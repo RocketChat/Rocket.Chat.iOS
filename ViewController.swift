@@ -39,6 +39,21 @@ class ViewController: UIViewController {
     }
     
     
+    @IBAction func leftNavTapped(sender: AnyObject) {
+        
+        let appdelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appdelegate.centerContainer?.toggleDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+        
+    }
+    
+    @IBAction func rightNavTapped(sender: AnyObject) {
+        
+        let appdelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        appdelegate.centerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+        
+    }
     
     
 }
