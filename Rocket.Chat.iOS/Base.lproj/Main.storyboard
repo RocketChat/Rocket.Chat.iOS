@@ -32,7 +32,18 @@
                             <constraint firstItem="mKj-8L-ic0" firstAttribute="centerY" secondItem="ikq-l2-qYm" secondAttribute="centerY" id="dVI-1k-sDg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cQN-uN-CZi"/>
+                    <navigationItem key="navigationItem" id="cQN-uN-CZi">
+                        <barButtonItem key="leftBarButtonItem" title="Left" id="KNH-mw-WAW">
+                            <connections>
+                                <action selector="leftNavTapped:" destination="uTd-Gh-naL" id="hny-Zb-7Oq"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Right" id="A03-dI-4Sm">
+                            <connections>
+                                <action selector="rightNavTapped:" destination="uTd-Gh-naL" id="p6c-St-7CZ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vje-1j-oly" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
