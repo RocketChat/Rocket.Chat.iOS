@@ -1,2 +1,2 @@
 # Rocket.Chat.iOS
-Rocket.Chat Native iOS Application
+Rocket.Chat Native iOS Application!
