@@ -19,28 +19,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         
-        //let rootViewController = self.window!.rootViewController
+//        let rootViewController = self.window!.rootViewController
         
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        let centerViewController = mainStoryboard.instantiateViewControllerWithIdentifier("viewController") as! ViewController
-        
-        let leftViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftView") as! LeftViewController
-        
-        let rightViewController = mainStoryboard.instantiateViewControllerWithIdentifier("rightView") as! RightViewController
-        
-        let leftSideNav = UINavigationController(rootViewController: leftViewController)
-        let centerNav = UINavigationController(rootViewController: centerViewController)
-        let rightNav = UINavigationController(rootViewController: rightViewController)
-        
-        
-        centerContainer = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftSideNav,rightDrawerViewController:rightNav)
-        
-        centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
-        centerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
-        
-        window!.rootViewController = centerContainer
-        window!.makeKeyAndVisible()
+//        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+//        
+//        let centerViewController = mainStoryboard.instantiateViewControllerWithIdentifier("viewController") as! ViewController
+//        
+//        let leftViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftView") as! LeftViewController
+//        
+//        let rightViewController = mainStoryboard.instantiateViewControllerWithIdentifier("rightView") as! RightViewController
+//        
+//        let leftSideNav = UINavigationController(rootViewController: leftViewController)
+//        let centerNav = UINavigationController(rootViewController: centerViewController)
+//        let rightNav = UINavigationController(rootViewController: rightViewController)
+//        
+//
+//        centerContainer = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftSideNav,rightDrawerViewController:rightNav)
+//        
+//        centerContainer!.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
+//        centerContainer!.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
+//        
+//        window!.rootViewController = centerContainer
+//        window!.makeKeyAndVisible()
         
         
         
