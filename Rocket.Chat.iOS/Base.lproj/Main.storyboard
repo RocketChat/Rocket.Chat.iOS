@@ -125,8 +125,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nRT-z4-6HS">
-                                <rect key="frame" x="36" y="149" width="248" height="270"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nRT-z4-6HS">
+                                <rect key="frame" x="20" y="149" width="280" height="270"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="270" id="HQU-eA-HcJ"/>
@@ -189,33 +189,22 @@
                                 </constraints>
                                 <state key="normal" title="Forgot your password"/>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IjP-fK-PyE">
-                                <rect key="frame" x="36" y="61" width="80" height="80"/>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="IjP-fK-PyE">
+                                <rect key="frame" x="20" y="61" width="280" height="80"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="80" id="Rhh-0h-iqS"/>
+                                    <constraint firstAttribute="width" constant="280" id="Rhh-0h-iqS"/>
                                     <constraint firstAttribute="height" constant="80" id="wr5-dK-c21"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="Rhh-0h-iqS"/>
+                                    </mask>
+                                </variation>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="D5S-Zf-iyu">
-                                <rect key="frame" x="124" y="86" width="160" height="30"/>
-                                <color key="tintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <attributedString key="attributedText">
-                                    <fragment content="ROCKET.CHAT">
-                                        <attributes>
-                                            <color key="NSColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                            <font key="NSFont" size="25" name="DINAlternate-Bold"/>
-                                            <paragraphStyle key="NSParagraphStyle" alignment="right" lineBreakMode="truncatingTail" baseWritingDirection="natural"/>
-                                        </attributes>
-                                    </fragment>
-                                </attributedString>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.22628117155269151" green="0.053832549115037029" blue="0.54541508838383845" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="ghp-Is-tT5" firstAttribute="top" secondItem="3IM-pc-mdw" secondAttribute="bottom" constant="8" symbolic="YES" id="Ao3-hn-Fq0"/>
-                            <constraint firstItem="D5S-Zf-iyu" firstAttribute="top" secondItem="F2u-zX-id3" secondAttribute="bottom" constant="66" id="Apu-RG-DqG"/>
                             <constraint firstItem="3IM-pc-mdw" firstAttribute="centerX" secondItem="ghp-Is-tT5" secondAttribute="centerX" id="BJQ-1B-HJ5"/>
                             <constraint firstItem="3IM-pc-mdw" firstAttribute="top" secondItem="bSx-Xj-y2l" secondAttribute="bottom" constant="13" id="DYg-Nq-njK"/>
                             <constraint firstItem="ghp-Is-tT5" firstAttribute="leading" secondItem="GIv-Qq-4z9" secondAttribute="leading" id="GvX-ml-dTE"/>
@@ -224,21 +213,19 @@
                             <constraint firstItem="GIv-Qq-4z9" firstAttribute="trailing" secondItem="ghp-Is-tT5" secondAttribute="trailing" id="I9H-9p-KDv"/>
                             <constraint firstItem="vT7-ho-mxp" firstAttribute="trailing" secondItem="cGM-Hl-xXw" secondAttribute="trailing" id="MrR-UX-SHt"/>
                             <constraint firstItem="cGM-Hl-xXw" firstAttribute="top" secondItem="vT7-ho-mxp" secondAttribute="bottom" constant="16" id="Nzg-zq-mvu"/>
-                            <constraint firstItem="IjP-fK-PyE" firstAttribute="leading" secondItem="oRb-aO-skx" secondAttribute="leadingMargin" constant="20" id="OZT-zS-oFz"/>
+                            <constraint firstItem="IjP-fK-PyE" firstAttribute="leading" secondItem="oRb-aO-skx" secondAttribute="leadingMargin" id="OZT-zS-oFz"/>
                             <constraint firstItem="IjP-fK-PyE" firstAttribute="leading" secondItem="nRT-z4-6HS" secondAttribute="leading" id="SgT-dS-s6c"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="IjP-fK-PyE" secondAttribute="trailing" id="XBB-BY-xFg"/>
                             <constraint firstItem="nRT-z4-6HS" firstAttribute="leading" secondItem="oRb-aO-skx" secondAttribute="leadingMargin" constant="20" id="YD2-80-UqQ"/>
                             <constraint firstItem="vT7-ho-mxp" firstAttribute="leading" secondItem="cGM-Hl-xXw" secondAttribute="leading" id="YYA-Tz-6Dj"/>
                             <constraint firstItem="GIv-Qq-4z9" firstAttribute="top" secondItem="cGM-Hl-xXw" secondAttribute="bottom" constant="19" id="ciL-mx-wgR"/>
-                            <constraint firstItem="D5S-Zf-iyu" firstAttribute="leading" secondItem="IjP-fK-PyE" secondAttribute="trailing" constant="8" symbolic="YES" id="cjR-OV-ZUV"/>
                             <constraint firstItem="GIv-Qq-4z9" firstAttribute="centerX" secondItem="nRT-z4-6HS" secondAttribute="centerX" id="eqx-V2-ShB"/>
                             <constraint firstItem="bSx-Xj-y2l" firstAttribute="centerX" secondItem="3IM-pc-mdw" secondAttribute="centerX" id="gdY-zS-dMy"/>
-                            <constraint firstItem="D5S-Zf-iyu" firstAttribute="centerY" secondItem="IjP-fK-PyE" secondAttribute="centerY" id="kD4-MT-7tT"/>
                             <constraint firstItem="vT7-ho-mxp" firstAttribute="top" secondItem="IjP-fK-PyE" secondAttribute="bottom" constant="24" id="kox-3R-xR5"/>
                             <constraint firstItem="bSx-Xj-y2l" firstAttribute="top" secondItem="GIv-Qq-4z9" secondAttribute="bottom" constant="18" id="l50-Yk-otb"/>
                             <constraint firstItem="GIv-Qq-4z9" firstAttribute="trailing" secondItem="cGM-Hl-xXw" secondAttribute="trailing" id="pse-N5-8L3"/>
                             <constraint firstItem="ghp-Is-tT5" firstAttribute="centerX" secondItem="oRb-aO-skx" secondAttribute="centerX" id="unP-ZS-6NC"/>
                             <constraint firstItem="nRT-z4-6HS" firstAttribute="top" secondItem="IjP-fK-PyE" secondAttribute="bottom" constant="8" symbolic="YES" id="voz-4G-OOh"/>
-                            <constraint firstItem="D5S-Zf-iyu" firstAttribute="trailing" secondItem="nRT-z4-6HS" secondAttribute="trailing" id="xEH-nf-QzL"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -272,4 +259,7 @@
             <point key="canvasLocation" x="30" y="-779"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="logo" width="436" height="85"/>
+    </resources>
 </document>
