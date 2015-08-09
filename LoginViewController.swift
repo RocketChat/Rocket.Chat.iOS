@@ -139,6 +139,8 @@ class LoginViewController: UIViewController {
             //show the alert
             alert.show()
             
+            //userNameTextField gets the focus
+            userNameTextField.becomeFirstResponder()
             
         }
         
