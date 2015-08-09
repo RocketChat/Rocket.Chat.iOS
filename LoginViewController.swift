@@ -10,10 +10,17 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    
+    @IBOutlet var userNameTextField: UITextField!
+    @IBOutlet var passwordTextField: UITextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,14 +29,35 @@ class LoginViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    //Login action
+    @IBAction func loginButtonTapped(sender: AnyObject) {
     }
-    */
+    
+    
+    //Register a new acoount action
+    @IBAction func registerNewAccountTapped(sender: AnyObject) {
+    }
 
+    
+    //Forgot password action
+    @IBAction func forgotPasswordTapped(sender: AnyObject) {
+    }
+    
+    
+    
+    //Dismissing the keyboard
+    @IBAction func dismissKeyboard(sender: AnyObject) {
+        
+        self.resignFirstResponder()
+    }
+    
+    //Dismissing the keyboard when user taps outside
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        
+        self.view.endEditing(true)
+    
+    }
+    
+    
+    
 }

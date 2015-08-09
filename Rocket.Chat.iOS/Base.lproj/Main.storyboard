@@ -113,10 +113,10 @@
             </objects>
             <point key="canvasLocation" x="1215" y="-779"/>
         </scene>
-        <!--View Controller-->
+        <!--Login View Controller-->
         <scene sceneID="MJ8-mK-U97">
             <objects>
-                <viewController id="adJ-xO-Vln" sceneMemberID="viewController">
+                <viewController id="adJ-xO-Vln" customClass="LoginViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="F2u-zX-id3"/>
                         <viewControllerLayoutGuide type="bottom" id="090-Kr-T1b"/>
@@ -140,6 +140,9 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="dismissKeyboard:" destination="adJ-xO-Vln" eventType="editingDidEndOnExit" id="nPv-MI-gBS"/>
+                                </connections>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GIv-Qq-4z9">
                                 <rect key="frame" x="60" y="250" width="201" height="30"/>
@@ -148,6 +151,9 @@
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="dismissKeyboard:" destination="adJ-xO-Vln" eventType="editingDidEndOnExit" id="foT-A2-vJ0"/>
+                                </connections>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your login information" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vT7-ho-mxp">
                                 <rect key="frame" x="60" y="165" width="201" height="20"/>
@@ -174,6 +180,9 @@
                                         <exclude reference="GHd-BM-L96"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="loginButtonTapped:" destination="adJ-xO-Vln" eventType="touchUpInside" id="rbO-kB-eMc"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3IM-pc-mdw">
                                 <rect key="frame" x="80" y="341" width="161" height="25"/>
@@ -181,6 +190,9 @@
                                     <constraint firstAttribute="height" constant="25" id="Bme-Xc-qtH"/>
                                 </constraints>
                                 <state key="normal" title="Register a new account"/>
+                                <connections>
+                                    <action selector="registerNewAccountTapped:" destination="adJ-xO-Vln" eventType="touchUpInside" id="WZM-gd-a4e"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ghp-Is-tT5">
                                 <rect key="frame" x="60" y="374" width="201" height="25"/>
@@ -188,6 +200,9 @@
                                     <constraint firstAttribute="height" constant="25" id="E8Y-5a-ulk"/>
                                 </constraints>
                                 <state key="normal" title="Forgot your password"/>
+                                <connections>
+                                    <action selector="forgotPasswordTapped:" destination="adJ-xO-Vln" eventType="touchUpInside" id="x4v-ar-cOP"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="IjP-fK-PyE">
                                 <rect key="frame" x="16" y="61" width="288" height="80"/>
@@ -234,6 +249,10 @@
                         </variation>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="passwordTextField" destination="GIv-Qq-4z9" id="Dda-VS-54a"/>
+                        <outlet property="userNameTextField" destination="cGM-Hl-xXw" id="Qyy-iw-hgE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xfE-27-yFK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
