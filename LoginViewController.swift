@@ -30,6 +30,13 @@ class LoginViewController: UIViewController {
         passwordTextField.addTarget(self, action: "textFieldDidChange", forControlEvents: UIControlEvents.EditingChanged)
         
         
+        
+        //Prefill text inputs to make login easier for developing
+        userNameTextField.text = "info@rocket.chat"
+        passwordTextField.text = "123qwe"
+        
+        
+        
     }
 
     override func didReceiveMemoryWarning() {
