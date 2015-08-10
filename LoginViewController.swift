@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JSQCoreDataKit
 
 class LoginViewController: UIViewController {
 
@@ -35,6 +36,23 @@ class LoginViewController: UIViewController {
         userNameTextField.text = "info@rocket.chat"
         passwordTextField.text = "123qwe"
         
+        //Check for already logged in user
+        let ent = entity(name: "User", context: context)!
+        ent.predicate = NSPredicate(format: "password IS NOT NULL")
+        
+        let request = FetchRequest<User>(entity: ent)
+        
+        
+        var users = [User]()
+        do{
+            users = try fetch(request, inContext: context)
+        }catch{
+            print("Error fetching users \(error)")
+        }
+        
+        if !users.isEmpty {
+            loginButtonTapped(nil)
+        }
         
         
     }
