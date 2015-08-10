@@ -18,18 +18,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Main" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mKj-8L-ic0">
-                                <rect key="frame" x="20" y="273" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hYj-KK-2gS">
+                                <rect key="frame" x="20" y="72" width="280" height="30"/>
+                                <state key="normal" title="Load More"/>
+                            </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hUb-s7-0eT">
+                                <rect key="frame" x="40" y="110" width="240" height="128"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="mKj-8L-ic0" firstAttribute="centerX" secondItem="ikq-l2-qYm" secondAttribute="centerX" id="GXz-vN-96A"/>
-                            <constraint firstItem="mKj-8L-ic0" firstAttribute="leading" secondItem="ikq-l2-qYm" secondAttribute="leadingMargin" constant="4" id="TMN-FW-1pf"/>
-                            <constraint firstItem="mKj-8L-ic0" firstAttribute="centerY" secondItem="ikq-l2-qYm" secondAttribute="centerY" id="dVI-1k-sDg"/>
+                            <constraint firstItem="hYj-KK-2gS" firstAttribute="centerX" secondItem="ikq-l2-qYm" secondAttribute="centerX" id="9bR-qq-V7e"/>
+                            <constraint firstItem="hYj-KK-2gS" firstAttribute="top" secondItem="QCZ-pr-dNw" secondAttribute="bottom" constant="8" symbolic="YES" id="DSm-cq-p0x"/>
+                            <constraint firstItem="hYj-KK-2gS" firstAttribute="leading" secondItem="ikq-l2-qYm" secondAttribute="leadingMargin" constant="4" id="T6l-jz-Kc1"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cQN-uN-CZi">
@@ -204,7 +206,7 @@
                                     <action selector="forgotPasswordTapped:" destination="adJ-xO-Vln" eventType="touchUpInside" id="x4v-ar-cOP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo" translatesAutoresizingMaskIntoConstraints="NO" id="IjP-fK-PyE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="IjP-fK-PyE">
                                 <rect key="frame" x="16" y="61" width="288" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="Rhh-0h-iqS"/>
@@ -279,6 +281,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo" width="436" height="85"/>
+        <image name="logo.png" width="436" height="85"/>
     </resources>
 </document>
