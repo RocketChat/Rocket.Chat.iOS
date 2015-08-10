@@ -69,27 +69,36 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //MARK: TableView Data
     
+    //Sections in tableview
     func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return 1
+        return 1 //Just for now
     }
     
+    //Number of table rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         return cR1!.messages.count
+        
     }
     
+    //Populating data
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let cell:MainTableViewCell = mainTableview.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! MainTableViewCell
         
+        //Console logs
         print("\(cR1!.messages[indexPath.row].user)")
         print("\(cR1?.messages[indexPath.row].text)")
         print("\(cR1?.messages[indexPath.row].tstamp)")
+        
+        //Setting data
         cell.avatarImg.image = UIImage(named: "avatar.png")
         cell.usernameLabel.text = "\(cR1!.messages[indexPath.row].user.username)"
         cell.timeLabel.text = "\(cR1!.messages[indexPath.row].tstamp)"
         cell.messageLabel.text = "\(cR1!.messages[indexPath.row].text)"
         
         return cell
+        
     }
     
     
