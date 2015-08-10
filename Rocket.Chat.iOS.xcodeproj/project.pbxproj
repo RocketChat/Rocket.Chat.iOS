@@ -24,6 +24,7 @@
 		DF1E01861B736B830097862D /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01851B736B830097862D /* RightViewController.swift */; };
 		DF3DE1AB1B78A1350072A33D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3DE1AA1B78A1350072A33D /* logo.png */; };
 		DF3DE1AD1B78A37E0072A33D /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */; };
+		DF7DBBFE1B78C8D000A98956 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = DF7DBBFD1B78C8D000A98956 /* avatar.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		DF1E01851B736B830097862D /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightViewController.swift; path = ../RightViewController.swift; sourceTree = "<group>"; };
 		DF3DE1AA1B78A1350072A33D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTableViewCell.swift; path = ../MainTableViewCell.swift; sourceTree = "<group>"; };
+		DF7DBBFD1B78C8D000A98956 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 		E8B42BE2CCF2AD5BB7DE9FF1 /* Pods-Rocket.Chat.iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.iOS/Pods-Rocket.Chat.iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -181,6 +183,7 @@
 		DF3DE1A91B78A1290072A33D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				DF7DBBFD1B78C8D000A98956 /* avatar.png */,
 				DF3DE1AA1B78A1350072A33D /* logo.png */,
 			);
 			name = images;
@@ -301,6 +304,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DF3DE1AB1B78A1350072A33D /* logo.png in Resources */,
+				DF7DBBFE1B78C8D000A98956 /* avatar.png in Resources */,
 				4FB7E4E21B70111D00C69777 /* LaunchScreen.storyboard in Resources */,
 				4FB7E4DF1B70111D00C69777 /* Assets.xcassets in Resources */,
 				4FB7E4DD1B70111D00C69777 /* Main.storyboard in Resources */,
