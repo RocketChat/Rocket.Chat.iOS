@@ -19,21 +19,43 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        //Remove lines between cells
+        mainTableview.separatorStyle = UITableViewCellSeparatorStyle.None
+        
         //Dummy data
         
             let u1:User = User(id: "1", username: "Komic", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
             let msg1:Message = Message(id: "1", text: "Message 1 from u1", tstamp: NSDate(), user: u1)
+            let msg2:Message = Message(id: "2", text: "Message 2 from u1", tstamp: NSDate(), user: u1)
+            let msg3:Message = Message(id: "3", text: "Message 3 from u1", tstamp: NSDate(), user: u1)
+            let msg4:Message = Message(id: "4", text: "Message 4 from u1", tstamp: NSDate(), user: u1)
+            let msg5:Message = Message(id: "5", text: "Message 5 from u1", tstamp: NSDate(), user: u1)
         
             let u2:User = User(id: "2", username: "Yorgos", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
-            let msg2:Message = Message(id: "2", text: "Message 2 from u2", tstamp: NSDate(), user: u2)
+            let msg6:Message = Message(id: "6", text: "Message 6 from u2", tstamp: NSDate(), user: u2)
+            let msg7:Message = Message(id: "7", text: "Message 7 from u2", tstamp: NSDate(), user: u2)
+            let msg8:Message = Message(id: "8", text: "Message 8 from u2", tstamp: NSDate(), user: u2)
+            let msg9:Message = Message(id: "9", text: "Message 9 from u2", tstamp: NSDate(), user: u2)
+            let msg10:Message = Message(id: "10", text: "Message 10 from u2", tstamp: NSDate(), user: u2)
+            let msg11:Message = Message(id: "11", text: "Message 11 from u2", tstamp: NSDate(), user: u2)
         
             let u3:User = User(id: "3", username: "GeorgeP", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
-            let msg3:Message = Message(id: "3", text: "Message 3 from u3", tstamp: NSDate(), user: u3)
+            let msg12:Message = Message(id: "12", text: "Message 12 from u3", tstamp: NSDate(), user: u3)
+            let msg13:Message = Message(id: "13", text: "Message 13 from u3", tstamp: NSDate(), user: u3)
+            let msg14:Message = Message(id: "14", text: "Message 14 from u3", tstamp: NSDate(), user: u3)
+            let msg15:Message = Message(id: "15", text: "Message 15 from u3", tstamp: NSDate(), user: u3)
+            let msg16:Message = Message(id: "16", text: "Message 16 from u3", tstamp: NSDate(), user: u3)
+            let msg17:Message = Message(id: "17", text: "Message 17 from u3", tstamp: NSDate(), user: u3)
+            let msg18:Message = Message(id: "18", text: "Message 18 from u3", tstamp: NSDate(), user: u3)
+            let msg19:Message = Message(id: "19", text: "Message 19 from u3", tstamp: NSDate(), user: u3)
+            let msg20:Message = Message(id: "20", text: "Message 20 from u3", tstamp: NSDate(), user: u3)
+        
         
             let uSet1:Set<User> = [u1, u2, u3]
         
-            let mArray1:[Message] = [msg1, msg2, msg3]
+        //Inserting messages in an array (DUMB way)
+        let mArray1:[Message] = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, msg10, msg11, msg12, msg13, msg14, msg15, msg16, msg17, msg18, msg19, msg20]
         
         
             let c1:ChatRoom = ChatRoom(id: "1", name: "c1", type: .PUBLIC, users: uSet1, messages: mArray1)
