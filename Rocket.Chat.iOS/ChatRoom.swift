@@ -35,7 +35,7 @@ class ChatRoom:Hashable{
     /// `User`s participating in the room
     var users : Set<User>
     /// `Message`s in the room
-    var messages : Set<Message>//TODO: Change to orderer array, to preserve sending order
+    var messages : [Message]
     /// `Type` of room
     var type : Type
     /// Unread counter and unread since date
@@ -43,7 +43,7 @@ class ChatRoom:Hashable{
     /// Users that are currently typing
     var typing : [User]?
     
-    init(id:String, name: String, type: Type, users:Set<User>, messages:Set<Message>){
+    init(id:String, name: String, type: Type, users:Set<User>, messages:[Message]){
         self.id = id
         self.name = name
         self.users = users
@@ -52,7 +52,7 @@ class ChatRoom:Hashable{
     }
     
     convenience init(id:String, name: String, type : Type){
-        self.init(id:id, name:name, type:type, users:Set<User>(), messages:Set<Message>())
+        self.init(id:id, name:name, type:type, users:Set<User>(), messages:[Message]())
     }
     
     // For Hashable
