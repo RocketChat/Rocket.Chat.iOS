@@ -261,7 +261,7 @@
         <!--Navigation Controller-->
         <scene sceneID="Uu2-jJ-p0n">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="F5u-id-cdG" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="navController" automaticallyAdjustsScrollViewInsets="NO" id="F5u-id-cdG" sceneMemberID="viewController">
                     <toolbarItems/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="u18-76-eDe">
