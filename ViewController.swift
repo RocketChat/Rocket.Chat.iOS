@@ -29,10 +29,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         //Create some messages for u1
         let msg1:Message = Message(id: "1", text: "Message 1 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
-        let msg2:Message = Message(id: "2", text: "Message 2 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
-        let msg3:Message = Message(id: "3", text: "Message 3 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
-        let msg4:Message = Message(id: "4", text: "Message 4 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
-        let msg5:Message = Message(id: "5", text: "Message 5 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
+        let msg2:Message = Message(id: "2", text: "Bigger Message, number 2 from Komic just for fun", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
+        let msg3:Message = Message(id: "3", text: "Message 3 from Komic just to see what's up with the cell height", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
+        let msg4:Message = Message(id: "4", text: "Message 4 from Komic, a little smaller", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
+        let msg5:Message = Message(id: "5", text: "Message 5 from Komic is message 5", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
     
         
         //Create user u2
@@ -117,7 +117,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         mainTableview.separatorStyle = UITableViewCellSeparatorStyle.None
         
         mainTableview.rowHeight = UITableViewAutomaticDimension
-        mainTableview.estimatedRowHeight = 100
+        mainTableview.estimatedRowHeight = 44
         
         
         
@@ -211,11 +211,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //If same user
         if sameUser {
             
-            cell.avatarImg.image = nil
-            cell.usernameLabel.text = ""
-            cell.timeLabel.text = "\(cR1!.messages[indexPath.row].tstamp)"
-            cell.messageLabel.text = "\(cR1!.messages[indexPath.row].text)"
             
+            cell.avatarImg.hidden = true
+            cell.usernameLabel.hidden = true
+            cell.timeLabel.hidden = true
+            cell.messageLabel.text = "\(cR1!.messages[indexPath.row].text)"
             
             
         }
@@ -223,6 +223,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         else{
             
             //Setting data
+            cell.avatarImg.hidden = false
+            cell.usernameLabel.hidden = false
+            cell.timeLabel.hidden = false
             cell.avatarImg.image = UIImage(named: "avatar.png")
             cell.usernameLabel.text = "\(cR1!.messages[indexPath.row].user.username)"
             cell.timeLabel.text = "\(cR1!.messages[indexPath.row].tstamp)"
@@ -234,7 +237,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return cell
         
     }
-    
     
     
     //Function to get random number between 1-60 to create different timestamps
