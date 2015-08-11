@@ -7,6 +7,11 @@
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="HelveticaNeue.ttc">
+            <string>HelveticaNeue-Bold</string>
+        </mutableArray>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="ZB7-k7-jxU">
@@ -24,60 +29,63 @@
                                 <rect key="frame" x="20" y="72" width="280" height="30"/>
                                 <state key="normal" title="Load More"/>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hUb-s7-0eT">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hUb-s7-0eT">
                                 <rect key="frame" x="3" y="110" width="314" height="400"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="100" id="crD-tj-Pmh" customClass="MainTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="22" width="314" height="100"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" rowHeight="75" id="crD-tj-Pmh" customClass="MainTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="22" width="314" height="75"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="crD-tj-Pmh" id="nPR-il-4el">
-                                            <rect key="frame" x="0.0" y="0.0" width="314" height="99"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="314" height="74"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V7E-uh-7ni">
-                                                    <rect key="frame" x="8" y="5" width="60" height="60"/>
+                                                    <rect key="frame" x="8" y="12" width="60" height="60"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="60" id="FoF-dQ-Vgs"/>
-                                                        <constraint firstAttribute="height" constant="60" id="SUM-Xp-hFu"/>
+                                                        <constraint firstAttribute="height" constant="60" id="bWn-Tf-QuC"/>
+                                                        <constraint firstAttribute="width" constant="60" id="nZ6-WN-brh"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tbc-uQ-WaK">
-                                                    <rect key="frame" x="82" y="8" width="80" height="21"/>
+                                                    <rect key="frame" x="82" y="12" width="80" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="yLR-Vt-G1A"/>
+                                                        <constraint firstAttribute="width" constant="80" id="Hah-1V-QAv"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="6" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WnG-Pr-jbT">
+                                                    <rect key="frame" x="82" y="36" width="224" height="20"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ofA-CU-Mw9">
-                                                    <rect key="frame" x="187" y="12" width="94" height="17"/>
+                                                    <rect key="frame" x="212" y="14" width="94" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="94" id="LNV-jG-zku"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WnG-Pr-jbT">
-                                                    <rect key="frame" x="82" y="37" width="224" height="28"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottom" secondItem="WnG-Pr-jbT" secondAttribute="bottom" constant="34" id="AbZ-mh-5ZU"/>
-                                                <constraint firstItem="WnG-Pr-jbT" firstAttribute="leading" secondItem="Tbc-uQ-WaK" secondAttribute="leading" id="DaG-xb-0mw"/>
-                                                <constraint firstItem="ofA-CU-Mw9" firstAttribute="leading" secondItem="V7E-uh-7ni" secondAttribute="trailing" constant="119" id="P65-Rb-ZyY"/>
+                                                <constraint firstItem="WnG-Pr-jbT" firstAttribute="leading" secondItem="Tbc-uQ-WaK" secondAttribute="leading" id="DMJ-UB-ObQ"/>
+                                                <constraint firstItem="ofA-CU-Mw9" firstAttribute="baseline" secondItem="Tbc-uQ-WaK" secondAttribute="firstBaseline" constant="-2" id="GGJ-7r-BQc"/>
+                                                <constraint firstItem="Tbc-uQ-WaK" firstAttribute="leading" secondItem="V7E-uh-7ni" secondAttribute="trailing" constant="14" id="LUc-pn-BpE"/>
+                                                <constraint firstItem="WnG-Pr-jbT" firstAttribute="trailing" secondItem="ofA-CU-Mw9" secondAttribute="trailing" id="On3-Gs-8Cw"/>
                                                 <constraint firstItem="V7E-uh-7ni" firstAttribute="top" secondItem="nPR-il-4el" secondAttribute="topMargin" constant="-3" id="QBU-0G-p9d"/>
-                                                <constraint firstItem="V7E-uh-7ni" firstAttribute="centerY" secondItem="nPR-il-4el" secondAttribute="centerY" constant="-14.5" id="VKU-g3-Oq2"/>
-                                                <constraint firstItem="Tbc-uQ-WaK" firstAttribute="baseline" secondItem="ofA-CU-Mw9" secondAttribute="baseline" id="ZZ1-k9-7kf"/>
-                                                <constraint firstItem="WnG-Pr-jbT" firstAttribute="top" secondItem="Tbc-uQ-WaK" secondAttribute="bottom" constant="8" id="gVB-Ob-0fM"/>
-                                                <constraint firstItem="WnG-Pr-jbT" firstAttribute="trailing" secondItem="nPR-il-4el" secondAttribute="trailingMargin" id="jvO-O9-zGf"/>
-                                                <constraint firstItem="Tbc-uQ-WaK" firstAttribute="leading" secondItem="V7E-uh-7ni" secondAttribute="trailing" constant="14" id="pqW-AE-acm"/>
-                                                <constraint firstItem="Tbc-uQ-WaK" firstAttribute="top" secondItem="nPR-il-4el" secondAttribute="topMargin" id="qsZ-Bp-4Jh"/>
-                                                <constraint firstItem="V7E-uh-7ni" firstAttribute="leading" secondItem="nPR-il-4el" secondAttribute="leadingMargin" id="sV8-Gw-9r4"/>
-                                                <constraint firstItem="ofA-CU-Mw9" firstAttribute="baseline" secondItem="Tbc-uQ-WaK" secondAttribute="firstBaseline" id="ueb-M2-oQK"/>
-                                                <constraint firstItem="WnG-Pr-jbT" firstAttribute="centerX" secondItem="ofA-CU-Mw9" secondAttribute="centerX" constant="-40" id="z9U-3y-T9V"/>
+                                                <constraint firstItem="V7E-uh-7ni" firstAttribute="leading" secondItem="nPR-il-4el" secondAttribute="leadingMargin" id="RPF-u9-LlO"/>
+                                                <constraint firstItem="WnG-Pr-jbT" firstAttribute="centerY" secondItem="V7E-uh-7ni" secondAttribute="centerY" constant="4" id="ThK-Mj-2w4"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="WnG-Pr-jbT" secondAttribute="bottom" constant="10" id="Y0n-pF-xiA"/>
+                                                <constraint firstItem="V7E-uh-7ni" firstAttribute="top" secondItem="ofA-CU-Mw9" secondAttribute="top" constant="-2" id="dfS-Zo-xLg"/>
+                                                <constraint firstItem="ofA-CU-Mw9" firstAttribute="trailing" secondItem="nPR-il-4el" secondAttribute="trailingMargin" id="nza-DW-gzg"/>
+                                                <constraint firstItem="Tbc-uQ-WaK" firstAttribute="top" secondItem="nPR-il-4el" secondAttribute="topMargin" constant="4" id="pEu-Zd-0O2"/>
+                                                <constraint firstItem="ofA-CU-Mw9" firstAttribute="baseline" secondItem="Tbc-uQ-WaK" secondAttribute="baseline" constant="-2" id="t5m-zi-1sQ"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="V7E-uh-7ni" secondAttribute="bottom" constant="-6" id="wbd-U3-vJT"/>
                                             </constraints>
                                             <variation key="default">
                                                 <mask key="constraints">
