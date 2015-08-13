@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8164.2" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="adJ-xO-Vln">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="adJ-xO-Vln">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8135.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -106,15 +106,42 @@
                                     <outlet property="delegate" destination="uTd-Gh-naL" id="Wg8-yR-KFI"/>
                                 </connections>
                             </tableView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="viw-6B-0pw">
+                                <rect key="frame" x="16" y="518" width="288" height="42"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="42" id="DeG-3t-b7D"/>
+                                    <constraint firstAttribute="width" constant="280" id="mDs-ki-gc7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="mDs-ki-gc7"/>
+                                    </mask>
+                                </variation>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8dJ-SW-7HW">
+                                <rect key="frame" x="254" y="524" width="36" height="30"/>
+                                <state key="normal" title="Send"/>
+                                <connections>
+                                    <action selector="sendMsg:" destination="uTd-Gh-naL" eventType="touchUpInside" id="9Jd-bt-NqM"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hYj-KK-2gS" firstAttribute="centerX" secondItem="ikq-l2-qYm" secondAttribute="centerX" id="9bR-qq-V7e"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="viw-6B-0pw" secondAttribute="leading" id="AyZ-tq-59a"/>
                             <constraint firstItem="hYj-KK-2gS" firstAttribute="top" secondItem="QCZ-pr-dNw" secondAttribute="bottom" constant="8" symbolic="YES" id="DSm-cq-p0x"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="viw-6B-0pw" secondAttribute="trailing" id="EeK-Oy-U0U"/>
+                            <constraint firstItem="8dJ-SW-7HW" firstAttribute="leading" secondItem="viw-6B-0pw" secondAttribute="trailing" constant="-50" id="Fx8-bd-DQ8"/>
                             <constraint firstAttribute="trailingMargin" secondItem="hUb-s7-0eT" secondAttribute="trailing" constant="-13" id="Hdr-EM-xxR"/>
                             <constraint firstItem="hUb-s7-0eT" firstAttribute="top" secondItem="hYj-KK-2gS" secondAttribute="bottom" constant="8" id="Pa4-HE-1ed"/>
                             <constraint firstItem="hYj-KK-2gS" firstAttribute="leading" secondItem="ikq-l2-qYm" secondAttribute="leadingMargin" constant="4" id="T6l-jz-Kc1"/>
+                            <constraint firstItem="8dJ-SW-7HW" firstAttribute="top" secondItem="viw-6B-0pw" secondAttribute="bottom" constant="-36" id="U2N-Zq-ySt"/>
                             <constraint firstItem="hUb-s7-0eT" firstAttribute="leading" secondItem="ikq-l2-qYm" secondAttribute="leadingMargin" constant="-13" id="c8k-wA-NbL"/>
+                            <constraint firstItem="viw-6B-0pw" firstAttribute="top" secondItem="hUb-s7-0eT" secondAttribute="bottom" constant="8" id="jOh-jS-TET"/>
                             <constraint firstItem="2Xy-Ja-dRg" firstAttribute="top" secondItem="hUb-s7-0eT" secondAttribute="bottom" constant="58" id="kg2-Vr-ss2"/>
                         </constraints>
                     </view>
@@ -131,7 +158,9 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="composeMsg" destination="viw-6B-0pw" id="8Ae-Ak-M9e"/>
                         <outlet property="mainTableview" destination="hUb-s7-0eT" id="0rl-la-xoh"/>
+                        <outlet property="tableViewBottomConstraint" destination="kg2-Vr-ss2" id="9mR-o7-qp3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vje-1j-oly" userLabel="First Responder" sceneMemberID="firstResponder"/>
