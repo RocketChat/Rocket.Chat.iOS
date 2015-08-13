@@ -117,7 +117,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         mainTableview.separatorStyle = UITableViewCellSeparatorStyle.None
         
         mainTableview.rowHeight = UITableViewAutomaticDimension
-        mainTableview.estimatedRowHeight = 44
+        mainTableview.estimatedRowHeight = 75
         
         
         
