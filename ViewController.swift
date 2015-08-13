@@ -11,7 +11,11 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
+    
+    
     @IBOutlet var mainTableview: UITableView!
+    @IBOutlet var composeMsg: UITextView!
     
     //Variable to access the dummy chatroom
     var cR1:ChatRoom?
@@ -19,6 +23,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        
+        //Notifications to manage keyboard
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
         
         
@@ -126,6 +135,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         mainTableview.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
 
         
+                
+        //Set border to composeMsg textarea
+        composeMsg.layer.borderColor = UIColor.blackColor().CGColor
+        composeMsg.layer.borderWidth = 0.5
+        composeMsg.layer.cornerRadius = 10
         
         
     }
@@ -244,5 +258,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let r = arc4random_uniform(60) + 1
         return Double(r)
     }
+    
+    @IBAction func sendMsg(sender: AnyObject) {
+        
+        composeMsg.resignFirstResponder()
+    }
+    
+    func keyboardWasShown(notification: NSNotification) {
+        var info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            self.tableViewBottomConstraint.constant += keyboardFrame.size.height
+        })
+        
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        var info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
+        
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            self.tableViewBottomConstraint.constant -= keyboardFrame.size.height
+        })
+        
+    }
+    
+    
+    
+    
     
 }
