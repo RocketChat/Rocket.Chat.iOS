@@ -14,6 +14,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     
     
+    //this constraint is not needed. It is used for a different way to bring up the tableview when user enters text in composeMsg text area . See comment in keyboardWasShown func
+    @IBOutlet var tableViewTopContsraint: NSLayoutConstraint!
+
+    
     @IBOutlet var mainTableview: UITableView!
     @IBOutlet var composeMsg: UITextView!
     
@@ -260,26 +264,51 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         composeMsg.resignFirstResponder()
     }
     
+    
+    //function to move composeMsg text area up when keyboard shows up
     func keyboardWasShown(notification: NSNotification) {
         var info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         
         UIView.animateWithDuration(0.1, animations: { () -> Void in
             self.tableViewBottomConstraint.constant += keyboardFrame.size.height
+            
+            //a different way to move the last cell above composeMsg. Problem is that load more button dissapears
+            //    self.tableViewTopContsraint.constant -= keyboardFrame.size.height
         })
+        
+        //make room for scrollview to scroll so last cell will come above composeMsg textarea
+        mainTableview.contentInset.bottom += keyboardFrame.size.height
+        
+        
+        let indexPath:NSIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
+        
+        //print(indexPath)
+        
+        mainTableview.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+        
+        
         
     }
     
+    //function to move composeMsg text area down when keyboard hides
     func keyboardWillHide(notification: NSNotification) {
         var info = notification.userInfo!
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         
         UIView.animateWithDuration(0.1, animations: { () -> Void in
             self.tableViewBottomConstraint.constant -= keyboardFrame.size.height
+            
+            //a different way to move the last cell above composeMsg. Problem is that load more button dissapears
+            //   self.tableViewTopContsraint.constant += keyboardFrame.size.height
         })
+        
+        
+        //remove extra room for scroll
+        mainTableview.contentInset.bottom -= keyboardFrame.size.height
+        
         
     }
     
-
     
 }

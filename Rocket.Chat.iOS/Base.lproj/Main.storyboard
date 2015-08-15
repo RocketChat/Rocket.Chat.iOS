@@ -161,6 +161,7 @@
                         <outlet property="composeMsg" destination="viw-6B-0pw" id="8Ae-Ak-M9e"/>
                         <outlet property="mainTableview" destination="hUb-s7-0eT" id="0rl-la-xoh"/>
                         <outlet property="tableViewBottomConstraint" destination="kg2-Vr-ss2" id="9mR-o7-qp3"/>
+                        <outlet property="tableViewTopContsraint" destination="Pa4-HE-1ed" id="oX7-3p-XFW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vje-1j-oly" userLabel="First Responder" sceneMemberID="firstResponder"/>
