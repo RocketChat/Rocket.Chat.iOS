@@ -119,9 +119,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         /********* End of Dummy data *********/
         
         
-        
-        
-        
         //Remove lines between cells
         mainTableview.separatorStyle = UITableViewCellSeparatorStyle.None
         
@@ -176,13 +173,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //MARK: TableView
     //
     
-    
-    
-    
     //Sections in tableview
-    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
-        return 1 //Just for now?
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1 // Just for now?
     }
+      
+
     
     //Number of table rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -284,8 +280,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    
-    
-    
+
     
 }
