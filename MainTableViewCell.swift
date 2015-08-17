@@ -16,6 +16,7 @@ class MainTableViewCell: UITableViewCell {
     @IBOutlet var messageLabel: UILabel!
     
     
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
