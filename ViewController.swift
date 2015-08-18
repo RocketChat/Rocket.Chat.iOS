@@ -33,6 +33,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
+        //Create and add touch gesture to tableview
+        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
+        tapGesture.cancelsTouchesInView = true
+        mainTableview.addGestureRecognizer(tapGesture)
         
         
         /********* Dummy data *********/
@@ -170,6 +174,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    override func viewDidLayoutSubviews() {
+        
+        //scroll tableview at the bottomIndexPath
+        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+        
+    }
     
     
     //
@@ -282,17 +292,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    //Function to get random number between 1-60 to create different timestamps
-    func randomTime() -> Double {
-        let r = arc4random_uniform(60) + 1
-        return Double(r)
-    }
-    
     //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
         
-        composeMsg.resignFirstResponder()
+        
+        //dismiss keyboard
+        dismissKeyboard()
     }
+    
     
     
     //function to move composeMsg text area up when keyboard shows up
@@ -307,7 +314,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
         
     }
-    
     
     
     //function to move composeMsg text area down when keyboard hides
@@ -325,10 +331,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    override func viewDidLayoutSubviews() {
-
-        //scroll tableview at the bottomIndexPath
-        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-
+    //Function to get random number between 1-60 to create different timestamps
+    func randomTime() -> Double {
+        let r = arc4random_uniform(60) + 1
+        return Double(r)
     }
+
+    
+    //Function to dismiss keyboard
+    func dismissKeyboard() {
+        
+        //dismiss keyboard
+        composeMsg.resignFirstResponder()
+    }
+    
 }
