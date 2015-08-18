@@ -3,7 +3,7 @@
 use_frameworks!
 target 'Rocket.Chat.iOS' do
 
-pod 'MMDrawerController', '~> 0.5.7'
+pod 'MMDrawerController', '~> 0.6.0'
 pod 'JSQCoreDataKit', :git => 'https://github.com/jessesquires/JSQCoreDataKit.git', :branch => 'release-2.0'
 
 end

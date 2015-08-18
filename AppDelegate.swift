@@ -17,11 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //Variable to keep the MMDrawerController instance
     var centerContainer:MMDrawerController?
+    private(set) var model:CoreDataModel?
+    private(set) var stack:CoreDataStack?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        let model = CoreDataModel(name: "Rocket.Chat", bundle: NSBundle(identifier: "Rocket.Chat.iOS"))
-        let stack = CoreDataStack(model: model)
+        model = CoreDataModel(name: "Rocket.Chat.iOS")
+        stack = CoreDataStack(model: model!)
         
         return true
     }

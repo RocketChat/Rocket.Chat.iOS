@@ -36,22 +36,25 @@ class LoginViewController: UIViewController {
         userNameTextField.text = "info@rocket.chat"
         passwordTextField.text = "123qwe"
         
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = delegate.stack!.context
+        
         //Check for already logged in user
-        let ent = entity(name: "User", context: context)!
-        ent.predicate = NSPredicate(format: "password IS NOT NULL")
+        let ent = entity(name: "User", context: context)
+        //ent.predicate = NSPredicate(format: "password IS NOT NULL")
         
         let request = FetchRequest<User>(entity: ent)
         
         
         var users = [User]()
         do{
-            users = try fetch(request, inContext: context)
+            users = try fetch(request: request, inContext: context)
         }catch{
             print("Error fetching users \(error)")
         }
         
         if !users.isEmpty {
-            loginButtonTapped(nil)
+            loginButtonTapped(users[0])
         }
         
         

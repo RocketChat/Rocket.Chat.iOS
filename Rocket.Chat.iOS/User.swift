@@ -12,7 +12,7 @@ import CoreData
 class User : NSManagedObject {
     /// Status of the `User`
     /// This uses raw values, in order to facilitate CoreData
-    enum Status : Int{
+    enum Status : Int16{
         case ONLINE = 0
         case AWAY = 1
         case BUSY = 2
@@ -28,7 +28,7 @@ class User : NSManagedObject {
     @NSManaged var avatar : String
     /// This is to make CoreData work, since it doesn't support enums
     /// We store this private int to CoreData and use `status` for public usage
-    @NSManaged private var statusVal : Int
+    @NSManaged private var statusVal : Int16
     var status : Status {
         get {
             return Status(rawValue: statusVal)!
@@ -39,16 +39,25 @@ class User : NSManagedObject {
     }
     @NSManaged var statusMessage : String?
     
-    @NSManaged var timezone : NSTimeZone
+    @NSManaged private var timezoneVal : String
+    var timezone : NSTimeZone {
+        get {
+            return NSTimeZone(name: timezoneVal)!
+        }
+        set {
+            self.timezoneVal = newValue.name
+        }
+    }
 
     init(context: NSManagedObjectContext, id:String, username:String, avatar:String, status : Status, timezone : NSTimeZone){
         let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: context)!
-        super.init(entity: entity, insertIntoManagedObjectContext: context)
+        super.init(entity: entity, insertIntoManagedObjectContext: nil)
         self.id = id
         self.username = username
         self.avatar = avatar
-        self.status = status
-        self.timezone = timezone
+        //TODO: Setting status hear will cause an exception, come back later and check why
+        self.statusVal = status.rawValue
+        self.timezoneVal = timezone.name
     }
     
     //For Hashable

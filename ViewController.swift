@@ -13,9 +13,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     
-    
-    //this constraint is not needed. It is used for a different way to bring up the tableview when user enters text in composeMsg text area . See comment in keyboardWasShown func
-    @IBOutlet var tableViewTopContsraint: NSLayoutConstraint!
 
     
     @IBOutlet var mainTableview: UITableView!
@@ -23,6 +20,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //Variable to access the dummy chatroom
     var cR1:ChatRoom?
+    
+    //indexPath to find the bottom of the tableview
+    var bottomIndexPath:NSIndexPath = NSIndexPath()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,9 +36,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         /********* Dummy data *********/
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = delegate.stack!.context
         
         //Create user u1
-        let u1:User = User(id: "1", username: "Komic", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u1:User = User(context: context, id: "1", username: "Komic", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
     
         //Create some messages for u1
         let msg1:Message = Message(id: "1", text: "Message 1 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
@@ -49,7 +51,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         
         //Create user u2
-        let u2:User = User(id: "2", username: "Yorgos", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u2:User = User(context: context, id: "2", username: "Yorgos", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //Create some messages for u2
         let msg6:Message = Message(id: "6", text: "Message 6 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
@@ -61,7 +63,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         //Create user u3
-        let u3:User = User(id: "3", username: "GeorgeP", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u3:User = User(context: context, id: "3", username: "GeorgeP", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //Create some messages for u3
         let msg12:Message = Message(id: "12", text: "Message 12 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
@@ -131,9 +133,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         
-        //Start tableview scroll from the bottom up
-        let indexPath:NSIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-        mainTableview.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+        //Scroll tableview scroll at the bottom where is the latest message
+        bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
+       // mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
 
         
                 
@@ -197,6 +199,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let cell:MainTableViewCell = mainTableview.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! MainTableViewCell
         
         
+        let visible = mainTableview.visibleCells
+        
+        print(visible.count)
+        
+        bottomIndexPath = NSIndexPath(forRow: visible.count, inSection: 0)
         //Boolean to check if previous and current user are the same user
         var sameUser = false
         
@@ -271,25 +278,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         
         UIView.animateWithDuration(0.1, animations: { () -> Void in
-            self.tableViewBottomConstraint.constant += keyboardFrame.size.height
             
-            //a different way to move the last cell above composeMsg. Problem is that load more button dissapears
-            //    self.tableViewTopContsraint.constant -= keyboardFrame.size.height
+            //add the keyboard height to the tableview's bottom constraint
+            self.tableViewBottomConstraint.constant += keyboardFrame.size.height
         })
         
-        //make room for scrollview to scroll so last cell will come above composeMsg textarea
-        mainTableview.contentInset.bottom += keyboardFrame.size.height
-        
-        
-        let indexPath:NSIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-        
-        //print(indexPath)
-        
-        mainTableview.scrollToRowAtIndexPath(indexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-        
-        
-        
     }
+    
+    
     
     //function to move composeMsg text area down when keyboard hides
     func keyboardWillHide(notification: NSNotification) {
@@ -297,18 +293,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         
         UIView.animateWithDuration(0.1, animations: { () -> Void in
-            self.tableViewBottomConstraint.constant -= keyboardFrame.size.height
             
-            //a different way to move the last cell above composeMsg. Problem is that load more button dissapears
-            //   self.tableViewTopContsraint.constant += keyboardFrame.size.height
+            //substract the keyboard height from the tableview's bottom constraint
+            self.tableViewBottomConstraint.constant -= keyboardFrame.size.height
         })
-        
-        
-        //remove extra room for scroll
-        mainTableview.contentInset.bottom -= keyboardFrame.size.height
         
         
     }
     
     
+    override func viewDidLayoutSubviews() {
+
+        //scroll tableview at the bottom so when keyboard shows up it doesn't hide the messages
+        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+
+    }
 }
