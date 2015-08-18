@@ -193,13 +193,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Populating data
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:MainTableViewCell = mainTableview.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! MainTableViewCell
-        
-        
+        //Get visible cells indexes
         let visible = mainTableview.indexPathsForVisibleRows
-        
-        
-        //print(visible!.last!.row)
         
         //Set bottomIndexpath to last visible cell's index
         bottomIndexPath = NSIndexPath(forRow: visible!.last!.row, inSection: 0)
@@ -228,35 +223,61 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
 
-        //Setting the data for the cell
+        //Create cell and set data
         
         //If same user
         if sameUser {
             
+            //Try to create cell
+            var noDetailsCell:noDetailsTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("noDetailsCell", forIndexPath: indexPath) as? noDetailsTableViewCell
             
-            cell.avatarImg.hidden = true
-            cell.usernameLabel.hidden = true
-            cell.timeLabel.hidden = true
-            cell.messageLabel.text = "\(cR1!.messages[indexPath.row].text)"
+            //If it is nill
+            if noDetailsCell == nil{
+                
+                //Create the cell
+                noDetailsCell = noDetailsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "noDetailsCell")
             
+            }
+            
+            //Set text to noDetailsMessage label
+            noDetailsCell!.noDetailsMessage.text = "\(cR1!.messages[indexPath.row].text)"
+            
+            //return the no detailed cell
+            return noDetailsCell!
             
         }
         //If different user
         else{
             
-            //Setting data
-            cell.avatarImg.hidden = false
-            cell.usernameLabel.hidden = false
-            cell.timeLabel.hidden = false
-            cell.avatarImg.image = UIImage(named: "avatar.png")
-            cell.usernameLabel.text = "\(cR1!.messages[indexPath.row].user.username)"
-            cell.timeLabel.text = "\(cR1!.messages[indexPath.row].tstamp)"
-            cell.messageLabel.text = "\(cR1!.messages[indexPath.row].text)"
+            //Try to create the cell
+            var fullDetailsCell:MainTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("fullDetailsCell", forIndexPath: indexPath) as? MainTableViewCell
             
+            //If nill
+            if fullDetailsCell == nil{
+                
+                //Create the cell
+                fullDetailsCell = MainTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "fullDetailsCell")
+                
+                
+            }
+            
+            //Set the image
+            fullDetailsCell!.avatarImg.image = UIImage(named: "avatar.png")
+            
+            //Set the text for the username label
+            fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row].user.username)"
+            
+            //Set the timestamp
+            fullDetailsCell!.timeLabel.text = "\(cR1!.messages[indexPath.row].tstamp)"
+            
+            
+            //Set the message text
+            fullDetailsCell!.messageLabel.text = "\(cR1!.messages[indexPath.row].text)"
+            
+            //Return the full detailed cell
+            return fullDetailsCell!
         }
         
-        
-        return cell
         
     }
     
@@ -267,6 +288,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         return Double(r)
     }
     
+    //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
         
         composeMsg.resignFirstResponder()
