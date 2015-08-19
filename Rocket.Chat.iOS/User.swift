@@ -7,37 +7,63 @@
 //
 
 import Foundation
+import CoreData
 
-class User : Hashable {
-    enum Status {
-        case ONLINE
-        case AWAY
-        case BUSY
-        case INVISIBLE
+class User : NSManagedObject {
+    /// Status of the `User`
+    /// This uses raw values, in order to facilitate CoreData
+    enum Status : Int16{
+        case ONLINE = 0
+        case AWAY = 1
+        case BUSY = 2
+        case INVISIBLE = 3
     }
     
-    var id : String
-    var username : String
-    var password : String? = nil //Password is only for the local user, not remote
+    @NSManaged dynamic var id : String
+    @NSManaged dynamic var username : String
+    @NSManaged dynamic var password : String? //Password is only for the local user, not remote
     
     /// Avatar url or image name.
     /// In case this is not a url the code calling must know how to construct the url
-    var avatar : String
-    var status : Status
-    var statusMessage : String?
+    @NSManaged dynamic var avatar : String
+    /// This is to make CoreData work, since it doesn't support enums
+    /// We store this private int to CoreData and use `status` for public usage
+    @NSManaged dynamic private var statusVal : NSNumber
+    var status : Status {
+        get {
+            return Status(rawValue: statusVal.shortValue) ?? .ONLINE
+        }
+        set {
+            //self.statusVal = NSNumber(short: newValue.rawValue)
+            setValue(NSNumber(short: newValue.rawValue), forKey: "statusVal")
+        }
+    }
+    @NSManaged dynamic var statusMessage : String?
     
-    var timezone : NSTimeZone
+    @NSManaged dynamic private var timezoneVal : String
+    var timezone : NSTimeZone {
+        get {
+            return NSTimeZone(name: timezoneVal) ?? NSTimeZone.systemTimeZone()
+        }
+        set {
+            self.timezoneVal = newValue.name
+        }
+    }
 
-    init(id:String, username:String, avatar:String, status : Status, timezone : NSTimeZone){
+    convenience init(context: NSManagedObjectContext, id:String, username:String, avatar:String, status : Status, timezone : NSTimeZone){
+        let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: context)!
+        self.init(entity: entity, insertIntoManagedObjectContext: context)
         self.id = id
         self.username = username
         self.avatar = avatar
-        self.status = status
-        self.timezone = timezone
+        //TODO: Setting status hear will cause an exception, come back later and check why (probably swift/compiler bug)
+        //self.status = status
+        setValue(NSNumber(short: status.rawValue), forKey: "statusVal")
+        self.timezoneVal = timezone.name
     }
     
     //For Hashable
-    var hashValue : Int {
+    override var hashValue : Int {
         return id.hashValue
     }
 }
