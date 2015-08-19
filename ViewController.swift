@@ -14,7 +14,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet var bottomViewBottomConstraint: NSLayoutConstraint!
     
-    @IBOutlet var loadMoreButtonTopConstratint: NSLayoutConstraint!
+    @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
+    
 
     
     @IBOutlet var mainTableview: UITableView!
@@ -139,8 +140,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //Set bottomIndexpath to last cell's index
         bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-
-        
+mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
                 
         //Set border to composeMsg textarea
         composeMsg.layer.borderColor = UIColor.blackColor().CGColor
@@ -198,7 +198,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Number of table rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return cR1!.messages.count
+        return cR1!.messages.count + 1 //plus 1 to put the loadMore button at the top
         
     }
     
@@ -217,7 +217,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         //Get current row
-        let row = indexPath.row
+        let row = indexPath.row - 1 //minus 1 to stay in range of the array
         
         //Get previous row
         let prevRow = row - 1
@@ -234,8 +234,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
         }
         
-
+        
+        
         //Create cell and set data
+        
+        //if we scrolled at the top
+        if (indexPath.row == 0) {
+            
+            //try create the cell for the load button
+            var loadMoreHeader:loadMoreHeaderTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("loadMoreHeader", forIndexPath: indexPath) as? loadMoreHeaderTableViewCell
+            
+            //if the cell is nil
+            if loadMoreHeader == nil{
+                
+                //create it
+                loadMoreHeader = loadMoreHeaderTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMoreHeader")
+                
+            }
+            
+            //return it
+            return loadMoreHeader!
+        }
+        
         
         //If same user
         if sameUser {
@@ -252,7 +272,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             //Set text to noDetailsMessage label
-            noDetailsCell!.noDetailsMessage.text = "\(cR1!.messages[indexPath.row].text)"
+            noDetailsCell!.noDetailsMessage.text = "\(cR1!.messages[indexPath.row - 1].text)"
             
             //return the no detailed cell
             return noDetailsCell!
@@ -277,14 +297,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             fullDetailsCell!.avatarImg.image = UIImage(named: "avatar.png")
             
             //Set the text for the username label
-            fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row].user.username)"
+            fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row - 1].user.username)"
             
             //Set the timestamp
-            fullDetailsCell!.timeLabel.text = "\(cR1!.messages[indexPath.row].tstamp)"
+            fullDetailsCell!.timeLabel.text = "\(cR1!.messages[indexPath.row - 1].tstamp)"
             
             
             //Set the message text
-            fullDetailsCell!.messageLabel.text = "\(cR1!.messages[indexPath.row].text)"
+            fullDetailsCell!.messageLabel.text = "\(cR1!.messages[indexPath.row - 1].text)"
             
             //Return the full detailed cell
             return fullDetailsCell!
@@ -313,7 +333,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //add the keyboard height to the tableview's bottom constraint
             self.bottomViewBottomConstraint.constant += keyboardFrame.size.height
-            self.loadMoreButtonTopConstratint.constant -= keyboardFrame.size.height
+            self.tableViewTopConstraint.constant -= keyboardFrame.size.height
         })
         
     }
@@ -328,7 +348,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //substract the keyboard height from the tableview's bottom constraint
             self.bottomViewBottomConstraint.constant -= keyboardFrame.size.height
-            self.loadMoreButtonTopConstratint.constant += keyboardFrame.size.height
+            self.tableViewTopConstraint.constant += keyboardFrame.size.height
         })
         
         
