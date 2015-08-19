@@ -42,9 +42,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         /********* Dummy data *********/
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = delegate.stack!.context
+
         
         //Create user u1
-        let u1:User = User(id: "1", username: "Komic", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u1:User = User(context: context, id: "1", username: "Komic", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
     
         //Create some messages for u1
         let msg1:Message = Message(id: "1", text: "Message 1 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
@@ -55,7 +58,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         
         //Create user u2
-        let u2:User = User(id: "2", username: "Yorgos", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u2:User = User(context: context, id: "2", username: "Yorgos", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //Create some messages for u2
         let msg6:Message = Message(id: "6", text: "Message 6 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
@@ -67,7 +70,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         //Create user u3
-        let u3:User = User(id: "3", username: "GeorgeP", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u3:User = User(context: context, id: "3", username: "GeorgeP", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //Create some messages for u3
         let msg12:Message = Message(id: "12", text: "Message 12 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
