@@ -8,6 +8,7 @@
 
 
 import UIKit
+import JSQCoreDataKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -16,9 +17,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     //Variable to keep the MMDrawerController instance
     var centerContainer:MMDrawerController?
+    private(set) var model:CoreDataModel?
+    private(set) var stack:CoreDataStack?
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
+        model = CoreDataModel(name: "Rocket_Chat_iOS")
+        stack = CoreDataStack(model: model!)
         
         return true
     }

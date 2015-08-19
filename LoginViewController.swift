@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import JSQCoreDataKit
 
 class LoginViewController: UIViewController {
 
@@ -35,6 +36,29 @@ class LoginViewController: UIViewController {
         userNameTextField.text = "info@rocket.chat"
         passwordTextField.text = "123qwe"
         
+        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = delegate.stack!.context
+        
+        //Check for already logged in user
+        let ent = entity(name: "User", context: context)
+        
+        let request = FetchRequest<User>(entity: ent)
+        //Users that we have password for only
+        request.predicate = NSPredicate(format: "password != nil")
+        
+        
+        var users = [User]()
+        do{
+            users = try fetch(request: request, inContext: context)
+        }catch{
+            print("Error fetching users \(error)")
+        }
+        
+        if !users.isEmpty {
+            userNameTextField.text = users[0].username
+            passwordTextField.text = users[0].password
+            loginButtonTapped(users)
+        }
         
         
     }
@@ -76,6 +100,22 @@ class LoginViewController: UIViewController {
         
             //get the appdelegate and store it in a variable
             let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let context = appDelegate.stack!.context
+            
+            let user = User(context: context, id: "NON-YET", username: userNameTextField.text!, avatar: "avatar.png", status: .ONLINE, timezone: NSTimeZone.systemTimeZone())
+            user.password = passwordTextField.text!
+            //User is automatically is added to CoreData, but not saved, so we need to call
+            //save context next.
+            //This is dump, because it writes the same user again, and again
+            
+            saveContext(context, wait: true, completion:{(error: NSError?) -> Void in
+                if let err = error {
+                    let alert = UIAlertController(title: "Alert", message: "Error \(err.userInfo)", preferredStyle: UIAlertControllerStyle.Alert)
+                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+                    self.presentViewController(alert, animated: true, completion: nil)
+                }
+                
+            })
             
             //let rootViewController = appDelegate.window!.rootViewController
             
