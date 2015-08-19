@@ -11,8 +11,10 @@ import UIKit
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet var bottomViewBottomConstraint: NSLayoutConstraint!
+    
+    @IBOutlet var loadMoreButtonTopConstratint: NSLayoutConstraint!
 
     
     @IBOutlet var mainTableview: UITableView!
@@ -177,7 +179,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLayoutSubviews() {
         
         //scroll tableview at the bottomIndexPath
-        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+        //mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
         
     }
     
@@ -310,7 +312,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         UIView.animateWithDuration(0.1, animations: { () -> Void in
             
             //add the keyboard height to the tableview's bottom constraint
-            self.tableViewBottomConstraint.constant += keyboardFrame.size.height
+            self.bottomViewBottomConstraint.constant += keyboardFrame.size.height
+            self.loadMoreButtonTopConstratint.constant -= keyboardFrame.size.height
         })
         
     }
@@ -324,7 +327,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         UIView.animateWithDuration(0.1, animations: { () -> Void in
             
             //substract the keyboard height from the tableview's bottom constraint
-            self.tableViewBottomConstraint.constant -= keyboardFrame.size.height
+            self.bottomViewBottomConstraint.constant -= keyboardFrame.size.height
+            self.loadMoreButtonTopConstratint.constant += keyboardFrame.size.height
         })
         
         
