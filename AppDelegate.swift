@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
-        model = CoreDataModel(name: "Rocket.Chat.iOS")
+        model = CoreDataModel(name: "Rocket_Chat_iOS")
         stack = CoreDataStack(model: model!)
         
         return true

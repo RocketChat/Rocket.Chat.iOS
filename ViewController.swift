@@ -33,14 +33,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
+        //Create and add touch gesture to tableview
+        let tapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
+        tapGesture.cancelsTouchesInView = true
+        mainTableview.addGestureRecognizer(tapGesture)
         
         
         /********* Dummy data *********/
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let context = delegate.stack!.context
         
         //Create user u1
-        let u1:User = User(context: context, id: "1", username: "Komic", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u1:User = User(id: "1", username: "Komic", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
     
         //Create some messages for u1
         let msg1:Message = Message(id: "1", text: "Message 1 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
@@ -51,7 +53,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         
         //Create user u2
-        let u2:User = User(context: context, id: "2", username: "Yorgos", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u2:User = User(id: "2", username: "Yorgos", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //Create some messages for u2
         let msg6:Message = Message(id: "6", text: "Message 6 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
@@ -63,7 +65,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         //Create user u3
-        let u3:User = User(context: context, id: "3", username: "GeorgeP", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u3:User = User(id: "3", username: "GeorgeP", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //Create some messages for u3
         let msg12:Message = Message(id: "12", text: "Message 12 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
@@ -133,9 +135,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         
-        //Scroll tableview scroll at the bottom where is the latest message
+        //Set bottomIndexpath to last cell's index
         bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-       // mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
 
         
                 
@@ -173,6 +174,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    override func viewDidLayoutSubviews() {
+        
+        //scroll tableview at the bottomIndexPath
+        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+        
+    }
     
     
     //
@@ -196,14 +203,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Populating data
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell:MainTableViewCell = mainTableview.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! MainTableViewCell
+        //Get visible cells indexes
+        let visible = mainTableview.indexPathsForVisibleRows
+        
+        //Set bottomIndexpath to last visible cell's index
+        bottomIndexPath = NSIndexPath(forRow: visible!.last!.row, inSection: 0)
         
         
-        let visible = mainTableview.visibleCells
-        
-        print(visible.count)
-        
-        bottomIndexPath = NSIndexPath(forRow: visible.count, inSection: 0)
         //Boolean to check if previous and current user are the same user
         var sameUser = false
         
@@ -227,49 +233,73 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
 
-        //Setting the data for the cell
+        //Create cell and set data
         
         //If same user
         if sameUser {
             
+            //Try to create cell
+            var noDetailsCell:noDetailsTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("noDetailsCell", forIndexPath: indexPath) as? noDetailsTableViewCell
             
-            cell.avatarImg.hidden = true
-            cell.usernameLabel.hidden = true
-            cell.timeLabel.hidden = true
-            cell.messageLabel.text = "\(cR1!.messages[indexPath.row].text)"
+            //If it is nill
+            if noDetailsCell == nil{
+                
+                //Create the cell
+                noDetailsCell = noDetailsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "noDetailsCell")
             
+            }
+            
+            //Set text to noDetailsMessage label
+            noDetailsCell!.noDetailsMessage.text = "\(cR1!.messages[indexPath.row].text)"
+            
+            //return the no detailed cell
+            return noDetailsCell!
             
         }
         //If different user
         else{
             
-            //Setting data
-            cell.avatarImg.hidden = false
-            cell.usernameLabel.hidden = false
-            cell.timeLabel.hidden = false
-            cell.avatarImg.image = UIImage(named: "avatar.png")
-            cell.usernameLabel.text = "\(cR1!.messages[indexPath.row].user.username)"
-            cell.timeLabel.text = "\(cR1!.messages[indexPath.row].tstamp)"
-            cell.messageLabel.text = "\(cR1!.messages[indexPath.row].text)"
+            //Try to create the cell
+            var fullDetailsCell:MainTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("fullDetailsCell", forIndexPath: indexPath) as? MainTableViewCell
             
+            //If nill
+            if fullDetailsCell == nil{
+                
+                //Create the cell
+                fullDetailsCell = MainTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "fullDetailsCell")
+                
+                
+            }
+            
+            //Set the image
+            fullDetailsCell!.avatarImg.image = UIImage(named: "avatar.png")
+            
+            //Set the text for the username label
+            fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row].user.username)"
+            
+            //Set the timestamp
+            fullDetailsCell!.timeLabel.text = "\(cR1!.messages[indexPath.row].tstamp)"
+            
+            
+            //Set the message text
+            fullDetailsCell!.messageLabel.text = "\(cR1!.messages[indexPath.row].text)"
+            
+            //Return the full detailed cell
+            return fullDetailsCell!
         }
         
         
-        return cell
-        
     }
     
     
-    //Function to get random number between 1-60 to create different timestamps
-    func randomTime() -> Double {
-        let r = arc4random_uniform(60) + 1
-        return Double(r)
-    }
-    
+    //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
         
-        composeMsg.resignFirstResponder()
+        
+        //dismiss keyboard
+        dismissKeyboard()
     }
+    
     
     
     //function to move composeMsg text area up when keyboard shows up
@@ -284,7 +314,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         })
         
     }
-    
     
     
     //function to move composeMsg text area down when keyboard hides
@@ -302,10 +331,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    override func viewDidLayoutSubviews() {
-
-        //scroll tableview at the bottom so when keyboard shows up it doesn't hide the messages
-        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-
+    //Function to get random number between 1-60 to create different timestamps
+    func randomTime() -> Double {
+        let r = arc4random_uniform(60) + 1
+        return Double(r)
     }
+
+    
+    //Function to dismiss keyboard
+    func dismissKeyboard() {
+        
+        //dismiss keyboard
+        composeMsg.resignFirstResponder()
+    }
+    
 }

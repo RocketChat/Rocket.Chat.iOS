@@ -1,21 +1,16 @@
 //
-//  MainTableViewCell.swift
+//  noDetailsTableViewCell.swift
 //  Rocket.Chat.iOS
 //
-//  Created by Kornelakis Michael on 8/10/15.
+//  Created by Kornelakis Michael on 8/18/15.
 //  Copyright © 2015 Rocket.Chat. All rights reserved.
 //
 
 import UIKit
 
-class MainTableViewCell: UITableViewCell {
+class noDetailsTableViewCell: UITableViewCell {
 
-    @IBOutlet var avatarImg: UIImageView!
-    @IBOutlet var usernameLabel: UILabel!
-    @IBOutlet var timeLabel: UILabel!
-    @IBOutlet var messageLabel: UILabel!
-    
-    
+    @IBOutlet var noDetailsMessage: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
