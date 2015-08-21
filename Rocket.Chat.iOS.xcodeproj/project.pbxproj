@@ -22,11 +22,11 @@
 		DF1E01801B736A4A0097862D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E017F1B736A4A0097862D /* AppDelegate.swift */; };
 		DF1E01821B736ACB0097862D /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01811B736ACB0097862D /* LeftViewController.swift */; };
 		DF1E01861B736B830097862D /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01851B736B830097862D /* RightViewController.swift */; };
-		DF2CD6711B8484A900FAC0D6 /* loadMoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2CD6701B8484A900FAC0D6 /* loadMoreHeaderTableViewCell.swift */; };
+		DF2CD6711B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */; };
 		DF3DE1AB1B78A1350072A33D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3DE1AA1B78A1350072A33D /* logo.png */; };
 		DF3DE1AD1B78A37E0072A33D /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */; };
 		DF7DBBFE1B78C8D000A98956 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = DF7DBBFD1B78C8D000A98956 /* avatar.png */; };
-		DFA179071B83299500FA8DC1 /* noDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA179061B83299500FA8DC1 /* noDetailsTableViewCell.swift */; };
+		DFA179071B83299500FA8DC1 /* NoDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,11 +70,11 @@
 		DF1E017F1B736A4A0097862D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		DF1E01811B736ACB0097862D /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftViewController.swift; path = ../LeftViewController.swift; sourceTree = "<group>"; };
 		DF1E01851B736B830097862D /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightViewController.swift; path = ../RightViewController.swift; sourceTree = "<group>"; };
-		DF2CD6701B8484A900FAC0D6 /* loadMoreHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = loadMoreHeaderTableViewCell.swift; path = ../loadMoreHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadMoreHeaderTableViewCell.swift; path = ../LoadMoreHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		DF3DE1AA1B78A1350072A33D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTableViewCell.swift; path = ../MainTableViewCell.swift; sourceTree = "<group>"; };
 		DF7DBBFD1B78C8D000A98956 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
-		DFA179061B83299500FA8DC1 /* noDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = noDetailsTableViewCell.swift; path = ../noDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoDetailsTableViewCell.swift; path = ../NoDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		E8B42BE2CCF2AD5BB7DE9FF1 /* Pods-Rocket.Chat.iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.iOS/Pods-Rocket.Chat.iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -153,8 +153,8 @@
 				402A141B1B723E1D00B60093 /* Model */,
 				DF1E017F1B736A4A0097862D /* AppDelegate.swift */,
 				DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */,
-				DFA179061B83299500FA8DC1 /* noDetailsTableViewCell.swift */,
-				DF2CD6701B8484A900FAC0D6 /* loadMoreHeaderTableViewCell.swift */,
+				DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */,
+				DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */,
 				DF155FAA1B766F7D00AA4810 /* LoginViewController.swift */,
 				DF1E01851B736B830097862D /* RightViewController.swift */,
 				DF1E01811B736ACB0097862D /* LeftViewController.swift */,
@@ -392,9 +392,9 @@
 				DF1E01861B736B830097862D /* RightViewController.swift in Sources */,
 				DF1E017E1B7369BF0097862D /* ViewController.swift in Sources */,
 				DF3DE1AD1B78A37E0072A33D /* MainTableViewCell.swift in Sources */,
-				DF2CD6711B8484A900FAC0D6 /* loadMoreHeaderTableViewCell.swift in Sources */,
+				DF2CD6711B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift in Sources */,
 				4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */,
-				DFA179071B83299500FA8DC1 /* noDetailsTableViewCell.swift in Sources */,
+				DFA179071B83299500FA8DC1 /* NoDetailsTableViewCell.swift in Sources */,
 				40FD82791B725D1000305E04 /* Message.swift in Sources */,
 				4084B23B1B734C28002AF4F5 /* ChatRoom.swift in Sources */,
 				DF1E01821B736ACB0097862D /* LeftViewController.swift in Sources */,

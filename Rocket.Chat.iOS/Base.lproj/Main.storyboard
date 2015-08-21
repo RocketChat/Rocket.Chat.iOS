@@ -65,7 +65,7 @@
                                 <rect key="frame" x="-1" y="64" width="322" height="446"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loadMoreHeader" rowHeight="44" id="cop-oD-MCR" customClass="loadMoreHeaderTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loadMoreHeader" rowHeight="44" id="cop-oD-MCR" customClass="LoadMoreHeaderTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="22" width="322" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cop-oD-MCR" id="6s2-ro-ilc">
@@ -164,7 +164,7 @@
                                             <outlet property="usernameLabel" destination="Tbc-uQ-WaK" id="LZI-hO-ePQ"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noDetailsCell" rowHeight="30" id="2o6-DG-n0X" customClass="noDetailsTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noDetailsCell" rowHeight="30" id="2o6-DG-n0X" customClass="NoDetailsTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="146" width="322" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2o6-DG-n0X" id="7pG-rt-Mc6">
