@@ -1,16 +1,16 @@
 //
-//  noDetailsTableViewCell.swift
+//  loadMoreHeaderTableViewCell.swift
 //  Rocket.Chat.iOS
 //
-//  Created by Kornelakis Michael on 8/18/15.
+//  Created by Kornelakis Michael on 8/19/15.
 //  Copyright © 2015 Rocket.Chat. All rights reserved.
 //
 
 import UIKit
 
-class noDetailsTableViewCell: UITableViewCell {
+class LoadMoreHeaderTableViewCell: UITableViewCell {
 
-    @IBOutlet var noDetailsMessage: UILabel!
+    @IBOutlet var loadMoreButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()
