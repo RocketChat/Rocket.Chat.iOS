@@ -16,7 +16,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
     
-
+    
+    //Variable to keep the logged in user
+    var currentUser = User?()
+    
+    //Array to keep dummy messages
+    var mArray1:[Message] = []
     
     @IBOutlet var mainTableview: UITableView!
     @IBOutlet var composeMsg: UITextView!
@@ -90,7 +95,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     
         //Inserting messages in an array (DUMB way)
-        var mArray1:[Message] = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, msg10, msg11, msg12, msg13, msg14, msg15, msg16, msg17, msg18, msg19, msg20]
+        mArray1 = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, msg10, msg11, msg12, msg13, msg14, msg15, msg16, msg17, msg18, msg19, msg20]
         
        
         
@@ -320,9 +325,39 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
     //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
         
+        //If there is text
+        if composeMsg.text != "" {
+            //create current message
+            let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: currentUser!)
+            
+            //add it to the messages array
+            mArray1 += [currentMsg]
+            
+            
+            //update the messages array of the chatroom
+            cR1?.messages = mArray1
+            
+            //reset the text input
+            composeMsg.text = ""
+            
+            //dismiss keyboard
+            dismissKeyboard()
+            
+            //reload the button
+            mainTableview.reloadData()
+            
+            //get the bottom index
+            bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
+            
+            //scroll to bottom
+            mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+        }
+        //If text is empty
+        else{
         
-        //dismiss keyboard
-        dismissKeyboard()
+            //dismiss keyboard
+            dismissKeyboard()
+        }
     }
     
     

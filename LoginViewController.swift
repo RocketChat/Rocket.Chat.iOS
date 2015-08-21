@@ -16,6 +16,9 @@ class LoginViewController: UIViewController {
     @IBOutlet var passwordTextField: UITextField!
     
     
+    //variable to get the logged in user
+    var currentUser = User?()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -115,6 +118,10 @@ class LoginViewController: UIViewController {
                     self.presentViewController(alert, animated: true, completion: nil)
                 }
                 
+            //set the logged in user
+            self.currentUser = user
+            
+                
             })
             
             //let rootViewController = appDelegate.window!.rootViewController
@@ -134,6 +141,9 @@ class LoginViewController: UIViewController {
             //right view
             let rightViewController = mainStoryboard.instantiateViewControllerWithIdentifier("rightView") as! RightViewController
             
+            
+            //send the logged in user in the ViewController
+            centerViewController.currentUser = currentUser
             
             //Set the left, right and center views as the rootviewcontroller for the navigation controller (one rootviewcontroller at a time)
             
