@@ -245,13 +245,13 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
         if (indexPath.row == 0) {
             
             //try create the cell for the load button
-            var loadMoreHeader:loadMoreHeaderTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("loadMoreHeader", forIndexPath: indexPath) as? loadMoreHeaderTableViewCell
+            var loadMoreHeader:LoadMoreHeaderTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("loadMoreHeader", forIndexPath: indexPath) as? LoadMoreHeaderTableViewCell
             
             //if the cell is nil
             if loadMoreHeader == nil{
                 
                 //create it
-                loadMoreHeader = loadMoreHeaderTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMoreHeader")
+                loadMoreHeader = LoadMoreHeaderTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMoreHeader")
                 
             }
             
@@ -264,13 +264,13 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
         if sameUser {
             
             //Try to create cell
-            var noDetailsCell:noDetailsTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("noDetailsCell", forIndexPath: indexPath) as? noDetailsTableViewCell
+            var noDetailsCell:NoDetailsTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("noDetailsCell", forIndexPath: indexPath) as? NoDetailsTableViewCell
             
             //If it is nill
             if noDetailsCell == nil{
                 
                 //Create the cell
-                noDetailsCell = noDetailsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "noDetailsCell")
+                noDetailsCell = NoDetailsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "noDetailsCell")
             
             }
             
