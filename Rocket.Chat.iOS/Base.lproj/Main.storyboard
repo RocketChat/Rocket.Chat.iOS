@@ -29,10 +29,10 @@
                                 <rect key="frame" x="16" y="518" width="288" height="42"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="viw-6B-0pw">
-                                        <rect key="frame" x="1" y="6" width="216" height="30"/>
+                                        <rect key="frame" x="1" y="8" width="216" height="34"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="30" id="inF-yU-oa7"/>
+                                            <constraint firstAttribute="height" constant="34" id="inF-yU-oa7"/>
                                             <constraint firstAttribute="width" constant="280" id="mDs-ki-gc7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -57,8 +57,8 @@
                                     <constraint firstItem="viw-6B-0pw" firstAttribute="leading" secondItem="G3g-gb-Vuc" secondAttribute="leading" constant="1" id="7fe-Cz-xkK"/>
                                     <constraint firstItem="8dJ-SW-7HW" firstAttribute="leading" secondItem="viw-6B-0pw" secondAttribute="trailing" constant="19" id="MJk-Ks-QpC"/>
                                     <constraint firstItem="8dJ-SW-7HW" firstAttribute="top" secondItem="G3g-gb-Vuc" secondAttribute="top" constant="6" id="YEh-ge-FQt"/>
-                                    <constraint firstItem="viw-6B-0pw" firstAttribute="centerY" secondItem="G3g-gb-Vuc" secondAttribute="centerY" id="d1r-ld-pm2"/>
-                                    <constraint firstItem="viw-6B-0pw" firstAttribute="top" secondItem="G3g-gb-Vuc" secondAttribute="top" constant="6" id="w0d-oX-qQU"/>
+                                    <constraint firstItem="viw-6B-0pw" firstAttribute="centerY" secondItem="G3g-gb-Vuc" secondAttribute="centerY" constant="4" id="d1r-ld-pm2"/>
+                                    <constraint firstItem="viw-6B-0pw" firstAttribute="top" secondItem="G3g-gb-Vuc" secondAttribute="top" constant="8" id="w0d-oX-qQU"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="75" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="hUb-s7-0eT">
@@ -112,10 +112,10 @@
                                                         <constraint firstAttribute="width" constant="60" id="arQ-em-hdQ"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Tbc-uQ-WaK">
-                                                    <rect key="frame" x="82" y="12" width="80" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="Tbc-uQ-WaK">
+                                                    <rect key="frame" x="82" y="12" width="122" height="21"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="width" constant="80" id="Hah-1V-QAv"/>
+                                                        <constraint firstAttribute="width" constant="122" id="Hah-1V-QAv"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
