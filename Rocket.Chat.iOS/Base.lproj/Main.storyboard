@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="adJ-xO-Vln">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="adJ-xO-Vln">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
@@ -13,7 +13,7 @@
         </mutableArray>
     </customFonts>
     <scenes>
-        <!--View Controller-->
+        <!--#general-->
         <scene sceneID="ZB7-k7-jxU">
             <objects>
                 <viewController storyboardIdentifier="viewController" id="uTd-Gh-naL" customClass="ViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -207,13 +207,13 @@
                             <constraint firstItem="G3g-gb-Vuc" firstAttribute="top" secondItem="hUb-s7-0eT" secondAttribute="bottom" constant="8" id="r4I-6l-Yoi"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cQN-uN-CZi">
-                        <barButtonItem key="leftBarButtonItem" title="Left" id="KNH-mw-WAW">
+                    <navigationItem key="navigationItem" title="#general" id="cQN-uN-CZi">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="KNH-mw-WAW">
                             <connections>
                                 <action selector="leftNavTapped:" destination="uTd-Gh-naL" id="hny-Zb-7Oq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Right" id="A03-dI-4Sm">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="A03-dI-4Sm">
                             <connections>
                                 <action selector="rightNavTapped:" destination="uTd-Gh-naL" id="p6c-St-7CZ"/>
                             </connections>
@@ -385,7 +385,7 @@
                                     <action selector="forgotPasswordTapped:" destination="adJ-xO-Vln" eventType="touchUpInside" id="x4v-ar-cOP"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="IjP-fK-PyE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="IjP-fK-PyE">
                                 <rect key="frame" x="16" y="61" width="288" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="Rhh-0h-iqS"/>
@@ -460,6 +460,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo.png" width="436" height="85"/>
+        <image name="Logo" width="436" height="85"/>
     </resources>
 </document>
