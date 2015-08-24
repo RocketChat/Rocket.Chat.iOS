@@ -16,7 +16,7 @@
         <!--View Controller-->
         <scene sceneID="ZB7-k7-jxU">
             <objects>
-                <viewController storyboardIdentifier="viewController" id="uTd-Gh-naL" customClass="ViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="viewController" automaticallyAdjustsScrollViewInsets="NO" id="uTd-Gh-naL" customClass="ViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="QCZ-pr-dNw"/>
                         <viewControllerLayoutGuide type="bottom" id="2Xy-Ja-dRg"/>
@@ -30,7 +30,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="loadMoreHeader" rowHeight="44" id="cop-oD-MCR" customClass="LoadMoreHeaderTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="86" width="344" height="44"/>
+                                        <rect key="frame" x="0.0" y="22" width="344" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cop-oD-MCR" id="6s2-ro-ilc">
                                             <rect key="frame" x="0.0" y="0.0" width="344" height="43"/>
@@ -63,7 +63,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="fullDetailsCell" rowHeight="80" id="crD-tj-Pmh" customClass="MainTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="130" width="344" height="80"/>
+                                        <rect key="frame" x="0.0" y="66" width="344" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="crD-tj-Pmh" id="nPR-il-4el">
                                             <rect key="frame" x="0.0" y="0.0" width="344" height="79"/>
@@ -129,7 +129,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="noDetailsCell" rowHeight="30" id="2o6-DG-n0X" customClass="NoDetailsTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="210" width="344" height="30"/>
+                                        <rect key="frame" x="0.0" y="146" width="344" height="30"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="2o6-DG-n0X" id="7pG-rt-Mc6">
                                             <rect key="frame" x="0.0" y="0.0" width="344" height="29"/>
