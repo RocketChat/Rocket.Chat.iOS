@@ -297,7 +297,7 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
             }
             
             //Set the image
-            fullDetailsCell!.avatarImg.image = UIImage(named: "avatar.png")
+            fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
             
             //Set the text for the username label
             fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row - 1].user.username)"
