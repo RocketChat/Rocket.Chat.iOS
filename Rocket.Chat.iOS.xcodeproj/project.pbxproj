@@ -10,6 +10,11 @@
 		402A141D1B723E4400B60093 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402A141C1B723E4400B60093 /* User.swift */; };
 		4084B23B1B734C28002AF4F5 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4084B23A1B734C28002AF4F5 /* ChatRoom.swift */; };
 		40FD82791B725D1000305E04 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FD82781B725D1000305E04 /* Message.swift */; };
+		4F00C3BF1B8B44CC005D558E /* LeftMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F00C3BE1B8B44CC005D558E /* LeftMenuTableViewController.swift */; };
+		4F00C3C11B8B59C9005D558E /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F00C3C01B8B59C9005D558E /* FavoritesTableViewCell.swift */; };
+		4F00C3C31B8B59DA005D558E /* ChannelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F00C3C21B8B59D9005D558E /* ChannelsTableViewCell.swift */; };
+		4F00C3C51B8B5A09005D558E /* PrivateGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F00C3C41B8B5A09005D558E /* PrivateGroupsTableViewCell.swift */; };
+		4F00C3C71B8B5A27005D558E /* DirectMessagesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F00C3C61B8B5A27005D558E /* DirectMessagesTableViewCell.swift */; };
 		4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7E4D41B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld */; };
 		4FB7E4DD1B70111D00C69777 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4DB1B70111D00C69777 /* Main.storyboard */; };
 		4FB7E4DF1B70111D00C69777 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4DE1B70111D00C69777 /* Assets.xcassets */; };
@@ -50,6 +55,11 @@
 		4084B23A1B734C28002AF4F5 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		40FD82781B725D1000305E04 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		4227E3B51FEB156513C2D7BD /* Pods_Rocket_Chat_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F00C3BE1B8B44CC005D558E /* LeftMenuTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeftMenuTableViewController.swift; sourceTree = "<group>"; };
+		4F00C3C01B8B59C9005D558E /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
+		4F00C3C21B8B59D9005D558E /* ChannelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelsTableViewCell.swift; sourceTree = "<group>"; };
+		4F00C3C41B8B5A09005D558E /* PrivateGroupsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrivateGroupsTableViewCell.swift; sourceTree = "<group>"; };
+		4F00C3C61B8B5A27005D558E /* DirectMessagesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DirectMessagesTableViewCell.swift; sourceTree = "<group>"; };
 		4FB7E4CF1B70111D00C69777 /* Rocket.Chat.iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rocket.Chat.iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB7E4D51B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rocket_Chat_iOS.xcdatamodel; sourceTree = "<group>"; };
 		4FB7E4DC1B70111D00C69777 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -155,6 +165,11 @@
 				DF1E01811B736ACB0097862D /* LeftViewController.swift */,
 				DF1E017D1B7369BF0097862D /* ViewController.swift */,
 				4FB7E4DB1B70111D00C69777 /* Main.storyboard */,
+				4F00C3C01B8B59C9005D558E /* FavoritesTableViewCell.swift */,
+				4F00C3C61B8B5A27005D558E /* DirectMessagesTableViewCell.swift */,
+				4F00C3C41B8B5A09005D558E /* PrivateGroupsTableViewCell.swift */,
+				4F00C3C21B8B59D9005D558E /* ChannelsTableViewCell.swift */,
+				4F00C3BE1B8B44CC005D558E /* LeftMenuTableViewController.swift */,
 				4FB7E4DE1B70111D00C69777 /* Assets.xcassets */,
 				4FB7E4E01B70111D00C69777 /* LaunchScreen.storyboard */,
 				4FB7E4E31B70111D00C69777 /* Info.plist */,
@@ -373,16 +388,21 @@
 			files = (
 				DF155FAB1B766F7D00AA4810 /* LoginViewController.swift in Sources */,
 				DF1E01801B736A4A0097862D /* AppDelegate.swift in Sources */,
+				4F00C3C71B8B5A27005D558E /* DirectMessagesTableViewCell.swift in Sources */,
 				DF1E01861B736B830097862D /* RightViewController.swift in Sources */,
 				DF1E017E1B7369BF0097862D /* ViewController.swift in Sources */,
 				DF3DE1AD1B78A37E0072A33D /* MainTableViewCell.swift in Sources */,
 				DF2CD6711B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift in Sources */,
+				4F00C3C31B8B59DA005D558E /* ChannelsTableViewCell.swift in Sources */,
+				4F00C3C51B8B5A09005D558E /* PrivateGroupsTableViewCell.swift in Sources */,
 				4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */,
 				DFA179071B83299500FA8DC1 /* NoDetailsTableViewCell.swift in Sources */,
 				40FD82791B725D1000305E04 /* Message.swift in Sources */,
+				4F00C3BF1B8B44CC005D558E /* LeftMenuTableViewController.swift in Sources */,
 				4084B23B1B734C28002AF4F5 /* ChatRoom.swift in Sources */,
 				DF1E01821B736ACB0097862D /* LeftViewController.swift in Sources */,
 				402A141D1B723E4400B60093 /* User.swift in Sources */,
+				4F00C3C11B8B59C9005D558E /* FavoritesTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
