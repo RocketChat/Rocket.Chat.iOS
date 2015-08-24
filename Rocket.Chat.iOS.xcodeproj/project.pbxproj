@@ -25,6 +25,14 @@
 		4FB7E4ED1B70111E00C69777 /* Rocket_Chat_iOSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7E4EC1B70111E00C69777 /* Rocket_Chat_iOSTests.swift */; };
 		4FB7E4F81B70111E00C69777 /* Rocket_Chat_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7E4F71B70111E00C69777 /* Rocket_Chat_iOSUITests.swift */; };
 		783304F2FCA3B826852C6DD2 /* Pods_Rocket_Chat_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4227E3B51FEB156513C2D7BD /* Pods_Rocket_Chat_iOS.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		DF155FAB1B766F7D00AA4810 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF155FAA1B766F7D00AA4810 /* LoginViewController.swift */; };
+		DF1E017E1B7369BF0097862D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E017D1B7369BF0097862D /* ViewController.swift */; };
+		DF1E01801B736A4A0097862D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E017F1B736A4A0097862D /* AppDelegate.swift */; };
+		DF1E01821B736ACB0097862D /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01811B736ACB0097862D /* LeftViewController.swift */; };
+		DF1E01861B736B830097862D /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01851B736B830097862D /* RightViewController.swift */; };
+		DF2CD6711B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */; };
+		DF3DE1AD1B78A37E0072A33D /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */; };
+		DFA179071B83299500FA8DC1 /* NoDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +79,15 @@
 		4FB7E4F31B70111E00C69777 /* Rocket.Chat.iOSUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rocket.Chat.iOSUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB7E4F71B70111E00C69777 /* Rocket_Chat_iOSUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket_Chat_iOSUITests.swift; sourceTree = "<group>"; };
 		4FB7E4F91B70111E00C69777 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF155FAA1B766F7D00AA4810 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginViewController.swift; path = ../LoginViewController.swift; sourceTree = "<group>"; };
+		DF1E01741B7367A60097862D /* Rocket.Chat.iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket.Chat.iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		DF1E017D1B7369BF0097862D /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ../ViewController.swift; sourceTree = "<group>"; };
+		DF1E017F1B736A4A0097862D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
+		DF1E01811B736ACB0097862D /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftViewController.swift; path = ../LeftViewController.swift; sourceTree = "<group>"; };
+		DF1E01851B736B830097862D /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightViewController.swift; path = ../RightViewController.swift; sourceTree = "<group>"; };
+		DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadMoreHeaderTableViewCell.swift; path = ../LoadMoreHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTableViewCell.swift; path = ../MainTableViewCell.swift; sourceTree = "<group>"; };
+		DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoDetailsTableViewCell.swift; path = ../NoDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		E8B42BE2CCF2AD5BB7DE9FF1 /* Pods-Rocket.Chat.iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.iOS/Pods-Rocket.Chat.iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -564,7 +581,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Rocket.Chat.iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -584,7 +601,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Rocket.Chat.iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
