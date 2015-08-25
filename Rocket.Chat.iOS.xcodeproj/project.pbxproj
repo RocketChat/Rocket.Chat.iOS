@@ -22,6 +22,7 @@
 		DF1E01801B736A4A0097862D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E017F1B736A4A0097862D /* AppDelegate.swift */; };
 		DF1E01821B736ACB0097862D /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01811B736ACB0097862D /* LeftViewController.swift */; };
 		DF1E01861B736B830097862D /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01851B736B830097862D /* RightViewController.swift */; };
+		DF2874F01B8B162E0034473B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2874EF1B8B162E0034473B /* RegisterViewController.swift */; };
 		DF2CD6711B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */; };
 		DF3DE1AB1B78A1350072A33D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3DE1AA1B78A1350072A33D /* logo.png */; };
 		DF3DE1AD1B78A37E0072A33D /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */; };
@@ -70,6 +71,7 @@
 		DF1E017F1B736A4A0097862D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = ../AppDelegate.swift; sourceTree = "<group>"; };
 		DF1E01811B736ACB0097862D /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftViewController.swift; path = ../LeftViewController.swift; sourceTree = "<group>"; };
 		DF1E01851B736B830097862D /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightViewController.swift; path = ../RightViewController.swift; sourceTree = "<group>"; };
+		DF2874EF1B8B162E0034473B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ../RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadMoreHeaderTableViewCell.swift; path = ../LoadMoreHeaderTableViewCell.swift; sourceTree = "<group>"; };
 		DF3DE1AA1B78A1350072A33D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTableViewCell.swift; path = ../MainTableViewCell.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */,
 				DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */,
 				DF155FAA1B766F7D00AA4810 /* LoginViewController.swift */,
+				DF2874EF1B8B162E0034473B /* RegisterViewController.swift */,
 				DF1E01851B736B830097862D /* RightViewController.swift */,
 				DF1E01811B736ACB0097862D /* LeftViewController.swift */,
 				DF1E017D1B7369BF0097862D /* ViewController.swift */,
@@ -397,6 +400,7 @@
 				DFA179071B83299500FA8DC1 /* NoDetailsTableViewCell.swift in Sources */,
 				40FD82791B725D1000305E04 /* Message.swift in Sources */,
 				4084B23B1B734C28002AF4F5 /* ChatRoom.swift in Sources */,
+				DF2874F01B8B162E0034473B /* RegisterViewController.swift in Sources */,
 				DF1E01821B736ACB0097862D /* LeftViewController.swift in Sources */,
 				402A141D1B723E4400B60093 /* User.swift in Sources */,
 			);
@@ -489,7 +493,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -528,7 +532,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -545,7 +549,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Rocket.Chat.iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -564,7 +568,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Rocket.Chat.iOS/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
