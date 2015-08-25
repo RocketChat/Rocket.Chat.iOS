@@ -340,8 +340,8 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
             //reset the text input
             composeMsg.text = ""
             
-            //dismiss keyboard
-            dismissKeyboard()
+            //dismiss keyboard - Uncomment the next line if you want keyboard to hide when you send a message
+            //dismissKeyboard()
             
             //reload the button
             mainTableview.reloadData()
