@@ -24,9 +24,7 @@
 		DF1E01861B736B830097862D /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01851B736B830097862D /* RightViewController.swift */; };
 		DF2874F01B8B162E0034473B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2874EF1B8B162E0034473B /* RegisterViewController.swift */; };
 		DF2CD6711B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */; };
-		DF3DE1AB1B78A1350072A33D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3DE1AA1B78A1350072A33D /* logo.png */; };
 		DF3DE1AD1B78A37E0072A33D /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */; };
-		DF7DBBFE1B78C8D000A98956 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = DF7DBBFD1B78C8D000A98956 /* avatar.png */; };
 		DFA179071B83299500FA8DC1 /* NoDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -73,9 +71,7 @@
 		DF1E01851B736B830097862D /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightViewController.swift; path = ../RightViewController.swift; sourceTree = "<group>"; };
 		DF2874EF1B8B162E0034473B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ../RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadMoreHeaderTableViewCell.swift; path = ../LoadMoreHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		DF3DE1AA1B78A1350072A33D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTableViewCell.swift; path = ../MainTableViewCell.swift; sourceTree = "<group>"; };
-		DF7DBBFD1B78C8D000A98956 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 		DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoDetailsTableViewCell.swift; path = ../NoDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		E8B42BE2CCF2AD5BB7DE9FF1 /* Pods-Rocket.Chat.iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.iOS/Pods-Rocket.Chat.iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -151,22 +147,15 @@
 		4FB7E4D11B70111D00C69777 /* Rocket.Chat.iOS */ = {
 			isa = PBXGroup;
 			children = (
-				DF3DE1A91B78A1290072A33D /* images */,
 				402A141B1B723E1D00B60093 /* Model */,
+				DF4B41F61B8D196300AD3617 /* Cells */,
+				DF4B41F71B8D199400AD3617 /* ViewControllers */,
 				DF1E017F1B736A4A0097862D /* AppDelegate.swift */,
-				DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */,
-				DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */,
-				DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */,
-				DF155FAA1B766F7D00AA4810 /* LoginViewController.swift */,
-				DF2874EF1B8B162E0034473B /* RegisterViewController.swift */,
-				DF1E01851B736B830097862D /* RightViewController.swift */,
-				DF1E01811B736ACB0097862D /* LeftViewController.swift */,
-				DF1E017D1B7369BF0097862D /* ViewController.swift */,
 				4FB7E4DB1B70111D00C69777 /* Main.storyboard */,
-				4FB7E4DE1B70111D00C69777 /* Assets.xcassets */,
 				4FB7E4E01B70111D00C69777 /* LaunchScreen.storyboard */,
-				4FB7E4E31B70111D00C69777 /* Info.plist */,
+				4FB7E4DE1B70111D00C69777 /* Assets.xcassets */,
 				4FB7E4D41B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld */,
+				DF4B41F91B8D1A2200AD3617 /* Supporting Files */,
 			);
 			path = Rocket.Chat.iOS;
 			sourceTree = "<group>";
@@ -189,13 +178,42 @@
 			path = Rocket.Chat.iOSUITests;
 			sourceTree = "<group>";
 		};
-		DF3DE1A91B78A1290072A33D /* images */ = {
+		DF4B41F61B8D196300AD3617 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				DF7DBBFD1B78C8D000A98956 /* avatar.png */,
-				DF3DE1AA1B78A1350072A33D /* logo.png */,
+				DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */,
+				DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */,
+				DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */,
 			);
-			name = images;
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		DF4B41F71B8D199400AD3617 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DF4B41F81B8D19A800AD3617 /* Auth */,
+				DF2874EF1B8B162E0034473B /* RegisterViewController.swift */,
+				DF1E01811B736ACB0097862D /* LeftViewController.swift */,
+				DF1E01851B736B830097862D /* RightViewController.swift */,
+				DF1E017D1B7369BF0097862D /* ViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		DF4B41F81B8D19A800AD3617 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				DF155FAA1B766F7D00AA4810 /* LoginViewController.swift */,
+			);
+			name = Auth;
+			sourceTree = "<group>";
+		};
+		DF4B41F91B8D1A2200AD3617 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4FB7E4E31B70111D00C69777 /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		E7E1D0A9090D37B9C9D73E94 /* Frameworks */ = {
@@ -313,8 +331,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF3DE1AB1B78A1350072A33D /* logo.png in Resources */,
-				DF7DBBFE1B78C8D000A98956 /* avatar.png in Resources */,
 				4FB7E4E21B70111D00C69777 /* LaunchScreen.storyboard in Resources */,
 				4FB7E4DF1B70111D00C69777 /* Assets.xcassets in Resources */,
 				4FB7E4DD1B70111D00C69777 /* Main.storyboard in Resources */,
