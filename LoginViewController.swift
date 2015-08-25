@@ -225,26 +225,25 @@ class LoginViewController: UIViewController {
         
         var exists = false
         
-        for i in self.users {
+        //If there are registered users
+        if !self.users.isEmpty{
             
-            if i.username == userNameTextField.text{
-                exists = true
-                self.currentUser = i
-                print("CurrentUser set " + i.username)
+            for i in self.users {
+                
+                if i.username == userNameTextField.text{
+                    exists = true
+                    self.currentUser = i
+                    print("CurrentUser set " + i.username)
+                }
             }
+            
         }
-        
-        
-        
-        
         //if user and pass is OK return true
 //        if(userName == "komic" && passWord == "komic123"){
 //            
 //            return true
 //            
 //        }
-        
-        
         
         
         //if user and pass exists return true
