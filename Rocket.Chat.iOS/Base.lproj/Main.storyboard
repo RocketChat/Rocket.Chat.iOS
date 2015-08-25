@@ -169,7 +169,7 @@
                                             <constraint firstAttribute="width" constant="280" id="mDs-ki-gc7"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" autocorrectionType="no"/>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="mDs-ki-gc7"/>
