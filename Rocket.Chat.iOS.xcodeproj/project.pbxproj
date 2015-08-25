@@ -7,9 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		402A141D1B723E4400B60093 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402A141C1B723E4400B60093 /* User.swift */; };
-		4084B23B1B734C28002AF4F5 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4084B23A1B734C28002AF4F5 /* ChatRoom.swift */; };
-		40FD82791B725D1000305E04 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FD82781B725D1000305E04 /* Message.swift */; };
+		410CEB141B8B386E00CAFFE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB131B8B386E00CAFFE9 /* AppDelegate.swift */; };
+		410CEB1A1B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB171B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift */; };
+		410CEB1B1B8B388300CAFFE9 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB181B8B388300CAFFE9 /* MainTableViewCell.swift */; };
+		410CEB1C1B8B388300CAFFE9 /* NoDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB191B8B388300CAFFE9 /* NoDetailsTableViewCell.swift */; };
+		410CEB221B8B388F00CAFFE9 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB1E1B8B388F00CAFFE9 /* LeftViewController.swift */; };
+		410CEB231B8B388F00CAFFE9 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB1F1B8B388F00CAFFE9 /* RightViewController.swift */; };
+		410CEB241B8B388F00CAFFE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB201B8B388F00CAFFE9 /* ViewController.swift */; };
+		410CEB271B8B38A800CAFFE9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB261B8B38A800CAFFE9 /* LoginViewController.swift */; };
+		410CEB2C1B8B390400CAFFE9 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB291B8B390400CAFFE9 /* ChatRoom.swift */; };
+		410CEB2D1B8B390400CAFFE9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB2A1B8B390400CAFFE9 /* Message.swift */; };
+		410CEB2E1B8B390400CAFFE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB2B1B8B390400CAFFE9 /* User.swift */; };
 		4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7E4D41B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld */; };
 		4FB7E4DD1B70111D00C69777 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4DB1B70111D00C69777 /* Main.storyboard */; };
 		4FB7E4DF1B70111D00C69777 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4DE1B70111D00C69777 /* Assets.xcassets */; };
@@ -21,10 +29,12 @@
 		DF1E017E1B7369BF0097862D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E017D1B7369BF0097862D /* ViewController.swift */; };
 		DF1E01801B736A4A0097862D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E017F1B736A4A0097862D /* AppDelegate.swift */; };
 		DF1E01821B736ACB0097862D /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01811B736ACB0097862D /* LeftViewController.swift */; };
-		DF1E01861B736B830097862D /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01851B736B830097862D /* RightViewController.swift */; };
+        DF1E01861B736B830097862D /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01851B736B830097862D /* RightViewController.swift */; };
 		DF2874F01B8B162E0034473B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2874EF1B8B162E0034473B /* RegisterViewController.swift */; };
 		DF2CD6711B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */; };
+		DF3DE1AB1B78A1350072A33D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3DE1AA1B78A1350072A33D /* logo.png */; };
 		DF3DE1AD1B78A37E0072A33D /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */; };
+		DF7DBBFE1B78C8D000A98956 /* avatar.png in Resources */ = {isa = PBXBuildFile; fileRef = DF7DBBFD1B78C8D000A98956 /* avatar.png */; };
 		DFA179071B83299500FA8DC1 /* NoDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,9 +57,18 @@
 
 /* Begin PBXFileReference section */
 		39D29D0B9966EB0E7E0F9317 /* Pods-Rocket.Chat.iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.iOS/Pods-Rocket.Chat.iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		402A141C1B723E4400B60093 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		4084B23A1B734C28002AF4F5 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
-		40FD82781B725D1000305E04 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		410CEB131B8B386E00CAFFE9 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		410CEB171B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadMoreHeaderTableViewCell.swift; path = Cells/LoadMoreHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		410CEB181B8B388300CAFFE9 /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTableViewCell.swift; path = Cells/MainTableViewCell.swift; sourceTree = "<group>"; };
+		410CEB191B8B388300CAFFE9 /* NoDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoDetailsTableViewCell.swift; path = Cells/NoDetailsTableViewCell.swift; sourceTree = "<group>"; };
+		410CEB1E1B8B388F00CAFFE9 /* LeftViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftViewController.swift; path = ViewControllers/LeftViewController.swift; sourceTree = "<group>"; };
+		410CEB1F1B8B388F00CAFFE9 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightViewController.swift; path = ViewControllers/RightViewController.swift; sourceTree = "<group>"; };
+		410CEB201B8B388F00CAFFE9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ViewControllers/ViewController.swift; sourceTree = "<group>"; };
+		410CEB261B8B38A800CAFFE9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		410CEB291B8B390400CAFFE9 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatRoom.swift; path = Models/ChatRoom.swift; sourceTree = "<group>"; };
+		410CEB2A1B8B390400CAFFE9 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
+		410CEB2B1B8B390400CAFFE9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
+		410CEB2F1B8B391100CAFFE9 /* Rocket.Chat.iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket.Chat.iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		4227E3B51FEB156513C2D7BD /* Pods_Rocket_Chat_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB7E4CF1B70111D00C69777 /* Rocket.Chat.iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rocket.Chat.iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4FB7E4D51B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rocket_Chat_iOS.xcdatamodel; sourceTree = "<group>"; };
@@ -71,7 +90,9 @@
 		DF1E01851B736B830097862D /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightViewController.swift; path = ../RightViewController.swift; sourceTree = "<group>"; };
 		DF2874EF1B8B162E0034473B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ../RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadMoreHeaderTableViewCell.swift; path = ../LoadMoreHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		DF3DE1AA1B78A1350072A33D /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainTableViewCell.swift; path = ../MainTableViewCell.swift; sourceTree = "<group>"; };
+		DF7DBBFD1B78C8D000A98956 /* avatar.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = avatar.png; sourceTree = "<group>"; };
 		DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NoDetailsTableViewCell.swift; path = ../NoDetailsTableViewCell.swift; sourceTree = "<group>"; };
 		E8B42BE2CCF2AD5BB7DE9FF1 /* Pods-Rocket.Chat.iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.iOS/Pods-Rocket.Chat.iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -114,11 +135,49 @@
 		402A141B1B723E1D00B60093 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				402A141C1B723E4400B60093 /* User.swift */,
-				40FD82781B725D1000305E04 /* Message.swift */,
-				4084B23A1B734C28002AF4F5 /* ChatRoom.swift */,
+				410CEB291B8B390400CAFFE9 /* ChatRoom.swift */,
+				410CEB2A1B8B390400CAFFE9 /* Message.swift */,
+				410CEB2B1B8B390400CAFFE9 /* User.swift */,
 			);
 			name = Model;
+			sourceTree = "<group>";
+		};
+		410CEB151B8B387500CAFFE9 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				410CEB251B8B38A800CAFFE9 /* Auth */,
+				410CEB1E1B8B388F00CAFFE9 /* LeftViewController.swift */,
+				410CEB1F1B8B388F00CAFFE9 /* RightViewController.swift */,
+				410CEB201B8B388F00CAFFE9 /* ViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		410CEB161B8B387B00CAFFE9 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				410CEB171B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift */,
+				410CEB181B8B388300CAFFE9 /* MainTableViewCell.swift */,
+				410CEB191B8B388300CAFFE9 /* NoDetailsTableViewCell.swift */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		410CEB251B8B38A800CAFFE9 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				410CEB261B8B38A800CAFFE9 /* LoginViewController.swift */,
+			);
+			name = Auth;
+			path = ViewControllers/Auth;
+			sourceTree = "<group>";
+		};
+		410CEB281B8B38B200CAFFE9 /* Supporting FIles */ = {
+			isa = PBXGroup;
+			children = (
+				4FB7E4E31B70111D00C69777 /* Info.plist */,
+			);
+			name = "Supporting FIles";
 			sourceTree = "<group>";
 		};
 		4FB7E4C61B70111D00C69777 = {
@@ -130,7 +189,6 @@
 				4FB7E4D01B70111D00C69777 /* Products */,
 				02E0FA433FF159A275A34B71 /* Pods */,
 				E7E1D0A9090D37B9C9D73E94 /* Frameworks */,
-				DF1E01741B7367A60097862D /* Rocket.Chat.iOS-Bridging-Header.h */,
 			);
 			sourceTree = "<group>";
 		};
@@ -147,15 +205,29 @@
 		4FB7E4D11B70111D00C69777 /* Rocket.Chat.iOS */ = {
 			isa = PBXGroup;
 			children = (
+				DF3DE1A91B78A1290072A33D /* images */,
 				402A141B1B723E1D00B60093 /* Model */,
-				DF4B41F61B8D196300AD3617 /* Cells */,
-				DF4B41F71B8D199400AD3617 /* ViewControllers */,
+<<<<<<< HEAD
 				DF1E017F1B736A4A0097862D /* AppDelegate.swift */,
+				DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */,
+				DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */,
+				DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */,
+				DF155FAA1B766F7D00AA4810 /* LoginViewController.swift */,
+				DF2874EF1B8B162E0034473B /* RegisterViewController.swift */,
+				DF1E01851B736B830097862D /* RightViewController.swift */,
+				DF1E01811B736ACB0097862D /* LeftViewController.swift */,
+				DF1E017D1B7369BF0097862D /* ViewController.swift */,
+=======
+				410CEB161B8B387B00CAFFE9 /* Cells */,
+				410CEB151B8B387500CAFFE9 /* ViewControllers */,
+				410CEB131B8B386E00CAFFE9 /* AppDelegate.swift */,
+>>>>>>> 0e89f0d5b89ccecdc82a88c66c86b84e9f5c3f05
 				4FB7E4DB1B70111D00C69777 /* Main.storyboard */,
 				4FB7E4E01B70111D00C69777 /* LaunchScreen.storyboard */,
 				4FB7E4DE1B70111D00C69777 /* Assets.xcassets */,
 				4FB7E4D41B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld */,
-				DF4B41F91B8D1A2200AD3617 /* Supporting Files */,
+				410CEB2F1B8B391100CAFFE9 /* Rocket.Chat.iOS-Bridging-Header.h */,
+				410CEB281B8B38B200CAFFE9 /* Supporting FIles */,
 			);
 			path = Rocket.Chat.iOS;
 			sourceTree = "<group>";
@@ -178,42 +250,13 @@
 			path = Rocket.Chat.iOSUITests;
 			sourceTree = "<group>";
 		};
-		DF4B41F61B8D196300AD3617 /* Cells */ = {
+		DF3DE1A91B78A1290072A33D /* images */ = {
 			isa = PBXGroup;
 			children = (
-				DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */,
-				DF3DE1AC1B78A37E0072A33D /* MainTableViewCell.swift */,
-				DFA179061B83299500FA8DC1 /* NoDetailsTableViewCell.swift */,
+				DF7DBBFD1B78C8D000A98956 /* avatar.png */,
+				DF3DE1AA1B78A1350072A33D /* logo.png */,
 			);
-			name = Cells;
-			sourceTree = "<group>";
-		};
-		DF4B41F71B8D199400AD3617 /* ViewControllers */ = {
-			isa = PBXGroup;
-			children = (
-				DF4B41F81B8D19A800AD3617 /* Auth */,
-				DF2874EF1B8B162E0034473B /* RegisterViewController.swift */,
-				DF1E01811B736ACB0097862D /* LeftViewController.swift */,
-				DF1E01851B736B830097862D /* RightViewController.swift */,
-				DF1E017D1B7369BF0097862D /* ViewController.swift */,
-			);
-			name = ViewControllers;
-			sourceTree = "<group>";
-		};
-		DF4B41F81B8D19A800AD3617 /* Auth */ = {
-			isa = PBXGroup;
-			children = (
-				DF155FAA1B766F7D00AA4810 /* LoginViewController.swift */,
-			);
-			name = Auth;
-			sourceTree = "<group>";
-		};
-		DF4B41F91B8D1A2200AD3617 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				4FB7E4E31B70111D00C69777 /* Info.plist */,
-			);
-			name = "Supporting Files";
+			name = images;
 			sourceTree = "<group>";
 		};
 		E7E1D0A9090D37B9C9D73E94 /* Frameworks */ = {
@@ -331,6 +374,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF3DE1AB1B78A1350072A33D /* logo.png in Resources */,
+				DF7DBBFE1B78C8D000A98956 /* avatar.png in Resources */,
 				4FB7E4E21B70111D00C69777 /* LaunchScreen.storyboard in Resources */,
 				4FB7E4DF1B70111D00C69777 /* Assets.xcassets in Resources */,
 				4FB7E4DD1B70111D00C69777 /* Main.storyboard in Resources */,
@@ -406,19 +451,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DF155FAB1B766F7D00AA4810 /* LoginViewController.swift in Sources */,
-				DF1E01801B736A4A0097862D /* AppDelegate.swift in Sources */,
-				DF1E01861B736B830097862D /* RightViewController.swift in Sources */,
-				DF1E017E1B7369BF0097862D /* ViewController.swift in Sources */,
-				DF3DE1AD1B78A37E0072A33D /* MainTableViewCell.swift in Sources */,
-				DF2CD6711B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift in Sources */,
+				410CEB271B8B38A800CAFFE9 /* LoginViewController.swift in Sources */,
+				410CEB141B8B386E00CAFFE9 /* AppDelegate.swift in Sources */,
 				4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */,
+<<<<<<< HEAD
 				DFA179071B83299500FA8DC1 /* NoDetailsTableViewCell.swift in Sources */,
 				40FD82791B725D1000305E04 /* Message.swift in Sources */,
 				4084B23B1B734C28002AF4F5 /* ChatRoom.swift in Sources */,
 				DF2874F01B8B162E0034473B /* RegisterViewController.swift in Sources */,
 				DF1E01821B736ACB0097862D /* LeftViewController.swift in Sources */,
 				402A141D1B723E4400B60093 /* User.swift in Sources */,
+=======
+				410CEB1B1B8B388300CAFFE9 /* MainTableViewCell.swift in Sources */,
+				410CEB241B8B388F00CAFFE9 /* ViewController.swift in Sources */,
+				410CEB1A1B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift in Sources */,
+				410CEB2D1B8B390400CAFFE9 /* Message.swift in Sources */,
+				410CEB1C1B8B388300CAFFE9 /* NoDetailsTableViewCell.swift in Sources */,
+				410CEB2E1B8B390400CAFFE9 /* User.swift in Sources */,
+				410CEB221B8B388F00CAFFE9 /* LeftViewController.swift in Sources */,
+				410CEB2C1B8B390400CAFFE9 /* ChatRoom.swift in Sources */,
+				410CEB231B8B388F00CAFFE9 /* RightViewController.swift in Sources */,
+>>>>>>> 0e89f0d5b89ccecdc82a88c66c86b84e9f5c3f05
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -513,6 +566,7 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -551,6 +605,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -570,7 +625,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket.Chat.iOS-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -589,7 +645,8 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket.Chat.iOS-Bridging-Header.h";
+				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 			};
 			name = Release;
 		};
