@@ -148,12 +148,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //Set bottomIndexpath to last cell's index
         bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-        
-        //fix for tableview not scrolling all the way to the bottom in iOS 9
-        mainTableview.reloadData()
-        
-        
+mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                
         //Set border to composeMsg textarea
         composeMsg.layer.borderColor = UIColor.blackColor().CGColor
         composeMsg.layer.borderWidth = 0.5
@@ -191,7 +187,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLayoutSubviews() {
         
         //scroll tableview at the bottomIndexPath
-//        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+        //mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
         
     }
     
@@ -347,21 +343,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //dismiss keyboard - Uncomment the next line if you want keyboard to hide when you send a message
             //dismissKeyboard()
             
-            //reload the tableview data
+            //reload the button
             mainTableview.reloadData()
             
+            //get the bottom index
+            bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
             
-            //get the bottom index - THIS NEEDS TO BE REMOVED -
-            //bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-            
-            //If we are the bottom
-            if (bottomIndexPath.row == cR1!.messages.count - 1) {
             //scroll to bottom
-                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-                //calling it twice because something is wrong with scrolling the tableview to the bottom in iOS 9
-                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-            }
-            
+            mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
         }
         //If text is empty
         else{
