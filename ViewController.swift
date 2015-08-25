@@ -7,14 +7,15 @@
 //
 
 import UIKit
-import MMDrawerController
+
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
+    
     @IBOutlet var bottomViewBottomConstraint: NSLayoutConstraint!
+    
     @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
     
-<<<<<<< HEAD:ViewController.swift
     
     //Variable to keep the logged in user
     var currentUser = User?()
@@ -22,25 +23,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Array to keep dummy messages
     var mArray1:[Message] = []
     
-=======
->>>>>>> 0e89f0d5b89ccecdc82a88c66c86b84e9f5c3f05:Rocket.Chat.iOS/ViewControllers/ViewController.swift
     @IBOutlet var mainTableview: UITableView!
     @IBOutlet var composeMsg: UITextView!
     
-    // Variable to access the dummy chatroom
+    //Variable to access the dummy chatroom
     var cR1:ChatRoom?
     
-    // indexPath to find the bottom of the tableview
+    //indexPath to find the bottom of the tableview
     var bottomIndexPath:NSIndexPath = NSIndexPath()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Do any additional setup after loading the view, typically from a nib.
         
-        // Notifications to manage keyboard
+        
+        //Notifications to manage keyboard
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
-        // Create and add touch gesture to tableview
+        //Create and add touch gesture to tableview
         let tapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
         tapGesture.cancelsTouchesInView = true
         mainTableview.addGestureRecognizer(tapGesture)
