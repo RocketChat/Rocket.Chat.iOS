@@ -29,7 +29,7 @@
 		DF1E017E1B7369BF0097862D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E017D1B7369BF0097862D /* ViewController.swift */; };
 		DF1E01801B736A4A0097862D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E017F1B736A4A0097862D /* AppDelegate.swift */; };
 		DF1E01821B736ACB0097862D /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01811B736ACB0097862D /* LeftViewController.swift */; };
-        DF1E01861B736B830097862D /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01851B736B830097862D /* RightViewController.swift */; };
+		DF1E01861B736B830097862D /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF1E01851B736B830097862D /* RightViewController.swift */; };
 		DF2874F01B8B162E0034473B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2874EF1B8B162E0034473B /* RegisterViewController.swift */; };
 		DF2CD6711B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2CD6701B8484A900FAC0D6 /* LoadMoreHeaderTableViewCell.swift */; };
 		DF3DE1AB1B78A1350072A33D /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = DF3DE1AA1B78A1350072A33D /* logo.png */; };
