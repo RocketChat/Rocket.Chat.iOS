@@ -14,6 +14,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var bottomViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
     
+<<<<<<< HEAD:ViewController.swift
+    
+    //Variable to keep the logged in user
+    var currentUser = User?()
+    
+    //Array to keep dummy messages
+    var mArray1:[Message] = []
+    
+=======
+>>>>>>> 0e89f0d5b89ccecdc82a88c66c86b84e9f5c3f05:Rocket.Chat.iOS/ViewControllers/ViewController.swift
     @IBOutlet var mainTableview: UITableView!
     @IBOutlet var composeMsg: UITextView!
     
@@ -84,7 +94,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     
         //Inserting messages in an array (DUMB way)
-        var mArray1:[Message] = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, msg10, msg11, msg12, msg13, msg14, msg15, msg16, msg17, msg18, msg19, msg20]
+        mArray1 = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, msg10, msg11, msg12, msg13, msg14, msg15, msg16, msg17, msg18, msg19, msg20]
         
        
         
@@ -137,8 +147,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //Set bottomIndexpath to last cell's index
         bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-                
+        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        
+        //fix for tableview not scrolling all the way to the bottom in iOS 9
+        mainTableview.reloadData()
+        
+        
         //Set border to composeMsg textarea
         composeMsg.layer.borderColor = UIColor.blackColor().CGColor
         composeMsg.layer.borderWidth = 0.5
@@ -176,7 +190,7 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
     override func viewDidLayoutSubviews() {
         
         //scroll tableview at the bottomIndexPath
-        //mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+//        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
         
     }
     
@@ -291,7 +305,7 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
             }
             
             //Set the image
-            fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
+            fullDetailsCell!.avatarImg.image = UIImage(named: "avatar.png")
             
             //Set the text for the username label
             fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row - 1].user.username)"
@@ -314,9 +328,46 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
     //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
         
+        //If there is text
+        if composeMsg.text != "" {
+            //create current message
+            let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: currentUser!)
+            
+            //add it to the messages array
+            mArray1 += [currentMsg]
+            
+            
+            //update the messages array of the chatroom
+            cR1?.messages = mArray1
+            
+            //reset the text input
+            composeMsg.text = ""
+            
+            //dismiss keyboard - Uncomment the next line if you want keyboard to hide when you send a message
+            //dismissKeyboard()
+            
+            //reload the tableview data
+            mainTableview.reloadData()
+            
+            
+            //get the bottom index - THIS NEEDS TO BE REMOVED -
+            //bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
+            
+            //If we are the bottom
+            if (bottomIndexPath.row == cR1!.messages.count - 1) {
+            //scroll to bottom
+                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                //calling it twice because something is wrong with scrolling the tableview to the bottom in iOS 9
+                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            }
+            
+        }
+        //If text is empty
+        else{
         
-        //dismiss keyboard
-        dismissKeyboard()
+            //dismiss keyboard
+            dismissKeyboard()
+        }
     }
     
     
