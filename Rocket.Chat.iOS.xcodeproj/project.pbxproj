@@ -7,17 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		410CEB141B8B386E00CAFFE9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB131B8B386E00CAFFE9 /* AppDelegate.swift */; };
-		410CEB1A1B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB171B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift */; };
-		410CEB1B1B8B388300CAFFE9 /* MainTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB181B8B388300CAFFE9 /* MainTableViewCell.swift */; };
-		410CEB1C1B8B388300CAFFE9 /* NoDetailsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB191B8B388300CAFFE9 /* NoDetailsTableViewCell.swift */; };
-		410CEB221B8B388F00CAFFE9 /* LeftViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB1E1B8B388F00CAFFE9 /* LeftViewController.swift */; };
-		410CEB231B8B388F00CAFFE9 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB1F1B8B388F00CAFFE9 /* RightViewController.swift */; };
-		410CEB241B8B388F00CAFFE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB201B8B388F00CAFFE9 /* ViewController.swift */; };
-		410CEB271B8B38A800CAFFE9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB261B8B38A800CAFFE9 /* LoginViewController.swift */; };
-		410CEB2C1B8B390400CAFFE9 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB291B8B390400CAFFE9 /* ChatRoom.swift */; };
-		410CEB2D1B8B390400CAFFE9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB2A1B8B390400CAFFE9 /* Message.swift */; };
-		410CEB2E1B8B390400CAFFE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB2B1B8B390400CAFFE9 /* User.swift */; };
+		402A141D1B723E4400B60093 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402A141C1B723E4400B60093 /* User.swift */; };
+		4084B23B1B734C28002AF4F5 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4084B23A1B734C28002AF4F5 /* ChatRoom.swift */; };
+		40FD82791B725D1000305E04 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FD82781B725D1000305E04 /* Message.swift */; };
 		4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7E4D41B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld */; };
 		4FB7E4DD1B70111D00C69777 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4DB1B70111D00C69777 /* Main.storyboard */; };
 		4FB7E4DF1B70111D00C69777 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4DE1B70111D00C69777 /* Assets.xcassets */; };
@@ -645,6 +637,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS-Bridging-Header.h";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket.Chat.iOS-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 			};
