@@ -148,7 +148,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //Set bottomIndexpath to last cell's index
         bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-                
         mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         
         //fix for tableview not scrolling all the way to the bottom in iOS 9
