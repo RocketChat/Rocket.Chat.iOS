@@ -8,32 +8,30 @@
 
 import UIKit
 import JSQCoreDataKit
+import MMDrawerController
 
 class LoginViewController: UIViewController {
 
-    
     @IBOutlet var userNameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
+<<<<<<< HEAD:LoginViewController.swift
     
     //variable to get the logged in user
     var currentUser = User?()
     var users = [User]()
     
+=======
+>>>>>>> 0e89f0d5b89ccecdc82a88c66c86b84e9f5c3f05:Rocket.Chat.iOS/ViewControllers/Auth/LoginViewController.swift
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         //set password textfield to secure entry textfield
         passwordTextField.secureTextEntry = true
         
-        
         //Add listener for the textinput for when input changes
         userNameTextField.addTarget(self, action: "textFieldDidChange", forControlEvents: UIControlEvents.EditingChanged)
         passwordTextField.addTarget(self, action: "textFieldDidChange", forControlEvents: UIControlEvents.EditingChanged)
-        
-        
         
         //Prefill text inputs to make login easier for developing
 //        userNameTextField.text = "info@rocket.chat"
