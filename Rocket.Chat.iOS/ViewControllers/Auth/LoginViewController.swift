@@ -15,14 +15,13 @@ class LoginViewController: UIViewController {
     @IBOutlet var userNameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
-<<<<<<< HEAD:LoginViewController.swift
+
     
     //variable to get the logged in user
     var currentUser = User?()
     var users = [User]()
     
-=======
->>>>>>> 0e89f0d5b89ccecdc82a88c66c86b84e9f5c3f05:Rocket.Chat.iOS/ViewControllers/Auth/LoginViewController.swift
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
