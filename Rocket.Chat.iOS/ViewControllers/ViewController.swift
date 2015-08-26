@@ -14,7 +14,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var bottomViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
     
-<<<<<<< HEAD:ViewController.swift
     
     //Variable to keep the logged in user
     var currentUser = User?()
@@ -22,8 +21,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Array to keep dummy messages
     var mArray1:[Message] = []
     
-=======
->>>>>>> 0e89f0d5b89ccecdc82a88c66c86b84e9f5c3f05:Rocket.Chat.iOS/ViewControllers/ViewController.swift
+
     @IBOutlet var mainTableview: UITableView!
     @IBOutlet var composeMsg: UITextView!
     
