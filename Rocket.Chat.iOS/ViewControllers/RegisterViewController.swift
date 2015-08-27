@@ -140,7 +140,7 @@ class RegisterViewController: UIViewController {
             if !exists{
                 
                 //Create the user
-                let user = User(context: context, id: "NON-YET", username: nameTextField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()), avatar: "avatar.png", status: .ONLINE, timezone: NSTimeZone.systemTimeZone())
+                let user = User(context: context, id: "NON-YET", username: nameTextField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()), avatar: UIImage(named: "Default-Avatar")!, status: .ONLINE, timezone: NSTimeZone.systemTimeZone())
                 
                 //Set the password
                 user.password = passwordTextField.text!

@@ -390,7 +390,7 @@
                                     <segue destination="EUe-Ig-J0w" kind="show" id="Ggg-Ca-CCM"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="IjP-fK-PyE">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="IjP-fK-PyE">
                                 <rect key="frame" x="16" y="61" width="288" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="Rhh-0h-iqS"/>
@@ -506,7 +506,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="KWx-ex-a9a">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="KWx-ex-a9a">
                                 <rect key="frame" x="12" y="61" width="296" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="80" id="NlT-cf-avX"/>
@@ -672,7 +672,7 @@
                                     <action selector="dismissKeyboard:" destination="0zG-IY-4s9" eventType="editingDidEndOnExit" id="Rvp-XD-KOC"/>
                                 </connections>
                             </textField>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" translatesAutoresizingMaskIntoConstraints="NO" id="WUt-lj-Sby">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="WUt-lj-Sby">
                                 <rect key="frame" x="12" y="61" width="296" height="80"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="280" id="F9M-NS-1w1"/>
@@ -736,9 +736,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="logo.png" width="436" height="85"/>
+        <image name="Logo" width="436" height="85"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="GAW-7H-vwf"/>
+        <segue reference="fwb-Rr-qQa"/>
     </inferredMetricsTieBreakers>
 </document>
