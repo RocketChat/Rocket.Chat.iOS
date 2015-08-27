@@ -50,8 +50,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         
         //Create user u1
-        let u1:User = User(context: context, id: "1", username: "Komic", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
-    
+        let u1:User = User(context: context, id: "1", username: "Komic", avatar: UIImage(named: "Default-Avatar")!, status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        
         //Create some messages for u1
         let msg1:Message = Message(id: "1", text: "Message 1 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
         let msg2:Message = Message(id: "2", text: "Bigger Message, number 2 from Komic just for fun", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
@@ -61,7 +61,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         
         //Create user u2
-        let u2:User = User(context: context, id: "2", username: "Yorgos", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u2:User = User(context: context, id: "2", username: "Yorgos", avatar: UIImage(named: "Default-Avatar")!, status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //Create some messages for u2
         let msg6:Message = Message(id: "6", text: "Message 6 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
@@ -73,7 +73,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         //Create user u3
-        let u3:User = User(context: context, id: "3", username: "GeorgeP", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u3:User = User(context: context, id: "3", username: "GeorgeP", avatar: UIImage(named: "Default-Avatar")!, status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //Create some messages for u3
         let msg12:Message = Message(id: "12", text: "Message 12 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
@@ -303,7 +303,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             //Set the image
-            fullDetailsCell!.avatarImg.image = UIImage(named: "avatar.png")
+            fullDetailsCell!.avatarImg.image = UIImage(data: (cR1?.messages[indexPath.row - 1].user.avata)!)
             
             //Set the text for the username label
             fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row - 1].user.username)"

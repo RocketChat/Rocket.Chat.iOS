@@ -25,7 +25,7 @@ class User : NSManagedObject {
     
     /// Avatar url or image name.
     /// In case this is not a url the code calling must know how to construct the url
-    @NSManaged dynamic var avatar : String
+    @NSManaged dynamic var avata : NSData!
     /// This is to make CoreData work, since it doesn't support enums
     /// We store this private int to CoreData and use `status` for public usage
     @NSManaged dynamic private var statusVal : NSNumber
@@ -50,12 +50,12 @@ class User : NSManagedObject {
         }
     }
 
-    convenience init(context: NSManagedObjectContext, id:String, username:String, avatar:String, status : Status, timezone : NSTimeZone){
+    convenience init(context: NSManagedObjectContext, id:String, username:String, avatar:UIImage!, status : Status, timezone : NSTimeZone){
         let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: context)!
         self.init(entity: entity, insertIntoManagedObjectContext: context)
         self.id = id
         self.username = username
-        self.avatar = avatar
+        self.avata = UIImagePNGRepresentation(avatar)!
         //TODO: Setting status hear will cause an exception, come back later and check why (probably swift/compiler bug)
         //self.status = status
         setValue(NSNumber(short: status.rawValue), forKey: "statusVal")
