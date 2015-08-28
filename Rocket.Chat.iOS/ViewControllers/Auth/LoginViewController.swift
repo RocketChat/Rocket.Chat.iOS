@@ -8,33 +8,33 @@
 
 import UIKit
 import JSQCoreDataKit
+import MMDrawerController
 
 class LoginViewController: UIViewController {
 
-    
     @IBOutlet var userNameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
+
     
+    //variable to get the logged in user
+    var currentUser = User?()
+    var users = [User]()
     
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
         
         //set password textfield to secure entry textfield
         passwordTextField.secureTextEntry = true
-        
         
         //Add listener for the textinput for when input changes
         userNameTextField.addTarget(self, action: "textFieldDidChange", forControlEvents: UIControlEvents.EditingChanged)
         passwordTextField.addTarget(self, action: "textFieldDidChange", forControlEvents: UIControlEvents.EditingChanged)
         
-        
-        
         //Prefill text inputs to make login easier for developing
-        userNameTextField.text = "info@rocket.chat"
-        passwordTextField.text = "123qwe"
+//        userNameTextField.text = "info@rocket.chat"
+//        passwordTextField.text = "123qwe"
         
         let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let context = delegate.stack!.context
@@ -47,18 +47,22 @@ class LoginViewController: UIViewController {
         request.predicate = NSPredicate(format: "password != nil")
         
         
-        var users = [User]()
+        users = [User]()
         do{
             users = try fetch(request: request, inContext: context)
         }catch{
             print("Error fetching users \(error)")
         }
         
-        if !users.isEmpty {
-            userNameTextField.text = users[0].username
-            passwordTextField.text = users[0].password
-            loginButtonTapped(users)
-        }
+//        if exists {
+//            loginButtonTapped(userNameTextField.text!)
+//        }
+        
+//        if !users.isEmpty {
+//            userNameTextField.text = users[0].username
+//            passwordTextField.text = users[0].password
+//            loginButtonTapped(users)
+//        }
         
         
     }
@@ -98,24 +102,37 @@ class LoginViewController: UIViewController {
         else if(userAndPassVerify(userNameTextField.text!, passWord:passwordTextField.text!))
         {
         
+            self.view.endEditing(true)
             //get the appdelegate and store it in a variable
             let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            let context = appDelegate.stack!.context
             
-            let user = User(context: context, id: "NON-YET", username: userNameTextField.text!, avatar: "avatar.png", status: .ONLINE, timezone: NSTimeZone.systemTimeZone())
-            user.password = passwordTextField.text!
-            //User is automatically is added to CoreData, but not saved, so we need to call
-            //save context next.
-            //This is dump, because it writes the same user again, and again
             
-            saveContext(context, wait: true, completion:{(error: NSError?) -> Void in
-                if let err = error {
-                    let alert = UIAlertController(title: "Alert", message: "Error \(err.userInfo)", preferredStyle: UIAlertControllerStyle.Alert)
-                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
-                    self.presentViewController(alert, animated: true, completion: nil)
-                }
-                
-            })
+            //THIS NEEDS TO MOVE (?)
+            
+            
+//            let context = appDelegate.stack!.context
+//            
+//            let user = User(context: context, id: "NON-YET", username: userNameTextField.text!, avatar: "avatar.png", status: .ONLINE, timezone: NSTimeZone.systemTimeZone())
+//            user.password = passwordTextField.text!
+//            //User is automatically is added to CoreData, but not saved, so we need to call
+//            //save context next.
+//            //This is dump, because it writes the same user again, and again
+//            
+//            saveContext(context, wait: true, completion:{(error: NSError?) -> Void in
+//                if let err = error {
+//                    let alert = UIAlertController(title: "Alert", message: "Error \(err.userInfo)", preferredStyle: UIAlertControllerStyle.Alert)
+//                    alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+//                    self.presentViewController(alert, animated: true, completion: nil)
+//                }
+//                
+//            //set the logged in user
+//            self.currentUser = user
+//            
+//                
+//            })
+            
+            
+            
             
             //let rootViewController = appDelegate.window!.rootViewController
             
@@ -134,6 +151,9 @@ class LoginViewController: UIViewController {
             //right view
             let rightViewController = mainStoryboard.instantiateViewControllerWithIdentifier("rightView") as! RightViewController
             
+            
+            //send the logged in user in the ViewController
+            centerViewController.currentUser = currentUser
             
             //Set the left, right and center views as the rootviewcontroller for the navigation controller (one rootviewcontroller at a time)
             
@@ -199,15 +219,39 @@ class LoginViewController: UIViewController {
     //Function to check username and password
     func userAndPassVerify(userName:String, passWord:String) -> Bool {
         
+        
+        var exists = false
+        
+        //If there are registered users
+        if !self.users.isEmpty{
+            
+            for i in self.users {
+                
+                if i.username == userNameTextField.text{
+                    exists = true
+                    self.currentUser = i
+                    print("CurrentUser set " + i.username)
+                }
+            }
+            
+        }
         //if user and pass is OK return true
-        if(userName == "info@rocket.chat" && passWord == "123qwe"){
+//        if(userName == "komic" && passWord == "komic123"){
+//            
+//            return true
+//            
+//        }
+        
+        
+        //if user and pass exists return true
+        
+        if exists {
             
             return true
             
         }
-        
-        //if user and pass don't exist return false
             
+        //if user doesn't exist
         else
         {
             
