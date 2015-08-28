@@ -14,6 +14,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBOutlet var bottomViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
     
+    
+    //Variable to keep the logged in user
+    var currentUser = User?()
+    
+    //Array to keep dummy messages
+    var mArray1:[Message] = []
+    
+
     @IBOutlet var mainTableview: UITableView!
     @IBOutlet var composeMsg: UITextView!
     
@@ -42,8 +50,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         
         //Create user u1
-        let u1:User = User(context: context, id: "1", username: "Komic", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
-    
+        let u1:User = User(context: context, id: "1", username: "Komic", avatar: UIImage(named: "Default-Avatar")!, status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        
         //Create some messages for u1
         let msg1:Message = Message(id: "1", text: "Message 1 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
         let msg2:Message = Message(id: "2", text: "Bigger Message, number 2 from Komic just for fun", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
@@ -53,7 +61,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
         
         //Create user u2
-        let u2:User = User(context: context, id: "2", username: "Yorgos", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u2:User = User(context: context, id: "2", username: "Yorgos", avatar: UIImage(named: "Default-Avatar")!, status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //Create some messages for u2
         let msg6:Message = Message(id: "6", text: "Message 6 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
@@ -65,7 +73,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         //Create user u3
-        let u3:User = User(context: context, id: "3", username: "GeorgeP", avatar: "avatar.png", status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
+        let u3:User = User(context: context, id: "3", username: "GeorgeP", avatar: UIImage(named: "Default-Avatar")!, status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //Create some messages for u3
         let msg12:Message = Message(id: "12", text: "Message 12 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
@@ -84,7 +92,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     
         //Inserting messages in an array (DUMB way)
-        var mArray1:[Message] = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, msg10, msg11, msg12, msg13, msg14, msg15, msg16, msg17, msg18, msg19, msg20]
+        mArray1 = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, msg10, msg11, msg12, msg13, msg14, msg15, msg16, msg17, msg18, msg19, msg20]
         
        
         
@@ -137,8 +145,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //Set bottomIndexpath to last cell's index
         bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-                
+        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
+        
+        //fix for tableview not scrolling all the way to the bottom in iOS 9
+        mainTableview.reloadData()
+        
+        
         //Set border to composeMsg textarea
         composeMsg.layer.borderColor = UIColor.blackColor().CGColor
         composeMsg.layer.borderWidth = 0.5
@@ -176,7 +188,7 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
     override func viewDidLayoutSubviews() {
         
         //scroll tableview at the bottomIndexPath
-        //mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+//        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
         
     }
     
@@ -291,7 +303,7 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
             }
             
             //Set the image
-            fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
+            fullDetailsCell!.avatarImg.image = UIImage(data: (cR1?.messages[indexPath.row - 1].user.avata)!)
             
             //Set the text for the username label
             fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row - 1].user.username)"
@@ -314,9 +326,46 @@ mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableV
     //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
         
+        //If there is text
+        if composeMsg.text != "" {
+            //create current message
+            let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: currentUser!)
+            
+            //add it to the messages array
+            mArray1 += [currentMsg]
+            
+            
+            //update the messages array of the chatroom
+            cR1?.messages = mArray1
+            
+            //reset the text input
+            composeMsg.text = ""
+            
+            //dismiss keyboard - Uncomment the next line if you want keyboard to hide when you send a message
+            //dismissKeyboard()
+            
+            //reload the tableview data
+            mainTableview.reloadData()
+            
+            
+            //get the bottom index - THIS NEEDS TO BE REMOVED -
+            //bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
+            
+            //If we are the bottom
+            if (bottomIndexPath.row == cR1!.messages.count - 1) {
+            //scroll to bottom
+                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                //calling it twice because something is wrong with scrolling the tableview to the bottom in iOS 9
+                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            }
+            
+        }
+        //If text is empty
+        else{
         
-        //dismiss keyboard
-        dismissKeyboard()
+            //dismiss keyboard
+            dismissKeyboard()
+        }
     }
     
     
