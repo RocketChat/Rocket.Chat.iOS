@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8187.4" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="adJ-xO-Vln">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8173.3" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="adJ-xO-Vln">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8151.3"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8142"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -211,12 +211,12 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="cQN-uN-CZi">
-                        <barButtonItem key="leftBarButtonItem" title="Left" id="KNH-mw-WAW">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="KNH-mw-WAW">
                             <connections>
                                 <action selector="leftNavTapped:" destination="uTd-Gh-naL" id="hny-Zb-7Oq"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Right" id="A03-dI-4Sm">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="A03-dI-4Sm">
                             <connections>
                                 <action selector="rightNavTapped:" destination="uTd-Gh-naL" id="p6c-St-7CZ"/>
                             </connections>
@@ -232,38 +232,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vje-1j-oly" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="434" y="-1215"/>
-        </scene>
-        <!--Left View Controller-->
-        <scene sceneID="vVk-38-jN8">
-            <objects>
-                <viewController storyboardIdentifier="leftView" id="U2z-4c-odc" customClass="LeftViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Bmp-nP-nJq"/>
-                        <viewControllerLayoutGuide type="bottom" id="7il-NQ-3v3"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="vuT-SI-lfM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dwp-Yb-OGt">
-                                <rect key="frame" x="20" y="273" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="dwp-Yb-OGt" firstAttribute="leading" secondItem="vuT-SI-lfM" secondAttribute="leadingMargin" constant="4" id="86z-ym-5xA"/>
-                            <constraint firstItem="dwp-Yb-OGt" firstAttribute="centerX" secondItem="vuT-SI-lfM" secondAttribute="centerX" id="nSq-ch-1rc"/>
-                            <constraint firstItem="dwp-Yb-OGt" firstAttribute="centerY" secondItem="vuT-SI-lfM" secondAttribute="centerY" id="qjx-yD-67e"/>
-                        </constraints>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="TfQ-eP-5yY" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="844" y="-1215"/>
         </scene>
         <!--Right View Controller-->
         <scene sceneID="bJD-5z-WkX">
@@ -734,9 +702,34 @@
             </objects>
             <point key="canvasLocation" x="30" y="-1215"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="gax-45-N1T">
+            <objects>
+                <viewController id="Ysn-69-pif" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="QeU-qT-Hl3"/>
+                        <viewControllerLayoutGuide type="bottom" id="A1C-JN-9CT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7gL-9Y-zwP">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vf2-Ma-kiD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
+        <!--leftView-->
+        <scene sceneID="C3k-4u-iXN">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="leftView" storyboardName="LeftMenu" referencedIdentifier="leftView" id="Hmc-Xy-Ydz" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Yx3-Mn-zfs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="823.5" y="-1215"/>
+        </scene>
     </scenes>
     <resources>
-        <image name="Logo" width="436" height="85"/>
+        <image name="Logo" width="218" height="42"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="fwb-Rr-qQa"/>
