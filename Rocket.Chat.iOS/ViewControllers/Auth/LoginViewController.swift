@@ -243,21 +243,8 @@ class LoginViewController: UIViewController {
 //        }
         
         
-        //if user and pass exists return true
-        
-        if exists {
-            
-            return true
-            
-        }
-            
-        //if user doesn't exist
-        else
-        {
-            
-            return false
-        
-        }
+        //Return if exists or not
+        return exists
         
     }
     
