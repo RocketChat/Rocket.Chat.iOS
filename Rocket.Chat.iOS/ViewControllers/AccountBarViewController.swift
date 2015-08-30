@@ -21,9 +21,6 @@ class AccountBarViewController: UIViewController {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
-    detailsButton.setTitle(">", forState: UIControlState.Normal)
-    detailsButton.transform = CGAffineTransformMakeRotation( CGFloat(90*M_PI/180));
-    
     
   }
   
