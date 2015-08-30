@@ -444,6 +444,138 @@
             </objects>
             <point key="canvasLocation" x="-376" y="-1215"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="qpw-SC-FMY">
+            <objects>
+                <viewController storyboardIdentifier="namePopover" id="6Ng-6o-KJH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Q6z-Dz-B3d"/>
+                        <viewControllerLayoutGuide type="bottom" id="yIA-Of-yFf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="3ov-QY-YMP">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name should not be empty" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J5c-Jf-AAZ">
+                                <rect key="frame" x="22" y="15" width="207" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="J5c-Jf-AAZ" firstAttribute="centerY" secondItem="3ov-QY-YMP" secondAttribute="centerY" id="MZb-e7-Bom"/>
+                            <constraint firstItem="J5c-Jf-AAZ" firstAttribute="centerX" secondItem="3ov-QY-YMP" secondAttribute="centerX" id="ecA-hh-0IP"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="250" height="50"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="9qm-Vl-HaA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-811" y="-583"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="2eK-xc-X38">
+            <objects>
+                <viewController storyboardIdentifier="emailPopover" id="UWK-4r-DDZ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="ic1-7l-St3"/>
+                        <viewControllerLayoutGuide type="bottom" id="4FK-6Y-hDZ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Jys-dM-ot9">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="50"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email is not valid" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WDx-Nu-wlV">
+                                <rect key="frame" x="62" y="14" width="127" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WDx-Nu-wlV" firstAttribute="centerX" secondItem="Jys-dM-ot9" secondAttribute="centerX" id="Uth-FK-ptD"/>
+                            <constraint firstItem="WDx-Nu-wlV" firstAttribute="centerY" secondItem="Jys-dM-ot9" secondAttribute="centerY" id="cbd-2a-OWB"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="250" height="50"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="K6G-ZM-I2V" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-811" y="-482"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="eN3-Od-7pt">
+            <objects>
+                <viewController storyboardIdentifier="passwordPopover" id="NtX-tY-Uny" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xmL-fs-W4J"/>
+                        <viewControllerLayoutGuide type="bottom" id="UG2-WT-xd1"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="SJI-yb-5QH">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="55"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Password should be at least 8 characters" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CsL-MP-keX">
+                                <rect key="frame" x="15" y="5" width="220" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CsL-MP-keX" firstAttribute="centerX" secondItem="SJI-yb-5QH" secondAttribute="centerX" id="cTD-1l-lTW"/>
+                            <constraint firstItem="CsL-MP-keX" firstAttribute="leading" secondItem="SJI-yb-5QH" secondAttribute="leadingMargin" constant="-1" id="kDY-eD-D3b"/>
+                            <constraint firstItem="CsL-MP-keX" firstAttribute="centerY" secondItem="SJI-yb-5QH" secondAttribute="centerY" id="kgY-uR-MEG"/>
+                            <constraint firstItem="UG2-WT-xd1" firstAttribute="top" secondItem="CsL-MP-keX" secondAttribute="bottom" constant="5" id="vlq-KP-p2L"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="250" height="55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XPV-u6-WYo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-811" y="-381"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="MK5-eM-KDq">
+            <objects>
+                <viewController storyboardIdentifier="confirmPopover" id="EmA-tc-BdR" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="XJ0-fR-hnh"/>
+                        <viewControllerLayoutGuide type="bottom" id="Njm-aM-N4V"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="183-XE-nzO">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="55"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Passwords do not match. Please confirm your password" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uf7-cG-JJ3">
+                                <rect key="frame" x="15" y="5" width="220" height="45"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Njm-aM-N4V" firstAttribute="top" secondItem="Uf7-cG-JJ3" secondAttribute="bottom" constant="5" id="OsL-tm-Eml"/>
+                            <constraint firstItem="Uf7-cG-JJ3" firstAttribute="centerX" secondItem="183-XE-nzO" secondAttribute="centerX" id="R0g-Pf-f7k"/>
+                            <constraint firstItem="Uf7-cG-JJ3" firstAttribute="centerY" secondItem="183-XE-nzO" secondAttribute="centerY" id="ioG-ON-2Zc"/>
+                            <constraint firstItem="Uf7-cG-JJ3" firstAttribute="leading" secondItem="183-XE-nzO" secondAttribute="leadingMargin" constant="-1" id="nlP-ux-OTS"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="250" height="55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="H5c-UD-9fW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-811" y="-269"/>
+        </scene>
         <!--Register View Controller-->
         <scene sceneID="bcV-Ob-ZoS">
             <objects>
