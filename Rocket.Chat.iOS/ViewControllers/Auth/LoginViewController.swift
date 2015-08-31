@@ -236,12 +236,7 @@ class LoginViewController: UIViewController {
             }
             
         }
-        //if user and pass is OK return true
-        if(userName == "komic" && passWord == "komic123"){
 
-            return true
-
-        }
       
         
         //if user and pass exists return true
