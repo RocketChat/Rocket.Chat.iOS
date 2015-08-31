@@ -174,6 +174,7 @@ class LoginViewController: UIViewController {
             
             //Set the open gesture for the center container
             centerContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
+            centerContainer.setMaximumRightDrawerWidth(appDelegate.window!.frame.width, animated: true, completion: nil)
             //Set the close gesture for the center container
             centerContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
             

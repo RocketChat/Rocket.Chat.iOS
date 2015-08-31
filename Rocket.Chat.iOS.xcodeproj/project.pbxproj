@@ -27,6 +27,7 @@
 		783304F2FCA3B826852C6DD2 /* Pods_Rocket_Chat_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4227E3B51FEB156513C2D7BD /* Pods_Rocket_Chat_iOS.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E51B8DC6280014548B /* RegisterViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DFC070F31B9450A500B88313 /* Right.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F11B9450A500B88313 /* Right.storyboard */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +76,7 @@
 		4FB7E4F91B70111E00C69777 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ViewControllers/RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		DFC070F21B9450A500B88313 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Right.storyboard; sourceTree = "<group>"; };
 		E8B42BE2CCF2AD5BB7DE9FF1 /* Pods-Rocket.Chat.iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.iOS/Pods-Rocket.Chat.iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -193,6 +195,7 @@
 				410CEB151B8B387500CAFFE9 /* ViewControllers */,
 				410CEB131B8B386E00CAFFE9 /* AppDelegate.swift */,
 				4FB7E4DB1B70111D00C69777 /* Main.storyboard */,
+				DFC070F11B9450A500B88313 /* Right.storyboard */,
 				4FB7E4E01B70111D00C69777 /* LaunchScreen.storyboard */,
 				4FB7E4DE1B70111D00C69777 /* Assets.xcassets */,
 				4FB7E4D41B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld */,
@@ -336,6 +339,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4FB7E4E21B70111D00C69777 /* LaunchScreen.storyboard in Resources */,
+				DFC070F31B9450A500B88313 /* Right.storyboard in Resources */,
 				4FB7E4DF1B70111D00C69777 /* Assets.xcassets in Resources */,
 				4FB7E4DD1B70111D00C69777 /* Main.storyboard in Resources */,
 			);
@@ -473,6 +477,14 @@
 				4FB7E4E11B70111D00C69777 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		DFC070F11B9450A500B88313 /* Right.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFC070F21B9450A500B88313 /* Base */,
+			);
+			name = Right.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
