@@ -8,9 +8,12 @@
 
 import UIKit
 
-class LeftViewController: UIViewController {
+class LeftViewController: UIViewController, SwitchAccountViewDelegate {
 
   @IBOutlet weak var accountTopView: UIView!
+  @IBOutlet weak var leftMainContainer: UIView!
+  
+  var tabBarContainer : LeftMenuTabBarViewController?
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,15 +33,29 @@ class LeftViewController: UIViewController {
 //    return true
 //  }
 //  
-  
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+  // MARK: - Navigation
+  
+  // In a storyboard-based application, you will often want to do a little preparation before navigation
+  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    
+    //set self as the delegate in the account bar that will handle the event coming up from there.
+    if segue.identifier == "embedAccountBar"{
+      let vc = segue.destinationViewController as! AccountBarViewController
+      vc.delegate = self
+    } else if segue.identifier == "embedChatNav"{
+      tabBarContainer = segue.destinationViewController as? LeftMenuTabBarViewController
     }
-    */
+  }
+  
+  // MARK: SwitchAccountViewDelegate
+  func didClickOnAccountBar(accountOptionsWereOpen: Bool){
+		// not much to do here, simply let the tab bar container know about the event, so it can swap the selected view.
+    if (tabBarContainer != nil){
+      tabBarContainer?.didClickOnAccountBar(accountOptionsWereOpen)
+    }
+  }
+
+
 
 }

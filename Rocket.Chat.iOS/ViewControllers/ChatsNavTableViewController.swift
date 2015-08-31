@@ -1,5 +1,5 @@
 //
-//  LeftMenuTableViewController.swift
+//  ChatsNavTableViewController.swift
 //  Rocket.Chat.iOS
 //
 //  Created by giorgos on 8/24/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LeftMenuTableViewController: UITableViewController {
+class ChatsNavTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
