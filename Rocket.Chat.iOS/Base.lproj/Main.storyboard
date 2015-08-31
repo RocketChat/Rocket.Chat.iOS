@@ -263,39 +263,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TfQ-eP-5yY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="844" y="-1215"/>
-        </scene>
-        <!--Right View Controller-->
-        <scene sceneID="bJD-5z-WkX">
-            <objects>
-                <viewController storyboardIdentifier="rightView" id="Q86-mi-qjE" customClass="RightViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Wrw-nZ-UaH"/>
-                        <viewControllerLayoutGuide type="bottom" id="wN4-Qs-zoT"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Jgb-ly-y3E">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Right" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vV3-lK-BTr">
-                                <rect key="frame" x="20" y="273" width="280" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="vV3-lK-BTr" firstAttribute="centerX" secondItem="Jgb-ly-y3E" secondAttribute="centerX" id="OZq-ax-VaN"/>
-                            <constraint firstItem="vV3-lK-BTr" firstAttribute="leading" secondItem="Jgb-ly-y3E" secondAttribute="leadingMargin" constant="4" id="cs5-7m-mlv"/>
-                            <constraint firstItem="vV3-lK-BTr" firstAttribute="centerY" secondItem="Jgb-ly-y3E" secondAttribute="centerY" id="lBu-3z-X8Y"/>
-                        </constraints>
-                    </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Ipl-JL-g0l" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1215" y="-1215"/>
+            <point key="canvasLocation" x="1006" y="-1577"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="MJ8-mK-U97">
@@ -865,6 +833,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DZd-tZ-clt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="30" y="-1215"/>
+        </scene>
+        <!--rightView-->
+        <scene sceneID="0H1-n0-yJY">
+            <objects>
+                <viewControllerPlaceholder storyboardIdentifier="rightView" storyboardName="Right" referencedIdentifier="rightView" id="jPQ-ms-ExR" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6mx-1f-M50" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="891" y="-1139"/>
         </scene>
     </scenes>
     <resources>

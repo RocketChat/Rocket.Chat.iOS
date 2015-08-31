@@ -7,8 +7,20 @@
 //
 
 import UIKit
+import MMDrawerController
 
 class RightViewController: UIViewController {
 
+    @IBAction func backToMainView(sender: AnyObject) {
+        
+        
+        //get the appDelegate
+        let appdelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        //Toggle the drawer to the right
+        appdelegate.centerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+        
+        
+    }
 
 }
