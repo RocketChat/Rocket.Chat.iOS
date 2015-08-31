@@ -19,11 +19,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="pBQ-Wi-ZKv">
-                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="h4H-gB-4eA">
-                            <connections>
-                                <action selector="backToMainView:" destination="Q86-mi-qjE" id="xAM-79-XEc"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="leftBarButtonItem" systemItem="reply" id="h4H-gB-4eA"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                 </viewController>
