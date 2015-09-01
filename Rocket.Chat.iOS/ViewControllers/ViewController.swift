@@ -41,10 +41,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
-        // Create and add touch gesture to tableview
+        // Create tap gesture
         let tapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
         tapGesture.cancelsTouchesInView = true
+        
+        //Create double tap gesture
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: Selector("showHiddenTimestamp:"))
+        doubleTapGesture.numberOfTapsRequired = 2
+        
+        //Add gestures on tableview
         mainTableview.addGestureRecognizer(tapGesture)
+        mainTableview.addGestureRecognizer(doubleTapGesture)
         
         
         /********* Dummy data *********/
@@ -283,6 +290,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             }
             
+            //Set hidden timestamp
+            let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
+            print(defaultTimeZoneStr)
+            noDetailsCell!.hiddenTimeStamp.text = "\(defaultTimeZoneStr)"
+            noDetailsCell!.hiddenTimeStamp.hidden = true
+            
             //Set text to noDetailsMessage label
             noDetailsCell!.noDetailsMessage.text = "\(cR1!.messages[indexPath.row - 1].text)"
             //Set color to #444444
@@ -330,6 +343,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
     }
+    
     
     
     //Function to close the keyboard when send button is pressed
@@ -423,5 +437,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //dismiss keyboard
         composeMsg.resignFirstResponder()
     }
+    
+    
+    //Function to toggle message's timestamp
+    func showHiddenTimestamp(gesture: UITapGestureRecognizer) {
+        
+        //get the index path of the cell where the user double tapped on
+        let tableCellRow = mainTableview.indexPathForRowAtPoint(gesture.locationInView(mainTableview))!
+        
+        //Get the cell
+        if  let tableCell = mainTableview.cellForRowAtIndexPath(tableCellRow) as? NoDetailsTableViewCell {
+            
+            //Toggle timestamp
+            
+            if !tableCell.hiddenTimeStamp.hidden {
+                
+                tableCell.hiddenTimeStamp.hidden = true
+                
+            }else {
+                
+                tableCell.hiddenTimeStamp.hidden = false
+                
+            }
+        }
+        
+    }
+    
+    
     
 }
