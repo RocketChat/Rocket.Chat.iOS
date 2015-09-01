@@ -29,10 +29,18 @@ class LeftViewController: UIViewController, SwitchAccountViewDelegate {
     }
     
 
-//  override func prefersStatusBarHidden() -> Bool {
-//    return true
-//  }
-//  
+  override func prefersStatusBarHidden() -> Bool {
+    switch UIDevice.currentDevice().orientation{
+    case .Portrait, .PortraitUpsideDown:
+			return false
+    case .LandscapeLeft, .LandscapeRight:
+    	return true
+    default:
+      return false
+    }
+
+  }
+  
 
   // MARK: - Navigation
   
