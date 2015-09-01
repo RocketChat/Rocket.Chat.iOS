@@ -8,7 +8,6 @@
 
 import XCTest
 
-@available(iOS 9.0, *)
 class Rocket_Chat_iOSUITests: XCTestCase {
         
     override func setUp() {
