@@ -10,7 +10,7 @@ import UIKit
 import JSQCoreDataKit
 import MMDrawerController
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet var userNameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
@@ -72,6 +72,14 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    //Function to return popovers as modals to all devices.
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        
+        return .None
+        
+    }
+    
 
     //Login action
     @IBAction func loginButtonTapped(sender: AnyObject) {
@@ -85,6 +93,33 @@ class LoginViewController: UIViewController {
             userNameTextField.layer.borderColor = UIColor.redColor().CGColor
             userNameTextField.layer.borderWidth = 1.0
             
+            //Create View Controller
+            let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("loginPopover")
+            
+            //Set it as popover
+            popoverVC!.modalPresentationStyle = .Popover
+            
+            //Set the size
+            popoverVC!.preferredContentSize = CGSizeMake(250, 50)
+            
+            
+            if let popoverController = popoverVC!.popoverPresentationController {
+                
+                //Specify the anchor location
+                popoverController.sourceView = userNameTextField
+                popoverController.sourceRect = userNameTextField.bounds
+                
+                
+                //Popover above the textfield
+                popoverController.permittedArrowDirections = .Down
+                
+                //Set the delegate
+                popoverController.delegate = self
+            }
+            
+            //Show the popover
+            presentViewController(popoverVC!, animated: true, completion: nil)
+            
         }
             
         //Check if password is empty
@@ -95,6 +130,33 @@ class LoginViewController: UIViewController {
             passwordTextField.layer.borderColor = UIColor.redColor().CGColor
             passwordTextField.layer.borderWidth = 1.0
             
+            
+            //Create popover controller
+            let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("loginPopover")
+            
+            //Set it as popover
+            popoverVC!.modalPresentationStyle = .Popover
+            
+            //Set the size
+            popoverVC?.preferredContentSize = CGSizeMake(250, 50)
+            
+            if let popoverController = popoverVC!.popoverPresentationController {
+                
+                //Specify the anchor location
+                popoverController.sourceView = passwordTextField
+                popoverController.sourceRect = passwordTextField.bounds
+                
+                //Popover above the textfield
+                popoverController.permittedArrowDirections = .Down
+                
+                //Set the delegate
+                popoverController.delegate = self
+                
+                //Show the popover
+                presentViewController(popoverVC!, animated: true, completion: nil)
+
+            }
+
         }
             
         //if username and password is OK

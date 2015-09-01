@@ -15,6 +15,7 @@
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
             <string>Roboto-Regular</string>
+            <string>Roboto-Regular</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -139,15 +140,24 @@
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H3y-Oj-f5r">
+                                                    <rect key="frame" x="49" y="6" width="34" height="17"/>
+                                                    <fontDescription key="fontDescription" name="Roboto-Regular" family="Roboto" pointSize="14"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="AFF-po-CBZ" firstAttribute="leading" secondItem="7pG-rt-Mc6" secondAttribute="leadingMargin" constant="89" id="1Lb-cP-4K3"/>
                                                 <constraint firstItem="AFF-po-CBZ" firstAttribute="top" secondItem="7pG-rt-Mc6" secondAttribute="topMargin" constant="-4" id="51O-F0-Ba9"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="AFF-po-CBZ" secondAttribute="bottom" constant="-4" id="MRX-Va-G7J"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="AFF-po-CBZ" secondAttribute="trailing" constant="8" id="NZk-5y-gS8"/>
+                                                <constraint firstItem="H3y-Oj-f5r" firstAttribute="top" secondItem="7pG-rt-Mc6" secondAttribute="topMargin" constant="-2" id="O0S-HC-WZJ"/>
+                                                <constraint firstItem="AFF-po-CBZ" firstAttribute="leading" secondItem="H3y-Oj-f5r" secondAttribute="trailing" constant="14" id="m24-FW-e7j"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="hiddenTimeStamp" destination="H3y-Oj-f5r" id="Mjc-Xv-oUe"/>
                                             <outlet property="noDetailsMessage" destination="AFF-po-CBZ" id="VNG-t3-9nF"/>
                                         </connections>
                                     </tableViewCell>
@@ -262,6 +272,38 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TfQ-eP-5yY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="884" y="-1561"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Pg2-Dl-5bC">
+            <objects>
+                <viewController storyboardIdentifier="loginPopover" id="XVl-ec-Xcl" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Rbu-Rw-Qo8"/>
+                        <viewControllerLayoutGuide type="bottom" id="Zu8-tG-iRv"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ktx-3t-3xu">
+                        <rect key="frame" x="0.0" y="0.0" width="250" height="55"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This should not be empty! :)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="W07-Ce-7g5">
+                                <rect key="frame" x="18" y="17" width="214" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="W07-Ce-7g5" firstAttribute="centerY" secondItem="ktx-3t-3xu" secondAttribute="centerY" id="kQp-Zd-wV4"/>
+                            <constraint firstItem="W07-Ce-7g5" firstAttribute="centerX" secondItem="ktx-3t-3xu" secondAttribute="centerX" id="yNY-1t-hOP"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <size key="freeformSize" width="250" height="55"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Sw-X6-R3f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-795" y="-1215.5"/>
         </scene>
         <!--Login View Controller-->
         <scene sceneID="MJ8-mK-U97">

@@ -10,6 +10,7 @@ import UIKit
 
 class NoDetailsTableViewCell: UITableViewCell {
 
+    @IBOutlet var hiddenTimeStamp: UILabel!
     @IBOutlet var noDetailsMessage: UILabel!
     
     override func awakeFromNib() {
