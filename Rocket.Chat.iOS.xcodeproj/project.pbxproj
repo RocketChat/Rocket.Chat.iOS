@@ -26,10 +26,9 @@
 		4FB7E4F81B70111E00C69777 /* Rocket_Chat_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7E4F71B70111E00C69777 /* Rocket_Chat_iOSUITests.swift */; };
 		783304F2FCA3B826852C6DD2 /* Pods_Rocket_Chat_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4227E3B51FEB156513C2D7BD /* Pods_Rocket_Chat_iOS.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A5A3A9721B93CBEE00CFE8FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5A3A9741B93CBEE00CFE8FB /* Localizable.strings */; };
-		DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E51B8DC6280014548B /* RegisterViewController.swift */; };
-		DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */; };
 		DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E51B8DC6280014548B /* RegisterViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */; settings = {ASSET_TAGS = (); }; };
 		DFC070F31B9450A500B88313 /* Right.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F11B9450A500B88313 /* Right.storyboard */; settings = {ASSET_TAGS = (); }; };
 		DFC071011B94615300B88313 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F51B94615300B88313 /* Roboto-Black.ttf */; settings = {ASSET_TAGS = (); }; };
 		DFC071021B94615300B88313 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F61B94615300B88313 /* Roboto-BlackItalic.ttf */; settings = {ASSET_TAGS = (); }; };
@@ -93,6 +92,7 @@
 		A5A3A9751B93CBFC00CFE8FB /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ViewControllers/RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+hexValue.swift"; path = "../UIColor+hexValue.swift"; sourceTree = "<group>"; };
 		DFC070F21B9450A500B88313 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Right.storyboard; sourceTree = "<group>"; };
 		DFC070F51B94615300B88313 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		DFC070F61B94615300B88313 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
@@ -224,6 +224,7 @@
 				402A141B1B723E1D00B60093 /* Model */,
 				410CEB161B8B387B00CAFFE9 /* Cells */,
 				410CEB151B8B387500CAFFE9 /* ViewControllers */,
+				DFAB3D9B1B97323700B02020 /* Extensions */,
 				410CEB131B8B386E00CAFFE9 /* AppDelegate.swift */,
 				4FB7E4DB1B70111D00C69777 /* Main.storyboard */,
 				DFC070F11B9450A500B88313 /* Right.storyboard */,
@@ -252,6 +253,14 @@
 				4FB7E4F91B70111E00C69777 /* Info.plist */,
 			);
 			path = Rocket.Chat.iOSUITests;
+			sourceTree = "<group>";
+		};
+		DFAB3D9B1B97323700B02020 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		DFC070F41B94613B00B88313 /* fonts */ = {
@@ -483,6 +492,7 @@
 				4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */,
 				410CEB1B1B8B388300CAFFE9 /* MainTableViewCell.swift in Sources */,
 				410CEB241B8B388F00CAFFE9 /* ViewController.swift in Sources */,
+				DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */,
 				410CEB1A1B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift in Sources */,
 				410CEB2D1B8B390400CAFFE9 /* Message.swift in Sources */,
 				410CEB1C1B8B388300CAFFE9 /* NoDetailsTableViewCell.swift in Sources */,
@@ -548,6 +558,14 @@
 			children = (
 				A5A3A9731B93CBEE00CFE8FB /* en */,
 				A5A3A9751B93CBFC00CFE8FB /* pt */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		DFC070F11B9450A500B88313 /* Right.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFC070F21B9450A500B88313 /* Base */,
 			);
 			name = Localizable.strings;
 		DFC070F11B9450A500B88313 /* Right.storyboard */ = {
