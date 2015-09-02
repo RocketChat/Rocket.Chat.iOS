@@ -9,7 +9,7 @@
 import UIKit
 import JSQCoreDataKit
 
-class ForgotPasswordViewController: UIViewController {
+class ForgotPasswordViewController: UIViewController, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet var userNameOrEmail: UITextField!
     
@@ -32,9 +32,18 @@ class ForgotPasswordViewController: UIViewController {
         
     }
     
+    //Function to return popovers as modals to all devices.
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        
+        return .None
+        
+    }
     
+    
+    //Submiting username or email to recover password Function
     @IBAction func submitToRecoverPassword(sender: AnyObject) {
         
+        //If user submits username or email
         if userNameOrEmail.text != "" {
             
             let appDel:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -71,6 +80,35 @@ class ForgotPasswordViewController: UIViewController {
                 alert.show()
             }
             
+        }
+        //If user submits empty data
+        else {
+            
+            //Create popover
+            let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("forgotPasswordPopover")
+            
+            //Set it as popover
+            popoverVC?.modalPresentationStyle = .Popover
+            
+            //Set the size
+            popoverVC?.preferredContentSize = CGSizeMake(250, 55)
+            
+            if let popoverController = popoverVC?.popoverPresentationController {
+                
+                //specify the anchor location
+                popoverController.sourceView = userNameOrEmail
+                popoverController.sourceRect = userNameOrEmail.bounds
+                
+                //Popover above the textfield
+                popoverController.permittedArrowDirections = .Down
+                
+                //Set the delegate
+                popoverController.delegate = self
+                
+            }
+            
+            //Show the popover
+            presentViewController(popoverVC!, animated: true, completion: nil)
             
         }
         
