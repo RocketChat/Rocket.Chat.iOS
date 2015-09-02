@@ -298,8 +298,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //Set text to noDetailsMessage label
             noDetailsCell!.noDetailsMessage.text = "\(cR1!.messages[indexPath.row - 1].text)"
+            
             //Set color to #444444
-            noDetailsCell!.noDetailsMessage.textColor = UIColor(red: 68/255, green: 68/255, blue: 68/255, alpha: 1)
+            noDetailsCell!.noDetailsMessage.textColor = UIColor.colorWithHexValue(44, greenValue: 44, blueValue: 44, alpha: 1)
             
             //return the no detailed cell
             return noDetailsCell!
@@ -325,8 +326,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //Set the text for the username label
             fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row - 1].user.username)"
+            
             //Set color to #444444
-            fullDetailsCell!.usernameLabel.textColor = UIColor(red: 68/255, green: 68/255, blue: 68/255, alpha: 1)
+            fullDetailsCell!.usernameLabel.textColor = UIColor.colorWithHexValue(44, greenValue: 44, blueValue: 44, alpha: 1)
             
             //Set the timestamp
             let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
