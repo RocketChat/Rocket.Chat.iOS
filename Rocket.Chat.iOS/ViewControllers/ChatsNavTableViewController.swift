@@ -43,7 +43,6 @@ class ChatsNavTableViewController: UITableViewController {
     return LeftMenuHeaders(rawValue: section)?.toString()
   }
   
-  
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
     // Table view cells are reused and should be dequeued using a cell identifier.
@@ -71,6 +70,13 @@ class ChatsNavTableViewController: UITableViewController {
     return cell!
   }
   
+  override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+
+    // for some reason, the background color on ipads does not respect the storyboard value.
+    cell.backgroundColor = UIColor(red: 4, green: 67, blue: 106, alpha: 0)
+
+    //TODO: replace this with hex value once we merge with @kormic's branch
+  }
   
   func drawFavoritesCell(currentCell: FavoritesTableViewCell, currentTableView: UITableView, currentIndexPath: NSIndexPath){
     //TODO

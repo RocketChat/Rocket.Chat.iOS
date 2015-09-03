@@ -37,6 +37,15 @@ class AccountOptionsTableViewController: UITableViewController {
 
     }
 
+	  override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+  	  
+    	// for some reason, the background color on ipads does not respect the storyboard value.
+	    cell.backgroundColor = UIColor(red: 4, green: 67, blue: 106, alpha: 0)
+    
+  	  //TODO: replace this with hex value once we merge with @kormic's branch
+	  }
+
+  
     /*
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
