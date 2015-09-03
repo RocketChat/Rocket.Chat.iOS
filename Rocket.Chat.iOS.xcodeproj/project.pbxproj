@@ -567,12 +567,6 @@
 			children = (
 				DFC070F21B9450A500B88313 /* Base */,
 			);
-			name = Localizable.strings;
-		DFC070F11B9450A500B88313 /* Right.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				DFC070F21B9450A500B88313 /* Base */,
-			);
 			name = Right.storyboard;
 			sourceTree = "<group>";
 		};
