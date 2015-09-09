@@ -159,6 +159,7 @@ class LoginViewController: UIViewController {
             
             //Set the left view as the rootview for the navigation controller and keep it in a variable
             let leftSideNav = UINavigationController(rootViewController: leftViewController)
+	          leftSideNav.setNavigationBarHidden(true, animated: false)
 
             //Set the center view as the rootview for the navigation controller and keep it in a variable
             let centerNav = UINavigationController(rootViewController: centerViewController)
@@ -235,13 +236,8 @@ class LoginViewController: UIViewController {
             }
             
         }
-        //if user and pass is OK return true
-//        if(userName == "komic" && passWord == "komic123"){
-//            
-//            return true
-//            
-//        }
-        
+
+      
         
         //if user and pass exists return true
         
