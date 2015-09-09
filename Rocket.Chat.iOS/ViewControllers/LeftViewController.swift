@@ -10,5 +10,11 @@ import UIKit
 
 class LeftViewController: UIViewController {
 
+    
+    override func viewDidLoad() {
+        
+        self.view.backgroundColor = UIColor.rocketBlueColor()
+        
+    }
 
 }

@@ -295,12 +295,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             print(defaultTimeZoneStr)
             noDetailsCell!.hiddenTimeStamp.text = "\(defaultTimeZoneStr)"
             noDetailsCell!.hiddenTimeStamp.hidden = true
-            
+            noDetailsCell!.hiddenTimeStamp.textColor = UIColor.rocketTimestampColor()
+
             //Set text to noDetailsMessage label
             noDetailsCell!.noDetailsMessage.text = "\(cR1!.messages[indexPath.row - 1].text)"
             
             //Set color to #444444
-            noDetailsCell!.noDetailsMessage.textColor = UIColor.colorWithHexValue(44, greenValue: 44, blueValue: 44, alpha: 1)
+//            noDetailsCell!.noDetailsMessage.textColor = UIColor.colorWithHexValue(44, greenValue: 44, blueValue: 44, alpha: 1)
+            noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
             
             //return the no detailed cell
             return noDetailsCell!
@@ -328,16 +330,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row - 1].user.username)"
             
             //Set color to #444444
-            fullDetailsCell!.usernameLabel.textColor = UIColor.colorWithHexValue(44, greenValue: 44, blueValue: 44, alpha: 1)
+//            fullDetailsCell!.usernameLabel.textColor = UIColor.colorWithHexValue(44, greenValue: 44, blueValue: 44, alpha: 1)
+            fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
             
             //Set the timestamp
             let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
             print(defaultTimeZoneStr)
             fullDetailsCell!.timeLabel.text = "\(defaultTimeZoneStr)"
-            
+            fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
             
             //Set the message text
             fullDetailsCell!.messageLabel.text = "\(cR1!.messages[indexPath.row - 1].text)"
+            
+            fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
             
             //Return the full detailed cell
             return fullDetailsCell!

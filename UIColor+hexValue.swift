@@ -28,6 +28,12 @@ extension UIColor {
         return UIColor(red: 127/255.0, green: 127/255.0, blue: 127/255.0, alpha: 1)
         
     }
+
+    static func rocketTimestampColor() -> UIColor {
+        
+        return UIColor(red: 170/255, green: 170/255, blue: 170/255, alpha: 1)
+        
+    }
     
     static func rocketRedColor() -> UIColor {
         
