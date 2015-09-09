@@ -17,4 +17,29 @@ extension UIColor {
     
     }
 
+    static func rocketMainFontColor() -> UIColor {
+        
+        return UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1)
+        
+    }
+    
+    static func rocketSecondaryFontColor() -> UIColor {
+        
+        return UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1)
+        
+    }
+    
+    static func rocketRedColor() -> UIColor {
+        
+        return UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1)
+        
+    }
+    
+    static func rocketBlueColor() -> UIColor {
+        
+        return UIColor(red: 255.0, green: 255.0, blue: 255.0, alpha: 1)
+        
+    }
+    
+    
 }
