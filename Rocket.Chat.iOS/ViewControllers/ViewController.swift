@@ -31,6 +31,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // indexPath to find the bottom of the tableview
     var bottomIndexPath:NSIndexPath = NSIndexPath()
     
+    
+    var dateFormatter = NSDateFormatter()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -38,10 +41,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWillHide:"), name:UIKeyboardWillHideNotification, object: nil);
         
-        // Create and add touch gesture to tableview
+        // Create tap gesture
         let tapGesture = UITapGestureRecognizer(target: self, action: Selector("dismissKeyboard"))
         tapGesture.cancelsTouchesInView = true
+        
+        //Create double tap gesture
+        let doubleTapGesture = UITapGestureRecognizer(target: self, action: Selector("showHiddenTimestamp:"))
+        doubleTapGesture.numberOfTapsRequired = 2
+        
+        //Add gestures on tableview
         mainTableview.addGestureRecognizer(tapGesture)
+        mainTableview.addGestureRecognizer(doubleTapGesture)
         
         
         /********* Dummy data *********/
@@ -131,7 +141,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //store the created chatroom c1 into global variable cR1
         cR1 = c1
         
-        
         /********* End of Dummy data *********/
         
         
@@ -156,7 +165,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         composeMsg.layer.borderWidth = 0.5
         composeMsg.layer.cornerRadius = 10
         
-        
+        dateFormatter.dateFormat = "HH:mm"
     }
     
     override func didReceiveMemoryWarning() {
@@ -182,6 +191,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         //Toggle the drawer to the right
         appdelegate.centerContainer?.toggleDrawerSide(MMDrawerSide.Right, animated: true, completion: nil)
+        
         
     }
     
@@ -280,8 +290,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             }
             
+            //Set hidden timestamp
+            let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
+            print(defaultTimeZoneStr)
+            noDetailsCell!.hiddenTimeStamp.text = "\(defaultTimeZoneStr)"
+            noDetailsCell!.hiddenTimeStamp.hidden = true
+            noDetailsCell!.hiddenTimeStamp.textColor = UIColor.rocketTimestampColor()
+
             //Set text to noDetailsMessage label
             noDetailsCell!.noDetailsMessage.text = "\(cR1!.messages[indexPath.row - 1].text)"
+            
+            //Set color to #444444
+//            noDetailsCell!.noDetailsMessage.textColor = UIColor.colorWithHexValue(44, greenValue: 44, blueValue: 44, alpha: 1)
+            noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
             
             //return the no detailed cell
             return noDetailsCell!
@@ -308,12 +329,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //Set the text for the username label
             fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row - 1].user.username)"
             
-            //Set the timestamp
-            fullDetailsCell!.timeLabel.text = "\(cR1!.messages[indexPath.row - 1].tstamp)"
+            //Set color to #444444
+//            fullDetailsCell!.usernameLabel.textColor = UIColor.colorWithHexValue(44, greenValue: 44, blueValue: 44, alpha: 1)
+            fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
             
+            //Set the timestamp
+            let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
+            print(defaultTimeZoneStr)
+            fullDetailsCell!.timeLabel.text = "\(defaultTimeZoneStr)"
+            fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
             
             //Set the message text
             fullDetailsCell!.messageLabel.text = "\(cR1!.messages[indexPath.row - 1].text)"
+            
+            fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
             
             //Return the full detailed cell
             return fullDetailsCell!
@@ -323,14 +352,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    
     //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
         
         //If there is text
         if composeMsg.text != "" {
             //create current message
+//            let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: currentUser!)
             let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: currentUser!)
-            
             //add it to the messages array
             mArray1 += [currentMsg]
             
@@ -414,5 +444,32 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //dismiss keyboard
         composeMsg.resignFirstResponder()
     }
+    
+    
+    //Function to toggle message's timestamp
+    func showHiddenTimestamp(gesture: UITapGestureRecognizer) {
+        
+        //get the index path of the cell where the user double tapped on
+        let tableCellRow = mainTableview.indexPathForRowAtPoint(gesture.locationInView(mainTableview))!
+        
+        //Get the cell
+        if  let tableCell = mainTableview.cellForRowAtIndexPath(tableCellRow) as? NoDetailsTableViewCell {
+            
+            //Toggle timestamp
+            
+            if !tableCell.hiddenTimeStamp.hidden {
+                
+                tableCell.hiddenTimeStamp.hidden = true
+                
+            }else {
+                
+                tableCell.hiddenTimeStamp.hidden = false
+                
+            }
+        }
+        
+    }
+    
+    
     
 }
