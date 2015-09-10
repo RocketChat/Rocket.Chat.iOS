@@ -19,7 +19,7 @@ class LeftViewController: UIViewController, SwitchAccountViewDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-      
+        self.view.backgroundColor = UIColor.rocketBlueColor()
 
     }
 
@@ -63,13 +63,5 @@ class LeftViewController: UIViewController, SwitchAccountViewDelegate {
       tabBarContainer?.didClickOnAccountBar(accountOptionsWereOpen)
     }
   }
-
-
-    
-    override func viewDidLoad() {
-        
-        self.view.backgroundColor = UIColor.rocketBlueColor()
-        
-    }
 
 }
