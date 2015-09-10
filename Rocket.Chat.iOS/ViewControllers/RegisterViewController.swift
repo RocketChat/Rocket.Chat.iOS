@@ -9,7 +9,7 @@
 import UIKit
 import JSQCoreDataKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet var nameTextField: UITextField!
     @IBOutlet var emailTextField: UITextField!
@@ -20,6 +20,9 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //Setting the password and confirm password as secure text
+        passwordTextField.secureTextEntry = true
+        confirmPasswordTextField.secureTextEntry = true
         
     }
 
@@ -31,6 +34,14 @@ class RegisterViewController: UIViewController {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         
         self.view.endEditing(true)
+        
+    }
+    
+    
+    //Function to return popovers as modals to all devices.
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        
+        return .None
         
     }
     
@@ -58,6 +69,34 @@ class RegisterViewController: UIViewController {
             nameTextField.layer.borderColor = UIColor.redColor().CGColor
             nameTextField.layer.borderWidth = 1
             
+            //Create View Controller
+            let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("namePopover")
+            
+            //Set it as popover
+            popoverVC!.modalPresentationStyle = .Popover
+            
+            //Set the size
+            popoverVC!.preferredContentSize = CGSizeMake(250, 50)
+            
+            
+            if let popoverController = popoverVC!.popoverPresentationController {
+                
+                //Specify the anchor location
+                popoverController.sourceView = nameTextField
+                popoverController.sourceRect = nameTextField.bounds
+
+                
+                //Popover above the textfield
+                popoverController.permittedArrowDirections = .Down
+                
+                //Set the delegate
+                popoverController.delegate = self
+            }
+            
+            //Show the popover
+            presentViewController(popoverVC!, animated: true, completion: nil)
+            
+        
         }
         
         //then email check
@@ -66,13 +105,69 @@ class RegisterViewController: UIViewController {
             emailTextField.layer.borderColor = UIColor.redColor().CGColor
             emailTextField.layer.borderWidth = 1
             
+            //Create View Controller
+            let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("emailPopover")
+            
+            //Set it as popover
+            popoverVC!.modalPresentationStyle = .Popover
+            
+            //Set the size
+            popoverVC!.preferredContentSize = CGSizeMake(250, 50)
+            
+            
+            if let popoverController = popoverVC!.popoverPresentationController {
+                
+                //Specify the anchor location
+                popoverController.sourceView = emailTextField
+                popoverController.sourceRect = emailTextField.bounds
+                
+                
+                //Popover above the textfield
+                popoverController.permittedArrowDirections = .Down
+                
+                //Set the delegate
+                popoverController.delegate = self
+            }
+            
+            //Show the popover
+            presentViewController(popoverVC!, animated: true, completion: nil)
+
         }
         
         //then password check
-        else if (passwordTextField.text!.isEmpty || passwordTextField.text!.characters.count < 8) {
+        else if (passwordTextField.text!.characters.count < 8) {
             
             passwordTextField.layer.borderColor = UIColor.redColor().CGColor
             passwordTextField.layer.borderWidth = 1
+            
+            
+            //Create View Controller
+            let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("passwordPopover")
+            
+            //Set it as popover
+            popoverVC!.modalPresentationStyle = .Popover
+            
+            //Set the size
+            popoverVC!.preferredContentSize = CGSizeMake(250, 55)
+            
+            
+            if let popoverController = popoverVC!.popoverPresentationController {
+                
+                //Specify the anchor location
+                popoverController.sourceView = passwordTextField
+                popoverController.sourceRect = passwordTextField.bounds
+                
+                
+                //Popover above the textfield
+                popoverController.permittedArrowDirections = .Down
+                
+                //Set the delegate
+                popoverController.delegate = self
+            }
+            
+            //Show the popover
+            presentViewController(popoverVC!, animated: true, completion: nil)
+
             
         }
         
@@ -80,8 +175,35 @@ class RegisterViewController: UIViewController {
         //Confirm password
         else if passwordTextField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) != confirmPasswordTextField.text!.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) {
             
-            let alert = UIAlertView(title: "Confirm Password", message: "Please Confirm Your Password", delegate: self, cancelButtonTitle: "Dismiss")
-            alert.show()
+//            let alert = UIAlertView(title: "Confirm Password", message: "Please Confirm Your Password", delegate: self, cancelButtonTitle: "Dismiss")
+//            alert.show()
+            
+            
+            //Create View Controller
+            let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("confirmPopover")
+            
+            //Set it as popover
+            popoverVC!.modalPresentationStyle = .Popover
+            
+            //Set the size
+            popoverVC!.preferredContentSize = CGSizeMake(250, 55)
+            
+            if let popoverController = popoverVC!.popoverPresentationController {
+                
+                //Specify the anchor location
+                popoverController.sourceView = confirmPasswordTextField
+                popoverController.sourceRect = confirmPasswordTextField.bounds
+                
+                
+                //Popover above the textfield
+                popoverController.permittedArrowDirections = .Down
+                
+                //Set the delegate
+                popoverController.delegate = self
+            }
+            
+            //Show the popover
+            presentViewController(popoverVC!, animated: true, completion: nil)
             
         }
         
