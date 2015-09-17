@@ -515,7 +515,7 @@
             </objects>
             <point key="canvasLocation" x="1744" y="-398.5"/>
         </scene>
-        <!--My Settings View Controller-->
+        <!--Preferences-->
         <scene sceneID="RDh-Re-tkl">
             <objects>
                 <viewController storyboardIdentifier="mySettings" id="fHE-nF-96j" customClass="MySettingsViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
@@ -527,27 +527,28 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Settings View" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPQ-zk-WbN">
-                                <rect key="frame" x="94" y="273" width="133" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="MESSAGES" textAlignment="center" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OPQ-zk-WbN">
+                                <rect key="frame" x="82" y="90" width="89" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="OPQ-zk-WbN" firstAttribute="centerX" secondItem="epr-R9-kcw" secondAttribute="centerX" id="VXg-hD-dJ8"/>
-                            <constraint firstItem="OPQ-zk-WbN" firstAttribute="centerY" secondItem="epr-R9-kcw" secondAttribute="centerY" id="jIE-MF-A4h"/>
-                        </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="TEb-y3-Jyv">
-                        <barButtonItem key="leftBarButtonItem" title="Menu" id="EWt-Kl-nGh">
+                    <tabBarItem key="tabBarItem" title="Item" id="rOB-lJ-oeP"/>
+                    <navigationItem key="navigationItem" title="Preferences" id="c1X-z4-Uen">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="4qk-TW-Vye">
                             <connections>
-                                <action selector="backButton:" destination="fHE-nF-96j" id="JKR-VG-LXs"/>
+                                <action selector="backButton:" destination="fHE-nF-96j" id="edR-F8-Njl"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="messagesTitleLabel" destination="OPQ-zk-WbN" id="JBA-gY-VJc"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Vl8-Mr-9K0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

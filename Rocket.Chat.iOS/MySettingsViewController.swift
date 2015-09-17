@@ -10,17 +10,24 @@ import UIKit
 import MMDrawerController
 
 class MySettingsViewController: UIViewController {
-
+    
+    
+    @IBOutlet var messagesTitleLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       
+        //Set the navigation's title to rocketMainFontColor
+        navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.rocketMainFontColor()]
 
-        // Do any additional setup after loading the view.
+        //Set the messages title to rocketMainFontColor
+        messagesTitleLabel.textColor = UIColor.rocketMainFontColor()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
 
     //Menu button action
