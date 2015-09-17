@@ -28,13 +28,13 @@ class LeftMenuTabBarViewController: UITabBarController, SwitchAccountViewDelegat
   
   // MARK: SwitchAccountViewDelegate
   func didClickOnAccountBar(accountOptionsWereOpen: Bool){
-   
+
     if (accountOptionsWereOpen){ //need to show original chatNav menu
       selectedIndex = findIndexOfChatNav()
       selectedViewController = viewControllers![selectedIndex]
       
     } else { // need to show account options
-			selectedIndex = findIndexOfAccountOptions()
+      selectedIndex = findIndexOfAccountOptions()
       selectedViewController = viewControllers![selectedIndex]
     }
     
@@ -68,4 +68,17 @@ class LeftMenuTabBarViewController: UITabBarController, SwitchAccountViewDelegat
     }
     return -1
   }
+    
+    /** Returns the index of the My Settings view, or -1 if it can't find it. */
+    func findIndexOfMySettings() -> Int {
+        if viewControllers == nil {
+            return -1
+        }
+        for (index, value) in (customizableViewControllers?.enumerate())! {
+            if value is SettingsMenuViewController {
+                return index
+            }
+        }
+        return -1
+    }
 }
