@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MMDrawerController
 
 class AccountOptionsTableViewController: UITableViewController {
 
@@ -49,35 +50,45 @@ class AccountOptionsTableViewController: UITableViewController {
   	  //TODO: replace this with hex value once we merge with @kormic's branch
 	  }
 
-  
-    /*
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("reuseIdentifier", forIndexPath: indexPath)
+    
+    
+    
+    //Here is what happens when the user select's an option from account options
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    
+        //If user selects MySettings
+        if indexPath.row == 0 {
+         
+            //get the appDelegate
+            let appdelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            
+            //Create MySettingsViewController instance
+            let mySettingsVC = storyboard?.instantiateViewControllerWithIdentifier("mySettings")
+            
+            //Set it as rootViewController in the navigation controller
+            let centerNewNav = UINavigationController(rootViewController: mySettingsVC!)
+            
+            //Set the settings controller as the center view controller in the MMDrawer
+            appdelegate.centerContainer?.setCenterViewController(centerNewNav, withCloseAnimation: false, completion: nil)
+            
+            //Close the drawer
+            appdelegate.centerContainer?.closeDrawerAnimated(true, completion: nil)
+            
+            //Get the AccountBar's tab controller
+            let MyAccountTabBarController = tabBarController?.parentViewController?.childViewControllers[0] as! MyAccountBarTabViewController
 
-        // Configure the cell...
-
-        return cell
+            //Set the account bar view
+            MyAccountTabBarController.selectedViewController = MyAccountTabBarController.viewControllers![1]
+            
+            //get LeftMenu's tab bar controller
+            let leftMenuTabBarController = tabBarController as! LeftMenuTabBarViewController
+            
+            //Set the left menu's view
+            tabBarController?.selectedViewController = tabBarController?.viewControllers![leftMenuTabBarController.findIndexOfMySettings()]
+            
+        }
+        
     }
-    */
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
 }
