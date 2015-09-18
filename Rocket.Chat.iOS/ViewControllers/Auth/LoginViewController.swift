@@ -296,7 +296,7 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
                 if i.username == userNameTextField.text && i.password == passwordTextField.text{
                     exists = true
                     self.currentUser = i
-                    print("CurrentUser set " + i.username)
+//                    print("CurrentUser set " + i.username)
                 }
             }
             

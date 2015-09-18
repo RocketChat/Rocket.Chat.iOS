@@ -292,7 +292,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //Set hidden timestamp
             let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
-            print(defaultTimeZoneStr)
             noDetailsCell!.hiddenTimeStamp.text = "\(defaultTimeZoneStr)"
             noDetailsCell!.hiddenTimeStamp.hidden = true
             noDetailsCell!.hiddenTimeStamp.textColor = UIColor.rocketTimestampColor()
@@ -335,7 +334,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //Set the timestamp
             let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
-            print(defaultTimeZoneStr)
             fullDetailsCell!.timeLabel.text = "\(defaultTimeZoneStr)"
             fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
             
