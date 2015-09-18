@@ -10,9 +10,17 @@ import UIKit
 
 class SoundOptionsViewController: UIViewController {
     
+    
+    //Labels
     @IBOutlet var newRoomNotificationLabel: UILabel!
     @IBOutlet var newMessageLabel: UILabel!
 
+    
+    //Switches
+    @IBOutlet var newRoomNotificationSwitch: UISwitch!
+    @IBOutlet var newMessageNotficationSwitch: UISwitch!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -27,5 +35,36 @@ class SoundOptionsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    //MARK: Sound Options Actions
+    
+    @IBAction func newRoomNotificationAction(sender: AnyObject) {
+        
+        if newRoomNotificationSwitch.on {
+            
+            print("New Room Notification is ON")
+            
+        } else {
+            
+            print("New Room Notification is OFF")
+            
+        }
+        
+    }
+    
+    
+    @IBAction func newMessageNotificationAction(sender: AnyObject) {
+        
+        if newMessageNotficationSwitch.on {
+            
+            print("New Message Notification is ON")
+            
+        } else {
+            
+            print("New Message Notification is OFF")
+            
+        }
+        
+    }
 
 }

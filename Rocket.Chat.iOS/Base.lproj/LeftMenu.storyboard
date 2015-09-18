@@ -874,12 +874,21 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EFK-0e-fiX">
                                 <rect key="frame" x="245" y="55" width="51" height="31"/>
+                                <connections>
+                                    <action selector="convertAsciiToEmojiAction:" destination="9FC-x3-FzK" eventType="valueChanged" id="wtP-Vf-RD5"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n0W-L1-io4">
                                 <rect key="frame" x="245" y="95" width="51" height="31"/>
+                                <connections>
+                                    <action selector="autoLoadImagesAction:" destination="9FC-x3-FzK" eventType="valueChanged" id="oD8-gR-RuO"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="C0z-qu-DGT">
                                 <rect key="frame" x="245" y="134" width="51" height="31"/>
+                                <connections>
+                                    <action selector="saveMobileBandwidthAction:" destination="9FC-x3-FzK" eventType="valueChanged" id="SX0-xF-xgT"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Convert ASCII to Emoji" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AKa-mL-SZ2">
                                 <rect key="frame" x="12" y="60" width="185" height="21"/>
@@ -889,6 +898,9 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lgp-zj-Fee">
                                 <rect key="frame" x="245" y="15" width="51" height="31"/>
+                                <connections>
+                                    <action selector="useEmojisAction:" destination="9FC-x3-FzK" eventType="valueChanged" id="arR-MH-7lE"/>
+                                </connections>
                             </switch>
                         </subviews>
                         <constraints>
@@ -916,9 +928,13 @@
                     </view>
                     <connections>
                         <outlet property="autoLoadImagesLabel" destination="O56-8S-P9H" id="Hmn-3S-xaA"/>
+                        <outlet property="autoLoadImagesSwitch" destination="n0W-L1-io4" id="cpT-i6-or9"/>
                         <outlet property="convertAsciiToEmojiLabel" destination="AKa-mL-SZ2" id="EsT-mK-wMY"/>
+                        <outlet property="convertAsciiToEmojiSwitch" destination="EFK-0e-fiX" id="n3d-Tk-C9z"/>
                         <outlet property="saveMobileBandWidthLabel" destination="G8W-7T-puG" id="PfB-et-D42"/>
+                        <outlet property="saveMobileBandwidthSwitch" destination="C0z-qu-DGT" id="UgC-9R-9Co"/>
                         <outlet property="useEmojisLabel" destination="Vif-hi-FIn" id="Xwb-xA-MiI"/>
+                        <outlet property="useEmojisSwitch" destination="lgp-zj-Fee" id="ypw-Si-WTL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yiC-lI-3lx" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -945,9 +961,15 @@
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BpM-Vw-Kio">
                                 <rect key="frame" x="245" y="12" width="51" height="31"/>
+                                <connections>
+                                    <action selector="newRoomNotificationAction:" destination="rVu-f0-qfI" eventType="valueChanged" id="rNL-Zk-VIv"/>
+                                </connections>
                             </switch>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Kda-HQ-VO3">
                                 <rect key="frame" x="245" y="52" width="51" height="31"/>
+                                <connections>
+                                    <action selector="newMessageNotificationAction:" destination="rVu-f0-qfI" eventType="valueChanged" id="K6S-dq-FWw"/>
+                                </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="New Message Notification" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8nT-5e-m5d">
                                 <rect key="frame" x="12" y="51" width="209" height="32"/>
@@ -973,7 +995,9 @@
                     </view>
                     <connections>
                         <outlet property="newMessageLabel" destination="8nT-5e-m5d" id="muu-FZ-TEO"/>
+                        <outlet property="newMessageNotficationSwitch" destination="Kda-HQ-VO3" id="ire-QC-2po"/>
                         <outlet property="newRoomNotificationLabel" destination="mso-wd-GkB" id="MpT-bm-Fyl"/>
+                        <outlet property="newRoomNotificationSwitch" destination="BpM-Vw-Kio" id="Xhi-OO-MiM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BuM-YJ-xif" userLabel="First Responder" sceneMemberID="firstResponder"/>
