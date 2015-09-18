@@ -9,19 +9,22 @@
 import UIKit
 import MMDrawerController
 
-class MySettingsViewController: UIViewController {
+class MySettingsViewController: UIViewController, UIScrollViewDelegate {
     
+    @IBOutlet var scrollView: UIScrollView!
     
-    @IBOutlet var messagesTitleLabel: UILabel!
+    @IBOutlet var messagesOptionsLabel: UILabel!
+    @IBOutlet var soundOptionsLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        
         //Set the navigation's title to rocketMainFontColor
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.rocketMainFontColor()]
 
         //Set the messages title to rocketMainFontColor
-        messagesTitleLabel.textColor = UIColor.rocketMainFontColor()
+        messagesOptionsLabel.textColor = UIColor.rocketMainFontColor()
+        soundOptionsLabel.textColor = UIColor.rocketMainFontColor()
     }
 
     override func didReceiveMemoryWarning() {

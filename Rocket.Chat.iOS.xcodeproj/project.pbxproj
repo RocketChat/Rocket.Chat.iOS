@@ -39,6 +39,8 @@
 		DF113AE91BA6D91000CE6D17 /* MyAccountBarTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E51B8DC6280014548B /* RegisterViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF5F92611BAC4304000EA4C3 /* MessagesOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF5F92631BAC4315000EA4C3 /* SoundOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF7CD46C1BA585B6004B55E9 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF8C851F1BA48A97005E37D2 /* MySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8C851E1BA48A97005E37D2 /* MySettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */; settings = {ASSET_TAGS = (); }; };
@@ -116,6 +118,8 @@
 		DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountBarTabViewController.swift; sourceTree = "<group>"; };
 		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ViewControllers/RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesOptionsViewController.swift; sourceTree = "<group>"; };
+		DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundOptionsViewController.swift; sourceTree = "<group>"; };
 		DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenuViewController.swift; sourceTree = "<group>"; };
 		DF8C851E1BA48A97005E37D2 /* MySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySettingsViewController.swift; sourceTree = "<group>"; };
 		DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+hexValue.swift"; path = "../UIColor+hexValue.swift"; sourceTree = "<group>"; };
@@ -197,6 +201,8 @@
 				4F28B1661B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift */,
 				DF8C851E1BA48A97005E37D2 /* MySettingsViewController.swift */,
 				DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */,
+				DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */,
+				DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -533,6 +539,7 @@
 				410CEB141B8B386E00CAFFE9 /* AppDelegate.swift in Sources */,
 				4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */,
 				410CEB1B1B8B388300CAFFE9 /* MainTableViewCell.swift in Sources */,
+				DF5F92631BAC4315000EA4C3 /* SoundOptionsViewController.swift in Sources */,
 				410CEB241B8B388F00CAFFE9 /* ViewController.swift in Sources */,
 				DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */,
 				410CEB1A1B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift in Sources */,
@@ -552,6 +559,7 @@
 				410CEB231B8B388F00CAFFE9 /* RightViewController.swift in Sources */,
 				4F28B1671B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift in Sources */,
 				4F28B1621B9101720033D8D1 /* PrivateGroupsTableViewCell.swift in Sources */,
+				DF5F92611BAC4304000EA4C3 /* MessagesOptionsViewController.swift in Sources */,
 				DF113AE51BA6D87B00CE6D17 /* MyAccountBarViewController.swift in Sources */,
 				DF8C851F1BA48A97005E37D2 /* MySettingsViewController.swift in Sources */,
 			);
