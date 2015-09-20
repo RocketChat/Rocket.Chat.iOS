@@ -56,6 +56,7 @@ class AccountOptionsTableViewController: UITableViewController {
     //Here is what happens when the user select's an option from account options
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     
+        
         //If user selects MySettings
         if indexPath.row == 0 {
          
@@ -74,11 +75,31 @@ class AccountOptionsTableViewController: UITableViewController {
             //Close the drawer
             appdelegate.centerContainer?.closeDrawerAnimated(true, completion: nil)
             
+            
+            
             //Get the AccountBar's tab controller
             let MyAccountTabBarController = tabBarController?.parentViewController?.childViewControllers[0] as! MyAccountBarTabViewController
+            
 
             //Set the account bar view
             MyAccountTabBarController.selectedViewController = MyAccountTabBarController.viewControllers![1]
+            
+            
+            
+            /******** Prepare the account bar for when we exit settings ********/
+            
+            //Get the accountBarView
+            let accountBarView = MyAccountTabBarController.viewControllers![MyAccountTabBarController.findIndexOfAccountBar()] as! AccountBarViewController
+            
+            //Set accountOptionWereOpen to false so when we get back from settings the account bar will work right
+            accountBarView.accountOptionsWereOpen = false
+            
+            //Rotate the arrow down
+            accountBarView.detailsButton?.imageView?.image = UIImage(named: "Arrow-Down")
+            
+            /************/
+            
+            
             
             //get LeftMenu's tab bar controller
             let leftMenuTabBarController = tabBarController as! LeftMenuTabBarViewController

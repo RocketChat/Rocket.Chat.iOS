@@ -9,7 +9,8 @@
 import UIKit
 
 class MyAccountBarViewController: UIViewController {
-
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -22,5 +23,19 @@ class MyAccountBarViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    //MARK: Navigation
+    
+    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+                
+        //Get the LeftMenuTabBarViewController
+        let leftMenuTabBarController = tabBarController?.parentViewController?.childViewControllers[1] as! LeftMenuTabBarViewController
+        
+        //Set the left menu view to chatnav
+        leftMenuTabBarController.selectedViewController = leftMenuTabBarController.viewControllers![leftMenuTabBarController.findIndexOfChatNav()]
+        
+        //Set the account bar to accountBarView
+        tabBarController?.selectedViewController = tabBarController?.viewControllers![0]
+        
+    }
 
 }
