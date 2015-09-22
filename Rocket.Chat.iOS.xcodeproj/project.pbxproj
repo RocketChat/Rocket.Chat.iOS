@@ -57,6 +57,8 @@
 		DFC0710A1B94615300B88313 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FE1B94615300B88313 /* Roboto-Regular.ttf */; settings = {ASSET_TAGS = (); }; };
 		DFC0710B1B94615300B88313 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FF1B94615300B88313 /* Roboto-Thin.ttf */; settings = {ASSET_TAGS = (); }; };
 		DFC0710C1B94615300B88313 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC071001B94615300B88313 /* Roboto-ThinItalic.ttf */; settings = {ASSET_TAGS = (); }; };
+		DFEEBE6C1BAF4DCD00DE1825 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEEBE6B1BAF4DCD00DE1825 /* profileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DFEEBE6E1BAF53E800DE1825 /* ChangeAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEEBE6D1BAF53E800DE1825 /* ChangeAvatarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -136,6 +138,8 @@
 		DFC070FE1B94615300B88313 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		DFC070FF1B94615300B88313 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		DFC071001B94615300B88313 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		DFEEBE6B1BAF4DCD00DE1825 /* profileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
+		DFEEBE6D1BAF53E800DE1825 /* ChangeAvatarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeAvatarViewController.swift; sourceTree = "<group>"; };
 		E8B42BE2CCF2AD5BB7DE9FF1 /* Pods-Rocket.Chat.iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.iOS/Pods-Rocket.Chat.iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -203,6 +207,8 @@
 				DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */,
 				DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */,
 				DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */,
+				DFEEBE6B1BAF4DCD00DE1825 /* profileViewController.swift */,
+				DFEEBE6D1BAF53E800DE1825 /* ChangeAvatarViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -541,6 +547,7 @@
 				410CEB1B1B8B388300CAFFE9 /* MainTableViewCell.swift in Sources */,
 				DF5F92631BAC4315000EA4C3 /* SoundOptionsViewController.swift in Sources */,
 				410CEB241B8B388F00CAFFE9 /* ViewController.swift in Sources */,
+				DFEEBE6C1BAF4DCD00DE1825 /* profileViewController.swift in Sources */,
 				DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */,
 				410CEB1A1B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift in Sources */,
 				4F28B1611B9101720033D8D1 /* DirectMessagesTableViewCell.swift in Sources */,
@@ -551,6 +558,7 @@
 				4F28B1691B9493B10033D8D1 /* ChatsNavTableViewController.swift in Sources */,
 				410CEB2E1B8B390400CAFFE9 /* User.swift in Sources */,
 				410CEB221B8B388F00CAFFE9 /* LeftViewController.swift in Sources */,
+				DFEEBE6E1BAF53E800DE1825 /* ChangeAvatarViewController.swift in Sources */,
 				DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */,
 				4F28B1591B90FF230033D8D1 /* AccountBarViewController.swift in Sources */,
 				4F28B1651B93514E0033D8D1 /* AccountOptionsTableViewController.swift in Sources */,
