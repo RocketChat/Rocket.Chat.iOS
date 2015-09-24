@@ -9,6 +9,7 @@
 import UIKit
 import JSQCoreDataKit
 import MMDrawerController
+import ObjectiveDDP
 
 class LoginViewController: UIViewController, UIPopoverPresentationControllerDelegate {
   
@@ -20,7 +21,17 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
   //variable to get the logged in user
   var currentUser = User?()
   var users = [User]()
-  
+  var meteor: MeteorClient!
+
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+    meteor = ad.meteorClient
+
+    let observingOption = NSKeyValueObservingOptions.New
+    meteor.addObserver(self, forKeyPath:"websocketReady", options: observingOption, context:nil)
+  }
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -346,5 +357,17 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
   }
   
   
-  
+  // MARK: - Connection
+  override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<(Void)>) {
+
+    if (keyPath == "websocketReady" && meteor.websocketReady) {
+      //      connectionStatusText.text = "Connected to Todo Server"
+      //      var image:UIImage = UIImage(named: "green_light.png")!
+      //      connectionStatusLight.image = image
+      print("connected to server!!!")
+    }
+  }
+
+
+
 }
