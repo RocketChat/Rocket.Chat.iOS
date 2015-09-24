@@ -11,6 +11,9 @@ import UIKit
 
 class SettingsMenuViewController: UIViewController {
 
+    //variable to get the user - This is just for now(?)
+    var currentUser = User?()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,10 +53,13 @@ class SettingsMenuViewController: UIViewController {
     
         let appDel = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        let profileVC = storyboard?.instantiateViewControllerWithIdentifier("profileVC")
+        let profileVC = storyboard?.instantiateViewControllerWithIdentifier("profileVC") as! profileViewController
+        
+        //This is just for now(?)
+        profileVC.currentUser = currentUser
         
         //Set it as rootViewController in the navigation controller
-        let centerNewNav = UINavigationController(rootViewController: profileVC!)
+        let centerNewNav = UINavigationController(rootViewController: profileVC)
         
         //Set the settings controller as the center view controller in the MMDrawer
         appDel.centerContainer?.setCenterViewController(centerNewNav, withCloseAnimation: false, completion: nil)
