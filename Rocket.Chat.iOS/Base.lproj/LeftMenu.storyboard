@@ -141,9 +141,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="66"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Yellow" translatesAutoresizingMaskIntoConstraints="NO" id="gfG-CM-ESz">
-                                <rect key="frame" x="20" y="29" width="15" height="20"/>
-                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Default-Avatar" translatesAutoresizingMaskIntoConstraints="NO" id="o5P-qa-KbA">
                                 <rect key="frame" x="43" y="22" width="35" height="35"/>
                             </imageView>
@@ -159,6 +156,9 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Yellow" translatesAutoresizingMaskIntoConstraints="NO" id="gfG-CM-ESz">
+                                <rect key="frame" x="20" y="33" width="15" height="17"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.22352941179999999" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -789,7 +789,7 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="fHE-nF-96j" kind="relationship" relationship="rootViewController" id="nvO-d0-Fkx"/>
-                        <segue destination="CiL-Cf-HbC" kind="show" id="Jfh-tx-dgm"/>
+                        <segue destination="CiL-Cf-HbC" kind="show" identifier="" id="Jfh-tx-dgm"/>
                         <segue destination="flz-X3-V0a" kind="show" id="n2r-nf-tPZ"/>
                     </connections>
                 </navigationController>
