@@ -27,9 +27,6 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
     super.viewWillAppear(animated)
     let ad = UIApplication.sharedApplication().delegate as! AppDelegate
     meteor = ad.meteorClient
-
-    let observingOption = NSKeyValueObservingOptions.New
-    meteor.addObserver(self, forKeyPath:"websocketReady", options: observingOption, context:nil)
   }
 
   
@@ -334,16 +331,7 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
   }
   
   
-  // MARK: - Connection
-  override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<(Void)>) {
 
-    if (keyPath == "websocketReady" && meteor.websocketReady) {
-      //      connectionStatusText.text = "Connected to Todo Server"
-      //      var image:UIImage = UIImage(named: "green_light.png")!
-      //      connectionStatusLight.image = image
-      print("connected to server!!!")
-    }
-  }
 
 
 
