@@ -8,6 +8,7 @@
 
 import UIKit
 import JSQCoreDataKit
+import ObjectiveDDP
 
 class RegisterViewController: UIViewController, UIPopoverPresentationControllerDelegate {
   
@@ -16,6 +17,15 @@ class RegisterViewController: UIViewController, UIPopoverPresentationControllerD
   @IBOutlet var passwordTextField: UITextField!
   @IBOutlet var confirmPasswordTextField: UITextField!
   
+  var meteor: MeteorClient!
+  
+  override func viewWillAppear(animated: Bool) {
+    super.viewWillAppear(animated)
+    let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+    meteor = ad.meteorClient
+    
+  }
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -186,11 +196,42 @@ class RegisterViewController: UIViewController, UIPopoverPresentationControllerD
     else
     {
       
+      let formData = NSDictionary(dictionary: [
+        "email": emailTextField.text!,
+        "pass": passwordTextField.text!,
+        "name": nameTextField.text!
+      ])
+      meteor.callMethodName("registerUser", parameters: [formData], responseCallback: {(response, error) -> Void in
         
+        if((error) != nil) {
+          self.handleFailedReg(error)
+          return
         }
+        self.handleSuccessfulReg(response)
+      })
       
+    }
+    
+  }
+  
+  /** Takes the user to the username registration form. */
+  func handleSuccessfulReg(response: NSDictionary){
+
+    // FIXME: look into whether we need this!!
+    
+    let res = response["result"] as? NSDictionary
+    if (res != nil){
+      let serverSessionToken = res!["token"] as? String
+      let userId = res!["id"] as? String
+      if (serverSessionToken != nil && userId != nil){
         
         
+        //get the appdelegate and store it in a variable
+        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = appDelegate.stack!.context
+        
+        //Create the user
+        _ = User(context: context, id: userId!, username: nameTextField.text!, sessionToken: serverSessionToken!, avatar: UIImage(named: "Default-Avatar")!, status: .ONLINE, timezone: NSTimeZone.systemTimeZone())
         
         //User is automatically is added to CoreData, but not saved, so we need to call
         //save context next.
@@ -206,13 +247,19 @@ class RegisterViewController: UIViewController, UIPopoverPresentationControllerD
         })
         
         
-        //Go back to login screen
-        self.performSegueWithIdentifier("returnToLogin", sender: self)
-        
+        //Proceed to username selection screen.
+        self.performSegueWithIdentifier("selectUsername", sender: self)
         
       }
     }
     
+  }
+  
+  func handleFailedReg(error: NSError){
+    //Inform the not-registered user
+    let alert = UIAlertView(title: "Name Exists", message: "Username not available", delegate: self, cancelButtonTitle: "Dismiss")
+    alert.show()
+
   }
   
   
