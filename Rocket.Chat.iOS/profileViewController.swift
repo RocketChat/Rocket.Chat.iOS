@@ -19,6 +19,7 @@ class profileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     var language = [String()]
     let picker = UIPickerView()
+    var currentUser = User?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,7 +30,7 @@ class profileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         language = ["English","Greek","Portuguese"]
         
         //Set username placeholder
-        
+        usernameTextField.text = currentUser?.username
         
         //Set pickerview's delegate and background color
         picker.delegate = self
@@ -59,6 +60,7 @@ class profileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     //Menu button action

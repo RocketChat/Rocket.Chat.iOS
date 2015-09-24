@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         model = CoreDataModel(name: "Rocket_Chat_iOS")
         stack = CoreDataStack(model: model!)
 
+        
         return true
     }
 }

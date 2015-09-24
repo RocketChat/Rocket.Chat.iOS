@@ -16,6 +16,7 @@ class MySettingsViewController: UIViewController, UIScrollViewDelegate {
     @IBOutlet var messagesOptionsLabel: UILabel!
     @IBOutlet var soundOptionsLabel: UILabel!
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -25,6 +26,7 @@ class MySettingsViewController: UIViewController, UIScrollViewDelegate {
         //Set the messages title to rocketMainFontColor
         messagesOptionsLabel.textColor = UIColor.rocketMainFontColor()
         soundOptionsLabel.textColor = UIColor.rocketMainFontColor()
+    
     }
 
     override func didReceiveMemoryWarning() {
