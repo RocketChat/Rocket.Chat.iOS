@@ -99,10 +99,6 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
     loginToServer(userNameTextField.text!, pass: passwordTextField.text!)
 
 
-    //let rootViewController = appDelegate.window!.rootViewController
-
-
-
   }
 
   func loginToServer(userName: String, pass: String) {
@@ -137,10 +133,7 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
 
     self.view.endEditing(true)
 
-    //get the appdelegate and store it in a variable
     let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-
-    //get the storyboard an store it in a variable
     let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
 
 
@@ -156,48 +149,35 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
     let rightViewController = mainStoryboard.instantiateViewControllerWithIdentifier("rightView") as! RightViewController
 
 
+    // FIXME: see why we need the currentUser
     //send the logged in user in the ViewController
     centerViewController.currentUser = currentUser
 
     //Set the left, right and center views as the rootviewcontroller for the navigation controller (one rootviewcontroller at a time)
 
-    //Set the left view as the rootview for the navigation controller and keep it in a variable
     let leftSideNav = UINavigationController(rootViewController: leftViewController)
     leftSideNav.setNavigationBarHidden(true, animated: false)
-
-    //Set the center view as the rootview for the navigation controller and keep it in a variable
     let centerNav = UINavigationController(rootViewController: centerViewController)
-
-    //Set the right view as the rootview for the navigation controller and keep it in a variable
     let rightNav = UINavigationController(rootViewController: rightViewController)
 
     //Create the MMDrawerController and keep it in a variable named center container
     let centerContainer:MMDrawerController = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftSideNav,rightDrawerViewController:rightNav)
 
-
     //Open and Close gestures for the center container
 
-    //Set the open gesture for the center container
     centerContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
+    centerContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
 
     //Setting the width of th right view
     //centerContainer.setMaximumRightDrawerWidth(appDelegate.window!.frame.width, animated: true, completion: nil)
-    //Set the close gesture for the center container
-    centerContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
-
-
-
-
+    
     //Set the centerContainer in the appDelegate.swift as the center container
     appDelegate.centerContainer = centerContainer
 
     //Set the rootViewController as the center container
     appDelegate.window!.rootViewController = appDelegate.centerContainer
-
-
     appDelegate.window!.makeKeyAndVisible()
 
-    //    self.navigationController?.pushViewController(listViewController, animated: true)
   }
 
   func handleFailedAuth(error: NSError) {
@@ -219,19 +199,14 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
   func validateFields(){
     //Check if username is empty
     
-    if(userNameTextField.text == ""){
+    if(userNameTextField.text == nil || userNameTextField.text!.isEmpty){
 
       //if empty change username textfield border color to red
       userNameTextField.layer.borderColor = UIColor.redColor().CGColor
       userNameTextField.layer.borderWidth = 1.0
 
-      //Create View Controller
       let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("loginPopover")
-
-      //Set it as popover
       popoverVC!.modalPresentationStyle = .Popover
-
-      //Set the size
       popoverVC!.preferredContentSize = CGSizeMake(250, 50)
 
 
@@ -241,35 +216,22 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
         popoverController.sourceView = userNameTextField
         popoverController.sourceRect = userNameTextField.bounds
         
-
         //Popover above the textfield
         popoverController.permittedArrowDirections = .Down
-
-        //Set the delegate
         popoverController.delegate = self
       }
       
       //Show the popover
       presentViewController(popoverVC!, animated: true, completion: nil)
 
-    }
-
-      //Check if password is empty
-
-    else if(passwordTextField.text == ""){
+    }else if(passwordTextField.text == nil || passwordTextField.text!.isEmpty){
 
       //if empty change password textfield border color to red
       passwordTextField.layer.borderColor = UIColor.redColor().CGColor
       passwordTextField.layer.borderWidth = 1.0
 
-
-      //Create popover controller
       let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("loginPopover")
-
-      //Set it as popover
       popoverVC!.modalPresentationStyle = .Popover
-
-      //Set the size
       popoverVC?.preferredContentSize = CGSizeMake(250, 50)
 
       if let popoverController = popoverVC!.popoverPresentationController {
@@ -280,8 +242,6 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
 
         //Popover above the textfield
         popoverController.permittedArrowDirections = .Down
-
-        //Set the delegate
         popoverController.delegate = self
 
         //Show the popover
@@ -303,19 +263,6 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
     passwordTextField.layer.borderWidth = 0.0
     
   }
-  
-  
-  
-  //Register a new acoount action
-  @IBAction func registerNewAccountTapped(sender: AnyObject) {
-  }
-  
-  
-  //Forgot password action
-  @IBAction func forgotPasswordTapped(sender: AnyObject) {
-  }
-  
-  
   
   //Dismissing the keyboard
   @IBAction func dismissKeyboard(sender: AnyObject) {
