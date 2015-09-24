@@ -1,5 +1,6 @@
 PODS:
   - JSQCoreDataKit (2.0.0)
+  - M13OrderedDictionary (1.0.6)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -12,11 +13,16 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
+  - ObjectiveDDP (0.1.8):
+    - M13OrderedDictionary
+    - SocketRocket (= 0.3.1-beta2)
+  - SocketRocket (0.3.1-beta2)
 
 DEPENDENCIES:
   - JSQCoreDataKit (from `https://github.com/jessesquires/JSQCoreDataKit.git`, branch
     `release-2.0`)
   - MMDrawerController (~> 0.6.0)
+  - ObjectiveDDP (~> 0.1.8)
 
 EXTERNAL SOURCES:
   JSQCoreDataKit:
@@ -30,6 +36,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   JSQCoreDataKit: 6b8c511bedc9cf17fce944a42cb0f1f2090e1fab
+  M13OrderedDictionary: ca1bb2d743fd64500ffabee811d4bf2d0a65c908
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
+  ObjectiveDDP: 87609d002487bdb2e81b460de707b684551c04de
+  SocketRocket: 7284ab9370a06c99aba92b2fe3a32aedd0f9a6fa
 
 COCOAPODS: 0.38.2

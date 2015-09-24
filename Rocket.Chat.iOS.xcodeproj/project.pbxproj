@@ -18,6 +18,8 @@
 		410CEB2C1B8B390400CAFFE9 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB291B8B390400CAFFE9 /* ChatRoom.swift */; };
 		410CEB2D1B8B390400CAFFE9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB2A1B8B390400CAFFE9 /* Message.swift */; };
 		410CEB2E1B8B390400CAFFE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB2B1B8B390400CAFFE9 /* User.swift */; };
+		4F18F6811BB2F40B00048D7E /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6801BB2F40B00048D7E /* bridge.m */; settings = {ASSET_TAGS = (); }; };
+		4F18F6851BB3545500048D7E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6841BB3545500048D7E /* BaseViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		4F28B1571B903B6D0033D8D1 /* LeftMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F28B1551B903B6D0033D8D1 /* LeftMenu.storyboard */; };
 		4F28B1591B90FF230033D8D1 /* AccountBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B1581B90FF230033D8D1 /* AccountBarViewController.swift */; };
 		4F28B1601B9101720033D8D1 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B15B1B9101720033D8D1 /* FavoritesTableViewCell.swift */; };
@@ -83,8 +85,10 @@
 		410CEB291B8B390400CAFFE9 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatRoom.swift; path = Models/ChatRoom.swift; sourceTree = "<group>"; };
 		410CEB2A1B8B390400CAFFE9 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
 		410CEB2B1B8B390400CAFFE9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
-		410CEB2F1B8B391100CAFFE9 /* Rocket.Chat.iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket.Chat.iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		410CEB2F1B8B391100CAFFE9 /* Rocket_Chat_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket_Chat_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		4227E3B51FEB156513C2D7BD /* Pods_Rocket_Chat_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F18F6801BB2F40B00048D7E /* bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bridge.m; sourceTree = "<group>"; };
+		4F18F6841BB3545500048D7E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = ViewControllers/BaseViewController.swift; sourceTree = "<group>"; };
 		4F28B1561B903B6D0033D8D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LeftMenu.storyboard; sourceTree = "<group>"; };
 		4F28B1581B90FF230033D8D1 /* AccountBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountBarViewController.swift; path = ViewControllers/AccountBarViewController.swift; sourceTree = "<group>"; };
 		4F28B15B1B9101720033D8D1 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
@@ -175,6 +179,7 @@
 		410CEB151B8B387500CAFFE9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4F18F6841BB3545500048D7E /* BaseViewController.swift */,
 				4F28B1681B9493B10033D8D1 /* ChatsNavTableViewController.swift */,
 				410CEB251B8B38A800CAFFE9 /* Auth */,
 				410CEB1E1B8B388F00CAFFE9 /* LeftViewController.swift */,
@@ -247,6 +252,7 @@
 		4FB7E4D11B70111D00C69777 /* Rocket.Chat.iOS */ = {
 			isa = PBXGroup;
 			children = (
+				4F18F6801BB2F40B00048D7E /* bridge.m */,
 				402A141B1B723E1D00B60093 /* Model */,
 				410CEB161B8B387B00CAFFE9 /* Cells */,
 				410CEB151B8B387500CAFFE9 /* ViewControllers */,
@@ -258,7 +264,7 @@
 				4F28B1551B903B6D0033D8D1 /* LeftMenu.storyboard */,
 				4FB7E4DE1B70111D00C69777 /* Assets.xcassets */,
 				4FB7E4D41B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld */,
-				410CEB2F1B8B391100CAFFE9 /* Rocket.Chat.iOS-Bridging-Header.h */,
+				410CEB2F1B8B391100CAFFE9 /* Rocket_Chat_iOS-Bridging-Header.h */,
 				410CEB281B8B38B200CAFFE9 /* Supporting FIles */,
 			);
 			path = Rocket.Chat.iOS;
@@ -515,6 +521,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F18F6811BB2F40B00048D7E /* bridge.m in Sources */,
 				410CEB271B8B38A800CAFFE9 /* LoginViewController.swift in Sources */,
 				4F28B1631B9101720033D8D1 /* ChannelsTableViewCell.swift in Sources */,
 				410CEB141B8B386E00CAFFE9 /* AppDelegate.swift in Sources */,
@@ -526,6 +533,7 @@
 				4F28B1611B9101720033D8D1 /* DirectMessagesTableViewCell.swift in Sources */,
 				410CEB2D1B8B390400CAFFE9 /* Message.swift in Sources */,
 				410CEB1C1B8B388300CAFFE9 /* NoDetailsTableViewCell.swift in Sources */,
+				4F18F6851BB3545500048D7E /* BaseViewController.swift in Sources */,
 				DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */,
 				4F28B1691B9493B10033D8D1 /* ChatsNavTableViewController.swift in Sources */,
 				410CEB2E1B8B390400CAFFE9 /* User.swift in Sources */,
@@ -717,7 +725,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket.Chat.iOS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket_Chat_iOS-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -737,7 +745,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket.Chat.iOS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket_Chat_iOS-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 			};
 			name = Release;
