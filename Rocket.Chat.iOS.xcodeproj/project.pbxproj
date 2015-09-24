@@ -20,6 +20,7 @@
 		410CEB2E1B8B390400CAFFE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB2B1B8B390400CAFFE9 /* User.swift */; };
 		4F18F6811BB2F40B00048D7E /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6801BB2F40B00048D7E /* bridge.m */; settings = {ASSET_TAGS = (); }; };
 		4F18F6851BB3545500048D7E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6841BB3545500048D7E /* BaseViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4F18F6871BB4103A00048D7E /* UsernameRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6861BB4103A00048D7E /* UsernameRegistrationViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		4F28B1571B903B6D0033D8D1 /* LeftMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F28B1551B903B6D0033D8D1 /* LeftMenu.storyboard */; };
 		4F28B1591B90FF230033D8D1 /* AccountBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B1581B90FF230033D8D1 /* AccountBarViewController.swift */; };
 		4F28B1601B9101720033D8D1 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B15B1B9101720033D8D1 /* FavoritesTableViewCell.swift */; };
@@ -89,6 +90,7 @@
 		4227E3B51FEB156513C2D7BD /* Pods_Rocket_Chat_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F18F6801BB2F40B00048D7E /* bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bridge.m; sourceTree = "<group>"; };
 		4F18F6841BB3545500048D7E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = ViewControllers/BaseViewController.swift; sourceTree = "<group>"; };
+		4F18F6861BB4103A00048D7E /* UsernameRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameRegistrationViewController.swift; sourceTree = "<group>"; };
 		4F28B1561B903B6D0033D8D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LeftMenu.storyboard; sourceTree = "<group>"; };
 		4F28B1581B90FF230033D8D1 /* AccountBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountBarViewController.swift; path = ViewControllers/AccountBarViewController.swift; sourceTree = "<group>"; };
 		4F28B15B1B9101720033D8D1 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				4F28B1581B90FF230033D8D1 /* AccountBarViewController.swift */,
 				4F28B1641B93514E0033D8D1 /* AccountOptionsTableViewController.swift */,
 				4F28B1661B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift */,
+				4F18F6861BB4103A00048D7E /* UsernameRegistrationViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				4F28B1591B90FF230033D8D1 /* AccountBarViewController.swift in Sources */,
 				4F28B1651B93514E0033D8D1 /* AccountOptionsTableViewController.swift in Sources */,
 				4F28B1601B9101720033D8D1 /* FavoritesTableViewCell.swift in Sources */,
+				4F18F6871BB4103A00048D7E /* UsernameRegistrationViewController.swift in Sources */,
 				410CEB2C1B8B390400CAFFE9 /* ChatRoom.swift in Sources */,
 				410CEB231B8B388F00CAFFE9 /* RightViewController.swift in Sources */,
 				4F28B1671B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift in Sources */,
