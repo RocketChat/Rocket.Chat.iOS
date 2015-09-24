@@ -21,6 +21,7 @@ class User : NSManagedObject {
     
     @NSManaged dynamic var id : String
     @NSManaged dynamic var username : String
+    @NSManaged dynamic var sessionToken : String
     @NSManaged dynamic var password : String? //Password is only for the local user, not remote
     
     /// Avatar url or image name.
@@ -50,12 +51,13 @@ class User : NSManagedObject {
         }
     }
 
-    convenience init(context: NSManagedObjectContext, id:String, username:String, avatar:UIImage!, status : Status, timezone : NSTimeZone){
+  convenience init(context: NSManagedObjectContext, id:String, username:String, sessionToken: String, avatar:UIImage!, status : Status, timezone : NSTimeZone){
         let entity = NSEntityDescription.entityForName("User", inManagedObjectContext: context)!
         self.init(entity: entity, insertIntoManagedObjectContext: context)
         self.id = id
         self.username = username
         self.avata = UIImagePNGRepresentation(avatar)!
+    	self.sessionToken = sessionToken
         //TODO: Setting status hear will cause an exception, come back later and check why (probably swift/compiler bug)
         //self.status = status
         setValue(NSNumber(short: status.rawValue), forKey: "statusVal")
