@@ -10,7 +10,11 @@ import UIKit
 import MMDrawerController
 
 class AccountOptionsTableViewController: UITableViewController {
-
+    
+    
+    //Variable to keep current user - This is just for now(?)
+    var currentCenterViewControllerCurrentUser = User?()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -63,11 +67,26 @@ class AccountOptionsTableViewController: UITableViewController {
             //get the appDelegate
             let appdelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             
+            
+            //Get the current Navigation Controller
+            let currentNavigationController = appdelegate.centerContainer?.centerViewController as! UINavigationController
+            
+            
+            /*** This is to get the current user from the view controller - This is just for now(?) ***/
+            //Get the current center view controller
+            if(currentNavigationController.viewControllers[0].isKindOfClass(ViewController)){
+                let currentCenterViewController = currentNavigationController.viewControllers[0] as! ViewController
+                currentCenterViewControllerCurrentUser = currentCenterViewController.currentUser
+            }
+            /******/
+            
+            
             //Create MySettingsViewController instance
-            let mySettingsVC = storyboard?.instantiateViewControllerWithIdentifier("mySettings")
+            let mySettingsVC = storyboard?.instantiateViewControllerWithIdentifier("mySettings") as! MySettingsViewController
             
             //Set it as rootViewController in the navigation controller
-            let centerNewNav = UINavigationController(rootViewController: mySettingsVC!)
+            let centerNewNav = UINavigationController(rootViewController: mySettingsVC)
+            
             
             //Set the settings controller as the center view controller in the MMDrawer
             appdelegate.centerContainer?.setCenterViewController(centerNewNav, withCloseAnimation: false, completion: nil)
@@ -106,6 +125,14 @@ class AccountOptionsTableViewController: UITableViewController {
             
             //Set the left menu's view
             tabBarController?.selectedViewController = tabBarController?.viewControllers![leftMenuTabBarController.findIndexOfMySettings()]
+            
+            
+            /*** This is also just for now(?) ***/
+            /*** We need to pass the current user to the SettingsMenuViewController which is going to be the new centerviewcontroller ***/
+            let settingsMenuViewController = tabBarController?.viewControllers![leftMenuTabBarController.findIndexOfMySettings()] as! SettingsMenuViewController
+            
+            settingsMenuViewController.currentUser = currentCenterViewControllerCurrentUser
+            /******/
             
         }
         
