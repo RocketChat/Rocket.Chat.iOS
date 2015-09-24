@@ -22,13 +22,69 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
   var currentUser = User?()
   var users = [User]()
   var meteor: MeteorClient!
-
+  
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
     let ad = UIApplication.sharedApplication().delegate as! AppDelegate
     meteor = ad.meteorClient
-  }
+    
+    
+    
+    
+    // TODO: check if session token exists and try to login with that.
+    
+    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    let context = delegate.stack!.context
+    
+    //Check for already logged in user
+    let ent = entity(name: "User", context: context)
+    
+    let request = FetchRequest<User>(entity: ent)
+    //Users that we have password for only
+    request.predicate = NSPredicate(format: "sessionToken != nil")
+    
+    
+    users = [User]()
+    do{
+      users = try fetch(request: request, inContext: context)
+      if (users.count>0) {
+        let currentUser: User? = users[0]
+        if (currentUser != nil){
+          
+          print(currentUser!.sessionToken)
+          
+          meteor.logonWithSessionToken(currentUser!.sessionToken, responseCallback: {(response, error) -> Void in
+            
+            if((error) != nil) {
+              print("error!!! \(error)")
+              return
+            }
+            print(response)
+          })
+//            
+//            if((error) != nil) {
+//            	print("error!!! \(error)")
+//            	return
+//            }
+//            	print(response)
+//            })
 
+          
+        }else{
+          print("no session found")
+        }
+      }else{
+        print("no users found")
+      }
+    }catch{
+      print("Error fetching users \(error)")
+    }
+    
+    
+    
+    
+  }
+  
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -52,7 +108,7 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
     
     let request = FetchRequest<User>(entity: ent)
     //Users that we have password for only
-    request.predicate = NSPredicate(format: "password != nil")
+    request.predicate = NSPredicate(format: "sessionToken != nil")
     
     
     users = [User]()
@@ -95,19 +151,19 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
     
     validateFields()
     
-
+    
     loginToServer(userNameTextField.text!, pass: passwordTextField.text!)
-
-
+    
+    
   }
-
+  
   func loginToServer(userName: String, pass: String) {
     if (!meteor.websocketReady) {
       let notConnectedAlert = UIAlertView(title: "Connection Error", message: "Can't find the Rocket.Chat server, try again", delegate: nil, cancelButtonTitle: "OK")
       notConnectedAlert.show()
       return
     }
-
+    
     meteor.logonWithUsernameOrEmail(userName, password: pass) {(response, error) -> Void in
       
       if((error) != nil) {
@@ -117,101 +173,132 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
       self.handleSuccessfulAuth(response)
     }
   }
-
+  
   func handleSuccessfulAuth(response: NSDictionary) {
-
-
+    
+    
     let result = response["result"] as? NSDictionary
     if (result == nil) {
       let err = NSError(domain: "Rocket.chat", code: 500, userInfo: ["msg": "empty result"])
       self.handleFailedAuth(err)
       return
     }
-
-    let token = result!["token"] as? NSString
-    // TODO: store token.
-
-    self.view.endEditing(true)
-
-    let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-
-
-    //Create and store the center the left and the right views and keep them in variables
-
-    //center view
-    let centerViewController = mainStoryboard.instantiateViewControllerWithIdentifier("viewController") as! ViewController
-
-    //left view
-    let leftViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftView") as! LeftViewController
-
-    //right view
-    let rightViewController = mainStoryboard.instantiateViewControllerWithIdentifier("rightView") as! RightViewController
-
-
-    // FIXME: see why we need the currentUser
-    //send the logged in user in the ViewController
-    centerViewController.currentUser = currentUser
-
-    //Set the left, right and center views as the rootviewcontroller for the navigation controller (one rootviewcontroller at a time)
-
-    let leftSideNav = UINavigationController(rootViewController: leftViewController)
-    leftSideNav.setNavigationBarHidden(true, animated: false)
-    let centerNav = UINavigationController(rootViewController: centerViewController)
-    let rightNav = UINavigationController(rootViewController: rightViewController)
-
-    //Create the MMDrawerController and keep it in a variable named center container
-    let centerContainer:MMDrawerController = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftSideNav,rightDrawerViewController:rightNav)
-
-    //Open and Close gestures for the center container
-
-    centerContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
-    centerContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
-
-    //Setting the width of th right view
-    //centerContainer.setMaximumRightDrawerWidth(appDelegate.window!.frame.width, animated: true, completion: nil)
     
-    //Set the centerContainer in the appDelegate.swift as the center container
-    appDelegate.centerContainer = centerContainer
-
-    //Set the rootViewController as the center container
-    appDelegate.window!.rootViewController = appDelegate.centerContainer
-    appDelegate.window!.makeKeyAndVisible()
-
+    
+    
+    let res = response["result"] as? NSDictionary
+    if (res != nil){
+      let serverSessionToken = res!["token"] as? String
+      let userId = res!["id"] as? String
+      if (serverSessionToken != nil && userId != nil){
+        
+        
+        //get the appdelegate and store it in a variable
+        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        let context = appDelegate.stack!.context
+        
+        //Create the user
+        _ = User(context: context, id: userId!, username: userNameTextField.text!, sessionToken: serverSessionToken!, avatar: UIImage(named: "Default-Avatar")!, status: .ONLINE, timezone: NSTimeZone.systemTimeZone())
+        
+        //Set the password
+        //        user.password = passwordTextField.text!
+        
+        //User is automatically is added to CoreData, but not saved, so we need to call
+        //save context next.
+        
+        //Save the user
+        saveContext(context, wait: true, completion:{(error: NSError?) -> Void in
+          if let err = error {
+            let alert = UIAlertController(title: "Alert", message: "My Error \(err.userInfo)", preferredStyle: UIAlertControllerStyle.Alert)
+            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
+            self.presentViewController(alert, animated: true, completion: nil)
+          }
+          
+        })
+        
+        
+        self.view.endEditing(true)
+        
+        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        
+        
+        //Create and store the center the left and the right views and keep them in variables
+        
+        //center view
+        let centerViewController = mainStoryboard.instantiateViewControllerWithIdentifier("viewController") as! ViewController
+        
+        //left view
+        let leftViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftView") as! LeftViewController
+        
+        //right view
+        let rightViewController = mainStoryboard.instantiateViewControllerWithIdentifier("rightView") as! RightViewController
+        
+        
+        // FIXME: see why we need the currentUser
+        //send the logged in user in the ViewController
+        centerViewController.currentUser = currentUser
+        
+        //Set the left, right and center views as the rootviewcontroller for the navigation controller (one rootviewcontroller at a time)
+        
+        let leftSideNav = UINavigationController(rootViewController: leftViewController)
+        leftSideNav.setNavigationBarHidden(true, animated: false)
+        let centerNav = UINavigationController(rootViewController: centerViewController)
+        let rightNav = UINavigationController(rootViewController: rightViewController)
+        
+        //Create the MMDrawerController and keep it in a variable named center container
+        let centerContainer:MMDrawerController = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftSideNav,rightDrawerViewController:rightNav)
+        
+        //Open and Close gestures for the center container
+        
+        centerContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
+        centerContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
+        
+        //Setting the width of th right view
+        //centerContainer.setMaximumRightDrawerWidth(appDelegate.window!.frame.width, animated: true, completion: nil)
+        
+        //Set the centerContainer in the appDelegate.swift as the center container
+        appDelegate.centerContainer = centerContainer
+        
+        //Set the rootViewController as the center container
+        appDelegate.window!.rootViewController = appDelegate.centerContainer
+        appDelegate.window!.makeKeyAndVisible()
+      }
+    }
+    
   }
-
+  
   func handleFailedAuth(error: NSError) {
     //create an alert
     let alert = UIAlertView(title: "Warning!", message: "Check your username / password combination", delegate: self, cancelButtonTitle: "Dismiss")
-
+    
     //empty textfields
     userNameTextField.text = ""
     passwordTextField.text = ""
-
-
+    
+    
     //show the alert
     alert.show()
-
+    
     //userNameTextField gets the focus
     userNameTextField.becomeFirstResponder()
   }
-
+  
   func validateFields(){
     //Check if username is empty
     
     if(userNameTextField.text == nil || userNameTextField.text!.isEmpty){
-
+      
       //if empty change username textfield border color to red
       userNameTextField.layer.borderColor = UIColor.redColor().CGColor
       userNameTextField.layer.borderWidth = 1.0
-
+      
       let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("loginPopover")
       popoverVC!.modalPresentationStyle = .Popover
       popoverVC!.preferredContentSize = CGSizeMake(250, 50)
-
-
+      
+      
       if let popoverController = popoverVC!.popoverPresentationController {
-
+        
         //Specify the anchor location
         popoverController.sourceView = userNameTextField
         popoverController.sourceRect = userNameTextField.bounds
@@ -223,36 +310,36 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
       
       //Show the popover
       presentViewController(popoverVC!, animated: true, completion: nil)
-
+      
     }else if(passwordTextField.text == nil || passwordTextField.text!.isEmpty){
-
+      
       //if empty change password textfield border color to red
       passwordTextField.layer.borderColor = UIColor.redColor().CGColor
       passwordTextField.layer.borderWidth = 1.0
-
+      
       let popoverVC = storyboard?.instantiateViewControllerWithIdentifier("loginPopover")
       popoverVC!.modalPresentationStyle = .Popover
       popoverVC?.preferredContentSize = CGSizeMake(250, 50)
-
+      
       if let popoverController = popoverVC!.popoverPresentationController {
-
+        
         //Specify the anchor location
         popoverController.sourceView = passwordTextField
         popoverController.sourceRect = passwordTextField.bounds
-
+        
         //Popover above the textfield
         popoverController.permittedArrowDirections = .Down
         popoverController.delegate = self
-
+        
         //Show the popover
         presentViewController(popoverVC!, animated: true, completion: nil)
-
+        
       }
-
+      
     }
   }
-
-
+  
+  
   
   func textFieldDidChange() {
     
@@ -278,8 +365,8 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
   }
   
   
-
-
-
-
+  
+  
+  
+  
 }
