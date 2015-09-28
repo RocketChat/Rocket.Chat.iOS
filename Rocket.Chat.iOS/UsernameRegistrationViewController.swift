@@ -9,15 +9,14 @@
 import UIKit
 import ObjectiveDDP
 
-class UsernameRegistrationViewController: UIViewController {
+class UsernameRegistrationViewController: AuthViewController {
   
   @IBOutlet weak var usernameField: UITextField!
   var meteor: MeteorClient!
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
-    let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-    meteor = ad.meteorClient
+
     
   }
   
@@ -25,9 +24,16 @@ class UsernameRegistrationViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+
+    let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+    meteor = ad.meteorClient
+    
+    print("set meteor client")
+    
+    let params = NSDictionary()
     
     //retrieve username suggestions from server
-    meteor.callMethodName("getUsernameSuggestion", parameters: nil, responseCallback: {(response, error) -> Void in
+    meteor.callMethodName("getUsernameSuggestion", parameters: [params], responseCallback: {(response, error) -> Void in
       
       if((error) != nil) {
         self.handleFailedUsernameLoad(error)
@@ -51,8 +57,7 @@ class UsernameRegistrationViewController: UIViewController {
       return
     }
     
-    let params = NSDictionary(dictionary: ["username": usernameField.text!])
-    meteor.callMethodName("setUsername", parameters: [params], responseCallback: {(response, error) -> Void in
+    meteor.callMethodName("setUsername", parameters: [usernameField.text!], responseCallback: {(response, error) -> Void in
       
       if((error) != nil) {
         self.handleFailedUsernameReg(error)
@@ -66,11 +71,14 @@ class UsernameRegistrationViewController: UIViewController {
 
   // MARK: SetUsernameHandlers
   func handleSuccessfulUsernameReg(response: NSDictionary){
-    
-    
+    createMainMMDrawer()
   }
 
   func handleFailedUsernameReg(error: NSError){
+    let alert = UIAlertView(title: "Sorry", message: "Failed to set username", delegate: self, cancelButtonTitle: "Dismiss")
+    alert.show()
+    print("\(error)")
+
   }
 
   
@@ -82,13 +90,8 @@ class UsernameRegistrationViewController: UIViewController {
   }
   
   func handleSuccessfulUsernameLoad(response: NSDictionary){
-    let res = response["result"] as? NSDictionary
-    if (res != nil){
-      let usernames = res!["usernames"] as? NSArray
-      if (usernames != nil){
-        usernameField.text = usernames![0] as? String
-      }
-    }
+    let res = response["result"] as? String
+    usernameField.text = res!
   }
   
 }

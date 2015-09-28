@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import JSQCoreDataKit
 import MMDrawerController
 import ObjectiveDDP
 
-class LoginViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class LoginViewController: AuthViewController, UIPopoverPresentationControllerDelegate {
   
   @IBOutlet var userNameTextField: UITextField!
   @IBOutlet var passwordTextField: UITextField!
@@ -19,69 +18,33 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
   
   
   //variable to get the logged in user
-  var currentUser = User?()
-  var users = [User]()
   var meteor: MeteorClient!
   
   override func viewWillAppear(animated: Bool) {
     super.viewWillAppear(animated)
+    
     let ad = UIApplication.sharedApplication().delegate as! AppDelegate
     meteor = ad.meteorClient
     
+  
+    let defaults = NSUserDefaults.standardUserDefaults()
+    if let sessionToken = defaults.stringForKey("sessionToken") {
+			print("sessionToken: \(sessionToken)")
     
     
     
+    meteor.logonWithSessionToken(sessionToken, responseCallback: {(response, error) -> Void in
+      
+      if((error) != nil) {
+        print("error!!! \(error)")
+        return
+      }
+      print(response)
+    })
+
     // TODO: check if session token exists and try to login with that.
     
-    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let context = delegate.stack!.context
-    
-    //Check for already logged in user
-    let ent = entity(name: "User", context: context)
-    
-    let request = FetchRequest<User>(entity: ent)
-    //Users that we have password for only
-    request.predicate = NSPredicate(format: "sessionToken != nil")
-    
-    
-    users = [User]()
-    do{
-      users = try fetch(request: request, inContext: context)
-      if (users.count>0) {
-        let currentUser: User? = users[0]
-        if (currentUser != nil){
-          
-          print(currentUser!.sessionToken)
-          
-          meteor.logonWithSessionToken(currentUser!.sessionToken, responseCallback: {(response, error) -> Void in
-            
-            if((error) != nil) {
-              print("error!!! \(error)")
-              return
-            }
-            print(response)
-          })
-//            
-//            if((error) != nil) {
-//            	print("error!!! \(error)")
-//            	return
-//            }
-//            	print(response)
-//            })
-
-          
-        }else{
-          print("no session found")
-        }
-      }else{
-        print("no users found")
-      }
-    }catch{
-      print("Error fetching users \(error)")
     }
-    
-    
-    
     
   }
   
@@ -100,36 +63,7 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
     //        userNameTextField.text = "info@rocket.chat"
     //        passwordTextField.text = "123qwe"
     
-    let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    let context = delegate.stack!.context
-    
-    //Check for already logged in user
-    let ent = entity(name: "User", context: context)
-    
-    let request = FetchRequest<User>(entity: ent)
-    //Users that we have password for only
-    request.predicate = NSPredicate(format: "sessionToken != nil")
-    
-    
-    users = [User]()
-    do{
-      users = try fetch(request: request, inContext: context)
-    }catch{
-      print("Error fetching users \(error)")
-    }
-    
-    //        if exists {
-    //            loginButtonTapped(userNameTextField.text!)
-    //        }
-    
-    //        if !users.isEmpty {
-    //            userNameTextField.text = users[0].username
-    //            passwordTextField.text = users[0].password
-    //            loginButtonTapped(users)
-    //        }
-    
-    
-  }
+   }
   
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
@@ -186,85 +120,9 @@ class LoginViewController: UIViewController, UIPopoverPresentationControllerDele
     
     
     
-    let res = response["result"] as? NSDictionary
-    if (res != nil){
-      let serverSessionToken = res!["token"] as? String
-      let userId = res!["id"] as? String
-      if (serverSessionToken != nil && userId != nil){
-        
-        
-        //get the appdelegate and store it in a variable
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let context = appDelegate.stack!.context
-        
-        //Create the user
-        _ = User(context: context, id: userId!, username: userNameTextField.text!, sessionToken: serverSessionToken!, avatar: UIImage(named: "Default-Avatar")!, status: .ONLINE, timezone: NSTimeZone.systemTimeZone())
-        
-        //Set the password
-        //        user.password = passwordTextField.text!
-        
-        //User is automatically is added to CoreData, but not saved, so we need to call
-        //save context next.
-        
-        //Save the user
-        saveContext(context, wait: true, completion:{(error: NSError?) -> Void in
-          if let err = error {
-            let alert = UIAlertController(title: "Alert", message: "My Error \(err.userInfo)", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-          }
-          
-        })
-        
-        
-        self.view.endEditing(true)
-        
-        let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        
-        //Create and store the center the left and the right views and keep them in variables
-        
-        //center view
-        let centerViewController = mainStoryboard.instantiateViewControllerWithIdentifier("viewController") as! ViewController
-        
-        //left view
-        let leftViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftView") as! LeftViewController
-        
-        //right view
-        let rightViewController = mainStoryboard.instantiateViewControllerWithIdentifier("rightView") as! RightViewController
-        
-        
-        // FIXME: see why we need the currentUser
-        //send the logged in user in the ViewController
-        centerViewController.currentUser = currentUser
-        
-        //Set the left, right and center views as the rootviewcontroller for the navigation controller (one rootviewcontroller at a time)
-        
-        let leftSideNav = UINavigationController(rootViewController: leftViewController)
-        leftSideNav.setNavigationBarHidden(true, animated: false)
-        let centerNav = UINavigationController(rootViewController: centerViewController)
-        let rightNav = UINavigationController(rootViewController: rightViewController)
-        
-        //Create the MMDrawerController and keep it in a variable named center container
-        let centerContainer:MMDrawerController = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftSideNav,rightDrawerViewController:rightNav)
-        
-        //Open and Close gestures for the center container
-        
-        centerContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
-        centerContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
-        
-        //Setting the width of th right view
-        //centerContainer.setMaximumRightDrawerWidth(appDelegate.window!.frame.width, animated: true, completion: nil)
-        
-        //Set the centerContainer in the appDelegate.swift as the center container
-        appDelegate.centerContainer = centerContainer
-        
-        //Set the rootViewController as the center container
-        appDelegate.window!.rootViewController = appDelegate.centerContainer
-        appDelegate.window!.makeKeyAndVisible()
-      }
+    if (getTokenAndSaveUser(userNameTextField.text!, response: response)){
+     	createMainMMDrawer()
     }
-    
   }
   
   func handleFailedAuth(error: NSError) {

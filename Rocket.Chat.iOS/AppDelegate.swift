@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import JSQCoreDataKit
 import MMDrawerController
 import ObjectiveDDP
 
@@ -18,15 +17,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   // Variable to keep the MMDrawerController instance
   var centerContainer : MMDrawerController?
-  private(set) var model : CoreDataModel?
-  private(set) var stack : CoreDataStack?
   
   var meteorClient = initialiseMeteor("pre2", "ws://localhost:4000/websocket");
   
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-    model = CoreDataModel(name: "Rocket_Chat_iOS")
-    stack = CoreDataStack(model: model!)
     
     let observingOption = NSKeyValueObservingOptions.New
     meteorClient.addObserver(self, forKeyPath:"websocketReady", options: observingOption, context:nil)
