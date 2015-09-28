@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import JSQCoreDataKit
 import ObjectiveDDP
 
-class RegisterViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+class RegisterViewController: AuthViewController, UIPopoverPresentationControllerDelegate {
   
   @IBOutlet var nameTextField: UITextField!
   @IBOutlet var emailTextField: UITextField!
@@ -219,49 +218,40 @@ class RegisterViewController: UIViewController, UIPopoverPresentationControllerD
 
     // FIXME: look into whether we need this!!
     
-    let res = response["result"] as? NSDictionary
+    let res = response["id"] as? String
     if (res != nil){
-      let serverSessionToken = res!["token"] as? String
-      let userId = res!["id"] as? String
-      if (serverSessionToken != nil && userId != nil){
+      
+      meteor.logonWithEmail(emailTextField.text!, password: passwordTextField.text!, responseCallback: {(response, error) -> Void in
         
-        
-        //get the appdelegate and store it in a variable
-        let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let context = appDelegate.stack!.context
-        
-        //Create the user
-        _ = User(context: context, id: userId!, username: nameTextField.text!, sessionToken: serverSessionToken!, avatar: UIImage(named: "Default-Avatar")!, status: .ONLINE, timezone: NSTimeZone.systemTimeZone())
-        
-        //User is automatically is added to CoreData, but not saved, so we need to call
-        //save context next.
-        
-        //Save the user
-        saveContext(context, wait: true, completion:{(error: NSError?) -> Void in
-          if let err = error {
-            let alert = UIAlertController(title: "Alert", message: "Error \(err.userInfo)", preferredStyle: UIAlertControllerStyle.Alert)
-            alert.addAction(UIAlertAction(title: "Click", style: UIAlertActionStyle.Default, handler: nil))
-            self.presentViewController(alert, animated: true, completion: nil)
-          }
-          
-        })
-        
-        
-        //Proceed to username selection screen.
-        self.performSegueWithIdentifier("selectUsername", sender: self)
-        
-      }
+        if((error) != nil) {
+          self.handleFailedReg(error)
+          return
+        }
+        self.handleSuccessfulLogin(response)
+      })
+
+
+      
+    
+    }
+    
+  }
+
+  func handleSuccessfulLogin(response: NSDictionary){
+    if(getTokenAndSaveUser(emailTextField.text!, response: response)){
+
+    	//Proceed to username selection screen.
+    	self.performSegueWithIdentifier("selectUsername", sender: self)
     }
     
   }
   
   func handleFailedReg(error: NSError){
     //Inform the not-registered user
-    let alert = UIAlertView(title: "Name Exists", message: "Username not available", delegate: self, cancelButtonTitle: "Dismiss")
+    let alert = UIAlertView(title: "Sorry", message: "An error occurred during registration", delegate: self, cancelButtonTitle: "Dismiss")
     alert.show()
 
   }
-  
   
   //Dismissing the keyboard
   @IBAction func dismissKeyboard(sender: AnyObject) {
