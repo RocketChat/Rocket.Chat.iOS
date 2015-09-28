@@ -630,7 +630,6 @@
                                 </variation>
                                 <connections>
                                     <action selector="submitToRegister:" destination="0zG-IY-4s9" eventType="touchUpInside" id="BJF-yx-5D4"/>
-                                    <segue destination="XkY-oO-q7v" kind="show" identifier="selectUsername" id="78h-hX-D7j"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M2B-9U-C1r">
@@ -702,6 +701,7 @@
                         <outlet property="emailTextField" destination="XgL-wv-sGi" id="CaQ-NF-daD"/>
                         <outlet property="nameTextField" destination="cp5-t6-WHT" id="jpt-oo-h8U"/>
                         <outlet property="passwordTextField" destination="EFE-ST-ThZ" id="5GR-L5-M7q"/>
+                        <segue destination="XkY-oO-q7v" kind="show" identifier="selectUsername" id="qaK-hF-CjT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Id0-yC-LLn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -956,7 +956,7 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The username is used to allow others to mention you in messages." textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sqP-5Z-qNO">
                                 <rect key="frame" x="40" y="188" width="241" height="40"/>
                                 <fontDescription key="fontDescription" style="UICTFontTextStyleCaption1"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register Username" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QbS-aA-MnC">
