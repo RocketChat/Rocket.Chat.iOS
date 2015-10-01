@@ -19,7 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var centerContainer : MMDrawerController?
   
     var meteorClient = initialiseMeteor("pre2", "ws://localhost:4000/websocket");
-//    var meteorClient = initialiseMeteor("pre2", "https://demo.rocket.chat/home");
+//    var meteorClient = initialiseMeteor("pre2", "https://demo.rocket.chat/home/websocket");
 
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
@@ -43,11 +43,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     return true
   }
   
-    func reportConnectionReady() {
-        
+  func reportConnectionReady() {
+   
+        print("Connection Ready")
         connectWithSessionToken()
-        
-    }
+  
+  }
     
   func reportConnection() {
     print("================> connected to server!")
@@ -85,50 +86,52 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     return
                 }
                 print(response)
+                
+                let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+                
+                
+                let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
+                
+                
+                //Create and store the center the left and the right views and keep them in variables
+                
+                //center view
+                let centerViewController = mainStoryboard.instantiateViewControllerWithIdentifier("viewController") as! ViewController
+                
+                //left view
+                let leftViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftView") as! LeftViewController
+                
+                //right view
+                let rightViewController = mainStoryboard.instantiateViewControllerWithIdentifier("rightView") as! RightViewController
+                
+                
+                //Set the left, right and center views as the rootviewcontroller for the navigation controller (one rootviewcontroller at a time)
+                
+                let leftSideNav = UINavigationController(rootViewController: leftViewController)
+                leftSideNav.setNavigationBarHidden(true, animated: false)
+                let centerNav = UINavigationController(rootViewController: centerViewController)
+                let rightNav = UINavigationController(rootViewController: rightViewController)
+                
+                //Create the MMDrawerController and keep it in a variable named center container
+                let centerContainer:MMDrawerController = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftSideNav,rightDrawerViewController:rightNav)
+                
+                //Open and Close gestures for the center container
+                
+                centerContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
+                centerContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
+                
+                //Setting the width of th right view
+                //centerContainer.setMaximumRightDrawerWidth(appDelegate.window!.frame.width, animated: true, completion: nil)
+                
+                //Set the centerContainer in the appDelegate.swift as the center container
+                appDelegate.centerContainer = centerContainer
+                
+                //Set the rootViewController as the center container
+                appDelegate.window!.rootViewController = appDelegate.centerContainer
+                appDelegate.window!.makeKeyAndVisible()
             })
             
-            let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            
-            let mainStoryboard: UIStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            
-            //Create and store the center the left and the right views and keep them in variables
-            
-            //center view
-            let centerViewController = mainStoryboard.instantiateViewControllerWithIdentifier("viewController") as! ViewController
-            
-            //left view
-            let leftViewController = mainStoryboard.instantiateViewControllerWithIdentifier("leftView") as! LeftViewController
-            
-            //right view
-            let rightViewController = mainStoryboard.instantiateViewControllerWithIdentifier("rightView") as! RightViewController
-            
-            
-            //Set the left, right and center views as the rootviewcontroller for the navigation controller (one rootviewcontroller at a time)
-            
-            let leftSideNav = UINavigationController(rootViewController: leftViewController)
-            leftSideNav.setNavigationBarHidden(true, animated: false)
-            let centerNav = UINavigationController(rootViewController: centerViewController)
-            let rightNav = UINavigationController(rootViewController: rightViewController)
-            
-            //Create the MMDrawerController and keep it in a variable named center container
-            let centerContainer:MMDrawerController = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftSideNav,rightDrawerViewController:rightNav)
-            
-            //Open and Close gestures for the center container
-            
-            centerContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
-            centerContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
-            
-            //Setting the width of th right view
-            //centerContainer.setMaximumRightDrawerWidth(appDelegate.window!.frame.width, animated: true, completion: nil)
-            
-            //Set the centerContainer in the appDelegate.swift as the center container
-            appDelegate.centerContainer = centerContainer
-            
-            //Set the rootViewController as the center container
-            appDelegate.window!.rootViewController = appDelegate.centerContainer
-            appDelegate.window!.makeKeyAndVisible()
+        
         }
         
         
