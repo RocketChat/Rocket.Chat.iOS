@@ -27,25 +27,27 @@ class LoginViewController: AuthViewController, UIPopoverPresentationControllerDe
     let ad = UIApplication.sharedApplication().delegate as! AppDelegate
     meteor = ad.meteorClient
     
+
+//We have to see how to do the login
     
-    let defaults = NSUserDefaults.standardUserDefaults()
-    if let sessionToken = defaults.stringForKey("sessionToken") {
-        print("sessionToken: \(sessionToken)")
-        
-        
-        
-        meteor.logonWithSessionToken(sessionToken, responseCallback: {(response, error) -> Void in
-            
-            if((error) != nil) {
-                print("error!!! \(error)")
-                return
-            }
-            print(response)
-        })
-        
-        // TODO: check if session token exists and try to login with that.
-        
-    }
+//    let defaults = NSUserDefaults.standardUserDefaults()
+//    if let sessionToken = defaults.stringForKey("sessionToken") {
+//        print("sessionToken: \(sessionToken)")
+//        
+//        
+//        
+//        meteor.logonWithSessionToken(sessionToken, responseCallback: {(response, error) -> Void in
+//            
+//            if((error) != nil) {
+//                print("error!!! \(error)")
+//                return
+//            }
+//            print(response)
+//        })
+//        
+//        // TODO: check if session token exists and try to login with that.
+//        
+//    }
     
     
     
