@@ -18,8 +18,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // Variable to keep the MMDrawerController instance
   var centerContainer : MMDrawerController?
   
-  var meteorClient = initialiseMeteor("pre2", "ws://localhost:4000/websocket");
-  //    var meteorClient = initialiseMeteor("pre2", "https://demo.rocket.chat/home/websocket");
+    var meteorClient = initialiseMeteor("pre2", "ws://localhost:4000/websocket");
+//    var meteorClient = initialiseMeteor("pre2", "https://demo.rocket.chat/websocket");
+
   
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
