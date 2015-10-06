@@ -62,7 +62,7 @@ class AccountOptionsTableViewController: UITableViewController {
     
         
         //If user selects MySettings
-        if indexPath.row == 0 {
+        if (indexPath.section == 1 && indexPath.row == 0) {
          
             //get the appDelegate
             let appdelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -135,6 +135,32 @@ class AccountOptionsTableViewController: UITableViewController {
             /******/
             
         }
+        else if (indexPath.section == 1 && indexPath.row == 1) {
+            
+            let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+            let meteor = ad.meteorClient
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyboard.instantiateInitialViewController()
+            
+            
+            if (meteor.connected){
+            
+                meteor.logout()
+                print("Logged out")
+                ad.window?.rootViewController = loginVC
+                
+            } else {
+            
+                let alert = UIAlertController(title: "Error", message: "Connection is lost", preferredStyle: UIAlertControllerStyle.Alert)
+                let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+                alert.addAction(cancel)
+                self.presentViewController(alert, animated: true, completion: nil)
+                
+            }
+                
+    
+        }
+        
         
     }
     
