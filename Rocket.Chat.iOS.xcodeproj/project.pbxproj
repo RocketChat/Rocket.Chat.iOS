@@ -35,8 +35,17 @@
 		4FB7E4F81B70111E00C69777 /* Rocket_Chat_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7E4F71B70111E00C69777 /* Rocket_Chat_iOSUITests.swift */; };
 		783304F2FCA3B826852C6DD2 /* Pods_Rocket_Chat_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4227E3B51FEB156513C2D7BD /* Pods_Rocket_Chat_iOS.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A5A3A9721B93CBEE00CFE8FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5A3A9741B93CBEE00CFE8FB /* Localizable.strings */; };
+		DF113AE51BA6D87B00CE6D17 /* MyAccountBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF113AE41BA6D87B00CE6D17 /* MyAccountBarViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF113AE91BA6D91000CE6D17 /* MyAccountBarTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E51B8DC6280014548B /* RegisterViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF3B322C1BC32E6500C856A9 /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = DF3B322B1BC32E6500C856A9 /* bridge.m */; settings = {ASSET_TAGS = (); }; };
+		DF3B322E1BC333D500C856A9 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF3B322D1BC333D500C856A9 /* AuthViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF5F92611BAC4304000EA4C3 /* MessagesOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF5F92631BAC4315000EA4C3 /* SoundOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF7A4F571BC3BE10000B4C08 /* UsernameRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7A4F561BC3BE10000B4C08 /* UsernameRegistrationViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF7CD46C1BA585B6004B55E9 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF8C851F1BA48A97005E37D2 /* MySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8C851E1BA48A97005E37D2 /* MySettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */; settings = {ASSET_TAGS = (); }; };
 		DFC070F31B9450A500B88313 /* Right.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F11B9450A500B88313 /* Right.storyboard */; settings = {ASSET_TAGS = (); }; };
 		DFC071011B94615300B88313 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F51B94615300B88313 /* Roboto-Black.ttf */; settings = {ASSET_TAGS = (); }; };
@@ -51,6 +60,8 @@
 		DFC0710A1B94615300B88313 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FE1B94615300B88313 /* Roboto-Regular.ttf */; settings = {ASSET_TAGS = (); }; };
 		DFC0710B1B94615300B88313 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FF1B94615300B88313 /* Roboto-Thin.ttf */; settings = {ASSET_TAGS = (); }; };
 		DFC0710C1B94615300B88313 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC071001B94615300B88313 /* Roboto-ThinItalic.ttf */; settings = {ASSET_TAGS = (); }; };
+		DFEEBE6C1BAF4DCD00DE1825 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEEBE6B1BAF4DCD00DE1825 /* profileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DFEEBE6E1BAF53E800DE1825 /* ChangeAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEEBE6D1BAF53E800DE1825 /* ChangeAvatarViewController.swift */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -108,8 +119,17 @@
 		4FB7E4F91B70111E00C69777 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A5A3A9731B93CBEE00CFE8FB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A5A3A9751B93CBFC00CFE8FB /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
-		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ViewControllers/RegisterViewController.swift; sourceTree = "<group>"; };
+		DF113AE41BA6D87B00CE6D17 /* MyAccountBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountBarViewController.swift; sourceTree = "<group>"; };
+		DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountBarTabViewController.swift; sourceTree = "<group>"; };
+		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ../RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		DF3B322B1BC32E6500C856A9 /* bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bridge.m; sourceTree = "<group>"; };
+		DF3B322D1BC333D500C856A9 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
+		DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesOptionsViewController.swift; sourceTree = "<group>"; };
+		DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundOptionsViewController.swift; sourceTree = "<group>"; };
+		DF7A4F561BC3BE10000B4C08 /* UsernameRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameRegistrationViewController.swift; sourceTree = "<group>"; };
+		DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenuViewController.swift; sourceTree = "<group>"; };
+		DF8C851E1BA48A97005E37D2 /* MySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySettingsViewController.swift; sourceTree = "<group>"; };
 		DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+hexValue.swift"; path = "../UIColor+hexValue.swift"; sourceTree = "<group>"; };
 		DFC070F21B9450A500B88313 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Right.storyboard; sourceTree = "<group>"; };
 		DFC070F51B94615300B88313 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
@@ -124,6 +144,8 @@
 		DFC070FE1B94615300B88313 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		DFC070FF1B94615300B88313 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Thin.ttf"; sourceTree = "<group>"; };
 		DFC071001B94615300B88313 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		DFEEBE6B1BAF4DCD00DE1825 /* profileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = profileViewController.swift; sourceTree = "<group>"; };
+		DFEEBE6D1BAF53E800DE1825 /* ChangeAvatarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChangeAvatarViewController.swift; sourceTree = "<group>"; };
 		E8B42BE2CCF2AD5BB7DE9FF1 /* Pods-Rocket.Chat.iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.iOS/Pods-Rocket.Chat.iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -180,11 +202,18 @@
 				410CEB1E1B8B388F00CAFFE9 /* LeftViewController.swift */,
 				410CEB1F1B8B388F00CAFFE9 /* RightViewController.swift */,
 				410CEB201B8B388F00CAFFE9 /* ViewController.swift */,
-				DF2A60E51B8DC6280014548B /* RegisterViewController.swift */,
 				DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */,
 				4F28B1581B90FF230033D8D1 /* AccountBarViewController.swift */,
+				DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */,
+				DF113AE41BA6D87B00CE6D17 /* MyAccountBarViewController.swift */,
 				4F28B1641B93514E0033D8D1 /* AccountOptionsTableViewController.swift */,
 				4F28B1661B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift */,
+				DF8C851E1BA48A97005E37D2 /* MySettingsViewController.swift */,
+				DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */,
+				DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */,
+				DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */,
+				DFEEBE6B1BAF4DCD00DE1825 /* profileViewController.swift */,
+				DFEEBE6D1BAF53E800DE1825 /* ChangeAvatarViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -206,7 +235,10 @@
 		410CEB251B8B38A800CAFFE9 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				DF2A60E51B8DC6280014548B /* RegisterViewController.swift */,
+				DF7A4F561BC3BE10000B4C08 /* UsernameRegistrationViewController.swift */,
 				410CEB261B8B38A800CAFFE9 /* LoginViewController.swift */,
+				DF3B322D1BC333D500C856A9 /* AuthViewController.swift */,
 			);
 			name = Auth;
 			path = ViewControllers/Auth;
@@ -247,6 +279,7 @@
 		4FB7E4D11B70111D00C69777 /* Rocket.Chat.iOS */ = {
 			isa = PBXGroup;
 			children = (
+				DF3B322B1BC32E6500C856A9 /* bridge.m */,
 				402A141B1B723E1D00B60093 /* Model */,
 				410CEB161B8B387B00CAFFE9 /* Cells */,
 				410CEB151B8B387500CAFFE9 /* ViewControllers */,
@@ -516,21 +549,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				410CEB271B8B38A800CAFFE9 /* LoginViewController.swift in Sources */,
+				DF7CD46C1BA585B6004B55E9 /* SettingsMenuViewController.swift in Sources */,
 				4F28B1631B9101720033D8D1 /* ChannelsTableViewCell.swift in Sources */,
 				410CEB141B8B386E00CAFFE9 /* AppDelegate.swift in Sources */,
 				4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */,
+				DF7A4F571BC3BE10000B4C08 /* UsernameRegistrationViewController.swift in Sources */,
 				410CEB1B1B8B388300CAFFE9 /* MainTableViewCell.swift in Sources */,
+				DF5F92631BAC4315000EA4C3 /* SoundOptionsViewController.swift in Sources */,
 				410CEB241B8B388F00CAFFE9 /* ViewController.swift in Sources */,
+				DFEEBE6C1BAF4DCD00DE1825 /* profileViewController.swift in Sources */,
 				DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */,
 				410CEB1A1B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift in Sources */,
 				4F28B1611B9101720033D8D1 /* DirectMessagesTableViewCell.swift in Sources */,
+				DF113AE91BA6D91000CE6D17 /* MyAccountBarTabViewController.swift in Sources */,
 				410CEB2D1B8B390400CAFFE9 /* Message.swift in Sources */,
 				410CEB1C1B8B388300CAFFE9 /* NoDetailsTableViewCell.swift in Sources */,
 				DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */,
+				DF3B322C1BC32E6500C856A9 /* bridge.m in Sources */,
 				4F28B1691B9493B10033D8D1 /* ChatsNavTableViewController.swift in Sources */,
 				410CEB2E1B8B390400CAFFE9 /* User.swift in Sources */,
 				410CEB221B8B388F00CAFFE9 /* LeftViewController.swift in Sources */,
+				DFEEBE6E1BAF53E800DE1825 /* ChangeAvatarViewController.swift in Sources */,
 				DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */,
+				DF3B322E1BC333D500C856A9 /* AuthViewController.swift in Sources */,
 				4F28B1591B90FF230033D8D1 /* AccountBarViewController.swift in Sources */,
 				4F28B1651B93514E0033D8D1 /* AccountOptionsTableViewController.swift in Sources */,
 				4F28B1601B9101720033D8D1 /* FavoritesTableViewCell.swift in Sources */,
@@ -538,6 +579,9 @@
 				410CEB231B8B388F00CAFFE9 /* RightViewController.swift in Sources */,
 				4F28B1671B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift in Sources */,
 				4F28B1621B9101720033D8D1 /* PrivateGroupsTableViewCell.swift in Sources */,
+				DF5F92611BAC4304000EA4C3 /* MessagesOptionsViewController.swift in Sources */,
+				DF113AE51BA6D87B00CE6D17 /* MyAccountBarViewController.swift in Sources */,
+				DF8C851F1BA48A97005E37D2 /* MySettingsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

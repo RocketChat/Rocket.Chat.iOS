@@ -13,7 +13,8 @@ class LeftViewController: UIViewController, SwitchAccountViewDelegate {
   @IBOutlet weak var accountTopView: UIView!
   @IBOutlet weak var leftMainContainer: UIView!
   
-  var tabBarContainer : LeftMenuTabBarViewController?
+    var accountTabBarContainer : MyAccountBarTabViewController?
+    var tabBarContainer : LeftMenuTabBarViewController?
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,8 +50,9 @@ class LeftViewController: UIViewController, SwitchAccountViewDelegate {
     
     //set self as the delegate in the account bar that will handle the event coming up from there.
     if segue.identifier == "embedAccountBar"{
-      let vc = segue.destinationViewController as! AccountBarViewController
-      vc.delegate = self
+      accountTabBarContainer = segue.destinationViewController as? MyAccountBarTabViewController
+        let accountBarTabView = accountTabBarContainer?.viewControllers![0] as! AccountBarViewController
+        accountBarTabView.delegate = self
     } else if segue.identifier == "embedChatNav"{
       tabBarContainer = segue.destinationViewController as? LeftMenuTabBarViewController
     }

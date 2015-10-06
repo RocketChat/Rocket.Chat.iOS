@@ -54,94 +54,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         mainTableview.addGestureRecognizer(doubleTapGesture)
         
         
-        /********* Dummy data *********/
-        let delegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let context = delegate.stack!.context
-
-        
-        //Create user u1
-        let u1:User = User(context: context, id: "1", username: "Komic", avatar: UIImage(named: "Default-Avatar")!, status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
-        
-        //Create some messages for u1
-        let msg1:Message = Message(id: "1", text: "Message 1 from Komic", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
-        let msg2:Message = Message(id: "2", text: "Bigger Message, number 2 from Komic just for fun", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
-        let msg3:Message = Message(id: "3", text: "Message 3 from Komic just to see what's up with the cell height", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
-        let msg4:Message = Message(id: "4", text: "Message 4 from Komic, a little smaller", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
-        let msg5:Message = Message(id: "5", text: "Message 5 from Komic is message 5", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u1)
-    
-        
-        //Create user u2
-        let u2:User = User(context: context, id: "2", username: "Yorgos", avatar: UIImage(named: "Default-Avatar")!, status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
-        
-        //Create some messages for u2
-        let msg6:Message = Message(id: "6", text: "Message 6 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
-        let msg7:Message = Message(id: "7", text: "Message 7 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
-        let msg8:Message = Message(id: "8", text: "Message 8 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
-        let msg9:Message = Message(id: "9", text: "Message 9 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
-        let msg10:Message = Message(id: "10", text: "Message 10 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
-        let msg11:Message = Message(id: "11", text: "Message 11 from Yorgos", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u2)
-        
-        
-        //Create user u3
-        let u3:User = User(context: context, id: "3", username: "GeorgeP", avatar: UIImage(named: "Default-Avatar")!, status: User.Status.ONLINE, timezone: NSTimeZone.systemTimeZone())
-        
-        //Create some messages for u3
-        let msg12:Message = Message(id: "12", text: "Message 12 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
-        let msg13:Message = Message(id: "13", text: "Message 13 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
-        let msg14:Message = Message(id: "14", text: "Message 14 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
-        let msg15:Message = Message(id: "15", text: "Message 15 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
-        let msg16:Message = Message(id: "16", text: "Message 16 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
-        let msg17:Message = Message(id: "17", text: "Message 17 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
-        let msg18:Message = Message(id: "18", text: "Message 18 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
-        let msg19:Message = Message(id: "19", text: "Message 19 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
-        let msg20:Message = Message(id: "20", text: "Message 20 from GeorgeP", tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: u3)
-        
-        //Create set of users
-        let uSet1:Set<User> = [u1, u2, u3]
-        
-        
-    
-        //Inserting messages in an array (DUMB way)
-        mArray1 = [msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, msg10, msg11, msg12, msg13, msg14, msg15, msg16, msg17, msg18, msg19, msg20]
-        
        
-        
-        //BubbleSort to keep messages in order by tstamps
-        let nElements = mArray1.count
-        
-        var didSwap = true
-        
-        while didSwap {
-            didSwap = false
-            
-            for i in 0..<nElements - 1 {
-                if (mArray1[i].tstamp.compare(mArray1[i+1].tstamp) == NSComparisonResult.OrderedDescending)  {
-                    let tmp = mArray1[i]
-                    mArray1[i] = mArray1[i+1]
-                    mArray1[i+1] = tmp
-                    didSwap = true
-                }
-            }
-        }
-        
-        
-          //Logs
-//        for i in mArray1 {
-//            
-//            print(i.text + " " + "\(i.user.username)")
-//            
-//        }
-        
-        
-        
-        //Create chatroom 1
-        let c1:ChatRoom = ChatRoom(id: "1", name: "c1", type: .PUBLIC, users: uSet1, messages: mArray1)
-        
-        
-        //store the created chatroom c1 into global variable cR1
-        cR1 = c1
-        
-        /********* End of Dummy data *********/
         
         
         //Remove lines between cells
@@ -153,8 +66,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         //Set bottomIndexpath to last cell's index
-        bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
         
         //fix for tableview not scrolling all the way to the bottom in iOS 9
         mainTableview.reloadData()
@@ -217,8 +128,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Number of table rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return cR1!.messages.count + 1 //plus 1 to put the loadMore button at the top
-        
+
+        return 1
     }
     
     //Populating data
@@ -292,7 +203,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //Set hidden timestamp
             let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
-            print(defaultTimeZoneStr)
             noDetailsCell!.hiddenTimeStamp.text = "\(defaultTimeZoneStr)"
             noDetailsCell!.hiddenTimeStamp.hidden = true
             noDetailsCell!.hiddenTimeStamp.textColor = UIColor.rocketTimestampColor()
@@ -335,7 +245,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             //Set the timestamp
             let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
-            print(defaultTimeZoneStr)
             fullDetailsCell!.timeLabel.text = "\(defaultTimeZoneStr)"
             fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
             
@@ -359,40 +268,31 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //If there is text
         if composeMsg.text != "" {
             //create current message
-//            let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: currentUser!)
-            let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: currentUser!)
+            
             //add it to the messages array
-            mArray1 += [currentMsg]
             
             
             //update the messages array of the chatroom
-            cR1?.messages = mArray1
+            
             
             //reset the text input
-            composeMsg.text = ""
+            
             
             //dismiss keyboard - Uncomment the next line if you want keyboard to hide when you send a message
             //dismissKeyboard()
             
             //reload the tableview data
-            mainTableview.reloadData()
             
-            
-            //get the bottom index - THIS NEEDS TO BE REMOVED -
-            //bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
             
             //If we are the bottom
-            if (bottomIndexPath.row == cR1!.messages.count - 1) {
+           
             //scroll to bottom
-                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-                //calling it twice because something is wrong with scrolling the tableview to the bottom in iOS 9
-                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+           
             }
-            
-        }
+        
         //If text is empty
         else{
-        
+    
             //dismiss keyboard
             dismissKeyboard()
         }
@@ -430,21 +330,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    
-    //Function to get random number between 1-60 to create different timestamps
-    func randomTime() -> Double {
-        let r = arc4random_uniform(60) + 1
-        return Double(r)
-    }
-
-    
     //Function to dismiss keyboard
     func dismissKeyboard() {
         
         //dismiss keyboard
         composeMsg.resignFirstResponder()
+        
     }
     
+    
+    //WE MIGHT NEED THIS LATER
     
     //Function to toggle message's timestamp
     func showHiddenTimestamp(gesture: UITapGestureRecognizer) {
@@ -470,6 +365,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    //THIS IS NOT NEEDED ANYMORE (???)
     
+    //Function to get random number between 1-60 to create different timestamps
+    func randomTime() -> Double {
+        let r = arc4random_uniform(60) + 1
+        return Double(r)
+    }
     
 }

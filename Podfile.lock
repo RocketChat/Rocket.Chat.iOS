@@ -1,5 +1,5 @@
 PODS:
-  - JSQCoreDataKit (2.0.0)
+  - M13OrderedDictionary (1.0.6)
   - MMDrawerController (0.6.0):
     - MMDrawerController/Core (= 0.6.0)
     - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
@@ -12,24 +12,29 @@ PODS:
     - MMDrawerController/Core
   - MMDrawerController/Subclass (0.6.0):
     - MMDrawerController/Core
+  - ObjectiveDDP (0.2.0):
+    - M13OrderedDictionary
+    - SocketRocket (= 0.4.1)
+  - SocketRocket (0.4.1)
 
 DEPENDENCIES:
-  - JSQCoreDataKit (from `https://github.com/jessesquires/JSQCoreDataKit.git`, branch
-    `release-2.0`)
   - MMDrawerController (~> 0.6.0)
+  - ObjectiveDDP (from `https://github.com/boundsj/ObjectiveDDP.git`, branch `master`)
 
 EXTERNAL SOURCES:
-  JSQCoreDataKit:
-    :branch: release-2.0
-    :git: https://github.com/jessesquires/JSQCoreDataKit.git
+  ObjectiveDDP:
+    :branch: master
+    :git: https://github.com/boundsj/ObjectiveDDP.git
 
 CHECKOUT OPTIONS:
-  JSQCoreDataKit:
-    :commit: 8be0696c8c7c51cfac8433381dc7afa597525ae0
-    :git: https://github.com/jessesquires/JSQCoreDataKit.git
+  ObjectiveDDP:
+    :commit: 93d1477110102b7fe5fc61335a6ccfa53055a013
+    :git: https://github.com/boundsj/ObjectiveDDP.git
 
 SPEC CHECKSUMS:
-  JSQCoreDataKit: 6b8c511bedc9cf17fce944a42cb0f1f2090e1fab
+  M13OrderedDictionary: ca1bb2d743fd64500ffabee811d4bf2d0a65c908
   MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
+  ObjectiveDDP: c2225f6896d671977b7046afc0530967cd141f90
+  SocketRocket: ee0b5c34182d37bb4f1f8d628bbe737718126daa
 
 COCOAPODS: 0.38.2
