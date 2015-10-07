@@ -12,9 +12,6 @@ import MMDrawerController
 class AccountOptionsTableViewController: UITableViewController {
     
     
-    //Variable to keep current user - This is just for now(?)
-    var currentCenterViewControllerCurrentUser = User?()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -53,7 +50,6 @@ class AccountOptionsTableViewController: UITableViewController {
     
   	  //TODO: replace this with hex value once we merge with @kormic's branch
 	  }
-
     
     
     
@@ -62,23 +58,10 @@ class AccountOptionsTableViewController: UITableViewController {
     
         
         //If user selects MySettings
-        if indexPath.row == 0 {
+        if (indexPath.section == 1 && indexPath.row == 0) {
          
             //get the appDelegate
             let appdelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            
-            
-            //Get the current Navigation Controller
-            let currentNavigationController = appdelegate.centerContainer?.centerViewController as! UINavigationController
-            
-            
-            /*** This is to get the current user from the view controller - This is just for now(?) ***/
-            //Get the current center view controller
-            if(currentNavigationController.viewControllers[0].isKindOfClass(ViewController)){
-                let currentCenterViewController = currentNavigationController.viewControllers[0] as! ViewController
-                currentCenterViewControllerCurrentUser = currentCenterViewController.currentUser
-            }
-            /******/
             
             
             //Create MySettingsViewController instance
@@ -93,7 +76,6 @@ class AccountOptionsTableViewController: UITableViewController {
             
             //Close the drawer
             appdelegate.centerContainer?.closeDrawerAnimated(true, completion: nil)
-            
             
             
             //Get the AccountBar's tab controller
@@ -127,16 +109,28 @@ class AccountOptionsTableViewController: UITableViewController {
             tabBarController?.selectedViewController = tabBarController?.viewControllers![leftMenuTabBarController.findIndexOfMySettings()]
             
             
-            /*** This is also just for now(?) ***/
-            /*** We need to pass the current user to the SettingsMenuViewController which is going to be the new centerviewcontroller ***/
-            let settingsMenuViewController = tabBarController?.viewControllers![leftMenuTabBarController.findIndexOfMySettings()] as! SettingsMenuViewController
-            
-            settingsMenuViewController.currentUser = currentCenterViewControllerCurrentUser
-            /******/
+        }
+    
+        else if (indexPath.section == 1 && indexPath.row == 1) {
+    
+            let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+            let meteor = ad.meteorClient
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let loginVC = storyboard.instantiateInitialViewController()
+    
+            if (meteor.connected){
+                meteor.logout()
+                print("Logged out")
+                ad.window?.rootViewController = loginVC
+            } else {
+                let alert = UIAlertController(title: "Error", message: "Connection is lost", preferredStyle: UIAlertControllerStyle.Alert)
+                let cancel = UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler: nil)
+                alert.addAction(cancel)
+                self.presentViewController(alert, animated: true, completion: nil)
+            }
             
         }
-        
+    
+
     }
-    
-    
 }
