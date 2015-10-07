@@ -15,9 +15,9 @@
 		410CEB231B8B388F00CAFFE9 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB1F1B8B388F00CAFFE9 /* RightViewController.swift */; };
 		410CEB241B8B388F00CAFFE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB201B8B388F00CAFFE9 /* ViewController.swift */; };
 		410CEB271B8B38A800CAFFE9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB261B8B38A800CAFFE9 /* LoginViewController.swift */; };
-		410CEB2C1B8B390400CAFFE9 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB291B8B390400CAFFE9 /* ChatRoom.swift */; };
-		410CEB2D1B8B390400CAFFE9 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB2A1B8B390400CAFFE9 /* Message.swift */; };
-		410CEB2E1B8B390400CAFFE9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB2B1B8B390400CAFFE9 /* User.swift */; };
+		4F18F6811BB2F40B00048D7E /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6801BB2F40B00048D7E /* bridge.m */; settings = {ASSET_TAGS = (); }; };
+		4F18F6851BB3545500048D7E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6841BB3545500048D7E /* BaseViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4F18F6871BB4103A00048D7E /* UsernameRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6861BB4103A00048D7E /* UsernameRegistrationViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		4F28B1571B903B6D0033D8D1 /* LeftMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F28B1551B903B6D0033D8D1 /* LeftMenu.storyboard */; };
 		4F28B1591B90FF230033D8D1 /* AccountBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B1581B90FF230033D8D1 /* AccountBarViewController.swift */; };
 		4F28B1601B9101720033D8D1 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B15B1B9101720033D8D1 /* FavoritesTableViewCell.swift */; };
@@ -27,7 +27,7 @@
 		4F28B1651B93514E0033D8D1 /* AccountOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B1641B93514E0033D8D1 /* AccountOptionsTableViewController.swift */; };
 		4F28B1671B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B1661B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift */; };
 		4F28B1691B9493B10033D8D1 /* ChatsNavTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B1681B9493B10033D8D1 /* ChatsNavTableViewController.swift */; };
-		4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7E4D41B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld */; };
+		4F641EAD1BB594B400319176 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F641EAC1BB594B400319176 /* AuthViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		4FB7E4DD1B70111D00C69777 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4DB1B70111D00C69777 /* Main.storyboard */; };
 		4FB7E4DF1B70111D00C69777 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4DE1B70111D00C69777 /* Assets.xcassets */; };
 		4FB7E4E21B70111D00C69777 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4E01B70111D00C69777 /* LaunchScreen.storyboard */; };
@@ -88,11 +88,11 @@
 		410CEB1F1B8B388F00CAFFE9 /* RightViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RightViewController.swift; path = ViewControllers/RightViewController.swift; sourceTree = "<group>"; };
 		410CEB201B8B388F00CAFFE9 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ViewController.swift; path = ViewControllers/ViewController.swift; sourceTree = "<group>"; };
 		410CEB261B8B38A800CAFFE9 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		410CEB291B8B390400CAFFE9 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatRoom.swift; path = Models/ChatRoom.swift; sourceTree = "<group>"; };
-		410CEB2A1B8B390400CAFFE9 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
-		410CEB2B1B8B390400CAFFE9 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
-		410CEB2F1B8B391100CAFFE9 /* Rocket.Chat.iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket.Chat.iOS-Bridging-Header.h"; sourceTree = "<group>"; };
+		410CEB2F1B8B391100CAFFE9 /* Rocket_Chat_iOS-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket_Chat_iOS-Bridging-Header.h"; sourceTree = "<group>"; };
 		4227E3B51FEB156513C2D7BD /* Pods_Rocket_Chat_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4F18F6801BB2F40B00048D7E /* bridge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = bridge.m; sourceTree = "<group>"; };
+		4F18F6841BB3545500048D7E /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = ViewControllers/BaseViewController.swift; sourceTree = "<group>"; };
+		4F18F6861BB4103A00048D7E /* UsernameRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UsernameRegistrationViewController.swift; path = ../../UsernameRegistrationViewController.swift; sourceTree = "<group>"; };
 		4F28B1561B903B6D0033D8D1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LeftMenu.storyboard; sourceTree = "<group>"; };
 		4F28B1581B90FF230033D8D1 /* AccountBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountBarViewController.swift; path = ViewControllers/AccountBarViewController.swift; sourceTree = "<group>"; };
 		4F28B15B1B9101720033D8D1 /* FavoritesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewCell.swift; sourceTree = "<group>"; };
@@ -102,8 +102,8 @@
 		4F28B1641B93514E0033D8D1 /* AccountOptionsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountOptionsTableViewController.swift; path = ViewControllers/AccountOptionsTableViewController.swift; sourceTree = "<group>"; };
 		4F28B1661B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LeftMenuTabBarViewController.swift; path = ViewControllers/LeftMenuTabBarViewController.swift; sourceTree = "<group>"; };
 		4F28B1681B9493B10033D8D1 /* ChatsNavTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatsNavTableViewController.swift; path = ViewControllers/ChatsNavTableViewController.swift; sourceTree = "<group>"; };
+		4F641EAC1BB594B400319176 /* AuthViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		4FB7E4CF1B70111D00C69777 /* Rocket.Chat.iOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rocket.Chat.iOS.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4FB7E4D51B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rocket_Chat_iOS.xcdatamodel; sourceTree = "<group>"; };
 		4FB7E4DC1B70111D00C69777 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		4FB7E4DE1B70111D00C69777 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4FB7E4E11B70111D00C69777 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -119,6 +119,7 @@
 		DF113AE41BA6D87B00CE6D17 /* MyAccountBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountBarViewController.swift; sourceTree = "<group>"; };
 		DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountBarTabViewController.swift; sourceTree = "<group>"; };
 		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ViewControllers/RegisterViewController.swift; sourceTree = "<group>"; };
+		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ../RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesOptionsViewController.swift; sourceTree = "<group>"; };
 		DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundOptionsViewController.swift; sourceTree = "<group>"; };
@@ -178,25 +179,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		402A141B1B723E1D00B60093 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				410CEB291B8B390400CAFFE9 /* ChatRoom.swift */,
-				410CEB2A1B8B390400CAFFE9 /* Message.swift */,
-				410CEB2B1B8B390400CAFFE9 /* User.swift */,
-			);
-			name = Model;
-			sourceTree = "<group>";
-		};
 		410CEB151B8B387500CAFFE9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				4F18F6841BB3545500048D7E /* BaseViewController.swift */,
 				4F28B1681B9493B10033D8D1 /* ChatsNavTableViewController.swift */,
 				410CEB251B8B38A800CAFFE9 /* Auth */,
 				410CEB1E1B8B388F00CAFFE9 /* LeftViewController.swift */,
 				410CEB1F1B8B388F00CAFFE9 /* RightViewController.swift */,
 				410CEB201B8B388F00CAFFE9 /* ViewController.swift */,
-				DF2A60E51B8DC6280014548B /* RegisterViewController.swift */,
 				DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */,
 				4F28B1581B90FF230033D8D1 /* AccountBarViewController.swift */,
 				DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */,
@@ -230,7 +221,10 @@
 		410CEB251B8B38A800CAFFE9 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				DF2A60E51B8DC6280014548B /* RegisterViewController.swift */,
+				4F18F6861BB4103A00048D7E /* UsernameRegistrationViewController.swift */,
 				410CEB261B8B38A800CAFFE9 /* LoginViewController.swift */,
+				4F641EAC1BB594B400319176 /* AuthViewController.swift */,
 			);
 			name = Auth;
 			path = ViewControllers/Auth;
@@ -271,7 +265,7 @@
 		4FB7E4D11B70111D00C69777 /* Rocket.Chat.iOS */ = {
 			isa = PBXGroup;
 			children = (
-				402A141B1B723E1D00B60093 /* Model */,
+				4F18F6801BB2F40B00048D7E /* bridge.m */,
 				410CEB161B8B387B00CAFFE9 /* Cells */,
 				410CEB151B8B387500CAFFE9 /* ViewControllers */,
 				DFAB3D9B1B97323700B02020 /* Extensions */,
@@ -281,8 +275,7 @@
 				4FB7E4E01B70111D00C69777 /* LaunchScreen.storyboard */,
 				4F28B1551B903B6D0033D8D1 /* LeftMenu.storyboard */,
 				4FB7E4DE1B70111D00C69777 /* Assets.xcassets */,
-				4FB7E4D41B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld */,
-				410CEB2F1B8B391100CAFFE9 /* Rocket.Chat.iOS-Bridging-Header.h */,
+				410CEB2F1B8B391100CAFFE9 /* Rocket_Chat_iOS-Bridging-Header.h */,
 				410CEB281B8B38B200CAFFE9 /* Supporting FIles */,
 			);
 			path = Rocket.Chat.iOS;
@@ -539,31 +532,31 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4F18F6811BB2F40B00048D7E /* bridge.m in Sources */,
 				410CEB271B8B38A800CAFFE9 /* LoginViewController.swift in Sources */,
 				DF7CD46C1BA585B6004B55E9 /* SettingsMenuViewController.swift in Sources */,
 				4F28B1631B9101720033D8D1 /* ChannelsTableViewCell.swift in Sources */,
 				410CEB141B8B386E00CAFFE9 /* AppDelegate.swift in Sources */,
-				4FB7E4D61B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld in Sources */,
 				410CEB1B1B8B388300CAFFE9 /* MainTableViewCell.swift in Sources */,
 				DF5F92631BAC4315000EA4C3 /* SoundOptionsViewController.swift in Sources */,
 				410CEB241B8B388F00CAFFE9 /* ViewController.swift in Sources */,
 				DFEEBE6C1BAF4DCD00DE1825 /* profileViewController.swift in Sources */,
+				4F641EAD1BB594B400319176 /* AuthViewController.swift in Sources */,
 				DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */,
 				410CEB1A1B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift in Sources */,
 				4F28B1611B9101720033D8D1 /* DirectMessagesTableViewCell.swift in Sources */,
 				DF113AE91BA6D91000CE6D17 /* MyAccountBarTabViewController.swift in Sources */,
-				410CEB2D1B8B390400CAFFE9 /* Message.swift in Sources */,
 				410CEB1C1B8B388300CAFFE9 /* NoDetailsTableViewCell.swift in Sources */,
+				4F18F6851BB3545500048D7E /* BaseViewController.swift in Sources */,
 				DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */,
 				4F28B1691B9493B10033D8D1 /* ChatsNavTableViewController.swift in Sources */,
-				410CEB2E1B8B390400CAFFE9 /* User.swift in Sources */,
 				410CEB221B8B388F00CAFFE9 /* LeftViewController.swift in Sources */,
 				DFEEBE6E1BAF53E800DE1825 /* ChangeAvatarViewController.swift in Sources */,
 				DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */,
 				4F28B1591B90FF230033D8D1 /* AccountBarViewController.swift in Sources */,
 				4F28B1651B93514E0033D8D1 /* AccountOptionsTableViewController.swift in Sources */,
 				4F28B1601B9101720033D8D1 /* FavoritesTableViewCell.swift in Sources */,
-				410CEB2C1B8B390400CAFFE9 /* ChatRoom.swift in Sources */,
+				4F18F6871BB4103A00048D7E /* UsernameRegistrationViewController.swift in Sources */,
 				410CEB231B8B388F00CAFFE9 /* RightViewController.swift in Sources */,
 				4F28B1671B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift in Sources */,
 				4F28B1621B9101720033D8D1 /* PrivateGroupsTableViewCell.swift in Sources */,
@@ -749,7 +742,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket.Chat.iOS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket_Chat_iOS-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -769,7 +762,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "chat.rocket.Rocket-Chat-iOS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket.Chat.iOS-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat.iOS/Rocket_Chat_iOS-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 			};
 			name = Release;
@@ -862,19 +855,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		4FB7E4D41B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				4FB7E4D51B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodel */,
-			);
-			currentVersion = 4FB7E4D51B70111D00C69777 /* Rocket_Chat_iOS.xcdatamodel */;
-			path = Rocket_Chat_iOS.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 4FB7E4C71B70111D00C69777 /* Project object */;
 }

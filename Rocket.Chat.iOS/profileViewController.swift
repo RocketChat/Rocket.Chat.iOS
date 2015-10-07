@@ -19,7 +19,6 @@ class profileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     var language = [String()]
     let picker = UIPickerView()
-    var currentUser = User?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,8 +28,6 @@ class profileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         //Some languages to add to the pickerview
         language = ["English","Greek","Portuguese"]
         
-        //Set username placeholder
-        usernameTextField.text = currentUser?.username
         
         //Set pickerview's delegate and background color
         picker.delegate = self

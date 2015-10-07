@@ -11,8 +11,6 @@ import UIKit
 
 class SettingsMenuViewController: UIViewController {
 
-    //variable to get the user - This is just for now(?)
-    var currentUser = User?()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +53,7 @@ class SettingsMenuViewController: UIViewController {
         
         let profileVC = storyboard?.instantiateViewControllerWithIdentifier("profileVC") as! profileViewController
         
-        //This is just for now(?)
-        profileVC.currentUser = currentUser
+
         
         //Set it as rootViewController in the navigation controller
         let centerNewNav = UINavigationController(rootViewController: profileVC)
