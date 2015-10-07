@@ -15,17 +15,17 @@ class AccountBarViewController: UIViewController {
   @IBOutlet weak var usernameLabel: UILabel!
   @IBOutlet weak var avatarIcon: UIImageView!
   @IBOutlet weak var statusIcon: UIImageView!
-  
+    
+    
   /** this will tell you what the state was before the touch event */
   var accountOptionsWereOpen = false
   
   var delegate:SwitchAccountViewDelegate! = nil
-  
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     
     // Do any additional setup after loading the view.
-    
   }
   
   override func didReceiveMemoryWarning() {
@@ -55,27 +55,20 @@ class AccountBarViewController: UIViewController {
   
   
   override func animationDidStop(anim: CAAnimation, finished flag: Bool){
+    
     if (detailsButton.imageView?.image == UIImage(named: "Arrow-Up")) {
       detailsButton.imageView?.image = UIImage(named: "Arrow-Down")
     } else {
       detailsButton.imageView?.image = UIImage(named: "Arrow-Up")
     }
-    
     if ((delegate) != nil){ // let delegate know about event
 	    delegate!.didClickOnAccountBar(accountOptionsWereOpen)
   	  accountOptionsWereOpen = !accountOptionsWereOpen
     }
   }
   
-  /*
-  // In a storyboard-based application, you will often want to do a little preparation before navigation
-  override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-  // Get the new view controller using segue.destinationViewController.
-  // Pass the selected object to the new view controller.
-  }
-  */
-  
 }
+
 
 /** This protocol is used for handling events from the AccountBar. */
 protocol SwitchAccountViewDelegate {
