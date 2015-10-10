@@ -8,6 +8,7 @@
 
 import UIKit
 import MMDrawerController
+import ObjectiveDDP
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -21,9 +22,43 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // indexPath to find the bottom of the tableview
     var bottomIndexPath:NSIndexPath = NSIndexPath()
   
-  var messages: NSArray?
+    var messages: NSArray?
     
     var dateFormatter = NSDateFormatter()
+    
+    
+    var meteor: MeteorClient!
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        //After login join general room
+        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        meteor = ad.meteorClient
+
+        meteor.callMethodName("joinRoom", parameters: ["GENERAL"]) { (response, error) -> Void in
+            
+            if error != nil {
+                print("Error:\(error.description)")
+                return
+            }else{
+                print("joined general room")
+                
+                self.meteor.callMethodName("loadHistory", parameters: ["GENERAL","60"], responseCallback: { (response, error) -> Void in
+                    if error != nil{
+                        print("Error:\(error.description)")
+                        return
+                    }else{
+                        print(response)
+
+                    }
+                })
+            }
+        }
+        
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

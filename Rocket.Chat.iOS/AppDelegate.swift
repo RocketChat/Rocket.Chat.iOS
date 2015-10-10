@@ -29,8 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     meteorClient.addObserver(self, forKeyPath:"websocketReady", options: observingOption, context:nil)
     
     
-    
-    
+    //Subsribe to Collections
+    self.meteorClient.addSubscription("activeUsers")
     self.meteorClient.addSubscription("userData")
 
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportConnectionReady", name: MeteorClientConnectionReadyNotification, object: nil)
