@@ -43,16 +43,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 return
             }else{
                 print("joined general room")
-                
-                self.meteor.callMethodName("loadHistory", parameters: ["GENERAL","60"], responseCallback: { (response, error) -> Void in
-                    if error != nil{
-                        print("Error:\(error.description)")
-                        return
-                    }else{
-                        print(response)
-
-                    }
-                })
             }
         }
         
