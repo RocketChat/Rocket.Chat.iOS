@@ -118,7 +118,6 @@
 		A5A3A9751B93CBFC00CFE8FB /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DF113AE41BA6D87B00CE6D17 /* MyAccountBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountBarViewController.swift; sourceTree = "<group>"; };
 		DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountBarTabViewController.swift; sourceTree = "<group>"; };
-		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ViewControllers/RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ../RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesOptionsViewController.swift; sourceTree = "<group>"; };
@@ -200,6 +199,7 @@
 				DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */,
 				DFEEBE6B1BAF4DCD00DE1825 /* profileViewController.swift */,
 				DFEEBE6D1BAF53E800DE1825 /* ChangeAvatarViewController.swift */,
+				DF8B00EE1BCA7A96008005C9 /* avatarControllers */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -297,6 +297,13 @@
 				4FB7E4F91B70111E00C69777 /* Info.plist */,
 			);
 			path = Rocket.Chat.iOSUITests;
+			sourceTree = "<group>";
+		};
+		DF8B00EE1BCA7A96008005C9 /* avatarControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = avatarControllers;
 			sourceTree = "<group>";
 		};
 		DFAB3D9B1B97323700B02020 /* Extensions */ = {
