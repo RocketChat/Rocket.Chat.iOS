@@ -9,9 +9,13 @@
 
 import UIKit
 import MMDrawerController
+import ObjectiveDDP
 
 class profileViewController: UIViewController, UITextFieldDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
 
+    @IBOutlet var usernameLabel: UILabel!
+    @IBOutlet var passwordLabel: UILabel!
+    @IBOutlet var languageLabel: UILabel!
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var languageTextField: UITextField!
@@ -19,11 +23,27 @@ class profileViewController: UIViewController, UITextFieldDelegate, UIPickerView
     
     var language = [String()]
     let picker = UIPickerView()
+    var meteor: MeteorClient!
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        
+        usernameLabel.textColor = UIColor.rocketMainFontColor()
+        passwordLabel.textColor = UIColor.rocketMainFontColor()
+        languageLabel.textColor = UIColor.rocketMainFontColor()
+        
+        //Getting the username and setting the placeholder for the usernameTextField
+        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        meteor = ad.meteorClient
+    
+        let users = meteor.collections["users"] as! M13MutableOrderedDictionary
+        
+        let obj = users.objectAtIndex(0)        
+        
+        
+        usernameTextField.placeholder = obj["username"] as? String
         
         //Some languages to add to the pickerview
         language = ["English","Greek","Portuguese"]

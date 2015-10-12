@@ -41,6 +41,12 @@
 		DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF5F92611BAC4304000EA4C3 /* MessagesOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF5F92631BAC4315000EA4C3 /* SoundOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF7C52C01BCB95320087B2B4 /* UsernameInitialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52BF1BCB95320087B2B4 /* UsernameInitialsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF7C52C21BCB95530087B2B4 /* ChooseFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C11BCB95530087B2B4 /* ChooseFileViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF7C52C41BCB957A0087B2B4 /* FacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C31BCB957A0087B2B4 /* FacebookViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF7C52C61BCB95A70087B2B4 /* GoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C51BCB95A70087B2B4 /* GoogleViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF7C52C81BCB95C30087B2B4 /* GithubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C71BCB95C30087B2B4 /* GithubViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF7C52CA1BCB95DC0087B2B4 /* LinkedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C91BCB95DC0087B2B4 /* LinkedInViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF7CD46C1BA585B6004B55E9 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DF8C851F1BA48A97005E37D2 /* MySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8C851E1BA48A97005E37D2 /* MySettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */; settings = {ASSET_TAGS = (); }; };
@@ -118,11 +124,16 @@
 		A5A3A9751B93CBFC00CFE8FB /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		DF113AE41BA6D87B00CE6D17 /* MyAccountBarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountBarViewController.swift; sourceTree = "<group>"; };
 		DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountBarTabViewController.swift; sourceTree = "<group>"; };
-		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ViewControllers/RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ../RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesOptionsViewController.swift; sourceTree = "<group>"; };
 		DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundOptionsViewController.swift; sourceTree = "<group>"; };
+		DF7C52BF1BCB95320087B2B4 /* UsernameInitialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameInitialsViewController.swift; sourceTree = "<group>"; };
+		DF7C52C11BCB95530087B2B4 /* ChooseFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFileViewController.swift; sourceTree = "<group>"; };
+		DF7C52C31BCB957A0087B2B4 /* FacebookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookViewController.swift; sourceTree = "<group>"; };
+		DF7C52C51BCB95A70087B2B4 /* GoogleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleViewController.swift; sourceTree = "<group>"; };
+		DF7C52C71BCB95C30087B2B4 /* GithubViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GithubViewController.swift; sourceTree = "<group>"; };
+		DF7C52C91BCB95DC0087B2B4 /* LinkedInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkedInViewController.swift; sourceTree = "<group>"; };
 		DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsMenuViewController.swift; sourceTree = "<group>"; };
 		DF8C851E1BA48A97005E37D2 /* MySettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySettingsViewController.swift; sourceTree = "<group>"; };
 		DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIColor+hexValue.swift"; path = "../UIColor+hexValue.swift"; sourceTree = "<group>"; };
@@ -200,6 +211,7 @@
 				DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */,
 				DFEEBE6B1BAF4DCD00DE1825 /* profileViewController.swift */,
 				DFEEBE6D1BAF53E800DE1825 /* ChangeAvatarViewController.swift */,
+				DF8B00EE1BCA7A96008005C9 /* avatarControllers */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -297,6 +309,19 @@
 				4FB7E4F91B70111E00C69777 /* Info.plist */,
 			);
 			path = Rocket.Chat.iOSUITests;
+			sourceTree = "<group>";
+		};
+		DF8B00EE1BCA7A96008005C9 /* avatarControllers */ = {
+			isa = PBXGroup;
+			children = (
+				DF7C52BF1BCB95320087B2B4 /* UsernameInitialsViewController.swift */,
+				DF7C52C11BCB95530087B2B4 /* ChooseFileViewController.swift */,
+				DF7C52C31BCB957A0087B2B4 /* FacebookViewController.swift */,
+				DF7C52C51BCB95A70087B2B4 /* GoogleViewController.swift */,
+				DF7C52C71BCB95C30087B2B4 /* GithubViewController.swift */,
+				DF7C52C91BCB95DC0087B2B4 /* LinkedInViewController.swift */,
+			);
+			name = avatarControllers;
 			sourceTree = "<group>";
 		};
 		DFAB3D9B1B97323700B02020 /* Extensions */ = {
@@ -543,17 +568,23 @@
 				DFEEBE6C1BAF4DCD00DE1825 /* profileViewController.swift in Sources */,
 				4F641EAD1BB594B400319176 /* AuthViewController.swift in Sources */,
 				DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */,
+				DF7C52C01BCB95320087B2B4 /* UsernameInitialsViewController.swift in Sources */,
 				410CEB1A1B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift in Sources */,
 				4F28B1611B9101720033D8D1 /* DirectMessagesTableViewCell.swift in Sources */,
 				DF113AE91BA6D91000CE6D17 /* MyAccountBarTabViewController.swift in Sources */,
+				DF7C52C81BCB95C30087B2B4 /* GithubViewController.swift in Sources */,
 				410CEB1C1B8B388300CAFFE9 /* NoDetailsTableViewCell.swift in Sources */,
+				DF7C52C41BCB957A0087B2B4 /* FacebookViewController.swift in Sources */,
+				DF7C52CA1BCB95DC0087B2B4 /* LinkedInViewController.swift in Sources */,
 				4F18F6851BB3545500048D7E /* BaseViewController.swift in Sources */,
 				DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */,
+				DF7C52C61BCB95A70087B2B4 /* GoogleViewController.swift in Sources */,
 				4F28B1691B9493B10033D8D1 /* ChatsNavTableViewController.swift in Sources */,
 				410CEB221B8B388F00CAFFE9 /* LeftViewController.swift in Sources */,
 				DFEEBE6E1BAF53E800DE1825 /* ChangeAvatarViewController.swift in Sources */,
 				DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */,
 				4F28B1591B90FF230033D8D1 /* AccountBarViewController.swift in Sources */,
+				DF7C52C21BCB95530087B2B4 /* ChooseFileViewController.swift in Sources */,
 				4F28B1651B93514E0033D8D1 /* AccountOptionsTableViewController.swift in Sources */,
 				4F28B1601B9101720033D8D1 /* FavoritesTableViewCell.swift in Sources */,
 				4F18F6871BB4103A00048D7E /* UsernameRegistrationViewController.swift in Sources */,

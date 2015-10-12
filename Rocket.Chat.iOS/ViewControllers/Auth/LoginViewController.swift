@@ -121,7 +121,7 @@ class LoginViewController: AuthViewController, UIPopoverPresentationControllerDe
       self.handleFailedAuth(err)
       return
     }
-    
+   
     
     
     if (getTokenAndSaveUser(userNameTextField.text!, response: response)){

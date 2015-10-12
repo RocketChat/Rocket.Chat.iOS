@@ -8,6 +8,7 @@
 
 import UIKit
 import MMDrawerController
+import ObjectiveDDP
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -21,9 +22,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // indexPath to find the bottom of the tableview
     var bottomIndexPath:NSIndexPath = NSIndexPath()
   
-  var messages: NSArray?
+    var messages: NSArray?
     
     var dateFormatter = NSDateFormatter()
+    
+    
+    var meteor: MeteorClient!
+    
+    
+    override func viewWillAppear(animated: Bool) {
+        
+        //After login join general room
+        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        meteor = ad.meteorClient
+
+        meteor.callMethodName("joinDefaultChannels", parameters: nil) { (response, error) -> Void in
+            
+            if error != nil {
+                print("Error:\(error.description)")
+                return
+            }else{
+                print(response)
+            }
+        }
+        
+    }
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -263,6 +288,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
+
+        
+/*** TESTING THIS ***/
+        
+//        let formData = NSDictionary(dictionary: [
+//            "message": composeMsg.text!,
+//            ])
+//
+//        if composeMsg.text != "" {
+//            meteor.callMethodName("sendMessage", parameters: [formData], responseCallback: { (responce, error) -> Void in
+//                
+//                if (error != nil) {
+//                    
+//                    print("Error: \(error.description)")
+//                    return
+//                    
+//                }else {
+//                    print("Message sent")
+//                }
+//                
+//            })
+//
+//        }
+        
+/******/
+
+
         
 //        //If there is text
 //        if composeMsg.text != "" {
