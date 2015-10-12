@@ -13,13 +13,14 @@ class ChooseFileViewController: UIViewController {
     
     @IBOutlet var chooseFileAvatar: UIImageView!
     @IBOutlet var chooseFileButton: UIButton!
-
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        chooseFileButton.backgroundColor = UIColor.rocketBlueColor()
+        chooseFileButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        
     }
 
     override func didReceiveMemoryWarning() {

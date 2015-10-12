@@ -15,12 +15,12 @@ class LinkedInViewController: UIViewController {
     @IBOutlet var linkedInButton: UIButton!
     
     
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        linkedInButton.backgroundColor = UIColor.rocketBlueColor()
+        linkedInButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        
     }
 
     override func didReceiveMemoryWarning() {
