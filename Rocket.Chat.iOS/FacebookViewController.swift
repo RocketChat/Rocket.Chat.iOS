@@ -19,7 +19,9 @@ class FacebookViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        facebookButton.backgroundColor = UIColor.rocketBlueColor()
+        facebookButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        
     }
 
     override func didReceiveMemoryWarning() {

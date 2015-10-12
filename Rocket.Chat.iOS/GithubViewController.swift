@@ -18,7 +18,9 @@ class GithubViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        githubButton.backgroundColor = UIColor.rocketBlueColor()
+        githubButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        
     }
 
     override func didReceiveMemoryWarning() {

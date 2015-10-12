@@ -12,14 +12,19 @@ class UsernameInitialsViewController: UIViewController {
 
     
     @IBOutlet var usernameAvatar: UIImageView!
-    @IBOutlet var usernamInitialsButton: UIButton!
+    @IBOutlet var usernameInitialsButton: UIButton!
+   
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        usernameInitialsButton.backgroundColor = UIColor.rocketBlueColor()
+        usernameInitialsButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+    
+        
+        
     }
 
     override func didReceiveMemoryWarning() {

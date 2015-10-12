@@ -18,7 +18,9 @@ class GoogleViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        googleButton.backgroundColor = UIColor.rocketBlueColor()
+        googleButton.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        
     }
 
     override func didReceiveMemoryWarning() {
