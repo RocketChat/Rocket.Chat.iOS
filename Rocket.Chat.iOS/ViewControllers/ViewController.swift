@@ -36,13 +36,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let ad = UIApplication.sharedApplication().delegate as! AppDelegate
         meteor = ad.meteorClient
 
-        meteor.callMethodName("joinRoom", parameters: ["GENERAL"]) { (response, error) -> Void in
+        meteor.callMethodName("joinDefaultChannels", parameters: nil) { (response, error) -> Void in
             
             if error != nil {
                 print("Error:\(error.description)")
                 return
             }else{
-                print("joined general room")
+                print(response)
             }
         }
         
@@ -288,6 +288,33 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
+
+        
+/*** TESTING THIS ***/
+        
+//        let formData = NSDictionary(dictionary: [
+//            "message": composeMsg.text!,
+//            ])
+//
+//        if composeMsg.text != "" {
+//            meteor.callMethodName("sendMessage", parameters: [formData], responseCallback: { (responce, error) -> Void in
+//                
+//                if (error != nil) {
+//                    
+//                    print("Error: \(error.description)")
+//                    return
+//                    
+//                }else {
+//                    print("Message sent")
+//                }
+//                
+//            })
+//
+//        }
+        
+/******/
+
+
         
 //        //If there is text
 //        if composeMsg.text != "" {
