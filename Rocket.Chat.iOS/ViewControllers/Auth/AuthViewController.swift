@@ -33,7 +33,7 @@ class AuthViewController: UIViewController {
   }
   */
   
-  func getTokenAndSaveUser(email: String, response: NSDictionary) -> Bool {
+    func getTokenAndSaveUser(email: String, response: NSDictionary) -> Bool {
     let res = response["result"] as? NSDictionary
     if (res == nil){
       return false
@@ -48,6 +48,7 @@ class AuthViewController: UIViewController {
     let defaults = NSUserDefaults.standardUserDefaults()
     defaults.setObject(serverSessionToken, forKey: "sessionToken")
     defaults.setObject(email, forKey: "email")
+
     
     return true
   }

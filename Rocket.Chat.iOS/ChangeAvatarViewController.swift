@@ -13,10 +13,14 @@ import MMDrawerController
 
 class ChangeAvatarViewController: UIViewController {
 
+    @IBOutlet var instructionsLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        instructionsLabel.textColor = UIColor.rocketMainFontColor()
+
         
         //Set the navigation's title to rocketMainFontColor
         navigationController!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.rocketMainFontColor()]

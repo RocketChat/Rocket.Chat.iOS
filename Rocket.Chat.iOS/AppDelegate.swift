@@ -18,8 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   // Variable to keep the MMDrawerController instance
   var centerContainer : MMDrawerController?
   
-    var meteorClient = initialiseMeteor("pre2", "ws://localhost:4000/websocket");
-//    var meteorClient = initialiseMeteor("pre2", "https://demo.rocket.chat/websocket");
+//    var meteorClient = initialiseMeteor("pre2", "ws://localhost:4000/websocket");
+    var meteorClient = initialiseMeteor("pre2", "https://demo.rocket.chat/websocket");
 
   
   
@@ -29,14 +29,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     meteorClient.addObserver(self, forKeyPath:"websocketReady", options: observingOption, context:nil)
     
     
-    //      let storyboard = UIStoryboard(name: "Main", bundle: nil)
-    
-    //        let loginController:LoginViewController =  storyboard.instantiateViewControllerWithIdentifier("loginViewController") as! LoginViewController
-    //        loginController.meteor = self.meteorClient
-    
-    //        meteorClient.addSubscription("things")
-    //        meteorClient.addSubscription("lists")
-    
+    //Subsribe to Collections
+    self.meteorClient.addSubscription("activeUsers")
+    self.meteorClient.addSubscription("userData")
+
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportConnectionReady", name: MeteorClientConnectionReadyNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportConnection", name: MeteorClientDidConnectNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportDisconnection", name:MeteorClientDidDisconnectNotification, object: nil)
