@@ -1213,10 +1213,10 @@
             </objects>
             <point key="canvasLocation" x="2972" y="-917.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Username Initials View Controller-->
         <scene sceneID="W8j-Dn-c7n">
             <objects>
-                <viewController id="SQu-iE-HJC" sceneMemberID="viewController">
+                <viewController id="SQu-iE-HJC" customClass="UsernameInitialsViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="BRx-3u-esn"/>
                         <viewControllerLayoutGuide type="bottom" id="mWd-v9-m7x"/>
@@ -1248,15 +1248,19 @@
                             <constraint firstItem="uD4-7r-Iri" firstAttribute="bottom" secondItem="pXA-Kf-cYz" secondAttribute="bottom" id="btA-WW-rso"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="usernamInitialsButton" destination="uD4-7r-Iri" id="JNB-0q-0nb"/>
+                        <outlet property="usernameAvatar" destination="pXA-Kf-cYz" id="mNk-i9-3Zg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9RW-Pm-Cep" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2982.5" y="54"/>
         </scene>
-        <!--View Controller-->
+        <!--Choose File View Controller-->
         <scene sceneID="Eal-v2-iOu">
             <objects>
-                <viewController id="2BB-cJ-clO" sceneMemberID="viewController">
+                <viewController id="2BB-cJ-clO" customClass="ChooseFileViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="TFk-ZM-U33"/>
                         <viewControllerLayoutGuide type="bottom" id="uRk-Td-PqB"/>
@@ -1285,15 +1289,19 @@
                             <constraint firstAttribute="trailingMargin" secondItem="ku1-I7-d5u" secondAttribute="trailing" constant="29" id="yht-Da-o5k"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="chooseFileAvatar" destination="C4r-EM-wfC" id="zEP-c7-NOf"/>
+                        <outlet property="chooseFileButton" destination="ku1-I7-d5u" id="LtB-RB-yvm"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Eto-Uv-6El" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2982.5" y="185.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Facebook View Controller-->
         <scene sceneID="wIS-Vd-APr">
             <objects>
-                <viewController id="tAb-Ln-g3l" sceneMemberID="viewController">
+                <viewController id="tAb-Ln-g3l" customClass="FacebookViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9ah-hT-Kj3"/>
                         <viewControllerLayoutGuide type="bottom" id="O3v-gl-Gws"/>
@@ -1325,15 +1333,19 @@
                             <constraint firstItem="gw0-eF-fVO" firstAttribute="centerY" secondItem="ei5-DF-ftb" secondAttribute="centerY" id="Txb-On-Q59"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="facebookAvatar" destination="5di-5i-rlx" id="m1y-Cs-SCO"/>
+                        <outlet property="facebookButton" destination="gw0-eF-fVO" id="6Oh-nW-ad5"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="buX-kA-7nS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2982.5" y="319.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Google View Controller-->
         <scene sceneID="Acf-Vw-dJr">
             <objects>
-                <viewController id="lV3-dH-xIh" sceneMemberID="viewController">
+                <viewController id="lV3-dH-xIh" customClass="GoogleViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Je9-Xi-Zib"/>
                         <viewControllerLayoutGuide type="bottom" id="Z7c-jZ-fEO"/>
@@ -1363,15 +1375,19 @@
                             <constraint firstItem="Yas-3d-FbO" firstAttribute="bottom" secondItem="yGp-F6-0jn" secondAttribute="bottom" id="lpz-Gg-QXl"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="googleAvatar" destination="yGp-F6-0jn" id="uea-WU-C9M"/>
+                        <outlet property="googleButton" destination="Yas-3d-FbO" id="Wch-dU-1bk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dg1-RZ-00v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2982.5" y="447.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Github View Controller-->
         <scene sceneID="oJg-jQ-t5u">
             <objects>
-                <viewController id="JKj-Ju-eUB" sceneMemberID="viewController">
+                <viewController id="JKj-Ju-eUB" customClass="GithubViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="wia-4g-1bl"/>
                         <viewControllerLayoutGuide type="bottom" id="2iI-Ry-oLb"/>
@@ -1400,15 +1416,19 @@
                             <constraint firstItem="0cM-ab-vcf" firstAttribute="centerY" secondItem="wbw-4L-LRb" secondAttribute="centerY" id="zKt-3d-b2b"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="githubAvatar" destination="7vi-z7-OkT" id="gnk-ap-5ru"/>
+                        <outlet property="githubButton" destination="0cM-ab-vcf" id="QIK-Px-h89"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GDh-WH-hCN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2982.5" y="568.5"/>
         </scene>
-        <!--View Controller-->
+        <!--Linked In View Controller-->
         <scene sceneID="lNb-QV-dTt">
             <objects>
-                <viewController id="efR-3B-sbS" sceneMemberID="viewController">
+                <viewController id="efR-3B-sbS" customClass="LinkedInViewController" customModule="Rocket_Chat_iOS" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JC8-3f-4qp"/>
                         <viewControllerLayoutGuide type="bottom" id="T76-B5-DKz"/>
@@ -1437,6 +1457,10 @@
                             <constraint firstItem="XGs-mi-u7F" firstAttribute="centerY" secondItem="SPG-Kj-drJ" secondAttribute="centerY" id="pfT-uN-JEu"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="linkedInAvatar" destination="Zy2-2B-Djb" id="RVU-NX-ZbG"/>
+                        <outlet property="linkedInButton" destination="XGs-mi-u7F" id="fYF-Bs-SOb"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bra-yp-Ayj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
