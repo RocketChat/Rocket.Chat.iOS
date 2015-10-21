@@ -20,8 +20,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
 //    var meteorClient = initialiseMeteor("pre2", "ws://localhost:4000/websocket");
     var meteorClient = initialiseMeteor("pre2", "https://demo.rocket.chat/websocket");
+    
+    
+    func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
+        
+        //Subsribe to Collections
+//        self.meteorClient.addSubscription("activeUsers")
+//        self.meteorClient.addSubscription("userData")
+        self.meteorClient.addSubscription("subscription")
+      //  self.meteorClient.addSubscription("messages", withParameters: ["GENERAL"])
 
-  
+        return true
+    }
   
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     
@@ -29,10 +39,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     meteorClient.addObserver(self, forKeyPath:"websocketReady", options: observingOption, context:nil)
     
     
-    //Subsribe to Collections
-    self.meteorClient.addSubscription("activeUsers")
-    self.meteorClient.addSubscription("userData")
+    
 
+    
+    
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportConnectionReady", name: MeteorClientConnectionReadyNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportConnection", name: MeteorClientDidConnectNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportDisconnection", name:MeteorClientDidDisconnectNotification, object: nil)
@@ -44,7 +54,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     print("Connection Ready")
     connectWithSessionToken()
-    
+
   }
   
   func reportConnection() {
