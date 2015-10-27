@@ -160,42 +160,38 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //Create double tap gesture
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: Selector("showHiddenTimestamp:"))
         doubleTapGesture.numberOfTapsRequired = 2
-//
+
+        
         //Add gestures on tableview
         mainTableview.addGestureRecognizer(tapGesture)
         mainTableview.addGestureRecognizer(doubleTapGesture)
-//
-//        
-//      
-//        
+
+        
         //Remove lines between cells
         mainTableview.separatorStyle = UITableViewCellSeparatorStyle.None
         
         mainTableview.rowHeight = UITableViewAutomaticDimension
         mainTableview.estimatedRowHeight = 75
-//
-//        
-//        
-//        //Set bottomIndexpath to last cell's index
-////        bottomIndexPath = NSIndexPath(forRow: messages.count-1, inSection: 0)
-//        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-//      
-//        //fix for tableview not scrolling all the way to the bottom in iOS 9
-//        mainTableview.reloadData()
-//        
-//        
+
+
         //Set border to composeMsg textarea
         composeMsg.layer.borderColor = UIColor.blackColor().CGColor
         composeMsg.layer.borderWidth = 0.5
         composeMsg.layer.cornerRadius = 10
-//
-//        dateFormatter.dateFormat = "HH:mm"
+
+        
+        dateFormatter.dateFormat = "HH:mm"
+        
     }
+    
+    
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
     
     
     @IBAction func leftNavTapped(sender: AnyObject) {
@@ -208,6 +204,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    
     @IBAction func rightNavTapped(sender: AnyObject) {
         
         //get the appDelegate
@@ -219,12 +216,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    override func viewDidLayoutSubviews() {
-        
-        //scroll tableview at the bottomIndexPath
-//        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-        
-    }
     
     
     //
@@ -241,8 +232,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Number of table rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-//        return messages.count + 1 //plus 1 to put the loadMore button at the top
-      return 1
+      return self.users.count
       
     }
     
