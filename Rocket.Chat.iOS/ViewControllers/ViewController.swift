@@ -288,32 +288,27 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
-
         
-/*** TESTING THIS ***/
         
-//        let formData = NSDictionary(dictionary: [
-//            "message": composeMsg.text!,
-//            ])
-//
-//        if composeMsg.text != "" {
-//            meteor.callMethodName("sendMessage", parameters: [formData], responseCallback: { (responce, error) -> Void in
-//                
-//                if (error != nil) {
-//                    
-//                    print("Error: \(error.description)")
-//                    return
-//                    
-//                }else {
-//                    print("Message sent")
-//                }
-//                
-//            })
-//
-//        }
         
-/******/
-
+        var messageObject = NSDictionary()
+        messageObject = [
+            "rid":"GENERAL",
+            "msg":composeMsg.text!
+        ]
+        
+        meteor.callMethodName("sendMessage", parameters: [messageObject], responseCallback: { (response, error) -> Void in
+            
+            if error != nil {
+                print("Error:\(error.description)")
+                return
+            }else{
+                self.composeMsg.text = ""
+                print(response)
+            }
+            
+        })
+        
 
         
 //        //If there is text
@@ -390,13 +385,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    
-    //Function to get random number between 1-60 to create different timestamps
-    func randomTime() -> Double {
-        let r = arc4random_uniform(60) + 1
-        return Double(r)
-    }
-
     
     //Function to dismiss keyboard
     func dismissKeyboard() {
