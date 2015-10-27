@@ -506,5 +506,76 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+    //Function to add the incoming messages
+    func didReceiveUpdate(notification: NSNotification) {
+        
+        
+        //Workaround for the first fifty messages that are being added in the collection
+        //Maybe here we will handle the response of the loadHistory that's now happening in viewWillAppear
+        if (counter >= 50){
+
+            
+//            let lastMessage = NSDictionary(dictionary: [
+//                "$date": self.ts[self.ts.count - 1]![0] * 1000
+//                ])
+            
+            let now = NSDictionary(dictionary: [
+                "$date": NSDate().timeIntervalSince1970 * 1000
+                ])
+            
+            
+            //Getting 1 message everytime a message is added in the rocketchat_message collection
+            meteor.callMethodName("loadHistory", parameters: ["GENERAL", now,1], responseCallback: { (response, error) -> Void in
+                
+                if error != nil {
+                    
+                    print("Error:\(error.description)")
+                    return
+                    
+                } else {
+                    
+//                    print(response!["result"]!)
+                    
+                    //JSON Handling
+                    let result = JSON(response)
+                    self.chatMessages = result["result"]["messages"]
+                    
+                    
+                    
+                    var type = ""
+                    if self.chatMessages[0]["t"].string != nil {
+                        type = self.chatMessages[0]["t"].string!
+                    }
+                    
+                    
+                    
+                    self.users[self.users.count] = [self.chatMessages[0]["u","_id"].string!, self.chatMessages[0]["u","username"].string!, self.chatMessages[0]["msg"].string!,type]
+                    let timestamp = [self.chatMessages[0]["ts","$date"].number!]
+                    let timestampInDouble = timestamp as! [Double]
+                    self.ts[self.ts.count] =  [timestampInDouble[0] / 1000]
+                    
+                }
+                
+                
+                //Reloading data and if we are at the bottom scroll the view to the last row
+                self.mainTableview.reloadData()
+
+                //The bottom index was equal with the self.users.count - 1 but now because a message was added is equal with self.users.count - 2
+                if (self.bottomIndexPath.row == self.users.count - 2) {
+                    self.bottomIndexPath = NSIndexPath(forRow: self.users.count - 1, inSection: 0)
+                    self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                }
+                
+            })
+            
+        }else {
+            
+            counter++
+        
+        }
+
+
+    }
+    
     
 }
