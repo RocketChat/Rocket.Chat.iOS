@@ -9,6 +9,7 @@
 import UIKit
 import MMDrawerController
 import ObjectiveDDP
+import SwiftyJSON
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -22,36 +23,131 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // indexPath to find the bottom of the tableview
     var bottomIndexPath:NSIndexPath = NSIndexPath()
   
-    var messages: NSArray?
-    
     var dateFormatter = NSDateFormatter()
-    
-    
+
     var meteor: MeteorClient!
+
+    var chatMessages:JSON = []
+
+    //Dictionary to keep the users from the JSON response
+    var users = [Int():[String(),String(),String(),String()]]
+    
+    //Dictionary to keep the timestamps from the JSON response
+    var ts = [Int():[Double()]]
+    
+    //Counter used in didReceiveUpdate for the incoming messages
+    var counter = 0
+    
     
     
     override func viewWillAppear(animated: Bool) {
         
-        //After login join general room
+        
+        
         let ad = UIApplication.sharedApplication().delegate as! AppDelegate
         meteor = ad.meteorClient
 
-        meteor.callMethodName("joinDefaultChannels", parameters: nil) { (response, error) -> Void in
+        
+        //After login join general room
+
+        meteor.callMethodName("joinDefaultChannels", parameters: nil, responseCallback: { (response, error) -> Void in
+            
+                if error != nil {
+                    
+                    print("Error:\(error.description)\n")
+                    return
+
+                } else {
+                    
+//                    print("\(response)\n")
+
+                }
+            
+        })
+        
+        
+
+
+
+ 
+        //Get the 50 past messages to fill the tableview
+        //This is just temporary. Later the RoomHistoryManager will handle the way the messages are coming in
+        let now = NSDate()
+
+        let formData = NSDictionary(dictionary: [
+            "$date": now.timeIntervalSince1970*1000
+            ])
+        
+        meteor.callMethodName("loadHistory", parameters: ["GENERAL", formData,50], responseCallback: { (response, error) -> Void in
             
             if error != nil {
+               
                 print("Error:\(error.description)")
                 return
-            }else{
-                print(response)
+            
+            } else {
+                
+//                print(response!["result"]!)
+          
+                //JSON Handling
+                let result = JSON(response)
+                self.chatMessages = result["result"]["messages"]
+                
+
+                
+//                print(self.chatMessages)
+//                print(self.users!)
+
+                
+                var i = self.chatMessages.count
+                
+                for (_,subJson) in self.chatMessages {
+                    
+                    var type = ""
+                    if subJson["t"].string != nil {
+                        type = subJson["t"].string!
+                    }
+                    
+                    
+                    self.users[i] = [subJson["u","_id"].string!, subJson["u","username"].string!, subJson["msg"].string!,type]
+                    let timestamp = [subJson["ts","$date"].number!]
+                    let timestampInDouble = timestamp as! [Double]
+                    self.ts[i] =  [timestampInDouble[0] / 1000]
+                    i--
+                }
+                
+                
+                
+                
+//                for (var i = 0; i<self.users.count; i++){
+//                    print("\(self.users[i])\n")
+//                }
+                
+                
+                //Reload data and scroll to the bottom of the tableview
+                self.mainTableview.reloadData()
+                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessages.count, inSection: 0)
+                self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                
+                //Subscribe to rocketchat_message collection for the GENERAL channel
+                self.meteor.addSubscription("messages", withParameters: ["GENERAL"])
+                
+                //Add observer to handle incoming messages
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveUpdate:", name: "rocketchat_message_added", object: nil)
+
+
             }
-        }
+
+        })
         
     }
     
-    
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         
         // Notifications to manage keyboard
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardWasShown:"), name:UIKeyboardWillShowNotification, object: nil);
