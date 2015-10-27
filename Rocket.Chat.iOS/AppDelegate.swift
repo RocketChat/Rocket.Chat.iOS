@@ -28,7 +28,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        self.meteorClient.addSubscription("activeUsers")
 //        self.meteorClient.addSubscription("userData")
         self.meteorClient.addSubscription("subscription")
-      //  self.meteorClient.addSubscription("messages", withParameters: ["GENERAL"])
 
         return true
     }
@@ -40,9 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     
-
-    
-    
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportConnectionReady", name: MeteorClientConnectionReadyNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportConnection", name: MeteorClientDidConnectNotification, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: "reportDisconnection", name:MeteorClientDidDisconnectNotification, object: nil)
@@ -52,7 +48,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func reportConnectionReady() {
     
-    print("Connection Ready")
+    print("Connection Ready\n")
     connectWithSessionToken()
 
   }
@@ -90,10 +86,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       meteorClient.logonWithSessionToken(sessionToken, responseCallback: {(response, error) -> Void in
         
         if((error) != nil) {
+            
           print("error!!! \(error)")
           return
+            
         }
-        print(response)
+        print("\(response)\n")
         
         let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
