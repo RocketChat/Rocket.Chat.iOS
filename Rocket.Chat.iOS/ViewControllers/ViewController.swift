@@ -240,133 +240,135 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
 
-//        //Get visible cells indexes
-//        let visible = mainTableview.indexPathsForVisibleRows
-//        
-//        //Set bottomIndexpath to last visible cell's index
-//        bottomIndexPath = NSIndexPath(forRow: visible!.last!.row, inSection: 0)
+        //Get visible cells indexes
+        let visible = mainTableview.indexPathsForVisibleRows
+        //Set bottomIndexpath to last visible cell's index
+        bottomIndexPath = NSIndexPath(forRow: visible!.last!.row, inSection: 0)
       
-      let cell = UITableViewCell()
+
         
-//        //Boolean to check if previous and current user are the same user
-//        var sameUser = false
-//        
-//        
-//        //Get current row
-//        let row = indexPath.row - 1 //minus 1 to stay in range of the array
-//        
-//        //Get previous row
-//        let prevRow = row - 1
-//        
-//        
-//        //Check previous and current user
-//        if(row > 0){
-//            
-//
-//          // TODO: need to check if 2 messages have the same owner.
-//          //            if(cR1!.messages[row].user == cR1!.messages[prevRow].user){
-//          
-//                //If true then set sameUser to true
-//                sameUser = true
-//            
-////            }
-//        }
-//        
-//        
-//        
-//        //Create cell and set data
-//        
-//        //if we scrolled at the top
-//        if (indexPath.row == 0) {
-//            
-//            //try create the cell for the load button
-//            var loadMoreHeader:LoadMoreHeaderTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("loadMoreHeader", forIndexPath: indexPath) as? LoadMoreHeaderTableViewCell
-//            
-//            //if the cell is nil
-//            if loadMoreHeader == nil{
-//                
-//                //create it
-//                loadMoreHeader = LoadMoreHeaderTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMoreHeader")
-//                
-//            }
-//            
-//            //return it
-//            return loadMoreHeader!
-//        }
-//        
-//        
-//        //If same user
-//        if sameUser {
-//            
-//            //Try to create cell
-//            var noDetailsCell:NoDetailsTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("noDetailsCell", forIndexPath: indexPath) as? NoDetailsTableViewCell
-//            
-//            //If it is nill
-//            if noDetailsCell == nil{
-//                
-//                //Create the cell
-//                noDetailsCell = NoDetailsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "noDetailsCell")
-//            
-//            }
-//            
-//            //Set hidden timestamp
-//            let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
-//            print(defaultTimeZoneStr)
-//            noDetailsCell!.hiddenTimeStamp.text = "\(defaultTimeZoneStr)"
-//            noDetailsCell!.hiddenTimeStamp.hidden = true
-//            noDetailsCell!.hiddenTimeStamp.textColor = UIColor.rocketTimestampColor()
-//
-//            //Set text to noDetailsMessage label
-//            noDetailsCell!.noDetailsMessage.text = "\(cR1!.messages[indexPath.row - 1].text)"
-//            
-//            //Set color to #444444
-////            noDetailsCell!.noDetailsMessage.textColor = UIColor.colorWithHexValue(44, greenValue: 44, blueValue: 44, alpha: 1)
-//            noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
-//            
-//            //return the no detailed cell
-//            return noDetailsCell!
-//            
-//        }
-//        //If different user
-//        else{
-//            
-//            //Try to create the cell
-//            var fullDetailsCell:MainTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("fullDetailsCell", forIndexPath: indexPath) as? MainTableViewCell
-//            
-//            //If nill
-//            if fullDetailsCell == nil{
-//                
-//                //Create the cell
-//                fullDetailsCell = MainTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "fullDetailsCell")
-//                
-//                
-//            }
-//            
-//            //Set the image
-//            fullDetailsCell!.avatarImg.image = UIImage(data: (cR1?.messages[indexPath.row - 1].user.avata)!)
-//            
-//            //Set the text for the username label
-//            fullDetailsCell!.usernameLabel.text = "\(cR1!.messages[indexPath.row - 1].user.username)"
-//            
-//            //Set color to #444444
-////            fullDetailsCell!.usernameLabel.textColor = UIColor.colorWithHexValue(44, greenValue: 44, blueValue: 44, alpha: 1)
-//            fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
-//            
-//            //Set the timestamp
-//            let defaultTimeZoneStr = dateFormatter.stringFromDate(cR1!.messages[indexPath.row - 1].tstamp)
-//            print(defaultTimeZoneStr)
-//            fullDetailsCell!.timeLabel.text = "\(defaultTimeZoneStr)"
-//            fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
-//            
-//            //Set the message text
-//            fullDetailsCell!.messageLabel.text = "\(cR1!.messages[indexPath.row - 1].text)"
-//            
-//            fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
-//            
-//            //Return the full detailed cell
-//            return fullDetailsCell!
-//        }
-      return cell
+        //Boolean to check if previous and current user are the same user
+        var sameUser = false
+
+        
+//        print("\(indexPath.row) -- \(sameUser) -- \(self.users[indexPath.row]![3]) -- \(self.users[indexPath.row]![2])")
+        
+        
+        //Check if the next and previous user are the same to see what kind of cell we will create
+        if(indexPath.row > 0){
+
+            if(self.users[indexPath.row]![0] == self.users[indexPath.row - 1]![0]){
+
+                sameUser = true
+            
+            }
+        }
+        
+        
+        
+        
+        //Create cell and set data
+        
+        //Header
+        if (indexPath.row == 0) {
+            
+            var loadMoreHeader:LoadMoreHeaderTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("loadMoreHeader", forIndexPath: indexPath) as? LoadMoreHeaderTableViewCell
+            
+            if loadMoreHeader == nil{
+                
+                loadMoreHeader = LoadMoreHeaderTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "loadMoreHeader")
+                
+            }
+            
+            return loadMoreHeader!
+        }
+        
+        
+
+        //If Same User - return a full detailed cell
+        if (sameUser) {
+            
+            var noDetailsCell:NoDetailsTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("noDetailsCell", forIndexPath: indexPath) as? NoDetailsTableViewCell
+            
+            if noDetailsCell == nil{
+                
+                noDetailsCell = NoDetailsTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "noDetailsCell")
+            
+            }
+
+            //Set hidden timestamp
+            noDetailsCell!.hiddenTimeStamp.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: self.ts[indexPath.row]![0])))"
+            noDetailsCell!.hiddenTimeStamp.hidden = true
+            noDetailsCell!.hiddenTimeStamp.textColor = UIColor.rocketTimestampColor()
+
+            //Set text to noDetailsMessage label
+            noDetailsCell!.noDetailsMessage.text = self.users[indexPath.row]![2]
+            noDetailsCell?.noDetailsMessage.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+            
+            //Set color to #444444
+            noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
+            
+            return noDetailsCell!
+            
+        }
+        //If different user and joined the channel - return a full detailed cell
+        else if (!sameUser && self.users[indexPath.row]![3] == "uj"){
+
+            var fullDetailsCell:MainTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("fullDetailsCell", forIndexPath: indexPath) as? MainTableViewCell
+            
+            if fullDetailsCell == nil{
+                
+                fullDetailsCell = MainTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "fullDetailsCell")
+                
+                
+            }
+
+            fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
+            fullDetailsCell!.usernameLabel.text = self.users[indexPath.row]![1]
+
+            //Set color to #444444
+            fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
+            
+            //Set the timestamp
+            fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: self.ts[indexPath.row]![0])))"
+            fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
+            fullDetailsCell!.messageLabel.text = "has joined the channel"
+            fullDetailsCell?.messageLabel.font = UIFont.italicSystemFontOfSize(15)
+            fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
+
+            return fullDetailsCell!
+        }
+        //If different user - return a non detailed cell
+        else {
+            
+            
+            var fullDetailsCell:MainTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("fullDetailsCell", forIndexPath: indexPath) as? MainTableViewCell
+            
+            
+            if fullDetailsCell == nil{
+                
+                fullDetailsCell = MainTableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "fullDetailsCell")
+                
+            }
+            
+
+            fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
+            fullDetailsCell!.usernameLabel.text = self.users[indexPath.row]![1]
+
+            //Set color to #444444
+            fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
+            
+            //Set the timestamp
+            fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: self.ts[indexPath.row]![0])))"
+            fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
+            
+            //Set the message text
+            fullDetailsCell!.messageLabel.text = self.users[indexPath.row]![2]
+            fullDetailsCell?.messageLabel.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+            fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
+            
+            return fullDetailsCell!
+        }
         
     }
     
