@@ -119,6 +119,17 @@ class AccountOptionsTableViewController: UITableViewController {
             let loginVC = storyboard.instantiateInitialViewController()
     
             if (meteor.connected){
+                
+//                meteor.callMethodName("leaveRoom", parameters: ["GENERAL"], responseCallback: { (response, error) -> Void in
+//                    
+//                    if error != nil {
+//                        print(error.description)
+//                    }else{
+//                        print(response)
+//                    }
+//                    
+//                })
+                
                 meteor.logout()
                 print("Logged out")
                 ad.window?.rootViewController = loginVC
