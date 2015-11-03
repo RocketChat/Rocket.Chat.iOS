@@ -22,20 +22,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // indexPath to find the bottom of the tableview
     var bottomIndexPath:NSIndexPath = NSIndexPath()
-  
-    var messages: NSArray?
     
     var dateFormatter = NSDateFormatter()
     
-    
     var meteor: MeteorClient!
     
+    //JSON to keep the response
+    var chatMessages:JSON = []
+    
+    //Dictionary to keep the users from the JSON response
+    var users = [Int():[String(),String(),String(),String()]]
+    
+    //Dictionary to keep the timestamps from the JSON response
+    var ts = [Int():[Double()]]
     
     override func viewWillAppear(animated: Bool) {
         
         //After login join general room
         let ad = UIApplication.sharedApplication().delegate as! AppDelegate
         meteor = ad.meteorClient
+        
+        
+        //Subscribe to rocketchat_message collection for the GENERAL channel
+        self.meteor.addSubscription("messages", withParameters: ["GENERAL"])
+
 
         meteor.callMethodName("joinDefaultChannels", parameters: nil) { (response, error) -> Void in
             
