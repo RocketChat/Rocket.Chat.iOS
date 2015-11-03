@@ -353,24 +353,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     @IBAction func sendMsg(sender: AnyObject) {
         
         
-        
-        var messageObject = NSDictionary()
-        messageObject = [
-            "rid":"GENERAL",
-            "msg":composeMsg.text!
-        ]
-        
-        meteor.callMethodName("sendMessage", parameters: [messageObject], responseCallback: { (response, error) -> Void in
+        if (composeMsg.text != ""){
             
-            if error != nil {
-                print("Error:\(error.description)")
-                return
-            }else{
-                self.composeMsg.text = ""
-//                print(response)
-            }
+            var messageObject = NSDictionary()
+            messageObject = [
+                "rid":"GENERAL",
+                "msg":composeMsg.text!
+            ]
             
-        })
+            meteor.callMethodName("sendMessage", parameters: [messageObject], responseCallback: { (response, error) -> Void in
+                
+                if error != nil {
+                    print("Error:\(error.description)")
+                    return
+                }else{
+                    self.composeMsg.text = ""
+                    //print(response)
+                }
+                
+            })
+            
+        }
+
         
 
         
@@ -484,7 +488,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Function to add the incoming messages
     func didReceiveUpdate(notification: NSNotification) {
         
-        print("Notification: \(notification.userInfo!)")
         var type = ""
         if let t = notification.userInfo!["t"]{
             type = t as! String
