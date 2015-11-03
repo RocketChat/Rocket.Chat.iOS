@@ -53,9 +53,78 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print("Error:\(error.description)")
                 return
             }else{
-                print(response)
+                //print(response)
+                
+                //Add observer to handle incoming messages
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveUpdate:", name: "rocketchat_message_added", object: nil)
             }
         }
+        
+        //Get the 50 past messages to fill the tableview
+        //This is just temporary. Later the RoomHistoryManager will handle the way the messages are coming in
+        let now = NSDate()
+        
+        let formData = NSDictionary(dictionary: [
+            "$date": now.timeIntervalSince1970*1000
+            ])
+        
+        meteor.callMethodName("loadHistory", parameters: ["GENERAL", formData,50], responseCallback: { (response, error) -> Void in
+            
+            if error != nil {
+                
+                print("Error:\(error.description)")
+                return
+                
+            } else {
+                
+                print(response!["result"]!)
+                
+                //JSON Handling
+                let result = JSON(response)
+                self.chatMessages = result["result"]["messages"]
+                
+                
+                
+//                                print(self.chatMessages)
+                //                print(self.users!)
+                
+                
+                var i = self.chatMessages.count
+                
+                for (_,subJson) in self.chatMessages {
+                    
+                    var type = ""
+                    if subJson["t"].string != nil {
+                        type = subJson["t"].string!
+                    }
+                    
+                    
+                    self.users[i] = [subJson["u","_id"].string!, subJson["u","username"].string!, subJson["msg"].string!,type]
+                    let timestamp = [subJson["ts","$date"].number!]
+                    let timestampInDouble = timestamp as! [Double]
+                    self.ts[i] =  [timestampInDouble[0] / 1000]
+                    i--
+                }
+                
+                
+                
+                //                for (var i = 0; i<self.users.count; i++){
+                //                    print("\(self.users[i])\n")
+                //                }
+                
+                
+                //Reload data and scroll to the bottom of the tableview
+                self.mainTableview.reloadData()
+                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessages.count, inSection: 0)
+                self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                
+                
+                
+            }
+            
+        })
+        
+        
         
     }
     
