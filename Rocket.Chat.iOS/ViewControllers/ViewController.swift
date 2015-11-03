@@ -148,32 +148,20 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //Add gestures on tableview
         mainTableview.addGestureRecognizer(tapGesture)
         mainTableview.addGestureRecognizer(doubleTapGesture)
-//
-//        
-//      
-//        
+
+        
         //Remove lines between cells
         mainTableview.separatorStyle = UITableViewCellSeparatorStyle.None
         
         mainTableview.rowHeight = UITableViewAutomaticDimension
         mainTableview.estimatedRowHeight = 75
-//
-//        
-//        
-//        //Set bottomIndexpath to last cell's index
-////        bottomIndexPath = NSIndexPath(forRow: messages.count-1, inSection: 0)
-//        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: true)
-//      
-//        //fix for tableview not scrolling all the way to the bottom in iOS 9
-//        mainTableview.reloadData()
-//        
-//        
+ 
         //Set border to composeMsg textarea
         composeMsg.layer.borderColor = UIColor.blackColor().CGColor
         composeMsg.layer.borderWidth = 0.5
         composeMsg.layer.cornerRadius = 10
-//
-//        dateFormatter.dateFormat = "HH:mm"
+
+        dateFormatter.dateFormat = "HH:mm"
     }
     
     override func didReceiveMemoryWarning() {
@@ -203,12 +191,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    override func viewDidLayoutSubviews() {
-        
-        //scroll tableview at the bottomIndexPath
-//        mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-        
-    }
     
     
     //
