@@ -120,6 +120,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 //Reload data and scroll to the bottom of the tableview
                 self.mainTableview.reloadData()
+                //If iOS 8 scrolling doesn't work properly.
                 self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData.count - 1, inSection: 0)
                 self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
                 
@@ -513,7 +514,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if (lastVisibleCellsIndexPath.row == (self.chatMessageData.count - 2)) {
             
-            //            self.mainTableview.scrollToRowAtIndexPath(NSIndexPath(forRow: self.chatMessageData.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             
             
