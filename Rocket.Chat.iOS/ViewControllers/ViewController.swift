@@ -30,16 +30,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //JSON to keep the response
     var chatMessages:JSON = []
     
-    /*
-       Dictionary to keep each chatMessage.
-       Each message is stored in this order [index:[_id,username,msg,type]]
-       The _id value is the user's id
-    */
-    var chatMessageData = [Int():[String(),String(),String(),String()]]
+    //Dictionary to keep each chatMessage
+    var chatMessageData = [Int():ChatMessage()]
     
-    
-    //Dictionary to keep the timestamps from the JSON response
-    var ts = [Int():[Double()]]
     
     override func viewWillAppear(animated: Bool) {
         
@@ -66,7 +59,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         //Get the 50 past messages to fill the tableview
-        //This is just temporary. Later the RoomHistoryManager will handle the way the messages are coming in
         let now = NSDate()
         
         let formData = NSDictionary(dictionary: [
@@ -90,10 +82,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 
                 
-//                                print(self.chatMessages)
-                //                print(self.chatMessageData!)
-                
-                
+                //Storing the result from oldest to newest message
                 var i = self.chatMessages.count
                 
                 for (_,subJson) in self.chatMessages {
@@ -103,19 +92,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                         type = subJson["t"].string!
                     }
                     
-                    
-                    self.chatMessageData[i] = [subJson["u","_id"].string!, subJson["u","username"].string!, subJson["msg"].string!,type]
                     let timestamp = [subJson["ts","$date"].number!]
                     let timestampInDouble = timestamp as! [Double]
-                    self.ts[i] =  [timestampInDouble[0] / 1000]
+                    let timestampInMilliseconds = timestampInDouble[0] / 1000
+                    
+                    let  cM = ChatMessage(user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
+                    
+                    
+                    self.chatMessageData[i] = cM
+
                     i--
                 }
-                
-                
-                
-                //                for (var i = 0; i<self.chatMessageData.count; i++){
-                //                    print("\(self.chatMessageData[i])\n")
-                //                }
                 
                 
                 //Reload data and scroll to the bottom of the tableview
@@ -150,7 +137,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //Create double tap gesture
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: Selector("showHiddenTimestamp:"))
         doubleTapGesture.numberOfTapsRequired = 2
-//
+
         //Add gestures on tableview
         mainTableview.addGestureRecognizer(tapGesture)
         mainTableview.addGestureRecognizer(doubleTapGesture)
