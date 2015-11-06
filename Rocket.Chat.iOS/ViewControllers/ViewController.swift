@@ -30,8 +30,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //JSON to keep the response
     var chatMessages:JSON = []
     
-    //Dictionary to keep the users from the JSON response
-    var users = [Int():[String(),String(),String(),String()]]
+    //Dictionary to keep the chatMessageData from the JSON response
+    var chatMessageData = [Int():[String(),String(),String(),String()]]
     
     //Dictionary to keep the timestamps from the JSON response
     var ts = [Int():[Double()]]
@@ -86,7 +86,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 
 //                                print(self.chatMessages)
-                //                print(self.users!)
+                //                print(self.chatMessageData!)
                 
                 
                 var i = self.chatMessages.count
@@ -99,7 +99,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                     
                     
-                    self.users[i] = [subJson["u","_id"].string!, subJson["u","username"].string!, subJson["msg"].string!,type]
+                    self.chatMessageData[i] = [subJson["u","_id"].string!, subJson["u","username"].string!, subJson["msg"].string!,type]
                     let timestamp = [subJson["ts","$date"].number!]
                     let timestampInDouble = timestamp as! [Double]
                     self.ts[i] =  [timestampInDouble[0] / 1000]
@@ -108,14 +108,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 
                 
-                //                for (var i = 0; i<self.users.count; i++){
-                //                    print("\(self.users[i])\n")
+                //                for (var i = 0; i<self.chatMessageData.count; i++){
+                //                    print("\(self.chatMessageData[i])\n")
                 //                }
                 
                 
                 //Reload data and scroll to the bottom of the tableview
                 self.mainTableview.reloadData()
-                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessages.count, inSection: 0)
+                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData.count - 1, inSection: 0)
                 self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
                 
                 
@@ -207,7 +207,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Number of table rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.users.count
+        return self.chatMessageData.count
       
     }
     
@@ -226,13 +226,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         var sameUser = false
         
         
-        //        print("\(indexPath.row) -- \(sameUser) -- \(self.users[indexPath.row]![3]) -- \(self.users[indexPath.row]![2])")
+        //        print("\(indexPath.row) -- \(sameUser) -- \(self.chatMessageData[indexPath.row]![3]) -- \(self.chatMessageData[indexPath.row]![2])")
         
         
         //Check if the next and previous user are the same to see what kind of cell we will create
         if(indexPath.row > 0){
             
-            if(self.users[indexPath.row]![0] == self.users[indexPath.row - 1]![0]){
+            if(self.chatMessageData[indexPath.row]![0] == self.chatMessageData[indexPath.row - 1]![0]){
                 
                 sameUser = true
                 
@@ -277,7 +277,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             noDetailsCell!.hiddenTimeStamp.textColor = UIColor.rocketTimestampColor()
             
             //Set text to noDetailsMessage label
-            noDetailsCell!.noDetailsMessage.text = self.users[indexPath.row]![2]
+            noDetailsCell!.noDetailsMessage.text = self.chatMessageData[indexPath.row]![2]
             noDetailsCell?.noDetailsMessage.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
             
             //Set color to #444444
@@ -287,7 +287,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         }
             //If different user and joined the channel - return a full detailed cell
-        else if (!sameUser && self.users[indexPath.row]![3] == "uj"){
+        else if (!sameUser && self.chatMessageData[indexPath.row]![3] == "uj"){
             
             var fullDetailsCell:MainTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("fullDetailsCell", forIndexPath: indexPath) as? MainTableViewCell
             
@@ -299,7 +299,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
-            fullDetailsCell!.usernameLabel.text = self.users[indexPath.row]![1]
+            fullDetailsCell!.usernameLabel.text = self.chatMessageData[indexPath.row]![1]
             
             //Set color to #444444
             fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
@@ -328,7 +328,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             
             fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
-            fullDetailsCell!.usernameLabel.text = self.users[indexPath.row]![1]
+            fullDetailsCell!.usernameLabel.text = self.chatMessageData[indexPath.row]![1]
             
             //Set color to #444444
             fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
@@ -338,7 +338,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
             
             //Set the message text
-            fullDetailsCell!.messageLabel.text = self.users[indexPath.row]![2]
+            fullDetailsCell!.messageLabel.text = self.chatMessageData[indexPath.row]![2]
             fullDetailsCell?.messageLabel.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
             fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
             
@@ -492,7 +492,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         if let t = notification.userInfo!["t"]{
             type = t as! String
         }
-        self.users[self.users.count] = [notification.userInfo!["u"]!["_id"]! as! String, notification.userInfo!["u"]!["username"]! as! String, notification.userInfo!["msg"]! as! String,type]
+        self.chatMessageData[self.chatMessageData.count] = [notification.userInfo!["u"]!["_id"]! as! String, notification.userInfo!["u"]!["username"]! as! String, notification.userInfo!["msg"]! as! String,type]
         
         let timestamp = [notification.userInfo!["ts"]!["$date"] as! NSNumber]
         let timestampInDouble = timestamp as! [Double]
@@ -504,11 +504,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let lastVisibleCells = self.mainTableview.visibleCells.last
         let lastVisibleCellsIndexPath = NSIndexPath(forRow: self.mainTableview.indexPathForCell(lastVisibleCells!)!.row, inSection: 0)
         
-        self.bottomIndexPath = NSIndexPath(forRow: self.users.count - 1, inSection: 0)
+        self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData.count - 1, inSection: 0)
         
-        if (lastVisibleCellsIndexPath.row == (self.users.count - 2)) {
+        if (lastVisibleCellsIndexPath.row == (self.chatMessageData.count - 2)) {
             
-            //            self.mainTableview.scrollToRowAtIndexPath(NSIndexPath(forRow: self.users.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            //            self.mainTableview.scrollToRowAtIndexPath(NSIndexPath(forRow: self.chatMessageData.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             
             
