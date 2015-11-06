@@ -15,9 +15,9 @@
 		410CEB231B8B388F00CAFFE9 /* RightViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB1F1B8B388F00CAFFE9 /* RightViewController.swift */; };
 		410CEB241B8B388F00CAFFE9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB201B8B388F00CAFFE9 /* ViewController.swift */; };
 		410CEB271B8B38A800CAFFE9 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 410CEB261B8B38A800CAFFE9 /* LoginViewController.swift */; };
-		4F18F6811BB2F40B00048D7E /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6801BB2F40B00048D7E /* bridge.m */; settings = {ASSET_TAGS = (); }; };
-		4F18F6851BB3545500048D7E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6841BB3545500048D7E /* BaseViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		4F18F6871BB4103A00048D7E /* UsernameRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6861BB4103A00048D7E /* UsernameRegistrationViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4F18F6811BB2F40B00048D7E /* bridge.m in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6801BB2F40B00048D7E /* bridge.m */; };
+		4F18F6851BB3545500048D7E /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6841BB3545500048D7E /* BaseViewController.swift */; };
+		4F18F6871BB4103A00048D7E /* UsernameRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F18F6861BB4103A00048D7E /* UsernameRegistrationViewController.swift */; };
 		4F28B1571B903B6D0033D8D1 /* LeftMenu.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4F28B1551B903B6D0033D8D1 /* LeftMenu.storyboard */; };
 		4F28B1591B90FF230033D8D1 /* AccountBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B1581B90FF230033D8D1 /* AccountBarViewController.swift */; };
 		4F28B1601B9101720033D8D1 /* FavoritesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B15B1B9101720033D8D1 /* FavoritesTableViewCell.swift */; };
@@ -27,7 +27,7 @@
 		4F28B1651B93514E0033D8D1 /* AccountOptionsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B1641B93514E0033D8D1 /* AccountOptionsTableViewController.swift */; };
 		4F28B1671B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B1661B936C6C0033D8D1 /* LeftMenuTabBarViewController.swift */; };
 		4F28B1691B9493B10033D8D1 /* ChatsNavTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F28B1681B9493B10033D8D1 /* ChatsNavTableViewController.swift */; };
-		4F641EAD1BB594B400319176 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F641EAC1BB594B400319176 /* AuthViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		4F641EAD1BB594B400319176 /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4F641EAC1BB594B400319176 /* AuthViewController.swift */; };
 		4FB7E4DD1B70111D00C69777 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4DB1B70111D00C69777 /* Main.storyboard */; };
 		4FB7E4DF1B70111D00C69777 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4DE1B70111D00C69777 /* Assets.xcassets */; };
 		4FB7E4E21B70111D00C69777 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4FB7E4E01B70111D00C69777 /* LaunchScreen.storyboard */; };
@@ -35,38 +35,39 @@
 		4FB7E4F81B70111E00C69777 /* Rocket_Chat_iOSUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4FB7E4F71B70111E00C69777 /* Rocket_Chat_iOSUITests.swift */; };
 		783304F2FCA3B826852C6DD2 /* Pods_Rocket_Chat_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4227E3B51FEB156513C2D7BD /* Pods_Rocket_Chat_iOS.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A5A3A9721B93CBEE00CFE8FB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A5A3A9741B93CBEE00CFE8FB /* Localizable.strings */; };
-		DF113AE51BA6D87B00CE6D17 /* MyAccountBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF113AE41BA6D87B00CE6D17 /* MyAccountBarViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF113AE91BA6D91000CE6D17 /* MyAccountBarTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E51B8DC6280014548B /* RegisterViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF5F92611BAC4304000EA4C3 /* MessagesOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF5F92631BAC4315000EA4C3 /* SoundOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF7C52C01BCB95320087B2B4 /* UsernameInitialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52BF1BCB95320087B2B4 /* UsernameInitialsViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF7C52C21BCB95530087B2B4 /* ChooseFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C11BCB95530087B2B4 /* ChooseFileViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF7C52C41BCB957A0087B2B4 /* FacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C31BCB957A0087B2B4 /* FacebookViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF7C52C61BCB95A70087B2B4 /* GoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C51BCB95A70087B2B4 /* GoogleViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF7C52C81BCB95C30087B2B4 /* GithubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C71BCB95C30087B2B4 /* GithubViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF7C52CA1BCB95DC0087B2B4 /* LinkedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C91BCB95DC0087B2B4 /* LinkedInViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF7CD46C1BA585B6004B55E9 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DF7F94C11BCFA67000B52126 /* RoomHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7F94C01BCFA67000B52126 /* RoomHistoryManager.swift */; settings = {ASSET_TAGS = (); }; };
-		DF8C851F1BA48A97005E37D2 /* MySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8C851E1BA48A97005E37D2 /* MySettingsViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DF113AE51BA6D87B00CE6D17 /* MyAccountBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF113AE41BA6D87B00CE6D17 /* MyAccountBarViewController.swift */; };
+		DF113AE91BA6D91000CE6D17 /* MyAccountBarTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */; };
+		DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E51B8DC6280014548B /* RegisterViewController.swift */; };
+		DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */; };
+		DF5F92611BAC4304000EA4C3 /* MessagesOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */; };
+		DF5F92631BAC4315000EA4C3 /* SoundOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */; };
+		DF70828E1BED0FF9005B6192 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70828D1BED0FF9005B6192 /* ChatMessage.swift */; };
+		DF7C52C01BCB95320087B2B4 /* UsernameInitialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52BF1BCB95320087B2B4 /* UsernameInitialsViewController.swift */; };
+		DF7C52C21BCB95530087B2B4 /* ChooseFileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C11BCB95530087B2B4 /* ChooseFileViewController.swift */; };
+		DF7C52C41BCB957A0087B2B4 /* FacebookViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C31BCB957A0087B2B4 /* FacebookViewController.swift */; };
+		DF7C52C61BCB95A70087B2B4 /* GoogleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C51BCB95A70087B2B4 /* GoogleViewController.swift */; };
+		DF7C52C81BCB95C30087B2B4 /* GithubViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C71BCB95C30087B2B4 /* GithubViewController.swift */; };
+		DF7C52CA1BCB95DC0087B2B4 /* LinkedInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7C52C91BCB95DC0087B2B4 /* LinkedInViewController.swift */; };
+		DF7CD46C1BA585B6004B55E9 /* SettingsMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7CD46B1BA585B6004B55E9 /* SettingsMenuViewController.swift */; };
+		DF7F94C11BCFA67000B52126 /* RoomHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF7F94C01BCFA67000B52126 /* RoomHistoryManager.swift */; };
+		DF8C851F1BA48A97005E37D2 /* MySettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF8C851E1BA48A97005E37D2 /* MySettingsViewController.swift */; };
 		DF9AC21A1BD66406009D5F1C /* SwiftyJSON.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DF9AC2191BD66406009D5F1C /* SwiftyJSON.framework */; };
-		DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */; settings = {ASSET_TAGS = (); }; };
-		DFC070F31B9450A500B88313 /* Right.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F11B9450A500B88313 /* Right.storyboard */; settings = {ASSET_TAGS = (); }; };
-		DFC071011B94615300B88313 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F51B94615300B88313 /* Roboto-Black.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC071021B94615300B88313 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F61B94615300B88313 /* Roboto-BlackItalic.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC071031B94615300B88313 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F71B94615300B88313 /* Roboto-Bold.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC071041B94615300B88313 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F81B94615300B88313 /* Roboto-BoldItalic.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC071051B94615300B88313 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F91B94615300B88313 /* Roboto-Italic.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC071061B94615300B88313 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FA1B94615300B88313 /* Roboto-Light.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC071071B94615300B88313 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FB1B94615300B88313 /* Roboto-LightItalic.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC071081B94615300B88313 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FC1B94615300B88313 /* Roboto-Medium.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC071091B94615300B88313 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FD1B94615300B88313 /* Roboto-MediumItalic.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC0710A1B94615300B88313 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FE1B94615300B88313 /* Roboto-Regular.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC0710B1B94615300B88313 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FF1B94615300B88313 /* Roboto-Thin.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFC0710C1B94615300B88313 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC071001B94615300B88313 /* Roboto-ThinItalic.ttf */; settings = {ASSET_TAGS = (); }; };
-		DFEEBE6C1BAF4DCD00DE1825 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEEBE6B1BAF4DCD00DE1825 /* profileViewController.swift */; settings = {ASSET_TAGS = (); }; };
-		DFEEBE6E1BAF53E800DE1825 /* ChangeAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEEBE6D1BAF53E800DE1825 /* ChangeAvatarViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		DFAB3D9A1B97322600B02020 /* UIColor+hexValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFAB3D991B97322600B02020 /* UIColor+hexValue.swift */; };
+		DFC070F31B9450A500B88313 /* Right.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F11B9450A500B88313 /* Right.storyboard */; };
+		DFC071011B94615300B88313 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F51B94615300B88313 /* Roboto-Black.ttf */; };
+		DFC071021B94615300B88313 /* Roboto-BlackItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F61B94615300B88313 /* Roboto-BlackItalic.ttf */; };
+		DFC071031B94615300B88313 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F71B94615300B88313 /* Roboto-Bold.ttf */; };
+		DFC071041B94615300B88313 /* Roboto-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F81B94615300B88313 /* Roboto-BoldItalic.ttf */; };
+		DFC071051B94615300B88313 /* Roboto-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070F91B94615300B88313 /* Roboto-Italic.ttf */; };
+		DFC071061B94615300B88313 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FA1B94615300B88313 /* Roboto-Light.ttf */; };
+		DFC071071B94615300B88313 /* Roboto-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FB1B94615300B88313 /* Roboto-LightItalic.ttf */; };
+		DFC071081B94615300B88313 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FC1B94615300B88313 /* Roboto-Medium.ttf */; };
+		DFC071091B94615300B88313 /* Roboto-MediumItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FD1B94615300B88313 /* Roboto-MediumItalic.ttf */; };
+		DFC0710A1B94615300B88313 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FE1B94615300B88313 /* Roboto-Regular.ttf */; };
+		DFC0710B1B94615300B88313 /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC070FF1B94615300B88313 /* Roboto-Thin.ttf */; };
+		DFC0710C1B94615300B88313 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DFC071001B94615300B88313 /* Roboto-ThinItalic.ttf */; };
+		DFEEBE6C1BAF4DCD00DE1825 /* profileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEEBE6B1BAF4DCD00DE1825 /* profileViewController.swift */; };
+		DFEEBE6E1BAF53E800DE1825 /* ChangeAvatarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DFEEBE6D1BAF53E800DE1825 /* ChangeAvatarViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -130,6 +131,7 @@
 		DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesOptionsViewController.swift; sourceTree = "<group>"; };
 		DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundOptionsViewController.swift; sourceTree = "<group>"; };
+		DF70828D1BED0FF9005B6192 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
 		DF7C52BF1BCB95320087B2B4 /* UsernameInitialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UsernameInitialsViewController.swift; sourceTree = "<group>"; };
 		DF7C52C11BCB95530087B2B4 /* ChooseFileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseFileViewController.swift; sourceTree = "<group>"; };
 		DF7C52C31BCB957A0087B2B4 /* FacebookViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookViewController.swift; sourceTree = "<group>"; };
@@ -321,6 +323,7 @@
 		DF7F94C21BCFB28100B52126 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				DF70828D1BED0FF9005B6192 /* ChatMessage.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -587,6 +590,7 @@
 				DF7C52C01BCB95320087B2B4 /* UsernameInitialsViewController.swift in Sources */,
 				410CEB1A1B8B388300CAFFE9 /* LoadMoreHeaderTableViewCell.swift in Sources */,
 				4F28B1611B9101720033D8D1 /* DirectMessagesTableViewCell.swift in Sources */,
+				DF70828E1BED0FF9005B6192 /* ChatMessage.swift in Sources */,
 				DF113AE91BA6D91000CE6D17 /* MyAccountBarTabViewController.swift in Sources */,
 				DF7C52C81BCB95C30087B2B4 /* GithubViewController.swift in Sources */,
 				410CEB1C1B8B388300CAFFE9 /* NoDetailsTableViewCell.swift in Sources */,
