@@ -30,8 +30,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //JSON to keep the response
     var chatMessages:JSON = []
     
-    //Dictionary to keep the chatMessageData from the JSON response
+    /*
+       Dictionary to keep each chatMessage.
+       Each message is stored in this order [index:[_id,username,msg,type]]
+       The _id value is the user's id
+    */
     var chatMessageData = [Int():[String(),String(),String(),String()]]
+    
     
     //Dictionary to keep the timestamps from the JSON response
     var ts = [Int():[Double()]]
