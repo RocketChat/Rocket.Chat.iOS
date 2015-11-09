@@ -535,7 +535,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData.count - 1, inSection: 0)
         
-        if (lastVisibleCellsIndexPath.row == (self.chatMessageData.count - 2)) {
+        if (lastVisibleCellsIndexPath.row >= bottomIndexPath.row - 1) {
             
             self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             
