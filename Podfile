@@ -7,6 +7,7 @@ target 'Rocket.Chat.iOS' do
 # pod 'JSQCoreDataKit', :git => 'https://github.com/jessesquires/JSQCoreDataKit.git', :branch => 'release-2.0'
   pod 'ObjectiveDDP', :git => 'https://github.com/boundsj/ObjectiveDDP.git', :branch => 'master'
 #  pod 'ObjectiveDDP', '~> 0.1.8'
+  pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 end
 
 target 'Rocket.Chat.iOSTests' do
