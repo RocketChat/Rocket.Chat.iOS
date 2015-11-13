@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ObjectiveDDP
 
 class AccountBarViewController: UIViewController {
   
@@ -22,10 +23,21 @@ class AccountBarViewController: UIViewController {
   
   var delegate:SwitchAccountViewDelegate! = nil
     
+  var meteor:MeteorClient!
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Do any additional setup after loading the view.
+    //Get the username and
+    let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+    meteor = ad.meteorClient
+    let users = meteor.collections["users"] as! M13MutableOrderedDictionary
+    
+    let obj = users.objectAtIndex(0)
+    print(obj["_id"])
+    
+    self.usernameLabel.text = obj["username"] as? String
+    
   }
   
   override func didReceiveMemoryWarning() {

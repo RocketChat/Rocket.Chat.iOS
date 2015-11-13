@@ -41,7 +41,7 @@ class profileViewController: UIViewController, UITextFieldDelegate, UIPickerView
         let users = meteor.collections["users"] as! M13MutableOrderedDictionary
         
         let obj = users.objectAtIndex(0)        
-        
+        print(obj["_id"])
         
         usernameTextField.placeholder = obj["username"] as? String
         
