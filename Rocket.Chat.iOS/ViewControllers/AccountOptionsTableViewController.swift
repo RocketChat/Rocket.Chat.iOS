@@ -8,12 +8,18 @@
 
 import UIKit
 import MMDrawerController
+import ObjectiveDDP
 
 class AccountOptionsTableViewController: UITableViewController {
     
+    var meteor = MeteorClient!()
+    var ad:AppDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.ad = UIApplication.sharedApplication().delegate as? AppDelegate
+        self.meteor = self.ad!.meteorClient
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
