@@ -25,7 +25,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, willFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
         
         //Subsribe to Collections
-//        self.meteorClient.addSubscription("activeUsers")
+        self.meteorClient.addSubscription("activeUsers")
 //        self.meteorClient.addSubscription("userData")
         self.meteorClient.addSubscription("subscription")
 
