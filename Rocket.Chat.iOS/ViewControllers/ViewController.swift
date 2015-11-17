@@ -45,7 +45,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         let ad = UIApplication.sharedApplication().delegate as! AppDelegate
         meteor = ad.meteorClient
         
-        
         //Subscribe to rocketchat_message collection for the GENERAL channel
         self.meteor.addSubscription("messages", withParameters: ["GENERAL"])
 
@@ -79,7 +78,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
             } else {
                 
-                print(response!["result"]!)
+//                print(response!["result"]!)
                 
                 //JSON Handling
                 let result = JSON(response)
@@ -98,7 +97,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     let timestampInMilliseconds = timestampInDouble[0] / 1000
                     
                     let  cM = ChatMessage(user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
-                    
+        
                     
                     self.chatMessageData.append(cM)
 
@@ -106,7 +105,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 
                 self.chatMessageData = self.chatMessageData.reverse()
-                
                 
                 
                 //Reload data and scroll to the bottom of the tableview
