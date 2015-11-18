@@ -36,28 +36,20 @@ class AccountBarViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "userChange:", name: "users_changed", object: nil)
+        
         let userNameAndStatus = self.getUsernameAndStatus()
         
         self.usernameLabel.text = userNameAndStatus.0
         
-        switch userNameAndStatus.1 {
-            
-            case "online":
-                self.statusIcon.image = UIImage(named: "Green")
-            
-            case "away":
-                self.statusIcon.image = UIImage(named: "Yellow")
-            
-            case "busy":
-                self.statusIcon.image = UIImage(named: "Red")
-            
-            case "offline":
-                self.statusIcon.image = UIImage(named: "Grey")
-            
-            default:
-                self.statusIcon.image = UIImage(named: "Green")
-        }
+        self.changeStatusIcon(userNameAndStatus.1)
         
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "users_changed", object: nil)
+    
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,6 +69,41 @@ class AccountBarViewController: UIViewController {
         return (userName!, userStatus)
     }
     
+    
+    func changeStatusIcon(currentStatus: String) {
+        
+        switch currentStatus {
+            
+            case "online":
+                self.statusIcon.image = UIImage(named: "Green")
+                
+            case "away":
+                self.statusIcon.image = UIImage(named: "Yellow")
+                
+            case "busy":
+                self.statusIcon.image = UIImage(named: "Red")
+                
+            case "offline":
+                self.statusIcon.image = UIImage(named: "Grey")
+                
+            default:
+                self.statusIcon.image = UIImage(named: "Green")
+        }
+        
+    }
+    
+    
+    func userChange(notification:NSNotification){
+        
+        if notification.userInfo!["_id"] as? String == self.meteor.userId {
+            
+            let status = notification.userInfo!["status"] as? String ?? "offline"
+            
+            self.changeStatusIcon(status)
+            
+        }
+        
+    }
     
     // MARK: - Navigation
     
