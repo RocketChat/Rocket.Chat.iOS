@@ -29,7 +29,7 @@ class AccountBarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.ad = UIApplication.sharedApplication().delegate as? AppDelegate
         meteor = self.ad!.meteorClient
         
     }
@@ -90,7 +90,7 @@ class AccountBarViewController: UIViewController {
             default:
                 self.statusIcon.image = UIImage(named: "Green")
         }
-        
+        NSUserDefaults.standardUserDefaults().setValue(currentStatus, forKey: "previousStatus")
     }
     
     

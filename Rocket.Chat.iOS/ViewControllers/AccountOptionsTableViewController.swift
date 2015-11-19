@@ -79,6 +79,8 @@ class AccountOptionsTableViewController: UITableViewController {
                     
 //                    print(response["result"])
                     self.chooseOptionAndSetViews("ChatNav",color: "Green")
+                    NSUserDefaults.standardUserDefaults().setValue("online", forKey: "previousStatus")
+
                 })
             case 1:
                 print("Away")
@@ -91,6 +93,8 @@ class AccountOptionsTableViewController: UITableViewController {
                     
 //                    print(response["result"])
                     self.chooseOptionAndSetViews("ChatNav",color: "Yellow")
+                    NSUserDefaults.standardUserDefaults().setValue("away", forKey: "previousStatus")
+
                 })
             case 2:
                 print("Busy")
@@ -103,6 +107,7 @@ class AccountOptionsTableViewController: UITableViewController {
                     
 //                    print(response["result"])
                     self.chooseOptionAndSetViews("ChatNav",color: "Red")
+                    NSUserDefaults.standardUserDefaults().setValue("busy", forKey: "previousStatus")
                 })
             case 3:
                 print("Invisible")
@@ -116,6 +121,8 @@ class AccountOptionsTableViewController: UITableViewController {
                     
 //                    print(response["result"])
                     self.chooseOptionAndSetViews("ChatNav",color:"Grey")
+                    NSUserDefaults.standardUserDefaults().setValue("offline", forKey: "previousStatus")
+
                 })
             default:
                 print("default")
