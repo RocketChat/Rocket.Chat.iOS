@@ -24,12 +24,13 @@ class AccountBarViewController: UIViewController {
     var delegate:SwitchAccountViewDelegate! = nil
     
     var meteor:MeteorClient!
+    var ad:AppDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-        meteor = ad.meteorClient
+        self.ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        meteor = self.ad!.meteorClient
         
     }
     
