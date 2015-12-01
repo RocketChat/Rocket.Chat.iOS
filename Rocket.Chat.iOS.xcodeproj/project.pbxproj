@@ -39,6 +39,7 @@
 		DF113AE91BA6D91000CE6D17 /* MyAccountBarTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */; };
 		DF2A60E61B8DC6280014548B /* RegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E51B8DC6280014548B /* RegisterViewController.swift */; };
 		DF2A60E81B8DCD3A0014548B /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */; };
+		DF4928A51BFDCA3400B1F901 /* DarwinNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4928A41BFDCA3400B1F901 /* DarwinNotifications.swift */; };
 		DF5F92611BAC4304000EA4C3 /* MessagesOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */; };
 		DF5F92631BAC4315000EA4C3 /* SoundOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */; };
 		DF70828E1BED0FF9005B6192 /* ChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF70828D1BED0FF9005B6192 /* ChatMessage.swift */; };
@@ -129,6 +130,7 @@
 		DF113AE81BA6D91000CE6D17 /* MyAccountBarTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyAccountBarTabViewController.swift; sourceTree = "<group>"; };
 		DF2A60E51B8DC6280014548B /* RegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterViewController.swift; path = ../RegisterViewController.swift; sourceTree = "<group>"; };
 		DF2A60E71B8DCD3A0014548B /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		DF4928A41BFDCA3400B1F901 /* DarwinNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DarwinNotifications.swift; sourceTree = "<group>"; };
 		DF5F92601BAC4304000EA4C3 /* MessagesOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessagesOptionsViewController.swift; sourceTree = "<group>"; };
 		DF5F92621BAC4315000EA4C3 /* SoundOptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SoundOptionsViewController.swift; sourceTree = "<group>"; };
 		DF70828D1BED0FF9005B6192 /* ChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessage.swift; sourceTree = "<group>"; };
@@ -289,6 +291,7 @@
 				410CEB161B8B387B00CAFFE9 /* Cells */,
 				410CEB151B8B387500CAFFE9 /* ViewControllers */,
 				DFAB3D9B1B97323700B02020 /* Extensions */,
+				DF4928A41BFDCA3400B1F901 /* DarwinNotifications.swift */,
 				DF7F94C01BCFA67000B52126 /* RoomHistoryManager.swift */,
 				410CEB131B8B386E00CAFFE9 /* AppDelegate.swift */,
 				4FB7E4DB1B70111D00C69777 /* Main.storyboard */,
@@ -594,6 +597,7 @@
 				DF113AE91BA6D91000CE6D17 /* MyAccountBarTabViewController.swift in Sources */,
 				DF7C52C81BCB95C30087B2B4 /* GithubViewController.swift in Sources */,
 				410CEB1C1B8B388300CAFFE9 /* NoDetailsTableViewCell.swift in Sources */,
+				DF4928A51BFDCA3400B1F901 /* DarwinNotifications.swift in Sources */,
 				DF7C52C41BCB957A0087B2B4 /* FacebookViewController.swift in Sources */,
 				DF7C52CA1BCB95DC0087B2B4 /* LinkedInViewController.swift in Sources */,
 				4F18F6851BB3545500048D7E /* BaseViewController.swift in Sources */,
