@@ -55,11 +55,48 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func reportConnection() {
     print("================> connected to server!")
+    
+    //Notify current rootview controller
+    let controller = self.window?.rootViewController
+
+    if let controllerType = controller as? LoginViewController {
+        
+        controllerType.connectionStatus(true)
+
+    } else if let controllerType = controller as? MMDrawerController {
+        
+        let centerContainerNavController = controllerType.centerViewController as! UINavigationController
+        
+        if let centerContainerOfMMDC = centerContainerNavController.viewControllers[0] as? ViewController {
+            
+            centerContainerOfMMDC.connectionStatus(true)
+
+        }
+    }
   }
   
   func reportDisconnection() {
     print("================> disconnected from server!")
-  }
+    
+    //notify current rootview controller
+    let controller = self.window?.rootViewController
+
+    if let controllerType = controller as? LoginViewController {
+        
+        controllerType.connectionStatus(false)
+        
+    } else if let controllerType = controller as? MMDrawerController {
+        
+        let centerContainerNavController = controllerType.centerViewController as! UINavigationController
+        
+        if let centerContainerOfMMDC = centerContainerNavController.viewControllers[0] as? ViewController {
+            
+            centerContainerOfMMDC.connectionStatus(false)
+
+        }
+    }
+
+    }
   
   // MARK: - Connection
   override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<(Void)>) {
@@ -142,7 +179,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
   }
-  
-  
   
 }

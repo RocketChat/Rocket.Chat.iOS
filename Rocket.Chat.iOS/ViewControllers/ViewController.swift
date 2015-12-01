@@ -19,6 +19,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet var mainTableview: UITableView!
     @IBOutlet var composeMsg: UITextView!
+    @IBOutlet var composeMsgButton: UIButton!
     
     // indexPath to find the bottom of the tableview
     var bottomIndexPath:NSIndexPath = NSIndexPath()
@@ -32,6 +33,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     //Array to keep each chatMessage
     var chatMessageData = [ChatMessage]()
+    
+    
+    @IBOutlet var activityIndicatorInViewController: UIActivityIndicatorView!
+    @IBOutlet var customIndicatorViewInViewController: UIView!
     
     
     override func viewWillAppear(animated: Bool) {
@@ -151,7 +156,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         composeMsg.layer.borderColor = UIColor.blackColor().CGColor
         composeMsg.layer.borderWidth = 0.5
         composeMsg.layer.cornerRadius = 10
-
+        
         dateFormatter.dateFormat = "HH:mm"
     }
     
@@ -378,7 +383,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
         
-        
         if (composeMsg.text != ""){
             
             var messageObject = NSDictionary()
@@ -542,6 +546,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         }
         
+        
+    }
+    
+    func connectionStatus(live:Bool) {
+
+        if (live){
+            
+            self.customIndicatorViewInViewController.hidden = true
+            self.activityIndicatorInViewController.stopAnimating()
+            self.composeMsg.userInteractionEnabled = false
+            self.composeMsg.backgroundColor = UIColor.whiteColor()
+            self.composeMsgButton.userInteractionEnabled = true
+            self.composeMsgButton.enabled = true
+            
+        }else {
+            
+            self.customIndicatorViewInViewController.hidden = false
+            self.activityIndicatorInViewController.startAnimating()
+            self.composeMsg.userInteractionEnabled = false
+            self.composeMsg.backgroundColor = UIColor.lightGrayColor()
+            self.composeMsgButton.userInteractionEnabled = false
+            self.composeMsgButton.enabled = false
+        }
+
         
     }
     
