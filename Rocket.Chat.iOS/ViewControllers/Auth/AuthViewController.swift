@@ -85,7 +85,6 @@ class AuthViewController: UIViewController {
     let centerContainer:MMDrawerController = MMDrawerController(centerViewController: centerNav, leftDrawerViewController: leftSideNav,rightDrawerViewController:rightNav)
     
     //Open and Close gestures for the center container
-    
     centerContainer.openDrawerGestureModeMask = MMOpenDrawerGestureMode.PanningCenterView;
     centerContainer.closeDrawerGestureModeMask = MMCloseDrawerGestureMode.PanningCenterView;
     
@@ -98,6 +97,6 @@ class AuthViewController: UIViewController {
     //Set the rootViewController as the center container
     appDelegate.window!.rootViewController = appDelegate.centerContainer
     appDelegate.window!.makeKeyAndVisible()
-
+    
   }
 }

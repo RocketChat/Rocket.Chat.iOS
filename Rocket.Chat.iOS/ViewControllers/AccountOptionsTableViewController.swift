@@ -146,6 +146,7 @@ class AccountOptionsTableViewController: UITableViewController {
             if (meteor.connected){
                 
                 meteor.logout()
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: "connectedWithSessionToken")
                 print("Logged out")
                 ad.window?.rootViewController = loginVC
             
