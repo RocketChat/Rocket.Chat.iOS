@@ -143,6 +143,45 @@ class ChatsNavTableViewController: UITableViewController {
         return LeftMenuHeaders(rawValue: section)?.toString()
     }
     
+    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        // Table view cells are reused and should be dequeued using a cell identifier.
+        
+        var cell: UITableViewCell?
+        
+        if indexPath.section == LeftMenuHeaders.Channels.rawValue {
+            
+            let mycell = tableView.dequeueReusableCellWithIdentifier(LeftMenuCellIds.Channels.rawValue, forIndexPath: indexPath) as! ChannelsTableViewCell
+            drawChannelsCell(mycell, currentTableView: tableView, currentIndexPath: indexPath)
+            
+            cell = mycell
+            
+        }else if indexPath.section == LeftMenuHeaders.DirectMessages.rawValue {
+            
+            let mycell = tableView.dequeueReusableCellWithIdentifier(LeftMenuCellIds.DirectMessages.rawValue, forIndexPath: indexPath) as! DirectMessagesTableViewCell
+            drawMessagesCell(mycell, currentTableView: tableView, currentIndexPath: indexPath)
+            
+            cell = mycell
+            
+        }else if indexPath.section == LeftMenuHeaders.PrivateGroups.rawValue {
+            
+            let mycell = tableView.dequeueReusableCellWithIdentifier(LeftMenuCellIds.PrivateGroups.rawValue, forIndexPath: indexPath) as! PrivateGroupsTableViewCell
+            drawGroupsCell(mycell, currentTableView: tableView, currentIndexPath: indexPath)
+            
+            cell = mycell
+            
+        }else if indexPath.section == LeftMenuHeaders.History.rawValue {
+            
+            let mycell = tableView.dequeueReusableCellWithIdentifier(LeftMenuCellIds.History.rawValue, forIndexPath: indexPath) as! HistoryTableViewCell
+            drawHistoryCell(mycell, currentTableView: tableView, currentIndexPath: indexPath)
+            
+            cell = mycell
+            
+        }
+        
+        return cell!
+        
+    }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -152,7 +191,78 @@ class ChatsNavTableViewController: UITableViewController {
         //TODO: replace this with hex value once we merge with @kormic's branch
     }
     
+    func drawChannelsCell(currentCell: ChannelsTableViewCell, currentTableView: UITableView, currentIndexPath: NSIndexPath){
+        
+        
+        if self.channelsData.count == 0 {
+            currentCell.nameLabel?.text = "You haven't joined any rooms yet"
+        }else {
+            currentCell.statusLabel?.text = "#"
+            currentCell.nameLabel?.text = "\(self.channelsData[currentIndexPath.row].name)"
+        }
+    }
+    
+    func drawMessagesCell(currentCell: DirectMessagesTableViewCell, currentTableView: UITableView, currentIndexPath: NSIndexPath){
+        
+        if self.directMessagesData.count == 0 {
+            currentCell.nameLabel?.text = "You haven't started any conversations yet"
+        }else {
+            currentCell.statusLabel?.text = "@"
+            currentCell.nameLabel?.text = "\(self.directMessagesData[currentIndexPath.row].name)"
+        }
+    }
+    
+    func drawGroupsCell(currentCell: PrivateGroupsTableViewCell, currentTableView: UITableView, currentIndexPath: NSIndexPath){
+        
+        if self.privateGroupsData.count == 0 {
+            //            currentCell.nameLabel.font = UIFont.italicSystemFontOfSize(15)
+            //            currentCell.nameLabel.textColor = UIColor.rocketSecondaryFontColor()
+            currentCell.nameLabel?.text = "You have no private groups yet"
+        }else {
+            currentCell.statusLabel?.text = "g"
+            currentCell.nameLabel?.text = "\(self.privateGroupsData[currentIndexPath.row].name)"
+        }
+        
+    }
+    
+    func drawHistoryCell(currentCell: HistoryTableViewCell, currentTableView: UITableView, currentIndexPath: NSIndexPath){
+        
+        currentCell.nameLabel.hidden = true
+        currentCell.userInteractionEnabled = false
+        //        currentCell.nameLabel?.text = "History \(currentIndexPath.section) Row \(currentIndexPath.row)"
+    }
+    
+    
+    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        
+        if indexPath.section == LeftMenuHeaders.Channels.rawValue {
+            
+            if ((delegate) != nil){ // let delegate know about event
+                delegate!.didSelectRoom(self.channelsData[indexPath.row].rid, roomName: self.channelsData[indexPath.row].name)
+            }
+            
+        }else if indexPath.section == LeftMenuHeaders.DirectMessages.rawValue {
+            
+            if ((delegate) != nil){ // let delegate know about event
+                delegate!.didSelectRoom(self.directMessagesData[indexPath.row].rid, roomName: self.directMessagesData[indexPath.row].name)
+            }
+            
+        }else if indexPath.section == LeftMenuHeaders.PrivateGroups.rawValue {
+            
+            if ((delegate) != nil){ // let delegate know about event
+                delegate!.didSelectRoom(self.privateGroupsData[indexPath.row].rid, roomName: self.privateGroupsData[indexPath.row].name)
+            }
+            
+        }else if indexPath.section == LeftMenuHeaders.History.rawValue {
+            print("History")
+        }
+        
+        self.ad?.centerContainer?.closeDrawerAnimated(true, completion: nil)
+    }
+    
 }
+
 
 /** The cell ids used in the UITableView in order to identify the different prototype cells. */
 enum LeftMenuCellIds: String {
