@@ -173,24 +173,30 @@ enum LeftMenuCellIds: String {
 
 /** The section IDs and names for the Left Menu UITableView */
 enum LeftMenuHeaders: Int {
-  
-  case Favorites = 0
-  case Channels
-  case DirectMessages
-  case PrivateGroups
-  
-  func toString()-> String {
-    switch self{
-    case .Favorites:
-      return "Favorites"
-    case .Channels:
-      return "Channels"
-    case .DirectMessages:
-      return "Direct Messages"
-    case .PrivateGroups:
-      return "Private Groups"
+    
+    case Channels = 0
+    case DirectMessages
+    case PrivateGroups
+    case History
+    
+    func toString()-> String {
+        switch self{
+        case .Channels:
+            return "Channels"
+        case .DirectMessages:
+            return "Direct Messages"
+        case .PrivateGroups:
+            return "Private Groups"
+        case .History:
+            return "History"
+        }
+        
     }
     
-  }
-  
+}
+
+
+/** This protocol is used for handling events from the AccountBar. */
+protocol SwitchRoomDelegate {
+    func didSelectRoom(rid: String, roomName: String)
 }
