@@ -31,16 +31,6 @@ class ChatsNavTableViewController: UITableViewController {
     tableView.separatorColor = UIColor.clearColor()
 
   }
-  // MARK: - Table view data source
-  override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
-  }
-  
-  override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    
-    return LeftMenuHeaders(rawValue: section)?.toString()
-  }
-  
   override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
     
     // Table view cells are reused and should be dequeued using a cell identifier.
@@ -98,6 +88,49 @@ class ChatsNavTableViewController: UITableViewController {
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 4
+    }
+    
+    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        switch LeftMenuHeaders(rawValue: section)!.rawValue{
+            
+        case LeftMenuHeaders.Channels.rawValue:
+            
+            if self.channelsData.count == 0 {
+                return 1
+            }else {
+                return self.channelsData.count
+            }
+            
+        case LeftMenuHeaders.DirectMessages.rawValue:
+            
+            if self.directMessagesData.count == 0 {
+                return 1
+            }else {
+                return self.directMessagesData.count
+            }
+        case LeftMenuHeaders.PrivateGroups.rawValue:
+            
+            if self.privateGroupsData.count == 0 {
+                return 1
+            }else {
+                return self.privateGroupsData.count
+            }
+            
+        default:
+            
+            return 1
+            
+        }
+        
+        
+    }
+    
+    
+    
+    override func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return LeftMenuHeaders(rawValue: section)?.toString()
     }
     
     
