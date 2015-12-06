@@ -31,12 +31,6 @@ class ChatsNavTableViewController: UITableViewController {
     tableView.separatorColor = UIColor.clearColor()
 
   }
-  
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
-    // Dispose of any resources that can be recreated.
-  }
-  
   // MARK: - Table view data source
   
   override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -100,6 +94,12 @@ class ChatsNavTableViewController: UITableViewController {
     currentCell.statusLabel?.text = "g"
     currentCell.nameLabel?.text = "Groups \(currentIndexPath.section) Row \(currentIndexPath.row)"
   }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
