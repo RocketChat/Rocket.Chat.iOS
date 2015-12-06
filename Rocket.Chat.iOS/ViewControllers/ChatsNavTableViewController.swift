@@ -11,12 +11,7 @@ import ObjectiveDDP
 import SwiftyJSON
 
 class ChatsNavTableViewController: UITableViewController {
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
     var meteor:MeteorClient?
     var channelsData = [Room]()
     var directMessagesData = [Room]()
@@ -24,67 +19,82 @@ class ChatsNavTableViewController: UITableViewController {
     var ad:AppDelegate?
     var delegate:SwitchRoomDelegate?
     
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem()
     
-    // this is to remove the bottom line 'border' on the table view cells
-    tableView.separatorColor = UIColor.clearColor()
-
-  }
-  override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    
-    // Table view cells are reused and should be dequeued using a cell identifier.
-
-    var cell: UITableViewCell?
-    
-    if indexPath.section == LeftMenuHeaders.Favorites.rawValue {
-      let mycell = tableView.dequeueReusableCellWithIdentifier(LeftMenuCellIds.Favorites.rawValue, forIndexPath: indexPath) as! FavoritesTableViewCell
-      drawFavoritesCell(mycell, currentTableView: tableView, currentIndexPath: indexPath)
-      cell = mycell
-    }else if indexPath.section == LeftMenuHeaders.Channels.rawValue {
-      let mycell = tableView.dequeueReusableCellWithIdentifier(LeftMenuCellIds.Channels.rawValue, forIndexPath: indexPath) as! ChannelsTableViewCell
-      drawChannelsCell(mycell, currentTableView: tableView, currentIndexPath: indexPath)
-      cell = mycell
-    }else if indexPath.section == LeftMenuHeaders.DirectMessages.rawValue {
-      let mycell = tableView.dequeueReusableCellWithIdentifier(LeftMenuCellIds.DirectMessages.rawValue, forIndexPath: indexPath) as! DirectMessagesTableViewCell
-      drawMessagesCell(mycell, currentTableView: tableView, currentIndexPath: indexPath)
-      cell = mycell
-    }else if indexPath.section == LeftMenuHeaders.PrivateGroups.rawValue {
-      let mycell = tableView.dequeueReusableCellWithIdentifier(LeftMenuCellIds.PrivateGroups.rawValue, forIndexPath: indexPath) as! PrivateGroupsTableViewCell
-      drawGroupsCell(mycell, currentTableView: tableView, currentIndexPath: indexPath)
-      cell = mycell
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        ad = UIApplication.sharedApplication().delegate as? AppDelegate
+        self.meteor = self.ad?.meteorClient
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "roomAdded:", name: "rocketchat_subscription_added", object: nil)
+        
+        if !NSUserDefaults.standardUserDefaults().boolForKey("connectedWithSessionToken") {
+            
+            let rocketchat_subscription = self.meteor?.collections["rocketchat_subscription"] as? M13MutableOrderedDictionary
+            print(rocketchat_subscription)
+            
+            for var i:UInt = 0 ; i < (rocketchat_subscription?.count()) ; i++ {
+                
+                print(rocketchat_subscription?.objectAtIndex(i)!)
+                
+                let room = Room(_id: (rocketchat_subscription?.objectAtIndex(i)!["_id"])! as! String, unread: (rocketchat_subscription?.objectAtIndex(i)!["unread"])! as! Int, t: (rocketchat_subscription?.objectAtIndex(i)!["t"])! as! String, open: (rocketchat_subscription?.objectAtIndex(i)!["open"])! as! Bool, ts: (rocketchat_subscription?.objectAtIndex(i)!["ts"])! as? Double, rid: (rocketchat_subscription?.objectAtIndex(i)!["rid"])! as! String, ls: (rocketchat_subscription?.objectAtIndex(i)!["ls"])! as? Double, alert: (rocketchat_subscription?.objectAtIndex(i)!["alert"])! as! Bool, name: (rocketchat_subscription?.objectAtIndex(i)!["name"])! as! String)
+                
+                if (room.t == "c"){
+                    self.channelsData.append(room)
+                } else if (room.t == "d") {
+                    self.directMessagesData.append(room)
+                } else if (room.t == "p") {
+                    self.privateGroupsData.append(room)
+                }
+                
+                
+            }
+            
+            //            print("reloading")
+            //            print(self.channelsData)
+            //            print(self.directMessagesData)
+            //            print(self.privateGroupsData)
+            self.tableView.reloadData()
+            
+        }
+        
+        // Uncomment the following line to preserve selection between presentations
+        // self.clearsSelectionOnViewWillAppear = false
+        
+        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
+        // self.navigationItem.rightBarButtonItem = self.editButtonItem()
+        
+        // this is to remove the bottom line 'border' on the table view cells
+        tableView.separatorColor = UIColor.clearColor()
+        
     }
     
-    return cell!
-  }
-  func drawFavoritesCell(currentCell: FavoritesTableViewCell, currentTableView: UITableView, currentIndexPath: NSIndexPath){
-    //TODO
-    currentCell.nameLabel?.text = "Favorites \(currentIndexPath.section) Row \(currentIndexPath.row)"
-  }
-  
-  func drawChannelsCell(currentCell: ChannelsTableViewCell, currentTableView: UITableView, currentIndexPath: NSIndexPath){
-    //TODO
-    currentCell.statusLabel?.text = "#"
-    currentCell.nameLabel?.text = "Channels \(currentIndexPath.section) Row \(currentIndexPath.row)"
-  }
-  
-  func drawMessagesCell(currentCell: DirectMessagesTableViewCell, currentTableView: UITableView, currentIndexPath: NSIndexPath){
-    //TODO
-    currentCell.statusLabel?.text = "@"
-    currentCell.nameLabel?.text = "Messages \(currentIndexPath.section) Row \(currentIndexPath.row)"
-  }
-  
-  func drawGroupsCell(currentCell: PrivateGroupsTableViewCell, currentTableView: UITableView, currentIndexPath: NSIndexPath){
-    //TODO
-    currentCell.statusLabel?.text = "g"
-    currentCell.nameLabel?.text = "Groups \(currentIndexPath.section) Row \(currentIndexPath.row)"
-  }
+    
+    func roomAdded(notification: NSNotification) {
+        
+        let incomingRoom = JSON(notification.userInfo!)
+        //        print(incomingRoom)
+        
+        let room = Room(_id: incomingRoom["_id"].string!, unread: incomingRoom["unread"].int!, t: incomingRoom["t"].string!, open: incomingRoom["open"].bool!, ts: incomingRoom["ts"]["$date"].double, rid: incomingRoom["rid"].string!, ls: incomingRoom["ls"]["$date"].double, alert: incomingRoom["alert"].bool!, name: incomingRoom["name"].string!)
+        //        print(room.t)
+        if (room.t == "c"){
+            self.channelsData.append(room)
+        } else if (room.t == "d") {
+            self.directMessagesData.append(room)
+        } else if (room.t == "p") {
+            self.privateGroupsData.append(room)
+        }
+        //        print(self.channelsData)
+        self.tableView.reloadData()
+        
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Table view data source
     
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 4
