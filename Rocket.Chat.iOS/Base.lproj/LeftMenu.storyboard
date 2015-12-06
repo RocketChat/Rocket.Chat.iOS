@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9060" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
@@ -259,7 +258,7 @@
                         <sections>
                             <tableViewSection headerTitle="Status" id="ARU-id-X4b" userLabel="Status">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" id="B4G-uR-27I" userLabel="OnlineCell" customClass="FavoritesTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="B4G-uR-27I" userLabel="OnlineCell" customClass="HistoryTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="B4G-uR-27I" id="n1a-UP-Zx0">
@@ -290,7 +289,7 @@
                                             <outlet property="nameLabel" destination="fBj-cQ-OOH" id="hc7-51-rnT"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" id="Dm6-6G-uZE" userLabel="AwayCell" customClass="FavoritesTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="Dm6-6G-uZE" userLabel="AwayCell" customClass="HistoryTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dm6-6G-uZE" id="tmF-K1-p9o">
@@ -323,7 +322,7 @@
                                             <outlet property="nameLabel" destination="qSH-UG-nmE" id="3O3-0J-7aC"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" id="Vlu-ml-Caq" userLabel="BusyCell" customClass="FavoritesTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="Vlu-ml-Caq" userLabel="BusyCell" customClass="HistoryTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vlu-ml-Caq" id="nwa-3P-qGw">
@@ -356,7 +355,7 @@
                                             <outlet property="nameLabel" destination="jbv-ZA-Pku" id="F3r-Jn-t9r"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" id="ipY-m6-T2K" userLabel="InvisibleCell" customClass="FavoritesTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="ipY-m6-T2K" userLabel="InvisibleCell" customClass="HistoryTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="160" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ipY-m6-T2K" id="2zd-6G-vud">
@@ -393,7 +392,7 @@
                             </tableViewSection>
                             <tableViewSection headerTitle="Options" id="iYe-pn-z1y" userLabel="Options">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" id="Dh1-1s-5lg" userLabel="SettingsCell" customClass="FavoritesTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="Dh1-1s-5lg" userLabel="SettingsCell" customClass="HistoryTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="232" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Dh1-1s-5lg" id="RLt-d7-UWs">
@@ -424,7 +423,7 @@
                                             <outlet property="nameLabel" destination="KJX-i1-Ef2" id="Ebp-fy-UL9"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" id="i4I-MC-acb" userLabel="SettingsCell" customClass="FavoritesTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="i4I-MC-acb" userLabel="SettingsCell" customClass="HistoryTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="276" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="i4I-MC-acb" id="SXM-4u-RoX">
@@ -601,7 +600,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.01176470588" green="0.26274509800000001" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="favoritesCell" id="QgN-K3-dzw" customClass="FavoritesTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="channelsCell" id="QgN-K3-dzw" customClass="ChannelsTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="50" width="320" height="32"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QgN-K3-dzw" id="pAf-W3-Xz8">
@@ -614,7 +613,7 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNs-Md-WAz">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iNs-Md-WAz">
                                             <rect key="frame" x="8" y="-2" width="24" height="33"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="24" id="bPc-nn-prS"/>
@@ -640,24 +639,24 @@
                                     <outlet property="statusLabel" destination="iNs-Md-WAz" id="mlS-1x-8il"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="channelsCell" id="MYV-8Q-fXD" customClass="ChannelsTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dmCell" id="MYV-8Q-fXD" customClass="DirectMessagesTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="82" width="320" height="32"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="MYV-8Q-fXD" id="OR5-Ti-skW">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="31"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQd-Gq-fHy">
-                                            <rect key="frame" x="8" y="0.0" width="24" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="24" id="WEz-Cg-MQf"/>
-                                            </constraints>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Jz-gK-Dff">
+                                            <rect key="frame" x="31" y="0.0" width="269" height="31"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8Jz-gK-Dff">
-                                            <rect key="frame" x="31" y="0.0" width="269" height="31"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dQd-Gq-fHy">
+                                            <rect key="frame" x="8" y="0.0" width="24" height="31"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="24" id="WEz-Cg-MQf"/>
+                                            </constraints>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -679,7 +678,7 @@
                                     <outlet property="statusLabel" destination="dQd-Gq-fHy" id="pLf-Fx-BMO"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="dmCell" id="HeS-hV-i2I" customClass="DirectMessagesTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupsCell" id="HeS-hV-i2I" customClass="PrivateGroupsTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="114" width="320" height="32"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="HeS-hV-i2I" id="qAy-W9-uru">
@@ -692,7 +691,7 @@
                                             <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gW-a9-xB2">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3gW-a9-xB2">
                                             <rect key="frame" x="8" y="0.0" width="24" height="31"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="24" id="Kqi-z7-J1e"/>
@@ -718,22 +717,13 @@
                                     <outlet property="statusLabel" destination="3gW-a9-xB2" id="Tsf-H9-qc5"/>
                                 </connections>
                             </tableViewCell>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groupsCell" id="k6P-FJ-ssG" customClass="PrivateGroupsTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="historyCell" id="k6P-FJ-ssG" customClass="HistoryTableViewCell" customModule="Rocket_Chat_iOS" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="146" width="320" height="32"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k6P-FJ-ssG" id="gUh-JN-pgB">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="31"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="s" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vX5-am-dbw">
-                                            <rect key="frame" x="8" y="0.0" width="24" height="31"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="24" id="a3K-UY-4G2"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                            <color key="textColor" red="1" green="1" blue="1" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label..." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ekv-MU-CXr">
                                             <rect key="frame" x="31" y="0.0" width="269" height="31"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -742,19 +732,15 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Ekv-MU-CXr" firstAttribute="leading" secondItem="gUh-JN-pgB" secondAttribute="leadingMargin" constant="23" id="1om-YN-9E6"/>
-                                        <constraint firstItem="Ekv-MU-CXr" firstAttribute="top" secondItem="gUh-JN-pgB" secondAttribute="top" id="2iE-ZD-0gf"/>
-                                        <constraint firstAttribute="trailingMargin" secondItem="Ekv-MU-CXr" secondAttribute="trailing" constant="12" id="Fix-L7-an2"/>
-                                        <constraint firstItem="vX5-am-dbw" firstAttribute="firstBaseline" secondItem="Ekv-MU-CXr" secondAttribute="firstBaseline" id="PE5-z3-nWa"/>
-                                        <constraint firstAttribute="bottom" secondItem="vX5-am-dbw" secondAttribute="bottom" id="Pdz-MZ-Z8s"/>
-                                        <constraint firstAttribute="leadingMargin" secondItem="vX5-am-dbw" secondAttribute="leading" id="iKZ-9p-dOQ"/>
-                                        <constraint firstItem="vX5-am-dbw" firstAttribute="baseline" secondItem="Ekv-MU-CXr" secondAttribute="baseline" id="wlx-Af-Ze5"/>
+                                        <constraint firstItem="Ekv-MU-CXr" firstAttribute="top" secondItem="gUh-JN-pgB" secondAttribute="top" id="2d1-3D-9BA"/>
+                                        <constraint firstItem="Ekv-MU-CXr" firstAttribute="leading" secondItem="gUh-JN-pgB" secondAttribute="leadingMargin" constant="23" id="F3t-QN-6Iu"/>
+                                        <constraint firstAttribute="bottom" secondItem="Ekv-MU-CXr" secondAttribute="bottom" id="SKw-4q-WqF"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="Ekv-MU-CXr" secondAttribute="trailing" constant="12" id="bwn-q3-b2G"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.26274509800000001" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <outlet property="nameLabel" destination="Ekv-MU-CXr" id="Gjg-vi-B7a"/>
-                                    <outlet property="statusLabel" destination="vX5-am-dbw" id="QYF-hV-TtA"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
