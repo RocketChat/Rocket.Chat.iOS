@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ObjectiveDDP
+import SwiftyJSON
 
 class ChatsNavTableViewController: UITableViewController {
   
@@ -15,6 +17,12 @@ class ChatsNavTableViewController: UITableViewController {
     
     // Uncomment the following line to preserve selection between presentations
     // self.clearsSelectionOnViewWillAppear = false
+    var meteor:MeteorClient?
+    var channelsData = [Room]()
+    var directMessagesData = [Room]()
+    var privateGroupsData = [Room]()
+    var ad:AppDelegate?
+    var delegate:SwitchRoomDelegate?
     
     // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
     // self.navigationItem.rightBarButtonItem = self.editButtonItem()
