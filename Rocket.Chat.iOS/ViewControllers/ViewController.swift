@@ -261,11 +261,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 return noDetailsCell!
             
-            }else{
+            }else if (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "uj"){
                 
                 //Set text to noDetailsMessage label
-                noDetailsCell!.noDetailsMessage.text = self.chatMessageData[indexPath.row].message
-                noDetailsCell?.noDetailsMessage.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                noDetailsCell!.noDetailsMessage.text = "has joined the channel"
+                noDetailsCell?.noDetailsMessage.font = UIFont.italicSystemFontOfSize(15)
+                
+                //Set color to #444444
+                noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
+                
+                return noDetailsCell!
+                
+            }else if (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "room_changed_privacy"){
+                
+                //Set text to noDetailsMessage label
+                noDetailsCell!.noDetailsMessage.text = "room type has changed to \(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message) by \(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].username)"
+                noDetailsCell?.noDetailsMessage.font = UIFont.italicSystemFontOfSize(15)
                 
                 //Set color to #444444
                 noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
@@ -273,11 +284,54 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 return noDetailsCell!
                 
             }
+            else{
+                
+                if (self.tmpChatMessage?.messageType == "tmp") {
+                    
+                    if (indexPath.row == self.chatMessageData[self.lastJoinedRoom!]?.count) {
+                        
+                        //Set text to noDetailsMessage label
+                        noDetailsCell!.noDetailsMessage.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                        noDetailsCell?.noDetailsMessage.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                        
+                        //Set color to #444444
+                        noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketRedColor()
+                        
+                        return noDetailsCell!
+                        
+                    }else {
+                        
+                        //Set text to noDetailsMessage label
+                        noDetailsCell!.noDetailsMessage.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                        noDetailsCell?.noDetailsMessage.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                        
+                        //Set color to #444444
+                        noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
+                        
+                        return noDetailsCell!
+                        
+                    }
+                    
+                }else {
+                
+                    //Set text to noDetailsMessage label
+                    noDetailsCell!.noDetailsMessage.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                    noDetailsCell?.noDetailsMessage.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                    
+                    //Set color to #444444
+                    noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
+                    
+                    return noDetailsCell!
+                
+                }
+                
+                
+            }
             
             
         }
         //If different user and joined the channel - return a full detailed cell
-        else if (!sameUser && self.chatMessageData[indexPath.row].messageType == "uj"){
+        else if (!sameUser && self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "uj"){
             
             var fullDetailsCell:MainTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("fullDetailsCell", forIndexPath: indexPath) as? MainTableViewCell
             
@@ -338,15 +392,79 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 return fullDetailsCell!
                 
                 
-            }
-            else {
+            } else if (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "uj") {
+                
+                //Set the timestamp
+                fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
+                fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
                 
                 //Set the message text
-                fullDetailsCell!.messageLabel.text = self.chatMessageData[indexPath.row].message
-                fullDetailsCell?.messageLabel.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                fullDetailsCell!.messageLabel.text = "has joined the channel"
+                fullDetailsCell?.messageLabel.font = UIFont.italicSystemFontOfSize(15)
                 fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
                 
                 return fullDetailsCell!
+                
+            } else if (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "room_changed_privacy") {
+                
+                //Set the timestamp
+                fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
+                fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
+                
+                //Set the message text
+                fullDetailsCell!.messageLabel.text = "room type has changed to \(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message) by \(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].username)"
+                fullDetailsCell?.messageLabel.font = UIFont.italicSystemFontOfSize(15)
+                fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
+                
+                return fullDetailsCell!
+                
+            } else {
+                
+                if (self.tmpChatMessage?.messageType == "tmp") {
+                    
+                    if (indexPath.row == self.chatMessageData[self.lastJoinedRoom!]!.count) {
+                        
+                        //Hide the timestamp
+                        fullDetailsCell!.timeLabel.text = ""
+                        
+                        //Set the message text
+                        fullDetailsCell!.messageLabel.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                        fullDetailsCell?.messageLabel.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                        fullDetailsCell!.messageLabel.textColor = UIColor.rocketRedColor()
+                        
+                        return fullDetailsCell!
+                        
+                    }else {
+                        
+                        //Set the timestamp
+                        fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
+                        fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
+                        
+                        //Set the message text
+                        fullDetailsCell!.messageLabel.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                        fullDetailsCell?.messageLabel.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                        fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
+                        
+                        return fullDetailsCell!
+                        
+                    }
+                    
+                    
+                }else {
+                    
+                    //Set the timestamp
+                    fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
+                    fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
+                    
+                    //Set the message text
+                    fullDetailsCell!.messageLabel.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                    fullDetailsCell?.messageLabel.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                    fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
+                    
+                    return fullDetailsCell!
+                    
+                }
+                
             }
             
         }
