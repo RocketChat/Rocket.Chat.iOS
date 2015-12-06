@@ -162,13 +162,13 @@ class ChatsNavTableViewController: UITableViewController {
 
 /** The cell ids used in the UITableView in order to identify the different prototype cells. */
 enum LeftMenuCellIds: String {
-  case Favorites = "favoritesCell"
-  case Channels = "channelsCell"
-  case DirectMessages = "dmCell"
-  case PrivateGroups = "groupsCell"
-  
-  static let allValues = [Favorites, Channels, DirectMessages, PrivateGroups]
-
+    case Channels = "channelsCell"
+    case DirectMessages = "dmCell"
+    case PrivateGroups = "groupsCell"
+    case History = "historyCell"
+    
+    static let allValues = [Channels, DirectMessages, PrivateGroups, History]
+    
 }
 
 /** The section IDs and names for the Left Menu UITableView */
