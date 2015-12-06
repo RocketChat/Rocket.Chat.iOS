@@ -11,7 +11,7 @@ import MMDrawerController
 import ObjectiveDDP
 import SwiftyJSON
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwitchRoomDelegate {
     
     @IBOutlet var bottomViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
@@ -31,94 +31,66 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //JSON to keep the response
     var chatMessages:JSON = []
     
-    //Array to keep each chatMessage
-    var chatMessageData = [ChatMessage]()
-    
+    //Dictionary to keep each chatMessage
+    var chatMessageData = [String:[ChatMessage]]()
     
     @IBOutlet var activityIndicatorInViewController: UIActivityIndicatorView!
     @IBOutlet var customIndicatorViewInViewController: UIView!
     
+    var lastJoinedRoomName:String?
+    var lastJoinedRoom:String?
+    var tmpChatMessage:ChatMessage?
+    var lastSeenTimeStamp:Double?
     
     override func viewWillAppear(animated: Bool) {
+        
+        if (NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") != nil) {
+            self.lastJoinedRoomName = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRoomName") as? String
+            self.lastJoinedRoom = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") as? String
+        }else {
+            self.lastJoinedRoomName = "general"
+            self.lastJoinedRoom = "GENERAL"
+        }
+        
+        self.title = "#\(self.lastJoinedRoomName!)"
         
         //After login join general room
         let ad = UIApplication.sharedApplication().delegate as! AppDelegate
         meteor = ad.meteorClient
         
         //Subscribe to rocketchat_message collection for the GENERAL channel
-        self.meteor.addSubscription("messages", withParameters: ["GENERAL"])
+        self.meteor.addSubscription("stream-messages")
 
+        meteor.callMethodName("channelsList", parameters: nil) { (response, error) -> Void in
+            
+            if error != nil {
+                print(error.description)
+                return
+            }
+            
+            //print(response["result"]!["channels"]!![0]!)
+        }
 
-        meteor.callMethodName("joinDefaultChannels", parameters: nil) { (response, error) -> Void in
+        meteor.callMethodName("joinDefaultChannels", parameters: []) { (response, error) -> Void in
             
             if error != nil {
                 print("Error:\(error.description)")
                 return
             }else{
-                //print(response)
                 
                 //Add observer to handle incoming messages
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveUpdate:", name: "rocketchat_message_added", object: nil)
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveUpdate:", name: "stream-messages_added", object: nil)
+
             }
         }
-        
-        //Get the 50 past messages to fill the tableview
-        let now = NSDate()
-        
-        let formData = NSDictionary(dictionary: [
-            "$date": now.timeIntervalSince1970*1000
-            ])
-        
-        meteor.callMethodName("loadHistory", parameters: ["GENERAL", formData,50], responseCallback: { (response, error) -> Void in
-            
-            if error != nil {
-                
-                print("Error:\(error.description)")
-                return
-                
-            } else {
-                
-//                print(response!["result"]!)
-                
-                //JSON Handling
-                let result = JSON(response)
-                self.chatMessages = result["result"]["messages"]
-                
-                
-                for (_,subJson) in self.chatMessages {
-                    
-                    var type = ""
-                    if subJson["t"].string != nil {
-                        type = subJson["t"].string!
-                    }
-                    
-                    let timestamp = [subJson["ts","$date"].number!]
-                    let timestampInDouble = timestamp as! [Double]
-                    let timestampInMilliseconds = timestampInDouble[0] / 1000
-                    
-                    let  cM = ChatMessage(user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
-        
-                    
-                    self.chatMessageData.append(cM)
 
-                }
-                
-                
-                self.chatMessageData = self.chatMessageData.reverse()
-                
-                
-                //Reload data and scroll to the bottom of the tableview
-                self.mainTableview.reloadData()
-                //If iOS 8 scrolling doesn't work properly.
-                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData.count - 1, inSection: 0)
-                self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-                
-                
-            }
-            
-        })
-        
-        
+        //Get last 50 messages
+        loadHistory(self.lastJoinedRoom!, numberOfMessages: 50)
+
+        //Get the leftViewController instance and use it to notify this ViewController about changing the channel using the SwitchRoomDelegate
+        let leftNavController = ad.centerContainer?.leftDrawerViewController as! UINavigationController
+        let leftViewController = leftNavController.viewControllers.first as! LeftViewController
+        leftViewController.viewController = self
         
     }
     
@@ -156,8 +128,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         composeMsg.layer.cornerRadius = 10
         
         dateFormatter.dateFormat = "HH:mm"
+        
+        self.tmpChatMessage?.messageType = ""
     }
-    
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -201,7 +175,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Number of table rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.chatMessageData.count
+        //If the user has joined a channel the length is that channels messages + 1 for the load more btn else it is 0
+        let numOfRows = self.chatMessageData[self.lastJoinedRoom!] != nil ? self.chatMessageData[self.lastJoinedRoom!]!.count + 1 : 0
+        
+        return numOfRows
       
     }
     
@@ -570,5 +547,101 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
         
     }
+    
+    func didSelectRoom(rid: String, roomName: String) {
+        
+        NSUserDefaults.standardUserDefaults().setValue(roomName, forKey: "lastJoinedRoomName")
+        NSUserDefaults.standardUserDefaults().setValue(rid, forKey: "lastJoinedRid")
+        
+        self.lastJoinedRoomName = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRoomName") as? String
+        self.lastJoinedRoom = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") as? String
+        self.title = "#\(NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRoomName")!)"
+
+
+        if self.chatMessageData[lastJoinedRoom!] == nil {
+            
+            loadHistory(self.lastJoinedRoom!, numberOfMessages: 50)
+            
+        }else {
+
+            self.mainTableview.reloadData()
+            //If iOS 8 scrolling doesn't work properly.
+            self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+            
+            //Uncomment this if you want to scroll at the bottom even when selecting the current channel
+            self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+
+        }
+        
+    }
+    
+    
+    
+    func loadHistory(room: String, numberOfMessages: Int){
+        
+        //Get the 50 past messages to fill the tableview
+        let now = NSDate()
+        
+        let formData = NSDictionary(dictionary: [
+            "$date": now.timeIntervalSince1970*1000
+            ])
+        
+        meteor.callMethodName("loadHistory", parameters: [room, formData, numberOfMessages], responseCallback: { (response, error) -> Void in
+            
+            if error != nil {
+                
+                print("Error:\(error.description)")
+                return
+                
+            } else {
+                
+                //print(response!["result"]!)
+                
+                //JSON Handling
+                let result = JSON(response)
+                self.chatMessages = result["result"]["messages"]
+                
+                if self.chatMessages.count != 0 {
+                    
+                    for (_,subJson) in self.chatMessages {
+                        
+                        var type = ""
+                        if subJson["t"].string != nil {
+                            type = subJson["t"].string!
+                        }
+                        
+                        let timestamp = [subJson["ts","$date"].number!]
+                        let timestampInDouble = timestamp as! [Double]
+                        let timestampInMilliseconds = timestampInDouble[0] / 1000
+                        
+                        let  cM = ChatMessage(rid: subJson["rid"].string!,user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
+                        
+                        if self.chatMessageData[cM.rid] == nil {
+                            
+                            self.chatMessageData[cM.rid] = [cM]
+                            
+                        }else {
+                            
+                            self.chatMessageData[cM.rid]! += [cM]
+                            
+                        }
+                        
+                    }
+                
+                    self.chatMessageData[room] = self.chatMessageData[room]!.reverse()
+                    //Reload data and scroll to the bottom of the tableview
+                    self.mainTableview.reloadData()
+                    //If iOS 8 scrolling doesn't work properly.
+                    self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[room]!.count, inSection: 0)
+                    self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+
+                }else {
+                    self.mainTableview.reloadData()
+                }
+            }
+        })
+        
+    }
+    
     
 }
