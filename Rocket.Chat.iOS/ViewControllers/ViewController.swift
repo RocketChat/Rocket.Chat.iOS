@@ -189,7 +189,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //Get visible cells indexes
         let visible = mainTableview.indexPathsForVisibleRows
         //Set bottomIndexpath to last visible cell's index
-        bottomIndexPath = NSIndexPath(forRow: visible!.last!.row, inSection: 0)
+        self.bottomIndexPath = NSIndexPath(forRow: visible!.last!.row, inSection: 0)
         
         
         
@@ -201,9 +201,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         //Check if the next and previous user are the same to see what kind of cell we will create
-        if(indexPath.row > 0){
+        if(indexPath.row > 1){
             
-            if(self.chatMessageData[indexPath.row].userId == self.chatMessageData[indexPath.row - 1].userId){
+            if(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].userId == self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 2].userId){
             
                 sameUser = true
                 
@@ -231,7 +231,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         
-        //If Same User - return a full detailed cell
+        //If Same User - return a no detailed cell
         if (sameUser) {
             
             var noDetailsCell:NoDetailsTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("noDetailsCell", forIndexPath: indexPath) as? NoDetailsTableViewCell
@@ -243,13 +243,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             //Set hidden timestamp
-            noDetailsCell!.hiddenTimeStamp.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[indexPath.row].timestamp))))"
+            noDetailsCell!.hiddenTimeStamp.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
             noDetailsCell!.hiddenTimeStamp.hidden = true
             noDetailsCell!.hiddenTimeStamp.textColor = UIColor.rocketTimestampColor()
             
             
             //If message is removed
-            if(self.chatMessageData[indexPath.row].messageType == "rm") {
+            if(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "rm") {
                 
                 
                 //Set text to noDetailsMessage label
@@ -289,13 +289,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
-            fullDetailsCell!.usernameLabel.text = self.chatMessageData[indexPath.row].username
+            fullDetailsCell!.usernameLabel.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].username
             
             //Set color to #444444
             fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
             
             //Set the timestamp
-            fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[indexPath.row].timestamp))))"
+            fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
             fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
             fullDetailsCell!.messageLabel.text = "has joined the channel"
             fullDetailsCell?.messageLabel.font = UIFont.italicSystemFontOfSize(15)
@@ -304,9 +304,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return fullDetailsCell!
             
         }
-        //If different user - return a non detailed cell
+        //If different user - return a full detailed cell
         else {
-        
+            
             var fullDetailsCell:MainTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("fullDetailsCell", forIndexPath: indexPath) as? MainTableViewCell
             
             
@@ -317,18 +317,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
-            fullDetailsCell!.usernameLabel.text = self.chatMessageData[indexPath.row].username
+            fullDetailsCell!.usernameLabel.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].username
             
             //Set color to #444444
             fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
             
-            //Set the timestamp
-            fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[indexPath.row].timestamp))))"
-            fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
-            
             
             //If message is removed
-            if(self.chatMessageData[indexPath.row].messageType == "rm"){
+            if(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "rm"){
+                
+                //Set the timestamp
+                fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
+                fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
                 
                 //Set the message text
                 fullDetailsCell!.messageLabel.text = "message removed"
