@@ -78,15 +78,6 @@ class ChatsNavTableViewController: UITableViewController {
     
     return cell!
   }
-  
-  override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-
-    // for some reason, the background color on ipads does not respect the storyboard value.
-    cell.backgroundColor = UIColor(red: 4, green: 67, blue: 106, alpha: 0)
-
-    //TODO: replace this with hex value once we merge with @kormic's branch
-  }
-  
   func drawFavoritesCell(currentCell: FavoritesTableViewCell, currentTableView: UITableView, currentIndexPath: NSIndexPath){
     //TODO
     currentCell.nameLabel?.text = "Favorites \(currentIndexPath.section) Row \(currentIndexPath.row)"
@@ -158,6 +149,15 @@ class ChatsNavTableViewController: UITableViewController {
   }
   */
   
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        // for some reason, the background color on ipads does not respect the storyboard value.
+        cell.backgroundColor = UIColor(red: 4, green: 67, blue: 106, alpha: 0)
+        
+        //TODO: replace this with hex value once we merge with @kormic's branch
+    }
+    
 }
 
 /** The cell ids used in the UITableView in order to identify the different prototype cells. */
