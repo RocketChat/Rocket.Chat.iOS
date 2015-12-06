@@ -472,15 +472,25 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    
+
     //Function to close the keyboard when send button is pressed
     @IBAction func sendMsg(sender: AnyObject) {
-        
+
         if (composeMsg.text != ""){
+            
+            self.tmpChatMessage = ChatMessage(rid: self.lastJoinedRoom!, user_id: self.meteor.userId, username: "komic", msg: composeMsg.text, msgType: "tmp", ts: NSDate().timeIntervalSince1970 * 1000.0)
+            
+            self.chatMessageData[self.lastJoinedRoom!]?.append(self.tmpChatMessage!)
+            
+            self.mainTableview.reloadData()
+            
+            //If iOS 8 scrolling doesn't work properly.
+            self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+            self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
             
             var messageObject = NSDictionary()
             messageObject = [
-                "rid":"GENERAL",
+                "rid":self.lastJoinedRoom!,
                 "msg":composeMsg.text!
             ]
             
@@ -498,49 +508,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
         }
 
-        
-
-        
-//        //If there is text
-//        if composeMsg.text != "" {
-//            //create current message
-////            let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: currentUser!)
-//          let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: User?)	// FIXME!
-//            //add it to the messages array
-//            mArray1 += [currentMsg]
-//            
-//            
-//            //update the messages array of the chatroom
-//            cR1?.messages = mArray1
-//            
-//            //reset the text input
-//            composeMsg.text = ""
-//            
-//            //dismiss keyboard - Uncomment the next line if you want keyboard to hide when you send a message
-//            //dismissKeyboard()
-//            
-//            //reload the tableview data
-//            mainTableview.reloadData()
-//            
-//            
-//            //get the bottom index - THIS NEEDS TO BE REMOVED -
-//            //bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-//            
-//            //If we are the bottom
-//            if (bottomIndexPath.row == cR1!.messages.count - 1) {
-//            //scroll to bottom
-//                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-//                //calling it twice because something is wrong with scrolling the tableview to the bottom in iOS 9
-//                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-//            }
-//            
-//        }
-//        //If text is empty
-//        else{
-//        
-//            //dismiss keyboard
-//            dismissKeyboard()
-//        }
     }
     
     
