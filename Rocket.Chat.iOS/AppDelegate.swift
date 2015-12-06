@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.meteorClient.addSubscription("activeUsers")
         //        self.meteorClient.addSubscription("userData")
         self.meteorClient.addSubscription("subscription")
-        
+        self.meteorClient.addSubscription("rocketchat_subscription")
         return true
     }
     
@@ -112,7 +112,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillEnterForeground(application: UIApplication) {
 
         NSUserDefaults.standardUserDefaults().setBool(false, forKey: "kDisplayStatusLocked")
-        
+
     }
     
     
@@ -148,7 +148,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     
     func reportConnectionReady() {
-        
+
         print("Connection Ready\n")
         connectWithSessionToken()
         
@@ -203,6 +203,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func reportDisconnection() {
         print("================> disconnected from server!")
         
+        
         //notify current rootview controller
         let controller = self.window?.rootViewController
         
@@ -243,6 +244,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     
                 }
                 print("\(response)\n")
+                
+                NSUserDefaults.standardUserDefaults().setBool(true, forKey: "connectedWithSessionToken")
                 
                 let appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
                 
