@@ -578,32 +578,66 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Function to add the incoming messages
     func didReceiveUpdate(notification: NSNotification) {
         
-        var type = ""
-        if let t = notification.userInfo!["t"]{
-            type = t as! String
-        }
         
-        let timestamp = [notification.userInfo!["ts"]!["$date"] as! NSNumber]
-        let timestampInDouble = timestamp as! [Double]
-        let timestampInMilliseconds = timestampInDouble[0] / 1000
+        if let args = notification.userInfo!["args"] {
         
-        let incomingMsg = ChatMessage(user_id: notification.userInfo!["u"]!["_id"]! as! String, username: notification.userInfo!["u"]!["username"]! as! String, msg: notification.userInfo!["msg"]! as! String, msgType: type, ts: timestampInMilliseconds)
-    
-        self.chatMessageData.append(incomingMsg)
-        
-        //Reloading data and if we are at the bottom scroll the view to the last row
-        self.mainTableview.reloadData()
-        
-        let lastVisibleCells = self.mainTableview.visibleCells.last
-        let lastVisibleCellsIndexPath = NSIndexPath(forRow: self.mainTableview.indexPathForCell(lastVisibleCells!)!.row, inSection: 0)
-        
-        self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData.count - 1, inSection: 0)
-        
-        if (lastVisibleCellsIndexPath.row >= bottomIndexPath.row - 1) {
+            let msg = JSON(args[1]!)
+//            print(msg)
+
+            if self.tmpChatMessage?.messageType == "tmp"{
+                
+                self.tmpChatMessage?.messageType = ""
+                self.chatMessageData[self.lastJoinedRoom!]?.removeLast()
+                
+            }
             
-            self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            if self.lastSeenTimeStamp != Double(msg["ts"]["$date"].number! as NSNumber) {
             
             
+
+            
+            if msg["rid"].string == NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") as? String {
+                var type = ""
+                if let t = msg["t"].string{
+                    type = t
+                }
+                
+                let timestamp = [msg["ts"]["$date"].number! as NSNumber]
+                let timestampInDouble = timestamp as! [Double]
+                let timestampInMilliseconds = timestampInDouble[0] / 1000
+                
+                let incomingMsg = ChatMessage(rid: msg["rid"].string!,user_id: msg["u"]["_id"].string!, username: msg["u"]["username"].string!, msg: msg["msg"].string!, msgType: type, ts: timestampInMilliseconds)
+                
+                if self.chatMessageData[self.lastJoinedRoom!] != nil{
+                self.chatMessageData[self.lastJoinedRoom!]!.append(incomingMsg)
+                } else {
+                    self.chatMessageData[self.lastJoinedRoom!] = [incomingMsg]
+                }
+                
+                self.lastSeenTimeStamp = Double(msg["ts"]["$date"].number! as NSNumber)
+
+            }
+            
+            //Reloading data and if we are at the bottom scroll the view to the last row
+            self.mainTableview.reloadData()
+            
+            if let lastVisibleCells = self.mainTableview.visibleCells.last {
+            
+                let lastVisibleCellsIndexPath = NSIndexPath(forRow: self.mainTableview.indexPathForCell(lastVisibleCells)!.row, inSection: 0)
+            
+                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                
+                if (lastVisibleCellsIndexPath.row >= bottomIndexPath.row - 1) {
+                    print("scroll to bottom")
+                    self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                }
+                
+            } else {
+                print("empty room")
+                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                
+            }
+            }
         }
         
         
