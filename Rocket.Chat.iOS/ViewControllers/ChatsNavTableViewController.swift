@@ -18,7 +18,7 @@ class ChatsNavTableViewController: UITableViewController {
     var privateGroupsData = [Room]()
     var ad:AppDelegate?
     var delegate:SwitchRoomDelegate?
-    
+    var currentCenterVCWhenSettingsSelected:ViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -235,20 +235,28 @@ class ChatsNavTableViewController: UITableViewController {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        
+        let currentVC = self.ad?.centerContainer?.centerViewController as! UINavigationController
+
         if indexPath.section == LeftMenuHeaders.Channels.rawValue {
+
+            checkIfWeAreOnSettingsAndSetCenterContainer(currentVC)
             
             if ((delegate) != nil){ // let delegate know about event
+                print("selectroom")
                 delegate!.didSelectRoom(self.channelsData[indexPath.row].rid, roomName: self.channelsData[indexPath.row].name)
             }
             
         }else if indexPath.section == LeftMenuHeaders.DirectMessages.rawValue {
+
+            checkIfWeAreOnSettingsAndSetCenterContainer(currentVC)
             
             if ((delegate) != nil){ // let delegate know about event
                 delegate!.didSelectRoom(self.directMessagesData[indexPath.row].rid, roomName: self.directMessagesData[indexPath.row].name)
             }
             
         }else if indexPath.section == LeftMenuHeaders.PrivateGroups.rawValue {
+
+            checkIfWeAreOnSettingsAndSetCenterContainer(currentVC)
             
             if ((delegate) != nil){ // let delegate know about event
                 delegate!.didSelectRoom(self.privateGroupsData[indexPath.row].rid, roomName: self.privateGroupsData[indexPath.row].name)
@@ -261,7 +269,21 @@ class ChatsNavTableViewController: UITableViewController {
         self.ad?.centerContainer?.closeDrawerAnimated(true, completion: nil)
     }
     
+    
+    
+    func checkIfWeAreOnSettingsAndSetCenterContainer(navController: UINavigationController) {
+        
+        if ((navController.viewControllers.first?.isKindOfClass(MySettingsViewController)) == true) {
+            let centerNewNav = UINavigationController(rootViewController: self.currentCenterVCWhenSettingsSelected!)
+            self.ad!.centerContainer?.setCenterViewController(centerNewNav, withCloseAnimation: false, completion: nil)
+        }
+        
+    }
+    
 }
+
+
+
 
 
 /** The cell ids used in the UITableView in order to identify the different prototype cells. */
