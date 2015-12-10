@@ -623,22 +623,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             //Reloading data and if we are at the bottom scroll the view to the last row
             self.mainTableview.reloadData()
             
-            if let lastVisibleCells = self.mainTableview.visibleCells.last {
-            
-                let lastVisibleCellsIndexPath = NSIndexPath(forRow: self.mainTableview.indexPathForCell(lastVisibleCells)!.row, inSection: 0)
-            
-                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
-                
-                if (lastVisibleCellsIndexPath.row >= bottomIndexPath.row - 1) {
-                    print("scroll to bottom")
-                    self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                if let lastVisibleCells = self.mainTableview.visibleCells.last {
+                    
+                    let lastVisibleCellsIndexPath = NSIndexPath(forRow: self.mainTableview.indexPathForCell(lastVisibleCells)!.row, inSection: 0)
+                    
+                    self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                    
+                    if (lastVisibleCellsIndexPath.row >= bottomIndexPath.row - 1) {
+                        print("scroll to bottom")
+                        self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                    }
+                    
+                } else {
+                    print("empty room")
+                    self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                    
                 }
-                
-            } else {
-                print("empty room")
-                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
-                
-            }
             }
         }
         
@@ -680,17 +680,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
 
         if self.chatMessageData[lastJoinedRoom!] == nil {
-            
+
             loadHistory(self.lastJoinedRoom!, numberOfMessages: 50)
             
         }else {
 
             self.mainTableview.reloadData()
-            //If iOS 8 scrolling doesn't work properly.
-            self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
             
-            //Uncomment this if you want to scroll at the bottom even when selecting the current channel
-            self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                //If iOS 8 scrolling doesn't work properly.
+                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                
+                //Uncomment this if you want to scroll at the bottom even when selecting the current channel
+                self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
 
         }
         
