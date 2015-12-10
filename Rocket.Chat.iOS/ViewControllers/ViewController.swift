@@ -42,58 +42,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var tmpChatMessage:ChatMessage?
     var lastSeenTimeStamp:Double?
     
-    override func viewWillAppear(animated: Bool) {
-        
-        if (NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") != nil) {
-            self.lastJoinedRoomName = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRoomName") as? String
-            self.lastJoinedRoom = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") as? String
-        }else {
-            self.lastJoinedRoomName = "general"
-            self.lastJoinedRoom = "GENERAL"
-        }
-        
-        self.title = "#\(self.lastJoinedRoomName!)"
-        
-        //After login join general room
-        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-        meteor = ad.meteorClient
-        
-        //Subscribe to rocketchat_message collection for the GENERAL channel
-        self.meteor.addSubscription("stream-messages")
-
-        meteor.callMethodName("channelsList", parameters: nil) { (response, error) -> Void in
-            
-            if error != nil {
-                print(error.description)
-                return
-            }
-            
-            //print(response["result"]!["channels"]!![0]!)
-        }
-
-        meteor.callMethodName("joinDefaultChannels", parameters: []) { (response, error) -> Void in
-            
-            if error != nil {
-                print("Error:\(error.description)")
-                return
-            }else{
-                
-                //Add observer to handle incoming messages
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveUpdate:", name: "stream-messages_added", object: nil)
-
-            }
-        }
-
-        //Get last 50 messages
-        loadHistory(self.lastJoinedRoom!, numberOfMessages: 50)
-
-        //Get the leftViewController instance and use it to notify this ViewController about changing the channel using the SwitchRoomDelegate
-        let leftNavController = ad.centerContainer?.leftDrawerViewController as! UINavigationController
-        let leftViewController = leftNavController.viewControllers.first as! LeftViewController
-        leftViewController.viewController = self
-        
-    }
-    
     
     
     override func viewDidLoad() {
@@ -130,6 +78,60 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         dateFormatter.dateFormat = "HH:mm"
         
         self.tmpChatMessage?.messageType = ""
+        
+        
+        
+        if (NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") != nil) {
+            self.lastJoinedRoomName = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRoomName") as? String
+            self.lastJoinedRoom = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") as? String
+        }else {
+            self.lastJoinedRoomName = "general"
+            self.lastJoinedRoom = "GENERAL"
+        }
+        
+        self.title = "#\(self.lastJoinedRoomName!)"
+        
+        //After login join general room
+        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        meteor = ad.meteorClient
+        
+        //Subscribe to rocketchat_message collection for the GENERAL channel
+        self.meteor.addSubscription("stream-messages")
+        
+        
+        meteor.callMethodName("channelsList", parameters: nil) { (response, error) -> Void in
+            
+            if error != nil {
+                print(error.description)
+                return
+            }
+            
+            //print(response["result"]!["channels"]!![0]!)
+        }
+        
+        meteor.callMethodName("joinDefaultChannels", parameters: []) { (response, error) -> Void in
+            
+            if error != nil {
+                print("Error:\(error.description)")
+                return
+            }else{
+                
+                //Add observer to handle incoming messages
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveUpdate:", name: "stream-messages_added", object: nil)
+                
+            }
+        }
+        
+        //Get last 50 messages
+        loadHistory(self.lastJoinedRoom!, numberOfMessages: 50)
+        
+        
+        //Get the leftViewController instance and use it to notify this ViewController about changing the channel using the SwitchRoomDelegate
+        let leftNavController = ad.centerContainer?.leftDrawerViewController as! UINavigationController
+        let leftViewController = leftNavController.viewControllers.first as! LeftViewController
+        leftViewController.viewController = self
+        
+        
     }
         
     override func didReceiveMemoryWarning() {
