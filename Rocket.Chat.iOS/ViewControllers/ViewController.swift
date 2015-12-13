@@ -486,9 +486,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             self.mainTableview.reloadData()
             
-            //If iOS 8 scrolling doesn't work properly.
-            self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
-            self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            if self.chatMessageData[self.lastJoinedRoom!] != nil {
+                //If iOS 8 scrolling doesn't work properly.
+                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            }
+            
             
             var messageObject = NSDictionary()
             messageObject = [
@@ -723,7 +726,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 let result = JSON(response)
                 self.chatMessages = result["result"]["messages"]
                 
-                if self.chatMessages.count != 0 {
+                if self.chatMessages.count > 0 {
                     
                     for (_,subJson) in self.chatMessages {
                         
