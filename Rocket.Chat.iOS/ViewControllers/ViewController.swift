@@ -27,6 +27,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var dateFormatter = NSDateFormatter()
     
     var meteor: MeteorClient!
+    var ad:AppDelegate!
     
     //JSON to keep the response
     var chatMessages:JSON = []
@@ -92,8 +93,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.title = "#\(self.lastJoinedRoomName!)"
         
         //After login join general room
-        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-        meteor = ad.meteorClient
+        self.ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        meteor = self.ad.meteorClient
         
         //Subscribe to rocketchat_message collection for the GENERAL channel
         self.meteor.addSubscription("stream-messages")
@@ -115,7 +116,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print("Error:\(error.description)")
                 return
             }else{
-                
+                print(response)
                 //Add observer to handle incoming messages
                 NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveUpdate:", name: "stream-messages_added", object: nil)
                 
@@ -716,6 +717,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if error != nil {
                 
                 print("Error:\(error.description)")
+                let alert = UIAlertController(title: "Invalid Room", message: "Invalid Room", preferredStyle: UIAlertControllerStyle.Alert)
+                let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default){ _ in
+                    self.ad.centerContainer?.openDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+                }
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
                 return
                 
             } else {
