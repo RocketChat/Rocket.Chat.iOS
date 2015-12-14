@@ -622,11 +622,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 self.lastSeenTimeStamp = Double(msg["ts"]["$date"].number! as NSNumber)
 
-            }
             
-            //Reloading data and if we are at the bottom scroll the view to the last row
-            self.mainTableview.reloadData()
             
+                //Reloading data and if we are at the bottom scroll the view to the last row
+                self.mainTableview.reloadData()
+                
                 if let lastVisibleCells = self.mainTableview.visibleCells.last {
                     
                     let lastVisibleCellsIndexPath = NSIndexPath(forRow: self.mainTableview.indexPathForCell(lastVisibleCells)!.row, inSection: 0)
@@ -639,9 +639,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                     }
                     
                 } else {
-                    print("empty room")
-                    self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                    //When we are in an empty room and a we have an incoming message to another room we have joined
+                    print("No need to scroll")
+                    self.bottomIndexPath = NSIndexPath(forRow: 0, inSection: 0)
                     
+                }
                 }
             }
         }
