@@ -693,14 +693,56 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             loadHistory(self.lastJoinedRoom!, numberOfMessages: 50)
             
         }else {
+
+            var unreadChatMessages = [ChatMessage]()
             
-            self.mainTableview.reloadData()
+            let formData = NSDictionary(dictionary: [
+                "$date": ((self.chatMessageData[self.lastJoinedRoom!]?.last!.timestamp)! * 1000)
+                ])
             
-            //If iOS 8 scrolling doesn't work properly.
-            self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
-            
-            //Uncomment this if you want to scroll at the bottom even when selecting the current channel
-            self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            self.meteor.callMethodName("loadMissedMessages", parameters: [self.lastJoinedRoom!, formData], responseCallback: { (response, error) -> Void in
+                
+                if error != nil {
+                    print(error.description)
+                    return
+                }
+
+                let unread = JSON(response["result"]!)
+                print("Unread:\(unread)")
+                
+                for (_,subJson) in unread {
+                    
+                    var type = ""
+                    if subJson["t"].string != nil {
+                        type = subJson["t"].string!
+                    }
+                    
+                    let timestamp = [subJson["ts","$date"].number!]
+                    let timestampInDouble = timestamp as! [Double]
+                    let timestampInMilliseconds = timestampInDouble[0] / 1000
+                    
+                    let  cM = ChatMessage(rid: subJson["rid"].string!,user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
+                    unreadChatMessages.append(cM)
+                    
+                    
+                }
+                
+                unreadChatMessages = unreadChatMessages.reverse()
+                
+                for (var i = 0; i < unreadChatMessages.count; i++){
+                    self.chatMessageData[self.lastJoinedRoom!]! += [unreadChatMessages[i]]
+                }
+                
+                self.mainTableview.reloadData()
+                
+                //If iOS 8 scrolling doesn't work properly.
+                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                
+                //Uncomment this if you want to scroll at the bottom even when selecting the current channel
+                self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                
+                unreadChatMessages.removeAll()
+            })
             
         }
         
