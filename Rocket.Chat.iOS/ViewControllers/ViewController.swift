@@ -560,31 +560,34 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Function to toggle message's timestamp
     func showHiddenTimestamp(gesture: UITapGestureRecognizer) {
         
-        //get the index path of the cell where the user double tapped on
-        let tableCellRow = mainTableview.indexPathForRowAtPoint(gesture.locationInView(mainTableview))!
-        
-        //Get the cell
-        if  let tableCell = mainTableview.cellForRowAtIndexPath(tableCellRow) as? NoDetailsTableViewCell {
+        //If double tapping happens inside the tableview
+        if mainTableview.indexPathForRowAtPoint(gesture.locationInView(mainTableview)) != nil {
             
-            //Toggle timestamp
+            //get the index path of the cell where the user double tapped on
+            let tableCellRow = mainTableview.indexPathForRowAtPoint(gesture.locationInView(mainTableview))!
             
-            if !tableCell.hiddenTimeStamp.hidden {
+            //Get the cell
+            if  let tableCell = mainTableview.cellForRowAtIndexPath(tableCellRow) as? NoDetailsTableViewCell {
                 
-                tableCell.hiddenTimeStamp.hidden = true
+                //Toggle timestamp
                 
-            }else {
-                
-                tableCell.hiddenTimeStamp.hidden = false
-                
+                if !tableCell.hiddenTimeStamp.hidden {
+                    
+                    tableCell.hiddenTimeStamp.hidden = true
+                    
+                }else {
+                    
+                    tableCell.hiddenTimeStamp.hidden = false
+                    
+                }
             }
         }
-        
     }
     
     //Function to add the incoming messages
     func didReceiveUpdate(notification: NSNotification) {
         
-        
+
         if let args = notification.userInfo!["args"] {
         
             let msg = JSON(args[1]!)
