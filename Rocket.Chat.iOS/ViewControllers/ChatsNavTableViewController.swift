@@ -12,32 +12,41 @@ import SwiftyJSON
 
 class ChatsNavTableViewController: UITableViewController {
     
-    var meteor:MeteorClient?
+    var meteor:MeteorClient!
     var channelsData = [Room]()
     var directMessagesData = [Room]()
     var privateGroupsData = [Room]()
-    var ad:AppDelegate?
+    var ad:AppDelegate!
     var delegate:SwitchRoomDelegate?
     var currentCenterVCWhenSettingsSelected:ViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ad = UIApplication.sharedApplication().delegate as? AppDelegate
-        self.meteor = self.ad?.meteorClient
+        ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.meteor = self.ad.meteorClient
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "roomAdded:", name: "rocketchat_subscription_added", object: nil)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "roomRemoved:", name: "rocketchat_subscription_removed", object: nil)
+
         if !NSUserDefaults.standardUserDefaults().boolForKey("connectedWithSessionToken") {
             
-            let rocketchat_subscription = self.meteor?.collections["rocketchat_subscription"] as? M13MutableOrderedDictionary
+            let rocketchat_subscription = self.meteor.collections["rocketchat_subscription"] as! M13MutableOrderedDictionary
             print(rocketchat_subscription)
             
-            for var i:UInt = 0 ; i < (rocketchat_subscription?.count()) ; i++ {
+            for var i:UInt = 0 ; i < (rocketchat_subscription.count()) ; i++ {
                 
-                print(rocketchat_subscription?.objectAtIndex(i)!)
+                print(rocketchat_subscription.objectAtIndex(i)!)
                 
-                let room = Room(_id: (rocketchat_subscription?.objectAtIndex(i)!["_id"])! as! String, unread: (rocketchat_subscription?.objectAtIndex(i)!["unread"])! as! Int, t: (rocketchat_subscription?.objectAtIndex(i)!["t"])! as! String, open: (rocketchat_subscription?.objectAtIndex(i)!["open"])! as! Bool, ts: (rocketchat_subscription?.objectAtIndex(i)!["ts"])! as? Double, rid: (rocketchat_subscription?.objectAtIndex(i)!["rid"])! as! String, ls: (rocketchat_subscription?.objectAtIndex(i)!["ls"])! as? Double, alert: (rocketchat_subscription?.objectAtIndex(i)!["alert"])! as! Bool, name: (rocketchat_subscription?.objectAtIndex(i)!["name"])! as! String)
+                let room = Room(_id: (rocketchat_subscription.objectAtIndex(i)!["_id"])! as! String,
+                    unread: (rocketchat_subscription.objectAtIndex(i)!["unread"])! as! Int,
+                    t: (rocketchat_subscription.objectAtIndex(i)!["t"])! as! String,
+                    open: (rocketchat_subscription.objectAtIndex(i)!["open"])! as! Bool,
+                    ts: (rocketchat_subscription.objectAtIndex(i)!["ts"])! as? Double,
+                    rid: (rocketchat_subscription.objectAtIndex(i)!["rid"])! as! String,
+                    ls: (rocketchat_subscription.objectAtIndex(i)!["ls"])! as? Double,
+                    alert: (rocketchat_subscription.objectAtIndex(i)!["alert"])! as! Bool,
+                    name: (rocketchat_subscription.objectAtIndex(i)!["name"])! as! String)
                 
                 if (room.t == "c"){
                     self.channelsData.append(room)
