@@ -98,6 +98,40 @@ class ChatsNavTableViewController: UITableViewController {
         
     }
     
+    func roomRemoved(notification: NSNotification) {
+        
+        let incomingRoom = JSON(notification.userInfo!)
+        
+        for (var i = 0; i < self.channelsData.count ; i++){
+            
+            if self.channelsData[i]._id == incomingRoom["_id"].string! {
+                self.channelsData.removeAtIndex(i)
+                break
+            }
+            
+        }
+        
+        for (var i = 0; i < self.directMessagesData.count ; i++){
+            
+            if self.directMessagesData[i]._id == incomingRoom["_id"].string! {
+                self.directMessagesData.removeAtIndex(i)
+                break
+            }
+            
+        }
+        
+        for (var i = 0; i < self.privateGroupsData.count ; i++){
+            
+            if self.privateGroupsData[i]._id == incomingRoom["_id"].string! {
+                self.privateGroupsData.removeAtIndex(i)
+                break
+            }
+            
+        }
+        
+        self.tableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
