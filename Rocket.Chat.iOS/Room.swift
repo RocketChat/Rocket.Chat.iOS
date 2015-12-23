@@ -10,15 +10,15 @@ import UIKit
 
 class Room {
     
-    var _id = String()
-    var unread = Int()
-    var t = String()
-    var open = Bool()
-    var ts = Double()
-    var rid = String()
-    var ls = Double()
-    var alert = Bool()
-    var name = String()
+    var _id:String
+    var unread:Int
+    var t:String
+    var open:Bool
+    var ts:Double
+    var rid:String
+    var ls:Double
+    var alert:Bool
+    var name:String
     
     
     init(_id: String ,unread: Int, t: String, open: Bool, ts: Double?, rid: String, ls: Double?, alert: Bool, name: String){
@@ -29,10 +29,14 @@ class Room {
         self.open = open
         if ts != nil {
            self.ts = ts!
+        }else {
+            self.ts = Double()
         }
         self.rid = rid
         if ls != nil {
             self.ls = ls!
+        }else {
+            self.ls = Double()
         }
         self.alert = alert
         self.name = name
