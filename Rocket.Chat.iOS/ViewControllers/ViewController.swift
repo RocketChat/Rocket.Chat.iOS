@@ -44,6 +44,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var lastSeenTimeStamp:Double?
     
     
+    var currentUsername:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,6 +120,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 print(response)
                 //Add observer to handle incoming messages
                 NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveUpdate:", name: "stream-messages_added", object: nil)
+                
+                let users = self.meteor.collections["users"] as! M13MutableOrderedDictionary
+                
+                let user = users.objectAtIndex(0)
+                self.currentUsername = user["username"] as? String
+
+                
                 
             }
         }
@@ -481,7 +489,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if (composeMsg.text != ""){
             
-            self.tmpChatMessage = ChatMessage(rid: self.lastJoinedRoom!, user_id: self.meteor.userId, username: "komic", msg: composeMsg.text, msgType: "tmp", ts: NSDate().timeIntervalSince1970 * 1000.0)
+            self.tmpChatMessage = ChatMessage(rid: self.lastJoinedRoom!, user_id: self.meteor.userId, username: self.currentUsername!, msg: composeMsg.text, msgType: "tmp", ts: NSDate().timeIntervalSince1970 * 1000.0)
             
             self.chatMessageData[self.lastJoinedRoom!]?.append(self.tmpChatMessage!)
             
