@@ -315,8 +315,8 @@ class ChatsNavTableViewController: UITableViewController {
     
     
     func checkIfWeAreOnSettingsAndSetCenterContainer(navController: UINavigationController) {
-        
-        if ((navController.viewControllers.first?.isKindOfClass(MySettingsViewController)) == true) {
+        print("Check if we are on settings")
+        if ((navController.viewControllers.first?.isKindOfClass(ViewController)) != true) {
             let centerNewNav = UINavigationController(rootViewController: self.currentCenterVCWhenSettingsSelected!)
             self.ad!.centerContainer?.setCenterViewController(centerNewNav, withCloseAnimation: false, completion: nil)
         }
