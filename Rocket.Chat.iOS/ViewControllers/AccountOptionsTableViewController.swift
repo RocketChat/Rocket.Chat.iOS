@@ -235,10 +235,18 @@ class AccountOptionsTableViewController: UITableViewController {
     
     
     func checkIfWeAreOnSettingsAndSetCenterContainer() {
+        
         let navC = self.ad?.centerContainer?.centerViewController as! UINavigationController
         
-        if (navC.viewControllers.first!.isKindOfClass(MySettingsViewController) == true) {
-            print("Settings are the center")
+//        if (navC.viewControllers.first!.isKindOfClass(MySettingsViewController) == true) {
+//            print("Settings were the center")
+//            let centerNewNav = UINavigationController(rootViewController: self.viewController!)
+//            self.ad!.centerContainer?.setCenterViewController(centerNewNav, withCloseAnimation: false, completion: nil)
+//            self.ad!.centerContainer?.closeDrawerAnimated(true, completion: nil)
+//        }
+        
+        if (navC.viewControllers.first!.isKindOfClass(ViewController) != true) {
+            print("Channel was not the center")
             let centerNewNav = UINavigationController(rootViewController: self.viewController!)
             self.ad!.centerContainer?.setCenterViewController(centerNewNav, withCloseAnimation: false, completion: nil)
             self.ad!.centerContainer?.closeDrawerAnimated(true, completion: nil)
