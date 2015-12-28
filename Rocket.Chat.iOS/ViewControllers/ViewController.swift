@@ -772,9 +772,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             if error != nil {
                 
                 print("Error:\(error.description)")
-                let alert = UIAlertController(title: "Invalid Room", message: "Invalid Room", preferredStyle: UIAlertControllerStyle.Alert)
+                let alert = UIAlertController(title: "Invalid Room", message: "This room is invalid. You will be redirected to the general channel", preferredStyle: UIAlertControllerStyle.Alert)
                 let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default){ _ in
-                    self.ad.centerContainer?.openDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+//                    self.ad.centerContainer?.openDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+                    self.didSelectRoom("GENERAL", roomName: "general")
                 }
                 alert.addAction(action)
                 self.presentViewController(alert, animated: true, completion: nil)
