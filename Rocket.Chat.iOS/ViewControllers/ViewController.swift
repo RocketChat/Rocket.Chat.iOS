@@ -668,7 +668,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             
             self.customIndicatorViewInViewController.hidden = true
             self.activityIndicatorInViewController.stopAnimating()
-            self.composeMsg.userInteractionEnabled = false
+            self.composeMsg.userInteractionEnabled = true
             self.composeMsg.backgroundColor = UIColor.whiteColor()
             self.composeMsgButton.userInteractionEnabled = true
             self.composeMsgButton.enabled = true
@@ -695,6 +695,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.lastJoinedRoom = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") as? String
         self.title = "#\(NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRoomName")!)"
         
+        if self.composeMsgButton.enabled == false {
+
+            self.composeMsg.userInteractionEnabled = true
+            self.composeMsg.backgroundColor = UIColor.whiteColor()
+            self.composeMsgButton.userInteractionEnabled = true
+            self.composeMsgButton.enabled = true
+            
+        }
         
         if self.chatMessageData[lastJoinedRoom!] == nil {
             

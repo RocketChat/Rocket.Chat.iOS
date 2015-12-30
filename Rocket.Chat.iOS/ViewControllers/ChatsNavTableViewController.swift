@@ -106,6 +106,7 @@ class ChatsNavTableViewController: UITableViewController {
             
             if self.channelsData[i]._id == incomingRoom["_id"].string! {
                 self.channelsData.removeAtIndex(i)
+                roomRemovedNotification()
                 break
             }
             
@@ -115,6 +116,7 @@ class ChatsNavTableViewController: UITableViewController {
             
             if self.directMessagesData[i]._id == incomingRoom["_id"].string! {
                 self.directMessagesData.removeAtIndex(i)
+                roomRemovedNotification()
                 break
             }
             
@@ -124,6 +126,7 @@ class ChatsNavTableViewController: UITableViewController {
             
             if self.privateGroupsData[i]._id == incomingRoom["_id"].string! {
                 self.privateGroupsData.removeAtIndex(i)
+                roomRemovedNotification()
                 break
             }
             
@@ -321,6 +324,24 @@ class ChatsNavTableViewController: UITableViewController {
             self.ad!.centerContainer?.setCenterViewController(centerNewNav, withCloseAnimation: false, completion: nil)
         }
         
+    }
+    
+    func roomRemovedNotification() {
+    
+        let alert = UIAlertController(title: "Room Removed", message: "This room has been removed", preferredStyle: UIAlertControllerStyle.Alert)
+        let ok = UIAlertAction(title: "OK", style: .Default) { _ in
+            
+            let currentVC = self.ad?.centerContainer?.centerViewController as! UINavigationController
+            let vc = currentVC.viewControllers.first as! ViewController
+
+            vc.composeMsg.userInteractionEnabled = false
+            vc.composeMsg.backgroundColor = UIColor.lightGrayColor()
+            vc.composeMsgButton.userInteractionEnabled = false
+            vc.composeMsgButton.enabled = false
+        }
+        alert.addAction(ok)
+        self.presentViewController(alert, animated: true, completion: nil)
+    
     }
     
 }
