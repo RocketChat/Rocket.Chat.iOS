@@ -1,5 +1,5 @@
 //
-//  FavoritesTableViewCell.swift
+//  HistoryTableViewCell.swift
 //  Rocket.Chat.iOS
 //
 //  Created by giorgos on 8/24/15.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavoritesTableViewCell: UITableViewCell {
+class HistoryTableViewCell: UITableViewCell {
   
   // MARK: Properties
   @IBOutlet weak var statusLabel: UILabel!

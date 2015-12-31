@@ -10,6 +10,7 @@ import UIKit
 
 class ChatMessage {
 
+    var rid = String()
     var userId = String()
     var username = String()
     var message = String()
@@ -18,22 +19,21 @@ class ChatMessage {
     
     
     
-    init(user_id: String, username: String, msg: String, msgType: String, ts: Double){
+    init(rid: String ,user_id: String, username: String, msg: String, msgType: String, ts: Double?){
 
+        self.rid = rid
         self.userId = user_id
         self.username = username
         self.message = msg
         self.messageType = msgType
-        self.timestamp = ts
+        self.timestamp = ts!
         
     }
     
     convenience init() {
-        self.init(user_id: String(), username: String(), msg: String(), msgType: String(), ts: Double())
+        self.init(rid: String(), user_id: String(), username: String(), msg: String(), msgType: String(), ts: Double())
     }
     
-    
-
     
 }
 

@@ -13,7 +13,7 @@ func displayStatusChanged(center: CFNotificationCenter!, _: UnsafeMutablePointer
     if (name == "com.apple.springboard.lockcomplete") {
         
         NSUserDefaults.standardUserDefaults().setBool(true, forKey: "kDisplayStatusLocked")
-        
+
     }
     
 }

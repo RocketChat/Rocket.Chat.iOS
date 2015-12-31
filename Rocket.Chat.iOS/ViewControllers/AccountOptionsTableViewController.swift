@@ -14,6 +14,7 @@ class AccountOptionsTableViewController: UITableViewController {
     
     var meteor = MeteorClient!()
     var ad:AppDelegate?
+    var viewController:ViewController!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +22,9 @@ class AccountOptionsTableViewController: UITableViewController {
         self.ad = UIApplication.sharedApplication().delegate as? AppDelegate
         self.meteor = self.ad!.meteorClient
 
+        let navC = self.ad?.centerContainer?.centerViewController as! UINavigationController
+        self.viewController = navC.viewControllers.first as! ViewController
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -128,6 +132,8 @@ class AccountOptionsTableViewController: UITableViewController {
                 print("default")
             }
             
+            checkIfWeAreOnSettingsAndSetCenterContainer()
+        
         }
         //If user selects MySettings
         else if (indexPath.section == 1 && indexPath.row == 0) {
@@ -146,6 +152,7 @@ class AccountOptionsTableViewController: UITableViewController {
             if (meteor.connected){
                 
                 meteor.logout()
+                NSUserDefaults.standardUserDefaults().setBool(false, forKey: "connectedWithSessionToken")
                 print("Logged out")
                 ad.window?.rootViewController = loginVC
             
@@ -194,6 +201,9 @@ class AccountOptionsTableViewController: UITableViewController {
         let leftMenuTabBarController = tabBarController as! LeftMenuTabBarViewController
         
         
+        sendCenterContainerToChatNavWhenSettingsSelected()
+        
+        
         switch viewToAppear{
             
             case "ChatNav":
@@ -201,6 +211,7 @@ class AccountOptionsTableViewController: UITableViewController {
                 tabBarController?.selectedViewController = tabBarController?.viewControllers![leftMenuTabBarController.findIndexOfChatNav()]
                 
             case "Settings":
+                
                 //Create MySettingsViewController instance
                 let mySettingsVC = storyboard?.instantiateViewControllerWithIdentifier("mySettings") as! MySettingsViewController
                 
@@ -218,6 +229,46 @@ class AccountOptionsTableViewController: UITableViewController {
             default:
                 tabBarController?.selectedViewController = tabBarController?.viewControllers![leftMenuTabBarController.findIndexOfMySettings()]
         
+        }
+        
+    }
+    
+    
+    func checkIfWeAreOnSettingsAndSetCenterContainer() {
+        
+        let navC = self.ad?.centerContainer?.centerViewController as! UINavigationController
+        
+//        if (navC.viewControllers.first!.isKindOfClass(MySettingsViewController) == true) {
+//            print("Settings were the center")
+//            let centerNewNav = UINavigationController(rootViewController: self.viewController!)
+//            self.ad!.centerContainer?.setCenterViewController(centerNewNav, withCloseAnimation: false, completion: nil)
+//            self.ad!.centerContainer?.closeDrawerAnimated(true, completion: nil)
+//        }
+        
+        if (navC.viewControllers.first!.isKindOfClass(ViewController) != true) {
+            print("Channel was not the center")
+            let centerNewNav = UINavigationController(rootViewController: self.viewController!)
+            self.ad!.centerContainer?.setCenterViewController(centerNewNav, withCloseAnimation: false, completion: nil)
+            self.ad!.centerContainer?.closeDrawerAnimated(true, completion: nil)
+        }
+        
+    }
+    
+    
+    
+    func sendCenterContainerToChatNavWhenSettingsSelected() {
+        
+        //get LeftMenu's tab bar controller
+        let leftMenuTabBarController = tabBarController as! LeftMenuTabBarViewController
+        
+        //Send the current center ViewController instance to ChatsNavTableViewController so we can return to it
+        let chatsNavTableViewController = tabBarController?.viewControllers![leftMenuTabBarController.findIndexOfChatNav()] as! ChatsNavTableViewController
+        let navC = self.ad?.centerContainer?.centerViewController as? UINavigationController
+        
+        if ((navC?.viewControllers.first?.isKindOfClass(ViewController)) == true) {
+            
+            chatsNavTableViewController.currentCenterVCWhenSettingsSelected = navC?.viewControllers.first as? ViewController
+            
         }
         
     }

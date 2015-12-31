@@ -11,7 +11,7 @@ import MMDrawerController
 import ObjectiveDDP
 import SwiftyJSON
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, SwitchRoomDelegate {
     
     @IBOutlet var bottomViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet var tableViewTopConstraint: NSLayoutConstraint!
@@ -27,102 +27,24 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var dateFormatter = NSDateFormatter()
     
     var meteor: MeteorClient!
+    var ad:AppDelegate!
     
     //JSON to keep the response
     var chatMessages:JSON = []
     
-    //Array to keep each chatMessage
-    var chatMessageData = [ChatMessage]()
-    
+    //Dictionary to keep each chatMessage
+    var chatMessageData = [String:[ChatMessage]]()
     
     @IBOutlet var activityIndicatorInViewController: UIActivityIndicatorView!
     @IBOutlet var customIndicatorViewInViewController: UIView!
     
-    
-    override func viewWillAppear(animated: Bool) {
-        
-        //After login join general room
-        let ad = UIApplication.sharedApplication().delegate as! AppDelegate
-        meteor = ad.meteorClient
-        
-        //Subscribe to rocketchat_message collection for the GENERAL channel
-        self.meteor.addSubscription("messages", withParameters: ["GENERAL"])
-
-
-        meteor.callMethodName("joinDefaultChannels", parameters: nil) { (response, error) -> Void in
-            
-            if error != nil {
-                print("Error:\(error.description)")
-                return
-            }else{
-                //print(response)
-                
-                //Add observer to handle incoming messages
-                NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveUpdate:", name: "rocketchat_message_added", object: nil)
-            }
-        }
-        
-        //Get the 50 past messages to fill the tableview
-        let now = NSDate()
-        
-        let formData = NSDictionary(dictionary: [
-            "$date": now.timeIntervalSince1970*1000
-            ])
-        
-        meteor.callMethodName("loadHistory", parameters: ["GENERAL", formData,50], responseCallback: { (response, error) -> Void in
-            
-            if error != nil {
-                
-                print("Error:\(error.description)")
-                return
-                
-            } else {
-                
-//                print(response!["result"]!)
-                
-                //JSON Handling
-                let result = JSON(response)
-                self.chatMessages = result["result"]["messages"]
-                
-                
-                for (_,subJson) in self.chatMessages {
-                    
-                    var type = ""
-                    if subJson["t"].string != nil {
-                        type = subJson["t"].string!
-                    }
-                    
-                    let timestamp = [subJson["ts","$date"].number!]
-                    let timestampInDouble = timestamp as! [Double]
-                    let timestampInMilliseconds = timestampInDouble[0] / 1000
-                    
-                    let  cM = ChatMessage(user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
-        
-                    
-                    self.chatMessageData.append(cM)
-
-                }
-                
-                
-                self.chatMessageData = self.chatMessageData.reverse()
-                
-                
-                //Reload data and scroll to the bottom of the tableview
-                self.mainTableview.reloadData()
-                //If iOS 8 scrolling doesn't work properly.
-                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData.count - 1, inSection: 0)
-                self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-                
-                
-            }
-            
-        })
-        
-        
-        
-    }
+    var lastJoinedRoomName:String?
+    var lastJoinedRoom:String?
+    var tmpChatMessage:ChatMessage?
+    var lastSeenTimeStamp:Double?
     
     
+    var currentUsername:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -138,24 +60,87 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //Create double tap gesture
         let doubleTapGesture = UITapGestureRecognizer(target: self, action: Selector("showHiddenTimestamp:"))
         doubleTapGesture.numberOfTapsRequired = 2
-
+        
         //Add gestures on tableview
         mainTableview.addGestureRecognizer(tapGesture)
         mainTableview.addGestureRecognizer(doubleTapGesture)
-
+        
         
         //Remove lines between cells
         mainTableview.separatorStyle = UITableViewCellSeparatorStyle.None
         
         mainTableview.rowHeight = UITableViewAutomaticDimension
         mainTableview.estimatedRowHeight = 75
- 
+        
         //Set border to composeMsg textarea
         composeMsg.layer.borderColor = UIColor.blackColor().CGColor
         composeMsg.layer.borderWidth = 0.5
         composeMsg.layer.cornerRadius = 10
         
         dateFormatter.dateFormat = "HH:mm"
+        
+        self.tmpChatMessage?.messageType = ""
+        
+        
+        
+        if (NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") != nil) {
+            self.lastJoinedRoomName = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRoomName") as? String
+            self.lastJoinedRoom = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") as? String
+        }else {
+            self.lastJoinedRoomName = "general"
+            self.lastJoinedRoom = "GENERAL"
+        }
+        
+        self.title = "#\(self.lastJoinedRoomName!)"
+        
+        //After login join general room
+        self.ad = UIApplication.sharedApplication().delegate as! AppDelegate
+        meteor = self.ad.meteorClient
+        
+        //Subscribe to rocketchat_message collection for the GENERAL channel
+        self.meteor.addSubscription("stream-messages")
+        
+        
+        meteor.callMethodName("channelsList", parameters: nil) { (response, error) -> Void in
+            
+            if error != nil {
+                print(error.description)
+                return
+            }
+            
+            //print(response["result"]!["channels"]!![0]!)
+        }
+        
+        meteor.callMethodName("joinDefaultChannels", parameters: []) { (response, error) -> Void in
+            
+            if error != nil {
+                print("Error:\(error.description)")
+                return
+            }else{
+                print(response)
+                //Add observer to handle incoming messages
+                NSNotificationCenter.defaultCenter().addObserver(self, selector: "didReceiveUpdate:", name: "stream-messages_added", object: nil)
+                
+                let users = self.meteor.collections["users"] as! M13MutableOrderedDictionary
+                
+                let user = users.objectAtIndex(0)
+                self.currentUsername = user["username"] as? String
+
+                
+                
+            }
+        }
+        
+        //Get last 50 messages
+        loadHistory(self.lastJoinedRoom!, numberOfMessages: 50)
+        
+        
+        //Get the leftViewController instance and use it to notify this ViewController about changing the channel using the SwitchRoomDelegate
+        let leftNavController = ad.centerContainer?.leftDrawerViewController as! UINavigationController
+        let leftViewController = leftNavController.viewControllers.first as! LeftViewController
+        leftViewController.viewController = self
+        
+        
     }
     
     override func didReceiveMemoryWarning() {
@@ -195,14 +180,17 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1 // Just for now?
     }
-      
-
+    
+    
     
     //Number of table rows
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.chatMessageData.count
-      
+        //If the user has joined a channel the length is that channels messages + 1 for the load more btn else it is 0
+        let numOfRows = self.chatMessageData[self.lastJoinedRoom!] != nil ? self.chatMessageData[self.lastJoinedRoom!]!.count + 1 : 0
+        
+        return numOfRows
+        
     }
     
     //Populating data
@@ -212,7 +200,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         //Get visible cells indexes
         let visible = mainTableview.indexPathsForVisibleRows
         //Set bottomIndexpath to last visible cell's index
-        bottomIndexPath = NSIndexPath(forRow: visible!.last!.row, inSection: 0)
+        self.bottomIndexPath = NSIndexPath(forRow: visible!.last!.row, inSection: 0)
         
         
         
@@ -224,10 +212,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         //Check if the next and previous user are the same to see what kind of cell we will create
-        if(indexPath.row > 0){
+        if(indexPath.row > 1){
             
-            if(self.chatMessageData[indexPath.row].userId == self.chatMessageData[indexPath.row - 1].userId){
-            
+            if(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].userId == self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 2].userId){
+                
                 sameUser = true
                 
             }
@@ -254,7 +242,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         
         
-        //If Same User - return a full detailed cell
+        //If Same User - return a no detailed cell
         if (sameUser) {
             
             var noDetailsCell:NoDetailsTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("noDetailsCell", forIndexPath: indexPath) as? NoDetailsTableViewCell
@@ -266,13 +254,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             //Set hidden timestamp
-            noDetailsCell!.hiddenTimeStamp.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[indexPath.row].timestamp))))"
+            noDetailsCell!.hiddenTimeStamp.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
             noDetailsCell!.hiddenTimeStamp.hidden = true
             noDetailsCell!.hiddenTimeStamp.textColor = UIColor.rocketTimestampColor()
             
             
             //If message is removed
-            if(self.chatMessageData[indexPath.row].messageType == "rm") {
+            if(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "rm") {
                 
                 
                 //Set text to noDetailsMessage label
@@ -283,12 +271,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
                 
                 return noDetailsCell!
-            
-            }else{
+                
+            }else if (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "uj"){
                 
                 //Set text to noDetailsMessage label
-                noDetailsCell!.noDetailsMessage.text = self.chatMessageData[indexPath.row].message
-                noDetailsCell?.noDetailsMessage.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                noDetailsCell!.noDetailsMessage.text = "has joined the channel"
+                noDetailsCell?.noDetailsMessage.font = UIFont.italicSystemFontOfSize(15)
+                
+                //Set color to #444444
+                noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
+                
+                return noDetailsCell!
+                
+            }else if (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "room_changed_privacy"){
+                
+                //Set text to noDetailsMessage label
+                noDetailsCell!.noDetailsMessage.text = "room type has changed to \(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message) by \(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].username)"
+                noDetailsCell?.noDetailsMessage.font = UIFont.italicSystemFontOfSize(15)
                 
                 //Set color to #444444
                 noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
@@ -296,11 +295,54 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 return noDetailsCell!
                 
             }
+            else{
+                
+                if (self.tmpChatMessage?.messageType == "tmp") {
+                    
+                    if (indexPath.row == self.chatMessageData[self.lastJoinedRoom!]?.count) {
+                        
+                        //Set text to noDetailsMessage label
+                        noDetailsCell!.noDetailsMessage.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                        noDetailsCell?.noDetailsMessage.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                        
+                        //Set color to #444444
+                        noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketRedColor()
+                        
+                        return noDetailsCell!
+                        
+                    }else {
+                        
+                        //Set text to noDetailsMessage label
+                        noDetailsCell!.noDetailsMessage.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                        noDetailsCell?.noDetailsMessage.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                        
+                        //Set color to #444444
+                        noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
+                        
+                        return noDetailsCell!
+                        
+                    }
+                    
+                }else {
+                    
+                    //Set text to noDetailsMessage label
+                    noDetailsCell!.noDetailsMessage.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                    noDetailsCell?.noDetailsMessage.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                    
+                    //Set color to #444444
+                    noDetailsCell!.noDetailsMessage.textColor = UIColor.rocketSecondaryFontColor()
+                    
+                    return noDetailsCell!
+                    
+                }
+                
+                
+            }
             
             
         }
-        //If different user and joined the channel - return a full detailed cell
-        else if (!sameUser && self.chatMessageData[indexPath.row].messageType == "uj"){
+            //If different user and joined the channel - return a full detailed cell
+        else if (!sameUser && self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "uj"){
             
             var fullDetailsCell:MainTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("fullDetailsCell", forIndexPath: indexPath) as? MainTableViewCell
             
@@ -312,13 +354,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
-            fullDetailsCell!.usernameLabel.text = self.chatMessageData[indexPath.row].username
+            fullDetailsCell!.usernameLabel.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].username
             
             //Set color to #444444
             fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
             
             //Set the timestamp
-            fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[indexPath.row].timestamp))))"
+            fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
             fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
             fullDetailsCell!.messageLabel.text = "has joined the channel"
             fullDetailsCell?.messageLabel.font = UIFont.italicSystemFontOfSize(15)
@@ -327,9 +369,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             return fullDetailsCell!
             
         }
-        //If different user - return a non detailed cell
+            //If different user - return a full detailed cell
         else {
-        
+            
             var fullDetailsCell:MainTableViewCell? = mainTableview.dequeueReusableCellWithIdentifier("fullDetailsCell", forIndexPath: indexPath) as? MainTableViewCell
             
             
@@ -340,18 +382,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             }
             
             fullDetailsCell!.avatarImg.image = UIImage(named: "Default-Avatar")
-            fullDetailsCell!.usernameLabel.text = self.chatMessageData[indexPath.row].username
+            fullDetailsCell!.usernameLabel.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].username
             
             //Set color to #444444
             fullDetailsCell!.usernameLabel.textColor = UIColor.rocketMainFontColor()
             
-            //Set the timestamp
-            fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[indexPath.row].timestamp))))"
-            fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
-            
             
             //If message is removed
-            if(self.chatMessageData[indexPath.row].messageType == "rm"){
+            if(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "rm"){
+                
+                //Set the timestamp
+                fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
+                fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
                 
                 //Set the message text
                 fullDetailsCell!.messageLabel.text = "message removed"
@@ -361,15 +403,79 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 return fullDetailsCell!
                 
                 
-            }
-            else {
+            } else if (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "uj") {
+                
+                //Set the timestamp
+                fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
+                fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
                 
                 //Set the message text
-                fullDetailsCell!.messageLabel.text = self.chatMessageData[indexPath.row].message
-                fullDetailsCell?.messageLabel.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                fullDetailsCell!.messageLabel.text = "has joined the channel"
+                fullDetailsCell?.messageLabel.font = UIFont.italicSystemFontOfSize(15)
                 fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
                 
                 return fullDetailsCell!
+                
+            } else if (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].messageType == "room_changed_privacy") {
+                
+                //Set the timestamp
+                fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
+                fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
+                
+                //Set the message text
+                fullDetailsCell!.messageLabel.text = "room type has changed to \(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message) by \(self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].username)"
+                fullDetailsCell?.messageLabel.font = UIFont.italicSystemFontOfSize(15)
+                fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
+                
+                return fullDetailsCell!
+                
+            } else {
+                
+                if (self.tmpChatMessage?.messageType == "tmp") {
+                    
+                    if (indexPath.row == self.chatMessageData[self.lastJoinedRoom!]!.count) {
+                        
+                        //Hide the timestamp
+                        fullDetailsCell!.timeLabel.text = ""
+                        
+                        //Set the message text
+                        fullDetailsCell!.messageLabel.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                        fullDetailsCell?.messageLabel.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                        fullDetailsCell!.messageLabel.textColor = UIColor.rocketRedColor()
+                        
+                        return fullDetailsCell!
+                        
+                    }else {
+                        
+                        //Set the timestamp
+                        fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
+                        fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
+                        
+                        //Set the message text
+                        fullDetailsCell!.messageLabel.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                        fullDetailsCell?.messageLabel.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                        fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
+                        
+                        return fullDetailsCell!
+                        
+                    }
+                    
+                    
+                }else {
+                    
+                    //Set the timestamp
+                    fullDetailsCell!.timeLabel.text = "\(dateFormatter.stringFromDate(NSDate(timeIntervalSince1970: (self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].timestamp))))"
+                    fullDetailsCell!.timeLabel.textColor = UIColor.rocketTimestampColor()
+                    
+                    //Set the message text
+                    fullDetailsCell!.messageLabel.text = self.chatMessageData[self.lastJoinedRoom!]![indexPath.row - 1].message
+                    fullDetailsCell?.messageLabel.font = UIFont(name: "Roboto-Regular.ttf", size: 15)
+                    fullDetailsCell!.messageLabel.textColor = UIColor.rocketSecondaryFontColor()
+                    
+                    return fullDetailsCell!
+                    
+                }
+                
             }
             
         }
@@ -383,9 +489,22 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if (composeMsg.text != ""){
             
+            self.tmpChatMessage = ChatMessage(rid: self.lastJoinedRoom!, user_id: self.meteor.userId, username: self.currentUsername!, msg: composeMsg.text, msgType: "tmp", ts: NSDate().timeIntervalSince1970 * 1000.0)
+            
+            self.chatMessageData[self.lastJoinedRoom!]?.append(self.tmpChatMessage!)
+            
+            self.mainTableview.reloadData()
+            
+            if self.chatMessageData[self.lastJoinedRoom!] != nil {
+                //If iOS 8 scrolling doesn't work properly.
+                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            }
+            
+            
             var messageObject = NSDictionary()
             messageObject = [
-                "rid":"GENERAL",
+                "rid":self.lastJoinedRoom!,
                 "msg":composeMsg.text!
             ]
             
@@ -402,50 +521,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             })
             
         }
-
         
-
-        
-//        //If there is text
-//        if composeMsg.text != "" {
-//            //create current message
-////            let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: currentUser!)
-//          let currentMsg:Message = Message(id: "", text: composeMsg.text, tstamp: NSDate(timeInterval: randomTime(), sinceDate: NSDate()), user: User?)	// FIXME!
-//            //add it to the messages array
-//            mArray1 += [currentMsg]
-//            
-//            
-//            //update the messages array of the chatroom
-//            cR1?.messages = mArray1
-//            
-//            //reset the text input
-//            composeMsg.text = ""
-//            
-//            //dismiss keyboard - Uncomment the next line if you want keyboard to hide when you send a message
-//            //dismissKeyboard()
-//            
-//            //reload the tableview data
-//            mainTableview.reloadData()
-//            
-//            
-//            //get the bottom index - THIS NEEDS TO BE REMOVED -
-//            //bottomIndexPath = NSIndexPath(forRow: cR1!.messages.count-1, inSection: 0)
-//            
-//            //If we are the bottom
-//            if (bottomIndexPath.row == cR1!.messages.count - 1) {
-//            //scroll to bottom
-//                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-//                //calling it twice because something is wrong with scrolling the tableview to the bottom in iOS 9
-//                mainTableview.scrollToRowAtIndexPath(bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
-//            }
-//            
-//        }
-//        //If text is empty
-//        else{
-//        
-//            //dismiss keyboard
-//            dismissKeyboard()
-//        }
     }
     
     
@@ -492,68 +568,107 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     //Function to toggle message's timestamp
     func showHiddenTimestamp(gesture: UITapGestureRecognizer) {
         
-        //get the index path of the cell where the user double tapped on
-        let tableCellRow = mainTableview.indexPathForRowAtPoint(gesture.locationInView(mainTableview))!
-        
-        //Get the cell
-        if  let tableCell = mainTableview.cellForRowAtIndexPath(tableCellRow) as? NoDetailsTableViewCell {
+        //If double tapping happens inside the tableview
+        if mainTableview.indexPathForRowAtPoint(gesture.locationInView(mainTableview)) != nil {
             
-            //Toggle timestamp
+            //get the index path of the cell where the user double tapped on
+            let tableCellRow = mainTableview.indexPathForRowAtPoint(gesture.locationInView(mainTableview))!
             
-            if !tableCell.hiddenTimeStamp.hidden {
+            //Get the cell
+            if  let tableCell = mainTableview.cellForRowAtIndexPath(tableCellRow) as? NoDetailsTableViewCell {
                 
-                tableCell.hiddenTimeStamp.hidden = true
+                //Toggle timestamp
                 
-            }else {
-                
-                tableCell.hiddenTimeStamp.hidden = false
-                
+                if !tableCell.hiddenTimeStamp.hidden {
+                    
+                    tableCell.hiddenTimeStamp.hidden = true
+                    
+                }else {
+                    
+                    tableCell.hiddenTimeStamp.hidden = false
+                    
+                }
             }
         }
-        
     }
     
     //Function to add the incoming messages
     func didReceiveUpdate(notification: NSNotification) {
         
-        var type = ""
-        if let t = notification.userInfo!["t"]{
-            type = t as! String
-        }
         
-        let timestamp = [notification.userInfo!["ts"]!["$date"] as! NSNumber]
-        let timestampInDouble = timestamp as! [Double]
-        let timestampInMilliseconds = timestampInDouble[0] / 1000
-        
-        let incomingMsg = ChatMessage(user_id: notification.userInfo!["u"]!["_id"]! as! String, username: notification.userInfo!["u"]!["username"]! as! String, msg: notification.userInfo!["msg"]! as! String, msgType: type, ts: timestampInMilliseconds)
-    
-        self.chatMessageData.append(incomingMsg)
-        
-        //Reloading data and if we are at the bottom scroll the view to the last row
-        self.mainTableview.reloadData()
-        
-        let lastVisibleCells = self.mainTableview.visibleCells.last
-        let lastVisibleCellsIndexPath = NSIndexPath(forRow: self.mainTableview.indexPathForCell(lastVisibleCells!)!.row, inSection: 0)
-        
-        self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData.count - 1, inSection: 0)
-        
-        if (lastVisibleCellsIndexPath.row >= bottomIndexPath.row - 1) {
+        if let args = notification.userInfo!["args"] {
             
-            self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+            let msg = JSON(args[1]!)
+            //            print(msg)
             
+            if self.tmpChatMessage?.messageType == "tmp"{
+                
+                self.tmpChatMessage?.messageType = ""
+                self.chatMessageData[self.lastJoinedRoom!]?.removeLast()
+                
+            }
             
+            if self.lastSeenTimeStamp != Double(msg["ts"]["$date"].number! as NSNumber) {
+                
+                
+                
+                
+                if msg["rid"].string == NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") as? String {
+                    var type = ""
+                    if let t = msg["t"].string{
+                        type = t
+                    }
+                    
+                    let timestamp = [msg["ts"]["$date"].number! as NSNumber]
+                    let timestampInDouble = timestamp as! [Double]
+                    let timestampInMilliseconds = timestampInDouble[0] / 1000
+                    
+                    let incomingMsg = ChatMessage(rid: msg["rid"].string!,user_id: msg["u"]["_id"].string!, username: msg["u"]["username"].string!, msg: msg["msg"].string!, msgType: type, ts: timestampInMilliseconds)
+                    
+                    if self.chatMessageData[self.lastJoinedRoom!] != nil{
+                        self.chatMessageData[self.lastJoinedRoom!]!.append(incomingMsg)
+                    } else {
+                        self.chatMessageData[self.lastJoinedRoom!] = [incomingMsg]
+                    }
+                    
+                    self.lastSeenTimeStamp = Double(msg["ts"]["$date"].number! as NSNumber)
+                    
+                    
+                    
+                    //Reloading data and if we are at the bottom scroll the view to the last row
+                    self.mainTableview.reloadData()
+                    
+                    if let lastVisibleCells = self.mainTableview.visibleCells.last {
+                        
+                        let lastVisibleCellsIndexPath = NSIndexPath(forRow: self.mainTableview.indexPathForCell(lastVisibleCells)!.row, inSection: 0)
+                        
+                        self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                        
+                        if (lastVisibleCellsIndexPath.row >= bottomIndexPath.row - 1) {
+                            print("scroll to bottom")
+                            self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                        }
+                        
+                    } else {
+                        //When we are in an empty room and a we have an incoming message to another room we have joined
+                        print("No need to scroll")
+                        self.bottomIndexPath = NSIndexPath(forRow: 0, inSection: 0)
+                        
+                    }
+                }
+            }
         }
         
         
     }
     
     func connectionStatus(live:Bool) {
-
+        
         if (live){
             
             self.customIndicatorViewInViewController.hidden = true
             self.activityIndicatorInViewController.stopAnimating()
-            self.composeMsg.userInteractionEnabled = false
+            self.composeMsg.userInteractionEnabled = true
             self.composeMsg.backgroundColor = UIColor.whiteColor()
             self.composeMsgButton.userInteractionEnabled = true
             self.composeMsgButton.enabled = true
@@ -567,8 +682,162 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             self.composeMsgButton.userInteractionEnabled = false
             self.composeMsgButton.enabled = false
         }
-
+        
         
     }
+    
+    func didSelectRoom(rid: String, roomName: String) {
+        
+        NSUserDefaults.standardUserDefaults().setValue(roomName, forKey: "lastJoinedRoomName")
+        NSUserDefaults.standardUserDefaults().setValue(rid, forKey: "lastJoinedRid")
+        
+        self.lastJoinedRoomName = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRoomName") as? String
+        self.lastJoinedRoom = NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRid") as? String
+        self.title = "#\(NSUserDefaults.standardUserDefaults().valueForKey("lastJoinedRoomName")!)"
+        
+        if self.composeMsgButton.enabled == false {
+
+            self.composeMsg.userInteractionEnabled = true
+            self.composeMsg.backgroundColor = UIColor.whiteColor()
+            self.composeMsgButton.userInteractionEnabled = true
+            self.composeMsgButton.enabled = true
+            
+        }
+        
+        if self.chatMessageData[lastJoinedRoom!] == nil {
+            
+            loadHistory(self.lastJoinedRoom!, numberOfMessages: 50)
+            
+        }else {
+
+            var unreadChatMessages = [ChatMessage]()
+            
+            let formData = NSDictionary(dictionary: [
+                "$date": ((self.chatMessageData[self.lastJoinedRoom!]?.last!.timestamp)! * 1000)
+                ])
+            
+            self.meteor.callMethodName("loadMissedMessages", parameters: [self.lastJoinedRoom!, formData], responseCallback: { (response, error) -> Void in
+                
+                if error != nil {
+                    print(error.description)
+                    return
+                }
+
+                let unread = JSON(response["result"]!)
+                print("Unread:\(unread)")
+                
+                for (_,subJson) in unread {
+                    
+                    var type = ""
+                    if subJson["t"].string != nil {
+                        type = subJson["t"].string!
+                    }
+                    
+                    let timestamp = [subJson["ts","$date"].number!]
+                    let timestampInDouble = timestamp as! [Double]
+                    let timestampInMilliseconds = timestampInDouble[0] / 1000
+                    
+                    let  cM = ChatMessage(rid: subJson["rid"].string!,user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
+                    unreadChatMessages.append(cM)
+                    
+                    
+                }
+                
+                unreadChatMessages = unreadChatMessages.reverse()
+                
+                for (var i = 0; i < unreadChatMessages.count; i++){
+                    self.chatMessageData[self.lastJoinedRoom!]! += [unreadChatMessages[i]]
+                }
+                
+                self.mainTableview.reloadData()
+                
+                //If iOS 8 scrolling doesn't work properly.
+                self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[self.lastJoinedRoom!]!.count, inSection: 0)
+                
+                //Uncomment this if you want to scroll at the bottom even when selecting the current channel
+                self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                
+                unreadChatMessages.removeAll()
+            })
+            
+        }
+        
+    }
+    
+    
+    
+    func loadHistory(room: String, numberOfMessages: Int){
+        
+        //Get the 50 past messages to fill the tableview
+        let now = NSDate()
+        
+        let formData = NSDictionary(dictionary: [
+            "$date": now.timeIntervalSince1970*1000
+            ])
+        
+        meteor.callMethodName("loadHistory", parameters: [room, formData, numberOfMessages], responseCallback: { (response, error) -> Void in
+            
+            if error != nil {
+                
+                print("Error:\(error.description)")
+                let alert = UIAlertController(title: "Invalid Room", message: "This room is invalid. You will be redirected to the general channel", preferredStyle: UIAlertControllerStyle.Alert)
+                let action = UIAlertAction(title: "OK", style: UIAlertActionStyle.Default){ _ in
+//                    self.ad.centerContainer?.openDrawerSide(MMDrawerSide.Left, animated: true, completion: nil)
+                    self.didSelectRoom("GENERAL", roomName: "general")
+                }
+                alert.addAction(action)
+                self.presentViewController(alert, animated: true, completion: nil)
+                return
+                
+            } else {
+                
+                //print(response!["result"]!)
+                
+                //JSON Handling
+                let result = JSON(response)
+                self.chatMessages = result["result"]["messages"]
+                
+                if self.chatMessages.count > 0 {
+                    
+                    for (_,subJson) in self.chatMessages {
+                        
+                        var type = ""
+                        if subJson["t"].string != nil {
+                            type = subJson["t"].string!
+                        }
+                        
+                        let timestamp = [subJson["ts","$date"].number!]
+                        let timestampInDouble = timestamp as! [Double]
+                        let timestampInMilliseconds = timestampInDouble[0] / 1000
+                        
+                        let  cM = ChatMessage(rid: subJson["rid"].string!,user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
+                        
+                        if self.chatMessageData[cM.rid] == nil {
+                            
+                            self.chatMessageData[cM.rid] = [cM]
+                            
+                        }else {
+                            
+                            self.chatMessageData[cM.rid]! += [cM]
+                            
+                        }
+                        
+                    }
+                    
+                    self.chatMessageData[room] = self.chatMessageData[room]!.reverse()
+                    //Reload data and scroll to the bottom of the tableview
+                    self.mainTableview.reloadData()
+                    //If iOS 8 scrolling doesn't work properly.
+                    self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[room]!.count, inSection: 0)
+                    self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                    
+                }else {
+                    self.mainTableview.reloadData()
+                }
+            }
+        })
+        
+    }
+    
     
 }
