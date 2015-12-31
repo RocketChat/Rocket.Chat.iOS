@@ -43,6 +43,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var tmpChatMessage:ChatMessage?
     var lastSeenTimeStamp:Double?
     
+    var refreshControl = UIRefreshControl()
     
     var currentUsername:String?
     
@@ -76,6 +77,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         composeMsg.layer.borderColor = UIColor.blackColor().CGColor
         composeMsg.layer.borderWidth = 0.5
         composeMsg.layer.cornerRadius = 10
+        
+        self.refreshControl.addTarget(self, action: "endRefresh", forControlEvents: .AllEvents)
+        self.mainTableview.addSubview(self.refreshControl)
         
         dateFormatter.dateFormat = "HH:mm"
         
@@ -132,7 +136,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
         
         //Get last 50 messages
-        loadHistory(self.lastJoinedRoom!, numberOfMessages: 50)
+        loadHistory(self.lastJoinedRoom!, end: nil, numberOfMessages: 50, ls: nil, append: false, appendAboveCell: nil)
         
         
         //Get the leftViewController instance and use it to notify this ViewController about changing the channel using the SwitchRoomDelegate
@@ -171,6 +175,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
+    @IBAction func loadMore(sender: AnyObject) {
+        
+        print("loadMore")
+        
+        loadHistory(self.lastJoinedRoom!, end: ((self.chatMessageData[self.lastJoinedRoom!]?.first?.timestamp)! * 1000), numberOfMessages: 10, ls: nil, append: true, appendAboveCell: 0)
+        
+//        self.chatMessageData[self.lastJoinedRoom!]?.appendContentsOf(self.chatMessageData[self.lastJoinedRoom!]!)
+//        self.mainTableview.reloadData()
+        
+    }
     
     //
     //MARK: TableView
@@ -482,6 +496,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
+
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        
+        let visible = mainTableview.indexPathsForVisibleRows
+        
+        if visible?.first?.row < 10 && self.chatMessageData[self.lastJoinedRoom!]?.count > 0{
+            print("refreshing")
+            print(visible?.first?.row)
+            pullToRefresh((visible?.first?.row)!, numberOfMessages: 50)
+        }
+        
+    }
     
     
     //Function to close the keyboard when send button is pressed
@@ -706,7 +732,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         if self.chatMessageData[lastJoinedRoom!] == nil {
             
-            loadHistory(self.lastJoinedRoom!, numberOfMessages: 50)
+            loadHistory(self.lastJoinedRoom!, end: nil, numberOfMessages: 50, ls: nil, append: false, appendAboveCell: nil)
             
         }else {
 
@@ -766,13 +792,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     
     
-    func loadHistory(room: String, numberOfMessages: Int){
+    func loadHistory(room: String, end: Double?, numberOfMessages: Int, ls: Double?, append: Bool, appendAboveCell: Int?){
         
         //Get the 50 past messages to fill the tableview
         let now = NSDate()
         
         let formData = NSDictionary(dictionary: [
-            "$date": now.timeIntervalSince1970*1000
+            "$date": end ?? now.timeIntervalSince1970 * 1000
             ])
         
         meteor.callMethodName("loadHistory", parameters: [room, formData, numberOfMessages], responseCallback: { (response, error) -> Void in
@@ -795,49 +821,103 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
                 
                 //JSON Handling
                 let result = JSON(response)
-                self.chatMessages = result["result"]["messages"]
                 
-                if self.chatMessages.count > 0 {
+                if append {
+                    print("appending")
+                    var earlierMessages = [ChatMessage]()
+                    self.chatMessages = result["result"]["messages"]
                     
-                    for (_,subJson) in self.chatMessages {
+                    if self.chatMessages.count > 0 {
                         
-                        var type = ""
-                        if subJson["t"].string != nil {
-                            type = subJson["t"].string!
+                        for (_,subJson) in self.chatMessages {
+                            
+                            var type = ""
+                            if subJson["t"].string != nil {
+                                type = subJson["t"].string!
+                            }
+                            
+                            let timestamp = [subJson["ts","$date"].number!]
+                            let timestampInDouble = timestamp as! [Double]
+                            let timestampInMilliseconds = timestampInDouble[0] / 1000
+                            
+                            let  cM = ChatMessage(rid: subJson["rid"].string!,user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
+                            
+                            earlierMessages.append(cM)
                         }
                         
-                        let timestamp = [subJson["ts","$date"].number!]
-                        let timestampInDouble = timestamp as! [Double]
-                        let timestampInMilliseconds = timestampInDouble[0] / 1000
+                        earlierMessages = earlierMessages.reverse()
                         
-                        let  cM = ChatMessage(rid: subJson["rid"].string!,user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
-                        
-                        if self.chatMessageData[cM.rid] == nil {
-                            
-                            self.chatMessageData[cM.rid] = [cM]
-                            
-                        }else {
-                            
-                            self.chatMessageData[cM.rid]! += [cM]
-                            
-                        }
-                        
+                        self.chatMessageData[self.lastJoinedRoom!]? = earlierMessages + (self.chatMessageData[self.lastJoinedRoom!])!
+                        self.mainTableview.reloadData()
+                        let scrollTo = earlierMessages.count + appendAboveCell! - 1
+                        self.mainTableview.scrollToRowAtIndexPath(NSIndexPath(forRow: scrollTo, inSection: 0), atScrollPosition: .Top, animated: false)
+                        earlierMessages.removeAll()
+                    }else {
+                        print("no more messages")
                     }
+                    print("endRefresh")
+                    self.refreshControl.endRefreshing()
                     
-                    self.chatMessageData[room] = self.chatMessageData[room]!.reverse()
-                    //Reload data and scroll to the bottom of the tableview
-                    self.mainTableview.reloadData()
-                    //If iOS 8 scrolling doesn't work properly.
-                    self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[room]!.count, inSection: 0)
-                    self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
                     
                 }else {
-                    self.mainTableview.reloadData()
+                    
+                    
+                    self.chatMessages = result["result"]["messages"]
+                    
+                    if self.chatMessages.count > 0 {
+                        
+                        for (_,subJson) in self.chatMessages {
+                            
+                            var type = ""
+                            if subJson["t"].string != nil {
+                                type = subJson["t"].string!
+                            }
+                            
+                            let timestamp = [subJson["ts","$date"].number!]
+                            let timestampInDouble = timestamp as! [Double]
+                            let timestampInMilliseconds = timestampInDouble[0] / 1000
+                            
+                            let  cM = ChatMessage(rid: subJson["rid"].string!,user_id: subJson["u","_id"].string!, username: subJson["u","username"].string!, msg: subJson["msg"].string!, msgType: type, ts: timestampInMilliseconds)
+                            
+                            if self.chatMessageData[cM.rid] == nil {
+                                
+                                self.chatMessageData[cM.rid] = [cM]
+                                
+                            }else {
+                                
+                                self.chatMessageData[cM.rid]! += [cM]
+                                
+                            }
+                            
+                        }
+                        
+                        self.chatMessageData[room] = self.chatMessageData[room]!.reverse()
+                        //Reload data and scroll to the bottom of the tableview
+                        self.mainTableview.reloadData()
+                        //If iOS 8 scrolling doesn't work properly.
+                        self.bottomIndexPath = NSIndexPath(forRow: self.chatMessageData[room]!.count - 1, inSection: 0)
+                        self.mainTableview.scrollToRowAtIndexPath(self.bottomIndexPath, atScrollPosition: UITableViewScrollPosition.Bottom, animated: false)
+                        
+                    }else {
+                        self.mainTableview.reloadData()
+                    }
+                    
+                    
                 }
+                
+
             }
         })
         
     }
     
+    func pullToRefresh(cellWhereRefreshStarts: Int, numberOfMessages: Int) {
+        
+        loadHistory(self.lastJoinedRoom!, end: ((self.chatMessageData[self.lastJoinedRoom!]?.first?.timestamp)! * 1000), numberOfMessages: numberOfMessages, ls: nil, append: true, appendAboveCell: cellWhereRefreshStarts)
+        
+    }
     
+    func endRefresh() {
+        self.refreshControl.endRefreshing()
+    }
 }
