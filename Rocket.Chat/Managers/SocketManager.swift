@@ -11,6 +11,7 @@ import Starscream
 
 
 public typealias MessageCompletion = (AnyObject?) -> Void
+public typealias SocketCompletion = (WebSocket?, Bool) -> Void
 
 
 class SocketManager {
@@ -19,13 +20,14 @@ class SocketManager {
 
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
+    var connectionHandler: SocketCompletion?
     
     
     // MARK: Connection
     
-    static func connect(url: NSURL) {
-        disconnect()
-        
+    static func connect(url: NSURL, completion: SocketCompletion) {
+        sharedInstance.connectionHandler = completion
+
         sharedInstance.socket = WebSocket(url: url)
         sharedInstance.socket?.delegate = sharedInstance
         sharedInstance.socket?.pongDelegate = sharedInstance
@@ -33,7 +35,8 @@ class SocketManager {
         sharedInstance.socket?.connect()
     }
     
-    static func disconnect() {
+    static func disconnect(completion: SocketCompletion) {
+        sharedInstance.connectionHandler = completion
         sharedInstance.socket?.disconnect()
     }
     
@@ -54,10 +57,16 @@ extension SocketManager: WebSocketDelegate {
     
     func websocketDidConnect(socket: WebSocket) {
         Log.debug("Socket (\(socket)) did connect")
+
+        connectionHandler?(socket, socket.isConnected)
+        connectionHandler = nil
     }
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Log.debug("Socket (\(socket)) did disconnect with error (\(error))")
+        
+        connectionHandler?(socket, socket.isConnected)
+        connectionHandler = nil
     }
     
     func websocketDidReceiveData(socket: WebSocket, data: NSData) {
