@@ -20,7 +20,9 @@ class AuthViewController: BaseViewController {
     // MARK: IBAction
     
     @IBAction func buttonAuthenticatePressed(sender: AnyObject) {
-        
+        SocketManager.sendMessage("") { (response) in
+            Log.debug(response as! String)
+        }
     }
 
 }

@@ -8,13 +8,17 @@
 
 import Foundation
 import Starscream
-import Log
+
+
+public typealias MessageCompletion = (AnyObject?) -> Void
 
 
 class SocketManager {
     
     static let sharedInstance = SocketManager()
+
     var socket: WebSocket?
+    var queue: [String: MessageCompletion] = [:]
     
     
     // MARK: Connection
@@ -33,6 +37,14 @@ class SocketManager {
         sharedInstance.socket?.disconnect()
     }
     
+    
+    // MARK: Messages
+    
+    static func sendMessage(text: String, completion: MessageCompletion) {
+        sharedInstance.socket?.writeString(text)
+        sharedInstance.queue[String.random()] = completion
+    }
+    
 }
 
 
@@ -41,19 +53,24 @@ class SocketManager {
 extension SocketManager: WebSocketDelegate {
     
     func websocketDidConnect(socket: WebSocket) {
-        Logger().debug("Socket (\(socket)) did connect")
+        Log.debug("Socket (\(socket)) did connect")
     }
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        Logger().debug("Socket (\(socket)) did disconnect with error (\(error))")
+        Log.debug("Socket (\(socket)) did disconnect with error (\(error))")
     }
     
     func websocketDidReceiveData(socket: WebSocket, data: NSData) {
-        Logger().debug("Socket (\(socket)) did receive data (\(data))")
+        Log.debug("Socket (\(socket)) did receive data (\(data))")
     }
     
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        Logger().debug("Socket (\(socket)) did receive message (\(text))")
+        Log.debug("Socket (\(socket)) did receive message (\(text))")
+        
+        if queue["123"] != nil {
+            let completion = queue["123"]! as MessageCompletion
+            completion(text)
+        }
     }
     
 }
@@ -64,7 +81,7 @@ extension SocketManager: WebSocketDelegate {
 extension SocketManager: WebSocketPongDelegate {
     
     func websocketDidReceivePong(socket: WebSocket) {
-        Logger().debug("Socket (\(socket)) did receive pong")
+        Log.debug("Socket (\(socket)) did receive pong")
     }
     
 }
