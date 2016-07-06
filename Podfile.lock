@@ -1,48 +1,12 @@
 PODS:
-  - M13OrderedDictionary (1.0.6)
-  - MMDrawerController (0.6.0):
-    - MMDrawerController/Core (= 0.6.0)
-    - MMDrawerController/MMDrawerBarButtonItem (= 0.6.0)
-    - MMDrawerController/MMDrawerVisualStates (= 0.6.0)
-    - MMDrawerController/Subclass (= 0.6.0)
-  - MMDrawerController/Core (0.6.0)
-  - MMDrawerController/MMDrawerBarButtonItem (0.6.0):
-    - MMDrawerController/Core
-  - MMDrawerController/MMDrawerVisualStates (0.6.0):
-    - MMDrawerController/Core
-  - MMDrawerController/Subclass (0.6.0):
-    - MMDrawerController/Core
-  - ObjectiveDDP (0.2.0):
-    - M13OrderedDictionary
-    - SocketRocket (= 0.3.1-beta2)
-  - SocketRocket (0.3.1-beta2)
-  - SwiftyJSON (2.3.0)
+  - Starscream (1.1.3)
 
 DEPENDENCIES:
-  - MMDrawerController (~> 0.6.0)
-  - ObjectiveDDP (from `https://github.com/boundsj/ObjectiveDDP.git`, branch `master`)
-  - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
-
-EXTERNAL SOURCES:
-  ObjectiveDDP:
-    :branch: master
-    :git: https://github.com/boundsj/ObjectiveDDP.git
-  SwiftyJSON:
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
-
-CHECKOUT OPTIONS:
-  ObjectiveDDP:
-    :commit: a0276a594846c420c4ba88cea8a07e170b8d83d2
-    :git: https://github.com/boundsj/ObjectiveDDP.git
-  SwiftyJSON:
-    :commit: 83dc3138b14571200ea7f070933a2a510491e997
-    :git: https://github.com/SwiftyJSON/SwiftyJSON.git
+  - Starscream (~> 1.1.3)
 
 SPEC CHECKSUMS:
-  M13OrderedDictionary: ca1bb2d743fd64500ffabee811d4bf2d0a65c908
-  MMDrawerController: e3a54a5570388463ad3b36975251575b50c4e1a0
-  ObjectiveDDP: 019556b2241dd275d96a133df2f56de51d429a0f
-  SocketRocket: 7284ab9370a06c99aba92b2fe3a32aedd0f9a6fa
-  SwiftyJSON: cacfe0373d584585716bd1d43202c24cc66afd65
+  Starscream: d662732354b40dd19ed1ece3e3c44c80b536b83c
 
-COCOAPODS: 0.38.2
+PODFILE CHECKSUM: 18acb46f0e83de248c52c9de465bfb363cc4f00f
+
+COCOAPODS: 1.0.1
