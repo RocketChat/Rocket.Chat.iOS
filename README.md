@@ -11,4 +11,4 @@ In case you're interested in playing around with the code or giving something ba
 
 ### Code style guide
 
-We're currently following the Swift Style Guide from Ray Wenderlich: https://github.com/raywenderlich/swift-style-guide.
+We're currently following the Swift Style Guide from Ray Wenderlich: https://github.com/raywenderlich/swift-style-guide. The only exception is that we're using 4 spaces instead of 2.
