@@ -6,7 +6,10 @@ use_frameworks!
 
 target 'Rocket.Chat' do
 
-	# Network
-	pod 'Starscream', '~> 1.1.3'
+  # Network
+  pod 'Starscream', '~> 1.1.3'
+
+  # Logging
+  pod 'Log'
 
 end

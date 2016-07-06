@@ -1,12 +1,15 @@
 PODS:
+  - Log (0.5)
   - Starscream (1.1.3)
 
 DEPENDENCIES:
+  - Log
   - Starscream (~> 1.1.3)
 
 SPEC CHECKSUMS:
+  Log: 5972312cb85cffbc56407b612936b610eb4af8a5
   Starscream: d662732354b40dd19ed1ece3e3c44c80b536b83c
 
-PODFILE CHECKSUM: 18acb46f0e83de248c52c9de465bfb363cc4f00f
+PODFILE CHECKSUM: 8efe24122ed83d0049543ff5eac5022c3881236c
 
 COCOAPODS: 1.0.1
