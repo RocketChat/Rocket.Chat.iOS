@@ -43,6 +43,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxf-dy-KcP">
                                         <rect key="frame" x="32" y="59" width="200" height="30"/>
                                         <state key="normal" title="Connect"/>
+                                        <connections>
+                                            <action selector="buttonConnectPressed:" destination="rJd-W9-gC3" eventType="touchUpInside" id="cDP-bs-WCf"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -60,6 +63,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Server" id="htX-6r-Jqg"/>
                     <connections>
+                        <outlet property="textFieldServerURL" destination="0ea-ze-woy" id="XkR-cW-Db7"/>
                         <segue destination="hgH-Tx-WGh" kind="show" identifier="Auth" id="0nu-Bn-V6H"/>
                     </connections>
                 </viewController>
@@ -70,7 +74,7 @@
         <!--Authentication-->
         <scene sceneID="5Wi-dQ-6MX">
             <objects>
-                <viewController id="hgH-Tx-WGh" sceneMemberID="viewController">
+                <viewController id="hgH-Tx-WGh" customClass="AuthViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="f3J-1q-ulY"/>
                         <viewControllerLayoutGuide type="bottom" id="lpb-3T-cNi"/>
@@ -85,6 +89,9 @@
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keC-vH-Csb">
                                         <rect key="frame" x="0.0" y="98" width="200" height="30"/>
                                         <state key="normal" title="Authenticate"/>
+                                        <connections>
+                                            <action selector="buttonAuthenticatePressed:" destination="hgH-Tx-WGh" eventType="touchUpInside" id="E6v-FC-kVt"/>
+                                        </connections>
                                     </button>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GNS-rk-0Es">
                                         <rect key="frame" x="0.0" y="60" width="200" height="30"/>
@@ -111,6 +118,10 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Authentication" id="Lfp-fv-5Pu"/>
+                    <connections>
+                        <outlet property="textFieldPassword" destination="GNS-rk-0Es" id="6vY-7K-vAj"/>
+                        <outlet property="textFieldUsername" destination="brm-mC-sTE" id="mwl-3o-ang"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="klf-hW-N14" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

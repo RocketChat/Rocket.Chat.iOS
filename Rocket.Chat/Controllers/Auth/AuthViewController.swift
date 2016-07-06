@@ -13,4 +13,14 @@ class AuthViewController: BaseViewController {
     
     var serverURL: String?
     
+    @IBOutlet weak var textFieldUsername: UITextField!
+    @IBOutlet weak var textFieldPassword: UITextField!
+    
+    
+    // MARK: IBAction
+    
+    @IBAction func buttonAuthenticatePressed(sender: AnyObject) {
+        
+    }
+
 }
