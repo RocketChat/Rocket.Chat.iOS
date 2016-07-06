@@ -28,9 +28,11 @@ class ConnectServerViewController: BaseViewController {
     
     @IBAction func buttonConnectPressed(sender: AnyObject) {
         let url = NSURL(string: textFieldServerURL.text!)!
-        SocketManager.connect(url)
-
-        self.performSegueWithIdentifier("Auth", sender: nil)
+        SocketManager.connect(url) { [unowned self] (socket, connected) in
+            if connected {
+                self.performSegueWithIdentifier("Auth", sender: nil)
+            }
+        }
     }
     
 }
