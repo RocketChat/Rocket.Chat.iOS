@@ -22,6 +22,8 @@ class SocketManager: WebSocketDelegate, WebSocketPongDelegate {
     // MARK: Connection
     
     static func connect(url: NSURL) {
+        disconnect()
+        
         sharedInstance.socket = WebSocket(url: url)
         sharedInstance.socket?.delegate = sharedInstance
         sharedInstance.socket?.pongDelegate = sharedInstance
