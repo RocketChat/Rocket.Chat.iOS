@@ -1,15 +1,15 @@
 //
-//  Rocket_Chat_iOSTests.swift
-//  Rocket.Chat.iOSTests
+//  Rocket_ChatTests.swift
+//  Rocket.ChatTests
 //
-//  Created by giorgos on 8/4/15.
-//  Copyright © 2015 Rocket.Chat. All rights reserved.
+//  Created by Rafael K. Streit on 7/5/16.
+//  Copyright © 2016 Rocket.Chat. All rights reserved.
 //
 
 import XCTest
-@testable import Rocket_Chat_iOS
+@testable import Rocket_Chat
 
-class Rocket_Chat_iOSTests: XCTestCase {
+class Rocket_ChatTests: XCTestCase {
     
     override func setUp() {
         super.setUp()

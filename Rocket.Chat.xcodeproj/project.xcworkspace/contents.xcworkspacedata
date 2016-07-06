@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:Rocket.Chat.iOS.xcodeproj">
+      location = "self:Rocket.Chat.xcodeproj">
    </FileRef>
 </Workspace>
