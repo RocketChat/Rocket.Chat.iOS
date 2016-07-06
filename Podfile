@@ -6,6 +6,9 @@ use_frameworks!
 
 target 'Rocket.Chat' do
 
+  # Code utilities
+  pod 'SwiftyJSON'
+
   # Network
   pod 'Starscream', '~> 1.1.3'
 
