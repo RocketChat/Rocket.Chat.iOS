@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="eFO-g0-vxH">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Base Navigation Controller-->
+        <scene sceneID="dVT-E9-4gO">
+            <objects>
+                <navigationController id="eFO-g0-vxH" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="F7W-s9-wXu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="rJd-W9-gC3" kind="relationship" relationship="rootViewController" id="zRe-DW-sGL"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Oa8-4P-jae" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="340" y="674"/>
+        </scene>
+        <!--Server-->
+        <scene sceneID="7wB-Dp-Aom">
+            <objects>
+                <viewController id="rJd-W9-gC3" customClass="ConnectServerViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="yxx-YJ-SEM"/>
+                        <viewControllerLayoutGuide type="bottom" id="4sW-vJ-FiJ"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hnM-NP-iCl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x11-i1-wfS">
+                                <rect key="frame" x="168" y="245" width="265" height="110"/>
+                                <subviews>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="wss://demo.rocket.chat/websocket" borderStyle="roundedRect" placeholder="Server URL" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="0ea-ze-woy">
+                                        <rect key="frame" x="32" y="21" width="200" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hxf-dy-KcP">
+                                        <rect key="frame" x="32" y="59" width="200" height="30"/>
+                                        <state key="normal" title="Connect"/>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="110" id="OJ6-wE-x8C"/>
+                                    <constraint firstAttribute="width" constant="265" id="icG-2d-zJ6"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="x11-i1-wfS" firstAttribute="centerY" secondItem="hnM-NP-iCl" secondAttribute="centerY" id="ILZ-4y-WzX"/>
+                            <constraint firstItem="x11-i1-wfS" firstAttribute="centerX" secondItem="hnM-NP-iCl" secondAttribute="centerX" id="e6h-v0-08M"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Server" id="htX-6r-Jqg"/>
+                    <connections>
+                        <segue destination="hgH-Tx-WGh" kind="show" identifier="Auth" id="0nu-Bn-V6H"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qDA-Y9-wrB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1126" y="674"/>
+        </scene>
+        <!--Authentication-->
+        <scene sceneID="5Wi-dQ-6MX">
+            <objects>
+                <viewController id="hgH-Tx-WGh" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="f3J-1q-ulY"/>
+                        <viewControllerLayoutGuide type="bottom" id="lpb-3T-cNi"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JO1-X2-MzO">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yNg-d5-raw">
+                                <rect key="frame" x="200" y="225" width="200" height="150"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="keC-vH-Csb">
+                                        <rect key="frame" x="0.0" y="98" width="200" height="30"/>
+                                        <state key="normal" title="Authenticate"/>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GNS-rk-0Es">
+                                        <rect key="frame" x="0.0" y="60" width="200" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="brm-mC-sTE">
+                                        <rect key="frame" x="0.0" y="22" width="200" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="ecn-sK-zYG"/>
+                                    <constraint firstAttribute="width" constant="200" id="g6y-Y0-YFE"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="yNg-d5-raw" firstAttribute="centerX" secondItem="JO1-X2-MzO" secondAttribute="centerX" id="Clg-Sg-TPw"/>
+                            <constraint firstItem="yNg-d5-raw" firstAttribute="centerY" secondItem="JO1-X2-MzO" secondAttribute="centerY" id="QEy-Oi-BLN"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Authentication" id="Lfp-fv-5Pu"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="klf-hW-N14" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1896" y="674"/>
+        </scene>
+    </scenes>
+</document>
