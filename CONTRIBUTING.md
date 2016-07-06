@@ -11,9 +11,13 @@ Please note we are still in very early stages development, so expect lots of bug
 ## Setting up a development environment
 In case you're interested in playing around with the code or giving something back, here are some instructions on how to set up your project:
 
+### Code style guide
+
+We're currently following the Swift Style Guide from Ray Wenderlich: https://github.com/raywenderlich/swift-style-guide.
+
 ### Pre-requisites
 1. An OSX machine
-2. XCode-Beta (at the time of writing). You'll need Swift 2 support.
+2. Xcode. You'll need Swift 2 support.
 3. [Cocoapods](https://cocoapods.org/) as the dependency manager. cocoapods)
 
 ### 
@@ -23,7 +27,7 @@ git clone https://github.com/RocketChat/Rocket.Chat.iOS
 ```
 2. Download library dependencies using the cocoapods dependency manager:
 ```pod install```
-3. Do NOT open the XCode project directly, insteaduse the Rocket.Chat.iOS.xcworkspace file instead to open the XCode workspace. 
+3. Do NOT open the Xcode project directly, insteaduse the Rocket.Chat.xcworkspace file instead to open the Xcode workspace.
 4. Build the project
 
 
