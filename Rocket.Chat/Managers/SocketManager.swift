@@ -11,11 +11,9 @@ import Starscream
 import Log
 
 
-class SocketManager: WebSocketDelegate, WebSocketPongDelegate {
+class SocketManager {
     
-    // Singleton
     static let sharedInstance = SocketManager()
-    
     var socket: WebSocket?
     
     
@@ -35,8 +33,12 @@ class SocketManager: WebSocketDelegate, WebSocketPongDelegate {
         sharedInstance.socket?.disconnect()
     }
     
-    
-    // MARK: WebSocketDelegate
+}
+
+
+// MARK: WebSocketDelegate
+
+extension SocketManager: WebSocketDelegate {
     
     func websocketDidConnect(socket: WebSocket) {
         Logger().debug("Socket (\(socket)) did connect")
@@ -54,8 +56,12 @@ class SocketManager: WebSocketDelegate, WebSocketPongDelegate {
         Logger().debug("Socket (\(socket)) did receive message (\(text))")
     }
     
-    
-    // MARK: WebSocketPongDelegate
+}
+
+
+// MARK: WebSocketPongDelegate
+
+extension SocketManager: WebSocketPongDelegate {
     
     func websocketDidReceivePong(socket: WebSocket) {
         Logger().debug("Socket (\(socket)) did receive pong")
