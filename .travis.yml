@@ -1,0 +1,5 @@
+language: objective-c
+osx_image: xcode7.3
+xcode_project: Rocket.Chat.xcodeproj
+xcode_scheme: Rocket.Chat
+xcode_sdk: iphonesimulator9.0
