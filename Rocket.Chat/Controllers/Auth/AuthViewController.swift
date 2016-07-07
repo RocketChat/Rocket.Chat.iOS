@@ -20,7 +20,22 @@ class AuthViewController: BaseViewController {
     // MARK: IBAction
     
     @IBAction func buttonAuthenticatePressed(sender: AnyObject) {
-        SocketManager.sendMessage("") { (response) in
+
+        let object = [
+            "msg":" method",
+            "method": "login",
+            "params": [[
+                "user": [
+                    "email": textFieldUsername.text!,
+                    "password":[
+                        "digest": textFieldPassword.text!.sha256(),
+                        "algorithm":"sha-256"
+                    ]
+                ]
+            ]]
+        ]
+
+        SocketManager.sendMessage(object) { (response) in
             Log.debug(response as! String)
         }
     }
