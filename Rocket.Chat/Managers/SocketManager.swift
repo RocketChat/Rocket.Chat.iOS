@@ -8,6 +8,7 @@
 
 import Foundation
 import Starscream
+import SwiftyJSON
 
 
 public typealias MessageCompletion = (AnyObject?) -> Void
@@ -43,9 +44,24 @@ class SocketManager {
     
     // MARK: Messages
     
-    static func sendMessage(text: String, completion: MessageCompletion) {
-        sharedInstance.socket?.writeString(text)
-        sharedInstance.queue[String.random()] = completion
+    static func sendMessage(object: AnyObject, completion: MessageCompletion?) {
+        let identifier = String.random(50)
+        var json = JSON(object)
+        json["id"] = JSON(identifier)
+        
+        if let raw = json.rawString() {
+            Log.debug("Socket will send message: \(raw)")
+            
+            sharedInstance.socket?.writeString(raw)
+            
+            if completion != nil {
+                sharedInstance.queue[identifier] = completion
+            }
+        } else {
+            Log.debug("JSON invalid: \(json)")
+
+            // TODO: JSON is invalid
+        }
     }
     
 }
@@ -58,8 +74,14 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidConnect(socket: WebSocket) {
         Log.debug("Socket (\(socket)) did connect")
 
-        connectionHandler?(socket, socket.isConnected)
-        connectionHandler = nil
+        // TODO: We must review this info
+        let object = [
+            "msg": "connect",
+            "version": "1",
+            "support": ["1", "pre2", "pre1"]
+        ]
+        
+        SocketManager.sendMessage(object, completion: nil)
     }
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
@@ -76,9 +98,25 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         Log.debug("Socket (\(socket)) did receive message (\(text))")
         
-        if queue["123"] != nil {
-            let completion = queue["123"]! as MessageCompletion
-            completion(text)
+        if let dataFromString = text.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
+            let json = JSON(data: dataFromString)
+            
+            if let message = json["msg"].string {
+
+                // Server is authenticated right now
+                if message == "connected" {
+                    connectionHandler?(socket, true)
+                    connectionHandler = nil
+                    return
+                }
+            }
+            
+            if let identifier = json["id"].string {
+                if queue[identifier] != nil {
+                    let completion = queue[identifier]! as MessageCompletion
+                    completion(text)
+                }
+            }
         }
     }
     
