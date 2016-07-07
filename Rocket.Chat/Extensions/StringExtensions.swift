@@ -8,11 +8,6 @@
 
 import Foundation
 
-func sha256data(data: NSData) -> NSData? {
-    guard let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH)) else { return nil }
-    CC_SHA256(data.bytes, CC_LONG(data.length), UnsafeMutablePointer(res.mutableBytes))
-    return res
-}
 
 extension String {
 
