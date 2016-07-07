@@ -98,7 +98,7 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         let json = JSON.parse(text)
         
-        guard json != nil else {
+        guard json != nil && json.isExists() else {
             Log.debug("[WebSocket] did receive invalid JSON object: \(text)")
             return
         }
