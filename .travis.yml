@@ -1,0 +1,16 @@
+language: objective-c
+osx_image: xcode7.3
+
+env:
+  matrix:
+    - TEST_TYPE=iOS
+before_install:
+- |
+    gem install xcpretty -N --no-ri --no-rdoc
+script:
+- |
+    set -o pipefail
+    xcodebuild clean test -workspace Rocket.Chat.xcworkspace -scheme Rocket.Chat -destination "platform=iOS Simulator,name=iPhone 6 Plus" -enableCodeCoverage YES | xcpretty
+after_success:
+- |
+    bash <(curl -s https://codecov.io/bash)
