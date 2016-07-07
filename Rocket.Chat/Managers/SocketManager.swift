@@ -11,13 +11,15 @@ import Starscream
 import SwiftyJSON
 
 
-public typealias MessageCompletion = (AnyObject?) -> Void
+public typealias MessageCompletion = (JSON) -> Void
 public typealias SocketCompletion = (WebSocket?, Bool) -> Void
 
 
 class SocketManager {
     
     static let sharedInstance = SocketManager()
+
+    var serverURL: NSURL?
 
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
@@ -27,6 +29,7 @@ class SocketManager {
     // MARK: Connection
     
     static func connect(url: NSURL, completion: SocketCompletion) {
+        sharedInstance.serverURL = url
         sharedInstance.connectionHandler = completion
 
         sharedInstance.socket = WebSocket(url: url)
@@ -117,7 +120,7 @@ extension SocketManager: WebSocketDelegate {
         if let identifier = json["id"].string {
             if queue[identifier] != nil {
                 let completion = queue[identifier]! as MessageCompletion
-                completion(text)
+                completion(json)
             }
         }
     }

@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import RealmSwift
 
 class AuthViewController: BaseViewController {
     
@@ -35,8 +36,21 @@ class AuthViewController: BaseViewController {
             ]]
         ]
 
-        SocketManager.sendMessage(object) { (response) in
-            Log.debug(response as! String)
+        SocketManager.sendMessage(object) { [unowned self] (response) in
+            let auth = Auth()
+            auth.serverURL = self.serverURL!
+            auth.token = response["result"]["token"].string
+            
+            if let date = response["result"]["tokenExpires"]["$date"].double {
+                auth.tokenExpires = NSDate(timeIntervalSince1970:date)
+            }
+            
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(auth)
+            }
+
+            Log.debug("\(realm.objects(Auth.self))")
         }
     }
 
