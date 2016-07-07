@@ -8,6 +8,12 @@
 
 import Foundation
 
+func sha256data(data: NSData) -> NSData? {
+    guard let res = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH)) else { return nil }
+    CC_SHA256(data.bytes, CC_LONG(data.length), UnsafeMutablePointer(res.mutableBytes))
+    return res
+}
+
 extension String {
 
     static func random(length: Int = 20) -> String {
@@ -23,12 +29,16 @@ extension String {
     }
     
     func sha256() -> String {
-        let data = self.dataUsingEncoding(NSUTF8StringEncoding)!
-        var digest = [UInt8](count:Int(CC_SHA512_DIGEST_LENGTH), repeatedValue: 0)
-        CC_SHA512(data.bytes, CC_LONG(data.length), &digest)
-        let hexBytes = digest.map { String(format: "%02hhx", $0) }
-        
-        return hexBytes.joinWithSeparator("")
+        let digest = NSMutableData(length: Int(CC_SHA256_DIGEST_LENGTH))!
+
+        if let data: NSData = self.dataUsingEncoding(NSUTF8StringEncoding) {
+            CC_SHA256(data.bytes, CC_LONG(data.length), UnsafeMutablePointer<UInt8>(digest.mutableBytes))
+        }
+
+        var string = "\(digest)".stringByReplacingOccurrencesOfString(" ", withString: "")
+        string = string.stringByReplacingOccurrencesOfString("<", withString: "")
+        string = string.stringByReplacingOccurrencesOfString(">", withString: "")
+        return string
     }
 
 }
