@@ -6,6 +6,9 @@ use_frameworks!
 
 target 'Rocket.Chat' do
 
+  # Database
+  pod 'RealmSwift'
+
   # Code utilities
   pod 'SwiftyJSON'
 
