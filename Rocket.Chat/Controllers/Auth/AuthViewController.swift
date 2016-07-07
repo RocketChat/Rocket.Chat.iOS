@@ -22,15 +22,15 @@ class AuthViewController: BaseViewController {
     @IBAction func buttonAuthenticatePressed(sender: AnyObject) {
 
         let object = [
-            "msg":" method",
+            "msg": "method",
             "method": "login",
             "params": [[
                 "user": [
-                    "email": textFieldUsername.text!,
-                    "password":[
-                        "digest": textFieldPassword.text!.sha256(),
-                        "algorithm":"sha-256"
-                    ]
+                    "email": textFieldUsername.text!
+                ],
+                "password": [
+                    "digest": textFieldPassword.text!.sha256(),
+                    "algorithm":"sha-256"
                 ]
             ]]
         ]
