@@ -85,18 +85,18 @@ extension SocketManager: WebSocketDelegate {
     }
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        Log.debug("Socket (\(socket)) did disconnect with error (\(error))")
+        Log.debug("[WebSocket] did disconnect with error (\(error))")
         
         connectionHandler?(socket, socket.isConnected)
         connectionHandler = nil
     }
     
     func websocketDidReceiveData(socket: WebSocket, data: NSData) {
-        Log.debug("Socket (\(socket)) did receive data (\(data))")
+        Log.debug("[WebSocket] did receive data (\(data))")
     }
     
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        Log.debug("Socket (\(socket)) did receive message (\(text))")
+        Log.debug("[WebSocket] did receive message (\(text))")
         
         if let dataFromString = text.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
             let json = JSON(data: dataFromString)
@@ -128,7 +128,7 @@ extension SocketManager: WebSocketDelegate {
 extension SocketManager: WebSocketPongDelegate {
     
     func websocketDidReceivePong(socket: WebSocket) {
-        Log.debug("Socket (\(socket)) did receive pong")
+        Log.debug("[WebSocket] did receive pong")
     }
     
 }
