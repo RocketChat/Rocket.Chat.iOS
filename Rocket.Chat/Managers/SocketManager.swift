@@ -96,26 +96,28 @@ extension SocketManager: WebSocketDelegate {
     }
     
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        Log.debug("[WebSocket] did receive message (\(text))")
+        let json = JSON.parse(text)
         
-        if let dataFromString = text.dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: false) {
-            let json = JSON(data: dataFromString)
-            
-            if let message = json["msg"].string {
-
-                // Server is authenticated right now
-                if message == "connected" {
-                    connectionHandler?(socket, true)
-                    connectionHandler = nil
-                    return
-                }
+        guard json != nil else {
+            Log.debug("[WebSocket] did receive invalid JSON object: \(text)")
+            return
+        }
+    
+        Log.debug("[WebSocket] did receive JSON message: \(json.rawString()!)")
+        
+        if let message = json["msg"].string {
+            // Server is authenticated right now
+            if message == "connected" {
+                connectionHandler?(socket, true)
+                connectionHandler = nil
+                return
             }
-            
-            if let identifier = json["id"].string {
-                if queue[identifier] != nil {
-                    let completion = queue[identifier]! as MessageCompletion
-                    completion(text)
-                }
+        }
+        
+        if let identifier = json["id"].string {
+            if queue[identifier] != nil {
+                let completion = queue[identifier]! as MessageCompletion
+                completion(text)
             }
         }
     }
