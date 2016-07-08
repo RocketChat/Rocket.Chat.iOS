@@ -17,7 +17,7 @@ class AuthManager {
         @return Last auth object (sorted by lastAccess), if exists.
     */
     static func isAuthenticated() -> Auth? {
-        return try! Realm().objects(Auth.self).sorted("lastAccess", ascending: true).first
+        return try! Realm().objects(Auth.self).sorted("lastAccess", ascending: false).first
     }
     
     /**

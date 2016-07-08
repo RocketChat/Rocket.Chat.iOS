@@ -9,6 +9,8 @@
 import XCTest
 import SwiftyJSON
 
+@testable import Rocket_Chat
+
 class SocketManagerSpec: XCTestCase {
     
     // MARK: SocketResponse
