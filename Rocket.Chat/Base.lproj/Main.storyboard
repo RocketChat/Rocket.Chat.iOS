@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Base View Controller-->
+        <!--Main View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="BaseViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -26,14 +26,29 @@
                                     <segue destination="HO0-43-1Ue" kind="presentation" id="lwm-uO-QRg"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvI-Ne-wdZ">
+                                <rect key="frame" x="160" y="163" width="280" height="102"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="102" id="K4d-7Q-McF"/>
+                                    <constraint firstAttribute="width" constant="280" id="dDB-KC-3OE"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="5qg-i6-CkS" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="82c-ly-bvd"/>
+                            <constraint firstItem="5qg-i6-CkS" firstAttribute="top" secondItem="zvI-Ne-wdZ" secondAttribute="bottom" constant="20" id="JZB-SD-oPU"/>
+                            <constraint firstItem="zvI-Ne-wdZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MPT-Eu-9et"/>
                             <constraint firstAttribute="trailing" secondItem="5qg-i6-CkS" secondAttribute="trailing" constant="20" id="QfM-Lq-obE"/>
                             <constraint firstItem="5qg-i6-CkS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="bcj-Xi-TNj"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="labelAuthenticationStatus" destination="zvI-Ne-wdZ" id="5O4-Qq-k0Q"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
