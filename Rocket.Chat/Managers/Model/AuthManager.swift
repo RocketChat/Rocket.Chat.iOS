@@ -13,6 +13,21 @@ class AuthManager {
     
     // MARK: Authentication
 
+    /**
+        @return Last auth object (sorted by lastAccess), if exists.
+    */
+    static func isAuthenticated() -> Auth? {
+        return try! Realm().objects(Auth.self).sorted("lastAccess", ascending: true).first
+    }
+    
+    /**
+        This method authenticates the user with email and password.
+ 
+        @param email Email
+        @param password Password
+        @param completion The completion block that'll be called in case
+            of success or error.
+    */
     static func auth(email: String, password: String, completion: MessageCompletion) {
         let object = [
             "msg": "method",

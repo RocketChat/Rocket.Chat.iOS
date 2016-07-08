@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import RealmSwift
 
 class AuthViewController: BaseViewController {
     
@@ -22,11 +21,11 @@ class AuthViewController: BaseViewController {
         let email = textFieldUsername.text!
         let password = textFieldPassword.text!
         
-        AuthManager.auth(email, password: password) { (response) in
+        AuthManager.auth(email, password: password) { [unowned self] (response) in
             if response.isError() {
                 
             } else {
-                
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
     }
