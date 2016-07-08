@@ -10,10 +10,16 @@ import Foundation
 import RealmSwift
 
 class Auth: BaseModel {
+    // Server
     dynamic var serverURL = ""
 
+    // Token
     dynamic var token: String?
     dynamic var tokenExpires: NSDate?
 
+    // User
     dynamic var user: User?
+    
+    // Access
+    dynamic var lastAccess: NSDate?
 }

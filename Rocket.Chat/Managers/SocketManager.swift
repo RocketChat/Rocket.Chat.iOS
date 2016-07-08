@@ -11,7 +11,27 @@ import Starscream
 import SwiftyJSON
 
 
-public typealias MessageCompletion = (JSON) -> Void
+public struct SocketResponse {
+    var result: JSON
+    var socket: WebSocket?
+    
+    func isError() -> Bool {
+        let msg = result["msg"].string
+
+        if msg == "error" || msg == "failed" {
+            return true
+        }
+        
+        if result["error"] != nil {
+            return true
+        }
+        
+        return false
+    }
+}
+
+
+public typealias MessageCompletion = (SocketResponse) -> Void
 public typealias SocketCompletion = (WebSocket?, Bool) -> Void
 
 
@@ -119,8 +139,9 @@ extension SocketManager: WebSocketDelegate {
         
         if let identifier = json["id"].string {
             if queue[identifier] != nil {
+                let result = SocketResponse(result: json, socket: socket)
                 let completion = queue[identifier]! as MessageCompletion
-                completion(json)
+                completion(result)
             }
         }
     }
