@@ -18,7 +18,7 @@ class Auth: BaseModel {
     dynamic var tokenExpires: NSDate?
 
     // User
-    dynamic var user: User?
+    dynamic var userId: String?
     
     // Access
     dynamic var lastAccess: NSDate?

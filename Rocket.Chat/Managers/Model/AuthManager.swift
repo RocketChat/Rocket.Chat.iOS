@@ -56,6 +56,7 @@ class AuthManager {
             auth.lastAccess = NSDate()
             auth.serverURL = response.socket!.currentURL.absoluteString
             auth.token = result["result"]["token"].string
+            auth.userId = result["result"]["id"].string
 
             if let date = result["result"]["tokenExpires"]["$date"].double {
                 auth.tokenExpires = NSDate(timeIntervalSince1970:date)
