@@ -9,20 +9,23 @@
 import Foundation
 import RealmSwift
 
-class Auth: BaseModel {
+class Auth: Object {
     // Server
     dynamic var serverURL = ""
 
     // Token
     dynamic var token: String?
     dynamic var tokenExpires: NSDate?
+    dynamic var lastAccess: NSDate?
 
     // User
     dynamic var userId: String?
     
-    // Access
-    dynamic var lastAccess: NSDate?
-    
     // Subscriptions
     var subscriptions = List<Subscription>()
+    
+    // Primary key from Auth 
+    override static func primaryKey() -> String? {
+        return "serverURL"
+    }
 }
