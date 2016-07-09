@@ -11,4 +11,8 @@ import RealmSwift
 
 class BaseModel: Object {
     dynamic var identifier = ""
+    
+    override static func primaryKey() -> String? {
+        return "identifier"
+    }
 }
