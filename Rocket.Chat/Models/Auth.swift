@@ -22,4 +22,7 @@ class Auth: BaseModel {
     
     // Access
     dynamic var lastAccess: NSDate?
+    
+    // Subscriptions
+    var subscriptions = List<Subscription>()
 }
