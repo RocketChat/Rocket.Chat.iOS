@@ -135,6 +135,10 @@ extension SocketManager: WebSocketDelegate {
                 connectionHandler = nil
                 return
             }
+            
+            if message == "added" && json["collection"] == "users" {
+                
+            }
         }
         
         if let identifier = json["id"].string {
