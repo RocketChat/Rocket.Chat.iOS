@@ -7,10 +7,11 @@
 //
 
 import Foundation
+import RealmSwift
 
 class SubscriptionManager {
     
-    static func allSubscriptions(auth: Auth) {
+    static func updateSubscriptions(auth: Auth, completion: MessageCompletion) {
         let request = [
             "msg": "method",
             "method": "subscriptions/get",
@@ -22,12 +23,28 @@ class SubscriptionManager {
                 return print(response.result)
             }
             
+            let subscriptions = List<Subscription>()
             if let result = response.result["result"].array {
                 for obj in result {
-                    
+                    let subscription = Subscription()
+                    subscription.identifier = obj["_id"].string!
+                    subscription.rid = obj["rid"].string!
+                    subscription.unread = obj["unread"].int ?? 0
+                    subscription.open = obj["open"].bool ?? false
+                    subscription.alert = obj["alert"].bool ?? false
+                    subscriptions.append(subscription)
                 }
             }
+            
+            let realm = try! Realm()
+            try! realm.write {
+                realm.add(subscriptions)
+                auth.subscriptions = subscriptions
+            }
+            
+            completion(response)
         }
     }
     
 }
+
