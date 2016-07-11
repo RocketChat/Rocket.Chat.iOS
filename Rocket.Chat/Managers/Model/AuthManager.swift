@@ -64,7 +64,7 @@ class AuthManager {
             
             let realm = try! Realm()
             try! realm.write {
-                realm.add(auth)
+                realm.add(auth, update: true)
             }
             
             completion(response)

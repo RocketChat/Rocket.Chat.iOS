@@ -38,7 +38,7 @@ class SubscriptionManager {
             
             let realm = try! Realm()
             try! realm.write {
-                realm.add(subscriptions)
+                realm.add(subscriptions, update: true)
                 auth.subscriptions = subscriptions
             }
             
