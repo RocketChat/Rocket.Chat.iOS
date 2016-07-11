@@ -29,6 +29,7 @@ class SubscriptionManager {
                     let subscription = Subscription()
                     subscription.identifier = obj["_id"].string!
                     subscription.rid = obj["rid"].string!
+                    subscription.name = obj["name"].string!
                     subscription.unread = obj["unread"].int ?? 0
                     subscription.open = obj["open"].bool ?? false
                     subscription.alert = obj["alert"].bool ?? false
