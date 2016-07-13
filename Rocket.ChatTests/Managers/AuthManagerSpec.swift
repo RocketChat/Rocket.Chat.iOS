@@ -39,22 +39,22 @@ extension AuthManagerSpec {
     
     func testIsAuthenticatedUserAuthenticated() {
         let auth = Auth()
-        auth.identifier = "123"
+        auth.serverURL = "123"
 
         try! realm.write {
             realm.add(auth)
         }
         
-        XCTAssert(AuthManager.isAuthenticated()?.identifier == auth.identifier, "isAuthenticated returns Auth instance")
+        XCTAssert(AuthManager.isAuthenticated()?.serverURL == auth.serverURL, "isAuthenticated returns Auth instance")
     }
     
     func testIsAuthenticatedReturnsLastAccessed() {
         let auth1 = Auth()
-        auth1.identifier = "one"
+        auth1.serverURL = "one"
         auth1.lastAccess = NSDate()
         
         let auth2 = Auth()
-        auth2.identifier = "two"
+        auth2.serverURL = "two"
         auth2.lastAccess = NSDate(timeIntervalSince1970: 1)
         
         try! realm.write {
@@ -62,7 +62,7 @@ extension AuthManagerSpec {
             realm.add(auth2)
         }
         
-        XCTAssert(AuthManager.isAuthenticated()?.identifier == auth1.identifier, "isAuthenticated returns the latests Auth instance")
+        XCTAssert(AuthManager.isAuthenticated()?.serverURL == auth1.serverURL, "isAuthenticated returns the latests Auth instance")
     }
 
 }
