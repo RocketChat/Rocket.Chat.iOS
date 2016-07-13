@@ -59,7 +59,7 @@ class AuthManager {
             auth.userId = result["result"]["id"].string
 
             if let date = result["result"]["tokenExpires"]["$date"].double {
-                auth.tokenExpires = NSDate(timeIntervalSince1970:date)
+                auth.tokenExpires = NSDate.dateFromInterval(date)
             }
             
             let realm = try! Realm()

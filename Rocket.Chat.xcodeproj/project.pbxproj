@@ -30,6 +30,7 @@
 		41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41DF76E91D2C50710028DBF8 /* Assets.xcassets */; };
 		41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41DF76EB1D2C50720028DBF8 /* LaunchScreen.storyboard */; };
 		41DF77031D2C50720028DBF8 /* Rocket_ChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF77021D2C50720028DBF8 /* Rocket_ChatUITests.swift */; };
+		41E991D41D343A9F00BDDCA8 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E991D31D343A9F00BDDCA8 /* NSDateExtension.swift */; };
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
 /* End PBXBuildFile section */
 
@@ -82,6 +83,7 @@
 		41DF76FE1D2C50720028DBF8 /* Rocket.ChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rocket.ChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DF77021D2C50720028DBF8 /* Rocket_ChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket_ChatUITests.swift; sourceTree = "<group>"; };
 		41DF77041D2C50720028DBF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		41E991D31D343A9F00BDDCA8 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = Extensions/NSDateExtension.swift; sourceTree = "<group>"; };
 		5108B4F1453CB9F4E425E3F4 /* Pods-Rocket.Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.release.xcconfig"; sourceTree = "<group>"; };
 		58C7F7D8D91A05CA5D1C9FE0 /* Pods-Rocket.ChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_ChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */,
+				41E991D31D343A9F00BDDCA8 /* NSDateExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -519,6 +522,7 @@
 				41DAE93E1D318F350098E068 /* Subscription.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
+				41E991D41D343A9F00BDDCA8 /* NSDateExtension.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				4174CB1A1D2D9DA60086DAC8 /* SocketManager.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,

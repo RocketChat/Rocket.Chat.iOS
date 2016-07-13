@@ -33,6 +33,16 @@ class SubscriptionManager {
                     subscription.unread = obj["unread"].int ?? 0
                     subscription.open = obj["open"].bool ?? false
                     subscription.alert = obj["alert"].bool ?? false
+                    subscription.favorite = obj["f"].bool ?? false
+                    
+                    if let createdAt = obj["ts"]["$date"].double {
+                        subscription.createdAt = NSDate.dateFromInterval(createdAt)
+                    }
+                    
+                    if let lastSeen = obj["ls"]["$date"].double {
+                        subscription.lastSeen = NSDate.dateFromInterval(lastSeen)
+                    }
+
                     subscriptions.append(subscription)
                 }
             }
