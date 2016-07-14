@@ -18,6 +18,10 @@ class MainViewController: BaseViewController {
         
         if let auth = AuthManager.isAuthenticated() {
             labelAuthenticationStatus.text = "User is authenticated with token \(auth.token) on \(auth.serverURL)."
+            
+            SubscriptionManager.updateSubscriptions(auth, completion: { (response) in
+                Log.debug("\(auth.subscriptions)")
+            })
         } else {
             labelAuthenticationStatus.text = "User is not authenticated."
         }
