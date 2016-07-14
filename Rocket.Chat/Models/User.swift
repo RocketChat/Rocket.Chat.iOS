@@ -17,5 +17,5 @@ class Email: BaseModel {
 class User: BaseModel {
     dynamic var username = ""
     dynamic var name = ""
-    let emails = List<Email>()
+    var emails = List<Email>()
 }
