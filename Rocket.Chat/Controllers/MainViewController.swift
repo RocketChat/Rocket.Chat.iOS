@@ -21,6 +21,12 @@ class MainViewController: BaseViewController {
             
             SubscriptionManager.updateSubscriptions(auth, completion: { (response) in
                 Log.debug("\(auth.subscriptions)")
+                
+                if let subscription = auth.subscriptions.first {
+                    MessageManager.fetchHistory(subscription, completion: { (response) in
+                        Log.debug("\(MessageManager.allMessages(subscription))")
+                    })
+                }
             })
         } else {
             labelAuthenticationStatus.text = "User is not authenticated."
