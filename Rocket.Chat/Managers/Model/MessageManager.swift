@@ -9,9 +9,32 @@
 import Foundation
 import RealmSwift
 
+
 class MessageManager {
     
     static let historySize = 50
+    
+    
+}
+
+
+// MARK: Realm Data
+
+extension MessageManager {
+    
+    static func allMessages(subscription: Subscription) -> Results<Message> {
+        return try! Realm().objects(Message.self)
+            .filter("subscription = %@", subscription)
+            .sorted("createdAt", ascending: false)
+    }
+    
+}
+
+
+
+// MARK: History
+
+extension MessageManager {
     
     static func fetchHistory(subscription: Subscription, completion: MessageCompletion) {
         let request = [
@@ -32,6 +55,7 @@ class MessageManager {
                 for obj in result {
                     let message = Message()
                     message.identifier = obj["_id"].string!
+                    message.subscription = subscription
                     message.rid = obj["rid"].string!
                     message.text = obj["msg"].string!
                     

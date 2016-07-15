@@ -24,7 +24,7 @@ class MainViewController: BaseViewController {
                 
                 if let subscription = auth.subscriptions.first {
                     MessageManager.fetchHistory(subscription, completion: { (response) in
-                        Log.debug("\(response)")
+                        Log.debug("\(MessageManager.allMessages(subscription))")
                     })
                 }
             })
