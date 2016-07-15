@@ -24,6 +24,15 @@ class AuthManager {
 
 extension AuthManager {
     
+    
+    /**
+        This method resumes a previous authentication with token
+        stored in the Realm object.
+ 
+        - parameter auth The Auth object that user wants to resume.
+        - parameter completion The completion callback that will be
+            called in case of success or error.
+    */
     static func resume(auth: Auth, completion: MessageCompletion) {
         let url = NSURL(string: auth.serverURL)!
         SocketManager.connect(url) { (socket, connected) in
