@@ -1,4 +1,9 @@
 # Rocket.Chat.iOS
+
+[![Build Status](https://travis-ci.org/RocketChat/Rocket.Chat.iOS.svg?branch=develop)](https://travis-ci.org/RocketChat/Rocket.Chat.iOS)
+[![codecov](https://codecov.io/gh/RocketChat/Rocket.Chat.iOS/branch/develop/graph/badge.svg)](https://codecov.io/gh/RocketChat/Rocket.Chat.iOS)
+
+
 Rocket.Chat Native iOS Application
 
 ## Reporting an Issue
