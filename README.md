@@ -7,7 +7,20 @@ Rocket.Chat Native iOS Application
 Please note we are still in very early stages development, so expect lots of bugs, etc. until we can reach a first alpha version.
 
 ## Setting up a development environment
+
 In case you're interested in playing around with the code or giving something back, here are some instructions on how to set up your project:
+
+1. Install [CocoaPods](https://cocoapods.org)
+
+  `sudo gem install cocoapods`
+
+2. Install all the Pods
+
+  `pod install`
+
+3. Open `Rocket.Chat.xcworkspace`
+4. Run the project (⌘ + R)
+
 
 ### Code style guide
 
