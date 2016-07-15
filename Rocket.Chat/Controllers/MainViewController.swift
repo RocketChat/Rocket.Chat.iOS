@@ -17,16 +17,18 @@ class MainViewController: BaseViewController {
         super.viewWillAppear(animated)
         
         if let auth = AuthManager.isAuthenticated() {
-            labelAuthenticationStatus.text = "User is authenticated with token \(auth.token) on \(auth.serverURL)."
-            
-            SubscriptionManager.updateSubscriptions(auth, completion: { (response) in
-                Log.debug("\(auth.subscriptions)")
+            AuthManager.resume(auth, completion: { [unowned self] (response) in
+                self.labelAuthenticationStatus.text = "User is authenticated with token \(auth.token) on \(auth.serverURL)."
                 
-                if let subscription = auth.subscriptions.first {
-                    MessageManager.fetchHistory(subscription, completion: { (response) in
-                        Log.debug("\(MessageManager.allMessages(subscription))")
-                    })
-                }
+                SubscriptionManager.updateSubscriptions(auth, completion: { (response) in
+                    Log.debug("\(auth.subscriptions)")
+                    
+                    if let subscription = auth.subscriptions.first {
+                        MessageManager.fetchHistory(subscription, completion: { (response) in
+                            Log.debug("\(MessageManager.allMessages(subscription))")
+                        })
+                    }
+                })
             })
         } else {
             labelAuthenticationStatus.text = "User is not authenticated."
