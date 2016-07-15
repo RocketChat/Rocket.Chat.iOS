@@ -67,7 +67,7 @@ class SocketManager {
     
     // MARK: Messages
     
-    static func sendMessage(object: AnyObject, completion: MessageCompletion?) {
+    static func send(object: AnyObject, completion: MessageCompletion? = nil) {
         let identifier = String.random(50)
         var json = JSON(object)
         json["id"] = JSON(identifier)
@@ -104,7 +104,7 @@ extension SocketManager: WebSocketDelegate {
             "support": ["1", "pre2", "pre1"]
         ]
         
-        SocketManager.sendMessage(object, completion: nil)
+        SocketManager.send(object)
     }
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
@@ -121,6 +121,7 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         let json = JSON.parse(text)
         
+        // JSON is invalid
         guard json != nil && json.isExists() else {
             Log.debug("[WebSocket] did receive invalid JSON object: \(text)")
             return
@@ -136,8 +137,10 @@ extension SocketManager: WebSocketDelegate {
                 return
             }
             
-            if message == "added" && json["collection"] == "users" {
-                
+            // Server sent a ping message, we must respond with pong
+            if message == "ping" {
+                SocketManager.send(["msg": "pong"])
+                return
             }
         }
         

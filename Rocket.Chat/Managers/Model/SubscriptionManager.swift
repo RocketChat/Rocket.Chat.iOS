@@ -18,7 +18,7 @@ class SubscriptionManager {
             "params": []
         ]
 
-        SocketManager.sendMessage(request) { (response) in
+        SocketManager.send(request) { (response) in
             guard !response.isError() else {
                 return print(response.result)
             }
