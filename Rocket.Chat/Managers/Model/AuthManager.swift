@@ -11,14 +11,60 @@ import RealmSwift
 
 class AuthManager {
     
-    // MARK: Authentication
-
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
     static func isAuthenticated() -> Auth? {
         return try! Realm().objects(Auth.self).sorted("lastAccess", ascending: false).first
     }
+}
+
+
+// MARK: Socket Management
+
+extension AuthManager {
+    
+    
+    /**
+        This method resumes a previous authentication with token
+        stored in the Realm object.
+ 
+        - parameter auth The Auth object that user wants to resume.
+        - parameter completion The completion callback that will be
+            called in case of success or error.
+    */
+    static func resume(auth: Auth, completion: MessageCompletion) {
+        let url = NSURL(string: auth.serverURL)!
+        SocketManager.connect(url) { (socket, connected) in
+            guard connected else {
+                let response = SocketResponse(
+                    result: ["error": "Can't connect to the socket"],
+                    socket: socket
+                )
+
+                return completion(response)
+            }
+            
+            let object = [
+                "msg": "method",
+                "method": "login",
+                "params": [[
+                    "resume": auth.token!
+                ]]
+            ]
+            
+            SocketManager.sendMessage(object) { (response) in
+                guard !response.isError() else {
+                    // TODO: Logging or default behaviour on fails
+                    completion(response)
+                    return
+                }
+
+                completion(response)
+            }
+        }
+    }
+    
     
     /**
         This method authenticates the user with email and password.
