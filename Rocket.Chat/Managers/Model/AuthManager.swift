@@ -53,7 +53,7 @@ extension AuthManager {
                 ]]
             ]
             
-            SocketManager.sendMessage(object) { (response) in
+            SocketManager.send(object) { (response) in
                 guard !response.isError() else {
                     // TODO: Logging or default behaviour on fails
                     completion(response)
@@ -89,7 +89,7 @@ extension AuthManager {
             ]]
         ]
 
-        SocketManager.sendMessage(object) { (response) in
+        SocketManager.send(object) { (response) in
             guard !response.isError() else {
                 // TODO: Logging or default behaviour on fails
                 completion(response)
