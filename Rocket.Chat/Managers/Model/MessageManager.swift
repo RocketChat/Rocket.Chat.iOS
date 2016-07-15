@@ -25,7 +25,7 @@ extension MessageManager {
     static func allMessages(subscription: Subscription) -> Results<Message> {
         return try! Realm().objects(Message.self)
             .filter("subscription = %@", subscription)
-            .sorted("createdAt", ascending: false)
+            .sorted("createdAt", ascending: true)
     }
     
 }
