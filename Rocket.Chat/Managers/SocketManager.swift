@@ -67,7 +67,7 @@ class SocketManager {
     
     // MARK: Messages
     
-    static func sendMessage(object: AnyObject, completion: MessageCompletion?) {
+    static func send(object: AnyObject, completion: MessageCompletion? = nil) {
         let identifier = String.random(50)
         var json = JSON(object)
         json["id"] = JSON(identifier)
@@ -104,7 +104,7 @@ extension SocketManager: WebSocketDelegate {
             "support": ["1", "pre2", "pre1"]
         ]
         
-        SocketManager.sendMessage(object, completion: nil)
+        SocketManager.send(object)
     }
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
@@ -139,7 +139,7 @@ extension SocketManager: WebSocketDelegate {
             
             // Server sent a ping message, we must respond with pong
             if message == "ping" {
-                SocketManager.sendMessage(["msg": "pong"], completion: nil)
+                SocketManager.send(["msg": "pong"])
                 return
             }
         }
