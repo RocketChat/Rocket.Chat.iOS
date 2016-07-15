@@ -16,6 +16,8 @@ class Mention: BaseModel {
 }
 
 class Message: BaseModel {
+    dynamic var subscription: Subscription!
+    
     dynamic var rid = ""
     dynamic var createdAt: NSDate?
     dynamic var updatedAt: NSDate?
