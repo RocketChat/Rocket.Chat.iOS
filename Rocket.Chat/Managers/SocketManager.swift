@@ -121,6 +121,7 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         let json = JSON.parse(text)
         
+        // JSON is invalid
         guard json != nil && json.isExists() else {
             Log.debug("[WebSocket] did receive invalid JSON object: \(text)")
             return
@@ -136,8 +137,10 @@ extension SocketManager: WebSocketDelegate {
                 return
             }
             
-            if message == "added" && json["collection"] == "users" {
-                
+            // Server sent a ping message, we must respond with pong
+            if message == "ping" {
+                SocketManager.sendMessage(["msg": "pong"], completion: nil)
+                return
             }
         }
         
