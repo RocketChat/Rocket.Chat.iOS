@@ -59,8 +59,7 @@ extension MessageManager {
                 }
             }
             
-            let realm = try! Realm()
-            try! realm.write {
+            Realm.execute() { (realm) in
                 realm.add(messages, update: true)
             }
             
