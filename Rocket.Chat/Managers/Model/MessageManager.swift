@@ -53,20 +53,8 @@ extension MessageManager {
             let messages = List<Message>()
             if let result = response.result["result"]["messages"].array {
                 for obj in result {
-                    let message = Message()
-                    message.identifier = obj["_id"].string!
+                    let message = Message(object: obj)
                     message.subscription = subscription
-                    message.rid = obj["rid"].string!
-                    message.text = obj["msg"].string!
-                    
-                    if let createdAt = obj["ts"]["$date"].double {
-                        message.createdAt = NSDate.dateFromInterval(createdAt)
-                    }
-                    
-                    if let updatedAt = obj["_updatedAt"]["$date"].double {
-                        message.updatedAt = NSDate.dateFromInterval(updatedAt)
-                    }
-                    
                     messages.append(message)
                 }
             }

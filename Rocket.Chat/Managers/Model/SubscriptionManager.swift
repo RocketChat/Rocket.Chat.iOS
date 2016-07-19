@@ -26,23 +26,7 @@ class SubscriptionManager {
             let subscriptions = List<Subscription>()
             if let result = response.result["result"].array {
                 for obj in result {
-                    let subscription = Subscription()
-                    subscription.identifier = obj["_id"].string!
-                    subscription.rid = obj["rid"].string!
-                    subscription.name = obj["name"].string!
-                    subscription.unread = obj["unread"].int ?? 0
-                    subscription.open = obj["open"].bool ?? false
-                    subscription.alert = obj["alert"].bool ?? false
-                    subscription.favorite = obj["f"].bool ?? false
-                    
-                    if let createdAt = obj["ts"]["$date"].double {
-                        subscription.createdAt = NSDate.dateFromInterval(createdAt)
-                    }
-                    
-                    if let lastSeen = obj["ls"]["$date"].double {
-                        subscription.lastSeen = NSDate.dateFromInterval(lastSeen)
-                    }
-
+                    let subscription = Subscription(object: obj)
                     subscriptions.append(subscription)
                 }
             }

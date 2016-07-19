@@ -8,14 +8,9 @@
 
 import Foundation
 import RealmSwift
+import SwiftyJSON
 
-class Mention: BaseModel {
-    dynamic var objId = ""
-    dynamic var username: String?
-    dynamic var channel: String?
-}
-
-class Message: BaseModel {
+class Message: BaseModel, ModelMapping {
     dynamic var subscription: Subscription!
     
     dynamic var rid = ""
@@ -26,4 +21,23 @@ class Message: BaseModel {
     dynamic var text = ""
 
     var mentions = List<Mention>()
+
+    
+    // MARK: ModelMapping
+
+    convenience required init(object: JSON) {
+        self.init()
+
+        self.identifier = object["_id"].string!
+        self.rid = object["rid"].string!
+        self.text = object["msg"].string!
+        
+        if let createdAt = object["ts"]["$date"].double {
+            self.createdAt = NSDate.dateFromInterval(createdAt)
+        }
+        
+        if let updatedAt = object["_updatedAt"]["$date"].double {
+            self.updatedAt = NSDate.dateFromInterval(updatedAt)
+        }
+    }
 }
