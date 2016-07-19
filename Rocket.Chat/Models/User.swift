@@ -9,13 +9,8 @@
 import Foundation
 import RealmSwift
 
-class Email: BaseModel {
-    dynamic var email = ""
-    dynamic var verified = false
-}
-
 class User: BaseModel {
-    dynamic var username = ""
-    dynamic var name = ""
+    dynamic var username: String?
+    dynamic var name: String?
     var emails = List<Email>()
 }

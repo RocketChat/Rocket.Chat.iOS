@@ -8,6 +8,11 @@
 
 import Foundation
 import RealmSwift
+import SwiftyJSON
+
+protocol ModelMapping {
+    init(object: JSON)
+}
 
 class BaseModel: Object {
     dynamic var identifier = ""
