@@ -13,13 +13,11 @@ import RealmSwift
 
 class AuthManagerSpec: XCTestCase {
 
-    let realm = try! Realm()
-    
     override func setUp() {
         super.setUp()
 
         // Clear all the Auth objects in Realm
-        try! realm.write {
+        Realm.execute() { (realm) in
             for obj in realm.objects(Auth.self) {
                 realm.delete(obj)
             }
@@ -41,7 +39,7 @@ extension AuthManagerSpec {
         let auth = Auth()
         auth.serverURL = "123"
 
-        try! realm.write {
+        Realm.execute() { (realm) in
             realm.add(auth)
         }
         
@@ -57,7 +55,7 @@ extension AuthManagerSpec {
         auth2.serverURL = "two"
         auth2.lastAccess = NSDate(timeIntervalSince1970: 1)
         
-        try! realm.write {
+        Realm.execute() { (realm) in
             realm.add(auth1)
             realm.add(auth2)
         }
