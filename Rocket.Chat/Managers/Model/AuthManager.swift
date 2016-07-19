@@ -108,8 +108,7 @@ extension AuthManager {
                 auth.tokenExpires = NSDate.dateFromInterval(date)
             }
             
-            let realm = try! Realm()
-            try! realm.write {
+            Realm.execute() { (realm) in
                 realm.add(auth, update: true)
             }
             

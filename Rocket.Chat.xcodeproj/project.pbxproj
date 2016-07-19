@@ -13,6 +13,7 @@
 		415801951D303B640099E71B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415801941D303B640099E71B /* MainViewController.swift */; };
 		4159720C1D3DB854002258F4 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720B1D3DB854002258F4 /* Email.swift */; };
 		4159720E1D3DB882002258F4 /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720D1D3DB882002258F4 /* Mention.swift */; };
+		415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720F1D3DBDA0002258F4 /* RealmExtension.swift */; };
 		4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */; };
 		4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */; };
 		4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB121D2D99960086DAC8 /* BaseViewController.swift */; };
@@ -66,6 +67,7 @@
 		415801941D303B640099E71B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
 		4159720B1D3DB854002258F4 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Email.swift; path = Models/Email.swift; sourceTree = "<group>"; };
 		4159720D1D3DB882002258F4 /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mention.swift; path = Models/Mention.swift; sourceTree = "<group>"; };
+		4159720F1D3DBDA0002258F4 /* RealmExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmExtension.swift; path = Extensions/RealmExtension.swift; sourceTree = "<group>"; };
 		4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectServerViewController.swift; path = Controllers/Auth/ConnectServerViewController.swift; sourceTree = "<group>"; };
 		4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Auth.storyboard; path = Storyboards/Auth.storyboard; sourceTree = "<group>"; };
 		4174CB121D2D99960086DAC8 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Controllers/Base/BaseViewController.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			children = (
 				4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */,
 				41E991D31D343A9F00BDDCA8 /* NSDateExtension.swift */,
+				4159720F1D3DBDA0002258F4 /* RealmExtension.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -638,6 +641,7 @@
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
 				415801951D303B640099E71B /* MainViewController.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
+				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				41BA89301D303F9B00CBF526 /* BaseModel.swift in Sources */,
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,
