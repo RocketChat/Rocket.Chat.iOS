@@ -13,13 +13,11 @@ import RealmSwift
 
 class MessageManagerSpec: XCTestCase {
     
-    let realm = try! Realm()
-    
     override func setUp() {
         super.setUp()
         
         // Clear all the Message objects in Realm
-        try! realm.write {
+        Realm.execute() { (realm) in
             for obj in realm.objects(Message.self) {
                 realm.delete(obj)
             }
@@ -52,7 +50,7 @@ extension MessageManagerSpec {
         message2.identifier = "msg2"
         message2.subscription = subscription2
         
-        try! realm.write {
+        Realm.execute() { (realm) in
             realm.add([subscription1, subscription2, message1, message2])
         }
         
@@ -79,7 +77,7 @@ extension MessageManagerSpec {
         message2.createdAt = NSDate(timeIntervalSinceNow: 0)
         message2.subscription = subscription
         
-        try! realm.write {
+        Realm.execute() { (realm) in
             realm.add([subscription, message1, message2])
         }
         
