@@ -31,11 +31,15 @@ class MainViewController: BaseViewController {
                 self.labelAuthenticationStatus.text = "User is authenticated with token \(auth.token) on \(auth.serverURL)."
                 
                 SubscriptionManager.updateSubscriptions(auth, completion: { (response) in
-                    Log.debug("\(auth.subscriptions)")
-                    
                     if let subscription = auth.subscriptions.first {
                         MessageManager.fetchHistory(subscription, completion: { (response) in
-                            Log.debug("\(MessageManager.allMessages(subscription))")
+                            let storyboardChat = UIStoryboard(name: "Chat", bundle: NSBundle.mainBundle())
+                            let controller = storyboardChat.instantiateInitialViewController()
+                            let application = UIApplication.sharedApplication()
+                            
+                            if let window = application.keyWindow {
+                                window.rootViewController = controller
+                            }
                         })
                     }
                 })

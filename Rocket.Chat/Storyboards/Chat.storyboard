@@ -4,10 +4,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Chat View Controller-->
         <scene sceneID="sPN-TU-rHY">
             <objects>
-                <viewController id="A1E-cs-q8E" sceneMemberID="viewController">
+                <viewController id="A1E-cs-q8E" customClass="ChatViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rlV-iR-eWf"/>
                         <viewControllerLayoutGuide type="bottom" id="AmO-ZE-7Kw"/>
