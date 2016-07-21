@@ -18,7 +18,7 @@ class ChatViewController: BaseViewController {
     
     private func setupSideMenu() {
         let storyboardSubscriptions = UIStoryboard(name: "Subscriptions", bundle: NSBundle.mainBundle())
-
+        SideMenuManager.menuFadeStatusBar = false
         SideMenuManager.menuLeftNavigationController = storyboardSubscriptions.instantiateInitialViewController() as? UISideMenuNavigationController
         
         SideMenuManager.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
