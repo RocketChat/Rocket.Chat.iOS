@@ -5,12 +5,14 @@ PODS:
   - Realm/Headers (1.0.1)
   - RealmSwift (1.0.1):
     - Realm (= 1.0.1)
+  - SideMenu (1.1.9)
   - Starscream (1.1.3)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Log
   - RealmSwift
+  - SideMenu
   - Starscream (~> 1.1.3)
   - SwiftyJSON
 
@@ -18,9 +20,10 @@ SPEC CHECKSUMS:
   Log: 5972312cb85cffbc56407b612936b610eb4af8a5
   Realm: 2e15e39d35b08abb529e212ed5d8af107b5236c8
   RealmSwift: d73ea2af08c3676dbdd5e4b669651a0f492162a4
+  SideMenu: e4ecb0f1061e19230e53079edb2b300081446f80
   Starscream: d662732354b40dd19ed1ece3e3c44c80b536b83c
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 9f0e9a552ac47082304939eaa1056504210595fd
+PODFILE CHECKSUM: 5462eec42ac1d48452418edefa0a26a71147702a
 
 COCOAPODS: 1.0.1

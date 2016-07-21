@@ -41,6 +41,7 @@
 		41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E2F9FE1D414DE800238DFD /* Chat.storyboard */; };
 		41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E2FA001D414EA100238DFD /* Subscriptions.storyboard */; };
 		41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */; };
+		41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E2FA061D41513C00238DFD /* ChatViewController.swift */; };
 		41E991D41D343A9F00BDDCA8 /* NSDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E991D31D343A9F00BDDCA8 /* NSDateExtension.swift */; };
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
 /* End PBXBuildFile section */
@@ -105,6 +106,7 @@
 		41E2F9FE1D414DE800238DFD /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Chat.storyboard; path = Storyboards/Chat.storyboard; sourceTree = "<group>"; };
 		41E2FA001D414EA100238DFD /* Subscriptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Subscriptions.storyboard; path = Storyboards/Subscriptions.storyboard; sourceTree = "<group>"; };
 		41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionsViewController.swift; path = Controllers/Subscriptions/SubscriptionsViewController.swift; sourceTree = "<group>"; };
+		41E2FA061D41513C00238DFD /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = Controllers/Chat/ChatViewController.swift; sourceTree = "<group>"; };
 		41E991D31D343A9F00BDDCA8 /* NSDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtension.swift; path = Extensions/NSDateExtension.swift; sourceTree = "<group>"; };
 		5108B4F1453CB9F4E425E3F4 /* Pods-Rocket.Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.release.xcconfig"; sourceTree = "<group>"; };
 		58C7F7D8D91A05CA5D1C9FE0 /* Pods-Rocket.ChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 		41E2FA021D414ECC00238DFD /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				41E2FA061D41513C00238DFD /* ChatViewController.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -681,6 +684,7 @@
 				41A79C131D2F09F200A1968E /* Auth.swift in Sources */,
 				41DAE93E1D318F350098E068 /* Subscription.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
+				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
 				41E991D41D343A9F00BDDCA8 /* NSDateExtension.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
