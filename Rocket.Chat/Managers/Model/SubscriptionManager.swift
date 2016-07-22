@@ -27,13 +27,14 @@ class SubscriptionManager {
             if let result = response.result["result"].array {
                 for obj in result {
                     let subscription = Subscription(object: obj)
+                    subscription.auth = auth
+
                     subscriptions.append(subscription)
                 }
             }
             
             Realm.execute() { (realm) in
                 realm.add(subscriptions, update: true)
-                auth.subscriptions = subscriptions
             }
             
             completion(response)
