@@ -8,7 +8,7 @@
 
 
 enum ResponseMessage {
-    case Connected, Error, Ping, Changed, Updated, Removed
+    case Connected, Error, Ping, Changed, Added, Updated, Removed
     case Unknown
     
     init?(_ value: String) {
@@ -31,6 +31,10 @@ enum ResponseMessage {
             
         case "changed":
             self = .Changed
+            break
+            
+        case "added":
+            self = .Added
             break
             
         case "updated":

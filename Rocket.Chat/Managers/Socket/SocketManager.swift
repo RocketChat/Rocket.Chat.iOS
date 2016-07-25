@@ -144,7 +144,7 @@ extension SocketManager {
     private func handleMessage(response: JSON, socket: WebSocket) {
         let result = SocketResponse(response, socket: socket)!
         
-        guard let _ = result.msg else {
+        guard result.msg != nil else {
             return Log.debug("Msg is invalid: \(result.result)")
         }
         
@@ -153,7 +153,7 @@ extension SocketManager {
         case .Ping: return handlePingMessage(result, socket: socket)
         case .Changed: return handleChangedMessage(result, socket: socket)
 
-        case .Error, .Removed, .Updated, .Unknown: break
+        case .Error, .Added, .Removed, .Updated, .Unknown: break
         }
         
         // Call completion block
