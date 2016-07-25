@@ -62,14 +62,14 @@ class ChatViewController: BaseViewController {
         messages = subscription?.messages.sorted("createdAt", ascending: true)
         
         MessageManager.fetchHistory(subscription) { [unowned self] (response) in
-            self.messages = self.subscription?.messages.sorted("createdAt", ascending: true)
+            self.messages = self.subscription?.fetchMessages()
             self.collectionView.reloadData()
             self.collectionView.layoutIfNeeded()
             self.scrollToBottom()
         }
         
         MessageManager.changes(subscription) { [unowned self] (response) in
-            self.messages = self.subscription?.messages.sorted("createdAt", ascending: true)
+            self.messages = self.subscription?.fetchMessages()
             self.collectionView.reloadData()
             self.collectionView.layoutIfNeeded()
             self.scrollToBottom(true)

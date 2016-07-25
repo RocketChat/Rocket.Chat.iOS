@@ -54,13 +54,13 @@ extension MessageManagerSpec {
             realm.add([subscription1, subscription2, message1, message2])
         }
         
-        let messages1 = MessageManager.allMessages(subscription1)
-        let messages2 = MessageManager.allMessages(subscription2)
+        let messages1 = subscription1.fetchMessages()
+        let messages2 = subscription2.fetchMessages()
         
-        XCTAssert(messages1.count == 1, "allMessages() will return all messages related to the subscription")
-        XCTAssert(messages2.count == 1, "allMessages() will return all messages related to the subscription")
-        XCTAssert(messages1[0].identifier == message1.identifier, "allMessages() will return just messages related to the subscription")
-        XCTAssert(messages2[0].identifier == message2.identifier, "allMessages() will return just messages related to the subscription")
+        XCTAssert(messages1.count == 1, "fetchMessages() will return all messages related to the subscription")
+        XCTAssert(messages2.count == 1, "fetchMessages() will return all messages related to the subscription")
+        XCTAssert(messages1[0].identifier == message1.identifier, "fetchMessages() will return just messages related to the subscription")
+        XCTAssert(messages2[0].identifier == message2.identifier, "fetchMessages() will return just messages related to the subscription")
     }
     
     func testAllMessagesReturnsMessagesOrderedByDate() {
@@ -81,10 +81,10 @@ extension MessageManagerSpec {
             realm.add([subscription, message1, message2])
         }
         
-        let messages = MessageManager.allMessages(subscription)
-        XCTAssert(messages.count == 2, "allMessages() will return all messages related to the subscription")
-        XCTAssert(messages[0].identifier == message1.identifier, "allMessages() will return messages ordered by date")
-        XCTAssert(messages[1].identifier == message2.identifier, "allMessages() will return messages ordered by date")
+        let messages = subscription.fetchMessages()
+        XCTAssert(messages.count == 2, "fetchMessages() will return all messages related to the subscription")
+        XCTAssert(messages[0].identifier == message1.identifier, "fetchMessages() will return messages ordered by date")
+        XCTAssert(messages[1].identifier == message2.identifier, "fetchMessages() will return messages ordered by date")
     }
     
 }

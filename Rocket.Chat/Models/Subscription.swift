@@ -49,3 +49,12 @@ class Subscription: BaseModel, ModelMapping {
         }
     }
 }
+
+
+extension Subscription {
+    
+    func fetchMessages() -> Results<Message> {
+        return self.messages.sorted("createdAt", ascending: true)
+    }
+    
+}
