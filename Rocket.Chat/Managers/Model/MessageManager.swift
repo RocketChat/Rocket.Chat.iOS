@@ -39,7 +39,7 @@ extension MessageManager {
         let request = [
             "msg": "method",
             "method": "loadHistory",
-            "params": ["xSgZjSaWrcXoDR4QZ", NSNull(), historySize, [
+            "params": ["\(subscription.rid)", NSNull(), historySize, [
                 "$date": NSDate().timeIntervalSince1970 * 1000
             ]]
         ]
