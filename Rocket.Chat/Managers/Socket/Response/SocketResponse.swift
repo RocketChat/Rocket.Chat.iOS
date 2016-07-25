@@ -13,20 +13,7 @@ import Starscream
 
 public struct SocketResponse {
     var socket: WebSocket?
-    var result: JSON {
-        didSet {
-            self.id = result["id"].string
-            self.collection = result["collection"].string
-            
-            if let eventName = result["fields"]["eventName"].string{
-                self.event = eventName
-            }
-
-            if let msg = result["msg"].string {
-                self.msg = ResponseMessage(msg)
-            }
-        }
-    }
+    var result: JSON
 
     // JSON Data
     var id: String?
@@ -40,6 +27,17 @@ public struct SocketResponse {
     init?(_ result: JSON, socket: WebSocket?) {
         self.result = result
         self.socket = socket
+        
+        self.id = result["id"].string
+        self.collection = result["collection"].string
+        
+        if let eventName = result["fields"]["eventName"].string{
+            self.event = eventName
+        }
+        
+        if let msg = result["msg"].string {
+            self.msg = ResponseMessage(msg)
+        }
     }
     
     

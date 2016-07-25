@@ -12,6 +12,22 @@ class SubscriptionsViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
+    var assigned = false
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if !assigned {
+            if let auth = AuthManager.isAuthenticated() {
+                assigned = true
+
+                SubscriptionManager.changes(auth, completion: { [unowned self] (response) in
+                    self.tableView.reloadData()
+                })
+            }
+        }
+    }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()

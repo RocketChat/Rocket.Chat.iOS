@@ -42,7 +42,7 @@ class SubscriptionManager {
     }
     
     static func changes(auth: Auth, completion: MessageCompletion) {
-        let eventName = "\(auth.userId)/subscriptions-changed"
+        let eventName = "\(auth.userId!)/subscriptions-changed"
         let request = [
             "msg": "sub",
             "name": "stream-notify-user",
@@ -54,18 +54,12 @@ class SubscriptionManager {
                 return print(response.result)
             }
             
-            let subscriptions = List<Subscription>()
-            if let result = response.result["result"].array {
-                for obj in result {
-                    let subscription = Subscription(object: obj)
-                    subscription.auth = auth
-                    
-                    subscriptions.append(subscription)
-                }
-            }
+            let object = response.result["fields"]["args"][1]
+            let subscription = Subscription(object: object)
+            subscription.auth = auth
             
             Realm.execute() { (realm) in
-                realm.add(subscriptions, update: true)
+                realm.add(subscription, update: true)
             }
             
             completion(response)
