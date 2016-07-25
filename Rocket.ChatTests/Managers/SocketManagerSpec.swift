@@ -34,7 +34,7 @@ class SocketManagerSpec: XCTestCase {
     }
     
     func testSocketResponseErrorFalse() {
-        let result = JSON(["msg": "result", "foo": "bar"])
+        let result = JSON(["msg": "result", "foo": "bar", "fields": ["eventName": "event"]])
         let response = SocketResponse(result, socket: nil)
         XCTAssert(response!.isError() == false, "isError() should return true when JSON don't contains error")
     }
