@@ -17,6 +17,8 @@
 		4159720C1D3DB854002258F4 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720B1D3DB854002258F4 /* Email.swift */; };
 		4159720E1D3DB882002258F4 /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720D1D3DB882002258F4 /* Mention.swift */; };
 		415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720F1D3DBDA0002258F4 /* RealmExtension.swift */; };
+		416133321D46CA4E00E09DA2 /* ChatTextCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416133311D46CA4E00E09DA2 /* ChatTextCell.swift */; };
+		416133341D46CA7200E09DA2 /* ChatTextCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 416133331D46CA7200E09DA2 /* ChatTextCell.xib */; };
 		4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */; };
 		4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */; };
 		4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB121D2D99960086DAC8 /* BaseViewController.swift */; };
@@ -77,6 +79,8 @@
 		4159720B1D3DB854002258F4 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Email.swift; path = Models/Email.swift; sourceTree = "<group>"; };
 		4159720D1D3DB882002258F4 /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mention.swift; path = Models/Mention.swift; sourceTree = "<group>"; };
 		4159720F1D3DBDA0002258F4 /* RealmExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmExtension.swift; path = Extensions/RealmExtension.swift; sourceTree = "<group>"; };
+		416133311D46CA4E00E09DA2 /* ChatTextCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTextCell.swift; path = Views/Cells/Chat/ChatTextCell.swift; sourceTree = "<group>"; };
+		416133331D46CA7200E09DA2 /* ChatTextCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatTextCell.xib; path = Views/Cells/Chat/ChatTextCell.xib; sourceTree = "<group>"; };
 		4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectServerViewController.swift; path = Controllers/Auth/ConnectServerViewController.swift; sourceTree = "<group>"; };
 		4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Auth.storyboard; path = Storyboards/Auth.storyboard; sourceTree = "<group>"; };
 		4174CB121D2D99960086DAC8 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Controllers/Base/BaseViewController.swift; sourceTree = "<group>"; };
@@ -181,6 +185,31 @@
 				41DC7A1E1D3865FE00896FC0 /* MessageManagerSpec.swift */,
 			);
 			name = Managers;
+			sourceTree = "<group>";
+		};
+		4161332F1D46CA2800E09DA2 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				416133301D46CA3100E09DA2 /* Cells */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		416133301D46CA3100E09DA2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				416133351D46CA7400E09DA2 /* Chat */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		416133351D46CA7400E09DA2 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				416133311D46CA4E00E09DA2 /* ChatTextCell.swift */,
+				416133331D46CA7200E09DA2 /* ChatTextCell.xib */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		4174CB0A1D2D990F0086DAC8 /* Controllers */ = {
@@ -296,6 +325,7 @@
 				4174CB1D1D2DB3270086DAC8 /* Extensions */,
 				4174CB181D2D9D940086DAC8 /* Managers */,
 				4174CB0B1D2D99170086DAC8 /* Storyboards */,
+				4161332F1D46CA2800E09DA2 /* Views */,
 				4174CB0A1D2D990F0086DAC8 /* Controllers */,
 				41DF76E21D2C50710028DBF8 /* AppDelegate.swift */,
 				41DF76EB1D2C50720028DBF8 /* LaunchScreen.storyboard */,
@@ -477,6 +507,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				416133341D46CA7200E09DA2 /* ChatTextCell.xib in Resources */,
 				4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */,
 				41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */,
 				41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */,
@@ -694,6 +725,7 @@
 				415801951D303B640099E71B /* MainViewController.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
+				416133321D46CA4E00E09DA2 /* ChatTextCell.swift in Sources */,
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				41BA89301D303F9B00CBF526 /* BaseModel.swift in Sources */,
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,

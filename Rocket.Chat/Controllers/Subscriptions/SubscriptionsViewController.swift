@@ -7,6 +7,7 @@
 //
 
 import RealmSwift
+import SideMenu
 
 class SubscriptionsViewController: BaseViewController {
     
@@ -61,6 +62,16 @@ extension SubscriptionsViewController: UITableViewDataSource {
         }
         
         return cell
+    }
+    
+}
+
+
+extension SubscriptionsViewController: UITableViewDelegate {
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let subscription = subscriptions[indexPath.row]
+        ChatViewController.sharedInstance()?.subscription = subscription
     }
     
 }

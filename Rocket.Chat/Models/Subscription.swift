@@ -23,6 +23,8 @@ class Subscription: BaseModel, ModelMapping {
 
     dynamic var createdAt: NSDate?
     dynamic var lastSeen: NSDate?
+    
+    let messages = LinkingObjects(fromType: Message.self, property: "subscription")
 
 
     // MARK: ModelMapping
