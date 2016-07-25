@@ -11,26 +11,6 @@ import Starscream
 import SwiftyJSON
 
 
-public struct SocketResponse {
-    var result: JSON
-    var socket: WebSocket?
-    
-    func isError() -> Bool {
-        let msg = result["msg"].string
-
-        if msg == "error" || msg == "failed" {
-            return true
-        }
-        
-        if result["error"] != nil {
-            return true
-        }
-        
-        return false
-    }
-}
-
-
 public typealias MessageCompletion = (SocketResponse) -> Void
 public typealias SocketCompletion = (WebSocket?, Bool) -> Void
 
@@ -43,6 +23,7 @@ class SocketManager {
 
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
+    var events: [String: [MessageCompletion]] = [:]
     var connectionHandler: SocketCompletion?
     
     
@@ -87,6 +68,17 @@ class SocketManager {
         }
     }
     
+    static func subscribe(object: AnyObject, eventName: String, completion: MessageCompletion? = nil) {
+        if let completion = completion {
+            var list = sharedInstance.events[eventName] != nil ? sharedInstance.events[eventName] : []
+            list?.append(completion)
+    
+            sharedInstance.events[eventName] = list
+        }
+        
+        self.send(object, completion: completion)
+    }
+    
 }
 
 
@@ -129,24 +121,31 @@ extension SocketManager: WebSocketDelegate {
     
         Log.debug("[WebSocket] did receive JSON message: \(json.rawString()!)")
         
-        if let message = json["msg"].string {
-            // Server is authenticated right now
-            if message == "connected" {
-                connectionHandler?(socket, true)
-                connectionHandler = nil
-                return
-            }
-            
-            // Server sent a ping message, we must respond with pong
-            if message == "ping" {
-                SocketManager.send(["msg": "pong"])
-                return
-            }
+        let result = SocketResponse(json, socket: socket)
+        let collection = result?.collection
+        let eventName = result?.eventName
+        let fields = json["fields"]
+        
+        // Server is authenticated right now
+        if result?.msg == .Connected {
+            connectionHandler?(socket, true)
+            connectionHandler = nil
+            return
         }
         
-        if let identifier = json["id"].string {
+        // Server sent a ping message, we must respond with pong
+        if result?.msg == .Ping {
+            SocketManager.send(["msg": "pong"])
+            return
+        }
+        
+        // Event?
+        if result?.msg == .Changed {
+            
+        }
+        
+        if let result = result, identifier = json["id"].string {
             if queue[identifier] != nil {
-                let result = SocketResponse(result: json, socket: socket)
                 let completion = queue[identifier]! as MessageCompletion
                 completion(result)
             }

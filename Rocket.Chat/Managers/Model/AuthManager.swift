@@ -38,11 +38,11 @@ extension AuthManager {
         SocketManager.connect(url) { (socket, connected) in
             guard connected else {
                 let response = SocketResponse(
-                    result: ["error": "Can't connect to the socket"],
+                    ["error": "Can't connect to the socket"],
                     socket: socket
                 )
 
-                return completion(response)
+                return completion(response!)
             }
             
             let object = [
