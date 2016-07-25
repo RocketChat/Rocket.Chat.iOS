@@ -14,7 +14,6 @@ class MessageManager {
     
     static let historySize = 50
     
-    
 }
 
 

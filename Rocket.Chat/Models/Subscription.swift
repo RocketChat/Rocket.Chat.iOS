@@ -11,6 +11,8 @@ import RealmSwift
 import SwiftyJSON
 
 class Subscription: BaseModel, ModelMapping {
+    dynamic var auth: Auth?
+    
     dynamic var rid = ""
 
     dynamic var name = ""
