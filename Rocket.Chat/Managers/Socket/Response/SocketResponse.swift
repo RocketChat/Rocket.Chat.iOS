@@ -18,8 +18,8 @@ public struct SocketResponse {
             self.id = result["id"].string
             self.collection = result["collection"].string
             
-            if let eventName = result["eventName"].string{
-                self.event = ResponseEvent(eventName)
+            if let eventName = result["fields"]["eventName"].string{
+                self.event = eventName
             }
 
             if let msg = result["msg"].string {
@@ -32,7 +32,7 @@ public struct SocketResponse {
     var id: String?
     var msg: ResponseMessage?
     var collection: String?
-    var event: ResponseEvent?
+    var event: String?
     
     
     // MARK: Initializer
