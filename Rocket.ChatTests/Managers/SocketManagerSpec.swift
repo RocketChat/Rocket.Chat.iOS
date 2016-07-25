@@ -17,26 +17,26 @@ class SocketManagerSpec: XCTestCase {
     
     func testSocketResponseErrorMethodMsgError() {
         let result = JSON(["msg": "error", "foo": "bar"])
-        let response = SocketResponse(result: result, socket: nil)
-        XCTAssert(response.isError() == true, "isError() should return true when JSON object contains {'msg': 'error'}")
+        let response = SocketResponse(result, socket: nil)
+        XCTAssert(response!.isError() == true, "isError() should return true when JSON object contains {'msg': 'error'}")
     }
     
     func testSocketResponseErrorMethodMsgFailed() {
         let result = JSON(["msg": "failed", "foo": "bar"])
-        let response = SocketResponse(result: result, socket: nil)
-        XCTAssert(response.isError() == true, "isError() should return true when JSON object contains {'msg': 'failed'}")
+        let response = SocketResponse(result, socket: nil)
+        XCTAssert(response!.isError() == true, "isError() should return true when JSON object contains {'msg': 'failed'}")
     }
     
     func testSocketResponseErrorObjectError() {
         let result = JSON(["msg": "result", "error": []])
-        let response = SocketResponse(result: result, socket: nil)
-        XCTAssert(response.isError() == true, "isError() should return true when JSON object contains {'error': [...]}")
+        let response = SocketResponse(result, socket: nil)
+        XCTAssert(response!.isError() == true, "isError() should return true when JSON object contains {'error': [...]}")
     }
     
     func testSocketResponseErrorFalse() {
         let result = JSON(["msg": "result", "foo": "bar"])
-        let response = SocketResponse(result: result, socket: nil)
-        XCTAssert(response.isError() == false, "isError() should return true when JSON don't contains error")
+        let response = SocketResponse(result, socket: nil)
+        XCTAssert(response!.isError() == false, "isError() should return true when JSON don't contains error")
     }
     
 }

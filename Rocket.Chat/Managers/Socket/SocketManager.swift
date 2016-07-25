@@ -11,26 +11,6 @@ import Starscream
 import SwiftyJSON
 
 
-public struct SocketResponse {
-    var result: JSON
-    var socket: WebSocket?
-    
-    func isError() -> Bool {
-        let msg = result["msg"].string
-
-        if msg == "error" || msg == "failed" {
-            return true
-        }
-        
-        if result["error"] != nil {
-            return true
-        }
-        
-        return false
-    }
-}
-
-
 public typealias MessageCompletion = (SocketResponse) -> Void
 public typealias SocketCompletion = (WebSocket?, Bool) -> Void
 
@@ -43,6 +23,7 @@ class SocketManager {
 
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
+    var events: [String: [MessageCompletion]] = [:]
     var connectionHandler: SocketCompletion?
     
     
@@ -87,6 +68,17 @@ class SocketManager {
         }
     }
     
+    static func subscribe(object: AnyObject, eventName: String, completion: MessageCompletion? = nil) {
+        if let completion = completion {
+            var list = sharedInstance.events[eventName] != nil ? sharedInstance.events[eventName] : []
+            list?.append(completion)
+    
+            sharedInstance.events[eventName] = list
+        }
+        
+        self.send(object, completion: completion)
+    }
+    
 }
 
 
@@ -128,29 +120,7 @@ extension SocketManager: WebSocketDelegate {
         }
     
         Log.debug("[WebSocket] did receive JSON message: \(json.rawString()!)")
-        
-        if let message = json["msg"].string {
-            // Server is authenticated right now
-            if message == "connected" {
-                connectionHandler?(socket, true)
-                connectionHandler = nil
-                return
-            }
-            
-            // Server sent a ping message, we must respond with pong
-            if message == "ping" {
-                SocketManager.send(["msg": "pong"])
-                return
-            }
-        }
-        
-        if let identifier = json["id"].string {
-            if queue[identifier] != nil {
-                let result = SocketResponse(result: json, socket: socket)
-                let completion = queue[identifier]! as MessageCompletion
-                completion(result)
-            }
-        }
+        self.handleMessage(json, socket: socket)
     }
     
 }
@@ -162,6 +132,58 @@ extension SocketManager: WebSocketPongDelegate {
     
     func websocketDidReceivePong(socket: WebSocket) {
         Log.debug("[WebSocket] did receive pong")
+    }
+    
+}
+
+
+// MARK: Handlers
+
+extension SocketManager {
+    
+    private func handleMessage(response: JSON, socket: WebSocket) {
+        let result = SocketResponse(response, socket: socket)!
+        
+        guard result.msg != nil else {
+            return Log.debug("Msg is invalid: \(result.result)")
+        }
+        
+        switch result.msg! {
+        case .Connected: return handleConnectionMessage(result, socket: socket)
+        case .Ping: return handlePingMessage(result, socket: socket)
+        case .Changed: return handleChangedMessage(result, socket: socket)
+
+        case .Error, .Added, .Removed, .Updated, .Unknown: break
+        }
+        
+        // Call completion block
+        if let identifier = result.id {
+            if queue[identifier] != nil {
+                let completion = queue[identifier]! as MessageCompletion
+                completion(result)
+            }
+        }
+    }
+    
+    private func handleConnectionMessage(result: SocketResponse, socket: WebSocket) {
+        connectionHandler?(socket, true)
+        connectionHandler = nil
+    }
+    
+    private func handlePingMessage(result: SocketResponse, socket: WebSocket) {
+        SocketManager.send(["msg": "pong"])
+    }
+    
+    private func handleChangedMessage(result: SocketResponse, socket: WebSocket) {
+        guard let event = result.event else {
+            return Log.debug("Event name is invalid: \(result.result)")
+        }
+        
+        if let handlers = events[event] {
+            for handler in handlers {
+                handler(result)
+            }
+        }
     }
     
 }

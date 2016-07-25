@@ -11,6 +11,9 @@ def shared_pods
   # Code utilities
   pod 'SwiftyJSON'
 
+  # UI
+  pod 'SideMenu'
+
   # Database
   pod 'RealmSwift'
 
