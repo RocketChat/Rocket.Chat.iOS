@@ -13,6 +13,7 @@ class SubscriptionsViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var assigned = false
+    var subscriptions: Results<Subscription>!
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,21 +40,25 @@ extension SubscriptionsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let auth = AuthManager.isAuthenticated() {
-            return auth.subscriptions.count
+            subscriptions = auth.subscriptions.sorted("lastSeen", ascending: false)
+            return subscriptions.count
         }
         
         return 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        guard let auth = AuthManager.isAuthenticated() else {
-            return UITableViewCell()
-        }
-
-        let subscription = auth.subscriptions[indexPath.row]
+        let subscription = subscriptions[indexPath.row]
         let identifier = "CellSubscription"
         let cell = tableView.dequeueReusableCellWithIdentifier(identifier)!
         cell.textLabel?.text = subscription.name
+        cell.detailTextLabel?.text = "\(subscription.unread) unread messages"
+        
+        if subscription.alert {
+            cell.textLabel?.font = UIFont.boldSystemFontOfSize(16)
+        } else {
+            cell.textLabel?.font = UIFont.systemFontOfSize(16)
+        }
         
         return cell
     }
