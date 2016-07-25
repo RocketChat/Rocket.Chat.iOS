@@ -145,7 +145,7 @@ extension SocketManager {
         let result = SocketResponse(response, socket: socket)!
         
         guard let _ = result.msg else {
-            return NSLog("Invalid message from server")
+            return Log.debug("Msg is invalid: \(result.result)")
         }
         
         switch result.msg! {
@@ -175,7 +175,15 @@ extension SocketManager {
     }
     
     private func handleChangedMessage(result: SocketResponse, socket: WebSocket) {
+        guard let event = result.event else {
+            return Log.debug("Event name is invalid: \(result.result)")
+        }
         
+        if let handlers = events[event] {
+            for handler in handlers {
+                handler(result)
+            }
+        }
     }
     
 }
