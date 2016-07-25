@@ -8,8 +8,7 @@
 
 
 enum ResponseMessage {
-    case Connected, Failed, Error, Ping, Pong, Changed, Updated, Removed
-    
+    case Connected, Error, Ping, Changed, Updated, Removed
     case Unknown
     
     init?(_ value: String) {
@@ -19,7 +18,7 @@ enum ResponseMessage {
             break
             
         case "failed":
-            self = .Failed
+            self = .Error
             break
             
         case "error":
@@ -28,10 +27,6 @@ enum ResponseMessage {
             
         case "ping":
             self = .Ping
-            break
-            
-        case "pong":
-            self = .Pong
             break
             
         case "changed":
