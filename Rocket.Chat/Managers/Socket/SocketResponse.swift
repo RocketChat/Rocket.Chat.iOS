@@ -15,6 +15,7 @@ public struct SocketResponse {
     var socket: WebSocket?
     var result: JSON {
         didSet {
+            self.id = result["id"].string
             self.collection = result["collection"].string
             
             if let eventName = result["eventName"].string{
@@ -28,6 +29,7 @@ public struct SocketResponse {
     }
 
     // JSON Data
+    var id: String?
     var msg: ResponseMessage?
     var collection: String?
     var event: ResponseEvent?
@@ -44,7 +46,7 @@ public struct SocketResponse {
     // MARK: Checks
     
     func isError() -> Bool {
-        if msg == .Error || msg == .Failed {
+        if msg == .Error {
             return true
         }
         

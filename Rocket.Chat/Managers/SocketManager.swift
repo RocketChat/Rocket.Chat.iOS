@@ -120,36 +120,7 @@ extension SocketManager: WebSocketDelegate {
         }
     
         Log.debug("[WebSocket] did receive JSON message: \(json.rawString()!)")
-        
-        let result = SocketResponse(json, socket: socket)
-        let collection = result?.collection
-        let eventName = result?.eventName
-        let fields = json["fields"]
-        
-        // Server is authenticated right now
-        if result?.msg == .Connected {
-            connectionHandler?(socket, true)
-            connectionHandler = nil
-            return
-        }
-        
-        // Server sent a ping message, we must respond with pong
-        if result?.msg == .Ping {
-            SocketManager.send(["msg": "pong"])
-            return
-        }
-        
-        // Event?
-        if result?.msg == .Changed {
-            
-        }
-        
-        if let result = result, identifier = json["id"].string {
-            if queue[identifier] != nil {
-                let completion = queue[identifier]! as MessageCompletion
-                completion(result)
-            }
-        }
+        self.handleMessage(json, socket: socket)
     }
     
 }
@@ -161,6 +132,50 @@ extension SocketManager: WebSocketPongDelegate {
     
     func websocketDidReceivePong(socket: WebSocket) {
         Log.debug("[WebSocket] did receive pong")
+    }
+    
+}
+
+
+// MARK: Handlers
+
+extension SocketManager {
+    
+    private func handleMessage(response: JSON, socket: WebSocket) {
+        let result = SocketResponse(response, socket: socket)!
+        
+        guard let _ = result.msg else {
+            return NSLog("Invalid message from server")
+        }
+        
+        switch result.msg! {
+        case .Connected: return handleConnectionMessage(result, socket: socket)
+        case .Ping: return handlePingMessage(result, socket: socket)
+        case .Changed: return handleChangedMessage(result, socket: socket)
+
+        case .Error, .Removed, .Updated, .Unknown: break
+        }
+        
+        // Call completion block
+        if let identifier = result.id {
+            if queue[identifier] != nil {
+                let completion = queue[identifier]! as MessageCompletion
+                completion(result)
+            }
+        }
+    }
+    
+    private func handleConnectionMessage(result: SocketResponse, socket: WebSocket) {
+        connectionHandler?(socket, true)
+        connectionHandler = nil
+    }
+    
+    private func handlePingMessage(result: SocketResponse, socket: WebSocket) {
+        SocketManager.send(["msg": "pong"])
+    }
+    
+    private func handleChangedMessage(result: SocketResponse, socket: WebSocket) {
+        
     }
     
 }
