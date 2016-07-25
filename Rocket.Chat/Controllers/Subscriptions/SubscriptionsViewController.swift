@@ -72,6 +72,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let subscription = subscriptions[indexPath.row]
         ChatViewController.sharedInstance()?.subscription = subscription
+        dismissViewControllerAnimated(true, completion: nil)
     }
     
 }
