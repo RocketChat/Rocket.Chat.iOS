@@ -257,8 +257,8 @@
 			isa = PBXGroup;
 			children = (
 				41F1702C1D425358007E6948 /* Socket */,
-				4174CB1B1D2DB2080086DAC8 /* LogManager.swift */,
 				41552F641D30307D0081438D /* Model */,
+				4174CB1B1D2DB2080086DAC8 /* LogManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
