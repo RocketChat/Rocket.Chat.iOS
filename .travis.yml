@@ -6,7 +6,6 @@ env:
     - TEST_TYPE=iOS
 before_install:
 - |
-	before_install:
     gem install cocoapods -v '1.0.1'
     gem install xcpretty -N --no-ri --no-rdoc
 script:
