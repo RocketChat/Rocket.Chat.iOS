@@ -38,11 +38,20 @@ class ChatViewController: BaseViewController {
         registerCells()
     }
     
-    func registerCells() {
+    private func registerCells() {
         self.collectionView.registerNib(UINib(
             nibName: "ChatTextCell",
             bundle: NSBundle.mainBundle()
         ), forCellWithReuseIdentifier: ChatTextCell.identifier)
+    }
+    
+    private func scrollToBottom(animated: Bool = false) {
+        let totalItems = collectionView.numberOfItemsInSection(0) - 1
+        
+        if totalItems > 0 {
+            let indexPath = NSIndexPath(forRow: totalItems, inSection: 0)
+            collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
+        }
     }
     
     
@@ -55,11 +64,15 @@ class ChatViewController: BaseViewController {
         MessageManager.fetchHistory(subscription) { [unowned self] (response) in
             self.messages = self.subscription?.messages.sorted("createdAt", ascending: true)
             self.collectionView.reloadData()
+            self.collectionView.layoutIfNeeded()
+            self.scrollToBottom()
         }
         
         MessageManager.changes(subscription) { [unowned self] (response) in
             self.messages = self.subscription?.messages.sorted("createdAt", ascending: true)
             self.collectionView.reloadData()
+            self.collectionView.layoutIfNeeded()
+            self.scrollToBottom(true)
         }
     }
     
