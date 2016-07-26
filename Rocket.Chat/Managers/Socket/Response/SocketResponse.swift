@@ -31,7 +31,7 @@ public struct SocketResponse {
         self.id = result["id"].string
         self.collection = result["collection"].string
         
-        if let eventName = result["fields"]["eventName"].string{
+        if let eventName = result["fields"]["eventName"].string {
             self.event = eventName
         }
         

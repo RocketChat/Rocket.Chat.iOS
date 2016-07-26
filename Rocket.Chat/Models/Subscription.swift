@@ -23,6 +23,8 @@ class Subscription: BaseModel, ModelMapping {
 
     dynamic var createdAt: NSDate?
     dynamic var lastSeen: NSDate?
+    
+    let messages = LinkingObjects(fromType: Message.self, property: "subscription")
 
 
     // MARK: ModelMapping
@@ -46,4 +48,13 @@ class Subscription: BaseModel, ModelMapping {
             self.lastSeen = NSDate.dateFromInterval(lastSeen)
         }
     }
+}
+
+
+extension Subscription {
+    
+    func fetchMessages() -> Results<Message> {
+        return self.messages.sorted("createdAt", ascending: true)
+    }
+    
 }

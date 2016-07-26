@@ -17,29 +17,13 @@ class MessageManager {
 }
 
 
-// MARK: Realm Data
-
-extension MessageManager {
-    
-    static func allMessages(subscription: Subscription) -> Results<Message> {
-        return try! Realm().objects(Message.self)
-            .filter("subscription = %@", subscription)
-            .sorted("createdAt", ascending: true)
-    }
-    
-}
-
-
-
-// MARK: History
-
 extension MessageManager {
     
     static func fetchHistory(subscription: Subscription, completion: MessageCompletion) {
         let request = [
             "msg": "method",
             "method": "loadHistory",
-            "params": ["xSgZjSaWrcXoDR4QZ", NSNull(), historySize, [
+            "params": ["\(subscription.rid)", NSNull(), historySize, [
                 "$date": NSDate().timeIntervalSince1970 * 1000
             ]]
         ]
@@ -60,6 +44,31 @@ extension MessageManager {
             
             Realm.execute() { (realm) in
                 realm.add(messages, update: true)
+            }
+            
+            completion(response)
+        }
+    }
+    
+    static func changes(subscription: Subscription, completion: MessageCompletion) {
+        let eventName = "\(subscription.rid)"
+        let request = [
+            "msg": "sub",
+            "name": "stream-room-messages",
+            "params": [eventName, false]
+        ]
+        
+        SocketManager.subscribe(request, eventName: eventName) { (response) in
+            guard !response.isError() else {
+                return print(response.result)
+            }
+            
+            let object = response.result["fields"]["args"][0]
+            let message = Message(object: object)
+            message.subscription = subscription
+            
+            Realm.execute() { (realm) in
+                realm.add(message, update: true)
             }
             
             completion(response)
