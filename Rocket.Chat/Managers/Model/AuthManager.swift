@@ -69,18 +69,19 @@ extension AuthManager {
     /**
         This method authenticates the user with email and password.
  
-        - parameter email: Email
+        - parameter username: Username
         - parameter password: Password
         - parameter completion: The completion block that'll be called in case
             of success or error.
     */
-    static func auth(email: String, password: String, completion: MessageCompletion) {
+    static func auth(username: String, password: String, completion: MessageCompletion) {
+        let usernameType = username.containsString("@") ? "email" : "username"
         let object = [
             "msg": "method",
             "method": "login",
             "params": [[
                 "user": [
-                    "email": email
+                    usernameType: username
                 ],
                 "password": [
                     "digest": password.sha256(),
