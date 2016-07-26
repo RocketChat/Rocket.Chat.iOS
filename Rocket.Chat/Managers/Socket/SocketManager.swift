@@ -68,15 +68,14 @@ class SocketManager {
         }
     }
     
-    static func subscribe(object: AnyObject, eventName: String, completion: MessageCompletion? = nil) {
-        if let completion = completion {
-            var list = sharedInstance.events[eventName] != nil ? sharedInstance.events[eventName] : []
-            list?.append(completion)
-    
+    static func subscribe(object: AnyObject, eventName: String, completion: MessageCompletion) {
+        if var list = sharedInstance.events[eventName] {
+            list.append(completion)
             sharedInstance.events[eventName] = list
+        } else {
+            self.send(object, completion: completion)
+            sharedInstance.events[eventName] = [completion]
         }
-        
-        self.send(object, completion: completion)
     }
     
 }
