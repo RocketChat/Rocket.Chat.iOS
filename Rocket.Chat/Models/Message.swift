@@ -39,5 +39,10 @@ class Message: BaseModel, ModelMapping {
         if let updatedAt = object["_updatedAt"]["$date"].double {
             self.updatedAt = NSDate.dateFromInterval(updatedAt)
         }
+        
+        let user = User()
+        user.identifier = object["u"]["_id"].string!
+        user.username = object["u"]["username"].string
+        self.user = user
     }
 }
