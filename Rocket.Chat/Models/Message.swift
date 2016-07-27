@@ -22,7 +22,13 @@ class Message: BaseModel, ModelMapping {
 
     var mentions = List<Mention>()
 
+    func userAvatarURL() -> NSURL {
+        let username = user?.username
+        let serverURL = NSURL(string: subscription.auth!.serverURL)
+        return NSURL(string: "\(serverURL)/avatar/\(username).jpg")!
+    }
     
+
     // MARK: ModelMapping
 
     convenience required init(object: JSON) {
@@ -43,6 +49,11 @@ class Message: BaseModel, ModelMapping {
         let user = User()
         user.identifier = object["u"]["_id"].string!
         user.username = object["u"]["username"].string
+        
+        Realm.execute { (realm) in
+            realm.add(user, update: true)
+        }
+        
         self.user = user
     }
 }
