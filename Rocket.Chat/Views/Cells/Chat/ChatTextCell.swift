@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SDWebImage
 
 class ChatTextCell: UICollectionViewCell {
     
@@ -19,10 +20,22 @@ class ChatTextCell: UICollectionViewCell {
         }
     }
     
+    
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var labelDate: UILabel!
+    @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelText: UILabel!
     
     private func updateMessageInformation() {
-        labelText.text = "\(message.user?.username): \(message.text)"
+        let formatter = NSDateFormatter()
+        formatter.timeStyle = .ShortStyle
+
+        imageView.sd_setImageWithURL(message.userAvatarURL())
+        labelDate.text = formatter.stringFromDate(message.createdAt!)
+        labelUsername.text = message.user?.username
+        labelText.text = message.text
+        
     }
     
 }

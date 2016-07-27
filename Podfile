@@ -18,6 +18,7 @@ def shared_pods
   pod 'RealmSwift'
 
   # Network
+  pod 'SDWebImage', '~> 3.8'
   pod 'Starscream', '~> 1.1.3'
 end
 
