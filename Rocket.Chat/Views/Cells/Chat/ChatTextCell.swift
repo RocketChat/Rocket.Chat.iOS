@@ -22,7 +22,7 @@ class ChatTextCell: UICollectionViewCell {
     @IBOutlet weak var labelText: UILabel!
     
     private func updateMessageInformation() {
-        labelText.text = message.text
+        labelText.text = "\(message.user?.username): \(message.text)"
     }
     
 }
