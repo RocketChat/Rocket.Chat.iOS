@@ -125,7 +125,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
         let message = messages![indexPath.row]
         let width = UIScreen.mainScreen().bounds.size.width
         let height = UILabel.heightForView(message.text, font: UIFont.systemFontOfSize(14), width: width) + 27
-        return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: max(height, ChatTextCell.minimumHeight))
+        return CGSize(width: width, height: max(height, ChatTextCell.minimumHeight))
     }
     
 }
