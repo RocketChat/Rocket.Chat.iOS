@@ -33,6 +33,8 @@
 		4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
 		417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417A70021D47918200FF46EE /* ResponseMessageSpec.swift */; };
 		419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419205481D52EDE6004EEC5F /* UILabelExtension.swift */; };
+		4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */; };
+		4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */; };
 		41A79C0F1D2F085F00A1968E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C0E1D2F085F00A1968E /* User.swift */; };
 		41A79C131D2F09F200A1968E /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C121D2F09F200A1968E /* Auth.swift */; };
 		41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BA89231D303D8B00CBF526 /* AuthManagerSpec.swift */; };
@@ -103,6 +105,8 @@
 		4174CB201D2DD4690086DAC8 /* Rocket.Chat-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket.Chat-Bridge.h"; sourceTree = "<group>"; };
 		417A70021D47918200FF46EE /* ResponseMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResponseMessageSpec.swift; path = Managers/Socket/ResponseMessageSpec.swift; sourceTree = "<group>"; };
 		419205481D52EDE6004EEC5F /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILabelExtension.swift; path = Extensions/UILabelExtension.swift; sourceTree = "<group>"; };
+		4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionCell.swift; path = Views/Cells/Subscription/SubscriptionCell.swift; sourceTree = "<group>"; };
+		4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = Extensions/UIColorExtension.swift; sourceTree = "<group>"; };
 		41A79C0E1D2F085F00A1968E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		41A79C121D2F09F200A1968E /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Auth.swift; path = Models/Auth.swift; sourceTree = "<group>"; };
 		41BA89231D303D8B00CBF526 /* AuthManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthManagerSpec.swift; path = Managers/AuthManagerSpec.swift; sourceTree = "<group>"; };
@@ -212,6 +216,7 @@
 		416133301D46CA3100E09DA2 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				4192054A1D52F4E7004EEC5F /* Subscription */,
 				416133351D46CA7400E09DA2 /* Chat */,
 			);
 			name = Cells;
@@ -293,6 +298,7 @@
 			isa = PBXGroup;
 			children = (
 				4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */,
+				4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */,
 				41E991D31D343A9F00BDDCA8 /* NSDateExtension.swift */,
 				4159720F1D3DBDA0002258F4 /* RealmExtension.swift */,
 				419205481D52EDE6004EEC5F /* UILabelExtension.swift */,
@@ -307,6 +313,14 @@
 				417A70021D47918200FF46EE /* ResponseMessageSpec.swift */,
 			);
 			name = Socket;
+			sourceTree = "<group>";
+		};
+		4192054A1D52F4E7004EEC5F /* Subscription */ = {
+			isa = PBXGroup;
+			children = (
+				4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */,
+			);
+			name = Subscription;
 			sourceTree = "<group>";
 		};
 		41A79C0D1D2F084F00A1968E /* Models */ = {
@@ -760,6 +774,7 @@
 			files = (
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
 				415801951D303B640099E71B /* MainViewController.swift in Sources */,
+				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatTextCell.swift in Sources */,
@@ -779,6 +794,7 @@
 				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
+				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,
 				41E991D41D343A9F00BDDCA8 /* NSDateExtension.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
