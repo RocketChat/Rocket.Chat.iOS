@@ -122,7 +122,10 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
-        return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: 44)
+        let message = messages![indexPath.row]
+        let width = UIScreen.mainScreen().bounds.size.width
+        let height = UILabel.heightForView(message.text, font: UIFont.systemFontOfSize(14), width: width) + 27
+        return CGSize(width: UIScreen.mainScreen().bounds.size.width, height: max(height, ChatTextCell.minimumHeight))
     }
     
 }
