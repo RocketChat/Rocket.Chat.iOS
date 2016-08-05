@@ -8,7 +8,7 @@ before_install:
 - |
     gem install cocoapods -v '1.0.1'
     gem install xcpretty -N --no-ri --no-rdoc
-	pod repo update	
+    pod repo update	
 script:
 - |
     set -o pipefail
