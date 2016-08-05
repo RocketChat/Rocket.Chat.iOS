@@ -70,7 +70,8 @@ class MessageSpec: XCTestCase {
             "rid": "123",
             "msg": "Foo Bar Baz",
             "ts": ["$date": 1234567891011],
-            "_updatedAt": ["$date": 1234567891011]
+            "_updatedAt": ["$date": 1234567891011],
+            "u": ["_id": "123", "username": "foo"]
         ])
         
         let message = Message(object: object)

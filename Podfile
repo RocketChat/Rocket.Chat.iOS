@@ -1,7 +1,6 @@
 source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '9.0'
-
 use_frameworks!
 
 def shared_pods
@@ -18,6 +17,7 @@ def shared_pods
   pod 'RealmSwift'
 
   # Network
+  pod 'SDWebImage', '~> 3.8'
   pod 'Starscream', '~> 1.1.3'
 end
 

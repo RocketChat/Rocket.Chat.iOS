@@ -50,17 +50,10 @@ extension SubscriptionsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let subscription = subscriptions[indexPath.row]
-        let identifier = "CellSubscription"
-        let cell = tableView.dequeueReusableCellWithIdentifier(identifier)!
-        cell.textLabel?.text = subscription.name
-        cell.detailTextLabel?.text = "\(subscription.unread) unread messages"
-        
-        if subscription.alert {
-            cell.textLabel?.font = UIFont.boldSystemFontOfSize(16)
-        } else {
-            cell.textLabel?.font = UIFont.systemFontOfSize(16)
-        }
-        
+
+        let cell = tableView.dequeueReusableCellWithIdentifier(SubscriptionCell.identifier) as! SubscriptionCell
+        cell.subscription = subscription
+
         return cell
     }
     
