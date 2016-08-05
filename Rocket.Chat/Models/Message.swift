@@ -22,7 +22,13 @@ class Message: BaseModel, ModelMapping {
 
     var mentions = List<Mention>()
 
+    func userAvatarURL() -> NSURL? {
+        guard let username = user?.username else { return nil }
+        guard let serverURL = NSURL(string: subscription.auth!.serverURL) else { return nil }
+        return NSURL(string: "http://\(serverURL.host!)/avatar/\(username).jpg")!
+    }
     
+
     // MARK: ModelMapping
 
     convenience required init(object: JSON) {
@@ -39,5 +45,15 @@ class Message: BaseModel, ModelMapping {
         if let updatedAt = object["_updatedAt"]["$date"].double {
             self.updatedAt = NSDate.dateFromInterval(updatedAt)
         }
+        
+        let user = User()
+        user.identifier = object["u"]["_id"].string!
+        user.username = object["u"]["username"].string
+        
+        Realm.execute { (realm) in
+            realm.add(user, update: true)
+        }
+        
+        self.user = user
     }
 }
