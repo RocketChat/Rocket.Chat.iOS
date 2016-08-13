@@ -19,24 +19,18 @@ class SubscriptionManager {
         ]
 
         SocketManager.send(request) { (response) in
-            guard !response.isError() else {
-                return print(response.result)
-            }
+            guard !response.isError() else { return Log.debug(response.result.string) }
             
             let subscriptions = List<Subscription>()
-            if let result = response.result["result"].array {
-                for obj in result {
-                    let subscription = Subscription(object: obj)
-                    subscription.auth = auth
+            let list = response.result["result"].array
 
-                    subscriptions.append(subscription)
-                }
-            }
+            list?.forEach({ (obj) in
+                let subscription = Subscription(object: obj)
+                subscription.auth = auth
+                subscriptions.append(subscription)
+            })
             
-            Realm.execute() { (realm) in
-                realm.add(subscriptions, update: true)
-            }
-            
+            Realm.update(subscriptions)
             completion(response)
         }
     }
@@ -50,18 +44,13 @@ class SubscriptionManager {
         ]
         
         SocketManager.subscribe(request, eventName: eventName) { (response) in
-            guard !response.isError() else {
-                return print(response.result)
-            }
+            guard !response.isError() else { return Log.debug(response.result.string) }
             
             let object = response.result["fields"]["args"][1]
             let subscription = Subscription(object: object)
             subscription.auth = auth
             
-            Realm.execute() { (realm) in
-                realm.add(subscription, update: true)
-            }
-            
+            Realm.update(subscription)
             completion(response)
         }
     }

@@ -18,4 +18,19 @@ extension Realm {
         }
     }
     
+    
+    // MARK: Mutate
+    
+    static func update(object: Object) {
+        self.execute() { (realm) in
+            realm.add(object, update: true)
+        }
+    }
+    
+    static func update<S: SequenceType where S.Generator.Element: Object>(objects: S) {
+        self.execute() { (realm) in
+            realm.add(objects, update: true)
+        }
+    }
+    
 }
