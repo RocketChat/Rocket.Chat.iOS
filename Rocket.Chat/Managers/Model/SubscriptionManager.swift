@@ -12,10 +12,16 @@ import RealmSwift
 class SubscriptionManager {
     
     static func updateSubscriptions(auth: Auth, completion: MessageCompletion) {
+        var params: [[String: AnyObject]] = []
+
+        if let lastUpdated = auth.lastSubscriptionFetch {
+            params.append(["$date": NSDate.intervalFromDate(lastUpdated)])
+        }
+
         let request = [
             "msg": "method",
             "method": "subscriptions/get",
-            "params": []
+            "params": params
         ]
 
         SocketManager.send(request) { (response) in
@@ -30,7 +36,13 @@ class SubscriptionManager {
                 subscriptions.append(subscription)
             })
             
-            Realm.update(subscriptions)
+            Realm.execute({ (realm) in
+                auth.lastSubscriptionFetch = NSDate()
+
+                realm.add(subscriptions, update: true)
+                realm.add(auth, update: true)
+            })
+
             completion(response)
         }
     }

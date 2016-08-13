@@ -11,9 +11,7 @@ import Foundation
 class Log {
     
     static func debug(text: String?) {
-        #if DEBUG
         NSLog(text ?? "")
-        #endif
     }
     
 }

@@ -17,6 +17,7 @@ class Auth: Object {
     dynamic var token: String?
     dynamic var tokenExpires: NSDate?
     dynamic var lastAccess: NSDate?
+    dynamic var lastSubscriptionFetch: NSDate?
 
     // User
     dynamic var userId: String?
