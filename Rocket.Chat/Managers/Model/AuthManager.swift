@@ -100,6 +100,7 @@ extension AuthManager {
             let result = response.result
 
             let auth = Auth()
+            auth.lastSubscriptionFetch = nil
             auth.lastAccess = NSDate()
             auth.serverURL = response.socket!.currentURL.absoluteString
             auth.token = result["result"]["token"].string
@@ -109,10 +110,7 @@ extension AuthManager {
                 auth.tokenExpires = NSDate.dateFromInterval(date)
             }
             
-            Realm.execute() { (realm) in
-                realm.add(auth, update: true)
-            }
-            
+            Realm.update(auth)
             completion(response)
         }
     }
