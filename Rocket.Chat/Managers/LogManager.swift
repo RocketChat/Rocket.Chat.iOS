@@ -7,12 +7,13 @@
 //
 
 import Foundation
-import Log
 
 class Log {
     
     static func debug(text: String) {
-        Logger().debug(text)
+        #if DEBUG
+        NSLog(text)
+        #endif
     }
     
 }
