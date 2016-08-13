@@ -10,9 +10,9 @@ import Foundation
 
 class Log {
     
-    static func debug(text: String) {
+    static func debug(text: String?) {
         #if DEBUG
-        NSLog(text)
+        NSLog(text ?? "")
         #endif
     }
     
