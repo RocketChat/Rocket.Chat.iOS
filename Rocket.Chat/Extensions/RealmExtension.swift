@@ -18,4 +18,21 @@ extension Realm {
         }
     }
     
+    
+    // MARK: Mutate
+    
+    // This method will add or update a Realm's object.
+    static func update(object: Object) {
+        self.execute() { (realm) in
+            realm.add(object, update: true)
+        }
+    }
+    
+    // This method will add or update a list of some Realm's object.
+    static func update<S: SequenceType where S.Generator.Element: Object>(objects: S) {
+        self.execute() { (realm) in
+            realm.add(objects, update: true)
+        }
+    }
+    
 }

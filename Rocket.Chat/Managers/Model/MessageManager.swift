@@ -29,23 +29,18 @@ extension MessageManager {
         ]
         
         SocketManager.send(request) { (response) in
-            guard !response.isError() else {
-                return print(response.result)
-            }
+            guard !response.isError() else { return Log.debug(response.result.string) }
             
             let messages = List<Message>()
-            if let result = response.result["result"]["messages"].array {
-                for obj in result {
-                    let message = Message(object: obj)
-                    message.subscription = subscription
-                    messages.append(message)
-                }
-            }
+            let list = response.result["result"]["messages"].array
             
-            Realm.execute() { (realm) in
-                realm.add(messages, update: true)
-            }
+            list?.forEach({ (obj) in
+                let message = Message(object: obj)
+                message.subscription = subscription
+                messages.append(message)
+            })
             
+            Realm.update(messages)
             completion(response)
         }
     }
@@ -59,18 +54,13 @@ extension MessageManager {
         ]
         
         SocketManager.subscribe(request, eventName: eventName) { (response) in
-            guard !response.isError() else {
-                return print(response.result)
-            }
+            guard !response.isError() else { return Log.debug(response.result.string) }
             
             let object = response.result["fields"]["args"][0]
             let message = Message(object: object)
             message.subscription = subscription
             
-            Realm.execute() { (realm) in
-                realm.add(message, update: true)
-            }
-            
+            Realm.update(message)
             completion(response)
         }
     }
