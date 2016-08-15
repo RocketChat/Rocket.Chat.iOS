@@ -4,9 +4,6 @@ platform :ios, '9.0'
 use_frameworks!
 
 def shared_pods
-  # Logging
-  pod 'Log'
-
   # Code utilities
   pod 'SwiftyJSON'
 

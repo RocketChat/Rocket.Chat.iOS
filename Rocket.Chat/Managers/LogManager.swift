@@ -7,12 +7,11 @@
 //
 
 import Foundation
-import Log
 
 class Log {
     
-    static func debug(text: String) {
-        Logger().debug(text)
+    static func debug(text: String?) {
+        NSLog(text ?? "")
     }
     
 }
