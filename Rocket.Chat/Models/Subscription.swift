@@ -11,9 +11,9 @@ import RealmSwift
 import SwiftyJSON
 
 enum SubscriptionType: String {
-    case DirectMessage
-    case Channel
-    case Group
+    case DirectMessage = "d"
+    case Channel = "c"
+    case Group = "p"
 }
 
 class Subscription: BaseModel, ModelMapping {
@@ -51,20 +51,7 @@ class Subscription: BaseModel, ModelMapping {
         self.open = object["open"].bool ?? false
         self.alert = object["alert"].bool ?? false
         self.favorite = object["f"].bool ?? false
-        
-        // Subscription Type
-        if let type = object["t"].string {
-            switch type {
-            case "d":
-                self.type = .DirectMessage
-                break
-            case "p":
-                self.type = .Group
-                break
-            default:
-                self.type = .Channel
-            }
-        }
+        self.privateType = object["t"].string ?? SubscriptionType.Channel.rawValue
         
         if let createdAt = object["ts"]["$date"].double {
             self.createdAt = NSDate.dateFromInterval(createdAt)
