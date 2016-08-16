@@ -40,7 +40,7 @@
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.94999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="QYQ-rY-d5g">
-                        <rect key="frame" x="55" y="24" width="294" height="62"/>
+                        <rect key="frame" x="55" y="23" width="294" height="63"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -58,7 +58,7 @@
                 <constraint firstItem="W3N-Wt-YdI" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="5" id="k18-w2-eXR"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="2" id="nFi-sf-ZfI"/>
                 <constraint firstAttribute="bottom" secondItem="QYQ-rY-d5g" secondAttribute="bottom" constant="3" id="oPu-ur-XHH"/>
-                <constraint firstItem="QYQ-rY-d5g" firstAttribute="top" secondItem="pvK-41-cNi" secondAttribute="bottom" constant="1" id="q6m-EB-Kde"/>
+                <constraint firstItem="QYQ-rY-d5g" firstAttribute="top" secondItem="pvK-41-cNi" secondAttribute="bottom" id="q6m-EB-Kde"/>
                 <constraint firstAttribute="trailing" secondItem="QYQ-rY-d5g" secondAttribute="trailing" constant="3" id="zUX-5k-dSO"/>
             </constraints>
             <size key="customSize" width="352" height="89"/>

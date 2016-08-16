@@ -10,8 +10,20 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+enum SubscriptionType: String {
+    case DirectMessage
+    case Channel
+    case Group
+}
+
 class Subscription: BaseModel, ModelMapping {
     dynamic var auth: Auth?
+    
+    private dynamic var privateType = SubscriptionType.Channel.rawValue
+    var type: SubscriptionType {
+        get { return SubscriptionType(rawValue: privateType)! }
+        set { privateType = newValue.rawValue }
+    }
     
     dynamic var rid = ""
 
@@ -39,6 +51,20 @@ class Subscription: BaseModel, ModelMapping {
         self.open = object["open"].bool ?? false
         self.alert = object["alert"].bool ?? false
         self.favorite = object["f"].bool ?? false
+        
+        // Subscription Type
+        if let type = object["t"].string {
+            switch type {
+            case "d":
+                self.type = .DirectMessage
+                break
+            case "p":
+                self.type = .Group
+                break
+            default:
+                self.type = .Channel
+            }
+        }
         
         if let createdAt = object["ts"]["$date"].double {
             self.createdAt = NSDate.dateFromInterval(createdAt)

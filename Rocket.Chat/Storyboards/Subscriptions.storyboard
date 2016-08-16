@@ -38,15 +38,15 @@
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TC5-c9-jfq">
-                                                    <rect key="frame" x="15" y="9" width="25" height="25"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="TC5-c9-jfq">
+                                                    <rect key="frame" x="15" y="16" width="13" height="13"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" constant="25" id="VnW-I3-mjH"/>
-                                                        <constraint firstAttribute="width" constant="25" id="ZiX-nk-B9v"/>
+                                                        <constraint firstAttribute="height" constant="13" id="VnW-I3-mjH"/>
+                                                        <constraint firstAttribute="width" constant="13" id="ZiX-nk-B9v"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Y6S-q9-3Bj">
-                                                    <rect key="frame" x="48" y="11" width="508" height="21"/>
+                                                    <rect key="frame" x="36" y="11" width="520" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="JFw-TL-zof"/>
                                                     </constraints>
