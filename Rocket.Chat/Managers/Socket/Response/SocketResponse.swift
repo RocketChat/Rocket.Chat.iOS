@@ -44,14 +44,10 @@ public struct SocketResponse {
     // MARK: Checks
     
     func isError() -> Bool {
-        if msg == .Error {
+        if msg == .Error || result["error"] != nil {
             return true
         }
-        
-        if result["error"] != nil {
-            return true
-        }
-        
+
         return false
     }
 }
