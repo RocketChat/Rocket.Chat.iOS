@@ -151,7 +151,6 @@ extension SocketManager {
         case .Connected: return handleConnectionMessage(result, socket: socket)
         case .Ping: return handlePingMessage(result, socket: socket)
         case .Changed: return handleChangedMessage(result, socket: socket)
-
         case .Error, .Added, .Removed, .Updated, .Unknown: break
         }
         
