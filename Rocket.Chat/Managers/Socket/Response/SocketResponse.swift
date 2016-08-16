@@ -36,7 +36,7 @@ public struct SocketResponse {
         }
         
         if let msg = result["msg"].string {
-            self.msg = ResponseMessage(msg)
+            self.msg = ResponseMessage(rawValue: msg) ?? ResponseMessage.Unknown
         }
     }
     
