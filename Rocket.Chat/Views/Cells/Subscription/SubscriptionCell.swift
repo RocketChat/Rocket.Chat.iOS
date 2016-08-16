@@ -12,6 +12,11 @@ class SubscriptionCell: UITableViewCell {
 
     static let identifier = "CellSubscription"
     
+    internal let iconColorOffline = UIColor(rgb: 0x9AB1BF, alphaVal: 1)
+    internal let iconColorOnline = UIColor(rgb: 0x35AC19, alphaVal: 1)
+    internal let iconColorAway = UIColor(rgb: 0xFCB316, alphaVal: 1)
+    internal let iconColorBusy = UIColor(rgb: 0xD30230, alphaVal: 1)
+
     internal let labelSelectedTextColor = UIColor(rgb: 0xFFFFFF, alphaVal: 1)
     internal let labelReadTextColor = UIColor(rgb: 0x9AB1BF, alphaVal: 1)
     internal let labelUnreadTextColor = UIColor(rgb: 0xFFFFFF, alphaVal: 1)
@@ -31,6 +36,8 @@ class SubscriptionCell: UITableViewCell {
     }
     
     func updateSubscriptionInformatin() {
+        updateIconImage()
+
         labelName.text = subscription.name
         
         if subscription.unread > 0 {
@@ -43,6 +50,20 @@ class SubscriptionCell: UITableViewCell {
         
         labelUnread.alpha = subscription.unread > 0 ? 1 : 0
         labelUnread.text = "\(subscription.unread)"
+    }
+    
+    func updateIconImage() {
+        switch subscription.type {
+        case .Channel:
+            imageViewIcon.image = UIImage(named: "Hashtag")?.imageWithTint(iconColorOffline)
+            break
+        case .DirectMessage:
+            imageViewIcon.image = UIImage(named: "Mention")?.imageWithTint(iconColorOnline)
+            break
+        case .Group:
+            imageViewIcon.image = UIImage(named: "Lock")?.imageWithTint(iconColorOffline)
+            break
+        }
     }
 
 }
