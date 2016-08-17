@@ -13,5 +13,9 @@ extension NSDate {
     public static func dateFromInterval(interval: Double) -> NSDate? {
         return NSDate(timeIntervalSince1970: interval / 1000)
     }
+
+    public static func intervalFromDate(date: NSDate) -> Double {
+        return date.timeIntervalSince1970 * 1000
+    }
     
 }
