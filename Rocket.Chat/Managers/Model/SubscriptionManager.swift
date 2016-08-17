@@ -12,31 +12,37 @@ import RealmSwift
 class SubscriptionManager {
     
     static func updateSubscriptions(auth: Auth, completion: MessageCompletion) {
+        var params: [[String: AnyObject]] = []
+
+        if let lastUpdated = auth.lastSubscriptionFetch {
+            params.append(["$date": NSDate.intervalFromDate(lastUpdated)])
+        }
+
         let request = [
             "msg": "method",
             "method": "subscriptions/get",
-            "params": []
+            "params": params
         ]
 
         SocketManager.send(request) { (response) in
-            guard !response.isError() else {
-                return print(response.result)
-            }
+            guard !response.isError() else { return Log.debug(response.result.string) }
             
             let subscriptions = List<Subscription>()
-            if let result = response.result["result"].array {
-                for obj in result {
-                    let subscription = Subscription(object: obj)
-                    subscription.auth = auth
+            let list = response.result["result"].array
 
-                    subscriptions.append(subscription)
-                }
-            }
+            list?.forEach({ (obj) in
+                let subscription = Subscription(object: obj)
+                subscription.auth = auth
+                subscriptions.append(subscription)
+            })
             
-            Realm.execute() { (realm) in
+            Realm.execute({ (realm) in
+                auth.lastSubscriptionFetch = NSDate()
+
                 realm.add(subscriptions, update: true)
-            }
-            
+                realm.add(auth, update: true)
+            })
+
             completion(response)
         }
     }
@@ -50,18 +56,13 @@ class SubscriptionManager {
         ]
         
         SocketManager.subscribe(request, eventName: eventName) { (response) in
-            guard !response.isError() else {
-                return print(response.result)
-            }
+            guard !response.isError() else { return Log.debug(response.result.string) }
             
             let object = response.result["fields"]["args"][1]
             let subscription = Subscription(object: object)
             subscription.auth = auth
             
-            Realm.execute() { (realm) in
-                realm.add(subscription, update: true)
-            }
-            
+            Realm.update(subscription)
             completion(response)
         }
     }
