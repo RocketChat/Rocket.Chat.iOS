@@ -18,7 +18,6 @@ extension Realm {
         }
     }
     
-    
     // MARK: Mutate
     
     // This method will add or update a Realm's object.

@@ -71,7 +71,7 @@ class SubscriptionSpec: XCTestCase {
         let auth = Auth()
         auth.serverURL = "http://foo.bar.baz"
         
-        let subscription = Subscription(object: object)
+        let subscription = Subscription(dict: object)
         subscription.auth = auth
         
         Realm.execute() { (realm) in

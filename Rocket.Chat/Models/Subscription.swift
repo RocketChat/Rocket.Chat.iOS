@@ -10,8 +10,20 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-class Subscription: BaseModel, ModelMapping {
+enum SubscriptionType: String {
+    case DirectMessage = "d"
+    case Channel = "c"
+    case Group = "p"
+}
+
+class Subscription: BaseModel {
     dynamic var auth: Auth?
+    
+    private dynamic var privateType = SubscriptionType.Channel.rawValue
+    var type: SubscriptionType {
+        get { return SubscriptionType(rawValue: privateType)! }
+        set { privateType = newValue.rawValue }
+    }
     
     dynamic var rid = ""
 
@@ -24,32 +36,43 @@ class Subscription: BaseModel, ModelMapping {
     dynamic var createdAt: NSDate?
     dynamic var lastSeen: NSDate?
     
+    dynamic var otherUserId: String?
+    var directMessageUser: User? {
+        get {
+            guard otherUserId != nil else { return nil }
+            return try! Realm().objects(User.self).filter("identifier = '\(otherUserId!)'").first
+        }
+    }
+    
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
-
+    
 
     // MARK: ModelMapping
-
-    convenience required init(object: JSON) {
-        self.init()
-
-        self.identifier = object["_id"].string!
-        self.rid = object["rid"].string!
-        self.name = object["name"].string!
-        self.unread = object["unread"].int ?? 0
-        self.open = object["open"].bool ?? false
-        self.alert = object["alert"].bool ?? false
-        self.favorite = object["f"].bool ?? false
+    
+    override func update(dict: JSON) {
+        self.identifier = dict["_id"].string!
+        self.rid = dict["rid"].string!
+        self.name = dict["name"].string!
+        self.unread = dict["unread"].int ?? 0
+        self.open = dict["open"].bool ?? false
+        self.alert = dict["alert"].bool ?? false
+        self.favorite = dict["f"].bool ?? false
+        self.privateType = dict["t"].string ?? SubscriptionType.Channel.rawValue
         
-        if let createdAt = object["ts"]["$date"].double {
+        if self.type == .DirectMessage {
+            let userId = dict["u"]["_id"].string
+            self.otherUserId = rid.stringByReplacingOccurrencesOfString(userId!, withString: "")
+        }
+        
+        if let createdAt = dict["ts"]["$date"].double {
             self.createdAt = NSDate.dateFromInterval(createdAt)
         }
         
-        if let lastSeen = object["ls"]["$date"].double {
+        if let lastSeen = dict["ls"]["$date"].double {
             self.lastSeen = NSDate.dateFromInterval(lastSeen)
         }
     }
 }
-
 
 extension Subscription {
     

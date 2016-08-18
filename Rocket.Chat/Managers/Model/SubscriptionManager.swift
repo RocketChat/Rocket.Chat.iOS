@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class SubscriptionManager {
+struct SubscriptionManager {
     
     static func updateSubscriptions(auth: Auth, completion: MessageCompletion) {
         var params: [[String: AnyObject]] = []
@@ -31,7 +31,7 @@ class SubscriptionManager {
             let list = response.result["result"].array
 
             list?.forEach({ (obj) in
-                let subscription = Subscription(object: obj)
+                let subscription = Subscription(dict: obj)
                 subscription.auth = auth
                 subscriptions.append(subscription)
             })
@@ -59,7 +59,7 @@ class SubscriptionManager {
             guard !response.isError() else { return Log.debug(response.result.string) }
             
             let object = response.result["fields"]["args"][1]
-            let subscription = Subscription(object: object)
+            let subscription = Subscription(dict: object)
             subscription.auth = auth
             
             Realm.update(subscription)

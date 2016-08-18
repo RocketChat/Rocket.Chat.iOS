@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-class Message: BaseModel, ModelMapping {
+class Message: BaseModel {
     dynamic var subscription: Subscription!
     
     dynamic var rid = ""
@@ -30,25 +30,23 @@ class Message: BaseModel, ModelMapping {
     
 
     // MARK: ModelMapping
-
-    convenience required init(object: JSON) {
-        self.init()
-
-        self.identifier = object["_id"].string!
-        self.rid = object["rid"].string!
-        self.text = object["msg"].string!
+    
+    override func update(dict: JSON) {
+        self.identifier = dict["_id"].string!
+        self.rid = dict["rid"].string!
+        self.text = dict["msg"].string!
         
-        if let createdAt = object["ts"]["$date"].double {
+        if let createdAt = dict["ts"]["$date"].double {
             self.createdAt = NSDate.dateFromInterval(createdAt)
         }
         
-        if let updatedAt = object["_updatedAt"]["$date"].double {
+        if let updatedAt = dict["_updatedAt"]["$date"].double {
             self.updatedAt = NSDate.dateFromInterval(updatedAt)
         }
         
         let user = User()
-        user.identifier = object["u"]["_id"].string!
-        user.username = object["u"]["username"].string
+        user.identifier = dict["u"]["_id"].string!
+        user.username = dict["u"]["username"].string
         
         Realm.execute { (realm) in
             realm.add(user, update: true)
