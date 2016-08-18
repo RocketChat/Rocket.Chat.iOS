@@ -16,23 +16,30 @@ class SubscriptionsViewController: BaseViewController {
     var assigned = false
     var subscriptions: Results<Subscription>!
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if !assigned {
-            if let auth = AuthManager.isAuthenticated() {
-                assigned = true
-
-                SubscriptionManager.changes(auth, completion: { [unowned self] (response) in
-                    self.tableView.reloadData()
-                })
-            }
-        }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        subscribeSubscriptionsChanges()
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
+    }
+    
+}
+
+extension SubscriptionsViewController {
+    
+    func subscribeSubscriptionsChanges() {
+        guard !assigned else { return }
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        
+        assigned = true
+        
+        UserManager.subscribeAllActive { (response) in }
+        SubscriptionManager.changes(auth, completion: { [unowned self] (response) in
+            self.tableView.reloadData()
+        })
     }
     
 }
