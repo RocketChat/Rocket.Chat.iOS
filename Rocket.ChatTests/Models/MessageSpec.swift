@@ -74,7 +74,7 @@ class MessageSpec: XCTestCase {
             "u": ["_id": "123", "username": "foo"]
         ])
         
-        let message = Message(object: object)
+        let message = Message(dict: object)
 
         Realm.execute() { (realm) in
             realm.add(message)

@@ -21,12 +21,6 @@ class SocketManagerSpec: XCTestCase {
         XCTAssert(response!.isError() == true, "isError() should return true when JSON object contains {'msg': 'error'}")
     }
     
-    func testSocketResponseErrorMethodMsgFailed() {
-        let result = JSON(["msg": "failed", "foo": "bar"])
-        let response = SocketResponse(result, socket: nil)
-        XCTAssert(response!.isError() == true, "isError() should return true when JSON object contains {'msg': 'failed'}")
-    }
-    
     func testSocketResponseErrorObjectError() {
         let result = JSON(["msg": "result", "error": []])
         let response = SocketResponse(result, socket: nil)
