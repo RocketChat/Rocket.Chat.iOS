@@ -13,14 +13,13 @@ import XCTest
 class ResponseMessageSpec: XCTestCase {
 
     func testInitializer() {
-        XCTAssert(ResponseMessage("connected")! == .Connected, "Initializer results into a correct value")
-        XCTAssert(ResponseMessage("ping")! == .Ping, "Initializer results into a correct value")
-        XCTAssert(ResponseMessage("added")! == .Added, "Initializer results into a correct value")
-        XCTAssert(ResponseMessage("changed")! == .Changed, "Initializer results into a correct value")
-        XCTAssert(ResponseMessage("removed")! == .Removed, "Initializer results into a correct value")
-        XCTAssert(ResponseMessage("updated")! == .Updated, "Initializer results into a correct value")
-        XCTAssert(ResponseMessage("foobar")! == .Unknown, "Initializer results into unknown value")
-        XCTAssert(ResponseMessage("")! == .Unknown, "Initializer results into unknown value")
+        XCTAssert(ResponseMessage(rawValue: "connected") == .Connected, "Initializer results into a correct value")
+        XCTAssert(ResponseMessage(rawValue: "ping") == .Ping, "Initializer results into a correct value")
+        XCTAssert(ResponseMessage(rawValue: "added") == .Added, "Initializer results into a correct value")
+        XCTAssert(ResponseMessage(rawValue: "changed") == .Changed, "Initializer results into a correct value")
+        XCTAssert(ResponseMessage(rawValue: "removed") == .Removed, "Initializer results into a correct value")
+        XCTAssert(ResponseMessage(rawValue: "updated") == .Updated, "Initializer results into a correct value")
+        XCTAssert(ResponseMessage(rawValue: "foobar") == nil, "Initializer results into nil value")
     }
 
 }
