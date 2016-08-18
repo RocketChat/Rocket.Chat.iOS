@@ -58,7 +58,20 @@ class SubscriptionCell: UITableViewCell {
             imageViewIcon.image = UIImage(named: "Hashtag")?.imageWithTint(iconColorOffline)
             break
         case .DirectMessage:
-            imageViewIcon.image = UIImage(named: "Mention")?.imageWithTint(iconColorOnline)
+            var color = iconColorOffline
+
+            if let user = subscription.directMessageUser {
+                color = { _ -> UIColor in
+                    switch user.status {
+                    case .Online: return self.iconColorOnline
+                    case .Offline: return self.iconColorOffline
+                    case .Away: return self.iconColorAway
+                    case .Busy: return self.iconColorBusy
+                    }
+                }()
+            }
+
+            imageViewIcon.image = UIImage(named: "Mention")?.imageWithTint(color)
             break
         case .Group:
             imageViewIcon.image = UIImage(named: "Lock")?.imageWithTint(iconColorOffline)

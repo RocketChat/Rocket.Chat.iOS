@@ -10,16 +10,14 @@ import Foundation
 import RealmSwift
 
 
-class MessageManager {
-    
+struct MessageManager {
     static let historySize = 50
-    
 }
 
 
 extension MessageManager {
     
-    static func fetchHistory(subscription: Subscription, completion: MessageCompletion) {
+    static func getHistory(subscription: Subscription, completion: MessageCompletion) {
         let request = [
             "msg": "method",
             "method": "loadHistory",
@@ -35,7 +33,7 @@ extension MessageManager {
             let list = response.result["result"]["messages"].array
             
             list?.forEach({ (obj) in
-                let message = Message(object: obj)
+                let message = Message(dict: obj)
                 message.subscription = subscription
                 messages.append(message)
             })
@@ -57,7 +55,7 @@ extension MessageManager {
             guard !response.isError() else { return Log.debug(response.result.string) }
             
             let object = response.result["fields"]["args"][0]
-            let message = Message(object: object)
+            let message = Message(dict: object)
             message.subscription = subscription
             
             Realm.update(message)

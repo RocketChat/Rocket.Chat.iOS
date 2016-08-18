@@ -25,6 +25,8 @@
 		4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4161333B1D46E32F00E09DA2 /* UserSpec.swift */; };
 		4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4161333D1D46E3AB00E09DA2 /* SubscriptionSpec.swift */; };
 		416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4161333F1D46E6A800E09DA2 /* MessageSpec.swift */; };
+		4162E1531D651A8800AAAE49 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162E1521D651A8800AAAE49 /* UserManager.swift */; };
+		4162E1551D654A7400AAAE49 /* SocketHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162E1541D654A7400AAAE49 /* SocketHandlers.swift */; };
 		4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */; };
 		4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */; };
 		4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB121D2D99960086DAC8 /* BaseViewController.swift */; };
@@ -97,6 +99,8 @@
 		4161333B1D46E32F00E09DA2 /* UserSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserSpec.swift; path = Models/UserSpec.swift; sourceTree = "<group>"; };
 		4161333D1D46E3AB00E09DA2 /* SubscriptionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionSpec.swift; path = Models/SubscriptionSpec.swift; sourceTree = "<group>"; };
 		4161333F1D46E6A800E09DA2 /* MessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageSpec.swift; path = Models/MessageSpec.swift; sourceTree = "<group>"; };
+		4162E1521D651A8800AAAE49 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = Managers/Model/UserManager.swift; sourceTree = "<group>"; };
+		4162E1541D654A7400AAAE49 /* SocketHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketHandlers.swift; path = Managers/Socket/Response/SocketHandlers.swift; sourceTree = "<group>"; };
 		4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectServerViewController.swift; path = Controllers/Auth/ConnectServerViewController.swift; sourceTree = "<group>"; };
 		4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Auth.storyboard; path = Storyboards/Auth.storyboard; sourceTree = "<group>"; };
 		4174CB121D2D99960086DAC8 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Controllers/Base/BaseViewController.swift; sourceTree = "<group>"; };
@@ -182,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				414A1FFB1D46395900093E10 /* SocketResponse.swift */,
+				4162E1541D654A7400AAAE49 /* SocketHandlers.swift */,
 				414A1FF51D46320F00093E10 /* ResponseMessage.swift */,
 			);
 			name = Response;
@@ -193,6 +198,7 @@
 				41552F651D30308C0081438D /* AuthManager.swift */,
 				41DAE93B1D318E280098E068 /* SubscriptionManager.swift */,
 				41DC7A1C1D38471700896FC0 /* MessageManager.swift */,
+				4162E1521D651A8800AAAE49 /* UserManager.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -784,6 +790,7 @@
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				41BA89301D303F9B00CBF526 /* BaseModel.swift in Sources */,
 				419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */,
+				4162E1551D654A7400AAAE49 /* SocketHandlers.swift in Sources */,
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
 				4159720C1D3DB854002258F4 /* Email.swift in Sources */,
@@ -798,6 +805,7 @@
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
 				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,
+				4162E1531D651A8800AAAE49 /* UserManager.swift in Sources */,
 				41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */,
 				41E991D41D343A9F00BDDCA8 /* NSDateExtension.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,

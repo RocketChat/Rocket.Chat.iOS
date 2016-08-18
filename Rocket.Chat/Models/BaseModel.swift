@@ -11,13 +11,29 @@ import RealmSwift
 import SwiftyJSON
 
 protocol ModelMapping {
-    init(object: JSON)
+    func update(dict: JSON)
 }
 
-class BaseModel: Object {
+class BaseModel: Object, ModelMapping {
     dynamic var identifier = ""
     
     override static func primaryKey() -> String? {
         return "identifier"
     }
+    
+    
+    // MARK: ModelMapping
+    
+    convenience init(_ identifier: String) {
+        self.init()
+    }
+    
+    convenience init(dict: JSON) {
+        self.init()
+        self.update(dict)
+    }
+    
+    func update(dict: JSON) {}
+
 }
+
