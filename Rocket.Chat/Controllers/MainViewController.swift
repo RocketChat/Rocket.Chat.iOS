@@ -31,6 +31,11 @@ class MainViewController: BaseViewController {
                 self.labelAuthenticationStatus.text = "User is authenticated with token \(auth.token) on \(auth.serverURL)."
                 
                 SubscriptionManager.updateSubscriptions(auth, completion: { (response) in
+                    // TODO: Move it to somewhere else
+                    UserManager.changes()
+                    SubscriptionManager.changes(auth)
+                    
+                    // Open chat
                     let storyboardChat = UIStoryboard(name: "Chat", bundle: NSBundle.mainBundle())
                     let controller = storyboardChat.instantiateInitialViewController()
                     let application = UIApplication.sharedApplication()
