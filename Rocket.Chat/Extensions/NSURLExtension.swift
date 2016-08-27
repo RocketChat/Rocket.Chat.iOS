@@ -10,7 +10,7 @@ import Foundation
 
 extension NSURL {
     
-    func socketURL() -> NSURL {
+    func socketURL() -> NSURL? {
         let pathComponents = self.pathComponents ?? []
         let components = NSURLComponents()
         components.scheme = "wss"
@@ -22,7 +22,7 @@ extension NSURL {
             newURL = newURL?.URLByAppendingPathComponent("websocket")
         }
         
-        return newURL ?? self
+        return newURL
     }
     
 }
