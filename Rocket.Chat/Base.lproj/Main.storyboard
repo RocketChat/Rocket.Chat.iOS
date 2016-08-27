@@ -23,7 +23,7 @@
                                 </constraints>
                                 <state key="normal" title="Connect to a new server"/>
                                 <connections>
-                                    <segue destination="HO0-43-1Ue" kind="presentation" id="lwm-uO-QRg"/>
+                                    <segue destination="HO0-43-1Ue" kind="presentation" identifier="Auth" id="lwm-uO-QRg"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvI-Ne-wdZ">
