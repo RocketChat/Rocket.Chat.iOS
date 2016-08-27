@@ -68,6 +68,7 @@ class ChatViewController: BaseViewController {
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
             self.collectionView.reloadData()
             self.collectionView.layoutIfNeeded()
+            self.scrollToBottom()
         }
         
         MessageManager.getHistory(subscription) { [unowned self] (response) in
