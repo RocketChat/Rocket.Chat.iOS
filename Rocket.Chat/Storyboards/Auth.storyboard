@@ -20,7 +20,7 @@
             </objects>
             <point key="canvasLocation" x="340" y="674"/>
         </scene>
-        <!--Server-->
+        <!--Connect Server View Controller-->
         <scene sceneID="7wB-Dp-Aom">
             <objects>
                 <viewController id="rJd-W9-gC3" customClass="ConnectServerViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
@@ -98,7 +98,7 @@
                             <constraint firstItem="x11-i1-wfS" firstAttribute="centerX" secondItem="hnM-NP-iCl" secondAttribute="centerX" id="e6h-v0-08M"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Server" id="htX-6r-Jqg"/>
+                    <navigationItem key="navigationItem" id="htX-6r-Jqg"/>
                     <connections>
                         <outlet property="textFieldServerURL" destination="0ea-ze-woy" id="XkR-cW-Db7"/>
                         <segue destination="hgH-Tx-WGh" kind="show" identifier="Auth" id="0nu-Bn-V6H"/>
