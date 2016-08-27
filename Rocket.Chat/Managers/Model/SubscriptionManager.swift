@@ -47,7 +47,7 @@ struct SubscriptionManager {
         }
     }
     
-    static func changes(auth: Auth, completion: MessageCompletion) {
+    static func changes(auth: Auth) {
         let eventName = "\(auth.userId!)/subscriptions-changed"
         let request = [
             "msg": "sub",
@@ -63,7 +63,6 @@ struct SubscriptionManager {
             subscription.auth = auth
             
             Realm.update(subscription)
-            completion(response)
         }
     }
     

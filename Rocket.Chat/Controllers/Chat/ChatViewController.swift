@@ -13,6 +13,7 @@ class ChatViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
 
+    var messagesToken: NotificationToken!
     var messages: Results<Message>!
     var subscription: Subscription! {
         didSet {
@@ -58,8 +59,17 @@ class ChatViewController: BaseViewController {
     // MARK: Subscription
     
     private func updateSubscriptionInfo() {
+        if let token = messagesToken {
+            token.stop()
+        }
+
         title = subscription?.name
         messages = subscription?.messages.sorted("createdAt", ascending: true)
+        messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
+            self.collectionView.reloadData()
+            self.collectionView.layoutIfNeeded()
+            self.scrollToBottom()
+        }
         
         MessageManager.getHistory(subscription) { [unowned self] (response) in
             self.messages = self.subscription?.fetchMessages()
@@ -68,12 +78,7 @@ class ChatViewController: BaseViewController {
             self.scrollToBottom()
         }
         
-        MessageManager.changes(subscription) { [unowned self] (response) in
-            self.messages = self.subscription?.fetchMessages()
-            self.collectionView.reloadData()
-            self.collectionView.layoutIfNeeded()
-            self.scrollToBottom(true)
-        }
+        MessageManager.changes(subscription)
     }
     
     
