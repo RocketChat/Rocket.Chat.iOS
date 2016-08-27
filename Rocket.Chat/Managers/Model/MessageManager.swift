@@ -43,7 +43,7 @@ extension MessageManager {
         }
     }
     
-    static func changes(subscription: Subscription, completion: MessageCompletion) {
+    static func changes(subscription: Subscription) {
         let eventName = "\(subscription.rid)"
         let request = [
             "msg": "sub",
@@ -59,7 +59,6 @@ extension MessageManager {
             message.subscription = subscription
             
             Realm.update(message)
-            completion(response)
         }
     }
 
