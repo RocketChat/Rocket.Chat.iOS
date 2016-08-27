@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  Rocket.Chat
+
+  Created by Rafael K. Streit on 8/27/16.
+  Copyright © 2016 Rocket.Chat. All rights reserved.
+*/
+
+
+"global.ok" = "OK";
+
+"alert.connection.invalid_url.title" = "Oops!";
+"alert.connection.invalid_url.message" = "The URL you entered is invalid. Check it and try again, please!";
