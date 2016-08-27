@@ -14,11 +14,13 @@ class SubscriptionsViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var assigned = false
-    var subscriptions: Results<Subscription>!
+    var subscriptions: Results<Subscription>?
+    var subscriptionsToken: NotificationToken?
+    var usersToken: NotificationToken?
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        subscribeSubscriptionsChanges()
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        subscribeModelChanges()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -30,16 +32,19 @@ class SubscriptionsViewController: BaseViewController {
 
 extension SubscriptionsViewController {
     
-    func subscribeSubscriptionsChanges() {
+    func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>) {
+        tableView?.reloadData()
+    }
+    
+    func subscribeModelChanges() {
         guard !assigned else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
         
         assigned = true
         
-        UserManager.subscribeAllActive { (response) in }
-        SubscriptionManager.changes(auth, completion: { [unowned self] (response) in
-            self.tableView.reloadData()
-        })
+        subscriptions = auth.subscriptions.sorted("lastSeen", ascending: false)
+        subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
+        usersToken = try! Realm().objects(User.self).addNotificationBlock(handleModelUpdates)
     }
     
 }
@@ -47,16 +52,11 @@ extension SubscriptionsViewController {
 extension SubscriptionsViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let auth = AuthManager.isAuthenticated() {
-            subscriptions = auth.subscriptions.sorted("lastSeen", ascending: false)
-            return subscriptions.count
-        }
-        
-        return 0
+        return subscriptions?.count ?? 0
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let subscription = subscriptions[indexPath.row]
+        let subscription = subscriptions![indexPath.row]
 
         let cell = tableView.dequeueReusableCellWithIdentifier(SubscriptionCell.identifier) as! SubscriptionCell
         cell.subscription = subscription
@@ -70,7 +70,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
 extension SubscriptionsViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let subscription = subscriptions[indexPath.row]
+        let subscription = subscriptions![indexPath.row]
         ChatViewController.sharedInstance()?.subscription = subscription
         dismissViewControllerAnimated(true, completion: nil)
     }

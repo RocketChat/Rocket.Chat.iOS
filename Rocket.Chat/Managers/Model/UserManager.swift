@@ -10,18 +10,14 @@ import Foundation
 
 struct UserManager {
     
-    // This needs to be called just once
-    static func subscribeAllActive(completion: MessageCompletion) {
+    static func changes() {
         let request = [
             "msg": "sub",
             "name": "activeUsers",
             "params": []
         ]
         
-        SocketManager.send(request) { (response) in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-            completion(response)
-        }
+        SocketManager.send(request) { (response) in }
     }
     
 }
