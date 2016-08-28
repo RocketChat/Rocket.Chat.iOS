@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-let kDefaultNavigationBarHeight = CGFloat(44)
 
 class BaseNavigationController: UINavigationController {
     
