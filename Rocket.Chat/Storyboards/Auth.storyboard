@@ -33,7 +33,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqF-Ks-juL">
-                                <rect key="frame" x="25" y="192.5" width="550" height="215"/>
+                                <rect key="frame" x="25" y="193" width="550" height="215"/>
                                 <subviews>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x11-i1-wfS">
                                         <rect key="frame" x="0.0" y="85" width="550" height="130"/>
@@ -92,8 +92,8 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="zMq-o9-J2o">
-                                        <rect key="frame" x="150.5" y="14" width="249" height="49"/>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="zMq-o9-J2o">
+                                        <rect key="frame" x="151" y="14" width="249" height="49"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="49" id="bd6-M5-tHA"/>
                                             <constraint firstAttribute="width" constant="249" id="zSO-6I-lba"/>
@@ -167,7 +167,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0078431372550000003" green="0.14117647059999999" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="yNg-d5-raw" firstAttribute="centerX" secondItem="JO1-X2-MzO" secondAttribute="centerX" id="Clg-Sg-TPw"/>
                             <constraint firstItem="yNg-d5-raw" firstAttribute="centerY" secondItem="JO1-X2-MzO" secondAttribute="centerY" id="QEy-Oi-BLN"/>
