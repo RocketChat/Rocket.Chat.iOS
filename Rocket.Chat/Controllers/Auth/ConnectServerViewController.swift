@@ -17,13 +17,11 @@ class ConnectServerViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let navBar = navigationController?.navigationBar
-        navBar?.setBackgroundImage(UIImage(), forBarMetrics: .Default)
-        navBar?.shadowImage = UIImage()
-        navBar?.backgroundColor = UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0)
-        navBar?.translucent = true
-        
+
+        let nav = navigationController as! BaseNavigationController
+        nav.setTransparentTheme()
+        nav.navigationBar.barStyle = .Black
+
         textFieldServerURL.placeholder = defaultURL
     }
     
