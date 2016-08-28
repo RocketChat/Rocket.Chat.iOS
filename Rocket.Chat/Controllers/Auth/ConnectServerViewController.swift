@@ -13,6 +13,7 @@ class ConnectServerViewController: BaseViewController {
 
     internal let defaultURL = "https://demo.rocket.chat"
     internal var connecting = false
+    internal var serverURL: NSURL!
     
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldServerURL: UITextField!
@@ -54,12 +55,19 @@ class ConnectServerViewController: BaseViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "Auth" {
+            let controller = segue.destinationViewController as! AuthViewController
+            controller.serverURL = serverURL
+        }
+    }
+    
     
     // MARK: Keyboard Handlers
     
     func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            visibleViewBottomConstraint.constant = CGRectGetHeight(keyboardSize) + kDefaultNavigationBarHeight
+            visibleViewBottomConstraint.constant = CGRectGetHeight(keyboardSize)
         }
     }
     
@@ -93,6 +101,8 @@ class ConnectServerViewController: BaseViewController {
         connecting = true
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
+        
+        serverURL = socketURL
         
         SocketManager.connect(socketURL) { [unowned self] (socket, connected) in
             if connected {

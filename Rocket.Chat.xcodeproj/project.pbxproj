@@ -272,6 +272,7 @@
 		4174CB0B1D2D99170086DAC8 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				41DF76EB1D2C50720028DBF8 /* LaunchScreen.storyboard */,
 				41DF76E61D2C50710028DBF8 /* Main.storyboard */,
 				4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */,
 				41E2F9FE1D414DE800238DFD /* Chat.storyboard */,
@@ -395,7 +396,6 @@
 				4161332F1D46CA2800E09DA2 /* Views */,
 				4174CB0A1D2D990F0086DAC8 /* Controllers */,
 				41DF76E21D2C50710028DBF8 /* AppDelegate.swift */,
-				41DF76EB1D2C50720028DBF8 /* LaunchScreen.storyboard */,
 				4174CB201D2DD4690086DAC8 /* Rocket.Chat-Bridge.h */,
 				41DF76E91D2C50710028DBF8 /* Assets.xcassets */,
 				41DF76EE1D2C50720028DBF8 /* Info.plist */,

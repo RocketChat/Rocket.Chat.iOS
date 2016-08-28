@@ -11,13 +11,62 @@ import UIKit
 
 class AuthViewController: BaseViewController {
     
+    var serverURL: NSURL!
+    
+    @IBOutlet weak var labelHost: UILabel!
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
+    @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        labelHost.text = serverURL.host!
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(keyboardWillShow(_:)),
+            name: UIKeyboardWillShowNotification,
+            object: nil
+        )
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(keyboardWillHide(_:)),
+            name: UIKeyboardWillHideNotification,
+            object: nil
+        )
+        
+        textFieldUsername.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(true)
+        NSNotificationCenter.defaultCenter().removeObserver(self)
+    }
+    
+    
+    // MARK: Keyboard Handlers
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            visibleViewBottomConstraint.constant = CGRectGetHeight(keyboardSize)
+        }
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        visibleViewBottomConstraint.constant = 0
+    }
     
     
     // MARK: IBAction
     
-    @IBAction func buttonAuthenticatePressed(sender: AnyObject) {
+    func authenticate() {
         let email = textFieldUsername.text!
         let password = textFieldPassword.text!
         
@@ -30,4 +79,21 @@ class AuthViewController: BaseViewController {
         }
     }
 
+}
+
+
+extension AuthViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if textField == textFieldUsername {
+            textFieldPassword.becomeFirstResponder()
+        }
+        
+        if textField == textFieldPassword {
+            authenticate()
+        }
+        
+        return true
+    }
+    
 }
