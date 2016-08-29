@@ -11,6 +11,7 @@ import UIKit
 
 class AuthViewController: BaseViewController {
     
+    internal var connecting = false
     var serverURL: NSURL!
     
     @IBOutlet weak var labelHost: UILabel!
@@ -18,6 +19,7 @@ class AuthViewController: BaseViewController {
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +72,17 @@ class AuthViewController: BaseViewController {
         let email = textFieldUsername.text!
         let password = textFieldPassword.text!
         
+        textFieldUsername.alpha = 0.5
+        textFieldPassword.alpha = 0.5
+        connecting = true
+        activityIndicator.startAnimating()
+        
         AuthManager.auth(email, password: password) { [unowned self] (response) in
+            self.textFieldUsername.alpha = 1
+            self.textFieldPassword.alpha = 1
+            self.connecting = false
+            self.activityIndicator.stopAnimating()
+
             if response.isError() {
                 
             } else {
@@ -84,7 +96,15 @@ class AuthViewController: BaseViewController {
 
 extension AuthViewController: UITextFieldDelegate {
     
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        return !connecting
+    }
+    
     func textFieldShouldReturn(textField: UITextField) -> Bool {
+        if connecting {
+            return false
+        }
+        
         if textField == textFieldUsername {
             textFieldPassword.becomeFirstResponder()
         }
