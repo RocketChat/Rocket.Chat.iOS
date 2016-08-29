@@ -202,11 +202,20 @@
                                                             <constraint firstAttribute="height" constant="1" id="OvK-jn-LH6"/>
                                                         </constraints>
                                                     </view>
+                                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="EG7-WS-QYQ">
+                                                        <rect key="frame" x="510" y="68" width="25" height="25"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="25" id="3ir-y0-4hD"/>
+                                                            <constraint firstAttribute="height" constant="25" id="Vu4-86-Vvf"/>
+                                                        </constraints>
+                                                    </activityIndicatorView>
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstItem="A9R-8V-1bd" firstAttribute="leading" secondItem="CS6-d2-2aP" secondAttribute="leading" constant="15" id="4j9-N2-Uzg"/>
                                                     <constraint firstAttribute="trailing" secondItem="geT-X2-1jv" secondAttribute="trailing" constant="15" id="Aj3-Co-FaP"/>
+                                                    <constraint firstItem="EG7-WS-QYQ" firstAttribute="top" secondItem="ygD-Jl-GJ5" secondAttribute="bottom" constant="18" id="HQa-3A-uM1"/>
                                                     <constraint firstItem="geT-X2-1jv" firstAttribute="top" secondItem="ygD-Jl-GJ5" secondAttribute="bottom" constant="47" id="Hff-Ag-zXg"/>
                                                     <constraint firstItem="ygD-Jl-GJ5" firstAttribute="top" secondItem="CS6-d2-2aP" secondAttribute="top" constant="15" id="LMm-ij-8zr"/>
                                                     <constraint firstItem="FLj-IP-rRC" firstAttribute="top" secondItem="CS6-d2-2aP" secondAttribute="top" constant="48" id="S1w-SH-ZdB"/>
@@ -217,6 +226,7 @@
                                                     <constraint firstAttribute="trailing" secondItem="FLj-IP-rRC" secondAttribute="trailing" constant="15" id="ruW-fo-6mE"/>
                                                     <constraint firstAttribute="trailing" secondItem="ygD-Jl-GJ5" secondAttribute="trailing" constant="15" id="shV-Mu-C4k"/>
                                                     <constraint firstAttribute="trailing" secondItem="A9R-8V-1bd" secondAttribute="trailing" constant="15" id="stH-Z3-GD4"/>
+                                                    <constraint firstAttribute="trailing" secondItem="EG7-WS-QYQ" secondAttribute="trailing" constant="15" id="tJK-pI-wSJ"/>
                                                     <constraint firstItem="FLj-IP-rRC" firstAttribute="leading" secondItem="CS6-d2-2aP" secondAttribute="leading" constant="15" id="tvn-0O-wdH"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -260,6 +270,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Authentication" id="Lfp-fv-5Pu"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="EG7-WS-QYQ" id="RjP-38-HEH"/>
                         <outlet property="labelHost" destination="N47-mf-4Qa" id="lvK-4y-sFt"/>
                         <outlet property="textFieldPassword" destination="A9R-8V-1bd" id="Ayd-9m-hp2"/>
                         <outlet property="textFieldUsername" destination="ygD-Jl-GJ5" id="HM8-dg-2wc"/>
