@@ -9,6 +9,21 @@
 import Foundation
 import UIKit
 
+
 class BaseNavigationController: UINavigationController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    func setTransparentTheme() {
+        let navBar = self.navigationBar
+        navBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navBar.shadowImage = UIImage()
+        navBar.backgroundColor = UIColor.clearColor()
+        navBar.translucent = true
+        navBar.tintColor = UIColor.whiteColor()
+        navBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+    }
     
 }

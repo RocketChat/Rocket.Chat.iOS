@@ -7,7 +7,12 @@
 */
 
 
+// Global
 "global.ok" = "OK";
 
+// Alerts
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "The URL you entered is invalid. Check it and try again, please!";
+
+// Auth
+"auth.connect.button_connect" = "Connect";

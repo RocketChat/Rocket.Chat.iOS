@@ -14,6 +14,14 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var labelAuthenticationStatus: UILabel!
     @IBOutlet weak var buttonConnect: UIButton!
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if AuthManager.isAuthenticated() == nil {
+            performSegueWithIdentifier("Auth", sender: nil)
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         
