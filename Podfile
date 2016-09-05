@@ -4,6 +4,10 @@ platform :ios, '9.0'
 use_frameworks!
 
 def shared_pods
+  # Crash Report
+  pod 'Fabric'
+  pod 'Crashlytics'
+
   # Code utilities
   pod 'SwiftyJSON'
 
