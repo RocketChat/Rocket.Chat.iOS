@@ -1,4 +1,7 @@
 PODS:
+  - Crashlytics (3.8.0):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.8)
   - Realm (1.0.2):
     - Realm/Headers (= 1.0.2)
   - Realm/Headers (1.0.2)
@@ -12,6 +15,8 @@ PODS:
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
+  - Crashlytics
+  - Fabric
   - RealmSwift
   - SDWebImage (~> 3.8)
   - SideMenu
@@ -19,6 +24,8 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
+  Crashlytics: 8601d9c74a4c4d28f3e7f408bf4c0e490c70e8b4
+  Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   Realm: 9d5c46a4d7d27958530a8dfc58f63a99e5c2cba3
   RealmSwift: 82f3ac5e24530143dddfde2033acc0d308f27d96
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
@@ -26,6 +33,6 @@ SPEC CHECKSUMS:
   Starscream: d662732354b40dd19ed1ece3e3c44c80b536b83c
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 80b0193a262acd4e4b7fbacfdcc5389d240d4792
+PODFILE CHECKSUM: dfc922ce96f96ee9b4f5bfab07cc94c410085a3d
 
 COCOAPODS: 1.0.1
