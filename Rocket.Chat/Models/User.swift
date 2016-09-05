@@ -32,7 +32,7 @@ class User: BaseModel {
     // MARK: ModelMapping
     
     override func update(dict: JSON) {
-        if let identifier = dict["_id"].string {
+        if self.identifier == nil {
             self.identifier = identifier
         }
         

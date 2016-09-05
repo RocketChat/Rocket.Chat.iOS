@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import SwiftyJSON
 
 extension Realm {
     
@@ -18,6 +19,22 @@ extension Realm {
         }
     }
     
+    static func getOrCreate<T: BaseModel>(model: T.Type, primaryKey: String, values: JSON) -> T {
+        var object: T!
+
+        self.execute { (realm) in
+            object = realm.objectForPrimaryKey(model, key: primaryKey)
+            
+            if object == nil {
+                object = T()
+                object.update(values)
+            }
+        }
+        
+        return object
+    }
+    
+
     // MARK: Mutate
     
     // This method will add or update a Realm's object.
