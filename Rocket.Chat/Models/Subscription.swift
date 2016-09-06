@@ -50,7 +50,10 @@ class Subscription: BaseModel {
     // MARK: ModelMapping
     
     override func update(dict: JSON) {
-        self.identifier = dict["_id"].string!
+        if self.identifier == nil {
+            self.identifier = dict["_id"].string!
+        }
+
         self.rid = dict["rid"].string!
         self.name = dict["name"].string!
         self.unread = dict["unread"].int ?? 0

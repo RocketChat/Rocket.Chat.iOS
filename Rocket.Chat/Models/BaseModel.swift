@@ -15,7 +15,7 @@ protocol ModelMapping {
 }
 
 class BaseModel: Object, ModelMapping {
-    dynamic var identifier = ""
+    dynamic var identifier: String?
     
     override static func primaryKey() -> String? {
         return "identifier"

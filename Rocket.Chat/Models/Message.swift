@@ -32,7 +32,10 @@ class Message: BaseModel {
     // MARK: ModelMapping
     
     override func update(dict: JSON) {
-        self.identifier = dict["_id"].string!
+        if self.identifier == nil {
+            self.identifier = dict["_id"].string!
+        }
+
         self.rid = dict["rid"].string!
         self.text = dict["msg"].string!
         
@@ -44,14 +47,8 @@ class Message: BaseModel {
             self.updatedAt = NSDate.dateFromInterval(updatedAt)
         }
         
-        let user = User()
-        user.identifier = dict["u"]["_id"].string!
-        user.username = dict["u"]["username"].string
-        
-        Realm.execute { (realm) in
-            realm.add(user, update: true)
+        if let userId = dict["u"]["_id"].string {
+            self.user = Realm.getOrCreate(User.self, primaryKey: userId, values: dict["u"])
         }
-        
-        self.user = user
     }
 }
