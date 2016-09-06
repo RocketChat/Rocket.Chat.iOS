@@ -24,7 +24,7 @@ class User: BaseModel {
 
     private dynamic var privateStatus = UserStatus.Offline.rawValue
     var status: UserStatus {
-        get { return UserStatus(rawValue: privateStatus)! }
+        get { return UserStatus(rawValue: privateStatus) ?? UserStatus.Offline }
         set { privateStatus = newValue.rawValue }
     }
 
