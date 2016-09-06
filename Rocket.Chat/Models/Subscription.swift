@@ -21,7 +21,7 @@ class Subscription: BaseModel {
     
     private dynamic var privateType = SubscriptionType.Channel.rawValue
     var type: SubscriptionType {
-        get { return SubscriptionType(rawValue: privateType)! }
+        get { return SubscriptionType(rawValue: privateType) ?? SubscriptionType.Group }
         set { privateType = newValue.rawValue }
     }
     
