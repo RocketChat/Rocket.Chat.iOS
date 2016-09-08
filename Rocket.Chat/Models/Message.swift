@@ -36,8 +36,8 @@ class Message: BaseModel {
             self.identifier = dict["_id"].string!
         }
 
-        self.rid = dict["rid"].string!
-        self.text = dict["msg"].string!
+        self.rid = dict["rid"].string ?? ""
+        self.text = dict["msg"].string ?? ""
         
         if let createdAt = dict["ts"]["$date"].double {
             self.createdAt = NSDate.dateFromInterval(createdAt)
