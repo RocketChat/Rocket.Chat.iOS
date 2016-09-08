@@ -54,8 +54,8 @@ class Subscription: BaseModel {
             self.identifier = dict["_id"].string!
         }
 
-        self.rid = dict["rid"].string!
-        self.name = dict["name"].string!
+        self.rid = dict["rid"].string ?? ""
+        self.name = dict["name"].string ?? ""
         self.unread = dict["unread"].int ?? 0
         self.open = dict["open"].bool ?? false
         self.alert = dict["alert"].bool ?? false
