@@ -21,7 +21,7 @@ class Subscription: BaseModel {
     
     private dynamic var privateType = SubscriptionType.Channel.rawValue
     var type: SubscriptionType {
-        get { return SubscriptionType(rawValue: privateType)! }
+        get { return SubscriptionType(rawValue: privateType) ?? SubscriptionType.Group }
         set { privateType = newValue.rawValue }
     }
     
@@ -54,8 +54,8 @@ class Subscription: BaseModel {
             self.identifier = dict["_id"].string!
         }
 
-        self.rid = dict["rid"].string!
-        self.name = dict["name"].string!
+        self.rid = dict["rid"].string ?? ""
+        self.name = dict["name"].string ?? ""
         self.unread = dict["unread"].int ?? 0
         self.open = dict["open"].bool ?? false
         self.alert = dict["alert"].bool ?? false
