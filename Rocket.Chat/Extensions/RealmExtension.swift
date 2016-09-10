@@ -27,8 +27,9 @@ extension Realm {
             
             if object == nil {
                 object = T()
-                object.update(values)
             }
+
+            object.update(values)
         }
         
         return object
