@@ -42,6 +42,7 @@ class ChatTextCell: UICollectionViewCell {
         labelDate.text = formatter.stringFromDate(message.createdAt!)
         labelUsername.text = message.user?.username
         labelText.text = message.text
+        labelText.sizeToFit()
     }
     
 }
