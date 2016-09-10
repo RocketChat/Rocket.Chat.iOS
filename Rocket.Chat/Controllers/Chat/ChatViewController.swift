@@ -12,6 +12,7 @@ import RealmSwift
 class ChatViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
@@ -63,15 +64,21 @@ class ChatViewController: BaseViewController {
             token.stop()
         }
 
+        activityIndicator.startAnimating()
         title = subscription?.name
         messages = subscription?.messages.sorted("createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
+            if self.messages.count > 0 {
+                self.activityIndicator.stopAnimating()
+            }
+
             self.collectionView.reloadData()
             self.collectionView.layoutIfNeeded()
             self.scrollToBottom()
         }
         
         MessageManager.getHistory(subscription) { [unowned self] (response) in
+            self.activityIndicator.stopAnimating()
             self.messages = self.subscription?.fetchMessages()
             self.collectionView.reloadData()
             self.collectionView.layoutIfNeeded()
