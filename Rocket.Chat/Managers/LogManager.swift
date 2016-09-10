@@ -11,7 +11,7 @@ import Foundation
 class Log {
     
     static func debug(text: String?) {
-        NSLog(text ?? "")
+        NSLog("[Debug] %@ ", text ?? "")
     }
     
 }
