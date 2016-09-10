@@ -23,6 +23,7 @@ class ChatTextCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
+            imageView.layer.masksToBounds = true
             imageView.layer.cornerRadius = 4
         }
     }
