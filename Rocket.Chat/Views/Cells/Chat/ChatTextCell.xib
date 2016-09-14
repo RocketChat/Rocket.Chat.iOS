@@ -32,31 +32,32 @@
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W3N-Wt-YdI">
-                        <rect key="frame" x="5" y="7" width="35" height="35"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="35" id="DdA-Li-C1A"/>
-                            <constraint firstAttribute="height" constant="35" id="o52-MN-2VT"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.94999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="QYQ-rY-d5g">
                         <rect key="frame" x="47" y="23" width="295" height="17"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dHe-RL-dFU" customClass="AvatarView" customModule="Rocket_Chat" customModuleProvider="target">
+                        <rect key="frame" x="5" y="5" width="35" height="35"/>
+                        <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="35" id="0XY-Gd-C8z"/>
+                            <constraint firstAttribute="width" constant="35" id="Cny-FU-tGi"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
             <constraints>
                 <constraint firstItem="40K-VI-9eL" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="2" id="4Ig-wg-cUQ"/>
+                <constraint firstItem="dHe-RL-dFU" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="5" id="4Zr-IT-efr"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="2" id="796-8s-tZB"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="7" id="9Lf-Mp-5cE"/>
+                <constraint firstItem="QYQ-rY-d5g" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="GJl-aI-jlO"/>
                 <constraint firstAttribute="trailing" secondItem="pvK-41-cNi" secondAttribute="trailing" priority="900" constant="2" id="OVZ-S3-Gij"/>
-                <constraint firstItem="QYQ-rY-d5g" firstAttribute="leading" secondItem="W3N-Wt-YdI" secondAttribute="trailing" constant="7" id="fhA-i9-hlF"/>
-                <constraint firstItem="W3N-Wt-YdI" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="7" id="j3H-wD-IHM"/>
-                <constraint firstItem="40K-VI-9eL" firstAttribute="leading" secondItem="W3N-Wt-YdI" secondAttribute="trailing" constant="7" id="jMw-Dc-8kQ"/>
-                <constraint firstItem="W3N-Wt-YdI" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="5" id="k18-w2-eXR"/>
+                <constraint firstItem="40K-VI-9eL" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="evW-4R-3TS"/>
+                <constraint firstItem="dHe-RL-dFU" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="5" id="myV-aY-DuJ"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="2" id="nFi-sf-ZfI"/>
                 <constraint firstAttribute="bottom" secondItem="QYQ-rY-d5g" secondAttribute="bottom" constant="3" id="oPu-ur-XHH"/>
                 <constraint firstItem="QYQ-rY-d5g" firstAttribute="top" secondItem="pvK-41-cNi" secondAttribute="bottom" id="q6m-EB-Kde"/>
@@ -71,7 +72,7 @@
                 </mask>
             </variation>
             <connections>
-                <outlet property="imageView" destination="W3N-Wt-YdI" id="lJV-ES-eHo"/>
+                <outlet property="avatarView" destination="dHe-RL-dFU" id="csc-UN-OHb"/>
                 <outlet property="labelDate" destination="pvK-41-cNi" id="0kK-Vz-QXR"/>
                 <outlet property="labelText" destination="QYQ-rY-d5g" id="Na3-Lw-iPE"/>
                 <outlet property="labelUsername" destination="40K-VI-9eL" id="OIn-tg-dp0"/>

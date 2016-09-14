@@ -21,12 +21,6 @@ class Message: BaseModel {
     dynamic var text = ""
 
     var mentions = List<Mention>()
-
-    func userAvatarURL() -> NSURL? {
-        guard let username = user?.username else { return nil }
-        guard let serverURL = NSURL(string: subscription.auth!.serverURL) else { return nil }
-        return NSURL(string: "http://\(serverURL.host!)/avatar/\(username).jpg")!
-    }
     
 
     // MARK: ModelMapping

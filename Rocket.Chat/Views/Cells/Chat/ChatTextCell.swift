@@ -20,14 +20,8 @@ class ChatTextCell: UICollectionViewCell {
             updateMessageInformation()
         }
     }
-    
-    @IBOutlet weak var imageView: UIImageView! {
-        didSet {
-            imageView.layer.masksToBounds = true
-            imageView.layer.cornerRadius = 4
-        }
-    }
 
+    @IBOutlet weak var avatarView: AvatarView!
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelText: UILabel!
@@ -36,10 +30,7 @@ class ChatTextCell: UICollectionViewCell {
         let formatter = NSDateFormatter()
         formatter.timeStyle = .ShortStyle
 
-        if let imageURL = message.userAvatarURL() {
-            imageView.sd_setImageWithURL(imageURL)
-        }
-
+        avatarView.user = message.user
         labelDate.text = formatter.stringFromDate(message.createdAt!)
         labelUsername.text = message.user?.username
         labelText.text = message.text
