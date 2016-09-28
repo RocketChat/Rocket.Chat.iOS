@@ -22,8 +22,25 @@ class AvatarView: UIView {
         }
     }
     
+    @IBOutlet weak var view: AvatarView!
     @IBOutlet weak var labelInitials: UILabel!
     @IBOutlet weak var imageView: UIImageView!
+    
+    // TODO: Refactor this code to a base view
+    required init(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)!
+        Bundle.main.loadNibNamed("AvatarView", owner: self, options: nil)
+        self.view.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(self.view)
+        
+        self.addConstraints([
+            NSLayoutConstraint(item: self.view, attribute: .left, relatedBy: .equal, toItem: self, attribute: .left, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self.view, attribute: .top, relatedBy: .equal, toItem: self, attribute: .top, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self.view, attribute: .right, relatedBy: .equal, toItem: self, attribute: .right, multiplier: 1, constant: 0),
+            NSLayoutConstraint(item: self.view, attribute: .bottom, relatedBy: .equal, toItem: self, attribute: .bottom, multiplier: 1, constant: 0)
+        ])
+    }
+
     
     private func userAvatarURL() -> URL? {
         guard let username = user.username else { return nil }
@@ -33,6 +50,8 @@ class AvatarView: UIView {
     }
     
     private func updateAvatar() {
+        setAvatarWithInitials()
+
         if let imageURL = userAvatarURL() {
             imageView.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cache, url) in
                 if error != nil {
@@ -41,8 +60,6 @@ class AvatarView: UIView {
                     self.labelInitials.text = ""
                 }
             })
-        } else {
-            setAvatarWithInitials()
         }
     }
     
@@ -58,11 +75,11 @@ class AvatarView: UIView {
         } else {
             let position = username.characters.count % avatarColors.count
             color = avatarColors[position]
-        
+            initials = username
         }
         
         labelInitials.text = initials
-        backgroundColor = UIColor(rgb: color, alphaVal: 1)
+        view.backgroundColor = UIColor(rgb: color, alphaVal: 1)
     }
     
 }
