@@ -27,7 +27,7 @@ class NSURLExtensionSpec: XCTestCase {
             let socketURL = url?.socketURL()
             
             XCTAssertEqual(socketURL?.scheme, "wss")
-            XCTAssertTrue(socketURL?.pathComponents?.contains("websocket") ?? false)
+            XCTAssertTrue(socketURL?.pathComponents.contains("websocket") ?? false)
         }
     }
     
