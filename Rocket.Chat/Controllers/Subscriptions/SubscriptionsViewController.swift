@@ -23,7 +23,7 @@ class SubscriptionsViewController: BaseViewController {
         subscribeModelChanges()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
     }
@@ -42,7 +42,7 @@ extension SubscriptionsViewController {
         
         assigned = true
         
-        subscriptions = auth.subscriptions.sorted("lastSeen", ascending: false)
+        subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
         subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
         usersToken = try! Realm().objects(User.self).addNotificationBlock(handleModelUpdates)
     }
@@ -51,14 +51,14 @@ extension SubscriptionsViewController {
 
 extension SubscriptionsViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return subscriptions?.count ?? 0
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let subscription = subscriptions![indexPath.row]
 
-        let cell = tableView.dequeueReusableCellWithIdentifier(SubscriptionCell.identifier) as! SubscriptionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionCell.identifier) as! SubscriptionCell
         cell.subscription = subscription
 
         return cell
@@ -69,10 +69,10 @@ extension SubscriptionsViewController: UITableViewDataSource {
 
 extension SubscriptionsViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let subscription = subscriptions![indexPath.row]
         ChatViewController.sharedInstance()?.subscription = subscription
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
     
 }

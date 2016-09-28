@@ -18,11 +18,11 @@ class SubscriptionSpec: XCTestCase {
         super.setUp()
         
         Realm.execute() { (realm) in
-            for obj in realm.objects(Auth) {
+            for obj in realm.objects(Auth.self) {
                 realm.delete(obj)
             }
         
-            for obj in realm.objects(Subscription) {
+            for obj in realm.objects(Subscription.self) {
                 realm.delete(obj)
             }
         }
@@ -41,13 +41,13 @@ class SubscriptionSpec: XCTestCase {
         object.open = false
         object.alert = true
         object.favorite = true
-        object.createdAt = NSDate()
-        object.lastSeen = NSDate()
+        object.createdAt = Date()
+        object.lastSeen = Date()
         
         Realm.execute() { (realm) in
             realm.add(object)
             
-            let results = realm.objects(Subscription)
+            let results = realm.objects(Subscription.self)
             let first = results.first
             XCTAssert(results.count == 1, "Subscription object was created with success")
             XCTAssert(first?.identifier == "123", "Subscription object was created with success")
@@ -77,7 +77,7 @@ class SubscriptionSpec: XCTestCase {
         Realm.execute() { (realm) in
             realm.add(subscription)
             
-            let results = realm.objects(Subscription)
+            let results = realm.objects(Subscription.self)
             let first = results.first
             XCTAssert(results.count == 1, "Subscription object was created with success")
             XCTAssert(first?.identifier == "123", "Subscription object was created with success")

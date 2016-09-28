@@ -14,18 +14,18 @@ class Message: BaseModel {
     dynamic var subscription: Subscription!
     
     dynamic var rid = ""
-    dynamic var createdAt: NSDate?
-    dynamic var updatedAt: NSDate?
+    dynamic var createdAt: Date?
+    dynamic var updatedAt: Date?
     dynamic var user: User?
     
     dynamic var text = ""
 
     var mentions = List<Mention>()
-    
+
 
     // MARK: ModelMapping
     
-    override func update(dict: JSON) {
+    override func update(_ dict: JSON) {
         if self.identifier == nil {
             self.identifier = dict["_id"].string!
         }
@@ -34,11 +34,11 @@ class Message: BaseModel {
         self.text = dict["msg"].string ?? ""
         
         if let createdAt = dict["ts"]["$date"].double {
-            self.createdAt = NSDate.dateFromInterval(createdAt)
+            self.createdAt = Date.dateFromInterval(createdAt)
         }
         
         if let updatedAt = dict["_updatedAt"]["$date"].double {
-            self.updatedAt = NSDate.dateFromInterval(updatedAt)
+            self.updatedAt = Date.dateFromInterval(updatedAt)
         }
         
         if let userId = dict["u"]["_id"].string {

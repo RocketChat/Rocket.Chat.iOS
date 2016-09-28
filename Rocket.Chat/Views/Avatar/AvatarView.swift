@@ -14,7 +14,7 @@ let avatarColors: [UInt] = [
     0x8BC34A, 0xCDDC39, 0xFFC107, 0xFF9800, 0xFF5722,
     0x795548, 0x9E9E9E, 0x607D8B]
 
-class AvatarView: BaseView {
+class AvatarView: UIView {
     
     var user: User! {
         didSet {
@@ -25,21 +25,16 @@ class AvatarView: BaseView {
     @IBOutlet weak var labelInitials: UILabel!
     @IBOutlet weak var imageView: UIImageView!
     
-    override func setup() {
-        nibName = "AvatarView"
-        super.setup()
-    }
-    
-    private func userAvatarURL() -> NSURL? {
+    private func userAvatarURL() -> URL? {
         guard let username = user.username else { return nil }
         guard let auth = AuthManager.isAuthenticated() else { return nil }
         guard let serverURL = NSURL(string: auth.serverURL) else { return nil }
-        return NSURL(string: "http://\(serverURL.host!)/avatar/\(username).jpg")!
+        return URL(string: "http://\(serverURL.host!)/avatar/\(username).jpg")!
     }
     
     private func updateAvatar() {
         if let imageURL = userAvatarURL() {
-            imageView.sd_setImageWithURL(imageURL, completed: { [unowned self] (image, error, cache, url) in
+            imageView.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cache, url) in
                 if error != nil {
                     self.setAvatarWithInitials()
                 } else {
@@ -63,18 +58,10 @@ class AvatarView: BaseView {
         } else {
             let position = username.characters.count % avatarColors.count
             color = avatarColors[position]
-            
-            let usernameParts = username.characters.split{$0 == " "}.map(String.init)
-            if usernameParts.count == 1 {
-                let str = usernameParts.first!
-                let index = str.startIndex
-                initials = str[index.advancedBy(0)...index.advancedBy(1)]
-            } else {
-                initials = usernameParts.first! + usernameParts.last!
-            }
+        
         }
         
-        labelInitials.text = initials.uppercaseString
+        labelInitials.text = initials
         backgroundColor = UIColor(rgb: color, alphaVal: 1)
     }
     

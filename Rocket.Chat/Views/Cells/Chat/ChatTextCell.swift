@@ -26,12 +26,13 @@ class ChatTextCell: UICollectionViewCell {
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelText: UILabel!
     
-    private func updateMessageInformation() {
-        let formatter = NSDateFormatter()
-        formatter.timeStyle = .ShortStyle
-
+    fileprivate func updateMessageInformation() {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+        labelDate.text = formatter.string(from: message.createdAt! as Date)
+        
         avatarView.user = message.user
-        labelDate.text = formatter.stringFromDate(message.createdAt!)
+        
         labelUsername.text = message.user?.username
         labelText.text = message.text
         labelText.sizeToFit()
