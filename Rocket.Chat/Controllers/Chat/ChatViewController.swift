@@ -89,6 +89,13 @@ class ChatViewController: BaseViewController {
     }
     
     
+    // MARK: IBAction
+    
+    @IBAction func buttonMenuDidPressed(_ sender: AnyObject) {
+        present(SideMenuManager.menuLeftNavigationController!, animated: true, completion: nil)
+    }
+    
+    
     // MARK: Side Menu
     
     fileprivate func setupSideMenu() {
