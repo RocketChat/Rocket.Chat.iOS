@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftyJSON
 
 protocol ModelMapping {
-    func update(dict: JSON)
+    func update(_ dict: JSON)
 }
 
 class BaseModel: Object, ModelMapping {
@@ -33,7 +33,7 @@ class BaseModel: Object, ModelMapping {
         self.update(dict)
     }
     
-    func update(dict: JSON) {}
+    func update(_ dict: JSON) {}
 
 }
 

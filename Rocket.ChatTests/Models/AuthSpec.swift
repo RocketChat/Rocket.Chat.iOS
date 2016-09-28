@@ -28,8 +28,8 @@ class AuthSpec: XCTestCase {
         let object = Auth()
         object.serverURL = serverURL
         object.token = "123"
-        object.tokenExpires = NSDate()
-        object.lastAccess = NSDate()
+        object.tokenExpires = Date()
+        object.lastAccess = Date()
         object.userId = "123"
         
         Realm.execute() { (realm) in

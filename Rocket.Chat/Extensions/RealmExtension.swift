@@ -12,18 +12,18 @@ import SwiftyJSON
 
 extension Realm {
     
-    static func execute(completion: (Realm) -> Void) {
+    static func execute(_ completion: (Realm) -> Void) {
         let realm = try! Realm()
         try! realm.write {
             completion(realm)
         }
     }
     
-    static func getOrCreate<T: BaseModel>(model: T.Type, primaryKey: String, values: JSON) -> T {
+    static func getOrCreate<T: BaseModel>(_ model: T.Type, primaryKey: String, values: JSON) -> T {
         var object: T!
 
         self.execute { (realm) in
-            object = realm.objectForPrimaryKey(model, key: primaryKey)
+            object = realm.object(ofType: model, forPrimaryKey: primaryKey as AnyObject)
             
             if object == nil {
                 object = T()
@@ -38,14 +38,14 @@ extension Realm {
     // MARK: Mutate
     
     // This method will add or update a Realm's object.
-    static func update(object: Object) {
+    static func update(_ object: Object) {
         self.execute() { (realm) in
             realm.add(object, update: true)
         }
     }
     
     // This method will add or update a list of some Realm's object.
-    static func update<S: SequenceType where S.Generator.Element: Object>(objects: S) {
+    static func update<S: Sequence>(_ objects: S) where S.Iterator.Element: Object {
         self.execute() { (realm) in
             realm.add(objects, update: true)
         }
