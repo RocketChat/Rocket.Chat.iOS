@@ -17,7 +17,7 @@ class BaseModelSpec: XCTestCase {
         super.setUp()
         
         Realm.execute() { (realm) in
-            for obj in realm.objects(BaseModel) {
+            for obj in realm.objects(BaseModel.self) {
                 realm.delete(obj)
             }
         }
@@ -29,7 +29,7 @@ class BaseModelSpec: XCTestCase {
             object.identifier = "123"
             realm.add(object)
             
-            let results = realm.objects(BaseModel)
+            let results = realm.objects(BaseModel.self)
             let first = results.first
             XCTAssert(results.count == 1)
             XCTAssert(first?.identifier == "123")
