@@ -21,7 +21,13 @@ class ChatTextCell: UICollectionViewCell {
         }
     }
 
-    @IBOutlet weak var avatarView: AvatarView!
+    @IBOutlet weak var avatarView: AvatarView! {
+        didSet {
+            avatarView.layer.cornerRadius = 4
+            avatarView.layer.masksToBounds = true
+        }
+    }
+
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelText: UILabel!
