@@ -14,7 +14,7 @@ class NSDateExtension: XCTestCase {
 
     func testDateFromInterval() {
         let interval = 1468544344553.0
-        let date = NSDate.dateFromInterval(interval)
+        let date = Date.dateFromInterval(interval)
         XCTAssert(date?.timeIntervalSince1970 == interval / 1000, "Date interval is divided by 1000")
     }
 

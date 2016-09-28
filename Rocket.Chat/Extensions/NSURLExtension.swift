@@ -8,18 +8,18 @@
 
 import Foundation
 
-extension NSURL {
+extension URL {
     
-    func socketURL() -> NSURL? {
-        let pathComponents = self.pathComponents ?? []
-        let components = NSURLComponents()
+    func socketURL() -> URL? {
+        let pathComponents = self.pathComponents 
+        var components = URLComponents()
         components.scheme = "wss"
         components.host = self.host
         components.path = self.path
         
-        var newURL = components.URL
+        var newURL = components.url
         if !pathComponents.contains("websocket") {
-            newURL = newURL?.URLByAppendingPathComponent("websocket")
+            newURL = newURL?.appendingPathComponent("websocket")
         }
         
         return newURL

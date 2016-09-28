@@ -18,19 +18,19 @@ class MessageSpec: XCTestCase {
         super.setUp()
         
         Realm.execute() { (realm) in
-            for obj in realm.objects(User) {
+            for obj in realm.objects(User.self) {
                 realm.delete(obj)
             }
             
-            for obj in realm.objects(Auth) {
+            for obj in realm.objects(Auth.self) {
                 realm.delete(obj)
             }
             
-            for obj in realm.objects(Message) {
+            for obj in realm.objects(Message.self) {
                 realm.delete(obj)
             }
             
-            for obj in realm.objects(Subscription) {
+            for obj in realm.objects(Subscription.self) {
                 realm.delete(obj)
             }
         }
@@ -56,7 +56,7 @@ class MessageSpec: XCTestCase {
         Realm.execute() { (realm) in
             realm.add(message)
             
-            let results = realm.objects(Message)
+            let results = realm.objects(Message.self)
             let first = results.first
             XCTAssert(results.count == 1, "Message object was created with success")
             XCTAssert(first?.identifier == "123", "Message object was created with success")
@@ -79,7 +79,7 @@ class MessageSpec: XCTestCase {
         Realm.execute() { (realm) in
             realm.add(message)
             
-            let results = realm.objects(Message)
+            let results = realm.objects(Message.self)
             let first = results.first
             XCTAssert(results.count == 1, "Message object was created with success")
             XCTAssert(first?.identifier == "123", "Message object was created with success")
