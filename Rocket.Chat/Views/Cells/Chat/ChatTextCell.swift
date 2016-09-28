@@ -23,6 +23,7 @@ class ChatTextCell: UICollectionViewCell {
     
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
+            imageView.layer.masksToBounds = true
             imageView.layer.cornerRadius = 4
         }
     }
@@ -42,6 +43,7 @@ class ChatTextCell: UICollectionViewCell {
         labelDate.text = formatter.string(from: message.createdAt! as Date)
         labelUsername.text = message.user?.username
         labelText.text = message.text
+        labelText.sizeToFit()
     }
     
 }

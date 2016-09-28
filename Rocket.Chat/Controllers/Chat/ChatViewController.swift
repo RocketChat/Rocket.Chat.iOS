@@ -12,6 +12,7 @@ import RealmSwift
 class ChatViewController: BaseViewController {
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
@@ -63,15 +64,21 @@ class ChatViewController: BaseViewController {
             token.stop()
         }
 
+        activityIndicator.startAnimating()
         title = subscription?.name
         messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
+            if self.messages.count > 0 {
+                self.activityIndicator.stopAnimating()
+            }
+
             self.collectionView.reloadData()
             self.collectionView.layoutIfNeeded()
             self.scrollToBottom()
         }
         
         MessageManager.getHistory(subscription) { [unowned self] (response) in
+            self.activityIndicator.stopAnimating()
             self.messages = self.subscription?.fetchMessages()
             self.collectionView.reloadData()
             self.collectionView.layoutIfNeeded()
@@ -129,7 +136,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let message = messages![indexPath.row]
         let width = UIScreen.main.bounds.size.width
-        let height = UILabel.heightForView(message.text, font: UIFont.systemFont(ofSize: 16), width: width) + 27
+        let height = UILabel.heightForView(message.text, font: UIFont.systemFont(ofSize: 14), width: width - 60) + 35
         return CGSize(width: width, height: max(height, ChatTextCell.minimumHeight))
     }
     

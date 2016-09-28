@@ -64,9 +64,7 @@ extension SocketManager {
             
             switch collection {
             case "users":
-                let user = User()
-                user.identifier = identifier
-                user.update(fields)
+                let user = Realm.getOrCreate(User.self, primaryKey: identifier, values: fields)
                 Realm.update(user)
             default: break
             }
