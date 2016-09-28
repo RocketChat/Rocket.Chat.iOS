@@ -33,7 +33,7 @@ class User: BaseModel {
     
     override func update(_ dict: JSON) {
         if self.identifier == nil {
-            self.identifier = identifier
+            self.identifier = dict["_id"].string
         }
         
         if let username = dict["username"].string {
