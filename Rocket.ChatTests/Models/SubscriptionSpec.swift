@@ -41,8 +41,8 @@ class SubscriptionSpec: XCTestCase {
         object.open = false
         object.alert = true
         object.favorite = true
-        object.createdAt = NSDate()
-        object.lastSeen = NSDate()
+        object.createdAt = Date()
+        object.lastSeen = Date()
         
         Realm.execute() { (realm) in
             realm.add(object)

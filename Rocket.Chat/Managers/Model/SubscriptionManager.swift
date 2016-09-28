@@ -11,18 +11,18 @@ import RealmSwift
 
 struct SubscriptionManager {
     
-    static func updateSubscriptions(auth: Auth, completion: MessageCompletion) {
-        var params: [[String: AnyObject]] = []
+    static func updateSubscriptions(_ auth: Auth, completion: @escaping MessageCompletion) {
+        var params: [[String: Any]] = []
 
         if let lastUpdated = auth.lastSubscriptionFetch {
-            params.append(["$date": NSDate.intervalFromDate(lastUpdated)])
+            params.append(["$date": Date.intervalFromDate(lastUpdated)])
         }
 
         let request = [
             "msg": "method",
             "method": "subscriptions/get",
             "params": params
-        ]
+        ] as [String : Any]
 
         SocketManager.send(request) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -37,7 +37,7 @@ struct SubscriptionManager {
             })
             
             Realm.execute({ (realm) in
-                auth.lastSubscriptionFetch = NSDate()
+                auth.lastSubscriptionFetch = Date()
 
                 realm.add(subscriptions, update: true)
                 realm.add(auth, update: true)
@@ -47,13 +47,13 @@ struct SubscriptionManager {
         }
     }
     
-    static func changes(auth: Auth) {
+    static func changes(_ auth: Auth) {
         let eventName = "\(auth.userId!)/subscriptions-changed"
         let request = [
             "msg": "sub",
             "name": "stream-notify-user",
             "params": [eventName, false]
-        ]
+        ] as [String : Any]
         
         SocketManager.subscribe(request, eventName: eventName) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }

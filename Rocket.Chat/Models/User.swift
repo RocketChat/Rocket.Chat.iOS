@@ -22,7 +22,7 @@ class User: BaseModel {
     dynamic var name: String?
     var emails = List<Email>()
 
-    private dynamic var privateStatus = UserStatus.Offline.rawValue
+    fileprivate dynamic var privateStatus = UserStatus.Offline.rawValue
     var status: UserStatus {
         get { return UserStatus(rawValue: privateStatus) ?? UserStatus.Offline }
         set { privateStatus = newValue.rawValue }
@@ -31,7 +31,7 @@ class User: BaseModel {
     
     // MARK: ModelMapping
     
-    override func update(dict: JSON) {
+    override func update(_ dict: JSON) {
         if self.identifier == nil {
             self.identifier = identifier
         }

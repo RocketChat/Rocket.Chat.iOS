@@ -49,11 +49,11 @@ extension AuthManagerSpec {
     func testIsAuthenticatedReturnsLastAccessed() {
         let auth1 = Auth()
         auth1.serverURL = "one"
-        auth1.lastAccess = NSDate()
+        auth1.lastAccess = Date()
         
         let auth2 = Auth()
         auth2.serverURL = "two"
-        auth2.lastAccess = NSDate(timeIntervalSince1970: 1)
+        auth2.lastAccess = Date(timeIntervalSince1970: 1)
         
         Realm.execute() { (realm) in
             realm.add(auth1)

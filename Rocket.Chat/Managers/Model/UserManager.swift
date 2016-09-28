@@ -15,7 +15,7 @@ struct UserManager {
             "msg": "sub",
             "name": "activeUsers",
             "params": []
-        ]
+        ] as [String : Any]
         
         SocketManager.send(request) { (response) in }
     }

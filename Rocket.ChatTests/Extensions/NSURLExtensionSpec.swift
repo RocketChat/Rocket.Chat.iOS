@@ -23,7 +23,7 @@ class NSURLExtensionSpec: XCTestCase {
         ]
         
         for test in tests {
-            let url = NSURL(string: test)
+            let url = URL(string: test)
             let socketURL = url?.socketURL()
             
             XCTAssertEqual(socketURL?.scheme, "wss")
