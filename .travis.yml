@@ -1,18 +1,10 @@
+language: swift
 osx_image: xcode8
 
-env:
-  matrix:
-    - TEST_TYPE=iOS
 before_install:
 - |
-    gem install activesupport -v 4.2.6
-    gem install cocoapods -v 1.0.1
-    gem install xcpretty -N --no-ri --no-rdoc
+    gem install cocoapods -v '1.0.1'
+	gem install xcpretty -N --no-ri --no-rdoc
     pod repo update	
-script:
-- |
-    set -o pipefail
-    xcodebuild clean test -workspace Rocket.Chat.xcworkspace -scheme Rocket.Chat -destination "platform=iOS Simulator,name=iPhone 7" -enableCodeCoverage YES | xcpretty
-after_success:
-- |
-    bash <(curl -s https://codecov.io/bash)
+script: xcodebuild clean test -workspace Rocket.Chat.xcworkspace -scheme Rocket.Chat -destination "platform=iOS Simulator,name=iPhone 7" -enableCodeCoverage YES | xcpretty
+after_success: bash <(curl -s https://codecov.io/bash)
