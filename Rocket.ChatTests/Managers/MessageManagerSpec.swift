@@ -69,12 +69,12 @@ extension MessageManagerSpec {
 
         let message1 = Message()
         message1.identifier = "msg1"
-        message1.createdAt = NSDate(timeIntervalSinceNow: -100)
+        message1.createdAt = Date(timeIntervalSinceNow: -100)
         message1.subscription = subscription
         
         let message2 = Message()
         message2.identifier = "msg2"
-        message2.createdAt = NSDate(timeIntervalSinceNow: 0)
+        message2.createdAt = Date(timeIntervalSinceNow: 0)
         message2.subscription = subscription
         
         Realm.execute() { (realm) in

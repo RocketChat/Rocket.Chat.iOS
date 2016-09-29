@@ -32,15 +32,15 @@ class ChatTextCell: UICollectionViewCell {
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelText: UILabel!
     
-    private func updateMessageInformation() {
-        let formatter = NSDateFormatter()
-        formatter.timeStyle = .ShortStyle
+    fileprivate func updateMessageInformation() {
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
 
         if let imageURL = message.userAvatarURL() {
-            imageView.sd_setImageWithURL(imageURL)
+            imageView.sd_setImage(with: imageURL as URL!)
         }
 
-        labelDate.text = formatter.stringFromDate(message.createdAt!)
+        labelDate.text = formatter.string(from: message.createdAt! as Date)
         labelUsername.text = message.user?.username
         labelText.text = message.text
         labelText.sizeToFit()

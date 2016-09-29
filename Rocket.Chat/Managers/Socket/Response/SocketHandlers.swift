@@ -13,7 +13,7 @@ import SwiftyJSON
 
 extension SocketManager {
     
-    func handleMessage(response: JSON, socket: WebSocket) {
+    func handleMessage(_ response: JSON, socket: WebSocket) {
         let result = SocketResponse(response, socket: socket)!
         
         guard result.msg != nil else {
@@ -36,23 +36,23 @@ extension SocketManager {
         }
     }
     
-    private func handleConnectionMessage(result: SocketResponse, socket: WebSocket) {
+    fileprivate func handleConnectionMessage(_ result: SocketResponse, socket: WebSocket) {
         connectionHandler?(socket, true)
         connectionHandler = nil
     }
     
-    private func handlePingMessage(result: SocketResponse, socket: WebSocket) {
+    fileprivate func handlePingMessage(_ result: SocketResponse, socket: WebSocket) {
         SocketManager.send(["msg": "pong"])
     }
     
-    private func handleEventSubscription(result: SocketResponse, socket: WebSocket) {
+    fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {
         let handlers = events[result.event ?? ""]
         handlers?.forEach({ (handler) in
             handler(result)
         })
     }
     
-    private func handleModelUpdates(result: SocketResponse, socket: WebSocket) {
+    fileprivate func handleModelUpdates(_ result: SocketResponse, socket: WebSocket) {
         if result.event != nil {
             return handleEventSubscription(result, socket: socket)
         }
