@@ -22,12 +22,6 @@ class Message: BaseModel {
 
     var mentions = List<Mention>()
 
-    func userAvatarURL() -> URL? {
-        guard let username = user?.username else { return nil }
-        guard let serverURL = URL(string: subscription.auth!.serverURL) else { return nil }
-        return URL(string: "http://\(serverURL.host!)/avatar/\(username).jpg")!
-    }
-    
 
     // MARK: ModelMapping
     

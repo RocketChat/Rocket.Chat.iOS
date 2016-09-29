@@ -20,11 +20,11 @@ class ChatTextCell: UICollectionViewCell {
             updateMessageInformation()
         }
     }
-    
-    @IBOutlet weak var imageView: UIImageView! {
+
+    @IBOutlet weak var avatarView: AvatarView! {
         didSet {
-            imageView.layer.masksToBounds = true
-            imageView.layer.cornerRadius = 4
+            avatarView.layer.cornerRadius = 4
+            avatarView.layer.masksToBounds = true
         }
     }
 
@@ -35,12 +35,10 @@ class ChatTextCell: UICollectionViewCell {
     fileprivate func updateMessageInformation() {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
-
-        if let imageURL = message.userAvatarURL() {
-            imageView.sd_setImage(with: imageURL as URL!)
-        }
-
         labelDate.text = formatter.string(from: message.createdAt! as Date)
+        
+        avatarView.user = message.user
+        
         labelUsername.text = message.user?.username
         labelText.text = message.text
         labelText.sizeToFit()
