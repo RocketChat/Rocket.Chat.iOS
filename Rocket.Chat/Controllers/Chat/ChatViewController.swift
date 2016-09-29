@@ -26,7 +26,7 @@ class ChatViewController: BaseViewController {
     // MARK: View Life Cycle
     
     class func sharedInstance() -> ChatViewController? {
-        if let nav = UIApplication.sharedApplication().delegate?.window??.rootViewController as? UINavigationController {
+        if let nav = UIApplication.shared.delegate?.window??.rootViewController as? UINavigationController {
             return nav.viewControllers.first as? ChatViewController
         }
         
@@ -40,33 +40,33 @@ class ChatViewController: BaseViewController {
         registerCells()
     }
     
-    private func registerCells() {
-        self.collectionView.registerNib(UINib(
+    fileprivate func registerCells() {
+        self.collectionView.register(UINib(
             nibName: "ChatTextCell",
-            bundle: NSBundle.mainBundle()
+            bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatTextCell.identifier)
     }
     
-    private func scrollToBottom(animated: Bool = false) {
-        let totalItems = collectionView.numberOfItemsInSection(0) - 1
+    fileprivate func scrollToBottom(_ animated: Bool = false) {
+        let totalItems = collectionView.numberOfItems(inSection: 0) - 1
         
         if totalItems > 0 {
-            let indexPath = NSIndexPath(forRow: totalItems, inSection: 0)
-            collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
+            let indexPath = IndexPath(row: totalItems, section: 0)
+            collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
         }
     }
     
     
     // MARK: Subscription
     
-    private func updateSubscriptionInfo() {
+    fileprivate func updateSubscriptionInfo() {
         if let token = messagesToken {
             token.stop()
         }
 
         activityIndicator.startAnimating()
         title = subscription?.name
-        messages = subscription?.messages.sorted("createdAt", ascending: true)
+        messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
             if self.messages.count > 0 {
                 self.activityIndicator.stopAnimating()
@@ -91,8 +91,8 @@ class ChatViewController: BaseViewController {
     
     // MARK: Side Menu
     
-    private func setupSideMenu() {
-        let storyboardSubscriptions = UIStoryboard(name: "Subscriptions", bundle: NSBundle.mainBundle())
+    fileprivate func setupSideMenu() {
+        let storyboardSubscriptions = UIStoryboard(name: "Subscriptions", bundle: Bundle.main)
         SideMenuManager.menuFadeStatusBar = false
         SideMenuManager.menuLeftNavigationController = storyboardSubscriptions.instantiateInitialViewController() as? UISideMenuNavigationController
         
@@ -107,7 +107,7 @@ class ChatViewController: BaseViewController {
 
 extension ChatViewController: UICollectionViewDataSource {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let messages = messages {
             return messages.count
         }
@@ -115,10 +115,10 @@ extension ChatViewController: UICollectionViewDataSource {
         return 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let message = messages![indexPath.row]
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ChatTextCell.identifier, forIndexPath: indexPath) as! ChatTextCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatTextCell.identifier, for: indexPath) as! ChatTextCell
         cell.message = message
 
         return cell
@@ -129,14 +129,14 @@ extension ChatViewController: UICollectionViewDataSource {
 
 extension ChatViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsZero
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let message = messages![indexPath.row]
-        let width = UIScreen.mainScreen().bounds.size.width
-        let height = UILabel.heightForView(message.text, font: UIFont.systemFontOfSize(14), width: width - 60) + 35
+        let width = UIScreen.main.bounds.size.width
+        let height = UILabel.heightForView(message.text, font: UIFont.systemFont(ofSize: 14), width: width - 60) + 35
         return CGSize(width: width, height: max(height, ChatTextCell.minimumHeight))
     }
     

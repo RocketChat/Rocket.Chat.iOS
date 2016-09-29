@@ -19,7 +19,7 @@ class SocketManager {
     
     static let sharedInstance = SocketManager()
 
-    var serverURL: NSURL?
+    var serverURL: URL?
 
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
@@ -29,7 +29,7 @@ class SocketManager {
     
     // MARK: Connection
     
-    static func connect(url: NSURL, completion: SocketCompletion) {
+    static func connect(_ url: URL, completion: @escaping SocketCompletion) {
         sharedInstance.serverURL = url
         sharedInstance.connectionHandler = completion
 
@@ -40,7 +40,7 @@ class SocketManager {
         sharedInstance.socket?.connect()
     }
     
-    static func disconnect(completion: SocketCompletion) {
+    static func disconnect(_ completion: @escaping SocketCompletion) {
         sharedInstance.connectionHandler = completion
         sharedInstance.socket?.disconnect()
     }
@@ -48,7 +48,7 @@ class SocketManager {
     
     // MARK: Messages
     
-    static func send(object: AnyObject, completion: MessageCompletion? = nil) {
+    static func send(_ object: [String: Any], completion: MessageCompletion? = nil) {
         let identifier = String.random(50)
         var json = JSON(object)
         json["id"] = JSON(identifier)
@@ -56,7 +56,7 @@ class SocketManager {
         if let raw = json.rawString() {
             Log.debug("Socket will send message: \(raw)")
             
-            sharedInstance.socket?.writeString(raw)
+            sharedInstance.socket?.write(string: raw)
             
             if completion != nil {
                 sharedInstance.queue[identifier] = completion
@@ -68,7 +68,7 @@ class SocketManager {
         }
     }
     
-    static func subscribe(object: AnyObject, eventName: String, completion: MessageCompletion) {
+    static func subscribe(_ object: [String: Any], eventName: String, completion: @escaping MessageCompletion) {
         if var list = sharedInstance.events[eventName] {
             list.append(completion)
             sharedInstance.events[eventName] = list
@@ -93,7 +93,7 @@ extension SocketManager: WebSocketDelegate {
             "msg": "connect",
             "version": "1",
             "support": ["1", "pre2", "pre1"]
-        ]
+        ] as [String : Any]
         
         SocketManager.send(object)
     }
@@ -105,7 +105,7 @@ extension SocketManager: WebSocketDelegate {
         connectionHandler = nil
     }
     
-    func websocketDidReceiveData(socket: WebSocket, data: NSData) {
+    func websocketDidReceiveData(socket: WebSocket, data: Data) {
         Log.debug("[WebSocket] did receive data (\(data))")
     }
     
@@ -113,7 +113,7 @@ extension SocketManager: WebSocketDelegate {
         let json = JSON.parse(text)
         
         // JSON is invalid
-        guard json != nil && json.isExists() else {
+        guard json != nil && json.exists() else {
             Log.debug("[WebSocket] did receive invalid JSON object: \(text)")
             return
         }
@@ -129,7 +129,7 @@ extension SocketManager: WebSocketDelegate {
 
 extension SocketManager: WebSocketPongDelegate {
     
-    func websocketDidReceivePong(socket: WebSocket) {
+    func websocketDidReceivePong(socket: WebSocket, data: Data?) {
         Log.debug("[WebSocket] did receive pong")
     }
     

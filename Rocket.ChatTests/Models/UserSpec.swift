@@ -17,11 +17,11 @@ class UserSpec: XCTestCase {
         super.setUp()
         
         Realm.execute() { (realm) in
-            for obj in realm.objects(User) {
+            for obj in realm.objects(User.self) {
                 realm.delete(obj)
             }
             
-            for obj in realm.objects(Email) {
+            for obj in realm.objects(Email.self) {
                 realm.delete(obj)
             }
         }
@@ -40,7 +40,7 @@ class UserSpec: XCTestCase {
         Realm.execute() { (realm) in
             realm.add(object)
             
-            let results = realm.objects(User)
+            let results = realm.objects(User.self)
             let first = results.first
             XCTAssert(results.count == 1, "User object was created with success")
             XCTAssert(first?.identifier == "123", "User object was created with success")
