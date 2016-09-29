@@ -1,4 +1,3 @@
-language: swift
 osx_image: xcode8
 
 env:
@@ -12,7 +11,7 @@ before_install:
 script:
 - |
     set -o pipefail
-    xcodebuild clean test -workspace Rocket.Chat.xcworkspace -scheme Rocket.Chat -destination "platform=iOS Simulator,name=iPhone 6 Plus" -enableCodeCoverage YES | xcpretty
+    xcodebuild clean test -workspace Rocket.Chat.xcworkspace -scheme Rocket.Chat -destination "platform=iOS Simulator,name=iPhone 7" -enableCodeCoverage YES | xcpretty
 after_success:
 - |
     bash <(curl -s https://codecov.io/bash)
