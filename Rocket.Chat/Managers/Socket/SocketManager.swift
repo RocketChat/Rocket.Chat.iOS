@@ -118,7 +118,10 @@ extension SocketManager: WebSocketDelegate {
             return
         }
     
-        Log.debug("[WebSocket] did receive JSON message: \(json.rawString()!)")
+        if let raw = json.rawString() {
+            Log.debug("[WebSocket] did receive JSON message: \(raw)")
+        }
+
         self.handleMessage(json, socket: socket)
     }
     
