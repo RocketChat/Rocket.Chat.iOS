@@ -75,10 +75,26 @@ class AvatarView: UIView {
         } else {
             let position = username.characters.count % avatarColors.count
             color = avatarColors[position]
-            initials = username
+            
+            let strings = username.components(separatedBy: ".")
+            if let first = strings.first, let last = strings.last {
+                let lastOffset = strings.count > 1 ? 1 : 2
+                let indexFirst = first.index(first.startIndex, offsetBy: 1)
+                let indexLast = last.index(last.startIndex, offsetBy: lastOffset)
+                
+                let firstString = first.substring(to: indexFirst)
+                var lastString = last.substring(to: indexLast)
+
+                if lastOffset == 2 {
+                    let endIndex = lastString.index(lastString.startIndex, offsetBy: 1)
+                    lastString = lastString.substring(from: endIndex)
+                }
+
+                initials = "\(firstString)\(lastString)"
+            }
         }
         
-        labelInitials.text = initials
+        labelInitials.text = initials.uppercased()
         view.backgroundColor = UIColor(rgb: color, alphaVal: 1)
     }
     
