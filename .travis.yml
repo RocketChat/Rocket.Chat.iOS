@@ -5,5 +5,5 @@ before_install:
 - |
     gem install cocoapods -v '1.0.1' --no-rdoc --no-ri --no-document --quiet
     gem install xcpretty -N --no-ri --no-rdoc
-    pod repo update	
+    pod repo update 
 script: xcodebuild clean test -workspace Rocket.Chat.xcworkspace -scheme Rocket.Chat -destination "platform=iOS Simulator,name=iPhone 7" -enableCodeCoverage YES | xcpretty
