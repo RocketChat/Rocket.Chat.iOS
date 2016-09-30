@@ -11,6 +11,7 @@ PODS:
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - SideMenu (2.0.2)
+  - SlackTextViewController (1.9.4)
   - Starscream (2.0.0)
   - SwiftyJSON (3.1.0)
 
@@ -20,6 +21,7 @@ DEPENDENCIES:
   - RealmSwift
   - SDWebImage (~> 3.8)
   - SideMenu
+  - SlackTextViewController
   - Starscream (~> 2.0.0)
   - SwiftyJSON
 
@@ -30,9 +32,10 @@ SPEC CHECKSUMS:
   RealmSwift: 7d015f34a2781a50889be9b5a15c36c08597ea0e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   SideMenu: f22ea9330f09810cc6c3ebd6e3be27bacb91ab11
+  SlackTextViewController: d490f354dba963bc469a6b9ce3213978eaed67a5
   Starscream: 947c865596f0d6bb3f0203fee23228ed2d471468
   SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
 
-PODFILE CHECKSUM: 3e80631c475bb8aa9748f1edcd79010fbcff7242
+PODFILE CHECKSUM: d23bd5f38a4198f483474cbc9bb6da5c523c303d
 
 COCOAPODS: 1.0.1

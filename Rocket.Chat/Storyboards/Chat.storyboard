@@ -17,20 +17,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="tfd-c6-q47">
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Oci-m9-Ca5">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="A1E-cs-q8E" id="aSa-UE-yWw"/>
-                                    <outlet property="delegate" destination="A1E-cs-q8E" id="fHM-5v-fZt"/>
-                                </connections>
-                            </collectionView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="uUJ-ih-W2L">
                                 <constraints>
                                     <constraint firstAttribute="height" constant="37" id="2qt-ly-W8P"/>
@@ -41,12 +27,8 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="tfd-c6-q47" firstAttribute="leading" secondItem="OVX-LA-RMF" secondAttribute="leading" id="FU4-ME-sxj"/>
                             <constraint firstItem="uUJ-ih-W2L" firstAttribute="centerX" secondItem="OVX-LA-RMF" secondAttribute="centerX" id="M0h-i7-L25"/>
-                            <constraint firstItem="AmO-ZE-7Kw" firstAttribute="top" secondItem="tfd-c6-q47" secondAttribute="bottom" id="UQf-nW-Mke"/>
                             <constraint firstItem="uUJ-ih-W2L" firstAttribute="centerY" secondItem="OVX-LA-RMF" secondAttribute="centerY" id="XXG-N0-E5I"/>
-                            <constraint firstItem="tfd-c6-q47" firstAttribute="top" secondItem="OVX-LA-RMF" secondAttribute="top" id="gMC-7U-Mgo"/>
-                            <constraint firstAttribute="trailing" secondItem="tfd-c6-q47" secondAttribute="trailing" id="gmt-ZF-CWQ"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa">
@@ -58,7 +40,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="uUJ-ih-W2L" id="GiA-t4-Snn"/>
-                        <outlet property="collectionView" destination="tfd-c6-q47" id="hPC-vc-XtV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA8-7w-0ga" userLabel="First Responder" sceneMemberID="firstResponder"/>
