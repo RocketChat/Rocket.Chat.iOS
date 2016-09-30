@@ -8,10 +8,10 @@
 
 import SideMenu
 import RealmSwift
+import SlackTextViewController
 
-class ChatViewController: BaseViewController {
+class ChatViewController: SLKTextViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     var messagesToken: NotificationToken!
@@ -35,24 +35,55 @@ class ChatViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        isInverted = false
         
         setupSideMenu()
         registerCells()
     }
     
+    override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
+        return UICollectionViewFlowLayout()
+    }
+    
     fileprivate func registerCells() {
-        self.collectionView.register(UINib(
+        self.collectionView?.register(UINib(
             nibName: "ChatTextCell",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatTextCell.identifier)
     }
     
     fileprivate func scrollToBottom(_ animated: Bool = false) {
-        let totalItems = collectionView.numberOfItems(inSection: 0) - 1
+        let totalItems = collectionView!.numberOfItems(inSection: 0) - 1
         
         if totalItems > 0 {
             let indexPath = IndexPath(row: totalItems, section: 0)
-            collectionView.scrollToItem(at: indexPath, at: .bottom, animated: animated)
+            collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: animated)
+        }
+    }
+    
+    
+    // MARK: SlackTextViewController
+    
+    override func didPressRightButton(_ sender: Any?) {
+        sendMessage()
+    }
+    
+    override func didPressReturnKey(_ keyCommand: UIKeyCommand?) {
+        sendMessage()
+    }
+    
+    override func textViewDidBeginEditing(_ textView: UITextView) {
+        scrollToBottom()
+    }
+    
+    
+    // MARK: Message
+    
+    fileprivate func sendMessage() {
+        guard let message = textView.text else { return }
+        
+        SubscriptionManager.sendTextMessage(message, subscription: subscription) { [unowned self] (response) in
+            self.textView.text = ""
         }
     }
     
@@ -72,16 +103,16 @@ class ChatViewController: BaseViewController {
                 self.activityIndicator.stopAnimating()
             }
 
-            self.collectionView.reloadData()
-            self.collectionView.layoutIfNeeded()
+            self.collectionView?.reloadData()
+            self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
         }
         
         MessageManager.getHistory(subscription) { [unowned self] (response) in
             self.activityIndicator.stopAnimating()
             self.messages = self.subscription?.fetchMessages()
-            self.collectionView.reloadData()
-            self.collectionView.layoutIfNeeded()
+            self.collectionView?.reloadData()
+            self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
         }
         
@@ -112,9 +143,9 @@ class ChatViewController: BaseViewController {
 
 // MARK: UICollectionViewDataSource
 
-extension ChatViewController: UICollectionViewDataSource {
+extension ChatViewController {
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if let messages = messages {
             return messages.count
         }
@@ -122,7 +153,7 @@ extension ChatViewController: UICollectionViewDataSource {
         return 0
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let message = messages![indexPath.row]
 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatTextCell.identifier, for: indexPath) as! ChatTextCell
