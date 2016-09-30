@@ -72,6 +72,10 @@ class ChatViewController: SLKTextViewController {
         sendMessage()
     }
     
+    override func textViewDidBeginEditing(_ textView: UITextView) {
+        scrollToBottom()
+    }
+    
     
     // MARK: Message
     
