@@ -62,6 +62,28 @@ class ChatViewController: SLKTextViewController {
     }
     
     
+    // MARK: SlackTextViewController
+    
+    override func didPressRightButton(_ sender: Any?) {
+        sendMessage()
+    }
+    
+    override func didPressReturnKey(_ keyCommand: UIKeyCommand?) {
+        sendMessage()
+    }
+    
+    
+    // MARK: Message
+    
+    fileprivate func sendMessage() {
+        guard let message = textView.text else { return }
+        
+        SubscriptionManager.sendTextMessage(message, subscription: subscription) { [unowned self] (response) in
+            self.textView.text = ""
+        }
+    }
+    
+    
     // MARK: Subscription
     
     fileprivate func updateSubscriptionInfo() {

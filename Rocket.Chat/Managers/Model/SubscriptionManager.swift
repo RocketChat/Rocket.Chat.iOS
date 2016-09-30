@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 struct SubscriptionManager {
-    
+
     static func updateSubscriptions(_ auth: Auth, completion: @escaping MessageCompletion) {
         var params: [[String: Any]] = []
 
@@ -63,6 +63,26 @@ struct SubscriptionManager {
             subscription.auth = auth
             
             Realm.update(subscription)
+        }
+    }
+    
+    
+    // MARK: Messages
+    
+    static func sendTextMessage(_ message: String, subscription: Subscription, completion: @escaping MessageCompletion) {
+        let request = [
+            "msg": "method",
+            "method": "sendMessage",
+            "params": [[
+                "_id": String.random(50),
+                "rid": subscription.rid,
+                "msg": message
+            ]]
+        ] as [String : Any]
+        
+        SocketManager.send(request) { (response) in
+            guard !response.isError() else { return Log.debug(response.result.string) }            
+            completion(response)
         }
     }
     
