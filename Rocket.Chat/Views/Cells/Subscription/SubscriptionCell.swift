@@ -40,7 +40,7 @@ class SubscriptionCell: UITableViewCell {
 
         labelName.text = subscription.name
         
-        if subscription.unread > 0 {
+        if subscription.unread > 0 || subscription.alert {
             labelName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
             labelName.textColor = labelUnreadTextColor
         } else {
