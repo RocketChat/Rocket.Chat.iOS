@@ -74,7 +74,7 @@ struct SubscriptionManager {
             "msg": "method",
             "method": "sendMessage",
             "params": [[
-                "_id": String.random(50),
+                "_id": String.random(18),
                 "rid": subscription.rid,
                 "msg": message
             ]]
