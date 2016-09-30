@@ -19,6 +19,7 @@ class ChatViewController: SLKTextViewController {
     var subscription: Subscription! {
         didSet {
             updateSubscriptionInfo()
+            markAsRead()
         }
     }
     
@@ -89,6 +90,12 @@ class ChatViewController: SLKTextViewController {
     
     
     // MARK: Subscription
+    
+    fileprivate func markAsRead() {
+        SubscriptionManager.markAsRead(subscription) { (response) in
+            // Nothing, for now
+        }
+    }
     
     fileprivate func updateSubscriptionInfo() {
         if let token = messagesToken {
