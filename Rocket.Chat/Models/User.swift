@@ -11,10 +11,10 @@ import RealmSwift
 import SwiftyJSON
 
 enum UserStatus: String {
-    case Offline = "offline"
-    case Online = "online"
-    case Busy = "busy"
-    case Away = "away"
+    case offline = "offline"
+    case online = "online"
+    case busy = "busy"
+    case away = "away"
 }
 
 class User: BaseModel {
@@ -22,9 +22,9 @@ class User: BaseModel {
     dynamic var name: String?
     var emails = List<Email>()
 
-    fileprivate dynamic var privateStatus = UserStatus.Offline.rawValue
+    fileprivate dynamic var privateStatus = UserStatus.offline.rawValue
     var status: UserStatus {
-        get { return UserStatus(rawValue: privateStatus) ?? UserStatus.Offline }
+        get { return UserStatus(rawValue: privateStatus) ?? UserStatus.offline }
         set { privateStatus = newValue.rawValue }
     }
 
@@ -41,7 +41,7 @@ class User: BaseModel {
         }
         
         if let status = dict["status"].string {
-            self.status = UserStatus(rawValue: status) ?? .Offline
+            self.status = UserStatus(rawValue: status) ?? .offline
         }
     }
 }

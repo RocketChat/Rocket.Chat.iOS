@@ -11,17 +11,17 @@ import RealmSwift
 import SwiftyJSON
 
 enum SubscriptionType: String {
-    case DirectMessage = "d"
-    case Channel = "c"
-    case Group = "p"
+    case directMessage = "d"
+    case channel = "c"
+    case group = "p"
 }
 
 class Subscription: BaseModel {
     dynamic var auth: Auth?
     
-    fileprivate dynamic var privateType = SubscriptionType.Channel.rawValue
+    fileprivate dynamic var privateType = SubscriptionType.channel.rawValue
     var type: SubscriptionType {
-        get { return SubscriptionType(rawValue: privateType) ?? SubscriptionType.Group }
+        get { return SubscriptionType(rawValue: privateType) ?? SubscriptionType.group }
         set { privateType = newValue.rawValue }
     }
     
@@ -60,9 +60,9 @@ class Subscription: BaseModel {
         self.open = dict["open"].bool ?? false
         self.alert = dict["alert"].bool ?? false
         self.favorite = dict["f"].bool ?? false
-        self.privateType = dict["t"].string ?? SubscriptionType.Channel.rawValue
+        self.privateType = dict["t"].string ?? SubscriptionType.channel.rawValue
         
-        if self.type == .DirectMessage {
+        if self.type == .directMessage {
             let userId = dict["u"]["_id"].string
             self.otherUserId = rid.replacingOccurrences(of: userId!, with: "")
         }
