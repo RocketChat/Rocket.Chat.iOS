@@ -18,7 +18,17 @@ enum AttachmentType {
 
 class Attachment: BaseModel {
     var type: AttachmentType {
-        get { return .image }
+        get {
+            if audioURL?.characters.count ?? 0 > 0 {
+                return .audio
+            }
+            
+            if videoURL?.characters.count ?? 0 > 0 {
+                return .video
+            }
+
+            return .image
+        }
     }
     
     dynamic var title = ""

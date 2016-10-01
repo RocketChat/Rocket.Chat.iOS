@@ -21,6 +21,7 @@ class Message: BaseModel {
     dynamic var text = ""
 
     var mentions = List<Mention>()
+    var attachments = List<Attachment>()
 
 
     // MARK: ModelMapping
@@ -43,6 +44,16 @@ class Message: BaseModel {
         
         if let userId = dict["u"]["_id"].string {
             self.user = Realm.getOrCreate(User.self, primaryKey: userId, values: dict["u"])
+        }
+        
+        if let attachments = dict["attachments"].array {
+            self.attachments = List()
+
+            for attachment in attachments {
+                let obj = Attachment()
+                obj.update(attachment)
+                self.attachments.append(obj)
+            }
         }
     }
 }
