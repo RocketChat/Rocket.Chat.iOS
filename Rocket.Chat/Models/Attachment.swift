@@ -10,14 +10,8 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-enum AttachmentType {
-    case image
-    case audio
-    case video
-}
-
 class Attachment: BaseModel {
-    var type: AttachmentType {
+    var type: MessageType {
         get {
             if audioURL?.characters.count ?? 0 > 0 {
                 return .audio
@@ -65,16 +59,47 @@ class Attachment: BaseModel {
         
         self.titleLinkDownload = dict["title_link_download"].bool ?? true
         
-        self.imageURL = dict["image_url"].string
+        self.imageURL = encode(url: dict["image_url"].string)
         self.imageType = dict["image_type"].string
         self.imageSize = dict["image_size"].int ?? 0
         
-        self.audioURL = dict["audio_url"].string
+        self.audioURL = encode(url: dict["audio_url"].string)
         self.audioType = dict["audio_type"].string
         self.audioSize = dict["audio_size"].int ?? 0
         
-        self.videoURL = dict["video_url"].string
+        self.videoURL = encode(url: dict["video_url"].string)
         self.videoType = dict["video_type"].string
         self.videoSize = dict["video_size"].int ?? 0
     }
+    
+    fileprivate func encode(url: String?) -> String? {
+        guard let url = url else { return nil }
+
+        let parts = url.components(separatedBy: "/")
+        var encoded: [String] = []
+        for part in parts {
+            if let string = part.addingPercentEncoding(withAllowedCharacters: .urlHostAllowed) {
+                encoded.append(string)
+            } else {
+                encoded.append(part)
+            }
+        }
+        
+        return encoded.joined(separator: "/")
+    }
+}
+
+extension Attachment {
+    
+    static func fullImageURL(_ attachment: Attachment) -> URL? {
+        guard let imagePath = attachment.imageURL else { return nil }
+        guard let auth = AuthManager.isAuthenticated() else { return nil }
+        guard let userId = auth.userId else { return nil }
+        guard let token = auth.token else { return nil }
+        guard let siteURL = auth.settings?.siteURL else { return nil }
+        var urlString = "\(siteURL)\(imagePath)?rc_uid=\(userId)&rc_token=\(token)"
+        urlString = urlString.replacingOccurrences(of: "//", with: "/")
+        return URL(string: urlString)
+    }
+    
 }
