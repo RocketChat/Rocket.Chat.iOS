@@ -10,6 +10,13 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+enum MessageType {
+    case text
+    case image
+    case audio
+    case video
+}
+
 class Message: BaseModel {
     dynamic var subscription: Subscription!
     
@@ -22,6 +29,9 @@ class Message: BaseModel {
 
     var mentions = List<Mention>()
     var attachments = List<Attachment>()
+    var type: MessageType {
+        get { return attachments.first?.type ?? .text }
+    }
 
 
     // MARK: ModelMapping

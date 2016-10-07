@@ -115,4 +115,29 @@ extension AuthManager {
         }
     }
     
+    static func updatePublicSettings(_ auth: Auth, completion: @escaping MessageCompletion) {
+        let object = [
+            "msg": "method",
+            "method": "public-settings/get"
+        ] as [String : Any]
+        
+        SocketManager.send(object) { (response) in
+            guard !response.isError() else {
+                // TODO: Logging or default behaviour on fails
+                completion(response)
+                return
+            }
+            
+            Realm.execute({ (realm) in
+                let settings = auth.settings ?? AuthSettings()
+                settings.update(response.result["result"])
+                auth.settings = settings
+
+                realm.add([settings, auth], update: true)
+            })
+        
+            completion(response)
+        }
+    }
+    
 }

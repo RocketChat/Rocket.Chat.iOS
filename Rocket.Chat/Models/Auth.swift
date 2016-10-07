@@ -12,6 +12,7 @@ import RealmSwift
 class Auth: Object {
     // Server
     dynamic var serverURL = ""
+    dynamic var settings: AuthSettings?
 
     // Token
     dynamic var token: String?
