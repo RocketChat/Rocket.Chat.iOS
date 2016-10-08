@@ -27,8 +27,11 @@ class ChatImageCell: UICollectionViewCell {
         }
     }
     
+    
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
+    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var activityIndicatorImageView: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
             imageView.layer.cornerRadius = 4
@@ -47,9 +50,12 @@ class ChatImageCell: UICollectionViewCell {
         labelUsername.text = message.user?.username
         
         guard let attachment = message.attachments.first else { return }
+        labelTitle.text = attachment.title
+
         let imageURL = Attachment.fullImageURL(attachment)
-        imageView.sd_setImage(with: imageURL, completed: { (image, error, cacheType, imageURL) in
-            print(error ?? "OK")
+        activityIndicatorImageView.startAnimating()
+        imageView.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cacheType, imageURL) in
+            self.activityIndicatorImageView.stopAnimating()
         })
     }
 }
