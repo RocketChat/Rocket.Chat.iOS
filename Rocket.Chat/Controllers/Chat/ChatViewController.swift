@@ -36,6 +36,10 @@ class ChatViewController: SLKTextViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.tintColor = UIColor.lightGray
+
         isInverted = false
         
         setupSideMenu()
