@@ -6,9 +6,7 @@
 //  Copyright © 2016 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
 import UIKit
-import SDWebImage
 
 class ChatTextCell: UICollectionViewCell {
     

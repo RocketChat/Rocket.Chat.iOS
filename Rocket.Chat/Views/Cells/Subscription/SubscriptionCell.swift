@@ -54,26 +54,26 @@ class SubscriptionCell: UITableViewCell {
     
     func updateIconImage() {
         switch subscription.type {
-        case .Channel:
+        case .channel:
             imageViewIcon.image = UIImage(named: "Hashtag")?.imageWithTint(iconColorOffline)
             break
-        case .DirectMessage:
+        case .directMessage:
             var color = iconColorOffline
 
             if let user = subscription.directMessageUser {
                 color = { _ -> UIColor in
                     switch user.status {
-                    case .Online: return self.iconColorOnline
-                    case .Offline: return self.iconColorOffline
-                    case .Away: return self.iconColorAway
-                    case .Busy: return self.iconColorBusy
+                    case .online: return self.iconColorOnline
+                    case .offline: return self.iconColorOffline
+                    case .away: return self.iconColorAway
+                    case .busy: return self.iconColorBusy
                     }
                 }()
             }
 
             imageViewIcon.image = UIImage(named: "Mention")?.imageWithTint(color)
             break
-        case .Group:
+        case .group:
             imageViewIcon.image = UIImage(named: "Lock")?.imageWithTint(iconColorOffline)
             break
         }
