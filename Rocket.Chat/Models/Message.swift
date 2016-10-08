@@ -10,6 +10,13 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+enum MessageType {
+    case text
+    case image
+    case audio
+    case video
+}
+
 class Message: BaseModel {
     dynamic var subscription: Subscription!
     
@@ -21,6 +28,10 @@ class Message: BaseModel {
     dynamic var text = ""
 
     var mentions = List<Mention>()
+    var attachments = List<Attachment>()
+    var type: MessageType {
+        get { return attachments.first?.type ?? .text }
+    }
 
 
     // MARK: ModelMapping
@@ -43,6 +54,16 @@ class Message: BaseModel {
         
         if let userId = dict["u"]["_id"].string {
             self.user = Realm.getOrCreate(User.self, primaryKey: userId, values: dict["u"])
+        }
+        
+        if let attachments = dict["attachments"].array {
+            self.attachments = List()
+
+            for attachment in attachments {
+                let obj = Attachment()
+                obj.update(attachment)
+                self.attachments.append(obj)
+            }
         }
     }
 }

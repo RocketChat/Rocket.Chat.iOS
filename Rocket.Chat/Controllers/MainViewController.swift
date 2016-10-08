@@ -40,6 +40,10 @@ class MainViewController: BaseViewController {
                 
                 SubscriptionManager.updateSubscriptions(auth, completion: { (response) in
                     // TODO: Move it to somewhere else
+                    AuthManager.updatePublicSettings(auth, completion: { (response) in
+                        
+                    })
+
                     UserManager.changes()
                     SubscriptionManager.changes(auth)
                     
