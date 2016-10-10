@@ -41,6 +41,7 @@
 		419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419205481D52EDE6004EEC5F /* UILabelExtension.swift */; };
 		4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */; };
 		4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */; };
+		4199A9891DABCC570035F820 /* Emojione.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4199A9881DABCC570035F820 /* Emojione.swift */; };
 		41A79C0F1D2F085F00A1968E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C0E1D2F085F00A1968E /* User.swift */; };
 		41A79C131D2F09F200A1968E /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C121D2F09F200A1968E /* Auth.swift */; };
 		41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A87BAC1DA66E700000EE80 /* AuthSettings.swift */; };
@@ -125,6 +126,7 @@
 		419205481D52EDE6004EEC5F /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILabelExtension.swift; path = Extensions/UILabelExtension.swift; sourceTree = "<group>"; };
 		4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionCell.swift; path = Views/Cells/Subscription/SubscriptionCell.swift; sourceTree = "<group>"; };
 		4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = Extensions/UIColorExtension.swift; sourceTree = "<group>"; };
+		4199A9881DABCC570035F820 /* Emojione.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emojione.swift; sourceTree = "<group>"; };
 		41A79C0E1D2F085F00A1968E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		41A79C121D2F09F200A1968E /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Auth.swift; path = Models/Auth.swift; sourceTree = "<group>"; };
 		41A87BAC1DA66E700000EE80 /* AuthSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettings.swift; path = Models/AuthSettings.swift; sourceTree = "<group>"; };
@@ -355,6 +357,23 @@
 			name = Subscription;
 			sourceTree = "<group>";
 		};
+		4199A9861DABCC2E0035F820 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				4199A9871DABCC570035F820 /* Emojione */,
+			);
+			name = External;
+			sourceTree = "<group>";
+		};
+		4199A9871DABCC570035F820 /* Emojione */ = {
+			isa = PBXGroup;
+			children = (
+				4199A9881DABCC570035F820 /* Emojione.swift */,
+			);
+			name = Emojione;
+			path = External/Emojione;
+			sourceTree = "<group>";
+		};
 		41A79C0D1D2F084F00A1968E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -415,6 +434,7 @@
 		41DF76E11D2C50710028DBF8 /* Rocket.Chat */ = {
 			isa = PBXGroup;
 			children = (
+				4199A9861DABCC2E0035F820 /* External */,
 				41A79C0D1D2F084F00A1968E /* Models */,
 				4174CB1D1D2DB3270086DAC8 /* Extensions */,
 				4174CB181D2D9D940086DAC8 /* Managers */,
@@ -840,6 +860,7 @@
 				4159720C1D3DB854002258F4 /* Email.swift in Sources */,
 				41BAE3E71D71B26C00C2445A /* NSURLExtension.swift in Sources */,
 				4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */,
+				4199A9891DABCC570035F820 /* Emojione.swift in Sources */,
 				41C275DF1D848005003C88CF /* AvatarView.swift in Sources */,
 				4174CB171D2D9BB70086DAC8 /* AuthViewController.swift in Sources */,
 				4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */,
