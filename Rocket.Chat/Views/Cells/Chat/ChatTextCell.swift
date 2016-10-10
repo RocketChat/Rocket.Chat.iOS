@@ -38,7 +38,7 @@ class ChatTextCell: UICollectionViewCell {
         avatarView.user = message.user
         
         labelUsername.text = message.user?.username
-        labelText.text = message.text
+        labelText.text = Emojione.transform(string: message.text)
         labelText.sizeToFit()
     }
     
