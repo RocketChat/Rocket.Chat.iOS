@@ -32,13 +32,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa">
-                        <barButtonItem key="leftBarButtonItem" image="Menu" id="gea-bF-25Y">
-                            <connections>
-                                <action selector="buttonMenuDidPressed:" destination="A1E-cs-q8E" id="4Sp-Rn-vlQ"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa"/>
                     <connections>
                         <outlet property="activityIndicator" destination="uUJ-ih-W2L" id="GiA-t4-Snn"/>
                     </connections>
@@ -66,7 +60,4 @@
             <point key="canvasLocation" x="864" y="636"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="Menu" width="22" height="22"/>
-    </resources>
 </document>
