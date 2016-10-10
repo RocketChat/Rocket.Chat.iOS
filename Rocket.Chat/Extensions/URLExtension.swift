@@ -1,5 +1,5 @@
 //
-//  NSURLExtension.swift
+//  URLExtension.swift
 //  Rocket.Chat
 //
 //  Created by Rafael K. Streit on 8/27/16.
@@ -14,8 +14,8 @@ extension URL {
         let pathComponents = self.pathComponents 
         var components = URLComponents()
         components.scheme = "wss"
-        components.host = self.host
-        components.path = self.path
+        components.host = self.host != nil ? self.host : self.path
+        components.path = self.host != nil ? self.path : ""
         
         var newURL = components.url
         if !pathComponents.contains("websocket") {
