@@ -43,9 +43,9 @@ class ChatViewController: SLKTextViewController {
 
         isInverted = false
         
+        setupTitleView()
         setupSideMenu()
         registerCells()
-        setupTitleView()
     }
     
     fileprivate func setupTitleView() {
@@ -121,6 +121,7 @@ class ChatViewController: SLKTextViewController {
 
         activityIndicator.startAnimating()
         title = subscription?.name
+        chatTitleView?.subscription = subscription
         messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
             if self.messages.count > 0 {
