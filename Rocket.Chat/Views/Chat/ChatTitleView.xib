@@ -22,14 +22,14 @@
                         <constraint firstAttribute="height" constant="21" id="mAU-RX-JAf"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.35686274509803922" green="0.35686274509803922" blue="0.35686274509803922" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="HbG-ar-gTn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6Sz-aq-d79"/>
-                <constraint firstItem="MyI-mP-Niy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="9g9-YD-DQK"/>
+                <constraint firstItem="HbG-ar-gTn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-1" id="6Sz-aq-d79"/>
+                <constraint firstItem="MyI-mP-Niy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-1" id="9g9-YD-DQK"/>
                 <constraint firstItem="HbG-ar-gTn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="qPg-to-V4W"/>
                 <constraint firstAttribute="trailing" secondItem="MyI-mP-Niy" secondAttribute="trailing" constant="8" id="rjX-p2-GhN"/>
                 <constraint firstItem="MyI-mP-Niy" firstAttribute="leading" secondItem="HbG-ar-gTn" secondAttribute="trailing" constant="8" id="zVM-MK-n4g"/>
