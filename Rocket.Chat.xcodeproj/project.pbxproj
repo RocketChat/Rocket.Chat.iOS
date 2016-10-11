@@ -69,6 +69,8 @@
 		41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */; };
 		41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E2FA061D41513C00238DFD /* ChatViewController.swift */; };
 		41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E991D31D343A9F00BDDCA8 /* DateExtension.swift */; };
+		41F167E91DAC4D4300775CCA /* ChatTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F167E81DAC4D4300775CCA /* ChatTitleView.swift */; };
+		41F167EB1DAC4D5500775CCA /* ChatTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F167EA1DAC4D5500775CCA /* ChatTitleView.xib */; };
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
 /* End PBXBuildFile section */
 
@@ -160,6 +162,8 @@
 		41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionsViewController.swift; path = Controllers/Subscriptions/SubscriptionsViewController.swift; sourceTree = "<group>"; };
 		41E2FA061D41513C00238DFD /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = Controllers/Chat/ChatViewController.swift; sourceTree = "<group>"; };
 		41E991D31D343A9F00BDDCA8 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtension.swift; path = Extensions/DateExtension.swift; sourceTree = "<group>"; };
+		41F167E81DAC4D4300775CCA /* ChatTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTitleView.swift; path = Views/Chat/ChatTitleView.swift; sourceTree = "<group>"; };
+		41F167EA1DAC4D5500775CCA /* ChatTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatTitleView.xib; path = Views/Chat/ChatTitleView.xib; sourceTree = "<group>"; };
 		5108B4F1453CB9F4E425E3F4 /* Pods-Rocket.Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.release.xcconfig"; sourceTree = "<group>"; };
 		58C7F7D8D91A05CA5D1C9FE0 /* Pods-Rocket.ChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_ChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -236,6 +240,7 @@
 		4161332F1D46CA2800E09DA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				41F167E51DAC450200775CCA /* Chat */,
 				41C275DD1D847FEE003C88CF /* Avatar */,
 				416133301D46CA3100E09DA2 /* Cells */,
 			);
@@ -486,6 +491,15 @@
 			name = Subscriptions;
 			sourceTree = "<group>";
 		};
+		41F167E51DAC450200775CCA /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				41F167EA1DAC4D5500775CCA /* ChatTitleView.xib */,
+				41F167E81DAC4D4300775CCA /* ChatTitleView.swift */,
+			);
+			name = Chat;
+			sourceTree = "<group>";
+		};
 		41F1702C1D425358007E6948 /* Socket */ = {
 			isa = PBXGroup;
 			children = (
@@ -638,6 +652,7 @@
 				41BAE3EB1D71CA5200C2445A /* Localizable.strings in Resources */,
 				41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */,
 				41DF76E81D2C50710028DBF8 /* Main.storyboard in Resources */,
+				41F167EB1DAC4D5500775CCA /* ChatTitleView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -848,6 +863,7 @@
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
 				415801951D303B640099E71B /* MainViewController.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
+				41F167E91DAC4D4300775CCA /* ChatTitleView.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatTextCell.swift in Sources */,

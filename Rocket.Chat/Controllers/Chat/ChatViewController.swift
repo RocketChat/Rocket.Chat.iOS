@@ -13,7 +13,8 @@ import SlackTextViewController
 class ChatViewController: SLKTextViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
+    weak var chatTitleView: ChatTitleView?
+    
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
     var subscription: Subscription! {
@@ -38,12 +39,19 @@ class ChatViewController: SLKTextViewController {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.white
-        navigationController?.navigationBar.tintColor = UIColor.lightGray
+        navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
 
         isInverted = false
         
+        setupTitleView()
         setupSideMenu()
         registerCells()
+    }
+    
+    fileprivate func setupTitleView() {
+        let view = Bundle.main.loadNibNamed("ChatTitleView", owner: self, options: [:])!.first as! ChatTitleView
+        self.navigationItem.titleView = view
+        chatTitleView = view
     }
     
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
@@ -113,6 +121,7 @@ class ChatViewController: SLKTextViewController {
 
         activityIndicator.startAnimating()
         title = subscription?.name
+        chatTitleView?.subscription = subscription
         messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
             if self.messages.count > 0 {
