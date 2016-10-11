@@ -33,9 +33,9 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa">
-                        <barButtonItem key="leftBarButtonItem" image="Menu" id="gea-bF-25Y">
+                        <barButtonItem key="leftBarButtonItem" image="Menu" id="8AY-Oe-fcS">
                             <connections>
-                                <action selector="buttonMenuDidPressed:" destination="A1E-cs-q8E" id="4Sp-Rn-vlQ"/>
+                                <action selector="buttonMenuDidPressed:" destination="A1E-cs-q8E" id="Rkb-iU-5Co"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
