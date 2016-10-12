@@ -49,7 +49,8 @@ class ChatViewController: SLKTextViewController {
     }
     
     fileprivate func setupTitleView() {
-        let view = Bundle.main.loadNibNamed("ChatTitleView", owner: self, options: [:])!.first as! ChatTitleView
+        // FIXME: Use typealias or associatedType in the protocol, to avoid casting
+        let view = ChatTitleView.instanceFromNib() as? ChatTitleView
         self.navigationItem.titleView = view
         chatTitleView = view
     }
