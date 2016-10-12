@@ -30,6 +30,13 @@ class ChatTextCell: UICollectionViewCell {
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelText: UILabel!
     
+    override func prepareForReuse() {
+        avatarView.imageView.image = nil
+        labelUsername.text = ""
+        labelText.text = ""
+        labelDate.text = ""
+    }
+    
     fileprivate func updateMessageInformation() {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
@@ -39,7 +46,6 @@ class ChatTextCell: UICollectionViewCell {
         
         labelUsername.text = message.user?.username
         labelText.text = Emojione.transform(string: message.text)
-        labelText.sizeToFit()
     }
     
 }
