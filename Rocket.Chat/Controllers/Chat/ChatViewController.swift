@@ -171,11 +171,7 @@ class ChatViewController: SLKTextViewController {
 extension ChatViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let messages = messages {
-            return messages.count
-        }
-        
-        return 0
+        return messages?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
