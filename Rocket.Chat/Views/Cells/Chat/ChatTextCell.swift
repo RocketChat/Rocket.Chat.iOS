@@ -31,7 +31,6 @@ class ChatTextCell: UICollectionViewCell {
     @IBOutlet weak var labelText: UILabel!
     
     override func prepareForReuse() {
-        avatarView.imageView.image = nil
         labelUsername.text = ""
         labelText.text = ""
         labelDate.text = ""

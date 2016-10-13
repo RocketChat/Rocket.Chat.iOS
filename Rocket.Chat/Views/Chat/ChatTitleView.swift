@@ -8,7 +8,10 @@
 
 import UIKit
 
-class ChatTitleView: UIView {
+class ChatTitleView: BaseView {
+    
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var labelTitle: UILabel!
     
     internal let iconColorOffline = UIColor(rgb: 0x9AB1BF, alphaVal: 1)
     internal let iconColorOnline = UIColor(rgb: 0x35AC19, alphaVal: 1)
@@ -45,8 +48,9 @@ class ChatTitleView: UIView {
             }
         }
     }
+    // MARK: Replaceable
     
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var labelTitle: UILabel!
-    
+    override func isReplaceable() -> Bool {
+        return true
+    }
 }
