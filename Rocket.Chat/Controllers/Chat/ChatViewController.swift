@@ -9,6 +9,7 @@
 import SideMenu
 import RealmSwift
 import SlackTextViewController
+import SafariServices
 
 class ChatViewController: SLKTextViewController {
     
@@ -192,6 +193,7 @@ extension ChatViewController {
         if message.type == .url {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatURLCell.identifier, for: indexPath) as! ChatURLCell
             cell.message = message
+            cell.delegate = self
             return cell
         }
         
@@ -231,4 +233,14 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: fullWidth, height: max(labelHeightSpace, ChatTextCell.minimumHeight))
     }
     
+}
+
+
+// MARK: ChatURLCellProtocol
+
+extension ChatViewController: ChatURLCellProtocol {
+    func openURLFromCell(url: URL, cell: ChatURLCell) {
+        let controller = SFSafariViewController(url: url)
+        present(controller, animated: true, completion: nil)
+    }
 }
