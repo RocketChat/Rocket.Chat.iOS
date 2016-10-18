@@ -124,6 +124,7 @@
                 <outlet property="labelURLDescription" destination="7Cu-Hf-tVd" id="ufP-vj-vHY"/>
                 <outlet property="labelURLTitle" destination="9Mv-Tp-g1Y" id="sG1-Pc-hPV"/>
                 <outlet property="labelUsername" destination="40K-VI-9eL" id="OIn-tg-dp0"/>
+                <outlet property="viewURL" destination="XuJ-Kr-IFM" id="UX3-4r-RXb"/>
             </connections>
             <point key="canvasLocation" x="699" y="538"/>
         </collectionViewCell>
