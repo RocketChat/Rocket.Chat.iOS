@@ -69,6 +69,11 @@ class ChatViewController: SLKTextViewController {
             nibName: "ChatImageCell",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatImageCell.identifier)
+        
+        self.collectionView?.register(UINib(
+            nibName: "ChatURLCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatURLCell.identifier)
     }
     
     fileprivate func scrollToBottom(_ animated: Bool = false) {
@@ -181,7 +186,12 @@ extension ChatViewController {
         if message.type == .image {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatImageCell.identifier, for: indexPath) as! ChatImageCell
             cell.message = message
-            
+            return cell
+        }
+        
+        if message.type == .url {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatURLCell.identifier, for: indexPath) as! ChatURLCell
+            cell.message = message
             return cell
         }
         
@@ -202,13 +212,23 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let message = messages![indexPath.row]
         
+        let fullWidth = UIScreen.main.bounds.size.width
+        let labelHeightSpace = UILabel.heightForView(
+            message.text,
+            font: UIFont.systemFont(ofSize: 14),
+            width: fullWidth - 60
+        ) + 35
+        
         if message.type == .image {
-            return CGSize(width: UIScreen.main.bounds.size.width, height: ChatImageCell.minimumHeight)
+            return CGSize(width: fullWidth, height: ChatImageCell.minimumHeight)
+        }
+        
+        if message.type == .url {
+            let height = max(labelHeightSpace + 50, ChatURLCell.minimumHeight)
+            return CGSize(width: fullWidth, height: height)
         }
 
-        let width = UIScreen.main.bounds.size.width
-        let height = UILabel.heightForView(message.text, font: UIFont.systemFont(ofSize: 14), width: width - 60) + 35
-        return CGSize(width: width, height: max(height, ChatTextCell.minimumHeight))
+        return CGSize(width: fullWidth, height: max(labelHeightSpace, ChatTextCell.minimumHeight))
     }
     
 }
