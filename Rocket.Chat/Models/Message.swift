@@ -15,6 +15,7 @@ enum MessageType {
     case image
     case audio
     case video
+    case url
 }
 
 class Message: BaseModel {
@@ -32,7 +33,11 @@ class Message: BaseModel {
     var urls = List<MessageURL>()
 
     var type: MessageType {
-        get { return attachments.first?.type ?? .text }
+        get {
+            if let attachment = attachments.first { return attachment.type }
+            if let _ = urls.first { return .url }
+            return .text
+        }
     }
 
 
