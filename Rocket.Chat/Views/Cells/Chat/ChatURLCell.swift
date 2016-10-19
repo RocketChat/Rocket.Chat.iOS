@@ -14,6 +14,8 @@ protocol ChatURLCellProtocol {
 
 class ChatURLCell: UICollectionViewCell {
     
+    fileprivate static let imageViewDefaultWidth = CGFloat(50)
+    
     static let minimumHeight = CGFloat(110)
     static let identifier = "ChatURLCell"
     
@@ -37,6 +39,7 @@ class ChatURLCell: UICollectionViewCell {
     @IBOutlet weak var labelText: UILabel!
 
     @IBOutlet weak var viewURL: UIView!
+    @IBOutlet weak var imageViewURLWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewURL: UIImageView! {
         didSet {
             imageViewURL.layer.masksToBounds = true
@@ -78,7 +81,13 @@ class ChatURLCell: UICollectionViewCell {
             labelURLDescription.text = url.textDescription
             
             if let imageURL = URL(string: url.imageURL ?? "") {
-                imageViewURL.sd_setImage(with: imageURL)
+                imageViewURL.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cache, url) in
+                    if error != nil {
+                        self.imageViewURLWidthConstraint.constant = 0
+                    } else {
+                        self.imageViewURLWidthConstraint.constant = ChatURLCell.imageViewDefaultWidth
+                    }
+                })
             }
         }
     }
