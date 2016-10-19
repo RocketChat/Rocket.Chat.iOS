@@ -119,6 +119,7 @@
             <connections>
                 <outlet property="avatarView" destination="dHe-RL-dFU" id="csc-UN-OHb"/>
                 <outlet property="imageViewURL" destination="63t-Kq-A0t" id="Aa6-K5-s9d"/>
+                <outlet property="imageViewURLWidthConstraint" destination="4uN-JF-MHW" id="hZs-tQ-IR2"/>
                 <outlet property="labelDate" destination="pvK-41-cNi" id="0kK-Vz-QXR"/>
                 <outlet property="labelText" destination="QYQ-rY-d5g" id="Na3-Lw-iPE"/>
                 <outlet property="labelURLDescription" destination="7Cu-Hf-tVd" id="ufP-vj-vHY"/>
