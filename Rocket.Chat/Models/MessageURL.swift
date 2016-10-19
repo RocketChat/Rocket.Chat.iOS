@@ -33,6 +33,10 @@ class MessageURL: BaseModel {
         imageURL = MessageURL.parseImageURL(meta: meta)
     }
     
+    func isValid() -> Bool {
+        return title?.characters.count ?? 0 > 0 && textDescription?.characters.count ?? 0 > 0
+    }
+    
     
     // MARK: Parsers
     

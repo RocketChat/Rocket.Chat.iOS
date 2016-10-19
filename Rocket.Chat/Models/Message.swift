@@ -34,8 +34,16 @@ class Message: BaseModel {
 
     var type: MessageType {
         get {
-            if let attachment = attachments.first { return attachment.type }
-            if let _ = urls.first { return .url }
+            if let attachment = attachments.first {
+                return attachment.type
+            }
+
+            if let url = urls.first {
+                if url.isValid() {
+                    return .url
+                }
+            }
+
             return .text
         }
     }
