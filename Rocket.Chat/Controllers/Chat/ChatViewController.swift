@@ -62,19 +62,9 @@ class ChatViewController: SLKTextViewController {
     
     fileprivate func registerCells() {
         self.collectionView?.register(UINib(
-            nibName: "ChatTextCell",
+            nibName: "ChatMessageCell",
             bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatTextCell.identifier)
-        
-        self.collectionView?.register(UINib(
-            nibName: "ChatImageCell",
-            bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatImageCell.identifier)
-        
-        self.collectionView?.register(UINib(
-            nibName: "ChatURLCell",
-            bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatURLCell.identifier)
+        ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
     }
     
     fileprivate func scrollToBottom(_ animated: Bool = false) {
@@ -184,20 +174,11 @@ extension ChatViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let message = messages![indexPath.row]
 
-        if message.type == .image {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatImageCell.identifier, for: indexPath) as! ChatImageCell
-            cell.message = message
-            return cell
-        }
-        
-        if message.type == .url {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatURLCell.identifier, for: indexPath) as! ChatURLCell
-            cell.message = message
-            cell.delegate = self
-            return cell
-        }
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatTextCell.identifier, for: indexPath) as! ChatTextCell
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ChatMessageCell.identifier,
+            for: indexPath
+        ) as! ChatMessageCell
+
         cell.message = message
         return cell
     }
@@ -213,24 +194,9 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let message = messages![indexPath.row]
-        
         let fullWidth = UIScreen.main.bounds.size.width
-        let labelHeightSpace = UILabel.heightForView(
-            message.text,
-            font: UIFont.systemFont(ofSize: 14),
-            width: fullWidth - 60
-        ) + 35
-        
-        if message.type == .image {
-            return CGSize(width: fullWidth, height: ChatImageCell.minimumHeight)
-        }
-        
-        if message.type == .url {
-            let height = max(labelHeightSpace + 50, ChatURLCell.minimumHeight)
-            return CGSize(width: fullWidth, height: height)
-        }
-
-        return CGSize(width: fullWidth, height: max(labelHeightSpace, ChatTextCell.minimumHeight))
+        let height = ChatMessageCell.cellMediaHeightFor(message: message)
+        return CGSize(width: fullWidth, height: height)
     }
     
 }
@@ -238,9 +204,9 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: ChatURLCellProtocol
 
-extension ChatViewController: ChatURLCellProtocol {
-    func openURLFromCell(url: URL, cell: ChatURLCell) {
-        let controller = SFSafariViewController(url: url)
-        present(controller, animated: true, completion: nil)
+extension ChatViewController: ChatMessageURLViewProtocol {
+    func openURLFromCell(url: MessageURL) {
+        // let controller = SFSafariViewController(url: url)
+        // present(controller, animated: true, completion: nil)
     }
 }
