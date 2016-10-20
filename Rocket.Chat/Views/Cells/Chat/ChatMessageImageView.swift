@@ -1,5 +1,5 @@
 //
-//  ChatImageCell.swift
+//  ChatMessageImageView.swift
 //  Rocket.Chat
 //
 //  Created by Rafael K. Streit on 03/10/16.
@@ -9,28 +9,15 @@
 import UIKit
 import SDWebImage
 
-class ChatImageCell: UICollectionViewCell {
-    
-    static let minimumHeight = CGFloat(270)
-    static let identifier = "ChatImageCell"
-    
-    var message: Message! {
+class ChatMessageImageView: BaseView {
+    static let defaultHeight = CGFloat(150)
+
+    var attachment: Attachment! {
         didSet {
             updateMessageInformation()
         }
     }
     
-    @IBOutlet weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-        }
-    }
-    
-    
-    @IBOutlet weak var labelDate: UILabel!
-    @IBOutlet weak var labelUsername: UILabel!
-    @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var activityIndicatorImageView: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
@@ -41,17 +28,6 @@ class ChatImageCell: UICollectionViewCell {
     }
     
     fileprivate func updateMessageInformation() {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-        labelDate.text = formatter.string(from: message.createdAt! as Date)
-        
-        avatarView.user = message.user
-        
-        labelUsername.text = message.user?.username
-        
-        guard let attachment = message.attachments.first else { return }
-        labelTitle.text = attachment.title
-
         let imageURL = Attachment.fullImageURL(attachment)
         activityIndicatorImageView.startAnimating()
         imageView.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cacheType, imageURL) in
