@@ -10,13 +10,11 @@ import UIKit
 
 
 class BaseView: UIView, NibLoadableView {
-    
     func isReplaceable() -> Bool {
         return false
     }
     
     override func awakeAfter(using aDecoder: NSCoder) -> Any? {
-    
         if !isReplaceable() || !subviews.isEmpty {
             return self
         }

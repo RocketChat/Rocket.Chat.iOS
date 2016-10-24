@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 /**
  *  A protocol used to load xib files using the class name
  *  In order for that to work the xib and the class file must have the same name, i.e:
@@ -16,7 +17,7 @@ import UIKit
  */
 public protocol NibLoadableView: class {
     static var nibName: String { get }
-    static func instanceFromNib()-> UIView
+    static func instanceFromNib() -> UIView
     static func instanceFromNibWithName(name: String) -> UIView
 }
 
@@ -25,6 +26,7 @@ public extension NibLoadableView where Self: UIView {
         // In Swift 3 it returns `Rocket_Chat.AvatarView` so we need to extract what we need
         return String(describing: self).components(separatedBy: ".").last ?? ""
     }
+
     static func instanceFromNib()-> UIView {
         return instanceFromNibWithName(name: self.nibName)
     }
