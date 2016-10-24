@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
@@ -43,7 +43,6 @@
                 <constraint firstItem="63t-Kq-A0t" firstAttribute="leading" secondItem="nfz-qe-v9j" secondAttribute="trailing" constant="7" id="81z-Na-p8i"/>
                 <constraint firstItem="63t-Kq-A0t" firstAttribute="centerY" secondItem="XuJ-Kr-IFM" secondAttribute="centerY" id="Bnf-be-fQj"/>
                 <constraint firstItem="nfz-qe-v9j" firstAttribute="leading" secondItem="XuJ-Kr-IFM" secondAttribute="leading" id="CA5-jL-huk"/>
-                <constraint firstAttribute="height" constant="50" id="L60-Z2-Jt5"/>
                 <constraint firstItem="9Mv-Tp-g1Y" firstAttribute="leading" secondItem="63t-Kq-A0t" secondAttribute="trailing" constant="8" id="Sgt-eq-I3v"/>
                 <constraint firstItem="7Cu-Hf-tVd" firstAttribute="top" secondItem="9Mv-Tp-g1Y" secondAttribute="bottom" id="c6z-kb-xlj"/>
                 <constraint firstItem="7Cu-Hf-tVd" firstAttribute="leading" secondItem="63t-Kq-A0t" secondAttribute="trailing" constant="8" id="dPA-p6-vyc"/>

@@ -179,6 +179,7 @@ extension ChatViewController {
             for: indexPath
         ) as! ChatMessageCell
 
+        cell.delegate = self
         cell.message = message
         return cell
     }
@@ -204,9 +205,11 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: ChatURLCellProtocol
 
-extension ChatViewController: ChatMessageURLViewProtocol {
+extension ChatViewController: ChatMessageCellProtocol {
     func openURLFromCell(url: MessageURL) {
-        // let controller = SFSafariViewController(url: url)
-        // present(controller, animated: true, completion: nil)
+        guard let targetURL = url.targetURL else { return }
+        guard let destinyURL = URL(string: targetURL) else { return }
+        let controller = SFSafariViewController(url: destinyURL)
+        present(controller, animated: true, completion: nil)
     }
 }

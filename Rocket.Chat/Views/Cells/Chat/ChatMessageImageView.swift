@@ -28,7 +28,16 @@ class ChatMessageImageView: BaseView {
         }
     }
     
+    var tapGesture: UITapGestureRecognizer?
+    
     fileprivate func updateMessageInformation() {
+        if let gesture = tapGesture {
+            removeGestureRecognizer(gesture)
+        }
+        
+        tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView))
+        addGestureRecognizer(tapGesture!)
+        
         labelTitle.text = attachment.title
         
         let imageURL = Attachment.fullImageURL(attachment)
@@ -36,5 +45,9 @@ class ChatMessageImageView: BaseView {
         imageView.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cacheType, imageURL) in
             self.activityIndicatorImageView.stopAnimating()
         })
+    }
+    
+    func didTapView() {
+        dump(self)
     }
 }

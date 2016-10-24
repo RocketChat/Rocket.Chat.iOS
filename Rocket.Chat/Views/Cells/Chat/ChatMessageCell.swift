@@ -8,11 +8,16 @@
 
 import UIKit
 
+protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol {
+    
+}
+
 class ChatMessageCell: UICollectionViewCell {
     
     static let minimumHeight = CGFloat(55)
     static let identifier = "ChatMessageCell"
 
+    var delegate: ChatMessageCellProtocol?
     var message: Message! {
         didSet {
             updateMessageInformation()
@@ -83,6 +88,8 @@ class ChatMessageCell: UICollectionViewCell {
             guard url.isValid() else { continue }
             let view = ChatMessageURLView.instanceFromNib() as! ChatMessageURLView
             view.url = url
+            view.delegate = delegate
+
             mediaViews.addArrangedSubview(view)
             mediaViewHeight = mediaViewHeight + ChatMessageURLView.defaultHeight
         }
