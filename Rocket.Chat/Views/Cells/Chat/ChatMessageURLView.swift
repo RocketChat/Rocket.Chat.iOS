@@ -33,19 +33,15 @@ class ChatMessageURLView: BaseView {
     @IBOutlet weak var labelURLTitle: UILabel!
     @IBOutlet weak var labelURLDescription: UILabel!
     
-    var tapGestureURLView: UITapGestureRecognizer?
+    var tapGesture: UITapGestureRecognizer?
     
     fileprivate func updateMessageInformation() {
-        if let gesture = tapGestureURLView {
+        if let gesture = tapGesture {
             self.removeGestureRecognizer(gesture)
         }
         
-        tapGestureURLView = UITapGestureRecognizer(
-            target: self,
-            action: #selector(viewURLDidTapped(_:))
-        )
-        
-        self.addGestureRecognizer(tapGestureURLView!)
+        tapGesture = UITapGestureRecognizer( target: self, action: #selector(viewDidTapped(_:)))
+        addGestureRecognizer(tapGesture!)
         
         labelURLTitle.text = url.title
         labelURLDescription.text = url.textDescription
@@ -58,7 +54,7 @@ class ChatMessageURLView: BaseView {
         }
     }
     
-    func viewURLDidTapped(_ sender: Any) {
+    func viewDidTapped(_ sender: Any) {
         delegate?.openURLFromCell(url: url)
     }
 }
