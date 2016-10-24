@@ -15,6 +15,7 @@ enum MessageType {
     case image
     case audio
     case video
+    case url
 }
 
 class Message: BaseModel {
@@ -29,8 +30,22 @@ class Message: BaseModel {
 
     var mentions = List<Mention>()
     var attachments = List<Attachment>()
+    var urls = List<MessageURL>()
+
     var type: MessageType {
-        get { return attachments.first?.type ?? .text }
+        get {
+            if let attachment = attachments.first {
+                return attachment.type
+            }
+
+            if let url = urls.first {
+                if url.isValid() {
+                    return .url
+                }
+            }
+
+            return .text
+        }
     }
 
 
@@ -56,6 +71,7 @@ class Message: BaseModel {
             self.user = Realm.getOrCreate(User.self, primaryKey: userId, values: dict["u"])
         }
         
+        // Attachments
         if let attachments = dict["attachments"].array {
             self.attachments = List()
 
@@ -63,6 +79,17 @@ class Message: BaseModel {
                 let obj = Attachment()
                 obj.update(attachment)
                 self.attachments.append(obj)
+            }
+        }
+        
+        // URLs
+        if let urls = dict["urls"].array {
+            self.urls = List()
+            
+            for url in urls {
+                let obj = MessageURL()
+                obj.update(url)
+                self.urls.append(obj)
             }
         }
     }
