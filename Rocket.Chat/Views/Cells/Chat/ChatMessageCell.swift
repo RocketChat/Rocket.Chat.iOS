@@ -45,7 +45,8 @@ class ChatMessageCell: UICollectionViewCell {
             width: fullWidth - 60
         ) + 35
         
-        for _ in message.urls {
+        for url in message.urls {
+            guard url.isValid() else { continue }
             total = total + ChatMessageURLView.defaultHeight
         }
         
