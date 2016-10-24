@@ -10,7 +10,7 @@ import UIKit
 import SDWebImage
 
 class ChatMessageImageView: BaseView {
-    static let defaultHeight = CGFloat(150)
+    static let defaultHeight = CGFloat(250)
 
     var attachment: Attachment! {
         didSet {
@@ -18,16 +18,19 @@ class ChatMessageImageView: BaseView {
         }
     }
     
+    @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var activityIndicatorImageView: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView! {
         didSet {
-            imageView.layer.cornerRadius = 4
+            imageView.layer.cornerRadius = 3
             imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.1).cgColor
-            imageView.layer.borderWidth = 0.5
+            imageView.layer.borderWidth = 1
         }
     }
     
     fileprivate func updateMessageInformation() {
+        labelTitle.text = attachment.title
+        
         let imageURL = Attachment.fullImageURL(attachment)
         activityIndicatorImageView.startAnimating()
         imageView.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cacheType, imageURL) in
