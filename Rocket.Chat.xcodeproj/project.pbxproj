@@ -77,6 +77,8 @@
 		41F167E91DAC4D4300775CCA /* ChatTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F167E81DAC4D4300775CCA /* ChatTitleView.swift */; };
 		41F167EB1DAC4D5500775CCA /* ChatTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41F167EA1DAC4D5500775CCA /* ChatTitleView.xib */; };
 		41F3C1001DB577ED000E0C76 /* MessageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F3C0FF1DB577ED000E0C76 /* MessageURL.swift */; };
+		41FF36061DBEC0BA0074E20A /* ChatMessageVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FF36041DBEC0BA0074E20A /* ChatMessageVideoView.swift */; };
+		41FF36071DBEC0BA0074E20A /* ChatMessageVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41FF36051DBEC0BA0074E20A /* ChatMessageVideoView.xib */; };
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
 /* End PBXBuildFile section */
 
@@ -176,6 +178,8 @@
 		41F167E81DAC4D4300775CCA /* ChatTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatTitleView.swift; path = Views/Chat/ChatTitleView.swift; sourceTree = "<group>"; };
 		41F167EA1DAC4D5500775CCA /* ChatTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatTitleView.xib; path = Views/Chat/ChatTitleView.xib; sourceTree = "<group>"; };
 		41F3C0FF1DB577ED000E0C76 /* MessageURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageURL.swift; path = Models/MessageURL.swift; sourceTree = "<group>"; };
+		41FF36041DBEC0BA0074E20A /* ChatMessageVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageVideoView.swift; path = Views/Cells/Chat/ChatMessageVideoView.swift; sourceTree = "<group>"; };
+		41FF36051DBEC0BA0074E20A /* ChatMessageVideoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatMessageVideoView.xib; path = Views/Cells/Chat/ChatMessageVideoView.xib; sourceTree = "<group>"; };
 		5108B4F1453CB9F4E425E3F4 /* Pods-Rocket.Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.release.xcconfig"; sourceTree = "<group>"; };
 		58C7F7D8D91A05CA5D1C9FE0 /* Pods-Rocket.ChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_ChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -278,6 +282,8 @@
 				4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */,
 				412E1F391DB6D55000531FDA /* ChatMessageURLView.swift */,
 				412E1F3A1DB6D55000531FDA /* ChatMessageURLView.xib */,
+				41FF36041DBEC0BA0074E20A /* ChatMessageVideoView.swift */,
+				41FF36051DBEC0BA0074E20A /* ChatMessageVideoView.xib */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -680,6 +686,7 @@
 				41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */,
 				41DF76E81D2C50710028DBF8 /* Main.storyboard in Resources */,
 				41F167EB1DAC4D5500775CCA /* ChatTitleView.xib in Resources */,
+				41FF36071DBEC0BA0074E20A /* ChatMessageVideoView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -727,7 +734,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		5A6B94785E51D859BD0468DE /* [CP] Check Pods Manifest.lock */ = {
@@ -742,7 +749,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		6396FC1046FD3E86C9C3A600 /* [CP] Check Pods Manifest.lock */ = {
@@ -921,6 +928,7 @@
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
 				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,
 				4162E1531D651A8800AAAE49 /* UserManager.swift in Sources */,
+				41FF36061DBEC0BA0074E20A /* ChatMessageVideoView.swift in Sources */,
 				41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */,
 				41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */,
 				41900C271D9FE35400308EF4 /* Attachment.swift in Sources */,

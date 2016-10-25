@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol {
+protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol {
     
 }
 
@@ -55,8 +55,16 @@ class ChatMessageCell: UICollectionViewCell {
             total = total + ChatMessageURLView.defaultHeight
         }
         
-        for _ in message.attachments {
-            total = total + ChatMessageImageView.defaultHeight
+        for attachment in message.attachments {
+            let type = attachment.type
+
+            if type == .image {
+                total = total + ChatMessageImageView.defaultHeight
+            }
+            
+            if type == .video {
+                total = total + ChatMessageVideoView.defaultHeight
+            }
         }
         
         return total
@@ -95,10 +103,23 @@ class ChatMessageCell: UICollectionViewCell {
         }
         
         for attachment in message.attachments {
-            let view = ChatMessageImageView.instanceFromNib() as! ChatMessageImageView
-            view.attachment = attachment
-            mediaViews.addArrangedSubview(view)
-            mediaViewHeight = mediaViewHeight + ChatMessageImageView.defaultHeight
+            let type = attachment.type
+
+            if type == .image {
+                let view = ChatMessageImageView.instanceFromNib() as! ChatMessageImageView
+                view.attachment = attachment
+                mediaViews.addArrangedSubview(view)
+                mediaViewHeight = mediaViewHeight + ChatMessageImageView.defaultHeight
+            }
+            
+            if type == .video {
+                let view = ChatMessageVideoView.instanceFromNib() as! ChatMessageVideoView
+                view.attachment = attachment
+                view.delegate = delegate
+
+                mediaViews.addArrangedSubview(view)
+                mediaViewHeight = mediaViewHeight + ChatMessageVideoView.defaultHeight
+            }
         }
         
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
