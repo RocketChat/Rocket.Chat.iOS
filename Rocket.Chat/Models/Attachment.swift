@@ -40,6 +40,13 @@ class Attachment: BaseModel {
     dynamic var videoURL: String? = nil
     dynamic var videoType: String? = nil
     dynamic var videoSize = 0
+    var videoThumbPath: URL? {
+        get {
+            let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documents = path[0]
+            return documents.appendingPathComponent("\(identifier ?? "temp").png")
+        }
+    }
     
 
     // MARK: ModelMapping
@@ -86,6 +93,10 @@ class Attachment: BaseModel {
         }
         
         return encoded.joined(separator: "/")
+    }
+    
+    override class func ignoredProperties() -> [String] {
+        return ["videoThumb"]
     }
 }
 

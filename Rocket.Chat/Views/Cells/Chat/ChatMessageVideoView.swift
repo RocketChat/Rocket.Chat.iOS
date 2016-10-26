@@ -31,23 +31,26 @@ class ChatMessageVideoView: BaseView {
         }
     }
 
+    @IBOutlet weak var buttonPlay: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
-    var tapGesture: UITapGestureRecognizer?
-    
     fileprivate func updateMessageInformation() {
-        if let gesture = tapGesture {
-            removeGestureRecognizer(gesture)
-        }
-        
-        tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView))
-        addGestureRecognizer(tapGesture!)
-        
+        buttonPlay.isHidden = true
+        activityIndicator.startAnimating()
         labelTitle.text = attachment.title
         
         guard let videoURL = attachment.fullVideoURL() else { return }
-        activityIndicator.startAnimating()
-    
+        guard let thumbURL = attachment.videoThumbPath else { return }
+
+        if let imageData = try? Data(contentsOf: thumbURL) {
+            if let thumbnail = UIImage(data: imageData) {
+                imageViewPreview.image = thumbnail
+                activityIndicator.stopAnimating()
+                buttonPlay.isHidden = false
+                return
+            }
+        }
+
         DispatchQueue.global(qos: .userInitiated).async {
             let asset = AVAsset(url: videoURL)
             let imageGenerator = AVAssetImageGenerator(asset: asset)
@@ -56,16 +59,19 @@ class ChatMessageVideoView: BaseView {
 
             if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
                 let thumbnail = UIImage(cgImage:imageRef)
-                
+        
                 DispatchQueue.main.async {
+                    try? UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)
+
                     self.activityIndicator.stopAnimating()
                     self.imageViewPreview.image = thumbnail
+                    self.buttonPlay.isHidden = false
                 }
             }
         }
     }
     
-    func didTapView() {
+    @IBAction func buttonPlayDidPressed(_ sender: Any) {
         delegate?.openVideoFromCell(attachment: attachment)
     }
 }

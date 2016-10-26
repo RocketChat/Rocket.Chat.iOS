@@ -37,9 +37,21 @@
                             </constraints>
                         </activityIndicatorView>
                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Er3-7A-ag7"/>
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n1V-Rm-0Fo">
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="UYn-ly-jsu"/>
+                                <constraint firstAttribute="width" constant="40" id="Yn4-ol-8yx"/>
+                            </constraints>
+                            <state key="normal" image="Play"/>
+                            <connections>
+                                <action selector="buttonPlayDidPressed:" destination="93k-m0-hcx" eventType="touchUpInside" id="U1B-5y-w9M"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="n1V-Rm-0Fo" firstAttribute="centerX" secondItem="Tap-bA-2Og" secondAttribute="centerX" id="M6y-rk-NE8"/>
+                        <constraint firstItem="n1V-Rm-0Fo" firstAttribute="centerY" secondItem="Tap-bA-2Og" secondAttribute="centerY" id="PYa-0k-d5o"/>
                         <constraint firstAttribute="trailing" secondItem="Er3-7A-ag7" secondAttribute="trailing" id="PqT-Nf-YWx"/>
                         <constraint firstAttribute="bottom" secondItem="Er3-7A-ag7" secondAttribute="bottom" id="Wy0-Rb-Dfg"/>
                         <constraint firstItem="yoy-xe-Xj2" firstAttribute="centerY" secondItem="Tap-bA-2Og" secondAttribute="centerY" id="Yu4-s5-UWm"/>
@@ -63,10 +75,14 @@
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="activityIndicator" destination="yoy-xe-Xj2" id="hda-BW-oNH"/>
+                <outlet property="buttonPlay" destination="n1V-Rm-0Fo" id="fna-jr-utX"/>
                 <outlet property="imageViewPreview" destination="Er3-7A-ag7" id="QPs-ru-Own"/>
                 <outlet property="labelTitle" destination="q2f-Tt-feU" id="B5R-a0-mNO"/>
             </connections>
             <point key="canvasLocation" x="670" y="839"/>
         </view>
     </objects>
+    <resources>
+        <image name="Play" width="40" height="40"/>
+    </resources>
 </document>
