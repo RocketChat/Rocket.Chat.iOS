@@ -9,7 +9,7 @@
 import UIKit
 
 protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol {
-    
+    func openURL(url: URL)
 }
 
 class ChatMessageCell: UICollectionViewCell {
@@ -36,6 +36,7 @@ class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var labelText: UITextView! {
         didSet {
             labelText.textContainerInset = .zero
+            labelText.delegate = self
         }
     }
     
@@ -125,4 +126,18 @@ class ChatMessageCell: UICollectionViewCell {
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
     }
     
+}
+
+
+extension ChatMessageCell: UITextViewDelegate {
+    
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if URL.scheme == "http" || URL.scheme == "https" {
+            delegate?.openURL(url: URL)
+            return false
+        }
+
+        return true
+    }
+
 }
