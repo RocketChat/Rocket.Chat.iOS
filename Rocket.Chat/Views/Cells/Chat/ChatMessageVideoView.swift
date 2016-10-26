@@ -25,7 +25,12 @@ class ChatMessageVideoView: BaseView {
     }
     
     @IBOutlet weak var labelTitle: UILabel!
-    @IBOutlet weak var imageViewPreview: UIImageView!
+    @IBOutlet weak var imageViewPreview: UIImageView! {
+        didSet {
+            imageViewPreview.layer.cornerRadius = 4
+        }
+    }
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var tapGesture: UITapGestureRecognizer?
@@ -43,13 +48,20 @@ class ChatMessageVideoView: BaseView {
         guard let videoURL = attachment.fullVideoURL() else { return }
         activityIndicator.startAnimating()
     
-        let asset = AVAsset(url: videoURL)
-        let imageGenerator = AVAssetImageGenerator(asset: asset)
-        let time = CMTimeMake(1, 1)
+        DispatchQueue.global(qos: .userInitiated).async {
+            let asset = AVAsset(url: videoURL)
+            let imageGenerator = AVAssetImageGenerator(asset: asset)
+            imageGenerator.appliesPreferredTrackTransform = true
+            let time = CMTimeMake(1, 1)
 
-        if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
-            let thumbnail = UIImage(cgImage:imageRef)
-            imageViewPreview.image = thumbnail
+            if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
+                let thumbnail = UIImage(cgImage:imageRef)
+                
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.imageViewPreview.image = thumbnail
+                }
+            }
         }
     }
     
