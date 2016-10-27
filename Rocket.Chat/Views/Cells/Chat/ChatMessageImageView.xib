@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="93k-m0-hcx" customClass="ChatMessageImageView" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FuJ-nG-Msg">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q2f-Tt-feU">
+                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                            <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="q2f-Tt-feU" firstAttribute="leading" secondItem="FuJ-nG-Msg" secondAttribute="leading" id="0Om-hG-iGw"/>
+                        <constraint firstAttribute="trailing" secondItem="q2f-Tt-feU" secondAttribute="trailing" id="ECm-rn-iPG"/>
+                        <constraint firstAttribute="height" constant="30" id="PmQ-gB-H3v"/>
+                        <constraint firstItem="q2f-Tt-feU" firstAttribute="top" secondItem="FuJ-nG-Msg" secondAttribute="top" constant="5" id="u7R-ee-KzG"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Tap-bA-2Og">
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wQ2-4D-y5T"/>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="yoy-xe-Xj2">
+                            <constraints>
+                                <constraint firstAttribute="width" constant="20" id="3Tk-e8-R0h"/>
+                                <constraint firstAttribute="height" constant="20" id="Qwi-nP-qex"/>
+                            </constraints>
+                        </activityIndicatorView>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="wQ2-4D-y5T" secondAttribute="trailing" id="3PX-N6-u5J"/>
+                        <constraint firstItem="wQ2-4D-y5T" firstAttribute="leading" secondItem="Tap-bA-2Og" secondAttribute="leading" id="4JH-F9-IXv"/>
+                        <constraint firstItem="yoy-xe-Xj2" firstAttribute="centerY" secondItem="Tap-bA-2Og" secondAttribute="centerY" id="Yu4-s5-UWm"/>
+                        <constraint firstItem="wQ2-4D-y5T" firstAttribute="top" secondItem="Tap-bA-2Og" secondAttribute="top" id="bK5-j0-UdD"/>
+                        <constraint firstAttribute="bottom" secondItem="wQ2-4D-y5T" secondAttribute="bottom" id="kTe-ce-Qhi"/>
+                        <constraint firstItem="yoy-xe-Xj2" firstAttribute="centerX" secondItem="Tap-bA-2Og" secondAttribute="centerX" id="tej-VM-lbJ"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="FuJ-nG-Msg" firstAttribute="top" secondItem="93k-m0-hcx" secondAttribute="top" id="AV5-3s-Bbd"/>
+                <constraint firstItem="FuJ-nG-Msg" firstAttribute="leading" secondItem="93k-m0-hcx" secondAttribute="leading" id="C0F-fQ-PV6"/>
+                <constraint firstAttribute="trailing" secondItem="FuJ-nG-Msg" secondAttribute="trailing" id="Kjv-N0-4fY"/>
+                <constraint firstAttribute="trailing" secondItem="Tap-bA-2Og" secondAttribute="trailing" id="QfW-qI-3lS"/>
+                <constraint firstItem="Tap-bA-2Og" firstAttribute="leading" secondItem="93k-m0-hcx" secondAttribute="leading" id="ku9-Um-GhA"/>
+                <constraint firstItem="Tap-bA-2Og" firstAttribute="top" secondItem="FuJ-nG-Msg" secondAttribute="bottom" id="kwq-Rc-N8U"/>
+                <constraint firstAttribute="bottom" secondItem="Tap-bA-2Og" secondAttribute="bottom" id="nwX-SF-z1S"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="activityIndicatorImageView" destination="yoy-xe-Xj2" id="nC9-gt-ZSs"/>
+                <outlet property="imageView" destination="wQ2-4D-y5T" id="3w3-O4-0xj"/>
+                <outlet property="labelTitle" destination="q2f-Tt-feU" id="B5R-a0-mNO"/>
+            </connections>
+            <point key="canvasLocation" x="670" y="839"/>
+        </view>
+    </objects>
+</document>

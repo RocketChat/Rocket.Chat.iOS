@@ -8,17 +8,20 @@
 
 import SideMenu
 import RealmSwift
+import SlackTextViewController
+import SafariServices
 
-class ChatViewController: BaseViewController {
+class ChatViewController: SLKTextViewController {
     
-    @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
+    weak var chatTitleView: ChatTitleView?
+    
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
     var subscription: Subscription! {
         didSet {
             updateSubscriptionInfo()
+            markAsRead()
         }
     }
     
@@ -26,7 +29,7 @@ class ChatViewController: BaseViewController {
     // MARK: View Life Cycle
     
     class func sharedInstance() -> ChatViewController? {
-        if let nav = UIApplication.sharedApplication().delegate?.window??.rootViewController as? UINavigationController {
+        if let nav = UIApplication.shared.delegate?.window??.rootViewController as? UINavigationController {
             return nav.viewControllers.first as? ChatViewController
         }
         
@@ -35,53 +38,103 @@ class ChatViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.barTintColor = UIColor.white
+        navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
+
+        isInverted = false
         
+        setupTitleView()
         setupSideMenu()
         registerCells()
     }
     
-    private func registerCells() {
-        self.collectionView.registerNib(UINib(
-            nibName: "ChatTextCell",
-            bundle: NSBundle.mainBundle()
-        ), forCellWithReuseIdentifier: ChatTextCell.identifier)
+    fileprivate func setupTitleView() {
+        // FIXME: Use typealias or associatedType in the protocol, to avoid casting
+        let view = ChatTitleView.instanceFromNib() as? ChatTitleView
+        self.navigationItem.titleView = view
+        chatTitleView = view
     }
     
-    private func scrollToBottom(animated: Bool = false) {
-        let totalItems = collectionView.numberOfItemsInSection(0) - 1
+    override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
+        return UICollectionViewFlowLayout()
+    }
+    
+    fileprivate func registerCells() {
+        self.collectionView?.register(UINib(
+            nibName: "ChatMessageCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
+    }
+    
+    fileprivate func scrollToBottom(_ animated: Bool = false) {
+        let totalItems = collectionView!.numberOfItems(inSection: 0) - 1
         
         if totalItems > 0 {
-            let indexPath = NSIndexPath(forRow: totalItems, inSection: 0)
-            collectionView.scrollToItemAtIndexPath(indexPath, atScrollPosition: .Bottom, animated: animated)
+            let indexPath = IndexPath(row: totalItems, section: 0)
+            collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: animated)
+        }
+    }
+    
+    
+    // MARK: SlackTextViewController
+    
+    override func didPressRightButton(_ sender: Any?) {
+        sendMessage()
+    }
+    
+    override func didPressReturnKey(_ keyCommand: UIKeyCommand?) {
+        sendMessage()
+    }
+    
+    override func textViewDidBeginEditing(_ textView: UITextView) {
+        scrollToBottom()
+    }
+    
+    
+    // MARK: Message
+    
+    fileprivate func sendMessage() {
+        guard let message = textView.text else { return }
+        
+        SubscriptionManager.sendTextMessage(message, subscription: subscription) { [unowned self] (response) in
+            self.textView.text = ""
         }
     }
     
     
     // MARK: Subscription
     
-    private func updateSubscriptionInfo() {
+    fileprivate func markAsRead() {
+        SubscriptionManager.markAsRead(subscription) { (response) in
+            // Nothing, for now
+        }
+    }
+    
+    fileprivate func updateSubscriptionInfo() {
         if let token = messagesToken {
             token.stop()
         }
 
         activityIndicator.startAnimating()
         title = subscription?.name
-        messages = subscription?.messages.sorted("createdAt", ascending: true)
+        chatTitleView?.subscription = subscription
+        messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
             if self.messages.count > 0 {
                 self.activityIndicator.stopAnimating()
             }
 
-            self.collectionView.reloadData()
-            self.collectionView.layoutIfNeeded()
+            self.collectionView?.reloadData()
+            self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
         }
         
         MessageManager.getHistory(subscription) { [unowned self] (response) in
             self.activityIndicator.stopAnimating()
             self.messages = self.subscription?.fetchMessages()
-            self.collectionView.reloadData()
-            self.collectionView.layoutIfNeeded()
+            self.collectionView?.reloadData()
+            self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
         }
         
@@ -89,10 +142,17 @@ class ChatViewController: BaseViewController {
     }
     
     
+    // MARK: IBAction
+    
+    @IBAction func buttonMenuDidPressed(_ sender: AnyObject) {
+        present(SideMenuManager.menuLeftNavigationController!, animated: true, completion: nil)
+    }
+    
+    
     // MARK: Side Menu
     
-    private func setupSideMenu() {
-        let storyboardSubscriptions = UIStoryboard(name: "Subscriptions", bundle: NSBundle.mainBundle())
+    fileprivate func setupSideMenu() {
+        let storyboardSubscriptions = UIStoryboard(name: "Subscriptions", bundle: Bundle.main)
         SideMenuManager.menuFadeStatusBar = false
         SideMenuManager.menuLeftNavigationController = storyboardSubscriptions.instantiateInitialViewController() as? UISideMenuNavigationController
         
@@ -105,22 +165,22 @@ class ChatViewController: BaseViewController {
 
 // MARK: UICollectionViewDataSource
 
-extension ChatViewController: UICollectionViewDataSource {
+extension ChatViewController {
     
-    func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if let messages = messages {
-            return messages.count
-        }
-        
-        return 0
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return messages?.count ?? 0
     }
     
-    func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let message = messages![indexPath.row]
 
-        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(ChatTextCell.identifier, forIndexPath: indexPath) as! ChatTextCell
-        cell.message = message
+        let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: ChatMessageCell.identifier,
+            for: indexPath
+        ) as! ChatMessageCell
 
+        cell.delegate = self
+        cell.message = message
         return cell
     }
     
@@ -129,15 +189,27 @@ extension ChatViewController: UICollectionViewDataSource {
 
 extension ChatViewController: UICollectionViewDelegateFlowLayout {
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        return UIEdgeInsetsZero
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let message = messages![indexPath.row]
-        let width = UIScreen.mainScreen().bounds.size.width
-        let height = UILabel.heightForView(message.text, font: UIFont.systemFontOfSize(14), width: width - 60) + 35
-        return CGSize(width: width, height: max(height, ChatTextCell.minimumHeight))
+        let fullWidth = UIScreen.main.bounds.size.width
+        let height = ChatMessageCell.cellMediaHeightFor(message: message)
+        return CGSize(width: fullWidth, height: height)
     }
     
+}
+
+
+// MARK: ChatURLCellProtocol
+
+extension ChatViewController: ChatMessageCellProtocol {
+    func openURLFromCell(url: MessageURL) {
+        guard let targetURL = url.targetURL else { return }
+        guard let destinyURL = URL(string: targetURL) else { return }
+        let controller = SFSafariViewController(url: destinyURL)
+        present(controller, animated: true, completion: nil)
+    }
 }

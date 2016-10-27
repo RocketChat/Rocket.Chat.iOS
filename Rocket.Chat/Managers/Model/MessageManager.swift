@@ -17,14 +17,14 @@ struct MessageManager {
 
 extension MessageManager {
     
-    static func getHistory(subscription: Subscription, completion: MessageCompletion) {
+    static func getHistory(_ subscription: Subscription, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
             "method": "loadHistory",
             "params": ["\(subscription.rid)", NSNull(), historySize, [
-                "$date": NSDate().timeIntervalSince1970 * 1000
+                "$date": Date().timeIntervalSince1970 * 1000
             ]]
-        ]
+        ] as [String : Any]
         
         SocketManager.send(request) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -43,13 +43,13 @@ extension MessageManager {
         }
     }
     
-    static func changes(subscription: Subscription) {
+    static func changes(_ subscription: Subscription) {
         let eventName = "\(subscription.rid)"
         let request = [
             "msg": "sub",
             "name": "stream-room-messages",
             "params": [eventName, false]
-        ]
+        ] as [String : Any]
         
         SocketManager.subscribe(request, eventName: eventName) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }

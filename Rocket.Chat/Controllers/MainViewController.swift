@@ -14,25 +14,25 @@ class MainViewController: BaseViewController {
     @IBOutlet weak var labelAuthenticationStatus: UILabel!
     @IBOutlet weak var buttonConnect: UIButton!
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         if AuthManager.isAuthenticated() == nil {
-            performSegueWithIdentifier("Auth", sender: nil)
+            performSegue(withIdentifier: "Auth", sender: nil)
         }
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         if let auth = AuthManager.isAuthenticated() {
             labelAuthenticationStatus.text = "Logging in..."
-            buttonConnect.enabled = false
+            buttonConnect.isEnabled = false
             
             AuthManager.resume(auth, completion: { [unowned self] (response) in
                 guard !response.isError() else {
                     self.labelAuthenticationStatus.text = "User is not authenticated"
-                    self.buttonConnect.enabled = true
+                    self.buttonConnect.isEnabled = true
                     return
                 }
                 
@@ -40,13 +40,17 @@ class MainViewController: BaseViewController {
                 
                 SubscriptionManager.updateSubscriptions(auth, completion: { (response) in
                     // TODO: Move it to somewhere else
+                    AuthManager.updatePublicSettings(auth, completion: { (response) in
+                        
+                    })
+
                     UserManager.changes()
                     SubscriptionManager.changes(auth)
                     
                     // Open chat
-                    let storyboardChat = UIStoryboard(name: "Chat", bundle: NSBundle.mainBundle())
+                    let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
                     let controller = storyboardChat.instantiateInitialViewController()
-                    let application = UIApplication.sharedApplication()
+                    let application = UIApplication.shared
                     
                     if let window = application.keyWindow {
                         window.rootViewController = controller
@@ -55,7 +59,7 @@ class MainViewController: BaseViewController {
             })
         } else {
             labelAuthenticationStatus.text = "User is not authenticated."
-            buttonConnect.enabled = true
+            buttonConnect.isEnabled = true
         }
     }
     

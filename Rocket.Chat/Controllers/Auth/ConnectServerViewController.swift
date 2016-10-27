@@ -13,7 +13,7 @@ class ConnectServerViewController: BaseViewController {
 
     internal let defaultURL = "https://demo.rocket.chat"
     internal var connecting = false
-    internal var serverURL: NSURL!
+    internal var serverURL: URL!
     
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldServerURL: UITextField!
@@ -25,39 +25,39 @@ class ConnectServerViewController: BaseViewController {
 
         let nav = navigationController as! BaseNavigationController
         nav.setTransparentTheme()
-        nav.navigationBar.barStyle = .Black
+        nav.navigationBar.barStyle = .black
 
         textFieldServerURL.placeholder = defaultURL
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow(_:)),
-            name: UIKeyboardWillShowNotification,
+            name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
 
-        NSNotificationCenter.defaultCenter().addObserver(
+        NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillHide(_:)),
-            name: UIKeyboardWillHideNotification,
+            name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
         
         textFieldServerURL.becomeFirstResponder()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
-        NSNotificationCenter.defaultCenter().removeObserver(self)
+        NotificationCenter.default.removeObserver(self)
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "Auth" {
-            let controller = segue.destinationViewController as! AuthViewController
+            let controller = segue.destination as! AuthViewController
             controller.serverURL = serverURL
         }
     }
@@ -65,13 +65,13 @@ class ConnectServerViewController: BaseViewController {
     
     // MARK: Keyboard Handlers
     
-    func keyboardWillShow(notification: NSNotification) {
-        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            visibleViewBottomConstraint.constant = CGRectGetHeight(keyboardSize)
+    func keyboardWillShow(_ notification: Notification) {
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            visibleViewBottomConstraint.constant = keyboardSize.height
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         visibleViewBottomConstraint.constant = 0
     }
     
@@ -82,11 +82,11 @@ class ConnectServerViewController: BaseViewController {
         let alert = UIAlertController(
             title: localizedString("alert.connection.invalid_url.title"),
             message: localizedString("alert.connection.invalid_url.message"),
-            preferredStyle: .Alert
+            preferredStyle: .alert
         )
         
-        alert.addAction(UIAlertAction(title: localizedString("global.ok"), style: .Default, handler: nil))
-        presentViewController(alert, animated: true, completion: nil)
+        alert.addAction(UIAlertAction(title: localizedString("global.ok"), style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     
     func connect() {
@@ -95,7 +95,7 @@ class ConnectServerViewController: BaseViewController {
             text = defaultURL
         }
         
-        guard let url = NSURL(string: text) else { return alertInvalidURL() }
+        guard let url = URL(string: text) else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
         
         connecting = true
@@ -106,7 +106,7 @@ class ConnectServerViewController: BaseViewController {
         
         SocketManager.connect(socketURL) { [unowned self] (socket, connected) in
             if connected {
-                self.performSegueWithIdentifier("Auth", sender: nil)
+                self.performSegue(withIdentifier: "Auth", sender: nil)
             }
         
             self.connecting = false
@@ -120,11 +120,11 @@ class ConnectServerViewController: BaseViewController {
 
 extension ConnectServerViewController: UITextFieldDelegate {
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !connecting
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         connect()
         return true
     }

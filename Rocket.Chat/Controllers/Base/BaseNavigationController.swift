@@ -18,12 +18,12 @@ class BaseNavigationController: UINavigationController {
     
     func setTransparentTheme() {
         let navBar = self.navigationBar
-        navBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navBar.setBackgroundImage(UIImage(), for: .default)
         navBar.shadowImage = UIImage()
-        navBar.backgroundColor = UIColor.clearColor()
-        navBar.translucent = true
-        navBar.tintColor = UIColor.whiteColor()
-        navBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
+        navBar.backgroundColor = UIColor.clear
+        navBar.isTranslucent = true
+        navBar.tintColor = UIColor.white
+        navBar.titleTextAttributes = [NSForegroundColorAttributeName : UIColor.white]
     }
     
 }

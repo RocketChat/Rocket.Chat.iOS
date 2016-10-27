@@ -10,7 +10,7 @@ import Foundation
 
 class Log {
     
-    static func debug(text: String?) {
+    static func debug(_ text: String?) {
         NSLog(text ?? "")
     }
     
