@@ -11,17 +11,17 @@ import RealmSwift
 import SwiftyJSON
 
 enum SubscriptionType: String {
-    case DirectMessage = "d"
-    case Channel = "c"
-    case Group = "p"
+    case directMessage = "d"
+    case channel = "c"
+    case group = "p"
 }
 
 class Subscription: BaseModel {
     dynamic var auth: Auth?
     
-    private dynamic var privateType = SubscriptionType.Channel.rawValue
+    fileprivate dynamic var privateType = SubscriptionType.channel.rawValue
     var type: SubscriptionType {
-        get { return SubscriptionType(rawValue: privateType) ?? SubscriptionType.Group }
+        get { return SubscriptionType(rawValue: privateType) ?? SubscriptionType.group }
         set { privateType = newValue.rawValue }
     }
     
@@ -33,8 +33,8 @@ class Subscription: BaseModel {
     dynamic var alert = false
     dynamic var favorite = false
 
-    dynamic var createdAt: NSDate?
-    dynamic var lastSeen: NSDate?
+    dynamic var createdAt: Date?
+    dynamic var lastSeen: Date?
     
     dynamic var otherUserId: String?
     var directMessageUser: User? {
@@ -49,7 +49,7 @@ class Subscription: BaseModel {
 
     // MARK: ModelMapping
     
-    override func update(dict: JSON) {
+    override func update(_ dict: JSON) {
         if self.identifier == nil {
             self.identifier = dict["_id"].string!
         }
@@ -60,19 +60,19 @@ class Subscription: BaseModel {
         self.open = dict["open"].bool ?? false
         self.alert = dict["alert"].bool ?? false
         self.favorite = dict["f"].bool ?? false
-        self.privateType = dict["t"].string ?? SubscriptionType.Channel.rawValue
+        self.privateType = dict["t"].string ?? SubscriptionType.channel.rawValue
         
-        if self.type == .DirectMessage {
+        if self.type == .directMessage {
             let userId = dict["u"]["_id"].string
-            self.otherUserId = rid.stringByReplacingOccurrencesOfString(userId!, withString: "")
+            self.otherUserId = rid.replacingOccurrences(of: userId!, with: "")
         }
         
         if let createdAt = dict["ts"]["$date"].double {
-            self.createdAt = NSDate.dateFromInterval(createdAt)
+            self.createdAt = Date.dateFromInterval(createdAt)
         }
         
         if let lastSeen = dict["ls"]["$date"].double {
-            self.lastSeen = NSDate.dateFromInterval(lastSeen)
+            self.lastSeen = Date.dateFromInterval(lastSeen)
         }
     }
 }
@@ -80,7 +80,7 @@ class Subscription: BaseModel {
 extension Subscription {
     
     func fetchMessages() -> Results<Message> {
-        return self.messages.sorted("createdAt", ascending: true)
+        return self.messages.sorted(byProperty: "createdAt", ascending: true)
     }
     
 }

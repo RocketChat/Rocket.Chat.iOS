@@ -15,7 +15,7 @@ struct AuthManager {
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
     static func isAuthenticated() -> Auth? {
-        return try! Realm().objects(Auth.self).sorted("lastAccess", ascending: false).first
+        return try! Realm().objects(Auth.self).sorted(byProperty: "lastAccess", ascending: false).first
     }
 }
 
@@ -33,8 +33,8 @@ extension AuthManager {
         - parameter completion The completion callback that will be
             called in case of success or error.
     */
-    static func resume(auth: Auth, completion: MessageCompletion) {
-        let url = NSURL(string: auth.serverURL)!
+    static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
+        let url = URL(string: auth.serverURL)!
         SocketManager.connect(url) { (socket, connected) in
             guard connected else {
                 let response = SocketResponse(
@@ -51,7 +51,7 @@ extension AuthManager {
                 "params": [[
                     "resume": auth.token!
                 ]]
-            ]
+            ] as [String: Any]
             
             SocketManager.send(object) { (response) in
                 guard !response.isError() else {
@@ -74,8 +74,8 @@ extension AuthManager {
         - parameter completion: The completion block that'll be called in case
             of success or error.
     */
-    static func auth(username: String, password: String, completion: MessageCompletion) {
-        let usernameType = username.containsString("@") ? "email" : "username"
+    static func auth(_ username: String, password: String, completion: @escaping MessageCompletion) {
+        let usernameType = username.contains("@") ? "email" : "username"
         let object = [
             "msg": "method",
             "method": "login",
@@ -88,7 +88,7 @@ extension AuthManager {
                     "algorithm":"sha-256"
                 ]
             ]]
-        ]
+        ] as [String : Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
@@ -101,16 +101,41 @@ extension AuthManager {
 
             let auth = Auth()
             auth.lastSubscriptionFetch = nil
-            auth.lastAccess = NSDate()
+            auth.lastAccess = Date()
             auth.serverURL = response.socket!.currentURL.absoluteString
             auth.token = result["result"]["token"].string
             auth.userId = result["result"]["id"].string
 
             if let date = result["result"]["tokenExpires"]["$date"].double {
-                auth.tokenExpires = NSDate.dateFromInterval(date)
+                auth.tokenExpires = Date.dateFromInterval(date)
             }
             
             Realm.update(auth)
+            completion(response)
+        }
+    }
+    
+    static func updatePublicSettings(_ auth: Auth, completion: @escaping MessageCompletion) {
+        let object = [
+            "msg": "method",
+            "method": "public-settings/get"
+        ] as [String : Any]
+        
+        SocketManager.send(object) { (response) in
+            guard !response.isError() else {
+                // TODO: Logging or default behaviour on fails
+                completion(response)
+                return
+            }
+            
+            Realm.execute({ (realm) in
+                let settings = auth.settings ?? AuthSettings()
+                settings.update(response.result["result"])
+                auth.settings = settings
+
+                realm.add([settings, auth], update: true)
+            })
+        
             completion(response)
         }
     }

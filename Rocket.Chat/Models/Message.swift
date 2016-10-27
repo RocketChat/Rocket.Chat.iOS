@@ -10,28 +10,48 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+enum MessageType {
+    case text
+    case image
+    case audio
+    case video
+    case url
+}
+
 class Message: BaseModel {
     dynamic var subscription: Subscription!
     
     dynamic var rid = ""
-    dynamic var createdAt: NSDate?
-    dynamic var updatedAt: NSDate?
+    dynamic var createdAt: Date?
+    dynamic var updatedAt: Date?
     dynamic var user: User?
     
     dynamic var text = ""
 
     var mentions = List<Mention>()
+    var attachments = List<Attachment>()
+    var urls = List<MessageURL>()
 
-    func userAvatarURL() -> NSURL? {
-        guard let username = user?.username else { return nil }
-        guard let serverURL = NSURL(string: subscription.auth!.serverURL) else { return nil }
-        return NSURL(string: "http://\(serverURL.host!)/avatar/\(username).jpg")!
+    var type: MessageType {
+        get {
+            if let attachment = attachments.first {
+                return attachment.type
+            }
+
+            if let url = urls.first {
+                if url.isValid() {
+                    return .url
+                }
+            }
+
+            return .text
+        }
     }
-    
+
 
     // MARK: ModelMapping
     
-    override func update(dict: JSON) {
+    override func update(_ dict: JSON) {
         if self.identifier == nil {
             self.identifier = dict["_id"].string!
         }
@@ -40,15 +60,37 @@ class Message: BaseModel {
         self.text = dict["msg"].string ?? ""
         
         if let createdAt = dict["ts"]["$date"].double {
-            self.createdAt = NSDate.dateFromInterval(createdAt)
+            self.createdAt = Date.dateFromInterval(createdAt)
         }
         
         if let updatedAt = dict["_updatedAt"]["$date"].double {
-            self.updatedAt = NSDate.dateFromInterval(updatedAt)
+            self.updatedAt = Date.dateFromInterval(updatedAt)
         }
         
         if let userId = dict["u"]["_id"].string {
             self.user = Realm.getOrCreate(User.self, primaryKey: userId, values: dict["u"])
+        }
+        
+        // Attachments
+        if let attachments = dict["attachments"].array {
+            self.attachments = List()
+
+            for attachment in attachments {
+                let obj = Attachment()
+                obj.update(attachment)
+                self.attachments.append(obj)
+            }
+        }
+        
+        // URLs
+        if let urls = dict["urls"].array {
+            self.urls = List()
+            
+            for url in urls {
+                let obj = MessageURL()
+                obj.update(url)
+                self.urls.append(obj)
+            }
         }
     }
 }

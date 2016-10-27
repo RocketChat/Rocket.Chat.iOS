@@ -10,28 +10,28 @@ import UIKit
 
 extension UIImage {
 
-    func imageWithTint(color: UIColor, alpha: CGFloat = 1.0) -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.mainScreen().scale)
+    func imageWithTint(_ color: UIColor, alpha: CGFloat = 1.0) -> UIImage {
+        UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.main.scale)
         
         let context = UIGraphicsGetCurrentContext()
 
         color.setFill()
         
-        CGContextTranslateCTM(context, 0, self.size.height)
-        CGContextScaleCTM(context, 1.0, -1.0)
+        context?.translateBy(x: 0, y: self.size.height)
+        context?.scaleBy(x: 1.0, y: -1.0)
         
-        CGContextSetBlendMode(context, CGBlendMode.ColorBurn)
-        let rect = CGRectMake(0.0, 0.0, self.size.width, self.size.height)
-        CGContextDrawImage(context, rect, self.CGImage)
+        context?.setBlendMode(CGBlendMode.colorBurn)
+        let rect = CGRect(x: 0.0, y: 0.0, width: self.size.width, height: self.size.height)
+        context?.draw(self.cgImage!, in: rect)
         
-        CGContextSetBlendMode(context, CGBlendMode.SourceIn)
-        CGContextAddRect(context, rect)
-        CGContextDrawPath(context, CGPathDrawingMode.Fill)
+        context?.setBlendMode(CGBlendMode.sourceIn)
+        context?.addRect(rect)
+        context?.drawPath(using: CGPathDrawingMode.fill)
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return image
+        return image!
     }
 
 }
