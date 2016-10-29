@@ -40,6 +40,13 @@ class Attachment: BaseModel {
     dynamic var videoURL: String? = nil
     dynamic var videoType: String? = nil
     dynamic var videoSize = 0
+    var videoThumbPath: URL? {
+        get {
+            let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+            let documents = path[0]
+            return documents.appendingPathComponent("\(identifier ?? "temp").png")
+        }
+    }
     
 
     // MARK: ModelMapping
@@ -87,19 +94,31 @@ class Attachment: BaseModel {
         
         return encoded.joined(separator: "/")
     }
+    
+    override class func ignoredProperties() -> [String] {
+        return ["videoThumb"]
+    }
 }
 
 extension Attachment {
     
-    static func fullImageURL(_ attachment: Attachment) -> URL? {
-        guard let imagePath = attachment.imageURL else { return nil }
+    fileprivate static func fullURLWith(_ path: String?) -> URL? {
+        guard let path = path else { return nil }
         guard let auth = AuthManager.isAuthenticated() else { return nil }
         guard let userId = auth.userId else { return nil }
         guard let token = auth.token else { return nil }
         guard let siteURL = auth.settings?.siteURL else { return nil }
-        var urlString = "\(siteURL)\(imagePath)?rc_uid=\(userId)&rc_token=\(token)"
+        var urlString = "\(siteURL)\(path)?rc_uid=\(userId)&rc_token=\(token)"
         urlString = urlString.replacingOccurrences(of: "//", with: "/")
         return URL(string: urlString)
+    }
+    
+    func fullVideoURL() -> URL? {
+        return Attachment.fullURLWith(videoURL)
+    }
+    
+    func fullImageURL() -> URL? {
+        return Attachment.fullURLWith(imageURL)
     }
     
 }
