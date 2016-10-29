@@ -39,6 +39,8 @@
 		4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1B1D2DB2080086DAC8 /* LogManager.swift */; };
 		4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */; };
 		417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 417A70021D47918200FF46EE /* ResponseMessageSpec.swift */; };
+		418C4DC61DC4C07800ABED4C /* SubscriptionSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 418C4DC51DC4C07800ABED4C /* SubscriptionSectionView.swift */; };
+		418C4DC81DC4C08800ABED4C /* SubscriptionSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 418C4DC71DC4C08800ABED4C /* SubscriptionSectionView.xib */; };
 		41900C271D9FE35400308EF4 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41900C261D9FE35400308EF4 /* Attachment.swift */; };
 		419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419205481D52EDE6004EEC5F /* UILabelExtension.swift */; };
 		4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */; };
@@ -134,6 +136,8 @@
 		4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtensions.swift; path = Extensions/StringExtensions.swift; sourceTree = "<group>"; };
 		4174CB201D2DD4690086DAC8 /* Rocket.Chat-Bridge.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Rocket.Chat-Bridge.h"; sourceTree = "<group>"; };
 		417A70021D47918200FF46EE /* ResponseMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResponseMessageSpec.swift; path = Managers/Socket/ResponseMessageSpec.swift; sourceTree = "<group>"; };
+		418C4DC51DC4C07800ABED4C /* SubscriptionSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionSectionView.swift; path = Views/Sections/SubscriptionSectionView.swift; sourceTree = "<group>"; };
+		418C4DC71DC4C08800ABED4C /* SubscriptionSectionView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SubscriptionSectionView.xib; path = Views/Sections/SubscriptionSectionView.xib; sourceTree = "<group>"; };
 		41900C261D9FE35400308EF4 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Attachment.swift; path = Models/Attachment.swift; sourceTree = "<group>"; };
 		419205481D52EDE6004EEC5F /* UILabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UILabelExtension.swift; path = Extensions/UILabelExtension.swift; sourceTree = "<group>"; };
 		4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionCell.swift; path = Views/Cells/Subscription/SubscriptionCell.swift; sourceTree = "<group>"; };
@@ -259,6 +263,7 @@
 				41D5BC2B1DAFBEE4009A493A /* Base */,
 				41F167E51DAC450200775CCA /* Chat */,
 				41C275DD1D847FEE003C88CF /* Avatar */,
+				418C4DC41DC4C05000ABED4C /* Sections */,
 				416133301D46CA3100E09DA2 /* Cells */,
 			);
 			name = Views;
@@ -374,6 +379,15 @@
 				417A70021D47918200FF46EE /* ResponseMessageSpec.swift */,
 			);
 			name = Socket;
+			sourceTree = "<group>";
+		};
+		418C4DC41DC4C05000ABED4C /* Sections */ = {
+			isa = PBXGroup;
+			children = (
+				418C4DC51DC4C07800ABED4C /* SubscriptionSectionView.swift */,
+				418C4DC71DC4C08800ABED4C /* SubscriptionSectionView.xib */,
+			);
+			name = Sections;
 			sourceTree = "<group>";
 		};
 		4192054A1D52F4E7004EEC5F /* Subscription */ = {
@@ -677,6 +691,7 @@
 				41C275E11D84815C003C88CF /* AvatarView.xib in Resources */,
 				416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */,
 				4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */,
+				418C4DC81DC4C08800ABED4C /* SubscriptionSectionView.xib in Resources */,
 				412E1F3C1DB6D55000531FDA /* ChatMessageURLView.xib in Resources */,
 				41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */,
 				41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */,
@@ -895,6 +910,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
+				418C4DC61DC4C07800ABED4C /* SubscriptionSectionView.swift in Sources */,
 				415801951D303B640099E71B /* MainViewController.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,

@@ -72,8 +72,7 @@ extension SubscriptionsViewController {
             }
             
             switch subscription.type {
-            case .channel,
-                 .group:
+            case .channel, .group:
                 channelGroup.append(subscription)
                 break
             case .directMessage:
@@ -86,47 +85,33 @@ extension SubscriptionsViewController {
         groupSubscriptions = [List<Subscription>]()
         
         if (favoriteGroup.count > 0) {
-            groupInfomation?.append(["name": "Favorites"])
+            groupInfomation?.append([
+                "icon": "Star",
+                "name": localizedString("subscriptions.favorites")
+            ])
+
             groupSubscriptions?.append(favoriteGroup)
         }
         
         if (channelGroup.count > 0) {
-            groupInfomation?.append(["name": "Channels"])
+            groupInfomation?.append([
+                "name": localizedString("subscriptions.channels")
+            ])
+
             groupSubscriptions?.append(channelGroup)
         }
         
         if (directMessageGroup.count > 0) {
-            groupInfomation?.append(["name": "Direct Messages"])
+            groupInfomation?.append([
+                "name": localizedString("subscriptions.direct_messages")
+            ])
+
             groupSubscriptions?.append(directMessageGroup)
         }
     }
 
 }
 
-//extension SubscriptionsViewController: UITableViewDataSource {
-//	
-//	func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-//		return groupInfomation?.count ?? 0
-//	}
-//	
-//	func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//		return groupInfomation?[section]["name"] ?? ""
-//	}
-//	
-//	func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//		return groupSubscriptions?[section].count ?? 0
-//	}
-//	
-//	func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-//		let subscription = groupSubscriptions?[indexPath.section][indexPath.row]
-//		
-//		let cell = tableView.dequeueReusableCellWithIdentifier(SubscriptionCell.identifier) as! SubscriptionCell
-//		cell.subscription = subscription
-//		
-//		return cell
-//	}
-//	
-//}
 
 extension SubscriptionsViewController: UITableViewDataSource {
     
@@ -134,16 +119,11 @@ extension SubscriptionsViewController: UITableViewDataSource {
         return groupInfomation?.count ?? 0
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return groupInfomation?[section]["name"] ?? ""
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return groupSubscriptions?[section].count ?? 0 //subscriptions?.count ?? 0
+        return groupSubscriptions?[section].count ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //let subscription = subscriptions![indexPath.row]
         let subscription = groupSubscriptions?[indexPath.section][indexPath.row]
 
         let cell = tableView.dequeueReusableCell(withIdentifier: SubscriptionCell.identifier) as! SubscriptionCell
@@ -157,8 +137,19 @@ extension SubscriptionsViewController: UITableViewDataSource {
 
 extension SubscriptionsViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 40 : 60
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard let group = groupInfomation?[section] else { return nil }
+        let view = SubscriptionSectionView.instanceFromNib() as! SubscriptionSectionView
+        view.setIconName(group["icon"])
+        view.setTitle(group["name"])
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //let subscription = subscriptions![indexPath.row]
         let subscription = groupSubscriptions?[indexPath.section][indexPath.row]
         ChatViewController.sharedInstance()?.subscription = subscription
         dismiss(animated: true, completion: nil)
