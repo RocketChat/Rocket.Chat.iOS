@@ -16,3 +16,8 @@
 
 // Auth
 "auth.connect.button_connect" = "Connect";
+
+// Subscriptions
+"subscriptions.favorites" = "Favorites";
+"subscriptions.channels" = "Channels";
+"subscriptions.direct_messages" = "Direct Messages";
