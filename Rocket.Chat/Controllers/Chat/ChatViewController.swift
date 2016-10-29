@@ -10,6 +10,7 @@ import SideMenu
 import RealmSwift
 import SlackTextViewController
 import SafariServices
+import MobilePlayer
 
 class ChatViewController: SLKTextViewController {
     
@@ -206,10 +207,25 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 // MARK: ChatURLCellProtocol
 
 extension ChatViewController: ChatMessageCellProtocol {
+    
+    func openURL(url: URL) {
+        let controller = SFSafariViewController(url: url)
+        present(controller, animated: true, completion: nil)
+    }
+    
     func openURLFromCell(url: MessageURL) {
         guard let targetURL = url.targetURL else { return }
         guard let destinyURL = URL(string: targetURL) else { return }
         let controller = SFSafariViewController(url: destinyURL)
         present(controller, animated: true, completion: nil)
     }
+    
+    func openVideoFromCell(attachment: Attachment) {
+        guard let videoURL = attachment.fullVideoURL() else { return }
+        let controller = MobilePlayerViewController(contentURL: videoURL)
+        controller.title = attachment.title
+        controller.activityItems = [attachment.title, videoURL]
+        present(controller, animated: true, completion: nil)
+    }
+
 }

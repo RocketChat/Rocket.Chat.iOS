@@ -40,7 +40,7 @@ class ChatMessageImageView: BaseView {
         
         labelTitle.text = attachment.title
         
-        let imageURL = Attachment.fullImageURL(attachment)
+        let imageURL = attachment.fullImageURL()
         activityIndicatorImageView.startAnimating()
         imageView.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cacheType, imageURL) in
             self.activityIndicatorImageView.stopAnimating()
