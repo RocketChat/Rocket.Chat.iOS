@@ -41,6 +41,7 @@ class AvatarView: BaseView {
                     self.setAvatarWithInitials()
                 } else {
                     self.labelInitials.text = ""
+                    self.backgroundColor = UIColor.clear
                 }
             })
         }
