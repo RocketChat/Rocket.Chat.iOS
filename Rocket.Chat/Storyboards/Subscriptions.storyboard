@@ -92,7 +92,9 @@
                             <constraint firstAttribute="trailing" secondItem="fKk-pZ-N3a" secondAttribute="trailing" id="cOy-px-6DD"/>
                         </constraints>
                     </view>
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="cIZ-6h-3cC"/>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                     </connections>
