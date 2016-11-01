@@ -35,7 +35,10 @@ class SubscriptionsViewController: BaseViewController {
 
 extension SubscriptionsViewController {
     
-    func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>) {
+    func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
+        groupSubscription()
         tableView?.reloadData()
     }
     
@@ -51,7 +54,9 @@ extension SubscriptionsViewController {
         }
         
         subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
-        usersToken = try! Realm().objects(User.self).addNotificationBlock(handleModelUpdates)
+        usersToken = try? Realm().addNotificationBlock({ [unowned self] (notification, realm) in
+            self.handleModelUpdates(nil)
+        })
         
         groupSubscription()
     }
