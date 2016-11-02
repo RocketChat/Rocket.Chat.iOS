@@ -6,8 +6,8 @@
 //  Copyright © 2016 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
 import UIKit
+import SwiftyJSON
 
 class ConnectServerViewController: BaseViewController {
 
@@ -97,6 +97,7 @@ class ConnectServerViewController: BaseViewController {
         
         guard let url = URL(string: text) else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
+        guard let validateURL = url.validateURL() else { return alertInvalidURL() }
         
         connecting = true
         textFieldServerURL.alpha = 0.5
@@ -104,15 +105,49 @@ class ConnectServerViewController: BaseViewController {
         
         serverURL = socketURL
         
-        SocketManager.connect(socketURL) { [unowned self] (socket, connected) in
-            if connected {
-                self.performSegue(withIdentifier: "Auth", sender: nil)
+        validate(url: validateURL) { [unowned self] (result, error) in
+            guard !error else {
+                DispatchQueue.main.async {
+                    self.connecting = false
+                    self.textFieldServerURL.alpha = 1
+                    self.activityIndicator.stopAnimating()
+                }
+
+                return
             }
+            
+            SocketManager.connect(socketURL) { (socket, connected) in
+                if connected {
+                    self.performSegue(withIdentifier: "Auth", sender: nil)
+                }
         
-            self.connecting = false
-            self.textFieldServerURL.alpha = 1
-            self.activityIndicator.stopAnimating()
+                self.connecting = false
+                self.textFieldServerURL.alpha = 1
+                self.activityIndicator.stopAnimating()
+            }
         }
+    }
+    
+    func validate(url: URL, completion: @escaping RequestCompletion) {
+        let request = URLRequest(url: url)
+        let session = URLSession.shared
+        
+        let task = session.dataTask(with: request, completionHandler: {data, response, error -> Void in
+            if let data = data {
+                let json = JSON(data: data)
+                Log.debug(json.rawString())
+
+                guard json["version"].string != nil else {
+                    return completion(nil, true)
+                }
+                
+                completion(json, false)
+            } else {
+                completion(nil, true)
+            }
+        })
+    
+        task.resume()
     }
     
 }

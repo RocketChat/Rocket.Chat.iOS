@@ -10,6 +10,12 @@ import Foundation
 
 extension URL {
     
+    func validateURL() -> URL? {
+        var newURL = self
+        newURL = newURL.appendingPathComponent("api/info")
+        return newURL
+    }
+    
     func socketURL() -> URL? {
         let pathComponents = self.pathComponents 
         var components = URLComponents()

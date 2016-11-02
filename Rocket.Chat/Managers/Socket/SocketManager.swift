@@ -11,6 +11,7 @@ import Starscream
 import SwiftyJSON
 
 
+public typealias RequestCompletion = (JSON?, Bool) -> Void
 public typealias MessageCompletion = (SocketResponse) -> Void
 public typealias SocketCompletion = (WebSocket?, Bool) -> Void
 
