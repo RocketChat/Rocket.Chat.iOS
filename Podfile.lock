@@ -1,20 +1,20 @@
 PODS:
-  - Crashlytics (3.8.2):
+  - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
-  - Fabric (1.6.9)
+  - Fabric (1.6.11)
   - MobilePlayer (1.2.0)
-  - Realm (2.0.0):
-    - Realm/Headers (= 2.0.0)
-  - Realm/Headers (2.0.0)
-  - RealmSwift (2.0.0):
-    - Realm (= 2.0.0)
+  - Realm (2.0.3):
+    - Realm/Headers (= 2.0.3)
+  - Realm/Headers (2.0.3)
+  - RealmSwift (2.0.3):
+    - Realm (= 2.0.3)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - SideMenu (2.0.2)
-  - SlackTextViewController (1.9.4)
-  - Starscream (2.0.0)
-  - SwiftyJSON (3.1.0)
+  - SideMenu (2.0.5)
+  - SlackTextViewController (1.9.5)
+  - Starscream (2.0.1)
+  - SwiftyJSON (3.1.1)
 
 DEPENDENCIES:
   - Crashlytics
@@ -28,16 +28,16 @@ DEPENDENCIES:
   - SwiftyJSON
 
 SPEC CHECKSUMS:
-  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
-  Fabric: bc5bec42cef4bcf1ee3ce0e218fc518e4b44dfbb
+  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  Realm: 6dda421ae4b3e9a09742fc2cf4b876d459cbedcd
-  RealmSwift: 7d015f34a2781a50889be9b5a15c36c08597ea0e
+  Realm: 5f008bfe3c8c47142eddfc30b8c1584cde22db24
+  RealmSwift: 5afb451f65b682242f272dbb52d5c6f6e343c980
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SideMenu: f22ea9330f09810cc6c3ebd6e3be27bacb91ab11
-  SlackTextViewController: d490f354dba963bc469a6b9ce3213978eaed67a5
-  Starscream: 947c865596f0d6bb3f0203fee23228ed2d471468
-  SwiftyJSON: 29b9f2a64f118c07e691667c2ba1efe536acfe0b
+  SideMenu: 0ecfd407b24e7d36c57fc50ca7f5d7cedb7c8841
+  SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
+  Starscream: ce7a202d95615bd4113bc5a0f1932f1db8c808a4
+  SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
 
 PODFILE CHECKSUM: fa488871d8f5d330b5fccb77f5c0960b0aa060ee
 

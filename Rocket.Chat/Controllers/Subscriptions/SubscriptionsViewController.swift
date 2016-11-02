@@ -19,7 +19,7 @@ class SubscriptionsViewController: BaseViewController {
     var usersToken: NotificationToken?
     
     var groupInfomation: [[String: String]]?
-    var groupSubscriptions: [List<Subscription>]?
+    var groupSubscriptions: [[Subscription]]?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -62,11 +62,13 @@ extension SubscriptionsViewController {
     }
  
     func groupSubscription() {
-        let favoriteGroup: List<Subscription> = List<Subscription>()
-        let channelGroup: List<Subscription> = List<Subscription>()
-        let directMessageGroup: List<Subscription> = List<Subscription>()
+        var favoriteGroup: [Subscription] = []
+        var channelGroup: [Subscription] = []
+        var directMessageGroup: [Subscription] = []
         
-        for subscription in subscriptions! {
+        let orderSubscriptions = subscriptions?.sorted(byProperty: "name", ascending: true)
+
+        for subscription in orderSubscriptions! {
             if (!subscription.open) {
                 continue
             }
@@ -87,20 +89,24 @@ extension SubscriptionsViewController {
         }
         
         groupInfomation = [[String: String]]()
-        groupSubscriptions = [List<Subscription>]()
+        groupSubscriptions = [[Subscription]]()
         
         if (favoriteGroup.count > 0) {
             groupInfomation?.append([
                 "icon": "Star",
-                "name": localizedString("subscriptions.favorites")
+                "name": String(format: "%@ (%d)", localizedString("subscriptions.favorites"), favoriteGroup.count)
             ])
 
+            favoriteGroup = favoriteGroup.sorted {
+                return $0.type.rawValue < $1.type.rawValue
+            }
+            
             groupSubscriptions?.append(favoriteGroup)
         }
         
         if (channelGroup.count > 0) {
             groupInfomation?.append([
-                "name": localizedString("subscriptions.channels")
+                "name": String(format: "%@ (%d)", localizedString("subscriptions.channels"), channelGroup.count)
             ])
 
             groupSubscriptions?.append(channelGroup)
@@ -108,7 +114,7 @@ extension SubscriptionsViewController {
         
         if (directMessageGroup.count > 0) {
             groupInfomation?.append([
-                "name": localizedString("subscriptions.direct_messages")
+                "name": String(format: "%@ (%d)", localizedString("subscriptions.direct_messages"), channelGroup.count) 
             ])
 
             groupSubscriptions?.append(directMessageGroup)
