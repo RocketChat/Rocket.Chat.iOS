@@ -17,6 +17,7 @@ class ChatViewController: SLKTextViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var chatTitleView: ChatTitleView?
     
+    var searchResult: Results<User>?
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
     var subscription: Subscription! {
@@ -48,6 +49,19 @@ class ChatViewController: SLKTextViewController {
         setupTitleView()
         setupSideMenu()
         registerCells()
+        
+        setupMarkdownFormatting()
+        setupPrefixesForAutoCompletion()
+    }
+    
+    fileprivate func setupMarkdownFormatting() {
+        textView.registerMarkdownFormattingSymbol("*", withTitle: "Bold")
+        textView.registerMarkdownFormattingSymbol("_", withTitle: "Italic")
+        textView.registerMarkdownFormattingSymbol("~", withTitle: "Strike")
+    }
+    
+    fileprivate func setupPrefixesForAutoCompletion() {
+        registerPrefixes(forAutoCompletion: ["@"])
     }
     
     fileprivate func setupTitleView() {
@@ -90,6 +104,21 @@ class ChatViewController: SLKTextViewController {
     
     override func textViewDidBeginEditing(_ textView: UITextView) {
         scrollToBottom()
+    }
+    
+    override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
+        guard let users = try? Realm().objects(User.self) else { return }
+        
+        if prefix == "@" && word.characters.count > 0 {
+            self.searchResult = users.filter(NSPredicate(format: "username BEGINSWITH[c] %@", word))
+        }
+        
+        let show = (self.searchResult?.count ?? 0 > 0)
+        self.showAutoCompletionView(show)
+    }
+    
+    override func heightForAutoCompletionView() -> CGFloat {
+        return CGFloat(34) * CGFloat(self.searchResult?.count ?? 0)
     }
     
     
