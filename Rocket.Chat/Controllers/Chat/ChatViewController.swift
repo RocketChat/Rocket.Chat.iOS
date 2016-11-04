@@ -17,6 +17,7 @@ class ChatViewController: SLKTextViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var chatTitleView: ChatTitleView?
     
+    var searchResult: Results<User>?
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
     var subscription: Subscription! {
@@ -44,10 +45,28 @@ class ChatViewController: SLKTextViewController {
         navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
 
         isInverted = false
+        bounces = true
+        shakeToClearEnabled = true
+        isKeyboardPanningEnabled = true
+        shouldScrollToBottomAfterKeyboardShows = false
         
         setupTitleView()
         setupSideMenu()
         registerCells()
+        setupTextViewSettings()
+    }
+    
+    fileprivate func setupTextViewSettings() {
+        textInputbar.autoHideRightButton = true
+
+        textView.registerMarkdownFormattingSymbol("*", withTitle: "Bold")
+        textView.registerMarkdownFormattingSymbol("_", withTitle: "Italic")
+        textView.registerMarkdownFormattingSymbol("~", withTitle: "Strike")
+        textView.registerMarkdownFormattingSymbol("`", withTitle: "Code")
+        textView.registerMarkdownFormattingSymbol("```", withTitle: "Preformatted")
+        textView.registerMarkdownFormattingSymbol(">", withTitle: "Quote")
+        
+        registerPrefixes(forAutoCompletion: ["@"])
     }
     
     fileprivate func setupTitleView() {
@@ -62,10 +81,15 @@ class ChatViewController: SLKTextViewController {
     }
     
     fileprivate func registerCells() {
-        self.collectionView?.register(UINib(
+        collectionView?.register(UINib(
             nibName: "ChatMessageCell",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
+        
+        autoCompletionView.register(UINib(
+            nibName: "AutocompleteCell",
+            bundle: Bundle.main
+        ), forCellReuseIdentifier: AutocompleteCell.identifier)
     }
     
     fileprivate func scrollToBottom(_ animated: Bool = false) {
@@ -90,6 +114,52 @@ class ChatViewController: SLKTextViewController {
     
     override func textViewDidBeginEditing(_ textView: UITextView) {
         scrollToBottom()
+    }
+    
+    override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
+        guard let users = try? Realm().objects(User.self) else { return }
+        
+        if prefix == "@" && word.characters.count > 0 {
+            self.searchResult = users.filter(NSPredicate(format: "username BEGINSWITH[c] %@", word))
+        }
+        
+        let show = (self.searchResult?.count ?? 0 > 0)
+        self.showAutoCompletionView(show)
+    }
+    
+    override func heightForAutoCompletionView() -> CGFloat {
+        return AutocompleteCell.minimumHeight * CGFloat(searchResult?.count ?? 1)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.searchResult?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return self.autoCompletionCellForRowAtIndexPath(indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return AutocompleteCell.minimumHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let user = searchResult?[indexPath.row] else { return }
+        guard let username = user.username else { return }
+        acceptAutoCompletion(with: "\(username): ", keepPrefix: true)
+    }
+    
+    func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
+        let cell = self.autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as! AutocompleteCell
+        cell.selectionStyle = .default
+        
+        guard let user = self.searchResult?[indexPath.row] else {
+            return cell
+        }
+        
+        cell.avatarView.user = user
+        cell.labelTitle.text = user.username
+        return cell
     }
     
     
