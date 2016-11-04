@@ -58,9 +58,6 @@ class ChatViewController: SLKTextViewController {
     
     fileprivate func setupTextViewSettings() {
         textInputbar.autoHideRightButton = true
-        textInputbar.maxCharCount = 1024
-        textInputbar.counterStyle = .split
-        textInputbar.counterPosition = .top
         
         textInputbar.editorTitle.textColor = UIColor.darkGray
         
@@ -135,7 +132,7 @@ class ChatViewController: SLKTextViewController {
     }
     
     override func heightForAutoCompletionView() -> CGFloat {
-        return AutocompleteCell.minimumHeight * CGFloat(self.searchResult?.count ?? 1)
+        return AutocompleteCell.minimumHeight * CGFloat(searchResult?.count ?? 1)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -148,6 +145,12 @@ class ChatViewController: SLKTextViewController {
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return AutocompleteCell.minimumHeight
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let user = searchResult?[indexPath.row] else { return }
+        guard let username = user.username else { return }
+        acceptAutoCompletion(with: "\(username): ", keepPrefix: true)
     }
     
     func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
