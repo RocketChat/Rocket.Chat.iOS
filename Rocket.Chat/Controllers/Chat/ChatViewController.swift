@@ -58,9 +58,7 @@ class ChatViewController: SLKTextViewController {
     
     fileprivate func setupTextViewSettings() {
         textInputbar.autoHideRightButton = true
-        
-        textInputbar.editorTitle.textColor = UIColor.darkGray
-        
+
         textView.registerMarkdownFormattingSymbol("*", withTitle: "Bold")
         textView.registerMarkdownFormattingSymbol("_", withTitle: "Italic")
         textView.registerMarkdownFormattingSymbol("~", withTitle: "Strike")
@@ -68,8 +66,7 @@ class ChatViewController: SLKTextViewController {
         textView.registerMarkdownFormattingSymbol("```", withTitle: "Preformatted")
         textView.registerMarkdownFormattingSymbol(">", withTitle: "Quote")
         
-        autoCompletionView.delegate = self
-        autoCompletionView.dataSource = self
+        registerPrefixes(forAutoCompletion: ["@"])
     }
     
     fileprivate func setupTitleView() {
@@ -93,7 +90,6 @@ class ChatViewController: SLKTextViewController {
             nibName: "AutocompleteCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: AutocompleteCell.identifier)
-        registerPrefixes(forAutoCompletion: ["@"])
     }
     
     fileprivate func scrollToBottom(_ animated: Bool = false) {
