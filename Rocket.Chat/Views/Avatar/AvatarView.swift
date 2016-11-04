@@ -23,6 +23,12 @@ class AvatarView: BaseView {
     }
     
     @IBOutlet weak var labelInitials: UILabel!
+    var labelInitialsFontSize: CGFloat? {
+        didSet {
+            labelInitials?.font = UIFont.systemFont(ofSize: labelInitialsFontSize!)
+        }
+    }
+
     @IBOutlet weak var imageView: UIImageView!
     
     private func userAvatarURL() -> URL? {

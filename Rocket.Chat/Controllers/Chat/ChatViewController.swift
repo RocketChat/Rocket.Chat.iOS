@@ -45,23 +45,34 @@ class ChatViewController: SLKTextViewController {
         navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
 
         isInverted = false
+        bounces = true
+        shakeToClearEnabled = true
+        isKeyboardPanningEnabled = true
+        shouldScrollToBottomAfterKeyboardShows = false
         
         setupTitleView()
         setupSideMenu()
         registerCells()
-        
-        setupMarkdownFormatting()
-        setupPrefixesForAutoCompletion()
+        setupTextViewSettings()
     }
     
-    fileprivate func setupMarkdownFormatting() {
+    fileprivate func setupTextViewSettings() {
+        textInputbar.autoHideRightButton = true
+        textInputbar.maxCharCount = 1024
+        textInputbar.counterStyle = .split
+        textInputbar.counterPosition = .top
+        
+        textInputbar.editorTitle.textColor = UIColor.darkGray
+        
         textView.registerMarkdownFormattingSymbol("*", withTitle: "Bold")
         textView.registerMarkdownFormattingSymbol("_", withTitle: "Italic")
         textView.registerMarkdownFormattingSymbol("~", withTitle: "Strike")
-    }
-    
-    fileprivate func setupPrefixesForAutoCompletion() {
-        registerPrefixes(forAutoCompletion: ["@"])
+        textView.registerMarkdownFormattingSymbol("`", withTitle: "Code")
+        textView.registerMarkdownFormattingSymbol("```", withTitle: "Preformatted")
+        textView.registerMarkdownFormattingSymbol(">", withTitle: "Quote")
+        
+        autoCompletionView.delegate = self
+        autoCompletionView.dataSource = self
     }
     
     fileprivate func setupTitleView() {
@@ -76,10 +87,16 @@ class ChatViewController: SLKTextViewController {
     }
     
     fileprivate func registerCells() {
-        self.collectionView?.register(UINib(
+        collectionView?.register(UINib(
             nibName: "ChatMessageCell",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
+        
+        autoCompletionView.register(UINib(
+            nibName: "AutocompleteCell",
+            bundle: Bundle.main
+        ), forCellReuseIdentifier: AutocompleteCell.identifier)
+        registerPrefixes(forAutoCompletion: ["@"])
     }
     
     fileprivate func scrollToBottom(_ animated: Bool = false) {
@@ -118,7 +135,32 @@ class ChatViewController: SLKTextViewController {
     }
     
     override func heightForAutoCompletionView() -> CGFloat {
-        return CGFloat(34) * CGFloat(self.searchResult?.count ?? 0)
+        return AutocompleteCell.minimumHeight * CGFloat(self.searchResult?.count ?? 1)
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.searchResult?.count ?? 0
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        return self.autoCompletionCellForRowAtIndexPath(indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return AutocompleteCell.minimumHeight
+    }
+    
+    func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
+        let cell = self.autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as! AutocompleteCell
+        cell.selectionStyle = .default
+        
+        guard let user = self.searchResult?[indexPath.row] else {
+            return cell
+        }
+        
+        cell.avatarView.user = user
+        cell.labelTitle.text = user.username
+        return cell
     }
     
     
