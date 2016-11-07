@@ -12,6 +12,12 @@ import SideMenu
 class SubscriptionsViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var viewTextField: UIView! {
+        didSet {
+            viewTextField.layer.cornerRadius = 4
+            viewTextField.layer.masksToBounds = true
+        }
+    }
     
     var assigned = false
     var subscriptions: Results<Subscription>?
@@ -20,7 +26,7 @@ class SubscriptionsViewController: BaseViewController {
     
     var groupInfomation: [[String: String]]?
     var groupSubscriptions: [[Subscription]]?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         subscribeModelChanges()
@@ -30,7 +36,6 @@ class SubscriptionsViewController: BaseViewController {
         super.viewDidAppear(animated)
         tableView.reloadData()
     }
-    
 }
 
 extension SubscriptionsViewController {
@@ -149,7 +154,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
 extension SubscriptionsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 40 : 60
+        return section == 0 ? 50 : 60
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
