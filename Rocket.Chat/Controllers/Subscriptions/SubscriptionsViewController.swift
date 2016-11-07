@@ -20,6 +20,7 @@ class SubscriptionsViewController: BaseViewController {
     }
     
     var assigned = false
+    var isSearching = false
     var searchResult: [Subscription]?
     var subscriptions: Results<Subscription>?
     var subscriptionsToken: NotificationToken?
@@ -38,6 +39,7 @@ class SubscriptionsViewController: BaseViewController {
         tableView.reloadData()
         
         SubscriptionManager.channelsList("a") { [unowned self] (result) in
+            self.isSearching = true
             self.searchResult = result
             self.groupSubscription()
             self.tableView.reloadData()
@@ -77,10 +79,15 @@ extension SubscriptionsViewController {
         var favoriteGroup: [Subscription] = []
         var channelGroup: [Subscription] = []
         var directMessageGroup: [Subscription] = []
+        var searchResultsGroup: [Subscription] = []
         
-        let orderSubscriptions = searchResult ?? Array(subscriptions!.sorted(byProperty: "name", ascending: true))
+        let orderSubscriptions = isSearching ? searchResult : Array(subscriptions!.sorted(byProperty: "name", ascending: true))
 
-        for subscription in orderSubscriptions {
+        for subscription in orderSubscriptions ?? [] {
+            if (isSearching) {
+                searchResultsGroup.append(subscription)
+            }
+            
             if (subscription.favorite) {
                 favoriteGroup.append(subscription)
                 continue
@@ -99,33 +106,45 @@ extension SubscriptionsViewController {
         groupInfomation = [[String: String]]()
         groupSubscriptions = [[Subscription]]()
         
-        if (favoriteGroup.count > 0) {
+        if (searchResultsGroup.count > 0) {
             groupInfomation?.append([
-                "icon": "Star",
-                "name": String(format: "%@ (%d)", localizedString("subscriptions.favorites"), favoriteGroup.count)
+                "name": String(format: "%@ (%d)", localizedString("subscriptions.search_results"), searchResultsGroup.count)
             ])
-
-            favoriteGroup = favoriteGroup.sorted {
+            
+            searchResultsGroup = searchResultsGroup.sorted {
                 return $0.type.rawValue < $1.type.rawValue
             }
             
-            groupSubscriptions?.append(favoriteGroup)
-        }
-        
-        if (channelGroup.count > 0) {
-            groupInfomation?.append([
-                "name": String(format: "%@ (%d)", localizedString("subscriptions.channels"), channelGroup.count)
-            ])
-
-            groupSubscriptions?.append(channelGroup)
-        }
-        
-        if (directMessageGroup.count > 0) {
-            groupInfomation?.append([
-                "name": String(format: "%@ (%d)", localizedString("subscriptions.direct_messages"), channelGroup.count) 
-            ])
-
-            groupSubscriptions?.append(directMessageGroup)
+            groupSubscriptions?.append(searchResultsGroup)
+        } else {
+            if (favoriteGroup.count > 0) {
+                groupInfomation?.append([
+                    "icon": "Star",
+                    "name": String(format: "%@ (%d)", localizedString("subscriptions.favorites"), favoriteGroup.count)
+                    ])
+                
+                favoriteGroup = favoriteGroup.sorted {
+                    return $0.type.rawValue < $1.type.rawValue
+                }
+                
+                groupSubscriptions?.append(favoriteGroup)
+            }
+            
+            if (channelGroup.count > 0) {
+                groupInfomation?.append([
+                    "name": String(format: "%@ (%d)", localizedString("subscriptions.channels"), channelGroup.count)
+                    ])
+                
+                groupSubscriptions?.append(channelGroup)
+            }
+            
+            if (directMessageGroup.count > 0) {
+                groupInfomation?.append([
+                    "name": String(format: "%@ (%d)", localizedString("subscriptions.direct_messages"), channelGroup.count)
+                    ])
+                
+                groupSubscriptions?.append(directMessageGroup)
+            }
         }
     }
 
