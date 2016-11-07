@@ -69,7 +69,7 @@ struct SubscriptionManager {
     
     // MARK: Search
     
-    static func channelsList(_ text: String, completion: @escaping MessageCompletion) {
+    static func channelsList(_ text: String, completion: @escaping MessageCompletionObjectsList<Subscription>) {
         let request = [
             "msg": "method",
             "method": "channelsList",
@@ -79,23 +79,19 @@ struct SubscriptionManager {
         SocketManager.send(request) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }
             
-            let subscriptions = List<Subscription>()
-            let list = response.result["result"].array
+            var subscriptions = [Subscription]()
+            let list = response.result["result"]["channels"].array
             
             list?.forEach({ (obj) in
                 let subscription = Subscription(dict: obj)
-                subscription.auth = auth
                 subscriptions.append(subscription)
             })
             
             Realm.execute({ (realm) in
-                auth.lastSubscriptionFetch = Date()
-                
                 realm.add(subscriptions, update: true)
-                realm.add(auth, update: true)
             })
             
-            completion(response)
+            completion(subscriptions)
         }
     }
     
