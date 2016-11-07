@@ -12,6 +12,7 @@ import SideMenu
 class SubscriptionsViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var textFieldSearch: UITextField!
     @IBOutlet weak var viewTextField: UIView! {
         didSet {
             viewTextField.layer.cornerRadius = 4
@@ -37,17 +38,27 @@ class SubscriptionsViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
+    }
+}
+
+extension SubscriptionsViewController {
+    
+    func searchBy(_ text: String = "") {
+        if text.characters.count == 0 {
+            self.isSearching = false
+            self.searchResult = []
+            self.groupSubscription()
+            self.tableView.reloadData()
+            return
+        }
         
-        SubscriptionManager.channelsList("a") { [unowned self] (result) in
+        SubscriptionManager.channelsList(text) { [unowned self] (result) in
             self.isSearching = true
             self.searchResult = result
             self.groupSubscription()
             self.tableView.reloadData()
         }
     }
-}
-
-extension SubscriptionsViewController {
     
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
         guard let auth = AuthManager.isAuthenticated() else { return }
@@ -191,6 +202,19 @@ extension SubscriptionsViewController: UITableViewDelegate {
         let subscription = groupSubscriptions?[indexPath.section][indexPath.row]
         ChatViewController.sharedInstance()?.subscription = subscription
         dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+
+extension SubscriptionsViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        let prospectiveText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        searchBy(prospectiveText)
+        return true
     }
     
 }
