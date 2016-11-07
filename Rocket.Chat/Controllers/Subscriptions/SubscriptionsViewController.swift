@@ -20,6 +20,7 @@ class SubscriptionsViewController: BaseViewController {
     }
     
     var assigned = false
+    var searchResult: [Subscription]?
     var subscriptions: Results<Subscription>?
     var subscriptionsToken: NotificationToken?
     var usersToken: NotificationToken?
@@ -35,6 +36,12 @@ class SubscriptionsViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
+        
+        SubscriptionManager.channelsList("a") { [unowned self] (result) in
+            self.searchResult = result
+            self.groupSubscription()
+            self.tableView.reloadData()
+        }
     }
 }
 
@@ -71,13 +78,9 @@ extension SubscriptionsViewController {
         var channelGroup: [Subscription] = []
         var directMessageGroup: [Subscription] = []
         
-        let orderSubscriptions = subscriptions?.sorted(byProperty: "name", ascending: true)
+        let orderSubscriptions = searchResult ?? Array(subscriptions!.sorted(byProperty: "name", ascending: true))
 
-        for subscription in orderSubscriptions! {
-            if (!subscription.open) {
-                continue
-            }
-            
+        for subscription in orderSubscriptions {
             if (subscription.favorite) {
                 favoriteGroup.append(subscription)
                 continue

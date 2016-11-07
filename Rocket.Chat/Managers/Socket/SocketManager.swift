@@ -9,11 +9,13 @@
 import Foundation
 import Starscream
 import SwiftyJSON
+import RealmSwift
 
 
 public typealias RequestCompletion = (JSON?, Bool) -> Void
 public typealias MessageCompletion = (SocketResponse) -> Void
 public typealias SocketCompletion = (WebSocket?, Bool) -> Void
+public typealias MessageCompletionObjectsList <T: Object> = ([T]) -> Void
 
 
 class SocketManager {
