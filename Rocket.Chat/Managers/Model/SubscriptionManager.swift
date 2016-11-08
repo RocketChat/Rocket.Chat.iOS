@@ -69,28 +69,39 @@ struct SubscriptionManager {
     
     // MARK: Search
     
-    static func channelsList(_ text: String, completion: @escaping MessageCompletionObjectsList<Subscription>) {
+    static func spotlight(_ text: String, completion: @escaping MessageCompletionObjectsList<Subscription>) {
         let request = [
             "msg": "method",
-            "method": "channelsList",
-            "params": [text, "all", 50, "name"]
+            "method": "spotlight",
+            "params": [text, NSNull(), ["rooms": true, "users": true]]
         ] as [String : Any]
         
         SocketManager.send(request) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }
             
             var subscriptions = [Subscription]()
-            let list = response.result["result"]["channels"].array
+            let rooms = response.result["result"]["rooms"].array
+            let users = response.result["result"]["users"].array
             
-            list?.forEach({ (obj) in
+            rooms?.forEach({ (obj) in
                 let subscription = Subscription(dict: obj)
+                subscriptions.append(subscription)
+            })
+            
+            users?.forEach({ (obj) in
+                let user = User(dict: obj)
+                let subscription = Subscription()
+                subscription.identifier = user.identifier ?? ""
+                subscription.otherUserId = user.identifier
+                subscription.type = .directMessage
+                subscription.name = user.username ?? ""
                 subscriptions.append(subscription)
             })
             
             Realm.execute({ (realm) in
                 realm.add(subscriptions, update: true)
             })
-            
+        
             completion(subscriptions)
         }
     }

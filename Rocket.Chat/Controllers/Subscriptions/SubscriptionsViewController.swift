@@ -52,7 +52,7 @@ extension SubscriptionsViewController {
             return
         }
         
-        SubscriptionManager.channelsList(text) { [unowned self] (result) in
+        SubscriptionManager.spotlight(text) { [unowned self] (result) in
             self.isSearching = true
             self.searchResult = result
             self.groupSubscription()
@@ -123,7 +123,7 @@ extension SubscriptionsViewController {
             ])
             
             searchResultsGroup = searchResultsGroup.sorted {
-                return $0.type.rawValue < $1.type.rawValue
+                return $0.name < $1.name
             }
             
             groupSubscriptions?.append(searchResultsGroup)
