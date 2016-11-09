@@ -92,6 +92,7 @@ struct SubscriptionManager {
                 let user = User(dict: obj)
                 let subscription = Subscription()
                 subscription.identifier = user.identifier ?? ""
+                subscription.rid = user.identifier ?? ""
                 subscription.otherUserId = user.identifier
                 subscription.type = .directMessage
                 subscription.name = user.username ?? ""
@@ -108,6 +109,19 @@ struct SubscriptionManager {
     
     
     // MARK: Messages
+    
+    static func createDirectMessage(_ username: String, completion: @escaping MessageCompletion) {
+        let request = [
+            "msg": "method",
+            "method": "createDirectMessage",
+            "params": [username]
+        ] as [String : Any]
+        
+        SocketManager.send(request) { (response) in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+            completion(response)
+        }
+    }
     
     static func markAsRead(_ subscription: Subscription, completion: @escaping MessageCompletion) {
         let request = [
