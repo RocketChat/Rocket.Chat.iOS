@@ -85,6 +85,7 @@ struct SubscriptionManager {
             
             rooms?.forEach({ (obj) in
                 let subscription = Subscription(dict: obj)
+                subscription.rid = subscription.identifier ?? ""
                 subscriptions.append(subscription)
             })
             
@@ -92,7 +93,6 @@ struct SubscriptionManager {
                 let user = User(dict: obj)
                 let subscription = Subscription()
                 subscription.identifier = user.identifier ?? ""
-                subscription.rid = user.identifier ?? ""
                 subscription.otherUserId = user.identifier
                 subscription.type = .directMessage
                 subscription.name = user.username ?? ""
@@ -108,7 +108,7 @@ struct SubscriptionManager {
     }
     
     
-    // MARK: Messages
+    // MARK: Rooms, Groups & DMs
     
     static func createDirectMessage(_ username: String, completion: @escaping MessageCompletion) {
         let request = [
@@ -122,6 +122,22 @@ struct SubscriptionManager {
             completion(response)
         }
     }
+    
+    static func getRoom(byName name: String, completion: @escaping MessageCompletion) {
+        let request = [
+            "msg": "method",
+            "method": "getRoomByTypeAndName",
+            "params": ["c", name]
+        ] as [String : Any]
+        
+        SocketManager.send(request) { (response) in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+            completion(response)
+        }
+    }
+    
+    
+    // MARK: Messages
     
     static func markAsRead(_ subscription: Subscription, completion: @escaping MessageCompletion) {
         let request = [

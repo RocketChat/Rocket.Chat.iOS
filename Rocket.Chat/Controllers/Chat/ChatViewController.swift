@@ -190,12 +190,23 @@ class ChatViewController: SLKTextViewController {
         activityIndicator.startAnimating()
         title = subscription?.name
         chatTitleView?.subscription = subscription
+        
+        if subscription.isValid() {
+            updateSubscriptionMessages()
+        } else {
+            subscription.fetchRoomIdentifier({ [unowned self] (response) in
+                self.subscription = response
+            })
+        }
+    }
+    
+    fileprivate func updateSubscriptionMessages() {
         messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
             if self.messages.count > 0 {
                 self.activityIndicator.stopAnimating()
             }
-
+            
             self.collectionView?.reloadData()
             self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
