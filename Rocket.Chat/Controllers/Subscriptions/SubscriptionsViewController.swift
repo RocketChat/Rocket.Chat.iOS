@@ -12,7 +12,17 @@ import SideMenu
 class SubscriptionsViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var textFieldSearch: UITextField!
+    @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
+    @IBOutlet weak var textFieldSearch: UITextField! {
+        didSet {
+            textFieldSearch.placeholder = localizedString("subscriptions.search")
+            
+            if let placeholder = textFieldSearch.placeholder {
+                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+            }
+        }
+    }
+
     @IBOutlet weak var viewTextField: UIView! {
         didSet {
             viewTextField.layer.cornerRadius = 4
@@ -45,14 +55,28 @@ extension SubscriptionsViewController {
     
     func searchBy(_ text: String = "") {
         if text.characters.count == 0 {
-            self.isSearching = false
-            self.searchResult = []
-            self.groupSubscription()
-            self.tableView.reloadData()
+            activityViewSearching.stopAnimating()
+            isSearching = false
+            searchResult = []
+            groupSubscription()
+            tableView.reloadData()
             return
         }
         
+        let historyText = text
+        activityViewSearching.startAnimating()
+        
         SubscriptionManager.spotlight(text) { [unowned self] (result) in
+            let currentText = self.textFieldSearch.text ?? ""
+
+            if currentText.characters.count == 0 {
+                return
+            }
+            
+            if currentText == historyText {
+                self.activityViewSearching.stopAnimating()
+            }
+            
             self.isSearching = true
             self.searchResult = result
             self.groupSubscription()
@@ -151,8 +175,8 @@ extension SubscriptionsViewController {
             
             if (directMessageGroup.count > 0) {
                 groupInfomation?.append([
-                    "name": String(format: "%@ (%d)", localizedString("subscriptions.direct_messages"), channelGroup.count)
-                    ])
+                    "name": String(format: "%@ (%d)", localizedString("subscriptions.direct_messages"), directMessageGroup.count)
+                ])
                 
                 groupSubscriptions?.append(directMessageGroup)
             }

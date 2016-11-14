@@ -21,7 +21,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fKk-pZ-N3a">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fKk-pZ-N3a">
                                 <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.28627450980000002" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
@@ -98,12 +98,18 @@
                                                     <outlet property="delegate" destination="pre-Wt-UOv" id="H6a-TB-8Qk"/>
                                                 </connections>
                                             </textField>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nkZ-uB-Z8e">
+                                                <rect key="frame" x="317" y="9" width="20" height="20"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0020407468546181917" green="0.17051500082015991" blue="0.27439388632774353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="TPV-i5-hsW" firstAttribute="leading" secondItem="qEc-o0-IxJ" secondAttribute="leading" constant="5" id="74K-kd-AqZ"/>
+                                            <constraint firstAttribute="trailing" secondItem="nkZ-uB-Z8e" secondAttribute="trailing" constant="8" id="DcM-qH-TOb"/>
                                             <constraint firstAttribute="trailing" secondItem="TPV-i5-hsW" secondAttribute="trailing" constant="5" id="KHm-EP-Nf7"/>
+                                            <constraint firstAttribute="bottom" secondItem="nkZ-uB-Z8e" secondAttribute="bottom" constant="8" id="caR-Uy-aNY"/>
                                             <constraint firstAttribute="height" constant="37" id="cis-8T-7p5"/>
+                                            <constraint firstItem="nkZ-uB-Z8e" firstAttribute="top" secondItem="qEc-o0-IxJ" secondAttribute="top" constant="9" id="len-rF-8WP"/>
                                             <constraint firstAttribute="bottom" secondItem="TPV-i5-hsW" secondAttribute="bottom" id="rI8-3A-dNC"/>
                                             <constraint firstItem="TPV-i5-hsW" firstAttribute="top" secondItem="qEc-o0-IxJ" secondAttribute="top" id="wnP-Wx-bpV"/>
                                         </constraints>
@@ -134,6 +140,7 @@
                     <nil key="simulatedStatusBarMetrics"/>
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
+                        <outlet property="activityViewSearching" destination="nkZ-uB-Z8e" id="2Bb-ph-mdv"/>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                         <outlet property="textFieldSearch" destination="TPV-i5-hsW" id="0ho-Fe-IZ9"/>
                         <outlet property="viewTextField" destination="qEc-o0-IxJ" id="1KL-CT-eAr"/>
