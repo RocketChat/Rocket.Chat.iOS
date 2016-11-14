@@ -65,13 +65,13 @@ class ConnectServerViewController: BaseViewController {
     
     // MARK: Keyboard Handlers
     
-    func keyboardWillShow(_ notification: Notification) {
+    override func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             visibleViewBottomConstraint.constant = keyboardSize.height
         }
     }
     
-    func keyboardWillHide(_ notification: Notification) {
+    override func keyboardWillHide(_ notification: Notification) {
         visibleViewBottomConstraint.constant = 0
     }
     
