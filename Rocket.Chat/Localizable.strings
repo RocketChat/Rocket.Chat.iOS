@@ -18,6 +18,7 @@
 "auth.connect.button_connect" = "Connect";
 
 // Subscriptions
+"subscriptions.search" = "Search";
 "subscriptions.search_results" = "Results";
 "subscriptions.favorites" = "Favorites";
 "subscriptions.channels" = "Channels";

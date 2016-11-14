@@ -77,7 +77,10 @@ struct SubscriptionManager {
         ] as [String : Any]
         
         SocketManager.send(request) { (response) in
-            guard !response.isError() else { return Log.debug(response.result.string) }
+            guard !response.isError() else {
+                completion([])
+                return Log.debug(response.result.string)
+            }
             
             var subscriptions = [Subscription]()
             let rooms = response.result["result"]["rooms"].array
