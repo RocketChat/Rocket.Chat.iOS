@@ -60,6 +60,14 @@ class SubscriptionsViewController: BaseViewController {
 extension SubscriptionsViewController {
     
     func searchBy(_ text: String = "") {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        subscriptions = auth.subscriptions.filter("name CONTAINS %@", text)
+        
+        groupSubscription()
+        tableView.reloadData()
+    }
+    
+    func searchOnSpotlight(_ text: String = "") {
         if text.characters.count == 0 {
             activityViewSearching.stopAnimating()
             isSearching = false
@@ -74,7 +82,7 @@ extension SubscriptionsViewController {
         
         SubscriptionManager.spotlight(text) { [unowned self] (result) in
             let currentText = self.textFieldSearch.text ?? ""
-
+            
             if currentText.characters.count == 0 {
                 return
             }
