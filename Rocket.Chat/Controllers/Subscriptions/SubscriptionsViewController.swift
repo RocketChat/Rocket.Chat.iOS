@@ -18,7 +18,8 @@ class SubscriptionsViewController: BaseViewController {
             textFieldSearch.placeholder = localizedString("subscriptions.search")
             
             if let placeholder = textFieldSearch.placeholder {
-                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSForegroundColorAttributeName: UIColor.lightGray])
+                let color = UIColor(rgb: 0x9AB1BF, alphaVal: 1)
+                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSForegroundColorAttributeName: color])
             }
         }
     }
@@ -31,7 +32,8 @@ class SubscriptionsViewController: BaseViewController {
     }
     
     var assigned = false
-    var isSearching = false
+    var isSearchingLocally = false
+    var isSearchingRemotely = false
     var searchResult: [Subscription]?
     var subscriptions: Results<Subscription>?
     var subscriptionsToken: NotificationToken?
@@ -63,21 +65,39 @@ extension SubscriptionsViewController {
         guard let auth = AuthManager.isAuthenticated() else { return }
         subscriptions = auth.subscriptions.filter("name CONTAINS %@", text)
         
-        groupSubscription()
-        tableView.reloadData()
-    }
-    
-    func searchOnSpotlight(_ text: String = "") {
         if text.characters.count == 0 {
-            activityViewSearching.stopAnimating()
-            isSearching = false
+            isSearchingLocally = false
+            isSearchingRemotely = false
             searchResult = []
+            
             groupSubscription()
             tableView.reloadData()
+            tableView.tableFooterView = nil
+            
+            activityViewSearching.stopAnimating()
+            
             return
         }
         
+        if subscriptions?.count == 0 {
+            searchOnSpotlight(text)
+            return
+        }
+        
+        isSearchingLocally = true
+        isSearchingRemotely = false
+        
+        groupSubscription()
+        tableView.reloadData()
+        
+        let footerView = SubscriptionSearchMoreView.instanceFromNib() as! SubscriptionSearchMoreView
+        footerView.delegate = self
+        tableView.tableFooterView = footerView
+    }
+    
+    func searchOnSpotlight(_ text: String = "") {
         let historyText = text
+        tableView.tableFooterView = nil
         activityViewSearching.startAnimating()
         
         SubscriptionManager.spotlight(text) { [unowned self] (result) in
@@ -91,7 +111,7 @@ extension SubscriptionsViewController {
                 self.activityViewSearching.stopAnimating()
             }
             
-            self.isSearching = true
+            self.isSearchingRemotely = true
             self.searchResult = result
             self.groupSubscription()
             self.tableView.reloadData()
@@ -130,10 +150,10 @@ extension SubscriptionsViewController {
         var directMessageGroup: [Subscription] = []
         var searchResultsGroup: [Subscription] = []
         
-        let orderSubscriptions = isSearching ? searchResult : Array(subscriptions!.sorted(byProperty: "name", ascending: true))
+        let orderSubscriptions = isSearchingRemotely ? searchResult : Array(subscriptions!.sorted(byProperty: "name", ascending: true))
 
         for subscription in orderSubscriptions ?? [] {
-            if (isSearching) {
+            if (isSearchingRemotely) {
                 searchResultsGroup.append(subscription)
             }
             
@@ -253,6 +273,15 @@ extension SubscriptionsViewController: UITextFieldDelegate {
         
         searchBy(prospectiveText)
         return true
+    }
+    
+}
+
+
+extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
+    
+    func buttonLoadMoreDidPressed() {
+        searchOnSpotlight(textFieldSearch.text ?? "")
     }
     
 }
