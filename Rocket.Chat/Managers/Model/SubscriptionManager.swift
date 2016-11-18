@@ -67,6 +67,79 @@ struct SubscriptionManager {
     }
     
     
+    // MARK: Search
+    
+    static func spotlight(_ text: String, completion: @escaping MessageCompletionObjectsList<Subscription>) {
+        let request = [
+            "msg": "method",
+            "method": "spotlight",
+            "params": [text, NSNull(), ["rooms": true, "users": true]]
+        ] as [String : Any]
+        
+        SocketManager.send(request) { (response) in
+            guard !response.isError() else {
+                completion([])
+                return Log.debug(response.result.string)
+            }
+            
+            var subscriptions = [Subscription]()
+            let rooms = response.result["result"]["rooms"].array
+            let users = response.result["result"]["users"].array
+            
+            rooms?.forEach({ (obj) in
+                let subscription = Subscription(dict: obj)
+                subscription.rid = subscription.identifier ?? ""
+                subscriptions.append(subscription)
+            })
+            
+            users?.forEach({ (obj) in
+                let user = User(dict: obj)
+                let subscription = Subscription()
+                subscription.identifier = user.identifier ?? ""
+                subscription.otherUserId = user.identifier
+                subscription.type = .directMessage
+                subscription.name = user.username ?? ""
+                subscriptions.append(subscription)
+            })
+            
+            Realm.execute({ (realm) in
+                realm.add(subscriptions, update: true)
+            })
+        
+            completion(subscriptions)
+        }
+    }
+    
+    
+    // MARK: Rooms, Groups & DMs
+    
+    static func createDirectMessage(_ username: String, completion: @escaping MessageCompletion) {
+        let request = [
+            "msg": "method",
+            "method": "createDirectMessage",
+            "params": [username]
+        ] as [String : Any]
+        
+        SocketManager.send(request) { (response) in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+            completion(response)
+        }
+    }
+    
+    static func getRoom(byName name: String, completion: @escaping MessageCompletion) {
+        let request = [
+            "msg": "method",
+            "method": "getRoomByTypeAndName",
+            "params": ["c", name]
+        ] as [String : Any]
+        
+        SocketManager.send(request) { (response) in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+            completion(response)
+        }
+    }
+    
+    
     // MARK: Messages
     
     static func markAsRead(_ subscription: Subscription, completion: @escaping MessageCompletion) {

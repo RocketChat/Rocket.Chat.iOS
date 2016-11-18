@@ -12,28 +12,111 @@ import SideMenu
 class SubscriptionsViewController: BaseViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
+    @IBOutlet weak var textFieldSearch: UITextField! {
+        didSet {
+            textFieldSearch.placeholder = localizedString("subscriptions.search")
+            
+            if let placeholder = textFieldSearch.placeholder {
+                let color = UIColor(rgb: 0x9AB1BF, alphaVal: 1)
+                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSForegroundColorAttributeName: color])
+            }
+        }
+    }
+
+    @IBOutlet weak var viewTextField: UIView! {
+        didSet {
+            viewTextField.layer.cornerRadius = 4
+            viewTextField.layer.masksToBounds = true
+        }
+    }
     
     var assigned = false
+    var isSearchingLocally = false
+    var isSearchingRemotely = false
+    var searchResult: [Subscription]?
     var subscriptions: Results<Subscription>?
     var subscriptionsToken: NotificationToken?
     var usersToken: NotificationToken?
     
     var groupInfomation: [[String: String]]?
     var groupSubscriptions: [[Subscription]]?
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
         subscribeModelChanges()
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        unregisterKeyboardNotifications()
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadData()
+        registerKeyboardHandlers(tableView)
     }
-    
 }
 
 extension SubscriptionsViewController {
+    
+    func searchBy(_ text: String = "") {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        subscriptions = auth.subscriptions.filter("name CONTAINS %@", text)
+        
+        if text.characters.count == 0 {
+            isSearchingLocally = false
+            isSearchingRemotely = false
+            searchResult = []
+            
+            groupSubscription()
+            tableView.reloadData()
+            tableView.tableFooterView = nil
+            
+            activityViewSearching.stopAnimating()
+            
+            return
+        }
+        
+        if subscriptions?.count == 0 {
+            searchOnSpotlight(text)
+            return
+        }
+        
+        isSearchingLocally = true
+        isSearchingRemotely = false
+        
+        groupSubscription()
+        tableView.reloadData()
+        
+        let footerView = SubscriptionSearchMoreView.instanceFromNib() as! SubscriptionSearchMoreView
+        footerView.delegate = self
+        tableView.tableFooterView = footerView
+    }
+    
+    func searchOnSpotlight(_ text: String = "") {
+        let historyText = text
+        tableView.tableFooterView = nil
+        activityViewSearching.startAnimating()
+        
+        SubscriptionManager.spotlight(text) { [unowned self] (result) in
+            let currentText = self.textFieldSearch.text ?? ""
+            
+            if currentText.characters.count == 0 {
+                return
+            }
+            
+            if currentText == historyText {
+                self.activityViewSearching.stopAnimating()
+            }
+            
+            self.isSearchingRemotely = true
+            self.searchResult = result
+            self.groupSubscription()
+            self.tableView.reloadData()
+        }
+    }
     
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
         guard let auth = AuthManager.isAuthenticated() else { return }
@@ -65,12 +148,13 @@ extension SubscriptionsViewController {
         var favoriteGroup: [Subscription] = []
         var channelGroup: [Subscription] = []
         var directMessageGroup: [Subscription] = []
+        var searchResultsGroup: [Subscription] = []
         
-        let orderSubscriptions = subscriptions?.sorted(byProperty: "name", ascending: true)
+        let orderSubscriptions = isSearchingRemotely ? searchResult : Array(subscriptions!.sorted(byProperty: "name", ascending: true))
 
-        for subscription in orderSubscriptions! {
-            if (!subscription.open) {
-                continue
+        for subscription in orderSubscriptions ?? [] {
+            if (isSearchingRemotely) {
+                searchResultsGroup.append(subscription)
             }
             
             if (subscription.favorite) {
@@ -91,33 +175,45 @@ extension SubscriptionsViewController {
         groupInfomation = [[String: String]]()
         groupSubscriptions = [[Subscription]]()
         
-        if (favoriteGroup.count > 0) {
+        if (searchResultsGroup.count > 0) {
             groupInfomation?.append([
-                "icon": "Star",
-                "name": String(format: "%@ (%d)", localizedString("subscriptions.favorites"), favoriteGroup.count)
+                "name": String(format: "%@ (%d)", localizedString("subscriptions.search_results"), searchResultsGroup.count)
             ])
-
-            favoriteGroup = favoriteGroup.sorted {
-                return $0.type.rawValue < $1.type.rawValue
+            
+            searchResultsGroup = searchResultsGroup.sorted {
+                return $0.name < $1.name
             }
             
-            groupSubscriptions?.append(favoriteGroup)
-        }
-        
-        if (channelGroup.count > 0) {
-            groupInfomation?.append([
-                "name": String(format: "%@ (%d)", localizedString("subscriptions.channels"), channelGroup.count)
-            ])
-
-            groupSubscriptions?.append(channelGroup)
-        }
-        
-        if (directMessageGroup.count > 0) {
-            groupInfomation?.append([
-                "name": String(format: "%@ (%d)", localizedString("subscriptions.direct_messages"), channelGroup.count) 
-            ])
-
-            groupSubscriptions?.append(directMessageGroup)
+            groupSubscriptions?.append(searchResultsGroup)
+        } else {
+            if (favoriteGroup.count > 0) {
+                groupInfomation?.append([
+                    "icon": "Star",
+                    "name": String(format: "%@ (%d)", localizedString("subscriptions.favorites"), favoriteGroup.count)
+                    ])
+                
+                favoriteGroup = favoriteGroup.sorted {
+                    return $0.type.rawValue < $1.type.rawValue
+                }
+                
+                groupSubscriptions?.append(favoriteGroup)
+            }
+            
+            if (channelGroup.count > 0) {
+                groupInfomation?.append([
+                    "name": String(format: "%@ (%d)", localizedString("subscriptions.channels"), channelGroup.count)
+                    ])
+                
+                groupSubscriptions?.append(channelGroup)
+            }
+            
+            if (directMessageGroup.count > 0) {
+                groupInfomation?.append([
+                    "name": String(format: "%@ (%d)", localizedString("subscriptions.direct_messages"), directMessageGroup.count)
+                ])
+                
+                groupSubscriptions?.append(directMessageGroup)
+            }
         }
     }
 
@@ -149,7 +245,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
 extension SubscriptionsViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 40 : 60
+        return section == 0 ? 50 : 60
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -164,6 +260,28 @@ extension SubscriptionsViewController: UITableViewDelegate {
         let subscription = groupSubscriptions?[indexPath.section][indexPath.row]
         ChatViewController.sharedInstance()?.subscription = subscription
         dismiss(animated: true, completion: nil)
+    }
+    
+}
+
+
+extension SubscriptionsViewController: UITextFieldDelegate {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let currentText = textField.text ?? ""
+        let prospectiveText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        searchBy(prospectiveText)
+        return true
+    }
+    
+}
+
+
+extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
+    
+    func buttonLoadMoreDidPressed() {
+        searchOnSpotlight(textFieldSearch.text ?? "")
     }
     
 }
