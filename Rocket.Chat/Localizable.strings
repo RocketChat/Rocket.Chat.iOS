@@ -18,6 +18,9 @@
 "auth.connect.button_connect" = "Connect";
 
 // Subscriptions
+"subscriptions.search" = "Search";
+"subscriptions.search_results" = "Results";
+"subscriptions.search.load_more_results" = "Load more results";
 "subscriptions.favorites" = "Favorites";
 "subscriptions.channels" = "Channels";
 "subscriptions.direct_messages" = "Direct Messages";

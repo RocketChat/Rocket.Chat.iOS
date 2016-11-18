@@ -132,11 +132,11 @@ class ChatViewController: SLKTextViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.searchResult?.count ?? 0
+        return searchResult?.count ?? 0
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return self.autoCompletionCellForRowAtIndexPath(indexPath)
+        return autoCompletionCellForRowAtIndexPath(indexPath)
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -150,10 +150,10 @@ class ChatViewController: SLKTextViewController {
     }
     
     func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
-        let cell = self.autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as! AutocompleteCell
+        let cell = autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as! AutocompleteCell
         cell.selectionStyle = .default
         
-        guard let user = self.searchResult?[indexPath.row] else {
+        guard let user = searchResult?[indexPath.row] else {
             return cell
         }
         
@@ -190,12 +190,23 @@ class ChatViewController: SLKTextViewController {
         activityIndicator.startAnimating()
         title = subscription?.name
         chatTitleView?.subscription = subscription
+        
+        if subscription.isValid() {
+            updateSubscriptionMessages()
+        } else {
+            subscription.fetchRoomIdentifier({ [unowned self] (response) in
+                self.subscription = response
+            })
+        }
+    }
+    
+    fileprivate func updateSubscriptionMessages() {
         messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
             if self.messages.count > 0 {
                 self.activityIndicator.stopAnimating()
             }
-
+            
             self.collectionView?.reloadData()
             self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()

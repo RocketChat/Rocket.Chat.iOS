@@ -10,6 +10,8 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+
+
 enum SubscriptionType: String {
     case directMessage = "d"
     case channel = "c"
@@ -78,6 +80,36 @@ class Subscription: BaseModel {
 }
 
 extension Subscription {
+    
+    func isValid() -> Bool {
+        return self.rid.characters.count > 0
+    }
+    
+    func fetchRoomIdentifier(_ completion: @escaping MessageCompletionObject <Subscription>) {
+        if type == .channel {
+            SubscriptionManager.getRoom(byName: name, completion: { [unowned self] (response) in
+                guard !response.isError() else { return }
+
+                let result = response.result["result"]
+                Realm.execute({ (realm) in
+                    self.update(result)
+                })
+
+                completion(self)
+            })
+        } else if type == .directMessage {
+            SubscriptionManager.createDirectMessage(name, completion: { [unowned self] (response) in
+                guard !response.isError() else { return }
+                
+                let rid = response.result["result"]["rid"].string ?? ""
+                Realm.execute({ (realm) in
+                    self.rid = rid
+                })
+
+                completion(self)
+            })
+        }
+    }
     
     func fetchMessages() -> Results<Message> {
         return self.messages.sorted(byProperty: "createdAt", ascending: true)
