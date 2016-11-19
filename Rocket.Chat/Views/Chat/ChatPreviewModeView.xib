@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ChatPreviewModeView" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="400" height="95"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="This is a preview of #channel" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lWX-ee-yg5">
+                    <rect key="frame" x="10" y="6" width="380" height="27"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="27" id="TQk-Oz-iEH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" red="0.60392156860000001" green="0.69411764710000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4KQ-U2-uYG">
+                    <rect key="frame" x="10" y="41" width="380" height="44"/>
+                    <color key="backgroundColor" red="0.015686274510000001" green="0.28627450980000002" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="44" id="Vqp-0M-2Ml"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
+                    <state key="normal" title="Join Channel">
+                        <color key="titleColor" red="0.60392156860000001" green="0.69411764710000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </state>
+                </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="ZQ7-XJ-wRD">
+                    <rect key="frame" x="190" y="53" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="AyV-hn-Jf7"/>
+                        <constraint firstAttribute="height" constant="20" id="lOY-3t-979"/>
+                    </constraints>
+                </activityIndicatorView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lY4-XX-Y6m">
+                    <rect key="frame" x="0.0" y="0.0" width="400" height="1"/>
+                    <color key="backgroundColor" red="0.60392156860000001" green="0.69411764710000001" blue="0.74901960779999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="OJI-JU-NYj"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="lWX-ee-yg5" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="5pp-Ac-ON5"/>
+                <constraint firstItem="lY4-XX-Y6m" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SGA-Bz-nzD"/>
+                <constraint firstAttribute="trailing" secondItem="lY4-XX-Y6m" secondAttribute="trailing" id="Yj9-l7-zpb"/>
+                <constraint firstItem="lY4-XX-Y6m" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="YjU-4e-PUu"/>
+                <constraint firstItem="4KQ-U2-uYG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="aDv-4E-6Wn"/>
+                <constraint firstAttribute="trailing" secondItem="4KQ-U2-uYG" secondAttribute="trailing" constant="10" id="ddX-vu-gcU"/>
+                <constraint firstAttribute="trailing" secondItem="lWX-ee-yg5" secondAttribute="trailing" constant="10" id="j93-uT-D1R"/>
+                <constraint firstItem="ZQ7-XJ-wRD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lBh-Lv-dE0"/>
+                <constraint firstItem="lWX-ee-yg5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="rLV-4I-ia8"/>
+                <constraint firstAttribute="bottom" secondItem="ZQ7-XJ-wRD" secondAttribute="bottom" constant="22" id="voc-iO-tGd"/>
+                <constraint firstAttribute="bottom" secondItem="4KQ-U2-uYG" secondAttribute="bottom" constant="10" id="y2R-bk-Z3r"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="activityIndicator" destination="ZQ7-XJ-wRD" id="w4m-lO-Oah"/>
+                <outlet property="buttonJoin" destination="4KQ-U2-uYG" id="5YM-Hf-Kyb"/>
+                <outlet property="labelTitle" destination="lWX-ee-yg5" id="jyd-at-M3c"/>
+            </connections>
+            <point key="canvasLocation" x="34" y="57.5"/>
+        </view>
+    </objects>
+</document>

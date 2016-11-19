@@ -16,6 +16,7 @@ class ChatViewController: SLKTextViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var chatTitleView: ChatTitleView?
+    weak var chatPreviewModeView: ChatPreviewModeView?
     
     var searchResult: Results<User>?
     var messagesToken: NotificationToken!
@@ -218,9 +219,27 @@ class ChatViewController: SLKTextViewController {
             self.collectionView?.reloadData()
             self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
+            
+            if self.subscription.type != .channel || self.subscription.joined {
+                self.setTextInputbarHidden(false, animated: false)
+                self.chatPreviewModeView?.removeFromSuperview()
+            } else {
+                self.showChatPreviewModeView()
+                self.setTextInputbarHidden(true, animated: false)
+            }
         }
         
         MessageManager.changes(subscription)
+    }
+    
+    fileprivate func showChatPreviewModeView() {
+        chatPreviewModeView?.removeFromSuperview()
+
+        let previewView = ChatPreviewModeView.instanceFromNib() as! ChatPreviewModeView
+        previewView.subscription = subscription
+        previewView.frame = CGRect(x: 0, y: view.frame.height - previewView.frame.height, width: view.frame.width, height: previewView.frame.height)
+        view.addSubview(previewView)
+        chatPreviewModeView = previewView
     }
     
     
