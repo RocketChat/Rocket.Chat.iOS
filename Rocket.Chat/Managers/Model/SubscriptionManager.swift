@@ -33,6 +33,7 @@ struct SubscriptionManager {
             list?.forEach({ (obj) in
                 let subscription = Subscription(dict: obj)
                 subscription.auth = auth
+                subscription.joined = true
                 subscriptions.append(subscription)
             })
             

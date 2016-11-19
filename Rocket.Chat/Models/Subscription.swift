@@ -34,6 +34,7 @@ class Subscription: BaseModel {
     dynamic var open = false
     dynamic var alert = false
     dynamic var favorite = false
+    dynamic var joined = false
 
     dynamic var createdAt: Date?
     dynamic var lastSeen: Date?
