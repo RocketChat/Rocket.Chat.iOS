@@ -215,11 +215,11 @@ class ChatViewController: SLKTextViewController {
         }
         
         if self.subscription.isJoined() {
-            self.setTextInputbarHidden(false, animated: false)
-            self.chatPreviewModeView?.removeFromSuperview()
+            setTextInputbarHidden(false, animated: false)
+            chatPreviewModeView?.removeFromSuperview()
         } else {
-            self.setTextInputbarHidden(true, animated: false)
-            self.showChatPreviewModeView()
+            setTextInputbarHidden(true, animated: false)
+            showChatPreviewModeView()
         }
     }
     
