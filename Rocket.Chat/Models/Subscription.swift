@@ -34,7 +34,6 @@ class Subscription: BaseModel {
     dynamic var open = false
     dynamic var alert = false
     dynamic var favorite = false
-    dynamic var joined = false
 
     dynamic var createdAt: Date?
     dynamic var lastSeen: Date?
@@ -84,6 +83,10 @@ extension Subscription {
     
     func isValid() -> Bool {
         return self.rid.characters.count > 0
+    }
+    
+    func isJoined() -> Bool {
+        return auth != nil || type != .channel
     }
     
     func fetchRoomIdentifier(_ completion: @escaping MessageCompletionObject <Subscription>) {
