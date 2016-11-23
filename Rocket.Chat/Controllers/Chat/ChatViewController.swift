@@ -57,6 +57,20 @@ class ChatViewController: SLKTextViewController {
         setupTextViewSettings()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        
+        let insets = UIEdgeInsets(
+            top: 0,
+            left: 0,
+            bottom: chatPreviewModeView?.frame.height ?? 0,
+            right: 0
+        )
+        
+        collectionView?.contentInset = insets
+        collectionView?.scrollIndicatorInsets = insets
+    }
+    
     fileprivate func setupTextViewSettings() {
         textInputbar.autoHideRightButton = true
 
@@ -199,6 +213,14 @@ class ChatViewController: SLKTextViewController {
                 self.subscription = response
             })
         }
+        
+        if self.subscription.isJoined() {
+            self.setTextInputbarHidden(false, animated: false)
+            self.chatPreviewModeView?.removeFromSuperview()
+        } else {
+            self.setTextInputbarHidden(true, animated: false)
+            self.showChatPreviewModeView()
+        }
     }
     
     fileprivate func updateSubscriptionMessages() {
@@ -219,14 +241,6 @@ class ChatViewController: SLKTextViewController {
             self.collectionView?.reloadData()
             self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
-            
-            if self.subscription.type != .channel || self.subscription.joined {
-                self.setTextInputbarHidden(false, animated: false)
-                self.chatPreviewModeView?.removeFromSuperview()
-            } else {
-                self.showChatPreviewModeView()
-                self.setTextInputbarHidden(true, animated: false)
-            }
         }
         
         MessageManager.changes(subscription)
