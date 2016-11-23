@@ -157,7 +157,11 @@ extension SubscriptionsViewController {
                 searchResultsGroup.append(subscription)
             }
             
-            if (subscription.favorite) {
+            if !isSearchingLocally && !subscription.open {
+                continue
+            }
+            
+            if subscription.favorite {
                 favoriteGroup.append(subscription)
                 continue
             }
