@@ -250,6 +250,7 @@ class ChatViewController: SLKTextViewController {
         chatPreviewModeView?.removeFromSuperview()
 
         let previewView = ChatPreviewModeView.instanceFromNib() as! ChatPreviewModeView
+        previewView.delegate = self
         previewView.subscription = subscription
         previewView.frame = CGRect(x: 0, y: view.frame.height - previewView.frame.height, width: view.frame.width, height: previewView.frame.height)
         view.addSubview(previewView)
@@ -313,6 +314,24 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
         let fullWidth = UIScreen.main.bounds.size.width
         let height = ChatMessageCell.cellMediaHeightFor(message: message)
         return CGSize(width: fullWidth, height: height)
+    }
+    
+}
+
+
+// MARK: ChatPreviewModeViewProtocol
+
+extension ChatViewController: ChatPreviewModeViewProtocol {
+    
+    func userDidJoinedSubscription() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let subscription = self.subscription else { return }
+        
+        Realm.execute { (realm) in
+            subscription.auth = auth
+        }
+        
+        self.subscription = subscription
     }
     
 }
