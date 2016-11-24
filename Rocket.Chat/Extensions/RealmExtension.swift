@@ -39,6 +39,15 @@ extension Realm {
     // MARK: Mutate
     
     // This method will add or update a Realm's object.
+    static func delete(_ object: Object) {
+        guard !object.isInvalidated else { return }
+
+        self.execute() { (realm) in
+            realm.delete(object)
+        }
+    }
+    
+    // This method will add or update a Realm's object.
     static func update(_ object: Object) {
         self.execute() { (realm) in
             realm.add(object, update: true)
