@@ -18,7 +18,8 @@ class ChatViewController: SLKTextViewController {
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     
-    var searchResult: [String] = []
+    var searchResult: [String: SubscriptionType] = [:]
+    
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
     var subscription: Subscription! {
@@ -133,26 +134,29 @@ class ChatViewController: SLKTextViewController {
     
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
         if prefix == "@" && word.characters.count > 0 {
-            guard var users: [String] = try? Realm().objects(User.self).map({ $0.username ?? "" }) else { return }
+            searchResult = try? Realm().objects(User.self).map({ [$0.username : .user] })
             users.append("here")
             users.append("all")
-            
-            self.searchResult = users.filter({ (string) -> Bool in
+        
+            searchResult = users.filter({ (string) -> Bool in
                 return string.contains(word)
             })
 
         } else if prefix == "#" && word.characters.count > 0 {
             guard let channels = try? Realm().objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p')").map({ $0.name }) else { return }
             
-            self.searchResult = channels.filter({ (string) -> Bool in
+            isSearchingUser = false
+            isSearchingChannel = true
+            searchResult = channels.filter({ (string) -> Bool in
                 return string.contains(word)
             })
+
         } else {
-            self.searchResult = []
+            searchResult = []
         }
         
-        let show = (self.searchResult.count > 0)
-        self.showAutoCompletionView(show)
+        let show = (searchResult.count > 0)
+        showAutoCompletionView(show)
     }
     
     override func heightForAutoCompletionView() -> CGFloat {

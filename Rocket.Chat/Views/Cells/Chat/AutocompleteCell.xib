@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11761" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,9 +15,16 @@
             <rect key="frame" x="0.0" y="0.0" width="482" height="55"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gtH-Da-DFy" id="hWz-Y4-uEw">
-                <rect key="frame" x="0.0" y="0.0" width="482" height="55"/>
+                <rect key="frame" x="0.0" y="0.0" width="482" height="54"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EvE-ak-5w6">
+                        <rect key="frame" x="8" y="15" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="ruE-Z6-lMT"/>
+                            <constraint firstAttribute="height" constant="25" id="vNL-eC-oWn"/>
+                        </constraints>
+                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHT-nZ-nga" customClass="AvatarView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="8" y="15" width="25" height="25"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -42,6 +49,8 @@
                     <constraint firstItem="IHT-nZ-nga" firstAttribute="leading" secondItem="hWz-Y4-uEw" secondAttribute="leading" constant="8" id="QU7-B7-ieL"/>
                     <constraint firstItem="IHT-nZ-nga" firstAttribute="centerY" secondItem="hWz-Y4-uEw" secondAttribute="centerY" id="Vf4-6N-Z9w"/>
                     <constraint firstItem="Gvu-r5-Qh8" firstAttribute="leading" secondItem="IHT-nZ-nga" secondAttribute="trailing" constant="8" id="XZx-s3-v4q"/>
+                    <constraint firstItem="EvE-ak-5w6" firstAttribute="leading" secondItem="hWz-Y4-uEw" secondAttribute="leading" constant="8" id="edb-Ea-R1z"/>
+                    <constraint firstItem="EvE-ak-5w6" firstAttribute="centerY" secondItem="hWz-Y4-uEw" secondAttribute="centerY" id="mfx-Te-hmh"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
