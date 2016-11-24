@@ -81,7 +81,7 @@ class ChatViewController: SLKTextViewController {
         textView.registerMarkdownFormattingSymbol("```", withTitle: "Preformatted")
         textView.registerMarkdownFormattingSymbol(">", withTitle: "Quote")
         
-        registerPrefixes(forAutoCompletion: ["@"])
+        registerPrefixes(forAutoCompletion: ["@", "#"])
     }
     
     fileprivate func setupTitleView() {
@@ -132,10 +132,23 @@ class ChatViewController: SLKTextViewController {
     }
     
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
-        guard let users = try? Realm().objects(User.self) else { return }
-        
         if prefix == "@" && word.characters.count > 0 {
-            self.searchResult = users.filter(NSPredicate(format: "username BEGINSWITH[c] %@", word)).map({ $0.username ?? "" })
+            guard var users: [String] = try? Realm().objects(User.self).map({ $0.username ?? "" }) else { return }
+            users.append("here")
+            users.append("all")
+            
+            self.searchResult = users.filter({ (string) -> Bool in
+                return string.contains(word)
+            })
+
+        } else if prefix == "#" && word.characters.count > 0 {
+            guard let channels = try? Realm().objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p')").map({ $0.name }) else { return }
+            
+            self.searchResult = channels.filter({ (string) -> Bool in
+                return string.contains(word)
+            })
+        } else {
+            self.searchResult = []
         }
         
         let show = (self.searchResult.count > 0)
@@ -160,7 +173,7 @@ class ChatViewController: SLKTextViewController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let object = searchResult[indexPath.row]
-        acceptAutoCompletion(with: object, keepPrefix: true)
+        acceptAutoCompletion(with: "\(object) ", keepPrefix: true)
     }
     
     func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
