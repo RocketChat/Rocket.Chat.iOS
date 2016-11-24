@@ -18,7 +18,7 @@ class ChatViewController: SLKTextViewController {
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     
-    var searchResult: Results<User>?
+    var searchResult: [String] = []
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
     var subscription: Subscription! {
@@ -135,19 +135,19 @@ class ChatViewController: SLKTextViewController {
         guard let users = try? Realm().objects(User.self) else { return }
         
         if prefix == "@" && word.characters.count > 0 {
-            self.searchResult = users.filter(NSPredicate(format: "username BEGINSWITH[c] %@", word))
+            self.searchResult = users.filter(NSPredicate(format: "username BEGINSWITH[c] %@", word)).map({ $0.username ?? "" })
         }
         
-        let show = (self.searchResult?.count ?? 0 > 0)
+        let show = (self.searchResult.count > 0)
         self.showAutoCompletionView(show)
     }
     
     override func heightForAutoCompletionView() -> CGFloat {
-        return AutocompleteCell.minimumHeight * CGFloat(searchResult?.count ?? 1)
+        return AutocompleteCell.minimumHeight * CGFloat(searchResult.count)
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResult?.count ?? 0
+        return searchResult.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -159,21 +159,17 @@ class ChatViewController: SLKTextViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let user = searchResult?[indexPath.row] else { return }
-        guard let username = user.username else { return }
-        acceptAutoCompletion(with: "\(username): ", keepPrefix: true)
+        let object = searchResult[indexPath.row]
+        acceptAutoCompletion(with: object, keepPrefix: true)
     }
     
     func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
+        let object = searchResult[indexPath.row]
         let cell = autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as! AutocompleteCell
         cell.selectionStyle = .default
         
-        guard let user = searchResult?[indexPath.row] else {
-            return cell
-        }
-        
-        cell.avatarView.user = user
-        cell.labelTitle.text = user.username
+        // cell.avatarView.user = user
+        cell.labelTitle.text = object
         return cell
     }
     
