@@ -58,11 +58,18 @@ struct SubscriptionManager {
         SocketManager.subscribe(request, eventName: eventName) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }
             
+            let msg = response.result["fields"]["args"][0]
             let object = response.result["fields"]["args"][1]
-            let subscription = Subscription(dict: object)
-            subscription.auth = auth
             
-            Realm.update(subscription)
+            if msg == "removed" {
+                let subscription = Subscription(dict: object)
+                subscription.auth = nil
+                Realm.update(subscription)
+            } else {
+                let subscription = Subscription(dict: object)
+                subscription.auth = auth
+                Realm.update(subscription)
+            }
         }
     }
     
