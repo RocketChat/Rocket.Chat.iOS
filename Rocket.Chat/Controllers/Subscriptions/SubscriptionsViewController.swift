@@ -97,7 +97,6 @@ extension SubscriptionsViewController {
     }
     
     func searchOnSpotlight(_ text: String = "") {
-        let historyText = text
         tableView.tableFooterView = nil
         activityViewSearching.startAnimating()
         
