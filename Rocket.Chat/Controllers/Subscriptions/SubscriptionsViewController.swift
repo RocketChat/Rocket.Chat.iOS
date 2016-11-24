@@ -49,6 +49,7 @@ class SubscriptionsViewController: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        textFieldSearch.resignFirstResponder()
         unregisterKeyboardNotifications()
     }
     
@@ -96,7 +97,6 @@ extension SubscriptionsViewController {
     }
     
     func searchOnSpotlight(_ text: String = "") {
-        let historyText = text
         tableView.tableFooterView = nil
         activityViewSearching.startAnimating()
         
@@ -107,10 +107,7 @@ extension SubscriptionsViewController {
                 return
             }
             
-            if currentText == historyText {
-                self.activityViewSearching.stopAnimating()
-            }
-            
+            self.activityViewSearching.stopAnimating()
             self.isSearchingRemotely = true
             self.searchResult = result
             self.groupSubscription()
@@ -119,6 +116,7 @@ extension SubscriptionsViewController {
     }
     
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
+        guard !isSearchingLocally && !isSearchingRemotely else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
         subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
         groupSubscription()
@@ -274,6 +272,11 @@ extension SubscriptionsViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
         let prospectiveText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        
+        if string == "\n" {
+            searchOnSpotlight(currentText)
+            return false
+        }
         
         searchBy(prospectiveText)
         return true
