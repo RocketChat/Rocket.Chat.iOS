@@ -288,15 +288,18 @@ extension ChatViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let message = messages![indexPath.row]
-
         let cell = collectionView.dequeueReusableCell(
             withReuseIdentifier: ChatMessageCell.identifier,
             for: indexPath
         ) as! ChatMessageCell
 
         cell.delegate = self
-        cell.message = message
+        
+        if messages?.count ?? 0 > indexPath.row {
+            let message = messages![indexPath.row]
+            cell.message = message
+        }
+
         return cell
     }
     

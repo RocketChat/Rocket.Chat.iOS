@@ -59,6 +59,7 @@ extension SocketManager {
         
         // Handle model updates
         if let collection = result.collection {
+            guard let msg = result.msg else { return }
             guard let identifier = result.result["id"].string else { return }
             let fields = result.result["fields"]
             
@@ -66,6 +67,17 @@ extension SocketManager {
             case "users":
                 let user = Realm.getOrCreate(User.self, primaryKey: identifier, values: fields)
                 Realm.update(user)
+            case "subscriptions":
+                if msg == .Added || msg == .Changed {
+                    let object = Realm.getOrCreate(Subscription.self, primaryKey: identifier, values: fields)
+                    Realm.update(object)
+                }
+                
+                if msg == .Removed {
+                    let object = Realm.getOrCreate(Subscription.self, primaryKey: identifier, values: fields)
+                    Realm.delete(object)
+                }
+                
             default: break
             }
         }

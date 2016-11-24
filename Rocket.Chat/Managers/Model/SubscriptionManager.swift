@@ -28,11 +28,29 @@ struct SubscriptionManager {
             guard !response.isError() else { return Log.debug(response.result.string) }
             
             let subscriptions = List<Subscription>()
+            
+            // List is used the first time user opens the app
             let list = response.result["result"].array
+            
+            // Update & Removed is used on updates
+            let updated = response.result["result"]["update"].array
+            let removed = response.result["result"]["remove"].array
 
             list?.forEach({ (obj) in
                 let subscription = Subscription(dict: obj)
                 subscription.auth = auth
+                subscriptions.append(subscription)
+            })
+            
+            updated?.forEach({ (obj) in
+                let subscription = Subscription(dict: obj)
+                subscription.auth = auth
+                subscriptions.append(subscription)
+            })
+            
+            removed?.forEach({ (obj) in
+                let subscription = Subscription(dict: obj)
+                subscription.auth = nil
                 subscriptions.append(subscription)
             })
             
@@ -58,11 +76,18 @@ struct SubscriptionManager {
         SocketManager.subscribe(request, eventName: eventName) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }
             
+            let msg = response.result["fields"]["args"][0]
             let object = response.result["fields"]["args"][1]
-            let subscription = Subscription(dict: object)
-            subscription.auth = auth
             
-            Realm.update(subscription)
+            if msg == "removed" {
+                let subscription = Subscription(dict: object)
+                subscription.auth = nil
+                Realm.update(subscription)
+            } else {
+                let subscription = Subscription(dict: object)
+                subscription.auth = auth
+                Realm.update(subscription)
+            }
         }
     }
     
