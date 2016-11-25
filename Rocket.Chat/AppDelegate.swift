@@ -25,6 +25,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        if let socket = SocketManager.sharedInstance.socket {
+            if !socket.isConnected {
+                socket.connect()
+            }
+        }
+    }
 
 }
 
