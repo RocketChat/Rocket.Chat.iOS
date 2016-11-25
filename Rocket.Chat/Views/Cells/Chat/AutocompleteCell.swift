@@ -13,6 +13,7 @@ class AutocompleteCell: UITableViewCell {
     static let minimumHeight = CGFloat(44)
     static let identifier = "AutocompleteCell"
     
+    @IBOutlet weak var imageViewIcon: UIImageView!
     @IBOutlet weak var avatarView: AvatarView! {
         didSet {
             avatarView.layer.cornerRadius = 4
