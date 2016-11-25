@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11761" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,8 +18,15 @@
                 <rect key="frame" x="0.0" y="0.0" width="482" height="55"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EvE-ak-5w6">
+                        <rect key="frame" x="20" y="19.5" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="ruE-Z6-lMT"/>
+                            <constraint firstAttribute="height" constant="16" id="vNL-eC-oWn"/>
+                        </constraints>
+                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHT-nZ-nga" customClass="AvatarView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="8" y="15" width="25" height="25"/>
+                        <rect key="frame" x="15" y="15" width="25" height="25"/>
                         <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="25" id="tK2-vW-gE9"/>
@@ -27,7 +34,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Gvu-r5-Qh8">
-                        <rect key="frame" x="41" y="17" width="433" height="21"/>
+                        <rect key="frame" x="48" y="17" width="426" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="4Zf-RV-XY6"/>
                         </constraints>
@@ -39,13 +46,16 @@
                 <constraints>
                     <constraint firstItem="Gvu-r5-Qh8" firstAttribute="centerY" secondItem="hWz-Y4-uEw" secondAttribute="centerY" id="KDu-i6-aRP"/>
                     <constraint firstAttribute="trailing" secondItem="Gvu-r5-Qh8" secondAttribute="trailing" constant="8" id="PHu-kt-zm4"/>
-                    <constraint firstItem="IHT-nZ-nga" firstAttribute="leading" secondItem="hWz-Y4-uEw" secondAttribute="leading" constant="8" id="QU7-B7-ieL"/>
+                    <constraint firstItem="IHT-nZ-nga" firstAttribute="leading" secondItem="hWz-Y4-uEw" secondAttribute="leading" constant="15" id="QU7-B7-ieL"/>
                     <constraint firstItem="IHT-nZ-nga" firstAttribute="centerY" secondItem="hWz-Y4-uEw" secondAttribute="centerY" id="Vf4-6N-Z9w"/>
                     <constraint firstItem="Gvu-r5-Qh8" firstAttribute="leading" secondItem="IHT-nZ-nga" secondAttribute="trailing" constant="8" id="XZx-s3-v4q"/>
+                    <constraint firstItem="EvE-ak-5w6" firstAttribute="leading" secondItem="hWz-Y4-uEw" secondAttribute="leading" constant="20" id="edb-Ea-R1z"/>
+                    <constraint firstItem="EvE-ak-5w6" firstAttribute="centerY" secondItem="hWz-Y4-uEw" secondAttribute="centerY" id="mfx-Te-hmh"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="avatarView" destination="IHT-nZ-nga" id="jhy-jL-pjs"/>
+                <outlet property="imageViewIcon" destination="EvE-ak-5w6" id="SlX-F9-X9q"/>
                 <outlet property="labelTitle" destination="Gvu-r5-Qh8" id="6zE-nV-DP7"/>
             </connections>
             <point key="canvasLocation" x="-190" y="-94.5"/>
