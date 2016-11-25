@@ -18,7 +18,7 @@ class ChatViewController: SLKTextViewController {
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     
-    var searchResult: [String: SubscriptionType] = [:]
+    var searchResult: [String: Any] = [:]
     
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
@@ -133,26 +133,32 @@ class ChatViewController: SLKTextViewController {
     }
     
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
-        if prefix == "@" && word.characters.count > 0 {
-            searchResult = try? Realm().objects(User.self).map({ [$0.username : .user] })
-            users.append("here")
-            users.append("all")
+        searchResult = [:]
         
-            searchResult = users.filter({ (string) -> Bool in
-                return string.contains(word)
-            })
+        if prefix == "@" && word.characters.count > 0 {
+            guard let users = try? Realm().objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", word)) else { return }
+
+            for user in users {
+                if let username = user.username {
+                    searchResult[username] = user
+                }
+            }
+            
+            if "here".contains(word) {
+                searchResult["here"] = UIImage(named: "Hashtag")
+            }
+            
+            if "all".contains(word) {
+                searchResult["all"] = UIImage(named: "Hashtag")
+            }
 
         } else if prefix == "#" && word.characters.count > 0 {
-            guard let channels = try? Realm().objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p')").map({ $0.name }) else { return }
+            guard let channels = try? Realm().objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p') && name BEGINSWITH[c] %@", word) else { return }
             
-            isSearchingUser = false
-            isSearchingChannel = true
-            searchResult = channels.filter({ (string) -> Bool in
-                return string.contains(word)
-            })
+            for channel in channels {
+                searchResult[channel.name] = channel.type == .channel ? UIImage(named: "Hashtag") : UIImage(named: "Lock")
+            }
 
-        } else {
-            searchResult = []
         }
         
         let show = (searchResult.count > 0)
@@ -164,7 +170,7 @@ class ChatViewController: SLKTextViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResult.count
+        return searchResult.keys.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -176,17 +182,29 @@ class ChatViewController: SLKTextViewController {
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let object = searchResult[indexPath.row]
-        acceptAutoCompletion(with: "\(object) ", keepPrefix: true)
+        let key = Array(searchResult.keys)[indexPath.row]
+        acceptAutoCompletion(with: "\(key) ", keepPrefix: true)
     }
     
     func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
-        let object = searchResult[indexPath.row]
+        let key = Array(searchResult.keys)[indexPath.row]
         let cell = autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as! AutocompleteCell
         cell.selectionStyle = .default
         
-        // cell.avatarView.user = user
-        cell.labelTitle.text = object
+        if let user = searchResult[key] as? User {
+            cell.avatarView.isHidden = false
+            cell.imageViewIcon.isHidden = true
+            cell.avatarView.user = user
+        } else {
+            cell.avatarView.isHidden = true
+            cell.imageViewIcon.isHidden = false
+            
+            if let image = searchResult[key] as? UIImage {
+                cell.imageViewIcon.image = image.imageWithTint(.lightGray)
+            }
+        }
+
+        cell.labelTitle.text = key
         return cell
     }
     
