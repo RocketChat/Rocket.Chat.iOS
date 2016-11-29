@@ -9,9 +9,14 @@
 import UIKit
 import SDWebImage
 
+protocol ChatMessageImageViewProtocol {
+    func openImageFromCell(attachment: Attachment, thumbnail: UIImageView)
+}
+
 class ChatMessageImageView: BaseView {
     static let defaultHeight = CGFloat(250)
 
+    var delegate: ChatMessageImageViewProtocol?
     var attachment: Attachment! {
         didSet {
             updateMessageInformation()
@@ -48,6 +53,6 @@ class ChatMessageImageView: BaseView {
     }
     
     func didTapView() {
-        dump(self)
+        delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
     }
 }

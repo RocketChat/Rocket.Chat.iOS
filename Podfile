@@ -15,6 +15,7 @@ def shared_pods
   pod 'SideMenu'
   pod 'SlackTextViewController'
   pod 'MobilePlayer'
+  pod 'URBMediaFocusViewController'
 
   # Database
   pod 'RealmSwift'
