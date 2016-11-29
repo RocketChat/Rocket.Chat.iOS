@@ -33,7 +33,6 @@
 		416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4161333F1D46E6A800E09DA2 /* MessageSpec.swift */; };
 		4162E1531D651A8800AAAE49 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162E1521D651A8800AAAE49 /* UserManager.swift */; };
 		4162E1551D654A7400AAAE49 /* SocketHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4162E1541D654A7400AAAE49 /* SocketHandlers.swift */; };
-		41693D811DE8A1B600DB3B42 /* ChatMediaImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41693D801DE8A1B600DB3B42 /* ChatMediaImageViewController.swift */; };
 		4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */; };
 		4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */; };
 		4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4174CB121D2D99960086DAC8 /* BaseViewController.swift */; };
@@ -137,7 +136,6 @@
 		4161333F1D46E6A800E09DA2 /* MessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageSpec.swift; path = Models/MessageSpec.swift; sourceTree = "<group>"; };
 		4162E1521D651A8800AAAE49 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserManager.swift; path = Managers/Model/UserManager.swift; sourceTree = "<group>"; };
 		4162E1541D654A7400AAAE49 /* SocketHandlers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketHandlers.swift; path = Managers/Socket/Response/SocketHandlers.swift; sourceTree = "<group>"; };
-		41693D801DE8A1B600DB3B42 /* ChatMediaImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMediaImageViewController.swift; path = Controllers/Media/ChatMediaImageViewController.swift; sourceTree = "<group>"; };
 		4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConnectServerViewController.swift; path = Controllers/Auth/ConnectServerViewController.swift; sourceTree = "<group>"; };
 		4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Auth.storyboard; path = Storyboards/Auth.storyboard; sourceTree = "<group>"; };
 		4174CB121D2D99960086DAC8 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseViewController.swift; path = Controllers/Base/BaseViewController.swift; sourceTree = "<group>"; };
@@ -323,21 +321,12 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		41693D821DE8A1BD00DB3B42 /* Media */ = {
-			isa = PBXGroup;
-			children = (
-				41693D801DE8A1B600DB3B42 /* ChatMediaImageViewController.swift */,
-			);
-			name = Media;
-			sourceTree = "<group>";
-		};
 		4174CB0A1D2D990F0086DAC8 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				4174CB111D2D99840086DAC8 /* Base */,
 				4174CB101D2D997E0086DAC8 /* Auth */,
 				41E2FA021D414ECC00238DFD /* Chat */,
-				41693D821DE8A1BD00DB3B42 /* Media */,
 				41E2FA031D414ED400238DFD /* Subscriptions */,
 				415801941D303B640099E71B /* MainViewController.swift */,
 			);
@@ -952,7 +941,6 @@
 				41F167E91DAC4D4300775CCA /* ChatTitleView.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
-				41693D811DE8A1B600DB3B42 /* ChatMediaImageViewController.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				41BA89301D303F9B00CBF526 /* BaseModel.swift in Sources */,
