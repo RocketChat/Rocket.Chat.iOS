@@ -11,12 +11,14 @@ import RealmSwift
 import SlackTextViewController
 import SafariServices
 import MobilePlayer
+import URBMediaFocusViewController
 
 class ChatViewController: SLKTextViewController {
     
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
+    lazy var mediaFocusViewController = URBMediaFocusViewController()
     
     var searchResult: [String: Any] = [:]
     
@@ -46,6 +48,9 @@ class ChatViewController: SLKTextViewController {
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
 
+        mediaFocusViewController.shouldDismissOnTap = true
+        mediaFocusViewController.shouldShowPhotoActions = true
+        
         isInverted = false
         bounces = true
         shakeToClearEnabled = true
@@ -393,6 +398,14 @@ extension ChatViewController: ChatMessageCellProtocol {
         controller.title = attachment.title
         controller.activityItems = [attachment.title, videoURL]
         present(controller, animated: true, completion: nil)
+    }
+    
+    func openImageFromCell(attachment: Attachment, thumbnail: UIImageView) {
+        if let image = thumbnail.image {
+            mediaFocusViewController.show(image, from: thumbnail)
+        } else {
+            mediaFocusViewController.showImage(from: attachment.fullImageURL(), from: thumbnail)
+        }
     }
 
 }

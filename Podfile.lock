@@ -15,6 +15,7 @@ PODS:
   - SlackTextViewController (1.9.5)
   - Starscream (2.0.1)
   - SwiftyJSON (3.1.1)
+  - URBMediaFocusViewController (0.9.0)
 
 DEPENDENCIES:
   - Crashlytics
@@ -26,6 +27,7 @@ DEPENDENCIES:
   - SlackTextViewController
   - Starscream (~> 2.0.0)
   - SwiftyJSON
+  - URBMediaFocusViewController
 
 SPEC CHECKSUMS:
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
@@ -38,7 +40,8 @@ SPEC CHECKSUMS:
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
   Starscream: ce7a202d95615bd4113bc5a0f1932f1db8c808a4
   SwiftyJSON: f0be2e604f83e8405a624e9f891898bf6ed4e019
+  URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: fa488871d8f5d330b5fccb77f5c0960b0aa060ee
+PODFILE CHECKSUM: d9a60a9e057afb887c93f82a4b84d2bb6b012f65
 
 COCOAPODS: 1.1.1
