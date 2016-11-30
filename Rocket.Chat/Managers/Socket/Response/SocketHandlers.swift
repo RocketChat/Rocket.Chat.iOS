@@ -10,6 +10,7 @@ import Foundation
 import Starscream
 import RealmSwift
 import SwiftyJSON
+import Bugsnag
 
 extension SocketManager {
     
@@ -18,6 +19,10 @@ extension SocketManager {
         
         guard result.msg != nil else {
             return Log.debug("Msg is invalid: \(result.result)")
+        }
+        
+        guard !result.isError() else {
+            return handleError(result, socket: socket)
         }
         
         switch result.msg! {
@@ -43,6 +48,16 @@ extension SocketManager {
     
     fileprivate func handlePingMessage(_ result: SocketResponse, socket: WebSocket) {
         SocketManager.send(["msg": "pong"])
+    }
+    
+    fileprivate func handleError(_ result: SocketResponse, socket: WebSocket) {
+        let error = result.result["error"]
+    
+        let exception = NSException(name: NSExceptionName(rawValue: error["error"].string ?? "Unknown"),
+                                    reason: error["reason"].string ?? "No reason",
+                                    userInfo: nil)
+        
+        Bugsnag.notify(exception)
     }
     
     fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {
