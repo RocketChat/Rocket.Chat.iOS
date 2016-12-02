@@ -6,7 +6,7 @@
 //  Copyright © 2016 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 import Starscream
 import SwiftyJSON
 import RealmSwift
@@ -19,6 +19,12 @@ public typealias MessageCompletionObject <T: Object> = (T) -> Void
 public typealias MessageCompletionObjectsList <T: Object> = ([T]) -> Void
 
 
+protocol SocketConnectionHandler {
+    func socketDidConnect(socket: SocketManager)
+    func socketDidDisconnect(socket: SocketManager)
+}
+
+
 class SocketManager {
     
     static let sharedInstance = SocketManager()
@@ -28,14 +34,16 @@ class SocketManager {
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
     var events: [String: [MessageCompletion]] = [:]
-    var connectionHandler: SocketCompletion?
+
+    internal var internalConnectionHandler: SocketCompletion?
+    internal var connectionHandlers: [String: SocketConnectionHandler] = [:]
     
     
     // MARK: Connection
     
     static func connect(_ url: URL, completion: @escaping SocketCompletion) {
         sharedInstance.serverURL = url
-        sharedInstance.connectionHandler = completion
+        sharedInstance.internalConnectionHandler = completion
 
         sharedInstance.socket = WebSocket(url: url)
         sharedInstance.socket?.delegate = sharedInstance
@@ -45,7 +53,7 @@ class SocketManager {
     }
     
     static func disconnect(_ completion: @escaping SocketCompletion) {
-        sharedInstance.connectionHandler = completion
+        sharedInstance.internalConnectionHandler = completion
         sharedInstance.socket?.disconnect()
     }
     
@@ -82,6 +90,17 @@ class SocketManager {
         }
     }
     
+    
+    // MARK: Handlers
+    
+    static func addConnectionHandler(token: String, handler: SocketConnectionHandler) {
+        sharedInstance.connectionHandlers[token] = handler
+    }
+    
+    static func removeConnectionHandler(token: String) {
+        sharedInstance.connectionHandlers[token] = nil
+    }
+    
 }
 
 
@@ -105,8 +124,8 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Log.debug("[WebSocket] did disconnect with error (\(error))")
         
-        connectionHandler?(socket, socket.isConnected)
-        connectionHandler = nil
+        internalConnectionHandler?(socket, socket.isConnected)
+        internalConnectionHandler = nil
     }
     
     func websocketDidReceiveData(socket: WebSocket, data: Data) {

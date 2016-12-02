@@ -42,8 +42,8 @@ extension SocketManager {
     }
     
     fileprivate func handleConnectionMessage(_ result: SocketResponse, socket: WebSocket) {
-        connectionHandler?(socket, true)
-        connectionHandler = nil
+        internalConnectionHandler?(socket, true)
+        internalConnectionHandler = nil
     }
     
     fileprivate func handlePingMessage(_ result: SocketResponse, socket: WebSocket) {

@@ -22,6 +22,7 @@ class ChatViewController: SLKTextViewController {
     
     var searchResult: [String: Any] = [:]
     
+    let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
     var subscription: Subscription! {
@@ -40,6 +41,10 @@ class ChatViewController: SLKTextViewController {
         }
         
         return nil
+    }
+    
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
     
     override func viewDidLoad() {
@@ -61,6 +66,8 @@ class ChatViewController: SLKTextViewController {
         setupSideMenu()
         registerCells()
         setupTextViewSettings()
+        
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
     
     override func viewWillLayoutSubviews() {
@@ -342,6 +349,9 @@ extension ChatViewController {
 }
 
 
+
+// MARK: UICollectionViewDelegateFlowLayout
+
 extension ChatViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -408,4 +418,19 @@ extension ChatViewController: ChatMessageCellProtocol {
         }
     }
 
+}
+
+
+// MARK: SocketConnectionHandler
+
+extension ChatViewController: SocketConnectionHandler {
+    
+    func socketDidConnect(socket: SocketManager) {
+        
+    }
+    
+    func socketDidDisconnect(socket: SocketManager) {
+        
+    }
+    
 }
