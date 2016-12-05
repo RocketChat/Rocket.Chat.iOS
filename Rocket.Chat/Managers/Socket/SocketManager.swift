@@ -90,8 +90,23 @@ class SocketManager {
         }
     }
     
+}
+
+
+// MARK: Helpers
+
+extension SocketManager {
     
-    // MARK: Handlers
+    static func isConnected() -> Bool {
+        return self.sharedInstance.socket?.isConnected ?? false
+    }
+    
+}
+
+
+// MARK: Connection handlers
+
+extension SocketManager {
     
     static func addConnectionHandler(token: String, handler: SocketConnectionHandler) {
         sharedInstance.connectionHandlers[token] = handler
@@ -119,6 +134,10 @@ extension SocketManager: WebSocketDelegate {
         ] as [String : Any]
         
         SocketManager.send(object)
+        
+        for (_, handler) in connectionHandlers {
+            handler.socketDidConnect(socket: self)
+        }
     }
     
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
@@ -126,6 +145,10 @@ extension SocketManager: WebSocketDelegate {
         
         internalConnectionHandler?(socket, socket.isConnected)
         internalConnectionHandler = nil
+        
+        for (_, handler) in connectionHandlers {
+            handler.socketDidDisconnect(socket: self)
+        }
     }
     
     func websocketDidReceiveData(socket: WebSocket, data: Data) {
@@ -136,7 +159,7 @@ extension SocketManager: WebSocketDelegate {
         let json = JSON.parse(text)
         
         // JSON is invalid
-        guard json != nil && json.exists() else {
+        guard json.exists() else {
             Log.debug("[WebSocket] did receive invalid JSON object: \(text)")
             return
         }
