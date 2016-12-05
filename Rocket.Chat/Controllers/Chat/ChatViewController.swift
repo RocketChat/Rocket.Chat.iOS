@@ -62,12 +62,19 @@ class ChatViewController: SLKTextViewController {
         isKeyboardPanningEnabled = true
         shouldScrollToBottomAfterKeyboardShows = false
         
+        rightButton.isEnabled = false
+        
         setupTitleView()
         setupSideMenu()
         registerCells()
         setupTextViewSettings()
         
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        SocketManager.sharedInstance.socket?.disconnect()
     }
     
     override func viewWillLayoutSubviews() {
@@ -131,6 +138,10 @@ class ChatViewController: SLKTextViewController {
     
     
     // MARK: SlackTextViewController
+    
+    override func canPressRightButton() -> Bool {
+        return SocketManager.isConnected()
+    }
     
     override func didPressRightButton(_ sender: Any?) {
         sendMessage()
@@ -430,7 +441,9 @@ extension ChatViewController: SocketConnectionHandler {
     }
     
     func socketDidDisconnect(socket: SocketManager) {
-        
+        let headerView = ChatHeaderViewOffline.instanceFromNib() as! ChatHeaderViewOffline
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.frame.height)
+        view.addSubview(headerView)
     }
     
 }
