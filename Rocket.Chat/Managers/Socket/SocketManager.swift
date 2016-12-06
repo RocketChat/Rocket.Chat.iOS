@@ -97,6 +97,26 @@ class SocketManager {
 
 extension SocketManager {
     
+    static func reconnect() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        
+        AuthManager.resume(auth, completion: { (response) in
+            guard !response.isError() else {
+                return
+            }
+            
+            SubscriptionManager.updateSubscriptions(auth, completion: { (response) in
+                // TODO: Move it to somewhere else
+                AuthManager.updatePublicSettings(auth, completion: { (response) in
+                    
+                })
+                    
+                UserManager.changes()
+                SubscriptionManager.changes(auth)
+            })
+        })
+    }
+    
     static func isConnected() -> Bool {
         return self.sharedInstance.socket?.isConnected ?? false
     }
