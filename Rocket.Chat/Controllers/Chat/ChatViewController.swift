@@ -73,11 +73,6 @@ class ChatViewController: SLKTextViewController {
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        SocketManager.sharedInstance.socket?.disconnect()
-    }
-    
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
@@ -443,6 +438,8 @@ extension ChatViewController: SocketConnectionHandler {
     }
     
     func socketDidDisconnect(socket: SocketManager) {
+        chatHeaderViewOffline?.removeFromSuperview()
+        
         let headerView = ChatHeaderViewOffline.instanceFromNib() as! ChatHeaderViewOffline
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.frame.height)
         view.addSubview(headerView)
