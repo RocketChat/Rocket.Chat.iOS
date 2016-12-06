@@ -18,6 +18,7 @@ class ChatViewController: SLKTextViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
+    weak var chatHeaderViewOffline: ChatHeaderViewOffline?
     lazy var mediaFocusViewController = URBMediaFocusViewController()
     
     var searchResult: [String: Any] = [:]
@@ -437,13 +438,15 @@ extension ChatViewController: ChatMessageCellProtocol {
 extension ChatViewController: SocketConnectionHandler {
     
     func socketDidConnect(socket: SocketManager) {
-        
+        chatHeaderViewOffline?.removeFromSuperview()
+        rightButton.isEnabled = true
     }
     
     func socketDidDisconnect(socket: SocketManager) {
         let headerView = ChatHeaderViewOffline.instanceFromNib() as! ChatHeaderViewOffline
         headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.frame.height)
         view.addSubview(headerView)
+        chatHeaderViewOffline = headerView
     }
     
 }
