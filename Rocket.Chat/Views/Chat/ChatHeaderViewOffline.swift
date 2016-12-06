@@ -14,7 +14,7 @@ class ChatHeaderViewOffline: BaseView {
     @IBOutlet weak var buttonRefresh: UIButton!
     
     @IBAction func buttonRefreshDidPressed(_ sender: Any) {
-        SocketManager.sharedInstance.socket?.connect()
+        SocketManager.reconnect()
     }
     
 }
