@@ -35,9 +35,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        if let socket = SocketManager.sharedInstance.socket {
-            if !socket.isConnected {
-                socket.connect()
+        // We just want to reconnect if user is already in the chat
+        if let _ = ChatViewController.sharedInstance() {
+            if !SocketManager.isConnected() {
+                SocketManager.reconnect()
             }
         }
     }
