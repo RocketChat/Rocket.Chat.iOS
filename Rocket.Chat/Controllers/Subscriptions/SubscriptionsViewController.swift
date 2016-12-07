@@ -47,10 +47,16 @@ class SubscriptionsViewController: BaseViewController {
         subscribeModelChanges()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        ChatViewController.sharedInstance()?.toggleStatusBar(hide: true)
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         textFieldSearch.resignFirstResponder()
         unregisterKeyboardNotifications()
+        ChatViewController.sharedInstance()?.toggleStatusBar(hide: false)
     }
     
     override func viewDidAppear(_ animated: Bool) {
