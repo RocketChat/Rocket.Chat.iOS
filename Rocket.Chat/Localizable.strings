@@ -14,6 +14,9 @@
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "The URL you entered is invalid. Check it and try again, please!";
 
+// Socket Connection
+"connection.offline.banner.message" = "You're offline, try connecting again";
+
 // Auth
 "auth.connect.button_connect" = "Connect";
 
