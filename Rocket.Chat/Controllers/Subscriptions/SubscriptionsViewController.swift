@@ -280,7 +280,10 @@ extension SubscriptionsViewController: UITextFieldDelegate {
         let prospectiveText = (currentText as NSString).replacingCharacters(in: range, with: string)
         
         if string == "\n" {
-            searchOnSpotlight(currentText)
+            if currentText.characters.count > 0 {
+                searchOnSpotlight(currentText)
+            }
+
             return false
         }
         
