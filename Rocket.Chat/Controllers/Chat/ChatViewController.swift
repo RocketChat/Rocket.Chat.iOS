@@ -23,6 +23,8 @@ class ChatViewController: SLKTextViewController {
     
     var searchResult: [String: Any] = [:]
     
+    var hideStatusBar = false
+    
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
@@ -307,7 +309,7 @@ class ChatViewController: SLKTextViewController {
         chatPreviewModeView = previewView
     }
     
-    
+
     // MARK: IBAction
     
     @IBAction func buttonMenuDidPressed(_ sender: AnyObject) {
@@ -324,6 +326,30 @@ class ChatViewController: SLKTextViewController {
         
         SideMenuManager.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
         SideMenuManager.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
+    }
+    
+}
+
+
+// MARK: Status Bar Control
+
+extension ChatViewController {
+    
+    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
+        return .slide
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return hideStatusBar
+    }
+    
+    func toggleStatusBar(hide: Bool) {
+        hideStatusBar = hide
+        UIView.animate(withDuration: 0.25) { () -> Void in
+            self.setNeedsStatusBarAppearanceUpdate()
+            self.navigationController?.navigationBar.frame.origin.y = 20
+            self.collectionView?.frame.origin.y = 0
+        }
     }
     
 }
