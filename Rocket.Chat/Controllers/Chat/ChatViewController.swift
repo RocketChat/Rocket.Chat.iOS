@@ -18,10 +18,12 @@ class ChatViewController: SLKTextViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
+    weak var chatHeaderViewOffline: ChatHeaderViewOffline?
     lazy var mediaFocusViewController = URBMediaFocusViewController()
     
     var searchResult: [String: Any] = [:]
     
+    let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
     var subscription: Subscription! {
@@ -42,6 +44,10 @@ class ChatViewController: SLKTextViewController {
         return nil
     }
     
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
@@ -57,10 +63,14 @@ class ChatViewController: SLKTextViewController {
         isKeyboardPanningEnabled = true
         shouldScrollToBottomAfterKeyboardShows = false
         
+        rightButton.isEnabled = false
+        
         setupTitleView()
         setupSideMenu()
         registerCells()
         setupTextViewSettings()
+        
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
     
     override func viewWillLayoutSubviews() {
@@ -124,6 +134,10 @@ class ChatViewController: SLKTextViewController {
     
     
     // MARK: SlackTextViewController
+    
+    override func canPressRightButton() -> Bool {
+        return SocketManager.isConnected()
+    }
     
     override func didPressRightButton(_ sender: Any?) {
         sendMessage()
@@ -342,6 +356,9 @@ extension ChatViewController {
 }
 
 
+
+// MARK: UICollectionViewDelegateFlowLayout
+
 extension ChatViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
@@ -408,4 +425,25 @@ extension ChatViewController: ChatMessageCellProtocol {
         }
     }
 
+}
+
+
+// MARK: SocketConnectionHandler
+
+extension ChatViewController: SocketConnectionHandler {
+    
+    func socketDidConnect(socket: SocketManager) {
+        chatHeaderViewOffline?.removeFromSuperview()
+        rightButton.isEnabled = true
+    }
+    
+    func socketDidDisconnect(socket: SocketManager) {
+        chatHeaderViewOffline?.removeFromSuperview()
+        
+        let headerView = ChatHeaderViewOffline.instanceFromNib() as! ChatHeaderViewOffline
+        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.frame.height)
+        view.addSubview(headerView)
+        chatHeaderViewOffline = headerView
+    }
+    
 }
