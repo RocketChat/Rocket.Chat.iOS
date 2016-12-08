@@ -17,11 +17,19 @@ struct MessageManager {
 
 extension MessageManager {
     
-    static func getHistory(_ subscription: Subscription, completion: @escaping MessageCompletion) {
+    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletion) {
+        var lastDate: Any!
+        
+        if let lastMessageDate = lastMessageDate {
+            lastDate = ["$date": lastMessageDate.timeIntervalSince1970 * 1000]
+        } else {
+            lastDate = NSNull()
+        }
+        
         let request = [
             "msg": "method",
             "method": "loadHistory",
-            "params": ["\(subscription.rid)", NSNull(), historySize, [
+            "params": ["\(subscription.rid)", lastDate, historySize, [
                 "$date": Date().timeIntervalSince1970 * 1000
             ]]
         ] as [String : Any]
