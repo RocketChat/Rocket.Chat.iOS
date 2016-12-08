@@ -25,6 +25,7 @@ class ChatViewController: SLKTextViewController {
     
     var hideStatusBar = false
     
+    var isRequestingHistory = false
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
@@ -282,12 +283,20 @@ class ChatViewController: SLKTextViewController {
                 self.activityIndicator.stopAnimating()
             }
             
+            var scrollToBottom = false
+            if (self.collectionView?.bounds)?.maxY == self.collectionView?.contentSize.height {
+                scrollToBottom = true
+            }
+            
             self.collectionView?.reloadData()
             self.collectionView?.layoutIfNeeded()
-            self.scrollToBottom()
+            
+            if scrollToBottom {
+                self.scrollToBottom()
+            }
         }
         
-        MessageManager.getHistory(subscription) { [unowned self] (response) in
+        MessageManager.getHistory(subscription, lastMessageDate: nil) { [unowned self] (response) in
             self.activityIndicator.stopAnimating()
             self.messages = self.subscription?.fetchMessages()
             self.collectionView?.reloadData()
@@ -296,6 +305,20 @@ class ChatViewController: SLKTextViewController {
         }
         
         MessageManager.changes(subscription)
+    }
+    
+    fileprivate func loadMoreMessagesFrom(date: Date?) {
+        if isRequestingHistory {
+            return
+        }
+        
+        isRequestingHistory = true
+        MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (response) in
+            self.messages = self.subscription?.fetchMessages()
+            self.collectionView?.reloadData()
+            self.collectionView?.layoutIfNeeded()
+            self.isRequestingHistory = false
+        }
     }
     
     fileprivate func showChatPreviewModeView() {
@@ -358,6 +381,14 @@ extension ChatViewController {
 // MARK: UICollectionViewDataSource
 
 extension ChatViewController {
+    
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row <= 5 {
+            if let message = messages!.first {
+                loadMoreMessagesFrom(date: message.createdAt)
+            }
+        }
+    }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages?.count ?? 0
@@ -460,6 +491,7 @@ extension ChatViewController: SocketConnectionHandler {
     
     func socketDidConnect(socket: SocketManager) {
         chatHeaderViewOffline?.removeFromSuperview()
+        updateSubscriptionMessages()
         rightButton.isEnabled = true
     }
     
