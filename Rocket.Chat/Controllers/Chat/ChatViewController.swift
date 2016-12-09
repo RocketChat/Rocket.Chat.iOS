@@ -21,6 +21,8 @@ class ChatViewController: SLKTextViewController {
     weak var chatHeaderViewOffline: ChatHeaderViewOffline?
     lazy var mediaFocusViewController = URBMediaFocusViewController()
     
+    var dataController = ChatDataController()
+    
     var searchResult: [String: Any] = [:]
     
     var hideStatusBar = false
@@ -277,6 +279,8 @@ class ChatViewController: SLKTextViewController {
     }
     
     fileprivate func updateSubscriptionMessages() {
+        isRequestingHistory = true
+        
         messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
             if self.messages.count > 0 {
@@ -298,10 +302,19 @@ class ChatViewController: SLKTextViewController {
         
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [unowned self] (response) in
             self.activityIndicator.stopAnimating()
-            self.messages = self.subscription?.fetchMessages()
+            
+            var objs: [ChatData] = []
+            let messages = self.subscription!.fetchMessages()
+            for message in messages {
+                let obj = ChatData(type: .message, timestamp: message.createdAt!)!
+                objs.append(obj)
+            }
+            self.dataController.insert(objs)
+        
             self.collectionView?.reloadData()
             self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
+            self.isRequestingHistory = false
         }
         
         MessageManager.changes(subscription)
@@ -316,7 +329,6 @@ class ChatViewController: SLKTextViewController {
         MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (response) in
             self.messages = self.subscription?.fetchMessages()
             self.collectionView?.reloadData()
-            self.collectionView?.layoutIfNeeded()
             self.isRequestingHistory = false
         }
     }
