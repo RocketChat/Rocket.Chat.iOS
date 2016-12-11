@@ -1,9 +1,10 @@
 language: objective-c
-osx_image: xcode8
+osx_image: xcode8.1
 rvm: 2.2.2
 before_install:
 - |
     gem install cocoapods -v '1.0.1' --no-rdoc --no-ri --no-document --quiet
     gem install xcpretty -N --no-ri --no-rdoc
     pod repo update 
-script: xcodebuild clean test -workspace Rocket.Chat.xcworkspace -scheme Rocket.Chat -destination "platform=iOS Simulator,name=iPhone 7" -enableCodeCoverage YES | xcpretty
+script:
+- ./Scripts/build.sh
