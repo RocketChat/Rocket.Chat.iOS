@@ -19,7 +19,7 @@ struct ChatData {
     var identifier = String.random(10)
     var type: ChatDataType = .message
     var timestamp: Date
-    var indexPath: IndexPath
+    var indexPath: IndexPath!
     
     // This is only used for messages
     var message: Message?
@@ -39,21 +39,36 @@ class ChatDataController {
         data = []
     }
     
-    func insert(_ items: [ChatData]) {
+    func itemAt(_ indexPath: IndexPath) -> ChatData? {
+        for item in data {
+            if item.indexPath?.row == indexPath.row && item.indexPath?.section == indexPath.section {
+                return item
+            }
+        }
+        
+        return nil
+    }
+    
+    func insert(_ items: [ChatData]) -> [IndexPath] {
+        var indexPaths: [IndexPath] = []
         var normalizeds: [ChatData] = []
         let identifiers = items.map { $0.identifier }
         data.append(contentsOf: items)
-        data.sort(by: { $0.timestamp > $1.timestamp })
+        data.sort(by: { $0.timestamp < $1.timestamp })
         
         for (idx, item) in data.enumerated() {
             if let index = identifiers.index(of: item.identifier) {
-                var item = items[index]
-                item.indexPath = IndexPath(item: idx, section: 0)
+                var customItem = items[index]
+                customItem.indexPath = IndexPath(item: idx, section: 0)
+                indexPaths.append(customItem.indexPath)
+                normalizeds.append(customItem)
+            } else {
                 normalizeds.append(item)
             }
         }
         
-        dump(items)
+        data = normalizeds
+        return indexPaths
     }
     
     func remove(_ items: [ChatData]) {
