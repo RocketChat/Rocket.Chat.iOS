@@ -283,6 +283,10 @@ class ChatViewController: SLKTextViewController {
         
         messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
+            if self.isRequestingHistory {
+                return
+            }
+            
             if self.messages.count > 0 {
                 self.activityIndicator.stopAnimating()
             }
@@ -292,7 +296,6 @@ class ChatViewController: SLKTextViewController {
                 scrollToBottom = true
             }
             
-            self.collectionView?.reloadData()
             self.collectionView?.layoutIfNeeded()
             
             if scrollToBottom {
@@ -306,14 +309,19 @@ class ChatViewController: SLKTextViewController {
             var objs: [ChatData] = []
             let messages = self.subscription!.fetchMessages()
             for message in messages {
-                let obj = ChatData(type: .message, timestamp: message.createdAt!)!
+                var obj = ChatData(type: .message, timestamp: message.createdAt!)!
+                obj.message = message
                 objs.append(obj)
             }
-            self.dataController.insert(objs)
+            
+            let indexPaths = self.dataController.insert(objs)
+            self.collectionView?.performBatchUpdates({ 
+                self.collectionView?.insertItems(at: indexPaths)
+            }, completion: { (completed) in
+                self.collectionView?.layoutIfNeeded()
+                self.scrollToBottom()
+            })
         
-            self.collectionView?.reloadData()
-            self.collectionView?.layoutIfNeeded()
-            self.scrollToBottom()
             self.isRequestingHistory = false
         }
         
@@ -327,9 +335,31 @@ class ChatViewController: SLKTextViewController {
         
         isRequestingHistory = true
         MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (response) in
-            self.messages = self.subscription?.fetchMessages()
-            self.collectionView?.reloadData()
-            self.isRequestingHistory = false
+            var objs: [ChatData] = []
+            let messages = self.subscription!.fetchMessages()
+            for message in messages {
+                var obj = ChatData(type: .message, timestamp: message.createdAt!)!
+                obj.message = message
+                objs.append(obj)
+            }
+            
+            let contentHeight = self.collectionView!.contentSize.height
+            let offsetY = self.collectionView!.contentOffset.y
+            let bottomOffset = contentHeight - offsetY
+            
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            
+            let indexPaths = self.dataController.insert(objs)
+            self.collectionView?.performBatchUpdates({ 
+                self.collectionView?.insertItems(at: indexPaths)
+            }, completion: { (completed) in
+                if completed {
+                    self.collectionView!.contentOffset = CGPoint(x: 0, y: self.collectionView!.contentSize.height - bottomOffset)
+                    CATransaction.commit()
+                    self.isRequestingHistory = false
+                }
+            })
         }
     }
     
@@ -396,14 +426,14 @@ extension ChatViewController {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row <= 5 {
-            if let message = messages!.first {
+            if let message = dataController.itemAt(indexPath)?.message {
                 loadMoreMessagesFrom(date: message.createdAt)
             }
         }
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messages?.count ?? 0
+        return dataController.data.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -414,9 +444,10 @@ extension ChatViewController {
 
         cell.delegate = self
         
-        if messages?.count ?? 0 > indexPath.row {
-            let message = messages![indexPath.row]
-            cell.message = message
+        if dataController.data.count > indexPath.row {
+            if let message = dataController.itemAt(indexPath)?.message {
+                cell.message = message
+            }
         }
 
         return cell
@@ -435,10 +466,13 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let message = messages![indexPath.row]
-        let fullWidth = UIScreen.main.bounds.size.width
-        let height = ChatMessageCell.cellMediaHeightFor(message: message)
-        return CGSize(width: fullWidth, height: height)
+        if let message = dataController.itemAt(indexPath)?.message {
+            let fullWidth = UIScreen.main.bounds.size.width
+            let height = ChatMessageCell.cellMediaHeightFor(message: message)
+            return CGSize(width: fullWidth, height: height)
+        }
+        
+        return .zero
     }
     
 }
