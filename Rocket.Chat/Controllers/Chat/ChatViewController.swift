@@ -50,6 +50,7 @@ class ChatViewController: SLKTextViewController {
     }
     
     deinit {
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
     
@@ -74,10 +75,18 @@ class ChatViewController: SLKTextViewController {
         setupSideMenu()
         registerCells()
         setupTextViewSettings()
-        
+
+        // TODO: this should really goes into the view model, when we have it
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
-    
+
+    internal func reconnect() {
+        if !SocketManager.isConnected() {
+            SocketManager.reconnect()
+        }
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
         
