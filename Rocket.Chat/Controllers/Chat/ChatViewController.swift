@@ -352,6 +352,11 @@ class ChatViewController: SLKTextViewController {
                 objs.append(obj)
             }
             
+            if objs.count == 0 {
+                return
+            }
+
+            let indexPaths = self.dataController.insert(objs)
             let contentHeight = self.collectionView!.contentSize.height
             let offsetY = self.collectionView!.contentOffset.y
             let bottomOffset = contentHeight - offsetY
@@ -359,7 +364,6 @@ class ChatViewController: SLKTextViewController {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
             
-            let indexPaths = self.dataController.insert(objs)
             self.collectionView?.performBatchUpdates({ 
                 self.collectionView?.insertItems(at: indexPaths)
             }, completion: { (completed) in
@@ -434,7 +438,7 @@ extension ChatViewController {
 extension ChatViewController {
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row <= 5 {
+        if indexPath.row == 0 {
             if let message = dataController.itemAt(indexPath)?.message {
                 loadMoreMessagesFrom(date: message.createdAt)
             }
