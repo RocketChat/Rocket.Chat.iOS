@@ -78,7 +78,7 @@ class ChatViewController: SLKTextViewController {
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
-    @objc private func reconnect() {
+    internal func reconnect() {
         if !SocketManager.isConnected() {
             SocketManager.reconnect()
         }
