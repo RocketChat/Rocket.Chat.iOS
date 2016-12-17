@@ -49,26 +49,28 @@ class ChatDataController {
         return nil
     }
     
-    func insert(_ items: [ChatData]) -> [IndexPath] {
-        var indexPaths: [IndexPath] = []
+    func indexPathOf(_ identifier: String) -> IndexPath? {
+        for item in data {
+            if item.identifier == identifier {
+                return item.indexPath
+            }
+        }
+        
+        return nil
+    }
+    
+    func insert(_ items: [ChatData]) {
         var normalizeds: [ChatData] = []
-        let identifiers = items.map { $0.identifier }
         data.append(contentsOf: items)
         data.sort(by: { $0.timestamp < $1.timestamp })
         
         for (idx, item) in data.enumerated() {
-            if let index = identifiers.index(of: item.identifier) {
-                var customItem = items[index]
-                customItem.indexPath = IndexPath(item: idx, section: 0)
-                indexPaths.append(customItem.indexPath)
-                normalizeds.append(customItem)
-            } else {
-                normalizeds.append(item)
-            }
+            var customItem = item
+            customItem.indexPath = IndexPath(item: idx, section: 0)
+            normalizeds.append(customItem)
         }
         
         data = normalizeds
-        return indexPaths
     }
     
     func remove(_ items: [ChatData]) {

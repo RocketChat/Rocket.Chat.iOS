@@ -11,13 +11,13 @@ import RealmSwift
 
 
 struct MessageManager {
-    static let historySize = 50
+    static let historySize = 5
 }
 
 
 extension MessageManager {
     
-    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletion) {
+    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletionObjectsList<Message>) {
         var lastDate: Any!
         
         if let lastMessageDate = lastMessageDate {
@@ -47,7 +47,7 @@ extension MessageManager {
             })
             
             Realm.update(messages)
-            completion(response)
+            completion(Array(messages))
         }
     }
     
