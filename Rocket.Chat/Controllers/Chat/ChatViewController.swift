@@ -9,8 +9,6 @@
 import SideMenu
 import RealmSwift
 import SlackTextViewController
-import SafariServices
-import MobilePlayer
 import URBMediaFocusViewController
 
 class ChatViewController: SLKTextViewController {
@@ -211,7 +209,7 @@ class ChatViewController: SLKTextViewController {
         }
     }
     
-    fileprivate func updateSubscriptionMessages() {
+    internal func updateSubscriptionMessages() {
         isRequestingHistory = true
         
         messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
@@ -238,22 +236,20 @@ class ChatViewController: SLKTextViewController {
         
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [unowned self] (response) in
             self.activityIndicator.stopAnimating()
-            
+ 
+            guard let subscription = self.subscription else { return }
+
             var objs: [ChatData] = []
-            let messages = self.subscription!.fetchMessages()
-            for message in messages {
+            for message in subscription.fetchMessages() {
                 var obj = ChatData(type: .message, timestamp: message.createdAt!)!
                 obj.message = message
                 objs.append(obj)
             }
             
-            let indexPaths = self.dataController.insert(objs)
-            self.collectionView?.performBatchUpdates({ 
-                self.collectionView?.insertItems(at: indexPaths)
-            }, completion: { (completed) in
-                self.collectionView?.layoutIfNeeded()
-                self.scrollToBottom()
-            })
+            self.dataController.insert(objs)
+            self.collectionView?.reloadData()
+            self.collectionView?.layoutIfNeeded()
+            self.scrollToBottom()
         
             self.isRequestingHistory = false
         }
@@ -267,10 +263,9 @@ class ChatViewController: SLKTextViewController {
         }
         
         isRequestingHistory = true
-        MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (response) in
+        MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (newMessages) in
             var objs: [ChatData] = []
-            let messages = self.subscription!.fetchMessages()
-            for message in messages {
+            for message in newMessages {
                 var obj = ChatData(type: .message, timestamp: message.createdAt!)!
                 obj.message = message
                 objs.append(obj)
@@ -280,23 +275,22 @@ class ChatViewController: SLKTextViewController {
                 return
             }
 
-            let indexPaths = self.dataController.insert(objs)
-            let contentHeight = self.collectionView!.contentSize.height
-            let offsetY = self.collectionView!.contentOffset.y
-            let bottomOffset = contentHeight - offsetY
-            
-            CATransaction.begin()
-            CATransaction.setDisableActions(true)
-            
-            self.collectionView?.performBatchUpdates({ 
-                self.collectionView?.insertItems(at: indexPaths)
-            }, completion: { (completed) in
-                if completed {
-                    self.collectionView!.contentOffset = CGPoint(x: 0, y: self.collectionView!.contentSize.height - bottomOffset)
-                    CATransaction.commit()
-                    self.isRequestingHistory = false
+            var topItemIdentifier: String?
+            if let topIndexPath = self.collectionView?.indexPathsForVisibleItems.first {
+                if let identifier = self.dataController.itemAt(topIndexPath)?.identifier {
+                    topItemIdentifier = identifier
                 }
-            })
+            }
+
+            self.dataController.insert(objs)
+            self.collectionView?.reloadData()
+            self.isRequestingHistory = false
+            
+            if let identifier = topItemIdentifier {
+                if let indexPath = self.dataController.indexPathOf(identifier) {
+                    self.collectionView?.scrollToItem(at: indexPath, at: .top, animated: false)
+                }
+            }
         }
     }
     

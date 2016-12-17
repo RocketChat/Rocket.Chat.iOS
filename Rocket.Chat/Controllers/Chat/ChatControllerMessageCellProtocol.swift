@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SafariServices
+import MobilePlayer
 
 
 extension ChatViewController: ChatMessageCellProtocol {
