@@ -129,6 +129,11 @@ class ChatViewController: SLKTextViewController {
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
         
+        collectionView?.register(UINib(
+            nibName: "ChatMessageDaySeparator",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
+        
         autoCompletionView.register(UINib(
             nibName: "AutocompleteCell",
             bundle: Bundle.main
@@ -246,7 +251,7 @@ class ChatViewController: SLKTextViewController {
                 objs.append(obj)
             }
             
-            self.dataController.insert(objs)
+            _ = self.dataController.insert(objs)
             self.collectionView?.reloadData()
             self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
@@ -265,22 +270,18 @@ class ChatViewController: SLKTextViewController {
         isRequestingHistory = true
         MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (newMessages) in
             var objs: [ChatData] = []
-            var indexPaths: [IndexPath] = []
             
-            for (idx, message) in newMessages.enumerated() {
+            for message in newMessages {
                 var obj = ChatData(type: .message, timestamp: message.createdAt!)!
                 obj.message = message
                 objs.append(obj)
-                
-                indexPaths.append(IndexPath(row: idx, section: 0))
             }
             
             if objs.count == 0 {
                 return
             }
 
-            self.dataController.insert(objs)
-            
+            let indexPaths = self.dataController.insert(objs)
             let contentHeight = self.collectionView!.contentSize.height
             let offsetY = self.collectionView!.contentOffset.y
             let bottomOffset = contentHeight - offsetY
@@ -372,22 +373,48 @@ extension ChatViewController {
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
+        guard dataController.data.count > indexPath.row else { return UICollectionViewCell() }
+        guard let obj = dataController.itemAt(indexPath) else { return UICollectionViewCell() }
+        
+        if obj.type == .message {
+            return cellForMessage(obj, at: indexPath)
+        }
+        
+        if obj.type == .daySeparator {
+            return cellForDaySeparator(obj, at: indexPath)
+        }
+        
+        return UICollectionViewCell()
+    }
+    
+    
+    // MARK: Cells
+    
+    func cellForMessage(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView!.dequeueReusableCell(
             withReuseIdentifier: ChatMessageCell.identifier,
             for: indexPath
         ) as! ChatMessageCell
-
+        
         cell.delegate = self
         
-        if dataController.data.count > indexPath.row {
-            if let message = dataController.itemAt(indexPath)?.message {
-                cell.message = message
-            }
+        if let message = obj.message {
+            cell.message = message
         }
-
+        
         return cell
     }
     
+    func cellForDaySeparator(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView!.dequeueReusableCell(
+            withReuseIdentifier: ChatMessageDaySeparator.identifier,
+            for: indexPath
+        ) as! ChatMessageDaySeparator
+        
+        cell.labelTitle.text = obj.timestamp.formatted("MMM dd, YYYY")
+        return cell
+    }
+
 }
 
 
@@ -401,13 +428,14 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let fullWidth = UIScreen.main.bounds.size.width
+    
         if let message = dataController.itemAt(indexPath)?.message {
-            let fullWidth = UIScreen.main.bounds.size.width
             let height = ChatMessageCell.cellMediaHeightFor(message: message)
             return CGSize(width: fullWidth, height: height)
         }
         
-        return .zero
+        return CGSize(width: fullWidth, height: 40)
     }
     
 }

@@ -59,9 +59,36 @@ class ChatDataController {
         return nil
     }
     
-    func insert(_ items: [ChatData]) {
+    func insert(_ items: [ChatData]) -> [IndexPath] {
+        var indexPaths: [IndexPath] = []
+        var newItems: [ChatData] = []
+        var lastObj = data.last
+        
+        for newObj in items {
+            if let lastObj = lastObj {
+                if lastObj.timestamp.day != newObj.timestamp.day ||
+                    lastObj.timestamp.month != newObj.timestamp.month ||
+                    lastObj.timestamp.year != newObj.timestamp.year {
+                    
+                    let date = newObj.timestamp
+                    let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+                    let components = calendar.components([.day , .month, .year ], from: date)
+                    let newDate = calendar.date(from: components)
+                    let separator = ChatData(type: .daySeparator, timestamp: newDate!)!
+                    newItems.append(separator)
+                }
+            }
+        
+            newItems.append(newObj)
+            lastObj = newObj
+        }
+        
+        for (idx, _) in newItems.enumerated() {
+            indexPaths.append(IndexPath(row: idx, section: 0))
+        }
+        
         var normalizeds: [ChatData] = []
-        data.append(contentsOf: items)
+        data.append(contentsOf: newItems)
         data.sort(by: { $0.timestamp < $1.timestamp })
         
         for (idx, item) in data.enumerated() {
@@ -71,6 +98,7 @@ class ChatDataController {
         }
         
         data = normalizeds
+        return indexPaths
     }
     
     func remove(_ items: [ChatData]) {
