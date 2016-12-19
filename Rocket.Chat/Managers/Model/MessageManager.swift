@@ -11,7 +11,7 @@ import RealmSwift
 
 
 struct MessageManager {
-    static let historySize = 5
+    static let historySize = 30
 }
 
 
