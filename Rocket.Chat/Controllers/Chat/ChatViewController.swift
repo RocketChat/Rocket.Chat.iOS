@@ -265,32 +265,36 @@ class ChatViewController: SLKTextViewController {
         isRequestingHistory = true
         MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (newMessages) in
             var objs: [ChatData] = []
-            for message in newMessages {
+            var indexPaths: [IndexPath] = []
+            
+            for (idx, message) in newMessages.enumerated() {
                 var obj = ChatData(type: .message, timestamp: message.createdAt!)!
                 obj.message = message
                 objs.append(obj)
+                
+                indexPaths.append(IndexPath(row: idx, section: 0))
             }
             
             if objs.count == 0 {
                 return
             }
 
-            var topItemIdentifier: String?
-            if let topIndexPath = self.collectionView?.indexPathsForVisibleItems.first {
-                if let identifier = self.dataController.itemAt(topIndexPath)?.identifier {
-                    topItemIdentifier = identifier
-                }
-            }
-
             self.dataController.insert(objs)
-            self.collectionView?.reloadData()
-            self.isRequestingHistory = false
             
-            if let identifier = topItemIdentifier {
-                if let indexPath = self.dataController.indexPathOf(identifier) {
-                    self.collectionView?.scrollToItem(at: indexPath, at: .top, animated: false)
-                }
-            }
+            let contentHeight = self.collectionView!.contentSize.height
+            let offsetY = self.collectionView!.contentOffset.y
+            let bottomOffset = contentHeight - offsetY
+            
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            self.collectionView!.performBatchUpdates({
+                self.collectionView?.insertItems(at: indexPaths)
+            }, completion: { finished in
+                self.collectionView!.contentOffset = CGPoint(x: 0, y: self.collectionView!.contentSize.height - bottomOffset)
+                CATransaction.commit()
+            })
+            
+            self.isRequestingHistory = false
         }
     }
     
