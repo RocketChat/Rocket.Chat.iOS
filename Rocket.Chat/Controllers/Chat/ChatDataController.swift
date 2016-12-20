@@ -35,8 +35,15 @@ class ChatDataController {
     
     var data: [ChatData] = []
     
-    func clear() {
+    func clear() -> [IndexPath] {
+        var indexPaths: [IndexPath] = []
+        
+        for item in data {
+            indexPaths.append(item.indexPath)
+        }
+        
         data = []
+        return indexPaths
     }
     
     func itemAt(_ indexPath: IndexPath) -> ChatData? {
@@ -63,6 +70,11 @@ class ChatDataController {
         var indexPaths: [IndexPath] = []
         var newItems: [ChatData] = []
         var lastObj = data.first
+        var identifiers: [String] = []
+        
+        for obj in items {
+            identifiers.append(obj.identifier)
+        }
         
         for newObj in items {
             if let lastObj = lastObj {
@@ -75,6 +87,7 @@ class ChatDataController {
                     let components = calendar.components([.day , .month, .year ], from: date)
                     let newDate = calendar.date(from: components)
                     let separator = ChatData(type: .daySeparator, timestamp: newDate!)!
+                    identifiers.append(separator.identifier)
                     newItems.append(separator)
                 }
             }
@@ -83,18 +96,22 @@ class ChatDataController {
             lastObj = newObj
         }
         
-        for (idx, _) in newItems.enumerated() {
-            indexPaths.append(IndexPath(row: idx, section: 0))
-        }
-        
         var normalizeds: [ChatData] = []
         data.append(contentsOf: newItems)
         data.sort(by: { $0.timestamp < $1.timestamp })
         
         for (idx, item) in data.enumerated() {
             var customItem = item
-            customItem.indexPath = IndexPath(item: idx, section: 0)
+            let indexPath = IndexPath(item: idx, section: 0)
+            customItem.indexPath = indexPath
             normalizeds.append(customItem)
+            
+            for identifier in identifiers {
+                if identifier == item.identifier {
+                    indexPaths.append(indexPath)
+                    break
+                }
+            }
         }
         
         data = normalizeds

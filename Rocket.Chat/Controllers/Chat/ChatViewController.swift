@@ -52,6 +52,11 @@ class ChatViewController: SLKTextViewController {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        registerCells()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
@@ -71,7 +76,6 @@ class ChatViewController: SLKTextViewController {
         
         setupTitleView()
         setupSideMenu()
-        registerCells()
         setupTextViewSettings()
 
         // TODO: this should really goes into the view model, when we have it
@@ -192,20 +196,29 @@ class ChatViewController: SLKTextViewController {
         if let token = messagesToken {
             token.stop()
         }
-
+        
         activityIndicator.startAnimating()
         title = subscription?.name
         chatTitleView?.subscription = subscription
         
-        if subscription.isValid() {
-            updateSubscriptionMessages()
-        } else {
-            subscription.fetchRoomIdentifier({ [unowned self] (response) in
-                self.subscription = response
-            })
-        }
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        let indexPaths = dataController.clear()
+        collectionView?.performBatchUpdates({ 
+            self.collectionView?.deleteItems(at: indexPaths)
+        }, completion: { finished in
+            CATransaction.commit()
+            
+            if self.subscription.isValid() {
+                self.updateSubscriptionMessages()
+            } else {
+                self.subscription.fetchRoomIdentifier({ [unowned self] (response) in
+                    self.subscription = response
+                })
+            }
+        })
         
-        if self.subscription.isJoined() {
+        if subscription.isJoined() {
             setTextInputbarHidden(false, animated: false)
             chatPreviewModeView?.removeFromSuperview()
         } else {
@@ -216,43 +229,22 @@ class ChatViewController: SLKTextViewController {
     
     internal func updateSubscriptionMessages() {
         isRequestingHistory = true
+    
+        messages = subscription.fetchMessages()
+        appendMessages(messages: Array(messages))
         
-        messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
             if self.isRequestingHistory {
                 return
             }
             
-            if self.messages.count > 0 {
-                self.activityIndicator.stopAnimating()
-            }
-            
-            var scrollToBottom = false
-            if (self.collectionView?.bounds)?.maxY == self.collectionView?.contentSize.height {
-                scrollToBottom = true
-            }
-            
-            self.collectionView?.layoutIfNeeded()
-            
-            if scrollToBottom {
-                self.scrollToBottom()
-            }
+            self.appendMessages(messages: Array(self.subscription.fetchMessages()))
         }
         
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [unowned self] (response) in
             self.activityIndicator.stopAnimating()
  
-            guard let subscription = self.subscription else { return }
-
-            var objs: [ChatData] = []
-            for message in subscription.fetchMessages() {
-                var obj = ChatData(type: .message, timestamp: message.createdAt!)!
-                obj.message = message
-                objs.append(obj)
-            }
-            
-            _ = self.dataController.insert(objs)
-            self.collectionView?.reloadData()
+            self.appendMessages(messages: Array(self.subscription.fetchMessages()))
             self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
         
@@ -269,34 +261,58 @@ class ChatViewController: SLKTextViewController {
         
         isRequestingHistory = true
         MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (newMessages) in
-            var objs: [ChatData] = []
-            
-            for message in newMessages {
-                var obj = ChatData(type: .message, timestamp: message.createdAt!)!
-                obj.message = message
-                objs.append(obj)
-            }
-            
-            if objs.count == 0 {
-                return
-            }
-
-            let indexPaths = self.dataController.insert(objs)
-            let contentHeight = self.collectionView!.contentSize.height
-            let offsetY = self.collectionView!.contentOffset.y
-            let bottomOffset = contentHeight - offsetY
-            
-            CATransaction.begin()
-            CATransaction.setDisableActions(true)
-            self.collectionView!.performBatchUpdates({
-                self.collectionView?.insertItems(at: indexPaths)
-            }, completion: { finished in
-                self.collectionView!.contentOffset = CGPoint(x: 0, y: self.collectionView!.contentSize.height - bottomOffset)
-                CATransaction.commit()
-            })
-            
+            self.appendMessages(messages: newMessages)
             self.isRequestingHistory = false
         }
+    }
+    
+    fileprivate func appendMessages(messages: Array<Message>) {
+        guard let collectionView = self.collectionView else { return }
+        
+        var objs: [ChatData] = []
+        var newMessages: [Message] = []
+        
+        // Do not add duplicated messages
+        for message in messages {
+            var insert = true
+
+            for obj in dataController.data {
+                if message.identifier == obj.message?.identifier {
+                    insert = false
+                }
+            }
+            
+            if insert {
+                newMessages.append(message)
+            }
+        }
+        
+        // Normalize data into ChatData object
+        for message in newMessages {
+            var obj = ChatData(type: .message, timestamp: message.createdAt!)!
+            obj.message = message
+            objs.append(obj)
+        }
+        
+        // No new data? Don't update it then
+        if objs.count == 0 {
+            return
+        }
+        
+        // Insert data into collectionView without moving it
+        let indexPaths = dataController.insert(objs)
+        let contentHeight = collectionView.contentSize.height
+        let offsetY = collectionView.contentOffset.y
+        let bottomOffset = contentHeight - offsetY
+        
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        collectionView.performBatchUpdates({
+            collectionView.insertItems(at: indexPaths)
+        }, completion: { finished in
+            collectionView.contentOffset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
+            CATransaction.commit()
+        })
     }
     
     fileprivate func showChatPreviewModeView() {
