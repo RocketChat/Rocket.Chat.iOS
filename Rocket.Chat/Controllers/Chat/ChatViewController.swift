@@ -364,6 +364,12 @@ extension ChatViewController {
         if indexPath.row == 0 {
             if let message = dataController.itemAt(indexPath)?.message {
                 loadMoreMessagesFrom(date: message.createdAt)
+            } else {
+                let nextIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+
+                if let message = dataController.itemAt(nextIndexPath)?.message {
+                    loadMoreMessagesFrom(date: message.createdAt)
+                }
             }
         }
     }
