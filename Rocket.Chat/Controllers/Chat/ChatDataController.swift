@@ -62,7 +62,7 @@ class ChatDataController {
     func insert(_ items: [ChatData]) -> [IndexPath] {
         var indexPaths: [IndexPath] = []
         var newItems: [ChatData] = []
-        var lastObj = data.last
+        var lastObj = data.first
         
         for newObj in items {
             if let lastObj = lastObj {
