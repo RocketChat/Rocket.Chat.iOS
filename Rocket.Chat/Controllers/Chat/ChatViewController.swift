@@ -77,10 +77,16 @@ class ChatViewController: SLKTextViewController {
         setupTitleView()
         setupSideMenu()
         setupTextViewSettings()
-
+        
         // TODO: this should really goes into the view model, when we have it
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+        
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        let subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
+        if let subscription = subscriptions.first {
+            self.subscription = subscription
+        }
     }
 
     internal func reconnect() {
