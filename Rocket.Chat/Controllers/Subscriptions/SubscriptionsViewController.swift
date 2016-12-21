@@ -136,10 +136,6 @@ extension SubscriptionsViewController {
         assigned = true
         
         subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
-        if let subscription = subscriptions?.first {
-            ChatViewController.sharedInstance()?.subscription = subscription
-        }
-        
         subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
         usersToken = try? Realm().addNotificationBlock({ [unowned self] (notification, realm) in
             self.handleModelUpdates(nil)

@@ -9,8 +9,6 @@
 import SideMenu
 import RealmSwift
 import SlackTextViewController
-import SafariServices
-import MobilePlayer
 import URBMediaFocusViewController
 
 class ChatViewController: SLKTextViewController {
@@ -21,10 +19,13 @@ class ChatViewController: SLKTextViewController {
     weak var chatHeaderViewOffline: ChatHeaderViewOffline?
     lazy var mediaFocusViewController = URBMediaFocusViewController()
     
+    var dataController = ChatDataController()
+    
     var searchResult: [String: Any] = [:]
     
     var hideStatusBar = false
     
+    var isRequestingHistory = false
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messages: Results<Message>!
@@ -51,6 +52,11 @@ class ChatViewController: SLKTextViewController {
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        registerCells()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
@@ -70,12 +76,17 @@ class ChatViewController: SLKTextViewController {
         
         setupTitleView()
         setupSideMenu()
-        registerCells()
         setupTextViewSettings()
-
+        
         // TODO: this should really goes into the view model, when we have it
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+        
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        let subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
+        if let subscription = subscriptions.first {
+            self.subscription = subscription
+        }
     }
 
     internal func reconnect() {
@@ -128,6 +139,11 @@ class ChatViewController: SLKTextViewController {
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
         
+        collectionView?.register(UINib(
+            nibName: "ChatMessageDaySeparator",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
+        
         autoCompletionView.register(UINib(
             nibName: "AutocompleteCell",
             bundle: Bundle.main
@@ -162,82 +178,6 @@ class ChatViewController: SLKTextViewController {
         scrollToBottom()
     }
     
-    override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
-        searchResult = [:]
-        
-        if prefix == "@" && word.characters.count > 0 {
-            guard let users = try? Realm().objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", word)) else { return }
-
-            for user in users {
-                if let username = user.username {
-                    searchResult[username] = user
-                }
-            }
-            
-            if "here".contains(word) {
-                searchResult["here"] = UIImage(named: "Hashtag")
-            }
-            
-            if "all".contains(word) {
-                searchResult["all"] = UIImage(named: "Hashtag")
-            }
-
-        } else if prefix == "#" && word.characters.count > 0 {
-            guard let channels = try? Realm().objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p') && name BEGINSWITH[c] %@", word) else { return }
-            
-            for channel in channels {
-                searchResult[channel.name] = channel.type == .channel ? UIImage(named: "Hashtag") : UIImage(named: "Lock")
-            }
-
-        }
-        
-        let show = (searchResult.count > 0)
-        showAutoCompletionView(show)
-    }
-    
-    override func heightForAutoCompletionView() -> CGFloat {
-        return AutocompleteCell.minimumHeight * CGFloat(searchResult.count)
-    }
-    
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResult.keys.count
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return autoCompletionCellForRowAtIndexPath(indexPath)
-    }
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return AutocompleteCell.minimumHeight
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let key = Array(searchResult.keys)[indexPath.row]
-        acceptAutoCompletion(with: "\(key) ", keepPrefix: true)
-    }
-    
-    func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
-        let key = Array(searchResult.keys)[indexPath.row]
-        let cell = autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as! AutocompleteCell
-        cell.selectionStyle = .default
-        
-        if let user = searchResult[key] as? User {
-            cell.avatarView.isHidden = false
-            cell.imageViewIcon.isHidden = true
-            cell.avatarView.user = user
-        } else {
-            cell.avatarView.isHidden = true
-            cell.imageViewIcon.isHidden = false
-            
-            if let image = searchResult[key] as? UIImage {
-                cell.imageViewIcon.image = image.imageWithTint(.lightGray)
-            }
-        }
-
-        cell.labelTitle.text = key
-        return cell
-    }
-    
     
     // MARK: Message
     
@@ -262,20 +202,29 @@ class ChatViewController: SLKTextViewController {
         if let token = messagesToken {
             token.stop()
         }
-
+        
         activityIndicator.startAnimating()
         title = subscription?.name
         chatTitleView?.subscription = subscription
         
-        if subscription.isValid() {
-            updateSubscriptionMessages()
-        } else {
-            subscription.fetchRoomIdentifier({ [unowned self] (response) in
-                self.subscription = response
-            })
-        }
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        let indexPaths = dataController.clear()
+        collectionView?.performBatchUpdates({ 
+            self.collectionView?.deleteItems(at: indexPaths)
+        }, completion: { finished in
+            CATransaction.commit()
+            
+            if self.subscription.isValid() {
+                self.updateSubscriptionMessages()
+            } else {
+                self.subscription.fetchRoomIdentifier({ [unowned self] (response) in
+                    self.subscription = response
+                })
+            }
+        })
         
-        if self.subscription.isJoined() {
+        if subscription.isJoined() {
             setTextInputbarHidden(false, animated: false)
             chatPreviewModeView?.removeFromSuperview()
         } else {
@@ -284,27 +233,92 @@ class ChatViewController: SLKTextViewController {
         }
     }
     
-    fileprivate func updateSubscriptionMessages() {
-        messages = subscription?.messages.sorted(byProperty: "createdAt", ascending: true)
+    internal func updateSubscriptionMessages() {
+        isRequestingHistory = true
+    
+        messages = subscription.fetchMessages()
+        appendMessages(messages: Array(messages))
+        
         messagesToken = messages.addNotificationBlock { [unowned self] (changes) in
-            if self.messages.count > 0 {
-                self.activityIndicator.stopAnimating()
+            if self.isRequestingHistory {
+                return
             }
             
-            self.collectionView?.reloadData()
-            self.collectionView?.layoutIfNeeded()
-            self.scrollToBottom()
+            self.appendMessages(messages: Array(self.subscription.fetchMessages()))
         }
         
-        MessageManager.getHistory(subscription) { [unowned self] (response) in
+        MessageManager.getHistory(subscription, lastMessageDate: nil) { [unowned self] (response) in
             self.activityIndicator.stopAnimating()
-            self.messages = self.subscription?.fetchMessages()
-            self.collectionView?.reloadData()
+ 
+            self.appendMessages(messages: Array(self.subscription.fetchMessages()))
             self.collectionView?.layoutIfNeeded()
             self.scrollToBottom()
+        
+            self.isRequestingHistory = false
         }
         
         MessageManager.changes(subscription)
+    }
+    
+    fileprivate func loadMoreMessagesFrom(date: Date?) {
+        if isRequestingHistory {
+            return
+        }
+        
+        isRequestingHistory = true
+        MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (newMessages) in
+            self.appendMessages(messages: newMessages)
+            self.isRequestingHistory = false
+        }
+    }
+    
+    fileprivate func appendMessages(messages: Array<Message>) {
+        guard let collectionView = self.collectionView else { return }
+        
+        var objs: [ChatData] = []
+        var newMessages: [Message] = []
+        
+        // Do not add duplicated messages
+        for message in messages {
+            var insert = true
+
+            for obj in dataController.data {
+                if message.identifier == obj.message?.identifier {
+                    insert = false
+                }
+            }
+            
+            if insert {
+                newMessages.append(message)
+            }
+        }
+        
+        // Normalize data into ChatData object
+        for message in newMessages {
+            var obj = ChatData(type: .message, timestamp: message.createdAt!)!
+            obj.message = message
+            objs.append(obj)
+        }
+        
+        // No new data? Don't update it then
+        if objs.count == 0 {
+            return
+        }
+        
+        // Insert data into collectionView without moving it
+        let indexPaths = dataController.insert(objs)
+        let contentHeight = collectionView.contentSize.height
+        let offsetY = collectionView.contentOffset.y
+        let bottomOffset = contentHeight - offsetY
+        
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        collectionView.performBatchUpdates({
+            collectionView.insertItems(at: indexPaths)
+        }, completion: { finished in
+            collectionView.contentOffset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
+            CATransaction.commit()
+        })
     }
     
     fileprivate func showChatPreviewModeView() {
@@ -368,26 +382,67 @@ extension ChatViewController {
 
 extension ChatViewController {
     
+    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            if let message = dataController.itemAt(indexPath)?.message {
+                loadMoreMessagesFrom(date: message.createdAt)
+            } else {
+                let nextIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
+
+                if let message = dataController.itemAt(nextIndexPath)?.message {
+                    loadMoreMessagesFrom(date: message.createdAt)
+                }
+            }
+        }
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messages?.count ?? 0
+        return dataController.data.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(
+        guard dataController.data.count > indexPath.row else { return UICollectionViewCell() }
+        guard let obj = dataController.itemAt(indexPath) else { return UICollectionViewCell() }
+        
+        if obj.type == .message {
+            return cellForMessage(obj, at: indexPath)
+        }
+        
+        if obj.type == .daySeparator {
+            return cellForDaySeparator(obj, at: indexPath)
+        }
+        
+        return UICollectionViewCell()
+    }
+    
+    
+    // MARK: Cells
+    
+    func cellForMessage(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView!.dequeueReusableCell(
             withReuseIdentifier: ChatMessageCell.identifier,
             for: indexPath
         ) as! ChatMessageCell
-
+        
         cell.delegate = self
         
-        if messages?.count ?? 0 > indexPath.row {
-            let message = messages![indexPath.row]
+        if let message = obj.message {
             cell.message = message
         }
-
+        
         return cell
     }
     
+    func cellForDaySeparator(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView!.dequeueReusableCell(
+            withReuseIdentifier: ChatMessageDaySeparator.identifier,
+            for: indexPath
+        ) as! ChatMessageDaySeparator
+        
+        cell.labelTitle.text = obj.timestamp.formatted("MMM dd, YYYY")
+        return cell
+    }
+
 }
 
 
@@ -401,10 +456,14 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let message = messages![indexPath.row]
         let fullWidth = UIScreen.main.bounds.size.width
-        let height = ChatMessageCell.cellMediaHeightFor(message: message)
-        return CGSize(width: fullWidth, height: height)
+    
+        if let message = dataController.itemAt(indexPath)?.message {
+            let height = ChatMessageCell.cellMediaHeightFor(message: message)
+            return CGSize(width: fullWidth, height: height)
+        }
+        
+        return CGSize(width: fullWidth, height: 40)
     }
     
 }
@@ -427,58 +486,3 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
     
 }
 
-
-// MARK: ChatURLCellProtocol
-
-extension ChatViewController: ChatMessageCellProtocol {
-    
-    func openURL(url: URL) {
-        let controller = SFSafariViewController(url: url)
-        present(controller, animated: true, completion: nil)
-    }
-    
-    func openURLFromCell(url: MessageURL) {
-        guard let targetURL = url.targetURL else { return }
-        guard let destinyURL = URL(string: targetURL) else { return }
-        let controller = SFSafariViewController(url: destinyURL)
-        present(controller, animated: true, completion: nil)
-    }
-    
-    func openVideoFromCell(attachment: Attachment) {
-        guard let videoURL = attachment.fullVideoURL() else { return }
-        let controller = MobilePlayerViewController(contentURL: videoURL)
-        controller.title = attachment.title
-        controller.activityItems = [attachment.title, videoURL]
-        present(controller, animated: true, completion: nil)
-    }
-    
-    func openImageFromCell(attachment: Attachment, thumbnail: UIImageView) {
-        if let image = thumbnail.image {
-            mediaFocusViewController.show(image, from: thumbnail)
-        } else {
-            mediaFocusViewController.showImage(from: attachment.fullImageURL(), from: thumbnail)
-        }
-    }
-
-}
-
-
-// MARK: SocketConnectionHandler
-
-extension ChatViewController: SocketConnectionHandler {
-    
-    func socketDidConnect(socket: SocketManager) {
-        chatHeaderViewOffline?.removeFromSuperview()
-        rightButton.isEnabled = true
-    }
-    
-    func socketDidDisconnect(socket: SocketManager) {
-        chatHeaderViewOffline?.removeFromSuperview()
-        
-        let headerView = ChatHeaderViewOffline.instanceFromNib() as! ChatHeaderViewOffline
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.frame.height)
-        view.addSubview(headerView)
-        chatHeaderViewOffline = headerView
-    }
-    
-}
