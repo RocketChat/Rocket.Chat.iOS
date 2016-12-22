@@ -78,17 +78,30 @@ class ChatDataController {
         
         for newObj in items {
             if let lastObj = lastObj {
-                if lastObj.timestamp.day != newObj.timestamp.day ||
+                if lastObj.type == .message && (
+                    lastObj.timestamp.day != newObj.timestamp.day ||
                     lastObj.timestamp.month != newObj.timestamp.month ||
-                    lastObj.timestamp.year != newObj.timestamp.year {
+                    lastObj.timestamp.year != newObj.timestamp.year) {
                     
-                    let date = newObj.timestamp
-                    let calendar = NSCalendar(calendarIdentifier: .gregorian)!
-                    let components = calendar.components([.day , .month, .year ], from: date)
-                    let newDate = calendar.date(from: components)
-                    let separator = ChatData(type: .daySeparator, timestamp: newDate!)!
-                    identifiers.append(separator.identifier)
-                    newItems.append(separator)
+                    // Check if already contains some separator with this data
+                    var insert = true
+                    for obj in data.filter({ $0.type == .daySeparator }) {
+                        if (lastObj.timestamp.day == obj.timestamp.day &&
+                            lastObj.timestamp.month == obj.timestamp.month &&
+                            lastObj.timestamp.year == obj.timestamp.year) {
+                            insert = false
+                        }
+                    }
+                    
+                    if insert {
+                        let date = newObj.timestamp
+                        let calendar = NSCalendar(calendarIdentifier: .gregorian)!
+                        let components = calendar.components([.day , .month, .year ], from: date)
+                        let newDate = calendar.date(from: components)
+                        let separator = ChatData(type: .daySeparator, timestamp: newDate!)!
+                        identifiers.append(separator.identifier)
+                        newItems.append(separator)
+                    }
                 }
             }
         
