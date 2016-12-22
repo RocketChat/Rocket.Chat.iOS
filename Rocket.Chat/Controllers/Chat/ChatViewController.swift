@@ -87,6 +87,8 @@ class ChatViewController: SLKTextViewController {
         if let subscription = subscriptions.first {
             self.subscription = subscription
         }
+        
+        view.bringSubview(toFront: activityIndicator)
     }
 
     internal func reconnect() {
@@ -248,11 +250,11 @@ class ChatViewController: SLKTextViewController {
         }
         
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [unowned self] (response) in
-            self.activityIndicator.stopAnimating()
- 
-            self.appendMessages(messages: Array(self.subscription.fetchMessages()))
-            self.collectionView?.layoutIfNeeded()
-            self.scrollToBottom()
+            DispatchQueue.main.async {
+                self.appendMessages(messages: Array(self.subscription.fetchMessages()))
+                self.scrollToBottom()
+                self.activityIndicator.stopAnimating()
+            }
         
             self.isRequestingHistory = false
         }
@@ -267,7 +269,10 @@ class ChatViewController: SLKTextViewController {
         
         isRequestingHistory = true
         MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (newMessages) in
-            self.appendMessages(messages: newMessages)
+            DispatchQueue.main.async {
+                self.appendMessages(messages: newMessages)
+            }
+
             self.isRequestingHistory = false
         }
     }
