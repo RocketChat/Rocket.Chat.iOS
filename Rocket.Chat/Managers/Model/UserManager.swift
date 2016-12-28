@@ -9,15 +9,14 @@
 import Foundation
 
 struct UserManager {
-    
+
     static func changes() {
         let request = [
             "msg": "sub",
             "name": "activeUsers",
             "params": []
         ] as [String : Any]
-        
-        SocketManager.send(request) { (response) in }
+
+        SocketManager.send(request) { _ in }
     }
-    
 }

@@ -22,10 +22,10 @@ class Auth: Object {
 
     // User
     dynamic var userId: String?
-    
+
     // Subscriptions
     let subscriptions = LinkingObjects(fromType: Subscription.self, property: "auth")
-    
+
     // Primary key from Auth 
     override static func primaryKey() -> String? {
         return "serverURL"

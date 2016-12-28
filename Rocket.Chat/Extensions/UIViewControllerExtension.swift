@@ -12,7 +12,7 @@ import ObjectiveC
 private var viewScrollViewAssociatedKey: UInt8 = 0
 
 extension UIViewController {
-    
+
     var scrollViewInternal: UIScrollView! {
         get {
             return objc_getAssociatedObject(self, &viewScrollViewAssociatedKey) as? UIScrollView
@@ -21,12 +21,12 @@ extension UIViewController {
             objc_setAssociatedObject(self, &viewScrollViewAssociatedKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
+
     // MARK: Keyboard Handling
-    
+
     func registerKeyboardHandlers(_ scrollView: UIScrollView) {
         self.scrollViewInternal = scrollView
-        
+
         // Keyboard handler
         NotificationCenter.default.addObserver(
             self,
@@ -34,7 +34,7 @@ extension UIViewController {
             name: NSNotification.Name.UIKeyboardWillShow,
             object: nil
         )
-        
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(UIViewController.keyboardWillHide(_:)),
@@ -42,38 +42,39 @@ extension UIViewController {
             object: nil
         )
     }
-    
+
     func unregisterKeyboardNotifications() {
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     internal func keyboardWillShow(_ notification: Foundation.Notification) {
         let userInfo = (notification as NSNotification).userInfo!
-        let value = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
-        let rawFrame = value.cgRectValue
+        let value = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue
+        let rawFrame = value?.cgRectValue ?? CGRect.zero
         let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey]!
         let scrollView = self.scrollViewInternal
-        
+
         UIView.animate(
             withDuration: (duration as AnyObject).doubleValue,
             delay: 0,
             options: UIViewAnimationOptions(),
             animations: {
-                var insets = scrollView?.contentInset
-                insets?.bottom = rawFrame.height
-                
-                scrollView?.contentInset = insets!
-                scrollView?.scrollIndicatorInsets = insets!
+                guard let insets = scrollView?.contentInset else { return }
+                var newInsets = insets
+                newInsets.bottom = rawFrame.height
+
+                scrollView?.contentInset = newInsets
+                scrollView?.scrollIndicatorInsets = newInsets
         },
             completion: nil
         )
     }
-    
+
     internal func keyboardWillHide(_ notification: Foundation.Notification) {
         let userInfo = (notification as NSNotification).userInfo!
         let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey]!
         let scrollView = self.scrollViewInternal
-        
+
         UIView.animate(
             withDuration: (duration as AnyObject).doubleValue,
             delay: 0,
@@ -86,5 +87,5 @@ extension UIViewController {
             completion: nil
         )
     }
-    
+
 }

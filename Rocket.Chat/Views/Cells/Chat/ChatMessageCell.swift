@@ -13,11 +13,11 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
 }
 
 class ChatMessageCell: UICollectionViewCell {
-    
+
     static let minimumHeight = CGFloat(55)
     static let identifier = "ChatMessageCell"
 
-    var delegate: ChatMessageCellProtocol?
+    weak var delegate: ChatMessageCellProtocol?
     var message: Message! {
         didSet {
             updateMessageInformation()
@@ -39,9 +39,9 @@ class ChatMessageCell: UICollectionViewCell {
             labelText.delegate = self
         }
     }
-    
+
     @IBOutlet weak var mediaViews: UIStackView!
-    @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!    
+    @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
     static func cellMediaHeightFor(message: Message, grouped: Bool = true) -> CGFloat {
         let fullWidth = UIScreen.main.bounds.size.width
@@ -50,89 +50,92 @@ class ChatMessageCell: UICollectionViewCell {
             font: UIFont.systemFont(ofSize: 14),
             width: fullWidth - 60
         ) + 35
-        
+
         for url in message.urls {
             guard url.isValid() else { continue }
             total = total + ChatMessageURLView.defaultHeight
         }
-        
+
         for attachment in message.attachments {
             let type = attachment.type
 
             if type == .image {
                 total = total + ChatMessageImageView.defaultHeight
             }
-            
+
             if type == .video {
                 total = total + ChatMessageVideoView.defaultHeight
             }
         }
-        
+
         return total
     }
-    
+
     override func prepareForReuse() {
         labelUsername.text = ""
         labelText.text = ""
         labelDate.text = ""
-        
+
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
         }
     }
-    
+
     fileprivate func updateMessageInformation() {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
         labelDate.text = formatter.string(from: message.createdAt! as Date)
-        
+
         avatarView.user = message.user
-        
+
         labelUsername.text = message.user?.username
         labelText.text = Emojione.transform(string: message.text)
-        
-        var mediaViewHeight = CGFloat(0)
-        
-        for url in message.urls {
-            guard url.isValid() else { continue }
-            let view = ChatMessageURLView.instanceFromNib() as! ChatMessageURLView
-            view.url = url
-            view.delegate = delegate
 
-            mediaViews.addArrangedSubview(view)
-            mediaViewHeight = mediaViewHeight + ChatMessageURLView.defaultHeight
+        var mediaViewHeight = CGFloat(0)
+
+        message.urls.forEach { url in
+            guard url.isValid() else { return }
+            if let view = ChatMessageURLView.instanceFromNib() as? ChatMessageURLView {
+                view.url = url
+                view.delegate = delegate
+
+                mediaViews.addArrangedSubview(view)
+                mediaViewHeight = mediaViewHeight + ChatMessageURLView.defaultHeight
+            }
         }
-        
-        for attachment in message.attachments {
+
+        message.attachments.forEach { attachment in
             let type = attachment.type
 
-            if type == .image {
-                let view = ChatMessageImageView.instanceFromNib() as! ChatMessageImageView
-                view.attachment = attachment
-                view.delegate = delegate
+            switch type {
+            case .image:
+                if let view = ChatMessageImageView.instanceFromNib() as? ChatMessageImageView {
+                    view.attachment = attachment
+                    view.delegate = delegate
 
-                mediaViews.addArrangedSubview(view)
-                mediaViewHeight = mediaViewHeight + ChatMessageImageView.defaultHeight
-            }
-            
-            if type == .video {
-                let view = ChatMessageVideoView.instanceFromNib() as! ChatMessageVideoView
-                view.attachment = attachment
-                view.delegate = delegate
+                    mediaViews.addArrangedSubview(view)
+                    mediaViewHeight = mediaViewHeight + ChatMessageImageView.defaultHeight
+                }
 
-                mediaViews.addArrangedSubview(view)
-                mediaViewHeight = mediaViewHeight + ChatMessageVideoView.defaultHeight
+            case .video:
+                if let view = ChatMessageVideoView.instanceFromNib() as? ChatMessageVideoView {
+                    view.attachment = attachment
+                    view.delegate = delegate
+
+                    mediaViews.addArrangedSubview(view)
+                    mediaViewHeight = mediaViewHeight + ChatMessageVideoView.defaultHeight
+                }
+            default:
+                return
             }
         }
-        
+
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
     }
-    
 }
 
-
 extension ChatMessageCell: UITextViewDelegate {
-    
+
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
         if URL.scheme == "http" || URL.scheme == "https" {
             delegate?.openURL(url: URL)
@@ -141,5 +144,4 @@ extension ChatMessageCell: UITextViewDelegate {
 
         return true
     }
-
 }

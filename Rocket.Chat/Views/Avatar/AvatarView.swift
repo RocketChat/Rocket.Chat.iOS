@@ -15,13 +15,13 @@ let avatarColors: [UInt] = [
     0x795548, 0x9E9E9E, 0x607D8B]
 
 class AvatarView: BaseView {
-    
+
     var user: User! {
         didSet {
             updateAvatar()
         }
     }
-    
+
     @IBOutlet weak var labelInitials: UILabel!
     var labelInitialsFontSize: CGFloat? {
         didSet {
@@ -30,48 +30,49 @@ class AvatarView: BaseView {
     }
 
     @IBOutlet weak var imageView: UIImageView!
-    
+
     private func userAvatarURL() -> URL? {
         guard let username = user.username else { return nil }
         guard let auth = AuthManager.isAuthenticated() else { return nil }
         guard let serverURL = NSURL(string: auth.serverURL) else { return nil }
         return URL(string: "http://\(serverURL.host!)/avatar/\(username).jpg")!
     }
-    
+
     private func updateAvatar() {
         setAvatarWithInitials()
 
         if let imageURL = userAvatarURL() {
-            imageView.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cache, url) in
-                if error != nil {
-                    self.setAvatarWithInitials()
-                } else {
-                    self.labelInitials.text = ""
-                    self.backgroundColor = UIColor.clear
+            imageView.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
+                guard let _ = error else {
+                    self?.labelInitials.text = ""
+                    self?.backgroundColor = UIColor.clear
+                    return
                 }
+
+                self?.setAvatarWithInitials()
             })
         }
     }
-    
+
     private func setAvatarWithInitials() {
         let username = user.username ?? "?"
 
         var initials = ""
         var color: UInt = 0x000000
-        
+
         if username == "?" {
             initials = username
             color = 0x000000
         } else {
             let position = username.characters.count % avatarColors.count
             color = avatarColors[position]
-            
+
             let strings = username.components(separatedBy: ".")
             if let first = strings.first, let last = strings.last {
                 let lastOffset = strings.count > 1 ? 1 : 2
                 let indexFirst = first.index(first.startIndex, offsetBy: 1)
                 let indexLast = last.index(last.startIndex, offsetBy: lastOffset)
-                
+
                 let firstString = first.substring(to: indexFirst)
                 var lastString = last.substring(to: indexLast)
 
@@ -83,13 +84,13 @@ class AvatarView: BaseView {
                 initials = "\(firstString)\(lastString)"
             }
         }
-        
+
         labelInitials.text = initials.uppercased()
         backgroundColor = UIColor(rgb: color, alphaVal: 1)
     }
-    
+
     // MARK: Replaceable
-    
+
     override func isReplaceable() -> Bool {
         return true
     }

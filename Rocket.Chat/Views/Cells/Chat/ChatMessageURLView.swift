@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChatMessageURLViewProtocol {
+protocol ChatMessageURLViewProtocol: class {
     func openURLFromCell(url: MessageURL)
 }
 
@@ -16,7 +16,7 @@ class ChatMessageURLView: BaseView {
     static let defaultHeight = CGFloat(50)
     fileprivate static let imageViewDefaultWidth = CGFloat(50)
 
-    var delegate: ChatMessageURLViewProtocol?
+    weak var delegate: ChatMessageURLViewProtocol?
     var url: MessageURL! {
         didSet {
             updateMessageInformation()
@@ -32,28 +32,28 @@ class ChatMessageURLView: BaseView {
 
     @IBOutlet weak var labelURLTitle: UILabel!
     @IBOutlet weak var labelURLDescription: UILabel!
-    
+
     var tapGesture: UITapGestureRecognizer?
-    
+
     fileprivate func updateMessageInformation() {
         if let gesture = tapGesture {
             self.removeGestureRecognizer(gesture)
         }
-        
+
         tapGesture = UITapGestureRecognizer( target: self, action: #selector(viewDidTapped(_:)))
         addGestureRecognizer(tapGesture!)
-        
+
         labelURLTitle.text = url.title
         labelURLDescription.text = url.textDescription
-        
+
         if let imageURL = URL(string: url.imageURL ?? "") {
-            imageViewURL.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cache, url) in
+            imageViewURL.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
                 let width = error != nil ? 0 : ChatMessageURLView.imageViewDefaultWidth
-                self.imageViewURLWidthConstraint.constant = width
+                self?.imageViewURLWidthConstraint.constant = width
             })
         }
     }
-    
+
     func viewDidTapped(_ sender: Any) {
         delegate?.openURLFromCell(url: url)
     }

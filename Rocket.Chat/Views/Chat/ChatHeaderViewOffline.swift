@@ -9,17 +9,17 @@
 import UIKit
 
 class ChatHeaderViewOffline: BaseView {
-    
+
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
             labelTitle.text = localizedString("connection.offline.banner.message")
         }
     }
-    
+
     @IBOutlet weak var buttonRefresh: UIButton!
-    
+
     @IBAction func buttonRefreshDidPressed(_ sender: Any) {
         SocketManager.reconnect()
     }
-    
+
 }
