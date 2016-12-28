@@ -9,9 +9,9 @@
 import Foundation
 
 class Log {
-    
+
     static func debug(_ text: String?) {
         NSLog(text ?? "")
     }
-    
+
 }

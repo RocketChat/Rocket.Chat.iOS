@@ -10,7 +10,6 @@ import Foundation
 import SwiftyJSON
 import Starscream
 
-
 public struct SocketResponse {
     var socket: WebSocket?
     var result: JSON
@@ -20,29 +19,26 @@ public struct SocketResponse {
     var msg: ResponseMessage?
     var collection: String?
     var event: String?
-    
-    
+
     // MARK: Initializer
 
     init?(_ result: JSON, socket: WebSocket?) {
         self.result = result
         self.socket = socket
-        
         self.id = result["id"].string
         self.collection = result["collection"].string
-        
+
         if let eventName = result["fields"]["eventName"].string {
             self.event = eventName
         }
-        
+
         if let msg = result["msg"].string {
             self.msg = ResponseMessage(rawValue: msg) ?? ResponseMessage.Unknown
         }
     }
-    
-    
+
     // MARK: Checks
-    
+
     func isError() -> Bool {
         if msg == .Error || result["error"] != nil {
             return true

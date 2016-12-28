@@ -83,7 +83,7 @@
 		41DF76E81D2C50710028DBF8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41DF76E61D2C50710028DBF8 /* Main.storyboard */; };
 		41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 41DF76E91D2C50710028DBF8 /* Assets.xcassets */; };
 		41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41DF76EB1D2C50720028DBF8 /* LaunchScreen.storyboard */; };
-		41DF77031D2C50720028DBF8 /* Rocket_ChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF77021D2C50720028DBF8 /* Rocket_ChatUITests.swift */; };
+		41DF77031D2C50720028DBF8 /* RocketChatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF77021D2C50720028DBF8 /* RocketChatUITests.swift */; };
 		41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E2F9FE1D414DE800238DFD /* Chat.storyboard */; };
 		41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E2FA001D414EA100238DFD /* Subscriptions.storyboard */; };
 		41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */; };
@@ -204,7 +204,7 @@
 		41DF76F31D2C50720028DBF8 /* Rocket.ChatTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rocket.ChatTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		41DF76F91D2C50720028DBF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41DF76FE1D2C50720028DBF8 /* Rocket.ChatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rocket.ChatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		41DF77021D2C50720028DBF8 /* Rocket_ChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket_ChatUITests.swift; sourceTree = "<group>"; };
+		41DF77021D2C50720028DBF8 /* RocketChatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketChatUITests.swift; sourceTree = "<group>"; };
 		41DF77041D2C50720028DBF8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41E2F9FE1D414DE800238DFD /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Chat.storyboard; path = Storyboards/Chat.storyboard; sourceTree = "<group>"; };
 		41E2FA001D414EA100238DFD /* Subscriptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Subscriptions.storyboard; path = Storyboards/Subscriptions.storyboard; sourceTree = "<group>"; };
@@ -564,7 +564,7 @@
 		41DF77011D2C50720028DBF8 /* Rocket.ChatUITests */ = {
 			isa = PBXGroup;
 			children = (
-				41DF77021D2C50720028DBF8 /* Rocket_ChatUITests.swift */,
+				41DF77021D2C50720028DBF8 /* RocketChatUITests.swift */,
 				41DF77041D2C50720028DBF8 /* Info.plist */,
 			);
 			path = Rocket.ChatUITests;
@@ -639,8 +639,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 41DF77071D2C50720028DBF8 /* Build configuration list for PBXNativeTarget "Rocket.Chat" */;
 			buildPhases = (
-				D37272A11E13E60E00A25E1A /* ShellScript */,
 				5A6B94785E51D859BD0468DE /* [CP] Check Pods Manifest.lock */,
+				D37272A11E13E60E00A25E1A /* SwiftLint */,
 				6396FC1046FD3E86C9C3A600 /* [CP] Check Pods Manifest.lock */,
 				41DF76DB1D2C50710028DBF8 /* Sources */,
 				41DF76DC1D2C50710028DBF8 /* Frameworks */,
@@ -855,14 +855,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D37272A11E13E60E00A25E1A /* ShellScript */ = {
+		D37272A11E13E60E00A25E1A /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "SwiftLint";
+			name = SwiftLint;
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1081,7 +1081,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41DF77031D2C50720028DBF8 /* Rocket_ChatUITests.swift in Sources */,
+				41DF77031D2C50720028DBF8 /* RocketChatUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
