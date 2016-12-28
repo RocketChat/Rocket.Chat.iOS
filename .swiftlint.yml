@@ -1,0 +1,6 @@
+disabled_rules: # rule identifiers to exclude from running
+  - variable_name
+excluded:
+  - Pods
+line_length: 300
+reporter: "xcode"
