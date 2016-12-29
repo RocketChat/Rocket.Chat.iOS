@@ -85,7 +85,7 @@ class ConnectServerViewController: BaseViewController {
     }
 
     func connect() {
-        var text = textFieldServerURL.text!
+        var text = textFieldServerURL.text ?? ""
         if text.characters.count == 0 {
             text = defaultURL
         }

@@ -33,15 +33,15 @@ class ChatMessageImageView: BaseView {
         }
     }
 
-    var tapGesture: UITapGestureRecognizer?
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        return UITapGestureRecognizer(target: self, action: #selector(didTapView))
+    }()
 
     fileprivate func updateMessageInformation() {
-        if let gesture = tapGesture {
-            removeGestureRecognizer(gesture)
+        let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
+        if !containsGesture {
+            addGestureRecognizer(tapGesture)
         }
-
-        tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView))
-        addGestureRecognizer(tapGesture!)
 
         labelTitle.text = attachment.title
 

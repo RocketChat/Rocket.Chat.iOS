@@ -48,10 +48,10 @@ extension UIViewController {
     }
 
     internal func keyboardWillShow(_ notification: Foundation.Notification) {
-        let userInfo = (notification as NSNotification).userInfo!
-        let value = userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue
+        let userInfo = notification.userInfo
+        let value = userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
         let rawFrame = value?.cgRectValue ?? CGRect.zero
-        let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey]!
+        let duration = userInfo?[UIKeyboardAnimationDurationUserInfoKey] ?? 0
         let scrollView = self.scrollViewInternal
 
         UIView.animate(
@@ -71,8 +71,8 @@ extension UIViewController {
     }
 
     internal func keyboardWillHide(_ notification: Foundation.Notification) {
-        let userInfo = (notification as NSNotification).userInfo!
-        let duration = userInfo[UIKeyboardAnimationDurationUserInfoKey]!
+        let userInfo = notification.userInfo
+        let duration = userInfo?[UIKeyboardAnimationDurationUserInfoKey] ?? 0
         let scrollView = self.scrollViewInternal
 
         UIView.animate(

@@ -15,7 +15,7 @@ import Bugsnag
 extension SocketManager {
 
     func handleMessage(_ response: JSON, socket: WebSocket) {
-        let result = SocketResponse(response, socket: socket)!
+        guard let result = SocketResponse(response, socket: socket) else { return }
 
         guard result.msg != nil else {
             return Log.debug("Msg is invalid: \(result.result)")
@@ -25,20 +25,19 @@ extension SocketManager {
             return handleError(result, socket: socket)
         }
 
-        switch result.msg! {
-        case .Connected: return handleConnectionMessage(result, socket: socket)
-        case .Ping: return handlePingMessage(result, socket: socket)
-        case .Changed, .Added, .Removed: return handleModelUpdates(result, socket: socket)
-        case .Error, .Updated, .Unknown: break
+        switch result.msg {
+            case .some(.Connected): return handleConnectionMessage(result, socket: socket)
+            case .some(.Ping): return handlePingMessage(result, socket: socket)
+            case .some(.Changed), .some(.Added), .some(.Removed): return handleModelUpdates(result, socket: socket)
+            case .some(.Error), .some(.Updated), .some(.Unknown): fallthrough
+            default: break
         }
 
         // Call completion block
-        if let identifier = result.id {
-            if queue[identifier] != nil {
-                let completion = queue[identifier]! as MessageCompletion
-                completion(result)
-            }
-        }
+        guard let identifier = result.id,
+              let completion = queue[identifier] else { return }
+        let messageCompletion = completion as MessageCompletion
+        messageCompletion(result)
     }
 
     fileprivate func handleConnectionMessage(_ result: SocketResponse, socket: WebSocket) {
@@ -97,5 +96,4 @@ extension SocketManager {
             }
         }
     }
-
 }

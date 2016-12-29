@@ -38,8 +38,8 @@ class Subscription: BaseModel {
 
     dynamic var otherUserId: String?
     var directMessageUser: User? {
-        guard otherUserId != nil else { return nil }
-        guard let messages = try? Realm().objects(User.self).filter("identifier = '\(otherUserId!)'") else { return nil }
+        guard let otherUserId = otherUserId else { return nil }
+        guard let messages = try? Realm().objects(User.self).filter("identifier = '\(otherUserId)'") else { return nil }
 
         return messages.first
     }
@@ -50,7 +50,7 @@ class Subscription: BaseModel {
 
     override func update(_ dict: JSON) {
         if self.identifier == nil {
-            self.identifier = dict["_id"].string!
+            self.identifier = dict["_id"].string ?? ""
         }
 
         self.rid = dict["rid"].string ?? ""
@@ -62,8 +62,8 @@ class Subscription: BaseModel {
         self.privateType = dict["t"].string ?? SubscriptionType.channel.rawValue
 
         if self.type == .directMessage {
-            let userId = dict["u"]["_id"].string
-            self.otherUserId = rid.replacingOccurrences(of: userId!, with: "")
+            let userId = dict["u"]["_id"].string ?? ""
+            self.otherUserId = rid.replacingOccurrences(of: userId, with: "")
         }
 
         if let createdAt = dict["ts"]["$date"].double {

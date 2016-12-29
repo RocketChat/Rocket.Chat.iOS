@@ -84,7 +84,10 @@ class ChatMessageCell: UICollectionViewCell {
     fileprivate func updateMessageInformation() {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
-        labelDate.text = formatter.string(from: message.createdAt! as Date)
+
+        if let createdAt = message.createdAt {
+            labelDate.text = formatter.string(from: createdAt)
+        }
 
         avatarView.user = message.user
 

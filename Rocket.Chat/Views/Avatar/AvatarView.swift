@@ -25,7 +25,7 @@ class AvatarView: BaseView {
     @IBOutlet weak var labelInitials: UILabel!
     var labelInitialsFontSize: CGFloat? {
         didSet {
-            labelInitials?.font = UIFont.systemFont(ofSize: labelInitialsFontSize!)
+            labelInitials?.font = UIFont.systemFont(ofSize: labelInitialsFontSize ?? 0)
         }
     }
 
@@ -34,8 +34,9 @@ class AvatarView: BaseView {
     private func userAvatarURL() -> URL? {
         guard let username = user.username else { return nil }
         guard let auth = AuthManager.isAuthenticated() else { return nil }
-        guard let serverURL = NSURL(string: auth.serverURL) else { return nil }
-        return URL(string: "http://\(serverURL.host!)/avatar/\(username).jpg")!
+        guard let host = NSURL(string: auth.serverURL)?.host else { return nil }
+
+        return URL(string: "http://\(host)/avatar/\(username).jpg")
     }
 
     private func updateAvatar() {
