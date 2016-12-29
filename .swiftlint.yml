@@ -1,5 +1,5 @@
-disabled_rules: # rule identifiers to exclude from running
-  - variable_name
+opt_in_rules:
+  - force_unwrapping
 excluded:
   - Pods
 line_length: 300
