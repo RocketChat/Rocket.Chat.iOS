@@ -33,15 +33,15 @@ class ChatMessageURLView: BaseView {
     @IBOutlet weak var labelURLTitle: UILabel!
     @IBOutlet weak var labelURLDescription: UILabel!
 
-    var tapGesture: UITapGestureRecognizer?
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        return UITapGestureRecognizer(target: self, action: #selector(viewDidTapped(_:)))
+    }()
 
     fileprivate func updateMessageInformation() {
-        if let gesture = tapGesture {
-            self.removeGestureRecognizer(gesture)
+        let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
+        if !containsGesture {
+            addGestureRecognizer(tapGesture)
         }
-
-        tapGesture = UITapGestureRecognizer( target: self, action: #selector(viewDidTapped(_:)))
-        addGestureRecognizer(tapGesture!)
 
         labelURLTitle.text = url.title
         labelURLDescription.text = url.textDescription

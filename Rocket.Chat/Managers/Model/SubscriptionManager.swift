@@ -66,7 +66,7 @@ struct SubscriptionManager {
     }
 
     static func changes(_ auth: Auth) {
-        let eventName = "\(auth.userId!)/subscriptions-changed"
+        let eventName = "\(auth.userId ?? "")/subscriptions-changed"
         let request = [
             "msg": "sub",
             "name": "stream-notify-user",

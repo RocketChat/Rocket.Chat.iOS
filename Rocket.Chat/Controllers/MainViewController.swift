@@ -29,14 +29,14 @@ class MainViewController: BaseViewController {
             labelAuthenticationStatus.text = "Logging in..."
             buttonConnect.isEnabled = false
 
-            AuthManager.resume(auth, completion: { [unowned self] (response) in
+            AuthManager.resume(auth, completion: { [weak self] response in
                 guard !response.isError() else {
-                    self.labelAuthenticationStatus.text = "User is not authenticated"
-                    self.buttonConnect.isEnabled = true
+                    self?.labelAuthenticationStatus.text = "User is not authenticated"
+                    self?.buttonConnect.isEnabled = true
                     return
                 }
 
-                self.labelAuthenticationStatus.text = "User is authenticated with token \(auth.token) on \(auth.serverURL)."
+                self?.labelAuthenticationStatus.text = "User is authenticated with token \(auth.token) on \(auth.serverURL)."
 
                 SubscriptionManager.updateSubscriptions(auth, completion: { _ in
                     // TODO: Move it to somewhere else

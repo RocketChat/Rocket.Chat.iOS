@@ -59,5 +59,4 @@ extension Realm {
             realm.add(objects, update: true)
         }
     }
-
 }

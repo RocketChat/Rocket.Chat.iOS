@@ -66,7 +66,7 @@ class ChatDataController {
         return nil
     }
 
-    // swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length cyclomatic_complexity
     func insert(_ items: [ChatData]) -> [IndexPath] {
         var indexPaths: [IndexPath] = []
         var newItems: [ChatData] = []
@@ -95,11 +95,11 @@ class ChatDataController {
                     }
 
                     if insert {
+                        guard let calendar = NSCalendar(calendarIdentifier: .gregorian) else { continue }
                         let date = newObj.timestamp
-                        let calendar = NSCalendar(calendarIdentifier: .gregorian)!
-                        let components = calendar.components([.day, .month, .year ], from: date)
-                        let newDate = calendar.date(from: components)
-                        let separator = ChatData(type: .daySeparator, timestamp: newDate!)!
+                        let components = calendar.components([.day, .month, .year], from: date)
+                        guard let newDate = calendar.date(from: components) else { continue }
+                        guard let separator = ChatData(type: .daySeparator, timestamp: newDate) else { continue }
                         identifiers.append(separator.identifier)
                         newItems.append(separator)
                     }
@@ -135,5 +135,4 @@ class ChatDataController {
     func remove(_ items: [ChatData]) {
 
     }
-
 }

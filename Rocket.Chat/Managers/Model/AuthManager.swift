@@ -33,22 +33,22 @@ extension AuthManager {
             called in case of success or error.
     */
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
-        let url = URL(string: auth.serverURL)!
+        guard let url = URL(string: auth.serverURL) else { return }
         SocketManager.connect(url) { (socket, connected) in
             guard connected else {
-                let response = SocketResponse(
+                guard let response = SocketResponse(
                     ["error": "Can't connect to the socket"],
                     socket: socket
-                )
+                ) else { return }
 
-                return completion(response!)
+                return completion(response)
             }
 
             let object = [
                 "msg": "method",
                 "method": "login",
                 "params": [[
-                    "resume": auth.token!
+                    "resume": auth.token ?? ""
                 ]]
             ] as [String: Any]
 
@@ -100,7 +100,7 @@ extension AuthManager {
             let auth = Auth()
             auth.lastSubscriptionFetch = nil
             auth.lastAccess = Date()
-            auth.serverURL = response.socket!.currentURL.absoluteString
+            auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
             auth.token = result["result"]["token"].string
             auth.userId = result["result"]["id"].string
 

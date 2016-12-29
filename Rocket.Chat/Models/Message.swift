@@ -50,7 +50,7 @@ class Message: BaseModel {
 
     override func update(_ dict: JSON) {
         if self.identifier == nil {
-            self.identifier = dict["_id"].string!
+            self.identifier = dict["_id"].string ?? ""
         }
 
         self.rid = dict["rid"].string ?? ""

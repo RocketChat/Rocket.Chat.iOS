@@ -107,18 +107,18 @@ extension SubscriptionsViewController {
         tableView.tableFooterView = nil
         activityViewSearching.startAnimating()
 
-        SubscriptionManager.spotlight(text) { [unowned self] (result) in
-            let currentText = self.textFieldSearch.text ?? ""
+        SubscriptionManager.spotlight(text) { [weak self] result in
+            let currentText = self?.textFieldSearch.text ?? ""
 
             if currentText.characters.count == 0 {
                 return
             }
 
-            self.activityViewSearching.stopAnimating()
-            self.isSearchingRemotely = true
-            self.searchResult = result
-            self.groupSubscription()
-            self.tableView.reloadData()
+            self?.activityViewSearching.stopAnimating()
+            self?.isSearchingRemotely = true
+            self?.searchResult = result
+            self?.groupSubscription()
+            self?.tableView.reloadData()
         }
     }
 
@@ -138,21 +138,22 @@ extension SubscriptionsViewController {
 
         subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
         subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
-        usersToken = try? Realm().addNotificationBlock({ [weak self] _, _ in
+        usersToken = try? Realm().addNotificationBlock { [weak self] _, _ in
             self?.handleModelUpdates(nil)
-        })
+        }
 
         groupSubscription()
     }
 
-    // swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length cyclomatic_complexity
     func groupSubscription() {
         var favoriteGroup: [Subscription] = []
         var channelGroup: [Subscription] = []
         var directMessageGroup: [Subscription] = []
         var searchResultsGroup: [Subscription] = []
 
-        let orderSubscriptions = isSearchingRemotely ? searchResult : Array(subscriptions!.sorted(byProperty: "name", ascending: true))
+        guard let subscriptions = subscriptions else { return }
+        let orderSubscriptions = isSearchingRemotely ? searchResult : Array(subscriptions.sorted(byProperty: "name", ascending: true))
 
         for subscription in orderSubscriptions ?? [] {
             if isSearchingRemotely {
@@ -220,7 +221,6 @@ extension SubscriptionsViewController {
             }
         }
     }
-
 }
 
 extension SubscriptionsViewController: UITableViewDataSource {
@@ -243,7 +243,6 @@ extension SubscriptionsViewController: UITableViewDataSource {
 
         return cell
     }
-
 }
 
 extension SubscriptionsViewController: UITableViewDelegate {
@@ -270,7 +269,6 @@ extension SubscriptionsViewController: UITableViewDelegate {
             ChatViewController.sharedInstance()?.subscription = subscription
         }
     }
-
 }
 
 extension SubscriptionsViewController: UITextFieldDelegate {
@@ -290,7 +288,6 @@ extension SubscriptionsViewController: UITextFieldDelegate {
         searchBy(prospectiveText)
         return true
     }
-
 }
 
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
@@ -298,5 +295,4 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
     func buttonLoadMoreDidPressed() {
         searchOnSpotlight(textFieldSearch.text ?? "")
     }
-
 }

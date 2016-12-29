@@ -24,7 +24,7 @@ class AuthViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        labelHost.text = serverURL.host!
+        labelHost.text = serverURL.host
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -65,23 +65,22 @@ class AuthViewController: BaseViewController {
 
     // MARK: IBAction
     func authenticate() {
-        let email = textFieldUsername.text!
-        let password = textFieldPassword.text!
+        let email = textFieldUsername.text ?? ""
+        let password = textFieldPassword.text ?? ""
 
         textFieldUsername.alpha = 0.5
         textFieldPassword.alpha = 0.5
         connecting = true
         activityIndicator.startAnimating()
 
-        AuthManager.auth(email, password: password) { [unowned self] (response) in
-            self.textFieldUsername.alpha = 1
-            self.textFieldPassword.alpha = 1
-            self.connecting = false
-            self.activityIndicator.stopAnimating()
+        AuthManager.auth(email, password: password) { [weak self] response in
+            self?.textFieldUsername.alpha = 1
+            self?.textFieldPassword.alpha = 1
+            self?.connecting = false
+            self?.activityIndicator.stopAnimating()
 
-            if response.isError() {
-            } else {
-                self.dismiss(animated: true, completion: nil)
+            if !response.isError() {
+                self?.dismiss(animated: true, completion: nil)
             }
         }
     }
@@ -109,5 +108,4 @@ extension AuthViewController: UITextFieldDelegate {
 
         return true
     }
-
 }

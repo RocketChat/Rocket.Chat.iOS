@@ -11,7 +11,7 @@ import RealmSwift
 import SlackTextViewController
 import URBMediaFocusViewController
 
-// swiftlint:disable file_length
+// swiftlint:disable file_length type_body_length
 class ChatViewController: SLKTextViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -153,7 +153,7 @@ class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func scrollToBottom(_ animated: Bool = false) {
-        let totalItems = collectionView!.numberOfItems(inSection: 0) - 1
+        let totalItems = (collectionView?.numberOfItems(inSection: 0) ?? 0) - 1
 
         if totalItems > 0 {
             let indexPath = IndexPath(row: totalItems, section: 0)
@@ -217,8 +217,8 @@ class ChatViewController: SLKTextViewController {
             if self.subscription.isValid() {
                 self.updateSubscriptionMessages()
             } else {
-                self.subscription.fetchRoomIdentifier({ [unowned self] (response) in
-                    self.subscription = response
+                self.subscription.fetchRoomIdentifier({ [weak self] response in
+                    self?.subscription = response
                 })
             }
         })
@@ -266,12 +266,12 @@ class ChatViewController: SLKTextViewController {
         }
 
         isRequestingHistory = true
-        MessageManager.getHistory(subscription, lastMessageDate: date) { [unowned self] (newMessages) in
+        MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] newMessages in
             DispatchQueue.main.async {
-                self.appendMessages(messages: newMessages)
+                self?.appendMessages(messages: newMessages)
             }
 
-            self.isRequestingHistory = false
+            self?.isRequestingHistory = false
         }
     }
 
@@ -298,7 +298,8 @@ class ChatViewController: SLKTextViewController {
 
         // Normalize data into ChatData object
         for message in newMessages {
-            var obj = ChatData(type: .message, timestamp: message.createdAt!)!
+            guard let createdAt = message.createdAt else { continue }
+            guard var obj = ChatData(type: .message, timestamp: createdAt) else { continue }
             obj.message = message
             objs.append(obj)
         }
@@ -339,7 +340,8 @@ class ChatViewController: SLKTextViewController {
     // MARK: IBAction
 
     @IBAction func buttonMenuDidPressed(_ sender: AnyObject) {
-        present(SideMenuManager.menuLeftNavigationController!, animated: true, completion: nil)
+        guard let menuLeftNavigationController = SideMenuManager.menuLeftNavigationController else { return }
+        present(menuLeftNavigationController, animated: true, completion: nil)
     }
 
     // MARK: Side Menu
@@ -349,10 +351,10 @@ class ChatViewController: SLKTextViewController {
         SideMenuManager.menuFadeStatusBar = false
         SideMenuManager.menuLeftNavigationController = storyboardSubscriptions.instantiateInitialViewController() as? UISideMenuNavigationController
 
-        SideMenuManager.menuAddPanGestureToPresent(toView: self.navigationController!.navigationBar)
-        SideMenuManager.menuAddScreenEdgePanGesturesToPresent(toView: self.navigationController!.view)
+        guard let navigationController = self.navigationController else { return }
+        SideMenuManager.menuAddPanGestureToPresent(toView: navigationController.navigationBar)
+        SideMenuManager.menuAddScreenEdgePanGesturesToPresent(toView: navigationController.view)
     }
-
 }
 
 // MARK: Status Bar Control
@@ -435,7 +437,7 @@ extension ChatViewController {
     }
 
     func cellForDaySeparator(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView!.dequeueReusableCell(
+        guard let cell = collectionView?.dequeueReusableCell(
             withReuseIdentifier: ChatMessageDaySeparator.identifier,
             for: indexPath
         ) as? ChatMessageDaySeparator else {
@@ -465,7 +467,6 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
         return CGSize(width: fullWidth, height: 40)
     }
-
 }
 
 // MARK: ChatPreviewModeViewProtocol

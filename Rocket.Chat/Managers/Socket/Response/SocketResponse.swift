@@ -15,6 +15,7 @@ public struct SocketResponse {
     var result: JSON
 
     // JSON Data
+    // swiftlint:disable variable_name
     var id: String?
     var msg: ResponseMessage?
     var collection: String?
@@ -40,7 +41,7 @@ public struct SocketResponse {
     // MARK: Checks
 
     func isError() -> Bool {
-        if msg == .Error || result["error"] != nil {
+        if msg == .Error || result["error"] != JSON.null {
             return true
         }
 

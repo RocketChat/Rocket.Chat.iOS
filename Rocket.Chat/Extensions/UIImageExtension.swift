@@ -11,6 +11,9 @@ import UIKit
 extension UIImage {
 
     func imageWithTint(_ color: UIColor, alpha: CGFloat = 1.0) -> UIImage {
+
+        guard let cgImage = cgImage else { return self }
+
         UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.main.scale)
 
         let context = UIGraphicsGetCurrentContext()
@@ -22,16 +25,16 @@ extension UIImage {
 
         context?.setBlendMode(CGBlendMode.colorBurn)
         let rect = CGRect(x: 0.0, y: 0.0, width: self.size.width, height: self.size.height)
-        context?.draw(self.cgImage!, in: rect)
+        context?.draw(cgImage, in: rect)
 
         context?.setBlendMode(CGBlendMode.sourceIn)
         context?.addRect(rect)
         context?.drawPath(using: CGPathDrawingMode.fill)
 
-        let image = UIGraphicsGetImageFromCurrentImageContext()
+        let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
-        return image!
+        guard let image = img else { return self }
+        return image
     }
-
 }
