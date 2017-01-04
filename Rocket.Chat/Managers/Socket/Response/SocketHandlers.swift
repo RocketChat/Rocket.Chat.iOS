@@ -17,20 +17,19 @@ extension SocketManager {
     func handleMessage(_ response: JSON, socket: WebSocket) {
         guard let result = SocketResponse(response, socket: socket) else { return }
 
-        guard result.msg != nil else {
-            return Log.debug("Msg is invalid: \(result.result)")
-        }
-
         guard !result.isError() else {
             return handleError(result, socket: socket)
         }
 
-        switch result.msg {
-            case .some(.Connected): return handleConnectionMessage(result, socket: socket)
-            case .some(.Ping): return handlePingMessage(result, socket: socket)
-            case .some(.Changed), .some(.Added), .some(.Removed): return handleModelUpdates(result, socket: socket)
-            case .some(.Error), .some(.Updated), .some(.Unknown): fallthrough
-            default: break
+        guard let message = result.msg else {
+            return Log.debug("Msg is invalid: \(result.result)")
+        }
+
+        switch message {
+            case .Connected: return handleConnectionMessage(result, socket: socket)
+            case .Ping: return handlePingMessage(result, socket: socket)
+            case .Changed, .Added, .Removed: return handleModelUpdates(result, socket: socket)
+            case .Error, .Updated, .Unknown: break
         }
 
         // Call completion block
