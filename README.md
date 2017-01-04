@@ -26,7 +26,6 @@ In case you're interested in playing around with the code or giving something ba
 3. Open `Rocket.Chat.xcworkspace`
 4. Run the project (⌘ + R)
 
+### Code style
 
-### Code style guide
-
-We're currently following the Swift Style Guide from Ray Wenderlich: https://github.com/raywenderlich/swift-style-guide. The only exception is that we're using 4 spaces instead of 2.
+We use (swiftlint)[https://github.com/realm/SwiftLint#installation] to enforce code style and best practices.
