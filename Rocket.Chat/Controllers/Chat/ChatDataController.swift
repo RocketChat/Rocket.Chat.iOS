@@ -73,10 +73,6 @@ class ChatDataController {
         var lastObj = data.last
         var identifiers: [String] = items.map { $0.identifier }
 
-        for obj in items {
-            identifiers.append(obj.identifier)
-        }
-
         for newObj in items {
             if let lastObj = lastObj {
                 if lastObj.type == .message && (
