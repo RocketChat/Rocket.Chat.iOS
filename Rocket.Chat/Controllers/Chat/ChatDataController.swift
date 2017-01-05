@@ -31,7 +31,7 @@ struct ChatData {
     }
 }
 
-class ChatDataController {
+final class ChatDataController {
 
     var data: [ChatData] = []
 
@@ -112,7 +112,7 @@ class ChatDataController {
 
         data.append(contentsOf: newItems)
         data.sort(by: { $0.timestamp < $1.timestamp })
-        
+
         var normalizeds: [ChatData] = []
         for (idx, item) in data.enumerated() {
             var customItem = item

@@ -12,7 +12,7 @@ protocol ChatMessageURLViewProtocol: class {
     func openURLFromCell(url: MessageURL)
 }
 
-class ChatMessageURLView: BaseView {
+final class ChatMessageURLView: BaseView {
     static let defaultHeight = CGFloat(50)
     fileprivate static let imageViewDefaultWidth = CGFloat(50)
 

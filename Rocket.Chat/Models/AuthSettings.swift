@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-class AuthSettings: BaseModel {
+final class AuthSettings: BaseModel {
     dynamic var siteURL: String?
 
     // MARK: ModelMapping

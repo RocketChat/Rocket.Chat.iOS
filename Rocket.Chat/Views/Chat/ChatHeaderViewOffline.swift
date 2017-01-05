@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatHeaderViewOffline: BaseView {
+final class ChatHeaderViewOffline: BaseView {
 
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {

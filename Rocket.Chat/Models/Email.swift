@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Email: BaseModel {
+final class Email: BaseModel {
     dynamic var email = ""
     dynamic var verified = false
 }

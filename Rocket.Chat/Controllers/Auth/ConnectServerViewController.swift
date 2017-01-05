@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-class ConnectServerViewController: BaseViewController {
+final class ConnectServerViewController: BaseViewController {
 
     internal let defaultURL = "https://demo.rocket.chat"
     internal var connecting = false

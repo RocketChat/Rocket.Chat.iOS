@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class AuthViewController: BaseViewController {
+final class AuthViewController: BaseViewController {
 
     internal var connecting = false
     var serverURL: URL!

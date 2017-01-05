@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AutocompleteCell: UITableViewCell {
+final class AutocompleteCell: UITableViewCell {
 
     static let minimumHeight = CGFloat(44)
     static let identifier = "AutocompleteCell"

@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-class Attachment: BaseModel {
+final class Attachment: BaseModel {
     var type: MessageType {
         if audioURL?.characters.count ?? 0 > 0 {
             return .audio

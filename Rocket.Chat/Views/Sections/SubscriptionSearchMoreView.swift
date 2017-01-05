@@ -12,7 +12,7 @@ protocol SubscriptionSearchMoreViewDelegate: class {
     func buttonLoadMoreDidPressed()
 }
 
-class SubscriptionSearchMoreView: BaseView {
+final class SubscriptionSearchMoreView: BaseView {
 
     weak var delegate: SubscriptionSearchMoreViewDelegate?
 

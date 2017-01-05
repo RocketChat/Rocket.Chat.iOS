@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SubscriptionCell: UITableViewCell {
+final class SubscriptionCell: UITableViewCell {
 
     static let identifier = "CellSubscription"
 

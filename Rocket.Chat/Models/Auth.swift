@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class Auth: Object {
+final class Auth: Object {
     // Server
     dynamic var serverURL = ""
     dynamic var settings: AuthSettings?
