@@ -73,6 +73,16 @@ class ChatDataController {
         var lastObj = data.last
         var identifiers: [String] = items.map { $0.identifier }
 
+        func insertDaySeparator(from obj: ChatData) {
+            guard let calendar = NSCalendar(calendarIdentifier: .gregorian) else { return }
+            let date = obj.timestamp
+            let components = calendar.components([.day, .month, .year], from: date)
+            guard let newDate = calendar.date(from: components) else { return }
+            guard let separator = ChatData(type: .daySeparator, timestamp: newDate) else { return }
+            identifiers.append(separator.identifier)
+            newItems.append(separator)
+        }
+
         for newObj in items {
             if let lastObj = lastObj {
                 if lastObj.type == .message && (
@@ -91,13 +101,7 @@ class ChatDataController {
                     }
 
                     if insert {
-                        guard let calendar = NSCalendar(calendarIdentifier: .gregorian) else { continue }
-                        let date = newObj.timestamp
-                        let components = calendar.components([.day, .month, .year], from: date)
-                        guard let newDate = calendar.date(from: components) else { continue }
-                        guard let separator = ChatData(type: .daySeparator, timestamp: newDate) else { continue }
-                        identifiers.append(separator.identifier)
-                        newItems.append(separator)
+                        insertDaySeparator(from: newObj)
                     }
                 }
             }
@@ -106,10 +110,10 @@ class ChatDataController {
             lastObj = newObj
         }
 
-        var normalizeds: [ChatData] = []
         data.append(contentsOf: newItems)
         data.sort(by: { $0.timestamp < $1.timestamp })
-
+        
+        var normalizeds: [ChatData] = []
         for (idx, item) in data.enumerated() {
             var customItem = item
             let indexPath = IndexPath(item: idx, section: 0)
