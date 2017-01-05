@@ -12,7 +12,7 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
     func openURL(url: URL)
 }
 
-class ChatMessageCell: UICollectionViewCell {
+final class ChatMessageCell: UICollectionViewCell {
 
     static let minimumHeight = CGFloat(55)
     static let identifier = "ChatMessageCell"

@@ -12,7 +12,7 @@ import SlackTextViewController
 import URBMediaFocusViewController
 
 // swiftlint:disable file_length type_body_length
-class ChatViewController: SLKTextViewController {
+final class ChatViewController: SLKTextViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     weak var chatTitleView: ChatTitleView?

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatTitleView: BaseView {
+final class ChatTitleView: BaseView {
 
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!

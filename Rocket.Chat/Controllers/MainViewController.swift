@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class MainViewController: BaseViewController {
+final class MainViewController: BaseViewController {
 
     @IBOutlet weak var labelAuthenticationStatus: UILabel!
     @IBOutlet weak var buttonConnect: UIButton!

@@ -9,7 +9,7 @@
 import RealmSwift
 import SideMenu
 
-class SubscriptionsViewController: BaseViewController {
+final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!

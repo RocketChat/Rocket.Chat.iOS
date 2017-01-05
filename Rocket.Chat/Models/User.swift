@@ -14,7 +14,7 @@ enum UserStatus: String {
     case offline, online, busy, away
 }
 
-class User: BaseModel {
+final class User: BaseModel {
     dynamic var username: String?
     dynamic var name: String?
     var emails = List<Email>()

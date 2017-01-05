@@ -14,7 +14,7 @@ let avatarColors: [UInt] = [
     0x8BC34A, 0xCDDC39, 0xFFC107, 0xFF9800, 0xFF5722,
     0x795548, 0x9E9E9E, 0x607D8B]
 
-class AvatarView: BaseView {
+final class AvatarView: BaseView {
 
     var user: User! {
         didSet {

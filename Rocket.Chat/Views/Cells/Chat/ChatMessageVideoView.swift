@@ -14,7 +14,7 @@ protocol ChatMessageVideoViewProtocol: class {
     func openVideoFromCell(attachment: Attachment)
 }
 
-class ChatMessageVideoView: BaseView {
+final class ChatMessageVideoView: BaseView {
     static let defaultHeight = CGFloat(250)
 
     weak var delegate: ChatMessageVideoViewProtocol?
