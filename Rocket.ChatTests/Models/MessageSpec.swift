@@ -13,49 +13,49 @@ import SwiftyJSON
 @testable import Rocket_Chat
 
 class MessageSpec: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
-        
-        Realm.execute() { (realm) in
+
+        Realm.execute { realm in
             for obj in realm.objects(User.self) {
                 realm.delete(obj)
             }
-            
+
             for obj in realm.objects(Auth.self) {
                 realm.delete(obj)
             }
-            
+
             for obj in realm.objects(Message.self) {
                 realm.delete(obj)
             }
-            
+
             for obj in realm.objects(Subscription.self) {
                 realm.delete(obj)
             }
         }
     }
-    
+
     func testSubscriptionObject() {
         let auth = Auth()
         auth.serverURL = "http://foo.bar.baz"
-        
+
         let subscription = Subscription()
         subscription.auth = auth
         subscription.identifier = "123"
-        
+
         let user = User()
         user.identifier = "123"
-        
+
         let message = Message()
         message.identifier = "123"
         message.text = "text"
         message.user = user
         message.subscription = subscription
-        
-        Realm.execute() { (realm) in
+
+        Realm.execute { realm in
             realm.add(message)
-            
+
             let results = realm.objects(Message.self)
             let first = results.first
             XCTAssert(results.count == 1, "Message object was created with success")
@@ -63,7 +63,7 @@ class MessageSpec: XCTestCase {
             XCTAssert(subscription.messages.first?.identifier == first?.identifier, "Message relationship with Subscription is OK")
         }
     }
-    
+
     func testMessageObjectFromJSON() {
         let object = JSON([
             "_id": "123",
@@ -73,17 +73,17 @@ class MessageSpec: XCTestCase {
             "_updatedAt": ["$date": 1234567891011],
             "u": ["_id": "123", "username": "foo"]
         ])
-        
+
         let message = Message(dict: object)
 
-        Realm.execute() { (realm) in
+        Realm.execute { realm in
             realm.add(message)
-            
+
             let results = realm.objects(Message.self)
             let first = results.first
             XCTAssert(results.count == 1, "Message object was created with success")
             XCTAssert(first?.identifier == "123", "Message object was created with success")
         }
     }
-    
+
 }

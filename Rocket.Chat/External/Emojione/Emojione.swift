@@ -7,6 +7,8 @@
 
 import Foundation
 
+// swiftlint:disable type_body_length
+// swiftlint:disable file_length
 struct Emojione {
     static let values = [
         "100": "\u{0001f4af}",
@@ -1828,25 +1830,25 @@ struct Emojione {
         "regional_indicator_d": "\u{0001f1e9}",
         "regional_indicator_c": "\u{0001f1e8}",
         "regional_indicator_b": "\u{0001f1e7}",
-        "regional_indicator_a": "\u{0001f1e6}",
-        ]
-    
+        "regional_indicator_a": "\u{0001f1e6}"
+    ]
+
     static func transform(string: String) -> String {
         let oldString = string as NSString
         var transformedString = string as NSString
-        
-        let regex = try! NSRegularExpression(pattern: ":([-+\\w]+):", options: [])
-        let matches = regex.matches(in: transformedString as String, options: [], range: NSMakeRange(0, transformedString.length))
-        
+
+        let regex = try? NSRegularExpression(pattern: ":([-+\\w]+):", options: [])
+        let matches = regex?.matches(in: transformedString as String, options: [], range: NSRange(location: 0, length: transformedString.length)) ?? []
+
         for result in matches {
             guard result.numberOfRanges == 2 else { continue }
-            
+
             let shortname = oldString.substring(with: result.rangeAt(1))
             if let emoji = values[shortname] {
                 transformedString = transformedString.replacingOccurrences(of: ":\(shortname):", with: emoji) as NSString
             }
         }
-        
+
         return transformedString as String
     }
 }

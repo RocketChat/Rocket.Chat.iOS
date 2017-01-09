@@ -10,21 +10,20 @@ import Foundation
 import RealmSwift
 
 struct AuthManager {
-    
+
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
     static func isAuthenticated() -> Auth? {
-        return try! Realm().objects(Auth.self).sorted(byProperty: "lastAccess", ascending: false).first
+        guard let auths = try? Realm().objects(Auth.self).sorted(byProperty: "lastAccess", ascending: false) else { return nil}
+        return auths.first
     }
 }
-
 
 // MARK: Socket Management
 
 extension AuthManager {
-    
-    
+
     /**
         This method resumes a previous authentication with token
         stored in the Realm object.
@@ -34,25 +33,25 @@ extension AuthManager {
             called in case of success or error.
     */
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
-        let url = URL(string: auth.serverURL)!
+        guard let url = URL(string: auth.serverURL) else { return }
         SocketManager.connect(url) { (socket, connected) in
             guard connected else {
-                let response = SocketResponse(
+                guard let response = SocketResponse(
                     ["error": "Can't connect to the socket"],
                     socket: socket
-                )
+                ) else { return }
 
-                return completion(response!)
+                return completion(response)
             }
-            
+
             let object = [
                 "msg": "method",
                 "method": "login",
                 "params": [[
-                    "resume": auth.token!
+                    "resume": auth.token ?? ""
                 ]]
             ] as [String: Any]
-            
+
             SocketManager.send(object) { (response) in
                 guard !response.isError() else {
                     // TODO: Logging or default behaviour on fails
@@ -64,8 +63,7 @@ extension AuthManager {
             }
         }
     }
-    
-    
+
     /**
         This method authenticates the user with email and password.
  
@@ -85,7 +83,7 @@ extension AuthManager {
                 ],
                 "password": [
                     "digest": password.sha256(),
-                    "algorithm":"sha-256"
+                    "algorithm": "sha-256"
                 ]
             ]]
         ] as [String : Any]
@@ -102,42 +100,41 @@ extension AuthManager {
             let auth = Auth()
             auth.lastSubscriptionFetch = nil
             auth.lastAccess = Date()
-            auth.serverURL = response.socket!.currentURL.absoluteString
+            auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
             auth.token = result["result"]["token"].string
             auth.userId = result["result"]["id"].string
 
             if let date = result["result"]["tokenExpires"]["$date"].double {
                 auth.tokenExpires = Date.dateFromInterval(date)
             }
-            
+
             Realm.update(auth)
             completion(response)
         }
     }
-    
+
     static func updatePublicSettings(_ auth: Auth, completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
         ] as [String : Any]
-        
+
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
                 // TODO: Logging or default behaviour on fails
                 completion(response)
                 return
             }
-            
-            Realm.execute({ (realm) in
+
+            Realm.execute { realm in
                 let settings = auth.settings ?? AuthSettings()
                 settings.update(response.result["result"])
                 auth.settings = settings
 
                 realm.add([settings, auth], update: true)
-            })
-        
+            }
+
             completion(response)
         }
     }
-    
 }

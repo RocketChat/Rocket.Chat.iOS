@@ -11,7 +11,7 @@ import XCTest
 @testable import Rocket_Chat
 
 class NSURLExtensionSpec: XCTestCase {
-    
+
     func testSocketURLComponents() {
         let tests = [
             "http://demo.rocket.chat/",
@@ -21,14 +21,14 @@ class NSURLExtensionSpec: XCTestCase {
             "http://foo/websocket",
             "http://127.0.0.1/websocket"
         ]
-        
+
         for test in tests {
             let url = URL(string: test)
             let socketURL = url?.socketURL()
-            
+
             XCTAssertEqual(socketURL?.scheme, "wss")
             XCTAssertTrue(socketURL?.pathComponents.contains("websocket") ?? false)
         }
     }
-    
+
 }

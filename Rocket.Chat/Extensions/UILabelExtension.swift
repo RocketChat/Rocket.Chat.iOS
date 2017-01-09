@@ -8,9 +8,8 @@
 
 import UIKit
 
-
 extension UILabel {
-    
+
     static func heightForView(_ text: String, font: UIFont, width: CGFloat) -> CGFloat {
         let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
@@ -20,5 +19,4 @@ extension UILabel {
         label.sizeToFit()
         return label.frame.height
     }
-    
 }

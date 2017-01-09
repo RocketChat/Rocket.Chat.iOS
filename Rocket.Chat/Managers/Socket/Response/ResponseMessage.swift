@@ -6,7 +6,6 @@
 //  Copyright © 2016 Rocket.Chat. All rights reserved.
 //
 
-
 enum ResponseMessage: String {
     case Connected = "connected"
     case Error = "error"
