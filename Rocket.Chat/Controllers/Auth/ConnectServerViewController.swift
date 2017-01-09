@@ -9,30 +9,30 @@
 import UIKit
 import SwiftyJSON
 
-class ConnectServerViewController: BaseViewController {
+final class ConnectServerViewController: BaseViewController {
 
     internal let defaultURL = "https://demo.rocket.chat"
     internal var connecting = false
     internal var serverURL: URL!
-    
+
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldServerURL: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let nav = navigationController as! BaseNavigationController
-        nav.setTransparentTheme()
-        nav.navigationBar.barStyle = .black
-
         textFieldServerURL.placeholder = defaultURL
+
+        if let nav = navigationController as? BaseNavigationController {
+            nav.setTransparentTheme()
+            nav.navigationBar.barStyle = .black
+        }
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(keyboardWillShow(_:)),
@@ -46,93 +46,88 @@ class ConnectServerViewController: BaseViewController {
             name: NSNotification.Name.UIKeyboardWillHide,
             object: nil
         )
-        
+
         textFieldServerURL.becomeFirstResponder()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         NotificationCenter.default.removeObserver(self)
     }
-    
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "Auth" {
-            let controller = segue.destination as! AuthViewController
+        if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
             controller.serverURL = serverURL
         }
     }
-    
-    
+
     // MARK: Keyboard Handlers
-    
     override func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
             visibleViewBottomConstraint.constant = keyboardSize.height
         }
     }
-    
+
     override func keyboardWillHide(_ notification: Notification) {
         visibleViewBottomConstraint.constant = 0
     }
-    
-    
+
     // MARK: IBAction
-    
     func alertInvalidURL() {
         let alert = UIAlertController(
             title: localizedString("alert.connection.invalid_url.title"),
             message: localizedString("alert.connection.invalid_url.message"),
             preferredStyle: .alert
         )
-        
+
         alert.addAction(UIAlertAction(title: localizedString("global.ok"), style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-    
+
     func connect() {
-        var text = textFieldServerURL.text!
+        var text = textFieldServerURL.text ?? ""
         if text.characters.count == 0 {
             text = defaultURL
         }
-        
+
         guard let url = URL(string: text) else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
         guard let validateURL = url.validateURL() else { return alertInvalidURL() }
-        
+
         connecting = true
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
-        
+
         serverURL = socketURL
-        
-        validate(url: validateURL) { [unowned self] (result, error) in
+
+        validate(url: validateURL) { [weak self] (_, error) in
             guard !error else {
                 DispatchQueue.main.async {
-                    self.connecting = false
-                    self.textFieldServerURL.alpha = 1
-                    self.activityIndicator.stopAnimating()
+                    self?.connecting = false
+                    self?.textFieldServerURL.alpha = 1
+                    self?.activityIndicator.stopAnimating()
                 }
 
                 return
             }
-            
-            SocketManager.connect(socketURL) { (socket, connected) in
+
+            SocketManager.connect(socketURL) { (_, connected) in
                 if connected {
-                    self.performSegue(withIdentifier: "Auth", sender: nil)
+                    self?.performSegue(withIdentifier: "Auth", sender: nil)
                 }
-        
-                self.connecting = false
-                self.textFieldServerURL.alpha = 1
-                self.activityIndicator.stopAnimating()
+
+                self?.connecting = false
+                self?.textFieldServerURL.alpha = 1
+                self?.activityIndicator.stopAnimating()
             }
         }
     }
-    
+
     func validate(url: URL, completion: @escaping RequestCompletion) {
         let request = URLRequest(url: url)
         let session = URLSession.shared
-        
-        let task = session.dataTask(with: request, completionHandler: {data, response, error -> Void in
+
+        let task = session.dataTask(with: request, completionHandler: { (data, _, _) in
             if let data = data {
                 let json = JSON(data: data)
                 Log.debug(json.rawString())
@@ -140,28 +135,27 @@ class ConnectServerViewController: BaseViewController {
                 guard json["version"].string != nil else {
                     return completion(nil, true)
                 }
-                
+
                 completion(json, false)
             } else {
                 completion(nil, true)
             }
         })
-    
+
         task.resume()
     }
-    
+
 }
 
-
 extension ConnectServerViewController: UITextFieldDelegate {
-    
+
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         return !connecting
     }
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         connect()
         return true
     }
-    
+
 }

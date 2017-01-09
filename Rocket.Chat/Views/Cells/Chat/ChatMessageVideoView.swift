@@ -10,20 +10,20 @@ import UIKit
 import SDWebImage
 import AVFoundation
 
-protocol ChatMessageVideoViewProtocol {
+protocol ChatMessageVideoViewProtocol: class {
     func openVideoFromCell(attachment: Attachment)
 }
 
-class ChatMessageVideoView: BaseView {
+final class ChatMessageVideoView: BaseView {
     static let defaultHeight = CGFloat(250)
 
-    var delegate: ChatMessageVideoViewProtocol?
+    weak var delegate: ChatMessageVideoViewProtocol?
     var attachment: Attachment! {
         didSet {
             updateMessageInformation()
         }
     }
-    
+
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var imageViewPreview: UIImageView! {
         didSet {
@@ -33,12 +33,12 @@ class ChatMessageVideoView: BaseView {
 
     @IBOutlet weak var buttonPlay: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
+
     fileprivate func updateMessageInformation() {
         buttonPlay.isHidden = true
         activityIndicator.startAnimating()
         labelTitle.text = attachment.title
-        
+
         guard let videoURL = attachment.fullVideoURL() else { return }
         guard let thumbURL = attachment.videoThumbPath else { return }
 
@@ -59,7 +59,7 @@ class ChatMessageVideoView: BaseView {
 
             if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
                 let thumbnail = UIImage(cgImage:imageRef)
-        
+
                 DispatchQueue.main.async {
                     try? UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)
 
@@ -70,7 +70,7 @@ class ChatMessageVideoView: BaseView {
             }
         }
     }
-    
+
     @IBAction func buttonPlayDidPressed(_ sender: Any) {
         delegate?.openVideoFromCell(attachment: attachment)
     }

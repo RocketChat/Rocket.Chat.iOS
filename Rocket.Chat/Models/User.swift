@@ -11,13 +11,10 @@ import RealmSwift
 import SwiftyJSON
 
 enum UserStatus: String {
-    case offline = "offline"
-    case online = "online"
-    case busy = "busy"
-    case away = "away"
+    case offline, online, busy, away
 }
 
-class User: BaseModel {
+final class User: BaseModel {
     dynamic var username: String?
     dynamic var name: String?
     var emails = List<Email>()
@@ -28,18 +25,17 @@ class User: BaseModel {
         set { privateStatus = newValue.rawValue }
     }
 
-    
     // MARK: ModelMapping
-    
+
     override func update(_ dict: JSON) {
         if self.identifier == nil {
             self.identifier = dict["_id"].string
         }
-        
+
         if let username = dict["username"].string {
             self.username = username
         }
-        
+
         if let status = dict["status"].string {
             self.status = UserStatus(rawValue: status) ?? .offline
         }

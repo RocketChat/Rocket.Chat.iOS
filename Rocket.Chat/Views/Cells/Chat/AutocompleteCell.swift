@@ -8,11 +8,11 @@
 
 import UIKit
 
-class AutocompleteCell: UITableViewCell {
-    
+final class AutocompleteCell: UITableViewCell {
+
     static let minimumHeight = CGFloat(44)
     static let identifier = "AutocompleteCell"
-    
+
     @IBOutlet weak var imageViewIcon: UIImageView!
     @IBOutlet weak var avatarView: AvatarView! {
         didSet {
@@ -23,5 +23,5 @@ class AutocompleteCell: UITableViewCell {
     }
 
     @IBOutlet weak var labelTitle: UILabel!
-    
+
 }

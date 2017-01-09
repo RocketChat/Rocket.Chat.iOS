@@ -27,10 +27,10 @@ public extension NibLoadableView where Self: UIView {
         return String(describing: self).components(separatedBy: ".").last ?? ""
     }
 
-    static func instanceFromNib()-> UIView {
+    static func instanceFromNib() -> UIView {
         return instanceFromNibWithName(name: self.nibName)
     }
-    
+
     static func instanceFromNibWithName(name: String) -> UIView {
         return Bundle.main.loadNibNamed(name, owner: nil, options: nil)?.first as? UIView ?? UIView()
     }

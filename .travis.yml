@@ -2,9 +2,8 @@ language: objective-c
 osx_image: xcode8.2
 rvm: 2.2.2
 before_install:
-- |
-    gem install cocoapods -v '1.0.1' --no-rdoc --no-ri --no-document --quiet
-    gem install xcpretty -N --no-ri --no-rdoc
-    pod repo update 
+- ./Scripts/before_install.sh
+install:
+- ./Scripts/install_swiftlint.sh
 script:
 - ./Scripts/build.sh

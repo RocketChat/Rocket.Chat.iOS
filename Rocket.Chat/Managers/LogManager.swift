@@ -8,10 +8,9 @@
 
 import Foundation
 
-class Log {
-    
+final class Log {
     static func debug(_ text: String?) {
         NSLog(text ?? "")
     }
-    
+
 }

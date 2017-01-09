@@ -8,22 +8,22 @@
 
 import UIKit
 
-
 extension ChatViewController: SocketConnectionHandler {
-    
+
     func socketDidConnect(socket: SocketManager) {
         chatHeaderViewOffline?.removeFromSuperview()
         updateSubscriptionMessages()
         rightButton.isEnabled = true
     }
-    
+
     func socketDidDisconnect(socket: SocketManager) {
         chatHeaderViewOffline?.removeFromSuperview()
-        
-        let headerView = ChatHeaderViewOffline.instanceFromNib() as! ChatHeaderViewOffline
-        headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.frame.height)
-        view.addSubview(headerView)
-        chatHeaderViewOffline = headerView
+
+        if let headerView = ChatHeaderViewOffline.instanceFromNib() as? ChatHeaderViewOffline {
+            headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.frame.height)
+            view.addSubview(headerView)
+            chatHeaderViewOffline = headerView
+        }
     }
-    
+
 }

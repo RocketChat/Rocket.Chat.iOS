@@ -8,20 +8,20 @@
 
 import UIKit
 
-protocol SubscriptionSearchMoreViewDelegate {
+protocol SubscriptionSearchMoreViewDelegate: class {
     func buttonLoadMoreDidPressed()
 }
 
-class SubscriptionSearchMoreView: BaseView {
-    
-    var delegate: SubscriptionSearchMoreViewDelegate?
-    
+final class SubscriptionSearchMoreView: BaseView {
+
+    weak var delegate: SubscriptionSearchMoreViewDelegate?
+
     @IBOutlet weak var buttonLoadMore: UIButton! {
         didSet {
             buttonLoadMore.setTitle(localizedString("subscriptions.search.load_more_results"), for: .normal)
         }
     }
-    
+
     @IBAction func buttonLoadMoreDidPressed(_ sender: Any) {
         delegate?.buttonLoadMoreDidPressed()
     }
