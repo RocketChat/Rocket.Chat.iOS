@@ -28,4 +28,4 @@ In case you're interested in playing around with the code or giving something ba
 
 ### Code style
 
-We use (swiftlint)[https://github.com/realm/SwiftLint#installation] to enforce code style and best practices.
+We use [swiftlint](https://github.com/realm/SwiftLint#installation) to enforce code style and best practices.
