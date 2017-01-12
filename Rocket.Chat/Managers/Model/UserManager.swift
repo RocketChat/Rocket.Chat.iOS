@@ -19,4 +19,5 @@ struct UserManager {
 
         SocketManager.send(request) { _ in }
     }
+
 }

@@ -49,4 +49,5 @@ extension Date {
         let comp: DateComponents = (calendar as NSCalendar).components(.weekday, from: self)
         return comp.weekday ?? -1
     }
+
 }

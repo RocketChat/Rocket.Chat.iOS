@@ -14,7 +14,11 @@ protocol LauncherProtocol {
 
 final class Launcher: LauncherProtocol {
     private lazy var launchers: [LauncherProtocol] = {
-        return [PersistencyCoordinator(), BugTrackingCoordinator()]
+        return [
+            PersistencyCoordinator(),
+            BugTrackingCoordinator(),
+            UserCoordinator()
+        ]
     }()
 
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
