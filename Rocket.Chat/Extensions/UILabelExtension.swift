@@ -19,4 +19,5 @@ extension UILabel {
         label.sizeToFit()
         return label.frame.height
     }
+    
 }
