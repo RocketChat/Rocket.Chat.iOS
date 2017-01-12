@@ -235,8 +235,19 @@ final class ChatViewController: SLKTextViewController {
     internal func updateSubscriptionMessages() {
         isRequestingHistory = true
 
+        scrollToBottom()
         messages = subscription.fetchMessages()
         appendMessages(messages: Array(messages))
+
+        DispatchQueue.main.async { [weak self] in
+            guard let messages = self?.messages else { return }
+
+            if messages.count > 0 {
+                self?.activityIndicator.stopAnimating()
+            }
+
+            self?.scrollToBottom()
+        }
 
         messagesToken = messages.addNotificationBlock { [weak self] _ in
             guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
@@ -246,10 +257,11 @@ final class ChatViewController: SLKTextViewController {
         }
 
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] _ in
-            DispatchQueue.main.async {
-                guard let messages = self?.subscription.fetchMessages() else { return }
+            guard let messages = self?.subscription.fetchMessages() else { return }
 
-                self?.appendMessages(messages: Array(messages))
+            self?.appendMessages(messages: Array(messages))
+
+            DispatchQueue.main.async {
                 self?.scrollToBottom()
                 self?.activityIndicator.stopAnimating()
             }
@@ -267,15 +279,12 @@ final class ChatViewController: SLKTextViewController {
 
         isRequestingHistory = true
         MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] newMessages in
-            DispatchQueue.main.async {
-                self?.appendMessages(messages: newMessages)
-            }
-
+            self?.appendMessages(messages: newMessages, updateScrollPosition: true)
             self?.isRequestingHistory = false
         }
     }
 
-    fileprivate func appendMessages(messages: [Message]) {
+    fileprivate func appendMessages(messages: [Message], updateScrollPosition: Bool = false) {
         guard let collectionView = self.collectionView else { return }
 
         var objs: [ChatData] = []
@@ -315,14 +324,19 @@ final class ChatViewController: SLKTextViewController {
         let offsetY = collectionView.contentOffset.y
         let bottomOffset = contentHeight - offsetY
 
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        collectionView.performBatchUpdates({
-            collectionView.insertItems(at: indexPaths)
-        }, completion: { _ in
-            collectionView.contentOffset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
-            CATransaction.commit()
-        })
+        DispatchQueue.main.async {
+            CATransaction.begin()
+            CATransaction.setDisableActions(true)
+            collectionView.performBatchUpdates({
+                collectionView.insertItems(at: indexPaths)
+            }, completion: { _ in
+                if updateScrollPosition {
+                    collectionView.contentOffset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
+                }
+
+                CATransaction.commit()
+            })
+        }
     }
 
     fileprivate func showChatPreviewModeView() {
