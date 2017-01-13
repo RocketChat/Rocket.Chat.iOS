@@ -10,18 +10,15 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-protocol ModelMapping {
-    func update(_ dict: JSON)
-}
+class BaseModel: Object {
+    var mapping: ModelMapping?
+    var handler: ModelHandler?
 
-class BaseModel: Object, ModelMapping {
     dynamic var identifier: String?
 
     override static func primaryKey() -> String? {
         return "identifier"
     }
-
-    // MARK: ModelMapping
 
     convenience init(_ identifier: String) {
         self.init()
@@ -29,8 +26,6 @@ class BaseModel: Object, ModelMapping {
 
     convenience init(dict: JSON) {
         self.init()
-        self.update(dict)
+        self.mapping?.map(dict)
     }
-
-    func update(_ dict: JSON) {}
 }
