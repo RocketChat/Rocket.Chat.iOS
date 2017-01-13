@@ -28,16 +28,6 @@ final class User: BaseModel {
     // MARK: ModelMapping
 
     override func update(_ dict: JSON) {
-        if self.identifier == nil {
-            self.identifier = dict["_id"].string
-        }
-
-        if let username = dict["username"].string {
-            self.username = username
-        }
-
-        if let status = dict["status"].string {
-            self.status = UserStatus(rawValue: status) ?? .offline
-        }
+        
     }
 }
