@@ -11,8 +11,6 @@ import SwiftyJSON
 import RealmSwift
 
 extension User: ModelHandler {
-    typealias Model = User
-
     func add(_ values: JSON) {
         map(values)
     }
