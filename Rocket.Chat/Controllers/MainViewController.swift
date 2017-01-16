@@ -27,7 +27,7 @@ final class MainViewController: BaseViewController {
 
         if let auth = AuthManager.isAuthenticated() {
             labelAuthenticationStatus.text = "Logging in..."
-            buttonConnect.isEnabled = false
+            buttonConnect.isEnabled = true
 
             AuthManager.resume(auth, completion: { [weak self] response in
                 guard !response.isError() else {
