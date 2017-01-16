@@ -10,18 +10,18 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-struct UserModelHandler: ModelHandler {
+class UserModelHandler: BaseModelHandler {
     typealias Model = User
 
-    func add(_ object: User, values: JSON) {
+    static func add(_ object: User, values: JSON) {
         object.update(values)
     }
 
-    func update(_ object: User, values: JSON) {
+    static func update(_ object: User, values: JSON) {
         object.update(values)
     }
 
-    func remove(_ object: User, values: JSON) {
+    static func remove(_ object: User, values: JSON) {
         Realm.execute({ (realm) in
             object.update(values)
             object.status = .offline

@@ -11,8 +11,8 @@ import RealmSwift
 import SwiftyJSON
 
 class BaseModel: Object {
-    var mapping: ModelMapping?
-    var handler: ModelHandler?
+    var mapping: BaseModelMapping { return BaseModelMapping() }
+    var handler: BaseModelHandler { return BaseModelHandler() }
 
     dynamic var identifier: String?
 
@@ -26,6 +26,10 @@ class BaseModel: Object {
 
     convenience init(dict: JSON) {
         self.init()
-        self.mapping?.map(dict)
+        mapping.map(self, values: dict)
+    }
+
+    func update(dict: JSON) {
+        mapping.map(self, values: dict)
     }
 }

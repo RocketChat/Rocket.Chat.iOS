@@ -9,10 +9,10 @@
 import Foundation
 import SwiftyJSON
 
-struct UserModelMapping: ModelMapping {
+class UserModelMapping: BaseModelMapping {
     typealias Model = User
 
-    func map(_ instance: User, values: JSON) {
+    static func map(_ instance: User, values: JSON) {
         if instance.identifier == nil {
             instance.identifier = values["_id"].string
         }

@@ -77,19 +77,9 @@ extension SocketManager {
             let fields = result.result["fields"]
 
             switch collection {
-            case "users": User.
-            case "subscriptions":
-                if msg == .Added || msg == .Changed {
-                    let object = Realm.getOrCreate(Subscription.self, primaryKey: identifier, values: fields)
-                    Realm.update(object)
-                }
-
-                if msg == .Removed {
-                    let object = Realm.getOrCreate(Subscription.self, primaryKey: identifier, values: fields)
-                    Realm.delete(object)
-                }
-
-            default: break
+                case "users": break
+                case "subscriptions": break
+                default: break
             }
         }
     }
