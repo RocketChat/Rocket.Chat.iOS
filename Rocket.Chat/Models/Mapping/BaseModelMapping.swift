@@ -16,4 +16,3 @@ class BaseModelMapping: ModelMapping {
         assertionFailure("This method must be implemented by a subclass.")
     }
 }
-

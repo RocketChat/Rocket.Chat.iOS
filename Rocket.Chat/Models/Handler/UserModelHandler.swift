@@ -13,15 +13,15 @@ import RealmSwift
 class UserModelHandler: BaseModelHandler {
     typealias Model = User
 
-    static func add(_ object: User, values: JSON) {
+    func add(_ object: User, values: JSON) {
         object.update(values)
     }
 
-    static func update(_ object: User, values: JSON) {
+    func update(_ object: User, values: JSON) {
         object.update(values)
     }
 
-    static func remove(_ object: User, values: JSON) {
+    func remove(_ object: User, values: JSON) {
         Realm.execute({ (realm) in
             object.update(values)
             object.status = .offline
