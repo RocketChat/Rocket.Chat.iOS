@@ -39,7 +39,7 @@ extension MessageManager {
             let list = response.result["result"]["messages"].array
 
             list?.forEach { obj in
-                let message = Message(dict: obj)
+                let message = Message.getOrCreate(values: obj)
                 message.subscription = subscription
                 messages.append(message)
             }
@@ -61,7 +61,7 @@ extension MessageManager {
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             let object = response.result["fields"]["args"][0]
-            let message = Message(dict: object)
+            let message = Message.getOrCreate(values: object)
             message.subscription = subscription
 
             Realm.update(message)
