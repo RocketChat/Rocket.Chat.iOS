@@ -11,8 +11,5 @@ import RealmSwift
 import SwiftyJSON
 
 final class AuthSettings: BaseModel {
-    override var mapping: BaseModelMapping { return AuthSettingsModelMapping() }
-
-    // MARK: Fields
     dynamic var siteURL: String?
 }

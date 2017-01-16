@@ -9,20 +9,18 @@
 import Foundation
 import SwiftyJSON
 
-class UserModelMapping: BaseModelMapping {
-    typealias Model = User
-
-    func map(_ instance: User, values: JSON) {
-        if instance.identifier == nil {
-            instance.identifier = values["_id"].string
+extension User: ModelMappeable {
+    func map(_ values: JSON) {
+        if self.identifier == nil {
+            self.identifier = values["_id"].string
         }
 
         if let username = values["username"].string {
-            instance.username = username
+            self.username = username
         }
 
         if let status = values["status"].string {
-            instance.status = UserStatus(rawValue: status) ?? .offline
+            self.status = UserStatus(rawValue: status) ?? .offline
         }
     }
 }

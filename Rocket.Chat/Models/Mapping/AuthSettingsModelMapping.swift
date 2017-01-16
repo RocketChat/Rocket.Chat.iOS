@@ -9,20 +9,14 @@
 import Foundation
 import SwiftyJSON
 
-class AuthSettingsModelMapping: BaseModelMapping {
-    typealias Model = AuthSettings
-
-    // MARK: ModelMapping
-
-    func map(_ instance: AuthSettings, values: JSON) {
-        if instance.identifier == nil {
-            instance.identifier = String.random()
+extension AuthSettings: ModelMappeable {
+    func map(_ values: JSON) {
+        if self.identifier == nil {
+            self.identifier = String.random()
         }
 
-        instance.siteURL = objectForKey(object: values, key: "Site_Url")?.string
+        self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
     }
-
-    // MARK: Helpers
 
     fileprivate func objectForKey(object: JSON, key: String) -> JSON? {
         return object.array?.filter { obj in

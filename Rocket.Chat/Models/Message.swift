@@ -19,9 +19,6 @@ enum MessageType {
 }
 
 final class Message: BaseModel {
-    override var mapping: BaseModelMapping { return MessageModelMapping() }
-
-    // MARK: Fields
     dynamic var subscription: Subscription!
     dynamic var rid = ""
     dynamic var createdAt: Date?

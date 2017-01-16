@@ -9,40 +9,34 @@
 import Foundation
 import SwiftyJSON
 
-class AttachmentModelMapping: BaseModelMapping {
-    typealias Model = Attachment
-
-    // MARK: ModelMapping
-
-    func map(_ instance: Attachment, values: JSON) {
-        if instance.identifier == nil {
-            instance.identifier = String.random(30)
+extension Attachment: ModelMappeable {
+    func map(_ values: JSON) {
+        if self.identifier == nil {
+            self.identifier = String.random(30)
         }
 
         if let title = values["title"].string {
-            instance.title = title
+            self.title = title
         }
 
         if let titleLink = values["title_link"].string {
-            instance.titleLink = titleLink
+            self.titleLink = titleLink
         }
 
-        instance.titleLinkDownload = values["title_link_download"].bool ?? true
+        self.titleLinkDownload = values["title_link_download"].bool ?? true
 
-        instance.imageURL = encode(url: values["image_url"].string)
-        instance.imageType = values["image_type"].string
-        instance.imageSize = values["image_size"].int ?? 0
+        self.imageURL = encode(url: values["image_url"].string)
+        self.imageType = values["image_type"].string
+        self.imageSize = values["image_size"].int ?? 0
 
-        instance.audioURL = encode(url: values["audio_url"].string)
-        instance.audioType = values["audio_type"].string
-        instance.audioSize = values["audio_size"].int ?? 0
+        self.audioURL = encode(url: values["audio_url"].string)
+        self.audioType = values["audio_type"].string
+        self.audioSize = values["audio_size"].int ?? 0
 
-        instance.videoURL = encode(url: values["video_url"].string)
-        instance.videoType = values["video_type"].string
-        instance.videoSize = values["video_size"].int ?? 0
+        self.videoURL = encode(url: values["video_url"].string)
+        self.videoType = values["video_type"].string
+        self.videoSize = values["video_size"].int ?? 0
     }
-
-    // MARK: Helpers
 
     fileprivate func encode(url: String?) -> String? {
         guard let url = url else { return nil }

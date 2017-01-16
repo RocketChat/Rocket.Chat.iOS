@@ -1,5 +1,5 @@
 //
-//  ModelMapping.swift
+//  ModelMappeable.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Kellermann Streit on 13/01/17.
@@ -9,8 +9,6 @@
 import Foundation
 import SwiftyJSON
 
-protocol ModelMapping {
-    associatedtype Model
-
-    func map(_ instance: Model, values: JSON)
+protocol ModelMappeable {
+    func map(_ values: JSON)
 }

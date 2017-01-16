@@ -10,18 +10,18 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-class SubscriptionModelHandler: BaseModelHandler {
+extension Subscription: ModelHandler {
     typealias Model = Subscription
 
-    func add(_ object: Subscription, values: JSON) {
-        object.update(values)
+    func add(_ values: JSON) {
+        map(values)
     }
 
-    func update(_ object: Subscription, values: JSON) {
-        object.update(values)
+    func update(_ values: JSON) {
+        map(values)
     }
 
-    func remove(_ object: Subscription, values: JSON) {
-        Realm.delete(object)
+    func remove(_ values: JSON) {
+        Realm.delete(self)
     }
 }
