@@ -12,7 +12,7 @@ import SwiftyJSON
 class UserModelMapping: BaseModelMapping {
     typealias Model = User
 
-    static func map(_ instance: User, values: JSON) {
+    func map(_ instance: User, values: JSON) {
         if instance.identifier == nil {
             instance.identifier = values["_id"].string
         }

@@ -21,6 +21,11 @@
 		4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */; };
 		4151B4501E2D03B800F8AA1B /* BaseModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B44F1E2D03B800F8AA1B /* BaseModelHandler.swift */; };
 		4151B4521E2D03D400F8AA1B /* BaseModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4511E2D03D400F8AA1B /* BaseModelMapping.swift */; };
+		4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4531E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift */; };
+		4151B4561E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */; };
+		4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4571E2D1D2E00F8AA1B /* MessageModelMapping.swift */; };
+		4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4591E2D1DD400F8AA1B /* AttachmentModelMapping.swift */; };
+		4151B45C1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B45B1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift */; };
 		41552F661D30308C0081438D /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F651D30308C0081438D /* AuthManager.swift */; };
 		41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41552F671D3035D80081438D /* SocketManagerSpec.swift */; };
 		415801951D303B640099E71B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415801941D303B640099E71B /* MainViewController.swift */; };
@@ -143,6 +148,11 @@
 		4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserModelHandler.swift; path = Models/Handler/UserModelHandler.swift; sourceTree = "<group>"; };
 		4151B44F1E2D03B800F8AA1B /* BaseModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseModelHandler.swift; path = Models/Handler/BaseModelHandler.swift; sourceTree = "<group>"; };
 		4151B4511E2D03D400F8AA1B /* BaseModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseModelMapping.swift; path = Models/Mapping/BaseModelMapping.swift; sourceTree = "<group>"; };
+		4151B4531E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionModelHandler.swift; path = Models/Handler/SubscriptionModelHandler.swift; sourceTree = "<group>"; };
+		4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionModelMapping.swift; path = Models/Mapping/SubscriptionModelMapping.swift; sourceTree = "<group>"; };
+		4151B4571E2D1D2E00F8AA1B /* MessageModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageModelMapping.swift; path = Models/Mapping/MessageModelMapping.swift; sourceTree = "<group>"; };
+		4151B4591E2D1DD400F8AA1B /* AttachmentModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttachmentModelMapping.swift; path = Models/Mapping/AttachmentModelMapping.swift; sourceTree = "<group>"; };
+		4151B45B1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettingsModelMapping.swift; path = Models/Mapping/AuthSettingsModelMapping.swift; sourceTree = "<group>"; };
 		41552F651D30308C0081438D /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthManager.swift; path = Managers/Model/AuthManager.swift; sourceTree = "<group>"; };
 		41552F671D3035D80081438D /* SocketManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketManagerSpec.swift; path = Managers/SocketManagerSpec.swift; sourceTree = "<group>"; };
 		415801941D303B640099E71B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainViewController.swift; path = Controllers/MainViewController.swift; sourceTree = "<group>"; };
@@ -510,7 +520,11 @@
 			isa = PBXGroup;
 			children = (
 				4151B4511E2D03D400F8AA1B /* BaseModelMapping.swift */,
+				4151B4591E2D1DD400F8AA1B /* AttachmentModelMapping.swift */,
+				4151B45B1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift */,
 				41BD37E01E290F2900CBC4C2 /* UserModelMapping.swift */,
+				4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */,
+				4151B4571E2D1D2E00F8AA1B /* MessageModelMapping.swift */,
 			);
 			name = Mapping;
 			sourceTree = "<group>";
@@ -520,6 +534,7 @@
 			children = (
 				4151B44F1E2D03B800F8AA1B /* BaseModelHandler.swift */,
 				4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */,
+				4151B4531E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift */,
 			);
 			name = Handler;
 			sourceTree = "<group>";
@@ -1044,6 +1059,7 @@
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
 				418C4DC61DC4C07800ABED4C /* SubscriptionSectionView.swift in Sources */,
 				415801951D303B640099E71B /* MainViewController.swift in Sources */,
+				4151B4561E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
 				41BD37D91E290D8600CBC4C2 /* ModelMapping.swift in Sources */,
@@ -1053,6 +1069,7 @@
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
+				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
 				D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */,
 				419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */,
@@ -1074,6 +1091,7 @@
 				41A79C131D2F09F200A1968E /* Auth.swift in Sources */,
 				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
 				41DAE93E1D318F350098E068 /* Subscription.swift in Sources */,
+				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
 				41BD37E11E290F2900CBC4C2 /* UserModelMapping.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
 				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
@@ -1081,6 +1099,7 @@
 				41D5BC2F1DAFBEEB009A493A /* NibLoadableProtocol.swift in Sources */,
 				41EE15821E05BF9600754D45 /* ChatControllerSocketConnectionHandler.swift in Sources */,
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
+				4151B45C1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift in Sources */,
 				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,
 				41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */,
 				419EAF291E26562E002C8DA5 /* UserCoordinator.swift in Sources */,
@@ -1104,6 +1123,7 @@
 				41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */,
 				41BD37DD1E290DDB00CBC4C2 /* BaseModel.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
+				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
