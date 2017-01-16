@@ -125,7 +125,7 @@ extension AuthManager {
 
             Realm.execute { realm in
                 let settings = auth.settings ?? AuthSettings()
-                settings.update(response.result["result"])
+                settings.map(response.result["result"])
                 auth.settings = settings
 
                 realm.add([settings, auth], update: true)

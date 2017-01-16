@@ -16,10 +16,7 @@ enum SubscriptionType: String {
     case group = "p"
 }
 
-final class Subscription: BaseModel {
-    override var mapping: BaseModelMapping { return SubscriptionModelMapping() }
-    override var handler: BaseModelHandler { return SubscriptionModelHandler() }
-
+class Subscription: BaseModel {
     dynamic var auth: Auth?
 
     fileprivate dynamic var privateType = SubscriptionType.channel.rawValue

@@ -10,10 +10,7 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-final class Attachment: BaseModel {
-    override var mapping: BaseModelMapping { return AttachmentModelMapping() }
-
-    // MARK: Fields
+class Attachment: BaseModel {
     var type: MessageType {
         if audioURL?.characters.count ?? 0 > 0 {
             return .audio

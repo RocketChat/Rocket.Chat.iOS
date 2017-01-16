@@ -10,48 +10,46 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-class MessageModelMapping: BaseModelMapping {
-    typealias Model = Message
-
-    func map(_ instance: Message, values: JSON) {
-        if instance.identifier == nil {
-            instance.identifier = values["_id"].string ?? ""
+extension Message: ModelMappeable {
+    func map(_ values: JSON) {
+        if self.identifier == nil {
+            self.identifier = values["_id"].string ?? ""
         }
 
-        instance.rid = values["rid"].string ?? ""
-        instance.text = values["msg"].string ?? ""
+        self.rid = values["rid"].string ?? ""
+        self.text = values["msg"].string ?? ""
 
         if let createdAt = values["ts"]["$date"].double {
-            instance.createdAt = Date.dateFromInterval(createdAt)
+            self.createdAt = Date.dateFromInterval(createdAt)
         }
 
         if let updatedAt = values["_updatedAt"]["$date"].double {
-            instance.updatedAt = Date.dateFromInterval(updatedAt)
+            self.updatedAt = Date.dateFromInterval(updatedAt)
         }
 
         if let userId = values["u"]["_id"].string {
-            instance.user = Realm.getOrCreate(User.self, primaryKey: userId, values: values["u"])
+            self.user = Realm.getOrCreate(User.self, primaryKey: userId, values: values["u"])
         }
 
         // Attachments
         if let attachments = values["attachments"].array {
-            instance.attachments = List()
+            self.attachments = List()
 
             for attachment in attachments {
                 let obj = Attachment()
-                obj.update(attachment)
-                instance.attachments.append(obj)
+                obj.map(attachment)
+                self.attachments.append(obj)
             }
         }
 
         // URLs
         if let urls = values["urls"].array {
-            instance.urls = List()
+            self.urls = List()
 
             for url in urls {
                 let obj = MessageURL()
-                obj.update(url)
-                instance.urls.append(obj)
+                obj.map(url)
+                self.urls.append(obj)
             }
         }
     }

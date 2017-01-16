@@ -10,22 +10,22 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-class UserModelHandler: BaseModelHandler {
+extension User: ModelHandler {
     typealias Model = User
 
-    func add(_ object: User, values: JSON) {
-        object.update(values)
+    func add(_ values: JSON) {
+        map(values)
     }
 
-    func update(_ object: User, values: JSON) {
-        object.update(values)
+    func update(_ values: JSON) {
+        map(values)
     }
 
-    func remove(_ object: User, values: JSON) {
+    func remove(_ values: JSON) {
         Realm.execute({ (realm) in
-            object.update(values)
-            object.status = .offline
-            realm.add(object, update: true)
+            self.map(values)
+            self.status = .offline
+            realm.add(self, update: true)
         })
     }
 }

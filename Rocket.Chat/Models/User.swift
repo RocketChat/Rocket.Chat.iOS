@@ -14,10 +14,7 @@ enum UserStatus: String {
     case offline, online, busy, away
 }
 
-final class User: BaseModel {
-    override var mapping: BaseModelMapping { return UserModelMapping() }
-    override var handler: BaseModelHandler { return UserModelHandler() }
-
+class User: BaseModel {
     dynamic var username: String?
     dynamic var name: String?
     var emails = List<Email>()
