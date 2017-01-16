@@ -10,13 +10,22 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+var executingRealmInstance: Realm?
+
 extension Realm {
 
     static func execute(_ completion: (Realm) -> Void) {
+        if let realm = executingRealmInstance {
+            completion(realm)
+            return
+        }
+
         guard let realm = try? Realm() else { return }
+        executingRealmInstance = realm
         try? realm.write {
             completion(realm)
         }
+        executingRealmInstance = nil
     }
 
     static func getOrCreate<T: BaseModel>(_ model: T.Type, primaryKey: String) -> T {
