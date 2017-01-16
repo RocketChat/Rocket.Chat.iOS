@@ -15,6 +15,9 @@ enum UserStatus: String {
 }
 
 final class User: BaseModel {
+    override var mapping: BaseModelMapping { return UserModelMapping() }
+    override var handler: BaseModelHandler { return UserModelHandler() }
+
     dynamic var username: String?
     dynamic var name: String?
     var emails = List<Email>()
@@ -23,11 +26,5 @@ final class User: BaseModel {
     var status: UserStatus {
         get { return UserStatus(rawValue: privateStatus) ?? UserStatus.offline }
         set { privateStatus = newValue.rawValue }
-    }
-
-    // MARK: ModelMapping
-
-    override func update(_ dict: JSON) {
-        
     }
 }
