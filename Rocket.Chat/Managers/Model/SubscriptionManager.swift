@@ -37,19 +37,19 @@ struct SubscriptionManager {
             let removed = response.result["result"]["remove"].array
 
             list?.forEach { obj in
-                let subscription = Subscription(dict: obj)
+                let subscription = Subscription.getOrCreate(values: obj)
                 subscription.auth = auth
                 subscriptions.append(subscription)
             }
 
             updated?.forEach { obj in
-                let subscription = Subscription(dict: obj)
+                let subscription = Subscription.getOrCreate(values: obj)
                 subscription.auth = auth
                 subscriptions.append(subscription)
             }
 
             removed?.forEach { obj in
-                let subscription = Subscription(dict: obj)
+                let subscription = Subscription.getOrCreate(values: obj)
                 subscription.auth = nil
                 subscriptions.append(subscription)
             }
@@ -80,11 +80,11 @@ struct SubscriptionManager {
             let object = response.result["fields"]["args"][1]
 
             if msg == "removed" {
-                let subscription = Subscription(dict: object)
+                let subscription = Subscription.getOrCreate(values: object)
                 subscription.auth = nil
                 Realm.update(subscription)
             } else {
-                let subscription = Subscription(dict: object)
+                let subscription = Subscription.getOrCreate(values: object)
                 subscription.auth = auth
                 Realm.update(subscription)
             }
@@ -111,13 +111,13 @@ struct SubscriptionManager {
             let users = response.result["result"]["users"].array
 
             rooms?.forEach { obj in
-                let subscription = Subscription(dict: obj)
+                let subscription = Subscription.getOrCreate(values: obj)
                 subscription.rid = subscription.identifier ?? ""
                 subscriptions.append(subscription)
             }
 
             users?.forEach { obj in
-                let user = User(dict: obj)
+                let user = User.getOrCreate(values: obj)
                 let subscription = Subscription()
                 subscription.identifier = user.identifier ?? ""
                 subscription.otherUserId = user.identifier

@@ -18,7 +18,7 @@ enum MessageType {
     case url
 }
 
-final class Message: BaseModel {
+class Message: BaseModel {
     dynamic var subscription: Subscription!
     dynamic var rid = ""
     dynamic var createdAt: Date?

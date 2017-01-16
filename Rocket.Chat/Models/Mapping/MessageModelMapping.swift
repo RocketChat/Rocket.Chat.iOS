@@ -27,8 +27,8 @@ extension Message: ModelMappeable {
             self.updatedAt = Date.dateFromInterval(updatedAt)
         }
 
-        if let userId = values["u"]["_id"].string {
-            self.user = Realm.getOrCreate(User.self, primaryKey: userId, values: values["u"])
+        if let _ = values["u"]["_id"].string {
+            self.user = User.getOrCreate(values: values["u"])
         }
 
         // Attachments

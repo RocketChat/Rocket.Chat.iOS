@@ -19,7 +19,7 @@ extension Realm {
         }
     }
 
-    static func getOrCreate<T: BaseModel>(_ model: T.Type, primaryKey: String, values: JSON) -> T {
+    static func getOrCreate<T: BaseModel>(_ model: T.Type, primaryKey: String) -> T {
         var object: T!
 
         self.execute { (realm) in
@@ -28,8 +28,6 @@ extension Realm {
             if object == nil {
                 object = T()
             }
-
-            object.update(values)
         }
 
         return object
