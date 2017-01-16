@@ -10,7 +10,9 @@ import Foundation
 import SwiftyJSON
 
 protocol ModelHandler {
-    func add(_ dict: JSON)
-    func update(_ dict: JSON)
-    func remove(_ dict: JSON)
+    associatedtype Model
+
+    func add(_ object: Model, values: JSON)
+    func update(_ object: Model, values: JSON)
+    func remove(_ object: Model, values: JSON)
 }
