@@ -14,11 +14,3 @@ protocol ModelMapping {
 
     func map(_ instance: Model, values: JSON)
 }
-
-class BaseModelMapping: ModelMapping {
-    typealias Model = BaseModel
-
-    func map(_ instance: BaseModel, values: JSON) {
-        // Do nothing
-    }
-}

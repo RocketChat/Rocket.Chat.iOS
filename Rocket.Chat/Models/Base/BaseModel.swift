@@ -29,7 +29,7 @@ class BaseModel: Object {
         mapping.map(self, values: dict)
     }
 
-    func update(dict: JSON) {
+    func update(_ dict: JSON) {
         mapping.map(self, values: dict)
     }
 }

@@ -16,19 +16,3 @@ protocol ModelHandler {
     func update(_ object: Model, values: JSON)
     func remove(_ object: Model, values: JSON)
 }
-
-class BaseModelHandler: ModelHandler {
-    typealias Model = BaseModel
-
-    func add(_ object: BaseModel, values: JSON) {
-        // Do nothing
-    }
-
-    func update(_ object: BaseModel, values: JSON) {
-        // Do nothing
-    }
-
-    func remove(_ object: BaseModel, values: JSON) {
-        // Do nothing
-    }
-}
