@@ -8,7 +8,6 @@
 
 import Foundation
 import Starscream
-import RealmSwift
 import SwiftyJSON
 import Bugsnag
 
@@ -77,8 +76,12 @@ extension SocketManager {
             let fields = result.result["fields"]
 
             switch collection {
-                case "users": break
-                case "subscriptions": break
+                case "users":
+                    User.handle(msg: msg, primaryKey: identifier, values: fields)
+                    break
+                case "subscriptions":
+                    Subscription.handle(msg: msg, primaryKey: identifier, values: fields)
+                    break
                 default: break
             }
         }

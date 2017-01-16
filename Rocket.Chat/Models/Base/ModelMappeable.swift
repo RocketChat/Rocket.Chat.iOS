@@ -9,18 +9,23 @@
 import Foundation
 import SwiftyJSON
 import RealmSwift
+import Realm
+
+public typealias UpdateBlock<T> = (_ object: T?) -> Void
 
 protocol ModelMappeable {
     func map(_ values: JSON)
 }
 
 extension ModelMappeable where Self: BaseModel {
-    static func getOrCreate(values: JSON) -> Self {
+    @discardableResult static func getOrCreate(values: JSON, updates: UpdateBlock<Self>?) -> Self {
         var object: Self!
 
-        Realm.execute { (realm) in
+        Realm.execute { (_) in
             if let primaryKey = values["_id"].string {
-                object = realm.object(ofType: Self.self, forPrimaryKey: primaryKey as AnyObject)
+                if let newObject = try? Realm().object(ofType: Self.self, forPrimaryKey: primaryKey as AnyObject) {
+                    object = newObject
+                }
             }
 
             if object == nil {
@@ -28,6 +33,7 @@ extension ModelMappeable where Self: BaseModel {
             }
 
             object.map(values)
+            updates?(object)
         }
 
         return object

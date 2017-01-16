@@ -28,7 +28,7 @@ extension Message: ModelMappeable {
         }
 
         if let _ = values["u"]["_id"].string {
-            self.user = User.getOrCreate(values: values["u"])
+            self.user = User.getOrCreate(values: values["u"], updates: nil)
         }
 
         // Attachments
