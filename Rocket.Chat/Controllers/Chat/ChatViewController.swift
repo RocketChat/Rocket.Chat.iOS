@@ -253,7 +253,7 @@ final class ChatViewController: SLKTextViewController {
             guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
             guard let messages = self?.subscription.fetchMessages() else { return }
 
-            self?.appendMessages(messages: Array(messages))
+            self?.appendMessages(messages: Array(messages), updateScrollPosition: true)
         }
 
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] _ in

@@ -46,6 +46,7 @@ extension MessageManager {
                 messages.append(message)
             }
 
+            Realm.update(messages)
             completion(Array(messages))
         }
     }
