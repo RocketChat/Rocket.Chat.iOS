@@ -14,7 +14,7 @@ class UserCoordinator: LauncherProtocol {
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey : Any]?) {
         turnAllUsersOffline()
     }
-    
+
     // This method is suppose to be called when the app starts. We want all
     // users to be offline, because when we subscribe to the API that returns
     // the active users, it will only return users that aren't offline.

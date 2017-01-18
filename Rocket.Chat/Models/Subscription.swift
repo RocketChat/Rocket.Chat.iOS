@@ -16,7 +16,7 @@ enum SubscriptionType: String {
     case group = "p"
 }
 
-final class Subscription: BaseModel {
+class Subscription: BaseModel {
     dynamic var auth: Auth?
 
     fileprivate dynamic var privateType = SubscriptionType.channel.rawValue
@@ -45,39 +45,9 @@ final class Subscription: BaseModel {
     }
 
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
-
-    // MARK: ModelMapping
-
-    override func update(_ dict: JSON) {
-        if self.identifier == nil {
-            self.identifier = dict["_id"].string ?? ""
-        }
-
-        self.rid = dict["rid"].string ?? ""
-        self.name = dict["name"].string ?? ""
-        self.unread = dict["unread"].int ?? 0
-        self.open = dict["open"].bool ?? false
-        self.alert = dict["alert"].bool ?? false
-        self.favorite = dict["f"].bool ?? false
-        self.privateType = dict["t"].string ?? SubscriptionType.channel.rawValue
-
-        if self.type == .directMessage {
-            let userId = dict["u"]["_id"].string ?? ""
-            self.otherUserId = rid.replacingOccurrences(of: userId, with: "")
-        }
-
-        if let createdAt = dict["ts"]["$date"].double {
-            self.createdAt = Date.dateFromInterval(createdAt)
-        }
-
-        if let lastSeen = dict["ls"]["$date"].double {
-            self.lastSeen = Date.dateFromInterval(lastSeen)
-        }
-    }
 }
 
 extension Subscription {
-
     func isValid() -> Bool {
         return self.rid.characters.count > 0
     }
