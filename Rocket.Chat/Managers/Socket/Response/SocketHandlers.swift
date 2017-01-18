@@ -8,7 +8,6 @@
 
 import Foundation
 import Starscream
-import RealmSwift
 import SwiftyJSON
 import Bugsnag
 
@@ -77,32 +76,13 @@ extension SocketManager {
             let fields = result.result["fields"]
 
             switch collection {
-            case "users":
-                if msg == .Added || msg == .Changed {
-                    let user = Realm.getOrCreate(User.self, primaryKey: identifier, values: fields)
-                    Realm.update(user)
-                }
-
-                if msg == .Removed {
-                    let user = Realm.getOrCreate(User.self, primaryKey: identifier, values: fields)
-
-                    Realm.execute({ (realm) in
-                        user.status = .offline
-                        realm.add(user, update: true)
-                    })
-                }
-            case "subscriptions":
-                if msg == .Added || msg == .Changed {
-                    let object = Realm.getOrCreate(Subscription.self, primaryKey: identifier, values: fields)
-                    Realm.update(object)
-                }
-
-                if msg == .Removed {
-                    let object = Realm.getOrCreate(Subscription.self, primaryKey: identifier, values: fields)
-                    Realm.delete(object)
-                }
-
-            default: break
+                case "users":
+                    User.handle(msg: msg, primaryKey: identifier, values: fields)
+                    break
+                case "subscriptions":
+                    Subscription.handle(msg: msg, primaryKey: identifier, values: fields)
+                    break
+                default: break
             }
         }
     }

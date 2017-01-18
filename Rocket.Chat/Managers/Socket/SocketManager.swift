@@ -70,8 +70,6 @@ class SocketManager {
             }
         } else {
             Log.debug("JSON invalid: \(json)")
-
-            // TODO: JSON is invalid
         }
     }
 
@@ -138,7 +136,6 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidConnect(socket: WebSocket) {
         Log.debug("Socket (\(socket)) did connect")
 
-        // TODO: We must review this info
         let object = [
             "msg": "connect",
             "version": "1",

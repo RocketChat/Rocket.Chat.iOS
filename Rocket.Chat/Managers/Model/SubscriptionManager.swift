@@ -36,21 +36,27 @@ struct SubscriptionManager {
             let updated = response.result["result"]["update"].array
             let removed = response.result["result"]["remove"].array
 
-            list?.forEach { obj in
-                let subscription = Subscription(dict: obj)
-                subscription.auth = auth
+            list?.forEach { object in
+                let subscription = Subscription.getOrCreate(values: object, updates: { (object) in
+                    object?.auth = auth
+                })
+
                 subscriptions.append(subscription)
             }
 
-            updated?.forEach { obj in
-                let subscription = Subscription(dict: obj)
-                subscription.auth = auth
+            updated?.forEach { object in
+                let subscription = Subscription.getOrCreate(values: object, updates: { (object) in
+                    object?.auth = auth
+                })
+
                 subscriptions.append(subscription)
             }
 
-            removed?.forEach { obj in
-                let subscription = Subscription(dict: obj)
-                subscription.auth = nil
+            removed?.forEach { object in
+                let subscription = Subscription.getOrCreate(values: object, updates: { (object) in
+                    object?.auth = nil
+                })
+
                 subscriptions.append(subscription)
             }
 
@@ -79,15 +85,9 @@ struct SubscriptionManager {
             let msg = response.result["fields"]["args"][0]
             let object = response.result["fields"]["args"][1]
 
-            if msg == "removed" {
-                let subscription = Subscription(dict: object)
-                subscription.auth = nil
-                Realm.update(subscription)
-            } else {
-                let subscription = Subscription(dict: object)
-                subscription.auth = auth
-                Realm.update(subscription)
-            }
+            Subscription.getOrCreate(values: object, updates: { (object) in
+                object?.auth = msg == "removed" ? nil : auth
+            })
         }
     }
 
@@ -110,14 +110,16 @@ struct SubscriptionManager {
             let rooms = response.result["result"]["rooms"].array
             let users = response.result["result"]["users"].array
 
-            rooms?.forEach { obj in
-                let subscription = Subscription(dict: obj)
-                subscription.rid = subscription.identifier ?? ""
+            rooms?.forEach { object in
+                let subscription = Subscription.getOrCreate(values: object, updates: { (object) in
+                    object?.rid = object?.identifier ?? ""
+                })
+
                 subscriptions.append(subscription)
             }
 
-            users?.forEach { obj in
-                let user = User(dict: obj)
+            users?.forEach { object in
+                let user = User.getOrCreate(values: object, updates: nil)
                 let subscription = Subscription()
                 subscription.identifier = user.identifier ?? ""
                 subscription.otherUserId = user.identifier
