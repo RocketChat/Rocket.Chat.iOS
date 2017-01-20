@@ -85,9 +85,13 @@ struct SubscriptionManager {
             let msg = response.result["fields"]["args"][0]
             let object = response.result["fields"]["args"][1]
 
-            Subscription.getOrCreate(values: object, updates: { (object) in
+            let subscription = Subscription.getOrCreate(values: object, updates: { (object) in
                 object?.auth = msg == "removed" ? nil : auth
             })
+
+            Realm.execute { realm in
+                realm.add(subscription, update: true)
+            }
         }
     }
 
