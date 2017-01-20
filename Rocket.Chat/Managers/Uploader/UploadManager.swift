@@ -9,5 +9,5 @@
 import Foundation
 
 class Upload {
-    var uploader: Uploader?
+    
 }

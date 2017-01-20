@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AWSS3
 
 struct AmazonS3Uploader: Uploader {
     static func name() -> String {
@@ -18,6 +19,21 @@ struct AmazonS3Uploader: Uploader {
     }
 
     static func upload() {
-        // Do something
+        let manager = AWSS3TransferManager.default()
+        let request = AWSS3TransferManagerUploadRequest()
+        request?.bucket = "foo"
+        request?.key = "filename"
+        request?.body = URL(string: "foo")
+        manager?.upload(request).continue(with: AWSExecutor.mainThread(), with: { (task) -> Any? in
+            if let error = task.error {
+                Log.debug(error)
+                return nil
+            }
+
+            if let result = task.result {
+                Log.debug(result)
+                return nil
+            }
+        })
     }
 }
