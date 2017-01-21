@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 struct AuthManager {
-
+    
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
