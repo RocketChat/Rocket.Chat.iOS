@@ -202,6 +202,8 @@ final class ChatViewController: SLKTextViewController {
             token.stop()
         }
 
+        Upload.upload(subscription: subscription)
+
         activityIndicator.startAnimating()
         title = subscription?.name
         chatTitleView?.subscription = subscription

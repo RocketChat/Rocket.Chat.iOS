@@ -16,6 +16,16 @@ extension AuthSettings: ModelMappeable {
         }
 
         self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
+
+        self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
+
+        self.AWSS3Bucket = objectForKey(object: values, key: "FileUpload_S3_Bucket")?.string
+        self.AWSS3BucketURL = objectForKey(object: values, key: "FileUpload_S3_BucketURL")?.string
+        self.AWSS3ACL = objectForKey(object: values, key: "FileUpload_S3_Acl")?.string
+        self.AWSS3AccessKey = objectForKey(object: values, key: "FileUpload_S3_AWSAccessKeyId")?.string
+        self.AWSS3SecretKey = objectForKey(object: values, key: "FileUpload_S3_AWSSecretAccessKey")?.string
+        self.AWSS3CDN = objectForKey(object: values, key: "FileUpload_S3_CDN")?.string
+        self.AWSS3Region = objectForKey(object: values, key: "FileUpload_S3_Region")?.string
     }
 
     fileprivate func objectForKey(object: JSON, key: String) -> JSON? {
