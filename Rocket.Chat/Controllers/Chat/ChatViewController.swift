@@ -183,9 +183,11 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func sendMessage() {
         guard let message = textView.text else { return }
+        rightButton.isEnabled = false
 
         SubscriptionManager.sendTextMessage(message, subscription: subscription) { [weak self] _ in
             self?.textView.text = ""
+            self?.rightButton.isEnabled = true
         }
     }
 
