@@ -205,6 +205,7 @@ final class ChatViewController: SLKTextViewController {
         activityIndicator.startAnimating()
         title = subscription?.name
         chatTitleView?.subscription = subscription
+        textView.resignFirstResponder()
 
         CATransaction.begin()
         CATransaction.setDisableActions(true)
