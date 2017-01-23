@@ -14,9 +14,5 @@ struct PersistencyCoordinator: LauncherProtocol {
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
             deleteRealmIfMigrationNeeded: true
         )
-
-        if let fileURL = Realm.Configuration.defaultConfiguration.fileURL {
-            Log.debug(String(format: "Realm path: %@", fileURL as CVarArg))
-        }
     }
 }
