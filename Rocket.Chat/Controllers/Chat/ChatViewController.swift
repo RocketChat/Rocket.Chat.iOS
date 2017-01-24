@@ -199,7 +199,7 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    fileprivate func updateSubscriptionInfo() {
+    internal func updateSubscriptionInfo() {
         if let token = messagesToken {
             token.stop()
         }

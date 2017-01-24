@@ -143,14 +143,13 @@ extension SocketManager: WebSocketDelegate {
         ] as [String : Any]
 
         SocketManager.send(object)
-
-        for (_, handler) in connectionHandlers {
-            handler.socketDidConnect(socket: self)
-        }
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Log.debug("[WebSocket] did disconnect with error (\(error))")
+
+        events = [:]
+        queue = [:]
 
         internalConnectionHandler?(socket, socket.isConnected)
         internalConnectionHandler = nil
