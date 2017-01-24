@@ -12,7 +12,13 @@ extension ChatViewController: SocketConnectionHandler {
 
     func socketDidConnect(socket: SocketManager) {
         chatHeaderViewOffline?.removeFromSuperview()
-        updateSubscriptionMessages()
+
+        DispatchQueue.main.async { [weak self] in
+            if let subscription = self?.subscription {
+                self?.subscription = subscription
+            }
+        }
+
         rightButton.isEnabled = true
     }
 
