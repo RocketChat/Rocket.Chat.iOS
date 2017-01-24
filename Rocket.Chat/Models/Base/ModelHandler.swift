@@ -20,13 +20,14 @@ extension ModelHandler where Self: BaseModel {
     static func handle(msg: ResponseMessage, primaryKey: String, values: JSON) {
         var object: Self!
 
-        Realm.execute { (_) in
-            if let newObject = try? Realm().object(ofType: Self.self, forPrimaryKey: primaryKey as AnyObject) {
-                object = newObject
+        Realm.execute { (realm) in
+            if let existentObject = realm.object(ofType: Self.self, forPrimaryKey: primaryKey as AnyObject) {
+                object = existentObject
             }
 
             if object == nil {
                 object = Self()
+                object.setValue(primaryKey, forKey: Self.primaryKey() ?? "")
             }
 
             switch msg {
