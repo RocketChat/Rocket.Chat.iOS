@@ -11,10 +11,7 @@ import Foundation
 final class Log {
     static func debug(_ text: String?) {
         guard let text = text else { return }
-
-        #if DEBUG
         print(text)
-        #endif
     }
 
 }
