@@ -16,10 +16,6 @@ extension SocketManager {
     func handleMessage(_ response: JSON, socket: WebSocket) {
         guard let result = SocketResponse(response, socket: socket) else { return }
 
-        guard !result.isError() else {
-            return handleError(result, socket: socket)
-        }
-
         guard let message = result.msg else {
             return Log.debug("Msg is invalid: \(result.result)")
         }
