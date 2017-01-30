@@ -81,6 +81,13 @@ final class AuthViewController: BaseViewController {
 
             if !response.isError() {
                 self?.dismiss(animated: true, completion: nil)
+            } else {
+                if let error = response.result["error"].dictionary {
+                    let message = error["message"]?.string ?? localizedString("error.socket.default_error_message")
+                    let alert = UIAlertController(title: localizedString("error.socket.default_error_title"), message: message, preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    self?.present(alert, animated: true, completion: nil)
+                }
             }
         }
     }
