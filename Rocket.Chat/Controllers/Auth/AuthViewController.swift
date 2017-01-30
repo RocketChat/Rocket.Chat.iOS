@@ -79,15 +79,19 @@ final class AuthViewController: BaseViewController {
             self?.connecting = false
             self?.activityIndicator.stopAnimating()
 
-            if !response.isError() {
-                self?.dismiss(animated: true, completion: nil)
-            } else {
+            if response.isError() {
                 if let error = response.result["error"].dictionary {
-                    let message = error["message"]?.string ?? localizedString("error.socket.default_error_message")
-                    let alert = UIAlertController(title: localizedString("error.socket.default_error_title"), message: message, preferredStyle: .alert)
+                    let alert = UIAlertController(
+                        title: localizedString("error.socket.default_error_title"),
+                        message: error["message"]?.string ?? localizedString("error.socket.default_error_message"),
+                        preferredStyle: .alert
+                    )
+
                     alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                     self?.present(alert, animated: true, completion: nil)
                 }
+            } else {
+                self?.dismiss(animated: true, completion: nil)
             }
         }
     }

@@ -24,7 +24,8 @@ extension SocketManager {
             case .Connected: return handleConnectionMessage(result, socket: socket)
             case .Ping: return handlePingMessage(result, socket: socket)
             case .Changed, .Added, .Removed: return handleModelUpdates(result, socket: socket)
-            case .Error, .Updated, .Unknown: break
+            case .Updated, .Unknown: break
+            case .Error: handleError(result, socket: socket)
         }
 
         // Call completion block
