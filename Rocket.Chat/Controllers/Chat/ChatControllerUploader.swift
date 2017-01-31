@@ -7,33 +7,69 @@
 //
 
 import UIKit
+import Photos
 
-extension ChatViewController: UIImagePickerControllerDelegate {
+extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { (_) in
 
         }))
 
-        alert.addAction(UIAlertAction(title: "Use Last Photo Taken", style: .default, handler: { (action) in
+        alert.addAction(UIAlertAction(title: "Use Last Photo Taken", style: .default, handler: { (_) in
 
         }))
 
-        alert.addAction(UIAlertAction(title: "Choose From Library", style: .default, handler: { (action) in
-
+        alert.addAction(UIAlertAction(title: "Choose From Library", style: .default, handler: { (_) in
+            self.openPhotosLibrary()
         }))
 
-        alert.addAction(UIAlertAction(title: "Import File From...", style: .default, handler: { (action) in
-
+        alert.addAction(UIAlertAction(title: "Import File From...", style: .default, handler: { (_) in
+            // Do nothing yet.
         }))
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (action) in
-
-        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
 
         present(alert, animated: true, completion: nil)
+    }
+
+    fileprivate func openPhotosLibrary() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = false
+        picker.sourceType = .photoLibrary
+
+        if let mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) {
+            picker.mediaTypes = mediaTypes
+        }
+
+        present(picker, animated: true, completion: nil)
+    }
+
+    // MARK: UIImagePickerControllerDelegate
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        guard let assetURL = info[UIImagePickerControllerReferenceURL] as? URL else { return }
+        guard let _ = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject else { return }
+
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            guard let imageData = UIImagePNGRepresentation(image) else { return }
+
+            UploadManager.upload(
+                file: imageData,
+                filename: "Test.png",
+                size: 10000,
+                subscription: self.subscription
+            )
+        }
+
+        dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 
 }
