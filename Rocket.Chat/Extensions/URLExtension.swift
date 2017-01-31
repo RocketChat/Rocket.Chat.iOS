@@ -11,8 +11,13 @@ import Foundation
 extension URL {
 
     func validateURL() -> URL? {
-        var newURL = self
-        newURL = newURL.appendingPathComponent("api/info")
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = self.host != nil ? self.host : self.path
+        components.path = self.host != nil ? self.path : ""
+
+        var newURL = components.url
+        newURL = newURL?.appendingPathComponent("api/info")
         return newURL
     }
 
