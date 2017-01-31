@@ -8,18 +8,17 @@
 
 import Foundation
 
-struct Upload {
+struct UploadManager {
 
-    static func upload(subscription: Subscription) {
+    static func upload(file: Data, filename: String, size: Int, subscription: Subscription) {
         let request = [
             "msg": "method",
             "method": "slingshot/uploadRequest",
-            "id": "42",
             "params": [
                 "rocketchat-uploads", [
-                    "name": "filename.extension",
-                    "size": 15664,
-                    "type": "image/jpeg"
+                    "name": filename,
+                    "size": size,
+                    "type": "image/png"
                 ], [
                     "rid": subscription.rid
                 ]
