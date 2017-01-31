@@ -16,10 +16,6 @@ extension SocketManager {
     func handleMessage(_ response: JSON, socket: WebSocket) {
         guard let result = SocketResponse(response, socket: socket) else { return }
 
-        guard !result.isError() else {
-            return handleError(result, socket: socket)
-        }
-
         guard let message = result.msg else {
             return Log.debug("Msg is invalid: \(result.result)")
         }
@@ -28,7 +24,8 @@ extension SocketManager {
             case .Connected: return handleConnectionMessage(result, socket: socket)
             case .Ping: return handlePingMessage(result, socket: socket)
             case .Changed, .Added, .Removed: return handleModelUpdates(result, socket: socket)
-            case .Error, .Updated, .Unknown: break
+            case .Updated, .Unknown: break
+            case .Error: handleError(result, socket: socket)
         }
 
         // Call completion block

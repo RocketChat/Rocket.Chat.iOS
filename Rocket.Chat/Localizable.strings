@@ -10,6 +10,10 @@
 // Global
 "global.ok" = "OK";
 
+// Errors
+"error.socket.default_error_title" = "Ooops!";
+"error.socket.default_error_message" = "Something wrong happened, please try again.";
+
 // Alerts
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "The URL you entered is invalid. Check it and try again, please!";

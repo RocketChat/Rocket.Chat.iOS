@@ -35,6 +35,13 @@ public struct SocketResponse {
 
         if let msg = result["msg"].string {
             self.msg = ResponseMessage(rawValue: msg) ?? ResponseMessage.Unknown
+
+            // Sometimes response is an error, but the "msg" isn't.
+            if self.msg == ResponseMessage.Unknown {
+                if self.isError() {
+                    self.msg = ResponseMessage.Error
+                }
+            }
         }
     }
 
