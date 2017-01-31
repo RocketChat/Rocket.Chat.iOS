@@ -73,6 +73,7 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     // MARK: IBAction
+
     func alertInvalidURL() {
         let alert = UIAlertController(
             title: localizedString("alert.connection.invalid_url.title"),
@@ -106,6 +107,7 @@ final class ConnectServerViewController: BaseViewController {
                     self?.connecting = false
                     self?.textFieldServerURL.alpha = 1
                     self?.activityIndicator.stopAnimating()
+                    self?.alertInvalidURL()
                 }
 
                 return
