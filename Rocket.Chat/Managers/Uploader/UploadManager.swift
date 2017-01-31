@@ -26,7 +26,9 @@ struct Upload {
             ]
         ] as [String : Any]
 
-        SocketManager.send(request)
+        SocketManager.send(request) { (response) in
+
+        }
     }
 
 }
