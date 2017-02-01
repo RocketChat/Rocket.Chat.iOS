@@ -105,6 +105,7 @@ extension SocketManager {
 
                 UserManager.changes()
                 SubscriptionManager.changes(auth)
+                PushManager.setUser(auth.userId, completion: { (response) in })
             })
         })
     }

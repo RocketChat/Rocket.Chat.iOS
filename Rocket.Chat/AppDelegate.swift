@@ -15,6 +15,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Launcher().prepareToLaunch(with: launchOptions)
+        
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+        application.registerForRemoteNotifications()
         return true
+    }
+    
+    // Mark : AppDelegate LifeCycle
+    
+    func applicationDidEnterBackground(_ application: UIApplication) {
+        if let _ = AuthManager.isAuthenticated() {
+            UserManager.setUserPresence(status: .away)
+            SocketManager.disconnect( { (socket, connected) in })
+        }
+    }
+    
+    // Mark : Remote Notification
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        UserDefaults.standard.set(deviceToken.hexString, forKey: "deviceToken")
     }
 }
