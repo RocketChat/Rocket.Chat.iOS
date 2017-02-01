@@ -58,26 +58,28 @@ class UploadManager {
             guard let uploadURL = URL(string: result["result"]["upload"].string ?? "") else { return }
             guard let downloadURL = result["result"]["download"].string else { return }
 
-            var data = Data()
-            for postData in result["result"]["postData"].array ?? [] {
-                let value = String(format: "%@: %@", postData["name"].string ?? "", postData["value"].string ?? "")
-                if let valueEncoded = value.data(using: .utf8) {
-                    data.append(valueEncoded)
-                }
-            }
-
             var request = URLRequest(url: uploadURL)
             request.httpMethod = "POST"
 
-            let boundary = "---------------------------14737809831466499882746641449"
+            let boundary = String.random()
             let contentType = "multipart/form-data; boundary=\(boundary)"
             request.addValue(contentType, forHTTPHeaderField: "Content-Type")
 
+            var data = Data()
             data.append("\r\n--\(boundary)\r\n".data(using: .utf8) ?? Data())
-            data.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(file.name)\"\\r\n".data(using: .utf8) ?? Data())
+
+            for postData in result["result"]["postData"].array ?? [] {
+                guard let key = postData["name"].string else { continue }
+                guard let value = postData["value"].string else { continue }
+                data.append("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".data(using: .utf8) ?? Data())
+                data.append(value.data(using: .utf8) ?? Data())
+                data.append("\r\n--\(boundary)\r\n".data(using: .utf8) ?? Data())
+            }
+
+            data.append("Content-Disposition: form-data; name=\"file\"\r\n".data(using: .utf8) ?? Data())
             data.append("Content-Type: application/octet-stream\r\n\r\n".data(using: .utf8) ?? Data())
             data.append(file.data)
-            data.append("\r\n--\(boundary)\r\n".data(using: .utf8) ?? Data())
+            data.append("\r\n--\(boundary)--\r\n".data(using: .utf8) ?? Data())
             request.httpBody = data
 
             let config = URLSessionConfiguration.default
