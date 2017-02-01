@@ -19,5 +19,15 @@ struct UserManager {
 
         SocketManager.send(request) { _ in }
     }
-
+    
+    static func setUserPresence(status: UserStatus) {
+        let method = "UserPresence:".appending(status.rawValue)
+        
+        let request = [
+            "msg": "method",
+            "method": method,
+            "params": []
+            ] as [String : Any]
+        SocketManager.send(request) { (_) in }
+    }
 }

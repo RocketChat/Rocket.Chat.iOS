@@ -46,7 +46,8 @@ final class MainViewController: BaseViewController {
 
                     UserManager.changes()
                     SubscriptionManager.changes(auth)
-
+                    PushManager.setUser(auth.userId, completion: { (response) in })
+                    
                     // Open chat
                     let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
                     let controller = storyboardChat.instantiateInitialViewController()
