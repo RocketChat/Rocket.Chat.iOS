@@ -57,12 +57,11 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             guard let imageData = UIImagePNGRepresentation(image) else { return }
 
-            UploadManager.upload(
-                file: imageData,
-                filename: "Test.png",
-                size: 10000,
-                subscription: self.subscription
-            )
+            UploadManager.shared.upload(file: imageData, filename: "Teste.png", subscription: self.subscription, progress: { (progress) in
+
+            }, completion: { (success) in
+
+            })
         }
 
         dismiss(animated: true, completion: nil)
