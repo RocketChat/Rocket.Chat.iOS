@@ -55,9 +55,16 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         guard let _ = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject else { return }
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            guard let imageData = UIImagePNGRepresentation(image) else { return }
+            guard let imageData = UIImageJPEGRepresentation(image, 0.9) else { return }
 
-            UploadManager.shared.upload(file: imageData, filename: "Teste.png", subscription: self.subscription, progress: { (progress) in
+            let file = FileUpload(
+                name: String(format: "%@.jpeg", String.random()),
+                size: (imageData as NSData).length,
+                type: "image/jpeg",
+                data: imageData
+            )
+
+            UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { (progress) in
 
             }, completion: { (success) in
 

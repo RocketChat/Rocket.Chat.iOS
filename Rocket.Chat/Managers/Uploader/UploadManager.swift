@@ -11,19 +11,38 @@ import Foundation
 public typealias UploadProgressBlock = (Int) -> Void
 public typealias UploadCompletionBlock = (Bool) -> Void
 
+struct FileUpload {
+    var name: String
+    var size: Int
+    var type: String
+    var data: Data
+}
+
 class UploadManager {
 
     static let shared = UploadManager()
 
-    func upload(file: Data, filename: String, subscription: Subscription, progress: UploadProgressBlock, completion: UploadCompletionBlock) {
+    fileprivate func sendFileMessage(params: [Any]) {
+        let request = [
+            "msg": "method",
+            "method": "sendFileMessage",
+            "params": params
+        ] as [String : Any]
+
+        SocketManager.send(request) { (response) in
+            
+        }
+    }
+
+    func upload(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
         let request = [
             "msg": "method",
             "method": "slingshot/uploadRequest",
             "params": [
                 "rocketchat-uploads", [
-                    "name": filename,
-                    "size": 1000,
-                    "type": "image/png"
+                    "name": file.name,
+                    "size": file.size,
+                    "type": file.type
                 ], [
                     "rid": subscription.rid
                 ]
@@ -36,8 +55,8 @@ class UploadManager {
             }
 
             let result = response.result
-            guard let upload = result["result"]["upload"].string else { return }
-            guard let uploadURL = URL(string: upload) else { return }
+            guard let uploadURL = URL(string: result["result"]["upload"].string ?? "") else { return }
+            guard let downloadURL = result["result"]["download"].string else { return }
 
             var data = Data()
             for postData in result["result"]["postData"].array ?? [] {
@@ -51,21 +70,40 @@ class UploadManager {
             request.httpMethod = "POST"
 
             let boundary = "---------------------------14737809831466499882746641449"
-            let contentType = String(format: "multipart/form-data; boundary=%@", boundary)
+            let contentType = "multipart/form-data; boundary=\(boundary)"
             request.addValue(contentType, forHTTPHeaderField: "Content-Type")
 
-            data.append(String(format: "\r\n--%@\r\n", boundary).data(using: .utf8)!)
-            data.append(String(format:"Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\\r\n").data(using: .utf8)!)
-            data.append(String(format: "Content-Type: application/octet-stream\r\n\r\n").data(using: .utf8)!)
-            data.append(file)
-            data.append(String(format: "\r\n--%@\r\n", boundary).data(using: .utf8)!)
+            data.append("\r\n--\(boundary)\r\n".data(using: .utf8) ?? Data())
+            data.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(file.name)\"\\r\n".data(using: .utf8) ?? Data())
+            data.append("Content-Type: application/octet-stream\r\n\r\n".data(using: .utf8) ?? Data())
+            data.append(file.data)
+            data.append("\r\n--\(boundary)\r\n".data(using: .utf8) ?? Data())
             request.httpBody = data
 
             let config = URLSessionConfiguration.default
             let session = URLSession(configuration: config)
-            let task = session.dataTask(with: request, completionHandler: { (data, response, error) in
-                print(error)
-                print(response)
+            let task = session.dataTask(with: request, completionHandler: { (_, response, error) in
+                if let _ = error {
+                    print(error)
+                    completion(false)
+                } else {
+                    print(response)
+
+                    DispatchQueue.main.async {
+                        let fileIdentifier = downloadURL.components(separatedBy: "/").last
+
+                        self.sendFileMessage(params: [
+                            subscription.rid,
+                            "s3", [// TODO: This is not fixed
+                                "type": file.type,
+                                "size": file.size,
+                                "name": file.name,
+                                "_id": fileIdentifier ?? String.random(),
+                                "url": downloadURL
+                            ]
+                        ])
+                    }
+                }
             })
 
             task.resume()
