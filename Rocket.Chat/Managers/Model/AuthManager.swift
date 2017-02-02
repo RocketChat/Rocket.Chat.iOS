@@ -34,6 +34,7 @@ extension AuthManager {
     */
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
+
         SocketManager.connect(url) { (socket, connected) in
             guard connected else {
                 guard let response = SocketResponse(
@@ -42,8 +43,9 @@ extension AuthManager {
                 ) else { return }
 
                 return completion(response)
-            }            
-            PushManager.setPushToken(completion: { (response) in })
+            }
+
+            PushManager.updatePushToken()
             
             let object = [
                 "msg": "method",
