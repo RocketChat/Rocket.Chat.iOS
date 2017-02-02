@@ -16,11 +16,15 @@ extension AuthSettings: ModelMappeable {
         }
 
         self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
+
+        self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
     }
 
     fileprivate func objectForKey(object: JSON, key: String) -> JSON? {
-        return object.array?.filter { obj in
+        let result = object.array?.filter { obj in
             return obj["_id"].string == key
         }.first
+
+        return result?["value"]
     }
 }

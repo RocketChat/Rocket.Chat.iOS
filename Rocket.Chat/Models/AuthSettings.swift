@@ -12,4 +12,7 @@ import SwiftyJSON
 
 final class AuthSettings: BaseModel {
     dynamic var siteURL: String?
+
+    // File upload
+    dynamic var uploadStorageType: String?
 }

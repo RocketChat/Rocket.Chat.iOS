@@ -8,6 +8,7 @@ PODS:
   - KSCrash/RecordingAdvanced (1.8.13):
     - KSCrash/Recording
   - MobilePlayer (1.2.0)
+  - NVActivityIndicatorView (3.2)
   - Realm (2.1.0):
     - Realm/Headers (= 2.1.0)
   - Realm/Headers (2.1.0)
@@ -27,6 +28,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - MobilePlayer
+  - NVActivityIndicatorView
   - RealmSwift
   - SDWebImage (~> 3.8)
   - SideMenu
@@ -41,6 +43,7 @@ SPEC CHECKSUMS:
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   KSCrash: 4c3a83f133b60f4bd57e05235ebf8d46e36d378d
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
+  NVActivityIndicatorView: 28942c18ced111a6a3ce5e6f5b27d9d40116d639
   Realm: bc829ad0ef3d4eea70c34cfcc3b1704d18d50df1
   RealmSwift: a4d4abbf0088c337cab5b738054395842e4b3052
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
@@ -50,6 +53,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: 2fee4b7c442a63d1f31db108221ec6b74be0c91b
+PODFILE CHECKSUM: f504bcc2293770c3f3bd1f361e71939ff1d370c9
 
 COCOAPODS: 1.1.1
