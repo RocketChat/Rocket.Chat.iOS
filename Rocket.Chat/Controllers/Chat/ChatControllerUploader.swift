@@ -52,13 +52,14 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         guard let assetURL = info[UIImagePickerControllerReferenceURL] as? URL else { return }
-        guard let _ = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject else { return }
+        guard let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject else { return }
+        guard let resource = PHAssetResource.assetResources(for: asset).first else { return }
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             guard let imageData = UIImageJPEGRepresentation(image, 0.9) else { return }
 
             let file = FileUpload(
-                name: String(format: "%@.jpeg", String.random()),
+                name: resource.originalFilename,
                 size: (imageData as NSData).length,
                 type: "image/jpeg",
                 data: imageData
