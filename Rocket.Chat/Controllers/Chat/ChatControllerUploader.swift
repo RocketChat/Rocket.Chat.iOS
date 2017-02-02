@@ -14,19 +14,19 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: localizedString("chat.upload.take_photo"), style: .default, handler: { (_) in
             // Do nothing yet.
         }))
 
-        alert.addAction(UIAlertAction(title: "Choose From Library", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: localizedString("chat.upload.choose_from_library"), style: .default, handler: { (_) in
             self.openPhotosLibrary()
         }))
 
-        alert.addAction(UIAlertAction(title: "Import File From...", style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: localizedString("chat.upload.import_file"), style: .default, handler: { (_) in
             // Do nothing yet.
         }))
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: localizedString("global.cancel"), style: .cancel, handler: nil))
 
         present(alert, animated: true, completion: nil)
     }
@@ -80,13 +80,13 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                         preferredStyle: .alert
                     )
 
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                    alert.addAction(UIAlertAction(title: localizedString("global.ok"), style: .default, handler: nil))
 
                     DispatchQueue.main.async {
                         self.present(alert, animated: true, completion: nil)
                     }
                 } else {
-                    
+
                 }
             })
         }
