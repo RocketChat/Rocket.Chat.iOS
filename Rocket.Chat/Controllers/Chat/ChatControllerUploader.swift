@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import NVActivityIndicatorView
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -44,10 +45,14 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         present(picker, animated: true, completion: nil)
     }
 
-
     // MARK: UIImagePickerControllerDelegate
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        NVActivityIndicatorPresenter.sharedInstance.startAnimating(ActivityData(
+            message: localizedString("chat.upload.uploading_image"),
+            type: .ballPulse
+        ))
+
         guard let assetURL = info[UIImagePickerControllerReferenceURL] as? URL else { return }
         guard let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject else { return }
         guard let resource = PHAssetResource.assetResources(for: asset).first else { return }
@@ -65,6 +70,8 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { (progress) in
                 // We currently don't have progress being called.
             }, completion: { [unowned self] (response, error) in
+                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
+
                 if error {
                     var errorMessage = localizedString("error.socket.default_error_message")
 
