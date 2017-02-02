@@ -15,11 +15,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: "Take Photo", style: .default, handler: { (_) in
-
-        }))
-
-        alert.addAction(UIAlertAction(title: "Use Last Photo Taken", style: .default, handler: { (_) in
-
+            // Do nothing yet.
         }))
 
         alert.addAction(UIAlertAction(title: "Choose From Library", style: .default, handler: { (_) in
@@ -48,6 +44,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         present(picker, animated: true, completion: nil)
     }
 
+
     // MARK: UIImagePickerControllerDelegate
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
@@ -66,7 +63,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             )
 
             UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { (progress) in
-
+                
             }, completion: { (success) in
 
             })
