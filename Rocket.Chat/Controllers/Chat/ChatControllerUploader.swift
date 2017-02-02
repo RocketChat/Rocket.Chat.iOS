@@ -63,9 +63,31 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             )
 
             UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { (progress) in
-                
-            }, completion: { (success) in
+                // We currently don't have progress being called.
+            }, completion: { [unowned self] (response, error) in
+                if error {
+                    var errorMessage = localizedString("error.socket.default_error_message")
 
+                    if let response = response {
+                        if let message = response.result["error"]["message"].string {
+                            errorMessage = message
+                        }
+                    }
+
+                    let alert = UIAlertController(
+                        title: localizedString("error.socket.default_error_title"),
+                        message: errorMessage,
+                        preferredStyle: .alert
+                    )
+
+                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                } else {
+                    
+                }
             })
         }
 

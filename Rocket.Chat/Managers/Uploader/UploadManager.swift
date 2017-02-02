@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 public typealias UploadProgressBlock = (Int) -> Void
-public typealias UploadCompletionBlock = (Bool) -> Void
+public typealias UploadCompletionBlock = (SocketResponse?, Bool) -> Void
 
 struct FileUpload {
     var name: String
@@ -23,7 +23,7 @@ class UploadManager {
 
     static let shared = UploadManager()
 
-    fileprivate func sendFileMessage(params: [Any]) {
+    fileprivate func sendFileMessage(params: [Any], completion: @escaping UploadCompletionBlock) {
         let request = [
             "msg": "method",
             "method": "sendFileMessage",
@@ -31,7 +31,7 @@ class UploadManager {
         ] as [String : Any]
 
         SocketManager.send(request) { (response) in
-            
+            completion(response, response.isError())
         }
     }
 
@@ -79,6 +79,7 @@ class UploadManager {
 
         SocketManager.send(request) { [unowned self] (response) in
             guard !response.isError() else {
+                completion(response, true)
                 return
             }
 
@@ -90,12 +91,12 @@ class UploadManager {
 
             let config = URLSessionConfiguration.default
             let session = URLSession(configuration: config)
-            let task = session.dataTask(with: request, completionHandler: { (_, _, error) in
+            let task = session.dataTask(with: request, completionHandler: { (_, response, error) in
                 if let _ = error {
-                    completion(false)
+                    completion(nil, true)
                 } else {
                     DispatchQueue.main.async {
-                        let fileIdentifier = downloadURL.components(separatedBy: "/").last
+                        let fileIdentifier = downloadURL.components(separatedBy: "/").last ?? String.random()
 
                         self.sendFileMessage(params: [
                             subscription.rid,
@@ -103,10 +104,10 @@ class UploadManager {
                                 "type": file.type,
                                 "size": file.size,
                                 "name": file.name,
-                                "_id": fileIdentifier ?? String.random(),
+                                "_id": fileIdentifier,
                                 "url": downloadURL
                             ]
-                        ])
+                        ], completion: completion)
                     }
                 }
             })
