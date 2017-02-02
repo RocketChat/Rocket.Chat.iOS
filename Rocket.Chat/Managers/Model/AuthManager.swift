@@ -106,7 +106,8 @@ extension AuthManager {
             if let date = result["result"]["tokenExpires"]["$date"].double {
                 auth.tokenExpires = Date.dateFromInterval(date)
             }
-            PushManager.setPushToken(completion: { (response) in })
+
+            PushManager.updatePushToken()
             
             Realm.update(auth)
             completion(response)
