@@ -10,6 +10,8 @@ import SideMenu
 import RealmSwift
 import SlackTextViewController
 import URBMediaFocusViewController
+import NVActivityIndicatorView
+
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
@@ -71,6 +73,8 @@ final class ChatViewController: SLKTextViewController {
         shakeToClearEnabled = true
         isKeyboardPanningEnabled = true
         shouldScrollToBottomAfterKeyboardShows = false
+
+        leftButton.setImage(UIImage(named: "Upload"), for: .normal)
 
         rightButton.isEnabled = false
 
@@ -169,6 +173,10 @@ final class ChatViewController: SLKTextViewController {
 
     override func didPressRightButton(_ sender: Any?) {
         sendMessage()
+    }
+
+    override func didPressLeftButton(_ sender: Any?) {
+        buttonUploadDidPressed()
     }
 
     override func didPressReturnKey(_ keyCommand: UIKeyCommand?) {
