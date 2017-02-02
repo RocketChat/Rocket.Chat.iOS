@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PushManager {
+final class PushManager {
 
     static let kDeviceTokenKey = "deviceToken"
     static let kPushIdentifierKey = "pushIdentifier"
