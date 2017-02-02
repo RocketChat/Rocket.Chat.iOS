@@ -9,55 +9,55 @@
 import Foundation
 
 class PushManager {
-    
-    static func setPushToken(completion: @escaping MessageCompletion) {
+
+    static let kDeviceTokenKey = "deviceToken"
+    static let kPushIdentifierKey = "pushIdentifier"
+
+    static func updatePushToken() {
         guard let deviceToken = getDeviceToken() else { return }
-        var userId: Any?
-        userId = AuthManager.isAuthenticated()?.userId ?? NSNull()
+        guard let userIdentifier = AuthManager.isAuthenticated()?.userId else { return }
         
         let request = [
             "msg": "method",
             "method": "raix:push-update",
             "params": [[
                 "id": getOrCreatePushId(),
-                "userId": userId,
+                "userId": userIdentifier,
                 "token": ["apn": deviceToken],
                 "appName": "main",
                 "metadata": [:]
-                ]]
-            ] as [String : Any]
-        SocketManager.send(request) { (response) in
-            completion(response)
-        }
+            ]]
+        ] as [String : Any]
+
+        SocketManager.send(request)
     }
     
-    static func setUser(_ userId: String?, completion: @escaping MessageCompletion) {
-        guard let userId = userId else { return }
-        
+    static func updateUser(_ userIdentifier: String) {
         let request = [
             "msg": "method",
             "method": "raix:push-setuser",
-            "userId": userId,
+            "userId": userIdentifier,
             "params": [getOrCreatePushId()]
-            ] as [String : Any]
-        SocketManager.send(request) { (response) in
-            completion(response)
-        }
+        ] as [String : Any]
+
+        SocketManager.send(request)
     }
     
     fileprivate static func getOrCreatePushId() -> String {
-        guard let pushId = UserDefaults.standard.string(forKey: "pushId") else {
+        guard let pushId = UserDefaults.standard.string(forKey: kPushIdentifierKey) else {
             let randomId = UUID().uuidString.replacingOccurrences(of: "-", with: "")
-            UserDefaults.standard.set(randomId, forKey: "pushId")
+            UserDefaults.standard.set(randomId, forKey: kPushIdentifierKey)
             return randomId
-        }        
+        }
+
         return pushId
     }
     
     fileprivate static func getDeviceToken() -> String? {
-        guard let deviceToken = UserDefaults.standard.string(forKey: "deviceToken") else {
+        guard let deviceToken = UserDefaults.standard.string(forKey: kDeviceTokenKey) else {
             return nil
         }
+
         return deviceToken
     }
     

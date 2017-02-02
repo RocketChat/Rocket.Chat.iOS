@@ -21,18 +21,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
-    // Mark : AppDelegate LifeCycle
+    // MARK: AppDelegate LifeCycle
     
     func applicationDidEnterBackground(_ application: UIApplication) {
         if let _ = AuthManager.isAuthenticated() {
-            UserManager.setUserPresence(status: .away)
-            SocketManager.disconnect( { (socket, connected) in })
+            UserManager.setUserPresence(status: .away) { (response) in
+                SocketManager.disconnect({ (_, _) in })
+            }
         }
     }
     
-    // Mark : Remote Notification
+    // MARK: Remote Notification
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        UserDefaults.standard.set(deviceToken.hexString, forKey: "deviceToken")
+        UserDefaults.standard.set(deviceToken.hexString, forKey: PushManager.kDeviceTokenKey)
     }
 }
