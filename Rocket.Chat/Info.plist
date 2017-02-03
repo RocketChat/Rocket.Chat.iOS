@@ -49,8 +49,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSCameraUsageDescription</key>
+	<string>To take photos and upload it</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>To upload photos</string>
+	<string>To upload photos from your library</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
