@@ -12,11 +12,28 @@ import SlackTextViewController
 import URBMediaFocusViewController
 import NVActivityIndicatorView
 
-
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var activityIndicator: NVActivityIndicatorView!
+    @IBOutlet weak var activityIndicatorContainer: UIView! {
+        didSet {
+            let width = activityIndicatorContainer.bounds.width
+            let height = activityIndicatorContainer.bounds.height
+            let frame = CGRect(x: 0, y: 0, width: width, height: height)
+            let activityIndicator = NVActivityIndicatorView(
+                frame: frame,
+                type: .ballPulse,
+                color: .RCDarkBlue(),
+                padding: 0
+            )
+
+            activityIndicatorContainer.addSubview(activityIndicator)
+            self.activityIndicator = activityIndicator
+            activityIndicator.startAnimating()
+        }
+    }
+
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewOffline: ChatHeaderViewOffline?
@@ -92,7 +109,7 @@ final class ChatViewController: SLKTextViewController {
             self.subscription = subscription
         }
 
-        view.bringSubview(toFront: activityIndicator)
+        view.bringSubview(toFront: activityIndicatorContainer)
     }
 
     internal func reconnect() {
