@@ -50,8 +50,8 @@ final class MainViewController: BaseViewController {
 
             AuthManager.resume(auth, completion: { [weak self] response in
                 guard !response.isError() else {
-                    self?.labelAuthenticationStatus.isHidden = true
-                    self?.buttonConnect.isHidden = true
+                    self?.labelAuthenticationStatus.isHidden = false
+                    self?.buttonConnect.isHidden = false
                     self?.activityIndicator.stopAnimating()
                     return
                 }
@@ -76,7 +76,6 @@ final class MainViewController: BaseViewController {
                 })
             })
         } else {
-            labelAuthenticationStatus.text = "User is not authenticated."
             buttonConnect.isEnabled = true
         }
     }

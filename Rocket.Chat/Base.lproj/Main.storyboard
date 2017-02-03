@@ -40,7 +40,7 @@
                                     <segue destination="HO0-43-1Ue" kind="presentation" identifier="Auth" id="lwm-uO-QRg"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvI-Ne-wdZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User is not authenticated" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvI-Ne-wdZ">
                                 <rect key="frame" x="48" y="243" width="280" height="102"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="102" id="K4d-7Q-McF"/>
