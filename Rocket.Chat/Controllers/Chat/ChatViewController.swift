@@ -393,6 +393,10 @@ final class ChatViewController: SLKTextViewController {
         SideMenuManager.menuFadeStatusBar = false
         SideMenuManager.menuLeftNavigationController = storyboardSubscriptions.instantiateInitialViewController() as? UISideMenuNavigationController
 
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            SideMenuManager.menuWidth = 320
+        }
+
         guard let navigationController = self.navigationController else { return }
         SideMenuManager.menuAddPanGestureToPresent(toView: navigationController.navigationBar)
         SideMenuManager.menuAddScreenEdgePanGesturesToPresent(toView: navigationController.view)
