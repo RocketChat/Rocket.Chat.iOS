@@ -29,6 +29,11 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
         alert.addAction(UIAlertAction(title: localizedString("global.cancel"), style: .cancel, handler: nil))
 
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = leftButton
+            presenter.sourceRect = leftButton.bounds
+        }
+
         present(alert, animated: true, completion: nil)
     }
 
