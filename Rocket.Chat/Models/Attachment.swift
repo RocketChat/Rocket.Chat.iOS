@@ -67,6 +67,11 @@ extension Attachment {
     }
 
     func fullImageURL() -> URL? {
+        guard let imageURL = imageURL else { return nil }
+        if imageURL.contains("http://") || imageURL.contains("https://") {
+            return URL(string: imageURL)
+        }
+
         return Attachment.fullURLWith(imageURL)
     }
 
