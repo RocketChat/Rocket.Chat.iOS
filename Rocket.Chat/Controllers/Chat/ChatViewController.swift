@@ -118,6 +118,13 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        view?.layoutSubviews()
+        scrollToBottom()
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
@@ -263,7 +270,6 @@ final class ChatViewController: SLKTextViewController {
     internal func updateSubscriptionMessages() {
         isRequestingHistory = true
 
-        scrollToBottom()
         messages = subscription.fetchMessages()
         appendMessages(messages: Array(messages))
 
@@ -416,11 +422,27 @@ extension ChatViewController {
     }
 
     func toggleStatusBar(hide: Bool) {
+        guard let collectionView = self.collectionView else { return }
+
         hideStatusBar = hide
+
+        let statusBarHeight = CGFloat(20)
+        let contentHeight = collectionView.contentSize.height
+        let offsetY = collectionView.contentOffset.y
+        let bottomOffset = contentHeight - offsetY
+
         UIView.animate(withDuration: 0.25) { () -> Void in
             self.setNeedsStatusBarAppearanceUpdate()
-            self.navigationController?.navigationBar.frame.origin.y = 20
-            self.collectionView?.frame.origin.y = 0
+            self.navigationController?.navigationBar.frame.origin.y = statusBarHeight
+
+            var yOffset: CGFloat!
+            if hide {
+                yOffset = collectionView.contentSize.height - bottomOffset - statusBarHeight
+            } else {
+                yOffset = collectionView.contentSize.height - bottomOffset + statusBarHeight
+            }
+
+            collectionView.contentOffset = CGPoint(x: 0, y: yOffset)
         }
     }
 
