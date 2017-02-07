@@ -118,6 +118,13 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        view?.layoutSubviews()
+        scrollToBottom()
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
@@ -263,7 +270,6 @@ final class ChatViewController: SLKTextViewController {
     internal func updateSubscriptionMessages() {
         isRequestingHistory = true
 
-        scrollToBottom()
         messages = subscription.fetchMessages()
         appendMessages(messages: Array(messages))
 
@@ -276,6 +282,8 @@ final class ChatViewController: SLKTextViewController {
 
             self?.scrollToBottom()
         }
+
+        return
 
         messagesToken = messages.addNotificationBlock { [weak self] _ in
             guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
