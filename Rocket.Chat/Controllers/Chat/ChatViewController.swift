@@ -15,7 +15,25 @@ import NVActivityIndicatorView
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
 
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    var activityIndicator: NVActivityIndicatorView!
+    @IBOutlet weak var activityIndicatorContainer: UIView! {
+        didSet {
+            let width = activityIndicatorContainer.bounds.width
+            let height = activityIndicatorContainer.bounds.height
+            let frame = CGRect(x: 0, y: 0, width: width, height: height)
+            let activityIndicator = NVActivityIndicatorView(
+                frame: frame,
+                type: .ballPulse,
+                color: .RCDarkBlue(),
+                padding: 0
+            )
+
+            activityIndicatorContainer.addSubview(activityIndicator)
+            self.activityIndicator = activityIndicator
+            activityIndicator.startAnimating()
+        }
+    }
+
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewOffline: ChatHeaderViewOffline?
@@ -91,13 +109,20 @@ final class ChatViewController: SLKTextViewController {
             self.subscription = subscription
         }
 
-        view.bringSubview(toFront: activityIndicator)
+        view.bringSubview(toFront: activityIndicatorContainer)
     }
 
     internal func reconnect() {
         if !SocketManager.isConnected() {
             SocketManager.reconnect()
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        view?.layoutSubviews()
+        scrollToBottom()
     }
 
     override func viewWillLayoutSubviews() {
@@ -112,6 +137,14 @@ final class ChatViewController: SLKTextViewController {
 
         collectionView?.contentInset = insets
         collectionView?.scrollIndicatorInsets = insets
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        coordinator.animate(alongsideTransition: nil, completion: { _ in
+            self.collectionView?.collectionViewLayout.invalidateLayout()
+        })
     }
 
     fileprivate func setupTextViewSettings() {
@@ -245,7 +278,6 @@ final class ChatViewController: SLKTextViewController {
     internal func updateSubscriptionMessages() {
         isRequestingHistory = true
 
-        scrollToBottom()
         messages = subscription.fetchMessages()
         appendMessages(messages: Array(messages))
 
@@ -375,6 +407,10 @@ final class ChatViewController: SLKTextViewController {
         SideMenuManager.menuFadeStatusBar = false
         SideMenuManager.menuLeftNavigationController = storyboardSubscriptions.instantiateInitialViewController() as? UISideMenuNavigationController
 
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            SideMenuManager.menuWidth = 320
+        }
+
         guard let navigationController = self.navigationController else { return }
         SideMenuManager.menuAddPanGestureToPresent(toView: navigationController.navigationBar)
         SideMenuManager.menuAddScreenEdgePanGesturesToPresent(toView: navigationController.view)
@@ -394,11 +430,27 @@ extension ChatViewController {
     }
 
     func toggleStatusBar(hide: Bool) {
+        guard let collectionView = self.collectionView else { return }
+
         hideStatusBar = hide
+
+        let statusBarHeight = CGFloat(20)
+        let contentHeight = collectionView.contentSize.height
+        let offsetY = collectionView.contentOffset.y
+        let bottomOffset = contentHeight - offsetY
+
         UIView.animate(withDuration: 0.25) { () -> Void in
             self.setNeedsStatusBarAppearanceUpdate()
-            self.navigationController?.navigationBar.frame.origin.y = 20
-            self.collectionView?.frame.origin.y = 0
+            self.navigationController?.navigationBar.frame.origin.y = statusBarHeight
+
+            var yOffset: CGFloat!
+            if hide {
+                yOffset = collectionView.contentSize.height - bottomOffset - statusBarHeight
+            } else {
+                yOffset = collectionView.contentSize.height - bottomOffset + statusBarHeight
+            }
+
+            collectionView.contentOffset = CGPoint(x: 0, y: yOffset)
         }
     }
 

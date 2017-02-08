@@ -11,7 +11,6 @@ import UIKit
 extension UIImage {
 
     func imageWithTint(_ color: UIColor, alpha: CGFloat = 1.0) -> UIImage {
-
         guard let cgImage = cgImage else { return self }
 
         UIGraphicsBeginImageContextWithOptions(self.size, false, UIScreen.main.scale)
@@ -38,4 +37,20 @@ extension UIImage {
         return image
     }
 
+    func resizeWith(width: CGFloat) -> UIImage? {
+        let height = CGFloat(ceil(width/self.size.width * self.size.height))
+        let size = CGSize(width: width, height: height)
+        let imageView = UIImageView(frame: CGRect(origin: .zero, size: size))
+        imageView.contentMode = .scaleAspectFit
+        imageView.image = self
+
+        UIGraphicsBeginImageContextWithOptions(imageView.bounds.size, false, scale)
+        guard let context = UIGraphicsGetCurrentContext() else { return nil }
+        imageView.layer.render(in: context)
+        guard let result = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
+        UIGraphicsEndImageContext()
+
+        return result
+    }
+    
 }

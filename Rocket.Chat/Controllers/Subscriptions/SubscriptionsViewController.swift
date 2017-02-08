@@ -147,6 +147,7 @@ extension SubscriptionsViewController {
 
     // swiftlint:disable function_body_length cyclomatic_complexity
     func groupSubscription() {
+        var unreadGroup: [Subscription] = []
         var favoriteGroup: [Subscription] = []
         var channelGroup: [Subscription] = []
         var directMessageGroup: [Subscription] = []
@@ -161,6 +162,11 @@ extension SubscriptionsViewController {
             }
 
             if !isSearchingLocally && !subscription.open {
+                continue
+            }
+
+            if subscription.alert {
+                unreadGroup.append(subscription)
                 continue
             }
 
@@ -191,11 +197,23 @@ extension SubscriptionsViewController {
 
             groupSubscriptions?.append(searchResultsGroup)
         } else {
+            if unreadGroup.count > 0 {
+                groupInfomation?.append([
+                    "name": String(format: "%@ (%d)", localizedString("subscriptions.unreads"), unreadGroup.count)
+                ])
+
+                unreadGroup = unreadGroup.sorted {
+                    return $0.type.rawValue < $1.type.rawValue
+                }
+
+                groupSubscriptions?.append(unreadGroup)
+            }
+
             if favoriteGroup.count > 0 {
                 groupInfomation?.append([
                     "icon": "Star",
                     "name": String(format: "%@ (%d)", localizedString("subscriptions.favorites"), favoriteGroup.count)
-                    ])
+                ])
 
                 favoriteGroup = favoriteGroup.sorted {
                     return $0.type.rawValue < $1.type.rawValue
@@ -207,7 +225,7 @@ extension SubscriptionsViewController {
             if channelGroup.count > 0 {
                 groupInfomation?.append([
                     "name": String(format: "%@ (%d)", localizedString("subscriptions.channels"), channelGroup.count)
-                    ])
+                ])
 
                 groupSubscriptions?.append(channelGroup)
             }
