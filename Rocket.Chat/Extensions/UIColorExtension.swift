@@ -19,9 +19,12 @@ extension UIColor {
         )
     }
 
-
     static func RCDarkBlue() -> UIColor {
         return UIColor(rgb: 0x0a4469, alphaVal: 1)
+    }
+
+    static func RCLightBlue() -> UIColor {
+        return UIColor(rgb: 0x9ab1bf, alphaVal: 1)
     }
 
     static func RCBlue() -> UIColor {
