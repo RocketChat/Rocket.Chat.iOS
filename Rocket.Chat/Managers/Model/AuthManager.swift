@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 
 struct AuthManager {
-    
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
@@ -45,8 +44,6 @@ extension AuthManager {
                 return completion(response)
             }
 
-            PushManager.updatePushToken()
-            
             let object = [
                 "msg": "method",
                 "method": "login",
@@ -61,6 +58,7 @@ extension AuthManager {
                     return
                 }
 
+                PushManager.updatePushToken()
                 completion(response)
             }
         }
@@ -110,7 +108,7 @@ extension AuthManager {
             }
 
             PushManager.updatePushToken()
-            
+
             Realm.update(auth)
             completion(response)
         }

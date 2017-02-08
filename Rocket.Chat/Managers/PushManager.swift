@@ -16,7 +16,7 @@ final class PushManager {
     static func updatePushToken() {
         guard let deviceToken = getDeviceToken() else { return }
         guard let userIdentifier = AuthManager.isAuthenticated()?.userId else { return }
-        
+
         let request = [
             "msg": "method",
             "method": "raix:push-update",
@@ -24,14 +24,14 @@ final class PushManager {
                 "id": getOrCreatePushId(),
                 "userId": userIdentifier,
                 "token": ["apn": deviceToken],
-                "appName": "main",
+                "appName": Bundle.main.bundleIdentifier ?? "main",
                 "metadata": [:]
             ]]
         ] as [String : Any]
 
         SocketManager.send(request)
     }
-    
+
     static func updateUser(_ userIdentifier: String) {
         let request = [
             "msg": "method",
@@ -42,7 +42,7 @@ final class PushManager {
 
         SocketManager.send(request)
     }
-    
+
     fileprivate static func getOrCreatePushId() -> String {
         guard let pushId = UserDefaults.standard.string(forKey: kPushIdentifierKey) else {
             let randomId = UUID().uuidString.replacingOccurrences(of: "-", with: "")
@@ -52,7 +52,7 @@ final class PushManager {
 
         return pushId
     }
-    
+
     fileprivate static func getDeviceToken() -> String? {
         guard let deviceToken = UserDefaults.standard.string(forKey: kDeviceTokenKey) else {
             return nil
@@ -60,5 +60,5 @@ final class PushManager {
 
         return deviceToken
     }
-    
+
 }
