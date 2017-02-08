@@ -31,6 +31,14 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    @IBOutlet weak var viewUserStatus: UIView!
+    @IBOutlet weak var labelUsername: UILabel!
+    @IBOutlet weak var imageViewArrowDown: UIImageView! {
+        didSet {
+            imageViewArrowDown.image = imageViewArrowDown.image?.imageWithTint(.RCLightBlue())
+        }
+    }
+
     var assigned = false
     var isSearchingLocally = false
     var isSearchingRemotely = false
