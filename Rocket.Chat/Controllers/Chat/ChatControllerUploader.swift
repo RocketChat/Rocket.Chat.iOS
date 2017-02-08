@@ -16,7 +16,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: localizedString("chat.upload.take_photo"), style: .default, handler: { (_) in
-            // Do nothing yet.
+            self.openCamera()
         }))
 
         alert.addAction(UIAlertAction(title: localizedString("chat.upload.choose_from_library"), style: .default, handler: { (_) in
@@ -29,7 +29,22 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
         alert.addAction(UIAlertAction(title: localizedString("global.cancel"), style: .cancel, handler: nil))
 
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = leftButton
+            presenter.sourceRect = leftButton.bounds
+        }
+
         present(alert, animated: true, completion: nil)
+    }
+
+    fileprivate func openCamera() {
+        let imagePicker  = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = false
+        imagePicker.sourceType = .camera
+        imagePicker.cameraFlashMode = .off
+        imagePicker.cameraCaptureMode = .photo
+        self.present(imagePicker, animated: true, completion: nil)
     }
 
     fileprivate func openPhotosLibrary() {
@@ -53,15 +68,22 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             type: .ballPulse
         ))
 
-        guard let assetURL = info[UIImagePickerControllerReferenceURL] as? URL else { return }
-        guard let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject else { return }
-        guard let resource = PHAssetResource.assetResources(for: asset).first else { return }
+        var filename = "\(String.random()).jpeg"
+
+        if let assetURL = info[UIImagePickerControllerReferenceURL] as? URL {
+            if let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject {
+                if let resource = PHAssetResource.assetResources(for: asset).first {
+                    filename = resource.originalFilename
+                }
+            }
+        }
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            guard let imageData = UIImageJPEGRepresentation(image, 0.9) else { return }
+            let resizedImage = image.resizeWith(width: 1024) ?? image
+            guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
 
             let file = FileUpload(
-                name: resource.originalFilename,
+                name: filename,
                 size: (imageData as NSData).length,
                 type: "image/jpeg",
                 data: imageData
