@@ -19,10 +19,10 @@ struct UserManager {
 
         SocketManager.send(request) { _ in }
     }
-    
+
     static func setUserPresence(status: UserStatus, completion: @escaping MessageCompletion) {
         let method = "UserPresence:".appending(status.rawValue)
-        
+
         let request = [
             "msg": "method",
             "method": method,
@@ -33,4 +33,5 @@ struct UserManager {
             completion(response)
         }
     }
+
 }

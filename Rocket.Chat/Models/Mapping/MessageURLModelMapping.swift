@@ -24,7 +24,6 @@ extension MessageURL: ModelMappeable {
         imageURL = MessageURL.parseImageURL(meta: meta)
     }
 
-
     // MARK: Helpers
 
     fileprivate static func parseTitle(meta: [String: JSON]) -> String? {

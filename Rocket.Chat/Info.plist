@@ -49,10 +49,6 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>UIBackgroundModes</key>
-	<array>
-		<string>remote-notification</string>
-	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To upload photos</string>
 	<key>UILaunchStoryboardName</key>

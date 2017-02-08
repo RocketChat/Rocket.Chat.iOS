@@ -105,7 +105,10 @@ extension SocketManager {
 
                 UserManager.changes()
                 SubscriptionManager.changes(auth)
-                PushManager.setUser(auth.userId, completion: { (response) in })
+
+                if let userId = auth.userId {
+                    PushManager.updateUser(userId)
+                }
             })
         })
     }

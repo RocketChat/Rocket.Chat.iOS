@@ -49,7 +49,7 @@ final class MainViewController: BaseViewController {
                     if let userIdentifier = auth.userId {
                         PushManager.updateUser(userIdentifier)
                     }
-                    
+
                     // Open chat
                     let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
                     let controller = storyboardChat.instantiateInitialViewController()
