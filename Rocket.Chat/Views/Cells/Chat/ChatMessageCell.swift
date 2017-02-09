@@ -53,18 +53,18 @@ final class ChatMessageCell: UICollectionViewCell {
 
         for url in message.urls {
             guard url.isValid() else { continue }
-            total = total + ChatMessageURLView.defaultHeight
+            total += ChatMessageURLView.defaultHeight
         }
 
         for attachment in message.attachments {
             let type = attachment.type
 
             if type == .image {
-                total = total + ChatMessageImageView.defaultHeight
+                total += ChatMessageImageView.defaultHeight
             }
 
             if type == .video {
-                total = total + ChatMessageVideoView.defaultHeight
+                total += ChatMessageVideoView.defaultHeight
             }
         }
 
@@ -103,7 +103,7 @@ final class ChatMessageCell: UICollectionViewCell {
                 view.delegate = delegate
 
                 mediaViews.addArrangedSubview(view)
-                mediaViewHeight = mediaViewHeight + ChatMessageURLView.defaultHeight
+                mediaViewHeight += ChatMessageURLView.defaultHeight
             }
         }
 
@@ -117,7 +117,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.delegate = delegate
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight = mediaViewHeight + ChatMessageImageView.defaultHeight
+                    mediaViewHeight += ChatMessageImageView.defaultHeight
                 }
 
             case .video:
@@ -126,7 +126,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.delegate = delegate
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight = mediaViewHeight + ChatMessageVideoView.defaultHeight
+                    mediaViewHeight += ChatMessageVideoView.defaultHeight
                 }
             default:
                 return
