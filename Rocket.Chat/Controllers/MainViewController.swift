@@ -57,13 +57,16 @@ final class MainViewController: BaseViewController {
                 }
 
                 SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                    // TODO: Move it to somewhere else
                     AuthManager.updatePublicSettings(auth, completion: { _ in
 
                     })
 
                     UserManager.changes()
                     SubscriptionManager.changes(auth)
+
+                    if let userIdentifier = auth.userId {
+                        PushManager.updateUser(userIdentifier)
+                    }
 
                     // Open chat
                     let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
