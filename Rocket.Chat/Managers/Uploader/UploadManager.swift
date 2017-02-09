@@ -91,7 +91,7 @@ class UploadManager {
 
             let config = URLSessionConfiguration.default
             let session = URLSession(configuration: config)
-            let task = session.dataTask(with: request, completionHandler: { (_, response, error) in
+            let task = session.dataTask(with: request, completionHandler: { (_, _, error) in
                 if let _ = error {
                     completion(nil, true)
                 } else {
@@ -117,4 +117,3 @@ class UploadManager {
     }
 
 }
-
