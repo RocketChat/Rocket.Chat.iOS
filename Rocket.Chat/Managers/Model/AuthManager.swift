@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 
 struct AuthManager {
-    
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
@@ -34,6 +33,7 @@ extension AuthManager {
     */
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
+
         SocketManager.connect(url) { (socket, connected) in
             guard connected else {
                 guard let response = SocketResponse(
@@ -58,6 +58,7 @@ extension AuthManager {
                     return
                 }
 
+                PushManager.updatePushToken()
                 completion(response)
             }
         }
@@ -105,6 +106,8 @@ extension AuthManager {
             if let date = result["result"]["tokenExpires"]["$date"].double {
                 auth.tokenExpires = Date.dateFromInterval(date)
             }
+
+            PushManager.updatePushToken()
 
             Realm.update(auth)
             completion(response)
