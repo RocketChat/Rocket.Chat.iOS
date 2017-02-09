@@ -11,7 +11,7 @@ else
     # lets try to install swift lint using homebrew
     if which brew >/dev/null; then
         if $(brew update && brew install swiftlint); then
-            swiftlint
+            lint
             exit 0
         else
             echo "Failed to install swiftlint using homebrew"
