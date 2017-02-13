@@ -8,7 +8,13 @@
 
 import UIKit
 
-class SubscriptionUserStatusView: BaseView {
+protocol SubscriptionUserStatusViewProtocol: class {
+    func userDidPressedOption()
+}
+
+final class SubscriptionUserStatusView: BaseView {
+
+    weak var delegate: SubscriptionUserStatusViewProtocol?
 
     @IBOutlet weak var buttonOnline: UIButton!
     @IBOutlet weak var labelOnline: UILabel! {
@@ -64,31 +70,38 @@ class SubscriptionUserStatusView: BaseView {
         }
     }
 
-
     // MARK: IBAction
 
     @IBAction func buttonOnlineDidPressed(_ sender: Any) {
-
+        UserManager.setUserStatus(status: .online) { [weak self] (_) in
+            self?.delegate?.userDidPressedOption()
+        }
     }
 
     @IBAction func buttonAwayDidPressed(_ sender: Any) {
-
+        UserManager.setUserStatus(status: .away) { [weak self] (_) in
+            self?.delegate?.userDidPressedOption()
+        }
     }
 
     @IBAction func buttonBusyDidPressed(_ sender: Any) {
-
+        UserManager.setUserStatus(status: .busy) { [weak self] (_) in
+            self?.delegate?.userDidPressedOption()
+        }
     }
 
     @IBAction func buttonInvisibleDidPressed(_ sender: Any) {
-
+        UserManager.setUserStatus(status: .offline) { [weak self] (_) in
+            self?.delegate?.userDidPressedOption()
+        }
     }
 
     @IBAction func buttonSettingsDidPressed(_ sender: Any) {
-
+        self.delegate?.userDidPressedOption()
     }
 
     @IBAction func buttonLogoutDidPressed(_ sender: Any) {
-        
+        self.delegate?.userDidPressedOption()
     }
 
 }

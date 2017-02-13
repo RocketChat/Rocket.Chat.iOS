@@ -10,6 +10,10 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+enum UserPresence: String {
+    case online, away
+}
+
 enum UserStatus: String {
     case offline, online, busy, away
 }
