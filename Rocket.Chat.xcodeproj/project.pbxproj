@@ -64,6 +64,8 @@
 		41A79C0F1D2F085F00A1968E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C0E1D2F085F00A1968E /* User.swift */; };
 		41A79C131D2F09F200A1968E /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C121D2F09F200A1968E /* Auth.swift */; };
 		41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A87BAC1DA66E700000EE80 /* AuthSettings.swift */; };
+		41A91AEF1E51C51A005C94B1 /* SubscriptionUserStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A91AEE1E51C51A005C94B1 /* SubscriptionUserStatusView.xib */; };
+		41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusView.swift */; };
 		41AC3CD31DCC9873002DC39A /* AutocompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */; };
 		41AC3CD91DCCA0C9002DC39A /* AutocompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */; };
 		41B4B2341E40B1D200F4D252 /* ChatControllerUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B2331E40B1D200F4D252 /* ChatControllerUploader.swift */; };
@@ -195,6 +197,8 @@
 		41A79C0E1D2F085F00A1968E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		41A79C121D2F09F200A1968E /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Auth.swift; path = Models/Auth.swift; sourceTree = "<group>"; };
 		41A87BAC1DA66E700000EE80 /* AuthSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettings.swift; path = Models/AuthSettings.swift; sourceTree = "<group>"; };
+		41A91AEE1E51C51A005C94B1 /* SubscriptionUserStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SubscriptionUserStatusView.xib; path = Views/Subscriptions/SubscriptionUserStatusView.xib; sourceTree = "<group>"; };
+		41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionUserStatusView.swift; path = Views/Subscriptions/SubscriptionUserStatusView.swift; sourceTree = "<group>"; };
 		41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AutocompleteCell.xib; path = Views/Cells/Chat/AutocompleteCell.xib; sourceTree = "<group>"; };
 		41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutocompleteCell.swift; path = Views/Cells/Chat/AutocompleteCell.swift; sourceTree = "<group>"; };
 		41B4B2331E40B1D200F4D252 /* ChatControllerUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatControllerUploader.swift; path = Controllers/Chat/ChatControllerUploader.swift; sourceTree = "<group>"; };
@@ -337,11 +341,12 @@
 		4161332F1D46CA2800E09DA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				41D5BC2B1DAFBEE4009A493A /* Base */,
-				41F167E51DAC450200775CCA /* Chat */,
 				41C275DD1D847FEE003C88CF /* Avatar */,
-				418C4DC41DC4C05000ABED4C /* Sections */,
+				41D5BC2B1DAFBEE4009A493A /* Base */,
 				416133301D46CA3100E09DA2 /* Cells */,
+				41F167E51DAC450200775CCA /* Chat */,
+				418C4DC41DC4C05000ABED4C /* Sections */,
+				41A91AED1E51C4E5005C94B1 /* Subscriptions */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -522,6 +527,15 @@
 				41A79C0E1D2F085F00A1968E /* User.swift */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		41A91AED1E51C4E5005C94B1 /* Subscriptions */ = {
+			isa = PBXGroup;
+			children = (
+				41A91AEE1E51C51A005C94B1 /* SubscriptionUserStatusView.xib */,
+				41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusView.swift */,
+			);
+			name = Subscriptions;
 			sourceTree = "<group>";
 		};
 		41BD37D71E290D7400CBC4C2 /* Base */ = {
@@ -843,6 +857,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41AC3CD31DCC9873002DC39A /* AutocompleteCell.xib in Resources */,
+				41A91AEF1E51C51A005C94B1 /* SubscriptionUserStatusView.xib in Resources */,
 				41C275E11D84815C003C88CF /* AvatarView.xib in Resources */,
 				416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */,
 				4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */,
@@ -1132,6 +1147,7 @@
 				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,
 				41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */,
 				419EAF291E26562E002C8DA5 /* UserCoordinator.swift in Sources */,
+				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,
 				41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */,
 				41EE157E1E05BED600754D45 /* ChatControllerAutocomplete.swift in Sources */,

@@ -31,6 +31,13 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    @IBOutlet weak var viewUser: UIView! {
+        didSet {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
+            viewUser.addGestureRecognizer(gesture)
+        }
+    }
+
     @IBOutlet weak var viewUserStatus: UIView!
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var imageViewArrowDown: UIImageView! {
@@ -321,4 +328,22 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
     func buttonLoadMoreDidPressed() {
         searchOnSpotlight(textFieldSearch.text ?? "")
     }
+}
+
+extension SubscriptionsViewController {
+
+    func viewUserDidTap(sender: Any) {
+        guard let viewStatus = SubscriptionUserStatusView.instanceFromNib() as? SubscriptionUserStatusView else { return }
+
+        var newFrame = view.frame
+        newFrame.origin.y = -newFrame.height
+        viewStatus.frame = newFrame
+        viewUser.insertSubview(viewStatus, at: 0)
+
+        newFrame.origin.y = 64
+        UIView.animate(withDuration: 0.15) {
+            viewStatus.frame = newFrame
+        }
+    }
+
 }
