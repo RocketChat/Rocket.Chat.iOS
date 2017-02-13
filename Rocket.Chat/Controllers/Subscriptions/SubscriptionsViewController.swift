@@ -31,6 +31,7 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    weak var viewUserMenu: SubscriptionUserStatusView?
     @IBOutlet weak var viewUser: UIView! {
         didSet {
             let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
@@ -332,17 +333,41 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 
 extension SubscriptionsViewController {
 
-    func viewUserDidTap(sender: Any) {
-        guard let viewStatus = SubscriptionUserStatusView.instanceFromNib() as? SubscriptionUserStatusView else { return }
+    func presentUserMenu() {
+        guard let viewUserMenu = SubscriptionUserStatusView.instanceFromNib() as? SubscriptionUserStatusView else { return }
 
         var newFrame = view.frame
         newFrame.origin.y = -newFrame.height
-        viewStatus.frame = newFrame
-        viewUser.insertSubview(viewStatus, at: 0)
+        viewUserMenu.frame = newFrame
+        viewUser.insertSubview(viewUserMenu, at: 0)
+        self.viewUserMenu = viewUserMenu
 
         newFrame.origin.y = 64
         UIView.animate(withDuration: 0.15) {
-            viewStatus.frame = newFrame
+            viewUserMenu.frame = newFrame
+            self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        }
+    }
+
+    func dismissUserMenu() {
+        guard let viewUserMenu = viewUserMenu else { return }
+
+        var newFrame = viewUserMenu.frame
+        newFrame.origin.y = -newFrame.height
+
+        UIView.animate(withDuration: 0.15, animations: {
+            viewUserMenu.frame = newFrame
+            self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat(0))
+        }) { (_) in
+            viewUserMenu.removeFromSuperview()
+        }
+    }
+
+    func viewUserDidTap(sender: Any) {
+        if let _ = viewUserMenu {
+            dismissUserMenu()
+        } else {
+            presentUserMenu()
         }
     }
 
