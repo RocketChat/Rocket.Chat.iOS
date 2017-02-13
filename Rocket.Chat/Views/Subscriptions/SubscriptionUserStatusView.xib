@@ -239,6 +239,10 @@
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="imageViewLogout" destination="9UG-sA-NzQ" id="I62-IF-cnP"/>
+                <outlet property="imageViewSettings" destination="FzV-JX-Kc0" id="MJC-jM-Vk3"/>
+            </connections>
             <point key="canvasLocation" x="33.5" y="54.5"/>
         </view>
     </objects>

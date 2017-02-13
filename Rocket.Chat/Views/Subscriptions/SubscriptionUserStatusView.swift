@@ -10,6 +10,16 @@ import UIKit
 
 class SubscriptionUserStatusView: BaseView {
 
+    @IBOutlet weak var imageViewSettings: UIImageView! {
+        didSet {
+            imageViewSettings.image = imageViewSettings.image?.imageWithTint(.RCLightBlue())
+        }
+    }
 
+    @IBOutlet weak var imageViewLogout: UIImageView! {
+        didSet {
+            imageViewLogout.image = imageViewLogout.image?.imageWithTint(.RCLightBlue())
+        }
+    }
 
 }
