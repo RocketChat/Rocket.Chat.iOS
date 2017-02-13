@@ -73,6 +73,7 @@ final class SubscriptionsViewController: BaseViewController {
         textFieldSearch.resignFirstResponder()
         unregisterKeyboardNotifications()
         ChatViewController.sharedInstance()?.toggleStatusBar(hide: false)
+        dismissUserMenu()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -331,7 +332,7 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
     }
 }
 
-extension SubscriptionsViewController {
+extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
 
     func presentUserMenu() {
         guard let viewUserMenu = SubscriptionUserStatusView.instanceFromNib() as? SubscriptionUserStatusView else { return }
@@ -339,7 +340,9 @@ extension SubscriptionsViewController {
         var newFrame = view.frame
         newFrame.origin.y = -newFrame.height
         viewUserMenu.frame = newFrame
-        viewUser.insertSubview(viewUserMenu, at: 0)
+        viewUserMenu.delegate = self
+
+        view.addSubview(viewUserMenu)
         self.viewUserMenu = viewUserMenu
 
         newFrame.origin.y = 64
@@ -369,6 +372,10 @@ extension SubscriptionsViewController {
         } else {
             presentUserMenu()
         }
+    }
+
+    func userDidPressedOption() {
+        dismissUserMenu()
     }
 
 }
