@@ -65,6 +65,7 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateCurrentUserInformation()
         ChatViewController.sharedInstance()?.toggleStatusBar(hide: true)
     }
 
@@ -144,13 +145,16 @@ extension SubscriptionsViewController {
         guard let auth = AuthManager.isAuthenticated() else { return }
         subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
         groupSubscription()
+        updateCurrentUserInformation()
         tableView?.reloadData()
+    }
 
-        // Update current user data
+    func updateCurrentUserInformation() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let labelUsername = self.labelUsername else { return }
+        guard let viewUserStatus = self.viewUserStatus else { return }
+
         Realm.execute { (realm) in
-            guard let labelUsername = self.labelUsername else { return }
-            guard let viewUserStatus = self.viewUserStatus else { return }
-
             if let user = realm.object(ofType: User.self, forPrimaryKey: auth.userId) {
                 labelUsername.text = user.username ?? ""
 
@@ -392,6 +396,8 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
     }
 
     func viewUserDidTap(sender: Any) {
+        textFieldSearch.resignFirstResponder()
+
         if let _ = viewUserMenu {
             dismissUserMenu()
         } else {
