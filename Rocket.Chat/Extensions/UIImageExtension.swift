@@ -52,5 +52,5 @@ extension UIImage {
 
         return result
     }
-    
+
 }

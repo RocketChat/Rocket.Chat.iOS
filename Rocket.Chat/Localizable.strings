@@ -34,6 +34,14 @@
 "subscriptions.channels" = "Channels";
 "subscriptions.direct_messages" = "Direct Messages";
 
+// User Menu
+"user_menu.online" = "Online";
+"user_menu.away" = "Away";
+"user_menu.busy" = "Busy";
+"user_menu.invisible" = "Invisible";
+"user_menu.settings" = "My Account";
+"user_menu.logout" = "Logout";
+
 // Chat
 "chat.channel_preview_view.title" = "This is a preview of #%@";
 "chat.channel_preview_view.join" = "Join Channel";

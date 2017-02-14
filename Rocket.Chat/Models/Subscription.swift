@@ -84,7 +84,7 @@ extension Subscription {
     }
 
     func fetchMessages() -> Results<Message> {
-        return self.messages.sorted(byProperty: "createdAt", ascending: true)
+        return self.messages.sorted(byKeyPath: "createdAt", ascending: true)
     }
 
 }
