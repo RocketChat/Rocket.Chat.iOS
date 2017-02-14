@@ -6,7 +6,6 @@
 //  Copyright © 2016 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
 import UIKit
 
 class BaseViewController: UIViewController {

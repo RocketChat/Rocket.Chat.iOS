@@ -14,7 +14,7 @@ struct AuthManager {
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
     static func isAuthenticated() -> Auth? {
-        guard let auths = try? Realm().objects(Auth.self).sorted(byProperty: "lastAccess", ascending: false) else { return nil}
+        guard let auths = try? Realm().objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false) else { return nil}
         return auths.first
     }
 }
@@ -111,6 +111,22 @@ extension AuthManager {
 
             Realm.update(auth)
             completion(response)
+        }
+    }
+
+    /**
+        Logouts user from the app, clear database
+        and disconnects from the socket.
+     */
+    static func logout(completion: @escaping VoidCompletion) {
+        SocketManager.disconnect { (_, _) in
+            SocketManager.clear()
+
+            Realm.execute({ (realm) in
+                realm.deleteAll()
+            })
+
+            completion()
         }
     }
 

@@ -31,6 +31,22 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    weak var viewUserMenu: SubscriptionUserStatusView?
+    @IBOutlet weak var viewUser: UIView! {
+        didSet {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
+            viewUser.addGestureRecognizer(gesture)
+        }
+    }
+
+    @IBOutlet weak var viewUserStatus: UIView!
+    @IBOutlet weak var labelUsername: UILabel!
+    @IBOutlet weak var imageViewArrowDown: UIImageView! {
+        didSet {
+            imageViewArrowDown.image = imageViewArrowDown.image?.imageWithTint(.RCLightBlue())
+        }
+    }
+
     var assigned = false
     var isSearchingLocally = false
     var isSearchingRemotely = false
@@ -49,6 +65,7 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        updateCurrentUserInformation()
         ChatViewController.sharedInstance()?.toggleStatusBar(hide: true)
     }
 
@@ -57,6 +74,7 @@ final class SubscriptionsViewController: BaseViewController {
         textFieldSearch.resignFirstResponder()
         unregisterKeyboardNotifications()
         ChatViewController.sharedInstance()?.toggleStatusBar(hide: false)
+        dismissUserMenu()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -125,9 +143,37 @@ extension SubscriptionsViewController {
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
         guard !isSearchingLocally && !isSearchingRemotely else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
+        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         groupSubscription()
+        updateCurrentUserInformation()
         tableView?.reloadData()
+    }
+
+    func updateCurrentUserInformation() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let labelUsername = self.labelUsername else { return }
+        guard let viewUserStatus = self.viewUserStatus else { return }
+
+        Realm.execute { (realm) in
+            if let user = realm.object(ofType: User.self, forPrimaryKey: auth.userId) {
+                labelUsername.text = user.username ?? ""
+
+                switch user.status {
+                case .online:
+                    viewUserStatus.backgroundColor = .RCOnline()
+                    break
+                case .busy:
+                    viewUserStatus.backgroundColor = .RCBusy()
+                    break
+                case .away:
+                    viewUserStatus.backgroundColor = .RCAway()
+                    break
+                case .offline:
+                    viewUserStatus.backgroundColor = .RCInvisible()
+                    break
+                }
+            }
+        }
     }
 
     func subscribeModelChanges() {
@@ -136,7 +182,7 @@ extension SubscriptionsViewController {
 
         assigned = true
 
-        subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
+        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
         usersToken = try? Realm().addNotificationBlock { [weak self] _, _ in
             self?.handleModelUpdates(nil)
@@ -154,7 +200,7 @@ extension SubscriptionsViewController {
         var searchResultsGroup: [Subscription] = []
 
         guard let subscriptions = subscriptions else { return }
-        let orderSubscriptions = isSearchingRemotely ? searchResult : Array(subscriptions.sorted(byProperty: "name", ascending: true))
+        let orderSubscriptions = isSearchingRemotely ? searchResult : Array(subscriptions.sorted(byKeyPath: "name", ascending: true))
 
         for subscription in orderSubscriptions ?? [] {
             if isSearchingRemotely {
@@ -313,4 +359,55 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
     func buttonLoadMoreDidPressed() {
         searchOnSpotlight(textFieldSearch.text ?? "")
     }
+}
+
+extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
+
+    func presentUserMenu() {
+        guard let viewUserMenu = SubscriptionUserStatusView.instanceFromNib() as? SubscriptionUserStatusView else { return }
+
+        var newFrame = view.frame
+        newFrame.origin.y = -newFrame.height
+        viewUserMenu.frame = newFrame
+        viewUserMenu.delegate = self
+        viewUserMenu.parentController = self
+
+        view.addSubview(viewUserMenu)
+        self.viewUserMenu = viewUserMenu
+
+        newFrame.origin.y = 64
+        UIView.animate(withDuration: 0.15) {
+            viewUserMenu.frame = newFrame
+            self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
+        }
+    }
+
+    func dismissUserMenu() {
+        guard let viewUserMenu = viewUserMenu else { return }
+
+        var newFrame = viewUserMenu.frame
+        newFrame.origin.y = -newFrame.height
+
+        UIView.animate(withDuration: 0.15, animations: {
+            viewUserMenu.frame = newFrame
+            self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat(0))
+        }) { (_) in
+            viewUserMenu.removeFromSuperview()
+        }
+    }
+
+    func viewUserDidTap(sender: Any) {
+        textFieldSearch.resignFirstResponder()
+
+        if let _ = viewUserMenu {
+            dismissUserMenu()
+        } else {
+            presentUserMenu()
+        }
+    }
+
+    func userDidPressedOption() {
+        dismissUserMenu()
+    }
+
 }
