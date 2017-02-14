@@ -124,7 +124,7 @@
                                                     <constraint firstAttribute="width" constant="20" id="lh9-Bv-mfD"/>
                                                 </constraints>
                                             </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="rafael.kellermann" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3h-Vc-Kfo">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="john.appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3h-Vc-Kfo">
                                                 <rect key="frame" x="35" y="21.5" width="295" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="5nm-hf-Aip"/>
