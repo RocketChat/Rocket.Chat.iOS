@@ -370,6 +370,7 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
         newFrame.origin.y = -newFrame.height
         viewUserMenu.frame = newFrame
         viewUserMenu.delegate = self
+        viewUserMenu.parentController = self
 
         view.addSubview(viewUserMenu)
         self.viewUserMenu = viewUserMenu

@@ -15,6 +15,7 @@ protocol SubscriptionUserStatusViewProtocol: class {
 final class SubscriptionUserStatusView: BaseView {
 
     weak var delegate: SubscriptionUserStatusViewProtocol?
+    weak var parentController: UIViewController?
 
     @IBOutlet weak var buttonOnline: UIButton!
     @IBOutlet weak var labelOnline: UILabel! {
@@ -97,6 +98,13 @@ final class SubscriptionUserStatusView: BaseView {
     }
 
     @IBAction func buttonSettingsDidPressed(_ sender: Any) {
+        let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
+
+        if let controller = storyboard.instantiateInitialViewController() {
+            controller.modalPresentationStyle = .formSheet
+            parentController?.present(controller, animated: true, completion: nil)
+        }
+
         self.delegate?.userDidPressedOption()
     }
 
