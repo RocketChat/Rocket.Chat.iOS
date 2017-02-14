@@ -37,7 +37,6 @@ extension UIColor {
         return UIColor(rgb: 0x9AB1BF, alphaVal: 1)
     }
 
-
     // Theme color
 
     static func RCDarkBlue() -> UIColor {

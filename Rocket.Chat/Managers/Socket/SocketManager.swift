@@ -175,7 +175,7 @@ extension SocketManager: WebSocketDelegate {
     }
 
     func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        let json = JSON.parse(text)
+        let json = JSON(parseJSON: text)
 
         // JSON is invalid
         guard json.exists() else {
