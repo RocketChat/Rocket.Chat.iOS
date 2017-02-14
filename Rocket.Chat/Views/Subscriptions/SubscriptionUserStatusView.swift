@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 protocol SubscriptionUserStatusViewProtocol: class {
     func userDidPressedOption()
@@ -109,7 +110,16 @@ final class SubscriptionUserStatusView: BaseView {
     }
 
     @IBAction func buttonLogoutDidPressed(_ sender: Any) {
-        self.delegate?.userDidPressedOption()
+        AuthManager.logout {
+            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let controller = storyboardChat.instantiateInitialViewController()
+            let application = UIApplication.shared
+
+            if let window = application.keyWindow {
+                window.rootViewController = controller
+                window.makeKeyAndVisible()
+            }
+        }
     }
 
 }
