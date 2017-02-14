@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		15A2FD223558011BFDE03883 /* Pods_Rocket_ChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */; };
 		4102E3AA1E532323004BAA82 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4102E3A91E532323004BAA82 /* Settings.storyboard */; };
+		4102E3AD1E53273E004BAA82 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */; };
 		411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411EDED41E3102CB00BC7BE3 /* UploadManager.swift */; };
 		412731D51DE0A55C00FC45A0 /* ChatPreviewModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412731D41DE0A55C00FC45A0 /* ChatPreviewModeView.xib */; };
 		412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412731D61DE0A89B00FC45A0 /* ChatPreviewModeView.swift */; };
@@ -142,6 +143,7 @@
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		4102E3A91E532323004BAA82 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Storyboards/Settings.storyboard; sourceTree = "<group>"; };
+		4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Controllers/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
 		411EDED41E3102CB00BC7BE3 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadManager.swift; path = Managers/Uploader/UploadManager.swift; sourceTree = "<group>"; };
 		412731D41DE0A55C00FC45A0 /* ChatPreviewModeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatPreviewModeView.xib; path = Views/Chat/ChatPreviewModeView.xib; sourceTree = "<group>"; };
 		412731D61DE0A89B00FC45A0 /* ChatPreviewModeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatPreviewModeView.swift; path = Views/Chat/ChatPreviewModeView.swift; sourceTree = "<group>"; };
@@ -301,6 +303,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		4102E3AB1E53272C004BAA82 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		411EDECE1E30F2D700BC7BE3 /* Uploader */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,6 +409,7 @@
 				4174CB111D2D99840086DAC8 /* Base */,
 				4174CB101D2D997E0086DAC8 /* Auth */,
 				41E2FA021D414ECC00238DFD /* Chat */,
+				4102E3AB1E53272C004BAA82 /* Settings */,
 				41E2FA031D414ED400238DFD /* Subscriptions */,
 				415801941D303B640099E71B /* MainViewController.swift */,
 			);
@@ -1145,6 +1156,7 @@
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
 				41D5BC2F1DAFBEEB009A493A /* NibLoadableProtocol.swift in Sources */,
+				4102E3AD1E53273E004BAA82 /* SettingsViewController.swift in Sources */,
 				41EE15821E05BF9600754D45 /* ChatControllerSocketConnectionHandler.swift in Sources */,
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
 				4151B45C1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift in Sources */,
