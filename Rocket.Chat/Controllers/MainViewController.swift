@@ -37,7 +37,7 @@ final class MainViewController: BaseViewController {
         super.viewDidAppear(animated)
 
         if let leftMenuController = SideMenuManager.menuLeftNavigationController {
-            leftMenuController.dismiss(animated: false, completion: { 
+            leftMenuController.dismiss(animated: false, completion: {
                 SideMenuManager.menuLeftNavigationController = nil
                 SideMenuManager.menuLeftSwipeToDismissGesture = nil
                 SideMenuManager.menuRightNavigationController = nil

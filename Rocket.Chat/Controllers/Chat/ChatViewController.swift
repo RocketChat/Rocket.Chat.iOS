@@ -104,7 +104,7 @@ final class ChatViewController: SLKTextViewController {
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         guard let auth = AuthManager.isAuthenticated() else { return }
-        let subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
+        let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         if let subscription = subscriptions.first {
             self.subscription = subscription
         }

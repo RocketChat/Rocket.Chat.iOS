@@ -14,7 +14,7 @@ struct AuthManager {
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
     static func isAuthenticated() -> Auth? {
-        guard let auths = try? Realm().objects(Auth.self).sorted(byProperty: "lastAccess", ascending: false) else { return nil}
+        guard let auths = try? Realm().objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false) else { return nil}
         return auths.first
     }
 }

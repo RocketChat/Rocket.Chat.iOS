@@ -143,7 +143,7 @@ extension SubscriptionsViewController {
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
         guard !isSearchingLocally && !isSearchingRemotely else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
+        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         groupSubscription()
         updateCurrentUserInformation()
         tableView?.reloadData()
@@ -182,7 +182,7 @@ extension SubscriptionsViewController {
 
         assigned = true
 
-        subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
+        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
         usersToken = try? Realm().addNotificationBlock { [weak self] _, _ in
             self?.handleModelUpdates(nil)
@@ -200,7 +200,7 @@ extension SubscriptionsViewController {
         var searchResultsGroup: [Subscription] = []
 
         guard let subscriptions = subscriptions else { return }
-        let orderSubscriptions = isSearchingRemotely ? searchResult : Array(subscriptions.sorted(byProperty: "name", ascending: true))
+        let orderSubscriptions = isSearchingRemotely ? searchResult : Array(subscriptions.sorted(byKeyPath: "name", ascending: true))
 
         for subscription in orderSubscriptions ?? [] {
             if isSearchingRemotely {
