@@ -61,6 +61,7 @@ final class MainViewController: BaseViewController {
 
                     })
 
+                    UserManager.userDataChanges()
                     UserManager.changes()
                     SubscriptionManager.changes(auth)
 

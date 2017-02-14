@@ -20,6 +20,16 @@ struct UserManager {
         SocketManager.send(request) { _ in }
     }
 
+    static func userDataChanges() {
+        let request = [
+            "msg": "sub",
+            "name": "userData",
+            "params": []
+        ] as [String : Any]
+
+        SocketManager.send(request) { _ in }
+    }
+
     static func setUserStatus(status: UserStatus, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",

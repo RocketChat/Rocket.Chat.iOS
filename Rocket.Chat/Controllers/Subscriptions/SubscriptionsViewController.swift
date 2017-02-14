@@ -145,6 +145,31 @@ extension SubscriptionsViewController {
         subscriptions = auth.subscriptions.sorted(byProperty: "lastSeen", ascending: false)
         groupSubscription()
         tableView?.reloadData()
+
+        // Update current user data
+        Realm.execute { (realm) in
+            guard let labelUsername = self.labelUsername else { return }
+            guard let viewUserStatus = self.viewUserStatus else { return }
+
+            if let user = realm.object(ofType: User.self, forPrimaryKey: auth.userId) {
+                labelUsername.text = user.username ?? ""
+
+                switch user.status {
+                case .online:
+                    viewUserStatus.backgroundColor = .RCOnline()
+                    break
+                case .busy:
+                    viewUserStatus.backgroundColor = .RCBusy()
+                    break
+                case .away:
+                    viewUserStatus.backgroundColor = .RCAway()
+                    break
+                case .offline:
+                    viewUserStatus.backgroundColor = .RCInvisible()
+                    break
+                }
+            }
+        }
     }
 
     func subscribeModelChanges() {

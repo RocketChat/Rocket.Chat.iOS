@@ -103,6 +103,7 @@ extension SocketManager {
 
                 })
 
+                UserManager.userDataChanges()
                 UserManager.changes()
                 SubscriptionManager.changes(auth)
 
