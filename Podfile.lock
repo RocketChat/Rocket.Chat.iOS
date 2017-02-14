@@ -1,26 +1,26 @@
 PODS:
-  - Bugsnag (5.6.5):
-    - KSCrash/RecordingAdvanced (= 1.8.13)
+  - Bugsnag (5.7.0):
+    - KSCrash/RecordingAdvanced (= 1.11.2)
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
-  - KSCrash/Recording (1.8.13)
-  - KSCrash/RecordingAdvanced (1.8.13):
+  - KSCrash/Recording (1.11.2)
+  - KSCrash/RecordingAdvanced (1.11.2):
     - KSCrash/Recording
   - MobilePlayer (1.2.0)
-  - NVActivityIndicatorView (3.2)
-  - Realm (2.1.0):
-    - Realm/Headers (= 2.1.0)
-  - Realm/Headers (2.1.0)
-  - RealmSwift (2.1.0):
-    - Realm (= 2.1.0)
+  - NVActivityIndicatorView (3.4)
+  - Realm (2.4.2):
+    - Realm/Headers (= 2.4.2)
+  - Realm/Headers (2.4.2)
+  - RealmSwift (2.4.2):
+    - Realm (= 2.4.2)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
-  - SideMenu (2.0.6)
+  - SideMenu (2.2.0)
   - SlackTextViewController (1.9.5)
-  - Starscream (2.0.2)
-  - SwiftyJSON (3.1.3)
+  - Starscream (2.0.3)
+  - SwiftyJSON (3.1.4)
   - URBMediaFocusViewController (0.9.0)
 
 DEPENDENCIES:
@@ -38,19 +38,19 @@ DEPENDENCIES:
   - URBMediaFocusViewController
 
 SPEC CHECKSUMS:
-  Bugsnag: a390acb8d937a9af54dd5044298a892e716c6eef
+  Bugsnag: d86488d670f91acbce0186e6570e500039676ef0
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  KSCrash: 4c3a83f133b60f4bd57e05235ebf8d46e36d378d
+  KSCrash: 8acc46aca72b2772d5d1e3cba1da9173db4d705e
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  NVActivityIndicatorView: 28942c18ced111a6a3ce5e6f5b27d9d40116d639
-  Realm: bc829ad0ef3d4eea70c34cfcc3b1704d18d50df1
-  RealmSwift: a4d4abbf0088c337cab5b738054395842e4b3052
+  NVActivityIndicatorView: 5754be63ceecd1df8af37d3c088d81872feeb8b8
+  Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
+  RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
-  SideMenu: 90be7a14e9f54eb528f96f2033aa54f2992c5667
+  SideMenu: eeff6b85456c5c6e14165655691d2033f6b24969
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
-  Starscream: 6c135a34e0a6e60cedaa0b30db67a4c05cf7cd38
-  SwiftyJSON: 38a8ea2006779c0fc4c310cb2ee8195327740faf
+  Starscream: 3fdd5c277e57cca6b5c406d274e3f34a7c88f2ce
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
 PODFILE CHECKSUM: f504bcc2293770c3f3bd1f361e71939ff1d370c9
