@@ -114,6 +114,22 @@ extension AuthManager {
         }
     }
 
+    /**
+        Logouts user from the app, clear database
+        and disconnects from the socket.
+     */
+    static func logout(completion: @escaping VoidCompletion) {
+        SocketManager.disconnect { (_, _) in
+            SocketManager.clear()
+
+            Realm.execute({ (realm) in
+                realm.deleteAll()
+            })
+
+            completion()
+        }
+    }
+
     static func updatePublicSettings(_ auth: Auth, completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
