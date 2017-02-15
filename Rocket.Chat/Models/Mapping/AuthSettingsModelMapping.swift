@@ -16,6 +16,7 @@ extension AuthSettings: ModelMappeable {
         }
 
         self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
+        self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string
 
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
     }
