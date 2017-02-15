@@ -98,6 +98,7 @@ final class ChatViewController: SLKTextViewController {
         setupTitleView()
         setupSideMenu()
         setupTextViewSettings()
+        setupLongPressGestureHandler()
 
         // TODO: this should really goes into the view model, when we have it
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
