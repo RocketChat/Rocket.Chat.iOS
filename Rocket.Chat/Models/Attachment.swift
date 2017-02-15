@@ -56,8 +56,8 @@ extension Attachment {
         guard let auth = AuthManager.isAuthenticated() else { return nil }
         guard let userId = auth.userId else { return nil }
         guard let token = auth.token else { return nil }
-        guard let siteURL = auth.settings?.siteURL else { return nil }
-        var urlString = "\(siteURL)\(path)?rc_uid=\(userId)&rc_token=\(token)"
+        guard let baseURL = auth.baseURL() else { return nil }
+        var urlString = "\(baseURL)\(path)?rc_uid=\(userId)&rc_token=\(token)"
         urlString = urlString.replacingOccurrences(of: "//", with: "/")
         return URL(string: urlString)
     }
