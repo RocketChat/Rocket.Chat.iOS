@@ -13,7 +13,7 @@ protocol SubscriptionUserStatusViewProtocol: class {
     func userDidPressedOption()
 }
 
-final class SubscriptionUserStatusView: BaseView {
+final class SubscriptionUserStatusView: UIView {
 
     weak var delegate: SubscriptionUserStatusViewProtocol?
     weak var parentController: UIViewController?

@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class SubscriptionSectionView: BaseView {
+final class SubscriptionSectionView: UIView {
 
     fileprivate let defaultIconWidthConstraint = CGFloat(18)
     fileprivate let defaultTitleLeftConstraint = CGFloat(8)

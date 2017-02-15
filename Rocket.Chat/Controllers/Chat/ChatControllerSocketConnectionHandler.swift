@@ -25,7 +25,7 @@ extension ChatViewController: SocketConnectionHandler {
     func socketDidDisconnect(socket: SocketManager) {
         chatHeaderViewOffline?.removeFromSuperview()
 
-        if let headerView = ChatHeaderViewOffline.instanceFromNib() as? ChatHeaderViewOffline {
+        if let headerView = ChatHeaderViewOffline.instantiateFromNib() {
             headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.frame.height)
             view.addSubview(headerView)
             chatHeaderViewOffline = headerView
