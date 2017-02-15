@@ -21,6 +21,7 @@
 		414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FF51D46320F00093E10 /* ResponseMessage.swift */; };
 		414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FF91D46395400093E10 /* SocketManager.swift */; };
 		414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FFB1D46395900093E10 /* SocketResponse.swift */; };
+		414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EFF911E54FE69004F001F /* AuthExtensions.swift */; };
 		4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */; };
 		4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4531E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift */; };
 		4151B4561E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */; };
@@ -155,6 +156,7 @@
 		414A1FF51D46320F00093E10 /* ResponseMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResponseMessage.swift; path = Managers/Socket/Response/ResponseMessage.swift; sourceTree = "<group>"; };
 		414A1FF91D46395400093E10 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = Managers/Socket/SocketManager.swift; sourceTree = "<group>"; };
 		414A1FFB1D46395900093E10 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketResponse.swift; path = Managers/Socket/Response/SocketResponse.swift; sourceTree = "<group>"; };
+		414EFF911E54FE69004F001F /* AuthExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthExtensions.swift; path = Extensions/Models/AuthExtensions.swift; sourceTree = "<group>"; };
 		4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserModelHandler.swift; path = Models/Handler/UserModelHandler.swift; sourceTree = "<group>"; };
 		4151B4531E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionModelHandler.swift; path = Models/Handler/SubscriptionModelHandler.swift; sourceTree = "<group>"; };
 		4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionModelMapping.swift; path = Models/Mapping/SubscriptionModelMapping.swift; sourceTree = "<group>"; };
@@ -329,6 +331,14 @@
 			name = Response;
 			sourceTree = "<group>";
 		};
+		414EFF901E54FE35004F001F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				414EFF911E54FE69004F001F /* AuthExtensions.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		41552F641D30307D0081438D /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +472,7 @@
 		4174CB1D1D2DB3270086DAC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				414EFF901E54FE35004F001F /* Models */,
 				597ECBA11E3708A50041C5C5 /* DataExtension.swift */,
 				4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */,
 				4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */,
@@ -1149,6 +1160,7 @@
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
 				4102E3AD1E53273E004BAA82 /* SettingsViewController.swift in Sources */,
+				414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */,
 				41EE15821E05BF9600754D45 /* ChatControllerSocketConnectionHandler.swift in Sources */,
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
 				4151B45C1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift in Sources */,
