@@ -46,6 +46,10 @@
 "chat.channel_preview_view.title" = "This is a preview of #%@";
 "chat.channel_preview_view.join" = "Join Channel";
 
+// Chat Message Actions
+"chat.message.actions.report" = "Report Message";
+"chat.message.actions.copy" = "Copy";
+
 // Chat Upload
 "chat.upload.uploading_image" = "Uploading image";
 "chat.upload.take_photo" = "Take Photo";
