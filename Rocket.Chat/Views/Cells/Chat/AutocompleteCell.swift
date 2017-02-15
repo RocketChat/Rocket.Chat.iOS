@@ -14,7 +14,18 @@ final class AutocompleteCell: UITableViewCell {
     static let identifier = "AutocompleteCell"
 
     @IBOutlet weak var imageViewIcon: UIImageView!
-    @IBOutlet weak var avatarView: AvatarView! {
+
+    @IBOutlet weak var avatarViewContainer: AvatarView! {
+        didSet {
+            if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.frame = avatarViewContainer.bounds
+                avatarViewContainer.addSubview(avatarView)
+                self.avatarView = avatarView
+            }
+        }
+    }
+
+    weak var avatarView: AvatarView! {
         didSet {
             avatarView.layer.cornerRadius = 4
             avatarView.layer.masksToBounds = true

@@ -12,7 +12,7 @@ protocol ChatPreviewModeViewProtocol: class {
     func userDidJoinedSubscription()
 }
 
-final class ChatPreviewModeView: BaseView {
+final class ChatPreviewModeView: UIView {
 
     weak var delegate: ChatPreviewModeViewProtocol?
     var subscription: Subscription! {

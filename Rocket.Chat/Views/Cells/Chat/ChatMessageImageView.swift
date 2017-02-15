@@ -13,7 +13,7 @@ protocol ChatMessageImageViewProtocol: class {
     func openImageFromCell(attachment: Attachment, thumbnail: UIImageView)
 }
 
-final class ChatMessageImageView: BaseView {
+final class ChatMessageImageView: UIView {
     static let defaultHeight = CGFloat(250)
 
     weak var delegate: ChatMessageImageViewProtocol?
