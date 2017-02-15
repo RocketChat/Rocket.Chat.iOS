@@ -161,8 +161,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func setupTitleView() {
-        // FIXME: Use typealias or associatedType in the protocol, to avoid casting
-        let view = ChatTitleView.instanceFromNib() as? ChatTitleView
+        let view = ChatTitleView.instantiateFromNib()
         self.navigationItem.titleView = view
         chatTitleView = view
     }
@@ -384,7 +383,7 @@ final class ChatViewController: SLKTextViewController {
     fileprivate func showChatPreviewModeView() {
         chatPreviewModeView?.removeFromSuperview()
 
-        if let previewView = ChatPreviewModeView.instanceFromNib() as? ChatPreviewModeView {
+        if let previewView = ChatPreviewModeView.instantiateFromNib() {
             previewView.delegate = self
             previewView.subscription = subscription
             previewView.frame = CGRect(x: 0, y: view.frame.height - previewView.frame.height, width: view.frame.width, height: previewView.frame.height)

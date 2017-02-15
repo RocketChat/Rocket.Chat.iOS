@@ -24,7 +24,17 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
-    @IBOutlet weak var avatarView: AvatarView! {
+    @IBOutlet weak var avatarViewContainer: UIView! {
+        didSet {
+            if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.frame = avatarViewContainer.bounds
+                avatarViewContainer.addSubview(avatarView)
+                self.avatarView = avatarView
+            }
+        }
+    }
+
+    weak var avatarView: AvatarView! {
         didSet {
             avatarView.layer.cornerRadius = 4
             avatarView.layer.masksToBounds = true
@@ -98,7 +108,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
         message.urls.forEach { url in
             guard url.isValid() else { return }
-            if let view = ChatMessageURLView.instanceFromNib() as? ChatMessageURLView {
+            if let view = ChatMessageURLView.instantiateFromNib() {
                 view.url = url
                 view.delegate = delegate
 
@@ -112,7 +122,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
             switch type {
             case .image:
-                if let view = ChatMessageImageView.instanceFromNib() as? ChatMessageImageView {
+                if let view = ChatMessageImageView.instantiateFromNib() {
                     view.attachment = attachment
                     view.delegate = delegate
 
@@ -121,7 +131,7 @@ final class ChatMessageCell: UICollectionViewCell {
                 }
 
             case .video:
-                if let view = ChatMessageVideoView.instanceFromNib() as? ChatMessageVideoView {
+                if let view = ChatMessageVideoView.instantiateFromNib() {
                     view.attachment = attachment
                     view.delegate = delegate
 

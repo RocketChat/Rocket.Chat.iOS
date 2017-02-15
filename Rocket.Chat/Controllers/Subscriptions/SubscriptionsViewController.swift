@@ -115,7 +115,7 @@ extension SubscriptionsViewController {
         groupSubscription()
         tableView.reloadData()
 
-        if let footerView = SubscriptionSearchMoreView.instanceFromNib() as? SubscriptionSearchMoreView {
+        if let footerView = SubscriptionSearchMoreView.instantiateFromNib() {
             footerView.delegate = self
             tableView.tableFooterView = footerView
         }
@@ -317,7 +317,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let group = groupInfomation?[section] else { return nil }
-        guard let view = SubscriptionSectionView.instanceFromNib() as? SubscriptionSectionView else {
+        guard let view = SubscriptionSectionView.instantiateFromNib() else {
             return nil
         }
 
@@ -364,7 +364,7 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
 
     func presentUserMenu() {
-        guard let viewUserMenu = SubscriptionUserStatusView.instanceFromNib() as? SubscriptionUserStatusView else { return }
+        guard let viewUserMenu = SubscriptionUserStatusView.instantiateFromNib() else { return }
 
         var newFrame = view.frame
         newFrame.origin.y = -newFrame.height
