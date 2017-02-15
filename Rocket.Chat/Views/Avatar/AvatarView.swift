@@ -14,7 +14,7 @@ let avatarColors: [UInt] = [
     0x8BC34A, 0xCDDC39, 0xFFC107, 0xFF9800, 0xFF5722,
     0x795548, 0x9E9E9E, 0x607D8B]
 
-final class AvatarView: BaseView {
+final class AvatarView: UIView {
 
     var user: User! {
         didSet {
@@ -43,7 +43,7 @@ final class AvatarView: BaseView {
         setAvatarWithInitials()
 
         if let imageURL = userAvatarURL() {
-            imageView.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
+            imageView?.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
                 guard let _ = error else {
                     self?.labelInitials.text = ""
                     self?.backgroundColor = UIColor.clear
@@ -56,7 +56,7 @@ final class AvatarView: BaseView {
     }
 
     private func setAvatarWithInitials() {
-        let username = user.username ?? "?"
+        let username = user?.username ?? "?"
 
         var initials = ""
         var color: UInt = 0x000000
@@ -86,13 +86,8 @@ final class AvatarView: BaseView {
             }
         }
 
-        labelInitials.text = initials.uppercased()
+        labelInitials?.text = initials.uppercased()
         backgroundColor = UIColor(rgb: color, alphaVal: 1)
     }
 
-    // MARK: Replaceable
-
-    override func isReplaceable() -> Bool {
-        return true
-    }
 }
