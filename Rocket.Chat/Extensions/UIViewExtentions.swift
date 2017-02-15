@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 extension UIView {
 
     static var nib: UINib {
@@ -17,7 +16,7 @@ extension UIView {
     }
 
     static func instantiateFromNib() -> Self? {
-        func instanceFromNib<T: UIView>() ->T? {
+        func instanceFromNib<T: UIView>() -> T? {
             return nib.instantiate() as? T
         }
 
@@ -25,4 +24,3 @@ extension UIView {
     }
 
 }
-
