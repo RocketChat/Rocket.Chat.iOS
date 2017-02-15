@@ -70,4 +70,20 @@ extension MessageManager {
             Realm.update(message)
         }
     }
+
+    static func report(_ message: Message, completion: @escaping MessageCompletion) {
+        guard let messageIdentifier = message.identifier else { return }
+
+        let request = [
+            "msg": "method",
+            "method": "reportMessage",
+            "params": [messageIdentifier, "Message reported by user."]
+        ] as [String : Any]
+
+        SocketManager.send(request) { response in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+            completion(response)
+        }
+    }
+
 }
