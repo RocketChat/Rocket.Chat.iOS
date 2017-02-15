@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ChatTitleView: BaseView {
+final class ChatTitleView: UIView {
 
     @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!
@@ -48,9 +48,5 @@ final class ChatTitleView: BaseView {
             }
         }
     }
-    // MARK: Replaceable
-
-    override func isReplaceable() -> Bool {
-        return true
-    }
+    
 }
