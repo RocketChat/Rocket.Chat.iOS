@@ -26,6 +26,9 @@ class Message: BaseModel {
     dynamic var user: User?
     dynamic var text = ""
 
+    dynamic var alias = ""
+    dynamic var avatar = ""
+
     var mentions = List<Mention>()
     var attachments = List<Attachment>()
     var urls = List<MessageURL>()

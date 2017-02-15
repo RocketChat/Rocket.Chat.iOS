@@ -99,9 +99,15 @@ final class ChatMessageCell: UICollectionViewCell {
             labelDate.text = formatter.string(from: createdAt)
         }
 
+        avatarView.imageURL = URL(string: message.avatar)
         avatarView.user = message.user
 
-        labelUsername.text = message.user?.username
+        if message.alias.characters.count > 0 {
+            labelUsername.text = message.alias
+        } else {
+            labelUsername.text = message.user?.username
+        }
+
         labelText.text = Emojione.transform(string: message.text)
 
         var mediaViewHeight = CGFloat(0)

@@ -18,6 +18,8 @@ extension Message: ModelMappeable {
 
         self.rid = values["rid"].string ?? ""
         self.text = values["msg"].string ?? ""
+        self.avatar = values["avatar"].string ?? ""
+        self.alias = values["alias"].string ?? ""
 
         if let createdAt = values["ts"]["$date"].double {
             self.createdAt = Date.dateFromInterval(createdAt)
