@@ -34,7 +34,7 @@ extension ChatViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: localizedString("chat.message.actions.report"), style: .default, handler: { (_) in
-            
+            self.report(message: message)
         }))
 
         alert.addAction(UIAlertAction(title: localizedString("chat.message.actions.copy"), style: .default, handler: { (_) in
@@ -53,6 +53,14 @@ extension ChatViewController {
         }
 
         present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: Actions
+
+    fileprivate func report(message: Message) {
+        MessageManager.report(message) { (response) in
+
+        }
     }
 
 }
