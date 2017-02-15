@@ -16,7 +16,13 @@ let avatarColors: [UInt] = [
 
 final class AvatarView: UIView {
 
-    var user: User! {
+    var imageURL: URL? {
+        didSet {
+            updateAvatar()
+        }
+    }
+
+    var user: User? {
         didSet {
             updateAvatar()
         }
@@ -32,7 +38,7 @@ final class AvatarView: UIView {
     @IBOutlet weak var imageView: UIImageView!
 
     private func userAvatarURL() -> URL? {
-        guard let username = user.username else { return nil }
+        guard let username = user?.username else { return nil }
         guard let auth = AuthManager.isAuthenticated() else { return nil }
         guard let host = NSURL(string: auth.serverURL)?.host else { return nil }
         guard let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else { return nil }
@@ -42,7 +48,14 @@ final class AvatarView: UIView {
     private func updateAvatar() {
         setAvatarWithInitials()
 
-        if let imageURL = userAvatarURL() {
+        var imageURL: URL?
+        if let avatar = self.imageURL {
+            imageURL = avatar
+        } else {
+            imageURL = userAvatarURL()
+        }
+
+        if let imageURL = imageURL {
             imageView?.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
                 guard let _ = error else {
                     self?.labelInitials.text = ""
