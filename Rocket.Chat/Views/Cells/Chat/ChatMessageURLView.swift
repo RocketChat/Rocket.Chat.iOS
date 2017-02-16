@@ -50,7 +50,11 @@ final class ChatMessageURLView: UIView {
             imageViewURL.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
                 let width = error != nil ? 0 : ChatMessageURLView.imageViewDefaultWidth
                 self?.imageViewURLWidthConstraint.constant = width
+                self?.layoutSubviews()
             })
+        } else {
+            imageViewURLWidthConstraint.constant = 0
+            layoutSubviews()
         }
     }
 
