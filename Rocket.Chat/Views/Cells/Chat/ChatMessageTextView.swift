@@ -19,6 +19,7 @@ final class ChatMessageTextView: UIView {
         }
     }
 
+    @IBOutlet weak var viewLeftBorder: UIView!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
@@ -30,6 +31,12 @@ final class ChatMessageTextView: UIView {
 
     fileprivate func updateMessageInformation() {
         guard let attachment = self.attachment else { return }
+
+        if let _ = attachment.color {
+            viewLeftBorder.backgroundColor = UIColor(hex: attachment.color)
+        } else {
+            viewLeftBorder.backgroundColor = .lightGray
+        }
 
         labelTitle.text = attachment.title
         labelDescription.text = attachment.text
