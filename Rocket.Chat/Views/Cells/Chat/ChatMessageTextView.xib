@@ -67,6 +67,7 @@
                 <outlet property="imageViewThumbWidthConstraint" destination="VNd-f8-M71" id="AM8-GR-bOz"/>
                 <outlet property="labelDescription" destination="RP9-E1-GnI" id="7rM-9X-uoc"/>
                 <outlet property="labelTitle" destination="uYW-dT-TvJ" id="cWN-0r-kIE"/>
+                <outlet property="viewLeftBorder" destination="TtR-1b-Q52" id="kpa-yo-rlu"/>
             </connections>
             <point key="canvasLocation" x="460" y="843"/>
         </view>
