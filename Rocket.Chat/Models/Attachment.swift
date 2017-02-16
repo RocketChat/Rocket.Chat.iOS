@@ -20,8 +20,16 @@ class Attachment: BaseModel {
             return .video
         }
 
-        return .image
+        if imageURL?.characters.count ?? 0 > 0 {
+            return .image
+        }
+
+        return .textAttachment
     }
+
+    dynamic var text: String?
+    dynamic var thumbURL: String?
+    dynamic var color: String?
 
     dynamic var title = ""
     dynamic var titleLink = ""

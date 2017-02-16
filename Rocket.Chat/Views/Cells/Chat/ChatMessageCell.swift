@@ -69,6 +69,10 @@ final class ChatMessageCell: UICollectionViewCell {
         for attachment in message.attachments {
             let type = attachment.type
 
+            if type == .textAttachment {
+                total += ChatMessageTextView.defaultHeight
+            }
+
             if type == .image {
                 total += ChatMessageImageView.defaultHeight
             }
@@ -127,6 +131,15 @@ final class ChatMessageCell: UICollectionViewCell {
             let type = attachment.type
 
             switch type {
+            case .textAttachment:
+                if let view = ChatMessageTextView.instantiateFromNib() {
+                    view.attachment = attachment
+
+                    mediaViews.addArrangedSubview(view)
+                    mediaViewHeight += ChatMessageTextView.defaultHeight
+                }
+                break
+
             case .image:
                 if let view = ChatMessageImageView.instantiateFromNib() {
                     view.attachment = attachment
@@ -135,6 +148,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     mediaViews.addArrangedSubview(view)
                     mediaViewHeight += ChatMessageImageView.defaultHeight
                 }
+                break
 
             case .video:
                 if let view = ChatMessageVideoView.instantiateFromNib() {
@@ -144,6 +158,8 @@ final class ChatMessageCell: UICollectionViewCell {
                     mediaViews.addArrangedSubview(view)
                     mediaViewHeight += ChatMessageVideoView.defaultHeight
                 }
+                break
+
             default:
                 return
             }
