@@ -27,6 +27,7 @@ class Attachment: BaseModel {
         return .textAttachment
     }
 
+    dynamic var collapsed: Bool = false
     dynamic var text: String?
     dynamic var thumbURL: String?
     dynamic var color: String?
