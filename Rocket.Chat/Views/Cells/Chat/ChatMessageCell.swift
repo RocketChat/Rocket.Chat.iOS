@@ -70,7 +70,7 @@ final class ChatMessageCell: UICollectionViewCell {
             let type = attachment.type
 
             if type == .textAttachment {
-                total += ChatMessageTextView.defaultHeight
+                total += ChatMessageTextView.heightFor(attachment)
             }
 
             if type == .image {
@@ -136,7 +136,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.attachment = attachment
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageTextView.defaultHeight
+                    mediaViewHeight += ChatMessageTextView.heightFor(attachment)
                 }
                 break
 

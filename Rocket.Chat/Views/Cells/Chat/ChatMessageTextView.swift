@@ -23,6 +23,7 @@ final class ChatMessageTextView: UIView {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
+    var collapsed = true
     var attachment: Attachment? {
         didSet {
             updateMessageInformation()
@@ -31,6 +32,7 @@ final class ChatMessageTextView: UIView {
 
     fileprivate func updateMessageInformation() {
         guard let attachment = self.attachment else { return }
+        collapsed = attachment.collapsed
 
         if let _ = attachment.color {
             viewLeftBorder.backgroundColor = UIColor(hex: attachment.color)
@@ -51,5 +53,18 @@ final class ChatMessageTextView: UIView {
             imageViewThumbWidthConstraint.constant = 0
             layoutSubviews()
         }
+    }
+
+    static func heightFor(_ attachment: Attachment) -> CGFloat {
+        if attachment.collapsed {
+            return self.defaultHeight
+        }
+
+        let fullWidth = UIScreen.main.bounds.size.width
+        return max(self.defaultHeight, UILabel.heightForView(
+            attachment.text ?? "",
+            font: UIFont.systemFont(ofSize: 14),
+            width: fullWidth - 60
+        ) + 20)
     }
 }
