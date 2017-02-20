@@ -9,7 +9,13 @@
 extension Auth {
 
     func baseURL() -> String? {
-        return self.settings?.cdnPrefixURL ?? self.settings?.siteURL
+        if let cdn = self.settings?.cdnPrefixURL {
+            if cdn.characters.count > 0 {
+                return cdn
+            }
+        }
+
+        return self.settings?.siteURL
     }
 
 }

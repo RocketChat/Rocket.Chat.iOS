@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZWT-yJ-dk4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZWT-yJ-dk4">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -37,14 +38,22 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa">
-                        <barButtonItem key="leftBarButtonItem" image="Menu" id="8AY-Oe-fcS">
-                            <connections>
-                                <action selector="buttonMenuDidPressed:" destination="A1E-cs-q8E" id="Rkb-iU-5Co"/>
-                            </connections>
-                        </barButtonItem>
+                        <leftBarButtonItems>
+                            <barButtonItem image="Menu" id="8AY-Oe-fcS">
+                                <connections>
+                                    <action selector="buttonMenuDidPressed:" destination="A1E-cs-q8E" id="Rkb-iU-5Co"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem image="Star" id="wdP-aa-l8w">
+                                <connections>
+                                    <action selector="buttonFavoriteDidPressed:" destination="A1E-cs-q8E" id="nff-Ej-DNe"/>
+                                </connections>
+                            </barButtonItem>
+                        </leftBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorContainer" destination="fbt-TF-z7U" id="Nmz-IG-SvM"/>
+                        <outlet property="buttonFavorite" destination="wdP-aa-l8w" id="GbE-eF-LkQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA8-7w-0ga" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -72,5 +81,6 @@
     </scenes>
     <resources>
         <image name="Menu" width="22" height="22"/>
+        <image name="Star" width="26" height="25"/>
     </resources>
 </document>
