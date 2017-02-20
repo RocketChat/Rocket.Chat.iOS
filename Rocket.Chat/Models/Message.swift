@@ -12,6 +12,7 @@ import SwiftyJSON
 
 enum MessageType {
     case text
+    case textAttachment
     case image
     case audio
     case video
