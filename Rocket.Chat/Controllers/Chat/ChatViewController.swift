@@ -372,10 +372,11 @@ final class ChatViewController: SLKTextViewController {
             collectionView.performBatchUpdates({
                 collectionView.insertItems(at: indexPaths)
             }, completion: { _ in
-                if updateScrollPosition {
+                let shouldScroll = self.isContentBiggerThanContainerHeight()
+                if updateScrollPosition && shouldScroll {
                     collectionView.contentOffset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
                 }
-
+                
                 CATransaction.commit()
             })
         }
@@ -391,6 +392,18 @@ final class ChatViewController: SLKTextViewController {
             view.addSubview(previewView)
             chatPreviewModeView = previewView
         }
+    }
+    
+    fileprivate func isContentBiggerThanContainerHeight() -> Bool {
+        if let contentHeight = self.collectionView?.contentSize.height {
+            if let collectionViewHeight = self.collectionView?.frame.height {
+                if contentHeight < collectionViewHeight {
+                    return false
+                }
+            }
+        }
+        
+        return true
     }
 
     // MARK: IBAction
