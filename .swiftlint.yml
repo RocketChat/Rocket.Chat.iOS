@@ -2,5 +2,6 @@ opt_in_rules:
   - force_unwrapping
 excluded:
   - Pods
+  - Rocket.Chat/Extensions/UIColorCSSColorsExtension.swift
 line_length: 300
 reporter: "xcode"

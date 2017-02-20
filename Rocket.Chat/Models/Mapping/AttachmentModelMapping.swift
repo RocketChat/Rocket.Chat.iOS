@@ -23,6 +23,11 @@ extension Attachment: ModelMappeable {
             self.titleLink = titleLink
         }
 
+        self.collapsed = values["collapsed"].bool ?? false
+        self.text = values["text"].string
+        self.thumbURL = values["thumb_url"].string
+        self.color = values["color"].string
+
         self.titleLinkDownload = values["title_link_download"].bool ?? true
 
         self.imageURL = encode(url: values["image_url"].string)
