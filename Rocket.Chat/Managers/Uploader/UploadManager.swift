@@ -100,7 +100,7 @@ class UploadManager {
 
                         self.sendFileMessage(params: [
                             subscription.rid,
-                            "s3", [// TODO: This is not fixed
+                            "s3", [
                                 "type": file.type,
                                 "size": file.size,
                                 "name": file.name,
