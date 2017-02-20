@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol {
+protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol {
     func openURL(url: URL)
 }
 
@@ -134,6 +134,7 @@ final class ChatMessageCell: UICollectionViewCell {
             case .textAttachment:
                 if let view = ChatMessageTextView.instantiateFromNib() {
                     view.attachment = attachment
+                    view.delegate = delegate
 
                     mediaViews.addArrangedSubview(view)
                     mediaViewHeight += ChatMessageTextView.heightFor(attachment)

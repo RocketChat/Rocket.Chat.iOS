@@ -7,10 +7,17 @@
 //
 
 import UIKit
+import RealmSwift
+
+protocol ChatMessageTextViewProtocol: class {
+    func viewDidCollpaseChange(view: UIView)
+}
 
 final class ChatMessageTextView: UIView {
     static let defaultHeight = CGFloat(50)
     fileprivate static let imageViewDefaultWidth = CGFloat(50)
+
+    weak var delegate: ChatMessageTextViewProtocol?
 
     @IBOutlet weak var imageViewThumbWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewThumb: UIImageView! {
@@ -23,16 +30,23 @@ final class ChatMessageTextView: UIView {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
-    var collapsed = true
     var attachment: Attachment? {
         didSet {
             updateMessageInformation()
         }
     }
 
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        return UITapGestureRecognizer(target: self, action: #selector(viewDidTapped(_:)))
+    }()
+
     fileprivate func updateMessageInformation() {
         guard let attachment = self.attachment else { return }
-        collapsed = attachment.collapsed
+
+        let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
+        if !containsGesture {
+            addGestureRecognizer(tapGesture)
+        }
 
         if let _ = attachment.color {
             viewLeftBorder.backgroundColor = UIColor(hex: attachment.color)
@@ -66,5 +80,15 @@ final class ChatMessageTextView: UIView {
             font: UIFont.systemFont(ofSize: 14),
             width: fullWidth - 60
         ) + 20)
+    }
+
+    func viewDidTapped(_ sender: Any) {
+        guard let attachment = self.attachment else { return }
+
+        Realm.execute { (_) in
+            attachment.collapsed = !attachment.collapsed
+        }
+
+        delegate?.viewDidCollpaseChange(view: self)
     }
 }
