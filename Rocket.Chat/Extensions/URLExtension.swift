@@ -15,6 +15,7 @@ extension URL {
         components.scheme = "https"
         components.host = self.host != nil ? self.host : self.path
         components.path = self.host != nil ? self.path : ""
+        components.port = self.port != nil ? self.port : nil
 
         var newURL = components.url
         newURL = newURL?.appendingPathComponent("api/info")
@@ -27,6 +28,7 @@ extension URL {
         components.scheme = "wss"
         components.host = self.host != nil ? self.host : self.path
         components.path = self.host != nil ? self.path : ""
+        components.port = self.port != nil ? self.port : nil
 
         var newURL = components.url
         if !pathComponents.contains("websocket") {
