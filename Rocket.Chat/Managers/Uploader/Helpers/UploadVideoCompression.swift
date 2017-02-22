@@ -18,7 +18,9 @@ struct UploadVideoCompression {
         if FileManager.default.fileExists(atPath: newPath) {
             do {
                 try FileManager.default.removeItem(atPath: newPath)
-            } catch {}
+            } catch {
+                return completion(nil, true)
+            }
         }
 
         guard let newPathURL = URL(string: newPath) else { return completion(nil, true) }
@@ -29,10 +31,10 @@ struct UploadVideoCompression {
             switch assetExport.status {
             case .completed:
                 do {
-                    let videoData = try NSData(contentsOf: newPathURL, options: NSData.ReadingOptions())
-                    completion(videoData, false)
+                    let newVideoData = try NSData(contentsOf: newPathURL, options: NSData.ReadingOptions())
+                    return completion(newVideoData, false)
                 } catch {
-                    completion(nil, true)
+                    return completion(nil, true)
                 }
 
                 break
