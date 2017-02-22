@@ -30,12 +30,11 @@ final class ChatViewController: SLKTextViewController {
 
             activityIndicatorContainer.addSubview(activityIndicator)
             self.activityIndicator = activityIndicator
-            activityIndicator.startAnimating()
         }
     }
 
     @IBOutlet weak var buttonFavorite: UIBarButtonItem!
-    
+
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewOffline: ChatHeaderViewOffline?
@@ -246,7 +245,6 @@ final class ChatViewController: SLKTextViewController {
             token.stop()
         }
 
-        activityIndicator.startAnimating()
         title = subscription?.name
         chatTitleView?.subscription = subscription
         updateFavoriteMark()
@@ -255,19 +253,21 @@ final class ChatViewController: SLKTextViewController {
         CATransaction.begin()
         CATransaction.setDisableActions(true)
         let indexPaths = dataController.clear()
-        collectionView?.performBatchUpdates({
-            self.collectionView?.deleteItems(at: indexPaths)
-        }, completion: { _ in
-            CATransaction.commit()
+        UIView.performWithoutAnimation {
+            collectionView?.performBatchUpdates({
+                self.collectionView?.deleteItems(at: indexPaths)
+            }, completion: { _ in
+                CATransaction.commit()
+            })
+        }
 
-            if self.subscription.isValid() {
-                self.updateSubscriptionMessages()
-            } else {
-                self.subscription.fetchRoomIdentifier({ [weak self] response in
-                    self?.subscription = response
-                })
-            }
-        })
+        if self.subscription.isValid() {
+            self.updateSubscriptionMessages()
+        } else {
+            self.subscription.fetchRoomIdentifier({ [weak self] response in
+                self?.subscription = response
+            })
+        }
 
         if subscription.isJoined() {
             setTextInputbarHidden(false, animated: false)
@@ -287,11 +287,11 @@ final class ChatViewController: SLKTextViewController {
         DispatchQueue.main.async { [weak self] in
             guard let messages = self?.messages else { return }
 
-            if messages.count > 0 {
-                self?.activityIndicator.stopAnimating()
+            if messages.count == 0 {
+                self?.activityIndicator.startAnimating()
+            } else {
+                self?.scrollToBottom()
             }
-
-            self?.scrollToBottom()
         }
 
         messagesToken = messages.addNotificationBlock { [weak self] _ in
@@ -307,8 +307,10 @@ final class ChatViewController: SLKTextViewController {
             self?.appendMessages(messages: Array(messages))
 
             DispatchQueue.main.async {
-                self?.scrollToBottom()
-                self?.activityIndicator.stopAnimating()
+                if self?.activityIndicator.isAnimating ?? false {
+                    self?.scrollToBottom()
+                    self?.activityIndicator.stopAnimating()
+                }
             }
 
             self?.isRequestingHistory = false
@@ -396,13 +398,13 @@ final class ChatViewController: SLKTextViewController {
             chatPreviewModeView = previewView
         }
     }
-    
+
     fileprivate func updateFavoriteMark() {
         guard let subscription = self.subscription else { return }
-        
+
         self.buttonFavorite?.tintColor = subscription.favorite ? .RCFavoriteMark() : .RCFavoriteUnmark()
     }
-  
+
     fileprivate func isContentBiggerThanContainerHeight() -> Bool {
         if let contentHeight = self.collectionView?.contentSize.height {
             if let collectionViewHeight = self.collectionView?.frame.height {
@@ -411,7 +413,7 @@ final class ChatViewController: SLKTextViewController {
                 }
             }
         }
-        
+
         return true
     }
 
@@ -423,7 +425,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     @IBAction func buttonFavoriteDidPressed(_ sender: Any) {
-        SubscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in
+        SubscriptionManager.toggleFavorite(subscription) { [unowned self] (_) in
             self.updateFavoriteMark()
         }
     }

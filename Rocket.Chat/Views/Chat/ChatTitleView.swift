@@ -48,5 +48,5 @@ final class ChatTitleView: UIView {
             }
         }
     }
-    
+
 }
