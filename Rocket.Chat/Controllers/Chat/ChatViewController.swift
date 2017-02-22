@@ -289,9 +289,9 @@ final class ChatViewController: SLKTextViewController {
 
             if messages.count == 0 {
                 self?.activityIndicator.startAnimating()
+            } else {
+                self?.scrollToBottom()
             }
-
-            self?.scrollToBottom()
         }
 
         messagesToken = messages.addNotificationBlock { [weak self] _ in
@@ -307,8 +307,10 @@ final class ChatViewController: SLKTextViewController {
             self?.appendMessages(messages: Array(messages))
 
             DispatchQueue.main.async {
-                self?.scrollToBottom()
-                self?.activityIndicator.stopAnimating()
+                if self?.activityIndicator.isAnimating ?? false {
+                    self?.scrollToBottom()
+                    self?.activityIndicator.stopAnimating()
+                }
             }
 
             self?.isRequestingHistory = false
