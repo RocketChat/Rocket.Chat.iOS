@@ -56,6 +56,7 @@
 
 // Chat Upload
 "chat.upload.uploading_image" = "Uploading image";
+"chat.upload.uploading_video" = "Uploading video";
 "chat.upload.take_photo" = "Take Photo";
 "chat.upload.choose_from_library" = "Choose From Library";
 "chat.upload.import_file" = "Import File From...";
