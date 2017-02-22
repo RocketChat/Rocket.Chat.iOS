@@ -329,9 +329,8 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let subscription = groupSubscriptions?[indexPath.section][indexPath.row]
-        dismiss(animated: true) {
-            ChatViewController.sharedInstance()?.subscription = subscription
-        }
+        ChatViewController.sharedInstance()?.subscription = subscription
+        dismiss(animated: true)
     }
 }
 
