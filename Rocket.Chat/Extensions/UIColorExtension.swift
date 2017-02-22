@@ -50,13 +50,13 @@ extension UIColor {
     static func RCBlue() -> UIColor {
         return UIColor(rgb: 0x0b4c74, alphaVal: 1)
     }
-    
+
     // Function color
-    
+
     static func RCFavoriteMark() -> UIColor {
         return UIColor(rgb: 0xF8B62B, alphaVal: 1.0)
     }
-    
+
     static func RCFavoriteUnmark() -> UIColor {
         return UIColor.lightGray
     }
