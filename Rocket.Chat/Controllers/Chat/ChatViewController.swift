@@ -396,13 +396,13 @@ final class ChatViewController: SLKTextViewController {
             chatPreviewModeView = previewView
         }
     }
-    
+
     fileprivate func updateFavoriteMark() {
         guard let subscription = self.subscription else { return }
-        
+
         self.buttonFavorite?.tintColor = subscription.favorite ? .RCFavoriteMark() : .RCFavoriteUnmark()
     }
-  
+
     fileprivate func isContentBiggerThanContainerHeight() -> Bool {
         if let contentHeight = self.collectionView?.contentSize.height {
             if let collectionViewHeight = self.collectionView?.frame.height {
@@ -411,7 +411,7 @@ final class ChatViewController: SLKTextViewController {
                 }
             }
         }
-        
+
         return true
     }
 
@@ -423,7 +423,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     @IBAction func buttonFavoriteDidPressed(_ sender: Any) {
-        SubscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in
+        SubscriptionManager.toggleFavorite(subscription) { [unowned self] (_) in
             self.updateFavoriteMark()
         }
     }
