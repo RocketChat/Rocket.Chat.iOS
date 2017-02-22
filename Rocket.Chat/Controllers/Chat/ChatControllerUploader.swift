@@ -40,8 +40,8 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     fileprivate func openCamera() {
         let imagePicker  = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.allowsEditing = false
-        imagePicker.sourceType = .camera
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .savedPhotosAlbum
         imagePicker.cameraFlashMode = .off
         imagePicker.cameraCaptureMode = .photo
         self.present(imagePicker, animated: true, completion: nil)
@@ -51,9 +51,9 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = false
-        picker.sourceType = .photoLibrary
+        picker.sourceType = .savedPhotosAlbum
 
-        if let mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) {
+        if let mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum) {
             picker.mediaTypes = mediaTypes
         }
 
@@ -78,17 +78,31 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             }
         }
 
+        var file: FileUpload?
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let resizedImage = image.resizeWith(width: 1024) ?? image
             guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
 
-            let file = FileUpload(
+            file = FileUpload(
                 name: filename,
                 size: (imageData as NSData).length,
                 type: "image/jpeg",
                 data: imageData
             )
+        }
 
+        if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
+            if let video = try? Data(contentsOf: videoURL) {
+                file = FileUpload(
+                    name: filename,
+                    size: (video as NSData).length,
+                    type: "video/mp4",
+                    data: video
+                )
+            }
+        }
+
+        if let file = file {
             UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { (progress) in
                 // We currently don't have progress being called.
             }, completion: { [unowned self] (response, error) in
@@ -115,7 +129,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                         self.present(alert, animated: true, completion: nil)
                     }
                 } else {
-
+                    
                 }
             })
         }
