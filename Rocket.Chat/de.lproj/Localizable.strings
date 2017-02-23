@@ -20,7 +20,7 @@
 "alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfe deine Eingabe und probiere es noch einmal.";
 
 // Socket Connection
-"connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden..";
+"connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
 
 // Auth
 "auth.connect.button_connect" = "Verbinden";
@@ -28,7 +28,7 @@
 // Subscriptions
 "subscriptions.search" = "Suche";
 "subscriptions.search_results" = "Ergebnisse";
-"subscriptions.search.load_more_results" = "Mehr Ergebnisse..";
+"subscriptions.search.load_more_results" = "Mehr Ergebnisse...";
 "subscriptions.unreads" = "Ungelesen";
 "subscriptions.favorites" = "Favoriten";
 "subscriptions.channels" = "Kanäle";
@@ -59,4 +59,4 @@
 "chat.upload.uploading_video" = "Video wird hochgeladen";
 "chat.upload.take_photo" = "Foto aufnehmen";
 "chat.upload.choose_from_library" = "Foto & Video Mediathek";
-"chat.upload.import_file" = "Importiere Datei aus..";
+"chat.upload.import_file" = "Importiere Datei aus...";
