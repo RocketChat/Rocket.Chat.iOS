@@ -301,13 +301,21 @@ final class ChatViewController: SLKTextViewController {
             self?.appendMessages(messages: Array(messages), updateScrollPosition: true)
         }
 
+        let lastMessageDate = messages.last?.createdAt
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] _ in
             guard let messages = self?.subscription.fetchMessages() else { return }
+
+            var shouldScrollBottom = false
+            if let lastMessageHistoryDate = messages.last?.createdAt {
+                if let lastMessageDate = lastMessageDate {
+                    shouldScrollBottom = lastMessageHistoryDate.timeIntervalSince(lastMessageDate) > 0
+                }
+            }
 
             self?.appendMessages(messages: Array(messages))
 
             DispatchQueue.main.async {
-                if self?.activityIndicator.isAnimating ?? false {
+                if shouldScrollBottom || self?.activityIndicator.isAnimating ?? false {
                     self?.scrollToBottom()
                     self?.activityIndicator.stopAnimating()
                 }
