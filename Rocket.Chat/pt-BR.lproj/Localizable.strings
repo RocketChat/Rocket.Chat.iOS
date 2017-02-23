@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  Rocket.Chat
+
+  Created by Rafael K. Streit on 8/27/16.
+  Copyright © 2016 Rocket.Chat. All rights reserved.
+*/
+
+
+// Global
+"global.ok" = "OK";
+"global.cancel" = "Cancelar";
+
+// Errors
+"error.socket.default_error_title" = "Ooops!";
+"error.socket.default_error_message" = "Algo errado aconteceu, por favor tente novamente.";
+
+// Alerts
+"alert.connection.invalid_url.title" = "Oops!";
+"alert.connection.invalid_url.message" = "A URL que você inseriu está incorreta ou é inválida. Confira se ela está informada corretamente e tente novamente, por favor!";
+
+// Socket Connection
+"connection.offline.banner.message" = "Você está offline, conecte novamente";
+
+// Auth
+"auth.connect.button_connect" = "Conectar";
+
+// Subscriptions
+"subscriptions.search" = "Busca";
+"subscriptions.search_results" = "Resultados";
+"subscriptions.search.load_more_results" = "Carregar mais";
+"subscriptions.unreads" = "Não lidos";
+"subscriptions.favorites" = "Favoritos";
+"subscriptions.channels" = "Canais";
+"subscriptions.direct_messages" = "Mensagens Diretas";
+
+// User Menu
+"user_menu.online" = "Disponível";
+"user_menu.away" = "Ausente";
+"user_menu.busy" = "Ocupado";
+"user_menu.invisible" = "Invisível";
+"user_menu.settings" = "Minha conta";
+"user_menu.logout" = "Sair";
+
+// Chat
+"chat.channel_preview_view.title" = "Esta é uma pré-visualização de #%@";
+"chat.channel_preview_view.join" = "Entrar";
+
+// Chat Message Actions
+"chat.message.actions.report" = "Reportar mensagem";
+"chat.message.actions.copy" = "Copiar";
+
+// Chat Message Report
+"chat.message.report.success.title" = "Mensagem reportada";
+"chat.message.report.success.message" = "Mensagem reportada com sucesso, obrigado!";
+
+// Chat Upload
+"chat.upload.uploading_image" = "Enviando imagem";
+"chat.upload.uploading_video" = "Enviando video";
+"chat.upload.take_photo" = "Tirar uma foto";
+"chat.upload.choose_from_library" = "Escolher da biblioteca";
+"chat.upload.import_file" = "Importar arquivo...";
