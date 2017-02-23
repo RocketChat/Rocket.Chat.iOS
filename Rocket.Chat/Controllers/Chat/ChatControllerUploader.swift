@@ -40,7 +40,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     fileprivate func openCamera() {
         let imagePicker  = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.allowsEditing = false
+        imagePicker.allowsEditing = true
         imagePicker.sourceType = .camera
         imagePicker.cameraFlashMode = .off
         imagePicker.cameraCaptureMode = .photo
@@ -51,9 +51,9 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.allowsEditing = false
-        picker.sourceType = .photoLibrary
+        picker.sourceType = .savedPhotosAlbum
 
-        if let mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary) {
+        if let mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum) {
             picker.mediaTypes = mediaTypes
         }
 
@@ -63,12 +63,9 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     // MARK: UIImagePickerControllerDelegate
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        NVActivityIndicatorPresenter.sharedInstance.startAnimating(ActivityData(
-            message: localizedString("chat.upload.uploading_image"),
-            type: .ballPulse
-        ))
-
+        var activityMessage = localizedString("chat.upload.uploading_image")
         var filename = "\(String.random()).jpeg"
+        var file: FileUpload?
 
         if let assetURL = info[UIImagePickerControllerReferenceURL] as? URL {
             if let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject {
@@ -82,12 +79,44 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             let resizedImage = image.resizeWith(width: 1024) ?? image
             guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
 
-            let file = FileUpload(
+            file = FileUpload(
                 name: filename,
                 size: (imageData as NSData).length,
                 type: "image/jpeg",
                 data: imageData
             )
+        }
+
+        if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
+            activityMessage = localizedString("chat.upload.uploading_video")
+
+            let assetURL = AVURLAsset(url: videoURL)
+            let semaphore = DispatchSemaphore(value: 0)
+
+            UploadVideoCompression.toMediumQuality(sourceAsset: assetURL, completion: { (videoData, _) in
+                guard let videoData = videoData else {
+                    semaphore.signal()
+                    return
+                }
+
+                file = FileUpload(
+                    name: filename,
+                    size: videoData.length,
+                    type: "video/mp4",
+                    data: videoData as Data
+                )
+
+                semaphore.signal()
+            })
+
+            _ = semaphore.wait(timeout: .distantFuture)
+        }
+
+        if let file = file {
+            NVActivityIndicatorPresenter.sharedInstance.startAnimating(ActivityData(
+                message: activityMessage,
+                type: .ballPulse
+            ))
 
             UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { (progress) in
                 // We currently don't have progress being called.
@@ -114,8 +143,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     DispatchQueue.main.async {
                         self.present(alert, animated: true, completion: nil)
                     }
-                } else {
-
                 }
             })
         }
