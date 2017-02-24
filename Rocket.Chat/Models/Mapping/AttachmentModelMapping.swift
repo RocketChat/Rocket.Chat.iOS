@@ -41,6 +41,12 @@ extension Attachment: ModelMappeable {
         self.videoURL = encode(url: values["video_url"].string)
         self.videoType = values["video_type"].string
         self.videoSize = values["video_size"].int ?? 0
+
+        // Override title & value from fields object
+        if let fields = values["fields"].array?.first {
+            self.title = fields["title"].string ?? self.title
+            self.text = fields["value"].string ?? self.text
+        }
     }
 
     fileprivate func encode(url: String?) -> String? {
