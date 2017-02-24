@@ -60,3 +60,19 @@
 "chat.upload.take_photo" = "Take Photo";
 "chat.upload.choose_from_library" = "Choose From Library";
 "chat.upload.import_file" = "Import File From...";
+
+// Message Types
+"chat.message.type.room_name_changed" = "Room name changed to: %@ by %@";
+"chat.message.type.user_added_by" = "User %@ added by %@";
+"chat.message.type.user_removed_by" = "User %@ removed by %@";
+"chat.message.type.user_left" = "Has left the channel";
+"chat.message.type.user_joined" = "Has joined the channel";
+"chat.message.type.user_muted" = "User %@ muted by %@";
+"chat.message.type.user_unmuted" = "User %@ unmuted by %@";
+"chat.message.type.welcome" = "Welcome %@";
+"chat.message.type.message_removed" = "Message removed";
+"chat.message.type.subscription_role_added" = "%@ was set %@ by %@";
+"chat.message.type.subscription_role_removed" = "%@ is no longer %@ by %@";
+"chat.message.type.room_archived" = "This room has been archived by %@";
+"chat.message.type.room_unarchived" = "This room has been unarchived by %@";
+

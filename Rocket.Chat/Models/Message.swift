@@ -17,10 +17,25 @@ enum MessageType {
     case audio
     case video
     case url
+
+    case roomNameChanged
+    case userAdded
+    case userRemoved
+    case userJoined
+    case userLeft
+    case userMuted
+    case userUnmuted
+    case welcome
+    case messageRemoved
+    case subscriptionRoleAdded
+    case subscriptionRoleRemoved
+    case roomArchived
+    case roomUnarchived
 }
 
 class Message: BaseModel {
     dynamic var subscription: Subscription!
+    dynamic var internalType: String!
     dynamic var rid = ""
     dynamic var createdAt: Date?
     dynamic var updatedAt: Date?
