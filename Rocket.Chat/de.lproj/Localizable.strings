@@ -9,54 +9,54 @@
 
 // Global
 "global.ok" = "OK";
-"global.cancel" = "Cancel";
+"global.cancel" = "Abbrechen";
 
 // Errors
 "error.socket.default_error_title" = "Ooops!";
-"error.socket.default_error_message" = "Something wrong happened, please try again.";
+"error.socket.default_error_message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
 
 // Alerts
-"alert.connection.invalid_url.title" = "Oops!";
-"alert.connection.invalid_url.message" = "The URL you entered is invalid. Check it and try again, please!";
+"alert.connection.invalid_url.title" = "Ooops!";
+"alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfe deine Eingabe und probiere es noch einmal.";
 
 // Socket Connection
-"connection.offline.banner.message" = "You're offline, try connecting again";
+"connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
 
 // Auth
-"auth.connect.button_connect" = "Connect";
+"auth.connect.button_connect" = "Verbinden";
 
 // Subscriptions
-"subscriptions.search" = "Search";
-"subscriptions.search_results" = "Results";
-"subscriptions.search.load_more_results" = "Load more results";
-"subscriptions.unreads" = "Unreads";
-"subscriptions.favorites" = "Favorites";
-"subscriptions.channels" = "Channels";
-"subscriptions.direct_messages" = "Direct Messages";
+"subscriptions.search" = "Suche";
+"subscriptions.search_results" = "Ergebnisse";
+"subscriptions.search.load_more_results" = "Mehr Ergebnisse...";
+"subscriptions.unreads" = "Ungelesen";
+"subscriptions.favorites" = "Favoriten";
+"subscriptions.channels" = "Kanäle";
+"subscriptions.direct_messages" = "Direktnachrichten";
 
 // User Menu
 "user_menu.online" = "Online";
-"user_menu.away" = "Away";
-"user_menu.busy" = "Busy";
-"user_menu.invisible" = "Invisible";
-"user_menu.settings" = "My Account";
+"user_menu.away" = "Abwesend";
+"user_menu.busy" = "Beschäftigt";
+"user_menu.invisible" = "Unsichtbar";
+"user_menu.settings" = "Mein Account";
 "user_menu.logout" = "Logout";
 
 // Chat
-"chat.channel_preview_view.title" = "This is a preview of #%@";
-"chat.channel_preview_view.join" = "Join Channel";
+"chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
+"chat.channel_preview_view.join" = "Channel beitreten";
 
 // Chat Message Actions
-"chat.message.actions.report" = "Report Message";
-"chat.message.actions.copy" = "Copy";
+"chat.message.actions.report" = "Nachricht melden";
+"chat.message.actions.copy" = "Kopieren";
 
 // Chat Message Report
-"chat.message.report.success.title" = "Message Reported";
-"chat.message.report.success.message" = "Message reported successfully, thank you!";
+"chat.message.report.success.title" = "Nachricht gemeldet";
+"chat.message.report.success.message" = "Die ausgewählte Nachricht wurde erfolgreich gemeldet. Vielen Dank!";
 
 // Chat Upload
-"chat.upload.uploading_image" = "Uploading image";
-"chat.upload.uploading_video" = "Uploading video";
-"chat.upload.take_photo" = "Take Photo";
-"chat.upload.choose_from_library" = "Choose From Library";
-"chat.upload.import_file" = "Import File From...";
+"chat.upload.uploading_image" = "Bild wird hochgeladen";
+"chat.upload.uploading_video" = "Video wird hochgeladen";
+"chat.upload.take_photo" = "Foto aufnehmen";
+"chat.upload.choose_from_library" = "Foto & Video Mediathek";
+"chat.upload.import_file" = "Importiere Datei aus...";
