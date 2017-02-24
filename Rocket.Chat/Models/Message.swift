@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-enum MessageType {
+enum MessageType: String {
     case text
     case textAttachment
     case image
@@ -18,19 +18,19 @@ enum MessageType {
     case video
     case url
 
-    case roomNameChanged
-    case userAdded
-    case userRemoved
-    case userJoined
-    case userLeft
-    case userMuted
-    case userUnmuted
-    case welcome
-    case messageRemoved
-    case subscriptionRoleAdded
-    case subscriptionRoleRemoved
-    case roomArchived
-    case roomUnarchived
+    case roomNameChanged = "r"
+    case userAdded = "au"
+    case userRemoved = "ru"
+    case userJoined = "uj"
+    case userLeft = "ul"
+    case userMuted = "user-muted"
+    case userUnmuted = "user-unmuted"
+    case welcome = "wm"
+    case messageRemoved = "rm"
+    case subscriptionRoleAdded = "subscription-role-added"
+    case subscriptionRoleRemoved = "subscription-role-removed"
+    case roomArchived = "room-archived"
+    case roomUnarchived = "room-unarchived"
 }
 
 class Message: BaseModel {
@@ -60,6 +60,6 @@ class Message: BaseModel {
             }
         }
 
-        return .text
+        return MessageType(rawValue: internalType) ?? .text
     }
 }
