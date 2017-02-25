@@ -1,0 +1,62 @@
+/* 
+  Localizable.strings
+  Rocket.Chat
+
+  Created by Rafael K. Streit on 8/27/16.
+  Copyright © 2016 Rocket.Chat. All rights reserved.
+*/
+
+
+// Global
+"global.ok" = "OK";
+"global.cancel" = "Abbrechen";
+
+// Errors
+"error.socket.default_error_title" = "Ooops!";
+"error.socket.default_error_message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
+
+// Alerts
+"alert.connection.invalid_url.title" = "Ooops!";
+"alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfe deine Eingabe und probiere es noch einmal.";
+
+// Socket Connection
+"connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
+
+// Auth
+"auth.connect.button_connect" = "Verbinden";
+
+// Subscriptions
+"subscriptions.search" = "Suche";
+"subscriptions.search_results" = "Ergebnisse";
+"subscriptions.search.load_more_results" = "Mehr Ergebnisse...";
+"subscriptions.unreads" = "Ungelesen";
+"subscriptions.favorites" = "Favoriten";
+"subscriptions.channels" = "Kanäle";
+"subscriptions.direct_messages" = "Direktnachrichten";
+
+// User Menu
+"user_menu.online" = "Online";
+"user_menu.away" = "Abwesend";
+"user_menu.busy" = "Beschäftigt";
+"user_menu.invisible" = "Unsichtbar";
+"user_menu.settings" = "Mein Account";
+"user_menu.logout" = "Logout";
+
+// Chat
+"chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
+"chat.channel_preview_view.join" = "Channel beitreten";
+
+// Chat Message Actions
+"chat.message.actions.report" = "Nachricht melden";
+"chat.message.actions.copy" = "Kopieren";
+
+// Chat Message Report
+"chat.message.report.success.title" = "Nachricht gemeldet";
+"chat.message.report.success.message" = "Die ausgewählte Nachricht wurde erfolgreich gemeldet. Vielen Dank!";
+
+// Chat Upload
+"chat.upload.uploading_image" = "Bild wird hochgeladen";
+"chat.upload.uploading_video" = "Video wird hochgeladen";
+"chat.upload.take_photo" = "Foto aufnehmen";
+"chat.upload.choose_from_library" = "Foto & Video Mediathek";
+"chat.upload.import_file" = "Importiere Datei aus...";
