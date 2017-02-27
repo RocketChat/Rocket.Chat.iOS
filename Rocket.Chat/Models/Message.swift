@@ -10,17 +10,32 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-enum MessageType {
+enum MessageType: String {
     case text
     case textAttachment
     case image
     case audio
     case video
     case url
+
+    case roomNameChanged = "r"
+    case userAdded = "au"
+    case userRemoved = "ru"
+    case userJoined = "uj"
+    case userLeft = "ul"
+    case userMuted = "user-muted"
+    case userUnmuted = "user-unmuted"
+    case welcome = "wm"
+    case messageRemoved = "rm"
+    case subscriptionRoleAdded = "subscription-role-added"
+    case subscriptionRoleRemoved = "subscription-role-removed"
+    case roomArchived = "room-archived"
+    case roomUnarchived = "room-unarchived"
 }
 
 class Message: BaseModel {
     dynamic var subscription: Subscription!
+    dynamic var internalType: String!
     dynamic var rid = ""
     dynamic var createdAt: Date?
     dynamic var updatedAt: Date?
@@ -29,6 +44,8 @@ class Message: BaseModel {
 
     dynamic var alias = ""
     dynamic var avatar = ""
+
+    dynamic var role = ""
 
     var mentions = List<Mention>()
     var attachments = List<Attachment>()
@@ -45,6 +62,6 @@ class Message: BaseModel {
             }
         }
 
-        return .text
+        return MessageType(rawValue: internalType) ?? .text
     }
 }
