@@ -45,6 +45,8 @@ class Message: BaseModel {
     dynamic var alias = ""
     dynamic var avatar = ""
 
+    dynamic var role = ""
+
     var mentions = List<Mention>()
     var attachments = List<Attachment>()
     var urls = List<MessageURL>()
