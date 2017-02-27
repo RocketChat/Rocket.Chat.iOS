@@ -260,6 +260,7 @@
 		41EB22321E5E474200AA3AE7 /* UploadVideoCompression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadVideoCompression.swift; path = Managers/Uploader/Helpers/UploadVideoCompression.swift; sourceTree = "<group>"; };
 		41EB22371E5F056600AA3AE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		41EB223A1E5F057F00AA3AE7 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		41EB223B1E5F19EB00AA3AE7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		41EE157D1E05BED600754D45 /* ChatControllerAutocomplete.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatControllerAutocomplete.swift; path = Controllers/Chat/ChatControllerAutocomplete.swift; sourceTree = "<group>"; };
 		41EE157F1E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatControllerMessageCellProtocol.swift; path = Controllers/Chat/ChatControllerMessageCellProtocol.swift; sourceTree = "<group>"; };
 		41EE15811E05BF9600754D45 /* ChatControllerSocketConnectionHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatControllerSocketConnectionHandler.swift; path = Controllers/Chat/ChatControllerSocketConnectionHandler.swift; sourceTree = "<group>"; };
@@ -872,6 +873,7 @@
 				en,
 				Base,
 				"pt-BR",
+				de,
 			);
 			mainGroup = 41DF76D61D2C50710028DBF8;
 			productRefGroup = 41DF76E01D2C50710028DBF8 /* Products */;
@@ -1282,6 +1284,7 @@
 			children = (
 				41EB22371E5F056600AA3AE7 /* en */,
 				41EB223A1E5F057F00AA3AE7 /* pt-BR */,
+				41EB223B1E5F19EB00AA3AE7 /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
