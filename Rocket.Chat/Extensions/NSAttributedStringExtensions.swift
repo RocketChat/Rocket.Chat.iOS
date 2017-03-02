@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TSMarkdownParser
 
 extension NSMutableAttributedString {
 
@@ -24,6 +25,25 @@ extension NSMutableAttributedString {
                 NSForegroundColorAttributeName: color
             ], range: attributeRange)
         }
+    }
+
+    func transformMarkdown() -> NSAttributedString {
+        let defaultFontSize = MessageTextFontAttributes.defaultFontSize
+
+        let parser = TSMarkdownParser.standard()
+        parser.defaultAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: defaultFontSize)]
+        parser.quoteAttributes = [[NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]]
+        parser.strongAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: defaultFontSize)]
+        parser.emphasisAttributes = [NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]
+        parser.linkAttributes = [NSForegroundColorAttributeName: UIColor.darkGray]
+
+        let font = UIFont(name: "Courier New", size: defaultFontSize) ?? UIFont.systemFont(ofSize: defaultFontSize)
+        parser.monospaceAttributes = [
+            NSFontAttributeName: font,
+            NSForegroundColorAttributeName: UIColor.red
+        ]
+
+        return parser.attributedString(fromAttributedMarkdownString: self)
     }
 
 }
