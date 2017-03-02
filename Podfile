@@ -19,6 +19,9 @@ def shared_pods
   pod 'URBMediaFocusViewController'
   pod 'NVActivityIndicatorView'
 
+  # Text Processing
+  pod 'TSMarkdownParser'
+
   # Database
   pod 'RealmSwift'
 
