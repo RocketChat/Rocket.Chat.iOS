@@ -13,7 +13,7 @@ extension NSMutableAttributedString {
     func setFont(_ font: UIFont, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSFontAttributeName: font,
+                NSFontAttributeName: font
             ], range: attributeRange)
         }
     }
@@ -21,9 +21,10 @@ extension NSMutableAttributedString {
     func setFontColor(_ color: UIColor, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSForegroundColorAttributeName: color,
+                NSForegroundColorAttributeName: color
             ], range: attributeRange)
         }
     }
 
 }
+

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import TSMarkdownParser
 
 protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol {
     func openURL(url: URL)
@@ -122,7 +123,8 @@ final class ChatMessageCell: UICollectionViewCell {
             text.setFontColor(MessageTextFontAttributes.defaultFontColor)
         }
 
-        labelText.attributedText = text
+        let markdownText = TSMarkdownParser.standard().attributedString(fromAttributedMarkdownString: text)
+        labelText.attributedText = markdownText
 
         var mediaViewHeight = CGFloat(0)
 
