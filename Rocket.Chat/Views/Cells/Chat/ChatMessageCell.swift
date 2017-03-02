@@ -122,7 +122,7 @@ final class ChatMessageCell: UICollectionViewCell {
             text.setFontColor(MessageTextFontAttributes.defaultFontColor)
         }
 
-        labelText.attributedText = text
+        labelText.attributedText = text.transformMarkdown()
 
         var mediaViewHeight = CGFloat(0)
 
