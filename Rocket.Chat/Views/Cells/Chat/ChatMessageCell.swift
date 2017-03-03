@@ -56,7 +56,7 @@ final class ChatMessageCell: UICollectionViewCell {
     static func cellMediaHeightFor(message: Message, grouped: Bool = true) -> CGFloat {
         let fullWidth = UIScreen.main.bounds.size.width
         var total = UILabel.heightForView(
-            message.textNormalized().string,
+            message.textNormalized(),
             font: UIFont.systemFont(ofSize: 14),
             width: fullWidth - 60
         ) + 35
@@ -112,7 +112,17 @@ final class ChatMessageCell: UICollectionViewCell {
             labelUsername.text = message.user?.username
         }
 
-        labelText.attributedText = message.textNormalized()
+        let text = NSMutableAttributedString(string: message.textNormalized())
+
+        if self.message.isSystemMessage() {
+            text.setFont(MessageTextFontAttributes.italicFont)
+            text.setFontColor(MessageTextFontAttributes.systemFontColor)
+        } else {
+            text.setFont(MessageTextFontAttributes.defaultFont)
+            text.setFontColor(MessageTextFontAttributes.defaultFontColor)
+        }
+
+        labelText.attributedText = text.transformMarkdown()
 
         var mediaViewHeight = CGFloat(0)
 
