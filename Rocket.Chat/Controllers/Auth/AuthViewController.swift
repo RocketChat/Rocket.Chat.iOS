@@ -35,11 +35,6 @@ final class AuthViewController: BaseViewController {
         self.updateAuthenticationMethods()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        stopLoading()
-    }
-
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -57,7 +52,9 @@ final class AuthViewController: BaseViewController {
             object: nil
         )
 
-        textFieldUsername.becomeFirstResponder()
+        if !connecting {
+            textFieldUsername.becomeFirstResponder()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -82,7 +79,7 @@ final class AuthViewController: BaseViewController {
         self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
     }
 
-    fileprivate func handleAuthenticationResponse(_ response: SocketResponse) {
+    internal func handleAuthenticationResponse(_ response: SocketResponse) {
         stopLoading()
 
         if response.isError() {
@@ -127,12 +124,7 @@ final class AuthViewController: BaseViewController {
     }
 
     @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().signIn()
+        authenticateWithGoogle()
     }
 
     @IBAction func buttonTermsDidPressed(_ sender: Any) {
@@ -186,40 +178,3 @@ extension AuthViewController: UITextFieldDelegate {
     }
 }
 
-
-extension AuthViewController: GIDSignInDelegate {
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
-        guard error == nil else {
-            return
-        }
-
-        let params = [
-            "serviceName": "google",
-            "accessToken": user.authentication.accessToken,
-            "refreshToken": user.authentication.refreshToken,
-            "idToken": user.authentication.idToken,
-            "expiresIn": Int(user.authentication.accessTokenExpirationDate.timeIntervalSinceNow),
-            "scope": "profile"
-        ] as [String : Any]
-
-        AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
-    }
-
-    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
-        
-    }
-}
-
-extension AuthViewController: GIDSignInUIDelegate {
-    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
-        startLoading()
-    }
-
-    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
-        present(viewController, animated: true, completion: nil)
-    }
-
-    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
-        dismiss(animated: true, completion: nil)
-    }
-}
