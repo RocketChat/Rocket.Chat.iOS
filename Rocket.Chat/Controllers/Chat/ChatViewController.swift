@@ -389,7 +389,7 @@ final class ChatViewController: SLKTextViewController {
                 if updateScrollPosition && shouldScroll {
                     collectionView.contentOffset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
                 }
-                
+
                 CATransaction.commit()
             })
         }

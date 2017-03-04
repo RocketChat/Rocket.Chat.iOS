@@ -128,6 +128,7 @@ extension AuthManager {
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
             SocketManager.clear()
+            GIDSignIn.sharedInstance().signOut()
 
             Realm.execute({ (realm) in
                 realm.deleteAll()
@@ -149,10 +150,10 @@ extension AuthManager {
                 return
             }
 
-            let settings = auth?.settings ?? AuthSettings()
-            settings.map(response.result["result"])
-
+            var settings: AuthSettings!
             Realm.execute { realm in
+                settings = auth?.settings ?? AuthSettings()
+                settings.map(response.result["result"])
                 realm.add(settings, update: true)
 
                 if let auth = auth {
