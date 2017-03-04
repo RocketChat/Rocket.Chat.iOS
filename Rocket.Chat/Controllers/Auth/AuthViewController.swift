@@ -9,12 +9,19 @@
 import Foundation
 import UIKit
 import SafariServices
+import OnePasswordExtension
 
 final class AuthViewController: BaseViewController {
 
     internal var connecting = false
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
+
+    @IBOutlet weak var onePasswordButton: UIButton! {
+        didSet {
+            onePasswordButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
+        }
+    }
 
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
@@ -159,6 +166,18 @@ final class AuthViewController: BaseViewController {
         }
     }
 
+    @IBAction func buttonOnePasswordDidPressed(_ sender: Any) {
+        let siteURL = serverPublicSettings?.siteURL ?? ""
+        OnePasswordExtension.shared().findLogin(forURLString: siteURL, for: self, sender: sender) { [weak self] (login, _) in
+            if login == nil {
+                return
+            }
+
+            self?.textFieldUsername.text = login?[AppExtensionUsernameKey] as? String
+            self?.textFieldPassword.text = login?[AppExtensionPasswordKey] as? String
+            self?.authenticateWithUsernameOrEmail()
+        }
+    }
 }
 
 extension AuthViewController: UITextFieldDelegate {
