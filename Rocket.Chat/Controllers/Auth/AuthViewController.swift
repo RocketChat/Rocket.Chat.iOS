@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import p2_OAuth2
 
 final class AuthViewController: BaseViewController {
 
@@ -65,6 +66,15 @@ final class AuthViewController: BaseViewController {
 
     // MARK: IBAction
     func authenticate() {
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()
+
+        return
+
         let email = textFieldUsername.text ?? ""
         let password = textFieldPassword.text ?? ""
 
@@ -118,5 +128,32 @@ extension AuthViewController: UITextFieldDelegate {
         }
 
         return true
+    }
+}
+
+
+extension AuthViewController: GIDSignInDelegate {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
+        guard error == nil else {
+            return
+        }
+
+        
+
+        return
+    }
+
+    func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
+        
+    }
+}
+
+extension AuthViewController: GIDSignInUIDelegate {
+    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
+        present(viewController, animated: true, completion: nil)
+    }
+
+    func sign(_ signIn: GIDSignIn!, dismiss viewController: UIViewController!) {
+        dismiss(animated: true, completion: nil)
     }
 }
