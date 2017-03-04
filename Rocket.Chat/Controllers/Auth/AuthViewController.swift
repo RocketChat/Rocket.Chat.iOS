@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import SafariServices
 
 final class AuthViewController: BaseViewController {
 
@@ -102,6 +103,32 @@ final class AuthViewController: BaseViewController {
             } else {
                 self?.dismiss(animated: true, completion: nil)
             }
+        }
+    }
+
+    @IBAction func buttonTermsDidPressed(_ sender: Any) {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = self.serverURL.host
+
+        if var newURL = components.url {
+            newURL = newURL.appendingPathComponent("terms-of-service")
+
+            let controller = SFSafariViewController(url: newURL)
+            present(controller, animated: true, completion: nil)
+        }
+    }
+
+    @IBAction func buttonPolicyDidPressed(_ sender: Any) {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = self.serverURL.host
+
+        if var newURL = components.url {
+            newURL = newURL.appendingPathComponent("privacy-policy")
+
+            let controller = SFSafariViewController(url: newURL)
+            present(controller, animated: true, completion: nil)
         }
     }
 
