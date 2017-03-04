@@ -8,7 +8,6 @@
 
 import Foundation
 import UIKit
-import p2_OAuth2
 
 final class AuthViewController: BaseViewController {
 
