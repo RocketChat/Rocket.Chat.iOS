@@ -14,18 +14,25 @@ final class AuthViewController: BaseViewController {
 
     internal var connecting = false
     var serverURL: URL!
+    var serverPublicSettings: AuthSettings?
 
-    @IBOutlet weak var labelHost: UILabel!
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var buttonAuthenticateGoogle: UIButton! {
+        didSet {
+            buttonAuthenticateGoogle.layer.cornerRadius = 3
+        }
+    }
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = serverURL.host
 
-        labelHost.text = serverURL.host
+        self.updateAuthenticationMethods()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -64,17 +71,14 @@ final class AuthViewController: BaseViewController {
         visibleViewBottomConstraint.constant = 0
     }
 
+    // MARK: Authentication methods
+    fileprivate func updateAuthenticationMethods() {
+        guard let settings = self.serverPublicSettings else { return }
+        self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
+    }
+
     // MARK: IBAction
-    func authenticate() {
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        GIDSignIn.sharedInstance().delegate = self
-        GIDSignIn.sharedInstance().uiDelegate = self
-        GIDSignIn.sharedInstance().signIn()
-
-        return
-
+    func authenticateWithUsernameOrEmail() {
         let email = textFieldUsername.text ?? ""
         let password = textFieldPassword.text ?? ""
 
@@ -104,6 +108,15 @@ final class AuthViewController: BaseViewController {
                 self?.dismiss(animated: true, completion: nil)
             }
         }
+    }
+
+    @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {
+        var configureError: NSError?
+        GGLContext.sharedInstance().configureWithError(&configureError)
+        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        GIDSignIn.sharedInstance().delegate = self
+        GIDSignIn.sharedInstance().uiDelegate = self
+        GIDSignIn.sharedInstance().signIn()
     }
 
     @IBAction func buttonTermsDidPressed(_ sender: Any) {
@@ -150,7 +163,7 @@ extension AuthViewController: UITextFieldDelegate {
         }
 
         if textField == textFieldPassword {
-            authenticate()
+            authenticateWithUsernameOrEmail()
         }
 
         return true
