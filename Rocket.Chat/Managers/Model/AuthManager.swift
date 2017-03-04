@@ -17,6 +17,20 @@ struct AuthManager {
         guard let auths = try? Realm().objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false) else { return nil}
         return auths.first
     }
+
+    /**
+        - returns: Current user object, if exists.
+    */
+    static func currentUser() -> User? {
+        guard let auth = isAuthenticated() else { return nil }
+
+        var user: User?
+        Realm.execute { (realm) in
+            user = realm.object(ofType: User.self, forPrimaryKey: auth.userId)
+        }
+
+        return user
+    }
 }
 
 // MARK: Socket Management
@@ -119,6 +133,31 @@ extension AuthManager {
         ] as [String : Any]
 
         self.auth(params: params, completion: completion)
+    }
+
+    /**
+        Returns the username suggestion for the logged in user.
+    */
+    static func usernameSuggestion(completion: @escaping MessageCompletion) {
+        let object = [
+            "msg": "method",
+            "method": "getUsernameSuggestion"
+        ] as [String : Any]
+
+        SocketManager.send(object, completion: completion)
+    }
+
+    /**
+     Set username of logged in user
+     */
+    static func setUsername(_ username: String, completion: @escaping MessageCompletion) {
+        let object = [
+            "msg": "method",
+            "method": "setUsername",
+            "params": [username]
+        ] as [String : Any]
+
+        SocketManager.send(object, completion: completion)
     }
 
     /**
