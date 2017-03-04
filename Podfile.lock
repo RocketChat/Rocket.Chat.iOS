@@ -43,7 +43,6 @@ PODS:
     - KSCrash/Recording
   - MobilePlayer (1.2.0)
   - NVActivityIndicatorView (3.4)
-  - p2.OAuth2 (3.0.2)
   - Realm (2.4.2):
     - Realm/Headers (= 2.4.2)
   - Realm/Headers (2.4.2)
@@ -66,7 +65,6 @@ DEPENDENCIES:
   - Google/SignIn
   - MobilePlayer
   - NVActivityIndicatorView
-  - p2.OAuth2 (~> 3.0)
   - RealmSwift
   - SDWebImage (~> 3.8)
   - SideMenu
@@ -91,7 +89,6 @@ SPEC CHECKSUMS:
   KSCrash: 8acc46aca72b2772d5d1e3cba1da9173db4d705e
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   NVActivityIndicatorView: 5754be63ceecd1df8af37d3c088d81872feeb8b8
-  p2.OAuth2: ba5f538fafbb81dd3a71b6e22d4550a08e71fdf0
   Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
   RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
@@ -102,6 +99,6 @@ SPEC CHECKSUMS:
   TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: 179ae0d0de1a2eacbd3a8b20c34d52d5c2be2bf3
+PODFILE CHECKSUM: 3d77768a3c0802990ab424506679c3e8a63dc900
 
 COCOAPODS: 1.1.1
