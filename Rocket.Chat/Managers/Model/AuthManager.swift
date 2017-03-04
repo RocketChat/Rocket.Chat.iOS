@@ -68,31 +68,10 @@ extension AuthManager {
         Generic method that authenticates the user.
     */
     static func auth(params: [String: Any], completion: @escaping MessageCompletion) {
-
-    }
-
-    /**
-        This method authenticates the user with email and password.
- 
-        - parameter username: Username
-        - parameter password: Password
-        - parameter completion: The completion block that'll be called in case
-            of success or error.
-    */
-    static func auth(_ username: String, password: String, completion: @escaping MessageCompletion) {
-        let usernameType = username.contains("@") ? "email" : "username"
         let object = [
             "msg": "method",
             "method": "login",
-            "params": [[
-                "user": [
-                    usernameType: username
-                ],
-                "password": [
-                    "digest": password.sha256(),
-                    "algorithm": "sha-256"
-                ]
-            ]]
+            "params": [params]
         ] as [String : Any]
 
         SocketManager.send(object) { (response) in
@@ -119,6 +98,27 @@ extension AuthManager {
             Realm.update(auth)
             completion(response)
         }
+    }
+
+    /**
+        This method authenticates the user with email and password.
+ 
+        - parameter username: Username
+        - parameter password: Password
+        - parameter completion: The completion block that'll be called in case
+            of success or error.
+    */
+    static func auth(_ username: String, password: String, completion: @escaping MessageCompletion) {
+        let usernameType = username.contains("@") ? "email" : "username"
+        let params = [
+            "user": [usernameType: username],
+            "password": [
+                "digest": password.sha256(),
+                "algorithm": "sha-256"
+            ]
+        ] as [String : Any]
+
+        self.auth(params: params, completion: completion)
     }
 
     /**
