@@ -30,6 +30,7 @@ def shared_pods
   pod 'Starscream', '~> 2.0.0'
 
   # Authentication SDKs
+  pod '1PasswordExtension'
   pod 'Google/SignIn'
 end
 
