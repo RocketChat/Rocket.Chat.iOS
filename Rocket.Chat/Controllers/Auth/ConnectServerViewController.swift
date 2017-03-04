@@ -15,6 +15,8 @@ final class ConnectServerViewController: BaseViewController {
     internal var connecting = false
     internal var serverURL: URL!
 
+    var serverPublicSettings: AuthSettings?
+
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldServerURL: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -58,6 +60,7 @@ final class ConnectServerViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
             controller.serverURL = serverURL
+            controller.serverPublicSettings = self.serverPublicSettings
         }
     }
 
@@ -114,13 +117,17 @@ final class ConnectServerViewController: BaseViewController {
             }
 
             SocketManager.connect(socketURL) { (_, connected) in
-                if connected {
-                    self?.performSegue(withIdentifier: "Auth", sender: nil)
-                }
+                AuthManager.updatePublicSettings(nil) { (settings) in
+                    self?.serverPublicSettings = settings
 
-                self?.connecting = false
-                self?.textFieldServerURL.alpha = 1
-                self?.activityIndicator.stopAnimating()
+                    if connected {
+                        self?.performSegue(withIdentifier: "Auth", sender: nil)
+                    }
+
+                    self?.connecting = false
+                    self?.textFieldServerURL.alpha = 1
+                    self?.activityIndicator.stopAnimating()
+                }
             }
         }
     }

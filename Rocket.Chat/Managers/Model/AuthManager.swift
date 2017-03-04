@@ -65,27 +65,13 @@ extension AuthManager {
     }
 
     /**
-        This method authenticates the user with email and password.
- 
-        - parameter username: Username
-        - parameter password: Password
-        - parameter completion: The completion block that'll be called in case
-            of success or error.
+        Generic method that authenticates the user.
     */
-    static func auth(_ username: String, password: String, completion: @escaping MessageCompletion) {
-        let usernameType = username.contains("@") ? "email" : "username"
+    static func auth(params: [String: Any], completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "login",
-            "params": [[
-                "user": [
-                    usernameType: username
-                ],
-                "password": [
-                    "digest": password.sha256(),
-                    "algorithm": "sha-256"
-                ]
-            ]]
+            "params": [params]
         ] as [String : Any]
 
         SocketManager.send(object) { (response) in
@@ -115,12 +101,34 @@ extension AuthManager {
     }
 
     /**
+        This method authenticates the user with email and password.
+ 
+        - parameter username: Username
+        - parameter password: Password
+        - parameter completion: The completion block that'll be called in case
+            of success or error.
+    */
+    static func auth(_ username: String, password: String, completion: @escaping MessageCompletion) {
+        let usernameType = username.contains("@") ? "email" : "username"
+        let params = [
+            "user": [usernameType: username],
+            "password": [
+                "digest": password.sha256(),
+                "algorithm": "sha-256"
+            ]
+        ] as [String : Any]
+
+        self.auth(params: params, completion: completion)
+    }
+
+    /**
         Logouts user from the app, clear database
         and disconnects from the socket.
      */
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
             SocketManager.clear()
+            GIDSignIn.sharedInstance().signOut()
 
             Realm.execute({ (realm) in
                 realm.deleteAll()
@@ -130,7 +138,7 @@ extension AuthManager {
         }
     }
 
-    static func updatePublicSettings(_ auth: Auth, completion: @escaping MessageCompletion) {
+    static func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
@@ -138,19 +146,23 @@ extension AuthManager {
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
-                completion(response)
+                completion(nil)
                 return
             }
 
+            var settings: AuthSettings!
             Realm.execute { realm in
-                let settings = auth.settings ?? AuthSettings()
+                settings = auth?.settings ?? AuthSettings()
                 settings.map(response.result["result"])
-                auth.settings = settings
+                realm.add(settings, update: true)
 
-                realm.add([settings, auth], update: true)
+                if let auth = auth {
+                    auth.settings = settings
+                    realm.add(auth, update: true)
+                }
             }
 
-            completion(response)
+            completion(settings)
         }
     }
 }
