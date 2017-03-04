@@ -28,6 +28,10 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 3.8'
   pod 'Starscream', '~> 2.0.0'
+  pod 'p2.OAuth2', '~> 3.0'
+
+  # Authentication SDKs
+  pod 'Google/SignIn'
 end
 
 target 'Rocket.Chat' do

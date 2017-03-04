@@ -65,6 +65,13 @@ extension AuthManager {
     }
 
     /**
+        Generic method that authenticates the user.
+    */
+    static func auth(params: [String: Any], completion: @escaping MessageCompletion) {
+
+    }
+
+    /**
         This method authenticates the user with email and password.
  
         - parameter username: Username
