@@ -101,7 +101,13 @@ final class AuthViewController: BaseViewController {
                 present(alert, animated: true, completion: nil)
             }
         } else {
-            dismiss(animated: true, completion: nil)
+            if let user = AuthManager.currentUser() {
+                if let _ = user.username {
+                    dismiss(animated: true, completion: nil)
+                } else {
+                    performSegue(withIdentifier: "RequestUsername", sender: nil)
+                }
+            }
         }
     }
 
