@@ -250,6 +250,9 @@
                                                         <state key="normal" title="Terms of Service">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="buttonTermsDidPressed:" destination="hgH-Tx-WGh" eventType="touchUpInside" id="wtB-ad-t2U"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="and" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WZs-vv-q8v">
                                                         <rect key="frame" x="117" y="29" width="52" height="23"/>
@@ -265,6 +268,9 @@
                                                         <state key="normal" title="Privacy Policy">
                                                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="buttonPolicyDidPressed:" destination="hgH-Tx-WGh" eventType="touchUpInside" id="CFe-Ir-cNw"/>
+                                                        </connections>
                                                     </button>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="By proceeding you are agreeing to our" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zmi-CC-Ety">
                                                         <rect key="frame" x="4" y="10" width="262" height="23"/>
