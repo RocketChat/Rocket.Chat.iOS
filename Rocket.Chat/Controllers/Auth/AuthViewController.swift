@@ -35,6 +35,11 @@ final class AuthViewController: BaseViewController {
         self.updateAuthenticationMethods()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        stopLoading()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -77,37 +82,48 @@ final class AuthViewController: BaseViewController {
         self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
     }
 
+    fileprivate func handleAuthenticationResponse(_ response: SocketResponse) {
+        stopLoading()
+
+        if response.isError() {
+            if let error = response.result["error"].dictionary {
+                let alert = UIAlertController(
+                    title: localizedString("error.socket.default_error_title"),
+                    message: error["message"]?.string ?? localizedString("error.socket.default_error_message"),
+                    preferredStyle: .alert
+                )
+
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+
+    // MARK: Loaders
+    func startLoading() {
+        textFieldUsername.alpha = 0.5
+        textFieldPassword.alpha = 0.5
+        connecting = true
+        activityIndicator.startAnimating()
+    }
+
+    func stopLoading() {
+        textFieldUsername.alpha = 1
+        textFieldPassword.alpha = 1
+        connecting = false
+        activityIndicator.stopAnimating()
+    }
+
     // MARK: IBAction
     func authenticateWithUsernameOrEmail() {
         let email = textFieldUsername.text ?? ""
         let password = textFieldPassword.text ?? ""
 
-        textFieldUsername.alpha = 0.5
-        textFieldPassword.alpha = 0.5
-        connecting = true
-        activityIndicator.startAnimating()
+        startLoading()
 
-        AuthManager.auth(email, password: password) { [weak self] response in
-            self?.textFieldUsername.alpha = 1
-            self?.textFieldPassword.alpha = 1
-            self?.connecting = false
-            self?.activityIndicator.stopAnimating()
-
-            if response.isError() {
-                if let error = response.result["error"].dictionary {
-                    let alert = UIAlertController(
-                        title: localizedString("error.socket.default_error_title"),
-                        message: error["message"]?.string ?? localizedString("error.socket.default_error_message"),
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alert, animated: true, completion: nil)
-                }
-            } else {
-                self?.dismiss(animated: true, completion: nil)
-            }
-        }
+        AuthManager.auth(email, password: password, completion: self.handleAuthenticationResponse)
     }
 
     @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {
@@ -177,9 +193,16 @@ extension AuthViewController: GIDSignInDelegate {
             return
         }
 
-        
+        let params = [
+            "serviceName": "google",
+            "accessToken": user.authentication.accessToken,
+            "refreshToken": user.authentication.refreshToken,
+            "idToken": user.authentication.idToken,
+            "expiresIn": Int(user.authentication.accessTokenExpirationDate.timeIntervalSinceNow),
+            "scope": "profile"
+        ] as [String : Any]
 
-        return
+        AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {
@@ -188,6 +211,10 @@ extension AuthViewController: GIDSignInDelegate {
 }
 
 extension AuthViewController: GIDSignInUIDelegate {
+    func sign(inWillDispatch signIn: GIDSignIn!, error: Error!) {
+        startLoading()
+    }
+
     func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
         present(viewController, animated: true, completion: nil)
     }

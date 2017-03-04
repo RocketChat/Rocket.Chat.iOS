@@ -13,7 +13,7 @@
         <scene sceneID="dVT-E9-4gO">
             <objects>
                 <navigationController id="eFO-g0-vxH" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="F7W-s9-wXu">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="F7W-s9-wXu">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -41,7 +41,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqF-Ks-juL" userLabel="Content">
-                                        <rect key="frame" x="25" y="258.5" width="325" height="150"/>
+                                        <rect key="frame" x="25" y="259" width="325" height="150"/>
                                         <subviews>
                                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x11-i1-wfS">
                                                 <rect key="frame" x="0.0" y="90" width="325" height="60"/>
@@ -89,7 +89,7 @@
                                                 </variation>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" translatesAutoresizingMaskIntoConstraints="NO" id="zMq-o9-J2o">
-                                                <rect key="frame" x="38.5" y="14" width="249" height="49"/>
+                                                <rect key="frame" x="39" y="14" width="249" height="49"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="49" id="bd6-M5-tHA"/>
                                                     <constraint firstAttribute="width" constant="249" id="zSO-6I-lba"/>
