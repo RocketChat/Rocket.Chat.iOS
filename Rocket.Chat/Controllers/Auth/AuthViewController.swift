@@ -14,18 +14,25 @@ final class AuthViewController: BaseViewController {
 
     internal var connecting = false
     var serverURL: URL!
+    var serverPublicSettings: AuthSettings?
 
-    @IBOutlet weak var labelHost: UILabel!
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var buttonAuthenticateGoogle: UIButton! {
+        didSet {
+            buttonAuthenticateGoogle.layer.cornerRadius = 3
+        }
+    }
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = serverURL.host
 
-        labelHost.text = serverURL.host
+        self.updateAuthenticationMethods()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -45,7 +52,9 @@ final class AuthViewController: BaseViewController {
             object: nil
         )
 
-        textFieldUsername.becomeFirstResponder()
+        if !connecting {
+            textFieldUsername.becomeFirstResponder()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -64,37 +73,58 @@ final class AuthViewController: BaseViewController {
         visibleViewBottomConstraint.constant = 0
     }
 
-    // MARK: IBAction
-    func authenticate() {
-        let email = textFieldUsername.text ?? ""
-        let password = textFieldPassword.text ?? ""
+    // MARK: Authentication methods
+    fileprivate func updateAuthenticationMethods() {
+        guard let settings = self.serverPublicSettings else { return }
+        self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
+    }
 
+    internal func handleAuthenticationResponse(_ response: SocketResponse) {
+        stopLoading()
+
+        if response.isError() {
+            if let error = response.result["error"].dictionary {
+                let alert = UIAlertController(
+                    title: localizedString("error.socket.default_error_title"),
+                    message: error["message"]?.string ?? localizedString("error.socket.default_error_message"),
+                    preferredStyle: .alert
+                )
+
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
+    }
+
+    // MARK: Loaders
+    func startLoading() {
         textFieldUsername.alpha = 0.5
         textFieldPassword.alpha = 0.5
         connecting = true
         activityIndicator.startAnimating()
+    }
 
-        AuthManager.auth(email, password: password) { [weak self] response in
-            self?.textFieldUsername.alpha = 1
-            self?.textFieldPassword.alpha = 1
-            self?.connecting = false
-            self?.activityIndicator.stopAnimating()
+    func stopLoading() {
+        textFieldUsername.alpha = 1
+        textFieldPassword.alpha = 1
+        connecting = false
+        activityIndicator.stopAnimating()
+    }
 
-            if response.isError() {
-                if let error = response.result["error"].dictionary {
-                    let alert = UIAlertController(
-                        title: localizedString("error.socket.default_error_title"),
-                        message: error["message"]?.string ?? localizedString("error.socket.default_error_message"),
-                        preferredStyle: .alert
-                    )
+    // MARK: IBAction
+    func authenticateWithUsernameOrEmail() {
+        let email = textFieldUsername.text ?? ""
+        let password = textFieldPassword.text ?? ""
 
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alert, animated: true, completion: nil)
-                }
-            } else {
-                self?.dismiss(animated: true, completion: nil)
-            }
-        }
+        startLoading()
+
+        AuthManager.auth(email, password: password, completion: self.handleAuthenticationResponse)
+    }
+
+    @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {
+        authenticateWithGoogle()
     }
 
     @IBAction func buttonTermsDidPressed(_ sender: Any) {
@@ -141,9 +171,10 @@ extension AuthViewController: UITextFieldDelegate {
         }
 
         if textField == textFieldPassword {
-            authenticate()
+            authenticateWithUsernameOrEmail()
         }
 
         return true
     }
 }
+

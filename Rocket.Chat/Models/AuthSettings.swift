@@ -14,6 +14,10 @@ final class AuthSettings: BaseModel {
     dynamic var siteURL: String?
     dynamic var cdnPrefixURL: String?
 
+    // Authentication methods
+    dynamic var isUsernameEmailAuthenticationEnabled = false
+    dynamic var isGoogleAuthenticationEnabled = false
+
     // File upload
     dynamic var uploadStorageType: String?
 }

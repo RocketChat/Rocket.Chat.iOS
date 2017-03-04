@@ -18,6 +18,9 @@ extension AuthSettings: ModelMappeable {
         self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
         self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string
 
+        self.isUsernameEmailAuthenticationEnabled = objectForKey(object: values, key: "Accounts_ShowFormLogin")?.bool ?? true
+        self.isGoogleAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Google")?.bool ?? false
+
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
     }
 
