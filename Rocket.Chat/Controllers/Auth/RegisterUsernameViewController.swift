@@ -69,6 +69,7 @@ final class RegisterUsernameViewController: BaseViewController {
         textFieldUsername.alpha = 0.5
         requesting = true
         activityIndicator.startAnimating()
+        textFieldUsername.resignFirstResponder()
     }
 
     func stopLoading() {
