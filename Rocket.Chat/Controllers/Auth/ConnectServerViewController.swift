@@ -21,6 +21,14 @@ final class ConnectServerViewController: BaseViewController {
     @IBOutlet weak var textFieldServerURL: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    @IBOutlet weak var viewFields: UIView! {
+        didSet {
+            viewFields.layer.cornerRadius = 4
+            viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
+            viewFields.layer.borderWidth = 0.5
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -28,7 +36,6 @@ final class ConnectServerViewController: BaseViewController {
 
         if let nav = navigationController as? BaseNavigationController {
             nav.setTransparentTheme()
-            nav.navigationBar.barStyle = .black
         }
     }
 
