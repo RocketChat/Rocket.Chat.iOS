@@ -108,6 +108,7 @@ final class ConnectServerViewController: BaseViewController {
         connecting = true
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
+        textFieldServerURL.resignFirstResponder()
 
         serverURL = socketURL
 

@@ -125,6 +125,8 @@ final class AuthViewController: BaseViewController {
         textFieldPassword.alpha = 0.5
         connecting = true
         activityIndicator.startAnimating()
+        textFieldUsername.resignFirstResponder()
+        textFieldPassword.resignFirstResponder()
     }
 
     func stopLoading() {
