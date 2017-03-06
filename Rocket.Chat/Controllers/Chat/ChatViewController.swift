@@ -429,6 +429,8 @@ final class ChatViewController: SLKTextViewController {
 
     @IBAction func buttonMenuDidPressed(_ sender: AnyObject) {
         guard let menuLeftNavigationController = SideMenuManager.menuLeftNavigationController else { return }
+        textView.resignFirstResponder()
+
         present(menuLeftNavigationController, animated: true, completion: nil)
     }
 
