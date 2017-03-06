@@ -36,8 +36,6 @@ struct UploadVideoCompression {
                 } catch {
                     return completion(nil, true)
                 }
-
-                break
             default:
                 return completion(nil, true)
             }
