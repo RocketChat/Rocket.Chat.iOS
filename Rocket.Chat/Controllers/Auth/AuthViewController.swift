@@ -17,6 +17,14 @@ final class AuthViewController: BaseViewController {
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
 
+    @IBOutlet weak var viewFields: UIView! {
+        didSet {
+            viewFields.layer.cornerRadius = 4
+            viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
+            viewFields.layer.borderWidth = 0.5
+        }
+    }
+
     @IBOutlet weak var onePasswordButton: UIButton! {
         didSet {
             onePasswordButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
@@ -117,6 +125,8 @@ final class AuthViewController: BaseViewController {
         textFieldPassword.alpha = 0.5
         connecting = true
         activityIndicator.startAnimating()
+        textFieldUsername.resignFirstResponder()
+        textFieldPassword.resignFirstResponder()
     }
 
     func stopLoading() {

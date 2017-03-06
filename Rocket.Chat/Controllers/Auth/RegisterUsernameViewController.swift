@@ -15,6 +15,14 @@ final class RegisterUsernameViewController: BaseViewController {
 
     var serverPublicSettings: AuthSettings?
 
+    @IBOutlet weak var viewFields: UIView! {
+        didSet {
+            viewFields.layer.cornerRadius = 4
+            viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
+            viewFields.layer.borderWidth = 0.5
+        }
+    }
+
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
@@ -61,6 +69,7 @@ final class RegisterUsernameViewController: BaseViewController {
         textFieldUsername.alpha = 0.5
         requesting = true
         activityIndicator.startAnimating()
+        textFieldUsername.resignFirstResponder()
     }
 
     func stopLoading() {

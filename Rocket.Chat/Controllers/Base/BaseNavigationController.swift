@@ -24,7 +24,7 @@ class BaseNavigationController: UINavigationController {
         navBar.shadowImage = UIImage()
         navBar.backgroundColor = UIColor.clear
         navBar.isTranslucent = true
-        navBar.tintColor = UIColor.white
-        navBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
+        navBar.tintColor = .RCBlue()
+        navBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.RCBlue()]
     }
 }
