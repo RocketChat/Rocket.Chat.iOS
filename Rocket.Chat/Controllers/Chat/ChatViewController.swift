@@ -316,7 +316,7 @@ final class ChatViewController: SLKTextViewController {
 
             DispatchQueue.main.async {
                 if shouldScrollBottom || self?.activityIndicator.isAnimating ?? false {
-                    self?.scrollToBottom()
+                    self?.scrollToBottom(true)
                     self?.activityIndicator.stopAnimating()
                 }
             }
@@ -387,7 +387,8 @@ final class ChatViewController: SLKTextViewController {
             }, completion: { _ in
                 let shouldScroll = self.isContentBiggerThanContainerHeight()
                 if updateScrollPosition && shouldScroll {
-                    collectionView.contentOffset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
+                    let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
+                    collectionView.setContentOffset(offset, animated: true)
                 }
 
                 CATransaction.commit()
