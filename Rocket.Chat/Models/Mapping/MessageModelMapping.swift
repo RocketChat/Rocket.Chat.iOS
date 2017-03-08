@@ -31,8 +31,17 @@ extension Message: ModelMappeable {
             self.updatedAt = Date.dateFromInterval(updatedAt)
         }
 
-        if let _ = values["u"]["_id"].string {
+        if let userIdentifier = values["u"]["_id"].string {
             self.user = User.getOrCreate(values: values["u"], updates: nil)
+
+            var isBlocked = false
+            for blocked in MessageManager.blockedUsersList {
+                if blocked == userIdentifier {
+                    isBlocked = true
+                }
+            }
+
+            self.userBlocked = isBlocked
         }
 
         // Attachments
