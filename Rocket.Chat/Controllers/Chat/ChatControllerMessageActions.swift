@@ -20,11 +20,12 @@ extension ChatViewController {
 
     func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
-            let touchPoint = recognizer.location(in: self.view)
+            let touchPoint = recognizer.location(in: self.collectionView)
             if let indexPath = collectionView?.indexPathForItem(at: touchPoint) {
-                if messages.count > indexPath.row {
-                    let message = messages[indexPath.row]
-                    presentActionsFor(message: message, indexPath: indexPath)
+                if let cell = collectionView?.cellForItem(at: indexPath) as? ChatMessageCell {
+                    if let message = cell.message {
+                        presentActionsFor(message: message, indexPath: indexPath)
+                    }
                 }
             }
         }
@@ -35,6 +36,16 @@ extension ChatViewController {
 
         alert.addAction(UIAlertAction(title: localizedString("chat.message.actions.report"), style: .default, handler: { (_) in
             self.report(message: message)
+        }))
+
+        alert.addAction(UIAlertAction(title: localizedString("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
+            guard let user = message.user else { return }
+
+            DispatchQueue.main.async {
+                MessageManager.blockMessagesFrom(user, completion: {
+                    self?.updateSubscriptionInfo()
+                })
+            }
         }))
 
         alert.addAction(UIAlertAction(title: localizedString("chat.message.actions.copy"), style: .default, handler: { (_) in

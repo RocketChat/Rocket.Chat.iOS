@@ -47,6 +47,7 @@
 "chat.channel_preview_view.join" = "Entrar";
 
 // Chat Message Actions
+"chat.message.actions.block" = "Bloquear mensagens do usuário";
 "chat.message.actions.report" = "Reportar mensagem";
 "chat.message.actions.copy" = "Copiar";
 
