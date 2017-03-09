@@ -164,6 +164,9 @@ final class ChatViewController: SLKTextViewController {
         let view = ChatTitleView.instantiateFromNib()
         self.navigationItem.titleView = view
         chatTitleView = view
+
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(chatTitleViewDidPressed))
+        chatTitleView?.addGestureRecognizer(gesture)
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
@@ -426,6 +429,9 @@ final class ChatViewController: SLKTextViewController {
         present(menuLeftNavigationController, animated: true, completion: nil)
     }
 
+    func chatTitleViewDidPressed(_ sender: AnyObject) {
+        performSegue(withIdentifier: "Channel Info", sender: sender)
+    }
 
     // MARK: Side Menu
 
