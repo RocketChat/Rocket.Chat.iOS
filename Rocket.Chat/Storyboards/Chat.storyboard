@@ -42,15 +42,9 @@
                                 <action selector="buttonMenuDidPressed:" destination="A1E-cs-q8E" id="Rkb-iU-5Co"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" image="Star NavBar" id="wdP-aa-l8w">
-                            <connections>
-                                <action selector="buttonFavoriteDidPressed:" destination="A1E-cs-q8E" id="nff-Ej-DNe"/>
-                            </connections>
-                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorContainer" destination="fbt-TF-z7U" id="Nmz-IG-SvM"/>
-                        <outlet property="buttonFavorite" destination="wdP-aa-l8w" id="GbE-eF-LkQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA8-7w-0ga" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -78,6 +72,5 @@
     </scenes>
     <resources>
         <image name="Menu" width="22" height="22"/>
-        <image name="Star NavBar" width="22" height="21"/>
     </resources>
 </document>
