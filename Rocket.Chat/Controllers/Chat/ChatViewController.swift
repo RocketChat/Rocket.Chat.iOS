@@ -33,8 +33,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    @IBOutlet weak var buttonFavorite: UIBarButtonItem!
-
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewOffline: ChatHeaderViewOffline?
@@ -247,7 +245,6 @@ final class ChatViewController: SLKTextViewController {
 
         title = subscription?.name
         chatTitleView?.subscription = subscription
-        updateFavoriteMark()
         textView.resignFirstResponder()
 
         CATransaction.begin()
@@ -408,12 +405,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    fileprivate func updateFavoriteMark() {
-        guard let subscription = self.subscription else { return }
-
-        self.buttonFavorite?.tintColor = subscription.favorite ? .RCFavoriteMark() : .RCFavoriteUnmark()
-    }
-
     fileprivate func isContentBiggerThanContainerHeight() -> Bool {
         if let contentHeight = self.collectionView?.contentSize.height {
             if let collectionViewHeight = self.collectionView?.frame.height {
@@ -435,11 +426,6 @@ final class ChatViewController: SLKTextViewController {
         present(menuLeftNavigationController, animated: true, completion: nil)
     }
 
-    @IBAction func buttonFavoriteDidPressed(_ sender: Any) {
-        SubscriptionManager.toggleFavorite(subscription) { [unowned self] (_) in
-            self.updateFavoriteMark()
-        }
-    }
 
     // MARK: Side Menu
 
