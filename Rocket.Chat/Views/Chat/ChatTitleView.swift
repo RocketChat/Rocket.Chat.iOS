@@ -10,13 +10,16 @@ import UIKit
 
 final class ChatTitleView: UIView {
 
-    let iconColor = UIColor(rgb: 0x999999, alphaVal: 1)
-
     @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var labelTitle: UILabel! {
+        didSet {
+            labelTitle.textColor = .RCDarkGray()
+        }
+    }
+
     @IBOutlet weak var imageArrowDown: UIImageView! {
         didSet {
-            imageArrowDown.image = imageArrowDown.image?.imageWithTint(iconColor)
+            imageArrowDown.image = imageArrowDown.image?.imageWithTint(.RCGray())
         }
     }
 
@@ -26,16 +29,16 @@ final class ChatTitleView: UIView {
 
             switch subscription.type {
             case .channel:
-                icon.image = UIImage(named: "Hashtag")?.imageWithTint(iconColor)
+                icon.image = UIImage(named: "Hashtag")?.imageWithTint(.RCGray())
                 break
             case .directMessage:
-                var color = iconColor
+                var color = UIColor.RCGray()
 
                 if let user = subscription.directMessageUser {
                     color = { _ -> UIColor in
                         switch user.status {
                         case .online: return .RCOnline()
-                        case .offline: return iconColor
+                        case .offline: return .RCGray()
                         case .away: return .RCAway()
                         case .busy: return .RCBusy()
                         }
@@ -45,7 +48,7 @@ final class ChatTitleView: UIView {
                 icon.image = UIImage(named: "Mention")?.imageWithTint(color)
                 break
             case .group:
-                icon.image = UIImage(named: "Lock")?.imageWithTint(iconColor)
+                icon.image = UIImage(named: "Lock")?.imageWithTint(.RCGray())
                 break
             }
         }
