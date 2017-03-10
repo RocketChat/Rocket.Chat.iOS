@@ -77,3 +77,13 @@
 "chat.message.type.room_archived" = "This room has been archived by %@";
 "chat.message.type.room_unarchived" = "This room has been unarchived by %@";
 
+// Chat Information
+"chat.info.title" = "Info";
+"chat.info.item.topic" = "Topic";
+"chat.info.item.description" = "Description";
+"chat.info.item.notifications" = "Notifications";
+"chat.info.item.members" = "Members";
+"chat.info.item.pinned" = "Pinned";
+"chat.info.item.starred" = "Starred";
+
+
