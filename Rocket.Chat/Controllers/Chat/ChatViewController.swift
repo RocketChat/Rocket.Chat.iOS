@@ -147,6 +147,14 @@ final class ChatViewController: SLKTextViewController {
         })
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nav = segue.destination as? UINavigationController, segue.identifier == "Channel Info" {
+            if let controller = nav.viewControllers.first as? ChannelInfoViewController {
+                controller.subscription = self.subscription
+            }
+        }
+    }
+
     fileprivate func setupTextViewSettings() {
         textInputbar.autoHideRightButton = true
 
