@@ -51,6 +51,35 @@ class ChannelInfoViewController: BaseViewController {
 
 extension ChannelInfoViewController {
 
+    func cellForSubscriptionName() -> ChannelInfoBasicCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoBasicCell.identifier) as? ChannelInfoBasicCell else {
+            return ChannelInfoBasicCell()
+        }
+
+        cell.labelTitle.text = "#\(subscription.name)"
+        return cell
+    }
+
+    func cellForSubscriptionTopic() -> ChannelInfoDescriptionCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoDescriptionCell.identifier) as? ChannelInfoDescriptionCell else {
+            return ChannelInfoDescriptionCell()
+        }
+
+        cell.labelTitle.text = localizedString("chat.info.item.topic")
+        cell.labelDescription.text = "ChannelInfoDescriptionCell"
+        return cell
+    }
+
+    func cellForUser() -> ChannelInfoUserCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoUserCell.identifier) as? ChannelInfoUserCell else {
+            return ChannelInfoUserCell()
+        }
+
+        cell.labelTitle.text = subscription.name
+        cell.labelSubtitle.text = subscription.otherUserId
+
+        return cell
+    }
 
 }
 
@@ -60,6 +89,15 @@ extension ChannelInfoViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellType = tableViewData[indexPath.section][indexPath.row]
+
+        if cellType == ChannelInfoUserCell.self {
+            return cellForUser()
+        }
+
+        if cellType == ChannelInfoBasicCell.self {
+            return cellForSubscriptionName()
+        }
+
         return tableView.dequeueReusableCell(withIdentifier: cellType.identifier) ?? UITableViewCell()
     }
 
