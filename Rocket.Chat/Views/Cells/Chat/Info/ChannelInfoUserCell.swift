@@ -8,9 +8,10 @@
 
 import UIKit
 
-class ChannelInfoUserCell: UITableViewCell {
+class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol {
 
     static let identifier = "kChannelInfoCellUser"
+    static let defaultHeight: Float = 80
 
     @IBOutlet weak var imageViewAvatar: UIImageView!
     @IBOutlet weak var labelTitle: UILabel!

@@ -8,10 +8,11 @@
 
 import UIKit
 
-class ChannelInfoBasicCell: UITableViewCell {
+class ChannelInfoBasicCell: UITableViewCell, ChannelInfoCellProtocol {
 
     static let identifier = "kChannelInfoCellBasic"
+    static let defaultHeight: Float = 44
 
     @IBOutlet weak var labelTitle: UILabel!
-    
+
 }
