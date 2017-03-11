@@ -34,6 +34,8 @@ final class ChatViewController: SLKTextViewController {
     }
 
     @IBOutlet weak var buttonFavorite: UIBarButtonItem!
+    @IBOutlet weak var buttonScrollToBottom: UIButton!
+    var buttonScrollToBottomMarginConstraint: NSLayoutConstraint?
 
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
@@ -100,6 +102,7 @@ final class ChatViewController: SLKTextViewController {
         setupSideMenu()
         setupTextViewSettings()
         setupLongPressGestureHandler()
+        setupScrollToBottomButton()
 
         // TODO: this should really goes into the view model, when we have it
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
@@ -112,6 +115,8 @@ final class ChatViewController: SLKTextViewController {
         }
 
         view.bringSubview(toFront: activityIndicatorContainer)
+        view.bringSubview(toFront: buttonScrollToBottom)
+        view.bringSubview(toFront: textInputbar)
     }
 
     internal func reconnect() {
@@ -168,6 +173,12 @@ final class ChatViewController: SLKTextViewController {
         chatTitleView = view
     }
 
+    fileprivate func setupScrollToBottomButton() {
+        buttonScrollToBottom.layer.cornerRadius = 25
+        buttonScrollToBottom.layer.borderColor = UIColor.lightGray.cgColor
+        buttonScrollToBottom.layer.borderWidth = 1
+    }
+
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
         return UICollectionViewFlowLayout()
     }
@@ -195,6 +206,20 @@ final class ChatViewController: SLKTextViewController {
         if totalItems > 0 {
             let indexPath = IndexPath(row: totalItems, section: 0)
             collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: animated)
+        }
+
+        hideButtonScrollToBottom(animated: true)
+    }
+
+    fileprivate func hideButtonScrollToBottom(animated: Bool) {
+        buttonScrollToBottomMarginConstraint?.constant = 50
+        let action = {
+            self.view.layoutIfNeeded()
+        }
+        if animated {
+            UIView.animate(withDuration: 0.5, animations: action)
+        } else {
+            action()
         }
     }
 
@@ -441,6 +466,10 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    @IBAction func buttonScrollToBottomPressed(_ sender: UIButton) {
+        scrollToBottom(true)
+    }
+
     // MARK: Side Menu
 
     fileprivate func setupSideMenu() {
@@ -584,6 +613,29 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
         return CGSize(width: fullWidth, height: 40)
     }
+}
+
+// MARK: UIScrollViewDelegate
+
+extension ChatViewController {
+
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        guard let view = buttonScrollToBottom.superview else { return }
+
+        if buttonScrollToBottomMarginConstraint == nil {
+            buttonScrollToBottomMarginConstraint = buttonScrollToBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
+            buttonScrollToBottomMarginConstraint?.isActive = true
+        }
+        if targetContentOffset.pointee.y < scrollView.contentSize.height - scrollView.frame.height {
+            buttonScrollToBottomMarginConstraint?.constant = -64
+            UIView.animate(withDuration: 0.5) {
+                view.layoutIfNeeded()
+            }
+        } else {
+            hideButtonScrollToBottom(animated: true)
+        }
+    }
+
 }
 
 // MARK: ChatPreviewModeViewProtocol
