@@ -61,13 +61,12 @@ class Attachment: BaseModel {
 extension Attachment {
 
     fileprivate static func fullURLWith(_ path: String?) -> URL? {
-        guard let path = path else { return nil }
+        guard let path = path?.replacingOccurrences(of: "//", with: "/") else { return nil }
         guard let auth = AuthManager.isAuthenticated() else { return nil }
         guard let userId = auth.userId else { return nil }
         guard let token = auth.token else { return nil }
         guard let baseURL = auth.baseURL() else { return nil }
-        var urlString = "\(baseURL)\(path)?rc_uid=\(userId)&rc_token=\(token)"
-        urlString = urlString.replacingOccurrences(of: "//", with: "/")
+        let urlString = "\(baseURL)\(path)?rc_uid=\(userId)&rc_token=\(token)"
         return URL(string: urlString)
     }
 
