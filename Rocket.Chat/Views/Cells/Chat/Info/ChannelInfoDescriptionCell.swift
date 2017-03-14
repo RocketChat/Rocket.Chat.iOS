@@ -8,12 +8,29 @@
 
 import UIKit
 
+struct ChannelInfoDescriptionCellData: ChannelInfoCellDataProtocol {
+    let cellType = ChannelInfoDescriptionCell.self
+    var title: String?
+    var description: String?
+}
+
 class ChannelInfoDescriptionCell: UITableViewCell, ChannelInfoCellProtocol {
 
     static let identifier = "kChannelInfoCellDescription"
     static let defaultHeight: Float = 80
 
     @IBOutlet weak var labelTitle: UILabel!
-    @IBOutlet weak var labelDescription: UILabel!
+    @IBOutlet weak var labelDescription: UILabel! {
+        didSet {
+            labelDescription.textColor = UIColor.RCLightGray()
+        }
+    }
+
+    var data: ChannelInfoDescriptionCellData? {
+        didSet {
+            labelTitle.text = data?.title
+            labelDescription.text = data?.description
+        }
+    }
 
 }

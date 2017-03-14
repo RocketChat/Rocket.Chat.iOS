@@ -9,6 +9,15 @@
 import Foundation
 
 protocol ChannelInfoCellProtocol {
+    associatedtype DataType
+
     static var identifier: String { get }
     static var defaultHeight: Float { get }
+    var data: DataType? { get set }
+}
+
+protocol ChannelInfoCellDataProtocol {
+    associatedtype CellType
+
+    var cellType: CellType { get }
 }

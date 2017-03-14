@@ -10,7 +10,7 @@ import UIKit
 
 class ChannelInfoViewController: BaseViewController {
 
-    var tableViewData: [[ChannelInfoCellProtocol.Type]] = [] {
+    var tableViewData: [[Any]] = [] {
         didSet {
             tableView?.reloadData()
         }
@@ -19,21 +19,27 @@ class ChannelInfoViewController: BaseViewController {
     var subscription: Subscription! {
         didSet {
             let channelInfoData = [
-                ChannelInfoDetailCell.self,
-                ChannelInfoDetailCell.self,
-                ChannelInfoDetailCell.self,
-                ChannelInfoDetailCell.self
+                ChannelInfoDetailCellData(title: "Members", detail: "100"),
+                ChannelInfoDetailCellData(title: "Members", detail: "100"),
+                ChannelInfoDetailCellData(title: "Members", detail: "100"),
+                ChannelInfoDetailCellData(title: "Members", detail: "100")
             ]
 
             if subscription.type == .directMessage {
                 tableViewData = [[
-                    ChannelInfoUserCell.self
+                    ChannelInfoUserCellData(user: subscription.directMessageUser)
                 ], channelInfoData]
             } else {
                 tableViewData = [[
-                    ChannelInfoBasicCell.self,
-                    ChannelInfoDescriptionCell.self,
-                    ChannelInfoDescriptionCell.self
+                    ChannelInfoBasicCellData(title: "#\(subscription.name)"),
+                    ChannelInfoDescriptionCellData(
+                        title: localizedString("chat.info.item.topic"),
+                        description: subscription.roomTopic
+                    ),
+                    ChannelInfoDescriptionCellData(
+                        title: localizedString("chat.info.item.description"),
+                        description: subscription.roomDescription
+                    )
                 ], channelInfoData]
             }
         }
@@ -41,44 +47,15 @@ class ChannelInfoViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        title = localizedString("chat.info.title")
+    }
+
+    // MARK: IBAction
+
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-    }
-
-}
-
-// MARK: Cells
-
-extension ChannelInfoViewController {
-
-    func cellForSubscriptionName() -> ChannelInfoBasicCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoBasicCell.identifier) as? ChannelInfoBasicCell else {
-            return ChannelInfoBasicCell()
-        }
-
-        cell.labelTitle.text = "#\(subscription.name)"
-        return cell
-    }
-
-    func cellForSubscriptionTopic() -> ChannelInfoDescriptionCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoDescriptionCell.identifier) as? ChannelInfoDescriptionCell else {
-            return ChannelInfoDescriptionCell()
-        }
-
-        cell.labelTitle.text = localizedString("chat.info.item.topic")
-        cell.labelDescription.text = "ChannelInfoDescriptionCell"
-        return cell
-    }
-
-    func cellForUser() -> ChannelInfoUserCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoUserCell.identifier) as? ChannelInfoUserCell else {
-            return ChannelInfoUserCell()
-        }
-
-        cell.labelTitle.text = subscription.name
-        cell.labelSubtitle.text = subscription.otherUserId
-
-        return cell
     }
 
 }
@@ -88,22 +65,59 @@ extension ChannelInfoViewController {
 extension ChannelInfoViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellType = tableViewData[indexPath.section][indexPath.row]
+        let data = tableViewData[indexPath.section][indexPath.row]
 
-        if cellType == ChannelInfoUserCell.self {
-            return cellForUser()
+        if let data = data as? ChannelInfoBasicCellData {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoBasicCell.identifier) as? ChannelInfoBasicCell {
+                cell.data = data
+                return cell
+            }
         }
 
-        if cellType == ChannelInfoBasicCell.self {
-            return cellForSubscriptionName()
+        if let data = data as? ChannelInfoDetailCellData {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoDetailCell.identifier) as? ChannelInfoDetailCell {
+                cell.data = data
+                return cell
+            }
         }
 
-        return tableView.dequeueReusableCell(withIdentifier: cellType.identifier) ?? UITableViewCell()
+        if let data = data as? ChannelInfoUserCellData {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoUserCell.identifier) as? ChannelInfoUserCell {
+                cell.data = data
+                return cell
+            }
+        }
+
+        if let data = data as? ChannelInfoDescriptionCellData {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoDescriptionCell.identifier) as? ChannelInfoDescriptionCell {
+                cell.data = data
+                return cell
+            }
+        }
+
+        return UITableViewCell()
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cellType = tableViewData[indexPath.section][indexPath.row]
-        return CGFloat(cellType.defaultHeight)
+        let data = tableViewData[indexPath.section][indexPath.row]
+
+        if let _ = data as? ChannelInfoBasicCellData {
+            return CGFloat(ChannelInfoBasicCell.defaultHeight)
+        }
+
+        if let _ = data as? ChannelInfoDetailCellData {
+            return CGFloat(ChannelInfoDetailCell.defaultHeight)
+        }
+
+        if let _ = data as? ChannelInfoUserCellData {
+            return CGFloat(ChannelInfoUserCell.defaultHeight)
+        }
+
+        if let _ = data as? ChannelInfoDescriptionCellData {
+            return CGFloat(ChannelInfoDescriptionCell.defaultHeight)
+        }
+
+        return CGFloat(0)
     }
 
 }
