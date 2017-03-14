@@ -36,6 +36,9 @@ class Subscription: BaseModel {
     dynamic var createdAt: Date?
     dynamic var lastSeen: Date?
 
+    dynamic var roomTopic: String?
+    dynamic var roomDescription: String?
+
     dynamic var otherUserId: String?
     var directMessageUser: User? {
         guard let otherUserId = otherUserId else { return nil }

@@ -8,10 +8,20 @@
 
 import UIKit
 
+struct ChannelInfoBasicCellData: ChannelInfoCellDataProtocol {
+    let cellType = ChannelInfoBasicCell.self
+    var title: String?
+}
+
 class ChannelInfoBasicCell: UITableViewCell, ChannelInfoCellProtocol {
 
     static let identifier = "kChannelInfoCellBasic"
     static let defaultHeight: Float = 44
+    var data: ChannelInfoBasicCellData? {
+        didSet {
+            labelTitle.text = data?.title
+        }
+    }
 
     @IBOutlet weak var labelTitle: UILabel!
 
