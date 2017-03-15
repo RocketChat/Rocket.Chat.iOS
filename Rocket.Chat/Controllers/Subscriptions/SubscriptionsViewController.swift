@@ -7,7 +7,6 @@
 //
 
 import RealmSwift
-import SideMenu
 
 final class SubscriptionsViewController: BaseViewController {
 
@@ -66,14 +65,11 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCurrentUserInformation()
-        ChatViewController.sharedInstance()?.toggleStatusBar(hide: true)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        textFieldSearch.resignFirstResponder()
         unregisterKeyboardNotifications()
-        ChatViewController.sharedInstance()?.toggleStatusBar(hide: false)
         dismissUserMenu()
     }
 
