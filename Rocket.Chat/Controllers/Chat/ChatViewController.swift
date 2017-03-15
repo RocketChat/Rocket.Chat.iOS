@@ -6,7 +6,6 @@
 //  Copyright © 2016 Rocket.Chat. All rights reserved.
 //
 
-import SideMenu
 import RealmSwift
 import SlackTextViewController
 import URBMediaFocusViewController
@@ -99,7 +98,6 @@ final class ChatViewController: SLKTextViewController {
         rightButton.isEnabled = false
 
         setupTitleView()
-        setupSideMenu()
         setupTextViewSettings()
         setupLongPressGestureHandler()
         setupScrollToBottomButton()
@@ -341,7 +339,7 @@ final class ChatViewController: SLKTextViewController {
 
             DispatchQueue.main.async {
                 if shouldScrollBottom || self?.activityIndicator.isAnimating ?? false {
-                    self?.scrollToBottom(true)
+                    self?.scrollToBottom()
                     self?.activityIndicator.stopAnimating()
                 }
             }
@@ -454,10 +452,8 @@ final class ChatViewController: SLKTextViewController {
     // MARK: IBAction
 
     @IBAction func buttonMenuDidPressed(_ sender: AnyObject) {
-        guard let menuLeftNavigationController = SideMenuManager.menuLeftNavigationController else { return }
-        textView.resignFirstResponder()
-
-        present(menuLeftNavigationController, animated: true, completion: nil)
+//        guard let menuLeftNavigationController = SideMenuManager.menuLeftNavigationController else { return }
+//        present(menuLeftNavigationController, animated: true, completion: nil)
     }
 
     @IBAction func buttonFavoriteDidPressed(_ sender: Any) {
@@ -468,22 +464,6 @@ final class ChatViewController: SLKTextViewController {
 
     @IBAction func buttonScrollToBottomPressed(_ sender: UIButton) {
         scrollToBottom(true)
-    }
-
-    // MARK: Side Menu
-
-    fileprivate func setupSideMenu() {
-        let storyboardSubscriptions = UIStoryboard(name: "Subscriptions", bundle: Bundle.main)
-        SideMenuManager.menuFadeStatusBar = false
-        SideMenuManager.menuLeftNavigationController = storyboardSubscriptions.instantiateInitialViewController() as? UISideMenuNavigationController
-
-        if UIDevice.current.userInterfaceIdiom == .pad {
-            SideMenuManager.menuWidth = 320
-        }
-
-        guard let navigationController = self.navigationController else { return }
-        SideMenuManager.menuAddPanGestureToPresent(toView: navigationController.navigationBar)
-        SideMenuManager.menuAddScreenEdgePanGesturesToPresent(toView: navigationController.view)
     }
 }
 
