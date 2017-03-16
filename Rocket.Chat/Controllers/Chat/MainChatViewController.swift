@@ -11,13 +11,24 @@ import SideMenuController
 
 class MainChatViewController: SideMenuController {
 
+    class func shared() -> MainChatViewController? {
+        return UIApplication.shared.windows.first?.rootViewController as? MainChatViewController
+    }
+
+    class func closeSideMenuIfNeeded() {
+        if let instance = shared() {
+            if instance.sidePanelVisible {
+                instance.toggle()
+            }
+        }
+    }
+
     required init?(coder aDecoder: NSCoder) {
         SideMenuController.preferences.drawing.menuButtonImage = UIImage(named: "Menu")
         SideMenuController.preferences.drawing.sidePanelPosition = .underCenterPanelLeft
-        SideMenuController.preferences.drawing.sidePanelWidth = 300
+        SideMenuController.preferences.drawing.sidePanelWidth = 280
         SideMenuController.preferences.drawing.centerPanelShadow = true
         SideMenuController.preferences.animating.statusBarBehaviour = .horizontalPan
-
         super.init(coder: aDecoder)
     }
 
