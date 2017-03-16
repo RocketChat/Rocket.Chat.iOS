@@ -24,7 +24,7 @@ final class MainViewController: BaseViewController {
             let activityIndicator = NVActivityIndicatorView(
                 frame: frame,
                 type: .ballPulse,
-                color: .white,
+                color: UIColor.RCBlue(),
                 padding: 0
             )
 

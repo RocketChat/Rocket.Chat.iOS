@@ -42,6 +42,8 @@ class Message: BaseModel {
     dynamic var user: User?
     dynamic var text = ""
 
+    dynamic var userBlocked: Bool = false
+
     dynamic var alias = ""
     dynamic var avatar = ""
 

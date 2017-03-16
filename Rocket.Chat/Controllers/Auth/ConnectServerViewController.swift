@@ -15,9 +15,19 @@ final class ConnectServerViewController: BaseViewController {
     internal var connecting = false
     internal var serverURL: URL!
 
+    var serverPublicSettings: AuthSettings?
+
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldServerURL: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+    @IBOutlet weak var viewFields: UIView! {
+        didSet {
+            viewFields.layer.cornerRadius = 4
+            viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
+            viewFields.layer.borderWidth = 0.5
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,7 +36,6 @@ final class ConnectServerViewController: BaseViewController {
 
         if let nav = navigationController as? BaseNavigationController {
             nav.setTransparentTheme()
-            nav.navigationBar.barStyle = .black
         }
     }
 
@@ -58,6 +67,7 @@ final class ConnectServerViewController: BaseViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
             controller.serverURL = serverURL
+            controller.serverPublicSettings = self.serverPublicSettings
         }
     }
 
@@ -98,6 +108,7 @@ final class ConnectServerViewController: BaseViewController {
         connecting = true
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
+        textFieldServerURL.resignFirstResponder()
 
         serverURL = socketURL
 
@@ -114,13 +125,17 @@ final class ConnectServerViewController: BaseViewController {
             }
 
             SocketManager.connect(socketURL) { (_, connected) in
-                if connected {
-                    self?.performSegue(withIdentifier: "Auth", sender: nil)
-                }
+                AuthManager.updatePublicSettings(nil) { (settings) in
+                    self?.serverPublicSettings = settings
 
-                self?.connecting = false
-                self?.textFieldServerURL.alpha = 1
-                self?.activityIndicator.stopAnimating()
+                    if connected {
+                        self?.performSegue(withIdentifier: "Auth", sender: nil)
+                    }
+
+                    self?.connecting = false
+                    self?.textFieldServerURL.alpha = 1
+                    self?.activityIndicator.stopAnimating()
+                }
             }
         }
     }

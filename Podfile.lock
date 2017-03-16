@@ -1,9 +1,44 @@
 PODS:
+  - 1PasswordExtension (1.8.4)
   - Bugsnag (5.7.0):
     - KSCrash/RecordingAdvanced (= 1.11.2)
   - Crashlytics (3.8.3):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
+  - FirebaseAnalytics (3.7.0):
+    - FirebaseCore (~> 3.5)
+    - FirebaseInstanceID (~> 1.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseCore (3.5.0):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseInstanceID (1.0.9)
+  - Google/Core (3.0.3):
+    - FirebaseAnalytics (~> 3.2)
+  - Google/SignIn (3.0.3):
+    - Google/Core
+    - GoogleSignIn (~> 4.0)
+  - GoogleSignIn (4.0.2):
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - GTMOAuth2 (~> 1.0)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GTMOAuth2 (1.1.4):
+    - GTMSessionFetcher (~> 1.1)
+  - GTMSessionFetcher (1.1.8):
+    - GTMSessionFetcher/Full (= 1.1.8)
+  - GTMSessionFetcher/Core (1.1.8)
+  - GTMSessionFetcher/Full (1.1.8):
+    - GTMSessionFetcher/Core (= 1.1.8)
   - KSCrash/Recording (1.11.2)
   - KSCrash/RecordingAdvanced (1.11.2):
     - KSCrash/Recording
@@ -25,9 +60,11 @@ PODS:
   - URBMediaFocusViewController (0.9.0)
 
 DEPENDENCIES:
+  - 1PasswordExtension
   - Bugsnag
   - Crashlytics
   - Fabric
+  - Google/SignIn
   - MobilePlayer
   - NVActivityIndicatorView
   - RealmSwift
@@ -40,9 +77,18 @@ DEPENDENCIES:
   - URBMediaFocusViewController
 
 SPEC CHECKSUMS:
+  1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
   Bugsnag: d86488d670f91acbce0186e6570e500039676ef0
   Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
+  FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
+  FirebaseCore: 1c0a13bf59bb95cdd19577252499f0ec6a03e999
+  FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
+  Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
+  GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
+  GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
   KSCrash: 8acc46aca72b2772d5d1e3cba1da9173db4d705e
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   NVActivityIndicatorView: 5754be63ceecd1df8af37d3c088d81872feeb8b8
@@ -56,6 +102,6 @@ SPEC CHECKSUMS:
   TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: adbfdc443339f9de10c2b86184c7ac329d99e1ce
+PODFILE CHECKSUM: 9146f0e25c3b3cc9dbb02b250e1dbd213dae0dfc
 
 COCOAPODS: 1.1.1

@@ -8,23 +8,46 @@
 
 import Foundation
 import UIKit
+import SafariServices
+import OnePasswordExtension
 
 final class AuthViewController: BaseViewController {
 
     internal var connecting = false
     var serverURL: URL!
+    var serverPublicSettings: AuthSettings?
 
-    @IBOutlet weak var labelHost: UILabel!
+    @IBOutlet weak var viewFields: UIView! {
+        didSet {
+            viewFields.layer.cornerRadius = 4
+            viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
+            viewFields.layer.borderWidth = 0.5
+        }
+    }
+
+    @IBOutlet weak var onePasswordButton: UIButton! {
+        didSet {
+            onePasswordButton.isHidden = !OnePasswordExtension.shared().isAppExtensionAvailable()
+        }
+    }
+
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var buttonAuthenticateGoogle: UIButton! {
+        didSet {
+            buttonAuthenticateGoogle.layer.cornerRadius = 3
+        }
+    }
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = serverURL.host
 
-        labelHost.text = serverURL.host
+        self.updateAuthenticationMethods()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -44,7 +67,9 @@ final class AuthViewController: BaseViewController {
             object: nil
         )
 
-        textFieldUsername.becomeFirstResponder()
+        if !connecting {
+            textFieldUsername.becomeFirstResponder()
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,39 +88,106 @@ final class AuthViewController: BaseViewController {
         visibleViewBottomConstraint.constant = 0
     }
 
-    // MARK: IBAction
-    func authenticate() {
-        let email = textFieldUsername.text ?? ""
-        let password = textFieldPassword.text ?? ""
+    // MARK: Authentication methods
+    fileprivate func updateAuthenticationMethods() {
+        guard let settings = self.serverPublicSettings else { return }
+        self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
+    }
 
-        textFieldUsername.alpha = 0.5
-        textFieldPassword.alpha = 0.5
-        connecting = true
-        activityIndicator.startAnimating()
+    internal func handleAuthenticationResponse(_ response: SocketResponse) {
+        stopLoading()
 
-        AuthManager.auth(email, password: password) { [weak self] response in
-            self?.textFieldUsername.alpha = 1
-            self?.textFieldPassword.alpha = 1
-            self?.connecting = false
-            self?.activityIndicator.stopAnimating()
+        if response.isError() {
+            if let error = response.result["error"].dictionary {
+                let alert = UIAlertController(
+                    title: localizedString("error.socket.default_error_title"),
+                    message: error["message"]?.string ?? localizedString("error.socket.default_error_message"),
+                    preferredStyle: .alert
+                )
 
-            if response.isError() {
-                if let error = response.result["error"].dictionary {
-                    let alert = UIAlertController(
-                        title: localizedString("error.socket.default_error_title"),
-                        message: error["message"]?.string ?? localizedString("error.socket.default_error_message"),
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alert, animated: true, completion: nil)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
+            }
+        } else {
+            if let user = AuthManager.currentUser() {
+                if let _ = user.username {
+                    dismiss(animated: true, completion: nil)
+                } else {
+                    performSegue(withIdentifier: "RequestUsername", sender: nil)
                 }
-            } else {
-                self?.dismiss(animated: true, completion: nil)
             }
         }
     }
 
+    // MARK: Loaders
+    func startLoading() {
+        textFieldUsername.alpha = 0.5
+        textFieldPassword.alpha = 0.5
+        connecting = true
+        activityIndicator.startAnimating()
+        textFieldUsername.resignFirstResponder()
+        textFieldPassword.resignFirstResponder()
+    }
+
+    func stopLoading() {
+        textFieldUsername.alpha = 1
+        textFieldPassword.alpha = 1
+        connecting = false
+        activityIndicator.stopAnimating()
+    }
+
+    // MARK: IBAction
+    func authenticateWithUsernameOrEmail() {
+        let email = textFieldUsername.text ?? ""
+        let password = textFieldPassword.text ?? ""
+
+        startLoading()
+
+        AuthManager.auth(email, password: password, completion: self.handleAuthenticationResponse)
+    }
+
+    @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {
+        authenticateWithGoogle()
+    }
+
+    @IBAction func buttonTermsDidPressed(_ sender: Any) {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = self.serverURL.host
+
+        if var newURL = components.url {
+            newURL = newURL.appendingPathComponent("terms-of-service")
+
+            let controller = SFSafariViewController(url: newURL)
+            present(controller, animated: true, completion: nil)
+        }
+    }
+
+    @IBAction func buttonPolicyDidPressed(_ sender: Any) {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = self.serverURL.host
+
+        if var newURL = components.url {
+            newURL = newURL.appendingPathComponent("privacy-policy")
+
+            let controller = SFSafariViewController(url: newURL)
+            present(controller, animated: true, completion: nil)
+        }
+    }
+
+    @IBAction func buttonOnePasswordDidPressed(_ sender: Any) {
+        let siteURL = serverPublicSettings?.siteURL ?? ""
+        OnePasswordExtension.shared().findLogin(forURLString: siteURL, for: self, sender: sender) { [weak self] (login, _) in
+            if login == nil {
+                return
+            }
+
+            self?.textFieldUsername.text = login?[AppExtensionUsernameKey] as? String
+            self?.textFieldPassword.text = login?[AppExtensionPasswordKey] as? String
+            self?.authenticateWithUsernameOrEmail()
+        }
+    }
 }
 
 extension AuthViewController: UITextFieldDelegate {
@@ -114,9 +206,10 @@ extension AuthViewController: UITextFieldDelegate {
         }
 
         if textField == textFieldPassword {
-            authenticate()
+            authenticateWithUsernameOrEmail()
         }
 
         return true
     }
 }
+

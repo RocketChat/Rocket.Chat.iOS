@@ -84,7 +84,8 @@ extension Subscription {
     }
 
     func fetchMessages() -> Results<Message> {
-        return self.messages.sorted(byKeyPath: "createdAt", ascending: true)
+        let filter = NSPredicate(format: "userBlocked == false")
+        return self.messages.filter(filter).sorted(byKeyPath: "createdAt", ascending: true)
     }
 
 }
