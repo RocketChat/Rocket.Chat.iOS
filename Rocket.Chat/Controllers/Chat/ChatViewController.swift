@@ -459,11 +459,6 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: IBAction
 
-    @IBAction func buttonMenuDidPressed(_ sender: AnyObject) {
-//        guard let menuLeftNavigationController = SideMenuManager.menuLeftNavigationController else { return }
-//        present(menuLeftNavigationController, animated: true, completion: nil)
-    }
-
     @IBAction func buttonFavoriteDidPressed(_ sender: Any) {
         SubscriptionManager.toggleFavorite(subscription) { [unowned self] (_) in
             self.updateFavoriteMark()
