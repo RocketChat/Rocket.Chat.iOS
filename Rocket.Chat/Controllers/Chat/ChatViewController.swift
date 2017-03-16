@@ -61,8 +61,10 @@ final class ChatViewController: SLKTextViewController {
     // MARK: View Life Cycle
 
     class func sharedInstance() -> ChatViewController? {
-        if let nav = UIApplication.shared.delegate?.window??.rootViewController as? UINavigationController {
-            return nav.viewControllers.first as? ChatViewController
+        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
+            if let nav = main.centerViewController as? UINavigationController {
+                return nav.viewControllers.first as? ChatViewController
+            }
         }
 
         return nil
@@ -281,6 +283,7 @@ final class ChatViewController: SLKTextViewController {
                 self.collectionView?.deleteItems(at: indexPaths)
             }, completion: { _ in
                 CATransaction.commit()
+                MainChatViewController.closeSideMenuIfNeeded()
             })
         }
 
