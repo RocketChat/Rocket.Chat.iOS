@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZWT-yJ-dk4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8cV-un-sd9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbt-TF-z7U">
-                                <rect key="frame" x="158" y="244.5" width="60" height="60"/>
+                                <rect key="frame" x="158" y="245" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="RDs-qf-dR9"/>
                                     <constraint firstAttribute="width" constant="60" id="rqT-ly-vaC"/>
@@ -51,13 +51,7 @@
                         </constraints>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa">
-                        <barButtonItem key="leftBarButtonItem" image="Menu" id="8AY-Oe-fcS">
-                            <connections>
-                                <action selector="buttonMenuDidPressed:" destination="A1E-cs-q8E" id="Rkb-iU-5Co"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa"/>
                     <connections>
                         <outlet property="activityIndicatorContainer" destination="fbt-TF-z7U" id="Nmz-IG-SvM"/>
                         <outlet property="buttonScrollToBottom" destination="Stw-bA-gXV" id="u7H-cM-6TS"/>
@@ -86,10 +80,10 @@
                                 <color key="sectionIndexBackgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kChannelInfoCellBasic" id="gKO-s2-y5v" customClass="ChannelInfoBasicCell" customModule="Rocket_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gKO-s2-y5v" id="zaK-O4-oZu">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sQe-B0-EkL">
@@ -113,10 +107,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="kChannelInfoCellDetail" id="k55-cl-wlo" customClass="ChannelInfoDetailCell" customModule="Rocket_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="99.5" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="100" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="k55-cl-wlo" id="o9F-sz-vh1">
-                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9t8-8n-pob">
@@ -153,10 +147,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kChannelInfoCellDescription" rowHeight="80" id="Fgn-eD-tSk" customClass="ChannelInfoDescriptionCell" customModule="Rocket_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="143.5" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="144" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Fgn-eD-tSk" id="jgl-OM-Vc0">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="utH-LK-k03">
@@ -191,10 +185,10 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kChannelInfoCellUser" rowHeight="80" id="eMh-Gn-ROi" customClass="ChannelInfoUserCell" customModule="Rocket_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="223.5" width="375" height="80"/>
+                                        <rect key="frame" x="0.0" y="224" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="eMh-Gn-ROi" id="70g-EK-Vf3">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="csl-yy-ib5">
@@ -283,10 +277,40 @@
             </objects>
             <point key="canvasLocation" x="2484" y="636"/>
         </scene>
+        <!--Main Chat View Controller-->
+        <scene sceneID="3gv-jK-am2">
+            <objects>
+                <viewController id="8cV-un-sd9" customClass="MainChatViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0HC-p4-uO1"/>
+                        <viewControllerLayoutGuide type="bottom" id="PZt-Mx-Wom"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Frn-gW-sf6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="ZWT-yJ-dk4" kind="custom" identifier="showCenterController" customClass="CenterContainmentSegue" customModule="SideMenuController" id="49z-6y-c6s"/>
+                        <segue destination="P2x-Rh-AO9" kind="custom" identifier="containSideMenu" customClass="SideContainmentSegue" customModule="SideMenuController" id="9yd-xs-Cbl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ozo-Ve-E9D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-287" y="636"/>
+        </scene>
+        <!--Subscriptions-->
+        <scene sceneID="DIh-Dr-zLC">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Subscriptions" id="P2x-Rh-AO9" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3lB-gl-VBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="656" y="175"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="XbC-Os-gqR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZWT-yJ-dk4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Chat" automaticallyAdjustsScrollViewInsets="NO" id="ZWT-yJ-dk4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vuM-gG-ey4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -304,6 +328,5 @@
     </scenes>
     <resources>
         <image name="Arrow Down" width="25" height="25"/>
-        <image name="Menu" width="22" height="22"/>
     </resources>
 </document>

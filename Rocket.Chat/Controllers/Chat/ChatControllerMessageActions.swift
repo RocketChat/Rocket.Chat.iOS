@@ -13,10 +13,15 @@ extension ChatViewController {
     func setupLongPressGestureHandler() {
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
         gesture.minimumPressDuration = 1
+        gesture.delegate = self
         collectionView?.addGestureRecognizer(gesture)
     }
 
     // MARK: Gesture handler
+
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
 
     func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
