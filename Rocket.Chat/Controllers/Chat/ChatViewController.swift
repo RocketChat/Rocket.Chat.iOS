@@ -46,6 +46,7 @@ final class ChatViewController: SLKTextViewController {
     var searchResult: [String: Any] = [:]
 
     var hideStatusBar = false
+    var shouldCloseSidebarAfterSubscriptionUpdate = false
 
     var isRequestingHistory = false
     let socketHandlerToken = String.random(5)
@@ -283,7 +284,11 @@ final class ChatViewController: SLKTextViewController {
                 self.collectionView?.deleteItems(at: indexPaths)
             }, completion: { _ in
                 CATransaction.commit()
-                MainChatViewController.closeSideMenuIfNeeded()
+
+                if self.shouldCloseSidebarAfterSubscriptionUpdate {
+                    MainChatViewController.closeSideMenuIfNeeded()
+                    self.shouldCloseSidebarAfterSubscriptionUpdate = false
+                }
             })
         }
 
