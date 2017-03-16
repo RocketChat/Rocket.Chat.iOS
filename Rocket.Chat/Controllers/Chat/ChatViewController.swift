@@ -45,8 +45,7 @@ final class ChatViewController: SLKTextViewController {
 
     var searchResult: [String: Any] = [:]
 
-    var hideStatusBar = false
-    var shouldCloseSidebarAfterSubscriptionUpdate = false
+    var closeSidebarAfterSubscriptionUpdate = false
 
     var isRequestingHistory = false
     let socketHandlerToken = String.random(5)
@@ -285,9 +284,9 @@ final class ChatViewController: SLKTextViewController {
             }, completion: { _ in
                 CATransaction.commit()
 
-                if self.shouldCloseSidebarAfterSubscriptionUpdate {
+                if self.closeSidebarAfterSubscriptionUpdate {
                     MainChatViewController.closeSideMenuIfNeeded()
-                    self.shouldCloseSidebarAfterSubscriptionUpdate = false
+                    self.closeSidebarAfterSubscriptionUpdate = false
                 }
             })
         }
@@ -468,45 +467,6 @@ final class ChatViewController: SLKTextViewController {
     @IBAction func buttonScrollToBottomPressed(_ sender: UIButton) {
         scrollToBottom(true)
     }
-}
-
-// MARK: Status Bar Control
-
-extension ChatViewController {
-
-    override var preferredStatusBarUpdateAnimation: UIStatusBarAnimation {
-        return .slide
-    }
-
-    override var prefersStatusBarHidden: Bool {
-        return hideStatusBar
-    }
-
-    func toggleStatusBar(hide: Bool) {
-        guard let collectionView = self.collectionView else { return }
-
-        hideStatusBar = hide
-
-        let statusBarHeight = CGFloat(20)
-        let contentHeight = collectionView.contentSize.height
-        let offsetY = collectionView.contentOffset.y
-        let bottomOffset = contentHeight - offsetY
-
-        UIView.animate(withDuration: 0.25) { () -> Void in
-            self.setNeedsStatusBarAppearanceUpdate()
-            self.navigationController?.navigationBar.frame.origin.y = statusBarHeight
-
-            var yOffset: CGFloat!
-            if hide {
-                yOffset = collectionView.contentSize.height - bottomOffset - statusBarHeight
-            } else {
-                yOffset = collectionView.contentSize.height - bottomOffset + statusBarHeight
-            }
-
-            collectionView.contentOffset = CGPoint(x: 0, y: yOffset)
-        }
-    }
-
 }
 
 // MARK: UICollectionViewDataSource
