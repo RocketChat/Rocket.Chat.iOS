@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SideMenu
 
 protocol SubscriptionUserStatusViewProtocol: class {
     func userDidPressedOption()

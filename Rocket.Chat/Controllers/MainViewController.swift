@@ -8,7 +8,6 @@
 
 import UIKit
 import NVActivityIndicatorView
-import SideMenu
 
 final class MainViewController: BaseViewController {
 
@@ -35,15 +34,6 @@ final class MainViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
-        if let leftMenuController = SideMenuManager.menuLeftNavigationController {
-            leftMenuController.dismiss(animated: false, completion: {
-                SideMenuManager.menuLeftNavigationController = nil
-                SideMenuManager.menuLeftSwipeToDismissGesture = nil
-                SideMenuManager.menuRightNavigationController = nil
-                SideMenuManager.menuRightSwipeToDismissGesture = nil
-            })
-        }
 
         if AuthManager.isAuthenticated() == nil {
             performSegue(withIdentifier: "Auth", sender: nil)
