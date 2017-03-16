@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZWT-yJ-dk4">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8cV-un-sd9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -23,7 +23,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbt-TF-z7U">
-                                <rect key="frame" x="158" y="244.5" width="60" height="60"/>
+                                <rect key="frame" x="158" y="245" width="60" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="RDs-qf-dR9"/>
                                     <constraint firstAttribute="width" constant="60" id="rqT-ly-vaC"/>
@@ -52,11 +52,6 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa">
-                        <barButtonItem key="leftBarButtonItem" image="Menu" id="8AY-Oe-fcS">
-                            <connections>
-                                <action selector="buttonMenuDidPressed:" destination="A1E-cs-q8E" id="Rkb-iU-5Co"/>
-                            </connections>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="Star NavBar" id="wdP-aa-l8w">
                             <connections>
                                 <action selector="buttonFavoriteDidPressed:" destination="A1E-cs-q8E" id="nff-Ej-DNe"/>
@@ -73,10 +68,40 @@
             </objects>
             <point key="canvasLocation" x="1676" y="636"/>
         </scene>
+        <!--Main Chat View Controller-->
+        <scene sceneID="3gv-jK-am2">
+            <objects>
+                <viewController id="8cV-un-sd9" customClass="MainChatViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0HC-p4-uO1"/>
+                        <viewControllerLayoutGuide type="bottom" id="PZt-Mx-Wom"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Frn-gW-sf6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="ZWT-yJ-dk4" kind="custom" identifier="showCenterController" customClass="CenterContainmentSegue" customModule="SideMenuController" id="49z-6y-c6s"/>
+                        <segue destination="P2x-Rh-AO9" kind="custom" identifier="containSideMenu" customClass="SideContainmentSegue" customModule="SideMenuController" id="9yd-xs-Cbl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ozo-Ve-E9D" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-287" y="636"/>
+        </scene>
+        <!--Subscriptions-->
+        <scene sceneID="DIh-Dr-zLC">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Subscriptions" id="P2x-Rh-AO9" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3lB-gl-VBo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="656" y="175"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="XbC-Os-gqR">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="ZWT-yJ-dk4" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Chat" automaticallyAdjustsScrollViewInsets="NO" id="ZWT-yJ-dk4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vuM-gG-ey4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -94,7 +119,6 @@
     </scenes>
     <resources>
         <image name="Arrow Down" width="25" height="25"/>
-        <image name="Menu" width="22" height="22"/>
         <image name="Star NavBar" width="22" height="21"/>
     </resources>
 </document>

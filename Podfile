@@ -13,7 +13,7 @@ def shared_pods
   pod 'SwiftyJSON'
 
   # UI
-  pod 'SideMenu'
+  pod 'SideMenuController'
   pod 'SlackTextViewController'
   pod 'MobilePlayer'
   pod 'URBMediaFocusViewController'

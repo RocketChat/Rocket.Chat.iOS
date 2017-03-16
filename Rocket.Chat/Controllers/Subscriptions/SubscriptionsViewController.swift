@@ -7,7 +7,6 @@
 //
 
 import RealmSwift
-import SideMenu
 
 final class SubscriptionsViewController: BaseViewController {
 
@@ -66,14 +65,11 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCurrentUserInformation()
-        ChatViewController.sharedInstance()?.toggleStatusBar(hide: true)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        textFieldSearch.resignFirstResponder()
         unregisterKeyboardNotifications()
-        ChatViewController.sharedInstance()?.toggleStatusBar(hide: false)
         dismissUserMenu()
     }
 
@@ -328,9 +324,10 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let subscription = groupSubscriptions?[indexPath.section][indexPath.row]
-        ChatViewController.sharedInstance()?.subscription = subscription
-        dismiss(animated: true)
+        let subscription = self.groupSubscriptions?[indexPath.section][indexPath.row]
+        let controller = ChatViewController.sharedInstance()
+        controller?.closeSidebarAfterSubscriptionUpdate = true
+        controller?.subscription = subscription
     }
 }
 
