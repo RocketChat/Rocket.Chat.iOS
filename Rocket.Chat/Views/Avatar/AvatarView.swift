@@ -85,14 +85,17 @@ final class AvatarView: UIView {
             if let first = strings.first, let last = strings.last {
                 let lastOffset = strings.count > 1 ? 1 : 2
                 let indexFirst = first.index(first.startIndex, offsetBy: 1)
-                let indexLast = last.index(last.startIndex, offsetBy: lastOffset)
-
                 let firstString = first.substring(to: indexFirst)
-                var lastString = last.substring(to: indexLast)
 
-                if lastOffset == 2 {
-                    let endIndex = lastString.index(lastString.startIndex, offsetBy: 1)
-                    lastString = lastString.substring(from: endIndex)
+                var lastString = ""
+                if last.characters.count > lastOffset {
+                    let indexLast = last.index(last.startIndex, offsetBy: lastOffset)
+                    lastString = last.substring(to: indexLast)
+
+                    if lastOffset == 2 {
+                        let endIndex = lastString.index(lastString.startIndex, offsetBy: 1)
+                        lastString = lastString.substring(from: endIndex)
+                    }
                 }
 
                 initials = "\(firstString)\(lastString)"
