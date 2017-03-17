@@ -277,9 +277,9 @@ final class ChatViewController: SLKTextViewController {
 
         CATransaction.begin()
         CATransaction.setDisableActions(true)
-        let indexPaths = dataController.clear()
         UIView.performWithoutAnimation {
             collectionView?.performBatchUpdates({
+                let indexPaths = self.dataController.clear()
                 self.collectionView?.deleteItems(at: indexPaths)
             }, completion: { _ in
                 CATransaction.commit()
@@ -404,7 +404,6 @@ final class ChatViewController: SLKTextViewController {
         }
 
         // Insert data into collectionView without moving it
-        let indexPaths = dataController.insert(objs)
         let contentHeight = collectionView.contentSize.height
         let offsetY = collectionView.contentOffset.y
         let bottomOffset = contentHeight - offsetY
@@ -413,6 +412,7 @@ final class ChatViewController: SLKTextViewController {
             CATransaction.begin()
             CATransaction.setDisableActions(true)
             collectionView.performBatchUpdates({
+                let indexPaths = self.dataController.insert(objs)
                 collectionView.insertItems(at: indexPaths)
             }, completion: { _ in
                 let shouldScroll = self.isContentBiggerThanContainerHeight()
