@@ -68,6 +68,31 @@ final class AvatarView: UIView {
         }
     }
 
+    internal func initialsFor(_ username: String) -> String {
+        let strings = username.components(separatedBy: ".")
+
+        if let first = strings.first, let last = strings.last {
+            let lastOffset = strings.count > 1 ? 1 : 2
+            let indexFirst = first.index(first.startIndex, offsetBy: 1)
+            let firstString = first.substring(to: indexFirst)
+
+            var lastString = ""
+            if last.characters.count >= lastOffset {
+                let indexLast = last.index(last.startIndex, offsetBy: lastOffset)
+                lastString = last.substring(to: indexLast)
+
+                if lastOffset == 2 {
+                    let endIndex = lastString.index(lastString.startIndex, offsetBy: 1)
+                    lastString = lastString.substring(from: endIndex)
+                }
+            }
+            
+            return "\(firstString)\(lastString)".uppercased()
+        }
+        
+        return ""
+    }
+
     private func setAvatarWithInitials() {
         let username = user?.username ?? "?"
 
@@ -80,26 +105,7 @@ final class AvatarView: UIView {
         } else {
             let position = username.characters.count % avatarColors.count
             color = avatarColors[position]
-
-            let strings = username.components(separatedBy: ".")
-            if let first = strings.first, let last = strings.last {
-                let lastOffset = strings.count > 1 ? 1 : 2
-                let indexFirst = first.index(first.startIndex, offsetBy: 1)
-                let firstString = first.substring(to: indexFirst)
-
-                var lastString = ""
-                if last.characters.count > lastOffset {
-                    let indexLast = last.index(last.startIndex, offsetBy: lastOffset)
-                    lastString = last.substring(to: indexLast)
-
-                    if lastOffset == 2 {
-                        let endIndex = lastString.index(lastString.startIndex, offsetBy: 1)
-                        lastString = lastString.substring(from: endIndex)
-                    }
-                }
-
-                initials = "\(firstString)\(lastString)"
-            }
+            initials = initialsFor(username)
         }
 
         labelInitials?.text = initials.uppercased()
