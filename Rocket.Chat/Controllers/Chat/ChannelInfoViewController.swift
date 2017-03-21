@@ -19,10 +19,8 @@ class ChannelInfoViewController: BaseViewController {
     var subscription: Subscription! {
         didSet {
             let channelInfoData = [
-                ChannelInfoDetailCellData(title: "Members", detail: "100"),
-                ChannelInfoDetailCellData(title: "Members", detail: "100"),
-                ChannelInfoDetailCellData(title: "Members", detail: "100"),
-                ChannelInfoDetailCellData(title: "Members", detail: "100")
+                ChannelInfoDetailCellData(title: localizedString("chat.info.item.pinned"), detail: ""),
+                ChannelInfoDetailCellData(title: localizedString("chat.info.item.starred"), detail: "")
             ]
 
             if subscription.type == .directMessage {
