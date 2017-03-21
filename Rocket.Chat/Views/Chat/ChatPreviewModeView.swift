@@ -17,7 +17,7 @@ final class ChatPreviewModeView: UIView {
     weak var delegate: ChatPreviewModeViewProtocol?
     var subscription: Subscription! {
         didSet {
-            let format = localizedString("chat.channel_preview_view.title")
+            let format = localized("chat.channel_preview_view.title")
             let string = String(format: format, subscription.name)
             labelTitle.text = string
         }
@@ -27,7 +27,7 @@ final class ChatPreviewModeView: UIView {
     @IBOutlet weak var buttonJoin: UIButton! {
         didSet {
             buttonJoin.layer.cornerRadius = 4
-            buttonJoin.setTitle(localizedString("chat.channel_preview_view.join"), for: .normal)
+            buttonJoin.setTitle(localized("chat.channel_preview_view.join"), for: .normal)
         }
     }
 
@@ -41,7 +41,7 @@ final class ChatPreviewModeView: UIView {
 
         SubscriptionManager.join(room: subscription.rid) { [weak self] _ in
             self?.activityIndicator.stopAnimating()
-            self?.buttonJoin.setTitle(localizedString("chat.channel_preview_view.join"), for: .normal)
+            self?.buttonJoin.setTitle(localized("chat.channel_preview_view.join"), for: .normal)
             self?.delegate?.userDidJoinedSubscription()
         }
     }
