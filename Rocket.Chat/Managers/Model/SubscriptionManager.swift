@@ -88,7 +88,8 @@ struct SubscriptionManager {
                     list?.forEach { object in
                         if let rid = object["_id"].string {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
-                                subscription.map(object)
+                                subscription.roomDescription = object["description"].string ?? ""
+                                subscription.roomTopic = object["topic"].string ?? ""
                                 subscriptions.append(subscription)
                             }
                         }
@@ -97,7 +98,8 @@ struct SubscriptionManager {
                     updated?.forEach { object in
                         if let rid = object["_id"].string {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
-                                subscription.map(object)
+                                subscription.roomDescription = object["description"].string ?? ""
+                                subscription.roomTopic = object["topic"].string ?? ""
                                 subscriptions.append(subscription)
                             }
                         }

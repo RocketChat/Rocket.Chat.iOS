@@ -22,7 +22,7 @@ class ChannelInfoDescriptionCell: UITableViewCell, ChannelInfoCellProtocol {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel! {
         didSet {
-            labelDescription.textColor = UIColor.RCLightGray()
+            labelDescription.textColor = UIColor.RCGray()
         }
     }
 
