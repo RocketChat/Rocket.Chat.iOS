@@ -250,7 +250,7 @@ final class ChatViewController: SLKTextViewController {
     fileprivate func sendMessage() {
         guard let message = textView.text else { return }
         
-        if textView.text.characters.count == 0 {
+        if message.characters.count == 0 {
             return
         }
         
