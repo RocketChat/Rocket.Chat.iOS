@@ -22,10 +22,27 @@ class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol {
         didSet {
             labelTitle.text = data?.user?.username
             labelSubtitle.text = data?.user?.name
+            avatarView.user = data?.user
         }
     }
 
-    @IBOutlet weak var imageViewAvatar: UIImageView!
+    @IBOutlet weak var avatarViewContainer: UIView! {
+        didSet {
+            if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.frame = avatarViewContainer.bounds
+                avatarViewContainer.addSubview(avatarView)
+                self.avatarView = avatarView
+            }
+        }
+    }
+
+    weak var avatarView: AvatarView! {
+        didSet {
+            avatarView.layer.cornerRadius = 4
+            avatarView.layer.masksToBounds = true
+        }
+    }
+
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelSubtitle: UILabel!
 
