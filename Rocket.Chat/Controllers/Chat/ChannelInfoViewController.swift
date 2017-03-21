@@ -19,8 +19,8 @@ class ChannelInfoViewController: BaseViewController {
     var subscription: Subscription! {
         didSet {
             let channelInfoData = [
-                ChannelInfoDetailCellData(title: localizedString("chat.info.item.pinned"), detail: ""),
-                ChannelInfoDetailCellData(title: localizedString("chat.info.item.starred"), detail: "")
+                ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: ""),
+                ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "")
             ]
 
             if subscription.type == .directMessage {
@@ -31,11 +31,11 @@ class ChannelInfoViewController: BaseViewController {
                 tableViewData = [[
                     ChannelInfoBasicCellData(title: "#\(subscription.name)"),
                     ChannelInfoDescriptionCellData(
-                        title: localizedString("chat.info.item.topic"),
+                        title: localized("chat.info.item.topic"),
                         description: subscription.roomTopic
                     ),
                     ChannelInfoDescriptionCellData(
-                        title: localizedString("chat.info.item.description"),
+                        title: localized("chat.info.item.description"),
                         description: subscription.roomDescription
                     )
                 ], channelInfoData]
@@ -47,7 +47,7 @@ class ChannelInfoViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        title = localizedString("chat.info.title")
+        title = localized("chat.info.title")
     }
 
     // MARK: IBAction

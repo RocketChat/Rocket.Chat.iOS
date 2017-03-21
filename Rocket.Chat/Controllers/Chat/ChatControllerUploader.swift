@@ -15,19 +15,19 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: localizedString("chat.upload.take_photo"), style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
             self.openCamera()
         }))
 
-        alert.addAction(UIAlertAction(title: localizedString("chat.upload.choose_from_library"), style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: localized("chat.upload.choose_from_library"), style: .default, handler: { (_) in
             self.openPhotosLibrary()
         }))
 
-        alert.addAction(UIAlertAction(title: localizedString("chat.upload.import_file"), style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: localized("chat.upload.import_file"), style: .default, handler: { (_) in
             // Do nothing yet.
         }))
 
-        alert.addAction(UIAlertAction(title: localizedString("global.cancel"), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
             presenter.sourceView = leftButton
@@ -63,7 +63,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     // MARK: UIImagePickerControllerDelegate
 
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        var activityMessage = localizedString("chat.upload.uploading_image")
+        var activityMessage = localized("chat.upload.uploading_image")
         var filename = "\(String.random()).jpeg"
         var file: FileUpload?
 
@@ -88,7 +88,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
 
         if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
-            activityMessage = localizedString("chat.upload.uploading_video")
+            activityMessage = localized("chat.upload.uploading_video")
 
             let assetURL = AVURLAsset(url: videoURL)
             let semaphore = DispatchSemaphore(value: 0)
@@ -124,7 +124,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
 
                 if error {
-                    var errorMessage = localizedString("error.socket.default_error_message")
+                    var errorMessage = localized("error.socket.default_error_message")
 
                     if let response = response {
                         if let message = response.result["error"]["message"].string {
@@ -133,12 +133,12 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     }
 
                     let alert = UIAlertController(
-                        title: localizedString("error.socket.default_error_title"),
+                        title: localized("error.socket.default_error_title"),
                         message: errorMessage,
                         preferredStyle: .alert
                     )
 
-                    alert.addAction(UIAlertAction(title: localizedString("global.ok"), style: .default, handler: nil))
+                    alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
 
                     DispatchQueue.main.async {
                         self.present(alert, animated: true, completion: nil)

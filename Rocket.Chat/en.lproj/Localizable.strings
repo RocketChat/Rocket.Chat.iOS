@@ -80,7 +80,9 @@
 // Chat Information
 "chat.info.title" = "Info";
 "chat.info.item.topic" = "Topic";
+"chat.info.item.no_topic" = "No topic";
 "chat.info.item.description" = "Description";
+"chat.info.item.no_description" = "No description";
 "chat.info.item.notifications" = "Notifications";
 "chat.info.item.members" = "Members";
 "chat.info.item.pinned" = "Pinned";
