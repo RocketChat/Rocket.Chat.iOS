@@ -91,7 +91,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="xvi-yg-Ug7"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="15"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
