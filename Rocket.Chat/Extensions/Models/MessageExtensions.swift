@@ -27,57 +27,57 @@ extension Message {
         switch type {
             case .roomNameChanged:
                 return String(
-                    format: localizedString("chat.message.type.room_name_changed"),
+                    format: localized("chat.message.type.room_name_changed"),
                     text,
                     self.user?.username ?? ""
                 )
 
             case .userAdded:
                 return String(
-                    format: localizedString("chat.message.type.user_added_by"),
+                    format: localized("chat.message.type.user_added_by"),
                     text,
                     self.user?.username ?? ""
                 )
 
             case .userRemoved:
                 return String(
-                    format: localizedString("chat.message.type.user_removed_by"),
+                    format: localized("chat.message.type.user_removed_by"),
                     text,
                     self.user?.username ?? ""
                 )
 
             case .userJoined:
-                return localizedString("chat.message.type.user_joined")
+                return localized("chat.message.type.user_joined")
 
             case .userLeft:
-                return localizedString("chat.message.type.user_left")
+                return localized("chat.message.type.user_left")
 
             case .userMuted:
                 return String(
-                    format: localizedString("chat.message.type.user_muted"),
+                    format: localized("chat.message.type.user_muted"),
                     text,
                     self.user?.username ?? ""
                 )
 
             case .userUnmuted:
                 return String(
-                    format: localizedString("chat.message.type.user_unmuted"),
+                    format: localized("chat.message.type.user_unmuted"),
                     text,
                     self.user?.username ?? ""
                 )
 
             case .welcome:
                 return String(
-                    format: localizedString("chat.message.type.welcome"),
+                    format: localized("chat.message.type.welcome"),
                     text
                 )
 
             case .messageRemoved:
-                return localizedString("chat.message.type.message_removed")
+                return localized("chat.message.type.message_removed")
 
             case .subscriptionRoleAdded:
                 return String(
-                    format: localizedString("chat.message.type.subscription_role_added"),
+                    format: localized("chat.message.type.subscription_role_added"),
                     text,
                     role,
                     self.user?.username ?? ""
@@ -85,7 +85,7 @@ extension Message {
 
             case .subscriptionRoleRemoved:
                 return String(
-                    format: localizedString("chat.message.type.subscription_role_removed"),
+                    format: localized("chat.message.type.subscription_role_removed"),
                     text,
                     role,
                     self.user?.username ?? ""
@@ -93,13 +93,13 @@ extension Message {
 
             case .roomArchived:
                 return String(
-                    format: localizedString("chat.message.type.room_archived"),
+                    format: localized("chat.message.type.room_archived"),
                     text
                 )
 
             case .roomUnarchived:
                 return String(
-                    format: localizedString("chat.message.type.room_unarchived"),
+                    format: localized("chat.message.type.room_unarchived"),
                     text
                 )
 

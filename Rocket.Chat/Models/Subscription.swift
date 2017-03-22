@@ -36,6 +36,9 @@ class Subscription: BaseModel {
     dynamic var createdAt: Date?
     dynamic var lastSeen: Date?
 
+    dynamic var roomTopic: String?
+    dynamic var roomDescription: String?
+
     dynamic var otherUserId: String?
     var directMessageUser: User? {
         guard let otherUserId = otherUserId else { return nil }
@@ -47,6 +50,7 @@ class Subscription: BaseModel {
 }
 
 extension Subscription {
+
     func isValid() -> Bool {
         return self.rid.characters.count > 0
     }
@@ -86,6 +90,20 @@ extension Subscription {
     func fetchMessages() -> Results<Message> {
         let filter = NSPredicate(format: "userBlocked == false")
         return self.messages.filter(filter).sorted(byKeyPath: "createdAt", ascending: true)
+    }
+
+}
+
+extension Subscription {
+
+    static func find(rid: String, realm: Realm) -> Subscription? {
+        var object: Subscription?
+
+        if let findObject = realm.objects(Subscription.self).filter("rid == '\(rid)'").first {
+            object = findObject
+        }
+
+        return object
     }
 
 }

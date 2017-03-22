@@ -86,12 +86,12 @@ final class ConnectServerViewController: BaseViewController {
 
     func alertInvalidURL() {
         let alert = UIAlertController(
-            title: localizedString("alert.connection.invalid_url.title"),
-            message: localizedString("alert.connection.invalid_url.message"),
+            title: localized("alert.connection.invalid_url.title"),
+            message: localized("alert.connection.invalid_url.message"),
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: localizedString("global.ok"), style: .default, handler: nil))
+        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
 

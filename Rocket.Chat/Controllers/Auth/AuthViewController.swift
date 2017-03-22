@@ -100,8 +100,8 @@ final class AuthViewController: BaseViewController {
         if response.isError() {
             if let error = response.result["error"].dictionary {
                 let alert = UIAlertController(
-                    title: localizedString("error.socket.default_error_title"),
-                    message: error["message"]?.string ?? localizedString("error.socket.default_error_message"),
+                    title: localized("error.socket.default_error_title"),
+                    message: error["message"]?.string ?? localized("error.socket.default_error_message"),
                     preferredStyle: .alert
                 )
 
