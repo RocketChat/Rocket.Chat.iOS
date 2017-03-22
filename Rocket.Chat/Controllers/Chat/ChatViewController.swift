@@ -259,11 +259,11 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func sendMessage() {
         guard let message = textView.text else { return }
-        
+
         if message.characters.count == 0 {
             return
         }
-        
+
         rightButton.isEnabled = false
 
         SubscriptionManager.sendTextMessage(message, subscription: subscription) { [weak self] _ in
@@ -289,21 +289,17 @@ final class ChatViewController: SLKTextViewController {
         chatTitleView?.subscription = subscription
         textView.resignFirstResponder()
 
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
-        let indexPaths = dataController.clear()
-        UIView.performWithoutAnimation {
-            collectionView?.performBatchUpdates({
-                self.collectionView?.deleteItems(at: indexPaths)
-            }, completion: { _ in
-                CATransaction.commit()
+        collectionView?.performBatchUpdates({
+            let indexPaths = self.dataController.clear()
+            self.collectionView?.deleteItems(at: indexPaths)
+        }, completion: { _ in
+            CATransaction.commit()
 
-                if self.closeSidebarAfterSubscriptionUpdate {
-                    MainChatViewController.closeSideMenuIfNeeded()
-                    self.closeSidebarAfterSubscriptionUpdate = false
-                }
-            })
-        }
+            if self.closeSidebarAfterSubscriptionUpdate {
+                MainChatViewController.closeSideMenuIfNeeded()
+                self.closeSidebarAfterSubscriptionUpdate = false
+            }
+        })
 
         if self.subscription.isValid() {
             self.updateSubscriptionMessages()
@@ -326,47 +322,31 @@ final class ChatViewController: SLKTextViewController {
         isRequestingHistory = true
 
         messages = subscription.fetchMessages()
-        appendMessages(messages: Array(messages))
-
-        DispatchQueue.main.async { [weak self] in
-            guard let messages = self?.messages else { return }
+        appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
+            guard let messages = self.messages else { return }
 
             if messages.count == 0 {
-                self?.activityIndicator.startAnimating()
+                self.activityIndicator.startAnimating()
             } else {
-                self?.scrollToBottom()
+                self.scrollToBottom()
             }
-        }
+        })
 
         messagesToken = messages.addNotificationBlock { [weak self] _ in
             guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
             guard let messages = self?.subscription.fetchMessages() else { return }
 
-            self?.appendMessages(messages: Array(messages), updateScrollPosition: true)
+            self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
         }
 
-        let lastMessageDate = messages.last?.createdAt
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] _ in
             guard let messages = self?.subscription.fetchMessages() else { return }
 
-            var shouldScrollBottom = false
-            if let lastMessageHistoryDate = messages.last?.createdAt {
-                if let lastMessageDate = lastMessageDate {
-                    shouldScrollBottom = lastMessageHistoryDate.timeIntervalSince(lastMessageDate) > 0
-                }
-            }
-
-            self?.appendMessages(messages: Array(messages))
-
-            DispatchQueue.main.async {
-                if shouldScrollBottom || self?.activityIndicator.isAnimating ?? false {
-                    self?.scrollToBottom()
-                }
-
+            self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
                 self?.activityIndicator.stopAnimating()
-            }
-
-            self?.isRequestingHistory = false
+                self?.scrollToBottom()
+                self?.isRequestingHistory = false
+            })
         }
 
         MessageManager.changes(subscription)
@@ -379,64 +359,68 @@ final class ChatViewController: SLKTextViewController {
 
         isRequestingHistory = true
         MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] newMessages in
-            self?.appendMessages(messages: newMessages, updateScrollPosition: true)
+            self?.appendMessages(messages: newMessages, updateScrollPosition: true, completion: nil)
             self?.isRequestingHistory = false
         }
     }
 
-    fileprivate func appendMessages(messages: [Message], updateScrollPosition: Bool = false) {
+    fileprivate func appendMessages(messages: [Message], updateScrollPosition: Bool = false, completion: VoidCompletion?) {
         guard let collectionView = self.collectionView else { return }
 
-        var objs: [ChatData] = []
-        var newMessages: [Message] = []
+        var contentHeight = collectionView.contentSize.height
+        var offsetY = collectionView.contentOffset.y
+        var bottomOffset = contentHeight - offsetY
 
-        // Do not add duplicated messages
-        for message in messages {
-            var insert = true
-
-            for obj in dataController.data {
-                if message.identifier == obj.message?.identifier {
-                    insert = false
-                }
-            }
-
-            if insert {
-                newMessages.append(message)
-            }
-        }
-
-        // Normalize data into ChatData object
-        for message in newMessages {
-            guard let createdAt = message.createdAt else { continue }
-            guard var obj = ChatData(type: .message, timestamp: createdAt) else { continue }
-            obj.message = message
-            objs.append(obj)
-        }
-
-        // No new data? Don't update it then
-        if objs.count == 0 {
-            return
-        }
-
-        // Insert data into collectionView without moving it
-        let indexPaths = dataController.insert(objs)
-        let contentHeight = collectionView.contentSize.height
-        let offsetY = collectionView.contentOffset.y
-        let bottomOffset = contentHeight - offsetY
-
-        DispatchQueue.main.async {
-            CATransaction.begin()
-            CATransaction.setDisableActions(true)
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+        UIView.performWithoutAnimation {
             collectionView.performBatchUpdates({
+                // Insert data into collectionView without moving it
+                contentHeight = collectionView.contentSize.height
+                offsetY = collectionView.contentOffset.y
+                bottomOffset = contentHeight - offsetY
+
+                var objs: [ChatData] = []
+                var newMessages: [Message] = []
+
+                // Do not add duplicated messages
+                for message in messages {
+                    var insert = true
+
+                    for obj in self.dataController.data {
+                        if message.identifier == obj.message?.identifier {
+                            insert = false
+                        }
+                    }
+
+                    if insert {
+                        newMessages.append(message)
+                    }
+                }
+
+                // Normalize data into ChatData object
+                for message in newMessages {
+                    guard let createdAt = message.createdAt else { continue }
+                    guard var obj = ChatData(type: .message, timestamp: createdAt) else { continue }
+                    obj.message = message
+                    objs.append(obj)
+                }
+
+                // No new data? Don't update it then
+                if objs.count == 0 {
+                    return
+                }
+
+                let indexPaths = self.dataController.insert(objs)
                 collectionView.insertItems(at: indexPaths)
             }, completion: { _ in
                 let shouldScroll = self.isContentBiggerThanContainerHeight()
                 if updateScrollPosition && shouldScroll {
                     let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
-                    collectionView.setContentOffset(offset, animated: false)
+                    collectionView.contentOffset = offset
                 }
 
-                CATransaction.commit()
+                completion?()
             })
         }
     }
