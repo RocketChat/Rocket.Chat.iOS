@@ -14,7 +14,7 @@ final class SubscriptionsViewController: BaseViewController {
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
     @IBOutlet weak var textFieldSearch: UITextField! {
         didSet {
-            textFieldSearch.placeholder = localizedString("subscriptions.search")
+            textFieldSearch.placeholder = localized("subscriptions.search")
 
             if let placeholder = textFieldSearch.placeholder {
                 let color = UIColor(rgb: 0x9AB1BF, alphaVal: 1)
@@ -230,7 +230,7 @@ extension SubscriptionsViewController {
 
         if searchResultsGroup.count > 0 {
             groupInfomation?.append([
-                "name": String(format: "%@ (%d)", localizedString("subscriptions.search_results"), searchResultsGroup.count)
+                "name": String(format: "%@ (%d)", localized("subscriptions.search_results"), searchResultsGroup.count)
             ])
 
             searchResultsGroup = searchResultsGroup.sorted {
@@ -241,7 +241,7 @@ extension SubscriptionsViewController {
         } else {
             if unreadGroup.count > 0 {
                 groupInfomation?.append([
-                    "name": String(format: "%@ (%d)", localizedString("subscriptions.unreads"), unreadGroup.count)
+                    "name": String(format: "%@ (%d)", localized("subscriptions.unreads"), unreadGroup.count)
                 ])
 
                 unreadGroup = unreadGroup.sorted {
@@ -254,7 +254,7 @@ extension SubscriptionsViewController {
             if favoriteGroup.count > 0 {
                 groupInfomation?.append([
                     "icon": "Star",
-                    "name": String(format: "%@ (%d)", localizedString("subscriptions.favorites"), favoriteGroup.count)
+                    "name": String(format: "%@ (%d)", localized("subscriptions.favorites"), favoriteGroup.count)
                 ])
 
                 favoriteGroup = favoriteGroup.sorted {
@@ -266,7 +266,7 @@ extension SubscriptionsViewController {
 
             if channelGroup.count > 0 {
                 groupInfomation?.append([
-                    "name": String(format: "%@ (%d)", localizedString("subscriptions.channels"), channelGroup.count)
+                    "name": String(format: "%@ (%d)", localized("subscriptions.channels"), channelGroup.count)
                 ])
 
                 groupSubscriptions?.append(channelGroup)
@@ -274,7 +274,7 @@ extension SubscriptionsViewController {
 
             if directMessageGroup.count > 0 {
                 groupInfomation?.append([
-                    "name": String(format: "%@ (%d)", localizedString("subscriptions.direct_messages"), directMessageGroup.count)
+                    "name": String(format: "%@ (%d)", localized("subscriptions.direct_messages"), directMessageGroup.count)
                 ])
 
                 groupSubscriptions?.append(directMessageGroup)
