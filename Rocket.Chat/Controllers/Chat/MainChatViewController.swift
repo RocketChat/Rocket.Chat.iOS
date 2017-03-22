@@ -28,6 +28,7 @@ class MainChatViewController: SideMenuController {
         SideMenuController.preferences.drawing.sidePanelPosition = .underCenterPanelLeft
         SideMenuController.preferences.drawing.sidePanelWidth = 280
         SideMenuController.preferences.drawing.centerPanelShadow = true
+        SideMenuController.preferences.interaction.swipingEnabled = true
         SideMenuController.preferences.animating.statusBarBehaviour = .horizontalPan
         super.init(coder: aDecoder)
     }

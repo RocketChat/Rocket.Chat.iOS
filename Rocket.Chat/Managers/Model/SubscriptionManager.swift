@@ -18,13 +18,19 @@ struct SubscriptionManager {
             params.append(["$date": Date.intervalFromDate(lastUpdated)])
         }
 
-        let request = [
+        let requestSubscriptions = [
             "msg": "method",
             "method": "subscriptions/get",
             "params": params
         ] as [String : Any]
 
-        SocketManager.send(request) { response in
+        let requestRooms = [
+            "msg": "method",
+            "method": "rooms/get",
+            "params": params
+        ] as [String : Any]
+
+        SocketManager.send(requestSubscriptions) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             let subscriptions = List<Subscription>()
@@ -67,7 +73,44 @@ struct SubscriptionManager {
                 realm.add(auth, update: true)
             }
 
-            completion(response)
+            SocketManager.send(requestRooms) { response in
+                guard !response.isError() else { return Log.debug(response.result.string) }
+
+                let subscriptions = List<Subscription>()
+
+                // List is used the first time user opens the app
+                let list = response.result["result"].array
+
+                // Update is used on updates
+                let updated = response.result["result"]["update"].array
+
+                Realm.execute { realm in
+                    list?.forEach { object in
+                        if let rid = object["_id"].string {
+                            if let subscription = Subscription.find(rid: rid, realm: realm) {
+                                subscription.roomDescription = object["description"].string ?? ""
+                                subscription.roomTopic = object["topic"].string ?? ""
+                                subscriptions.append(subscription)
+                            }
+                        }
+                    }
+
+                    updated?.forEach { object in
+                        if let rid = object["_id"].string {
+                            if let subscription = Subscription.find(rid: rid, realm: realm) {
+                                subscription.roomDescription = object["description"].string ?? ""
+                                subscription.roomTopic = object["topic"].string ?? ""
+                                subscriptions.append(subscription)
+                            }
+                        }
+                    }
+
+                    auth.lastSubscriptionFetch = Date()
+                    realm.add(subscriptions, update: true)
+                }
+
+                completion(response)
+            }
         }
     }
 
