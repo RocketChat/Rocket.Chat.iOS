@@ -421,6 +421,8 @@ final class ChatViewController: SLKTextViewController {
                 }
 
                 completion?()
+
+                CATransaction.commit()
             })
         }
     }
