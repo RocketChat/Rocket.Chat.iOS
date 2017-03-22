@@ -19,6 +19,7 @@ class ChannelInfoViewController: BaseViewController {
     var subscription: Subscription! {
         didSet {
             let channelInfoData = [
+                ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: ""),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: ""),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "")
             ]
@@ -119,6 +120,20 @@ extension ChannelInfoViewController: UITableViewDelegate {
         }
 
         return CGFloat(0)
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = tableViewData[indexPath.section][indexPath.row]
+
+        if let _ = data as? ChannelInfoDetailCellData {
+            let alert = UIAlertController(title: "Ops!", message: "We're still working on this feature, stay tunned!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+
+            if let selectedIndex = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: selectedIndex, animated: true)
+            }
+        }
     }
 
 }
