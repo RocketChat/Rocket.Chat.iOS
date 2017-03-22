@@ -13,10 +13,15 @@ extension ChatViewController {
     func setupLongPressGestureHandler() {
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
         gesture.minimumPressDuration = 1
+        gesture.delegate = self
         collectionView?.addGestureRecognizer(gesture)
     }
 
     // MARK: Gesture handler
+
+    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
 
     func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
@@ -34,11 +39,11 @@ extension ChatViewController {
     func presentActionsFor(message: Message, indexPath: IndexPath) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: localizedString("chat.message.actions.report"), style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: localized("chat.message.actions.report"), style: .default, handler: { (_) in
             self.report(message: message)
         }))
 
-        alert.addAction(UIAlertAction(title: localizedString("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
+        alert.addAction(UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
             guard let user = message.user else { return }
 
             DispatchQueue.main.async {
@@ -48,11 +53,11 @@ extension ChatViewController {
             }
         }))
 
-        alert.addAction(UIAlertAction(title: localizedString("chat.message.actions.copy"), style: .default, handler: { (_) in
+        alert.addAction(UIAlertAction(title: localized("chat.message.actions.copy"), style: .default, handler: { (_) in
             UIPasteboard.general.string = message.text
         }))
 
-        alert.addAction(UIAlertAction(title: localizedString("global.cancel"), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
             if let cell = collectionView?.cellForItem(at: indexPath) {
@@ -71,12 +76,12 @@ extension ChatViewController {
     fileprivate func report(message: Message) {
         MessageManager.report(message) { (_) in
             let alert = UIAlertController(
-                title: localizedString("chat.message.report.success.title"),
-                message: localizedString("chat.message.report.success.message"),
+                title: localized("chat.message.report.success.title"),
+                message: localized("chat.message.report.success.message"),
                 preferredStyle: .alert
             )
 
-            alert.addAction(UIAlertAction(title: localizedString("global.ok"), style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
         }
     }

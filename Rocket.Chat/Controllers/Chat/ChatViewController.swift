@@ -32,7 +32,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    @IBOutlet weak var buttonFavorite: UIBarButtonItem!
     @IBOutlet weak var buttonScrollToBottom: UIButton!
     var buttonScrollToBottomMarginConstraint: NSLayoutConstraint?
 
@@ -154,6 +153,14 @@ final class ChatViewController: SLKTextViewController {
         })
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let nav = segue.destination as? UINavigationController, segue.identifier == "Channel Info" {
+            if let controller = nav.viewControllers.first as? ChannelInfoViewController {
+                controller.subscription = self.subscription
+            }
+        }
+    }
+
     fileprivate func setupTextViewSettings() {
         textInputbar.autoHideRightButton = true
 
@@ -171,6 +178,9 @@ final class ChatViewController: SLKTextViewController {
         let view = ChatTitleView.instantiateFromNib()
         self.navigationItem.titleView = view
         chatTitleView = view
+
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(chatTitleViewDidPressed))
+        chatTitleView?.addGestureRecognizer(gesture)
     }
 
     fileprivate func setupScrollToBottomButton() {
@@ -277,7 +287,6 @@ final class ChatViewController: SLKTextViewController {
 
         title = subscription?.name
         chatTitleView?.subscription = subscription
-        updateFavoriteMark()
         textView.resignFirstResponder()
 
         CATransaction.begin()
@@ -352,8 +361,9 @@ final class ChatViewController: SLKTextViewController {
             DispatchQueue.main.async {
                 if shouldScrollBottom || self?.activityIndicator.isAnimating ?? false {
                     self?.scrollToBottom()
-                    self?.activityIndicator.stopAnimating()
                 }
+
+                self?.activityIndicator.stopAnimating()
             }
 
             self?.isRequestingHistory = false
@@ -423,7 +433,7 @@ final class ChatViewController: SLKTextViewController {
                 let shouldScroll = self.isContentBiggerThanContainerHeight()
                 if updateScrollPosition && shouldScroll {
                     let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
-                    collectionView.setContentOffset(offset, animated: true)
+                    collectionView.setContentOffset(offset, animated: false)
                 }
 
                 CATransaction.commit()
@@ -443,12 +453,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    fileprivate func updateFavoriteMark() {
-        guard let subscription = self.subscription else { return }
-
-        self.buttonFavorite?.tintColor = subscription.favorite ? .RCFavoriteMark() : .RCFavoriteUnmark()
-    }
-
     fileprivate func isContentBiggerThanContainerHeight() -> Bool {
         if let contentHeight = self.collectionView?.contentSize.height {
             if let collectionViewHeight = self.collectionView?.frame.height {
@@ -463,10 +467,8 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: IBAction
 
-    @IBAction func buttonFavoriteDidPressed(_ sender: Any) {
-        SubscriptionManager.toggleFavorite(subscription) { [unowned self] (_) in
-            self.updateFavoriteMark()
-        }
+    func chatTitleViewDidPressed(_ sender: AnyObject) {
+        performSegue(withIdentifier: "Channel Info", sender: sender)
     }
 
     @IBAction func buttonScrollToBottomPressed(_ sender: UIButton) {

@@ -20,35 +20,35 @@ final class SubscriptionUserStatusView: UIView {
     @IBOutlet weak var buttonOnline: UIButton!
     @IBOutlet weak var labelOnline: UILabel! {
         didSet {
-            labelOnline.text = localizedString("user_menu.online")
+            labelOnline.text = localized("user_menu.online")
         }
     }
 
     @IBOutlet weak var buttonAway: UIView!
     @IBOutlet weak var labelAway: UILabel! {
         didSet {
-            labelAway.text = localizedString("user_menu.away")
+            labelAway.text = localized("user_menu.away")
         }
     }
 
     @IBOutlet weak var buttonBusy: UIView!
     @IBOutlet weak var labelBusy: UILabel! {
         didSet {
-            labelBusy.text = localizedString("user_menu.busy")
+            labelBusy.text = localized("user_menu.busy")
         }
     }
 
     @IBOutlet weak var buttonInvisible: UIView!
     @IBOutlet weak var labelInvisible: UILabel! {
         didSet {
-            labelInvisible.text = localizedString("user_menu.invisible")
+            labelInvisible.text = localized("user_menu.invisible")
         }
     }
 
     @IBOutlet weak var buttonSettings: UIView!
     @IBOutlet weak var labelSettings: UILabel! {
         didSet {
-            labelSettings.text = localizedString("user_menu.settings")
+            labelSettings.text = localized("user_menu.settings")
         }
     }
 
@@ -61,7 +61,7 @@ final class SubscriptionUserStatusView: UIView {
     @IBOutlet weak var buttonLogout: UIView!
     @IBOutlet weak var labelLogout: UILabel! {
         didSet {
-            labelLogout.text = localizedString("user_menu.logout")
+            labelLogout.text = localized("user_menu.logout")
         }
     }
 

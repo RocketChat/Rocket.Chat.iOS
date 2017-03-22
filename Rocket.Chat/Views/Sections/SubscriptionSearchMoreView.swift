@@ -18,7 +18,7 @@ final class SubscriptionSearchMoreView: UIView {
 
     @IBOutlet weak var buttonLoadMore: UIButton! {
         didSet {
-            buttonLoadMore.setTitle(localizedString("subscriptions.search.load_more_results"), for: .normal)
+            buttonLoadMore.setTitle(localized("subscriptions.search.load_more_results"), for: .normal)
         }
     }
 

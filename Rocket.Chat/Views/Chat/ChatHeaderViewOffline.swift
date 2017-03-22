@@ -12,7 +12,7 @@ final class ChatHeaderViewOffline: UIView {
 
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
-            labelTitle.text = localizedString("connection.offline.banner.message")
+            labelTitle.text = localized("connection.offline.banner.message")
         }
     }
 

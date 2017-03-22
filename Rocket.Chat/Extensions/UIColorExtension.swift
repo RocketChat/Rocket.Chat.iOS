@@ -39,6 +39,14 @@ extension UIColor {
 
     // Theme color
 
+    static func RCDarkGray() -> UIColor {
+        return UIColor(rgb: 0x333333, alphaVal: 1)
+    }
+
+    static func RCGray() -> UIColor {
+        return UIColor(rgb: 0x999999, alphaVal: 1)
+    }
+
     static func RCLightGray() -> UIColor {
         return UIColor(rgb: 0xDDDDDD, alphaVal: 1)
     }
