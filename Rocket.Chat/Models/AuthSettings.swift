@@ -14,6 +14,9 @@ final class AuthSettings: BaseModel {
     dynamic var siteURL: String?
     dynamic var cdnPrefixURL: String?
 
+    // Rooms
+    dynamic var favoriteRooms = true
+
     // Authentication methods
     dynamic var isUsernameEmailAuthenticationEnabled = false
     dynamic var isGoogleAuthenticationEnabled = false
