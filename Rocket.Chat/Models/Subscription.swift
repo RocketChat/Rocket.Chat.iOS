@@ -92,6 +92,12 @@ extension Subscription {
         return self.messages.filter(filter).sorted(byKeyPath: "createdAt", ascending: true)
     }
 
+    func updateFavorite(_ favorite: Bool) {
+        Realm.execute { _ in
+            self.favorite = favorite
+        }
+    }
+
 }
 
 extension Subscription {
