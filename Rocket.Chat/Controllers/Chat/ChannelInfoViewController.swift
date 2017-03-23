@@ -48,10 +48,33 @@ class ChannelInfoViewController: BaseViewController {
     }
 
     @IBOutlet weak var tableView: UITableView!
+    weak var buttonFavorite: UIBarButtonItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = localized("chat.info.title")
+
+        if let auth = AuthManager.isAuthenticated() {
+            if auth.settings?.favoriteRooms ?? false {
+                let buttonFavorite = UIBarButtonItem()
+                navigationItem.rightBarButtonItem = buttonFavorite
+                self.buttonFavorite = buttonFavorite
+                updateButtonFavoriteImage()
+            }
+        }
+    }
+
+    func updateButtonFavoriteImage() {
+        guard let buttonFavorite = self.buttonFavorite else { return }
+        var image: UIImage?
+
+        if subscription.favorite {
+            image = UIImage(named: "Star-Filled")?.imageWithTint(UIColor.RCFavoriteMark())
+        } else {
+            image = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray())
+        }
+
+        buttonFavorite.image = image?.withRenderingMode(.alwaysOriginal)
     }
 
     // MARK: IBAction
