@@ -8,6 +8,7 @@
 
 import UIKit
 import SwiftyJSON
+import semver
 
 final class ConnectServerViewController: BaseViewController {
 
@@ -149,8 +150,23 @@ final class ConnectServerViewController: BaseViewController {
                 let json = JSON(data: data)
                 Log.debug(json.rawString())
 
-                guard json["version"].string != nil else {
+                guard let version = json["version"].string else {
                     return completion(nil, true)
+                }
+
+                if let minVersion = Bundle.main.object(forInfoDictionaryKey: "RC_MIN_SERVER_VERSION") as? String {
+                    if Semver.lt(version, minVersion) {
+                        let alert = UIAlertController(
+                            title: localized("alert.connection.invalid_version.title"),
+                            message: String(format: localized("alert.connection.invalid_version.message"), version, minVersion),
+                            preferredStyle: .alert
+                        )
+
+                        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+
+                        return completion(nil, true)
+                    }
                 }
 
                 completion(json, false)

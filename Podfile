@@ -11,6 +11,7 @@ def shared_pods
 
   # Code utilities
   pod 'SwiftyJSON'
+  pod 'semver'
 
   # UI
   pod 'SideMenuController'
