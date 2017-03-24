@@ -52,6 +52,7 @@ PODS:
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
+  - semver (1.0.0)
   - SideMenuController (0.2.4)
   - SlackTextViewController (1.9.5)
   - Starscream (2.0.3)
@@ -69,6 +70,7 @@ DEPENDENCIES:
   - NVActivityIndicatorView
   - RealmSwift
   - SDWebImage (~> 3.8)
+  - semver
   - SideMenuController
   - SlackTextViewController
   - Starscream (~> 2.0.0)
@@ -95,6 +97,7 @@ SPEC CHECKSUMS:
   Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
   RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  semver: efe6bf4af25bffab18d442592771be392210b5ce
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
   Starscream: 3fdd5c277e57cca6b5c406d274e3f34a7c88f2ce
@@ -102,6 +105,6 @@ SPEC CHECKSUMS:
   TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: ddb7c3e672b9fde92752fcd4b57fa8a2c6116722
+PODFILE CHECKSUM: ba9d77b7ee1abf5cb7a1edf9ef743f9b8dfefe5c
 
 COCOAPODS: 1.1.1
