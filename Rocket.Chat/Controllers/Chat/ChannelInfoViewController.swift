@@ -48,13 +48,51 @@ class ChannelInfoViewController: BaseViewController {
     }
 
     @IBOutlet weak var tableView: UITableView!
+    weak var buttonFavorite: UIBarButtonItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         title = localized("chat.info.title")
+
+        if let auth = AuthManager.isAuthenticated() {
+            if auth.settings?.favoriteRooms ?? false {
+                let defaultImage = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray()).withRenderingMode(.alwaysOriginal)
+                let buttonFavorite = UIBarButtonItem(image: defaultImage, style: .plain, target: self, action: #selector(buttonFavoriteDidPressed))
+                navigationItem.rightBarButtonItem = buttonFavorite
+                self.buttonFavorite = buttonFavorite
+                updateButtonFavoriteImage()
+            }
+        }
+    }
+
+    func updateButtonFavoriteImage(_ force: Bool = false, value: Bool = false) {
+        guard let buttonFavorite = self.buttonFavorite else { return }
+        let favorite = force ? value : subscription.favorite
+        var image: UIImage?
+
+        if favorite {
+            image = UIImage(named: "Star-Filled")?.imageWithTint(UIColor.RCFavoriteMark())
+        } else {
+            image = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray())
+        }
+
+        buttonFavorite.image = image?.withRenderingMode(.alwaysOriginal)
     }
 
     // MARK: IBAction
+
+    func buttonFavoriteDidPressed(_ sender: Any) {
+        SubscriptionManager.toggleFavorite(self.subscription) { [unowned self] (response) in
+            if response.isError() {
+                self.subscription.updateFavorite(!self.subscription.favorite)
+            }
+
+            self.updateButtonFavoriteImage()
+        }
+
+        self.subscription.updateFavorite(!subscription.favorite)
+        updateButtonFavoriteImage()
+    }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
