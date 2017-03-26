@@ -903,7 +903,7 @@
 				TargetAttributes = {
 					41DF76DE1D2C50710028DBF8 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = S6UPZG7ZR3;
+						DevelopmentTeam = 99SX93U34N;
 						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1471,11 +1471,11 @@
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				DEVELOPMENT_TEAM = 99SX93U34N;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = raghav.chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
@@ -1492,11 +1492,11 @@
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				DEVELOPMENT_TEAM = 99SX93U34N;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = raghav.chat.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
