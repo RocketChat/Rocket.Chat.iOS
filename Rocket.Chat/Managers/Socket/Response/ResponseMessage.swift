@@ -7,12 +7,12 @@
 //
 
 enum ResponseMessage: String {
-    case Connected = "connected"
-    case Error = "error"
-    case Ping = "ping"
-    case Changed = "changed"
-    case Added = "added"
-    case Updated = "updated"
-    case Removed = "removed"
-    case Unknown
+    case connected = "connected"
+    case error = "error"
+    case ping = "ping"
+    case changed = "changed"
+    case added = "added"
+    case updated = "updated"
+    case removed = "removed"
+    case unknown
 }

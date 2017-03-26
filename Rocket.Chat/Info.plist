@@ -95,7 +95,7 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>RC_MIN_SERVER_VERSION</key>
-	<string>0.54.0</string>
+    <key>RC_MIN_SERVER_VERSION</key>
+    <string>0.54.0</string>
 </dict>
 </plist>
