@@ -349,6 +349,11 @@ extension SubscriptionsViewController: UITextFieldDelegate {
         searchBy(prospectiveText)
         return true
     }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        searchBy()
+        return true
+    }
 }
 
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
