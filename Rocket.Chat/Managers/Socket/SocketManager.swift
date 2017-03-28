@@ -157,7 +157,7 @@ extension SocketManager: WebSocketDelegate {
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        Log.debug("[WebSocket] did disconnect with error (\(error))")
+        Log.debug("[WebSocket] did disconnect with error (\(String(describing: error)))")
 
         events = [:]
         queue = [:]
