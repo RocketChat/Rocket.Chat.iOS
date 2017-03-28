@@ -1,7 +1,5 @@
 PODS:
   - 1PasswordExtension (1.8.4)
-  - Bugsnag (5.7.0):
-    - KSCrash/RecordingAdvanced (= 1.11.2)
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
@@ -39,9 +37,6 @@ PODS:
   - GTMSessionFetcher/Core (1.1.9)
   - GTMSessionFetcher/Full (1.1.9):
     - GTMSessionFetcher/Core (= 1.1.9)
-  - KSCrash/Recording (1.11.2)
-  - KSCrash/RecordingAdvanced (1.11.2):
-    - KSCrash/Recording
   - MobilePlayer (1.2.0)
   - NVActivityIndicatorView (3.5.2)
   - Realm (2.4.4):
@@ -62,7 +57,6 @@ PODS:
 
 DEPENDENCIES:
   - 1PasswordExtension
-  - Bugsnag
   - Crashlytics
   - Fabric
   - Google/SignIn
@@ -80,7 +74,6 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
-  Bugsnag: d86488d670f91acbce0186e6570e500039676ef0
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
@@ -91,7 +84,6 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
-  KSCrash: 8acc46aca72b2772d5d1e3cba1da9173db4d705e
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   NVActivityIndicatorView: 8c10abd410a0657afd21aa853373e1a3cfc25e7f
   Realm: 5a280a1f5a9a3c267bebf4f41ee47911137703d7
@@ -105,6 +97,6 @@ SPEC CHECKSUMS:
   TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: ba9d77b7ee1abf5cb7a1edf9ef743f9b8dfefe5c
+PODFILE CHECKSUM: f750ef7286106d96fe5ff2c0eba926ce112f3b51
 
 COCOAPODS: 1.1.1
