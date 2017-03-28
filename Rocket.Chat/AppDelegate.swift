@@ -20,10 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         application.registerForRemoteNotifications()
 
-        Realm.execute { (realm) in
-            debugPrint("Path to realm file: " + realm.configuration.fileURL!.absoluteString)
-        }
-
         return true
     }
 
