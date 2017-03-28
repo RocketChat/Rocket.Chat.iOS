@@ -9,7 +9,7 @@
 import Foundation
 import Starscream
 import SwiftyJSON
-import Bugsnag
+import Crashlytics
 
 extension SocketManager {
 
@@ -51,11 +51,16 @@ extension SocketManager {
     fileprivate func handleError(_ result: SocketResponse, socket: WebSocket) {
         let error = result.result["error"]
 
-        let exception = NSException(name: NSExceptionName(rawValue: error["error"].string ?? "Unknown"),
-                                    reason: error["reason"].string ?? "No reason",
-                                    userInfo: nil)
+        let errorInfo = [
+            NSLocalizedDescriptionKey: error["error"].string ?? "Unknown",
+            NSLocalizedFailureReasonErrorKey: error["reason"].string ?? "No reason"
+        ]
 
-        Bugsnag.notify(exception)
+        Crashlytics.sharedInstance().recordError(NSError(
+            domain: "SocketHandler.handleError",
+            code: -1001,
+            userInfo: errorInfo
+        ))
     }
 
     fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {
