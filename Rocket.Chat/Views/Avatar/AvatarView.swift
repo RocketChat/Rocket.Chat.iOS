@@ -86,10 +86,10 @@ final class AvatarView: UIView {
                     lastString = lastString.substring(from: endIndex)
                 }
             }
-            
+
             return "\(firstString)\(lastString)".uppercased()
         }
-        
+
         return ""
     }
 
