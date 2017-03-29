@@ -39,18 +39,18 @@ PODS:
     - GTMSessionFetcher/Core (= 1.1.9)
   - MobilePlayer (1.2.0)
   - NVActivityIndicatorView (3.5.2)
-  - Realm (2.4.4):
-    - Realm/Headers (= 2.4.4)
-  - Realm/Headers (2.4.4)
-  - RealmSwift (2.4.4):
-    - Realm (= 2.4.4)
+  - Realm (2.5.0):
+    - Realm/Headers (= 2.5.0)
+  - Realm/Headers (2.5.0)
+  - RealmSwift (2.5.0):
+    - Realm (= 2.5.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - semver (1.0.0)
   - SideMenuController (0.2.4)
   - SlackTextViewController (1.9.5)
-  - Starscream (2.0.3)
+  - Starscream (2.0.4)
   - SwiftyJSON (3.1.4)
   - TSMarkdownParser (2.1.3)
   - URBMediaFocusViewController (0.9.0)
@@ -86,13 +86,13 @@ SPEC CHECKSUMS:
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   NVActivityIndicatorView: 8c10abd410a0657afd21aa853373e1a3cfc25e7f
-  Realm: 5a280a1f5a9a3c267bebf4f41ee47911137703d7
-  RealmSwift: 0c02b9f2d4be4301c497ed10e53a0580584eb1dd
+  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
+  RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   semver: efe6bf4af25bffab18d442592771be392210b5ce
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
-  Starscream: 3fdd5c277e57cca6b5c406d274e3f34a7c88f2ce
+  Starscream: df5974ee928b157c8eda8af8de7c620276b7dfcc
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
