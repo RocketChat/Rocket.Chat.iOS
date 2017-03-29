@@ -31,13 +31,13 @@ extension ModelHandler where Self: BaseModel {
             }
 
             switch msg {
-                case .Added:
+                case .added:
                     object.add(values)
                     break
-                case .Changed:
+                case .changed:
                     object.update(values)
                     break
-                case .Removed:
+                case .removed:
                     object.remove(values)
                     break
                 default:
