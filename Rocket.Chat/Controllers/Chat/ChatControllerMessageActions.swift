@@ -10,44 +10,18 @@ import UIKit
 
 extension ChatViewController {
 
-    func setupLongPressGestureHandler() {
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
-        gesture.minimumPressDuration = 1
-        gesture.delegate = self
-        view?.addGestureRecognizer(gesture)
-    }
-
-    // MARK: Gesture handler
-
-    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-
-    func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        if recognizer.state == .began {
-            let touchPoint = recognizer.location(in: self.collectionView)
-            if let indexPath = collectionView?.indexPathForItem(at: touchPoint) {
-                if let cell = collectionView?.cellForItem(at: indexPath) as? ChatMessageCell {
-                    if let message = cell.message {
-                        presentActionsFor(message: message, indexPath: indexPath)
-                    }
-                }
-            }
-        }
-    }
-
-    func presentActionsFor(message: Message, indexPath: IndexPath) {
+    func presentActionsFor(_ message: Message, view: UIView) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        let pinMessage = message.pinned ? localized("chat.message.actions.pin") : localized("chat.message.actions.unpin")
+        let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
         alert.addAction(UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
             if message.pinned {
-                MessageManager.unpin(message, completion: { (response) in
-
+                MessageManager.unpin(message, completion: { (_) in
+                    // Do nothing
                 })
             } else {
-                MessageManager.pin(message, completion: { (response) in
-
+                MessageManager.pin(message, completion: { (_) in
+                    // Do nothing
                 })
             }
         }))
@@ -73,12 +47,8 @@ extension ChatViewController {
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
-            if let cell = collectionView?.cellForItem(at: indexPath) {
-                presenter.sourceView = cell
-                presenter.sourceRect = cell.bounds
-            } else {
-                presenter.sourceView = collectionView
-            }
+            presenter.sourceView = view
+            presenter.sourceRect = view.bounds
         }
 
         present(alert, animated: true, completion: nil)
