@@ -100,7 +100,6 @@ final class ChatViewController: SLKTextViewController {
 
         setupTitleView()
         setupTextViewSettings()
-        setupLongPressGestureHandler()
         setupScrollToBottomButton()
 
         // TODO: this should really goes into the view model, when we have it
