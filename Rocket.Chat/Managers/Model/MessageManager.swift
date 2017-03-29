@@ -95,6 +95,30 @@ extension MessageManager {
         }
     }
 
+    static func pin(_ message: Message, completion: @escaping MessageCompletion) {
+        guard let messageIdentifier = message.identifier else { return }
+
+        let request = [
+            "msg": "method",
+            "method": "pinMessage",
+            "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
+        ] as [String : Any]
+
+        SocketManager.send(request, completion: completion)
+    }
+
+    static func unpin(_ message: Message, completion: @escaping MessageCompletion) {
+        guard let messageIdentifier = message.identifier else { return }
+
+        let request = [
+            "msg": "method",
+            "method": "unpinMessage",
+            "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
+        ] as [String : Any]
+
+        SocketManager.send(request, completion: completion)
+    }
+
     static func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
         guard let userIdentifier = user.identifier else { return }
 

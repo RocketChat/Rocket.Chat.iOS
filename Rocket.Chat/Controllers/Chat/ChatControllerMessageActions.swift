@@ -14,7 +14,7 @@ extension ChatViewController {
         let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
         gesture.minimumPressDuration = 1
         gesture.delegate = self
-        collectionView?.addGestureRecognizer(gesture)
+        view?.addGestureRecognizer(gesture)
     }
 
     // MARK: Gesture handler
@@ -38,6 +38,19 @@ extension ChatViewController {
 
     func presentActionsFor(message: Message, indexPath: IndexPath) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let pinMessage = message.pinned ? localized("chat.message.actions.pin") : localized("chat.message.actions.unpin")
+        alert.addAction(UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
+            if message.pinned {
+                MessageManager.unpin(message, completion: { (response) in
+
+                })
+            } else {
+                MessageManager.pin(message, completion: { (response) in
+
+                })
+            }
+        }))
 
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.report"), style: .default, handler: { (_) in
             self.report(message: message)
