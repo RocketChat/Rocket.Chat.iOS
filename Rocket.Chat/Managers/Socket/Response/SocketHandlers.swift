@@ -21,11 +21,11 @@ extension SocketManager {
         }
 
         switch message {
-            case .Connected: return handleConnectionMessage(result, socket: socket)
-            case .Ping: return handlePingMessage(result, socket: socket)
-            case .Changed, .Added, .Removed: return handleModelUpdates(result, socket: socket)
-            case .Updated, .Unknown: break
-            case .Error: handleError(result, socket: socket)
+            case .connected: return handleConnectionMessage(result, socket: socket)
+            case .ping: return handlePingMessage(result, socket: socket)
+            case .changed, .added, .removed: return handleModelUpdates(result, socket: socket)
+            case .updated, .unknown: break
+            case .error: handleError(result, socket: socket)
         }
 
         // Call completion block
