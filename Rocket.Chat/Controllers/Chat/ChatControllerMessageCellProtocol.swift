@@ -12,6 +12,12 @@ import MobilePlayer
 
 extension ChatViewController: ChatMessageCellProtocol {
 
+    func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
+        if recognizer.state == .began {
+            presentActionsFor(message, view: view)
+        }
+    }
+
     func openURL(url: URL) {
         let controller = SFSafariViewController(url: url)
         present(controller, animated: true, completion: nil)
