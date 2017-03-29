@@ -591,6 +591,7 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
 
         self.subscription = subscription
     }
+
 }
 
 // MARK: UnreadMessageNotification
