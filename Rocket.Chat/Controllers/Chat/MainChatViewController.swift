@@ -41,8 +41,4 @@ class MainChatViewController: SideMenuController {
         performSegue(withIdentifier: "containSideMenu", sender: nil)
     }
 
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-
 }
