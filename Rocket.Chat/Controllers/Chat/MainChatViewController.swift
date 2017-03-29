@@ -29,6 +29,7 @@ class MainChatViewController: SideMenuController {
         SideMenuController.preferences.drawing.sidePanelWidth = 280
         SideMenuController.preferences.drawing.centerPanelShadow = true
         SideMenuController.preferences.interaction.swipingEnabled = true
+        SideMenuController.preferences.interaction.panningEnabled = true
         SideMenuController.preferences.animating.statusBarBehaviour = .horizontalPan
         super.init(coder: aDecoder)
     }
@@ -38,6 +39,10 @@ class MainChatViewController: SideMenuController {
 
         performSegue(withIdentifier: "showCenterController", sender: nil)
         performSegue(withIdentifier: "containSideMenu", sender: nil)
+    }
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
     }
 
 }

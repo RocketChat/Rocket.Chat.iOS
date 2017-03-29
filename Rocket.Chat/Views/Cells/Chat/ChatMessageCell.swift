@@ -10,6 +10,7 @@ import UIKit
 
 protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol {
     func openURL(url: URL)
+    func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
 }
 
 final class ChatMessageCell: UICollectionViewCell {
@@ -17,6 +18,7 @@ final class ChatMessageCell: UICollectionViewCell {
     static let minimumHeight = CGFloat(55)
     static let identifier = "ChatMessageCell"
 
+    weak var longPressGesture: UILongPressGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
     var message: Message! {
         didSet {
@@ -95,35 +97,17 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
-    fileprivate func updateMessageInformation() {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-
-        if let createdAt = message.createdAt {
-            labelDate.text = formatter.string(from: createdAt)
+    func insertGesturesIfNeeded() {
+        if self.longPressGesture == nil {
+            let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
+            gesture.minimumPressDuration = 1
+            gesture.delegate = self
+            contentView.addGestureRecognizer(gesture)
+            self.longPressGesture = gesture
         }
+    }
 
-        avatarView.imageURL = URL(string: message.avatar)
-        avatarView.user = message.user
-
-        if message.alias.characters.count > 0 {
-            labelUsername.text = message.alias
-        } else {
-            labelUsername.text = message.user?.username
-        }
-
-        let text = NSMutableAttributedString(string: message.textNormalized())
-
-        if self.message.isSystemMessage() {
-            text.setFont(MessageTextFontAttributes.italicFont)
-            text.setFontColor(MessageTextFontAttributes.systemFontColor)
-        } else {
-            text.setFont(MessageTextFontAttributes.defaultFont)
-            text.setFontColor(MessageTextFontAttributes.defaultFontColor)
-        }
-
-        labelText.attributedText = text.transformMarkdown()
-
+    func insertAttachments() {
         var mediaViewHeight = CGFloat(0)
 
         message.urls.forEach { url in
@@ -181,6 +165,54 @@ final class ChatMessageCell: UICollectionViewCell {
 
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
     }
+
+    fileprivate func updateMessageInformation() {
+        guard let _ = delegate else { return }
+
+        let formatter = DateFormatter()
+        formatter.timeStyle = .short
+
+        if let createdAt = message.createdAt {
+            labelDate.text = formatter.string(from: createdAt)
+        }
+
+        avatarView.imageURL = URL(string: message.avatar)
+        avatarView.user = message.user
+
+        if message.alias.characters.count > 0 {
+            labelUsername.text = message.alias
+        } else {
+            labelUsername.text = message.user?.username
+        }
+
+        let text = NSMutableAttributedString(string: message.textNormalized())
+
+        if self.message.isSystemMessage() {
+            text.setFont(MessageTextFontAttributes.italicFont)
+            text.setFontColor(MessageTextFontAttributes.systemFontColor)
+        } else {
+            text.setFont(MessageTextFontAttributes.defaultFont)
+            text.setFontColor(MessageTextFontAttributes.defaultFontColor)
+        }
+
+        labelText.attributedText = text.transformMarkdown()
+
+        insertGesturesIfNeeded()
+        insertAttachments()
+    }
+
+    func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
+    }
+
+}
+
+extension ChatMessageCell: UIGestureRecognizerDelegate {
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+
 }
 
 extension ChatMessageCell: UITextViewDelegate {
