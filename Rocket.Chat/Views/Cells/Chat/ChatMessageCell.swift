@@ -145,6 +145,7 @@ final class ChatMessageCell: UICollectionViewCell {
                 if let view = ChatMessageTextView.instantiateFromNib() {
                     view.attachment = attachment
                     view.delegate = delegate
+                    view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
                     mediaViewHeight += ChatMessageTextView.heightFor(attachment)
@@ -155,6 +156,7 @@ final class ChatMessageCell: UICollectionViewCell {
                 if let view = ChatMessageImageView.instantiateFromNib() {
                     view.attachment = attachment
                     view.delegate = delegate
+                    view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
                     mediaViewHeight += ChatMessageImageView.defaultHeight
@@ -165,6 +167,7 @@ final class ChatMessageCell: UICollectionViewCell {
                 if let view = ChatMessageVideoView.instantiateFromNib() {
                     view.attachment = attachment
                     view.delegate = delegate
+                    view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
                     mediaViewHeight += ChatMessageVideoView.defaultHeight
