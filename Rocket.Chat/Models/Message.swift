@@ -45,7 +45,6 @@ class Message: BaseModel {
     dynamic var userBlocked: Bool = false
 
     dynamic var pinned: Bool = false
-    dynamic var starred: Bool = false
 
     dynamic var alias = ""
     dynamic var avatar = ""
