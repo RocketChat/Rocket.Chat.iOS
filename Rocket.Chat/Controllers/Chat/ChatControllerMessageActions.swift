@@ -10,33 +10,7 @@ import UIKit
 
 extension ChatViewController {
 
-    func setupLongPressGestureHandler() {
-        let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
-        gesture.minimumPressDuration = 1
-        gesture.delegate = self
-        collectionView?.addGestureRecognizer(gesture)
-    }
-
-    // MARK: Gesture handler
-
-    override func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
-    }
-
-    func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
-        if recognizer.state == .began {
-            let touchPoint = recognizer.location(in: self.collectionView)
-            if let indexPath = collectionView?.indexPathForItem(at: touchPoint) {
-                if let cell = collectionView?.cellForItem(at: indexPath) as? ChatMessageCell {
-                    if let message = cell.message {
-                        presentActionsFor(message: message, indexPath: indexPath)
-                    }
-                }
-            }
-        }
-    }
-
-    func presentActionsFor(message: Message, indexPath: IndexPath) {
+    func presentActionsFor(_ message: Message, view: UIView) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.report"), style: .default, handler: { (_) in
@@ -60,12 +34,8 @@ extension ChatViewController {
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
-            if let cell = collectionView?.cellForItem(at: indexPath) {
-                presenter.sourceView = cell
-                presenter.sourceRect = cell.bounds
-            } else {
-                presenter.sourceView = collectionView
-            }
+            presenter.sourceView = view
+            presenter.sourceRect = view.bounds
         }
 
         present(alert, animated: true, completion: nil)
