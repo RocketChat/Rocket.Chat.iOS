@@ -34,12 +34,12 @@ public struct SocketResponse {
         }
 
         if let msg = result["msg"].string {
-            self.msg = ResponseMessage(rawValue: msg) ?? ResponseMessage.Unknown
+            self.msg = ResponseMessage(rawValue: msg) ?? ResponseMessage.unknown
 
             // Sometimes response is an error, but the "msg" isn't.
-            if self.msg == ResponseMessage.Unknown {
+            if self.msg == ResponseMessage.unknown {
                 if self.isError() {
-                    self.msg = ResponseMessage.Error
+                    self.msg = ResponseMessage.error
                 }
             }
         }
@@ -48,7 +48,7 @@ public struct SocketResponse {
     // MARK: Checks
 
     func isError() -> Bool {
-        if msg == .Error || result["error"] != JSON.null {
+        if msg == .error || result["error"] != JSON.null {
             return true
         }
 
