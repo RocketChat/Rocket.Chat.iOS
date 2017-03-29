@@ -89,8 +89,9 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qEc-o0-IxJ">
                                         <rect key="frame" x="15" y="64" width="345" height="37"/>
                                         <subviews>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TPV-i5-hsW">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="TPV-i5-hsW" customClass="TintedTextField" customModule="Rocket_Chat" customModuleProvider="target">
                                                 <rect key="frame" x="5" y="0.0" width="335" height="37"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="search"/>
@@ -99,14 +100,14 @@
                                                 </connections>
                                             </textField>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="nkZ-uB-Z8e">
-                                                <rect key="frame" x="317" y="9" width="20" height="20"/>
+                                                <rect key="frame" x="289" y="9" width="20" height="20"/>
                                             </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.0020407468546181917" green="0.17051500082015991" blue="0.27439388632774353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="6EO-5w-ejQ"/>
                                             <constraint firstItem="TPV-i5-hsW" firstAttribute="leading" secondItem="qEc-o0-IxJ" secondAttribute="leading" constant="5" id="74K-kd-AqZ"/>
-                                            <constraint firstAttribute="trailing" secondItem="nkZ-uB-Z8e" secondAttribute="trailing" constant="8" id="DcM-qH-TOb"/>
+                                            <constraint firstAttribute="trailing" secondItem="nkZ-uB-Z8e" secondAttribute="trailing" constant="36" id="DcM-qH-TOb"/>
                                             <constraint firstAttribute="trailing" secondItem="TPV-i5-hsW" secondAttribute="trailing" constant="5" id="KHm-EP-Nf7"/>
                                             <constraint firstAttribute="bottom" secondItem="nkZ-uB-Z8e" secondAttribute="bottom" constant="8" id="caR-Uy-aNY"/>
                                             <constraint firstItem="nkZ-uB-Z8e" firstAttribute="top" secondItem="qEc-o0-IxJ" secondAttribute="top" constant="9" id="len-rF-8WP"/>
