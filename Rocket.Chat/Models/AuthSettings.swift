@@ -20,6 +20,7 @@ final class AuthSettings: BaseModel {
     // Authentication methods
     dynamic var isUsernameEmailAuthenticationEnabled = false
     dynamic var isGoogleAuthenticationEnabled = false
+    dynamic var isLDAPAuthenticationEnabled = false
 
     // File upload
     dynamic var uploadStorageType: String?
