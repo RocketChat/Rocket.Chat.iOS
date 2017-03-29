@@ -1,9 +1,9 @@
 language: objective-c
-osx_image: xcode8.2
+osx_image: xcode8.3
 rvm: 2.2.2
 before_install:
 - ./Scripts/before_install.sh
 install:
 - ./Scripts/install_swiftlint.sh
 script:
-- ./Scripts/build.sh
+- ./Scripts/test.sh
