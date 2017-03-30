@@ -143,7 +143,18 @@ final class AuthViewController: BaseViewController {
 
         startLoading()
 
-        AuthManager.auth(email, password: password, completion: self.handleAuthenticationResponse)
+        if serverPublicSettings?.isLDAPAuthenticationEnabled ?? false {
+            let params = [
+                "ldap": true,
+                "username": email,
+                "ldapPass": password,
+                "ldapOptions": []
+            ] as [String : Any]
+
+            AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
+        } else {
+            AuthManager.auth(email, password: password, completion: self.handleAuthenticationResponse)
+        }
     }
 
     @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {
