@@ -77,6 +77,15 @@ final class AuthViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "TwoFactor" {
+            if let controller = segue.destination as? TwoFactorAuthenticationViewController {
+                controller.username = textFieldUsername.text ?? ""
+                controller.password = textFieldPassword.text ?? ""
+            }
+        }
+    }
+
     // MARK: Keyboard Handlers
     override func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -99,6 +108,12 @@ final class AuthViewController: BaseViewController {
 
         if response.isError() {
             if let error = response.result["error"].dictionary {
+                // User is using 2FA
+                if error["error"]?.string == "totp-required" {
+                    performSegue(withIdentifier: "TwoFactor", sender: nil)
+                    return
+                }
+
                 let alert = UIAlertController(
                     title: localized("error.socket.default_error_title"),
                     message: error["message"]?.string ?? localized("error.socket.default_error_message"),
