@@ -53,6 +53,8 @@
 "chat.message.actions.block" = "Block messages from user";
 "chat.message.actions.report" = "Report Message";
 "chat.message.actions.copy" = "Copy";
+"chat.message.actions.pin" = "Pin message";
+"chat.message.actions.unpin" = "Unpin message";
 
 // Chat Message Report
 "chat.message.report.success.title" = "Message Reported";

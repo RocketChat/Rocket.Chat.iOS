@@ -587,4 +587,5 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
 
         self.subscription = subscription
     }
+
 }
