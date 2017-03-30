@@ -9,15 +9,20 @@
 import UIKit
 import SDWebImage
 
-class ChatMessageImageView: BaseView {
+protocol ChatMessageImageViewProtocol: class {
+    func openImageFromCell(attachment: Attachment, thumbnail: UIImageView)
+}
+
+final class ChatMessageImageView: UIView {
     static let defaultHeight = CGFloat(250)
 
+    weak var delegate: ChatMessageImageViewProtocol?
     var attachment: Attachment! {
         didSet {
             updateMessageInformation()
         }
     }
-    
+
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var activityIndicatorImageView: UIActivityIndicatorView!
     @IBOutlet weak var imageView: UIImageView! {
@@ -27,27 +32,27 @@ class ChatMessageImageView: BaseView {
             imageView.layer.borderWidth = 1
         }
     }
-    
-    var tapGesture: UITapGestureRecognizer?
-    
+
+    private lazy var tapGesture: UITapGestureRecognizer = {
+        return UITapGestureRecognizer(target: self, action: #selector(didTapView))
+    }()
+
     fileprivate func updateMessageInformation() {
-        if let gesture = tapGesture {
-            removeGestureRecognizer(gesture)
+        let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
+        if !containsGesture {
+            addGestureRecognizer(tapGesture)
         }
-        
-        tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapView))
-        addGestureRecognizer(tapGesture!)
-        
+
         labelTitle.text = attachment.title
-        
-        let imageURL = Attachment.fullImageURL(attachment)
+
+        let imageURL = attachment.fullImageURL()
         activityIndicatorImageView.startAnimating()
-        imageView.sd_setImage(with: imageURL, completed: { [unowned self] (image, error, cacheType, imageURL) in
-            self.activityIndicatorImageView.stopAnimating()
+        imageView.sd_setImage(with: imageURL, completed: { [weak self] _, _, _, _ in
+            self?.activityIndicatorImageView.stopAnimating()
         })
     }
-    
+
     func didTapView() {
-        dump(self)
+        delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
     }
 }

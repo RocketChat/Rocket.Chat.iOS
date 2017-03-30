@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Mention: BaseModel {
+final class Mention: BaseModel {
     dynamic var objId = ""
     dynamic var username: String?
     dynamic var channel: String?
