@@ -61,7 +61,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 
     // MARK: UIImagePickerControllerDelegate
-
+    // swiftlint:disable cyclomatic_complexity function_body_length
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         var activityMessage = localized("chat.upload.uploading_image")
         var filename = "\(String.random()).jpeg"
@@ -118,7 +118,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                 type: .ballPulse
             ))
 
-            UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { (progress) in
+            UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { _ in
                 // We currently don't have progress being called.
             }, completion: { [unowned self] (response, error) in
                 NVActivityIndicatorPresenter.sharedInstance.stopAnimating()

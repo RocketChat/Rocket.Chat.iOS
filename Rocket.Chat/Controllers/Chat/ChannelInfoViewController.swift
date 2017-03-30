@@ -141,19 +141,19 @@ extension ChannelInfoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let data = tableViewData[indexPath.section][indexPath.row]
 
-        if let _ = data as? ChannelInfoBasicCellData {
+        if data as? ChannelInfoBasicCellData != nil {
             return CGFloat(ChannelInfoBasicCell.defaultHeight)
         }
 
-        if let _ = data as? ChannelInfoDetailCellData {
+        if data as? ChannelInfoDetailCellData != nil {
             return CGFloat(ChannelInfoDetailCell.defaultHeight)
         }
 
-        if let _ = data as? ChannelInfoUserCellData {
+        if data as? ChannelInfoUserCellData != nil {
             return CGFloat(ChannelInfoUserCell.defaultHeight)
         }
 
-        if let _ = data as? ChannelInfoDescriptionCellData {
+        if data as? ChannelInfoDescriptionCellData != nil {
             return CGFloat(ChannelInfoDescriptionCell.defaultHeight)
         }
 
@@ -163,7 +163,7 @@ extension ChannelInfoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = tableViewData[indexPath.section][indexPath.row]
 
-        if let _ = data as? ChannelInfoDetailCellData {
+        if data as? ChannelInfoDetailCellData != nil {
             let alert = UIAlertController(title: "Ops!", message: "We're still working on this feature, stay tunned!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             present(alert, animated: true, completion: nil)

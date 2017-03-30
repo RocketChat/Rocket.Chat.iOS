@@ -48,7 +48,7 @@ final class ChatMessageTextView: UIView {
             addGestureRecognizer(tapGesture)
         }
 
-        if let _ = attachment.color {
+        if attachment.color != nil {
             viewLeftBorder.backgroundColor = UIColor(hex: attachment.color)
         } else {
             viewLeftBorder.backgroundColor = .lightGray

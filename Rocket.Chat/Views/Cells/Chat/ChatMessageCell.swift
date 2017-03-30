@@ -167,7 +167,7 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     fileprivate func updateMessageInformation() {
-        guard let _ = delegate else { return }
+        guard delegate != nil else { return }
 
         let formatter = DateFormatter()
         formatter.timeStyle = .short

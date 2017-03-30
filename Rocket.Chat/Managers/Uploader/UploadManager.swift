@@ -73,6 +73,7 @@ class UploadManager {
         }
     }
 
+    // swiftlint:disable function_body_length
     func uploadToUFSFile(store: String, file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
         // Normalize the store name, cause setting is not the same value
         // In the future, we do plan to change it and return the correct value
@@ -111,8 +112,8 @@ class UploadManager {
             let request = self.requestUpload(uploadURL, file: file, formData: JSON(object: headers))
             let config = URLSessionConfiguration.default
             let session = URLSession(configuration: config)
-            let task = session.uploadTask(with: request, from: file.data, completionHandler: { (data, response, error) in
-                if let _ = error {
+            let task = session.uploadTask(with: request, from: file.data, completionHandler: { (_, _, error) in
+                if error != nil {
                     completion(nil, true)
                 } else {
                     let request = [
@@ -177,7 +178,7 @@ class UploadManager {
             let config = URLSessionConfiguration.default
             let session = URLSession(configuration: config)
             let task = session.dataTask(with: request, completionHandler: { (_, _, error) in
-                if let _ = error {
+                if error != nil {
                     completion(nil, true)
                 } else {
                     DispatchQueue.main.async {
