@@ -13,6 +13,19 @@ extension ChatViewController {
     func presentActionsFor(_ message: Message, view: UIView) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
+        let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
+        alert.addAction(UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
+            if message.pinned {
+                MessageManager.unpin(message, completion: { (_) in
+                    // Do nothing
+                })
+            } else {
+                MessageManager.pin(message, completion: { (_) in
+                    // Do nothing
+                })
+            }
+        }))
+
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.report"), style: .default, handler: { (_) in
             self.report(message: message)
         }))
