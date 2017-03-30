@@ -35,6 +35,7 @@ extension Message: ModelMappeable {
             self.user = User.getOrCreate(values: values["u"], updates: nil)
 
             var isBlocked = false
+            // swiftlint:disable for_where
             for blocked in MessageManager.blockedUsersList {
                 if blocked == userIdentifier {
                     isBlocked = true

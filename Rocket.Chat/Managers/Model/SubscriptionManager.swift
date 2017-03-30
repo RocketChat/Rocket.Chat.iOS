@@ -11,6 +11,7 @@ import RealmSwift
 
 struct SubscriptionManager {
 
+    // swiftlint:disable function_body_length
     static func updateSubscriptions(_ auth: Auth, completion: @escaping MessageCompletion) {
         var params: [[String: Any]] = []
 

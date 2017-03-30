@@ -57,7 +57,7 @@ final class AvatarView: UIView {
 
         if let imageURL = imageURL {
             imageView?.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
-                guard let _ = error else {
+                guard error != nil else {
                     self?.labelInitials.text = ""
                     self?.backgroundColor = UIColor.clear
                     return
