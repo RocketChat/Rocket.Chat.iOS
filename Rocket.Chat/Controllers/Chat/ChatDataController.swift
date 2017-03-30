@@ -47,23 +47,17 @@ final class ChatDataController {
     }
 
     func itemAt(_ indexPath: IndexPath) -> ChatData? {
-        for item in data {
-            if item.indexPath?.row == indexPath.row && item.indexPath?.section == indexPath.section {
-                return item
-            }
-        }
-
-        return nil
+        return data.filter { item in
+            return item.indexPath?.row == indexPath.row && item.indexPath?.section == indexPath.section
+        }.first
     }
 
     func indexPathOf(_ identifier: String) -> IndexPath? {
-        for item in data {
-            if item.identifier == identifier {
-                return item.indexPath
-            }
-        }
-
-        return nil
+        return data.filter { item in
+            return item.identifier == identifier
+        }.flatMap { item in
+            item.indexPath
+        }.first
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
@@ -91,6 +85,7 @@ final class ChatDataController {
                     lastObj.timestamp.year != newObj.timestamp.year) {
 
                     // Check if already contains some separator with this data
+                    // swiftlint:disable for_where
                     var insert = true
                     for obj in data.filter({ $0.type == .daySeparator }) {
                         if lastObj.timestamp.day == obj.timestamp.day &&
@@ -121,6 +116,7 @@ final class ChatDataController {
             normalizeds.append(customItem)
 
             for identifier in identifiers {
+                // swiftlint: disable for_where
                 if identifier == item.identifier {
                     indexPaths.append(indexPath)
                     break
