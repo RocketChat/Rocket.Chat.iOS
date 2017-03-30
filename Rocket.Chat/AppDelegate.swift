@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: AppDelegate LifeCycle
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        if let _ = AuthManager.isAuthenticated() {
+        if AuthManager.isAuthenticated() != nil {
             UserManager.setUserPresence(status: .away) { (_) in
                 SocketManager.disconnect({ (_, _) in })
             }
