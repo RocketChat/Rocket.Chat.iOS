@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="16A319" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Main View Controller-->
@@ -13,40 +18,59 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5qg-i6-CkS">
-                                <rect key="frame" x="20" y="285" width="560" height="30"/>
+                                <rect key="frame" x="20" y="365" width="335" height="60"/>
+                                <color key="backgroundColor" red="0.039215686270000001" green="0.2666666667" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="pBi-WV-DTN"/>
+                                    <constraint firstAttribute="height" constant="60" id="pBi-WV-DTN"/>
                                 </constraints>
-                                <state key="normal" title="Connect to a new server"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <state key="normal" title="Connect to a new server">
+                                    <color key="titleColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="4"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <segue destination="HO0-43-1Ue" kind="presentation" identifier="Auth" id="lwm-uO-QRg"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvI-Ne-wdZ">
-                                <rect key="frame" x="160" y="163" width="280" height="102"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User is not authenticated" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zvI-Ne-wdZ">
+                                <rect key="frame" x="48" y="243" width="280" height="102"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="102" id="K4d-7Q-McF"/>
                                     <constraint firstAttribute="width" constant="280" id="dDB-KC-3OE"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.039215686270000001" green="0.2666666667" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g4J-Kq-pOo">
+                                <rect key="frame" x="158" y="304" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="CAe-ML-sPN"/>
+                                    <constraint firstAttribute="width" constant="60" id="xpb-zu-foa"/>
+                                </constraints>
+                            </view>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="5qg-i6-CkS" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="82c-ly-bvd"/>
+                            <constraint firstItem="5qg-i6-CkS" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="61" id="82c-ly-bvd"/>
                             <constraint firstItem="5qg-i6-CkS" firstAttribute="top" secondItem="zvI-Ne-wdZ" secondAttribute="bottom" constant="20" id="JZB-SD-oPU"/>
                             <constraint firstItem="zvI-Ne-wdZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="MPT-Eu-9et"/>
                             <constraint firstAttribute="trailing" secondItem="5qg-i6-CkS" secondAttribute="trailing" constant="20" id="QfM-Lq-obE"/>
                             <constraint firstItem="5qg-i6-CkS" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="bcj-Xi-TNj"/>
+                            <constraint firstItem="g4J-Kq-pOo" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="oFN-ar-Xx2"/>
+                            <constraint firstItem="g4J-Kq-pOo" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xlj-ht-FTT"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="activityIndicatorContainer" destination="g4J-Kq-pOo" id="Be1-yY-iFG"/>
                         <outlet property="buttonConnect" destination="5qg-i6-CkS" id="uaU-K2-whB"/>
                         <outlet property="labelAuthenticationStatus" destination="zvI-Ne-wdZ" id="5O4-Qq-k0Q"/>
                     </connections>

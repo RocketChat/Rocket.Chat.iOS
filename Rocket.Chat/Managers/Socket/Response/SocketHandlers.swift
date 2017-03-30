@@ -8,67 +8,88 @@
 
 import Foundation
 import Starscream
-import RealmSwift
 import SwiftyJSON
+import Crashlytics
 
 extension SocketManager {
-    
+
     func handleMessage(_ response: JSON, socket: WebSocket) {
-        let result = SocketResponse(response, socket: socket)!
-        
-        guard result.msg != nil else {
+        guard let result = SocketResponse(response, socket: socket) else { return }
+
+        guard let message = result.msg else {
             return Log.debug("Msg is invalid: \(result.result)")
         }
-        
-        switch result.msg! {
-        case .Connected: return handleConnectionMessage(result, socket: socket)
-        case .Ping: return handlePingMessage(result, socket: socket)
-        case .Changed, .Added, .Removed: return handleModelUpdates(result, socket: socket)
-        case .Error, .Updated, .Unknown: break
+
+        switch message {
+            case .connected: return handleConnectionMessage(result, socket: socket)
+            case .ping: return handlePingMessage(result, socket: socket)
+            case .changed, .added, .removed: return handleModelUpdates(result, socket: socket)
+            case .updated, .unknown: break
+            case .error: handleError(result, socket: socket)
         }
-        
+
         // Call completion block
-        if let identifier = result.id {
-            if queue[identifier] != nil {
-                let completion = queue[identifier]! as MessageCompletion
-                completion(result)
-            }
+        guard let identifier = result.id,
+              let completion = queue[identifier] else { return }
+        let messageCompletion = completion as MessageCompletion
+        messageCompletion(result)
+    }
+
+    fileprivate func handleConnectionMessage(_ result: SocketResponse, socket: WebSocket) {
+        internalConnectionHandler?(socket, true)
+        internalConnectionHandler = nil
+
+        for (_, handler) in connectionHandlers {
+            handler.socketDidConnect(socket: self)
         }
     }
-    
-    fileprivate func handleConnectionMessage(_ result: SocketResponse, socket: WebSocket) {
-        connectionHandler?(socket, true)
-        connectionHandler = nil
-    }
-    
+
     fileprivate func handlePingMessage(_ result: SocketResponse, socket: WebSocket) {
         SocketManager.send(["msg": "pong"])
     }
-    
+
+    fileprivate func handleError(_ result: SocketResponse, socket: WebSocket) {
+        let error = result.result["error"]
+
+        let errorInfo = [
+            NSLocalizedDescriptionKey: error["error"].string ?? "Unknown",
+            NSLocalizedFailureReasonErrorKey: error["reason"].string ?? "No reason"
+        ]
+
+        Crashlytics.sharedInstance().recordError(NSError(
+            domain: "SocketHandler.handleError",
+            code: -1001,
+            userInfo: errorInfo
+        ))
+    }
+
     fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {
         let handlers = events[result.event ?? ""]
         handlers?.forEach({ (handler) in
             handler(result)
         })
     }
-    
+
     fileprivate func handleModelUpdates(_ result: SocketResponse, socket: WebSocket) {
         if result.event != nil {
             return handleEventSubscription(result, socket: socket)
         }
-        
+
         // Handle model updates
         if let collection = result.collection {
+            guard let msg = result.msg else { return }
             guard let identifier = result.result["id"].string else { return }
             let fields = result.result["fields"]
-            
+
             switch collection {
-            case "users":
-                let user = Realm.getOrCreate(User.self, primaryKey: identifier, values: fields)
-                Realm.update(user)
-            default: break
+                case "users":
+                    User.handle(msg: msg, primaryKey: identifier, values: fields)
+                    break
+                case "subscriptions":
+                    Subscription.handle(msg: msg, primaryKey: identifier, values: fields)
+                    break
+                default: break
             }
         }
     }
-
 }

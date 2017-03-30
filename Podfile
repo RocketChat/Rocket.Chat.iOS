@@ -10,10 +10,17 @@ def shared_pods
 
   # Code utilities
   pod 'SwiftyJSON'
+  pod 'semver'
 
   # UI
-  pod 'SideMenu'
+  pod 'SideMenuController'
   pod 'SlackTextViewController'
+  pod 'MobilePlayer'
+  pod 'URBMediaFocusViewController'
+  pod 'NVActivityIndicatorView'
+
+  # Text Processing
+  pod 'TSMarkdownParser'
 
   # Database
   pod 'RealmSwift'
@@ -21,6 +28,10 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 3.8'
   pod 'Starscream', '~> 2.0.0'
+
+  # Authentication SDKs
+  pod '1PasswordExtension'
+  pod 'Google/SignIn'
 end
 
 target 'Rocket.Chat' do

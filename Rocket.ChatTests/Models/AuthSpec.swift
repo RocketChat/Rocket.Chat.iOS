@@ -12,17 +12,17 @@ import RealmSwift
 @testable import Rocket_Chat
 
 class AuthSpec: XCTestCase {
-    
+
     override func setUp() {
         super.setUp()
-        
-        Realm.execute() { (realm) in
+
+        Realm.execute { realm in
             for obj in realm.objects(Auth.self) {
                 realm.delete(obj)
             }
         }
     }
-    
+
     func testAuthObject() {
         let serverURL = "http://foobar.com"
         let object = Auth()
@@ -31,15 +31,14 @@ class AuthSpec: XCTestCase {
         object.tokenExpires = Date()
         object.lastAccess = Date()
         object.userId = "123"
-        
-        Realm.execute() { (realm) in
+
+        Realm.execute { realm in
             realm.add(object)
-            
+
             let results = realm.objects(Auth.self)
             let first = results.first
             XCTAssert(results.count == 1, "Auth object was created with success")
             XCTAssert(first?.serverURL == serverURL, "Auth object was created with success")
         }
     }
-    
 }
