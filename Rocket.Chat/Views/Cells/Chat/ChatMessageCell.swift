@@ -72,7 +72,7 @@ final class ChatMessageCell: UICollectionViewCell {
             let type = attachment.type
 
             if type == .textAttachment {
-                total += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text)
+                total += ChatMessageTextView.heightFor(attachment)
             }
 
             if type == .image {
@@ -127,12 +127,12 @@ final class ChatMessageCell: UICollectionViewCell {
             switch type {
             case .textAttachment:
                 if let view = ChatMessageTextView.instantiateFromNib() {
-                    view.viewModel = ChatMessageTextViewModel(withAttachment: attachment)
+                    view.attachment = attachment
                     view.delegate = delegate
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text)
+                    mediaViewHeight += ChatMessageTextView.heightFor(attachment)
                 }
                 break
 
