@@ -7,17 +7,14 @@
 //
 
 import UIKit
-import RealmSwift
 
 protocol ChatMessageTextViewProtocol: class {
     func viewDidCollpaseChange(view: UIView)
 }
 
 final class ChatMessageTextView: UIView {
-    static let defaultHeight = CGFloat(50)
-    fileprivate static let imageViewDefaultWidth = CGFloat(50)
 
-    weak var delegate: ChatMessageTextViewProtocol?
+    static let defaultHeight = CGFloat(50)
 
     @IBOutlet weak var imageViewThumbWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewThumb: UIImageView! {
@@ -30,65 +27,66 @@ final class ChatMessageTextView: UIView {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
+    weak var delegate: ChatMessageTextViewProtocol?
+
     var attachment: Attachment? {
         didSet {
+            guard let attachment = attachment else { return }
+            viewModel = ChatMessageTextViewModel(withAttachment: attachment)
             updateMessageInformation()
         }
     }
+
+    var viewModel: ChatMessageTextViewModel?
+
+    private static let imageViewDefaultWidth = CGFloat(50)
 
     private lazy var tapGesture: UITapGestureRecognizer = {
         return UITapGestureRecognizer(target: self, action: #selector(viewDidTapped(_:)))
     }()
 
-    fileprivate func updateMessageInformation() {
-        guard let attachment = self.attachment else { return }
+    private func updateMessageInformation() {
 
         let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
         if !containsGesture {
             addGestureRecognizer(tapGesture)
         }
 
-        if attachment.color != nil {
-            viewLeftBorder.backgroundColor = UIColor(hex: attachment.color)
-        } else {
-            viewLeftBorder.backgroundColor = .lightGray
+        viewLeftBorder.backgroundColor = viewModel?.color
+
+        labelTitle.text = viewModel?.title
+        labelDescription.text = viewModel?.text
+
+        let updateConstraint = { [weak self] (constant: CGFloat) in
+            self?.imageViewThumbWidthConstraint.constant = constant
+            self?.layoutSubviews()
         }
 
-        labelTitle.text = attachment.title
-        labelDescription.text = attachment.text
-
-        if let imageURL = URL(string: attachment.thumbURL ?? "") {
-            imageViewThumb.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
+        if let thumbURL = viewModel?.thumbURL {
+            imageViewThumb.sd_setImage(with: thumbURL, completed: { _, error, _, _ in
                 let width = error != nil ? 0 : ChatMessageTextView.imageViewDefaultWidth
-                self?.imageViewThumbWidthConstraint.constant = width
-                self?.layoutSubviews()
+                updateConstraint(width)
             })
         } else {
-            imageViewThumbWidthConstraint.constant = 0
-            layoutSubviews()
+            updateConstraint(0)
         }
     }
 
-    static func heightFor(_ attachment: Attachment) -> CGFloat {
-        if attachment.collapsed {
+    static func heightFor(collapsed: Bool, withText text: String?) -> CGFloat {
+        if collapsed {
             return self.defaultHeight
         }
 
         let fullWidth = UIScreen.main.bounds.size.width
         return max(self.defaultHeight, UILabel.heightForView(
-            attachment.text ?? "",
+            text ?? "",
             font: UIFont.systemFont(ofSize: 14),
             width: fullWidth - 60
         ) + 20)
     }
 
     func viewDidTapped(_ sender: Any) {
-        guard let attachment = self.attachment else { return }
-
-        Realm.execute { (_) in
-            attachment.collapsed = !attachment.collapsed
-        }
-
+        viewModel?.toggleCollpase()
         delegate?.viewDidCollpaseChange(view: self)
     }
 }
