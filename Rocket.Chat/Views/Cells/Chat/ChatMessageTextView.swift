@@ -7,14 +7,17 @@
 //
 
 import UIKit
+import RealmSwift
 
 protocol ChatMessageTextViewProtocol: class {
     func viewDidCollpaseChange(view: UIView)
 }
 
 final class ChatMessageTextView: UIView {
-
     static let defaultHeight = CGFloat(50)
+    fileprivate static let imageViewDefaultWidth = CGFloat(50)
+
+    weak var delegate: ChatMessageTextViewProtocol?
 
     @IBOutlet weak var imageViewThumbWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewThumb: UIImageView! {
@@ -27,78 +30,65 @@ final class ChatMessageTextView: UIView {
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
-    weak var delegate: ChatMessageTextViewProtocol?
-
-    var viewModel: ChatMessageTextViewModel? {
+    var attachment: Attachment? {
         didSet {
-            prepareView()
+            updateMessageInformation()
         }
     }
-
-    private static let imageViewDefaultWidth = CGFloat(50)
 
     private lazy var tapGesture: UITapGestureRecognizer = {
         return UITapGestureRecognizer(target: self, action: #selector(viewDidTapped(_:)))
     }()
 
-    private func prepareView() {
-        addGestureIfNeeded()
-        updateLeftBorder()
-        updateLabels()
-        updateImageView()
-    }
+    fileprivate func updateMessageInformation() {
+        guard let attachment = self.attachment else { return }
 
-    // MARK: Layout
-
-    private func updateLeftBorder() {
-        viewLeftBorder.backgroundColor = viewModel?.color
-    }
-
-    private func updateLabels() {
-        labelTitle.text = viewModel?.title
-        labelDescription.text = viewModel?.text
-    }
-
-    private func updateImageView() {
-        let updateConstraint = { [weak self] (constant: CGFloat) in
-            self?.imageViewThumbWidthConstraint.constant = constant
-            self?.layoutSubviews()
+        let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
+        if !containsGesture {
+            addGestureRecognizer(tapGesture)
         }
-
-        if let thumbURL = viewModel?.thumbURL {
-            imageViewThumb.sd_setImage(with: thumbURL, completed: { _, error, _, _ in
+        
+        if attachment.color != nil {
+            viewLeftBorder.backgroundColor = UIColor(hex: attachment.color)
+        } else {
+            viewLeftBorder.backgroundColor = .lightGray
+        }
+        
+        labelTitle.text = attachment.title
+        labelDescription.text = attachment.text
+        
+        if let imageURL = URL(string: attachment.thumbURL ?? "") {
+            imageViewThumb.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
                 let width = error != nil ? 0 : ChatMessageTextView.imageViewDefaultWidth
-                updateConstraint(width)
+                self?.imageViewThumbWidthConstraint.constant = width
+                self?.layoutSubviews()
             })
         } else {
-            updateConstraint(0)
+            imageViewThumbWidthConstraint.constant = 0
+            layoutSubviews()
         }
     }
 
-    static func heightFor(collapsed: Bool, withText text: String?) -> CGFloat {
-        if collapsed {
+    static func heightFor(_ attachment: Attachment) -> CGFloat {
+        if attachment.collapsed {
             return self.defaultHeight
         }
 
         let fullWidth = UIScreen.main.bounds.size.width
         return max(self.defaultHeight, UILabel.heightForView(
-            text ?? "",
+            attachment.text ?? "",
             font: UIFont.systemFont(ofSize: 14),
             width: fullWidth - 60
         ) + 20)
     }
 
-    // MARK: Actions
-
     func viewDidTapped(_ sender: Any) {
-        viewModel?.toggleCollpase()
-        delegate?.viewDidCollpaseChange(view: self)
-    }
+        guard let attachment = self.attachment else { return }
 
-    private func addGestureIfNeeded() {
-        let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
-        if !containsGesture {
-            addGestureRecognizer(tapGesture)
+        Realm.execute { (_) in
+            attachment.collapsed = !attachment.collapsed
         }
+
+        delegate?.viewDidCollpaseChange(view: self)
     }
 }
