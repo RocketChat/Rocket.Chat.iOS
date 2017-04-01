@@ -22,5 +22,4 @@ extension UIView {
 
         return instanceFromNib()
     }
-
 }

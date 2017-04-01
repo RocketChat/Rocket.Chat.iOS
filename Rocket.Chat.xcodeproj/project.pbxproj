@@ -143,6 +143,8 @@
 		D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */; };
 		D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28221DFD86C300D6019C /* LauncherProtocol.swift */; };
 		D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */; };
+		D39D63DD1E8FD3CA00EECFCB /* ChatMessageTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39D63DC1E8FD3CA00EECFCB /* ChatMessageTextViewModel.swift */; };
+		D39D63E01E8FD54800EECFCB /* ChatMessageTextViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39D63DF1E8FD54800EECFCB /* ChatMessageTextViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +315,8 @@
 		D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BugTrackingCoordinator.swift; sourceTree = "<group>"; };
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
+		D39D63DC1E8FD3CA00EECFCB /* ChatMessageTextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModel.swift; sourceTree = "<group>"; };
+		D39D63DF1E8FD54800EECFCB /* ChatMessageTextViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,6 +459,7 @@
 				41FF36041DBEC0BA0074E20A /* ChatMessageVideoView.swift */,
 				41FF36051DBEC0BA0074E20A /* ChatMessageVideoView.xib */,
 				412BCC861E55C6B800F7F4EE /* ChatMessageTextView.swift */,
+				D39D63DC1E8FD3CA00EECFCB /* ChatMessageTextViewModel.swift */,
 				412BCC841E55C6A300F7F4EE /* ChatMessageTextView.xib */,
 				41D3A62F1E0805490011949D /* ChatMessageDaySeparator.swift */,
 				41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */,
@@ -479,6 +484,7 @@
 		4171ABA31E7C0556009FC3F0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D39D63DE1E8FD53500EECFCB /* Chat */,
 				4171ABA41E7C056E009FC3F0 /* AvatarViewSpec.swift */,
 			);
 			name = Views;
@@ -829,6 +835,14 @@
 			);
 			name = Launcher;
 			path = Managers/Launcher;
+			sourceTree = "<group>";
+		};
+		D39D63DE1E8FD53500EECFCB /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D39D63DF1E8FD54800EECFCB /* ChatMessageTextViewModelTests.swift */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		EE693BBD0CC2727847214E2D /* Pods */ = {
@@ -1230,6 +1244,7 @@
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
 				41BD37D91E290D8600CBC4C2 /* ModelMappeable.swift in Sources */,
+				D39D63DD1E8FD3CA00EECFCB /* ChatMessageTextViewModel.swift in Sources */,
 				41BD37DB1E290D9C00CBC4C2 /* ModelHandler.swift in Sources */,
 				41F167E91DAC4D4300775CCA /* ChatTitleView.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
@@ -1323,6 +1338,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4171ABA51E7C056E009FC3F0 /* AvatarViewSpec.swift in Sources */,
+				D39D63E01E8FD54800EECFCB /* ChatMessageTextViewModelTests.swift in Sources */,
 				417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */,
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
 				925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */,
