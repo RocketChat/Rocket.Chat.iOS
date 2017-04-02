@@ -29,15 +29,11 @@ final class ChatMessageTextView: UIView {
 
     weak var delegate: ChatMessageTextViewProtocol?
 
-    var attachment: Attachment? {
+    var viewModel: ChatMessageTextViewModel? {
         didSet {
-            guard let attachment = attachment else { return }
-            viewModel = ChatMessageTextViewModel(withAttachment: attachment)
-            updateMessageInformation()
+            prepareView()
         }
     }
-
-    var viewModel: ChatMessageTextViewModel?
 
     private static let imageViewDefaultWidth = CGFloat(50)
 
@@ -45,18 +41,25 @@ final class ChatMessageTextView: UIView {
         return UITapGestureRecognizer(target: self, action: #selector(viewDidTapped(_:)))
     }()
 
-    private func updateMessageInformation() {
+    private func prepareView() {
+        addGestureIfNeeded()
+        updateLeftBorder()
+        updateLabels()
+        updateImageView()
+    }
 
-        let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
-        if !containsGesture {
-            addGestureRecognizer(tapGesture)
-        }
+    // MARK: Layout
 
+    private func updateLeftBorder() {
         viewLeftBorder.backgroundColor = viewModel?.color
+    }
 
+    private func updateLabels() {
         labelTitle.text = viewModel?.title
         labelDescription.text = viewModel?.text
+    }
 
+    private func updateImageView() {
         let updateConstraint = { [weak self] (constant: CGFloat) in
             self?.imageViewThumbWidthConstraint.constant = constant
             self?.layoutSubviews()
@@ -85,8 +88,17 @@ final class ChatMessageTextView: UIView {
         ) + 20)
     }
 
+    // MARK: Actions
+
     func viewDidTapped(_ sender: Any) {
         viewModel?.toggleCollpase()
         delegate?.viewDidCollpaseChange(view: self)
+    }
+
+    private func addGestureIfNeeded() {
+        let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
+        if !containsGesture {
+            addGestureRecognizer(tapGesture)
+        }
     }
 }
