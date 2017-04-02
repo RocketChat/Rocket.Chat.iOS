@@ -61,7 +61,7 @@ final class ChatMessageCell: UICollectionViewCell {
             message.textNormalized(),
             font: UIFont.systemFont(ofSize: 14),
             width: fullWidth - 60
-        ) + 35
+            ) + 35
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -72,7 +72,7 @@ final class ChatMessageCell: UICollectionViewCell {
             let type = attachment.type
 
             if type == .textAttachment {
-                total += ChatMessageTextView.heightFor(attachment)
+                total += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text)
             }
 
             if type == .image {
@@ -127,12 +127,12 @@ final class ChatMessageCell: UICollectionViewCell {
             switch type {
             case .textAttachment:
                 if let view = ChatMessageTextView.instantiateFromNib() {
-                    view.attachment = attachment
+                    view.viewModel = ChatMessageTextViewModel(withAttachment: attachment)
                     view.delegate = delegate
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageTextView.heightFor(attachment)
+                    mediaViewHeight += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text)
                 }
                 break
 
