@@ -239,6 +239,7 @@ extension SubscriptionsViewController {
 
             groupSubscriptions?.append(searchResultsGroup)
         } else {
+        
             if unreadGroup.count > 0 {
                 groupInfomation?.append([
                     "name": String(format: "%@ (%d)", localized("subscriptions.unreads"), unreadGroup.count)
@@ -249,16 +250,18 @@ extension SubscriptionsViewController {
                 }
 
                 groupSubscriptions?.append(unreadGroup)
+                NotificationCenter.default.post(name: Notification.Name("Unread_Message_Notification"), object: nil)
+            } else {
+                NotificationCenter.default.post(name: Notification.Name("All_Messages_Read_Notification"), object: nil)
             }
 
             if favoriteGroup.count > 0 {
                 groupInfomation?.append([
                     "icon": "Star",
                     "name": String(format: "%@ (%d)", localized("subscriptions.favorites"), favoriteGroup.count)
-                ])
-
+                    ])
                 favoriteGroup = favoriteGroup.sorted {
-                    return $0.type.rawValue < $1.type.rawValue
+                return $0.type.rawValue < $1.type.rawValue
                 }
 
                 groupSubscriptions?.append(favoriteGroup)
@@ -267,7 +270,7 @@ extension SubscriptionsViewController {
             if channelGroup.count > 0 {
                 groupInfomation?.append([
                     "name": String(format: "%@ (%d)", localized("subscriptions.channels"), channelGroup.count)
-                ])
+                    ])
 
                 groupSubscriptions?.append(channelGroup)
             }

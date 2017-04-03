@@ -113,6 +113,9 @@ final class ChatViewController: SLKTextViewController {
             self.subscription = subscription
         }
 
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.didReceiveUnreadMessagesNotification(notification:)), name: Notification.Name("Unread_Message_Notification"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.didReceiveAllMessagesReadNotification(notification:)), name: Notification.Name("All_Messages_Read_Notification"), object: nil)
+        
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
         view.bringSubview(toFront: textInputbar)
@@ -587,5 +590,32 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         }
 
         self.subscription = subscription
+    }
+}
+
+// MARK: UnreadMessageNotification
+
+extension ChatViewController {
+    func didReceiveUnreadMessagesNotification(notification: Notification) {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        button.accessibilityIdentifier = MainChatViewController.preferences.interaction.menuButtonAccessibilityIdentifier
+        button.setImage(UIImage(named: "MenuBubble"), for: .normal)
+        button.addTarget(sideMenuController, action: #selector(MainChatViewController.toggle), for: UIControlEvents.touchUpInside)
+        var navItems = self.navigationItem.leftBarButtonItems
+        let originalButton = navItems?[1] as UIBarButtonItem?
+        originalButton?.customView = button
+        navItems?[1] = (originalButton)!
+        self.navigationItem.setLeftBarButtonItems(navItems, animated: true)
+    }
+    func didReceiveAllMessagesReadNotification(notification: Notification) {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        button.accessibilityIdentifier = MainChatViewController.preferences.interaction.menuButtonAccessibilityIdentifier
+        button.setImage(UIImage(named: "Menu"), for: .normal)
+        button.addTarget(sideMenuController, action: #selector(MainChatViewController.toggle), for: UIControlEvents.touchUpInside)
+        var navItems = self.navigationItem.leftBarButtonItems
+        let originalButton = navItems?[1] as UIBarButtonItem?
+        originalButton?.customView = button
+        navItems?[1] = originalButton!
+        self.navigationItem.setLeftBarButtonItems(navItems, animated: true)
     }
 }
