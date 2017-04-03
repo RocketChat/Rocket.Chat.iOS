@@ -21,6 +21,7 @@ extension Message {
         )
     }
 
+    // swiftlint:disable function_body_length cyclomatic_complexity
     func textNormalized() -> String {
         let text = Emojione.transform(string: self.text)
 

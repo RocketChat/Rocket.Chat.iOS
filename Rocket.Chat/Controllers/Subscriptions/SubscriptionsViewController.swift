@@ -8,6 +8,7 @@
 
 import RealmSwift
 
+// swiftlint:disable file_length
 final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -351,6 +352,11 @@ extension SubscriptionsViewController: UITextFieldDelegate {
         searchBy(prospectiveText)
         return true
     }
+
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        searchBy()
+        return true
+    }
 }
 
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
@@ -398,7 +404,7 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
     func viewUserDidTap(sender: Any) {
         textFieldSearch.resignFirstResponder()
 
-        if let _ = viewUserMenu {
+        if viewUserMenu != nil {
             dismissUserMenu()
         } else {
             presentUserMenu()
@@ -408,5 +414,4 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
     func userDidPressedOption() {
         dismissUserMenu()
     }
-
 }

@@ -77,6 +77,15 @@ final class AuthViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "TwoFactor" {
+            if let controller = segue.destination as? TwoFactorAuthenticationViewController {
+                controller.username = textFieldUsername.text ?? ""
+                controller.password = textFieldPassword.text ?? ""
+            }
+        }
+    }
+
     // MARK: Keyboard Handlers
     override func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
@@ -99,6 +108,12 @@ final class AuthViewController: BaseViewController {
 
         if response.isError() {
             if let error = response.result["error"].dictionary {
+                // User is using 2FA
+                if error["error"]?.string == "totp-required" {
+                    performSegue(withIdentifier: "TwoFactor", sender: nil)
+                    return
+                }
+
                 let alert = UIAlertController(
                     title: localized("error.socket.default_error_title"),
                     message: error["message"]?.string ?? localized("error.socket.default_error_message"),
@@ -110,7 +125,7 @@ final class AuthViewController: BaseViewController {
             }
         } else {
             if let user = AuthManager.currentUser() {
-                if let _ = user.username {
+                if user.username != nil {
                     dismiss(animated: true, completion: nil)
                 } else {
                     performSegue(withIdentifier: "RequestUsername", sender: nil)
@@ -143,7 +158,18 @@ final class AuthViewController: BaseViewController {
 
         startLoading()
 
-        AuthManager.auth(email, password: password, completion: self.handleAuthenticationResponse)
+        if serverPublicSettings?.isLDAPAuthenticationEnabled ?? false {
+            let params = [
+                "ldap": true,
+                "username": email,
+                "ldapPass": password,
+                "ldapOptions": []
+            ] as [String : Any]
+
+            AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
+        } else {
+            AuthManager.auth(email, password: password, completion: self.handleAuthenticationResponse)
+        }
     }
 
     @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {
@@ -212,4 +238,3 @@ extension AuthViewController: UITextFieldDelegate {
         return true
     }
 }
-

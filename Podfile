@@ -7,7 +7,6 @@ def shared_pods
   # Crash Report
   pod 'Fabric'
   pod 'Crashlytics'
-  pod 'Bugsnag'
 
   # Code utilities
   pod 'SwiftyJSON'

@@ -22,6 +22,7 @@ extension Message: ModelMappeable {
         self.alias = values["alias"].string ?? ""
         self.internalType = values["t"].string ?? "t"
         self.role = values["role"].string ?? ""
+        self.pinned = values["pinned"].bool ?? false
 
         if let createdAt = values["ts"]["$date"].double {
             self.createdAt = Date.dateFromInterval(createdAt)
@@ -35,6 +36,7 @@ extension Message: ModelMappeable {
             self.user = User.getOrCreate(values: values["u"], updates: nil)
 
             var isBlocked = false
+            // swiftlint:disable for_where
             for blocked in MessageManager.blockedUsersList {
                 if blocked == userIdentifier {
                     isBlocked = true

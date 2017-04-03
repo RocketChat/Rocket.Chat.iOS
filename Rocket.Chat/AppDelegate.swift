@@ -20,17 +20,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
         application.registerForRemoteNotifications()
 
-        Realm.execute { (realm) in
-            debugPrint("Path to realm file: " + realm.configuration.fileURL!.absoluteString)
-        }
-
         return true
     }
 
     // MARK: AppDelegate LifeCycle
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        if let _ = AuthManager.isAuthenticated() {
+        if AuthManager.isAuthenticated() != nil {
             UserManager.setUserPresence(status: .away) { (_) in
                 SocketManager.disconnect({ (_, _) in })
             }
