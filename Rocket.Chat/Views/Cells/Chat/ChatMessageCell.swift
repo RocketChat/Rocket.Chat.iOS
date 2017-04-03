@@ -61,7 +61,7 @@ final class ChatMessageCell: UICollectionViewCell {
             message.textNormalized(),
             font: UIFont.systemFont(ofSize: 14),
             width: fullWidth - 60
-            ) + 35
+        ) + 35
 
         for url in message.urls {
             guard url.isValid() else { continue }
