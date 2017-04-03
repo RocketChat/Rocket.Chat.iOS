@@ -143,6 +143,8 @@
 		D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */; };
 		D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28221DFD86C300D6019C /* LauncherProtocol.swift */; };
 		D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */; };
+		D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */; };
+		D3CFAFC01E907FCF00BADC0A /* ChatMessageTextViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFAFBF1E907FCF00BADC0A /* ChatMessageTextViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -313,6 +315,8 @@
 		D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BugTrackingCoordinator.swift; sourceTree = "<group>"; };
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
+		D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModel.swift; sourceTree = "<group>"; };
+		D3CFAFBF1E907FCF00BADC0A /* ChatMessageTextViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -455,6 +459,7 @@
 				41FF36041DBEC0BA0074E20A /* ChatMessageVideoView.swift */,
 				41FF36051DBEC0BA0074E20A /* ChatMessageVideoView.xib */,
 				412BCC861E55C6B800F7F4EE /* ChatMessageTextView.swift */,
+				D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */,
 				412BCC841E55C6A300F7F4EE /* ChatMessageTextView.xib */,
 				41D3A62F1E0805490011949D /* ChatMessageDaySeparator.swift */,
 				41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */,
@@ -479,6 +484,7 @@
 		4171ABA31E7C0556009FC3F0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D3CFAFBE1E907FC100BADC0A /* Chat */,
 				4171ABA41E7C056E009FC3F0 /* AvatarViewSpec.swift */,
 			);
 			name = Views;
@@ -829,6 +835,14 @@
 			);
 			name = Launcher;
 			path = Managers/Launcher;
+			sourceTree = "<group>";
+		};
+		D3CFAFBE1E907FC100BADC0A /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D3CFAFBF1E907FCF00BADC0A /* ChatMessageTextViewModelTests.swift */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		EE693BBD0CC2727847214E2D /* Pods */ = {
@@ -1299,6 +1313,7 @@
 				41D3A6301E0805490011949D /* ChatMessageDaySeparator.swift in Sources */,
 				41900C271D9FE35400308EF4 /* Attachment.swift in Sources */,
 				412719441E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift in Sources */,
+				D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */,
 				415029BD1E72E0FD009F596C /* ChannelInfoCellProtocol.swift in Sources */,
 				415029B51E72D519009F596C /* ChannelInfoBasicCell.swift in Sources */,
 				D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */,
@@ -1331,6 +1346,7 @@
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
+				D3CFAFC01E907FCF00BADC0A /* ChatMessageTextViewModelTests.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41DC7A221D386B4700896FC0 /* StringExtensionSpec.swift in Sources */,
