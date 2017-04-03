@@ -164,8 +164,6 @@ final class ConnectServerViewController: BaseViewController {
 
                         alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
                         self.present(alert, animated: true, completion: nil)
-
-                        return completion(nil, true)
                     }
                 }
 

@@ -100,7 +100,6 @@ final class ChatViewController: SLKTextViewController {
 
         setupTitleView()
         setupTextViewSettings()
-        setupLongPressGestureHandler()
         setupScrollToBottomButton()
 
         // TODO: this should really goes into the view model, when we have it
@@ -390,6 +389,7 @@ final class ChatViewController: SLKTextViewController {
                 for message in messages {
                     var insert = true
 
+                    // swiftlint:disable for_where
                     for obj in self.dataController.data {
                         if message.identifier == obj.message?.identifier {
                             insert = false
@@ -591,6 +591,7 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
 
         self.subscription = subscription
     }
+
 }
 
 // MARK: UnreadMessageNotification

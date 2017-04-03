@@ -1,15 +1,13 @@
 PODS:
   - 1PasswordExtension (1.8.4)
-  - Bugsnag (5.7.0):
-    - KSCrash/RecordingAdvanced (= 1.11.2)
-  - Crashlytics (3.8.3):
+  - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
   - FirebaseAnalytics (3.7.0):
     - FirebaseCore (~> 3.5)
     - FirebaseInstanceID (~> 1.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
-  - FirebaseCore (3.5.0):
+  - FirebaseCore (3.5.2):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (1.0.9)
   - Google/Core (3.0.3):
@@ -34,35 +32,31 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
   - GTMOAuth2 (1.1.4):
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.1.8):
-    - GTMSessionFetcher/Full (= 1.1.8)
-  - GTMSessionFetcher/Core (1.1.8)
-  - GTMSessionFetcher/Full (1.1.8):
-    - GTMSessionFetcher/Core (= 1.1.8)
-  - KSCrash/Recording (1.11.2)
-  - KSCrash/RecordingAdvanced (1.11.2):
-    - KSCrash/Recording
+  - GTMSessionFetcher (1.1.9):
+    - GTMSessionFetcher/Full (= 1.1.9)
+  - GTMSessionFetcher/Core (1.1.9)
+  - GTMSessionFetcher/Full (1.1.9):
+    - GTMSessionFetcher/Core (= 1.1.9)
   - MobilePlayer (1.2.0)
-  - NVActivityIndicatorView (3.4)
-  - Realm (2.4.2):
-    - Realm/Headers (= 2.4.2)
-  - Realm/Headers (2.4.2)
-  - RealmSwift (2.4.2):
-    - Realm (= 2.4.2)
+  - NVActivityIndicatorView (3.5.2)
+  - Realm (2.5.0):
+    - Realm/Headers (= 2.5.0)
+  - Realm/Headers (2.5.0)
+  - RealmSwift (2.5.0):
+    - Realm (= 2.5.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - semver (1.0.0)
   - SideMenuController (0.2.4)
   - SlackTextViewController (1.9.5)
-  - Starscream (2.0.3)
+  - Starscream (2.0.4)
   - SwiftyJSON (3.1.4)
   - TSMarkdownParser (2.1.3)
   - URBMediaFocusViewController (0.9.0)
 
 DEPENDENCIES:
   - 1PasswordExtension
-  - Bugsnag
   - Crashlytics
   - Fabric
   - Google/SignIn
@@ -80,31 +74,29 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
-  Bugsnag: d86488d670f91acbce0186e6570e500039676ef0
-  Crashlytics: 2b6dbe138a42395577cfa73dfa1aa7248cadf39e
+  Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
   FirebaseAnalytics: 0d1b7d81d5021155be37702a94ba1ec16d45365d
-  FirebaseCore: 1c0a13bf59bb95cdd19577252499f0ec6a03e999
+  FirebaseCore: a024587e43778508700af8c6b1209f7c4516ba02
   FirebaseInstanceID: 2d0518b1378fe9d685ef40cbdd63d2fdc1125339
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
   GoogleSignIn: d7ad83f13480e1f30453471d00d19b5293ac46af
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
-  GTMSessionFetcher: 6f8d8b28b7e345549ac471071608170b31cb4977
-  KSCrash: 8acc46aca72b2772d5d1e3cba1da9173db4d705e
+  GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  NVActivityIndicatorView: 5754be63ceecd1df8af37d3c088d81872feeb8b8
-  Realm: d27b758e12d62a3371879a065d4c40aa212c5a54
-  RealmSwift: 9556c0fe0f0cfecacfb755ae9e68ff379fc6bead
+  NVActivityIndicatorView: 8c10abd410a0657afd21aa853373e1a3cfc25e7f
+  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
+  RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   semver: efe6bf4af25bffab18d442592771be392210b5ce
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
-  Starscream: 3fdd5c277e57cca6b5c406d274e3f34a7c88f2ce
+  Starscream: df5974ee928b157c8eda8af8de7c620276b7dfcc
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: ba9d77b7ee1abf5cb7a1edf9ef743f9b8dfefe5c
+PODFILE CHECKSUM: f750ef7286106d96fe5ff2c0eba926ce112f3b51
 
 COCOAPODS: 1.2.0

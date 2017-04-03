@@ -47,6 +47,7 @@
 		4159720C1D3DB854002258F4 /* Email.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720B1D3DB854002258F4 /* Email.swift */; };
 		4159720E1D3DB882002258F4 /* Mention.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720D1D3DB882002258F4 /* Mention.swift */; };
 		415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4159720F1D3DBDA0002258F4 /* RealmExtension.swift */; };
+		41597DCE1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */; };
 		416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416133311D46CA4E00E09DA2 /* ChatMessageCell.swift */; };
 		416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 416133331D46CA7200E09DA2 /* ChatMessageCell.xib */; };
 		416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 416133371D46DB1D00E09DA2 /* BaseModelSpec.swift */; };
@@ -136,9 +137,14 @@
 		597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA11E3708A50041C5C5 /* DataExtension.swift */; };
 		597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA31E3708B10041C5C5 /* PushManager.swift */; };
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
+		925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */; };
+		925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */; };
+		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
 		D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */; };
 		D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28221DFD86C300D6019C /* LauncherProtocol.swift */; };
 		D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */; };
+		D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */; };
+		D3CFAFC01E907FCF00BADC0A /* ChatMessageTextViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFAFBF1E907FCF00BADC0A /* ChatMessageTextViewModelTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -200,6 +206,7 @@
 		4159720B1D3DB854002258F4 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Email.swift; path = Models/Email.swift; sourceTree = "<group>"; };
 		4159720D1D3DB882002258F4 /* Mention.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Mention.swift; path = Models/Mention.swift; sourceTree = "<group>"; };
 		4159720F1D3DBDA0002258F4 /* RealmExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmExtension.swift; path = Extensions/RealmExtension.swift; sourceTree = "<group>"; };
+		41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TwoFactorAuthenticationViewController.swift; path = Controllers/Auth/TwoFactorAuthenticationViewController.swift; sourceTree = "<group>"; };
 		416133311D46CA4E00E09DA2 /* ChatMessageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageCell.swift; path = Views/Cells/Chat/ChatMessageCell.swift; sourceTree = "<group>"; };
 		416133331D46CA7200E09DA2 /* ChatMessageCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatMessageCell.xib; path = Views/Cells/Chat/ChatMessageCell.xib; sourceTree = "<group>"; };
 		416133371D46DB1D00E09DA2 /* BaseModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseModelSpec.swift; path = Models/BaseModelSpec.swift; sourceTree = "<group>"; };
@@ -301,10 +308,15 @@
 		597ECBA11E3708A50041C5C5 /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DataExtension.swift; path = Extensions/DataExtension.swift; sourceTree = "<group>"; };
 		597ECBA31E3708B10041C5C5 /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushManager.swift; path = Managers/PushManager.swift; sourceTree = "<group>"; };
 		68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_ChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
+		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TintedTextField.swift; path = Views/Subscriptions/TintedTextField.swift; sourceTree = "<group>"; };
 		BCF38696E8EC385488688390 /* Pods-Rocket.Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.debug.xcconfig"; sourceTree = "<group>"; };
 		D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BugTrackingCoordinator.swift; sourceTree = "<group>"; };
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
+		D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModel.swift; sourceTree = "<group>"; };
+		D3CFAFBF1E907FCF00BADC0A /* ChatMessageTextViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModelTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */,
+				925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -446,6 +459,7 @@
 				41FF36041DBEC0BA0074E20A /* ChatMessageVideoView.swift */,
 				41FF36051DBEC0BA0074E20A /* ChatMessageVideoView.xib */,
 				412BCC861E55C6B800F7F4EE /* ChatMessageTextView.swift */,
+				D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */,
 				412BCC841E55C6A300F7F4EE /* ChatMessageTextView.xib */,
 				41D3A62F1E0805490011949D /* ChatMessageDaySeparator.swift */,
 				41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */,
@@ -470,6 +484,7 @@
 		4171ABA31E7C0556009FC3F0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D3CFAFBE1E907FC100BADC0A /* Chat */,
 				4171ABA41E7C056E009FC3F0 /* AvatarViewSpec.swift */,
 			);
 			name = Views;
@@ -509,6 +524,7 @@
 				4174CB161D2D9BB70086DAC8 /* AuthViewController.swift */,
 				412719431E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift */,
 				412719451E6B403700461FEE /* RegisterUsernameViewController.swift */,
+				41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -627,6 +643,7 @@
 			children = (
 				41A91AEE1E51C51A005C94B1 /* SubscriptionUserStatusView.xib */,
 				41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusView.swift */,
+				A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */,
 			);
 			name = Subscriptions;
 			sourceTree = "<group>";
@@ -742,6 +759,7 @@
 				41DC7A201D386B2C00896FC0 /* Extensions */,
 				41552F691D3035DB0081438D /* Managers */,
 				4171ABA31E7C0556009FC3F0 /* Views */,
+				925FF74F1E8EFC9200982043 /* Settings */,
 				41DF76F91D2C50720028DBF8 /* Info.plist */,
 			);
 			path = Rocket.ChatTests;
@@ -799,6 +817,14 @@
 			name = Socket;
 			sourceTree = "<group>";
 		};
+		925FF74F1E8EFC9200982043 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */,
+			);
+			name = Settings;
+			sourceTree = "<group>";
+		};
 		D32E28201DFD86AC00D6019C /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
@@ -809,6 +835,14 @@
 			);
 			name = Launcher;
 			path = Managers/Launcher;
+			sourceTree = "<group>";
+		};
+		D3CFAFBE1E907FC100BADC0A /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				D3CFAFBF1E907FCF00BADC0A /* ChatMessageTextViewModelTests.swift */,
+			);
+			name = Chat;
 			sourceTree = "<group>";
 		};
 		EE693BBD0CC2727847214E2D /* Pods */ = {
@@ -898,7 +932,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = Rocket.Chat;
 				TargetAttributes = {
 					41DF76DE1D2C50710028DBF8 = {
@@ -1205,6 +1239,7 @@
 				415801951D303B640099E71B /* MainViewController.swift in Sources */,
 				41D7CA871E644E47000F38EA /* MessageExtensions.swift in Sources */,
 				415029BB1E72D553009F596C /* ChannelInfoUserCell.swift in Sources */,
+				925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */,
 				4151B4561E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
@@ -1235,6 +1270,7 @@
 				41A1748C1DD9F2F900188E3B /* UIViewControllerExtension.swift in Sources */,
 				41D701D61E67111E00FED2EE /* MessageTextFontAttributes.swift in Sources */,
 				41C275DF1D848005003C88CF /* AvatarView.swift in Sources */,
+				A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */,
 				4174CB171D2D9BB70086DAC8 /* AuthViewController.swift in Sources */,
 				418688111E53CC86002F785C /* ChatControllerMessageActions.swift in Sources */,
 				41F3C1001DB577ED000E0C76 /* MessageURL.swift in Sources */,
@@ -1260,6 +1296,7 @@
 				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,
 				41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */,
 				419EAF291E26562E002C8DA5 /* UserCoordinator.swift in Sources */,
+				41597DCE1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift in Sources */,
 				41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */,
 				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,
@@ -1276,6 +1313,7 @@
 				41D3A6301E0805490011949D /* ChatMessageDaySeparator.swift in Sources */,
 				41900C271D9FE35400308EF4 /* Attachment.swift in Sources */,
 				412719441E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift in Sources */,
+				D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */,
 				415029BD1E72E0FD009F596C /* ChannelInfoCellProtocol.swift in Sources */,
 				415029B51E72D519009F596C /* ChannelInfoBasicCell.swift in Sources */,
 				D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */,
@@ -1302,11 +1340,13 @@
 				4171ABA51E7C056E009FC3F0 /* AvatarViewSpec.swift in Sources */,
 				417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */,
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
+				925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */,
 				41DC7A241D386CA800896FC0 /* NSDateExtensionSpec.swift in Sources */,
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
+				D3CFAFC01E907FCF00BADC0A /* ChatMessageTextViewModelTests.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41DC7A221D386B4700896FC0 /* StringExtensionSpec.swift in Sources */,

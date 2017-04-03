@@ -10,6 +10,7 @@ import UIKit
 
 protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol {
     func openURL(url: URL)
+    func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
 }
 
 final class ChatMessageCell: UICollectionViewCell {
@@ -17,6 +18,7 @@ final class ChatMessageCell: UICollectionViewCell {
     static let minimumHeight = CGFloat(55)
     static let identifier = "ChatMessageCell"
 
+    weak var longPressGesture: UILongPressGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
     var message: Message! {
         didSet {
@@ -70,7 +72,7 @@ final class ChatMessageCell: UICollectionViewCell {
             let type = attachment.type
 
             if type == .textAttachment {
-                total += ChatMessageTextView.heightFor(attachment)
+                total += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text)
             }
 
             if type == .image {
@@ -95,7 +97,78 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
+    func insertGesturesIfNeeded() {
+        if self.longPressGesture == nil {
+            let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
+            gesture.minimumPressDuration = 1
+            gesture.delegate = self
+            contentView.addGestureRecognizer(gesture)
+            self.longPressGesture = gesture
+        }
+    }
+
+    func insertAttachments() {
+        var mediaViewHeight = CGFloat(0)
+
+        message.urls.forEach { url in
+            guard url.isValid() else { return }
+            if let view = ChatMessageURLView.instantiateFromNib() {
+                view.url = url
+                view.delegate = delegate
+
+                mediaViews.addArrangedSubview(view)
+                mediaViewHeight += ChatMessageURLView.defaultHeight
+            }
+        }
+
+        message.attachments.forEach { attachment in
+            let type = attachment.type
+
+            switch type {
+            case .textAttachment:
+                if let view = ChatMessageTextView.instantiateFromNib() {
+                    view.viewModel = ChatMessageTextViewModel(withAttachment: attachment)
+                    view.delegate = delegate
+                    view.translatesAutoresizingMaskIntoConstraints = false
+
+                    mediaViews.addArrangedSubview(view)
+                    mediaViewHeight += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text)
+                }
+                break
+
+            case .image:
+                if let view = ChatMessageImageView.instantiateFromNib() {
+                    view.attachment = attachment
+                    view.delegate = delegate
+                    view.translatesAutoresizingMaskIntoConstraints = false
+
+                    mediaViews.addArrangedSubview(view)
+                    mediaViewHeight += ChatMessageImageView.defaultHeight
+                }
+                break
+
+            case .video:
+                if let view = ChatMessageVideoView.instantiateFromNib() {
+                    view.attachment = attachment
+                    view.delegate = delegate
+                    view.translatesAutoresizingMaskIntoConstraints = false
+
+                    mediaViews.addArrangedSubview(view)
+                    mediaViewHeight += ChatMessageVideoView.defaultHeight
+                }
+                break
+
+            default:
+                return
+            }
+        }
+
+        mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
+    }
+
     fileprivate func updateMessageInformation() {
+        guard delegate != nil else { return }
+
         let formatter = DateFormatter()
         formatter.timeStyle = .short
 
@@ -124,60 +197,22 @@ final class ChatMessageCell: UICollectionViewCell {
 
         labelText.attributedText = text.transformMarkdown()
 
-        var mediaViewHeight = CGFloat(0)
-
-        message.urls.forEach { url in
-            guard url.isValid() else { return }
-            if let view = ChatMessageURLView.instantiateFromNib() {
-                view.url = url
-                view.delegate = delegate
-
-                mediaViews.addArrangedSubview(view)
-                mediaViewHeight += ChatMessageURLView.defaultHeight
-            }
-        }
-
-        message.attachments.forEach { attachment in
-            let type = attachment.type
-
-            switch type {
-            case .textAttachment:
-                if let view = ChatMessageTextView.instantiateFromNib() {
-                    view.attachment = attachment
-                    view.delegate = delegate
-
-                    mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageTextView.heightFor(attachment)
-                }
-                break
-
-            case .image:
-                if let view = ChatMessageImageView.instantiateFromNib() {
-                    view.attachment = attachment
-                    view.delegate = delegate
-
-                    mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageImageView.defaultHeight
-                }
-                break
-
-            case .video:
-                if let view = ChatMessageVideoView.instantiateFromNib() {
-                    view.attachment = attachment
-                    view.delegate = delegate
-
-                    mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageVideoView.defaultHeight
-                }
-                break
-
-            default:
-                return
-            }
-        }
-
-        mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
+        insertGesturesIfNeeded()
+        insertAttachments()
     }
+
+    func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+        delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
+    }
+
+}
+
+extension ChatMessageCell: UIGestureRecognizerDelegate {
+
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+        return false
+    }
+
 }
 
 extension ChatMessageCell: UITextViewDelegate {

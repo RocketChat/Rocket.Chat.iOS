@@ -122,17 +122,36 @@ extension AuthManager {
         - parameter completion: The completion block that'll be called in case
             of success or error.
     */
-    static func auth(_ username: String, password: String, completion: @escaping MessageCompletion) {
+    static func auth(_ username: String, password: String, code: String? = nil, completion: @escaping MessageCompletion) {
         let usernameType = username.contains("@") ? "email" : "username"
-        let params = [
-            "user": [usernameType: username],
-            "password": [
-                "digest": password.sha256(),
-                "algorithm": "sha-256"
-            ]
-        ] as [String : Any]
+        var params: [String: Any]?
 
-        self.auth(params: params, completion: completion)
+        if let code = code {
+            params = [
+                "totp": [
+                    "login": [
+                        "user": [usernameType: username],
+                        "password": [
+                            "digest": password.sha256(),
+                            "algorithm": "sha-256"
+                        ]
+                    ],
+                    "code": code
+                ]
+            ]
+        } else {
+            params = [
+                "user": [usernameType: username],
+                "password": [
+                    "digest": password.sha256(),
+                    "algorithm": "sha-256"
+                ]
+            ]
+        }
+
+        if let params = params {
+            self.auth(params: params, completion: completion)
+        }
     }
 
     /**
