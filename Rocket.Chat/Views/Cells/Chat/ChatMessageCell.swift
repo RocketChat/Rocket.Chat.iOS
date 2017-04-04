@@ -210,7 +210,7 @@ final class ChatMessageCell: UICollectionViewCell {
 extension ChatMessageCell: UIGestureRecognizerDelegate {
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true
+        return false
     }
 
 }
