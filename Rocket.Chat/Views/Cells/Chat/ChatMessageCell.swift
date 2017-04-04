@@ -100,9 +100,9 @@ final class ChatMessageCell: UICollectionViewCell {
     func insertGesturesIfNeeded() {
         if self.longPressGesture == nil {
             let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
-            gesture.minimumPressDuration = 1
+            gesture.minimumPressDuration = 0.5
             gesture.delegate = self
-            contentView.addGestureRecognizer(gesture)
+            self.addGestureRecognizer(gesture)
             self.longPressGesture = gesture
         }
     }
