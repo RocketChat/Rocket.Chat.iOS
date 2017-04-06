@@ -63,6 +63,16 @@ final class SubscriptionsViewController: BaseViewController {
         subscribeModelChanges()
     }
 
+    class func sharedInstance() -> SubscriptionsViewController? {
+        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
+            if let navigationController = main.sideViewController as? UINavigationController {
+                return navigationController.viewControllers.first as? SubscriptionsViewController
+            }
+        }
+
+        return nil
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCurrentUserInformation()
@@ -278,6 +288,21 @@ extension SubscriptionsViewController {
             }
         }
     }
+
+    func highlightSelectedSubscriptionCell() {
+        guard let selectedSubscription = ChatViewController.sharedInstance()?.subscription else { return }
+        var r: Int?
+        let s = groupSubscriptions?.index { subscriptions -> Bool in
+            if let index = subscriptions.index(of: selectedSubscription) {
+                r = index
+                return true
+            }
+            return false
+        }
+        guard let section = s, let row = r else { return }
+        let indexPath = IndexPath(row: row, section: section)
+        tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+    }
 }
 
 extension SubscriptionsViewController: UITableViewDataSource {
@@ -297,6 +322,11 @@ extension SubscriptionsViewController: UITableViewDataSource {
 
         let subscription = groupSubscriptions?[indexPath.section][indexPath.row]
         cell.subscription = subscription
+        if let selectedSubscription = ChatViewController.sharedInstance()?.subscription {
+            if subscription == selectedSubscription {
+                cell.isSelected = true
+            }
+        }
 
         return cell
     }
