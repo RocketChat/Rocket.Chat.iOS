@@ -10,36 +10,29 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-var executingRealmInstance: Realm?
-
 extension Realm {
 
-    static func execute(_ completion: (Realm) -> Void) {
-        if let realm = executingRealmInstance {
-            completion(realm)
-            return
-        }
+    static func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
+        var backgroundTaskId: UIBackgroundTaskIdentifier?
 
-        guard let realm = try? Realm() else { return }
-        executingRealmInstance = realm
-        try? realm.write {
-            completion(realm)
-        }
-        executingRealmInstance = nil
-    }
+        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: "chat.rocket.realm.background", expirationHandler: { _ in
+            backgroundTaskId = UIBackgroundTaskInvalid
+        })
 
-    static func getOrCreate<T: BaseModel>(_ model: T.Type, primaryKey: String) -> T {
-        var object: T!
+        if let backgroundTaskId = backgroundTaskId {
+            DispatchQueue.global(qos: .background).async { _ in
+                guard let realm = try? Realm() else { return }
+                try? realm.write {
+                    execution(realm)
+                }
 
-        self.execute { (realm) in
-            object = realm.object(ofType: model, forPrimaryKey: primaryKey as AnyObject)
+                DispatchQueue.main.async {
+                    completion?()
+                }
 
-            if object == nil {
-                object = T()
+                UIApplication.shared.endBackgroundTask(backgroundTaskId)
             }
         }
-
-        return object
     }
 
     // MARK: Mutate
@@ -48,23 +41,23 @@ extension Realm {
     static func delete(_ object: Object) {
         guard !object.isInvalidated else { return }
 
-        self.execute { realm in
+        self.execute({ realm in
             realm.delete(object)
-        }
+        })
     }
 
     // This method will add or update a Realm's object.
     static func update(_ object: Object) {
-        self.execute { realm in
+        self.execute({ realm in
             realm.add(object, update: true)
-        }
+        })
     }
 
     // This method will add or update a list of some Realm's object.
     static func update<S: Sequence>(_ objects: S) where S.Iterator.Element: Object {
-        self.execute { realm in
+        self.execute({ realm in
             realm.add(objects, update: true)
-        }
+        })
     }
 
 }

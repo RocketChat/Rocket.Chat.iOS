@@ -8,9 +8,10 @@
 
 import Foundation
 import SwiftyJSON
+import RealmSwift
 
 extension Subscription: ModelMappeable {
-    func map(_ values: JSON) {
+    func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
             self.identifier = values["_id"].string ?? ""
         }

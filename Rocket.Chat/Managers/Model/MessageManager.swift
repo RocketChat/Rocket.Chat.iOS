@@ -19,7 +19,7 @@ extension MessageManager {
 
     static var blockedUsersList = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 
-    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletionObjectsList<Message>) {
+    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping VoidCompletion) {
         var lastDate: Any!
 
         if let lastMessageDate = lastMessageDate {
@@ -38,25 +38,26 @@ extension MessageManager {
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
-
-            let validMessages = List<Message>()
-            let messages = List<Message>()
             let list = response.result["result"]["messages"].array
 
-            list?.forEach { object in
-                let message = Message.getOrCreate(values: object, updates: { (object) in
-                    object?.subscription = subscription
-                })
+            let validMessages = List<Message>()
+            let subscriptionIdentifier = subscription.identifier
 
-                messages.append(message)
+            Realm.execute({ (realm) in
+                guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
 
-                if !message.userBlocked {
-                    validMessages.append(message)
+                list?.forEach { object in
+                    let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
+                        object?.subscription = detachedSubscription
+                    })
+
+                    realm.add(message, update: true)
+
+                    if !message.userBlocked {
+                        validMessages.append(message)
+                    }
                 }
-            }
-
-            Realm.update(messages)
-            completion(Array(validMessages))
+            }, completion: completion)
         }
     }
 
@@ -72,11 +73,14 @@ extension MessageManager {
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             let object = response.result["fields"]["args"][0]
-            let message = Message.getOrCreate(values: object, updates: { (object) in
-                object?.subscription = subscription
-            })
 
-            Realm.update(message)
+            Realm.execute({ (realm) in
+                let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
+                    object?.subscription = subscription
+                })
+
+                realm.add(message, update: true)
+            })
         }
     }
 
@@ -127,7 +131,7 @@ extension MessageManager {
         UserDefaults.standard.setValue(blockedUsers, forKey: kBlockedUsersIndentifiers)
         self.blockedUsersList = blockedUsers
 
-        Realm.execute { (realm) in
+        Realm.execute({ (realm) in
             let messages = realm.objects(Message.self).filter("user.identifier = '\(userIdentifier)'")
 
             for message in messages {
@@ -135,9 +139,11 @@ extension MessageManager {
             }
 
             realm.add(messages, update: true)
-        }
 
-        completion()
+            DispatchQueue.main.async {
+                completion()
+            }
+        })
     }
 
 }

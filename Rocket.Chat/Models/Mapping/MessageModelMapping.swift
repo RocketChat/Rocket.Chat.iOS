@@ -11,7 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 extension Message: ModelMappeable {
-    func map(_ values: JSON) {
+    func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
             self.identifier = values["_id"].string ?? ""
         }
@@ -33,7 +33,11 @@ extension Message: ModelMappeable {
         }
 
         if let userIdentifier = values["u"]["_id"].string {
-            self.user = User.getOrCreate(values: values["u"], updates: nil)
+            if let realm = realm {
+                if let user = realm.object(ofType: User.self, forPrimaryKey: userIdentifier as AnyObject) {
+                    self.user = user
+                }
+            }
 
             var isBlocked = false
             // swiftlint:disable for_where
@@ -52,7 +56,7 @@ extension Message: ModelMappeable {
 
             for attachment in attachments {
                 let obj = Attachment()
-                obj.map(attachment)
+                obj.map(attachment, realm: realm)
                 self.attachments.append(obj)
             }
         }
@@ -63,7 +67,7 @@ extension Message: ModelMappeable {
 
             for url in urls {
                 let obj = MessageURL()
-                obj.map(url)
+                obj.map(url, realm: realm)
                 self.urls.append(obj)
             }
         }
