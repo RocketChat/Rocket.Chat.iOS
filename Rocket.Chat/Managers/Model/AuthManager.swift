@@ -204,18 +204,26 @@ extension AuthManager {
             }
 
             Realm.execute({ realm in
-                guard let auth = AuthManager.isAuthenticated() else { return }
+                var settings: AuthSettings?
 
-                var settings: AuthSettings!
-                settings = auth.settings ?? AuthSettings()
-                settings.map(response.result["result"], realm: realm)
-                realm.add(settings, update: true)
+                if let auth = AuthManager.isAuthenticated() {
+                    settings = auth.settings
+                } else {
+                    settings = AuthSettings()
+                }
 
-                auth.settings = settings
-                realm.add(auth, update: true)
+                if let settings = settings {
+                    settings.map(response.result["result"], realm: realm)
+                    realm.add(settings, update: true)
 
-                let unmanagedSettings = AuthSettings(value: settings)
-                completion(unmanagedSettings)
+                    if let auth = AuthManager.isAuthenticated() {
+                        auth.settings = settings
+                        realm.add(auth, update: true)
+                    }
+
+                    let unmanagedSettings = AuthSettings(value: settings)
+                    completion(unmanagedSettings)
+                }
             })
         }
     }
