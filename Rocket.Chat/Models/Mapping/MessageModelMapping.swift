@@ -36,6 +36,10 @@ extension Message: ModelMappeable {
             if let realm = realm {
                 if let user = realm.object(ofType: User.self, forPrimaryKey: userIdentifier as AnyObject) {
                     self.user = user
+                } else {
+                    let user = User()
+                    user.map(values["u"], realm: realm)
+                    self.user = user
                 }
             }
 

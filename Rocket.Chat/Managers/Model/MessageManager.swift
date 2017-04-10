@@ -73,10 +73,12 @@ extension MessageManager {
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             let object = response.result["fields"]["args"][0]
+            let subscriptionIdentifier = subscription.identifier
 
             Realm.execute({ (realm) in
+                guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
                 let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
-                    object?.subscription = subscription
+                    object?.subscription = detachedSubscription
                 })
 
                 realm.add(message, update: true)
