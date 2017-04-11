@@ -43,14 +43,7 @@ extension Message: ModelMappeable {
                 }
             }
 
-            var isBlocked = false
-            // swiftlint:disable for_where
-            for blocked in MessageManager.blockedUsersList {
-                if blocked == userIdentifier {
-                    isBlocked = true
-                }
-            }
-
+            let isBlocked = MessageManager.blockedUsersList.contains(userIdentifier)
             self.userBlocked = isBlocked
         }
 
