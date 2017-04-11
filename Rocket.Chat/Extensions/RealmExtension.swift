@@ -35,6 +35,13 @@ extension Realm {
         }
     }
 
+    static func executeOnMainThread(_ execution: @escaping (Realm) -> Void) {
+        guard let realm = try? Realm() else { return }
+        try? realm.write {
+            execution(realm)
+        }
+    }
+
     // MARK: Mutate
 
     // This method will add or update a Realm's object.

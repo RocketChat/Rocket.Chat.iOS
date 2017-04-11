@@ -94,7 +94,6 @@ class ChatMessageTextViewModelTests: XCTestCase {
         let attachment = Attachment()
         let model = ChatMessageTextViewModel(withAttachment: attachment)
         model.toggleCollpase()
-
         XCTAssertTrue(model.collapsed)
     }
 }
