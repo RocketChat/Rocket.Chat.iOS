@@ -16,7 +16,7 @@ class UserSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Realm.execute { realm in
+        Realm.execute({ realm in
             for obj in realm.objects(User.self) {
                 realm.delete(obj)
             }
@@ -24,7 +24,7 @@ class UserSpec: XCTestCase {
             for obj in realm.objects(Email.self) {
                 realm.delete(obj)
             }
-        }
+        })
     }
 
     func testUserObject() {
@@ -37,13 +37,13 @@ class UserSpec: XCTestCase {
         email.email = "foo@bar.baz"
         object.emails.append(email)
 
-        Realm.execute { realm in
+        Realm.execute({ realm in
             realm.add(object)
 
             let results = realm.objects(User.self)
             let first = results.first
             XCTAssert(results.count == 1, "User object was created with success")
             XCTAssert(first?.identifier == "123", "User object was created with success")
-        }
+        })
     }
 }
