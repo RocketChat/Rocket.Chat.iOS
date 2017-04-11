@@ -127,6 +127,7 @@ final class ChatViewController: SLKTextViewController {
         super.viewWillAppear(animated)
 
         view?.layoutSubviews()
+        collectionView?.layoutSubviews()
         scrollToBottom()
     }
 
@@ -340,7 +341,7 @@ final class ChatViewController: SLKTextViewController {
 
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
             guard let messages = self?.subscription.fetchMessages() else { return }
-//
+
             self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
                 self?.activityIndicator.stopAnimating()
                 self?.scrollToBottom()
@@ -421,9 +422,11 @@ final class ChatViewController: SLKTextViewController {
                     collectionView.contentOffset = offset
                 }
 
-                completion?()
-
                 CATransaction.commit()
+
+                DispatchQueue.main.async {
+                    completion?()
+                }
             })
         }
     }
