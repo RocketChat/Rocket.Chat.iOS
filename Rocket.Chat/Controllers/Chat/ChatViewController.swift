@@ -14,19 +14,13 @@ import NVActivityIndicatorView
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
 
-    var activityIndicator: NVActivityIndicatorView!
+    var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
         didSet {
             let width = activityIndicatorContainer.bounds.width
             let height = activityIndicatorContainer.bounds.height
             let frame = CGRect(x: 0, y: 0, width: width, height: height)
-            let activityIndicator = NVActivityIndicatorView(
-                frame: frame,
-                type: .ballPulse,
-                color: .RCDarkBlue(),
-                padding: 0
-            )
-
+            let activityIndicator = LoaderView(frame: frame)
             activityIndicatorContainer.addSubview(activityIndicator)
             self.activityIndicator = activityIndicator
         }

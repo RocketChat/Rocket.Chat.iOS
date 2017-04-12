@@ -14,19 +14,13 @@ final class MainViewController: BaseViewController {
     @IBOutlet weak var labelAuthenticationStatus: UILabel!
     @IBOutlet weak var buttonConnect: UIButton!
 
-    var activityIndicator: NVActivityIndicatorView!
+    var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
         didSet {
             let width = activityIndicatorContainer.bounds.width
             let height = activityIndicatorContainer.bounds.height
             let frame = CGRect(x: 0, y: 0, width: width, height: height)
-            let activityIndicator = NVActivityIndicatorView(
-                frame: frame,
-                type: .ballPulse,
-                color: UIColor.RCBlue(),
-                padding: 0
-            )
-
+            let activityIndicator = LoaderView(frame: frame)
             activityIndicatorContainer.addSubview(activityIndicator)
             self.activityIndicator = activityIndicator
         }
