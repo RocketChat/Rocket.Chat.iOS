@@ -9,7 +9,6 @@
 import RealmSwift
 import SlackTextViewController
 import URBMediaFocusViewController
-import NVActivityIndicatorView
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
