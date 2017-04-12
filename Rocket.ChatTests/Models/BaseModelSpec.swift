@@ -16,7 +16,7 @@ class BaseModelSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             for obj in realm.objects(BaseModel.self) {
                 realm.delete(obj)
             }
@@ -24,7 +24,7 @@ class BaseModelSpec: XCTestCase {
     }
 
     func testBaseModelBasicInstructions() {
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             let object = BaseModel()
             object.identifier = "123"
             realm.add(object)
