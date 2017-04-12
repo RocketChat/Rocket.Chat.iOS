@@ -20,10 +20,10 @@ class UserCoordinator: LauncherProtocol {
     // the active users, it will only return users that aren't offline.
     private func turnAllUsersOffline() {
         // FIXME: Remove the Realm dependency.
-        Realm.execute { (realm) in
+        Realm.execute({ (realm) in
             let users = realm.objects(User.self)
             users.setValue("offline", forKey: "privateStatus")
-        }
+        })
     }
 
 }

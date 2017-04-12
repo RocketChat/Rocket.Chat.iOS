@@ -127,6 +127,7 @@ final class ChatViewController: SLKTextViewController {
         super.viewWillAppear(animated)
 
         view?.layoutSubviews()
+        collectionView?.layoutSubviews()
         scrollToBottom()
     }
 
@@ -338,7 +339,7 @@ final class ChatViewController: SLKTextViewController {
             self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
         }
 
-        MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] _ in
+        MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
             guard let messages = self?.subscription.fetchMessages() else { return }
 
             self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
@@ -357,8 +358,9 @@ final class ChatViewController: SLKTextViewController {
         }
 
         isRequestingHistory = true
-        MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] newMessages in
-            self?.appendMessages(messages: newMessages, updateScrollPosition: true, completion: nil)
+        MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
+            guard let messages = self?.subscription.fetchMessages() else { return }
+            self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
             self?.isRequestingHistory = false
         }
     }
@@ -420,9 +422,11 @@ final class ChatViewController: SLKTextViewController {
                     collectionView.contentOffset = offset
                 }
 
-                completion?()
-
                 CATransaction.commit()
+
+                DispatchQueue.main.async {
+                    completion?()
+                }
             })
         }
     }
@@ -582,9 +586,9 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         guard let auth = AuthManager.isAuthenticated() else { return }
         guard let subscription = self.subscription else { return }
 
-        Realm.execute { _ in
+        Realm.execute({ _ in
             subscription.auth = auth
-        }
+        })
 
         self.subscription = subscription
     }

@@ -11,15 +11,15 @@ import SwiftyJSON
 import RealmSwift
 
 extension Subscription: ModelHandler {
-    func add(_ values: JSON) {
-        map(values)
+    func add(_ values: JSON, realm: Realm) {
+        map(values, realm: realm)
     }
 
-    func update(_ values: JSON) {
-        map(values)
+    func update(_ values: JSON, realm: Realm) {
+        map(values, realm: realm)
     }
 
-    func remove(_ values: JSON) {
-        Realm.delete(self)
+    func remove(_ values: JSON, realm: Realm) {
+        realm.delete(self)
     }
 }

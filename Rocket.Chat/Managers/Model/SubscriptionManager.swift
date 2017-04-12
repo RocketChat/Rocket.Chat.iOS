@@ -31,49 +31,7 @@ struct SubscriptionManager {
             "params": params
         ] as [String : Any]
 
-        SocketManager.send(requestSubscriptions) { response in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-
-            let subscriptions = List<Subscription>()
-
-            // List is used the first time user opens the app
-            let list = response.result["result"].array
-
-            // Update & Removed is used on updates
-            let updated = response.result["result"]["update"].array
-            let removed = response.result["result"]["remove"].array
-
-            list?.forEach { object in
-                let subscription = Subscription.getOrCreate(values: object, updates: { (object) in
-                    object?.auth = auth
-                })
-
-                subscriptions.append(subscription)
-            }
-
-            updated?.forEach { object in
-                let subscription = Subscription.getOrCreate(values: object, updates: { (object) in
-                    object?.auth = auth
-                })
-
-                subscriptions.append(subscription)
-            }
-
-            removed?.forEach { object in
-                let subscription = Subscription.getOrCreate(values: object, updates: { (object) in
-                    object?.auth = nil
-                })
-
-                subscriptions.append(subscription)
-            }
-
-            Realm.execute { realm in
-                auth.lastSubscriptionFetch = Date()
-
-                realm.add(subscriptions, update: true)
-                realm.add(auth, update: true)
-            }
-
+        func executeRoomsRequest() {
             SocketManager.send(requestRooms) { response in
                 guard !response.isError() else { return Log.debug(response.result.string) }
 
@@ -85,7 +43,9 @@ struct SubscriptionManager {
                 // Update is used on updates
                 let updated = response.result["result"]["update"].array
 
-                Realm.execute { realm in
+                Realm.execute({ realm in
+                    guard let auth = AuthManager.isAuthenticated() else { return }
+
                     list?.forEach { object in
                         if let rid = object["_id"].string {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
@@ -108,10 +68,62 @@ struct SubscriptionManager {
 
                     auth.lastSubscriptionFetch = Date()
                     realm.add(subscriptions, update: true)
+
+                    DispatchQueue.main.async {
+                        completion(response)
+                    }
+                })
+            }
+        }
+
+        SocketManager.send(requestSubscriptions) { response in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+
+            let subscriptions = List<Subscription>()
+
+            // List is used the first time user opens the app
+            let list = response.result["result"].array
+
+            // Update & Removed is used on updates
+            let updated = response.result["result"]["update"].array
+            let removed = response.result["result"]["remove"].array
+
+            Realm.execute({ realm in
+                guard let auth = AuthManager.isAuthenticated() else { return }
+
+                list?.forEach { object in
+                    let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
+                        object?.auth = auth
+                    })
+
+                    subscriptions.append(subscription)
                 }
 
-                completion(response)
-            }
+                updated?.forEach { object in
+                    let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
+                        object?.auth = auth
+                    })
+
+                    subscriptions.append(subscription)
+                }
+
+                removed?.forEach { object in
+                    let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
+                        object?.auth = nil
+                    })
+
+                    subscriptions.append(subscription)
+                }
+
+                auth.lastSubscriptionFetch = Date()
+
+                realm.add(subscriptions, update: true)
+                realm.add(auth, update: true)
+
+                DispatchQueue.main.async {
+                    executeRoomsRequest()
+                }
+            })
         }
     }
 
@@ -129,13 +141,14 @@ struct SubscriptionManager {
             let msg = response.result["fields"]["args"][0]
             let object = response.result["fields"]["args"][1]
 
-            let subscription = Subscription.getOrCreate(values: object, updates: { (object) in
-                object?.auth = msg == "removed" ? nil : auth
-            })
+            Realm.execute({ (realm) in
+                guard let auth = AuthManager.isAuthenticated() else { return }
+                let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
+                    object?.auth = msg == "removed" ? nil : auth
+                })
 
-            Realm.execute { realm in
                 realm.add(subscription, update: true)
-            }
+            })
         }
     }
 
@@ -158,29 +171,31 @@ struct SubscriptionManager {
             let rooms = response.result["result"]["rooms"].array
             let users = response.result["result"]["users"].array
 
-            rooms?.forEach { object in
-                let subscription = Subscription.getOrCreate(values: object, updates: { (object) in
-                    object?.rid = object?.identifier ?? ""
-                })
+            Realm.execute({ (realm) in
+                rooms?.forEach { object in
+                    let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
+                        object?.rid = object?.identifier ?? ""
+                    })
 
-                subscriptions.append(subscription)
-            }
+                    subscriptions.append(subscription)
+                }
 
-            users?.forEach { object in
-                let user = User.getOrCreate(values: object, updates: nil)
-                let subscription = Subscription()
-                subscription.identifier = user.identifier ?? ""
-                subscription.otherUserId = user.identifier
-                subscription.type = .directMessage
-                subscription.name = user.username ?? ""
-                subscriptions.append(subscription)
-            }
+                users?.forEach { object in
+                    let user = User.getOrCreate(realm: realm, values: object, updates: nil)
+                    let subscription = Subscription()
+                    subscription.identifier = user.identifier ?? ""
+                    subscription.otherUserId = user.identifier
+                    subscription.type = .directMessage
+                    subscription.name = user.username ?? ""
+                    subscriptions.append(subscription)
+                }
 
-            Realm.execute { realm in
                 realm.add(subscriptions, update: true)
-            }
 
-            completion(subscriptions)
+                DispatchQueue.main.async {
+                    completion(subscriptions)
+                }
+            })
         }
     }
 

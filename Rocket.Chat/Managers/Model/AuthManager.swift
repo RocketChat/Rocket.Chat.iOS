@@ -23,12 +23,7 @@ struct AuthManager {
     */
     static func currentUser() -> User? {
         guard let auth = isAuthenticated() else { return nil }
-
-        var user: User?
-        Realm.execute { (realm) in
-            user = realm.object(ofType: User.self, forPrimaryKey: auth.userId)
-        }
-
+        guard let user = try? Realm().object(ofType: User.self, forPrimaryKey: auth.userId) else { return nil }
         return user
     }
 }
@@ -208,19 +203,28 @@ extension AuthManager {
                 return
             }
 
-            var settings: AuthSettings!
-            Realm.execute { realm in
-                settings = auth?.settings ?? AuthSettings()
-                settings.map(response.result["result"])
-                realm.add(settings, update: true)
+            Realm.execute({ realm in
+                var settings: AuthSettings?
 
-                if let auth = auth {
-                    auth.settings = settings
-                    realm.add(auth, update: true)
+                if let auth = AuthManager.isAuthenticated() {
+                    settings = auth.settings
+                } else {
+                    settings = AuthSettings()
                 }
-            }
 
-            completion(settings)
+                if let settings = settings {
+                    settings.map(response.result["result"], realm: realm)
+                    realm.add(settings, update: true)
+
+                    if let auth = AuthManager.isAuthenticated() {
+                        auth.settings = settings
+                        realm.add(auth, update: true)
+                    }
+
+                    let unmanagedSettings = AuthSettings(value: settings)
+                    completion(unmanagedSettings)
+                }
+            })
         }
     }
 }
