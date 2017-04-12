@@ -17,7 +17,7 @@ class MessageSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Realm.execute { realm in
+        Realm.execute({ realm in
             for obj in realm.objects(User.self) {
                 realm.delete(obj)
             }
@@ -33,7 +33,7 @@ class MessageSpec: XCTestCase {
             for obj in realm.objects(Subscription.self) {
                 realm.delete(obj)
             }
-        }
+        })
     }
 
     func testSubscriptionObject() {
@@ -53,7 +53,7 @@ class MessageSpec: XCTestCase {
         message.user = user
         message.subscription = subscription
 
-        Realm.execute { realm in
+        Realm.execute({ realm in
             realm.add(message)
 
             let results = realm.objects(Message.self)
@@ -61,7 +61,7 @@ class MessageSpec: XCTestCase {
             XCTAssert(results.count == 1, "Message object was created with success")
             XCTAssert(first?.identifier == "123", "Message object was created with success")
             XCTAssert(subscription.messages.first?.identifier == first?.identifier, "Message relationship with Subscription is OK")
-        }
+        })
     }
 
     func testMessageObjectFromJSON() {
@@ -74,17 +74,16 @@ class MessageSpec: XCTestCase {
             "u": ["_id": "123", "username": "foo"]
         ])
 
-        let message = Message()
-        message.map(object)
-
-        Realm.execute { realm in
+        Realm.execute({ realm in
+            let message = Message()
+            message.map(object, realm: realm)
             realm.add(message)
 
             let results = realm.objects(Message.self)
             let first = results.first
             XCTAssert(results.count == 1, "Message object was created with success")
             XCTAssert(first?.identifier == "123", "Message object was created with success")
-        }
+        })
     }
 
 }
