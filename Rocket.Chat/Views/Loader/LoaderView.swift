@@ -18,7 +18,7 @@ class LoaderView: UIView {
         layer.speed = 1
 
         layer.sublayers = nil
-        setupLayersAndAnimation(in: self.layer, size: CGSize(width: 42, height: 42), color: .blue)
+        setupLayersAndAnimation(in: self.layer, size: CGSize(width: 42, height: 42))
     }
 
     public final func stopAnimating() {
@@ -27,7 +27,7 @@ class LoaderView: UIView {
         layer.sublayers?.removeAll()
     }
 
-    func setupLayersAndAnimation(in layer: CALayer, size: CGSize, color: UIColor) {
+    func setupLayersAndAnimation(in layer: CALayer, size: CGSize) {
         let circleSpacing: CGFloat = 4
         let circleSize: CGFloat = 10
         let circleRadius = circleSize / 2
