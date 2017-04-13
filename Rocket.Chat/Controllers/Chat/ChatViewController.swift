@@ -325,6 +325,7 @@ final class ChatViewController: SLKTextViewController {
             }
         })
 
+        messagesToken?.stop()
         messagesToken = messages.addNotificationBlock { [weak self] _ in
             guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
             guard let messages = self?.subscription.fetchMessages() else { return }
