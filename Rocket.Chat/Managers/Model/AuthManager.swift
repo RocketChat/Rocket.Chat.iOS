@@ -89,22 +89,25 @@ extension AuthManager {
                 return
             }
 
-            let result = response.result
+            Realm.executeOnMainThread({ (realm) in
+                let result = response.result
 
-            let auth = Auth()
-            auth.lastSubscriptionFetch = nil
-            auth.lastAccess = Date()
-            auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
-            auth.token = result["result"]["token"].string
-            auth.userId = result["result"]["id"].string
+                let auth = Auth()
+                auth.lastSubscriptionFetch = nil
+                auth.lastAccess = Date()
+                auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
+                auth.token = result["result"]["token"].string
+                auth.userId = result["result"]["id"].string
 
-            if let date = result["result"]["tokenExpires"]["$date"].double {
-                auth.tokenExpires = Date.dateFromInterval(date)
-            }
+                if let date = result["result"]["tokenExpires"]["$date"].double {
+                    auth.tokenExpires = Date.dateFromInterval(date)
+                }
 
-            PushManager.updatePushToken()
+                PushManager.updatePushToken()
 
-            Realm.update(auth)
+                realm.add(auth)
+            })
+
             completion(response)
         }
     }
