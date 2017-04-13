@@ -47,6 +47,16 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    class func sharedInstance() -> SubscriptionsViewController? {
+        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
+            if let nav = main.sideViewController as? UINavigationController {
+                return nav.viewControllers.first as? SubscriptionsViewController
+            }
+        }
+
+        return nil
+    }
+
     var assigned = false
     var isSearchingLocally = false
     var isSearchingRemotely = false
