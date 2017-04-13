@@ -69,6 +69,10 @@ final class AvatarView: UIView {
     }
 
     internal func initialsFor(_ username: String) -> String {
+        guard username.characters.count > 0 else {
+            return "?"
+        }
+
         let strings = username.components(separatedBy: ".")
 
         if let first = strings.first, let last = strings.last {
