@@ -23,6 +23,8 @@ class AvatarViewSpec: XCTestCase {
             return
         }
 
+        XCTAssertTrue(avatarView.initialsFor("") == "?")
+        XCTAssertTrue(avatarView.initialsFor("?") == "?")
         XCTAssertTrue(avatarView.initialsFor("f") == "F")
         XCTAssertTrue(avatarView.initialsFor("B") == "B")
         XCTAssertTrue(avatarView.initialsFor("fo") == "FO")
