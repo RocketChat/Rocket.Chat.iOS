@@ -38,7 +38,6 @@ PODS:
   - GTMSessionFetcher/Full (1.1.9):
     - GTMSessionFetcher/Core (= 1.1.9)
   - MobilePlayer (1.2.0)
-  - NVActivityIndicatorView (3.6.0)
   - Realm (2.5.1):
     - Realm/Headers (= 2.5.1)
   - Realm/Headers (2.5.1)
@@ -61,7 +60,6 @@ DEPENDENCIES:
   - Fabric
   - Google/SignIn
   - MobilePlayer
-  - NVActivityIndicatorView
   - RealmSwift
   - SDWebImage (~> 3.8)
   - semver
@@ -85,7 +83,6 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  NVActivityIndicatorView: c7c1c4300b418bd9ed06459e78d4df859ddbe31f
   Realm: 32f86104d37c8521f864d4274050b38ba6190733
   RealmSwift: f719e7511c902b8908593e8f143f59e47931bdb6
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
@@ -97,6 +94,6 @@ SPEC CHECKSUMS:
   TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: f750ef7286106d96fe5ff2c0eba926ce112f3b51
+PODFILE CHECKSUM: fd2ee0ec8db6ade1f173c9325ad871f595f369fe
 
 COCOAPODS: 1.2.0
