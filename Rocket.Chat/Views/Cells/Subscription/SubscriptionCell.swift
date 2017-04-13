@@ -16,10 +16,6 @@ final class SubscriptionCell: UITableViewCell {
     internal let labelReadTextColor = UIColor(rgb: 0x9AB1BF, alphaVal: 1)
     internal let labelUnreadTextColor = UIColor(rgb: 0xFFFFFF, alphaVal: 1)
 
-    internal let defaultBackgroundColor = UIColor.clear
-    internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.18)
-    internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.27)
-
     var subscription: Subscription! {
         didSet {
             updateSubscriptionInformatin()
@@ -78,39 +74,4 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
-}
-
-extension SubscriptionCell {
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        let transition = {
-            switch selected {
-            case true:
-                self.backgroundColor = self.selectedBackgroundColor
-            case false:
-                self.backgroundColor = self.defaultBackgroundColor
-            }
-        }
-        if animated {
-            UIView.animate(withDuration: 0.18, animations: transition)
-        } else {
-            transition()
-        }
-    }
-
-    override func setHighlighted(_ highlighted: Bool, animated: Bool) {
-        let transition = {
-            switch highlighted {
-            case true:
-                self.backgroundColor = self.highlightedBackgroundColor
-            case false:
-                self.backgroundColor = self.defaultBackgroundColor
-            }
-        }
-        if animated {
-            UIView.animate(withDuration: 0.18, animations: transition)
-        } else {
-            transition()
-        }
-    }
 }
