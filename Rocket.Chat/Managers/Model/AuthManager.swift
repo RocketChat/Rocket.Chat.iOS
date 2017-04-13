@@ -183,7 +183,7 @@ extension AuthManager {
             SocketManager.clear()
             GIDSignIn.sharedInstance().signOut()
 
-            Realm.execute({ (realm) in
+            Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
             })
 
