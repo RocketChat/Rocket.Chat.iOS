@@ -32,7 +32,6 @@ class MainChatViewController: SideMenuController {
         SideMenuController.preferences.interaction.panningEnabled = true
         SideMenuController.preferences.animating.statusBarBehaviour = .horizontalPan
         super.init(coder: aDecoder)
-        self.delegate = self
     }
 
     override func viewDidLoad() {
@@ -42,14 +41,4 @@ class MainChatViewController: SideMenuController {
         performSegue(withIdentifier: "containSideMenu", sender: nil)
     }
 
-}
-
-extension MainChatViewController: SideMenuControllerDelegate {
-    func sideMenuControllerDidHide(_ sideMenuController: SideMenuController) {
-
-    }
-
-    func sideMenuControllerDidReveal(_ sideMenuController: SideMenuController) {
-        SubscriptionsViewController.sharedInstance()?.highlightSelectedSubscriptionCell()
-    }
 }
