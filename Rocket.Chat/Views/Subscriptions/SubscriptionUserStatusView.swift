@@ -109,6 +109,10 @@ final class SubscriptionUserStatusView: UIView {
     }
 
     @IBAction func buttonLogoutDidPressed(_ sender: Any) {
+        ChatViewController.sharedInstance()?.messagesToken?.stop()
+        SubscriptionsViewController.sharedInstance()?.usersToken?.stop()
+        SubscriptionsViewController.sharedInstance()?.subscriptionsToken?.stop()
+
         AuthManager.logout {
             let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
             let controller = storyboardChat.instantiateInitialViewController()
