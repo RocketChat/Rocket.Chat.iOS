@@ -74,6 +74,30 @@ extension AuthManager {
     }
 
     /**
+        Method that creates an User account.
+     */
+    static func signup(with name: String, _ email: String, _ password: String, completion: @escaping MessageCompletion) {
+        let object = [
+            "msg": "method",
+            "method": "registerUser",
+            "params": [[
+                "email": email,
+                "pass": password,
+                "name": name
+            ]]
+        ] as [String : Any]
+
+        SocketManager.send(object) { (response) in
+            guard !response.isError() else {
+                completion(response)
+                return
+            }
+
+            self.auth(email, password: password, completion: completion)
+        }
+    }
+
+    /**
         Generic method that authenticates the user.
     */
     static func auth(params: [String: Any], completion: @escaping MessageCompletion) {
