@@ -336,6 +336,13 @@ extension SubscriptionsViewController: UITableViewDelegate {
         controller?.closeSidebarAfterSubscriptionUpdate = true
         controller?.subscription = subscription
     }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let sell = cell as? SubscriptionCell else { return }
+        if let selectedSubscription = ChatViewController.sharedInstance()?.subscription {
+            sell.isSelected = sell.subscription == selectedSubscription
+        }
+    }
 }
 
 extension SubscriptionsViewController: UITextFieldDelegate {
