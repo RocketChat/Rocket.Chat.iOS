@@ -109,6 +109,13 @@ final class SubscriptionUserStatusView: UIView {
     }
 
     @IBAction func buttonLogoutDidPressed(_ sender: Any) {
+        // RKS NOTE: I know that this isn't the best place, but we need to fix
+        // this crash ASAP. In the future we may have a centered place for all
+        // database notifications.
+        ChatViewController.sharedInstance()?.messagesToken?.stop()
+        SubscriptionsViewController.sharedInstance()?.usersToken?.stop()
+        SubscriptionsViewController.sharedInstance()?.subscriptionsToken?.stop()
+
         AuthManager.logout {
             let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
             let controller = storyboardChat.instantiateInitialViewController()

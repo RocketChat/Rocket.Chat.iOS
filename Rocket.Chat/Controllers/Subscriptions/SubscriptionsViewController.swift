@@ -47,6 +47,16 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    class func sharedInstance() -> SubscriptionsViewController? {
+        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
+            if let nav = main.sideViewController as? UINavigationController {
+                return nav.viewControllers.first as? SubscriptionsViewController
+            }
+        }
+
+        return nil
+    }
+
     var assigned = false
     var isSearchingLocally = false
     var isSearchingRemotely = false
@@ -147,29 +157,25 @@ extension SubscriptionsViewController {
     }
 
     func updateCurrentUserInformation() {
-        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let user = AuthManager.currentUser() else { return }
         guard let labelUsername = self.labelUsername else { return }
         guard let viewUserStatus = self.viewUserStatus else { return }
 
-        Realm.execute { (realm) in
-            if let user = realm.object(ofType: User.self, forPrimaryKey: auth.userId) {
-                labelUsername.text = user.username ?? ""
+        labelUsername.text = user.username ?? ""
 
-                switch user.status {
-                case .online:
-                    viewUserStatus.backgroundColor = .RCOnline()
-                    break
-                case .busy:
-                    viewUserStatus.backgroundColor = .RCBusy()
-                    break
-                case .away:
-                    viewUserStatus.backgroundColor = .RCAway()
-                    break
-                case .offline:
-                    viewUserStatus.backgroundColor = .RCInvisible()
-                    break
-                }
-            }
+        switch user.status {
+        case .online:
+            viewUserStatus.backgroundColor = .RCOnline()
+            break
+        case .busy:
+            viewUserStatus.backgroundColor = .RCBusy()
+            break
+        case .away:
+            viewUserStatus.backgroundColor = .RCAway()
+            break
+        case .offline:
+            viewUserStatus.backgroundColor = .RCInvisible()
+            break
         }
     }
 

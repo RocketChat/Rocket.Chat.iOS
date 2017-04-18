@@ -38,12 +38,11 @@ PODS:
   - GTMSessionFetcher/Full (1.1.9):
     - GTMSessionFetcher/Core (= 1.1.9)
   - MobilePlayer (1.2.0)
-  - NVActivityIndicatorView (3.5.2)
-  - Realm (2.5.0):
-    - Realm/Headers (= 2.5.0)
-  - Realm/Headers (2.5.0)
-  - RealmSwift (2.5.0):
-    - Realm (= 2.5.0)
+  - Realm (2.5.1):
+    - Realm/Headers (= 2.5.1)
+  - Realm/Headers (2.5.1)
+  - RealmSwift (2.5.1):
+    - Realm (= 2.5.1)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -61,7 +60,6 @@ DEPENDENCIES:
   - Fabric
   - Google/SignIn
   - MobilePlayer
-  - NVActivityIndicatorView
   - RealmSwift
   - SDWebImage (~> 3.8)
   - semver
@@ -85,9 +83,8 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  NVActivityIndicatorView: 8c10abd410a0657afd21aa853373e1a3cfc25e7f
-  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
-  RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
+  Realm: 32f86104d37c8521f864d4274050b38ba6190733
+  RealmSwift: f719e7511c902b8908593e8f143f59e47931bdb6
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   semver: efe6bf4af25bffab18d442592771be392210b5ce
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
@@ -97,6 +94,6 @@ SPEC CHECKSUMS:
   TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: f750ef7286106d96fe5ff2c0eba926ce112f3b51
+PODFILE CHECKSUM: fd2ee0ec8db6ade1f173c9325ad871f595f369fe
 
 COCOAPODS: 1.2.0
