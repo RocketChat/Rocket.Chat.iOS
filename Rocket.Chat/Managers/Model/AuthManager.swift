@@ -23,12 +23,7 @@ struct AuthManager {
     */
     static func currentUser() -> User? {
         guard let auth = isAuthenticated() else { return nil }
-
-        var user: User?
-        Realm.execute { (realm) in
-            user = realm.object(ofType: User.self, forPrimaryKey: auth.userId)
-        }
-
+        guard let user = try? Realm().object(ofType: User.self, forPrimaryKey: auth.userId) else { return nil }
         return user
     }
 }
@@ -79,6 +74,30 @@ extension AuthManager {
     }
 
     /**
+        Method that creates an User account.
+     */
+    static func signup(with name: String, _ email: String, _ password: String, completion: @escaping MessageCompletion) {
+        let object = [
+            "msg": "method",
+            "method": "registerUser",
+            "params": [[
+                "email": email,
+                "pass": password,
+                "name": name
+            ]]
+        ] as [String : Any]
+
+        SocketManager.send(object) { (response) in
+            guard !response.isError() else {
+                completion(response)
+                return
+            }
+
+            self.auth(email, password: password, completion: completion)
+        }
+    }
+
+    /**
         Generic method that authenticates the user.
     */
     static func auth(params: [String: Any], completion: @escaping MessageCompletion) {
@@ -94,22 +113,25 @@ extension AuthManager {
                 return
             }
 
-            let result = response.result
+            Realm.executeOnMainThread({ (realm) in
+                let result = response.result
 
-            let auth = Auth()
-            auth.lastSubscriptionFetch = nil
-            auth.lastAccess = Date()
-            auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
-            auth.token = result["result"]["token"].string
-            auth.userId = result["result"]["id"].string
+                let auth = Auth()
+                auth.lastSubscriptionFetch = nil
+                auth.lastAccess = Date()
+                auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
+                auth.token = result["result"]["token"].string
+                auth.userId = result["result"]["id"].string
 
-            if let date = result["result"]["tokenExpires"]["$date"].double {
-                auth.tokenExpires = Date.dateFromInterval(date)
-            }
+                if let date = result["result"]["tokenExpires"]["$date"].double {
+                    auth.tokenExpires = Date.dateFromInterval(date)
+                }
 
-            PushManager.updatePushToken()
+                PushManager.updatePushToken()
 
-            Realm.update(auth)
+                realm.add(auth)
+            })
+
             completion(response)
         }
     }
@@ -188,7 +210,7 @@ extension AuthManager {
             SocketManager.clear()
             GIDSignIn.sharedInstance().signOut()
 
-            Realm.execute({ (realm) in
+            Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
             })
 
@@ -208,19 +230,19 @@ extension AuthManager {
                 return
             }
 
-            var settings: AuthSettings!
-            Realm.execute { realm in
-                settings = auth?.settings ?? AuthSettings()
-                settings.map(response.result["result"])
+            Realm.executeOnMainThread({ realm in
+                let settings = AuthManager.isAuthenticated()?.settings ?? AuthSettings()
+                settings.map(response.result["result"], realm: realm)
                 realm.add(settings, update: true)
 
-                if let auth = auth {
+                if let auth = AuthManager.isAuthenticated() {
                     auth.settings = settings
                     realm.add(auth, update: true)
                 }
-            }
 
-            completion(settings)
+                let unmanagedSettings = AuthSettings(value: settings)
+                completion(unmanagedSettings)
+            })
         }
     }
 }

@@ -9,41 +9,34 @@
 import Foundation
 import SwiftyJSON
 import RealmSwift
+import Realm
 
 extension User: ModelHandler {
-    func add(_ values: JSON) {
-        map(values)
+    func add(_ values: JSON, realm: Realm) {
+        map(values, realm: realm)
+        realm.add(self, update: true)
 
-        Realm.execute({ (realm) in
-            realm.add(self, update: true)
-
-            guard let identifier = self.identifier else { return }
-            if let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first {
-                subscription.otherUserId = identifier
-                realm.add(subscription, update: true)
-            }
-        })
+        guard let identifier = self.identifier else { return }
+        if let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first {
+            subscription.otherUserId = identifier
+            realm.add(subscription, update: true)
+        }
     }
 
-    func update(_ values: JSON) {
-        map(values)
+    func update(_ values: JSON, realm: Realm) {
+        map(values, realm: realm)
+        realm.add(self, update: true)
 
-        Realm.execute({ (realm) in
-            realm.add(self, update: true)
-
-            guard let identifier = self.identifier else { return }
-            if let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first {
-                subscription.otherUserId = identifier
-                realm.add(subscription, update: true)
-            }
-        })
+        guard let identifier = self.identifier else { return }
+        if let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first {
+            subscription.otherUserId = identifier
+            realm.add(subscription, update: true)
+        }
     }
 
-    func remove(_ values: JSON) {
-        Realm.execute({ (realm) in
-            self.map(values)
-            self.status = .offline
-            realm.add(self, update: true)
-        })
+    func remove(_ values: JSON, realm: Realm) {
+        self.map(values, realm: realm)
+        self.status = .offline
+        realm.add(self, update: true)
     }
 }

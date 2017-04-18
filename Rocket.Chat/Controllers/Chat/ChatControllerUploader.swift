@@ -8,7 +8,6 @@
 
 import UIKit
 import Photos
-import NVActivityIndicatorView
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -113,16 +112,9 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
 
         if let file = file {
-            NVActivityIndicatorPresenter.sharedInstance.startAnimating(ActivityData(
-                message: activityMessage,
-                type: .ballPulse
-            ))
-
             UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { _ in
                 // We currently don't have progress being called.
             }, completion: { [unowned self] (response, error) in
-                NVActivityIndicatorPresenter.sharedInstance.stopAnimating()
-
                 if error {
                     var errorMessage = localized("error.socket.default_error_message")
 

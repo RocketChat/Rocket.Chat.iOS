@@ -9,24 +9,17 @@
 import RealmSwift
 import SlackTextViewController
 import URBMediaFocusViewController
-import NVActivityIndicatorView
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
 
-    var activityIndicator: NVActivityIndicatorView!
+    var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
         didSet {
             let width = activityIndicatorContainer.bounds.width
             let height = activityIndicatorContainer.bounds.height
             let frame = CGRect(x: 0, y: 0, width: width, height: height)
-            let activityIndicator = NVActivityIndicatorView(
-                frame: frame,
-                type: .ballPulse,
-                color: .RCDarkBlue(),
-                padding: 0
-            )
-
+            let activityIndicator = LoaderView(frame: frame)
             activityIndicatorContainer.addSubview(activityIndicator)
             self.activityIndicator = activityIndicator
         }
@@ -127,6 +120,7 @@ final class ChatViewController: SLKTextViewController {
         super.viewWillAppear(animated)
 
         view?.layoutSubviews()
+        collectionView?.layoutSubviews()
         scrollToBottom()
     }
 
@@ -331,6 +325,7 @@ final class ChatViewController: SLKTextViewController {
             }
         })
 
+        messagesToken?.stop()
         messagesToken = messages.addNotificationBlock { [weak self] _ in
             guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
             guard let messages = self?.subscription.fetchMessages() else { return }
@@ -338,7 +333,7 @@ final class ChatViewController: SLKTextViewController {
             self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
         }
 
-        MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] _ in
+        MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
             guard let messages = self?.subscription.fetchMessages() else { return }
 
             self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
@@ -357,8 +352,9 @@ final class ChatViewController: SLKTextViewController {
         }
 
         isRequestingHistory = true
-        MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] newMessages in
-            self?.appendMessages(messages: newMessages, updateScrollPosition: true, completion: nil)
+        MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
+            guard let messages = self?.subscription.fetchMessages() else { return }
+            self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
             self?.isRequestingHistory = false
         }
     }
@@ -420,9 +416,11 @@ final class ChatViewController: SLKTextViewController {
                     collectionView.contentOffset = offset
                 }
 
-                completion?()
-
                 CATransaction.commit()
+
+                DispatchQueue.main.async {
+                    completion?()
+                }
             })
         }
     }
@@ -582,9 +580,9 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         guard let auth = AuthManager.isAuthenticated() else { return }
         guard let subscription = self.subscription else { return }
 
-        Realm.execute { _ in
+        Realm.execute({ _ in
             subscription.auth = auth
-        }
+        })
 
         self.subscription = subscription
     }

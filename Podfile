@@ -17,7 +17,6 @@ def shared_pods
   pod 'SlackTextViewController'
   pod 'MobilePlayer'
   pod 'URBMediaFocusViewController'
-  pod 'NVActivityIndicatorView'
 
   # Text Processing
   pod 'TSMarkdownParser'

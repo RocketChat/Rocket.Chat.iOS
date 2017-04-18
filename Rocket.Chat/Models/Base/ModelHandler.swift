@@ -11,16 +11,16 @@ import SwiftyJSON
 import RealmSwift
 
 protocol ModelHandler {
-    func add(_ values: JSON)
-    func update(_ values: JSON)
-    func remove(_ values: JSON)
+    func add(_ values: JSON, realm: Realm)
+    func update(_ values: JSON, realm: Realm)
+    func remove(_ values: JSON, realm: Realm)
 }
 
 extension ModelHandler where Self: BaseModel {
     static func handle(msg: ResponseMessage, primaryKey: String, values: JSON) {
-        var object: Self!
+        Realm.execute({ (realm) in
+            var object: Self!
 
-        Realm.execute { (realm) in
             if let existentObject = realm.object(ofType: Self.self, forPrimaryKey: primaryKey as AnyObject) {
                 object = existentObject
             }
@@ -32,18 +32,18 @@ extension ModelHandler where Self: BaseModel {
 
             switch msg {
                 case .added:
-                    object.add(values)
+                    object.add(values, realm: realm)
                     break
                 case .changed:
-                    object.update(values)
+                    object.update(values, realm: realm)
                     break
                 case .removed:
-                    object.remove(values)
+                    object.remove(values, realm: realm)
                     break
                 default:
-                    object.update(values)
+                    object.update(values, realm: realm)
                     break
             }
-        }
+        })
     }
 }

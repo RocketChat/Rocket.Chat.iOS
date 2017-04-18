@@ -14,28 +14,25 @@ import Realm
 public typealias UpdateBlock<T> = (_ object: T?) -> Void
 
 protocol ModelMappeable {
-    func map(_ values: JSON)
+    func map(_ values: JSON, realm: Realm?)
 }
 
 extension ModelMappeable where Self: BaseModel {
-    @discardableResult static func getOrCreate(values: JSON, updates: UpdateBlock<Self>?) -> Self {
+    static func getOrCreate(realm: Realm, values: JSON, updates: UpdateBlock<Self>?) -> Self {
         var object: Self!
 
-        Realm.execute { (_) in
-            if let primaryKey = values["_id"].string {
-                if let newObject = try? Realm().object(ofType: Self.self, forPrimaryKey: primaryKey as AnyObject) {
-                    object = newObject
-                }
+        if let primaryKey = values["_id"].string {
+            if let newObject = realm.object(ofType: Self.self, forPrimaryKey: primaryKey as AnyObject) {
+                object = newObject
             }
-
-            if object == nil {
-                object = Self()
-            }
-
-            object.map(values)
-            updates?(object)
         }
 
+        if object == nil {
+            object = Self()
+        }
+
+        object.map(values, realm: realm)
+        updates?(object)
         return object
     }
 }
