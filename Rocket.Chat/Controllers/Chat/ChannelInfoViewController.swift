@@ -16,8 +16,10 @@ class ChannelInfoViewController: BaseViewController {
         }
     }
 
-    var subscription: Subscription! {
+    var subscription: Subscription? {
         didSet {
+            guard let subscription = self.subscription else { return }
+
             let channelInfoData = [
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: ""),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: ""),
@@ -67,7 +69,7 @@ class ChannelInfoViewController: BaseViewController {
 
     func updateButtonFavoriteImage(_ force: Bool = false, value: Bool = false) {
         guard let buttonFavorite = self.buttonFavorite else { return }
-        let favorite = force ? value : subscription.favorite
+        let favorite = force ? value : subscription?.favorite ?? false
         var image: UIImage?
 
         if favorite {
@@ -82,15 +84,17 @@ class ChannelInfoViewController: BaseViewController {
     // MARK: IBAction
 
     func buttonFavoriteDidPressed(_ sender: Any) {
-        SubscriptionManager.toggleFavorite(self.subscription) { [unowned self] (response) in
+        guard let subscription = self.subscription else { return }
+
+        SubscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in
             if response.isError() {
-                self.subscription.updateFavorite(!self.subscription.favorite)
+                subscription.updateFavorite(!subscription.favorite)
             }
 
             self.updateButtonFavoriteImage()
         }
 
-        self.subscription.updateFavorite(!subscription.favorite)
+        self.subscription?.updateFavorite(!subscription.favorite)
         updateButtonFavoriteImage()
     }
 
