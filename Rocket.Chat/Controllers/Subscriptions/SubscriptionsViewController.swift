@@ -345,11 +345,10 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let sell = cell as? SubscriptionCell else { return }
-        if let selectedSubscription = ChatViewController.sharedInstance()?.subscription {
-            if sell.subscription == selectedSubscription {
-                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
-            }
+        guard let subscriptionCell = cell as? SubscriptionCell else { return }
+        guard let selectedSubscription = ChatViewController.sharedInstance()?.subscription else { return }
+        if subscriptionCell.subscription == selectedSubscription {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
     }
 }
