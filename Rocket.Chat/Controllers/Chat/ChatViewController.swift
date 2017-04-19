@@ -582,7 +582,7 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         guard let auth = AuthManager.isAuthenticated() else { return }
         guard let subscription = self.subscription else { return }
 
-        Realm.execute({ _ in
+        Realm.executeOnMainThread({ _ in
             subscription.auth = auth
         })
 
