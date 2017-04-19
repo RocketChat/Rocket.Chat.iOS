@@ -168,7 +168,7 @@ struct SubscriptionManager {
             }
 
             var subscriptions = [Subscription]()
-            var detachedSubscriptions = [Subscription]()
+            var identifiers = [String]()
             let rooms = response.result["result"]["rooms"].array
             let users = response.result["result"]["users"].array
 
@@ -177,6 +177,10 @@ struct SubscriptionManager {
                     let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
                         object?.rid = object?.identifier ?? ""
                     })
+
+                    if let identifier = subscription.identifier {
+                        identifiers.append(identifier)
+                    }
 
                     subscriptions.append(subscription)
                 }
@@ -189,14 +193,25 @@ struct SubscriptionManager {
                     subscription.type = .directMessage
                     subscription.name = user.username ?? ""
                     subscriptions.append(subscription)
+
+                    if let identifier = subscription.identifier {
+                        identifiers.append(identifier)
+                    }
                 }
 
                 realm.add(subscriptions, update: true)
+            }, completion: {
+                var detachedSubscriptions = [Subscription]()
 
-                detachedSubscriptions = subscriptions.map({ Subscription(value: $0) })
-                DispatchQueue.main.async {
-                    completion(detachedSubscriptions)
-                }
+                Realm.executeOnMainThread({ (realm) in
+                    for identifier in identifiers {
+                        if let subscription = realm.object(ofType: Subscription.self, forPrimaryKey: identifier) {
+                            detachedSubscriptions.append(subscription)
+                        }
+                    }
+                })
+
+                completion(detachedSubscriptions)
             })
         }
     }
