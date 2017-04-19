@@ -330,6 +330,13 @@ extension SubscriptionsViewController: UITableViewDelegate {
         return view
     }
 
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let selected = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selected, animated: true)
+        }
+        return indexPath
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let subscription = self.groupSubscriptions?[indexPath.section][indexPath.row]
         let controller = ChatViewController.sharedInstance()
@@ -340,7 +347,9 @@ extension SubscriptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let sell = cell as? SubscriptionCell else { return }
         if let selectedSubscription = ChatViewController.sharedInstance()?.subscription {
-            sell.isSelected = sell.subscription == selectedSubscription
+            if sell.subscription == selectedSubscription {
+                tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+            }
         }
     }
 }
