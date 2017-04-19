@@ -168,6 +168,7 @@ struct SubscriptionManager {
             }
 
             var subscriptions = [Subscription]()
+            var detachedSubscriptions = [Subscription]()
             let rooms = response.result["result"]["rooms"].array
             let users = response.result["result"]["users"].array
 
@@ -192,8 +193,9 @@ struct SubscriptionManager {
 
                 realm.add(subscriptions, update: true)
 
+                detachedSubscriptions = subscriptions.map({ Subscription(value: $0) })
                 DispatchQueue.main.async {
-                    completion(subscriptions)
+                    completion(detachedSubscriptions)
                 }
             })
         }
