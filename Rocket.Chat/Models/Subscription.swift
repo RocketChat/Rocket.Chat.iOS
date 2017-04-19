@@ -65,28 +65,30 @@ extension Subscription {
                 guard !response.isError() else { return }
 
                 let result = response.result["result"]
-                Realm.execute({ realm in
-                    self?.update(result, realm: realm)
-
-                    DispatchQueue.main.async {
-                        guard let strongSelf = self else { return }
-                        completion(strongSelf)
+                Realm.executeOnMainThread({ realm in
+                    if let obj = self {
+                        obj.update(result, realm: realm)
+                        realm.add(obj, update: true)
                     }
                 })
+
+                guard let strongSelf = self else { return }
+                completion(strongSelf)
             })
         } else if type == .directMessage {
             SubscriptionManager.createDirectMessage(name, completion: { [weak self] (response) in
                 guard !response.isError() else { return }
 
                 let rid = response.result["result"]["rid"].string ?? ""
-                Realm.execute({ _ in
-                    self?.rid = rid
-
-                    DispatchQueue.main.async {
-                        guard let strongSelf = self else { return }
-                        completion(strongSelf)
+                Realm.executeOnMainThread({ realm in
+                    if let obj = self {
+                        obj.rid = rid
+                        realm.add(obj, update: true)
                     }
                 })
+
+                guard let strongSelf = self else { return }
+                completion(strongSelf)
             })
         }
     }
