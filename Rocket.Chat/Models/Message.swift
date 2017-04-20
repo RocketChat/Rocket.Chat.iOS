@@ -51,6 +51,8 @@ class Message: BaseModel {
 
     dynamic var role = ""
 
+    dynamic var temporary = false
+
     var mentions = List<Mention>()
     var attachments = List<Attachment>()
     var urls = List<MessageURL>()
