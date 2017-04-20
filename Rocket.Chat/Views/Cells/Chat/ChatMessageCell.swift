@@ -195,6 +195,10 @@ final class ChatMessageCell: UICollectionViewCell {
             text.setFontColor(MessageTextFontAttributes.defaultFontColor)
         }
 
+        if self.message.temporary {
+            text.setFontColor(MessageTextFontAttributes.systemFontColor)
+        }
+
         labelText.attributedText = text.transformMarkdown()
 
         insertGesturesIfNeeded()
