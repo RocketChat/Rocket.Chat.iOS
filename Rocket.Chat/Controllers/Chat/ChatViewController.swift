@@ -149,7 +149,9 @@ final class ChatViewController: SLKTextViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nav = segue.destination as? UINavigationController, segue.identifier == "Channel Info" {
             if let controller = nav.viewControllers.first as? ChannelInfoViewController {
-                controller.subscription = self.subscription
+                if let subscription = self.subscription {
+                    controller.subscription = subscription
+                }
             }
         }
     }
@@ -580,7 +582,7 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         guard let auth = AuthManager.isAuthenticated() else { return }
         guard let subscription = self.subscription else { return }
 
-        Realm.execute({ _ in
+        Realm.executeOnMainThread({ _ in
             subscription.auth = auth
         })
 

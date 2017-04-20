@@ -114,6 +114,10 @@ extension AuthManager {
             }
 
             Realm.executeOnMainThread({ (realm) in
+                // Delete all the Auth objects, since we don't
+                // support multiple-server authentication yet
+                realm.delete(realm.objects(Auth.self))
+
                 let result = response.result
 
                 let auth = Auth()
