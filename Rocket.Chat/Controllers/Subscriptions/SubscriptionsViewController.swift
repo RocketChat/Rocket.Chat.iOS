@@ -330,11 +330,26 @@ extension SubscriptionsViewController: UITableViewDelegate {
         return view
     }
 
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let selected = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selected, animated: true)
+        }
+        return indexPath
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let subscription = self.groupSubscriptions?[indexPath.section][indexPath.row]
         let controller = ChatViewController.sharedInstance()
         controller?.closeSidebarAfterSubscriptionUpdate = true
         controller?.subscription = subscription
+    }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let subscriptionCell = cell as? SubscriptionCell else { return }
+        guard let selectedSubscription = ChatViewController.sharedInstance()?.subscription else { return }
+        if subscriptionCell.subscription == selectedSubscription {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
     }
 }
 
