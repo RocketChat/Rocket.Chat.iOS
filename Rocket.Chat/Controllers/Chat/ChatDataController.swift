@@ -128,7 +128,20 @@ final class ChatDataController {
         return indexPaths
     }
 
-    func remove(_ items: [ChatData]) {
+    func remove(_ items: [Int]) {
+        data = data.enumerated().filter { !items.contains($0.offset) }.map { $0.element }
+    }
 
+    func update(_ message: Message) -> Int {
+        for (index, _) in data.enumerated() {
+            var obj = data[index]
+
+            if obj.message?.identifier == message.identifier {
+                obj.message = message
+                return obj.indexPath.row
+            }
+        }
+
+        return -1
     }
 }
