@@ -340,22 +340,51 @@ final class ChatViewController: SLKTextViewController {
         isRequestingHistory = true
 
         messages = subscription.fetchMessages()
-        appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
-            guard let messages = self.messages else { return }
-
-            if messages.count == 0 {
-                self.activityIndicator.startAnimating()
-            } else {
-                self.scrollToBottom()
-            }
-        })
-
         messagesToken?.stop()
         messagesToken = messages.addNotificationBlock { [weak self] changes in
-            guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
-            guard let messages = self?.subscription.fetchMessages() else { return }
+            switch changes {
+            case .initial(let messages):
+                self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
+                    guard let messages = self?.messages else { return }
 
-            self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
+                    if messages.count == 0 {
+                        self?.activityIndicator.startAnimating()
+                    } else {
+                        self?.scrollToBottom()
+                    }
+                })
+
+                break
+            case .update(_, let deletions, let insertions, let modifications):
+                guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
+                guard let messages = self?.subscription.fetchMessages() else { return }
+
+                if insertions.count > 0 {
+                    self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
+                }
+
+                DispatchQueue.main.async {
+                    self?.collectionView?.performBatchUpdates({
+                        self?.dataController.remove(deletions)
+
+                        var indexPathModifications = [Int]()
+                        for modified in modifications {
+                            if let index = self?.dataController.update(messages[modified]) {
+                                if index >= 0 {
+                                    indexPathModifications.append(index)
+                                }
+                            }
+                        }
+
+                        self?.collectionView?.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
+                        self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
+                    }, completion: nil)
+                }
+
+                break
+            case .error:
+                break
+            }
         }
 
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
