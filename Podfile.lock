@@ -39,11 +39,11 @@ PODS:
   - GTMSessionFetcher/Full (1.1.9):
     - GTMSessionFetcher/Core (= 1.1.9)
   - MobilePlayer (1.2.0)
-  - Realm (2.6.1):
-    - Realm/Headers (= 2.6.1)
-  - Realm/Headers (2.6.1)
-  - RealmSwift (2.6.1):
-    - Realm (= 2.6.1)
+  - Realm (2.6.2):
+    - Realm/Headers (= 2.6.2)
+  - Realm/Headers (2.6.2)
+  - RealmSwift (2.6.2):
+    - Realm (= 2.6.2)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -84,8 +84,8 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  Realm: 9abfd4f87519376daa5ae3a4603155de408bf8b3
-  RealmSwift: a54d3e8931cf7d3afa5a1fac9c8f88109d7f02b3
+  Realm: 29222766425b9f831228f81b63f0e38a97a4d700
+  RealmSwift: d161a80f96cb91ae88391a7d5a9cf08024a7bc8e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   semver: efe6bf4af25bffab18d442592771be392210b5ce
   SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca

@@ -1,5 +1,5 @@
 //
-//  ChatMessageTextViewModelTests.swift
+//  ChatMessageTextViewModelSpec.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Machado on 01/04/17.
@@ -9,7 +9,7 @@
 import XCTest
 @testable import Rocket_Chat
 
-class ChatMessageTextViewModelTests: XCTestCase {
+class ChatMessageTextViewModelSpec: XCTestCase {
 
     func testValidColor() {
         let attachment = Attachment()
