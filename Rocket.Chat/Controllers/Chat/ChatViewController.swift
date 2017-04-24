@@ -355,7 +355,7 @@ final class ChatViewController: SLKTextViewController {
                 })
 
                 break
-            case .update(_, let deletions, let insertions, let modifications):
+            case .update(_, _, let insertions, let modifications):
                 guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
                 guard let messages = self?.subscription.fetchMessages() else { return }
 
@@ -363,23 +363,18 @@ final class ChatViewController: SLKTextViewController {
                     self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
                 }
 
-                DispatchQueue.main.async {
-                    self?.collectionView?.performBatchUpdates({
-                        self?.dataController.remove(deletions)
-
-                        var indexPathModifications = [Int]()
-                        for modified in modifications {
-                            if let index = self?.dataController.update(messages[modified]) {
-                                if index >= 0 {
-                                    indexPathModifications.append(index)
-                                }
+                self?.collectionView?.performBatchUpdates({
+                    var indexPathModifications = [Int]()
+                    for modified in modifications {
+                        if let index = self?.dataController.update(messages[modified]) {
+                            if index >= 0 {
+                                indexPathModifications.append(index)
                             }
                         }
+                    }
 
-                        self?.collectionView?.deleteItems(at: deletions.map { IndexPath(row: $0, section: 0) })
-                        self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                    }, completion: nil)
-                }
+                    self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
+                }, completion: nil)
 
                 break
             case .error:
