@@ -253,11 +253,7 @@ final class ChatViewController: SLKTextViewController {
     // MARK: Message
 
     fileprivate func sendMessage() {
-        guard let messageText = textView.text else { return }
-
-        if messageText.characters.count == 0 {
-            return
-        }
+        guard let messageText = textView.text, messageText.characters.count > 0 else { return }
 
         rightButton.isEnabled = false
 

@@ -17,7 +17,7 @@ class SubscriptionSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             for obj in realm.objects(Auth.self) {
                 realm.delete(obj)
             }
@@ -45,7 +45,7 @@ class SubscriptionSpec: XCTestCase {
             object.createdAt = Date()
             object.lastSeen = Date()
 
-            realm.add(object)
+            realm.add(object, update: true)
 
             let results = realm.objects(Subscription.self)
             let first = results.first
@@ -76,7 +76,7 @@ class SubscriptionSpec: XCTestCase {
             subscription.map(object, realm: realm)
             subscription.auth = auth
 
-            realm.add(subscription)
+            realm.add(subscription, update: true)
 
             let results = realm.objects(Subscription.self)
             let first = results.first

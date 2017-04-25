@@ -50,7 +50,7 @@ extension MessageManagerSpec {
             message2.identifier = "msg2"
             message2.subscription = subscription2
 
-            realm.add([subscription1, subscription2, message1, message2])
+            realm.add([subscription1, subscription2, message1, message2], update: true)
 
             let messages1 = subscription1.fetchMessages()
             let messages2 = subscription2.fetchMessages()

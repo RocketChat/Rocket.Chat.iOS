@@ -12,16 +12,6 @@ import RealmSwift
 
 class ChatDataControllerSpec: XCTestCase {
 
-    override func setUp() {
-        super.setUp()
-
-        Realm.execute({ realm in
-            for obj in realm.objects(Message.self) {
-                realm.delete(obj)
-            }
-        })
-    }
-
     func testInitilization() {
         let controller = ChatDataController()
         XCTAssertEqual(controller.data.count, 0, "Controller has no data on initialization")
@@ -30,13 +20,9 @@ class ChatDataControllerSpec: XCTestCase {
     func testInsertObject() {
         let controller = ChatDataController()
 
-        var message: Message!
-        Realm.executeOnMainThread { (realm) in
-            message = Message()
-            message.identifier = "123"
-            message.text = "Foobar"
-            realm.add(message)
-        }
+        let message = Message()
+        message.identifier = "123"
+        message.text = "Foobar"
 
         XCTAssertNotNil(message, "Message can't be nil")
 
@@ -54,19 +40,13 @@ class ChatDataControllerSpec: XCTestCase {
     func testInsertMultipleObjects() {
         let controller = ChatDataController()
 
-        var message1: Message!
-        var message2: Message!
-        Realm.executeOnMainThread { (realm) in
-            message1 = Message()
-            message1.identifier = "test-multiple-1"
-            message1.text = "Foobar 1"
-            realm.add(message1)
+        let message1 = Message()
+        message1.identifier = "test-multiple-1"
+        message1.text = "Foobar 1"
 
-            message2 = Message()
-            message2.identifier = "test-multiple-2"
-            message2.text = "Foobar 2"
-            realm.add(message2)
-        }
+        let message2 = Message()
+        message2.identifier = "test-multiple-2"
+        message2.text = "Foobar 2"
 
         XCTAssertNotNil(message1, "Message1 can't be nil")
         XCTAssertNotNil(message2, "Message2 can't be nil")
@@ -89,19 +69,13 @@ class ChatDataControllerSpec: XCTestCase {
     func testInsertMultipleObjectsWithDifferentDates() {
         let controller = ChatDataController()
 
-        var message1: Message!
-        var message2: Message!
-        Realm.executeOnMainThread { (realm) in
-            message1 = Message()
-            message1.identifier = "test-multiple-diff-1"
-            message1.text = "Foobar 1"
-            realm.add(message1)
+        let message1 = Message()
+        message1.identifier = "test-multiple-diff-1"
+        message1.text = "Foobar 1"
 
-            message2 = Message()
-            message2.identifier = "test-multiple-diff-2"
-            message2.text = "Foobar 2"
-            realm.add(message2)
-        }
+        let message2 = Message()
+        message2.identifier = "test-multiple-diff-2"
+        message2.text = "Foobar 2"
 
         XCTAssertNotNil(message1, "Message1 can't be nil")
         XCTAssertNotNil(message2, "Message2 can't be nil")
@@ -124,30 +98,19 @@ class ChatDataControllerSpec: XCTestCase {
     func testUpdateObject() {
         let controller = ChatDataController()
 
-        var message: Message!
-        Realm.executeOnMainThread { (realm) in
-            message = Message()
-            message.identifier = "123"
-            message.text = "Foobar"
-            realm.add(message)
-        }
+        let message: Message!
+        message = Message()
+        message.identifier = "update-1"
+        message.text = "Foobar"
 
-        XCTAssertNotNil(message, "Message can't be nil")
+        guard var obj = ChatData(type: .message, timestamp: Date()) else { return XCTFail() }
+        obj.message = message
 
-        var obj = ChatData(type: .message, timestamp: Date())
-        obj?.message = message
-        XCTAssertNotNil(obj, "obj can't be nil")
+        let indexPaths = controller.insert([obj])
+        XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
+        XCTAssertEqual(indexPaths.count, 1, "indexPaths will have three results")
 
-        if let obj = obj {
-            let indexPaths = controller.insert([obj])
-            XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-            XCTAssertEqual(indexPaths.count, 1, "indexPaths will have one result")
-        }
-
-        Realm.executeOnMainThread { (realm) in
-            message.text = "Foobar, updated"
-            realm.add(message, update: true)
-        }
+        message.text = "Foobar, updated"
 
         let index = controller.update(message)
         XCTAssertEqual(index, 0, "indexPath is the message indexPath row")
