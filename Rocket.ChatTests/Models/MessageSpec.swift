@@ -17,7 +17,7 @@ class MessageSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             for obj in realm.objects(User.self) {
                 realm.delete(obj)
             }
@@ -54,7 +54,7 @@ class MessageSpec: XCTestCase {
         message.subscription = subscription
 
         Realm.execute({ realm in
-            realm.add(message)
+            realm.add(message, update: true)
 
             let results = realm.objects(Message.self)
             let first = results.first

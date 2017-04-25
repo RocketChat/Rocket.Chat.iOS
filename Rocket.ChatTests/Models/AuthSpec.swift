@@ -16,7 +16,7 @@ class AuthSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             for obj in realm.objects(Auth.self) {
                 realm.delete(obj)
             }

@@ -16,7 +16,7 @@ class UserSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             for obj in realm.objects(User.self) {
                 realm.delete(obj)
             }
@@ -38,7 +38,7 @@ class UserSpec: XCTestCase {
         object.emails.append(email)
 
         Realm.execute({ realm in
-            realm.add(object)
+            realm.add(object, update: true)
 
             let results = realm.objects(User.self)
             let first = results.first
