@@ -30,7 +30,7 @@ class MainChatViewController: SideMenuController {
         SideMenuController.preferences.drawing.centerPanelShadow = true
         SideMenuController.preferences.interaction.swipingEnabled = true
         SideMenuController.preferences.interaction.panningEnabled = true
-        SideMenuController.preferences.animating.statusBarBehaviour = .horizontalPan
+        SideMenuController.preferences.animating.statusBarBehaviour = .slideAnimation
         super.init(coder: aDecoder)
     }
 
