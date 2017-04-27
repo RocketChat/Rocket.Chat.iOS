@@ -54,7 +54,7 @@ class SubscriptionSpec: XCTestCase {
             let results = realm.objects(Subscription.self)
             let first = results.first
             XCTAssert(results.count == 1, "Subscription object was created with success")
-            XCTAssert(first?.identifier == "123", "Subscription object was created with success")
+            XCTAssert(first?.identifier == "subs-from-data", "Subscription object was created with success")
             XCTAssert(auth.subscriptions.first?.identifier == first?.identifier, "Auth relationship with Subscription is OK")
         })
     }
@@ -85,7 +85,7 @@ class SubscriptionSpec: XCTestCase {
             let results = realm.objects(Subscription.self)
             let first = results.first
             XCTAssert(results.count == 1, "Subscription object was created with success")
-            XCTAssert(first?.identifier == "123", "Subscription object was created with success")
+            XCTAssert(first?.identifier == "subs-from-json-1", "Subscription object was created with success")
             XCTAssert(auth.subscriptions.first?.identifier == first?.identifier, "Auth relationship with Subscription is OK")
         })
     }
