@@ -119,8 +119,6 @@ final class ChatViewController: SLKTextViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        setupSideMenuDelegateHandling()
-
         view?.layoutSubviews()
         collectionView?.layoutSubviews()
         scrollToBottom()
