@@ -48,7 +48,7 @@ class MessageSpec: XCTestCase {
         user.identifier = "123"
 
         let message = Message()
-        message.identifier = "123"
+        message.identifier = "message-object-1"
         message.text = "text"
         message.user = user
         message.subscription = subscription
@@ -59,14 +59,14 @@ class MessageSpec: XCTestCase {
             let results = realm.objects(Message.self)
             let first = results.first
             XCTAssert(results.count == 1, "Message object was created with success")
-            XCTAssert(first?.identifier == "123", "Message object was created with success")
+            XCTAssert(first?.identifier == "message-object-1", "Message object was created with success")
             XCTAssert(subscription.messages.first?.identifier == first?.identifier, "Message relationship with Subscription is OK")
         })
     }
 
     func testMessageObjectFromJSON() {
         let object = JSON([
-            "_id": "123",
+            "_id": "message-json-1",
             "rid": "123",
             "msg": "Foo Bar Baz",
             "ts": ["$date": 1234567891011],
@@ -82,7 +82,7 @@ class MessageSpec: XCTestCase {
             let results = realm.objects(Message.self)
             let first = results.first
             XCTAssert(results.count == 1, "Message object was created with success")
-            XCTAssert(first?.identifier == "123", "Message object was created with success")
+            XCTAssert(first?.identifier == "message-json-1", "Message object was created with success")
         })
     }
 
