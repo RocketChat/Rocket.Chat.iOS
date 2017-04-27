@@ -22,6 +22,10 @@ class SubscriptionSpec: XCTestCase {
                 realm.delete(obj)
             }
 
+            for obj in realm.objects(Message.self) {
+                realm.delete(obj)
+            }
+
             for obj in realm.objects(Subscription.self) {
                 realm.delete(obj)
             }
@@ -29,14 +33,14 @@ class SubscriptionSpec: XCTestCase {
     }
 
     func testSubscriptionObject() {
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             let auth = Auth()
             auth.serverURL = "http://foo.bar.baz"
 
             let object = Subscription()
             object.auth = auth
-            object.identifier = "123"
-            object.rid = "123"
+            object.identifier = "subs-from-data"
+            object.rid = "subs-from-data-rid"
             object.name = "Foo Bar Baz"
             object.unread = 10
             object.open = false
@@ -57,8 +61,8 @@ class SubscriptionSpec: XCTestCase {
 
     func testSubscriptionObjectFromJSON() {
         let object = JSON([
-            "_id": "123",
-            "rid": "123",
+            "_id": "subs-from-json-1",
+            "rid": "subs-from-json-1-rid",
             "name": "Foo Bar Baz",
             "unread": 0,
             "open": false,
@@ -68,7 +72,7 @@ class SubscriptionSpec: XCTestCase {
             "ls": ["$date": 1234567891011]
         ])
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             let auth = Auth()
             auth.serverURL = "http://foo.bar.baz"
 

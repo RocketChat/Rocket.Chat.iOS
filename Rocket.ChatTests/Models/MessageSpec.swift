@@ -53,7 +53,7 @@ class MessageSpec: XCTestCase {
         message.user = user
         message.subscription = subscription
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             realm.add(message, update: true)
 
             let results = realm.objects(Message.self)
@@ -74,7 +74,7 @@ class MessageSpec: XCTestCase {
             "u": ["_id": "123", "username": "foo"]
         ])
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             let message = Message()
             message.map(object, realm: realm)
             realm.add(message)
