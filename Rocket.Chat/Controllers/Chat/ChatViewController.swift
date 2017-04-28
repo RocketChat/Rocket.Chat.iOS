@@ -206,13 +206,10 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func scrollToBottom(_ animated: Bool = false) {
-        let totalItems = (collectionView?.numberOfItems(inSection: 0) ?? 0) - 1
-
-        if totalItems > 0 {
-            let indexPath = IndexPath(row: totalItems, section: 0)
-            collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: animated)
-        }
-
+        let boundsHeight = collectionView?.bounds.size.height ?? 0
+        let sizeHeight = collectionView?.contentSize.height ?? 0
+        let offset = CGPoint(x: 0, y: max(sizeHeight - boundsHeight, 0))
+        collectionView?.setContentOffset(offset, animated: animated)
         hideButtonScrollToBottom(animated: true)
     }
 
@@ -352,7 +349,6 @@ final class ChatViewController: SLKTextViewController {
 
                 break
             case .update(_, _, let insertions, let modifications):
-                guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
                 guard let messages = self?.subscription.fetchMessages() else { return }
 
                 if insertions.count > 0 {
@@ -383,7 +379,11 @@ final class ChatViewController: SLKTextViewController {
 
             self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
                 self?.activityIndicator.stopAnimating()
-                self?.scrollToBottom()
+
+                UIView.performWithoutAnimation {
+                    self?.scrollToBottom()
+                }
+
                 self?.isRequestingHistory = false
             })
         }
@@ -411,8 +411,6 @@ final class ChatViewController: SLKTextViewController {
         var offsetY = collectionView.contentOffset.y
         var bottomOffset = contentHeight - offsetY
 
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
         UIView.performWithoutAnimation {
             collectionView.performBatchUpdates({
                 // Insert data into collectionView without moving it
@@ -460,8 +458,6 @@ final class ChatViewController: SLKTextViewController {
                     let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
                     collectionView.contentOffset = offset
                 }
-
-                CATransaction.commit()
 
                 DispatchQueue.main.async {
                     completion?()

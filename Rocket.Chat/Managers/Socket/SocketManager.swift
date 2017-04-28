@@ -50,6 +50,11 @@ class SocketManager {
     }
 
     static func disconnect(_ completion: @escaping SocketCompletion) {
+        if !(sharedInstance.socket?.isConnected ?? false) {
+            completion(sharedInstance.socket, true)
+            return
+        }
+
         sharedInstance.internalConnectionHandler = completion
         sharedInstance.socket?.disconnect()
     }
