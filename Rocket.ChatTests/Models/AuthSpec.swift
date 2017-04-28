@@ -16,10 +16,12 @@ class AuthSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
+        var uniqueConfiguration = Realm.Configuration.defaultConfiguration
+        uniqueConfiguration.inMemoryIdentifier = NSUUID().uuidString
+        Realm.Configuration.defaultConfiguration = uniqueConfiguration
+
         Realm.executeOnMainThread({ realm in
-            for obj in realm.objects(Auth.self) {
-                realm.delete(obj)
-            }
+            realm.deleteAll()
         })
     }
 
