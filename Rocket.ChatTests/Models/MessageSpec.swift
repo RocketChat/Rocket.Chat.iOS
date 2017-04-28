@@ -17,22 +17,12 @@ class MessageSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Realm.executeOnMainThread({ realm in
-            for obj in realm.objects(User.self) {
-                realm.delete(obj)
-            }
+        var uniqueConfiguration = Realm.Configuration.defaultConfiguration
+        uniqueConfiguration.inMemoryIdentifier = NSUUID().uuidString
+        Realm.Configuration.defaultConfiguration = uniqueConfiguration
 
-            for obj in realm.objects(Auth.self) {
-                realm.delete(obj)
-            }
-
-            for obj in realm.objects(Message.self) {
-                realm.delete(obj)
-            }
-
-            for obj in realm.objects(Subscription.self) {
-                realm.delete(obj)
-            }
+        Realm.executeOnMainThread({ (realm) in
+            realm.deleteAll()
         })
     }
 
@@ -48,25 +38,25 @@ class MessageSpec: XCTestCase {
         user.identifier = "123"
 
         let message = Message()
-        message.identifier = "123"
+        message.identifier = "message-object-1"
         message.text = "text"
         message.user = user
         message.subscription = subscription
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             realm.add(message, update: true)
 
             let results = realm.objects(Message.self)
             let first = results.first
             XCTAssert(results.count == 1, "Message object was created with success")
-            XCTAssert(first?.identifier == "123", "Message object was created with success")
+            XCTAssert(first?.identifier == "message-object-1", "Message object was created with success")
             XCTAssert(subscription.messages.first?.identifier == first?.identifier, "Message relationship with Subscription is OK")
         })
     }
 
     func testMessageObjectFromJSON() {
         let object = JSON([
-            "_id": "123",
+            "_id": "message-json-1",
             "rid": "123",
             "msg": "Foo Bar Baz",
             "ts": ["$date": 1234567891011],
@@ -74,7 +64,7 @@ class MessageSpec: XCTestCase {
             "u": ["_id": "123", "username": "foo"]
         ])
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             let message = Message()
             message.map(object, realm: realm)
             realm.add(message)
@@ -82,7 +72,7 @@ class MessageSpec: XCTestCase {
             let results = realm.objects(Message.self)
             let first = results.first
             XCTAssert(results.count == 1, "Message object was created with success")
-            XCTAssert(first?.identifier == "123", "Message object was created with success")
+            XCTAssert(first?.identifier == "message-json-1", "Message object was created with success")
         })
     }
 
