@@ -43,7 +43,6 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         performSegue(withIdentifier: "containSideMenu", sender: nil)
     }
 
-
     // MARK: SideMenuControllerDelegate
 
     func sideMenuControllerWillHide(_ sideMenuController: SideMenuController) {
