@@ -3,7 +3,7 @@ PODS:
   - Crashlytics (3.8.4):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.11)
-  - FirebaseAnalytics (3.8.0):
+  - FirebaseAnalytics (3.9.0):
     - FirebaseCore (~> 3.6)
     - FirebaseInstanceID (~> 1.0)
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
@@ -48,7 +48,7 @@ PODS:
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
   - semver (1.0.0)
-  - SideMenuController (0.2.4)
+  - SideMenuController (0.2.4.1)
   - SlackTextViewController (1.9.5)
   - Starscream (2.0.4)
   - SwiftyJSON (3.1.4)
@@ -64,18 +64,27 @@ DEPENDENCIES:
   - RealmSwift
   - SDWebImage (~> 3.8)
   - semver
-  - SideMenuController
+  - SideMenuController (from `git@github.com:rafaelks/SideMenuController.git`)
   - SlackTextViewController
   - Starscream (~> 2.0.0)
   - SwiftyJSON
   - TSMarkdownParser
   - URBMediaFocusViewController
 
+EXTERNAL SOURCES:
+  SideMenuController:
+    :git: git@github.com:rafaelks/SideMenuController.git
+
+CHECKOUT OPTIONS:
+  SideMenuController:
+    :commit: a3a55e08f4752b5a4e169c6a8b2ceee0096649f5
+    :git: git@github.com:rafaelks/SideMenuController.git
+
 SPEC CHECKSUMS:
   1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
   Crashlytics: 79e236942ca1e7fc641df1feb9a275360a78ab6a
   Fabric: 5911403591946b8228ab1c51d98f1d7137e863c6
-  FirebaseAnalytics: 920e46455f27b0a52a80907a6d9b73ee4bd1c635
+  FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   Google: 813c467362eabc11385f5a5cc9ad0cb651a58f4e
@@ -88,13 +97,13 @@ SPEC CHECKSUMS:
   RealmSwift: d161a80f96cb91ae88391a7d5a9cf08024a7bc8e
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   semver: efe6bf4af25bffab18d442592771be392210b5ce
-  SideMenuController: b463d2b3aa58e2afe57f57a07938fa9a647894ca
+  SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
   Starscream: df5974ee928b157c8eda8af8de7c620276b7dfcc
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
   TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: c8d3bc80917c8a31986cd3bc4b9205e7bb39307f
+PODFILE CHECKSUM: c32cfdea3bd2f983fe06f089235b2dba6f2247a4
 
 COCOAPODS: 1.2.1
