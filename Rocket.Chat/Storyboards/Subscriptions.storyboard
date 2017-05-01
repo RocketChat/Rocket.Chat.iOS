@@ -169,6 +169,9 @@
                                         <state key="normal" title="Cancel">
                                             <color key="titleColor" red="0.60392156860000001" green="0.69411764710000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="buttonCancelSearchDidPressed:" destination="pre-Wt-UOv" eventType="touchUpInside" id="RPO-qI-lwq"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0067813492888250913" green="0.23202088336929722" blue="0.37039987959908049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -202,6 +205,8 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="activityViewSearching" destination="nkZ-uB-Z8e" id="2Bb-ph-mdv"/>
+                        <outlet property="buttonCancelSearch" destination="DHL-lw-BNd" id="Z2w-xL-sMe"/>
+                        <outlet property="buttonCancelSearchWidthConstraint" destination="cc8-l6-3Cc" id="mCA-dV-hng"/>
                         <outlet property="imageViewArrowDown" destination="QXa-y8-P03" id="aiy-GU-1xl"/>
                         <outlet property="labelUsername" destination="K3h-Vc-Kfo" id="6sl-Ij-9ar"/>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
