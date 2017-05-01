@@ -19,6 +19,9 @@
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "A URL que você inseriu está incorreta ou é inválida. Confira se ela está informada corretamente e tente novamente, por favor!";
 
+"alert.connection.invalid_version.title" = "Oops!";
+"alert.connection.invalid_version.message" = "O servidor que você está conectando não é suportado mais por esta versão do aplicativo: %@.\n\nEsta versão do aplicativo requer a versão %@ do servidor para funcionar corretamente.";
+
 // Socket Connection
 "connection.offline.banner.message" = "Você está offline, conecte novamente";
 
@@ -50,6 +53,8 @@
 "chat.message.actions.block" = "Bloquear mensagens do usuário";
 "chat.message.actions.report" = "Reportar mensagem";
 "chat.message.actions.copy" = "Copiar";
+"chat.message.actions.pin" = "Pinar mensagem";
+"chat.message.actions.unpin" = "Remover pino da mensagem";
 
 // Chat Message Report
 "chat.message.report.success.title" = "Mensagem reportada";
@@ -61,3 +66,29 @@
 "chat.upload.take_photo" = "Tirar uma foto";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
+
+// Message Types
+"chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";
+"chat.message.type.user_added_by" = "Usuário %@ adicionado por %@";
+"chat.message.type.user_removed_by" = "Usuário %@ removido por %@";
+"chat.message.type.user_left" = "Saiu do canal";
+"chat.message.type.user_joined" = "Entrou no canal";
+"chat.message.type.user_muted" = "Usuário %@ entrou no modo mudo por %@";
+"chat.message.type.user_unmuted" = "Usuário %@ saiu do modo mudo por %@";
+"chat.message.type.welcome" = "Bem-vindo %@";
+"chat.message.type.message_removed" = "Mensagem removida";
+"chat.message.type.subscription_role_added" = "%@ foi adicionado como %@ por %@";
+"chat.message.type.subscription_role_removed" = "%@ não é mais %@ por %@";
+"chat.message.type.room_archived" = "Esta sala foi arquivada por %@";
+"chat.message.type.room_unarchived" = "Esta sala foi desarquivada por %@";
+
+// Chat Information
+"chat.info.title" = "Informações";
+"chat.info.item.topic" = "Tópico";
+"chat.info.item.no_topic" = "Sem tópico";
+"chat.info.item.description" = "Descrição";
+"chat.info.item.no_description" = "Sem descrição";
+"chat.info.item.notifications" = "Notificações";
+"chat.info.item.members" = "Membros";
+"chat.info.item.pinned" = "Pinadas";
+"chat.info.item.starred" = "Favoritas";
