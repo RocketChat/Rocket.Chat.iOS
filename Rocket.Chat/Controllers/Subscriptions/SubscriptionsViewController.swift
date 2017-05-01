@@ -14,7 +14,7 @@ final class SubscriptionsViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
 
-    let defaultButtonCancelSearchWidth = CGFloat(55)
+    let defaultButtonCancelSearchWidth = CGFloat(65)
     @IBOutlet weak var buttonCancelSearch: UIButton! {
         didSet {
             buttonCancelSearch.setTitle(localized("global.cancel"), for: .normal)
