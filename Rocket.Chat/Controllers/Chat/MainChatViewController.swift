@@ -26,7 +26,14 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     required init?(coder aDecoder: NSCoder) {
         SideMenuController.preferences.drawing.menuButtonImage = UIImage(named: "Menu")
         SideMenuController.preferences.drawing.sidePanelPosition = .underCenterPanelLeft
-        SideMenuController.preferences.drawing.sidePanelWidth = 280
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            SideMenuController.preferences.drawing.sidePanelWidth = 320
+        } else {
+            SideMenuController.preferences.drawing.sidePanelWidth = UIScreen.main.bounds.width -
+                20
+        }
+
         SideMenuController.preferences.drawing.centerPanelShadow = true
         SideMenuController.preferences.interaction.swipingEnabled = true
         SideMenuController.preferences.interaction.panningEnabled = true
