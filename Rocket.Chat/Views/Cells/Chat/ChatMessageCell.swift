@@ -185,13 +185,13 @@ final class ChatMessageCell: UICollectionViewCell {
             labelUsername.text = message.user?.username
         }
 
-        let text = MessageTextCacheManager.shared.message(for: message)
+        if let text = MessageTextCacheManager.shared.message(for: message) {
+            if message.temporary {
+                text.setFontColor(MessageTextFontAttributes.systemFontColor)
+            }
 
-        if message.temporary {
-            text.setFontColor(MessageTextFontAttributes.systemFontColor)
+            labelText.attributedText = text
         }
-
-        labelText.attributedText = text
 
         insertGesturesIfNeeded()
         insertAttachments()
