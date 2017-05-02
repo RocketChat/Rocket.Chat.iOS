@@ -13,6 +13,19 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
+
+    let defaultButtonCancelSearchWidth = CGFloat(65)
+    @IBOutlet weak var buttonCancelSearch: UIButton! {
+        didSet {
+            buttonCancelSearch.setTitle(localized("global.cancel"), for: .normal)
+        }
+    }
+    @IBOutlet weak var buttonCancelSearchWidthConstraint: NSLayoutConstraint! {
+        didSet {
+            buttonCancelSearchWidthConstraint.constant = 0
+        }
+    }
+
     @IBOutlet weak var textFieldSearch: UITextField! {
         didSet {
             textFieldSearch.placeholder = localized("subscriptions.search")
@@ -92,6 +105,10 @@ final class SubscriptionsViewController: BaseViewController {
 }
 
 extension SubscriptionsViewController {
+
+    @IBAction func buttonCancelSearchDidPressed(_ sender: Any) {
+        textFieldSearch.resignFirstResponder()
+    }
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
@@ -330,15 +347,46 @@ extension SubscriptionsViewController: UITableViewDelegate {
         return view
     }
 
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let selected = tableView.indexPathForSelectedRow {
+            tableView.deselectRow(at: selected, animated: true)
+        }
+        return indexPath
+    }
+
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let subscription = self.groupSubscriptions?[indexPath.section][indexPath.row]
         let controller = ChatViewController.sharedInstance()
         controller?.closeSidebarAfterSubscriptionUpdate = true
         controller?.subscription = subscription
     }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        guard let subscriptionCell = cell as? SubscriptionCell else { return }
+        guard let selectedSubscription = ChatViewController.sharedInstance()?.subscription else { return }
+        if subscriptionCell.subscription == selectedSubscription {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+    }
 }
 
 extension SubscriptionsViewController: UITextFieldDelegate {
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        buttonCancelSearchWidthConstraint.constant = defaultButtonCancelSearchWidth
+
+        UIView.animate(withDuration: 0.1) {
+            self.view.layoutIfNeeded()
+        }
+    }
+
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        buttonCancelSearchWidthConstraint.constant = 0
+
+        UIView.animate(withDuration: 0.1) {
+            self.view.layoutIfNeeded()
+        }
+    }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""

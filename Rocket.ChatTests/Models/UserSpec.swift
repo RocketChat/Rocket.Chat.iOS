@@ -16,14 +16,12 @@ class UserSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Realm.execute({ realm in
-            for obj in realm.objects(User.self) {
-                realm.delete(obj)
-            }
+        var uniqueConfiguration = Realm.Configuration.defaultConfiguration
+        uniqueConfiguration.inMemoryIdentifier = NSUUID().uuidString
+        Realm.Configuration.defaultConfiguration = uniqueConfiguration
 
-            for obj in realm.objects(Email.self) {
-                realm.delete(obj)
-            }
+        Realm.executeOnMainThread({ (realm) in
+            realm.deleteAll()
         })
     }
 
@@ -38,7 +36,7 @@ class UserSpec: XCTestCase {
         object.emails.append(email)
 
         Realm.execute({ realm in
-            realm.add(object)
+            realm.add(object, update: true)
 
             let results = realm.objects(User.self)
             let first = results.first
