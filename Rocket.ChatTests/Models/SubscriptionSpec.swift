@@ -17,26 +17,24 @@ class SubscriptionSpec: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        Realm.execute({ realm in
-            for obj in realm.objects(Auth.self) {
-                realm.delete(obj)
-            }
+        var uniqueConfiguration = Realm.Configuration.defaultConfiguration
+        uniqueConfiguration.inMemoryIdentifier = NSUUID().uuidString
+        Realm.Configuration.defaultConfiguration = uniqueConfiguration
 
-            for obj in realm.objects(Subscription.self) {
-                realm.delete(obj)
-            }
+        Realm.executeOnMainThread({ (realm) in
+            realm.deleteAll()
         })
     }
 
     func testSubscriptionObject() {
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             let auth = Auth()
             auth.serverURL = "http://foo.bar.baz"
 
             let object = Subscription()
             object.auth = auth
-            object.identifier = "123"
-            object.rid = "123"
+            object.identifier = "subs-from-data"
+            object.rid = "subs-from-data-rid"
             object.name = "Foo Bar Baz"
             object.unread = 10
             object.open = false
@@ -45,20 +43,20 @@ class SubscriptionSpec: XCTestCase {
             object.createdAt = Date()
             object.lastSeen = Date()
 
-            realm.add(object)
+            realm.add(object, update: true)
 
             let results = realm.objects(Subscription.self)
             let first = results.first
             XCTAssert(results.count == 1, "Subscription object was created with success")
-            XCTAssert(first?.identifier == "123", "Subscription object was created with success")
+            XCTAssert(first?.identifier == "subs-from-data", "Subscription object was created with success")
             XCTAssert(auth.subscriptions.first?.identifier == first?.identifier, "Auth relationship with Subscription is OK")
         })
     }
 
     func testSubscriptionObjectFromJSON() {
         let object = JSON([
-            "_id": "123",
-            "rid": "123",
+            "_id": "subs-from-json-1",
+            "rid": "subs-from-json-1-rid",
             "name": "Foo Bar Baz",
             "unread": 0,
             "open": false,
@@ -68,7 +66,7 @@ class SubscriptionSpec: XCTestCase {
             "ls": ["$date": 1234567891011]
         ])
 
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             let auth = Auth()
             auth.serverURL = "http://foo.bar.baz"
 
@@ -76,12 +74,12 @@ class SubscriptionSpec: XCTestCase {
             subscription.map(object, realm: realm)
             subscription.auth = auth
 
-            realm.add(subscription)
+            realm.add(subscription, update: true)
 
             let results = realm.objects(Subscription.self)
             let first = results.first
             XCTAssert(results.count == 1, "Subscription object was created with success")
-            XCTAssert(first?.identifier == "123", "Subscription object was created with success")
+            XCTAssert(first?.identifier == "subs-from-json-1", "Subscription object was created with success")
             XCTAssert(auth.subscriptions.first?.identifier == first?.identifier, "Auth relationship with Subscription is OK")
         })
     }

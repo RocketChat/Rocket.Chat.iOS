@@ -272,14 +272,14 @@ struct SubscriptionManager {
         }
     }
 
-    static func sendTextMessage(_ message: String, subscription: Subscription, completion: @escaping MessageCompletion) {
+    static func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
             "method": "sendMessage",
             "params": [[
-                "_id": String.random(18),
-                "rid": subscription.rid,
-                "msg": message
+                "_id": message.identifier ?? "",
+                "rid": message.subscription.rid,
+                "msg": message.text
             ]]
         ] as [String : Any]
 

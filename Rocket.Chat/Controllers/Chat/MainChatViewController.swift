@@ -9,7 +9,7 @@
 import UIKit
 import SideMenuController
 
-class MainChatViewController: SideMenuController {
+class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
     class func shared() -> MainChatViewController? {
         return UIApplication.shared.windows.first?.rootViewController as? MainChatViewController
@@ -26,19 +26,50 @@ class MainChatViewController: SideMenuController {
     required init?(coder aDecoder: NSCoder) {
         SideMenuController.preferences.drawing.menuButtonImage = UIImage(named: "Menu")
         SideMenuController.preferences.drawing.sidePanelPosition = .underCenterPanelLeft
-        SideMenuController.preferences.drawing.sidePanelWidth = 280
+
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            SideMenuController.preferences.drawing.sidePanelWidth = 320
+        } else {
+            SideMenuController.preferences.drawing.sidePanelWidth = UIScreen.main.bounds.width -
+                20
+        }
+
         SideMenuController.preferences.drawing.centerPanelShadow = true
         SideMenuController.preferences.interaction.swipingEnabled = true
         SideMenuController.preferences.interaction.panningEnabled = true
-        SideMenuController.preferences.animating.statusBarBehaviour = .horizontalPan
+        SideMenuController.preferences.animating.statusBarBehaviour = .slideAnimation
         super.init(coder: aDecoder)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.delegate = self
+
         performSegue(withIdentifier: "showCenterController", sender: nil)
         performSegue(withIdentifier: "containSideMenu", sender: nil)
+    }
+
+    // MARK: SideMenuControllerDelegate
+
+    func sideMenuControllerWillHide(_ sideMenuController: SideMenuController) {
+        ChatViewController.sharedInstance()?.textView.resignFirstResponder()
+        SubscriptionsViewController.sharedInstance()?.textFieldSearch.resignFirstResponder()
+    }
+
+    func sideMenuControllerDidHide(_ sideMenuController: SideMenuController) {
+        ChatViewController.sharedInstance()?.textView.resignFirstResponder()
+        SubscriptionsViewController.sharedInstance()?.textFieldSearch.resignFirstResponder()
+    }
+
+    func sideMenuControllerDidReveal(_ sideMenuController: SideMenuController) {
+        ChatViewController.sharedInstance()?.textView.resignFirstResponder()
+        SubscriptionsViewController.sharedInstance()?.textFieldSearch.resignFirstResponder()
+    }
+
+    func sideMenuControllerWillReveal(_ sideMenuController: SideMenuController) {
+        ChatViewController.sharedInstance()?.textView.resignFirstResponder()
+        SubscriptionsViewController.sharedInstance()?.textFieldSearch.resignFirstResponder()
     }
 
 }
