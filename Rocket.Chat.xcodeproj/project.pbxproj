@@ -35,6 +35,7 @@
 		415029B91E72D541009F596C /* ChannelInfoDescriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415029B81E72D541009F596C /* ChannelInfoDescriptionCell.swift */; };
 		415029BB1E72D553009F596C /* ChannelInfoUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415029BA1E72D553009F596C /* ChannelInfoUserCell.swift */; };
 		415029BD1E72E0FD009F596C /* ChannelInfoCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415029BC1E72E0FD009F596C /* ChannelInfoCellProtocol.swift */; };
+		415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */; };
 		4151807B1EAE249F0000A039 /* ChatDataControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415180791EAE249F0000A039 /* ChatDataControllerSpec.swift */; };
 		4151807C1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */; };
 		4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */; };
@@ -198,6 +199,7 @@
 		415029B81E72D541009F596C /* ChannelInfoDescriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelInfoDescriptionCell.swift; path = Views/Cells/Chat/Info/ChannelInfoDescriptionCell.swift; sourceTree = "<group>"; };
 		415029BA1E72D553009F596C /* ChannelInfoUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelInfoUserCell.swift; path = Views/Cells/Chat/Info/ChannelInfoUserCell.swift; sourceTree = "<group>"; };
 		415029BC1E72E0FD009F596C /* ChannelInfoCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelInfoCellProtocol.swift; path = Views/Cells/Chat/Info/ChannelInfoCellProtocol.swift; sourceTree = "<group>"; };
+		415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTextCacheManager.swift; path = Managers/MessageTextCacheManager.swift; sourceTree = "<group>"; };
 		415180791EAE249F0000A039 /* ChatDataControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatDataControllerSpec.swift; path = Views/Chat/ChatDataControllerSpec.swift; sourceTree = "<group>"; };
 		4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageTextViewModelSpec.swift; path = Views/Chat/ChatMessageTextViewModelSpec.swift; sourceTree = "<group>"; };
 		4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserModelHandler.swift; path = Models/Handler/UserModelHandler.swift; sourceTree = "<group>"; };
@@ -558,6 +560,7 @@
 				41552F641D30307D0081438D /* Model */,
 				4174CB1B1D2DB2080086DAC8 /* LogManager.swift */,
 				597ECBA31E3708B10041C5C5 /* PushManager.swift */,
+				415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1271,6 +1274,7 @@
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
+				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
 				411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */,
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
