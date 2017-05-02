@@ -13,7 +13,7 @@ def shared_pods
   pod 'semver'
 
   # UI
-  pod 'SideMenuController'
+  pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
   pod 'SlackTextViewController'
   pod 'MobilePlayer'
   pod 'URBMediaFocusViewController'
@@ -46,7 +46,7 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
-      config.build_settings['SWIFT_VERSION'] = '3.0'
+      config.build_settings['SWIFT_VERSION'] = '3.1'
     end
   end
 end

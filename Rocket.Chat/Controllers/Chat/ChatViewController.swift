@@ -206,13 +206,10 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func scrollToBottom(_ animated: Bool = false) {
-        let totalItems = (collectionView?.numberOfItems(inSection: 0) ?? 0) - 1
-
-        if totalItems > 0 {
-            let indexPath = IndexPath(row: totalItems, section: 0)
-            collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: animated)
-        }
-
+        let boundsHeight = collectionView?.bounds.size.height ?? 0
+        let sizeHeight = collectionView?.contentSize.height ?? 0
+        let offset = CGPoint(x: 0, y: max(sizeHeight - boundsHeight, 0))
+        collectionView?.setContentOffset(offset, animated: animated)
         hideButtonScrollToBottom(animated: true)
     }
 
@@ -253,17 +250,36 @@ final class ChatViewController: SLKTextViewController {
     // MARK: Message
 
     fileprivate func sendMessage() {
-        guard let message = textView.text else { return }
-
-        if message.characters.count == 0 {
-            return
-        }
+        guard let messageText = textView.text, messageText.characters.count > 0 else { return }
 
         rightButton.isEnabled = false
 
-        SubscriptionManager.sendTextMessage(message, subscription: subscription) { [weak self] _ in
-            self?.textView.text = ""
-            self?.rightButton.isEnabled = true
+        var message: Message?
+        Realm.executeOnMainThread({ (realm) in
+            message = Message()
+            message?.internalType = ""
+            message?.createdAt = Date()
+            message?.text = messageText
+            message?.subscription = self.subscription
+            message?.identifier = String.random(18)
+            message?.temporary = true
+            message?.user = AuthManager.currentUser()
+
+            if let message = message {
+                realm.add(message)
+            }
+        })
+
+        if let message = message {
+            textView.text = ""
+            rightButton.isEnabled = true
+
+            SubscriptionManager.sendTextMessage(message) { _ in
+                Realm.executeOnMainThread({ (realm) in
+                    message.temporary = false
+                    realm.add(message, update: true)
+                })
+            }
         }
     }
 
@@ -317,22 +333,45 @@ final class ChatViewController: SLKTextViewController {
         isRequestingHistory = true
 
         messages = subscription.fetchMessages()
-        appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
-            guard let messages = self.messages else { return }
-
-            if messages.count == 0 {
-                self.activityIndicator.startAnimating()
-            } else {
-                self.scrollToBottom()
-            }
-        })
-
         messagesToken?.stop()
-        messagesToken = messages.addNotificationBlock { [weak self] _ in
-            guard let isRequestingHistory = self?.isRequestingHistory, !isRequestingHistory else { return }
-            guard let messages = self?.subscription.fetchMessages() else { return }
+        messagesToken = messages.addNotificationBlock { [weak self] changes in
+            switch changes {
+            case .initial(let messages):
+                self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
+                    guard let messages = self?.messages else { return }
 
-            self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
+                    if messages.count == 0 {
+                        self?.activityIndicator.startAnimating()
+                    } else {
+                        self?.scrollToBottom()
+                    }
+                })
+
+                break
+            case .update(_, _, let insertions, let modifications):
+                guard let messages = self?.subscription.fetchMessages() else { return }
+
+                if insertions.count > 0 {
+                    self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
+                }
+
+                self?.collectionView?.performBatchUpdates({
+                    var indexPathModifications = [Int]()
+                    for modified in modifications {
+                        if let index = self?.dataController.update(messages[modified]) {
+                            if index >= 0 {
+                                indexPathModifications.append(index)
+                            }
+                        }
+                    }
+
+                    self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
+                }, completion: nil)
+
+                break
+            case .error:
+                break
+            }
         }
 
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
@@ -340,7 +379,11 @@ final class ChatViewController: SLKTextViewController {
 
             self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
                 self?.activityIndicator.stopAnimating()
-                self?.scrollToBottom()
+
+                UIView.performWithoutAnimation {
+                    self?.scrollToBottom()
+                }
+
                 self?.isRequestingHistory = false
             })
         }
@@ -368,8 +411,6 @@ final class ChatViewController: SLKTextViewController {
         var offsetY = collectionView.contentOffset.y
         var bottomOffset = contentHeight - offsetY
 
-        CATransaction.begin()
-        CATransaction.setDisableActions(true)
         UIView.performWithoutAnimation {
             collectionView.performBatchUpdates({
                 // Insert data into collectionView without moving it
@@ -417,8 +458,6 @@ final class ChatViewController: SLKTextViewController {
                     let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
                     collectionView.contentOffset = offset
                 }
-
-                CATransaction.commit()
 
                 DispatchQueue.main.async {
                     completion?()

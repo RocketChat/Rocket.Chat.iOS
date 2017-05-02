@@ -35,7 +35,7 @@ enum MessageType: String {
 
 class Message: BaseModel {
     dynamic var subscription: Subscription!
-    dynamic var internalType: String!
+    dynamic var internalType: String = ""
     dynamic var rid = ""
     dynamic var createdAt: Date?
     dynamic var updatedAt: Date?
@@ -50,6 +50,8 @@ class Message: BaseModel {
     dynamic var avatar = ""
 
     dynamic var role = ""
+
+    dynamic var temporary = false
 
     var mentions = List<Mention>()
     var attachments = List<Attachment>()
