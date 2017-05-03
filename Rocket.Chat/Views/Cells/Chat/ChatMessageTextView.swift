@@ -15,6 +15,7 @@ protocol ChatMessageTextViewProtocol: class {
 final class ChatMessageTextView: UIView {
 
     static let defaultHeight = CGFloat(50)
+    static let defaultTitleHeight = CGFloat(17)
 
     @IBOutlet weak var imageViewThumbWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewThumb: UIImageView! {
@@ -24,6 +25,7 @@ final class ChatMessageTextView: UIView {
     }
 
     @IBOutlet weak var viewLeftBorder: UIView!
+    @IBOutlet weak var labelTitleHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var labelDescription: UILabel!
 
@@ -56,7 +58,13 @@ final class ChatMessageTextView: UIView {
 
     private func updateLabels() {
         labelTitle.text = viewModel?.title
-        labelDescription.text = viewModel?.text
+        labelDescription.attributedText = NSMutableAttributedString(string: viewModel?.text ?? "").transformMarkdown()
+
+        if viewModel?.title.characters.count == 0 {
+            labelTitleHeightConstraint.constant = 0
+        } else {
+            labelTitleHeightConstraint.constant = ChatMessageTextView.defaultTitleHeight
+        }
     }
 
     private func updateImageView() {
