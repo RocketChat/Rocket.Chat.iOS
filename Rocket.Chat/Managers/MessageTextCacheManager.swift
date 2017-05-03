@@ -28,7 +28,7 @@ class MessageTextCacheManager {
 
     @discardableResult func update(for message: Message) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
-        let resultText: NSAttributedString
+        let resultText: NSMutableAttributedString
         let key = cachedKey(for: identifier)
 
         let text = NSMutableAttributedString(string: message.textNormalized())
@@ -41,9 +41,10 @@ class MessageTextCacheManager {
             text.setFontColor(MessageTextFontAttributes.defaultFontColor)
         }
 
-        resultText = text.transformMarkdown()
+        resultText = NSMutableAttributedString(attributedString: text.transformMarkdown())
+        resultText.trimCharacters(in: .whitespaces)
         cache.setObject(resultText, forKey: key)
-        return NSMutableAttributedString(attributedString: resultText)
+        return resultText
     }
 
     func message(for message: Message) -> NSMutableAttributedString? {
