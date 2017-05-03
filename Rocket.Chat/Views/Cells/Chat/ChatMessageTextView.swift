@@ -85,7 +85,7 @@ final class ChatMessageTextView: UIView {
             text ?? "",
             font: UIFont.systemFont(ofSize: 14),
             width: fullWidth - 60
-        ) + 20)
+        ) + 10)
     }
 
     // MARK: Actions
