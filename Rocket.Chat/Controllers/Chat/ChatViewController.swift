@@ -499,13 +499,23 @@ final class ChatViewController: SLKTextViewController {
     private func observeAlertSubscriptions() {
         guard let auth = AuthManager.isAuthenticated() else { return }
         let subscriptions = auth.subscriptions
+
         alertSubscriptionToken = subscriptions.addNotificationBlock { [weak self] _ in
+            guard let strongSelf = self else { return }
             guard let auth = AuthManager.isAuthenticated() else { return }
+            let menuButtonFilter: (UIBarButtonItem) -> Bool = { barButtonItem in
+                if let button = barButtonItem.customView as? UIButton,
+                    let sideMenuController = strongSelf.sideMenuController {
+                    return button.allTargets.contains(sideMenuController)
+                }
+                return false
+            }
+            guard let leftMenuButton = strongSelf.navigationItem.leftBarButtonItems?.filter(menuButtonFilter).first else { return }
             let alertSubscriptionCount = auth.subscriptions.filter("alert == YES").count
             if alertSubscriptionCount > 0 {
-                self?.navigationItem.leftBarButtonItems?.forEach { $0.badge = "" }
+                leftMenuButton.badge = ""
             } else {
-                self?.navigationItem.leftBarButtonItems?.forEach { $0.badge = nil }
+                leftMenuButton.badge = nil
             }
         }
     }
