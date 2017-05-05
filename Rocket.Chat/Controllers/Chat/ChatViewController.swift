@@ -123,9 +123,9 @@ final class ChatViewController: SLKTextViewController {
         super.viewWillAppear(animated)
 
         self.navigationItem.leftBarButtonItems?.forEach { barButton in
-            barButton.badgeMinSize = CGSize(width: 10, height: 10)
-            barButton.badgeEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 5)
-            barButton.badgePadding = CGSize.zero
+            barButton.badgeLabel.minSize = CGSize(width: 10, height: 10)
+            barButton.badgeLabel.edgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 5)
+            barButton.badgeLabel.padding = CGSize.zero
             barButton.badgeLabel.font = UIFont.systemFont(ofSize: 10)
         }
     }
@@ -513,9 +513,9 @@ final class ChatViewController: SLKTextViewController {
             guard let leftMenuButton = strongSelf.navigationItem.leftBarButtonItems?.filter(menuButtonFilter).first else { return }
             let alertSubscriptionCount = auth.subscriptions.filter("alert == YES").count
             if alertSubscriptionCount > 0 {
-                leftMenuButton.badge = ""
+                leftMenuButton.badgeLabel.text = ""
             } else {
-                leftMenuButton.badge = nil
+                leftMenuButton.badgeLabel.text = nil
             }
         }
     }
