@@ -116,14 +116,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        view?.layoutSubviews()
-        collectionView?.layoutSubviews()
-        scrollToBottom()
-    }
-
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
