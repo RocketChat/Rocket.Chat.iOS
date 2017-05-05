@@ -49,6 +49,7 @@ final class ChatViewController: SLKTextViewController {
             markAsRead()
         }
     }
+    var alertSubscriptionToken: NotificationToken?
 
     // MARK: View Life Cycle
 
@@ -108,11 +109,24 @@ final class ChatViewController: SLKTextViewController {
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
         view.bringSubview(toFront: textInputbar)
+
+        observeAlertSubscriptions()
     }
 
     internal func reconnect() {
         if !SocketManager.isConnected() {
             SocketManager.reconnect()
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.navigationItem.leftBarButtonItems?.forEach { barButton in
+            barButton.badgeMinSize = CGSize(width: 10, height: 10)
+            barButton.badgeEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 5)
+            barButton.badgePadding = CGSize.zero
+            barButton.badgeLabel.font = UIFont.systemFont(ofSize: 10)
         }
     }
 
@@ -480,6 +494,20 @@ final class ChatViewController: SLKTextViewController {
         }
 
         return true
+    }
+
+    private func observeAlertSubscriptions() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        let subscriptions = auth.subscriptions
+        alertSubscriptionToken = subscriptions.addNotificationBlock { [weak self] _ in
+            guard let auth = AuthManager.isAuthenticated() else { return }
+            let alertSubscriptionCount = auth.subscriptions.filter("alert == YES").count
+            if alertSubscriptionCount > 0 {
+                self?.navigationItem.leftBarButtonItems?.forEach { $0.badge = "" }
+            } else {
+                self?.navigationItem.leftBarButtonItems?.forEach { $0.badge = nil }
+            }
+        }
     }
 
     // MARK: IBAction
