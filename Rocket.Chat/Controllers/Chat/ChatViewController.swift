@@ -50,6 +50,7 @@ final class ChatViewController: SLKTextViewController {
         }
     }
     var alertSubscriptionToken: NotificationToken?
+    let menuBadge = BadgeView(withType: .dot)
 
     // MARK: View Life Cycle
 
@@ -122,12 +123,16 @@ final class ChatViewController: SLKTextViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        self.navigationItem.leftBarButtonItems?.forEach { barButton in
-            barButton.badgeLabel.minSize = CGSize(width: 10, height: 10)
-            barButton.badgeLabel.edgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 5)
-            barButton.badgeLabel.padding = CGSize.zero
-            barButton.badgeLabel.font = UIFont.systemFont(ofSize: 10)
+        let menuItemFilter: (UIBarButtonItem) -> Bool = { barButtonItem in
+            if let button = barButtonItem.customView as? UIButton,
+                let sideMenuController = self.sideMenuController {
+                return button.allTargets.contains(sideMenuController)
+            }
+            return false
         }
+        guard let leftMenuButtonItem = self.navigationItem.leftBarButtonItems?.filter(menuItemFilter).first else { return }
+
+        leftMenuButtonItem.addBadge(self.menuBadge)
     }
 
     override func viewWillLayoutSubviews() {
@@ -503,19 +508,11 @@ final class ChatViewController: SLKTextViewController {
         alertSubscriptionToken = subscriptions.addNotificationBlock { [weak self] _ in
             guard let strongSelf = self else { return }
             guard let auth = AuthManager.isAuthenticated() else { return }
-            let menuButtonFilter: (UIBarButtonItem) -> Bool = { barButtonItem in
-                if let button = barButtonItem.customView as? UIButton,
-                    let sideMenuController = strongSelf.sideMenuController {
-                    return button.allTargets.contains(sideMenuController)
-                }
-                return false
-            }
-            guard let leftMenuButton = strongSelf.navigationItem.leftBarButtonItems?.filter(menuButtonFilter).first else { return }
             let alertSubscriptionCount = auth.subscriptions.filter("alert == YES").count
             if alertSubscriptionCount > 0 {
-                leftMenuButton.badgeLabel.text = ""
+                strongSelf.menuBadge.isHidden = false
             } else {
-                leftMenuButton.badgeLabel.text = nil
+                strongSelf.menuBadge.isHidden = true
             }
         }
     }

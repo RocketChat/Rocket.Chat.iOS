@@ -7,27 +7,12 @@
 //
 
 import Foundation
-import ObjectiveC
 
 extension UIBarButtonItem {
 
-    struct BadgeExtension {
-        static var badgeLabel = "badgeLabel"
-    }
-
-    var badgeLabel: BadgeLabel {
-        get {
-            guard let label = objc_getAssociatedObject(self, &BadgeExtension.badgeLabel) as? BadgeLabel else {
-                let defaultLabel = BadgeLabel(withTarget: badgeSuperView)
-                self.badgeLabel = defaultLabel
-                badgeSuperView?.addSubview(defaultLabel)
-                return defaultLabel
-            }
-            return label
-        }
-        set {
-            objc_setAssociatedObject(self, &BadgeExtension.badgeLabel, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
-        }
+    func addBadge(_ badge: BadgeView) {
+        badgeSuperView?.addSubview(badge)
+        badge.target = badgeSuperView
     }
 
     private var badgeSuperView: UIView? {

@@ -8,16 +8,31 @@
 
 import UIKit
 
-class BadgeLabel: UILabel {
+class BadgeView: UILabel {
 
-    init(withTarget target: UIView?) {
-        self.target = target
+    enum BadgeType {
+        case dot
+        case label
+    }
+
+    init(withType type: BadgeType) {
         super.init(frame: CGRect.zero)
 
         textAlignment = .center
         textColor = UIColor.white
         backgroundColor = UIColor.red
         clipsToBounds = true
+
+        switch type {
+        case .dot:
+            minSize = CGSize(width: 10, height: 10)
+            edgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 5)
+            padding = CGSize.zero
+            font = UIFont.systemFont(ofSize: 10)
+            text = ""
+        case .label:
+            break
+        }
 
         layoutBadge()
     }
