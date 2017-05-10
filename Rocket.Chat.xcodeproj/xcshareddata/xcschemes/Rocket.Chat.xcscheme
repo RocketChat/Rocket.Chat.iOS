@@ -49,6 +49,16 @@
                ReferencedContainer = "container:Rocket.Chat.xcodeproj">
             </BuildableReference>
          </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "A0918BD11EC0A15D0015D5D5"
+               BuildableName = "Rocket.Chat.SDKTests.xctest"
+               BlueprintName = "Rocket.Chat.SDKTests"
+               ReferencedContainer = "container:Rocket.Chat.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
