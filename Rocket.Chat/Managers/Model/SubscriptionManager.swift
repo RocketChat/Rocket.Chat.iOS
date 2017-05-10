@@ -11,6 +11,18 @@ import RealmSwift
 
 struct SubscriptionManager {
 
+    static func updateUnreadApplicationBadge() {
+        var unread = 0
+
+        Realm.execute({ (realm) in
+            for obj in realm.objects(Subscription.self) {
+                unread += obj.unread
+            }
+        }, completion: {
+            UIApplication.shared.applicationIconBadgeNumber = unread
+        })
+    }
+
     // swiftlint:disable function_body_length
     static func updateSubscriptions(_ auth: Auth, completion: @escaping MessageCompletion) {
         var params: [[String: Any]] = []
