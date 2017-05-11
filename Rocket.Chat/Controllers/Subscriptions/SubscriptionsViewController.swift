@@ -170,6 +170,7 @@ extension SubscriptionsViewController {
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         groupSubscription()
         updateCurrentUserInformation()
+        SubscriptionManager.updateUnreadApplicationBadge()
         tableView?.reloadData()
     }
 
