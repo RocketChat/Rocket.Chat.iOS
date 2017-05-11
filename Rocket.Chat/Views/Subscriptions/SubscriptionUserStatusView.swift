@@ -113,6 +113,7 @@ final class SubscriptionUserStatusView: UIView {
         // this crash ASAP. In the future we may have a centered place for all
         // database notifications.
         ChatViewController.sharedInstance()?.messagesToken?.stop()
+        ChatViewController.sharedInstance()?.alertSubscriptionToken?.stop()
         SubscriptionsViewController.sharedInstance()?.usersToken?.stop()
         SubscriptionsViewController.sharedInstance()?.subscriptionsToken?.stop()
 
