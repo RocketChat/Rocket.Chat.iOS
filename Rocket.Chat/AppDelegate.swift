@@ -8,6 +8,7 @@
 
 import UIKit
 import RealmSwift
+import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,13 +18,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Launcher().prepareToLaunch(with: launchOptions)
 
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil))
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in }
         application.registerForRemoteNotifications()
 
         return true
     }
 
     // MARK: AppDelegate LifeCycle
+
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        let center = UNUserNotificationCenter.current()
+        center.removeAllDeliveredNotifications()
+    }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
         if AuthManager.isAuthenticated() != nil {
@@ -42,10 +48,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: Remote Notification
-
-    func application(_ application: UIApplication, didReceive notification: UILocalNotification) {
-        Log.debug("Notification: \(notification)")
-    }
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         Log.debug("Notification: \(userInfo)")
