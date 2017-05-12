@@ -49,18 +49,7 @@ extension SocketManager {
     }
 
     fileprivate func handleError(_ result: SocketResponse, socket: WebSocket) {
-        let error = result.result["error"]
-
-        let errorInfo = [
-            NSLocalizedDescriptionKey: error["error"].string ?? "Unknown",
-            NSLocalizedFailureReasonErrorKey: error["reason"].string ?? "No reason"
-        ]
-
-        Crashlytics.sharedInstance().recordError(NSError(
-            domain: "SocketHandler.handleError",
-            code: -1001,
-            userInfo: errorInfo
-        ))
+        // Do nothing?
     }
 
     fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {
