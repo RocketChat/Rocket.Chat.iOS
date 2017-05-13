@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CommonCrypto
 
 func localized(_ string: String) -> String {
     return NSLocalizedString(string, comment: "")

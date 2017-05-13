@@ -118,10 +118,15 @@
 		A0918BDA1EC0A15D0015D5D5 /* RocketChatSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */; };
 		A0918BDC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A0918BCC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A0918BE91EC0A1FF0015D5D5 /* Foobar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0918BE81EC0A1FF0015D5D5 /* Foobar.swift */; };
+		A09910761EC7501400A9FEE8 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		A09910771EC7501400A9FEE8 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		A099107C1EC7501D00A9FEE8 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A09910841EC75AE600A9FEE8 /* AuthExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09910821EC75AE600A9FEE8 /* AuthExtensions.swift */; };
 		A09910851EC75AE600A9FEE8 /* AuthExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09910821EC75AE600A9FEE8 /* AuthExtensions.swift */; };
 		A09910861EC75AE600A9FEE8 /* MessageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09910831EC75AE600A9FEE8 /* MessageExtensions.swift */; };
 		A09910871EC75AE600A9FEE8 /* MessageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09910831EC75AE600A9FEE8 /* MessageExtensions.swift */; };
+		A099108F1EC75EAA00A9FEE8 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = A099108A1EC75EAA00A9FEE8 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A09910911EC75EAA00A9FEE8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A099108C1EC75EAA00A9FEE8 /* Info.plist */; };
 		A0E0E7D61EC6F920001B93B1 /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7D21EC6F920001B93B1 /* ResponseMessage.swift */; };
 		A0E0E7D71EC6F920001B93B1 /* SocketManager+Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7D31EC6F920001B93B1 /* SocketManager+Handle.swift */; };
 		A0E0E7D81EC6F920001B93B1 /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7D41EC6F920001B93B1 /* SocketResponse.swift */; };
@@ -225,7 +230,28 @@
 			remoteGlobalIDString = 41DF76DE1D2C50710028DBF8;
 			remoteInfo = Rocket.Chat;
 		};
+		A09910741EC7501400A9FEE8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41DF76D71D2C50710028DBF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = A099106E1EC7501400A9FEE8;
+			remoteInfo = CommonCrypto;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		A099107B1EC7501400A9FEE8 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				A09910771EC7501400A9FEE8 /* CommonCrypto.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -358,8 +384,14 @@
 		A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketChatSDKTests.swift; sourceTree = "<group>"; };
 		A0918BDB1EC0A15D0015D5D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A0918BE81EC0A1FF0015D5D5 /* Foobar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foobar.swift; sourceTree = "<group>"; };
+		A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09910821EC75AE600A9FEE8 /* AuthExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthExtensions.swift; sourceTree = "<group>"; };
 		A09910831EC75AE600A9FEE8 /* MessageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageExtensions.swift; sourceTree = "<group>"; };
+		A099108A1EC75EAA00A9FEE8 /* CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
+		A099108B1EC75EAA00A9FEE8 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
+		A099108C1EC75EAA00A9FEE8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A099108D1EC75EAA00A9FEE8 /* iphoneos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.modulemap; sourceTree = "<group>"; };
+		A099108E1EC75EAA00A9FEE8 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
 		A0E0E7D21EC6F920001B93B1 /* ResponseMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMessage.swift; sourceTree = "<group>"; };
 		A0E0E7D31EC6F920001B93B1 /* SocketManager+Handle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SocketManager+Handle.swift"; sourceTree = "<group>"; };
 		A0E0E7D41EC6F920001B93B1 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketResponse.swift; sourceTree = "<group>"; };
@@ -410,6 +442,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A09910761EC7501400A9FEE8 /* CommonCrypto.framework in Frameworks */,
 				7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -434,6 +467,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A099107C1EC7501D00A9FEE8 /* CommonCrypto.framework in Frameworks */,
 				0D98BB4A8E5EBAE0C2AEF332 /* Pods_Rocket_Chat_SDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,6 +478,13 @@
 			files = (
 				A0918BD31EC0A15D0015D5D5 /* RocketChat.framework in Frameworks */,
 				4C62AB1D4200E0805736BF1B /* Pods_Rocket_Chat_SDKTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A099106B1EC7501400A9FEE8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -771,6 +812,7 @@
 				41DF77011D2C50720028DBF8 /* Rocket.ChatUITests */,
 				A0918BCB1EC0A15D0015D5D5 /* Rocket.Chat.SDK */,
 				A0918BD81EC0A15D0015D5D5 /* Rocket.Chat.SDKTests */,
+				A09910891EC75EAA00A9FEE8 /* CommonCrypto */,
 				41DF76E01D2C50710028DBF8 /* Products */,
 				EE693BBD0CC2727847214E2D /* Pods */,
 				106DAA428B5BF7289FB70C65 /* Frameworks */,
@@ -785,6 +827,7 @@
 				41DF76FE1D2C50720028DBF8 /* Rocket.ChatUITests.xctest */,
 				A0918BCA1EC0A15D0015D5D5 /* RocketChat.framework */,
 				A0918BD21EC0A15D0015D5D5 /* Rocket.Chat.SDKTests.xctest */,
+				A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -902,6 +945,18 @@
 				A09910831EC75AE600A9FEE8 /* MessageExtensions.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		A09910891EC75EAA00A9FEE8 /* CommonCrypto */ = {
+			isa = PBXGroup;
+			children = (
+				A099108A1EC75EAA00A9FEE8 /* CommonCrypto.h */,
+				A099108B1EC75EAA00A9FEE8 /* CommonCrypto.xcconfig */,
+				A099108C1EC75EAA00A9FEE8 /* Info.plist */,
+				A099108D1EC75EAA00A9FEE8 /* iphoneos.modulemap */,
+				A099108E1EC75EAA00A9FEE8 /* iphonesimulator.modulemap */,
+			);
+			path = CommonCrypto;
 			sourceTree = "<group>";
 		};
 		A0E0E7CC1EC6F7A3001B93B1 /* Rocket.Chat.Shared */ = {
@@ -1060,6 +1115,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A099106C1EC7501400A9FEE8 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A099108F1EC75EAA00A9FEE8 /* CommonCrypto.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
@@ -1074,10 +1137,12 @@
 				41DF76DD1D2C50710028DBF8 /* Resources */,
 				37F7335F566598AA8C26F0F2 /* [CP] Embed Pods Frameworks */,
 				98879A7BEE6639FACC37C1EF /* [CP] Copy Pods Resources */,
+				A099107B1EC7501400A9FEE8 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				A09910751EC7501400A9FEE8 /* PBXTargetDependency */,
 			);
 			name = Rocket.Chat;
 			productName = Rocket.Chat;
@@ -1168,6 +1233,24 @@
 			productReference = A0918BD21EC0A15D0015D5D5 /* Rocket.Chat.SDKTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		A099106E1EC7501400A9FEE8 /* CommonCrypto */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A099107A1EC7501400A9FEE8 /* Build configuration list for PBXNativeTarget "CommonCrypto" */;
+			buildPhases = (
+				A099106A1EC7501400A9FEE8 /* Sources */,
+				A099106B1EC7501400A9FEE8 /* Frameworks */,
+				A099106C1EC7501400A9FEE8 /* Headers */,
+				A099106D1EC7501400A9FEE8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CommonCrypto;
+			productName = CommonCrypto;
+			productReference = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */;
+			productType = "com.apple.product-type.framework";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1214,6 +1297,10 @@
 						ProvisioningStyle = Automatic;
 						TestTargetID = 41DF76DE1D2C50710028DBF8;
 					};
+					A099106E1EC7501400A9FEE8 = {
+						CreatedOnToolsVersion = 8.3.2;
+						ProvisioningStyle = Automatic;
+					};
 				};
 			};
 			buildConfigurationList = 41DF76DA1D2C50710028DBF8 /* Build configuration list for PBXProject "Rocket.Chat" */;
@@ -1236,6 +1323,7 @@
 				41DF76FD1D2C50720028DBF8 /* Rocket.ChatUITests */,
 				A0918BC91EC0A15D0015D5D5 /* Rocket.Chat.SDK */,
 				A0918BD11EC0A15D0015D5D5 /* Rocket.Chat.SDKTests */,
+				A099106E1EC7501400A9FEE8 /* CommonCrypto */,
 			);
 		};
 /* End PBXProject section */
@@ -1297,6 +1385,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		A099106D1EC7501400A9FEE8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A09910911EC75EAA00A9FEE8 /* Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1721,6 +1817,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		A099106A1EC7501400A9FEE8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -1743,6 +1846,11 @@
 			isa = PBXTargetDependency;
 			target = 41DF76DE1D2C50710028DBF8 /* Rocket.Chat */;
 			targetProxy = A0918BD61EC0A15D0015D5D5 /* PBXContainerItemProxy */;
+		};
+		A09910751EC7501400A9FEE8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = A099106E1EC7501400A9FEE8 /* CommonCrypto */;
+			targetProxy = A09910741EC7501400A9FEE8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2071,6 +2179,61 @@
 			};
 			name = Release;
 		};
+		A09910781EC7501400A9FEE8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A099108B1EC75EAA00A9FEE8 /* CommonCrypto.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CommonCrypto/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.CommonCrypto;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A09910791EC7501400A9FEE8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A099108B1EC75EAA00A9FEE8 /* CommonCrypto.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = CommonCrypto/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.CommonCrypto;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 3.0;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2124,6 +2287,15 @@
 			buildConfigurations = (
 				A0918BE31EC0A15D0015D5D5 /* Debug */,
 				A0918BE41EC0A15D0015D5D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A099107A1EC7501400A9FEE8 /* Build configuration list for PBXNativeTarget "CommonCrypto" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A09910781EC7501400A9FEE8 /* Debug */,
+				A09910791EC7501400A9FEE8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

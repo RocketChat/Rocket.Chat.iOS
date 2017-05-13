@@ -9,8 +9,6 @@
 #ifndef Rocket_Chat_Bridge_h
 #define Rocket_Chat_Bridge_h
 
-#import "CommonCrypto/CommonCrypto.h"
-
 // Markdown
 #import <TSMarkdownParser/TSMarkdownParser.h>
 
