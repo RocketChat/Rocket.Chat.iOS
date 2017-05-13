@@ -1,5 +1,5 @@
 //
-//  RealmExtension.swift
+//  RealmExtension.Shared.swift
 //  Rocket.Chat
 //
 //  Created by Rafael K. Streit on 7/18/16.

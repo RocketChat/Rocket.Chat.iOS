@@ -1,5 +1,5 @@
 //
-//  URLExtension.swift
+//  URLExtension.Shared.swift
 //  Rocket.Chat
 //
 //  Created by Rafael K. Streit on 8/27/16.

@@ -1,5 +1,5 @@
 //
-//  DataExtension.swift
+//  DataExtension.Shared.swift
 //  Rocket.Chat
 //
 //  Created by Gradler Kim on 2017. 1. 23..
