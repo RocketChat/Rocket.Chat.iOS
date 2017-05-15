@@ -9,7 +9,14 @@
 import Foundation
 import RealmSwift
 
+protocol AuthDelegate: class {
+    func didLogout()
+}
+
 struct AuthManager {
+
+    static weak var delegate: AuthDelegate?
+
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
@@ -212,11 +219,12 @@ extension AuthManager {
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
             SocketManager.clear()
-            GIDSignIn.sharedInstance().signOut()
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
             })
+
+            self.delegate?.didLogout()
 
             completion()
         }
