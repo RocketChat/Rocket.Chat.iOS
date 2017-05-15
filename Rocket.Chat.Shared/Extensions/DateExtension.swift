@@ -1,5 +1,5 @@
 //
-//  DateExtension.Shared.swift
+//  DateExtension.swift
 //  Rocket.Chat
 //
 //  Created by Rafael K. Streit on 7/11/16.

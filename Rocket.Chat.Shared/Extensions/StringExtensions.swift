@@ -1,5 +1,5 @@
 //
-//  StringExtensions.Shared.swift
+//  StringExtensions.swift
 //  Rocket.Chat
 //
 //  Created by Rafael K. Streit on 7/6/16.

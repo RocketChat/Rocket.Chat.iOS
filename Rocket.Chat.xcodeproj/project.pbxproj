@@ -140,12 +140,12 @@
 		A0E0E7DD1EC6F935001B93B1 /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7D41EC6F920001B93B1 /* SocketResponse.swift */; };
 		A0E0E7DF1EC6FEFA001B93B1 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7DE1EC6FEFA001B93B1 /* LogManager.swift */; };
 		A0E0E7E01EC6FF12001B93B1 /* LogManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7DE1EC6FEFA001B93B1 /* LogManager.swift */; };
-		A0E0E7E21EC6FF7D001B93B1 /* URLExtension.Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E11EC6FF7D001B93B1 /* URLExtension.Shared.swift */; };
-		A0E0E7E31EC6FF82001B93B1 /* URLExtension.Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E11EC6FF7D001B93B1 /* URLExtension.Shared.swift */; };
-		A0E0E7E61EC701A8001B93B1 /* RealmExtension.Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E41EC701A8001B93B1 /* RealmExtension.Shared.swift */; };
-		A0E0E7E71EC701A8001B93B1 /* RealmExtension.Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E41EC701A8001B93B1 /* RealmExtension.Shared.swift */; };
-		A0E0E7E81EC701A8001B93B1 /* StringExtensions.Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E51EC701A8001B93B1 /* StringExtensions.Shared.swift */; };
-		A0E0E7E91EC701A8001B93B1 /* StringExtensions.Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E51EC701A8001B93B1 /* StringExtensions.Shared.swift */; };
+		A0E0E7E21EC6FF7D001B93B1 /* URLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E11EC6FF7D001B93B1 /* URLExtension.swift */; };
+		A0E0E7E31EC6FF82001B93B1 /* URLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E11EC6FF7D001B93B1 /* URLExtension.swift */; };
+		A0E0E7E61EC701A8001B93B1 /* RealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E41EC701A8001B93B1 /* RealmExtension.swift */; };
+		A0E0E7E71EC701A8001B93B1 /* RealmExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E41EC701A8001B93B1 /* RealmExtension.swift */; };
+		A0E0E7E81EC701A8001B93B1 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E51EC701A8001B93B1 /* StringExtensions.swift */; };
+		A0E0E7E91EC701A8001B93B1 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7E51EC701A8001B93B1 /* StringExtensions.swift */; };
 		A0E0E7F01EC704BB001B93B1 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7ED1EC704BB001B93B1 /* AuthManager.swift */; };
 		A0E0E7F11EC704BB001B93B1 /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7ED1EC704BB001B93B1 /* AuthManager.swift */; };
 		A0E0E7F21EC704BB001B93B1 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7EE1EC704BB001B93B1 /* SubscriptionManager.swift */; };
@@ -192,10 +192,10 @@
 		A0E0E83B1EC749FE001B93B1 /* SubscriptionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E82C1EC749FE001B93B1 /* SubscriptionModelMapping.swift */; };
 		A0E0E83C1EC749FE001B93B1 /* UserModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E82D1EC749FE001B93B1 /* UserModelMapping.swift */; };
 		A0E0E83D1EC749FE001B93B1 /* UserModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E82D1EC749FE001B93B1 /* UserModelMapping.swift */; };
-		A0E0E8401EC74A89001B93B1 /* DataExtension.Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E83E1EC74A89001B93B1 /* DataExtension.Shared.swift */; };
-		A0E0E8411EC74A89001B93B1 /* DataExtension.Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E83E1EC74A89001B93B1 /* DataExtension.Shared.swift */; };
-		A0E0E8421EC74A89001B93B1 /* DateExtension.Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E83F1EC74A89001B93B1 /* DateExtension.Shared.swift */; };
-		A0E0E8431EC74A89001B93B1 /* DateExtension.Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E83F1EC74A89001B93B1 /* DateExtension.Shared.swift */; };
+		A0E0E8401EC74A89001B93B1 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E83E1EC74A89001B93B1 /* DataExtension.swift */; };
+		A0E0E8411EC74A89001B93B1 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E83E1EC74A89001B93B1 /* DataExtension.swift */; };
+		A0E0E8421EC74A89001B93B1 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E83F1EC74A89001B93B1 /* DateExtension.swift */; };
+		A0E0E8431EC74A89001B93B1 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E83F1EC74A89001B93B1 /* DateExtension.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
 		CBF49DD059247912D23CD70C /* Pods_Rocket_ChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3276E643B358C0C343A3566D /* Pods_Rocket_ChatUITests.framework */; };
 		D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */; };
@@ -398,9 +398,9 @@
 		A0E0E7D41EC6F920001B93B1 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketResponse.swift; sourceTree = "<group>"; };
 		A0E0E7D51EC6F920001B93B1 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
 		A0E0E7DE1EC6FEFA001B93B1 /* LogManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogManager.swift; sourceTree = "<group>"; };
-		A0E0E7E11EC6FF7D001B93B1 /* URLExtension.Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLExtension.Shared.swift; sourceTree = "<group>"; };
-		A0E0E7E41EC701A8001B93B1 /* RealmExtension.Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmExtension.Shared.swift; sourceTree = "<group>"; };
-		A0E0E7E51EC701A8001B93B1 /* StringExtensions.Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.Shared.swift; sourceTree = "<group>"; };
+		A0E0E7E11EC6FF7D001B93B1 /* URLExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLExtension.swift; sourceTree = "<group>"; };
+		A0E0E7E41EC701A8001B93B1 /* RealmExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmExtension.swift; sourceTree = "<group>"; };
+		A0E0E7E51EC701A8001B93B1 /* StringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensions.swift; sourceTree = "<group>"; };
 		A0E0E7ED1EC704BB001B93B1 /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		A0E0E7EE1EC704BB001B93B1 /* SubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionManager.swift; sourceTree = "<group>"; };
 		A0E0E7EF1EC704BB001B93B1 /* UserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
@@ -424,8 +424,8 @@
 		A0E0E82B1EC749FE001B93B1 /* MessageURLModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageURLModelMapping.swift; sourceTree = "<group>"; };
 		A0E0E82C1EC749FE001B93B1 /* SubscriptionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionModelMapping.swift; sourceTree = "<group>"; };
 		A0E0E82D1EC749FE001B93B1 /* UserModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModelMapping.swift; sourceTree = "<group>"; };
-		A0E0E83E1EC74A89001B93B1 /* DataExtension.Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.Shared.swift; sourceTree = "<group>"; };
-		A0E0E83F1EC74A89001B93B1 /* DateExtension.Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.Shared.swift; sourceTree = "<group>"; };
+		A0E0E83E1EC74A89001B93B1 /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
+		A0E0E83F1EC74A89001B93B1 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TintedTextField.swift; path = Views/Subscriptions/TintedTextField.swift; sourceTree = "<group>"; };
 		BCF38696E8EC385488688390 /* Pods-Rocket.Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.debug.xcconfig"; sourceTree = "<group>"; };
 		BD9D8C281E43B71968985044 /* Pods_Rocket_Chat_SDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -962,11 +962,11 @@
 			isa = PBXGroup;
 			children = (
 				A09910811EC75AE600A9FEE8 /* Models */,
-				A0E0E83E1EC74A89001B93B1 /* DataExtension.Shared.swift */,
-				A0E0E83F1EC74A89001B93B1 /* DateExtension.Shared.swift */,
-				A0E0E7E11EC6FF7D001B93B1 /* URLExtension.Shared.swift */,
-				A0E0E7E41EC701A8001B93B1 /* RealmExtension.Shared.swift */,
-				A0E0E7E51EC701A8001B93B1 /* StringExtensions.Shared.swift */,
+				A0E0E83E1EC74A89001B93B1 /* DataExtension.swift */,
+				A0E0E83F1EC74A89001B93B1 /* DateExtension.swift */,
+				A0E0E7E11EC6FF7D001B93B1 /* URLExtension.swift */,
+				A0E0E7E41EC701A8001B93B1 /* RealmExtension.swift */,
+				A0E0E7E51EC701A8001B93B1 /* StringExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1615,7 +1615,7 @@
 				419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */,
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,
 				415029B71E72D530009F596C /* ChannelInfoDetailCell.swift in Sources */,
-				A0E0E7E61EC701A8001B93B1 /* RealmExtension.Shared.swift in Sources */,
+				A0E0E7E61EC701A8001B93B1 /* RealmExtension.swift in Sources */,
 				41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */,
 				A0E0E8101EC7063F001B93B1 /* User.swift in Sources */,
 				412719461E6B403700461FEE /* RegisterUsernameViewController.swift in Sources */,
@@ -1636,7 +1636,7 @@
 				A0E0E8201EC749D6001B93B1 /* Mention.swift in Sources */,
 				412BCC871E55C6B800F7F4EE /* ChatMessageTextView.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
-				A0E0E7E81EC701A8001B93B1 /* StringExtensions.Shared.swift in Sources */,
+				A0E0E7E81EC701A8001B93B1 /* StringExtensions.swift in Sources */,
 				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
 				A0E0E7DF1EC6FEFA001B93B1 /* LogManager.swift in Sources */,
 				412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */,
@@ -1645,7 +1645,7 @@
 				41EE15821E05BF9600754D45 /* ChatControllerSocketConnectionHandler.swift in Sources */,
 				A0E0E7D81EC6F920001B93B1 /* SocketResponse.swift in Sources */,
 				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,
-				A0E0E7E21EC6FF7D001B93B1 /* URLExtension.Shared.swift in Sources */,
+				A0E0E7E21EC6FF7D001B93B1 /* URLExtension.swift in Sources */,
 				41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */,
 				419EAF291E26562E002C8DA5 /* UserCoordinator.swift in Sources */,
 				41597DCE1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift in Sources */,
@@ -1677,13 +1677,13 @@
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
 				A0E0E8021EC7063F001B93B1 /* BaseModel.swift in Sources */,
 				41B4B2341E40B1D200F4D252 /* ChatControllerUploader.swift in Sources */,
-				A0E0E8421EC74A89001B93B1 /* DateExtension.Shared.swift in Sources */,
+				A0E0E8421EC74A89001B93B1 /* DateExtension.swift in Sources */,
 				4133EDCF1DA2834E005AA783 /* ChatMessageImageView.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
 				A0E0E83A1EC749FE001B93B1 /* SubscriptionModelMapping.swift in Sources */,
 				A0BBAF261EC7FE5F002BF87C /* UploadManager.swift in Sources */,
 				A0BBAF291EC7FE6A002BF87C /* UploadVideoCompression.swift in Sources */,
-				A0E0E8401EC74A89001B93B1 /* DataExtension.Shared.swift in Sources */,
+				A0E0E8401EC74A89001B93B1 /* DataExtension.swift in Sources */,
 				A0E0E8041EC7063F001B93B1 /* ModelHandler.swift in Sources */,
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,
 			);
@@ -1726,7 +1726,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0E0E8011EC7063F001B93B1 /* Auth.swift in Sources */,
-				A0E0E8431EC74A89001B93B1 /* DateExtension.Shared.swift in Sources */,
+				A0E0E8431EC74A89001B93B1 /* DateExtension.swift in Sources */,
 				A0E0E8331EC749FE001B93B1 /* AttachmentModelMapping.swift in Sources */,
 				A09910871EC75AE600A9FEE8 /* MessageExtensions.swift in Sources */,
 				A0E0E7F31EC704BB001B93B1 /* SubscriptionManager.swift in Sources */,
@@ -1738,7 +1738,7 @@
 				A0E0E81F1EC749D6001B93B1 /* Attachment.swift in Sources */,
 				A0BBAF2D1EC7FEB6002BF87C /* PushManager.swift in Sources */,
 				A0E0E8371EC749FE001B93B1 /* MessageModelMapping.swift in Sources */,
-				A0E0E7E31EC6FF82001B93B1 /* URLExtension.Shared.swift in Sources */,
+				A0E0E7E31EC6FF82001B93B1 /* URLExtension.swift in Sources */,
 				A0BBAF2A1EC7FE6A002BF87C /* UploadVideoCompression.swift in Sources */,
 				A0BBAF211EC7FDDD002BF87C /* Emojione.swift in Sources */,
 				A0E0E8311EC749FE001B93B1 /* UserModelHandler.swift in Sources */,
@@ -1749,7 +1749,7 @@
 				A0E0E8141EC7066E001B93B1 /* AuthSettings.swift in Sources */,
 				A0E0E8051EC7063F001B93B1 /* ModelHandler.swift in Sources */,
 				A0E0E8071EC7063F001B93B1 /* ModelMappeable.swift in Sources */,
-				A0E0E7E91EC701A8001B93B1 /* StringExtensions.Shared.swift in Sources */,
+				A0E0E7E91EC701A8001B93B1 /* StringExtensions.swift in Sources */,
 				A0E0E82F1EC749FE001B93B1 /* SubscriptionModelHandler.swift in Sources */,
 				A0E0E8391EC749FE001B93B1 /* MessageURLModelMapping.swift in Sources */,
 				A0E0E8351EC749FE001B93B1 /* AuthSettingsModelMapping.swift in Sources */,
@@ -1757,10 +1757,10 @@
 				A0E0E7DC1EC6F935001B93B1 /* SocketManager+Handle.swift in Sources */,
 				A0E0E7F51EC704BB001B93B1 /* UserManager.swift in Sources */,
 				A0E0E80F1EC7063F001B93B1 /* Subscription.swift in Sources */,
-				A0E0E8411EC74A89001B93B1 /* DataExtension.Shared.swift in Sources */,
+				A0E0E8411EC74A89001B93B1 /* DataExtension.swift in Sources */,
 				A0E0E8211EC749D6001B93B1 /* Mention.swift in Sources */,
 				A0E0E7DD1EC6F935001B93B1 /* SocketResponse.swift in Sources */,
-				A0E0E7E71EC701A8001B93B1 /* RealmExtension.Shared.swift in Sources */,
+				A0E0E7E71EC701A8001B93B1 /* RealmExtension.swift in Sources */,
 				A09910851EC75AE600A9FEE8 /* AuthExtensions.swift in Sources */,
 				A0E0E7DA1EC6F930001B93B1 /* SocketManager.swift in Sources */,
 				A0918BE91EC0A1FF0015D5D5 /* Foobar.swift in Sources */,
