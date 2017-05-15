@@ -39,11 +39,11 @@ PODS:
   - GTMSessionFetcher/Full (1.1.9):
     - GTMSessionFetcher/Core (= 1.1.9)
   - MobilePlayer (1.2.0)
-  - Realm (2.6.2):
-    - Realm/Headers (= 2.6.2)
-  - Realm/Headers (2.6.2)
-  - RealmSwift (2.6.2):
-    - Realm (= 2.6.2)
+  - Realm (2.7.0):
+    - Realm/Headers (= 2.7.0)
+  - Realm/Headers (2.7.0)
+  - RealmSwift (2.7.0):
+    - Realm (= 2.7.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -64,7 +64,7 @@ DEPENDENCIES:
   - RealmSwift
   - SDWebImage (~> 3.8)
   - semver
-  - SideMenuController (from `git@github.com:rafaelks/SideMenuController.git`)
+  - SideMenuController (from `https://github.com/rafaelks/SideMenuController.git`)
   - SlackTextViewController
   - Starscream (~> 2.0.0)
   - SwiftyJSON
@@ -73,12 +73,12 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   SideMenuController:
-    :git: git@github.com:rafaelks/SideMenuController.git
+    :git: https://github.com/rafaelks/SideMenuController.git
 
 CHECKOUT OPTIONS:
   SideMenuController:
     :commit: a3a55e08f4752b5a4e169c6a8b2ceee0096649f5
-    :git: git@github.com:rafaelks/SideMenuController.git
+    :git: https://github.com/rafaelks/SideMenuController.git
 
 SPEC CHECKSUMS:
   1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
@@ -93,8 +93,8 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5c046c76a1f859bc9c187e918f18e4fc7bb57b5e
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  Realm: 29222766425b9f831228f81b63f0e38a97a4d700
-  RealmSwift: d161a80f96cb91ae88391a7d5a9cf08024a7bc8e
+  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
+  RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   semver: efe6bf4af25bffab18d442592771be392210b5ce
   SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
@@ -104,6 +104,6 @@ SPEC CHECKSUMS:
   TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
   URBMediaFocusViewController: 26779e301fe75ec0152fbe8b476bd06ccee9f9b3
 
-PODFILE CHECKSUM: c32cfdea3bd2f983fe06f089235b2dba6f2247a4
+PODFILE CHECKSUM: f616230e4b79b25b8a4e0f0f93067849361aafc5
 
 COCOAPODS: 1.2.1
