@@ -49,14 +49,6 @@ target 'Rocket.ChatUITests' do
 
 end
 
-target 'Rocket.Chat.SDK' do
-  shared_pods
-end
-
-target 'Rocket.Chat.SDKTests' do
-  shared_pods
-end
-
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|

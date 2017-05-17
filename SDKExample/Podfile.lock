@@ -1,0 +1,38 @@
+PODS:
+  - Realm (2.7.0):
+    - Realm/Headers (= 2.7.0)
+  - Realm/Headers (2.7.0)
+  - RealmSwift (2.7.0):
+    - Realm (= 2.7.0)
+  - RocketChat (0.1.0):
+    - RealmSwift
+    - SDWebImage (~> 3.8)
+    - semver
+    - Starscream (~> 2.0.0)
+    - SwiftyJSON
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
+  - semver (1.0.0)
+  - Starscream (2.0.4)
+  - SwiftyJSON (3.1.4)
+
+DEPENDENCIES:
+  - RocketChat (from `../`)
+
+EXTERNAL SOURCES:
+  RocketChat:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  Realm: 07e5d3a9e0e41d65fd5f9f05150ed6295d0f093b
+  RealmSwift: 6d06425d3900c86473c4f323bf6949b43fca22bc
+  RocketChat: 4744700356f1838e7aad50a27f13559e69184238
+  SDWebImage: '098e97e6176540799c27e804c96653ee0833d13c'
+  semver: efe6bf4af25bffab18d442592771be392210b5ce
+  Starscream: df5974ee928b157c8eda8af8de7c620276b7dfcc
+  SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
+
+PODFILE CHECKSUM: df8d010ee75e4eb883402bec6298dbf4aab82eee
+
+COCOAPODS: 1.2.1
