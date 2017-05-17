@@ -32,10 +32,10 @@ class MessageSpec: XCTestCase {
 
         let subscription = Subscription()
         subscription.auth = auth
-        subscription.identifier = "123"
+        subscription.identifier = "message-subscription-1"
 
         let user = User()
-        user.identifier = "123"
+        user.identifier = "message-user-1"
 
         let message = Message()
         message.identifier = "message-object-1"
@@ -43,15 +43,9 @@ class MessageSpec: XCTestCase {
         message.user = user
         message.subscription = subscription
 
-        Realm.executeOnMainThread({ realm in
-            realm.add(message, update: true)
-
-            let results = realm.objects(Message.self)
-            let first = results.first
-            XCTAssert(results.count == 1, "Message object was created with success")
-            XCTAssert(first?.identifier == "message-object-1", "Message object was created with success")
-            XCTAssert(subscription.messages.first?.identifier == first?.identifier, "Message relationship with Subscription is OK")
-        })
+        XCTAssert(message.identifier == "message-object-1", "Message relationship with Subscription is OK")
+        XCTAssert(message.subscription.identifier == "message-subscription-1", "Message relationship with Subscription is OK")
+        XCTAssert(message.user?.identifier == "message-user-1", "Message relationship with Subscription is OK")
     }
 
     func testMessageObjectFromJSON() {
@@ -64,16 +58,9 @@ class MessageSpec: XCTestCase {
             "u": ["_id": "123", "username": "foo"]
         ])
 
-        Realm.executeOnMainThread({ realm in
-            let message = Message()
-            message.map(object, realm: realm)
-            realm.add(message)
-
-            let results = realm.objects(Message.self)
-            let first = results.first
-            XCTAssert(results.count == 1, "Message object was created with success")
-            XCTAssert(first?.identifier == "message-json-1", "Message object was created with success")
-        })
+        let message = Message()
+        message.map(object, realm: nil)
+        XCTAssert(message.identifier == "message-json-1", "Message object was created with success")
     }
 
 }
