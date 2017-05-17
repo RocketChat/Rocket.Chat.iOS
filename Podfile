@@ -4,10 +4,6 @@ platform :ios, '10.0'
 use_frameworks!
 
 def shared_pods
-  # Crash Report
-  pod 'Fabric'
-  pod 'Crashlytics'
-
   # Code utilities
   pod 'SwiftyJSON'
   pod 'semver'
@@ -21,6 +17,10 @@ def shared_pods
 end
 
 def app_pods
+  # Crash Report
+  pod 'Fabric'
+  pod 'Crashlytics'
+
   # UI
   pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
   pod 'SlackTextViewController'
@@ -47,6 +47,14 @@ end
 
 target 'Rocket.ChatUITests' do
 
+end
+
+target 'Rocket.Chat.SDK' do
+    shared_pods
+end
+
+target 'Rocket.Chat.SDKTests' do
+    shared_pods
 end
 
 post_install do |installer|

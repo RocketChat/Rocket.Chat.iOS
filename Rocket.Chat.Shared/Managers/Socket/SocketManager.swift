@@ -33,6 +33,8 @@ class SocketManager {
     var queue: [String: MessageCompletion] = [:]
     var events: [String: [MessageCompletion]] = [:]
 
+    public weak var delegate: SocketDelegate?
+
     internal var internalConnectionHandler: SocketCompletion?
     internal var connectionHandlers: [String: SocketConnectionHandler] = [:]
 

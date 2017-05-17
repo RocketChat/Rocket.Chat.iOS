@@ -3,5 +3,6 @@ opt_in_rules:
 excluded:
   - Pods
   - Rocket.Chat/Extensions/UIColorCSSColorsExtension.swift
+  - SDKExample/Pods
 line_length: 300
 reporter: "xcode"

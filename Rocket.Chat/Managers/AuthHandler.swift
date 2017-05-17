@@ -1,5 +1,5 @@
 //
-//  AuthDelegator.swift
+//  AuthHandler.swift
 //  Rocket.Chat
 //
 //  Created by Lucas Woo on 5/14/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AuthDelegator: AuthDelegate {
+class AuthHandler: AuthDelegate {
     func didLogout() {
         GIDSignIn.sharedInstance().signOut()
     }
