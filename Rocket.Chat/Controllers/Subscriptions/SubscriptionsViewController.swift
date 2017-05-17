@@ -88,6 +88,8 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tableView.reloadData()
+
         updateCurrentUserInformation()
     }
 
@@ -99,7 +101,6 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        tableView.reloadData()
         registerKeyboardHandlers(tableView)
     }
 }
@@ -169,9 +170,13 @@ extension SubscriptionsViewController {
         guard let auth = AuthManager.isAuthenticated() else { return }
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         groupSubscription()
+
         updateCurrentUserInformation()
         SubscriptionManager.updateUnreadApplicationBadge()
-        tableView?.reloadData()
+
+        if MainChatViewController.shared()?.sidePanelVisible ?? false {
+            tableView?.reloadData()
+        }
     }
 
     func updateCurrentUserInformation() {
@@ -205,9 +210,7 @@ extension SubscriptionsViewController {
 
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
-        usersToken = try? Realm().addNotificationBlock { [weak self] _, _ in
-            self?.handleModelUpdates(nil)
-        }
+        usersToken = try? Realm().objects(User.self).addNotificationBlock(handleModelUpdates)
 
         groupSubscription()
     }
