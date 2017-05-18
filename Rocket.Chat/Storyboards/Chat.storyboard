@@ -9,16 +9,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Chatting-->
-        <scene sceneID="MQd-gd-2MN">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Chatting" id="40H-Rs-YEe" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Hr5-85-KIE"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Xsr-zO-IGC" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1529" y="635"/>
-        </scene>
         <!--Main Chat View Controller-->
         <scene sceneID="3gv-jK-am2">
             <objects>
@@ -33,8 +23,8 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="ZWT-yJ-dk4" kind="custom" identifier="showCenterController" customClass="CenterContainmentSegue" customModule="SideMenuController" id="49z-6y-c6s"/>
                         <segue destination="P2x-Rh-AO9" kind="custom" identifier="containSideMenu" customClass="SideContainmentSegue" customModule="SideMenuController" id="9yd-xs-Cbl"/>
+                        <segue destination="aAR-t7-INE" kind="custom" identifier="showCenterController" customClass="CenterContainmentSegue" customModule="SideMenuController" id="wcm-6s-EpY"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozo-Ve-E9D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -49,23 +39,13 @@
             </objects>
             <point key="canvasLocation" x="656" y="175"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="XbC-Os-gqR">
+        <!--Chatting-->
+        <scene sceneID="RrU-6g-NUu">
             <objects>
-                <navigationController storyboardIdentifier="Chat" automaticallyAdjustsScrollViewInsets="NO" id="ZWT-yJ-dk4" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vuM-gG-ey4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="40H-Rs-YEe" kind="relationship" relationship="rootViewController" id="FZS-qY-C4I"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="c27-wD-Q3n" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <viewControllerPlaceholder storyboardName="Chatting" id="aAR-t7-INE" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3qA-ZN-bOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="864" y="636"/>
+            <point key="canvasLocation" x="657" y="635"/>
         </scene>
     </scenes>
 </document>
