@@ -2,6 +2,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '10.0'
 use_frameworks!
+inhibit_all_warnings!
 
 def shared_pods
   # Code utilities
@@ -14,6 +15,14 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 3.8'
   pod 'Starscream', '~> 2.0.0'
+
+  # UI
+  pod 'SlackTextViewController'
+  pod 'MobilePlayer'
+  pod 'URBMediaFocusViewController'
+
+  # Text Processing
+  pod 'TSMarkdownParser'
 end
 
 def app_pods
@@ -23,12 +32,6 @@ def app_pods
 
   # UI
   pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
-  pod 'SlackTextViewController'
-  pod 'MobilePlayer'
-  pod 'URBMediaFocusViewController'
-
-  # Text Processing
-  pod 'TSMarkdownParser'
 
   # Authentication SDKs
   pod '1PasswordExtension'

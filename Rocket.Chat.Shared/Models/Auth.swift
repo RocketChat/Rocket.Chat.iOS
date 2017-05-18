@@ -31,3 +31,17 @@ final class Auth: Object {
         return "serverURL"
     }
 }
+
+extension Auth {
+
+    func baseURL() -> String? {
+        if let cdn = self.settings?.cdnPrefixURL {
+            if cdn.characters.count > 0 {
+                return cdn
+            }
+        }
+
+        return self.settings?.siteURL
+    }
+    
+}

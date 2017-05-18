@@ -50,17 +50,9 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    weak var delegate: ChatViewControllerDelegate?
+
     // MARK: View Life Cycle
-
-    class func sharedInstance() -> ChatViewController? {
-        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
-            if let nav = main.centerViewController as? UINavigationController {
-                return nav.viewControllers.first as? ChatViewController
-            }
-        }
-
-        return nil
-    }
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
@@ -297,11 +289,7 @@ final class ChatViewController: SLKTextViewController {
             self.collectionView?.deleteItems(at: indexPaths)
         }, completion: { _ in
             CATransaction.commit()
-
-            if self.closeSidebarAfterSubscriptionUpdate {
-                MainChatViewController.closeSideMenuIfNeeded()
-                self.closeSidebarAfterSubscriptionUpdate = false
-            }
+            self.delegate?.chatViewController(self, didUpdateWithSubscription: self.subscription)
         })
 
         if self.subscription.isValid() {

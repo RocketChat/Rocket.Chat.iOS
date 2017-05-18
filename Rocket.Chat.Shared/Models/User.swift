@@ -10,15 +10,15 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-enum UserPresence: String {
+public enum UserPresence: String {
     case online, away
 }
 
-enum UserStatus: String {
+public enum UserStatus: String {
     case offline, online, busy, away
 }
 
-class User: BaseModel {
+public class User: BaseModel {
     dynamic var username: String?
     dynamic var name: String?
     var emails = List<Email>()

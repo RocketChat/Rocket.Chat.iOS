@@ -10,10 +10,10 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-class BaseModel: Object {
+public class BaseModel: Object {
     dynamic var identifier: String?
 
-    override static func primaryKey() -> String? {
+    override public static func primaryKey() -> String? {
         return "identifier"
     }
 }

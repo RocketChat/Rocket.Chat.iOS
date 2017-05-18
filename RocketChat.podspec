@@ -11,7 +11,11 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                   DESC
 
-  s.source_files = 'Rocket.Chat.SDK/**/*.swift', 'Rocket.Chat.Shared/**/*.swift'
+  s.public_header_files = 'Rocket.Chat.SDK/Rocket.Chat.SDK.h'
+  s.source_files = 'Rocket.Chat.{SDK,Shared}/**/*.swift'
+  s.resource_bundles = {
+    'RocketChat' => ['Rocket.Chat.{SDK,Shared}/**/*.{storyboard,xib}'],
+  }
 
   s.frameworks = 'UIKit'
 
@@ -28,5 +32,13 @@ TODO: Add long description of the pod here.
   # Network
   s.dependency 'SDWebImage', '~> 3.8'
   s.dependency 'Starscream', '~> 2.0.0'
+
+  # UI
+  s.dependency 'SlackTextViewController'
+  s.dependency 'MobilePlayer'
+  s.dependency 'URBMediaFocusViewController'
+
+  # Text Processing
+  s.dependency 'TSMarkdownParser'
 
 end
