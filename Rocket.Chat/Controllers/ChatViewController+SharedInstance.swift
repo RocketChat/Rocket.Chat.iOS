@@ -10,7 +10,7 @@ import UIKit
 
 extension ChatViewController {
     class func sharedInstance() -> ChatViewController? {
-        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
+        if let main = MainChatViewController.shared() {
             if let nav = main.centerViewController as? UINavigationController {
                 return nav.viewControllers.first as? ChatViewController
             }

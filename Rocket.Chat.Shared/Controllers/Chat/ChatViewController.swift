@@ -37,8 +37,6 @@ final class ChatViewController: SLKTextViewController {
 
     var searchResult: [String: Any] = [:]
 
-    var closeSidebarAfterSubscriptionUpdate = false
-
     var isRequestingHistory = false
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
@@ -49,8 +47,6 @@ final class ChatViewController: SLKTextViewController {
             markAsRead()
         }
     }
-
-    weak var delegate: ChatViewControllerDelegate?
 
     // MARK: View Life Cycle
 
@@ -280,6 +276,8 @@ final class ChatViewController: SLKTextViewController {
             token.stop()
         }
 
+        self.activityIndicator.startAnimating()
+
         title = subscription?.name
         chatTitleView?.subscription = subscription
         textView.resignFirstResponder()
@@ -289,7 +287,7 @@ final class ChatViewController: SLKTextViewController {
             self.collectionView?.deleteItems(at: indexPaths)
         }, completion: { _ in
             CATransaction.commit()
-            self.delegate?.chatViewController(self, didUpdateWithSubscription: self.subscription)
+            self.activityIndicator.stopAnimating()
         })
 
         if self.subscription.isValid() {
