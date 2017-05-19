@@ -53,11 +53,11 @@ target 'Rocket.ChatUITests' do
 end
 
 target 'Rocket.Chat.SDK' do
-    shared_pods
+  shared_pods
 end
 
 target 'Rocket.Chat.SDKTests' do
-    shared_pods
+  shared_pods
 end
 
 post_install do |installer|
