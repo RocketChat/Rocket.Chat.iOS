@@ -31,7 +31,7 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
             SideMenuController.preferences.drawing.sidePanelWidth = 320
         } else {
             SideMenuController.preferences.drawing.sidePanelWidth = UIScreen.main.bounds.width -
-                20
+                30
         }
 
         SideMenuController.preferences.drawing.centerPanelShadow = true
@@ -69,7 +69,9 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
     func sideMenuControllerWillReveal(_ sideMenuController: SideMenuController) {
         ChatViewController.sharedInstance()?.textView.resignFirstResponder()
+
         SubscriptionsViewController.sharedInstance()?.textFieldSearch.resignFirstResponder()
+        SubscriptionsViewController.sharedInstance()?.updateData()
     }
 
 }
