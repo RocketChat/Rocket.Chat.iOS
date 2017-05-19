@@ -9,13 +9,9 @@
 import Foundation
 import RealmSwift
 
-protocol AuthDelegate: class {
-    func didLogout()
-}
+public struct AuthManager {
 
-struct AuthManager {
-
-    static weak var delegate: AuthDelegate?
+    static public weak var delegate: AuthDelegate?
 
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.

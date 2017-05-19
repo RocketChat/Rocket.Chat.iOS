@@ -37,8 +37,6 @@ final class ChatViewController: SLKTextViewController {
 
     var searchResult: [String: Any] = [:]
 
-    var closeSidebarAfterSubscriptionUpdate = false
-
     var isRequestingHistory = false
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
@@ -51,16 +49,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     // MARK: View Life Cycle
-
-    class func sharedInstance() -> ChatViewController? {
-        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
-            if let nav = main.centerViewController as? UINavigationController {
-                return nav.viewControllers.first as? ChatViewController
-            }
-        }
-
-        return nil
-    }
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
@@ -288,6 +276,8 @@ final class ChatViewController: SLKTextViewController {
             token.stop()
         }
 
+        self.activityIndicator.startAnimating()
+
         title = subscription?.name
         chatTitleView?.subscription = subscription
         textView.resignFirstResponder()
@@ -297,11 +287,7 @@ final class ChatViewController: SLKTextViewController {
             self.collectionView?.deleteItems(at: indexPaths)
         }, completion: { _ in
             CATransaction.commit()
-
-            if self.closeSidebarAfterSubscriptionUpdate {
-                MainChatViewController.closeSideMenuIfNeeded()
-                self.closeSidebarAfterSubscriptionUpdate = false
-            }
+            self.activityIndicator.stopAnimating()
         })
 
         if self.subscription.isValid() {

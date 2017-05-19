@@ -17,14 +17,8 @@ class MessageManagerSpec: XCTestCase {
         super.setUp()
 
         // Clear all the Message objects in Realm
-        Realm.execute({ realm in
-            for obj in realm.objects(Message.self) {
-                realm.delete(obj)
-            }
-
-            for obj in realm.objects(Subscription.self) {
-                realm.delete(obj)
-            }
+        Realm.executeOnMainThread({ realm in
+            realm.deleteAll()
         })
     }
 
@@ -35,7 +29,7 @@ class MessageManagerSpec: XCTestCase {
 extension MessageManagerSpec {
 
     func testAllMessagesReturnsOnlyRelatedToSubscription() {
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             let subscription1 = Subscription()
             subscription1.identifier = "subs1"
 
@@ -63,7 +57,7 @@ extension MessageManagerSpec {
     }
 
     func testAllMessagesReturnsMessagesOrderedByDate() {
-        Realm.execute({ realm in
+        Realm.executeOnMainThread({ realm in
             let subscription = Subscription()
             subscription.identifier = "subscription"
 

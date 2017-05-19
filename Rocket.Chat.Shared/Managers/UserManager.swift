@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct UserManager {
+public struct UserManager {
 
     static func changes() {
         let request = [
@@ -30,7 +30,7 @@ struct UserManager {
         SocketManager.send(request) { _ in }
     }
 
-    static func setUserStatus(status: UserStatus, completion: @escaping MessageCompletion) {
+    public static func setUserStatus(status: UserStatus, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
             "method": "UserPresence:setDefaultStatus",
@@ -42,7 +42,7 @@ struct UserManager {
         }
     }
 
-    static func setUserPresence(status: UserPresence, completion: @escaping MessageCompletion) {
+    public static func setUserPresence(status: UserPresence, completion: @escaping MessageCompletion) {
         let method = "UserPresence:".appending(status.rawValue)
 
         let request = [

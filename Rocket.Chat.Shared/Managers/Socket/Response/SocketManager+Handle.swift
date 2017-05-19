@@ -9,7 +9,6 @@
 import Foundation
 import Starscream
 import SwiftyJSON
-import Crashlytics
 
 extension SocketManager {
 
@@ -25,7 +24,7 @@ extension SocketManager {
             case .ping: return handlePingMessage(result, socket: socket)
             case .changed, .added, .removed: return handleModelUpdates(result, socket: socket)
             case .updated, .unknown: break
-            case .error: handleError(result, socket: socket)
+            case .error: self.delegate?.handleError(of: result, socket: socket)
         }
 
         // Call completion block
@@ -46,21 +45,6 @@ extension SocketManager {
 
     fileprivate func handlePingMessage(_ result: SocketResponse, socket: WebSocket) {
         SocketManager.send(["msg": "pong"])
-    }
-
-    fileprivate func handleError(_ result: SocketResponse, socket: WebSocket) {
-        let error = result.result["error"]
-
-        let errorInfo = [
-            NSLocalizedDescriptionKey: error["error"].string ?? "Unknown",
-            NSLocalizedFailureReasonErrorKey: error["reason"].string ?? "No reason"
-        ]
-
-        Crashlytics.sharedInstance().recordError(NSError(
-            domain: "SocketHandler.handleError",
-            code: -1001,
-            userInfo: errorInfo
-        ))
     }
 
     fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {

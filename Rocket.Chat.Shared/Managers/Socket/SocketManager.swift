@@ -23,7 +23,7 @@ protocol SocketConnectionHandler {
     func socketDidDisconnect(socket: SocketManager)
 }
 
-class SocketManager {
+public class SocketManager {
 
     static let sharedInstance = SocketManager()
 
@@ -32,6 +32,8 @@ class SocketManager {
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
     var events: [String: [MessageCompletion]] = [:]
+
+    public weak var delegate: SocketDelegate?
 
     internal var internalConnectionHandler: SocketCompletion?
     internal var connectionHandlers: [String: SocketConnectionHandler] = [:]
@@ -149,7 +151,7 @@ extension SocketManager {
 
 extension SocketManager: WebSocketDelegate {
 
-    func websocketDidConnect(socket: WebSocket) {
+    public func websocketDidConnect(socket: WebSocket) {
         Log.debug("Socket (\(socket)) did connect")
 
         let object = [
@@ -161,7 +163,7 @@ extension SocketManager: WebSocketDelegate {
         SocketManager.send(object)
     }
 
-    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+    public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Log.debug("[WebSocket] did disconnect with error (\(String(describing: error)))")
 
         events = [:]
@@ -175,11 +177,11 @@ extension SocketManager: WebSocketDelegate {
         }
     }
 
-    func websocketDidReceiveData(socket: WebSocket, data: Data) {
+    public func websocketDidReceiveData(socket: WebSocket, data: Data) {
         Log.debug("[WebSocket] did receive data (\(data))")
     }
 
-    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+    public func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         let json = JSON(parseJSON: text)
 
         // JSON is invalid
@@ -201,7 +203,7 @@ extension SocketManager: WebSocketDelegate {
 
 extension SocketManager: WebSocketPongDelegate {
 
-    func websocketDidReceivePong(socket: WebSocket, data: Data?) {
+    public func websocketDidReceivePong(socket: WebSocket, data: Data?) {
         Log.debug("[WebSocket] did receive pong")
     }
 

@@ -2,12 +2,9 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 platform :ios, '10.0'
 use_frameworks!
+inhibit_all_warnings!
 
 def shared_pods
-  # Crash Report
-  pod 'Fabric'
-  pod 'Crashlytics'
-
   # Code utilities
   pod 'SwiftyJSON'
   pod 'semver'
@@ -18,17 +15,23 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 3.8'
   pod 'Starscream', '~> 2.0.0'
-end
 
-def app_pods
   # UI
-  pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
   pod 'SlackTextViewController'
   pod 'MobilePlayer'
   pod 'URBMediaFocusViewController'
 
   # Text Processing
   pod 'TSMarkdownParser'
+end
+
+def app_pods
+  # Crash Report
+  pod 'Fabric'
+  pod 'Crashlytics'
+
+  # UI
+  pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
 
   # Authentication SDKs
   pod '1PasswordExtension'
