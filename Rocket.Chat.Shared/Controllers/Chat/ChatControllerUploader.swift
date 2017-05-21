@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UploadManagerInjected {
 
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -112,7 +112,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
 
         if let file = file {
-            UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { _ in
+            uploadManager.upload(file: file, subscription: self.subscription, progress: { _ in
                 // We currently don't have progress being called.
             }, completion: { [unowned self] (response, error) in
                 if error {

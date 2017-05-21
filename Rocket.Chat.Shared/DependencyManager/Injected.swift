@@ -11,6 +11,7 @@ import Foundation
 protocol InjectionContainer {
     var socketManager: SocketManager { get }
     var authManager: AuthManager { get }
+    var uploadManager: UploadManager { get }
 }
 
 protocol Injected {
@@ -28,5 +29,12 @@ protocol AuthManagerInjected: Injected {}
 extension AuthManagerInjected {
     var authManager: AuthManager {
         return injectionContainer.authManager
+    }
+}
+
+protocol UploadManagerInjected: Injected {}
+extension UploadManagerInjected {
+    var uploadManager: UploadManager {
+        return injectionContainer.uploadManager
     }
 }

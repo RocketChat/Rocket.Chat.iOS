@@ -11,4 +11,5 @@ import Foundation
 struct DependencyRepository: InjectionContainer {
     var socketManager = SocketManager()
     var authManager = AuthManager()
+    var uploadManager = UploadManager()
 }
