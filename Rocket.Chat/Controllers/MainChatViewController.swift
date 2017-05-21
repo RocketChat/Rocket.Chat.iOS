@@ -50,6 +50,19 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         performSegue(withIdentifier: "containSideMenu", sender: nil)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard let identifier = segue.identifier else { return }
+        switch identifier {
+        case "containSideMenu":
+            guard let chatViewController = segue.destination as? ChatViewController else { break }
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { break }
+            chatViewController.injectionContainer = appDelegate.injectionContainer
+        default:
+            break
+        }
+    }
+
     // MARK: SideMenuControllerDelegate
 
     func sideMenuControllerWillHide(_ sideMenuController: SideMenuController) {

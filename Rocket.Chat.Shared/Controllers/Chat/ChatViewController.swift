@@ -11,7 +11,7 @@ import SlackTextViewController
 import URBMediaFocusViewController
 
 // swiftlint:disable file_length type_body_length
-final class ChatViewController: SLKTextViewController {
+final class ChatViewController: SLKTextViewController, AuthManagerInjected, SocketManagerInjected {
 
     var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
@@ -45,6 +45,19 @@ final class ChatViewController: SLKTextViewController {
         didSet {
             updateSubscriptionInfo()
             markAsRead()
+        }
+    }
+
+    var injectionContainer: InjectionContainer! {
+        didSet {
+            SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
+            guard self.subscription == nil else { return }
+            guard let auth = AuthManager.isAuthenticated() else { return }
+            let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
+            if let subscription = subscriptions.first {
+                self.subscription = subscription
+            }
         }
     }
 
@@ -85,13 +98,6 @@ final class ChatViewController: SLKTextViewController {
 
         // TODO: this should really goes into the view model, when we have it
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
-
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        if let subscription = subscriptions.first {
-            self.subscription = subscription
-        }
 
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
