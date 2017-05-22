@@ -45,7 +45,7 @@ final class SettingsViewModel {
         return text
     }
 
-    internal var licenceURL: URL? {
+    internal var licenseURL: URL? {
         return URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
     }
 
