@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MessageUI
 import SafariServices
 
 final class SettingsViewController: UITableViewController {
@@ -23,12 +24,40 @@ final class SettingsViewController: UITableViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    // MARK: UITableViewDelegate
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let url = viewModel.settingsURL(atIndex: indexPath.row) else { return }
-
+    func cellTermsOfServiceDidPressed() {
+        guard let url = viewModel.licenseURL else { return }
         let controller = SFSafariViewController(url: url)
         navigationController?.pushViewController(controller, animated: true)
     }
+
+    func cellContactDidPressed() {
+        if !MFMailComposeViewController.canSendMail() {
+            return
+        }
+
+        let controller = MFMailComposeViewController()
+        controller.mailComposeDelegate = self
+        controller.setToRecipients([viewModel.supportEmail])
+        controller.setSubject(viewModel.supportEmailSubject)
+        controller.setMessageBody(viewModel.supportEmailBody, isHTML: true)
+        self.present(controller, animated: true, completion: nil)
+    }
+
+    // MARK: UITableViewDelegate
+
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == 0 {
+            cellContactDidPressed()
+        } else if indexPath.row == 1 {
+            cellTermsOfServiceDidPressed()
+        }
+    }
+}
+
+extension SettingsViewController: MFMailComposeViewControllerDelegate {
+
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        dismiss(animated: true, completion: nil)
+    }
+
 }
