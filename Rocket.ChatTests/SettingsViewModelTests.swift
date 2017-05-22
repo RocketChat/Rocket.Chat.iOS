@@ -33,26 +33,10 @@ class SettingsViewModelTests: XCTestCase {
         XCTAssert(model.formattedVersion == formatted, "Show app version and build")
     }
 
-    func testRocketChatURL() {
-        let url = URL(string: "https://rocket.chat")
-        let modelURL = model.settingsURL(atIndex: 0)?.absoluteString
-        XCTAssert(modelURL == url?.absoluteString, "Show rocketchat website url")
-    }
-
-    func testContactURL() {
-        let url = URL(string: "https://rocket.chat/contact")
-        let modelURL = model.settingsURL(atIndex: 1)?.absoluteString
-        XCTAssert(modelURL == url?.absoluteString, "Show contact url")
-    }
-
     func testLicenseURL() {
         let url = URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
-        let modelURL = model.settingsURL(atIndex: 2)?.absoluteString
-        XCTAssert(modelURL == url?.absoluteString, "Show contact url")
+        let modelURL = model.licenseURL
+        XCTAssert(modelURL?.absoluteString == url?.absoluteString, "Show license url")
     }
 
-    func testInvalidSectino() {
-        let modelURL = model.settingsURL(atIndex: 3)?.absoluteString
-        XCTAssert(modelURL == nil, "Section 3 is invalid, no data in here so far")
-    }
 }

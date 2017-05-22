@@ -25,7 +25,7 @@ final class SettingsViewController: UITableViewController {
     }
 
     func cellTermsOfServiceDidPressed() {
-        guard let url = viewModel.licenceURL else { return }
+        guard let url = viewModel.licenseURL else { return }
         let controller = SFSafariViewController(url: url)
         navigationController?.pushViewController(controller, animated: true)
     }
