@@ -21,8 +21,6 @@ struct FileUpload {
 
 class UploadManager {
 
-    static let shared = UploadManager()
-
     fileprivate func sendFileMessage(params: [Any], completion: @escaping UploadCompletionBlock) {
         let request = [
             "msg": "method",

@@ -31,7 +31,7 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
             SideMenuController.preferences.drawing.sidePanelWidth = 320
         } else {
             SideMenuController.preferences.drawing.sidePanelWidth = UIScreen.main.bounds.width -
-                20
+                30
         }
 
         SideMenuController.preferences.drawing.centerPanelShadow = true
@@ -48,6 +48,19 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
         performSegue(withIdentifier: "showCenterController", sender: nil)
         performSegue(withIdentifier: "containSideMenu", sender: nil)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard let identifier = segue.identifier else { return }
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        switch identifier {
+        case "showCenterController":
+            guard let chatViewController = segue.destination as? ChatViewController else { break }
+            chatViewController.injectionContainer = appDelegate.injectionContainer
+        default:
+            break
+        }
     }
 
     // MARK: SideMenuControllerDelegate
@@ -69,7 +82,9 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
     func sideMenuControllerWillReveal(_ sideMenuController: SideMenuController) {
         ChatViewController.sharedInstance()?.textView.resignFirstResponder()
+
         SubscriptionsViewController.sharedInstance()?.textFieldSearch.resignFirstResponder()
+        SubscriptionsViewController.sharedInstance()?.updateData()
     }
 
 }

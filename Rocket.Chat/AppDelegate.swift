@@ -11,9 +11,10 @@ import RealmSwift
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, AuthManagerInjected, SocketManagerInjected {
 
     var window: UIWindow?
+    var injectionContainer: InjectionContainer! = DependencyRepository()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Launcher().prepareToLaunch(with: launchOptions)
