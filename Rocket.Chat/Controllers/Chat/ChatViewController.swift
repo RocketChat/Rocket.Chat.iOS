@@ -30,7 +30,7 @@ final class ChatViewController: SLKTextViewController {
 
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
-    weak var chatHeaderViewOffline: ChatHeaderViewOffline?
+    weak var chatHeaderViewStatus: ChatHeaderViewStatus?
     lazy var mediaFocusViewController = URBMediaFocusViewController()
 
     var dataController = ChatDataController()
