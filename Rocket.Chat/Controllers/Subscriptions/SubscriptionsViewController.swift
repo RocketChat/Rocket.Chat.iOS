@@ -88,8 +88,6 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        tableView.reloadData()
-
         updateCurrentUserInformation()
     }
 
@@ -163,6 +161,15 @@ extension SubscriptionsViewController {
             self?.groupSubscription()
             self?.tableView.reloadData()
         }
+    }
+
+    func updateData() {
+        guard !isSearchingLocally && !isSearchingRemotely else { return }
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
+        groupSubscription()
+        updateCurrentUserInformation()
+        tableView?.reloadData()
     }
 
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {

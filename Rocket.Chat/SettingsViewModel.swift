@@ -13,21 +13,6 @@ private enum BundleInfoKey: String {
     case build = "CFBundleVersion"
 }
 
-private enum Settings: Int {
-    case website, contact, license
-
-    func url() -> URL? {
-        switch self {
-        case .website:
-            return URL(string: "https://rocket.chat")
-        case .contact:
-            return URL(string: "https://rocket.chat/contact")
-        case .license:
-            return URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
-        }
-    }
-}
-
 final class SettingsViewModel {
 
     internal var formattedVersion: String {
@@ -42,8 +27,26 @@ final class SettingsViewModel {
         return appInfo(.build)
     }
 
-    func settingsURL(atIndex index: Int) -> URL? {
-        return Settings(rawValue: index)?.url()
+    internal var supportEmail: String {
+        return "Rocket.Chat Support <support@rocket.chat>"
+    }
+
+    internal var supportEmailSubject: String {
+        return "Support on iOS native application"
+    }
+
+    internal var supportEmailBody: String {
+        var text = "<br /><br />"
+        text += "<b>Device information</b><br />"
+        text += "<b>System name</b>: \(UIDevice.current.systemName)<br />"
+        text += "<b>System version</b>: \(UIDevice.current.systemVersion)<br />"
+        text += "<b>System model</b>: \(UIDevice.current.model)<br />"
+        text += "<b>Application version</b>: \(version) (\(build))"
+        return text
+    }
+
+    internal var licenseURL: URL? {
+        return URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
     }
 
     // MARK: Helpers
