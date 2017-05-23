@@ -23,17 +23,4 @@ final class ChatHeaderViewStatus: UIView {
         SocketManager.reconnect()
     }
 
-    // MARK: Frame/Position
-
-    func updateFramePosition() {
-        guard let superview = self.superview else { return }
-
-        frame = CGRect(
-            x: 0,
-            y: 0,
-            width: superview.frame.width,
-            height: ChatHeaderViewStatus.defaultHeight
-        )
-    }
-
 }

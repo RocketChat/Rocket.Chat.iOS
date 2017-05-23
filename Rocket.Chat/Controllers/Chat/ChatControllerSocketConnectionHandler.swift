@@ -11,7 +11,7 @@ import UIKit
 extension ChatViewController: SocketConnectionHandler {
 
     func socketDidConnect(socket: SocketManager) {
-        chatHeaderViewOffline?.removeFromSuperview()
+        chatHeaderViewStatus?.removeFromSuperview()
 
         DispatchQueue.main.async { [weak self] in
             if let subscription = self?.subscription {
@@ -23,12 +23,27 @@ extension ChatViewController: SocketConnectionHandler {
     }
 
     func socketDidDisconnect(socket: SocketManager) {
-        chatHeaderViewOffline?.removeFromSuperview()
+        chatHeaderViewStatus?.removeFromSuperview()
 
-        if let headerView = ChatHeaderViewOffline.instantiateFromNib() {
-            headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.frame.height)
+        if let headerView = ChatHeaderViewStatus.instantiateFromNib() {
+            headerView.translatesAutoresizingMaskIntoConstraints = false
+            headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 44)
             view.addSubview(headerView)
-            chatHeaderViewOffline = headerView
+            chatHeaderViewStatus = headerView
+
+            view.addConstraints(NSLayoutConstraint.constraints(
+                withVisualFormat: "|-0-[headerView]-0-|",
+                options: .alignAllLeft,
+                metrics: nil,
+                views: ["headerView": headerView])
+            )
+
+            view.addConstraints(NSLayoutConstraint.constraints(
+                withVisualFormat: "V:|-0-[headerView(44)]",
+                options: .alignAllLeft,
+                metrics: nil,
+                views: ["headerView": headerView])
+            )
         }
     }
 
