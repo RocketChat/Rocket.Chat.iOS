@@ -57,6 +57,13 @@ extension MessageManager {
 
                     if !message.userBlocked {
                         validMessages.append(message)
+                    } else {
+                        // TODO: Dependency Injection in model mapping
+                        guard let user = message.user else { return }
+                        guard let uid = user.identifier else { return }
+                        if !self.blockedUsersList.contains(uid) {
+                            validMessages.append(message)
+                        }
                     }
                 }
             }, completion: completion)
