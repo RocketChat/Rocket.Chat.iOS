@@ -316,6 +316,13 @@ extension SubscriptionsViewController {
             }
         }
     }
+
+    func subscription(for indexPath: IndexPath) -> Subscription? {
+        guard let groups = groupSubscriptions else { return nil }
+        guard groups.count > indexPath.section else { return nil }
+        guard groups[indexPath.section].count > indexPath.row else { return nil }
+        return groups[indexPath.section][indexPath.row]
+    }
 }
 
 extension SubscriptionsViewController: UITableViewDataSource {
@@ -333,8 +340,9 @@ extension SubscriptionsViewController: UITableViewDataSource {
             return UITableViewCell()
         }
 
-        let subscription = groupSubscriptions?[indexPath.section][indexPath.row]
-        cell.subscription = subscription
+        if let subscription = subscription(for: indexPath) {
+            cell.subscription = subscription
+        }
 
         return cell
     }
@@ -366,7 +374,8 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let subscription = self.groupSubscriptions?[indexPath.section][indexPath.row]
+        guard let subscription = subscription(for: indexPath) else { return }
+
         let controller = ChatViewController.sharedInstance()
         controller?.closeSidebarAfterSubscriptionUpdate = true
         controller?.subscription = subscription
