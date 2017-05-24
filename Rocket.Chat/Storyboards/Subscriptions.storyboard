@@ -220,19 +220,16 @@
             </objects>
             <point key="canvasLocation" x="1012" y="488.90554722638683"/>
         </scene>
-        <!--Side Menu Navigation Controller-->
+        <!--Navigation Controller-->
         <scene sceneID="OQO-C1-nEa">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="BRy-Se-87j" customClass="UISideMenuNavigationController" customModule="SideMenu" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="BRy-Se-87j" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="AU3-QI-Caf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="boolean" keyPath="leftSide" value="YES"/>
-                    </userDefinedRuntimeAttributes>
                     <connections>
                         <segue destination="pre-Wt-UOv" kind="relationship" relationship="rootViewController" id="pog-b6-o8g"/>
                     </connections>

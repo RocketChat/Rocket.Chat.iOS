@@ -39,6 +39,8 @@ extension ChatViewController: ChatMessageCellProtocol {
     }
 
     func openImageFromCell(attachment: Attachment, thumbnail: UIImageView) {
+        textView.resignFirstResponder()
+
         if let image = thumbnail.image {
             mediaFocusViewController.show(image, from: thumbnail)
         } else {
