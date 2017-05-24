@@ -16,6 +16,10 @@ extension Attachment: ModelMappeable {
             self.identifier = String.random(30)
         }
 
+        if let authorName = values["author_name"].string {
+            self.title = "@\(authorName)"
+        }
+
         if let title = values["title"].string {
             self.title = title
         }
