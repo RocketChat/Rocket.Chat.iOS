@@ -44,7 +44,7 @@ extension SocketManager {
     }
 
     fileprivate func handlePingMessage(_ result: SocketResponse, socket: WebSocket) {
-        SocketManager.send(["msg": "pong"])
+        self.send(["msg": "pong"])
     }
 
     fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {

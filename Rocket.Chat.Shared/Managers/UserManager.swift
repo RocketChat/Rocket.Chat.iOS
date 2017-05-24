@@ -8,41 +8,43 @@
 
 import Foundation
 
-public struct UserManager {
+public struct UserManager: SocketManagerInjected {
 
-    static func changes() {
+    var injectionContainer: InjectionContainer!
+
+    func changes() {
         let request = [
             "msg": "sub",
             "name": "activeUsers",
             "params": []
         ] as [String : Any]
 
-        SocketManager.send(request) { _ in }
+        socketManager.send(request) { _ in }
     }
 
-    static func userDataChanges() {
+    func userDataChanges() {
         let request = [
             "msg": "sub",
             "name": "userData",
             "params": []
         ] as [String : Any]
 
-        SocketManager.send(request) { _ in }
+        socketManager.send(request) { _ in }
     }
 
-    public static func setUserStatus(status: UserStatus, completion: @escaping MessageCompletion) {
+    public func setUserStatus(status: UserStatus, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
             "method": "UserPresence:setDefaultStatus",
             "params": [status.rawValue]
         ] as [String : Any]
 
-        SocketManager.send(request) { (response) in
+        socketManager.send(request) { (response) in
             completion(response)
         }
     }
 
-    public static func setUserPresence(status: UserPresence, completion: @escaping MessageCompletion) {
+    public func setUserPresence(status: UserPresence, completion: @escaping MessageCompletion) {
         let method = "UserPresence:".appending(status.rawValue)
 
         let request = [
@@ -51,7 +53,7 @@ public struct UserManager {
             "params": []
         ] as [String : Any]
 
-        SocketManager.send(request) { (response) in
+        socketManager.send(request) { (response) in
             completion(response)
         }
     }

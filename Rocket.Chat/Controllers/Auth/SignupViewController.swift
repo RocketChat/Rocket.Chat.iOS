@@ -9,7 +9,9 @@
 import UIKit
 import SwiftyJSON
 
-final class SignupViewController: BaseViewController {
+final class SignupViewController: BaseViewController, AuthManagerInjected {
+
+    var injectionContainer: InjectionContainer!
 
     internal var requesting = false
 
@@ -54,6 +56,18 @@ final class SignupViewController: BaseViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard let identifier = segue.identifier else { return }
+        switch identifier {
+        case "RequestUsername":
+            guard let controller = segue.destination as? RegisterUsernameViewController else { break }
+            controller.injectionContainer = injectionContainer
+        default:
+            break
+        }
+    }
+
     func startLoading() {
         textFieldName.alpha = 0.5
         textFieldEmail.alpha = 0.5
@@ -94,7 +108,7 @@ final class SignupViewController: BaseViewController {
         let email = textFieldEmail.text ?? ""
         let password = textFieldPassword.text ?? ""
 
-        AuthManager.signup(with: name, email, password) { [weak self] (response) in
+        authManager.signup(with: name, email, password) { [weak self] (response) in
             self?.stopLoading()
 
             if response.isError() {
@@ -109,7 +123,7 @@ final class SignupViewController: BaseViewController {
                     self?.present(alert, animated: true, completion: nil)
                 }
             } else {
-                if let user = AuthManager.currentUser() {
+                if let user = self?.authManager.currentUser() {
                     if user.username != nil {
                         self?.dismiss(animated: true, completion: nil)
                     } else {

@@ -8,16 +8,19 @@
 
 import UIKit
 
-final class AutocompleteCell: UITableViewCell {
+final class AutocompleteCell: UITableViewCell, Injected {
 
     static let minimumHeight = CGFloat(44)
     static let identifier = "AutocompleteCell"
+
+    var injectionContainer: InjectionContainer!
 
     @IBOutlet weak var imageViewIcon: UIImageView!
 
     @IBOutlet weak var avatarViewContainer: AvatarView! {
         didSet {
             if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.injectionContainer = injectionContainer
                 avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
                 self.avatarView = avatarView

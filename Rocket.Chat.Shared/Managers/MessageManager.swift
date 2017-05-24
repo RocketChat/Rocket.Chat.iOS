@@ -9,17 +9,19 @@
 import Foundation
 import RealmSwift
 
-struct MessageManager {
-    static let historySize = 30
+class MessageManager: SocketManagerInjected {
+    let historySize = 30
+
+    var injectionContainer: InjectionContainer!
+
+    var blockedUsersList = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 }
 
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
 
 extension MessageManager {
 
-    static var blockedUsersList = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
-
-    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping VoidCompletion) {
+    func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping VoidCompletion) {
         var lastDate: Any!
 
         if let lastMessageDate = lastMessageDate {
@@ -36,7 +38,7 @@ extension MessageManager {
             ]]
         ] as [String : Any]
 
-        SocketManager.send(request) { response in
+        socketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
             let list = response.result["result"]["messages"].array
 
@@ -61,7 +63,7 @@ extension MessageManager {
         }
     }
 
-    static func changes(_ subscription: Subscription) {
+    func changes(_ subscription: Subscription) {
         let eventName = "\(subscription.rid)"
         let request = [
             "msg": "sub",
@@ -69,7 +71,7 @@ extension MessageManager {
             "params": [eventName, false]
         ] as [String : Any]
 
-        SocketManager.subscribe(request, eventName: eventName) { response in
+        socketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             let object = response.result["fields"]["args"][0]
@@ -86,7 +88,7 @@ extension MessageManager {
         }
     }
 
-    static func report(_ message: Message, completion: @escaping MessageCompletion) {
+    func report(_ message: Message, completion: @escaping MessageCompletion) {
         guard let messageIdentifier = message.identifier else { return }
 
         let request = [
@@ -95,13 +97,13 @@ extension MessageManager {
             "params": [messageIdentifier, "Message reported by user."]
         ] as [String : Any]
 
-        SocketManager.send(request) { response in
+        socketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
             completion(response)
         }
     }
 
-    static func pin(_ message: Message, completion: @escaping MessageCompletion) {
+    func pin(_ message: Message, completion: @escaping MessageCompletion) {
         guard let messageIdentifier = message.identifier else { return }
 
         let request = [
@@ -110,10 +112,10 @@ extension MessageManager {
             "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
         ] as [String : Any]
 
-        SocketManager.send(request, completion: completion)
+        socketManager.send(request, completion: completion)
     }
 
-    static func unpin(_ message: Message, completion: @escaping MessageCompletion) {
+    func unpin(_ message: Message, completion: @escaping MessageCompletion) {
         guard let messageIdentifier = message.identifier else { return }
 
         let request = [
@@ -122,10 +124,10 @@ extension MessageManager {
             "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
         ] as [String : Any]
 
-        SocketManager.send(request, completion: completion)
+        socketManager.send(request, completion: completion)
     }
 
-    static func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
+    func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
         guard let userIdentifier = user.identifier else { return }
 
         var blockedUsers: [String] = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []

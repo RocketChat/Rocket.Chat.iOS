@@ -23,9 +23,9 @@ protocol SocketConnectionHandler {
     func socketDidDisconnect(socket: SocketManager)
 }
 
-public class SocketManager {
+public class SocketManager: AuthManagerInjected, PushManagerInjected, SubscriptionManagerInjected, UserManagerInjected {
 
-    static let sharedInstance = SocketManager()
+    var injectionContainer: InjectionContainer!
 
     var serverURL: URL?
 
@@ -40,35 +40,35 @@ public class SocketManager {
 
     // MARK: Connection
 
-    static func connect(_ url: URL, completion: @escaping SocketCompletion) {
-        sharedInstance.serverURL = url
-        sharedInstance.internalConnectionHandler = completion
+    func connect(_ url: URL, completion: @escaping SocketCompletion) {
+        self.serverURL = url
+        self.internalConnectionHandler = completion
 
-        sharedInstance.socket = WebSocket(url: url)
-        sharedInstance.socket?.delegate = sharedInstance
-        sharedInstance.socket?.pongDelegate = sharedInstance
+        self.socket = WebSocket(url: url)
+        self.socket?.delegate = self
+        self.socket?.pongDelegate = self
 
-        sharedInstance.socket?.connect()
+        self.socket?.connect()
     }
 
-    static func disconnect(_ completion: @escaping SocketCompletion) {
-        if !(sharedInstance.socket?.isConnected ?? false) {
-            completion(sharedInstance.socket, true)
+    func disconnect(_ completion: @escaping SocketCompletion) {
+        if !(self.socket?.isConnected ?? false) {
+            completion(self.socket, true)
             return
         }
 
-        sharedInstance.internalConnectionHandler = completion
-        sharedInstance.socket?.disconnect()
+        self.internalConnectionHandler = completion
+        self.socket?.disconnect()
     }
 
-    static func clear() {
-        sharedInstance.internalConnectionHandler = nil
-        sharedInstance.connectionHandlers = [:]
+    func clear() {
+        self.internalConnectionHandler = nil
+        self.connectionHandlers = [:]
     }
 
     // MARK: Messages
 
-    static func send(_ object: [String: Any], completion: MessageCompletion? = nil) {
+    func send(_ object: [String: Any], completion: MessageCompletion? = nil) {
         let identifier = String.random(50)
         var json = JSON(object)
         json["id"] = JSON(identifier)
@@ -76,23 +76,23 @@ public class SocketManager {
         if let raw = json.rawString() {
             Log.debug("Socket will send message: \(raw)")
 
-            sharedInstance.socket?.write(string: raw)
+            self.socket?.write(string: raw)
 
             if completion != nil {
-                sharedInstance.queue[identifier] = completion
+                self.queue[identifier] = completion
             }
         } else {
             Log.debug("JSON invalid: \(json)")
         }
     }
 
-    static func subscribe(_ object: [String: Any], eventName: String, completion: @escaping MessageCompletion) {
-        if var list = sharedInstance.events[eventName] {
+    func subscribe(_ object: [String: Any], eventName: String, completion: @escaping MessageCompletion) {
+        if var list = self.events[eventName] {
             list.append(completion)
-            sharedInstance.events[eventName] = list
+            self.events[eventName] = list
         } else {
             self.send(object, completion: completion)
-            sharedInstance.events[eventName] = [completion]
+            self.events[eventName] = [completion]
         }
     }
 
@@ -102,33 +102,33 @@ public class SocketManager {
 
 extension SocketManager {
 
-    static func reconnect() {
-        guard let auth = AuthManager.isAuthenticated() else { return }
+    func reconnect() {
+        guard let auth = authManager.isAuthenticated() else { return }
 
-        AuthManager.resume(auth, completion: { (response) in
+        authManager.resume(auth, completion: { (response) in
             guard !response.isError() else {
                 return
             }
 
-            SubscriptionManager.updateSubscriptions(auth, completion: { _ in
+            self.subscriptionManager.updateSubscriptions(auth, completion: { _ in
                 // TODO: Move it to somewhere else
-                AuthManager.updatePublicSettings(auth, completion: { _ in
+                self.authManager.updatePublicSettings(auth, completion: { _ in
 
                 })
 
-                UserManager.userDataChanges()
-                UserManager.changes()
-                SubscriptionManager.changes(auth)
+                self.userManager.userDataChanges()
+                self.userManager.changes()
+                self.subscriptionManager.changes(auth)
 
                 if let userId = auth.userId {
-                    PushManager.updateUser(userId)
+                    self.pushManager.updateUser(userId)
                 }
             })
         })
     }
 
-    static func isConnected() -> Bool {
-        return self.sharedInstance.socket?.isConnected ?? false
+    func isConnected() -> Bool {
+        return self.socket?.isConnected ?? false
     }
 
 }
@@ -137,12 +137,12 @@ extension SocketManager {
 
 extension SocketManager {
 
-    static func addConnectionHandler(token: String, handler: SocketConnectionHandler) {
-        sharedInstance.connectionHandlers[token] = handler
+    func addConnectionHandler(token: String, handler: SocketConnectionHandler) {
+        self.connectionHandlers[token] = handler
     }
 
-    static func removeConnectionHandler(token: String) {
-        sharedInstance.connectionHandlers[token] = nil
+    func removeConnectionHandler(token: String) {
+        self.connectionHandlers[token] = nil
     }
 
 }
@@ -160,7 +160,7 @@ extension SocketManager: WebSocketDelegate {
             "support": ["1", "pre2", "pre1"]
         ] as [String : Any]
 
-        SocketManager.send(object)
+        self.send(object)
     }
 
     public func websocketDidDisconnect(socket: WebSocket, error: NSError?) {

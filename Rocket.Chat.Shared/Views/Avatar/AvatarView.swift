@@ -14,7 +14,9 @@ let avatarColors: [UInt] = [
     0x8BC34A, 0xCDDC39, 0xFFC107, 0xFF9800, 0xFF5722,
     0x795548, 0x9E9E9E, 0x607D8B]
 
-final class AvatarView: UIView {
+final class AvatarView: UIView, AuthManagerInjected {
+
+    var injectionContainer: InjectionContainer!
 
     var imageURL: URL? {
         didSet {
@@ -39,7 +41,7 @@ final class AvatarView: UIView {
 
     private func userAvatarURL() -> URL? {
         guard let username = user?.username else { return nil }
-        guard let auth = AuthManager.isAuthenticated() else { return nil }
+        guard let auth = authManager.isAuthenticated() else { return nil }
         guard let baseURL = auth.baseURL() else { return nil }
         guard let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else { return nil }
         return URL(string: "\(baseURL)/avatar/\(encodedUsername).jpg")

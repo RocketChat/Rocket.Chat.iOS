@@ -10,11 +10,13 @@ import UIKit
 import SwiftyJSON
 import semver
 
-final class ConnectServerViewController: BaseViewController {
+final class ConnectServerViewController: BaseViewController, SocketManagerInjected, AuthManagerInjected {
 
     internal let defaultURL = "https://demo.rocket.chat"
     internal var connecting = false
     internal var serverURL: URL!
+
+    var injectionContainer: InjectionContainer!
 
     var serverPublicSettings: AuthSettings?
 
@@ -67,6 +69,7 @@ final class ConnectServerViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
+            controller.injectionContainer = injectionContainer
             controller.serverURL = serverURL
             controller.serverPublicSettings = self.serverPublicSettings
         }
@@ -114,28 +117,29 @@ final class ConnectServerViewController: BaseViewController {
         serverURL = socketURL
 
         validate(url: validateURL) { [weak self] (_, error) in
+            guard let strongSelf = self else { return }
             guard !error else {
                 DispatchQueue.main.async {
-                    self?.connecting = false
-                    self?.textFieldServerURL.alpha = 1
-                    self?.activityIndicator.stopAnimating()
-                    self?.alertInvalidURL()
+                    strongSelf.connecting = false
+                    strongSelf.textFieldServerURL.alpha = 1
+                    strongSelf.activityIndicator.stopAnimating()
+                    strongSelf.alertInvalidURL()
                 }
 
                 return
             }
 
-            SocketManager.connect(socketURL) { (_, connected) in
-                AuthManager.updatePublicSettings(nil) { (settings) in
-                    self?.serverPublicSettings = settings
+            strongSelf.socketManager.connect(socketURL) { (_, connected) in
+                strongSelf.authManager.updatePublicSettings(nil) { (settings) in
+                    strongSelf.serverPublicSettings = settings
 
                     if connected {
-                        self?.performSegue(withIdentifier: "Auth", sender: nil)
+                        strongSelf.performSegue(withIdentifier: "Auth", sender: nil)
                     }
 
-                    self?.connecting = false
-                    self?.textFieldServerURL.alpha = 1
-                    self?.activityIndicator.stopAnimating()
+                    strongSelf.connecting = false
+                    strongSelf.textFieldServerURL.alpha = 1
+                    strongSelf.activityIndicator.stopAnimating()
                 }
             }
         }

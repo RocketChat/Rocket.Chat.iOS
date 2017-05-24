@@ -11,7 +11,12 @@ import Foundation
 protocol InjectionContainer {
     var socketManager: SocketManager { get }
     var authManager: AuthManager { get }
+    var subscriptionManager: SubscriptionManager { get }
+    var userManager: UserManager { get }
+    var messageManager: MessageManager { get }
     var uploadManager: UploadManager { get }
+    var pushManager: PushManager { get }
+    var messageTextCacheManager: MessageTextCacheManager { get }
 }
 
 protocol Injected {
@@ -32,9 +37,44 @@ extension AuthManagerInjected {
     }
 }
 
+protocol SubscriptionManagerInjected: Injected {}
+extension SubscriptionManagerInjected {
+    var subscriptionManager: SubscriptionManager {
+        return injectionContainer.subscriptionManager
+    }
+}
+
+protocol UserManagerInjected: Injected {}
+extension UserManagerInjected {
+    var userManager: UserManager {
+        return injectionContainer.userManager
+    }
+}
+
+protocol MessageManagerInjected: Injected {}
+extension MessageManagerInjected {
+    var messageManager: MessageManager {
+        return injectionContainer.messageManager
+    }
+}
+
 protocol UploadManagerInjected: Injected {}
 extension UploadManagerInjected {
     var uploadManager: UploadManager {
         return injectionContainer.uploadManager
+    }
+}
+
+protocol PushManagerInjected: Injected {}
+extension PushManagerInjected {
+    var pushManager: PushManager {
+        return injectionContainer.pushManager
+    }
+}
+
+protocol MessageTextCacheManagerInjected: Injected {}
+extension MessageTextCacheManagerInjected {
+    var messageTextCacheManager: MessageTextCacheManager {
+        return injectionContainer.messageTextCacheManager
     }
 }

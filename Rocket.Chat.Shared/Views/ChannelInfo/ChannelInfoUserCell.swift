@@ -13,11 +13,13 @@ struct ChannelInfoUserCellData: ChannelInfoCellDataProtocol {
     var user: User?
 }
 
-class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol {
+class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol, Injected {
     typealias DataType = ChannelInfoUserCellData
 
     static let identifier = "kChannelInfoCellUser"
     static let defaultHeight: Float = 80
+
+    var injectionContainer: InjectionContainer!
     var data: DataType? {
         didSet {
             labelTitle.text = data?.user?.username
@@ -29,6 +31,7 @@ class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol {
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.injectionContainer = injectionContainer
                 avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
                 self.avatarView = avatarView

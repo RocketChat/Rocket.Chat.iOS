@@ -19,7 +19,9 @@ struct FileUpload {
     var data: Data
 }
 
-class UploadManager {
+class UploadManager: SocketManagerInjected, AuthManagerInjected {
+
+    var injectionContainer: InjectionContainer!
 
     fileprivate func sendFileMessage(params: [Any], completion: @escaping UploadCompletionBlock) {
         let request = [
@@ -28,7 +30,7 @@ class UploadManager {
             "params": params
         ] as [String : Any]
 
-        SocketManager.send(request) { (response) in
+        socketManager.send(request) { (response) in
             completion(response, response.isError())
         }
     }
@@ -61,7 +63,7 @@ class UploadManager {
     }
 
     func upload(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
-        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let auth = authManager.isAuthenticated() else { return }
         guard let store = auth.settings?.uploadStorageType else { return }
 
         if store == "AmazonS3" {
@@ -89,7 +91,7 @@ class UploadManager {
             ]]
         ] as [String : Any]
 
-        SocketManager.send(request) { [unowned self] (response) in
+        socketManager.send(request) { [unowned self] (response) in
             guard !response.isError() else {
                 completion(response, true)
                 return
@@ -97,7 +99,7 @@ class UploadManager {
 
             let result = response.result
 
-            guard let auth = AuthManager.isAuthenticated() else { return }
+            guard let auth = self.authManager.isAuthenticated() else { return }
             guard let uploadURL = URL(string: result["result"]["url"].string ?? "") else { return }
             guard let fileToken = result["result"]["token"].string else { return }
             guard let fileIdentifier = result["result"]["fileId"].string else { return }
@@ -120,7 +122,7 @@ class UploadManager {
                         "params": [fileIdentifier, normalizedStore, fileToken]
                     ] as [String : Any]
 
-                    SocketManager.send(request) { [unowned self] (response) in
+                    self.socketManager.send(request) { [unowned self] (response) in
                         guard !response.isError() else {
                             completion(response, true)
                             return
@@ -161,7 +163,7 @@ class UploadManager {
             ]
         ] as [String : Any]
 
-        SocketManager.send(request) { [unowned self] (response) in
+        socketManager.send(request) { [unowned self] (response) in
             guard !response.isError() else {
                 completion(response, true)
                 return

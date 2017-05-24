@@ -9,7 +9,9 @@
 import RealmSwift
 
 // swiftlint:disable file_length
-final class SubscriptionsViewController: BaseViewController {
+final class SubscriptionsViewController: BaseViewController, AuthManagerInjected, SubscriptionManagerInjected {
+
+    var injectionContainer: InjectionContainer!
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
@@ -110,7 +112,7 @@ extension SubscriptionsViewController {
     }
 
     func searchBy(_ text: String = "") {
-        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let auth = authManager.isAuthenticated() else { return }
         subscriptions = auth.subscriptions.filter("name CONTAINS %@", text)
 
         if text.characters.count == 0 {
@@ -148,7 +150,7 @@ extension SubscriptionsViewController {
         tableView.tableFooterView = nil
         activityViewSearching.startAnimating()
 
-        SubscriptionManager.spotlight(text) { [weak self] result in
+        subscriptionManager.spotlight(text) { [weak self] result in
             let currentText = self?.textFieldSearch.text ?? ""
 
             if currentText.characters.count == 0 {
@@ -165,7 +167,7 @@ extension SubscriptionsViewController {
 
     func updateData() {
         guard !isSearchingLocally && !isSearchingRemotely else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let auth = authManager.isAuthenticated() else { return }
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         groupSubscription()
         updateCurrentUserInformation()
@@ -174,7 +176,7 @@ extension SubscriptionsViewController {
 
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
         guard !isSearchingLocally && !isSearchingRemotely else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let auth = authManager.isAuthenticated() else { return }
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         groupSubscription()
 
@@ -187,7 +189,7 @@ extension SubscriptionsViewController {
     }
 
     func updateCurrentUserInformation() {
-        guard let user = AuthManager.currentUser() else { return }
+        guard let user = authManager.currentUser() else { return }
         guard let labelUsername = self.labelUsername else { return }
         guard let viewUserStatus = self.viewUserStatus else { return }
 
@@ -211,7 +213,7 @@ extension SubscriptionsViewController {
 
     func subscribeModelChanges() {
         guard !assigned else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let auth = authManager.isAuthenticated() else { return }
 
         assigned = true
 
@@ -432,6 +434,7 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
 
     func presentUserMenu() {
         guard let viewUserMenu = SubscriptionUserStatusView.instantiateFromNib() else { return }
+        viewUserMenu.injectionContainer = injectionContainer
 
         var newFrame = view.frame
         newFrame.origin.y = -newFrame.height

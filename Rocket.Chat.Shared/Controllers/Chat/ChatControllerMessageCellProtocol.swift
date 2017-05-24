@@ -31,7 +31,8 @@ extension ChatViewController: ChatMessageCellProtocol {
     }
 
     func openVideoFromCell(attachment: Attachment) {
-        guard let videoURL = attachment.fullVideoURL() else { return }
+        guard let auth = authManager.isAuthenticated() else { return }
+        guard let videoURL = attachment.fullVideoURL(inAuth: auth) else { return }
         let controller = MobilePlayerViewController(contentURL: videoURL)
         controller.title = attachment.title
         controller.activityItems = [attachment.title, videoURL]
@@ -44,7 +45,8 @@ extension ChatViewController: ChatMessageCellProtocol {
         if let image = thumbnail.image {
             mediaFocusViewController.show(image, from: thumbnail)
         } else {
-            mediaFocusViewController.showImage(from: attachment.fullImageURL(), from: thumbnail)
+            guard let auth = authManager.isAuthenticated() else { return }
+            mediaFocusViewController.showImage(from: attachment.fullImageURL(inAuth: auth), from: thumbnail)
         }
     }
 

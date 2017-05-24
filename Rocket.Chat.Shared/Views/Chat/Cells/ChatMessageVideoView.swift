@@ -14,9 +14,10 @@ protocol ChatMessageVideoViewProtocol: class {
     func openVideoFromCell(attachment: Attachment)
 }
 
-final class ChatMessageVideoView: UIView {
+final class ChatMessageVideoView: UIView, AuthManagerInjected {
     static let defaultHeight = CGFloat(250)
 
+    var injectionContainer: InjectionContainer!
     weak var delegate: ChatMessageVideoViewProtocol?
     var attachment: Attachment! {
         didSet {
@@ -39,7 +40,8 @@ final class ChatMessageVideoView: UIView {
         activityIndicator.startAnimating()
         labelTitle.text = attachment.title
 
-        guard let videoURL = attachment.fullVideoURL() else { return }
+        guard let auth = authManager.isAuthenticated() else { return }
+        guard let videoURL = attachment.fullVideoURL(inAuth: auth) else { return }
         guard let thumbURL = attachment.videoThumbPath else { return }
 
         if let imageData = try? Data(contentsOf: thumbURL) {

@@ -11,7 +11,7 @@ import SlackTextViewController
 import URBMediaFocusViewController
 
 // swiftlint:disable file_length type_body_length
-final class ChatViewController: SLKTextViewController, AuthManagerInjected, SocketManagerInjected {
+final class ChatViewController: SLKTextViewController, AuthManagerInjected, SocketManagerInjected, SubscriptionManagerInjected, MessageManagerInjected {
 
     var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
@@ -50,10 +50,10 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
 
     var injectionContainer: InjectionContainer! {
         didSet {
-            SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+            socketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
             guard self.subscription == nil else { return }
-            guard let auth = AuthManager.isAuthenticated() else { return }
+            guard let auth = authManager.isAuthenticated() else { return }
             let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
             if let subscription = subscriptions.first {
                 self.subscription = subscription
@@ -65,7 +65,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
 
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        socketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
     override func awakeFromNib() {
@@ -105,8 +105,8 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
     }
 
     internal func reconnect() {
-        if !SocketManager.isConnected() {
-            SocketManager.reconnect()
+        if !socketManager.isConnected() {
+            socketManager.reconnect()
         }
     }
 
@@ -135,6 +135,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nav = segue.destination as? UINavigationController, segue.identifier == "Channel Info" {
             if let controller = nav.viewControllers.first as? ChannelInfoViewController {
+                controller.injectionContainer = self.injectionContainer
                 if let subscription = self.subscription {
                     controller.subscription = subscription
                 }
@@ -214,7 +215,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
     // MARK: SlackTextViewController
 
     override func canPressRightButton() -> Bool {
-        return SocketManager.isConnected()
+        return socketManager.isConnected()
     }
 
     override func didPressRightButton(_ sender: Any?) {
@@ -249,7 +250,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
             message?.subscription = self.subscription
             message?.identifier = String.random(18)
             message?.temporary = true
-            message?.user = AuthManager.currentUser()
+            message?.user = self.authManager.currentUser()
 
             if let message = message {
                 realm.add(message)
@@ -260,7 +261,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
             textView.text = ""
             rightButton.isEnabled = true
 
-            SubscriptionManager.sendTextMessage(message) { _ in
+            subscriptionManager.sendTextMessage(message) { _ in
                 Realm.executeOnMainThread({ (realm) in
                     message.temporary = false
                     realm.add(message, update: true)
@@ -272,7 +273,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
     // MARK: Subscription
 
     fileprivate func markAsRead() {
-        SubscriptionManager.markAsRead(subscription) { _ in
+        subscriptionManager.markAsRead(subscription) { _ in
             // Nothing, for now
         }
     }
@@ -299,9 +300,9 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
         if self.subscription.isValid() {
             self.updateSubscriptionMessages()
         } else {
-            self.subscription.fetchRoomIdentifier({ [weak self] response in
+            self.subscription.fetchRoomIdentifier(subscriptionManager: subscriptionManager) { [weak self] response in
                 self?.subscription = response
-            })
+            }
         }
 
         if subscription.isJoined() {
@@ -358,7 +359,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
             }
         }
 
-        MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
+        messageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
             guard let messages = self?.subscription.fetchMessages() else { return }
 
             self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
@@ -372,7 +373,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
             })
         }
 
-        MessageManager.changes(subscription)
+        messageManager.changes(subscription)
     }
 
     fileprivate func loadMoreMessagesFrom(date: Date?) {
@@ -381,7 +382,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
         }
 
         isRequestingHistory = true
-        MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
+        messageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
             guard let messages = self?.subscription.fetchMessages() else { return }
             self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
             self?.isRequestingHistory = false
@@ -454,6 +455,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
         chatPreviewModeView?.removeFromSuperview()
 
         if let previewView = ChatPreviewModeView.instantiateFromNib() {
+            previewView.injectionContainer = injectionContainer
             previewView.delegate = self
             previewView.subscription = subscription
             previewView.frame = CGRect(x: 0, y: view.frame.height - previewView.frame.height, width: view.frame.width, height: previewView.frame.height)
@@ -532,6 +534,7 @@ extension ChatViewController {
                 return UICollectionViewCell()
         }
 
+        cell.injectionContainer = self.injectionContainer
         cell.delegate = self
 
         if let message = obj.message {
@@ -556,7 +559,7 @@ extension ChatViewController {
 
 // MARK: UICollectionViewDelegateFlowLayout
 
-extension ChatViewController: UICollectionViewDelegateFlowLayout {
+extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCacheManagerInjected {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .zero
@@ -566,7 +569,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
         let fullWidth = UIScreen.main.bounds.size.width
 
         if let message = dataController.itemAt(indexPath)?.message {
-            let height = ChatMessageCell.cellMediaHeightFor(message: message)
+            let height = ChatMessageCell.cellMediaHeightFor(message: message, messageTextCacheManager: messageTextCacheManager)
             return CGSize(width: fullWidth, height: height)
         }
 
@@ -602,7 +605,7 @@ extension ChatViewController {
 extension ChatViewController: ChatPreviewModeViewProtocol {
 
     func userDidJoinedSubscription() {
-        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let auth = authManager.isAuthenticated() else { return }
         guard let subscription = self.subscription else { return }
 
         Realm.executeOnMainThread({ _ in

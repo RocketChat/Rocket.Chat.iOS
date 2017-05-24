@@ -12,8 +12,9 @@ protocol ChatPreviewModeViewProtocol: class {
     func userDidJoinedSubscription()
 }
 
-final class ChatPreviewModeView: UIView {
+final class ChatPreviewModeView: UIView, SubscriptionManagerInjected {
 
+    var injectionContainer: InjectionContainer!
     weak var delegate: ChatPreviewModeViewProtocol?
     var subscription: Subscription! {
         didSet {
@@ -39,7 +40,7 @@ final class ChatPreviewModeView: UIView {
         activityIndicator.startAnimating()
         buttonJoin.setTitle("", for: .normal)
 
-        SubscriptionManager.join(room: subscription.rid) { [weak self] _ in
+        subscriptionManager.join(room: subscription.rid) { [weak self] _ in
             self?.activityIndicator.stopAnimating()
             self?.buttonJoin.setTitle(localized("chat.channel_preview_view.join"), for: .normal)
             self?.delegate?.userDidJoinedSubscription()

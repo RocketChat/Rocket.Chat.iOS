@@ -10,7 +10,5 @@ import Foundation
 
 class ManagerDelegatesCoordinator: LauncherProtocol {
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey : Any]?) {
-        SocketManager.sharedInstance.delegate = SocketHandler()
-        AuthManager.delegate = AuthHandler()
     }
 }

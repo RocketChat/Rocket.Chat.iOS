@@ -8,7 +8,9 @@
 
 import UIKit
 
-class ChannelInfoViewController: BaseViewController {
+class ChannelInfoViewController: BaseViewController, AuthManagerInjected, SubscriptionManagerInjected {
+
+    var injectionContainer: InjectionContainer!
 
     var tableViewData: [[Any]] = [] {
         didSet {
@@ -56,7 +58,7 @@ class ChannelInfoViewController: BaseViewController {
         super.viewDidLoad()
         title = localized("chat.info.title")
 
-        if let auth = AuthManager.isAuthenticated() {
+        if let auth = authManager.isAuthenticated() {
             if auth.settings?.favoriteRooms ?? false {
                 let defaultImage = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray()).withRenderingMode(.alwaysOriginal)
                 let buttonFavorite = UIBarButtonItem(image: defaultImage, style: .plain, target: self, action: #selector(buttonFavoriteDidPressed))
@@ -86,7 +88,7 @@ class ChannelInfoViewController: BaseViewController {
     func buttonFavoriteDidPressed(_ sender: Any) {
         guard let subscription = self.subscription else { return }
 
-        SubscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in
+        subscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in
             if response.isError() {
                 subscription.updateFavorite(!subscription.favorite)
             }
@@ -127,6 +129,7 @@ extension ChannelInfoViewController: UITableViewDelegate {
 
         if let data = data as? ChannelInfoUserCellData {
             if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoUserCell.identifier) as? ChannelInfoUserCell {
+                cell.injectionContainer = injectionContainer
                 cell.data = data
                 return cell
             }

@@ -59,9 +59,9 @@ extension Subscription {
         return auth != nil || type != .channel
     }
 
-    func fetchRoomIdentifier(_ completion: @escaping MessageCompletionObject <Subscription>) {
+    func fetchRoomIdentifier(subscriptionManager: SubscriptionManager, _ completion: @escaping MessageCompletionObject <Subscription>) {
         if type == .channel {
-            SubscriptionManager.getRoom(byName: name, completion: { [weak self] (response) in
+            subscriptionManager.getRoom(byName: name, completion: { [weak self] (response) in
                 guard !response.isError() else { return }
 
                 let result = response.result["result"]
@@ -76,7 +76,7 @@ extension Subscription {
                 completion(strongSelf)
             })
         } else if type == .directMessage {
-            SubscriptionManager.createDirectMessage(name, completion: { [weak self] (response) in
+            subscriptionManager.createDirectMessage(name, completion: { [weak self] (response) in
                 guard !response.isError() else { return }
 
                 let rid = response.result["result"]["rid"].string ?? ""
