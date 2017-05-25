@@ -27,11 +27,15 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
         }
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func awakeFromNib() {
+        super.awakeFromNib()
 
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         self.injectionContainer = appDelegate.injectionContainer
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         if authManager.isAuthenticated() == nil {
             performSegue(withIdentifier: "Auth", sender: nil)
