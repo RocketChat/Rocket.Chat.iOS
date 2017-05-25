@@ -11,10 +11,14 @@ import RealmSwift
 
 @testable import Rocket_Chat
 
-class AuthManagerSpec: XCTestCase {
+class AuthManagerSpec: XCTestCase, AuthManagerInjected {
+
+    var injectionContainer: InjectionContainer!
 
     override func setUp() {
         super.setUp()
+
+        self.injectionContainer = DependencyRepository()
 
         // Clear all the Auth objects in Realm
         Realm.executeOnMainThread({ realm in
@@ -31,7 +35,7 @@ class AuthManagerSpec: XCTestCase {
 extension AuthManagerSpec {
 
     func testIsAuthenticatedUserNotAuthenticated() {
-        XCTAssert(AuthManager.isAuthenticated() == nil, "isAuthenticated returns nil for non authenticated users")
+        XCTAssert(authManager.isAuthenticated() == nil, "isAuthenticated returns nil for non authenticated users")
     }
 
     func testIsAuthenticatedUserAuthenticated() {
@@ -41,7 +45,7 @@ extension AuthManagerSpec {
 
             realm.add(auth)
 
-            XCTAssert(AuthManager.isAuthenticated()?.serverURL == auth.serverURL, "isAuthenticated returns Auth instance")
+            XCTAssert(self.authManager.isAuthenticated()?.serverURL == auth.serverURL, "isAuthenticated returns Auth instance")
         })
     }
 
@@ -58,7 +62,7 @@ extension AuthManagerSpec {
             realm.add(auth1)
             realm.add(auth2)
 
-            XCTAssert(AuthManager.isAuthenticated()?.serverURL == auth1.serverURL, "isAuthenticated returns the latests Auth instance")
+            XCTAssert(self.authManager.isAuthenticated()?.serverURL == auth1.serverURL, "isAuthenticated returns the latests Auth instance")
         })
     }
 
