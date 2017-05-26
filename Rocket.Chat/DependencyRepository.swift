@@ -8,8 +8,23 @@
 
 import Foundation
 
-struct DependencyRepository: InjectionContainer {
+class DependencyRepository: InjectionContainer {
     var socketManager = SocketManager()
     var authManager = AuthManager()
+    var subscriptionManager = SubscriptionManager()
+    var userManager = UserManager()
+    var messageManager = MessageManager()
     var uploadManager = UploadManager()
+    var pushManager = PushManager()
+    var messageTextCacheManager = MessageTextCacheManager()
+
+    init() {
+        socketManager.injectionContainer = self
+        authManager.injectionContainer = self
+        subscriptionManager.injectionContainer = self
+        userManager.injectionContainer = self
+        messageManager.injectionContainer = self
+        pushManager.injectionContainer = self
+        pushManager.injectionContainer = self
+    }
 }

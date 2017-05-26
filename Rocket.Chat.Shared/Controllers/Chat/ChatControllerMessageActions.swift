@@ -16,11 +16,11 @@ extension ChatViewController {
         let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
         alert.addAction(UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
             if message.pinned {
-                MessageManager.unpin(message, completion: { (_) in
+                self.messageManager.unpin(message, completion: { (_) in
                     // Do nothing
                 })
             } else {
-                MessageManager.pin(message, completion: { (_) in
+                self.messageManager.pin(message, completion: { (_) in
                     // Do nothing
                 })
             }
@@ -34,7 +34,7 @@ extension ChatViewController {
             guard let user = message.user else { return }
 
             DispatchQueue.main.async {
-                MessageManager.blockMessagesFrom(user, completion: {
+                self?.messageManager.blockMessagesFrom(user, completion: {
                     self?.updateSubscriptionInfo()
                 })
             }
@@ -57,7 +57,7 @@ extension ChatViewController {
     // MARK: Actions
 
     fileprivate func report(message: Message) {
-        MessageManager.report(message) { (_) in
+        messageManager.report(message) { (_) in
             let alert = UIAlertController(
                 title: localized("chat.message.report.success.title"),
                 message: localized("chat.message.report.success.message"),

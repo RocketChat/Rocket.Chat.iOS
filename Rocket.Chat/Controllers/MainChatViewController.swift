@@ -9,7 +9,7 @@
 import UIKit
 import SideMenuController
 
-class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
+class MainChatViewController: SideMenuController, SideMenuControllerDelegate, Injected {
 
     class func shared() -> MainChatViewController? {
         return UIApplication.shared.windows.first?.rootViewController as? MainChatViewController
@@ -22,6 +22,8 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
             }
         }
     }
+
+    var injectionContainer: InjectionContainer!
 
     required init?(coder aDecoder: NSCoder) {
         SideMenuController.preferences.drawing.menuButtonImage = UIImage(named: "Menu")
@@ -53,11 +55,13 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         super.prepare(for: segue, sender: sender)
         guard let identifier = segue.identifier else { return }
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
         switch identifier {
         case "showCenterController":
             guard let chatViewController = segue.destination as? ChatViewController else { break }
-            chatViewController.injectionContainer = appDelegate.injectionContainer
+            chatViewController.injectionContainer = injectionContainer
+        case "containSideMenu":
+            guard let subscriptionsViewController = segue.destination as? SubscriptionsViewController else { break }
+            subscriptionsViewController.injectionContainer = injectionContainer
         default:
             break
         }

@@ -11,7 +11,7 @@ import RealmSwift
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, AuthManagerInjected, SocketManagerInjected {
+class AppDelegate: UIResponder, UIApplicationDelegate, AuthManagerInjected, SocketManagerInjected, PushManagerInjected, UserManagerInjected {
 
     var window: UIWindow?
     var injectionContainer: InjectionContainer! = DependencyRepository()
@@ -33,9 +33,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthManagerInjected, Sock
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        if AuthManager.isAuthenticated() != nil {
-            UserManager.setUserPresence(status: .away) { (_) in
-                SocketManager.disconnect({ (_, _) in })
+        if authManager.isAuthenticated() != nil {
+            userManager.setUserPresence(status: .away) { (_) in
+                self.socketManager.disconnect({ (_, _) in })
             }
         }
     }
@@ -59,7 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AuthManagerInjected, Sock
     }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        UserDefaults.standard.set(deviceToken.hexString, forKey: PushManager.kDeviceTokenKey)
+        UserDefaults.standard.set(deviceToken.hexString, forKey: pushManager.kDeviceTokenKey)
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

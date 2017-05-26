@@ -13,13 +13,14 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
 }
 
-final class ChatMessageCell: UICollectionViewCell {
+final class ChatMessageCell: UICollectionViewCell, MessageTextCacheManagerInjected {
 
     static let minimumHeight = CGFloat(55)
     static let identifier = "ChatMessageCell"
 
     weak var longPressGesture: UILongPressGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
+    var injectionContainer: InjectionContainer!
     var message: Message! {
         didSet {
             updateMessageInformation()
@@ -29,6 +30,7 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.injectionContainer = self.injectionContainer
                 avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
                 self.avatarView = avatarView
@@ -55,10 +57,10 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
-    static func cellMediaHeightFor(message: Message, grouped: Bool = true) -> CGFloat {
+    static func cellMediaHeightFor(message: Message, grouped: Bool = true, messageTextCacheManager: MessageTextCacheManager) -> CGFloat {
         let fullWidth = UIScreen.main.bounds.size.width
         var total = UILabel.heightForView(
-            MessageTextCacheManager.shared.message(for: message)?.string ?? "",
+            messageTextCacheManager.message(for: message)?.string ?? "",
             font: UIFont.systemFont(ofSize: 14),
             width: fullWidth - 60
         ) + 35
@@ -138,6 +140,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
             case .image:
                 if let view = ChatMessageImageView.instantiateFromNib() {
+                    view.injectionContainer = injectionContainer
                     view.attachment = attachment
                     view.delegate = delegate
                     view.translatesAutoresizingMaskIntoConstraints = false
@@ -149,6 +152,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
             case .video:
                 if let view = ChatMessageVideoView.instantiateFromNib() {
+                    view.injectionContainer = injectionContainer
                     view.attachment = attachment
                     view.delegate = delegate
                     view.translatesAutoresizingMaskIntoConstraints = false
@@ -185,7 +189,7 @@ final class ChatMessageCell: UICollectionViewCell {
             labelUsername.text = message.user?.username
         }
 
-        if let text = MessageTextCacheManager.shared.message(for: message) {
+        if let text = messageTextCacheManager.message(for: message) {
             if message.temporary {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
             }

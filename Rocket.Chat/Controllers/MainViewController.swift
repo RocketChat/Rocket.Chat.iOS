@@ -8,7 +8,9 @@
 
 import UIKit
 
-final class MainViewController: BaseViewController {
+final class MainViewController: BaseViewController, AuthManagerInjected, SubscriptionManagerInjected, UserManagerInjected, PushManagerInjected {
+
+    var injectionContainer: InjectionContainer!
 
     @IBOutlet weak var labelAuthenticationStatus: UILabel!
     @IBOutlet weak var buttonConnect: UIButton!
@@ -25,10 +27,17 @@ final class MainViewController: BaseViewController {
         }
     }
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        self.injectionContainer = appDelegate.injectionContainer
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if AuthManager.isAuthenticated() == nil {
+        if authManager.isAuthenticated() == nil {
             performSegue(withIdentifier: "Auth", sender: nil)
         }
     }
@@ -36,35 +45,38 @@ final class MainViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        if let auth = AuthManager.isAuthenticated() {
+        if let auth = authManager.isAuthenticated() {
             labelAuthenticationStatus.isHidden = true
             buttonConnect.isHidden = true
             activityIndicator.startAnimating()
 
-            AuthManager.resume(auth, completion: { [weak self] response in
+            self.authManager.resume(auth, completion: { [weak self] response in
+                guard let strongSelf = self else { return }
                 guard !response.isError() else {
-                    self?.labelAuthenticationStatus.isHidden = false
-                    self?.buttonConnect.isHidden = false
-                    self?.activityIndicator.stopAnimating()
+                    strongSelf.labelAuthenticationStatus.isHidden = false
+                    strongSelf.buttonConnect.isHidden = false
+                    strongSelf.activityIndicator.stopAnimating()
                     return
                 }
 
-                SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                    AuthManager.updatePublicSettings(auth, completion: { _ in
+                self?.subscriptionManager.updateSubscriptions(auth, completion: { _ in
+                    strongSelf.authManager.updatePublicSettings(auth, completion: { _ in
 
                     })
 
-                    UserManager.userDataChanges()
-                    UserManager.changes()
-                    SubscriptionManager.changes(auth)
+                    strongSelf.userManager.userDataChanges()
+                    strongSelf.userManager.changes()
+                    strongSelf.subscriptionManager.changes(auth)
 
                     if let userIdentifier = auth.userId {
-                        PushManager.updateUser(userIdentifier)
+                        strongSelf.pushManager.updateUser(userIdentifier)
                     }
 
                     // Open chat
                     let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
-                    let controller = storyboardChat.instantiateInitialViewController()
+                    guard let controller = storyboardChat.instantiateInitialViewController() as? MainChatViewController else { return }
+                    controller.injectionContainer = strongSelf.injectionContainer
+
                     let application = UIApplication.shared
 
                     if let window = application.keyWindow {
@@ -74,6 +86,19 @@ final class MainViewController: BaseViewController {
             })
         } else {
             buttonConnect.isEnabled = true
+        }
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        guard let identifier = segue.identifier else { return }
+        switch identifier {
+        case "Auth":
+            guard let navigationController = segue.destination as? UINavigationController else { return }
+            guard let connectServerViewController = navigationController.viewControllers.first as? ConnectServerViewController else { return }
+            connectServerViewController.injectionContainer = self.injectionContainer
+        default:
+            break
         }
     }
 

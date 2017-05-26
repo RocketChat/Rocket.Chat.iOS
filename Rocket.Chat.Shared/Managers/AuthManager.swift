@@ -9,14 +9,16 @@
 import Foundation
 import RealmSwift
 
-public struct AuthManager {
+public struct AuthManager: SocketManagerInjected, PushManagerInjected {
 
-    static public weak var delegate: AuthDelegate?
+    var injectionContainer: InjectionContainer!
+
+    public weak var delegate: AuthDelegate?
 
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
-    static func isAuthenticated() -> Auth? {
+    func isAuthenticated() -> Auth? {
         guard let auths = try? Realm().objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false) else { return nil}
         return auths.first
     }
@@ -24,7 +26,7 @@ public struct AuthManager {
     /**
         - returns: Current user object, if exists.
     */
-    static func currentUser() -> User? {
+    func currentUser() -> User? {
         guard let auth = isAuthenticated() else { return nil }
         guard let user = try? Realm().object(ofType: User.self, forPrimaryKey: auth.userId) else { return nil }
         return user
@@ -43,10 +45,10 @@ extension AuthManager {
         - parameter completion The completion callback that will be
             called in case of success or error.
     */
-    static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
+    func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
 
-        SocketManager.connect(url) { (socket, connected) in
+        socketManager.connect(url) { (socket, connected) in
             guard connected else {
                 guard let response = SocketResponse(
                     ["error": "Can't connect to the socket"],
@@ -64,13 +66,13 @@ extension AuthManager {
                 ]]
             ] as [String: Any]
 
-            SocketManager.send(object) { (response) in
+            self.socketManager.send(object) { (response) in
                 guard !response.isError() else {
                     completion(response)
                     return
                 }
 
-                PushManager.updatePushToken()
+                self.pushManager.updatePushToken()
                 completion(response)
             }
         }
@@ -79,7 +81,7 @@ extension AuthManager {
     /**
         Method that creates an User account.
      */
-    static func signup(with name: String, _ email: String, _ password: String, completion: @escaping MessageCompletion) {
+    func signup(with name: String, _ email: String, _ password: String, completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "registerUser",
@@ -90,7 +92,7 @@ extension AuthManager {
             ]]
         ] as [String : Any]
 
-        SocketManager.send(object) { (response) in
+        socketManager.send(object) { (response) in
             guard !response.isError() else {
                 completion(response)
                 return
@@ -103,14 +105,14 @@ extension AuthManager {
     /**
         Generic method that authenticates the user.
     */
-    static func auth(params: [String: Any], completion: @escaping MessageCompletion) {
+    func auth(params: [String: Any], completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "login",
             "params": [params]
         ] as [String : Any]
 
-        SocketManager.send(object) { (response) in
+        socketManager.send(object) { (response) in
             guard !response.isError() else {
                 completion(response)
                 return
@@ -134,7 +136,7 @@ extension AuthManager {
                     auth.tokenExpires = Date.dateFromInterval(date)
                 }
 
-                PushManager.updatePushToken()
+                self.pushManager.updatePushToken()
 
                 realm.add(auth)
             })
@@ -151,7 +153,7 @@ extension AuthManager {
         - parameter completion: The completion block that'll be called in case
             of success or error.
     */
-    static func auth(_ username: String, password: String, code: String? = nil, completion: @escaping MessageCompletion) {
+    func auth(_ username: String, password: String, code: String? = nil, completion: @escaping MessageCompletion) {
         let usernameType = username.contains("@") ? "email" : "username"
         var params: [String: Any]?
 
@@ -186,35 +188,35 @@ extension AuthManager {
     /**
         Returns the username suggestion for the logged in user.
     */
-    static func usernameSuggestion(completion: @escaping MessageCompletion) {
+    func usernameSuggestion(completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "getUsernameSuggestion"
         ] as [String : Any]
 
-        SocketManager.send(object, completion: completion)
+        socketManager.send(object, completion: completion)
     }
 
     /**
      Set username of logged in user
      */
-    static func setUsername(_ username: String, completion: @escaping MessageCompletion) {
+    func setUsername(_ username: String, completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "setUsername",
             "params": [username]
         ] as [String : Any]
 
-        SocketManager.send(object, completion: completion)
+        socketManager.send(object, completion: completion)
     }
 
     /**
         Logouts user from the app, clear database
         and disconnects from the socket.
      */
-    static func logout(completion: @escaping VoidCompletion) {
-        SocketManager.disconnect { (_, _) in
-            SocketManager.clear()
+    func logout(completion: @escaping VoidCompletion) {
+        socketManager.disconnect { (_, _) in
+            self.socketManager.clear()
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
@@ -226,24 +228,24 @@ extension AuthManager {
         }
     }
 
-    static func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
+    func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
         ] as [String : Any]
 
-        SocketManager.send(object) { (response) in
+        socketManager.send(object) { (response) in
             guard !response.isError() else {
                 completion(nil)
                 return
             }
 
             Realm.executeOnMainThread({ realm in
-                let settings = AuthManager.isAuthenticated()?.settings ?? AuthSettings()
+                let settings = self.isAuthenticated()?.settings ?? AuthSettings()
                 settings.map(response.result["result"], realm: realm)
                 realm.add(settings, update: true)
 
-                if let auth = AuthManager.isAuthenticated() {
+                if let auth = self.isAuthenticated() {
                     auth.settings = settings
                     realm.add(auth, update: true)
                 }

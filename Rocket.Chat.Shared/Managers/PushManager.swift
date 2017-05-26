@@ -8,14 +8,16 @@
 
 import Foundation
 
-final class PushManager {
+class PushManager: SocketManagerInjected, AuthManagerInjected {
 
-    static let kDeviceTokenKey = "deviceToken"
-    static let kPushIdentifierKey = "pushIdentifier"
+    let kDeviceTokenKey = "deviceToken"
+    let kPushIdentifierKey = "pushIdentifier"
 
-    static func updatePushToken() {
+    var injectionContainer: InjectionContainer!
+
+    func updatePushToken() {
         guard let deviceToken = getDeviceToken() else { return }
-        guard let userIdentifier = AuthManager.isAuthenticated()?.userId else { return }
+        guard let userIdentifier = authManager.isAuthenticated()?.userId else { return }
 
         let request = [
             "msg": "method",
@@ -29,10 +31,10 @@ final class PushManager {
             ]]
         ] as [String : Any]
 
-        SocketManager.send(request)
+        socketManager.send(request)
     }
 
-    static func updateUser(_ userIdentifier: String) {
+    func updateUser(_ userIdentifier: String) {
         let request = [
             "msg": "method",
             "method": "raix:push-setuser",
@@ -40,10 +42,10 @@ final class PushManager {
             "params": [getOrCreatePushId()]
         ] as [String : Any]
 
-        SocketManager.send(request)
+        socketManager.send(request)
     }
 
-    fileprivate static func getOrCreatePushId() -> String {
+    fileprivate func getOrCreatePushId() -> String {
         guard let pushId = UserDefaults.standard.string(forKey: kPushIdentifierKey) else {
             let randomId = UUID().uuidString.replacingOccurrences(of: "-", with: "")
             UserDefaults.standard.set(randomId, forKey: kPushIdentifierKey)
@@ -53,7 +55,7 @@ final class PushManager {
         return pushId
     }
 
-    fileprivate static func getDeviceToken() -> String? {
+    fileprivate func getDeviceToken() -> String? {
         guard let deviceToken = UserDefaults.standard.string(forKey: kDeviceTokenKey) else {
             return nil
         }

@@ -10,7 +10,6 @@ import Foundation
 
 class MessageTextCacheManager {
 
-    static let shared = MessageTextCacheManager()
     let cache = NSCache<NSString, NSAttributedString>()
 
     internal func cachedKey(for identifier: String) -> NSString {

@@ -43,8 +43,9 @@ extension Message: ModelMappeable {
                 }
             }
 
-            let isBlocked = MessageManager.blockedUsersList.contains(userIdentifier)
-            self.userBlocked = isBlocked
+            // TODO: Dependency Injection in model mapping
+            // let isBlocked = MessageManager.blockedUsersList.contains(userIdentifier)
+            //  self.userBlocked = isBlocked
         }
 
         // Attachments

@@ -26,6 +26,7 @@ extension ChatViewController: SocketConnectionHandler {
         chatHeaderViewOffline?.removeFromSuperview()
 
         if let headerView = ChatHeaderViewOffline.instantiateFromNib() {
+            headerView.injectionContainer = injectionContainer
             headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: headerView.frame.height)
             view.addSubview(headerView)
             chatHeaderViewOffline = headerView

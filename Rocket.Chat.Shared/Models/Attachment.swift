@@ -60,9 +60,8 @@ class Attachment: BaseModel {
 
 extension Attachment {
 
-    fileprivate static func fullURLWith(_ path: String?) -> URL? {
+    fileprivate static func fullURLWith(_ path: String?, auth: Auth) -> URL? {
         guard let path = path?.replacingOccurrences(of: "//", with: "/") else { return nil }
-        guard let auth = AuthManager.isAuthenticated() else { return nil }
         guard let userId = auth.userId else { return nil }
         guard let token = auth.token else { return nil }
         guard let baseURL = auth.baseURL() else { return nil }
@@ -70,17 +69,17 @@ extension Attachment {
         return URL(string: urlString)
     }
 
-    func fullVideoURL() -> URL? {
-        return Attachment.fullURLWith(videoURL)
+    func fullVideoURL(inAuth auth: Auth) -> URL? {
+        return Attachment.fullURLWith(videoURL, auth: auth)
     }
 
-    func fullImageURL() -> URL? {
+    func fullImageURL(inAuth auth: Auth) -> URL? {
         guard let imageURL = imageURL else { return nil }
         if imageURL.contains("http://") || imageURL.contains("https://") {
             return URL(string: imageURL)
         }
 
-        return Attachment.fullURLWith(imageURL)
+        return Attachment.fullURLWith(imageURL, auth: auth)
     }
 
 }

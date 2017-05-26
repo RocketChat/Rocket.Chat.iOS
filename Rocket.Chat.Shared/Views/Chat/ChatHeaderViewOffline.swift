@@ -8,7 +8,9 @@
 
 import UIKit
 
-final class ChatHeaderViewOffline: UIView {
+final class ChatHeaderViewOffline: UIView, SocketManagerInjected {
+
+    var injectionContainer: InjectionContainer!
 
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
@@ -19,7 +21,7 @@ final class ChatHeaderViewOffline: UIView {
     @IBOutlet weak var buttonRefresh: UIButton!
 
     @IBAction func buttonRefreshDidPressed(_ sender: Any) {
-        SocketManager.reconnect()
+        socketManager.reconnect()
     }
 
 }

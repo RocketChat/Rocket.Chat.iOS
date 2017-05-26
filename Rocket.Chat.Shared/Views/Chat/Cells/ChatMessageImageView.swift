@@ -13,9 +13,10 @@ protocol ChatMessageImageViewProtocol: class {
     func openImageFromCell(attachment: Attachment, thumbnail: UIImageView)
 }
 
-final class ChatMessageImageView: UIView {
+final class ChatMessageImageView: UIView, AuthManagerInjected {
     static let defaultHeight = CGFloat(250)
 
+    var injectionContainer: InjectionContainer!
     weak var delegate: ChatMessageImageViewProtocol?
     var attachment: Attachment! {
         didSet {
@@ -45,7 +46,8 @@ final class ChatMessageImageView: UIView {
 
         labelTitle.text = attachment.title
 
-        let imageURL = attachment.fullImageURL()
+        guard let auth = authManager.isAuthenticated() else { return }
+        let imageURL = attachment.fullImageURL(inAuth: auth)
         activityIndicatorImageView.startAnimating()
         imageView.sd_setImage(with: imageURL, completed: { [weak self] _, _, _, _ in
             self?.activityIndicatorImageView.stopAnimating()
