@@ -113,7 +113,7 @@ extension AuthManager {
                 return
             }
 
-            Realm.executeOnMainThread({ (realm) in
+            Realm.execute({ (realm) in
                 // Delete all the Auth objects, since we don't
                 // support multiple-server authentication yet
                 realm.delete(realm.objects(Auth.self))
@@ -134,9 +134,9 @@ extension AuthManager {
                 PushManager.updatePushToken()
 
                 realm.add(auth)
+            }, completion: {
+                completion(response)
             })
-
-            completion(response)
         }
     }
 
