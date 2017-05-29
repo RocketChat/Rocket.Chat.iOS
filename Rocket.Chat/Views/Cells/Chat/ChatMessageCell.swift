@@ -59,7 +59,7 @@ final class ChatMessageCell: UICollectionViewCell {
         let fullWidth = UIScreen.main.bounds.size.width
         var total = UILabel.heightForView(
             MessageTextCacheManager.shared.message(for: message)?.string ?? "",
-            font: UIFont.systemFont(ofSize: 14),
+            font: UIFont.systemFont(ofSize: 15),
             width: fullWidth - 60
         ) + 35
 
