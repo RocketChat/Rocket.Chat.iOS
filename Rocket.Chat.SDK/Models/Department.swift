@@ -16,4 +16,13 @@ struct Department {
     var description: String
     var numAgents: Int
     var showOnRegistration: Bool
+
+    init(withJSON json: JSON) {
+        id = json["_id"].stringValue
+        enabled = json["enabled"].boolValue
+        name = json["name"].stringValue
+        description = json["description"].stringValue
+        numAgents = json["numAgents"].intValue
+        showOnRegistration = json["showOnRegistration"].boolValue
+    }
 }

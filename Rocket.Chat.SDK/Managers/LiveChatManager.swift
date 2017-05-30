@@ -46,6 +46,10 @@ class LiveChatManager: SocketManagerInjected {
                 self.room = rid
             }
 
+            self.departments = json["departments"].map { (_, json) in
+                return Department(withJSON: json)
+            }
+
             self.initiated = true
             DispatchQueue.global(qos: .background).async(execute: completion)
         }
