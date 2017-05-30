@@ -1,10 +1,10 @@
-/* 
-  Localizable.strings
-  Rocket.Chat
+/*
+ Localizable.strings
+ Rocket.Chat
 
-  Created by Rafael K. Streit on 8/27/16.
-  Copyright © 2016 Rocket.Chat. All rights reserved.
-*/
+ Created by Rafael K. Streit on 8/27/16.
+ Copyright © 2016 Rocket.Chat. All rights reserved.
+ */
 
 
 // Global
@@ -18,6 +18,9 @@
 // Alerts
 "alert.connection.invalid_url.title" = "Ooops!";
 "alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfe deine Eingabe und probiere es noch einmal.";
+
+"alert.connection.invalid_version.title" = "Oops!";
+"alert.connection.invalid_version.message" = "Der Serverversion, mit der du dich verbinden möchtest, wird nicht mehr unterstützt: %@.\n\nWir benötigen Version %@.";
 
 // Socket Connection
 "connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
@@ -44,11 +47,14 @@
 
 // Chat
 "chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
-"chat.channel_preview_view.join" = "Channel beitreten";
+"chat.channel_preview_view.join" = "Kanal beitreten";
 
 // Chat Message Actions
+"chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
 "chat.message.actions.report" = "Nachricht melden";
 "chat.message.actions.copy" = "Kopieren";
+"chat.message.actions.pin" = "Nachricht anheften";
+"chat.message.actions.unpin" = "Nachricht lösen";
 
 // Chat Message Report
 "chat.message.report.success.title" = "Nachricht gemeldet";
@@ -60,3 +66,29 @@
 "chat.upload.take_photo" = "Foto aufnehmen";
 "chat.upload.choose_from_library" = "Foto & Video Mediathek";
 "chat.upload.import_file" = "Importiere Datei aus...";
+
+// Message Types
+"chat.message.type.room_name_changed" = "Raum umbenannt zu: %@ von %@";
+"chat.message.type.user_added_by" = "Benutzer %@ hinzugefügt von %@";
+"chat.message.type.user_removed_by" = "Benutzer %@ entfernt von %@";
+"chat.message.type.user_left" = "Hat den Kanal verlassen";
+"chat.message.type.user_joined" = "Hat den Kanal betreten";
+"chat.message.type.user_muted" = "Benutzer %@ stillgestellt von %@";
+"chat.message.type.user_unmuted" = "Benutzer %@ laut gestellt von %@";
+"chat.message.type.welcome" = "Willkommen %@";
+"chat.message.type.message_removed" = "Nachricht entfernt";
+"chat.message.type.subscription_role_added" = "%@ wurde zu %@ geändert von %@";
+"chat.message.type.subscription_role_removed" = "%@ ist nicht mehr länger %@ geändert von %@";
+"chat.message.type.room_archived" = "Dieser Raum wurde archiviert von %@";
+"chat.message.type.room_unarchived" = "Dieser Raum wurde hervorgekramt von %@";
+
+// Chat Information
+"chat.info.title" = "Info";
+"chat.info.item.topic" = "Thema";
+"chat.info.item.no_topic" = "Ohne Thema";
+"chat.info.item.description" = "Beschreibung";
+"chat.info.item.no_description" = "Ohne Beschreibung";
+"chat.info.item.notifications" = "Benachrichtigungen";
+"chat.info.item.members" = "Teilnehmer";
+"chat.info.item.pinned" = "Angeheftet";
+"chat.info.item.starred" = "Favorisiert";
