@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-struct SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
+class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
 
     var injectionContainer: InjectionContainer!
 

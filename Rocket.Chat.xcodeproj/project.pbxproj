@@ -59,6 +59,8 @@
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
 		925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */; };
 		925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */; };
+		A00BA5FA1EDDB0740090874D /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BA5F91EDDB0740090874D /* Department.swift */; };
+		A00BA5FE1EDDB31A0090874D /* LiveChatSbuscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BA5FD1EDDB31A0090874D /* LiveChatSbuscriptionManager.swift */; };
 		A030A1341ECC8E7000F71C6F /* RocketChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030A1331ECC8E7000F71C6F /* RocketChat.swift */; };
 		A0559DF71ECC2CCD00E83220 /* SubscriptionModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DEE1ECC2CCD00E83220 /* SubscriptionModelHandler.swift */; };
 		A0559DF81ECC2CCD00E83220 /* UserModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DEF1ECC2CCD00E83220 /* UserModelHandler.swift */; };
@@ -200,7 +202,6 @@
 		A0918BD31EC0A15D0015D5D5 /* RocketChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0918BCA1EC0A15D0015D5D5 /* RocketChat.framework */; };
 		A0918BDA1EC0A15D0015D5D5 /* RocketChatSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */; };
 		A0918BDC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A0918BCC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A0918BE91EC0A1FF0015D5D5 /* Foobar.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0918BE81EC0A1FF0015D5D5 /* Foobar.swift */; };
 		A09910761EC7501400A9FEE8 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Required, ); }; };
 		A09910771EC7501400A9FEE8 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A099107C1EC7501D00A9FEE8 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Required, ); }; };
@@ -387,6 +388,8 @@
 		925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		952D82B61B438F91DDE91709 /* Pods-Rocket.ChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatUITests/Pods-Rocket.ChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A00BA5F91EDDB0740090874D /* Department.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
+		A00BA5FD1EDDB31A0090874D /* LiveChatSbuscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveChatSbuscriptionManager.swift; sourceTree = "<group>"; };
 		A030A1331ECC8E7000F71C6F /* RocketChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketChat.swift; sourceTree = "<group>"; };
 		A030A1371ECC9CDC00F71C6F /* RocketChat.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; indentWidth = 2; path = RocketChat.podspec; sourceTree = SOURCE_ROOT; tabWidth = 2; };
 		A030A1381ECC9CEE00F71C6F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
@@ -451,7 +454,6 @@
 		A0918BD21EC0A15D0015D5D5 /* Rocket.Chat.SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rocket.Chat.SDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketChatSDKTests.swift; sourceTree = "<group>"; };
 		A0918BDB1EC0A15D0015D5D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A0918BE81EC0A1FF0015D5D5 /* Foobar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Foobar.swift; sourceTree = "<group>"; };
 		A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09910831EC75AE600A9FEE8 /* MessageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageExtensions.swift; sourceTree = "<group>"; };
 		A099108A1EC75EAA00A9FEE8 /* CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
@@ -824,6 +826,14 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		A00BA5F81EDDB0560090874D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A00BA5F91EDDB0740090874D /* Department.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		A030A1361ECC9CA800F71C6F /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -860,6 +870,7 @@
 			isa = PBXGroup;
 			children = (
 				A07F172E1ECD930900A1F199 /* LiveChatManager.swift */,
+				A00BA5FD1EDDB31A0090874D /* LiveChatSbuscriptionManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -978,11 +989,11 @@
 		A0918BCB1EC0A15D0015D5D5 /* Rocket.Chat.SDK */ = {
 			isa = PBXGroup;
 			children = (
+				A00BA5F81EDDB0560090874D /* Models */,
 				A07F172D1ECD92EA00A1F199 /* Managers */,
 				A030A1361ECC9CA800F71C6F /* Supporting Files */,
 				A0918BCC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h */,
 				A030A1331ECC8E7000F71C6F /* RocketChat.swift */,
-				A0918BE81EC0A1FF0015D5D5 /* Foobar.swift */,
 			);
 			path = Rocket.Chat.SDK;
 			sourceTree = "<group>";
@@ -1895,6 +1906,7 @@
 				A07F17B01ECDC21100A1F199 /* ChatMessageTextViewModel.swift in Sources */,
 				A07F172F1ECD930900A1F199 /* LiveChatManager.swift in Sources */,
 				A0559E341ECC431200E83220 /* SocketManager+Handle.swift in Sources */,
+				A00BA5FE1EDDB31A0090874D /* LiveChatSbuscriptionManager.swift in Sources */,
 				A0559E291ECC430900E83220 /* Mention.swift in Sources */,
 				A0D128C31ED175AC0088B240 /* Injected.swift in Sources */,
 				A0559E2E1ECC430E00E83220 /* UserManager.swift in Sources */,
@@ -1915,11 +1927,11 @@
 				A0559E2C1ECC430E00E83220 /* AuthManager.swift in Sources */,
 				A0559E271ECC430900E83220 /* Message.swift in Sources */,
 				A07F17501ECDC13C00A1F199 /* ChatControllerUploader.swift in Sources */,
+				A00BA5FA1EDDB0740090874D /* Department.swift in Sources */,
 				A0559E321ECC431200E83220 /* ResponseMessage.swift in Sources */,
 				A0559E221ECC430900E83220 /* Auth.swift in Sources */,
 				A07F17831ECDC18700A1F199 /* ChannelInfoDetailCell.swift in Sources */,
 				A0A8123E1ECDC814000567D7 /* NSAttributedStringExtensions.swift in Sources */,
-				A0918BE91EC0A1FF0015D5D5 /* Foobar.swift in Sources */,
 				A07F174A1ECDC13C00A1F199 /* ChatControllerMessageActions.swift in Sources */,
 				A0559E311ECC430E00E83220 /* PushManager.swift in Sources */,
 				A0A812351ECDC71D000567D7 /* MessageTextCacheManager.swift in Sources */,
