@@ -1,5 +1,5 @@
 //
-//  ChatHeaderViewOffline.swift
+//  ChatHeaderViewStatus.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Kellermann Streit on 05/12/16.
@@ -8,8 +8,9 @@
 
 import UIKit
 
-final class ChatHeaderViewOffline: UIView {
+final class ChatHeaderViewStatus: UIView {
 
+    static let defaultHeight = CGFloat(44)
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
             labelTitle.text = localized("connection.offline.banner.message")
