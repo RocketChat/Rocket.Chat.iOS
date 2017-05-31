@@ -1,8 +1,8 @@
 //
-//  SocketHandler.swift
+//  AppSocketManager.swift
 //  Rocket.Chat
 //
-//  Created by Lucas Woo on 5/17/17.
+//  Created by Lucas Woo on 5/29/17.
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 
@@ -11,8 +11,9 @@ import Starscream
 import SwiftyJSON
 import Crashlytics
 
-class SocketHandler: SocketDelegate {
-    func handleError(of response: SocketResponse, socket: WebSocket) {
+class AppSocketManager: SocketManager {
+
+    override func handleError(of response: SocketResponse, socket: WebSocket) {
         let error = response.result["error"]
 
         let errorInfo = [
@@ -26,4 +27,5 @@ class SocketHandler: SocketDelegate {
             userInfo: errorInfo
         ))
     }
+
 }

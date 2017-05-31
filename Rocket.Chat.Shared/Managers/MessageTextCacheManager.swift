@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MessageTextCacheManager {
+public class MessageTextCacheManager {
 
     let cache = NSCache<NSString, NSAttributedString>()
 

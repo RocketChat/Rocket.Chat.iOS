@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class MessageManager: SocketManagerInjected {
+public class MessageManager: SocketManagerInjected {
     let historySize = 30
 
     var injectionContainer: InjectionContainer!

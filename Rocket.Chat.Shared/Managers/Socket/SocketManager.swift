@@ -33,8 +33,6 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
     var queue: [String: MessageCompletion] = [:]
     var events: [String: [MessageCompletion]] = [:]
 
-    public weak var delegate: SocketDelegate?
-
     internal var internalConnectionHandler: SocketCompletion?
     internal var connectionHandlers: [String: SocketConnectionHandler] = [:]
 
@@ -94,6 +92,10 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
             self.send(object, completion: completion)
             self.events[eventName] = [completion]
         }
+    }
+
+    func handleError(of response: SocketResponse, socket: WebSocket) {
+        fatalError("Not implemented.")
     }
 
 }

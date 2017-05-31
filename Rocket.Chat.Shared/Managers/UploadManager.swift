@@ -19,7 +19,7 @@ struct FileUpload {
     var data: Data
 }
 
-class UploadManager: SocketManagerInjected, AuthManagerInjected {
+public class UploadManager: SocketManagerInjected, AuthManagerInjected {
 
     var injectionContainer: InjectionContainer!
 

@@ -7,12 +7,19 @@
 //
 
 import UIKit
+import RocketChat
 
 class ViewController: UIViewController {
+
+    @IBOutlet weak var serverAddrTextField: UITextField!
+    @IBOutlet weak var emailTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var securedSwitch: UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +27,29 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    @IBAction func didTouchUpInsideLoginButton(_ sender: UIButton) {
+        guard let serverAddr = serverAddrTextField.text,
+            let email = emailTextField.text,
+            let name = nameTextField.text
+            else {
+            return
+        }
+        let secured = securedSwitch.isOn
+
+        RocketChat.configure(withServerURL: URL(string: serverAddr)!, secured: secured) {
+            let livechatManager = RocketChat.injectionContainer.livechatManager
+            livechatManager.initiate {
+                livechatManager.registerGuestAndLogin(withEmail: email, name: name, toDepartment: livechatManager.departments.first!) {
+                    DispatchQueue.main.async {
+                        guard let controller = try? livechatManager.getLiveChatViewController() else {
+                            return
+                        }
+                        self.present(controller, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
 
 }
 

@@ -9,8 +9,8 @@
 import Foundation
 
 class DependencyRepository: InjectionContainer {
-    var socketManager = SocketManager()
-    var authManager = AuthManager()
+    var socketManager: SocketManager = AppSocketManager()
+    var authManager: AuthManager = AppAuthManager()
     var subscriptionManager = SubscriptionManager()
     var userManager = UserManager()
     var messageManager = MessageManager()

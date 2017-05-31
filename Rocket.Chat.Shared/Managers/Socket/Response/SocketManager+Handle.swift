@@ -24,7 +24,7 @@ extension SocketManager {
             case .ping: return handlePingMessage(result, socket: socket)
             case .changed, .added, .removed: return handleModelUpdates(result, socket: socket)
             case .updated, .unknown: break
-            case .error: self.delegate?.handleError(of: result, socket: socket)
+            case .error: self.handleError(of: result, socket: socket)
         }
 
         // Call completion block

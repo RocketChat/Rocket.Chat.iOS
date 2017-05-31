@@ -13,8 +13,7 @@
         <!--Rocket.Chat-->
         <scene sceneID="3Zz-MB-boy">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="zvo-IP-dYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <viewController extendedLayoutIncludesOpaqueBars="YES" id="gbT-rj-Kj0" customClass="ChatViewController" customModule="RocketChat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" extendedLayoutIncludesOpaqueBars="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gbT-rj-Kj0" customClass="ChatViewController" customModule="RocketChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="3iS-cY-rRk"/>
                         <viewControllerLayoutGuide type="bottom" id="MJ9-0m-yh7"/>
@@ -59,13 +58,13 @@
                         <segue destination="2db-JE-Bhp" kind="presentation" identifier="Channel Info" id="54p-iO-dQT"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zvo-IP-dYb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1676" y="636"/>
         </scene>
         <!--Title-->
         <scene sceneID="NGv-Za-0eY">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="sLf-Oc-oZ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="MIf-va-F3U" customClass="ChannelInfoViewController" customModule="RocketChat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Dev-VG-FQ6"/>
@@ -259,15 +258,15 @@
                         <outlet property="tableView" destination="CoN-X8-35A" id="KTV-pd-Gce"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="sLf-Oc-oZ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3309.5999999999999" y="635.53223388305855"/>
         </scene>
         <!--Base Navigation Controller-->
         <scene sceneID="wLf-xr-fcz">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="eyG-cd-JsC" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController id="2db-JE-Bhp" customClass="BaseNavigationController" customModule="RocketChat" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="0mI-6s-1jW">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0mI-6s-1jW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -275,16 +274,16 @@
                         <segue destination="MIf-va-F3U" kind="relationship" relationship="rootViewController" id="gN2-q4-OyP"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eyG-cd-JsC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2484" y="636"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JTu-8T-Fc9">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3Q1-7M-SLS" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="Chat" automaticallyAdjustsScrollViewInsets="NO" id="z1O-Um-tnA" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="CMk-Wk-jt9">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="CMk-Wk-jt9">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -293,6 +292,7 @@
                         <segue destination="gbT-rj-Kj0" kind="relationship" relationship="rootViewController" id="u4a-3z-n57"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Q1-7M-SLS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="864" y="636"/>
         </scene>

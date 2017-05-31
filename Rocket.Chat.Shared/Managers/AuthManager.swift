@@ -9,11 +9,9 @@
 import Foundation
 import RealmSwift
 
-public struct AuthManager: SocketManagerInjected, PushManagerInjected {
+public class AuthManager: SocketManagerInjected, PushManagerInjected {
 
     var injectionContainer: InjectionContainer!
-
-    public weak var delegate: AuthDelegate?
 
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
@@ -31,11 +29,8 @@ public struct AuthManager: SocketManagerInjected, PushManagerInjected {
         guard let user = try? Realm().object(ofType: User.self, forPrimaryKey: auth.userId) else { return nil }
         return user
     }
-}
 
-// MARK: Socket Management
-
-extension AuthManager {
+    // MARK: Socket Management
 
     /**
         This method resumes a previous authentication with token
@@ -118,7 +113,7 @@ extension AuthManager {
                 return
             }
 
-            Realm.executeOnMainThread({ (realm) in
+            Realm.execute({ (realm) in
                 // Delete all the Auth objects, since we don't
                 // support multiple-server authentication yet
                 realm.delete(realm.objects(Auth.self))
@@ -139,9 +134,9 @@ extension AuthManager {
                 self.pushManager.updatePushToken()
 
                 realm.add(auth)
+            }, completion: {
+                completion(response)
             })
-
-            completion(response)
         }
     }
 
@@ -221,8 +216,6 @@ extension AuthManager {
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
             })
-
-            self.delegate?.didLogout()
 
             completion()
         }

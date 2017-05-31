@@ -11,7 +11,7 @@ import SlackTextViewController
 import URBMediaFocusViewController
 
 // swiftlint:disable file_length type_body_length
-final class ChatViewController: SLKTextViewController, AuthManagerInjected, SocketManagerInjected, SubscriptionManagerInjected, MessageManagerInjected {
+public class ChatViewController: SLKTextViewController, AuthManagerInjected, SocketManagerInjected, SubscriptionManagerInjected, MessageManagerInjected {
 
     var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
@@ -30,7 +30,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
 
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
-    weak var chatHeaderViewOffline: ChatHeaderViewOffline?
+    weak var chatHeaderViewStatus: ChatHeaderViewStatus?
     lazy var mediaFocusViewController = URBMediaFocusViewController()
 
     var dataController = ChatDataController()
@@ -68,12 +68,12 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
         socketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
-    override func awakeFromNib() {
+    override public func awakeFromNib() {
         super.awakeFromNib()
         registerCells()
     }
 
-    override func viewDidLoad() {
+    override public func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.white
@@ -110,7 +110,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
         }
     }
 
-    override func viewWillLayoutSubviews() {
+    override public func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
         let insets = UIEdgeInsets(
@@ -124,7 +124,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
         collectionView?.scrollIndicatorInsets = insets
     }
 
-    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+    override public func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
         coordinator.animate(alongsideTransition: nil, completion: { _ in
@@ -132,7 +132,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
         })
     }
 
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nav = segue.destination as? UINavigationController, segue.identifier == "Channel Info" {
             if let controller = nav.viewControllers.first as? ChannelInfoViewController {
                 controller.injectionContainer = self.injectionContainer
@@ -171,7 +171,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
         buttonScrollToBottom.layer.borderWidth = 1
     }
 
-    override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
+    override public class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
         return UICollectionViewFlowLayout()
     }
 
@@ -214,23 +214,23 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
 
     // MARK: SlackTextViewController
 
-    override func canPressRightButton() -> Bool {
+    override public func canPressRightButton() -> Bool {
         return socketManager.isConnected()
     }
 
-    override func didPressRightButton(_ sender: Any?) {
+    override public func didPressRightButton(_ sender: Any?) {
         sendMessage()
     }
 
-    override func didPressLeftButton(_ sender: Any?) {
+    override public func didPressLeftButton(_ sender: Any?) {
         buttonUploadDidPressed()
     }
 
-    override func didPressReturnKey(_ keyCommand: UIKeyCommand?) {
+    override public func didPressReturnKey(_ keyCommand: UIKeyCommand?) {
         sendMessage()
     }
 
-    override func textViewDidBeginEditing(_ textView: UITextView) {
+    override public func textViewDidBeginEditing(_ textView: UITextView) {
         scrollToBottom()
     }
 
@@ -491,7 +491,7 @@ final class ChatViewController: SLKTextViewController, AuthManagerInjected, Sock
 
 extension ChatViewController {
 
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    override public func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == 0 {
             if let message = dataController.itemAt(indexPath)?.message {
                 loadMoreMessagesFrom(date: message.createdAt)
@@ -505,11 +505,11 @@ extension ChatViewController {
         }
     }
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataController.data.count
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard dataController.data.count > indexPath.row else { return UICollectionViewCell() }
         guard let obj = dataController.itemAt(indexPath) else { return UICollectionViewCell() }
 
@@ -561,11 +561,11 @@ extension ChatViewController {
 
 extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCacheManagerInjected {
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .zero
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let fullWidth = UIScreen.main.bounds.size.width
 
         if let message = dataController.itemAt(indexPath)?.message {
@@ -581,7 +581,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCac
 
 extension ChatViewController {
 
-    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+    override public func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard let view = buttonScrollToBottom.superview else { return }
 
         if buttonScrollToBottomMarginConstraint == nil {
