@@ -1,14 +1,19 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11134" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11106"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SDKExample" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -16,11 +21,93 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Server address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="tB5-iG-khN">
+                                <rect key="frame" x="160" y="205" width="163" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Uo9-W8-fVX">
+                                <rect key="frame" x="160" y="267" width="163" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="eF9-l2-s0T">
+                                <rect key="frame" x="160" y="318" width="163" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nea-3h-tGA">
+                                <rect key="frame" x="168" y="374" width="38" height="30"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="didTouchUpInsideLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZaO-H9-1Br"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpG-MU-a6m">
+                                <rect key="frame" x="102" y="321" width="50" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8ZB-1v-Uwk">
+                                <rect key="frame" x="106" y="270" width="46" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Server Addr.:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jlT-dP-4VQ">
+                                <rect key="frame" x="52" y="208" width="100" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b6w-FG-qQT">
+                                <rect key="frame" x="310" y="628" width="51" height="31"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Secured" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtY-Ef-z4y">
+                                <rect key="frame" x="238" y="633" width="64" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="tB5-iG-khN" firstAttribute="leading" secondItem="jlT-dP-4VQ" secondAttribute="trailing" constant="8" id="628-6C-nTd"/>
+                            <constraint firstItem="nea-3h-tGA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9lj-eV-N27"/>
+                            <constraint firstItem="eF9-l2-s0T" firstAttribute="top" secondItem="Uo9-W8-fVX" secondAttribute="bottom" constant="21" id="Aet-yO-jFV"/>
+                            <constraint firstItem="tB5-iG-khN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="185" id="CM7-UA-af4"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Uo9-W8-fVX" secondAttribute="trailing" constant="36" id="Io6-T4-cgG"/>
+                            <constraint firstItem="YpG-MU-a6m" firstAttribute="trailing" secondItem="8ZB-1v-Uwk" secondAttribute="trailing" id="J1m-hc-kZG"/>
+                            <constraint firstItem="jlT-dP-4VQ" firstAttribute="baseline" secondItem="tB5-iG-khN" secondAttribute="baseline" id="Q5I-az-VaV"/>
+                            <constraint firstItem="8ZB-1v-Uwk" firstAttribute="trailing" secondItem="jlT-dP-4VQ" secondAttribute="trailing" id="UxY-Bs-PWI"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="tB5-iG-khN" secondAttribute="trailing" constant="36" id="Wvc-ZQ-7T7"/>
+                            <constraint firstItem="jlT-dP-4VQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="36" id="XJ7-Mh-TH5"/>
+                            <constraint firstItem="Uo9-W8-fVX" firstAttribute="leading" secondItem="tB5-iG-khN" secondAttribute="leading" id="gBb-v4-WvW"/>
+                            <constraint firstItem="nea-3h-tGA" firstAttribute="top" secondItem="eF9-l2-s0T" secondAttribute="bottom" constant="26" id="lz4-Wp-9vu"/>
+                            <constraint firstItem="8ZB-1v-Uwk" firstAttribute="baseline" secondItem="Uo9-W8-fVX" secondAttribute="baseline" id="r6h-2j-0BR"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="eF9-l2-s0T" secondAttribute="trailing" constant="36" id="r6o-43-ON1"/>
+                            <constraint firstItem="Uo9-W8-fVX" firstAttribute="top" secondItem="tB5-iG-khN" secondAttribute="bottom" constant="32" id="sWg-L4-9M1"/>
+                            <constraint firstItem="YpG-MU-a6m" firstAttribute="baseline" secondItem="eF9-l2-s0T" secondAttribute="baseline" id="tFl-2d-SjE"/>
+                            <constraint firstItem="eF9-l2-s0T" firstAttribute="leading" secondItem="Uo9-W8-fVX" secondAttribute="leading" id="vnZ-qF-57D"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="Uo9-W8-fVX" id="FKx-gV-8Lh"/>
+                        <outlet property="nameTextField" destination="eF9-l2-s0T" id="pzV-kn-DcI"/>
+                        <outlet property="securedSwitch" destination="b6w-FG-qQT" id="QS0-dm-K07"/>
+                        <outlet property="serverAddrTextField" destination="tB5-iG-khN" id="m1D-KG-8wR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="136.80000000000001" y="117.39130434782609"/>
         </scene>
     </scenes>
 </document>

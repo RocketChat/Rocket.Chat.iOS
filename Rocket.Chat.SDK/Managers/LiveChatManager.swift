@@ -76,6 +76,7 @@ public class LiveChatManager: SocketManagerInjected {
             self.token = json["token"].stringValue
             self.login {
                 let roomSubscription = Subscription()
+                roomSubscription.identifier = UUID().uuidString
                 roomSubscription.rid = self.room
                 Realm.execute({ realm in
                     realm.add(roomSubscription)
@@ -107,8 +108,7 @@ public class LiveChatManager: SocketManagerInjected {
         guard self.loggedIn else {
             fatalError("LiveChatManager methods called before properly logged in.")
         }
-
-        let storyboard = UIStoryboard(name: "Chatting", bundle: nil)
+        let storyboard = UIStoryboard(name: "Chatting", bundle: RocketChat.resourceBundle)
         let chatViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController
         chatViewController?.injectionContainer = injectionContainer
         let realm = try Realm()

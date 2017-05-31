@@ -11,6 +11,13 @@ import Foundation
 public final class RocketChat {
 
     public static var injectionContainer = DependencyRepository()
+    static var mainBundle = Bundle(for: RocketChat.self)
+    static var resourceBundle: Bundle? {
+        guard let path = mainBundle.path(forResource: "RocketChat", ofType: "bundle") else {
+            return nil
+        }
+        return Bundle(path: path)
+    }
 
     public static func configure(withServerURL serverURL: URL, secured: Bool = true, completion: @escaping () -> Void) {
         guard let socketURL = serverURL.socketURL(secured: secured) else {
