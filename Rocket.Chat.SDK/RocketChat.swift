@@ -23,8 +23,8 @@ public final class RocketChat {
         guard let socketURL = serverURL.socketURL(secured: secured) else {
             return
         }
-        injectionContainer.socketManager.connect(socketURL) { (_, connected) in
-            self.injectionContainer.authManager.updatePublicSettings(nil) { (settings) in
+        injectionContainer.socketManager.connect(socketURL) { (_, _) in
+            self.injectionContainer.authManager.updatePublicSettings(nil) { _ in
                 DispatchQueue.global(qos: .background).async(execute: completion)
             }
         }

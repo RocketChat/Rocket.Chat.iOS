@@ -41,7 +41,7 @@ class ViewController: UIViewController {
             livechatManager.initiate {
                 livechatManager.registerGuestAndLogin(withEmail: email, name: name, toDepartment: livechatManager.departments.first!) {
                     DispatchQueue.main.async {
-                        guard let controller = try? livechatManager.getLiveChatViewController() else {
+                        guard let controller = livechatManager.getLiveChatViewController() else {
                             return
                         }
                         self.present(controller, animated: true, completion: nil)
