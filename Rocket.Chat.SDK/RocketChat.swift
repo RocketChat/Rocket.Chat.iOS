@@ -12,8 +12,8 @@ public final class RocketChat {
 
     public static var injectionContainer = DependencyRepository()
 
-    public static func configure(withServerURL serverURL: URL, completion: @escaping () -> Void) {
-        guard let socketURL = serverURL.socketURL() else {
+    public static func configure(withServerURL serverURL: URL, secured: Bool = true, completion: @escaping () -> Void) {
+        guard let socketURL = serverURL.socketURL(secured: secured) else {
             return
         }
         injectionContainer.socketManager.connect(socketURL) { (_, connected) in

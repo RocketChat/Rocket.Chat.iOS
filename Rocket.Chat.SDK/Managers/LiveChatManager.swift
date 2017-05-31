@@ -93,9 +93,9 @@ public class LiveChatManager: SocketManagerInjected {
         let params = [
             "msg": "method",
             "method": "login",
-            "params": [
+            "params": [[
                 "resume": token
-            ]
+            ]]
         ] as [String : Any]
         socketManager.send(params) { _ in
             self.loggedIn = true
