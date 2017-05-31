@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PushManager: SocketManagerInjected, AuthManagerInjected {
+public class PushManager: SocketManagerInjected, AuthManagerInjected {
 
     let kDeviceTokenKey = "deviceToken"
     let kPushIdentifierKey = "pushIdentifier"

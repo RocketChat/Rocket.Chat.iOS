@@ -1,5 +1,5 @@
 //
-//  LiveChatSbuscriptionManager.swift
+//  LiveChatSubscriptionManager.swift
 //  Rocket.Chat
 //
 //  Created by Lucas Woo on 5/30/17.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LiveChatSbuscriptionManager: SubscriptionManager {
+class LiveChatSubscriptionManager: SubscriptionManager {
     override func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",

@@ -25,7 +25,7 @@ public class LiveChatManager: SocketManagerInjected {
     var registrationForm = false
     var displayOfflineForm = false
 
-    var departments: [Department] = []
+    public var departments: [Department] = []
 
     public func initiate(completion: @escaping () -> Void) {
         visitorToken = String.random()
