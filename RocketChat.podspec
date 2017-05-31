@@ -13,7 +13,10 @@ TODO: Add long description of the pod here.
 
   s.source_files = 'Rocket.Chat.{SDK,Shared}/**/*.swift'
   s.resource_bundles = {
-    'RocketChat' => ['Rocket.Chat.{SDK,Shared}/**/*.{storyboard,xib}'],
+    'RocketChat' => [
+      'Rocket.Chat.{SDK,Shared}/**/*.{storyboard,xib}',
+      'Rocket.Chat.Shared/SharedAssets.xcassets',
+    ],
   }
 
   s.frameworks = 'UIKit'
