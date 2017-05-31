@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class LiveChatManager: SocketManagerInjected {
+public class LiveChatManager: SocketManagerInjected {
 
     var injectionContainer: InjectionContainer!
     var initiated = false
@@ -27,7 +27,7 @@ class LiveChatManager: SocketManagerInjected {
 
     var departments: [Department] = []
 
-    func initiate(completion: @escaping () -> Void) {
+    public func initiate(completion: @escaping () -> Void) {
         visitorToken = String.random()
         let params = [
             "msg": "method",
@@ -55,7 +55,7 @@ class LiveChatManager: SocketManagerInjected {
         }
     }
 
-    func registerGuestAndLogin(withEmail email: String, name: String, toDepartment department: Department, completion: @escaping () -> Void) {
+    public func registerGuestAndLogin(withEmail email: String, name: String, toDepartment department: Department, completion: @escaping () -> Void) {
         guard self.initiated else {
             fatalError("LiveChatManager methods called before properly initiated.")
         }
@@ -85,7 +85,7 @@ class LiveChatManager: SocketManagerInjected {
         }
     }
 
-    func login(completion: @escaping () -> Void) {
+    public func login(completion: @escaping () -> Void) {
         guard self.initiated else {
             fatalError("LiveChatManager methods called before properly initiated.")
         }
@@ -103,7 +103,7 @@ class LiveChatManager: SocketManagerInjected {
         }
     }
 
-    func getLiveChatViewController() throws -> ChatViewController? {
+    public func getLiveChatViewController() throws -> ChatViewController? {
         guard self.loggedIn else {
             fatalError("LiveChatManager methods called before properly logged in.")
         }

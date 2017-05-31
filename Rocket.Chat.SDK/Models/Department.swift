@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-struct Department {
+public struct Department {
     var id: String
     var enabled: Bool
     var name: String
