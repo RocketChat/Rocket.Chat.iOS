@@ -11,13 +11,16 @@ Pod::Spec.new do |s|
 TODO: Add long description of the pod here.
                   DESC
 
-  s.public_header_files = 'Rocket.Chat.SDK/Rocket.Chat.SDK.h'
   s.source_files = 'Rocket.Chat.{SDK,Shared}/**/*.swift'
   s.resource_bundles = {
     'RocketChat' => ['Rocket.Chat.{SDK,Shared}/**/*.{storyboard,xib}'],
   }
 
   s.frameworks = 'UIKit'
+
+  s.vendored_frameworks = 'CommonCrypto.framework'
+
+  s.module_name = 'RocketChat'
 
   s.ios.deployment_target = '10.0'
   s.osx.deployment_target = '10.12'
