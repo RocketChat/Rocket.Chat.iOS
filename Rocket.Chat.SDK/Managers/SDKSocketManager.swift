@@ -11,6 +11,6 @@ import Starscream
 
 class SDKSocketManager: SocketManager {
     override func handleError(of response: SocketResponse, socket: WebSocket) {
-
+        Log.debug("error: " + (response.result["error"].rawString() ?? ""))
     }
 }
