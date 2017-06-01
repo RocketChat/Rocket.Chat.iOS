@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class LiveChatManager: SocketManagerInjected {
+public class LiveChatManager: SocketManagerInjected, AuthManagerInjected {
 
     var injectionContainer: InjectionContainer!
     var initiated = false
@@ -74,10 +74,12 @@ public class LiveChatManager: SocketManagerInjected {
             let json = response.result["result"]
             self.userId = json["userId"].stringValue
             self.token = json["token"].stringValue
+
             self.login {
                 let roomSubscription = Subscription()
                 roomSubscription.identifier = UUID().uuidString
                 roomSubscription.rid = self.room
+                roomSubscription.name = department.name
                 Realm.execute({ realm in
                     realm.add(roomSubscription)
                 })
@@ -91,14 +93,8 @@ public class LiveChatManager: SocketManagerInjected {
             fatalError("LiveChatManager methods called before properly initiated.")
         }
 
-        let params = [
-            "msg": "method",
-            "method": "login",
-            "params": [[
-                "resume": token
-            ]]
-        ] as [String : Any]
-        socketManager.send(params) { _ in
+        let params = ["resume": token] as [String : Any]
+        authManager.auth(params: params) { _ in
             self.loggedIn = true
             DispatchQueue.global(qos: .background).async(execute: completion)
         }
@@ -112,7 +108,8 @@ public class LiveChatManager: SocketManagerInjected {
         let chatViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController
         chatViewController?.injectionContainer = injectionContainer
         guard let realm = try? Realm() else { return nil }
-        chatViewController?.subscription = Subscription.find(rid: room, realm: realm)
+        guard let subscription = Subscription.find(rid: room, realm: realm) else { return nil }
+        chatViewController?.subscription = subscription
         return chatViewController
     }
 
