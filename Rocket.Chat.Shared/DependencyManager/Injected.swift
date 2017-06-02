@@ -8,17 +8,6 @@
 
 import Foundation
 
-protocol InjectionContainer {
-    var socketManager: SocketManager { get }
-    var authManager: AuthManager { get }
-    var subscriptionManager: SubscriptionManager { get }
-    var userManager: UserManager { get }
-    var messageManager: MessageManager { get }
-    var uploadManager: UploadManager { get }
-    var pushManager: PushManager { get }
-    var messageTextCacheManager: MessageTextCacheManager { get }
-}
-
 protocol Injected {
     var injectionContainer: InjectionContainer! { get set }
 }
