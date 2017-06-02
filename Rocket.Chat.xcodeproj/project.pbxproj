@@ -65,6 +65,8 @@
 		A032EF6C1EE1946D00A9DA78 /* LiveChatManagerInjected.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6B1EE1946D00A9DA78 /* LiveChatManagerInjected.swift */; };
 		A032EF6E1EE1956F00A9DA78 /* InjectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6D1EE1956F00A9DA78 /* InjectionContainer.swift */; };
 		A032EF701EE195AA00A9DA78 /* InjectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6F1EE195AA00A9DA78 /* InjectionContainer.swift */; };
+		A032EF731EE1A3EF00A9DA78 /* ChatViewController+RegisterCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF721EE1A3EF00A9DA78 /* ChatViewController+RegisterCells.swift */; };
+		A032EF751EE1A49400A9DA78 /* ChatViewController+RegisterCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF741EE1A49400A9DA78 /* ChatViewController+RegisterCells.swift */; };
 		A0559DF71ECC2CCD00E83220 /* SubscriptionModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DEE1ECC2CCD00E83220 /* SubscriptionModelHandler.swift */; };
 		A0559DF81ECC2CCD00E83220 /* UserModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DEF1ECC2CCD00E83220 /* UserModelHandler.swift */; };
 		A0559DF91ECC2CCD00E83220 /* AttachmentModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DF11ECC2CCD00E83220 /* AttachmentModelMapping.swift */; };
@@ -401,6 +403,8 @@
 		A032EF6B1EE1946D00A9DA78 /* LiveChatManagerInjected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveChatManagerInjected.swift; sourceTree = "<group>"; };
 		A032EF6D1EE1956F00A9DA78 /* InjectionContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionContainer.swift; sourceTree = "<group>"; };
 		A032EF6F1EE195AA00A9DA78 /* InjectionContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionContainer.swift; sourceTree = "<group>"; };
+		A032EF721EE1A3EF00A9DA78 /* ChatViewController+RegisterCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatViewController+RegisterCells.swift"; sourceTree = "<group>"; };
+		A032EF741EE1A49400A9DA78 /* ChatViewController+RegisterCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatViewController+RegisterCells.swift"; sourceTree = "<group>"; };
 		A0559DEE1ECC2CCD00E83220 /* SubscriptionModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionModelHandler.swift; sourceTree = "<group>"; };
 		A0559DEF1ECC2CCD00E83220 /* UserModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModelHandler.swift; sourceTree = "<group>"; };
 		A0559DF11ECC2CCD00E83220 /* AttachmentModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentModelMapping.swift; sourceTree = "<group>"; };
@@ -866,6 +870,14 @@
 			path = DependencyManager;
 			sourceTree = "<group>";
 		};
+		A032EF711EE1A3BC00A9DA78 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				A032EF721EE1A3EF00A9DA78 /* ChatViewController+RegisterCells.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		A0559DED1ECC2CCD00E83220 /* Handler */ = {
 			isa = PBXGroup;
 			children = (
@@ -1016,6 +1028,7 @@
 				A0DE0CC81EDEF96000C4FA34 /* Extensions */,
 				A00BA5F81EDDB0560090874D /* Models */,
 				A07F172D1ECD92EA00A1F199 /* Managers */,
+				A032EF711EE1A3BC00A9DA78 /* Controllers */,
 				A030A1361ECC9CA800F71C6F /* Supporting Files */,
 				A0918BCC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h */,
 				A030A1331ECC8E7000F71C6F /* RocketChat.swift */,
@@ -1065,8 +1078,9 @@
 			isa = PBXGroup;
 			children = (
 				A0A812461ECDCAE7000567D7 /* ChatViewController+SharedInstance.swift */,
+				A032EF741EE1A49400A9DA78 /* ChatViewController+RegisterCells.swift */,
 			);
-			name = Chat;
+			path = Chat;
 			sourceTree = "<group>";
 		};
 		A0DE0CC81EDEF96000C4FA34 /* Extensions */ = {
@@ -1863,6 +1877,7 @@
 				A07F17961ECDC18700A1F199 /* ChatMessageTextView.swift in Sources */,
 				A0559DFD1ECC2CCD00E83220 /* SubscriptionModelMapping.swift in Sources */,
 				A07F17531ECDC13C00A1F199 /* ChatViewController.swift in Sources */,
+				A032EF751EE1A49400A9DA78 /* ChatViewController+RegisterCells.swift in Sources */,
 				A0BBAF261EC7FE5F002BF87C /* UploadManager.swift in Sources */,
 				A032EF6E1EE1956F00A9DA78 /* InjectionContainer.swift in Sources */,
 				A0BBAF291EC7FE6A002BF87C /* UploadVideoCompression.swift in Sources */,
@@ -1927,6 +1942,7 @@
 				A0A812381ECDC764000567D7 /* UILabelExtension.swift in Sources */,
 				A0559E191ECC430100E83220 /* ModelMappeable.swift in Sources */,
 				A07F179B1ECDC18700A1F199 /* ChatMessageURLView.swift in Sources */,
+				A032EF731EE1A3EF00A9DA78 /* ChatViewController+RegisterCells.swift in Sources */,
 				A07F178F1ECDC18700A1F199 /* ChatMessageDaySeparator.swift in Sources */,
 				A0559E281ECC430900E83220 /* Attachment.swift in Sources */,
 				A0A812291ECDC684000567D7 /* UIColor+RCColors.swift in Sources */,

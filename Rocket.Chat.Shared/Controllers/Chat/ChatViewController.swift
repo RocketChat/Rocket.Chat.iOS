@@ -175,23 +175,6 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         return UICollectionViewFlowLayout()
     }
 
-    fileprivate func registerCells() {
-        collectionView?.register(UINib(
-            nibName: "ChatMessageCell",
-            bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
-
-        collectionView?.register(UINib(
-            nibName: "ChatMessageDaySeparator",
-            bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
-
-        autoCompletionView.register(UINib(
-            nibName: "AutocompleteCell",
-            bundle: Bundle.main
-        ), forCellReuseIdentifier: AutocompleteCell.identifier)
-    }
-
     fileprivate func scrollToBottom(_ animated: Bool = false) {
         let boundsHeight = collectionView?.bounds.size.height ?? 0
         let sizeHeight = collectionView?.contentSize.height ?? 0
