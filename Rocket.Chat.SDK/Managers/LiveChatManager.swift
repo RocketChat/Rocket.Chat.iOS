@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class LiveChatManager: SocketManagerInjected, AuthManagerInjected {
+public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, SubscriptionManagerInjected {
 
     var injectionContainer: InjectionContainer!
     var initiated = false
@@ -55,7 +55,7 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected {
         }
     }
 
-    public func registerGuestAndLogin(withEmail email: String, name: String, toDepartment department: Department, completion: @escaping () -> Void) {
+    public func registerGuestAndLogin(withEmail email: String, name: String, toDepartment department: Department, message messageText: String, completion: @escaping () -> Void) {
         guard self.initiated else {
             fatalError("LiveChatManager methods called before properly initiated.")
         }
@@ -80,10 +80,23 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected {
                 roomSubscription.identifier = UUID().uuidString
                 roomSubscription.rid = self.room
                 roomSubscription.name = department.name
+                roomSubscription.type = .directMessage
+
+                let message = Message()
+                message.internalType = ""
+                message.createdAt = Date()
+                message.text = messageText
+                message.identifier = UUID().uuidString
+                message.subscription = roomSubscription
+                message.temporary = true
+                message.user = self.authManager.currentUser()
                 Realm.execute({ realm in
                     realm.add(roomSubscription)
+                    realm.add(message)
                 })
-                DispatchQueue.global(qos: .background).async(execute: completion)
+                self.subscriptionManager.sendTextMessage(message) { _ in
+                    DispatchQueue.global(qos: .background).async(execute: completion)
+                }
             }
         }
     }
