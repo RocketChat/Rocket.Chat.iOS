@@ -72,7 +72,7 @@ final class SubscriptionCell: UITableViewCell {
 
             imageViewIcon.image = UIImage(named: "Mention")?.imageWithTint(color)
             break
-        case .group:
+        case .group, .livechat:
             imageViewIcon.image = UIImage(named: "Lock")?.imageWithTint(.RCInvisible())
             break
         }

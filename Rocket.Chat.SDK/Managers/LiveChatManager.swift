@@ -80,7 +80,7 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
                 roomSubscription.identifier = UUID().uuidString
                 roomSubscription.rid = self.room
                 roomSubscription.name = department.name
-                roomSubscription.type = .directMessage
+                roomSubscription.type = .livechat
 
                 let message = Message()
                 message.internalType = ""

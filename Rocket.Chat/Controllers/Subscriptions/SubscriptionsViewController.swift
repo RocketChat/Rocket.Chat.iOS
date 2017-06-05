@@ -255,7 +255,7 @@ extension SubscriptionsViewController {
             }
 
             switch subscription.type {
-            case .channel, .group:
+            case .channel, .group, .livechat:
                 channelGroup.append(subscription)
             case .directMessage:
                 directMessageGroup.append(subscription)
