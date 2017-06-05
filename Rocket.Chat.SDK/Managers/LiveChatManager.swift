@@ -90,10 +90,12 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
                 message.subscription = roomSubscription
                 message.temporary = true
                 message.user = self.authManager.currentUser()
-                Realm.execute({ realm in
-                    realm.add(roomSubscription)
-                    realm.add(message)
-                })
+
+                let realm = try? Realm()
+                try? realm?.write {
+                    realm?.add(roomSubscription)
+                    realm?.add(message)
+                }
                 self.subscriptionManager.sendTextMessage(message) { _ in
                     DispatchQueue.global(qos: .background).async(execute: completion)
                 }
