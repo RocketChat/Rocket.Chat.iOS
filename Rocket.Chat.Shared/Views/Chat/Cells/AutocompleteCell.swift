@@ -13,7 +13,13 @@ final class AutocompleteCell: UITableViewCell, Injected {
     static let minimumHeight = CGFloat(44)
     static let identifier = "AutocompleteCell"
 
-    var injectionContainer: InjectionContainer!
+    var injectionContainer: InjectionContainer! {
+        didSet {
+            if let avatarView = self.avatarView {
+                avatarView.injectionContainer = injectionContainer
+            }
+        }
+    }
 
     @IBOutlet weak var imageViewIcon: UIImageView!
 
