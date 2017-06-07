@@ -119,7 +119,7 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         guard self.loggedIn else {
             fatalError("LiveChatManager methods called before properly logged in.")
         }
-        let storyboard = UIStoryboard(name: "Chatting", bundle: RocketChat.resourceBundle)
+        let storyboard = UIStoryboard(name: "Chatting", bundle: Bundle.rocketChat)
         let chatViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController
         chatViewController?.injectionContainer = injectionContainer
         guard let realm = try? Realm() else { return nil }

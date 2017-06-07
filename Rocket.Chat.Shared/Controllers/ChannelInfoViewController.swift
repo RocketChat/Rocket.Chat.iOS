@@ -60,7 +60,7 @@ class ChannelInfoViewController: BaseViewController, AuthManagerInjected, Subscr
 
         if let auth = authManager.isAuthenticated() {
             if auth.settings?.favoriteRooms ?? false {
-                let defaultImage = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray()).withRenderingMode(.alwaysOriginal)
+                let defaultImage = UIImage(named: "Star", in: Bundle.rocketChat, compatibleWith: nil)?.imageWithTint(UIColor.RCGray()).withRenderingMode(.alwaysOriginal)
                 let buttonFavorite = UIBarButtonItem(image: defaultImage, style: .plain, target: self, action: #selector(buttonFavoriteDidPressed))
                 navigationItem.rightBarButtonItem = buttonFavorite
                 self.buttonFavorite = buttonFavorite
@@ -75,9 +75,9 @@ class ChannelInfoViewController: BaseViewController, AuthManagerInjected, Subscr
         var image: UIImage?
 
         if favorite {
-            image = UIImage(named: "Star-Filled")?.imageWithTint(UIColor.RCFavoriteMark())
+            image = UIImage(named: "Star-Filled", in: Bundle.rocketChat, compatibleWith: nil)?.imageWithTint(UIColor.RCFavoriteMark())
         } else {
-            image = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray())
+            image = UIImage(named: "Star", in: Bundle.rocketChat, compatibleWith: nil)?.imageWithTint(UIColor.RCGray())
         }
 
         buttonFavorite.image = image?.withRenderingMode(.alwaysOriginal)

@@ -1,5 +1,5 @@
 //
-//  UIViewExtentions.swift
+//  UIView+Nib.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Machado on 12/10/16.
@@ -12,7 +12,7 @@ import UIKit
 extension UIView {
 
     static var nib: UINib {
-        return UINib(nibName: "\(self)", bundle: nil)
+        return UINib(nibName: "\(self)", bundle: Bundle.rocketChat)
     }
 
     static func instantiateFromNib() -> Self? {

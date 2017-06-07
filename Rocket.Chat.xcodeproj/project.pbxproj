@@ -53,7 +53,6 @@
 		41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E2F9FE1D414DE800238DFD /* Chat.storyboard */; };
 		41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E2FA001D414EA100238DFD /* Subscriptions.storyboard */; };
 		41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */; };
-		41EB22361E5F056600AA3AE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41EB22381E5F056600AA3AE7 /* Localizable.strings */; };
 		58C5E64A23BF1E77F08D62A9 /* Pods_Rocket_Chat_SDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BD9D8C281E43B71968985044 /* Pods_Rocket_Chat_SDK.framework */; };
 		68D186DF1ED9714F0030EE8C /* MessageURLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */; };
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
@@ -65,8 +64,12 @@
 		A032EF6C1EE1946D00A9DA78 /* LiveChatManagerInjected.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6B1EE1946D00A9DA78 /* LiveChatManagerInjected.swift */; };
 		A032EF6E1EE1956F00A9DA78 /* InjectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6D1EE1956F00A9DA78 /* InjectionContainer.swift */; };
 		A032EF701EE195AA00A9DA78 /* InjectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6F1EE195AA00A9DA78 /* InjectionContainer.swift */; };
-		A032EF731EE1A3EF00A9DA78 /* ChatViewController+RegisterCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF721EE1A3EF00A9DA78 /* ChatViewController+RegisterCells.swift */; };
-		A032EF751EE1A49400A9DA78 /* ChatViewController+RegisterCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF741EE1A49400A9DA78 /* ChatViewController+RegisterCells.swift */; };
+		A0452DCB1EE7C4CD003FBC9B /* Bundle+RocketChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0452DCA1EE7C4CD003FBC9B /* Bundle+RocketChat.swift */; };
+		A0452DCD1EE7C5BB003FBC9B /* Bundle+RocketChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0452DCC1EE7C5BB003FBC9B /* Bundle+RocketChat.swift */; };
+		A0452DD31EE7C9F3003FBC9B /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0452DCE1EE7C5FE003FBC9B /* UIView+Nib.swift */; };
+		A0452DD41EE7C9F4003FBC9B /* UIView+Nib.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0452DCE1EE7C5FE003FBC9B /* UIView+Nib.swift */; };
+		A0452DD81EE7CD20003FBC9B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0452DDB1EE7CD20003FBC9B /* Localizable.strings */; };
+		A0452DD91EE7CD20003FBC9B /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = A0452DDB1EE7CD20003FBC9B /* Localizable.strings */; };
 		A0559DF71ECC2CCD00E83220 /* SubscriptionModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DEE1ECC2CCD00E83220 /* SubscriptionModelHandler.swift */; };
 		A0559DF81ECC2CCD00E83220 /* UserModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DEF1ECC2CCD00E83220 /* UserModelHandler.swift */; };
 		A0559DF91ECC2CCD00E83220 /* AttachmentModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DF11ECC2CCD00E83220 /* AttachmentModelMapping.swift */; };
@@ -241,8 +244,6 @@
 		A0D128C71ED185F80088B240 /* DependencyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D128C61ED185F80088B240 /* DependencyRepository.swift */; };
 		A0DE0CC51EDE9EC700C4FA34 /* DependencyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE0CC41EDE9EC700C4FA34 /* DependencyRepository.swift */; };
 		A0DE0CC71EDEAD6600C4FA34 /* SDKSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE0CC61EDEAD6600C4FA34 /* SDKSocketManager.swift */; };
-		A0DE0CCA1EDEF98800C4FA34 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE0CC91EDEF98800C4FA34 /* UIViewExtensions.swift */; };
-		A0DE0CCD1EDEF9DA00C4FA34 /* UIViewExtentions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE0CCC1EDEF9DA00C4FA34 /* UIViewExtentions.swift */; };
 		A0E0E7D61EC6F920001B93B1 /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7D21EC6F920001B93B1 /* ResponseMessage.swift */; };
 		A0E0E7D71EC6F920001B93B1 /* SocketManager+Handle.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7D31EC6F920001B93B1 /* SocketManager+Handle.swift */; };
 		A0E0E7D81EC6F920001B93B1 /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E7D41EC6F920001B93B1 /* SocketResponse.swift */; };
@@ -384,9 +385,6 @@
 		41E2F9FE1D414DE800238DFD /* Chat.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Chat.storyboard; path = Storyboards/Chat.storyboard; sourceTree = "<group>"; };
 		41E2FA001D414EA100238DFD /* Subscriptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Subscriptions.storyboard; path = Storyboards/Subscriptions.storyboard; sourceTree = "<group>"; };
 		41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionsViewController.swift; sourceTree = "<group>"; };
-		41EB22371E5F056600AA3AE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		41EB223A1E5F057F00AA3AE7 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		41EB223B1E5F19EB00AA3AE7 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		5108B4F1453CB9F4E425E3F4 /* Pods-Rocket.Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.release.xcconfig"; sourceTree = "<group>"; };
 		58C7F7D8D91A05CA5D1C9FE0 /* Pods-Rocket.ChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		597ECBA01E3708980041C5C5 /* Rocket.Chat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rocket.Chat.entitlements; sourceTree = "<group>"; };
@@ -403,8 +401,12 @@
 		A032EF6B1EE1946D00A9DA78 /* LiveChatManagerInjected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveChatManagerInjected.swift; sourceTree = "<group>"; };
 		A032EF6D1EE1956F00A9DA78 /* InjectionContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionContainer.swift; sourceTree = "<group>"; };
 		A032EF6F1EE195AA00A9DA78 /* InjectionContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionContainer.swift; sourceTree = "<group>"; };
-		A032EF721EE1A3EF00A9DA78 /* ChatViewController+RegisterCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatViewController+RegisterCells.swift"; sourceTree = "<group>"; };
-		A032EF741EE1A49400A9DA78 /* ChatViewController+RegisterCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ChatViewController+RegisterCells.swift"; sourceTree = "<group>"; };
+		A0452DCA1EE7C4CD003FBC9B /* Bundle+RocketChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+RocketChat.swift"; sourceTree = "<group>"; };
+		A0452DCC1EE7C5BB003FBC9B /* Bundle+RocketChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+RocketChat.swift"; sourceTree = "<group>"; };
+		A0452DCE1EE7C5FE003FBC9B /* UIView+Nib.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Nib.swift"; sourceTree = "<group>"; };
+		A0452DDA1EE7CD20003FBC9B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A0452DDC1EE7CD22003FBC9B /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		A0452DDD1EE7CD23003FBC9B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A0559DEE1ECC2CCD00E83220 /* SubscriptionModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionModelHandler.swift; sourceTree = "<group>"; };
 		A0559DEF1ECC2CCD00E83220 /* UserModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModelHandler.swift; sourceTree = "<group>"; };
 		A0559DF11ECC2CCD00E83220 /* AttachmentModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentModelMapping.swift; sourceTree = "<group>"; };
@@ -492,8 +494,6 @@
 		A0D128C61ED185F80088B240 /* DependencyRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyRepository.swift; sourceTree = "<group>"; };
 		A0DE0CC41EDE9EC700C4FA34 /* DependencyRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyRepository.swift; sourceTree = "<group>"; };
 		A0DE0CC61EDEAD6600C4FA34 /* SDKSocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKSocketManager.swift; sourceTree = "<group>"; };
-		A0DE0CC91EDEF98800C4FA34 /* UIViewExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
-		A0DE0CCC1EDEF9DA00C4FA34 /* UIViewExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtentions.swift; sourceTree = "<group>"; };
 		A0E0E7D21EC6F920001B93B1 /* ResponseMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResponseMessage.swift; sourceTree = "<group>"; };
 		A0E0E7D31EC6F920001B93B1 /* SocketManager+Handle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SocketManager+Handle.swift"; sourceTree = "<group>"; };
 		A0E0E7D41EC6F920001B93B1 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketResponse.swift; sourceTree = "<group>"; };
@@ -799,7 +799,6 @@
 				41DF76E91D2C50710028DBF8 /* Assets.xcassets */,
 				41DF76EE1D2C50720028DBF8 /* Info.plist */,
 				4116C52C1E69B15400AC4E43 /* GoogleService-Info.plist */,
-				41EB22381E5F056600AA3AE7 /* Localizable.strings */,
 				597ECBA01E3708980041C5C5 /* Rocket.Chat.entitlements */,
 			);
 			path = Rocket.Chat;
@@ -873,7 +872,6 @@
 		A032EF711EE1A3BC00A9DA78 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				A032EF721EE1A3EF00A9DA78 /* ChatViewController+RegisterCells.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1078,7 +1076,6 @@
 			isa = PBXGroup;
 			children = (
 				A0A812461ECDCAE7000567D7 /* ChatViewController+SharedInstance.swift */,
-				A032EF741EE1A49400A9DA78 /* ChatViewController+RegisterCells.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1086,7 +1083,7 @@
 		A0DE0CC81EDEF96000C4FA34 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A0DE0CC91EDEF98800C4FA34 /* UIViewExtensions.swift */,
+				A0452DCA1EE7C4CD003FBC9B /* Bundle+RocketChat.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1094,7 +1091,7 @@
 		A0DE0CCB1EDEF9C200C4FA34 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				A0DE0CCC1EDEF9DA00C4FA34 /* UIViewExtentions.swift */,
+				A0452DCC1EE7C5BB003FBC9B /* Bundle+RocketChat.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1113,6 +1110,7 @@
 				A07F17341ECDC13C00A1F199 /* Controllers */,
 				A07F17581ECDC18700A1F199 /* Views */,
 				A07F17B11ECDC2B600A1F199 /* SharedAssets.xcassets */,
+				A0452DDB1EE7CD20003FBC9B /* Localizable.strings */,
 			);
 			path = Rocket.Chat.Shared;
 			sourceTree = "<group>";
@@ -1168,6 +1166,7 @@
 				A0A8122B1ECDC6C7000567D7 /* UIViewController+Keyboard.swift */,
 				A0A812361ECDC764000567D7 /* UILabelExtension.swift */,
 				A0A8123C1ECDC814000567D7 /* NSAttributedStringExtensions.swift */,
+				A0452DCE1EE7C5FE003FBC9B /* UIView+Nib.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1486,12 +1485,12 @@
 				A07F17A81ECDC18700A1F199 /* ChatPreviewModeView.xib in Resources */,
 				4116C52D1E69B15400AC4E43 /* GoogleService-Info.plist in Resources */,
 				41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */,
-				41EB22361E5F056600AA3AE7 /* Localizable.strings in Resources */,
 				A0798F591EDD937400A495AA /* ChatHeaderViewStatus.xib in Resources */,
 				41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */,
 				41DF76E81D2C50710028DBF8 /* Main.storyboard in Resources */,
 				A07F178C1ECDC18700A1F199 /* ChatMessageCell.xib in Resources */,
 				A07F17881ECDC18700A1F199 /* AutocompleteCell.xib in Resources */,
+				A0452DD81EE7CD20003FBC9B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1527,6 +1526,7 @@
 				A07F17951ECDC18700A1F199 /* ChatMessageImageView.xib in Resources */,
 				A07F17A91ECDC18700A1F199 /* ChatPreviewModeView.xib in Resources */,
 				A07F17911ECDC18700A1F199 /* ChatMessageDaySeparator.xib in Resources */,
+				A0452DD91EE7CD20003FBC9B /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1823,12 +1823,13 @@
 				A07F177C1ECDC18700A1F199 /* ChannelInfoBasicCell.swift in Sources */,
 				A07F17A61ECDC18700A1F199 /* ChatPreviewModeView.swift in Sources */,
 				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
+				A0452DD31EE7C9F3003FBC9B /* UIView+Nib.swift in Sources */,
 				A0E0E8201EC749D6001B93B1 /* Mention.swift in Sources */,
+				A0452DCD1EE7C5BB003FBC9B /* Bundle+RocketChat.swift in Sources */,
 				A07F17561ECDC16600A1F199 /* ChannelInfoViewController.swift in Sources */,
 				A07F17491ECDC13C00A1F199 /* ChatControllerMessageActions.swift in Sources */,
 				A0798F581EDD936F00A495AA /* ChatHeaderViewStatus.swift in Sources */,
 				A0A8123A1ECDC7D1000567D7 /* MessageTextFontAttributes.swift in Sources */,
-				A0DE0CCD1EDEF9DA00C4FA34 /* UIViewExtentions.swift in Sources */,
 				A07F17AF1ECDC21100A1F199 /* ChatMessageTextViewModel.swift in Sources */,
 				A07F17781ECDC18700A1F199 /* AvatarView.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
@@ -1877,7 +1878,6 @@
 				A07F17961ECDC18700A1F199 /* ChatMessageTextView.swift in Sources */,
 				A0559DFD1ECC2CCD00E83220 /* SubscriptionModelMapping.swift in Sources */,
 				A07F17531ECDC13C00A1F199 /* ChatViewController.swift in Sources */,
-				A032EF751EE1A49400A9DA78 /* ChatViewController+RegisterCells.swift in Sources */,
 				A0BBAF261EC7FE5F002BF87C /* UploadManager.swift in Sources */,
 				A032EF6E1EE1956F00A9DA78 /* InjectionContainer.swift in Sources */,
 				A0BBAF291EC7FE6A002BF87C /* UploadVideoCompression.swift in Sources */,
@@ -1942,7 +1942,6 @@
 				A0A812381ECDC764000567D7 /* UILabelExtension.swift in Sources */,
 				A0559E191ECC430100E83220 /* ModelMappeable.swift in Sources */,
 				A07F179B1ECDC18700A1F199 /* ChatMessageURLView.swift in Sources */,
-				A032EF731EE1A3EF00A9DA78 /* ChatViewController+RegisterCells.swift in Sources */,
 				A07F178F1ECDC18700A1F199 /* ChatMessageDaySeparator.swift in Sources */,
 				A0559E281ECC430900E83220 /* Attachment.swift in Sources */,
 				A0A812291ECDC684000567D7 /* UIColor+RCColors.swift in Sources */,
@@ -1962,8 +1961,10 @@
 				A0559E301ECC430E00E83220 /* UploadManager.swift in Sources */,
 				A0559E261ECC430900E83220 /* Email.swift in Sources */,
 				A07F17931ECDC18700A1F199 /* ChatMessageImageView.swift in Sources */,
+				A0452DCB1EE7C4CD003FBC9B /* Bundle+RocketChat.swift in Sources */,
 				A07F17A31ECDC18700A1F199 /* ChatHeaderViewOffline.swift in Sources */,
 				A07F17B01ECDC21100A1F199 /* ChatMessageTextViewModel.swift in Sources */,
+				A0452DD41EE7C9F4003FBC9B /* UIView+Nib.swift in Sources */,
 				A07F172F1ECD930900A1F199 /* LiveChatManager.swift in Sources */,
 				A0559E341ECC431200E83220 /* SocketManager+Handle.swift in Sources */,
 				A00BA5FE1EDDB31A0090874D /* LiveChatSubscriptionManager.swift in Sources */,
@@ -1991,7 +1992,6 @@
 				A0559E321ECC431200E83220 /* ResponseMessage.swift in Sources */,
 				A0559E221ECC430900E83220 /* Auth.swift in Sources */,
 				A07F17831ECDC18700A1F199 /* ChannelInfoDetailCell.swift in Sources */,
-				A0DE0CCA1EDEF98800C4FA34 /* UIViewExtensions.swift in Sources */,
 				A0A8123E1ECDC814000567D7 /* NSAttributedStringExtensions.swift in Sources */,
 				A07F174A1ECDC13C00A1F199 /* ChatControllerMessageActions.swift in Sources */,
 				A0559E311ECC430E00E83220 /* PushManager.swift in Sources */,
@@ -2077,12 +2077,12 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
-		41EB22381E5F056600AA3AE7 /* Localizable.strings */ = {
+		A0452DDB1EE7CD20003FBC9B /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				41EB22371E5F056600AA3AE7 /* en */,
-				41EB223A1E5F057F00AA3AE7 /* pt-BR */,
-				41EB223B1E5F19EB00AA3AE7 /* de */,
+				A0452DDA1EE7CD20003FBC9B /* en */,
+				A0452DDC1EE7CD22003FBC9B /* pt-BR */,
+				A0452DDD1EE7CD23003FBC9B /* de */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
