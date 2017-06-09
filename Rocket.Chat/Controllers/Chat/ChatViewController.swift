@@ -49,6 +49,8 @@ final class ChatViewController: SLKTextViewController {
             markAsRead()
         }
     }
+    var alertSubscriptionToken: NotificationToken?
+    let menuBadge = BadgeView(withType: .dot)
 
     // MARK: View Life Cycle
 
@@ -108,12 +110,29 @@ final class ChatViewController: SLKTextViewController {
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
         view.bringSubview(toFront: textInputbar)
+
+        observeAlertSubscriptions()
     }
 
     internal func reconnect() {
         if !SocketManager.isConnected() {
             SocketManager.reconnect()
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let menuItemFilter: (UIBarButtonItem) -> Bool = { barButtonItem in
+            if let button = barButtonItem.customView as? UIButton,
+                let sideMenuController = self.sideMenuController {
+                return button.allTargets.contains(sideMenuController)
+            }
+            return false
+        }
+        guard let leftMenuButtonItem = self.navigationItem.leftBarButtonItems?.filter(menuItemFilter).first else { return }
+
+        leftMenuButtonItem.addBadge(self.menuBadge)
     }
 
     override func viewWillLayoutSubviews() {
@@ -480,6 +499,22 @@ final class ChatViewController: SLKTextViewController {
         }
 
         return true
+    }
+
+    private func observeAlertSubscriptions() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        let subscriptions = auth.subscriptions
+
+        alertSubscriptionToken = subscriptions.addNotificationBlock { [weak self] _ in
+            guard let strongSelf = self else { return }
+            guard let auth = AuthManager.isAuthenticated() else { return }
+            let alertSubscriptionCount = auth.subscriptions.filter("alert == YES").count
+            if alertSubscriptionCount > 0 {
+                strongSelf.menuBadge.isHidden = false
+            } else {
+                strongSelf.menuBadge.isHidden = true
+            }
+        }
     }
 
     // MARK: IBAction
