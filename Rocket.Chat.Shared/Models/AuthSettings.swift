@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-final class AuthSettings: BaseModel {
+public class AuthSettings: BaseModel {
     dynamic var siteURL: String?
     dynamic var cdnPrefixURL: String?
 

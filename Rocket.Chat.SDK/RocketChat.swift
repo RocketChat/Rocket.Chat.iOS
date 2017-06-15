@@ -12,7 +12,7 @@ public final class RocketChat {
 
     public static var injectionContainer = DependencyRepository()
 
-    public static func configure(withServerURL serverURL: URL, secured: Bool = true, completion: @escaping () -> Void) {
+    public class func configure(withServerURL serverURL: URL, secured: Bool = true, completion: @escaping () -> Void) {
         guard let socketURL = serverURL.socketURL(secured: secured) else {
             return
         }
@@ -21,6 +21,18 @@ public final class RocketChat {
                 DispatchQueue.global(qos: .background).async(execute: completion)
             }
         }
+    }
+
+    public class func livechat() -> LiveChatManager {
+        return injectionContainer.livechatManager
+    }
+
+    public class func auth() -> AuthManager {
+        return injectionContainer.authManager
+    }
+
+    public class func socket() -> SocketManager {
+        return injectionContainer.socketManager
     }
 
 }

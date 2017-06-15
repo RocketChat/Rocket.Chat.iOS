@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-final class Auth: Object {
+public class Auth: Object {
     // Server
     dynamic var serverURL = ""
     dynamic var settings: AuthSettings?
@@ -27,7 +27,7 @@ final class Auth: Object {
     let subscriptions = LinkingObjects(fromType: Subscription.self, property: "auth")
 
     // Primary key from Auth 
-    override static func primaryKey() -> String? {
+    override public static func primaryKey() -> String? {
         return "serverURL"
     }
 }
