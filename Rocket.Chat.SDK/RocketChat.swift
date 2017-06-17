@@ -32,8 +32,15 @@ public final class RocketChat {
         return injectionContainer.authManager
     }
 
+    public class func user() -> UserManager {
+        return injectionContainer.userManager
+    }
+
     public class func socket() -> SocketManager {
         return injectionContainer.socketManager
     }
 
+    public class func push() -> PushManager {
+        return injectionContainer.pushManager
+    }
 }
