@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-class UserCoordinator: LauncherProtocol {
+class UserCoordinator: LauncherCoordinator {
 
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey : Any]?) {
         turnAllUsersOffline()
