@@ -121,10 +121,7 @@ extension SocketManager {
                 self.userManager.userDataChanges()
                 self.userManager.changes()
                 self.subscriptionManager.changes(auth)
-
-                if let userId = auth.userId {
-                    self.pushManager.updateUser(userId)
-                }
+                self.pushManager.updateUser()
             })
         })
     }
