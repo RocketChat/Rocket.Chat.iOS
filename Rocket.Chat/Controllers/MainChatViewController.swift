@@ -47,6 +47,8 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate, In
         super.viewDidLoad()
 
         self.delegate = self
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        self.injectionContainer = appDelegate.injectionContainer
 
         performSegue(withIdentifier: "showCenterController", sender: nil)
         performSegue(withIdentifier: "containSideMenu", sender: nil)
@@ -57,10 +59,12 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate, In
         guard let identifier = segue.identifier else { return }
         switch identifier {
         case "showCenterController":
-            guard let chatViewController = segue.destination as? ChatViewController else { break }
+            guard let navController = segue.destination as? UINavigationController else { break }
+            guard let chatViewController = navController.viewControllers.first as? ChatViewController else { break }
             chatViewController.injectionContainer = injectionContainer
         case "containSideMenu":
-            guard let subscriptionsViewController = segue.destination as? SubscriptionsViewController else { break }
+            guard let navController = segue.destination as? UINavigationController else { break }
+            guard let subscriptionsViewController = navController.viewControllers.first as? SubscriptionsViewController else { break }
             subscriptionsViewController.injectionContainer = injectionContainer
         default:
             break

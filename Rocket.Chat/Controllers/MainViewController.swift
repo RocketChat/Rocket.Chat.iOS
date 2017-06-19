@@ -72,7 +72,6 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
                     // Open chat
                     let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
                     guard let controller = storyboardChat.instantiateInitialViewController() as? MainChatViewController else { return }
-                    controller.injectionContainer = strongSelf.injectionContainer
 
                     let application = UIApplication.shared
 
