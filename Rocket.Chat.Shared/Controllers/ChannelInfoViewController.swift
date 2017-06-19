@@ -88,12 +88,12 @@ class ChannelInfoViewController: BaseViewController, AuthManagerInjected, Subscr
     func buttonFavoriteDidPressed(_ sender: Any) {
         guard let subscription = self.subscription else { return }
 
-        subscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in
+        subscriptionManager.toggleFavorite(subscription) { [weak self] (response) in
             if response.isError() {
                 subscription.updateFavorite(!subscription.favorite)
             }
 
-            self.updateButtonFavoriteImage()
+            self?.updateButtonFavoriteImage()
         }
 
         self.subscription?.updateFavorite(!subscription.favorite)
