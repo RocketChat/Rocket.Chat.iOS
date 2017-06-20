@@ -67,15 +67,11 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
                     strongSelf.userManager.userDataChanges()
                     strongSelf.userManager.changes()
                     strongSelf.subscriptionManager.changes(auth)
-
-                    if let userIdentifier = auth.userId {
-                        strongSelf.pushManager.updateUser(userIdentifier)
-                    }
+                    strongSelf.pushManager.updateUser()
 
                     // Open chat
                     let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
                     guard let controller = storyboardChat.instantiateInitialViewController() as? MainChatViewController else { return }
-                    controller.injectionContainer = strongSelf.injectionContainer
 
                     let application = UIApplication.shared
 

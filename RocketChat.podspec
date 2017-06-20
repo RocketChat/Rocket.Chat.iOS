@@ -16,6 +16,7 @@ TODO: Add long description of the pod here.
     'RocketChat' => [
       'Rocket.Chat.{SDK,Shared}/**/*.{storyboard,xib}',
       'Rocket.Chat.Shared/SharedAssets.xcassets',
+      'Rocket.Chat.Shared/**/Localizable.strings',
     ],
   }
 

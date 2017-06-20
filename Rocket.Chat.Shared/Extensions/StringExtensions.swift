@@ -10,7 +10,7 @@ import Foundation
 import CommonCrypto
 
 func localized(_ string: String) -> String {
-    return NSLocalizedString(string, comment: "")
+    return NSLocalizedString(string, bundle: Bundle.rocketChat, comment: "")
 }
 
 extension String {

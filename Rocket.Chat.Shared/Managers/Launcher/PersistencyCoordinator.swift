@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-struct PersistencyCoordinator: LauncherProtocol {
+struct PersistencyCoordinator: LauncherCoordinator {
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
         Realm.Configuration.defaultConfiguration = Realm.Configuration(
             deleteRealmIfMigrationNeeded: true

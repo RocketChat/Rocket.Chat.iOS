@@ -29,8 +29,7 @@ final class ChatTitleView: UIView {
 
             switch subscription.type {
             case .channel:
-                icon.image = UIImage(named: "Hashtag")?.imageWithTint(.RCGray())
-                break
+                icon.image = UIImage(named: "Hashtag", in: Bundle.rocketChat, compatibleWith: nil)?.imageWithTint(.RCGray())
             case .directMessage:
                 var color = UIColor.RCGray()
 
@@ -45,11 +44,9 @@ final class ChatTitleView: UIView {
                     }()
                 }
 
-                icon.image = UIImage(named: "Mention")?.imageWithTint(color)
-                break
-            case .group:
-                icon.image = UIImage(named: "Lock")?.imageWithTint(.RCGray())
-                break
+                icon.image = UIImage(named: "Mention", in: Bundle.rocketChat, compatibleWith: nil)?.imageWithTint(color)
+            case .group, .livechat:
+                icon.image = UIImage(named: "Lock", in: Bundle.rocketChat, compatibleWith: nil)?.imageWithTint(.RCGray())
             }
         }
     }

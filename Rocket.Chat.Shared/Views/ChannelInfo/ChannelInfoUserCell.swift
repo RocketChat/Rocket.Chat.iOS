@@ -19,7 +19,11 @@ class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol, Injected {
     static let identifier = "kChannelInfoCellUser"
     static let defaultHeight: Float = 80
 
-    var injectionContainer: InjectionContainer!
+    var injectionContainer: InjectionContainer! {
+        didSet {
+            avatarView.injectionContainer = injectionContainer
+        }
+    }
     var data: DataType? {
         didSet {
             labelTitle.text = data?.user?.username

@@ -17,29 +17,38 @@ public class PushManager: SocketManagerInjected, AuthManagerInjected {
 
     func updatePushToken() {
         guard let deviceToken = getDeviceToken() else { return }
+        updatePushToken(with: deviceToken, pushId: getOrCreatePushId())
+    }
+
+    public func updatePushToken(with deviceToken: String, pushId: String) {
         guard let userIdentifier = authManager.isAuthenticated()?.userId else { return }
 
         let request = [
             "msg": "method",
             "method": "raix:push-update",
             "params": [[
-                "id": getOrCreatePushId(),
+                "id": pushId,
                 "userId": userIdentifier,
                 "token": ["apn": deviceToken],
                 "appName": Bundle.main.bundleIdentifier ?? "main",
                 "metadata": [:]
-            ]]
-        ] as [String : Any]
+                ]]
+            ] as [String : Any]
 
         socketManager.send(request)
     }
 
-    func updateUser(_ userIdentifier: String) {
+    public func updateUser() {
+        guard let userIdentifier = authManager.isAuthenticated()?.userId else { return }
+        updateUser(userIdentifier, pushId: getOrCreatePushId())
+    }
+
+    public func updateUser(_ userIdentifier: String, pushId: String) {
         let request = [
             "msg": "method",
             "method": "raix:push-setuser",
             "userId": userIdentifier,
-            "params": [getOrCreatePushId()]
+            "params": [pushId]
         ] as [String : Any]
 
         socketManager.send(request)

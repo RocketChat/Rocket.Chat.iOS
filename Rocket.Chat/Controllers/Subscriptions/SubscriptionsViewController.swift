@@ -11,7 +11,11 @@ import RealmSwift
 // swiftlint:disable file_length
 final class SubscriptionsViewController: BaseViewController, AuthManagerInjected, SubscriptionManagerInjected {
 
-    var injectionContainer: InjectionContainer!
+    var injectionContainer: InjectionContainer! {
+        didSet {
+            subscribeModelChanges()
+        }
+    }
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
@@ -82,11 +86,6 @@ final class SubscriptionsViewController: BaseViewController, AuthManagerInjected
 
     var groupInfomation: [[String: String]]?
     var groupSubscriptions: [[Subscription]]?
-
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        subscribeModelChanges()
-    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -255,7 +254,7 @@ extension SubscriptionsViewController {
             }
 
             switch subscription.type {
-            case .channel, .group:
+            case .channel, .group, .livechat:
                 channelGroup.append(subscription)
             case .directMessage:
                 directMessageGroup.append(subscription)

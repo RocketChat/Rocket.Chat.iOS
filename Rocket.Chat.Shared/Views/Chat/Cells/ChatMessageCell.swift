@@ -20,7 +20,13 @@ final class ChatMessageCell: UICollectionViewCell, MessageTextCacheManagerInject
 
     weak var longPressGesture: UILongPressGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
-    var injectionContainer: InjectionContainer!
+    var injectionContainer: InjectionContainer! {
+        didSet {
+            if let avatarView = self.avatarView {
+                avatarView.injectionContainer = injectionContainer
+            }
+        }
+    }
     var message: Message! {
         didSet {
             updateMessageInformation()

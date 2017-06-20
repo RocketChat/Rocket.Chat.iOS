@@ -8,7 +8,7 @@
 
 import Foundation
 
-class LiveChatSubscriptionManager: SubscriptionManager {
+class LiveChatSubscriptionManager: SubscriptionManager, LiveChatManagerInjected {
     override func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
@@ -16,7 +16,8 @@ class LiveChatSubscriptionManager: SubscriptionManager {
             "params": [[
                 "_id": message.identifier ?? "",
                 "rid": message.subscription.rid,
-                "msg": message.text
+                "msg": message.text,
+                "token": livechatManager.visitorToken
                 ]]
             ] as [String : Any]
 

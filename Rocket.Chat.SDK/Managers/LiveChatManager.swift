@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-public class LiveChatManager: SocketManagerInjected {
+public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, SubscriptionManagerInjected {
 
     var injectionContainer: InjectionContainer!
     var initiated = false
@@ -55,7 +55,7 @@ public class LiveChatManager: SocketManagerInjected {
         }
     }
 
-    public func registerGuestAndLogin(withEmail email: String, name: String, toDepartment department: Department, completion: @escaping () -> Void) {
+    public func registerGuestAndLogin(withEmail email: String, name: String, toDepartment department: Department, message messageText: String, completion: @escaping () -> Void) {
         guard self.initiated else {
             fatalError("LiveChatManager methods called before properly initiated.")
         }
@@ -74,14 +74,31 @@ public class LiveChatManager: SocketManagerInjected {
             let json = response.result["result"]
             self.userId = json["userId"].stringValue
             self.token = json["token"].stringValue
+
             self.login {
                 let roomSubscription = Subscription()
                 roomSubscription.identifier = UUID().uuidString
                 roomSubscription.rid = self.room
-                Realm.execute({ realm in
-                    realm.add(roomSubscription)
-                })
-                DispatchQueue.global(qos: .background).async(execute: completion)
+                roomSubscription.name = department.name
+                roomSubscription.type = .livechat
+
+                let message = Message()
+                message.internalType = ""
+                message.createdAt = Date()
+                message.text = messageText
+                message.identifier = UUID().uuidString
+                message.subscription = roomSubscription
+                message.temporary = true
+                message.user = self.authManager.currentUser()
+
+                let realm = try? Realm()
+                try? realm?.write {
+                    realm?.add(roomSubscription)
+                    realm?.add(message)
+                }
+                self.subscriptionManager.sendTextMessage(message) { _ in
+                    DispatchQueue.global(qos: .background).async(execute: completion)
+                }
             }
         }
     }
@@ -91,28 +108,23 @@ public class LiveChatManager: SocketManagerInjected {
             fatalError("LiveChatManager methods called before properly initiated.")
         }
 
-        let params = [
-            "msg": "method",
-            "method": "login",
-            "params": [[
-                "resume": token
-            ]]
-        ] as [String : Any]
-        socketManager.send(params) { _ in
+        let params = ["resume": token] as [String : Any]
+        authManager.auth(params: params) { _ in
             self.loggedIn = true
             DispatchQueue.global(qos: .background).async(execute: completion)
         }
     }
 
-    public func getLiveChatViewController() throws -> ChatViewController? {
+    public func getLiveChatViewController() -> ChatViewController? {
         guard self.loggedIn else {
             fatalError("LiveChatManager methods called before properly logged in.")
         }
-        let storyboard = UIStoryboard(name: "Chatting", bundle: RocketChat.resourceBundle)
+        let storyboard = UIStoryboard(name: "Chatting", bundle: Bundle.rocketChat)
         let chatViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController
         chatViewController?.injectionContainer = injectionContainer
-        let realm = try Realm()
-        chatViewController?.subscription = Subscription.find(rid: room, realm: realm)
+        guard let realm = try? Realm() else { return nil }
+        guard let subscription = Subscription.find(rid: room, realm: realm) else { return nil }
+        chatViewController?.subscription = subscription
         return chatViewController
     }
 

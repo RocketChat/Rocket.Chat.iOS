@@ -16,7 +16,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
-    func isAuthenticated() -> Auth? {
+    public func isAuthenticated() -> Auth? {
         guard let auths = try? Realm().objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false) else { return nil}
         return auths.first
     }
@@ -24,7 +24,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
     /**
         - returns: Current user object, if exists.
     */
-    func currentUser() -> User? {
+    public func currentUser() -> User? {
         guard let auth = isAuthenticated() else { return nil }
         guard let user = try? Realm().object(ofType: User.self, forPrimaryKey: auth.userId) else { return nil }
         return user
@@ -40,7 +40,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         - parameter completion The completion callback that will be
             called in case of success or error.
     */
-    func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
+    public func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
 
         socketManager.connect(url) { (socket, connected) in
@@ -76,7 +76,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
     /**
         Method that creates an User account.
      */
-    func signup(with name: String, _ email: String, _ password: String, completion: @escaping MessageCompletion) {
+    public func signup(with name: String, _ email: String, _ password: String, completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "registerUser",
@@ -100,7 +100,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
     /**
         Generic method that authenticates the user.
     */
-    func auth(params: [String: Any], completion: @escaping MessageCompletion) {
+    public func auth(params: [String: Any], completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "login",
@@ -148,7 +148,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         - parameter completion: The completion block that'll be called in case
             of success or error.
     */
-    func auth(_ username: String, password: String, code: String? = nil, completion: @escaping MessageCompletion) {
+    public func auth(_ username: String, password: String, code: String? = nil, completion: @escaping MessageCompletion) {
         let usernameType = username.contains("@") ? "email" : "username"
         var params: [String: Any]?
 
@@ -183,7 +183,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
     /**
         Returns the username suggestion for the logged in user.
     */
-    func usernameSuggestion(completion: @escaping MessageCompletion) {
+    public func usernameSuggestion(completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "getUsernameSuggestion"
@@ -195,7 +195,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
     /**
      Set username of logged in user
      */
-    func setUsername(_ username: String, completion: @escaping MessageCompletion) {
+    public func setUsername(_ username: String, completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "setUsername",
@@ -209,7 +209,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         Logouts user from the app, clear database
         and disconnects from the socket.
      */
-    func logout(completion: @escaping VoidCompletion) {
+    public func logout(completion: @escaping VoidCompletion) {
         socketManager.disconnect { (_, _) in
             self.socketManager.clear()
 
@@ -221,7 +221,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         }
     }
 
-    func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
+    public func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
