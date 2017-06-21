@@ -41,7 +41,16 @@ class ViewController: UIViewController {
         RocketChat.configure(withServerURL: URL(string: serverAddr)!, secured: secured) {
             let livechatManager = RocketChat.injectionContainer.livechatManager
             livechatManager.initiate {
-                livechatManager.registerGuestAndLogin(withEmail: email, name: name, toDepartment: livechatManager.departments.first!, message: message) {
+                guard let department = livechatManager.departments.first else {
+                    let alert = UIAlertController(title: "No department available", message: nil, preferredStyle: .alert)
+                    let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+                    alert.addAction(action)
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                    return
+                }
+                livechatManager.registerGuestAndLogin(withEmail: email, name: name, toDepartment: department, message: message) {
                     DispatchQueue.main.async {
                         guard let controller = livechatManager.getLiveChatViewController() else {
                             return
