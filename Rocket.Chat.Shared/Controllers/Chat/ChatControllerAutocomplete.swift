@@ -24,18 +24,18 @@ extension ChatViewController {
             }
 
             if "here".contains(word) {
-                searchResult["here"] = UIImage(named: "Hashtag")
+                searchResult["here"] = UIImage(named: "Hashtag", in: Bundle.rocketChat, compatibleWith: nil)
             }
 
             if "all".contains(word) {
-                searchResult["all"] = UIImage(named: "Hashtag")
+                searchResult["all"] = UIImage(named: "Hashtag", in: Bundle.rocketChat, compatibleWith: nil)
             }
 
         } else if prefix == "#" && word.characters.count > 0 {
             guard let channels = try? Realm().objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p') && name BEGINSWITH[c] %@", word) else { return }
 
             for channel in channels {
-                searchResult[channel.name] = channel.type == .channel ? UIImage(named: "Hashtag") : UIImage(named: "Lock")
+                searchResult[channel.name] = channel.type == .channel ? UIImage(named: "Hashtag", in: Bundle.rocketChat, compatibleWith: nil) : UIImage(named: "Lock", in: Bundle.rocketChat, compatibleWith: nil)
             }
 
         }

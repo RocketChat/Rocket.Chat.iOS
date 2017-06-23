@@ -88,7 +88,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         isKeyboardPanningEnabled = true
         shouldScrollToBottomAfterKeyboardShows = false
 
-        leftButton.setImage(UIImage(named: "Upload"), for: .normal)
+        leftButton.setImage(UIImage(named: "Upload", in: Bundle.rocketChat, compatibleWith: nil), for: .normal)
 
         rightButton.isEnabled = false
 
@@ -178,17 +178,17 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
     fileprivate func registerCells() {
         collectionView?.register(UINib(
             nibName: "ChatMessageCell",
-            bundle: Bundle.main
+            bundle: Bundle.rocketChat
         ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
 
         collectionView?.register(UINib(
             nibName: "ChatMessageDaySeparator",
-            bundle: Bundle.main
+            bundle: Bundle.rocketChat
         ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
 
         autoCompletionView.register(UINib(
             nibName: "AutocompleteCell",
-            bundle: Bundle.main
+            bundle: Bundle.rocketChat
         ), forCellReuseIdentifier: AutocompleteCell.identifier)
     }
 

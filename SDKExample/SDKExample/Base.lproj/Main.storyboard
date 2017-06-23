@@ -40,13 +40,6 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nea-3h-tGA">
-                                <rect key="frame" x="168" y="374" width="38" height="30"/>
-                                <state key="normal" title="Login"/>
-                                <connections>
-                                    <action selector="didTouchUpInsideLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZaO-H9-1Br"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YpG-MU-a6m">
                                 <rect key="frame" x="102" y="321" width="50" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -76,30 +69,55 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="First Message:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SYf-KX-71Y">
+                                <rect key="frame" x="40" y="377" width="112" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Hello from SDKExample" borderStyle="roundedRect" placeholder="Message" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="poi-i3-5nt">
+                                <rect key="frame" x="160" y="374" width="163" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nea-3h-tGA">
+                                <rect key="frame" x="168" y="434" width="38" height="30"/>
+                                <state key="normal" title="Login"/>
+                                <connections>
+                                    <action selector="didTouchUpInsideLoginButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ZaO-H9-1Br"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="tB5-iG-khN" firstAttribute="leading" secondItem="jlT-dP-4VQ" secondAttribute="trailing" constant="8" id="628-6C-nTd"/>
                             <constraint firstItem="nea-3h-tGA" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="9lj-eV-N27"/>
                             <constraint firstItem="eF9-l2-s0T" firstAttribute="top" secondItem="Uo9-W8-fVX" secondAttribute="bottom" constant="21" id="Aet-yO-jFV"/>
+                            <constraint firstItem="SYf-KX-71Y" firstAttribute="trailing" secondItem="YpG-MU-a6m" secondAttribute="trailing" id="BM5-X4-Tdq"/>
                             <constraint firstItem="tB5-iG-khN" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="185" id="CM7-UA-af4"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Uo9-W8-fVX" secondAttribute="trailing" constant="36" id="Io6-T4-cgG"/>
+                            <constraint firstItem="poi-i3-5nt" firstAttribute="top" secondItem="eF9-l2-s0T" secondAttribute="bottom" constant="26" id="HPa-uJ-who"/>
                             <constraint firstItem="YpG-MU-a6m" firstAttribute="trailing" secondItem="8ZB-1v-Uwk" secondAttribute="trailing" id="J1m-hc-kZG"/>
                             <constraint firstItem="jlT-dP-4VQ" firstAttribute="baseline" secondItem="tB5-iG-khN" secondAttribute="baseline" id="Q5I-az-VaV"/>
                             <constraint firstItem="8ZB-1v-Uwk" firstAttribute="trailing" secondItem="jlT-dP-4VQ" secondAttribute="trailing" id="UxY-Bs-PWI"/>
                             <constraint firstAttribute="trailingMargin" secondItem="tB5-iG-khN" secondAttribute="trailing" constant="36" id="Wvc-ZQ-7T7"/>
                             <constraint firstItem="jlT-dP-4VQ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="36" id="XJ7-Mh-TH5"/>
+                            <constraint firstItem="SYf-KX-71Y" firstAttribute="baseline" secondItem="poi-i3-5nt" secondAttribute="baseline" id="YUf-di-vdC"/>
+                            <constraint firstItem="poi-i3-5nt" firstAttribute="leading" secondItem="eF9-l2-s0T" secondAttribute="leading" id="bpZ-Ac-mlq"/>
+                            <constraint firstItem="eF9-l2-s0T" firstAttribute="trailing" secondItem="Uo9-W8-fVX" secondAttribute="trailing" id="dXR-LE-s7S"/>
                             <constraint firstItem="Uo9-W8-fVX" firstAttribute="leading" secondItem="tB5-iG-khN" secondAttribute="leading" id="gBb-v4-WvW"/>
-                            <constraint firstItem="nea-3h-tGA" firstAttribute="top" secondItem="eF9-l2-s0T" secondAttribute="bottom" constant="26" id="lz4-Wp-9vu"/>
+                            <constraint firstItem="nea-3h-tGA" firstAttribute="top" secondItem="poi-i3-5nt" secondAttribute="bottom" constant="30" id="h0H-VU-oeh"/>
+                            <constraint firstItem="Uo9-W8-fVX" firstAttribute="trailing" secondItem="tB5-iG-khN" secondAttribute="trailing" id="iZO-Oy-SHh"/>
                             <constraint firstItem="8ZB-1v-Uwk" firstAttribute="baseline" secondItem="Uo9-W8-fVX" secondAttribute="baseline" id="r6h-2j-0BR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="eF9-l2-s0T" secondAttribute="trailing" constant="36" id="r6o-43-ON1"/>
                             <constraint firstItem="Uo9-W8-fVX" firstAttribute="top" secondItem="tB5-iG-khN" secondAttribute="bottom" constant="32" id="sWg-L4-9M1"/>
                             <constraint firstItem="YpG-MU-a6m" firstAttribute="baseline" secondItem="eF9-l2-s0T" secondAttribute="baseline" id="tFl-2d-SjE"/>
                             <constraint firstItem="eF9-l2-s0T" firstAttribute="leading" secondItem="Uo9-W8-fVX" secondAttribute="leading" id="vnZ-qF-57D"/>
+                            <constraint firstItem="poi-i3-5nt" firstAttribute="trailing" secondItem="eF9-l2-s0T" secondAttribute="trailing" id="zKH-kF-xta"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="Uo9-W8-fVX" id="FKx-gV-8Lh"/>
+                        <outlet property="messageTextField" destination="poi-i3-5nt" id="Mf0-TR-ahD"/>
                         <outlet property="nameTextField" destination="eF9-l2-s0T" id="pzV-kn-DcI"/>
                         <outlet property="securedSwitch" destination="b6w-FG-qQT" id="QS0-dm-K07"/>
                         <outlet property="serverAddrTextField" destination="tB5-iG-khN" id="m1D-KG-8wR"/>

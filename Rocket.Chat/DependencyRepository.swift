@@ -25,6 +25,5 @@ class DependencyRepository: InjectionContainer {
         userManager.injectionContainer = self
         messageManager.injectionContainer = self
         pushManager.injectionContainer = self
-        pushManager.injectionContainer = self
     }
 }

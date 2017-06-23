@@ -14,6 +14,7 @@ enum SubscriptionType: String {
     case directMessage = "d"
     case channel = "c"
     case group = "p"
+    case livechat = "l"
 }
 
 class Subscription: BaseModel {

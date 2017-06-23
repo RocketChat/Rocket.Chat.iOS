@@ -11,23 +11,36 @@ import Foundation
 public final class RocketChat {
 
     public static var injectionContainer = DependencyRepository()
-    static var mainBundle = Bundle(for: RocketChat.self)
-    static var resourceBundle: Bundle? {
-        guard let path = mainBundle.path(forResource: "RocketChat", ofType: "bundle") else {
-            return nil
-        }
-        return Bundle(path: path)
-    }
 
-    public static func configure(withServerURL serverURL: URL, secured: Bool = true, completion: @escaping () -> Void) {
+    public class func configure(withServerURL serverURL: URL, secured: Bool = true, completion: @escaping () -> Void) {
         guard let socketURL = serverURL.socketURL(secured: secured) else {
             return
         }
-        injectionContainer.socketManager.connect(socketURL) { (_, connected) in
-            self.injectionContainer.authManager.updatePublicSettings(nil) { (settings) in
+        Launcher().prepareToLaunch(with: nil)
+        injectionContainer.socketManager.connect(socketURL) { (_, _) in
+            self.injectionContainer.authManager.updatePublicSettings(nil) { _ in
                 DispatchQueue.global(qos: .background).async(execute: completion)
             }
         }
     }
 
+    public class func livechat() -> LiveChatManager {
+        return injectionContainer.livechatManager
+    }
+
+    public class func auth() -> AuthManager {
+        return injectionContainer.authManager
+    }
+
+    public class func user() -> UserManager {
+        return injectionContainer.userManager
+    }
+
+    public class func socket() -> SocketManager {
+        return injectionContainer.socketManager
+    }
+
+    public class func push() -> PushManager {
+        return injectionContainer.pushManager
+    }
 }
