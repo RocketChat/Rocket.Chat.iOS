@@ -8,7 +8,8 @@
 
 import Foundation
 
-final class Email: BaseModel {
-    dynamic var email = ""
-    dynamic var verified = false
+/// Since a user can own multiple emails, a email can only be linked to one user. Represents a email instance.
+public class Email: BaseModel {
+    public dynamic var email = ""
+    public dynamic var verified = false
 }

@@ -9,11 +9,18 @@
 import Foundation
 import RealmSwift
 
+/// A manager that manages all subscription related actions
 public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
 
+    /// Dependency injection container, replace it to change the behavior of the auth manager
     var injectionContainer: InjectionContainer!
 
     // swiftlint:disable function_body_length
+    /// Updates all subscriptions information and stores them locally from remote server
+    ///
+    /// - Parameters:
+    ///   - auth: the target server's auth instance
+    ///   - completion: will be called after action completion
     func updateSubscriptions(_ auth: Auth, completion: @escaping MessageCompletion) {
         var params: [[String: Any]] = []
 
@@ -156,6 +163,11 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
 
     // MARK: Search
 
+    /// Search with given text for related subscriptions
+    ///
+    /// - Parameters:
+    ///   - text: text to be searched
+    ///   - completion: will be called after action completion
     func spotlight(_ text: String, completion: @escaping MessageCompletionObjectsList<Subscription>) {
         let request = [
             "msg": "method",
@@ -220,6 +232,11 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
 
     // MARK: Rooms, Groups & DMs
 
+    /// Create a subscription to target user
+    ///
+    /// - Parameters:
+    ///   - username: username of target user
+    ///   - completion: will be called after action completion
     func createDirectMessage(_ username: String, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
@@ -233,6 +250,11 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
         }
     }
 
+    /// Get a room by room name
+    ///
+    /// - Parameters:
+    ///   - name: room name
+    ///   - completion: will be called after action completion
     func getRoom(byName name: String, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
@@ -246,6 +268,11 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
         }
     }
 
+    /// Join a room by given room id
+    ///
+    /// - Parameters:
+    ///   - rid: target room id
+    ///   - completion: will be called after action completion
     func join(room rid: String, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
@@ -261,6 +288,11 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
 
     // MARK: Messages
 
+    /// Mark any new messages of a subscription until now as read
+    ///
+    /// - Parameters:
+    ///   - subscription: target subscription
+    ///   - completion: will be called after action completion
     func markAsRead(_ subscription: Subscription, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
@@ -274,6 +306,11 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
         }
     }
 
+    /// Send a text message to target subscription
+    ///
+    /// - Parameters:
+    ///   - message: a message instance that contains the text and target subscription
+    ///   - completion: will be called after action completion
     func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
@@ -291,6 +328,11 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
         }
     }
 
+    /// Toggle a subscription as favorite or not
+    ///
+    /// - Parameters:
+    ///   - subscription: target subscription
+    ///   - completion: will be called after action completion
     func toggleFavorite(_ subscription: Subscription, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",

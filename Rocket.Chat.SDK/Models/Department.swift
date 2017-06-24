@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 
+/// Livechat Department
 public struct Department {
     var id: String
     var enabled: Bool

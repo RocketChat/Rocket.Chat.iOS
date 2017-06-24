@@ -17,7 +17,8 @@ enum SubscriptionType: String {
     case livechat = "l"
 }
 
-class Subscription: BaseModel {
+/// A data structure represents a subscription
+public class Subscription: BaseModel {
     dynamic var auth: Auth?
 
     fileprivate dynamic var privateType = SubscriptionType.channel.rawValue

@@ -9,21 +9,26 @@
 import Foundation
 import RealmSwift
 
+/// A manager that manages all authentication related actions
 public class AuthManager: SocketManagerInjected, PushManagerInjected {
 
+    /// Dependency injection container, replace it to change the behavior of the auth manager
     var injectionContainer: InjectionContainer!
 
-    /**
-        - returns: Last auth object (sorted by lastAccess), if exists.
-    */
+    /// Last auth object (sorted by lastAccess), if exists; nil otherwise.
+    ///
+    /// - Returns: an instance of `Auth`
     public func isAuthenticated() -> Auth? {
         guard let auths = try? Realm().objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false) else { return nil}
         return auths.first
     }
 
     /**
-        - returns: Current user object, if exists.
+        - returns:
     */
+    /// Get current user, if exists; nil otherwise.
+    ///
+    /// - Returns: an instance of `User`
     public func currentUser() -> User? {
         guard let auth = isAuthenticated() else { return nil }
         guard let user = try? Realm().object(ofType: User.self, forPrimaryKey: auth.userId) else { return nil }
@@ -32,14 +37,11 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
 
     // MARK: Socket Management
 
-    /**
-        This method resumes a previous authentication with token
-        stored in the Realm object.
- 
-        - parameter auth The Auth object that user wants to resume.
-        - parameter completion The completion callback that will be
-            called in case of success or error.
-    */
+    /// This method resumes a previous authentication with token stored in the Realm object.
+    ///
+    /// - Parameters:
+    ///   - auth: The Auth object that user wants to resume
+    ///   - completion: The completion callback that will be called in case of success or error
     public func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
 
@@ -73,9 +75,13 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         }
     }
 
-    /**
-        Method that creates an User account.
-     */
+    /// Sign up a new user with given username, email, and password, completion will be called after action been completed.
+    ///
+    /// - Parameters:
+    ///   - name: username
+    ///   - email: user's email
+    ///   - password: a strong password
+    ///   - completion: will be called after action completion
     public func signup(with name: String, _ email: String, _ password: String, completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
@@ -97,9 +103,11 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         }
     }
 
-    /**
-        Generic method that authenticates the user.
-    */
+    /// A generic method that authenticated a user, should not be used directly unless you exactly know what you're doing
+    ///
+    /// - Parameters:
+    ///   - params: a dictionary of params that will be sent to server
+    ///   - completion: will be called after action completion
     public func auth(params: [String: Any], completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
@@ -140,14 +148,13 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         }
     }
 
-    /**
-        This method authenticates the user with email and password.
- 
-        - parameter username: Username
-        - parameter password: Password
-        - parameter completion: The completion block that'll be called in case
-            of success or error.
-    */
+    /// Authenticate a user with given email and password.
+    ///
+    /// - Parameters:
+    ///   - username: username of the user
+    ///   - password: password of the user
+    ///   - code: totp authentication code if exists, nil otherwise
+    ///   - completion: will be called after action completion
     public func auth(_ username: String, password: String, code: String? = nil, completion: @escaping MessageCompletion) {
         let usernameType = username.contains("@") ? "email" : "username"
         var params: [String: Any]?
@@ -180,9 +187,9 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         }
     }
 
-    /**
-        Returns the username suggestion for the logged in user.
-    */
+    /// Get the username suggestion for the logged in user.
+    ///
+    /// - Parameter completion: will be called after action completion
     public func usernameSuggestion(completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
@@ -192,9 +199,11 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         socketManager.send(object, completion: completion)
     }
 
-    /**
-     Set username of logged in user
-     */
+    /// Set username of the logged in user.
+    ///
+    /// - Parameters:
+    ///   - username: new username
+    ///   - completion: will be called after action completion
     public func setUsername(_ username: String, completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
@@ -205,10 +214,9 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         socketManager.send(object, completion: completion)
     }
 
-    /**
-        Logouts user from the app, clear database
-        and disconnects from the socket.
-     */
+    /// Logouts user from the app, clear database and disconnects from the socket.
+    ///
+    /// - Parameter completion: will be called after action completion
     public func logout(completion: @escaping VoidCompletion) {
         socketManager.disconnect { (_, _) in
             self.socketManager.clear()
@@ -221,6 +229,11 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
         }
     }
 
+    /// Update server settings and public informations
+    ///
+    /// - Parameters:
+    ///   - auth: the auth server to be updated
+    ///   - completion: will be called after action completion
     public func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
         let object = [
             "msg": "method",

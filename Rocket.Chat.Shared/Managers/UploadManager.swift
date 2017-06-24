@@ -9,7 +9,9 @@
 import Foundation
 import SwiftyJSON
 
+/// A callback function type that would indicates progress of uploads
 public typealias UploadProgressBlock = (Int) -> Void
+/// A callback function type that would indicates completion of uploads
 public typealias UploadCompletionBlock = (SocketResponse?, Bool) -> Void
 
 struct FileUpload {
@@ -19,6 +21,7 @@ struct FileUpload {
     var data: Data
 }
 
+/// A manager that manages all user generated files and images uploads
 public class UploadManager: SocketManagerInjected, AuthManagerInjected {
 
     var injectionContainer: InjectionContainer!

@@ -9,22 +9,23 @@
 import Foundation
 import RealmSwift
 
+/// Server authentication settings
 public class Auth: Object {
     // Server
-    dynamic var serverURL = ""
-    dynamic var settings: AuthSettings?
+    public dynamic var serverURL = ""
+    public dynamic var settings: AuthSettings?
 
     // Token
     dynamic var token: String?
     dynamic var tokenExpires: Date?
-    dynamic var lastAccess: Date?
-    dynamic var lastSubscriptionFetch: Date?
+    public dynamic var lastAccess: Date?
+    public dynamic var lastSubscriptionFetch: Date?
 
     // User
-    dynamic var userId: String?
+    public dynamic var userId: String?
 
     // Subscriptions
-    let subscriptions = LinkingObjects(fromType: Subscription.self, property: "auth")
+    public let subscriptions = LinkingObjects(fromType: Subscription.self, property: "auth")
 
     // Primary key from Auth 
     override public static func primaryKey() -> String? {

@@ -9,18 +9,29 @@
 import Foundation
 import RealmSwift
 
+/// A manager that manages all message related actions
 public class MessageManager: SocketManagerInjected {
+    /// Default history fetch size
     let historySize = 30
 
+    /// Dependency injection container, replace it to change the behavior of the message manager
     var injectionContainer: InjectionContainer!
 
+    /// A list that maintains all blocked users, stored in `UserDefaults`
     var blockedUsersList = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 }
 
+/// The key that refer to blocked users list in `UserDefaults`
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
 
 extension MessageManager {
 
+    /// Get history messages of the target subscription and store locally
+    ///
+    /// - Parameters:
+    ///   - subscription: the target subscription
+    ///   - lastMessageDate: a date that indicates a criteria of the query
+    ///   - completion: will be called after action completion
     func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping VoidCompletion) {
         var lastDate: Any!
 
@@ -70,6 +81,9 @@ extension MessageManager {
         }
     }
 
+    /// Subscribe the changes of the target subscription
+    ///
+    /// - Parameter subscription: target subscription
     func changes(_ subscription: Subscription) {
         let eventName = "\(subscription.rid)"
         let request = [
@@ -110,6 +124,11 @@ extension MessageManager {
         }
     }
 
+    /// Pin a given message
+    ///
+    /// - Parameters:
+    ///   - message: the message to be pinned
+    ///   - completion: will be called after action completion
     func pin(_ message: Message, completion: @escaping MessageCompletion) {
         guard let messageIdentifier = message.identifier else { return }
 
@@ -122,6 +141,11 @@ extension MessageManager {
         socketManager.send(request, completion: completion)
     }
 
+    /// Unpin a given message
+    ///
+    /// - Parameters:
+    ///   - message: the message to be unpinned
+    ///   - completion: will be called after action completion
     func unpin(_ message: Message, completion: @escaping MessageCompletion) {
         guard let messageIdentifier = message.identifier else { return }
 
@@ -134,6 +158,11 @@ extension MessageManager {
         socketManager.send(request, completion: completion)
     }
 
+    /// Block a user and all messages from him/her/them
+    ///
+    /// - Parameters:
+    ///   - user: target user
+    ///   - completion: will be called after action completion
     func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
         guard let userIdentifier = user.identifier else { return }
 

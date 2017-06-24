@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// A manager that manages all message text rendering cache
 public class MessageTextCacheManager {
 
     let cache = NSCache<NSString, NSAttributedString>()
