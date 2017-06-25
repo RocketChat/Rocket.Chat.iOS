@@ -13,7 +13,7 @@ import RealmSwift
 public class AuthManager: SocketManagerInjected, PushManagerInjected {
 
     /// Dependency injection container, replace it to change the behavior of the auth manager
-    var injectionContainer: InjectionContainer!
+    public var injectionContainer: InjectionContainer!
 
     /// Last auth object (sorted by lastAccess), if exists; nil otherwise.
     ///

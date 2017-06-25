@@ -15,7 +15,7 @@ public class MessageManager: SocketManagerInjected {
     let historySize = 30
 
     /// Dependency injection container, replace it to change the behavior of the message manager
-    var injectionContainer: InjectionContainer!
+    public var injectionContainer: InjectionContainer!
 
     /// A list that maintains all blocked users, stored in `UserDefaults`
     var blockedUsersList = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
@@ -32,7 +32,7 @@ extension MessageManager {
     ///   - subscription: the target subscription
     ///   - lastMessageDate: a date that indicates a criteria of the query
     ///   - completion: will be called after action completion
-    func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping VoidCompletion) {
+    public func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping VoidCompletion) {
         var lastDate: Any!
 
         if let lastMessageDate = lastMessageDate {
@@ -84,7 +84,7 @@ extension MessageManager {
     /// Subscribe the changes of the target subscription
     ///
     /// - Parameter subscription: target subscription
-    func changes(_ subscription: Subscription) {
+    public func changes(_ subscription: Subscription) {
         let eventName = "\(subscription.rid)"
         let request = [
             "msg": "sub",
@@ -129,7 +129,7 @@ extension MessageManager {
     /// - Parameters:
     ///   - message: the message to be pinned
     ///   - completion: will be called after action completion
-    func pin(_ message: Message, completion: @escaping MessageCompletion) {
+    public func pin(_ message: Message, completion: @escaping MessageCompletion) {
         guard let messageIdentifier = message.identifier else { return }
 
         let request = [
@@ -146,7 +146,7 @@ extension MessageManager {
     /// - Parameters:
     ///   - message: the message to be unpinned
     ///   - completion: will be called after action completion
-    func unpin(_ message: Message, completion: @escaping MessageCompletion) {
+    public func unpin(_ message: Message, completion: @escaping MessageCompletion) {
         guard let messageIdentifier = message.identifier else { return }
 
         let request = [
@@ -163,7 +163,7 @@ extension MessageManager {
     /// - Parameters:
     ///   - user: target user
     ///   - completion: will be called after action completion
-    func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
+   public func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
         guard let userIdentifier = user.identifier else { return }
 
         var blockedUsers: [String] = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []

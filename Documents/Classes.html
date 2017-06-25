@@ -13,7 +13,7 @@
     <a title="Classes  Reference"></a>
     <header>
       <div class="content-wrapper">
-        <p><a href="index.html">RocketChat Docs</a> (27% documented)</p>
+        <p><a href="index.html">RocketChat Docs</a> (42% documented)</p>
         <p class="header-right"><a href="https://github.com/RocketChat/Rocket.Chat.iOS"><img src="img/gh.png"/>View on GitHub</a></p>
       </div>
     </header>
@@ -55,6 +55,9 @@
                 <a href="Classes/Email.html">Email</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/Launcher.html">Launcher</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/LiveChatManager.html">LiveChatManager</a>
               </li>
               <li class="nav-group-task">
@@ -64,7 +67,7 @@
                 <a href="Classes/Message.html">Message</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes.html#/s:C10RocketChat14MessageManager">MessageManager</a>
+                <a href="Classes/MessageManager.html">MessageManager</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes.html#/s:C10RocketChat23MessageTextCacheManager">MessageTextCacheManager</a>
@@ -79,16 +82,19 @@
                 <a href="Classes/RocketChat.html">RocketChat</a>
               </li>
               <li class="nav-group-task">
+                <a href="Classes/SDKSocketManager.html">SDKSocketManager</a>
+              </li>
+              <li class="nav-group-task">
                 <a href="Classes/SocketManager.html">SocketManager</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes.html#/s:C10RocketChat12Subscription">Subscription</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes.html#/s:C10RocketChat19SubscriptionManager">SubscriptionManager</a>
+                <a href="Classes/SubscriptionManager.html">SubscriptionManager</a>
               </li>
               <li class="nav-group-task">
-                <a href="Classes.html#/s:C10RocketChat13UploadManager">UploadManager</a>
+                <a href="Classes/UploadManager.html">UploadManager</a>
               </li>
               <li class="nav-group-task">
                 <a href="Classes/User.html">User</a>
@@ -116,10 +122,27 @@
             </ul>
           </li>
           <li class="nav-group-name">
+            <a href="Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="Protocols/InjectionContainer.html">InjectionContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/LauncherCoordinator.html">LauncherCoordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Protocols/SocketConnectionHandler.html">SocketConnectionHandler</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
             <a href="Structs.html">Structs</a>
             <ul class="nav-group-tasks">
               <li class="nav-group-task">
                 <a href="Structs.html#/s:V10RocketChat10Department">Department</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="Structs.html#/s:V10RocketChat10FileUpload">FileUpload</a>
               </li>
               <li class="nav-group-task">
                 <a href="Structs/SocketResponse.html">SocketResponse</a>
@@ -170,7 +193,7 @@
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
-                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DependencyRepository</span><span class="p">:</span> <span class="kt">InjectionContainer</span></code></pre>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">DependencyRepository</span><span class="p">:</span> <span class="kt"><a href="Protocols/InjectionContainer.html">InjectionContainer</a></span></code></pre>
 
                         </div>
                       </div>
@@ -339,12 +362,45 @@
                       <div class="abstract">
                         <p>A manager that manages all subscription related actions</p>
 
+                        <a href="Classes/SubscriptionManager.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
                         <div class="language">
                           <p class="aside-title">Swift</p>
                           <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SubscriptionManager</span><span class="p">:</span> <span class="kt">SocketManagerInjected</span><span class="p">,</span> <span class="kt">AuthManagerInjected</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:C10RocketChat16SDKSocketManager"></a>
+                    <a name="//apple_ref/swift/Class/SDKSocketManager" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C10RocketChat16SDKSocketManager">SDKSocketManager</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A socket manager that implemented the error handler method</p>
+
+                        <a href="Classes/SDKSocketManager.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SDKSocketManager</span><span class="p">:</span> <span class="kt"><a href="Classes/SocketManager.html">SocketManager</a></span></code></pre>
 
                         </div>
                       </div>
@@ -370,6 +426,7 @@
                       <div class="abstract">
                         <p>A manager that manages all user generated files and images uploads</p>
 
+                        <a href="Classes/UploadManager.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -431,9 +488,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A manager that manages all livechat related actions</p>
 
                         <a href="Classes/LiveChatManager.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">LiveChatManager</span><span class="p">:</span> <span class="kt">SocketManagerInjected</span><span class="p">,</span> <span class="kt">AuthManagerInjected</span><span class="p">,</span> <span class="kt">SubscriptionManagerInjected</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -550,9 +615,17 @@
                     <section class="section">
                       <div class="pointer"></div>
                       <div class="abstract">
-                        <p>Undocumented</p>
+                        <p>A manager that manages all web socket connection related actions</p>
 
                         <a href="Classes/SocketManager.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SocketManager</span><span class="p">:</span> <span class="kt">AuthManagerInjected</span><span class="p">,</span> <span class="kt">PushManagerInjected</span><span class="p">,</span> <span class="kt">SubscriptionManagerInjected</span><span class="p">,</span> <span class="kt">UserManagerInjected</span></code></pre>
+
+                        </div>
                       </div>
                     </section>
                   </div>
@@ -691,6 +764,38 @@
                 <li class="item">
                   <div>
                     <code>
+                    <a name="/s:C10RocketChat8Launcher"></a>
+                    <a name="//apple_ref/swift/Class/Launcher" class="dashAnchor"></a>
+                    <a class="token" href="#/s:C10RocketChat8Launcher">Launcher</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Centralized management of launching</p>
+
+                        <a href="Classes/Launcher.html" class="slightly-smaller">See more</a>
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">Launcher</span><span class="p">:</span> <span class="kt">LauncherProtocol</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
                     <a name="/s:C10RocketChat11PushManager"></a>
                     <a name="//apple_ref/swift/Class/PushManager" class="dashAnchor"></a>
                     <a class="token" href="#/s:C10RocketChat11PushManager">PushManager</a>
@@ -798,6 +903,7 @@
                       <div class="abstract">
                         <p>A manager that manages all message related actions</p>
 
+                        <a href="Classes/MessageManager.html" class="slightly-smaller">See more</a>
                       </div>
                       <div class="declaration">
                         <h4>Declaration</h4>
@@ -815,7 +921,7 @@
           </section>
         </section>
         <section id="footer">
-          <p>&copy; 2017 <a class="link" href="https://rocket.chat" target="_blank" rel="external">Rocket.Chat</a>. All rights reserved. (Last updated: 2017-06-24)</p>
+          <p>&copy; 2017 <a class="link" href="https://rocket.chat" target="_blank" rel="external">Rocket.Chat</a>. All rights reserved. (Last updated: 2017-06-25)</p>
           <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
         </section>
       </article>

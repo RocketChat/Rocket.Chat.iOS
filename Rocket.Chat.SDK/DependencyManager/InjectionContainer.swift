@@ -8,7 +8,8 @@
 
 import Foundation
 
-protocol InjectionContainer {
+/// A container that holds all dependency injections
+public protocol InjectionContainer {
     var socketManager: SocketManager { get }
     var authManager: AuthManager { get }
     var subscriptionManager: SubscriptionManager { get }

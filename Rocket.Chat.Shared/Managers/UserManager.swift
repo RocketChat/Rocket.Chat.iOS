@@ -12,10 +12,10 @@ import Foundation
 public class UserManager: SocketManagerInjected {
 
     /// Dependency injection container, replace it to change the behavior of the user manager
-    var injectionContainer: InjectionContainer!
+    public var injectionContainer: InjectionContainer!
 
     /// Subscribe active users' changes
-    func changes() {
+    public func changes() {
         let request = [
             "msg": "sub",
             "name": "activeUsers",
@@ -26,7 +26,7 @@ public class UserManager: SocketManagerInjected {
     }
 
     /// Subscribe user data changes
-    func userDataChanges() {
+    public func userDataChanges() {
         let request = [
             "msg": "sub",
             "name": "userData",

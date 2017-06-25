@@ -14,7 +14,8 @@ public class PushManager: SocketManagerInjected, AuthManagerInjected {
     let kDeviceTokenKey = "deviceToken"
     let kPushIdentifierKey = "pushIdentifier"
 
-    var injectionContainer: InjectionContainer!
+    /// Dependency injection container, replace it to change the behavior of the push manager
+    public var injectionContainer: InjectionContainer!
 
     func updatePushToken() {
         guard let deviceToken = getDeviceToken() else { return }

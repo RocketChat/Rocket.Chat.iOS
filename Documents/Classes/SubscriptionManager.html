@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SubscriptionManager Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/SubscriptionManager" class="dashAnchor"></a>
+    <a title="SubscriptionManager Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">RocketChat Docs</a> (42% documented)</p>
+        <p class="header-right"><a href="https://github.com/RocketChat/Rocket.Chat.iOS"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">RocketChat Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        SubscriptionManager Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Attachment.html">Attachment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Auth.html">Auth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AuthManager.html">AuthManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AuthSettings.html">AuthSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BaseModel.html">BaseModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatViewController.html">ChatViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DependencyRepository.html">DependencyRepository</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Email.html">Email</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Launcher.html">Launcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LiveChatManager.html">LiveChatManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10RocketChat7Mention">Mention</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Message.html">Message</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageManager.html">MessageManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10RocketChat23MessageTextCacheManager">MessageTextCacheManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10RocketChat10MessageURL">MessageURL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PushManager.html">PushManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RocketChat.html">RocketChat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SDKSocketManager.html">SDKSocketManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SocketManager.html">SocketManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10RocketChat12Subscription">Subscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SubscriptionManager.html">SubscriptionManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UploadManager.html">UploadManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/User.html">User</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UserManager.html">UserManager</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/MessageType.html">MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ResponseMessage.html">ResponseMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserPresence.html">UserPresence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserStatus.html">UserStatus</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/InjectionContainer.html">InjectionContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LauncherCoordinator.html">LauncherCoordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SocketConnectionHandler.html">SocketConnectionHandler</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:V10RocketChat10Department">Department</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:V10RocketChat10FileUpload">FileUpload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SocketResponse.html">SocketResponse</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:10RocketChat21UploadCompletionBlock">UploadCompletionBlock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:10RocketChat19UploadProgressBlock">UploadProgressBlock</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>SubscriptionManager</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">SubscriptionManager</span><span class="p">:</span> <span class="kt">SocketManagerInjected</span><span class="p">,</span> <span class="kt">AuthManagerInjected</span></code></pre>
+
+                </div>
+              </div>
+            <p>A manager that manages all subscription related actions</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10RocketChat19SubscriptionManager18injectionContainerGSQPS_18InjectionContainer__"></a>
+                    <a name="//apple_ref/swift/Property/injectionContainer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10RocketChat19SubscriptionManager18injectionContainerGSQPS_18InjectionContainer__">injectionContainer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dependency injection container, replace it to change the behavior of the auth manager</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">injectionContainer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/InjectionContainer.html">InjectionContainer</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat19SubscriptionManager19updateSubscriptionsFTCS_4Auth10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/updateSubscriptions(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat19SubscriptionManager19updateSubscriptionsFTCS_4Auth10completionFVS_14SocketResponseT__T_">updateSubscriptions(_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Updates all subscriptions information and stores them locally from remote server</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updateSubscriptions</span><span class="p">(</span><span class="n">_</span> <span class="nv">auth</span><span class="p">:</span> <span class="kt"><a href="../Classes/Auth.html">Auth</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>auth</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the target server&rsquo;s auth instance</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Search"></a>
+                <a name="//apple_ref/swift/Section/Search" class="dashAnchor"></a>
+                <a href="#/Search">
+                  <h3 class="section-name">Search</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat19SubscriptionManager9spotlightFTSS10completionFGSaCS_12Subscription_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/spotlight(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat19SubscriptionManager9spotlightFTSS10completionFGSaCS_12Subscription_T__T_">spotlight(_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Search with given text for related subscriptions</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">spotlight</span><span class="p">(</span><span class="n">_</span> <span class="nv">text</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletionObjectsList</span><span class="o">&lt;</span><span class="kt"><a href="../Classes.html#/s:C10RocketChat12Subscription">Subscription</a></span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>text</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>text to be searched</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Rooms,%20Groups%20&amp;%20DMs"></a>
+                <a name="//apple_ref/swift/Section/Rooms, Groups &amp; DMs" class="dashAnchor"></a>
+                <a href="#/Rooms,%20Groups%20&amp;%20DMs">
+                  <h3 class="section-name">Rooms, Groups &amp; DMs</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat19SubscriptionManager19createDirectMessageFTSS10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/createDirectMessage(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat19SubscriptionManager19createDirectMessageFTSS10completionFVS_14SocketResponseT__T_">createDirectMessage(_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Create a subscription to target user</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">createDirectMessage</span><span class="p">(</span><span class="n">_</span> <span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>username</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>username of target user</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat19SubscriptionManager7getRoomFT6byNameSS10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/getRoom(byName:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat19SubscriptionManager7getRoomFT6byNameSS10completionFVS_14SocketResponseT__T_">getRoom(byName:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get a room by room name</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">getRoom</span><span class="p">(</span><span class="n">byName</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>room name</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat19SubscriptionManager4joinFT4roomSS10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/join(room:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat19SubscriptionManager4joinFT4roomSS10completionFVS_14SocketResponseT__T_">join(room:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Join a room by given room id</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">join</span><span class="p">(</span><span class="n">room</span> <span class="nv">rid</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>rid</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>target room id</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Messages"></a>
+                <a name="//apple_ref/swift/Section/Messages" class="dashAnchor"></a>
+                <a href="#/Messages">
+                  <h3 class="section-name">Messages</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat19SubscriptionManager10markAsReadFTCS_12Subscription10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/markAsRead(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat19SubscriptionManager10markAsReadFTCS_12Subscription10completionFVS_14SocketResponseT__T_">markAsRead(_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Mark any new messages of a subscription until now as read</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">markAsRead</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscription</span><span class="p">:</span> <span class="kt"><a href="../Classes.html#/s:C10RocketChat12Subscription">Subscription</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscription</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>target subscription</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat19SubscriptionManager15sendTextMessageFTCS_7Message10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/sendTextMessage(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat19SubscriptionManager15sendTextMessageFTCS_7Message10completionFVS_14SocketResponseT__T_">sendTextMessage(_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Send a text message to target subscription</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">sendTextMessage</span><span class="p">(</span><span class="n">_</span> <span class="nv">message</span><span class="p">:</span> <span class="kt"><a href="../Classes/Message.html">Message</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>message</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a message instance that contains the text and target subscription</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat19SubscriptionManager14toggleFavoriteFTCS_12Subscription10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/toggleFavorite(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat19SubscriptionManager14toggleFavoriteFTCS_12Subscription10completionFVS_14SocketResponseT__T_">toggleFavorite(_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Toggle a subscription as favorite or not</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">toggleFavorite</span><span class="p">(</span><span class="n">_</span> <span class="nv">subscription</span><span class="p">:</span> <span class="kt"><a href="../Classes.html#/s:C10RocketChat12Subscription">Subscription</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>subscription</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>target subscription</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://rocket.chat" target="_blank" rel="external">Rocket.Chat</a>. All rights reserved. (Last updated: 2017-06-25)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

@@ -8,8 +8,10 @@
 
 import Foundation
 
-class Launcher: LauncherProtocol {
-    lazy var coordinators: [LauncherCoordinator] = {
+/// Centralized management of launching
+public class Launcher: LauncherProtocol {
+    /// Actual coodinators
+    public lazy var coordinators: [LauncherCoordinator] = {
         return [
             PersistencyCoordinator(),
             UserCoordinator()

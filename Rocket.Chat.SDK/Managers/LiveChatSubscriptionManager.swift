@@ -8,6 +8,7 @@
 
 import Foundation
 
+/// Since livechat api differs from normal chatting api, a specific livechat subscription manager is required
 class LiveChatSubscriptionManager: SubscriptionManager, LiveChatManagerInjected {
     override func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
         let request = [
