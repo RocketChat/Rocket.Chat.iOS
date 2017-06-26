@@ -2,9 +2,49 @@
 
 [![Build Status](https://travis-ci.org/RocketChat/Rocket.Chat.iOS.svg?branch=develop)](https://travis-ci.org/RocketChat/Rocket.Chat.iOS)
 [![codecov](https://codecov.io/gh/RocketChat/Rocket.Chat.iOS/branch/develop/graph/badge.svg)](https://codecov.io/gh/RocketChat/Rocket.Chat.iOS)
+[![documentation](https://RocketChat.github.io/Rocket.Chat.iOS/badge.svg)](https://RocketChat.github.io/Rocket.Chat.iOS)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/09aed95b69c14cb88521890335633acc)](https://www.codacy.com/app/RocketChat/Rocket-Chat-iOS)
 
 Rocket.Chat Native iOS Application
+
+## Rocket.Chat.iOS.SDK
+
+### Requirements
+
+- Swift 3
+- iOS 10.0+
+
+### Install with CocoaPods
+
+Add this to your `Podfile`
+
+  `pod RocketChat`
+
+## Usage
+
+A simple livechat example
+
+```swift
+  import RocketChat
+  RocketChat.configure(withServerURL: URL(string: "demo.rocket.chat")!) {
+            let livechat = RocketChat.livechat()
+            livechat.initiate {
+                guard let department = livechat.departments.first else {
+                    return
+                }
+                livechat.registerGuestAndLogin(withEmail: email, name: name, toDepartment: department, message: message) {
+                    DispatchQueue.main.async {
+                        guard let controller = livechat.getLiveChatViewController() else {
+                            return
+                        }
+                        someController.present(controller, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+```
+
+See more with [`SDKExample` app](https://github.com/RocketChat/Rocket.Chat.iOS/tree/develop/SDKExample), also [API Reference](https://RocketChat.github.io/Rocket.Chat.iOS).
 
 ## Reporting an Issue
 
