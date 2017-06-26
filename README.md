@@ -18,30 +18,30 @@ Rocket.Chat Native iOS Application
 
 Add this to your `Podfile`
 
-  `pod RocketChat`
+  `pod 'RocketChat'`
 
 ## Usage
 
 A simple livechat example
 
 ```swift
-  import RocketChat
-  RocketChat.configure(withServerURL: URL(string: "demo.rocket.chat")!) {
-            let livechat = RocketChat.livechat()
-            livechat.initiate {
-                guard let department = livechat.departments.first else {
+import RocketChat
+RocketChat.configure(withServerURL: URL(string: "demo.rocket.chat")!) {
+    let livechat = RocketChat.livechat()
+    livechat.initiate {
+        guard let department = livechat.departments.first else {
+            return
+        }
+        livechat.registerGuestAndLogin(withEmail: email, name: name, toDepartment: department, message: message) {
+            DispatchQueue.main.async {
+                guard let controller = livechat.getLiveChatViewController() else {
                     return
                 }
-                livechat.registerGuestAndLogin(withEmail: email, name: name, toDepartment: department, message: message) {
-                    DispatchQueue.main.async {
-                        guard let controller = livechat.getLiveChatViewController() else {
-                            return
-                        }
-                        someController.present(controller, animated: true, completion: nil)
-                    }
-                }
+                someController.present(controller, animated: true, completion: nil)
             }
         }
+    }
+}
 ```
 
 See more with [`SDKExample` app](https://github.com/RocketChat/Rocket.Chat.iOS/tree/develop/SDKExample), also [API Reference](https://RocketChat.github.io/Rocket.Chat.iOS).
