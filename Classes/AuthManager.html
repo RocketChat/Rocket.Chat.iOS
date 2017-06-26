@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>AuthManager Class Reference</title>
+    <link rel="stylesheet" type="text/css" href="../css/jazzy.css" />
+    <link rel="stylesheet" type="text/css" href="../css/highlight.css" />
+    <meta charset='utf-8'>
+    <script src="../js/jquery.min.js" defer></script>
+    <script src="../js/jazzy.js" defer></script>
+    
+  </head>
+  <body>
+    <a name="//apple_ref/swift/Class/AuthManager" class="dashAnchor"></a>
+    <a title="AuthManager Class Reference"></a>
+    <header>
+      <div class="content-wrapper">
+        <p><a href="../index.html">RocketChat Docs</a> (42% documented)</p>
+        <p class="header-right"><a href="https://github.com/RocketChat/Rocket.Chat.iOS"><img src="../img/gh.png"/>View on GitHub</a></p>
+      </div>
+    </header>
+    <div class="content-wrapper">
+      <p id="breadcrumbs">
+        <a href="../index.html">RocketChat Reference</a>
+        <img id="carat" src="../img/carat.png" />
+        AuthManager Class Reference
+      </p>
+    </div>
+    <div class="content-wrapper">
+      <nav class="sidebar">
+        <ul class="nav-groups">
+          <li class="nav-group-name">
+            <a href="../Classes.html">Classes</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Classes/Attachment.html">Attachment</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Auth.html">Auth</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AuthManager.html">AuthManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/AuthSettings.html">AuthSettings</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/BaseModel.html">BaseModel</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/ChatViewController.html">ChatViewController</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/DependencyRepository.html">DependencyRepository</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Email.html">Email</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Launcher.html">Launcher</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/LiveChatManager.html">LiveChatManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10RocketChat7Mention">Mention</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/Message.html">Message</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/MessageManager.html">MessageManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10RocketChat23MessageTextCacheManager">MessageTextCacheManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10RocketChat10MessageURL">MessageURL</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/PushManager.html">PushManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/RocketChat.html">RocketChat</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SDKSocketManager.html">SDKSocketManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SocketManager.html">SocketManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes.html#/s:C10RocketChat12Subscription">Subscription</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/SubscriptionManager.html">SubscriptionManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UploadManager.html">UploadManager</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/User.html">User</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Classes/UserManager.html">UserManager</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Enums.html">Enums</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Enums/MessageType.html">MessageType</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/ResponseMessage.html">ResponseMessage</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserPresence.html">UserPresence</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Enums/UserStatus.html">UserStatus</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Protocols.html">Protocols</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Protocols/InjectionContainer.html">InjectionContainer</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/LauncherCoordinator.html">LauncherCoordinator</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Protocols/SocketConnectionHandler.html">SocketConnectionHandler</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Structs.html">Structs</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:V10RocketChat10Department">Department</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs.html#/s:V10RocketChat10FileUpload">FileUpload</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Structs/SocketResponse.html">SocketResponse</a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-group-name">
+            <a href="../Typealiases.html">Typealiases</a>
+            <ul class="nav-group-tasks">
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:10RocketChat21UploadCompletionBlock">UploadCompletionBlock</a>
+              </li>
+              <li class="nav-group-task">
+                <a href="../Typealiases.html#/s:10RocketChat19UploadProgressBlock">UploadProgressBlock</a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <article class="main-content">
+        <section>
+          <section class="section">
+            <h1>AuthManager</h1>
+              <div class="declaration">
+                <div class="language">
+                  <pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="kt">AuthManager</span><span class="p">:</span> <span class="kt">SocketManagerInjected</span><span class="p">,</span> <span class="kt">PushManagerInjected</span></code></pre>
+
+                </div>
+              </div>
+            <p>A manager that manages all authentication related actions</p>
+
+          </section>
+          <section class="section task-group-section">
+            <div class="task-group">
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:vC10RocketChat11AuthManager18injectionContainerGSQPS_18InjectionContainer__"></a>
+                    <a name="//apple_ref/swift/Property/injectionContainer" class="dashAnchor"></a>
+                    <a class="token" href="#/s:vC10RocketChat11AuthManager18injectionContainerGSQPS_18InjectionContainer__">injectionContainer</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Dependency injection container, replace it to change the behavior of the auth manager</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="k">var</span> <span class="nv">injectionContainer</span><span class="p">:</span> <span class="kt"><a href="../Protocols/InjectionContainer.html">InjectionContainer</a></span><span class="o">!</span></code></pre>
+
+                        </div>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat11AuthManager15isAuthenticatedFT_GSqCS_4Auth_"></a>
+                    <a name="//apple_ref/swift/Method/isAuthenticated()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat11AuthManager15isAuthenticatedFT_GSqCS_4Auth_">isAuthenticated()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Last auth object (sorted by lastAccess), if exists; nil otherwise.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">isAuthenticated</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/Auth.html">Auth</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p>an instance of <code><a href="../Classes/Auth.html">Auth</a></code></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat11AuthManager11currentUserFT_GSqCS_4User_"></a>
+                    <a name="//apple_ref/swift/Method/currentUser()" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat11AuthManager11currentUserFT_GSqCS_4User_">currentUser()</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">currentUser</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt"><a href="../Classes/User.html">User</a></span><span class="p">?</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Return Value</h4>
+                        <p></p>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+            <div class="task-group">
+              <div class="task-name-container">
+                <a name="/Socket%20Management"></a>
+                <a name="//apple_ref/swift/Section/Socket Management" class="dashAnchor"></a>
+                <a href="#/Socket%20Management">
+                  <h3 class="section-name">Socket Management</h3>
+                </a>
+              </div>
+              <ul>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat11AuthManager6resumeFTCS_4Auth10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/resume(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat11AuthManager6resumeFTCS_4Auth10completionFVS_14SocketResponseT__T_">resume(_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>This method resumes a previous authentication with token stored in the Realm object.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">resume</span><span class="p">(</span><span class="n">_</span> <span class="nv">auth</span><span class="p">:</span> <span class="kt"><a href="../Classes/Auth.html">Auth</a></span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>auth</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The Auth object that user wants to resume</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>The completion callback that will be called in case of success or error</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat11AuthManager6signupFT4withSSSSSS10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/signup(with:_:_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat11AuthManager6signupFT4withSSSSSS10completionFVS_14SocketResponseT__T_">signup(with:_:_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Sign up a new user with given username, email, and password, completion will be called after action been completed.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">signup</span><span class="p">(</span><span class="n">with</span> <span class="nv">name</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">email</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="n">_</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>name</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>username</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>email</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>user&rsquo;s email</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a strong password</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat11AuthManager4authFT6paramsGVs10DictionarySSP__10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/auth(params:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat11AuthManager4authFT6paramsGVs10DictionarySSP__10completionFVS_14SocketResponseT__T_">auth(params:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>A generic method that authenticated a user, should not be used directly unless you exactly know what you&rsquo;re doing</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">auth</span><span class="p">(</span><span class="nv">params</span><span class="p">:</span> <span class="p">[</span><span class="kt">String</span><span class="p">:</span> <span class="kt">Any</span><span class="p">],</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>params</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>a dictionary of params that will be sent to server</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat11AuthManager4authFTSS8passwordSS4codeGSqSS_10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/auth(_:password:code:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat11AuthManager4authFTSS8passwordSS4codeGSqSS_10completionFVS_14SocketResponseT__T_">auth(_:password:code:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Authenticate a user with given email and password.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">auth</span><span class="p">(</span><span class="n">_</span> <span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">password</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">code</span><span class="p">:</span> <span class="kt">String</span><span class="p">?</span> <span class="o">=</span> <span class="kc">nil</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>username</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>username of the user</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>password</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>password of the user</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>code</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>totp authentication code if exists, nil otherwise</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat11AuthManager18usernameSuggestionFT10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/usernameSuggestion(completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat11AuthManager18usernameSuggestionFT10completionFVS_14SocketResponseT__T_">usernameSuggestion(completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Get the username suggestion for the logged in user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">usernameSuggestion</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat11AuthManager11setUsernameFTSS10completionFVS_14SocketResponseT__T_"></a>
+                    <a name="//apple_ref/swift/Method/setUsername(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat11AuthManager11setUsernameFTSS10completionFVS_14SocketResponseT__T_">setUsername(_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Set username of the logged in user.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">setUsername</span><span class="p">(</span><span class="n">_</span> <span class="nv">username</span><span class="p">:</span> <span class="kt">String</span><span class="p">,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>username</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>new username</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat11AuthManager6logoutFT10completionFT_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/logout(completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat11AuthManager6logoutFT10completionFT_T__T_">logout(completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Logouts user from the app, clear database and disconnects from the socket.</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">logout</span><span class="p">(</span><span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">VoidCompletion</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+                <li class="item">
+                  <div>
+                    <code>
+                    <a name="/s:FC10RocketChat11AuthManager20updatePublicSettingsFTGSqCS_4Auth_10completionFGSqCS_12AuthSettings_T__T_"></a>
+                    <a name="//apple_ref/swift/Method/updatePublicSettings(_:completion:)" class="dashAnchor"></a>
+                    <a class="token" href="#/s:FC10RocketChat11AuthManager20updatePublicSettingsFTGSqCS_4Auth_10completionFGSqCS_12AuthSettings_T__T_">updatePublicSettings(_:completion:)</a>
+                    </code>
+                  </div>
+                  <div class="height-container">
+                    <div class="pointer-container"></div>
+                    <section class="section">
+                      <div class="pointer"></div>
+                      <div class="abstract">
+                        <p>Update server settings and public informations</p>
+
+                      </div>
+                      <div class="declaration">
+                        <h4>Declaration</h4>
+                        <div class="language">
+                          <p class="aside-title">Swift</p>
+                          <pre class="highlight"><code><span class="kd">public</span> <span class="kd">func</span> <span class="nf">updatePublicSettings</span><span class="p">(</span><span class="n">_</span> <span class="nv">auth</span><span class="p">:</span> <span class="kt"><a href="../Classes/Auth.html">Auth</a></span><span class="p">?,</span> <span class="nv">completion</span><span class="p">:</span> <span class="kd">@escaping</span> <span class="kt">MessageCompletionObject</span><span class="o">&lt;</span><span class="kt"><a href="../Classes/AuthSettings.html">AuthSettings</a></span><span class="p">?</span><span class="o">&gt;</span><span class="p">)</span></code></pre>
+
+                        </div>
+                      </div>
+                      <div>
+                        <h4>Parameters</h4>
+                        <table class="graybox">
+                          <tbody>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>auth</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>the auth server to be updated</p>
+                                </div>
+                              </td>
+                            </tr>
+                            <tr>
+                              <td>
+                                <code>
+                                <em>completion</em>
+                                </code>
+                              </td>
+                              <td>
+                                <div>
+                                  <p>will be called after action completion</p>
+                                </div>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                    </section>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </section>
+        </section>
+        <section id="footer">
+          <p>&copy; 2017 <a class="link" href="https://rocket.chat" target="_blank" rel="external">Rocket.Chat</a>. All rights reserved. (Last updated: 2017-06-26)</p>
+          <p>Generated by <a class="link" href="https://github.com/realm/jazzy" target="_blank" rel="external">jazzy ♪♫ v0.8.2</a>, a <a class="link" href="http://realm.io" target="_blank" rel="external">Realm</a> project.</p>
+        </section>
+      </article>
+    </div>
+  </body>
+</div>
+</html>

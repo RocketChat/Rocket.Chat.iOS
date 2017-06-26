@@ -1,0 +1,1062 @@
+{
+  "warnings": [
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyManager/InjectionContainer.swift",
+      "line": 13,
+      "symbol": "InjectionContainer.socketManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyManager/InjectionContainer.swift",
+      "line": 14,
+      "symbol": "InjectionContainer.authManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyManager/InjectionContainer.swift",
+      "line": 15,
+      "symbol": "InjectionContainer.subscriptionManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyManager/InjectionContainer.swift",
+      "line": 16,
+      "symbol": "InjectionContainer.userManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyManager/InjectionContainer.swift",
+      "line": 17,
+      "symbol": "InjectionContainer.messageManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyManager/InjectionContainer.swift",
+      "line": 18,
+      "symbol": "InjectionContainer.uploadManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyManager/InjectionContainer.swift",
+      "line": 19,
+      "symbol": "InjectionContainer.pushManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyManager/InjectionContainer.swift",
+      "line": 20,
+      "symbol": "InjectionContainer.messageTextCacheManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyManager/InjectionContainer.swift",
+      "line": 21,
+      "symbol": "InjectionContainer.livechatManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyRepository.swift",
+      "line": 15,
+      "symbol": "DependencyRepository.socketManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyRepository.swift",
+      "line": 16,
+      "symbol": "DependencyRepository.authManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyRepository.swift",
+      "line": 17,
+      "symbol": "DependencyRepository.subscriptionManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyRepository.swift",
+      "line": 18,
+      "symbol": "DependencyRepository.userManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyRepository.swift",
+      "line": 19,
+      "symbol": "DependencyRepository.messageManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyRepository.swift",
+      "line": 20,
+      "symbol": "DependencyRepository.uploadManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyRepository.swift",
+      "line": 21,
+      "symbol": "DependencyRepository.pushManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyRepository.swift",
+      "line": 22,
+      "symbol": "DependencyRepository.messageTextCacheManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/DependencyRepository.swift",
+      "line": 24,
+      "symbol": "DependencyRepository.livechatManager",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/Managers/LiveChatManager.swift",
+      "line": 15,
+      "symbol": "LiveChatManager.injectionContainer",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/Managers/LiveChatManager.swift",
+      "line": 16,
+      "symbol": "LiveChatManager.initiated",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/Managers/LiveChatManager.swift",
+      "line": 17,
+      "symbol": "LiveChatManager.loggedIn",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/Managers/LiveChatManager.swift",
+      "line": 22,
+      "symbol": "LiveChatManager.isLiveChatEnabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.SDK/Managers/LiveChatManager.swift",
+      "line": 23,
+      "symbol": "LiveChatManager.title",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatControllerAutocomplete.swift",
+      "line": 14,
+      "symbol": "ChatViewController.didChangeAutoCompletionPrefix(_:andWord:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatControllerAutocomplete.swift",
+      "line": 47,
+      "symbol": "ChatViewController.heightForAutoCompletionView()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatControllerAutocomplete.swift",
+      "line": 51,
+      "symbol": "ChatViewController.tableView(_:numberOfRowsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatControllerAutocomplete.swift",
+      "line": 55,
+      "symbol": "ChatViewController.tableView(_:cellForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatControllerAutocomplete.swift",
+      "line": 59,
+      "symbol": "ChatViewController.tableView(_:heightForRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatControllerAutocomplete.swift",
+      "line": 63,
+      "symbol": "ChatViewController.tableView(_:didSelectRowAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatControllerUploader.swift",
+      "line": 64,
+      "symbol": "ChatViewController.imagePickerController(_:didFinishPickingMediaWithInfo:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatControllerUploader.swift",
+      "line": 145,
+      "symbol": "ChatViewController.imagePickerControllerDidCancel(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": null,
+      "symbol": "ChatViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": null,
+      "symbol": "ChatViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": null,
+      "symbol": "ChatViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": null,
+      "symbol": "ChatViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": null,
+      "symbol": "ChatViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": null,
+      "symbol": "ChatViewController",
+      "symbol_kind": "source.lang.swift.decl.extension",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 14,
+      "symbol": "ChatViewController",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 71,
+      "symbol": "ChatViewController.awakeFromNib()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 76,
+      "symbol": "ChatViewController.viewDidLoad()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 113,
+      "symbol": "ChatViewController.viewWillLayoutSubviews()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 127,
+      "symbol": "ChatViewController.viewWillTransition(to:with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 135,
+      "symbol": "ChatViewController.prepare(for:sender:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 174,
+      "symbol": "ChatViewController.collectionViewLayout(for:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 217,
+      "symbol": "ChatViewController.canPressRightButton()",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 221,
+      "symbol": "ChatViewController.didPressRightButton(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 225,
+      "symbol": "ChatViewController.didPressLeftButton(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 229,
+      "symbol": "ChatViewController.didPressReturnKey(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 233,
+      "symbol": "ChatViewController.textViewDidBeginEditing(_:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 494,
+      "symbol": "ChatViewController.collectionView(_:willDisplay:forItemAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 508,
+      "symbol": "ChatViewController.collectionView(_:numberOfItemsInSection:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 512,
+      "symbol": "ChatViewController.collectionView(_:cellForItemAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 564,
+      "symbol": "ChatViewController.collectionView(_:layout:insetForSectionAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 568,
+      "symbol": "ChatViewController.collectionView(_:layout:sizeForItemAt:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Controllers/Chat/ChatViewController.swift",
+      "line": 584,
+      "symbol": "ChatViewController.scrollViewWillEndDragging(_:withVelocity:targetContentOffset:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Launcher/LauncherProtocol.swift",
+      "line": 23,
+      "symbol": "LauncherCoordinator.prepareToLaunch(with:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/ResponseMessage.swift",
+      "line": 20,
+      "symbol": "ResponseMessage.connected",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/ResponseMessage.swift",
+      "line": 21,
+      "symbol": "ResponseMessage.error",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/ResponseMessage.swift",
+      "line": 22,
+      "symbol": "ResponseMessage.ping",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/ResponseMessage.swift",
+      "line": 23,
+      "symbol": "ResponseMessage.changed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/ResponseMessage.swift",
+      "line": 24,
+      "symbol": "ResponseMessage.added",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/ResponseMessage.swift",
+      "line": 25,
+      "symbol": "ResponseMessage.updated",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/ResponseMessage.swift",
+      "line": 26,
+      "symbol": "ResponseMessage.removed",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/ResponseMessage.swift",
+      "line": 27,
+      "symbol": "ResponseMessage.unknown",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/SocketResponse.swift",
+      "line": 16,
+      "symbol": "SocketResponse.result",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/SocketResponse.swift",
+      "line": 20,
+      "symbol": "SocketResponse.id",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/SocketResponse.swift",
+      "line": 21,
+      "symbol": "SocketResponse.msg",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/SocketResponse.swift",
+      "line": 22,
+      "symbol": "SocketResponse.collection",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/Response/SocketResponse.swift",
+      "line": 23,
+      "symbol": "SocketResponse.event",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/SocketManager.swift",
+      "line": 36,
+      "symbol": "SocketManager.injectionContainer",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/SocketManager.swift",
+      "line": 190,
+      "symbol": "SocketManager.websocketDidConnect(socket:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/SocketManager.swift",
+      "line": 202,
+      "symbol": "SocketManager.websocketDidDisconnect(socket:error:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/SocketManager.swift",
+      "line": 216,
+      "symbol": "SocketManager.websocketDidReceiveData(socket:data:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/SocketManager.swift",
+      "line": 220,
+      "symbol": "SocketManager.websocketDidReceiveMessage(socket:text:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Managers/Socket/SocketManager.swift",
+      "line": 242,
+      "symbol": "SocketManager.websocketDidReceivePong(socket:data:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 15,
+      "symbol": "Attachment.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 31,
+      "symbol": "Attachment.collapsed",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 32,
+      "symbol": "Attachment.text",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 33,
+      "symbol": "Attachment.thumbURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 34,
+      "symbol": "Attachment.color",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 36,
+      "symbol": "Attachment.title",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 37,
+      "symbol": "Attachment.titleLink",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 38,
+      "symbol": "Attachment.titleLinkDownload",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 40,
+      "symbol": "Attachment.imageURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 41,
+      "symbol": "Attachment.imageType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 42,
+      "symbol": "Attachment.imageSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 44,
+      "symbol": "Attachment.audioURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 45,
+      "symbol": "Attachment.audioType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 46,
+      "symbol": "Attachment.audioSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 48,
+      "symbol": "Attachment.videoURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 49,
+      "symbol": "Attachment.videoType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 50,
+      "symbol": "Attachment.videoSize",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 51,
+      "symbol": "Attachment.videoThumbPath",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 73,
+      "symbol": "Attachment.fullVideoURL(inAuth:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Attachment.swift",
+      "line": 77,
+      "symbol": "Attachment.fullImageURL(inAuth:)",
+      "symbol_kind": "source.lang.swift.decl.function.method.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Auth.swift",
+      "line": 15,
+      "symbol": "Auth.serverURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Auth.swift",
+      "line": 16,
+      "symbol": "Auth.settings",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Auth.swift",
+      "line": 21,
+      "symbol": "Auth.lastAccess",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Auth.swift",
+      "line": 22,
+      "symbol": "Auth.lastSubscriptionFetch",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Auth.swift",
+      "line": 25,
+      "symbol": "Auth.userId",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Auth.swift",
+      "line": 28,
+      "symbol": "Auth.subscriptions",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/AuthSettings.swift",
+      "line": 15,
+      "symbol": "AuthSettings.siteURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/AuthSettings.swift",
+      "line": 16,
+      "symbol": "AuthSettings.cdnPrefixURL",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/AuthSettings.swift",
+      "line": 19,
+      "symbol": "AuthSettings.favoriteRooms",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/AuthSettings.swift",
+      "line": 22,
+      "symbol": "AuthSettings.isUsernameEmailAuthenticationEnabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/AuthSettings.swift",
+      "line": 23,
+      "symbol": "AuthSettings.isGoogleAuthenticationEnabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/AuthSettings.swift",
+      "line": 24,
+      "symbol": "AuthSettings.isLDAPAuthenticationEnabled",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/AuthSettings.swift",
+      "line": 27,
+      "symbol": "AuthSettings.uploadStorageType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Base/BaseModel.swift",
+      "line": 13,
+      "symbol": "BaseModel",
+      "symbol_kind": "source.lang.swift.decl.class",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Email.swift",
+      "line": 13,
+      "symbol": "Email.email",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Email.swift",
+      "line": 14,
+      "symbol": "Email.verified",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 35,
+      "symbol": "MessageType.text",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 36,
+      "symbol": "MessageType.textAttachment",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 37,
+      "symbol": "MessageType.image",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 38,
+      "symbol": "MessageType.audio",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 39,
+      "symbol": "MessageType.video",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 40,
+      "symbol": "MessageType.url",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 42,
+      "symbol": "MessageType.roomNameChanged",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 43,
+      "symbol": "MessageType.userAdded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 44,
+      "symbol": "MessageType.userRemoved",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 45,
+      "symbol": "MessageType.userJoined",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 46,
+      "symbol": "MessageType.userLeft",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 47,
+      "symbol": "MessageType.userMuted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 48,
+      "symbol": "MessageType.userUnmuted",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 49,
+      "symbol": "MessageType.welcome",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 50,
+      "symbol": "MessageType.messageRemoved",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 51,
+      "symbol": "MessageType.subscriptionRoleAdded",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 52,
+      "symbol": "MessageType.subscriptionRoleRemoved",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 53,
+      "symbol": "MessageType.roomArchived",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 54,
+      "symbol": "MessageType.roomUnarchived",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 59,
+      "symbol": "Message.subscription",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 60,
+      "symbol": "Message.internalType",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 61,
+      "symbol": "Message.rid",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 62,
+      "symbol": "Message.createdAt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 63,
+      "symbol": "Message.updatedAt",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 64,
+      "symbol": "Message.user",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 65,
+      "symbol": "Message.text",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 67,
+      "symbol": "Message.userBlocked",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 69,
+      "symbol": "Message.pinned",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 78,
+      "symbol": "Message.mentions",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 79,
+      "symbol": "Message.attachments",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 80,
+      "symbol": "Message.urls",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/Message.swift",
+      "line": 82,
+      "symbol": "Message.type",
+      "symbol_kind": "source.lang.swift.decl.var.instance",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/User.swift",
+      "line": 13,
+      "symbol": "UserPresence",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/User.swift",
+      "line": 14,
+      "symbol": "UserPresence.away",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/User.swift",
+      "line": 14,
+      "symbol": "UserPresence.online",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/User.swift",
+      "line": 17,
+      "symbol": "UserStatus",
+      "symbol_kind": "source.lang.swift.decl.enum",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/User.swift",
+      "line": 18,
+      "symbol": "UserStatus.away",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/User.swift",
+      "line": 18,
+      "symbol": "UserStatus.busy",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/User.swift",
+      "line": 18,
+      "symbol": "UserStatus.offline",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    },
+    {
+      "file": "/Users/lucas/Developer/Rocket.Chat.iOS/Rocket.Chat.Shared/Models/User.swift",
+      "line": 18,
+      "symbol": "UserStatus.online",
+      "symbol_kind": "source.lang.swift.decl.enumelement",
+      "warning": "undocumented"
+    }
+  ],
+  "source_directory": "/Users/lucas/Developer/Rocket.Chat.iOS"
+}
