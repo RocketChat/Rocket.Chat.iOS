@@ -8,3 +8,4 @@ install:
 - ./Scripts/update_dependencies.sh
 script:
 - ./Scripts/test.sh
+- ./Scripts/test_sdk.sh
