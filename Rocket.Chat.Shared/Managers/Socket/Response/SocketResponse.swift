@@ -10,16 +10,17 @@ import Foundation
 import SwiftyJSON
 import Starscream
 
+/// A data struct corresponding of a socket's response
 public struct SocketResponse {
     var socket: WebSocket?
-    var result: JSON
+    public var result: JSON
 
     // JSON Data
     // swiftlint:disable variable_name
-    var id: String?
-    var msg: ResponseMessage?
-    var collection: String?
-    var event: String?
+    public var id: String?
+    public var msg: ResponseMessage?
+    public var collection: String?
+    public var event: String?
 
     // MARK: Initializer
 
@@ -47,7 +48,10 @@ public struct SocketResponse {
 
     // MARK: Checks
 
-    func isError() -> Bool {
+    /// Check if the response indicates an error
+    ///
+    /// - Returns: `true` if it is an error, `false` otherwise
+    public func isError() -> Bool {
         if msg == .error || result["error"] != JSON.null {
             return true
         }

@@ -9,6 +9,7 @@
 import Foundation
 import SwiftyJSON
 
+/// Livechat Department, not stored locally
 public struct Department {
     var id: String
     var enabled: Bool

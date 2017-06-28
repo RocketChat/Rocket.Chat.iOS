@@ -8,7 +8,8 @@
 
 import Foundation
 
-final class Mention: BaseModel {
+/// A data structure represents a mention of a user in a channel
+public class Mention: BaseModel {
     dynamic var objId = ""
     dynamic var username: String?
     dynamic var channel: String?

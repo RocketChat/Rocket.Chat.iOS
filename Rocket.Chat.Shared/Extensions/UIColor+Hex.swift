@@ -24,7 +24,7 @@
 
 import UIKit
 
-public extension UIColor {
+extension UIColor {
     
     /**
      Creates an immuatble UIColor instance specified by a hex string, CSS color name, or nil.
@@ -43,7 +43,7 @@ public extension UIColor {
      - **nil** [UIColor clearColor]
      - **empty string** [UIColor clearColor]
      */
-    public convenience init(hex: String?) {
+    convenience init(hex: String?) {
         let normalizedHexString: String = UIColor.normalize(hex)
         var c: CUnsignedInt = 0
         Scanner(string: normalizedHexString).scanHexInt32(&c)
@@ -61,7 +61,7 @@ public extension UIColor {
      
      - Returns: A new string with `String` with the color's hexidecimal value.
      */
-    public func hexDescription(_ includeAlpha: Bool = false) -> String {
+    func hexDescription(_ includeAlpha: Bool = false) -> String {
         if self.cgColor.numberOfComponents == 4 {
             let components = self.cgColor.components
             let red = Float((components?[0])!) * 255.0

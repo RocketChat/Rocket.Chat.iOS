@@ -31,6 +31,21 @@ class SDKExampleUITests: XCTestCase {
     func testExample() {
         // Use recording to get started writing UI tests.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let serverAddressTextField = XCUIApplication().textFields["Server address"]
+        serverAddressTextField.tap()
+        serverAddressTextField.typeText("livechattest.rocket.chat")
+
+        
+        let emailTextField = XCUIApplication().textFields["Email"]
+        emailTextField.tap()
+        emailTextField.typeText("demo@example.com")
+
+        let nameTextField = XCUIApplication().textFields["Name"]
+        nameTextField.tap()
+        nameTextField.typeText("William")
+
+        XCUIApplication().buttons["Login"].tap()
     }
     
 }

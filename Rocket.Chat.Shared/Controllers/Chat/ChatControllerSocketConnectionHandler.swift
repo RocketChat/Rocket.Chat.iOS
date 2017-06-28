@@ -10,7 +10,7 @@ import UIKit
 
 extension ChatViewController: SocketConnectionHandler {
 
-    func socketDidConnect(socket: SocketManager) {
+    public func socketDidConnect(socket: SocketManager) {
         chatHeaderViewStatus?.removeFromSuperview()
 
         DispatchQueue.main.async { [weak self] in
@@ -22,7 +22,7 @@ extension ChatViewController: SocketConnectionHandler {
         rightButton.isEnabled = true
     }
 
-    func socketDidDisconnect(socket: SocketManager) {
+    public func socketDidDisconnect(socket: SocketManager) {
         chatHeaderViewStatus?.removeFromSuperview()
 
         if let headerView = ChatHeaderViewStatus.instantiateFromNib() {

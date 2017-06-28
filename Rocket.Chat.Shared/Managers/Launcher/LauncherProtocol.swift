@@ -18,6 +18,7 @@ extension LauncherProtocol {
     }
 }
 
-protocol LauncherCoordinator {
+/// A protocol of instance of specific launching agent
+public protocol LauncherCoordinator {
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?)
 }

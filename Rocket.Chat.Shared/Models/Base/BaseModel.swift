@@ -13,7 +13,7 @@ import SwiftyJSON
 public class BaseModel: Object {
     dynamic var identifier: String?
 
-    override public static func primaryKey() -> String? {
+    public override static func primaryKey() -> String? {
         return "identifier"
     }
 }

@@ -10,18 +10,19 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+/// A server's public informations and settings
 public class AuthSettings: BaseModel {
-    dynamic var siteURL: String?
-    dynamic var cdnPrefixURL: String?
+    public dynamic var siteURL: String?
+    public dynamic var cdnPrefixURL: String?
 
     // Rooms
-    dynamic var favoriteRooms = true
+    public dynamic var favoriteRooms = true
 
     // Authentication methods
-    dynamic var isUsernameEmailAuthenticationEnabled = false
-    dynamic var isGoogleAuthenticationEnabled = false
-    dynamic var isLDAPAuthenticationEnabled = false
+    public dynamic var isUsernameEmailAuthenticationEnabled = false
+    public dynamic var isGoogleAuthenticationEnabled = false
+    public dynamic var isLDAPAuthenticationEnabled = false
 
     // File upload
-    dynamic var uploadStorageType: String?
+    public dynamic var uploadStorageType: String?
 }

@@ -8,18 +8,25 @@
 
 import Foundation
 
+/// A manager that manages all push notifications related actions
 public class PushManager: SocketManagerInjected, AuthManagerInjected {
 
     let kDeviceTokenKey = "deviceToken"
     let kPushIdentifierKey = "pushIdentifier"
 
-    var injectionContainer: InjectionContainer!
+    /// Dependency injection container, replace it to change the behavior of the push manager
+    public var injectionContainer: InjectionContainer!
 
     func updatePushToken() {
         guard let deviceToken = getDeviceToken() else { return }
         updatePushToken(with: deviceToken, pushId: getOrCreatePushId())
     }
 
+    /// Update server's memories of current user's device token
+    ///
+    /// - Parameters:
+    ///   - deviceToken: new device token
+    ///   - pushId: push id
     public func updatePushToken(with deviceToken: String, pushId: String) {
         guard let userIdentifier = authManager.isAuthenticated()?.userId else { return }
 
@@ -38,11 +45,17 @@ public class PushManager: SocketManagerInjected, AuthManagerInjected {
         socketManager.send(request)
     }
 
+    /// Update server's memories of current user's push id
     public func updateUser() {
         guard let userIdentifier = authManager.isAuthenticated()?.userId else { return }
         updateUser(userIdentifier, pushId: getOrCreatePushId())
     }
 
+    /// Update server's memories of given user's push id with given push id
+    ///
+    /// - Parameters:
+    ///   - userIdentifier: user's id
+    ///   - pushId: push id
     public func updateUser(_ userIdentifier: String, pushId: String) {
         let request = [
             "msg": "method",

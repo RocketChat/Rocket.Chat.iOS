@@ -18,10 +18,14 @@ public enum UserStatus: String {
     case offline, online, busy, away
 }
 
+/// A data structure represents a user
 public class User: BaseModel {
-    dynamic var username: String?
-    dynamic var name: String?
-    var emails = List<Email>()
+    /// A unique login name of the user
+    public dynamic var username: String?
+    /// A representitive name of the user
+    public dynamic var name: String?
+    /// A user can link multiple email address to his/her/their account
+    public var emails = List<Email>()
 
     fileprivate dynamic var privateStatus = UserStatus.offline.rawValue
     var status: UserStatus {

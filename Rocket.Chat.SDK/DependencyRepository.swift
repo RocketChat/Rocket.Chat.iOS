@@ -8,6 +8,9 @@
 
 import Foundation
 
+/**
+    A simple dependency injection repository
+ */
 public class DependencyRepository: InjectionContainer {
     public var socketManager: SocketManager = SDKSocketManager()
     public var authManager = AuthManager()

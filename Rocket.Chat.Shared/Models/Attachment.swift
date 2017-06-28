@@ -10,8 +10,9 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-class Attachment: BaseModel {
-    var type: MessageType {
+/// A data structure represents an attachment
+public class Attachment: BaseModel {
+    public var type: MessageType {
         if audioURL?.characters.count ?? 0 > 0 {
             return .audio
         }
@@ -27,33 +28,33 @@ class Attachment: BaseModel {
         return .textAttachment
     }
 
-    dynamic var collapsed: Bool = false
-    dynamic var text: String?
-    dynamic var thumbURL: String?
-    dynamic var color: String?
+    public dynamic var collapsed: Bool = false
+    public dynamic var text: String?
+    public dynamic var thumbURL: String?
+    public dynamic var color: String?
 
-    dynamic var title = ""
-    dynamic var titleLink = ""
-    dynamic var titleLinkDownload = true
+    public dynamic var title = ""
+    public dynamic var titleLink = ""
+    public dynamic var titleLinkDownload = true
 
-    dynamic var imageURL: String?
-    dynamic var imageType: String?
-    dynamic var imageSize = 0
+    public dynamic var imageURL: String?
+    public dynamic var imageType: String?
+    public dynamic var imageSize = 0
 
-    dynamic var audioURL: String?
-    dynamic var audioType: String?
-    dynamic var audioSize = 0
+    public dynamic var audioURL: String?
+    public dynamic var audioType: String?
+    public dynamic var audioSize = 0
 
-    dynamic var videoURL: String?
-    dynamic var videoType: String?
-    dynamic var videoSize = 0
-    var videoThumbPath: URL? {
+    public dynamic var videoURL: String?
+    public dynamic var videoType: String?
+    public dynamic var videoSize = 0
+    public var videoThumbPath: URL? {
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documents = path[0]
         return documents.appendingPathComponent("\(identifier ?? "temp").png")
     }
 
-    override class func ignoredProperties() -> [String] {
+    public override class func ignoredProperties() -> [String] {
         return ["videoThumb"]
     }
 }
@@ -69,11 +70,11 @@ extension Attachment {
         return URL(string: urlString)
     }
 
-    func fullVideoURL(inAuth auth: Auth) -> URL? {
+    public func fullVideoURL(inAuth auth: Auth) -> URL? {
         return Attachment.fullURLWith(videoURL, auth: auth)
     }
 
-    func fullImageURL(inAuth auth: Auth) -> URL? {
+    public func fullImageURL(inAuth auth: Auth) -> URL? {
         guard let imageURL = imageURL else { return nil }
         if imageURL.contains("http://") || imageURL.contains("https://") {
             return URL(string: imageURL)

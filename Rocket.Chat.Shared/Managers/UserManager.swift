@@ -8,11 +8,14 @@
 
 import Foundation
 
-public struct UserManager: SocketManagerInjected {
+/// A manager that manages all user related actions
+public class UserManager: SocketManagerInjected {
 
-    var injectionContainer: InjectionContainer!
+    /// Dependency injection container, replace it to change the behavior of the user manager
+    public var injectionContainer: InjectionContainer!
 
-    func changes() {
+    /// Subscribe active users' changes
+    public func changes() {
         let request = [
             "msg": "sub",
             "name": "activeUsers",
@@ -22,7 +25,8 @@ public struct UserManager: SocketManagerInjected {
         socketManager.send(request) { _ in }
     }
 
-    func userDataChanges() {
+    /// Subscribe user data changes
+    public func userDataChanges() {
         let request = [
             "msg": "sub",
             "name": "userData",
@@ -32,6 +36,11 @@ public struct UserManager: SocketManagerInjected {
         socketManager.send(request) { _ in }
     }
 
+    /// Set current user's statue
+    ///
+    /// - Parameters:
+    ///   - status: new status
+    ///   - completion: will be called after action completion
     public func setUserStatus(status: UserStatus, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
@@ -44,6 +53,11 @@ public struct UserManager: SocketManagerInjected {
         }
     }
 
+    /// Set current user's presence
+    ///
+    /// - Parameters:
+    ///   - status: new presence
+    ///   - completion: will be called after action completion
     public func setUserPresence(status: UserPresence, completion: @escaping MessageCompletion) {
         let method = "UserPresence:".appending(status.rawValue)
 

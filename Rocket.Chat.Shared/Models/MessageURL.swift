@@ -10,7 +10,8 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-class MessageURL: BaseModel {
+/// A data structure represents a url message's preview data
+public class MessageURL: BaseModel {
     dynamic var textDescription: String?
     dynamic var title: String?
     dynamic var targetURL: String?

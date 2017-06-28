@@ -700,6 +700,7 @@
 				A0559DE61ECC23E400E83220 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A0559DE71ECC23E400E83220 /* Build configuration list for PBXNativeTarget "SDKExampleTests" */ = {
 			isa = XCConfigurationList;
@@ -708,6 +709,7 @@
 				A0559DE91ECC23E400E83220 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		A0559DEA1ECC23E400E83220 /* Build configuration list for PBXNativeTarget "SDKExampleUITests" */ = {
 			isa = XCConfigurationList;
@@ -716,6 +718,7 @@
 				A0559DEC1ECC23E400E83220 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

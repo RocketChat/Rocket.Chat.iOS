@@ -9,19 +9,24 @@
 import Foundation
 import SwiftyJSON
 
+/// A callback function type that would indicates progress of uploads
 public typealias UploadProgressBlock = (Int) -> Void
+/// A callback function type that would indicates completion of uploads
 public typealias UploadCompletionBlock = (SocketResponse?, Bool) -> Void
 
-struct FileUpload {
+/// A data structure represents a file to be uploaded
+public struct FileUpload {
     var name: String
     var size: Int
     var type: String
     var data: Data
 }
 
+/// A manager that manages all user generated files and images uploads
 public class UploadManager: SocketManagerInjected, AuthManagerInjected {
 
-    var injectionContainer: InjectionContainer!
+    /// Dependency injection container, replace it to change the behavior of the upload manager
+    public var injectionContainer: InjectionContainer!
 
     fileprivate func sendFileMessage(params: [Any], completion: @escaping UploadCompletionBlock) {
         let request = [
@@ -62,7 +67,14 @@ public class UploadManager: SocketManagerInjected, AuthManagerInjected {
         return request
     }
 
-    func upload(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
+    /// Upload a file to given subscription
+    ///
+    /// - Parameters:
+    ///   - file: file to be uploaded
+    ///   - subscription: target subscription
+    ///   - progress: pregress callback
+    ///   - completion: completion callback
+    public func upload(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
         guard let auth = authManager.isAuthenticated() else { return }
         guard let store = auth.settings?.uploadStorageType else { return }
 

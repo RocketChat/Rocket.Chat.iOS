@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "41DF76DE1D2C50710028DBF8"
-               BuildableName = "Rocket.Chat.app"
-               BlueprintName = "Rocket.Chat"
-               ReferencedContainer = "container:Rocket.Chat.xcodeproj">
+               BlueprintIdentifier = "A0559DBB1ECC23E400E83220"
+               BuildableName = "SDKExample.app"
+               BlueprintName = "SDKExample"
+               ReferencedContainer = "container:SDKExample.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -26,37 +26,36 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      codeCoverageEnabled = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "41DF76F21D2C50720028DBF8"
-               BuildableName = "Rocket.ChatTests.xctest"
-               BlueprintName = "Rocket.ChatTests"
-               ReferencedContainer = "container:Rocket.Chat.xcodeproj">
+               BlueprintIdentifier = "A0559DCF1ECC23E400E83220"
+               BuildableName = "SDKExampleTests.xctest"
+               BlueprintName = "SDKExampleTests"
+               ReferencedContainer = "container:SDKExample.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "41DF76FD1D2C50720028DBF8"
-               BuildableName = "Rocket.ChatUITests.xctest"
-               BlueprintName = "Rocket.ChatUITests"
-               ReferencedContainer = "container:Rocket.Chat.xcodeproj">
+               BlueprintIdentifier = "A0559DDA1ECC23E400E83220"
+               BuildableName = "SDKExampleUITests.xctest"
+               BlueprintName = "SDKExampleUITests"
+               ReferencedContainer = "container:SDKExample.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "41DF76DE1D2C50710028DBF8"
-            BuildableName = "Rocket.Chat.app"
-            BlueprintName = "Rocket.Chat"
-            ReferencedContainer = "container:Rocket.Chat.xcodeproj">
+            BlueprintIdentifier = "A0559DBB1ECC23E400E83220"
+            BuildableName = "SDKExample.app"
+            BlueprintName = "SDKExample"
+            ReferencedContainer = "container:SDKExample.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -76,19 +75,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "41DF76DE1D2C50710028DBF8"
-            BuildableName = "Rocket.Chat.app"
-            BlueprintName = "Rocket.Chat"
-            ReferencedContainer = "container:Rocket.Chat.xcodeproj">
+            BlueprintIdentifier = "A0559DBB1ECC23E400E83220"
+            BuildableName = "SDKExample.app"
+            BlueprintName = "SDKExample"
+            ReferencedContainer = "container:SDKExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <EnvironmentVariables>
-         <EnvironmentVariable
-            key = "OS_ACTIVITY_MODE"
-            value = "disable"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-      </EnvironmentVariables>
       <AdditionalOptions>
       </AdditionalOptions>
    </LaunchAction>
@@ -102,10 +94,10 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "41DF76DE1D2C50710028DBF8"
-            BuildableName = "Rocket.Chat.app"
-            BlueprintName = "Rocket.Chat"
-            ReferencedContainer = "container:Rocket.Chat.xcodeproj">
+            BlueprintIdentifier = "A0559DBB1ECC23E400E83220"
+            BuildableName = "SDKExample.app"
+            BlueprintName = "SDKExample"
+            ReferencedContainer = "container:SDKExample.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

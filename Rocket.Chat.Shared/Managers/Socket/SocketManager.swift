@@ -18,14 +18,22 @@ public typealias SocketCompletion = (WebSocket?, Bool) -> Void
 public typealias MessageCompletionObject <T: Object> = (T) -> Void
 public typealias MessageCompletionObjectsList <T: Object> = ([T]) -> Void
 
-protocol SocketConnectionHandler {
+/// A protocol that represents a listener of socket connection events
+public protocol SocketConnectionHandler {
+    /// Will be called once the socket did connect
+    ///
+    /// - Parameter socket: the socket manager
     func socketDidConnect(socket: SocketManager)
+    /// Will be called once the socket did disconnect
+    ///
+    /// - Parameter socket: the socket manager
     func socketDidDisconnect(socket: SocketManager)
 }
 
+/// A manager that manages all web socket connection related actions
 public class SocketManager: AuthManagerInjected, PushManagerInjected, SubscriptionManagerInjected, UserManagerInjected {
 
-    var injectionContainer: InjectionContainer!
+    public var injectionContainer: InjectionContainer!
 
     var serverURL: URL?
 
@@ -33,8 +41,8 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
     var queue: [String: MessageCompletion] = [:]
     var events: [String: [MessageCompletion]] = [:]
 
-    internal var internalConnectionHandler: SocketCompletion?
-    internal var connectionHandlers: [String: SocketConnectionHandler] = [:]
+    var internalConnectionHandler: SocketCompletion?
+    var connectionHandlers: [String: SocketConnectionHandler] = [:]
 
     // MARK: Connection
 
@@ -59,14 +67,20 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
         self.socket?.disconnect()
     }
 
-    func clear() {
+    /// Clear all socket connection handlers
+    public func clear() {
         self.internalConnectionHandler = nil
         self.connectionHandlers = [:]
     }
 
     // MARK: Messages
 
-    func send(_ object: [String: Any], completion: MessageCompletion? = nil) {
+    /// Send a given message to connected server
+    ///
+    /// - Parameters:
+    ///   - object: message to be sent
+    ///   - completion: will be called after response
+    public func send(_ object: [String: Any], completion: MessageCompletion? = nil) {
         let identifier = String.random(50)
         var json = JSON(object)
         json["id"] = JSON(identifier)
@@ -84,7 +98,13 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
         }
     }
 
-    func subscribe(_ object: [String: Any], eventName: String, completion: @escaping MessageCompletion) {
+    /// Subscribe an event by event name and an initial message
+    ///
+    /// - Parameters:
+    ///   - object: initial message to subscribe
+    ///   - eventName: event to be subscribed
+    ///   - completion: will be called after every event fires
+    public func subscribe(_ object: [String: Any], eventName: String, completion: @escaping MessageCompletion) {
         if var list = self.events[eventName] {
             list.append(completion)
             self.events[eventName] = list
@@ -94,7 +114,12 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
         }
     }
 
-    func handleError(of response: SocketResponse, socket: WebSocket) {
+    /// Dummy method, should be overriden for each specific usage
+    ///
+    /// - Parameters:
+    ///   - response: error response
+    ///   - socket: error socket
+    public func handleError(of response: SocketResponse, socket: WebSocket) {
         fatalError("Not implemented.")
     }
 
@@ -104,7 +129,8 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
 
 extension SocketManager {
 
-    func reconnect() {
+    /// Reconnect to server, server settings are retrieved from auth settings
+    public func reconnect() {
         guard let auth = authManager.isAuthenticated() else { return }
 
         authManager.resume(auth, completion: { (response) in
@@ -126,7 +152,10 @@ extension SocketManager {
         })
     }
 
-    func isConnected() -> Bool {
+    /// Get if the underlying socket is connected
+    ///
+    /// - Returns: `true` if connected
+    public func isConnected() -> Bool {
         return self.socket?.isConnected ?? false
     }
 
@@ -136,11 +165,19 @@ extension SocketManager {
 
 extension SocketManager {
 
-    func addConnectionHandler(token: String, handler: SocketConnectionHandler) {
+    /// Add a socket connection handler to this socket manager
+    ///
+    /// - Parameters:
+    ///   - token: a unique token for this connection handler
+    ///   - handler: the connection handler
+    public func addConnectionHandler(token: String, handler: SocketConnectionHandler) {
         self.connectionHandlers[token] = handler
     }
 
-    func removeConnectionHandler(token: String) {
+    /// Remove a connection handler by given token
+    ///
+    /// - Parameter token: token of the connection handler to be removed
+    public func removeConnectionHandler(token: String) {
         self.connectionHandlers[token] = nil
     }
 

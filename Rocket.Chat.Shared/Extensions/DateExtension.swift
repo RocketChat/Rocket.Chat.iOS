@@ -10,11 +10,11 @@ import Foundation
 
 extension Date {
 
-    public static func dateFromInterval(_ interval: Double) -> Date? {
+    static func dateFromInterval(_ interval: Double) -> Date? {
         return Date(timeIntervalSince1970: interval / 1000)
     }
 
-    public static func intervalFromDate(_ date: Date) -> Double {
+    static func intervalFromDate(_ date: Date) -> Double {
         return date.timeIntervalSince1970 * 1000
     }
 

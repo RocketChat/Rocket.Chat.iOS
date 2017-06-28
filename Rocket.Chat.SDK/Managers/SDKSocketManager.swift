@@ -9,8 +9,9 @@
 import Foundation
 import Starscream
 
-class SDKSocketManager: SocketManager {
-    override func handleError(of response: SocketResponse, socket: WebSocket) {
+/// A socket manager that implemented the error handler method
+public class SDKSocketManager: SocketManager {
+    public override func handleError(of response: SocketResponse, socket: WebSocket) {
         Log.debug("error: " + (response.result["error"].rawString() ?? ""))
     }
 }

@@ -9,24 +9,33 @@
 import Foundation
 import RealmSwift
 
+/// A manager that manages all livechat related actions
 public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, SubscriptionManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-    var initiated = false
-    var loggedIn = false
+    public var injectionContainer: InjectionContainer!
+    public var initiated = false
+    public var loggedIn = false
     var visitorToken = ""
     var userId = ""
     var token = ""
 
-    var isLiveChatEnabled = false
-    var title = ""
-    var online = false
-    var room = String.random()
-    var registrationForm = false
-    var displayOfflineForm = false
+    public var isLiveChatEnabled = false
+    public var title = ""
+    /// If is there any agents online
+    public var online = false
+    /// The
+    public var room = String.random()
+    /// If a form is required for registration
+    public var registrationForm = false
+    /// If a form should be displayed while no agents are online
+    public var displayOfflineForm = false
 
+    /// All available deparments can be talked to
     public var departments: [Department] = []
 
+    /// Initiate livechat settings and retrieve settings from remote server
+    ///
+    /// - Parameter completion: completion callback
     public func initiate(completion: @escaping () -> Void) {
         visitorToken = String.random()
         let params = [
@@ -55,6 +64,14 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         }
     }
 
+    /// Register a new guest with given email and name to given department, `LivechatManager` should be initiated first
+    ///
+    /// - Parameters:
+    ///   - email: guest's email
+    ///   - name: guest's name
+    ///   - department: target department
+    ///   - messageText: initial text
+    ///   - completion: completion callback
     public func registerGuestAndLogin(withEmail email: String, name: String, toDepartment department: Department, message messageText: String, completion: @escaping () -> Void) {
         guard self.initiated else {
             fatalError("LiveChatManager methods called before properly initiated.")
@@ -103,6 +120,9 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         }
     }
 
+    /// Login with previous registered user
+    ///
+    /// - Parameter completion: completion callback
     public func login(completion: @escaping () -> Void) {
         guard self.initiated else {
             fatalError("LiveChatManager methods called before properly initiated.")
@@ -115,6 +135,9 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         }
     }
 
+    /// After user is registrated or logged in, get the actual `ChatViewController` to start conversation
+    ///
+    /// - Returns: a `ChatViewController` initiated with livechat settings
     public func getLiveChatViewController() -> ChatViewController? {
         guard self.loggedIn else {
             fatalError("LiveChatManager methods called before properly logged in.")
