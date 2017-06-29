@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  SupportFormViewController.swift
 //  SDKExample
 //
 //  Created by Lucas Woo on 5/17/17.
@@ -9,7 +9,7 @@
 import UIKit
 import RocketChat
 
-class ViewController: UIViewController {
+class SupportFormViewController: UIViewController {
 
     @IBOutlet weak var serverAddrTextField: UITextField!
     @IBOutlet weak var emailTextField: UITextField!
@@ -55,7 +55,7 @@ class ViewController: UIViewController {
                         guard let controller = livechatManager.getLiveChatViewController() else {
                             return
                         }
-                        self.present(controller, animated: true, completion: nil)
+                        self.navigationController?.pushViewController(controller, animated: true)
                     }
                 }
             }
