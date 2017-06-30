@@ -68,7 +68,7 @@ final class ChatMessageCell: UICollectionViewCell, MessageTextCacheManagerInject
         var total = UILabel.heightForView(
             messageTextCacheManager.message(for: message)?.string ?? "",
             font: UIFont.systemFont(ofSize: 15),
-            width: fullWidth - 60
+            width: fullWidth - 62
         ) + 35
 
         for url in message.urls {
