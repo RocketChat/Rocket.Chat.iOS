@@ -99,13 +99,13 @@
                                 <rect key="frame" x="292" y="618" width="51" height="31"/>
                             </switch>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bKa-yM-ja2">
-                                <rect key="frame" x="38" y="179" width="300" height="310"/>
+                                <rect key="frame" x="38" y="191" width="300" height="286"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Server Address" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="oM6-cd-6xM">
-                                        <rect key="frame" x="19.5" y="18" width="261" height="28"/>
+                                        <rect key="frame" x="19.5" y="18" width="261" height="36"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="28" id="3dH-IH-2O0"/>
+                                            <constraint firstAttribute="height" constant="36" id="3dH-IH-2O0"/>
                                         </constraints>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -115,14 +115,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zt9-xh-raP">
-                                        <rect key="frame" x="19.5" y="62" width="261" height="1"/>
+                                        <rect key="frame" x="19.5" y="58" width="261" height="1"/>
                                         <color key="backgroundColor" red="0.76078431369999999" green="0.76078431369999999" blue="0.76078431369999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="itu-o2-fri"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jrD-Ev-GLK">
-                                        <rect key="frame" x="19.5" y="78" width="261" height="28"/>
+                                        <rect key="frame" x="19.5" y="70" width="261" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" keyboardType="emailAddress" returnKeyType="next"/>
@@ -131,14 +131,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jGJ-aE-kkJ">
-                                        <rect key="frame" x="19.5" y="122" width="261" height="1"/>
+                                        <rect key="frame" x="19.5" y="110" width="261" height="1"/>
                                         <color key="backgroundColor" red="0.76078431369999999" green="0.76078431369999999" blue="0.76078431369999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="p2Z-fu-xQf"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Name" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lRe-Pc-iAw">
-                                        <rect key="frame" x="19.5" y="138" width="261" height="28"/>
+                                        <rect key="frame" x="19.5" y="122" width="261" height="36"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
@@ -147,14 +147,14 @@
                                         </connections>
                                     </textField>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jLb-s2-YjC">
-                                        <rect key="frame" x="19.5" y="182" width="261" height="1"/>
+                                        <rect key="frame" x="19.5" y="162" width="261" height="1"/>
                                         <color key="backgroundColor" red="0.76078431369999999" green="0.76078431369999999" blue="0.76078431369999999" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="BuC-Le-Tff"/>
                                         </constraints>
                                     </view>
                                     <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="bottom" text="Hello from SDKExample" placeholder="Message" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="OS1-Sr-RaD">
-                                        <rect key="frame" x="19.5" y="198" width="261" height="64"/>
+                                        <rect key="frame" x="19.5" y="174" width="261" height="64"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="64" id="QuE-Bi-6lT"/>
                                         </constraints>
@@ -166,7 +166,7 @@
                                         </connections>
                                     </textField>
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="RYY-EL-OXD">
-                                        <rect key="frame" x="260" y="270" width="20" height="20"/>
+                                        <rect key="frame" x="260" y="246" width="20" height="20"/>
                                     </activityIndicatorView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -175,20 +175,20 @@
                                     <constraint firstItem="jGJ-aE-kkJ" firstAttribute="width" secondItem="Zt9-xh-raP" secondAttribute="width" id="6Dx-kh-aK0"/>
                                     <constraint firstItem="oM6-cd-6xM" firstAttribute="width" secondItem="bKa-yM-ja2" secondAttribute="width" multiplier="0.87" id="7Nt-t3-mKV"/>
                                     <constraint firstItem="jGJ-aE-kkJ" firstAttribute="leading" secondItem="Zt9-xh-raP" secondAttribute="leading" id="7d8-Yu-Esu"/>
-                                    <constraint firstItem="jrD-Ev-GLK" firstAttribute="top" secondItem="oM6-cd-6xM" secondAttribute="bottom" constant="32" id="7uZ-aj-gF1"/>
-                                    <constraint firstItem="jGJ-aE-kkJ" firstAttribute="top" secondItem="jrD-Ev-GLK" secondAttribute="bottom" constant="16" id="87w-Tx-o4g"/>
-                                    <constraint firstItem="Zt9-xh-raP" firstAttribute="top" secondItem="oM6-cd-6xM" secondAttribute="bottom" constant="16" id="8jq-ao-DgN"/>
+                                    <constraint firstItem="jrD-Ev-GLK" firstAttribute="top" secondItem="oM6-cd-6xM" secondAttribute="bottom" constant="16" id="7uZ-aj-gF1"/>
+                                    <constraint firstItem="jGJ-aE-kkJ" firstAttribute="top" secondItem="jrD-Ev-GLK" secondAttribute="bottom" constant="4" id="87w-Tx-o4g"/>
+                                    <constraint firstItem="Zt9-xh-raP" firstAttribute="top" secondItem="oM6-cd-6xM" secondAttribute="bottom" constant="4" id="8jq-ao-DgN"/>
                                     <constraint firstItem="jrD-Ev-GLK" firstAttribute="centerX" secondItem="oM6-cd-6xM" secondAttribute="centerX" id="B64-yt-RjK"/>
                                     <constraint firstItem="jrD-Ev-GLK" firstAttribute="leading" secondItem="oM6-cd-6xM" secondAttribute="leading" id="Btg-WB-M1I"/>
                                     <constraint firstItem="oM6-cd-6xM" firstAttribute="baseline" secondItem="lRe-Pc-iAw" secondAttribute="baseline" id="CGA-hN-wqf"/>
                                     <constraint firstItem="oM6-cd-6xM" firstAttribute="top" secondItem="bKa-yM-ja2" secondAttribute="top" constant="18" id="E94-d0-nqe"/>
                                     <constraint firstItem="oM6-cd-6xM" firstAttribute="leading" secondItem="lRe-Pc-iAw" secondAttribute="leading" id="NIN-pP-1km"/>
-                                    <constraint firstItem="OS1-Sr-RaD" firstAttribute="top" secondItem="lRe-Pc-iAw" secondAttribute="bottom" constant="32" id="Nb8-QO-5Iw"/>
+                                    <constraint firstItem="OS1-Sr-RaD" firstAttribute="top" secondItem="lRe-Pc-iAw" secondAttribute="bottom" constant="16" id="Nb8-QO-5Iw"/>
                                     <constraint firstItem="OS1-Sr-RaD" firstAttribute="width" secondItem="oM6-cd-6xM" secondAttribute="width" id="S01-iM-tAs"/>
                                     <constraint firstItem="jrD-Ev-GLK" firstAttribute="width" secondItem="oM6-cd-6xM" secondAttribute="width" id="SEe-FH-eGR"/>
                                     <constraint firstItem="oM6-cd-6xM" firstAttribute="centerX" secondItem="bKa-yM-ja2" secondAttribute="centerX" id="SVl-2I-RbA"/>
                                     <constraint firstItem="Zt9-xh-raP" firstAttribute="centerX" secondItem="bKa-yM-ja2" secondAttribute="centerX" id="Sf8-MP-pMG"/>
-                                    <constraint firstItem="jLb-s2-YjC" firstAttribute="top" secondItem="lRe-Pc-iAw" secondAttribute="bottom" constant="16" id="Xe8-Rd-fau"/>
+                                    <constraint firstItem="jLb-s2-YjC" firstAttribute="top" secondItem="lRe-Pc-iAw" secondAttribute="bottom" constant="4" id="Xe8-Rd-fau"/>
                                     <constraint firstItem="jrD-Ev-GLK" firstAttribute="height" secondItem="oM6-cd-6xM" secondAttribute="height" id="dho-l6-diq"/>
                                     <constraint firstItem="RYY-EL-OXD" firstAttribute="top" secondItem="OS1-Sr-RaD" secondAttribute="bottom" constant="8" id="i9X-hp-lSx"/>
                                     <constraint firstItem="Zt9-xh-raP" firstAttribute="width" secondItem="bKa-yM-ja2" secondAttribute="width" multiplier="0.87" id="iZ8-rT-5O6"/>
@@ -196,7 +196,7 @@
                                     <constraint firstItem="jLb-s2-YjC" firstAttribute="leading" secondItem="Zt9-xh-raP" secondAttribute="leading" id="jFu-o9-HQ0"/>
                                     <constraint firstItem="lRe-Pc-iAw" firstAttribute="width" secondItem="oM6-cd-6xM" secondAttribute="width" id="mgM-Qa-4Nx"/>
                                     <constraint firstItem="RYY-EL-OXD" firstAttribute="trailing" secondItem="OS1-Sr-RaD" secondAttribute="trailing" id="qXs-SD-pYD"/>
-                                    <constraint firstItem="lRe-Pc-iAw" firstAttribute="top" secondItem="jrD-Ev-GLK" secondAttribute="bottom" constant="32" id="sOd-dm-8K7"/>
+                                    <constraint firstItem="lRe-Pc-iAw" firstAttribute="top" secondItem="jrD-Ev-GLK" secondAttribute="bottom" constant="16" id="sOd-dm-8K7"/>
                                     <constraint firstItem="jLb-s2-YjC" firstAttribute="width" secondItem="Zt9-xh-raP" secondAttribute="width" id="t0y-mf-Ylq"/>
                                     <constraint firstItem="oM6-cd-6xM" firstAttribute="leading" secondItem="OS1-Sr-RaD" secondAttribute="leading" id="wLm-29-glT"/>
                                 </constraints>
