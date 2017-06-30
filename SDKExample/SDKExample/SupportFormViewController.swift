@@ -16,6 +16,7 @@ class SupportFormViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var messageTextField: UITextField!
     @IBOutlet weak var securedSwitch: UISwitch!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +29,12 @@ class SupportFormViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    @IBAction func didTouchUpInsideLoginButton(_ sender: UIButton) {
+    @IBAction func didTouchOutside(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+
+    
+    func presentLivechat() {
         guard let serverAddr = serverAddrTextField.text,
             let email = emailTextField.text,
             let name = nameTextField.text,
@@ -37,6 +43,7 @@ class SupportFormViewController: UIViewController {
             return
         }
         let secured = securedSwitch.isOn
+        activityIndicator.startAnimating()
 
         RocketChat.configure(withServerURL: URL(string: serverAddr)!, secured: secured) {
             let livechatManager = RocketChat.injectionContainer.livechatManager
@@ -46,12 +53,14 @@ class SupportFormViewController: UIViewController {
                     let action = UIAlertAction(title: "OK", style: .default, handler: nil)
                     alert.addAction(action)
                     DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
                         self.present(alert, animated: true, completion: nil)
                     }
                     return
                 }
                 livechatManager.registerGuestAndLogin(withEmail: email, name: name, toDepartment: department, message: message) {
                     DispatchQueue.main.async {
+                        self.activityIndicator.stopAnimating()
                         guard let controller = livechatManager.getLiveChatViewController() else {
                             return
                         }
@@ -61,6 +70,18 @@ class SupportFormViewController: UIViewController {
             }
         }
     }
+}
 
+extension SupportFormViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let nextTag = textField.tag + 1
+        if let nextResponder = textField.superview?.viewWithTag(nextTag) {
+            nextResponder.becomeFirstResponder()
+        } else {
+            textField.resignFirstResponder()
+            presentLivechat()
+        }
+        return false
+    }
 }
 
