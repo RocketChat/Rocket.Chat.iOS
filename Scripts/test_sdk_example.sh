@@ -1,6 +1,5 @@
 #!/bin/bash
 
-swiftlint
 xcodebuild clean test \
     -workspace ./SDKExample/SDKExample.xcworkspace \
     -scheme SDKExample \

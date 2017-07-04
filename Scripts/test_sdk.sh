@@ -1,6 +1,5 @@
 #!/bin/bash
 
-swiftlint
 xcodebuild clean test \
     -workspace Rocket.Chat.xcworkspace \
     -scheme Rocket.Chat.SDK \
