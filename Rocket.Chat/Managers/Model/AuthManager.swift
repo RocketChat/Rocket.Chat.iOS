@@ -45,32 +45,32 @@ struct AuthManager {
         defaults.set(auth.serverURL, forKey: AuthManagerPersistKeys.serverURL)
         defaults.set(auth.userId, forKey: AuthManagerPersistKeys.userId)
     }
-    
+
     static func recoverAuthIfNeeded() {
         if AuthManager.isAuthenticated() != nil {
             return
         }
-        
+
         guard
             let token = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.token),
             let serverURL = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.serverURL),
             let userId = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.userId) else {
                 return
         }
-        
+
         Realm.executeOnMainThread({ (realm) in
             // Clear database
             realm.deleteAll()
-            
+
             let auth = Auth()
             auth.lastSubscriptionFetch = nil
             auth.lastAccess = Date()
             auth.serverURL = serverURL
             auth.token = token
             auth.userId = userId
-            
+
             PushManager.updatePushToken()
-            
+
             realm.add(auth)
         })
     }
@@ -261,6 +261,11 @@ extension AuthManager {
         SocketManager.disconnect { (_, _) in
             SocketManager.clear()
             GIDSignIn.sharedInstance().signOut()
+
+            let defaults = UserDefaults.standard
+            defaults.removeObject(forKey: AuthManagerPersistKeys.token)
+            defaults.removeObject(forKey: AuthManagerPersistKeys.serverURL)
+            defaults.removeObject(forKey: AuthManagerPersistKeys.userId)
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
