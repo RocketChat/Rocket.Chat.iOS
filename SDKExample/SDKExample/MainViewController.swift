@@ -50,6 +50,7 @@ class MainViewController: UIViewController {
         activityIndicator.startAnimating()
         RocketChat.configure(withServerURL: serverUrl, secured: secured) {
             RocketChat.livechat().initiate {
+                self.activityIndicator.stopAnimating()
                 _ = RocketChat.livechat().presentSupportViewController()
             }
         }

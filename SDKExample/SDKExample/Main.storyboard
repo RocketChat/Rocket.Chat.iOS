@@ -89,7 +89,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
-                        <color key="backgroundColor" cocoaTouchSystemColor="lightTextColor"/>
+                        <color key="backgroundColor" white="1" alpha="0.95363334760273977" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Hds-nG-SGv" firstAttribute="top" secondItem="Hqf-94-J8Y" secondAttribute="bottom" constant="20" id="034-8F-ItH"/>
                             <constraint firstItem="naq-bc-xuf" firstAttribute="centerX" secondItem="fz8-HZ-Jja" secondAttribute="centerX" id="4jT-XE-gfe"/>

@@ -23,9 +23,9 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" showsSelectionIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="drl-O6-wxy">
-                                <rect key="frame" x="0.0" y="121.5" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="99.5" width="375" height="72"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="k8p-Ch-RQK"/>
+                                    <constraint firstAttribute="height" constant="72" id="k8p-Ch-RQK"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="dataSource" destination="e22-sB-Pwi" id="lVG-lA-KQ7"/>
