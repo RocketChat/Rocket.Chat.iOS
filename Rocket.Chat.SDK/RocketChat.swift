@@ -27,7 +27,7 @@ public final class RocketChat {
         Launcher().prepareToLaunch(with: nil)
         injectionContainer.socketManager.connect(socketURL) { (_, _) in
             self.injectionContainer.authManager.updatePublicSettings(nil) { _ in
-                DispatchQueue.global(qos: .background).async(execute: completion)
+                DispatchQueue.main.async(execute: completion)
             }
         }
     }

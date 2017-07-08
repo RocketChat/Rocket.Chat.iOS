@@ -57,6 +57,8 @@
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
 		925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */; };
 		925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */; };
+		A0000CA71F0D2C4000BE1BFA /* Support.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0000CA51F0D2C4000BE1BFA /* Support.storyboard */; };
+		A0000CA91F0D2C8B00BE1BFA /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000CA81F0D2C8B00BE1BFA /* SupportViewController.swift */; };
 		A00BA5FA1EDDB0740090874D /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BA5F91EDDB0740090874D /* Department.swift */; };
 		A00BA5FE1EDDB31A0090874D /* LiveChatSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BA5FD1EDDB31A0090874D /* LiveChatSubscriptionManager.swift */; };
 		A01074DD1EF57AB10066D3F3 /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074DC1EF57AB10066D3F3 /* LauncherProtocol.swift */; };
@@ -397,6 +399,8 @@
 		925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		952D82B61B438F91DDE91709 /* Pods-Rocket.ChatUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatUITests/Pods-Rocket.ChatUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A0000CA51F0D2C4000BE1BFA /* Support.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Support.storyboard; sourceTree = "<group>"; };
+		A0000CA81F0D2C8B00BE1BFA /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		A00BA5F91EDDB0740090874D /* Department.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
 		A00BA5FD1EDDB31A0090874D /* LiveChatSubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveChatSubscriptionManager.swift; sourceTree = "<group>"; };
 		A01074DC1EF57AB10066D3F3 /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
@@ -849,6 +853,14 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		A0000CA41F0D2C1C00BE1BFA /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				A0000CA51F0D2C4000BE1BFA /* Support.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
 		A00BA5F81EDDB0560090874D /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -889,6 +901,7 @@
 		A032EF711EE1A3BC00A9DA78 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				A0000CA81F0D2C8B00BE1BFA /* SupportViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1044,6 +1057,7 @@
 				A0DE0CC81EDEF96000C4FA34 /* Extensions */,
 				A00BA5F81EDDB0560090874D /* Models */,
 				A07F172D1ECD92EA00A1F199 /* Managers */,
+				A0000CA41F0D2C1C00BE1BFA /* Storyboards */,
 				A032EF711EE1A3BC00A9DA78 /* Controllers */,
 				A030A1361ECC9CA800F71C6F /* Supporting Files */,
 				A0918BCC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h */,
@@ -1531,6 +1545,7 @@
 			files = (
 				A07F17891ECDC18700A1F199 /* AutocompleteCell.xib in Resources */,
 				A07F178D1ECDC18700A1F199 /* ChatMessageCell.xib in Resources */,
+				A0000CA71F0D2C4000BE1BFA /* Support.storyboard in Resources */,
 				A07F179D1ECDC18700A1F199 /* ChatMessageURLView.xib in Resources */,
 				A07F17321ECDBE9400A1F199 /* Chatting.storyboard in Resources */,
 				A06C6F501EDD8E3F00543A5D /* ChatHeaderViewStatus.xib in Resources */,
@@ -1990,6 +2005,7 @@
 				A00BA5FE1EDDB31A0090874D /* LiveChatSubscriptionManager.swift in Sources */,
 				A0559E291ECC430900E83220 /* Mention.swift in Sources */,
 				A0D128C31ED175AC0088B240 /* Injected.swift in Sources */,
+				A0000CA91F0D2C8B00BE1BFA /* SupportViewController.swift in Sources */,
 				A0559E2E1ECC430E00E83220 /* UserManager.swift in Sources */,
 				A01074E21EF57C0C0066D3F3 /* PersistencyCoordinator.swift in Sources */,
 				A0559E121ECC42FA00E83220 /* DataExtension.swift in Sources */,
