@@ -89,11 +89,11 @@ final class ChatMessageTextView: UIView {
         }
 
         let fullWidth = UIScreen.main.bounds.size.width
-        return max(self.defaultHeight, UILabel.heightForView(
+        return max(self.defaultHeight, UILabel.sizeForView(
             text ?? "",
             font: UIFont.systemFont(ofSize: 14),
             width: fullWidth - 60
-        ) + 10)
+        ).height + 10)
     }
 
     // MARK: Actions

@@ -164,6 +164,7 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         guard let subscription = Subscription.find(rid: room, realm: realm) else { return nil }
         chatViewController?.subscription = subscription
         chatViewController?.leftButton.setImage(nil, for: .normal)
+        chatViewController?.messageCellStyle = .bubble
         return chatViewController
     }
 

@@ -10,6 +10,11 @@ import RealmSwift
 import SlackTextViewController
 import URBMediaFocusViewController
 
+enum MessageCellStyle {
+    case normal
+    case bubble
+}
+
 // swiftlint:disable file_length type_body_length
 public class ChatViewController: SLKTextViewController, AuthManagerInjected, SocketManagerInjected, SubscriptionManagerInjected, MessageManagerInjected {
 
@@ -45,6 +50,11 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         didSet {
             updateSubscriptionInfo()
             markAsRead()
+        }
+    }
+    var messageCellStyle: MessageCellStyle = .normal {
+        didSet {
+            collectionView?.reloadData()
         }
     }
 
@@ -185,6 +195,15 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
             nibName: "ChatMessageDaySeparator",
             bundle: Bundle.rocketChat
         ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
+
+        collectionView?.register(UINib(
+            nibName: "ReceivedMessageBubble",
+            bundle: Bundle.rocketChat
+        ), forCellWithReuseIdentifier: ChatMessageBubbleCell.receivedIdentifier)
+        collectionView?.register(UINib(
+            nibName: "SentMessageBubble",
+            bundle: Bundle.rocketChat
+        ), forCellWithReuseIdentifier: ChatMessageBubbleCell.sentIdendifier)
 
         autoCompletionView.register(UINib(
             nibName: "AutocompleteCell",
@@ -527,21 +546,41 @@ extension ChatViewController {
     // MARK: Cells
 
     func cellForMessage(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView?.dequeueReusableCell(
-            withReuseIdentifier: ChatMessageCell.identifier,
-            for: indexPath
-            ) as? ChatMessageCell else {
-                return UICollectionViewCell()
+        switch messageCellStyle {
+        case .normal:
+            guard let cell = collectionView?.dequeueReusableCell(
+                withReuseIdentifier: ChatMessageCell.identifier,
+                for: indexPath
+                ) as? ChatMessageCell else {
+                    return UICollectionViewCell()
+            }
+
+            cell.injectionContainer = self.injectionContainer
+            cell.delegate = self
+
+            if let message = obj.message {
+                cell.message = message
+            }
+            
+            return cell
+        case .bubble:
+            guard let message = obj.message else { return UICollectionViewCell() }
+            if message.user == authManager.currentUser() {
+                guard let cell = collectionView?.dequeueReusableCell(withReuseIdentifier: ChatMessageBubbleCell.sentIdendifier, for: indexPath) as? ChatMessageBubbleCell else { return UICollectionViewCell() }
+                cell.injectionContainer = self.injectionContainer
+                cell.delegate = self
+                cell.message = message
+                cell.type = .sentBubble
+                return cell
+            } else {
+                guard let cell = collectionView?.dequeueReusableCell(withReuseIdentifier: ChatMessageBubbleCell.receivedIdentifier, for: indexPath) as? ChatMessageBubbleCell else { return UICollectionViewCell() }
+                cell.injectionContainer = self.injectionContainer
+                cell.delegate = self
+                cell.message = message
+                cell.type = .receivedBubble
+                return cell
+            }
         }
-
-        cell.injectionContainer = self.injectionContainer
-        cell.delegate = self
-
-        if let message = obj.message {
-            cell.message = message
-        }
-
-        return cell
     }
 
     func cellForDaySeparator(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
@@ -569,8 +608,15 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCac
         let fullWidth = UIScreen.main.bounds.size.width
 
         if let message = dataController.itemAt(indexPath)?.message {
-            let height = ChatMessageCell.cellMediaHeightFor(message: message, messageTextCacheManager: messageTextCacheManager)
-            return CGSize(width: fullWidth, height: height)
+            switch messageCellStyle {
+            case .normal:
+                let height = ChatMessageCell.cellMediaHeightFor(message: message, messageTextCacheManager: messageTextCacheManager)
+                return CGSize(width: fullWidth, height: height)
+            case .bubble:
+                let style: MessageContainerStyle = message.user == authManager.currentUser() ? .sentBubble : .receivedBubble
+                let height = ChatMessageBubbleCell.cellSizeFor(message: message, style: style, messageTextCacheManager: messageTextCacheManager).height
+                return CGSize(width: fullWidth, height: height)
+            }
         }
 
         return CGSize(width: fullWidth, height: 40)

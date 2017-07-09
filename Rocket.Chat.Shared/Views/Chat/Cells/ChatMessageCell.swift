@@ -65,11 +65,11 @@ final class ChatMessageCell: UICollectionViewCell, MessageTextCacheManagerInject
 
     static func cellMediaHeightFor(message: Message, grouped: Bool = true, messageTextCacheManager: MessageTextCacheManager) -> CGFloat {
         let fullWidth = UIScreen.main.bounds.size.width
-        var total = UILabel.heightForView(
+        var total = UILabel.sizeForView(
             messageTextCacheManager.message(for: message)?.string ?? "",
             font: UIFont.systemFont(ofSize: 15),
             width: fullWidth - 62
-        ) + 35
+        ).height + 35
 
         for url in message.urls {
             guard url.isValid() else { continue }
