@@ -23,7 +23,7 @@
                         <rect key="frame" x="12" y="5" width="270" height="190"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWp-AR-c2u">
-                                <rect key="frame" x="13.5" y="9.5" width="243" height="171"/>
+                                <rect key="frame" x="13.5" y="23" width="243" height="152"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -33,9 +33,9 @@
                         <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="oWp-AR-c2u" firstAttribute="centerX" secondItem="BdH-WH-uVL" secondAttribute="centerX" id="Fmk-IF-mbE"/>
-                            <constraint firstItem="oWp-AR-c2u" firstAttribute="height" secondItem="BdH-WH-uVL" secondAttribute="height" multiplier="0.9" id="VIb-CL-o0a"/>
+                            <constraint firstItem="oWp-AR-c2u" firstAttribute="height" secondItem="BdH-WH-uVL" secondAttribute="height" multiplier="0.8" id="VIb-CL-o0a"/>
                             <constraint firstItem="oWp-AR-c2u" firstAttribute="width" secondItem="BdH-WH-uVL" secondAttribute="width" multiplier="0.9" id="hPe-Ub-pJV"/>
-                            <constraint firstItem="oWp-AR-c2u" firstAttribute="centerY" secondItem="BdH-WH-uVL" secondAttribute="centerY" id="prC-yv-Hea"/>
+                            <constraint firstItem="oWp-AR-c2u" firstAttribute="centerY" secondItem="BdH-WH-uVL" secondAttribute="centerY" constant="4" id="prC-yv-Hea"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3p-EV-Yry">

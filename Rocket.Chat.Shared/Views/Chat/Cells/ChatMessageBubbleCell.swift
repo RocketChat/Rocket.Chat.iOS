@@ -46,9 +46,9 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
         let size = UILabel.sizeForView(
             messageTextCacheManager.message(for: message, style: style)?.string ?? "",
             font: UIFont.systemFont(ofSize: 15),
-            width: fullWidth * 0.72 * 0.9
+            width: fullWidth * 0.72 * 0.8
             )
-        var total = size.height / 0.72
+        var total = size.height / 0.72 / 0.8
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -113,10 +113,6 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
         }
 
         if let text = messageTextCacheManager.message(for: message, style: type) {
-            if message.temporary {
-                text.setFontColor(MessageTextFontAttributes.systemFontColor)
-            }
-
             messageTextView.attributedText = text
         }
         

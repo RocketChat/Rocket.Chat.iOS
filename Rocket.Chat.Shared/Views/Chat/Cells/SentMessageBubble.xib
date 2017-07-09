@@ -23,7 +23,7 @@
                         <rect key="frame" x="93" y="10" width="270" height="180"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tIC-Uy-Qwp">
-                                <rect key="frame" x="14" y="9" width="243" height="162"/>
+                                <rect key="frame" x="14" y="22" width="243" height="144"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <attributedString key="attributedText">
                                     <fragment>
@@ -40,10 +40,10 @@
                         </subviews>
                         <color key="backgroundColor" red="0.13725490196078433" green="0.55686274509803924" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="tIC-Uy-Qwp" firstAttribute="height" secondItem="lbv-A9-cfO" secondAttribute="height" multiplier="0.9" id="NFV-q2-K1V"/>
+                            <constraint firstItem="tIC-Uy-Qwp" firstAttribute="height" secondItem="lbv-A9-cfO" secondAttribute="height" multiplier="0.8" id="NFV-q2-K1V"/>
                             <constraint firstItem="tIC-Uy-Qwp" firstAttribute="width" secondItem="lbv-A9-cfO" secondAttribute="width" multiplier="0.9" id="cRj-Cx-TaZ"/>
                             <constraint firstItem="tIC-Uy-Qwp" firstAttribute="centerX" secondItem="lbv-A9-cfO" secondAttribute="centerX" id="dxg-Vv-uQD"/>
-                            <constraint firstItem="tIC-Uy-Qwp" firstAttribute="centerY" secondItem="lbv-A9-cfO" secondAttribute="centerY" id="fug-ig-QpQ"/>
+                            <constraint firstItem="tIC-Uy-Qwp" firstAttribute="centerY" secondItem="lbv-A9-cfO" secondAttribute="centerY" constant="4" id="fug-ig-QpQ"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7ak-bQ-0fi">
