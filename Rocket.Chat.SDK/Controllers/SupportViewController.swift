@@ -61,11 +61,13 @@ public class SupportViewController: UIViewController, LiveChatManagerInjected {
         // TODO: prepare and wait for SDK configuration to finish
         guard let email = emailField.text else {
             let alert = UIAlertController(title: "Email is required", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Confirm", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }
         guard let name = nameField.text else {
             let alert = UIAlertController(title: "Name is required", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Confirm", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }
@@ -74,11 +76,13 @@ public class SupportViewController: UIViewController, LiveChatManagerInjected {
         }
         guard let department = department else {
             let alert = UIAlertController(title: "No department available", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Confirm", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }
         guard let message = initialMessageField.text else {
             let alert = UIAlertController(title: "Initial message is required", message: nil, preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Confirm", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }
