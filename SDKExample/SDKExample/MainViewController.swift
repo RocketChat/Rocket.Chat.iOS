@@ -7,16 +7,19 @@
 //
 
 import UIKit
+import RocketChat
 
 class MainViewController: UIViewController {
-    @IBOutlet weak var supportButton: UIView!
+
+    @IBOutlet weak var serverAddressField: UITextField!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var secureSwitch: UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
 
-        supportButton.layer.cornerRadius = 24
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,7 +27,6 @@ class MainViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -32,6 +34,32 @@ class MainViewController: UIViewController {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
+    @IBAction func didTouchSupportButton(_ sender: Any) {
+        presentSupportViewController()
+    }
+
+    func presentSupportViewController() {
+        guard let serverAddr = serverAddressField.text else { return }
+        guard let serverUrl = URL(string: serverAddr) else {
+            let alert = UIAlertController(title: "Validation Error", message: "Server Address is not a valid URL", preferredStyle: .alert)
+            present(alert, animated: true, completion: nil)
+            return
+        }
+        let secured = secureSwitch.isOn
+        activityIndicator.startAnimating()
+        RocketChat.configure(withServerURL: serverUrl, secured: secured) {
+            RocketChat.livechat().initiate {
+                self.activityIndicator.stopAnimating()
+                _ = RocketChat.livechat().presentSupportViewController()
+            }
+        }
+    }
+}
+
+extension MainViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        presentSupportViewController()
+        return false
+    }
 }

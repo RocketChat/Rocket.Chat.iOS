@@ -10,7 +10,6 @@
 		5DF200C8C8CB4D7C8F1BEC41 /* Pods_SDKExampleTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5B39C124C6F192C45CC08A2 /* Pods_SDKExampleTests.framework */; };
 		742A669648906DC2A04E9B7C /* Pods_SDKExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6BEFC061EAA1A14B11EC3F85 /* Pods_SDKExample.framework */; };
 		A0559DC01ECC23E400E83220 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DBF1ECC23E400E83220 /* AppDelegate.swift */; };
-		A0559DC21ECC23E400E83220 /* SupportFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DC11ECC23E400E83220 /* SupportFormViewController.swift */; };
 		A0559DC71ECC23E400E83220 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0559DC61ECC23E400E83220 /* Assets.xcassets */; };
 		A0559DCA1ECC23E400E83220 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0559DC81ECC23E400E83220 /* LaunchScreen.storyboard */; };
 		A0559DD51ECC23E400E83220 /* SDKExampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0559DD41ECC23E400E83220 /* SDKExampleTests.swift */; };
@@ -44,7 +43,6 @@
 		84B61EB19A37EC59FE2BA892 /* Pods-SDKExampleTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SDKExampleTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-SDKExampleTests/Pods-SDKExampleTests.release.xcconfig"; sourceTree = "<group>"; };
 		A0559DBC1ECC23E400E83220 /* SDKExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SDKExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0559DBF1ECC23E400E83220 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		A0559DC11ECC23E400E83220 /* SupportFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SupportFormViewController.swift; sourceTree = "<group>"; };
 		A0559DC61ECC23E400E83220 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		A0559DC91ECC23E400E83220 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A0559DCB1ECC23E400E83220 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -140,7 +138,6 @@
 			isa = PBXGroup;
 			children = (
 				A0559DBF1ECC23E400E83220 /* AppDelegate.swift */,
-				A0559DC11ECC23E400E83220 /* SupportFormViewController.swift */,
 				A0CE85D41F05430F00DCB095 /* MainViewController.swift */,
 				A0CE85D21F053B1800DCB095 /* Main.storyboard */,
 				A0559DC61ECC23E400E83220 /* Assets.xcassets */,
@@ -450,7 +447,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0CE85D51F05430F00DCB095 /* MainViewController.swift in Sources */,
-				A0559DC21ECC23E400E83220 /* SupportFormViewController.swift in Sources */,
 				A0559DC01ECC23E400E83220 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

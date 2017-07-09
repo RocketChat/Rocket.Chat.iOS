@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 /// A manager that manages all message text rendering cache
 public class MessageTextCacheManager {
@@ -26,19 +26,26 @@ public class MessageTextCacheManager {
         cache.removeObject(forKey: cachedKey(for: identifier))
     }
 
-    @discardableResult func update(for message: Message) -> NSMutableAttributedString? {
+    @discardableResult func update(for message: Message, style: MessageContainerStyle = .normal) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
         let resultText: NSMutableAttributedString
         let key = cachedKey(for: identifier)
+        var attributes: [String: Any] = [:]
 
-        let text = NSMutableAttributedString(string: message.textNormalized())
+        if style == .sentBubble {
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .right
+            attributes[NSParagraphStyleAttributeName] = paragraphStyle
+        }
+
+        let text = NSMutableAttributedString(string: message.textNormalized(), attributes: attributes)
 
         if message.isSystemMessage() {
             text.setFont(MessageTextFontAttributes.italicFont)
             text.setFontColor(MessageTextFontAttributes.systemFontColor)
         } else {
             text.setFont(MessageTextFontAttributes.defaultFont)
-            text.setFontColor(MessageTextFontAttributes.defaultFontColor)
+            text.setFontColor(MessageTextFontAttributes.fontColor(for: style))
         }
 
         resultText = NSMutableAttributedString(attributedString: text.transformMarkdown())
@@ -47,7 +54,7 @@ public class MessageTextCacheManager {
         return resultText
     }
 
-    func message(for message: Message) -> NSMutableAttributedString? {
+    func message(for message: Message, style: MessageContainerStyle = .normal) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
         let resultText: NSAttributedString
         let key = cachedKey(for: identifier)
@@ -55,7 +62,7 @@ public class MessageTextCacheManager {
         if let cachedVersion = cache.object(forKey: key) {
             resultText = cachedVersion
         } else {
-            if let result = update(for: message) {
+            if let result = update(for: message, style: style) {
                 resultText = result
             } else {
                 resultText = NSAttributedString(string: message.text)

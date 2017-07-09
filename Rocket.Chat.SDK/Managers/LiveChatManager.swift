@@ -60,7 +60,7 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
             }
 
             self.initiated = true
-            DispatchQueue.global(qos: .background).async(execute: completion)
+            DispatchQueue.main.async(execute: completion)
         }
     }
 
@@ -114,7 +114,7 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
                     realm?.add(message)
                 }
                 self.subscriptionManager.sendTextMessage(message) { _ in
-                    DispatchQueue.global(qos: .background).async(execute: completion)
+                    DispatchQueue.main.async(execute: completion)
                 }
             }
         }
@@ -131,8 +131,23 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         let params = ["resume": token] as [String : Any]
         authManager.auth(params: params) { _ in
             self.loggedIn = true
-            DispatchQueue.global(qos: .background).async(execute: completion)
+            DispatchQueue.main.async(execute: completion)
         }
+    }
+
+    public func presentSupportViewController() -> SupportViewController {
+        guard let viewController = UIStoryboard(name: "Support", bundle: Bundle.rocketChat).instantiateInitialViewController() as? UINavigationController else {
+            fatalError("Storyboard `Support` not found in bundle `RocketChat`")
+        }
+        guard let supportViewController = viewController.viewControllers.first as? SupportViewController else {
+            fatalError("Unexpected view hierachy")
+        }
+        supportViewController.injectionContainer = injectionContainer
+        supportViewController.room = room
+        DispatchQueue.main.async {
+            UIApplication.shared.delegate?.window??.rootViewController?.present(viewController, animated: true, completion: nil)
+        }
+        return supportViewController
     }
 
     /// After user is registrated or logged in, get the actual `ChatViewController` to start conversation
@@ -148,6 +163,8 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         guard let realm = try? Realm() else { return nil }
         guard let subscription = Subscription.find(rid: room, realm: realm) else { return nil }
         chatViewController?.subscription = subscription
+        chatViewController?.leftButton.setImage(nil, for: .normal)
+        chatViewController?.messageCellStyle = .bubble
         return chatViewController
     }
 
