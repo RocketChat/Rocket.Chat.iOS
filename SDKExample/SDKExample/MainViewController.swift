@@ -43,6 +43,7 @@ class MainViewController: UIViewController {
         guard let serverAddr = serverAddressField.text else { return }
         guard let serverUrl = URL(string: serverAddr) else {
             let alert = UIAlertController(title: "Validation Error", message: "Server Address is not a valid URL", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Confirm", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }
