@@ -45,6 +45,9 @@ class SocketManager {
         sharedInstance.socket = WebSocket(url: url)
         sharedInstance.socket?.delegate = sharedInstance
         sharedInstance.socket?.pongDelegate = sharedInstance
+        sharedInstance.socket?.headers = [
+            "Host": url.host ?? ""
+        ]
 
         sharedInstance.socket?.connect()
     }
