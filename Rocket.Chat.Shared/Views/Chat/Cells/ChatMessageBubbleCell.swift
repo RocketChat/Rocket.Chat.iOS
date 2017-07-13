@@ -8,12 +8,15 @@
 
 import UIKit
 
-
 class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInjected {
 
-    static let minimumHeight = CGFloat(24)
+    static let minimumHeight = 32 + bubbleHeightConstant
     static let receivedIdentifier = "ReceivedMessageBubble"
     static let sentIdendifier = "SentMessageBubble"
+
+    private static let bubbleWidthProportion: CGFloat = 0.72
+    private static let bubbleHeightConstant: CGFloat = 8
+    private static let bubblePadding: CGFloat = 12
 
     weak var longPressGesture: UILongPressGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
@@ -37,7 +40,7 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        bubbleView.layer.cornerRadius = 8
+        bubbleView.layer.cornerRadius = 16
         messageTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
@@ -46,9 +49,9 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
         let size = UILabel.sizeForView(
             messageTextCacheManager.message(for: message, style: style)?.string ?? "",
             font: UIFont.systemFont(ofSize: 15),
-            width: fullWidth * 0.72 * 0.8
+            width: fullWidth * ChatMessageBubbleCell.bubbleWidthProportion - ChatMessageBubbleCell.bubblePadding
             )
-        var total = size.height / 0.72 / 0.8
+        var total = size.height + ChatMessageBubbleCell.bubblePadding - ChatMessageBubbleCell.bubbleHeightConstant
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -71,7 +74,7 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
             }
         }
 
-        return CGSize(width: size.width, height: total)
+        return CGSize(width: size.width, height: total > ChatMessageBubbleCell.minimumHeight ? total : ChatMessageBubbleCell.minimumHeight)
     }
 
     override func prepareForReuse() {
@@ -81,8 +84,8 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        let size = messageTextView.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width * 0.9 * 0.72, height: CGFloat.infinity))
-        let width = size.width / 0.9
+        let size = messageTextView.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width * ChatMessageBubbleCell.bubbleWidthProportion - ChatMessageBubbleCell.bubblePadding, height: CGFloat.infinity))
+        let width = size.width
         if messageTextViewWidthAnchor == nil {
             messageTextViewWidthAnchor = messageTextView.widthAnchor.constraint(equalToConstant: width)
             messageTextViewWidthAnchor?.priority = 500
@@ -114,6 +117,7 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
 
         if let text = messageTextCacheManager.message(for: message, style: type) {
             messageTextView.attributedText = text
+            messageTextView.sizeToFit()
         }
         
         insertGesturesIfNeeded()

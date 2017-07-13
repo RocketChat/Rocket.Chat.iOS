@@ -27,6 +27,11 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        authManager.recoverAuthIfNeeded()
+    }
+    
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -46,6 +51,8 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
         super.viewWillAppear(animated)
 
         if let auth = authManager.isAuthenticated() {
+            authManager.persistAuthInformation(auth)
+
             labelAuthenticationStatus.isHidden = true
             buttonConnect.isHidden = true
             activityIndicator.startAnimating()
@@ -67,7 +74,8 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
                     strongSelf.userManager.userDataChanges()
                     strongSelf.userManager.changes()
                     strongSelf.subscriptionManager.changes(auth)
-                    strongSelf.pushManager.updateUser()
+
+                    self?.pushManager.updateUser()
 
                     // Open chat
                     let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)

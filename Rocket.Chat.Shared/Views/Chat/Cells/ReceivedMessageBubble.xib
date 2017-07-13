@@ -20,10 +20,10 @@
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BdH-WH-uVL" userLabel="BubbleView">
-                        <rect key="frame" x="12" y="5" width="270" height="190"/>
+                        <rect key="frame" x="12" y="4" width="270" height="192"/>
                         <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWp-AR-c2u">
-                                <rect key="frame" x="13.5" y="23" width="243" height="152"/>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWp-AR-c2u">
+                                <rect key="frame" x="6" y="6" width="258" height="180"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -32,14 +32,18 @@
                         </subviews>
                         <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstItem="oWp-AR-c2u" firstAttribute="centerX" secondItem="BdH-WH-uVL" secondAttribute="centerX" id="Fmk-IF-mbE"/>
-                            <constraint firstItem="oWp-AR-c2u" firstAttribute="height" secondItem="BdH-WH-uVL" secondAttribute="height" multiplier="0.8" id="VIb-CL-o0a"/>
-                            <constraint firstItem="oWp-AR-c2u" firstAttribute="width" secondItem="BdH-WH-uVL" secondAttribute="width" multiplier="0.9" id="hPe-Ub-pJV"/>
-                            <constraint firstItem="oWp-AR-c2u" firstAttribute="centerY" secondItem="BdH-WH-uVL" secondAttribute="centerY" constant="4" id="prC-yv-Hea"/>
+                            <constraint firstAttribute="trailing" secondItem="oWp-AR-c2u" secondAttribute="trailing" constant="6" id="4YY-wf-Dtm"/>
+                            <constraint firstItem="oWp-AR-c2u" firstAttribute="top" secondItem="BdH-WH-uVL" secondAttribute="top" constant="6" id="Q4n-ka-uO6"/>
+                            <constraint firstAttribute="bottom" secondItem="oWp-AR-c2u" secondAttribute="bottom" constant="6" id="VBX-z0-G7o"/>
+                            <constraint firstItem="oWp-AR-c2u" firstAttribute="height" secondItem="BdH-WH-uVL" secondAttribute="height" constant="-12" id="VIb-CL-o0a"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="XWH-qS-f6r"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="eJI-TS-7gc"/>
+                            <constraint firstItem="oWp-AR-c2u" firstAttribute="leading" secondItem="BdH-WH-uVL" secondAttribute="leading" constant="6" id="g56-5u-k2q"/>
+                            <constraint firstItem="oWp-AR-c2u" firstAttribute="width" secondItem="BdH-WH-uVL" secondAttribute="width" constant="-12" id="hPe-Ub-pJV"/>
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3p-EV-Yry">
-                        <rect key="frame" x="294" y="184" width="65" height="14.5"/>
+                        <rect key="frame" x="290" y="181.5" width="73" height="14.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
@@ -48,12 +52,12 @@
             </view>
             <constraints>
                 <constraint firstItem="BdH-WH-uVL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="5UU-cp-nKB"/>
-                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="o3p-EV-Yry" secondAttribute="trailing" constant="16" id="6pN-f6-MTg"/>
-                <constraint firstItem="o3p-EV-Yry" firstAttribute="leading" secondItem="BdH-WH-uVL" secondAttribute="trailing" constant="12" id="DM6-fv-OFq"/>
-                <constraint firstItem="o3p-EV-Yry" firstAttribute="baseline" secondItem="BdH-WH-uVL" secondAttribute="baseline" id="Jdn-n3-dNd"/>
+                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="o3p-EV-Yry" secondAttribute="trailing" constant="12" id="6pN-f6-MTg"/>
+                <constraint firstItem="o3p-EV-Yry" firstAttribute="leading" secondItem="BdH-WH-uVL" secondAttribute="trailing" constant="8" id="DM6-fv-OFq"/>
+                <constraint firstItem="o3p-EV-Yry" firstAttribute="bottom" secondItem="BdH-WH-uVL" secondAttribute="bottom" id="EZZ-Fq-tRW"/>
                 <constraint firstItem="BdH-WH-uVL" firstAttribute="width" relation="lessThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.72" id="jDz-SI-LPh"/>
                 <constraint firstItem="BdH-WH-uVL" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="jO8-mF-wEe"/>
-                <constraint firstItem="BdH-WH-uVL" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" multiplier="0.95" id="v3V-em-q7n"/>
+                <constraint firstItem="BdH-WH-uVL" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" constant="-8" id="v3V-em-q7n"/>
             </constraints>
             <size key="customSize" width="409" height="121"/>
             <connections>

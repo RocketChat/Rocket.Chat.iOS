@@ -30,21 +30,14 @@ public class MessageTextCacheManager {
         guard let identifier = message.identifier else { return nil }
         let resultText: NSMutableAttributedString
         let key = cachedKey(for: identifier)
-        var attributes: [String: Any] = [:]
 
-        if style == .sentBubble {
-            let paragraphStyle = NSMutableParagraphStyle()
-            paragraphStyle.alignment = .right
-            attributes[NSParagraphStyleAttributeName] = paragraphStyle
-        }
-
-        let text = NSMutableAttributedString(string: message.textNormalized(), attributes: attributes)
+        let text = NSMutableAttributedString(string: message.textNormalized())
 
         if message.isSystemMessage() {
-            text.setFont(MessageTextFontAttributes.italicFont)
+            text.setFont(MessageTextFontAttributes.font(for: style, fontStyle: .italic))
             text.setFontColor(MessageTextFontAttributes.systemFontColor)
         } else {
-            text.setFont(MessageTextFontAttributes.defaultFont)
+            text.setFont(MessageTextFontAttributes.font(for: style))
             text.setFontColor(MessageTextFontAttributes.fontColor(for: style))
         }
 
