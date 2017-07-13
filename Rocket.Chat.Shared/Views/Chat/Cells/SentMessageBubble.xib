@@ -34,7 +34,7 @@
                         <color key="backgroundColor" red="0.13725490196078433" green="0.55686274509803924" blue="0.96078431372549022" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="4l9-iX-Jp6"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="GJ4-3M-g2Z"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="GJ4-3M-g2Z"/>
                             <constraint firstItem="tIC-Uy-Qwp" firstAttribute="height" secondItem="lbv-A9-cfO" secondAttribute="height" constant="-12" id="NFV-q2-K1V"/>
                             <constraint firstAttribute="bottom" secondItem="tIC-Uy-Qwp" secondAttribute="bottom" constant="6" id="WxL-SB-MKI"/>
                             <constraint firstItem="tIC-Uy-Qwp" firstAttribute="top" secondItem="lbv-A9-cfO" secondAttribute="top" constant="6" id="YqT-uZ-8DF"/>

@@ -34,10 +34,10 @@ public class MessageTextCacheManager {
         let text = NSMutableAttributedString(string: message.textNormalized())
 
         if message.isSystemMessage() {
-            text.setFont(MessageTextFontAttributes.italicFont)
+            text.setFont(MessageTextFontAttributes.font(for: style, fontStyle: .italic))
             text.setFontColor(MessageTextFontAttributes.systemFontColor)
         } else {
-            text.setFont(MessageTextFontAttributes.defaultFont)
+            text.setFont(MessageTextFontAttributes.font(for: style))
             text.setFontColor(MessageTextFontAttributes.fontColor(for: style))
         }
 

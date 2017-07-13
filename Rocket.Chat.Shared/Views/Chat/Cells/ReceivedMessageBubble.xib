@@ -37,7 +37,7 @@
                             <constraint firstAttribute="bottom" secondItem="oWp-AR-c2u" secondAttribute="bottom" constant="6" id="VBX-z0-G7o"/>
                             <constraint firstItem="oWp-AR-c2u" firstAttribute="height" secondItem="BdH-WH-uVL" secondAttribute="height" constant="-12" id="VIb-CL-o0a"/>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="24" id="XWH-qS-f6r"/>
-                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="36" id="eJI-TS-7gc"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="eJI-TS-7gc"/>
                             <constraint firstItem="oWp-AR-c2u" firstAttribute="leading" secondItem="BdH-WH-uVL" secondAttribute="leading" constant="6" id="g56-5u-k2q"/>
                             <constraint firstItem="oWp-AR-c2u" firstAttribute="width" secondItem="BdH-WH-uVL" secondAttribute="width" constant="-12" id="hPe-Ub-pJV"/>
                         </constraints>

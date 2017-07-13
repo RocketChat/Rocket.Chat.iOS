@@ -10,7 +10,7 @@ import UIKit
 
 class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInjected {
 
-    static let minimumHeight = 36 + bubbleHeightConstant
+    static let minimumHeight = 32 + bubbleHeightConstant
     static let receivedIdentifier = "ReceivedMessageBubble"
     static let sentIdendifier = "SentMessageBubble"
 
@@ -40,7 +40,7 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        bubbleView.layer.cornerRadius = 18
+        bubbleView.layer.cornerRadius = 16
         messageTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
