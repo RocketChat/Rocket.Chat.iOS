@@ -75,9 +75,7 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
                     strongSelf.userManager.changes()
                     strongSelf.subscriptionManager.changes(auth)
 
-                    if let userIdentifier = auth.userId {
-                        pushManager.updateUser(userIdentifier)
-                    }
+                    self?.pushManager.updateUser()
 
                     // Open chat
                     let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
