@@ -15,9 +15,10 @@ class OfflineFormViewController: UIViewController, LiveChatManagerInjected {
     @IBOutlet weak var disabledLabel: UILabel!
     @IBOutlet weak var formView: UIView!
 
+    @IBOutlet weak var offlineMessageTextView: UITextView!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var messageTextView: UITextView!
+    @IBOutlet weak var messageField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     override func viewDidLoad() {
@@ -26,9 +27,15 @@ class OfflineFormViewController: UIViewController, LiveChatManagerInjected {
         let leftBarButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissSelf))
         navigationItem.leftBarButtonItem = leftBarButton
 
-        if livechatManager.displayOfflineForm == false {
+        navigationItem.title = livechatManager.offlineTitle
+        if livechatManager.displayOfflineForm {
+            offlineMessageTextView.text = livechatManager.offlineMessage
+            let size = offlineMessageTextView.sizeThatFits(CGSize(width: UIScreen.main.bounds.size.width * 0.8, height: 128))
+            offlineMessageTextView.heightAnchor.constraint(equalToConstant: size.height).isActive = true
+        } else {
             formView.isHidden = true
             disabledLabel.isHidden = false
+            disabledLabel.text = livechatManager.offlineUnavailableMessage
         }
 
     }
@@ -46,7 +53,7 @@ class OfflineFormViewController: UIViewController, LiveChatManagerInjected {
         guard let name = nameField.text else {
             return
         }
-        guard let message = messageTextView.text else {
+        guard let message = messageField.text else {
             return
         }
         activityIndicator.startAnimating()
