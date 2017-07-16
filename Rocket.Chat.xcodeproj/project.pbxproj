@@ -229,6 +229,7 @@
 		A09910861EC75AE600A9FEE8 /* MessageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09910831EC75AE600A9FEE8 /* MessageExtensions.swift */; };
 		A099108F1EC75EAA00A9FEE8 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = A099108A1EC75EAA00A9FEE8 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A09BBEA21ECF146E00FB846D /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09BBEA11ECF146E00FB846D /* Injected.swift */; };
+		A09D74AF1F1B337E00A8AF0D /* OfflineFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09D74AE1F1B337E00A8AF0D /* OfflineFormViewController.swift */; };
 		A0A812251ECDC657000567D7 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A812241ECDC657000567D7 /* UIImageExtension.swift */; };
 		A0A812261ECDC657000567D7 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A812241ECDC657000567D7 /* UIImageExtension.swift */; };
 		A0A812281ECDC684000567D7 /* UIColor+RCColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A812271ECDC684000567D7 /* UIColor+RCColors.swift */; };
@@ -496,6 +497,7 @@
 		A099108D1EC75EAA00A9FEE8 /* iphoneos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.modulemap; sourceTree = "<group>"; };
 		A099108E1EC75EAA00A9FEE8 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
 		A09BBEA11ECF146E00FB846D /* Injected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
+		A09D74AE1F1B337E00A8AF0D /* OfflineFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineFormViewController.swift; sourceTree = "<group>"; };
 		A0A812241ECDC657000567D7 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		A0A812271ECDC684000567D7 /* UIColor+RCColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+RCColors.swift"; sourceTree = "<group>"; };
 		A0A8122A1ECDC6C7000567D7 /* UINibExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINibExtensions.swift; sourceTree = "<group>"; };
@@ -910,6 +912,7 @@
 			isa = PBXGroup;
 			children = (
 				A0000CA81F0D2C8B00BE1BFA /* SupportViewController.swift */,
+				A09D74AE1F1B337E00A8AF0D /* OfflineFormViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -2009,6 +2012,7 @@
 				A0DE0CC71EDEAD6600C4FA34 /* SDKSocketManager.swift in Sources */,
 				A0559E301ECC430E00E83220 /* UploadManager.swift in Sources */,
 				A0559E261ECC430900E83220 /* Email.swift in Sources */,
+				A09D74AF1F1B337E00A8AF0D /* OfflineFormViewController.swift in Sources */,
 				A07F17931ECDC18700A1F199 /* ChatMessageImageView.swift in Sources */,
 				A0452DCB1EE7C4CD003FBC9B /* Bundle+RocketChat.swift in Sources */,
 				A07F17A31ECDC18700A1F199 /* ChatHeaderViewOffline.swift in Sources */,

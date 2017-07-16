@@ -19,7 +19,6 @@ public class SupportViewController: UIViewController, LiveChatManagerInjected {
 
     public var injectionContainer: InjectionContainer!
 
-    var room: String!
     var allowChangeDepartment = true {
         didSet {
             if allowChangeDepartment {
@@ -36,11 +35,6 @@ public class SupportViewController: UIViewController, LiveChatManagerInjected {
 
         let leftBarButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissSelf))
         navigationItem.leftBarButtonItem = leftBarButton
-    }
-
-    override public func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
     // MARK: - Action
