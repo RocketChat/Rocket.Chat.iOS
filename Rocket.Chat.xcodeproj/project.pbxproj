@@ -220,6 +220,7 @@
 		A07F17B61ECDC35100A1F199 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07F17B41ECDC35100A1F199 /* LoaderView.swift */; };
 		A08114561EDC062700AD63CB /* AppAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08114551EDC062700AD63CB /* AppAuthManager.swift */; };
 		A08114581EDC068100AD63CB /* AppSocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A08114571EDC068100AD63CB /* AppSocketManager.swift */; };
+		A082CAB91F1D0619001F6183 /* SupportDepartmentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A082CAB81F1D0619001F6183 /* SupportDepartmentViewController.swift */; };
 		A0918BD31EC0A15D0015D5D5 /* RocketChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0918BCA1EC0A15D0015D5D5 /* RocketChat.framework */; };
 		A0918BDA1EC0A15D0015D5D5 /* RocketChatSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */; };
 		A0918BDC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A0918BCC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -483,6 +484,7 @@
 		A07F17B41ECDC35100A1F199 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoaderView.swift; sourceTree = "<group>"; };
 		A08114551EDC062700AD63CB /* AppAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppAuthManager.swift; sourceTree = "<group>"; };
 		A08114571EDC068100AD63CB /* AppSocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSocketManager.swift; sourceTree = "<group>"; };
+		A082CAB81F1D0619001F6183 /* SupportDepartmentViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportDepartmentViewController.swift; sourceTree = "<group>"; };
 		A0918BCA1EC0A15D0015D5D5 /* RocketChat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = RocketChat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0918BCC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Rocket.Chat.SDK.h; sourceTree = "<group>"; };
 		A0918BCD1EC0A15D0015D5D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -912,6 +914,7 @@
 			isa = PBXGroup;
 			children = (
 				A0000CA81F0D2C8B00BE1BFA /* SupportViewController.swift */,
+				A082CAB81F1D0619001F6183 /* SupportDepartmentViewController.swift */,
 				A09D74AE1F1B337E00A8AF0D /* OfflineFormViewController.swift */,
 			);
 			path = Controllers;
@@ -2023,6 +2026,7 @@
 				A01074E41EF57C0C0066D3F3 /* UserCoordinator.swift in Sources */,
 				A00BA5FE1EDDB31A0090874D /* LiveChatSubscriptionManager.swift in Sources */,
 				A0559E291ECC430900E83220 /* Mention.swift in Sources */,
+				A082CAB91F1D0619001F6183 /* SupportDepartmentViewController.swift in Sources */,
 				A0D128C31ED175AC0088B240 /* Injected.swift in Sources */,
 				A0000CA91F0D2C8B00BE1BFA /* SupportViewController.swift in Sources */,
 				A0559E2E1ECC430E00E83220 /* UserManager.swift in Sources */,
