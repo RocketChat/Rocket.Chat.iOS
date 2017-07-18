@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SupportDepartmentViewControllerDelegate: class {
+public protocol SupportDepartmentViewControllerDelegate: class {
     func didSelect(department: Department)
 }
 

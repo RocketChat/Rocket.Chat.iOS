@@ -425,7 +425,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Offline Form" id="qjF-yp-8RR">
-                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="H3r-VF-gfs"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="H3r-VF-gfs">
+                            <connections>
+                                <action selector="didTouchCancelButton:" destination="VNj-2c-c6C" id="Y0N-LI-xPa"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="iG5-bR-KYk" id="DIP-qZ-EDk"/>

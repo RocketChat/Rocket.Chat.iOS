@@ -115,7 +115,7 @@ public class SupportViewController: UITableViewController, LiveChatManagerInject
 }
 
 extension SupportViewController: SupportDepartmentViewControllerDelegate {
-    func didSelect(department: Department) {
+    public func didSelect(department: Department) {
         self.department = department
     }
 }
