@@ -25,6 +25,11 @@ final class MainViewController: BaseViewController {
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        AuthManager.recoverAuthIfNeeded()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -37,6 +42,8 @@ final class MainViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         if let auth = AuthManager.isAuthenticated() {
+            AuthManager.persistAuthInformation(auth)
+
             labelAuthenticationStatus.isHidden = true
             buttonConnect.isHidden = true
             activityIndicator.startAnimating()
