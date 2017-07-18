@@ -24,6 +24,9 @@ class OfflineFormViewController: UITableViewController, LiveChatManagerInjected 
     }
 
     // MARK: - Actions
+    @IBAction func didTouchCancelButton(_ sender: UIBarButtonItem) {
+        dismissSelf()
+    }
 
     func dismissSelf() {
         self.dismiss(animated: true, completion: nil)
