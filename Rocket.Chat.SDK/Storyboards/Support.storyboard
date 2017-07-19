@@ -436,9 +436,42 @@
                         <outlet property="emailField" destination="CVH-dc-kQn" id="4ar-7G-vc7"/>
                         <outlet property="messageTextView" destination="oDa-Gi-oJs" id="wIL-SS-VS5"/>
                         <outlet property="nameField" destination="mtl-5G-2t1" id="j2I-4m-c12"/>
+                        <outlet property="offlineMessageLabel" destination="Jv7-c7-Qrb" id="Zq3-qq-rno"/>
+                        <outlet property="sectionHeader" destination="EtG-GC-3Mv" id="Nuc-wp-28b"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gph-jp-2en" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <view contentMode="scaleToFill" id="EtG-GC-3Mv" userLabel="OFFLINE FORM HEADER">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="62"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="characterWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jv7-c7-Qrb">
+                            <rect key="frame" x="12" y="37" width="35.5" height="17"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" red="0.42745098039215684" green="0.42745098039215684" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OFFLINE FORM" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3IW-KK-2hL">
+                            <rect key="frame" x="12" y="8" width="93.5" height="16"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="16" id="wl3-u0-hYT"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                            <color key="textColor" red="0.42745098039215684" green="0.42745098039215684" blue="0.44705882352941173" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="3IW-KK-2hL" firstAttribute="leading" secondItem="EtG-GC-3Mv" secondAttribute="leading" constant="12" id="6zc-5M-Ilg"/>
+                        <constraint firstItem="Jv7-c7-Qrb" firstAttribute="leading" secondItem="EtG-GC-3Mv" secondAttribute="leading" constant="12" id="9rO-2y-aZx"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="Jv7-c7-Qrb" secondAttribute="trailing" constant="12" id="JNL-no-HyU"/>
+                        <constraint firstItem="Jv7-c7-Qrb" firstAttribute="top" relation="greaterThanOrEqual" secondItem="3IW-KK-2hL" secondAttribute="bottom" constant="4" id="YbP-5z-pFw"/>
+                        <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="3IW-KK-2hL" secondAttribute="trailing" constant="12" id="a4l-WD-DLJ"/>
+                        <constraint firstAttribute="bottom" secondItem="Jv7-c7-Qrb" secondAttribute="bottom" constant="8" id="aX6-21-MnL"/>
+                        <constraint firstItem="3IW-KK-2hL" firstAttribute="top" secondItem="EtG-GC-3Mv" secondAttribute="top" constant="8" id="vIb-EV-BNT"/>
+                    </constraints>
+                </view>
             </objects>
             <point key="canvasLocation" x="-119" y="767"/>
         </scene>

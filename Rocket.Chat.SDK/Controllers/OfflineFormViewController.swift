@@ -17,10 +17,20 @@ class OfflineFormViewController: UITableViewController, LiveChatManagerInjected 
     @IBOutlet weak var messageTextView: UITextView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    @IBOutlet var sectionHeader: UIView!
+    @IBOutlet weak var offlineMessageLabel: UILabel!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         navigationItem.title = livechatManager.offlineTitle
+
+        offlineMessageLabel.text = livechatManager.offlineMessage
+        let messageLabelSize = offlineMessageLabel.sizeThatFits(CGSize(width: self.view.frame.width - 16, height: CGFloat.infinity))
+        offlineMessageLabel.heightAnchor.constraint(equalToConstant: messageLabelSize.height).isActive = true
+        var frame = sectionHeader.frame
+        frame.size = CGSize(width: self.view.frame.width, height: 8 + 16 + 4 + messageLabelSize.height + 8)
+        sectionHeader.frame = frame
     }
 
     // MARK: - Actions
@@ -46,6 +56,24 @@ class OfflineFormViewController: UITableViewController, LiveChatManagerInjected 
         livechatManager.sendOfflineMessage(email: email, name: name, message: message) {
             self.activityIndicator.stopAnimating()
             self.navigationController?.dismiss(animated: true, completion: nil)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch section {
+        case 0:
+            return sectionHeader?.frame.size.height ?? 0
+        default:
+            return super.tableView(tableView, heightForHeaderInSection: section)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        switch section {
+        case 0:
+            return sectionHeader
+        default:
+            return super.tableView(tableView, viewForHeaderInSection: section)
         }
     }
 
