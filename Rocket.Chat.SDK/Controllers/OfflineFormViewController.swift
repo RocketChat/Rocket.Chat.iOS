@@ -55,7 +55,9 @@ class OfflineFormViewController: UITableViewController, LiveChatManagerInjected 
         activityIndicator.startAnimating()
         livechatManager.sendOfflineMessage(email: email, name: name, message: message) {
             self.activityIndicator.stopAnimating()
-            self.navigationController?.dismiss(animated: true, completion: nil)
+            let alert = UIAlertController(title: self.livechatManager.title, message: self.livechatManager.offlineSuccessMessage, preferredStyle: .actionSheet)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default) { _ in self.dismissSelf() })
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
