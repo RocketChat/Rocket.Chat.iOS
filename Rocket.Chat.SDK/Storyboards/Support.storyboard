@@ -165,7 +165,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a0g-bw-kX5">
-                                                    <rect key="frame" x="121" y="4.5" width="132" height="34"/>
+                                                    <rect key="frame" x="-0.5" y="0.0" width="375" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="Start Messaging"/>
                                                     <connections>
@@ -178,8 +178,10 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="FMM-Pe-28p" firstAttribute="centerY" secondItem="LW8-xc-HM1" secondAttribute="centerY" id="68b-El-2qk"/>
+                                                <constraint firstItem="a0g-bw-kX5" firstAttribute="height" secondItem="LW8-xc-HM1" secondAttribute="height" id="8fE-qv-gNi"/>
                                                 <constraint firstItem="a0g-bw-kX5" firstAttribute="centerX" secondItem="LW8-xc-HM1" secondAttribute="centerX" id="Cfd-Ph-XYT"/>
                                                 <constraint firstItem="a0g-bw-kX5" firstAttribute="centerY" secondItem="LW8-xc-HM1" secondAttribute="centerY" id="EfE-Iq-Dkm"/>
+                                                <constraint firstItem="a0g-bw-kX5" firstAttribute="width" secondItem="LW8-xc-HM1" secondAttribute="width" id="T2P-8C-azY"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="FMM-Pe-28p" secondAttribute="trailing" constant="8" id="fnr-Eo-6iI"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -397,9 +399,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CB-cF-6d1">
-                                                    <rect key="frame" x="164" y="7" width="46" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3CB-cF-6d1">
+                                                    <rect key="frame" x="-0.5" y="0.5" width="375" height="43.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                     <state key="normal" title="Send"/>
                                                     <connections>
@@ -411,8 +412,12 @@
                                                 </activityIndicatorView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="3CB-cF-6d1" firstAttribute="width" secondItem="Mi0-5k-DXW" secondAttribute="width" id="2HE-TW-vfW"/>
+                                                <constraint firstItem="3CB-cF-6d1" firstAttribute="centerX" secondItem="Mi0-5k-DXW" secondAttribute="centerX" id="2cj-a2-YeI"/>
                                                 <constraint firstItem="iG5-bR-KYk" firstAttribute="centerY" secondItem="Mi0-5k-DXW" secondAttribute="centerY" id="8hR-Mk-wFz"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="iG5-bR-KYk" secondAttribute="trailing" constant="8" id="DL5-2K-QDK"/>
+                                                <constraint firstItem="3CB-cF-6d1" firstAttribute="height" secondItem="Mi0-5k-DXW" secondAttribute="height" id="JBJ-if-ahR"/>
+                                                <constraint firstItem="3CB-cF-6d1" firstAttribute="centerY" secondItem="Mi0-5k-DXW" secondAttribute="centerY" id="f4g-fp-LfW"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
