@@ -456,6 +456,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
 
                 let indexPaths = self.dataController.insert(objs)
                 collectionView.insertItems(at: indexPaths)
+                collectionView.reloadItems(at: indexPaths.filter { $0.row > 0 }.map { IndexPath(row: $0.row - 1, section: $0.section) })
             }, completion: { _ in
                 let shouldScroll = self.isContentBiggerThanContainerHeight()
                 if updateScrollPosition && shouldScroll {
@@ -571,6 +572,7 @@ extension ChatViewController {
                 cell.delegate = self
                 cell.message = message
                 cell.type = .sentBubble
+                cell.dateLabel.isHidden = !dataController.shouldShowDate(atIndexPath: indexPath)
                 return cell
             } else {
                 guard let cell = collectionView?.dequeueReusableCell(withReuseIdentifier: ChatMessageBubbleCell.receivedIdentifier, for: indexPath) as? ChatMessageBubbleCell else { return UICollectionViewCell() }
@@ -578,6 +580,7 @@ extension ChatViewController {
                 cell.delegate = self
                 cell.message = message
                 cell.type = .receivedBubble
+                cell.dateLabel.isHidden = !dataController.shouldShowDate(atIndexPath: indexPath)
                 return cell
             }
         }
