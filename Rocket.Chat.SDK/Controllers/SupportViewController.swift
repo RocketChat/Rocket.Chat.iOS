@@ -9,55 +9,73 @@
 import UIKit
 import RealmSwift
 
-public class SupportViewController: UIViewController, LiveChatManagerInjected {
+public class SupportViewController: UITableViewController, LiveChatManagerInjected {
 
-    @IBOutlet weak var departmentPickerView: UIPickerView!
+    @IBOutlet weak var departmentLabel: UILabel!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var initialMessageField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    public var injectionContainer: InjectionContainer!
-
-    var room: String!
-    var allowChangeDepartment = true {
+    public var injectionContainer: InjectionContainer! {
         didSet {
-            if allowChangeDepartment {
-                departmentPickerView.isHidden = false
-            } else {
-                departmentPickerView.isHidden = true
-            }
+            department = livechatManager.departments.first
         }
     }
-    var department: Department?
+
+    var allowChangeDepartment = true {
+        didSet {
+        }
+    }
+    var department: Department? {
+        didSet {
+            // department may be set before view initialized
+            departmentLabel?.text = department?.name
+        }
+    }
 
     override public func viewDidLoad() {
         super.viewDidLoad()
-
-        let leftBarButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(dismissSelf))
-        navigationItem.leftBarButtonItem = leftBarButton
+        departmentLabel.text = department?.name
     }
 
-    override public func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    public override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: nil)
+        guard let identifier = segue.identifier else {
+            return
+        }
+        switch identifier {
+        case "ShowDepartments":
+            guard let viewController = segue.destination as? SupportDepartmentViewController else {
+                return
+            }
+            viewController.injectionContainer = injectionContainer
+            viewController.delegate = self
+            let index = livechatManager.departments.index(where: { (department) -> Bool in
+                guard let selfDepartment = self.department else { return false }
+                return department == selfDepartment
+            }) ?? 0
+            viewController.selectedIndexPath = IndexPath(row: index, section: 0)
+        default:
+            break
+        }
     }
 
-    // MARK: - Action
-
-    @IBAction func didTouchOutside(_ sender: UITapGestureRecognizer) {
-        self.view.endEditing(true)
-    }
+    // MARK: - Actions
 
     @IBAction func didTouchStartButton(_ sender: UIButton) {
-        presentChatViewController()
+        prepareChatViewController()
+    }
+
+    @IBAction func didTouchCancelButton(_ sender: UIBarButtonItem) {
+        dismissSelf()
     }
 
     func dismissSelf() {
         self.dismiss(animated: true, completion: nil)
     }
 
-    func presentChatViewController() {
+    func prepareChatViewController() {
         // TODO: prepare and wait for SDK configuration to finish
         guard let email = emailField.text else {
             let alert = UIAlertController(title: "Email is required", message: nil, preferredStyle: .alert)
@@ -96,6 +114,12 @@ public class SupportViewController: UIViewController, LiveChatManagerInjected {
 
 }
 
+extension SupportViewController: SupportDepartmentViewControllerDelegate {
+    public func didSelect(department: Department) {
+        self.department = department
+    }
+}
+
 extension SupportViewController: UITextFieldDelegate {
     public func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         let nextTag = textField.tag + 1
@@ -103,30 +127,8 @@ extension SupportViewController: UITextFieldDelegate {
             nextResponder.becomeFirstResponder()
         } else {
             textField.resignFirstResponder()
-            presentChatViewController()
+            prepareChatViewController()
         }
         return false
-    }
-}
-
-extension SupportViewController: UIPickerViewDelegate {
-    public func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        guard row < livechatManager.departments.count else { return nil }
-        return livechatManager.departments[row].name
-    }
-
-    public func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        guard row < livechatManager.departments.count else { return }
-        self.department = livechatManager.departments[row]
-    }
-}
-
-extension SupportViewController: UIPickerViewDataSource {
-    public func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-
-    public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return livechatManager.departments.count
     }
 }

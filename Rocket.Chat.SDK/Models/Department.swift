@@ -27,3 +27,9 @@ public struct Department {
         showOnRegistration = json["showOnRegistration"].boolValue
     }
 }
+
+extension Department: Equatable {
+    public static func ==(aDptm: Department, bDptm: Department) -> Bool {
+        return aDptm.id == bDptm.id
+    }
+}

@@ -21,6 +21,7 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
 
     public var isLiveChatEnabled = false
     public var title = ""
+    public var enabled = false
     /// If is there any agents online
     public var online = false
     /// The
@@ -29,7 +30,10 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
     public var registrationForm = false
     /// If a form should be displayed while no agents are online
     public var displayOfflineForm = false
-
+    public var offlineTitle = "Offline Support"
+    public var offlineMessage = ""
+    public var offlineUnavailableMessage = ""
+    public var offlineSuccessMessage = ""
     /// All available deparments can be talked to
     public var departments: [Department] = []
 
@@ -47,9 +51,14 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
             let json = response.result["result"]
             self.isLiveChatEnabled = json["enabled"].boolValue
             self.title = json["title"].stringValue
+            self.enabled = json["enabled"].boolValue
             self.online = json["online"].boolValue
             self.registrationForm = json["registrationForm"].boolValue
             self.displayOfflineForm = json["displayOfflineForm"].boolValue
+            self.offlineTitle = json["offlineTitle"].stringValue
+            self.offlineMessage = json["offlineMessage"].stringValue
+            self.offlineUnavailableMessage = json["offlineUnavailableMessage"].stringValue
+            self.offlineSuccessMessage = json["offlineSuccessMessage"].stringValue
 
             if let rid = json["room"].string {
                 self.room = rid
@@ -135,19 +144,31 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         }
     }
 
-    public func presentSupportViewController() -> SupportViewController {
-        guard let viewController = UIStoryboard(name: "Support", bundle: Bundle.rocketChat).instantiateInitialViewController() as? UINavigationController else {
-            fatalError("Storyboard `Support` not found in bundle `RocketChat`")
+    public func presentSupportViewController() {
+        let storyboard = UIStoryboard(name: "Support", bundle: Bundle.rocketChat)
+        if online {
+            guard let navigationViewController = storyboard.instantiateInitialViewController() as? UINavigationController else {
+                fatalError("Unexpected view hierachy: initial view controller is not a navigation controller")
+            }
+            guard let supportViewController = navigationViewController.viewControllers.first as? SupportViewController else {
+                fatalError("Unexpected view hierachy: navigation controller's root view controller is not support view controller")
+            }
+            supportViewController.injectionContainer = injectionContainer
+            DispatchQueue.main.async {
+                UIApplication.shared.delegate?.window??.rootViewController?.present(navigationViewController, animated: true, completion: nil)
+            }
+        } else {
+            guard let navigationViewController = storyboard.instantiateViewController(withIdentifier: "offlineSupport") as? UINavigationController else {
+                fatalError("Unexpected view hierachy: `offlineSupport` is not a navigation controller")
+            }
+            guard let offlineFormViewController = navigationViewController.viewControllers.first as? OfflineFormViewController else {
+                fatalError("Unexpected view hierachy: navigation controller's root view controller is not offline form view controller")
+            }
+            offlineFormViewController.injectionContainer = injectionContainer
+            DispatchQueue.main.async {
+                UIApplication.shared.delegate?.window??.rootViewController?.present(navigationViewController, animated: true, completion: nil)
+            }
         }
-        guard let supportViewController = viewController.viewControllers.first as? SupportViewController else {
-            fatalError("Unexpected view hierachy")
-        }
-        supportViewController.injectionContainer = injectionContainer
-        supportViewController.room = room
-        DispatchQueue.main.async {
-            UIApplication.shared.delegate?.window??.rootViewController?.present(viewController, animated: true, completion: nil)
-        }
-        return supportViewController
     }
 
     /// After user is registrated or logged in, get the actual `ChatViewController` to start conversation
@@ -166,6 +187,24 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         chatViewController?.leftButton.setImage(nil, for: .normal)
         chatViewController?.messageCellStyle = .bubble
         return chatViewController
+    }
+
+    func sendOfflineMessage(email: String, name: String, message: String, completion: @escaping () -> Void) {
+        let params = [
+            "msg": "method",
+            "method": "livechat:sendOfflineMessage",
+            "params": [[
+                "name": name,
+                "email": email,
+                "message": message
+            ]]
+        ] as [String : Any]
+        socketManager.send(params) { response in
+            DispatchQueue.main.async {
+                completion()
+            }
+        }
+
     }
 
 }
