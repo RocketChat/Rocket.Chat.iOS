@@ -624,6 +624,15 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCac
 
         return CGSize(width: fullWidth, height: 40)
     }
+
+    public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        switch messageCellStyle {
+        case .normal:
+            return 10.0
+        case .bubble:
+            return 4
+        }
+    }
 }
 
 // MARK: UIScrollViewDelegate
