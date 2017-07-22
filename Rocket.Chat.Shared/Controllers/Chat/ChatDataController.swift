@@ -149,6 +149,10 @@ final class ChatDataController {
 
         let recentOne = data[indexPath.row + 1]
         let current = data[indexPath.row]
+        // if two messages are sent by different user
+        if current.message?.user != recentOne.message?.user {
+            return true
+        }
         // if indexPath is 10 minutes earlier than a recent one
         if abs(current.timestamp.seconds(to: recentOne.timestamp)) > (10 * 60) {
             return true
