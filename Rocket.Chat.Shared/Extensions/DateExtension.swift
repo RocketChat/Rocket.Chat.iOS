@@ -50,4 +50,11 @@ extension Date {
         return comp.weekday ?? -1
     }
 
+    func seconds(to another: Date) -> Double {
+        let interval = timeIntervalSince1970
+        let anotherInterval = another.timeIntervalSince1970
+
+        return interval - anotherInterval
+    }
+
 }

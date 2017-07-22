@@ -10,12 +10,12 @@ import UIKit
 
 class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInjected {
 
-    static let minimumHeight = 32 + bubbleHeightConstant
+    static let minimumHeight = 32 + bubbleVerticalMargin
     static let receivedIdentifier = "ReceivedMessageBubble"
     static let sentIdendifier = "SentMessageBubble"
 
     private static let bubbleWidthProportion: CGFloat = 0.72
-    private static let bubbleHeightConstant: CGFloat = 8
+    private static let bubbleVerticalMargin: CGFloat = 2
     private static let bubblePadding: CGFloat = 12
 
     weak var longPressGesture: UILongPressGestureRecognizer?
@@ -40,7 +40,7 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        bubbleView.layer.cornerRadius = 16
+        bubbleView.layer.cornerRadius = ChatMessageBubbleCell.minimumHeight / 2
         messageTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
@@ -51,7 +51,7 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
             font: UIFont.systemFont(ofSize: 15),
             width: fullWidth * ChatMessageBubbleCell.bubbleWidthProportion - ChatMessageBubbleCell.bubblePadding
             )
-        var total = size.height + ChatMessageBubbleCell.bubblePadding - ChatMessageBubbleCell.bubbleHeightConstant
+        var total = size.height + ChatMessageBubbleCell.bubblePadding + ChatMessageBubbleCell.bubbleVerticalMargin
 
         for url in message.urls {
             guard url.isValid() else { continue }

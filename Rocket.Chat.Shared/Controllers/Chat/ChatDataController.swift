@@ -140,4 +140,23 @@ final class ChatDataController {
 
         return -1
     }
+
+    func shouldShowDate(atIndexPath indexPath: IndexPath) -> Bool {
+        // if indexPath is last of the data or overflowed
+        guard indexPath.row + 1 < data.count else {
+            return true
+        }
+
+        let recentOne = data[indexPath.row + 1]
+        let current = data[indexPath.row]
+        // if two messages are sent by different user
+        if current.message?.user != recentOne.message?.user {
+            return true
+        }
+        // if indexPath is 10 minutes earlier than a recent one
+        if abs(current.timestamp.seconds(to: recentOne.timestamp)) > (10 * 60) {
+            return true
+        }
+        return false
+    }
 }
