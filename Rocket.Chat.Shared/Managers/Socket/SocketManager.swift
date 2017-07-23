@@ -53,6 +53,9 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
         self.socket = WebSocket(url: url)
         self.socket?.delegate = self
         self.socket?.pongDelegate = self
+        self.socket?.headers = [
+            "Host": url.host ?? ""
+        ]
 
         self.socket?.connect()
     }
