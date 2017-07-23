@@ -10,10 +10,10 @@ import UIKit
 
 extension UILabel {
 
-    static func sizeForView(_ text: String, font: UIFont, width: CGFloat) -> CGSize {
+    static func sizeForView(_ text: String, font: UIFont, width: CGFloat, lineBreakMode: NSLineBreakMode = .byClipping) -> CGSize {
         let label: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: width, height: CGFloat.greatestFiniteMagnitude))
         label.numberOfLines = 0
-        label.lineBreakMode = .byClipping
+        label.lineBreakMode = lineBreakMode
         label.font = font
         label.text = text
         label.sizeToFit()
