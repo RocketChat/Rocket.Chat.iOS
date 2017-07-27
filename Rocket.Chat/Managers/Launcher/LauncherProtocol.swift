@@ -15,6 +15,7 @@ protocol LauncherProtocol {
 final class Launcher: LauncherProtocol {
     private lazy var launchers: [LauncherProtocol] = {
         return [
+            TimestampCoordinator(),
             PersistencyCoordinator(),
             BugTrackingCoordinator(),
             UserCoordinator()

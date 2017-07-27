@@ -15,10 +15,6 @@ class ServerManager {
     var timestampOffset = 0.0
 
     static func timestampSync() {
-        DispatchQueue.global().asyncAfter(deadline: DispatchTime.now() + .seconds(600)) {
-            ServerManager.timestampSync()
-        }
-
         guard let auth = AuthManager.isAuthenticated() else { return }
         guard let serverURL = URL(string: auth.serverURL) else { return }
         guard let url = serverURL.timestampURL() else { return }

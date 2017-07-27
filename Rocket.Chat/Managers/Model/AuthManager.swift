@@ -183,6 +183,7 @@ extension AuthManager {
 
                 realm.add(auth)
             }, completion: {
+                ServerManager.timestampSync()
                 completion(response)
             })
         }

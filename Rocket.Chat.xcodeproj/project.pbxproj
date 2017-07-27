@@ -26,6 +26,7 @@
 		4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */; };
 		41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41494B911D63C6280004F369 /* UIImageExtension.swift */; };
 		41499C8F1F2A116900790EA7 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41499C8E1F2A116900790EA7 /* ServerManager.swift */; };
+		41499C911F2A1A7200790EA7 /* TimestampCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41499C901F2A1A7200790EA7 /* TimestampCoordinator.swift */; };
 		414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FF51D46320F00093E10 /* ResponseMessage.swift */; };
 		414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FF91D46395400093E10 /* SocketManager.swift */; };
 		414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FFB1D46395900093E10 /* SocketResponse.swift */; };
@@ -192,6 +193,7 @@
 		4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatMessageImageView.xib; path = Views/Cells/Chat/ChatMessageImageView.xib; sourceTree = "<group>"; };
 		41494B911D63C6280004F369 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = Extensions/UIImageExtension.swift; sourceTree = "<group>"; };
 		41499C8E1F2A116900790EA7 /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerManager.swift; path = Managers/ServerManager.swift; sourceTree = "<group>"; };
+		41499C901F2A1A7200790EA7 /* TimestampCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimestampCoordinator.swift; sourceTree = "<group>"; };
 		414A1FF51D46320F00093E10 /* ResponseMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResponseMessage.swift; path = Managers/Socket/Response/ResponseMessage.swift; sourceTree = "<group>"; };
 		414A1FF91D46395400093E10 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = Managers/Socket/SocketManager.swift; sourceTree = "<group>"; };
 		414A1FFB1D46395900093E10 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketResponse.swift; path = Managers/Socket/Response/SocketResponse.swift; sourceTree = "<group>"; };
@@ -860,6 +862,7 @@
 				D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */,
 				D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */,
 				419EAF281E26562E002C8DA5 /* UserCoordinator.swift */,
+				41499C901F2A1A7200790EA7 /* TimestampCoordinator.swift */,
 			);
 			name = Launcher;
 			path = Managers/Launcher;
@@ -1346,6 +1349,7 @@
 				41D3A6301E0805490011949D /* ChatMessageDaySeparator.swift in Sources */,
 				41900C271D9FE35400308EF4 /* Attachment.swift in Sources */,
 				412719441E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift in Sources */,
+				41499C911F2A1A7200790EA7 /* TimestampCoordinator.swift in Sources */,
 				D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */,
 				415029BD1E72E0FD009F596C /* ChannelInfoCellProtocol.swift in Sources */,
 				415029B51E72D519009F596C /* ChannelInfoBasicCell.swift in Sources */,
