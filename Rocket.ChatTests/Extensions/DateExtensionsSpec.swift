@@ -1,5 +1,5 @@
 //
-//  NSDateExtension.swift
+//  DateExtension.swift
 //  Rocket.Chat
 //
 //  Created by Rafael K. Streit on 7/14/16.
@@ -10,7 +10,13 @@ import XCTest
 
 @testable import Rocket_Chat
 
-class NSDateExtension: XCTestCase {
+class DateExtension: XCTestCase {
+
+    func testDateFromInterval() {
+        let interval = 1468544344553.0
+        let date = Date.dateFromInterval(interval)
+        XCTAssert(date?.timeIntervalSince1970 == interval / 1000, "Date interval is divided by 1000")
+    }
 
     func testDateFromInterval() {
         let interval = 1468544344553.0

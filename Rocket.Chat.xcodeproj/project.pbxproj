@@ -118,7 +118,7 @@
 		41DC7A1D1D38471700896FC0 /* MessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A1C1D38471700896FC0 /* MessageManager.swift */; };
 		41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A1E1D3865FE00896FC0 /* MessageManagerSpec.swift */; };
 		41DC7A221D386B4700896FC0 /* StringExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */; };
-		41DC7A241D386CA800896FC0 /* NSDateExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A231D386CA800896FC0 /* NSDateExtensionSpec.swift */; };
+		41DC7A241D386CA800896FC0 /* DateExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A231D386CA800896FC0 /* DateExtensionsSpec.swift */; };
 		41DCB8261DDC828200E1197F /* SubscriptionSearchMoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DCB8251DDC828200E1197F /* SubscriptionSearchMoreView.xib */; };
 		41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DCB8271DDC82E000E1197F /* SubscriptionSearchMoreView.swift */; };
 		41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF76E21D2C50710028DBF8 /* AppDelegate.swift */; };
@@ -286,7 +286,7 @@
 		41DC7A1C1D38471700896FC0 /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManager.swift; path = Managers/Model/MessageManager.swift; sourceTree = "<group>"; };
 		41DC7A1E1D3865FE00896FC0 /* MessageManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManagerSpec.swift; path = Managers/MessageManagerSpec.swift; sourceTree = "<group>"; };
 		41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtensionSpec.swift; path = Extensions/StringExtensionSpec.swift; sourceTree = "<group>"; };
-		41DC7A231D386CA800896FC0 /* NSDateExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtensionSpec.swift; path = Extensions/NSDateExtensionSpec.swift; sourceTree = "<group>"; };
+		41DC7A231D386CA800896FC0 /* DateExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtensionsSpec.swift; path = Extensions/DateExtensionsSpec.swift; sourceTree = "<group>"; };
 		41DCB8251DDC828200E1197F /* SubscriptionSearchMoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SubscriptionSearchMoreView.xib; path = Views/Sections/SubscriptionSearchMoreView.xib; sourceTree = "<group>"; };
 		41DCB8271DDC82E000E1197F /* SubscriptionSearchMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionSearchMoreView.swift; path = Views/Sections/SubscriptionSearchMoreView.swift; sourceTree = "<group>"; };
 		41DF76DF1D2C50710028DBF8 /* Rocket.Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rocket.Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -731,7 +731,7 @@
 			isa = PBXGroup;
 			children = (
 				41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */,
-				41DC7A231D386CA800896FC0 /* NSDateExtensionSpec.swift */,
+				41DC7A231D386CA800896FC0 /* DateExtensionsSpec.swift */,
 				41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */,
 			);
 			name = Extensions;
@@ -1379,7 +1379,7 @@
 				417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */,
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
 				925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */,
-				41DC7A241D386CA800896FC0 /* NSDateExtensionSpec.swift in Sources */,
+				41DC7A241D386CA800896FC0 /* DateExtensionsSpec.swift in Sources */,
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
