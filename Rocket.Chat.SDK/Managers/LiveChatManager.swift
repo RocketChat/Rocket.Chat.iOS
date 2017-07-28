@@ -153,7 +153,10 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
             guard let supportViewController = navigationViewController.viewControllers.first as? SupportViewController else {
                 fatalError("Unexpected view hierachy: navigation controller's root view controller is not support view controller")
             }
+
             supportViewController.injectionContainer = injectionContainer
+            navigationViewController.modalPresentationStyle = .formSheet
+
             DispatchQueue.main.async {
                 UIApplication.shared.delegate?.window??.rootViewController?.present(navigationViewController, animated: true, completion: nil)
             }
