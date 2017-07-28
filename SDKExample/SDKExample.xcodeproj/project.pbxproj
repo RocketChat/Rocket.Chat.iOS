@@ -140,9 +140,9 @@
 				A0559DBF1ECC23E400E83220 /* AppDelegate.swift */,
 				A0CE85D41F05430F00DCB095 /* MainViewController.swift */,
 				A0CE85D21F053B1800DCB095 /* Main.storyboard */,
-				A0559DC61ECC23E400E83220 /* Assets.xcassets */,
 				A0559DC81ECC23E400E83220 /* LaunchScreen.storyboard */,
 				A0559DCB1ECC23E400E83220 /* Info.plist */,
+				A0559DC61ECC23E400E83220 /* Assets.xcassets */,
 			);
 			path = SDKExample;
 			sourceTree = "<group>";
@@ -242,6 +242,7 @@
 				TargetAttributes = {
 					A0559DBB1ECC23E400E83220 = {
 						CreatedOnToolsVersion = 8.3.2;
+						DevelopmentTeam = S6UPZG7ZR3;
 						ProvisioningStyle = Automatic;
 					};
 					A0559DCF1ECC23E400E83220 = {
@@ -594,6 +595,7 @@
 			baseConfigurationReference = AC9F978551C65A054DEADB65 /* Pods-SDKExample.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = S6UPZG7ZR3;
 				INFOPLIST_FILE = SDKExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios.demo.sdk;
@@ -607,6 +609,7 @@
 			baseConfigurationReference = 4CE88CEC37482012CFFBF1C4 /* Pods-SDKExample.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = S6UPZG7ZR3;
 				INFOPLIST_FILE = SDKExample/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios.demo.sdk;
