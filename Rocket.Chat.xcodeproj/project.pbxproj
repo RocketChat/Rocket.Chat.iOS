@@ -224,9 +224,9 @@
 		A0918BD31EC0A15D0015D5D5 /* RocketChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0918BCA1EC0A15D0015D5D5 /* RocketChat.framework */; };
 		A0918BDA1EC0A15D0015D5D5 /* RocketChatSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */; };
 		A0918BDC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A0918BCC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		A09910761EC7501400A9FEE8 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		A09910761EC7501400A9FEE8 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A09910771EC7501400A9FEE8 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		A099107C1EC7501D00A9FEE8 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		A099107C1EC7501D00A9FEE8 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A09910861EC75AE600A9FEE8 /* MessageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09910831EC75AE600A9FEE8 /* MessageExtensions.swift */; };
 		A099108F1EC75EAA00A9FEE8 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = A099108A1EC75EAA00A9FEE8 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A09BBEA21ECF146E00FB846D /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09BBEA11ECF146E00FB846D /* Injected.swift */; };
@@ -429,6 +429,8 @@
 		A0452DDA1EE7CD20003FBC9B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		A0452DDC1EE7CD22003FBC9B /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		A0452DDD1EE7CD23003FBC9B /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		A04AB1371F2B9B1D00AD374B /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
+		A04AB1391F2B9B1D00AD374B /* module.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = module.modulemap; sourceTree = "<group>"; };
 		A0559DEE1ECC2CCD00E83220 /* SubscriptionModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionModelHandler.swift; sourceTree = "<group>"; };
 		A0559DEF1ECC2CCD00E83220 /* UserModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModelHandler.swift; sourceTree = "<group>"; };
 		A0559DF11ECC2CCD00E83220 /* AttachmentModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentModelMapping.swift; sourceTree = "<group>"; };
@@ -496,8 +498,6 @@
 		A099108A1EC75EAA00A9FEE8 /* CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
 		A099108B1EC75EAA00A9FEE8 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		A099108C1EC75EAA00A9FEE8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		A099108D1EC75EAA00A9FEE8 /* iphoneos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.modulemap; sourceTree = "<group>"; };
-		A099108E1EC75EAA00A9FEE8 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
 		A09BBEA11ECF146E00FB846D /* Injected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
 		A09D74AE1F1B337E00A8AF0D /* OfflineFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineFormViewController.swift; sourceTree = "<group>"; };
 		A0A812241ECDC657000567D7 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -920,6 +920,22 @@
 			path = Controllers;
 			sourceTree = "<group>";
 		};
+		A04AB1361F2B9B1D00AD374B /* iphoneos */ = {
+			isa = PBXGroup;
+			children = (
+				A04AB1371F2B9B1D00AD374B /* module.modulemap */,
+			);
+			path = iphoneos;
+			sourceTree = "<group>";
+		};
+		A04AB1381F2B9B1D00AD374B /* iphonesimulator */ = {
+			isa = PBXGroup;
+			children = (
+				A04AB1391F2B9B1D00AD374B /* module.modulemap */,
+			);
+			path = iphonesimulator;
+			sourceTree = "<group>";
+		};
 		A0559DED1ECC2CCD00E83220 /* Handler */ = {
 			isa = PBXGroup;
 			children = (
@@ -1107,8 +1123,8 @@
 				A099108A1EC75EAA00A9FEE8 /* CommonCrypto.h */,
 				A099108B1EC75EAA00A9FEE8 /* CommonCrypto.xcconfig */,
 				A099108C1EC75EAA00A9FEE8 /* Info.plist */,
-				A099108D1EC75EAA00A9FEE8 /* iphoneos.modulemap */,
-				A099108E1EC75EAA00A9FEE8 /* iphonesimulator.modulemap */,
+				A04AB1361F2B9B1D00AD374B /* iphoneos */,
+				A04AB1381F2B9B1D00AD374B /* iphonesimulator */,
 			);
 			path = CommonCrypto;
 			sourceTree = "<group>";

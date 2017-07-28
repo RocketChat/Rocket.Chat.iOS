@@ -22,7 +22,11 @@ TODO: Add long description of the pod here.
 
   s.frameworks = 'UIKit'
 
-  s.vendored_frameworks = 'CommonCrypto.framework'
+  s.preserve_path = 'CommonCrypto/**/*'
+  s.xcconfig = {
+    'SWIFT_INCLUDE_PATHS[sdk=iphonesimulator*]' => File.join(File.dirname(__FILE__), 'CommonCrypto/iphonesimulator/'),
+    'SWIFT_INCLUDE_PATHS[sdk=iphoneos*]' => File.join(File.dirname(__FILE__), 'CommonCrypto/iphoneos/')
+  }
 
   s.module_name = 'RocketChat'
 

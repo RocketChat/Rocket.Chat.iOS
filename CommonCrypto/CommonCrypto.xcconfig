@@ -1,2 +1,2 @@
-MODULEMAP_FILE[sdk=iphoneos*] = $(SRCROOT)/CommonCrypto/iphoneos.modulemap
-MODULEMAP_FILE[sdk=iphonesimulator*] = $(SRCROOT)/CommonCrypto/iphonesimulator.modulemap
+MODULEMAP_FILE[sdk=iphoneos*] = $(SRCROOT)/CommonCrypto/iphoneos/module.modulemap
+MODULEMAP_FILE[sdk=iphonesimulator*] = $(SRCROOT)/CommonCrypto/iphonesimulator/module.modulemap
