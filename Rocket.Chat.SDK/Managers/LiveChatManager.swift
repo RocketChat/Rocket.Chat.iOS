@@ -167,7 +167,10 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
             guard let offlineFormViewController = navigationViewController.viewControllers.first as? OfflineFormViewController else {
                 fatalError("Unexpected view hierachy: navigation controller's root view controller is not offline form view controller")
             }
+
             offlineFormViewController.injectionContainer = injectionContainer
+            navigationViewController.modalPresentationStyle = .formSheet
+
             DispatchQueue.main.async {
                 UIApplication.shared.delegate?.window??.rootViewController?.present(navigationViewController, animated: true, completion: nil)
             }
