@@ -10,10 +10,11 @@ import UIKit
 
 class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInjected {
 
-    static let minimumHeight = 32 + bubbleVerticalMargin
     static let receivedIdentifier = "ReceivedMessageBubble"
     static let sentIdendifier = "SentMessageBubble"
 
+    private static let messageContentMinimumHeight: CGFloat = 18
+    private static let bubbleMinimumHeight: CGFloat = messageContentMinimumHeight + bubblePadding
     private static let bubbleWidthProportion: CGFloat = 0.72
     private static let bubbleVerticalMargin: CGFloat = 2
     private static let bubblePadding: CGFloat = 12
@@ -40,7 +41,7 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        bubbleView.layer.cornerRadius = ChatMessageBubbleCell.minimumHeight / 2
+        bubbleView.layer.cornerRadius = ChatMessageBubbleCell.bubbleMinimumHeight / 2
         messageTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
@@ -48,10 +49,11 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
         let fullWidth = UIScreen.main.bounds.size.width
         let size = UILabel.sizeForView(
             messageTextCacheManager.message(for: message, style: style)?.string ?? "",
-            font: UIFont.systemFont(ofSize: 15),
-            width: fullWidth * ChatMessageBubbleCell.bubbleWidthProportion - ChatMessageBubbleCell.bubblePadding
-            )
-        var total = size.height + ChatMessageBubbleCell.bubblePadding + ChatMessageBubbleCell.bubbleVerticalMargin
+            font: MessageTextFontAttributes.font(for: style),
+            width: fullWidth * ChatMessageBubbleCell.bubbleWidthProportion - ChatMessageBubbleCell.bubblePadding,
+            lineBreakMode: .byWordWrapping
+        )
+        var total = size.height
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -74,7 +76,12 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
             }
         }
 
-        return CGSize(width: size.width, height: total > ChatMessageBubbleCell.minimumHeight ? total : ChatMessageBubbleCell.minimumHeight)
+        if total < ChatMessageBubbleCell.messageContentMinimumHeight {
+            total = ChatMessageBubbleCell.messageContentMinimumHeight
+        }
+        total += ChatMessageBubbleCell.bubblePadding + ChatMessageBubbleCell.bubbleVerticalMargin
+
+        return CGSize(width: size.width, height: total)
     }
 
     override func prepareForReuse() {
