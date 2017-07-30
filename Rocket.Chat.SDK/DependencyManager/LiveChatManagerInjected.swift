@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol LiveChatManagerInjected: Injected {}
+protocol LiveChatManagerInjected {}
 extension LiveChatManagerInjected {
     var livechatManager: LiveChatManager {
         return DependencyRepository.livechatManager

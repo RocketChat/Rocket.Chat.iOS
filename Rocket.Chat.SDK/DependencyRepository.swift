@@ -19,6 +19,7 @@ public class DependencyRepository {
     public static var messageManager = MessageManager()
     public static var uploadManager = UploadManager()
     public static var pushManager = PushManager()
+    public static var serverManager = ServerManager()
     public static var messageTextCacheManager = MessageTextCacheManager()
 
     public static var livechatManager = LiveChatManager()

@@ -21,7 +21,7 @@ public class SupportViewController: UITableViewController, LiveChatManagerInject
         didSet {
         }
     }
-    var department: Department? = livechatManager.departments.first {
+    var department: Department? {
         didSet {
             // department may be set before view initialized
             departmentLabel?.text = department?.name
@@ -30,6 +30,7 @@ public class SupportViewController: UITableViewController, LiveChatManagerInject
 
     override public func viewDidLoad() {
         super.viewDidLoad()
+        department = livechatManager.departments.first
         departmentLabel.text = department?.name
     }
 
