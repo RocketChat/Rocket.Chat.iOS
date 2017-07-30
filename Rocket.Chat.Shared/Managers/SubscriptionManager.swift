@@ -75,7 +75,7 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
                         }
                     }
 
-                    auth.lastSubscriptionFetch = Date()
+                    auth.lastSubscriptionFetch = Date.serverDate
                     realm.add(subscriptions, update: true)
 
                     DispatchQueue.main.async {
@@ -124,7 +124,7 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
                     subscriptions.append(subscription)
                 }
 
-                auth.lastSubscriptionFetch = Date()
+                auth.lastSubscriptionFetch = Date.serverDate
 
                 realm.add(subscriptions, update: true)
                 realm.add(auth, update: true)

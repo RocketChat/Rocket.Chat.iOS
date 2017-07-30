@@ -9,11 +9,15 @@
 import UIKit
 
 final class Launcher: LauncherProtocol {
+
+    var injectionContainer: InjectionContainer!
+
     lazy var coordinators: [LauncherCoordinator] = {
         return [
-            PersistencyCoordinator(),
-            BugTrackingCoordinator(),
-            UserCoordinator()
+            PersistencyCoordinator(injectionContainer),
+            BugTrackingCoordinator(injectionContainer),
+            UserCoordinator(injectionContainer),
+            TimestampCoordinator(injectionContainer)
         ]
     }()
 }

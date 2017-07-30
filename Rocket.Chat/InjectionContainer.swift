@@ -16,5 +16,6 @@ public protocol InjectionContainer {
     var messageManager: MessageManager { get }
     var uploadManager: UploadManager { get }
     var pushManager: PushManager { get }
+    var serverManager: ServerManager { get }
     var messageTextCacheManager: MessageTextCacheManager { get }
 }

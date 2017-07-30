@@ -264,7 +264,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         Realm.executeOnMainThread({ (realm) in
             message = Message()
             message?.internalType = ""
-            message?.createdAt = Date()
+            message?.createdAt = Date.serverDate
             message?.text = messageText
             message?.subscription = self.subscription
             message?.identifier = String.random(18)

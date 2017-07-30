@@ -192,6 +192,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
 
                 realm.add(auth)
             }, completion: {
+                ServerManager.timestampSync()
                 completion(response)
             })
         }

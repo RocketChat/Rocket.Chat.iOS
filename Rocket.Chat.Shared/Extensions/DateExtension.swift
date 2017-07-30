@@ -58,3 +58,17 @@ extension Date {
     }
 
 }
+
+// MARK: Extensions to sync timezone with server
+
+extension Date {
+
+    static var serverUnixTimestamp: TimeInterval {
+        return Date().timeIntervalSince1970 * 1000 - ServerManager.shared.timestampOffset
+    }
+
+    static var serverDate: Date {
+        return Date(timeIntervalSince1970: Date.serverUnixTimestamp / 1000)
+    }
+
+}

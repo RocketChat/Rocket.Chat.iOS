@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol Injected {
+public protocol Injected {
     var injectionContainer: InjectionContainer! { get set }
 }
 
@@ -58,6 +58,13 @@ protocol PushManagerInjected: Injected {}
 extension PushManagerInjected {
     var pushManager: PushManager {
         return injectionContainer.pushManager
+    }
+}
+
+protocol ServerManagerInjected: Injected {}
+extension ServerManagerInjected {
+    var serverManager: ServerManager {
+        return injectionContainer.serverManager
     }
 }
 
