@@ -13,8 +13,6 @@ import OnePasswordExtension
 
 final class AuthViewController: BaseViewController, AuthManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-
     internal var connecting = false
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
@@ -85,15 +83,8 @@ final class AuthViewController: BaseViewController, AuthManagerInjected {
         switch identifier {
         case "TwoFactor":
             guard let controller = segue.destination as? TwoFactorAuthenticationViewController else  { break }
-            controller.injectionContainer = injectionContainer
             controller.username = textFieldUsername.text ?? ""
             controller.password = textFieldPassword.text ?? ""
-        case "New account":
-            guard let controller = segue.destination as? SignupViewController else { return }
-            controller.injectionContainer = injectionContainer
-        case "RequestUsername":
-            guard let controller = segue.destination as? RegisterUsernameViewController else { return }
-            controller.injectionContainer = injectionContainer
         default:
             break
         }

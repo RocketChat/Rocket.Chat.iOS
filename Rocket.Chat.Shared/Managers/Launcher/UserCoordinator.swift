@@ -11,9 +11,6 @@ import RealmSwift
 
 class UserCoordinator: LauncherCoordinator {
 
-    var injectionContainer: InjectionContainer!
-    required init() {}
-
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey : Any]?) {
         turnAllUsersOffline()
     }

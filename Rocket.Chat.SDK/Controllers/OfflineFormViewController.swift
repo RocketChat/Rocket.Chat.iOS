@@ -10,8 +10,6 @@ import UIKit
 
 class OfflineFormViewController: UITableViewController, LiveChatManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var messageTextView: UITextView!

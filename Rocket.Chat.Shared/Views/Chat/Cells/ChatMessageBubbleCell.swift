@@ -21,7 +21,6 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
 
     weak var longPressGesture: UILongPressGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
-    var injectionContainer: InjectionContainer!
     var message: Message! {
         didSet {
             updateMessageInformation()

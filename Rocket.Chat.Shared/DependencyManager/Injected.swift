@@ -8,69 +8,65 @@
 
 import Foundation
 
-public protocol Injected {
-    var injectionContainer: InjectionContainer! { get set }
-}
-
-protocol SocketManagerInjected: Injected {}
+protocol SocketManagerInjected {}
 extension SocketManagerInjected {
     var socketManager: SocketManager {
-        return injectionContainer.socketManager
+        return DependencyRepository.socketManager
     }
 }
 
-protocol AuthManagerInjected: Injected {}
+protocol AuthManagerInjected {}
 extension AuthManagerInjected {
     var authManager: AuthManager {
-        return injectionContainer.authManager
+        return DependencyRepository.authManager
     }
 }
 
-protocol SubscriptionManagerInjected: Injected {}
+protocol SubscriptionManagerInjected {}
 extension SubscriptionManagerInjected {
     var subscriptionManager: SubscriptionManager {
-        return injectionContainer.subscriptionManager
+        return DependencyRepository.subscriptionManager
     }
 }
 
-protocol UserManagerInjected: Injected {}
+protocol UserManagerInjected {}
 extension UserManagerInjected {
     var userManager: UserManager {
-        return injectionContainer.userManager
+        return DependencyRepository.userManager
     }
 }
 
-protocol MessageManagerInjected: Injected {}
+protocol MessageManagerInjected {}
 extension MessageManagerInjected {
     var messageManager: MessageManager {
-        return injectionContainer.messageManager
+        return DependencyRepository.messageManager
     }
 }
 
-protocol UploadManagerInjected: Injected {}
+protocol UploadManagerInjected {}
 extension UploadManagerInjected {
     var uploadManager: UploadManager {
-        return injectionContainer.uploadManager
+        return DependencyRepository.uploadManager
     }
 }
 
-protocol PushManagerInjected: Injected {}
+protocol PushManagerInjected {}
 extension PushManagerInjected {
     var pushManager: PushManager {
-        return injectionContainer.pushManager
+        return DependencyRepository.pushManager
     }
 }
 
-protocol ServerManagerInjected: Injected {}
+protocol ServerManagerInjected {}
 extension ServerManagerInjected {
     var serverManager: ServerManager {
-        return injectionContainer.serverManager
+        return DependencyRepository.serverManager
     }
 }
 
-protocol MessageTextCacheManagerInjected: Injected {}
+protocol MessageTextCacheManagerInjected {}
 extension MessageTextCacheManagerInjected {
     var messageTextCacheManager: MessageTextCacheManager {
-        return injectionContainer.messageTextCacheManager
+        return DependencyRepository.messageTextCacheManager
     }
 }

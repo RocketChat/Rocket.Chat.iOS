@@ -11,8 +11,6 @@ import SwiftyJSON
 
 final class RegisterUsernameViewController: BaseViewController, AuthManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-
     internal var requesting = false
 
     var serverPublicSettings: AuthSettings?

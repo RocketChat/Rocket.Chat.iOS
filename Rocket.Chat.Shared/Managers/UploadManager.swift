@@ -25,9 +25,6 @@ public struct FileUpload {
 /// A manager that manages all user generated files and images uploads
 public class UploadManager: SocketManagerInjected, AuthManagerInjected {
 
-    /// Dependency injection container, replace it to change the behavior of the upload manager
-    public var injectionContainer: InjectionContainer!
-
     fileprivate func sendFileMessage(params: [Any], completion: @escaping UploadCompletionBlock) {
         let request = [
             "msg": "method",

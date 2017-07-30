@@ -11,6 +11,6 @@ import Foundation
 protocol LiveChatManagerInjected: Injected {}
 extension LiveChatManagerInjected {
     var livechatManager: LiveChatManager {
-        return injectionContainer.livechatManager
+        return DependencyRepository.livechatManager
     }
 }

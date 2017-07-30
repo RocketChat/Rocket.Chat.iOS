@@ -11,8 +11,6 @@ import SwiftyJSON
 
 final class SignupViewController: BaseViewController, AuthManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-
     internal var requesting = false
 
     var serverPublicSettings: AuthSettings?
@@ -54,18 +52,6 @@ final class SignupViewController: BaseViewController, AuthManagerInjected {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(true)
         NotificationCenter.default.removeObserver(self)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        guard let identifier = segue.identifier else { return }
-        switch identifier {
-        case "RequestUsername":
-            guard let controller = segue.destination as? RegisterUsernameViewController else { break }
-            controller.injectionContainer = injectionContainer
-        default:
-            break
-        }
     }
 
     func startLoading() {

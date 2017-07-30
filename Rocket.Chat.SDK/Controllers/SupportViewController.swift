@@ -17,17 +17,11 @@ public class SupportViewController: UITableViewController, LiveChatManagerInject
     @IBOutlet weak var initialMessageField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    public var injectionContainer: InjectionContainer! {
-        didSet {
-            department = livechatManager.departments.first
-        }
-    }
-
     var allowChangeDepartment = true {
         didSet {
         }
     }
-    var department: Department? {
+    var department: Department? = livechatManager.departments.first {
         didSet {
             // department may be set before view initialized
             departmentLabel?.text = department?.name
@@ -49,7 +43,6 @@ public class SupportViewController: UITableViewController, LiveChatManagerInject
             guard let viewController = segue.destination as? SupportDepartmentViewController else {
                 return
             }
-            viewController.injectionContainer = injectionContainer
             viewController.delegate = self
             let index = livechatManager.departments.index(where: { (department) -> Bool in
                 guard let selfDepartment = self.department else { return false }

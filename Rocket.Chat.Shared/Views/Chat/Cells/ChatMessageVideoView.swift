@@ -17,7 +17,6 @@ protocol ChatMessageVideoViewProtocol: class {
 final class ChatMessageVideoView: UIView, AuthManagerInjected {
     static let defaultHeight = CGFloat(250)
 
-    var injectionContainer: InjectionContainer!
     weak var delegate: ChatMessageVideoViewProtocol?
     var attachment: Attachment! {
         didSet {

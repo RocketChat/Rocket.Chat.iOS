@@ -12,9 +12,6 @@ import Crashlytics
 
 class BugTrackingCoordinator: LauncherCoordinator {
 
-    var injectionContainer: InjectionContainer!
-    required init() {}
-    
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
         launchFabric()
     }

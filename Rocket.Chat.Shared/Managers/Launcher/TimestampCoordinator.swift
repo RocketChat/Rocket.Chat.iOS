@@ -10,9 +10,6 @@ import UIKit
 
 class TimestampCoordinator: LauncherCoordinator, ServerManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-    required init() {}
-
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
         serverManager.timestampSync()
     }

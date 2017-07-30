@@ -12,7 +12,6 @@ import RealmSwift
 /// A manager that manages all livechat related actions
 public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, SubscriptionManagerInjected {
 
-    public var injectionContainer: InjectionContainer!
     public var initiated = false
     public var loggedIn = false
     var visitorToken = ""
@@ -153,7 +152,6 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
             guard let supportViewController = navigationViewController.viewControllers.first as? SupportViewController else {
                 fatalError("Unexpected view hierachy: navigation controller's root view controller is not support view controller")
             }
-            supportViewController.injectionContainer = injectionContainer
             DispatchQueue.main.async {
                 UIApplication.shared.delegate?.window??.rootViewController?.present(navigationViewController, animated: true, completion: nil)
             }
@@ -164,7 +162,6 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
             guard let offlineFormViewController = navigationViewController.viewControllers.first as? OfflineFormViewController else {
                 fatalError("Unexpected view hierachy: navigation controller's root view controller is not offline form view controller")
             }
-            offlineFormViewController.injectionContainer = injectionContainer
             DispatchQueue.main.async {
                 UIApplication.shared.delegate?.window??.rootViewController?.present(navigationViewController, animated: true, completion: nil)
             }
@@ -180,7 +177,6 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         }
         let storyboard = UIStoryboard(name: "Chatting", bundle: Bundle.rocketChat)
         let chatViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController
-        chatViewController?.injectionContainer = injectionContainer
         guard let realm = try? Realm() else { return nil }
         guard let subscription = Subscription.find(rid: room, realm: realm) else { return nil }
         chatViewController?.subscription = subscription

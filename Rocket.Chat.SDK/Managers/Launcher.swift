@@ -11,9 +11,6 @@ import Foundation
 /// Centralized management of launching
 public class Launcher: LauncherProtocol {
 
-    public var injectionContainer: InjectionContainer!
-    required public init() {}
-
     /// Actual coodinators
     public lazy var coordinators: [LauncherCoordinator] = {
         return [

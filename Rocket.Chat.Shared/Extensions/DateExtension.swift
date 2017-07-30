@@ -64,7 +64,7 @@ extension Date {
 extension Date {
 
     static var serverUnixTimestamp: TimeInterval {
-        return Date().timeIntervalSince1970 * 1000 - ServerManager.shared.timestampOffset
+        return Date().timeIntervalSince1970 * 1000 - DependencyRepository.serverManager.timestampOffset
     }
 
     static var serverDate: Date {

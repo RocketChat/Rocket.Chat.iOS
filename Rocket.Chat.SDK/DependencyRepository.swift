@@ -11,26 +11,15 @@ import Foundation
 /**
     A simple dependency injection repository
  */
-public class DependencyRepository: InjectionContainer {
-    public var socketManager: SocketManager = SDKSocketManager()
-    public var authManager = AuthManager()
-    public var subscriptionManager: SubscriptionManager = LiveChatSubscriptionManager()
-    public var userManager = UserManager()
-    public var messageManager = MessageManager()
-    public var uploadManager = UploadManager()
-    public var pushManager = PushManager()
-    public var messageTextCacheManager = MessageTextCacheManager()
+public class DependencyRepository {
+    public static var socketManager: SocketManager = SDKSocketManager()
+    public static var authManager = AuthManager()
+    public static var subscriptionManager: SubscriptionManager = LiveChatSubscriptionManager()
+    public static var userManager = UserManager()
+    public static var messageManager = MessageManager()
+    public static var uploadManager = UploadManager()
+    public static var pushManager = PushManager()
+    public static var messageTextCacheManager = MessageTextCacheManager()
 
-    public var livechatManager = LiveChatManager()
-
-    init() {
-        socketManager.injectionContainer = self
-        authManager.injectionContainer = self
-        subscriptionManager.injectionContainer = self
-        userManager.injectionContainer = self
-        messageManager.injectionContainer = self
-        pushManager.injectionContainer = self
-
-        livechatManager.injectionContainer = self
-    }
+    public static var livechatManager = LiveChatManager()
 }

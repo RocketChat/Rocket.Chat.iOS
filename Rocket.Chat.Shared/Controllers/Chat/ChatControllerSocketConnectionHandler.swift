@@ -26,7 +26,6 @@ extension ChatViewController: SocketConnectionHandler {
         chatHeaderViewStatus?.removeFromSuperview()
 
         if let headerView = ChatHeaderViewStatus.instantiateFromNib() {
-            headerView.injectionContainer = injectionContainer
             headerView.translatesAutoresizingMaskIntoConstraints = false
             headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 44)
             view.addSubview(headerView)

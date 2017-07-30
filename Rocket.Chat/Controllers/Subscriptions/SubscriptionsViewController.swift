@@ -11,12 +11,6 @@ import RealmSwift
 // swiftlint:disable file_length
 final class SubscriptionsViewController: BaseViewController, AuthManagerInjected, SubscriptionManagerInjected {
 
-    var injectionContainer: InjectionContainer! {
-        didSet {
-            subscribeModelChanges()
-        }
-    }
-
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
 
@@ -86,6 +80,10 @@ final class SubscriptionsViewController: BaseViewController, AuthManagerInjected
 
     var groupInfomation: [[String: String]]?
     var groupSubscriptions: [[Subscription]]?
+
+    override func viewDidLoad() {
+        subscribeModelChanges()
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -442,8 +440,6 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
 
     func presentUserMenu() {
         guard let viewUserMenu = SubscriptionUserStatusView.instantiateFromNib() else { return }
-        viewUserMenu.injectionContainer = injectionContainer
-
         var newFrame = view.frame
         newFrame.origin.y = -newFrame.height
         viewUserMenu.frame = newFrame

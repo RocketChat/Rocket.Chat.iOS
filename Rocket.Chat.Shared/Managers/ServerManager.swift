@@ -11,7 +11,6 @@ import SwiftyJSON
 
 public class ServerManager: AuthManagerInjected {
 
-    public var injectionContainer: InjectionContainer!
     var timestampOffset = 0.0
 
     func timestampSync() {

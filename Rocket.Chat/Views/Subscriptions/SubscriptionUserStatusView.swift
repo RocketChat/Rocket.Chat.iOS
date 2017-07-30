@@ -14,7 +14,6 @@ protocol SubscriptionUserStatusViewProtocol: class {
 
 final class SubscriptionUserStatusView: UIView, UserManagerInjected, AuthManagerInjected {
 
-    var injectionContainer: InjectionContainer!
     weak var delegate: SubscriptionUserStatusViewProtocol?
     weak var parentController: UIViewController?
 

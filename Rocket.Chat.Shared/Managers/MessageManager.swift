@@ -14,9 +14,6 @@ public class MessageManager: SocketManagerInjected {
     /// Default history fetch size
     let historySize = 30
 
-    /// Dependency injection container, replace it to change the behavior of the message manager
-    public var injectionContainer: InjectionContainer!
-
     /// A list that maintains all blocked users, stored in `UserDefaults`
     var blockedUsersList = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 }

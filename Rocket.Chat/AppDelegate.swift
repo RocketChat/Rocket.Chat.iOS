@@ -14,10 +14,9 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate, AuthManagerInjected, SocketManagerInjected, PushManagerInjected, UserManagerInjected {
 
     var window: UIWindow?
-    var injectionContainer: InjectionContainer! = DependencyRepository()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        Launcher(injectionContainer).prepareToLaunch(with: launchOptions)
+        Launcher().prepareToLaunch(with: launchOptions)
 
         UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in }
         application.registerForRemoteNotifications()

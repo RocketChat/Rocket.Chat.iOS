@@ -12,9 +12,6 @@ import RealmSwift
 /// A manager that manages all subscription related actions
 public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
 
-    /// Dependency injection container, replace it to change the behavior of the auth manager
-    public var injectionContainer: InjectionContainer!
-
     // swiftlint:disable function_body_length
     /// Updates all subscriptions information and stores them locally from remote server
     ///

@@ -11,9 +11,6 @@ import Foundation
 /// Main interface of the RocketChat SDK
 public final class RocketChat {
 
-    /// Dependency injection container, replace it to change the behavior of the SDK
-    public static var injectionContainer = DependencyRepository()
-
     /// Configure the RocketChat SDK, should be called before any other operations with the SDK for SDK initialization.
     ///
     /// - Parameters:
@@ -24,9 +21,9 @@ public final class RocketChat {
         guard let socketURL = serverURL.socketURL(secured: secured) else {
             return
         }
-        Launcher(injectionContainer).prepareToLaunch(with: nil)
-        injectionContainer.socketManager.connect(socketURL) { (_, _) in
-            self.injectionContainer.authManager.updatePublicSettings(nil) { _ in
+        Launcher().prepareToLaunch(with: nil)
+        DependencyRepository.socketManager.connect(socketURL) { (_, _) in
+            DependencyRepository.authManager.updatePublicSettings(nil) { _ in
                 DispatchQueue.main.async(execute: completion)
             }
         }
@@ -36,34 +33,34 @@ public final class RocketChat {
     ///
     /// - Returns: an instance of `LiveChatManager`
     public class func livechat() -> LiveChatManager {
-        return injectionContainer.livechatManager
+        return DependencyRepository.livechatManager
     }
 
     /// Get the default auth manager
     ///
     /// - Returns: an instance of `AuthManager`
     public class func auth() -> AuthManager {
-        return injectionContainer.authManager
+        return DependencyRepository.authManager
     }
 
     /// Get the default user manager
     ///
     /// - Returns: an instance of `UserManager`
     public class func user() -> UserManager {
-        return injectionContainer.userManager
+        return DependencyRepository.userManager
     }
 
     /// Get the default socket manager
     ///
     /// - Returns: an instance of `SocketManager`
     public class func socket() -> SocketManager {
-        return injectionContainer.socketManager
+        return DependencyRepository.socketManager
     }
 
     /// Get the default push manager
     ///
     /// - Returns: an instance of `PushManager`
     public class func push() -> PushManager {
-        return injectionContainer.pushManager
+        return DependencyRepository.pushManager
     }
 }
