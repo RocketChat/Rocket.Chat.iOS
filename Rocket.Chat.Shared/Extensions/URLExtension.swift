@@ -10,6 +10,18 @@ import Foundation
 
 extension URL {
 
+    func timestampURL() -> URL? {
+        var components = URLComponents()
+        components.scheme = "https"
+        components.host = self.host != nil ? self.host : self.path
+        components.path = ""
+        components.port = self.port != nil ? self.port : nil
+
+        var newURL = components.url
+        newURL = newURL?.appendingPathComponent("_timesync")
+        return newURL
+    }
+
     func validateURL(secured: Bool = true) -> URL? {
         var components = URLComponents()
         if secured {

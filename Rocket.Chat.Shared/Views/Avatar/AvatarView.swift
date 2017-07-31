@@ -16,8 +16,6 @@ let avatarColors: [UInt] = [
 
 final class AvatarView: UIView, AuthManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-
     var imageURL: URL? {
         didSet {
             updateAvatar()

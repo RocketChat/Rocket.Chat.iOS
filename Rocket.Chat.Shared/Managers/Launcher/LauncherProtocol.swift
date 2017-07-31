@@ -11,7 +11,6 @@ import UIKit
 protocol LauncherProtocol {
     var coordinators: [LauncherCoordinator] { get }
 }
-
 extension LauncherProtocol {
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
         coordinators.forEach { $0.prepareToLaunch(with: options) }

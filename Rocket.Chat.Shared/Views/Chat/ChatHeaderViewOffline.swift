@@ -10,8 +10,6 @@ import UIKit
 
 final class ChatHeaderViewOffline: UIView, SocketManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
             labelTitle.text = localized("connection.offline.banner.message")

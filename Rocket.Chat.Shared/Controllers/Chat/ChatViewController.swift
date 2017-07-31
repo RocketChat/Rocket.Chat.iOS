@@ -58,19 +58,6 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         }
     }
 
-    var injectionContainer: InjectionContainer! {
-        didSet {
-            socketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
-
-            guard self.subscription == nil else { return }
-            guard let auth = authManager.isAuthenticated() else { return }
-            let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-            if let subscription = subscriptions.first {
-                self.subscription = subscription
-            }
-        }
-    }
-
     // MARK: View Life Cycle
 
     deinit {
@@ -112,6 +99,15 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
         view.bringSubview(toFront: textInputbar)
+
+        socketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
+        guard self.subscription == nil else { return }
+        guard let auth = authManager.isAuthenticated() else { return }
+        let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
+        if let subscription = subscriptions.first {
+            self.subscription = subscription
+        }
     }
 
     internal func reconnect() {
@@ -145,7 +141,6 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
     override public func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let nav = segue.destination as? UINavigationController, segue.identifier == "Channel Info" {
             if let controller = nav.viewControllers.first as? ChannelInfoViewController {
-                controller.injectionContainer = self.injectionContainer
                 if let subscription = self.subscription {
                     controller.subscription = subscription
                 }
@@ -264,7 +259,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         Realm.executeOnMainThread({ (realm) in
             message = Message()
             message?.internalType = ""
-            message?.createdAt = Date()
+            message?.createdAt = Date.serverDate
             message?.text = messageText
             message?.subscription = self.subscription
             message?.identifier = String.random(18)
@@ -456,7 +451,9 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
 
                 let indexPaths = self.dataController.insert(objs)
                 collectionView.insertItems(at: indexPaths)
-                collectionView.reloadItems(at: indexPaths.filter { $0.row > 0 }.map { IndexPath(row: $0.row - 1, section: $0.section) })
+                if self.messageCellStyle == .bubble {
+                    collectionView.reloadItems(at: indexPaths.filter { $0.row > 0 }.map { IndexPath(row: $0.row - 1, section: $0.section) })
+                }
             }, completion: { _ in
                 let shouldScroll = self.isContentBiggerThanContainerHeight()
                 if updateScrollPosition && shouldScroll {
@@ -475,7 +472,6 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         chatPreviewModeView?.removeFromSuperview()
 
         if let previewView = ChatPreviewModeView.instantiateFromNib() {
-            previewView.injectionContainer = injectionContainer
             previewView.delegate = self
             previewView.subscription = subscription
             previewView.frame = CGRect(x: 0, y: view.frame.height - previewView.frame.height, width: view.frame.width, height: previewView.frame.height)
@@ -556,7 +552,6 @@ extension ChatViewController {
                     return UICollectionViewCell()
             }
 
-            cell.injectionContainer = self.injectionContainer
             cell.delegate = self
 
             if let message = obj.message {
@@ -568,7 +563,6 @@ extension ChatViewController {
             guard let message = obj.message else { return UICollectionViewCell() }
             if message.user == authManager.currentUser() {
                 guard let cell = collectionView?.dequeueReusableCell(withReuseIdentifier: ChatMessageBubbleCell.sentIdendifier, for: indexPath) as? ChatMessageBubbleCell else { return UICollectionViewCell() }
-                cell.injectionContainer = self.injectionContainer
                 cell.delegate = self
                 cell.message = message
                 cell.type = .sentBubble
@@ -576,7 +570,6 @@ extension ChatViewController {
                 return cell
             } else {
                 guard let cell = collectionView?.dequeueReusableCell(withReuseIdentifier: ChatMessageBubbleCell.receivedIdentifier, for: indexPath) as? ChatMessageBubbleCell else { return UICollectionViewCell() }
-                cell.injectionContainer = self.injectionContainer
                 cell.delegate = self
                 cell.message = message
                 cell.type = .receivedBubble

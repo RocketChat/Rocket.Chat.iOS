@@ -33,8 +33,6 @@ public protocol SocketConnectionHandler {
 /// A manager that manages all web socket connection related actions
 public class SocketManager: AuthManagerInjected, PushManagerInjected, SubscriptionManagerInjected, UserManagerInjected {
 
-    public var injectionContainer: InjectionContainer!
-
     var serverURL: URL?
 
     var socket: WebSocket?
@@ -53,6 +51,9 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
         self.socket = WebSocket(url: url)
         self.socket?.delegate = self
         self.socket?.pongDelegate = self
+        self.socket?.headers = [
+            "Host": url.host ?? ""
+        ]
 
         self.socket?.connect()
     }

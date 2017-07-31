@@ -10,8 +10,6 @@ import UIKit
 
 final class MainViewController: BaseViewController, AuthManagerInjected, SubscriptionManagerInjected, UserManagerInjected, PushManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-
     @IBOutlet weak var labelAuthenticationStatus: UILabel!
     @IBOutlet weak var buttonConnect: UIButton!
 
@@ -36,7 +34,6 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
         super.awakeFromNib()
 
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        self.injectionContainer = appDelegate.injectionContainer
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -92,18 +89,4 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
             buttonConnect.isEnabled = true
         }
     }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        guard let identifier = segue.identifier else { return }
-        switch identifier {
-        case "Auth":
-            guard let navigationController = segue.destination as? UINavigationController else { return }
-            guard let connectServerViewController = navigationController.viewControllers.first as? ConnectServerViewController else { return }
-            connectServerViewController.injectionContainer = self.injectionContainer
-        default:
-            break
-        }
-    }
-
 }

@@ -16,7 +16,6 @@ protocol ChatMessageImageViewProtocol: class {
 final class ChatMessageImageView: UIView, AuthManagerInjected {
     static let defaultHeight = CGFloat(250)
 
-    var injectionContainer: InjectionContainer!
     weak var delegate: ChatMessageImageViewProtocol?
     var attachment: Attachment! {
         didSet {

@@ -10,6 +10,7 @@ import Foundation
 
 /// Centralized management of launching
 public class Launcher: LauncherProtocol {
+
     /// Actual coodinators
     public lazy var coordinators: [LauncherCoordinator] = {
         return [

@@ -11,9 +11,6 @@ import Foundation
 /// A manager that manages all user related actions
 public class UserManager: SocketManagerInjected {
 
-    /// Dependency injection container, replace it to change the behavior of the user manager
-    public var injectionContainer: InjectionContainer!
-
     /// Subscribe active users' changes
     public func changes() {
         let request = [

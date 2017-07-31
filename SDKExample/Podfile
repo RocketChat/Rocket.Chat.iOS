@@ -7,7 +7,7 @@ target 'SDKExample' do
 
   # Pods for SDKExample
 
-  pod 'RocketChat', path: '../', inhibit_warnings: false
+  pod 'RocketChat', path: '../'
 
   target 'SDKExampleTests' do
     inherit! :search_paths

@@ -19,8 +19,6 @@ final class ChatHeaderViewStatus: UIView, SocketManagerInjected {
 
     @IBOutlet weak var buttonRefresh: UIButton!
 
-    var injectionContainer: InjectionContainer!
-
     @IBAction func buttonRefreshDidPressed(_ sender: Any) {
         socketManager.reconnect()
     }

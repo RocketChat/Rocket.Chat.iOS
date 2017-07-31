@@ -12,7 +12,6 @@ import RealmSwift
 /// A manager that manages all livechat related actions
 public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, SubscriptionManagerInjected {
 
-    public var injectionContainer: InjectionContainer!
     public var initiated = false
     public var loggedIn = false
     var visitorToken = ""
@@ -186,7 +185,6 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         }
         let storyboard = UIStoryboard(name: "Chatting", bundle: Bundle.rocketChat)
         let chatViewController = storyboard.instantiateViewController(withIdentifier: "ChatViewController") as? ChatViewController
-        chatViewController?.injectionContainer = injectionContainer
         guard let realm = try? Realm() else { return nil }
         guard let subscription = Subscription.find(rid: room, realm: realm) else { return nil }
         chatViewController?.subscription = subscription

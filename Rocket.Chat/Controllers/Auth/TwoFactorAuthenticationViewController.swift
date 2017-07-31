@@ -11,8 +11,6 @@ import SwiftyJSON
 
 final class TwoFactorAuthenticationViewController: BaseViewController, AuthManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-
     internal var requesting = false
 
     var username: String = ""

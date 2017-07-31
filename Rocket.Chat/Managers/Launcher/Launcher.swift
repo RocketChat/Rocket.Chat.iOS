@@ -9,11 +9,13 @@
 import UIKit
 
 final class Launcher: LauncherProtocol {
+
     lazy var coordinators: [LauncherCoordinator] = {
         return [
             PersistencyCoordinator(),
             BugTrackingCoordinator(),
-            UserCoordinator()
+            UserCoordinator(),
+            TimestampCoordinator()
         ]
     }()
 }

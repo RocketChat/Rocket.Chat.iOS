@@ -14,7 +14,6 @@ protocol ChatPreviewModeViewProtocol: class {
 
 final class ChatPreviewModeView: UIView, SubscriptionManagerInjected {
 
-    var injectionContainer: InjectionContainer!
     weak var delegate: ChatPreviewModeViewProtocol?
     var subscription: Subscription! {
         didSet {

@@ -18,11 +18,7 @@ struct AuthManagerPersistKeys {
 
 
 /// A manager that manages all authentication related actions
-public class AuthManager: SocketManagerInjected, PushManagerInjected {
-
-    /// Dependency injection container, replace it to change the behavior of the auth manager
-    public var injectionContainer: InjectionContainer!
-
+public class AuthManager: SocketManagerInjected, PushManagerInjected, ServerManagerInjected {
     /// Last auth object (sorted by lastAccess), if exists; nil otherwise.
     ///
     /// - Returns: an instance of `Auth`
@@ -192,6 +188,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected {
 
                 realm.add(auth)
             }, completion: {
+                self.serverManager.timestampSync()
                 completion(response)
             })
         }

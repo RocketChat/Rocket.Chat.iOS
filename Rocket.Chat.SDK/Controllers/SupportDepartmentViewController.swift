@@ -14,7 +14,6 @@ public protocol SupportDepartmentViewControllerDelegate: class {
 
 class SupportDepartmentViewController: UITableViewController, LiveChatManagerInjected {
 
-    var injectionContainer: InjectionContainer!
     weak var delegate: SupportDepartmentViewControllerDelegate?
 
     var selectedIndexPath: IndexPath = IndexPath(row: 0, section: 0)
@@ -55,12 +54,13 @@ class SupportDepartmentViewController: UITableViewController, LiveChatManagerInj
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DepartmentCell", for: indexPath)
 
-        guard let label = cell.contentView.viewWithTag(1) as? UILabel else {
-            return cell
-        }
         cell.accessoryType = .none
-
-        label.text = livechatManager.departments[indexPath.row].name
+        if let label = cell.contentView.viewWithTag(1) as? UILabel {
+            label.text = livechatManager.departments[indexPath.row].name
+        }
+        if let label = cell.contentView.viewWithTag(2) as? UILabel {
+            label.text = livechatManager.departments[indexPath.row].description
+        }
 
         return cell
     }
