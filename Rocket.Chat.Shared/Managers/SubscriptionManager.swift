@@ -12,9 +12,6 @@ import RealmSwift
 /// A manager that manages all subscription related actions
 public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
 
-    /// Dependency injection container, replace it to change the behavior of the auth manager
-    public var injectionContainer: InjectionContainer!
-
     // swiftlint:disable function_body_length
     /// Updates all subscriptions information and stores them locally from remote server
     ///
@@ -75,7 +72,7 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
                         }
                     }
 
-                    auth.lastSubscriptionFetch = Date()
+                    auth.lastSubscriptionFetch = Date.serverDate
                     realm.add(subscriptions, update: true)
 
                     DispatchQueue.main.async {
@@ -124,7 +121,7 @@ public class SubscriptionManager: SocketManagerInjected, AuthManagerInjected {
                     subscriptions.append(subscription)
                 }
 
-                auth.lastSubscriptionFetch = Date()
+                auth.lastSubscriptionFetch = Date.serverDate
 
                 realm.add(subscriptions, update: true)
                 realm.add(auth, update: true)

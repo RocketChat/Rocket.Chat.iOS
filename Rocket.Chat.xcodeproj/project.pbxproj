@@ -41,7 +41,6 @@
 		41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */; };
 		41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A1E1D3865FE00896FC0 /* MessageManagerSpec.swift */; };
 		41DC7A221D386B4700896FC0 /* StringExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */; };
-		41DC7A241D386CA800896FC0 /* NSDateExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A231D386CA800896FC0 /* NSDateExtensionSpec.swift */; };
 		41DCB8261DDC828200E1197F /* SubscriptionSearchMoreView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41DCB8251DDC828200E1197F /* SubscriptionSearchMoreView.xib */; };
 		41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DCB8271DDC82E000E1197F /* SubscriptionSearchMoreView.swift */; };
 		41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DF76E21D2C50710028DBF8 /* AppDelegate.swift */; };
@@ -72,10 +71,9 @@
 		A01074E31EF57C0C0066D3F3 /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074E01EF57C0C0066D3F3 /* UserCoordinator.swift */; };
 		A01074E41EF57C0C0066D3F3 /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074E01EF57C0C0066D3F3 /* UserCoordinator.swift */; };
 		A01074E61EF57C820066D3F3 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074E51EF57C820066D3F3 /* Launcher.swift */; };
+		A02D790A1F2EAD7F00BFF753 /* DateExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02D79091F2EAD7F00BFF753 /* DateExtensionsSpec.swift */; };
 		A030A1341ECC8E7000F71C6F /* RocketChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030A1331ECC8E7000F71C6F /* RocketChat.swift */; };
 		A032EF6C1EE1946D00A9DA78 /* LiveChatManagerInjected.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6B1EE1946D00A9DA78 /* LiveChatManagerInjected.swift */; };
-		A032EF6E1EE1956F00A9DA78 /* InjectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6D1EE1956F00A9DA78 /* InjectionContainer.swift */; };
-		A032EF701EE195AA00A9DA78 /* InjectionContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6F1EE195AA00A9DA78 /* InjectionContainer.swift */; };
 		A041B96D1F10FFE00023066E /* SentMessageBubble.xib in Resources */ = {isa = PBXBuildFile; fileRef = A041B96C1F10FFE00023066E /* SentMessageBubble.xib */; };
 		A0452DCB1EE7C4CD003FBC9B /* Bundle+RocketChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0452DCA1EE7C4CD003FBC9B /* Bundle+RocketChat.swift */; };
 		A0452DCD1EE7C5BB003FBC9B /* Bundle+RocketChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0452DCC1EE7C5BB003FBC9B /* Bundle+RocketChat.swift */; };
@@ -255,6 +253,10 @@
 		A0BBAF261EC7FE5F002BF87C /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BBAF251EC7FE5F002BF87C /* UploadManager.swift */; };
 		A0BBAF291EC7FE6A002BF87C /* UploadVideoCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BBAF281EC7FE6A002BF87C /* UploadVideoCompression.swift */; };
 		A0BBAF2C1EC7FEB6002BF87C /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0BBAF2B1EC7FEB6002BF87C /* PushManager.swift */; };
+		A0CB01C31F2DD0BA00C4321B /* TimestampCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CB01C21F2DD0BA00C4321B /* TimestampCoordinator.swift */; };
+		A0CB01C41F2DD0BA00C4321B /* TimestampCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CB01C21F2DD0BA00C4321B /* TimestampCoordinator.swift */; };
+		A0CB01C61F2DD0C700C4321B /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CB01C51F2DD0C700C4321B /* ServerManager.swift */; };
+		A0CB01C71F2DD0C700C4321B /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0CB01C51F2DD0C700C4321B /* ServerManager.swift */; };
 		A0D128C31ED175AC0088B240 /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09BBEA11ECF146E00FB846D /* Injected.swift */; };
 		A0D128C71ED185F80088B240 /* DependencyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0D128C61ED185F80088B240 /* DependencyRepository.swift */; };
 		A0DE0CC51EDE9EC700C4FA34 /* DependencyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0DE0CC41EDE9EC700C4FA34 /* DependencyRepository.swift */; };
@@ -381,7 +383,6 @@
 		41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSURLExtensionSpec.swift; path = Extensions/NSURLExtensionSpec.swift; sourceTree = "<group>"; };
 		41DC7A1E1D3865FE00896FC0 /* MessageManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManagerSpec.swift; path = Managers/MessageManagerSpec.swift; sourceTree = "<group>"; };
 		41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtensionSpec.swift; path = Extensions/StringExtensionSpec.swift; sourceTree = "<group>"; };
-		41DC7A231D386CA800896FC0 /* NSDateExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSDateExtensionSpec.swift; path = Extensions/NSDateExtensionSpec.swift; sourceTree = "<group>"; };
 		41DCB8251DDC828200E1197F /* SubscriptionSearchMoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SubscriptionSearchMoreView.xib; path = Views/Sections/SubscriptionSearchMoreView.xib; sourceTree = "<group>"; };
 		41DCB8271DDC82E000E1197F /* SubscriptionSearchMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionSearchMoreView.swift; path = Views/Sections/SubscriptionSearchMoreView.swift; sourceTree = "<group>"; };
 		41DF76DF1D2C50710028DBF8 /* Rocket.Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rocket.Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -416,12 +417,11 @@
 		A01074DF1EF57C0C0066D3F3 /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
 		A01074E01EF57C0C0066D3F3 /* UserCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
 		A01074E51EF57C820066D3F3 /* Launcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
+		A02D79091F2EAD7F00BFF753 /* DateExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtensionsSpec.swift; path = Extensions/DateExtensionsSpec.swift; sourceTree = "<group>"; };
 		A030A1331ECC8E7000F71C6F /* RocketChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketChat.swift; sourceTree = "<group>"; };
 		A030A1371ECC9CDC00F71C6F /* RocketChat.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; indentWidth = 2; path = RocketChat.podspec; sourceTree = SOURCE_ROOT; tabWidth = 2; };
 		A030A1381ECC9CEE00F71C6F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
 		A032EF6B1EE1946D00A9DA78 /* LiveChatManagerInjected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveChatManagerInjected.swift; sourceTree = "<group>"; };
-		A032EF6D1EE1956F00A9DA78 /* InjectionContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionContainer.swift; sourceTree = "<group>"; };
-		A032EF6F1EE195AA00A9DA78 /* InjectionContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InjectionContainer.swift; sourceTree = "<group>"; };
 		A041B96C1F10FFE00023066E /* SentMessageBubble.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SentMessageBubble.xib; sourceTree = "<group>"; };
 		A0452DCA1EE7C4CD003FBC9B /* Bundle+RocketChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+RocketChat.swift"; sourceTree = "<group>"; };
 		A0452DCC1EE7C5BB003FBC9B /* Bundle+RocketChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+RocketChat.swift"; sourceTree = "<group>"; };
@@ -515,6 +515,8 @@
 		A0BBAF251EC7FE5F002BF87C /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadManager.swift; sourceTree = "<group>"; };
 		A0BBAF281EC7FE6A002BF87C /* UploadVideoCompression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadVideoCompression.swift; sourceTree = "<group>"; };
 		A0BBAF2B1EC7FEB6002BF87C /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PushManager.swift; sourceTree = "<group>"; };
+		A0CB01C21F2DD0BA00C4321B /* TimestampCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimestampCoordinator.swift; sourceTree = "<group>"; };
+		A0CB01C51F2DD0C700C4321B /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		A0D128C61ED185F80088B240 /* DependencyRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyRepository.swift; sourceTree = "<group>"; };
 		A0DE0CC41EDE9EC700C4FA34 /* DependencyRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DependencyRepository.swift; sourceTree = "<group>"; };
 		A0DE0CC61EDEAD6600C4FA34 /* SDKSocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SDKSocketManager.swift; sourceTree = "<group>"; };
@@ -771,8 +773,8 @@
 		41DC7A201D386B2C00896FC0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				A02D79091F2EAD7F00BFF753 /* DateExtensionsSpec.swift */,
 				41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */,
-				41DC7A231D386CA800896FC0 /* NSDateExtensionSpec.swift */,
 				41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */,
 			);
 			name = Extensions;
@@ -816,7 +818,6 @@
 				4161332F1D46CA2800E09DA2 /* Views */,
 				4174CB0A1D2D990F0086DAC8 /* Controllers */,
 				41DF76E21D2C50710028DBF8 /* AppDelegate.swift */,
-				A032EF6D1EE1956F00A9DA78 /* InjectionContainer.swift */,
 				A0D128C61ED185F80088B240 /* DependencyRepository.swift */,
 				4174CB201D2DD4690086DAC8 /* Rocket.Chat-Bridge.h */,
 				41DF76E91D2C50710028DBF8 /* Assets.xcassets */,
@@ -886,6 +887,7 @@
 			children = (
 				A01074DC1EF57AB10066D3F3 /* LauncherProtocol.swift */,
 				A01074DF1EF57C0C0066D3F3 /* PersistencyCoordinator.swift */,
+				A0CB01C21F2DD0BA00C4321B /* TimestampCoordinator.swift */,
 				A01074E01EF57C0C0066D3F3 /* UserCoordinator.swift */,
 			);
 			path = Launcher;
@@ -904,7 +906,6 @@
 		A032EF6A1EE1943C00A9DA78 /* DependencyManager */ = {
 			isa = PBXGroup;
 			children = (
-				A032EF6F1EE195AA00A9DA78 /* InjectionContainer.swift */,
 				A032EF6B1EE1946D00A9DA78 /* LiveChatManagerInjected.swift */,
 			);
 			path = DependencyManager;
@@ -1192,6 +1193,7 @@
 				A0BBAF221EC7FE38002BF87C /* MessageManager.swift */,
 				A0BBAF251EC7FE5F002BF87C /* UploadManager.swift */,
 				A0BBAF2B1EC7FEB6002BF87C /* PushManager.swift */,
+				A0CB01C51F2DD0C700C4321B /* ServerManager.swift */,
 				A0A812331ECDC71D000567D7 /* MessageTextCacheManager.swift */,
 			);
 			path = Managers;
@@ -1949,11 +1951,12 @@
 				A0559DFD1ECC2CCD00E83220 /* SubscriptionModelMapping.swift in Sources */,
 				A07F17531ECDC13C00A1F199 /* ChatViewController.swift in Sources */,
 				A0BBAF261EC7FE5F002BF87C /* UploadManager.swift in Sources */,
-				A032EF6E1EE1956F00A9DA78 /* InjectionContainer.swift in Sources */,
 				A0BBAF291EC7FE6A002BF87C /* UploadVideoCompression.swift in Sources */,
 				A0E0E8401EC74A89001B93B1 /* DataExtension.swift in Sources */,
 				A0E0E8041EC7063F001B93B1 /* ModelHandler.swift in Sources */,
 				A07F174F1ECDC13C00A1F199 /* ChatControllerUploader.swift in Sources */,
+				A0CB01C61F2DD0C700C4321B /* ServerManager.swift in Sources */,
+				A0CB01C31F2DD0BA00C4321B /* TimestampCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1966,12 +1969,12 @@
 				417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */,
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
 				925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */,
-				41DC7A241D386CA800896FC0 /* NSDateExtensionSpec.swift in Sources */,
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
+				A02D790A1F2EAD7F00BFF753 /* DateExtensionsSpec.swift in Sources */,
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
 				41DC7A221D386B4700896FC0 /* StringExtensionSpec.swift in Sources */,
@@ -1994,10 +1997,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A032EF701EE195AA00A9DA78 /* InjectionContainer.swift in Sources */,
 				A07F179F1ECDC18700A1F199 /* ChatMessageVideoView.swift in Sources */,
 				A07F17421ECDC13C00A1F199 /* BaseNavigationController.swift in Sources */,
 				A06C6F4E1EDD8E3F00543A5D /* ChatHeaderViewStatus.swift in Sources */,
+				A0CB01C71F2DD0C700C4321B /* ServerManager.swift in Sources */,
 				A0559E1F1ECC430900E83220 /* MessageURLModelMapping.swift in Sources */,
 				A07F174C1ECDC13C00A1F199 /* ChatControllerMessageCellProtocol.swift in Sources */,
 				A07F177F1ECDC18700A1F199 /* ChannelInfoCellProtocol.swift in Sources */,
@@ -2039,6 +2042,7 @@
 				A0452DD41EE7C9F4003FBC9B /* UIView+Nib.swift in Sources */,
 				A07F172F1ECD930900A1F199 /* LiveChatManager.swift in Sources */,
 				A0559E341ECC431200E83220 /* SocketManager+Handle.swift in Sources */,
+				A0CB01C41F2DD0BA00C4321B /* TimestampCoordinator.swift in Sources */,
 				A01074E41EF57C0C0066D3F3 /* UserCoordinator.swift in Sources */,
 				A00BA5FE1EDDB31A0090874D /* LiveChatSubscriptionManager.swift in Sources */,
 				A0559E291ECC430900E83220 /* Mention.swift in Sources */,

@@ -20,13 +20,6 @@ final class ChatMessageCell: UICollectionViewCell, MessageTextCacheManagerInject
 
     weak var longPressGesture: UILongPressGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
-    var injectionContainer: InjectionContainer! {
-        didSet {
-            if let avatarView = self.avatarView {
-                avatarView.injectionContainer = injectionContainer
-            }
-        }
-    }
     var message: Message! {
         didSet {
             updateMessageInformation()
@@ -36,7 +29,6 @@ final class ChatMessageCell: UICollectionViewCell, MessageTextCacheManagerInject
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.injectionContainer = self.injectionContainer
                 avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
                 self.avatarView = avatarView
@@ -146,7 +138,6 @@ final class ChatMessageCell: UICollectionViewCell, MessageTextCacheManagerInject
 
             case .image:
                 if let view = ChatMessageImageView.instantiateFromNib() {
-                    view.injectionContainer = injectionContainer
                     view.attachment = attachment
                     view.delegate = delegate
                     view.translatesAutoresizingMaskIntoConstraints = false
@@ -158,7 +149,6 @@ final class ChatMessageCell: UICollectionViewCell, MessageTextCacheManagerInject
 
             case .video:
                 if let view = ChatMessageVideoView.instantiateFromNib() {
-                    view.injectionContainer = injectionContainer
                     view.attachment = attachment
                     view.delegate = delegate
                     view.translatesAutoresizingMaskIntoConstraints = false

@@ -69,7 +69,6 @@ extension ChatViewController {
         guard let cell = autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as? AutocompleteCell else {
             return AutocompleteCell(style: .`default`, reuseIdentifier: AutocompleteCell.identifier)
         }
-        cell.injectionContainer = injectionContainer
         cell.selectionStyle = .default
 
         let key = Array(searchResult.keys)[indexPath.row]

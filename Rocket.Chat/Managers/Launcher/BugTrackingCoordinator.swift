@@ -10,7 +10,8 @@ import Foundation
 import Fabric
 import Crashlytics
 
-struct BugTrackingCoordinator: LauncherCoordinator {
+class BugTrackingCoordinator: LauncherCoordinator {
+
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
         launchFabric()
     }

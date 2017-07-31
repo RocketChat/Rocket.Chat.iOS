@@ -33,8 +33,6 @@ public protocol SocketConnectionHandler {
 /// A manager that manages all web socket connection related actions
 public class SocketManager: AuthManagerInjected, PushManagerInjected, SubscriptionManagerInjected, UserManagerInjected {
 
-    public var injectionContainer: InjectionContainer!
-
     var serverURL: URL?
 
     var socket: WebSocket?

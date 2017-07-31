@@ -16,8 +16,6 @@ final class ConnectServerViewController: BaseViewController, SocketManagerInject
     internal var connecting = false
     internal var serverURL: URL!
 
-    var injectionContainer: InjectionContainer!
-
     var serverPublicSettings: AuthSettings?
 
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
@@ -69,7 +67,6 @@ final class ConnectServerViewController: BaseViewController, SocketManagerInject
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
-            controller.injectionContainer = injectionContainer
             controller.serverURL = serverURL
             controller.serverPublicSettings = self.serverPublicSettings
         }

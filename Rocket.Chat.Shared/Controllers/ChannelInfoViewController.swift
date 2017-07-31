@@ -10,8 +10,6 @@ import UIKit
 
 class ChannelInfoViewController: BaseViewController, AuthManagerInjected, SubscriptionManagerInjected {
 
-    var injectionContainer: InjectionContainer!
-
     var tableViewData: [[Any]] = [] {
         didSet {
             tableView?.reloadData()
@@ -129,7 +127,6 @@ extension ChannelInfoViewController: UITableViewDelegate {
 
         if let data = data as? ChannelInfoUserCellData {
             if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoUserCell.identifier) as? ChannelInfoUserCell {
-                cell.injectionContainer = injectionContainer
                 cell.data = data
                 return cell
             }

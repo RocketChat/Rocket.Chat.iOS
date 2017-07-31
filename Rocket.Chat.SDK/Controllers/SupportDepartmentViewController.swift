@@ -14,7 +14,6 @@ public protocol SupportDepartmentViewControllerDelegate: class {
 
 class SupportDepartmentViewController: UITableViewController, LiveChatManagerInjected {
 
-    var injectionContainer: InjectionContainer!
     weak var delegate: SupportDepartmentViewControllerDelegate?
 
     var selectedIndexPath: IndexPath = IndexPath(row: 0, section: 0)

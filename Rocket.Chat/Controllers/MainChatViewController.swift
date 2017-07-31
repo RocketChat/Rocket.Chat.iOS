@@ -9,7 +9,7 @@
 import UIKit
 import SideMenuController
 
-class MainChatViewController: SideMenuController, SideMenuControllerDelegate, Injected {
+class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
     class func shared() -> MainChatViewController? {
         return UIApplication.shared.windows.first?.rootViewController as? MainChatViewController
@@ -22,8 +22,6 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate, In
             }
         }
     }
-
-    var injectionContainer: InjectionContainer!
 
     required init?(coder aDecoder: NSCoder) {
         SideMenuController.preferences.drawing.menuButtonImage = UIImage(named: "Menu")
@@ -48,27 +46,9 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate, In
 
         self.delegate = self
         guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else { return }
-        self.injectionContainer = appDelegate.injectionContainer
 
         performSegue(withIdentifier: "showCenterController", sender: nil)
         performSegue(withIdentifier: "containSideMenu", sender: nil)
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        guard let identifier = segue.identifier else { return }
-        switch identifier {
-        case "showCenterController":
-            guard let navController = segue.destination as? UINavigationController else { break }
-            guard let chatViewController = navController.viewControllers.first as? ChatViewController else { break }
-            chatViewController.injectionContainer = injectionContainer
-        case "containSideMenu":
-            guard let navController = segue.destination as? UINavigationController else { break }
-            guard let subscriptionsViewController = navController.viewControllers.first as? SubscriptionsViewController else { break }
-            subscriptionsViewController.injectionContainer = injectionContainer
-        default:
-            break
-        }
     }
 
     // MARK: SideMenuControllerDelegate

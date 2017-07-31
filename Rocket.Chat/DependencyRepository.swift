@@ -8,22 +8,14 @@
 
 import Foundation
 
-class DependencyRepository: InjectionContainer {
-    var socketManager: SocketManager = AppSocketManager()
-    var authManager: AuthManager = AppAuthManager()
-    var subscriptionManager = SubscriptionManager()
-    var userManager = UserManager()
-    var messageManager = MessageManager()
-    var uploadManager = UploadManager()
-    var pushManager = PushManager()
-    var messageTextCacheManager = MessageTextCacheManager()
-
-    init() {
-        socketManager.injectionContainer = self
-        authManager.injectionContainer = self
-        subscriptionManager.injectionContainer = self
-        userManager.injectionContainer = self
-        messageManager.injectionContainer = self
-        pushManager.injectionContainer = self
-    }
+class DependencyRepository {
+    static var socketManager: SocketManager = AppSocketManager()
+    static var authManager: AuthManager = AppAuthManager()
+    static var subscriptionManager = SubscriptionManager()
+    static var userManager = UserManager()
+    static var messageManager = MessageManager()
+    static var uploadManager = UploadManager()
+    static var pushManager = PushManager()
+    static var serverManager = ServerManager()
+    static var messageTextCacheManager = MessageTextCacheManager()
 }
