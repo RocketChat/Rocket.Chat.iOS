@@ -13,12 +13,9 @@ import RealmSwift
 
 class AuthManagerSpec: XCTestCase, AuthManagerInjected {
 
-    var injectionContainer: InjectionContainer!
 
     override func setUp() {
         super.setUp()
-
-        self.injectionContainer = DependencyRepository()
 
         // Clear all the Auth objects in Realm
         Realm.executeOnMainThread({ realm in
