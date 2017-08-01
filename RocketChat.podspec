@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name     = 'RocketChat'
-  s.version  = '0.1.0'
+  s.version  = '0.1.1'
   s.license  = { :type => 'MIT', :file => 'LICENSE' }
   s.summary  = 'The ultimate Free Open Source Solution for team communications.'
   s.homepage = 'https://github.com/RocketChat/Rocket.Chat.iOS'
