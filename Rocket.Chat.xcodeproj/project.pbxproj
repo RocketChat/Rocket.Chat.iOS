@@ -1377,8 +1377,9 @@
 				41DF76FA1D2C50720028DBF8 /* Sources */,
 				41DF76FB1D2C50720028DBF8 /* Frameworks */,
 				41DF76FC1D2C50720028DBF8 /* Resources */,
-				D22B3943D698A8CC2CA3DDA5 /* 📦 Copy Pods Resources */,
+				D22B3943D698A8CC2CA3DDA5 /* [CP] Copy Pods Resources */,
 				DD553BF8FB8F7CDBCB5D0BF7 /* [CP] Copy Pods Resources */,
+				60317E6DF3833115FA743734 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1662,6 +1663,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		60317E6DF3833115FA743734 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.ChatUITests/Pods-Rocket.ChatUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		98879A7BEE6639FACC37C1EF /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1689,7 +1705,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		9B91C5388D48B92E04B1BF71 /* [CP] Embed Pods Frameworks */ = {
@@ -1751,19 +1767,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.Chat.SDK/Pods-Rocket.Chat.SDK-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		D22B3943D698A8CC2CA3DDA5 /* 📦 Copy Pods Resources */ = {
+		D22B3943D698A8CC2CA3DDA5 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.ChatUITests/Pods-Rocket.ChatUITests-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.ChatUITests/Pods-Rocket.ChatUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D31AB62F8523374759B2CBAC /* [CP] Check Pods Manifest.lock */ = {

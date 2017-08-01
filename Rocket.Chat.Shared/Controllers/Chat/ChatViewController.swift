@@ -601,7 +601,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCac
     }
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let fullWidth = UIScreen.main.bounds.size.width
+        let fullWidth = collectionView.frame.width
 
         if let message = dataController.itemAt(indexPath)?.message {
             switch messageCellStyle {
@@ -610,8 +610,12 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCac
                 return CGSize(width: fullWidth, height: height)
             case .bubble:
                 let style: MessageContainerStyle = message.user == authManager.currentUser() ? .sentBubble : .receivedBubble
-                let height = ChatMessageBubbleCell.cellSizeFor(message: message, style: style, messageTextCacheManager: messageTextCacheManager).height
-                return CGSize(width: fullWidth, height: height)
+                return ChatMessageBubbleCell.cellSizeFor(
+                    fullWidth,
+                    message: message,
+                    style: style,
+                    messageTextCacheManager: messageTextCacheManager
+                )
             }
         }
 
