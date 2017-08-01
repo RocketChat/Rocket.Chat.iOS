@@ -77,9 +77,9 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
         if total < ChatMessageBubbleCell.messageContentMinimumHeight {
             total = ChatMessageBubbleCell.messageContentMinimumHeight
         }
-
         total += ChatMessageBubbleCell.bubblePadding + ChatMessageBubbleCell.bubbleVerticalMargin
-        return CGSize(width: size.width, height: total)
+
+        return CGSize(width: width, height: total)
     }
 
     override func prepareForReuse() {
