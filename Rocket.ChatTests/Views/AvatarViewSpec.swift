@@ -33,7 +33,6 @@ class AvatarViewSpec: XCTestCase {
         XCTAssertTrue(avatarView.initialsFor("FOO") == "FO")
         XCTAssertTrue(avatarView.initialsFor("F.O") == "FO")
         XCTAssertTrue(avatarView.initialsFor("F.o") == "FO")
-        XCTAssertTrue(avatarView.initialsFor("F.o") == "FO")
         XCTAssertTrue(avatarView.initialsFor("Foo.bar") == "FB")
         XCTAssertTrue(avatarView.initialsFor("Foobar.bar") == "FB")
         XCTAssertTrue(avatarView.initialsFor("Foobar.bar.zab") == "FZ")
