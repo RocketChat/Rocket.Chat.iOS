@@ -44,12 +44,11 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
         messageTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
     }
 
-    static func cellSizeFor(message: Message, style: MessageContainerStyle, grouped: Bool = true, messageTextCacheManager: MessageTextCacheManager) -> CGSize {
-        let fullWidth = UIScreen.main.bounds.size.width
+    static func cellSizeFor(_ width: CGFloat, message: Message, style: MessageContainerStyle, grouped: Bool = true, messageTextCacheManager: MessageTextCacheManager) -> CGSize {
         let size = UILabel.sizeForView(
             messageTextCacheManager.message(for: message, style: style)?.string ?? "",
             font: MessageTextFontAttributes.font(for: style),
-            width: fullWidth * ChatMessageBubbleCell.bubbleWidthProportion - ChatMessageBubbleCell.bubblePadding,
+            width: width * ChatMessageBubbleCell.bubbleWidthProportion - ChatMessageBubbleCell.bubblePadding,
             lineBreakMode: .byWordWrapping
         )
         var total = size.height
@@ -80,7 +79,7 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
         }
         total += ChatMessageBubbleCell.bubblePadding + ChatMessageBubbleCell.bubbleVerticalMargin
 
-        return CGSize(width: size.width, height: total)
+        return CGSize(width: width, height: total)
     }
 
     override func prepareForReuse() {
