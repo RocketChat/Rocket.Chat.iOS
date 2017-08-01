@@ -7,7 +7,7 @@ target 'SDKExample' do
 
   # Pods for SDKExample
 
-  pod 'RocketChat', path: '../'
+  pod 'RocketChat', git: 'https://github.com/RocketChat/Rocket.Chat.iOS', branch: 'sdk'
 
   target 'SDKExampleTests' do
     inherit! :search_paths
