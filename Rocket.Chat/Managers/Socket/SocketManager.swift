@@ -112,7 +112,6 @@ extension SocketManager {
             }
 
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                // TODO: Move it to somewhere else
                 AuthManager.updatePublicSettings(auth, completion: { _ in
 
                 })
