@@ -62,7 +62,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     // MARK: UIImagePickerControllerDelegate
     // swiftlint:disable cyclomatic_complexity function_body_length
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        var activityMessage = localized("chat.upload.uploading_image")
         var filename = "\(String.random()).jpeg"
         var file: FileUpload?
 
@@ -87,8 +86,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
 
         if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
-            activityMessage = localized("chat.upload.uploading_video")
-
             let assetURL = AVURLAsset(url: videoURL)
             let semaphore = DispatchSemaphore(value: 0)
 
