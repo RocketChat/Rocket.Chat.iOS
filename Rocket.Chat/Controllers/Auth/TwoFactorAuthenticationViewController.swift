@@ -28,6 +28,10 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
     @IBOutlet weak var textFieldCode: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -46,11 +50,6 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
         )
 
         textFieldCode.becomeFirstResponder()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        NotificationCenter.default.removeObserver(self)
     }
 
     func startLoading() {
