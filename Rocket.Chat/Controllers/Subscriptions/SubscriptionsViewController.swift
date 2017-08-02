@@ -382,9 +382,11 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let subscriptionCell = cell as? SubscriptionCell else { return }
+        guard let cell = cell as? SubscriptionCell else { return }
+        guard let subscription = cell.subscription else { return }
         guard let selectedSubscription = ChatViewController.sharedInstance()?.subscription else { return }
-        if subscriptionCell.subscription == selectedSubscription {
+
+        if subscription.identifier == selectedSubscription.identifier {
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
     }
