@@ -95,7 +95,6 @@ final class ChatViewController: SLKTextViewController {
         setupTextViewSettings()
         setupScrollToBottomButton()
 
-        // TODO: this should really goes into the view model, when we have it
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
@@ -325,6 +324,26 @@ final class ChatViewController: SLKTextViewController {
         isRequestingHistory = true
 
         messages = subscription.fetchMessages()
+        updateMessagesQueryNotificationBlock()
+
+        MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
+            guard let messages = self?.subscription.fetchMessages() else { return }
+
+            self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
+                self?.activityIndicator.stopAnimating()
+
+                UIView.performWithoutAnimation {
+                    self?.scrollToBottom()
+                }
+
+                self?.isRequestingHistory = false
+            })
+        }
+
+        MessageManager.changes(subscription)
+    }
+
+    fileprivate func updateMessagesQueryNotificationBlock() {
         messagesToken?.stop()
         messagesToken = messages.addNotificationBlock { [weak self] changes in
             switch changes {
@@ -365,22 +384,6 @@ final class ChatViewController: SLKTextViewController {
                 break
             }
         }
-
-        MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
-            guard let messages = self?.subscription.fetchMessages() else { return }
-
-            self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
-                self?.activityIndicator.stopAnimating()
-
-                UIView.performWithoutAnimation {
-                    self?.scrollToBottom()
-                }
-
-                self?.isRequestingHistory = false
-            })
-        }
-
-        MessageManager.changes(subscription)
     }
 
     fileprivate func loadMoreMessagesFrom(date: Date?) {
