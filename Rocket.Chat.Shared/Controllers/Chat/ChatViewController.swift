@@ -304,8 +304,8 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         textView.resignFirstResponder()
 
         collectionView?.performBatchUpdates({
-            let indexPaths = self.dataController.clear()
-            self.collectionView?.deleteItems(at: indexPaths)
+            self.dataController.clear()
+            self.collectionView?.reloadData()
         }, completion: { _ in
             CATransaction.commit()
             self.activityIndicator.stopAnimating()
@@ -452,7 +452,14 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
                 let indexPaths = self.dataController.insert(objs)
                 collectionView.insertItems(at: indexPaths)
                 if self.messageCellStyle == .bubble {
-                    collectionView.reloadItems(at: indexPaths.filter { $0.row > 0 }.map { IndexPath(row: $0.row - 1, section: $0.section) })
+                    collectionView.reloadItems(at: indexPaths
+                        // Only items not the first
+                        .filter { $0.row > 0 }
+                        // Mapping into its previous one
+                        .map { IndexPath(row: $0.row - 1, section: $0.section) }
+                        // filter out items that just inserted
+                        .filter { !indexPaths.contains($0) }
+                    )
                 }
             }, completion: { _ in
                 let shouldScroll = self.isContentBiggerThanContainerHeight()
