@@ -452,7 +452,14 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
                 let indexPaths = self.dataController.insert(objs)
                 collectionView.insertItems(at: indexPaths)
                 if self.messageCellStyle == .bubble {
-                    collectionView.reloadItems(at: indexPaths.filter { $0.row > 0 }.map { IndexPath(row: $0.row - 1, section: $0.section) }.filter { !indexPaths.contains($0) })
+                    collectionView.reloadItems(at: indexPaths
+                        // Only items not the first
+                        .filter { $0.row > 0 }
+                        // Mapping into its previous one
+                        .map { IndexPath(row: $0.row - 1, section: $0.section) }
+                        // filter out items that just inserted
+                        .filter { !indexPaths.contains($0) }
+                    )
                 }
             }, completion: { _ in
                 let shouldScroll = self.isContentBiggerThanContainerHeight()
