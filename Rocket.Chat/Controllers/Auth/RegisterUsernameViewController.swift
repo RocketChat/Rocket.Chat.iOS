@@ -27,6 +27,10 @@ final class RegisterUsernameViewController: BaseViewController {
     @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -58,11 +62,6 @@ final class RegisterUsernameViewController: BaseViewController {
         )
 
         textFieldUsername.becomeFirstResponder()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        NotificationCenter.default.removeObserver(self)
     }
 
     func startLoading() {
