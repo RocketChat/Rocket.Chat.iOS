@@ -29,6 +29,10 @@ final class SignupViewController: BaseViewController {
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -49,17 +53,13 @@ final class SignupViewController: BaseViewController {
         textFieldName.becomeFirstResponder()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        NotificationCenter.default.removeObserver(self)
-    }
-
     func startLoading() {
         textFieldName.alpha = 0.5
         textFieldEmail.alpha = 0.5
         textFieldPassword.alpha = 0.5
-        
+
         requesting = true
+
         activityIndicator.startAnimating()
         textFieldName.resignFirstResponder()
         textFieldEmail.resignFirstResponder()
