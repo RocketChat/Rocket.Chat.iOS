@@ -222,6 +222,10 @@
 		A0918BD31EC0A15D0015D5D5 /* RocketChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0918BCA1EC0A15D0015D5D5 /* RocketChat.framework */; };
 		A0918BDA1EC0A15D0015D5D5 /* RocketChatSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */; };
 		A0918BDC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A0918BCC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A098ED031F385AAE003C4A44 /* WebSocketMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098ED011F385AAE003C4A44 /* WebSocketMock.swift */; };
+		A098ED041F385AAE003C4A44 /* WebSocketMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098ED021F385AAE003C4A44 /* WebSocketMockTests.swift */; };
+		A098ED051F385AB2003C4A44 /* WebSocketMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098ED011F385AAE003C4A44 /* WebSocketMock.swift */; };
+		A098ED061F385AB5003C4A44 /* WebSocketMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098ED011F385AAE003C4A44 /* WebSocketMock.swift */; };
 		A09910761EC7501400A9FEE8 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		A09910771EC7501400A9FEE8 /* CommonCrypto.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		A099107C1EC7501D00A9FEE8 /* CommonCrypto.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
@@ -493,6 +497,8 @@
 		A0918BD21EC0A15D0015D5D5 /* Rocket.Chat.SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rocket.Chat.SDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketChatSDKTests.swift; sourceTree = "<group>"; };
 		A0918BDB1EC0A15D0015D5D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A098ED011F385AAE003C4A44 /* WebSocketMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketMock.swift; sourceTree = "<group>"; };
+		A098ED021F385AAE003C4A44 /* WebSocketMockTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketMockTests.swift; sourceTree = "<group>"; };
 		A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A09910831EC75AE600A9FEE8 /* MessageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageExtensions.swift; sourceTree = "<group>"; };
 		A099108A1EC75EAA00A9FEE8 /* CommonCrypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CommonCrypto.h; sourceTree = "<group>"; };
@@ -789,6 +795,7 @@
 				41DF77011D2C50720028DBF8 /* Rocket.ChatUITests */,
 				A0918BCB1EC0A15D0015D5D5 /* Rocket.Chat.SDK */,
 				A0918BD81EC0A15D0015D5D5 /* Rocket.Chat.SDKTests */,
+				A088E8811F36148300D45AFC /* Test.Shared */,
 				A09910891EC75EAA00A9FEE8 /* CommonCrypto */,
 				41DF76E01D2C50710028DBF8 /* Products */,
 				EE693BBD0CC2727847214E2D /* Pods */,
@@ -1082,6 +1089,15 @@
 				A041B96C1F10FFE00023066E /* SentMessageBubble.xib */,
 			);
 			path = Cells;
+			sourceTree = "<group>";
+		};
+		A088E8811F36148300D45AFC /* Test.Shared */ = {
+			isa = PBXGroup;
+			children = (
+				A098ED011F385AAE003C4A44 /* WebSocketMock.swift */,
+				A098ED021F385AAE003C4A44 /* WebSocketMockTests.swift */,
+			);
+			path = Test.Shared;
 			sourceTree = "<group>";
 		};
 		A0918BCB1EC0A15D0015D5D5 /* Rocket.Chat.SDK */ = {
@@ -1983,9 +1999,11 @@
 				4151807B1EAE249F0000A039 /* ChatDataControllerSpec.swift in Sources */,
 				4171ABA51E7C056E009FC3F0 /* AvatarViewSpec.swift in Sources */,
 				417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */,
+				A098ED031F385AAE003C4A44 /* WebSocketMock.swift in Sources */,
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
 				925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */,
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
+				A098ED041F385AAE003C4A44 /* WebSocketMockTests.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
@@ -2006,6 +2024,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41DF77031D2C50720028DBF8 /* RocketChatUITests.swift in Sources */,
+				A098ED051F385AB2003C4A44 /* WebSocketMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2118,6 +2137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A0918BDA1EC0A15D0015D5D5 /* RocketChatSDKTests.swift in Sources */,
+				A098ED061F385AB5003C4A44 /* WebSocketMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
