@@ -129,7 +129,7 @@ final class ChatDataController {
     }
 
     func update(_ message: Message) -> Int {
-        for (index, _) in data.enumerated() {
+        for index in data.indices {
             var obj = data[index]
 
             if obj.message?.identifier == message.identifier {
