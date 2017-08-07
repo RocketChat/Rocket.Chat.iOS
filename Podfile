@@ -49,7 +49,8 @@ target 'Rocket.ChatTests' do
 end
 
 target 'Rocket.ChatUITests' do
-
+  shared_pods
+  app_pods
 end
 
 target 'Rocket.Chat.SDK' do
