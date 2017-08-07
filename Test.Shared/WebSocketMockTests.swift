@@ -7,6 +7,8 @@
 //
 
 import XCTest
+import SwiftyJSON
+@testable import Rocket_Chat
 
 class WebSocketMockTests: XCTestCase {
 
@@ -14,8 +16,8 @@ class WebSocketMockTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct results.
         let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
-        socket.onTextReceived = { _ in
-            return "Hello"
+        socket.onTextReceived = { _, send in
+            send(JSON(stringLiteral: "Hello"))
         }
 
         let expectOnConnect = XCTestExpectation(description: "Expect `onConnect` being called")
@@ -41,6 +43,28 @@ class WebSocketMockTests: XCTestCase {
         }
         socket.disconnect()
         wait(for: [expectOnDisconnect], timeout: 1)
+    }
+
+    func testWithSocketManager() {
+        let socketManager = SocketManager()
+        let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
+
+        let expectOnConnect = XCTestExpectation(description: "Expect `onConnect` being called")
+        let expectReceivedConnect = XCTestExpectation(description: "Expect receiving `connect` event")
+        socket.onJSONReceived = { json, send in
+            switch json["msg"].stringValue {
+            case "connect":
+                expectReceivedConnect.fulfill()
+                send(JSON(object: ["msg": "connected"]))
+            default:
+                return
+            }
+        }
+        socketManager.connect(socket: socket) { _, connected in
+            XCTAssertTrue(connected)
+            expectOnConnect.fulfill()
+        }
+        wait(for: [expectOnConnect, expectReceivedConnect], timeout: 1)
     }
 
 }
