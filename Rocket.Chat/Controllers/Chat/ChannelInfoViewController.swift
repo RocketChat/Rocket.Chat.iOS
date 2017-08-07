@@ -35,7 +35,7 @@ class ChannelInfoViewController: BaseViewController {
                 let description = subscription.roomDescription?.characters.count ?? 0 == 0 ? localized("chat.info.item.no_description") : subscription.roomDescription
 
                 tableViewData = [[
-                    ChannelInfoBasicCellData(title: "#\(subscription.name)"),
+                    ChannelInfoBasicCellData(title: "#\(subscription.displayName())"),
                     ChannelInfoDescriptionCellData(
                         title: localized("chat.info.item.topic"),
                         description: topic

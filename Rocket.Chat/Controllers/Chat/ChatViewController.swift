@@ -287,7 +287,7 @@ final class ChatViewController: SLKTextViewController {
             token.stop()
         }
 
-        title = subscription?.name
+        title = subscription?.displayName()
         chatTitleView?.subscription = subscription
         textView.resignFirstResponder()
 
