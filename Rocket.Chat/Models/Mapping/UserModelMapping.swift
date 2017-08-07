@@ -20,6 +20,10 @@ extension User: ModelMappeable {
             self.username = username
         }
 
+        if let name = values["name"].string {
+            self.name = name
+        }
+
         if let status = values["status"].string {
             self.status = UserStatus(rawValue: status) ?? .offline
         }
