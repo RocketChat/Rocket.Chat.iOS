@@ -182,7 +182,7 @@ final class ChatMessageCell: UICollectionViewCell {
         if message.alias.characters.count > 0 {
             labelUsername.text = message.alias
         } else {
-            labelUsername.text = message.user?.username
+            labelUsername.text = message.user?.displayName() ?? "Unknown"
         }
 
         if let text = MessageTextCacheManager.shared.message(for: message) {
