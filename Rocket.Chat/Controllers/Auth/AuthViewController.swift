@@ -43,6 +43,10 @@ final class AuthViewController: BaseViewController, AuthManagerInjected {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         title = serverURL.host
@@ -70,11 +74,6 @@ final class AuthViewController: BaseViewController, AuthManagerInjected {
         if !connecting {
             textFieldUsername.becomeFirstResponder()
         }
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        NotificationCenter.default.removeObserver(self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

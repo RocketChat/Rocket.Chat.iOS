@@ -93,7 +93,6 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         setupTextViewSettings()
         setupScrollToBottomButton()
 
-        // TODO: this should really goes into the view model, when we have it
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
 
         view.bringSubview(toFront: activityIndicatorContainer)
@@ -332,6 +331,26 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         isRequestingHistory = true
 
         messages = subscription.fetchMessages()
+        updateMessagesQueryNotificationBlock()
+
+        messageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
+            guard let messages = self?.subscription.fetchMessages() else { return }
+
+            self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
+                self?.activityIndicator.stopAnimating()
+
+                UIView.performWithoutAnimation {
+                    self?.scrollToBottom()
+                }
+
+                self?.isRequestingHistory = false
+            })
+        }
+
+        messageManager.changes(subscription)
+    }
+
+    fileprivate func updateMessagesQueryNotificationBlock() {
         messagesToken?.stop()
         messagesToken = messages.addNotificationBlock { [weak self] changes in
             switch changes {
@@ -372,22 +391,6 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
                 break
             }
         }
-
-        messageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
-            guard let messages = self?.subscription.fetchMessages() else { return }
-
-            self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
-                self?.activityIndicator.stopAnimating()
-
-                UIView.performWithoutAnimation {
-                    self?.scrollToBottom()
-                }
-
-                self?.isRequestingHistory = false
-            })
-        }
-
-        messageManager.changes(subscription)
     }
 
     fileprivate func loadMoreMessagesFrom(date: Date?) {
