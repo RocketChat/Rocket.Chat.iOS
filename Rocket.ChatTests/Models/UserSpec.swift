@@ -44,4 +44,32 @@ class UserSpec: XCTestCase {
             XCTAssert(first?.identifier == "123", "User object was created with success")
         })
     }
+
+    func testUserDisplayNameHonorFullnameSettings() {
+        let settings = AuthSettings()
+        settings.useUserRealName = false
+
+        AuthSettingsManager.shared.internalSettings = settings
+
+        let user = User()
+        user.name = "Full Name"
+        user.username = "username"
+
+        XCTAssertNotEqual(user.displayName(), "Full Name", "User.displayName() won't return name property")
+        XCTAssertEqual(user.displayName(), "username", "User.displayName() will return username property")
+    }
+
+    func testUserDisplayNameHonorNameSettings() {
+        let settings = AuthSettings()
+        settings.useUserRealName = true
+
+        AuthSettingsManager.shared.internalSettings = settings
+
+        let user = User()
+        user.name = "Full Name"
+        user.username = "username"
+
+        XCTAssertEqual(user.displayName(), "Full Name", "User.displayName() will return name property")
+        XCTAssertNotEqual(user.displayName(), "username", "User.displayName() won't return username property")
+    }
 }
