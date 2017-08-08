@@ -80,7 +80,9 @@ class WebSocketMock: WebSocket {
         if let data = string.data(using: .utf8) {
             let json = JSON(data: data)
             if json.exists(){
-                onJSONReceived.forEach { $0(json, send) }
+                DispatchQueue.global(qos: .background).async {
+                    self.onJSONReceived.forEach { $0(json, send) }
+                }
                 completion?()
             }
         }
@@ -105,7 +107,9 @@ class WebSocketMock: WebSocket {
 
         let json = JSON(data: data)
         if json.exists(){
-            onJSONReceived.forEach { $0(json, send) }
+            DispatchQueue.global(qos: .background).async {
+                self.onJSONReceived.forEach { $0(json, send) }
+            }
             completion?()
         }
     }
