@@ -63,7 +63,7 @@ extension Subscription {
             return name
         }
 
-        guard let settings = AuthSettingsManager.shared.settings else {
+        guard let settings = AuthSettingsManager.settings else {
             return name
         }
 
