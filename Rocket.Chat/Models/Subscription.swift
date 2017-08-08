@@ -19,7 +19,7 @@ enum SubscriptionType: String {
 class Subscription: BaseModel {
     dynamic var auth: Auth?
 
-    fileprivate dynamic var privateType = SubscriptionType.channel.rawValue
+    internal dynamic var privateType = SubscriptionType.channel.rawValue
     var type: SubscriptionType {
         get { return SubscriptionType(rawValue: privateType) ?? SubscriptionType.group }
         set { privateType = newValue.rawValue }

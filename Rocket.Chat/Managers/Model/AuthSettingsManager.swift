@@ -12,11 +12,9 @@ import RealmSwift
 final class AuthSettingsManager {
 
     static let shared = AuthSettingsManager()
-    static var settings: AuthSettings? {
-        get { return shared.settings }
-    }
+    static var settings: AuthSettings? { return shared.settings }
 
-    fileprivate var internalSettings: AuthSettings?
+    internal var internalSettings: AuthSettings?
     var settings: AuthSettings? {
         set { }
         get {
