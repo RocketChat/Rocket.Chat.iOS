@@ -26,7 +26,7 @@ class WebSocketMockTests: XCTestCase {
             expectOnConnect.fulfill()
         }
         socket.connect()
-        wait(for: [expectOnConnect], timeout: 1)
+        wait(for: [expectOnConnect], timeout: 2)
 
         let expectOnText = XCTestExpectation(description: "Expect `onText` being called")
         socket.onText = { (text) in
@@ -34,7 +34,7 @@ class WebSocketMockTests: XCTestCase {
             expectOnText.fulfill()
         }
         socket.write(string: "ping text")
-        wait(for: [expectOnText], timeout: 1)
+        wait(for: [expectOnText], timeout: 2)
 
         let expectOnDisconnect = XCTestExpectation(description: "Expect `onDisconnect` being called")
         socket.onDisconnect = { _ in
@@ -42,7 +42,7 @@ class WebSocketMockTests: XCTestCase {
             expectOnDisconnect.fulfill()
         }
         socket.disconnect()
-        wait(for: [expectOnDisconnect], timeout: 1)
+        wait(for: [expectOnDisconnect], timeout: 2)
     }
 
     func testWithSocketManager() {
@@ -65,7 +65,7 @@ class WebSocketMockTests: XCTestCase {
             XCTAssertTrue(connected)
             expectOnConnect.fulfill()
         }
-        wait(for: [expectOnConnect, expectReceivedConnect], timeout: 1)
+        wait(for: [expectOnConnect, expectReceivedConnect], timeout: 2)
         socketManager.clear()
 
         // Event Cascading in WebSocketMock
@@ -81,7 +81,7 @@ class WebSocketMockTests: XCTestCase {
             }
         }
         socketManager.send(["msg": "mock", "mock": "EventCascading"])
-        wait(for: [expectEventCascading], timeout: 1)
+        wait(for: [expectEventCascading], timeout: 2)
 
         // Disconnect
         let expectOnDidconnect = XCTestExpectation(description: "Expect `onDisconnect` being called")
@@ -93,7 +93,7 @@ class WebSocketMockTests: XCTestCase {
             XCTAssertFalse(connected)
             expectDisconnectEvent.fulfill()
         }
-        wait(for: [expectOnDidconnect, expectDisconnectEvent], timeout: 1)
+        wait(for: [expectOnDidconnect, expectDisconnectEvent], timeout: 2)
     }
 
     func testConnectionInterruption() {
@@ -116,7 +116,7 @@ class WebSocketMockTests: XCTestCase {
             XCTAssertTrue(connected)
             expectOnConnect.fulfill()
         }
-        wait(for: [expectOnConnect, expectReceivedConnect], timeout: 1)
+        wait(for: [expectOnConnect, expectReceivedConnect], timeout: 2)
         socketManager.clear()
 
         // Connection Interruption
@@ -126,7 +126,7 @@ class WebSocketMockTests: XCTestCase {
             expectOnConnectionInterrupted.fulfill()
         }
         socket.disconnect()
-        wait(for: [expectOnConnectionInterrupted], timeout: 1)
+        wait(for: [expectOnConnectionInterrupted], timeout: 2)
     }
 
 }
