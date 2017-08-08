@@ -12,16 +12,20 @@ import SwiftyJSON
 @testable import Starscream
 
 typealias SendMessage = (JSON) -> Void
-typealias OnTextReceived = (String, SendMessage) -> Void
 typealias OnJSONReceived = (JSON, SendMessage) -> Void
-typealias OnDataReceived = (Data, SendMessage) -> Void
 
 class WebSocketMock: WebSocket {
 
-    var onTextReceived: OnTextReceived?
-    var onJSONReceived: OnJSONReceived?
-    var onDataReceived: OnDataReceived?
+    var onJSONReceived = [OnJSONReceived]()
     var mockConnected = false
+
+    // MARK: - Mock Middlewares
+
+    func use(_ middlewares: OnJSONReceived...) {
+        onJSONReceived.append(contentsOf: middlewares)
+    }
+
+    // MARK: - Mocks
 
     override var isConnected: Bool {
         return mockConnected
@@ -65,7 +69,6 @@ class WebSocketMock: WebSocket {
      - parameter completion: The (optional) completion handler.
      */
     override func write(string: String, completion: (() -> ())? = nil) {
-        completion?()
         let send: SendMessage = { json in
             DispatchQueue.global(qos: .background).async {
                 guard let string = json.rawString() else { return }
@@ -74,15 +77,13 @@ class WebSocketMock: WebSocket {
             }
         }
 
-        if let onJSONReceived = onJSONReceived, let data = string.data(using: .utf8) {
+        if let data = string.data(using: .utf8) {
             let json = JSON(data: data)
             if json.exists(){
-                onJSONReceived(json, send)
-                return
+                onJSONReceived.forEach { $0(json, send) }
+                completion?()
             }
         }
-
-        onTextReceived?(string, send)
     }
 
     /**
@@ -94,7 +95,6 @@ class WebSocketMock: WebSocket {
      - parameter completion: The (optional) completion handler.
      */
     override func write(data: Data, completion: (() -> ())? = nil) {
-        completion?()
         let send: SendMessage = { json in
             DispatchQueue.global(qos: .background).async {
                 guard let string = json.rawString() else { return }
@@ -103,15 +103,11 @@ class WebSocketMock: WebSocket {
             }
         }
 
-        if let onJSONReceived = onJSONReceived {
-            let json = JSON(data: data)
-            if json.exists(){
-                onJSONReceived(json, send)
-                return
-            }
+        let json = JSON(data: data)
+        if json.exists(){
+            onJSONReceived.forEach { $0(json, send) }
+            completion?()
         }
-
-        onDataReceived?(data, send)
     }
 
     /**
