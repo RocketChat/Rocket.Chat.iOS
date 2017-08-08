@@ -96,7 +96,7 @@ class WebSocketMock: WebSocket {
      - parameter data:       The data to write.
      - parameter completion: The (optional) completion handler.
      */
-    override func write(data: Data, completion: (() -> ())? = nil) {
+    override func write(data: Data, completion: (() -> Void)? = nil) {
         let send: SendMessage = { json in
             DispatchQueue.global(qos: .background).async {
                 guard let string = json.rawString() else { return }
@@ -106,7 +106,7 @@ class WebSocketMock: WebSocket {
         }
 
         let json = JSON(data: data)
-        if json.exists(){
+        if json.exists() {
             DispatchQueue.global(qos: .background).async {
                 self.onJSONReceived.forEach { $0(json, send) }
             }
@@ -118,8 +118,7 @@ class WebSocketMock: WebSocket {
      Write a ping to the websocket. This sends it as a control frame.
      Yodel a   sound  to the planet.    This sends it as an astroid. http://youtu.be/Eu5ZJELRiJ8?t=42s
      */
-    override func write(ping: Data, completion: (() -> ())? = nil) {
+    override func write(ping: Data, completion: (() -> Void)? = nil) {
         completion?()
-        
     }
 }
