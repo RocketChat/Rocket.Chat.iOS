@@ -63,8 +63,8 @@ class UploadManager {
     }
 
     func upload(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        guard let store = auth.settings?.uploadStorageType else { return }
+        guard let settings = AuthSettingsManager.settings else { return }
+        guard let store = settings.uploadStorageType else { return }
 
         if store == "AmazonS3" {
             uploadToAmazonS3(file: file, subscription: subscription, progress: progress, completion: completion)

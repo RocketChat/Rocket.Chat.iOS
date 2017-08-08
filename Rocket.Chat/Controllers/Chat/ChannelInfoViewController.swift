@@ -56,8 +56,8 @@ class ChannelInfoViewController: BaseViewController {
         super.viewDidLoad()
         title = localized("chat.info.title")
 
-        if let auth = AuthManager.isAuthenticated() {
-            if auth.settings?.favoriteRooms ?? false {
+        if let settings = AuthSettingsManager.settings {
+            if settings.favoriteRooms {
                 let defaultImage = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray()).withRenderingMode(.alwaysOriginal)
                 let buttonFavorite = UIBarButtonItem(image: defaultImage, style: .plain, target: self, action: #selector(buttonFavoriteDidPressed))
                 navigationItem.rightBarButtonItem = buttonFavorite
