@@ -13,6 +13,7 @@
 		4112BEEC1E7971A400E734CB /* MainChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4112BEEB1E7971A400E734CB /* MainChatViewController.swift */; };
 		4116C52D1E69B15400AC4E43 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4116C52C1E69B15400AC4E43 /* GoogleService-Info.plist */; };
 		411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */; };
+		411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */; };
 		411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411EDED41E3102CB00BC7BE3 /* UploadManager.swift */; };
 		412719441E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412719431E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift */; };
 		412719461E6B403700461FEE /* RegisterUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412719451E6B403700461FEE /* RegisterUsernameViewController.swift */; };
@@ -181,6 +182,7 @@
 		4112BEEB1E7971A400E734CB /* MainChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainChatViewController.swift; path = Controllers/Chat/MainChatViewController.swift; sourceTree = "<group>"; };
 		4116C52C1E69B15400AC4E43 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettingsManager.swift; path = Managers/Model/AuthSettingsManager.swift; sourceTree = "<group>"; };
+		411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettingsManagerSpec.swift; path = Managers/AuthSettingsManagerSpec.swift; sourceTree = "<group>"; };
 		411EDED41E3102CB00BC7BE3 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadManager.swift; path = Managers/Uploader/UploadManager.swift; sourceTree = "<group>"; };
 		412719431E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewControllerGoogleExtensions.swift; path = Controllers/Auth/AuthViewControllerGoogleExtensions.swift; sourceTree = "<group>"; };
 		412719451E6B403700461FEE /* RegisterUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterUsernameViewController.swift; path = Controllers/Auth/RegisterUsernameViewController.swift; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 			children = (
 				417A70011D47916C00FF46EE /* Socket */,
 				41BA89231D303D8B00CBF526 /* AuthManagerSpec.swift */,
+				411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */,
 				41DC7A1E1D3865FE00896FC0 /* MessageManagerSpec.swift */,
 			);
 			name = Managers;
@@ -1460,6 +1463,7 @@
 				41DC7A241D386CA800896FC0 /* DateExtensionsSpec.swift in Sources */,
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
+				411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
