@@ -8,16 +8,24 @@
 
 import Foundation
 import ObjectiveC
+import SwiftyJSON
 @testable import Starscream
 
-typealias OnTextReceived = (String) -> String
-typealias OnDataReceived = (Data) -> String
+typealias SendMessage = (JSON) -> Void
+typealias OnJSONReceived = (JSON, SendMessage) -> Void
 
 class WebSocketMock: WebSocket {
 
-    var onTextReceived: OnTextReceived?
-    var onDataReceived: OnDataReceived?
+    var onJSONReceived = [OnJSONReceived]()
     var mockConnected = false
+
+    // MARK: - Mock Middlewares
+
+    func use(_ middlewares: OnJSONReceived...) {
+        onJSONReceived.append(contentsOf: middlewares)
+    }
+
+    // MARK: - Mocks
 
     override var isConnected: Bool {
         return mockConnected
@@ -61,13 +69,22 @@ class WebSocketMock: WebSocket {
      - parameter completion: The (optional) completion handler.
      */
     override func write(string: String, completion: (() -> ())? = nil) {
-        completion?()
-        guard let ret = onTextReceived?(string) else {
-            return
+        let send: SendMessage = { json in
+            DispatchQueue.global(qos: .background).async {
+                guard let string = json.rawString() else { return }
+                self.onText?(string)
+                self.delegate?.websocketDidReceiveMessage(socket: self, text: string)
+            }
         }
-        DispatchQueue.global(qos: .background).async {
-            self.onText?(ret)
-            self.delegate?.websocketDidReceiveMessage(socket: self, text: ret)
+
+        if let data = string.data(using: .utf8) {
+            let json = JSON(data: data)
+            if json.exists(){
+                DispatchQueue.global(qos: .background).async {
+                    self.onJSONReceived.forEach { $0(json, send) }
+                }
+                completion?()
+            }
         }
     }
 
@@ -80,13 +97,20 @@ class WebSocketMock: WebSocket {
      - parameter completion: The (optional) completion handler.
      */
     override func write(data: Data, completion: (() -> ())? = nil) {
-        completion?()
-        guard let ret = onDataReceived?(data) else {
-            return
+        let send: SendMessage = { json in
+            DispatchQueue.global(qos: .background).async {
+                guard let string = json.rawString() else { return }
+                self.onText?(string)
+                self.delegate?.websocketDidReceiveMessage(socket: self, text: string)
+            }
         }
-        DispatchQueue.global(qos: .background).async {
-            self.onText?(ret)
-            self.delegate?.websocketDidReceiveMessage(socket: self, text: ret)
+
+        let json = JSON(data: data)
+        if json.exists(){
+            DispatchQueue.global(qos: .background).async {
+                self.onJSONReceived.forEach { $0(json, send) }
+            }
+            completion?()
         }
     }
 
