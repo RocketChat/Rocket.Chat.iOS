@@ -33,10 +33,8 @@ class User: BaseModel {
 extension User {
 
     func displayName() -> String {
-        guard let auth = AuthManager.isAuthenticated(),
-              let settings = auth.settings
-            else {
-                return username ?? ""
+        guard let settings = AuthSettingsManager.shared.settings else {
+            return username ?? ""
         }
 
         return (settings.useUserRealName ? name : username) ?? ""

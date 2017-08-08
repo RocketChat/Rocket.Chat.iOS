@@ -125,7 +125,7 @@ final class ConnectServerViewController: BaseViewController {
             }
 
             SocketManager.connect(socketURL) { (_, connected) in
-                AuthManager.updatePublicSettings(nil) { (settings) in
+                AuthSettingsManager.updatePublicSettings(nil) { (settings) in
                     self?.serverPublicSettings = settings
 
                     if connected {

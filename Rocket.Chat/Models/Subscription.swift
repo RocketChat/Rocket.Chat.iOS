@@ -63,11 +63,8 @@ extension Subscription {
             return name
         }
 
-        guard
-            let auth = AuthManager.isAuthenticated(),
-            let settings = auth.settings
-            else {
-                return name
+        guard let settings = AuthSettingsManager.shared.settings else {
+            return name
         }
 
         return settings.useUserRealName ? fname : name
