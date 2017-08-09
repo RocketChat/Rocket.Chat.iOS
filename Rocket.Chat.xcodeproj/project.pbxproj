@@ -26,6 +26,7 @@
 		412E1F3C1DB6D55000531FDA /* ChatMessageURLView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412E1F3A1DB6D55000531FDA /* ChatMessageURLView.xib */; };
 		4133EDCF1DA2834E005AA783 /* ChatMessageImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4133EDCE1DA2834E005AA783 /* ChatMessageImageView.swift */; };
 		4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */; };
+		413996171F3B44500075F96E /* UploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413996161F3B44500075F96E /* UploadHelper.swift */; };
 		41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41494B911D63C6280004F369 /* UIImageExtension.swift */; };
 		41499C8F1F2A116900790EA7 /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41499C8E1F2A116900790EA7 /* ServerManager.swift */; };
 		41499C911F2A1A7200790EA7 /* TimestampCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41499C901F2A1A7200790EA7 /* TimestampCoordinator.swift */; };
@@ -195,6 +196,7 @@
 		412E1F3A1DB6D55000531FDA /* ChatMessageURLView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatMessageURLView.xib; path = Views/Cells/Chat/ChatMessageURLView.xib; sourceTree = "<group>"; };
 		4133EDCE1DA2834E005AA783 /* ChatMessageImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageImageView.swift; path = Views/Cells/Chat/ChatMessageImageView.swift; sourceTree = "<group>"; };
 		4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatMessageImageView.xib; path = Views/Cells/Chat/ChatMessageImageView.xib; sourceTree = "<group>"; };
+		413996161F3B44500075F96E /* UploadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadHelper.swift; path = Helpers/UploadHelper.swift; sourceTree = "<group>"; };
 		41494B911D63C6280004F369 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIImageExtension.swift; path = Extensions/UIImageExtension.swift; sourceTree = "<group>"; };
 		41499C8E1F2A116900790EA7 /* ServerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerManager.swift; path = Managers/ServerManager.swift; sourceTree = "<group>"; };
 		41499C901F2A1A7200790EA7 /* TimestampCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimestampCoordinator.swift; sourceTree = "<group>"; };
@@ -729,6 +731,7 @@
 			isa = PBXGroup;
 			children = (
 				41D701D51E67111E00FED2EE /* MessageTextFontAttributes.swift */,
+				413996161F3B44500075F96E /* UploadHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -982,6 +985,9 @@
 								enabled = 1;
 							};
 							com.apple.Push = {
+								enabled = 1;
+							};
+							com.apple.iCloud = {
 								enabled = 1;
 							};
 						};
@@ -1362,6 +1368,7 @@
 				41F167E91DAC4D4300775CCA /* ChatTitleView.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
+				413996171F3B44500075F96E /* UploadHelper.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,

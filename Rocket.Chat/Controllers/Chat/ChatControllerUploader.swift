@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import MobileCoreServices
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -23,7 +24,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }))
 
         alert.addAction(UIAlertAction(title: localized("chat.upload.import_file"), style: .default, handler: { (_) in
-            // Do nothing yet.
+            self.openDocumentPicker()
         }))
 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
@@ -141,6 +142,52 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+
+}
+
+extension ChatViewController: UIDocumentPickerDelegate {
+
+    func openDocumentPicker() {
+        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
+        documentPicker.delegate = self
+        documentPicker.modalPresentationStyle = .formSheet
+
+        self.present(documentPicker, animated: true, completion: nil)
+    }
+
+    // MARK: - UIDocumentPickerDelegate Methods
+
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        if controller.documentPickerMode == .import {
+            if let file = UploadHelper.file(for: url) {
+                UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { _ in
+                    // We currently don't have progress being called.
+                }, completion: { [unowned self] (response, error) in
+                    if error {
+                        var errorMessage = localized("error.socket.default_error_message")
+
+                        if let response = response {
+                            if let message = response.result["error"]["message"].string {
+                                errorMessage = message
+                            }
+                        }
+
+                        let alert = UIAlertController(
+                            title: localized("error.socket.default_error_title"),
+                            message: errorMessage,
+                            preferredStyle: .alert
+                        )
+
+                        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
+
+                        DispatchQueue.main.async {
+                            self.present(alert, animated: true, completion: nil)
+                        }
+                    }
+                })
+            }
+        }
     }
 
 }
