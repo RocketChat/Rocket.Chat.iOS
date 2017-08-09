@@ -87,4 +87,38 @@ class SocketManagerSpec: XCTestCase {
         wait(for: [expectCallback], timeout: 2)
     }
 
+    func testSubscribe() {
+        let socketManager = SocketManager()
+        socketManager.connect(socket: socket)
+
+        let expectCallback = XCTestExpectation(description: "Expect full events subscription")
+        socket.use { json, send in
+            switch json["msg"].stringValue {
+            case "subscribe":
+                send(JSON(object: ["msg": ""]))
+                4.times.forEach { idx in
+                    send(JSON(object: [
+                        "msg": "updated",
+                        "id": json["id"].stringValue,
+                        "fields": [
+                            "eventName": "foo",
+                            "time": idx
+                        ]
+                    ]))
+                }
+            default:
+                break
+            }
+        }
+        var count = 0
+        socketManager.subscribe(["msg": "subscribe"], eventName: "foo") { response in
+            XCTAssertEqual(response.event, "foo")
+            count += response.result["fields"]["time"].intValue
+            if count == 10 {
+                expectCallback.fulfill()
+            }
+        }
+        wait(for: [expectCallback], timeout: 2)
+    }
+
 }
