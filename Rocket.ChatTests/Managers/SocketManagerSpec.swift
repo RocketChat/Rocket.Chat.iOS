@@ -13,6 +13,19 @@ import SwiftyJSON
 
 class SocketManagerSpec: XCTestCase {
 
+    let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
+
+    override func setUp() {
+        socket.use { json, send in
+            switch json["msg"].stringValue {
+            case "connect":
+                send(JSON(object: ["msg": "connected"]))
+            default:
+                break
+            }
+        }
+    }
+
     // MARK: SocketResponse
 
     func testSocketResponseErrorMethodMsgError() {
@@ -31,6 +44,27 @@ class SocketManagerSpec: XCTestCase {
         let result = JSON(["msg": "result", "foo": "bar", "fields": ["eventName": "event"]])
         let response = SocketResponse(result, socket: nil)
         XCTAssert(response?.isError() == false, "isError() should return true when JSON don't contains error")
+    }
+
+    func testSocketPingPong() {
+        let socketManager = SocketManager()
+        socketManager.connect(socket: socket)
+
+        let expectPing = XCTestExpectation(description: "Expect event `ping`")
+        let expectPong = XCTestExpectation(description: "Expect event `pong`")
+        socket.use { json, send in
+            switch json["msg"].stringValue {
+            case "ping":
+                expectPing.fulfill()
+                send(JSON(object: ["msg": "ping"]))
+            case "pong":
+                expectPong.fulfill()
+            default:
+                break
+            }
+        }
+        socketManager.send(["msg": "ping"])
+        wait(for: [expectPing, expectPong], timeout: 2)
     }
 
 }

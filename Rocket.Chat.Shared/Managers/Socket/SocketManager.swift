@@ -44,7 +44,7 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
 
     // MARK: Connection
 
-    func connect(socket: WebSocket, completion: SocketCompletion?) {
+    func connect(socket: WebSocket, completion: SocketCompletion? = nil) {
         self.serverURL = socket.currentURL
         self.internalConnectionHandler = completion
 
@@ -58,7 +58,7 @@ public class SocketManager: AuthManagerInjected, PushManagerInjected, Subscripti
         self.socket?.connect()
     }
 
-    func connect(_ url: URL, completion: @escaping SocketCompletion) {
+    func connect(_ url: URL, completion: SocketCompletion? = nil) {
         self.serverURL = url
         self.internalConnectionHandler = completion
 
