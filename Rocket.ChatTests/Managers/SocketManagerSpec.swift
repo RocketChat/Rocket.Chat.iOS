@@ -67,4 +67,24 @@ class SocketManagerSpec: XCTestCase {
         wait(for: [expectPing, expectPong], timeout: 2)
     }
 
+    func testSendCallback() {
+        let socketManager = SocketManager()
+        socketManager.connect(socket: socket)
+
+        let expectCallback = XCTestExpectation(description: "Expect callback on message response")
+        socket.use { json, send in
+            switch json["msg"].stringValue {
+            case "foo":
+                send(JSON(object: ["msg": "bar", "id": json["id"].stringValue]))
+            default:
+                break
+            }
+        }
+        socketManager.send(["msg": "foo"]) { response in
+            XCTAssertEqual(response.result["msg"].stringValue, "bar")
+            expectCallback.fulfill()
+        }
+        wait(for: [expectCallback], timeout: 2)
+    }
+
 }
