@@ -9,7 +9,8 @@
 import Foundation
 
 extension Int {
-    var times: CountableClosedRange<Int> {
-        return 1...self
+    @discardableResult
+    func times<T>(_ transform: (Int) -> T) -> [T] {
+        return (1...self).map(transform)
     }
 }

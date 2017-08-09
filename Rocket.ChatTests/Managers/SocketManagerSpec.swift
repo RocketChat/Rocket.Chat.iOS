@@ -96,7 +96,7 @@ class SocketManagerSpec: XCTestCase {
             switch json["msg"].stringValue {
             case "subscribe":
                 send(JSON(object: ["msg": ""]))
-                4.times.forEach { idx in
+                4.times { idx in
                     send(JSON(object: [
                         "msg": "updated",
                         "id": json["id"].stringValue,
