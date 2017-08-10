@@ -13,8 +13,25 @@ struct UploadHelper {
 
     /**
         This method will creates a FileUpload object
+        based on a file Data.
+
+        - parameters:
+            - data: The file Data to be based on.
+        - returns: FileUpload object, if content is valid.
+     */
+    static func file(for data: Data, name: String, mimeType: String) -> FileUpload? {
+        return FileUpload(
+            name: name,
+            size: sizeFor(data),
+            type: mimeType,
+            data: data
+        )
+    }
+
+    /**
+        This method will creates a FileUpload object
         based on a file URL.
- 
+
         - parameters:
             - url: The file URL to be based on.
         - returns: FileUpload object, if URL is valid.
@@ -22,11 +39,10 @@ struct UploadHelper {
     static func file(for url: URL) -> FileUpload? {
         guard let data = try? Data(contentsOf: url) else { return nil }
 
-        return FileUpload(
+        return file(
+            for: data,
             name: nameFor(url),
-            size: sizeFor(data),
-            type: mimeTypeFor(url),
-            data: data
+            mimeType: mimeTypeFor(url)
         )
     }
 
