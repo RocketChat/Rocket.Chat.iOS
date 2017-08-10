@@ -33,7 +33,7 @@ final class ChatMessageTextViewModel {
         return attachment.collapsed
     }
 
-    private let attachment: Attachment
+    let attachment: Attachment
 
     init(withAttachment attachment: Attachment) {
         self.attachment = attachment
