@@ -27,12 +27,14 @@ extension ChatViewController {
         guard let filename = DownloadManager.filenameFor(attachment.titleLink) else { return }
         guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
 
+        // Open document itself
         func open() {
             documentController = UIDocumentInteractionController(url: localFileURL)
             documentController?.delegate = self
             documentController?.presentPreview(animated: true)
         }
 
+        // Checks if we do have the file in the system, before downloading it
         if DownloadManager.fileExists(localFileURL) {
             open()
         } else {
@@ -45,6 +47,7 @@ extension ChatViewController {
             chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
             chatHeaderViewStatus?.activityIndicator.startAnimating()
 
+            // Download file and cache it to be used later
             DownloadManager.download(url: fileURL, to: localFileURL) {
                 DispatchQueue.main.async {
                     self.hideHeaderStatusView()

@@ -15,7 +15,7 @@ class DownloadManager {
     }
 
     class func localFileURLFor(_ filename: String) -> URL? {
-        if let docDirectory = try? FileManager.default.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true) {
+        if let docDirectory = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true) {
             return docDirectory.appendingPathComponent(filename)
         }
 
