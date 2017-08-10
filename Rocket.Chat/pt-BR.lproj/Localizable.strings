@@ -63,6 +63,7 @@
 // Chat Upload
 "chat.upload.uploading_image" = "Enviando imagem";
 "chat.upload.uploading_video" = "Enviando video";
+"chat.upload.uploading_file" = "Enviando \"%@\"";
 "chat.upload.take_photo" = "Tirar uma foto";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
