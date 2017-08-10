@@ -10,7 +10,7 @@ import UIKit
 import SafariServices
 import MobilePlayer
 
-extension ChatViewController: ChatMessageCellProtocol {
+extension ChatViewController: ChatMessageCellProtocol, UIDocumentInteractionControllerDelegate {
 
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
@@ -48,10 +48,28 @@ extension ChatViewController: ChatMessageCellProtocol {
         }
     }
 
+    func openFileFromCell(attachment: Attachment) {
+        guard let fileURL = attachment.fullFileURL() else { return }
+        guard let filename = DownloadManager.filenameFor(attachment.titleLink) else { return }
+        guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
+
+        DownloadManager.download(url: fileURL, to: localFileURL) {
+            DispatchQueue.main.async {
+                self.documentController = UIDocumentInteractionController(url: localFileURL)
+                self.documentController?.delegate = self
+                self.documentController?.presentPreview(animated: true)
+            }
+        }
+    }
+
     func viewDidCollpaseChange(view: UIView) {
         guard let origin = collectionView?.convert(CGPoint.zero, from: view) else { return }
         guard let indexPath = collectionView?.indexPathForItem(at: origin) else { return }
         collectionView?.reloadItems(at: [indexPath])
+    }
+
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
     }
 
 }
