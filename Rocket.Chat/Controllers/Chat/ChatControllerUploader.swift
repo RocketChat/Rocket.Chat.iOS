@@ -65,9 +65,12 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         var filename = "\(String.random()).jpeg"
         var file: FileUpload?
+        var assetURL: URL?
 
-        if let assetURL = info[UIImagePickerControllerReferenceURL] as? URL {
-            if let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject {
+        if let tempAssetURL = info[UIImagePickerControllerReferenceURL] as? URL {
+            assetURL = tempAssetURL
+
+            if let asset = PHAsset.fetchAssets(withALAssetURLs: [tempAssetURL], options: nil).firstObject {
                 if let resource = PHAssetResource.assetResources(for: asset).first {
                     filename = resource.originalFilename
                 }
@@ -77,12 +80,16 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let resizedImage = image.resizeWith(width: 1024) ?? image
             guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
+            var mimeType: String?
 
-            file = FileUpload(
+            if let assetURL = assetURL {
+                mimeType = UploadHelper.mimeTypeFor(assetURL)
+            }
+
+            file = UploadHelper.file(
+                for: imageData,
                 name: filename,
-                size: (imageData as NSData).length,
-                type: "image/jpeg",
-                data: imageData
+                mimeType: mimeType ?? "image/jpeg"
             )
         }
 
@@ -96,11 +103,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     return
                 }
 
-                file = FileUpload(
+                file = UploadHelper.file(
+                    for: videoData as Data,
                     name: filename,
-                    size: videoData.length,
-                    type: "video/mp4",
-                    data: videoData as Data
+                    mimeType: UploadHelper.mimeTypeFor(videoURL)
                 )
 
                 semaphore.signal()
