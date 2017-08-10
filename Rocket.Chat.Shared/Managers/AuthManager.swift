@@ -38,7 +38,7 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected, ServerMana
         guard let user = try? Realm().object(ofType: User.self, forPrimaryKey: auth.userId) else { return nil }
         return user
     }
-    
+
     /**
         This method is going to persist the authentication informations
         that was latest used in NSUserDefaults to keep it safe if something

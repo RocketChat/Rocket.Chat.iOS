@@ -87,8 +87,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
 
         if let videoURL = info[UIImagePickerControllerMediaURL] as? URL {
-            activityMessage = localized("chat.upload.uploading_video")
-
             let assetURL = AVURLAsset(url: videoURL)
             let semaphore = DispatchSemaphore(value: 0)
 
