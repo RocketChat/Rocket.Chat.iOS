@@ -116,31 +116,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
 
         if let file = file {
-            UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { _ in
-                // We currently don't have progress being called.
-            }, completion: { [unowned self] (response, error) in
-                if error {
-                    var errorMessage = localized("error.socket.default_error_message")
-
-                    if let response = response {
-                        if let message = response.result["error"]["message"].string {
-                            errorMessage = message
-                        }
-                    }
-
-                    let alert = UIAlertController(
-                        title: localized("error.socket.default_error_title"),
-                        message: errorMessage,
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-
-                    DispatchQueue.main.async {
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-            })
+            upload(file)
         }
 
         dismiss(animated: true, completion: nil)
@@ -167,33 +143,43 @@ extension ChatViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         if controller.documentPickerMode == .import {
             if let file = UploadHelper.file(for: url) {
-                UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { _ in
-                    // We currently don't have progress being called.
-                }, completion: { [unowned self] (response, error) in
-                    if error {
-                        var errorMessage = localized("error.socket.default_error_message")
-
-                        if let response = response {
-                            if let message = response.result["error"]["message"].string {
-                                errorMessage = message
-                            }
-                        }
-
-                        let alert = UIAlertController(
-                            title: localized("error.socket.default_error_title"),
-                            message: errorMessage,
-                            preferredStyle: .alert
-                        )
-
-                        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-
-                        DispatchQueue.main.async {
-                            self.present(alert, animated: true, completion: nil)
-                        }
-                    }
-                })
+                upload(file)
             }
         }
+    }
+
+}
+
+// MARK: Uploading a FileUpload
+
+extension ChatViewController {
+
+    func upload(_ file: FileUpload) {
+        UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { _ in
+            // We currently don't have progress being called.
+        }, completion: { [unowned self] (response, error) in
+            if error {
+                var errorMessage = localized("error.socket.default_error_message")
+
+                if let response = response {
+                    if let message = response.result["error"]["message"].string {
+                        errorMessage = message
+                    }
+                }
+
+                let alert = UIAlertController(
+                    title: localized("error.socket.default_error_title"),
+                    message: errorMessage,
+                    preferredStyle: .alert
+                )
+
+                alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
+
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        })
     }
 
 }
