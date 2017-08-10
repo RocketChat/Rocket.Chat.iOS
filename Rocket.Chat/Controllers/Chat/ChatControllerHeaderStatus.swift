@@ -19,6 +19,13 @@ extension ChatViewController {
             view.addSubview(headerView)
             chatHeaderViewStatus = headerView
 
+            // Shadow of the view
+            headerView.layer.masksToBounds = false
+            headerView.layer.shadowColor = UIColor.black.cgColor
+            headerView.layer.shadowOpacity = 0.5
+            headerView.layer.shadowOffset = CGSize(width: 0, height: 0)
+            headerView.layer.shadowRadius = 5
+
             view.addConstraints(NSLayoutConstraint.constraints(
                 withVisualFormat: "|-0-[headerView]-0-|",
                 options: .alignAllLeft,
