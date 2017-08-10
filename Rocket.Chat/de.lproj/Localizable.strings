@@ -71,6 +71,9 @@
 // Chat Download
 "chat.download.downloading_file" = "Wird heruntergeladen \"%@\"";
 
+// Chat Cell Static Messages
+"chat.message.open_file" = "Antippen zum Öffnen";
+
 // Message Types
 "chat.message.type.room_name_changed" = "Raum umbenannt zu: %@ von %@";
 "chat.message.type.user_added_by" = "Benutzer %@ hinzugefügt von %@";
