@@ -1,0 +1,57 @@
+//
+//  ChatControllerDocuments.swift
+//  Rocket.Chat
+//
+//  Created by Rafael Kellermann Streit on 10/08/17.
+//  Copyright © 2017 Rocket.Chat. All rights reserved.
+//
+
+import Foundation
+
+// MARK: UIDocumentInteractionControllerDelegate
+
+extension ChatViewController: UIDocumentInteractionControllerDelegate {
+
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
+    }
+
+}
+
+// MARK: Open Attachments
+
+extension ChatViewController {
+
+    func openDocument(attachment: Attachment) {
+        guard let fileURL = attachment.fullFileURL() else { return }
+        guard let filename = DownloadManager.filenameFor(attachment.titleLink) else { return }
+        guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
+
+        func open() {
+            documentController = UIDocumentInteractionController(url: localFileURL)
+            documentController?.delegate = self
+            documentController?.presentPreview(animated: true)
+        }
+
+        if DownloadManager.fileExists(localFileURL) {
+            open()
+        } else {
+            showHeaderStatusView()
+
+            let message = String(format: localized("chat.download.downloading_file"), filename)
+            chatHeaderViewStatus?.labelTitle.text = message
+            chatHeaderViewStatus?.buttonRefresh.isHidden = true
+            chatHeaderViewStatus?.backgroundColor = .RCLightGray()
+            chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
+            chatHeaderViewStatus?.activityIndicator.startAnimating()
+
+            DownloadManager.download(url: fileURL, to: localFileURL) {
+                DispatchQueue.main.async {
+                    self.hideHeaderStatusView()
+                    open()
+                }
+            }
+        }
+    }
+
+}

@@ -48,7 +48,7 @@ extension UIColor {
     }
 
     static func RCLightGray() -> UIColor {
-        return UIColor(rgb: 0xDDDDDD, alphaVal: 1)
+        return UIColor(rgb: 0xEAEAEA, alphaVal: 1)
     }
 
     static func RCDarkBlue() -> UIColor {
@@ -61,16 +61,6 @@ extension UIColor {
 
     static func RCBlue() -> UIColor {
         return UIColor(rgb: 0x0b4c74, alphaVal: 1)
-    }
-
-    // Banners
-
-    static func RCOfflineBanner() -> UIColor {
-        return UIColor(rgb: 0xDDDDDD, alphaVal: 1)
-    }
-
-    static func RCUploadingBanner() -> UIColor {
-        return UIColor(rgb: 0xEAEAEA, alphaVal: 1)
     }
 
     // Function color
