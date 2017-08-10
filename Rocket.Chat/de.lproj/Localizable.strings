@@ -68,6 +68,9 @@
 "chat.upload.choose_from_library" = "Foto & Video Mediathek";
 "chat.upload.import_file" = "Importiere Datei aus...";
 
+// Chat Download
+"chat.download.downloading_file" = "Wird heruntergeladen \"%@\"";
+
 // Message Types
 "chat.message.type.room_name_changed" = "Raum umbenannt zu: %@ von %@";
 "chat.message.type.user_added_by" = "Benutzer %@ hinzugefügt von %@";

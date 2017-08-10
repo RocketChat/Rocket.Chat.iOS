@@ -27,7 +27,7 @@ extension ChatViewController: SocketConnectionHandler {
 
         chatHeaderViewStatus?.labelTitle.text = localized("connection.offline.banner.message")
         chatHeaderViewStatus?.buttonRefresh.isHidden = false
-        chatHeaderViewStatus?.backgroundColor = .RCOfflineBanner()
+        chatHeaderViewStatus?.backgroundColor = .RCLightGray()
         chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
     }
 
