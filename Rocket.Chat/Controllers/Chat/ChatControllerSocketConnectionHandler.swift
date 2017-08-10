@@ -11,7 +11,7 @@ import UIKit
 extension ChatViewController: SocketConnectionHandler {
 
     func socketDidConnect(socket: SocketManager) {
-        chatHeaderViewStatus?.removeFromSuperview()
+        hideHeaderStatusView()
 
         DispatchQueue.main.async { [weak self] in
             if let subscription = self?.subscription {
@@ -23,28 +23,12 @@ extension ChatViewController: SocketConnectionHandler {
     }
 
     func socketDidDisconnect(socket: SocketManager) {
-        chatHeaderViewStatus?.removeFromSuperview()
+        showHeaderStatusView()
 
-        if let headerView = ChatHeaderViewStatus.instantiateFromNib() {
-            headerView.translatesAutoresizingMaskIntoConstraints = false
-            headerView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: 44)
-            view.addSubview(headerView)
-            chatHeaderViewStatus = headerView
-
-            view.addConstraints(NSLayoutConstraint.constraints(
-                withVisualFormat: "|-0-[headerView]-0-|",
-                options: .alignAllLeft,
-                metrics: nil,
-                views: ["headerView": headerView])
-            )
-
-            view.addConstraints(NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-0-[headerView(44)]",
-                options: .alignAllLeft,
-                metrics: nil,
-                views: ["headerView": headerView])
-            )
-        }
+        chatHeaderViewStatus?.labelTitle.text = localized("connection.offline.banner.message")
+        chatHeaderViewStatus?.buttonRefresh.isHidden = false
+        chatHeaderViewStatus?.backgroundColor = .RCOfflineBanner()
+        chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
     }
 
 }

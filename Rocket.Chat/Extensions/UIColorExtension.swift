@@ -63,6 +63,16 @@ extension UIColor {
         return UIColor(rgb: 0x0b4c74, alphaVal: 1)
     }
 
+    // Banners
+
+    static func RCOfflineBanner() -> UIColor {
+        return UIColor(rgb: 0xDDDDDD, alphaVal: 1)
+    }
+
+    static func RCUploadingBanner() -> UIColor {
+        return UIColor(rgb: 0xEAEAEA, alphaVal: 1)
+    }
+
     // Function color
 
     static func RCFavoriteMark() -> UIColor {
