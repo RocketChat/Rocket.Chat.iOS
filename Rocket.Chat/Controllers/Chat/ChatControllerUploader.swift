@@ -128,17 +128,31 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
 }
 
+// MARK: UIDocumentMenuDelegate
+
+extension ChatViewController: UIDocumentMenuDelegate {
+
+    public func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+
+    func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+
+}
+
 extension ChatViewController: UIDocumentPickerDelegate {
 
     func openDocumentPicker() {
-        let documentPicker = UIDocumentPickerViewController(documentTypes: ["public.item"], in: .import)
-        documentPicker.delegate = self
-        documentPicker.modalPresentationStyle = .formSheet
-
-        self.present(documentPicker, animated: true, completion: nil)
+        let importMenu = UIDocumentMenuViewController(documentTypes: ["public.item"], in: .import)
+        importMenu.delegate = self
+        importMenu.modalPresentationStyle = .formSheet
+        self.present(importMenu, animated: true, completion: nil)
     }
 
-    // MARK: - UIDocumentPickerDelegate Methods
+    // MARK: UIDocumentPickerDelegate
 
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         if controller.documentPickerMode == .import {
