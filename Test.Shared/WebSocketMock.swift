@@ -68,7 +68,7 @@ class WebSocketMock: WebSocket {
      - parameter string:        The string to write.
      - parameter completion: The (optional) completion handler.
      */
-    override func write(string: String, completion: (() -> ())? = nil) {
+    override func write(string: String, completion: (() -> Void)? = nil) {
         let send: SendMessage = { json in
             DispatchQueue.global(qos: .background).async {
                 guard let string = json.rawString() else { return }
@@ -79,7 +79,7 @@ class WebSocketMock: WebSocket {
 
         if let data = string.data(using: .utf8) {
             let json = JSON(data: data)
-            if json.exists(){
+            if json.exists() {
                 DispatchQueue.global(qos: .background).async {
                     self.onJSONReceived.forEach { $0(json, send) }
                 }

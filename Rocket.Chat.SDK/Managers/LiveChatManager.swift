@@ -18,7 +18,6 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
     var userId = ""
     var token = ""
 
-    public var isLiveChatEnabled = false
     public var title = ""
     public var enabled = false
     /// If is there any agents online
@@ -48,7 +47,6 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
         ] as [String : Any]
         socketManager.send(params) { response in
             let json = response.result["result"]
-            self.isLiveChatEnabled = json["enabled"].boolValue
             self.title = json["title"].stringValue
             self.enabled = json["enabled"].boolValue
             self.online = json["online"].boolValue
@@ -201,7 +199,7 @@ public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, Subscr
                 "message": message
             ]]
         ] as [String : Any]
-        socketManager.send(params) { response in
+        socketManager.send(params) { _ in
             DispatchQueue.main.async {
                 completion()
             }
