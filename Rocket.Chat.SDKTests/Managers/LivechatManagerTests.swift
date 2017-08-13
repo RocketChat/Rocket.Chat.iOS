@@ -1,5 +1,5 @@
 //
-//  LiveChatManagerTests.swift
+//  LivechatManagerTests.swift
 //  Rocket.Chat
 //
 //  Created by Lucas Woo on 8/13/17.
@@ -10,7 +10,7 @@ import XCTest
 import SwiftyJSON
 @testable import RocketChat
 
-class LiveChatManagerTests: XCTestCase {
+class LivechatManagerTests: XCTestCase {
 
     let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
     let socketManager = SDKSocketManager()
@@ -36,7 +36,7 @@ class LiveChatManagerTests: XCTestCase {
     }
 
     func testInitiate() {
-        let livechatManager = LiveChatManager()
+        let livechatManager = LivechatManager()
         let expect = XCTestExpectation(description: "Expect LiveChatManager initiated")
         livechatManager.initiate {
             XCTAssertTrue(livechatManager.initiated)
@@ -48,7 +48,7 @@ class LiveChatManagerTests: XCTestCase {
     }
 
     func testRegisterAndLogin() {
-        let livechatManager = LiveChatManager()
+        let livechatManager = LivechatManager()
         livechatManager.initiated = true
         livechatManager.token = "YadDPc_6IfL7YJuySZ3DkOx-LSdbCtUcsypMdHVgQhx"
         let expect = XCTestExpectation(description: "Expect send offline message successfully")
@@ -59,7 +59,7 @@ class LiveChatManagerTests: XCTestCase {
     }
 
     func testLogin() {
-        let livechatManager = LiveChatManager()
+        let livechatManager = LivechatManager()
         livechatManager.initiated = true
         livechatManager.token = "YadDPc_6IfL7YJuySZ3DkOx-LSdbCtUcsypMdHVgQhx"
         let expect = XCTestExpectation(description: "Expect send offline message successfully")
@@ -70,7 +70,7 @@ class LiveChatManagerTests: XCTestCase {
     }
 
     func testSendOfflineMessage() {
-        let livechatManager = LiveChatManager()
+        let livechatManager = LivechatManager()
         let expect = XCTestExpectation(description: "Expect send offline message successfully")
         socket.use { json, send in
             guard json["msg"].stringValue == "method" else { return }

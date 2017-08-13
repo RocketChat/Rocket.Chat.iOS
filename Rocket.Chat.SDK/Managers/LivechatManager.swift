@@ -1,5 +1,5 @@
 //
-//  LiveChatManager.swift
+//  LivechatManager.swift
 //  Rocket.Chat
 //
 //  Created by Lucas Woo on 5/18/17.
@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 /// A manager that manages all livechat related actions
-public class LiveChatManager: SocketManagerInjected, AuthManagerInjected, SubscriptionManagerInjected {
+public class LivechatManager: SocketManagerInjected, AuthManagerInjected, SubscriptionManagerInjected {
 
     public var initiated = false
     public var loggedIn = false

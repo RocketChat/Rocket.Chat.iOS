@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-public class SupportViewController: UITableViewController, LiveChatManagerInjected {
+public class SupportViewController: UITableViewController, LivechatManagerInjected {
 
     @IBOutlet weak var departmentLabel: UILabel!
     @IBOutlet weak var emailField: UITextField!

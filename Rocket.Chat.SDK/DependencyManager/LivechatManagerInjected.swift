@@ -1,5 +1,5 @@
 //
-//  LiveChatManagerInjected.swift
+//  LivechatManagerInjected.swift
 //  Rocket.Chat
 //
 //  Created by Lucas Woo on 6/2/17.
@@ -8,9 +8,9 @@
 
 import Foundation
 
-protocol LiveChatManagerInjected {}
-extension LiveChatManagerInjected {
-    var livechatManager: LiveChatManager {
+protocol LivechatManagerInjected {}
+extension LivechatManagerInjected {
+    var livechatManager: LivechatManager {
         return DependencyRepository.livechatManager
     }
 }

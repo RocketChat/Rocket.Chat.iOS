@@ -34,7 +34,7 @@ class LivechatSubscriptionManagerTests: XCTestCase {
     }
 
     func testSendLivechatMessage() {
-        let subscriptionManager = LiveChatSubscriptionManager()
+        let subscriptionManager = LivechatSubscriptionManager()
 
         let roomSubscription = Subscription()
         roomSubscription.identifier = UUID().uuidString
