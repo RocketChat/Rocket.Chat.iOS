@@ -18,72 +18,11 @@ class LiveChatManagerTests: XCTestCase {
     override func setUp() {
         super.setUp()
 
-        socket.use { json, send in
-            switch json["msg"].stringValue {
-            case "connect":
-                send(JSON(object: ["msg": "connected"]))
-            default:
-                break
-            }
-        }
-
-        socket.use { json, send in
-            guard json["msg"].stringValue == "method" else { return }
-            switch json["method"].stringValue {
-            case "livechat:getInitialData":
-                let data: [String: Any] = [
-                    "id": json["id"].stringValue,
-                    "result": [
-                        "transcript": false,
-                        "registrationForm": true,
-                        "offlineTitle": "Leave a message (Changed)",
-                        "triggers": [],
-                        "displayOfflineForm": true,
-                        "offlineSuccessMessage": "",
-                        "departments": [
-                            [
-                                "_id": "sGDPYaB9i47CNRLNu",
-                                "numAgents": 1,
-                                "enabled": true,
-                                "showOnRegistration": true,
-                                "_updatedAt": [
-                                    "$date": 1500709708181
-                                ],
-                                "description": "department description",
-                                "name": "1depart"
-                            ],
-                            [
-                                "_id": "qPYPJuL6ZPTrRrzTN",
-                                "numAgents": 1,
-                                "enabled": true,
-                                "showOnRegistration": true,
-                                "_updatedAt": [
-                                    "$date": 1501163003597
-                                ],
-                                "description": "tech support",
-                                "name": "2depart"
-                            ]
-                        ],
-                        "offlineMessage": "localhost: We are not online right now. Please leave us a message:",
-                        "title": "Rocket.Local",
-                        "color": "#C1272D",
-                        "room": nil,
-                        "offlineUnavailableMessage": "Not available offline form",
-                        "enabled": true,
-                        "offlineColor": "#666666",
-                        "videoCall": false,
-                        "language": "",
-                        "transcriptMessage": "Would you like a copy of this chat emailed?",
-                        "online": false,
-                        "allowSwitchingDepartments": true
-                    ] as [String: Any?],
-                    "msg": "result"
-                ]
-                send(JSON(object: data))
-            default:
-                break
-            }
-        }
+        socket.use(.connect)
+        socket.use(.login)
+        socket.use(.livechatInitiate)
+        socket.use(.livechatRegisterGuest)
+        socket.use(.livechatSendOfflineMessage)
 
         socketManager.connect(socket: socket)
         DependencyRepository.socketManager = socketManager
@@ -108,6 +47,28 @@ class LiveChatManagerTests: XCTestCase {
         }
     }
 
+    func testRegisterAndLogin() {
+        let livechatManager = LiveChatManager()
+        livechatManager.initiated = true
+        livechatManager.token = "YadDPc_6IfL7YJuySZ3DkOx-LSdbCtUcsypMdHVgQhx"
+        let expect = XCTestExpectation(description: "Expect send offline message successfully")
+        livechatManager.login {
+            XCTAssertTrue(livechatManager.loggedIn)
+            expect.fulfill()
+        }
+    }
+
+    func testLogin() {
+        let livechatManager = LiveChatManager()
+        livechatManager.initiated = true
+        livechatManager.token = "YadDPc_6IfL7YJuySZ3DkOx-LSdbCtUcsypMdHVgQhx"
+        let expect = XCTestExpectation(description: "Expect send offline message successfully")
+        livechatManager.login {
+            XCTAssertTrue(livechatManager.loggedIn)
+            expect.fulfill()
+        }
+    }
+
     func testSendOfflineMessage() {
         let livechatManager = LiveChatManager()
         let expect = XCTestExpectation(description: "Expect send offline message successfully")
@@ -118,10 +79,6 @@ class LiveChatManagerTests: XCTestCase {
                 XCTAssertEqual(json["params"][0]["email"].stringValue, "test@example.com")
                 XCTAssertEqual(json["params"][0]["name"].stringValue, "test")
                 XCTAssertEqual(json["params"][0]["message"].stringValue, "test")
-                send(JSON(object: [
-                    "id": json["id"].stringValue,
-                    "msg": "result"
-                ]))
             default:
                 break
             }
