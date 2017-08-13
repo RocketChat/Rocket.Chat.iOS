@@ -108,4 +108,29 @@ class LiveChatManagerTests: XCTestCase {
         }
     }
 
+    func testSendOfflineMessage() {
+        let livechatManager = LiveChatManager()
+        let expect = XCTestExpectation(description: "Expect send offline message successfully")
+        socket.use { json, send in
+            guard json["msg"].stringValue == "method" else { return }
+            switch json["method"] {
+            case "livechat:sendOfflineMessage":
+                XCTAssertEqual(json["params"][0]["email"].stringValue, "test@example.com")
+                XCTAssertEqual(json["params"][0]["name"].stringValue, "test")
+                XCTAssertEqual(json["params"][0]["message"].stringValue, "test")
+                send(JSON(object: [
+                    "id": json["id"].stringValue,
+                    "msg": "result"
+                ]))
+            default:
+                break
+            }
+        }
+        livechatManager.initiate {
+            livechatManager.sendOfflineMessage(email: "test@example.com", name: "test", message: "test") {
+                expect.fulfill()
+            }
+        }
+    }
+
 }
