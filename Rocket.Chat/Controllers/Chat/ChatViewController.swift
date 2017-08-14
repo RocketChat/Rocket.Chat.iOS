@@ -32,6 +32,7 @@ final class ChatViewController: SLKTextViewController {
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewStatus: ChatHeaderViewStatus?
     lazy var mediaFocusViewController = URBMediaFocusViewController()
+    var documentController: UIDocumentInteractionController?
 
     var dataController = ChatDataController()
 
@@ -287,7 +288,7 @@ final class ChatViewController: SLKTextViewController {
             token.stop()
         }
 
-        title = subscription?.name
+        title = subscription?.displayName()
         chatTitleView?.subscription = subscription
         textView.resignFirstResponder()
 

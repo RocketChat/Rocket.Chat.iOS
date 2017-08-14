@@ -63,9 +63,10 @@ class UploadManager {
     }
 
     func upload(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        guard let store = auth.settings?.uploadStorageType else { return }
+        guard let settings = AuthSettingsManager.settings else { return }
+        guard let store = settings.uploadStorageType else { return }
 
+        // TODO: AmazonS3 method was removed from server version 0.57
         if store == "AmazonS3" {
             uploadToAmazonS3(file: file, subscription: subscription, progress: progress, completion: completion)
         } else {
@@ -148,6 +149,7 @@ class UploadManager {
         }
     }
 
+    // TODO: AmazonS3 method was removed from server version 0.57
     func uploadToAmazonS3(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
         let request = [
             "msg": "method",
