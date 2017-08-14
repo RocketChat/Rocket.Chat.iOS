@@ -13,8 +13,7 @@ import SwiftyJSON
 class WebSocketMockTests: XCTestCase {
 
     func testWebSocketMock() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        // swiftlint:disable:next force_unwrapping
         let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
         socket.use { _, send in
             send(JSON(stringLiteral: "Hello"))
@@ -47,6 +46,7 @@ class WebSocketMockTests: XCTestCase {
 
     func testWithSocketManager() {
         let socketManager = SocketManager()
+        // swiftlint:disable:next force_unwrapping
         let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
 
         // Connect
@@ -98,6 +98,7 @@ class WebSocketMockTests: XCTestCase {
 
     func testConnectionInterruption() {
         let socketManager = SocketManager()
+        // swiftlint:disable:next force_unwrapping
         let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
 
         // Connect

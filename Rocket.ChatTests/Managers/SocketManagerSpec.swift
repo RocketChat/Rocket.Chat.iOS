@@ -13,6 +13,7 @@ import SwiftyJSON
 
 class SocketManagerSpec: XCTestCase {
 
+    // swiftlint:disable:next force_unwrapping
     let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
 
     override func setUp() {

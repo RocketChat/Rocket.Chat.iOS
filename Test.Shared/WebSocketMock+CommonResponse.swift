@@ -20,6 +20,7 @@ enum WebSocketMockCommonResponse {
 
 extension WebSocketMock {
     // swiftlint:disable function_body_length
+    // swiftlint:disable cyclomatic_complexity
     func use(_ commonResponse: WebSocketMockCommonResponse) {
         switch commonResponse {
         case .connect:
@@ -169,5 +170,6 @@ extension WebSocketMock {
             }
         }
     }
+    // swiftlint:enable cyclomatic_complexity
     // swiftlint:enable function_body_length
 }
