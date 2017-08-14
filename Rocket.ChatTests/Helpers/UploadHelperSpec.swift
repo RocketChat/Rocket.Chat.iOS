@@ -61,7 +61,7 @@ class UploadHelperSpec: XCTestCase {
         let filename = "filename.png"
 
         guard let localURL = DownloadManager.localFileURLFor(filename) else {
-            XCTAssertTrue(false, "file url is invalid")
+            return XCTAssertTrue(false, "file url is invalid")
         }
 
         XCTAssert(filename == UploadHelper.nameFor(localURL), "filename keeps the same after URL")
