@@ -39,7 +39,7 @@ final class SubscriptionCell: UITableViewCell {
 
         updateIconImage()
 
-        labelName.text = subscription.name
+        labelName.text = subscription.displayName()
 
         if subscription.unread > 0 || subscription.alert {
             labelName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)

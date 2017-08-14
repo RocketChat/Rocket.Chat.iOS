@@ -66,8 +66,13 @@ extension Attachment {
         guard let userId = auth.userId else { return nil }
         guard let token = auth.token else { return nil }
         guard let baseURL = auth.baseURL() else { return nil }
-        let urlString = "\(baseURL)\(path)?rc_uid=\(userId)&rc_token=\(token)"
+        let pathNoSpaces = path.replacingOccurrences(of: " ", with: "%20")
+        let urlString = "\(baseURL)\(pathNoSpaces)?rc_uid=\(userId)&rc_token=\(token)"
         return URL(string: urlString)
+    }
+
+    func fullFileURL() -> URL? {
+        return Attachment.fullURLWith(titleLink)
     }
 
     func fullVideoURL() -> URL? {
