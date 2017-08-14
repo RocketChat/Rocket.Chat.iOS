@@ -22,6 +22,10 @@ final class ChatMessageTextViewModel {
     }
 
     var text: String {
+        if attachment.titleLink.characters.count > 0 {
+            return localized("chat.message.open_file")
+        }
+
         return attachment.text ?? ""
     }
 
@@ -33,7 +37,7 @@ final class ChatMessageTextViewModel {
         return attachment.collapsed
     }
 
-    private let attachment: Attachment
+    let attachment: Attachment
 
     init(withAttachment attachment: Attachment) {
         self.attachment = attachment
