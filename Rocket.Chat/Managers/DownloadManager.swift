@@ -35,7 +35,6 @@ class DownloadManager {
         return nil
     }
 
-
     /**
         This method checks of the file exists on file system.
  
