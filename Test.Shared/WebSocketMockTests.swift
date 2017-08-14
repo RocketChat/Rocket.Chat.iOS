@@ -13,8 +13,7 @@ import SwiftyJSON
 class WebSocketMockTests: XCTestCase {
 
     func testWebSocketMock() {
-        // swiftlint:disable:next force_unwrapping
-        let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
+        let socket = WebSocketMock()
         socket.use { _, send in
             send(JSON(stringLiteral: "Hello"))
         }
@@ -46,8 +45,7 @@ class WebSocketMockTests: XCTestCase {
 
     func testWithSocketManager() {
         let socketManager = SocketManager()
-        // swiftlint:disable:next force_unwrapping
-        let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
+        let socket = WebSocketMock()
 
         // Connect
         let expectOnConnect = XCTestExpectation(description: "Expect `onConnect` being called")
@@ -98,8 +96,7 @@ class WebSocketMockTests: XCTestCase {
 
     func testConnectionInterruption() {
         let socketManager = SocketManager()
-        // swiftlint:disable:next force_unwrapping
-        let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
+        let socket = WebSocketMock()
 
         // Connect
         let expectOnConnect = XCTestExpectation(description: "Expect `onConnect` being called")

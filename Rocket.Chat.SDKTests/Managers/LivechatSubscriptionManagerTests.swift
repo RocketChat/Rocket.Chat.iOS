@@ -12,8 +12,7 @@ import RealmSwift
 
 class LivechatSubscriptionManagerTests: XCTestCase {
 
-    // swiftlint:disable:next force_unwrapping
-    let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
+    let socket = WebSocketMock()
     let socketManager = SDKSocketManager()
 
     override func setUp() {

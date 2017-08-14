@@ -31,6 +31,10 @@ class WebSocketMock: WebSocket {
         return mockConnected
     }
 
+    convenience init() {
+        self.init(url: URL(string: "http://doesnt.matter")!)
+    }
+
     /**
      Connect to the WebSocket server on a background thread.
      */
