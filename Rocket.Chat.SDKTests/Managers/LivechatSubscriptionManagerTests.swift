@@ -11,7 +11,7 @@ import RealmSwift
 @testable import RocketChat
 
 class LivechatSubscriptionManagerTests: XCTestCase {
-    
+
     let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
     let socketManager = SDKSocketManager()
 
@@ -27,7 +27,7 @@ class LivechatSubscriptionManagerTests: XCTestCase {
 
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
-    
+
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()

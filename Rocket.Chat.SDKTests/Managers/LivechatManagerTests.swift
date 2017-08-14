@@ -72,7 +72,7 @@ class LivechatManagerTests: XCTestCase {
     func testSendOfflineMessage() {
         let livechatManager = LivechatManager()
         let expect = XCTestExpectation(description: "Expect send offline message successfully")
-        socket.use { json, send in
+        socket.use { json, _ in
             guard json["msg"].stringValue == "method" else { return }
             switch json["method"] {
             case "livechat:sendOfflineMessage":
