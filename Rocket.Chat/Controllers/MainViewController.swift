@@ -57,7 +57,7 @@ final class MainViewController: BaseViewController {
                 }
 
                 SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                    AuthManager.updatePublicSettings(auth, completion: { _ in
+                    AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
 
                     })
 

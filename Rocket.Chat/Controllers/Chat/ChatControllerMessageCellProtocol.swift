@@ -48,6 +48,10 @@ extension ChatViewController: ChatMessageCellProtocol {
         }
     }
 
+    func openFileFromCell(attachment: Attachment) {
+        openDocument(attachment: attachment)
+    }
+
     func viewDidCollpaseChange(view: UIView) {
         guard let origin = collectionView?.convert(CGPoint.zero, from: view) else { return }
         guard let indexPath = collectionView?.indexPathForItem(at: origin) else { return }

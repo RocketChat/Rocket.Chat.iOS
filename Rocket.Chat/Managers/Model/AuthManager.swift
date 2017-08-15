@@ -276,31 +276,4 @@ extension AuthManager {
         }
     }
 
-    static func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
-        let object = [
-            "msg": "method",
-            "method": "public-settings/get"
-        ] as [String : Any]
-
-        SocketManager.send(object) { (response) in
-            guard !response.isError() else {
-                completion(nil)
-                return
-            }
-
-            Realm.executeOnMainThread({ realm in
-                let settings = AuthManager.isAuthenticated()?.settings ?? AuthSettings()
-                settings.map(response.result["result"], realm: realm)
-                realm.add(settings, update: true)
-
-                if let auth = AuthManager.isAuthenticated() {
-                    auth.settings = settings
-                    realm.add(auth, update: true)
-                }
-
-                let unmanagedSettings = AuthSettings(value: settings)
-                completion(unmanagedSettings)
-            })
-        }
-    }
 }
