@@ -29,3 +29,15 @@ class User: BaseModel {
         set { privateStatus = newValue.rawValue }
     }
 }
+
+extension User {
+
+    func displayName() -> String {
+        guard let settings = AuthSettingsManager.settings else {
+            return username ?? ""
+        }
+
+        return (settings.useUserRealName ? name : username) ?? ""
+    }
+
+}

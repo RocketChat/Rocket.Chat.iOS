@@ -19,7 +19,7 @@ enum SubscriptionType: String {
 class Subscription: BaseModel {
     dynamic var auth: Auth?
 
-    fileprivate dynamic var privateType = SubscriptionType.channel.rawValue
+    internal dynamic var privateType = SubscriptionType.channel.rawValue
     var type: SubscriptionType {
         get { return SubscriptionType(rawValue: privateType) ?? SubscriptionType.group }
         set { privateType = newValue.rawValue }
@@ -27,7 +27,14 @@ class Subscription: BaseModel {
 
     dynamic var rid = ""
 
+    // Name of the subscription
     dynamic var name = ""
+
+    // Full name of the user, in the case of
+    // using the full user name setting
+    // Setting: UI_Use_Real_Name
+    dynamic var fname = ""
+
     dynamic var unread = 0
     dynamic var open = false
     dynamic var alert = false
@@ -50,6 +57,18 @@ class Subscription: BaseModel {
 }
 
 extension Subscription {
+
+    func displayName() -> String {
+        if type != .directMessage {
+            return name
+        }
+
+        guard let settings = AuthSettingsManager.settings else {
+            return name
+        }
+
+        return settings.useUserRealName ? fname : name
+    }
 
     func isValid() -> Bool {
         return self.rid.characters.count > 0

@@ -14,6 +14,9 @@ final class AuthSettings: BaseModel {
     dynamic var siteURL: String?
     dynamic var cdnPrefixURL: String?
 
+    // User
+    dynamic var useUserRealName = false
+
     // Rooms
     dynamic var favoriteRooms = true
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -35,11 +35,21 @@
                         <action selector="buttonRefreshDidPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="Fpn-eT-rQY"/>
                     </connections>
                 </button>
+                <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="XbV-sK-Jsy">
+                    <rect key="frame" x="335" y="10" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="ADI-hl-buR"/>
+                        <constraint firstAttribute="height" constant="20" id="oP2-sj-Wjg"/>
+                    </constraints>
+                    <color key="color" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </activityIndicatorView>
             </subviews>
             <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="dcc-9R-6FS" secondAttribute="bottom" constant="10" id="6ea-5y-bjl"/>
                 <constraint firstAttribute="trailing" secondItem="dcc-9R-6FS" secondAttribute="trailing" constant="15" id="G0f-Sj-7lw"/>
+                <constraint firstAttribute="trailing" secondItem="XbV-sK-Jsy" secondAttribute="trailing" constant="20" id="HDe-90-JaI"/>
+                <constraint firstItem="XbV-sK-Jsy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="WSK-iT-X16"/>
                 <constraint firstItem="c48-yE-clG" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="lpT-3H-z19"/>
                 <constraint firstItem="dcc-9R-6FS" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="oOT-48-ZR9"/>
                 <constraint firstItem="c48-yE-clG" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="xVD-mq-E7M"/>
@@ -48,6 +58,7 @@
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="activityIndicator" destination="XbV-sK-Jsy" id="7jz-MC-xIf"/>
                 <outlet property="buttonRefresh" destination="dcc-9R-6FS" id="snp-fS-s1t"/>
                 <outlet property="labelTitle" destination="c48-yE-clG" id="QBp-3H-wjd"/>
             </connections>
