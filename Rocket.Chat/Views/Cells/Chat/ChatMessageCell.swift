@@ -201,13 +201,6 @@ final class ChatMessageCell: UICollectionViewCell {
         delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
     }
 
-    override func preferredLayoutAttributesFitting(_ layoutAttributes: UICollectionViewLayoutAttributes) -> UICollectionViewLayoutAttributes {
-        var newFrame = layoutAttributes.frame
-        newFrame.size.height = ChatMessageCell.cellMediaHeightFor(message: message)
-        layoutAttributes.frame = newFrame
-        return layoutAttributes
-    }
-
 }
 
 extension ChatMessageCell: UIGestureRecognizerDelegate {
