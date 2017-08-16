@@ -43,7 +43,8 @@ final class ChatViewController: SLKTextViewController {
     var isRequestingHistory = false
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
-    var messages: Results<Message>!
+    var messagesQuery: Results<Message>!
+    var messages: [Message] = []
     var subscription: Subscription! {
         didSet {
             updateSubscriptionInfo()
@@ -177,7 +178,8 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
-        return UICollectionViewFlowLayout()
+        let layout = UICollectionViewFlowLayout()
+        return layout
     }
 
     fileprivate func registerCells() {
@@ -322,23 +324,22 @@ final class ChatViewController: SLKTextViewController {
     }
 
     internal func updateSubscriptionMessages() {
-        isRequestingHistory = true
-
-        messages = subscription.fetchMessages()
-        updateMessagesQueryNotificationBlock()
+        messagesQuery = subscription.fetchMessagesQueryResults()
+        loadMoreMessagesFrom(date: nil)
+//        updateMessagesQueryNotificationBlock()
 
         MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
-            guard let messages = self?.subscription.fetchMessages() else { return }
-
-            self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
-                self?.activityIndicator.stopAnimating()
-
-                UIView.performWithoutAnimation {
-                    self?.scrollToBottom()
-                }
-
-                self?.isRequestingHistory = false
-            })
+//            guard let messages = self?.subscription.fetchMessages() else { return }
+//
+//            self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
+//                self?.activityIndicator.stopAnimating()
+//
+//                UIView.performWithoutAnimation {
+//                    self?.scrollToBottom()
+//                }
+//
+//                self?.isRequestingHistory = false
+//            })
         }
 
         MessageManager.changes(subscription)
@@ -346,10 +347,10 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func updateMessagesQueryNotificationBlock() {
         messagesToken?.stop()
-        messagesToken = messages.addNotificationBlock { [weak self] changes in
+        messagesToken = messagesQuery.addNotificationBlock { [weak self] changes in
             switch changes {
             case .initial(let messages):
-                self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
+                self?.appendMessages(messages: self?.messages ?? [], updateScrollPosition: false, completion: {
                     guard let messages = self?.messages else { return }
 
                     if messages.count == 0 {
@@ -357,22 +358,38 @@ final class ChatViewController: SLKTextViewController {
                     } else {
                         self?.scrollToBottom()
                     }
+
+                    self?.isRequestingHistory = false
                 })
 
                 break
             case .update(_, _, let insertions, let modifications):
-                guard let messages = self?.subscription.fetchMessages() else { return }
-
                 if insertions.count > 0 {
-                    self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
+                    var newMessages: [Message] = []
+
+                    for insert in insertions {
+                        if let newMessage = self?.messagesQuery[insert] {
+                            self?.messages.append(newMessage)
+                            newMessages.append(newMessage)
+                        }
+                    }
+
+                    self?.appendMessages(messages: newMessages, updateScrollPosition: true, completion: nil)
                 }
 
                 self?.collectionView?.performBatchUpdates({
                     var indexPathModifications = [Int]()
+
                     for modified in modifications {
-                        if let index = self?.dataController.update(messages[modified]) {
-                            if index >= 0 {
-                                indexPathModifications.append(index)
+                        if self?.messages.count ?? 0 < modified + 1 {
+                            continue
+                        }
+
+                        if let message = self?.messages[modified] {
+                            if let index = self?.dataController.update(message) {
+                                if index >= 0 {
+                                    indexPathModifications.append(index)
+                                }
                             }
                         }
                     }
@@ -393,6 +410,20 @@ final class ChatViewController: SLKTextViewController {
         }
 
         isRequestingHistory = true
+
+        let newMessages = subscription.fetchMessages(lastMessageDate: date)
+        if newMessages.count > 0 {
+            messages.append(contentsOf: newMessages)
+            appendMessages(messages: newMessages, updateScrollPosition: true, completion: { [weak self] in
+                if date == nil {
+                    self?.scrollToBottom()
+                }
+
+                self?.isRequestingHistory = false
+            })
+            return
+        }
+
         MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
             guard let messages = self?.subscription.fetchMessages() else { return }
             self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
@@ -502,7 +533,7 @@ final class ChatViewController: SLKTextViewController {
 extension ChatViewController {
 
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        if indexPath.row == 5 {
             if let message = dataController.itemAt(indexPath)?.message {
                 loadMoreMessagesFrom(date: message.createdAt)
             } else {
@@ -575,7 +606,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let fullWidth = UIScreen.main.bounds.size.width
+        let fullWidth = collectionView.bounds.size.width
 
         if let message = dataController.itemAt(indexPath)?.message {
             let height = ChatMessageCell.cellMediaHeightFor(message: message)
