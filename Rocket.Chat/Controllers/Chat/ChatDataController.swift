@@ -96,7 +96,7 @@ final class ChatDataController {
                     }
 
                     if insert {
-                        insertDaySeparator(from: newObj)
+                        insertDaySeparator(from: lastObj)
                     }
                 }
             }
