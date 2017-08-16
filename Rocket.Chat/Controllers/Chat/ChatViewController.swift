@@ -425,9 +425,8 @@ final class ChatViewController: SLKTextViewController {
         }
 
         MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
-            guard let messages = self?.subscription.fetchMessages() else { return }
-            self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
             self?.isRequestingHistory = false
+            self?.loadMoreMessagesFrom(date: date)
         }
     }
 
@@ -533,7 +532,7 @@ final class ChatViewController: SLKTextViewController {
 extension ChatViewController {
 
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == 5 {
+        if indexPath.row == 0 {
             if let message = dataController.itemAt(indexPath)?.message {
                 loadMoreMessagesFrom(date: message.createdAt)
             } else {
