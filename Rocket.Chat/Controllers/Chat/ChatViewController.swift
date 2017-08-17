@@ -268,6 +268,8 @@ final class ChatViewController: SLKTextViewController {
             textView.text = ""
             rightButton.isEnabled = true
 
+            appendMessages(messages: [message], completion: nil)
+
             SubscriptionManager.sendTextMessage(message) { _ in
                 Realm.executeOnMainThread({ (realm) in
                     message.temporary = false
@@ -325,22 +327,9 @@ final class ChatViewController: SLKTextViewController {
 
     internal func updateSubscriptionMessages() {
         messagesQuery = subscription.fetchMessagesQueryResults()
-        loadMoreMessagesFrom(date: nil)
-//        updateMessagesQueryNotificationBlock()
 
-        MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
-//            guard let messages = self?.subscription.fetchMessages() else { return }
-//
-//            self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
-//                self?.activityIndicator.stopAnimating()
-//
-//                UIView.performWithoutAnimation {
-//                    self?.scrollToBottom()
-//                }
-//
-//                self?.isRequestingHistory = false
-//            })
-        }
+        loadMoreMessagesFrom(date: nil)
+        updateMessagesQueryNotificationBlock()
 
         MessageManager.changes(subscription)
     }
@@ -349,20 +338,7 @@ final class ChatViewController: SLKTextViewController {
         messagesToken?.stop()
         messagesToken = messagesQuery.addNotificationBlock { [weak self] changes in
             switch changes {
-            case .initial(let messages):
-                self?.appendMessages(messages: self?.messages ?? [], updateScrollPosition: false, completion: {
-                    guard let messages = self?.messages else { return }
-
-                    if messages.count == 0 {
-                        self?.activityIndicator.startAnimating()
-                    } else {
-                        self?.scrollToBottom()
-                    }
-
-                    self?.isRequestingHistory = false
-                })
-
-                break
+            case .initial: break
             case .update(_, _, let insertions, let modifications):
                 if insertions.count > 0 {
                     var newMessages: [Message] = []
@@ -398,8 +374,7 @@ final class ChatViewController: SLKTextViewController {
                 }, completion: nil)
 
                 break
-            case .error:
-                break
+            case .error: break
             }
         }
     }
@@ -413,7 +388,7 @@ final class ChatViewController: SLKTextViewController {
 
         let newMessages = subscription.fetchMessages(lastMessageDate: date)
         if newMessages.count > 0 {
-            messages.append(contentsOf: newMessages)
+            messages.insert(contentsOf: newMessages, at: 0)
             appendMessages(messages: newMessages, updateScrollPosition: true, completion: { [weak self] in
                 if date == nil {
                     self?.scrollToBottom()
