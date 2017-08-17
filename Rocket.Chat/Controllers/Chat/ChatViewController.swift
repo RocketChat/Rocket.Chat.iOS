@@ -328,6 +328,7 @@ final class ChatViewController: SLKTextViewController {
     internal func updateSubscriptionMessages() {
         messagesQuery = subscription.fetchMessagesQueryResults()
 
+        isRequestingHistory = false
         loadMoreMessagesFrom(date: nil)
         updateMessagesQueryNotificationBlock()
 
@@ -354,7 +355,7 @@ final class ChatViewController: SLKTextViewController {
                 }
 
                 self?.collectionView?.performBatchUpdates({
-                    var indexPathModifications = [Int]()
+                    var indexPathModifications: [Int] = []
 
                     for modified in modifications {
                         if self?.messages.count ?? 0 < modified + 1 {
@@ -363,13 +364,14 @@ final class ChatViewController: SLKTextViewController {
 
                         if let message = self?.messages[modified] {
                             if let index = self?.dataController.update(message) {
-                                if index >= 0 {
+                                if index >= 0 && !indexPathModifications.contains(index) {
                                     indexPathModifications.append(index)
                                 }
                             }
                         }
                     }
 
+                    Log.debug("indexPathModifications: \(indexPathModifications)")
                     self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
                 }, completion: nil)
 
@@ -379,7 +381,7 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    fileprivate func loadMoreMessagesFrom(date: Date?) {
+    fileprivate func loadMoreMessagesFrom(date: Date?, loadRemoteHistory: Bool = true) {
         if isRequestingHistory {
             return
         }
@@ -396,12 +398,13 @@ final class ChatViewController: SLKTextViewController {
 
                 self?.isRequestingHistory = false
             })
-            return
         }
 
-        MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
-            self?.isRequestingHistory = false
-            self?.loadMoreMessagesFrom(date: date)
+        if newMessages.count == 0 || loadRemoteHistory {
+            MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
+                self?.isRequestingHistory = false
+                self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+            }
         }
     }
 
@@ -507,7 +510,7 @@ final class ChatViewController: SLKTextViewController {
 extension ChatViewController {
 
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
+        if indexPath.row == 4 {
             if let message = dataController.itemAt(indexPath)?.message {
                 loadMoreMessagesFrom(date: message.createdAt)
             } else {
