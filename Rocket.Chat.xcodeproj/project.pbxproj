@@ -71,6 +71,8 @@
 		A01074E31EF57C0C0066D3F3 /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074E01EF57C0C0066D3F3 /* UserCoordinator.swift */; };
 		A01074E41EF57C0C0066D3F3 /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074E01EF57C0C0066D3F3 /* UserCoordinator.swift */; };
 		A01074E61EF57C820066D3F3 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074E51EF57C820066D3F3 /* Launcher.swift */; };
+		A027388C1F45D12D0049B9DB /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027388B1F45D12D0049B9DB /* DoubleExtensions.swift */; };
+		A027388D1F45D12D0049B9DB /* DoubleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A027388B1F45D12D0049B9DB /* DoubleExtensions.swift */; };
 		A02D790A1F2EAD7F00BFF753 /* DateExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02D79091F2EAD7F00BFF753 /* DateExtensionsSpec.swift */; };
 		A030A1341ECC8E7000F71C6F /* RocketChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030A1331ECC8E7000F71C6F /* RocketChat.swift */; };
 		A032EF6C1EE1946D00A9DA78 /* LivechatManagerInjected.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6B1EE1946D00A9DA78 /* LivechatManagerInjected.swift */; };
@@ -429,6 +431,7 @@
 		A01074DF1EF57C0C0066D3F3 /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
 		A01074E01EF57C0C0066D3F3 /* UserCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
 		A01074E51EF57C820066D3F3 /* Launcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Launcher.swift; sourceTree = "<group>"; };
+		A027388B1F45D12D0049B9DB /* DoubleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleExtensions.swift; sourceTree = "<group>"; };
 		A02D79091F2EAD7F00BFF753 /* DateExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtensionsSpec.swift; path = Extensions/DateExtensionsSpec.swift; sourceTree = "<group>"; };
 		A030A1331ECC8E7000F71C6F /* RocketChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketChat.swift; sourceTree = "<group>"; };
 		A030A1371ECC9CDC00F71C6F /* RocketChat.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; indentWidth = 2; path = RocketChat.podspec; sourceTree = SOURCE_ROOT; tabWidth = 2; };
@@ -1274,6 +1277,7 @@
 				A0A812361ECDC764000567D7 /* UILabelExtension.swift */,
 				A0A8123C1ECDC814000567D7 /* NSAttributedStringExtensions.swift */,
 				A0452DCE1EE7C5FE003FBC9B /* UIView+Nib.swift */,
+				A027388B1F45D12D0049B9DB /* DoubleExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2077,6 +2081,7 @@
 				A0A812251ECDC657000567D7 /* UIImageExtension.swift in Sources */,
 				A0559DFB1ECC2CCD00E83220 /* MessageModelMapping.swift in Sources */,
 				A01074E11EF57C0C0066D3F3 /* PersistencyCoordinator.swift in Sources */,
+				A027388C1F45D12D0049B9DB /* DoubleExtensions.swift in Sources */,
 				A0E0E8131EC7066E001B93B1 /* AuthSettings.swift in Sources */,
 				A07F17801ECDC18700A1F199 /* ChannelInfoDescriptionCell.swift in Sources */,
 				A0A8122E1ECDC6C7000567D7 /* UIViewController+Keyboard.swift in Sources */,
@@ -2266,6 +2271,7 @@
 				A0559E211ECC430900E83220 /* UserModelMapping.swift in Sources */,
 				A07F178B1ECDC18700A1F199 /* ChatMessageCell.swift in Sources */,
 				A0000CA11F0D290A00BE1BFA /* ChatMessageBubbleCell.swift in Sources */,
+				A027388D1F45D12D0049B9DB /* DoubleExtensions.swift in Sources */,
 				A0559E231ECC430900E83220 /* AuthSettings.swift in Sources */,
 				A0559E0F1ECC42F600E83220 /* UploadVideoCompression.swift in Sources */,
 				A0559E1A1ECC430400E83220 /* SubscriptionModelHandler.swift in Sources */,
