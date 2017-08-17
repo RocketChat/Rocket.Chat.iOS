@@ -32,7 +32,11 @@ class WebSocketMock: WebSocket {
     }
 
     convenience init() {
-        self.init(url: URL(string: "http://doesnt.matter")!)
+        guard let url = URL(string: "http://doesnt.matter") else {
+            self.init()
+            return
+        }
+        self.init(url: url)
     }
 
     /**
