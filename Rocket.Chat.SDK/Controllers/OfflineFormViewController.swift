@@ -8,7 +8,7 @@
 
 import UIKit
 
-class OfflineFormViewController: UITableViewController, LiveChatManagerInjected {
+class OfflineFormViewController: UITableViewController, LivechatManagerInjected {
 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!

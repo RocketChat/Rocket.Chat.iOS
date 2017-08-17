@@ -12,7 +12,7 @@ public protocol SupportDepartmentViewControllerDelegate: class {
     func didSelect(department: Department)
 }
 
-class SupportDepartmentViewController: UITableViewController, LiveChatManagerInjected {
+class SupportDepartmentViewController: UITableViewController, LivechatManagerInjected {
 
     weak var delegate: SupportDepartmentViewControllerDelegate?
 

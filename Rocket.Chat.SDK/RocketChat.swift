@@ -32,7 +32,7 @@ public final class RocketChat {
     /// Get the default livechat manager
     ///
     /// - Returns: an instance of `LiveChatManager`
-    public class func livechat() -> LiveChatManager {
+    public class func livechat() -> LivechatManager {
         return DependencyRepository.livechatManager
     }
 

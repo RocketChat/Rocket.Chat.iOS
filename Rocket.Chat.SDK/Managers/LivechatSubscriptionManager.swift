@@ -1,5 +1,5 @@
 //
-//  LiveChatSubscriptionManager.swift
+//  LivechatSubscriptionManager.swift
 //  Rocket.Chat
 //
 //  Created by Lucas Woo on 5/30/17.
@@ -9,7 +9,7 @@
 import Foundation
 
 /// Since livechat api differs from normal chatting api, a specific livechat subscription manager is required
-class LiveChatSubscriptionManager: SubscriptionManager, LiveChatManagerInjected {
+class LivechatSubscriptionManager: SubscriptionManager, LivechatManagerInjected {
     override func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",

@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class SocketManagerSpec: XCTestCase {
 
-    let socket = WebSocketMock(url: URL(string: "http://doesnt.matter")!)
+    let socket = WebSocketMock()
 
     override func setUp() {
         socket.use { json, send in

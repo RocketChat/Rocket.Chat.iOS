@@ -63,7 +63,7 @@
 		A0000CA71F0D2C4000BE1BFA /* Support.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A0000CA51F0D2C4000BE1BFA /* Support.storyboard */; };
 		A0000CA91F0D2C8B00BE1BFA /* SupportViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0000CA81F0D2C8B00BE1BFA /* SupportViewController.swift */; };
 		A00BA5FA1EDDB0740090874D /* Department.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BA5F91EDDB0740090874D /* Department.swift */; };
-		A00BA5FE1EDDB31A0090874D /* LiveChatSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BA5FD1EDDB31A0090874D /* LiveChatSubscriptionManager.swift */; };
+		A00BA5FE1EDDB31A0090874D /* LivechatSubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A00BA5FD1EDDB31A0090874D /* LivechatSubscriptionManager.swift */; };
 		A01074DD1EF57AB10066D3F3 /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074DC1EF57AB10066D3F3 /* LauncherProtocol.swift */; };
 		A01074DE1EF57ABB0066D3F3 /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074DC1EF57AB10066D3F3 /* LauncherProtocol.swift */; };
 		A01074E11EF57C0C0066D3F3 /* PersistencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074DF1EF57C0C0066D3F3 /* PersistencyCoordinator.swift */; };
@@ -73,7 +73,7 @@
 		A01074E61EF57C820066D3F3 /* Launcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = A01074E51EF57C820066D3F3 /* Launcher.swift */; };
 		A02D790A1F2EAD7F00BFF753 /* DateExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A02D79091F2EAD7F00BFF753 /* DateExtensionsSpec.swift */; };
 		A030A1341ECC8E7000F71C6F /* RocketChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A030A1331ECC8E7000F71C6F /* RocketChat.swift */; };
-		A032EF6C1EE1946D00A9DA78 /* LiveChatManagerInjected.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6B1EE1946D00A9DA78 /* LiveChatManagerInjected.swift */; };
+		A032EF6C1EE1946D00A9DA78 /* LivechatManagerInjected.swift in Sources */ = {isa = PBXBuildFile; fileRef = A032EF6B1EE1946D00A9DA78 /* LivechatManagerInjected.swift */; };
 		A041B96D1F10FFE00023066E /* SentMessageBubble.xib in Resources */ = {isa = PBXBuildFile; fileRef = A041B96C1F10FFE00023066E /* SentMessageBubble.xib */; };
 		A0452DCB1EE7C4CD003FBC9B /* Bundle+RocketChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0452DCA1EE7C4CD003FBC9B /* Bundle+RocketChat.swift */; };
 		A0452DCD1EE7C5BB003FBC9B /* Bundle+RocketChat.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0452DCC1EE7C5BB003FBC9B /* Bundle+RocketChat.swift */; };
@@ -137,7 +137,7 @@
 		A0798F5F1EDD951600A495AA /* ChatTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0798F5E1EDD951600A495AA /* ChatTitleView.xib */; };
 		A0798F601EDD951600A495AA /* ChatTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0798F5E1EDD951600A495AA /* ChatTitleView.xib */; };
 		A07F172B1ECD788500A1F199 /* SubscriptionManager+Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07F172A1ECD788500A1F199 /* SubscriptionManager+Application.swift */; };
-		A07F172F1ECD930900A1F199 /* LiveChatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07F172E1ECD930900A1F199 /* LiveChatManager.swift */; };
+		A07F172F1ECD930900A1F199 /* LivechatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07F172E1ECD930900A1F199 /* LivechatManager.swift */; };
 		A07F17321ECDBE9400A1F199 /* Chatting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07F17311ECDBE9400A1F199 /* Chatting.storyboard */; };
 		A07F17331ECDBF1B00A1F199 /* Chatting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07F17311ECDBE9400A1F199 /* Chatting.storyboard */; };
 		A07F17411ECDC13C00A1F199 /* BaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07F17361ECDC13C00A1F199 /* BaseNavigationController.swift */; };
@@ -293,6 +293,11 @@
 		A0E0E8221EC749D6001B93B1 /* MessageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E81D1EC749D6001B93B1 /* MessageURL.swift */; };
 		A0E0E8401EC74A89001B93B1 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E83E1EC74A89001B93B1 /* DataExtension.swift */; };
 		A0E0E8421EC74A89001B93B1 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0E0E83F1EC74A89001B93B1 /* DateExtension.swift */; };
+		A0F581B91F4062B50015AD82 /* LivechatManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F581B81F4062B50015AD82 /* LivechatManagerTests.swift */; };
+		A0F581BB1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F581BA1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift */; };
+		A0F581BC1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F581BA1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift */; };
+		A0F581BD1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F581BA1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift */; };
+		A0F581BF1F40A1DB0015AD82 /* LivechatSubscriptionManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0F581BE1F40A1DB0015AD82 /* LivechatSubscriptionManagerTests.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
 		CBF49DD059247912D23CD70C /* Pods_Rocket_ChatUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3276E643B358C0C343A3566D /* Pods_Rocket_ChatUITests.framework */; };
 		D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */; };
@@ -419,7 +424,7 @@
 		A0000CA51F0D2C4000BE1BFA /* Support.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Support.storyboard; sourceTree = "<group>"; };
 		A0000CA81F0D2C8B00BE1BFA /* SupportViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SupportViewController.swift; sourceTree = "<group>"; };
 		A00BA5F91EDDB0740090874D /* Department.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Department.swift; sourceTree = "<group>"; };
-		A00BA5FD1EDDB31A0090874D /* LiveChatSubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveChatSubscriptionManager.swift; sourceTree = "<group>"; };
+		A00BA5FD1EDDB31A0090874D /* LivechatSubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivechatSubscriptionManager.swift; sourceTree = "<group>"; };
 		A01074DC1EF57AB10066D3F3 /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		A01074DF1EF57C0C0066D3F3 /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
 		A01074E01EF57C0C0066D3F3 /* UserCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
@@ -428,7 +433,7 @@
 		A030A1331ECC8E7000F71C6F /* RocketChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RocketChat.swift; sourceTree = "<group>"; };
 		A030A1371ECC9CDC00F71C6F /* RocketChat.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; indentWidth = 2; path = RocketChat.podspec; sourceTree = SOURCE_ROOT; tabWidth = 2; };
 		A030A1381ECC9CEE00F71C6F /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
-		A032EF6B1EE1946D00A9DA78 /* LiveChatManagerInjected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveChatManagerInjected.swift; sourceTree = "<group>"; };
+		A032EF6B1EE1946D00A9DA78 /* LivechatManagerInjected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivechatManagerInjected.swift; sourceTree = "<group>"; };
 		A041B96C1F10FFE00023066E /* SentMessageBubble.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SentMessageBubble.xib; sourceTree = "<group>"; };
 		A0452DCA1EE7C4CD003FBC9B /* Bundle+RocketChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+RocketChat.swift"; sourceTree = "<group>"; };
 		A0452DCC1EE7C5BB003FBC9B /* Bundle+RocketChat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Bundle+RocketChat.swift"; sourceTree = "<group>"; };
@@ -451,7 +456,7 @@
 		A0798F5B1EDD941600A495AA /* ChatTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTitleView.swift; sourceTree = "<group>"; };
 		A0798F5E1EDD951600A495AA /* ChatTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTitleView.xib; sourceTree = "<group>"; };
 		A07F172A1ECD788500A1F199 /* SubscriptionManager+Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubscriptionManager+Application.swift"; sourceTree = "<group>"; };
-		A07F172E1ECD930900A1F199 /* LiveChatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveChatManager.swift; sourceTree = "<group>"; };
+		A07F172E1ECD930900A1F199 /* LivechatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivechatManager.swift; sourceTree = "<group>"; };
 		A07F17311ECDBE9400A1F199 /* Chatting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chatting.storyboard; sourceTree = "<group>"; };
 		A07F17361ECDC13C00A1F199 /* BaseNavigationController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseNavigationController.swift; sourceTree = "<group>"; };
 		A07F17371ECDC13C00A1F199 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
@@ -555,6 +560,9 @@
 		A0E0E81D1EC749D6001B93B1 /* MessageURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageURL.swift; sourceTree = "<group>"; };
 		A0E0E83E1EC74A89001B93B1 /* DataExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtension.swift; sourceTree = "<group>"; };
 		A0E0E83F1EC74A89001B93B1 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		A0F581B81F4062B50015AD82 /* LivechatManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivechatManagerTests.swift; sourceTree = "<group>"; };
+		A0F581BA1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "WebSocketMock+CommonResponse.swift"; sourceTree = "<group>"; };
+		A0F581BE1F40A1DB0015AD82 /* LivechatSubscriptionManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivechatSubscriptionManagerTests.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TintedTextField.swift; path = Views/Subscriptions/TintedTextField.swift; sourceTree = "<group>"; };
 		BCF38696E8EC385488688390 /* Pods-Rocket.Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.debug.xcconfig"; sourceTree = "<group>"; };
 		BD9D8C281E43B71968985044 /* Pods_Rocket_Chat_SDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat_SDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -917,7 +925,7 @@
 		A032EF6A1EE1943C00A9DA78 /* DependencyManager */ = {
 			isa = PBXGroup;
 			children = (
-				A032EF6B1EE1946D00A9DA78 /* LiveChatManagerInjected.swift */,
+				A032EF6B1EE1946D00A9DA78 /* LivechatManagerInjected.swift */,
 			);
 			path = DependencyManager;
 			sourceTree = "<group>";
@@ -974,8 +982,8 @@
 			isa = PBXGroup;
 			children = (
 				A01074E51EF57C820066D3F3 /* Launcher.swift */,
-				A07F172E1ECD930900A1F199 /* LiveChatManager.swift */,
-				A00BA5FD1EDDB31A0090874D /* LiveChatSubscriptionManager.swift */,
+				A07F172E1ECD930900A1F199 /* LivechatManager.swift */,
+				A00BA5FD1EDDB31A0090874D /* LivechatSubscriptionManager.swift */,
 				A0DE0CC61EDEAD6600C4FA34 /* SDKSocketManager.swift */,
 			);
 			path = Managers;
@@ -1108,6 +1116,7 @@
 			children = (
 				A086D4A31F3B57E000A9CB4B /* Extensions */,
 				A098ED011F385AAE003C4A44 /* WebSocketMock.swift */,
+				A0F581BA1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift */,
 				A098ED021F385AAE003C4A44 /* WebSocketMockTests.swift */,
 			);
 			path = Test.Shared;
@@ -1133,6 +1142,7 @@
 		A0918BD81EC0A15D0015D5D5 /* Rocket.Chat.SDKTests */ = {
 			isa = PBXGroup;
 			children = (
+				A0F581B51F4062720015AD82 /* Managers */,
 				A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */,
 				A0918BDB1EC0A15D0015D5D5 /* Info.plist */,
 			);
@@ -1295,6 +1305,15 @@
 				A0E0E7FA1EC7063F001B93B1 /* ModelMappeable.swift */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		A0F581B51F4062720015AD82 /* Managers */ = {
+			isa = PBXGroup;
+			children = (
+				A0F581B81F4062B50015AD82 /* LivechatManagerTests.swift */,
+				A0F581BE1F40A1DB0015AD82 /* LivechatSubscriptionManagerTests.swift */,
+			);
+			path = Managers;
 			sourceTree = "<group>";
 		};
 		D32E28201DFD86AC00D6019C /* Launcher */ = {
@@ -2168,6 +2187,7 @@
 				4151807C1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift in Sources */,
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
+				A0F581BB1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2176,6 +2196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				A086D4A71F3B588000A9CB4B /* IntExtensions.swift in Sources */,
+				A0F581BC1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift in Sources */,
 				41DF77031D2C50720028DBF8 /* RocketChatUITests.swift in Sources */,
 				A098ED051F385AB2003C4A44 /* WebSocketMock.swift in Sources */,
 			);
@@ -2228,11 +2249,11 @@
 				A07F17A31ECDC18700A1F199 /* ChatHeaderViewOffline.swift in Sources */,
 				A07F17B01ECDC21100A1F199 /* ChatMessageTextViewModel.swift in Sources */,
 				A0452DD41EE7C9F4003FBC9B /* UIView+Nib.swift in Sources */,
-				A07F172F1ECD930900A1F199 /* LiveChatManager.swift in Sources */,
+				A07F172F1ECD930900A1F199 /* LivechatManager.swift in Sources */,
 				A0559E341ECC431200E83220 /* SocketManager+Handle.swift in Sources */,
 				A0CB01C41F2DD0BA00C4321B /* TimestampCoordinator.swift in Sources */,
 				A01074E41EF57C0C0066D3F3 /* UserCoordinator.swift in Sources */,
-				A00BA5FE1EDDB31A0090874D /* LiveChatSubscriptionManager.swift in Sources */,
+				A00BA5FE1EDDB31A0090874D /* LivechatSubscriptionManager.swift in Sources */,
 				A0559E291ECC430900E83220 /* Mention.swift in Sources */,
 				A082CAB91F1D0619001F6183 /* SupportDepartmentViewController.swift in Sources */,
 				A0D128C31ED175AC0088B240 /* Injected.swift in Sources */,
@@ -2269,7 +2290,7 @@
 				A07F177D1ECDC18700A1F199 /* ChannelInfoBasicCell.swift in Sources */,
 				A030A1341ECC8E7000F71C6F /* RocketChat.swift in Sources */,
 				A07F17811ECDC18700A1F199 /* ChannelInfoDescriptionCell.swift in Sources */,
-				A032EF6C1EE1946D00A9DA78 /* LiveChatManagerInjected.swift in Sources */,
+				A032EF6C1EE1946D00A9DA78 /* LivechatManagerInjected.swift in Sources */,
 				A07F17851ECDC18700A1F199 /* ChannelInfoUserCell.swift in Sources */,
 				A0798F5D1EDD941600A495AA /* ChatTitleView.swift in Sources */,
 				A07F174E1ECDC13C00A1F199 /* ChatControllerSocketConnectionHandler.swift in Sources */,
@@ -2289,9 +2310,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A0F581BD1F409A1B0015AD82 /* WebSocketMock+CommonResponse.swift in Sources */,
 				A086D4A81F3B588100A9CB4B /* IntExtensions.swift in Sources */,
 				A0918BDA1EC0A15D0015D5D5 /* RocketChatSDKTests.swift in Sources */,
 				A098ED061F385AB5003C4A44 /* WebSocketMock.swift in Sources */,
+				A0F581BF1F40A1DB0015AD82 /* LivechatSubscriptionManagerTests.swift in Sources */,
+				A0F581B91F4062B50015AD82 /* LivechatManagerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

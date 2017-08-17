@@ -14,7 +14,7 @@ import Foundation
 public class DependencyRepository {
     public static var socketManager: SocketManager = SDKSocketManager()
     public static var authManager = AuthManager()
-    public static var subscriptionManager: SubscriptionManager = LiveChatSubscriptionManager()
+    public static var subscriptionManager: SubscriptionManager = LivechatSubscriptionManager()
     public static var userManager = UserManager()
     public static var messageManager = MessageManager()
     public static var uploadManager = UploadManager()
@@ -22,5 +22,5 @@ public class DependencyRepository {
     public static var serverManager = ServerManager()
     public static var messageTextCacheManager = MessageTextCacheManager()
 
-    public static var livechatManager = LiveChatManager()
+    public static var livechatManager = LivechatManager()
 }
