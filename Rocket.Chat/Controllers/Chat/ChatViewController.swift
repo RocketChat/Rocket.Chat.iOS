@@ -83,6 +83,8 @@ final class ChatViewController: SLKTextViewController {
         mediaFocusViewController.shouldDismissOnTap = true
         mediaFocusViewController.shouldShowPhotoActions = true
 
+        collectionView?.isPrefetchingEnabled = true
+
         isInverted = false
         bounces = true
         shakeToClearEnabled = true
@@ -178,8 +180,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
-        let layout = UICollectionViewFlowLayout()
-        return layout
+        return UICollectionViewFlowLayout()
     }
 
     fileprivate func registerCells() {
@@ -268,6 +269,7 @@ final class ChatViewController: SLKTextViewController {
             textView.text = ""
             rightButton.isEnabled = true
 
+            messages.insert(message, at: 0)
             appendMessages(messages: [message], completion: nil)
 
             SubscriptionManager.sendTextMessage(message) { _ in
@@ -463,9 +465,7 @@ final class ChatViewController: SLKTextViewController {
                     collectionView.contentOffset = offset
                 }
 
-                DispatchQueue.main.async {
-                    completion?()
-                }
+                completion?()
             })
         }
     }
