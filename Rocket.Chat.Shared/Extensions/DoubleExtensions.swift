@@ -6,7 +6,7 @@
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 extension Double {
     var radius: CGFloat {
