@@ -73,4 +73,14 @@ extension UIColor {
         return UIColor.lightGray
     }
 
+    // Bubble
+
+    static var rcReceivedBubble: UIColor {
+        return UIColor(rgb: 0xEAEAEA, alphaVal: 1)
+    }
+
+    static var rcSentBubble: UIColor {
+        return UIColor(rgb: 0x31A4F4, alphaVal: 1)
+    }
+
 }

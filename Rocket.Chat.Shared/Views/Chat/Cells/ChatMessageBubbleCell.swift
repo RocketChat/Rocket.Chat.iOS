@@ -15,9 +15,44 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
 
     private static let messageContentMinimumHeight: CGFloat = 18
     private static let bubbleMinimumHeight: CGFloat = messageContentMinimumHeight + bubblePadding
+
+    /// Bubble width proportion to cell view
     private static let bubbleWidthProportion: CGFloat = 0.72
+
+    /// Sum of top and bottom margin of bubble
     private static let bubbleVerticalMargin: CGFloat = 2
+
+    /// Sum of top and bottom padding of bubble
     private static let bubblePadding: CGFloat = 12
+
+    /// Left margin if is receivedBubble, right if sentBubble
+    private static let bubbleStartMargin: CGFloat = 20
+
+    // MARK: - computation conveniences
+
+    let hornHeight: CGFloat = 30
+    var hornCenterPoint: CGPoint {
+        switch type {
+        case .normal:
+            return CGPoint.zero
+        case .receivedBubble:
+            return CGPoint(x: ChatMessageBubbleCell.bubbleStartMargin, y: frame.size.height - ChatMessageBubbleCell.bubbleVerticalMargin - hornHeight / 2)
+        case .sentBubble:
+            return CGPoint(x: frame.size.width - ChatMessageBubbleCell.bubbleStartMargin, y: frame.size.height - ChatMessageBubbleCell.bubbleVerticalMargin - hornHeight / 2)
+        }
+    }
+    var hornZeroPoint: CGPoint {
+        switch type {
+        case .normal:
+            return CGPoint.zero
+        case .receivedBubble:
+            return CGPoint(x: hornCenterPoint.x - hornHeight / 2, y: hornCenterPoint.y - hornHeight / 2)
+        case .sentBubble:
+            return CGPoint(x: hornCenterPoint.x + hornHeight / 2, y: hornCenterPoint.y - hornHeight / 2)
+        }
+    }
+
+    var bubbleHornLayer: CAShapeLayer?
 
     weak var longPressGesture: UILongPressGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
@@ -42,6 +77,8 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
         super.awakeFromNib()
         bubbleView.layer.cornerRadius = ChatMessageBubbleCell.bubbleMinimumHeight / 2
         messageTextView.textContainerInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+
+        self.contentMode = .redraw
     }
 
     static func cellSizeFor(_ width: CGFloat, message: Message, style: MessageContainerStyle, grouped: Bool = true, messageTextCacheManager: MessageTextCacheManager) -> CGSize {
@@ -98,6 +135,41 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
             messageTextViewWidthAnchor?.constant = width
         }
         messageTextViewWidthAnchor?.isActive = true
+    }
+
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+
+        bubbleHornLayer?.removeFromSuperlayer()
+        bubbleHornLayer = CAShapeLayer()
+        switch type {
+        case .normal:
+            break
+        case .receivedBubble:
+            let path = UIBezierPath()
+
+            path.move(to: hornCenterPoint)
+            path.addArc(withCenter: CGPoint(x: hornCenterPoint.x - hornHeight / 2, y: hornCenterPoint.y), radius: hornHeight / 2, startAngle: 0.0.radius, endAngle: 90.0.radius, clockwise: true)
+            path.addArc(withCenter: hornZeroPoint, radius: hornHeight, startAngle: 90.0.radius, endAngle: 0.0.radius, clockwise: false)
+            path.close()
+
+            guard let hornLayer = bubbleHornLayer else { return }
+            hornLayer.path = path.cgPath
+            hornLayer.fillColor = UIColor.rcReceivedBubble.cgColor
+            self.layer.addSublayer(hornLayer)
+        case .sentBubble:
+            let path = UIBezierPath()
+
+            path.move(to: hornCenterPoint)
+            path.addArc(withCenter: CGPoint(x: hornCenterPoint.x + hornHeight / 2, y: hornCenterPoint.y), radius: hornHeight / 2, startAngle: 180.0.radius, endAngle: 90.0.radius, clockwise: false)
+            path.addArc(withCenter: hornZeroPoint, radius: hornHeight, startAngle: 90.0.radius, endAngle: 180.0.radius, clockwise: true)
+            path.close()
+
+            guard let hornLayer = bubbleHornLayer else { return }
+            hornLayer.path = path.cgPath
+            hornLayer.fillColor = UIColor.rcSentBubble.cgColor
+            self.layer.addSublayer(hornLayer)
+        }
     }
 
     func insertGesturesIfNeeded() {
