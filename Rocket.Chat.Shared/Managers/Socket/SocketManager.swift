@@ -31,7 +31,7 @@ public protocol SocketConnectionHandler {
 }
 
 /// A manager that manages all web socket connection related actions
-public class SocketManager: AuthManagerInjected, PushManagerInjected, SubscriptionManagerInjected, UserManagerInjected {
+public class SocketManager: AuthManagerInjected, AuthSettingsManagerInjected, PushManagerInjected, SubscriptionManagerInjected, UserManagerInjected {
 
     var serverURL: URL?
 
@@ -155,7 +155,7 @@ extension SocketManager {
 
             self.subscriptionManager.updateSubscriptions(auth, completion: { _ in
                 // TODO: Move it to somewhere else
-                self.authManager.updatePublicSettings(auth, completion: { _ in
+                self.authSettingsManager.updatePublicSettings(auth, completion: { _ in
 
                 })
 

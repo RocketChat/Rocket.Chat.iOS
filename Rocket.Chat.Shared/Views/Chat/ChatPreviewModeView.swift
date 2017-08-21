@@ -18,7 +18,7 @@ final class ChatPreviewModeView: UIView, SubscriptionManagerInjected {
     var subscription: Subscription! {
         didSet {
             let format = localized("chat.channel_preview_view.title")
-            let string = String(format: format, subscription.name)
+            let string = String(format: format, subscription.displayName())
             labelTitle.text = string
         }
     }

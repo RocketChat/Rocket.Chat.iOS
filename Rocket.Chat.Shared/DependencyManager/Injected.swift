@@ -22,6 +22,13 @@ extension AuthManagerInjected {
     }
 }
 
+protocol AuthSettingsManagerInjected {}
+extension AuthSettingsManagerInjected {
+    var authSettingsManager: AuthSettingsManager {
+        return DependencyRepository.authSettingsManager
+    }
+}
+
 protocol SubscriptionManagerInjected {}
 extension SubscriptionManagerInjected {
     var subscriptionManager: SubscriptionManager {
@@ -68,5 +75,12 @@ protocol MessageTextCacheManagerInjected {}
 extension MessageTextCacheManagerInjected {
     var messageTextCacheManager: MessageTextCacheManager {
         return DependencyRepository.messageTextCacheManager
+    }
+}
+
+protocol DownloadManagerInjected {}
+extension DownloadManagerInjected {
+    var downloadManager: DownloadManager {
+        return DependencyRepository.downloadManager
     }
 }

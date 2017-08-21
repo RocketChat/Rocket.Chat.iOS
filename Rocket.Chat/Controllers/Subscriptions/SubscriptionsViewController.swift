@@ -190,7 +190,7 @@ extension SubscriptionsViewController {
         guard let labelUsername = self.labelUsername else { return }
         guard let viewUserStatus = self.viewUserStatus else { return }
 
-        labelUsername.text = user.username ?? ""
+        labelUsername.text = user.displayName()
 
         switch user.status {
         case .online:
@@ -268,7 +268,7 @@ extension SubscriptionsViewController {
             ])
 
             searchResultsGroup = searchResultsGroup.sorted {
-                return $0.name < $1.name
+                return $0.displayName() < $1.displayName()
             }
 
             groupSubscriptions?.append(searchResultsGroup)

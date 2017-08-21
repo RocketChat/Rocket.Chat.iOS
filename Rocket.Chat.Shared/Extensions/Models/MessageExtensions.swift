@@ -30,21 +30,21 @@ extension Message {
                 return String(
                     format: localized("chat.message.type.room_name_changed"),
                     text,
-                    self.user?.username ?? ""
+                    self.user?.displayName() ?? ""
                 )
 
             case .userAdded:
                 return String(
                     format: localized("chat.message.type.user_added_by"),
                     text,
-                    self.user?.username ?? ""
+                    self.user?.displayName() ?? ""
                 )
 
             case .userRemoved:
                 return String(
                     format: localized("chat.message.type.user_removed_by"),
                     text,
-                    self.user?.username ?? ""
+                    self.user?.displayName() ?? ""
                 )
 
             case .userJoined:
@@ -57,14 +57,14 @@ extension Message {
                 return String(
                     format: localized("chat.message.type.user_muted"),
                     text,
-                    self.user?.username ?? ""
+                    self.user?.displayName() ?? ""
                 )
 
             case .userUnmuted:
                 return String(
                     format: localized("chat.message.type.user_unmuted"),
                     text,
-                    self.user?.username ?? ""
+                    self.user?.displayName() ?? ""
                 )
 
             case .welcome:
@@ -81,7 +81,7 @@ extension Message {
                     format: localized("chat.message.type.subscription_role_added"),
                     text,
                     role,
-                    self.user?.username ?? ""
+                    self.user?.displayName() ?? ""
                 )
 
             case .subscriptionRoleRemoved:
@@ -89,7 +89,7 @@ extension Message {
                     format: localized("chat.message.type.subscription_role_removed"),
                     text,
                     role,
-                    self.user?.username ?? ""
+                    self.user?.displayName() ?? ""
                 )
 
             case .roomArchived:

@@ -40,7 +40,7 @@ final class ChatMessageVideoView: UIView, AuthManagerInjected {
         labelTitle.text = attachment.title
 
         guard let auth = authManager.isAuthenticated() else { return }
-        guard let videoURL = attachment.fullVideoURL(inAuth: auth) else { return }
+        guard let videoURL = attachment.fullVideoURL(auth: auth) else { return }
         guard let thumbURL = attachment.videoThumbPath else { return }
 
         if let imageData = try? Data(contentsOf: thumbURL) {

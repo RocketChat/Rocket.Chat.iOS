@@ -138,6 +138,16 @@
 		A0798F5D1EDD941600A495AA /* ChatTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0798F5B1EDD941600A495AA /* ChatTitleView.swift */; };
 		A0798F5F1EDD951600A495AA /* ChatTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0798F5E1EDD951600A495AA /* ChatTitleView.xib */; };
 		A0798F601EDD951600A495AA /* ChatTitleView.xib in Resources */ = {isa = PBXBuildFile; fileRef = A0798F5E1EDD951600A495AA /* ChatTitleView.xib */; };
+		A07EB2FA1F4AB01C004AEBFC /* ChatControllerDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07EB2F71F4AB01C004AEBFC /* ChatControllerDocuments.swift */; };
+		A07EB2FB1F4AB01C004AEBFC /* ChatControllerDocuments.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07EB2F71F4AB01C004AEBFC /* ChatControllerDocuments.swift */; };
+		A07EB2FC1F4AB01C004AEBFC /* ChatControllerHeaderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07EB2F81F4AB01C004AEBFC /* ChatControllerHeaderStatus.swift */; };
+		A07EB2FD1F4AB01C004AEBFC /* ChatControllerHeaderStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07EB2F81F4AB01C004AEBFC /* ChatControllerHeaderStatus.swift */; };
+		A07EB3021F4AB07C004AEBFC /* UploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07EB3011F4AB07C004AEBFC /* UploadHelper.swift */; };
+		A07EB3031F4AB07C004AEBFC /* UploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07EB3011F4AB07C004AEBFC /* UploadHelper.swift */; };
+		A07EB3051F4AB0A5004AEBFC /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07EB3041F4AB0A5004AEBFC /* DownloadManager.swift */; };
+		A07EB3061F4AB0A5004AEBFC /* DownloadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07EB3041F4AB0A5004AEBFC /* DownloadManager.swift */; };
+		A07EB3081F4AB0DD004AEBFC /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07EB3071F4AB0DD004AEBFC /* AuthSettingsManager.swift */; };
+		A07EB3091F4AB0DD004AEBFC /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07EB3071F4AB0DD004AEBFC /* AuthSettingsManager.swift */; };
 		A07F172B1ECD788500A1F199 /* SubscriptionManager+Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07F172A1ECD788500A1F199 /* SubscriptionManager+Application.swift */; };
 		A07F172F1ECD930900A1F199 /* LivechatManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = A07F172E1ECD930900A1F199 /* LivechatManager.swift */; };
 		A07F17321ECDBE9400A1F199 /* Chatting.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A07F17311ECDBE9400A1F199 /* Chatting.storyboard */; };
@@ -227,6 +237,9 @@
 		A0918BD31EC0A15D0015D5D5 /* RocketChat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0918BCA1EC0A15D0015D5D5 /* RocketChat.framework */; };
 		A0918BDA1EC0A15D0015D5D5 /* RocketChatSDKTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */; };
 		A0918BDC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h in Headers */ = {isa = PBXBuildFile; fileRef = A0918BCC1EC0A15D0015D5D5 /* Rocket.Chat.SDK.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A097D9741F4B0B490069A743 /* UploadHelperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A097D9731F4B0B490069A743 /* UploadHelperSpec.swift */; };
+		A097D9761F4B0B5B0069A743 /* AuthSettingsManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A097D9751F4B0B5B0069A743 /* AuthSettingsManagerSpec.swift */; };
+		A097D9781F4B0B670069A743 /* DownloadManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = A097D9771F4B0B670069A743 /* DownloadManagerSpec.swift */; };
 		A098ED031F385AAE003C4A44 /* WebSocketMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098ED011F385AAE003C4A44 /* WebSocketMock.swift */; };
 		A098ED041F385AAE003C4A44 /* WebSocketMockTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098ED021F385AAE003C4A44 /* WebSocketMockTests.swift */; };
 		A098ED051F385AB2003C4A44 /* WebSocketMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = A098ED011F385AAE003C4A44 /* WebSocketMock.swift */; };
@@ -458,6 +471,11 @@
 		A06C6F4C1EDD8E3F00543A5D /* ChatHeaderViewStatus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatHeaderViewStatus.xib; sourceTree = "<group>"; };
 		A0798F5B1EDD941600A495AA /* ChatTitleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTitleView.swift; sourceTree = "<group>"; };
 		A0798F5E1EDD951600A495AA /* ChatTitleView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatTitleView.xib; sourceTree = "<group>"; };
+		A07EB2F71F4AB01C004AEBFC /* ChatControllerDocuments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatControllerDocuments.swift; sourceTree = "<group>"; };
+		A07EB2F81F4AB01C004AEBFC /* ChatControllerHeaderStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatControllerHeaderStatus.swift; sourceTree = "<group>"; };
+		A07EB3011F4AB07C004AEBFC /* UploadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadHelper.swift; sourceTree = "<group>"; };
+		A07EB3041F4AB0A5004AEBFC /* DownloadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DownloadManager.swift; sourceTree = "<group>"; };
+		A07EB3071F4AB0DD004AEBFC /* AuthSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsManager.swift; sourceTree = "<group>"; };
 		A07F172A1ECD788500A1F199 /* SubscriptionManager+Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SubscriptionManager+Application.swift"; sourceTree = "<group>"; };
 		A07F172E1ECD930900A1F199 /* LivechatManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LivechatManager.swift; sourceTree = "<group>"; };
 		A07F17311ECDBE9400A1F199 /* Chatting.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Chatting.storyboard; sourceTree = "<group>"; };
@@ -509,6 +527,9 @@
 		A0918BD21EC0A15D0015D5D5 /* Rocket.Chat.SDKTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Rocket.Chat.SDKTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		A0918BD91EC0A15D0015D5D5 /* RocketChatSDKTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketChatSDKTests.swift; sourceTree = "<group>"; };
 		A0918BDB1EC0A15D0015D5D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A097D9731F4B0B490069A743 /* UploadHelperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadHelperSpec.swift; sourceTree = "<group>"; };
+		A097D9751F4B0B5B0069A743 /* AuthSettingsManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettingsManagerSpec.swift; path = Managers/AuthSettingsManagerSpec.swift; sourceTree = "<group>"; };
+		A097D9771F4B0B670069A743 /* DownloadManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DownloadManagerSpec.swift; path = Managers/DownloadManagerSpec.swift; sourceTree = "<group>"; };
 		A098ED011F385AAE003C4A44 /* WebSocketMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketMock.swift; sourceTree = "<group>"; };
 		A098ED021F385AAE003C4A44 /* WebSocketMockTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocketMockTests.swift; sourceTree = "<group>"; };
 		A099106F1EC7501400A9FEE8 /* CommonCrypto.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CommonCrypto.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -657,6 +678,8 @@
 			children = (
 				417A70011D47916C00FF46EE /* Socket */,
 				41BA89231D303D8B00CBF526 /* AuthManagerSpec.swift */,
+				A097D9751F4B0B5B0069A743 /* AuthSettingsManagerSpec.swift */,
+				A097D9771F4B0B670069A743 /* DownloadManagerSpec.swift */,
 				41DC7A1E1D3865FE00896FC0 /* MessageManagerSpec.swift */,
 			);
 			name = Managers;
@@ -858,6 +881,7 @@
 				41552F691D3035DB0081438D /* Managers */,
 				4171ABA31E7C0556009FC3F0 /* Views */,
 				925FF74F1E8EFC9200982043 /* Settings */,
+				A097D9721F4B0B180069A743 /* Helpers */,
 				41DF76F91D2C50720028DBF8 /* Info.plist */,
 			);
 			path = Rocket.ChatTests;
@@ -981,6 +1005,14 @@
 			path = Mapping;
 			sourceTree = "<group>";
 		};
+		A07EB3001F4AB042004AEBFC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A07EB3011F4AB07C004AEBFC /* UploadHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		A07F172D1ECD92EA00A1F199 /* Managers */ = {
 			isa = PBXGroup;
 			children = (
@@ -1027,6 +1059,8 @@
 				A07F173C1ECDC13C00A1F199 /* ChatControllerMessageCellProtocol.swift */,
 				A07F173D1ECDC13C00A1F199 /* ChatControllerSocketConnectionHandler.swift */,
 				A07F173E1ECDC13C00A1F199 /* ChatControllerUploader.swift */,
+				A07EB2F71F4AB01C004AEBFC /* ChatControllerDocuments.swift */,
+				A07EB2F81F4AB01C004AEBFC /* ChatControllerHeaderStatus.swift */,
 				A07F173F1ECDC13C00A1F199 /* ChatDataController.swift */,
 				A07F17401ECDC13C00A1F199 /* ChatViewController.swift */,
 			);
@@ -1152,6 +1186,14 @@
 			path = Rocket.Chat.SDKTests;
 			sourceTree = "<group>";
 		};
+		A097D9721F4B0B180069A743 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				A097D9731F4B0B490069A743 /* UploadHelperSpec.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		A09910811EC75AE600A9FEE8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -1212,6 +1254,7 @@
 				A0BBAF281EC7FE6A002BF87C /* UploadVideoCompression.swift */,
 				A0A812391ECDC7D1000567D7 /* MessageTextFontAttributes.swift */,
 				A0E0E7CF1EC6F8A6001B93B1 /* Extensions */,
+				A07EB3001F4AB042004AEBFC /* Helpers */,
 				A0E0E7CE1EC6F892001B93B1 /* Models */,
 				A0E0E7CD1EC6F87D001B93B1 /* Managers */,
 				A07F17301ECDB46600A1F199 /* Storyboards */,
@@ -1230,6 +1273,7 @@
 				A0E0E7D01EC6F8DC001B93B1 /* Socket */,
 				A0E0E7DE1EC6FEFA001B93B1 /* LogManager.swift */,
 				A0E0E7ED1EC704BB001B93B1 /* AuthManager.swift */,
+				A07EB3071F4AB0DD004AEBFC /* AuthSettingsManager.swift */,
 				A0E0E7EE1EC704BB001B93B1 /* SubscriptionManager.swift */,
 				A0E0E7EF1EC704BB001B93B1 /* UserManager.swift */,
 				A0BBAF221EC7FE38002BF87C /* MessageManager.swift */,
@@ -1237,6 +1281,7 @@
 				A0BBAF2B1EC7FEB6002BF87C /* PushManager.swift */,
 				A0CB01C51F2DD0C700C4321B /* ServerManager.swift */,
 				A0A812331ECDC71D000567D7 /* MessageTextCacheManager.swift */,
+				A07EB3041F4AB0A5004AEBFC /* DownloadManager.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -2060,6 +2105,7 @@
 				415801951D303B640099E71B /* MainViewController.swift in Sources */,
 				A0E0E8191EC7499A001B93B1 /* Message.swift in Sources */,
 				A0E0E7F01EC704BB001B93B1 /* AuthManager.swift in Sources */,
+				A07EB3051F4AB0A5004AEBFC /* DownloadManager.swift in Sources */,
 				A0E0E7D91EC6F920001B93B1 /* SocketManager.swift in Sources */,
 				A0E0E8061EC7063F001B93B1 /* ModelMappeable.swift in Sources */,
 				A07F17841ECDC18700A1F199 /* ChannelInfoUserCell.swift in Sources */,
@@ -2078,6 +2124,7 @@
 				A07F178A1ECDC18700A1F199 /* ChatMessageCell.swift in Sources */,
 				A08114581EDC068100AD63CB /* AppSocketManager.swift in Sources */,
 				A0E0E7F41EC704BB001B93B1 /* UserManager.swift in Sources */,
+				A07EB3081F4AB0DD004AEBFC /* AuthSettingsManager.swift in Sources */,
 				A0A812251ECDC657000567D7 /* UIImageExtension.swift in Sources */,
 				A0559DFB1ECC2CCD00E83220 /* MessageModelMapping.swift in Sources */,
 				A01074E11EF57C0C0066D3F3 /* PersistencyCoordinator.swift in Sources */,
@@ -2099,6 +2146,7 @@
 				A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */,
 				4174CB171D2D9BB70086DAC8 /* AuthViewController.swift in Sources */,
 				A0BBAF231EC7FE38002BF87C /* MessageManager.swift in Sources */,
+				A07EB2FA1F4AB01C004AEBFC /* ChatControllerDocuments.swift in Sources */,
 				A07F177C1ECDC18700A1F199 /* ChannelInfoBasicCell.swift in Sources */,
 				A07F17A61ECDC18700A1F199 /* ChatPreviewModeView.swift in Sources */,
 				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
@@ -2109,6 +2157,7 @@
 				A07F17491ECDC13C00A1F199 /* ChatControllerMessageActions.swift in Sources */,
 				A0798F581EDD936F00A495AA /* ChatHeaderViewStatus.swift in Sources */,
 				A0A8123A1ECDC7D1000567D7 /* MessageTextFontAttributes.swift in Sources */,
+				A07EB2FC1F4AB01C004AEBFC /* ChatControllerHeaderStatus.swift in Sources */,
 				A07F17AF1ECDC21100A1F199 /* ChatMessageTextViewModel.swift in Sources */,
 				A07F17781ECDC18700A1F199 /* AvatarView.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
@@ -2152,6 +2201,7 @@
 				A07F172B1ECD788500A1F199 /* SubscriptionManager+Application.swift in Sources */,
 				A0A812471ECDCAE7000567D7 /* ChatViewController+SharedInstance.swift in Sources */,
 				A0E0E8421EC74A89001B93B1 /* DateExtension.swift in Sources */,
+				A07EB3021F4AB07C004AEBFC /* UploadHelper.swift in Sources */,
 				A0A812341ECDC71D000567D7 /* MessageTextCacheManager.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
 				A07F17961ECDC18700A1F199 /* ChatMessageTextView.swift in Sources */,
@@ -2179,6 +2229,8 @@
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
 				925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */,
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
+				A097D9741F4B0B490069A743 /* UploadHelperSpec.swift in Sources */,
+				A097D9781F4B0B670069A743 /* DownloadManagerSpec.swift in Sources */,
 				A098ED041F385AAE003C4A44 /* WebSocketMockTests.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
@@ -2187,6 +2239,7 @@
 				A02D790A1F2EAD7F00BFF753 /* DateExtensionsSpec.swift in Sources */,
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
+				A097D9761F4B0B5B0069A743 /* AuthSettingsManagerSpec.swift in Sources */,
 				41DC7A221D386B4700896FC0 /* StringExtensionSpec.swift in Sources */,
 				68D186DF1ED9714F0030EE8C /* MessageURLSpec.swift in Sources */,
 				4151807C1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift in Sources */,
@@ -2215,6 +2268,7 @@
 				A07F17421ECDC13C00A1F199 /* BaseNavigationController.swift in Sources */,
 				A06C6F4E1EDD8E3F00543A5D /* ChatHeaderViewStatus.swift in Sources */,
 				A0CB01C71F2DD0C700C4321B /* ServerManager.swift in Sources */,
+				A07EB2FD1F4AB01C004AEBFC /* ChatControllerHeaderStatus.swift in Sources */,
 				A0559E1F1ECC430900E83220 /* MessageURLModelMapping.swift in Sources */,
 				A07F174C1ECDC13C00A1F199 /* ChatControllerMessageCellProtocol.swift in Sources */,
 				A07F177F1ECDC18700A1F199 /* ChannelInfoCellProtocol.swift in Sources */,
@@ -2236,6 +2290,7 @@
 				A07F17541ECDC13C00A1F199 /* ChatViewController.swift in Sources */,
 				A07F17571ECDC16600A1F199 /* ChannelInfoViewController.swift in Sources */,
 				A07F17521ECDC13C00A1F199 /* ChatDataController.swift in Sources */,
+				A07EB3091F4AB0DD004AEBFC /* AuthSettingsManager.swift in Sources */,
 				A07F17441ECDC13C00A1F199 /* BaseViewController.swift in Sources */,
 				A0559E2A1ECC430900E83220 /* MessageURL.swift in Sources */,
 				A0A8122D1ECDC6C7000567D7 /* UINibExtensions.swift in Sources */,
@@ -2243,6 +2298,7 @@
 				A0A812261ECDC657000567D7 /* UIImageExtension.swift in Sources */,
 				A0559E2D1ECC430E00E83220 /* SubscriptionManager.swift in Sources */,
 				A07F17B61ECDC35100A1F199 /* LoaderView.swift in Sources */,
+				A07EB3061F4AB0A5004AEBFC /* DownloadManager.swift in Sources */,
 				A0559E201ECC430900E83220 /* SubscriptionModelMapping.swift in Sources */,
 				A0559E131ECC42FA00E83220 /* DateExtension.swift in Sources */,
 				A0DE0CC71EDEAD6600C4FA34 /* SDKSocketManager.swift in Sources */,
@@ -2270,6 +2326,7 @@
 				A07F17871ECDC18700A1F199 /* AutocompleteCell.swift in Sources */,
 				A0559E211ECC430900E83220 /* UserModelMapping.swift in Sources */,
 				A07F178B1ECDC18700A1F199 /* ChatMessageCell.swift in Sources */,
+				A07EB2FB1F4AB01C004AEBFC /* ChatControllerDocuments.swift in Sources */,
 				A0000CA11F0D290A00BE1BFA /* ChatMessageBubbleCell.swift in Sources */,
 				A027388D1F45D12D0049B9DB /* DoubleExtensions.swift in Sources */,
 				A0559E231ECC430900E83220 /* AuthSettings.swift in Sources */,
@@ -2286,6 +2343,7 @@
 				A07F17501ECDC13C00A1F199 /* ChatControllerUploader.swift in Sources */,
 				A00BA5FA1EDDB0740090874D /* Department.swift in Sources */,
 				A0559E321ECC431200E83220 /* ResponseMessage.swift in Sources */,
+				A07EB3031F4AB07C004AEBFC /* UploadHelper.swift in Sources */,
 				A0559E221ECC430900E83220 /* Auth.swift in Sources */,
 				A07F17831ECDC18700A1F199 /* ChannelInfoDetailCell.swift in Sources */,
 				A01074E61EF57C820066D3F3 /* Launcher.swift in Sources */,

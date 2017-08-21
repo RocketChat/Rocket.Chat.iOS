@@ -8,6 +8,7 @@
 
 import UIKit
 import Photos
+import MobileCoreServices
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate, UploadManagerInjected {
 
@@ -23,7 +24,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }))
 
         alert.addAction(UIAlertAction(title: localized("chat.upload.import_file"), style: .default, handler: { (_) in
-            // Do nothing yet.
+            self.openDocumentPicker()
         }))
 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
@@ -65,9 +66,12 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         var activityMessage = localized("chat.upload.uploading_image")
         var filename = "\(String.random()).jpeg"
         var file: FileUpload?
+        var assetURL: URL?
 
-        if let assetURL = info[UIImagePickerControllerReferenceURL] as? URL {
-            if let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject {
+        if let tempAssetURL = info[UIImagePickerControllerReferenceURL] as? URL {
+            assetURL = tempAssetURL
+
+            if let asset = PHAsset.fetchAssets(withALAssetURLs: [tempAssetURL], options: nil).firstObject {
                 if let resource = PHAssetResource.assetResources(for: asset).first {
                     filename = resource.originalFilename
                 }
@@ -77,12 +81,16 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let resizedImage = image.resizeWith(width: 1024) ?? image
             guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
+            var mimeType: String?
 
-            file = FileUpload(
+            if let assetURL = assetURL {
+                mimeType = UploadHelper.mimeTypeFor(assetURL)
+            }
+
+            file = UploadHelper.file(
+                for: imageData,
                 name: filename,
-                size: (imageData as NSData).length,
-                type: "image/jpeg",
-                data: imageData
+                mimeType: mimeType ?? "image/jpeg"
             )
         }
 
@@ -96,11 +104,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                     return
                 }
 
-                file = FileUpload(
+                file = UploadHelper.file(
+                    for: videoData as Data,
                     name: filename,
-                    size: videoData.length,
-                    type: "video/mp4",
-                    data: videoData as Data
+                    mimeType: UploadHelper.mimeTypeFor(videoURL)
                 )
 
                 semaphore.signal()
@@ -110,31 +117,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
 
         if let file = file {
-            uploadManager.upload(file: file, subscription: self.subscription, progress: { _ in
-                // We currently don't have progress being called.
-            }, completion: { [unowned self] (response, error) in
-                if error {
-                    var errorMessage = localized("error.socket.default_error_message")
-
-                    if let response = response {
-                        if let message = response.result["error"]["message"].string {
-                            errorMessage = message
-                        }
-                    }
-
-                    let alert = UIAlertController(
-                        title: localized("error.socket.default_error_title"),
-                        message: errorMessage,
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-
-                    DispatchQueue.main.async {
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-            })
+            upload(file)
         }
 
         dismiss(animated: true, completion: nil)
@@ -142,6 +125,95 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
     public func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
+    }
+
+}
+
+// MARK: UIDocumentMenuDelegate
+
+extension ChatViewController: UIDocumentMenuDelegate {
+
+    public func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
+        documentPicker.delegate = self
+        present(documentPicker, animated: true, completion: nil)
+    }
+
+    public func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
+        dismiss(animated: true, completion: nil)
+    }
+
+}
+
+extension ChatViewController: UIDocumentPickerDelegate {
+
+    func openDocumentPicker() {
+        let importMenu = UIDocumentMenuViewController(documentTypes: ["public.item"], in: .import)
+        importMenu.delegate = self
+        importMenu.modalPresentationStyle = .formSheet
+        self.present(importMenu, animated: true, completion: nil)
+    }
+
+    // MARK: UIDocumentPickerDelegate
+
+    public func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
+        if controller.documentPickerMode == .import {
+            if let file = UploadHelper.file(for: url) {
+                upload(file)
+            }
+        }
+    }
+
+}
+
+// MARK: Uploading a FileUpload
+
+extension ChatViewController {
+
+    func startLoadingUpload(file: FileUpload) {
+        showHeaderStatusView()
+
+        let message = String(format: localized("chat.upload.uploading_file"), file.name)
+        chatHeaderViewStatus?.labelTitle.text = message
+        chatHeaderViewStatus?.buttonRefresh.isHidden = true
+        chatHeaderViewStatus?.backgroundColor = .RCLightGray()
+        chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
+        chatHeaderViewStatus?.activityIndicator.startAnimating()
+    }
+
+    func stopLoadingUpload() {
+        hideHeaderStatusView()
+    }
+
+    func upload(_ file: FileUpload) {
+        startLoadingUpload(file: file)
+
+        uploadManager.upload(file: file, subscription: self.subscription, progress: { _ in
+            // We currently don't have progress being called.
+        }, completion: { [unowned self] (response, error) in
+            self.stopLoadingUpload()
+
+            if error {
+                var errorMessage = localized("error.socket.default_error_message")
+
+                if let response = response {
+                    if let message = response.result["error"]["message"].string {
+                        errorMessage = message
+                    }
+                }
+
+                let alert = UIAlertController(
+                    title: localized("error.socket.default_error_title"),
+                    message: errorMessage,
+                    preferredStyle: .alert
+                )
+
+                alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
+
+                DispatchQueue.main.async {
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+        })
     }
 
 }
