@@ -408,10 +408,12 @@ final class ChatViewController: SLKTextViewController {
 
         if newMessages.count == 0 || loadRemoteHistory {
             MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
-                self?.activityIndicator.stopAnimating()
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
 
-                self?.isRequestingHistory = false
-                self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+                    self?.isRequestingHistory = false
+                    self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+                }
             }
         }
     }
