@@ -375,7 +375,6 @@ final class ChatViewController: SLKTextViewController {
                         }
                     }
 
-                    Log.debug("indexPathModifications: \(indexPathModifications)")
                     self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
                 }, completion: nil)
 
@@ -392,6 +391,21 @@ final class ChatViewController: SLKTextViewController {
 
         isRequestingHistory = true
 
+        func loadHistoryFromRemote() {
+            let tempSubscription = Subscription(value: self.subscription)
+
+            DispatchQueue.global(qos: .background).async {
+                MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] in
+                    DispatchQueue.main.async {
+                        self?.activityIndicator.stopAnimating()
+
+                        self?.isRequestingHistory = false
+                        self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+                    }
+                }
+            }
+        }
+
         let newMessages = subscription.fetchMessages(lastMessageDate: date)
         if newMessages.count > 0 {
             messages.insert(contentsOf: newMessages, at: 0)
@@ -402,19 +416,14 @@ final class ChatViewController: SLKTextViewController {
                     self?.scrollToBottom()
                 }
 
-                self?.isRequestingHistory = false
-            })
-        }
-
-        if newMessages.count == 0 || loadRemoteHistory {
-            MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
-                DispatchQueue.main.async {
-                    self?.activityIndicator.stopAnimating()
-
+                if !loadRemoteHistory {
                     self?.isRequestingHistory = false
-                    self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+                } else {
+                    loadHistoryFromRemote()
                 }
-            }
+            })
+        } else {
+            loadHistoryFromRemote()
         }
     }
 
@@ -438,7 +447,6 @@ final class ChatViewController: SLKTextViewController {
             for message in tempMessages {
                 var insert = true
 
-                // swiftlint:disable for_where
                 for obj in self.dataController.data {
                     if message.identifier == obj.message?.identifier {
                         insert = false
@@ -461,6 +469,16 @@ final class ChatViewController: SLKTextViewController {
             // No new data? Don't update it then
             if objs.count == 0 {
                 DispatchQueue.main.async {
+                    let shouldScroll = self.isContentBiggerThanContainerHeight()
+
+                    if updateScrollPosition && shouldScroll {
+                        let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
+
+                        UIView.performWithoutAnimation {
+                            collectionView.contentOffset = offset
+                        }
+                    }
+
                     completion?()
                 }
 
@@ -484,7 +502,7 @@ final class ChatViewController: SLKTextViewController {
                             let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
                             collectionView.contentOffset = offset
                         }
-
+                        
                         completion?()
                     })
                 }
