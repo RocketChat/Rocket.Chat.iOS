@@ -330,6 +330,8 @@ final class ChatViewController: SLKTextViewController {
     internal func updateSubscriptionMessages() {
         messagesQuery = subscription.fetchMessagesQueryResults()
 
+        activityIndicator.startAnimating()
+
         isRequestingHistory = false
         loadMoreMessagesFrom(date: nil)
         updateMessagesQueryNotificationBlock()
@@ -394,6 +396,8 @@ final class ChatViewController: SLKTextViewController {
         if newMessages.count > 0 {
             messages.insert(contentsOf: newMessages, at: 0)
             appendMessages(messages: newMessages, updateScrollPosition: true, completion: { [weak self] in
+                self?.activityIndicator.stopAnimating()
+
                 if date == nil {
                     self?.scrollToBottom()
                 }
@@ -404,6 +408,8 @@ final class ChatViewController: SLKTextViewController {
 
         if newMessages.count == 0 || loadRemoteHistory {
             MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
+                self?.activityIndicator.stopAnimating()
+
                 self?.isRequestingHistory = false
                 self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
             }
@@ -413,60 +419,74 @@ final class ChatViewController: SLKTextViewController {
     fileprivate func appendMessages(messages: [Message], updateScrollPosition: Bool = false, completion: VoidCompletion?) {
         guard let collectionView = self.collectionView else { return }
 
-        var contentHeight = collectionView.contentSize.height
-        var offsetY = collectionView.contentOffset.y
-        var bottomOffset = contentHeight - offsetY
+        var tempMessages: [Message] = []
+        for message in messages {
+            tempMessages.append(Message(value: message))
+        }
 
-        UIView.performWithoutAnimation {
-            collectionView.performBatchUpdates({
-                // Insert data into collectionView without moving it
-                contentHeight = collectionView.contentSize.height
-                offsetY = collectionView.contentOffset.y
-                bottomOffset = contentHeight - offsetY
+        DispatchQueue.global(qos: .background).async {
+            var contentHeight = collectionView.contentSize.height
+            var offsetY = collectionView.contentOffset.y
+            var bottomOffset = contentHeight - offsetY
 
-                var objs: [ChatData] = []
-                var newMessages: [Message] = []
+            var objs: [ChatData] = []
+            var newMessages: [Message] = []
 
-                // Do not add duplicated messages
-                for message in messages {
-                    var insert = true
+            // Do not add duplicated messages
+            for message in tempMessages {
+                var insert = true
 
-                    // swiftlint:disable for_where
-                    for obj in self.dataController.data {
-                        if message.identifier == obj.message?.identifier {
-                            insert = false
+                // swiftlint:disable for_where
+                for obj in self.dataController.data {
+                    if message.identifier == obj.message?.identifier {
+                        insert = false
+                    }
+                }
+
+                if insert {
+                    newMessages.append(message)
+                }
+            }
+
+            // Normalize data into ChatData object
+            for message in newMessages {
+                guard let createdAt = message.createdAt else { continue }
+                guard var obj = ChatData(type: .message, timestamp: createdAt) else { continue }
+                obj.message = message
+                objs.append(obj)
+            }
+
+            // No new data? Don't update it then
+            if objs.count == 0 {
+                DispatchQueue.main.async {
+                    completion?()
+                }
+
+                return
+            }
+
+            DispatchQueue.main.async {
+                UIView.performWithoutAnimation {
+                    collectionView.performBatchUpdates({
+                        // Insert data into collectionView without moving it
+                        contentHeight = collectionView.contentSize.height
+                        offsetY = collectionView.contentOffset.y
+                        bottomOffset = contentHeight - offsetY
+
+                        let indexPaths = self.dataController.insert(objs)
+                        collectionView.insertItems(at: indexPaths)
+                    }, completion: { _ in
+                        let shouldScroll = self.isContentBiggerThanContainerHeight()
+
+                        if updateScrollPosition && shouldScroll {
+                            let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
+                            collectionView.contentOffset = offset
                         }
-                    }
 
-                    if insert {
-                        newMessages.append(message)
-                    }
+                        completion?()
+                    })
                 }
-
-                // Normalize data into ChatData object
-                for message in newMessages {
-                    guard let createdAt = message.createdAt else { continue }
-                    guard var obj = ChatData(type: .message, timestamp: createdAt) else { continue }
-                    obj.message = message
-                    objs.append(obj)
-                }
-
-                // No new data? Don't update it then
-                if objs.count == 0 {
-                    return
-                }
-
-                let indexPaths = self.dataController.insert(objs)
-                collectionView.insertItems(at: indexPaths)
-            }, completion: { _ in
-                let shouldScroll = self.isContentBiggerThanContainerHeight()
-                if updateScrollPosition && shouldScroll {
-                    let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
-                    collectionView.contentOffset = offset
-                }
-
-                completion?()
-            })
+            }
         }
     }
 
@@ -548,8 +568,8 @@ extension ChatViewController {
         guard let cell = collectionView?.dequeueReusableCell(
             withReuseIdentifier: ChatMessageCell.identifier,
             for: indexPath
-            ) as? ChatMessageCell else {
-                return UICollectionViewCell()
+        ) as? ChatMessageCell else {
+            return UICollectionViewCell()
         }
 
         cell.delegate = self
