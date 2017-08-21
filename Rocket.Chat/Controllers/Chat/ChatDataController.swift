@@ -116,7 +116,6 @@ final class ChatDataController {
             normalizeds.append(customItem)
 
             for identifier in identifiers {
-                // swiftlint: disable for_where
                 if identifier == item.identifier {
                     indexPaths.append(indexPath)
                     break
