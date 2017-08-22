@@ -180,7 +180,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
-        return UICollectionViewFlowLayout()
+        return ChatCollectionViewFlowLayout()
     }
 
     fileprivate func registerCells() {
@@ -269,11 +269,6 @@ final class ChatViewController: SLKTextViewController {
             textView.text = ""
             rightButton.isEnabled = true
 
-            messages.insert(message, at: 0)
-            appendMessages(messages: [message], completion: {
-                self.scrollToBottom()
-            })
-
             SubscriptionManager.sendTextMessage(message) { _ in
                 Realm.executeOnMainThread({ (realm) in
                     message.temporary = false
@@ -343,38 +338,46 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func updateMessagesQueryNotificationBlock() {
         messagesToken?.stop()
-        messagesToken = messagesQuery.addNotificationBlock { [weak self] changes in
+        messagesToken = messagesQuery.addNotificationBlock { [unowned self] changes in
             switch changes {
             case .initial: break
-            case .update(_, _, _, let modifications):
+            case .update(_, _, let insertions, let modifications):
+                if insertions.count > 0 {
+                    var newMessages: [Message] = []
+                    for insertion in insertions {
+                        let newMessage = Message(value: self.messagesQuery[insertion])
+                        newMessages.append(newMessage)
+                    }
+
+                    self.messages.append(contentsOf: newMessages)
+                    self.appendMessages(messages: newMessages, completion: nil)
+                }
+
                 if modifications.count == 0 {
                     return
                 }
 
-                let tempMessages = self?.messages.map({ Message(value: $0) }) ?? []
-                DispatchQueue.global(qos: .background).async {
-                    var indexPathModifications: [Int] = []
+                let messagesCount = self.messagesQuery.count
+                var indexPathModifications: [Int] = []
 
-                    for modified in modifications {
-                        if tempMessages.count < modified + 1 {
-                            continue
-                        }
-
-                        let message = tempMessages[modified]
-                        if let index = self?.dataController.update(message) {
-                            if index >= 0 && !indexPathModifications.contains(index) {
-                                indexPathModifications.append(index)
-                            }
-                        }
+                for modified in modifications {
+                    if messagesCount < modified + 1 {
+                        continue
                     }
 
-                    if indexPathModifications.count > 0 {
-                        DispatchQueue.main.async {
-                            UIView.performWithoutAnimation {
-                                self?.collectionView?.performBatchUpdates({
-                                    self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                                }, completion: nil)
-                            }
+                    let message = Message(value: self.messagesQuery[modified])
+                    let index = self.dataController.update(message)
+                    if index >= 0 && !indexPathModifications.contains(index) {
+                        indexPathModifications.append(index)
+                    }
+                }
+
+                if indexPathModifications.count > 0 {
+                    DispatchQueue.main.async {
+                        UIView.performWithoutAnimation {
+                            self.collectionView?.performBatchUpdates({
+                                self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
+                            }, completion: nil)
                         }
                     }
                 }
@@ -392,25 +395,21 @@ final class ChatViewController: SLKTextViewController {
 
         isRequestingHistory = true
 
-        func loadHistoryFromRemote(nextPageDate: Date? = nil) {
+        func loadHistoryFromRemote() {
             let tempSubscription = Subscription(value: self.subscription)
 
-            DispatchQueue.global(qos: .background).async {
-                MessageManager.getHistory(tempSubscription, lastMessageDate: nextPageDate ?? date) { [weak self] in
-                    DispatchQueue.main.async {
-                        self?.activityIndicator.stopAnimating()
-
-                        self?.isRequestingHistory = false
-                        self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
-                    }
+            MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] in
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                    self?.isRequestingHistory = false
                 }
             }
         }
 
-        let newMessages = subscription.fetchMessages(lastMessageDate: date)
+        let newMessages = subscription.fetchMessages(lastMessageDate: date).map({ Message(value: $0) })
         if newMessages.count > 0 {
-            messages.insert(contentsOf: newMessages, at: 0)
-            appendMessages(messages: newMessages, updateScrollPosition: true, completion: { [weak self] in
+            messages.append(contentsOf: newMessages)
+            appendMessages(messages: newMessages, completion: { [weak self] in
                 self?.activityIndicator.stopAnimating()
 
                 if date == nil {
@@ -432,7 +431,7 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    fileprivate func appendMessages(messages: [Message], updateScrollPosition: Bool = false, completion: VoidCompletion?) {
+    fileprivate func appendMessages(messages: [Message], completion: VoidCompletion?) {
         guard let collectionView = self.collectionView else { return }
 
         var tempMessages: [Message] = []
@@ -441,10 +440,6 @@ final class ChatViewController: SLKTextViewController {
         }
 
         DispatchQueue.global(qos: .background).async {
-            var contentHeight = collectionView.contentSize.height
-            var offsetY = collectionView.contentOffset.y
-            var bottomOffset = contentHeight - offsetY
-
             var objs: [ChatData] = []
             var newMessages: [Message] = []
 
@@ -474,16 +469,6 @@ final class ChatViewController: SLKTextViewController {
             // No new data? Don't update it then
             if objs.count == 0 {
                 DispatchQueue.main.async {
-                    let shouldScroll = self.isContentBiggerThanContainerHeight()
-
-                    if updateScrollPosition && shouldScroll {
-                        let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
-
-                        UIView.performWithoutAnimation {
-                            collectionView.contentOffset = offset
-                        }
-                    }
-
                     completion?()
                 }
 
@@ -491,26 +476,12 @@ final class ChatViewController: SLKTextViewController {
             }
 
             DispatchQueue.main.async {
-                UIView.performWithoutAnimation {
-                    collectionView.performBatchUpdates({
-                        // Insert data into collectionView without moving it
-                        contentHeight = collectionView.contentSize.height
-                        offsetY = collectionView.contentOffset.y
-                        bottomOffset = contentHeight - offsetY
-
-                        let indexPaths = self.dataController.insert(objs)
-                        collectionView.insertItems(at: indexPaths)
-                    }, completion: { _ in
-                        let shouldScroll = self.isContentBiggerThanContainerHeight()
-
-                        if updateScrollPosition && shouldScroll {
-                            let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
-                            collectionView.contentOffset = offset
-                        }
-
-                        completion?()
-                    })
-                }
+                collectionView.performBatchUpdates({
+                    let indexPaths = self.dataController.insert(objs)
+                    collectionView.insertItems(at: indexPaths)
+                }, completion: { _ in
+                    completion?()
+                })
             }
         }
     }
