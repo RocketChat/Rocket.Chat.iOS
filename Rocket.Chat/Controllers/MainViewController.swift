@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MainViewController: BaseViewController, AuthManagerInjected, SubscriptionManagerInjected, UserManagerInjected, PushManagerInjected {
+final class MainViewController: BaseViewController, AuthManagerInjected, AuthSettingsManagerInjected, SubscriptionManagerInjected, UserManagerInjected, PushManagerInjected {
 
     @IBOutlet weak var labelAuthenticationStatus: UILabel!
     @IBOutlet weak var buttonConnect: UIButton!
@@ -29,7 +29,7 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
         super.viewDidLoad()
         authManager.recoverAuthIfNeeded()
     }
-    
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
@@ -64,7 +64,7 @@ final class MainViewController: BaseViewController, AuthManagerInjected, Subscri
                 }
 
                 self?.subscriptionManager.updateSubscriptions(auth, completion: { _ in
-                    strongSelf.authManager.updatePublicSettings(auth, completion: { _ in
+                    strongSelf.authSettingsManager.updatePublicSettings(auth, completion: { _ in
 
                     })
 

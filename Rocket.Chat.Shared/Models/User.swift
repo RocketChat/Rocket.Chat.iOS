@@ -33,3 +33,15 @@ public class User: BaseModel {
         set { privateStatus = newValue.rawValue }
     }
 }
+
+extension User {
+
+    func displayName() -> String {
+        guard let settings = DependencyRepository.authSettingsManager.settings else {
+            return username ?? ""
+        }
+
+        return (settings.useUserRealName ? name : username) ?? ""
+    }
+
+}

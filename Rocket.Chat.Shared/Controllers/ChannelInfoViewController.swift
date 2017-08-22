@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChannelInfoViewController: BaseViewController, AuthManagerInjected, SubscriptionManagerInjected {
+class ChannelInfoViewController: BaseViewController, AuthManagerInjected, AuthSettingsManagerInjected, SubscriptionManagerInjected {
 
     var tableViewData: [[Any]] = [] {
         didSet {
@@ -35,7 +35,7 @@ class ChannelInfoViewController: BaseViewController, AuthManagerInjected, Subscr
                 let description = subscription.roomDescription?.characters.count ?? 0 == 0 ? localized("chat.info.item.no_description") : subscription.roomDescription
 
                 tableViewData = [[
-                    ChannelInfoBasicCellData(title: "#\(subscription.name)"),
+                    ChannelInfoBasicCellData(title: "#\(subscription.displayName())"),
                     ChannelInfoDescriptionCellData(
                         title: localized("chat.info.item.topic"),
                         description: topic
@@ -56,9 +56,9 @@ class ChannelInfoViewController: BaseViewController, AuthManagerInjected, Subscr
         super.viewDidLoad()
         title = localized("chat.info.title")
 
-        if let auth = authManager.isAuthenticated() {
-            if auth.settings?.favoriteRooms ?? false {
-                let defaultImage = UIImage(named: "Star", in: Bundle.rocketChat, compatibleWith: nil)?.imageWithTint(UIColor.RCGray()).withRenderingMode(.alwaysOriginal)
+        if let settings = authSettingsManager.settings {
+            if settings.favoriteRooms {
+                let defaultImage = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray()).withRenderingMode(.alwaysOriginal)
                 let buttonFavorite = UIBarButtonItem(image: defaultImage, style: .plain, target: self, action: #selector(buttonFavoriteDidPressed))
                 navigationItem.rightBarButtonItem = buttonFavorite
                 self.buttonFavorite = buttonFavorite

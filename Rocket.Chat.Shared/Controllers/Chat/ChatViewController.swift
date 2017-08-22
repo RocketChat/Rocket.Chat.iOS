@@ -37,6 +37,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewStatus: ChatHeaderViewStatus?
     lazy var mediaFocusViewController = URBMediaFocusViewController()
+    var documentController: UIDocumentInteractionController?
 
     var dataController = ChatDataController()
 
@@ -296,9 +297,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
             token.stop()
         }
 
-        self.activityIndicator.startAnimating()
-
-        title = subscription?.name
+        title = subscription?.displayName()
         chatTitleView?.subscription = subscription
         textView.resignFirstResponder()
 
@@ -567,7 +566,7 @@ extension ChatViewController {
             if let message = obj.message {
                 cell.message = message
             }
-            
+
             return cell
         case .bubble:
             guard let message = obj.message else { return UICollectionViewCell() }

@@ -11,6 +11,7 @@ import Foundation
 class DependencyRepository {
     static var socketManager: SocketManager = AppSocketManager()
     static var authManager: AuthManager = AppAuthManager()
+    static var authSettingsManager = AuthSettingsManager()
     static var subscriptionManager = SubscriptionManager()
     static var userManager = UserManager()
     static var messageManager = MessageManager()
@@ -18,4 +19,5 @@ class DependencyRepository {
     static var pushManager = PushManager()
     static var serverManager = ServerManager()
     static var messageTextCacheManager = MessageTextCacheManager()
+    static var downloadManager = DownloadManager()
 }

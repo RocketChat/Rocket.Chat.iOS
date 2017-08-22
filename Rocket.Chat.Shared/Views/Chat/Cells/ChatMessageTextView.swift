@@ -10,6 +10,7 @@ import UIKit
 
 protocol ChatMessageTextViewProtocol: class {
     func viewDidCollpaseChange(view: UIView)
+    func openFileFromCell(attachment: Attachment)
 }
 
 final class ChatMessageTextView: UIView {
@@ -101,6 +102,10 @@ final class ChatMessageTextView: UIView {
     func viewDidTapped(_ sender: Any) {
         viewModel?.toggleCollpase()
         delegate?.viewDidCollpaseChange(view: self)
+
+        if let attachment = viewModel?.attachment {
+            delegate?.openFileFromCell(attachment: attachment)
+        }
     }
 
     private func addGestureIfNeeded() {

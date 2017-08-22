@@ -38,7 +38,7 @@ extension AuthManagerSpec {
     func testIsAuthenticatedUserAuthenticated() {
         Realm.executeOnMainThread({ realm in
             let auth = Auth()
-            auth.serverURL = "123"
+            auth.serverURL = "ws://123.cc"
 
             realm.add(auth)
 
@@ -49,11 +49,11 @@ extension AuthManagerSpec {
     func testIsAuthenticatedReturnsLastAccessed() {
         Realm.executeOnMainThread({ realm in
             let auth1 = Auth()
-            auth1.serverURL = "one"
+            auth1.serverURL = "ws://one.cc"
             auth1.lastAccess = Date()
 
             let auth2 = Auth()
-            auth2.serverURL = "two"
+            auth2.serverURL = "ws://two.cc"
             auth2.lastAccess = Date(timeIntervalSince1970: 1)
 
             realm.add(auth1)

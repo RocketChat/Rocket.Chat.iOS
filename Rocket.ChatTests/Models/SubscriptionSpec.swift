@@ -14,6 +14,8 @@ import SwiftyJSON
 
 class SubscriptionSpec: XCTestCase {
 
+    let authSettingsManager = DependencyRepository.authSettingsManager
+
     override func setUp() {
         super.setUp()
 
@@ -83,4 +85,73 @@ class SubscriptionSpec: XCTestCase {
             XCTAssert(auth.subscriptions.first?.identifier == first?.identifier, "Auth relationship with Subscription is OK")
         })
     }
+
+    func testSubscriptionDisplayNameHonorFullnameSettings() {
+        let settings = AuthSettings()
+        settings.useUserRealName = false
+
+        authSettingsManager.internalSettings = settings
+
+        // Direct Messages
+        let directMessage = Subscription()
+        directMessage.name = "direct.message"
+        directMessage.fname = "DM"
+        directMessage.privateType = "d"
+
+        XCTAssertNotEqual(directMessage.displayName(), "DM", "Subscription.displayName() will return fname property")
+        XCTAssertEqual(directMessage.displayName(), "direct.message", "Subscription.displayName() won't return name property")
+
+        // Channels
+        let channel = Subscription()
+        channel.name = "channel"
+        channel.fname = "CHANNEL"
+        channel.privateType = "c"
+
+        XCTAssertEqual(channel.displayName(), "channel", "Subscription.displayName() will always return name for channels")
+        XCTAssertNotEqual(channel.displayName(), "CHANNEL", "Subscription.displayName() will always return name for channels")
+
+        // Groups and Private Groups
+        let group = Subscription()
+        group.name = "group"
+        group.fname = "GROUP"
+        group.privateType = "p"
+
+        XCTAssertEqual(group.displayName(), "group", "Subscription.displayName() will always return name for groups")
+        XCTAssertNotEqual(group.displayName(), "GROUP", "Subscription.displayName() will always return name for groups")
+    }
+
+    func testSubscriptionDisplayNameHonorNameSettings() {
+        let settings = AuthSettings()
+        settings.useUserRealName = true
+
+        authSettingsManager.internalSettings = settings
+
+        // Direct Messages
+        let directMessage = Subscription()
+        directMessage.name = "direct.message"
+        directMessage.fname = "DM"
+        directMessage.privateType = "d"
+
+        XCTAssertEqual(directMessage.displayName(), "DM", "Subscription.displayName() will return fname property")
+        XCTAssertNotEqual(directMessage.displayName(), "direct.message", "Subscription.displayName() won't return name property")
+
+        // Channels
+        let channel = Subscription()
+        channel.name = "channel"
+        channel.fname = "CHANNEL"
+        channel.privateType = "c"
+
+        XCTAssertEqual(channel.displayName(), "channel", "Subscription.displayName() will always return name for channels")
+        XCTAssertNotEqual(channel.displayName(), "CHANNEL", "Subscription.displayName() will always return name for channels")
+
+        // Groups and Private Groups
+        let group = Subscription()
+        group.name = "group"
+        group.fname = "GROUP"
+        group.privateType = "p"
+
+        XCTAssertEqual(group.displayName(), "group", "Subscription.displayName() will always return name for groups")
+        XCTAssertNotEqual(group.displayName(), "GROUP", "Subscription.displayName() will always return name for groups")
+    }
+
 }

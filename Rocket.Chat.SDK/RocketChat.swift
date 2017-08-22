@@ -23,7 +23,7 @@ public final class RocketChat {
         }
         Launcher().prepareToLaunch(with: nil)
         DependencyRepository.socketManager.connect(socketURL) { (_, _) in
-            DependencyRepository.authManager.updatePublicSettings(nil) { _ in
+            DependencyRepository.authSettingsManager.updatePublicSettings(nil) { _ in
                 DispatchQueue.main.async(execute: completion)
             }
         }

@@ -23,7 +23,7 @@ public struct FileUpload {
 }
 
 /// A manager that manages all user generated files and images uploads
-public class UploadManager: SocketManagerInjected, AuthManagerInjected {
+public class UploadManager: SocketManagerInjected, AuthManagerInjected, AuthSettingsManagerInjected {
 
     fileprivate func sendFileMessage(params: [Any], completion: @escaping UploadCompletionBlock) {
         let request = [
@@ -72,9 +72,10 @@ public class UploadManager: SocketManagerInjected, AuthManagerInjected {
     ///   - progress: pregress callback
     ///   - completion: completion callback
     public func upload(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
-        guard let auth = authManager.isAuthenticated() else { return }
-        guard let store = auth.settings?.uploadStorageType else { return }
+        guard let settings = authSettingsManager.settings else { return }
+        guard let store = settings.uploadStorageType else { return }
 
+        // TODO: AmazonS3 method was removed from server version 0.57
         if store == "AmazonS3" {
             uploadToAmazonS3(file: file, subscription: subscription, progress: progress, completion: completion)
         } else {
@@ -157,6 +158,7 @@ public class UploadManager: SocketManagerInjected, AuthManagerInjected {
         }
     }
 
+    // TODO: AmazonS3 method was removed from server version 0.57
     func uploadToAmazonS3(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
         let request = [
             "msg": "method",

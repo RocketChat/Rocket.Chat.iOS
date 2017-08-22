@@ -76,6 +76,10 @@ final class AvatarView: UIView, AuthManagerInjected {
         let strings = username.components(separatedBy: ".")
 
         if let first = strings.first, let last = strings.last {
+            if first.isEmpty || last.isEmpty {
+                return "?"
+            }
+
             let lastOffset = strings.count > 1 ? 1 : 2
             let indexFirst = first.index(first.startIndex, offsetBy: 1)
             let firstString = first.substring(to: indexFirst)

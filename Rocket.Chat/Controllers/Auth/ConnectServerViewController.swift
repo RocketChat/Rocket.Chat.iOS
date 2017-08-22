@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 import semver
 
-final class ConnectServerViewController: BaseViewController, SocketManagerInjected, AuthManagerInjected {
+final class ConnectServerViewController: BaseViewController, SocketManagerInjected, AuthManagerInjected, AuthSettingsManagerInjected {
 
     internal let defaultURL = "https://demo.rocket.chat"
     internal var connecting = false
@@ -126,7 +126,7 @@ final class ConnectServerViewController: BaseViewController, SocketManagerInject
             }
 
             strongSelf.socketManager.connect(socketURL) { (_, connected) in
-                strongSelf.authManager.updatePublicSettings(nil) { (settings) in
+                strongSelf.authSettingsManager.updatePublicSettings(nil) { (settings) in
                     strongSelf.serverPublicSettings = settings
 
                     if connected {

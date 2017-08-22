@@ -280,36 +280,4 @@ public class AuthManager: SocketManagerInjected, PushManagerInjected, ServerMana
         }
     }
 
-    /// Update server settings and public informations
-    ///
-    /// - Parameters:
-    ///   - auth: the auth server to be updated
-    ///   - completion: will be called after action completion
-    public func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
-        let object = [
-            "msg": "method",
-            "method": "public-settings/get"
-        ] as [String : Any]
-
-        socketManager.send(object) { (response) in
-            guard !response.isError() else {
-                completion(nil)
-                return
-            }
-
-            Realm.executeOnMainThread({ realm in
-                let settings = self.isAuthenticated()?.settings ?? AuthSettings()
-                settings.map(response.result["result"], realm: realm)
-                realm.add(settings, update: true)
-
-                if let auth = self.isAuthenticated() {
-                    auth.settings = settings
-                    realm.add(auth, update: true)
-                }
-
-                let unmanagedSettings = AuthSettings(value: settings)
-                completion(unmanagedSettings)
-            })
-        }
-    }
 }
