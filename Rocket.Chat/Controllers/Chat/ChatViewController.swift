@@ -346,18 +346,9 @@ final class ChatViewController: SLKTextViewController {
         messagesToken = messagesQuery.addNotificationBlock { [weak self] changes in
             switch changes {
             case .initial: break
-            case .update(_, _, let insertions, let modifications):
-                if insertions.count > 0 {
-                    var newMessages: [Message] = []
-
-                    for insert in insertions {
-                        if let newMessage = self?.messagesQuery[insert] {
-                            self?.messages.append(newMessage)
-                            newMessages.append(newMessage)
-                        }
-                    }
-
-                    self?.appendMessages(messages: newMessages, updateScrollPosition: true, completion: nil)
+            case .update(_, _, _, let modifications):
+                if modifications.count == 0 {
+                    return
                 }
 
                 let tempMessages = self?.messages.map({ Message(value: $0) }) ?? []
@@ -401,11 +392,11 @@ final class ChatViewController: SLKTextViewController {
 
         isRequestingHistory = true
 
-        func loadHistoryFromRemote() {
+        func loadHistoryFromRemote(nextPageDate: Date? = nil) {
             let tempSubscription = Subscription(value: self.subscription)
 
             DispatchQueue.global(qos: .background).async {
-                MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] in
+                MessageManager.getHistory(tempSubscription, lastMessageDate: nextPageDate ?? date) { [weak self] in
                     DispatchQueue.main.async {
                         self?.activityIndicator.stopAnimating()
 
@@ -433,7 +424,11 @@ final class ChatViewController: SLKTextViewController {
                 }
             })
         } else {
-            loadHistoryFromRemote()
+            if loadRemoteHistory {
+                loadHistoryFromRemote()
+            } else {
+                isRequestingHistory = false
+            }
         }
     }
 
@@ -560,15 +555,9 @@ final class ChatViewController: SLKTextViewController {
 extension ChatViewController {
 
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == 4 {
-            if let message = dataController.itemAt(indexPath)?.message {
+        if indexPath.row < 4 {
+            if let message = dataController.oldestMessage() {
                 loadMoreMessagesFrom(date: message.createdAt)
-            } else {
-                let nextIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-
-                if let message = dataController.itemAt(nextIndexPath)?.message {
-                    loadMoreMessagesFrom(date: message.createdAt)
-                }
             }
         }
     }
@@ -647,6 +636,16 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 // MARK: UIScrollViewDelegate
 
 extension ChatViewController {
+
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
+
+        if scrollView.contentOffset.y < -10 {
+            if let message = dataController.oldestMessage() {
+                loadMoreMessagesFrom(date: message.createdAt)
+            }
+        }
+    }
 
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard let view = buttonScrollToBottom.superview else { return }

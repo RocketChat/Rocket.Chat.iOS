@@ -129,6 +129,8 @@ final class ChatDataController {
 
     func update(_ message: Message) -> Int {
         for index in data.indices {
+            guard data.count > index else { continue }
+
             var obj = data[index]
 
             if obj.message?.identifier == message.identifier {
@@ -139,4 +141,15 @@ final class ChatDataController {
 
         return -1
     }
+
+    func oldestMessage() -> Message? {
+        for obj in data {
+            if obj.type == .message {
+                return obj.message
+            }
+        }
+
+        return nil
+    }
+
 }
