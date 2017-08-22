@@ -302,8 +302,8 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         textView.resignFirstResponder()
 
         collectionView?.performBatchUpdates({
-            self.dataController.clear()
-            self.collectionView?.reloadData()
+            let indexPaths = self.dataController.clear()
+            self.collectionView?.deleteItems(at: indexPaths)
         }, completion: { _ in
             CATransaction.commit()
             self.activityIndicator.stopAnimating()
