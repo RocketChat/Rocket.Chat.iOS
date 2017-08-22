@@ -270,7 +270,9 @@ final class ChatViewController: SLKTextViewController {
             rightButton.isEnabled = true
 
             messages.insert(message, at: 0)
-            appendMessages(messages: [message], completion: nil)
+            appendMessages(messages: [message], completion: {
+                self.scrollToBottom()
+            })
 
             SubscriptionManager.sendTextMessage(message) { _ in
                 Realm.executeOnMainThread({ (realm) in
@@ -358,25 +360,33 @@ final class ChatViewController: SLKTextViewController {
                     self?.appendMessages(messages: newMessages, updateScrollPosition: true, completion: nil)
                 }
 
-                self?.collectionView?.performBatchUpdates({
+                let tempMessages = self?.messages.map({ Message(value: $0) }) ?? []
+                DispatchQueue.global(qos: .background).async {
                     var indexPathModifications: [Int] = []
 
                     for modified in modifications {
-                        if self?.messages.count ?? 0 < modified + 1 {
+                        if tempMessages.count < modified + 1 {
                             continue
                         }
 
-                        if let message = self?.messages[modified] {
-                            if let index = self?.dataController.update(message) {
-                                if index >= 0 && !indexPathModifications.contains(index) {
-                                    indexPathModifications.append(index)
-                                }
+                        let message = tempMessages[modified]
+                        if let index = self?.dataController.update(message) {
+                            if index >= 0 && !indexPathModifications.contains(index) {
+                                indexPathModifications.append(index)
                             }
                         }
                     }
 
-                    self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                }, completion: nil)
+                    if indexPathModifications.count > 0 {
+                        DispatchQueue.main.async {
+                            UIView.performWithoutAnimation {
+                                self?.collectionView?.performBatchUpdates({
+                                    self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
+                                }, completion: nil)
+                            }
+                        }
+                    }
+                }
 
                 break
             case .error: break
@@ -502,7 +512,7 @@ final class ChatViewController: SLKTextViewController {
                             let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
                             collectionView.contentOffset = offset
                         }
-                        
+
                         completion?()
                     })
                 }

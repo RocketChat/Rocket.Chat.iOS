@@ -132,7 +132,7 @@ final class ChatDataController {
             var obj = data[index]
 
             if obj.message?.identifier == message.identifier {
-                obj.message = message
+                data[index].message = message
                 return obj.indexPath.row
             }
         }
