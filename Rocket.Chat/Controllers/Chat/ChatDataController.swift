@@ -96,7 +96,7 @@ final class ChatDataController {
                     }
 
                     if insert {
-                        insertDaySeparator(from: newObj)
+                        insertDaySeparator(from: lastObj)
                     }
                 }
             }
@@ -116,7 +116,6 @@ final class ChatDataController {
             normalizeds.append(customItem)
 
             for identifier in identifiers {
-                // swiftlint: disable for_where
                 if identifier == item.identifier {
                     indexPaths.append(indexPath)
                     break
@@ -130,14 +129,27 @@ final class ChatDataController {
 
     func update(_ message: Message) -> Int {
         for index in data.indices {
+            guard data.count > index else { continue }
+
             var obj = data[index]
 
             if obj.message?.identifier == message.identifier {
-                obj.message = message
+                data[index].message = message
                 return obj.indexPath.row
             }
         }
 
         return -1
     }
+
+    func oldestMessage() -> Message? {
+        for obj in data {
+            if obj.type == .message {
+                return obj.message
+            }
+        }
+
+        return nil
+    }
+
 }
