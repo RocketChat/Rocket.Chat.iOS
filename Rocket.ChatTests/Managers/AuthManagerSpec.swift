@@ -37,7 +37,7 @@ extension AuthManagerSpec {
     func testIsAuthenticatedUserAuthenticated() {
         Realm.executeOnMainThread({ realm in
             let auth = Auth()
-            auth.serverURL = "123"
+            auth.serverURL = "http://foo.com"
 
             realm.add(auth)
 
