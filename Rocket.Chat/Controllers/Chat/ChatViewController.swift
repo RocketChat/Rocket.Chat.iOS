@@ -210,9 +210,11 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func hideButtonScrollToBottom(animated: Bool) {
         buttonScrollToBottomMarginConstraint?.constant = 50
+
         let action = {
-            self.view.layoutIfNeeded()
+            self.buttonScrollToBottom.layoutIfNeeded()
         }
+
         if animated {
             UIView.animate(withDuration: 0.5, animations: action)
         } else {
@@ -239,7 +241,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func textViewDidBeginEditing(_ textView: UITextView) {
-        scrollToBottom()
+        scrollToBottom(true)
     }
 
     // MARK: Message
