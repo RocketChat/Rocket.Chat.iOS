@@ -10,7 +10,7 @@ import UIKit
 
 class ChatDirectMessageHeaderCell: UICollectionViewCell {
 
-    static let minimumHeight = CGFloat(200)
+    static let minimumHeight = CGFloat(300)
     static let identifier = "ChatDirectMessageHeaderCell"
 
     var subscription: Subscription? {
@@ -18,6 +18,9 @@ class ChatDirectMessageHeaderCell: UICollectionViewCell {
             guard let user = subscription?.directMessageUser else { return }
             labelUser.text = user.displayName()
             avatarView.user = user
+
+            let startText = localized("chat.dm.start_conversation")
+            labelStartConversation.text = String(format: startText, user.displayName())
         }
     }
 
