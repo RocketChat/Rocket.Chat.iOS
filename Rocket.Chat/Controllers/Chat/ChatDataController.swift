@@ -11,8 +11,8 @@ import Foundation
 enum ChatDataType {
     case daySeparator
     case message
-    case sendingMessage
     case loader
+    case header
 }
 
 struct ChatData {
