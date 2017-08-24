@@ -55,8 +55,7 @@ public class SupportViewController: UITableViewController, LivechatManagerInject
     }
 
     // MARK: - Actions
-
-    @IBAction func didTouchStartButton(_ sender: UIButton) {
+    @IBAction func didTouchSendButton(_ sender: UIBarButtonItem) {
         prepareChatViewController()
     }
 

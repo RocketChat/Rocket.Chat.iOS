@@ -39,7 +39,7 @@ class OfflineFormViewController: UITableViewController, LivechatManagerInjected 
         self.dismiss(animated: true, completion: nil)
     }
 
-    @IBAction func didTouchSendButton(_ sender: UIButton) {
+    @IBAction func didTouchSendButton(_ sender: UIBarButtonItem) {
         guard let email = emailField.text else {
             return
         }
