@@ -120,36 +120,29 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="uv1-HL-hEh">
-                                        <rect key="frame" x="0.0" y="243.5" width="375" height="44"/>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="Message" id="ziW-q7-lxK" userLabel="Message">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" rowHeight="144" id="WER-54-A0u">
+                                        <rect key="frame" x="0.0" y="299.5" width="375" height="144"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="uv1-HL-hEh" id="hU8-zz-zva">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WER-54-A0u" id="2hj-v4-lje">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="143.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Initial Message" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zht-OR-0Vn">
-                                                    <rect key="frame" x="16" y="11" width="114" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your Hello" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4P7-ff-ftr">
-                                                    <rect key="frame" x="146" y="0.0" width="205" height="44"/>
-                                                    <nil key="textColor"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YdV-Ez-nEY">
+                                                    <rect key="frame" x="8" y="0.0" width="359" height="144"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                    <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                                                    <connections>
-                                                        <outlet property="delegate" destination="mQg-Lp-WMw" id="a8T-RA-Jcz"/>
-                                                    </connections>
-                                                </textField>
+                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                </textView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Zht-OR-0Vn" firstAttribute="leading" secondItem="hU8-zz-zva" secondAttribute="leadingMargin" constant="8" id="3rv-db-vDF"/>
-                                                <constraint firstItem="4P7-ff-ftr" firstAttribute="centerY" secondItem="hU8-zz-zva" secondAttribute="centerY" id="ISE-il-oed"/>
-                                                <constraint firstItem="4P7-ff-ftr" firstAttribute="leading" secondItem="Zht-OR-0Vn" secondAttribute="trailing" constant="16" id="P5W-ba-XZ6"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="4P7-ff-ftr" secondAttribute="trailing" constant="16" id="XCA-4l-mBe"/>
-                                                <constraint firstItem="Zht-OR-0Vn" firstAttribute="centerY" secondItem="hU8-zz-zva" secondAttribute="centerY" id="iIc-Ce-XNg"/>
-                                                <constraint firstItem="4P7-ff-ftr" firstAttribute="height" secondItem="hU8-zz-zva" secondAttribute="height" id="m3T-HS-rdN"/>
+                                                <constraint firstItem="YdV-Ez-nEY" firstAttribute="centerY" secondItem="2hj-v4-lje" secondAttribute="centerY" id="8DQ-7P-FFH"/>
+                                                <constraint firstItem="YdV-Ez-nEY" firstAttribute="centerX" secondItem="2hj-v4-lje" secondAttribute="centerX" id="kQR-m1-4wa"/>
+                                                <constraint firstItem="YdV-Ez-nEY" firstAttribute="height" secondItem="2hj-v4-lje" secondAttribute="height" id="o3d-y6-DXi"/>
+                                                <constraint firstItem="YdV-Ez-nEY" firstAttribute="width" secondItem="2hj-v4-lje" secondAttribute="width" constant="-16" id="wKP-ZC-q3K"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -178,7 +171,7 @@
                     <connections>
                         <outlet property="departmentLabel" destination="ebS-kD-a2S" id="dPC-32-0Ni"/>
                         <outlet property="emailField" destination="kIT-4A-Skb" id="9Rw-2N-k6B"/>
-                        <outlet property="initialMessageField" destination="4P7-ff-ftr" id="64c-C1-Fh6"/>
+                        <outlet property="initialMessageView" destination="YdV-Ez-nEY" id="Rd4-UW-gax"/>
                         <outlet property="nameField" destination="Yy3-w7-7Gm" id="giS-Xl-c4R"/>
                     </connections>
                 </tableViewController>

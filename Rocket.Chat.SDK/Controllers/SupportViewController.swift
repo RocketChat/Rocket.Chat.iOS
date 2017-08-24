@@ -14,7 +14,7 @@ public class SupportViewController: UITableViewController, LivechatManagerInject
     @IBOutlet weak var departmentLabel: UILabel!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var initialMessageField: UITextField!
+    @IBOutlet weak var initialMessageView: UITextView!
 
     var allowChangeDepartment = true {
         didSet {
@@ -90,7 +90,7 @@ public class SupportViewController: UITableViewController, LivechatManagerInject
             present(alert, animated: true, completion: nil)
             return
         }
-        guard let message = initialMessageField.text else {
+        guard let message = initialMessageView.text else {
             let alert = UIAlertController(title: "Initial message is required", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Confirm", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
