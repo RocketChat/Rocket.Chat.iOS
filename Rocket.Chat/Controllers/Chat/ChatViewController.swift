@@ -40,6 +40,9 @@ final class ChatViewController: SLKTextViewController {
 
     var closeSidebarAfterSubscriptionUpdate = false
 
+    var loadedAllMessages = false
+    var firstMessageDate: Date?
+
     var isRequestingHistory = false
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
