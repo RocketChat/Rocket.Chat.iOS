@@ -13,7 +13,6 @@ class OfflineFormViewController: UITableViewController, LivechatManagerInjected 
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var messageTextView: UITextView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet var sectionHeader: UIView!
     @IBOutlet weak var offlineMessageLabel: UILabel!
@@ -50,9 +49,9 @@ class OfflineFormViewController: UITableViewController, LivechatManagerInjected 
         guard let message = messageTextView.text else {
             return
         }
-        activityIndicator.startAnimating()
+        LoaderView.showLoader(for: self.view, preset: .white)
         livechatManager.sendOfflineMessage(email: email, name: name, message: message) {
-            self.activityIndicator.stopAnimating()
+            LoaderView.hideLoader(for: self.view)
             let alert = UIAlertController(title: self.livechatManager.title, message: self.livechatManager.offlineSuccessMessage, preferredStyle: .actionSheet)
             alert.addAction(UIAlertAction(title: "Ok", style: .default) { _ in self.dismissSelf() })
             self.present(alert, animated: true, completion: nil)

@@ -15,7 +15,6 @@ public class SupportViewController: UITableViewController, LivechatManagerInject
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
     @IBOutlet weak var initialMessageField: UITextField!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     var allowChangeDepartment = true {
         didSet {
@@ -98,9 +97,9 @@ public class SupportViewController: UITableViewController, LivechatManagerInject
             present(alert, animated: true, completion: nil)
             return
         }
-        activityIndicator.startAnimating()
+        LoaderView.showLoader(for: self.view, preset: .white)
         livechatManager.registerGuestAndLogin(withEmail: email, name: name, toDepartment: department, message: message) {
-            self.activityIndicator.stopAnimating()
+            LoaderView.hideLoader(for: self.view)
             guard let viewController = self.livechatManager.getLiveChatViewController() else { return }
             self.navigationController?.pushViewController(viewController, animated: true)
         }
