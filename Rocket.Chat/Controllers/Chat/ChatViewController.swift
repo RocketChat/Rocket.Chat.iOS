@@ -197,6 +197,11 @@ final class ChatViewController: SLKTextViewController {
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
 
+        collectionView?.register(UINib(
+            nibName: "ChatDirectMessageHeaderCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatDirectMessageHeaderCell.identifier)
+
         autoCompletionView.register(UINib(
             nibName: "AutocompleteCell",
             bundle: Bundle.main
@@ -554,6 +559,10 @@ extension ChatViewController {
             return cellForDaySeparator(obj, at: indexPath)
         }
 
+        if obj.type == .header {
+            return cellForHeader(obj, at: indexPath)
+        }
+
         return UICollectionViewCell()
     }
 
@@ -587,6 +596,17 @@ extension ChatViewController {
         return cell
     }
 
+    func cellForHeader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatDirectMessageHeaderCell.identifier,
+            for: indexPath
+        ) as? ChatDirectMessageHeaderCell else {
+            return UICollectionViewCell()
+        }
+        cell.subscription = subscription
+        return cell
+    }
+
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
@@ -600,9 +620,19 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let fullWidth = collectionView.bounds.size.width
 
-        if let message = dataController.itemAt(indexPath)?.message {
-            let height = ChatMessageCell.cellMediaHeightFor(message: message)
-            return CGSize(width: fullWidth, height: height)
+        if let obj = dataController.itemAt(indexPath) {
+            if obj.type == .header {
+                return CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
+            }
+
+            if obj.type == .daySeparator {
+                return CGSize(width: fullWidth, height: ChatMessageDaySeparator.minimumHeight)
+            }
+
+            if let message = obj.message {
+                let height = ChatMessageCell.cellMediaHeightFor(message: message)
+                return CGSize(width: fullWidth, height: height)
+            }
         }
 
         return CGSize(width: fullWidth, height: 40)

@@ -48,6 +48,7 @@
 // Chat
 "chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
 "chat.channel_preview_view.join" = "Kanal beitreten";
+"chat.dm.start_conversation" = "Dies ist der Anfang deines Gesprächs mit %@";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
