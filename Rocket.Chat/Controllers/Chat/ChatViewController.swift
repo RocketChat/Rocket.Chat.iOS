@@ -419,7 +419,13 @@ final class ChatViewController: SLKTextViewController {
 
                     if messages.count == 0 {
                         self?.dataController.loadedAllMessages = true
-                        self?.dataController.insert([])
+
+                        self?.collectionView?.performBatchUpdates({
+                            if let (indexPaths, removedIndexPaths) = self?.dataController.insert([]) {
+                                self?.collectionView?.insertItems(at: indexPaths)
+                                self?.collectionView?.deleteItems(at: removedIndexPaths)
+                            }
+                        }, completion: nil)
                     } else {
                         self?.dataController.loadedAllMessages = false
                     }
@@ -496,8 +502,9 @@ final class ChatViewController: SLKTextViewController {
 
             DispatchQueue.main.async {
                 collectionView.performBatchUpdates({
-                    let indexPaths = self.dataController.insert(objs)
+                    let (indexPaths, removedIndexPaths) = self.dataController.insert(objs)
                     collectionView.insertItems(at: indexPaths)
+                    collectionView.deleteItems(at: removedIndexPaths)
                 }, completion: { _ in
                     completion?()
                 })
@@ -688,6 +695,7 @@ extension ChatViewController {
             buttonScrollToBottomMarginConstraint = buttonScrollToBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
             buttonScrollToBottomMarginConstraint?.isActive = true
         }
+
         if targetContentOffset.pointee.y < scrollView.contentSize.height - scrollView.frame.height {
             buttonScrollToBottomMarginConstraint?.constant = -64
             UIView.animate(withDuration: 0.5) {

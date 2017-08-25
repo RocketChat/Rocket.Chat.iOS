@@ -63,8 +63,9 @@ final class ChatDataController {
 
     // swiftlint:disable function_body_length cyclomatic_complexity
     @discardableResult
-    func insert(_ items: [ChatData]) -> [IndexPath] {
+    func insert(_ items: [ChatData]) -> ([IndexPath], [IndexPath]) {
         var indexPaths: [IndexPath] = []
+        var removedIndexPaths: [IndexPath] = []
         var newItems: [ChatData] = []
         var lastObj = data.last
         var identifiers: [String] = items.map { $0.identifier }
@@ -90,12 +91,17 @@ final class ChatDataController {
 
         // Has loader?
         let loaders = data.filter({ $0.type == .loader })
-        if loaders.count > 0 && loadedAllMessages {
-
-        } else if loaders.count == 0 && !loadedAllMessages {
-            if let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 10)) {
-                newItems.append(obj)
-                identifiers.append(obj.identifier)
+        if loadedAllMessages {
+            for (idx, obj) in loaders.enumerated() {
+                data.remove(at: idx)
+                removedIndexPaths.append(obj.indexPath)
+            }
+        } else {
+            if loaders.count == 0 {
+                if let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 0)) {
+                    newItems.append(obj)
+                    identifiers.append(obj.identifier)
+                }
             }
         }
 
@@ -146,7 +152,7 @@ final class ChatDataController {
         }
 
         data = normalizeds
-        return indexPaths
+        return (indexPaths, removedIndexPaths)
     }
 
     func update(_ message: Message) -> Int {
