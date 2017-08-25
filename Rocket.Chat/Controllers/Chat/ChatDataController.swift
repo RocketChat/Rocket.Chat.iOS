@@ -34,6 +34,7 @@ struct ChatData {
 final class ChatDataController {
 
     var data: [ChatData] = []
+    var loadedAllMessages = false
 
     func clear() -> [IndexPath] {
         var indexPaths: [IndexPath] = []
@@ -61,6 +62,7 @@ final class ChatDataController {
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
+    @discardableResult
     func insert(_ items: [ChatData]) -> [IndexPath] {
         var indexPaths: [IndexPath] = []
         var newItems: [ChatData] = []
@@ -77,14 +79,20 @@ final class ChatDataController {
             newItems.append(separator)
         }
 
-        if data.filter({ $0.type == .header }).count == 0 {
-            if let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0)) {
-                newItems.append(obj)
-                identifiers.append(obj.identifier)
+        if loadedAllMessages {
+            if data.filter({ $0.type == .header }).count == 0 {
+                if let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0)) {
+                    newItems.append(obj)
+                    identifiers.append(obj.identifier)
+                }
             }
         }
 
-        if data.filter({ $0.type == .loader }).count == 0 {
+        // Has loader?
+        let loaders = data.filter({ $0.type == .loader })
+        if loaders.count > 0 && loadedAllMessages {
+
+        } else if loaders.count == 0 && !loadedAllMessages {
             if let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 10)) {
                 newItems.append(obj)
                 identifiers.append(obj.identifier)
