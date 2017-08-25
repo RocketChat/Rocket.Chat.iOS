@@ -19,7 +19,7 @@ extension MessageManager {
 
     static var blockedUsersList = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 
-    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping VoidCompletion) {
+    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletionObjectsList<Message>) {
         var lastDate: Any!
 
         if let lastMessageDate = lastMessageDate {
@@ -36,11 +36,12 @@ extension MessageManager {
             ]]
         ] as [String : Any]
 
+        let validMessages = List<Message>()
+
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
             let list = response.result["result"]["messages"].array
 
-            let validMessages = List<Message>()
             let subscriptionIdentifier = subscription.identifier
 
             Realm.execute({ (realm) in
@@ -57,7 +58,9 @@ extension MessageManager {
                         validMessages.append(message)
                     }
                 }
-            }, completion: completion)
+            }, completion: {
+                completion(Array(validMessages))
+            })
         }
     }
 

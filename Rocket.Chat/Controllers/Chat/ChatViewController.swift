@@ -40,10 +40,8 @@ final class ChatViewController: SLKTextViewController {
 
     var closeSidebarAfterSubscriptionUpdate = false
 
-    var loadedAllMessages = false
-    var firstMessageDate: Date?
-
     var isRequestingHistory = false
+
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messagesQuery: Results<Message>!
@@ -344,6 +342,7 @@ final class ChatViewController: SLKTextViewController {
 
         activityIndicator.startAnimating()
 
+        dataController.loadedAllMessages = false
         isRequestingHistory = false
         loadMoreMessagesFrom(date: nil)
         updateMessagesQueryNotificationBlock()
@@ -413,10 +412,17 @@ final class ChatViewController: SLKTextViewController {
         func loadHistoryFromRemote() {
             let tempSubscription = Subscription(value: self.subscription)
 
-            MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] in
+            MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
                 DispatchQueue.main.async {
                     self?.activityIndicator.stopAnimating()
                     self?.isRequestingHistory = false
+
+                    if messages.count == 0 {
+                        self?.dataController.loadedAllMessages = true
+                        self?.dataController.insert([])
+                    } else {
+                        self?.dataController.loadedAllMessages = false
+                    }
                 }
             }
         }
@@ -641,6 +647,10 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
         if let obj = dataController.itemAt(indexPath) {
             if obj.type == .header {
                 return CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
+            }
+
+            if obj.type == .loader {
+                return CGSize(width: fullWidth, height: ChatLoaderCell.minimumHeight)
             }
 
             if obj.type == .daySeparator {
