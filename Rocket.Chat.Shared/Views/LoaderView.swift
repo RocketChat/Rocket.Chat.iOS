@@ -10,7 +10,52 @@ import UIKit
 
 class LoaderView: UIView {
 
+    enum Preset {
+        case darkBlue
+        case white
+    }
+
+    class func showLoader(for view: UIView, preset: Preset) {
+        let loader = LoaderView(frame: CGRect(x: view.frame.width / 2 - 30, y: view.frame.height / 2 - 30, width: 60, height: 60))
+        loader.preset = preset
+        loader.alpha = 0
+        view.addSubview(loader)
+        loader.show(animated: true)
+    }
+
+    class func hideLoader(for view: UIView) {
+        if let loader = LoaderView.loader(for: view) {
+            loader.removeFromSuperviewOnHide = true
+            loader.hide(animated: true)
+        }
+    }
+
+    class func loader(for view: UIView) -> LoaderView? {
+        return view.subviews.reversed().first { $0 is LoaderView } as? LoaderView
+    }
+
+    var preset: Preset = .darkBlue {
+        didSet {
+            switch preset {
+            case .darkBlue:
+                fillColor = UIColor.RCDarkBlue().cgColor
+            case .white:
+                layer.cornerRadius = 6
+                backgroundColor = UIColor.lightGray
+                fillColor = UIColor.white.cgColor
+            }
+        }
+    }
+    var fillColor: CGColor = UIColor.RCDarkBlue().cgColor
+    var removeFromSuperviewOnHide = true
     var isAnimating = false
+    override var isHidden: Bool {
+        didSet {
+            if isHidden && removeFromSuperviewOnHide {
+                removeFromSuperview()
+            }
+        }
+    }
 
     public final func startAnimating() {
         isHidden = false
@@ -27,11 +72,28 @@ class LoaderView: UIView {
         layer.sublayers?.removeAll()
     }
 
+    func show(animated: Bool) {
+        UIView.animate(withDuration: 0.2) {
+            self.alpha = 0.56
+            self.startAnimating()
+        }
+    }
+
+    func hide(animated: Bool) {
+        if animated {
+            UIView.animate(withDuration: 0.2) {
+                self.alpha = 0
+                self.isHidden = true
+            }
+        } else {
+            self.isHidden = true
+        }
+    }
+
     func setupLayersAndAnimation(in layer: CALayer, size: CGSize) {
         let circleSpacing: CGFloat = 4
         let circleSize: CGFloat = 10
         let circleRadius = circleSize / 2
-        let fillColor = UIColor.RCDarkBlue().cgColor
         let x: CGFloat = (layer.bounds.size.width - size.width) / 2
         let y: CGFloat = (layer.bounds.size.height - circleSize) / 2
         let duration: CFTimeInterval = 1.4

@@ -14,8 +14,7 @@ public class SupportViewController: UITableViewController, LivechatManagerInject
     @IBOutlet weak var departmentLabel: UILabel!
     @IBOutlet weak var emailField: UITextField!
     @IBOutlet weak var nameField: UITextField!
-    @IBOutlet weak var initialMessageField: UITextField!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var initialMessageView: UITextView!
 
     var allowChangeDepartment = true {
         didSet {
@@ -56,8 +55,7 @@ public class SupportViewController: UITableViewController, LivechatManagerInject
     }
 
     // MARK: - Actions
-
-    @IBAction func didTouchStartButton(_ sender: UIButton) {
+    @IBAction func didTouchSendButton(_ sender: UIBarButtonItem) {
         prepareChatViewController()
     }
 
@@ -92,15 +90,15 @@ public class SupportViewController: UITableViewController, LivechatManagerInject
             present(alert, animated: true, completion: nil)
             return
         }
-        guard let message = initialMessageField.text else {
+        guard let message = initialMessageView.text else {
             let alert = UIAlertController(title: "Initial message is required", message: nil, preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Confirm", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
             return
         }
-        activityIndicator.startAnimating()
+        LoaderView.showLoader(for: self.view, preset: .white)
         livechatManager.registerGuestAndLogin(withEmail: email, name: name, toDepartment: department, message: message) {
-            self.activityIndicator.stopAnimating()
+            LoaderView.hideLoader(for: self.view)
             guard let viewController = self.livechatManager.getLiveChatViewController() else { return }
             self.navigationController?.pushViewController(viewController, animated: true)
         }
