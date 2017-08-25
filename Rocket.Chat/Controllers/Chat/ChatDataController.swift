@@ -84,6 +84,13 @@ final class ChatDataController {
             }
         }
 
+        if data.filter({ $0.type == .loader }).count == 0 {
+            if let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 10)) {
+                newItems.append(obj)
+                identifiers.append(obj.identifier)
+            }
+        }
+
         for newObj in items {
             if let lastObj = lastObj {
                 if lastObj.type == .message && (

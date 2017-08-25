@@ -188,6 +188,11 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func registerCells() {
         collectionView?.register(UINib(
+            nibName: "ChatLoaderCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatLoaderCell.identifier)
+
+        collectionView?.register(UINib(
             nibName: "ChatMessageCell",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
@@ -559,6 +564,10 @@ extension ChatViewController {
             return cellForDaySeparator(obj, at: indexPath)
         }
 
+        if obj.type == .loader {
+            return cellForLoader(obj, at: indexPath)
+        }
+
         if obj.type == .header {
             return cellForHeader(obj, at: indexPath)
         }
@@ -604,6 +613,17 @@ extension ChatViewController {
             return UICollectionViewCell()
         }
         cell.subscription = subscription
+        return cell
+    }
+
+    func cellForLoader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatLoaderCell.identifier,
+            for: indexPath
+        ) as? ChatLoaderCell else {
+            return UICollectionViewCell()
+        }
+
         return cell
     }
 
