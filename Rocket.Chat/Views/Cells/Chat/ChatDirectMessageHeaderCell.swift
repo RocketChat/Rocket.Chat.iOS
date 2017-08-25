@@ -44,4 +44,12 @@ class ChatDirectMessageHeaderCell: UICollectionViewCell {
     @IBOutlet weak var labelUser: UILabel!
     @IBOutlet weak var labelStartConversation: UILabel!
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        avatarView.user = nil
+        labelUser.text = ""
+        labelStartConversation.text = ""
+    }
+
 }
