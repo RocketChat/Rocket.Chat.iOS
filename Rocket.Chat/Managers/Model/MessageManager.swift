@@ -10,7 +10,8 @@ import Foundation
 import RealmSwift
 
 struct MessageManager {
-    static let historySize = 30
+    static let initialHistorySize = 30
+    static let laterHistorySize = 50
 }
 
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
@@ -21,17 +22,20 @@ extension MessageManager {
 
     static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletionObjectsList<Message>) {
         var lastDate: Any!
+        var size: Int
 
         if let lastMessageDate = lastMessageDate {
             lastDate = ["$date": lastMessageDate.timeIntervalSince1970 * 1000]
+            size = laterHistorySize
         } else {
             lastDate = NSNull()
+            size = initialHistorySize
         }
 
         let request = [
             "msg": "method",
             "method": "loadHistory",
-            "params": ["\(subscription.rid)", lastDate, historySize, [
+            "params": ["\(subscription.rid)", lastDate, size, [
                 "$date": Date().timeIntervalSince1970 * 1000
             ]]
         ] as [String : Any]
