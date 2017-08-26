@@ -354,8 +354,11 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let group = groupInfomation?[section] else { return nil }
-        guard let view = SubscriptionSectionView.instantiateFromNib() else {
+        guard
+            groupInfomation?.count ?? 0 > section,
+            let group = groupInfomation?[section],
+            let view = SubscriptionSectionView.instantiateFromNib()
+        else {
             return nil
         }
 

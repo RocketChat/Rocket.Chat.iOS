@@ -114,9 +114,24 @@ extension Subscription {
         }
     }
 
-    func fetchMessages() -> Results<Message> {
+    func fetchMessages(_ limit: Int = 20, lastMessageDate: Date? = nil) -> [Message] {
+        var limitedMessages: [Message] = []
+        var messages = fetchMessagesQueryResults()
+
+        if let lastMessageDate = lastMessageDate {
+            messages = messages.filter("createdAt < %@", lastMessageDate)
+        }
+
+        for i in 0..<min(limit, messages.count) {
+            limitedMessages.append(messages[i])
+        }
+
+        return limitedMessages
+    }
+
+    func fetchMessagesQueryResults() -> Results<Message> {
         let filter = NSPredicate(format: "userBlocked == false")
-        return self.messages.filter(filter).sorted(byKeyPath: "createdAt", ascending: true)
+        return self.messages.filter(filter).sorted(byKeyPath: "createdAt", ascending: false)
     }
 
     func updateFavorite(_ favorite: Bool) {

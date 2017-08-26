@@ -66,7 +66,7 @@ class AuthSettingsManagerSpec: XCTestCase {
             settings.cdnPrefixURL = "foo.bar.baz"
 
             let auth = Auth()
-            auth.serverURL = "ws://one.cc"
+            auth.serverURL = "https://foo.one"
             auth.lastAccess = Date()
             auth.settings = settings
 
@@ -83,7 +83,7 @@ class AuthSettingsManagerSpec: XCTestCase {
             settings.cdnPrefixURL = "foo.bar.baz"
 
             let auth = Auth()
-            auth.serverURL = "ws://two.cc"
+            auth.serverURL = "https://foo.two"
             auth.lastAccess = Date()
             auth.settings = settings
 

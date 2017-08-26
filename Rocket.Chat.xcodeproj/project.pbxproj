@@ -250,6 +250,8 @@
 		A09910861EC75AE600A9FEE8 /* MessageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09910831EC75AE600A9FEE8 /* MessageExtensions.swift */; };
 		A099108F1EC75EAA00A9FEE8 /* CommonCrypto.h in Headers */ = {isa = PBXBuildFile; fileRef = A099108A1EC75EAA00A9FEE8 /* CommonCrypto.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		A09BBEA21ECF146E00FB846D /* Injected.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09BBEA11ECF146E00FB846D /* Injected.swift */; };
+		A09D6D1D1F51C58700D5D0BF /* ChatCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09D6D1C1F51C58700D5D0BF /* ChatCollectionViewFlowLayout.swift */; };
+		A09D6D1E1F51C58700D5D0BF /* ChatCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09D6D1C1F51C58700D5D0BF /* ChatCollectionViewFlowLayout.swift */; };
 		A09D74AF1F1B337E00A8AF0D /* OfflineFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A09D74AE1F1B337E00A8AF0D /* OfflineFormViewController.swift */; };
 		A0A812251ECDC657000567D7 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A812241ECDC657000567D7 /* UIImageExtension.swift */; };
 		A0A812261ECDC657000567D7 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0A812241ECDC657000567D7 /* UIImageExtension.swift */; };
@@ -538,6 +540,7 @@
 		A099108B1EC75EAA00A9FEE8 /* CommonCrypto.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CommonCrypto.xcconfig; sourceTree = "<group>"; };
 		A099108C1EC75EAA00A9FEE8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A09BBEA11ECF146E00FB846D /* Injected.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Injected.swift; sourceTree = "<group>"; };
+		A09D6D1C1F51C58700D5D0BF /* ChatCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		A09D74AE1F1B337E00A8AF0D /* OfflineFormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfflineFormViewController.swift; sourceTree = "<group>"; };
 		A0A812241ECDC657000567D7 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		A0A812271ECDC684000567D7 /* UIColor+RCColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+RCColors.swift"; sourceTree = "<group>"; };
@@ -1008,6 +1011,7 @@
 		A07EB3001F4AB042004AEBFC /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				A09D6D1C1F51C58700D5D0BF /* ChatCollectionViewFlowLayout.swift */,
 				A07EB3011F4AB07C004AEBFC /* UploadHelper.swift */,
 			);
 			path = Helpers;
@@ -2114,6 +2118,7 @@
 				A07F17471ECDC13C00A1F199 /* ChatControllerAutocomplete.swift in Sources */,
 				A0E0E8221EC749D6001B93B1 /* MessageURL.swift in Sources */,
 				A0559DFC1ECC2CCD00E83220 /* MessageURLModelMapping.swift in Sources */,
+				A09D6D1D1F51C58700D5D0BF /* ChatCollectionViewFlowLayout.swift in Sources */,
 				A0A8123D1ECDC814000567D7 /* NSAttributedStringExtensions.swift in Sources */,
 				925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
@@ -2306,6 +2311,7 @@
 				A0559E261ECC430900E83220 /* Email.swift in Sources */,
 				A09D74AF1F1B337E00A8AF0D /* OfflineFormViewController.swift in Sources */,
 				A07F17931ECDC18700A1F199 /* ChatMessageImageView.swift in Sources */,
+				A09D6D1E1F51C58700D5D0BF /* ChatCollectionViewFlowLayout.swift in Sources */,
 				A0452DCB1EE7C4CD003FBC9B /* Bundle+RocketChat.swift in Sources */,
 				A07F17A31ECDC18700A1F199 /* ChatHeaderViewOffline.swift in Sources */,
 				A07F17B01ECDC21100A1F199 /* ChatMessageTextViewModel.swift in Sources */,
