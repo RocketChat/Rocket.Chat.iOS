@@ -10,7 +10,7 @@ import UIKit
 
 class ChatLoaderCell: UICollectionViewCell {
 
-    static let minimumHeight = CGFloat(40)
+    static let minimumHeight = CGFloat(50)
     static let identifier = "ChatLoaderCell"
 
     weak var loaderView: LoaderView?
