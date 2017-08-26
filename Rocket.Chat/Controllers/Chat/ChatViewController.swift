@@ -201,6 +201,11 @@ final class ChatViewController: SLKTextViewController {
         ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
 
         collectionView?.register(UINib(
+            nibName: "ChatChannelHeaderCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatChannelHeaderCell.identifier)
+
+        collectionView?.register(UINib(
             nibName: "ChatDirectMessageHeaderCell",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatDirectMessageHeaderCell.identifier)
@@ -403,7 +408,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func loadMoreMessagesFrom(date: Date?, loadRemoteHistory: Bool = true) {
-        if isRequestingHistory {
+        if isRequestingHistory || dataController.loadedAllMessages {
             return
         }
 
@@ -580,7 +585,11 @@ extension ChatViewController {
         }
 
         if obj.type == .header {
-            return cellForHeader(obj, at: indexPath)
+            if subscription.type == .directMessage {
+                return cellForDMHeader(obj, at: indexPath)
+            } else {
+                return cellForChannelHeader(obj, at: indexPath)
+            }
         }
 
         return UICollectionViewCell()
@@ -616,7 +625,18 @@ extension ChatViewController {
         return cell
     }
 
-    func cellForHeader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+    func cellForChannelHeader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatChannelHeaderCell.identifier,
+            for: indexPath
+        ) as? ChatChannelHeaderCell else {
+            return UICollectionViewCell()
+        }
+        cell.subscription = subscription
+        return cell
+    }
+
+    func cellForDMHeader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView?.dequeueReusableCell(
             withReuseIdentifier: ChatDirectMessageHeaderCell.identifier,
             for: indexPath
@@ -653,7 +673,11 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
         if let obj = dataController.itemAt(indexPath) {
             if obj.type == .header {
-                return CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
+                if subscription.type == .directMessage {
+                    return CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
+                } else {
+                    return CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
+                }
             }
 
             if obj.type == .loader {
