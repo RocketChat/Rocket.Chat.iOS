@@ -87,6 +87,12 @@ final class ChatDataController {
                     identifiers.append(obj.identifier)
                 }
             }
+
+            let messages = data.filter({ $0.type == .message })
+            let firstMessage = messages.sorted(by: { $0.timestamp < $1.timestamp }).first
+            if let firstMessage = firstMessage {
+                insertDaySeparator(from: firstMessage)
+            }
         }
 
         // Has loader?

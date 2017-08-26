@@ -16,7 +16,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzT-AW-Dcm">
-                    <rect key="frame" x="5" y="229" width="365" height="21"/>
+                    <rect key="frame" x="5" y="233" width="365" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="CBq-Xd-Pdr"/>
                     </constraints>
@@ -24,15 +24,8 @@
                     <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yL7-aN-p4N">
-                    <rect key="frame" x="0.0" y="300" width="375" height="1"/>
-                    <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="1" id="pDi-Lo-2t9"/>
-                    </constraints>
-                </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvw-pk-2WV">
-                    <rect key="frame" x="5" y="250" width="365" height="42"/>
+                    <rect key="frame" x="5" y="254" width="365" height="42"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="42" id="zdu-ab-8e5"/>
                     </constraints>
@@ -41,7 +34,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2h-ZX-a3A">
-                    <rect key="frame" x="5" y="124" width="95" height="95"/>
+                    <rect key="frame" x="5" y="128" width="95" height="95"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="95" id="5CW-hs-46K"/>
@@ -54,14 +47,11 @@
                 <constraint firstAttribute="trailing" secondItem="tzT-AW-Dcm" secondAttribute="trailing" constant="5" id="1KD-xn-MOE"/>
                 <constraint firstItem="rvw-pk-2WV" firstAttribute="top" secondItem="tzT-AW-Dcm" secondAttribute="bottom" id="1ab-eZ-WYE"/>
                 <constraint firstItem="tzT-AW-Dcm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="4sL-dN-EHh"/>
-                <constraint firstAttribute="bottom" secondItem="yL7-aN-p4N" secondAttribute="bottom" id="6QE-TK-oT4"/>
                 <constraint firstItem="V2h-ZX-a3A" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="9AY-hm-4y9"/>
                 <constraint firstItem="rvw-pk-2WV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="5" id="V9r-KK-SWF"/>
                 <constraint firstAttribute="trailing" secondItem="rvw-pk-2WV" secondAttribute="trailing" constant="5" id="WYe-BA-lj2"/>
+                <constraint firstAttribute="bottom" secondItem="rvw-pk-2WV" secondAttribute="bottom" constant="5" id="YKB-tL-wyK"/>
                 <constraint firstItem="tzT-AW-Dcm" firstAttribute="top" secondItem="V2h-ZX-a3A" secondAttribute="bottom" constant="10" id="ZZ2-Hf-Tul"/>
-                <constraint firstItem="yL7-aN-p4N" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="b9q-uh-onk"/>
-                <constraint firstAttribute="trailing" secondItem="yL7-aN-p4N" secondAttribute="trailing" id="mTw-j6-06O"/>
-                <constraint firstItem="yL7-aN-p4N" firstAttribute="top" secondItem="rvw-pk-2WV" secondAttribute="bottom" constant="8" id="wFs-mb-OIR"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
