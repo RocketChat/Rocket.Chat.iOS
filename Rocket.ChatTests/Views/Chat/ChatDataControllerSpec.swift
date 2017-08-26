@@ -31,9 +31,9 @@ class ChatDataControllerSpec: XCTestCase {
         XCTAssertNotNil(obj, "obj can't be nil")
 
         if let obj = obj {
-            let indexPaths = controller.insert([obj])
+            let (indexPaths, _) = controller.insert([obj])
             XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-            XCTAssertEqual(indexPaths.count, 1, "indexPaths will have one result")
+            XCTAssertEqual(indexPaths.count, 2, "indexPaths will have one result")
         }
     }
 
@@ -60,9 +60,9 @@ class ChatDataControllerSpec: XCTestCase {
         XCTAssertNotNil(obj2, "obj can't be nil")
 
         if let obj1 = obj1, let obj2 = obj2 {
-            let indexPaths = controller.insert([obj1, obj2])
+            let (indexPaths, _) = controller.insert([obj1, obj2])
             XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-            XCTAssertEqual(indexPaths.count, 2, "indexPaths will have two results")
+            XCTAssertEqual(indexPaths.count, 3, "indexPaths will have two results")
         }
     }
 
@@ -89,9 +89,9 @@ class ChatDataControllerSpec: XCTestCase {
         XCTAssertNotNil(obj2, "obj can't be nil")
 
         if let obj1 = obj1, let obj2 = obj2 {
-            let indexPaths = controller.insert([obj1, obj2])
+            let (indexPaths, _) = controller.insert([obj1, obj2])
             XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-            XCTAssertEqual(indexPaths.count, 3, "indexPaths will have three results")
+            XCTAssertEqual(indexPaths.count, 4, "indexPaths will have three results")
         }
     }
 
@@ -106,14 +106,14 @@ class ChatDataControllerSpec: XCTestCase {
         guard var obj = ChatData(type: .message, timestamp: Date()) else { return XCTFail() }
         obj.message = message
 
-        let indexPaths = controller.insert([obj])
+        let (indexPaths, _) = controller.insert([obj])
         XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-        XCTAssertEqual(indexPaths.count, 1, "indexPaths will have three results")
+        XCTAssertEqual(indexPaths.count, 2, "indexPaths will have three results")
 
         message.text = "Foobar, updated"
 
         let index = controller.update(message)
-        XCTAssertEqual(index, 0, "indexPath is the message indexPath row")
+        XCTAssertEqual(index, 1, "indexPath is the message indexPath row")
         XCTAssertEqual(controller.data[index].message?.text, "Foobar, updated", "Message text was updated")
     }
 
