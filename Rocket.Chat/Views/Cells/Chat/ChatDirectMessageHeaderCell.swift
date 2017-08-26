@@ -10,7 +10,7 @@ import UIKit
 
 class ChatDirectMessageHeaderCell: UICollectionViewCell {
 
-    static let minimumHeight = CGFloat(300)
+    static let minimumHeight = CGFloat(240)
     static let identifier = "ChatDirectMessageHeaderCell"
 
     var subscription: Subscription? {
