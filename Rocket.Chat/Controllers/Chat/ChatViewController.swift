@@ -449,10 +449,9 @@ final class ChatViewController: SLKTextViewController {
             for message in tempMessages {
                 var insert = true
 
-                for obj in self.dataController.data {
-                    if message.identifier == obj.message?.identifier {
+                for obj in self.dataController.data
+                    where message.identifier == obj.message?.identifier {
                         insert = false
-                    }
                 }
 
                 if insert {
