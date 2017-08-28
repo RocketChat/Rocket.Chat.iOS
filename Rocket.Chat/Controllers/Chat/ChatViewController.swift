@@ -370,6 +370,7 @@ final class ChatViewController: SLKTextViewController {
 
                     self.messages.append(contentsOf: newMessages)
                     self.appendMessages(messages: newMessages, completion: nil)
+                    self.markAsRead()
                 }
 
                 if modifications.count == 0 {
