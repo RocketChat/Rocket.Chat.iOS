@@ -224,19 +224,7 @@
                             <outlet property="delegate" destination="205-Nc-Fuo" id="Xa7-9A-ACs"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Departments" id="Y7z-MJ-pZr">
-                        <barButtonItem key="backBarButtonItem" title="Cancel" id="aca-HL-uTe"/>
-                        <barButtonItem key="leftBarButtonItem" style="plain" systemItem="cancel" id="8DD-by-XqQ">
-                            <connections>
-                                <action selector="didTouchCancelButton:" destination="205-Nc-Fuo" id="JcC-M7-lIj"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="Azd-ev-AKN">
-                            <connections>
-                                <action selector="didTouchDoneButton:" destination="205-Nc-Fuo" id="WAH-bU-QDT"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Departments" id="Y7z-MJ-pZr"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9I9-p7-TvH" userLabel="First Responder" sceneMemberID="firstResponder"/>

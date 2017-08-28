@@ -16,21 +16,12 @@ class SupportDepartmentViewController: UITableViewController, LivechatManagerInj
 
     weak var delegate: SupportDepartmentViewControllerDelegate?
 
-    var selectedIndexPath: IndexPath = IndexPath(row: 0, section: 0)
+    var selectedIndexPath = IndexPath(row: 0, section: 0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.selectRow(at: selectedIndexPath, animated: false, scrollPosition: .middle)
         tableView.cellForRow(at: selectedIndexPath)?.accessoryType = .checkmark
-    }
-
-    @IBAction func didTouchCancelButton(_ sender: UIBarButtonItem) {
-        dismissSelf()
-    }
-
-    @IBAction func didTouchDoneButton(_ sender: UIBarButtonItem) {
-        delegate?.didSelect(department: livechatManager.departments[selectedIndexPath.row])
-        dismissSelf()
     }
 
     func dismissSelf() {
@@ -71,5 +62,6 @@ class SupportDepartmentViewController: UITableViewController, LivechatManagerInj
         tableView.cellForRow(at: selectedIndexPath)?.accessoryType = .none
         selectedIndexPath = indexPath
         tableView.cellForRow(at: indexPath)?.accessoryType = .checkmark
+        delegate?.didSelect(department: livechatManager.departments[indexPath.row])
     }
 }
