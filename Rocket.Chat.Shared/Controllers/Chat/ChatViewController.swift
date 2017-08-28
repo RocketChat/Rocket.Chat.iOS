@@ -187,7 +187,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
     fileprivate func registerCells() {
         collectionView?.register(UINib(
             nibName: "ChatLoaderCell",
-            bundle: Bundle.main
+            bundle: Bundle.rocketChat
         ), forCellWithReuseIdentifier: ChatLoaderCell.identifier)
 
         collectionView?.register(UINib(
@@ -210,12 +210,12 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         ), forCellWithReuseIdentifier: ChatMessageBubbleCell.sentIdendifier)
         collectionView?.register(UINib(
             nibName: "ChatChannelHeaderCell",
-            bundle: Bundle.main
+            bundle: Bundle.rocketChat
         ), forCellWithReuseIdentifier: ChatChannelHeaderCell.identifier)
 
         collectionView?.register(UINib(
             nibName: "ChatDirectMessageHeaderCell",
-            bundle: Bundle.main
+            bundle: Bundle.rocketChat
         ), forCellWithReuseIdentifier: ChatDirectMessageHeaderCell.identifier)
 
         autoCompletionView.register(UINib(
@@ -701,7 +701,12 @@ extension ChatViewController {
 extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCacheManagerInjected {
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .zero
+        switch messageCellStyle {
+        case .normal:
+            return .zero
+        case .bubble:
+            return UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+        }
     }
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
