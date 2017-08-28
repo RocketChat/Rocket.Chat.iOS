@@ -119,14 +119,12 @@ final class ChatDataController {
                     lastObj.timestamp.year != newObj.timestamp.year) {
 
                     // Check if already contains some separator with this data
-                    // swiftlint:disable for_where
                     var insert = true
-                    for obj in data.filter({ $0.type == .daySeparator }) {
-                        if lastObj.timestamp.day == obj.timestamp.day &&
-                           lastObj.timestamp.month == obj.timestamp.month &&
-                           lastObj.timestamp.year == obj.timestamp.year {
-                            insert = false
-                        }
+                    for obj in data.filter({ $0.type == .daySeparator })
+                        where lastObj.timestamp.day == obj.timestamp.day &&
+                            lastObj.timestamp.month == obj.timestamp.month &&
+                            lastObj.timestamp.year == obj.timestamp.year {
+                                insert = false
                     }
 
                     if insert {
@@ -149,11 +147,10 @@ final class ChatDataController {
             customItem.indexPath = indexPath
             normalizeds.append(customItem)
 
-            for identifier in identifiers {
-                if identifier == item.identifier {
+            for identifier in identifiers
+                where identifier == item.identifier {
                     indexPaths.append(indexPath)
                     break
-                }
             }
         }
 
@@ -162,25 +159,18 @@ final class ChatDataController {
     }
 
     func update(_ message: Message) -> Int {
-        for index in data.indices {
-            guard data.count > index else { continue }
-
-            var obj = data[index]
-
-            if obj.message?.identifier == message.identifier {
-                data[index].message = message
+        for var obj in data
+            where obj.message?.identifier == message.identifier {
+                obj.message = message
                 return obj.indexPath.row
-            }
         }
 
         return -1
     }
 
     func oldestMessage() -> Message? {
-        for obj in data {
-            if obj.type == .message {
-                return obj.message
-            }
+        for obj in data where obj.type == .message {
+            return obj.message
         }
 
         return nil
