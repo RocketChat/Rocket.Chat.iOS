@@ -26,7 +26,7 @@ final class AuthSettingsManager {
         }
     }
 
-    static func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
+    static func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings>) {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
