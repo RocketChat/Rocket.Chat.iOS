@@ -91,7 +91,18 @@ final class ChatDataController {
             let messages = data.filter({ $0.type == .message })
             let firstMessage = messages.sorted(by: { $0.timestamp < $1.timestamp }).first
             if let firstMessage = firstMessage {
-                insertDaySeparator(from: firstMessage)
+                // Check if already contains some separator with this data
+                var insert = true
+                for obj in data.filter({ $0.type == .daySeparator })
+                    where firstMessage.timestamp.day == obj.timestamp.day &&
+                        firstMessage.timestamp.month == obj.timestamp.month &&
+                        firstMessage.timestamp.year == obj.timestamp.year {
+                            insert = false
+                }
+
+                if insert {
+                    insertDaySeparator(from: firstMessage)
+                }
             }
         }
 
@@ -159,9 +170,9 @@ final class ChatDataController {
     }
 
     func update(_ message: Message) -> Int {
-        for var obj in data
+        for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
-                obj.message = message
+                data[idx].message = message
                 return obj.indexPath.row
         }
 
