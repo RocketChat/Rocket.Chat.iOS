@@ -12,7 +12,8 @@ import RealmSwift
 /// A manager that manages all message related actions
 public class MessageManager: SocketManagerInjected {
     /// Default history fetch size
-    let historySize = 30
+    let initialHistorySize = 30
+    let laterHistorySize = 50
 
     /// A list that maintains all blocked users, stored in `UserDefaults`
     var blockedUsersList = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
@@ -29,28 +30,32 @@ extension MessageManager {
     ///   - subscription: the target subscription
     ///   - lastMessageDate: a date that indicates a criteria of the query
     ///   - completion: will be called after action completion
-    public func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping VoidCompletion) {
+    public func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletionObjectsList<Message>) {
         var lastDate: Any!
+        var size: Int
 
         if let lastMessageDate = lastMessageDate {
             lastDate = ["$date": lastMessageDate.timeIntervalSince1970 * 1000]
+            size = laterHistorySize
         } else {
             lastDate = NSNull()
+            size = initialHistorySize
         }
 
         let request = [
             "msg": "method",
             "method": "loadHistory",
-            "params": ["\(subscription.rid)", lastDate, historySize, [
+            "params": ["\(subscription.rid)", lastDate, size, [
                 "$date": Date().timeIntervalSince1970 * 1000
             ]]
         ] as [String : Any]
+
+        let validMessages = List<Message>()
 
         socketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
             let list = response.result["result"]["messages"].array
 
-            let validMessages = List<Message>()
             let subscriptionIdentifier = subscription.identifier
 
             Realm.execute({ (realm) in
@@ -74,7 +79,9 @@ extension MessageManager {
                         }
                     }
                 }
-            }, completion: completion)
+            }, completion: {
+                completion(Array(validMessages))
+            })
         }
     }
 

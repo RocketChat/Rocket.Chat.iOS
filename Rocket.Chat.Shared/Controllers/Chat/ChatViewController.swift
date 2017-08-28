@@ -44,6 +44,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
     var searchResult: [String: Any] = [:]
 
     var isRequestingHistory = false
+
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messagesQuery: Results<Message>!
@@ -185,6 +186,11 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
 
     fileprivate func registerCells() {
         collectionView?.register(UINib(
+            nibName: "ChatLoaderCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatLoaderCell.identifier)
+
+        collectionView?.register(UINib(
             nibName: "ChatMessageCell",
             bundle: Bundle.rocketChat
         ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
@@ -202,6 +208,15 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
             nibName: "SentMessageBubble",
             bundle: Bundle.rocketChat
         ), forCellWithReuseIdentifier: ChatMessageBubbleCell.sentIdendifier)
+        collectionView?.register(UINib(
+            nibName: "ChatChannelHeaderCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatChannelHeaderCell.identifier)
+
+        collectionView?.register(UINib(
+            nibName: "ChatDirectMessageHeaderCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatDirectMessageHeaderCell.identifier)
 
         autoCompletionView.register(UINib(
             nibName: "AutocompleteCell",
@@ -336,6 +351,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
 
         activityIndicator.startAnimating()
 
+        dataController.loadedAllMessages = false
         isRequestingHistory = false
         loadMoreMessagesFrom(date: nil)
         updateMessagesQueryNotificationBlock()
@@ -358,6 +374,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
 
                     self.messages.append(contentsOf: newMessages)
                     self.appendMessages(messages: newMessages, completion: nil)
+                    self.markAsRead()
                 }
 
                 if modifications.count == 0 {
@@ -396,7 +413,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
     }
 
     fileprivate func loadMoreMessagesFrom(date: Date?, loadRemoteHistory: Bool = true) {
-        if isRequestingHistory {
+        if isRequestingHistory || dataController.loadedAllMessages {
             return
         }
 
@@ -405,10 +422,23 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
         func loadHistoryFromRemote() {
             let tempSubscription = Subscription(value: self.subscription)
 
-            messageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] in
+            messageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
                 DispatchQueue.main.async {
                     self?.activityIndicator.stopAnimating()
                     self?.isRequestingHistory = false
+
+                    if messages.count == 0 {
+                        self?.dataController.loadedAllMessages = true
+
+                        self?.collectionView?.performBatchUpdates({
+                            if let (indexPaths, removedIndexPaths) = self?.dataController.insert([]) {
+                                self?.collectionView?.insertItems(at: indexPaths)
+                                self?.collectionView?.deleteItems(at: removedIndexPaths)
+                            }
+                        }, completion: nil)
+                    } else {
+                        self?.dataController.loadedAllMessages = false
+                    }
                 }
             }
         }
@@ -454,10 +484,9 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
             for message in tempMessages {
                 var insert = true
 
-                for obj in self.dataController.data {
-                    if message.identifier == obj.message?.identifier {
+                for obj in self.dataController.data
+                    where message.identifier == obj.message?.identifier {
                         insert = false
-                    }
                 }
 
                 if insert {
@@ -484,7 +513,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
 
             DispatchQueue.main.async {
                 collectionView.performBatchUpdates({
-                    let indexPaths = self.dataController.insert(objs)
+                    let (indexPaths, removedIndexPaths) = self.dataController.insert(objs)
                     collectionView.insertItems(at: indexPaths)
                     if self.messageCellStyle == .bubble {
                         collectionView.reloadItems(at: indexPaths
@@ -496,6 +525,7 @@ public class ChatViewController: SLKTextViewController, AuthManagerInjected, Soc
                             .filter { !indexPaths.contains($0) }
                         )
                     }
+                    collectionView.deleteItems(at: removedIndexPaths)
                 }, completion: { _ in
                     completion?()
                 })
@@ -566,6 +596,18 @@ extension ChatViewController {
             return cellForDaySeparator(obj, at: indexPath)
         }
 
+        if obj.type == .loader {
+            return cellForLoader(obj, at: indexPath)
+        }
+
+        if obj.type == .header {
+            if subscription.type == .directMessage {
+                return cellForDMHeader(obj, at: indexPath)
+            } else {
+                return cellForChannelHeader(obj, at: indexPath)
+            }
+        }
+
         return UICollectionViewCell()
     }
 
@@ -619,6 +661,39 @@ extension ChatViewController {
         return cell
     }
 
+    func cellForChannelHeader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatChannelHeaderCell.identifier,
+            for: indexPath
+        ) as? ChatChannelHeaderCell else {
+            return UICollectionViewCell()
+        }
+        cell.subscription = subscription
+        return cell
+    }
+
+    func cellForDMHeader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatDirectMessageHeaderCell.identifier,
+            for: indexPath
+        ) as? ChatDirectMessageHeaderCell else {
+            return UICollectionViewCell()
+        }
+        cell.subscription = subscription
+        return cell
+    }
+
+    func cellForLoader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatLoaderCell.identifier,
+            for: indexPath
+        ) as? ChatLoaderCell else {
+            return UICollectionViewCell()
+        }
+
+        return cell
+    }
+
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
@@ -631,8 +706,25 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCac
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let fullWidth = collectionView.bounds.size.width
+        guard let obj = dataController.itemAt(indexPath) else {
+            return CGSize(width: fullWidth, height: 40)
+        }
 
-        if let message = dataController.itemAt(indexPath)?.message {
+        switch obj.type {
+        case .header:
+            if subscription.type == .directMessage {
+                return CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
+            } else {
+                return CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
+            }
+        case .loader:
+            return CGSize(width: fullWidth, height: ChatLoaderCell.minimumHeight)
+        case .daySeparator:
+            return CGSize(width: fullWidth, height: ChatMessageDaySeparator.minimumHeight)
+        default:
+            guard let message = obj.message else {
+                return CGSize(width: fullWidth, height: 40)
+            }
             switch messageCellStyle {
             case .normal:
                 let height = ChatMessageCell.cellMediaHeightFor(message: message, messageTextCacheManager: messageTextCacheManager)
@@ -648,7 +740,6 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCac
             }
         }
 
-        return CGSize(width: fullWidth, height: 40)
     }
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -682,6 +773,7 @@ extension ChatViewController {
             buttonScrollToBottomMarginConstraint = buttonScrollToBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
             buttonScrollToBottomMarginConstraint?.isActive = true
         }
+
         if targetContentOffset.pointee.y < scrollView.contentSize.height - scrollView.frame.height {
             buttonScrollToBottomMarginConstraint?.constant = -64
             UIView.animate(withDuration: 0.5) {

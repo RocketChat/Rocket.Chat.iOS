@@ -23,7 +23,7 @@ public final class AuthSettingsManager: SocketManagerInjected, AuthManagerInject
         }
     }
 
-    func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
+    func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings>) {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
