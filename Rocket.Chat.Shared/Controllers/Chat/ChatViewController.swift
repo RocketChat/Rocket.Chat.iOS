@@ -701,7 +701,12 @@ extension ChatViewController {
 extension ChatViewController: UICollectionViewDelegateFlowLayout, MessageTextCacheManagerInjected {
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .zero
+        switch messageCellStyle {
+        case .normal:
+            return .zero
+        case .bubble:
+            return UIEdgeInsets(top: 0, left: 0, bottom: 8, right: 0)
+        }
     }
 
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
