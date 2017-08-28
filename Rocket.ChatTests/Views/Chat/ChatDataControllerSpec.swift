@@ -33,7 +33,7 @@ class ChatDataControllerSpec: XCTestCase {
         if let obj = obj {
             let (indexPaths, _) = controller.insert([obj])
             XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-            XCTAssertEqual(indexPaths.count, 2, "indexPaths will have one result")
+            XCTAssertEqual(indexPaths.count, 2, "indexPaths will have two results")
         }
     }
 
@@ -62,7 +62,7 @@ class ChatDataControllerSpec: XCTestCase {
         if let obj1 = obj1, let obj2 = obj2 {
             let (indexPaths, _) = controller.insert([obj1, obj2])
             XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-            XCTAssertEqual(indexPaths.count, 3, "indexPaths will have two results")
+            XCTAssertEqual(indexPaths.count, 3, "indexPaths will have three results")
         }
     }
 
@@ -91,7 +91,7 @@ class ChatDataControllerSpec: XCTestCase {
         if let obj1 = obj1, let obj2 = obj2 {
             let (indexPaths, _) = controller.insert([obj1, obj2])
             XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-            XCTAssertEqual(indexPaths.count, 4, "indexPaths will have three results")
+            XCTAssertEqual(indexPaths.count, 4, "indexPaths will have four results")
         }
     }
 
@@ -115,6 +115,47 @@ class ChatDataControllerSpec: XCTestCase {
         let index = controller.update(message)
         XCTAssertEqual(index, 1, "indexPath is the message indexPath row")
         XCTAssertEqual(controller.data[index].message?.text, "Foobar, updated", "Message text was updated")
+    }
+
+    func testLoaderObject() {
+        let controller = ChatDataController()
+
+        let message1 = Message()
+        message1.identifier = "test-loader-1"
+        message1.text = "Foobar 1"
+
+        var obj1 = ChatData(type: .message, timestamp: Date())
+        obj1?.message = message1
+        XCTAssertNotNil(obj1, "obj can't be nil")
+
+        if let obj1 = obj1 {
+            let (indexPaths, _) = controller.insert([obj1])
+            XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
+            XCTAssertEqual(indexPaths.count, 2, "indexPaths will have two results")
+            XCTAssertEqual(controller.data.filter({ $0.type == .loader }).count, 1, "data will have 1 loader")
+            XCTAssertEqual(controller.data.filter({ $0.type == .header }).count, 0, "data will have 0 header")
+        }
+    }
+
+    func testLoadedAllMessagesHeaderObject() {
+        let controller = ChatDataController()
+        controller.loadedAllMessages = true
+
+        let message1 = Message()
+        message1.identifier = "test-header-1"
+        message1.text = "Foobar 1"
+
+        var obj1 = ChatData(type: .message, timestamp: Date())
+        obj1?.message = message1
+        XCTAssertNotNil(obj1, "obj can't be nil")
+
+        if let obj1 = obj1 {
+            let (indexPaths, _) = controller.insert([obj1])
+            XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
+            XCTAssertEqual(indexPaths.count, 2, "indexPaths will have two results")
+            XCTAssertEqual(controller.data.filter({ $0.type == .loader }).count, 0, "data will have 0 loader")
+            XCTAssertEqual(controller.data.filter({ $0.type == .header }).count, 1, "data will have 1 header")
+        }
     }
 
 }
