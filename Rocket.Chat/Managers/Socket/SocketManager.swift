@@ -15,7 +15,7 @@ public typealias RequestCompletion = (JSON?, Bool) -> Void
 public typealias VoidCompletion = () -> Void
 public typealias MessageCompletion = (SocketResponse) -> Void
 public typealias SocketCompletion = (WebSocket?, Bool) -> Void
-public typealias MessageCompletionObject <T: Object> = (T) -> Void
+public typealias MessageCompletionObject <T: Object> = (T?) -> Void
 public typealias MessageCompletionObjectsList <T: Object> = ([T]) -> Void
 
 protocol SocketConnectionHandler {
