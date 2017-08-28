@@ -48,6 +48,8 @@
 // Chat
 "chat.channel_preview_view.title" = "This is a preview of #%@";
 "chat.channel_preview_view.join" = "Join Channel";
+"chat.dm.start_conversation" = "This is the start of your conversation with %@";
+"chat.channel.start_conversation" = "This is the start of the conversation on %@";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Block messages from user";
