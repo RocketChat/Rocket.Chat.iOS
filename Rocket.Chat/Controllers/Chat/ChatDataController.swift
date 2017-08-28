@@ -11,8 +11,8 @@ import Foundation
 enum ChatDataType {
     case daySeparator
     case message
-    case sendingMessage
     case loader
+    case header
 }
 
 struct ChatData {
@@ -34,6 +34,7 @@ struct ChatData {
 final class ChatDataController {
 
     var data: [ChatData] = []
+    var loadedAllMessages = false
 
     func clear() -> [IndexPath] {
         var indexPaths: [IndexPath] = []
@@ -61,8 +62,10 @@ final class ChatDataController {
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
-    func insert(_ items: [ChatData]) -> [IndexPath] {
+    @discardableResult
+    func insert(_ items: [ChatData]) -> ([IndexPath], [IndexPath]) {
         var indexPaths: [IndexPath] = []
+        var removedIndexPaths: [IndexPath] = []
         var newItems: [ChatData] = []
         var lastObj = data.last
         var identifiers: [String] = items.map { $0.identifier }
@@ -77,6 +80,48 @@ final class ChatDataController {
             newItems.append(separator)
         }
 
+        if loadedAllMessages {
+            if data.filter({ $0.type == .header }).count == 0 {
+                if let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0)) {
+                    newItems.append(obj)
+                    identifiers.append(obj.identifier)
+                }
+            }
+
+            let messages = data.filter({ $0.type == .message })
+            let firstMessage = messages.sorted(by: { $0.timestamp < $1.timestamp }).first
+            if let firstMessage = firstMessage {
+                // Check if already contains some separator with this data
+                var insert = true
+                for obj in data.filter({ $0.type == .daySeparator })
+                    where firstMessage.timestamp.day == obj.timestamp.day &&
+                        firstMessage.timestamp.month == obj.timestamp.month &&
+                        firstMessage.timestamp.year == obj.timestamp.year {
+                            insert = false
+                }
+
+                if insert {
+                    insertDaySeparator(from: firstMessage)
+                }
+            }
+        }
+
+        // Has loader?
+        let loaders = data.filter({ $0.type == .loader })
+        if loadedAllMessages {
+            for (idx, obj) in loaders.enumerated() {
+                data.remove(at: idx)
+                removedIndexPaths.append(obj.indexPath)
+            }
+        } else {
+            if loaders.count == 0 {
+                if let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 0)) {
+                    newItems.append(obj)
+                    identifiers.append(obj.identifier)
+                }
+            }
+        }
+
         for newObj in items {
             if let lastObj = lastObj {
                 if lastObj.type == .message && (
@@ -85,14 +130,12 @@ final class ChatDataController {
                     lastObj.timestamp.year != newObj.timestamp.year) {
 
                     // Check if already contains some separator with this data
-                    // swiftlint:disable for_where
                     var insert = true
-                    for obj in data.filter({ $0.type == .daySeparator }) {
-                        if lastObj.timestamp.day == obj.timestamp.day &&
-                           lastObj.timestamp.month == obj.timestamp.month &&
-                           lastObj.timestamp.year == obj.timestamp.year {
-                            insert = false
-                        }
+                    for obj in data.filter({ $0.type == .daySeparator })
+                        where lastObj.timestamp.day == obj.timestamp.day &&
+                            lastObj.timestamp.month == obj.timestamp.month &&
+                            lastObj.timestamp.year == obj.timestamp.year {
+                                insert = false
                     }
 
                     if insert {
@@ -115,38 +158,30 @@ final class ChatDataController {
             customItem.indexPath = indexPath
             normalizeds.append(customItem)
 
-            for identifier in identifiers {
-                if identifier == item.identifier {
+            for identifier in identifiers
+                where identifier == item.identifier {
                     indexPaths.append(indexPath)
                     break
-                }
             }
         }
 
         data = normalizeds
-        return indexPaths
+        return (indexPaths, removedIndexPaths)
     }
 
     func update(_ message: Message) -> Int {
-        for index in data.indices {
-            guard data.count > index else { continue }
-
-            var obj = data[index]
-
-            if obj.message?.identifier == message.identifier {
-                data[index].message = message
+        for (idx, obj) in data.enumerated()
+            where obj.message?.identifier == message.identifier {
+                data[idx].message = message
                 return obj.indexPath.row
-            }
         }
 
         return -1
     }
 
     func oldestMessage() -> Message? {
-        for obj in data {
-            if obj.type == .message {
-                return obj.message
-            }
+        for obj in data where obj.type == .message {
+            return obj.message
         }
 
         return nil
