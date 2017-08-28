@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Gwg-yq-9FM" customClass="ChatChannelHeaderCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="301"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZH-BQ-7s4">
+                    <rect key="frame" x="5" y="233" width="365" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="4yU-Wj-RqW"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleHeadline"/>
+                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jL-f3-VUF">
+                    <rect key="frame" x="5" y="254" width="365" height="42"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="42" id="hFn-6Z-w8h"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" style="UICTFontTextStyleFootnote"/>
+                    <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="GZH-BQ-7s4" secondAttribute="trailing" constant="5" id="5Ov-Fx-4Cm"/>
+                <constraint firstItem="GZH-BQ-7s4" firstAttribute="leading" secondItem="Gwg-yq-9FM" secondAttribute="leading" constant="5" id="SQ8-vm-DRb"/>
+                <constraint firstAttribute="bottom" secondItem="5jL-f3-VUF" secondAttribute="bottom" constant="5" id="ST5-ZY-dVY"/>
+                <constraint firstAttribute="trailing" secondItem="5jL-f3-VUF" secondAttribute="trailing" constant="5" id="gvE-ck-n18"/>
+                <constraint firstItem="5jL-f3-VUF" firstAttribute="top" secondItem="GZH-BQ-7s4" secondAttribute="bottom" id="u7Y-3T-6GV"/>
+                <constraint firstItem="5jL-f3-VUF" firstAttribute="leading" secondItem="Gwg-yq-9FM" secondAttribute="leading" constant="5" id="zYV-wB-jit"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="labelStartConversation" destination="5jL-f3-VUF" id="wZd-V6-gzh"/>
+                <outlet property="labelTitle" destination="GZH-BQ-7s4" id="GT6-jx-cfA"/>
+            </connections>
+            <point key="canvasLocation" x="34.5" y="44.5"/>
+        </view>
+    </objects>
+</document>
