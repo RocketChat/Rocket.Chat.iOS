@@ -15,6 +15,8 @@
 		411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */; };
 		411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */; };
 		411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411EDED41E3102CB00BC7BE3 /* UploadManager.swift */; };
+		411F7D941F5179A50080E8AD /* ChatChannelHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411F7D931F5179A50080E8AD /* ChatChannelHeaderCell.swift */; };
+		411F7D961F5179B50080E8AD /* ChatChannelHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 411F7D951F5179B50080E8AD /* ChatChannelHeaderCell.xib */; };
 		412719441E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412719431E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift */; };
 		412719461E6B403700461FEE /* RegisterUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412719451E6B403700461FEE /* RegisterUsernameViewController.swift */; };
 		412731D51DE0A55C00FC45A0 /* ChatPreviewModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412731D41DE0A55C00FC45A0 /* ChatPreviewModeView.xib */; };
@@ -115,6 +117,9 @@
 		41C275DF1D848005003C88CF /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C275DE1D848005003C88CF /* AvatarView.swift */; };
 		41C275E11D84815C003C88CF /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41C275E01D84815C003C88CF /* AvatarView.xib */; };
 		41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41C45AEE1DFAD42800D9969C /* ChatDataController.swift */; };
+		41CABFF81F5047D600E0B289 /* ChatLoaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */; };
+		41CABFFA1F5047E200E0B289 /* ChatLoaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CABFF91F5047E200E0B289 /* ChatLoaderCell.swift */; };
+		41CABFFC1F50515100E0B289 /* ArrayExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41CABFFB1F50515100E0B289 /* ArrayExtensions.swift */; };
 		41D3A62E1E0805310011949D /* ChatMessageDaySeparator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */; };
 		41D3A6301E0805490011949D /* ChatMessageDaySeparator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D3A62F1E0805490011949D /* ChatMessageDaySeparator.swift */; };
 		41D4ABAB1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D4ABAA1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift */; };
@@ -122,6 +127,8 @@
 		41D701D61E67111E00FED2EE /* MessageTextFontAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D701D51E67111E00FED2EE /* MessageTextFontAttributes.swift */; };
 		41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D701D71E6763D100FED2EE /* NSAttributedStringExtensions.swift */; };
 		41D7CA871E644E47000F38EA /* MessageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D7CA861E644E47000F38EA /* MessageExtensions.swift */; };
+		41D894021F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D894011F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift */; };
+		41D894041F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D894031F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib */; };
 		41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DAE93B1D318E280098E068 /* SubscriptionManager.swift */; };
 		41DAE93E1D318F350098E068 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DAE93D1D318F350098E068 /* Subscription.swift */; };
 		41DC7A1B1D38454500896FC0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A1A1D38454500896FC0 /* Message.swift */; };
@@ -192,6 +199,8 @@
 		411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettingsManager.swift; path = Managers/Model/AuthSettingsManager.swift; sourceTree = "<group>"; };
 		411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettingsManagerSpec.swift; path = Managers/AuthSettingsManagerSpec.swift; sourceTree = "<group>"; };
 		411EDED41E3102CB00BC7BE3 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadManager.swift; path = Managers/Uploader/UploadManager.swift; sourceTree = "<group>"; };
+		411F7D931F5179A50080E8AD /* ChatChannelHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatChannelHeaderCell.swift; path = Views/Cells/Chat/ChatChannelHeaderCell.swift; sourceTree = "<group>"; };
+		411F7D951F5179B50080E8AD /* ChatChannelHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatChannelHeaderCell.xib; path = Views/Cells/Chat/ChatChannelHeaderCell.xib; sourceTree = "<group>"; };
 		412719431E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewControllerGoogleExtensions.swift; path = Controllers/Auth/AuthViewControllerGoogleExtensions.swift; sourceTree = "<group>"; };
 		412719451E6B403700461FEE /* RegisterUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterUsernameViewController.swift; path = Controllers/Auth/RegisterUsernameViewController.swift; sourceTree = "<group>"; };
 		412731D41DE0A55C00FC45A0 /* ChatPreviewModeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatPreviewModeView.xib; path = Views/Chat/ChatPreviewModeView.xib; sourceTree = "<group>"; };
@@ -292,6 +301,9 @@
 		41C275DE1D848005003C88CF /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarView.swift; path = Views/Avatar/AvatarView.swift; sourceTree = "<group>"; };
 		41C275E01D84815C003C88CF /* AvatarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AvatarView.xib; path = Views/Avatar/AvatarView.xib; sourceTree = "<group>"; };
 		41C45AEE1DFAD42800D9969C /* ChatDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatDataController.swift; path = Controllers/Chat/ChatDataController.swift; sourceTree = "<group>"; };
+		41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatLoaderCell.xib; path = Views/Cells/Chat/ChatLoaderCell.xib; sourceTree = "<group>"; };
+		41CABFF91F5047E200E0B289 /* ChatLoaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLoaderCell.swift; path = Views/Cells/Chat/ChatLoaderCell.swift; sourceTree = "<group>"; };
+		41CABFFB1F50515100E0B289 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrayExtensions.swift; path = Extensions/ArrayExtensions.swift; sourceTree = "<group>"; };
 		41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatMessageDaySeparator.xib; path = Views/Cells/Chat/ChatMessageDaySeparator.xib; sourceTree = "<group>"; };
 		41D3A62F1E0805490011949D /* ChatMessageDaySeparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageDaySeparator.swift; path = Views/Cells/Chat/ChatMessageDaySeparator.swift; sourceTree = "<group>"; };
 		41D4ABAA1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCollectionViewFlowLayout.swift; path = Helpers/ChatCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -299,6 +311,8 @@
 		41D701D51E67111E00FED2EE /* MessageTextFontAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTextFontAttributes.swift; path = Helpers/MessageTextFontAttributes.swift; sourceTree = "<group>"; };
 		41D701D71E6763D100FED2EE /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSAttributedStringExtensions.swift; path = Extensions/NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
 		41D7CA861E644E47000F38EA /* MessageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageExtensions.swift; path = Extensions/Models/MessageExtensions.swift; sourceTree = "<group>"; };
+		41D894011F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatDirectMessageHeaderCell.swift; path = Views/Cells/Chat/ChatDirectMessageHeaderCell.swift; sourceTree = "<group>"; };
+		41D894031F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatDirectMessageHeaderCell.xib; path = Views/Cells/Chat/ChatDirectMessageHeaderCell.xib; sourceTree = "<group>"; };
 		41DAE93B1D318E280098E068 /* SubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionManager.swift; path = Managers/Model/SubscriptionManager.swift; sourceTree = "<group>"; };
 		41DAE93D1D318F350098E068 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Subscription.swift; path = Models/Subscription.swift; sourceTree = "<group>"; };
 		41DC7A1A1D38454500896FC0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
@@ -504,6 +518,12 @@
 				41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */,
 				41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */,
 				41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */,
+				41D894011F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift */,
+				41D894031F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib */,
+				411F7D931F5179A50080E8AD /* ChatChannelHeaderCell.swift */,
+				411F7D951F5179B50080E8AD /* ChatChannelHeaderCell.xib */,
+				41CABFF91F5047E200E0B289 /* ChatLoaderCell.swift */,
+				41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -609,6 +629,7 @@
 			children = (
 				414EFF901E54FE35004F001F /* Models */,
 				597ECBA11E3708A50041C5C5 /* DataExtension.swift */,
+				41CABFFB1F50515100E0B289 /* ArrayExtensions.swift */,
 				41E991D31D343A9F00BDDCA8 /* DateExtension.swift */,
 				41D701D71E6763D100FED2EE /* NSAttributedStringExtensions.swift */,
 				4159720F1D3DBDA0002258F4 /* RealmExtension.swift */,
@@ -1066,6 +1087,7 @@
 				41C275E11D84815C003C88CF /* AvatarView.xib in Resources */,
 				416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */,
 				4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */,
+				41CABFF81F5047D600E0B289 /* ChatLoaderCell.xib in Resources */,
 				41D3A62E1E0805310011949D /* ChatMessageDaySeparator.xib in Resources */,
 				418C4DC81DC4C08800ABED4C /* SubscriptionSectionView.xib in Resources */,
 				412E1F3C1DB6D55000531FDA /* ChatMessageURLView.xib in Resources */,
@@ -1073,12 +1095,14 @@
 				41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */,
 				412731D51DE0A55C00FC45A0 /* ChatPreviewModeView.xib in Resources */,
 				41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */,
+				411F7D961F5179B50080E8AD /* ChatChannelHeaderCell.xib in Resources */,
 				41DCB8261DDC828200E1197F /* SubscriptionSearchMoreView.xib in Resources */,
 				4102E3AA1E532323004BAA82 /* Settings.storyboard in Resources */,
 				419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */,
 				4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */,
 				4116C52D1E69B15400AC4E43 /* GoogleService-Info.plist in Resources */,
 				41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */,
+				41D894041F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib in Resources */,
 				41EB22361E5F056600AA3AE7 /* Localizable.strings in Resources */,
 				41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */,
 				41DF76E81D2C50710028DBF8 /* Main.storyboard in Resources */,
@@ -1393,6 +1417,7 @@
 				41BD37D91E290D8600CBC4C2 /* ModelMappeable.swift in Sources */,
 				41BD37DB1E290D9C00CBC4C2 /* ModelHandler.swift in Sources */,
 				41ADDD491E9DBB100007A458 /* LoaderView.swift in Sources */,
+				411F7D941F5179A50080E8AD /* ChatChannelHeaderCell.swift in Sources */,
 				41F167E91DAC4D4300775CCA /* ChatTitleView.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
@@ -1440,6 +1465,7 @@
 				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
 				412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */,
+				41CABFFA1F5047E200E0B289 /* ChatLoaderCell.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
 				4102E3AD1E53273E004BAA82 /* SettingsViewController.swift in Sources */,
 				414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */,
@@ -1450,6 +1476,7 @@
 				41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */,
 				419EAF291E26562E002C8DA5 /* UserCoordinator.swift in Sources */,
 				41597DCE1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift in Sources */,
+				41CABFFC1F50515100E0B289 /* ArrayExtensions.swift in Sources */,
 				41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */,
 				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,
@@ -1480,6 +1507,7 @@
 				41B4B2341E40B1D200F4D252 /* ChatControllerUploader.swift in Sources */,
 				4133EDCF1DA2834E005AA783 /* ChatMessageImageView.swift in Sources */,
 				419ECCA21F3C8F15005F224B /* ChatControllerHeaderStatus.swift in Sources */,
+				41D894021F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift in Sources */,
 				41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */,
 				41BD37DD1E290DDB00CBC4C2 /* BaseModel.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,

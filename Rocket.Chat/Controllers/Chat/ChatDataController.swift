@@ -11,8 +11,8 @@ import Foundation
 enum ChatDataType {
     case daySeparator
     case message
-    case sendingMessage
     case loader
+    case header
 }
 
 struct ChatData {
@@ -34,6 +34,7 @@ struct ChatData {
 final class ChatDataController {
 
     var data: [ChatData] = []
+    var loadedAllMessages = false
 
     func clear() -> [IndexPath] {
         var indexPaths: [IndexPath] = []
@@ -61,8 +62,10 @@ final class ChatDataController {
     }
 
     // swiftlint:disable function_body_length cyclomatic_complexity
-    func insert(_ items: [ChatData]) -> [IndexPath] {
+    @discardableResult
+    func insert(_ items: [ChatData]) -> ([IndexPath], [IndexPath]) {
         var indexPaths: [IndexPath] = []
+        var removedIndexPaths: [IndexPath] = []
         var newItems: [ChatData] = []
         var lastObj = data.last
         var identifiers: [String] = items.map { $0.identifier }
@@ -75,6 +78,37 @@ final class ChatDataController {
             guard let separator = ChatData(type: .daySeparator, timestamp: newDate) else { return }
             identifiers.append(separator.identifier)
             newItems.append(separator)
+        }
+
+        if loadedAllMessages {
+            if data.filter({ $0.type == .header }).count == 0 {
+                if let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0)) {
+                    newItems.append(obj)
+                    identifiers.append(obj.identifier)
+                }
+            }
+
+            let messages = data.filter({ $0.type == .message })
+            let firstMessage = messages.sorted(by: { $0.timestamp < $1.timestamp }).first
+            if let firstMessage = firstMessage {
+                insertDaySeparator(from: firstMessage)
+            }
+        }
+
+        // Has loader?
+        let loaders = data.filter({ $0.type == .loader })
+        if loadedAllMessages {
+            for (idx, obj) in loaders.enumerated() {
+                data.remove(at: idx)
+                removedIndexPaths.append(obj.indexPath)
+            }
+        } else {
+            if loaders.count == 0 {
+                if let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 0)) {
+                    newItems.append(obj)
+                    identifiers.append(obj.identifier)
+                }
+            }
         }
 
         for newObj in items {
@@ -121,7 +155,7 @@ final class ChatDataController {
         }
 
         data = normalizeds
-        return indexPaths
+        return (indexPaths, removedIndexPaths)
     }
 
     func update(_ message: Message) -> Int {
