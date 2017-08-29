@@ -59,8 +59,8 @@ final class ChatMessageCell: UICollectionViewCell {
         let fullWidth = UIScreen.main.bounds.size.width
         var total = UILabel.heightForView(
             MessageTextCacheManager.shared.message(for: message)?.string ?? "",
-            font: UIFont.systemFont(ofSize: 14),
-            width: fullWidth - 60
+            font: UIFont.systemFont(ofSize: 15),
+            width: fullWidth - 62
         ) + 35
 
         for url in message.urls {
@@ -182,7 +182,7 @@ final class ChatMessageCell: UICollectionViewCell {
         if message.alias.characters.count > 0 {
             labelUsername.text = message.alias
         } else {
-            labelUsername.text = message.user?.username
+            labelUsername.text = message.user?.displayName() ?? "Unknown"
         }
 
         if let text = MessageTextCacheManager.shared.message(for: message) {

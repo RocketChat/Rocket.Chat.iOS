@@ -32,6 +32,7 @@ final class ChatViewController: SLKTextViewController {
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewStatus: ChatHeaderViewStatus?
     lazy var mediaFocusViewController = URBMediaFocusViewController()
+    var documentController: UIDocumentInteractionController?
 
     var dataController = ChatDataController()
 
@@ -40,9 +41,11 @@ final class ChatViewController: SLKTextViewController {
     var closeSidebarAfterSubscriptionUpdate = false
 
     var isRequestingHistory = false
+
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
-    var messages: Results<Message>!
+    var messagesQuery: Results<Message>!
+    var messages: [Message] = []
     var subscription: Subscription! {
         didSet {
             updateSubscriptionInfo()
@@ -81,6 +84,8 @@ final class ChatViewController: SLKTextViewController {
         mediaFocusViewController.shouldDismissOnTap = true
         mediaFocusViewController.shouldShowPhotoActions = true
 
+        collectionView?.isPrefetchingEnabled = true
+
         isInverted = false
         bounces = true
         shakeToClearEnabled = true
@@ -95,7 +100,6 @@ final class ChatViewController: SLKTextViewController {
         setupTextViewSettings()
         setupScrollToBottomButton()
 
-        // TODO: this should really goes into the view model, when we have it
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
@@ -177,10 +181,15 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
-        return UICollectionViewFlowLayout()
+        return ChatCollectionViewFlowLayout()
     }
 
     fileprivate func registerCells() {
+        collectionView?.register(UINib(
+            nibName: "ChatLoaderCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatLoaderCell.identifier)
+
         collectionView?.register(UINib(
             nibName: "ChatMessageCell",
             bundle: Bundle.main
@@ -190,6 +199,16 @@ final class ChatViewController: SLKTextViewController {
             nibName: "ChatMessageDaySeparator",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
+
+        collectionView?.register(UINib(
+            nibName: "ChatChannelHeaderCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatChannelHeaderCell.identifier)
+
+        collectionView?.register(UINib(
+            nibName: "ChatDirectMessageHeaderCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatDirectMessageHeaderCell.identifier)
 
         autoCompletionView.register(UINib(
             nibName: "AutocompleteCell",
@@ -207,9 +226,11 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func hideButtonScrollToBottom(animated: Bool) {
         buttonScrollToBottomMarginConstraint?.constant = 50
+
         let action = {
-            self.view.layoutIfNeeded()
+            self.buttonScrollToBottom.layoutIfNeeded()
         }
+
         if animated {
             UIView.animate(withDuration: 0.5, animations: action)
         } else {
@@ -236,7 +257,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func textViewDidBeginEditing(_ textView: UITextView) {
-        scrollToBottom()
+        scrollToBottom(true)
     }
 
     // MARK: Message
@@ -250,7 +271,7 @@ final class ChatViewController: SLKTextViewController {
         Realm.executeOnMainThread({ (realm) in
             message = Message()
             message?.internalType = ""
-            message?.createdAt = Date()
+            message?.createdAt = Date.serverDate
             message?.text = messageText
             message?.subscription = self.subscription
             message?.identifier = String.random(18)
@@ -288,7 +309,7 @@ final class ChatViewController: SLKTextViewController {
             token.stop()
         }
 
-        title = subscription?.name
+        title = subscription?.displayName()
         chatTitleView?.subscription = subscription
         textView.resignFirstResponder()
 
@@ -322,139 +343,179 @@ final class ChatViewController: SLKTextViewController {
     }
 
     internal func updateSubscriptionMessages() {
-        isRequestingHistory = true
+        messagesQuery = subscription.fetchMessagesQueryResults()
 
-        messages = subscription.fetchMessages()
-        messagesToken?.stop()
-        messagesToken = messages.addNotificationBlock { [weak self] changes in
-            switch changes {
-            case .initial(let messages):
-                self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
-                    guard let messages = self?.messages else { return }
+        activityIndicator.startAnimating()
 
-                    if messages.count == 0 {
-                        self?.activityIndicator.startAnimating()
-                    } else {
-                        self?.scrollToBottom()
-                    }
-                })
-
-                break
-            case .update(_, _, let insertions, let modifications):
-                guard let messages = self?.subscription.fetchMessages() else { return }
-
-                if insertions.count > 0 {
-                    self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
-                }
-
-                self?.collectionView?.performBatchUpdates({
-                    var indexPathModifications = [Int]()
-                    for modified in modifications {
-                        if let index = self?.dataController.update(messages[modified]) {
-                            if index >= 0 {
-                                indexPathModifications.append(index)
-                            }
-                        }
-                    }
-
-                    self?.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                }, completion: nil)
-
-                break
-            case .error:
-                break
-            }
-        }
-
-        MessageManager.getHistory(subscription, lastMessageDate: nil) { [weak self] in
-            guard let messages = self?.subscription.fetchMessages() else { return }
-
-            self?.appendMessages(messages: Array(messages), updateScrollPosition: false, completion: {
-                self?.activityIndicator.stopAnimating()
-
-                UIView.performWithoutAnimation {
-                    self?.scrollToBottom()
-                }
-
-                self?.isRequestingHistory = false
-            })
-        }
+        dataController.loadedAllMessages = false
+        isRequestingHistory = false
+        loadMoreMessagesFrom(date: nil)
+        updateMessagesQueryNotificationBlock()
 
         MessageManager.changes(subscription)
     }
 
-    fileprivate func loadMoreMessagesFrom(date: Date?) {
-        if isRequestingHistory {
+    fileprivate func updateMessagesQueryNotificationBlock() {
+        messagesToken?.stop()
+        messagesToken = messagesQuery.addNotificationBlock { [unowned self] changes in
+            switch changes {
+            case .initial: break
+            case .update(_, _, let insertions, let modifications):
+                if insertions.count > 0 {
+                    var newMessages: [Message] = []
+                    for insertion in insertions {
+                        let newMessage = Message(value: self.messagesQuery[insertion])
+                        newMessages.append(newMessage)
+                    }
+
+                    self.messages.append(contentsOf: newMessages)
+                    self.appendMessages(messages: newMessages, completion: nil)
+                    self.markAsRead()
+                }
+
+                if modifications.count == 0 {
+                    return
+                }
+
+                let messagesCount = self.messagesQuery.count
+                var indexPathModifications: [Int] = []
+
+                for modified in modifications {
+                    if messagesCount < modified + 1 {
+                        continue
+                    }
+
+                    let message = Message(value: self.messagesQuery[modified])
+                    let index = self.dataController.update(message)
+                    if index >= 0 && !indexPathModifications.contains(index) {
+                        indexPathModifications.append(index)
+                    }
+                }
+
+                if indexPathModifications.count > 0 {
+                    DispatchQueue.main.async {
+                        UIView.performWithoutAnimation {
+                            self.collectionView?.performBatchUpdates({
+                                self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
+                            }, completion: nil)
+                        }
+                    }
+                }
+
+                break
+            case .error: break
+            }
+        }
+    }
+
+    fileprivate func loadMoreMessagesFrom(date: Date?, loadRemoteHistory: Bool = true) {
+        if isRequestingHistory || dataController.loadedAllMessages {
             return
         }
 
         isRequestingHistory = true
-        MessageManager.getHistory(subscription, lastMessageDate: date) { [weak self] in
-            guard let messages = self?.subscription.fetchMessages() else { return }
-            self?.appendMessages(messages: Array(messages), updateScrollPosition: true, completion: nil)
-            self?.isRequestingHistory = false
+
+        func loadHistoryFromRemote() {
+            let tempSubscription = Subscription(value: self.subscription)
+
+            MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
+                DispatchQueue.main.async {
+                    self?.activityIndicator.stopAnimating()
+                    self?.isRequestingHistory = false
+
+                    if messages.count == 0 {
+                        self?.dataController.loadedAllMessages = true
+
+                        self?.collectionView?.performBatchUpdates({
+                            if let (indexPaths, removedIndexPaths) = self?.dataController.insert([]) {
+                                self?.collectionView?.insertItems(at: indexPaths)
+                                self?.collectionView?.deleteItems(at: removedIndexPaths)
+                            }
+                        }, completion: nil)
+                    } else {
+                        self?.dataController.loadedAllMessages = false
+                    }
+                }
+            }
+        }
+
+        let newMessages = subscription.fetchMessages(lastMessageDate: date).map({ Message(value: $0) })
+        if newMessages.count > 0 {
+            messages.append(contentsOf: newMessages)
+            appendMessages(messages: newMessages, completion: { [weak self] in
+                self?.activityIndicator.stopAnimating()
+
+                if date == nil {
+                    self?.scrollToBottom()
+                }
+
+                if !loadRemoteHistory {
+                    self?.isRequestingHistory = false
+                } else {
+                    loadHistoryFromRemote()
+                }
+            })
+        } else {
+            if loadRemoteHistory {
+                loadHistoryFromRemote()
+            } else {
+                isRequestingHistory = false
+            }
         }
     }
 
-    fileprivate func appendMessages(messages: [Message], updateScrollPosition: Bool = false, completion: VoidCompletion?) {
+    fileprivate func appendMessages(messages: [Message], completion: VoidCompletion?) {
         guard let collectionView = self.collectionView else { return }
 
-        var contentHeight = collectionView.contentSize.height
-        var offsetY = collectionView.contentOffset.y
-        var bottomOffset = contentHeight - offsetY
+        var tempMessages: [Message] = []
+        for message in messages {
+            tempMessages.append(Message(value: message))
+        }
 
-        UIView.performWithoutAnimation {
-            collectionView.performBatchUpdates({
-                // Insert data into collectionView without moving it
-                contentHeight = collectionView.contentSize.height
-                offsetY = collectionView.contentOffset.y
-                bottomOffset = contentHeight - offsetY
+        DispatchQueue.global(qos: .background).async {
+            var objs: [ChatData] = []
+            var newMessages: [Message] = []
 
-                var objs: [ChatData] = []
-                var newMessages: [Message] = []
+            // Do not add duplicated messages
+            for message in tempMessages {
+                var insert = true
 
-                // Do not add duplicated messages
-                for message in messages {
-                    var insert = true
-
-                    // swiftlint:disable for_where
-                    for obj in self.dataController.data {
-                        if message.identifier == obj.message?.identifier {
-                            insert = false
-                        }
-                    }
-
-                    if insert {
-                        newMessages.append(message)
-                    }
+                for obj in self.dataController.data
+                    where message.identifier == obj.message?.identifier {
+                        insert = false
                 }
 
-                // Normalize data into ChatData object
-                for message in newMessages {
-                    guard let createdAt = message.createdAt else { continue }
-                    guard var obj = ChatData(type: .message, timestamp: createdAt) else { continue }
-                    obj.message = message
-                    objs.append(obj)
+                if insert {
+                    newMessages.append(message)
                 }
+            }
 
-                // No new data? Don't update it then
-                if objs.count == 0 {
-                    return
-                }
+            // Normalize data into ChatData object
+            for message in newMessages {
+                guard let createdAt = message.createdAt else { continue }
+                guard var obj = ChatData(type: .message, timestamp: createdAt) else { continue }
+                obj.message = message
+                objs.append(obj)
+            }
 
-                let indexPaths = self.dataController.insert(objs)
-                collectionView.insertItems(at: indexPaths)
-            }, completion: { _ in
-                let shouldScroll = self.isContentBiggerThanContainerHeight()
-                if updateScrollPosition && shouldScroll {
-                    let offset = CGPoint(x: 0, y: collectionView.contentSize.height - bottomOffset)
-                    collectionView.contentOffset = offset
-                }
-
+            // No new data? Don't update it then
+            if objs.count == 0 {
                 DispatchQueue.main.async {
                     completion?()
                 }
-            })
+
+                return
+            }
+
+            DispatchQueue.main.async {
+                collectionView.performBatchUpdates({
+                    let (indexPaths, removedIndexPaths) = self.dataController.insert(objs)
+                    collectionView.insertItems(at: indexPaths)
+                    collectionView.deleteItems(at: removedIndexPaths)
+                }, completion: { _ in
+                    completion?()
+                })
+            }
         }
     }
 
@@ -498,15 +559,9 @@ final class ChatViewController: SLKTextViewController {
 extension ChatViewController {
 
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            if let message = dataController.itemAt(indexPath)?.message {
+        if indexPath.row < 4 {
+            if let message = dataController.oldestMessage() {
                 loadMoreMessagesFrom(date: message.createdAt)
-            } else {
-                let nextIndexPath = IndexPath(row: indexPath.row + 1, section: indexPath.section)
-
-                if let message = dataController.itemAt(nextIndexPath)?.message {
-                    loadMoreMessagesFrom(date: message.createdAt)
-                }
             }
         }
     }
@@ -527,6 +582,18 @@ extension ChatViewController {
             return cellForDaySeparator(obj, at: indexPath)
         }
 
+        if obj.type == .loader {
+            return cellForLoader(obj, at: indexPath)
+        }
+
+        if obj.type == .header {
+            if subscription.type == .directMessage {
+                return cellForDMHeader(obj, at: indexPath)
+            } else {
+                return cellForChannelHeader(obj, at: indexPath)
+            }
+        }
+
         return UICollectionViewCell()
     }
 
@@ -536,8 +603,8 @@ extension ChatViewController {
         guard let cell = collectionView?.dequeueReusableCell(
             withReuseIdentifier: ChatMessageCell.identifier,
             for: indexPath
-            ) as? ChatMessageCell else {
-                return UICollectionViewCell()
+        ) as? ChatMessageCell else {
+            return UICollectionViewCell()
         }
 
         cell.delegate = self
@@ -560,6 +627,39 @@ extension ChatViewController {
         return cell
     }
 
+    func cellForChannelHeader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatChannelHeaderCell.identifier,
+            for: indexPath
+        ) as? ChatChannelHeaderCell else {
+            return UICollectionViewCell()
+        }
+        cell.subscription = subscription
+        return cell
+    }
+
+    func cellForDMHeader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatDirectMessageHeaderCell.identifier,
+            for: indexPath
+        ) as? ChatDirectMessageHeaderCell else {
+            return UICollectionViewCell()
+        }
+        cell.subscription = subscription
+        return cell
+    }
+
+    func cellForLoader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatLoaderCell.identifier,
+            for: indexPath
+        ) as? ChatLoaderCell else {
+            return UICollectionViewCell()
+        }
+
+        return cell
+    }
+
 }
 
 // MARK: UICollectionViewDelegateFlowLayout
@@ -571,11 +671,29 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let fullWidth = UIScreen.main.bounds.size.width
+        let fullWidth = collectionView.bounds.size.width
 
-        if let message = dataController.itemAt(indexPath)?.message {
-            let height = ChatMessageCell.cellMediaHeightFor(message: message)
-            return CGSize(width: fullWidth, height: height)
+        if let obj = dataController.itemAt(indexPath) {
+            if obj.type == .header {
+                if subscription.type == .directMessage {
+                    return CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
+                } else {
+                    return CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
+                }
+            }
+
+            if obj.type == .loader {
+                return CGSize(width: fullWidth, height: ChatLoaderCell.minimumHeight)
+            }
+
+            if obj.type == .daySeparator {
+                return CGSize(width: fullWidth, height: ChatMessageDaySeparator.minimumHeight)
+            }
+
+            if let message = obj.message {
+                let height = ChatMessageCell.cellMediaHeightFor(message: message)
+                return CGSize(width: fullWidth, height: height)
+            }
         }
 
         return CGSize(width: fullWidth, height: 40)
@@ -586,6 +704,16 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
 extension ChatViewController {
 
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        super.scrollViewDidScroll(scrollView)
+
+        if scrollView.contentOffset.y < -10 {
+            if let message = dataController.oldestMessage() {
+                loadMoreMessagesFrom(date: message.createdAt)
+            }
+        }
+    }
+
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard let view = buttonScrollToBottom.superview else { return }
 
@@ -593,6 +721,7 @@ extension ChatViewController {
             buttonScrollToBottomMarginConstraint = buttonScrollToBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
             buttonScrollToBottomMarginConstraint?.isActive = true
         }
+
         if targetContentOffset.pointee.y < scrollView.contentSize.height - scrollView.frame.height {
             buttonScrollToBottomMarginConstraint?.constant = -64
             UIView.animate(withDuration: 0.5) {

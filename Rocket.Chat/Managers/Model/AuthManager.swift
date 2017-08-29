@@ -9,7 +9,14 @@
 import Foundation
 import RealmSwift
 
+struct AuthManagerPersistKeys {
+    static let token = "kAuthToken"
+    static let serverURL = "kAuthServerURL"
+    static let userId = "kUserId"
+}
+
 struct AuthManager {
+
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
@@ -25,6 +32,47 @@ struct AuthManager {
         guard let auth = isAuthenticated() else { return nil }
         guard let user = try? Realm().object(ofType: User.self, forPrimaryKey: auth.userId) else { return nil }
         return user
+    }
+
+    /**
+        This method is going to persist the authentication informations
+        that was latest used in NSUserDefaults to keep it safe if something
+        goes wrong on database migration.
+     */
+    static func persistAuthInformation(_ auth: Auth) {
+        let defaults = UserDefaults.standard
+        defaults.set(auth.token, forKey: AuthManagerPersistKeys.token)
+        defaults.set(auth.serverURL, forKey: AuthManagerPersistKeys.serverURL)
+        defaults.set(auth.userId, forKey: AuthManagerPersistKeys.userId)
+    }
+
+    static func recoverAuthIfNeeded() {
+        if AuthManager.isAuthenticated() != nil {
+            return
+        }
+
+        guard
+            let token = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.token),
+            let serverURL = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.serverURL),
+            let userId = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.userId) else {
+                return
+        }
+
+        Realm.executeOnMainThread({ (realm) in
+            // Clear database
+            realm.deleteAll()
+
+            let auth = Auth()
+            auth.lastSubscriptionFetch = nil
+            auth.lastAccess = Date()
+            auth.serverURL = serverURL
+            auth.token = token
+            auth.userId = userId
+
+            PushManager.updatePushToken()
+
+            realm.add(auth)
+        })
     }
 }
 
@@ -113,7 +161,7 @@ extension AuthManager {
                 return
             }
 
-            Realm.executeOnMainThread({ (realm) in
+            Realm.execute({ (realm) in
                 // Delete all the Auth objects, since we don't
                 // support multiple-server authentication yet
                 realm.delete(realm.objects(Auth.self))
@@ -134,9 +182,10 @@ extension AuthManager {
                 PushManager.updatePushToken()
 
                 realm.add(auth)
+            }, completion: {
+                ServerManager.timestampSync()
+                completion(response)
             })
-
-            completion(response)
         }
     }
 
@@ -214,6 +263,11 @@ extension AuthManager {
             SocketManager.clear()
             GIDSignIn.sharedInstance().signOut()
 
+            let defaults = UserDefaults.standard
+            defaults.removeObject(forKey: AuthManagerPersistKeys.token)
+            defaults.removeObject(forKey: AuthManagerPersistKeys.serverURL)
+            defaults.removeObject(forKey: AuthManagerPersistKeys.userId)
+
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
             })
@@ -222,31 +276,4 @@ extension AuthManager {
         }
     }
 
-    static func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings?>) {
-        let object = [
-            "msg": "method",
-            "method": "public-settings/get"
-        ] as [String : Any]
-
-        SocketManager.send(object) { (response) in
-            guard !response.isError() else {
-                completion(nil)
-                return
-            }
-
-            Realm.executeOnMainThread({ realm in
-                let settings = AuthManager.isAuthenticated()?.settings ?? AuthSettings()
-                settings.map(response.result["result"], realm: realm)
-                realm.add(settings, update: true)
-
-                if let auth = AuthManager.isAuthenticated() {
-                    auth.settings = settings
-                    realm.add(auth, update: true)
-                }
-
-                let unmanagedSettings = AuthSettings(value: settings)
-                completion(unmanagedSettings)
-            })
-        }
-    }
 }

@@ -33,10 +33,19 @@ class AvatarViewSpec: XCTestCase {
         XCTAssertTrue(avatarView.initialsFor("FOO") == "FO")
         XCTAssertTrue(avatarView.initialsFor("F.O") == "FO")
         XCTAssertTrue(avatarView.initialsFor("F.o") == "FO")
-        XCTAssertTrue(avatarView.initialsFor("F.o") == "FO")
         XCTAssertTrue(avatarView.initialsFor("Foo.bar") == "FB")
         XCTAssertTrue(avatarView.initialsFor("Foobar.bar") == "FB")
         XCTAssertTrue(avatarView.initialsFor("Foobar.bar.zab") == "FZ")
+        XCTAssertTrue(avatarView.initialsFor("...") == "?")
+        XCTAssertTrue(avatarView.initialsFor(".foo.b.a") == "?")
+        XCTAssertTrue(avatarView.initialsFor(".foo.b.a.") == "?")
+        XCTAssertTrue(avatarView.initialsFor(".foo.b.a.") == "?")
+        XCTAssertTrue(avatarView.initialsFor(".f.") == "?")
+        XCTAssertTrue(avatarView.initialsFor(".f......") == "?")
+        XCTAssertTrue(avatarView.initialsFor(".f......1234f") == "?")
+        XCTAssertTrue(avatarView.initialsFor(".?.!\"") == "?")
+        XCTAssertTrue(avatarView.initialsFor("1.2") == "12")
+        XCTAssertTrue(avatarView.initialsFor("!.!") == "!!")
     }
 
 }

@@ -42,7 +42,7 @@ final class AvatarView: UIView {
         guard let auth = AuthManager.isAuthenticated() else { return nil }
         guard let baseURL = auth.baseURL() else { return nil }
         guard let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else { return nil }
-        return URL(string: "\(baseURL)/avatar/\(encodedUsername).jpg")
+        return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
     }
 
     private func updateAvatar() {
@@ -76,6 +76,10 @@ final class AvatarView: UIView {
         let strings = username.components(separatedBy: ".")
 
         if let first = strings.first, let last = strings.last {
+            if first.isEmpty || last.isEmpty {
+                return "?"
+            }
+
             let lastOffset = strings.count > 1 ? 1 : 2
             let indexFirst = first.index(first.startIndex, offsetBy: 1)
             let firstString = first.substring(to: indexFirst)
