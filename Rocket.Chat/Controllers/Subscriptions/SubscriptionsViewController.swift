@@ -28,9 +28,9 @@ final class SubscriptionsViewController: BaseViewController {
         didSet {
             avatarView.layer.cornerRadius = 4
             avatarView.layer.masksToBounds = true
+            avatarView.labelInitialsFontSize = 18
             avatarView.frame.size.width = 40.0
             avatarView.frame.size.height = 40.00
-            avatarView.labelInitialsFontSize = 18
         }
     }
 
@@ -212,8 +212,7 @@ extension SubscriptionsViewController {
         guard let viewUserStatus = self.viewUserStatus else { return }
 
         labelUsername.text = user.displayName()
-        avatarView.user = user
-      
+
         switch user.status {
         case .online:
             viewUserStatus.backgroundColor = .RCOnline()
