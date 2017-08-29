@@ -34,7 +34,7 @@ extension AuthViewController: GIDSignInDelegate {
             "scope": "profile"
         ] as [String : Any]
 
-        AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
+        authManager.auth(params: params, completion: self.handleAuthenticationResponse)
     }
 
     func sign(_ signIn: GIDSignIn!, didDisconnectWith user: GIDGoogleUser!, withError error: Error!) {

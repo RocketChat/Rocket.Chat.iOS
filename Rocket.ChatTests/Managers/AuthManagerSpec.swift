@@ -11,7 +11,8 @@ import RealmSwift
 
 @testable import Rocket_Chat
 
-class AuthManagerSpec: XCTestCase {
+class AuthManagerSpec: XCTestCase, AuthManagerInjected {
+
 
     override func setUp() {
         super.setUp()
@@ -31,7 +32,7 @@ class AuthManagerSpec: XCTestCase {
 extension AuthManagerSpec {
 
     func testIsAuthenticatedUserNotAuthenticated() {
-        XCTAssert(AuthManager.isAuthenticated() == nil, "isAuthenticated returns nil for non authenticated users")
+        XCTAssert(authManager.isAuthenticated() == nil, "isAuthenticated returns nil for non authenticated users")
     }
 
     func testIsAuthenticatedUserAuthenticated() {
@@ -41,24 +42,24 @@ extension AuthManagerSpec {
 
             realm.add(auth)
 
-            XCTAssert(AuthManager.isAuthenticated()?.serverURL == auth.serverURL, "isAuthenticated returns Auth instance")
+            XCTAssert(self.authManager.isAuthenticated()?.serverURL == auth.serverURL, "isAuthenticated returns Auth instance")
         })
     }
 
     func testIsAuthenticatedReturnsLastAccessed() {
         Realm.executeOnMainThread({ realm in
             let auth1 = Auth()
-            auth1.serverURL = "one"
+            auth1.serverURL = "ws://one.cc"
             auth1.lastAccess = Date()
 
             let auth2 = Auth()
-            auth2.serverURL = "two"
+            auth2.serverURL = "ws://two.cc"
             auth2.lastAccess = Date(timeIntervalSince1970: 1)
 
             realm.add(auth1)
             realm.add(auth2)
 
-            XCTAssert(AuthManager.isAuthenticated()?.serverURL == auth1.serverURL, "isAuthenticated returns the latests Auth instance")
+            XCTAssert(self.authManager.isAuthenticated()?.serverURL == auth1.serverURL, "isAuthenticated returns the latests Auth instance")
         })
     }
 

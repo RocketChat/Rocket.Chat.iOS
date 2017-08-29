@@ -13,6 +13,8 @@ import RealmSwift
 
 class UserSpec: XCTestCase {
 
+    let authSettingsManager = DependencyRepository.authSettingsManager
+
     override func setUp() {
         super.setUp()
 
@@ -49,7 +51,7 @@ class UserSpec: XCTestCase {
         let settings = AuthSettings()
         settings.useUserRealName = false
 
-        AuthSettingsManager.shared.internalSettings = settings
+        authSettingsManager.internalSettings = settings
 
         let user = User()
         user.name = "Full Name"
@@ -63,7 +65,7 @@ class UserSpec: XCTestCase {
         let settings = AuthSettings()
         settings.useUserRealName = true
 
-        AuthSettingsManager.shared.internalSettings = settings
+        authSettingsManager.internalSettings = settings
 
         let user = User()
         user.name = "Full Name"

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ChatMessageBubbleCell" customModule="RocketChat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BdH-WH-uVL" userLabel="BubbleView">
+                        <rect key="frame" x="20" y="0.0" width="270" height="198"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" editable="NO" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oWp-AR-c2u">
+                                <rect key="frame" x="6" y="6" width="258" height="186"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="oWp-AR-c2u" secondAttribute="trailing" constant="6" id="4YY-wf-Dtm"/>
+                            <constraint firstItem="oWp-AR-c2u" firstAttribute="top" secondItem="BdH-WH-uVL" secondAttribute="top" constant="6" id="Q4n-ka-uO6"/>
+                            <constraint firstAttribute="bottom" secondItem="oWp-AR-c2u" secondAttribute="bottom" constant="6" id="VBX-z0-G7o"/>
+                            <constraint firstItem="oWp-AR-c2u" firstAttribute="height" secondItem="BdH-WH-uVL" secondAttribute="height" constant="-12" id="VIb-CL-o0a"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="32" id="XWH-qS-f6r"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="32" id="eJI-TS-7gc"/>
+                            <constraint firstItem="oWp-AR-c2u" firstAttribute="leading" secondItem="BdH-WH-uVL" secondAttribute="leading" constant="6" id="g56-5u-k2q"/>
+                            <constraint firstItem="oWp-AR-c2u" firstAttribute="width" secondItem="BdH-WH-uVL" secondAttribute="width" constant="-12" id="hPe-Ub-pJV"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o3p-EV-Yry">
+                        <rect key="frame" x="298" y="183.5" width="65" height="14.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                        <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="BdH-WH-uVL" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="20" id="5UU-cp-nKB"/>
+                <constraint firstAttribute="trailing" relation="lessThanOrEqual" secondItem="o3p-EV-Yry" secondAttribute="trailing" constant="12" id="6pN-f6-MTg"/>
+                <constraint firstItem="o3p-EV-Yry" firstAttribute="leading" secondItem="BdH-WH-uVL" secondAttribute="trailing" constant="8" id="DM6-fv-OFq"/>
+                <constraint firstItem="o3p-EV-Yry" firstAttribute="bottom" secondItem="BdH-WH-uVL" secondAttribute="bottom" id="EZZ-Fq-tRW"/>
+                <constraint firstItem="BdH-WH-uVL" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Zos-MZ-OKT"/>
+                <constraint firstItem="BdH-WH-uVL" firstAttribute="width" relation="lessThanOrEqual" secondItem="gTV-IL-0wX" secondAttribute="width" multiplier="0.72" id="jDz-SI-LPh"/>
+                <constraint firstItem="BdH-WH-uVL" firstAttribute="height" secondItem="gTV-IL-0wX" secondAttribute="height" constant="-2" id="v3V-em-q7n"/>
+            </constraints>
+            <size key="customSize" width="409" height="121"/>
+            <connections>
+                <outlet property="bubbleView" destination="BdH-WH-uVL" id="Zru-d7-Grk"/>
+                <outlet property="dateLabel" destination="o3p-EV-Yry" id="4qO-7b-79a"/>
+                <outlet property="messageTextView" destination="oWp-AR-c2u" id="FKM-3V-JmU"/>
+            </connections>
+            <point key="canvasLocation" x="-11.5" y="-39.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

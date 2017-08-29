@@ -21,7 +21,7 @@ class DateExtension: XCTestCase {
     func testDateFromServer() {
         let offset = Double(5000)
 
-        ServerManager.shared.timestampOffset = offset
+        DependencyRepository.serverManager.timestampOffset = offset
 
         let deviceDate = Date()
         let serverDate = Date.serverDate

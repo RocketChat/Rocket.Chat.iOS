@@ -10,7 +10,7 @@ import UIKit
 import SwiftyJSON
 import semver
 
-final class ConnectServerViewController: BaseViewController {
+final class ConnectServerViewController: BaseViewController, SocketManagerInjected, AuthManagerInjected, AuthSettingsManagerInjected {
 
     internal let defaultURL = "https://demo.rocket.chat"
     internal var connecting = false
@@ -113,28 +113,29 @@ final class ConnectServerViewController: BaseViewController {
         serverURL = socketURL
 
         validate(url: validateURL) { [weak self] (_, error) in
+            guard let strongSelf = self else { return }
             guard !error else {
                 DispatchQueue.main.async {
-                    self?.connecting = false
-                    self?.textFieldServerURL.alpha = 1
-                    self?.activityIndicator.stopAnimating()
-                    self?.alertInvalidURL()
+                    strongSelf.connecting = false
+                    strongSelf.textFieldServerURL.alpha = 1
+                    strongSelf.activityIndicator.stopAnimating()
+                    strongSelf.alertInvalidURL()
                 }
 
                 return
             }
 
-            SocketManager.connect(socketURL) { (_, connected) in
-                AuthSettingsManager.updatePublicSettings(nil) { (settings) in
-                    self?.serverPublicSettings = settings
+            strongSelf.socketManager.connect(socketURL) { (_, connected) in
+                strongSelf.authSettingsManager.updatePublicSettings(nil) { (settings) in
+                    strongSelf.serverPublicSettings = settings
 
                     if connected {
-                        self?.performSegue(withIdentifier: "Auth", sender: nil)
+                        strongSelf.performSegue(withIdentifier: "Auth", sender: nil)
                     }
 
-                    self?.connecting = false
-                    self?.textFieldServerURL.alpha = 1
-                    self?.activityIndicator.stopAnimating()
+                    strongSelf.connecting = false
+                    strongSelf.textFieldServerURL.alpha = 1
+                    strongSelf.activityIndicator.stopAnimating()
                 }
             }
         }

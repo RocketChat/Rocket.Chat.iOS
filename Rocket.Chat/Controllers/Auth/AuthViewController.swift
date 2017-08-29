@@ -11,7 +11,7 @@ import UIKit
 import SafariServices
 import OnePasswordExtension
 
-final class AuthViewController: BaseViewController {
+final class AuthViewController: BaseViewController, AuthManagerInjected {
 
     internal var connecting = false
     var serverURL: URL!
@@ -77,11 +77,15 @@ final class AuthViewController: BaseViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "TwoFactor" {
-            if let controller = segue.destination as? TwoFactorAuthenticationViewController {
-                controller.username = textFieldUsername.text ?? ""
-                controller.password = textFieldPassword.text ?? ""
-            }
+        super.prepare(for: segue, sender: sender)
+        guard let identifier = segue.identifier else { return }
+        switch identifier {
+        case "TwoFactor":
+            guard let controller = segue.destination as? TwoFactorAuthenticationViewController else  { break }
+            controller.username = textFieldUsername.text ?? ""
+            controller.password = textFieldPassword.text ?? ""
+        default:
+            break
         }
     }
 
@@ -123,7 +127,7 @@ final class AuthViewController: BaseViewController {
                 present(alert, animated: true, completion: nil)
             }
         } else {
-            if let user = AuthManager.currentUser() {
+            if let user = authManager.currentUser() {
                 if user.username != nil {
                     dismiss(animated: true, completion: nil)
                 } else {
@@ -165,9 +169,9 @@ final class AuthViewController: BaseViewController {
                 "ldapOptions": []
             ] as [String : Any]
 
-            AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
+            authManager.auth(params: params, completion: self.handleAuthenticationResponse)
         } else {
-            AuthManager.auth(email, password: password, completion: self.handleAuthenticationResponse)
+            authManager.auth(email, password: password, completion: self.handleAuthenticationResponse)
         }
     }
 

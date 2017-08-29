@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class RegisterUsernameViewController: BaseViewController {
+final class RegisterUsernameViewController: BaseViewController, AuthManagerInjected {
 
     internal var requesting = false
 
@@ -35,7 +35,7 @@ final class RegisterUsernameViewController: BaseViewController {
         super.viewDidLoad()
 
         startLoading()
-        AuthManager.usernameSuggestion { [weak self] (response) in
+        authManager.usernameSuggestion { [weak self] (response) in
             self?.stopLoading()
 
             if !response.isError() {
@@ -92,7 +92,7 @@ final class RegisterUsernameViewController: BaseViewController {
     fileprivate func requestUsername() {
         startLoading()
 
-        AuthManager.setUsername(textFieldUsername.text ?? "") { [weak self] (response) in
+        authManager.setUsername(textFieldUsername.text ?? "") { [weak self] (response) in
             self?.stopLoading()
 
             if response.isError() {

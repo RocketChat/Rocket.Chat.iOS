@@ -8,6 +8,7 @@ Rocket.Chat/Keys.plist
 ## Build generated
 build/
 DerivedData
+Documents
 
 ## Various settings
 *.pbxuser

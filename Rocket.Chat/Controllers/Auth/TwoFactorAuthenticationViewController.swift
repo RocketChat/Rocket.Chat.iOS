@@ -9,7 +9,7 @@
 import UIKit
 import SwiftyJSON
 
-final class TwoFactorAuthenticationViewController: BaseViewController {
+final class TwoFactorAuthenticationViewController: BaseViewController, AuthManagerInjected {
 
     internal var requesting = false
 
@@ -80,7 +80,7 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
     fileprivate func authenticate() {
         startLoading()
 
-        AuthManager.auth(username, password: password, code: textFieldCode.text ?? "") { [weak self] (response) in
+        authManager.auth(username, password: password, code: textFieldCode.text ?? "") { [weak self] (response) in
             self?.stopLoading()
 
             if response.isError() {

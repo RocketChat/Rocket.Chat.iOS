@@ -1,0 +1,22 @@
+platform :ios, '10.0'
+
+target 'SDKExample' do
+  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
+  use_frameworks!
+  inhibit_all_warnings!
+
+  # Pods for SDKExample
+
+  pod 'RocketChat', git: 'https://github.com/RocketChat/Rocket.Chat.iOS', branch: 'sdk'
+
+  target 'SDKExampleTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'SDKExampleUITests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+end

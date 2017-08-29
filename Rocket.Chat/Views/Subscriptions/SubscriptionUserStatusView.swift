@@ -12,7 +12,7 @@ protocol SubscriptionUserStatusViewProtocol: class {
     func userDidPressedOption()
 }
 
-final class SubscriptionUserStatusView: UIView {
+final class SubscriptionUserStatusView: UIView, UserManagerInjected, AuthManagerInjected {
 
     weak var delegate: SubscriptionUserStatusViewProtocol?
     weak var parentController: UIViewController?
@@ -74,25 +74,25 @@ final class SubscriptionUserStatusView: UIView {
     // MARK: IBAction
 
     @IBAction func buttonOnlineDidPressed(_ sender: Any) {
-        UserManager.setUserStatus(status: .online) { [weak self] (_) in
+        userManager.setUserStatus(status: .online) { [weak self] (_) in
             self?.delegate?.userDidPressedOption()
         }
     }
 
     @IBAction func buttonAwayDidPressed(_ sender: Any) {
-        UserManager.setUserStatus(status: .away) { [weak self] (_) in
+        userManager.setUserStatus(status: .away) { [weak self] (_) in
             self?.delegate?.userDidPressedOption()
         }
     }
 
     @IBAction func buttonBusyDidPressed(_ sender: Any) {
-        UserManager.setUserStatus(status: .busy) { [weak self] (_) in
+        userManager.setUserStatus(status: .busy) { [weak self] (_) in
             self?.delegate?.userDidPressedOption()
         }
     }
 
     @IBAction func buttonInvisibleDidPressed(_ sender: Any) {
-        UserManager.setUserStatus(status: .offline) { [weak self] (_) in
+        userManager.setUserStatus(status: .offline) { [weak self] (_) in
             self?.delegate?.userDidPressedOption()
         }
     }
@@ -116,7 +116,7 @@ final class SubscriptionUserStatusView: UIView {
         SubscriptionsViewController.sharedInstance()?.usersToken?.stop()
         SubscriptionsViewController.sharedInstance()?.subscriptionsToken?.stop()
 
-        AuthManager.logout {
+        authManager.logout {
             let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
             let controller = storyboardChat.instantiateInitialViewController()
             let application = UIApplication.shared

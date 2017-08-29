@@ -11,6 +11,8 @@ import XCTest
 
 class DownloadManagerSpec: XCTestCase {
 
+    let downloadManager = DownloadManager()
+
     func testFilenameForURL() {
         let url = "http://foo.bar/filename.png"
 

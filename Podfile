@@ -5,22 +5,9 @@ use_frameworks!
 inhibit_all_warnings!
 
 def shared_pods
-  # Crash Report
-  pod 'Fabric'
-  pod 'Crashlytics'
-
   # Code utilities
   pod 'SwiftyJSON'
   pod 'semver'
-
-  # UI
-  pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
-  pod 'SlackTextViewController'
-  pod 'MobilePlayer'
-  pod 'URBMediaFocusViewController'
-
-  # Text Processing
-  pod 'TSMarkdownParser'
 
   # Database
   pod 'RealmSwift'
@@ -29,18 +16,48 @@ def shared_pods
   pod 'SDWebImage', '~> 3.8'
   pod 'Starscream', '~> 2.0.0'
 
+  # UI
+  pod 'SlackTextViewController'
+  pod 'MobilePlayer'
+  pod 'URBMediaFocusViewController'
+
+  # Text Processing
+  pod 'TSMarkdownParser'
+end
+
+def app_pods
+  # Crash Report
+  pod 'Fabric'
+  pod 'Crashlytics'
+
+  # UI
+  pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
+
   # Authentication SDKs
   pod '1PasswordExtension'
   pod 'Google/SignIn'
 end
 
 target 'Rocket.Chat' do
-  # Shared pods
   shared_pods
+  app_pods
 end
 
 target 'Rocket.ChatTests' do
-  # Shared pods
+  shared_pods
+  app_pods
+end
+
+target 'Rocket.ChatUITests' do
+  shared_pods
+  app_pods
+end
+
+target 'Rocket.Chat.SDK' do
+  shared_pods
+end
+
+target 'Rocket.Chat.SDKTests' do
   shared_pods
 end
 

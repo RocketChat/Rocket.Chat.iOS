@@ -14,6 +14,8 @@ import SwiftyJSON
 
 class SubscriptionSpec: XCTestCase {
 
+    let authSettingsManager = DependencyRepository.authSettingsManager
+
     override func setUp() {
         super.setUp()
 
@@ -88,7 +90,7 @@ class SubscriptionSpec: XCTestCase {
         let settings = AuthSettings()
         settings.useUserRealName = false
 
-        AuthSettingsManager.shared.internalSettings = settings
+        authSettingsManager.internalSettings = settings
 
         // Direct Messages
         let directMessage = Subscription()
@@ -122,7 +124,7 @@ class SubscriptionSpec: XCTestCase {
         let settings = AuthSettings()
         settings.useUserRealName = true
 
-        AuthSettingsManager.shared.internalSettings = settings
+        authSettingsManager.internalSettings = settings
 
         // Direct Messages
         let directMessage = Subscription()

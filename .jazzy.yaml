@@ -1,0 +1,15 @@
+---
+author: Rocket.Chat
+author_url: https://rocket.chat
+github_url: https://github.com/RocketChat/Rocket.Chat.iOS
+module: RocketChat
+module_version: v0.1.0
+clean: true
+output: ./Documents
+sdk: iphone
+xcodebuild_arguments:
+  - -workspace
+  - Rocket.Chat.xcworkspace
+  - -scheme
+  - Rocket.Chat.SDK
+swift_version: '3.1'
