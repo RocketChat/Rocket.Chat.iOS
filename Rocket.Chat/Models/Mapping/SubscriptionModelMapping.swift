@@ -18,6 +18,7 @@ extension Subscription: ModelMappeable {
 
         self.rid = values["rid"].string ?? ""
         self.name = values["name"].string ?? ""
+        self.fname = values["fname"].string ?? ""
         self.unread = values["unread"].int ?? 0
         self.open = values["open"].bool ?? false
         self.alert = values["alert"].bool ?? false

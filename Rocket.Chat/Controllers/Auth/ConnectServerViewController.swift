@@ -30,6 +30,10 @@ final class ConnectServerViewController: BaseViewController {
         }
     }
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -58,11 +62,6 @@ final class ConnectServerViewController: BaseViewController {
         )
 
         textFieldServerURL.becomeFirstResponder()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(true)
-        NotificationCenter.default.removeObserver(self)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -126,7 +125,7 @@ final class ConnectServerViewController: BaseViewController {
             }
 
             SocketManager.connect(socketURL) { (_, connected) in
-                AuthManager.updatePublicSettings(nil) { (settings) in
+                AuthSettingsManager.updatePublicSettings(nil) { (settings) in
                     self?.serverPublicSettings = settings
 
                     if connected {

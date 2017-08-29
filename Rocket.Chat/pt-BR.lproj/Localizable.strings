@@ -48,6 +48,8 @@
 // Chat
 "chat.channel_preview_view.title" = "Esta é uma pré-visualização de #%@";
 "chat.channel_preview_view.join" = "Entrar";
+"chat.dm.start_conversation" = "Este é o começo de sua conversa com %@";
+"chat.channel.start_conversation" = "Este é o começo da conversa em %@";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Bloquear mensagens do usuário";
@@ -63,9 +65,16 @@
 // Chat Upload
 "chat.upload.uploading_image" = "Enviando imagem";
 "chat.upload.uploading_video" = "Enviando video";
+"chat.upload.uploading_file" = "Enviando \"%@\"";
 "chat.upload.take_photo" = "Tirar uma foto";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
+
+// Chat Download
+"chat.download.downloading_file" = "Baixando \"%@\"";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "Toque para abrir";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";

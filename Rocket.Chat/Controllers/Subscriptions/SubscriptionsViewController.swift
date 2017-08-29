@@ -209,10 +209,9 @@ extension SubscriptionsViewController {
         guard let labelUsername = self.labelUsername else { return }
         guard let viewUserStatus = self.viewUserStatus else { return }
 
-        labelUsername.text = user.username ?? ""
-        
+        labelUsername.text = user.displayName()
         avatarView.user = user
-
+      
         switch user.status {
         case .online:
             viewUserStatus.backgroundColor = .RCOnline()
@@ -289,7 +288,7 @@ extension SubscriptionsViewController {
             ])
 
             searchResultsGroup = searchResultsGroup.sorted {
-                return $0.name < $1.name
+                return $0.displayName() < $1.displayName()
             }
 
             groupSubscriptions?.append(searchResultsGroup)
@@ -375,8 +374,11 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        guard let group = groupInfomation?[section] else { return nil }
-        guard let view = SubscriptionSectionView.instantiateFromNib() else {
+        guard
+            groupInfomation?.count ?? 0 > section,
+            let group = groupInfomation?[section],
+            let view = SubscriptionSectionView.instantiateFromNib()
+        else {
             return nil
         }
 
@@ -402,9 +404,11 @@ extension SubscriptionsViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        guard let subscriptionCell = cell as? SubscriptionCell else { return }
+        guard let cell = cell as? SubscriptionCell else { return }
+        guard let subscription = cell.subscription else { return }
         guard let selectedSubscription = ChatViewController.sharedInstance()?.subscription else { return }
-        if subscriptionCell.subscription == selectedSubscription {
+
+        if subscription.identifier == selectedSubscription.identifier {
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         }
     }

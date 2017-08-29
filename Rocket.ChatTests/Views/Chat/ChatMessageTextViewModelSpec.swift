@@ -43,6 +43,15 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         XCTAssert(model.text == attachment.text, "Should have a text")
     }
 
+    func testTextTitleLink() {
+        let attachment = Attachment()
+        attachment.text = "Lorem ipsum"
+        attachment.titleLink = "http://foo.bar"
+        let model = ChatMessageTextViewModel(withAttachment: attachment)
+
+        XCTAssert(model.text == localized("chat.message.open_file"), "Should have a text")
+    }
+
     func testNilText() {
         let attachment = Attachment()
         let model = ChatMessageTextViewModel(withAttachment: attachment)

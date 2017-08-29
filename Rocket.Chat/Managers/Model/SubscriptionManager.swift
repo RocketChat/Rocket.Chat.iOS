@@ -78,7 +78,7 @@ struct SubscriptionManager {
                         }
                     }
 
-                    auth.lastSubscriptionFetch = Date()
+                    auth.lastSubscriptionFetch = Date.serverDate
                     realm.add(subscriptions, update: true)
 
                     DispatchQueue.main.async {
@@ -127,7 +127,7 @@ struct SubscriptionManager {
                     subscriptions.append(subscription)
                 }
 
-                auth.lastSubscriptionFetch = Date()
+                auth.lastSubscriptionFetch = Date.serverDate
 
                 realm.add(subscriptions, update: true)
                 realm.add(auth, update: true)

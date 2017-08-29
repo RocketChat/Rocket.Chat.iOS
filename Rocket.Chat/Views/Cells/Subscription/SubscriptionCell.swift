@@ -20,7 +20,7 @@ final class SubscriptionCell: UITableViewCell {
     internal let selectedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.18)
     internal let highlightedBackgroundColor = UIColor(rgb: 0x0, alphaVal: 0.27)
 
-    var subscription: Subscription! {
+    var subscription: Subscription? {
         didSet {
             updateSubscriptionInformatin()
         }
@@ -35,9 +35,11 @@ final class SubscriptionCell: UITableViewCell {
     }
 
     func updateSubscriptionInformatin() {
+        guard let subscription = self.subscription else { return }
+
         updateIconImage()
 
-        labelName.text = subscription.name
+        labelName.text = subscription.displayName()
 
         if subscription.unread > 0 || subscription.alert {
             labelName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
@@ -52,6 +54,8 @@ final class SubscriptionCell: UITableViewCell {
     }
 
     func updateIconImage() {
+        guard let subscription = self.subscription else { return }
+
         switch subscription.type {
         case .channel:
             imageViewIcon.image = UIImage(named: "Hashtag")?.imageWithTint(.RCInvisible())

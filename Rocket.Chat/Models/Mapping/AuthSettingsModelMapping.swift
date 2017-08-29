@@ -19,6 +19,8 @@ extension AuthSettings: ModelMappeable {
         self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
         self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string
 
+        self.useUserRealName = objectForKey(object: values, key: "UI_Use_Real_Name")?.bool ?? false
+
         self.favoriteRooms = objectForKey(object: values, key: "Favorite_Rooms")?.bool ?? true
 
         self.isUsernameEmailAuthenticationEnabled = objectForKey(object: values, key: "Accounts_ShowFormLogin")?.bool ?? true

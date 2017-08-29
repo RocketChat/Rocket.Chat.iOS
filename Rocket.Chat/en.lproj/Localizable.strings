@@ -48,6 +48,8 @@
 // Chat
 "chat.channel_preview_view.title" = "This is a preview of #%@";
 "chat.channel_preview_view.join" = "Join Channel";
+"chat.dm.start_conversation" = "This is the start of your conversation with %@";
+"chat.channel.start_conversation" = "This is the start of the conversation on %@";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Block messages from user";
@@ -63,9 +65,16 @@
 // Chat Upload
 "chat.upload.uploading_image" = "Uploading image";
 "chat.upload.uploading_video" = "Uploading video";
+"chat.upload.uploading_file" = "Uploading \"%@\"";
 "chat.upload.take_photo" = "Take Photo";
 "chat.upload.choose_from_library" = "Choose From Library";
 "chat.upload.import_file" = "Import File From...";
+
+// Chat Download
+"chat.download.downloading_file" = "Downloading \"%@\"";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "Tap to open the file";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Room name changed to: %@ by %@";
@@ -92,5 +101,3 @@
 "chat.info.item.members" = "Members";
 "chat.info.item.pinned" = "Pinned";
 "chat.info.item.starred" = "Starred";
-
-
