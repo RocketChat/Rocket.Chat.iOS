@@ -13,6 +13,24 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
+    @IBOutlet weak var imageViewIcon: UIImageView!
+    @IBOutlet weak var avatarViewContainer: AvatarView! {
+        didSet {
+            if let avatarView = AvatarView.instantiateFromNib() {
+                self.avatarView.frame = avatarViewContainer.bounds
+                avatarViewContainer.addSubview(avatarView)
+                self.avatarView = avatarView
+            }
+        }
+    }
+
+    weak var avatarView: AvatarView! {
+        didSet {
+            avatarView.layer.cornerRadius = 4
+            avatarView.layer.masksToBounds = true
+            avatarView.labelInitialsFontSize = 25
+        }
+    }
 
     let defaultButtonCancelSearchWidth = CGFloat(65)
     @IBOutlet weak var buttonCancelSearch: UIButton! {
@@ -192,7 +210,8 @@ extension SubscriptionsViewController {
         guard let viewUserStatus = self.viewUserStatus else { return }
 
         labelUsername.text = user.displayName()
-
+        avatarView.user = user
+      
         switch user.status {
         case .online:
             viewUserStatus.backgroundColor = .RCOnline()
