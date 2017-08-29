@@ -28,7 +28,9 @@ final class SubscriptionsViewController: BaseViewController {
         didSet {
             avatarView.layer.cornerRadius = 4
             avatarView.layer.masksToBounds = true
-            avatarView.labelInitialsFontSize = 25
+            avatarView.frame.size.width = 40.0
+            avatarView.frame.size.height = 40.00
+            avatarView.labelInitialsFontSize = 18
         }
     }
 
