@@ -29,7 +29,7 @@ public struct Department {
 }
 
 extension Department: Equatable {
-    public static func ==(aDptm: Department, bDptm: Department) -> Bool {
+    public static func == (aDptm: Department, bDptm: Department) -> Bool {
         return aDptm.id == bDptm.id
     }
 }

@@ -13,7 +13,6 @@ import RealmSwift
 
 class AuthManagerSpec: XCTestCase, AuthManagerInjected {
 
-
     override func setUp() {
         super.setUp()
 

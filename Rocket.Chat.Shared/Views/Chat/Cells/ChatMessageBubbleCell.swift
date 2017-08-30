@@ -196,18 +196,18 @@ class ChatMessageBubbleCell: UICollectionViewCell, MessageTextCacheManagerInject
             messageTextView.attributedText = text
             messageTextView.sizeToFit()
         }
-        
+
         insertGesturesIfNeeded()
         layoutIfNeeded()
     }
-    
+
     func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
     }
 }
 
 extension ChatMessageBubbleCell: UIGestureRecognizerDelegate {
-    
+
 }
 
 extension ChatMessageBubbleCell: UITextViewDelegate {

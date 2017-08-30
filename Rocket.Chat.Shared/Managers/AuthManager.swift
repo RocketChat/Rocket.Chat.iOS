@@ -9,13 +9,11 @@
 import Foundation
 import RealmSwift
 
-
 struct AuthManagerPersistKeys {
     static let token = "kAuthToken"
     static let serverURL = "kAuthServerURL"
     static let userId = "kUserId"
 }
-
 
 /// A manager that manages all authentication related actions
 public class AuthManager: SocketManagerInjected, PushManagerInjected, ServerManagerInjected {

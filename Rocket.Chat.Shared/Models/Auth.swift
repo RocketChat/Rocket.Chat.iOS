@@ -44,5 +44,5 @@ extension Auth {
 
         return self.settings?.siteURL
     }
-    
+
 }
