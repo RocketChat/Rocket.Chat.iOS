@@ -81,7 +81,7 @@ final class AuthViewController: BaseViewController, AuthManagerInjected {
         guard let identifier = segue.identifier else { return }
         switch identifier {
         case "TwoFactor":
-            guard let controller = segue.destination as? TwoFactorAuthenticationViewController else  { break }
+            guard let controller = segue.destination as? TwoFactorAuthenticationViewController else { break }
             controller.username = textFieldUsername.text ?? ""
             controller.password = textFieldPassword.text ?? ""
         default:

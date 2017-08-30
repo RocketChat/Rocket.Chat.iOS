@@ -147,7 +147,7 @@ public class LivechatManager: SocketManagerInjected, AuthManagerInjected, Subscr
             guard let navigationViewController = storyboard.instantiateInitialViewController() as? UINavigationController else {
                 fatalError("Unexpected view hierachy: initial view controller is not a navigation controller")
             }
-            guard let _ = navigationViewController.viewControllers.first as? SupportViewController else {
+            guard navigationViewController.viewControllers.first is SupportViewController else {
                 fatalError("Unexpected view hierachy: navigation controller's root view controller is not support view controller")
             }
 
@@ -160,7 +160,7 @@ public class LivechatManager: SocketManagerInjected, AuthManagerInjected, Subscr
             guard let navigationViewController = storyboard.instantiateViewController(withIdentifier: "offlineSupport") as? UINavigationController else {
                 fatalError("Unexpected view hierachy: `offlineSupport` is not a navigation controller")
             }
-            guard let _ = navigationViewController.viewControllers.first as? OfflineFormViewController else {
+            guard navigationViewController.viewControllers.first is OfflineFormViewController else {
                 fatalError("Unexpected view hierachy: navigation controller's root view controller is not offline form view controller")
             }
 
