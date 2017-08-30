@@ -210,8 +210,10 @@ extension SubscriptionsViewController {
         guard let user = AuthManager.currentUser() else { return }
         guard let labelUsername = self.labelUsername else { return }
         guard let viewUserStatus = self.viewUserStatus else { return }
+        guard let avatarView = self.avatarView else { return }
 
         labelUsername.text = user.displayName()
+        avatarView.user = user
 
         switch user.status {
         case .online:
