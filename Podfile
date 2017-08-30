@@ -26,8 +26,8 @@ def shared_pods
   pod 'RealmSwift'
 
   # Network
-  pod 'SDWebImage', '~> 3.8'
-  pod 'Starscream', '~> 2.0.0'
+  pod 'SDWebImage', '~> 3'
+  pod 'Starscream', '~> 2'
 
   # Authentication SDKs
   pod '1PasswordExtension'
