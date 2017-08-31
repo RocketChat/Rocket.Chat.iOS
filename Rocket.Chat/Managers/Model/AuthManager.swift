@@ -117,6 +117,10 @@ struct AuthManager {
             return
         }
 
+        Realm.Configuration.defaultConfiguration = Realm.Configuration(
+            deleteRealmIfMigrationNeeded: true
+        )
+
         Realm.executeOnMainThread({ (realm) in
             // Clear database
             realm.deleteAll()
