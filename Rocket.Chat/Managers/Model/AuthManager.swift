@@ -10,6 +10,11 @@ import Foundation
 import RealmSwift
 
 struct AuthManagerPersistKeys {
+    static let servers = "kServers"
+
+    static let selectedIndex = "kSelectedIndex"
+
+    static let databaseName = "kDatabaseName"
     static let token = "kAuthToken"
     static let serverURL = "kAuthServerURL"
     static let userId = "kUserId"
@@ -46,16 +51,70 @@ struct AuthManager {
         defaults.set(auth.userId, forKey: AuthManagerPersistKeys.userId)
     }
 
+    /**
+        This method migrates the old authentication storaged format
+        to a new one that supports multiple authentication at the
+        same app installation.
+     
+        Last version using the old format: 1.2.1.
+     */
+    static func recoverOldAuthFormatIfNeeded() {
+        if AuthManager.isAuthenticated() != nil {
+            return
+        }
+
+        let defaults = UserDefaults.standard
+
+        guard
+            let token = defaults.string(forKey: AuthManagerPersistKeys.token),
+            let serverURL = defaults.string(forKey: AuthManagerPersistKeys.serverURL),
+            let userId = defaults.string(forKey: AuthManagerPersistKeys.userId) else {
+                return
+        }
+
+        let servers = [[
+            AuthManagerPersistKeys.databaseName: "1",
+            AuthManagerPersistKeys.token: token,
+            AuthManagerPersistKeys.serverURL: serverURL,
+            AuthManagerPersistKeys.userId: userId
+        ]]
+
+        defaults.set(0, forKey: AuthManagerPersistKeys.selectedIndex)
+        defaults.set(servers, forKey: AuthManagerPersistKeys.servers)
+        defaults.removeObject(forKey: AuthManagerPersistKeys.token)
+        defaults.removeObject(forKey: AuthManagerPersistKeys.serverURL)
+        defaults.removeObject(forKey: AuthManagerPersistKeys.userId)
+    }
+
+    /**
+        Recovers the authentication on database if needed
+     */
     static func recoverAuthIfNeeded() {
         if AuthManager.isAuthenticated() != nil {
             return
         }
 
+        recoverOldAuthFormatIfNeeded()
+
+        let defaults = UserDefaults.standard
+
         guard
-            let token = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.token),
-            let serverURL = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.serverURL),
-            let userId = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.userId) else {
-                return
+            let servers = defaults.value(forKey: AuthManagerPersistKeys.servers) as? [[String: String]],
+            servers.count > 0
+        else {
+            return
+        }
+
+        let selectedIndex = defaults.integer(forKey: AuthManagerPersistKeys.selectedIndex)
+        let server = servers[selectedIndex]
+
+        guard
+            let databaseName = server[AuthManagerPersistKeys.databaseName],
+            let token = server[AuthManagerPersistKeys.token],
+            let serverURL = server[AuthManagerPersistKeys.serverURL],
+            let userId = server[AuthManagerPersistKeys.userId]
+        else {
+            return
         }
 
         Realm.executeOnMainThread({ (realm) in
