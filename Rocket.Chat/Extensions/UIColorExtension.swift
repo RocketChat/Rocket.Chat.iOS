@@ -34,7 +34,7 @@ extension UIColor {
     }
 
     static func RCInvisible() -> UIColor {
-        return UIColor(rgb: 0x9AB1BF, alphaVal: 1)
+        return UIColor(rgb: 0x9ea2a4, alphaVal: 1)
     }
 
     // Theme color
@@ -56,7 +56,7 @@ extension UIColor {
     }
 
     static func RCLightBlue() -> UIColor {
-        return UIColor(rgb: 0x9ab1bf, alphaVal: 1)
+        return UIColor(rgb: 0x9ea2a4, alphaVal: 1)
     }
 
     static func RCBlue() -> UIColor {
