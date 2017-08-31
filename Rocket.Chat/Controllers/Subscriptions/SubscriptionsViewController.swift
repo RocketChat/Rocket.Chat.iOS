@@ -51,7 +51,7 @@ final class SubscriptionsViewController: BaseViewController {
             textFieldSearch.placeholder = localized("subscriptions.search")
 
             if let placeholder = textFieldSearch.placeholder {
-                let color = UIColor(rgb: 0x9AB1BF, alphaVal: 1)
+                let color = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
                 textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSForegroundColorAttributeName: color])
             }
         }
