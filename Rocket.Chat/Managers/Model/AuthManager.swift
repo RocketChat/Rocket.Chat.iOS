@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import Realm
 
 struct AuthManagerPersistKeys {
     static let servers = "kServers"
@@ -26,17 +27,17 @@ struct AuthManager {
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
     static func isAuthenticated() -> Auth? {
-        guard let auths = try? Realm().objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false) else { return nil}
-        return auths.first
+        guard let realm = Realm.shared else { return nil }
+        return realm.objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false).first
     }
 
     /**
         - returns: Current user object, if exists.
     */
     static func currentUser() -> User? {
+        guard let realm = Realm.shared else { return nil }
         guard let auth = isAuthenticated() else { return nil }
-        guard let user = try? Realm().object(ofType: User.self, forPrimaryKey: auth.userId) else { return nil }
-        return user
+        return realm.object(ofType: User.self, forPrimaryKey: auth.userId)
     }
 
     /**
@@ -49,6 +50,21 @@ struct AuthManager {
         defaults.set(auth.token, forKey: AuthManagerPersistKeys.token)
         defaults.set(auth.serverURL, forKey: AuthManagerPersistKeys.serverURL)
         defaults.set(auth.userId, forKey: AuthManagerPersistKeys.userId)
+    }
+
+    static func selectedServerInformation() -> [String: String]? {
+        let defaults = UserDefaults.standard
+
+        guard
+            let servers = defaults.value(forKey: AuthManagerPersistKeys.servers) as? [[String: String]],
+            servers.count > 0
+        else {
+            return nil
+        }
+
+        let selectedIndex = defaults.integer(forKey: AuthManagerPersistKeys.selectedIndex)
+        let server = servers[selectedIndex]
+        return server
     }
 
     /**
@@ -73,7 +89,7 @@ struct AuthManager {
         }
 
         let servers = [[
-            AuthManagerPersistKeys.databaseName: "1",
+            AuthManagerPersistKeys.databaseName: "\(String.random()).realm",
             AuthManagerPersistKeys.token: token,
             AuthManagerPersistKeys.serverURL: serverURL,
             AuthManagerPersistKeys.userId: userId
@@ -96,20 +112,8 @@ struct AuthManager {
 
         recoverOldAuthFormatIfNeeded()
 
-        let defaults = UserDefaults.standard
-
         guard
-            let servers = defaults.value(forKey: AuthManagerPersistKeys.servers) as? [[String: String]],
-            servers.count > 0
-        else {
-            return
-        }
-
-        let selectedIndex = defaults.integer(forKey: AuthManagerPersistKeys.selectedIndex)
-        let server = servers[selectedIndex]
-
-        guard
-            let databaseName = server[AuthManagerPersistKeys.databaseName],
+            let server = selectedServerInformation(),
             let token = server[AuthManagerPersistKeys.token],
             let serverURL = server[AuthManagerPersistKeys.serverURL],
             let userId = server[AuthManagerPersistKeys.userId]
@@ -117,9 +121,7 @@ struct AuthManager {
             return
         }
 
-        Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            deleteRealmIfMigrationNeeded: true
-        )
+        DatabaseManager.changeDatabaseInstance()
 
         Realm.executeOnMainThread({ (realm) in
             // Clear database

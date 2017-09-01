@@ -12,10 +12,12 @@ import RealmSwift
 extension ChatViewController {
 
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
+        guard let realm = Realm.shared else { return }
+
         searchResult = [:]
 
         if prefix == "@" && word.characters.count > 0 {
-            guard let users = try? Realm().objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", word)) else { return }
+            let users = realm.objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", word))
 
             for user in users {
                 if let username = user.username {
@@ -32,7 +34,7 @@ extension ChatViewController {
             }
 
         } else if prefix == "#" && word.characters.count > 0 {
-            guard let channels = try? Realm().objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p') && name BEGINSWITH[c] %@", word) else { return }
+            let channels = realm.objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p') && name BEGINSWITH[c] %@", word)
 
             for channel in channels {
                 searchResult[channel.name] = channel.type == .channel ? UIImage(named: "Hashtag") : UIImage(named: "Lock")

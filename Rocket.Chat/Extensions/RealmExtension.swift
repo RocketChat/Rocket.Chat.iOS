@@ -7,10 +7,17 @@
 //
 
 import Foundation
-import RealmSwift
 import SwiftyJSON
+import RealmSwift
+
+var realmInstance: Realm?
 
 extension Realm {
+
+    static var shared: Realm? {
+        guard let configuration = realmInstance?.configuration else { return nil }
+        return try? Realm(configuration: configuration)
+    }
 
     static func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
         var backgroundTaskId: UIBackgroundTaskIdentifier?
@@ -21,7 +28,8 @@ extension Realm {
 
         if let backgroundTaskId = backgroundTaskId {
             DispatchQueue.global(qos: .background).async { _ in
-                guard let realm = try? Realm() else { return }
+                guard let realm = self.shared else { return }
+
                 try? realm.write {
                     execution(realm)
                 }
@@ -36,7 +44,8 @@ extension Realm {
     }
 
     static func executeOnMainThread(_ execution: @escaping (Realm) -> Void) {
-        guard let realm = try? Realm() else { return }
+        guard let realm = realmInstance else { return }
+
         try? realm.write {
             execution(realm)
         }
