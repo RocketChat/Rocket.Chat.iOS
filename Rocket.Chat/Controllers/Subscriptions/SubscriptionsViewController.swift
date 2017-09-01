@@ -212,12 +212,13 @@ extension SubscriptionsViewController {
     func subscribeModelChanges() {
         guard !assigned else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let realm = Realm.shared else { return }
 
         assigned = true
 
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
-        usersToken = try? Realm().objects(User.self).addNotificationBlock(handleModelUpdates)
+        usersToken = realm.objects(User.self).addNotificationBlock(handleModelUpdates)
 
         groupSubscription()
     }

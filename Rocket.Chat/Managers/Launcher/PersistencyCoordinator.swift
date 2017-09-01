@@ -11,8 +11,6 @@ import RealmSwift
 
 struct PersistencyCoordinator: LauncherProtocol {
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
-        Realm.Configuration.defaultConfiguration = Realm.Configuration(
-            deleteRealmIfMigrationNeeded: true
-        )
+        DatabaseManager.changeDatabaseInstance()
     }
 }

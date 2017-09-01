@@ -26,6 +26,7 @@
 		412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
 		412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412E1F391DB6D55000531FDA /* ChatMessageURLView.swift */; };
 		412E1F3C1DB6D55000531FDA /* ChatMessageURLView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412E1F3A1DB6D55000531FDA /* ChatMessageURLView.xib */; };
+		412F8DD91F599EF100AF7786 /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412F8DD81F599EF100AF7786 /* DatabaseManager.swift */; };
 		4133EDCF1DA2834E005AA783 /* ChatMessageImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4133EDCE1DA2834E005AA783 /* ChatMessageImageView.swift */; };
 		4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */; };
 		413996171F3B44500075F96E /* UploadHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 413996161F3B44500075F96E /* UploadHelper.swift */; };
@@ -210,6 +211,7 @@
 		412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorCSSColorsExtension.swift; path = Extensions/UIColorCSSColorsExtension.swift; sourceTree = "<group>"; };
 		412E1F391DB6D55000531FDA /* ChatMessageURLView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageURLView.swift; path = Views/Cells/Chat/ChatMessageURLView.swift; sourceTree = "<group>"; };
 		412E1F3A1DB6D55000531FDA /* ChatMessageURLView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatMessageURLView.xib; path = Views/Cells/Chat/ChatMessageURLView.xib; sourceTree = "<group>"; };
+		412F8DD81F599EF100AF7786 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatabaseManager.swift; path = Managers/DatabaseManager.swift; sourceTree = "<group>"; };
 		4133EDCE1DA2834E005AA783 /* ChatMessageImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageImageView.swift; path = Views/Cells/Chat/ChatMessageImageView.swift; sourceTree = "<group>"; };
 		4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatMessageImageView.xib; path = Views/Cells/Chat/ChatMessageImageView.xib; sourceTree = "<group>"; };
 		413996161F3B44500075F96E /* UploadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadHelper.swift; path = Helpers/UploadHelper.swift; sourceTree = "<group>"; };
@@ -620,6 +622,7 @@
 				415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */,
 				41499C8E1F2A116900790EA7 /* ServerManager.swift */,
 				419ECCA31F3CA21A005F224B /* DownloadManager.swift */,
+				412F8DD81F599EF100AF7786 /* DatabaseManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1452,6 +1455,7 @@
 				41F3C1001DB577ED000E0C76 /* MessageURL.swift in Sources */,
 				4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */,
 				41DC7A1D1D38471700896FC0 /* MessageManager.swift in Sources */,
+				412F8DD91F599EF100AF7786 /* DatabaseManager.swift in Sources */,
 				41A79C131D2F09F200A1968E /* Auth.swift in Sources */,
 				41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */,
 				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
