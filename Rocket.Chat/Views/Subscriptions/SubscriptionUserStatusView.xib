@@ -155,7 +155,7 @@
                     <subviews>
                         <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5R5-vI-pRq">
                             <rect key="frame" x="15" y="17" width="10" height="10"/>
-                            <color key="backgroundColor" red="0.61960784313725492" green="0.63529411764705879" blue="0.6588235294117647" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.79607843137254897" green="0.80784313725490198" blue="0.81960784313725488" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="10" id="Qd6-e8-O2g"/>
                                 <constraint firstAttribute="height" constant="10" id="cvv-ki-5DY"/>
