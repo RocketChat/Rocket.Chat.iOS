@@ -13,7 +13,6 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
-    @IBOutlet weak var imageViewIcon: UIImageView!
     @IBOutlet weak var avatarViewContainer: AvatarView! {
         didSet {
             if let avatarView = AvatarView.instantiateFromNib() {
@@ -29,8 +28,6 @@ final class SubscriptionsViewController: BaseViewController {
             avatarView.layer.cornerRadius = 4
             avatarView.layer.masksToBounds = true
             avatarView.labelInitialsFontSize = 18
-            avatarView.frame.size.width = 40.0
-            avatarView.frame.size.height = 40.00
         }
     }
 
@@ -214,7 +211,8 @@ extension SubscriptionsViewController {
 
         labelUsername.text = user.displayName()
         avatarView.user = user
-
+        avatarView.frame = CGRect(x: 0, y: 0, width: avatarViewContainer.frame.size.width, height: avatarViewContainer.frame.size.height)
+        
         switch user.status {
         case .online:
             viewUserStatus.backgroundColor = .RCOnline()

@@ -118,9 +118,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ArO-ez-uRr" userLabel="User View">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="X4s-Xy-Vc9" userLabel="Image View Icon">
-                                                <rect key="frame" x="38" y="11" width="40" height="40"/>
-                                            </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow Down" translatesAutoresizingMaskIntoConstraints="NO" id="QXa-y8-P03">
                                                 <rect key="frame" x="340" y="22" width="20" height="20"/>
                                                 <constraints>
@@ -165,14 +162,10 @@
                                             <constraint firstItem="QXa-y8-P03" firstAttribute="centerY" secondItem="ArO-ez-uRr" secondAttribute="centerY" id="1V1-ih-Llv"/>
                                             <constraint firstItem="V2s-Ct-SCW" firstAttribute="centerY" secondItem="ArO-ez-uRr" secondAttribute="centerY" id="2Jc-9b-WEh"/>
                                             <constraint firstItem="K3h-Vc-Kfo" firstAttribute="leading" secondItem="jtd-Yq-Z3y" secondAttribute="trailing" constant="7" id="4mO-ff-hNI"/>
-                                            <constraint firstItem="X4s-Xy-Vc9" firstAttribute="top" secondItem="ArO-ez-uRr" secondAttribute="top" constant="11" id="Eak-gy-0Gh"/>
                                             <constraint firstItem="QXa-y8-P03" firstAttribute="leading" secondItem="K3h-Vc-Kfo" secondAttribute="trailing" constant="-20" id="IiX-bm-Sdv"/>
                                             <constraint firstItem="K3h-Vc-Kfo" firstAttribute="centerY" secondItem="ArO-ez-uRr" secondAttribute="centerY" id="OKe-Wv-ua9"/>
                                             <constraint firstAttribute="trailing" secondItem="QXa-y8-P03" secondAttribute="trailing" constant="15" id="RpC-Gx-t2v"/>
-                                            <constraint firstItem="K3h-Vc-Kfo" firstAttribute="leading" secondItem="X4s-Xy-Vc9" secondAttribute="trailing" constant="7" id="UxL-Ta-fUT"/>
                                             <constraint firstItem="V2s-Ct-SCW" firstAttribute="leading" secondItem="ArO-ez-uRr" secondAttribute="leading" constant="15" id="VTg-Nj-NAV"/>
-                                            <constraint firstItem="jtd-Yq-Z3y" firstAttribute="centerX" secondItem="X4s-Xy-Vc9" secondAttribute="centerX" id="iDY-O4-Yyl"/>
-                                            <constraint firstAttribute="bottom" secondItem="X4s-Xy-Vc9" secondAttribute="bottom" constant="13" id="nXL-iy-uwX"/>
                                             <constraint firstItem="K3h-Vc-Kfo" firstAttribute="leading" secondItem="V2s-Ct-SCW" secondAttribute="trailing" constant="60" id="rsf-du-tXs"/>
                                             <constraint firstAttribute="height" constant="64" id="zwY-4t-oRL"/>
                                         </constraints>
@@ -227,7 +220,6 @@
                         <outlet property="buttonCancelSearch" destination="DHL-lw-BNd" id="Z2w-xL-sMe"/>
                         <outlet property="buttonCancelSearchWidthConstraint" destination="cc8-l6-3Cc" id="mCA-dV-hng"/>
                         <outlet property="imageViewArrowDown" destination="QXa-y8-P03" id="aiy-GU-1xl"/>
-                        <outlet property="imageViewIcon" destination="X4s-Xy-Vc9" id="bFl-hw-nUs"/>
                         <outlet property="labelUsername" destination="K3h-Vc-Kfo" id="6sl-Ij-9ar"/>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                         <outlet property="textFieldSearch" destination="TPV-i5-hsW" id="0ho-Fe-IZ9"/>
