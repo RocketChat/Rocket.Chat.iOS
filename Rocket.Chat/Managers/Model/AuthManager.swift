@@ -51,8 +51,8 @@ struct AuthManager {
         guard
             let token = auth.token,
             let userId = auth.userId,
-            let selectedIndex = defaults.value(forKey: AuthManagerPersistKeys.selectedIndex) as? Int,
-            var servers = defaults.value(forKey: AuthManagerPersistKeys.servers) as? [[String: String]],
+            let selectedIndex = DatabaseManager.selectedIndex,
+            var servers = DatabaseManager.servers,
             servers.count > selectedIndex
         else {
             return
@@ -65,10 +65,8 @@ struct AuthManager {
     }
 
     static func selectedServerInformation(index: Int? = nil) -> [String: String]? {
-        let defaults = UserDefaults.standard
-
         guard
-            let servers = defaults.value(forKey: AuthManagerPersistKeys.servers) as? [[String: String]],
+            let servers = DatabaseManager.servers,
             servers.count > 0
         else {
             return nil
@@ -78,7 +76,7 @@ struct AuthManager {
         if let index = index {
             server = servers[index]
         } else {
-            let selectedIndex = defaults.integer(forKey: AuthManagerPersistKeys.selectedIndex)
+            let selectedIndex = DatabaseManager.selectedIndex ?? 0
             server = servers[selectedIndex]
         }
 
