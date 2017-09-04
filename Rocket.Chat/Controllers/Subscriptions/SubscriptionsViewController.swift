@@ -13,23 +13,6 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
-    @IBOutlet weak var avatarViewContainer: AvatarView! {
-        didSet {
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = avatarViewContainer.bounds
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
-            }
-        }
-    }
-
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
-            avatarView.labelInitialsFontSize = 18
-        }
-    }
 
     let defaultButtonCancelSearchWidth = CGFloat(65)
     @IBOutlet weak var buttonCancelSearch: UIButton! {
@@ -70,6 +53,14 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     @IBOutlet weak var viewUserStatus: UIView!
+
+    @IBOutlet weak var imageViewServer: UIImageView! {
+        didSet {
+            imageViewServer.layer.masksToBounds = true
+            imageViewServer.layer.cornerRadius = 5
+        }
+    }
+
     @IBOutlet weak var labelServer: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var imageViewArrowDown: UIImageView! {
@@ -205,14 +196,18 @@ extension SubscriptionsViewController {
     }
 
     func updateCurrentUserInformation() {
+        guard let settings = AuthSettingsManager.settings else { return }
         guard let user = AuthManager.currentUser() else { return }
         guard let labelUsername = self.labelUsername else { return }
         guard let viewUserStatus = self.viewUserStatus else { return }
-        guard let avatarView = self.avatarView else { return }
+        guard let imageViewServer = self.imageViewServer else { return }
 
-        labelServer.text = AuthSettingsManager.shared.settings?.serverName
+        labelServer.text = settings.serverName
         labelUsername.text = user.displayName()
-        avatarView.user = user
+
+        if let assetURL = URL(string: settings.serverFaviconURL ?? "") {
+            imageViewServer.sd_setImage(with: assetURL)
+        }
 
         switch user.status {
         case .online:
@@ -373,7 +368,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
 extension SubscriptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45
+        return 60
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
