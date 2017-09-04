@@ -77,8 +77,6 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     func sideMenuControllerDidReveal(_ sideMenuController: SideMenuController) {
         ChatViewController.shared?.textView.resignFirstResponder()
         SubscriptionsViewController.shared?.textFieldSearch.resignFirstResponder()
-
-        openAddNewTeamController()
     }
 
     func sideMenuControllerWillReveal(_ sideMenuController: SideMenuController) {

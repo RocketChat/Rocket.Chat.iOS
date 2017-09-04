@@ -16,10 +16,9 @@ final class SubscriptionsViewController: BaseViewController {
     @IBOutlet weak var avatarViewContainer: AvatarView! {
         didSet {
             if let avatarView = AvatarView.instantiateFromNib() {
-                self.avatarView.frame = avatarViewContainer.bounds
+                avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
                 self.avatarView = avatarView
-                self.avatarView.frame = CGRect(x: 0, y: 0, width: avatarViewContainer.frame.size.width, height: avatarViewContainer.frame.size.height)
             }
         }
     }
@@ -212,7 +211,7 @@ extension SubscriptionsViewController {
 
         labelUsername.text = user.displayName()
         avatarView.user = user
-        
+
         switch user.status {
         case .online:
             viewUserStatus.backgroundColor = .RCOnline()
@@ -372,7 +371,7 @@ extension SubscriptionsViewController: UITableViewDataSource {
 extension SubscriptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return section == 0 ? 50 : 60
+        return 45
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -477,7 +476,7 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
         view.addSubview(viewUserMenu)
         self.viewUserMenu = viewUserMenu
 
-        newFrame.origin.y = 64
+        newFrame.origin.y = 84
         UIView.animate(withDuration: 0.15) {
             viewUserMenu.frame = newFrame
             self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
