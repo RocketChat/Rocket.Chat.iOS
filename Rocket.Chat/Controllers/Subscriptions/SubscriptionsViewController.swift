@@ -70,6 +70,7 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     @IBOutlet weak var viewUserStatus: UIView!
+    @IBOutlet weak var labelServer: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var imageViewArrowDown: UIImageView! {
         didSet {
@@ -209,6 +210,7 @@ extension SubscriptionsViewController {
         guard let viewUserStatus = self.viewUserStatus else { return }
         guard let avatarView = self.avatarView else { return }
 
+        labelServer.text = AuthSettingsManager.shared.settings?.serverName
         labelUsername.text = user.displayName()
         avatarView.user = user
 
