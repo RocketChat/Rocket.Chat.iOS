@@ -11,6 +11,8 @@ import SideMenuController
 
 class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
+    var shouldReconnect = false
+
     static var shared: MainChatViewController? {
         return UIApplication.shared.windows.first?.rootViewController as? MainChatViewController
     }
@@ -48,6 +50,16 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
         performSegue(withIdentifier: "showCenterController", sender: nil)
         performSegue(withIdentifier: "containSideMenu", sender: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        if shouldReconnect {
+            shouldReconnect = false
+            performSegue(withIdentifier: "showCenterController", sender: nil)
+            performSegue(withIdentifier: "containSideMenu", sender: nil)
+        }
     }
 
     // MARK: SideMenuControllerDelegate
