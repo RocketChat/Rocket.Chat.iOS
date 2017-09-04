@@ -13,6 +13,24 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
+    @IBOutlet weak var avatarViewContainer: AvatarView! {
+        didSet {
+            if let avatarView = AvatarView.instantiateFromNib() {
+                self.avatarView.frame = avatarViewContainer.bounds
+                avatarViewContainer.addSubview(avatarView)
+                self.avatarView = avatarView
+                self.avatarView.frame = CGRect(x: 0, y: 0, width: avatarViewContainer.frame.size.width, height: avatarViewContainer.frame.size.height)
+            }
+        }
+    }
+
+    weak var avatarView: AvatarView! {
+        didSet {
+            avatarView.layer.cornerRadius = 4
+            avatarView.layer.masksToBounds = true
+            avatarView.labelInitialsFontSize = 18
+        }
+    }
 
     let defaultButtonCancelSearchWidth = CGFloat(65)
     @IBOutlet weak var buttonCancelSearch: UIButton! {
@@ -31,7 +49,7 @@ final class SubscriptionsViewController: BaseViewController {
             textFieldSearch.placeholder = localized("subscriptions.search")
 
             if let placeholder = textFieldSearch.placeholder {
-                let color = UIColor(rgb: 0x9AB1BF, alphaVal: 1)
+                let color = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
                 textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSForegroundColorAttributeName: color])
             }
         }
@@ -190,9 +208,11 @@ extension SubscriptionsViewController {
         guard let user = AuthManager.currentUser() else { return }
         guard let labelUsername = self.labelUsername else { return }
         guard let viewUserStatus = self.viewUserStatus else { return }
+        guard let avatarView = self.avatarView else { return }
 
         labelUsername.text = user.displayName()
-
+        avatarView.user = user
+        
         switch user.status {
         case .online:
             viewUserStatus.backgroundColor = .RCOnline()
