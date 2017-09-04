@@ -14,6 +14,10 @@ final class AuthSettings: BaseModel {
     dynamic var siteURL: String?
     dynamic var cdnPrefixURL: String?
 
+    // Server information
+    dynamic var serverName: String?
+    dynamic var serverFaviconURL: String?
+
     // User
     dynamic var useUserRealName = false
 
