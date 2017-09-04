@@ -294,7 +294,7 @@
                     <connections>
                         <segue destination="ZWT-yJ-dk4" kind="custom" identifier="showCenterController" customClass="CenterContainmentSegue" customModule="SideMenuController" id="49z-6y-c6s"/>
                         <segue destination="P2x-Rh-AO9" kind="custom" identifier="containSideMenu" customClass="SideContainmentSegue" customModule="SideMenuController" id="9yd-xs-Cbl"/>
-                        <segue destination="CfV-7k-wfe" kind="presentation" identifier="Auth" id="fsY-Jr-OFS"/>
+                        <segue destination="CfV-7k-wfe" kind="presentation" identifier="Auth" modalTransitionStyle="flipHorizontal" id="fsY-Jr-OFS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozo-Ve-E9D" userLabel="First Responder" sceneMemberID="firstResponder"/>

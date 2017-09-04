@@ -44,7 +44,7 @@ extension Realm {
     }
 
     static func executeOnMainThread(_ execution: @escaping (Realm) -> Void) {
-        guard let realm = realmInstance else { return }
+        guard let realm = self.shared else { return }
 
         try? realm.write {
             execution(realm)

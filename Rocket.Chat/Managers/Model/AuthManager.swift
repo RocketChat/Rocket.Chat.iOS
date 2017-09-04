@@ -47,12 +47,24 @@ struct AuthManager {
      */
     static func persistAuthInformation(_ auth: Auth) {
         let defaults = UserDefaults.standard
-        defaults.set(auth.token, forKey: AuthManagerPersistKeys.token)
-        defaults.set(auth.serverURL, forKey: AuthManagerPersistKeys.serverURL)
-        defaults.set(auth.userId, forKey: AuthManagerPersistKeys.userId)
+
+        guard
+            let token = auth.token,
+            let userId = auth.userId,
+            let selectedIndex = defaults.value(forKey: AuthManagerPersistKeys.selectedIndex) as? Int,
+            var servers = defaults.value(forKey: AuthManagerPersistKeys.servers) as? [[String: String]],
+            servers.count > selectedIndex
+        else {
+            return
+        }
+
+        servers[selectedIndex][AuthManagerPersistKeys.token] = token
+        servers[selectedIndex][AuthManagerPersistKeys.userId] = userId
+
+        defaults.set(servers, forKey: AuthManagerPersistKeys.servers)
     }
 
-    static func selectedServerInformation() -> [String: String]? {
+    static func selectedServerInformation(index: Int? = nil) -> [String: String]? {
         let defaults = UserDefaults.standard
 
         guard
@@ -62,8 +74,14 @@ struct AuthManager {
             return nil
         }
 
-        let selectedIndex = defaults.integer(forKey: AuthManagerPersistKeys.selectedIndex)
-        let server = servers[selectedIndex]
+        var server: [String: String]?
+        if let index = index {
+            server = servers[index]
+        } else {
+            let selectedIndex = defaults.integer(forKey: AuthManagerPersistKeys.selectedIndex)
+            server = servers[selectedIndex]
+        }
+
         return server
     }
 
@@ -226,28 +244,26 @@ extension AuthManager {
                 return
             }
 
-            Realm.execute({ (realm) in
-                // Delete all the Auth objects, since we don't
-                // support multiple-server authentication yet
-                realm.delete(realm.objects(Auth.self))
+            let result = response.result
 
-                let result = response.result
+            let auth = Auth()
+            auth.lastSubscriptionFetch = nil
+            auth.lastAccess = Date()
+            auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
+            auth.token = result["result"]["token"].string
+            auth.userId = result["result"]["id"].string
 
-                let auth = Auth()
-                auth.lastSubscriptionFetch = nil
-                auth.lastAccess = Date()
-                auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
-                auth.token = result["result"]["token"].string
-                auth.userId = result["result"]["id"].string
+            if let date = result["result"]["tokenExpires"]["$date"].double {
+                auth.tokenExpires = Date.dateFromInterval(date)
+            }
 
-                if let date = result["result"]["tokenExpires"]["$date"].double {
-                    auth.tokenExpires = Date.dateFromInterval(date)
-                }
+            persistAuthInformation(auth)
+            DatabaseManager.changeDatabaseInstance()
 
+            Realm.executeOnMainThread({ (realm) in
                 PushManager.updatePushToken()
-
                 realm.add(auth)
-            }, completion: {
+
                 ServerManager.timestampSync()
                 completion(response)
             })
