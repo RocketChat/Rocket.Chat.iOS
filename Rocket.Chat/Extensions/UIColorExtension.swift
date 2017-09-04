@@ -22,19 +22,19 @@ extension UIColor {
     // Status
 
     static func RCOnline() -> UIColor {
-        return UIColor(rgb: 0x35AC19, alphaVal: 1)
+        return UIColor(rgb: 0x2DE0A5, alphaVal: 1)
     }
 
     static func RCAway() -> UIColor {
-        return UIColor(rgb: 0xFCB316, alphaVal: 1)
+        return UIColor(rgb: 0xFFD21F, alphaVal: 1)
     }
 
     static func RCBusy() -> UIColor {
-        return UIColor(rgb: 0xD30230, alphaVal: 1)
+        return UIColor(rgb: 0xF5455C, alphaVal: 1)
     }
 
     static func RCInvisible() -> UIColor {
-        return UIColor(rgb: 0x9AB1BF, alphaVal: 1)
+        return UIColor(rgb: 0xCBCED1, alphaVal: 1)
     }
 
     // Theme color
@@ -56,7 +56,7 @@ extension UIColor {
     }
 
     static func RCLightBlue() -> UIColor {
-        return UIColor(rgb: 0x9ab1bf, alphaVal: 1)
+        return UIColor(rgb: 0x9EA2A8, alphaVal: 1)
     }
 
     static func RCBlue() -> UIColor {
