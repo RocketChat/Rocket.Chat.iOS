@@ -60,7 +60,7 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
-    class func sharedInstance() -> SubscriptionsViewController? {
+    static var shared: SubscriptionsViewController? {
         if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
             if let nav = main.sideViewController as? UINavigationController {
                 return nav.viewControllers.first as? SubscriptionsViewController
@@ -181,7 +181,7 @@ extension SubscriptionsViewController {
         updateCurrentUserInformation()
         SubscriptionManager.updateUnreadApplicationBadge()
 
-        if MainChatViewController.shared()?.sidePanelVisible ?? false {
+        if MainChatViewController.shared?.sidePanelVisible ?? false {
             tableView?.reloadData()
         }
     }
@@ -380,7 +380,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let subscription = subscription(for: indexPath) else { return }
 
-        let controller = ChatViewController.sharedInstance()
+        let controller = ChatViewController.shared
         controller?.closeSidebarAfterSubscriptionUpdate = true
         controller?.subscription = subscription
     }
@@ -388,7 +388,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         guard let cell = cell as? SubscriptionCell else { return }
         guard let subscription = cell.subscription else { return }
-        guard let selectedSubscription = ChatViewController.sharedInstance()?.subscription else { return }
+        guard let selectedSubscription = ChatViewController.shared?.subscription else { return }
 
         if subscription.identifier == selectedSubscription.identifier {
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
