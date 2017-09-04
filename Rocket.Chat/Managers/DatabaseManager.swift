@@ -12,9 +12,17 @@ import Realm
 
 struct DatabaseManager {
 
+    static var selectedIndex: Int? {
+        return UserDefaults.standard.value(forKey: AuthManagerPersistKeys.selectedIndex) as? Int
+    }
+
+    static var servers: [[String: String]]? {
+        return UserDefaults.standard.value(forKey: AuthManagerPersistKeys.servers) as? [[String: String]]
+    }
+
     static func createNewDatabaseInstance(serverURL: String) -> Int {
         let defaults = UserDefaults.standard
-        var servers = defaults.value(forKey: AuthManagerPersistKeys.servers) as? [[String: String]] ?? []
+        var servers = self.servers ?? []
 
         servers.append([
             AuthManagerPersistKeys.databaseName: "\(String.random()).realm",
