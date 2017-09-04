@@ -261,12 +261,16 @@ extension AuthManager {
             DatabaseManager.changeDatabaseInstance()
 
             Realm.executeOnMainThread({ (realm) in
+                // Delete all the Auth objects, since we don't
+                // support multiple-server per database
+                realm.delete(realm.objects(Auth.self))
+
                 PushManager.updatePushToken()
                 realm.add(auth)
-
-                ServerManager.timestampSync()
-                completion(response)
             })
+
+            ServerManager.timestampSync()
+            completion(response)
         }
     }
 

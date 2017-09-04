@@ -74,7 +74,7 @@ final class MainViewController: BaseViewController {
                     let controller = storyboardChat.instantiateInitialViewController()
                     let application = UIApplication.shared
 
-                    if let window = application.keyWindow {
+                    if let window = application.windows.first {
                         window.rootViewController = controller
                     }
                 })
