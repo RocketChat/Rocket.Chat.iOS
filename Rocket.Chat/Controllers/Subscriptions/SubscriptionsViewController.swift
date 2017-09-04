@@ -19,6 +19,7 @@ final class SubscriptionsViewController: BaseViewController {
                 self.avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
                 self.avatarView = avatarView
+                self.avatarView.frame = CGRect(x: 0, y: 0, width: avatarViewContainer.frame.size.width, height: avatarViewContainer.frame.size.height)
             }
         }
     }
@@ -211,7 +212,6 @@ extension SubscriptionsViewController {
 
         labelUsername.text = user.displayName()
         avatarView.user = user
-        avatarView.frame = CGRect(x: 0, y: 0, width: avatarViewContainer.frame.size.width, height: avatarViewContainer.frame.size.height)
         
         switch user.status {
         case .online:
