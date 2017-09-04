@@ -20,7 +20,12 @@ extension AuthSettings: ModelMappeable {
         self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string
 
         self.serverName = objectForKey(object: values, key: "Site_Name")?.string
-        self.serverFaviconURL = objectForKey(object: values, key: "Assets_favicon_512")?.string
+
+        if let siteURL = self.siteURL {
+            if let assetURL = objectForKey(object: values, key: "Assets_favicon_512")?["defaultUrl"].string {
+                self.serverFaviconURL = "\(siteURL)/\(assetURL)"
+            }
+        }
 
         self.useUserRealName = objectForKey(object: values, key: "UI_Use_Real_Name")?.bool ?? false
 
