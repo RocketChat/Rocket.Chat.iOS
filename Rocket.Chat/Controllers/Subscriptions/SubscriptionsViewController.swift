@@ -72,7 +72,9 @@ final class SubscriptionsViewController: BaseViewController {
     static var shared: SubscriptionsViewController? {
         if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
             if let nav = main.sideViewController as? UINavigationController {
-                return nav.viewControllers.first as? SubscriptionsViewController
+                if let pageController = nav.viewControllers.first as? SubscriptionsPageViewController {
+                    return pageController.subscriptionsController
+                }
             }
         }
 
