@@ -10,17 +10,6 @@ import Foundation
 import RealmSwift
 import Realm
 
-struct AuthManagerPersistKeys {
-    static let servers = "kServers"
-
-    static let selectedIndex = "kSelectedIndex"
-
-    static let databaseName = "kDatabaseName"
-    static let token = "kAuthToken"
-    static let serverURL = "kAuthServerURL"
-    static let userId = "kUserId"
-}
-
 struct AuthManager {
 
     /**
@@ -58,10 +47,10 @@ struct AuthManager {
             return
         }
 
-        servers[selectedIndex][AuthManagerPersistKeys.token] = token
-        servers[selectedIndex][AuthManagerPersistKeys.userId] = userId
+        servers[selectedIndex][ServerPersistKeys.token] = token
+        servers[selectedIndex][ServerPersistKeys.userId] = userId
 
-        defaults.set(servers, forKey: AuthManagerPersistKeys.servers)
+        defaults.set(servers, forKey: ServerPersistKeys.servers)
     }
 
     static func selectedServerInformation(index: Int? = nil) -> [String: String]? {
@@ -98,24 +87,24 @@ struct AuthManager {
         let defaults = UserDefaults.standard
 
         guard
-            let token = defaults.string(forKey: AuthManagerPersistKeys.token),
-            let serverURL = defaults.string(forKey: AuthManagerPersistKeys.serverURL),
-            let userId = defaults.string(forKey: AuthManagerPersistKeys.userId) else {
+            let token = defaults.string(forKey: ServerPersistKeys.token),
+            let serverURL = defaults.string(forKey: ServerPersistKeys.serverURL),
+            let userId = defaults.string(forKey: ServerPersistKeys.userId) else {
                 return
         }
 
         let servers = [[
-            AuthManagerPersistKeys.databaseName: "\(String.random()).realm",
-            AuthManagerPersistKeys.token: token,
-            AuthManagerPersistKeys.serverURL: serverURL,
-            AuthManagerPersistKeys.userId: userId
+            ServerPersistKeys.databaseName: "\(String.random()).realm",
+            ServerPersistKeys.token: token,
+            ServerPersistKeys.serverURL: serverURL,
+            ServerPersistKeys.userId: userId
         ]]
 
-        defaults.set(0, forKey: AuthManagerPersistKeys.selectedIndex)
-        defaults.set(servers, forKey: AuthManagerPersistKeys.servers)
-        defaults.removeObject(forKey: AuthManagerPersistKeys.token)
-        defaults.removeObject(forKey: AuthManagerPersistKeys.serverURL)
-        defaults.removeObject(forKey: AuthManagerPersistKeys.userId)
+        defaults.set(0, forKey: ServerPersistKeys.selectedIndex)
+        defaults.set(servers, forKey: ServerPersistKeys.servers)
+        defaults.removeObject(forKey: ServerPersistKeys.token)
+        defaults.removeObject(forKey: ServerPersistKeys.serverURL)
+        defaults.removeObject(forKey: ServerPersistKeys.userId)
     }
 
     /**
@@ -130,9 +119,9 @@ struct AuthManager {
 
         guard
             let server = selectedServerInformation(),
-            let token = server[AuthManagerPersistKeys.token],
-            let serverURL = server[AuthManagerPersistKeys.serverURL],
-            let userId = server[AuthManagerPersistKeys.userId]
+            let token = server[ServerPersistKeys.token],
+            let serverURL = server[ServerPersistKeys.serverURL],
+            let userId = server[ServerPersistKeys.userId]
         else {
             return
         }
@@ -347,9 +336,9 @@ extension AuthManager {
             GIDSignIn.sharedInstance().signOut()
 
             let defaults = UserDefaults.standard
-            defaults.removeObject(forKey: AuthManagerPersistKeys.token)
-            defaults.removeObject(forKey: AuthManagerPersistKeys.serverURL)
-            defaults.removeObject(forKey: AuthManagerPersistKeys.userId)
+            defaults.removeObject(forKey: ServerPersistKeys.token)
+            defaults.removeObject(forKey: ServerPersistKeys.serverURL)
+            defaults.removeObject(forKey: ServerPersistKeys.userId)
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
