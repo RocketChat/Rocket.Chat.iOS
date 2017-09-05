@@ -33,9 +33,9 @@ enum MessageType: String {
     case roomUnarchived = "room-unarchived"
 
     var sequential: Bool {
-        let notSequential: [MessageType] = [.image, .video, .userJoined]
+        let sequential: [MessageType] = [.text, .textAttachment]
 
-        return !notSequential.contains(self)
+        return sequential.contains(self)
     }
 }
 
