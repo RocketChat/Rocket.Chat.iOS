@@ -53,6 +53,17 @@ final class ChatDataController {
         }.first
     }
 
+    func hasSequentialMessageAt(_ indexPath: IndexPath) -> Bool {
+        let prevIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+        let prevItem = itemAt(prevIndexPath)
+        let item = itemAt(indexPath)
+
+        let type = item?.message?.type
+        if type == .image { return false }
+
+        return item?.message?.user == prevItem?.message?.user
+    }
+
     func indexPathOf(_ identifier: String) -> IndexPath? {
         return data.filter { item in
             return item.identifier == identifier

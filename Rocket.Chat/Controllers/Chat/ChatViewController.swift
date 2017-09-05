@@ -613,6 +613,8 @@ extension ChatViewController {
             cell.message = message
         }
 
+        cell.sequential = dataController.hasSequentialMessageAt(indexPath)
+
         return cell
     }
 
@@ -691,7 +693,8 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
             }
 
             if let message = obj.message {
-                let height = ChatMessageCell.cellMediaHeightFor(message: message)
+                let sequential = dataController.hasSequentialMessageAt(indexPath)
+                let height = ChatMessageCell.cellMediaHeightFor(message: message, sequential: sequential)
                 return CGSize(width: fullWidth, height: height)
             }
         }
