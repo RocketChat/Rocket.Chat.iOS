@@ -22,7 +22,10 @@ extension AuthSettings: ModelMappeable {
         self.serverName = objectForKey(object: values, key: "Site_Name")?.string
 
         if let siteURL = self.siteURL {
-            if let assetURL = objectForKey(object: values, key: "Assets_favicon_512")?["defaultUrl"].string {
+            // Try URL or use defaultURL instead
+            if let assetURL = objectForKey(object: values, key: "Assets_favicon_512")?["url"].string {
+                self.serverFaviconURL = "\(siteURL)/\(assetURL)"
+            } else if let assetURL = objectForKey(object: values, key: "Assets_favicon_512")?["defaultUrl"].string {
                 self.serverFaviconURL = "\(siteURL)/\(assetURL)"
             }
         }

@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fKk-pZ-N3a">
-                                <rect key="frame" x="0.0" y="135" width="375" height="532"/>
+                                <rect key="frame" x="0.0" y="135" width="375" height="488"/>
                                 <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellSubscription" id="A3x-rd-OY1" customClass="SubscriptionCell" customModule="Rocket_Chat" customModuleProvider="target">
@@ -209,12 +209,12 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.015686274509803921" green="0.28627450980392155" blue="0.45490196078431372" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="fKk-pZ-N3a" firstAttribute="leading" secondItem="Sgi-qY-oLC" secondAttribute="leading" id="1Z9-Vc-Iq7"/>
                             <constraint firstAttribute="trailing" secondItem="5g6-R1-nTb" secondAttribute="trailing" id="5gf-7i-iXY"/>
                             <constraint firstItem="5g6-R1-nTb" firstAttribute="leading" secondItem="Sgi-qY-oLC" secondAttribute="leading" id="FWF-uq-j6U"/>
-                            <constraint firstItem="Qb5-fJ-P1i" firstAttribute="top" secondItem="fKk-pZ-N3a" secondAttribute="bottom" id="PuM-RZ-IR8"/>
+                            <constraint firstItem="Qb5-fJ-P1i" firstAttribute="top" secondItem="fKk-pZ-N3a" secondAttribute="bottom" constant="44" id="PuM-RZ-IR8"/>
                             <constraint firstAttribute="trailing" secondItem="fKk-pZ-N3a" secondAttribute="trailing" id="cOy-px-6DD"/>
                             <constraint firstItem="5g6-R1-nTb" firstAttribute="top" secondItem="Sgi-qY-oLC" secondAttribute="top" id="gob-hC-RzM"/>
                             <constraint firstItem="fKk-pZ-N3a" firstAttribute="top" secondItem="5g6-R1-nTb" secondAttribute="bottom" id="l6S-jK-uiN"/>
@@ -284,7 +284,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="69" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="svn-JN-2Fk">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
                                 <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -388,9 +388,12 @@
                             <constraint firstAttribute="trailing" secondItem="svn-JN-2Fk" secondAttribute="trailing" id="40f-lp-qLx"/>
                             <constraint firstItem="svn-JN-2Fk" firstAttribute="leading" secondItem="QL3-Do-ipl" secondAttribute="leading" id="5S0-qv-Hu6"/>
                             <constraint firstItem="svn-JN-2Fk" firstAttribute="top" secondItem="vmn-N7-OFq" secondAttribute="bottom" id="LAM-is-6CO"/>
-                            <constraint firstItem="0Zu-eU-GMU" firstAttribute="top" secondItem="svn-JN-2Fk" secondAttribute="bottom" id="nzO-Sb-o3B"/>
+                            <constraint firstItem="0Zu-eU-GMU" firstAttribute="top" secondItem="svn-JN-2Fk" secondAttribute="bottom" constant="44" id="nzO-Sb-o3B"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="svn-JN-2Fk" id="J6J-sl-DFx"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSR-Bo-vMp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

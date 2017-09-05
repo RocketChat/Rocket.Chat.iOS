@@ -12,9 +12,12 @@ class ServersViewController: UIViewController {
 
     var servers: [[String: String]] = []
 
+    @IBOutlet weak var tableView: UITableView!
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         servers = DatabaseManager.servers ?? []
+        tableView?.reloadData()
     }
 
 }
@@ -50,7 +53,11 @@ extension ServersViewController: UITableViewDelegate {
         if indexPath.row == servers.count {
             MainChatViewController.shared?.openAddNewTeamController()
         } else {
-            MainChatViewController.shared?.changeSelectedServer(index: indexPath.row)
+            if indexPath.row == DatabaseManager.selectedIndex {
+                SubscriptionsPageViewController.shared?.showSubscriptionsList()
+            } else {
+                MainChatViewController.shared?.changeSelectedServer(index: indexPath.row)
+            }
         }
     }
 
