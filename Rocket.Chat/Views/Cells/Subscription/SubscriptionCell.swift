@@ -66,10 +66,10 @@ final class SubscriptionCell: UITableViewCell {
             if let user = subscription.directMessageUser {
                 color = { _ -> UIColor in
                     switch user.status {
-                    case .online: return .RCOnline()
-                    case .offline: return .RCInvisible()
-                    case .away: return .RCAway()
-                    case .busy: return .RCBusy()
+                        case .online: return .RCOnline()
+                        case .offline: return .RCInvisible()
+                        case .away: return .RCAway()
+                        case .busy: return .RCBusy()
                     }
                 }()
             }
@@ -95,6 +95,7 @@ extension SubscriptionCell {
                 self.backgroundColor = self.defaultBackgroundColor
             }
         }
+
         if animated {
             UIView.animate(withDuration: 0.18, animations: transition)
         } else {
@@ -111,6 +112,7 @@ extension SubscriptionCell {
                 self.backgroundColor = self.defaultBackgroundColor
             }
         }
+
         if animated {
             UIView.animate(withDuration: 0.18, animations: transition)
         } else {

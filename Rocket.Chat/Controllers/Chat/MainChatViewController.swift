@@ -11,8 +11,6 @@ import SideMenuController
 
 class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
-    var shouldReconnect = false
-
     static var shared: MainChatViewController? {
         return UIApplication.shared.windows.first?.rootViewController as? MainChatViewController
     }
@@ -52,16 +50,6 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         performSegue(withIdentifier: "containSideMenu", sender: nil)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        if shouldReconnect {
-            shouldReconnect = false
-            performSegue(withIdentifier: "showCenterController", sender: nil)
-            performSegue(withIdentifier: "containSideMenu", sender: nil)
-        }
-    }
-
     // MARK: SideMenuControllerDelegate
 
     func sideMenuControllerWillHide(_ sideMenuController: SideMenuController) {
@@ -91,6 +79,21 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     func openAddNewTeamController() {
         SocketManager.disconnect { (_, _) in
             self.performSegue(withIdentifier: "Auth", sender: nil)
+        }
+    }
+
+    func changeSelectedServer(index: Int) {
+        DatabaseManager.selectDatabase(at: index)
+        DatabaseManager.changeDatabaseInstance(index: index)
+
+        SocketManager.disconnect { (_, _) in
+            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let controller = storyboardChat.instantiateInitialViewController()
+            let application = UIApplication.shared
+
+            if let window = application.windows.first {
+                window.rootViewController = controller
+            }
         }
     }
 

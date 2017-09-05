@@ -339,6 +339,43 @@
                                             <outlet property="labelServerName" destination="qVv-8W-XaU" id="xeK-2E-AIm"/>
                                         </connections>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kAddServerCellIdentifier" rowHeight="69" id="7eO-3P-1Ma" customClass="AddServerCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="97" width="375" height="69"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="7eO-3P-1Ma" id="vs7-aR-eU3">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add" translatesAutoresizingMaskIntoConstraints="NO" id="Z0v-ks-i2y">
+                                                    <rect key="frame" x="30" y="28.5" width="12" height="12"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="12" id="I03-oK-tc8"/>
+                                                        <constraint firstAttribute="height" constant="12" id="Ywt-BK-xFR"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add new Team" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="664-dR-rEE">
+                                                    <rect key="frame" x="72" y="24" width="288" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="4MU-Ur-3rZ"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="664-dR-rEE" firstAttribute="centerY" secondItem="vs7-aR-eU3" secondAttribute="centerY" id="8GA-cO-Dvk"/>
+                                                <constraint firstItem="Z0v-ks-i2y" firstAttribute="centerY" secondItem="vs7-aR-eU3" secondAttribute="centerY" id="Lvc-20-Ewe"/>
+                                                <constraint firstAttribute="trailing" secondItem="664-dR-rEE" secondAttribute="trailing" constant="15" id="Q2h-J6-zvq"/>
+                                                <constraint firstItem="Z0v-ks-i2y" firstAttribute="leading" secondItem="vs7-aR-eU3" secondAttribute="leading" constant="30" id="p8q-ZD-974"/>
+                                                <constraint firstItem="664-dR-rEE" firstAttribute="leading" secondItem="Z0v-ks-i2y" secondAttribute="trailing" constant="30" id="zEp-KT-1iu"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <connections>
+                                            <outlet property="labelText" destination="664-dR-rEE" id="p8S-Xt-bmO"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="7xe-nw-9mY" id="907-KG-LyA"/>
@@ -361,6 +398,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Add" width="25" height="25"/>
         <image name="Arrow Down" width="25" height="25"/>
     </resources>
 </document>
