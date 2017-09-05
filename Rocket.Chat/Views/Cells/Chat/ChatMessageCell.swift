@@ -22,7 +22,7 @@ final class ChatMessageCell: UICollectionViewCell {
     weak var delegate: ChatMessageCellProtocol?
     var message: Message! {
         didSet {
-            updateMessageInformation()
+            updateMessage()
         }
     }
 
@@ -179,9 +179,7 @@ final class ChatMessageCell: UICollectionViewCell {
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
     }
 
-    fileprivate func updateMessageInformation() {
-        guard delegate != nil else { return }
-
+    fileprivate func updateMessageHeader() {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
 
@@ -197,7 +195,9 @@ final class ChatMessageCell: UICollectionViewCell {
         } else {
             labelUsername.text = message.user?.displayName() ?? "Unknown"
         }
+    }
 
+    fileprivate func updateMessageContent() {
         if let text = MessageTextCacheManager.shared.message(for: message) {
             if message.temporary {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
@@ -205,6 +205,16 @@ final class ChatMessageCell: UICollectionViewCell {
 
             labelText.attributedText = text
         }
+    }
+
+    fileprivate func updateMessage() {
+        guard delegate != nil else { return }
+
+        if !sequential {
+            updateMessageHeader()
+        }
+
+        updateMessageContent()
 
         insertGesturesIfNeeded()
         insertAttachments()
