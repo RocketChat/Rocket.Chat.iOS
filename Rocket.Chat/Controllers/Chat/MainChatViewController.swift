@@ -60,6 +60,7 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     func sideMenuControllerDidHide(_ sideMenuController: SideMenuController) {
         ChatViewController.shared?.textView.resignFirstResponder()
         SubscriptionsViewController.shared?.textFieldSearch.resignFirstResponder()
+        SubscriptionsPageViewController.shared?.showSubscriptionsList(animated: false)
     }
 
     func sideMenuControllerDidReveal(_ sideMenuController: SideMenuController) {

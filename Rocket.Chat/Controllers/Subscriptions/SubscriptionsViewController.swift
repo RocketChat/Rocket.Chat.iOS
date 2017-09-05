@@ -58,6 +58,10 @@ final class SubscriptionsViewController: BaseViewController {
         didSet {
             imageViewServer.layer.masksToBounds = true
             imageViewServer.layer.cornerRadius = 5
+
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(imageViewServerDidTapped(gesture:)))
+            imageViewServer.isUserInteractionEnabled = true
+            imageViewServer.addGestureRecognizer(gesture)
         }
     }
 
@@ -70,12 +74,8 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     static var shared: SubscriptionsViewController? {
-        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
-            if let nav = main.sideViewController as? UINavigationController {
-                if let pageController = nav.viewControllers.first as? SubscriptionsPageViewController {
-                    return pageController.subscriptionsController
-                }
-            }
+        if let pageController = SubscriptionsPageViewController.shared {
+            return pageController.subscriptionsController
         }
 
         return nil
@@ -342,6 +342,11 @@ extension SubscriptionsViewController {
         guard groups[indexPath.section].count > indexPath.row else { return nil }
         return groups[indexPath.section][indexPath.row]
     }
+
+    func imageViewServerDidTapped(gesture: UIGestureRecognizer) {
+        SubscriptionsPageViewController.shared?.showServersList()
+    }
+
 }
 
 extension SubscriptionsViewController: UITableViewDataSource {
@@ -509,4 +514,5 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
     func userDidPressedOption() {
         dismissUserMenu()
     }
+
 }
