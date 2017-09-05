@@ -10,12 +10,12 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-var realmInstance: Realm?
+var realmConfiguration: Realm.Configuration?
 
 extension Realm {
 
     static var shared: Realm? {
-        guard let configuration = realmInstance?.configuration else { return nil }
+        guard let configuration = realmConfiguration else { return nil }
         return try? Realm(configuration: configuration)
     }
 
