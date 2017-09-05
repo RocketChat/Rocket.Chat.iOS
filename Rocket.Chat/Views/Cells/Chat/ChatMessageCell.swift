@@ -104,6 +104,7 @@ final class ChatMessageCell: UICollectionViewCell {
         labelUsername.text = ""
         labelText.text = ""
         labelDate.text = ""
+        sequential = false
 
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
