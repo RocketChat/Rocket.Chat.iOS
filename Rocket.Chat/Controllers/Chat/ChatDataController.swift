@@ -58,8 +58,10 @@ final class ChatDataController {
         let prevItem = itemAt(prevIndexPath)
         let item = itemAt(indexPath)
 
-        let type = item?.message?.type
-        if type == .image { return false }
+        guard (item?.message?.type.sequential ?? false) &&
+              (prevItem?.message?.type.sequential ?? false) else {
+            return false
+        }
 
         return item?.message?.user == prevItem?.message?.user
     }

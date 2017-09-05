@@ -31,6 +31,14 @@ enum MessageType: String {
     case subscriptionRoleRemoved = "subscription-role-removed"
     case roomArchived = "room-archived"
     case roomUnarchived = "room-unarchived"
+
+    var sequential: Bool {
+        if self == .image {
+            return false
+        }
+
+        return true
+    }
 }
 
 class Message: BaseModel {
