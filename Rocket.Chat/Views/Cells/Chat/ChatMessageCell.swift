@@ -61,7 +61,7 @@ final class ChatMessageCell: UICollectionViewCell {
             MessageTextCacheManager.shared.message(for: message)?.string ?? "",
             font: UIFont.systemFont(ofSize: 15),
             width: fullWidth - 62
-            ) + (sequential ? 7 : 35)
+        ) + (sequential ? 7 : 35)
 
         for url in message.urls {
             guard url.isValid() else { continue }
