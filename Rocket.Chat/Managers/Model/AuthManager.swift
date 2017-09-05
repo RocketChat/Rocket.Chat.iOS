@@ -161,8 +161,8 @@ extension AuthManager {
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
 
-        SocketManager.connect(url) { (socket, connected) in
-            guard connected else {
+        SocketManager.connect(url) { (socket, _) in
+            guard SocketManager.isConnected() else {
                 guard let response = SocketResponse(
                     ["error": "Can't connect to the socket"],
                     socket: socket

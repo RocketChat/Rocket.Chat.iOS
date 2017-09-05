@@ -20,6 +20,10 @@ struct DatabaseManager {
         return UserDefaults.standard.value(forKey: ServerPersistKeys.servers) as? [[String: String]]
     }
 
+    static func selectDatabase(at index: Int) {
+        UserDefaults.standard.set(index, forKey: ServerPersistKeys.selectedIndex)
+    }
+
     static func createNewDatabaseInstance(serverURL: String) -> Int {
         let defaults = UserDefaults.standard
         var servers = self.servers ?? []

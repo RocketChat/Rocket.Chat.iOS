@@ -22,16 +22,36 @@ class ServersViewController: UIViewController {
 extension ServersViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return servers.count
+        return servers.count + 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == servers.count {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: AddServerCell.identifier) as? AddServerCell else {
+                return UITableViewCell()
+            }
+
+            return cell
+        }
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: ServerCell.identifier) as? ServerCell else {
             return UITableViewCell()
         }
 
         cell.server = servers[indexPath.row]
         return cell
+    }
+
+}
+
+extension ServersViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if indexPath.row == servers.count {
+            MainChatViewController.shared?.openAddNewTeamController()
+        } else {
+            MainChatViewController.shared?.changeSelectedServer(index: indexPath.row)
+        }
     }
 
 }
