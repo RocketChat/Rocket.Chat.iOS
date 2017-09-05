@@ -55,13 +55,13 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
-    static func cellMediaHeightFor(message: Message, grouped: Bool = true) -> CGFloat {
+    static func cellMediaHeightFor(message: Message, sequential: Bool = true) -> CGFloat {
         let fullWidth = UIScreen.main.bounds.size.width
         var total = UILabel.heightForView(
             MessageTextCacheManager.shared.message(for: message)?.string ?? "",
             font: UIFont.systemFont(ofSize: 15),
             width: fullWidth - 62
-        ) + 35
+            ) + (sequential ? 7 : 35)
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -85,6 +85,19 @@ final class ChatMessageCell: UICollectionViewCell {
         }
 
         return total
+    }
+
+    // MARK: Sequential
+    @IBOutlet weak var labelUsernameHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelDateHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var avatarContainerHeightConstraint: NSLayoutConstraint!
+
+    var sequential: Bool = false {
+        didSet {
+            avatarContainerHeightConstraint.constant = sequential ? 0 : 35
+            labelUsernameHeightConstraint.constant = sequential ? 0 : 21
+            labelDateHeightConstraint.constant = sequential ? 0 : 21
+        }
     }
 
     override func prepareForReuse() {
