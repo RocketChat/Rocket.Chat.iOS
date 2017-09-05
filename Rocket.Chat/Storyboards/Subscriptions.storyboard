@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BRy-Se-87j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BRy-Se-87j">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -23,7 +23,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fKk-pZ-N3a">
                                 <rect key="frame" x="0.0" y="116" width="375" height="551"/>
-                                <color key="backgroundColor" red="0.015686274510000001" green="0.28627450980000002" blue="0.4549019608" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellSubscription" id="A3x-rd-OY1" customClass="SubscriptionCell" customModule="Rocket_Chat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -56,7 +56,7 @@
                                                         <constraint firstAttribute="height" constant="21" id="JFw-TL-zof"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
-                                                    <color key="textColor" red="0.60392156862745094" green="0.69411764705882351" blue="0.74901960784313726" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.61960784313725492" green="0.63529411764705879" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -103,7 +103,7 @@
                                                 <rect key="frame" x="229" y="9" width="20" height="20"/>
                                             </activityIndicatorView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.0020407468546181917" green="0.17051500082015991" blue="0.27439388632774353" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.12156862745098039" green="0.13725490196078433" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="6EO-5w-ejQ"/>
                                             <constraint firstItem="TPV-i5-hsW" firstAttribute="leading" secondItem="qEc-o0-IxJ" secondAttribute="leading" constant="5" id="74K-kd-AqZ"/>
@@ -119,23 +119,23 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow Down" translatesAutoresizingMaskIntoConstraints="NO" id="QXa-y8-P03">
-                                                <rect key="frame" x="340" y="21.5" width="20" height="20"/>
+                                                <rect key="frame" x="340" y="22" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="UO9-wX-Qny"/>
                                                     <constraint firstAttribute="width" constant="20" id="lh9-Bv-mfD"/>
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="john.appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3h-Vc-Kfo">
-                                                <rect key="frame" x="35" y="21.5" width="295" height="21"/>
+                                                <rect key="frame" x="85" y="22" width="275" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="5nm-hf-Aip"/>
                                                 </constraints>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                <color key="textColor" red="0.60392156860000001" green="0.69411764710000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2s-Ct-SCW">
-                                                <rect key="frame" x="15" y="27.5" width="10" height="10"/>
+                                                <rect key="frame" x="15" y="27" width="10" height="10"/>
                                                 <color key="backgroundColor" red="0.20784313725490194" green="0.67450980392156867" blue="0.098039215686274508" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="10" id="Lc5-sw-pFF"/>
@@ -147,16 +147,26 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <view contentMode="scaleAspectFit" translatesAutoresizingMaskIntoConstraints="NO" id="jtd-Yq-Z3y" userLabel="Avatar View" customClass="AvatarView" customModule="Rocket_Chat" customModuleProvider="target">
+                                                <rect key="frame" x="38" y="11" width="40" height="40"/>
+                                                <color key="backgroundColor" red="0.25490196079999999" green="0.30196078430000001" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="ZSo-aw-4xW"/>
+                                                    <constraint firstAttribute="width" constant="40" id="fMJ-Xh-Ity"/>
+                                                </constraints>
+                                            </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.0060406522825360298" green="0.23256123065948486" blue="0.36966162919998169" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
+                                            <constraint firstItem="jtd-Yq-Z3y" firstAttribute="top" secondItem="ArO-ez-uRr" secondAttribute="top" constant="11" id="1CJ-T9-yPF"/>
                                             <constraint firstItem="QXa-y8-P03" firstAttribute="centerY" secondItem="ArO-ez-uRr" secondAttribute="centerY" id="1V1-ih-Llv"/>
                                             <constraint firstItem="V2s-Ct-SCW" firstAttribute="centerY" secondItem="ArO-ez-uRr" secondAttribute="centerY" id="2Jc-9b-WEh"/>
-                                            <constraint firstItem="QXa-y8-P03" firstAttribute="leading" secondItem="K3h-Vc-Kfo" secondAttribute="trailing" constant="10" id="IiX-bm-Sdv"/>
+                                            <constraint firstItem="K3h-Vc-Kfo" firstAttribute="leading" secondItem="jtd-Yq-Z3y" secondAttribute="trailing" constant="7" id="4mO-ff-hNI"/>
+                                            <constraint firstItem="QXa-y8-P03" firstAttribute="leading" secondItem="K3h-Vc-Kfo" secondAttribute="trailing" constant="-20" id="IiX-bm-Sdv"/>
                                             <constraint firstItem="K3h-Vc-Kfo" firstAttribute="centerY" secondItem="ArO-ez-uRr" secondAttribute="centerY" id="OKe-Wv-ua9"/>
                                             <constraint firstAttribute="trailing" secondItem="QXa-y8-P03" secondAttribute="trailing" constant="15" id="RpC-Gx-t2v"/>
                                             <constraint firstItem="V2s-Ct-SCW" firstAttribute="leading" secondItem="ArO-ez-uRr" secondAttribute="leading" constant="15" id="VTg-Nj-NAV"/>
-                                            <constraint firstItem="K3h-Vc-Kfo" firstAttribute="leading" secondItem="V2s-Ct-SCW" secondAttribute="trailing" constant="10" id="rsf-du-tXs"/>
+                                            <constraint firstItem="K3h-Vc-Kfo" firstAttribute="leading" secondItem="V2s-Ct-SCW" secondAttribute="trailing" constant="60" id="rsf-du-tXs"/>
                                             <constraint firstAttribute="height" constant="64" id="zwY-4t-oRL"/>
                                         </constraints>
                                     </view>
@@ -167,14 +177,14 @@
                                             <constraint firstAttribute="width" constant="55" id="cc8-l6-3Cc"/>
                                         </constraints>
                                         <state key="normal" title="Cancel">
-                                            <color key="titleColor" red="0.60392156860000001" green="0.69411764710000001" blue="0.74901960779999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
                                         <connections>
                                             <action selector="buttonCancelSearchDidPressed:" destination="pre-Wt-UOv" eventType="touchUpInside" id="RPO-qI-lwq"/>
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0067813492888250913" green="0.23202088336929722" blue="0.37039987959908049" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="ArO-ez-uRr" firstAttribute="leading" secondItem="5g6-R1-nTb" secondAttribute="leading" id="7ET-xR-4Fq"/>
                                     <constraint firstItem="DHL-lw-BNd" firstAttribute="leading" secondItem="qEc-o0-IxJ" secondAttribute="trailing" constant="5" id="8vi-5B-J4G"/>
@@ -205,6 +215,8 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="activityViewSearching" destination="nkZ-uB-Z8e" id="2Bb-ph-mdv"/>
+                        <outlet property="avatarView" destination="jtd-Yq-Z3y" id="amP-Dp-yvS"/>
+                        <outlet property="avatarViewContainer" destination="jtd-Yq-Z3y" id="CPK-P6-GmB"/>
                         <outlet property="buttonCancelSearch" destination="DHL-lw-BNd" id="Z2w-xL-sMe"/>
                         <outlet property="buttonCancelSearchWidthConstraint" destination="cc8-l6-3Cc" id="mCA-dV-hng"/>
                         <outlet property="imageViewArrowDown" destination="QXa-y8-P03" id="aiy-GU-1xl"/>
@@ -225,7 +237,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="BRy-Se-87j" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="AU3-QI-Caf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AU3-QI-Caf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -237,6 +249,23 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7XN-2F-T1w" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="201" y="489"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="hIN-e8-ew4">
+            <objects>
+                <viewController id="bV6-48-XJW" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="MSb-Lo-LEo"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fcl-xR-Rce"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="cTR-qs-tBr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="URb-L4-NFf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
         </scene>
     </scenes>
     <resources>
