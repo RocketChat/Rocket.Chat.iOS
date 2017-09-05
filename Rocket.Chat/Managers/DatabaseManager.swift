@@ -12,18 +12,35 @@ import Realm
 
 struct DatabaseManager {
 
+    /**
+        - returns: The selected database index.
+     */
     static var selectedIndex: Int? {
         return UserDefaults.standard.value(forKey: ServerPersistKeys.selectedIndex) as? Int
     }
 
+    /**
+        - returns: All servers stored locally into the app.
+     */
     static var servers: [[String: String]]? {
         return UserDefaults.standard.value(forKey: ServerPersistKeys.servers) as? [[String: String]]
     }
 
+    /**
+        - parameter index: The database index user wants to select.
+     */
     static func selectDatabase(at index: Int) {
         UserDefaults.standard.set(index, forKey: ServerPersistKeys.selectedIndex)
     }
 
+    /**
+        This method will create a new database before user
+        even authenticated into the server. This is used
+        so we can populate the authentication information
+        when user logins.
+     
+        - parameter serverURL: The serve URL.
+     */
     static func createNewDatabaseInstance(serverURL: String) -> Int {
         let defaults = UserDefaults.standard
         var servers = self.servers ?? []
@@ -39,6 +56,16 @@ struct DatabaseManager {
         return index
     }
 
+    /**
+        This method is responsible to get the server
+        information that's stored locally on device and
+        use it to change the database configuration being
+        used by the currently instance.
+ 
+        - parameter index: If the index you want to use isn't stored
+            into the UserDefaults.standard, you can for the index
+            using this parameter.
+     */
     static func changeDatabaseInstance(index: Int? = nil) {
         guard
             let server = AuthManager.selectedServerInformation(),
@@ -52,8 +79,7 @@ struct DatabaseManager {
             deleteRealmIfMigrationNeeded: true
         )
 
-        realmInstance = try? Realm(configuration: configuration)
-        dump(configuration.fileURL)
+        realmConfiguration = configuration
     }
 
 }
