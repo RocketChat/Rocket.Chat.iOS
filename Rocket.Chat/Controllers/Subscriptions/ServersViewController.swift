@@ -45,6 +45,12 @@ extension ServersViewController: UITableViewDataSource {
         return cell
     }
 
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if DatabaseManager.selectedIndex == indexPath.row {
+            tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
+        }
+    }
+
 }
 
 extension ServersViewController: UITableViewDelegate {
