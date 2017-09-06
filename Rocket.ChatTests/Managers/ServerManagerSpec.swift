@@ -34,7 +34,7 @@ class ServerManagerSpec: XCTestCase {
         ServerManager.updateServerInformation(from: settings)
 
         // Check information
-        let server = DatabaseManager.servers?[DatabaseManager.selectedIndex ?? 0]
+        let server = DatabaseManager.servers?[DatabaseManager.selectedIndex]
         XCTAssertEqual(server?[ServerPersistKeys.serverName], "serverName", "serverName was updated")
         XCTAssertEqual(server?[ServerPersistKeys.serverIconURL], "serverFaviconURL", "serverFaviconURL was updated")
     }
@@ -60,7 +60,7 @@ class ServerManagerSpec: XCTestCase {
         ServerManager.updateServerInformation(from: settings)
 
         // Check information
-        let server = DatabaseManager.servers?[DatabaseManager.selectedIndex ?? 0]
+        let server = DatabaseManager.servers?[DatabaseManager.selectedIndex]
         XCTAssertNotEqual(server?[ServerPersistKeys.serverName], "serverName", "serverName was updated")
         XCTAssertNotEqual(server?[ServerPersistKeys.serverIconURL], "serverFaviconURL", "serverFaviconURL was updated")
     }

@@ -15,8 +15,8 @@ struct DatabaseManager {
     /**
         - returns: The selected database index.
      */
-    static var selectedIndex: Int? {
-        return UserDefaults.standard.value(forKey: ServerPersistKeys.selectedIndex) as? Int
+    static var selectedIndex: Int {
+        return UserDefaults.standard.value(forKey: ServerPersistKeys.selectedIndex) as? Int ?? 0
     }
 
     /**
