@@ -47,11 +47,11 @@ class ServerManager {
      */
     static func updateServerInformation(from settings: AuthSettings) {
         let defaults = UserDefaults.standard
+        let selectedIndex = DatabaseManager.selectedIndex
 
         guard
             let serverName = settings.serverName,
             let iconURL = settings.serverFaviconURL,
-            let selectedIndex = DatabaseManager.selectedIndex,
             var servers = DatabaseManager.servers,
             servers.count > selectedIndex
             else {

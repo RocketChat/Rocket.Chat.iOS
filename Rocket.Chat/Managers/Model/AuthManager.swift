@@ -36,11 +36,11 @@ struct AuthManager {
      */
     static func persistAuthInformation(_ auth: Auth) {
         let defaults = UserDefaults.standard
+        let selectedIndex = DatabaseManager.selectedIndex
 
         guard
             let token = auth.token,
             let userId = auth.userId,
-            let selectedIndex = DatabaseManager.selectedIndex,
             var servers = DatabaseManager.servers,
             servers.count > selectedIndex
         else {
