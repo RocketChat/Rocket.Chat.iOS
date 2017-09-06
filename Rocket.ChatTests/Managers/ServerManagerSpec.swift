@@ -48,7 +48,7 @@ class ServerManagerSpec: XCTestCase {
             ServerPersistKeys.serverURL: "wss://foo.com/websocket",
             ServerPersistKeys.token: "1",
             ServerPersistKeys.userId: "1"
-            ]]
+        ]]
 
         defaults.set(servers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 0)

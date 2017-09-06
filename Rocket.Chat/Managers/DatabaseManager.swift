@@ -54,7 +54,7 @@ struct DatabaseManager {
             validServers.append(server)
         }
 
-        if selectedIndex ?? 0 > validServers.count - 1 {
+        if selectedIndex > validServers.count - 1 {
             selectDatabase(at: 0)
         }
 
