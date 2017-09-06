@@ -59,5 +59,5 @@ extension AddServerCell {
             transition()
         }
     }
-    
+
 }

@@ -65,8 +65,7 @@ struct AuthManager {
         if let index = index {
             server = servers[index]
         } else {
-            let selectedIndex = DatabaseManager.selectedIndex ?? 0
-            server = servers[selectedIndex]
+            server = servers[DatabaseManager.selectedIndex]
         }
 
         return server
