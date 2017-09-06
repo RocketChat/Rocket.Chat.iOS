@@ -27,4 +27,12 @@ final class AuthSettings: BaseModel {
 
     // File upload
     dynamic var uploadStorageType: String?
+
+    // Hide Message Types
+    dynamic var hideMessageUserJoined: Bool = false
+    dynamic var hideMessageUserLeft: Bool = false
+    dynamic var hideMessageAddedUser: Bool = false
+    dynamic var hideMessageMuteUnmute: Bool = false
+    dynamic var hideMessageRemovedUser: Bool = false
+
 }
