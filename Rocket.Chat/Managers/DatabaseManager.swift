@@ -69,6 +69,7 @@ struct DatabaseManager {
      
         - parameter serverURL: The serve URL.
      */
+    @discardableResult
     static func createNewDatabaseInstance(serverURL: String) -> Int {
         let defaults = UserDefaults.standard
         var servers = self.servers ?? []
