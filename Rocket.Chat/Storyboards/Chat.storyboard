@@ -266,7 +266,7 @@
         <scene sceneID="aHX-tL-zPo">
             <objects>
                 <navigationController id="19H-wD-eac" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="uhj-qe-ylL">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="uhj-qe-ylL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -294,7 +294,7 @@
                     <connections>
                         <segue destination="ZWT-yJ-dk4" kind="custom" identifier="showCenterController" customClass="CenterContainmentSegue" customModule="SideMenuController" id="49z-6y-c6s"/>
                         <segue destination="P2x-Rh-AO9" kind="custom" identifier="containSideMenu" customClass="SideContainmentSegue" customModule="SideMenuController" id="9yd-xs-Cbl"/>
-                        <segue destination="CfV-7k-wfe" kind="presentation" identifier="Auth" modalTransitionStyle="flipHorizontal" id="fsY-Jr-OFS"/>
+                        <segue destination="CfV-7k-wfe" kind="presentation" identifier="Auth" id="fsY-Jr-OFS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ozo-Ve-E9D" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -314,7 +314,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Chat" automaticallyAdjustsScrollViewInsets="NO" id="ZWT-yJ-dk4" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="vuM-gG-ey4">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="vuM-gG-ey4">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
