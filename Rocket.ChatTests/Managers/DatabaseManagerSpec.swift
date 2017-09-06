@@ -77,4 +77,16 @@ class DatabaseManagerSpec: XCTestCase {
         XCTAssertEqual(DatabaseManager.selectedIndex, 0, "first item is selected")
     }
 
+    func testCreateNewDatabaseInstance() {
+        let serverURL = "wss://new.foo.bar"
+
+        DatabaseManager.createNewDatabaseInstance(serverURL: serverURL)
+
+        let servers = DatabaseManager.servers
+        let server = servers?.last
+
+        XCTAssertEqual(server?[ServerPersistKeys.serverURL], serverURL, "server was added sucessffuly")
+        XCTAssertNotNil(server?[ServerPersistKeys.databaseName], "new server database name isn't nil")
+    }
+
 }
