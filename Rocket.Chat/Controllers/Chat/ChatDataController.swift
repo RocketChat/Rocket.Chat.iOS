@@ -59,11 +59,22 @@ final class ChatDataController {
         let item = itemAt(indexPath)
 
         guard (item?.message?.type.sequential ?? false) &&
-              (prevItem?.message?.type.sequential ?? false) else {
+            (prevItem?.message?.type.sequential ?? false) else {
+                return false
+        }
+
+        let sameUser = item?.message?.user == prevItem?.message?.user
+
+        // is the message recent?
+        guard let date = item?.message?.createdAt,
+              let prevDate = prevItem?.message?.createdAt else {
             return false
         }
 
-        return item?.message?.user == prevItem?.message?.user
+        let timeLimit = 30.0 * 60 // 30 minutes
+        let recent = date.timeIntervalSince(prevDate) < timeLimit
+
+        return sameUser && recent
     }
 
     func indexPathOf(_ identifier: String) -> IndexPath? {
