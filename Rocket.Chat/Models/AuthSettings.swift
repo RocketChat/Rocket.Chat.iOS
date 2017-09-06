@@ -31,8 +31,8 @@ final class AuthSettings: BaseModel {
     // Hide Message Types
     dynamic var hideMessageUserJoined: Bool = false
     dynamic var hideMessageUserLeft: Bool = false
-    dynamic var hideMessageAddedUser: Bool = false
+    dynamic var hideMessageUserAdded: Bool = false
     dynamic var hideMessageMuteUnmute: Bool = false
-    dynamic var hideMessageRemovedUser: Bool = false
+    dynamic var hideMessageUserRemoved: Bool = false
 
 }
