@@ -73,11 +73,13 @@ class SubscriptionsPageViewController: UIPageViewController {
     func showServersList(animated: Bool = true) {
         guard let serversController = self.serversController else { return }
         setViewControllers([serversController], direction: .reverse, animated: animated, completion: nil)
+        pageControl?.currentPage = 0
     }
 
     func showSubscriptionsList(animated: Bool = true) {
         guard let subscriptionsController = self.subscriptionsController else { return }
         setViewControllers([subscriptionsController], direction: .forward, animated: animated, completion: nil)
+        pageControl?.currentPage = 1
     }
 
 }
