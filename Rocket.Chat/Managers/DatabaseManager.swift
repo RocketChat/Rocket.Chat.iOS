@@ -34,6 +34,34 @@ struct DatabaseManager {
     }
 
     /**
+        This method cleans the servers that doesn't have
+        authentication information.
+     */
+    static func cleanInvalidDatabases() {
+        let servers = self.servers ?? []
+        var validServers: [[String: String]] = []
+
+        for server in servers {
+            guard
+                server[ServerPersistKeys.token] != nil,
+                server[ServerPersistKeys.userId] != nil,
+                server[ServerPersistKeys.databaseName] != nil,
+                server[ServerPersistKeys.serverURL] != nil
+            else {
+                continue
+            }
+
+            validServers.append(server)
+        }
+
+        if selectedIndex ?? 0 > validServers.count - 1 {
+            selectDatabase(at: 0)
+        }
+
+        UserDefaults.standard.set(validServers, forKey: ServerPersistKeys.servers)
+    }
+
+    /**
         This method will create a new database before user
         even authenticated into the server. This is used
         so we can populate the authentication information
