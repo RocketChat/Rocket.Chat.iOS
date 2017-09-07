@@ -32,7 +32,7 @@ final class AuthSettings: BaseModel {
     dynamic var hideMessageUserJoined: Bool = false
     dynamic var hideMessageUserLeft: Bool = false
     dynamic var hideMessageUserAdded: Bool = false
-    dynamic var hideMessageMutedUnmuted: Bool = false
+    dynamic var hideMessageUserMutedUnmuted: Bool = false
     dynamic var hideMessageUserRemoved: Bool = false
 
     var hiddenTypes: Set<MessageType> {
@@ -42,7 +42,7 @@ final class AuthSettings: BaseModel {
         if hideMessageUserLeft { hiddenTypes.insert(.userLeft) }
         if hideMessageUserAdded { hiddenTypes.insert(.userAdded) }
         if hideMessageUserRemoved { hiddenTypes.insert(.userRemoved) }
-        if hideMessageMutedUnmuted {
+        if hideMessageUserMutedUnmuted {
             hiddenTypes.insert(.userMuted)
             hiddenTypes.insert(.userUnmuted)
         }
