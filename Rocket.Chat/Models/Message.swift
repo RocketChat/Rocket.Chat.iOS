@@ -31,17 +31,6 @@ enum MessageType: String {
     case subscriptionRoleRemoved = "subscription-role-removed"
     case roomArchived = "room-archived"
     case roomUnarchived = "room-unarchived"
-
-    var blocked: Bool {
-        guard let settings = AuthSettingsManager.settings else { return false }
-
-        return settings.hideMessageUserAdded && self == .userAdded ||
-               settings.hideMessageUserRemoved && self == .userRemoved ||
-               settings.hideMessageUserJoined && self == .userJoined ||
-               settings.hideMessageUserLeft && self == .userLeft ||
-               settings.hideMessageMuteUnmute && (self == .userMuted || self == .userUnmuted)
-
-    }
 }
 
 class Message: BaseModel {
