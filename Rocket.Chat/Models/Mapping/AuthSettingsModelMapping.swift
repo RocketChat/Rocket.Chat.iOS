@@ -34,7 +34,7 @@ extension AuthSettings: ModelMappeable {
         self.hideMessageUserJoined = objectForKey(object: values, key: "Message_HideType_uj")?.bool ?? false
         self.hideMessageUserLeft = objectForKey(object: values, key: "Message_HideType_ul")?.bool ?? false
         self.hideMessageUserAdded = objectForKey(object: values, key: "Message_HideType_au")?.bool ?? false
-        self.hideMessageMuteUnmute = objectForKey(object: values, key: "Message_HideType_mute_unmute")?.bool ?? false
+        self.hideMessageMutedUnmuted = objectForKey(object: values, key: "Message_HideType_mute_unmute")?.bool ?? false
         self.hideMessageUserRemoved = objectForKey(object: values, key: "Message_HideType_ru")?.bool ?? false
     }
 
