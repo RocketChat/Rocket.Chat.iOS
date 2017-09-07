@@ -22,7 +22,7 @@ final class ChatMessageCell: UICollectionViewCell {
     weak var delegate: ChatMessageCellProtocol?
     var message: Message! {
         didSet {
-            updateMessageInformation()
+            updateMessage()
         }
     }
 
@@ -55,13 +55,13 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
-    static func cellMediaHeightFor(message: Message, grouped: Bool = true) -> CGFloat {
+    static func cellMediaHeightFor(message: Message, sequential: Bool = true) -> CGFloat {
         let fullWidth = UIScreen.main.bounds.size.width
         var total = UILabel.heightForView(
             MessageTextCacheManager.shared.message(for: message)?.string ?? "",
             font: UIFont.systemFont(ofSize: 15),
             width: fullWidth - 62
-        ) + 35
+        ) + (sequential ? 7 : 35)
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -87,10 +87,24 @@ final class ChatMessageCell: UICollectionViewCell {
         return total
     }
 
+    // MARK: Sequential
+    @IBOutlet weak var labelUsernameHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var labelDateHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var avatarContainerHeightConstraint: NSLayoutConstraint!
+
+    var sequential: Bool = false {
+        didSet {
+            avatarContainerHeightConstraint.constant = sequential ? 0 : 35
+            labelUsernameHeightConstraint.constant = sequential ? 0 : 21
+            labelDateHeightConstraint.constant = sequential ? 0 : 21
+        }
+    }
+
     override func prepareForReuse() {
         labelUsername.text = ""
         labelText.text = ""
         labelDate.text = ""
+        sequential = false
 
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
@@ -166,9 +180,7 @@ final class ChatMessageCell: UICollectionViewCell {
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
     }
 
-    fileprivate func updateMessageInformation() {
-        guard delegate != nil else { return }
-
+    fileprivate func updateMessageHeader() {
         let formatter = DateFormatter()
         formatter.timeStyle = .short
 
@@ -184,7 +196,9 @@ final class ChatMessageCell: UICollectionViewCell {
         } else {
             labelUsername.text = message.user?.displayName() ?? "Unknown"
         }
+    }
 
+    fileprivate func updateMessageContent() {
         if let text = MessageTextCacheManager.shared.message(for: message) {
             if message.temporary {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
@@ -192,6 +206,16 @@ final class ChatMessageCell: UICollectionViewCell {
 
             labelText.attributedText = text
         }
+    }
+
+    fileprivate func updateMessage() {
+        guard delegate != nil else { return }
+
+        if !sequential {
+            updateMessageHeader()
+        }
+
+        updateMessageContent()
 
         insertGesturesIfNeeded()
         insertAttachments()
