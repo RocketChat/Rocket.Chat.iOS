@@ -45,6 +45,7 @@ extension ChatViewController: ChatMessageCellProtocol {
         if let image = thumbnail.image {
             let configuration = ImageViewerConfiguration { config in
                 config.image = image
+                config.imageView = thumbnail
             }
             present(ImageViewerController(configuration: configuration), animated: true)
         } else {
