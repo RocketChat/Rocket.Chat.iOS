@@ -493,7 +493,7 @@ final class ChatViewController: SLKTextViewController {
             // Normalize data into ChatData object
             for message in newMessages {
                 guard let createdAt = message.createdAt else { continue }
-                guard var obj = ChatData(type: .message, timestamp: createdAt) else { continue }
+                var obj = ChatData(type: .message, timestamp: createdAt)
                 obj.message = message
                 objs.append(obj)
             }
