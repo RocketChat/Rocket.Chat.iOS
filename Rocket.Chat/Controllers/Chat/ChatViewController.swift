@@ -8,7 +8,7 @@
 
 import RealmSwift
 import SlackTextViewController
-import URBMediaFocusViewController
+import SimpleImageViewer
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
@@ -31,7 +31,7 @@ final class ChatViewController: SLKTextViewController {
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewStatus: ChatHeaderViewStatus?
-    lazy var mediaFocusViewController = URBMediaFocusViewController()
+    var mediaFocusViewController = ImageViewerController(configuration: nil)
     var documentController: UIDocumentInteractionController?
 
     var dataController = ChatDataController()
@@ -80,9 +80,6 @@ final class ChatViewController: SLKTextViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
-
-        mediaFocusViewController.shouldDismissOnTap = true
-        mediaFocusViewController.shouldShowPhotoActions = true
 
         collectionView?.isPrefetchingEnabled = true
 
