@@ -136,7 +136,7 @@ extension Subscription {
             }
         }
 
-        return filteredMessages
+        return filteredMessages.sorted(byKeyPath: "createdAt", ascending: false)
     }
 
     func updateFavorite(_ favorite: Bool) {
