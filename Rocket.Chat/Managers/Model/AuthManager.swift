@@ -334,10 +334,7 @@ extension AuthManager {
             SocketManager.clear()
             GIDSignIn.sharedInstance().signOut()
 
-            let defaults = UserDefaults.standard
-            defaults.removeObject(forKey: ServerPersistKeys.token)
-            defaults.removeObject(forKey: ServerPersistKeys.serverURL)
-            defaults.removeObject(forKey: ServerPersistKeys.userId)
+            DatabaseManager.removerSelectedDatabase()
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()

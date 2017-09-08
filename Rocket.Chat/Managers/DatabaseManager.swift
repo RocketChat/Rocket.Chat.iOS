@@ -34,6 +34,26 @@ struct DatabaseManager {
     }
 
     /**
+        Remover selected server and select the
+        first one.
+     */
+    static func removerSelectedDatabase() {
+        removeDatabase(at: selectedIndex)
+        selectDatabase(at: 0)
+    }
+
+    /**
+        Removes server information at some index.
+     
+        parameter index: The database index user wants to delete.
+     */
+    static func removeDatabase(at index: Int) {
+        var servers = self.servers
+        servers?.remove(at: index)
+        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+    }
+
+    /**
         This method cleans the servers that doesn't have
         authentication information.
      */
