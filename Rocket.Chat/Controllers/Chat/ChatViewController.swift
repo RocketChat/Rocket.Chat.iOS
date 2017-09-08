@@ -31,7 +31,6 @@ final class ChatViewController: SLKTextViewController {
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewStatus: ChatHeaderViewStatus?
-    var mediaFocusViewController = ImageViewerController(configuration: nil)
     var documentController: UIDocumentInteractionController?
 
     var dataController = ChatDataController()
