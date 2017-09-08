@@ -28,6 +28,14 @@ extension AuthSettings: ModelMappeable {
         self.isLDAPAuthenticationEnabled = objectForKey(object: values, key: "LDAP_Enable")?.bool ?? false
 
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
+
+        // HideType
+
+        self.hideMessageUserJoined = objectForKey(object: values, key: "Message_HideType_uj")?.bool ?? false
+        self.hideMessageUserLeft = objectForKey(object: values, key: "Message_HideType_ul")?.bool ?? false
+        self.hideMessageUserAdded = objectForKey(object: values, key: "Message_HideType_au")?.bool ?? false
+        self.hideMessageUserMutedUnmuted = objectForKey(object: values, key: "Message_HideType_mute_unmute")?.bool ?? false
+        self.hideMessageUserRemoved = objectForKey(object: values, key: "Message_HideType_ru")?.bool ?? false
     }
 
     fileprivate func objectForKey(object: JSON, key: String) -> JSON? {
