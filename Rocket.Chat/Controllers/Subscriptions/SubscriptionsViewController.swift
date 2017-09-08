@@ -54,14 +54,23 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var viewUserStatus: UIView!
 
-    @IBOutlet weak var imageViewServer: UIImageView! {
+    weak var avatarView: AvatarView?
+    @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
-            imageViewServer.layer.masksToBounds = true
-            imageViewServer.layer.cornerRadius = 5
+            avatarViewContainer.layer.masksToBounds = true
+            avatarViewContainer.layer.cornerRadius = 5
 
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(imageViewServerDidTapped(gesture:)))
-            imageViewServer.isUserInteractionEnabled = true
-            imageViewServer.addGestureRecognizer(gesture)
+            if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.frame = CGRect(
+                    x: 0,
+                    y: 0,
+                    width: avatarViewContainer.frame.width,
+                    height: avatarViewContainer.frame.height
+                )
+
+                avatarViewContainer.addSubview(avatarView)
+                self.avatarView = avatarView
+            }
         }
     }
 
@@ -202,14 +211,11 @@ extension SubscriptionsViewController {
         guard let user = AuthManager.currentUser() else { return }
         guard let labelUsername = self.labelUsername else { return }
         guard let viewUserStatus = self.viewUserStatus else { return }
-        guard let imageViewServer = self.imageViewServer else { return }
+        guard let avatarView = self.avatarView else { return }
 
         labelServer.text = settings.serverName
         labelUsername.text = user.displayName()
-
-        if let assetURL = URL(string: settings.serverFaviconURL ?? "") {
-            imageViewServer.sd_setImage(with: assetURL)
-        }
+        avatarView.user = user
 
         switch user.status {
         case .online:
