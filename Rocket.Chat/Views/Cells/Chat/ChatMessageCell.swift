@@ -204,6 +204,15 @@ final class ChatMessageCell: UICollectionViewCell {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
             }
 
+            message.mentions.forEach {
+                if let username = $0.username,
+                    let range = text.string.range(of: "@\(username)") {
+                    let range = NSRange(range, in: text.string)
+                    text.setBackgroundColor(UIColor.mention.background, range: range)
+                    text.setFontColor(UIColor.mention.font, range: range)
+                }
+            }
+
             labelText.attributedText = text
         }
     }

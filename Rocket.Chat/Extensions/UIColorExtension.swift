@@ -77,4 +77,12 @@ extension UIColor {
         return UIColor.lightGray
     }
 
+    // Mention Color
+
+    static var mention =
+    (
+        background: UIColor(rgb: 0x13679A, alphaVal: 1),
+        font: UIColor(rgb: 0xFFFFFF, alphaVal: 1)
+    )
+
 }

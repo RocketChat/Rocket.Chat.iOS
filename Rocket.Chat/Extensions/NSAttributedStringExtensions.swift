@@ -44,6 +44,14 @@ extension NSMutableAttributedString {
         }
     }
 
+    func setBackgroundColor(_ color: UIColor, range: NSRange? = nil) {
+        if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
+            self.addAttributes([
+                NSBackgroundColorAttributeName: color
+                ], range: attributeRange)
+        }
+    }
+
     func transformMarkdown() -> NSAttributedString {
         let defaultFontSize = MessageTextFontAttributes.defaultFontSize
 
