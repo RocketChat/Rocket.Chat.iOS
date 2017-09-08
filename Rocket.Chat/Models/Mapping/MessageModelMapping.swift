@@ -68,5 +68,16 @@ extension Message: ModelMappeable {
                 self.urls.append(obj)
             }
         }
+
+        // Mentions
+        if let mentions = values["mentions"].array {
+            self.mentions = List()
+
+            for mention in mentions {
+                let obj = Mention()
+                obj.map(mention, realm: realm)
+                self.mentions.append(obj)
+            }
+        }
     }
 }
