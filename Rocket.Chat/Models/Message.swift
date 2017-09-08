@@ -31,6 +31,12 @@ enum MessageType: String {
     case subscriptionRoleRemoved = "subscription-role-removed"
     case roomArchived = "room-archived"
     case roomUnarchived = "room-unarchived"
+
+    var sequential: Bool {
+        let sequential: [MessageType] = [.text, .textAttachment]
+
+        return sequential.contains(self)
+    }
 }
 
 class Message: BaseModel {
