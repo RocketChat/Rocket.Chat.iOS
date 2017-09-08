@@ -25,7 +25,7 @@ struct ChatData {
     var message: Message?
 
     // Initializers
-    init?(type: ChatDataType, timestamp: Date) {
+    init(type: ChatDataType, timestamp: Date) {
         self.type = type
         self.timestamp = timestamp
     }
@@ -99,17 +99,16 @@ final class ChatDataController {
             let date = obj.timestamp
             let components = calendar.components([.day, .month, .year], from: date)
             guard let newDate = calendar.date(from: components) else { return }
-            guard let separator = ChatData(type: .daySeparator, timestamp: newDate) else { return }
+            let separator = ChatData(type: .daySeparator, timestamp: newDate)
             identifiers.append(separator.identifier)
             newItems.append(separator)
         }
 
         if loadedAllMessages {
             if data.filter({ $0.type == .header }).count == 0 {
-                if let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0)) {
-                    newItems.append(obj)
-                    identifiers.append(obj.identifier)
-                }
+                let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0))
+                newItems.append(obj)
+                identifiers.append(obj.identifier)
             }
 
             let messages = data.filter({ $0.type == .message })
@@ -139,10 +138,9 @@ final class ChatDataController {
             }
         } else {
             if loaders.count == 0 {
-                if let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 0)) {
-                    newItems.append(obj)
-                    identifiers.append(obj.identifier)
-                }
+                let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 0))
+                newItems.append(obj)
+                identifiers.append(obj.identifier)
             }
         }
 
