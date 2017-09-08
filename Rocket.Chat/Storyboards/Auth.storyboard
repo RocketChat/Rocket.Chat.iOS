@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12118" systemVersion="16E195" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eFO-g0-vxH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A360a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eFO-g0-vxH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12086"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -139,9 +139,16 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="htX-6r-Jqg"/>
+                    <navigationItem key="navigationItem" id="htX-6r-Jqg">
+                        <barButtonItem key="leftBarButtonItem" systemItem="stop" id="qto-hL-6xQ">
+                            <connections>
+                                <action selector="buttonCloseDidPressed:" destination="rJd-W9-gC3" id="4Gu-UC-kvS"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicator" destination="DW6-kC-gDS" id="A6O-hz-inh"/>
+                        <outlet property="buttonClose" destination="qto-hL-6xQ" id="xhS-iM-45M"/>
                         <outlet property="textFieldServerURL" destination="0ea-ze-woy" id="XkR-cW-Db7"/>
                         <outlet property="viewFields" destination="x11-i1-wfS" id="HPU-Y3-fmw"/>
                         <outlet property="visibleViewBottomConstraint" destination="zwG-Q5-5tg" id="orH-pL-Ddp"/>

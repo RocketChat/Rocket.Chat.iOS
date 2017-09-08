@@ -41,6 +41,9 @@ final class MainViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
+        DatabaseManager.cleanInvalidDatabases()
+        DatabaseManager.changeDatabaseInstance()
+
         if let auth = AuthManager.isAuthenticated() {
             AuthManager.persistAuthInformation(auth)
 

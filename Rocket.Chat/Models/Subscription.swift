@@ -48,9 +48,9 @@ class Subscription: BaseModel {
 
     dynamic var otherUserId: String?
     var directMessageUser: User? {
+        guard let realm = Realm.shared else { return nil }
         guard let otherUserId = otherUserId else { return nil }
-        guard let users = try? Realm().objects(User.self).filter("identifier = '\(otherUserId)'") else { return nil }
-        return users.first
+        return realm.objects(User.self).filter("identifier = '\(otherUserId)'").first
     }
 
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")

@@ -11,12 +11,12 @@ import SideMenuController
 
 class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
-    class func shared() -> MainChatViewController? {
+    static var shared: MainChatViewController? {
         return UIApplication.shared.windows.first?.rootViewController as? MainChatViewController
     }
 
     class func closeSideMenuIfNeeded() {
-        if let instance = shared() {
+        if let instance = shared {
             if instance.sidePanelVisible {
                 instance.toggle()
             }
@@ -53,25 +53,49 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     // MARK: SideMenuControllerDelegate
 
     func sideMenuControllerWillHide(_ sideMenuController: SideMenuController) {
-        ChatViewController.sharedInstance()?.textView.resignFirstResponder()
-        SubscriptionsViewController.sharedInstance()?.textFieldSearch.resignFirstResponder()
+        ChatViewController.shared?.textView.resignFirstResponder()
+        SubscriptionsViewController.shared?.textFieldSearch.resignFirstResponder()
     }
 
     func sideMenuControllerDidHide(_ sideMenuController: SideMenuController) {
-        ChatViewController.sharedInstance()?.textView.resignFirstResponder()
-        SubscriptionsViewController.sharedInstance()?.textFieldSearch.resignFirstResponder()
+        ChatViewController.shared?.textView.resignFirstResponder()
+        SubscriptionsViewController.shared?.textFieldSearch.resignFirstResponder()
+        SubscriptionsPageViewController.shared?.showSubscriptionsList(animated: false)
     }
 
     func sideMenuControllerDidReveal(_ sideMenuController: SideMenuController) {
-        ChatViewController.sharedInstance()?.textView.resignFirstResponder()
-        SubscriptionsViewController.sharedInstance()?.textFieldSearch.resignFirstResponder()
+        ChatViewController.shared?.textView.resignFirstResponder()
+        SubscriptionsViewController.shared?.textFieldSearch.resignFirstResponder()
     }
 
     func sideMenuControllerWillReveal(_ sideMenuController: SideMenuController) {
-        ChatViewController.sharedInstance()?.textView.resignFirstResponder()
+        ChatViewController.shared?.textView.resignFirstResponder()
 
-        SubscriptionsViewController.sharedInstance()?.textFieldSearch.resignFirstResponder()
-        SubscriptionsViewController.sharedInstance()?.updateData()
+        SubscriptionsViewController.shared?.textFieldSearch.resignFirstResponder()
+        SubscriptionsViewController.shared?.updateData()
+    }
+
+    // MARK: Authentication & Server management
+
+    func openAddNewTeamController() {
+        SocketManager.disconnect { (_, _) in
+            self.performSegue(withIdentifier: "Auth", sender: nil)
+        }
+    }
+
+    func changeSelectedServer(index: Int) {
+        DatabaseManager.selectDatabase(at: index)
+        DatabaseManager.changeDatabaseInstance(index: index)
+
+        SocketManager.disconnect { (_, _) in
+            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let controller = storyboardChat.instantiateInitialViewController()
+            let application = UIApplication.shared
+
+            if let window = application.windows.first {
+                window.rootViewController = controller
+            }
+        }
     }
 
 }

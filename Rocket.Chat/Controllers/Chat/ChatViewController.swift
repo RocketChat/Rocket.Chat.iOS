@@ -54,7 +54,7 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: View Life Cycle
 
-    class func sharedInstance() -> ChatViewController? {
+    static var shared: ChatViewController? {
         if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
             if let nav = main.centerViewController as? UINavigationController {
                 return nav.viewControllers.first as? ChatViewController
