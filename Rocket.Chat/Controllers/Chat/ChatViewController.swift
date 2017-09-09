@@ -283,9 +283,11 @@ final class ChatViewController: SLKTextViewController {
             textView.text = ""
             rightButton.isEnabled = true
 
-            SubscriptionManager.sendTextMessage(message) { _ in
+            SubscriptionManager.sendTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
                     message.temporary = false
+                    message.map(response.result["result"], realm: realm)
+                    MessageTextCacheManager.shared.update(for: message)
                     realm.add(message, update: true)
                 })
             }
