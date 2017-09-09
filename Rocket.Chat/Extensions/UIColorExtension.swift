@@ -19,7 +19,7 @@ extension UIColor {
         )
     }
 
-    // Status
+    // MARK: Status
 
     static func RCOnline() -> UIColor {
         return UIColor(rgb: 0x2DE0A5, alphaVal: 1)
@@ -37,7 +37,7 @@ extension UIColor {
         return UIColor(rgb: 0xCBCED1, alphaVal: 1)
     }
 
-    // Theme color
+    // MARK: Theme color
 
     static func RCBackgroundColor() -> UIColor {
         return UIColor(rgb: 0x2F343D, alphaVal: 1)
@@ -67,7 +67,7 @@ extension UIColor {
         return UIColor(rgb: 0x0b4c74, alphaVal: 1)
     }
 
-    // Function color
+    // MARK: Function color
 
     static func RCFavoriteMark() -> UIColor {
         return UIColor(rgb: 0xF8B62B, alphaVal: 1.0)
@@ -78,13 +78,13 @@ extension UIColor {
     }
 
 
-    // Colors from Web Version
+    // MARK: Colors from Web Version
 
     static let primaryAction = UIColor(rgb: 0x13679A, alphaVal: 1)
     static let attention = UIColor(rgb: 0x9C27B0, alphaVal: 1)
     static let link = UIColor(rgb: 0x0000EE, alphaVal: 1)
 
-    // Mention Color
+    // MARK: Mention Color
 
     static func background(for mention: Mention) -> UIColor {
         if mention.username == AuthManager.currentUser()?.username {

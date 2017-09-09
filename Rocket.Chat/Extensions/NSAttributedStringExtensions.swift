@@ -74,11 +74,11 @@ extension NSMutableAttributedString {
     func highlightMentions(for message: Message) {
         message.mentions.forEach {
             if let username = $0.username {
-                let ranges = self.string.ranges(of: "@\(username)")
+                let ranges = string.ranges(of: "@\(username)")
                 for range in ranges {
-                    let range = NSRange(range, in: self.string)
-                    self.setBackgroundColor(UIColor.background(for: $0), range: range)
-                    self.setFontColor(UIColor.font(for: $0), range: range)
+                    let range = NSRange(range, in: string)
+                    setBackgroundColor(UIColor.background(for: $0), range: range)
+                    setFontColor(UIColor.font(for: $0), range: range)
                 }
             }
         }
@@ -87,10 +87,10 @@ extension NSMutableAttributedString {
     func highlightChannels(for message: Message) {
         message.channels.forEach {
             if let name = $0.name {
-                let ranges = self.string.ranges(of: "#\(name)")
+                let ranges = string.ranges(of: "#\(name)")
                 for range in ranges {
-                    let range = NSRange(range, in: self.string)
-                    self.setFontColor(.link, range: range)
+                    let range = NSRange(range, in: string)
+                    setFontColor(.link, range: range)
                 }
             }
         }
