@@ -9,6 +9,14 @@
 import UIKit
 import TSMarkdownParser
 
+extension NSAttributedString {
+    func highlightingMentions(for message: Message) -> NSAttributedString {
+        let result = NSMutableAttributedString(attributedString: self)
+        result.highlightMentions(for: message)
+        return result
+    }
+}
+
 extension NSMutableAttributedString {
 
     func trimCharacters(in set: CharacterSet) {
@@ -71,4 +79,14 @@ extension NSMutableAttributedString {
         return parser.attributedString(fromAttributedMarkdownString: self)
     }
 
+    func highlightMentions(for message: Message) {
+        message.mentions.forEach {
+            if let username = $0.username,
+                let range = self.string.range(of: "@\(username)") {
+                let range = NSRange(range, in: self.string)
+                self.setBackgroundColor(UIColor.mention.background, range: range)
+                self.setFontColor(UIColor.mention.font, range: range)
+            }
+        }
+    }
 }
