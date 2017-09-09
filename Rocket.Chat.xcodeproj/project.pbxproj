@@ -173,6 +173,10 @@
 		925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */; };
 		925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
+		D1DF4A811F631C4A007FE245 /* NSRangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DF4A801F631C4A007FE245 /* NSRangeExtensions.swift */; };
+		D1DF4A831F631F22007FE245 /* MentionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DF4A821F631F22007FE245 /* MentionModelMapping.swift */; };
+		D1DF4A871F638B96007FE245 /* ChannelModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DF4A861F638B96007FE245 /* ChannelModelMapping.swift */; };
+		D1DF4A8D1F638FDB007FE245 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DF4A8C1F638FDB007FE245 /* Channel.swift */; };
 		D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */; };
 		D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28221DFD86C300D6019C /* LauncherProtocol.swift */; };
 		D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */; };
@@ -376,6 +380,10 @@
 		925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TintedTextField.swift; path = Views/Subscriptions/TintedTextField.swift; sourceTree = "<group>"; };
 		BCF38696E8EC385488688390 /* Pods-Rocket.Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.debug.xcconfig"; sourceTree = "<group>"; };
+		D1DF4A801F631C4A007FE245 /* NSRangeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSRangeExtensions.swift; sourceTree = "<group>"; };
+		D1DF4A821F631F22007FE245 /* MentionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionModelMapping.swift; sourceTree = "<group>"; };
+		D1DF4A861F638B96007FE245 /* ChannelModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelModelMapping.swift; sourceTree = "<group>"; };
+		D1DF4A8C1F638FDB007FE245 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BugTrackingCoordinator.swift; sourceTree = "<group>"; };
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
@@ -644,6 +652,7 @@
 		4174CB1D1D2DB3270086DAC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D1DF4A801F631C4A007FE245 /* NSRangeExtensions.swift */,
 				414EFF901E54FE35004F001F /* Models */,
 				597ECBA11E3708A50041C5C5 /* DataExtension.swift */,
 				41CABFFB1F50515100E0B289 /* ArrayExtensions.swift */,
@@ -727,6 +736,7 @@
 				4159720D1D3DB882002258F4 /* Mention.swift */,
 				41DAE93D1D318F350098E068 /* Subscription.swift */,
 				41A79C0E1D2F085F00A1968E /* User.swift */,
+				D1DF4A8C1F638FDB007FE245 /* Channel.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -768,6 +778,8 @@
 				4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */,
 				4151B4571E2D1D2E00F8AA1B /* MessageModelMapping.swift */,
 				4151B45D1E2D32EA00F8AA1B /* MessageURLModelMapping.swift */,
+				D1DF4A821F631F22007FE245 /* MentionModelMapping.swift */,
+				D1DF4A861F638B96007FE245 /* ChannelModelMapping.swift */,
 			);
 			name = Mapping;
 			sourceTree = "<group>";
@@ -1047,7 +1059,6 @@
 				TargetAttributes = {
 					41DF76DE1D2C50710028DBF8 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = S6UPZG7ZR3;
 						LastSwiftMigration = 0810;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -1063,7 +1074,7 @@
 					};
 					41DF76F21D2C50720028DBF8 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = S6UPZG7ZR3;
+						DevelopmentTeam = FWD9V5VYJ2;
 						LastSwiftMigration = 0810;
 						TestTargetID = 41DF76DE1D2C50710028DBF8;
 					};
@@ -1426,6 +1437,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41499C8F1F2A116900790EA7 /* ServerManager.swift in Sources */,
+				D1DF4A8D1F638FDB007FE245 /* Channel.swift in Sources */,
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
 				418C4DC61DC4C07800ABED4C /* SubscriptionSectionView.swift in Sources */,
 				415801951D303B640099E71B /* MainViewController.swift in Sources */,
@@ -1474,6 +1486,7 @@
 				41F3C1001DB577ED000E0C76 /* MessageURL.swift in Sources */,
 				4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */,
 				41DC7A1D1D38471700896FC0 /* MessageManager.swift in Sources */,
+				D1DF4A871F638B96007FE245 /* ChannelModelMapping.swift in Sources */,
 				412F8DD91F599EF100AF7786 /* DatabaseManager.swift in Sources */,
 				41A79C131D2F09F200A1968E /* Auth.swift in Sources */,
 				41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */,
@@ -1482,6 +1495,7 @@
 				41D4ABAB1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
 				41BD37E11E290F2900CBC4C2 /* UserModelMapping.swift in Sources */,
+				D1DF4A831F631F22007FE245 /* MentionModelMapping.swift in Sources */,
 				412BCC871E55C6B800F7F4EE /* ChatMessageTextView.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
@@ -1538,6 +1552,7 @@
 				41BD37DD1E290DDB00CBC4C2 /* BaseModel.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
 				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,
+				D1DF4A811F631C4A007FE245 /* NSRangeExtensions.swift in Sources */,
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
@@ -1730,7 +1745,7 @@
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1751,7 +1766,7 @@
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -1769,7 +1784,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				DEVELOPMENT_TEAM = FWD9V5VYJ2;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Rocket.ChatTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1788,7 +1803,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				DEVELOPMENT_TEAM = FWD9V5VYJ2;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Rocket.ChatTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;

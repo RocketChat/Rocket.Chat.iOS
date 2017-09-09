@@ -16,6 +16,6 @@ extension Channel: ModelMappeable {
             self.identifier = String.random()
         }
 
-        self.name = values["username"].string ?? ""
+        self.name = values["name"].string ?? ""
     }
 }

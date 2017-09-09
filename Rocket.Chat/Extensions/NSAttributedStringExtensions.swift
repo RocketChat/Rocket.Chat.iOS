@@ -9,14 +9,6 @@
 import UIKit
 import TSMarkdownParser
 
-extension NSAttributedString {
-    func highlightingMentions(for message: Message) -> NSAttributedString {
-        let result = NSMutableAttributedString(attributedString: self)
-        result.highlightMentions(for: message)
-        return result
-    }
-}
-
 extension NSMutableAttributedString {
 
     func trimCharacters(in set: CharacterSet) {
@@ -86,6 +78,16 @@ extension NSMutableAttributedString {
                 let range = NSRange(range, in: self.string)
                 self.setBackgroundColor(UIColor.background(for: $0), range: range)
                 self.setFontColor(UIColor.font(for: $0), range: range)
+            }
+        }
+    }
+
+    func highlightChannels(for message: Message) {
+        message.channels.forEach {
+            if let name = $0.name,
+                let range = self.string.range(of: "#\(name)") {
+                let range = NSRange(range, in: self.string)
+                self.setFontColor(.link, range: range)
             }
         }
     }
