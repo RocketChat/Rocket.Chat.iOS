@@ -84,8 +84,8 @@ extension NSMutableAttributedString {
             if let username = $0.username,
                 let range = self.string.range(of: "@\(username)") {
                 let range = NSRange(range, in: self.string)
-                self.setBackgroundColor(UIColor.mention.background, range: range)
-                self.setFontColor(UIColor.mention.font, range: range)
+                self.setBackgroundColor(UIColor.background(for: $0), range: range)
+                self.setFontColor(UIColor.font(for: $0), range: range)
             }
         }
     }

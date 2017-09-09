@@ -77,12 +77,36 @@ extension UIColor {
         return UIColor.lightGray
     }
 
+
+    // Colors from Web Version
+
+    static let primaryAction = UIColor(rgb: 0x13679A, alphaVal: 1)
+    static let attention = UIColor(rgb: 0x9C27B0, alphaVal: 1)
+    static let link = UIColor(rgb: 0x0000EE, alphaVal: 1)
+
     // Mention Color
 
-    static var mention =
-    (
-        background: UIColor(rgb: 0x13679A, alphaVal: 1),
-        font: UIColor(rgb: 0xFFFFFF, alphaVal: 1)
-    )
+    static func background(for mention: Mention) -> UIColor {
+        if mention.username == AuthManager.currentUser()?.username {
+            return .primaryAction
+        }
 
+        if mention.username == "all" || mention.username == "here" {
+            return .attention
+        }
+
+        return .white
+    }
+
+    static func font(for mention: Mention) -> UIColor {
+        if mention.username == AuthManager.currentUser()?.username {
+            return .white
+        }
+
+        if mention.username == "all" || mention.username == "here" {
+            return .white
+        }
+
+        return .link
+    }
 }
