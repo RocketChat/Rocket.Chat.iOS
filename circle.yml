@@ -1,0 +1,19 @@
+machine:
+  xcode:
+    version: "8.3.3"
+
+test:
+  override:
+    - set -o pipefail &&
+      xcodebuild
+        CODE_SIGNING_REQUIRED=NO
+        CODE_SIGN_IDENTITY=
+        PROVISIONING_PROFILE=
+        -sdk iphonesimulator
+        -destination 'platform=iOS Simulator,OS=10.3.3,name=iPhone 7'
+        -workspace Rocket.Chat.xcworkspace
+        -scheme "Rocket.Chat"
+        clean build test |
+      tee $CIRCLE_ARTIFACTS/xcode_raw.log |
+      xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
+
