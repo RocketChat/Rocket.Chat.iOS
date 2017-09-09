@@ -285,10 +285,12 @@ final class ChatViewController: SLKTextViewController {
 
             SubscriptionManager.sendTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
-                    message.temporary = false
+                    realm.delete(message)
+
+                    let message = Message()
                     message.map(response.result["result"], realm: realm)
                     MessageTextCacheManager.shared.update(for: message)
-                    realm.add(message, update: true)
+                    realm.add(message)
                 })
             }
         }
