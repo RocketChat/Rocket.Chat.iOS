@@ -9,7 +9,7 @@
 import Foundation
 
 final class Mention: BaseModel {
-    dynamic var objId = ""
-    dynamic var username: String?
-    dynamic var channel: String?
+    @objc dynamic var objId = ""
+    @objc dynamic var username: String?
+    @objc dynamic var channel: String?
 }

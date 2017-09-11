@@ -9,6 +9,6 @@
 import Foundation
 
 final class Email: BaseModel {
-    dynamic var email = ""
-    dynamic var verified = false
+    @objc dynamic var email = ""
+    @objc dynamic var verified = false
 }

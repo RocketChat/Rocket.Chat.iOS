@@ -11,10 +11,10 @@ import RealmSwift
 import SwiftyJSON
 
 class MessageURL: BaseModel {
-    dynamic var textDescription: String?
-    dynamic var title: String?
-    dynamic var targetURL: String?
-    dynamic var imageURL: String?
+    @objc dynamic var textDescription: String?
+    @objc dynamic var title: String?
+    @objc dynamic var targetURL: String?
+    @objc dynamic var imageURL: String?
 
     func isValid() -> Bool {
         return title?.characters.count ?? 0 > 0 && textDescription?.characters.count ?? 0 > 0

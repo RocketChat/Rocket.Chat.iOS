@@ -99,7 +99,7 @@ final class ChatMessageTextView: UIView {
 
     // MARK: Actions
 
-    func viewDidTapped(_ sender: Any) {
+    @objc func viewDidTapped(_ sender: Any) {
         viewModel?.toggleCollpase()
         delegate?.viewDidCollpaseChange(view: self)
 

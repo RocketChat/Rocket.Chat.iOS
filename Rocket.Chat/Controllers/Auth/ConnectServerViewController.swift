@@ -169,7 +169,7 @@ final class ConnectServerViewController: BaseViewController {
 
         let task = session.dataTask(with: request, completionHandler: { (data, _, _) in
             if let data = data {
-                let json = JSON(data: data)
+                guard let json = try? JSON(data: data) else { return completion(nil, true) }
                 Log.debug(json.rawString())
 
                 guard let version = json["version"].string else {
