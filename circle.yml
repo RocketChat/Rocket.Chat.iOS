@@ -6,8 +6,8 @@ dependencies:
     - gem install bundler
     - gem install xcpretty
     - gem install cocoapods
-    - pod repo update
-    - pod install
+    - ./Scripts/install_dependencies.sh
+    - ./Scripts/install_swiftlint.sh
 test:
   override:
-    - xcodebuild clean test -workspace Rocket.Chat.xcworkspace -scheme Rocket.Chat -destination "platform=iOS Simulator,name=iPhone 7"  -enableCodeCoverage YES | xcpretty -c && exit ${PIPESTATUS[0]}
+    - ./Scripts/test.sh
