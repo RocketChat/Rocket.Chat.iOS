@@ -17,7 +17,7 @@ def shared_pods
   pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
   pod 'SlackTextViewController'
   pod 'MobilePlayer'
-  pod 'URBMediaFocusViewController'
+  pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
 
   # Text Processing
   pod 'TSMarkdownParser'
@@ -26,8 +26,8 @@ def shared_pods
   pod 'RealmSwift'
 
   # Network
-  pod 'SDWebImage', '~> 3.8'
-  pod 'Starscream', '~> 2.0.0'
+  pod 'SDWebImage', '~> 3'
+  pod 'Starscream', '~> 2'
 
   # Authentication SDKs
   pod '1PasswordExtension'

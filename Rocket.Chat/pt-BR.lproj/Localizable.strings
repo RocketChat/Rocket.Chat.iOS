@@ -37,6 +37,9 @@
 "subscriptions.channels" = "Canais";
 "subscriptions.direct_messages" = "Mensagens Diretas";
 
+// Servers
+"servers.add_new_team" = "Adicionar novo time";
+
 // User Menu
 "user_menu.online" = "Disponível";
 "user_menu.away" = "Ausente";

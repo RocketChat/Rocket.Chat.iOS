@@ -30,7 +30,7 @@ final class AuthSettingsManager {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
-            ] as [String : Any]
+        ] as [String : Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
@@ -50,6 +50,7 @@ final class AuthSettingsManager {
 
                 let unmanagedSettings = AuthSettings(value: settings)
                 shared.internalSettings = unmanagedSettings
+                ServerManager.updateServerInformation(from: unmanagedSettings)
                 completion(unmanagedSettings)
             })
         }
