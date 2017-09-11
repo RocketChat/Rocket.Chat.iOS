@@ -11,9 +11,6 @@
 
 #import "CommonCrypto/CommonCrypto.h"
 
-// Markdown
-#import <TSMarkdownParser/TSMarkdownParser.h>
-
 // Google Authentication
 #import <Google/SignIn.h>
 
