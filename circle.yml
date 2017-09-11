@@ -6,8 +6,8 @@ dependencies:
     - gem install bundler
     - gem install xcpretty
     - gem install cocoapods
+    - brew install swiftlint
     - ./Scripts/update_dependencies.sh
-    - ./Scripts/install_swiftlint.sh
 test:
   override:
     - ./Scripts/test.sh
