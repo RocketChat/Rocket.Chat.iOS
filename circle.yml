@@ -2,16 +2,14 @@ machine:
   xcode:
     version: "8.3.3"
 
+dependencies:
+  pre:
+    gem install bundler
+    gem install xcpretty
+    gem install cocoapods
+  commands:
+    ./Scripts/install_swiftlint.sh
+    ./Scripts/update_dependencies.sh
 test:
-  override:
-    - set -o pipefail &&
-      xcodebuild
-        CODE_SIGNING_REQUIRED=NO
-        -sdk iphonesimulator
-        -destination 'platform=iOS Simulator,OS=10.3.1,name=iPhone 7'
-        -workspace Rocket.Chat.xcworkspace
-        -scheme "Rocket.Chat"
-        clean build test |
-      tee $CIRCLE_ARTIFACTS/xcode_raw.log |
-      xcpretty --color --report junit --output $CIRCLE_TEST_REPORTS/xcode/results.xml
-
+  commands:
+    ./Scripts/test.sh
