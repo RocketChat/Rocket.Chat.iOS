@@ -48,9 +48,9 @@ class Subscription: BaseModel {
 
     dynamic var otherUserId: String?
     var directMessageUser: User? {
+        guard let realm = Realm.shared else { return nil }
         guard let otherUserId = otherUserId else { return nil }
-        guard let users = try? Realm().objects(User.self).filter("identifier = '\(otherUserId)'") else { return nil }
-        return users.first
+        return realm.objects(User.self).filter("identifier = '\(otherUserId)'").first
     }
 
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
@@ -128,8 +128,15 @@ extension Subscription {
     }
 
     func fetchMessagesQueryResults() -> Results<Message> {
-        let filter = NSPredicate(format: "userBlocked == false")
-        return self.messages.filter(filter).sorted(byKeyPath: "createdAt", ascending: false)
+        var filteredMessages = self.messages.filter("userBlocked == false")
+
+        if let hiddenTypes = AuthSettingsManager.settings?.hiddenTypes {
+            for hiddenType in hiddenTypes {
+                filteredMessages = filteredMessages.filter("internalType != %@", hiddenType.rawValue)
+            }
+        }
+
+        return filteredMessages.sorted(byKeyPath: "createdAt", ascending: false)
     }
 
     func updateFavorite(_ favorite: Bool) {

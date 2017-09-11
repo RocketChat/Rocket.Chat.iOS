@@ -8,7 +8,7 @@
 
 import RealmSwift
 import SlackTextViewController
-import URBMediaFocusViewController
+import SimpleImageViewer
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
@@ -31,7 +31,6 @@ final class ChatViewController: SLKTextViewController {
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewStatus: ChatHeaderViewStatus?
-    lazy var mediaFocusViewController = URBMediaFocusViewController()
     var documentController: UIDocumentInteractionController?
 
     var dataController = ChatDataController()
@@ -55,7 +54,7 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: View Life Cycle
 
-    class func sharedInstance() -> ChatViewController? {
+    static var shared: ChatViewController? {
         if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
             if let nav = main.centerViewController as? UINavigationController {
                 return nav.viewControllers.first as? ChatViewController
@@ -80,9 +79,6 @@ final class ChatViewController: SLKTextViewController {
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
-
-        mediaFocusViewController.shouldDismissOnTap = true
-        mediaFocusViewController.shouldShowPhotoActions = true
 
         collectionView?.isPrefetchingEnabled = true
 
@@ -493,7 +489,7 @@ final class ChatViewController: SLKTextViewController {
             // Normalize data into ChatData object
             for message in newMessages {
                 guard let createdAt = message.createdAt else { continue }
-                guard var obj = ChatData(type: .message, timestamp: createdAt) else { continue }
+                var obj = ChatData(type: .message, timestamp: createdAt)
                 obj.message = message
                 objs.append(obj)
             }
@@ -613,6 +609,8 @@ extension ChatViewController {
             cell.message = message
         }
 
+        cell.sequential = dataController.hasSequentialMessageAt(indexPath)
+
         return cell
     }
 
@@ -666,6 +664,10 @@ extension ChatViewController {
 
 extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         return .zero
     }
@@ -691,7 +693,8 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
             }
 
             if let message = obj.message {
-                let height = ChatMessageCell.cellMediaHeightFor(message: message)
+                let sequential = dataController.hasSequentialMessageAt(indexPath)
+                let height = ChatMessageCell.cellMediaHeightFor(message: message, sequential: sequential)
                 return CGSize(width: fullWidth, height: height)
             }
         }

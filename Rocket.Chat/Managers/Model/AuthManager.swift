@@ -8,12 +8,7 @@
 
 import Foundation
 import RealmSwift
-
-struct AuthManagerPersistKeys {
-    static let token = "kAuthToken"
-    static let serverURL = "kAuthServerURL"
-    static let userId = "kUserId"
-}
+import Realm
 
 struct AuthManager {
 
@@ -21,17 +16,17 @@ struct AuthManager {
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
     static func isAuthenticated() -> Auth? {
-        guard let auths = try? Realm().objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false) else { return nil}
-        return auths.first
+        guard let realm = Realm.shared else { return nil }
+        return realm.objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false).first
     }
 
     /**
         - returns: Current user object, if exists.
     */
     static func currentUser() -> User? {
+        guard let realm = Realm.shared else { return nil }
         guard let auth = isAuthenticated() else { return nil }
-        guard let user = try? Realm().object(ofType: User.self, forPrimaryKey: auth.userId) else { return nil }
-        return user
+        return realm.object(ofType: User.self, forPrimaryKey: auth.userId)
     }
 
     /**
@@ -41,22 +36,96 @@ struct AuthManager {
      */
     static func persistAuthInformation(_ auth: Auth) {
         let defaults = UserDefaults.standard
-        defaults.set(auth.token, forKey: AuthManagerPersistKeys.token)
-        defaults.set(auth.serverURL, forKey: AuthManagerPersistKeys.serverURL)
-        defaults.set(auth.userId, forKey: AuthManagerPersistKeys.userId)
+        let selectedIndex = DatabaseManager.selectedIndex
+
+        guard
+            let token = auth.token,
+            let userId = auth.userId,
+            var servers = DatabaseManager.servers,
+            servers.count > selectedIndex
+        else {
+            return
+        }
+
+        servers[selectedIndex][ServerPersistKeys.token] = token
+        servers[selectedIndex][ServerPersistKeys.userId] = userId
+
+        defaults.set(servers, forKey: ServerPersistKeys.servers)
     }
 
+    static func selectedServerInformation(index: Int? = nil) -> [String: String]? {
+        guard
+            let servers = DatabaseManager.servers,
+            servers.count > 0
+        else {
+            return nil
+        }
+
+        var server: [String: String]?
+        if let index = index {
+            server = servers[index]
+        } else {
+            server = servers[DatabaseManager.selectedIndex]
+        }
+
+        return server
+    }
+
+    /**
+        This method migrates the old authentication storaged format
+        to a new one that supports multiple authentication at the
+        same app installation.
+     
+        Last version using the old format: 1.2.1.
+     */
+    static func recoverOldAuthFormatIfNeeded() {
+        if AuthManager.isAuthenticated() != nil {
+            return
+        }
+
+        let defaults = UserDefaults.standard
+
+        guard
+            let token = defaults.string(forKey: ServerPersistKeys.token),
+            let serverURL = defaults.string(forKey: ServerPersistKeys.serverURL),
+            let userId = defaults.string(forKey: ServerPersistKeys.userId) else {
+                return
+        }
+
+        let servers = [[
+            ServerPersistKeys.databaseName: "\(String.random()).realm",
+            ServerPersistKeys.token: token,
+            ServerPersistKeys.serverURL: serverURL,
+            ServerPersistKeys.userId: userId
+        ]]
+
+        defaults.set(0, forKey: ServerPersistKeys.selectedIndex)
+        defaults.set(servers, forKey: ServerPersistKeys.servers)
+        defaults.removeObject(forKey: ServerPersistKeys.token)
+        defaults.removeObject(forKey: ServerPersistKeys.serverURL)
+        defaults.removeObject(forKey: ServerPersistKeys.userId)
+    }
+
+    /**
+        Recovers the authentication on database if needed
+     */
     static func recoverAuthIfNeeded() {
         if AuthManager.isAuthenticated() != nil {
             return
         }
 
+        recoverOldAuthFormatIfNeeded()
+
         guard
-            let token = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.token),
-            let serverURL = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.serverURL),
-            let userId = UserDefaults.standard.string(forKey: AuthManagerPersistKeys.userId) else {
-                return
+            let server = selectedServerInformation(),
+            let token = server[ServerPersistKeys.token],
+            let serverURL = server[ServerPersistKeys.serverURL],
+            let userId = server[ServerPersistKeys.userId]
+        else {
+            return
         }
+
+        DatabaseManager.changeDatabaseInstance()
 
         Realm.executeOnMainThread({ (realm) in
             // Clear database
@@ -91,8 +160,8 @@ extension AuthManager {
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
 
-        SocketManager.connect(url) { (socket, connected) in
-            guard connected else {
+        SocketManager.connect(url) { (socket, _) in
+            guard SocketManager.isConnected() else {
                 guard let response = SocketResponse(
                     ["error": "Can't connect to the socket"],
                     socket: socket
@@ -161,31 +230,33 @@ extension AuthManager {
                 return
             }
 
-            Realm.execute({ (realm) in
+            let result = response.result
+
+            let auth = Auth()
+            auth.lastSubscriptionFetch = nil
+            auth.lastAccess = Date()
+            auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
+            auth.token = result["result"]["token"].string
+            auth.userId = result["result"]["id"].string
+
+            if let date = result["result"]["tokenExpires"]["$date"].double {
+                auth.tokenExpires = Date.dateFromInterval(date)
+            }
+
+            persistAuthInformation(auth)
+            DatabaseManager.changeDatabaseInstance()
+
+            Realm.executeOnMainThread({ (realm) in
                 // Delete all the Auth objects, since we don't
-                // support multiple-server authentication yet
+                // support multiple-server per database
                 realm.delete(realm.objects(Auth.self))
 
-                let result = response.result
-
-                let auth = Auth()
-                auth.lastSubscriptionFetch = nil
-                auth.lastAccess = Date()
-                auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
-                auth.token = result["result"]["token"].string
-                auth.userId = result["result"]["id"].string
-
-                if let date = result["result"]["tokenExpires"]["$date"].double {
-                    auth.tokenExpires = Date.dateFromInterval(date)
-                }
-
                 PushManager.updatePushToken()
-
                 realm.add(auth)
-            }, completion: {
-                ServerManager.timestampSync()
-                completion(response)
             })
+
+            ServerManager.timestampSync()
+            completion(response)
         }
     }
 
@@ -263,10 +334,7 @@ extension AuthManager {
             SocketManager.clear()
             GIDSignIn.sharedInstance().signOut()
 
-            let defaults = UserDefaults.standard
-            defaults.removeObject(forKey: AuthManagerPersistKeys.token)
-            defaults.removeObject(forKey: AuthManagerPersistKeys.serverURL)
-            defaults.removeObject(forKey: AuthManagerPersistKeys.userId)
+            DatabaseManager.removerSelectedDatabase()
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
