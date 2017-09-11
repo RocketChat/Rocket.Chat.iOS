@@ -17,36 +17,36 @@ enum SubscriptionType: String {
 }
 
 class Subscription: BaseModel {
-    dynamic var auth: Auth?
+    @objc dynamic var auth: Auth?
 
-    internal dynamic var privateType = SubscriptionType.channel.rawValue
+    @objc internal dynamic var privateType = SubscriptionType.channel.rawValue
     var type: SubscriptionType {
         get { return SubscriptionType(rawValue: privateType) ?? SubscriptionType.group }
         set { privateType = newValue.rawValue }
     }
 
-    dynamic var rid = ""
+    @objc dynamic var rid = ""
 
     // Name of the subscription
-    dynamic var name = ""
+    @objc dynamic var name = ""
 
     // Full name of the user, in the case of
     // using the full user name setting
     // Setting: UI_Use_Real_Name
-    dynamic var fname = ""
+    @objc dynamic var fname = ""
 
-    dynamic var unread = 0
-    dynamic var open = false
-    dynamic var alert = false
-    dynamic var favorite = false
+    @objc dynamic var unread = 0
+    @objc dynamic var open = false
+    @objc dynamic var alert = false
+    @objc dynamic var favorite = false
 
-    dynamic var createdAt: Date?
-    dynamic var lastSeen: Date?
+    @objc dynamic var createdAt: Date?
+    @objc dynamic var lastSeen: Date?
 
-    dynamic var roomTopic: String?
-    dynamic var roomDescription: String?
+    @objc dynamic var roomTopic: String?
+    @objc dynamic var roomDescription: String?
 
-    dynamic var otherUserId: String?
+    @objc dynamic var otherUserId: String?
     var directMessageUser: User? {
         guard let realm = Realm.shared else { return nil }
         guard let otherUserId = otherUserId else { return nil }

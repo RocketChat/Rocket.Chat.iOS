@@ -31,7 +31,7 @@ extension NSMutableAttributedString {
     func setFont(_ font: UIFont, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSFontAttributeName: font
+                NSAttributedStringKey.font: font
             ], range: attributeRange)
         }
     }
@@ -39,7 +39,7 @@ extension NSMutableAttributedString {
     func setFontColor(_ color: UIColor, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSForegroundColorAttributeName: color
+                NSAttributedStringKey.foregroundColor: color
             ], range: attributeRange)
         }
     }
@@ -48,16 +48,16 @@ extension NSMutableAttributedString {
         let defaultFontSize = MessageTextFontAttributes.defaultFontSize
 
         let parser = TSMarkdownParser.standard()
-        parser.defaultAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: defaultFontSize)]
-        parser.quoteAttributes = [[NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]]
-        parser.strongAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: defaultFontSize)]
-        parser.emphasisAttributes = [NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]
-        parser.linkAttributes = [NSForegroundColorAttributeName: UIColor.darkGray]
+        parser.defaultAttributes = [NSAttributedStringKey.font.rawValue: UIFont.systemFont(ofSize: defaultFontSize)]
+        parser.quoteAttributes = [[NSAttributedStringKey.font.rawValue: UIFont.italicSystemFont(ofSize: defaultFontSize)]]
+        parser.strongAttributes = [NSAttributedStringKey.font.rawValue: UIFont.boldSystemFont(ofSize: defaultFontSize)]
+        parser.emphasisAttributes = [NSAttributedStringKey.font.rawValue: UIFont.italicSystemFont(ofSize: defaultFontSize)]
+        parser.linkAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkGray]
 
         let font = UIFont(name: "Courier New", size: defaultFontSize) ?? UIFont.systemFont(ofSize: defaultFontSize)
         parser.monospaceAttributes = [
-            NSFontAttributeName: font,
-            NSForegroundColorAttributeName: UIColor.red
+            NSAttributedStringKey.font.rawValue: font,
+            NSAttributedStringKey.foregroundColor.rawValue: UIColor.red
         ]
 
         return parser.attributedString(fromAttributedMarkdownString: self)

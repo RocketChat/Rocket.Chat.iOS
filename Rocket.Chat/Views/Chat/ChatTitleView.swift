@@ -42,7 +42,7 @@ final class ChatTitleView: UIView {
                         case .away: return .RCAway()
                         case .busy: return .RCBusy()
                         }
-                    }()
+                    }(())
                 }
 
                 icon.image = UIImage(named: "Mention")?.imageWithTint(color)

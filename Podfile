@@ -10,8 +10,8 @@ def shared_pods
   pod 'Crashlytics'
 
   # Code utilities
-  pod 'SwiftyJSON'
-  pod 'semver'
+  pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :tag => '4.0.0-alpha.1'
+  pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
 
   # UI
   pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
@@ -27,7 +27,7 @@ def shared_pods
 
   # Network
   pod 'SDWebImage', '~> 3'
-  pod 'Starscream', '~> 2'
+  pod 'Starscream', :git => 'https://github.com/daltoniam/Starscream.git', :branch => 'swift4'
 
   # Authentication SDKs
   pod '1PasswordExtension'
