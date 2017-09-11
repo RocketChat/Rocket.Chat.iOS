@@ -1,0 +1,13 @@
+machine:
+  xcode:
+    version: "8.3.3"
+dependencies:
+  pre:
+    - gem install bundler
+    - gem install xcpretty
+    - gem install cocoapods
+    - brew install swiftlint
+    - ./Scripts/update_dependencies.sh
+test:
+  override:
+    - ./Scripts/test.sh
