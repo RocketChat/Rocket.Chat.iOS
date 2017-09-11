@@ -1,14 +1,13 @@
 machine:
   xcode:
     version: "8.3.3"
-
 dependencies:
   pre:
-    gem install bundler
-    gem install xcpretty
-    gem install cocoapods
-    pod repo update
-    pod install
+    - gem install bundler
+    - gem install xcpretty
+    - gem install cocoapods
+    - pod repo update
+    - pod install
 test:
   override:
-    xcodebuild clean test -workspace Rocket.Chat.xcworkspace -scheme Rocket.Chat -destination "platform=iOS Simulator,name=iPhone 7"  -enableCodeCoverage YES | xcpretty -c && exit ${PIPESTATUS[0]}
+    - xcodebuild clean test -workspace Rocket.Chat.xcworkspace -scheme Rocket.Chat -destination "platform=iOS Simulator,name=iPhone 7"  -enableCodeCoverage YES | xcpretty -c && exit ${PIPESTATUS[0]}
