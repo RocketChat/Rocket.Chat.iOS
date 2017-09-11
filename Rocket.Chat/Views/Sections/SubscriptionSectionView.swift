@@ -20,7 +20,7 @@ final class SubscriptionSectionView: UIView {
 
     func setIconName(_ iconName: String?) {
         if let iconName = iconName {
-            icon.image = UIImage(named: iconName)?.imageWithTint(UIColor(rgb: 0x9AB1BF, alphaVal: 1))
+            icon.image = UIImage(named: iconName)?.imageWithTint(UIColor(rgb: 0x9ea2a4, alphaVal: 1))
             iconWidthConstraint.constant = defaultIconWidthConstraint
             labelTitleLeftSpacingConstraint.constant = defaultTitleLeftConstraint
         } else {

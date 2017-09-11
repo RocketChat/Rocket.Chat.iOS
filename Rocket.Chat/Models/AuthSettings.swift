@@ -14,6 +14,10 @@ final class AuthSettings: BaseModel {
     dynamic var siteURL: String?
     dynamic var cdnPrefixURL: String?
 
+    // Server information
+    dynamic var serverName: String?
+    dynamic var serverFaviconURL: String?
+
     // User
     dynamic var useUserRealName = false
 
@@ -27,4 +31,26 @@ final class AuthSettings: BaseModel {
 
     // File upload
     dynamic var uploadStorageType: String?
+
+    // Hide Message Types
+    dynamic var hideMessageUserJoined: Bool = false
+    dynamic var hideMessageUserLeft: Bool = false
+    dynamic var hideMessageUserAdded: Bool = false
+    dynamic var hideMessageUserMutedUnmuted: Bool = false
+    dynamic var hideMessageUserRemoved: Bool = false
+
+    var hiddenTypes: Set<MessageType> {
+        var hiddenTypes = Set<MessageType>()
+
+        if hideMessageUserJoined { hiddenTypes.insert(.userJoined) }
+        if hideMessageUserLeft { hiddenTypes.insert(.userLeft) }
+        if hideMessageUserAdded { hiddenTypes.insert(.userAdded) }
+        if hideMessageUserRemoved { hiddenTypes.insert(.userRemoved) }
+        if hideMessageUserMutedUnmuted {
+            hiddenTypes.insert(.userMuted)
+            hiddenTypes.insert(.userUnmuted)
+        }
+
+        return hiddenTypes
+    }
 }

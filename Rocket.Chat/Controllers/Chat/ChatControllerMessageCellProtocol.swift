@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import MobilePlayer
+import SimpleImageViewer
 
 extension ChatViewController: ChatMessageCellProtocol {
 
@@ -42,9 +43,13 @@ extension ChatViewController: ChatMessageCellProtocol {
         textView.resignFirstResponder()
 
         if let image = thumbnail.image {
-            mediaFocusViewController.show(image, from: thumbnail)
+            let configuration = ImageViewerConfiguration { config in
+                config.image = image
+                config.imageView = thumbnail
+            }
+            present(ImageViewerController(configuration: configuration), animated: true)
         } else {
-            mediaFocusViewController.showImage(from: attachment.fullImageURL(), from: thumbnail)
+            openImage(attachment: attachment)
         }
     }
 

@@ -41,7 +41,6 @@ class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
 
     override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
-
         // Check where new items get inserted
         // ════════════════════════════════════════════════════════════
 

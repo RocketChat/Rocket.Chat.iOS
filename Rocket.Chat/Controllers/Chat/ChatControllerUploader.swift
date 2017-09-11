@@ -61,7 +61,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 
     // MARK: UIImagePickerControllerDelegate
-    // swiftlint:disable cyclomatic_complexity function_body_length
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         var filename = "\(String.random()).jpeg"
         var file: FileUpload?

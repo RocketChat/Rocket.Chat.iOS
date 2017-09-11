@@ -25,7 +25,7 @@ struct ChatData {
     var message: Message?
 
     // Initializers
-    init?(type: ChatDataType, timestamp: Date) {
+    init(type: ChatDataType, timestamp: Date) {
         self.type = type
         self.timestamp = timestamp
     }
@@ -53,6 +53,30 @@ final class ChatDataController {
         }.first
     }
 
+    func hasSequentialMessageAt(_ indexPath: IndexPath) -> Bool {
+        let prevIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
+        let prevItem = itemAt(prevIndexPath)
+        let item = itemAt(indexPath)
+
+        guard (item?.message?.type.sequential ?? false) &&
+            (prevItem?.message?.type.sequential ?? false) else {
+                return false
+        }
+
+        let sameUser = item?.message?.user == prevItem?.message?.user
+
+        // is the message recent?
+        guard let date = item?.message?.createdAt,
+              let prevDate = prevItem?.message?.createdAt else {
+            return false
+        }
+
+        let timeLimit = 30.0 * 60 // 30 minutes
+        let recent = date.timeIntervalSince(prevDate) < timeLimit
+
+        return sameUser && recent
+    }
+
     func indexPathOf(_ identifier: String) -> IndexPath? {
         return data.filter { item in
             return item.identifier == identifier
@@ -75,17 +99,16 @@ final class ChatDataController {
             let date = obj.timestamp
             let components = calendar.components([.day, .month, .year], from: date)
             guard let newDate = calendar.date(from: components) else { return }
-            guard let separator = ChatData(type: .daySeparator, timestamp: newDate) else { return }
+            let separator = ChatData(type: .daySeparator, timestamp: newDate)
             identifiers.append(separator.identifier)
             newItems.append(separator)
         }
 
         if loadedAllMessages {
             if data.filter({ $0.type == .header }).count == 0 {
-                if let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0)) {
-                    newItems.append(obj)
-                    identifiers.append(obj.identifier)
-                }
+                let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0))
+                newItems.append(obj)
+                identifiers.append(obj.identifier)
             }
 
             let messages = data.filter({ $0.type == .message })
@@ -115,10 +138,9 @@ final class ChatDataController {
             }
         } else {
             if loaders.count == 0 {
-                if let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 0)) {
-                    newItems.append(obj)
-                    identifiers.append(obj.identifier)
-                }
+                let obj = ChatData(type: .loader, timestamp: Date(timeIntervalSince1970: 0))
+                newItems.append(obj)
+                identifiers.append(obj.identifier)
             }
         }
 
