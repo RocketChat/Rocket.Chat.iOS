@@ -173,6 +173,13 @@
 		925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */; };
 		925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
+		D10E9C1A1F643457007F1796 /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E9C191F643457007F1796 /* Channel.swift */; };
+		D10E9C1E1F643474007F1796 /* ChannelModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E9C1D1F643474007F1796 /* ChannelModelMapping.swift */; };
+		D10E9C201F6434A7007F1796 /* NSRangeExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E9C1F1F6434A7007F1796 /* NSRangeExtensions.swift */; };
+		D10E9C221F643616007F1796 /* MentionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = D10E9C211F643616007F1796 /* MentionModelMapping.swift */; };
+		D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1411A291F6777F300D6EDF7 /* ChannelSpec.swift */; };
+		D1411A2C1F6779A200D6EDF7 /* MentionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1411A2B1F6779A200D6EDF7 /* MentionSpec.swift */; };
+		D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A403D81F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift */; };
 		D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */; };
 		D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28221DFD86C300D6019C /* LauncherProtocol.swift */; };
 		D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */; };
@@ -376,6 +383,13 @@
 		925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TintedTextField.swift; path = Views/Subscriptions/TintedTextField.swift; sourceTree = "<group>"; };
 		BCF38696E8EC385488688390 /* Pods-Rocket.Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.debug.xcconfig"; sourceTree = "<group>"; };
+		D10E9C191F643457007F1796 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Channel.swift; path = Models/Channel.swift; sourceTree = "<group>"; };
+		D10E9C1D1F643474007F1796 /* ChannelModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelModelMapping.swift; path = Models/Mapping/ChannelModelMapping.swift; sourceTree = "<group>"; };
+		D10E9C1F1F6434A7007F1796 /* NSRangeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSRangeExtensions.swift; path = Extensions/NSRangeExtensions.swift; sourceTree = "<group>"; };
+		D10E9C211F643616007F1796 /* MentionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MentionModelMapping.swift; path = Models/Mapping/MentionModelMapping.swift; sourceTree = "<group>"; };
+		D1411A291F6777F300D6EDF7 /* ChannelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelSpec.swift; path = Models/ChannelSpec.swift; sourceTree = "<group>"; };
+		D1411A2B1F6779A200D6EDF7 /* MentionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MentionSpec.swift; path = Models/MentionSpec.swift; sourceTree = "<group>"; };
+		D1A403D81F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSAttributedStringExtensionsSpec.swift; path = Extensions/NSAttributedStringExtensionsSpec.swift; sourceTree = "<group>"; };
 		D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BugTrackingCoordinator.swift; sourceTree = "<group>"; };
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
@@ -553,6 +567,8 @@
 				4161333D1D46E3AB00E09DA2 /* SubscriptionSpec.swift */,
 				4161333F1D46E6A800E09DA2 /* MessageSpec.swift */,
 				68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */,
+				D1411A291F6777F300D6EDF7 /* ChannelSpec.swift */,
+				D1411A2B1F6779A200D6EDF7 /* MentionSpec.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -655,6 +671,7 @@
 				412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */,
 				419205481D52EDE6004EEC5F /* UILabelExtension.swift */,
 				41494B911D63C6280004F369 /* UIImageExtension.swift */,
+				D10E9C1F1F6434A7007F1796 /* NSRangeExtensions.swift */,
 				41BAE3E61D71B26C00C2445A /* URLExtension.swift */,
 				41D5BC301DAFBEF4009A493A /* UIViewExtentions.swift */,
 				41E53A161E546F5500C3FBB3 /* UINibExtensions.swift */,
@@ -725,6 +742,7 @@
 				41DC7A1A1D38454500896FC0 /* Message.swift */,
 				41F3C0FF1DB577ED000E0C76 /* MessageURL.swift */,
 				4159720D1D3DB882002258F4 /* Mention.swift */,
+				D10E9C191F643457007F1796 /* Channel.swift */,
 				41DAE93D1D318F350098E068 /* Subscription.swift */,
 				41A79C0E1D2F085F00A1968E /* User.swift */,
 			);
@@ -768,6 +786,8 @@
 				4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */,
 				4151B4571E2D1D2E00F8AA1B /* MessageModelMapping.swift */,
 				4151B45D1E2D32EA00F8AA1B /* MessageURLModelMapping.swift */,
+				D10E9C1D1F643474007F1796 /* ChannelModelMapping.swift */,
+				D10E9C211F643616007F1796 /* MentionModelMapping.swift */,
 			);
 			name = Mapping;
 			sourceTree = "<group>";
@@ -806,6 +826,7 @@
 				41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */,
 				41DC7A231D386CA800896FC0 /* DateExtensionsSpec.swift */,
 				41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */,
+				D1A403D81F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1063,7 +1084,7 @@
 					};
 					41DF76F21D2C50720028DBF8 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = S6UPZG7ZR3;
+						DevelopmentTeam = FWD9V5VYJ2;
 						LastSwiftMigration = 0810;
 						TestTargetID = 41DF76DE1D2C50710028DBF8;
 					};
@@ -1441,6 +1462,7 @@
 				411F7D941F5179A50080E8AD /* ChatChannelHeaderCell.swift in Sources */,
 				41F167E91DAC4D4300775CCA /* ChatTitleView.swift in Sources */,
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
+				D10E9C1A1F643457007F1796 /* Channel.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
 				413996171F3B44500075F96E /* UploadHelper.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
@@ -1451,10 +1473,12 @@
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
 				597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */,
 				D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */,
+				D10E9C221F643616007F1796 /* MentionModelMapping.swift in Sources */,
 				419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */,
 				4162E1551D654A7400AAAE49 /* SocketHandlers.swift in Sources */,
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,
 				419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */,
+				D10E9C201F6434A7007F1796 /* NSRangeExtensions.swift in Sources */,
 				415029B71E72D530009F596C /* ChannelInfoDetailCell.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
 				41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */,
@@ -1491,6 +1515,7 @@
 				41CABFFA1F5047E200E0B289 /* ChatLoaderCell.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
 				4102E3AD1E53273E004BAA82 /* SettingsViewController.swift in Sources */,
+				D10E9C1E1F643474007F1796 /* ChannelModelMapping.swift in Sources */,
 				414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */,
 				41EE15821E05BF9600754D45 /* ChatControllerSocketConnectionHandler.swift in Sources */,
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
@@ -1557,6 +1582,7 @@
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
 				411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */,
+				D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
@@ -1568,9 +1594,11 @@
 				416296F91F41B42B00BCCEDD /* UploadHelperSpec.swift in Sources */,
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
+				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
 				4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */,
+				D1411A2C1F6779A200D6EDF7 /* MentionSpec.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1769,7 +1797,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				DEVELOPMENT_TEAM = FWD9V5VYJ2;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Rocket.ChatTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -1788,7 +1816,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				DEVELOPMENT_TEAM = FWD9V5VYJ2;
 				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Rocket.ChatTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
