@@ -96,7 +96,7 @@ final class ChatViewController: SLKTextViewController {
         setupTextViewSettings()
         setupScrollToBottomButton()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         guard let auth = AuthManager.isAuthenticated() else { return }
@@ -110,7 +110,7 @@ final class ChatViewController: SLKTextViewController {
         view.bringSubview(toFront: textInputbar)
     }
 
-    internal func reconnect() {
+    @objc internal func reconnect() {
         if !SocketManager.isConnected() {
             SocketManager.reconnect()
         }
@@ -541,7 +541,7 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: IBAction
 
-    func chatTitleViewDidPressed(_ sender: AnyObject) {
+    @objc func chatTitleViewDidPressed(_ sender: AnyObject) {
         performSegue(withIdentifier: "Channel Info", sender: sender)
     }
 
