@@ -28,6 +28,7 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 3'
   pod 'Starscream', '~> 2'
+  pod 'ReachabilitySwift', '~> 3'
 
   # Authentication SDKs
   pod '1PasswordExtension'
