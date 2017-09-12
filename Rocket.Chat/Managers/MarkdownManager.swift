@@ -2,7 +2,7 @@
 //  MarkdownManager.swift
 //  Rocket.Chat
 //
-//  Created by Matheus Cardisi on 9/11/17.
+//  Created by Matheus Cardoso on 9/11/17.
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 
@@ -23,6 +23,14 @@ class MarkdownManager {
 
         parser.defaultAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: defaultFontSize)]
         parser.quoteAttributes = [[NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]]
+
+        var codeAttributes: [String: Any] = [NSBackgroundColorAttributeName: UIColor.codeBackground]
+        if let codeFont = UIFont(name: "Courier New", size: defaultFontSize)?.bold() {
+            codeAttributes[NSFontAttributeName] = codeFont
+        }
+
+        parser.inlineCodeAttributes = codeAttributes
+
         parser.strongAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: defaultFontSize)]
         parser.italicAttributes = [NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]
         parser.strikeAttributes = [NSStrikethroughStyleAttributeName: NSNumber(value: NSUnderlineStyle.styleSingle.rawValue)]
@@ -60,9 +68,5 @@ class MarkdownManager {
         ]
 
         let font = UIFont(name: "Courier New", size: defaultFontSize) ?? UIFont.systemFont(ofSize: defaultFontSize)
-        parser.monospaceAttributes = [
-            NSFontAttributeName: font,
-            NSForegroundColorAttributeName: UIColor.red
-        ]
     }
 }

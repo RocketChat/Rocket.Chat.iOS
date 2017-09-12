@@ -77,4 +77,7 @@ extension UIColor {
         return UIColor.lightGray
     }
 
+    static var codeBackground: UIColor {
+        return UIColor(rgb: 0xCCCCCC, alphaVal: 1.0)
+    }
 }
