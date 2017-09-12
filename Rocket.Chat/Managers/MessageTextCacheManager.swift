@@ -43,6 +43,9 @@ class MessageTextCacheManager {
 
         resultText = NSMutableAttributedString(attributedString: text.transformMarkdown())
         resultText.trimCharacters(in: .whitespaces)
+        resultText.highlightMentions(for: message)
+        resultText.highlightChannels(for: message)
+
         cache.setObject(resultText, forKey: key)
         return resultText
     }
