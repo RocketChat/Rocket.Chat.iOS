@@ -99,6 +99,10 @@ final class ChatViewController: SLKTextViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
+        if !SocketManager.isConnected() {
+            socketDidDisconnect(socket: SocketManager.sharedInstance)
+        }
+
         guard let auth = AuthManager.isAuthenticated() else { return }
         let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
         if let subscription = subscriptions.first {

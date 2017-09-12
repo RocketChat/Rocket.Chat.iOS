@@ -36,6 +36,17 @@ final class MainViewController: BaseViewController {
         if AuthManager.isAuthenticated() == nil {
             performSegue(withIdentifier: "Auth", sender: nil)
         }
+
+        if !NetworkManager.shared.isConnected {
+            // Open chat
+            let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
+            let controller = storyboardChat.instantiateInitialViewController()
+            let application = UIApplication.shared
+
+            if let window = application.keyWindow {
+                window.rootViewController = controller
+            }
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -51,37 +62,39 @@ final class MainViewController: BaseViewController {
             buttonConnect.isHidden = true
             activityIndicator.startAnimating()
 
-            AuthManager.resume(auth, completion: { [weak self] response in
-                guard !response.isError() else {
-                    self?.labelAuthenticationStatus.isHidden = false
-                    self?.buttonConnect.isHidden = false
-                    self?.activityIndicator.stopAnimating()
-                    return
-                }
+            if NetworkManager.shared.isConnected {
+                AuthManager.resume(auth, completion: { [weak self] response in
+                    guard !response.isError() else {
+                        self?.labelAuthenticationStatus.isHidden = false
+                        self?.buttonConnect.isHidden = false
+                        self?.activityIndicator.stopAnimating()
+                        return
+                    }
 
-                SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                    AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
+                    SubscriptionManager.updateSubscriptions(auth, completion: { _ in
+                        AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
 
+                        })
+
+                        UserManager.userDataChanges()
+                        UserManager.changes()
+                        SubscriptionManager.changes(auth)
+
+                        if let userIdentifier = auth.userId {
+                            PushManager.updateUser(userIdentifier)
+                        }
+
+                        // Open chat
+                        let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
+                        let controller = storyboardChat.instantiateInitialViewController()
+                        let application = UIApplication.shared
+
+                        if let window = application.keyWindow {
+                            window.rootViewController = controller
+                        }
                     })
-
-                    UserManager.userDataChanges()
-                    UserManager.changes()
-                    SubscriptionManager.changes(auth)
-
-                    if let userIdentifier = auth.userId {
-                        PushManager.updateUser(userIdentifier)
-                    }
-
-                    // Open chat
-                    let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
-                    let controller = storyboardChat.instantiateInitialViewController()
-                    let application = UIApplication.shared
-
-                    if let window = application.keyWindow {
-                        window.rootViewController = controller
-                    }
                 })
-            })
+            }
         } else {
             buttonConnect.isEnabled = true
         }
