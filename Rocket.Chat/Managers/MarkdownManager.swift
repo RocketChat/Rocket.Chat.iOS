@@ -22,7 +22,10 @@ class MarkdownManager {
         let defaultFontSize = MessageTextFontAttributes.defaultFontSize
 
         parser.defaultAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: defaultFontSize)]
-        parser.quoteAttributes = [[NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]]
+        parser.quoteAttributes = [
+            NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize),
+            NSBackgroundColorAttributeName: UIColor.codeBackground
+        ]
 
         var codeAttributes: [String: Any] = [NSBackgroundColorAttributeName: UIColor.codeBackground]
         codeAttributes[NSForegroundColorAttributeName] = UIColor.code
@@ -68,7 +71,5 @@ class MarkdownManager {
             3: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 18)],
             4: [NSFontAttributeName: UIFont.boldSystemFont(ofSize: 16)]
         ]
-
-        let font = UIFont(name: "Courier New", size: defaultFontSize) ?? UIFont.systemFont(ofSize: defaultFontSize)
     }
 }
