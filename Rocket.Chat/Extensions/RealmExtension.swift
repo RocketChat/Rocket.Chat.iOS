@@ -15,8 +15,15 @@ var realmConfiguration: Realm.Configuration?
 extension Realm {
 
     static var shared: Realm? {
-        guard let configuration = realmConfiguration else { return nil }
-        return try? Realm(configuration: configuration)
+        if let configuration = realmConfiguration {
+            return try? Realm(configuration: configuration)
+        } else {
+            let configuration = Realm.Configuration(
+                deleteRealmIfMigrationNeeded: true
+            )
+
+            return try? Realm(configuration: configuration)
+        }
     }
 
     static func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
