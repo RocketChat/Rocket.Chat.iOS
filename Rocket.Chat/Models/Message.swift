@@ -60,6 +60,7 @@ class Message: BaseModel {
     @objc dynamic var temporary = false
 
     var mentions = List<Mention>()
+    var channels = List<Channel>()
     var attachments = List<Attachment>()
     var urls = List<MessageURL>()
 
