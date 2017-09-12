@@ -71,6 +71,7 @@ class AuthSettingsManagerSpec: XCTestCase {
             realm.add(auth)
         })
 
+        AuthSettingsManager.shared.updateCachedSettings()
         XCTAssertEqual(AuthSettingsManager.settings?.cdnPrefixURL, "foo.bar.baz", "settings are update from auth object")
     }
 

@@ -1,8 +1,7 @@
 # Rocket.Chat iOS native application
 
-[![Build Status](https://travis-ci.org/RocketChat/Rocket.Chat.iOS.svg?branch=develop)](https://travis-ci.org/RocketChat/Rocket.Chat.iOS)
+![Build Status](https://circleci.com/gh/RocketChat/Rocket.Chat.iOS/tree/develop.svg?style=shield&circle-token=62385bc0e3472bf6422d23efae787cc85860bcff)
 [![codecov](https://codecov.io/gh/RocketChat/Rocket.Chat.iOS/branch/develop/graph/badge.svg)](https://codecov.io/gh/RocketChat/Rocket.Chat.iOS)
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/09aed95b69c14cb88521890335633acc)](https://www.codacy.com/app/RocketChat/Rocket-Chat-iOS)
 
 # Get it from the store
 
