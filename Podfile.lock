@@ -39,7 +39,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.11):
     - GTMSessionFetcher/Core (= 1.1.11)
   - MobilePlayer (1.2.0)
-  - RCMarkdownParser (2.0.2)
+  - RCMarkdownParser (3.0.1)
   - Realm (2.10.0):
     - Realm/Headers (= 2.10.0)
   - Realm/Headers (2.10.0)
@@ -61,7 +61,7 @@ DEPENDENCIES:
   - Fabric
   - Google/SignIn
   - MobilePlayer
-  - RCMarkdownParser (from `~/dev/cardoso/RCMarkdownParser`)
+  - RCMarkdownParser
   - RealmSwift
   - SDWebImage (~> 3)
   - semver
@@ -72,8 +72,6 @@ DEPENDENCIES:
   - SwiftyJSON
 
 EXTERNAL SOURCES:
-  RCMarkdownParser:
-    :path: "~/dev/cardoso/RCMarkdownParser"
   SideMenuController:
     :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
@@ -100,7 +98,7 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  RCMarkdownParser: c2d3ea936556f3a237d55d2993488d49959005a0
+  RCMarkdownParser: fb50ce795c293f1daab6ae9a257aa1c720a44fb6
   Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
   RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
@@ -111,6 +109,6 @@ SPEC CHECKSUMS:
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftyJSON: c2842d878f95482ffceec5709abc3d05680c0220
 
-PODFILE CHECKSUM: e597acdb192491e75711cba0cdfa4853baa98d91
+PODFILE CHECKSUM: c136c233566b5d802b03a112f858655b4027cdc0
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1

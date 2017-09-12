@@ -20,7 +20,7 @@ def shared_pods
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
 
   # Text Processing
-  pod 'RCMarkdownParser', :path => '~/dev/cardoso/RCMarkdownParser'
+  pod 'RCMarkdownParser'
 
   # Database
   pod 'RealmSwift'
