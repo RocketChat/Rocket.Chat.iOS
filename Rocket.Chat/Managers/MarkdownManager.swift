@@ -26,6 +26,7 @@ class MarkdownManager {
             NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize),
             NSBackgroundColorAttributeName: UIColor.codeBackground
         ]
+        parser.quoteBlockAttributes = parser.quoteAttributes
 
         var codeAttributes: [String: Any] = [NSBackgroundColorAttributeName: UIColor.codeBackground]
         codeAttributes[NSForegroundColorAttributeName] = UIColor.code
