@@ -453,15 +453,23 @@ final class ChatViewController: SLKTextViewController {
                     self?.scrollToBottom()
                 }
 
-                if !loadRemoteHistory {
-                    self?.isRequestingHistory = false
+                if SocketManager.isConnected() {
+                    if !loadRemoteHistory {
+                        self?.isRequestingHistory = false
+                    } else {
+                        loadHistoryFromRemote()
+                    }
                 } else {
-                    loadHistoryFromRemote()
+                    self?.isRequestingHistory = false
                 }
             })
         } else {
-            if loadRemoteHistory {
-                loadHistoryFromRemote()
+            if SocketManager.isConnected() {
+                if loadRemoteHistory {
+                    loadHistoryFromRemote()
+                } else {
+                    isRequestingHistory = false
+                }
             } else {
                 isRequestingHistory = false
             }
