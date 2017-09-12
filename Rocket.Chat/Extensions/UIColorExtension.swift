@@ -82,7 +82,7 @@ extension UIColor {
 
     static let primaryAction = UIColor(rgb: 0x13679A, alphaVal: 1)
     static let attention = UIColor(rgb: 0x9C27B0, alphaVal: 1)
-    static let link = UIColor(rgb: 0x0000EE, alphaVal: 1)
+    static let link = UIColor(rgb: 0x2578F1, alphaVal: 1)
 
     // MARK: Mention Color
 
