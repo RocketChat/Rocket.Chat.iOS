@@ -44,6 +44,14 @@ extension NSMutableAttributedString {
         }
     }
 
+    func setBackgroundColor(_ color: UIColor, range: NSRange? = nil) {
+        if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
+            self.addAttributes([
+                NSBackgroundColorAttributeName: color
+            ], range: attributeRange)
+        }
+    }
+
     func transformMarkdown() -> NSAttributedString {
         let defaultFontSize = MessageTextFontAttributes.defaultFontSize
 
@@ -63,4 +71,28 @@ extension NSMutableAttributedString {
         return parser.attributedString(fromAttributedMarkdownString: self)
     }
 
+    func highlightMentions(for message: Message) {
+        message.mentions.forEach {
+            if let username = $0.username {
+                let ranges = string.ranges(of: "@\(username)")
+                for range in ranges {
+                    let range = NSRange(range, in: string)
+                    setBackgroundColor(UIColor.background(for: $0), range: range)
+                    setFontColor(UIColor.font(for: $0), range: range)
+                }
+            }
+        }
+    }
+
+    func highlightChannels(for message: Message) {
+        message.channels.forEach {
+            if let name = $0.name {
+                let ranges = string.ranges(of: "#\(name)")
+                for range in ranges {
+                    let range = NSRange(range, in: string)
+                    setFontColor(.link, range: range)
+                }
+            }
+        }
+    }
 }
