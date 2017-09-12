@@ -10,6 +10,7 @@
 		15A2FD223558011BFDE03883 /* Pods_Rocket_ChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */; };
 		4102E3AA1E532323004BAA82 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4102E3A91E532323004BAA82 /* Settings.storyboard */; };
 		4102E3AD1E53273E004BAA82 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */; };
+		411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411119B51F680DB00019854B /* NetworkCoordinator.swift */; };
 		4112BEEC1E7971A400E734CB /* MainChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4112BEEB1E7971A400E734CB /* MainChatViewController.swift */; };
 		4116C52D1E69B15400AC4E43 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4116C52C1E69B15400AC4E43 /* GoogleService-Info.plist */; };
 		411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */; };
@@ -209,6 +210,7 @@
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		4102E3A91E532323004BAA82 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Settings.storyboard; path = Storyboards/Settings.storyboard; sourceTree = "<group>"; };
 		4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = Controllers/Settings/SettingsViewController.swift; sourceTree = "<group>"; };
+		411119B51F680DB00019854B /* NetworkCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCoordinator.swift; sourceTree = "<group>"; };
 		4112BEEB1E7971A400E734CB /* MainChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainChatViewController.swift; path = Controllers/Chat/MainChatViewController.swift; sourceTree = "<group>"; };
 		4116C52C1E69B15400AC4E43 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettingsManager.swift; path = Managers/Model/AuthSettingsManager.swift; sourceTree = "<group>"; };
@@ -965,6 +967,7 @@
 				D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */,
 				419EAF281E26562E002C8DA5 /* UserCoordinator.swift */,
 				41499C901F2A1A7200790EA7 /* TimestampCoordinator.swift */,
+				411119B51F680DB00019854B /* NetworkCoordinator.swift */,
 			);
 			name = Launcher;
 			path = Managers/Launcher;
@@ -1548,6 +1551,7 @@
 				41AC3CD91DCCA0C9002DC39A /* AutocompleteCell.swift in Sources */,
 				41FF36061DBEC0BA0074E20A /* ChatMessageVideoView.swift in Sources */,
 				4147CE7B1F5EA41000C322C3 /* ServersViewController.swift in Sources */,
+				411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */,
 				41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */,
 				41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */,
 				41D3A6301E0805490011949D /* ChatMessageDaySeparator.swift in Sources */,
