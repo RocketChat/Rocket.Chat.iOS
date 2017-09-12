@@ -31,6 +31,7 @@ class MarkdownManager {
         }
 
         parser.inlineCodeAttributes = codeAttributes
+        parser.codeAttributes = codeAttributes
 
         parser.strongAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: defaultFontSize)]
         parser.italicAttributes = [NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]
