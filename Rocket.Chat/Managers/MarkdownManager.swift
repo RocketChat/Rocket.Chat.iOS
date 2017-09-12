@@ -25,6 +25,7 @@ class MarkdownManager {
         parser.quoteAttributes = [[NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]]
 
         var codeAttributes: [String: Any] = [NSBackgroundColorAttributeName: UIColor.codeBackground]
+        codeAttributes[NSForegroundColorAttributeName] = UIColor.code
         if let codeFont = UIFont(name: "Courier New", size: defaultFontSize)?.bold() {
             codeAttributes[NSFontAttributeName] = codeFont
         }
