@@ -53,4 +53,26 @@ extension String {
         return hexString
     }
 
+    func ranges(of string: String) -> [Range<Index>] {
+        var ranges = [Range<Index>]()
+
+        let pCount = string.characters.count
+        let strCount = self.characters.count
+
+        if strCount < pCount { return [] }
+
+        for i in 0...(strCount-pCount) {
+
+            let from = index(self.startIndex, offsetBy: i)
+
+            if let to = index(from, offsetBy: pCount, limitedBy: self.endIndex) {
+
+                if string == self[from..<to] {
+                    ranges.append(from..<to)
+                }
+            }
+        }
+
+        return ranges
+    }
 }

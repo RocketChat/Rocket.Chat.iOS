@@ -34,4 +34,14 @@ class StringExtensionSpec: XCTestCase {
         XCTAssert(string.sha256() == hash, "String SHA-256 cryptographic is correct")
     }
 
+    func testRangesOf() {
+        let string = "this word is in position 5 and this word is in position 36"
+        let ranges = string.ranges(of: "word")
+
+        XCTAssert(ranges.count == 2, "will find correct number of words")
+        XCTAssert(string.distance(from: string.startIndex, to: ranges[0].lowerBound) == 5, "will find word 1 in correct place")
+        XCTAssert(string.distance(from: string.startIndex, to: ranges[1].lowerBound) == 36, "will find word 2 in correct place")
+        XCTAssert(string.distance(from: ranges[0].lowerBound, to: ranges[0].upperBound) == 4, "will word 1 have correct size")
+        XCTAssert(string.distance(from: ranges[1].lowerBound, to: ranges[1].upperBound) == 4, "will word 2 have correct size")
+    }
 }
