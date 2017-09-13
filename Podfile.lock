@@ -39,6 +39,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.11):
     - GTMSessionFetcher/Core (= 1.1.11)
   - MobilePlayer (1.2.0)
+  - RCMarkdownParser (3.0.2)
   - ReachabilitySwift (3)
   - Realm (2.10.0):
     - Realm/Headers (= 2.10.0)
@@ -54,7 +55,6 @@ PODS:
   - SlackTextViewController (1.9.5)
   - Starscream (2.1.1)
   - SwiftyJSON (4.0.0-alpha.1)
-  - TSMarkdownParser (2.1.3)
 
 DEPENDENCIES:
   - 1PasswordExtension
@@ -62,7 +62,8 @@ DEPENDENCIES:
   - Fabric
   - Google/SignIn
   - MobilePlayer
-  - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift.git`, branch `develop`)
+  - RCMarkdownParser
+  - ReachabilitySwift (~> 3)
   - RealmSwift
   - SDWebImage (~> 3)
   - semver (from `https://github.com/rafaelks/Semver.Swift.git`, branch `chore/swift4`)
@@ -71,7 +72,6 @@ DEPENDENCIES:
   - SlackTextViewController
   - Starscream (from `https://github.com/daltoniam/Starscream.git`, branch `swift4`)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, tag `4.0.0-alpha.1`)
-  - TSMarkdownParser
 
 EXTERNAL SOURCES:
   ReachabilitySwift:
@@ -124,6 +124,7 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
+  RCMarkdownParser: a3f2de30108a6090c6e98784445789447c73b03f
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
   RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
@@ -134,8 +135,7 @@ SPEC CHECKSUMS:
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
   Starscream: 087670fe088bb12c04398fc343442a4b9eb96b86
   SwiftyJSON: c4d27c2ca659d5c91460cd17cc60fd212b26074d
-  TSMarkdownParser: 114779f14d46e7fc6d9880d4797e5abcc01f92c3
 
-PODFILE CHECKSUM: c6af97b091c4ebed99e183871125870b55647842
+PODFILE CHECKSUM: e805c0515abb226b05ba1d18f29496b8ca1f8e5e
 
 COCOAPODS: 1.3.1

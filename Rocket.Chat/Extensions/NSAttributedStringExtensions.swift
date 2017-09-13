@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import TSMarkdownParser
 
 extension NSMutableAttributedString {
 
@@ -53,22 +52,7 @@ extension NSMutableAttributedString {
     }
 
     func transformMarkdown() -> NSAttributedString {
-        let defaultFontSize = MessageTextFontAttributes.defaultFontSize
-
-        let parser = TSMarkdownParser.standard()
-        parser.defaultAttributes = [NSAttributedStringKey.font.rawValue: UIFont.systemFont(ofSize: defaultFontSize)]
-        parser.quoteAttributes = [[NSAttributedStringKey.font.rawValue: UIFont.italicSystemFont(ofSize: defaultFontSize)]]
-        parser.strongAttributes = [NSAttributedStringKey.font.rawValue: UIFont.boldSystemFont(ofSize: defaultFontSize)]
-        parser.emphasisAttributes = [NSAttributedStringKey.font.rawValue: UIFont.italicSystemFont(ofSize: defaultFontSize)]
-        parser.linkAttributes = [NSAttributedStringKey.foregroundColor.rawValue: UIColor.darkGray]
-
-        let font = UIFont(name: "Courier New", size: defaultFontSize) ?? UIFont.systemFont(ofSize: defaultFontSize)
-        parser.monospaceAttributes = [
-            NSAttributedStringKey.font.rawValue: font,
-            NSAttributedStringKey.foregroundColor.rawValue: UIColor.red
-        ]
-
-        return parser.attributedString(fromAttributedMarkdownString: self)
+        return MarkdownManager.parser.attributedStringFromAttributedMarkdownString(self)
     }
 
     func highlightMentions(for message: Message) {
