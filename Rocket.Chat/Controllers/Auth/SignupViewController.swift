@@ -77,7 +77,7 @@ final class SignupViewController: BaseViewController {
 
     // MARK: Keyboard Handlers
     override func keyboardWillShow(_ notification: Notification) {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             visibleViewBottomConstraint.constant = keyboardSize.height
         }
     }
