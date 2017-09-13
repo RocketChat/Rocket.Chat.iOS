@@ -68,8 +68,7 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
     // MARK: Keyboard Handlers
     override func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
-            visibleViewBottomConstraint.constant = keyboardSize.height
-        }
+            visibleViewBottomConstraint.constant = keyboardSize.heightUIKeyboardFrameEndUserInfoKey        }
     }
 
     override func keyboardWillHide(_ notification: Notification) {
