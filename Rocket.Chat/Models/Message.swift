@@ -63,7 +63,7 @@ class Message: BaseModel {
 
     @objc dynamic var temporary = false
 
-    dynamic var groupable = true
+    @objc dynamic var groupable = true
 
     var mentions = List<Mention>()
     var channels = List<Channel>()
