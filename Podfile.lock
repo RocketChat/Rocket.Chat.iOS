@@ -39,7 +39,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.11):
     - GTMSessionFetcher/Core (= 1.1.11)
   - MobilePlayer (1.2.0)
-  - RCMarkdownParser (3.0.1)
+  - RCMarkdownParser (3.0.2)
   - ReachabilitySwift (3)
   - Realm (2.10.0):
     - Realm/Headers (= 2.10.0)
@@ -100,7 +100,7 @@ SPEC CHECKSUMS:
   GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  RCMarkdownParser: fb50ce795c293f1daab6ae9a257aa1c720a44fb6
+  RCMarkdownParser: a3f2de30108a6090c6e98784445789447c73b03f
   ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
   Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
   RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
