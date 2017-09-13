@@ -11,7 +11,6 @@ import RealmSwift
 @testable import Rocket_Chat
 
 class ChatDataControllerSpec: XCTestCase {
-
     func testInitilization() {
         let controller = ChatDataController()
         XCTAssertEqual(controller.data.count, 0, "Controller has no data on initialization")
@@ -88,8 +87,7 @@ class ChatDataControllerSpec: XCTestCase {
     func testUpdateObject() {
         let controller = ChatDataController()
 
-        let message: Message!
-        message = Message()
+        let message = Message()
         message.identifier = "update-1"
         message.text = "Foobar"
 
@@ -142,4 +140,43 @@ class ChatDataControllerSpec: XCTestCase {
         XCTAssertEqual(controller.data.filter({ $0.type == .header }).count, 1, "data will have 1 header")
     }
 
+    func testHasSequentialMessage() {
+        let controller = ChatDataController()
+
+        let message1 = Message()
+        message1.identifier = "message1-sequential"
+        message1.groupable = true
+        message1.createdAt = Date()
+
+        let message2 = Message()
+        message2.identifier = "message2-sequential"
+        message2.groupable = true
+        message2.createdAt = Date() + (Message.maximumTimeForSequence - 1.0)
+
+        var data1 = ChatData(type: .message, timestamp: Date())
+        data1.message = message1
+        var data2 = ChatData(type: .message, timestamp: Date())
+        data2.message = message2
+
+        controller.insert([data1, data2])
+
+        let indexPaths = controller.data.filter {
+            $0.message?.identifier == "message2-sequential"
+        }
+        guard let indexPath = indexPaths.last?.indexPath else {
+            XCTFail("message2 not found in data")
+            return
+        }
+
+        XCTAssert(controller.hasSequentialMessageAt(indexPath), "message2 is sequential")
+
+        message2.groupable = false
+
+        XCTAssertFalse(controller.hasSequentialMessageAt(indexPath), "message2 is not sequential")
+
+        message2.groupable = true
+        message2.createdAt?.addTimeInterval(2.0)
+
+        XCTAssertFalse(controller.hasSequentialMessageAt(indexPath), "message2 is not sequential")
+    }
 }
