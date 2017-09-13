@@ -77,12 +77,19 @@ extension UIColor {
         return UIColor.lightGray
     }
 
-
     // MARK: Colors from Web Version
 
     static let primaryAction = UIColor(rgb: 0x13679A, alphaVal: 1)
     static let attention = UIColor(rgb: 0x9C27B0, alphaVal: 1)
     static let link = UIColor(rgb: 0x2578F1, alphaVal: 1)
+
+    static var code: UIColor {
+        return UIColor(rgb: 0x333333, alphaVal: 1.0)
+    }
+
+    static var codeBackground: UIColor {
+        return UIColor(rgb: 0xF8F8F8, alphaVal: 1.0)
+    }
 
     // MARK: Mention Color
 
