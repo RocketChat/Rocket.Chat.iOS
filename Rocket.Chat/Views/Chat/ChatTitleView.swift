@@ -23,6 +23,10 @@ final class ChatTitleView: UIView {
         }
     }
 
+    override var intrinsicContentSize: CGSize {
+        return UILayoutFittingExpandedSize
+    }
+
     var subscription: Subscription! {
         didSet {
             labelTitle.text = subscription.displayName()
