@@ -12,10 +12,16 @@ public extension NSRange {
     private init(string: String, lowerBound: String.Index, upperBound: String.Index) {
         let utf16 = string.utf16
 
-        let lowerBound = lowerBound.samePosition(in: utf16)
-        let location = utf16.distance(from: utf16.startIndex, to: lowerBound)
-        let length = utf16.distance(from: lowerBound, to: upperBound.samePosition(in: utf16))
+        guard
+            let lowerBound = lowerBound.samePosition(in: utf16),
+            let upperBound = upperBound.samePosition(in: utf16)
+        else {
+            self.init()
+            return
+        }
 
+        let location = utf16.distance(from: utf16.startIndex, to: lowerBound)
+        let length = utf16.distance(from: lowerBound, to: upperBound)
         self.init(location: location, length: length)
     }
 
