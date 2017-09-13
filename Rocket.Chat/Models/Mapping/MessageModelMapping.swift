@@ -23,6 +23,7 @@ extension Message: ModelMappeable {
         self.internalType = values["t"].string ?? "t"
         self.role = values["role"].string ?? ""
         self.pinned = values["pinned"].bool ?? false
+        self.groupable = values["groupable"].bool ?? true
 
         if let createdAt = values["ts"]["$date"].double {
             self.createdAt = Date.dateFromInterval(createdAt)
