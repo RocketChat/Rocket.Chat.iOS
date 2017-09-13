@@ -28,7 +28,7 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 3'
   pod 'Starscream', :git => 'https://github.com/daltoniam/Starscream.git', :branch => 'swift4'
-  pod 'ReachabilitySwift', :branch => 'develop'
+  pod 'ReachabilitySwift', :git => 'https://github.com/ashleymills/Reachability.swift.git', :branch => 'develop'
 
   # Authentication SDKs
   pod '1PasswordExtension'

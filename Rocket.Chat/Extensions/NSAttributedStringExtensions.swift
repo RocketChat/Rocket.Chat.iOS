@@ -47,7 +47,7 @@ extension NSMutableAttributedString {
     func setBackgroundColor(_ color: UIColor, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSBackgroundColorAttributeName: color
+                NSAttributedStringKey.backgroundColor: color
             ], range: attributeRange)
         }
     }

@@ -9,5 +9,5 @@
 import Foundation
 
 final class Channel: BaseModel {
-    dynamic var name: String?
+    @objc dynamic var name: String?
 }
