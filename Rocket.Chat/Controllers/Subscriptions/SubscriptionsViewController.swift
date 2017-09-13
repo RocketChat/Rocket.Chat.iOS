@@ -101,6 +101,8 @@ final class SubscriptionsViewController: BaseViewController {
     var groupInfomation: [[String: String]]?
     var groupSubscriptions: [[Subscription]]?
 
+    var searchText: String = ""
+
     override func awakeFromNib() {
         super.awakeFromNib()
         subscribeModelChanges()
@@ -183,6 +185,16 @@ extension SubscriptionsViewController {
         }
     }
 
+    func updateAll() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        subscriptions = auth.subscriptions.sortedByLastSeen()
+    }
+
+    func updateSearched() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        subscriptions = auth.subscriptions.filterBy(name: searchText).sortedByLastSeen()
+    }
+
     func updateData() {
         guard !isSearchingLocally && !isSearchingRemotely else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
@@ -193,9 +205,12 @@ extension SubscriptionsViewController {
     }
 
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        guard !isSearchingLocally && !isSearchingRemotely else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
+        if isSearchingLocally || isSearchingRemotely {
+            updateSearched()
+        } else {
+            updateAll()
+        }
+
         groupSubscription()
 
         updateCurrentUserInformation()
@@ -445,7 +460,7 @@ extension SubscriptionsViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
-        let prospectiveText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        searchText = (currentText as NSString).replacingCharacters(in: range, with: string)
 
         if string == "\n" {
             if currentText.characters.count > 0 {
@@ -455,7 +470,7 @@ extension SubscriptionsViewController: UITextFieldDelegate {
             return false
         }
 
-        searchBy(prospectiveText)
+        searchBy(searchText)
         return true
     }
 
