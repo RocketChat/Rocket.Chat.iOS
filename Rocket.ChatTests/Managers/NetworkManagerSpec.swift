@@ -11,16 +11,6 @@ import XCTest
 
 class NetworkManagerSpec: XCTestCase {
 
-    func testIsConnected() {
-        let manager = NetworkManager()
-
-        if manager.reachability?.currentReachabilityStatus == .notReachable {
-            XCTAssertFalse(manager.isConnected, "connected is false when Reachability status is .notReachable")
-        } else {
-            XCTAssertTrue(manager.isConnected, "connected is true when Reachability status is reachable")
-        }
-    }
-
     func testReachbilityNotNil() {
         let manager = NetworkManager()
         XCTAssertNotNil(manager.reachability, "reachability is not nil after init")
