@@ -51,7 +51,6 @@
 		415029BB1E72D553009F596C /* ChannelInfoUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415029BA1E72D553009F596C /* ChannelInfoUserCell.swift */; };
 		415029BD1E72E0FD009F596C /* ChannelInfoCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415029BC1E72E0FD009F596C /* ChannelInfoCellProtocol.swift */; };
 		415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */; };
-		4151807B1EAE249F0000A039 /* ChatDataControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415180791EAE249F0000A039 /* ChatDataControllerSpec.swift */; };
 		4151807C1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */; };
 		4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */; };
 		4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4151B4531E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift */; };
@@ -185,6 +184,7 @@
 		D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1A403D81F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift */; };
 		D1C536CC1F688B2F00EBA8D9 /* MarkdownManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C536CB1F688B2F00EBA8D9 /* MarkdownManager.swift */; };
 		D1C536CE1F688B7100EBA8D9 /* UIFontExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1C536CD1F688B7100EBA8D9 /* UIFontExtensions.swift */; };
+		D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1DA25241F695ABF00DB6ABB /* ChatDataControllerSpec.swift */; };
 		D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */; };
 		D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28221DFD86C300D6019C /* LauncherProtocol.swift */; };
 		D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */; };
@@ -254,7 +254,6 @@
 		415029BA1E72D553009F596C /* ChannelInfoUserCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelInfoUserCell.swift; path = Views/Cells/Chat/Info/ChannelInfoUserCell.swift; sourceTree = "<group>"; };
 		415029BC1E72E0FD009F596C /* ChannelInfoCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelInfoCellProtocol.swift; path = Views/Cells/Chat/Info/ChannelInfoCellProtocol.swift; sourceTree = "<group>"; };
 		415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTextCacheManager.swift; path = Managers/MessageTextCacheManager.swift; sourceTree = "<group>"; };
-		415180791EAE249F0000A039 /* ChatDataControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatDataControllerSpec.swift; path = Views/Chat/ChatDataControllerSpec.swift; sourceTree = "<group>"; };
 		4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageTextViewModelSpec.swift; path = Views/Chat/ChatMessageTextViewModelSpec.swift; sourceTree = "<group>"; };
 		4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserModelHandler.swift; path = Models/Handler/UserModelHandler.swift; sourceTree = "<group>"; };
 		4151B4531E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionModelHandler.swift; path = Models/Handler/SubscriptionModelHandler.swift; sourceTree = "<group>"; };
@@ -400,6 +399,7 @@
 		D1A403D81F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSAttributedStringExtensionsSpec.swift; path = Extensions/NSAttributedStringExtensionsSpec.swift; sourceTree = "<group>"; };
 		D1C536CB1F688B2F00EBA8D9 /* MarkdownManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarkdownManager.swift; path = Managers/MarkdownManager.swift; sourceTree = "<group>"; };
 		D1C536CD1F688B7100EBA8D9 /* UIFontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIFontExtensions.swift; path = Extensions/UIFontExtensions.swift; sourceTree = "<group>"; };
+		D1DA25241F695ABF00DB6ABB /* ChatDataControllerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatDataControllerSpec.swift; path = Controllers/ChatDataControllerSpec.swift; sourceTree = "<group>"; };
 		D32E28211DFD86C300D6019C /* BugTrackingCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BugTrackingCoordinator.swift; sourceTree = "<group>"; };
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
@@ -893,6 +893,7 @@
 		41DF76F61D2C50720028DBF8 /* Rocket.ChatTests */ = {
 			isa = PBXGroup;
 			children = (
+				D1DA25261F695AC700DB6ABB /* Controllers */,
 				416133361D46DB0900E09DA2 /* Models */,
 				41DC7A201D386B2C00896FC0 /* Extensions */,
 				41552F691D3035DB0081438D /* Managers */,
@@ -968,6 +969,14 @@
 			name = Settings;
 			sourceTree = "<group>";
 		};
+		D1DA25261F695AC700DB6ABB /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				D1DA25241F695ABF00DB6ABB /* ChatDataControllerSpec.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
 		D32E28201DFD86AC00D6019C /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
@@ -985,7 +994,6 @@
 		D3CFAFBE1E907FC100BADC0A /* Chat */ = {
 			isa = PBXGroup;
 			children = (
-				415180791EAE249F0000A039 /* ChatDataControllerSpec.swift */,
 				4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */,
 			);
 			name = Chat;
@@ -1596,7 +1604,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4151807B1EAE249F0000A039 /* ChatDataControllerSpec.swift in Sources */,
 				4171ABA51E7C056E009FC3F0 /* AvatarViewSpec.swift in Sources */,
 				417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */,
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
@@ -1608,6 +1615,7 @@
 				D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
+				D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
@@ -1786,7 +1794,7 @@
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = chat1.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
@@ -1807,7 +1815,7 @@
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = chat1.rocket.ios;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";

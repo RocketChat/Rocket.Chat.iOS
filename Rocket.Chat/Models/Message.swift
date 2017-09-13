@@ -40,6 +40,9 @@ enum MessageType: String {
 }
 
 class Message: BaseModel {
+
+    static var maximumTimeForSequence = 15.0 * 60.0 // 15 minutes
+
     dynamic var subscription: Subscription!
     dynamic var internalType: String = ""
     dynamic var rid = ""
@@ -58,6 +61,8 @@ class Message: BaseModel {
     dynamic var role = ""
 
     dynamic var temporary = false
+
+    dynamic var groupable = true
 
     var mentions = List<Mention>()
     var channels = List<Channel>()
