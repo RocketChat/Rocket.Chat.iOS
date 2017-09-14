@@ -152,6 +152,7 @@ extension SubscriptionsViewController {
     @IBAction func buttonCancelSearchDidPressed(_ sender: Any) {
         textFieldSearch.resignFirstResponder()
         textFieldSearch.text = ""
+        searchText = ""
         searchBy()
     }
 
@@ -549,9 +550,9 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
         UIView.animate(withDuration: 0.15, animations: {
             viewUserMenu.frame = newFrame
             self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat(0))
-        }) { (_) in
+        }, completion: { (_) in
             viewUserMenu.removeFromSuperview()
-        }
+        })
     }
 
     @objc func viewUserDidTap(sender: Any) {
