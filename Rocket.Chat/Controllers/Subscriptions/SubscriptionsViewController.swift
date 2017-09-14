@@ -156,7 +156,7 @@ extension SubscriptionsViewController {
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: searchText)
+        subscriptions = auth.subscriptions.filterBy(name: text)
 
         if text.characters.count == 0 {
             isSearchingLocally = false
