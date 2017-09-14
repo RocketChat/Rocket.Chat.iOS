@@ -152,6 +152,7 @@ extension SubscriptionsViewController {
     @IBAction func buttonCancelSearchDidPressed(_ sender: Any) {
         textFieldSearch.resignFirstResponder()
         textFieldSearch.text = ""
+        searchBy()
     }
 
     func searchBy(_ text: String = "") {
