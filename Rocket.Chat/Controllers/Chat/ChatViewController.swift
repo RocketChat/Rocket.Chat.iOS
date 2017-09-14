@@ -96,8 +96,12 @@ final class ChatViewController: SLKTextViewController {
         setupTextViewSettings()
         setupScrollToBottomButton()
 
-        NotificationCenter.default.addObserver(self, selector: #selector(ChatViewController.reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
+        if !SocketManager.isConnected() {
+            socketDidDisconnect(socket: SocketManager.sharedInstance)
+        }
 
         guard let auth = AuthManager.isAuthenticated() else { return }
         let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
@@ -110,7 +114,7 @@ final class ChatViewController: SLKTextViewController {
         view.bringSubview(toFront: textInputbar)
     }
 
-    internal func reconnect() {
+    @objc internal func reconnect() {
         if !SocketManager.isConnected() {
             SocketManager.reconnect()
         }
@@ -283,10 +287,14 @@ final class ChatViewController: SLKTextViewController {
             textView.text = ""
             rightButton.isEnabled = true
 
-            SubscriptionManager.sendTextMessage(message) { _ in
+            SubscriptionManager.sendTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
-                    message.temporary = false
-                    realm.add(message, update: true)
+                    realm.delete(message)
+
+                    let message = Message()
+                    message.map(response.result["result"], realm: realm)
+                    MessageTextCacheManager.shared.update(for: message)
+                    realm.add(message)
                 })
             }
         }
@@ -445,15 +453,23 @@ final class ChatViewController: SLKTextViewController {
                     self?.scrollToBottom()
                 }
 
-                if !loadRemoteHistory {
-                    self?.isRequestingHistory = false
+                if SocketManager.isConnected() {
+                    if !loadRemoteHistory {
+                        self?.isRequestingHistory = false
+                    } else {
+                        loadHistoryFromRemote()
+                    }
                 } else {
-                    loadHistoryFromRemote()
+                    self?.isRequestingHistory = false
                 }
             })
         } else {
-            if loadRemoteHistory {
-                loadHistoryFromRemote()
+            if SocketManager.isConnected() {
+                if loadRemoteHistory {
+                    loadHistoryFromRemote()
+                } else {
+                    isRequestingHistory = false
+                }
             } else {
                 isRequestingHistory = false
             }
@@ -541,7 +557,7 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: IBAction
 
-    func chatTitleViewDidPressed(_ sender: AnyObject) {
+    @objc func chatTitleViewDidPressed(_ sender: AnyObject) {
         performSegue(withIdentifier: "Channel Info", sender: sender)
     }
 

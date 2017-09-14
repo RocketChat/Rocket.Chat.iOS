@@ -23,6 +23,10 @@ final class ChatTitleView: UIView {
         }
     }
 
+    override var intrinsicContentSize: CGSize {
+        return UILayoutFittingExpandedSize
+    }
+
     var subscription: Subscription! {
         didSet {
             labelTitle.text = subscription.displayName()
@@ -42,7 +46,7 @@ final class ChatTitleView: UIView {
                         case .away: return .RCAway()
                         case .busy: return .RCBusy()
                         }
-                    }()
+                    }(())
                 }
 
                 icon.image = UIImage(named: "Mention")?.imageWithTint(color)
