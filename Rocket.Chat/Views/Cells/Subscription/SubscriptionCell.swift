@@ -71,7 +71,7 @@ final class SubscriptionCell: UITableViewCell {
                         case .away: return .RCAway()
                         case .busy: return .RCBusy()
                     }
-                }()
+                }(())
             }
 
             imageViewIcon.image = UIImage(named: "Mention")?.imageWithTint(color)

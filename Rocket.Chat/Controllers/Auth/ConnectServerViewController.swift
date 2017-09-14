@@ -81,7 +81,7 @@ final class ConnectServerViewController: BaseViewController {
 
     // MARK: Keyboard Handlers
     override func keyboardWillShow(_ notification: Notification) {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             visibleViewBottomConstraint.constant = keyboardSize.height
         }
     }
@@ -169,7 +169,7 @@ final class ConnectServerViewController: BaseViewController {
 
         let task = session.dataTask(with: request, completionHandler: { (data, _, _) in
             if let data = data {
-                let json = JSON(data: data)
+                guard let json = try? JSON(data: data) else { return completion(nil, true) }
                 Log.debug(json.rawString())
 
                 guard let version = json["version"].string else {

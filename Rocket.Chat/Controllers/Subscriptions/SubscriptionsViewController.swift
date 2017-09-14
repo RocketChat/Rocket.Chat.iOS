@@ -28,7 +28,7 @@ final class SubscriptionsViewController: BaseViewController {
 
             if let placeholder = textFieldSearch.placeholder {
                 let color = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
-                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSForegroundColorAttributeName: color])
+                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSAttributedStringKey.foregroundColor: color])
             }
         }
     }
@@ -554,7 +554,7 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
         }
     }
 
-    func viewUserDidTap(sender: Any) {
+    @objc func viewUserDidTap(sender: Any) {
         textFieldSearch.resignFirstResponder()
 
         if viewUserMenu != nil {

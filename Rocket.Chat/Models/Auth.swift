@@ -11,17 +11,17 @@ import RealmSwift
 
 final class Auth: Object {
     // Server
-    dynamic var serverURL = ""
-    dynamic var settings: AuthSettings?
+    @objc dynamic var serverURL = ""
+    @objc dynamic var settings: AuthSettings?
 
     // Token
-    dynamic var token: String?
-    dynamic var tokenExpires: Date?
-    dynamic var lastAccess: Date?
-    dynamic var lastSubscriptionFetch: Date?
+    @objc dynamic var token: String?
+    @objc dynamic var tokenExpires: Date?
+    @objc dynamic var lastAccess: Date?
+    @objc dynamic var lastSubscriptionFetch: Date?
 
     // User
-    dynamic var userId: String?
+    @objc dynamic var userId: String?
 
     // Subscriptions
     let subscriptions = LinkingObjects(fromType: Subscription.self, property: "auth")

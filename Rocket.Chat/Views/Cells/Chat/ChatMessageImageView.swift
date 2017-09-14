@@ -52,7 +52,7 @@ final class ChatMessageImageView: UIView {
         })
     }
 
-    func didTapView() {
+    @objc func didTapView() {
         delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
     }
 }

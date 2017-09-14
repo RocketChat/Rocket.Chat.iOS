@@ -9,5 +9,5 @@
 import Foundation
 
 final class Mention: BaseModel {
-    dynamic var username: String?
+    @objc dynamic var username: String?
 }
