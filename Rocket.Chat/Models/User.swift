@@ -19,11 +19,11 @@ enum UserStatus: String {
 }
 
 class User: BaseModel {
-    dynamic var username: String?
-    dynamic var name: String?
+    @objc dynamic var username: String?
+    @objc dynamic var name: String?
     var emails = List<Email>()
 
-    fileprivate dynamic var privateStatus = UserStatus.offline.rawValue
+    @objc fileprivate dynamic var privateStatus = UserStatus.offline.rawValue
     var status: UserStatus {
         get { return UserStatus(rawValue: privateStatus) ?? UserStatus.offline }
         set { privateStatus = newValue.rawValue }

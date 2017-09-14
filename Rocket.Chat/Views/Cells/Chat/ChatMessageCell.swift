@@ -221,7 +221,7 @@ final class ChatMessageCell: UICollectionViewCell {
         insertAttachments()
     }
 
-    func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+    @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
     }
 

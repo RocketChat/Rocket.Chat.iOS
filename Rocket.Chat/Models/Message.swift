@@ -40,29 +40,30 @@ enum MessageType: String {
 }
 
 class Message: BaseModel {
-
+    // This time is related to the grouping feature
+    // we have in the list of messages
     static var maximumTimeForSequence = 15.0 * 60.0 // 15 minutes
 
-    dynamic var subscription: Subscription!
-    dynamic var internalType: String = ""
-    dynamic var rid = ""
-    dynamic var createdAt: Date?
-    dynamic var updatedAt: Date?
-    dynamic var user: User?
-    dynamic var text = ""
+    @objc dynamic var subscription: Subscription!
+    @objc dynamic var internalType: String = ""
+    @objc dynamic var rid = ""
+    @objc dynamic var createdAt: Date?
+    @objc dynamic var updatedAt: Date?
+    @objc dynamic var user: User?
+    @objc dynamic var text = ""
 
-    dynamic var userBlocked: Bool = false
+    @objc dynamic var userBlocked: Bool = false
 
-    dynamic var pinned: Bool = false
+    @objc dynamic var pinned: Bool = false
 
-    dynamic var alias = ""
-    dynamic var avatar = ""
+    @objc dynamic var alias = ""
+    @objc dynamic var avatar = ""
 
-    dynamic var role = ""
+    @objc dynamic var role = ""
 
-    dynamic var temporary = false
+    @objc dynamic var temporary = false
 
-    dynamic var groupable = true
+    @objc dynamic var groupable = true
 
     var mentions = List<Mention>()
     var channels = List<Channel>()

@@ -27,26 +27,26 @@ class Attachment: BaseModel {
         return .textAttachment
     }
 
-    dynamic var collapsed: Bool = false
-    dynamic var text: String?
-    dynamic var thumbURL: String?
-    dynamic var color: String?
+    @objc dynamic var collapsed: Bool = false
+    @objc dynamic var text: String?
+    @objc dynamic var thumbURL: String?
+    @objc dynamic var color: String?
 
-    dynamic var title = ""
-    dynamic var titleLink = ""
-    dynamic var titleLinkDownload = true
+    @objc dynamic var title = ""
+    @objc dynamic var titleLink = ""
+    @objc dynamic var titleLinkDownload = true
 
-    dynamic var imageURL: String?
-    dynamic var imageType: String?
-    dynamic var imageSize = 0
+    @objc dynamic var imageURL: String?
+    @objc dynamic var imageType: String?
+    @objc dynamic var imageSize = 0
 
-    dynamic var audioURL: String?
-    dynamic var audioType: String?
-    dynamic var audioSize = 0
+    @objc dynamic var audioURL: String?
+    @objc dynamic var audioType: String?
+    @objc dynamic var audioSize = 0
 
-    dynamic var videoURL: String?
-    dynamic var videoType: String?
-    dynamic var videoSize = 0
+    @objc dynamic var videoURL: String?
+    @objc dynamic var videoType: String?
+    @objc dynamic var videoSize = 0
     var videoThumbPath: URL? {
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documents = path[0]

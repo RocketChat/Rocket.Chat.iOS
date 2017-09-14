@@ -11,10 +11,10 @@ import XCTest
 @testable import Rocket_Chat
 
 private func assert<T: Equatable>(_ attributedString: NSAttributedString,
-                                  has attribute: (String, T),
+                                  has attribute: (NSAttributedStringKey, T),
                                   in range: NSRange, _ message: String) {
     attributedString.enumerateAttributes(in: range, options: [], using: { attributes, crange, _ in
-        XCTAssert(range.toRange() == crange.toRange() && attributes[attribute.0] as? T == attribute.1, message)
+        XCTAssert(Range(range) == Range(crange) && attributes[attribute.0] as? T == attribute.1, message)
     })
 }
 
@@ -33,7 +33,7 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         let font = UIFont.italicSystemFont(ofSize: 12)
         attributedString.setFont(font, range: wordRange)
 
-        assert(attributedString, has: (NSFontAttributeName, font), in: wordRange, "setFont will work")
+        assert(attributedString, has: (NSAttributedStringKey.font, font), in: wordRange, "setFont will work")
     }
 
     func testSetFontColor() {
@@ -44,7 +44,7 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         let color = UIColor.red
         attributedString.setFontColor(color, range: wordRange)
 
-        assert(attributedString, has: (NSForegroundColorAttributeName, color), in: wordRange, "setFontColor will work")
+        assert(attributedString, has: (NSAttributedStringKey.foregroundColor, color), in: wordRange, "setFontColor will work")
     }
 
     func testSetBackgroundColor() {
@@ -55,6 +55,6 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         let color = UIColor.red
         attributedString.setBackgroundColor(color, range: wordRange)
 
-        assert(attributedString, has: (NSBackgroundColorAttributeName, color), in: wordRange, "setBackgroundColor will work")
+        assert(attributedString, has: (NSAttributedStringKey.backgroundColor, color), in: wordRange, "setBackgroundColor will work")
     }
 }

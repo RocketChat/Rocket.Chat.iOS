@@ -1843,7 +1843,7 @@ struct Emojione {
         for result in matches {
             guard result.numberOfRanges == 2 else { continue }
 
-            let shortname = oldString.substring(with: result.rangeAt(1))
+            let shortname = oldString.substring(with: result.range(at: 1))
             if let emoji = values[shortname] {
                 transformedString = transformedString.replacingOccurrences(of: ":\(shortname):", with: emoji) as NSString
             }
