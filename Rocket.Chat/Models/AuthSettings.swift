@@ -11,33 +11,33 @@ import RealmSwift
 import SwiftyJSON
 
 final class AuthSettings: BaseModel {
-    dynamic var siteURL: String?
-    dynamic var cdnPrefixURL: String?
+    @objc dynamic var siteURL: String?
+    @objc dynamic var cdnPrefixURL: String?
 
     // Server information
-    dynamic var serverName: String?
-    dynamic var serverFaviconURL: String?
+    @objc dynamic var serverName: String?
+    @objc dynamic var serverFaviconURL: String?
 
     // User
-    dynamic var useUserRealName = false
+    @objc dynamic var useUserRealName = false
 
     // Rooms
-    dynamic var favoriteRooms = true
+    @objc dynamic var favoriteRooms = true
 
     // Authentication methods
-    dynamic var isUsernameEmailAuthenticationEnabled = false
-    dynamic var isGoogleAuthenticationEnabled = false
-    dynamic var isLDAPAuthenticationEnabled = false
+    @objc dynamic var isUsernameEmailAuthenticationEnabled = false
+    @objc dynamic var isGoogleAuthenticationEnabled = false
+    @objc dynamic var isLDAPAuthenticationEnabled = false
 
     // File upload
-    dynamic var uploadStorageType: String?
+    @objc dynamic var uploadStorageType: String?
 
     // Hide Message Types
-    dynamic var hideMessageUserJoined: Bool = false
-    dynamic var hideMessageUserLeft: Bool = false
-    dynamic var hideMessageUserAdded: Bool = false
-    dynamic var hideMessageUserMutedUnmuted: Bool = false
-    dynamic var hideMessageUserRemoved: Bool = false
+    @objc dynamic var hideMessageUserJoined: Bool = false
+    @objc dynamic var hideMessageUserLeft: Bool = false
+    @objc dynamic var hideMessageUserAdded: Bool = false
+    @objc dynamic var hideMessageUserMutedUnmuted: Bool = false
+    @objc dynamic var hideMessageUserRemoved: Bool = false
 
     var hiddenTypes: Set<MessageType> {
         var hiddenTypes = Set<MessageType>()

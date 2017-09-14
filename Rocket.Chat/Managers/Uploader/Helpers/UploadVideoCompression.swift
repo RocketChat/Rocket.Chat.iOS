@@ -25,7 +25,7 @@ struct UploadVideoCompression {
 
         guard let newPathURL = URL(string: newPath) else { return completion(nil, true) }
         guard let assetExport: AVAssetExportSession = AVAssetExportSession(asset: sourceAsset, presetName: AVAssetExportPresetMediumQuality) else { return completion(nil, true) }
-        assetExport.outputFileType = AVFileTypeQuickTimeMovie
+        assetExport.outputFileType = AVFileType.mov
         assetExport.outputURL = newPathURL
         assetExport.exportAsynchronously { () -> Void in
             switch assetExport.status {

@@ -40,26 +40,33 @@ enum MessageType: String {
 }
 
 class Message: BaseModel {
-    dynamic var subscription: Subscription!
-    dynamic var internalType: String = ""
-    dynamic var rid = ""
-    dynamic var createdAt: Date?
-    dynamic var updatedAt: Date?
-    dynamic var user: User?
-    dynamic var text = ""
+    // This time is related to the grouping feature
+    // we have in the list of messages
+    static var maximumTimeForSequence = 15.0 * 60.0 // 15 minutes
 
-    dynamic var userBlocked: Bool = false
+    @objc dynamic var subscription: Subscription!
+    @objc dynamic var internalType: String = ""
+    @objc dynamic var rid = ""
+    @objc dynamic var createdAt: Date?
+    @objc dynamic var updatedAt: Date?
+    @objc dynamic var user: User?
+    @objc dynamic var text = ""
 
-    dynamic var pinned: Bool = false
+    @objc dynamic var userBlocked: Bool = false
 
-    dynamic var alias = ""
-    dynamic var avatar = ""
+    @objc dynamic var pinned: Bool = false
 
-    dynamic var role = ""
+    @objc dynamic var alias = ""
+    @objc dynamic var avatar = ""
 
-    dynamic var temporary = false
+    @objc dynamic var role = ""
+
+    @objc dynamic var temporary = false
+
+    @objc dynamic var groupable = true
 
     var mentions = List<Mention>()
+    var channels = List<Channel>()
     var attachments = List<Attachment>()
     var urls = List<MessageURL>()
 

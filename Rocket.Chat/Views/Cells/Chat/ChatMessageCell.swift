@@ -61,7 +61,7 @@ final class ChatMessageCell: UICollectionViewCell {
             MessageTextCacheManager.shared.message(for: message)?.string ?? "",
             font: UIFont.systemFont(ofSize: 15),
             width: fullWidth - 62
-        ) + (sequential ? 7 : 35)
+        ) + (sequential ? 7 : 28)
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -221,7 +221,7 @@ final class ChatMessageCell: UICollectionViewCell {
         insertAttachments()
     }
 
-    func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
+    @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
     }
 

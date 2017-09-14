@@ -10,24 +10,25 @@ def shared_pods
   pod 'Crashlytics'
 
   # Code utilities
-  pod 'SwiftyJSON'
-  pod 'semver'
+  pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :tag => '4.0.0-alpha.1'
+  pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
 
   # UI
   pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
-  pod 'SlackTextViewController'
+  pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git', :branch => 'chore/swift4_xcode9_ios11'
   pod 'MobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
 
   # Text Processing
-  pod 'TSMarkdownParser'
+  pod 'RCMarkdownParser'
 
   # Database
   pod 'RealmSwift'
 
   # Network
   pod 'SDWebImage', '~> 3'
-  pod 'Starscream', '~> 2'
+  pod 'Starscream', :git => 'https://github.com/daltoniam/Starscream.git', :branch => 'swift4'
+  pod 'ReachabilitySwift', :git => 'https://github.com/ashleymills/Reachability.swift.git', :branch => 'develop'
 
   # Authentication SDKs
   pod '1PasswordExtension'
