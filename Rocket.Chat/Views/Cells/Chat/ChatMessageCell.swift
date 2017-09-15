@@ -58,11 +58,9 @@ final class ChatMessageCell: UICollectionViewCell {
     static func cellMediaHeightFor(message: Message, sequential: Bool = true) -> CGFloat {
         let fullWidth = UIScreen.main.bounds.size.width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
-        let rect = attributedString?.boundingRect(with: CGSize(width: fullWidth - 62, height: CGFloat.greatestFiniteMagnitude),
-                                                  options: [.usesLineFragmentOrigin, .usesFontLeading],
-                                                  context:  nil)
+        let height = attributedString?.heightForView(withWidth: fullWidth - 62)
 
-        var total = (rect?.height ?? 0) + (sequential ? 8 : 28)
+        var total = (height ?? 0) + (sequential ? 8 : 28)
 
         for url in message.urls {
             guard url.isValid() else { continue }
