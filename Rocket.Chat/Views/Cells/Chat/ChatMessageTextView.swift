@@ -89,12 +89,11 @@ final class ChatMessageTextView: UIView {
             return self.defaultHeight
         }
 
+        let attributedString = NSMutableAttributedString(string: text ?? "").transformMarkdown()
+
         let fullWidth = UIScreen.main.bounds.size.width
-        return max(self.defaultHeight, UILabel.heightForView(
-            text ?? "",
-            font: UIFont.systemFont(ofSize: 14),
-            width: fullWidth - 60
-        ) + 10)
+        let height = attributedString.heightForView(withWidth: fullWidth - 80)
+        return max(self.defaultHeight, height ?? 0) + 10
     }
 
     // MARK: Actions
