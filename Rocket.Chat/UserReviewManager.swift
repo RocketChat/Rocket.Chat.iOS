@@ -29,10 +29,13 @@ class UserReviewManager {
         }
     }
 
-    func setNextDateForReview() {
+    func calculateNextDateForReview() -> Date {
         let week: TimeInterval = 604800
-        nextDateForReview = Date().addingTimeInterval(week)
+        return Date().addingTimeInterval(week)
+    }
 
+    func setNextDateForReview() {
+        nextDateForReview = calculateNextDateForReview()
         defaults.set(nextDateForReview, forKey: nextDateForReviewKey)
     }
 
