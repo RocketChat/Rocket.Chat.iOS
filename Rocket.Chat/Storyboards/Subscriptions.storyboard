@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A360a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BRy-Se-87j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BRy-Se-87j">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -13,10 +14,6 @@
         <scene sceneID="aTu-g1-T0C">
             <objects>
                 <viewController storyboardIdentifier="Subscriptions" id="pre-Wt-UOv" customClass="SubscriptionsViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="aVR-rv-7Ji"/>
-                        <viewControllerLayoutGuide type="bottom" id="Qb5-fJ-P1i"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Sgi-qY-oLC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -212,14 +209,15 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fKk-pZ-N3a" firstAttribute="leading" secondItem="Sgi-qY-oLC" secondAttribute="leading" id="1Z9-Vc-Iq7"/>
-                            <constraint firstAttribute="trailing" secondItem="5g6-R1-nTb" secondAttribute="trailing" id="5gf-7i-iXY"/>
-                            <constraint firstItem="5g6-R1-nTb" firstAttribute="leading" secondItem="Sgi-qY-oLC" secondAttribute="leading" id="FWF-uq-j6U"/>
-                            <constraint firstItem="Qb5-fJ-P1i" firstAttribute="top" secondItem="fKk-pZ-N3a" secondAttribute="bottom" constant="44" id="PuM-RZ-IR8"/>
-                            <constraint firstAttribute="trailing" secondItem="fKk-pZ-N3a" secondAttribute="trailing" id="cOy-px-6DD"/>
-                            <constraint firstItem="5g6-R1-nTb" firstAttribute="top" secondItem="Sgi-qY-oLC" secondAttribute="top" id="gob-hC-RzM"/>
+                            <constraint firstItem="fKk-pZ-N3a" firstAttribute="leading" secondItem="BC2-s4-mxp" secondAttribute="leading" id="1Z9-Vc-Iq7"/>
+                            <constraint firstItem="BC2-s4-mxp" firstAttribute="trailing" secondItem="5g6-R1-nTb" secondAttribute="trailing" id="5gf-7i-iXY"/>
+                            <constraint firstItem="5g6-R1-nTb" firstAttribute="leading" secondItem="BC2-s4-mxp" secondAttribute="leading" id="FWF-uq-j6U"/>
+                            <constraint firstItem="BC2-s4-mxp" firstAttribute="bottom" secondItem="fKk-pZ-N3a" secondAttribute="bottom" constant="44" id="PuM-RZ-IR8"/>
+                            <constraint firstItem="BC2-s4-mxp" firstAttribute="trailing" secondItem="fKk-pZ-N3a" secondAttribute="trailing" id="cOy-px-6DD"/>
+                            <constraint firstItem="5g6-R1-nTb" firstAttribute="top" secondItem="BC2-s4-mxp" secondAttribute="top" constant="-20" id="gob-hC-RzM"/>
                             <constraint firstItem="fKk-pZ-N3a" firstAttribute="top" secondItem="5g6-R1-nTb" secondAttribute="bottom" id="l6S-jK-uiN"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="BC2-s4-mxp"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="cIZ-6h-3cC"/>
@@ -250,7 +248,6 @@
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="BRy-Se-87j" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AU3-QI-Caf">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -276,10 +273,6 @@
         <scene sceneID="lOu-qi-JRh">
             <objects>
                 <viewController storyboardIdentifier="Servers" id="7xe-nw-9mY" customClass="ServersViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vmn-N7-OFq"/>
-                        <viewControllerLayoutGuide type="bottom" id="0Zu-eU-GMU"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="QL3-Do-ipl">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -386,11 +379,12 @@
                         </subviews>
                         <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="svn-JN-2Fk" secondAttribute="trailing" id="40f-lp-qLx"/>
-                            <constraint firstItem="svn-JN-2Fk" firstAttribute="leading" secondItem="QL3-Do-ipl" secondAttribute="leading" id="5S0-qv-Hu6"/>
-                            <constraint firstItem="svn-JN-2Fk" firstAttribute="top" secondItem="vmn-N7-OFq" secondAttribute="bottom" id="LAM-is-6CO"/>
-                            <constraint firstItem="0Zu-eU-GMU" firstAttribute="top" secondItem="svn-JN-2Fk" secondAttribute="bottom" constant="44" id="nzO-Sb-o3B"/>
+                            <constraint firstItem="j1D-FN-EuE" firstAttribute="trailing" secondItem="svn-JN-2Fk" secondAttribute="trailing" id="40f-lp-qLx"/>
+                            <constraint firstItem="svn-JN-2Fk" firstAttribute="leading" secondItem="j1D-FN-EuE" secondAttribute="leading" id="5S0-qv-Hu6"/>
+                            <constraint firstItem="svn-JN-2Fk" firstAttribute="top" secondItem="j1D-FN-EuE" secondAttribute="top" id="LAM-is-6CO"/>
+                            <constraint firstItem="j1D-FN-EuE" firstAttribute="bottom" secondItem="svn-JN-2Fk" secondAttribute="bottom" constant="44" id="nzO-Sb-o3B"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="j1D-FN-EuE"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="svn-JN-2Fk" id="J6J-sl-DFx"/>

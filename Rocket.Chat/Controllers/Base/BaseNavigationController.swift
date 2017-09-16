@@ -25,6 +25,6 @@ class BaseNavigationController: UINavigationController {
         navBar.backgroundColor = UIColor.clear
         navBar.isTranslucent = true
         navBar.tintColor = .RCBlue()
-        navBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.RCBlue()]
+        navBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.RCBlue()]
     }
 }

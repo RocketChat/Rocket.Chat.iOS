@@ -47,7 +47,7 @@ extension UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    internal func keyboardWillShow(_ notification: Foundation.Notification) {
+    @objc internal func keyboardWillShow(_ notification: Foundation.Notification) {
         let userInfo = notification.userInfo
         let value = userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue
         let rawFrame = value?.cgRectValue ?? CGRect.zero
@@ -70,7 +70,7 @@ extension UIViewController {
         )
     }
 
-    internal func keyboardWillHide(_ notification: Foundation.Notification) {
+    @objc internal func keyboardWillHide(_ notification: Foundation.Notification) {
         let userInfo = notification.userInfo
         let duration = userInfo?[UIKeyboardAnimationDurationUserInfoKey] ?? 0
         let scrollView = self.scrollViewInternal

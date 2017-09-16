@@ -110,7 +110,7 @@ class UploadManager {
                 "value": "rc_uid=\(auth.userId ?? ""); rc_token=\(auth.token ?? "")"
             ]]
 
-            let request = self.requestUpload(uploadURL, file: file, formData: JSON(object: headers))
+            let request = self.requestUpload(uploadURL, file: file, formData: JSON(headers))
             let config = URLSessionConfiguration.default
             let session = URLSession(configuration: config)
             let task = session.uploadTask(with: request, from: file.data, completionHandler: { (_, _, error) in

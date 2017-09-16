@@ -59,7 +59,9 @@ final class ChatDataController {
         let item = itemAt(indexPath)
 
         guard (item?.message?.type.sequential ?? false) &&
-            (prevItem?.message?.type.sequential ?? false) else {
+            (prevItem?.message?.type.sequential ?? false) &&
+            (item?.message?.groupable ?? true) &&
+            (prevItem?.message?.groupable ?? true) else {
                 return false
         }
 
@@ -71,7 +73,7 @@ final class ChatDataController {
             return false
         }
 
-        let timeLimit = 30.0 * 60 // 30 minutes
+        let timeLimit = Message.maximumTimeForSequence
         let recent = date.timeIntervalSince(prevDate) < timeLimit
 
         return sameUser && recent
