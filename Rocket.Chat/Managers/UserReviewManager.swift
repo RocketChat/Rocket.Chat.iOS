@@ -16,6 +16,8 @@ class UserReviewManager {
 
     private let defaults = UserDefaults.standard
 
+    let week: TimeInterval = 604800
+
     var nextDateForReview: Date {
         get {
             if let date = defaults.object(forKey: nextDateForReviewKey) as? Date {
@@ -36,7 +38,6 @@ class UserReviewManager {
     }
 
     func calculateNextDateForReview() -> Date {
-        let week: TimeInterval = 30 // 604800
         return Date().addingTimeInterval(week)
     }
 
