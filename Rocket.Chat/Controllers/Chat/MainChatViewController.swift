@@ -54,25 +54,23 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
     func sideMenuControllerWillHide(_ sideMenuController: SideMenuController) {
         ChatViewController.shared?.textView.resignFirstResponder()
-        SubscriptionsViewController.shared?.textFieldSearch.resignFirstResponder()
+        SubscriptionsViewController.shared?.willHide()
     }
 
     func sideMenuControllerDidHide(_ sideMenuController: SideMenuController) {
         ChatViewController.shared?.textView.resignFirstResponder()
-        SubscriptionsViewController.shared?.textFieldSearch.resignFirstResponder()
+        SubscriptionsViewController.shared?.didHide()
         SubscriptionsPageViewController.shared?.showSubscriptionsList(animated: false)
     }
 
     func sideMenuControllerDidReveal(_ sideMenuController: SideMenuController) {
         ChatViewController.shared?.textView.resignFirstResponder()
-        SubscriptionsViewController.shared?.textFieldSearch.resignFirstResponder()
+        SubscriptionsViewController.shared?.didReveal()
     }
 
     func sideMenuControllerWillReveal(_ sideMenuController: SideMenuController) {
         ChatViewController.shared?.textView.resignFirstResponder()
-
-        SubscriptionsViewController.shared?.textFieldSearch.resignFirstResponder()
-        SubscriptionsViewController.shared?.updateData()
+        SubscriptionsViewController.shared?.willReveal()
     }
 
     // MARK: Authentication & Server management

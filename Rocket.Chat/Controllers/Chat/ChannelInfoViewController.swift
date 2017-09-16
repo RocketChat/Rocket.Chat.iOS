@@ -83,7 +83,7 @@ class ChannelInfoViewController: BaseViewController {
 
     // MARK: IBAction
 
-    func buttonFavoriteDidPressed(_ sender: Any) {
+    @objc func buttonFavoriteDidPressed(_ sender: Any) {
         guard let subscription = self.subscription else { return }
 
         SubscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in

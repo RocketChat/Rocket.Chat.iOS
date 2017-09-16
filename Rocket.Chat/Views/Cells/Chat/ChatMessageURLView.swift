@@ -58,7 +58,7 @@ final class ChatMessageURLView: UIView {
         }
     }
 
-    func viewDidTapped(_ sender: Any) {
+    @objc func viewDidTapped(_ sender: Any) {
         delegate?.openURLFromCell(url: url)
     }
 }

@@ -7,7 +7,17 @@
 //
 
 import UIKit
-import TSMarkdownParser
+
+extension NSAttributedString {
+    func heightForView(withWidth width: CGFloat) -> CGFloat? {
+        let size = CGSize(width: width, height: CGFloat.greatestFiniteMagnitude)
+        let rect = self.boundingRect(with: size,
+                                     options: [.usesLineFragmentOrigin, .usesFontLeading],
+                                     context: nil)
+
+        return rect.height
+    }
+}
 
 extension NSMutableAttributedString {
 
@@ -31,7 +41,7 @@ extension NSMutableAttributedString {
     func setFont(_ font: UIFont, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSFontAttributeName: font
+                NSAttributedStringKey.font: font
             ], range: attributeRange)
         }
     }
@@ -39,28 +49,45 @@ extension NSMutableAttributedString {
     func setFontColor(_ color: UIColor, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSForegroundColorAttributeName: color
+                NSAttributedStringKey.foregroundColor: color
+            ], range: attributeRange)
+        }
+    }
+
+    func setBackgroundColor(_ color: UIColor, range: NSRange? = nil) {
+        if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
+            self.addAttributes([
+                NSAttributedStringKey.backgroundColor: color
             ], range: attributeRange)
         }
     }
 
     func transformMarkdown() -> NSAttributedString {
-        let defaultFontSize = MessageTextFontAttributes.defaultFontSize
-
-        let parser = TSMarkdownParser.standard()
-        parser.defaultAttributes = [NSFontAttributeName: UIFont.systemFont(ofSize: defaultFontSize)]
-        parser.quoteAttributes = [[NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]]
-        parser.strongAttributes = [NSFontAttributeName: UIFont.boldSystemFont(ofSize: defaultFontSize)]
-        parser.emphasisAttributes = [NSFontAttributeName: UIFont.italicSystemFont(ofSize: defaultFontSize)]
-        parser.linkAttributes = [NSForegroundColorAttributeName: UIColor.darkGray]
-
-        let font = UIFont(name: "Courier New", size: defaultFontSize) ?? UIFont.systemFont(ofSize: defaultFontSize)
-        parser.monospaceAttributes = [
-            NSFontAttributeName: font,
-            NSForegroundColorAttributeName: UIColor.red
-        ]
-
-        return parser.attributedString(fromAttributedMarkdownString: self)
+        return MarkdownManager.parser.attributedStringFromAttributedMarkdownString(self)
     }
 
+    func highlightMentions(for message: Message) {
+        message.mentions.forEach {
+            if let username = $0.username {
+                let ranges = string.ranges(of: "@\(username)")
+                for range in ranges {
+                    let range = NSRange(range, in: string)
+                    setBackgroundColor(UIColor.background(for: $0), range: range)
+                    setFontColor(UIColor.font(for: $0), range: range)
+                }
+            }
+        }
+    }
+
+    func highlightChannels(for message: Message) {
+        message.channels.forEach {
+            if let name = $0.name {
+                let ranges = string.ranges(of: "#\(name)")
+                for range in ranges {
+                    let range = NSRange(range, in: string)
+                    setFontColor(.link, range: range)
+                }
+            }
+        }
+    }
 }

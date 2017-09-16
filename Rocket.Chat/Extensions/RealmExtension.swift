@@ -29,12 +29,12 @@ extension Realm {
     static func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
         var backgroundTaskId: UIBackgroundTaskIdentifier?
 
-        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: "chat.rocket.realm.background", expirationHandler: { _ in
+        backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: "chat.rocket.realm.background", expirationHandler: {
             backgroundTaskId = UIBackgroundTaskInvalid
         })
 
         if let backgroundTaskId = backgroundTaskId {
-            DispatchQueue.global(qos: .background).async { _ in
+            DispatchQueue.global(qos: .background).async {
                 guard let realm = self.shared else { return }
 
                 try? realm.write {

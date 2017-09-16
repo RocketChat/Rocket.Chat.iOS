@@ -11,7 +11,7 @@ import RealmSwift
 import SwiftyJSON
 
 class BaseModel: Object {
-    dynamic var identifier: String?
+    @objc dynamic var identifier: String?
 
     override static func primaryKey() -> String? {
         return "identifier"

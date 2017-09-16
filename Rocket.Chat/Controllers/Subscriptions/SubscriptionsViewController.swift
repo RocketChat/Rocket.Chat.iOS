@@ -20,11 +20,7 @@ final class SubscriptionsViewController: BaseViewController {
             buttonCancelSearch.setTitle(localized("global.cancel"), for: .normal)
         }
     }
-    @IBOutlet weak var buttonCancelSearchWidthConstraint: NSLayoutConstraint! {
-        didSet {
-            buttonCancelSearchWidthConstraint.constant = 0
-        }
-    }
+    @IBOutlet weak var buttonCancelSearchWidthConstraint: NSLayoutConstraint!
 
     @IBOutlet weak var textFieldSearch: UITextField! {
         didSet {
@@ -32,7 +28,7 @@ final class SubscriptionsViewController: BaseViewController {
 
             if let placeholder = textFieldSearch.placeholder {
                 let color = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
-                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSForegroundColorAttributeName: color])
+                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSAttributedStringKey.foregroundColor: color])
             }
         }
     }
@@ -101,6 +97,8 @@ final class SubscriptionsViewController: BaseViewController {
     var groupInfomation: [[String: String]]?
     var groupSubscriptions: [[Subscription]]?
 
+    var searchText: String = ""
+
     override func awakeFromNib() {
         super.awakeFromNib()
         subscribeModelChanges()
@@ -123,15 +121,44 @@ final class SubscriptionsViewController: BaseViewController {
     }
 }
 
+// MARK: Side Menu callbacks
+extension SubscriptionsViewController {
+    func willHide() {
+        self.textFieldSearch.resignFirstResponder()
+    }
+
+    func didHide() {
+        self.textFieldSearch.resignFirstResponder()
+    }
+
+    func willReveal() {
+        if searchText.isEmpty {
+            hideCancelSearchButton()
+        } else {
+            showCancelSearchButton()
+        }
+
+        self.textFieldSearch.resignFirstResponder()
+        self.updateData()
+    }
+
+    func didReveal() {
+        self.textFieldSearch.resignFirstResponder()
+    }
+}
+
 extension SubscriptionsViewController {
 
     @IBAction func buttonCancelSearchDidPressed(_ sender: Any) {
         textFieldSearch.resignFirstResponder()
+        textFieldSearch.text = ""
+        searchText = ""
+        searchBy()
     }
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filter("name CONTAINS %@", text)
+        subscriptions = auth.subscriptions.filterBy(name: text)
 
         if text.characters.count == 0 {
             isSearchingLocally = false
@@ -183,6 +210,16 @@ extension SubscriptionsViewController {
         }
     }
 
+    func updateAll() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        subscriptions = auth.subscriptions.sortedByLastSeen()
+    }
+
+    func updateSearched() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        subscriptions = auth.subscriptions.filterBy(name: searchText).sortedByLastSeen()
+    }
+
     func updateData() {
         guard !isSearchingLocally && !isSearchingRemotely else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
@@ -193,9 +230,12 @@ extension SubscriptionsViewController {
     }
 
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        guard !isSearchingLocally && !isSearchingRemotely else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
+        if isSearchingLocally || isSearchingRemotely {
+            updateSearched()
+        } else {
+            updateAll()
+        }
+
         groupSubscription()
 
         updateCurrentUserInformation()
@@ -427,8 +467,16 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
 extension SubscriptionsViewController: UITextFieldDelegate {
 
-    func textFieldDidBeginEditing(_ textField: UITextField) {
+    func showCancelSearchButton() {
         buttonCancelSearchWidthConstraint.constant = defaultButtonCancelSearchWidth
+    }
+
+    func hideCancelSearchButton() {
+        buttonCancelSearchWidthConstraint.constant = 0
+    }
+
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        self.showCancelSearchButton()
 
         UIView.animate(withDuration: 0.1) {
             self.view.layoutIfNeeded()
@@ -436,7 +484,7 @@ extension SubscriptionsViewController: UITextFieldDelegate {
     }
 
     func textFieldDidEndEditing(_ textField: UITextField) {
-        buttonCancelSearchWidthConstraint.constant = 0
+        hideCancelSearchButton()
 
         UIView.animate(withDuration: 0.1) {
             self.view.layoutIfNeeded()
@@ -445,7 +493,7 @@ extension SubscriptionsViewController: UITextFieldDelegate {
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         let currentText = textField.text ?? ""
-        let prospectiveText = (currentText as NSString).replacingCharacters(in: range, with: string)
+        searchText = (currentText as NSString).replacingCharacters(in: range, with: string)
 
         if string == "\n" {
             if currentText.characters.count > 0 {
@@ -455,7 +503,7 @@ extension SubscriptionsViewController: UITextFieldDelegate {
             return false
         }
 
-        searchBy(prospectiveText)
+        searchBy(searchText)
         return true
     }
 
@@ -502,12 +550,12 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
         UIView.animate(withDuration: 0.15, animations: {
             viewUserMenu.frame = newFrame
             self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat(0))
-        }) { (_) in
+        }, completion: { (_) in
             viewUserMenu.removeFromSuperview()
-        }
+        })
     }
 
-    func viewUserDidTap(sender: Any) {
+    @objc func viewUserDidTap(sender: Any) {
         textFieldSearch.resignFirstResponder()
 
         if viewUserMenu != nil {
