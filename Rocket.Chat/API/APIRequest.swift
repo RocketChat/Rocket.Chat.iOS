@@ -15,7 +15,7 @@ protocol APIRequest {
     var query: String { get }
 
     func body() -> Data?
-    func request(for api: API) -> URLRequest?
+    func request(for api: API) -> URLRequest
 }
 
 extension APIRequest {
@@ -31,16 +31,13 @@ extension APIRequest {
         return nil
     }
 
-    func request(for api: API) -> URLRequest? {
-        let urlString = "\(api.host)\(Self.path)\(self.query)"
-        if let url = URL(string: urlString) {
-            var request = URLRequest(url: url)
-            request.httpMethod = Self.method
-            request.httpBody = self.body()
+    func request(for api: API) -> URLRequest {
+        let url = api.host.appendingPathComponent("\(Self.path)\(self.query)")
 
-            return request
-        }
+        var request = URLRequest(url: url)
+        request.httpMethod = Self.method
+        request.httpBody = self.body()
 
-        return nil
+        return request
     }
 }
