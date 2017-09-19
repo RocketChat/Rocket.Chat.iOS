@@ -166,7 +166,7 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     func validate(completion: @escaping RequestCompletion) {
-        API.shared.fetch { (result: InfoResult?) -> Void in
+        API.shared.fetch(InfoRequest()) { result in
             guard let version = result?.version else {
                 return completion(nil, true)
             }

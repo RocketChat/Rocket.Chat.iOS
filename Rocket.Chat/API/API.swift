@@ -17,8 +17,8 @@ class API {
         self.host = host
     }
 
-    func fetch<R>(completion: ((_ result: APIResult<R>?) -> Void)?) {
-        if let request = R.request(for: self) {
+    func fetch<R>(_ request: R, completion: ((_ result: APIResult<R>?) -> Void)?) {
+        if let request = request.request(for: self) {
             let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
                 guard let data = data else { return }
                 let json = try? JSON(data: data)
