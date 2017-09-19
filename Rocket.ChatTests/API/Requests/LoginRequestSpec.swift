@@ -2,7 +2,7 @@
 //  LoginRequest.swift
 //  Rocket.ChatTests
 //
-//  Created by Matheus Martins on 9/19/17.
+//  Created by Matheus Cardoso on 9/19/17.
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 
@@ -24,13 +24,13 @@ class LoginRequestSpec: XCTestCase {
 
     func testProperties() {
         let jsonString = """
-            {
-              "status": "success",
-              "data": {
-                  "authToken": "9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq",
-                  "userId": "aobEdbYhXfu5hkeqG"
-               }
+        {
+            "status": "success",
+            "data": {
+                "authToken": "9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq",
+                "userId": "aobEdbYhXfu5hkeqG"
             }
+        }
         """
 
         let json = JSON(parseJSON: jsonString)

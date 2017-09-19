@@ -172,6 +172,8 @@
 		597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA31E3708B10041C5C5 /* PushManager.swift */; };
 		68D186DF1ED9714F0030EE8C /* MessageURLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */; };
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
+		80A63C4F1F719F9600FE5AC4 /* ChannelInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C4E1F719F9600FE5AC4 /* ChannelInfoRequest.swift */; };
+		80A63C511F719FB300FE5AC4 /* ChannelInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C501F719FB300FE5AC4 /* ChannelInfoRequest.swift */; };
 		925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */; };
 		925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
@@ -396,6 +398,8 @@
 		597ECBA31E3708B10041C5C5 /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushManager.swift; path = Managers/PushManager.swift; sourceTree = "<group>"; };
 		68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageURLSpec.swift; path = Models/MessageURLSpec.swift; sourceTree = "<group>"; };
 		68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_ChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		80A63C4E1F719F9600FE5AC4 /* ChannelInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInfoRequest.swift; sourceTree = "<group>"; };
+		80A63C501F719FB300FE5AC4 /* ChannelInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInfoRequest.swift; sourceTree = "<group>"; };
 		925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TintedTextField.swift; path = Views/Subscriptions/TintedTextField.swift; sourceTree = "<group>"; };
@@ -1007,6 +1011,7 @@
 			children = (
 				D18675E91F70A58B00406FB4 /* InfoRequestSpec.swift */,
 				D18675ED1F716FBC00406FB4 /* LoginRequestSpec.swift */,
+				80A63C501F719FB300FE5AC4 /* ChannelInfoRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1027,6 +1032,7 @@
 			children = (
 				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
 				D18675EB1F716A0D00406FB4 /* LoginRequest.swift */,
+				80A63C4E1F719F9600FE5AC4 /* ChannelInfoRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1644,6 +1650,7 @@
 				41900C271D9FE35400308EF4 /* Attachment.swift in Sources */,
 				412719441E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift in Sources */,
 				41499C911F2A1A7200790EA7 /* TimestampCoordinator.swift in Sources */,
+				80A63C4F1F719F9600FE5AC4 /* ChannelInfoRequest.swift in Sources */,
 				D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */,
 				D1D535F11F70864C006625D2 /* InfoRequest.swift in Sources */,
 				415029BD1E72E0FD009F596C /* ChannelInfoCellProtocol.swift in Sources */,
@@ -1696,6 +1703,7 @@
 				4151807C1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift in Sources */,
 				411119B81F6825C30019854B /* NetworkManagerSpec.swift in Sources */,
 				416296F91F41B42B00BCCEDD /* UploadHelperSpec.swift in Sources */,
+				80A63C511F719FB300FE5AC4 /* ChannelInfoRequest.swift in Sources */,
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
