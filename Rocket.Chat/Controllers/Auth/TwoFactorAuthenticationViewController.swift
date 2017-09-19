@@ -15,6 +15,7 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
 
     var username: String = ""
     var password: String = ""
+    var token: String = ""
 
     @IBOutlet weak var viewFields: UIView! {
         didSet {
@@ -30,6 +31,11 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        textFieldCode.text = token
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -49,7 +55,11 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
             object: nil
         )
 
-        textFieldCode.becomeFirstResponder()
+        if token.isEmpty {
+            textFieldCode.becomeFirstResponder()
+        } else {
+            authenticate()
+        }
     }
 
     func startLoading() {
@@ -67,7 +77,7 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
 
     // MARK: Keyboard Handlers
     override func keyboardWillShow(_ notification: Notification) {
-        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             visibleViewBottomConstraint.constant = keyboardSize.height
         }
     }
