@@ -2,7 +2,7 @@
 //  LoginRequest.swift
 //  Rocket.Chat
 //
-//  Created by Matheus Martins on 9/19/17.
+//  Created by Matheus Cardoso on 9/19/17.
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 //  DOCS: https://rocket.chat/docs/developer-guides/rest-api/authentication/login
