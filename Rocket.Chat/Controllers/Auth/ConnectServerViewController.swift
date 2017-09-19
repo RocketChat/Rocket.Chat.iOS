@@ -121,6 +121,8 @@ final class ConnectServerViewController: BaseViewController {
             text = defaultURL
         }
 
+        API.shared.host = text
+
         guard let url = URL(string: text) else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
         guard let validateURL = url.validateURL() else { return alertInvalidURL() }
@@ -132,7 +134,7 @@ final class ConnectServerViewController: BaseViewController {
 
         serverURL = socketURL
 
-        validate(url: validateURL) { [weak self] (_, error) in
+        validate { [weak self] (_, error) in
             guard !error else {
                 DispatchQueue.main.async {
                     self?.connecting = false
@@ -163,39 +165,27 @@ final class ConnectServerViewController: BaseViewController {
         }
     }
 
-    func validate(url: URL, completion: @escaping RequestCompletion) {
-        let request = URLRequest(url: url)
-        let session = URLSession.shared
-
-        let task = session.dataTask(with: request, completionHandler: { (data, _, _) in
-            if let data = data {
-                guard let json = try? JSON(data: data) else { return completion(nil, true) }
-                Log.debug(json.rawString())
-
-                guard let version = json["version"].string else {
-                    return completion(nil, true)
-                }
-
-                if let minVersion = Bundle.main.object(forInfoDictionaryKey: "RC_MIN_SERVER_VERSION") as? String {
-                    if Semver.lt(version, minVersion) {
-                        let alert = UIAlertController(
-                            title: localized("alert.connection.invalid_version.title"),
-                            message: String(format: localized("alert.connection.invalid_version.message"), version, minVersion),
-                            preferredStyle: .alert
-                        )
-
-                        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-
-                completion(json, false)
-            } else {
-                completion(nil, true)
+    func validate(completion: @escaping RequestCompletion) {
+        API.shared.fetch { (result: InfoResult?) -> Void in
+            guard let version = result?.version else {
+                return completion(nil, true)
             }
-        })
 
-        task.resume()
+            if let minVersion = Bundle.main.object(forInfoDictionaryKey: "RC_MIN_SERVER_VERSION") as? String {
+                if Semver.lt(version, minVersion) {
+                    let alert = UIAlertController(
+                        title: localized("alert.connection.invalid_version.title"),
+                        message: String(format: localized("alert.connection.invalid_version.message"), version, minVersion),
+                        preferredStyle: .alert
+                    )
+
+                    alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+
+            completion(result?.raw, false)
+        }
     }
 
 }
