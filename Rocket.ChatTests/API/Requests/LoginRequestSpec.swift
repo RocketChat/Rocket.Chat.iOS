@@ -12,14 +12,23 @@ import SwiftyJSON
 @testable import Rocket_Chat
 
 class LoginRequestSpec: XCTestCase {
-    func testRequestNotNil() {
-        let request = LoginRequest("username", "password")
-        XCTAssertNotNil(request.request(for: API.shared), "request is not nil")
-    }
+    func testRequest() {
+        let request1 = LoginRequest("testUsername", "testPassword").request(for: API.shared)
+        let expectedURL = API.shared.host.appendingPathComponent(LoginRequest.path)
 
-    func testRequestNil() {
-        let request = LoginRequest("username", "password")
-        XCTAssertNil(request.request(for: API(host: "malformed host")), "request is nil")
+        XCTAssertEqual(request1.url, expectedURL, "url is correct")
+        XCTAssertEqual(request1.httpMethod, "POST", "http method is correct")
+
+        guard let body = request1.httpBody else { return XCTFail("body exists") }
+        guard let json = try? JSON(data: body) else { return XCTFail("body is json") }
+
+        let expectedJSON = JSON(parseJSON:
+            """
+            {"username":"testUsername","password":"testPassword"}
+            """
+        )
+
+        XCTAssertEqual(json, expectedJSON, "body is correct")
     }
 
     func testProperties() {

@@ -121,11 +121,10 @@ final class ConnectServerViewController: BaseViewController {
             text = defaultURL
         }
 
-        API.shared.host = text
-
         guard let url = URL(string: text) else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
-        guard let validateURL = url.validateURL() else { return alertInvalidURL() }
+
+        API.shared.host = url
 
         connecting = true
         textFieldServerURL.alpha = 0.5

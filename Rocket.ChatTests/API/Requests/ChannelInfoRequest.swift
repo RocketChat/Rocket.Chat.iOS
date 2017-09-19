@@ -12,17 +12,18 @@ import SwiftyJSON
 @testable import Rocket_Chat
 
 class ChannelInfoRequestSpec: XCTestCase {
-    func testRequestNotNil() {
-        let request1 = ChannelInfoRequest(roomId: "ByehQjC44FwMeiLbX")
-        XCTAssertNotNil(request1.request(for: API.shared), "request is not nil")
-
-        let request2 = ChannelInfoRequest(roomName: "general")
-        XCTAssertNotNil(request2.request(for: API.shared), "request is not nil")
+    func testRequestWithRoomId() {
+        let request = ChannelInfoRequest(roomId: "ByehQjC44FwMeiLbX").request(for: API.shared)
+        let expectedURL = API.shared.host.appendingPathComponent("\(ChannelInfoRequest.path)?roomId=ByehQjC44FwMeiLbX")
+        XCTAssertEqual(request.url, expectedURL, "url is correct")
+        XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
 
-    func testRequestNil() {
-        let request = ChannelInfoRequest(roomId: "ByehQjC44FwMeiLbX")
-        XCTAssertNil(request.request(for: API(host: "malformed host")), "request is nil")
+    func testRequestWithRoomName() {
+        let request = ChannelInfoRequest(roomName: "testing").request(for: API.shared)
+        let expectedURL = API.shared.host.appendingPathComponent("\(ChannelInfoRequest.path)?roomName=testing")
+        XCTAssertEqual(request.url, expectedURL, "url is correct")
+        XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
 
     func testProperties() {

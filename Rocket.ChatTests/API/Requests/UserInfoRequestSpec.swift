@@ -12,17 +12,18 @@ import SwiftyJSON
 @testable import Rocket_Chat
 
 class UserInfoRequestSpec: XCTestCase {
-    func testRequestNotNil() {
-        let request1 = UserInfoRequest(userId: "nSYqWzZ4GsKTX4dyK")
-        XCTAssertNotNil(request1.request(for: API.shared), "request is not nil")
-
-        let request2 = UserInfoRequest(username: "example")
-        XCTAssertNotNil(request2.request(for: API.shared), "request is not nil")
+    func testRequestWithUserId() {
+        let request = UserInfoRequest(userId: "nSYqWzZ4GsKTX4dyK").request(for: API.shared)
+        let expectedURL = API.shared.host.appendingPathComponent("\(UserInfoRequest.path)?userId=nSYqWzZ4GsKTX4dyK")
+        XCTAssertEqual(request.url, expectedURL, "url is correct")
+        XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
 
-    func testRequestNil() {
-        let request = UserInfoRequest(userId: "nSYqWzZ4GsKTX4dyK")
-        XCTAssertNil(request.request(for: API(host: "malformed host")), "request is nil")
+    func testRequestWithUsername() {
+        let request = UserInfoRequest(username: "example").request(for: API.shared)
+        let expectedURL = API.shared.host.appendingPathComponent("\(UserInfoRequest.path)?username=example")
+        XCTAssertEqual(request.url, expectedURL, "url is correct")
+        XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
 
     func testProperties() {
@@ -52,4 +53,3 @@ class UserInfoRequestSpec: XCTestCase {
         XCTAssertEqual(result.username, "example", "username is correct")
     }
 }
-

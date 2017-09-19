@@ -12,12 +12,11 @@ import SwiftyJSON
 @testable import Rocket_Chat
 
 class InfoRequestSpec: XCTestCase {
-    func testRequestNotNil() {
-        XCTAssertNotNil(InfoRequest().request(for: API.shared), "request is not nil")
-    }
-
-    func testRequestNil() {
-        XCTAssertNil(InfoRequest().request(for: API(host: "malformed host")), "request is nil")
+    func testRequest() {
+        let request1 = InfoRequest().request(for: API.shared)
+        let expectedURL = API.shared.host.appendingPathComponent(InfoRequest.path)
+        XCTAssertEqual(request1.url, expectedURL, "url is correct")
+        XCTAssertEqual(request1.httpMethod, "GET", "http method is correct")
     }
 
     func testProperties() {
