@@ -16,6 +16,7 @@ final class AuthViewController: BaseViewController {
     internal var connecting = false
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
+    var temporary2FACode: String?
 
     @IBOutlet weak var viewFields: UIView! {
         didSet {
@@ -81,6 +82,7 @@ final class AuthViewController: BaseViewController {
             if let controller = segue.destination as? TwoFactorAuthenticationViewController {
                 controller.username = textFieldUsername.text ?? ""
                 controller.password = textFieldPassword.text ?? ""
+                controller.token = temporary2FACode ?? ""
             }
         }
     }
@@ -218,6 +220,7 @@ final class AuthViewController: BaseViewController {
 
             self?.textFieldUsername.text = login?[AppExtensionUsernameKey] as? String
             self?.textFieldPassword.text = login?[AppExtensionPasswordKey] as? String
+            self?.temporary2FACode = login?[AppExtensionTOTPKey] as? String
             self?.authenticateWithUsernameOrEmail()
         }
     }

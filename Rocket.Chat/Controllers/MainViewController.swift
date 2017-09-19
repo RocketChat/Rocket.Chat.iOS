@@ -38,14 +38,7 @@ final class MainViewController: BaseViewController {
         }
 
         if !NetworkManager.shared.isConnected {
-            // Open chat
-            let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
-            let controller = storyboardChat.instantiateInitialViewController()
-            let application = UIApplication.shared
-
-            if let window = application.keyWindow {
-                window.rootViewController = controller
-            }
+            openChat()
         }
     }
 
@@ -68,6 +61,9 @@ final class MainViewController: BaseViewController {
                         self?.labelAuthenticationStatus.isHidden = false
                         self?.buttonConnect.isHidden = false
                         self?.activityIndicator.stopAnimating()
+
+                        self?.openChat()
+
                         return
                     }
 
@@ -84,19 +80,22 @@ final class MainViewController: BaseViewController {
                             PushManager.updateUser(userIdentifier)
                         }
 
-                        // Open chat
-                        let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
-                        let controller = storyboardChat.instantiateInitialViewController()
-                        let application = UIApplication.shared
-
-                        if let window = application.keyWindow {
-                            window.rootViewController = controller
-                        }
+                        self?.openChat()
                     })
                 })
             }
         } else {
             buttonConnect.isEnabled = true
+        }
+    }
+
+    func openChat() {
+        let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
+        let controller = storyboardChat.instantiateInitialViewController()
+        let application = UIApplication.shared
+
+        if let window = application.keyWindow {
+            window.rootViewController = controller
         }
     }
 
