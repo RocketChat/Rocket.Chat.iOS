@@ -13,11 +13,11 @@ import SwiftyJSON
 
 class InfoRequestSpec: XCTestCase {
     func testRequestNotNil() {
-        XCTAssertNotNil(InfoRequest.request(for: API.shared), "request is not nil")
+        XCTAssertNotNil(InfoRequest().request(for: API.shared), "request is not nil")
     }
 
     func testRequestNil() {
-        XCTAssertNil(InfoRequest.request(for: API(host: "malformed host")), "request is nil")
+        XCTAssertNil(InfoRequest().request(for: API(host: "malformed host")), "request is nil")
     }
 
     func testProperties() {
