@@ -177,6 +177,9 @@
 		80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */; };
 		80A63C551F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */; };
 		80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C561F71D2E400FE5AC4 /* APISpec.swift */; };
+		80A63C5A1F71E56A00FE5AC4 /* MemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A63C591F71E56A00FE5AC4 /* MemberCell.xib */; };
+		80A63C5C1F71E7CC00FE5AC4 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C5B1F71E7CC00FE5AC4 /* MemberCell.swift */; };
+		80A63C601F71E9BA00FE5AC4 /* MembersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C5F1F71E9BA00FE5AC4 /* MembersListViewController.swift */; };
 		925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */; };
 		925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
@@ -406,6 +409,9 @@
 		80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequest.swift; sourceTree = "<group>"; };
 		80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C561F71D2E400FE5AC4 /* APISpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISpec.swift; sourceTree = "<group>"; };
+		80A63C591F71E56A00FE5AC4 /* MemberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCell.xib; sourceTree = "<group>"; };
+		80A63C5B1F71E7CC00FE5AC4 /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
+		80A63C5F1F71E9BA00FE5AC4 /* MembersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MembersListViewController.swift; sourceTree = "<group>"; };
 		925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TintedTextField.swift; path = Views/Subscriptions/TintedTextField.swift; sourceTree = "<group>"; };
@@ -477,6 +483,7 @@
 			children = (
 				4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */,
 				925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */,
+				80A63C5F1F71E9BA00FE5AC4 /* MembersListViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -568,6 +575,8 @@
 			children = (
 				4192054A1D52F4E7004EEC5F /* Subscription */,
 				416133351D46CA7400E09DA2 /* Chat */,
+				80A63C591F71E56A00FE5AC4 /* MemberCell.xib */,
+				80A63C5B1F71E7CC00FE5AC4 /* MemberCell.swift */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -1250,6 +1259,7 @@
 				41DF76E81D2C50710028DBF8 /* Main.storyboard in Resources */,
 				41F167EB1DAC4D5500775CCA /* ChatTitleView.xib in Resources */,
 				41FF36071DBEC0BA0074E20A /* ChatMessageVideoView.xib in Resources */,
+				80A63C5A1F71E56A00FE5AC4 /* MemberCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1639,10 +1649,12 @@
 				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,
 				D15C83861F70991F001AB155 /* APIResult.swift in Sources */,
+				80A63C601F71E9BA00FE5AC4 /* MembersListViewController.swift in Sources */,
 				4180204F1E718E370012A092 /* ChannelInfoViewController.swift in Sources */,
 				4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */,
 				415DC7F61F67F5D30039FB4F /* NetworkManager.swift in Sources */,
 				41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */,
+				80A63C5C1F71E7CC00FE5AC4 /* MemberCell.swift in Sources */,
 				41EE157E1E05BED600754D45 /* ChatControllerAutocomplete.swift in Sources */,
 				80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */,
 				4162E1531D651A8800AAAE49 /* UserManager.swift in Sources */,

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A360a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8cV-un-sd9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8cV-un-sd9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,7 +19,7 @@
                         <viewControllerLayoutGuide type="bottom" id="AmO-ZE-7Kw"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OVX-LA-RMF">
-                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbt-TF-z7U">
@@ -256,6 +256,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="BZN-WA-DFR" id="fMf-lW-s3T"/>
+                        <segue destination="i6r-e5-U1B" kind="show" identifier="toMembersList" id="Dj3-vx-Ggd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Svt-7Y-y44" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -267,7 +268,7 @@
             <objects>
                 <navigationController id="19H-wD-eac" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="uhj-qe-ylL">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
@@ -315,7 +316,7 @@
                 <navigationController storyboardIdentifier="Chat" automaticallyAdjustsScrollViewInsets="NO" id="ZWT-yJ-dk4" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="vuM-gG-ey4">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -334,6 +335,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JFD-eY-gTm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="612" y="46"/>
+        </scene>
+        <!--Members List View Controller-->
+        <scene sceneID="fGa-f1-0c5">
+            <objects>
+                <viewController id="i6r-e5-U1B" customClass="MembersListViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FWi-Id-3dj"/>
+                        <viewControllerLayoutGuide type="bottom" id="083-vv-Y5u"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Dua-YL-gS7">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="hz2-84-IvC">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="i6r-e5-U1B" id="DOK-CK-vpP"/>
+                                    <outlet property="delegate" destination="i6r-e5-U1B" id="hp6-1F-QBX"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="hz2-84-IvC" secondAttribute="trailing" id="KJP-z3-zeD"/>
+                            <constraint firstItem="hz2-84-IvC" firstAttribute="leading" secondItem="Dua-YL-gS7" secondAttribute="leading" id="WWj-Zo-x5X"/>
+                            <constraint firstItem="hz2-84-IvC" firstAttribute="top" secondItem="FWi-Id-3dj" secondAttribute="bottom" id="Y5b-x4-IAS"/>
+                            <constraint firstItem="083-vv-Y5u" firstAttribute="top" secondItem="hz2-84-IvC" secondAttribute="bottom" id="aKY-wB-Osk"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="membersTableView" destination="hz2-84-IvC" id="29I-J5-lyC"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Jc2-qE-lsW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4138" y="636"/>
         </scene>
     </scenes>
     <resources>

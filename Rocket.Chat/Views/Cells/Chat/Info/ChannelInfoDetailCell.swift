@@ -10,8 +10,16 @@ import UIKit
 
 struct ChannelInfoDetailCellData: ChannelInfoCellDataProtocol {
     let cellType = ChannelInfoDetailCell.self
-    var title: String?
-    var detail: String?
+    let title: String
+    let detail: String
+
+    let action: (() -> Void)?
+
+    init(title: String, detail: String = "", action: (() -> Void)? = nil) {
+        self.title = title
+        self.detail = detail
+        self.action = action
+    }
 }
 
 class ChannelInfoDetailCell: UITableViewCell, ChannelInfoCellProtocol {
