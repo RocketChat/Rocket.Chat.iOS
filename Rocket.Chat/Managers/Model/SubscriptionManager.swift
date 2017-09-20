@@ -164,6 +164,25 @@ struct SubscriptionManager {
         }
     }
 
+    static func subscribeTypingEvent(_ subscription: Subscription, completion: @escaping (String?, Bool) -> Void) {
+        let eventName = "\(subscription.rid)/typing"
+        let request = [
+            "msg": "sub",
+            "name": "stream-notify-room",
+            "params": [eventName, false]
+            ] as [String : Any]
+
+        SocketManager.subscribe(request, eventName: eventName) { response in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+
+            let msg = response.result["fields"]["args"]
+            let userNameTyping = msg[0].string
+            let flag = (msg[1].int ?? 0) > 0
+
+            completion(userNameTyping, flag)
+        }
+    }
+    
     // MARK: Search
 
     static func spotlight(_ text: String, completion: @escaping MessageCompletionObjectsList<Subscription>) {

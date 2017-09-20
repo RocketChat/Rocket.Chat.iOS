@@ -357,6 +357,21 @@ final class ChatViewController: SLKTextViewController {
         updateMessagesQueryNotificationBlock()
 
         MessageManager.changes(subscription)
+        typingEvent()
+    }
+
+    fileprivate func typingEvent() {
+        typingIndicatorView?.interval = 0
+
+        SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
+            guard let username = username else { return }
+
+            if flag {
+                self?.typingIndicatorView?.insertUsername(username)
+            } else {
+                self?.typingIndicatorView?.removeUsername(username)
+            }
+        }
     }
 
     fileprivate func updateMessagesQueryNotificationBlock() {
