@@ -14,7 +14,7 @@ typealias ChannelInfoResult = APIResult<ChannelInfoRequest>
 class ChannelInfoRequest: APIRequest {
     static let path = "/api/v1/channels.info"
 
-    let query: String
+    let query: String?
 
     let roomId: String?
     let roomName: String?
@@ -22,13 +22,13 @@ class ChannelInfoRequest: APIRequest {
     init(roomId: String) {
         self.roomId = roomId
         self.roomName = nil
-        self.query = "?roomId=\(roomId)"
+        self.query = "roomId=\(roomId)"
     }
 
     init(roomName: String) {
         self.roomName = roomName
         self.roomId = nil
-        self.query = "?roomName=\(roomName)"
+        self.query = "roomName=\(roomName)"
     }
 }
 

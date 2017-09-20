@@ -14,7 +14,7 @@ typealias UserInfoResult = APIResult<UserInfoRequest>
 class UserInfoRequest: APIRequest {
     static let path = "/api/v1/users.info"
 
-    let query: String
+    let query: String?
 
     let userId: String?
     let username: String?
@@ -22,13 +22,13 @@ class UserInfoRequest: APIRequest {
     init(userId: String) {
         self.userId = userId
         self.username = nil
-        self.query = "?userId=\(userId)"
+        self.query = "userId=\(userId)"
     }
 
     init(username: String) {
         self.username = username
         self.userId = nil
-        self.query = "?username=\(username)"
+        self.query = "username=\(username)"
     }
 }
 

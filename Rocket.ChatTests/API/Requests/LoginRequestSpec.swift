@@ -13,13 +13,16 @@ import SwiftyJSON
 
 class LoginRequestSpec: XCTestCase {
     func testRequest() {
-        let request1 = LoginRequest("testUsername", "testPassword").request(for: API.shared)
+        guard let request = LoginRequest("testUsername", "testPassword").request(for: API.shared) else {
+            return XCTFail("request is not nil")
+        }
+
         let expectedURL = API.shared.host.appendingPathComponent(LoginRequest.path)
 
-        XCTAssertEqual(request1.url, expectedURL, "url is correct")
-        XCTAssertEqual(request1.httpMethod, "POST", "http method is correct")
+        XCTAssertEqual(request.url, expectedURL, "url is correct")
+        XCTAssertEqual(request.httpMethod, "POST", "http method is correct")
 
-        guard let body = request1.httpBody else { return XCTFail("body exists") }
+        guard let body = request.httpBody else { return XCTFail("body exists") }
         guard let json = try? JSON(data: body) else { return XCTFail("body is json") }
 
         let expectedJSON = JSON(parseJSON:

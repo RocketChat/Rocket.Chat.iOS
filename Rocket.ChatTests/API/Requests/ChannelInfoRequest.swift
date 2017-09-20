@@ -13,16 +13,26 @@ import SwiftyJSON
 
 class ChannelInfoRequestSpec: XCTestCase {
     func testRequestWithRoomId() {
-        let request = ChannelInfoRequest(roomId: "ByehQjC44FwMeiLbX").request(for: API.shared)
-        let expectedURL = API.shared.host.appendingPathComponent("\(ChannelInfoRequest.path)?roomId=ByehQjC44FwMeiLbX")
-        XCTAssertEqual(request.url, expectedURL, "url is correct")
+        guard let request = ChannelInfoRequest(roomId: "ByehQjC44FwMeiLbX").request(for: API.shared) else {
+            return XCTFail("request is not nil")
+        }
+        let url = API.shared.host.appendingPathComponent(ChannelInfoRequest.path)
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        urlComponents?.query = "roomId=ByehQjC44FwMeiLbX"
+
+        XCTAssertEqual(request.url, urlComponents?.url, "url is correct")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
 
     func testRequestWithRoomName() {
-        let request = ChannelInfoRequest(roomName: "testing").request(for: API.shared)
-        let expectedURL = API.shared.host.appendingPathComponent("\(ChannelInfoRequest.path)?roomName=testing")
-        XCTAssertEqual(request.url, expectedURL, "url is correct")
+        guard let request = ChannelInfoRequest(roomName: "testing").request(for: API.shared) else {
+            return XCTFail("request is not nil")
+        }
+        let url = API.shared.host.appendingPathComponent(ChannelInfoRequest.path)
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        urlComponents?.query = "roomName=testing"
+
+        XCTAssertEqual(request.url, urlComponents?.url, "url is correct")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
 
