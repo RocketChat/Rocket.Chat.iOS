@@ -13,16 +13,26 @@ import SwiftyJSON
 
 class UserInfoRequestSpec: XCTestCase {
     func testRequestWithUserId() {
-        let request = UserInfoRequest(userId: "nSYqWzZ4GsKTX4dyK").request(for: API.shared)
-        let expectedURL = API.shared.host.appendingPathComponent("\(UserInfoRequest.path)?userId=nSYqWzZ4GsKTX4dyK")
-        XCTAssertEqual(request.url, expectedURL, "url is correct")
+        guard let request = UserInfoRequest(userId: "nSYqWzZ4GsKTX4dyK").request(for: API.shared) else {
+            return XCTFail("request is not nil")
+        }
+        let url = API.shared.host.appendingPathComponent(UserInfoRequest.path)
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        urlComponents?.query = "userId=nSYqWzZ4GsKTX4dyK"
+
+        XCTAssertEqual(request.url, urlComponents?.url, "url is correct")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
 
     func testRequestWithUsername() {
-        let request = UserInfoRequest(username: "example").request(for: API.shared)
-        let expectedURL = API.shared.host.appendingPathComponent("\(UserInfoRequest.path)?username=example")
-        XCTAssertEqual(request.url, expectedURL, "url is correct")
+        guard let request = UserInfoRequest(username: "example").request(for: API.shared) else {
+            return XCTFail("request is not nil")
+        }
+        let url = API.shared.host.appendingPathComponent(UserInfoRequest.path)
+        var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
+        urlComponents?.query = "username=example"
+
+        XCTAssertEqual(request.url, urlComponents?.url, "url is correct")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
 

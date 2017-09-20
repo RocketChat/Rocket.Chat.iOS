@@ -15,8 +15,8 @@ class InfoRequestSpec: XCTestCase {
     func testRequest() {
         let request1 = InfoRequest().request(for: API.shared)
         let expectedURL = API.shared.host.appendingPathComponent(InfoRequest.path)
-        XCTAssertEqual(request1.url, expectedURL, "url is correct")
-        XCTAssertEqual(request1.httpMethod, "GET", "http method is correct")
+        XCTAssertEqual(request1?.url, expectedURL, "url is correct")
+        XCTAssertEqual(request1?.httpMethod, "GET", "http method is correct")
     }
 
     func testProperties() {

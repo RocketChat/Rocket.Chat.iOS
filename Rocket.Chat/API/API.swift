@@ -13,6 +13,8 @@ class API {
     static let shared: API! = API(host: "https://demo.rocket.chat")
 
     var host: URL
+    var authToken: String?
+    var userId: String?
 
     convenience init?(host: String) {
         guard let url = URL(string: host) else {
@@ -27,7 +29,11 @@ class API {
     }
 
     func fetch<R>(_ request: R, completion: ((_ result: APIResult<R>?) -> Void)?) {
-        let request = request.request(for: self)
+        guard let request = request.request(for: self) else {
+            completion?(nil)
+            return
+        }
+
         let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
             guard let data = data else { return }
             let json = try? JSON(data: data)
