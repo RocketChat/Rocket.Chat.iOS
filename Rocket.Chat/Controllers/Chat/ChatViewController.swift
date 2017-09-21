@@ -289,12 +289,11 @@ final class ChatViewController: SLKTextViewController {
 
             SubscriptionManager.sendTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
-                    realm.delete(message)
-
-                    let message = Message()
+                    message.temporary = false
                     message.map(response.result["result"], realm: realm)
+                    realm.add(message, update: true)
+
                     MessageTextCacheManager.shared.update(for: message)
-                    realm.add(message)
                 })
             }
         }
@@ -374,9 +373,8 @@ final class ChatViewController: SLKTextViewController {
 
                     self.messages.append(contentsOf: newMessages)
                     self.appendMessages(messages: newMessages, completion: {
-                        self.scrollToBottom()
+                        self.markAsRead()
                     })
-                    self.markAsRead()
                 }
 
                 if modifications.count == 0 {
