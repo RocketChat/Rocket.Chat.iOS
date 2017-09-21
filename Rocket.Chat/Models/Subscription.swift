@@ -59,15 +59,11 @@ class Subscription: BaseModel {
 extension Subscription {
 
     func displayName() -> String {
-        if type == .group {
-            return name
-        }
-
         guard let settings = AuthSettingsManager.settings else {
             return name
         }
 
-        if type == .channel {
+        if type != .directMessage {
             return settings.allowSpecialCharsOnRoomNames && fname != "" ? fname : name
         }
 
