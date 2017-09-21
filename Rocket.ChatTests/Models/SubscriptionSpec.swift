@@ -152,4 +152,36 @@ class SubscriptionSpec: XCTestCase {
         XCTAssertNotEqual(group.displayName(), "GROUP", "Subscription.displayName() will always return name for groups")
     }
 
+    func testSubscriptionDisplayChannelNameWithSpecialChars() {
+        let settings = AuthSettings()
+        settings.allowSpecialCharsOnRoomNames = true
+
+        AuthSettingsManager.shared.internalSettings = settings
+
+        // Channels
+        let channel = Subscription()
+        channel.name = "special-channel"
+        channel.fname = "special channel"
+        channel.privateType = "c"
+
+        XCTAssertEqual(channel.displayName(), "special channel", "Subscription.displayName() will return fname for channels when 'allowSpecialCharsOnRoomNames' is enabled")
+        XCTAssertNotEqual(channel.displayName(), "special-channel", "Subscription.displayName() will return fname for channels when 'allowSpecialCharsOnRoomNames' is enabled")
+    }
+
+    func testSubscriptionDisplayChannelNameWithoutSpecialChars() {
+        let settings = AuthSettings()
+        settings.allowSpecialCharsOnRoomNames = false
+
+        AuthSettingsManager.shared.internalSettings = settings
+
+        // Channels
+        let channel = Subscription()
+        channel.name = "special-channel"
+        channel.fname = "special channel"
+        channel.privateType = "c"
+
+        XCTAssertEqual(channel.displayName(), "special-channel", "Subscription.displayName() will return name for channels when 'allowSpecialCharsOnRoomNames' is disabled")
+        XCTAssertNotEqual(channel.displayName(), "special channel", "Subscription.displayName() will return name for channels when 'allowSpecialCharsOnRoomNames' is disabled")
+    }
+
 }
