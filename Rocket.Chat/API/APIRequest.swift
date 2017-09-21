@@ -8,6 +8,20 @@
 
 import Foundation
 
+enum APIRequestOptions {
+    case paginated(count: Int, offset: Int)
+    case none
+
+    var query: String? {
+        switch self {
+        case .paginated(let count, let offset):
+            return "count=\(count)&offset=\(offset)"
+        default:
+            return nil
+        }
+    }
+}
+
 protocol APIRequest {
     static var path: String { get }
     static var method: String { get }
@@ -15,7 +29,7 @@ protocol APIRequest {
     var query: String? { get }
 
     func body() -> Data?
-    func request(for api: API) -> URLRequest?
+    func request(for api: API, options: APIRequestOptions) -> URLRequest?
 }
 
 extension APIRequest {
@@ -31,10 +45,13 @@ extension APIRequest {
         return nil
     }
 
-    func request(for api: API) -> URLRequest? {
+    func request(for api: API, options: APIRequestOptions = .none) -> URLRequest? {
         var components = URLComponents(url: api.host, resolvingAgainstBaseURL: false)
         components?.path = Self.path
         components?.query = query
+        if let optionsQuery = options.query {
+            components?.query = "\(query ?? "")&\(optionsQuery)"
+        }
 
         guard let url = components?.url else {
             return nil

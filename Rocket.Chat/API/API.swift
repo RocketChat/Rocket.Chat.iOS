@@ -28,8 +28,8 @@ class API {
         self.host = host
     }
 
-    func fetch<R>(_ request: R, completion: ((_ result: APIResult<R>?) -> Void)?) {
-        guard let request = request.request(for: self) else {
+    func fetch<R>(_ request: R, options: APIRequestOptions = .none, completion: ((_ result: APIResult<R>?) -> Void)?) {
+        guard let request = request.request(for: self, options: options) else {
             completion?(nil)
             return
         }
