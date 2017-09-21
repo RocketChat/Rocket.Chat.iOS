@@ -22,6 +22,11 @@ class MembersListViewData {
         return "Showing: \(showing), Online: \(online), Total: \(total) users"
     }
 
+    var showMoreButtonTitle = "SHOW MORE"
+    var isShowingAllMembers: Bool {
+        return showing >= total
+    }
+
     var membersPages: [[API.User]] = []
     var members: FlattenCollection<[[API.User]]> {
         return membersPages.joined()
@@ -31,15 +36,22 @@ class MembersListViewData {
         return members[members.index(members.startIndex, offsetBy: index)]
     }
 
+    private var isLoadingMoreMembers = false
     func loadMoreMembers(completion: (() -> Void)? = nil) {
+        if isLoadingMoreMembers { return }
+
         if let subscription = subscription {
-            API.shared.fetch(ChannelMembersRequest(roomId: subscription.rid), options: .paginated(count: pageSize, offset: currentPage)) { result in
+            isLoadingMoreMembers = true
+            API.shared.fetch(ChannelMembersRequest(roomId: subscription.rid), options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
                 self.showing += result?.count ?? 0
                 self.total = result?.total ?? 0
                 if let members = result?.members {
                     self.membersPages.append(members.flatMap { $0 })
                 }
 
+                self.currentPage += 1
+
+                self.isLoadingMoreMembers = false
                 completion?()
             }
         }
@@ -48,8 +60,19 @@ class MembersListViewData {
 
 class MembersListViewController: UIViewController {
     @IBOutlet weak var membersTableView: UITableView!
+    var buttonCell: ButtonCell!
 
     var data = MembersListViewData()
+
+    func loadMoreMembers() {
+        self.buttonCell.button.isEnabled = false
+        data.loadMoreMembers {
+            DispatchQueue.main.async {
+                self.buttonCell.button.isEnabled = true
+                self.membersTableView.reloadData()
+            }
+        }
+    }
 }
 
 // MARK: ViewController
@@ -59,16 +82,23 @@ extension MembersListViewController {
             nibName: "MemberCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: MemberCell.identifier)
+
+        membersTableView.register(UINib(
+            nibName: "ButtonCell",
+            bundle: Bundle.main
+        ), forCellReuseIdentifier: ButtonCell.identifier)
+
+        if let cell = membersTableView.dequeueReusableCell(withIdentifier: ButtonCell.identifier) as? ButtonCell {
+            cell.button.setTitle(data.showMoreButtonTitle, for: UIControlState.normal)
+            cell.press = self.loadMoreMembers
+            self.buttonCell = cell
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        data.loadMoreMembers {
-            DispatchQueue.main.async {
-                self.membersTableView.reloadData()
-            }
-        }
+        loadMoreMembers()
     }
 }
 
@@ -76,15 +106,34 @@ extension MembersListViewController {
 
 extension MembersListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.members.count
+        return data.members.count + (data.isShowingAllMembers ? 0 : 1)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+
+        if indexPath.row == data.members.count {
+            return self.buttonCell
+        }
+
         if let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier) as? MemberCell {
             cell.data = MemberCellData(member: data.member(at: indexPath.row))
             return cell
         }
 
         return UITableViewCell()
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+}
+
+extension MembersListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
