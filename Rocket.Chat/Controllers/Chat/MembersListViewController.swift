@@ -14,6 +14,14 @@ class MembersListViewData {
     let pageSize = 100
     var currentPage = 0
 
+    var showing: Int = 0
+    var online: Int = 0
+    var total: Int = 0
+
+    var description: String {
+        return "Showing: \(showing), Online: \(online), Total: \(total) users"
+    }
+
     var membersPages: [[API.User]] = []
     var members: FlattenCollection<[[API.User]]> {
         return membersPages.joined()
@@ -26,6 +34,8 @@ class MembersListViewData {
     func loadMoreMembers(completion: (() -> Void)? = nil) {
         if let subscription = subscription {
             API.shared.fetch(ChannelMembersRequest(roomId: subscription.rid), options: .paginated(count: pageSize, offset: currentPage)) { result in
+                self.showing += result?.count ?? 0
+                self.total = result?.total ?? 0
                 if let members = result?.members {
                     self.membersPages.append(members.flatMap { $0 })
                 }
