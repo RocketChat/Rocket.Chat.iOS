@@ -52,6 +52,7 @@ class ServersViewController: UIViewController {
 
         guard
             let indexPath = tableView.indexPathForRow(at: point),
+            indexPath.row != DatabaseManager.selectedIndex,
             indexPath.row < servers.count
         else {
             return
@@ -68,11 +69,9 @@ class ServersViewController: UIViewController {
 
             let alert = UIAlertController(title: nil, message: message, preferredStyle: .actionSheet)
 
-            if indexPath.row != DatabaseManager.selectedIndex {
-                alert.addAction(UIAlertAction(title: localized("servers.action.connect"), style: .default, handler: { _ in
-                    self.selectServer(at: indexPath)
-                }))
-            }
+            alert.addAction(UIAlertAction(title: localized("servers.action.connect"), style: .default, handler: { _ in
+                self.selectServer(at: indexPath)
+            }))
 
             alert.addAction(UIAlertAction(title: localized("servers.action.remove"), style: .destructive, handler: { _ in
                 self.removeServer(at: indexPath)
