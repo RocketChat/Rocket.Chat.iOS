@@ -31,7 +31,7 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - GTMOAuth2 (1.1.4):
+  - GTMOAuth2 (1.1.5):
     - GTMSessionFetcher (~> 1.1)
   - GTMSessionFetcher (1.1.11):
     - GTMSessionFetcher/Full (= 1.1.11)
@@ -39,13 +39,13 @@ PODS:
   - GTMSessionFetcher/Full (1.1.11):
     - GTMSessionFetcher/Core (= 1.1.11)
   - MobilePlayer (1.2.0)
-  - RCMarkdownParser (3.0.2)
-  - ReachabilitySwift (3)
-  - Realm (2.10.0):
-    - Realm/Headers (= 2.10.0)
-  - Realm/Headers (2.10.0)
-  - RealmSwift (2.10.0):
-    - Realm (= 2.10.0)
+  - RCMarkdownParser (3.0.3)
+  - ReachabilitySwift (4.0-beta1)
+  - Realm (2.10.1):
+    - Realm/Headers (= 2.10.1)
+  - Realm/Headers (2.10.1)
+  - RealmSwift (2.10.1):
+    - Realm (= 2.10.1)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -96,7 +96,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   ReachabilitySwift:
-    :commit: 64f043787090610169c5069b70c8c58a5bfeb491
+    :commit: 6451cd109ef2e88a0763387de44668e17cb1b49e
     :git: https://github.com/ashleymills/Reachability.swift.git
   semver:
     :commit: a8ad3f3c1b168dfa6a8f1f7de2e5cae59239d9bf
@@ -127,13 +127,13 @@ SPEC CHECKSUMS:
   Google: 98da4b1a60ed0beb80a290387a28333406a1eb90
   GoogleSignIn: 8c599fc10d25b2af86a3f82fd9631e863f2b1400
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GTMOAuth2: 7fc9c10f5c745f4d9850419ea88889fe3baa6b7d
+  GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  RCMarkdownParser: a3f2de30108a6090c6e98784445789447c73b03f
-  ReachabilitySwift: f5b9bb30a0777fac8f09ce8b067e32faeb29bb64
-  Realm: 98b3a25643cf6b3e07d2b99fb43fe0eb9c801dec
-  RealmSwift: 34073ad3a31232bbaf7c0db898c037940284cba2
+  RCMarkdownParser: 062a5f014134dffe7cf1b0d0dc34c3abb4b0f203
+  ReachabilitySwift: fa4416f5356466392a733d21b41873ebe052bf40
+  Realm: fc7a317a5c2c9ba91f5f235ede4e2ea76e9eba0c
+  RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   semver: df3895a55a097c7a819a80e7375e95b29e136157
   SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
