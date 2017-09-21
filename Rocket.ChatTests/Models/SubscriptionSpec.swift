@@ -166,6 +166,15 @@ class SubscriptionSpec: XCTestCase {
 
         XCTAssertEqual(channel.displayName(), "special channel", "Subscription.displayName() will return fname for channels when 'allowSpecialCharsOnRoomNames' is enabled")
         XCTAssertNotEqual(channel.displayName(), "special-channel", "Subscription.displayName() will return fname for channels when 'allowSpecialCharsOnRoomNames' is enabled")
+
+        // Groups and Private Groups
+        let group = Subscription()
+        group.name = "special-group"
+        group.fname = "special group"
+        group.privateType = "p"
+
+        XCTAssertEqual(group.displayName(), "special group", "Subscription.displayName() will return fname for groups when 'allowSpecialCharsOnRoomNames' is enabled")
+        XCTAssertNotEqual(group.displayName(), "special-group", "Subscription.displayName() will return fname for groups when 'allowSpecialCharsOnRoomNames' is enabled")
     }
 
     func testSubscriptionDisplayChannelNameWithoutSpecialChars() {
@@ -182,6 +191,15 @@ class SubscriptionSpec: XCTestCase {
 
         XCTAssertEqual(channel.displayName(), "special-channel", "Subscription.displayName() will return name for channels when 'allowSpecialCharsOnRoomNames' is disabled")
         XCTAssertNotEqual(channel.displayName(), "special channel", "Subscription.displayName() will return name for channels when 'allowSpecialCharsOnRoomNames' is disabled")
+
+        // Groups and Private Groups
+        let group = Subscription()
+        group.name = "special-group"
+        group.fname = "special group"
+        group.privateType = "p"
+
+        XCTAssertEqual(group.displayName(), "special-group", "Subscription.displayName() will return name for groups when 'allowSpecialCharsOnRoomNames' is disabled")
+        XCTAssertNotEqual(group.displayName(), "special group", "Subscription.displayName() will return name for groups when 'allowSpecialCharsOnRoomNames' is disabled")
     }
 
 }
