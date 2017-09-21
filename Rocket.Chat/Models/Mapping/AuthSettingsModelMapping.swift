@@ -32,6 +32,8 @@ extension AuthSettings: ModelMappeable {
 
         self.useUserRealName = objectForKey(object: values, key: "UI_Use_Real_Name")?.bool ?? false
 
+        self.allowSpecialCharsOnRoomNames = objectForKey(object: values, key: "UI_Allow_room_names_with_special_chars")?.bool ?? false
+
         self.favoriteRooms = objectForKey(object: values, key: "Favorite_Rooms")?.bool ?? true
 
         self.isUsernameEmailAuthenticationEnabled = objectForKey(object: values, key: "Accounts_ShowFormLogin")?.bool ?? true
