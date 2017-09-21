@@ -260,8 +260,15 @@ final class ChatViewController: SLKTextViewController {
         scrollToBottom(true)
     }
 
-    // MARK: Message
+    override func textViewDidChange(_ textView: UITextView) {
+        if textView.text.characters.count > 0 {
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
+        } else {
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        }
+    }
 
+    // MARK: Message
     fileprivate func sendMessage() {
         guard let messageText = textView.text, messageText.characters.count > 0 else { return }
 
@@ -286,6 +293,7 @@ final class ChatViewController: SLKTextViewController {
         if let message = message {
             textView.text = ""
             rightButton.isEnabled = true
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
 
             SubscriptionManager.sendTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
