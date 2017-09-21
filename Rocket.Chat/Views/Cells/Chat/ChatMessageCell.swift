@@ -188,7 +188,7 @@ final class ChatMessageCell: UICollectionViewCell {
         }
 
         avatarView.imageURL = URL(string: message.avatar)
-        avatarView.user = message.user
+        avatarView.username = message.user?.username
 
         if message.alias.characters.count > 0 {
             labelUsername.text = message.alias
