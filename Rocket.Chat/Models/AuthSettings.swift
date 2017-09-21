@@ -18,8 +18,9 @@ final class AuthSettings: BaseModel {
     @objc dynamic var serverName: String?
     @objc dynamic var serverFaviconURL: String?
 
-    // User
+    // Layout: User Interface
     @objc dynamic var useUserRealName = false
+    @objc dynamic var allowSpecialCharsOnRoomNames = false
 
     // Rooms
     @objc dynamic var favoriteRooms = true
