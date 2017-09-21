@@ -8,24 +8,38 @@
 
 import UIKit
 
-class MembersListViewController: UIViewController {
-    @IBOutlet weak var membersTableView: UITableView!
-
+class MembersListViewData {
     var subscription: Subscription?
-    var usernames: [String] = []
 
-    func updateUsers() {
+    let pageSize = 100
+    var currentPage = 0
+
+    var membersPages: [[API.User]] = []
+    var members: FlattenCollection<[[API.User]]> {
+        return membersPages.joined()
+    }
+
+    func member(at index: Int) -> API.User {
+        return members[members.index(members.startIndex, offsetBy: index)]
+    }
+
+    func loadMoreMembers(completion: (() -> Void)? = nil) {
         if let subscription = subscription {
-            API.shared.fetch(ChannelInfoRequest(roomId: subscription.rid)) { result in
-                if let usernames = result?.usernames {
-                    self.usernames = usernames
-                    DispatchQueue.main.async {
-                        self.membersTableView.reloadData()
-                    }
+            API.shared.fetch(ChannelMembersRequest(roomId: subscription.rid), options: .paginated(count: pageSize, offset: currentPage)) { result in
+                if let members = result?.members {
+                    self.membersPages.append(members.flatMap { $0 })
                 }
+
+                completion?()
             }
         }
     }
+}
+
+class MembersListViewController: UIViewController {
+    @IBOutlet weak var membersTableView: UITableView!
+
+    var data = MembersListViewData()
 }
 
 // MARK: ViewController
@@ -39,7 +53,12 @@ extension MembersListViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateUsers()
+
+        data.loadMoreMembers {
+            DispatchQueue.main.async {
+                self.membersTableView.reloadData()
+            }
+        }
     }
 }
 
@@ -47,12 +66,12 @@ extension MembersListViewController {
 
 extension MembersListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return usernames.count
+        return data.members.count
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier) as? MemberCell {
-            cell.nameLabel.text = usernames[indexPath.row]
+            cell.data = MemberCellData(member: data.member(at: indexPath.row))
             return cell
         }
 
