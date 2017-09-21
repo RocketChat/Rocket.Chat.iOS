@@ -17,7 +17,7 @@ class ChatDirectMessageHeaderCell: UICollectionViewCell {
         didSet {
             guard let user = subscription?.directMessageUser else { return }
             labelUser.text = user.displayName()
-            avatarView.user = user
+            avatarView.username = user.username
 
             let startText = localized("chat.dm.start_conversation")
             labelStartConversation.text = String(format: startText, user.displayName())
@@ -47,7 +47,7 @@ class ChatDirectMessageHeaderCell: UICollectionViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        avatarView.user = nil
+        avatarView.username = nil
         labelUser.text = ""
         labelStartConversation.text = ""
     }

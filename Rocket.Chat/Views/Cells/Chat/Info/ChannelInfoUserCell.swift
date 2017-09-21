@@ -22,7 +22,7 @@ class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol {
         didSet {
             labelTitle.text = data?.user?.username
             labelSubtitle.text = data?.user?.name
-            avatarView.user = data?.user
+            avatarView.username = data?.user?.username
         }
     }
 

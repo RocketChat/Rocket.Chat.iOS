@@ -15,42 +15,43 @@
             <rect key="frame" x="0.0" y="0.0" width="253" height="53"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gpp-Mo-P08" id="JEZ-6W-A0m">
-                <rect key="frame" x="0.0" y="0.0" width="253" height="52.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="253" height="53"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S39-gJ-qtV" userLabel="StatusView">
-                        <rect key="frame" x="8" y="18" width="16" height="16"/>
+                        <rect key="frame" x="8" y="22.5" width="8" height="8"/>
                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="16" id="Sxo-VE-pM9"/>
-                            <constraint firstAttribute="height" constant="16" id="Vlv-vi-P9M"/>
+                            <constraint firstAttribute="width" constant="8" id="Sxo-VE-pM9"/>
+                            <constraint firstAttribute="height" constant="8" id="Vlv-vi-P9M"/>
                         </constraints>
                     </view>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l2q-bf-FrK" userLabel="AvatarView">
-                        <rect key="frame" x="29" y="6" width="40" height="40"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="40" id="CcB-bS-ygn"/>
-                            <constraint firstAttribute="height" constant="40" id="rOe-BN-Bmz"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQw-Lj-ju1" userLabel="NameLabel">
-                        <rect key="frame" x="77" y="16" width="42" height="21"/>
+                        <rect key="frame" x="61" y="16" width="42" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCs-d6-xj4" userLabel="AvatarView">
+                        <rect key="frame" x="20" y="6.5" width="40" height="40"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="iJa-9U-ERY"/>
+                            <constraint firstAttribute="height" constant="40" id="shJ-kj-c50"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="l2q-bf-FrK" firstAttribute="leading" secondItem="S39-gJ-qtV" secondAttribute="trailing" constant="5" id="495-6A-jld"/>
+                    <constraint firstItem="QCs-d6-xj4" firstAttribute="leading" secondItem="S39-gJ-qtV" secondAttribute="trailing" constant="4" id="495-6A-jld"/>
+                    <constraint firstItem="QCs-d6-xj4" firstAttribute="centerY" secondItem="JEZ-6W-A0m" secondAttribute="centerY" id="Jom-X3-SXJ"/>
                     <constraint firstItem="vQw-Lj-ju1" firstAttribute="centerY" secondItem="JEZ-6W-A0m" secondAttribute="centerY" id="MKA-F5-GI6"/>
                     <constraint firstItem="S39-gJ-qtV" firstAttribute="centerY" secondItem="JEZ-6W-A0m" secondAttribute="centerY" id="VEo-wQ-7CC"/>
                     <constraint firstItem="S39-gJ-qtV" firstAttribute="leading" secondItem="JEZ-6W-A0m" secondAttribute="leading" constant="8" id="eRP-Ki-FiI"/>
-                    <constraint firstItem="vQw-Lj-ju1" firstAttribute="leading" secondItem="l2q-bf-FrK" secondAttribute="trailing" constant="8" id="eZD-nV-aQF"/>
-                    <constraint firstItem="l2q-bf-FrK" firstAttribute="centerY" secondItem="JEZ-6W-A0m" secondAttribute="centerY" id="mmW-4p-T69"/>
+                    <constraint firstItem="vQw-Lj-ju1" firstAttribute="leading" secondItem="QCs-d6-xj4" secondAttribute="trailing" constant="1" id="eZD-nV-aQF"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="avatarView" destination="l2q-bf-FrK" id="3Z7-XO-zWE"/>
+                <outlet property="avatarViewContainer" destination="QCs-d6-xj4" id="EZe-g6-4fQ"/>
                 <outlet property="nameLabel" destination="vQw-Lj-ju1" id="vV9-SJ-Evs"/>
                 <outlet property="statusView" destination="S39-gJ-qtV" id="sy7-7C-SCX"/>
             </connections>
