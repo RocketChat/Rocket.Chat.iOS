@@ -87,7 +87,7 @@ class ChannelInfoViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let membersList = segue.destination as? MembersListViewController {
-            membersList.subscription = self.subscription
+            membersList.data.subscription = self.subscription
         }
     }
 
