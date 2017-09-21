@@ -11,7 +11,7 @@ import RealmSwift
 
 struct MessageManager {
     static let initialHistorySize = 30
-    static let laterHistorySize = 50
+    static let laterHistorySize = 60
 }
 
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
