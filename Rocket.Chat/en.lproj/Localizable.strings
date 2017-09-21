@@ -39,6 +39,8 @@
 
 // Servers
 "servers.add_new_team" = "Add new Team";
+"servers.action.connect" = "Connect";
+"servers.action.remove" = "Remove team";
 
 // User Menu
 "user_menu.online" = "Online";
