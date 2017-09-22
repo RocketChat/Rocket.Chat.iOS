@@ -12,30 +12,18 @@ import ReachabilitySwift
 class NetworkManager {
 
     static let shared = NetworkManager()
-
-    var isConnected = false
     var reachability: Reachability?
 
-    init() {
-        if let reachability = Reachability() {
-            self.reachability = reachability
-
-            reachability.whenReachable = { reachability in
-                self.isConnected = true
-            }
-
-            reachability.whenUnreachable = { reachability in
-                self.isConnected = false
-            }
-
-            do {
-                try reachability.startNotifier()
-            } catch {
-                Log.debug("Unable to start notifier")
-            }
-        } else {
-            Log.debug("Unable to start Reachability()")
+    static var isConnected: Bool {
+        if self.shared.reachability != nil {
+            self.shared.reachability = Reachability()
         }
+
+        return self.shared.reachability?.connection != .none
+    }
+
+    func start() {
+        reachability = Reachability()
     }
 
 }

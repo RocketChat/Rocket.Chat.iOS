@@ -12,7 +12,9 @@ import XCTest
 class NetworkManagerSpec: XCTestCase {
 
     func testReachbilityNotNil() {
-        let manager = NetworkManager()
+        let manager = NetworkManager.shared
+        manager.start()
+
         XCTAssertNotNil(manager.reachability, "reachability is not nil after init")
     }
 
