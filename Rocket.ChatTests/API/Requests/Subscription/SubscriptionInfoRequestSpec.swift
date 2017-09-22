@@ -1,5 +1,5 @@
 //
-//  ChannelInfoRequest.swift
+//  SubscriptionInfoRequestSpec.swift
 //  Rocket.ChatTests
 //
 //  Created by Matheus Cardoso on 9/19/17.
@@ -11,12 +11,13 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class ChannelInfoRequestSpec: XCTestCase {
+class SubscriptionInfoRequestSpec: XCTestCase {
     func testRequestWithRoomId() {
-        guard let request = ChannelInfoRequest(roomId: "ByehQjC44FwMeiLbX").request(for: API.shared) else {
+        let _request = SubscriptionInfoRequest(roomId: "ByehQjC44FwMeiLbX")
+        guard let request = _request.request(for: API.shared) else {
             return XCTFail("request is not nil")
         }
-        let url = API.shared.host.appendingPathComponent(ChannelInfoRequest.path)
+        let url = API.shared.host.appendingPathComponent(_request.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomId=ByehQjC44FwMeiLbX"
 
@@ -25,10 +26,11 @@ class ChannelInfoRequestSpec: XCTestCase {
     }
 
     func testRequestWithRoomName() {
-        guard let request = ChannelInfoRequest(roomName: "testing").request(for: API.shared) else {
+        let _request = SubscriptionInfoRequest(roomName: "testing")
+        guard let request = _request.request(for: API.shared) else {
             return XCTFail("request is not nil")
         }
-        let url = API.shared.host.appendingPathComponent(ChannelInfoRequest.path)
+        let url = API.shared.host.appendingPathComponent(_request.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomName=testing"
 
@@ -60,7 +62,7 @@ class ChannelInfoRequestSpec: XCTestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = ChannelInfoResult(raw: json)
+        let result = SubscriptionInfoResult(raw: json)
 
         XCTAssertEqual(result.channel, json["channel"])
         XCTAssertEqual(result.usernames ?? [], ["testing", "testing1", "testing2"])
