@@ -51,9 +51,11 @@ class SubscriptionMembersRequest: APIRequest {
 }
 
 extension APIResult where T == SubscriptionMembersRequest {
-    var members: [API.User?]? {
+    var members: [User?]? {
         return raw?["members"].arrayValue.map {
-            return API.User(json: $0)
+            let user = User()
+            user.map($0, realm: nil)
+            return user
         }
     }
 

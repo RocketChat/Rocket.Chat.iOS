@@ -28,6 +28,8 @@ class User: BaseModel {
         get { return UserStatus(rawValue: privateStatus) ?? UserStatus.offline }
         set { privateStatus = newValue.rawValue }
     }
+
+    var utcOffset: Double?
 }
 
 extension User {

@@ -27,12 +27,12 @@ class MembersListViewData {
         return showing >= total
     }
 
-    var membersPages: [[API.User]] = []
-    var members: FlattenCollection<[[API.User]]> {
+    var membersPages: [[User]] = []
+    var members: FlattenCollection<[[User]]> {
         return membersPages.joined()
     }
 
-    func member(at index: Int) -> API.User {
+    func member(at index: Int) -> User {
         return members[members.index(members.startIndex, offsetBy: index)]
     }
 
