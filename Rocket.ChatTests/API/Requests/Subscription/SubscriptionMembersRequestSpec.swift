@@ -1,5 +1,5 @@
 //
-//  ChannelMembersRequestSpec.swift
+//  SubscriptionMembersRequestSpec.swift
 //  Rocket.ChatTests
 //
 //  Created by Matheus Cardoso on 9/21/17.
@@ -11,12 +11,13 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class ChannelMembersRequestSpec: XCTestCase {
+class SubscriptionMembersRequestSpec: XCTestCase {
     func testRequestWithRoomId() {
-        guard let request = ChannelMembersRequest(roomId: "ByehQjC44FwMeiLbX").request(for: API.shared, options: .paginated(count: 20, offset: 100)) else {
+        let _request = SubscriptionMembersRequest(roomId: "ByehQjC44FwMeiLbX")
+        guard let request = _request.request(for: API.shared, options: .paginated(count: 20, offset: 100)) else {
             return XCTFail("request is not nil")
         }
-        let url = API.shared.host.appendingPathComponent(ChannelMembersRequest.path)
+        let url = API.shared.host.appendingPathComponent(_request.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomId=ByehQjC44FwMeiLbX&count=20&offset=100"
 
@@ -25,10 +26,11 @@ class ChannelMembersRequestSpec: XCTestCase {
     }
 
     func testRequestWithRoomName() {
-        guard let request = ChannelMembersRequest(roomName: "testing").request(for: API.shared, options: .paginated(count: 20, offset: 100)) else {
+        let _request = SubscriptionMembersRequest(roomName: "testing")
+        guard let request = _request.request(for: API.shared, options: .paginated(count: 20, offset: 100)) else {
             return XCTFail("request is not nil")
         }
-        let url = API.shared.host.appendingPathComponent(ChannelMembersRequest.path)
+        let url = API.shared.host.appendingPathComponent(_request.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomName=testing&count=20&offset=100"
 
@@ -64,7 +66,7 @@ class ChannelMembersRequestSpec: XCTestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = ChannelMembersResult(raw: json)
+        let result = SubscriptionMembersResult(raw: json)
 
         XCTAssertEqual(result.members?.count, json["members"].count, "members is correct")
         XCTAssertEqual(result.count, 2, "count is correct")

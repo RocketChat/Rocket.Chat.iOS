@@ -13,8 +13,9 @@ import SwiftyJSON
 
 class InfoRequestSpec: XCTestCase {
     func testRequest() {
-        let request1 = InfoRequest().request(for: API.shared)
-        let expectedURL = API.shared.host.appendingPathComponent(InfoRequest.path)
+        let _request = InfoRequest()
+        let request1 = _request.request(for: API.shared)
+        let expectedURL = API.shared.host.appendingPathComponent(_request.path)
         XCTAssertEqual(request1?.url, expectedURL, "url is correct")
         XCTAssertEqual(request1?.httpMethod, "GET", "http method is correct")
     }
