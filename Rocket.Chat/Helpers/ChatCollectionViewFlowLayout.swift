@@ -122,15 +122,8 @@ class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
             // Continue only if the new content is higher then the frame
             // If it is not the case the collection view can display all cells on one screen
             if collectionViewContentHeight + offset > collectionViewFrameHeight {
-
-                if willInsertItemsToTop {
-                    CATransaction.begin()
-                    CATransaction.setDisableActions(true)
-                    isInsertingItemsToTop = true
-
-                } else if willInsertItemsToBottom {
-                    isInsertingItemsToBottom = true
-                }
+                CATransaction.begin()
+                CATransaction.setDisableActions(true)
             }
         }
     }
@@ -143,31 +136,16 @@ class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
         // Get collection view as non-optional object
         guard let collectionView = self.collectionView else { return }
 
-        if isInsertingItemsToTop {
+        // Calculate new content offset
+        let newContentOffset = CGPoint(
+            x: collectionView.contentOffset.x,
+            y: collectionView.contentOffset.y + offset
+        )
 
-            // Calculate new content offset
-            let newContentOffset = CGPoint(
-                x: collectionView.contentOffset.x,
-                y: collectionView.contentOffset.y + offset
-            )
+        // Set new content offset without animation
+        collectionView.contentOffset = newContentOffset
 
-            // Set new content offset without animation
-            collectionView.contentOffset = newContentOffset
-
-            // Commit/end transaction
-            CATransaction.commit()
-
-        } else if isInsertingItemsToBottom {
-
-            // Calculate new content offset
-            // Always scroll to bottom
-            let newContentOffset = CGPoint(
-                x: collectionView.contentOffset.x,
-                y: collectionView.contentSize.height + offset - collectionView.frame.size.height + collectionView.contentInset.bottom
-            )
-
-            // Set new content offset with animation
-            collectionView.setContentOffset(newContentOffset, animated: true)
-        }
+        // Commit/end transaction
+        CATransaction.commit()
     }
 }

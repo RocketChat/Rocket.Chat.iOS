@@ -125,6 +125,23 @@ final class ConnectServerViewController: BaseViewController {
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
         guard let validateURL = url.validateURL() else { return alertInvalidURL() }
 
+        if let servers = DatabaseManager.servers {
+            let sameServerIndex = servers.index(where: {
+                if let stringServerUrl = $0[ServerPersistKeys.serverURL],
+                    let serverUrl = URL(string: stringServerUrl) {
+
+                    return serverUrl == socketURL
+                } else {
+                    return false
+                }
+            })
+
+            if let sameServerIndex = sameServerIndex {
+                MainChatViewController.shared?.changeSelectedServer(index: sameServerIndex)
+                return
+            }
+        }
+
         connecting = true
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
