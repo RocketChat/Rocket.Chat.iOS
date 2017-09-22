@@ -93,6 +93,8 @@ extension MembersListViewController {
             cell.press = self.loadMoreMembers
             self.buttonCell = cell
         }
+
+        self.title = localized("memberslist.title")
     }
 
     override func viewWillAppear(_ animated: Bool) {
