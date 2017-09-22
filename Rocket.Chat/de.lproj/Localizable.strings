@@ -106,3 +106,6 @@
 "chat.info.item.members" = "Teilnehmer";
 "chat.info.item.pinned" = "Angeheftet";
 "chat.info.item.starred" = "Favorisiert";
+
+// Members List
+"memberslist.title" = "Mitglieder";

@@ -336,10 +336,10 @@
             </objects>
             <point key="canvasLocation" x="612" y="46"/>
         </scene>
-        <!--Members List View Controller-->
+        <!--Members-->
         <scene sceneID="fGa-f1-0c5">
             <objects>
-                <viewController id="i6r-e5-U1B" customClass="MembersListViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Members" id="i6r-e5-U1B" customClass="MembersListViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="FWi-Id-3dj"/>
                         <viewControllerLayoutGuide type="bottom" id="083-vv-Y5u"/>

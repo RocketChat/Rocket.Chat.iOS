@@ -106,3 +106,6 @@
 "chat.info.item.members" = "Members";
 "chat.info.item.pinned" = "Pinned";
 "chat.info.item.starred" = "Starred";
+
+// Members List
+"memberslist.title" = "Members";
