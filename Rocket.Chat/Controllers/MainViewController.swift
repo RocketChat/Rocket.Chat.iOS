@@ -37,15 +37,8 @@ final class MainViewController: BaseViewController {
             performSegue(withIdentifier: "Auth", sender: nil)
         }
 
-        if !NetworkManager.shared.isConnected {
-            // Open chat
-            let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
-            let controller = storyboardChat.instantiateInitialViewController()
-            let application = UIApplication.shared
-
-            if let window = application.keyWindow {
-                window.rootViewController = controller
-            }
+        if !NetworkManager.isConnected {
+            openChat()
         }
     }
 
@@ -62,12 +55,15 @@ final class MainViewController: BaseViewController {
             buttonConnect.isHidden = true
             activityIndicator.startAnimating()
 
-            if NetworkManager.shared.isConnected {
+            if NetworkManager.isConnected {
                 AuthManager.resume(auth, completion: { [weak self] response in
                     guard !response.isError() else {
                         self?.labelAuthenticationStatus.isHidden = false
                         self?.buttonConnect.isHidden = false
                         self?.activityIndicator.stopAnimating()
+
+                        self?.openChat()
+
                         return
                     }
 
@@ -84,19 +80,22 @@ final class MainViewController: BaseViewController {
                             PushManager.updateUser(userIdentifier)
                         }
 
-                        // Open chat
-                        let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
-                        let controller = storyboardChat.instantiateInitialViewController()
-                        let application = UIApplication.shared
-
-                        if let window = application.keyWindow {
-                            window.rootViewController = controller
-                        }
+                        self?.openChat()
                     })
                 })
             }
         } else {
             buttonConnect.isEnabled = true
+        }
+    }
+
+    func openChat() {
+        let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
+        let controller = storyboardChat.instantiateInitialViewController()
+        let application = UIApplication.shared
+
+        if let window = application.keyWindow {
+            window.rootViewController = controller
         }
     }
 
