@@ -42,7 +42,7 @@ class MembersListViewData {
 
         if let subscription = subscription {
             isLoadingMoreMembers = true
-            API.shared.fetch(ChannelMembersRequest(roomId: subscription.rid), options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
+            API.shared.fetch(SubscriptionMembersRequest(roomId: subscription.rid, type: subscription.type), options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
                 self.showing += result?.count ?? 0
                 self.total = result?.total ?? 0
                 if let members = result?.members {

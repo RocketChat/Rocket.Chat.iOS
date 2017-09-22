@@ -23,8 +23,8 @@ enum APIRequestOptions {
 }
 
 protocol APIRequest {
-    static var path: String { get }
-    static var method: String { get }
+    var path: String { get }
+    var method: String { get }
 
     var query: String? { get }
 
@@ -33,7 +33,7 @@ protocol APIRequest {
 }
 
 extension APIRequest {
-    static var method: String {
+ var method: String {
         return "GET"
     }
 
@@ -47,7 +47,7 @@ extension APIRequest {
 
     func request(for api: API, options: APIRequestOptions = .none) -> URLRequest? {
         var components = URLComponents(url: api.host, resolvingAgainstBaseURL: false)
-        components?.path = Self.path
+        components?.path = path
         components?.query = query
         if let optionsQuery = options.query {
             components?.query = "\(query ?? "")&\(optionsQuery)"
@@ -58,7 +58,7 @@ extension APIRequest {
         }
 
         var request = URLRequest(url: url)
-        request.httpMethod = Self.method
+        request.httpMethod = method
         request.httpBody = self.body()
 
         if let token = api.authToken {
