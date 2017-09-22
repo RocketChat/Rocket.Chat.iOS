@@ -30,6 +30,17 @@ final class MainViewController: BaseViewController {
         AuthManager.recoverAuthIfNeeded()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        DatabaseManager.cleanInvalidDatabases()
+        DatabaseManager.changeDatabaseInstance()
+
+        labelAuthenticationStatus.isHidden = true
+        buttonConnect.isHidden = true
+        activityIndicator.startAnimating()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
@@ -72,17 +83,6 @@ final class MainViewController: BaseViewController {
                 window.rootViewController = controller
             }
         }
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        DatabaseManager.cleanInvalidDatabases()
-        DatabaseManager.changeDatabaseInstance()
-
-        labelAuthenticationStatus.isHidden = true
-        buttonConnect.isHidden = true
-        activityIndicator.startAnimating()
     }
 
     func openChat() {
