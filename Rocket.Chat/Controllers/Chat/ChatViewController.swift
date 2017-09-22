@@ -50,6 +50,10 @@ final class ChatViewController: SLKTextViewController {
         didSet {
             updateSubscriptionInfo()
             markAsRead()
+
+            if let oldValue = oldValue {
+                unsubscribe(for: oldValue)
+            }
         }
     }
 
@@ -314,6 +318,11 @@ final class ChatViewController: SLKTextViewController {
         SubscriptionManager.markAsRead(subscription) { _ in
             // Nothing, for now
         }
+    }
+
+    internal func unsubscribe(for subscription: Subscription) {
+        SocketManager.unsubscribe(eventName: subscription.rid)
+        SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
     }
 
     internal func updateSubscriptionInfo() {

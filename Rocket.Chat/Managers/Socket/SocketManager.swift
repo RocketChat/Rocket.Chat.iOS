@@ -70,9 +70,15 @@ class SocketManager {
     // MARK: Messages
 
     static func send(_ object: [String: Any], completion: MessageCompletion? = nil) {
-        let identifier = String.random(50)
         var json = JSON(object)
-        json["id"] = JSON(identifier)
+
+        let identifier: String
+        if let jsonId = json["id"].string {
+            identifier = jsonId
+        } else {
+            identifier = String.random(50)
+            json["id"] = JSON(identifier)
+        }
 
         if let raw = json.rawString() {
             Log.debug("Socket will send message: \(raw)")
@@ -94,6 +100,21 @@ class SocketManager {
         } else {
             self.send(object, completion: completion)
             sharedInstance.events[eventName] = [completion]
+        }
+    }
+
+    static func unsubscribe(eventName: String, completion: MessageCompletion? = nil) {
+        let request = [
+            "msg": "unsub",
+            "id": eventName
+        ] as [String : Any]
+
+        send(request) { response in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+
+            sharedInstance.events.removeValue(forKey: eventName)
+
+            completion?(response)
         }
     }
 
