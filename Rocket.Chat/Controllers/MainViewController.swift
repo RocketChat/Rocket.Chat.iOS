@@ -37,7 +37,7 @@ final class MainViewController: BaseViewController {
             performSegue(withIdentifier: "Auth", sender: nil)
         }
 
-        if !NetworkManager.shared.isConnected {
+        if !NetworkManager.isConnected {
             openChat()
         }
     }
@@ -55,7 +55,7 @@ final class MainViewController: BaseViewController {
             buttonConnect.isHidden = true
             activityIndicator.startAnimating()
 
-            if NetworkManager.shared.isConnected {
+            if NetworkManager.isConnected {
                 AuthManager.resume(auth, completion: { [weak self] response in
                     guard !response.isError() else {
                         self?.labelAuthenticationStatus.isHidden = false
