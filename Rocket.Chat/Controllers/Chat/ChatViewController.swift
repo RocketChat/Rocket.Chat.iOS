@@ -40,6 +40,7 @@ final class ChatViewController: SLKTextViewController {
     var closeSidebarAfterSubscriptionUpdate = false
 
     var isRequestingHistory = false
+    var isAppendingMessages = false
 
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
@@ -365,6 +366,10 @@ final class ChatViewController: SLKTextViewController {
             case .initial: break
             case .update(_, _, let insertions, let modifications):
                 if insertions.count > 0 {
+                    if insertions.count > 1 && self.isRequestingHistory {
+                        return
+                    }
+
                     var newMessages: [Message] = []
                     for insertion in insertions {
                         let newMessage = Message(value: self.messagesQuery[insertion])
@@ -426,6 +431,7 @@ final class ChatViewController: SLKTextViewController {
                 DispatchQueue.main.async {
                     self?.activityIndicator.stopAnimating()
                     self?.isRequestingHistory = false
+                    self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
 
                     if messages.count == 0 {
                         self?.dataController.loadedAllMessages = true
@@ -477,7 +483,10 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func appendMessages(messages: [Message], completion: VoidCompletion?) {
+        guard !isAppendingMessages else { return }
         guard let collectionView = self.collectionView else { return }
+
+        isAppendingMessages = true
 
         var tempMessages: [Message] = []
         for message in messages {
@@ -513,6 +522,7 @@ final class ChatViewController: SLKTextViewController {
             // No new data? Don't update it then
             if objs.count == 0 {
                 DispatchQueue.main.async {
+                    self.isAppendingMessages = false
                     completion?()
                 }
 
@@ -525,6 +535,7 @@ final class ChatViewController: SLKTextViewController {
                     collectionView.insertItems(at: indexPaths)
                     collectionView.deleteItems(at: removedIndexPaths)
                 }, completion: { _ in
+                    self.isAppendingMessages = false
                     completion?()
                 })
             }
