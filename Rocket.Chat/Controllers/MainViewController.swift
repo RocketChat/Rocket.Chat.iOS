@@ -33,12 +33,44 @@ final class MainViewController: BaseViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-        if AuthManager.isAuthenticated() == nil {
-            performSegue(withIdentifier: "Auth", sender: nil)
-        }
+        if let auth = AuthManager.isAuthenticated() {
+            AuthManager.persistAuthInformation(auth)
 
-        if !NetworkManager.isConnected {
-            openChat()
+            AuthManager.resume(auth, completion: { [weak self] response in
+                guard !response.isError() else {
+                    self?.labelAuthenticationStatus.isHidden = false
+                    self?.buttonConnect.isHidden = false
+                    self?.activityIndicator.stopAnimating()
+
+                    self?.openChat()
+
+                    return
+                }
+
+                SubscriptionManager.updateSubscriptions(auth, completion: { _ in
+                    AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
+
+                    })
+
+                    UserManager.userDataChanges()
+                    UserManager.changes()
+                    SubscriptionManager.changes(auth)
+
+                    if let userIdentifier = auth.userId {
+                        PushManager.updateUser(userIdentifier)
+                    }
+
+                    self?.openChat()
+                })
+            })
+        } else {
+            let storyboardAuth = UIStoryboard(name: "Auth", bundle: Bundle.main)
+            let controller = storyboardAuth.instantiateInitialViewController()
+            let application = UIApplication.shared
+
+            if let window = application.keyWindow {
+                window.rootViewController = controller
+            }
         }
     }
 
@@ -48,45 +80,9 @@ final class MainViewController: BaseViewController {
         DatabaseManager.cleanInvalidDatabases()
         DatabaseManager.changeDatabaseInstance()
 
-        if let auth = AuthManager.isAuthenticated() {
-            AuthManager.persistAuthInformation(auth)
-
-            labelAuthenticationStatus.isHidden = true
-            buttonConnect.isHidden = true
-            activityIndicator.startAnimating()
-
-            if NetworkManager.isConnected {
-                AuthManager.resume(auth, completion: { [weak self] response in
-                    guard !response.isError() else {
-                        self?.labelAuthenticationStatus.isHidden = false
-                        self?.buttonConnect.isHidden = false
-                        self?.activityIndicator.stopAnimating()
-
-                        self?.openChat()
-
-                        return
-                    }
-
-                    SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                        AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
-
-                        })
-
-                        UserManager.userDataChanges()
-                        UserManager.changes()
-                        SubscriptionManager.changes(auth)
-
-                        if let userIdentifier = auth.userId {
-                            PushManager.updateUser(userIdentifier)
-                        }
-
-                        self?.openChat()
-                    })
-                })
-            }
-        } else {
-            buttonConnect.isEnabled = true
-        }
+        labelAuthenticationStatus.isHidden = true
+        buttonConnect.isHidden = true
+        activityIndicator.startAnimating()
     }
 
     func openChat() {
