@@ -171,6 +171,7 @@ struct SubscriptionManager {
         let request = [
             "msg": "sub",
             "name": "stream-notify-room",
+            "id": eventName,
             "params": [eventName, false]
         ] as [String : Any]
 
