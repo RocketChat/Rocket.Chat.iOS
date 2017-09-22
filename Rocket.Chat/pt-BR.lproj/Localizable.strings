@@ -27,6 +27,8 @@
 
 // Auth
 "auth.connect.button_connect" = "Conectar";
+"servers.action.connect" = "Conectar";
+"servers.action.remove" = "Remover time";
 
 // Subscriptions
 "subscriptions.search" = "Busca";
