@@ -9,24 +9,23 @@
 import UIKit
 
 struct MemberCellData {
-    let member: API.User
+    let member: User
 
     var nameText: String {
-        return "\(member.name) (UTC \(member.utcOffset))"
+        let utcText = member.utcOffset != nil ? "(UTC \(member.utcOffset ?? 0))" : ""
+        return "\(member.name ?? "") \(utcText)"
     }
 
     var statusColor: UIColor {
         switch member.status {
-        case "online":
+        case .online:
             return .green
-        case "away":
+        case .away:
             return .yellow
-        case "busy":
+        case .busy:
             return .red
-        case "offline":
+        case .offline:
             return .black
-        default:
-            return .white
         }
     }
 }
