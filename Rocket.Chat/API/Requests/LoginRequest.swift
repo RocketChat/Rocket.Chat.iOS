@@ -12,8 +12,8 @@ import SwiftyJSON
 typealias LoginResult = APIResult<LoginRequest>
 
 class LoginRequest: APIRequest {
-    static let method: String = "POST"
-    static let path = "/api/v1/login"
+    let method: String = "POST"
+    let path = "/api/v1/login"
 
     let username: String
     let password: String

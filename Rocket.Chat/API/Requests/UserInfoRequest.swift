@@ -12,7 +12,7 @@ import SwiftyJSON
 typealias UserInfoResult = APIResult<UserInfoRequest>
 
 class UserInfoRequest: APIRequest {
-    static let path = "/api/v1/users.info"
+    let path = "/api/v1/users.info"
 
     let query: String?
 
