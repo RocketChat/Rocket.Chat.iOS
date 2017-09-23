@@ -30,62 +30,58 @@ final class MainViewController: BaseViewController {
         AuthManager.recoverAuthIfNeeded()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        if AuthManager.isAuthenticated() == nil {
-            performSegue(withIdentifier: "Auth", sender: nil)
-        }
-
-        if !NetworkManager.isConnected {
-            openChat()
-        }
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         DatabaseManager.cleanInvalidDatabases()
         DatabaseManager.changeDatabaseInstance()
 
+        labelAuthenticationStatus.isHidden = true
+        buttonConnect.isHidden = true
+        activityIndicator.startAnimating()
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+
         if let auth = AuthManager.isAuthenticated() {
             AuthManager.persistAuthInformation(auth)
 
-            labelAuthenticationStatus.isHidden = true
-            buttonConnect.isHidden = true
-            activityIndicator.startAnimating()
+            AuthManager.resume(auth, completion: { [weak self] response in
+                guard !response.isError() else {
+                    self?.labelAuthenticationStatus.isHidden = false
+                    self?.buttonConnect.isHidden = false
+                    self?.activityIndicator.stopAnimating()
 
-            if NetworkManager.isConnected {
-                AuthManager.resume(auth, completion: { [weak self] response in
-                    guard !response.isError() else {
-                        self?.labelAuthenticationStatus.isHidden = false
-                        self?.buttonConnect.isHidden = false
-                        self?.activityIndicator.stopAnimating()
+                    self?.openChat()
 
-                        self?.openChat()
+                    return
+                }
 
-                        return
+                SubscriptionManager.updateSubscriptions(auth, completion: { _ in
+                    AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
+
+                    })
+
+                    UserManager.userDataChanges()
+                    UserManager.changes()
+                    SubscriptionManager.changes(auth)
+
+                    if let userIdentifier = auth.userId {
+                        PushManager.updateUser(userIdentifier)
                     }
 
-                    SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                        AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
-
-                        })
-
-                        UserManager.userDataChanges()
-                        UserManager.changes()
-                        SubscriptionManager.changes(auth)
-
-                        if let userIdentifier = auth.userId {
-                            PushManager.updateUser(userIdentifier)
-                        }
-
-                        self?.openChat()
-                    })
+                    self?.openChat()
                 })
-            }
+            })
         } else {
-            buttonConnect.isEnabled = true
+            let storyboardAuth = UIStoryboard(name: "Auth", bundle: Bundle.main)
+            let controller = storyboardAuth.instantiateInitialViewController()
+            let application = UIApplication.shared
+
+            if let window = application.keyWindow {
+                window.rootViewController = controller
+            }
         }
     }
 

@@ -34,6 +34,8 @@ class StringExtensionSpec: XCTestCase {
         XCTAssert(string.sha256() == hash, "String SHA-256 cryptographic is correct")
     }
 
+    // MARK: Range
+
     func testRangesOf() {
         let string = "this word is in position 5 and this word is in position 36"
         let ranges = string.ranges(of: "word")
@@ -44,4 +46,5 @@ class StringExtensionSpec: XCTestCase {
         XCTAssert(string.distance(from: ranges[0].lowerBound, to: ranges[0].upperBound) == 4, "will word 1 have correct size")
         XCTAssert(string.distance(from: ranges[1].lowerBound, to: ranges[1].upperBound) == 4, "will word 2 have correct size")
     }
+
 }
