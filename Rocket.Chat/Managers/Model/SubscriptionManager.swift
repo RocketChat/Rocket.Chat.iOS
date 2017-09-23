@@ -80,10 +80,8 @@ struct SubscriptionManager {
 
                     auth.lastSubscriptionFetch = Date.serverDate
                     realm.add(subscriptions, update: true)
-
-                    DispatchQueue.main.async {
-                        completion(response)
-                    }
+                }, completion: {
+                    completion(response)
                 })
             }
         }
