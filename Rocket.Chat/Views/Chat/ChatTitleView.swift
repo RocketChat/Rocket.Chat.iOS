@@ -8,18 +8,19 @@
 
 import UIKit
 
+protocol ChatTitleViewProtocol: class {
+    func titleViewButtonChannelDidPressed()
+    func titleViewButtonMoreDidPressed()
+}
+
 final class ChatTitleView: UIView {
 
-    @IBOutlet weak var icon: UIImageView!
-    @IBOutlet weak var labelTitle: UILabel! {
-        didSet {
-            labelTitle.textColor = .RCDarkGray()
-        }
-    }
+    weak var delegate: ChatTitleViewProtocol?
 
-    @IBOutlet weak var imageArrowDown: UIImageView! {
+    @IBOutlet weak var icon: UIImageView!
+    @IBOutlet weak var buttonTitle: UIButton! {
         didSet {
-            imageArrowDown.image = imageArrowDown.image?.imageWithTint(.RCGray())
+            buttonTitle.titleLabel?.textColor = .RCDarkGray()
         }
     }
 
@@ -29,7 +30,7 @@ final class ChatTitleView: UIView {
 
     var subscription: Subscription! {
         didSet {
-            labelTitle.text = subscription.displayName()
+            buttonTitle.setTitle(subscription.displayName(), for: .normal)
 
             switch subscription.type {
             case .channel:
@@ -56,6 +57,16 @@ final class ChatTitleView: UIView {
                 break
             }
         }
+    }
+
+    // MARK: IBAction
+
+    @IBAction func buttonChannelDidPressed(_ sender: Any) {
+        delegate?.titleViewButtonChannelDidPressed()
+    }
+
+    @IBAction func buttonMoreDidPressed(_ sender: Any) {
+        delegate?.titleViewButtonMoreDidPressed()
     }
 
 }

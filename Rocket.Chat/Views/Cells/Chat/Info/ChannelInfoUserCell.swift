@@ -20,8 +20,8 @@ class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol {
     static let defaultHeight: Float = 80
     var data: DataType? {
         didSet {
-            labelTitle.text = data?.user?.username
-            labelSubtitle.text = data?.user?.name
+            labelTitle.text = data?.user?.name
+            labelSubtitle.text = data?.user?.username
             avatarView.user = data?.user
         }
     }

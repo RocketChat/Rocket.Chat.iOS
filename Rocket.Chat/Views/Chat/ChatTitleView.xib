@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -22,45 +23,53 @@
                         <constraint firstAttribute="width" constant="15" id="WZ7-8K-dCC"/>
                     </constraints>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MyI-mP-Niy">
-                    <rect key="frame" x="17" y="11" width="40" height="21"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIT-TU-fEF">
+                    <rect key="frame" x="329" y="0.0" width="46" height="44"/>
+                    <color key="backgroundColor" red="0.20000000000000001" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="21" id="mAU-RX-JAf"/>
+                        <constraint firstAttribute="width" constant="46" id="lEp-ud-1rK"/>
                     </constraints>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                    <state key="normal" image="More"/>
+                    <connections>
+                        <action selector="buttonMoreDidPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="cqx-HB-Toz"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0T-MO-VVm">
+                    <rect key="frame" x="17" y="0.0" width="312" height="44"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow Down" translatesAutoresizingMaskIntoConstraints="NO" id="Mdo-Zh-6jT">
-                    <rect key="frame" x="61" y="18.5" width="8" height="8"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="8" id="8nK-uY-Maz"/>
-                        <constraint firstAttribute="width" constant="8" id="yQD-ZM-SeN"/>
-                    </constraints>
-                </imageView>
+                    <inset key="titleEdgeInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" title="Button">
+                        <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="buttonChannelDidPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="6AV-Ki-2Vf"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="TIT-TU-fEF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="3rV-Pf-lq2"/>
+                <constraint firstAttribute="bottom" secondItem="k0T-MO-VVm" secondAttribute="bottom" id="5Pt-1a-1iL"/>
                 <constraint firstItem="HbG-ar-gTn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-1" id="6Sz-aq-d79"/>
-                <constraint firstItem="MyI-mP-Niy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-1" id="9g9-YD-DQK"/>
-                <constraint firstItem="Mdo-Zh-6jT" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="XHF-8W-vqA"/>
-                <constraint firstItem="Mdo-Zh-6jT" firstAttribute="leading" secondItem="MyI-mP-Niy" secondAttribute="trailing" constant="4" id="pl3-hy-jrf"/>
+                <constraint firstAttribute="bottomMargin" secondItem="TIT-TU-fEF" secondAttribute="bottom" id="6eu-oN-v5W"/>
+                <constraint firstItem="TIT-TU-fEF" firstAttribute="leading" secondItem="k0T-MO-VVm" secondAttribute="trailing" id="Ai5-Wq-Yyn"/>
+                <constraint firstItem="k0T-MO-VVm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YhT-1Q-dIQ"/>
+                <constraint firstAttribute="trailing" secondItem="TIT-TU-fEF" secondAttribute="trailing" id="anf-yU-meh"/>
+                <constraint firstItem="k0T-MO-VVm" firstAttribute="leading" secondItem="HbG-ar-gTn" secondAttribute="trailing" constant="2" id="pkv-NN-VDa"/>
                 <constraint firstItem="HbG-ar-gTn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qPg-to-V4W"/>
-                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="MyI-mP-Niy" secondAttribute="trailing" constant="15" id="rjX-p2-GhN"/>
-                <constraint firstItem="MyI-mP-Niy" firstAttribute="leading" secondItem="HbG-ar-gTn" secondAttribute="trailing" constant="2" id="zVM-MK-n4g"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="buttonTitle" destination="k0T-MO-VVm" id="Ttj-KL-JNo"/>
                 <outlet property="icon" destination="HbG-ar-gTn" id="CnQ-i5-cQv"/>
-                <outlet property="imageArrowDown" destination="Mdo-Zh-6jT" id="d8s-gY-RPG"/>
-                <outlet property="labelTitle" destination="MyI-mP-Niy" id="vkz-Xf-NfM"/>
             </connections>
             <point key="canvasLocation" x="-99.5" y="77"/>
         </view>
     </objects>
     <resources>
-        <image name="Arrow Down" width="25" height="25"/>
         <image name="Hashtag" width="23" height="23"/>
+        <image name="More" width="4" height="16"/>
     </resources>
 </document>
