@@ -16,16 +16,15 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hashtag" translatesAutoresizingMaskIntoConstraints="NO" id="HbG-ar-gTn">
-                    <rect key="frame" x="0.0" y="14" width="15" height="15"/>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hashtag" translatesAutoresizingMaskIntoConstraints="NO" id="HbG-ar-gTn">
+                    <rect key="frame" x="10" y="15" width="13" height="13"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="15" id="WOq-qm-hdQ"/>
-                        <constraint firstAttribute="width" constant="15" id="WZ7-8K-dCC"/>
+                        <constraint firstAttribute="height" constant="13" id="WOq-qm-hdQ"/>
+                        <constraint firstAttribute="width" constant="13" id="WZ7-8K-dCC"/>
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TIT-TU-fEF">
                     <rect key="frame" x="329" y="0.0" width="46" height="44"/>
-                    <color key="backgroundColor" red="0.20000000000000001" green="1" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="46" id="lEp-ud-1rK"/>
                     </constraints>
@@ -36,9 +35,8 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0T-MO-VVm">
-                    <rect key="frame" x="17" y="0.0" width="312" height="44"/>
+                    <rect key="frame" x="25" y="0.0" width="304" height="44"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="-1" maxX="0.0" maxY="0.0"/>
                     <state key="normal" title="Button">
                         <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -51,13 +49,13 @@
             <constraints>
                 <constraint firstItem="TIT-TU-fEF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="3rV-Pf-lq2"/>
                 <constraint firstAttribute="bottom" secondItem="k0T-MO-VVm" secondAttribute="bottom" id="5Pt-1a-1iL"/>
-                <constraint firstItem="HbG-ar-gTn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" constant="-1" id="6Sz-aq-d79"/>
+                <constraint firstItem="HbG-ar-gTn" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="6Sz-aq-d79"/>
                 <constraint firstAttribute="bottomMargin" secondItem="TIT-TU-fEF" secondAttribute="bottom" id="6eu-oN-v5W"/>
                 <constraint firstItem="TIT-TU-fEF" firstAttribute="leading" secondItem="k0T-MO-VVm" secondAttribute="trailing" id="Ai5-Wq-Yyn"/>
                 <constraint firstItem="k0T-MO-VVm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YhT-1Q-dIQ"/>
                 <constraint firstAttribute="trailing" secondItem="TIT-TU-fEF" secondAttribute="trailing" id="anf-yU-meh"/>
                 <constraint firstItem="k0T-MO-VVm" firstAttribute="leading" secondItem="HbG-ar-gTn" secondAttribute="trailing" constant="2" id="pkv-NN-VDa"/>
-                <constraint firstItem="HbG-ar-gTn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="qPg-to-V4W"/>
+                <constraint firstItem="HbG-ar-gTn" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="qPg-to-V4W"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

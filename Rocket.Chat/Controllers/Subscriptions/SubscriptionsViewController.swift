@@ -48,6 +48,10 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     @IBOutlet weak var viewUserStatus: UIView!
 
     weak var avatarView: AvatarView?

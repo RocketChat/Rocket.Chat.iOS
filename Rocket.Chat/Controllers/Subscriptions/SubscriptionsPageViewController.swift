@@ -23,8 +23,15 @@ class SubscriptionsPageViewController: UIPageViewController {
         return nil
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let titleView = SubscriptionsTitleView.instantiateFromNib()
+        navigationItem.titleView = titleView
 
         delegate = self
         dataSource = self
@@ -51,6 +58,13 @@ class SubscriptionsPageViewController: UIPageViewController {
         self.serversController = serversController
 
         setViewControllers([subscriptionsController], direction: .reverse, animated: false, completion: nil)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.barTintColor = UIColor(hex: "#1F2329")
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     override func viewDidLayoutSubviews() {

@@ -76,6 +76,10 @@ final class ChatViewController: SLKTextViewController {
         registerCells()
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
@@ -128,6 +132,13 @@ final class ChatViewController: SLKTextViewController {
         if !SocketManager.isConnected() {
             SocketManager.reconnect()
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        navigationController?.navigationBar.barTintColor = .white
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
 
     override func viewWillLayoutSubviews() {
