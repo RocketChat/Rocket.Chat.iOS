@@ -241,9 +241,9 @@ extension SubscriptionsViewController {
         updateCurrentUserInformation()
         SubscriptionManager.updateUnreadApplicationBadge()
 
-        if MainChatViewController.shared?.sidePanelVisible ?? false {
-            tableView?.reloadData()
-        }
+//        if MainChatViewController.shared?.sidePanelVisible ?? false {
+//            tableView?.reloadData()
+//        }
     }
 
     func updateCurrentUserInformation() {
@@ -449,9 +449,10 @@ extension SubscriptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let subscription = subscription(for: indexPath) else { return }
 
-        let controller = ChatViewController.shared
-        controller?.closeSidebarAfterSubscriptionUpdate = true
-        controller?.subscription = subscription
+        if let controller = UIStoryboard(name: "Chat", bundle: Bundle.main).instantiateInitialViewController() as? ChatViewController {
+            controller.subscription = subscription
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

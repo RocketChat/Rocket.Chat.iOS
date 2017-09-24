@@ -14,7 +14,6 @@ def shared_pods
   pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
 
   # UI
-  pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git', :branch => 'chore/swift4_xcode9_ios11'
   pod 'MobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'

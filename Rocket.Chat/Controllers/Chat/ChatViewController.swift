@@ -1,4 +1,4 @@
-//
+
 //  ChatViewController.swift
 //  Rocket.Chat
 //
@@ -59,10 +59,8 @@ final class ChatViewController: SLKTextViewController {
     // MARK: View Life Cycle
 
     static var shared: ChatViewController? {
-        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
-            if let nav = main.centerViewController as? UINavigationController {
-                return nav.viewControllers.first as? ChatViewController
-            }
+        if let nav = UIApplication.shared.delegate?.window??.rootViewController as? UINavigationController {
+            return nav.viewControllers.last as? ChatViewController
         }
 
         return nil
@@ -337,7 +335,7 @@ final class ChatViewController: SLKTextViewController {
             CATransaction.commit()
 
             if self.closeSidebarAfterSubscriptionUpdate {
-                MainChatViewController.closeSideMenuIfNeeded()
+//                MainChatViewController.closeSideMenuIfNeeded()
                 self.closeSidebarAfterSubscriptionUpdate = false
             }
         })

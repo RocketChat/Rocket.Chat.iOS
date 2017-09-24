@@ -236,11 +236,20 @@
                         <outlet property="viewTextField" destination="qEc-o0-IxJ" id="1KL-CT-eAr"/>
                         <outlet property="viewUser" destination="ArO-ez-uRr" id="1qV-E6-iP0"/>
                         <outlet property="viewUserStatus" destination="V2s-Ct-SCW" id="ZS3-d0-lpu"/>
+                        <segue destination="Q7Z-N2-FIp" kind="show" identifier="Chat" id="lUr-Fb-9Ij"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1573.5999999999999" y="818.14092953523243"/>
+        </scene>
+        <!--Chat-->
+        <scene sceneID="09W-ap-31A">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Chat" id="Q7Z-N2-FIp" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ufY-5a-OWv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2222" y="531"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="OQO-C1-nEa">
