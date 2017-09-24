@@ -151,6 +151,7 @@ final class AuthViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldUsername.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
+        buttonAuthenticateGoogle.isEnabled = false
     }
 
     func stopLoading() {
@@ -158,6 +159,7 @@ final class AuthViewController: BaseViewController {
         textFieldPassword.alpha = 1
         connecting = false
         activityIndicator.stopAnimating()
+        buttonAuthenticateGoogle.isEnabled = true
     }
 
     // MARK: IBAction
