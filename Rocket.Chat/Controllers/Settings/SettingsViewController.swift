@@ -34,6 +34,9 @@ final class SettingsViewController: UITableViewController {
 
     func cellContactDidPressed() {
         if !MFMailComposeViewController.canSendMail() {
+            let alert = UIAlertController(title: "No Mail Accounts", message: "Please set up a Mail account in order to send email.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
             return
         }
 
@@ -42,7 +45,7 @@ final class SettingsViewController: UITableViewController {
         controller.setToRecipients([viewModel.supportEmail])
         controller.setSubject(viewModel.supportEmailSubject)
         controller.setMessageBody(viewModel.supportEmailBody, isHTML: true)
-        self.present(controller, animated: true, completion: nil)
+        present(controller, animated: true, completion: nil)
     }
 
     // MARK: UITableViewDelegate
@@ -53,6 +56,8 @@ final class SettingsViewController: UITableViewController {
         } else if indexPath.row == 1 {
             cellTermsOfServiceDidPressed()
         }
+
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
 
