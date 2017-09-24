@@ -141,6 +141,7 @@
 		41D8EC901F78128500764B36 /* ChannelInfoActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8EC8F1F78128500764B36 /* ChannelInfoActionCell.swift */; };
 		41D8EC921F7812F900764B36 /* ChannelInfoActionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D8EC911F7812F900764B36 /* ChannelInfoActionCell.xib */; };
 		41D8EC941F78151A00764B36 /* ChannelActionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D8EC931F78151A00764B36 /* ChannelActionsViewController.swift */; };
+		41D8EC961F782B0900764B36 /* ChannelInfoUserCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D8EC951F782B0900764B36 /* ChannelInfoUserCell.xib */; };
 		41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DAE93B1D318E280098E068 /* SubscriptionManager.swift */; };
 		41DAE93E1D318F350098E068 /* Subscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DAE93D1D318F350098E068 /* Subscription.swift */; };
 		41DC7A1B1D38454500896FC0 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41DC7A1A1D38454500896FC0 /* Message.swift */; };
@@ -351,6 +352,7 @@
 		41D8EC8F1F78128500764B36 /* ChannelInfoActionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChannelInfoActionCell.swift; path = Views/Cells/Chat/Info/ChannelInfoActionCell.swift; sourceTree = "<group>"; };
 		41D8EC911F7812F900764B36 /* ChannelInfoActionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChannelInfoActionCell.xib; path = Views/Cells/Chat/Info/ChannelInfoActionCell.xib; sourceTree = "<group>"; };
 		41D8EC931F78151A00764B36 /* ChannelActionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChannelActionsViewController.swift; path = Controllers/Chat/ChannelActionsViewController.swift; sourceTree = "<group>"; };
+		41D8EC951F782B0900764B36 /* ChannelInfoUserCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChannelInfoUserCell.xib; path = Views/Cells/Chat/Info/ChannelInfoUserCell.xib; sourceTree = "<group>"; };
 		41DAE93B1D318E280098E068 /* SubscriptionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionManager.swift; path = Managers/Model/SubscriptionManager.swift; sourceTree = "<group>"; };
 		41DAE93D1D318F350098E068 /* Subscription.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Subscription.swift; path = Models/Subscription.swift; sourceTree = "<group>"; };
 		41DC7A1A1D38454500896FC0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
@@ -502,6 +504,7 @@
 				415029B61E72D530009F596C /* ChannelInfoDetailCell.swift */,
 				415029B81E72D541009F596C /* ChannelInfoDescriptionCell.swift */,
 				415029BA1E72D553009F596C /* ChannelInfoUserCell.swift */,
+				41D8EC951F782B0900764B36 /* ChannelInfoUserCell.xib */,
 				41D8EC8F1F78128500764B36 /* ChannelInfoActionCell.swift */,
 				41D8EC911F7812F900764B36 /* ChannelInfoActionCell.xib */,
 			);
@@ -1173,6 +1176,7 @@
 				412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */,
 				41C275E11D84815C003C88CF /* AvatarView.xib in Resources */,
 				416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */,
+				41D8EC961F782B0900764B36 /* ChannelInfoUserCell.xib in Resources */,
 				4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */,
 				41CABFF81F5047D600E0B289 /* ChatLoaderCell.xib in Resources */,
 				41D3A62E1E0805310011949D /* ChatMessageDaySeparator.xib in Resources */,

@@ -23,6 +23,8 @@ class ChannelActionsViewController: BaseViewController {
             guard let subscription = self.subscription else { return }
 
             let data = [[
+                ChannelInfoUserCellData(user: subscription.directMessageUser)
+            ], [
                 ChannelInfoActionCellData(icon: UIImage(named: "Message"), title: "Message", detail: true),
                 ChannelInfoActionCellData(icon: UIImage(named: "Call"), title: "Voice call", detail: true),
                 ChannelInfoActionCellData(icon: UIImage(named: "Video"), title: "Video call", detail: true)
@@ -43,6 +45,12 @@ class ChannelActionsViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        title = "Actions"
+
+        tableView?.register(UINib(
+            nibName: "ChannelInfoUserCell",
+            bundle: Bundle.main
+        ), forCellReuseIdentifier: ChannelInfoUserCell.identifier)
 
         tableView?.register(UINib(
             nibName: "ChannelInfoActionCell",
@@ -66,6 +74,13 @@ extension ChannelActionsViewController: UITableViewDelegate {
             }
         }
 
+        if let data = data as? ChannelInfoUserCellData {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoUserCell.identifier) as? ChannelInfoUserCell {
+                cell.data = data
+                return cell
+            }
+        }
+
         return UITableViewCell()
     }
 
@@ -74,6 +89,10 @@ extension ChannelActionsViewController: UITableViewDelegate {
 
         if data as? ChannelInfoActionCellData != nil {
             return CGFloat(ChannelInfoActionCell.defaultHeight)
+        }
+
+        if data as? ChannelInfoUserCellData != nil {
+            return CGFloat(ChannelInfoUserCell.defaultHeight)
         }
 
         return CGFloat(0)
