@@ -133,6 +133,12 @@ extension ChatViewController: UIDocumentMenuDelegate {
 
     public func documentMenu(_ documentMenu: UIDocumentMenuViewController, didPickDocumentPicker documentPicker: UIDocumentPickerViewController) {
         documentPicker.delegate = self
+
+        if let presenter = documentPicker.popoverPresentationController {
+            presenter.sourceView = leftButton
+            presenter.sourceRect = leftButton.bounds
+        }
+
         present(documentPicker, animated: true, completion: nil)
     }
 
@@ -148,6 +154,12 @@ extension ChatViewController: UIDocumentPickerDelegate {
         let importMenu = UIDocumentMenuViewController(documentTypes: ["public.item"], in: .import)
         importMenu.delegate = self
         importMenu.modalPresentationStyle = .formSheet
+
+        if let presenter = importMenu.popoverPresentationController {
+            presenter.sourceView = leftButton
+            presenter.sourceRect = leftButton.bounds
+        }
+
         self.present(importMenu, animated: true, completion: nil)
     }
 
