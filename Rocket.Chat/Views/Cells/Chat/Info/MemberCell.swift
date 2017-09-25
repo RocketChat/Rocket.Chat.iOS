@@ -25,7 +25,7 @@ struct MemberCellData {
         case .busy:
             return .RCBusy()
         case .offline:
-            return .black
+            return .RCInvisible()
         }
     }
 }
