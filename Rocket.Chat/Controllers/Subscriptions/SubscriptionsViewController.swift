@@ -255,7 +255,7 @@ extension SubscriptionsViewController {
 
         labelServer.text = settings.serverName
         labelUsername.text = user.displayName()
-        avatarView.username = user.username
+        avatarView.user = user
 
         switch user.status {
         case .online:

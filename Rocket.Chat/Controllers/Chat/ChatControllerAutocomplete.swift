@@ -77,7 +77,7 @@ extension ChatViewController {
         if let user = searchResult[key] as? User {
             cell.avatarView.isHidden = false
             cell.imageViewIcon.isHidden = true
-            cell.avatarView.username = user.username
+            cell.avatarView.user = user
         } else {
             cell.avatarView.isHidden = true
             cell.imageViewIcon.isHidden = false
