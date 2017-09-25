@@ -60,15 +60,13 @@ class MembersListViewData {
 
 class MembersListViewController: UIViewController {
     @IBOutlet weak var membersTableView: UITableView!
-    var buttonCell: ButtonCell!
+    var loaderCell: LoaderTableViewCell!
 
     var data = MembersListViewData()
 
     func loadMoreMembers() {
-        self.buttonCell.button.isEnabled = false
         data.loadMoreMembers {
             DispatchQueue.main.async {
-                self.buttonCell.button.isEnabled = true
                 self.membersTableView.reloadData()
             }
         }
@@ -84,14 +82,12 @@ extension MembersListViewController {
         ), forCellReuseIdentifier: MemberCell.identifier)
 
         membersTableView.register(UINib(
-            nibName: "ButtonCell",
+            nibName: "LoaderTableViewCell",
             bundle: Bundle.main
-        ), forCellReuseIdentifier: ButtonCell.identifier)
+        ), forCellReuseIdentifier: LoaderTableViewCell.identifier)
 
-        if let cell = membersTableView.dequeueReusableCell(withIdentifier: ButtonCell.identifier) as? ButtonCell {
-            cell.button.setTitle(data.showMoreButtonTitle, for: UIControlState.normal)
-            cell.press = self.loadMoreMembers
-            self.buttonCell = cell
+        if let cell = membersTableView.dequeueReusableCell(withIdentifier: LoaderTableViewCell.identifier) as? LoaderTableViewCell {
+            self.loaderCell = cell
         }
 
         self.title = localized("memberslist.title")
@@ -114,7 +110,7 @@ extension MembersListViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.row == data.members.count {
-            return self.buttonCell
+            return self.loaderCell
         }
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier) as? MemberCell {
