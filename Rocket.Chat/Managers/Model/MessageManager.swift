@@ -73,6 +73,7 @@ extension MessageManager {
         let request = [
             "msg": "sub",
             "name": "stream-room-messages",
+            "id": eventName,
             "params": [eventName, false]
         ] as [String : Any]
 
