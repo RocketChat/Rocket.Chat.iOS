@@ -22,7 +22,7 @@ final class AvatarView: UIView {
         }
     }
 
-    var username: String? {
+    var user: User? {
         didSet {
             updateAvatar()
         }
@@ -38,7 +38,7 @@ final class AvatarView: UIView {
     @IBOutlet weak var imageView: UIImageView!
 
     private func userAvatarURL() -> URL? {
-        guard let username = username else { return nil }
+        guard let username = user?.username else { return nil }
         guard let auth = AuthManager.isAuthenticated() else { return nil }
         guard let baseURL = auth.baseURL() else { return nil }
         guard let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else { return nil }
@@ -102,7 +102,7 @@ final class AvatarView: UIView {
     }
 
     private func setAvatarWithInitials() {
-        let username = self.username ?? "?"
+        let username = self.user?.username ?? "?"
 
         var initials = ""
         var color: UInt = 0x000000

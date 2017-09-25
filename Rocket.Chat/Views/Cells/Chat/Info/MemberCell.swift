@@ -62,7 +62,7 @@ class MemberCell: UITableViewCell {
         didSet {
             statusView.backgroundColor = data?.statusColor
             nameLabel.text = data?.nameText
-            avatarView.username = data?.member.username
+            avatarView.user = data?.member
         }
     }
 
