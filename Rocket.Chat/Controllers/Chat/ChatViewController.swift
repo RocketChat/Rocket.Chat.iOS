@@ -50,6 +50,10 @@ final class ChatViewController: SLKTextViewController {
         didSet {
             updateSubscriptionInfo()
             markAsRead()
+
+            if let oldValue = oldValue {
+                unsubscribe(for: oldValue)
+            }
         }
     }
 
@@ -261,8 +265,15 @@ final class ChatViewController: SLKTextViewController {
         scrollToBottom(true)
     }
 
-    // MARK: Message
+    override func textViewDidChange(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        } else {
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
+        }
+    }
 
+    // MARK: Message
     fileprivate func sendMessage() {
         guard let messageText = textView.text, messageText.characters.count > 0 else { return }
 
@@ -287,6 +298,7 @@ final class ChatViewController: SLKTextViewController {
         if let message = message {
             textView.text = ""
             rightButton.isEnabled = true
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
 
             SubscriptionManager.sendTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
@@ -300,12 +312,27 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    fileprivate func chatLogIsAtBottom() -> Bool {
+        let currentPosition = Int(collectionView?.contentOffset.y ?? 0)
+
+        let boundsHeight = collectionView?.bounds.size.height ?? 0
+        let sizeHeight = collectionView?.contentSize.height ?? 0
+        let offset = Int(max(sizeHeight - boundsHeight, 0))
+
+        return currentPosition == offset
+    }
+
     // MARK: Subscription
 
     fileprivate func markAsRead() {
         SubscriptionManager.markAsRead(subscription) { _ in
             // Nothing, for now
         }
+    }
+
+    internal func unsubscribe(for subscription: Subscription) {
+        SocketManager.unsubscribe(eventName: subscription.rid)
+        SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
     }
 
     internal func updateSubscriptionInfo() {
@@ -357,6 +384,28 @@ final class ChatViewController: SLKTextViewController {
         updateMessagesQueryNotificationBlock()
 
         MessageManager.changes(subscription)
+        typingEvent()
+    }
+
+    fileprivate func typingEvent() {
+        typingIndicatorView?.interval = 0
+
+        SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
+            guard let username = username else { return }
+
+            let isAtBottom = self?.chatLogIsAtBottom()
+
+            if flag {
+                self?.typingIndicatorView?.insertUsername(username)
+            } else {
+                self?.typingIndicatorView?.removeUsername(username)
+            }
+
+            if let isAtBottom = isAtBottom,
+                isAtBottom == true {
+                self?.scrollToBottom(true)
+            }
+        }
     }
 
     fileprivate func updateMessagesQueryNotificationBlock() {
