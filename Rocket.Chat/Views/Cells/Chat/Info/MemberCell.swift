@@ -41,6 +41,9 @@ class MemberCell: UITableViewCell {
 
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
+            avatarViewContainer.layer.masksToBounds = true
+            avatarViewContainer.layer.cornerRadius = 5
+
             if let avatarView = AvatarView.instantiateFromNib() {
                 avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
@@ -66,22 +69,4 @@ class MemberCell: UITableViewCell {
         }
     }
 
-    override func awakeFromNib() {
-        avatarViewContainer.layer.masksToBounds = true
-        avatarViewContainer.layer.cornerRadius = 5
-
-        if let avatarView = AvatarView.instantiateFromNib() {
-            avatarView.frame = CGRect(
-                x: 0,
-                y: 0,
-                width: avatarViewContainer.frame.width,
-                height: avatarViewContainer.frame.height
-            )
-
-            avatarViewContainer.addSubview(avatarView)
-            self.avatarView = avatarView
-        }
-
-        self.selectionStyle = .none
-    }
 }
