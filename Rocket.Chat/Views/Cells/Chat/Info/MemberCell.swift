@@ -81,5 +81,7 @@ class MemberCell: UITableViewCell {
             avatarViewContainer.addSubview(avatarView)
             self.avatarView = avatarView
         }
+
+        self.selectionStyle = .none
     }
 }
