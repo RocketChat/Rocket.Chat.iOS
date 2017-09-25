@@ -35,7 +35,7 @@ class MemberCell: UITableViewCell {
 
     @IBOutlet weak var statusView: UIView! {
         didSet {
-            statusView.layer.cornerRadius = statusView.layer.frame.width/2
+            statusView.layer.cornerRadius = statusView.layer.frame.width / 2
         }
     }
 
