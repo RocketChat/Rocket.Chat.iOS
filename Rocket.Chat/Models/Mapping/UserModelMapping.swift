@@ -27,5 +27,9 @@ extension User: ModelMappeable {
         if let status = values["status"].string {
             self.status = UserStatus(rawValue: status) ?? .offline
         }
+
+        if let utcOffset = values["utcOffset"].double {
+            self.utcOffset = utcOffset
+        }
     }
 }
