@@ -22,6 +22,9 @@
 "alert.connection.invalid_version.title" = "Oops!";
 "alert.connection.invalid_version.message" = "O servidor que você está conectando não é suportado mais por esta versão do aplicativo: %@.\n\nEsta versão do aplicativo requer a versão %@ do servidor para funcionar corretamente.";
 
+"alert.settings.set_mail_app.title" = "Oops!";
+"alert.settings.set_mail_app.message" = "Conta Mail não encontrada. Por favor, configure uma conta no aplicativo Mail para conseguir enviar emails.";
+
 // Socket Connection
 "connection.offline.banner.message" = "Você está offline, conecte novamente";
 
