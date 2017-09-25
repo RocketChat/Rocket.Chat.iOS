@@ -752,7 +752,7 @@ extension ChatViewController {
             buttonScrollToBottomMarginConstraint?.isActive = true
         }
 
-        if targetContentOffset.pointee.y < scrollView.contentSize.height - scrollView.frame.height {
+        if targetContentOffset.pointee.y.rounded() < scrollView.contentSize.height - scrollView.frame.height {
             buttonScrollToBottomMarginConstraint?.constant = -64
             UIView.animate(withDuration: 0.5) {
                 view.layoutIfNeeded()
