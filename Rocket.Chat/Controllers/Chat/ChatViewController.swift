@@ -266,10 +266,10 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func textViewDidChange(_ textView: UITextView) {
-        if textView.text.characters.count > 0 {
-            SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
-        } else {
+        if textView.text.isEmpty {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        } else {
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
         }
     }
 
