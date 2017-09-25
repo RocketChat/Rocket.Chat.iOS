@@ -15,9 +15,11 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
-            self.openCamera()
-        }))
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alert.addAction(UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
+                self.openCamera()
+            }))
+        }
 
         alert.addAction(UIAlertAction(title: localized("chat.upload.choose_from_library"), style: .default, handler: { (_) in
             self.openPhotosLibrary()
@@ -38,6 +40,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 
     fileprivate func openCamera() {
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            return assertionFailure("Device camera is not availbale")
+        }
+
         let imagePicker  = UIImagePickerController()
         imagePicker.delegate = self
         imagePicker.allowsEditing = true
