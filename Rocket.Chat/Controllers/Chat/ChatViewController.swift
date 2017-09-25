@@ -312,6 +312,16 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    fileprivate func chatLogIsAtBottom() -> Bool {
+        let currentPosition = Int(collectionView?.contentOffset.y ?? 0)
+
+        let boundsHeight = collectionView?.bounds.size.height ?? 0
+        let sizeHeight = collectionView?.contentSize.height ?? 0
+        let offset = Int(max(sizeHeight - boundsHeight, 0))
+
+        return currentPosition == offset
+    }
+
     // MARK: Subscription
 
     fileprivate func markAsRead() {
@@ -383,10 +393,17 @@ final class ChatViewController: SLKTextViewController {
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
             guard let username = username else { return }
 
+            let isAtBottom = self?.chatLogIsAtBottom()
+
             if flag {
                 self?.typingIndicatorView?.insertUsername(username)
             } else {
                 self?.typingIndicatorView?.removeUsername(username)
+            }
+
+            if let isAtBottom = isAtBottom,
+                isAtBottom == true {
+                self?.scrollToBottom(true)
             }
         }
     }
