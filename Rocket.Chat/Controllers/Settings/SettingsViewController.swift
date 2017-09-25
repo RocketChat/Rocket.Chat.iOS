@@ -21,7 +21,9 @@ final class SettingsViewController: UITableViewController {
     }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true) {
+            UserReviewManager.shared.requestReview()
+        }
     }
 
     func cellTermsOfServiceDidPressed() {

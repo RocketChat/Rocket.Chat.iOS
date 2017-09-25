@@ -142,7 +142,7 @@ extension SocketManager {
     }
 
     static func removeConnectionHandler(token: String) {
-        sharedInstance.connectionHandlers[token] = nil
+        sharedInstance.connectionHandlers.removeValue(forKey: token)
     }
 
 }
