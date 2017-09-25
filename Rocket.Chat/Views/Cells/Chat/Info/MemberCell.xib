@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S39-gJ-qtV" userLabel="StatusView">
-                        <rect key="frame" x="8" y="22.5" width="8" height="8"/>
+                        <rect key="frame" x="4" y="22.5" width="8" height="8"/>
                         <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="8" id="Sxo-VE-pM9"/>
@@ -27,13 +27,13 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQw-Lj-ju1" userLabel="NameLabel">
-                        <rect key="frame" x="59" y="18" width="37.5" height="18"/>
+                        <rect key="frame" x="55" y="18" width="37.5" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QCs-d6-xj4" userLabel="AvatarView">
-                        <rect key="frame" x="20" y="9" width="35" height="35"/>
+                        <rect key="frame" x="16" y="9" width="35" height="35"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="35" id="iJa-9U-ERY"/>
@@ -46,7 +46,7 @@
                     <constraint firstItem="QCs-d6-xj4" firstAttribute="centerY" secondItem="JEZ-6W-A0m" secondAttribute="centerY" id="Jom-X3-SXJ"/>
                     <constraint firstItem="vQw-Lj-ju1" firstAttribute="centerY" secondItem="JEZ-6W-A0m" secondAttribute="centerY" id="MKA-F5-GI6"/>
                     <constraint firstItem="S39-gJ-qtV" firstAttribute="centerY" secondItem="JEZ-6W-A0m" secondAttribute="centerY" id="VEo-wQ-7CC"/>
-                    <constraint firstItem="S39-gJ-qtV" firstAttribute="leading" secondItem="JEZ-6W-A0m" secondAttribute="leading" constant="8" id="eRP-Ki-FiI"/>
+                    <constraint firstItem="S39-gJ-qtV" firstAttribute="leading" secondItem="JEZ-6W-A0m" secondAttribute="leading" constant="4" id="eRP-Ki-FiI"/>
                     <constraint firstItem="vQw-Lj-ju1" firstAttribute="leading" secondItem="QCs-d6-xj4" secondAttribute="trailing" constant="4" id="eZD-nV-aQF"/>
                 </constraints>
             </tableViewCellContentView>
