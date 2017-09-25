@@ -39,7 +39,13 @@ extension User {
             return username ?? ""
         }
 
-        return (settings.useUserRealName ? name : username) ?? ""
+        if let name = name {
+            if settings.useUserRealName && !name.isEmpty {
+                return name
+            }
+        }
+
+        return username ?? ""
     }
 
 }

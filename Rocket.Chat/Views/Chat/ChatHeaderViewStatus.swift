@@ -8,9 +8,15 @@
 
 import UIKit
 
+protocol ChatHeaderViewStatusDelegate: class {
+    func viewStatusButtonRefreshDidPressed(_ view: ChatHeaderViewStatus)
+}
+
 final class ChatHeaderViewStatus: UIView {
 
     static let defaultHeight = CGFloat(44)
+
+    weak var delegate: ChatHeaderViewStatusDelegate?
 
     @IBOutlet weak var labelTitle: UILabel! {
         didSet {
@@ -32,7 +38,7 @@ final class ChatHeaderViewStatus: UIView {
     // MARK: IBAction
 
     @IBAction func buttonRefreshDidPressed(_ sender: Any) {
-        SocketManager.reconnect()
+        delegate?.viewStatusButtonRefreshDidPressed(self)
     }
 
 }
