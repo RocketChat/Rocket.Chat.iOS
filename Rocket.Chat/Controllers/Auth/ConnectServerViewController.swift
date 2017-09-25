@@ -52,6 +52,13 @@ final class ConnectServerViewController: BaseViewController {
         }
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        SocketManager.sharedInstance.socket?.disconnect()
+        DatabaseManager.cleanInvalidDatabases()
+    }
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
