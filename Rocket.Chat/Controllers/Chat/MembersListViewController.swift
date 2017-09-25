@@ -15,11 +15,12 @@ class MembersListViewData {
     var currentPage = 0
 
     var showing: Int = 0
-    var online: Int = 0
     var total: Int = 0
 
-    var description: String {
-        return "Showing: \(showing), Online: \(online), Total: \(total) users"
+    var title: String {
+        return String(
+            format: localized("memberslist.title"),
+            total)
     }
 
     var showMoreButtonTitle = "SHOW MORE"
@@ -68,6 +69,7 @@ class MembersListViewController: UIViewController {
         data.loadMoreMembers {
             DispatchQueue.main.async {
                 self.membersTableView.reloadData()
+                self.title = self.data.title
             }
         }
     }
@@ -89,8 +91,6 @@ extension MembersListViewController {
         if let cell = membersTableView.dequeueReusableCell(withIdentifier: LoaderTableViewCell.identifier) as? LoaderTableViewCell {
             self.loaderCell = cell
         }
-
-        self.title = localized("memberslist.title")
     }
 
     override func viewWillAppear(_ animated: Bool) {

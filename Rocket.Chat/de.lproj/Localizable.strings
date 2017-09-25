@@ -108,4 +108,4 @@
 "chat.info.item.starred" = "Favorisiert";
 
 // Members List
-"memberslist.title" = "Mitglieder";
+"memberslist.title" = "Mitglieder (%d)";
