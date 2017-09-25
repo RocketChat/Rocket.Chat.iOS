@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,12 +16,12 @@
             <objects>
                 <viewController storyboardIdentifier="Subscriptions" id="pre-Wt-UOv" customClass="SubscriptionsViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Sgi-qY-oLC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="fKk-pZ-N3a">
-                                <rect key="frame" x="0.0" y="75" width="375" height="548"/>
-                                <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="0.0" y="55" width="375" height="504"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="CellSubscription" id="A3x-rd-OY1" customClass="SubscriptionCell" customModule="Rocket_Chat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
@@ -81,7 +82,7 @@
                                 </connections>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5g6-R1-nTb">
-                                <rect key="frame" x="0.0" y="20" width="375" height="55"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="55"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qEc-o0-IxJ">
                                         <rect key="frame" x="16" y="10" width="284" height="37"/>
@@ -100,7 +101,7 @@
                                                 <rect key="frame" x="228" y="9" width="20" height="20"/>
                                             </activityIndicatorView>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.12156862745098039" green="0.13725490196078433" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="37" id="6EO-5w-ejQ"/>
                                             <constraint firstItem="TPV-i5-hsW" firstAttribute="leading" secondItem="qEc-o0-IxJ" secondAttribute="leading" constant="5" id="74K-kd-AqZ"/>
@@ -126,7 +127,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="DHL-lw-BNd" firstAttribute="leading" secondItem="qEc-o0-IxJ" secondAttribute="trailing" constant="5" id="8vi-5B-J4G"/>
                                     <constraint firstAttribute="trailing" secondItem="DHL-lw-BNd" secondAttribute="trailing" constant="15" id="Fj4-UM-s64"/>
@@ -137,7 +138,7 @@
                                 </constraints>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="fKk-pZ-N3a" firstAttribute="leading" secondItem="BC2-s4-mxp" secondAttribute="leading" id="1Z9-Vc-Iq7"/>
                             <constraint firstItem="BC2-s4-mxp" firstAttribute="trailing" secondItem="5g6-R1-nTb" secondAttribute="trailing" id="5gf-7i-iXY"/>
@@ -152,7 +153,7 @@
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="cIZ-6h-3cC"/>
                     <nil key="simulatedStatusBarMetrics"/>
-                    <nil key="simulatedTopBarMetrics"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="activityViewSearching" destination="nkZ-uB-Z8e" id="2Bb-ph-mdv"/>
                         <outlet property="buttonCancelSearch" destination="DHL-lw-BNd" id="Z2w-xL-sMe"/>
@@ -178,10 +179,11 @@
         <!--Base Navigation Controller-->
         <scene sceneID="OQO-C1-nEa">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="BRy-Se-87j" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="BRy-Se-87j" customClass="BaseNavigationController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="AU3-QI-Caf">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -197,7 +199,12 @@
         <scene sceneID="Okh-yT-p42">
             <objects>
                 <pageViewController autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="1QJ-Cq-P9G" customClass="SubscriptionsPageViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="Lmg-Rn-wmQ"/>
+                    <navigationItem key="navigationItem" id="Lmg-Rn-wmQ">
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="add" id="84L-Iz-PSG"/>
+                            <barButtonItem systemItem="search" id="Vf9-f7-NUL"/>
+                        </rightBarButtonItems>
+                    </navigationItem>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sqS-dA-tth" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -134,13 +134,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        navigationController?.navigationBar.barTintColor = .white
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 

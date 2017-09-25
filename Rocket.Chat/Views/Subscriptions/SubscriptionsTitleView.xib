@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VR2-ki-QLD">
-                    <rect key="frame" x="58" y="24" width="50.5" height="14"/>
+                    <rect key="frame" x="40" y="22" width="50.5" height="14"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="14" id="0VK-Ds-aL3"/>
                     </constraints>
@@ -24,8 +24,25 @@
                     <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rafael Kellermann Streit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Il-8X-3Zu">
+                    <rect key="frame" x="40" y="5" width="172" height="21"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="21" id="ZNM-nR-zgS"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                    <color key="textColor" red="0.1215686275" green="0.13725490200000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAr-Vl-xqH">
+                    <rect key="frame" x="8" y="10" width="24" height="24"/>
+                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="24" id="Z2i-VJ-ozT"/>
+                        <constraint firstAttribute="height" constant="24" id="ovU-oI-mXt"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMA-dR-LFG">
-                    <rect key="frame" x="40" y="26" width="10" height="10"/>
+                    <rect key="frame" x="217" y="9" width="10" height="10"/>
                     <color key="backgroundColor" red="0.20784313730000001" green="0.67450980390000004" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="F09-AX-VLH"/>
@@ -37,35 +54,17 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rafael Kellermann Streit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Il-8X-3Zu">
-                    <rect key="frame" x="40" y="3" width="320" height="21"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="21" id="ZNM-nR-zgS"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZAr-Vl-xqH">
-                    <rect key="frame" x="8" y="10" width="24" height="24"/>
-                    <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="calibratedWhite"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="24" id="Z2i-VJ-ozT"/>
-                        <constraint firstAttribute="height" constant="24" id="ovU-oI-mXt"/>
-                    </constraints>
-                </view>
             </subviews>
-            <color key="backgroundColor" red="0.12156862745098039" green="0.13725490196078433" blue="0.16078431372549018" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="3Il-8X-3Zu" secondAttribute="trailing" constant="15" id="3Qy-YU-mQf"/>
-                <constraint firstItem="iMA-dR-LFG" firstAttribute="leading" secondItem="ZAr-Vl-xqH" secondAttribute="trailing" constant="8" id="6NA-Gn-0t0"/>
                 <constraint firstItem="ZAr-Vl-xqH" firstAttribute="centerY" secondItem="dKY-Ch-wz7" secondAttribute="centerY" id="7sl-Gr-uk5"/>
-                <constraint firstItem="VR2-ki-QLD" firstAttribute="top" secondItem="3Il-8X-3Zu" secondAttribute="bottom" id="CfS-tz-fAR"/>
-                <constraint firstItem="iMA-dR-LFG" firstAttribute="top" secondItem="3Il-8X-3Zu" secondAttribute="bottom" constant="2" id="H3Z-qB-7hi"/>
+                <constraint firstItem="VR2-ki-QLD" firstAttribute="top" secondItem="3Il-8X-3Zu" secondAttribute="bottom" constant="-4" id="CfS-tz-fAR"/>
+                <constraint firstItem="iMA-dR-LFG" firstAttribute="leading" secondItem="3Il-8X-3Zu" secondAttribute="trailing" constant="5" id="Moi-Hx-rw9"/>
+                <constraint firstItem="VR2-ki-QLD" firstAttribute="leading" secondItem="ZAr-Vl-xqH" secondAttribute="trailing" constant="8" id="RGk-rX-UMn"/>
+                <constraint firstItem="6rA-25-euU" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iMA-dR-LFG" secondAttribute="trailing" constant="5" id="Wxa-bL-SaX"/>
                 <constraint firstItem="ZAr-Vl-xqH" firstAttribute="leading" secondItem="dKY-Ch-wz7" secondAttribute="leading" constant="8" id="Xml-04-e7F"/>
-                <constraint firstItem="VR2-ki-QLD" firstAttribute="leading" secondItem="iMA-dR-LFG" secondAttribute="trailing" constant="8" id="doe-Gn-E2B"/>
                 <constraint firstItem="3Il-8X-3Zu" firstAttribute="leading" secondItem="ZAr-Vl-xqH" secondAttribute="trailing" constant="8" id="knS-Jc-Veh"/>
-                <constraint firstItem="3Il-8X-3Zu" firstAttribute="top" secondItem="dKY-Ch-wz7" secondAttribute="top" constant="3" id="uPw-o7-U1Q"/>
+                <constraint firstItem="iMA-dR-LFG" firstAttribute="top" secondItem="6rA-25-euU" secondAttribute="top" constant="9" id="ngz-bp-N89"/>
+                <constraint firstItem="3Il-8X-3Zu" firstAttribute="top" secondItem="dKY-Ch-wz7" secondAttribute="top" constant="5" id="uPw-o7-U1Q"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="6rA-25-euU"/>

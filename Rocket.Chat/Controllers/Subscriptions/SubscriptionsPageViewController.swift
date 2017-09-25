@@ -60,13 +60,6 @@ class SubscriptionsPageViewController: UIPageViewController {
         setViewControllers([subscriptionsController], direction: .reverse, animated: false, completion: nil)
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        navigationController?.navigationBar.barTintColor = UIColor(hex: "#1F2329")
-        navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 

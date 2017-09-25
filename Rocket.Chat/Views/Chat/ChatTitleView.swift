@@ -50,7 +50,7 @@ final class ChatTitleView: UIView {
                     }(())
                 }
 
-                icon.image = UIImage(named: "Mention")?.imageWithTint(color)
+                icon.image = UIImage(named: "Mentions")?.imageWithTint(color)
                 break
             case .group:
                 icon.image = UIImage(named: "Lock")?.imageWithTint(.RCGray())
