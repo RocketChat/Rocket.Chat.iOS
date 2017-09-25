@@ -136,7 +136,7 @@ extension MembersListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == data.members.count {
+        if indexPath.row == data.members.count - 50 {
             loadMoreMembers()
         }
     }
