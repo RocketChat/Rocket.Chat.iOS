@@ -50,7 +50,7 @@ extension Message: ModelMappeable {
 
         // Attachments
         if let attachments = values["attachments"].array {
-            self.attachments = List()
+            self.attachments.removeAll()
 
             for attachment in attachments {
                 let obj = Attachment()
@@ -61,7 +61,7 @@ extension Message: ModelMappeable {
 
         // URLs
         if let urls = values["urls"].array {
-            self.urls = List()
+            self.urls.removeAll()
 
             for url in urls {
                 let obj = MessageURL()
@@ -72,7 +72,7 @@ extension Message: ModelMappeable {
 
         // Mentions
         if let mentions = values["mentions"].array {
-            self.mentions = List()
+            self.mentions.removeAll()
 
             for mention in mentions {
                 let obj = Mention()
@@ -83,7 +83,7 @@ extension Message: ModelMappeable {
 
         // Channels
         if let channels = values["channels"].array {
-            self.channels = List()
+            self.channels.removeAll()
 
             for channel in channels {
                 let obj = Channel()
