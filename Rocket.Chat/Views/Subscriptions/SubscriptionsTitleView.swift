@@ -31,7 +31,6 @@ class SubscriptionsTitleView: UIView {
     }
 
     @IBOutlet weak var labelUser: UILabel!
-    @IBOutlet weak var labelStatus: UILabel!
     @IBOutlet weak var viewStatus: UIView!
 
     var user: User? {

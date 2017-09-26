@@ -32,10 +32,6 @@ class SubscriptionsPageViewController: UIPageViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let titleView = SubscriptionsTitleView.instantiateFromNib()
-        navigationItem.titleView = titleView
-        self.titleView = titleView
-
         delegate = self
         dataSource = self
         view.backgroundColor = .RCBackgroundColor()

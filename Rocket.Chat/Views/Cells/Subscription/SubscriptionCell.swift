@@ -33,23 +33,20 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
+    weak var avatarView: AvatarView!
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
-            avatarViewContainer.layer.cornerRadius = 4
+            let width = avatarViewContainer.frame.width
+            avatarViewContainer.layer.cornerRadius = width / 2
             avatarViewContainer.layer.masksToBounds = true
 
             if let avatarView = AvatarView.instantiateFromNib() {
                 avatarView.frame = avatarViewContainer.bounds
+                avatarView.layer.cornerRadius = width / 2
+                avatarView.layer.masksToBounds = true
                 avatarViewContainer.addSubview(avatarView)
                 self.avatarView = avatarView
             }
-        }
-    }
-
-    weak var avatarView: AvatarView! {
-        didSet {
-            avatarView.layer.cornerRadius = 4
-            avatarView.layer.masksToBounds = true
         }
     }
 

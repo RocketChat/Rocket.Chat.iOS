@@ -86,6 +86,22 @@ final class SubscriptionsViewController: BaseViewController {
         subscribeModelChanges()
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        if #available(iOS 11.0, *) {
+            navigationController?.navigationBar.prefersLargeTitles = false
+            navigationItem.largeTitleDisplayMode = .never
+
+            navigationItem.searchController = UISearchController(searchResultsController: nil)
+            navigationItem.hidesSearchBarWhenScrolling = true
+        }
+
+        if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
+            title = server[ServerPersistKeys.serverName]
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateCurrentUserInformation()
