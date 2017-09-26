@@ -10,22 +10,15 @@ import UIKit
 
 class SubscriptionsTitleView: UIView {
 
-    weak var avatarView: AvatarView?
-    @IBOutlet weak var avatarViewContainer: UIView! {
+    @IBOutlet weak var imageViewServer: UIImageView! {
         didSet {
-            avatarViewContainer.layer.masksToBounds = true
-            avatarViewContainer.layer.cornerRadius = avatarViewContainer.frame.width / 2
+            imageViewServer.layer.masksToBounds = true
+            imageViewServer.layer.cornerRadius = 3
 
-            if let avatarView = AvatarView.instantiateFromNib() {
-                avatarView.frame = CGRect(
-                    x: 0,
-                    y: 0,
-                    width: avatarViewContainer.frame.width,
-                    height: avatarViewContainer.frame.height
-                )
-
-                avatarViewContainer.addSubview(avatarView)
-                self.avatarView = avatarView
+            if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
+                if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
+                    imageViewServer.sd_setImage(with: imageURL)
+                }
             }
         }
     }
@@ -38,7 +31,6 @@ class SubscriptionsTitleView: UIView {
             guard let user = user else { return }
 
             labelUser.text = user.displayName()
-            avatarView?.user = user
 
             switch user.status {
             case .online:

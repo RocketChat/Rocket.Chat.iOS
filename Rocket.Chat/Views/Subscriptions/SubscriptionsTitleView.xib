@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,16 +16,16 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rafael Kellermann Streit" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3Il-8X-3Zu">
-                    <rect key="frame" x="67" y="11.5" width="182" height="21"/>
+                    <rect key="frame" x="49" y="11.5" width="192" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="ZNM-nR-zgS"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                     <color key="textColor" red="0.1215686275" green="0.13725490200000001" blue="0.16078431369999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iMA-dR-LFG">
-                    <rect key="frame" x="254" y="17" width="10" height="10"/>
+                    <rect key="frame" x="246" y="17" width="10" height="10"/>
                     <color key="backgroundColor" red="0.20784313730000001" green="0.67450980390000004" blue="0.098039215690000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="10" id="F09-AX-VLH"/>
@@ -38,31 +37,31 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rHs-E7-BIh">
-                    <rect key="frame" x="24" y="4.5" width="35" height="35"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Co9-b0-rwg">
+                    <rect key="frame" x="16" y="10" width="25" height="25"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="35" id="f5i-YQ-KMl"/>
-                        <constraint firstAttribute="height" constant="35" id="pCd-nm-7aV"/>
+                        <constraint firstAttribute="height" constant="25" id="bmF-iZ-5gc"/>
+                        <constraint firstAttribute="width" constant="25" id="cHf-RA-Umh"/>
                     </constraints>
-                </view>
+                </imageView>
             </subviews>
             <constraints>
                 <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerY" secondItem="dKY-Ch-wz7" secondAttribute="centerY" id="3aB-l6-hD7"/>
-                <constraint firstItem="rHs-E7-BIh" firstAttribute="centerY" secondItem="dKY-Ch-wz7" secondAttribute="centerY" id="FX1-nk-M9k"/>
+                <constraint firstItem="3Il-8X-3Zu" firstAttribute="leading" secondItem="Co9-b0-rwg" secondAttribute="trailing" constant="8" id="6wZ-Fu-3if"/>
+                <constraint firstItem="Co9-b0-rwg" firstAttribute="leading" secondItem="6rA-25-euU" secondAttribute="leading" constant="16" id="DBL-nC-Eig"/>
                 <constraint firstItem="iMA-dR-LFG" firstAttribute="leading" secondItem="3Il-8X-3Zu" secondAttribute="trailing" constant="5" id="Moi-Hx-rw9"/>
-                <constraint firstItem="rHs-E7-BIh" firstAttribute="leading" secondItem="dKY-Ch-wz7" secondAttribute="leadingMargin" constant="8" id="RNx-W0-SH3"/>
                 <constraint firstItem="6rA-25-euU" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="iMA-dR-LFG" secondAttribute="trailing" constant="5" id="Wxa-bL-SaX"/>
+                <constraint firstItem="Co9-b0-rwg" firstAttribute="centerY" secondItem="dKY-Ch-wz7" secondAttribute="centerY" id="ZfG-ds-8hF"/>
                 <constraint firstItem="iMA-dR-LFG" firstAttribute="centerY" secondItem="dKY-Ch-wz7" secondAttribute="centerY" id="gvR-hr-8OE"/>
-                <constraint firstItem="3Il-8X-3Zu" firstAttribute="leading" secondItem="rHs-E7-BIh" secondAttribute="trailing" constant="8" id="uJX-M7-lS3"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="6rA-25-euU"/>
             <connections>
-                <outlet property="avatarViewContainer" destination="rHs-E7-BIh" id="WP0-vs-D5U"/>
+                <outlet property="imageViewServer" destination="Co9-b0-rwg" id="myQ-TH-Dg3"/>
                 <outlet property="labelUser" destination="3Il-8X-3Zu" id="7xF-PS-0wF"/>
                 <outlet property="viewStatus" destination="iMA-dR-LFG" id="r5d-rL-1Jm"/>
             </connections>
+            <point key="canvasLocation" x="33.5" y="54"/>
         </view>
     </objects>
 </document>

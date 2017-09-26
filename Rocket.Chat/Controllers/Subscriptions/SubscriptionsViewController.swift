@@ -97,9 +97,8 @@ final class SubscriptionsViewController: BaseViewController {
             navigationItem.hidesSearchBarWhenScrolling = true
         }
 
-        if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
-            title = server[ServerPersistKeys.serverName]
-        }
+        let titleView = SubscriptionsTitleView.instantiateFromNib()
+        navigationItem.titleView = titleView
     }
 
     override func viewWillAppear(_ animated: Bool) {

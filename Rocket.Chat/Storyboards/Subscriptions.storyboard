@@ -68,7 +68,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5I-Dx-APU">
-                                                    <rect key="frame" x="126" y="14" width="7" height="7"/>
+                                                    <rect key="frame" x="126" y="15" width="7" height="7"/>
                                                     <color key="backgroundColor" red="0.98823529409999999" green="0.56078431370000004" blue="0.35294117650000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="7" id="Gx9-5i-6M7"/>
@@ -91,7 +91,7 @@
                                                 <constraint firstItem="fJx-OD-n5l" firstAttribute="top" secondItem="Wxv-s5-H7g" secondAttribute="topMargin" constant="2" id="GkQ-o9-Qxm"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="fJx-OD-n5l" secondAttribute="bottom" constant="2" id="VYM-Rh-WA3"/>
                                                 <constraint firstItem="Y6S-q9-3Bj" firstAttribute="leading" secondItem="fJx-OD-n5l" secondAttribute="trailing" constant="8" id="e4m-PZ-Jbg"/>
-                                                <constraint firstItem="v5I-Dx-APU" firstAttribute="top" secondItem="Wxv-s5-H7g" secondAttribute="topMargin" constant="6" id="frU-to-r8r"/>
+                                                <constraint firstItem="v5I-Dx-APU" firstAttribute="top" secondItem="Wxv-s5-H7g" secondAttribute="topMargin" constant="7" id="frU-to-r8r"/>
                                                 <constraint firstItem="58W-AQ-vZy" firstAttribute="leading" secondItem="CcS-Jz-bWP" secondAttribute="trailing" constant="8" id="gBG-Gp-6JX"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="58W-AQ-vZy" secondAttribute="bottom" id="l7L-0i-QRq"/>
                                                 <constraint firstItem="CcS-Jz-bWP" firstAttribute="top" secondItem="Y6S-q9-3Bj" secondAttribute="bottom" constant="2" id="s5b-ec-BhJ"/>
@@ -128,7 +128,6 @@
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="cIZ-6h-3cC">
-                        <barButtonItem key="leftBarButtonItem" title="Settings" id="D9s-Sn-TYZ"/>
                         <rightBarButtonItems>
                             <barButtonItem systemItem="add" id="84L-Iz-PSG"/>
                             <barButtonItem systemItem="search" id="Vf9-f7-NUL"/>
