@@ -50,6 +50,7 @@ final class ChatViewController: SLKTextViewController {
         didSet {
             updateSubscriptionInfo()
             markAsRead()
+            typingIndicatorView?.dismissIndicator()
 
             if let oldValue = oldValue {
                 unsubscribe(for: oldValue)
