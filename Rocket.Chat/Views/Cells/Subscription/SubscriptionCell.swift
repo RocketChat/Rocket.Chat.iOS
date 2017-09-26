@@ -74,7 +74,7 @@ final class SubscriptionCell: UITableViewCell {
                 }(())
             }
 
-            imageViewIcon.image = UIImage(named: "Mention")?.imageWithTint(color)
+            imageViewIcon.image = UIImage(named: "Mentions")?.imageWithTint(color)
             break
         case .group:
             imageViewIcon.image = UIImage(named: "Lock")?.imageWithTint(.RCInvisible())

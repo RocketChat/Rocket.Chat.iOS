@@ -145,7 +145,7 @@ final class ConnectServerViewController: BaseViewController {
             })
 
             if let sameServerIndex = sameServerIndex {
-                MainChatViewController.shared?.changeSelectedServer(index: sameServerIndex)
+//                MainChatViewController.shared?.changeSelectedServer(index: sameServerIndex)
                 return
             }
         }

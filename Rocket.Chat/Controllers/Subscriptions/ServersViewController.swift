@@ -30,15 +30,15 @@ class ServersViewController: UIViewController {
     }
 
     func selectServer(at indexPath: IndexPath) {
-        if indexPath.row == servers.count {
-            MainChatViewController.shared?.openAddNewTeamController()
-        } else {
-            if indexPath.row == DatabaseManager.selectedIndex {
-                SubscriptionsPageViewController.shared?.showSubscriptionsList()
-            } else {
-                MainChatViewController.shared?.changeSelectedServer(index: indexPath.row)
-            }
-        }
+//        if indexPath.row == servers.count {
+//            MainChatViewController.shared?.openAddNewTeamController()
+//        } else {
+//            if indexPath.row == DatabaseManager.selectedIndex {
+//                SubscriptionsPageViewController.shared?.showSubscriptionsList()
+//            } else {
+//                MainChatViewController.shared?.changeSelectedServer(index: indexPath.row)
+//            }
+//        }
     }
 
     func removeServer(at indexPath: IndexPath) {

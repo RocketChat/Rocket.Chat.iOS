@@ -1,4 +1,4 @@
-//
+
 //  ChatViewController.swift
 //  Rocket.Chat
 //
@@ -48,7 +48,10 @@ final class ChatViewController: SLKTextViewController {
     var messages: [Message] = []
     var subscription: Subscription! {
         didSet {
-            updateSubscriptionInfo()
+            DispatchQueue.main.async {
+                self.updateSubscriptionInfo()
+            }
+
             markAsRead()
 
             if let oldValue = oldValue {
@@ -60,10 +63,8 @@ final class ChatViewController: SLKTextViewController {
     // MARK: View Life Cycle
 
     static var shared: ChatViewController? {
-        if let main = UIApplication.shared.delegate?.window??.rootViewController as? MainChatViewController {
-            if let nav = main.centerViewController as? UINavigationController {
-                return nav.viewControllers.first as? ChatViewController
-            }
+        if let nav = UIApplication.shared.delegate?.window??.rootViewController as? UINavigationController {
+            return nav.viewControllers.last as? ChatViewController
         }
 
         return nil
@@ -77,6 +78,10 @@ final class ChatViewController: SLKTextViewController {
     override func awakeFromNib() {
         super.awakeFromNib()
         registerCells()
+    }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .default
     }
 
     override func viewDidLoad() {
@@ -100,6 +105,14 @@ final class ChatViewController: SLKTextViewController {
         setupTitleView()
         setupTextViewSettings()
         setupScrollToBottomButton()
+
+        // Remove title from back button
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: nil,
+            action: nil
+        )
 
         NotificationCenter.default.addObserver(self, selector: #selector(reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
@@ -148,11 +161,15 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let nav = segue.destination as? UINavigationController, segue.identifier == "Channel Info" {
-            if let controller = nav.viewControllers.first as? ChannelInfoViewController {
-                if let subscription = self.subscription {
-                    controller.subscription = subscription
-                }
+        if segue.identifier == "Channel Info", let controller = segue.destination as? ChannelInfoViewController {
+            if let subscription = self.subscription {
+                controller.subscription = subscription
+            }
+        }
+
+        if segue.identifier == "Channel Actions", let controller = segue.destination as? ChannelActionsViewController {
+            if let subscription = self.subscription {
+                controller.subscription = subscription
             }
         }
     }
@@ -172,11 +189,9 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func setupTitleView() {
         let view = ChatTitleView.instantiateFromNib()
+        view?.delegate = self
         self.navigationItem.titleView = view
         chatTitleView = view
-
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(chatTitleViewDidPressed))
-        chatTitleView?.addGestureRecognizer(gesture)
     }
 
     fileprivate func setupScrollToBottomButton() {
@@ -351,7 +366,7 @@ final class ChatViewController: SLKTextViewController {
             CATransaction.commit()
 
             if self.closeSidebarAfterSubscriptionUpdate {
-                MainChatViewController.closeSideMenuIfNeeded()
+//                MainChatViewController.closeSideMenuIfNeeded()
                 self.closeSidebarAfterSubscriptionUpdate = false
             }
         })
@@ -616,10 +631,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     // MARK: IBAction
-
-    @objc func chatTitleViewDidPressed(_ sender: AnyObject) {
-        performSegue(withIdentifier: "Channel Info", sender: sender)
-    }
 
     @IBAction func buttonScrollToBottomPressed(_ sender: UIButton) {
         scrollToBottom(true)

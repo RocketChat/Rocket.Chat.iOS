@@ -48,6 +48,10 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     @IBOutlet weak var viewUserStatus: UIView!
 
     weak var avatarView: AvatarView?
@@ -243,14 +247,14 @@ extension SubscriptionsViewController {
 
         // Update titleView information with subscription, can be
         // some status changes
-        if let subscription = ChatViewController.shared?.subscription {
-            ChatViewController.shared?.chatTitleView?.subscription = subscription
-        }
+        // if let subscription = ChatViewController.shared?.subscription {
+        //     ChatViewController.shared?.chatTitleView?.subscription = subscription
+        // }
 
         // If side panel is visible, reload the data
-        if MainChatViewController.shared?.sidePanelVisible ?? false {
-            tableView?.reloadData()
-        }
+        // if MainChatViewController.shared?.sidePanelVisible ?? false {
+        //     tableView?.reloadData()
+        // }
     }
 
     func updateCurrentUserInformation() {
@@ -456,9 +460,10 @@ extension SubscriptionsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let subscription = subscription(for: indexPath) else { return }
 
-        let controller = ChatViewController.shared
-        controller?.closeSidebarAfterSubscriptionUpdate = true
-        controller?.subscription = subscription
+        if let controller = UIStoryboard(name: "Chat", bundle: Bundle.main).instantiateInitialViewController() as? ChatViewController {
+            controller.subscription = subscription
+            navigationController?.pushViewController(controller, animated: true)
+        }
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
