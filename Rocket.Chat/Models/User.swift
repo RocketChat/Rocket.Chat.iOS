@@ -28,6 +28,8 @@ class User: BaseModel {
         get { return UserStatus(rawValue: privateStatus) ?? UserStatus.offline }
         set { privateStatus = newValue.rawValue }
     }
+
+    var utcOffset: Double?
 }
 
 extension User {
@@ -37,7 +39,13 @@ extension User {
             return username ?? ""
         }
 
-        return (settings.useUserRealName ? name : username) ?? ""
+        if let name = name {
+            if settings.useUserRealName && !name.isEmpty {
+                return name
+            }
+        }
+
+        return username ?? ""
     }
 
 }

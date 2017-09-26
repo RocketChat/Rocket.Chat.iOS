@@ -160,6 +160,9 @@ extension AuthManager {
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
 
+        API.shared.authToken = auth.token
+        API.shared.userId = auth.userId
+
         SocketManager.connect(url) { (socket, _) in
             guard SocketManager.isConnected() else {
                 guard let response = SocketResponse(
@@ -238,6 +241,9 @@ extension AuthManager {
             auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
             auth.token = result["result"]["token"].string
             auth.userId = result["result"]["id"].string
+
+            API.shared.authToken = auth.token
+            API.shared.userId = auth.userId
 
             if let date = result["result"]["tokenExpires"]["$date"].double {
                 auth.tokenExpires = Date.dateFromInterval(date)
