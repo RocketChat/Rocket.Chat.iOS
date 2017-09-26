@@ -105,9 +105,9 @@ final class AuthViewController: BaseViewController {
     }
 
     internal func handleAuthenticationResponse(_ response: SocketResponse) {
-        stopLoading()
-
         if response.isError() {
+            stopLoading()
+
             if let error = response.result["error"].dictionary {
                 // User is using 2FA
                 if error["error"]?.string == "totp-required" {
@@ -124,20 +124,30 @@ final class AuthViewController: BaseViewController {
                 alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
                 present(alert, animated: true, completion: nil)
             }
-        } else {
-            if let user = AuthManager.currentUser() {
+
+            return
+        }
+
+        API.shared.fetch(MeRequest()) { [weak self] result in
+            self?.stopLoading()
+            if let user = result?.user {
                 if user.username != nil {
-                    dismiss(animated: true, completion: nil)
 
-                    let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    let controller = storyboardChat.instantiateInitialViewController()
-                    let application = UIApplication.shared
+                    DispatchQueue.main.async {
+                        self?.dismiss(animated: true, completion: nil)
 
-                    if let window = application.windows.first {
-                        window.rootViewController = controller
+                        let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
+                        let controller = storyboardChat.instantiateInitialViewController()
+                        let application = UIApplication.shared
+
+                        if let window = application.windows.first {
+                            window.rootViewController = controller
+                        }
                     }
                 } else {
-                    performSegue(withIdentifier: "RequestUsername", sender: nil)
+                    DispatchQueue.main.async {
+                        self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                    }
                 }
             }
         }
