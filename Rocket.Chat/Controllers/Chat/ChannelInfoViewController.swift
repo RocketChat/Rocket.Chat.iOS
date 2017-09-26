@@ -21,7 +21,7 @@ class ChannelInfoViewController: BaseViewController {
             guard let subscription = self.subscription else { return }
 
             let channelInfoData = [
-                ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: ""),
+                ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: ""),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "")
             ]
@@ -79,6 +79,16 @@ class ChannelInfoViewController: BaseViewController {
         }
 
         buttonFavorite.image = image?.withRenderingMode(.alwaysOriginal)
+    }
+
+    func showMembersList() {
+        self.performSegue(withIdentifier: "toMembersList", sender: self)
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let membersList = segue.destination as? MembersListViewController {
+            membersList.data.subscription = self.subscription
+        }
     }
 
     // MARK: IBAction
@@ -167,10 +177,15 @@ extension ChannelInfoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let data = tableViewData[indexPath.section][indexPath.row]
 
-        if data as? ChannelInfoDetailCellData != nil {
-            let alert = UIAlertController(title: "Ops!", message: "We're still working on this feature, stay tunned!", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+        if let data = data as? ChannelInfoDetailCellData {
+            guard let action = data.action else {
+                let alert = UIAlertController(title: "Ops!", message: "We're still working on this feature, stay tunned!", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+                present(alert, animated: true, completion: nil)
+                return
+            }
+
+            action()
 
             if let selectedIndex = tableView.indexPathForSelectedRow {
                 tableView.deselectRow(at: selectedIndex, animated: true)

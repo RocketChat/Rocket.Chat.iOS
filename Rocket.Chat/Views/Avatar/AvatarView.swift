@@ -102,7 +102,7 @@ final class AvatarView: UIView {
     }
 
     private func setAvatarWithInitials() {
-        let username = user?.username ?? "?"
+        let username = self.user?.username ?? "?"
 
         var initials = ""
         var color: UInt = 0x000000

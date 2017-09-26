@@ -241,6 +241,13 @@ extension SubscriptionsViewController {
         updateCurrentUserInformation()
         SubscriptionManager.updateUnreadApplicationBadge()
 
+        // Update titleView information with subscription, can be
+        // some status changes
+        if let subscription = ChatViewController.shared?.subscription {
+            ChatViewController.shared?.chatTitleView?.subscription = subscription
+        }
+
+        // If side panel is visible, reload the data
         if MainChatViewController.shared?.sidePanelVisible ?? false {
             tableView?.reloadData()
         }
