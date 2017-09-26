@@ -36,13 +36,12 @@ final class SubscriptionCell: UITableViewCell {
     weak var avatarView: AvatarView!
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
-            let width = avatarViewContainer.frame.width
-            avatarViewContainer.layer.cornerRadius = width / 2
+            avatarViewContainer.layer.cornerRadius = 4
             avatarViewContainer.layer.masksToBounds = true
 
             if let avatarView = AvatarView.instantiateFromNib() {
                 avatarView.frame = avatarViewContainer.bounds
-                avatarView.layer.cornerRadius = width / 2
+                avatarView.layer.cornerRadius = 4
                 avatarView.layer.masksToBounds = true
                 avatarViewContainer.addSubview(avatarView)
                 self.avatarView = avatarView
