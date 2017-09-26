@@ -10,6 +10,8 @@ import Foundation
 
 class SubscriptionsPageViewController: UIPageViewController {
 
+    var titleView: SubscriptionsTitleView?
+
     var serversController: ServersViewController?
     var subscriptionsController: SubscriptionsViewController?
 
@@ -32,6 +34,7 @@ class SubscriptionsPageViewController: UIPageViewController {
 
         let titleView = SubscriptionsTitleView.instantiateFromNib()
         navigationItem.titleView = titleView
+        self.titleView = titleView
 
         delegate = self
         dataSource = self

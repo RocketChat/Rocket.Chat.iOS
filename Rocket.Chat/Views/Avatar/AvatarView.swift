@@ -28,6 +28,13 @@ final class AvatarView: UIView {
         }
     }
 
+    var subscription: Subscription? {
+        didSet {
+            imageView?.image = nil
+            updateAvatar()
+        }
+    }
+
     @IBOutlet weak var labelInitials: UILabel!
     var labelInitialsFontSize: CGFloat? {
         didSet {
@@ -102,18 +109,20 @@ final class AvatarView: UIView {
     }
 
     private func setAvatarWithInitials() {
+        let subscription = self.subscription?.displayName() ?? "?"
         let username = self.user?.username ?? "?"
+        let text = subscription == "?" ? username : subscription
 
         var initials = ""
         var color: UInt = 0x000000
 
-        if username == "?" {
-            initials = username
+        if text == "?" {
+            initials = text
             color = 0x000000
         } else {
-            let position = username.characters.count % avatarColors.count
+            let position = text.characters.count % avatarColors.count
             color = avatarColors[position]
-            initials = initialsFor(username)
+            initials = initialsFor(text)
         }
 
         labelInitials?.text = initials.uppercased()

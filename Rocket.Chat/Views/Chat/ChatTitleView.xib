@@ -27,10 +27,9 @@
                         <action selector="buttonMoreDidPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="cqx-HB-Toz"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0T-MO-VVm">
-                    <rect key="frame" x="40" y="0.0" width="289" height="44"/>
-                    <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                    <inset key="titleEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="14"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0T-MO-VVm">
+                    <rect key="frame" x="25" y="0.0" width="304" height="44"/>
+                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
                     <state key="normal" title="Button">
                         <color key="titleColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
@@ -38,20 +37,11 @@
                         <action selector="buttonChannelDidPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="6AV-Ki-2Vf"/>
                     </connections>
                 </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r2h-ft-O7n">
-                    <rect key="frame" x="40" y="22" width="51" height="14"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="14" id="Wl2-xB-RSg"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                    <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mentions" translatesAutoresizingMaskIntoConstraints="NO" id="WbB-fC-cwV">
-                    <rect key="frame" x="8" y="10" width="24" height="24"/>
+                    <rect key="frame" x="8" y="15" width="14" height="14"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="24" id="FEd-ET-JsB"/>
-                        <constraint firstAttribute="height" constant="24" id="zOX-0i-ZKw"/>
+                        <constraint firstAttribute="width" constant="14" id="FEd-ET-JsB"/>
+                        <constraint firstAttribute="height" constant="14" id="zOX-0i-ZKw"/>
                     </constraints>
                 </imageView>
             </subviews>
@@ -60,13 +50,11 @@
                 <constraint firstItem="TIT-TU-fEF" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="topMargin" id="3rV-Pf-lq2"/>
                 <constraint firstAttribute="bottom" secondItem="k0T-MO-VVm" secondAttribute="bottom" id="5Pt-1a-1iL"/>
                 <constraint firstAttribute="bottomMargin" secondItem="TIT-TU-fEF" secondAttribute="bottom" id="6eu-oN-v5W"/>
-                <constraint firstItem="r2h-ft-O7n" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="7j3-49-DZ3"/>
                 <constraint firstItem="WbB-fC-cwV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="I7b-fH-jPE"/>
                 <constraint firstItem="k0T-MO-VVm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YhT-1Q-dIQ"/>
                 <constraint firstAttribute="trailing" secondItem="TIT-TU-fEF" secondAttribute="trailing" id="anf-yU-meh"/>
                 <constraint firstItem="WbB-fC-cwV" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="fSB-bC-X7D"/>
-                <constraint firstAttribute="bottom" secondItem="r2h-ft-O7n" secondAttribute="bottom" constant="8" id="mKt-GG-vzt"/>
-                <constraint firstItem="k0T-MO-VVm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="40" id="nqV-yl-Zil"/>
+                <constraint firstItem="k0T-MO-VVm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="25" id="nqV-yl-Zil"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

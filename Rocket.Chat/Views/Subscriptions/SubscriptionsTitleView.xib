@@ -68,6 +68,12 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="6rA-25-euU"/>
+            <connections>
+                <outlet property="avatarViewContainer" destination="ZAr-Vl-xqH" id="NPV-Ah-Q7e"/>
+                <outlet property="labelStatus" destination="VR2-ki-QLD" id="DRr-YK-kba"/>
+                <outlet property="labelUser" destination="3Il-8X-3Zu" id="7xF-PS-0wF"/>
+                <outlet property="viewStatus" destination="iMA-dR-LFG" id="r5d-rL-1Jm"/>
+            </connections>
         </view>
     </objects>
 </document>

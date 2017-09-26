@@ -26,41 +26,69 @@ final class SubscriptionCell: UITableViewCell {
         }
     }
 
-    @IBOutlet weak var imageViewIcon: UIImageView!
+    @IBOutlet weak var viewStatus: UIView! {
+        didSet {
+            viewStatus.layer.masksToBounds = true
+            viewStatus.layer.cornerRadius = 3
+        }
+    }
+
+    @IBOutlet weak var avatarViewContainer: UIView! {
+        didSet {
+            avatarViewContainer.layer.cornerRadius = 4
+            avatarViewContainer.layer.masksToBounds = true
+
+            if let avatarView = AvatarView.instantiateFromNib() {
+                avatarView.frame = avatarViewContainer.bounds
+                avatarViewContainer.addSubview(avatarView)
+                self.avatarView = avatarView
+            }
+        }
+    }
+
+    weak var avatarView: AvatarView! {
+        didSet {
+            avatarView.layer.cornerRadius = 4
+            avatarView.layer.masksToBounds = true
+        }
+    }
+
     @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelMessage: UILabel!
     @IBOutlet weak var labelUnread: UILabel! {
         didSet {
             labelUnread.layer.cornerRadius = 2
         }
     }
 
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        avatarView.user = nil
+        avatarView.subscription = nil
+        labelName.text = ""
+        labelMessage.text = ""
+        labelUnread.text = ""
+        labelUnread.alpha = 0
+    }
+
     func updateSubscriptionInformatin() {
         guard let subscription = self.subscription else { return }
 
-        updateIconImage()
+        updateStatus()
 
+        avatarView.subscription = subscription
+        avatarView.user = subscription.directMessageUser
         labelName.text = subscription.displayName()
-
-        if subscription.unread > 0 || subscription.alert {
-            labelName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)
-            labelName.textColor = labelUnreadTextColor
-        } else {
-            labelName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.body)
-            labelName.textColor = labelReadTextColor
-        }
-
+        labelMessage.text = subscription.lastMessageText()
         labelUnread.alpha = subscription.unread > 0 ? 1 : 0
         labelUnread.text = "\(subscription.unread)"
     }
 
-    func updateIconImage() {
+    func updateStatus() {
         guard let subscription = self.subscription else { return }
 
-        switch subscription.type {
-        case .channel:
-            imageViewIcon.image = UIImage(named: "Hashtag")?.imageWithTint(.RCInvisible())
-            break
-        case .directMessage:
+        if subscription.type == .directMessage {
             var color: UIColor = .RCInvisible()
 
             if let user = subscription.directMessageUser {
@@ -74,11 +102,10 @@ final class SubscriptionCell: UITableViewCell {
                 }(())
             }
 
-            imageViewIcon.image = UIImage(named: "Mentions")?.imageWithTint(color)
-            break
-        case .group:
-            imageViewIcon.image = UIImage(named: "Lock")?.imageWithTint(.RCInvisible())
-            break
+            viewStatus.isHidden = false
+            viewStatus.backgroundColor = color
+        } else {
+            viewStatus.isHidden = true
         }
     }
 

@@ -139,6 +139,10 @@ extension Subscription {
         return filteredMessages.sorted(byKeyPath: "createdAt", ascending: false)
     }
 
+    func lastMessageText() -> String? {
+        return messages.sorted(byKeyPath: "createdAt", ascending: true).last?.text
+    }
+
     func updateFavorite(_ favorite: Bool) {
         Realm.executeOnMainThread({ _ in
             self.favorite = favorite
