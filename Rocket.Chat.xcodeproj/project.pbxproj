@@ -1034,6 +1034,14 @@
 			path = Subscription;
 			sourceTree = "<group>";
 		};
+		802498EC1F7A82CD005477EC /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D18675EB1F716A0D00406FB4 /* LoginRequest.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		925FF74F1E8EFC9200982043 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1076,9 +1084,9 @@
 		D1D535EF1F70863C006625D2 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				802498EC1F7A82CD005477EC /* Authentication */,
 				80235D1C1F740AAC00A56CA5 /* Subscription */,
 				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
-				D18675EB1F716A0D00406FB4 /* LoginRequest.swift */,
 				80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */,
 			);
 			path = Requests;
