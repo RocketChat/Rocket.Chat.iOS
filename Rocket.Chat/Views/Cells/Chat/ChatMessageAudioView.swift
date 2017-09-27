@@ -70,6 +70,10 @@ class ChatMessageAudioView: UIView {
         }
     }
 
+    override func didMoveToSuperview() {
+        playing = false
+    }
+
     func updateAudio() {
         loading = true
 
