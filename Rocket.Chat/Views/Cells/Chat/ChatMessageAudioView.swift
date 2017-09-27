@@ -46,6 +46,17 @@ class ChatMessageAudioView: UIView {
         }
     }
 
+    var timer: Timer?
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        timer = Timer.scheduledTimer(withTimeInterval: 1.0/60.0, repeats: true) { _ in
+            self.timeSlider.value = Float(self.player.currentTime)
+            self.timeSlider.maximumValue = Float(self.player.duration)
+        }
+    }
+
     func updateAudio() {
         loading = true
 
