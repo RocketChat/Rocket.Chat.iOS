@@ -185,6 +185,8 @@
 		80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */; };
 		80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */; };
 		80235D261F74672D00A56CA5 /* LoaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80235D251F74672D00A56CA5 /* LoaderTableViewCell.xib */; };
+		802498EE1F7A8380005477EC /* MeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498ED1F7A8380005477EC /* MeRequest.swift */; };
+		802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F01F7A9BB4005477EC /* MeRequestSpec.swift */; };
 		80A63C4F1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */; };
 		80A63C511F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */; };
 		80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */; };
@@ -427,6 +429,8 @@
 		80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequestSpec.swift; sourceTree = "<group>"; };
 		80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoaderTableViewCell.swift; path = Views/Cells/LoaderTableViewCell.swift; sourceTree = "<group>"; };
 		80235D251F74672D00A56CA5 /* LoaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoaderTableViewCell.xib; path = Views/Cells/LoaderTableViewCell.xib; sourceTree = "<group>"; };
+		802498ED1F7A8380005477EC /* MeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeRequest.swift; sourceTree = "<group>"; };
+		802498F01F7A9BB4005477EC /* MeRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequest.swift; sourceTree = "<group>"; };
 		80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequest.swift; sourceTree = "<group>"; };
@@ -1052,6 +1056,24 @@
 			path = Subscription;
 			sourceTree = "<group>";
 		};
+		802498EC1F7A82CD005477EC /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D18675EB1F716A0D00406FB4 /* LoginRequest.swift */,
+				802498ED1F7A8380005477EC /* MeRequest.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		802498EF1F7A9B92005477EC /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D18675ED1F716FBC00406FB4 /* LoginRequestSpec.swift */,
+				802498F01F7A9BB4005477EC /* MeRequestSpec.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
 		925FF74F1E8EFC9200982043 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1072,9 +1094,9 @@
 		D18675E81F70A56800406FB4 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				802498EF1F7A9B92005477EC /* Authentication */,
 				80235D201F7442C100A56CA5 /* Subscription */,
 				D18675E91F70A58B00406FB4 /* InfoRequestSpec.swift */,
-				D18675ED1F716FBC00406FB4 /* LoginRequestSpec.swift */,
 				80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */,
 			);
 			path = Requests;
@@ -1094,9 +1116,9 @@
 		D1D535EF1F70863C006625D2 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				802498EC1F7A82CD005477EC /* Authentication */,
 				80235D1C1F740AAC00A56CA5 /* Subscription */,
 				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
-				D18675EB1F716A0D00406FB4 /* LoginRequest.swift */,
 				80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */,
 			);
 			path = Requests;
@@ -1680,6 +1702,7 @@
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
 				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
+				802498EE1F7A8380005477EC /* MeRequest.swift in Sources */,
 				412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */,
 				41CABFFA1F5047E200E0B289 /* ChatLoaderCell.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
@@ -1764,6 +1787,7 @@
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
 				80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
+				802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */,
 				411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */,
 				D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */,
 				80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */,
