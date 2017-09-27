@@ -25,7 +25,17 @@ class ChatMessageAudioView: UIView {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    private var player = AVAudioPlayer()
+    private var player = AVAudioPlayer() {
+        didSet {
+            player.delegate = self
+        }
+    }
+
+    var playing = false {
+        didSet {
+            playButton.setTitle(playing ? "⏸" : "▶️", for: .normal)
+        }
+    }
 
     func updateAudio() {
         playButton.isHidden = true
@@ -59,6 +69,18 @@ class ChatMessageAudioView: UIView {
     }
 
     @IBAction func didPressPlayButton(_ sender: UIButton) {
-        player.play()
+        if playing {
+            player.pause()
+        } else {
+            player.play()
+        }
+
+        playing = !playing
+    }
+}
+
+extension ChatMessageAudioView: AVAudioPlayerDelegate {
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        playing = false
     }
 }
