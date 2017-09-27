@@ -27,14 +27,19 @@ class ChatMessageAudioView: UIView {
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    private var player = AVAudioPlayer() {
+    private var player: AVAudioPlayer? {
         didSet {
-            player.delegate = self
+            player?.delegate = self
         }
     }
 
     var playing = false {
         didSet {
+            if playing {
+                player?.play()
+            } else {
+                player?.pause()
+            }
             playButton.setTitle(playing ? "⏸" : "▶️", for: .normal)
         }
     }
@@ -52,10 +57,15 @@ class ChatMessageAudioView: UIView {
         super.awakeFromNib()
 
         updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0/60.0, repeats: true) { _ in
-            self.timeSlider.value = Float(self.player.currentTime)
-            self.timeSlider.maximumValue = Float(self.player.duration)
+            guard let player = self.player else { return }
 
-            let displayTime = self.playing ? Int(self.player.currentTime) : Int(self.player.duration)
+            self.timeSlider.maximumValue = Float(player.duration)
+
+            if self.playing {
+                self.timeSlider.value = Float(player.currentTime)
+            }
+
+            let displayTime = self.playing ? Int(player.currentTime) : Int(player.duration)
             self.timeLabel.text = String(format: "%02d:%02d", (displayTime/60) % 60, displayTime % 60)
         }
     }
@@ -70,7 +80,7 @@ class ChatMessageAudioView: UIView {
         func updatePlayer() throws {
             let data = try Data(contentsOf: localURL)
             player = try AVAudioPlayer(data: data)
-            player.prepareToPlay()
+            player?.prepareToPlay()
 
             loading = false
         }
@@ -86,14 +96,16 @@ class ChatMessageAudioView: UIView {
             }
         }
     }
+    @IBAction func didStartSlidingSlider(_ sender: UISlider) {
+        playing = false
+    }
+
+    @IBAction func didFinishSlidingSlider(_ sender: UISlider) {
+        self.player?.currentTime = Double(sender.value)
+        playing = true
+    }
 
     @IBAction func didPressPlayButton(_ sender: UIButton) {
-        if playing {
-            player.pause()
-        } else {
-            player.play()
-        }
-
         playing = !playing
     }
 }
@@ -101,5 +113,6 @@ class ChatMessageAudioView: UIView {
 extension ChatMessageAudioView: AVAudioPlayerDelegate {
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         playing = false
+        self.timeSlider.value = 0.0
     }
 }

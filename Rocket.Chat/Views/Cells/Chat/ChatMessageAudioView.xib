@@ -57,6 +57,11 @@
                         </button>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="c75-Du-ac0">
                             <rect key="frame" x="41" y="5" width="236" height="31"/>
+                            <connections>
+                                <action selector="didFinishSlidingSlider:" destination="jII-b2-bIf" eventType="touchUpOutside" id="Kyw-4Q-G6U"/>
+                                <action selector="didFinishSlidingSlider:" destination="jII-b2-bIf" eventType="touchUpInside" id="q6i-Po-Ci7"/>
+                                <action selector="didStartSlidingSlider:" destination="jII-b2-bIf" eventType="touchDown" id="SlI-sq-4dM"/>
+                            </connections>
                         </slider>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMe-up-GvD">
                             <rect key="frame" x="43" y="35" width="27" height="15"/>
