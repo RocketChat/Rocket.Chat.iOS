@@ -46,14 +46,17 @@ class ChatMessageAudioView: UIView {
         }
     }
 
-    var timer: Timer?
+    var updateTimer: Timer?
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0/60.0, repeats: true) { _ in
+        updateTimer = Timer.scheduledTimer(withTimeInterval: 1.0/60.0, repeats: true) { _ in
             self.timeSlider.value = Float(self.player.currentTime)
             self.timeSlider.maximumValue = Float(self.player.duration)
+
+            let displayTime = self.playing ? Int(self.player.currentTime) : Int(self.player.duration)
+            self.timeLabel.text = String(format: "%02d:%02d", (displayTime/60) % 60, displayTime % 60)
         }
     }
 
@@ -70,9 +73,6 @@ class ChatMessageAudioView: UIView {
             player.prepareToPlay()
 
             loading = false
-
-            let interval = Int(player.duration)
-            self.timeLabel.text = String(format: "%02d:%02d", (interval/60) % 60, interval % 60)
         }
 
         if DownloadManager.fileExists(localURL) {
