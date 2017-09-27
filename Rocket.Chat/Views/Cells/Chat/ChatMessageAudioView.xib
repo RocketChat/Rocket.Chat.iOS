@@ -43,13 +43,14 @@
                                 <constraint firstAttribute="height" constant="20" id="sOc-zb-3Hv"/>
                             </constraints>
                         </activityIndicatorView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xU6-9R-Yqd" userLabel="Play Button">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xU6-9R-Yqd" userLabel="Play Button">
                             <rect key="frame" x="-1" y="0.0" width="40" height="40"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="40" id="KDb-hK-Nax"/>
                                 <constraint firstAttribute="height" constant="40" id="XsT-Tf-zAY"/>
                             </constraints>
-                            <state key="normal" image="Play"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
+                            <state key="normal" title="▶️"/>
                             <connections>
                                 <action selector="didPressPlayButton:" destination="jII-b2-bIf" eventType="touchUpInside" id="MX5-TP-d7q"/>
                             </connections>
@@ -99,8 +100,14 @@
             </connections>
             <point key="canvasLocation" x="709.5" y="783.5"/>
         </view>
+        <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="SV4-3n-dTX">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+            <items>
+                <barButtonItem title="Item" id="IoH-8Z-cvH"/>
+                <barButtonItem systemItem="play" id="aYq-by-CQW"/>
+            </items>
+            <point key="canvasLocation" x="1108" y="846"/>
+        </toolbar>
     </objects>
-    <resources>
-        <image name="Play" width="40" height="40"/>
-    </resources>
 </document>
