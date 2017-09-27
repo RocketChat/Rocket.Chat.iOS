@@ -15,6 +15,8 @@ class ChatMessageAudioView: UIView {
     var attachment: Attachment? {
         didSet {
             self.titleLabel.text = attachment?.title
+            loading = true
+            playing = false
             updateAudio()
         }
     }
@@ -37,9 +39,15 @@ class ChatMessageAudioView: UIView {
         }
     }
 
+    var loading = true {
+        didSet {
+            playButton.isHidden = loading
+            loading ? activityIndicator.startAnimating() : activityIndicator.stopAnimating()
+        }
+    }
+
     func updateAudio() {
-        playButton.isHidden = true
-        activityIndicator.startAnimating()
+        loading = true
 
         guard let attachment = attachment, let identifier = attachment.identifier else { return }
         guard let url = attachment.fullAudioURL() else { return }
@@ -49,8 +57,8 @@ class ChatMessageAudioView: UIView {
             let data = try Data(contentsOf: localURL)
             player = try AVAudioPlayer(data: data)
             player.prepareToPlay()
-            playButton.isHidden = false
-            activityIndicator.stopAnimating()
+
+            loading = false
 
             let interval = Int(player.duration)
             self.timeLabel.text = String(format: "%02d:%02d", (interval/60) % 60, interval % 60)
