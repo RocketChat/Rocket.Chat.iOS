@@ -133,6 +133,7 @@ final class ConnectServerViewController: BaseViewController {
 
         API.shared.host = url
 
+        // Check if server already exists and connect to that instead
         if let servers = DatabaseManager.servers {
             let sameServerIndex = servers.index(where: {
                 if let stringServerUrl = $0[ServerPersistKeys.serverURL],
@@ -146,6 +147,7 @@ final class ConnectServerViewController: BaseViewController {
 
             if let sameServerIndex = sameServerIndex {
 //                MainChatViewController.shared?.changeSelectedServer(index: sameServerIndex)
+                textFieldServerURL.resignFirstResponder()
                 return
             }
         }
