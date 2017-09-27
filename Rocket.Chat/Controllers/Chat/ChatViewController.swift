@@ -191,7 +191,7 @@ final class ChatViewController: SLKTextViewController {
     fileprivate func setupTitleView() {
         let view = ChatTitleView.instantiateFromNib()
         view?.delegate = self
-        self.navigationItem.titleView = view
+        navigationItem.titleView = view
         chatTitleView = view
     }
 
