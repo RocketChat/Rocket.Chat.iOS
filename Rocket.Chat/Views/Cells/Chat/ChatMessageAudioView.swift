@@ -33,7 +33,7 @@ class ChatMessageAudioView: UIView {
 
         guard let attachment = attachment, let identifier = attachment.identifier else { return }
         guard let url = attachment.fullAudioURL() else { return }
-        guard let localURL = DownloadManager.localFileURLFor("\(identifier).\(attachment.title)") else { return }
+        guard let localURL = DownloadManager.localFileURLFor(identifier) else { return }
 
         func updatePlayer() throws {
             let data = try Data(contentsOf: localURL)
@@ -41,6 +41,9 @@ class ChatMessageAudioView: UIView {
             player.prepareToPlay()
             playButton.isHidden = false
             activityIndicator.stopAnimating()
+
+            let interval = Int(player.duration)
+            self.timeLabel.text = String(format: "%02d:%02d", (interval/60) % 60, interval % 60)
         }
 
         if DownloadManager.fileExists(localURL) {
