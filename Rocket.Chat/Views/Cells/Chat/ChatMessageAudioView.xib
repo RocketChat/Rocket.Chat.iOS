@@ -37,26 +37,25 @@
                     <rect key="frame" x="0.0" y="30" width="279" height="59"/>
                     <subviews>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Zfk-42-wzd">
-                            <rect key="frame" x="9" y="10" width="20" height="20"/>
+                            <rect key="frame" x="4" y="5" width="20" height="20"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="20" id="8du-nd-y1H"/>
                                 <constraint firstAttribute="height" constant="20" id="sOc-zb-3Hv"/>
                             </constraints>
                         </activityIndicatorView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xU6-9R-Yqd" userLabel="Play Button">
-                            <rect key="frame" x="-1" y="0.0" width="40" height="40"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xU6-9R-Yqd" userLabel="Play Button">
+                            <rect key="frame" x="-1" y="0.0" width="30" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="KDb-hK-Nax"/>
-                                <constraint firstAttribute="height" constant="40" id="XsT-Tf-zAY"/>
+                                <constraint firstAttribute="width" constant="30" id="KDb-hK-Nax"/>
+                                <constraint firstAttribute="height" constant="30" id="XsT-Tf-zAY"/>
                             </constraints>
-                            <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                            <state key="normal" title="▶️"/>
+                            <state key="normal" image="fa_play"/>
                             <connections>
                                 <action selector="didPressPlayButton:" destination="jII-b2-bIf" eventType="touchUpInside" id="MX5-TP-d7q"/>
                             </connections>
                         </button>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="c75-Du-ac0">
-                            <rect key="frame" x="41" y="5" width="236" height="31"/>
+                            <rect key="frame" x="31" y="0.0" width="246" height="31"/>
                             <connections>
                                 <action selector="didFinishSlidingSlider:" destination="jII-b2-bIf" eventType="touchUpOutside" id="Kyw-4Q-G6U"/>
                                 <action selector="didFinishSlidingSlider:" destination="jII-b2-bIf" eventType="touchUpInside" id="q6i-Po-Ci7"/>
@@ -64,7 +63,7 @@
                             </connections>
                         </slider>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMe-up-GvD">
-                            <rect key="frame" x="43" y="35" width="27" height="15"/>
+                            <rect key="frame" x="33" y="30" width="27" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -115,4 +114,7 @@
             <point key="canvasLocation" x="1108" y="846"/>
         </toolbar>
     </objects>
+    <resources>
+        <image name="fa_play" width="256" height="256"/>
+    </resources>
 </document>
