@@ -81,6 +81,10 @@ final class ChatMessageCell: UICollectionViewCell {
             if type == .video {
                 total += ChatMessageVideoView.defaultHeight
             }
+
+            if type == .audio {
+                total += ChatMessageAudioView.defaultHeight
+            }
         }
 
         return total
@@ -170,6 +174,15 @@ final class ChatMessageCell: UICollectionViewCell {
                     mediaViewHeight += ChatMessageVideoView.defaultHeight
                 }
                 break
+
+            case .audio:
+                if let view = ChatMessageAudioView.instantiateFromNib() {
+                    view.attachment = attachment
+                    view.translatesAutoresizingMaskIntoConstraints = false
+
+                    mediaViews.addArrangedSubview(view)
+                    mediaViewHeight += ChatMessageAudioView.defaultHeight
+                }
 
             default:
                 return
