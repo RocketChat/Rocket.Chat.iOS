@@ -161,6 +161,13 @@
                                                     <constraint firstAttribute="width" constant="45" id="hzF-ny-wTQ"/>
                                                 </constraints>
                                             </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Add" translatesAutoresizingMaskIntoConstraints="NO" id="ZvM-k3-mZd">
+                                                <rect key="frame" x="310" y="32.5" width="20" height="20"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="20" id="AQD-eR-8CA"/>
+                                                    <constraint firstAttribute="width" constant="20" id="dNG-Ua-krL"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
@@ -170,7 +177,9 @@
                                             <constraint firstItem="xrn-W8-pS8" firstAttribute="centerY" secondItem="ArO-ez-uRr" secondAttribute="centerY" id="4wS-3P-5f5"/>
                                             <constraint firstItem="V2s-Ct-SCW" firstAttribute="leading" secondItem="xrn-W8-pS8" secondAttribute="trailing" constant="8" id="6nm-Fx-neA"/>
                                             <constraint firstItem="2Qq-vp-NoK" firstAttribute="top" secondItem="ArO-ez-uRr" secondAttribute="top" constant="19" id="Aoo-bg-34c"/>
+                                            <constraint firstItem="ZvM-k3-mZd" firstAttribute="top" secondItem="QXa-y8-P03" secondAttribute="top" id="F7a-lH-kWM"/>
                                             <constraint firstItem="K3h-Vc-Kfo" firstAttribute="leading" secondItem="V2s-Ct-SCW" secondAttribute="trailing" constant="8" id="JBS-Z8-ijx"/>
+                                            <constraint firstItem="QXa-y8-P03" firstAttribute="leading" secondItem="ZvM-k3-mZd" secondAttribute="trailing" constant="8" id="Lyq-kq-2VK"/>
                                             <constraint firstAttribute="trailing" secondItem="QXa-y8-P03" secondAttribute="trailing" constant="17" id="RpC-Gx-t2v"/>
                                             <constraint firstItem="QXa-y8-P03" firstAttribute="leading" secondItem="K3h-Vc-Kfo" secondAttribute="trailing" constant="15" id="S7E-pk-Vi1"/>
                                             <constraint firstAttribute="trailing" secondItem="2Qq-vp-NoK" secondAttribute="trailing" constant="15" id="Vth-Np-KrR"/>
@@ -228,13 +237,13 @@
                         <outlet property="avatarViewContainer" destination="xrn-W8-pS8" id="9EJ-E3-6iO"/>
                         <outlet property="buttonCancelSearch" destination="DHL-lw-BNd" id="Z2w-xL-sMe"/>
                         <outlet property="buttonCancelSearchWidthConstraint" destination="cc8-l6-3Cc" id="mCA-dV-hng"/>
+                        <outlet property="imageViewAddChannel" destination="ZvM-k3-mZd" id="9Fj-am-baY"/>
                         <outlet property="imageViewArrowDown" destination="QXa-y8-P03" id="aiy-GU-1xl"/>
                         <outlet property="labelServer" destination="2Qq-vp-NoK" id="ddj-Ab-OQx"/>
                         <outlet property="labelUsername" destination="K3h-Vc-Kfo" id="6sl-Ij-9ar"/>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                         <outlet property="textFieldSearch" destination="TPV-i5-hsW" id="0ho-Fe-IZ9"/>
                         <outlet property="viewTextField" destination="qEc-o0-IxJ" id="1KL-CT-eAr"/>
-                        <outlet property="viewUser" destination="ArO-ez-uRr" id="1qV-E6-iP0"/>
                         <outlet property="viewUserStatus" destination="V2s-Ct-SCW" id="ZS3-d0-lpu"/>
                     </connections>
                 </viewController>
