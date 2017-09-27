@@ -40,7 +40,7 @@ class ChatMessageAudioView: UIView {
             } else {
                 player?.pause()
             }
-            playButton.setTitle(playing ? "⏸" : "▶️", for: .normal)
+            playButton.setImage(playing ? #imageLiteral(resourceName: "fa_pause") : #imageLiteral(resourceName: "fa_play"), for: .normal)
         }
     }
 
