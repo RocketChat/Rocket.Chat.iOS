@@ -10,8 +10,12 @@ import Foundation
 import RealmSwift
 
 extension LinkingObjects where Element == Subscription {
-    func sortedByLastSeen() -> Results<Subscription> {
-        return self.sorted(byKeyPath: "lastSeen", ascending: false)
+    func sortedByLastMessageDate() -> [Subscription] {
+        return self.sorted(by: { (aSubscription, bSubscription) -> Bool in
+            guard let aDate = aSubscription.lastMessage()?.createdAt else { return false }
+            guard let bDate = bSubscription.lastMessage()?.createdAt else { return true }
+            return aDate > bDate
+        })
     }
 
     func filterBy(name: String) -> Results<Subscription> {
@@ -20,8 +24,12 @@ extension LinkingObjects where Element == Subscription {
 }
 
 extension Results where Element == Subscription {
-    func sortedByLastSeen() -> Results<Subscription> {
-        return self.sorted(byKeyPath: "lastSeen", ascending: false)
+    func sortedByLastMessageDate() -> [Subscription] {
+        return self.sorted(by: { (aSubscription, bSubscription) -> Bool in
+            guard let aDate = aSubscription.lastMessage()?.createdAt else { return false }
+            guard let bDate = bSubscription.lastMessage()?.createdAt else { return true }
+            return aDate > bDate
+        })
     }
 
     func filterBy(name: String) -> Results<Subscription> {

@@ -51,6 +51,7 @@ final class SubscriptionCell: UITableViewCell {
 
     @IBOutlet weak var labelName: UILabel!
     @IBOutlet weak var labelMessage: UILabel!
+    @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUnread: UILabel! {
         didSet {
             labelUnread.layer.cornerRadius = 2
@@ -76,9 +77,13 @@ final class SubscriptionCell: UITableViewCell {
         avatarView.subscription = subscription
         avatarView.user = subscription.directMessageUser
         labelName.text = subscription.displayName()
-        labelMessage.text = subscription.lastMessageText()
         labelUnread.alpha = subscription.unread > 0 ? 1 : 0
         labelUnread.text = "\(subscription.unread)"
+
+        if let lastMessage = subscription.lastMessage() {
+            labelMessage.text = lastMessage.text
+            labelDate.text = lastMessage.updatedAt?.formatted("HH:mm")
+        }
     }
 
     func updateStatus() {

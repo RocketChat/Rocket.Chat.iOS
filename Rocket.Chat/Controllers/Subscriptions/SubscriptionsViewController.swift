@@ -72,12 +72,9 @@ final class SubscriptionsViewController: BaseViewController {
     var isSearchingLocally = false
     var isSearchingRemotely = false
     var searchResult: [Subscription]?
-    var subscriptions: Results<Subscription>?
+    var subscriptions: [Subscription]?
     var subscriptionsToken: NotificationToken?
     var usersToken: NotificationToken?
-
-    var groupInfomation: [[String: String]]?
-    var groupSubscriptions: [[Subscription]]?
 
     var searchText: String = ""
 
@@ -159,7 +156,7 @@ extension SubscriptionsViewController {
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: text)
+//        subscriptions = auth.subscriptions.filterBy(name: text)
 
         if text.characters.count == 0 {
             isSearchingLocally = false
@@ -206,27 +203,26 @@ extension SubscriptionsViewController {
             self?.activityViewSearching.stopAnimating()
             self?.isSearchingRemotely = true
             self?.searchResult = result
-//            self?.groupSubscription()
             self?.tableView.reloadData()
         }
     }
 
     func updateAll() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sortedByLastSeen()
+        subscriptions = auth.subscriptions.sortedByLastMessageDate()
     }
 
     func updateSearched() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: searchText).sortedByLastSeen()
+        subscriptions = auth.subscriptions.filterBy(name: searchText).sortedByLastMessageDate()
     }
 
     func updateData() {
         guard !isSearchingLocally && !isSearchingRemotely else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-//        groupSubscription()
+
+        updateAll()
         updateCurrentUserInformation()
+
         tableView?.reloadData()
     }
 
@@ -255,7 +251,7 @@ extension SubscriptionsViewController {
     }
 
     func updateCurrentUserInformation() {
-        
+
     }
 
     func subscribeModelChanges() {
@@ -265,8 +261,7 @@ extension SubscriptionsViewController {
 
         assigned = true
 
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
+        subscriptionsToken = realm.objects(Subscription.self).addNotificationBlock(handleModelUpdates)
         usersToken = realm.objects(User.self).addNotificationBlock(handleModelUpdates)
     }
 

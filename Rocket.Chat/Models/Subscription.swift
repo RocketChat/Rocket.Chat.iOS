@@ -139,8 +139,8 @@ extension Subscription {
         return filteredMessages.sorted(byKeyPath: "createdAt", ascending: false)
     }
 
-    func lastMessageText() -> String? {
-        return messages.sorted(byKeyPath: "createdAt", ascending: true).last?.text
+    func lastMessage() -> Message? {
+        return fetchMessagesQueryResults().first
     }
 
     func updateFavorite(_ favorite: Bool) {
