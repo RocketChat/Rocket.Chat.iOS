@@ -75,8 +75,25 @@ final class SubscriptionCell: UITableViewCell {
         avatarView.subscription = subscription
         avatarView.user = subscription.directMessageUser
         labelName.text = subscription.displayName()
-        labelUnread.alpha = subscription.unread > 0 ? 1 : 0
-        labelUnread.text = "\(subscription.unread)"
+
+        let nameFontSize = labelName.font.pointSize
+        let dateFontSize = labelDate.font.pointSize
+
+        if subscription.unread > 0 {
+            labelName.font = UIFont.boldSystemFont(ofSize: nameFontSize)
+            labelDate.font = UIFont.boldSystemFont(ofSize: dateFontSize)
+            labelDate.textColor = .black
+
+            labelUnread.alpha = 1
+            labelUnread.text =  "\(subscription.unread)"
+        } else {
+            labelName.font = UIFont.systemFont(ofSize: nameFontSize)
+            labelDate.font = UIFont.systemFont(ofSize: dateFontSize)
+            labelDate.textColor = .RCGray()
+
+            labelUnread.alpha = 0
+            labelUnread.text =  ""
+        }
 
         if let lastMessage = subscription.lastMessage() {
             labelDate.text = lastMessage.updatedAt?.formatted("HH:mm")
