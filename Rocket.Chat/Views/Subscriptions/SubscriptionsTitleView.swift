@@ -10,19 +10,6 @@ import UIKit
 
 class SubscriptionsTitleView: UIView {
 
-    @IBOutlet weak var imageViewServer: UIImageView! {
-        didSet {
-            imageViewServer.layer.masksToBounds = true
-            imageViewServer.layer.cornerRadius = 3
-
-            if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
-                if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
-                    imageViewServer.sd_setImage(with: imageURL)
-                }
-            }
-        }
-    }
-
     @IBOutlet weak var labelUser: UILabel!
     @IBOutlet weak var viewStatus: UIView!
 
@@ -30,7 +17,7 @@ class SubscriptionsTitleView: UIView {
         didSet {
             guard let user = user else { return }
 
-            labelUser.text = user.displayName()
+            labelUser.text = "@\(user.username ?? user.displayName())"
 
             switch user.status {
             case .online:

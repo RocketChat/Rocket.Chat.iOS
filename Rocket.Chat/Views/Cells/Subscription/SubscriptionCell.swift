@@ -50,7 +50,6 @@ final class SubscriptionCell: UITableViewCell {
     }
 
     @IBOutlet weak var labelName: UILabel!
-    @IBOutlet weak var labelMessage: UILabel!
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUnread: UILabel! {
         didSet {
@@ -64,7 +63,6 @@ final class SubscriptionCell: UITableViewCell {
         avatarView.user = nil
         avatarView.subscription = nil
         labelName.text = ""
-        labelMessage.text = ""
         labelUnread.text = ""
         labelUnread.alpha = 0
     }
@@ -81,7 +79,6 @@ final class SubscriptionCell: UITableViewCell {
         labelUnread.text = "\(subscription.unread)"
 
         if let lastMessage = subscription.lastMessage() {
-            labelMessage.text = lastMessage.text
             labelDate.text = lastMessage.updatedAt?.formatted("HH:mm")
         }
     }

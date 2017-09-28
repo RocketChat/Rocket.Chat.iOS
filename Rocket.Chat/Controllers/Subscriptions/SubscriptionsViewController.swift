@@ -8,37 +8,12 @@
 
 import RealmSwift
 
-// swiftlint:disable file_length
 final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
 
-    let defaultButtonCancelSearchWidth = CGFloat(65)
-    @IBOutlet weak var buttonCancelSearch: UIButton! {
-        didSet {
-            buttonCancelSearch.setTitle(localized("global.cancel"), for: .normal)
-        }
-    }
-    @IBOutlet weak var buttonCancelSearchWidthConstraint: NSLayoutConstraint!
-
-    @IBOutlet weak var textFieldSearch: UITextField! {
-        didSet {
-            textFieldSearch.placeholder = localized("subscriptions.search")
-
-            if let placeholder = textFieldSearch.placeholder {
-                let color = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
-                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSAttributedStringKey.foregroundColor: color])
-            }
-        }
-    }
-
-    @IBOutlet weak var viewTextField: UIView! {
-        didSet {
-            viewTextField.layer.cornerRadius = 4
-            viewTextField.layer.masksToBounds = true
-        }
-    }
+    weak var titleView: SubscriptionsTitleView?
+    weak var searchController: UISearchController?
 
     weak var viewUserMenu: SubscriptionUserStatusView?
     @IBOutlet weak var viewUser: UIView! {
@@ -46,10 +21,6 @@ final class SubscriptionsViewController: BaseViewController {
             let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
             viewUser.addGestureRecognizer(gesture)
         }
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
 
     @IBOutlet weak var labelServer: UILabel!
@@ -86,16 +57,38 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.placeholder = localized("subscriptions.search")
+        self.searchController = searchController
+
         if #available(iOS 11.0, *) {
             navigationController?.navigationBar.prefersLargeTitles = false
             navigationItem.largeTitleDisplayMode = .never
 
-            navigationItem.searchController = UISearchController(searchResultsController: nil)
+            navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = true
+        } else {
+            tableView.tableHeaderView = searchController.searchBar
         }
 
-        let titleView = SubscriptionsTitleView.instantiateFromNib()
-        navigationItem.titleView = titleView
+        if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
+            if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
+                let imageViewServer = UIImageView()
+                imageViewServer.bounds = CGRect(x: 0, y: 0, width: 25, height: 25)
+                imageViewServer.sd_setImage(with: imageURL)
+
+                let buttonServer = UIBarButtonItem(customView: imageViewServer)
+                buttonServer.width = 25
+
+                navigationItem.leftBarButtonItem = buttonServer
+            }
+        }
+
+        if let titleView = SubscriptionsTitleView.instantiateFromNib() {
+            titleView.user = AuthManager.currentUser()
+            navigationItem.titleView = titleView
+            self.titleView = titleView
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -119,37 +112,11 @@ final class SubscriptionsViewController: BaseViewController {
     }
 }
 
-// MARK: Side Menu callbacks
-extension SubscriptionsViewController {
-    func willHide() {
-        self.textFieldSearch.resignFirstResponder()
-    }
+extension SubscriptionsViewController: UISearchBarDelegate {
 
-    func didHide() {
-        self.textFieldSearch.resignFirstResponder()
-    }
-
-    func willReveal() {
-        if searchText.isEmpty {
-            hideCancelSearchButton()
-        } else {
-            showCancelSearchButton()
-        }
-
-        self.textFieldSearch.resignFirstResponder()
-        self.updateData()
-    }
-
-    func didReveal() {
-        self.textFieldSearch.resignFirstResponder()
-    }
-}
-
-extension SubscriptionsViewController {
-
-    @IBAction func buttonCancelSearchDidPressed(_ sender: Any) {
-        textFieldSearch.resignFirstResponder()
-        textFieldSearch.text = ""
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
         searchText = ""
         searchBy()
     }
@@ -163,11 +130,8 @@ extension SubscriptionsViewController {
             isSearchingRemotely = false
             searchResult = []
 
-//            groupSubscription()
             tableView.reloadData()
             tableView.tableFooterView = nil
-
-            activityViewSearching.stopAnimating()
 
             return
         }
@@ -180,7 +144,6 @@ extension SubscriptionsViewController {
         isSearchingLocally = true
         isSearchingRemotely = false
 
-//        groupSubscription()
         tableView.reloadData()
 
         if let footerView = SubscriptionSearchMoreView.instantiateFromNib() {
@@ -191,16 +154,14 @@ extension SubscriptionsViewController {
 
     func searchOnSpotlight(_ text: String = "") {
         tableView.tableFooterView = nil
-        activityViewSearching.startAnimating()
 
         SubscriptionManager.spotlight(text) { [weak self] result in
-            let currentText = self?.textFieldSearch.text ?? ""
+            let currentText = self?.searchController?.searchBar.text ?? ""
 
             if currentText.characters.count == 0 {
                 return
             }
 
-            self?.activityViewSearching.stopAnimating()
             self?.isSearchingRemotely = true
             self?.searchResult = result
             self?.tableView.reloadData()
@@ -233,25 +194,15 @@ extension SubscriptionsViewController {
             updateAll()
         }
 
-//        groupSubscription()
-
         updateCurrentUserInformation()
         SubscriptionManager.updateUnreadApplicationBadge()
 
-        // Update titleView information with subscription, can be
-        // some status changes
-        // if let subscription = ChatViewController.shared?.subscription {
-        //     ChatViewController.shared?.chatTitleView?.subscription = subscription
-        // }
-
-        // If side panel is visible, reload the data
-        // if MainChatViewController.shared?.sidePanelVisible ?? false {
-        //     tableView?.reloadData()
-        // }
+        // TODO: Perform a lighter reload data based on the updated indexes
+        tableView?.reloadData()
     }
 
     func updateCurrentUserInformation() {
-
+        titleView?.user = AuthManager.currentUser()
     }
 
     func subscribeModelChanges() {
@@ -320,11 +271,11 @@ extension SubscriptionsViewController: UITableViewDelegate {
 extension SubscriptionsViewController: UITextFieldDelegate {
 
     func showCancelSearchButton() {
-        buttonCancelSearchWidthConstraint.constant = defaultButtonCancelSearchWidth
+        searchController?.searchBar.setShowsCancelButton(true, animated: true)
     }
 
     func hideCancelSearchButton() {
-        buttonCancelSearchWidthConstraint.constant = 0
+        searchController?.searchBar.setShowsCancelButton(false, animated: true)
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
@@ -368,8 +319,9 @@ extension SubscriptionsViewController: UITextFieldDelegate {
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 
     func buttonLoadMoreDidPressed() {
-        searchOnSpotlight(textFieldSearch.text ?? "")
+        searchOnSpotlight(searchController?.searchBar.text ?? "")
     }
+
 }
 
 extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
@@ -408,8 +360,6 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
     }
 
     @objc func viewUserDidTap(sender: Any) {
-        textFieldSearch.resignFirstResponder()
-
         if viewUserMenu != nil {
             dismissUserMenu()
         } else {
