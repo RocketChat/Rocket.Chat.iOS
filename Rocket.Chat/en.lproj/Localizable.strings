@@ -22,6 +22,9 @@
 "alert.connection.invalid_version.title" = "Oops!";
 "alert.connection.invalid_version.message" = "The server you're trying to connect is using a version that's not supported by the app anymore: %@.\n\nWe require version %@.";
 
+"alert.settings.set_mail_app.title" = "Oops!";
+"alert.settings.set_mail_app.message" = "No Mail Accounts. Please set up a Mail account in order to send email.";
+
 // Socket Connection
 "connection.offline.banner.message" = "You're offline, try connecting again";
 
@@ -106,3 +109,6 @@
 "chat.info.item.members" = "Members";
 "chat.info.item.pinned" = "Pinned";
 "chat.info.item.starred" = "Starred";
+
+// Members List
+"memberslist.title" = "Members (%d)";

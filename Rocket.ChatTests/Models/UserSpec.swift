@@ -72,4 +72,29 @@ class UserSpec: XCTestCase {
         XCTAssertEqual(user.displayName(), "Full Name", "User.displayName() will return name property")
         XCTAssertNotEqual(user.displayName(), "username", "User.displayName() won't return username property")
     }
+
+    func testUserDisplayNameHonorNameSettingsWhenEmpty() {
+        let settings = AuthSettings()
+        settings.useUserRealName = true
+
+        AuthSettingsManager.shared.internalSettings = settings
+
+        let user = User()
+        user.name = ""
+        user.username = "username"
+
+        XCTAssertEqual(user.displayName(), "username", "User.displayName() will return username property because name is empty")
+    }
+
+    func testUserDisplayNameHonorNameSettingsWhenNil() {
+        let settings = AuthSettings()
+        settings.useUserRealName = true
+
+        AuthSettingsManager.shared.internalSettings = settings
+
+        let user = User()
+        user.username = "username"
+
+        XCTAssertEqual(user.displayName(), "username", "User.displayName() will return username property because name is nil")
+    }
 }
