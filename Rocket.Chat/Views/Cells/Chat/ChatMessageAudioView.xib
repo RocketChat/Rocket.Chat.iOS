@@ -54,8 +54,11 @@
                                 <action selector="didPressPlayButton:" destination="jII-b2-bIf" eventType="touchUpInside" id="MX5-TP-d7q"/>
                             </connections>
                         </button>
-                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="c75-Du-ac0">
-                            <rect key="frame" x="31" y="0.0" width="246" height="31"/>
+                        <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="c75-Du-ac0">
+                            <rect key="frame" x="35" y="0.0" width="242" height="31"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="thumbTintColor" cocoaTouchSystemColor="darkTextColor"/>
                             <connections>
                                 <action selector="didFinishSlidingSlider:" destination="jII-b2-bIf" eventType="touchUpOutside" id="Kyw-4Q-G6U"/>
                                 <action selector="didFinishSlidingSlider:" destination="jII-b2-bIf" eventType="touchUpInside" id="q6i-Po-Ci7"/>
@@ -63,7 +66,7 @@
                             </connections>
                         </slider>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMe-up-GvD">
-                            <rect key="frame" x="33" y="30" width="27" height="15"/>
+                            <rect key="frame" x="37" y="30" width="27" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -76,7 +79,7 @@
                         <constraint firstItem="c75-Du-ac0" firstAttribute="centerY" secondItem="xU6-9R-Yqd" secondAttribute="centerY" id="LkF-rm-802"/>
                         <constraint firstAttribute="trailing" secondItem="c75-Du-ac0" secondAttribute="trailing" constant="4" id="OQd-5a-VQf"/>
                         <constraint firstItem="Zfk-42-wzd" firstAttribute="centerY" secondItem="xU6-9R-Yqd" secondAttribute="centerY" id="VDU-Hh-raM"/>
-                        <constraint firstItem="c75-Du-ac0" firstAttribute="leading" secondItem="xU6-9R-Yqd" secondAttribute="trailing" constant="4" id="iyn-wV-Ogg"/>
+                        <constraint firstItem="c75-Du-ac0" firstAttribute="leading" secondItem="xU6-9R-Yqd" secondAttribute="trailing" constant="8" id="iyn-wV-Ogg"/>
                         <constraint firstItem="Zfk-42-wzd" firstAttribute="centerX" secondItem="xU6-9R-Yqd" secondAttribute="centerX" id="pU0-1t-mJO"/>
                         <constraint firstItem="OMe-up-GvD" firstAttribute="top" secondItem="c75-Du-ac0" secondAttribute="bottom" id="yiD-L4-Pab"/>
                     </constraints>

@@ -23,8 +23,18 @@ class ChatMessageAudioView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
-    @IBOutlet weak var timeSlider: UISlider!
-    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var timeSlider: UISlider! {
+        didSet {
+            timeSlider.setThumbImage(#imageLiteral(resourceName: "fa_circle").resizeWith(width: 20)?.imageWithTint(.gray), for: .normal)
+            timeSlider.setThumbImage(#imageLiteral(resourceName: "fa_circle").resizeWith(width: 20)?.imageWithTint(.gray), for: .highlighted)
+        }
+    }
+    @IBOutlet weak var playButton: UIButton! {
+        didSet {
+            playButton.tintColor = .gray
+            playButton.imageView?.tintColor = .gray
+        }
+    }
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     private var player: AVAudioPlayer? {
@@ -40,7 +50,9 @@ class ChatMessageAudioView: UIView {
             } else {
                 player?.pause()
             }
-            playButton.setImage(playing ? #imageLiteral(resourceName: "fa_pause") : #imageLiteral(resourceName: "fa_play"), for: .normal)
+            let pause = #imageLiteral(resourceName: "fa_pause").imageWithTint(.gray)
+            let play = #imageLiteral(resourceName: "fa_play").imageWithTint(.gray)
+            playButton.setImage(playing ? pause : play, for: .normal)
         }
     }
 
