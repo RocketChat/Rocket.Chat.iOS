@@ -72,12 +72,7 @@ extension NewChannelViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch tableViewData[indexPath.section].cell {
-        case .boolOption:
-            return CGFloat(NewChannelBoolOptionCell.defaultHeight)
-        case .textField:
-            return CGFloat(NewChannelTextFieldCell.defaultHeight)
-        }
+        return CGFloat(tableViewData[indexPath.section].cell.getClass().defaultHeight)
     }
 }
 
