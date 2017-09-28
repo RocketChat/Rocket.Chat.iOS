@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -326,6 +327,50 @@
                                             <outlet property="labelDescription" destination="BW8-cJ-H4B" id="sgU-In-zTQ"/>
                                             <outlet property="labelTitle" destination="zlx-4c-vmk" id="uIr-nf-eMP"/>
                                             <outlet property="switchOption" destination="OQg-im-fl0" id="8Qi-Pt-t40"/>
+                                        </connections>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kNewChannelTextField" rowHeight="68" id="wjs-yn-5zv" customClass="NewChannelTextFieldCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="100" width="320" height="68"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wjs-yn-5zv" id="I04-A3-mBG">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="67.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="E6x-oP-DjD">
+                                                    <rect key="frame" x="8" y="8" width="304" height="50.5"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rAC-2D-SBf">
+                                                            <rect key="frame" x="0.0" y="0.0" width="304" height="20.5"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wIe-LO-cya">
+                                                            <rect key="frame" x="0.0" y="20.5" width="304" height="30"/>
+                                                            <nil key="textColor"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                            <textInputTraits key="textInputTraits"/>
+                                                            <connections>
+                                                                <action selector="textFieldInputEditingDidEnd:" destination="wjs-yn-5zv" eventType="editingDidEnd" id="3A8-98-maG"/>
+                                                            </connections>
+                                                        </textField>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="wIe-LO-cya" firstAttribute="width" secondItem="E6x-oP-DjD" secondAttribute="width" id="JBV-Jj-P2Y"/>
+                                                        <constraint firstItem="rAC-2D-SBf" firstAttribute="width" secondItem="E6x-oP-DjD" secondAttribute="width" id="wVT-qm-wIv"/>
+                                                    </constraints>
+                                                </stackView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="E6x-oP-DjD" firstAttribute="leading" secondItem="I04-A3-mBG" secondAttribute="leading" constant="8" id="F9r-We-4iE"/>
+                                                <constraint firstAttribute="trailing" secondItem="E6x-oP-DjD" secondAttribute="trailing" constant="8" id="P56-bA-cHX"/>
+                                                <constraint firstItem="E6x-oP-DjD" firstAttribute="top" secondItem="I04-A3-mBG" secondAttribute="topMargin" id="pxM-48-gfJ"/>
+                                                <constraint firstItem="E6x-oP-DjD" firstAttribute="centerX" secondItem="I04-A3-mBG" secondAttribute="centerX" id="zQZ-ew-Vah"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="labelTitle" destination="rAC-2D-SBf" id="Ice-bq-YsF"/>
+                                            <outlet property="textFieldInput" destination="wIe-LO-cya" id="NKh-yh-Dyy"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
