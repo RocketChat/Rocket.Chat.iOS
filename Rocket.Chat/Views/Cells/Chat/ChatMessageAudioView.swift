@@ -25,8 +25,8 @@ class ChatMessageAudioView: UIView {
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var timeSlider: UISlider! {
         didSet {
-            timeSlider.setThumbImage(#imageLiteral(resourceName: "fa_circle").resizeWith(width: 20)?.imageWithTint(.gray), for: .normal)
-            timeSlider.setThumbImage(#imageLiteral(resourceName: "fa_circle").resizeWith(width: 20)?.imageWithTint(.gray), for: .highlighted)
+            timeSlider.setThumbImage(#imageLiteral(resourceName: "Player Progress").resizeWith(width: 15)?.imageWithTint(.RCGray()), for: .normal)
+            timeSlider.setThumbImage(#imageLiteral(resourceName: "Player Progress").resizeWith(width: 15)?.imageWithTint(.RCDarkGray()), for: .highlighted)
         }
     }
     @IBOutlet weak var playButton: UIButton! {
@@ -50,8 +50,8 @@ class ChatMessageAudioView: UIView {
             } else {
                 player?.pause()
             }
-            let pause = #imageLiteral(resourceName: "fa_pause").imageWithTint(.gray)
-            let play = #imageLiteral(resourceName: "fa_play").imageWithTint(.gray)
+            let pause = #imageLiteral(resourceName: "Player Pause").imageWithTint(.RCDarkGray())
+            let play = #imageLiteral(resourceName: "Player Play").imageWithTint(.RCDarkGray())
             playButton.setImage(playing ? pause : play, for: .normal)
         }
     }

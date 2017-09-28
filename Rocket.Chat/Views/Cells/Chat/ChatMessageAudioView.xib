@@ -19,9 +19,9 @@
                     <rect key="frame" x="0.0" y="0.0" width="279" height="30"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ygj-2s-cXu" userLabel="Title Label">
-                            <rect key="frame" x="0.0" y="5" width="279" height="20"/>
+                            <rect key="frame" x="0.0" y="5" width="279" height="19.5"/>
                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="16"/>
-                            <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="textColor" red="0.29019607843137252" green="0.29019607843137252" blue="0.29019607843137252" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -37,25 +37,21 @@
                     <rect key="frame" x="0.0" y="30" width="279" height="59"/>
                     <subviews>
                         <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="Zfk-42-wzd">
-                            <rect key="frame" x="4" y="5" width="20" height="20"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="20" id="8du-nd-y1H"/>
-                                <constraint firstAttribute="height" constant="20" id="sOc-zb-3Hv"/>
-                            </constraints>
+                            <rect key="frame" x="0.0" y="5" width="20" height="20"/>
                         </activityIndicatorView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xU6-9R-Yqd" userLabel="Play Button">
-                            <rect key="frame" x="-1" y="0.0" width="30" height="30"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xU6-9R-Yqd" userLabel="Play Button">
+                            <rect key="frame" x="0.0" y="0.0" width="25" height="30"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="30" id="KDb-hK-Nax"/>
+                                <constraint firstAttribute="width" constant="25" id="KDb-hK-Nax"/>
                                 <constraint firstAttribute="height" constant="30" id="XsT-Tf-zAY"/>
                             </constraints>
-                            <state key="normal" image="fa_play"/>
+                            <state key="normal" image="Player Play"/>
                             <connections>
                                 <action selector="didPressPlayButton:" destination="jII-b2-bIf" eventType="touchUpInside" id="MX5-TP-d7q"/>
                             </connections>
                         </button>
                         <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="5" translatesAutoresizingMaskIntoConstraints="NO" id="c75-Du-ac0">
-                            <rect key="frame" x="35" y="0.0" width="242" height="31"/>
+                            <rect key="frame" x="31" y="0.0" width="246" height="31"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <color key="tintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="thumbTintColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -66,21 +62,21 @@
                             </connections>
                         </slider>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:00" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OMe-up-GvD">
-                            <rect key="frame" x="37" y="30" width="27" height="15"/>
+                            <rect key="frame" x="33" y="30" width="27" height="15"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" red="0.61960784310000006" green="0.63529411759999999" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="OMe-up-GvD" firstAttribute="leading" secondItem="c75-Du-ac0" secondAttribute="leading" id="9xp-If-FNS"/>
-                        <constraint firstItem="xU6-9R-Yqd" firstAttribute="leading" secondItem="P58-v7-rJ9" secondAttribute="leading" constant="-1" id="IVr-z5-aP5" userLabel="Button Play.leading = leading"/>
+                        <constraint firstItem="xU6-9R-Yqd" firstAttribute="leading" secondItem="P58-v7-rJ9" secondAttribute="leading" id="IVr-z5-aP5" userLabel="Button Play.leading = leading"/>
                         <constraint firstItem="c75-Du-ac0" firstAttribute="centerY" secondItem="xU6-9R-Yqd" secondAttribute="centerY" id="LkF-rm-802"/>
                         <constraint firstAttribute="trailing" secondItem="c75-Du-ac0" secondAttribute="trailing" constant="4" id="OQd-5a-VQf"/>
                         <constraint firstItem="Zfk-42-wzd" firstAttribute="centerY" secondItem="xU6-9R-Yqd" secondAttribute="centerY" id="VDU-Hh-raM"/>
                         <constraint firstItem="c75-Du-ac0" firstAttribute="leading" secondItem="xU6-9R-Yqd" secondAttribute="trailing" constant="8" id="iyn-wV-Ogg"/>
-                        <constraint firstItem="Zfk-42-wzd" firstAttribute="centerX" secondItem="xU6-9R-Yqd" secondAttribute="centerX" id="pU0-1t-mJO"/>
+                        <constraint firstItem="Zfk-42-wzd" firstAttribute="leading" secondItem="P58-v7-rJ9" secondAttribute="leading" id="jqT-Uh-rJe"/>
                         <constraint firstItem="OMe-up-GvD" firstAttribute="top" secondItem="c75-Du-ac0" secondAttribute="bottom" id="yiD-L4-Pab"/>
                     </constraints>
                 </view>
@@ -118,6 +114,6 @@
         </toolbar>
     </objects>
     <resources>
-        <image name="fa_play" width="256" height="256"/>
+        <image name="Player Play" width="18" height="20"/>
     </resources>
 </document>
