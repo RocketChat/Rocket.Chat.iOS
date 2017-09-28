@@ -32,13 +32,17 @@ enum NewChannelCells {
     case boolOption(title: String, description: String)
     case textField(title: String)
 
-    func getIdentifier() -> String {
+    func getClass() -> NewChannelCellProtocol.Type {
         switch self {
         case .boolOption:
-            return NewChannelBoolOptionCell.identifier
+            return NewChannelBoolOptionCell.self
         case .textField:
-            return NewChannelTextFieldCell.identifier
+            return NewChannelTextFieldCell.self
         }
+    }
+
+    func getIdentifier() -> String {
+        return getClass().identifier
     }
 
     func createCell(table: UITableView, delegate: NewChannelCellDelegate, key: String) -> NewChannelCellProtocol? {
@@ -51,6 +55,7 @@ enum NewChannelCells {
                 cell.labelTitle.text = title
                 cell.labelDescription.text = description
             }
+
         case .textField(let title):
             if let cell = cell as? NewChannelTextFieldCell {
                 cell.labelTitle.text = title
