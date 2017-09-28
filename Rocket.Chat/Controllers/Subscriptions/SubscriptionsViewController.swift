@@ -49,11 +49,6 @@ final class SubscriptionsViewController: BaseViewController {
 
     var searchText: String = ""
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        subscribeModelChanges()
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -89,6 +84,8 @@ final class SubscriptionsViewController: BaseViewController {
             navigationItem.titleView = titleView
             self.titleView = titleView
         }
+
+        subscribeModelChanges()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -207,7 +204,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func subscribeModelChanges() {
         guard !assigned else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
         guard let realm = Realm.shared else { return }
 
         assigned = true
