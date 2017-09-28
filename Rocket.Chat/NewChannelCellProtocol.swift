@@ -30,10 +30,31 @@ struct CreateCell {
 
 enum NewChannelCells {
     case boolOption(title: String, description: String)
+    case textField(title: String)
+
+    func getIdentifier() -> String {
+        switch self {
+        case .boolOption:
+            return NewChannelBoolOptionCell.identifier
+        case .textField:
+            return NewChannelTextFieldCell.identifier
+        }
+    }
 
     func createCell(table: UITableView, delegate: NewChannelCellDelegate, key: String) -> NewChannelCellProtocol? {
-        guard let cell = table.dequeueReusableCell(withIdentifier: NewChannelBoolOptionCell.identifier) as? NewChannelBoolOptionCell else {
-            return nil
+        let cellIdentifier = self.getIdentifier()
+        guard var cell = table.dequeueReusableCell(withIdentifier: cellIdentifier) as? NewChannelCellProtocol else { return nil }
+
+        switch self {
+        case .boolOption(let title, let description):
+            if let cell = cell as? NewChannelBoolOptionCell {
+                cell.labelTitle.text = title
+                cell.labelDescription.text = description
+            }
+        case .textField(let title):
+            if let cell = cell as? NewChannelTextFieldCell {
+                cell.labelTitle.text = title
+            }
         }
 
         cell.delegate = delegate
@@ -41,12 +62,6 @@ enum NewChannelCells {
 
         if let previousValue = cell.delegate?.getPreviousValue(key: key) {
             cell.setPreviousValue(previous: previousValue)
-        }
-
-        switch self {
-        case .boolOption(let title, let description):
-            cell.labelTitle.text = title
-            cell.labelDescription.text = description
         }
 
         return cell

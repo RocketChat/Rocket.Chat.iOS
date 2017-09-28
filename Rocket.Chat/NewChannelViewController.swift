@@ -20,6 +20,11 @@ class NewChannelViewController: BaseViewController {
             cell: .boolOption(title: "Read only channel", description: "Only admin can write new messages"),
             key: "Read only channel",
             defaultValue: false
+        ),
+        CreateCell(
+            cell: .textField(title: "Channel Name"),
+            key: "Channel Name",
+            defaultValue: ""
         )
     ]
 
@@ -67,9 +72,11 @@ extension NewChannelViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        switch tableViewData[indexPath.row].cell {
+        switch tableViewData[indexPath.section].cell {
         case .boolOption:
             return CGFloat(NewChannelBoolOptionCell.defaultHeight)
+        case .textField:
+            return CGFloat(NewChannelTextFieldCell.defaultHeight)
         }
     }
 }
