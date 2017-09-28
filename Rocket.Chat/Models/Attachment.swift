@@ -88,4 +88,8 @@ extension Attachment {
         return Attachment.fullURLWith(imageURL)
     }
 
+    func fullAudioURL() -> URL? {
+        return Attachment.fullURLWith(audioURL)
+    }
+
 }
