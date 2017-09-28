@@ -179,10 +179,10 @@
 		80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */; };
 		80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */; };
 		80235D261F74672D00A56CA5 /* LoaderTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80235D251F74672D00A56CA5 /* LoaderTableViewCell.xib */; };
-		802498F31F7ACD76005477EC /* ChatMessageAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */; };
-		802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */; };
 		802498EE1F7A8380005477EC /* MeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498ED1F7A8380005477EC /* MeRequest.swift */; };
 		802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F01F7A9BB4005477EC /* MeRequestSpec.swift */; };
+		802498F31F7ACD76005477EC /* ChatMessageAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */; };
+		802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */; };
 		80A63C4F1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */; };
 		80A63C511F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */; };
 		80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */; };
@@ -419,10 +419,10 @@
 		80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequestSpec.swift; sourceTree = "<group>"; };
 		80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoaderTableViewCell.swift; path = Views/Cells/LoaderTableViewCell.swift; sourceTree = "<group>"; };
 		80235D251F74672D00A56CA5 /* LoaderTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = LoaderTableViewCell.xib; path = Views/Cells/LoaderTableViewCell.xib; sourceTree = "<group>"; };
-		802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChatMessageAudioView.xib; path = Views/Cells/Chat/ChatMessageAudioView.xib; sourceTree = "<group>"; };
-		802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatMessageAudioView.swift; path = Views/Cells/Chat/ChatMessageAudioView.swift; sourceTree = "<group>"; };
 		802498ED1F7A8380005477EC /* MeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeRequest.swift; sourceTree = "<group>"; };
 		802498F01F7A9BB4005477EC /* MeRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeRequestSpec.swift; sourceTree = "<group>"; };
+		802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChatMessageAudioView.xib; path = Views/Cells/Chat/ChatMessageAudioView.xib; sourceTree = "<group>"; };
+		802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatMessageAudioView.swift; path = Views/Cells/Chat/ChatMessageAudioView.swift; sourceTree = "<group>"; };
 		80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequest.swift; sourceTree = "<group>"; };
 		80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequest.swift; sourceTree = "<group>"; };
