@@ -25,6 +25,7 @@ enum APIRequestOptions {
 protocol APIRequest {
     var path: String { get }
     var method: String { get }
+    var contentType: String? { get }
 
     var query: String? { get }
 
@@ -33,8 +34,12 @@ protocol APIRequest {
 }
 
 extension APIRequest {
- var method: String {
+    var method: String {
         return "GET"
+    }
+
+    var contentType: String? {
+        return nil
     }
 
     var query: String? {
@@ -67,6 +72,10 @@ extension APIRequest {
 
         if let userId = api.userId {
             request.addValue(userId, forHTTPHeaderField: "X-User-Id")
+        }
+
+        if let contentType = self.contentType {
+            request.addValue(contentType, forHTTPHeaderField: "Content-Type")
         }
 
         return request
