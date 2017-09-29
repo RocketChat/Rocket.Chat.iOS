@@ -45,6 +45,7 @@ class Subscription: BaseModel {
 
     @objc dynamic var roomTopic: String?
     @objc dynamic var roomDescription: String?
+    @objc dynamic var roomUpdatedAt: Date?
 
     @objc dynamic var otherUserId: String?
     var directMessageUser: User? {
@@ -137,10 +138,6 @@ extension Subscription {
         }
 
         return filteredMessages.sorted(byKeyPath: "createdAt", ascending: false)
-    }
-
-    func lastMessage() -> Message? {
-        return fetchMessagesQueryResults().first
     }
 
     func updateFavorite(_ favorite: Bool) {

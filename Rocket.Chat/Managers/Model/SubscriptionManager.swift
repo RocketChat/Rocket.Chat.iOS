@@ -63,6 +63,11 @@ struct SubscriptionManager {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
                                 subscription.roomDescription = object["description"].string ?? ""
                                 subscription.roomTopic = object["topic"].string ?? ""
+
+                                if let updatedAt = object["_updatedAt"]["$date"].double {
+                                    subscription.roomUpdatedAt = Date.dateFromInterval(updatedAt)
+                                }
+
                                 subscriptions.append(subscription)
                             }
                         }
@@ -73,6 +78,11 @@ struct SubscriptionManager {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
                                 subscription.roomDescription = object["description"].string ?? ""
                                 subscription.roomTopic = object["topic"].string ?? ""
+
+                                if let updatedAt = object["_updatedAt"]["$date"].double {
+                                    subscription.roomUpdatedAt = Date.dateFromInterval(updatedAt)
+                                }
+
                                 subscriptions.append(subscription)
                             }
                         }
@@ -159,6 +169,22 @@ struct SubscriptionManager {
 
                 realm.add(subscription, update: true)
             })
+        }
+    }
+
+    static func subscribeRoomChanges() {
+        let eventName = "stream-notify-room"
+        let request = [
+            "msg": "sub",
+            "name": "stream-notify-room",
+            "id": eventName,
+            "params": [nil, false]
+        ] as [String : Any]
+
+        SocketManager.subscribe(request, eventName: eventName) { response in
+            Log.debug("ROOOM UPPDATEEEEE START")
+            Log.debug(response.result.string)
+            Log.debug("ROOOM UPPDATEEEEE STOP")
         }
     }
 

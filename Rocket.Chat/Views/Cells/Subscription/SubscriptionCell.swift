@@ -95,9 +95,7 @@ final class SubscriptionCell: UITableViewCell {
             labelUnread.text =  ""
         }
 
-        if let lastMessage = subscription.lastMessage() {
-            labelDate.text = lastMessage.updatedAt?.formatted("HH:mm")
-        }
+        labelDate.text = subscription.roomUpdatedAt?.formatted("HH:mm")
     }
 
     func updateStatus() {

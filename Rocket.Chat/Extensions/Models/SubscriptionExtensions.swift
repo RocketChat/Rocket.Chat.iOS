@@ -12,8 +12,8 @@ import RealmSwift
 extension LinkingObjects where Element == Subscription {
     func sortedByLastMessageDate() -> [Subscription] {
         return self.sorted(by: { (aSubscription, bSubscription) -> Bool in
-            guard let aDate = aSubscription.lastMessage()?.createdAt else { return false }
-            guard let bDate = bSubscription.lastMessage()?.createdAt else { return true }
+            guard let aDate = aSubscription.roomUpdatedAt else { return false }
+            guard let bDate = bSubscription.roomUpdatedAt else { return true }
             return aDate > bDate
         })
     }
@@ -26,8 +26,8 @@ extension LinkingObjects where Element == Subscription {
 extension Results where Element == Subscription {
     func sortedByLastMessageDate() -> [Subscription] {
         return self.sorted(by: { (aSubscription, bSubscription) -> Bool in
-            guard let aDate = aSubscription.lastMessage()?.createdAt else { return false }
-            guard let bDate = bSubscription.lastMessage()?.createdAt else { return true }
+            guard let aDate = aSubscription.roomUpdatedAt else { return false }
+            guard let bDate = bSubscription.roomUpdatedAt else { return true }
             return aDate > bDate
         })
     }
