@@ -12,7 +12,7 @@ import semver
 
 final class ConnectServerViewController: BaseViewController {
 
-    internal let defaultURL = "https://demo.rocket.chat"
+    internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
     internal var serverURL: URL!
 
