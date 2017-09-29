@@ -14,9 +14,9 @@ class NSURLExtensionSpec: XCTestCase {
 
     func testSocketURLComponents() {
         let tests = [
-            "http://demo.rocket.chat/",
-            "wss://demo.rocket.chat/",
-            "wss://demo.rocket.chat/websocket",
+            "http://open.rocket.chat/",
+            "wss://open.rocket.chat/",
+            "wss://open.rocket.chat/websocket",
             "ftp://foo.bar.websocket.foo/chat/",
             "http://foo/websocket",
             "http://127.0.0.1/websocket"
