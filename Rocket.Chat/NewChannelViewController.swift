@@ -39,7 +39,25 @@ class NewChannelViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func buttonCreateDidPressed(_ sender: Any) {
+        guard let channelName = setValues["Channel Name"] as? String else { return }
+        guard let publicChannel = setValues["Public Channel"] as? Bool else { return }
 
+        let channelType: ChannelCreateType
+        if publicChannel {
+            channelType = .channel
+        } else {
+            channelType = .group
+        }
+
+        API.shared.fetch(ChannelCreateRequest(channelName: channelName, type: channelType)) { [weak self] result in
+
+            if let error = result?.raw?.error {
+                print(error)
+                return
+            }
+
+            self?.dismiss(animated: true, completion: nil)
+        }
     }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {

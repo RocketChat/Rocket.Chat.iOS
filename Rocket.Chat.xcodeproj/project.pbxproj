@@ -187,6 +187,10 @@
 		80A63C551F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */; };
 		80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C561F71D2E400FE5AC4 /* APISpec.swift */; };
 		890C92C31F7BDF55006144A5 /* NewChannelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890C92C21F7BDF55006144A5 /* NewChannelViewController.swift */; };
+		890C92C61F7BEECC006144A5 /* NewChannelCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890C92C51F7BEECC006144A5 /* NewChannelCellProtocol.swift */; };
+		890C92C81F7BEF34006144A5 /* NewChannelBoolOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890C92C71F7BEF34006144A5 /* NewChannelBoolOptionCell.swift */; };
+		89AEB7F81F7D225D00112A09 /* ChannelCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AEB7F71F7D225D00112A09 /* ChannelCreateRequest.swift */; };
+		89F0D92E1F7CA33F00254ED2 /* NewChannelTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89F0D92D1F7CA33F00254ED2 /* NewChannelTextFieldCell.swift */; };
 		925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */; };
 		925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
@@ -426,6 +430,10 @@
 		80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C561F71D2E400FE5AC4 /* APISpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISpec.swift; sourceTree = "<group>"; };
 		890C92C21F7BDF55006144A5 /* NewChannelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChannelViewController.swift; sourceTree = "<group>"; };
+		890C92C51F7BEECC006144A5 /* NewChannelCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChannelCellProtocol.swift; sourceTree = "<group>"; };
+		890C92C71F7BEF34006144A5 /* NewChannelBoolOptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewChannelBoolOptionCell.swift; sourceTree = "<group>"; };
+		89AEB7F71F7D225D00112A09 /* ChannelCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelCreateRequest.swift; sourceTree = "<group>"; };
+		89F0D92D1F7CA33F00254ED2 /* NewChannelTextFieldCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewChannelTextFieldCell.swift; path = Views/Cells/NewChannel/NewChannelTextFieldCell.swift; sourceTree = "<group>"; };
 		925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TintedTextField.swift; path = Views/Subscriptions/TintedTextField.swift; sourceTree = "<group>"; };
@@ -574,6 +582,7 @@
 		416133301D46CA3100E09DA2 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				890C92C41F7BED77006144A5 /* NewChannel */,
 				4192054A1D52F4E7004EEC5F /* Subscription */,
 				416133351D46CA7400E09DA2 /* Chat */,
 				80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */,
@@ -1059,6 +1068,24 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		890C92C41F7BED77006144A5 /* NewChannel */ = {
+			isa = PBXGroup;
+			children = (
+				890C92C51F7BEECC006144A5 /* NewChannelCellProtocol.swift */,
+				890C92C71F7BEF34006144A5 /* NewChannelBoolOptionCell.swift */,
+				89F0D92D1F7CA33F00254ED2 /* NewChannelTextFieldCell.swift */,
+			);
+			name = NewChannel;
+			sourceTree = "<group>";
+		};
+		89AEB7F61F7D222A00112A09 /* Channel */ = {
+			isa = PBXGroup;
+			children = (
+				89AEB7F71F7D225D00112A09 /* ChannelCreateRequest.swift */,
+			);
+			path = Channel;
+			sourceTree = "<group>";
+		};
 		925FF74F1E8EFC9200982043 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -1103,6 +1130,7 @@
 			children = (
 				802498EC1F7A82CD005477EC /* Authentication */,
 				80235D1C1F740AAC00A56CA5 /* Subscription */,
+				89AEB7F61F7D222A00112A09 /* Channel */,
 				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
 				80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */,
 			);
@@ -1627,6 +1655,7 @@
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
 				800FCD501F728EC800D9A692 /* MemberCell.swift in Sources */,
 				41BD37D91E290D8600CBC4C2 /* ModelMappeable.swift in Sources */,
+				890C92C61F7BEECC006144A5 /* NewChannelCellProtocol.swift in Sources */,
 				41BD37DB1E290D9C00CBC4C2 /* ModelHandler.swift in Sources */,
 				800FCD4B1F728EC800D9A692 /* ChannelInfoBasicCell.swift in Sources */,
 				41ADDD491E9DBB100007A458 /* LoaderView.swift in Sources */,
@@ -1702,6 +1731,7 @@
 				419EAF291E26562E002C8DA5 /* UserCoordinator.swift in Sources */,
 				41597DCE1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift in Sources */,
 				4147CE791F5EA3D000C322C3 /* SubscriptionsPageViewController.swift in Sources */,
+				890C92C81F7BEF34006144A5 /* NewChannelBoolOptionCell.swift in Sources */,
 				41CABFFC1F50515100E0B289 /* ArrayExtensions.swift in Sources */,
 				41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */,
 				D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */,
@@ -1733,6 +1763,7 @@
 				412719441E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift in Sources */,
 				41499C911F2A1A7200790EA7 /* TimestampCoordinator.swift in Sources */,
 				80A63C4F1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift in Sources */,
+				89F0D92E1F7CA33F00254ED2 /* NewChannelTextFieldCell.swift in Sources */,
 				D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */,
 				D1D535F11F70864C006625D2 /* InfoRequest.swift in Sources */,
 				411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */,
@@ -1754,6 +1785,7 @@
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
+				89AEB7F81F7D225D00112A09 /* ChannelCreateRequest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
