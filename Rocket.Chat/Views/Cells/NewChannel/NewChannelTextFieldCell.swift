@@ -23,7 +23,7 @@ class NewChannelTextFieldCell: UITableViewCell, NewChannelCellProtocol {
         }
     }
 
-    @IBAction func textFieldInputEditingDidEnd(_ sender: Any) {
+    @IBAction func textFieldInputEditingChanged(_ sender: Any) {
         delegate?.updateDictValue(key: key ?? "", value: textFieldInput.text ?? "")
     }
 }
