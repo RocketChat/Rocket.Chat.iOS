@@ -22,6 +22,9 @@
 "alert.connection.invalid_version.title" = "Oops!";
 "alert.connection.invalid_version.message" = "O servidor que você está conectando não é suportado mais por esta versão do aplicativo: %@.\n\nEsta versão do aplicativo requer a versão %@ do servidor para funcionar corretamente.";
 
+"alert.settings.set_mail_app.title" = "Oops!";
+"alert.settings.set_mail_app.message" = "Conta Mail não encontrada. Por favor, configure uma conta no aplicativo Mail para conseguir enviar emails.";
+
 // Socket Connection
 "connection.offline.banner.message" = "Você está offline, conecte novamente";
 
@@ -62,6 +65,7 @@
 "chat.message.actions.copy" = "Copiar";
 "chat.message.actions.pin" = "Pinar mensagem";
 "chat.message.actions.unpin" = "Remover pino da mensagem";
+"chat.message.actions.quote" = "Citar mensagem";
 
 // Chat Message Report
 "chat.message.report.success.title" = "Mensagem reportada";
@@ -106,3 +110,6 @@
 "chat.info.item.members" = "Membros";
 "chat.info.item.pinned" = "Pinadas";
 "chat.info.item.starred" = "Favoritas";
+
+// Members List
+"memberslist.title" = "Membros (%d)";
