@@ -20,7 +20,7 @@ def shared_pods
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
 
   # Text Processing
-  pod 'RCMarkdownParser'
+  pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git', :branch => 'fix/crash.8'
 
   # Database
   pod 'RealmSwift'
