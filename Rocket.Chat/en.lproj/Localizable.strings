@@ -65,6 +65,7 @@
 "chat.message.actions.copy" = "Copy";
 "chat.message.actions.pin" = "Pin message";
 "chat.message.actions.unpin" = "Unpin message";
+"chat.message.actions.quote" = "Quote message";
 
 // Chat Message Report
 "chat.message.report.success.title" = "Message Reported";

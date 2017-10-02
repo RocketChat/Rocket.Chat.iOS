@@ -293,6 +293,7 @@ final class ChatViewController: SLKTextViewController {
     fileprivate func sendMessage() {
         guard let messageText = textView.text, messageText.characters.count > 0 else { return }
 
+        self.scrollToBottom()
         rightButton.isEnabled = false
 
         var message: Message?
@@ -329,13 +330,14 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func chatLogIsAtBottom() -> Bool {
-        let currentPosition = Int(collectionView?.contentOffset.y ?? 0)
+        guard let collectionView = collectionView else { return false }
 
-        let boundsHeight = collectionView?.bounds.size.height ?? 0
-        let sizeHeight = collectionView?.contentSize.height ?? 0
-        let offset = Int(max(sizeHeight - boundsHeight, 0))
+        let height = collectionView.bounds.height
+        let bottomInset = collectionView.contentInset.bottom
+        let scrollContentSizeHeight = collectionView.contentSize.height
+        let verticalOffsetForBottom = scrollContentSizeHeight + bottomInset - height
 
-        return currentPosition == offset
+        return collectionView.contentOffset.y >= (verticalOffsetForBottom - 1)
     }
 
     // MARK: Subscription
@@ -467,11 +469,17 @@ final class ChatViewController: SLKTextViewController {
                 }
 
                 if indexPathModifications.count > 0 {
+                    let isAtBottom = self.chatLogIsAtBottom()
+
                     DispatchQueue.main.async {
                         UIView.performWithoutAnimation {
                             self.collectionView?.performBatchUpdates({
                                 self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                            }, completion: nil)
+                            }, completion: { _ in
+                                if isAtBottom {
+                                    self.scrollToBottom()
+                                }
+                            })
                         }
                     }
                 }

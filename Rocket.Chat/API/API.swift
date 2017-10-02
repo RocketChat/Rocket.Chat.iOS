@@ -10,7 +10,7 @@ import Foundation
 import SwiftyJSON
 
 class API {
-    static let shared: API! = API(host: "https://demo.rocket.chat")
+    static let shared: API! = API(host: "https://open.rocket.chat")
 
     var host: URL
     var authToken: String?
