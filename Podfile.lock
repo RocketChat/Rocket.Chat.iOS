@@ -62,7 +62,7 @@ DEPENDENCIES:
   - Fabric
   - Google/SignIn
   - MobilePlayer
-  - RCMarkdownParser
+  - RCMarkdownParser (from `https://github.com/RocketChat/RCMarkdownParser.git`, branch `fix/crash.8`)
   - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift.git`, branch `develop`)
   - RealmSwift
   - SDWebImage (~> 3)
@@ -74,6 +74,9 @@ DEPENDENCIES:
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, tag `4.0.0-alpha.1`)
 
 EXTERNAL SOURCES:
+  RCMarkdownParser:
+    :branch: fix/crash.8
+    :git: https://github.com/RocketChat/RCMarkdownParser.git
   ReachabilitySwift:
     :branch: develop
     :git: https://github.com/ashleymills/Reachability.swift.git
@@ -95,6 +98,9 @@ EXTERNAL SOURCES:
     :tag: 4.0.0-alpha.1
 
 CHECKOUT OPTIONS:
+  RCMarkdownParser:
+    :commit: dbca71182756d7f386157ef5002d6d1c1588bb34
+    :git: https://github.com/RocketChat/RCMarkdownParser.git
   ReachabilitySwift:
     :commit: 6451cd109ef2e88a0763387de44668e17cb1b49e
     :git: https://github.com/ashleymills/Reachability.swift.git
@@ -130,7 +136,7 @@ SPEC CHECKSUMS:
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
-  RCMarkdownParser: 062a5f014134dffe7cf1b0d0dc34c3abb4b0f203
+  RCMarkdownParser: df3dcec1e02816eaa6af848a00eb568d4594f967
   ReachabilitySwift: fa4416f5356466392a733d21b41873ebe052bf40
   Realm: fc7a317a5c2c9ba91f5f235ede4e2ea76e9eba0c
   RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
@@ -142,6 +148,6 @@ SPEC CHECKSUMS:
   Starscream: 087670fe088bb12c04398fc343442a4b9eb96b86
   SwiftyJSON: c4d27c2ca659d5c91460cd17cc60fd212b26074d
 
-PODFILE CHECKSUM: 898cfdfeab670ca52c619e14ba1822c22affbc38
+PODFILE CHECKSUM: 9ede73e8742209b301240c604d7df9bec0061c07
 
 COCOAPODS: 1.3.1
