@@ -78,6 +78,12 @@ class ServersViewController: UIViewController {
             }))
 
             alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+
+            if let presenter = alert.popoverPresentationController {
+                presenter.sourceView = tableView
+                presenter.sourceRect = CGRect(x: point.x, y: point.y, width: 0, height: 0)
+            }
+
             present(alert, animated: true, completion: nil)
         }
     }

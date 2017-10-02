@@ -50,6 +50,11 @@ final class ChatViewController: SLKTextViewController {
         didSet {
             updateSubscriptionInfo()
             markAsRead()
+            typingIndicatorView?.dismissIndicator()
+
+            if let oldValue = oldValue {
+                unsubscribe(for: oldValue)
+            }
         }
     }
 
@@ -261,11 +266,19 @@ final class ChatViewController: SLKTextViewController {
         scrollToBottom(true)
     }
 
-    // MARK: Message
+    override func textViewDidChange(_ textView: UITextView) {
+        if textView.text.isEmpty {
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        } else {
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
+        }
+    }
 
+    // MARK: Message
     fileprivate func sendMessage() {
         guard let messageText = textView.text, messageText.characters.count > 0 else { return }
 
+        self.scrollToBottom()
         rightButton.isEnabled = false
 
         var message: Message?
@@ -287,6 +300,7 @@ final class ChatViewController: SLKTextViewController {
         if let message = message {
             textView.text = ""
             rightButton.isEnabled = true
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
 
             SubscriptionManager.sendTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
@@ -300,12 +314,28 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    fileprivate func chatLogIsAtBottom() -> Bool {
+        guard let collectionView = collectionView else { return false }
+
+        let height = collectionView.bounds.height
+        let bottomInset = collectionView.contentInset.bottom
+        let scrollContentSizeHeight = collectionView.contentSize.height
+        let verticalOffsetForBottom = scrollContentSizeHeight + bottomInset - height
+
+        return collectionView.contentOffset.y >= (verticalOffsetForBottom - 1)
+    }
+
     // MARK: Subscription
 
     fileprivate func markAsRead() {
         SubscriptionManager.markAsRead(subscription) { _ in
             // Nothing, for now
         }
+    }
+
+    internal func unsubscribe(for subscription: Subscription) {
+        SocketManager.unsubscribe(eventName: subscription.rid)
+        SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
     }
 
     internal func updateSubscriptionInfo() {
@@ -357,6 +387,28 @@ final class ChatViewController: SLKTextViewController {
         updateMessagesQueryNotificationBlock()
 
         MessageManager.changes(subscription)
+        typingEvent()
+    }
+
+    fileprivate func typingEvent() {
+        typingIndicatorView?.interval = 0
+
+        SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
+            guard let username = username else { return }
+
+            let isAtBottom = self?.chatLogIsAtBottom()
+
+            if flag {
+                self?.typingIndicatorView?.insertUsername(username)
+            } else {
+                self?.typingIndicatorView?.removeUsername(username)
+            }
+
+            if let isAtBottom = isAtBottom,
+                isAtBottom == true {
+                self?.scrollToBottom(true)
+            }
+        }
     }
 
     fileprivate func updateMessagesQueryNotificationBlock() {
@@ -402,11 +454,17 @@ final class ChatViewController: SLKTextViewController {
                 }
 
                 if indexPathModifications.count > 0 {
+                    let isAtBottom = self.chatLogIsAtBottom()
+
                     DispatchQueue.main.async {
                         UIView.performWithoutAnimation {
                             self.collectionView?.performBatchUpdates({
                                 self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                            }, completion: nil)
+                            }, completion: { _ in
+                                if isAtBottom {
+                                    self.scrollToBottom()
+                                }
+                            })
                         }
                     }
                 }
@@ -752,7 +810,7 @@ extension ChatViewController {
             buttonScrollToBottomMarginConstraint?.isActive = true
         }
 
-        if targetContentOffset.pointee.y < scrollView.contentSize.height - scrollView.frame.height {
+        if targetContentOffset.pointee.y.rounded() < scrollView.contentSize.height - scrollView.frame.height {
             buttonScrollToBottomMarginConstraint?.constant = -64
             UIView.animate(withDuration: 0.5) {
                 view.layoutIfNeeded()
