@@ -211,7 +211,7 @@ final class ChatViewController: SLKTextViewController {
             bundle: Bundle.main
         ), forCellReuseIdentifier: ChatDirectMessageHeaderCell.identifier)
 
-        tableView?.register(UINib(
+        autoCompletionView.register(UINib(
             nibName: "AutocompleteCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: AutocompleteCell.identifier)
