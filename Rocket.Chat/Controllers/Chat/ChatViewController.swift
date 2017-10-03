@@ -86,7 +86,8 @@ final class ChatViewController: SLKTextViewController {
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
 
-        collectionView?.isPrefetchingEnabled = true
+        tableView?.separatorStyle = .none
+        tableView?.delegate = self
 
         isInverted = false
         bounces = true
@@ -136,16 +137,12 @@ final class ChatViewController: SLKTextViewController {
             right: 0
         )
 
-        collectionView?.contentInset = insets
-        collectionView?.scrollIndicatorInsets = insets
+        tableView?.contentInset = insets
+        tableView?.scrollIndicatorInsets = insets
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-
-        coordinator.animate(alongsideTransition: nil, completion: { _ in
-            self.collectionView?.collectionViewLayout.invalidateLayout()
-        })
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -186,47 +183,43 @@ final class ChatViewController: SLKTextViewController {
         buttonScrollToBottom.layer.borderWidth = 1
     }
 
-    override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
-        return ChatCollectionViewFlowLayout()
-    }
-
     fileprivate func registerCells() {
-        collectionView?.register(UINib(
-            nibName: "ChatLoaderCell",
+        tableView?.register(UINib(
+            nibName: "LoaderTableViewCell",
             bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatLoaderCell.identifier)
+        ), forCellReuseIdentifier: LoaderTableViewCell.identifier)
 
-        collectionView?.register(UINib(
+        tableView?.register(UINib(
             nibName: "ChatMessageCell",
             bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
+        ), forCellReuseIdentifier: ChatMessageCell.identifier)
 
-        collectionView?.register(UINib(
+        tableView?.register(UINib(
             nibName: "ChatMessageDaySeparator",
             bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
+        ), forCellReuseIdentifier: ChatMessageDaySeparator.identifier)
 
-        collectionView?.register(UINib(
+        tableView?.register(UINib(
             nibName: "ChatChannelHeaderCell",
             bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatChannelHeaderCell.identifier)
+        ), forCellReuseIdentifier: ChatChannelHeaderCell.identifier)
 
-        collectionView?.register(UINib(
+        tableView?.register(UINib(
             nibName: "ChatDirectMessageHeaderCell",
             bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatDirectMessageHeaderCell.identifier)
+        ), forCellReuseIdentifier: ChatDirectMessageHeaderCell.identifier)
 
-        autoCompletionView.register(UINib(
+        tableView?.register(UINib(
             nibName: "AutocompleteCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: AutocompleteCell.identifier)
     }
 
     fileprivate func scrollToBottom(_ animated: Bool = false) {
-        let boundsHeight = collectionView?.bounds.size.height ?? 0
-        let sizeHeight = collectionView?.contentSize.height ?? 0
+        let boundsHeight = tableView?.bounds.size.height ?? 0
+        let sizeHeight = tableView?.contentSize.height ?? 0
         let offset = CGPoint(x: 0, y: max(sizeHeight - boundsHeight, 0))
-        collectionView?.setContentOffset(offset, animated: animated)
+        tableView?.setContentOffset(offset, animated: animated)
         hideButtonScrollToBottom(animated: true)
     }
 
@@ -315,14 +308,14 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func chatLogIsAtBottom() -> Bool {
-        guard let collectionView = collectionView else { return false }
+        guard let tableView = tableView else { return false }
 
-        let height = collectionView.bounds.height
-        let bottomInset = collectionView.contentInset.bottom
-        let scrollContentSizeHeight = collectionView.contentSize.height
+        let height = tableView.bounds.height
+        let bottomInset = tableView.contentInset.bottom
+        let scrollContentSizeHeight = tableView.contentSize.height
         let verticalOffsetForBottom = scrollContentSizeHeight + bottomInset - height
 
-        return collectionView.contentOffset.y >= (verticalOffsetForBottom - 1)
+        return tableView.contentOffset.y >= (verticalOffsetForBottom - 1)
     }
 
     // MARK: Subscription
@@ -347,17 +340,17 @@ final class ChatViewController: SLKTextViewController {
         chatTitleView?.subscription = subscription
         textView.resignFirstResponder()
 
-        collectionView?.performBatchUpdates({
-            let indexPaths = self.dataController.clear()
-            self.collectionView?.deleteItems(at: indexPaths)
-        }, completion: { _ in
-            CATransaction.commit()
+        tableView?.beginUpdates()
+        let indexPaths = self.dataController.clear()
+        tableView?.deleteRows(at: indexPaths, with: .none)
+        tableView?.endUpdates()
 
-            if self.closeSidebarAfterSubscriptionUpdate {
-                MainChatViewController.closeSideMenuIfNeeded()
-                self.closeSidebarAfterSubscriptionUpdate = false
-            }
-        })
+        CATransaction.commit()
+
+        if self.closeSidebarAfterSubscriptionUpdate {
+            MainChatViewController.closeSideMenuIfNeeded()
+            self.closeSidebarAfterSubscriptionUpdate = false
+        }
 
         if self.subscription.isValid() {
             self.updateSubscriptionMessages()
@@ -458,13 +451,13 @@ final class ChatViewController: SLKTextViewController {
 
                     DispatchQueue.main.async {
                         UIView.performWithoutAnimation {
-                            self.collectionView?.performBatchUpdates({
-                                self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                            }, completion: { _ in
-                                if isAtBottom {
-                                    self.scrollToBottom()
-                                }
-                            })
+                            self.tableView?.beginUpdates()
+                            self.tableView?.reloadRows(at: indexPathModifications.map { IndexPath(row: $0, section: 0) }, with: .none)
+                            self.tableView?.endUpdates()
+
+                            if isAtBottom {
+                                self.scrollToBottom()
+                            }
                         }
                     }
                 }
@@ -494,12 +487,15 @@ final class ChatViewController: SLKTextViewController {
                     if messages.count == 0 {
                         self?.dataController.loadedAllMessages = true
 
-                        self?.collectionView?.performBatchUpdates({
-                            if let (indexPaths, removedIndexPaths) = self?.dataController.insert([]) {
-                                self?.collectionView?.insertItems(at: indexPaths)
-                                self?.collectionView?.deleteItems(at: removedIndexPaths)
-                            }
-                        }, completion: nil)
+                        self?.tableView?.beginUpdates()
+
+                        if let (indexPaths, removedIndexPaths) = self?.dataController.insert([]) {
+                            self?.tableView?.insertRows(at: indexPaths, with: .none)
+                            self?.tableView?.deleteRows(at: removedIndexPaths, with: .none)
+                        }
+
+                        self?.tableView?.endUpdates()
+
                     } else {
                         self?.dataController.loadedAllMessages = false
                     }
@@ -542,7 +538,7 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func appendMessages(messages: [Message], completion: VoidCompletion?) {
         guard !isAppendingMessages else { return }
-        guard let collectionView = self.collectionView else { return }
+        guard let tableView = self.tableView else { return }
 
         isAppendingMessages = true
 
@@ -588,14 +584,13 @@ final class ChatViewController: SLKTextViewController {
             }
 
             DispatchQueue.main.async {
-                collectionView.performBatchUpdates({
-                    let (indexPaths, removedIndexPaths) = self.dataController.insert(objs)
-                    collectionView.insertItems(at: indexPaths)
-                    collectionView.deleteItems(at: removedIndexPaths)
-                }, completion: { _ in
-                    self.isAppendingMessages = false
-                    completion?()
-                })
+                tableView.beginUpdates()
+                let (indexPaths, removedIndexPaths) = self.dataController.insert(objs)
+                tableView.insertRows(at: indexPaths, with: .none)
+                tableView.deleteRows(at: removedIndexPaths, with: .none)
+                tableView.endUpdates()
+                self.isAppendingMessages = false
+                completion?()
             }
         }
     }
@@ -612,18 +607,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    fileprivate func isContentBiggerThanContainerHeight() -> Bool {
-        if let contentHeight = self.collectionView?.contentSize.height {
-            if let collectionViewHeight = self.collectionView?.frame.height {
-                if contentHeight < collectionViewHeight {
-                    return false
-                }
-            }
-        }
-
-        return true
-    }
-
     // MARK: IBAction
 
     @objc func chatTitleViewDidPressed(_ sender: AnyObject) {
@@ -635,25 +618,96 @@ final class ChatViewController: SLKTextViewController {
     }
 }
 
-// MARK: UICollectionViewDataSource
+// MARK: UITableViewDataSource
 
 extension ChatViewController {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if tableView == self.autoCompletionView {
+            return autoCompletionCellForRowAtIndexPath(indexPath)
+        }
 
-    override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if tableView == self.tableView {
+            return cellForChatDataAtIndexPath(indexPath)
+        }
+
+        return UITableViewCell()
+    }
+
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if tableView == self.autoCompletionView {
+            return heightForAutoCompletionCell()
+        }
+
+        if tableView == self.tableView {
+            return heightForChatDataAtIndexPath(indexPath)
+        }
+
+        return 40
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == autoCompletionView {
+            return autoCompletionNumberOfRowsInSection(section)
+        } else if tableView == self.tableView {
+            return dataController.data.count
+        }
+
+        return 0
+    }
+}
+
+// MARK: UITableViewDelegate
+
+extension ChatViewController {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == self.autoCompletionView {
+            autoCompletionDidSelectRowAt(indexPath: indexPath)
+        }
+    }
+
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row < 4 {
             if let message = dataController.oldestMessage() {
                 loadMoreMessagesFrom(date: message.createdAt)
             }
         }
     }
+}
 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dataController.data.count
+// MARK: Cells
+
+extension ChatViewController {
+    func heightForChatDataAtIndexPath(_ indexPath: IndexPath) -> CGFloat {
+        if let obj = dataController.itemAt(indexPath) {
+            if obj.type == .header {
+                if subscription.type == .directMessage {
+                    return ChatDirectMessageHeaderCell.minimumHeight
+                } else {
+                    return ChatChannelHeaderCell.minimumHeight
+                }
+            }
+
+            if obj.type == .loader {
+                return LoaderTableViewCell.minimumHeight
+            }
+
+            if obj.type == .daySeparator {
+                return ChatMessageDaySeparator.minimumHeight
+            }
+
+            if let message = obj.message {
+                let sequential = dataController.hasSequentialMessageAt(indexPath)
+                let height = ChatMessageCell.cellMediaHeightFor(message: message, sequential: sequential)
+                return height
+            }
+        }
+
+        return 40
     }
 
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard dataController.data.count > indexPath.row else { return UICollectionViewCell() }
-        guard let obj = dataController.itemAt(indexPath) else { return UICollectionViewCell() }
+    func cellForChatDataAtIndexPath(_ indexPath: IndexPath) -> UITableViewCell {
+        guard dataController.data.count > indexPath.row else { return UITableViewCell() }
+        guard let obj = dataController.itemAt(indexPath) else { return UITableViewCell() }
 
         if obj.type == .message {
             return cellForMessage(obj, at: indexPath)
@@ -675,17 +729,15 @@ extension ChatViewController {
             }
         }
 
-        return UICollectionViewCell()
+        return UITableViewCell()
     }
 
-    // MARK: Cells
-
-    func cellForMessage(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView?.dequeueReusableCell(
-            withReuseIdentifier: ChatMessageCell.identifier,
+    func cellForMessage(_ obj: ChatData, at indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView?.dequeueReusableCell(
+            withIdentifier: ChatMessageCell.identifier,
             for: indexPath
         ) as? ChatMessageCell else {
-            return UICollectionViewCell()
+            return UITableViewCell()
         }
 
         cell.delegate = self
@@ -699,92 +751,48 @@ extension ChatViewController {
         return cell
     }
 
-    func cellForDaySeparator(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView?.dequeueReusableCell(
-            withReuseIdentifier: ChatMessageDaySeparator.identifier,
+    func cellForDaySeparator(_ obj: ChatData, at indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView?.dequeueReusableCell(
+            withIdentifier: ChatMessageDaySeparator.identifier,
             for: indexPath
         ) as? ChatMessageDaySeparator else {
-                return UICollectionViewCell()
+                return UITableViewCell()
         }
         cell.labelTitle.text = obj.timestamp.formatted("MMM dd, YYYY")
         return cell
     }
 
-    func cellForChannelHeader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView?.dequeueReusableCell(
-            withReuseIdentifier: ChatChannelHeaderCell.identifier,
+    func cellForChannelHeader(_ obj: ChatData, at indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView?.dequeueReusableCell(
+            withIdentifier: ChatChannelHeaderCell.identifier,
             for: indexPath
         ) as? ChatChannelHeaderCell else {
-            return UICollectionViewCell()
+            return UITableViewCell()
         }
         cell.subscription = subscription
         return cell
     }
 
-    func cellForDMHeader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView?.dequeueReusableCell(
-            withReuseIdentifier: ChatDirectMessageHeaderCell.identifier,
+    func cellForDMHeader(_ obj: ChatData, at indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView?.dequeueReusableCell(
+            withIdentifier: ChatDirectMessageHeaderCell.identifier,
             for: indexPath
         ) as? ChatDirectMessageHeaderCell else {
-            return UICollectionViewCell()
+            return UITableViewCell()
         }
         cell.subscription = subscription
         return cell
     }
 
-    func cellForLoader(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView?.dequeueReusableCell(
-            withReuseIdentifier: ChatLoaderCell.identifier,
+    func cellForLoader(_ obj: ChatData, at indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView?.dequeueReusableCell(
+            withIdentifier: LoaderTableViewCell.identifier,
             for: indexPath
-        ) as? ChatLoaderCell else {
-            return UICollectionViewCell()
+        ) as? LoaderTableViewCell else {
+            return UITableViewCell()
         }
 
         return cell
-    }
-
-}
-
-// MARK: UICollectionViewDelegateFlowLayout
-
-extension ChatViewController: UICollectionViewDelegateFlowLayout {
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return .zero
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let fullWidth = collectionView.bounds.size.width
-
-        if let obj = dataController.itemAt(indexPath) {
-            if obj.type == .header {
-                if subscription.type == .directMessage {
-                    return CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
-                } else {
-                    return CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
-                }
-            }
-
-            if obj.type == .loader {
-                return CGSize(width: fullWidth, height: ChatLoaderCell.minimumHeight)
-            }
-
-            if obj.type == .daySeparator {
-                return CGSize(width: fullWidth, height: ChatMessageDaySeparator.minimumHeight)
-            }
-
-            if let message = obj.message {
-                let sequential = dataController.hasSequentialMessageAt(indexPath)
-                let height = ChatMessageCell.cellMediaHeightFor(message: message, sequential: sequential)
-                return CGSize(width: fullWidth, height: height)
-            }
-        }
-
-        return CGSize(width: fullWidth, height: 40)
     }
 }
 

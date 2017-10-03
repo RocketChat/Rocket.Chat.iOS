@@ -13,7 +13,7 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
 }
 
-final class ChatMessageCell: UICollectionViewCell {
+final class ChatMessageCell: UITableViewCell {
 
     static let minimumHeight = CGFloat(55)
     static let identifier = "ChatMessageCell"
@@ -235,14 +235,6 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
-    }
-
-}
-
-extension ChatMessageCell: UIGestureRecognizerDelegate {
-
-    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
-        return false
     }
 
 }

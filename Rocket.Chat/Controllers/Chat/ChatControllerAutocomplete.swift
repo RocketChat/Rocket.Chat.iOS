@@ -46,28 +46,24 @@ extension ChatViewController {
         showAutoCompletionView(show)
     }
 
+    func heightForAutoCompletionCell() -> CGFloat {
+        return AutocompleteCell.minimumHeight
+    }
+
     override func heightForAutoCompletionView() -> CGFloat {
         return AutocompleteCell.minimumHeight * CGFloat(searchResult.count)
     }
 
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func autoCompletionNumberOfRowsInSection(_ section: Int) -> Int {
         return searchResult.keys.count
     }
 
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return autoCompletionCellForRowAtIndexPath(indexPath)
-    }
-
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return AutocompleteCell.minimumHeight
-    }
-
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func autoCompletionDidSelectRowAt(indexPath: IndexPath) {
         let key = Array(searchResult.keys)[indexPath.row]
         acceptAutoCompletion(with: "\(key) ", keepPrefix: true)
     }
 
-    private func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
+    func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
         guard let cell = autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as? AutocompleteCell else {
             return AutocompleteCell(style: .`default`, reuseIdentifier: AutocompleteCell.identifier)
         }
