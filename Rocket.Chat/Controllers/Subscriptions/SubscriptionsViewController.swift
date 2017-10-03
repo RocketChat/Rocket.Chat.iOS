@@ -54,6 +54,9 @@ final class SubscriptionsViewController: BaseViewController {
 
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchBar.placeholder = localized("subscriptions.search")
+        searchController.searchBar.delegate = self
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
         self.searchController = searchController
 
         if #available(iOS 11.0, *) {
@@ -126,6 +129,18 @@ final class SubscriptionsViewController: BaseViewController {
 
 extension SubscriptionsViewController: UISearchBarDelegate {
 
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "\n" {
+            if searchText.characters.count > 0 {
+                searchOnSpotlight(searchText)
+            }
+
+            return
+        }
+
+        searchBy(searchText)
+    }
+
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         searchBar.text = ""
@@ -135,7 +150,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
-//        subscriptions = auth.subscriptions.filterBy(name: text)
+        searchResult = Array(auth.subscriptions.filterBy(name: text).sortedByLastMessageDate())
 
         if text.characters.count == 0 {
             isSearchingLocally = false
@@ -202,15 +217,13 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
         if isSearchingLocally || isSearchingRemotely {
             updateSearched()
+            updateCurrentUserInformation()
         } else {
             updateAll()
         }
 
-        updateCurrentUserInformation()
         SubscriptionManager.updateUnreadApplicationBadge()
-
-        // TODO: Perform a lighter reload data based on the updated indexes
-        tableView?.reloadData()
+        tableView?.reloadSections(IndexSet(integer: 0), with: .fade)
     }
 
     func updateCurrentUserInformation() {
@@ -279,7 +292,7 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
 }
 
-extension SubscriptionsViewController: UITextFieldDelegate {
+extension SubscriptionsViewController {
 
     func showCancelSearchButton() {
         searchController?.searchBar.setShowsCancelButton(true, animated: true)
@@ -289,42 +302,6 @@ extension SubscriptionsViewController: UITextFieldDelegate {
         searchController?.searchBar.setShowsCancelButton(false, animated: true)
     }
 
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        self.showCancelSearchButton()
-
-        UIView.animate(withDuration: 0.1) {
-            self.view.layoutIfNeeded()
-        }
-    }
-
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        hideCancelSearchButton()
-
-        UIView.animate(withDuration: 0.1) {
-            self.view.layoutIfNeeded()
-        }
-    }
-
-    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        let currentText = textField.text ?? ""
-        searchText = (currentText as NSString).replacingCharacters(in: range, with: string)
-
-        if string == "\n" {
-            if currentText.characters.count > 0 {
-                searchOnSpotlight(currentText)
-            }
-
-            return false
-        }
-
-        searchBy(searchText)
-        return true
-    }
-
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        searchBy()
-        return true
-    }
 }
 
 extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
