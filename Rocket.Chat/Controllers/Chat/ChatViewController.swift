@@ -216,10 +216,9 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func scrollToBottom(_ animated: Bool = false) {
-        let boundsHeight = tableView?.bounds.size.height ?? 0
-        let sizeHeight = tableView?.contentSize.height ?? 0
-        let offset = CGPoint(x: 0, y: max(sizeHeight - boundsHeight, 0))
-        tableView?.setContentOffset(offset, animated: animated)
+        guard let tableView = self.tableView else { return }
+        let lastIndexPath = IndexPath(row: dataController.data.count - 1, section: 0)
+        tableView.scrollToRow(at: lastIndexPath, at: .bottom, animated: animated)
         hideButtonScrollToBottom(animated: true)
     }
 
@@ -340,10 +339,12 @@ final class ChatViewController: SLKTextViewController {
         chatTitleView?.subscription = subscription
         textView.resignFirstResponder()
 
-        tableView?.beginUpdates()
-        let indexPaths = self.dataController.clear()
-        tableView?.deleteRows(at: indexPaths, with: .none)
-        tableView?.endUpdates()
+        UIView.performWithoutAnimation {
+            tableView?.beginUpdates()
+            let indexPaths = self.dataController.clear()
+            tableView?.deleteRows(at: indexPaths, with: .none)
+            tableView?.endUpdates()
+        }
 
         CATransaction.commit()
 
@@ -479,26 +480,24 @@ final class ChatViewController: SLKTextViewController {
             let tempSubscription = Subscription(value: self.subscription)
 
             MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
-                DispatchQueue.main.async {
-                    self?.activityIndicator.stopAnimating()
-                    self?.isRequestingHistory = false
-                    self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+                self?.activityIndicator.stopAnimating()
+                self?.isRequestingHistory = false
+                self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
 
-                    if messages.count == 0 {
-                        self?.dataController.loadedAllMessages = true
+                if messages.count == 0 {
+                    self?.dataController.loadedAllMessages = true
 
+                    UIView.performWithoutAnimation {
                         self?.tableView?.beginUpdates()
-
                         if let (indexPaths, removedIndexPaths) = self?.dataController.insert([]) {
                             self?.tableView?.insertRows(at: indexPaths, with: .none)
                             self?.tableView?.deleteRows(at: removedIndexPaths, with: .none)
                         }
-
                         self?.tableView?.endUpdates()
-
-                    } else {
-                        self?.dataController.loadedAllMessages = false
                     }
+
+                } else {
+                    self?.dataController.loadedAllMessages = false
                 }
             }
         }
@@ -584,13 +583,15 @@ final class ChatViewController: SLKTextViewController {
             }
 
             DispatchQueue.main.async {
-                tableView.beginUpdates()
-                let (indexPaths, removedIndexPaths) = self.dataController.insert(objs)
-                tableView.insertRows(at: indexPaths, with: .none)
-                tableView.deleteRows(at: removedIndexPaths, with: .none)
-                tableView.endUpdates()
-                self.isAppendingMessages = false
-                completion?()
+                UIView.performWithoutAnimation {
+                    tableView.beginUpdates()
+                    let (indexPaths, removedIndexPaths) = self.dataController.insert(objs)
+                    tableView.insertRows(at: indexPaths, with: .none)
+                    tableView.deleteRows(at: removedIndexPaths, with: .none)
+                    tableView.endUpdates()
+                    self.isAppendingMessages = false
+                    completion?()
+                }
             }
         }
     }
