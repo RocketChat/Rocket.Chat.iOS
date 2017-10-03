@@ -89,7 +89,7 @@ final class ChatViewController: SLKTextViewController {
         textInputbar.isTranslucent = false
 
         tableView?.separatorStyle = .none
-        tableView?.delegate = self
+        tableView?.allowsSelection = false
 
         isInverted = false
         bounces = true
@@ -349,8 +349,6 @@ final class ChatViewController: SLKTextViewController {
             tableView?.reloadData()
         }
 
-        CATransaction.commit()
-
         if self.closeSidebarAfterSubscriptionUpdate {
             MainChatViewController.closeSideMenuIfNeeded()
             self.closeSidebarAfterSubscriptionUpdate = false
@@ -485,27 +483,29 @@ final class ChatViewController: SLKTextViewController {
             let tempSubscription = Subscription(value: self.subscription)
 
             MessageManager.getHistory(tempSubscription, lastMessageDate: date) { messages in
-                self.activityIndicator.stopAnimating()
-                self.isRequestingHistory = false
-                self.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.isRequestingHistory = false
+                    self.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
 
-                if messages.count == 0 {
-                    self.dataController.loadedAllMessages = true
+                    if messages.count == 0 {
+                        self.dataController.loadedAllMessages = true
 
-                    let oldHeight = tableView.contentSize.height
-                    UIView.performWithoutAnimation {
-                        tableView.beginUpdates()
-                        let (indexPaths, removedIndexPaths) = self.dataController.insert([])
-                        tableView.insertRows(at: indexPaths, with: .none)
-                        tableView.deleteRows(at: removedIndexPaths, with: .none)
-                        tableView.endUpdates()
-                        tableView.reloadData()
+                        let oldHeight = tableView.contentSize.height
+                        UIView.performWithoutAnimation {
+                            tableView.beginUpdates()
+                            let (indexPaths, removedIndexPaths) = self.dataController.insert([])
+                            tableView.insertRows(at: indexPaths, with: .none)
+                            tableView.deleteRows(at: removedIndexPaths, with: .none)
+                            tableView.endUpdates()
+                            tableView.reloadData()
+                        }
+
+                        let newHeight = tableView.contentSize.height
+                        tableView.contentOffset = CGPoint(x: 0, y: newHeight - oldHeight)
+                    } else {
+                        self.dataController.loadedAllMessages = false
                     }
-
-                    let newHeight = tableView.contentSize.height
-                    tableView.contentOffset = CGPoint(x: 0, y: newHeight - oldHeight)
-                } else {
-                    self.dataController.loadedAllMessages = false
                 }
             }
         }
