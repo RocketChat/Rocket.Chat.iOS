@@ -86,6 +86,8 @@ final class ChatViewController: SLKTextViewController {
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
 
+        textInputbar.isTranslucent = false
+
         tableView?.separatorStyle = .none
         tableView?.delegate = self
 
