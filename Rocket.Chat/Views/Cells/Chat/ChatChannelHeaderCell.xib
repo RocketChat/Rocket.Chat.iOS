@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="286.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GZH-BQ-7s4">
-                                <rect key="frame" x="4" y="203.5" width="371" height="21"/>
+                                <rect key="frame" x="4" y="223.5" width="371" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="4yU-Wj-RqW"/>
                                 </constraints>
@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5jL-f3-VUF">
-                                <rect key="frame" x="4" y="224.5" width="371" height="42"/>
+                                <rect key="frame" x="4" y="244.5" width="371" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="hFn-6Z-w8h"/>
                                 </constraints>
@@ -46,7 +46,7 @@
                             <constraint firstAttribute="trailing" secondItem="5jL-f3-VUF" secondAttribute="trailing" id="VuK-8X-por"/>
                             <constraint firstAttribute="trailing" secondItem="GZH-BQ-7s4" secondAttribute="trailing" id="ZxC-sT-DuN"/>
                             <constraint firstItem="5jL-f3-VUF" firstAttribute="leading" secondItem="tan-7n-lT9" secondAttribute="leading" constant="4" id="cMP-do-X6n"/>
-                            <constraint firstAttribute="bottom" secondItem="5jL-f3-VUF" secondAttribute="bottom" constant="20" id="dOK-Nl-5TQ"/>
+                            <constraint firstAttribute="bottom" secondItem="5jL-f3-VUF" secondAttribute="bottom" id="dOK-Nl-5TQ"/>
                             <constraint firstItem="5jL-f3-VUF" firstAttribute="top" secondItem="GZH-BQ-7s4" secondAttribute="bottom" id="dUJ-dc-lwt"/>
                         </constraints>
                     </view>

@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="278.5"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tzT-AW-Dcm">
-                                <rect key="frame" x="4" y="195.5" width="371" height="21"/>
+                                <rect key="frame" x="4" y="215.5" width="371" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="CBq-Xd-Pdr"/>
                                 </constraints>
@@ -31,7 +31,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rvw-pk-2WV">
-                                <rect key="frame" x="4" y="216.5" width="371" height="42"/>
+                                <rect key="frame" x="4" y="236.5" width="371" height="42"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="42" id="zdu-ab-8e5"/>
                                 </constraints>
@@ -40,7 +40,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="V2h-ZX-a3A">
-                                <rect key="frame" x="20" y="90.5" width="95" height="95"/>
+                                <rect key="frame" x="20" y="110.5" width="95" height="95"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="95" id="5CW-hs-46K"/>
@@ -52,7 +52,7 @@
                         <constraints>
                             <constraint firstItem="rvw-pk-2WV" firstAttribute="top" secondItem="tzT-AW-Dcm" secondAttribute="bottom" id="7fY-fU-0J7"/>
                             <constraint firstItem="tzT-AW-Dcm" firstAttribute="leading" secondItem="wCB-Kh-mGR" secondAttribute="leading" constant="4" id="C2W-fq-o28"/>
-                            <constraint firstAttribute="bottom" secondItem="rvw-pk-2WV" secondAttribute="bottom" constant="20" id="FLq-Tz-EJl"/>
+                            <constraint firstAttribute="bottom" secondItem="rvw-pk-2WV" secondAttribute="bottom" id="FLq-Tz-EJl"/>
                             <constraint firstAttribute="trailing" secondItem="rvw-pk-2WV" secondAttribute="trailing" id="V5P-DX-4hG"/>
                             <constraint firstAttribute="trailing" secondItem="tzT-AW-Dcm" secondAttribute="trailing" id="g53-oj-jb9"/>
                             <constraint firstItem="rvw-pk-2WV" firstAttribute="leading" secondItem="wCB-Kh-mGR" secondAttribute="leading" constant="4" id="j6d-6C-Nif"/>
