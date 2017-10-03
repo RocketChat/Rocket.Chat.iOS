@@ -68,13 +68,28 @@ final class SubscriptionsViewController: BaseViewController {
 
         if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
             if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
+                let buttonView = UIView()
                 let imageViewServer = UIImageView()
-                imageViewServer.bounds = CGRect(x: 0, y: 0, width: 25, height: 25)
+                imageViewServer.translatesAutoresizingMaskIntoConstraints = false
                 imageViewServer.sd_setImage(with: imageURL)
+                buttonView.addSubview(imageViewServer)
 
-                let buttonServer = UIBarButtonItem(customView: imageViewServer)
-                buttonServer.width = 25
+                let views = ["imageView": imageViewServer]
+                buttonView.addConstraints(NSLayoutConstraint.constraints(
+                    withVisualFormat: "H:|-[imageView(25)]-|",
+                    options: .alignAllCenterX,
+                    metrics: nil,
+                    views: views)
+                )
 
+                buttonView.addConstraints(NSLayoutConstraint.constraints(
+                    withVisualFormat: "V:|-[imageView(25)]-|",
+                    options: .alignAllCenterY,
+                    metrics: nil,
+                    views: views)
+                )
+
+                let buttonServer = UIBarButtonItem(customView: buttonView)
                 navigationItem.leftBarButtonItem = buttonServer
             }
         }
