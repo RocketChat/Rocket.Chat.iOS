@@ -22,7 +22,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="451" height="189.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sa8-uz-AWx">
-                                <rect key="frame" x="20" y="94.5" width="411" height="1"/>
+                                <rect key="frame" x="0.0" y="94.5" width="451" height="1"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="rqX-i6-uPO"/>
@@ -45,8 +45,8 @@
                             <constraint firstItem="GMC-tQ-cQS" firstAttribute="centerY" secondItem="rzy-jZ-mPD" secondAttribute="centerY" id="DYY-7l-5je"/>
                             <constraint firstItem="sa8-uz-AWx" firstAttribute="centerY" secondItem="rzy-jZ-mPD" secondAttribute="centerY" id="F4M-IE-s7d"/>
                             <constraint firstItem="GMC-tQ-cQS" firstAttribute="centerX" secondItem="rzy-jZ-mPD" secondAttribute="centerX" id="RZr-nN-gsY"/>
-                            <constraint firstItem="sa8-uz-AWx" firstAttribute="leading" secondItem="rzy-jZ-mPD" secondAttribute="leading" constant="20" id="cFU-gs-fxg"/>
-                            <constraint firstAttribute="trailing" secondItem="sa8-uz-AWx" secondAttribute="trailing" constant="20" id="ltF-AE-5f1"/>
+                            <constraint firstItem="sa8-uz-AWx" firstAttribute="leading" secondItem="rzy-jZ-mPD" secondAttribute="leading" id="cFU-gs-fxg"/>
+                            <constraint firstAttribute="trailing" secondItem="sa8-uz-AWx" secondAttribute="trailing" id="ltF-AE-5f1"/>
                         </constraints>
                     </view>
                 </subviews>
