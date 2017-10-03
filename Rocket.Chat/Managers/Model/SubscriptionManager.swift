@@ -173,12 +173,13 @@ struct SubscriptionManager {
     }
 
     static func subscribeRoomChanges() {
-        let eventName = "stream-notify-room"
+        guard let user = AuthManager.currentUser() else { return }
+
+        let eventName = "stream-notify-user/rooms-changed"
         let request = [
             "msg": "sub",
-            "name": "stream-notify-room",
-            "id": eventName,
-            "params": [nil, false]
+            "name": "stream-notify-user",
+            "params": ["\(user.identifier ?? "")/rooms-changed", false]
         ] as [String : Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
