@@ -175,17 +175,32 @@ struct SubscriptionManager {
     static func subscribeRoomChanges() {
         guard let user = AuthManager.currentUser() else { return }
 
-        let eventName = "stream-notify-user/rooms-changed"
+        let eventName = "\(user.identifier ?? "")/rooms-changed"
         let request = [
             "msg": "sub",
             "name": "stream-notify-user",
-            "params": ["\(user.identifier ?? "")/rooms-changed", false]
+            "params": [eventName, false]
         ] as [String : Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
-            Log.debug("ROOOM UPPDATEEEEE START")
-            Log.debug(response.result.string)
-            Log.debug("ROOOM UPPDATEEEEE STOP")
+            guard !response.isError() else { return Log.debug(response.result.string) }
+
+            let object = response.result["fields"]["args"][1]
+
+            Realm.execute({ (realm) in
+                if let rid = object["_id"].string {
+                    if let subscription = Subscription.find(rid: rid, realm: realm) {
+                        subscription.roomDescription = object["description"].string ?? ""
+                        subscription.roomTopic = object["topic"].string ?? ""
+
+                        if let updatedAt = object["_updatedAt"]["$date"].double {
+                            subscription.roomUpdatedAt = Date.dateFromInterval(updatedAt)
+                        }
+
+                        realm.add(subscription, update: true)
+                    }
+                }
+            })
         }
     }
 
