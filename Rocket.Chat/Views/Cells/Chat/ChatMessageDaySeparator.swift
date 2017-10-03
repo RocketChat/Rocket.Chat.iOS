@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ChatMessageDaySeparator: UICollectionViewCell {
+final class ChatMessageDaySeparator: UITableViewCell {
 
     static let minimumHeight = CGFloat(40)
     static let identifier = "ChatMessageDaySeparator"

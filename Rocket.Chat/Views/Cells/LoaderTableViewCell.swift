@@ -10,6 +10,7 @@ import UIKit
 
 class LoaderTableViewCell: UITableViewCell {
     static let identifier: String = "LoaderTableViewCell"
+    static let minimumHeight: CGFloat = 50
 
     weak var loaderView: LoaderView?
     @IBOutlet weak var loaderViewContainer: UIView! {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatDirectMessageHeaderCell: UICollectionViewCell {
+class ChatDirectMessageHeaderCell: UITableViewCell {
 
     static let minimumHeight = CGFloat(240)
     static let identifier = "ChatDirectMessageHeaderCell"
