@@ -68,6 +68,7 @@ class NewRoomViewController: BaseViewController {
     @IBAction func buttonCreateDidPressed(_ sender: Any) {
         guard let roomName = setValues["room name"] as? String else { return }
         guard let publicRoom = setValues["public room"] as? Bool else { return }
+        guard let readOnlyRoom = setValues["read only room"] as? Bool else { return }
 
         let roomType: RoomCreateType
         if publicRoom {
@@ -76,7 +77,7 @@ class NewRoomViewController: BaseViewController {
             roomType = .group
         }
 
-        API.shared.fetch(RoomCreateRequest(roomName: roomName, type: roomType)) { [weak self] result in
+        API.shared.fetch(RoomCreateRequest(roomName: roomName, type: roomType, readOnly: readOnlyRoom)) { [weak self] result in
 
             guard let success = result?.raw?["success"].boolValue,
                 success == true else {

@@ -33,15 +33,18 @@ class RoomCreateRequest: APIRequest {
 
     let roomName: String
     let type: RoomCreateType
+    let readOnly: Bool
 
-    init(roomName: String, type: RoomCreateType) {
+    init(roomName: String, type: RoomCreateType, readOnly: Bool = false) {
         self.roomName = roomName
         self.type = type
+        self.readOnly = readOnly
     }
 
     func body() -> Data? {
         let json: [String: Any] = [
-            "name": roomName
+            "name": roomName,
+            "readOnly": readOnly
         ]
 
         return try? JSONSerialization.data(withJSONObject: json)
