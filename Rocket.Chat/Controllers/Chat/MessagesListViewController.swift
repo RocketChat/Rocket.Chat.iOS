@@ -49,13 +49,16 @@ class MessagesListViewData {
         return messages[messages.index(messages.startIndex, offsetBy: index)]
     }
 
+    var query: String?
+
     private var isLoadingMoreMessages = false
     func loadMoreMessages(completion: (() -> Void)? = nil) {
         if isLoadingMoreMessages { return }
 
         if let subscription = subscription {
             isLoadingMoreMessages = true
-            API.shared.fetch(SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type), options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
+            API.shared.fetch(SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query),
+                             options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
                 self.showing += result?.count ?? 0
                 self.total = result?.total ?? 0
                 if let messages = result?.getMessages() {
@@ -71,7 +74,7 @@ class MessagesListViewData {
     }
 }
 
-class MessagesListViewController: UIViewController {
+class MessagesListViewController: BaseViewController {
     var data = MessagesListViewData()
 
     @IBOutlet weak var collectionView: UICollectionView!

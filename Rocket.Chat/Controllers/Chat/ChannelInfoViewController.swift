@@ -23,7 +23,7 @@ class ChannelInfoViewController: BaseViewController {
             let channelInfoData = [
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
-                ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "")
+                ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList)
             ]
 
             if subscription.type == .directMessage {
@@ -86,11 +86,17 @@ class ChannelInfoViewController: BaseViewController {
     }
 
     func showPinnedList() {
-        self.performSegue(withIdentifier: "toMessagesList", sender: self)
+        self.performSegue(withIdentifier: "toMessagesList", sender: "{\"pinned\":true}")
     }
 
     func showStarredList() {
-        self.performSegue(withIdentifier: "toMessagesList", sender: self)
+        guard let userId = AuthManager.currentUser()?.identifier else {
+            alert(title: "Oops!", message: "Internal error: User not found!")
+            return
+        }
+
+        self.performSegue(withIdentifier: "toMessagesList",
+                          sender: "{\"starred._id\":{\"$in\":[\"\(userId)\"] } }")
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -100,6 +106,7 @@ class ChannelInfoViewController: BaseViewController {
 
         if let messagesList = segue.destination as? MessagesListViewController {
             messagesList.data.subscription = self.subscription
+            messagesList.data.query = sender as? String
         }
     }
 
@@ -191,9 +198,7 @@ extension ChannelInfoViewController: UITableViewDelegate {
 
         if let data = data as? ChannelInfoDetailCellData {
             guard let action = data.action else {
-                let alert = UIAlertController(title: "Ops!", message: "We're still working on this feature, stay tunned!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                present(alert, animated: true, completion: nil)
+                alert(title: "Oops!", message: "We're still working on this feature, stay tunned!")
                 return
             }
 
@@ -204,7 +209,6 @@ extension ChannelInfoViewController: UITableViewDelegate {
             }
         }
     }
-
 }
 
 // MARK: UITableViewDataSource

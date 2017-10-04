@@ -59,7 +59,7 @@ class MembersListViewData {
     }
 }
 
-class MembersListViewController: UIViewController {
+class MembersListViewController: BaseViewController {
     @IBOutlet weak var membersTableView: UITableView!
     var loaderCell: LoaderTableViewCell!
 
