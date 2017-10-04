@@ -134,7 +134,14 @@ extension MessagesListViewController: UICollectionViewDataSource {
 
         return UICollectionViewCell()
     }
+}
 
+extension MessagesListViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if indexPath.row == data.messages.count - 50 {
+            loadMoreMessages()
+        }
+    }
 }
 
 extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
@@ -146,8 +153,4 @@ extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
         let height = ChatMessageCell.cellMediaHeightFor(message: data.message(at: indexPath.row), sequential: false)
         return CGSize(width: fullWidth, height: height)
     }
-}
-
-extension MessagesListViewController: UICollectionViewDelegate {
-
 }
