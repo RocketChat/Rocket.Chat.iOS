@@ -257,7 +257,7 @@
                     <connections>
                         <outlet property="tableView" destination="BZN-WA-DFR" id="fMf-lW-s3T"/>
                         <segue destination="i6r-e5-U1B" kind="show" identifier="toMembersList" id="Dj3-vx-Ggd"/>
-                        <segue destination="GAd-ch-6WH" kind="show" identifier="toMessagesList" id="FYf-dM-pdq"/>
+                        <segue destination="GAd-ch-6WH" kind="show" identifier="toMessagesList" id="199-n2-7WG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Svt-7Y-y44" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -387,7 +387,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pu2-ou-2ep">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QjN-lv-M9T">
                                     <size key="itemSize" width="50" height="50"/>
@@ -405,9 +405,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="pu2-ou-2ep" secondAttribute="trailing" id="2JS-UT-Rle"/>
-                            <constraint firstItem="PSn-2v-aPD" firstAttribute="top" secondItem="pu2-ou-2ep" secondAttribute="bottom" id="W7W-pu-IIT"/>
+                            <constraint firstItem="PSn-2v-aPD" firstAttribute="top" secondItem="pu2-ou-2ep" secondAttribute="bottom" id="Lq1-Av-lry"/>
+                            <constraint firstItem="pu2-ou-2ep" firstAttribute="height" secondItem="wih-fh-LH7" secondAttribute="height" id="b77-LE-N76"/>
                             <constraint firstItem="pu2-ou-2ep" firstAttribute="leading" secondItem="wih-fh-LH7" secondAttribute="leading" id="jxX-By-LUx"/>
-                            <constraint firstItem="pu2-ou-2ep" firstAttribute="top" secondItem="6M7-qB-RlN" secondAttribute="bottom" id="utN-ZQ-kCY"/>
                         </constraints>
                     </view>
                     <connections>
@@ -416,7 +416,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i4P-ZF-XWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4353" y="979"/>
+            <point key="canvasLocation" x="4352.8000000000002" y="978.26086956521749"/>
         </scene>
     </scenes>
     <resources>
