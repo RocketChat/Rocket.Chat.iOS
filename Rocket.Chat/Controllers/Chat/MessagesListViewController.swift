@@ -93,8 +93,11 @@ extension MessagesListViewController {
 
         collectionView.collectionViewLayout = ChatCollectionViewFlowLayout()
 
-        loadMoreMessages()
         registerCells()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        loadMoreMessages()
     }
 
     func registerCells() {
@@ -123,8 +126,8 @@ extension MessagesListViewController: UICollectionViewDataSource {
         }
 
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.identifier, for: indexPath) as? ChatMessageCell {
-            cell.message = data.message(at: indexPath.row)
             cell.delegate = ChatViewController.shared
+            cell.message = data.message(at: indexPath.row)
             return cell
         }
 
