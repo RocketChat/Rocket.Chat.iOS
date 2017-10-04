@@ -39,6 +39,32 @@ class NewChannelViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    fileprivate enum TypeAlerts {
+        case errorMessage(String)
+        case errorUnknown
+
+        func message() -> String {
+            switch self {
+            case .errorMessage(let message):
+                return message
+            case .errorUnknown:
+                return localized("error.socket.default_error_message")
+            }
+        }
+    }
+
+    fileprivate func showAlert(_ typeAlert: TypeAlerts) {
+        let alert = UIAlertController(
+            title: localized("error.socket.default_error_title"),
+            message: typeAlert.message(),
+            preferredStyle: .alert
+        )
+        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
+        DispatchQueue.main.sync {
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+
     @IBAction func buttonCreateDidPressed(_ sender: Any) {
         guard let channelName = setValues["Channel Name"] as? String else { return }
         guard let publicChannel = setValues["Public Channel"] as? Bool else { return }
@@ -52,10 +78,14 @@ class NewChannelViewController: BaseViewController {
 
         API.shared.fetch(ChannelCreateRequest(channelName: channelName, type: channelType)) { [weak self] result in
 
-            if let error = result?.raw?.error {
-                // TODO: Need show the error message to user
-                print(error)
-                return
+            guard let success = result?.raw?["success"].boolValue,
+                success == true else {
+                    if let errorMessage = result?.raw?["error"].string {
+                        self?.showAlert(.errorMessage(errorMessage))
+                    } else {
+                        self?.showAlert(.errorUnknown)
+                    }
+                    return
             }
 
             guard let auth = AuthManager.isAuthenticated() else { return }
@@ -69,8 +99,7 @@ class NewChannelViewController: BaseViewController {
 
                     self?.dismiss(animated: true, completion: nil)
                 } else {
-                    // TODO: Need show the error message to user
-                    print("New channel not found")
+                    self?.showAlert(.errorUnknown)
                 }
             }
         }
