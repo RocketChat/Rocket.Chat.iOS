@@ -78,15 +78,17 @@ extension MessagesListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        collectionView.collectionViewLayout = ChatCollectionViewFlowLayout()
+
         loadMoreMessages()
         registerCells()
     }
 
     func registerCells() {
         collectionView?.register(UINib(
-            nibName: "ChatLoaderCell",
+            nibName: "ChatMessageCell",
             bundle: Bundle.main
-        ), forCellWithReuseIdentifier: ChatLoaderCell.identifier)
+        ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
     }
 }
 
@@ -98,9 +100,21 @@ extension MessagesListViewController: UICollectionViewDataSource {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoaderCell.identifier, for: indexPath)
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.identifier, for: indexPath) as? ChatMessageCell {
+            cell.message = data.message(at: indexPath.row)
+            cell.delegate = ChatViewController.shared
+            return cell
+        }
 
-        return cell
+        return UICollectionViewCell()
+    }
+
+}
+
+extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let height = ChatMessageCell.cellMediaHeightFor(message: data.message(at: indexPath.row), sequential: false)
+        return CGSize(width: collectionView.bounds.size.width, height: height)
     }
 }
 
