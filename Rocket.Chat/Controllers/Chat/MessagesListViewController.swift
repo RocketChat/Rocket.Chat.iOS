@@ -13,15 +13,15 @@ extension APIResult where T == SubscriptionMessagesRequest {
     func getMessages() -> [Message?]? {
         return raw?["messages"].arrayValue.map { json in
             let message = Message()
-            DispatchQueue.main.async {
-                message.map(json, realm: Realm.shared)
-            }
+            message.map(json, realm: Realm.shared)
             return message
         }
     }
 }
 
 class MessagesListViewData {
+    typealias CellData = (message: Message?, date: Date?)
+
     var subscription: Subscription?
 
     let pageSize = 100
@@ -36,13 +36,13 @@ class MessagesListViewData {
         return showing >= total
     }
 
-    var messagesPages: [[Message]] = []
-    var messages: FlattenCollection<[[Message]]> {
-        return messagesPages.joined()
+    var cellsPages: [[CellData]] = []
+    var cells: FlattenCollection<[[CellData]]> {
+        return cellsPages.joined()
     }
 
-    func message(at index: Int) -> Message {
-        return messages[messages.index(messages.startIndex, offsetBy: index)]
+    func cell(at index: Int) -> CellData {
+        return cells[cells.index(cells.startIndex, offsetBy: index)]
     }
 
     var query: String?
@@ -55,16 +55,30 @@ class MessagesListViewData {
             isLoadingMoreMessages = true
             API.shared.fetch(SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query),
                              options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
-                self.showing += result?.count ?? 0
-                self.total = result?.total ?? 0
-                if let messages = result?.getMessages() {
-                    self.messagesPages.append(messages.flatMap { $0 })
+                DispatchQueue.main.async {
+                    self.showing += result?.count ?? 0
+                    self.total = result?.total ?? 0
+                    if let messages = result?.getMessages() {
+                        let messages = messages.flatMap { $0 }
+                        guard var lastMessage = messages.first else { return }
+                        var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
+                        messages.forEach { message in
+                            if lastMessage.createdAt?.day != message.createdAt?.day ||
+                                lastMessage.createdAt?.month != message.createdAt?.month ||
+                                lastMessage.createdAt?.year != message.createdAt?.year {
+                                cellsPage.append(CellData(message: nil, date: message.createdAt ?? Date(timeIntervalSince1970: 0)))
+                            }
+                            cellsPage.append(CellData(message: message, date: nil))
+                            lastMessage = message
+                        }
+                        self.cellsPages.append(cellsPage)
+                    }
+
+                    self.currentPage += 1
+
+                    self.isLoadingMoreMessages = false
+                    completion?()
                 }
-
-                self.currentPage += 1
-
-                self.isLoadingMoreMessages = false
-                completion?()
             }
         }
     }
@@ -111,6 +125,11 @@ extension MessagesListViewController {
             nibName: "ChatLoaderCell",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatLoaderCell.identifier)
+
+        collectionView.register(UINib(
+            nibName: "ChatMessageDaySeparator",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
     }
 }
 
@@ -118,17 +137,26 @@ extension MessagesListViewController {
 
 extension MessagesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.messages.count + (data.isShowingAllMessages ? 0 : 1)
+        return data.cells.count + (data.isShowingAllMessages ? 0 : 1)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard indexPath.row < data.messages.count else {
+        guard indexPath.row < data.cells.count else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoaderCell.identifier, for: indexPath)
         }
 
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.identifier, for: indexPath) as? ChatMessageCell {
+        let cellData = data.cell(at: indexPath.row)
+
+        if let message = cellData.message,
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.identifier, for: indexPath) as? ChatMessageCell {
             cell.delegate = ChatViewController.shared
-            cell.message = data.message(at: indexPath.row)
+            cell.message = message
+            return cell
+        }
+
+        if let date = cellData.date,
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageDaySeparator.identifier, for: indexPath) as? ChatMessageDaySeparator {
+            cell.labelTitle.text = date.formatted("MMM dd, YYYY")
             return cell
         }
 
@@ -138,7 +166,7 @@ extension MessagesListViewController: UICollectionViewDataSource {
 
 extension MessagesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == data.messages.count - 50 {
+        if indexPath.row == data.cells.count - 50 {
             loadMoreMessages()
         }
     }
@@ -148,9 +176,18 @@ extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let fullWidth = collectionView.bounds.size.width
 
-        guard indexPath.row < data.messages.count else { return CGSize(width: fullWidth, height: 50) }
+        guard indexPath.row < data.cells.count else { return CGSize(width: fullWidth, height: 50) }
 
-        let height = ChatMessageCell.cellMediaHeightFor(message: data.message(at: indexPath.row), sequential: false)
-        return CGSize(width: fullWidth, height: height)
+        let cellData = data.cell(at: indexPath.row)
+
+        if let message = cellData.message {
+            return CGSize(width: fullWidth, height: ChatMessageCell.cellMediaHeightFor(message: message, sequential: false))
+        }
+
+        if cellData.date != nil {
+            return CGSize(width: fullWidth, height: ChatMessageDaySeparator.minimumHeight)
+        }
+
+        return CGSize(width: fullWidth, height: 50)
     }
 }

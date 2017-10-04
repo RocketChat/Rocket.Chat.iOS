@@ -29,8 +29,20 @@ extension Message: ModelMappeable {
             self.createdAt = Date.dateFromInterval(createdAt)
         }
 
+        if let createdAt = values["ts"].string {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            self.createdAt = dateFormatter.date(from: createdAt)
+        }
+
         if let updatedAt = values["_updatedAt"]["$date"].double {
             self.updatedAt = Date.dateFromInterval(updatedAt)
+        }
+
+        if let updatedAt = values["_updatedAt"].string {
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            self.updatedAt = dateFormatter.date(from: updatedAt)
         }
 
         if let userIdentifier = values["u"]["_id"].string {
