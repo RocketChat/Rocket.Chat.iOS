@@ -15,22 +15,6 @@ final class SubscriptionsViewController: BaseViewController {
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
 
-    weak var viewUserMenu: SubscriptionUserStatusView?
-    @IBOutlet weak var viewUser: UIView! {
-        didSet {
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
-            viewUser.addGestureRecognizer(gesture)
-        }
-    }
-
-    @IBOutlet weak var labelServer: UILabel!
-    @IBOutlet weak var labelUsername: UILabel!
-    @IBOutlet weak var imageViewArrowDown: UIImageView! {
-        didSet {
-            imageViewArrowDown.image = imageViewArrowDown.image?.imageWithTint(.RCLightBlue())
-        }
-    }
-
     static var shared: SubscriptionsViewController? {
         if let pageController = SubscriptionsPageViewController.shared {
             return pageController.subscriptionsController
@@ -118,7 +102,6 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unregisterKeyboardNotifications()
-        dismissUserMenu()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -315,51 +298,3 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 
 }
 
-extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
-
-    func presentUserMenu() {
-        guard let viewUserMenu = SubscriptionUserStatusView.instantiateFromNib() else { return }
-
-        var newFrame = view.frame
-        newFrame.origin.y = -newFrame.height
-        viewUserMenu.frame = newFrame
-        viewUserMenu.delegate = self
-        viewUserMenu.parentController = self
-
-        view.addSubview(viewUserMenu)
-        self.viewUserMenu = viewUserMenu
-
-        newFrame.origin.y = 84
-        UIView.animate(withDuration: 0.15) {
-            viewUserMenu.frame = newFrame
-            self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
-        }
-    }
-
-    func dismissUserMenu() {
-        guard let viewUserMenu = viewUserMenu else { return }
-
-        var newFrame = viewUserMenu.frame
-        newFrame.origin.y = -newFrame.height
-
-        UIView.animate(withDuration: 0.15, animations: {
-            viewUserMenu.frame = newFrame
-            self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat(0))
-        }, completion: { (_) in
-            viewUserMenu.removeFromSuperview()
-        })
-    }
-
-    @objc func viewUserDidTap(sender: Any) {
-        if viewUserMenu != nil {
-            dismissUserMenu()
-        } else {
-            presentUserMenu()
-        }
-    }
-
-    func userDidPressedOption() {
-        dismissUserMenu()
-    }
-
-}
