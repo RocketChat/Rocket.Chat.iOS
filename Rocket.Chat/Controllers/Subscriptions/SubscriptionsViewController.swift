@@ -76,6 +76,9 @@ final class SubscriptionsViewController: BaseViewController {
                     views: views)
                 )
 
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
+                buttonView.addGestureRecognizer(tapGesture)
+
                 let buttonServer = UIBarButtonItem(customView: buttonView)
                 navigationItem.leftBarButtonItem = buttonServer
             }
@@ -236,6 +239,12 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func imageViewServerDidTapped(gesture: UIGestureRecognizer) {
         SubscriptionsPageViewController.shared?.showServersList()
+    }
+
+    // MARK: IBAction
+
+    @objc func openServersList() {
+        performSegue(withIdentifier: "Servers", sender: nil)
     }
 
 }

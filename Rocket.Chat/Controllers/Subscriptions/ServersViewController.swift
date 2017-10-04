@@ -14,6 +14,10 @@ class ServersViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -29,16 +33,35 @@ class ServersViewController: UIViewController {
         tableView?.reloadData()
     }
 
+    // MARK: IBAction
+
+    @objc func close() {
+        dismiss(animated: true, completion: nil)
+    }
+
     func selectServer(at indexPath: IndexPath) {
-//        if indexPath.row == servers.count {
-//            MainChatViewController.shared?.openAddNewTeamController()
-//        } else {
-//            if indexPath.row == DatabaseManager.selectedIndex {
-//                SubscriptionsPageViewController.shared?.showSubscriptionsList()
-//            } else {
-//                MainChatViewController.shared?.changeSelectedServer(index: indexPath.row)
-//            }
-//        }
+        if indexPath.row == servers.count {
+            SocketManager.disconnect { (_, _) in
+                self.performSegue(withIdentifier: "Auth", sender: nil)
+            }
+        } else {
+            if indexPath.row == DatabaseManager.selectedIndex {
+                close()
+            } else {
+                DatabaseManager.selectDatabase(at: indexPath.row)
+                DatabaseManager.changeDatabaseInstance(index: indexPath.row)
+
+                SocketManager.disconnect { (_, _) in
+                    let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
+                    let controller = storyboardChat.instantiateInitialViewController()
+                    let application = UIApplication.shared
+
+                    if let window = application.windows.first {
+                        window.rootViewController = controller
+                    }
+                }
+            }
+        }
     }
 
     func removeServer(at indexPath: IndexPath) {

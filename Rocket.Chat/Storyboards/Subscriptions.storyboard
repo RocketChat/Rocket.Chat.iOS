@@ -124,6 +124,7 @@
                     <connections>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                         <segue destination="Q7Z-N2-FIp" kind="show" identifier="Chat" id="lUr-Fb-9Ij"/>
+                        <segue destination="7xe-nw-9mY" kind="presentation" identifier="Servers" id="emf-xZ-ptX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -166,7 +167,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="69" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="svn-JN-2Fk">
-                                <rect key="frame" x="0.0" y="20" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="40" width="375" height="607"/>
                                 <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -269,18 +270,27 @@
                         <constraints>
                             <constraint firstItem="j1D-FN-EuE" firstAttribute="trailing" secondItem="svn-JN-2Fk" secondAttribute="trailing" id="40f-lp-qLx"/>
                             <constraint firstItem="svn-JN-2Fk" firstAttribute="leading" secondItem="j1D-FN-EuE" secondAttribute="leading" id="5S0-qv-Hu6"/>
-                            <constraint firstItem="svn-JN-2Fk" firstAttribute="top" secondItem="j1D-FN-EuE" secondAttribute="top" id="LAM-is-6CO"/>
-                            <constraint firstItem="j1D-FN-EuE" firstAttribute="bottom" secondItem="svn-JN-2Fk" secondAttribute="bottom" constant="44" id="nzO-Sb-o3B"/>
+                            <constraint firstItem="svn-JN-2Fk" firstAttribute="top" secondItem="j1D-FN-EuE" secondAttribute="top" constant="20" id="LAM-is-6CO"/>
+                            <constraint firstItem="j1D-FN-EuE" firstAttribute="bottom" secondItem="svn-JN-2Fk" secondAttribute="bottom" constant="20" id="nzO-Sb-o3B"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j1D-FN-EuE"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="svn-JN-2Fk" id="J6J-sl-DFx"/>
+                        <segue destination="NNr-s2-zvw" kind="presentation" identifier="Auth" id="0jL-nO-4eZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VSR-Bo-vMp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1321" y="-51"/>
+            <point key="canvasLocation" x="1340" y="-46"/>
+        </scene>
+        <!--Auth-->
+        <scene sceneID="2Wl-Yd-eQq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Auth" id="NNr-s2-zvw" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="whS-ta-qp1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2020" y="-334"/>
         </scene>
     </scenes>
     <resources>
