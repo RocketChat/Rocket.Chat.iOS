@@ -1,5 +1,5 @@
 //
-//  ChannelCreateRequest.swift
+//  RoomCreateRequest.swift
 //  Rocket.Chat
 //
 //  Created by Bruno Macabeus Aquino on 28/09/17.
@@ -11,7 +11,7 @@
 
 import Foundation
 
-enum ChannelCreateType {
+enum RoomCreateType {
     case channel
     case group
 
@@ -25,23 +25,23 @@ enum ChannelCreateType {
     }
 }
 
-class ChannelCreateRequest: APIRequest {
+class RoomCreateRequest: APIRequest {
     let method: String = "POST"
     var path: String {
         return type.path
     }
 
-    let channelName: String
-    let type: ChannelCreateType
+    let roomName: String
+    let type: RoomCreateType
 
-    init(channelName: String, type: ChannelCreateType) {
-        self.channelName = channelName
+    init(roomName: String, type: RoomCreateType) {
+        self.roomName = roomName
         self.type = type
     }
 
     func body() -> Data? {
         let json: [String: Any] = [
-            "name": channelName
+            "name": roomName
         ]
 
         return try? JSONSerialization.data(withJSONObject: json)
@@ -52,5 +52,5 @@ class ChannelCreateRequest: APIRequest {
     }
 }
 
-extension APIResult where T == ChannelCreateRequest {
+extension APIResult where T == RoomCreateRequest {
 }

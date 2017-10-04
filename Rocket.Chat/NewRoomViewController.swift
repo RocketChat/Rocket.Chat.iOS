@@ -1,5 +1,5 @@
 //
-//  NewChannelViewController.swift
+//  NewRoomViewController.swift
 //  Rocket.Chat
 //
 //  Created by Bruno Macabeus Aquino on 27/09/17.
@@ -9,22 +9,22 @@
 import UIKit
 import RealmSwift
 
-class NewChannelViewController: BaseViewController {
+class NewRoomViewController: BaseViewController {
 
     let tableViewData: [CreateCell] = [
         CreateCell(
             cell: .boolOption(title: "Public Channel", description: "Everyone can access this channel"),
-            key: "Public Channel",
+            key: "public room",
             defaultValue: true
         ),
         CreateCell(
             cell: .boolOption(title: "Read only channel", description: "Only admin can write new messages"),
-            key: "Read only channel",
+            key: "read only room",
             defaultValue: false
         ),
         CreateCell(
             cell: .textField(title: "Channel Name"),
-            key: "Channel Name",
+            key: "room name",
             defaultValue: ""
         )
     ]
@@ -66,17 +66,17 @@ class NewChannelViewController: BaseViewController {
     }
 
     @IBAction func buttonCreateDidPressed(_ sender: Any) {
-        guard let channelName = setValues["Channel Name"] as? String else { return }
-        guard let publicChannel = setValues["Public Channel"] as? Bool else { return }
+        guard let roomName = setValues["room name"] as? String else { return }
+        guard let publicRoom = setValues["public room"] as? Bool else { return }
 
-        let channelType: ChannelCreateType
-        if publicChannel {
-            channelType = .channel
+        let roomType: RoomCreateType
+        if publicRoom {
+            roomType = .channel
         } else {
-            channelType = .group
+            roomType = .group
         }
 
-        API.shared.fetch(ChannelCreateRequest(channelName: channelName, type: channelType)) { [weak self] result in
+        API.shared.fetch(RoomCreateRequest(roomName: roomName, type: roomType)) { [weak self] result in
 
             guard let success = result?.raw?["success"].boolValue,
                 success == true else {
@@ -91,11 +91,11 @@ class NewChannelViewController: BaseViewController {
             guard let auth = AuthManager.isAuthenticated() else { return }
 
             SubscriptionManager.updateSubscriptions(auth) { _ in
-                if let findNewChannel = Realm.shared?.objects(Subscription.self).filter("name == '\(channelName)'").first {
-                    let newChannel = findNewChannel
+                if let findNewRoom = Realm.shared?.objects(Subscription.self).filter("name == '\(roomName)'").first {
+                    let newRoom = findNewRoom
 
                     let controller = ChatViewController.shared
-                    controller?.subscription = newChannel
+                    controller?.subscription = newRoom
 
                     self?.dismiss(animated: true, completion: nil)
                 } else {
@@ -110,7 +110,7 @@ class NewChannelViewController: BaseViewController {
     }
 }
 
-extension NewChannelViewController: NewChannelCellDelegate {
+extension NewRoomViewController: NewChannelCellDelegate {
     func updateDictValue(key: String, value: Any) {
         setValues[key] = value
     }
@@ -122,7 +122,7 @@ extension NewChannelViewController: NewChannelCellDelegate {
 
 // MARK: UITableViewDelegate
 
-extension NewChannelViewController: UITableViewDelegate {
+extension NewRoomViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableViewData[indexPath.section]
@@ -141,7 +141,7 @@ extension NewChannelViewController: UITableViewDelegate {
 
 // MARK: UITableViewDataSource
 
-extension NewChannelViewController: UITableViewDataSource {
+extension NewRoomViewController: UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return tableViewData.count
