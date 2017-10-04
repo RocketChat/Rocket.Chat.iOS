@@ -22,7 +22,7 @@ class ChannelInfoViewController: BaseViewController {
 
             let channelInfoData = [
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
-                ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: ""),
+                ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "")
             ]
 
@@ -85,8 +85,20 @@ class ChannelInfoViewController: BaseViewController {
         self.performSegue(withIdentifier: "toMembersList", sender: self)
     }
 
+    func showPinnedList() {
+        self.performSegue(withIdentifier: "toMessagesList", sender: self)
+    }
+
+    func showStarredList() {
+        self.performSegue(withIdentifier: "toMessagesList", sender: self)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let membersList = segue.destination as? MembersListViewController {
+            membersList.data.subscription = self.subscription
+        }
+
+        if let membersList = segue.destination as? MessagesListViewController {
             membersList.data.subscription = self.subscription
         }
     }
