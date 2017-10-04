@@ -7,6 +7,19 @@
 //
 
 import UIKit
+import RealmSwift
+
+extension APIResult where T == SubscriptionMessagesRequest {
+    func getMessages() -> [Message?]? {
+        return raw?["messages"].arrayValue.map { json in
+            let message = Message()
+            DispatchQueue.main.async {
+                message.map(json, realm: Realm.shared)
+            }
+            return message
+        }
+    }
+}
 
 class MessagesListViewData {
     var subscription: Subscription?
@@ -45,7 +58,7 @@ class MessagesListViewData {
             API.shared.fetch(SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type), options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
                 self.showing += result?.count ?? 0
                 self.total = result?.total ?? 0
-                if let messages = result?.messages {
+                if let messages = result?.getMessages() {
                     self.messagesPages.append(messages.flatMap { $0 })
                 }
 
