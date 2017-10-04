@@ -98,8 +98,8 @@ class ChannelInfoViewController: BaseViewController {
             membersList.data.subscription = self.subscription
         }
 
-        if let membersList = segue.destination as? MessagesListViewController {
-            membersList.data.subscription = self.subscription
+        if let messagesList = segue.destination as? MessagesListViewController {
+            messagesList.data.subscription = self.subscription
         }
     }
 
