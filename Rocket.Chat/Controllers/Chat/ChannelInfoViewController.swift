@@ -8,6 +8,8 @@
 
 import UIKit
 
+typealias ListSegueData = (title: String, query: String?)
+
 class ChannelInfoViewController: BaseViewController {
 
     var tableViewData: [[Any]] = [] {
@@ -86,7 +88,8 @@ class ChannelInfoViewController: BaseViewController {
     }
 
     func showPinnedList() {
-        self.performSegue(withIdentifier: "toMessagesList", sender: "{\"pinned\":true}")
+        let data = ListSegueData(title: localized("pinnedlist.title"), query: "{\"pinned\":true}")
+        self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
     func showStarredList() {
@@ -95,8 +98,8 @@ class ChannelInfoViewController: BaseViewController {
             return
         }
 
-        self.performSegue(withIdentifier: "toMessagesList",
-                          sender: "{\"starred._id\":{\"$in\":[\"\(userId)\"] } }")
+        let data = ListSegueData(title: localized("starredlist.title"), query: "{\"starred._id\":{\"$in\":[\"\(userId)\"]}}")
+        self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -105,8 +108,13 @@ class ChannelInfoViewController: BaseViewController {
         }
 
         if let messagesList = segue.destination as? MessagesListViewController {
+
             messagesList.data.subscription = self.subscription
-            messagesList.data.query = sender as? String
+
+            if let segueData = sender as? ListSegueData {
+                messagesList.data.title = segueData.title
+                messagesList.data.query = segueData.query
+            }
         }
     }
 

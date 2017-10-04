@@ -113,3 +113,9 @@
 
 // Members List
 "memberslist.title" = "Mitglieder (%d)";
+
+
+// Messages List
+"messageslist.title" = "Nachrichten";
+"pinnedlist.title" = "Angeheftete Nachrichten";
+"starredlist.title" = "Favorisierte Nachrichten";
