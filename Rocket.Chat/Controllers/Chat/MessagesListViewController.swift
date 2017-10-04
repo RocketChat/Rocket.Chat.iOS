@@ -30,11 +30,7 @@ class MessagesListViewData {
     var showing: Int = 0
     var total: Int = 0
 
-    var title: String {
-        return String(
-            format: localized("messageslist.title"),
-            total)
-    }
+    var title: String = localized("messageslist.title")
 
     var isShowingAllMessages: Bool {
         return showing >= total
@@ -94,9 +90,11 @@ extension MessagesListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        collectionView.collectionViewLayout = ChatCollectionViewFlowLayout()
+        //collectionView.collectionViewLayout = ChatCollectionViewFlowLayout()
 
         registerCells()
+
+        self.title = data.title
     }
 
     override func viewWillAppear(_ animated: Bool) {

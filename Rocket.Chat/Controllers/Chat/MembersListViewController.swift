@@ -23,7 +23,6 @@ class MembersListViewData {
             total)
     }
 
-    var showMoreButtonTitle = "SHOW MORE"
     var isShowingAllMembers: Bool {
         return showing >= total
     }
