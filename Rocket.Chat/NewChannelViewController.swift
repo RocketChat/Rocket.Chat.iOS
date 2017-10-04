@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class NewChannelViewController: BaseViewController {
 
@@ -52,11 +53,26 @@ class NewChannelViewController: BaseViewController {
         API.shared.fetch(ChannelCreateRequest(channelName: channelName, type: channelType)) { [weak self] result in
 
             if let error = result?.raw?.error {
+                // TODO: Need show the error message to user
                 print(error)
                 return
             }
 
-            self?.dismiss(animated: true, completion: nil)
+            guard let auth = AuthManager.isAuthenticated() else { return }
+
+            SubscriptionManager.updateSubscriptions(auth) { _ in
+                if let findNewChannel = Realm.shared?.objects(Subscription.self).filter("name == '\(channelName)'").first {
+                    let newChannel = findNewChannel
+
+                    let controller = ChatViewController.shared
+                    controller?.subscription = newChannel
+
+                    self?.dismiss(animated: true, completion: nil)
+                } else {
+                    // TODO: Need show the error message to user
+                    print("New channel not found")
+                }
+            }
         }
     }
 
