@@ -15,7 +15,7 @@ enum ChannelCreateType {
     case channel
     case group
 
-    func path() -> String {
+    var path: String {
         switch self {
         case .channel:
             return "/api/v1/channels.create"
@@ -28,15 +28,15 @@ enum ChannelCreateType {
 class ChannelCreateRequest: APIRequest {
     let method: String = "POST"
     var path: String {
-        return type.path()
+        return type.path
     }
 
     let channelName: String
     let type: ChannelCreateType
 
     init(channelName: String, type: ChannelCreateType) {
-        self.type = type
         self.channelName = channelName
+        self.type = type
     }
 
     func body() -> Data? {
