@@ -95,7 +95,9 @@ final class SubscriptionCell: UITableViewCell {
             labelUnread.text =  ""
         }
 
-        labelDate.text = subscription.roomUpdatedAt?.formatted("HH:mm")
+        if let roomUpdatedAt = subscription.roomUpdatedAt {
+            labelDate.text = dateFormatted(date: roomUpdatedAt)
+        }
     }
 
     func updateStatus() {
@@ -120,6 +122,21 @@ final class SubscriptionCell: UITableViewCell {
         } else {
             viewStatus.isHidden = true
         }
+    }
+
+    // Need to localize this formatting
+    func dateFormatted(date: Date) -> String {
+        let calendar = NSCalendar.current
+
+        if calendar.isDateInYesterday(date) {
+            return "Yesterday"
+        }
+
+        if calendar.isDateInToday(date) {
+            return date.formatted("HH:mm")
+        }
+
+        return date.formatted("dd/MM/yyyy")
     }
 
 }

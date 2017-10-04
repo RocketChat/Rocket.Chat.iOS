@@ -133,6 +133,11 @@ final class ChatViewController: SLKTextViewController {
         view.bringSubview(toFront: textInputbar)
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: animated)
+    }
+
     @objc internal func reconnect() {
         if !SocketManager.isConnected() {
             SocketManager.reconnect()

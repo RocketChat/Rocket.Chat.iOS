@@ -150,7 +150,8 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        searchResult = Array(auth.subscriptions.filterBy(name: text).sortedByLastMessageDate())
+        subscriptions = auth.subscriptions.filterBy(name: text).sortedByLastMessageDate()
+        searchText = text
 
         if text.characters.count == 0 {
             isSearchingLocally = false
@@ -223,7 +224,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
 
         SubscriptionManager.updateUnreadApplicationBadge()
-        tableView?.reloadSections(IndexSet(integer: 0), with: .fade)
+        tableView?.reloadData()
     }
 
     func updateCurrentUserInformation() {
@@ -283,6 +284,8 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let subscription = subscription(for: indexPath) else { return }
+
+        searchController?.searchBar.resignFirstResponder()
 
         if let controller = UIStoryboard(name: "Chat", bundle: Bundle.main).instantiateInitialViewController() as? ChatViewController {
             controller.subscription = subscription
