@@ -98,10 +98,15 @@ extension MessagesListViewController {
     }
 
     func registerCells() {
-        collectionView?.register(UINib(
+        collectionView.register(UINib(
             nibName: "ChatMessageCell",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageCell.identifier)
+
+        collectionView.register(UINib(
+            nibName: "ChatLoaderCell",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatLoaderCell.identifier)
     }
 }
 
@@ -109,10 +114,14 @@ extension MessagesListViewController {
 
 extension MessagesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.messages.count
+        return data.messages.count + (data.isShowingAllMessages ? 0 : 1)
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard indexPath.row < data.messages.count else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoaderCell.identifier, for: indexPath)
+        }
+
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.identifier, for: indexPath) as? ChatMessageCell {
             cell.message = data.message(at: indexPath.row)
             cell.delegate = ChatViewController.shared
@@ -126,8 +135,12 @@ extension MessagesListViewController: UICollectionViewDataSource {
 
 extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let fullWidth = collectionView.bounds.size.width
+
+        guard indexPath.row < data.messages.count else { return CGSize(width: fullWidth, height: 50) }
+
         let height = ChatMessageCell.cellMediaHeightFor(message: data.message(at: indexPath.row), sequential: false)
-        return CGSize(width: collectionView.bounds.size.width, height: height)
+        return CGSize(width: fullWidth, height: height)
     }
 }
 
