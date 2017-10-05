@@ -14,12 +14,18 @@ class ServersViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.frame
+        view.insertSubview(blurEffectView, at: 0)
+        view.backgroundColor = .clear
 
         // Long press to show some actions on cells
         let longPressGesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPress(gesture:)))
@@ -29,6 +35,7 @@ class ServersViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
         servers = DatabaseManager.servers ?? []
         tableView?.reloadData()
     }

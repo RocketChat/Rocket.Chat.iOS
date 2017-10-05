@@ -124,7 +124,7 @@
                     <connections>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                         <segue destination="Q7Z-N2-FIp" kind="show" identifier="Chat" id="lUr-Fb-9Ij"/>
-                        <segue destination="7xe-nw-9mY" kind="presentation" identifier="Servers" id="emf-xZ-ptX"/>
+                        <segue destination="7xe-nw-9mY" kind="presentation" identifier="Servers" modalPresentationStyle="overCurrentContext" modalTransitionStyle="crossDissolve" id="emf-xZ-ptX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -168,7 +168,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="69" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="svn-JN-2Fk">
                                 <rect key="frame" x="0.0" y="40" width="375" height="607"/>
-                                <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kServerCellIdentifier" rowHeight="69" id="NZT-T6-2Ws" customClass="ServerCell" customModule="Rocket_Chat" customModuleProvider="target">
@@ -215,7 +215,7 @@
                                                 <constraint firstAttribute="trailing" secondItem="qVv-8W-XaU" secondAttribute="trailing" constant="15" id="nUV-S1-mbg"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="imageViewServer" destination="TVx-zC-LI2" id="8BO-9U-D3q"/>
                                             <outlet property="labelServerDescription" destination="dhI-Gs-Kck" id="788-t6-Mbt"/>
@@ -254,7 +254,7 @@
                                                 <constraint firstItem="664-dR-rEE" firstAttribute="leading" secondItem="Z0v-ks-i2y" secondAttribute="trailing" constant="30" id="zEp-KT-1iu"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="labelText" destination="664-dR-rEE" id="p8S-Xt-bmO"/>
                                         </connections>
@@ -266,7 +266,6 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="j1D-FN-EuE" firstAttribute="trailing" secondItem="svn-JN-2Fk" secondAttribute="trailing" id="40f-lp-qLx"/>
                             <constraint firstItem="svn-JN-2Fk" firstAttribute="leading" secondItem="j1D-FN-EuE" secondAttribute="leading" id="5S0-qv-Hu6"/>
@@ -275,6 +274,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j1D-FN-EuE"/>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="svn-JN-2Fk" id="J6J-sl-DFx"/>
                         <segue destination="NNr-s2-zvw" kind="presentation" identifier="Auth" id="0jL-nO-4eZ"/>
