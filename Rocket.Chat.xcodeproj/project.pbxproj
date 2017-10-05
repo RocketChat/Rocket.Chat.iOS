@@ -105,8 +105,7 @@
 		41A79C0F1D2F085F00A1968E /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C0E1D2F085F00A1968E /* User.swift */; };
 		41A79C131D2F09F200A1968E /* Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A79C121D2F09F200A1968E /* Auth.swift */; };
 		41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A87BAC1DA66E700000EE80 /* AuthSettings.swift */; };
-		41A91AEF1E51C51A005C94B1 /* SubscriptionUserStatusView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41A91AEE1E51C51A005C94B1 /* SubscriptionUserStatusView.xib */; };
-		41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusView.swift */; };
+		41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusViewController.swift */; };
 		41AC3CD31DCC9873002DC39A /* AutocompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */; };
 		41AC3CD91DCCA0C9002DC39A /* AutocompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */; };
 		41ADDD491E9DBB100007A458 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ADDD481E9DBB100007A458 /* LoaderView.swift */; };
@@ -340,8 +339,7 @@
 		41A79C0E1D2F085F00A1968E /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = User.swift; path = Models/User.swift; sourceTree = "<group>"; };
 		41A79C121D2F09F200A1968E /* Auth.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Auth.swift; path = Models/Auth.swift; sourceTree = "<group>"; };
 		41A87BAC1DA66E700000EE80 /* AuthSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettings.swift; path = Models/AuthSettings.swift; sourceTree = "<group>"; };
-		41A91AEE1E51C51A005C94B1 /* SubscriptionUserStatusView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SubscriptionUserStatusView.xib; path = Views/Subscriptions/SubscriptionUserStatusView.xib; sourceTree = "<group>"; };
-		41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionUserStatusView.swift; path = Views/Subscriptions/SubscriptionUserStatusView.swift; sourceTree = "<group>"; };
+		41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionUserStatusViewController.swift; path = Views/Subscriptions/SubscriptionUserStatusViewController.swift; sourceTree = "<group>"; };
 		41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AutocompleteCell.xib; path = Views/Cells/Chat/AutocompleteCell.xib; sourceTree = "<group>"; };
 		41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AutocompleteCell.swift; path = Views/Cells/Chat/AutocompleteCell.swift; sourceTree = "<group>"; };
 		41ADDD481E9DBB100007A458 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoaderView.swift; path = Views/Loader/LoaderView.swift; sourceTree = "<group>"; };
@@ -824,8 +822,6 @@
 		41A91AED1E51C4E5005C94B1 /* Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
-				41A91AEE1E51C51A005C94B1 /* SubscriptionUserStatusView.xib */,
-				41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusView.swift */,
 				A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */,
 				41EC88971F783B6C0019380D /* SubscriptionsTitleView.xib */,
 				41EC88991F783BC50019380D /* SubscriptionsTitleView.swift */,
@@ -1002,6 +998,7 @@
 				4147CE781F5EA3D000C322C3 /* SubscriptionsPageViewController.swift */,
 				41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */,
 				4147CE7A1F5EA41000C322C3 /* ServersViewController.swift */,
+				41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusViewController.swift */,
 			);
 			name = Subscriptions;
 			sourceTree = "<group>";
@@ -1308,7 +1305,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				41AC3CD31DCC9873002DC39A /* AutocompleteCell.xib in Resources */,
-				41A91AEF1E51C51A005C94B1 /* SubscriptionUserStatusView.xib in Resources */,
 				412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */,
 				41C275E11D84815C003C88CF /* AvatarView.xib in Resources */,
 				416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */,
@@ -1730,7 +1726,7 @@
 				802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */,
 				41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */,
 				D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */,
-				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
+				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusViewController.swift in Sources */,
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,
 				D15C83861F70991F001AB155 /* APIResult.swift in Sources */,
 				800FCD3E1F72893E00D9A692 /* MembersListViewController.swift in Sources */,

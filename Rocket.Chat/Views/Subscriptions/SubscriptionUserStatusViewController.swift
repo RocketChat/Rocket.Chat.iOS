@@ -12,7 +12,7 @@ protocol SubscriptionUserStatusViewProtocol: class {
     func userDidPressedOption()
 }
 
-final class SubscriptionUserStatusView: UIView {
+final class SubscriptionUserStatusViewController: UIViewController {
 
     weak var delegate: SubscriptionUserStatusViewProtocol?
     weak var parentController: UIViewController?
@@ -71,29 +71,41 @@ final class SubscriptionUserStatusView: UIView {
         }
     }
 
+    // MARK: View Controller
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        let blurEffect = UIBlurEffect(style: .dark)
+        let blurEffectView = UIVisualEffectView(effect: blurEffect)
+        blurEffectView.frame = self.view.frame
+        view.insertSubview(blurEffectView, at: 0)
+        view.backgroundColor = .clear
+    }
+
     // MARK: IBAction
 
     @IBAction func buttonOnlineDidPressed(_ sender: Any) {
         UserManager.setUserStatus(status: .online) { [weak self] (_) in
-            self?.delegate?.userDidPressedOption()
+            self?.dismiss(animated: true, completion: nil)
         }
     }
 
     @IBAction func buttonAwayDidPressed(_ sender: Any) {
         UserManager.setUserStatus(status: .away) { [weak self] (_) in
-            self?.delegate?.userDidPressedOption()
+            self?.dismiss(animated: true, completion: nil)
         }
     }
 
     @IBAction func buttonBusyDidPressed(_ sender: Any) {
         UserManager.setUserStatus(status: .busy) { [weak self] (_) in
-            self?.delegate?.userDidPressedOption()
+            self?.dismiss(animated: true, completion: nil)
         }
     }
 
     @IBAction func buttonInvisibleDidPressed(_ sender: Any) {
         UserManager.setUserStatus(status: .offline) { [weak self] (_) in
-            self?.delegate?.userDidPressedOption()
+            self?.dismiss(animated: true, completion: nil)
         }
     }
 
@@ -102,10 +114,8 @@ final class SubscriptionUserStatusView: UIView {
 
         if let controller = storyboard.instantiateInitialViewController() {
             controller.modalPresentationStyle = .formSheet
-            parentController?.present(controller, animated: true, completion: nil)
+            present(controller, animated: true, completion: nil)
         }
-
-        self.delegate?.userDidPressedOption()
     }
 
     @IBAction func buttonLogoutDidPressed(_ sender: Any) {

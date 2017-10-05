@@ -49,6 +49,8 @@ final class SubscriptionsViewController: BaseViewController {
 
             navigationItem.searchController = searchController
             navigationItem.hidesSearchBarWhenScrolling = true
+
+            tableView.contentInsetAdjustmentBehavior = .never
         } else {
             tableView.tableHeaderView = searchController.searchBar
         }
@@ -86,6 +88,10 @@ final class SubscriptionsViewController: BaseViewController {
 
         if let titleView = SubscriptionsTitleView.instantiateFromNib() {
             titleView.user = AuthManager.currentUser()
+
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openUserContextMenu))
+            titleView.addGestureRecognizer(tapGesture)
+
             navigationItem.titleView = titleView
             self.titleView = titleView
         }
@@ -245,6 +251,10 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     @objc func openServersList() {
         performSegue(withIdentifier: "Servers", sender: nil)
+    }
+
+    @objc func openUserContextMenu() {
+        performSegue(withIdentifier: "User", sender: nil)
     }
 
 }
