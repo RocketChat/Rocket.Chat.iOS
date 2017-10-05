@@ -35,7 +35,11 @@ class API {
         }
 
         let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
-            guard let data = data else { return }
+            guard let data = data else {
+                completion?(nil)
+                return
+            }
+
             let json = try? JSON(data: data)
             completion?(APIResult<R>(raw: json))
         }
