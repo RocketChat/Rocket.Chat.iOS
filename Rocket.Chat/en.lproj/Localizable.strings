@@ -12,7 +12,7 @@
 "global.cancel" = "Cancel";
 
 // Errors
-"error.socket.default_error_title" = "Ooops!";
+"error.socket.default_error_title" = "Oops!";
 "error.socket.default_error_message" = "Something wrong happened, please try again.";
 
 // Alerts
@@ -24,6 +24,9 @@
 
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "No Mail Accounts. Please set up a Mail account in order to send email.";
+
+"alert.feature.wip.title" = "Oops!";
+"alert.feature.wip.message" = "We're still working on this feature, stay tunned!";
 
 // Socket Connection
 "connection.offline.banner.message" = "You're offline, try connecting again";
