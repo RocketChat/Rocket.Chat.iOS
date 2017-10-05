@@ -94,7 +94,7 @@ class ChannelInfoViewController: BaseViewController {
 
     func showStarredList() {
         guard let userId = AuthManager.currentUser()?.identifier else {
-            alert(title: "Oops!", message: "Internal error: User not found!")
+            alert(title: localized("error.socket.default_error_title"), message: "error.socket.default_error_message")
             return
         }
 
