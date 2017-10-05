@@ -9,30 +9,48 @@
 import UIKit
 import RealmSwift
 
+struct GroupOfCreateCell {
+    let name: String?
+    let footer: String?
+    let cells: [CreateCell]
+}
+
 class NewRoomViewController: BaseViewController {
 
-    let tableViewData: [CreateCell] = [
-        CreateCell(
-            cell: .boolOption(title: "Public Channel", description: "Everyone can access this channel"),
-            key: "public room",
-            defaultValue: true
+    let tableViewData: [GroupOfCreateCell] = [
+        GroupOfCreateCell(
+            name: nil,
+            footer: nil,
+            cells: [
+                CreateCell(
+                    cell: .boolOption(title: "Public Channel", description: "Everyone can access this channel"),
+                    key: "public room",
+                    defaultValue: true
+                ),
+                CreateCell(
+                    cell: .boolOption(title: "Read only channel", description: "Only admin can write new messages"),
+                    key: "read only room",
+                    defaultValue: false
+                )
+            ]
         ),
-        CreateCell(
-            cell: .boolOption(title: "Read only channel", description: "Only admin can write new messages"),
-            key: "read only room",
-            defaultValue: false
-        ),
-        CreateCell(
-            cell: .textField(title: "Channel Name"),
-            key: "room name",
-            defaultValue: ""
+        GroupOfCreateCell(
+            name: "Channel Name",
+            footer: "Names must be all lower case and shorter than 22 characters",
+            cells: [
+                CreateCell(
+                    cell: .textField(placeholder: "Channel Name"),
+                    key: "room name",
+                    defaultValue: ""
+                )
+            ]
         )
     ]
 
     lazy var setValues: [String: Any] = {
         return tableViewData.reduce([String: Any]()) { (dict, entry) in
             var ndict = dict
-            ndict[entry.key] = entry.defaultValue
+            entry.cells.forEach { ndict[$0.key] = $0.defaultValue }
             return ndict
         }
     }()
@@ -126,7 +144,7 @@ extension NewRoomViewController: NewChannelCellDelegate {
 extension NewRoomViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let data = tableViewData[indexPath.section]
+        let data = tableViewData[indexPath.section].cells[indexPath.row]
 
         if let newCell = data.cell.createCell(table: tableView, delegate: self, key: data.key) as? UITableViewCell {
             return newCell
@@ -136,7 +154,15 @@ extension NewRoomViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(tableViewData[indexPath.section].cell.getClass().defaultHeight)
+        return CGFloat(tableViewData[indexPath.section].cells[indexPath.row].cell.getClass().defaultHeight)
+    }
+
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return tableViewData[section].name
+    }
+
+    func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return tableViewData[section].footer
     }
 }
 
@@ -149,6 +175,6 @@ extension NewRoomViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return tableViewData[section].cells.count
     }
 }

@@ -30,7 +30,7 @@ struct CreateCell {
 
 enum NewChannelCells {
     case boolOption(title: String, description: String)
-    case textField(title: String)
+    case textField(placeholder: String?)
 
     func getClass() -> NewChannelCellProtocol.Type {
         switch self {
@@ -56,9 +56,9 @@ enum NewChannelCells {
                 cell.labelDescription.text = description
             }
 
-        case .textField(let title):
+        case .textField(let placeholder):
             if let cell = cell as? NewChannelTextFieldCell {
-                cell.labelTitle.text = title
+                cell.textFieldInput.placeholder = placeholder
             }
         }
 
