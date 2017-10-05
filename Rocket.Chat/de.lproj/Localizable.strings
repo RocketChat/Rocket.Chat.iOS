@@ -112,10 +112,9 @@
 "chat.info.item.starred" = "Favorisiert";
 
 // Members List
-"memberslist.title" = "Mitglieder (%d)";
-
+"chat.members.list.title" = "Mitglieder (%d)";
 
 // Messages List
-"messageslist.title" = "Nachrichten";
-"pinnedlist.title" = "Angeheftete Nachrichten";
-"starredlist.title" = "Favorisierte Nachrichten";
+"chat.messages.list.title" = "Nachrichten";
+"chat.messages.pinned.list.title" = "Angeheftete Nachrichten";
+"chat.messages.starred.list.title" = "Favorisierte Nachrichten";

@@ -30,7 +30,7 @@ class MessagesListViewData {
     var showing: Int = 0
     var total: Int = 0
 
-    var title: String = localized("messageslist.title")
+    var title: String = localized("chat.messages.list.title")
 
     var isShowingAllMessages: Bool {
         return showing >= total

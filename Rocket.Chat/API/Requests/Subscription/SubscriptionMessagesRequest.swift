@@ -81,4 +81,3 @@ extension APIResult where T == SubscriptionMessagesRequest {
         return raw?["total"].int
     }
 }
-

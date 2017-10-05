@@ -19,7 +19,7 @@ class MembersListViewData {
 
     var title: String {
         return String(
-            format: localized("memberslist.title"),
+            format: localized("chat.members.list.title"),
             total)
     }
 
