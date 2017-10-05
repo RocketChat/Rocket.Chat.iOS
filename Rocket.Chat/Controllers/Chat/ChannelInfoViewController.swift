@@ -206,7 +206,7 @@ extension ChannelInfoViewController: UITableViewDelegate {
 
         if let data = data as? ChannelInfoDetailCellData {
             guard let action = data.action else {
-                alert(title: "Oops!", message: "We're still working on this feature, stay tunned!")
+                alert(title: localized("alert.feature.wip.title"), message: localized("alert.feature.wip.message"))
                 return
             }
 
