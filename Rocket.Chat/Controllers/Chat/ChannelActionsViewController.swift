@@ -47,6 +47,10 @@ class ChannelActionsViewController: BaseViewController {
         super.viewDidLoad()
         title = "Actions"
 
+        if #available(iOS 11.0, *) {
+            tableView?.contentInsetAdjustmentBehavior = .never
+        }
+
         tableView?.register(UINib(
             nibName: "ChannelInfoUserCell",
             bundle: Bundle.main

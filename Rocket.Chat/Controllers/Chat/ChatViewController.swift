@@ -91,6 +91,10 @@ final class ChatViewController: SLKTextViewController {
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
 
+        if #available(iOS 11.0, *) {
+            collectionView?.contentInsetAdjustmentBehavior = .never
+        }
+
         collectionView?.isPrefetchingEnabled = true
 
         isInverted = false
