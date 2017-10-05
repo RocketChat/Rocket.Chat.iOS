@@ -24,7 +24,7 @@ class MessagesListViewData {
 
     var subscription: Subscription?
 
-    let pageSize = 100
+    let pageSize = 20
     var currentPage = 0
 
     var showing: Int = 0
@@ -106,7 +106,7 @@ class MessagesListViewController: BaseViewController {
 extension MessagesListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         activityIndicator.startAnimating()
         self.activityIndicator.isHidden = false
 
@@ -170,7 +170,7 @@ extension MessagesListViewController: UICollectionViewDataSource {
 
 extension MessagesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == data.cells.count - 50 {
+        if indexPath.row == data.cells.count - data.pageSize/3 {
             loadMoreMessages()
         }
     }
