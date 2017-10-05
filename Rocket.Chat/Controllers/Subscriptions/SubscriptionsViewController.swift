@@ -210,11 +210,11 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
         if isSearchingLocally || isSearchingRemotely {
             updateSearched()
-            updateCurrentUserInformation()
         } else {
             updateAll()
         }
 
+        updateCurrentUserInformation()
         SubscriptionManager.updateUnreadApplicationBadge()
         tableView?.reloadData()
     }
