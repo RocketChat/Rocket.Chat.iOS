@@ -10,12 +10,19 @@ import Foundation
 
 class NewChannelTextFieldCell: UITableViewCell, NewChannelCellProtocol {
     static let identifier = "kNewChannelTextField"
-    static let defaultHeight: Float = 68
+    static let defaultHeight: Float = 40
     weak var delegate: NewChannelCellDelegate?
     var key: String?
 
-    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var imgClearText: UIImageView!
     @IBOutlet weak var textFieldInput: UITextField!
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        let gestureClearText = UITapGestureRecognizer(target: self, action: #selector(self.clearTextField))
+        imgClearText.addGestureRecognizer(gestureClearText)
+    }
 
     func setPreviousValue(previous: Any) {
         if let previous = previous as? String {
@@ -25,5 +32,10 @@ class NewChannelTextFieldCell: UITableViewCell, NewChannelCellProtocol {
 
     @IBAction func textFieldInputEditingChanged(_ sender: Any) {
         delegate?.updateDictValue(key: key ?? "", value: textFieldInput.text ?? "")
+    }
+
+    @objc func clearTextField(_ sender: Any) {
+        textFieldInput.text = ""
+        textFieldInputEditingChanged(sender)
     }
 }
