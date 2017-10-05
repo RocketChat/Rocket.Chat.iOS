@@ -122,13 +122,31 @@ final class ConnectServerViewController: BaseViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    func connect() {
-        var text = textFieldServerURL.text ?? ""
-        if text.characters.count == 0 {
-            text = defaultURL
+    func normalizeInputURL(_ inputURL: String) -> String? {
+        if inputURL.isEmpty {
+            return nil
         }
 
-        guard let url = URL(string: text) else { return alertInvalidURL() }
+        if let index = inputURL.range(of: "://")?.upperBound {
+            let url = inputURL[index..<inputURL.endIndex]
+            if url.isEmpty { return nil }
+
+            return "https://\(url)"
+        }
+
+        return "https://\(inputURL)"
+    }
+
+    func connect() {
+        guard var urlText = textFieldServerURL.text else { return alertInvalidURL() }
+        if urlText.isEmpty {
+            urlText = defaultURL
+        }
+        guard let normalizedURL = normalizeInputURL(urlText) else { return alertInvalidURL() }
+
+        textFieldServerURL.text = normalizedURL
+
+        guard let url = URL(string: normalizedURL) else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
 
         API.shared.host = url
@@ -227,3 +245,4 @@ extension ConnectServerViewController: UITextFieldDelegate {
     }
 
 }
+
