@@ -30,9 +30,7 @@ extension Message: ModelMappeable {
         }
 
         if let createdAt = values["ts"].string {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            self.createdAt = dateFormatter.date(from: createdAt)
+            self.createdAt = Date.dateFromString(createdAt)
         }
 
         if let updatedAt = values["_updatedAt"]["$date"].double {
@@ -40,9 +38,7 @@ extension Message: ModelMappeable {
         }
 
         if let updatedAt = values["_updatedAt"].string {
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
-            self.updatedAt = dateFormatter.date(from: updatedAt)
+            self.updatedAt = Date.dateFromString(updatedAt)
         }
 
         if let userIdentifier = values["u"]["_id"].string {
