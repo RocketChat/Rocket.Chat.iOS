@@ -60,7 +60,7 @@ class MessagesListViewData {
                     self.total = result?.total ?? 0
                     if let messages = result?.getMessages() {
                         let messages = messages.flatMap { $0 }
-                        guard var lastMessage = messages.first else { return }
+                        guard var lastMessage = messages.first else { completion?(); return; }
                         var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
                         messages.forEach { message in
                             if lastMessage.createdAt?.day != message.createdAt?.day ||
@@ -88,11 +88,14 @@ class MessagesListViewController: BaseViewController {
     var data = MessagesListViewData()
 
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     func loadMoreMessages() {
         data.loadMoreMessages {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
+                self.activityIndicator.stopAnimating()
+                self.activityIndicator.isHidden = true
             }
         }
     }
@@ -103,8 +106,9 @@ class MessagesListViewController: BaseViewController {
 extension MessagesListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        //collectionView.collectionViewLayout = ChatCollectionViewFlowLayout()
+        
+        activityIndicator.startAnimating()
+        self.activityIndicator.isHidden = false
 
         registerCells()
 
