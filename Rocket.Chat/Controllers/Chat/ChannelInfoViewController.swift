@@ -88,7 +88,7 @@ class ChannelInfoViewController: BaseViewController {
     }
 
     func showPinnedList() {
-        let data = ListSegueData(title: localized("pinnedlist.title"), query: "{\"pinned\":true}")
+        let data = ListSegueData(title: localized("chat.messages.pinned.list.title"), query: "{\"pinned\":true}")
         self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
@@ -98,7 +98,7 @@ class ChannelInfoViewController: BaseViewController {
             return
         }
 
-        let data = ListSegueData(title: localized("starredlist.title"), query: "{\"starred._id\":{\"$in\":[\"\(userId)\"]}}")
+        let data = ListSegueData(title: localized("chat.messages.starred.list.title"), query: "{\"starred._id\":{\"$in\":[\"\(userId)\"]}}")
         self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 

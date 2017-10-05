@@ -112,9 +112,9 @@
 "chat.info.item.starred" = "Starred";
 
 // Members List
-"memberslist.title" = "Members (%d)";
+"chat.members.list.title" = "Members (%d)";
 
 // Messages List
-"messageslist.title" = "Messages";
-"pinnedlist.title" = "Pinned Messages";
-"starredlist.title" = "Starred Messages";
+"chat.messages.list.title" = "Messages";
+"chat.messages.pinned.list.title" = "Pinned Messages";
+"chat.messages.starred.list.title" = "Starred Messages";
