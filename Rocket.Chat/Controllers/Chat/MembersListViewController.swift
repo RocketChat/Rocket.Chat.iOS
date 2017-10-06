@@ -56,13 +56,6 @@ class MembersListViewData {
             }
         }
     }
-
-    func resetMembers() {
-        currentPage = 0
-        total = 0
-        showing = 0
-        membersPages = []
-    }
 }
 
 class MembersListViewController: BaseViewController {
@@ -72,9 +65,15 @@ class MembersListViewController: BaseViewController {
     var data = MembersListViewData()
 
     @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
-        data.resetMembers()
-        membersTableView.reloadData()
-        loadMoreMembers()
+        let data = MembersListViewData()
+        data.subscription = self.data.subscription
+        data.loadMoreMembers {
+            self.data = data
+            DispatchQueue.main.async {
+                self.membersTableView.reloadData()
+                self.membersTableView.refreshControl?.endRefreshing()
+            }
+        }
     }
 
     func loadMoreMembers() {

@@ -86,13 +86,6 @@ class MessagesListViewData {
             }
         }
     }
-
-    func resetMessages() {
-        currentPage = 0
-        total = 0
-        showing = 0
-        cellsPages = []
-    }
 }
 
 class MessagesListViewController: BaseViewController {
@@ -101,8 +94,16 @@ class MessagesListViewController: BaseViewController {
     @IBOutlet weak var collectionView: UICollectionView!
 
     @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
-        data.resetMessages()
-        loadMoreMessages()
+        let data = MessagesListViewData()
+        data.subscription = self.data.subscription
+        data.query = self.data.query
+        data.loadMoreMessages {
+            self.data = data
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                self.collectionView.refreshControl?.endRefreshing()
+            }
+        }
     }
 
     func loadMoreMessages() {
