@@ -20,4 +20,3 @@ class ConnectServerViewControllerSpec: XCTestCase {
         XCTAssertNil(vc.normalizeInputURL(""), "will return nil when empty")
     }
 }
-
