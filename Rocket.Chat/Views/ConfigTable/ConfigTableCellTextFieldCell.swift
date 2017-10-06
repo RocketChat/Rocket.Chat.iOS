@@ -10,6 +10,7 @@ import Foundation
 
 class ConfigTableCellTextFieldCell: UITableViewCell, ConfigTableCellProtocol {
     static let identifier = "kConfigTableCellTextField"
+    static let xibFileName = "ConfigTableCellTextFieldCell"
     static let defaultHeight: Float = 40
     weak var delegate: ConfigTableCellDelegate?
     var key: String?
