@@ -123,18 +123,19 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     func normalizeInputURL(_ inputURL: String) -> String? {
-        if inputURL.isEmpty {
+        guard let url = URL(string: inputURL) else {
             return nil
         }
 
-        if let index = inputURL.range(of: "://")?.upperBound {
-            let url = inputURL[index..<inputURL.endIndex]
-            if url.isEmpty { return nil }
-
-            return "https://\(url)"
+        if let host = url.host, !host.isEmpty {
+            return "https://\(host)"
         }
 
-        return "https://\(inputURL)"
+        if !url.path.isEmpty {
+            return "https://\(url.path)"
+        }
+
+        return nil
     }
 
     func connect() {
