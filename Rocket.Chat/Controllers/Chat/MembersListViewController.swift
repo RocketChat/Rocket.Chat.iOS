@@ -56,6 +56,13 @@ class MembersListViewData {
             }
         }
     }
+
+    func resetMembers() {
+        currentPage = 0
+        total = 0
+        showing = 0
+        membersPages = []
+    }
 }
 
 class MembersListViewController: BaseViewController {
@@ -64,11 +71,17 @@ class MembersListViewController: BaseViewController {
 
     var data = MembersListViewData()
 
+    @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
+        data.resetMembers()
+        membersTableView.reloadData()
+        loadMoreMembers()
+    }
+
     func loadMoreMembers() {
         data.loadMoreMembers {
             DispatchQueue.main.async {
                 self.membersTableView.reloadData()
-                self.title = self.data.title
+                self.membersTableView.refreshControl?.endRefreshing()
             }
         }
     }
@@ -77,6 +90,19 @@ class MembersListViewController: BaseViewController {
 // MARK: ViewController
 extension MembersListViewController {
     override func viewDidLoad() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
+
+        membersTableView.refreshControl = refreshControl
+
+        registerCells()
+
+        if let cell = membersTableView.dequeueReusableCell(withIdentifier: LoaderTableViewCell.identifier) as? LoaderTableViewCell {
+            self.loaderCell = cell
+        }
+    }
+
+    func registerCells() {
         membersTableView.register(UINib(
             nibName: "MemberCell",
             bundle: Bundle.main
@@ -86,16 +112,16 @@ extension MembersListViewController {
             nibName: "LoaderTableViewCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: LoaderTableViewCell.identifier)
-
-        if let cell = membersTableView.dequeueReusableCell(withIdentifier: LoaderTableViewCell.identifier) as? LoaderTableViewCell {
-            self.loaderCell = cell
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         loadMoreMembers()
+
+        guard let refreshControl = membersTableView.refreshControl else { return }
+        membersTableView.refreshControl?.beginRefreshing()
+        membersTableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
     }
 }
 

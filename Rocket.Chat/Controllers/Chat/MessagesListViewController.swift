@@ -138,7 +138,7 @@ extension MessagesListViewController {
 
         guard let refreshControl = collectionView.refreshControl else { return }
         collectionView.refreshControl?.beginRefreshing()
-        collectionView.contentOffset = CGPoint.init(x: 0, y: -refreshControl.frame.size.height)
+        collectionView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
     }
 
     func registerCells() {
