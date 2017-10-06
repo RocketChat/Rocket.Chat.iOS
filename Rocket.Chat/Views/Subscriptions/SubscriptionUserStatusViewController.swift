@@ -17,6 +17,10 @@ final class SubscriptionUserStatusViewController: UIViewController {
     weak var delegate: SubscriptionUserStatusViewProtocol?
     weak var parentController: UIViewController?
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     @IBOutlet weak var buttonOnline: UIButton!
     @IBOutlet weak var labelOnline: UILabel! {
         didSet {

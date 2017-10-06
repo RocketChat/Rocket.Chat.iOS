@@ -37,6 +37,10 @@ class SubscriptionsTitleView: UIView {
     }
 
     override var intrinsicContentSize: CGSize {
+        if #available(iOS 11.0, *) {
+            return UILayoutFittingExpandedSize
+        }
+
         return UILayoutFittingCompressedSize
     }
 

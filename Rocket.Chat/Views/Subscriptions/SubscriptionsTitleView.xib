@@ -38,7 +38,7 @@
                     </userDefinedRuntimeAttributes>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerY" secondItem="dKY-Ch-wz7" secondAttribute="centerY" id="3aB-l6-hD7"/>
                 <constraint firstItem="3Il-8X-3Zu" firstAttribute="centerX" secondItem="dKY-Ch-wz7" secondAttribute="centerX" id="Qk0-TG-tS0"/>

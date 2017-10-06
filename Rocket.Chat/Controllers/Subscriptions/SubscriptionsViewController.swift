@@ -63,6 +63,12 @@ final class SubscriptionsViewController: BaseViewController {
         registerKeyboardHandlers(tableView)
     }
 
+    // MARK: Storyboard Segues
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        segue.destination.modalPresentationCapturesStatusBarAppearance = true
+    }
+
     // MARK: Setup Views
 
     func updateBackButton() {
@@ -122,11 +128,12 @@ final class SubscriptionsViewController: BaseViewController {
     func setupServerButton() {
         if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
             if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
-                let imageViewServer = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+                let imageViewServer = UIImageView()
                 imageViewServer.sd_setImage(with: imageURL)
 
                 if #available(iOS 11.0, *) {
                     let buttonView = UIView()
+                    imageViewServer.translatesAutoresizingMaskIntoConstraints = false
                     buttonView.addSubview(imageViewServer)
 
                     let views = ["imageView": imageViewServer]
@@ -153,6 +160,7 @@ final class SubscriptionsViewController: BaseViewController {
                     let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
                     imageViewServer.addGestureRecognizer(tapGesture)
 
+                    imageViewServer.frame = CGRect(x: 0, y: 0, width: 25, height: 25)
                     let buttonServer = UIBarButtonItem(customView: imageViewServer)
                     navigationItem.leftBarButtonItem = buttonServer
                 }

@@ -14,8 +14,8 @@ class ServersViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
-    override var prefersStatusBarHidden: Bool {
-        return true
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
     }
 
     override func viewDidLoad() {
@@ -38,6 +38,12 @@ class ServersViewController: UIViewController {
 
         servers = DatabaseManager.servers ?? []
         tableView?.reloadData()
+
+        tableView.alpha = 0
+
+        UIView.animate(withDuration: 0.3) {
+            self.tableView.alpha = 1
+        }
     }
 
     // MARK: IBAction
