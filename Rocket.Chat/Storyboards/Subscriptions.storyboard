@@ -372,6 +372,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="imgClearText" destination="p89-ut-egx" id="lHA-IF-svf"/>
+                                            <outlet property="imgRoomIcon" destination="LHN-kB-nbC" id="1dZ-UC-olY"/>
                                             <outlet property="textFieldInput" destination="wIe-LO-cya" id="NKh-yh-Dyy"/>
                                         </connections>
                                     </tableViewCell>
