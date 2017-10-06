@@ -102,7 +102,18 @@ class MessagesListViewController: BaseViewController {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.collectionView.refreshControl?.endRefreshing()
+                self.updateIsEmptyMessage()
             }
+        }
+    }
+
+    func updateIsEmptyMessage() {
+        guard let label = collectionView.backgroundView as? UILabel else { return }
+
+        if data.cells.count == 0 {
+            label.text = localized("chat.messages.list.empty")
+        } else {
+            label.text = ""
         }
     }
 
@@ -111,6 +122,7 @@ class MessagesListViewController: BaseViewController {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.collectionView.refreshControl?.endRefreshing()
+                self.updateIsEmptyMessage()
             }
         }
     }
@@ -126,6 +138,11 @@ extension MessagesListViewController {
         refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
 
         collectionView.refreshControl = refreshControl
+
+        let label = UILabel(frame: collectionView.frame)
+        label.textAlignment = .center
+        label.textColor = .gray
+        collectionView.backgroundView = label
 
         registerCells()
 

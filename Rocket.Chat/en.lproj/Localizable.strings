@@ -119,5 +119,6 @@
 
 // Messages List
 "chat.messages.list.title" = "Messages";
+"chat.messages.list.empty" = "No messages found";
 "chat.messages.pinned.list.title" = "Pinned Messages";
 "chat.messages.starred.list.title" = "Starred Messages";

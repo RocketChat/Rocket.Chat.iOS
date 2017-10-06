@@ -119,5 +119,6 @@
 
 // Messages List
 "chat.messages.list.title" = "Nachrichten";
+"chat.messages.list.empty" = "Keine Nachrichten gefunden";
 "chat.messages.pinned.list.title" = "Angeheftete Nachrichten";
 "chat.messages.starred.list.title" = "Favorisierte Nachrichten";
