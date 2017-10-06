@@ -9,36 +9,30 @@
 import UIKit
 import RealmSwift
 
-struct GroupOfCreateCell {
-    let name: String?
-    let footer: String?
-    let cells: [CreateCell]
-}
-
 class NewRoomViewController: BaseViewController {
 
-    let tableViewData: [GroupOfCreateCell] = [
-        GroupOfCreateCell(
+    let tableViewData: [GroupOfConfigCell] = [
+        GroupOfConfigCell(
             name: nil,
             footer: nil,
             cells: [
-                CreateCell(
+                ConfigTableCell(
                     cell: .boolOption(title: "Public Channel", description: "Everyone can access this channel"),
                     key: "public room",
                     defaultValue: true
                 ),
-                CreateCell(
+                ConfigTableCell(
                     cell: .boolOption(title: "Read only channel", description: "Only admin can write new messages"),
                     key: "read only room",
                     defaultValue: false
                 )
             ]
         ),
-        GroupOfCreateCell(
+        GroupOfConfigCell(
             name: "Channel Name",
             footer: "Names must be all lower case and shorter than 22 characters",
             cells: [
-                CreateCell(
+                ConfigTableCell(
                     cell: .textField(placeholder: "Channel Name", icon: #imageLiteral(resourceName: "Hashtag")),
                     key: "room name",
                     defaultValue: ""
@@ -47,7 +41,7 @@ class NewRoomViewController: BaseViewController {
         )
     ]
 
-    var referenceOfCells: [String: NewChannelCellProtocol] = [:]
+    var referenceOfCells: [String: ConfigTableCellProtocol] = [:]
     lazy var setValues: [String: Any] = {
         return tableViewData.reduce([String: Any]()) { (dict, entry) in
             var ndict = dict
@@ -130,13 +124,13 @@ class NewRoomViewController: BaseViewController {
     }
 }
 
-extension NewRoomViewController: NewChannelCellDelegate {
+extension NewRoomViewController: ConfigTableCellDelegate {
     func updateDictValue(key: String, value: Any) {
         setValues[key] = value
 
         if key == "public room",
             let value = value as? Bool,
-            let cellRoomName = referenceOfCells["room name"] as? NewChannelTextFieldCell {
+            let cellRoomName = referenceOfCells["room name"] as? ConfigTableCellTextFieldCell {
 
             if value {
                 cellRoomName.imgRoomIcon.image = #imageLiteral(resourceName: "Hashtag")

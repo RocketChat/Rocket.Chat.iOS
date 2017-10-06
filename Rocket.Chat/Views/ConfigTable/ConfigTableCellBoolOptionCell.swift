@@ -1,5 +1,5 @@
 //
-//  NewChannelBoolOptionCell.swift
+//  ConfigTableCellBoolOptionCell.swift
 //  Rocket.Chat
 //
 //  Created by Bruno Macabeus Aquino on 27/09/17.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-class NewChannelBoolOptionCell: UITableViewCell, NewChannelCellProtocol {
-    static let identifier = "kNewChannelBoolOption"
+class ConfigTableCellBoolOptionCell: UITableViewCell, ConfigTableCellProtocol {
+    static let identifier = "kConfigTableCellBoolOption"
     static let defaultHeight: Float = 56
-    weak var delegate: NewChannelCellDelegate?
+    weak var delegate: ConfigTableCellDelegate?
     var key: String?
 
     @IBOutlet weak var labelTitle: UILabel!
