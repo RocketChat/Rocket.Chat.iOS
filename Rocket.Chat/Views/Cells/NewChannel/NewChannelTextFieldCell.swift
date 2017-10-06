@@ -14,8 +14,9 @@ class NewChannelTextFieldCell: UITableViewCell, NewChannelCellProtocol {
     weak var delegate: NewChannelCellDelegate?
     var key: String?
 
-    @IBOutlet weak var imgClearText: UIImageView!
+    @IBOutlet weak var imgRoomIcon: UIImageView!
     @IBOutlet weak var textFieldInput: UITextField!
+    @IBOutlet weak var imgClearText: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()

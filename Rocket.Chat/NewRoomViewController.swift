@@ -39,7 +39,7 @@ class NewRoomViewController: BaseViewController {
             footer: "Names must be all lower case and shorter than 22 characters",
             cells: [
                 CreateCell(
-                    cell: .textField(placeholder: "Channel Name"),
+                    cell: .textField(placeholder: "Channel Name", icon: #imageLiteral(resourceName: "Hashtag")),
                     key: "room name",
                     defaultValue: ""
                 )
@@ -47,6 +47,7 @@ class NewRoomViewController: BaseViewController {
         )
     ]
 
+    var referenceOfCells: [String: NewChannelCellProtocol] = [:]
     lazy var setValues: [String: Any] = {
         return tableViewData.reduce([String: Any]()) { (dict, entry) in
             var ndict = dict
@@ -132,6 +133,17 @@ class NewRoomViewController: BaseViewController {
 extension NewRoomViewController: NewChannelCellDelegate {
     func updateDictValue(key: String, value: Any) {
         setValues[key] = value
+
+        if key == "public room",
+            let value = value as? Bool,
+            let cellRoomName = referenceOfCells["room name"] as? NewChannelTextFieldCell {
+
+            if value {
+                cellRoomName.imgRoomIcon.image = #imageLiteral(resourceName: "Hashtag")
+            } else {
+                cellRoomName.imgRoomIcon.image = #imageLiteral(resourceName: "Lock")
+            }
+        }
     }
 
     func getPreviousValue(key: String) -> Any? {
@@ -146,7 +158,10 @@ extension NewRoomViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableViewData[indexPath.section].cells[indexPath.row]
 
-        if let newCell = data.cell.createCell(table: tableView, delegate: self, key: data.key) as? UITableViewCell {
+        if let newChannelCell = data.cell.createCell(table: tableView, delegate: self, key: data.key),
+            let newCell = newChannelCell as? UITableViewCell {
+
+            referenceOfCells[data.key] = newChannelCell
             return newCell
         } else {
             return UITableViewCell()
@@ -163,6 +178,11 @@ extension NewRoomViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
         return tableViewData[section].footer
+    }
+
+    func tableView(_ tableView: UITableView, didEndDisplaying cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let data = tableViewData[indexPath.section].cells[indexPath.row]
+        referenceOfCells.removeValue(forKey: data.key)
     }
 }
 
