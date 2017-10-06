@@ -10,6 +10,7 @@ import Foundation
 
 class ConfigTableCellBoolOptionCell: UITableViewCell, ConfigTableCellProtocol {
     static let identifier = "kConfigTableCellBoolOption"
+    static let xibFileName = "ConfigTableCellBoolOptionCell"
     static let defaultHeight: Float = 56
     weak var delegate: ConfigTableCellDelegate?
     var key: String?

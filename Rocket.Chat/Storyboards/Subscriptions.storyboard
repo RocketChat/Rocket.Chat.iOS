@@ -280,103 +280,6 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <color key="separatorColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kConfigTableCellBoolOption" rowHeight="72" id="f98-fV-uAq" customClass="ConfigTableCellBoolOptionCell" customModule="Rocket_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="55.5" width="320" height="72"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="f98-fV-uAq" id="42j-vf-RmF">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="71.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OQg-im-fl0">
-                                                    <rect key="frame" x="265" y="20.5" width="49" height="31"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="31" id="OSI-0I-g5A"/>
-                                                        <constraint firstAttribute="width" constant="47" id="etf-Kp-SPW"/>
-                                                    </constraints>
-                                                    <connections>
-                                                        <action selector="switchDidChangeValue:" destination="f98-fV-uAq" eventType="valueChanged" id="mx6-Hb-xHg"/>
-                                                    </connections>
-                                                </switch>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="vUf-wU-2ee">
-                                                    <rect key="frame" x="8" y="17" width="42" height="37.5"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zlx-4c-vmk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="42" height="20.5"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BW8-cJ-H4B">
-                                                            <rect key="frame" x="0.0" y="20.5" width="42" height="17"/>
-                                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="14"/>
-                                                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </stackView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="vUf-wU-2ee" firstAttribute="leading" secondItem="42j-vf-RmF" secondAttribute="leading" constant="8" id="3mn-6q-oP1"/>
-                                                <constraint firstItem="vUf-wU-2ee" firstAttribute="centerY" secondItem="42j-vf-RmF" secondAttribute="centerY" id="KAi-Kj-wpB"/>
-                                                <constraint firstItem="OQg-im-fl0" firstAttribute="centerY" secondItem="42j-vf-RmF" secondAttribute="centerY" id="aUy-9o-5vx"/>
-                                                <constraint firstAttribute="trailing" secondItem="OQg-im-fl0" secondAttribute="trailing" constant="8" id="g2T-io-Hsk"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="labelDescription" destination="BW8-cJ-H4B" id="sgU-In-zTQ"/>
-                                            <outlet property="labelTitle" destination="zlx-4c-vmk" id="uIr-nf-eMP"/>
-                                            <outlet property="switchOption" destination="OQg-im-fl0" id="8Qi-Pt-t40"/>
-                                        </connections>
-                                    </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kConfigTableCellTextField" rowHeight="68" id="wjs-yn-5zv" customClass="ConfigTableCellTextFieldCell" customModule="Rocket_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="127.5" width="320" height="68"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="wjs-yn-5zv" id="I04-A3-mBG">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="67.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hashtag" translatesAutoresizingMaskIntoConstraints="NO" id="LHN-kB-nbC">
-                                                    <rect key="frame" x="8" y="27" width="15" height="15"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="15" id="vDF-Qp-yzJ"/>
-                                                        <constraint firstAttribute="width" constant="15" id="xkn-9b-1WO"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Placeholder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wIe-LO-cya">
-                                                    <rect key="frame" x="31" y="25.5" width="269" height="17"/>
-                                                    <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits"/>
-                                                    <connections>
-                                                        <action selector="textFieldInputEditingChanged:" destination="wjs-yn-5zv" eventType="editingChanged" id="hvR-UD-e4J"/>
-                                                    </connections>
-                                                </textField>
-                                                <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ClearText" translatesAutoresizingMaskIntoConstraints="NO" id="p89-ut-egx">
-                                                    <rect key="frame" x="300" y="27.5" width="12" height="12"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="12" id="cUT-9I-ceh"/>
-                                                        <constraint firstAttribute="width" constant="12" id="zEW-kZ-oFL"/>
-                                                    </constraints>
-                                                </imageView>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="LHN-kB-nbC" firstAttribute="leading" secondItem="I04-A3-mBG" secondAttribute="leading" constant="8" id="5K3-cx-Gkb"/>
-                                                <constraint firstItem="wIe-LO-cya" firstAttribute="leading" secondItem="LHN-kB-nbC" secondAttribute="trailing" constant="8" id="Ml9-YH-P0I"/>
-                                                <constraint firstItem="LHN-kB-nbC" firstAttribute="centerY" secondItem="wIe-LO-cya" secondAttribute="centerY" id="YVY-pq-dJo"/>
-                                                <constraint firstAttribute="trailing" secondItem="p89-ut-egx" secondAttribute="trailing" constant="8" id="c07-Om-Kxb"/>
-                                                <constraint firstItem="p89-ut-egx" firstAttribute="leading" secondItem="wIe-LO-cya" secondAttribute="trailing" id="f45-ha-5EG"/>
-                                                <constraint firstItem="wIe-LO-cya" firstAttribute="centerY" secondItem="I04-A3-mBG" secondAttribute="centerY" id="gdr-2O-5at"/>
-                                                <constraint firstItem="p89-ut-egx" firstAttribute="centerY" secondItem="wIe-LO-cya" secondAttribute="centerY" id="gr7-iZ-10P"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="imgClearText" destination="p89-ut-egx" id="lHA-IF-svf"/>
-                                            <outlet property="imgRoomIcon" destination="LHN-kB-nbC" id="1dZ-UC-olY"/>
-                                            <outlet property="textFieldInput" destination="wIe-LO-cya" id="NKh-yh-Dyy"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="kyj-uO-wfM" id="S7X-tB-cdx"/>
                                     <outlet property="delegate" destination="kyj-uO-wfM" id="Dwd-Ai-9Zt"/>
@@ -568,7 +471,5 @@
     <resources>
         <image name="Add" width="25" height="25"/>
         <image name="Arrow Down" width="25" height="25"/>
-        <image name="ClearText" width="14" height="14"/>
-        <image name="Hashtag" width="23" height="23"/>
     </resources>
 </document>

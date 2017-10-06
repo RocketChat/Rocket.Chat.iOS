@@ -15,11 +15,19 @@ protocol ConfigTableCellDelegate: class {
 
 protocol ConfigTableCellProtocol {
     static var identifier: String { get }
+    static var xibFileName: String { get }
     static var defaultHeight: Float { get }
 
     var delegate: ConfigTableCellDelegate? { get set }
     var key: String? { get set }
     func setPreviousValue(previous: Any)
+}
+
+extension ConfigTableCellProtocol {
+    static func registerCell(for table: UITableView) {
+        let cellNib = UINib(nibName: self.xibFileName, bundle: nil)
+        table.register(cellNib, forCellReuseIdentifier: self.identifier)
+    }
 }
 
 struct GroupOfConfigCell {

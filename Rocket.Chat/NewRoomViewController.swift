@@ -52,6 +52,11 @@ class NewRoomViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    override func viewDidLoad() {
+        ConfigTableCellBoolOptionCell.registerCell(for: tableView)
+        ConfigTableCellTextFieldCell.registerCell(for: tableView)
+    }
+
     fileprivate enum TypeAlerts {
         case errorMessage(String)
         case errorUnknown
