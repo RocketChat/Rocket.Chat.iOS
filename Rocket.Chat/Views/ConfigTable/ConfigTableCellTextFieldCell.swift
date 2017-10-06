@@ -1,5 +1,5 @@
 //
-//  NewChannelTextFieldCell.swift
+//  ConfigTableCellTextFieldCell.swift
 //  Rocket.Chat
 //
 //  Created by Bruno Macabeus Aquino on 28/09/17.
@@ -8,10 +8,10 @@
 
 import Foundation
 
-class NewChannelTextFieldCell: UITableViewCell, NewChannelCellProtocol {
-    static let identifier = "kNewChannelTextField"
+class ConfigTableCellTextFieldCell: UITableViewCell, ConfigTableCellProtocol {
+    static let identifier = "kConfigTableCellTextField"
     static let defaultHeight: Float = 40
-    weak var delegate: NewChannelCellDelegate?
+    weak var delegate: ConfigTableCellDelegate?
     var key: String?
 
     @IBOutlet weak var imgRoomIcon: UIImageView!
