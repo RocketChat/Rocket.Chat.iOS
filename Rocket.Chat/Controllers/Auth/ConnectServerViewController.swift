@@ -127,12 +127,22 @@ final class ConnectServerViewController: BaseViewController {
             return nil
         }
 
+        var port = ""
+        if let _port = url.port {
+            port = ":\(_port)"
+        }
+
+        var query = ""
+        if let _query = url.query, !_query.isEmpty {
+            query = "?\(_query)"
+        }
+
         if let host = url.host, !host.isEmpty {
-            return "https://\(host)"
+            return "https://\(host)\(port)\(url.path)\(query)"
         }
 
         if !url.path.isEmpty {
-            return "https://\(url.path)"
+            return "https://\(url.path)\(port)\(query)"
         }
 
         return nil
