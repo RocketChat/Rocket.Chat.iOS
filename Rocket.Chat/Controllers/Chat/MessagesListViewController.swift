@@ -60,7 +60,11 @@ class MessagesListViewData {
                     self.total = result?.total ?? 0
                     if let messages = result?.getMessages() {
                         let messages = messages.flatMap { $0 }
-                        guard var lastMessage = messages.first else { completion?(); return; }
+                        guard var lastMessage = messages.first else {
+                            self.isLoadingMoreMessages = false
+                            completion?()
+                            return
+                        }
                         var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
                         messages.forEach { message in
                             if lastMessage.createdAt?.day != message.createdAt?.day ||
@@ -82,20 +86,30 @@ class MessagesListViewData {
             }
         }
     }
+
+    func resetMessages() {
+        currentPage = 0
+        total = 0
+        showing = 0
+        cellsPages = []
+    }
 }
 
 class MessagesListViewController: BaseViewController {
     var data = MessagesListViewData()
 
     @IBOutlet weak var collectionView: UICollectionView!
-    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+    @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
+        data.resetMessages()
+        loadMoreMessages()
+    }
 
     func loadMoreMessages() {
         data.loadMoreMessages {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
-                self.activityIndicator.stopAnimating()
-                self.activityIndicator.isHidden = true
+                self.collectionView.refreshControl?.endRefreshing()
             }
         }
     }
@@ -107,16 +121,24 @@ extension MessagesListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        activityIndicator.startAnimating()
-        self.activityIndicator.isHidden = false
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
+
+        collectionView.refreshControl = refreshControl
 
         registerCells()
 
-        self.title = data.title
+        title = data.title
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
         loadMoreMessages()
+
+        guard let refreshControl = collectionView.refreshControl else { return }
+        collectionView.refreshControl?.beginRefreshing()
+        collectionView.contentOffset = CGPoint.init(x: 0, y: -refreshControl.frame.size.height)
     }
 
     func registerCells() {
