@@ -37,7 +37,7 @@ class SubscriptionsTitleView: UIView {
     }
 
     override var intrinsicContentSize: CGSize {
-        return UILayoutFittingExpandedSize
+        return UILayoutFittingCompressedSize
     }
 
 }

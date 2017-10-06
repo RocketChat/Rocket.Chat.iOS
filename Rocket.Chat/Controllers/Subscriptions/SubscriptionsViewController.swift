@@ -14,6 +14,7 @@ final class SubscriptionsViewController: BaseViewController {
 
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?
+    weak var searchBar: UISearchBar?
 
     static var shared: SubscriptionsViewController? {
         if let pageController = SubscriptionsPageViewController.shared {
@@ -36,66 +37,10 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchBar.placeholder = localized("subscriptions.search")
-        searchController.searchBar.delegate = self
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.hidesNavigationBarDuringPresentation = true
-        self.searchController = searchController
-
-        if #available(iOS 11.0, *) {
-            navigationController?.navigationBar.prefersLargeTitles = false
-            navigationItem.largeTitleDisplayMode = .never
-
-            navigationItem.searchController = searchController
-            navigationItem.hidesSearchBarWhenScrolling = true
-
-            tableView.contentInsetAdjustmentBehavior = .never
-        } else {
-            tableView.tableHeaderView = searchController.searchBar
-        }
-
-        if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
-            if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
-                let buttonView = UIView()
-                let imageViewServer = UIImageView()
-                imageViewServer.translatesAutoresizingMaskIntoConstraints = false
-                imageViewServer.sd_setImage(with: imageURL)
-                buttonView.addSubview(imageViewServer)
-
-                let views = ["imageView": imageViewServer]
-                buttonView.addConstraints(NSLayoutConstraint.constraints(
-                    withVisualFormat: "H:|-[imageView(25)]-|",
-                    options: .alignAllCenterX,
-                    metrics: nil,
-                    views: views)
-                )
-
-                buttonView.addConstraints(NSLayoutConstraint.constraints(
-                    withVisualFormat: "V:|-[imageView(25)]-|",
-                    options: .alignAllCenterY,
-                    metrics: nil,
-                    views: views)
-                )
-
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
-                buttonView.addGestureRecognizer(tapGesture)
-
-                let buttonServer = UIBarButtonItem(customView: buttonView)
-                navigationItem.leftBarButtonItem = buttonServer
-            }
-        }
-
-        if let titleView = SubscriptionsTitleView.instantiateFromNib() {
-            titleView.user = AuthManager.currentUser()
-
-            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openUserContextMenu))
-            titleView.addGestureRecognizer(tapGesture)
-
-            navigationItem.titleView = titleView
-            self.titleView = titleView
-        }
-
+        setupSearchBar()
+        setupServerButton()
+        setupTitleView()
+        updateBackButton()
         subscribeModelChanges()
     }
 
@@ -117,13 +62,110 @@ final class SubscriptionsViewController: BaseViewController {
         super.viewDidAppear(animated)
         registerKeyboardHandlers(tableView)
     }
+
+    // MARK: Setup Views
+
+    func updateBackButton() {
+        var unread = 0
+
+        Realm.execute({ (realm) in
+            for obj in realm.objects(Subscription.self) {
+                unread += obj.unread
+            }
+        }, completion: {
+            self.navigationItem.backBarButtonItem = UIBarButtonItem(
+                title: unread == 0 ? "" : "\(unread)",
+                style: .plain,
+                target: nil,
+                action: nil
+            )
+        })
+    }
+
+    func setupSearchBar() {
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = true
+
+        if #available(iOS 11.0, *) {
+            self.searchBar = searchController.searchBar
+            navigationController?.navigationBar.prefersLargeTitles = false
+            navigationItem.largeTitleDisplayMode = .never
+
+            navigationItem.searchController = searchController
+            navigationItem.hidesSearchBarWhenScrolling = true
+
+            tableView.contentInsetAdjustmentBehavior = .never
+        } else {
+            let searchBar = UISearchBar(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 44))
+            tableView.tableHeaderView = searchBar
+            self.searchBar = searchBar
+        }
+
+        self.searchController = searchController
+        self.searchBar?.placeholder = localized("subscriptions.search")
+        self.searchBar?.delegate = self
+    }
+
+    func setupTitleView() {
+        if let titleView = SubscriptionsTitleView.instantiateFromNib() {
+            titleView.user = AuthManager.currentUser()
+
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openUserContextMenu))
+            titleView.addGestureRecognizer(tapGesture)
+
+            navigationItem.titleView = titleView
+            self.titleView = titleView
+        }
+    }
+
+    func setupServerButton() {
+        if let server = DatabaseManager.servers?[DatabaseManager.selectedIndex] {
+            if let imageURL = URL(string: server[ServerPersistKeys.serverIconURL] ?? "") {
+                let imageViewServer = UIImageView(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+                imageViewServer.sd_setImage(with: imageURL)
+
+                if #available(iOS 11.0, *) {
+                    let buttonView = UIView()
+                    buttonView.addSubview(imageViewServer)
+
+                    let views = ["imageView": imageViewServer]
+                    buttonView.addConstraints(NSLayoutConstraint.constraints(
+                        withVisualFormat: "H:|-[imageView(25)]-|",
+                        options: .alignAllCenterX,
+                        metrics: nil,
+                        views: views)
+                    )
+
+                    buttonView.addConstraints(NSLayoutConstraint.constraints(
+                        withVisualFormat: "V:|-[imageView(25)]-|",
+                        options: .alignAllCenterY,
+                        metrics: nil,
+                        views: views)
+                    )
+
+                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
+                    buttonView.addGestureRecognizer(tapGesture)
+
+                    let buttonServer = UIBarButtonItem(customView: buttonView)
+                    navigationItem.leftBarButtonItem = buttonServer
+                } else {
+                    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openServersList))
+                    imageViewServer.addGestureRecognizer(tapGesture)
+
+                    let buttonServer = UIBarButtonItem(customView: imageViewServer)
+                    navigationItem.leftBarButtonItem = buttonServer
+                }
+            }
+        }
+    }
 }
 
 extension SubscriptionsViewController: UISearchBarDelegate {
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText == "\n" {
-            if searchText.characters.count > 0 {
+            if searchText.count > 0 {
                 searchOnSpotlight(searchText)
             }
 
@@ -145,7 +187,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         subscriptions = auth.subscriptions.filterBy(name: text).sortedByLastMessageDate()
         searchText = text
 
-        if text.characters.count == 0 {
+        if text.count == 0 {
             isSearchingLocally = false
             isSearchingRemotely = false
             searchResult = []
@@ -178,7 +220,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         SubscriptionManager.spotlight(text) { [weak self] result in
             let currentText = self?.searchController?.searchBar.text ?? ""
 
-            if currentText.characters.count == 0 {
+            if currentText.count == 0 {
                 return
             }
 
@@ -214,6 +256,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             updateAll()
         }
 
+        updateBackButton()
         updateCurrentUserInformation()
         SubscriptionManager.updateUnreadApplicationBadge()
         tableView?.reloadData()
@@ -316,4 +359,3 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
     }
 
 }
-
