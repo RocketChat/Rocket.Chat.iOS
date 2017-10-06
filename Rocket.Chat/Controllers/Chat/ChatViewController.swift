@@ -810,9 +810,11 @@ extension ChatViewController {
         if chatLogIsAtBottom() {
             hideButtonScrollToBottom(animated: true)
         } else {
-            buttonScrollToBottomMarginConstraint?.constant = -64
-            UIView.animate(withDuration: 0.5) {
-                view.layoutIfNeeded()
+            if buttonScrollToBottomMarginConstraint?.constant != -64 {
+                buttonScrollToBottomMarginConstraint?.constant = -64
+                UIView.animate(withDuration: 0.5) {
+                    view.layoutIfNeeded()
+                }
             }
         }
     }
