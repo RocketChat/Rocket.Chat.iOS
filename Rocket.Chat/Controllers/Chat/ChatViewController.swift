@@ -28,6 +28,22 @@ final class ChatViewController: SLKTextViewController {
     @IBOutlet weak var buttonScrollToBottom: UIButton!
     var buttonScrollToBottomMarginConstraint: NSLayoutConstraint?
 
+    var showButtonScrollToBottom: Bool = false {
+        didSet {
+            if showButtonScrollToBottom {
+                buttonScrollToBottomMarginConstraint?.constant = -64
+            } else {
+                buttonScrollToBottomMarginConstraint?.constant = 50
+            }
+
+            if showButtonScrollToBottom != oldValue {
+                UIView.animate(withDuration: 0.5) {
+                    self.view.layoutIfNeeded()
+                }
+            }
+        }
+    }
+
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
     weak var chatHeaderViewStatus: ChatHeaderViewStatus?
@@ -232,21 +248,7 @@ final class ChatViewController: SLKTextViewController {
         let sizeHeight = collectionView?.contentSize.height ?? 0
         let offset = CGPoint(x: 0, y: max(sizeHeight - boundsHeight, 0))
         collectionView?.setContentOffset(offset, animated: animated)
-        hideButtonScrollToBottom(animated: true)
-    }
-
-    fileprivate func hideButtonScrollToBottom(animated: Bool) {
-        buttonScrollToBottomMarginConstraint?.constant = 50
-
-        let action = {
-            self.buttonScrollToBottom.layoutIfNeeded()
-        }
-
-        if animated {
-            UIView.animate(withDuration: 0.5, animations: action)
-        } else {
-            action()
-        }
+        showButtonScrollToBottom = false
     }
 
     // MARK: SlackTextViewController
@@ -805,18 +807,7 @@ extension ChatViewController {
             }
         }
 
-        guard let view = buttonScrollToBottom.superview else { return }
-
-        if chatLogIsAtBottom() {
-            hideButtonScrollToBottom(animated: true)
-        } else {
-            if buttonScrollToBottomMarginConstraint?.constant != -64 {
-                buttonScrollToBottomMarginConstraint?.constant = -64
-                UIView.animate(withDuration: 0.5) {
-                    view.layoutIfNeeded()
-                }
-            }
-        }
+        showButtonScrollToBottom = !chatLogIsAtBottom()
     }
 }
 
