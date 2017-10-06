@@ -118,6 +118,11 @@ final class ChatViewController: SLKTextViewController {
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
         view.bringSubview(toFront: textInputbar)
+
+        if buttonScrollToBottomMarginConstraint == nil {
+            buttonScrollToBottomMarginConstraint = buttonScrollToBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
+            buttonScrollToBottomMarginConstraint?.isActive = true
+        }
     }
 
     @objc internal func reconnect() {
@@ -791,7 +796,6 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 // MARK: UIScrollViewDelegate
 
 extension ChatViewController {
-
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
 
@@ -800,26 +804,18 @@ extension ChatViewController {
                 loadMoreMessagesFrom(date: message.createdAt)
             }
         }
-    }
 
-    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         guard let view = buttonScrollToBottom.superview else { return }
 
-        if buttonScrollToBottomMarginConstraint == nil {
-            buttonScrollToBottomMarginConstraint = buttonScrollToBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
-            buttonScrollToBottomMarginConstraint?.isActive = true
-        }
-
-        if targetContentOffset.pointee.y.rounded() < scrollView.contentSize.height - scrollView.frame.height {
+        if chatLogIsAtBottom() {
+            hideButtonScrollToBottom(animated: true)
+        } else {
             buttonScrollToBottomMarginConstraint?.constant = -64
             UIView.animate(withDuration: 0.5) {
                 view.layoutIfNeeded()
             }
-        } else {
-            hideButtonScrollToBottom(animated: true)
         }
     }
-
 }
 
 // MARK: ChatPreviewModeViewProtocol
