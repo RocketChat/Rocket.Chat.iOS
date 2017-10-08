@@ -475,37 +475,37 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    func loadHistoryFromRemote(date: Date?) {
+        let tempSubscription = Subscription(value: self.subscription)
+
+        MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
+            DispatchQueue.main.async {
+                self?.activityIndicator.stopAnimating()
+                self?.isRequestingHistory = false
+                self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+
+                if messages.count == 0 {
+                    self?.dataController.loadedAllMessages = true
+
+                    self?.collectionView?.performBatchUpdates({
+                        if let (indexPaths, removedIndexPaths) = self?.dataController.insert([]) {
+                            self?.collectionView?.insertItems(at: indexPaths)
+                            self?.collectionView?.deleteItems(at: removedIndexPaths)
+                        }
+                    }, completion: nil)
+                } else {
+                    self?.dataController.loadedAllMessages = false
+                }
+            }
+        }
+    }
+
     fileprivate func loadMoreMessagesFrom(date: Date?, loadRemoteHistory: Bool = true) {
         if isRequestingHistory || dataController.loadedAllMessages {
             return
         }
 
         isRequestingHistory = true
-
-        func loadHistoryFromRemote() {
-            let tempSubscription = Subscription(value: self.subscription)
-
-            MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
-                DispatchQueue.main.async {
-                    self?.activityIndicator.stopAnimating()
-                    self?.isRequestingHistory = false
-                    self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
-
-                    if messages.count == 0 {
-                        self?.dataController.loadedAllMessages = true
-
-                        self?.collectionView?.performBatchUpdates({
-                            if let (indexPaths, removedIndexPaths) = self?.dataController.insert([]) {
-                                self?.collectionView?.insertItems(at: indexPaths)
-                                self?.collectionView?.deleteItems(at: removedIndexPaths)
-                            }
-                        }, completion: nil)
-                    } else {
-                        self?.dataController.loadedAllMessages = false
-                    }
-                }
-            }
-        }
 
         let newMessages = subscription.fetchMessages(lastMessageDate: date).map({ Message(value: $0) })
         if newMessages.count > 0 {
@@ -521,7 +521,7 @@ final class ChatViewController: SLKTextViewController {
                     if !loadRemoteHistory {
                         self?.isRequestingHistory = false
                     } else {
-                        loadHistoryFromRemote()
+                        self?.loadHistoryFromRemote(date: date)
                     }
                 } else {
                     self?.isRequestingHistory = false
@@ -530,7 +530,7 @@ final class ChatViewController: SLKTextViewController {
         } else {
             if SocketManager.isConnected() {
                 if loadRemoteHistory {
-                    loadHistoryFromRemote()
+                    loadHistoryFromRemote(date: date)
                 } else {
                     isRequestingHistory = false
                 }
