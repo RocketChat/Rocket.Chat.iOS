@@ -57,41 +57,36 @@ class MessagesListViewData {
             let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
             API.shared.fetch(request, options: options) { result in
-                self.showing += result?.count ?? 0
-                self.total = result?.total ?? 0
-
-                if let messages = result?.getMessages() {
-                    let messages = messages.flatMap { $0 }
-                    guard var lastMessage = messages.first else {
-                        self.isLoadingMoreMessages = false
-
-                        DispatchQueue.main.async {
-                            completion?()
-                        }
-
-                        return
-                    }
-
-                    var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
-                    messages.forEach { message in
-                        if lastMessage.createdAt?.day != message.createdAt?.day ||
-                            lastMessage.createdAt?.month != message.createdAt?.month ||
-                            lastMessage.createdAt?.year != message.createdAt?.year {
-                            cellsPage.append(CellData(message: nil, date: message.createdAt ?? Date(timeIntervalSince1970: 0)))
-                        }
-
-                        cellsPage.append(CellData(message: message, date: nil))
-                        lastMessage = message
-                    }
-
-                    self.cellsPages.append(cellsPage)
-                }
-
-                self.currentPage += 1
-
-                self.isLoadingMoreMessages = false
-
                 DispatchQueue.main.async {
+                    self.showing += result?.count ?? 0
+                    self.total = result?.total ?? 0
+
+                    if let messages = result?.getMessages() {
+                        let messages = messages.flatMap { $0 }
+                        guard var lastMessage = messages.first else {
+                            self.isLoadingMoreMessages = false
+                            completion?()
+                            return
+                        }
+
+                        var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
+                        messages.forEach { message in
+                            if lastMessage.createdAt?.day != message.createdAt?.day ||
+                                lastMessage.createdAt?.month != message.createdAt?.month ||
+                                lastMessage.createdAt?.year != message.createdAt?.year {
+                                cellsPage.append(CellData(message: nil, date: message.createdAt ?? Date(timeIntervalSince1970: 0)))
+                            }
+                            
+                            cellsPage.append(CellData(message: message, date: nil))
+                            lastMessage = message
+                        }
+
+                        self.cellsPages.append(cellsPage)
+                    }
+
+                    self.currentPage += 1
+
+                    self.isLoadingMoreMessages = false
                     completion?()
                 }
             }

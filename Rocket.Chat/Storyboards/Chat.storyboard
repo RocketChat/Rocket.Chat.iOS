@@ -149,11 +149,11 @@
                         <viewControllerLayoutGuide type="bottom" id="083-vv-Y5u"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Dua-YL-gS7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="hz2-84-IvC">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="i6r-e5-U1B" id="DOK-CK-vpP"/>
@@ -169,6 +169,7 @@
                             <constraint firstItem="083-vv-Y5u" firstAttribute="top" secondItem="hz2-84-IvC" secondAttribute="bottom" id="aKY-wB-Osk"/>
                         </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="membersTableView" destination="hz2-84-IvC" id="29I-J5-lyC"/>
                     </connections>
@@ -186,11 +187,11 @@
                         <viewControllerLayoutGuide type="bottom" id="PSn-2v-aPD"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="wih-fh-LH7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pu2-ou-2ep">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QjN-lv-M9T">
                                     <size key="itemSize" width="50" height="50"/>
@@ -207,12 +208,13 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="pu2-ou-2ep" secondAttribute="trailing" id="2JS-UT-Rle"/>
-                            <constraint firstItem="PSn-2v-aPD" firstAttribute="top" secondItem="pu2-ou-2ep" secondAttribute="bottom" id="Lq1-Av-lry"/>
-                            <constraint firstItem="pu2-ou-2ep" firstAttribute="height" secondItem="wih-fh-LH7" secondAttribute="height" id="b77-LE-N76"/>
-                            <constraint firstItem="pu2-ou-2ep" firstAttribute="leading" secondItem="wih-fh-LH7" secondAttribute="leading" id="jxX-By-LUx"/>
+                            <constraint firstAttribute="trailing" secondItem="pu2-ou-2ep" secondAttribute="trailing" id="SgR-92-JKO"/>
+                            <constraint firstItem="PSn-2v-aPD" firstAttribute="top" secondItem="pu2-ou-2ep" secondAttribute="bottom" id="UdF-az-fwl"/>
+                            <constraint firstItem="pu2-ou-2ep" firstAttribute="leading" secondItem="wih-fh-LH7" secondAttribute="leading" id="hQb-c7-Ozr"/>
+                            <constraint firstItem="pu2-ou-2ep" firstAttribute="top" secondItem="6M7-qB-RlN" secondAttribute="bottom" id="lGq-H9-Udx"/>
                         </constraints>
                     </view>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
                         <outlet property="collectionView" destination="pu2-ou-2ep" id="6l3-lH-YyP"/>
                     </connections>

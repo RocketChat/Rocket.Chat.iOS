@@ -221,8 +221,6 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     fileprivate func updateMessage() {
-        guard delegate != nil else { return }
-
         if !sequential {
             updateMessageHeader()
         }
