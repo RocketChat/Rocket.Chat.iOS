@@ -12,7 +12,7 @@
 "global.cancel" = "Cancel";
 
 // Errors
-"error.socket.default_error_title" = "Ooops!";
+"error.socket.default_error_title" = "Oops!";
 "error.socket.default_error_message" = "Something wrong happened, please try again.";
 
 // Alerts
@@ -31,6 +31,9 @@
 
 "alert.audio_message.error.title" = "Ooops!";
 "alert.audio_message.error.message" = "An error has occurred. Please, record your message again.";
+
+"alert.feature.wip.title" = "Oops!";
+"alert.feature.wip.message" = "We're still working on this feature, stay tunned!";
 
 // Socket Connection
 "connection.offline.banner.message" = "You're offline, try connecting again";
@@ -119,4 +122,10 @@
 "chat.info.item.starred" = "Starred";
 
 // Members List
-"memberslist.title" = "Members (%d)";
+"chat.members.list.title" = "Members (%d)";
+
+// Messages List
+"chat.messages.list.title" = "Messages";
+"chat.messages.list.empty" = "No messages found";
+"chat.messages.pinned.list.title" = "Pinned Messages";
+"chat.messages.starred.list.title" = "Starred Messages";
