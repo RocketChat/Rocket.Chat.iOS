@@ -244,6 +244,7 @@
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
                         <outlet property="textFieldSearch" destination="TPV-i5-hsW" id="0ho-Fe-IZ9"/>
                         <outlet property="viewTextField" destination="qEc-o0-IxJ" id="1KL-CT-eAr"/>
+                        <outlet property="viewUser" destination="ArO-ez-uRr" id="LYh-rg-dVA"/>
                         <outlet property="viewUserStatus" destination="V2s-Ct-SCW" id="ZS3-d0-lpu"/>
                         <segue destination="OzA-tw-YTL" kind="presentation" identifier="New Channel" id="BHC-Tf-sPw"/>
                     </connections>
