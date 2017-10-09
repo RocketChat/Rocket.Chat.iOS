@@ -30,15 +30,17 @@ final class ChatViewController: SLKTextViewController {
 
     var showButtonScrollToBottom: Bool = false {
         didSet {
-            if showButtonScrollToBottom {
-                buttonScrollToBottomMarginConstraint?.constant = -64
+            self.buttonScrollToBottom.superview?.layoutIfNeeded()
+
+            if self.showButtonScrollToBottom {
+                self.buttonScrollToBottomMarginConstraint?.constant = -64
             } else {
-                buttonScrollToBottomMarginConstraint?.constant = 50
+                self.buttonScrollToBottomMarginConstraint?.constant = 50
             }
 
             if showButtonScrollToBottom != oldValue {
                 UIView.animate(withDuration: 0.5) {
-                    self.view.layoutIfNeeded()
+                    self.buttonScrollToBottom.superview?.layoutIfNeeded()
                 }
             }
         }
