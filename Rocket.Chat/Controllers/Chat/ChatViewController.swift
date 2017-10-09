@@ -414,63 +414,59 @@ final class ChatViewController: SLKTextViewController {
     fileprivate func updateMessagesQueryNotificationBlock() {
         messagesToken?.stop()
         messagesToken = messagesQuery.addNotificationBlock { [unowned self] changes in
-            switch changes {
-            case .initial: break
-            case .update(_, _, let insertions, let modifications):
-                if insertions.count > 0 {
-                    if insertions.count > 1 && self.isRequestingHistory {
-                        return
-                    }
+            guard case .update(_, _, let insertions, let modifications) = changes else {
+                return
+            }
 
-                    var newMessages: [Message] = []
-                    for insertion in insertions {
-                        let newMessage = Message(value: self.messagesQuery[insertion])
-                        newMessages.append(newMessage)
-                    }
-
-                    self.messages.append(contentsOf: newMessages)
-                    self.appendMessages(messages: newMessages, completion: {
-                        self.markAsRead()
-                    })
-                }
-
-                if modifications.count == 0 {
+            if insertions.count > 0 {
+                if insertions.count > 1 && self.isRequestingHistory {
                     return
                 }
 
-                let messagesCount = self.messagesQuery.count
-                var indexPathModifications: [Int] = []
-
-                for modified in modifications {
-                    if messagesCount < modified + 1 {
-                        continue
-                    }
-
-                    let message = Message(value: self.messagesQuery[modified])
-                    let index = self.dataController.update(message)
-                    if index >= 0 && !indexPathModifications.contains(index) {
-                        indexPathModifications.append(index)
-                    }
+                var newMessages: [Message] = []
+                for insertion in insertions {
+                    let newMessage = Message(value: self.messagesQuery[insertion])
+                    newMessages.append(newMessage)
                 }
 
-                if indexPathModifications.count > 0 {
+                self.messages.append(contentsOf: newMessages)
+                self.appendMessages(messages: newMessages, completion: {
+                    self.markAsRead()
+                })
+            }
+
+            if modifications.count == 0 {
+                return
+            }
+
+            let messagesCount = self.messagesQuery.count
+            var indexPathModifications: [Int] = []
+
+            for modified in modifications {
+                if messagesCount < modified + 1 {
+                    continue
+                }
+
+                let message = Message(value: self.messagesQuery[modified])
+                let index = self.dataController.update(message)
+                if index >= 0 && !indexPathModifications.contains(index) {
+                    indexPathModifications.append(index)
+                }
+            }
+
+            if indexPathModifications.count > 0 {
+                DispatchQueue.main.async {
                     let isAtBottom = self.chatLogIsAtBottom()
-
-                    DispatchQueue.main.async {
-                        UIView.performWithoutAnimation {
-                            self.collectionView?.performBatchUpdates({
-                                self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
-                            }, completion: { _ in
-                                if isAtBottom {
-                                    self.scrollToBottom()
-                                }
-                            })
-                        }
+                    UIView.performWithoutAnimation {
+                        self.collectionView?.performBatchUpdates({
+                            self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
+                        }, completion: { _ in
+                            if isAtBottom {
+                                self.scrollToBottom()
+                            }
+                        })
                     }
                 }
-
-                break
-            case .error: break
             }
         }
     }
