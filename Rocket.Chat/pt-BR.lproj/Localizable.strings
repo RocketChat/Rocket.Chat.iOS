@@ -53,6 +53,15 @@
 "user_menu.settings" = "Minha conta";
 "user_menu.logout" = "Sair";
 
+// New Room View
+"new_room.cell.public_channel.title" = "Canal Público";
+"new_room.cell.public_chanell.description" = "Todos conseguem acessar esse canal";
+"new_room.cell.read_only.title" = "Canal somente leitura";
+"new_room.cell.read_only.description" = "Somente o admin pode escrever novas mensagens";
+"new_room.group.channel.name" = "Nome do canal";
+"new_room.group.channel.footer" = "O nome precisa ser escrito em minúsculo e ter menos que 22 caracteres";
+"new_room.cell.channel_name.title" = "Nome do canal";
+
 // Chat
 "chat.channel_preview_view.title" = "Esta é uma pré-visualização de #%@";
 "chat.channel_preview_view.join" = "Entrar";

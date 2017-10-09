@@ -17,23 +17,23 @@ class NewRoomViewController: BaseViewController {
             footer: nil,
             cells: [
                 ConfigTableCell(
-                    cell: .boolOption(title: "Public Channel", description: "Everyone can access this channel"),
+                    cell: .boolOption(title: localized("new_room.cell.public_channel.title"), description: localized("new_room.cell.public_chanell.description")),
                     key: "public room",
                     defaultValue: true
                 ),
                 ConfigTableCell(
-                    cell: .boolOption(title: "Read only channel", description: "Only admin can write new messages"),
+                    cell: .boolOption(title: localized("new_room.cell.read_only.title"), description: localized("new_room.cell.read_only.description")),
                     key: "read only room",
                     defaultValue: false
                 )
             ]
         ),
         GroupOfConfigCell(
-            name: "Channel Name",
-            footer: "Names must be all lower case and shorter than 22 characters",
+            name: localized("new_room.group.channel.name"),
+            footer: localized("new_room.group.channel.footer"),
             cells: [
                 ConfigTableCell(
-                    cell: .textField(placeholder: "Channel Name", icon: #imageLiteral(resourceName: "Hashtag")),
+                    cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag")),
                     key: "room name",
                     defaultValue: ""
                 )
