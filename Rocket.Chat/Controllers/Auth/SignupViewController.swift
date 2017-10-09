@@ -24,11 +24,15 @@ final class SignupViewController: BaseViewController {
     }
 
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fieldsContainerVerticalCenterConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fieldsContainerTopConstraint: NSLayoutConstraint!
+
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var fieldsContainer: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
 
     var customTextFields: [UITextField] = []
 

@@ -395,11 +395,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xp1-uz-zLh" userLabel="Visible View">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qTE-FD-RGC">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBN-QI-i7b" userLabel="Content">
-                                        <rect key="frame" x="0.0" y="237.5" width="375" height="192"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="508-af-i7m">
                                                 <rect key="frame" x="25" y="0.0" width="325" height="192"/>
@@ -494,29 +494,40 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="hBN-QI-i7b" firstAttribute="centerX" secondItem="xp1-uz-zLh" secondAttribute="centerX" id="4UQ-Q8-OeK"/>
-                                    <constraint firstItem="hBN-QI-i7b" firstAttribute="width" secondItem="xp1-uz-zLh" secondAttribute="width" id="DI5-ZE-zUB"/>
-                                    <constraint firstItem="hBN-QI-i7b" firstAttribute="centerY" secondItem="xp1-uz-zLh" secondAttribute="centerY" id="MPz-PH-UWg"/>
+                                    <constraint firstItem="hBN-QI-i7b" firstAttribute="centerY" secondItem="qTE-FD-RGC" secondAttribute="centerY" id="1xI-8w-Hbg"/>
+                                    <constraint firstItem="hBN-QI-i7b" firstAttribute="leading" secondItem="qTE-FD-RGC" secondAttribute="leading" id="4NG-TL-k83"/>
+                                    <constraint firstItem="hBN-QI-i7b" firstAttribute="width" secondItem="qTE-FD-RGC" secondAttribute="width" id="CwO-In-ny6"/>
+                                    <constraint firstAttribute="bottom" secondItem="hBN-QI-i7b" secondAttribute="bottom" id="IuZ-Da-hmF"/>
+                                    <constraint firstAttribute="trailing" secondItem="hBN-QI-i7b" secondAttribute="trailing" id="Oss-8P-4PC"/>
+                                    <constraint firstItem="hBN-QI-i7b" firstAttribute="top" secondItem="qTE-FD-RGC" secondAttribute="top" id="hRo-3x-MIY"/>
                                 </constraints>
-                            </view>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="1xI-8w-Hbg"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" red="0.96862745100000003" green="0.96862745100000003" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="xMK-Ku-eUa" firstAttribute="top" secondItem="xp1-uz-zLh" secondAttribute="bottom" id="Dpg-CR-JHe"/>
-                            <constraint firstAttribute="trailing" secondItem="xp1-uz-zLh" secondAttribute="trailing" id="ctP-lY-cMd"/>
-                            <constraint firstItem="xp1-uz-zLh" firstAttribute="top" secondItem="Lg9-5C-7wV" secondAttribute="top" id="saU-yT-wLb"/>
-                            <constraint firstItem="xp1-uz-zLh" firstAttribute="leading" secondItem="Lg9-5C-7wV" secondAttribute="leading" id="tKb-AL-F9T"/>
+                            <constraint firstItem="qTE-FD-RGC" firstAttribute="leading" secondItem="Lg9-5C-7wV" secondAttribute="leading" id="DW9-Xr-60J"/>
+                            <constraint firstAttribute="trailing" secondItem="qTE-FD-RGC" secondAttribute="trailing" id="EtU-Zf-Ouo"/>
+                            <constraint firstItem="xMK-Ku-eUa" firstAttribute="top" secondItem="qTE-FD-RGC" secondAttribute="bottom" id="VDW-4f-oyR"/>
+                            <constraint firstItem="qTE-FD-RGC" firstAttribute="top" secondItem="hj4-d5-2Sm" secondAttribute="bottom" id="zQr-LV-dxO"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New account" id="YTY-Iz-yS0"/>
                     <connections>
                         <outlet property="activityIndicator" destination="qXp-I4-Me1" id="nxZ-MP-zH8"/>
                         <outlet property="fieldsContainer" destination="d13-tX-toD" id="Vbp-FR-eM2"/>
+                        <outlet property="fieldsContainerTopConstraint" destination="hRo-3x-MIY" id="i48-Lo-0g0"/>
+                        <outlet property="fieldsContainerVerticalCenterConstraint" destination="1xI-8w-Hbg" id="k3v-Ng-A7l"/>
+                        <outlet property="scrollView" destination="qTE-FD-RGC" id="M6a-aI-xLE"/>
                         <outlet property="textFieldEmail" destination="qlZ-rO-nD7" id="rUJ-ZX-U34"/>
                         <outlet property="textFieldName" destination="boc-xz-QkJ" id="FXA-D4-oO8"/>
                         <outlet property="textFieldPassword" destination="PUc-EV-6ho" id="63v-qW-JBR"/>
                         <outlet property="viewFields" destination="508-af-i7m" id="L2h-lq-7Si"/>
-                        <outlet property="visibleViewBottomConstraint" destination="Dpg-CR-JHe" id="cY0-vY-pFJ"/>
+                        <outlet property="visibleViewBottomConstraint" destination="VDW-4f-oyR" id="hNl-zj-jlI"/>
                         <segue destination="DCX-We-7Nh" kind="show" identifier="RequestUsername" id="oar-7v-T9W"/>
                     </connections>
                 </viewController>
