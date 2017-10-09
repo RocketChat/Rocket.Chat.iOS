@@ -19,11 +19,10 @@ class MembersListViewData {
 
     var title: String {
         return String(
-            format: localized("memberslist.title"),
+            format: localized("chat.members.list.title"),
             total)
     }
 
-    var showMoreButtonTitle = "SHOW MORE"
     var isShowingAllMembers: Bool {
         return showing >= total
     }
@@ -59,17 +58,29 @@ class MembersListViewData {
     }
 }
 
-class MembersListViewController: UIViewController {
+class MembersListViewController: BaseViewController {
     @IBOutlet weak var membersTableView: UITableView!
     var loaderCell: LoaderTableViewCell!
 
     var data = MembersListViewData()
 
+    @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
+        let data = MembersListViewData()
+        data.subscription = self.data.subscription
+        data.loadMoreMembers {
+            self.data = data
+            DispatchQueue.main.async {
+                self.membersTableView.reloadData()
+                self.membersTableView.refreshControl?.endRefreshing()
+            }
+        }
+    }
+
     func loadMoreMembers() {
         data.loadMoreMembers {
             DispatchQueue.main.async {
                 self.membersTableView.reloadData()
-                self.title = self.data.title
+                self.membersTableView.refreshControl?.endRefreshing()
             }
         }
     }
@@ -78,6 +89,19 @@ class MembersListViewController: UIViewController {
 // MARK: ViewController
 extension MembersListViewController {
     override func viewDidLoad() {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
+
+        membersTableView.refreshControl = refreshControl
+
+        registerCells()
+
+        if let cell = membersTableView.dequeueReusableCell(withIdentifier: LoaderTableViewCell.identifier) as? LoaderTableViewCell {
+            self.loaderCell = cell
+        }
+    }
+
+    func registerCells() {
         membersTableView.register(UINib(
             nibName: "MemberCell",
             bundle: Bundle.main
@@ -87,16 +111,16 @@ extension MembersListViewController {
             nibName: "LoaderTableViewCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: LoaderTableViewCell.identifier)
-
-        if let cell = membersTableView.dequeueReusableCell(withIdentifier: LoaderTableViewCell.identifier) as? LoaderTableViewCell {
-            self.loaderCell = cell
-        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
         loadMoreMembers()
+
+        guard let refreshControl = membersTableView.refreshControl else { return }
+        membersTableView.refreshControl?.beginRefreshing()
+        membersTableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
     }
 }
 
@@ -136,7 +160,7 @@ extension MembersListViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == data.members.count - 50 {
+        if indexPath.row == data.members.count - data.pageSize/2 {
             loadMoreMembers()
         }
     }
