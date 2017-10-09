@@ -57,6 +57,7 @@ final class ChatViewController: SLKTextViewController {
             }
         }
     }
+    var isWritingMessage: Bool = false
     var recorderManager: AudioMessageRecorder?
 
     // MARK: View Life Cycle
@@ -296,11 +297,16 @@ final class ChatViewController: SLKTextViewController {
         if textView.text.isEmpty {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
 
+            isWritingMessage = false
             setupToolbarRightButtonWithAudioRecorder()
+
         } else {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
 
-            setupToolbarRightButtonWithMessageSender()
+            if !isWritingMessage {
+                isWritingMessage = !isWritingMessage
+                setupToolbarRightButtonWithMessageSender()
+            }
         }
     }
 
@@ -343,6 +349,7 @@ final class ChatViewController: SLKTextViewController {
             }
         }
 
+        isWritingMessage = false
         setupToolbarRightButtonWithAudioRecorder()
     }
 
