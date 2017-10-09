@@ -17,13 +17,11 @@ class ConfigTableCellTextFieldCell: UITableViewCell, ConfigTableCellProtocol {
 
     @IBOutlet weak var imgRoomIcon: UIImageView!
     @IBOutlet weak var textFieldInput: UITextField!
-    @IBOutlet weak var imgClearText: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        let gestureClearText = UITapGestureRecognizer(target: self, action: #selector(self.clearTextField))
-        imgClearText.addGestureRecognizer(gestureClearText)
+        textFieldInput.clearButtonMode = .whileEditing
     }
 
     func setPreviousValue(previous: Any) {
@@ -34,10 +32,5 @@ class ConfigTableCellTextFieldCell: UITableViewCell, ConfigTableCellProtocol {
 
     @IBAction func textFieldInputEditingChanged(_ sender: Any) {
         delegate?.updateDictValue(key: key ?? "", value: textFieldInput.text ?? "")
-    }
-
-    @objc func clearTextField(_ sender: Any) {
-        textFieldInput.text = ""
-        textFieldInputEditingChanged(sender)
     }
 }
