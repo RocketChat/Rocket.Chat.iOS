@@ -8,6 +8,8 @@
 
 import UIKit
 
+fileprivate typealias ListSegueData = (title: String, query: String?)
+
 class ChannelInfoViewController: BaseViewController {
 
     var tableViewData: [[Any]] = [] {
@@ -22,8 +24,8 @@ class ChannelInfoViewController: BaseViewController {
 
             let channelInfoData = [
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
-                ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: ""),
-                ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "")
+                ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
+                ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList)
             ]
 
             if subscription.type == .directMessage {
@@ -85,9 +87,34 @@ class ChannelInfoViewController: BaseViewController {
         self.performSegue(withIdentifier: "toMembersList", sender: self)
     }
 
+    func showPinnedList() {
+        let data = ListSegueData(title: localized("chat.messages.pinned.list.title"), query: "{\"pinned\":true}")
+        self.performSegue(withIdentifier: "toMessagesList", sender: data)
+    }
+
+    func showStarredList() {
+        guard let userId = AuthManager.currentUser()?.identifier else {
+            alert(title: localized("error.socket.default_error_title"), message: "error.socket.default_error_message")
+            return
+        }
+
+        let data = ListSegueData(title: localized("chat.messages.starred.list.title"), query: "{\"starred._id\":{\"$in\":[\"\(userId)\"]}}")
+        self.performSegue(withIdentifier: "toMessagesList", sender: data)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let membersList = segue.destination as? MembersListViewController {
             membersList.data.subscription = self.subscription
+        }
+
+        if let messagesList = segue.destination as? MessagesListViewController {
+
+            messagesList.data.subscription = self.subscription
+
+            if let segueData = sender as? ListSegueData {
+                messagesList.data.title = segueData.title
+                messagesList.data.query = segueData.query
+            }
         }
     }
 
@@ -179,9 +206,7 @@ extension ChannelInfoViewController: UITableViewDelegate {
 
         if let data = data as? ChannelInfoDetailCellData {
             guard let action = data.action else {
-                let alert = UIAlertController(title: "Ops!", message: "We're still working on this feature, stay tunned!", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                present(alert, animated: true, completion: nil)
+                alert(title: localized("alert.feature.wip.title"), message: localized("alert.feature.wip.message"))
                 return
             }
 
@@ -192,7 +217,6 @@ extension ChannelInfoViewController: UITableViewDelegate {
             }
         }
     }
-
 }
 
 // MARK: UITableViewDataSource
