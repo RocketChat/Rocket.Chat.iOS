@@ -4,6 +4,7 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -41,7 +42,7 @@
                     <constraint firstItem="pFT-DJ-f6P" firstAttribute="leading" secondItem="Vp1-fu-4cY" secondAttribute="leadingMargin" id="k42-b2-bgh"/>
                 </constraints>
             </tableViewCellContentView>
-            <inset key="separatorInset" minX="56" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <inset key="separatorInset" minX="49" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="imageViewIcon" destination="pFT-DJ-f6P" id="D8K-T0-Djk"/>
                 <outlet property="labelTitle" destination="xoc-6g-Mz5" id="pQI-Gh-JnV"/>
