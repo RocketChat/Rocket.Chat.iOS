@@ -57,6 +57,7 @@ final class ChatViewController: SLKTextViewController {
             }
         }
     }
+    var recorderManager: AudioMessageRecorder?
 
     // MARK: View Life Cycle
 
@@ -98,6 +99,10 @@ final class ChatViewController: SLKTextViewController {
 
         rightButton.isEnabled = false
 
+        recorderManager = AudioMessageRecorder()
+        recorderManager?.set(recorderDelegate: self)
+
+        setupToolbarRightButtonWithAudioRecorder()
         setupTitleView()
         setupTextViewSettings()
         setupScrollToBottomButton()
@@ -159,8 +164,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func setupTextViewSettings() {
-        textInputbar.autoHideRightButton = true
-
         textView.registerMarkdownFormattingSymbol("*", withTitle: "Bold")
         textView.registerMarkdownFormattingSymbol("_", withTitle: "Italic")
         textView.registerMarkdownFormattingSymbol("~", withTitle: "Strike")
@@ -184,6 +187,29 @@ final class ChatViewController: SLKTextViewController {
         buttonScrollToBottom.layer.cornerRadius = 25
         buttonScrollToBottom.layer.borderColor = UIColor.lightGray.cgColor
         buttonScrollToBottom.layer.borderWidth = 1
+    }
+
+    fileprivate func setupToolbarRightButtonWithAudioRecorder() {
+        removeToolbarRightButtonSelectors()
+
+        textInputbar.rightButton.setImage(UIImage(named: "Microphone"), for: .normal)
+        textInputbar.rightButton.setTitle("", for: .normal)
+
+        textInputbar.rightButton.addTarget(self, action: #selector(recordAudioMessage), for: .touchDown)
+        textInputbar.rightButton.addTarget(self, action: #selector(stopAudioRecord), for: .touchUpInside)
+    }
+
+    fileprivate func setupToolbarRightButtonWithMessageSender() {
+        removeToolbarRightButtonSelectors()
+
+        textInputbar.rightButton.setImage(UIImage(named: "Paper Plane"), for: .normal)
+        textInputbar.rightButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+    }
+
+    fileprivate func removeToolbarRightButtonSelectors() {
+        textInputbar.rightButton.removeTarget(self, action: #selector(recordAudioMessage), for: .touchDown)
+        textInputbar.rightButton.removeTarget(self, action: #selector(stopAudioRecord), for: .touchUpInside)
+        textInputbar.rightButton.removeTarget(self, action: #selector(sendMessage), for: .touchUpInside)
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
@@ -251,7 +277,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
-        sendMessage()
+
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -269,13 +295,17 @@ final class ChatViewController: SLKTextViewController {
     override func textViewDidChange(_ textView: UITextView) {
         if textView.text.isEmpty {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+
+            setupToolbarRightButtonWithAudioRecorder()
         } else {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
+
+            setupToolbarRightButtonWithMessageSender()
         }
     }
 
     // MARK: Message
-    fileprivate func sendMessage() {
+    @objc fileprivate func sendMessage() {
         guard let messageText = textView.text, messageText.characters.count > 0 else { return }
 
         self.scrollToBottom()
@@ -312,6 +342,8 @@ final class ChatViewController: SLKTextViewController {
                 })
             }
         }
+
+        setupToolbarRightButtonWithAudioRecorder()
     }
 
     fileprivate func chatLogIsAtBottom() -> Bool {
@@ -632,6 +664,16 @@ final class ChatViewController: SLKTextViewController {
 
     @IBAction func buttonScrollToBottomPressed(_ sender: UIButton) {
         scrollToBottom(true)
+    }
+
+    // MARK: Audio Message Recorder Helpers
+
+    @objc func recordAudioMessage() {
+        recorderManager?.record()
+    }
+
+    @objc func stopAudioRecord() {
+        recorderManager?.stop()
     }
 }
 

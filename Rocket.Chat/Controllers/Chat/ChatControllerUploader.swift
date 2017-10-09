@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import MobileCoreServices
+import AVFoundation
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -179,6 +180,38 @@ extension ChatViewController: UIDocumentPickerDelegate {
         }
     }
 
+}
+
+// MARK: AVAudioRecorderDelegate
+
+extension ChatViewController: AVAudioRecorderDelegate {
+
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        if error != nil {
+            let alert = UIAlertController(title: "Error", message: "Please, record your message againg.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if flag {
+            let alert = UIAlertController(title: "Success", message: "Your message was successfully recorded.", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Discard", style: .default, handler: nil))
+            alert.addAction(UIAlertAction(title: "Send", style: .default, handler: { _ in
+
+                var file: FileUpload?
+                let assetURL = recorder.url
+
+                file = UploadHelper.file(for: assetURL)
+
+                if let file = file {
+                    self.upload(file)
+                }
+            }))
+            present(alert, animated: true, completion: nil)
+        }
+    }
 }
 
 // MARK: Uploading a FileUpload
