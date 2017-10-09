@@ -46,4 +46,18 @@ extension SignupViewController {
         fieldsContainer.removeArrangedSubview(textFieldPassword)
         fieldsContainer.addArrangedSubview(textFieldPassword)
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        adjustScrollView()
+    }
+
+    func adjustScrollView() {
+        fieldsContainerVerticalCenterConstraint.isActive = !needScrolling()
+        fieldsContainerTopConstraint.isActive = needScrolling()
+    }
+
+    private func needScrolling() -> Bool {
+        return fieldsContainer.bounds.height >= scrollView.bounds.height
+    }
 }
