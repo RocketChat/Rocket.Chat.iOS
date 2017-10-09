@@ -11,6 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 extension Message: ModelMappeable {
+    //swiftlint:disable cyclomatic_complexity function_body_length
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
             self.identifier = values["_id"].string ?? ""
