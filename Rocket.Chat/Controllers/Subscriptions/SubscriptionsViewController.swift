@@ -41,6 +41,12 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     weak var viewUserMenu: SubscriptionUserStatusView?
+    @IBOutlet weak var viewUser: UIView! {
+        didSet {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
+            viewUser.addGestureRecognizer(gesture)
+        }
+    }
 
     @IBOutlet weak var viewUserStatus: UIView!
 
@@ -78,10 +84,6 @@ final class SubscriptionsViewController: BaseViewController {
     @IBOutlet weak var imageViewArrowDown: UIImageView! {
         didSet {
             imageViewArrowDown.image = imageViewArrowDown.image?.imageWithTint(.RCLightBlue())
-
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
-            imageViewArrowDown.addGestureRecognizer(gesture)
-            imageViewArrowDown.isUserInteractionEnabled = true
         }
     }
 
