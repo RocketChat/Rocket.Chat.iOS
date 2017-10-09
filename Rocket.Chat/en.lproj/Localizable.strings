@@ -25,6 +25,13 @@
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "No Mail Accounts. Please set up a Mail account in order to send email.";
 
+"alert.audio_message.success.send" = "Send"
+"alert.audio_message.success.title" = "Success";
+"alert.audio_message.success.message" = "Your message was successfully recorded.";
+
+"alert.audio_message.error.title" = "Ooops!";
+"alert.audio_message.error.message" = "An error has occurred. Please, record your message again.";
+
 // Socket Connection
 "connection.offline.banner.message" = "You're offline, try connecting again";
 

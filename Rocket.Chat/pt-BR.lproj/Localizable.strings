@@ -25,6 +25,13 @@
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "Conta Mail não encontrada. Por favor, configure uma conta no aplicativo Mail para conseguir enviar emails.";
 
+"alert.audio_message.success.send" = "Enviar"
+"alert.audio_message.success.title" = "Sucesso";
+"alert.audio_message.success.message" = "Sua mensagem foi gravado com sucesso.";
+
+"alert.audio_message.error.title" = "Ooops!";
+"alert.audio_message.error.message" = "Ocorreu um erro. Por favor, grave a sua mensagem novamente.";
+
 // Socket Connection
 "connection.offline.banner.message" = "Você está offline, conecte novamente";
 

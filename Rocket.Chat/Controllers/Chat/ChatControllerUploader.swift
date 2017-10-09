@@ -188,17 +188,17 @@ extension ChatViewController: AVAudioRecorderDelegate {
 
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
         if error != nil {
-            let alert = UIAlertController(title: "Error", message: "Please, record your message againg.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+            let alert = UIAlertController(title: localized("alert.audio_message.error.title"), message: localized("alert.audio_message.error.message"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
             present(alert, animated: true, completion: nil)
         }
     }
 
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
-            let alert = UIAlertController(title: "Success", message: "Your message was successfully recorded.", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Discard", style: .default, handler: nil))
-            alert.addAction(UIAlertAction(title: "Send", style: .default, handler: { _ in
+            let alert = UIAlertController(title: localized("alert.audio_message.success.title"), message: localized("alert.audio_message.success.message"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: localized("alert.audio_message.success.send"), style: .default, handler: { _ in
 
                 var file: FileUpload?
                 let assetURL = recorder.url
