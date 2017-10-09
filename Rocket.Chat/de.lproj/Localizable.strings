@@ -12,11 +12,11 @@
 "global.cancel" = "Abbrechen";
 
 // Errors
-"error.socket.default_error_title" = "Ooops!";
+"error.socket.default_error_title" = "Oops!";
 "error.socket.default_error_message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
 
 // Alerts
-"alert.connection.invalid_url.title" = "Ooops!";
+"alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfe deine Eingabe und probiere es noch einmal.";
 
 "alert.connection.invalid_version.title" = "Oops!";
@@ -24,6 +24,9 @@
 
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "Es sind keine Mail Accounts konfiguriert. Bitte richte einen Mail Account ein um Emails senden zu können.";
+
+"alert.feature.wip.title" = "Oops!";
+"alert.feature.wip.message" = "Entschuldigung, aber dieses Feature ist noch nicht verfügbar.";
 
 // Socket Connection
 "connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
@@ -112,4 +115,10 @@
 "chat.info.item.starred" = "Favorisiert";
 
 // Members List
-"memberslist.title" = "Mitglieder (%d)";
+"chat.members.list.title" = "Mitglieder (%d)";
+
+// Messages List
+"chat.messages.list.title" = "Nachrichten";
+"chat.messages.list.empty" = "Keine Nachrichten gefunden";
+"chat.messages.pinned.list.title" = "Angeheftete Nachrichten";
+"chat.messages.starred.list.title" = "Favorisierte Nachrichten";
