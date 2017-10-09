@@ -26,7 +26,7 @@
                         </constraints>
                     </imageView>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Placeholder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RzC-dR-KkA">
-                        <rect key="frame" x="31" y="25.5" width="269" height="17"/>
+                        <rect key="frame" x="31" y="25.5" width="281" height="17"/>
                         <nil key="textColor"/>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
@@ -34,33 +34,22 @@
                             <action selector="textFieldInputEditingChanged:" destination="STT-md-aQU" eventType="editingChanged" id="4z6-Gc-RDE"/>
                         </connections>
                     </textField>
-                    <imageView contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ClearText" translatesAutoresizingMaskIntoConstraints="NO" id="IZg-U5-ryd">
-                        <rect key="frame" x="300" y="27.5" width="12" height="12"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="12" id="ZhN-Bk-WLj"/>
-                            <constraint firstAttribute="width" constant="12" id="mIY-o2-zcM"/>
-                        </constraints>
-                    </imageView>
                 </subviews>
                 <constraints>
                     <constraint firstItem="RzC-dR-KkA" firstAttribute="leading" secondItem="03m-Or-Cps" secondAttribute="trailing" constant="8" id="0NG-Gp-QXY"/>
-                    <constraint firstItem="IZg-U5-ryd" firstAttribute="leading" secondItem="RzC-dR-KkA" secondAttribute="trailing" id="2l0-ZP-VvA"/>
-                    <constraint firstAttribute="trailing" secondItem="IZg-U5-ryd" secondAttribute="trailing" constant="8" id="6hd-XU-GYP"/>
                     <constraint firstItem="RzC-dR-KkA" firstAttribute="centerY" secondItem="Sdz-WT-uu8" secondAttribute="centerY" id="CfC-OR-A7s"/>
                     <constraint firstItem="03m-Or-Cps" firstAttribute="centerY" secondItem="RzC-dR-KkA" secondAttribute="centerY" id="Tmx-5M-jcm"/>
                     <constraint firstItem="03m-Or-Cps" firstAttribute="leading" secondItem="Sdz-WT-uu8" secondAttribute="leading" constant="8" id="UFM-fo-nzM"/>
-                    <constraint firstItem="IZg-U5-ryd" firstAttribute="centerY" secondItem="RzC-dR-KkA" secondAttribute="centerY" id="iNS-Kb-EeP"/>
+                    <constraint firstAttribute="trailing" secondItem="RzC-dR-KkA" secondAttribute="trailing" constant="8" id="b0R-2t-b7k"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
-                <outlet property="imgClearText" destination="IZg-U5-ryd" id="E5P-Rh-t0L"/>
                 <outlet property="imgRoomIcon" destination="03m-Or-Cps" id="FLv-Wc-YZ4"/>
                 <outlet property="textFieldInput" destination="RzC-dR-KkA" id="EYX-vQ-2BE"/>
             </connections>
         </tableViewCell>
     </objects>
     <resources>
-        <image name="ClearText" width="14" height="14"/>
         <image name="Hashtag" width="23" height="23"/>
     </resources>
 </document>
