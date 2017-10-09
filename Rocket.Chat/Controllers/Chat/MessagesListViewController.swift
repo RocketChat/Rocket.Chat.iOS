@@ -53,34 +53,45 @@ class MessagesListViewData {
 
         if let subscription = subscription {
             isLoadingMoreMessages = true
-            API.shared.fetch(SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query),
-                             options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
-                DispatchQueue.main.async {
-                    self.showing += result?.count ?? 0
-                    self.total = result?.total ?? 0
-                    if let messages = result?.getMessages() {
-                        let messages = messages.flatMap { $0 }
-                        guard var lastMessage = messages.first else {
-                            self.isLoadingMoreMessages = false
+
+            let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
+            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+            API.shared.fetch(request, options: options) { result in
+                self.showing += result?.count ?? 0
+                self.total = result?.total ?? 0
+
+                if let messages = result?.getMessages() {
+                    let messages = messages.flatMap { $0 }
+                    guard var lastMessage = messages.first else {
+                        self.isLoadingMoreMessages = false
+
+                        DispatchQueue.main.async {
                             completion?()
-                            return
                         }
-                        var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
-                        messages.forEach { message in
-                            if lastMessage.createdAt?.day != message.createdAt?.day ||
-                                lastMessage.createdAt?.month != message.createdAt?.month ||
-                                lastMessage.createdAt?.year != message.createdAt?.year {
-                                cellsPage.append(CellData(message: nil, date: message.createdAt ?? Date(timeIntervalSince1970: 0)))
-                            }
-                            cellsPage.append(CellData(message: message, date: nil))
-                            lastMessage = message
-                        }
-                        self.cellsPages.append(cellsPage)
+
+                        return
                     }
 
-                    self.currentPage += 1
+                    var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
+                    messages.forEach { message in
+                        if lastMessage.createdAt?.day != message.createdAt?.day ||
+                            lastMessage.createdAt?.month != message.createdAt?.month ||
+                            lastMessage.createdAt?.year != message.createdAt?.year {
+                            cellsPage.append(CellData(message: nil, date: message.createdAt ?? Date(timeIntervalSince1970: 0)))
+                        }
 
-                    self.isLoadingMoreMessages = false
+                        cellsPage.append(CellData(message: message, date: nil))
+                        lastMessage = message
+                    }
+
+                    self.cellsPages.append(cellsPage)
+                }
+
+                self.currentPage += 1
+
+                self.isLoadingMoreMessages = false
+
+                DispatchQueue.main.async {
                     completion?()
                 }
             }
@@ -193,7 +204,6 @@ extension MessagesListViewController: UICollectionViewDataSource {
 
         if let message = cellData.message,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageCell.identifier, for: indexPath) as? ChatMessageCell {
-            cell.delegate = ChatViewController.shared
             cell.message = message
             return cell
         }

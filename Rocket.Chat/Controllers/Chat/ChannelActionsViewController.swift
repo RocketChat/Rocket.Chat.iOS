@@ -8,6 +8,8 @@
 
 import UIKit
 
+fileprivate typealias ListSegueData = (title: String, query: String?)
+
 class ChannelActionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
@@ -25,18 +27,19 @@ class ChannelActionsViewController: BaseViewController {
             let data = [[
                 ChannelInfoUserCellData(user: subscription.directMessageUser)
             ], [
-                ChannelInfoActionCellData(icon: UIImage(named: "Message"), title: "Message", detail: true),
-                ChannelInfoActionCellData(icon: UIImage(named: "Call"), title: "Voice call", detail: true),
-                ChannelInfoActionCellData(icon: UIImage(named: "Video"), title: "Video call", detail: true)
+                ChannelInfoActionCellData(icon: UIImage(named: "Message"), title: "Message", action: nil),
+                ChannelInfoActionCellData(icon: UIImage(named: "Call"), title: "Voice call", action: nil),
+                ChannelInfoActionCellData(icon: UIImage(named: "Video"), title: "Video call", action: nil)
             ], [
-                ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: "Files", detail: true),
-                ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: "Mentions", detail: true),
-                ChannelInfoActionCellData(icon: UIImage(named: "Starred"), title: "Starred", detail: true),
-                ChannelInfoActionCellData(icon: UIImage(named: "Search"), title: "Search", detail: true),
-                ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: "Share", detail: true),
-                ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: "Pinned", detail: true),
-                ChannelInfoActionCellData(icon: UIImage(named: "Snipped"), title: "Snippets", detail: true),
-                ChannelInfoActionCellData(icon: UIImage(named: "Downloads"), title: "Downloads", detail: true)
+                ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: "Files", action: nil),
+                ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: "Mentions", action: nil),
+                ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: "Members", action: showMembersList),
+                ChannelInfoActionCellData(icon: UIImage(named: "Starred"), title: "Starred", action: showStarredList),
+                ChannelInfoActionCellData(icon: UIImage(named: "Search"), title: "Search", action: nil),
+                ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: "Share", action: nil),
+                ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: "Pinned", action: showPinnedList),
+                ChannelInfoActionCellData(icon: UIImage(named: "Snipped"), title: "Snippets", action: nil),
+                ChannelInfoActionCellData(icon: UIImage(named: "Downloads"), title: "Downloads", action: nil)
             ]]
 
             tableViewData = data
@@ -60,6 +63,48 @@ class ChannelActionsViewController: BaseViewController {
             nibName: "ChannelInfoActionCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: ChannelInfoActionCell.identifier)
+    }
+
+}
+
+// MARK: Actions
+
+extension ChannelActionsViewController {
+
+    func showMembersList() {
+        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "MembersList") as? MembersListViewController else {
+            return assertionFailure("controller could not be initialized")
+        }
+
+        controller.data.subscription = self.subscription
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
+    func showPinnedList() {
+        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "MessagesList") as? MessagesListViewController else {
+            return assertionFailure("controller could not be initialized")
+        }
+
+        controller.data.subscription = self.subscription
+        controller.data.title = localized("chat.messages.pinned.list.title")
+        controller.data.query = "{\"pinned\":true}"
+        navigationController?.pushViewController(controller, animated: true)
+    }
+
+    func showStarredList() {
+        guard let userId = AuthManager.currentUser()?.identifier else {
+            alert(title: localized("error.socket.default_error_title"), message: "error.socket.default_error_message")
+            return
+        }
+
+        guard let controller = UIStoryboard.controller(from: "Chat", identifier: "MessagesList") as? MessagesListViewController else {
+            return assertionFailure("controller could not be initialized")
+        }
+
+        controller.data.subscription = self.subscription
+        controller.data.title = localized("chat.messages.starred.list.title")
+        controller.data.query = "{\"starred._id\":{\"$in\":[\"\(userId)\"]}}"
+        navigationController?.pushViewController(controller, animated: true)
     }
 
 }
@@ -100,6 +145,23 @@ extension ChannelActionsViewController: UITableViewDelegate {
         }
 
         return CGFloat(0)
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let data = tableViewData[indexPath.section][indexPath.row]
+
+        if let data = data as? ChannelInfoActionCellData {
+            guard let action = data.action else {
+                alert(title: localized("alert.feature.wip.title"), message: localized("alert.feature.wip.message"))
+                return
+            }
+
+            action()
+
+            if let selectedIndex = tableView.indexPathForSelectedRow {
+                tableView.deselectRow(at: selectedIndex, animated: true)
+            }
+        }
     }
 
 }

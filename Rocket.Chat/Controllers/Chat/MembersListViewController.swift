@@ -18,9 +18,7 @@ class MembersListViewData {
     var total: Int = 0
 
     var title: String {
-        return String(
-            format: localized("chat.members.list.title"),
-            total)
+        return String(format: localized("chat.members.list.title"), total)
     }
 
     var isShowingAllMembers: Bool {
@@ -42,7 +40,17 @@ class MembersListViewData {
 
         if let subscription = subscription {
             isLoadingMoreMembers = true
-            API.shared.fetch(SubscriptionMembersRequest(roomId: subscription.rid, type: subscription.type), options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
+            let request = SubscriptionMembersRequest(
+                roomId: subscription.rid,
+                type: subscription.type
+            )
+
+            let options = APIRequestOptions.paginated(
+                count: pageSize,
+                offset: currentPage * pageSize
+            )
+
+            API.shared.fetch(request, options: options) { result in
                 self.showing += result?.count ?? 0
                 self.total = result?.total ?? 0
                 if let members = result?.members {

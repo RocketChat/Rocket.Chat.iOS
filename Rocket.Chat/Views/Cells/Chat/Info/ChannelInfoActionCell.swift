@@ -14,6 +14,15 @@ struct ChannelInfoActionCellData: ChannelInfoCellDataProtocol {
     var icon: UIImage?
     var title: String?
     var detail: Bool = false
+
+    let action: (() -> Void)?
+
+    init(icon: UIImage?, title: String = "", action: (() -> Void)? = nil) {
+        self.icon = icon
+        self.title = title
+        self.action = action
+        self.detail = true
+    }
 }
 
 class ChannelInfoActionCell: UITableViewCell, ChannelInfoCellProtocol {
