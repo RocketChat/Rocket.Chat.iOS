@@ -76,7 +76,7 @@ class MessagesListViewData {
                                 lastMessage.createdAt?.year != message.createdAt?.year {
                                 cellsPage.append(CellData(message: nil, date: message.createdAt ?? Date(timeIntervalSince1970: 0)))
                             }
-                            
+
                             cellsPage.append(CellData(message: message, date: nil))
                             lastMessage = message
                         }

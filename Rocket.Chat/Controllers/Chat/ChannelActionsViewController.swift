@@ -14,6 +14,8 @@ class ChannelActionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
 
+    weak var buttonFavorite: UIBarButtonItem?
+
     var tableViewData: [[Any]] = [] {
         didSet {
             tableView?.reloadData()
@@ -54,6 +56,11 @@ class ChannelActionsViewController: BaseViewController {
             tableView?.contentInsetAdjustmentBehavior = .never
         }
 
+        setupFavoriteButton()
+        registerCells()
+    }
+
+    func registerCells() {
         tableView?.register(UINib(
             nibName: "ChannelInfoUserCell",
             bundle: Bundle.main
@@ -63,6 +70,53 @@ class ChannelActionsViewController: BaseViewController {
             nibName: "ChannelInfoActionCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: ChannelInfoActionCell.identifier)
+    }
+
+    func setupFavoriteButton() {
+        if let settings = AuthSettingsManager.settings {
+            if settings.favoriteRooms {
+                let defaultImage = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray()).withRenderingMode(.alwaysOriginal)
+                let buttonFavorite = UIBarButtonItem(image: defaultImage, style: .plain, target: self, action: #selector(buttonFavoriteDidPressed))
+                navigationItem.rightBarButtonItem = buttonFavorite
+                self.buttonFavorite = buttonFavorite
+                updateButtonFavoriteImage()
+            }
+        }
+    }
+
+    func updateButtonFavoriteImage(_ force: Bool = false, value: Bool = false) {
+        guard let buttonFavorite = self.buttonFavorite else { return }
+        let favorite = force ? value : subscription?.favorite ?? false
+        var image: UIImage?
+
+        if favorite {
+            image = UIImage(named: "Star-Filled")?.imageWithTint(UIColor.RCFavoriteMark())
+        } else {
+            image = UIImage(named: "Star")?.imageWithTint(UIColor.RCGray())
+        }
+
+        buttonFavorite.image = image?.withRenderingMode(.alwaysOriginal)
+    }
+
+}
+
+// MARK: IBAction
+
+extension ChannelActionsViewController {
+
+    @objc func buttonFavoriteDidPressed(_ sender: Any) {
+        guard let subscription = self.subscription else { return }
+
+        SubscriptionManager.toggleFavorite(subscription) { [unowned self] (response) in
+            if response.isError() {
+                subscription.updateFavorite(!subscription.favorite)
+            }
+
+            self.updateButtonFavoriteImage()
+        }
+
+        self.subscription?.updateFavorite(!subscription.favorite)
+        updateButtonFavoriteImage()
     }
 
 }
