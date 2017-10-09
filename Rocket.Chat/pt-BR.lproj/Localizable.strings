@@ -12,7 +12,7 @@
 "global.cancel" = "Cancelar";
 
 // Errors
-"error.socket.default_error_title" = "Ooops!";
+"error.socket.default_error_title" = "Oops!";
 "error.socket.default_error_message" = "Algo errado aconteceu, por favor tente novamente.";
 
 // Alerts
@@ -24,6 +24,9 @@
 
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "Conta Mail não encontrada. Por favor, configure uma conta no aplicativo Mail para conseguir enviar emails.";
+
+"alert.feature.wip.title" = "Oops!";
+"alert.feature.wip.message" = "Desculpe, mas esta função ainda não está disponível.";
 
 // Socket Connection
 "connection.offline.banner.message" = "Você está offline, conecte novamente";
@@ -112,4 +115,10 @@
 "chat.info.item.starred" = "Favoritas";
 
 // Members List
-"memberslist.title" = "Membros (%d)";
+"chat.members.list.title" = "Membros (%d)";
+
+// Messages List
+"chat.messages.list.title" = "Mensagens";
+"chat.messages.list.empty" = "Nenhuma mensagem encontrada";
+"chat.messages.pinned.list.title" = "Mensagens Pinadas";
+"chat.messages.starred.list.title" = "Mensagens Favoritas";
