@@ -110,7 +110,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
                 file = UploadHelper.file(
                     for: videoData as Data,
-                    name: "\(filename).mp4",
+                    name: "\(filename.components(separatedBy: ".").first ?? "video").mp4",
                     mimeType: "video/mp4"
                 )
 
