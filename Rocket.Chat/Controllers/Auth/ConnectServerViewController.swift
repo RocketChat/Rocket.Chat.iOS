@@ -65,6 +65,11 @@ final class ConnectServerViewController: BaseViewController {
 
         SocketManager.sharedInstance.socket?.disconnect()
         DatabaseManager.cleanInvalidDatabases()
+
+        if let applicationServerURL = AppManager.applicationServerURL {
+            textFieldServerURL.text = applicationServerURL.host
+            connect()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
