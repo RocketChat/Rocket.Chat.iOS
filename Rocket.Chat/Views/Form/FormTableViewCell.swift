@@ -1,5 +1,5 @@
 //
-//  ConfigTableCellProtocol.swift
+//  FormTableViewCell.swift
 //  Rocket.Chat
 //
 //  Created by Bruno Macabeus Aquino on 27/09/17.
@@ -8,50 +8,50 @@
 
 import Foundation
 
-protocol ConfigTableCellDelegate: class {
+protocol FormTableViewDelegate: class {
     func updateDictValue(key: String, value: Any)
     func getPreviousValue(key: String) -> Any?
 }
 
-protocol ConfigTableCellProtocol {
+protocol FormTableViewCellProtocol {
     static var identifier: String { get }
     static var xibFileName: String { get }
     static var defaultHeight: Float { get }
 
-    var delegate: ConfigTableCellDelegate? { get set }
+    var delegate: FormTableViewDelegate? { get set }
     var key: String? { get set }
     func setPreviousValue(previous: Any)
 }
 
-extension ConfigTableCellProtocol {
+extension FormTableViewCellProtocol {
     static func registerCell(for table: UITableView) {
         let cellNib = UINib(nibName: self.xibFileName, bundle: nil)
         table.register(cellNib, forCellReuseIdentifier: self.identifier)
     }
 }
 
-struct GroupOfConfigCell {
+struct SectionForm {
     let name: String?
     let footer: String?
-    let cells: [ConfigTableCell]
+    let cells: [FormCell]
 }
 
-struct ConfigTableCell {
-    let cell: ConfigTableCells
+struct FormCell {
+    let cell: FormTableViewCell
     let key: String
     let defaultValue: Any
 }
 
-enum ConfigTableCells {
-    case boolOption(title: String, description: String)
+enum FormTableViewCell {
+    case check(title: String, description: String)
     case textField(placeholder: String?, icon: UIImage?)
 
-    func getClass() -> ConfigTableCellProtocol.Type {
+    func getClass() -> FormTableViewCellProtocol.Type {
         switch self {
-        case .boolOption:
-            return ConfigTableCellBoolOptionCell.self
+        case .check:
+            return CheckTableViewCell.self
         case .textField:
-            return ConfigTableCellTextFieldCell.self
+            return TextFieldTableViewCell.self
         }
     }
 
@@ -59,21 +59,21 @@ enum ConfigTableCells {
         return getClass().identifier
     }
 
-    func createCell(table: UITableView, delegate: ConfigTableCellDelegate, key: String) -> ConfigTableCellProtocol? {
+    func createCell(table: UITableView, delegate: FormTableViewDelegate, key: String) -> FormTableViewCellProtocol? {
         let cellIdentifier = self.getIdentifier()
-        guard var cell = table.dequeueReusableCell(withIdentifier: cellIdentifier) as? ConfigTableCellProtocol else { return nil }
+        guard var cell = table.dequeueReusableCell(withIdentifier: cellIdentifier) as? FormTableViewCellProtocol else { return nil }
 
         switch self {
-        case .boolOption(let title, let description):
-            if let cell = cell as? ConfigTableCellBoolOptionCell {
+        case .check(let title, let description):
+            if let cell = cell as? CheckTableViewCell {
                 cell.labelTitle.text = title
                 cell.labelDescription.text = description
             }
 
         case .textField(let placeholder, let icon):
-            if let cell = cell as? ConfigTableCellTextFieldCell {
+            if let cell = cell as? TextFieldTableViewCell {
                 cell.textFieldInput.placeholder = placeholder
-                cell.imgRoomIcon.image = icon
+                cell.imgLeftIcon.image = icon
             }
         }
 

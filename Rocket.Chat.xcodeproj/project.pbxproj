@@ -189,11 +189,11 @@
 		80A63C551F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */; };
 		80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C561F71D2E400FE5AC4 /* APISpec.swift */; };
 		890C92C31F7BDF55006144A5 /* NewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890C92C21F7BDF55006144A5 /* NewRoomViewController.swift */; };
-		897083C21F87D7C100233561 /* ConfigTableCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897083BF1F87D7C000233561 /* ConfigTableCellProtocol.swift */; };
-		897083C31F87D7C100233561 /* ConfigTableCellBoolOptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897083C01F87D7C000233561 /* ConfigTableCellBoolOptionCell.swift */; };
-		897083C41F87D7C100233561 /* ConfigTableCellTextFieldCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897083C11F87D7C000233561 /* ConfigTableCellTextFieldCell.swift */; };
-		897083C61F87D9E200233561 /* ConfigTableCellBoolOptionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897083C51F87D9E200233561 /* ConfigTableCellBoolOptionCell.xib */; };
-		897083C81F87DA0900233561 /* ConfigTableCellTextFieldCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897083C71F87DA0900233561 /* ConfigTableCellTextFieldCell.xib */; };
+		897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897083CE1F8CF08100233561 /* CheckTableViewCell.swift */; };
+		897083D41F8CF08100233561 /* CheckTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897083CF1F8CF08100233561 /* CheckTableViewCell.xib */; };
+		897083D51F8CF08100233561 /* TextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897083D01F8CF08100233561 /* TextFieldTableViewCell.swift */; };
+		897083D61F8CF08100233561 /* TextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897083D11F8CF08100233561 /* TextFieldTableViewCell.xib */; };
+		897083D71F8CF08100233561 /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897083D21F8CF08100233561 /* FormTableViewCell.swift */; };
 		89AEB7F81F7D225D00112A09 /* RoomCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AEB7F71F7D225D00112A09 /* RoomCreateRequest.swift */; };
 		925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */; };
 		925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */; };
@@ -437,11 +437,11 @@
 		80A63C561F71D2E400FE5AC4 /* APISpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISpec.swift; sourceTree = "<group>"; };
 		80D0BC811F86A79A00CEE3CF /* ConnectServerViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ConnectServerViewControllerSpec.swift; path = Controllers/ConnectServerViewControllerSpec.swift; sourceTree = "<group>"; };
 		890C92C21F7BDF55006144A5 /* NewRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewRoomViewController.swift; sourceTree = "<group>"; };
-		897083BF1F87D7C000233561 /* ConfigTableCellProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigTableCellProtocol.swift; path = Views/ConfigTable/ConfigTableCellProtocol.swift; sourceTree = "<group>"; };
-		897083C01F87D7C000233561 /* ConfigTableCellBoolOptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigTableCellBoolOptionCell.swift; path = Views/ConfigTable/ConfigTableCellBoolOptionCell.swift; sourceTree = "<group>"; };
-		897083C11F87D7C000233561 /* ConfigTableCellTextFieldCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConfigTableCellTextFieldCell.swift; path = Views/ConfigTable/ConfigTableCellTextFieldCell.swift; sourceTree = "<group>"; };
-		897083C51F87D9E200233561 /* ConfigTableCellBoolOptionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfigTableCellBoolOptionCell.xib; sourceTree = "<group>"; };
-		897083C71F87DA0900233561 /* ConfigTableCellTextFieldCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfigTableCellTextFieldCell.xib; sourceTree = "<group>"; };
+		897083CE1F8CF08100233561 /* CheckTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckTableViewCell.swift; sourceTree = "<group>"; };
+		897083CF1F8CF08100233561 /* CheckTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckTableViewCell.xib; sourceTree = "<group>"; };
+		897083D01F8CF08100233561 /* TextFieldTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		897083D11F8CF08100233561 /* TextFieldTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		897083D21F8CF08100233561 /* FormTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
 		89AEB7F71F7D225D00112A09 /* RoomCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomCreateRequest.swift; sourceTree = "<group>"; };
 		925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
 		925FF7501E8EFCAD00982043 /* SettingsViewModelTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModelTests.swift; sourceTree = "<group>"; };
@@ -579,7 +579,7 @@
 			isa = PBXGroup;
 			children = (
 				41C275DD1D847FEE003C88CF /* Avatar */,
-				890C92C41F7BED77006144A5 /* ConfigTable */,
+				897083CC1F8CF08100233561 /* Form */,
 				416133301D46CA3100E09DA2 /* Cells */,
 				41F167E51DAC450200775CCA /* Chat */,
 				41ADDD471E9DBAE90007A458 /* Loader */,
@@ -1079,16 +1079,25 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
-		890C92C41F7BED77006144A5 /* ConfigTable */ = {
+		897083CC1F8CF08100233561 /* Form */ = {
 			isa = PBXGroup;
 			children = (
-				897083BF1F87D7C000233561 /* ConfigTableCellProtocol.swift */,
-				897083C01F87D7C000233561 /* ConfigTableCellBoolOptionCell.swift */,
-				897083C51F87D9E200233561 /* ConfigTableCellBoolOptionCell.xib */,
-				897083C11F87D7C000233561 /* ConfigTableCellTextFieldCell.swift */,
-				897083C71F87DA0900233561 /* ConfigTableCellTextFieldCell.xib */,
+				897083D21F8CF08100233561 /* FormTableViewCell.swift */,
+				897083CD1F8CF08100233561 /* Cells */,
 			);
-			name = ConfigTable;
+			name = Form;
+			path = Views/Form;
+			sourceTree = "<group>";
+		};
+		897083CD1F8CF08100233561 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				897083CE1F8CF08100233561 /* CheckTableViewCell.swift */,
+				897083CF1F8CF08100233561 /* CheckTableViewCell.xib */,
+				897083D01F8CF08100233561 /* TextFieldTableViewCell.swift */,
+				897083D11F8CF08100233561 /* TextFieldTableViewCell.xib */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		89AEB7F61F7D222A00112A09 /* Room */ = {
@@ -1335,14 +1344,13 @@
 				416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */,
 				4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */,
 				41CABFF81F5047D600E0B289 /* ChatLoaderCell.xib in Resources */,
-				897083C61F87D9E200233561 /* ConfigTableCellBoolOptionCell.xib in Resources */,
 				41D3A62E1E0805310011949D /* ChatMessageDaySeparator.xib in Resources */,
 				80235D261F74672D00A56CA5 /* LoaderTableViewCell.xib in Resources */,
 				418C4DC81DC4C08800ABED4C /* SubscriptionSectionView.xib in Resources */,
-				897083C81F87DA0900233561 /* ConfigTableCellTextFieldCell.xib in Resources */,
 				412E1F3C1DB6D55000531FDA /* ChatMessageURLView.xib in Resources */,
 				41833F4E1DEF16B600E54655 /* Keys.plist in Resources */,
 				41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */,
+				897083D41F8CF08100233561 /* CheckTableViewCell.xib in Resources */,
 				412731D51DE0A55C00FC45A0 /* ChatPreviewModeView.xib in Resources */,
 				41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */,
 				411F7D961F5179B50080E8AD /* ChatChannelHeaderCell.xib in Resources */,
@@ -1352,6 +1360,7 @@
 				4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */,
 				4116C52D1E69B15400AC4E43 /* GoogleService-Info.plist in Resources */,
 				41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */,
+				897083D61F8CF08100233561 /* TextFieldTableViewCell.xib in Resources */,
 				41D894041F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib in Resources */,
 				802498F31F7ACD76005477EC /* ChatMessageAudioView.xib in Resources */,
 				41EB22361E5F056600AA3AE7 /* Localizable.strings in Resources */,
@@ -1720,8 +1729,6 @@
 				41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */,
 				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
 				D1D535EC1F7081FA006625D2 /* API.swift in Sources */,
-				897083C21F87D7C100233561 /* ConfigTableCellProtocol.swift in Sources */,
-				897083C31F87D7C100233561 /* ConfigTableCellBoolOptionCell.swift in Sources */,
 				41DAE93E1D318F350098E068 /* Subscription.swift in Sources */,
 				41D4ABAB1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
@@ -1733,7 +1740,9 @@
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
 				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
+				897083D51F8CF08100233561 /* TextFieldTableViewCell.swift in Sources */,
 				802498EE1F7A8380005477EC /* MeRequest.swift in Sources */,
+				897083D71F8CF08100233561 /* FormTableViewCell.swift in Sources */,
 				412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */,
 				41CABFFA1F5047E200E0B289 /* ChatLoaderCell.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
@@ -1788,6 +1797,7 @@
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
+				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
 				597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */,
 				414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */,
 				41B4B2341E40B1D200F4D252 /* ChatControllerUploader.swift in Sources */,
@@ -1795,7 +1805,6 @@
 				419ECCA21F3C8F15005F224B /* ChatControllerHeaderStatus.swift in Sources */,
 				890C92C31F7BDF55006144A5 /* NewRoomViewController.swift in Sources */,
 				41D894021F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift in Sources */,
-				897083C41F87D7C100233561 /* ConfigTableCellTextFieldCell.swift in Sources */,
 				41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */,
 				41BD37DD1E290DDB00CBC4C2 /* BaseModel.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
