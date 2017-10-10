@@ -109,7 +109,7 @@ final class SignupViewController: BaseViewController {
         let email = textFieldEmail.text ?? ""
         let password = textFieldPassword.text ?? ""
 
-        AuthManager.signup(with: name, email, password) { [weak self] (response) in
+        AuthManager.signup(with: name, email, password, customFields: getCustomFieldsParams()) { [weak self] (response) in
             self?.stopLoading()
 
             if response.isError() {
@@ -142,6 +142,11 @@ final class SignupViewController: BaseViewController {
                 }
             }
         }
+    }
+
+    private func getCustomFieldsParams() -> [String: String] {
+        let pairs = customTextFields.map { (key: $0.placeholder ?? "", value: $0.text ?? "") }
+        return Dictionary(keyValuePairs: pairs)
     }
 }
 
