@@ -172,6 +172,8 @@
 		77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BA81501F87C4CB00F295F4 /* TextField.swift */; };
 		77CCB6BE1F8D0597004BBF67 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */; };
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
+		800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E22831F8500A200DA84F1 /* MessagesListViewController.swift */; };
+		800E22861F8507E400DA84F1 /* SubscriptionMessagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */; };
 		800FCD3E1F72893E00D9A692 /* MembersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */; };
 		800FCD4B1F728EC800D9A692 /* ChannelInfoBasicCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800FCD441F728E6A00D9A692 /* ChannelInfoBasicCell.swift */; };
 		800FCD4C1F728EC800D9A692 /* ChannelInfoCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800FCD451F728E6A00D9A692 /* ChannelInfoCellProtocol.swift */; };
@@ -418,6 +420,8 @@
 		77BA814E1F87B2BE00F295F4 /* SignupViewController+CustomFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignupViewController+CustomFields.swift"; sourceTree = "<group>"; };
 		77BA81501F87C4CB00F295F4 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DictionaryExtensions.swift; path = Extensions/DictionaryExtensions.swift; sourceTree = "<group>"; };
+		800E22831F8500A200DA84F1 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessagesListViewController.swift; path = Controllers/Chat/MessagesListViewController.swift; sourceTree = "<group>"; };
+		800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMessagesRequest.swift; sourceTree = "<group>"; };
 		800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MembersListViewController.swift; path = Controllers/Chat/MembersListViewController.swift; sourceTree = "<group>"; };
 		800FCD441F728E6A00D9A692 /* ChannelInfoBasicCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInfoBasicCell.swift; sourceTree = "<group>"; };
 		800FCD451F728E6A00D9A692 /* ChannelInfoCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInfoCellProtocol.swift; sourceTree = "<group>"; };
@@ -981,6 +985,7 @@
 		41E2FA021D414ECC00238DFD /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
 				800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */,
 				41E2FA061D41513C00238DFD /* ChatViewController.swift */,
 				41EE157D1E05BED600754D45 /* ChatControllerAutocomplete.swift */,
@@ -1057,6 +1062,7 @@
 			children = (
 				80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */,
 				80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */,
+				800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -1754,6 +1760,7 @@
 				4162E1531D651A8800AAAE49 /* UserManager.swift in Sources */,
 				4112BEEC1E7971A400E734CB /* MainChatViewController.swift in Sources */,
 				800FCD4C1F728EC800D9A692 /* ChannelInfoCellProtocol.swift in Sources */,
+				800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */,
 				419ECCA41F3CA21A005F224B /* DownloadManager.swift in Sources */,
 				419D85001DF599DA0021F034 /* ChatHeaderViewStatus.swift in Sources */,
 				41AC3CD91DCCA0C9002DC39A /* AutocompleteCell.swift in Sources */,
@@ -1762,6 +1769,7 @@
 				80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */,
 				4147CE7B1F5EA41000C322C3 /* ServersViewController.swift in Sources */,
 				411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */,
+				800E22861F8507E400DA84F1 /* SubscriptionMessagesRequest.swift in Sources */,
 				41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */,
 				41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */,
 				41D3A6301E0805490011949D /* ChatMessageDaySeparator.swift in Sources */,
