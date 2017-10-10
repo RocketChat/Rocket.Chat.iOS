@@ -11,28 +11,28 @@ import RealmSwift
 
 class NewRoomViewController: BaseViewController {
 
-    let tableViewData: [GroupOfConfigCell] = [
-        GroupOfConfigCell(
+    let tableViewData: [SectionForm] = [
+        SectionForm(
             name: nil,
             footer: nil,
             cells: [
-                ConfigTableCell(
-                    cell: .boolOption(title: localized("new_room.cell.public_channel.title"), description: localized("new_room.cell.public_chanell.description")),
+                FormCell(
+                    cell: .check(title: localized("new_room.cell.public_channel.title"), description: localized("new_room.cell.public_chanell.description")),
                     key: "public room",
                     defaultValue: true
                 ),
-                ConfigTableCell(
-                    cell: .boolOption(title: localized("new_room.cell.read_only.title"), description: localized("new_room.cell.read_only.description")),
+                FormCell(
+                    cell: .check(title: localized("new_room.cell.read_only.title"), description: localized("new_room.cell.read_only.description")),
                     key: "read only room",
                     defaultValue: false
                 )
             ]
         ),
-        GroupOfConfigCell(
+        SectionForm(
             name: localized("new_room.group.channel.name"),
             footer: localized("new_room.group.channel.footer"),
             cells: [
-                ConfigTableCell(
+                FormCell(
                     cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag")),
                     key: "room name",
                     defaultValue: ""
@@ -41,7 +41,7 @@ class NewRoomViewController: BaseViewController {
         )
     ]
 
-    var referenceOfCells: [String: ConfigTableCellProtocol] = [:]
+    var referenceOfCells: [String: FormTableViewCellProtocol] = [:]
     lazy var setValues: [String: Any] = {
         return tableViewData.reduce([String: Any]()) { (dict, entry) in
             var ndict = dict
@@ -53,8 +53,8 @@ class NewRoomViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
-        ConfigTableCellBoolOptionCell.registerCell(for: tableView)
-        ConfigTableCellTextFieldCell.registerCell(for: tableView)
+        CheckTableViewCell.registerCell(for: tableView)
+        TextFieldTableViewCell.registerCell(for: tableView)
     }
 
     fileprivate enum TypeAlerts {
@@ -129,18 +129,20 @@ class NewRoomViewController: BaseViewController {
     }
 }
 
-extension NewRoomViewController: ConfigTableCellDelegate {
+// MARK: FormTableViewDelegate
+
+extension NewRoomViewController: FormTableViewDelegate {
     func updateDictValue(key: String, value: Any) {
         setValues[key] = value
 
         if key == "public room",
             let value = value as? Bool,
-            let cellRoomName = referenceOfCells["room name"] as? ConfigTableCellTextFieldCell {
+            let cellRoomName = referenceOfCells["room name"] as? TextFieldTableViewCell {
 
             if value {
-                cellRoomName.imgRoomIcon.image = #imageLiteral(resourceName: "Hashtag")
+                cellRoomName.imgLeftIcon.image = #imageLiteral(resourceName: "Hashtag")
             } else {
-                cellRoomName.imgRoomIcon.image = #imageLiteral(resourceName: "Lock")
+                cellRoomName.imgLeftIcon.image = #imageLiteral(resourceName: "Lock")
             }
         }
     }

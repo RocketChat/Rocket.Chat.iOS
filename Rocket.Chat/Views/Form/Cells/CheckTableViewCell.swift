@@ -1,5 +1,5 @@
 //
-//  ConfigTableCellBoolOptionCell.swift
+//  CheckTableViewCell.swift
 //  Rocket.Chat
 //
 //  Created by Bruno Macabeus Aquino on 27/09/17.
@@ -8,11 +8,11 @@
 
 import Foundation
 
-class ConfigTableCellBoolOptionCell: UITableViewCell, ConfigTableCellProtocol {
-    static let identifier = "kConfigTableCellBoolOption"
-    static let xibFileName = "ConfigTableCellBoolOptionCell"
+class CheckTableViewCell: UITableViewCell, FormTableViewCellProtocol {
+    static let identifier = "kCheckTableViewCell"
+    static let xibFileName = "CheckTableViewCell"
     static let defaultHeight: Float = 56
-    weak var delegate: ConfigTableCellDelegate?
+    weak var delegate: FormTableViewDelegate?
     var key: String?
 
     @IBOutlet weak var labelTitle: UILabel!

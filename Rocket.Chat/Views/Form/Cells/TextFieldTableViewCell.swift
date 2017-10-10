@@ -1,5 +1,5 @@
 //
-//  ConfigTableCellTextFieldCell.swift
+//  TextFieldTableViewCell.swift
 //  Rocket.Chat
 //
 //  Created by Bruno Macabeus Aquino on 28/09/17.
@@ -8,14 +8,14 @@
 
 import Foundation
 
-class ConfigTableCellTextFieldCell: UITableViewCell, ConfigTableCellProtocol {
-    static let identifier = "kConfigTableCellTextField"
-    static let xibFileName = "ConfigTableCellTextFieldCell"
+class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
+    static let identifier = "kTextFieldTableViewCell"
+    static let xibFileName = "TextFieldTableViewCell"
     static let defaultHeight: Float = 40
-    weak var delegate: ConfigTableCellDelegate?
+    weak var delegate: FormTableViewDelegate?
     var key: String?
 
-    @IBOutlet weak var imgRoomIcon: UIImageView!
+    @IBOutlet weak var imgLeftIcon: UIImageView!
     @IBOutlet weak var textFieldInput: UITextField!
 
     override func awakeFromNib() {
