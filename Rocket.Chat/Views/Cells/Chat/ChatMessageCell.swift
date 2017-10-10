@@ -124,9 +124,8 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
-    func insertAttachments() {
-        var mediaViewHeight = CGFloat(0)
-
+    func insertURLs() -> CGFloat {
+        var addedHeight = CGFloat(0)
         message.urls.forEach { url in
             guard url.isValid() else { return }
             if let view = ChatMessageURLView.instantiateFromNib() {
@@ -134,9 +133,16 @@ final class ChatMessageCell: UICollectionViewCell {
                 view.delegate = delegate
 
                 mediaViews.addArrangedSubview(view)
-                mediaViewHeight += ChatMessageURLView.defaultHeight
+                addedHeight += ChatMessageURLView.defaultHeight
             }
         }
+        return addedHeight
+    }
+
+    func insertAttachments() {
+        var mediaViewHeight = CGFloat(0)
+
+        mediaViewHeight += insertURLs()
 
         message.attachments.forEach { attachment in
             let type = attachment.type
