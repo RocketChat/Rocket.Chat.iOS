@@ -10,11 +10,11 @@ import Foundation
 
 struct AppManager {
 
-    private static let kApplicationServerURLKey = "SERVER_URL"
+    private static let kApplicationServerURLKey = "RC_SERVER_URL"
 
     /**
      The app allows the user to fix a URL and disable the multi-server support
-     by adding the value "SERVER_URL" to the Info.plist file. This will imply
+     by adding the value "RC_SERVER_URL" to the Info.plist file. This will imply
      in not allowing the user to type a custom server URL when authenticating.
 
      - returns: The custom URL, if this app has some URL fixed in the settings.
