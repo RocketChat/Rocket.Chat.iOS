@@ -24,13 +24,25 @@ final class SignupViewController: BaseViewController {
     }
 
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fieldsContainerVerticalCenterConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fieldsContainerTopConstraint: NSLayoutConstraint!
+
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var fieldsContainer: UIStackView!
+    @IBOutlet weak var scrollView: UIScrollView!
+
+    var customTextFields: [UITextField] = []
 
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupCustomFields()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -110,6 +122,7 @@ final class SignupViewController: BaseViewController {
                 }
             } else {
                 if let user = AuthManager.currentUser() {
+
                     if user.username != nil {
                         self?.dismiss(animated: true, completion: nil)
 
@@ -127,7 +140,6 @@ final class SignupViewController: BaseViewController {
             }
         }
     }
-
 }
 
 extension SignupViewController: UITextFieldDelegate {
@@ -141,18 +153,19 @@ extension SignupViewController: UITextFieldDelegate {
             return false
         }
 
-        if textField == textFieldName {
-            textFieldEmail.becomeFirstResponder()
-        }
-
-        if textField == textFieldEmail {
-            textFieldPassword.becomeFirstResponder()
-        }
-
         if textField == textFieldPassword {
             signup()
+        } else {
+            makeNextFieldFirstResponder(after: textField)
         }
-
         return true
+    }
+
+    private func makeNextFieldFirstResponder(after textField: UITextField) {
+        let textViews = fieldsContainer.arrangedSubviews.filter { $0 is UITextField }
+        if let currentTextFieldIndex = textViews.index(of: textField) {
+            let nextTextFieldIndex = textViews.index(after: currentTextFieldIndex)
+            textViews[nextTextFieldIndex].becomeFirstResponder()
+        }
     }
 }

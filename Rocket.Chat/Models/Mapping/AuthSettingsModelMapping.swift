@@ -49,13 +49,39 @@ extension AuthSettings: ModelMappeable {
         self.hideMessageUserAdded = objectForKey(object: values, key: "Message_HideType_au")?.bool ?? false
         self.hideMessageUserMutedUnmuted = objectForKey(object: values, key: "Message_HideType_mute_unmute")?.bool ?? false
         self.hideMessageUserRemoved = objectForKey(object: values, key: "Message_HideType_ru")?.bool ?? false
+
+        self.rawCustomFields = objectForKey(object: values, key: "Accounts_CustomFields")?
+            .string?
+            .removingWhitespaces()
     }
 
     fileprivate func objectForKey(object: JSON, key: String) -> JSON? {
         let result = object.array?.filter { obj in
             return obj["_id"].string == key
-        }.first
+            }.first
 
         return result?["value"]
+    }
+
+    private func getCustomFields(from rawString: String?) -> [CustomField] {
+        guard let encodedString = rawString?
+            .data(using: .utf8, allowLossyConversion: false) else {
+                return []
+        }
+        do {
+            let customFields = try JSON(data: encodedString)
+
+            return customFields.map { (key, value) -> CustomField in
+                let field = CustomField.chooseType(from: value, name: key)
+                field.map(value, realm: realm)
+                return field
+            }
+        } catch {
+            print(error)
+            return []
+        }
+    }
+    var customFields: [CustomField] {
+        return getCustomFields(from: rawCustomFields)
     }
 }
