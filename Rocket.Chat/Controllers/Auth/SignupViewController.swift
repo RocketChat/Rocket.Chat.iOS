@@ -69,6 +69,7 @@ final class SignupViewController: BaseViewController {
         textFieldName.alpha = 0.5
         textFieldEmail.alpha = 0.5
         textFieldPassword.alpha = 0.5
+        customTextFields.forEach { $0.alpha = 0.5 }
 
         requesting = true
 
@@ -76,12 +77,14 @@ final class SignupViewController: BaseViewController {
         textFieldName.resignFirstResponder()
         textFieldEmail.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
+        customTextFields.forEach { $0.resignFirstResponder() }
     }
 
     func stopLoading() {
         textFieldName.alpha = 1
         textFieldEmail.alpha = 1
         textFieldPassword.alpha = 1
+        customTextFields.forEach { $0.alpha = 1 }
 
         requesting = false
         activityIndicator.stopAnimating()
