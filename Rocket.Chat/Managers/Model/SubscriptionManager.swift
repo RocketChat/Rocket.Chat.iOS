@@ -10,7 +10,6 @@ import Foundation
 import RealmSwift
 
 struct SubscriptionManager {
-
     static func updateUnreadApplicationBadge() {
         var unread = 0
 
@@ -171,6 +170,7 @@ struct SubscriptionManager {
             })
         }
     }
+}
 
     static func subscribeRoomChanges() {
         guard let user = AuthManager.currentUser() else { return }
@@ -203,8 +203,11 @@ struct SubscriptionManager {
             })
         }
     }
+}
 
-    // MARK: Typing
+// MARK: Typing
+
+extension SubscriptionManager {
 
     static func subscribeTypingEvent(_ subscription: Subscription, completion: @escaping (String?, Bool) -> Void) {
         let eventName = "\(subscription.rid)/typing"
@@ -241,9 +244,11 @@ struct SubscriptionManager {
             completion?(response)
         }
     }
+}
 
-    // MARK: Search
+// MARK: Search
 
+extension SubscriptionManager {
     static func spotlight(_ text: String, completion: @escaping MessageCompletionObjectsList<Subscription>) {
         let request = [
             "msg": "method",
@@ -306,9 +311,11 @@ struct SubscriptionManager {
             })
         }
     }
+}
 
-    // MARK: Rooms, Groups & DMs
+// MARK: Rooms, Groups & DMs
 
+extension SubscriptionManager {
     static func createDirectMessage(_ username: String, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
@@ -347,9 +354,11 @@ struct SubscriptionManager {
             completion(response)
         }
     }
+}
 
-    // MARK: Messages
+// MARK: Messages
 
+extension SubscriptionManager {
     static func markAsRead(_ subscription: Subscription, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",

@@ -41,6 +41,9 @@ class SubscriptionsPageViewController: UIPageViewController {
         pageControl.numberOfPages = 2
         pageControl.currentPage = 1
         view.addSubview(pageControl)
+
+        pageControl.addTarget(self, action: #selector(SubscriptionsPageViewController.dotTapped(pageControl:)), for: .touchUpInside)
+
         self.pageControl = pageControl
 
         // Setup ViewControllers
@@ -84,6 +87,14 @@ class SubscriptionsPageViewController: UIPageViewController {
         guard let subscriptionsController = self.subscriptionsController else { return }
         setViewControllers([subscriptionsController], direction: .forward, animated: animated, completion: nil)
         pageControl?.currentPage = 1
+    }
+
+    @objc private func dotTapped(pageControl: UIPageControl) {
+        if pageControl.currentPage == 0 {
+            showServersList()
+        } else if pageControl.currentPage == 1 {
+            showSubscriptionsList()
+        }
     }
 
 }

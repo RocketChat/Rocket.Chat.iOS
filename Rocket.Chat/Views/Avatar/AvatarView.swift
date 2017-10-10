@@ -89,16 +89,16 @@ final class AvatarView: UIView {
 
             let lastOffset = strings.count > 1 ? 1 : 2
             let indexFirst = first.index(first.startIndex, offsetBy: 1)
-            let firstString = first.substring(to: indexFirst)
+            let firstString = first[..<indexFirst]
 
-            var lastString = ""
+            var lastString: Substring = ""
             if last.characters.count >= lastOffset {
                 let indexLast = last.index(last.startIndex, offsetBy: lastOffset)
-                lastString = last.substring(to: indexLast)
+                lastString = last[..<indexLast]
 
                 if lastOffset == 2 {
                     let endIndex = lastString.index(lastString.startIndex, offsetBy: 1)
-                    lastString = lastString.substring(from: endIndex)
+                    lastString = lastString[endIndex...]
                 }
             }
 

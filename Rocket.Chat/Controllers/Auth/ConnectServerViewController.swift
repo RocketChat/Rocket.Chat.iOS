@@ -14,7 +14,15 @@ final class ConnectServerViewController: BaseViewController {
 
     internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
-    internal var serverURL: URL!
+    var url: URL? {
+        guard var urlText = textFieldServerURL.text else { return nil }
+        if urlText.isEmpty {
+            urlText = defaultURL
+        }
+        guard let normalizedURL = normalizeInputURL(urlText) else { return nil }
+
+        return URL(string: normalizedURL)
+    }
 
     var serverPublicSettings: AuthSettings?
 
@@ -81,7 +89,7 @@ final class ConnectServerViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
-            controller.serverURL = serverURL
+            controller.serverURL = url?.socketURL()
             controller.serverPublicSettings = self.serverPublicSettings
         }
     }
@@ -149,15 +157,9 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     func connect() {
-        guard var urlText = textFieldServerURL.text else { return alertInvalidURL() }
-        if urlText.isEmpty {
-            urlText = defaultURL
-        }
-        guard let normalizedURL = normalizeInputURL(urlText) else { return alertInvalidURL() }
+        textFieldServerURL.text = url?.absoluteString
 
-        textFieldServerURL.text = normalizedURL
-
-        guard let url = URL(string: normalizedURL) else { return alertInvalidURL() }
+        guard let url = url else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
 
         API.shared.host = url
@@ -185,8 +187,6 @@ final class ConnectServerViewController: BaseViewController {
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
-
-        serverURL = socketURL
 
         validate { [weak self] (_, error) in
             guard !error else {
@@ -256,4 +256,3 @@ extension ConnectServerViewController: UITextFieldDelegate {
     }
 
 }
-
