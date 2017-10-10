@@ -170,7 +170,6 @@ struct SubscriptionManager {
             })
         }
     }
-}
 
     static func subscribeRoomChanges() {
         guard let user = AuthManager.currentUser() else { return }
