@@ -36,6 +36,7 @@ class SubscriptionsPageViewController: UIPageViewController {
         let pageControl = UIPageControl()
         pageControl.numberOfPages = 2
         pageControl.currentPage = 1
+        pageControl.isHidden = !AppManager.supportsMultiServer
         view.addSubview(pageControl)
 
         pageControl.addTarget(self, action: #selector(SubscriptionsPageViewController.dotTapped(pageControl:)), for: .touchUpInside)
@@ -74,6 +75,7 @@ class SubscriptionsPageViewController: UIPageViewController {
     // MARK: Change controllers externally
 
     func showServersList(animated: Bool = true) {
+        guard AppManager.supportsMultiServer else { return }
         guard let serversController = self.serversController else { return }
         setViewControllers([serversController], direction: .reverse, animated: animated, completion: nil)
         pageControl?.currentPage = 0
@@ -112,6 +114,8 @@ extension SubscriptionsPageViewController: UIPageViewControllerDelegate {
 extension SubscriptionsPageViewController: UIPageViewControllerDataSource {
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard AppManager.supportsMultiServer else { return nil }
+
         if viewController == subscriptionsController {
             return serversController
         }
@@ -120,6 +124,8 @@ extension SubscriptionsPageViewController: UIPageViewControllerDataSource {
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard AppManager.supportsMultiServer else { return nil }
+
         if viewController == serversController {
             return subscriptionsController
         }
