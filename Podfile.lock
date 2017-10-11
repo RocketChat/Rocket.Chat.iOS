@@ -69,7 +69,7 @@ DEPENDENCIES:
   - semver (from `https://github.com/rafaelks/Semver.Swift.git`, branch `chore/swift4`)
   - SideMenuController (from `https://github.com/rafaelks/SideMenuController.git`)
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
-  - SlackTextViewController (from `~/dev/RocketChat/SlackTextViewController`)
+  - SlackTextViewController (from `https://github.com/cardoso/SlackTextViewController.git`, branch `feat/addon_view`)
   - Starscream (from `https://github.com/daltoniam/Starscream.git`, branch `swift4`)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, tag `4.0.0-alpha.1`)
 
@@ -85,7 +85,8 @@ EXTERNAL SOURCES:
   SimpleImageViewer:
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
-    :path: ~/dev/RocketChat/SlackTextViewController
+    :branch: feat/addon_view
+    :git: https://github.com/cardoso/SlackTextViewController.git
   Starscream:
     :branch: swift4
     :git: https://github.com/daltoniam/Starscream.git
@@ -106,6 +107,9 @@ CHECKOUT OPTIONS:
   SimpleImageViewer:
     :commit: 26b54aefeced8039e85f1174ed5e2cd2dfc0251f
     :git: https://github.com/cardoso/SimpleImageViewer.git
+  SlackTextViewController:
+    :commit: 2369294186bf7e8a8ec23f592cd8d38c4dfe2c50
+    :git: https://github.com/cardoso/SlackTextViewController.git
   Starscream:
     :commit: e9d10000eca3f682650fb674eecc73ad709b316a
     :git: https://github.com/daltoniam/Starscream.git
@@ -138,6 +142,6 @@ SPEC CHECKSUMS:
   Starscream: 087670fe088bb12c04398fc343442a4b9eb96b86
   SwiftyJSON: c4d27c2ca659d5c91460cd17cc60fd212b26074d
 
-PODFILE CHECKSUM: b0f0d8a5dac999b06aa0c3bdbdbefa5bd0352a44
+PODFILE CHECKSUM: 9e27ced1a2b8a0b75db38b5f76f4d237bdcc9717
 
 COCOAPODS: 1.3.1

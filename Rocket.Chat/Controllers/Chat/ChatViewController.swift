@@ -52,6 +52,7 @@ final class ChatViewController: SLKTextViewController {
     var documentController: UIDocumentInteractionController?
 
     var replyView: ReplyView!
+    var replyString: String = ""
 
     var dataController = ChatDataController()
 
@@ -297,6 +298,9 @@ final class ChatViewController: SLKTextViewController {
     fileprivate func sendMessage() {
         guard let messageText = textView.text, messageText.characters.count > 0 else { return }
 
+        let replyString = self.replyString
+        stopReplying()
+
         self.scrollToBottom()
         rightButton.isEnabled = false
 
@@ -305,7 +309,7 @@ final class ChatViewController: SLKTextViewController {
             message = Message()
             message?.internalType = ""
             message?.createdAt = Date.serverDate
-            message?.text = messageText
+            message?.text = "\(messageText)\(replyString)"
             message?.subscription = self.subscription
             message?.identifier = String.random(18)
             message?.temporary = true
@@ -839,6 +843,34 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
 // MARK: ReplyView
 
 extension ChatViewController {
+    func quoteStringFor(_ message: Message) -> String? {
+        guard let url = subscription.auth?.baseURL() else { return nil }
+        guard let id = message.identifier else { return nil }
+
+        let path: String
+
+        switch subscription.type {
+        case .channel:
+            path = "channel"
+        case .group:
+            path = "group"
+        case .directMessage:
+            path = "direct"
+        }
+
+        return " [ ](\(url)/\(path)/\(subscription.name)?msg=\(id))"
+    }
+
+    func replyStringFor(_ message: Message) -> String? {
+        guard let quoteString = quoteStringFor(message) else { return nil }
+
+        guard subscription.type != .directMessage, let username = message.user?.username, username != AuthManager.currentUser()?.username else {
+            return quoteString
+        }
+
+        return " @\(username)\(quoteString)"
+    }
+
     func setupReplyView() {
         replyView = ReplyView.instantiateFromNib()
         replyView.backgroundColor = textInputbar.addonContentView.backgroundColor
@@ -848,7 +880,7 @@ extension ChatViewController {
         textInputbar.addonContentView.addSubview(replyView)
     }
 
-    func reply(to message: Message) {
+    func reply(to message: Message, onlyQuote: Bool = false) {
         textInputbar.addonContentViewHeight = 50
         replyView.username.text = message.user?.username
         replyView.message.text = message.text
@@ -858,6 +890,10 @@ extension ChatViewController {
         textDidUpdate(false)
 
         textView.becomeFirstResponder()
+
+        replyString = (onlyQuote ? quoteStringFor(message) : replyStringFor(message)) ?? ""
+
+        scrollToBottom()
     }
 
     func stopReplying() {
@@ -866,5 +902,7 @@ extension ChatViewController {
         textInputbar.layoutIfNeeded()
         replyView.frame = textInputbar.addonContentView.bounds
         textDidUpdate(false)
+
+        replyString = ""
     }
 }
