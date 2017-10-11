@@ -282,14 +282,14 @@ final class ChatViewController: SLKTextViewController {
     override func textViewDidChange(_ textView: UITextView) {
         if textView.text.isEmpty {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
-            stopReplying()
+            //stopReplying()
         } else {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
-            let message = Message()
-            message.user = User()
-            message.user?.username = "TesteUser"
-            message.text = "TestMessage"
-            reply(to: message)
+            //let message = Message()
+            //message.user = User()
+            //message.user?.username = "TesteUser"
+            //message.text = "TestMessage"
+            //reply(to: message)
         }
     }
 
@@ -841,10 +841,11 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
 extension ChatViewController {
     func setupReplyView() {
         replyView = ReplyView.instantiateFromNib()
-        textInputbar.addonContentView.addSubview(replyView)
         replyView.backgroundColor = textInputbar.addonContentView.backgroundColor
         replyView.frame = textInputbar.addonContentView.bounds
         replyView.onClose = stopReplying
+
+        textInputbar.addonContentView.addSubview(replyView)
     }
 
     func reply(to message: Message) {
@@ -854,12 +855,16 @@ extension ChatViewController {
 
         textInputbar.layoutIfNeeded()
         replyView.frame = textInputbar.addonContentView.bounds
+        textDidUpdate(false)
+
+        textView.becomeFirstResponder()
     }
 
     func stopReplying() {
         textInputbar.addonContentViewHeight = 0
+
         textInputbar.layoutIfNeeded()
         replyView.frame = textInputbar.addonContentView.bounds
-        textInputbar.layoutIfNeeded()
+        textDidUpdate(false)
     }
 }
