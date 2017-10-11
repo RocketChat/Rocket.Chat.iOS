@@ -69,6 +69,7 @@
 "chat.message.actions.pin" = "Nachricht anheften";
 "chat.message.actions.unpin" = "Nachricht lösen";
 "chat.message.actions.quote" = "Nachricht zitieren";
+"chat.message.actions.reply" = "Nachricht beantworten";
 
 // Chat Message Report
 "chat.message.report.success.title" = "Nachricht gemeldet";
