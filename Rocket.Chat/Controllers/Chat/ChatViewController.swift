@@ -881,13 +881,20 @@ extension ChatViewController {
     }
 
     func reply(to message: Message, onlyQuote: Bool = false) {
-        textInputbar.addonContentViewHeight = 50
+        replyView.alpha = 0
         replyView.username.text = message.user?.username
         replyView.message.text = message.text
 
-        textInputbar.layoutIfNeeded()
-        replyView.frame = textInputbar.addonContentView.bounds
-        textDidUpdate(false)
+        UIView.animate(withDuration: 0.25, animations: ({
+            self.textInputbar.addonContentViewHeight = 50
+            self.textInputbar.layoutIfNeeded()
+            self.replyView.frame = self.textInputbar.addonContentView.bounds
+            self.textDidUpdate(false)
+        }), completion: ({ _ in
+            UIView.animate(withDuration: 0.25) {
+                self.replyView.alpha = 1
+            }
+        }))
 
         textView.becomeFirstResponder()
 
@@ -897,11 +904,18 @@ extension ChatViewController {
     }
 
     func stopReplying() {
-        textInputbar.addonContentViewHeight = 0
+        replyView.alpha = 1
 
-        textInputbar.layoutIfNeeded()
-        replyView.frame = textInputbar.addonContentView.bounds
-        textDidUpdate(false)
+        UIView.animate(withDuration: 0.25, animations: ({
+            self.replyView.alpha = 0
+        }), completion: ({ _ in
+            UIView.animate(withDuration: 0.25) {
+                self.textInputbar.addonContentViewHeight = 0
+                self.textInputbar.layoutIfNeeded()
+                self.replyView.frame = self.textInputbar.addonContentView.bounds
+                self.textDidUpdate(false)
+            }
+        }))
 
         replyString = ""
     }
