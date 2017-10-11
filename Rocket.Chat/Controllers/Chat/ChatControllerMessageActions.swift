@@ -9,25 +9,6 @@
 import UIKit
 
 extension ChatViewController {
-
-    fileprivate func quoteStringFor(_ message: Message) -> String? {
-        guard let url = subscription.auth?.baseURL() else { return nil }
-        guard let id = message.identifier else { return nil }
-
-        let path: String
-
-        switch subscription.type {
-        case .channel:
-            path = "channel"
-        case .group:
-            path = "group"
-        case .directMessage:
-            path = "direct"
-        }
-
-        return "[ ](\(url)/\(path)/\(subscription.name)?msg=\(id))"
-    }
-
     func presentActionsFor(_ message: Message, view: UIView) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
@@ -63,10 +44,7 @@ extension ChatViewController {
         }))
 
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { [weak self] (_) in
-            guard let quoteString = self?.quoteStringFor(message) else { return }
-            guard let text = self?.textView.text else { return }
-
-            self?.textView.text = "\(text) \(quoteString)"
+            self?.reply(to: message, onlyQuote: true)
         }))
 
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { [weak self] (_) in
