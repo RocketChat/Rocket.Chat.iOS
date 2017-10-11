@@ -51,6 +51,8 @@ final class ChatViewController: SLKTextViewController {
     weak var chatHeaderViewStatus: ChatHeaderViewStatus?
     var documentController: UIDocumentInteractionController?
 
+    var replyView: ReplyView!
+
     var dataController = ChatDataController()
 
     var searchResult: [String: Any] = [:]
@@ -141,6 +143,8 @@ final class ChatViewController: SLKTextViewController {
             buttonScrollToBottomMarginConstraint = buttonScrollToBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
             buttonScrollToBottomMarginConstraint?.isActive = true
         }
+
+        setupReplyView()
     }
 
     @objc internal func reconnect() {
@@ -278,8 +282,14 @@ final class ChatViewController: SLKTextViewController {
     override func textViewDidChange(_ textView: UITextView) {
         if textView.text.isEmpty {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+            stopReplying()
         } else {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
+            let message = Message()
+            message.user = User()
+            message.user?.username = "TesteUser"
+            message.text = "TestMessage"
+            reply(to: message)
         }
     }
 
@@ -824,4 +834,32 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         self.subscription = subscription
     }
 
+}
+
+// MARK: ReplyView
+
+extension ChatViewController {
+    func setupReplyView() {
+        replyView = ReplyView.instantiateFromNib()
+        textInputbar.addonContentView.addSubview(replyView)
+        replyView.backgroundColor = textInputbar.addonContentView.backgroundColor
+        replyView.frame = textInputbar.addonContentView.bounds
+        replyView.onClose = stopReplying
+    }
+
+    func reply(to message: Message) {
+        textInputbar.addonContentViewHeight = 50
+        replyView.username.text = message.user?.username
+        replyView.message.text = message.text
+
+        textInputbar.layoutIfNeeded()
+        replyView.frame = textInputbar.addonContentView.bounds
+    }
+
+    func stopReplying() {
+        textInputbar.addonContentViewHeight = 0
+        textInputbar.layoutIfNeeded()
+        replyView.frame = textInputbar.addonContentView.bounds
+        textInputbar.layoutIfNeeded()
+    }
 }

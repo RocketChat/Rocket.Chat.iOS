@@ -80,6 +80,8 @@ extension ChatViewController {
             }
 
             self?.textView.text = "\(text) \(quoteString)\(mention)"
+
+            self?.reply(to: message)
         }))
 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
@@ -106,5 +108,4 @@ extension ChatViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
-
 }
