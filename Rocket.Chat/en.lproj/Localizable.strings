@@ -76,6 +76,7 @@
 "chat.message.actions.pin" = "Pin message";
 "chat.message.actions.unpin" = "Unpin message";
 "chat.message.actions.quote" = "Quote message";
+"chat.message.actions.reply" = "Reply to message";
 
 // Chat Message Report
 "chat.message.report.success.title" = "Message Reported";
