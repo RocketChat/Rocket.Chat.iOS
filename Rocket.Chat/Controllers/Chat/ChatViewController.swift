@@ -9,6 +9,7 @@
 import RealmSwift
 import SlackTextViewController
 import SimpleImageViewer
+import AudioToolbox
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
@@ -100,9 +101,12 @@ final class ChatViewController: SLKTextViewController {
 
         rightButton.isEnabled = false
 
+        textInputbar.rightButton.layer.zPosition = 2
+
         recorderManager = AudioMessageRecorder()
         recorderManager?.set(recorderDelegate: self)
 
+        removeToolbarRightButtonSelectors()
         setupToolbarRightButtonWithAudioRecorder()
         setupTitleView()
         setupTextViewSettings()
@@ -198,6 +202,7 @@ final class ChatViewController: SLKTextViewController {
 
         textInputbar.rightButton.addTarget(self, action: #selector(recordAudioMessage), for: .touchDown)
         textInputbar.rightButton.addTarget(self, action: #selector(stopAudioRecord), for: .touchUpInside)
+        textInputbar.rightButton.addTarget(self, action: #selector(stopAudioRecord), for: .touchCancel)
     }
 
     fileprivate func setupToolbarRightButtonWithMessageSender() {
@@ -210,6 +215,7 @@ final class ChatViewController: SLKTextViewController {
     fileprivate func removeToolbarRightButtonSelectors() {
         textInputbar.rightButton.removeTarget(self, action: #selector(recordAudioMessage), for: .touchDown)
         textInputbar.rightButton.removeTarget(self, action: #selector(stopAudioRecord), for: .touchUpInside)
+        textInputbar.rightButton.removeTarget(self, action: #selector(stopAudioRecord), for: .touchCancel)
         textInputbar.rightButton.removeTarget(self, action: #selector(sendMessage), for: .touchUpInside)
     }
 
