@@ -711,6 +711,8 @@ final class ChatViewController: SLKTextViewController {
         textInputbar.rightButton.tintColor = UIColor.white
         textInputbar.rightButton.addSubview(circleView)
 
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+
         recorderManager?.record()
     }
 
