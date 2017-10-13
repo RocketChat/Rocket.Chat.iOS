@@ -80,7 +80,31 @@ extension MessageManagerSpec {
         })
     }
 
-    func testAllMessagesReturnsMessagesNotHidden() {
+    func testHideMessagesUserJoined() {
+        Realm.executeOnMainThread { realm in
+            let subscription = Subscription()
+            subscription.identifier = "subscription"
+            realm.add([subscription])
+
+            AuthSettingsManager.shared.internalSettings = AuthSettings()
+
+            let message1 = Message()
+            message1.identifier = "msg1"
+            message1.subscription = subscription
+            realm.add([message1])
+
+            message1.internalType = MessageType.userJoined.rawValue
+
+            AuthSettingsManager.settings?.hideMessageUserJoined = false
+            var messages = subscription.fetchMessagesQueryResults()
+            XCTAssert(messages.count == 1, "fetchMessages() will return userJoined when it's not hidden")
+            AuthSettingsManager.settings?.hideMessageUserJoined = true
+            messages = subscription.fetchMessagesQueryResults()
+            XCTAssert(messages.count == 0, "fetchMessages() will not return userJoined when it's hidden")
+        }
+    }
+
+    func testHideMessagesUserLeft() {
         Realm.executeOnMainThread({ realm in
             let subscription = Subscription()
             subscription.identifier = "subscription"
@@ -93,51 +117,81 @@ extension MessageManagerSpec {
             message1.subscription = subscription
             realm.add([message1])
 
-            // userJoined
-
-            message1.internalType = MessageType.userJoined.rawValue
-
-            AuthSettingsManager.settings?.hideMessageUserJoined = false
-            var messages = subscription.fetchMessagesQueryResults()
-            XCTAssert(messages.count == 1, "fetchMessages() will return userJoined when it's not hidden")
-            AuthSettingsManager.settings?.hideMessageUserJoined = true
-            messages = subscription.fetchMessagesQueryResults()
-            XCTAssert(messages.count == 0, "fetchMessages() will not return userJoined when it's hidden")
-
             // userLeft
 
             message1.internalType = MessageType.userLeft.rawValue
 
             AuthSettingsManager.settings?.hideMessageUserLeft = false
-            messages = subscription.fetchMessagesQueryResults()
+            var messages = subscription.fetchMessagesQueryResults()
             XCTAssert(messages.count == 1, "fetchMessages() will return userLeft when it's not hidden")
             AuthSettingsManager.settings?.hideMessageUserLeft = true
             messages = subscription.fetchMessagesQueryResults()
             XCTAssert(messages.count == 0, "fetchMessages() will not return userLeft when it's hidden")
+        })
+    }
+
+    func testHideMessagesUserAdded() {
+        Realm.executeOnMainThread({ realm in
+            let subscription = Subscription()
+            subscription.identifier = "subscription"
+            realm.add([subscription])
+
+            AuthSettingsManager.shared.internalSettings = AuthSettings()
+
+            let message1 = Message()
+            message1.identifier = "msg1"
+            message1.subscription = subscription
+            realm.add([message1])
 
             // userAdded
 
             message1.internalType = MessageType.userAdded.rawValue
 
             AuthSettingsManager.settings?.hideMessageUserAdded = false
-            messages = subscription.fetchMessagesQueryResults()
+            var messages = subscription.fetchMessagesQueryResults()
             XCTAssert(messages.count == 1, "fetchMessages() will return userAdded when it's not hidden")
             AuthSettingsManager.settings?.hideMessageUserAdded = true
             messages = subscription.fetchMessagesQueryResults()
             XCTAssert(messages.count == 0, "fetchMessages() will not return userAdded when it's hidden")
+        })
+    }
 
-            // userRemoved
+    func testHideMessagesUserRemoved() {
+        Realm.executeOnMainThread({ realm in
+            let subscription = Subscription()
+            subscription.identifier = "subscription"
+            realm.add([subscription])
+
+            AuthSettingsManager.shared.internalSettings = AuthSettings()
+
+            let message1 = Message()
+            message1.identifier = "msg1"
+            message1.subscription = subscription
+            realm.add([message1])
 
             message1.internalType = MessageType.userRemoved.rawValue
 
             AuthSettingsManager.settings?.hideMessageUserRemoved = false
-            messages = subscription.fetchMessagesQueryResults()
+            var messages = subscription.fetchMessagesQueryResults()
             XCTAssert(messages.count == 1, "fetchMessages() will return userRemoved when it's not hidden")
             AuthSettingsManager.settings?.hideMessageUserRemoved = true
             messages = subscription.fetchMessagesQueryResults()
             XCTAssert(messages.count == 0, "fetchMessages() will not return userRemoved when it's hidden")
+        })
+    }
 
-            // userMutedUnmuted
+    func testHideMessagesUserMutedUnmuted() {
+        Realm.executeOnMainThread({ realm in
+            let subscription = Subscription()
+            subscription.identifier = "subscription"
+            realm.add([subscription])
+
+            AuthSettingsManager.shared.internalSettings = AuthSettings()
+
+            let message1 = Message()
+            message1.identifier = "msg1"
+            message1.subscription = subscription
+            realm.add([message1])
 
             message1.internalType = MessageType.userMuted.rawValue
 
@@ -148,7 +202,7 @@ extension MessageManagerSpec {
             realm.add([message2])
 
             AuthSettingsManager.settings?.hideMessageUserMutedUnmuted = false
-            messages = subscription.fetchMessagesQueryResults()
+            var messages = subscription.fetchMessagesQueryResults()
             XCTAssert(messages.count == 2, "fetchMessages() will return userMuted or userUnmuted when they're not hidden")
             AuthSettingsManager.settings?.hideMessageUserMutedUnmuted = true
             messages = subscription.fetchMessagesQueryResults()
