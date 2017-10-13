@@ -679,13 +679,49 @@ final class ChatViewController: SLKTextViewController {
         scrollToBottom(true)
     }
 
+    // MARK: Right Button Background View
+
+    var microphoneCircleView: UIView?
+
+    fileprivate func createCircleView() -> UIView? {
+        guard let imageViewFrameSize = textInputbar.rightButton.imageView?.frame.size else { return nil }
+
+        let circleView = UIView(frame: CGRect(x: imageViewFrameSize.width / 2, y: imageViewFrameSize.height / 2, width: 0, height: 0))
+        circleView.layer.cornerRadius = 65
+        circleView.layer.zPosition = -1
+        circleView.backgroundColor = view.tintColor
+
+        UIView.animate(withDuration: 0.2) {
+            circleView.frame.size = CGSize(width: 130, height: 130)
+        }
+
+        circleView.layer.anchorPoint = CGPoint(x: 1.0, y: 1.0)
+
+        return circleView
+    }
+
     // MARK: Audio Message Recorder Helpers
 
     @objc func recordAudioMessage() {
+        microphoneCircleView = createCircleView()
+
+        guard let circleView = microphoneCircleView else { return }
+
+        textInputbar.rightButton.setTitleColor(UIColor.white, for: .highlighted)
+        textInputbar.rightButton.tintColor = UIColor.white
+        textInputbar.rightButton.addSubview(circleView)
+
         recorderManager?.record()
     }
 
     @objc func stopAudioRecord() {
+        if let circleView = microphoneCircleView {
+            circleView.removeFromSuperview()
+        }
+
+        textInputbar.rightButton.tintColor = view.tintColor
+        self.textView.resignFirstResponder()
+
         recorderManager?.stop()
     }
 }
