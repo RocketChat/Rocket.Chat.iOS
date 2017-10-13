@@ -159,7 +159,9 @@ extension AuthManager {
     */
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
+        guard let urlApi = URL(string: auth.serverApiURL) else { return }
 
+        API.shared.host = urlApi
         API.shared.authToken = auth.token
         API.shared.userId = auth.userId
 
