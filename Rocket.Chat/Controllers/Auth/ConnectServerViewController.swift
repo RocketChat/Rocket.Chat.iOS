@@ -167,8 +167,6 @@ final class ConnectServerViewController: BaseViewController {
         guard let url = url else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
 
-        API.shared.host = url
-
         // Check if server already exists and connect to that instead
         if let servers = DatabaseManager.servers {
             let sameServerIndex = servers.index(where: {
@@ -193,6 +191,7 @@ final class ConnectServerViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
 
+        API.shared.host = url
         validate { [weak self] (_, error) in
             guard !error else {
                 DispatchQueue.main.async {
