@@ -72,6 +72,8 @@
 	<string>To take photos and upload it</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To upload photos from your library</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To record audio messages and upload it</string>
 	<key>RC_MIN_SERVER_VERSION</key>
 	<string>0.54.0</string>
 	<key>UIBackgroundModes</key>
