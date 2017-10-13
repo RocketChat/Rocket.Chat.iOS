@@ -40,6 +40,7 @@ class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return visibleAttributes
     }
 
+    // swiftlint:disable cyclomatic_complexity 
     override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
         // Check where new items get inserted
         // ════════════════════════════════════════════════════════════
