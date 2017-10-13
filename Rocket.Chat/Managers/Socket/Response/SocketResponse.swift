@@ -15,7 +15,6 @@ public struct SocketResponse {
     var result: JSON
 
     // JSON Data
-    // swiftlint:disable variable_name
     var id: String?
     var msg: ResponseMessage?
     var collection: String?
