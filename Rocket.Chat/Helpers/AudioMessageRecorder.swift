@@ -12,11 +12,7 @@ import AVFoundation
 class AudioMessageRecorder: NSObject, AVAudioRecorderDelegate {
 
     private var recorder: AVAudioRecorder?
-
-    override init() {
-        super.init()
-        setUpPermission()
-    }
+    private var recorderDelegate: AVAudioRecorderDelegate? = nil
 
     // MARK: Audio Session Helpers
 
@@ -63,7 +59,7 @@ class AudioMessageRecorder: NSObject, AVAudioRecorderDelegate {
         } catch let outError {
             print("Error for recorder init: \(outError).")
         }
-        recorder?.delegate = self
+        recorder?.delegate = recorderDelegate
         recorder?.isMeteringEnabled = true
         recorder?.prepareToRecord()
     }
@@ -80,21 +76,22 @@ class AudioMessageRecorder: NSObject, AVAudioRecorderDelegate {
     // MARK: Audio Recorder Methods
 
     func set(recorderDelegate: AVAudioRecorderDelegate) {
-        recorder?.delegate = recorderDelegate
+        self.recorderDelegate = recorderDelegate
     }
 
     func record() {
-        guard let audioRecorder = recorder else { return }
-
-        if !audioRecorder.isRecording {
-            setSession(active: true)
-            audioRecorder.record()
+        if let audioRecorder = recorder {
+            if !audioRecorder.isRecording {
+                setSession(active: true)
+                audioRecorder.record()
+            }
+        } else {
+            setUpPermission()
         }
     }
 
     func stop() {
         recorder?.stop()
-
         setSession(active: false)
     }
 }
