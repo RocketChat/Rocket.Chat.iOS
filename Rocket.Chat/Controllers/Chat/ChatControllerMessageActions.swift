@@ -69,6 +69,19 @@ extension ChatViewController {
             self?.textView.text = "\(text) \(quoteString)"
         }))
 
+        alert.addAction(UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { [weak self] (_) in
+            guard let quoteString = self?.quoteStringFor(message) else { return }
+            guard let text = self?.textView.text else { return }
+
+            var mention = ""
+            if self?.subscription.type == .channel || self?.subscription.type == .group,
+                let username = message.user?.username, username != AuthManager.currentUser()?.username {
+                mention = " @\(username)"
+            }
+
+            self?.textView.text = "\(text) \(quoteString)\(mention)"
+        }))
+
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {

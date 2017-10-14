@@ -68,7 +68,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
     // MARK: UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        var filename = "\(String.random()).jpeg"
+        var filename = String.random()
         var file: FileUpload?
         var assetURL: URL?
 
@@ -93,7 +93,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
             file = UploadHelper.file(
                 for: imageData,
-                name: filename,
+                name: "\(filename).jpeg",
                 mimeType: mimeType ?? "image/jpeg"
             )
         }
@@ -110,8 +110,8 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
                 file = UploadHelper.file(
                     for: videoData as Data,
-                    name: filename,
-                    mimeType: UploadHelper.mimeTypeFor(videoURL)
+                    name: "\(filename.components(separatedBy: ".").first ?? "video").mp4",
+                    mimeType: "video/mp4"
                 )
 
                 semaphore.signal()
