@@ -83,7 +83,7 @@ class NewRoomViewController: BaseViewController {
         }
     }
 
-    @IBAction func buttonCreateDidPressed(_ sender: Any) {
+    @IBAction func buttonCreateDidPressed(_ sender: UIButton) {
         guard let roomName = setValues["room name"] as? String else { return }
         guard let publicRoom = setValues["public room"] as? Bool else { return }
         guard let readOnlyRoom = setValues["read only room"] as? Bool else { return }
@@ -95,6 +95,7 @@ class NewRoomViewController: BaseViewController {
             roomType = .group
         }
 
+        sender.isEnabled = false
         API.shared.fetch(RoomCreateRequest(roomName: roomName, type: roomType, readOnly: readOnlyRoom)) { [weak self] result in
 
             guard let success = result?.raw?["success"].boolValue,
@@ -104,6 +105,7 @@ class NewRoomViewController: BaseViewController {
                     } else {
                         self?.showAlert(.errorUnknown)
                     }
+                    sender.isEnabled = true
                     return
             }
 
@@ -118,6 +120,7 @@ class NewRoomViewController: BaseViewController {
 
                     self?.dismiss(animated: true, completion: nil)
                 } else {
+                    sender.isEnabled = true
                     self?.showAlert(.errorUnknown)
                 }
             }
