@@ -11,6 +11,16 @@ import RealmSwift
 final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint! {
+        didSet {
+            // Remove the bottom constraint if we don't support multi server
+            if !AppManager.supportsMultiServer {
+                tableViewBottomConstraint.constant = 0
+            }
+        }
+    }
+
+    @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
 
     weak var titleView: SubscriptionsTitleView?
     weak var searchController: UISearchController?

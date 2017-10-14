@@ -128,6 +128,7 @@
                         <segue destination="Q7Z-N2-FIp" kind="show" identifier="Chat" id="lUr-Fb-9Ij"/>
                         <segue destination="7xe-nw-9mY" kind="presentation" identifier="Servers" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="emf-xZ-ptX"/>
                         <segue destination="WPg-Z4-kP7" kind="presentation" identifier="User" modalPresentationStyle="overFullScreen" modalTransitionStyle="crossDissolve" id="lqN-UV-5tm"/>
+                        <outlet property="tableViewBottomConstraint" destination="PuM-RZ-IR8" id="tml-9g-pWy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>
