@@ -30,4 +30,17 @@ class DateExtension: XCTestCase {
         XCTAssert(difference == offset, "Offset from both are correct")
     }
 
+    func testDateFromString() {
+        let dateString = "2017-04-26T20:10:32.866Z"
+
+        guard let date = Date.dateFromString(dateString) else {
+            XCTFail("Date is not nil")
+            return
+        }
+
+        XCTAssertEqual(date.year, "2017", "Year is correct")
+        XCTAssertEqual(date.month, "04", "Month is correct")
+        XCTAssertEqual(date.day, "26", "Day is correct")
+    }
+
 }

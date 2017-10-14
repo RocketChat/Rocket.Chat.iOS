@@ -242,6 +242,7 @@
                         <outlet property="labelServer" destination="2Qq-vp-NoK" id="ddj-Ab-OQx"/>
                         <outlet property="labelUsername" destination="K3h-Vc-Kfo" id="6sl-Ij-9ar"/>
                         <outlet property="tableView" destination="fKk-pZ-N3a" id="A7P-UJ-hQf"/>
+                        <outlet property="tableViewBottomConstraint" destination="PuM-RZ-IR8" id="tml-9g-pWy"/>
                         <outlet property="textFieldSearch" destination="TPV-i5-hsW" id="0ho-Fe-IZ9"/>
                         <outlet property="viewTextField" destination="qEc-o0-IxJ" id="1KL-CT-eAr"/>
                         <outlet property="viewUser" destination="ArO-ez-uRr" id="LYh-rg-dVA"/>
