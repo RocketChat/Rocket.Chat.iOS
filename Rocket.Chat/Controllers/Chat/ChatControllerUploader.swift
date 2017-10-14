@@ -196,7 +196,15 @@ extension ChatViewController: AVAudioRecorderDelegate {
 
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if flag {
-            let alert = UIAlertController(title: localized("alert.audio_message.success.title"), message: localized("alert.audio_message.success.message"), preferredStyle: .alert)
+            let start = startTime ?? NSDate()
+
+            let alert = UIAlertController(
+                title: localized("alert.audio_message.success.title"),
+                message: String(format: localized("alert.audio_message.success.message"),
+                                  String(format: "%.1f", abs(start.timeIntervalSinceNow))),
+                preferredStyle: .alert
+            )
+
             alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
             alert.addAction(UIAlertAction(title: localized("alert.audio_message.success.send"), style: .default, handler: { _ in
 

@@ -687,6 +687,7 @@ final class ChatViewController: SLKTextViewController {
     // MARK: Right Button Background View
 
     var microphoneCircleView: UIView?
+    var startTime: NSDate?
 
     fileprivate func createCircleView() -> UIView? {
         guard let imageViewFrameSize = textInputbar.rightButton.imageView?.frame.size else { return nil }
@@ -717,6 +718,8 @@ final class ChatViewController: SLKTextViewController {
         textInputbar.rightButton.addSubview(circleView)
 
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+
+        startTime = NSDate()
 
         recorderManager?.record()
     }
