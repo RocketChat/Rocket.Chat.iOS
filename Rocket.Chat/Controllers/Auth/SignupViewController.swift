@@ -69,6 +69,7 @@ final class SignupViewController: BaseViewController {
         textFieldName.alpha = 0.5
         textFieldEmail.alpha = 0.5
         textFieldPassword.alpha = 0.5
+        customTextFields.forEach { $0.alpha = 0.5 }
 
         requesting = true
 
@@ -76,12 +77,14 @@ final class SignupViewController: BaseViewController {
         textFieldName.resignFirstResponder()
         textFieldEmail.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
+        customTextFields.forEach { $0.resignFirstResponder() }
     }
 
     func stopLoading() {
         textFieldName.alpha = 1
         textFieldEmail.alpha = 1
         textFieldPassword.alpha = 1
+        customTextFields.forEach { $0.alpha = 1 }
 
         requesting = false
         activityIndicator.stopAnimating()
@@ -106,7 +109,7 @@ final class SignupViewController: BaseViewController {
         let email = textFieldEmail.text ?? ""
         let password = textFieldPassword.text ?? ""
 
-        AuthManager.signup(with: name, email, password) { [weak self] (response) in
+        AuthManager.signup(with: name, email, password, customFields: getCustomFieldsParams()) { [weak self] (response) in
             self?.stopLoading()
 
             if response.isError() {
@@ -139,6 +142,11 @@ final class SignupViewController: BaseViewController {
                 }
             }
         }
+    }
+
+    private func getCustomFieldsParams() -> [String: String] {
+        let pairs = customTextFields.map { (key: $0.placeholder ?? "", value: $0.text ?? "") }
+        return Dictionary(keyValuePairs: pairs)
     }
 }
 
