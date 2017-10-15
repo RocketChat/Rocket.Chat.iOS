@@ -69,6 +69,8 @@ final class ChatViewController: SLKTextViewController {
     var messages: [Message] = []
     var subscription: Subscription! {
         didSet {
+            if subscription.isInvalidated { return }
+
             updateSubscriptionInfo()
             markAsRead()
             typingIndicatorView?.dismissIndicator()
