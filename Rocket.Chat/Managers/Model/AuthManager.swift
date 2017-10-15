@@ -207,7 +207,7 @@ extension AuthManager {
                 "pass": password,
                 "name": name
             ]]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
@@ -227,7 +227,7 @@ extension AuthManager {
             "msg": "method",
             "method": "login",
             "params": [params]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
@@ -315,7 +315,7 @@ extension AuthManager {
         let object = [
             "msg": "method",
             "method": "getUsernameSuggestion"
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
@@ -328,7 +328,7 @@ extension AuthManager {
             "msg": "method",
             "method": "setUsername",
             "params": [username]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }

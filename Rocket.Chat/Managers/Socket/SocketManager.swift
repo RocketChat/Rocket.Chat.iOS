@@ -107,7 +107,7 @@ class SocketManager {
         let request = [
             "msg": "unsub",
             "id": eventName
-        ] as [String : Any]
+        ] as [String: Any]
 
         send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -179,7 +179,7 @@ extension SocketManager: WebSocketDelegate {
             "msg": "connect",
             "version": "1",
             "support": ["1", "pre2", "pre1"]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object)
     }

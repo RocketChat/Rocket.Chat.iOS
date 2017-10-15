@@ -15,7 +15,7 @@ struct UserManager {
             "msg": "sub",
             "name": "activeUsers",
             "params": []
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { _ in }
     }
@@ -25,7 +25,7 @@ struct UserManager {
             "msg": "sub",
             "name": "userData",
             "params": []
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { _ in }
     }
@@ -35,7 +35,7 @@ struct UserManager {
             "msg": "method",
             "method": "UserPresence:setDefaultStatus",
             "params": [status.rawValue]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { (response) in
             completion(response)
@@ -49,7 +49,7 @@ struct UserManager {
             "msg": "method",
             "method": method,
             "params": []
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { (response) in
             completion(response)
