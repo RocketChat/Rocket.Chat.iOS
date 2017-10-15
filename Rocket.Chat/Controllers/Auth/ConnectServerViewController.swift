@@ -19,9 +19,7 @@ final class ConnectServerViewController: BaseViewController {
         if urlText.isEmpty {
             urlText = defaultURL
         }
-        guard let normalizedURL = normalizeInputURL(urlText) else { return nil }
-
-        return URL(string: normalizedURL)
+        return  URL(string: urlText, scheme: "https")
     }
 
     var serverPublicSettings: AuthSettings?
@@ -133,32 +131,6 @@ final class ConnectServerViewController: BaseViewController {
 
         alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
-    }
-
-    func normalizeInputURL(_ inputURL: String) -> String? {
-        guard let url = URL(string: inputURL) else {
-            return nil
-        }
-
-        var port = ""
-        if let _port = url.port {
-            port = ":\(_port)"
-        }
-
-        var query = ""
-        if let _query = url.query, !_query.isEmpty {
-            query = "?\(_query)"
-        }
-
-        if let host = url.host, !host.isEmpty {
-            return "https://\(host)\(port)\(url.path)\(query)"
-        }
-
-        if !url.path.isEmpty {
-            return "https://\(url.path)\(port)\(query)"
-        }
-
-        return nil
     }
 
     func connect() {
