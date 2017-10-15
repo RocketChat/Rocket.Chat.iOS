@@ -59,26 +59,27 @@ final class SubscriptionCell: UITableViewCell {
         switch subscription.type {
         case .channel:
             imageViewIcon.image = UIImage(named: "Hashtag")?.imageWithTint(.RCInvisible())
-            break
         case .directMessage:
             var color: UIColor = .RCInvisible()
 
             if let user = subscription.directMessageUser {
                 color = { _ -> UIColor in
                     switch user.status {
-                        case .online: return .RCOnline()
-                        case .offline: return .RCInvisible()
-                        case .away: return .RCAway()
-                        case .busy: return .RCBusy()
+                    case .online:
+                        return .RCOnline()
+                    case .offline:
+                        return .RCInvisible()
+                    case .away:
+                        return .RCAway()
+                    case .busy:
+                        return .RCBusy()
                     }
                 }(())
             }
 
             imageViewIcon.image = UIImage(named: "Mention")?.imageWithTint(color)
-            break
         case .group:
             imageViewIcon.image = UIImage(named: "Lock")?.imageWithTint(.RCInvisible())
-            break
         }
     }
 
