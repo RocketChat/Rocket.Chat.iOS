@@ -198,10 +198,12 @@ extension ChatViewController: AVAudioRecorderDelegate {
         if flag {
             let start = startTime ?? NSDate()
 
+            let seconds = Int(abs(start.timeIntervalSinceNow))
+
             let alert = UIAlertController(
                 title: localized("alert.audio_message.success.title"),
                 message: String(format: localized("alert.audio_message.success.message"),
-                                  String(format: "%.1f", abs(start.timeIntervalSinceNow))),
+                                String(format: "%.2d:%.2d", seconds / 60, seconds % 60)),
                 preferredStyle: .alert
             )
 

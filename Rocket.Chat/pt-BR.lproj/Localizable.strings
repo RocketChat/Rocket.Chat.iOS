@@ -27,7 +27,7 @@
 
 "alert.audio_message.success.send" = "Enviar";
 "alert.audio_message.success.title" = "Sucesso";
-"alert.audio_message.success.message" = "Sua mensagem foi gravado com sucesso. Ela tem %@ segundos.";
+"alert.audio_message.success.message" = "Sua mensagem foi gravada com sucesso. Tempo de gravação: %@.";
 
 "alert.audio_message.error.title" = "Ooops!";
 "alert.audio_message.error.message" = "Ocorreu um erro. Por favor, grave a sua mensagem novamente.";
