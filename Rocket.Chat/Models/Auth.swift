@@ -12,10 +12,13 @@ import RealmSwift
 final class Auth: Object {
     // Server
     @objc dynamic var serverURL = ""
-    var serverApiURL: String {
-        return serverURL
-            .replacingOccurrences(of: "wss://", with: "https://")
-            .replacingOccurrences(of: "/websocket", with: "")
+    var serverApiURL: URL? {
+        guard var serverUrlComponents = URLComponents(string: serverURL) else { return nil }
+
+        serverUrlComponents.scheme = "https"
+        serverUrlComponents.path = ""
+
+        return serverUrlComponents.url
     }
     @objc dynamic var settings: AuthSettings?
 
