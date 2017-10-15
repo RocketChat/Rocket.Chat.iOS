@@ -120,6 +120,9 @@ final class ChatViewController: SLKTextViewController {
         rightButton.isEnabled = false
 
         textInputbar.rightButton.layer.zPosition = 2
+        textInputbar.gestureRecognizers?.forEach({ $0.delaysTouchesBegan = false })
+
+        scrollView?.gestureRecognizers?.forEach({ $0.delaysTouchesBegan = false })
 
         recorderManager = AudioMessageRecorder()
         recorderManager?.set(recorderDelegate: self)
@@ -208,6 +211,7 @@ final class ChatViewController: SLKTextViewController {
         chatTitleView = view
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(chatTitleViewDidPressed))
+        gesture.delaysTouchesBegan = false
         chatTitleView?.addGestureRecognizer(gesture)
     }
 
@@ -697,7 +701,7 @@ final class ChatViewController: SLKTextViewController {
         circleView.layer.zPosition = -1
         circleView.backgroundColor = view.tintColor
 
-        UIView.animate(withDuration: 0.2) {
+        UIView.animate(withDuration: 0.1) {
             circleView.frame.size = CGSize(width: 130, height: 130)
         }
 
