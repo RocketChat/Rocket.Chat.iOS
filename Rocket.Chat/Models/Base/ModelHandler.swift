@@ -31,18 +31,14 @@ extension ModelHandler where Self: BaseModel {
             }
 
             switch msg {
-                case .added:
-                    object.add(values, realm: realm)
-                    break
-                case .changed:
-                    object.update(values, realm: realm)
-                    break
-                case .removed:
-                    object.remove(values, realm: realm)
-                    break
-                default:
-                    object.update(values, realm: realm)
-                    break
+            case .added:
+                object.add(values, realm: realm)
+            case .changed:
+                object.update(values, realm: realm)
+            case .removed:
+                object.remove(values, realm: realm)
+            default:
+                object.update(values, realm: realm)
             }
         })
     }

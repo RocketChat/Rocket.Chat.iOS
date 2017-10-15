@@ -165,10 +165,13 @@ final class AuthViewController: BaseViewController {
     }
 
     func stopLoading() {
-        textFieldUsername.alpha = 1
-        textFieldPassword.alpha = 1
+        DispatchQueue.main.async(execute: {
+            self.textFieldUsername.alpha = 1
+            self.textFieldPassword.alpha = 1
+            self.activityIndicator.stopAnimating()
+        })
+
         connecting = false
-        activityIndicator.stopAnimating()
         buttonAuthenticateGoogle.isEnabled = true
     }
 
@@ -185,7 +188,7 @@ final class AuthViewController: BaseViewController {
                 "username": email,
                 "ldapPass": password,
                 "ldapOptions": []
-            ] as [String : Any]
+            ] as [String: Any]
 
             AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
         } else {
