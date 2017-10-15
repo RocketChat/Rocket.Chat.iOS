@@ -67,7 +67,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     }
 
     // MARK: UIImagePickerControllerDelegate
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         var filename = String.random()
         var file: FileUpload?
         var assetURL: URL?
