@@ -14,7 +14,15 @@ final class ConnectServerViewController: BaseViewController {
 
     internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
-    internal var serverURL: URL!
+    var url: URL? {
+        guard var urlText = textFieldServerURL.text else { return nil }
+        if urlText.isEmpty {
+            urlText = defaultURL
+        }
+        guard let normalizedURL = normalizeInputURL(urlText) else { return nil }
+
+        return URL(string: normalizedURL)
+    }
 
     var serverPublicSettings: AuthSettings?
 
@@ -57,6 +65,11 @@ final class ConnectServerViewController: BaseViewController {
 
         SocketManager.sharedInstance.socket?.disconnect()
         DatabaseManager.cleanInvalidDatabases()
+
+        if let applicationServerURL = AppManager.applicationServerURL {
+            textFieldServerURL.text = applicationServerURL.host
+            connect()
+        }
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -81,7 +94,7 @@ final class ConnectServerViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
-            controller.serverURL = serverURL
+            controller.serverURL = url?.socketURL()
             controller.serverPublicSettings = self.serverPublicSettings
         }
     }
@@ -122,13 +135,36 @@ final class ConnectServerViewController: BaseViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    func connect() {
-        var text = textFieldServerURL.text ?? ""
-        if text.characters.count == 0 {
-            text = defaultURL
+    func normalizeInputURL(_ inputURL: String) -> String? {
+        guard let url = URL(string: inputURL) else {
+            return nil
         }
 
-        guard let url = URL(string: text) else { return alertInvalidURL() }
+        var port = ""
+        if let _port = url.port {
+            port = ":\(_port)"
+        }
+
+        var query = ""
+        if let _query = url.query, !_query.isEmpty {
+            query = "?\(_query)"
+        }
+
+        if let host = url.host, !host.isEmpty {
+            return "https://\(host)\(port)\(url.path)\(query)"
+        }
+
+        if !url.path.isEmpty {
+            return "https://\(url.path)\(port)\(query)"
+        }
+
+        return nil
+    }
+
+    func connect() {
+        textFieldServerURL.text = url?.absoluteString
+
+        guard let url = url else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
 
         API.shared.host = url
@@ -156,8 +192,6 @@ final class ConnectServerViewController: BaseViewController {
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
-
-        serverURL = socketURL
 
         validate { [weak self] (_, error) in
             guard !error else {
