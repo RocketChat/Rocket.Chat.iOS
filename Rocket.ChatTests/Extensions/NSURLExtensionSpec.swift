@@ -34,7 +34,8 @@ class NSURLExtensionSpec: XCTestCase {
     func testInitWithStringAndScheme() {
         XCTAssertEqual(URL(string: "open.rocket.chat", scheme: "https")?.absoluteString, "https://open.rocket.chat", "will add scheme")
         XCTAssertEqual(URL(string: "https://open.rocket.chat", scheme: "https")?.absoluteString, "https://open.rocket.chat", "will return correct url")
-        XCTAssertEqual(URL(string: "http://open.rocket.chat", scheme: "https")?.absoluteString, "https://open.rocket.chat", "will force scheme")
+        XCTAssertEqual(URL(string: "http://open.rocket.chat", scheme: "https")?.absoluteString, "https://open.rocket.chat", "will force https scheme")
+        XCTAssertEqual(URL(string: "https://open.rocket.chat", scheme: "wss")?.absoluteString, "wss://open.rocket.chat", "will force wss scheme")
         XCTAssertEqual(URL(string: "http://open.rocket.chat/path", scheme: "https")?.absoluteString, "https://open.rocket.chat/path", "will keep path")
         XCTAssertEqual(URL(string: "http://open.rocket.chat?query=test", scheme: "https")?.absoluteString, "https://open.rocket.chat?query=test", "will keep query")
         XCTAssertEqual(URL(string: "http://open.rocket.chat/path?query=test", scheme: "https")?.absoluteString, "https://open.rocket.chat/path?query=test", "will keep path & query")
