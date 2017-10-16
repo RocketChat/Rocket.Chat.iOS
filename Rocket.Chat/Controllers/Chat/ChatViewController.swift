@@ -151,8 +151,18 @@ final class ChatViewController: SLKTextViewController {
     }
 
     @objc internal func reconnect() {
+        chatHeaderViewStatus?.activityIndicator.startAnimating()
+        chatHeaderViewStatus?.buttonRefresh.isHidden = true
+
         if !SocketManager.isConnected() {
             SocketManager.reconnect()
+        }
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
+            if !SocketManager.isConnected() {
+                self.chatHeaderViewStatus?.activityIndicator.stopAnimating()
+                self.chatHeaderViewStatus?.buttonRefresh.isHidden = false
+            }
         }
     }
 
