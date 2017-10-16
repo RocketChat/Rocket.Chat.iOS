@@ -27,7 +27,7 @@ final class PushManager {
                 "appName": Bundle.main.bundleIdentifier ?? "main",
                 "metadata": [:]
             ]]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request)
     }
@@ -38,7 +38,7 @@ final class PushManager {
             "method": "raix:push-setuser",
             "userId": userIdentifier,
             "params": [getOrCreatePushId()]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request)
     }

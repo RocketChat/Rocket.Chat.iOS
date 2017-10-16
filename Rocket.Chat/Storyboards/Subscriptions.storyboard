@@ -123,7 +123,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="john.appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3h-Vc-Kfo">
-                                                <rect key="frame" x="86" y="44" width="182" height="21"/>
+                                                <rect key="frame" x="86" y="44" width="244" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="5nm-hf-Aip"/>
                                                 </constraints>
@@ -145,7 +145,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qq-vp-NoK">
-                                                <rect key="frame" x="68" y="19" width="237" height="21"/>
+                                                <rect key="frame" x="68" y="19" width="262" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="2P6-YQ-MuU"/>
                                                 </constraints>
@@ -181,8 +181,7 @@
                                             <constraint firstItem="K3h-Vc-Kfo" firstAttribute="leading" secondItem="V2s-Ct-SCW" secondAttribute="trailing" constant="8" id="JBS-Z8-ijx"/>
                                             <constraint firstItem="QXa-y8-P03" firstAttribute="leading" secondItem="ZvM-k3-mZd" secondAttribute="trailing" constant="8" id="Lyq-kq-2VK"/>
                                             <constraint firstAttribute="trailing" secondItem="QXa-y8-P03" secondAttribute="trailing" constant="17" id="RpC-Gx-t2v"/>
-                                            <constraint firstItem="QXa-y8-P03" firstAttribute="leading" secondItem="K3h-Vc-Kfo" secondAttribute="trailing" constant="15" id="S7E-pk-Vi1"/>
-                                            <constraint firstAttribute="trailing" secondItem="2Qq-vp-NoK" secondAttribute="trailing" constant="15" id="Vth-Np-KrR"/>
+                                            <constraint firstItem="QXa-y8-P03" firstAttribute="leading" secondItem="K3h-Vc-Kfo" secondAttribute="trailing" constant="8" id="S7E-pk-Vi1"/>
                                             <constraint firstItem="xrn-W8-pS8" firstAttribute="leading" secondItem="ArO-ez-uRr" secondAttribute="leading" constant="15" id="aRI-rV-Qex"/>
                                             <constraint firstItem="K3h-Vc-Kfo" firstAttribute="top" secondItem="2Qq-vp-NoK" secondAttribute="bottom" constant="4" id="f0h-fV-UlW"/>
                                             <constraint firstAttribute="height" constant="85" id="zwY-4t-oRL"/>
