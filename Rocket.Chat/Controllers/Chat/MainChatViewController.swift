@@ -10,6 +10,11 @@ import UIKit
 import SideMenuController
 
 class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
+    let socketHandlerToken = String.random(5)
+
+    deinit {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+    }
 
     static var shared: MainChatViewController? {
         return UIApplication.shared.windows.first?.rootViewController as? MainChatViewController
@@ -46,6 +51,8 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
         self.delegate = self
 
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
         performSegue(withIdentifier: "showCenterController", sender: nil)
         performSegue(withIdentifier: "containSideMenu", sender: nil)
     }
@@ -75,6 +82,23 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
     // MARK: Authentication & Server management
 
+    func logout() {
+        ChatViewController.shared?.messagesToken?.stop()
+        SubscriptionsViewController.shared?.usersToken?.stop()
+        SubscriptionsViewController.shared?.subscriptionsToken?.stop()
+
+        AuthManager.logout {
+            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let controller = storyboardChat.instantiateInitialViewController()
+            let application = UIApplication.shared
+
+            if let window = application.keyWindow {
+                window.rootViewController = controller
+                window.makeKeyAndVisible()
+            }
+        }
+    }
+
     func openAddNewTeamController() {
         SocketManager.disconnect { (_, _) in
             self.performSegue(withIdentifier: "Auth", sender: nil)
@@ -95,5 +119,25 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
             }
         }
     }
+}
 
+extension MainChatViewController: SocketConnectionHandler {
+    func socketDidConnect(socket: SocketManager) {
+
+    }
+
+    func socketDidDisconnect(socket: SocketManager) {
+
+    }
+
+    func socketDidReturnError(socket: SocketManager, error: SocketError) {
+        switch error.error {
+        case .invalidUser:
+            SubscriptionsViewController.shared?.alert(title: "Invalid session", message: "Your current session has been invalidated. Please login again.") { _ in
+                self.logout()
+            }
+        default:
+            break
+        }
+    }
 }
