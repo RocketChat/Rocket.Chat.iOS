@@ -123,13 +123,13 @@ extension MainChatViewController: SocketConnectionHandler {
     }
 
     func socketDidDisconnect(socket: SocketManager) {
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
+
     }
 
     func socketDidReturnError(socket: SocketManager, error: SocketError) {
         switch error.error {
         case .invalidUser:
-            SubscriptionsViewController.shared?.alert(title: "Invalid session", message: "Your current session has been invalidated. Please login again.") { _ in
+            SubscriptionsViewController.shared?.alert(title: localized("alert.socket_error.invalid_user.title"), message: localized("alert.socket_error.invalid_user.message")) { _ in
                 self.logout()
             }
         default:
