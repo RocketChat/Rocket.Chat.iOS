@@ -12,10 +12,6 @@ import SideMenuController
 class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     let socketHandlerToken = String.random(5)
 
-    deinit {
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
-    }
-
     static var shared: MainChatViewController? {
         return UIApplication.shared.windows.first?.rootViewController as? MainChatViewController
     }
@@ -127,7 +123,7 @@ extension MainChatViewController: SocketConnectionHandler {
     }
 
     func socketDidDisconnect(socket: SocketManager) {
-
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
     func socketDidReturnError(socket: SocketManager, error: SocketError) {

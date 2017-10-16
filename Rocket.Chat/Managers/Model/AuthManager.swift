@@ -339,7 +339,6 @@ extension AuthManager {
      */
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
-            SocketManager.clear()
             GIDSignIn.sharedInstance().signOut()
 
             DatabaseManager.removerSelectedDatabase()

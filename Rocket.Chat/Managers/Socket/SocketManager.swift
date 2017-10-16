@@ -65,7 +65,7 @@ class SocketManager {
 
     static func clear() {
         sharedInstance.internalConnectionHandler = nil
-        sharedInstance.connectionHandlers = [:]
+        sharedInstance.connectionHandlers.removeAll()
     }
 
     // MARK: Messages
