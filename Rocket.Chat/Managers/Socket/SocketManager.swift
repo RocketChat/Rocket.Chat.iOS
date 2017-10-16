@@ -21,6 +21,7 @@ public typealias MessageCompletionObjectsList <T: Object> = ([T]) -> Void
 protocol SocketConnectionHandler {
     func socketDidConnect(socket: SocketManager)
     func socketDidDisconnect(socket: SocketManager)
+    func socketDidReturnError(socket: SocketManager, error: SocketError)
 }
 
 class SocketManager {
