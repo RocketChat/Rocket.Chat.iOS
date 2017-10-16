@@ -26,85 +26,86 @@ extension Message {
         let text = Emojione.transform(string: self.text)
 
         switch type {
-            case .roomNameChanged:
-                return String(
-                    format: localized("chat.message.type.room_name_changed"),
-                    text,
-                    self.user?.displayName() ?? ""
-                )
+        case .roomNameChanged:
+            return String(
+                format: localized("chat.message.type.room_name_changed"),
+                text,
+                self.user?.displayName() ?? ""
+            )
 
-            case .userAdded:
-                return String(
-                    format: localized("chat.message.type.user_added_by"),
-                    text,
-                    self.user?.displayName() ?? ""
-                )
+        case .userAdded:
+            return String(
+                format: localized("chat.message.type.user_added_by"),
+                text,
+                self.user?.displayName() ?? ""
+            )
 
-            case .userRemoved:
-                return String(
-                    format: localized("chat.message.type.user_removed_by"),
-                    text,
-                    self.user?.displayName() ?? ""
-                )
+        case .userRemoved:
+            return String(
+                format: localized("chat.message.type.user_removed_by"),
+                text,
+                self.user?.displayName() ?? ""
+            )
 
-            case .userJoined:
-                return localized("chat.message.type.user_joined")
+        case .userJoined:
+            return localized("chat.message.type.user_joined")
 
-            case .userLeft:
-                return localized("chat.message.type.user_left")
+        case .userLeft:
+            return localized("chat.message.type.user_left")
 
-            case .userMuted:
-                return String(
-                    format: localized("chat.message.type.user_muted"),
-                    text,
-                    self.user?.displayName() ?? ""
-                )
+        case .userMuted:
+            return String(
+                format: localized("chat.message.type.user_muted"),
+                text,
+                self.user?.displayName() ?? ""
+            )
 
-            case .userUnmuted:
-                return String(
-                    format: localized("chat.message.type.user_unmuted"),
-                    text,
-                    self.user?.displayName() ?? ""
-                )
+        case .userUnmuted:
+            return String(
+                format: localized("chat.message.type.user_unmuted"),
+                text,
+                self.user?.displayName() ?? ""
+            )
 
-            case .welcome:
-                return String(
-                    format: localized("chat.message.type.welcome"),
-                    text
-                )
+        case .welcome:
+            return String(
+                format: localized("chat.message.type.welcome"),
+                text
+            )
 
-            case .messageRemoved:
-                return localized("chat.message.type.message_removed")
+        case .messageRemoved:
+            return localized("chat.message.type.message_removed")
 
-            case .subscriptionRoleAdded:
-                return String(
-                    format: localized("chat.message.type.subscription_role_added"),
-                    text,
-                    role,
-                    self.user?.displayName() ?? ""
-                )
+        case .subscriptionRoleAdded:
+            return String(
+                format: localized("chat.message.type.subscription_role_added"),
+                text,
+                role,
+                self.user?.displayName() ?? ""
+            )
 
-            case .subscriptionRoleRemoved:
-                return String(
-                    format: localized("chat.message.type.subscription_role_removed"),
-                    text,
-                    role,
-                    self.user?.displayName() ?? ""
-                )
+        case .subscriptionRoleRemoved:
+            return String(
+                format: localized("chat.message.type.subscription_role_removed"),
+                text,
+                role,
+                self.user?.displayName() ?? ""
+            )
 
-            case .roomArchived:
-                return String(
-                    format: localized("chat.message.type.room_archived"),
-                    text
-                )
+        case .roomArchived:
+            return String(
+                format: localized("chat.message.type.room_archived"),
+                text
+            )
 
-            case .roomUnarchived:
-                return String(
-                    format: localized("chat.message.type.room_unarchived"),
-                    text
-                )
+        case .roomUnarchived:
+            return String(
+                format: localized("chat.message.type.room_unarchived"),
+                text
+            )
 
-            default: break
+        default:
+            break
         }
 
         return text

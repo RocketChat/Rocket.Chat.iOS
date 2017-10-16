@@ -58,7 +58,7 @@ final class ChatMessageVideoView: UIView {
             let time = CMTimeMake(1, 1)
 
             if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
-                let thumbnail = UIImage(cgImage:imageRef)
+                let thumbnail = UIImage(cgImage: imageRef)
 
                 DispatchQueue.main.async {
                     try? UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)

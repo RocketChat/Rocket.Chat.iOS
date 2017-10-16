@@ -11,7 +11,7 @@ import RealmSwift
 
 class UserCoordinator: LauncherProtocol {
 
-    func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey : Any]?) {
+    func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
         turnAllUsersOffline()
     }
 
