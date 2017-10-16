@@ -57,24 +57,12 @@ class NewRoomViewController: BaseViewController {
         TextFieldTableViewCell.registerCell(for: tableView)
     }
 
-    fileprivate enum TypeAlerts {
-        case errorMessage(String)
-        case errorUnknown
+    fileprivate func showErrorAlert(_ errorMessage: String?) {
+        let errorMessage = errorMessage ?? localized("error.socket.default_error_message")
 
-        func message() -> String {
-            switch self {
-            case .errorMessage(let message):
-                return message
-            case .errorUnknown:
-                return localized("error.socket.default_error_message")
-            }
-        }
-    }
-
-    fileprivate func showAlert(_ typeAlert: TypeAlerts) {
         let alert = UIAlertController(
             title: localized("error.socket.default_error_title"),
-            message: typeAlert.message(),
+            message: errorMessage,
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
@@ -96,16 +84,23 @@ class NewRoomViewController: BaseViewController {
         }
 
         sender.isEnabled = false
-        API.shared.fetch(RoomCreateRequest(roomName: roomName, type: roomType, readOnly: readOnlyRoom)) { [weak self] result in
+        executeRequestCreateRoom(roomName: roomName, roomType: roomType, readOnlyRoom: readOnlyRoom) { [weak self] success, errorMessage in
+
+            if success {
+                self?.dismiss(animated: true, completion: nil)
+            } else {
+                self?.showErrorAlert(errorMessage)
+                sender.isEnabled = true
+            }
+        }
+    }
+
+    fileprivate func executeRequestCreateRoom(roomName: String, roomType: RoomCreateType, readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
+        API.shared.fetch(RoomCreateRequest(roomName: roomName, type: roomType, readOnly: readOnlyRoom)) { result in
 
             guard let success = result?.raw?["success"].boolValue,
                 success == true else {
-                    if let errorMessage = result?.raw?["error"].string {
-                        self?.showAlert(.errorMessage(errorMessage))
-                    } else {
-                        self?.showAlert(.errorUnknown)
-                    }
-                    sender.isEnabled = true
+                    completion(false, result?.raw?["error"].string)
                     return
             }
 
@@ -118,10 +113,9 @@ class NewRoomViewController: BaseViewController {
                     let controller = ChatViewController.shared
                     controller?.subscription = newRoom
 
-                    self?.dismiss(animated: true, completion: nil)
+                    completion(true, nil)
                 } else {
-                    sender.isEnabled = true
-                    self?.showAlert(.errorUnknown)
+                    completion(false, nil)
                 }
             }
         }
