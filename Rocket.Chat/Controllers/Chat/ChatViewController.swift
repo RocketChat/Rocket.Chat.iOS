@@ -52,6 +52,9 @@ final class ChatViewController: SLKTextViewController {
     weak var chatHeaderViewStatus: ChatHeaderViewStatus?
     var documentController: UIDocumentInteractionController?
 
+    var replyView: ReplyView!
+    var replyString: String = ""
+
     var dataController = ChatDataController()
 
     var searchResult: [String: Any] = [:]
@@ -67,6 +70,8 @@ final class ChatViewController: SLKTextViewController {
     var messages: [Message] = []
     var subscription: Subscription! {
         didSet {
+            guard !subscription.isInvalidated else { return }
+
             updateSubscriptionInfo()
             markAsRead()
             typingIndicatorView?.dismissIndicator()
@@ -154,6 +159,8 @@ final class ChatViewController: SLKTextViewController {
             buttonScrollToBottomMarginConstraint = buttonScrollToBottom.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 50)
             buttonScrollToBottomMarginConstraint?.isActive = true
         }
+
+        setupReplyView()
     }
 
     @objc internal func reconnect() {
@@ -282,7 +289,7 @@ final class ChatViewController: SLKTextViewController {
         ), forCellReuseIdentifier: AutocompleteCell.identifier)
     }
 
-    fileprivate func scrollToBottom(_ animated: Bool = false) {
+    internal func scrollToBottom(_ animated: Bool = false) {
         let boundsHeight = collectionView?.bounds.size.height ?? 0
         let sizeHeight = collectionView?.contentSize.height ?? 0
         let offset = CGPoint(x: 0, y: max(sizeHeight - boundsHeight, 0))
@@ -333,6 +340,9 @@ final class ChatViewController: SLKTextViewController {
     @objc fileprivate func sendMessage() {
         guard let messageText = textView.text, messageText.characters.count > 0 else { return }
 
+        let replyString = self.replyString
+        stopReplying()
+
         self.scrollToBottom()
         rightButton.isEnabled = false
 
@@ -341,7 +351,7 @@ final class ChatViewController: SLKTextViewController {
             message = Message()
             message?.internalType = ""
             message?.createdAt = Date.serverDate
-            message?.text = messageText
+            message?.text = "\(messageText)\(replyString)"
             message?.subscription = self.subscription
             message?.identifier = String.random(18)
             message?.temporary = true

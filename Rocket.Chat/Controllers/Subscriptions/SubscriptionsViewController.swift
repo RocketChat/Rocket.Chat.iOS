@@ -37,7 +37,7 @@ final class SubscriptionsViewController: BaseViewController {
 
             if let placeholder = textFieldSearch.placeholder {
                 let color = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
-                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSAttributedStringKey.foregroundColor: color])
+                textFieldSearch.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedStringKey.foregroundColor: color])
             }
         }
     }
@@ -276,16 +276,12 @@ extension SubscriptionsViewController {
         switch user.status {
         case .online:
             viewUserStatus.backgroundColor = .RCOnline()
-            break
         case .busy:
             viewUserStatus.backgroundColor = .RCBusy()
-            break
         case .away:
             viewUserStatus.backgroundColor = .RCAway()
-            break
         case .offline:
             viewUserStatus.backgroundColor = .RCInvisible()
-            break
         }
     }
 
