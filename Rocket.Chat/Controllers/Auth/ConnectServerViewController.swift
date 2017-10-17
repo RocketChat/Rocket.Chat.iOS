@@ -9,6 +9,7 @@
 import UIKit
 import SwiftyJSON
 import semver
+import RealmSwift
 
 final class ConnectServerViewController: BaseViewController {
 
@@ -29,6 +30,8 @@ final class ConnectServerViewController: BaseViewController {
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldServerURL: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+
+    var loginServicesToken: NotificationToken?
 
     @IBOutlet weak var viewFields: UIView! {
         didSet {
@@ -178,8 +181,9 @@ final class ConnectServerViewController: BaseViewController {
 
             let index = DatabaseManager.createNewDatabaseInstance(serverURL: socketURL.absoluteString)
             DatabaseManager.changeDatabaseInstance(index: index)
-
             SocketManager.connect(socketURL) { (_, connected) in
+                self?.setupLoginServices()
+
                 AuthSettingsManager.updatePublicSettings(nil) { (settings) in
                     self?.serverPublicSettings = settings
 
@@ -231,4 +235,27 @@ extension ConnectServerViewController: UITextFieldDelegate {
         return true
     }
 
+}
+
+// MARK: Login Services
+extension ConnectServerViewController {
+    func setupLoginServices() {
+        Realm.executeOnMainThread { realm in
+            self.loginServicesToken?.stop()
+            let objects = realm.objects(LoginService.self)
+            DispatchQueue.main.async {
+                self.loginServicesToken = objects.addNotificationBlock { _ in
+                        self.updateLoginServices()
+                }
+            }
+
+            LoginServiceManager.changes()
+        }
+    }
+
+    func updateLoginServices() {
+        guard let loginServices = Realm.shared?.objects(LoginService.self) else { return }
+
+        print("loginServices: \(loginServices.description)")
+    }
 }
