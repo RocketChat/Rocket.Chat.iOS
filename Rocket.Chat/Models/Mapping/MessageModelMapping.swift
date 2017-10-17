@@ -11,6 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 extension Message: ModelMappeable {
+    //swiftlint:disable cyclomatic_complexity function_body_length
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
             self.identifier = values["_id"].string ?? ""
@@ -29,8 +30,16 @@ extension Message: ModelMappeable {
             self.createdAt = Date.dateFromInterval(createdAt)
         }
 
+        if let createdAt = values["ts"].string {
+            self.createdAt = Date.dateFromString(createdAt)
+        }
+
         if let updatedAt = values["_updatedAt"]["$date"].double {
             self.updatedAt = Date.dateFromInterval(updatedAt)
+        }
+
+        if let updatedAt = values["_updatedAt"].string {
+            self.updatedAt = Date.dateFromString(updatedAt)
         }
 
         if let userIdentifier = values["u"]["_id"].string {

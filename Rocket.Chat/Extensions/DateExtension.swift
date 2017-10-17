@@ -14,6 +14,12 @@ extension Date {
         return Date(timeIntervalSince1970: interval / 1000)
     }
 
+    public static func dateFromString(_ string: String, format: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'") -> Date? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.date(from: string)
+    }
+
     public static func intervalFromDate(_ date: Date) -> Double {
         return date.timeIntervalSince1970 * 1000
     }

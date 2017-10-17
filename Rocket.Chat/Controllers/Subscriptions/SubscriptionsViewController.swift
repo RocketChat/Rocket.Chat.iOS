@@ -12,6 +12,15 @@ import RealmSwift
 final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint! {
+        didSet {
+            // Remove the bottom constraint if we don't support multi server
+            if !AppManager.supportsMultiServer {
+                tableViewBottomConstraint.constant = 0
+            }
+        }
+    }
+
     @IBOutlet weak var activityViewSearching: UIActivityIndicatorView!
 
     let defaultButtonCancelSearchWidth = CGFloat(65)
@@ -28,7 +37,7 @@ final class SubscriptionsViewController: BaseViewController {
 
             if let placeholder = textFieldSearch.placeholder {
                 let color = UIColor(rgb: 0x9ea2a4, alphaVal: 1)
-                textFieldSearch.attributedPlaceholder = NSAttributedString(string:placeholder, attributes: [NSAttributedStringKey.foregroundColor: color])
+                textFieldSearch.attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [NSAttributedStringKey.foregroundColor: color])
             }
         }
     }
@@ -267,16 +276,12 @@ extension SubscriptionsViewController {
         switch user.status {
         case .online:
             viewUserStatus.backgroundColor = .RCOnline()
-            break
         case .busy:
             viewUserStatus.backgroundColor = .RCBusy()
-            break
         case .away:
             viewUserStatus.backgroundColor = .RCAway()
-            break
         case .offline:
             viewUserStatus.backgroundColor = .RCInvisible()
-            break
         }
     }
 

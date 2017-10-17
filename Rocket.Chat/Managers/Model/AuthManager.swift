@@ -159,7 +159,9 @@ extension AuthManager {
     */
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
+        guard let urlApi = auth.serverApiURL else { return }
 
+        API.shared.host = urlApi
         API.shared.authToken = auth.token
         API.shared.userId = auth.userId
 
@@ -205,7 +207,7 @@ extension AuthManager {
                 "pass": password,
                 "name": name
             ]]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
@@ -225,7 +227,7 @@ extension AuthManager {
             "msg": "method",
             "method": "login",
             "params": [params]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
@@ -313,7 +315,7 @@ extension AuthManager {
         let object = [
             "msg": "method",
             "method": "getUsernameSuggestion"
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
@@ -326,7 +328,7 @@ extension AuthManager {
             "msg": "method",
             "method": "setUsername",
             "params": [username]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
