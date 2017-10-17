@@ -32,7 +32,7 @@ extension AuthViewController: GIDSignInDelegate {
             "idToken": user.authentication.idToken,
             "expiresIn": Int(user.authentication.accessTokenExpirationDate.timeIntervalSinceNow),
             "scope": "profile"
-        ] as [String : Any]
+        ] as [String: Any]
 
         AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
     }
