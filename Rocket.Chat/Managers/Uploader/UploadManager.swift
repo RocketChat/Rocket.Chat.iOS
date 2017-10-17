@@ -28,7 +28,7 @@ class UploadManager {
             "msg": "method",
             "method": "sendFileMessage",
             "params": params
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { (response) in
             completion(response, response.isError())
@@ -90,7 +90,7 @@ class UploadManager {
                 "description": "",
                 "store": normalizedStore
             ]]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { [unowned self] (response) in
             guard !response.isError() else {
@@ -121,7 +121,7 @@ class UploadManager {
                         "msg": "method",
                         "method": "ufsComplete",
                         "params": [fileIdentifier, normalizedStore, fileToken]
-                    ] as [String : Any]
+                    ] as [String: Any]
 
                     SocketManager.send(request) { [unowned self] (response) in
                         guard !response.isError() else {
@@ -163,7 +163,7 @@ class UploadManager {
                     "rid": subscription.rid
                 ]
             ]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { [unowned self] (response) in
             guard !response.isError() else {

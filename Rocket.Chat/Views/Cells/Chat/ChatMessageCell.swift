@@ -157,7 +157,6 @@ final class ChatMessageCell: UICollectionViewCell {
                     mediaViews.addArrangedSubview(view)
                     mediaViewHeight += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text)
                 }
-                break
 
             case .image:
                 if let view = ChatMessageImageView.instantiateFromNib() {
@@ -168,7 +167,6 @@ final class ChatMessageCell: UICollectionViewCell {
                     mediaViews.addArrangedSubview(view)
                     mediaViewHeight += ChatMessageImageView.defaultHeight
                 }
-                break
 
             case .video:
                 if let view = ChatMessageVideoView.instantiateFromNib() {
@@ -179,7 +177,6 @@ final class ChatMessageCell: UICollectionViewCell {
                     mediaViews.addArrangedSubview(view)
                     mediaViewHeight += ChatMessageVideoView.defaultHeight
                 }
-                break
 
             case .audio:
                 if let view = ChatMessageAudioView.instantiateFromNib() {

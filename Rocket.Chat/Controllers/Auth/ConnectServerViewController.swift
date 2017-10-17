@@ -19,9 +19,7 @@ final class ConnectServerViewController: BaseViewController {
         if urlText.isEmpty {
             urlText = defaultURL
         }
-        guard let normalizedURL = normalizeInputURL(urlText) else { return nil }
-
-        return URL(string: normalizedURL)
+        return  URL(string: urlText, scheme: "https")
     }
 
     var serverPublicSettings: AuthSettings?
@@ -135,39 +133,11 @@ final class ConnectServerViewController: BaseViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    func normalizeInputURL(_ inputURL: String) -> String? {
-        guard let url = URL(string: inputURL) else {
-            return nil
-        }
-
-        var port = ""
-        if let _port = url.port {
-            port = ":\(_port)"
-        }
-
-        var query = ""
-        if let _query = url.query, !_query.isEmpty {
-            query = "?\(_query)"
-        }
-
-        if let host = url.host, !host.isEmpty {
-            return "https://\(host)\(port)\(url.path)\(query)"
-        }
-
-        if !url.path.isEmpty {
-            return "https://\(url.path)\(port)\(query)"
-        }
-
-        return nil
-    }
-
     func connect() {
         textFieldServerURL.text = url?.absoluteString
 
         guard let url = url else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
-
-        API.shared.host = url
 
         // Check if server already exists and connect to that instead
         if let servers = DatabaseManager.servers {
@@ -193,6 +163,7 @@ final class ConnectServerViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
 
+        API.shared.host = url
         validate { [weak self] (_, error) in
             guard !error else {
                 DispatchQueue.main.async {
