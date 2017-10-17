@@ -47,4 +47,16 @@ class StringExtensionSpec: XCTestCase {
         XCTAssert(string.distance(from: ranges[1].lowerBound, to: ranges[1].upperBound) == 4, "will word 2 have correct size")
     }
 
+    func testRemovingWhitespaces() {
+        // arrange
+        let withWhitespaces = "a b c d "
+        let expected = "abcd"
+
+        // act
+        let result = withWhitespaces.removingWhitespaces()
+
+        // assert
+        XCTAssertEqual(result, expected, "string has no whitespaces")
+    }
+
 }
