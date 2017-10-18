@@ -9,7 +9,9 @@
 import RealmSwift
 
 struct LoginServiceManager {
-    static func changes() {
+    let observeTokens: [NotificationToken]
+
+    static func subscribe() {
         let object = [
             "msg": "sub",
             "id": "6kSKFW4kkTyEDeG3E",
@@ -18,5 +20,13 @@ struct LoginServiceManager {
             ] as [String: Any]
 
         SocketManager.subscribe(object, eventName: "meteor_accounts_loginServiceConfiguration") { _ in }
+    }
+}
+
+// MARK: Realm
+extension LoginServiceManager {
+    static func observe(block: @escaping (RealmCollectionChange<Results<LoginService>>) -> Void) -> NotificationToken? {
+        let objects = Realm.shared?.objects(LoginService.self)
+        return objects?.addNotificationBlock(block)
     }
 }

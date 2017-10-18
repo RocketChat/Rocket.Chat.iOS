@@ -275,40 +275,43 @@ extension AuthViewController: UITextFieldDelegate {
 // MARK: Login Services
 extension AuthViewController {
     func setupLoginServices() {
-        Realm.executeOnMainThread { realm in
-            self.loginServicesToken?.stop()
-            let objects = realm.objects(LoginService.self)
-            DispatchQueue.main.async {
-                self.loginServicesToken = objects.addNotificationBlock { changes in
-                    self.updateLoginServices(changes: changes)
-                }
-            }
+        self.loginServicesToken?.stop()
+        self.loginServicesToken = LoginServiceManager.observe(block: updateLoginServices)
 
-            LoginServiceManager.changes()
-        }
+        LoginServiceManager.subscribe()
+    }
+
+    @objc func loginServiceButtonDidPress(_ button: UIButton) {
+        guard let service = customAuthButtons.filter({ $0.value == button }).keys.first else { return }
+
+        let loginService = LoginService.find(service: service)
+
+        alert(title: service, message: "\(loginService?.authorizePath ?? "error")")
     }
 
     func updateLoginServices(changes: RealmCollectionChange<Results<LoginService>>) {
         switch changes {
-        case .update(let res, let deletions, let insertions, let modifications):
+        case .update(let res, let deletions, let insertions, _ /*let modifications*/):
             insertions.map { res[$0] }.forEach {
                 guard $0.custom else { return }
 
                 let button = UIButton()
                 button.layer.cornerRadius = 3
                 button.setTitle($0.buttonLabelText ?? "", for: .normal)
+                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
                 button.setTitleColor(.white, for: .normal)
                 button.backgroundColor = .black
+                button.addTarget(self, action: #selector(loginServiceButtonDidPress(_:)), for: .touchUpInside)
 
                 authButtonsStackView.addArrangedSubview(button)
 
-                customAuthButtons[$0.identifier ?? ""] = button
+                customAuthButtons[$0.service ?? ""] = button
             }
 
             deletions.map { res[$0] }.forEach {
                 guard $0.custom else { return }
                 guard let button = self.customAuthButtons[$0.identifier ?? ""] else { return }
-                
+
                 authButtonsStackView.removeArrangedSubview(button)
 
                 customAuthButtons.removeValue(forKey: $0.identifier ?? "")
