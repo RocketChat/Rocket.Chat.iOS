@@ -66,7 +66,7 @@ class NewRoomViewController: BaseViewController {
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
     }
