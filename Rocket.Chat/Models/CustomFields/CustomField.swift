@@ -28,13 +28,10 @@ class CustomField {
         switch json["type"].stringValue {
         case SelectField.type:
             customField = SelectField()
-            break
         case TextField.type:
             customField = TextField()
-            break
         default:
             customField = CustomField()
-            break
         }
 
         customField.name = name

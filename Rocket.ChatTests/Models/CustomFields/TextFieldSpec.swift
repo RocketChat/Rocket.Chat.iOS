@@ -20,8 +20,8 @@ class TextFieldSpec: XCTestCase {
         let json = JSON([
             "minLength": minLength,
             "maxLength": maxLength
-            ])
-        
+        ])
+
         // act
         textField.map(json, realm: nil)
 
