@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="kTextFieldTableViewCell" rowHeight="68" id="STT-md-aQU" customClass="TextFieldTableViewCell" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="68"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="STT-md-aQU" id="Sdz-WT-uu8">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="67.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Hashtag" translatesAutoresizingMaskIntoConstraints="NO" id="03m-Or-Cps">
+                        <rect key="frame" x="8" y="27" width="15" height="15"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="15" id="56M-4U-vYD"/>
+                            <constraint firstAttribute="height" constant="15" id="mCI-d4-2EE"/>
+                        </constraints>
+                    </imageView>
+                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Placeholder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RzC-dR-KkA">
+                        <rect key="frame" x="31" y="25.5" width="281" height="17"/>
+                        <nil key="textColor"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits"/>
+                        <connections>
+                            <action selector="textFieldInputEditingChanged:" destination="STT-md-aQU" eventType="editingChanged" id="4z6-Gc-RDE"/>
+                        </connections>
+                    </textField>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="RzC-dR-KkA" firstAttribute="leading" secondItem="03m-Or-Cps" secondAttribute="trailing" constant="8" id="0NG-Gp-QXY"/>
+                    <constraint firstItem="RzC-dR-KkA" firstAttribute="centerY" secondItem="Sdz-WT-uu8" secondAttribute="centerY" id="CfC-OR-A7s"/>
+                    <constraint firstItem="03m-Or-Cps" firstAttribute="centerY" secondItem="RzC-dR-KkA" secondAttribute="centerY" id="Tmx-5M-jcm"/>
+                    <constraint firstItem="03m-Or-Cps" firstAttribute="leading" secondItem="Sdz-WT-uu8" secondAttribute="leading" constant="8" id="UFM-fo-nzM"/>
+                    <constraint firstAttribute="trailing" secondItem="RzC-dR-KkA" secondAttribute="trailing" constant="8" id="b0R-2t-b7k"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="imgLeftIcon" destination="03m-Or-Cps" id="FLv-Wc-YZ4"/>
+                <outlet property="textFieldInput" destination="RzC-dR-KkA" id="EYX-vQ-2BE"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="Hashtag" width="23" height="23"/>
+    </resources>
+</document>
