@@ -11,6 +11,7 @@ import UIKit
 import SafariServices
 import OnePasswordExtension
 import RealmSwift
+import OAuthSwift
 
 final class AuthViewController: BaseViewController {
 
@@ -19,6 +20,7 @@ final class AuthViewController: BaseViewController {
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
 
+    var oauthSwift: OAuth2Swift?
     var loginServicesToken: NotificationToken?
 
     @IBOutlet weak var viewFields: UIView! {
@@ -49,6 +51,7 @@ final class AuthViewController: BaseViewController {
 
     @IBOutlet weak var authButtonsStackView: UIStackView!
     var customAuthButtons = [String: UIButton]()
+    var loginService: LoginService?
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -273,7 +276,7 @@ extension AuthViewController: UITextFieldDelegate {
 }
 
 // MARK: Login Services
-extension AuthViewController {
+extension AuthViewController: SFSafariViewControllerDelegate {
     func setupLoginServices() {
         self.loginServicesToken?.stop()
         self.loginServicesToken = LoginServiceManager.observe(block: updateLoginServices)
@@ -283,17 +286,37 @@ extension AuthViewController {
 
     @objc func loginServiceButtonDidPress(_ button: UIButton) {
         guard let service = customAuthButtons.filter({ $0.value == button }).keys.first else { return }
+        guard let loginService = LoginService.find(service: service) else { return }
+        guard let host = loginService.serverURL, !host.isEmpty else { return }
+        guard let clientId = loginService.clientId else { return }
+        guard let authorizePath = loginService.authorizePath else { return }
+        guard let tokenPath = loginService.tokenPath else { return }
+        guard let callbackURL = URL(string: "https://\(serverURL.host ?? "")/_oauth/\(service)") else { return }
 
-        let loginService = LoginService.find(service: service)
+        oauthSwift = OAuth2Swift(
+            consumerKey: clientId,
+            consumerSecret: "e14e6e9c582201619d8054111bb18c8987b45fb3",
+            authorizeUrl: "\(host)\(authorizePath)",
+            accessTokenUrl: "\(host)\(tokenPath)",
+            responseType: "token"
+        )
 
-        alert(title: service, message: "\(loginService?.authorizePath ?? "error")")
+        guard let oauthSwift = oauthSwift else { return }
+
+        let handler = SafariURLHandler(viewController: self, oauthSwift: oauthSwift)
+        oauthSwift.authorizeURLHandler = handler
+
+        oauthSwift.authorize(withCallbackURL: callbackURL, scope: loginService.scope ?? "", state: String.random(5),
+                                          success: loginServiceSuccess, failure: loginServiceFailure)
+
+        self.loginService = loginService
     }
 
     func updateLoginServices(changes: RealmCollectionChange<Results<LoginService>>) {
         switch changes {
         case .update(let res, let deletions, let insertions, _ /*let modifications*/):
             insertions.map { res[$0] }.forEach {
-                guard $0.custom else { return }
+                guard $0.custom, !($0.serverURL?.isEmpty ?? true) else { return }
 
                 let button = UIButton()
                 button.layer.cornerRadius = 3
@@ -319,5 +342,24 @@ extension AuthViewController {
         default:
             break
         }
+    }
+
+    func loginServiceSuccess(_ credential: OAuthSwiftCredential, _ response: OAuthSwiftResponse?, _ parameters: OAuthSwift.Parameters) {
+        guard let loginService = self.loginService, let service = loginService.service, let scope = loginService.scope else { return }
+
+        let params = [
+            "serviceName": service,
+            "accessToken": credential.oauthToken,
+            "refreshToken": credential.oauthRefreshToken,
+            "idToken": credential.oauthTokenSecret,
+            "expiresIn": Int((credential.oauthTokenExpiresAt ?? Date()).timeIntervalSinceNow),
+            "scope": scope
+            ] as [String: Any]
+
+        AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
+    }
+
+    func loginServiceFailure(_ error: OAuthSwiftError) {
+
     }
 }

@@ -31,6 +31,7 @@ def shared_pods
   pod 'ReachabilitySwift', :git => 'https://github.com/ashleymills/Reachability.swift.git', :branch => 'develop'
 
   # Authentication SDKs
+  pod 'OAuthSwift'
   pod '1PasswordExtension'
   pod 'Google/SignIn'
 end
