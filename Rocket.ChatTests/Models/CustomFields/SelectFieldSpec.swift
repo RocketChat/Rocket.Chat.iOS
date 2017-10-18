@@ -20,7 +20,7 @@ class SelectFieldSpec: XCTestCase {
         let json = JSON([
             "options": options,
             "defaultValue": defaultValue
-            ])
+        ])
 
         // act
         selectField.map(json, realm: nil)
