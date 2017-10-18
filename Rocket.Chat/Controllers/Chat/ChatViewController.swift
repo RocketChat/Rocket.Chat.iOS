@@ -157,7 +157,7 @@ final class ChatViewController: SLKTextViewController {
         if !SocketManager.isConnected() {
             SocketManager.reconnect()
         }
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             if !SocketManager.isConnected() {
                 self.chatHeaderViewStatus?.activityIndicator.stopAnimating()
