@@ -11,17 +11,19 @@ import UIKit
 extension SignupViewController {
     func setupCustomFields() {
         customTextFields = getCustomTextFields()
+
         for textField in customTextFields {
             fieldsContainer.addArrangedSubview(textField)
             fieldsContainer.addArrangedSubview(createSeparatorView())
         }
+
         exchangePasswordFieldWithLast()
     }
 
     private func getCustomTextFields() -> [UITextField] {
         return AuthSettingsManager.settings?.customFields.map { customField in
             createTextField(with: customField.name)
-            } ?? []
+        } ?? []
     }
 
     private func createTextField(with name: String) -> UITextField {
