@@ -53,7 +53,7 @@ PODS:
   - SideMenuController (0.2.4.1)
   - SimpleImageViewer (1.0.2)
   - SlackTextViewController (1.9.5)
-  - Starscream (2.1.1)
+  - Starscream (3.0.0)
   - SwiftyJSON (4.0.0-alpha.1)
 
 DEPENDENCIES:
@@ -111,7 +111,7 @@ CHECKOUT OPTIONS:
     :commit: 9ed57435f793d7ed6afa370519a221f28a53e620
     :git: https://github.com/rafaelks/SlackTextViewController.git
   Starscream:
-    :commit: e9d10000eca3f682650fb674eecc73ad709b316a
+    :commit: f506be54ae320bbe0703e005df5e943df0bf58a4
     :git: https://github.com/daltoniam/Starscream.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -139,7 +139,7 @@ SPEC CHECKSUMS:
   SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
   SimpleImageViewer: 209dc6f6ee0eeed8ec3386b699eae9dca625d560
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
-  Starscream: 087670fe088bb12c04398fc343442a4b9eb96b86
+  Starscream: 287548363f1a599a8d6ab62e42793877198cd199
   SwiftyJSON: c4d27c2ca659d5c91460cd17cc60fd212b26074d
 
 PODFILE CHECKSUM: d79d13915969296b4f7712eed3cf63b5934fd9c0
