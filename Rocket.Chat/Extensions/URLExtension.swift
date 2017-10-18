@@ -9,6 +9,33 @@
 import Foundation
 
 extension URL {
+    init?(string: String, scheme: String) {
+        guard let url = URL(string: string) else {
+            return nil
+        }
+
+        var port = ""
+        if let _port = url.port {
+            port = ":\(_port)"
+        }
+
+        var query = ""
+        if let _query = url.query, !_query.isEmpty {
+            query = "?\(_query)"
+        }
+
+        if let host = url.host, !host.isEmpty {
+            self.init(string: "\(scheme)://\(host)\(port)\(url.path)\(query)")
+            return
+        }
+
+        if !url.path.isEmpty {
+            self.init(string: "\(scheme)://\(url.path)\(port)\(query)")
+            return
+        }
+
+        return nil
+    }
 
     func timestampURL() -> URL? {
         var components = URLComponents()
