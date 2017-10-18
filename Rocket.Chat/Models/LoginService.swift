@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 class LoginService: BaseModel {
     @objc dynamic var service: String?
@@ -22,4 +23,16 @@ class LoginService: BaseModel {
     @objc dynamic var tokenSentVia: String?
     @objc dynamic var usernameField: String?
     @objc dynamic var mergeUsers = false
+}
+
+extension LoginService {
+    static func find(service: String) -> LoginService? {
+        var object: LoginService?
+
+        if let findObject = Realm.shared?.objects(LoginService.self).filter("service == '\(service)'").first {
+            object = findObject
+        }
+
+        return object
+    }
 }
