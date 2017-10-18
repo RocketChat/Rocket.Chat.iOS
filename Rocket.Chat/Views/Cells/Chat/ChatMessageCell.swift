@@ -11,6 +11,7 @@ import UIKit
 protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol {
     func openURL(url: URL)
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
+    func handleTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
 }
 
 final class ChatMessageCell: UICollectionViewCell {
@@ -19,6 +20,7 @@ final class ChatMessageCell: UICollectionViewCell {
     static let identifier = "ChatMessageCell"
 
     weak var longPressGesture: UILongPressGestureRecognizer?
+    weak var tapGesture: UITapGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
     var message: Message! {
         didSet {
@@ -121,6 +123,13 @@ final class ChatMessageCell: UICollectionViewCell {
             gesture.delegate = self
             self.addGestureRecognizer(gesture)
             self.longPressGesture = gesture
+        }
+
+        if self.tapGesture == nil {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleTapGestureCell(recognizer:)))
+            gesture.delegate = self
+            labelUsername.addGestureRecognizer(gesture)
+            self.tapGesture = gesture
         }
     }
 
@@ -238,6 +247,10 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
+    }
+
+    @objc func handleTapGestureCell(recognizer: UIGestureRecognizer) {
+        delegate?.handleTapMessageCell(message, view: contentView, recognizer: recognizer)
     }
 
 }

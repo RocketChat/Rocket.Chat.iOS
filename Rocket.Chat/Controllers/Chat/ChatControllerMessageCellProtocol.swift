@@ -10,6 +10,7 @@ import UIKit
 import SafariServices
 import MobilePlayer
 import SimpleImageViewer
+import RealmSwift
 
 extension ChatViewController: ChatMessageCellProtocol {
 
@@ -17,6 +18,33 @@ extension ChatViewController: ChatMessageCellProtocol {
         if recognizer.state == .began {
             presentActionsFor(message, view: view)
         }
+    }
+
+    func handleTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
+        guard let username = message.user?.name else { return }
+
+        func openDirectMessage() -> Bool {
+            guard let directMessageRoom = Realm.shared?.objects(Subscription.self).filter("name == '\(username)' && privateType == 'd'").first else { return false }
+
+            let controller = ChatViewController.shared
+            controller?.subscription = directMessageRoom
+
+            return true
+        }
+
+        // Check if already have a direct message room with this user
+        if openDirectMessage() == true { return }
+
+        // If not, create a new direct message
+        SubscriptionManager.createDirectMessage(username, completion: { response in
+            guard !response.isError() else { return }
+
+            guard let auth = AuthManager.isAuthenticated() else { return }
+
+            SubscriptionManager.updateSubscriptions(auth) { _ in
+                _ = openDirectMessage()
+            }
+        })
     }
 
     func openURL(url: URL) {
