@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SafariServices
 import OnePasswordExtension
+import RealmSwift
 
 final class AuthViewController: BaseViewController {
 
@@ -17,6 +18,8 @@ final class AuthViewController: BaseViewController {
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
+
+    var loginServicesToken: NotificationToken?
 
     @IBOutlet weak var viewFields: UIView! {
         didSet {
@@ -44,6 +47,9 @@ final class AuthViewController: BaseViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    @IBOutlet weak var authButtonsStackView: UIStackView!
+    var customAuthButtons = [String: UIButton]()
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -57,6 +63,8 @@ final class AuthViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        setupLoginServices()
 
         NotificationCenter.default.addObserver(
             self,
@@ -261,5 +269,52 @@ extension AuthViewController: UITextFieldDelegate {
         }
 
         return true
+    }
+}
+
+// MARK: Login Services
+extension AuthViewController {
+    func setupLoginServices() {
+        Realm.executeOnMainThread { realm in
+            self.loginServicesToken?.stop()
+            let objects = realm.objects(LoginService.self)
+            DispatchQueue.main.async {
+                self.loginServicesToken = objects.addNotificationBlock { changes in
+                    self.updateLoginServices(changes: changes)
+                }
+            }
+
+            LoginServiceManager.changes()
+        }
+    }
+
+    func updateLoginServices(changes: RealmCollectionChange<Results<LoginService>>) {
+        switch changes {
+        case .update(let res, let deletions, let insertions, let modifications):
+            insertions.map { res[$0] }.forEach {
+                guard $0.custom else { return }
+
+                let button = UIButton()
+                button.layer.cornerRadius = 3
+                button.setTitle($0.buttonLabelText ?? "", for: .normal)
+                button.setTitleColor(.white, for: .normal)
+                button.backgroundColor = .black
+
+                authButtonsStackView.addArrangedSubview(button)
+
+                customAuthButtons[$0.identifier ?? ""] = button
+            }
+
+            deletions.map { res[$0] }.forEach {
+                guard $0.custom else { return }
+                guard let button = self.customAuthButtons[$0.identifier ?? ""] else { return }
+                
+                authButtonsStackView.removeArrangedSubview(button)
+
+                customAuthButtons.removeValue(forKey: $0.identifier ?? "")
+            }
+        default:
+            break
+        }
     }
 }
