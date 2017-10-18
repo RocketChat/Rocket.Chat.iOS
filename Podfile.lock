@@ -41,11 +41,11 @@ PODS:
   - MobilePlayer (1.2.0)
   - RCMarkdownParser (3.0.3)
   - ReachabilitySwift (4.1.0)
-  - Realm (2.10.1):
-    - Realm/Headers (= 2.10.1)
-  - Realm/Headers (2.10.1)
-  - RealmSwift (2.10.1):
-    - Realm (= 2.10.1)
+  - Realm (3.0.0):
+    - Realm/Headers (= 3.0.0)
+  - Realm/Headers (3.0.0)
+  - RealmSwift (3.0.0):
+    - Realm (= 3.0.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -120,8 +120,8 @@ SPEC CHECKSUMS:
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   RCMarkdownParser: 062a5f014134dffe7cf1b0d0dc34c3abb4b0f203
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  Realm: fc7a317a5c2c9ba91f5f235ede4e2ea76e9eba0c
-  RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
+  Realm: dec0de73be8c57506e39db72694d513c189493b3
+  RealmSwift: 44a7090b16d1b22a406c6bf129bdd602db1bbecc
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   semver: df3895a55a097c7a819a80e7375e95b29e136157
   SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
