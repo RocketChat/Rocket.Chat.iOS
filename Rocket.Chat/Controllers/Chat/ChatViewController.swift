@@ -369,7 +369,7 @@ final class ChatViewController: SLKTextViewController {
 
     internal func updateSubscriptionInfo() {
         if let token = messagesToken {
-            token.stop()
+            token.invalidate()
         }
 
         title = subscription?.displayName()
@@ -441,8 +441,8 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func updateMessagesQueryNotificationBlock() {
-        messagesToken?.stop()
-        messagesToken = messagesQuery.addNotificationBlock { [unowned self] changes in
+        messagesToken?.invalidate()
+        messagesToken = messagesQuery.observe { [unowned self] changes in
             guard case .update(_, _, let insertions, let modifications) = changes else {
                 return
             }
