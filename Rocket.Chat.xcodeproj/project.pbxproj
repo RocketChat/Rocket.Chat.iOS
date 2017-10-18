@@ -169,15 +169,15 @@
 		597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA11E3708A50041C5C5 /* DataExtension.swift */; };
 		597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA31E3708B10041C5C5 /* PushManager.swift */; };
 		68D186DF1ED9714F0030EE8C /* MessageURLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */; };
-		771334251F91102900036957 /* DictionaryExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771334241F91102900036957 /* DictionaryExtensionsSpec.swift */; };
-		771334281F95E25600036957 /* CustomFieldsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771334271F95E25600036957 /* CustomFieldsSpec.swift */; };
-		7713342A1F95F0E200036957 /* SelectFieldSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771334291F95F0E200036957 /* SelectFieldSpec.swift */; };
-		7713342C1F95F3D400036957 /* TextFieldSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7713342B1F95F3D400036957 /* TextFieldSpec.swift */; };
-		7713342E1F95F60A00036957 /* AuthSettingsModelMappingSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7713342D1F95F60A00036957 /* AuthSettingsModelMappingSpec.swift */; };
 		7798B4151F852B720074B2F4 /* SelectField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798B4141F852B720074B2F4 /* SelectField.swift */; };
 		7798B4191F852D670074B2F4 /* CustomField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7798B4181F852D670074B2F4 /* CustomField.swift */; };
 		77BA814F1F87B2BE00F295F4 /* SignupViewController+CustomFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BA814E1F87B2BE00F295F4 /* SignupViewController+CustomFields.swift */; };
 		77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77BA81501F87C4CB00F295F4 /* TextField.swift */; };
+		77C261251F97445300724A1F /* AuthSettingsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C261241F97445300724A1F /* AuthSettingsSpec.swift */; };
+		77C261271F97445F00724A1F /* DictionaryExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C261261F97445F00724A1F /* DictionaryExtensionsSpec.swift */; };
+		77C2612C1F97453600724A1F /* CustomFieldsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C261291F97453600724A1F /* CustomFieldsSpec.swift */; };
+		77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C2612A1F97453600724A1F /* SelectFieldSpec.swift */; };
+		77C2612E1F97453600724A1F /* TextFieldSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C2612B1F97453600724A1F /* TextFieldSpec.swift */; };
 		77CCB6BE1F8D0597004BBF67 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */; };
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
 		800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E22831F8500A200DA84F1 /* MessagesListViewController.swift */; };
@@ -428,15 +428,15 @@
 		597ECBA31E3708B10041C5C5 /* PushManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PushManager.swift; path = Managers/PushManager.swift; sourceTree = "<group>"; };
 		68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageURLSpec.swift; path = Models/MessageURLSpec.swift; sourceTree = "<group>"; };
 		68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_ChatTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		771334241F91102900036957 /* DictionaryExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensionsSpec.swift; sourceTree = "<group>"; };
-		771334271F95E25600036957 /* CustomFieldsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomFieldsSpec.swift; sourceTree = "<group>"; };
-		771334291F95F0E200036957 /* SelectFieldSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectFieldSpec.swift; sourceTree = "<group>"; };
-		7713342B1F95F3D400036957 /* TextFieldSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldSpec.swift; sourceTree = "<group>"; };
-		7713342D1F95F60A00036957 /* AuthSettingsModelMappingSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSettingsModelMappingSpec.swift; sourceTree = "<group>"; };
 		7798B4141F852B720074B2F4 /* SelectField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectField.swift; sourceTree = "<group>"; };
 		7798B4181F852D670074B2F4 /* CustomField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomField.swift; sourceTree = "<group>"; };
 		77BA814E1F87B2BE00F295F4 /* SignupViewController+CustomFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignupViewController+CustomFields.swift"; sourceTree = "<group>"; };
 		77BA81501F87C4CB00F295F4 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
+		77C261241F97445300724A1F /* AuthSettingsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettingsSpec.swift; path = Models/AuthSettingsSpec.swift; sourceTree = "<group>"; };
+		77C261261F97445F00724A1F /* DictionaryExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryExtensionsSpec.swift; path = Extensions/DictionaryExtensionsSpec.swift; sourceTree = "<group>"; };
+		77C261291F97453600724A1F /* CustomFieldsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFieldsSpec.swift; sourceTree = "<group>"; };
+		77C2612A1F97453600724A1F /* SelectFieldSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFieldSpec.swift; sourceTree = "<group>"; };
+		77C2612B1F97453600724A1F /* TextFieldSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldSpec.swift; sourceTree = "<group>"; };
 		77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DictionaryExtensions.swift; path = Extensions/DictionaryExtensions.swift; sourceTree = "<group>"; };
 		800E22831F8500A200DA84F1 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessagesListViewController.swift; path = Controllers/Chat/MessagesListViewController.swift; sourceTree = "<group>"; };
 		800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMessagesRequest.swift; sourceTree = "<group>"; };
@@ -655,6 +655,7 @@
 		416133361D46DB0900E09DA2 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				77C261241F97445300724A1F /* AuthSettingsSpec.swift */,
 				416133371D46DB1D00E09DA2 /* BaseModelSpec.swift */,
 				416133391D46E0A200E09DA2 /* AuthSpec.swift */,
 				4161333B1D46E32F00E09DA2 /* UserSpec.swift */,
@@ -663,7 +664,7 @@
 				68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */,
 				D1411A291F6777F300D6EDF7 /* ChannelSpec.swift */,
 				D1411A2B1F6779A200D6EDF7 /* MentionSpec.swift */,
-				771334261F95E24A00036957 /* CustomFields */,
+				77C261281F97453600724A1F /* CustomFields */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -926,12 +927,11 @@
 		41DC7A201D386B2C00896FC0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				77C261261F97445F00724A1F /* DictionaryExtensionsSpec.swift */,
 				41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */,
 				41DC7A231D386CA800896FC0 /* DateExtensionsSpec.swift */,
 				41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */,
 				D1A403D81F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift */,
-				771334241F91102900036957 /* DictionaryExtensionsSpec.swift */,
-				7713342D1F95F60A00036957 /* AuthSettingsModelMappingSpec.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1059,22 +1059,23 @@
 			name = Socket;
 			sourceTree = "<group>";
 		};
-		771334261F95E24A00036957 /* CustomFields */ = {
-			isa = PBXGroup;
-			children = (
-				771334271F95E25600036957 /* CustomFieldsSpec.swift */,
-				771334291F95F0E200036957 /* SelectFieldSpec.swift */,
-				7713342B1F95F3D400036957 /* TextFieldSpec.swift */,
-			);
-			path = CustomFields;
-			sourceTree = "<group>";
-		};
 		7798B4131F852AE30074B2F4 /* CustomFields */ = {
 			isa = PBXGroup;
 			children = (
 				7798B4181F852D670074B2F4 /* CustomField.swift */,
 				7798B4141F852B720074B2F4 /* SelectField.swift */,
 				77BA81501F87C4CB00F295F4 /* TextField.swift */,
+			);
+			name = CustomFields;
+			path = Models/CustomFields;
+			sourceTree = "<group>";
+		};
+		77C261281F97453600724A1F /* CustomFields */ = {
+			isa = PBXGroup;
+			children = (
+				77C261291F97453600724A1F /* CustomFieldsSpec.swift */,
+				77C2612A1F97453600724A1F /* SelectFieldSpec.swift */,
+				77C2612B1F97453600724A1F /* TextFieldSpec.swift */,
 			);
 			name = CustomFields;
 			path = Models/CustomFields;
@@ -1847,39 +1848,39 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				77C2612E1F97453600724A1F /* TextFieldSpec.swift in Sources */,
 				4171ABA51E7C056E009FC3F0 /* AvatarViewSpec.swift in Sources */,
 				D18675EA1F70A58B00406FB4 /* InfoRequestSpec.swift in Sources */,
 				417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */,
-				7713342E1F95F60A00036957 /* AuthSettingsModelMappingSpec.swift in Sources */,
 				D18675EE1F716FBC00406FB4 /* LoginRequestSpec.swift in Sources */,
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
 				925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */,
 				41DC7A241D386CA800896FC0 /* DateExtensionsSpec.swift in Sources */,
-				7713342A1F95F0E200036957 /* SelectFieldSpec.swift in Sources */,
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
 				80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
-				771334281F95E25600036957 /* CustomFieldsSpec.swift in Sources */,
-				7713342C1F95F3D400036957 /* TextFieldSpec.swift in Sources */,
 				802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */,
 				411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */,
 				D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */,
 				80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */,
+				77C2612C1F97453600724A1F /* CustomFieldsSpec.swift in Sources */,
+				77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
 				D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
+				77C261251F97445300724A1F /* AuthSettingsSpec.swift in Sources */,
 				41DC7A221D386B4700896FC0 /* StringExtensionSpec.swift in Sources */,
 				68D186DF1ED9714F0030EE8C /* MessageURLSpec.swift in Sources */,
+				77C261271F97445F00724A1F /* DictionaryExtensionsSpec.swift in Sources */,
 				80A63C551F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift in Sources */,
 				B5893BF61F6C4B1D00365768 /* UserReviewManagerSpec.swift in Sources */,
 				4151807C1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift in Sources */,
 				411119B81F6825C30019854B /* NetworkManagerSpec.swift in Sources */,
 				416296F91F41B42B00BCCEDD /* UploadHelperSpec.swift in Sources */,
 				80A63C511F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift in Sources */,
-				771334251F91102900036957 /* DictionaryExtensionsSpec.swift in Sources */,
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,

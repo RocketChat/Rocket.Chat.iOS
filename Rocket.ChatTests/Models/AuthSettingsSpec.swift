@@ -1,5 +1,5 @@
 //
-//  AuthSettingsModelMappingSpec.swift
+//  AuthSettingsSpec.swift
 //  Rocket.ChatTests
 //
 //  Created by Vadym Brusko on 10/17/17.
@@ -38,6 +38,6 @@ class AuthSettingsModelMappingSpec: XCTestCase {
         let customFields = authSettings.customFields
 
         // assert
-        XCTAssert(customFields.isEmpty, "will ahve empty array of custom fields")
+        XCTAssert(customFields.isEmpty, "will have empty array of custom fields")
     }
 }

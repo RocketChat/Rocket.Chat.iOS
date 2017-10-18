@@ -21,9 +21,8 @@ class DictionaryExtensionsSpec: XCTestCase {
         let resultDictionary = Dictionary(keyValuePairs: pairs)
 
         // assert
-         XCTAssertEqual(resultDictionary, expectedDictionary, "init with keyValuesPairs create dictionary correctly")
+        XCTAssertEqual(resultDictionary, expectedDictionary, "init with keyValuesPairs create dictionary correctly")
     }
-
 
     func testUnionInPlaceUpdateAllKeys() {
         // arrange
@@ -50,6 +49,4 @@ class DictionaryExtensionsSpec: XCTestCase {
         // assert
         XCTAssertEqual(newDictionary, expectedDictionary, "union create updated dictionary correctly")
     }
-
 }
-
