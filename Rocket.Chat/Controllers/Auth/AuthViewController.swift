@@ -279,7 +279,7 @@ extension AuthViewController: UITextFieldDelegate {
 extension AuthViewController {
 
     func setupLoginServices() {
-        self.loginServicesToken?.stop()
+        self.loginServicesToken?.invalidate()
         self.loginServicesToken = LoginServiceManager.observe(block: updateLoginServices)
 
         LoginServiceManager.subscribe()
