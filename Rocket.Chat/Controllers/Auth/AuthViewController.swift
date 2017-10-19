@@ -180,10 +180,10 @@ final class AuthViewController: BaseViewController {
             self.textFieldUsername.alpha = 1
             self.textFieldPassword.alpha = 1
             self.activityIndicator.stopAnimating()
+            self.buttonAuthenticateGoogle.isEnabled = true
         })
 
         connecting = false
-        buttonAuthenticateGoogle.isEnabled = true
     }
 
     // MARK: IBAction
