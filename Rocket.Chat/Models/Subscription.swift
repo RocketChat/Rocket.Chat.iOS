@@ -159,4 +159,18 @@ extension Subscription {
         return object
     }
 
+    static func find(name: String, subscriptionType: [SubscriptionType], realm: Realm) -> Subscription? {
+        let predicate = NSPredicate(
+            format: "name == %@ && privateType IN %@",
+            name, subscriptionType.map { $0.rawValue }
+        )
+
+        return Realm.shared?.objects(Subscription.self).filter(predicate).first
+    }
+
+    static func find(name: String, subscriptionType: [SubscriptionType]) -> Subscription? {
+        guard let realm = Realm.shared else { return nil }
+
+        return find(name: name, subscriptionType: subscriptionType, realm: realm)
+    }
 }
