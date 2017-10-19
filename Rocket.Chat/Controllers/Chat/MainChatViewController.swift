@@ -79,9 +79,9 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     // MARK: Authentication & Server management
 
     func logout() {
-        ChatViewController.shared?.messagesToken?.stop()
-        SubscriptionsViewController.shared?.usersToken?.stop()
-        SubscriptionsViewController.shared?.subscriptionsToken?.stop()
+        ChatViewController.shared?.messagesToken?.invalidate()
+        SubscriptionsViewController.shared?.usersToken?.invalidate()
+        SubscriptionsViewController.shared?.subscriptionsToken?.invalidate()
 
         AuthManager.logout {
             let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
