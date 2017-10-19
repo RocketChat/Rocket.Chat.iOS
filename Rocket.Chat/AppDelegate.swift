@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import UserNotifications
+import OAuthSwift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

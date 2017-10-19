@@ -276,7 +276,8 @@ extension AuthViewController: UITextFieldDelegate {
 }
 
 // MARK: Login Services
-extension AuthViewController: SFSafariViewControllerDelegate {
+extension AuthViewController {
+
     func setupLoginServices() {
         self.loginServicesToken?.stop()
         self.loginServicesToken = LoginServiceManager.observe(block: updateLoginServices)
@@ -303,11 +304,22 @@ extension AuthViewController: SFSafariViewControllerDelegate {
 
         guard let oauthSwift = oauthSwift else { return }
 
-        let handler = SafariURLHandler(viewController: self, oauthSwift: oauthSwift)
+        let handler = WebViewController()
+        handler.targetURL = URL(string: "\(host)\(authorizePath)")
+        handler.viewDidLoad()
+        navigationController?.pushViewController(handler, animated: true)
+        handler.didNavigate = { url in
+            guard let url = url else { return false }
+            if url.host == callbackURL.host && url.path == callbackURL.path {
+                OAuthSwift.handle(url: url)
+                return true
+            }
+            return false
+        }
         oauthSwift.authorizeURLHandler = handler
 
-        oauthSwift.authorize(withCallbackURL: callbackURL, scope: loginService.scope ?? "", state: String.random(5),
-                                          success: loginServiceSuccess, failure: loginServiceFailure)
+        let handle = oauthSwift.authorize(withCallbackURL: callbackURL, scope: loginService.scope ?? "",
+                                          state: String.random(5), success: loginServiceSuccess, failure: loginServiceFailure)
 
         self.loginService = loginService
     }
@@ -360,6 +372,6 @@ extension AuthViewController: SFSafariViewControllerDelegate {
     }
 
     func loginServiceFailure(_ error: OAuthSwiftError) {
-
+        alert(title: "Error", message: ((error.errorUserInfo[NSLocalizedDescriptionKey] ?? "") as? String) ?? "")
     }
 }
