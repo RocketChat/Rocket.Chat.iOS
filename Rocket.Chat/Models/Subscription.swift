@@ -165,7 +165,7 @@ extension Subscription {
             name, subscriptionType.map { $0.rawValue }
         )
 
-        return Realm.shared?.objects(Subscription.self).filter(predicate).first
+        return realm.objects(Subscription.self).filter(predicate).first
     }
 
     static func find(name: String, subscriptionType: [SubscriptionType]) -> Subscription? {
