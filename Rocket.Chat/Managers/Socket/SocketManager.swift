@@ -21,6 +21,7 @@ public typealias MessageCompletionObjectsList <T: Object> = ([T]) -> Void
 protocol SocketConnectionHandler {
     func socketDidConnect(socket: SocketManager)
     func socketDidDisconnect(socket: SocketManager)
+    func socketDidReturnError(socket: SocketManager, error: SocketError)
 }
 
 class SocketManager {
@@ -63,7 +64,7 @@ class SocketManager {
 
     static func clear() {
         sharedInstance.internalConnectionHandler = nil
-        sharedInstance.connectionHandlers = [:]
+        sharedInstance.connectionHandlers.removeAll()
     }
 
     // MARK: Messages
