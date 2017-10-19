@@ -35,6 +35,7 @@ final class SignupViewController: BaseViewController {
     @IBOutlet weak var scrollView: UIScrollView!
 
     var customTextFields: [UITextField] = []
+    var compoundPickerDelegate = CompoundPickerViewDelegate()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
