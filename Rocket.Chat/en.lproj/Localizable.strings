@@ -28,6 +28,9 @@
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "We're still working on this feature, stay tunned!";
 
+"alert.socket_error.invalid_user.title" = "Session expired";
+"alert.socket_error.invalid_user.message" = "Your session has expired. Please log in again.";
+
 // Socket Connection
 "connection.offline.banner.message" = "You're offline, try connecting again";
 
