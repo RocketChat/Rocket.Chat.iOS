@@ -123,7 +123,7 @@
                                                 </constraints>
                                             </imageView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="john.appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K3h-Vc-Kfo">
-                                                <rect key="frame" x="86" y="44" width="244" height="21"/>
+                                                <rect key="frame" x="86" y="44" width="189" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="5nm-hf-Aip"/>
                                                 </constraints>
@@ -145,7 +145,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Qq-vp-NoK">
-                                                <rect key="frame" x="68" y="19" width="262" height="21"/>
+                                                <rect key="frame" x="68" y="19" width="43.5" height="21"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="21" id="2P6-YQ-MuU"/>
                                                 </constraints>
@@ -246,7 +246,7 @@
                         <outlet property="viewTextField" destination="qEc-o0-IxJ" id="1KL-CT-eAr"/>
                         <outlet property="viewUser" destination="ArO-ez-uRr" id="LYh-rg-dVA"/>
                         <outlet property="viewUserStatus" destination="V2s-Ct-SCW" id="ZS3-d0-lpu"/>
-                        <segue destination="OzA-tw-YTL" kind="presentation" identifier="New Channel" id="BHC-Tf-sPw"/>
+                        <segue destination="OzA-tw-YTL" kind="presentation" identifier="New Channel" modalPresentationStyle="formSheet" id="BHC-Tf-sPw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ggc-kc-WdB" userLabel="First Responder" sceneMemberID="firstResponder"/>

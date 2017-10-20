@@ -55,6 +55,13 @@ class NewRoomViewController: BaseViewController {
     override func viewDidLoad() {
         CheckTableViewCell.registerCell(for: tableView)
         TextFieldTableViewCell.registerCell(for: tableView)
+
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillHide, object: nil)
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 
     fileprivate func showErrorAlert(_ errorMessage: String?) {
@@ -66,7 +73,7 @@ class NewRoomViewController: BaseViewController {
             preferredStyle: .alert
         )
         alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-        DispatchQueue.main.sync {
+        DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
     }
@@ -193,5 +200,45 @@ extension NewRoomViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableViewData[section].cells.count
+    }
+}
+
+// MARK: Update cell position when the keyboard will show/hide
+
+extension NewRoomViewController {
+    func getTableViewInsets(keyboardHeight: CGFloat) -> UIEdgeInsets? {
+        guard let window = UIApplication.shared.delegate?.window as? UIWindow else { return nil }
+        guard let tableViewFrame = tableView.superview?.convert(tableView.frame, to: window) else { return nil }
+
+        let bottomInset = keyboardHeight - (window.frame.height - tableViewFrame.height - tableViewFrame.origin.y)
+
+        return UIEdgeInsets(
+            top: tableView.contentInset.top,
+            left: tableView.contentInset.left,
+            bottom: bottomInset,
+            right: tableView.contentInset.right
+        )
+    }
+
+    @objc func keyboardWillChangeFrame(_ notification: Notification) {
+        guard let info = notification.userInfo else { return }
+        guard let animationDuration = info[UIKeyboardAnimationDurationUserInfoKey] as? TimeInterval else { return }
+        guard let keyboardFrame = info[UIKeyboardFrameEndUserInfoKey] as? NSValue else { return }
+
+        let keyboardHeight = keyboardFrame.cgRectValue.height
+        guard let contentInsets = getTableViewInsets(keyboardHeight: keyboardHeight) else { return }
+
+        UIView.animate(
+            withDuration: animationDuration,
+            animations: {
+                self.tableView.contentInset = contentInsets
+                self.tableView.scrollIndicatorInsets = contentInsets
+            }, completion: { _ -> Void in
+                guard let contentInsets = self.getTableViewInsets(keyboardHeight: keyboardHeight) else { return }
+
+                self.tableView.contentInset = contentInsets
+                self.tableView.scrollIndicatorInsets = contentInsets
+            }
+        )
     }
 }

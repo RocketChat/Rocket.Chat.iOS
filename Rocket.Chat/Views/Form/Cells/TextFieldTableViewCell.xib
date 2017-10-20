@@ -26,9 +26,9 @@
                         </constraints>
                     </imageView>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Placeholder" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="RzC-dR-KkA">
-                        <rect key="frame" x="31" y="25.5" width="281" height="17"/>
+                        <rect key="frame" x="31" y="25" width="281" height="18"/>
                         <nil key="textColor"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <textInputTraits key="textInputTraits"/>
                         <connections>
                             <action selector="textFieldInputEditingChanged:" destination="STT-md-aQU" eventType="editingChanged" id="4z6-Gc-RDE"/>
