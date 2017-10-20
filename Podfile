@@ -47,9 +47,15 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
+  swift4Targets = ['OAuthSwift']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'
+    end
+    if swift4Targets.include? target.name
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.0'
+      end
     end
   end
 end
