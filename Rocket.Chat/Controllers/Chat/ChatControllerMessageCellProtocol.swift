@@ -21,6 +21,7 @@ extension ChatViewController: ChatMessageCellProtocol {
 
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
         guard let username = message.user?.name else { return }
+        if username == AuthManager.currentUser()?.username { return }
 
         func openDirectMessage() -> Bool {
             guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
