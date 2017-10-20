@@ -51,7 +51,7 @@ extension WebViewController: WKNavigationDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
 
         if didNavigate?(navigationAction.request.url) ?? false {
-            decisionHandler(.cancel)
+            decisionHandler(.allow)
             dismissWebViewController()
             return
         }
