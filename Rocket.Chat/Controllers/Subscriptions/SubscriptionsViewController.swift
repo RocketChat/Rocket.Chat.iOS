@@ -81,13 +81,12 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var labelServer: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
-    @IBOutlet weak var imageViewAddChannel: UIImageView! {
+    @IBOutlet weak var buttonAddChannel: UIButton! {
         didSet {
-            imageViewAddChannel.image = imageViewAddChannel.image?.imageWithTint(.RCLightBlue())
-
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(imageViewAddChannelDidTap))
-            imageViewAddChannel.addGestureRecognizer(gesture)
-            imageViewAddChannel.isUserInteractionEnabled = true
+            if let image = UIImage(named: "Add") {
+                buttonAddChannel.tintColor = .RCLightBlue()
+                buttonAddChannel.setImage(image, for: .normal)
+            }
         }
     }
     @IBOutlet weak var imageViewArrowDown: UIImageView! {
@@ -590,7 +589,7 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
         dismissUserMenu()
     }
 
-    @objc func imageViewAddChannelDidTap(sender: Any) {
+    @IBAction func buttonAddChannelDidTap(sender: Any) {
         performSegue(withIdentifier: "New Channel", sender: sender)
     }
 
