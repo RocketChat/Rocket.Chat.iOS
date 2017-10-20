@@ -55,6 +55,11 @@ extension SocketManager {
 
     fileprivate func handleError(_ result: SocketResponse, socket: WebSocket) {
         // Do nothing?
+        let error = SocketError(json: result.result["error"])
+
+        for (_, handler) in connectionHandlers {
+            handler.socketDidReturnError(socket: self, error: error)
+        }
     }
 
     fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {
