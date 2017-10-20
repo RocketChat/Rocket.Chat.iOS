@@ -12,6 +12,7 @@ import SafariServices
 import OnePasswordExtension
 import RealmSwift
 import OAuthSwift
+import SwiftyJSON
 
 final class AuthViewController: BaseViewController {
 
@@ -52,6 +53,8 @@ final class AuthViewController: BaseViewController {
     @IBOutlet weak var authButtonsStackView: UIStackView!
     var customAuthButtons = [String: UIButton]()
     var loginService: LoginService?
+    var loginCredentialToken: String?
+    var loginCredentialSecret: String?
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -296,7 +299,7 @@ extension AuthViewController {
 
         oauthSwift = OAuth2Swift(
             consumerKey: clientId,
-            consumerSecret: "e14e6e9c582201619d8054111bb18c8987b45fb3",
+            consumerSecret: "3l9YH_Ser-7EN2s2qSfniu9V3vVjhg0AI7gvF9-BLWx",
             authorizeUrl: "\(host)\(authorizePath)",
             accessTokenUrl: "\(host)\(tokenPath)",
             responseType: "token"
@@ -305,12 +308,16 @@ extension AuthViewController {
         guard let oauthSwift = oauthSwift else { return }
 
         let handler = WebViewController()
+        oauthSwift.removeCallbackNotificationObserver()
         handler.targetURL = URL(string: "\(host)\(authorizePath)")
         handler.viewDidLoad()
         navigationController?.pushViewController(handler, animated: true)
         handler.didNavigate = { url in
             guard let url = url else { return false }
-            if url.host == callbackURL.host && url.path == callbackURL.path {
+            if url.host == callbackURL.host && url.path == callbackURL.path, let fragment = url.fragment {
+                let fragmentJSON = JSON(parseJSON: NSString(string: fragment).removingPercentEncoding ?? "")
+                self.loginCredentialToken = fragmentJSON["credentialToken"].string
+                self.loginCredentialSecret = fragmentJSON["credentialSecret"].string
                 OAuthSwift.handle(url: url)
                 return true
             }
@@ -318,9 +325,9 @@ extension AuthViewController {
         }
         oauthSwift.authorizeURLHandler = handler
 
+        let state = "{\"loginStyle\":\"popup\",\"credentialToken\":\"\(String.random(40))\",\"isCordova\":true}".base64Encoded()
         let handle = oauthSwift.authorize(withCallbackURL: callbackURL, scope: loginService.scope ?? "",
-                                          state: String.random(5), success: loginServiceSuccess, failure: loginServiceFailure)
-
+                                          state: state ?? "", success: loginServiceSuccess, failure: loginServiceFailure)
         self.loginService = loginService
     }
 
@@ -358,15 +365,14 @@ extension AuthViewController {
 
     func loginServiceSuccess(_ credential: OAuthSwiftCredential, _ response: OAuthSwiftResponse?, _ parameters: OAuthSwift.Parameters) {
         guard let loginService = self.loginService, let service = loginService.service, let scope = loginService.scope else { return }
-
+        guard let loginToken = self.loginCredentialToken else { return }
+        guard let loginSecret = self.loginCredentialSecret else { return }
         let params = [
-            "serviceName": service,
-            "accessToken": credential.oauthToken,
-            "refreshToken": credential.oauthRefreshToken,
-            "idToken": credential.oauthTokenSecret,
-            "expiresIn": Int((credential.oauthTokenExpiresAt ?? Date()).timeIntervalSinceNow),
-            "scope": scope
-            ] as [String: Any]
+            "oauth": [
+                "credentialToken": loginToken,
+                "credentialSecret": loginSecret
+                ] as [String: Any]
+            ]
 
         AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
     }
