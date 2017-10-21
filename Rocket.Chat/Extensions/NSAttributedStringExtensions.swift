@@ -74,6 +74,7 @@ extension NSMutableAttributedString {
                     let range = NSRange(range, in: string)
                     setBackgroundColor(UIColor.background(for: $0), range: range)
                     setFontColor(UIColor.font(for: $0), range: range)
+                    setFont(MessageTextFontAttributes.boldFont, range: range)
                 }
             }
         }
