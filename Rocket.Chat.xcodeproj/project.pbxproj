@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1435BFA31F9B601600FB2768 /* HighlightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BFA21F9B601600FB2768 /* HighlightTextView.swift */; };
 		15A2FD223558011BFDE03883 /* Pods_Rocket_ChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */; };
 		4101BF011F8D0A1700F67E89 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101BF001F8D0A1700F67E89 /* AppManager.swift */; };
 		4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */; };
@@ -255,6 +256,7 @@
 
 /* Begin PBXFileReference section */
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1435BFA21F9B601600FB2768 /* HighlightTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = HighlightTextView.swift; path = Views/Chat/HighlightTextView.swift; sourceTree = "<group>"; };
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		4101BF001F8D0A1700F67E89 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppManager.swift; path = Managers/AppManager.swift; sourceTree = "<group>"; };
 		4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppManagerSpec.swift; path = Managers/AppManagerSpec.swift; sourceTree = "<group>"; };
@@ -1049,6 +1051,7 @@
 				419D84FF1DF599DA0021F034 /* ChatHeaderViewStatus.swift */,
 				80CFB5711F8D697100FC9715 /* ReplyView.xib */,
 				80CFB5731F8DA55C00FC9715 /* ReplyView.swift */,
+				1435BFA21F9B601600FB2768 /* HighlightTextView.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1487,7 +1490,7 @@
 		};
 		D37272A11E13E60E00A25E1A /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
+			buildActionMask = 12;
 			files = (
 			);
 			inputPaths = (
@@ -1791,6 +1794,7 @@
 				802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */,
 				41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */,
 				D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */,
+				1435BFA31F9B601600FB2768 /* HighlightTextView.swift in Sources */,
 				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,
 				D15C83861F70991F001AB155 /* APIResult.swift in Sources */,
