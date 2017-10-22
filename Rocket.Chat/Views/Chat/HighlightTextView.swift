@@ -23,7 +23,7 @@ class HighlightTextView: UITextView {
 
         let framesetter: CTFramesetter = CTFramesetterCreateWithAttributedString(string)
         let path: CGMutablePath = CGMutablePath()
-        path.addRect(CGRect(x: 0, y: 0, width: bounds.size.width, height: bounds.size.height))
+        path.addRect(CGRect(x: 0, y: 0, width: bounds.size.width - 16, height: bounds.size.height))
         let totalframe: CTFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)
 
         guard let context: CGContext = UIGraphicsGetCurrentContext() else {
@@ -61,12 +61,12 @@ class HighlightTextView: UITextView {
                     var ascent: CGFloat = 0
                     var descent: CGFloat = 0
 
-                    runBounds.size.width = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, nil))
+                    runBounds.size.width = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, nil)) + 6
                     runBounds.size.height = ascent + descent
 
                     let xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, nil)
-                    runBounds.origin.x = origins[index].x + xOffset
-                    runBounds.origin.y = origins[index].y
+                    runBounds.origin.x = origins[index].x + xOffset + 2
+                    runBounds.origin.y = origins[index].y - 4
 
                     let path = UIBezierPath(roundedRect: runBounds, cornerRadius: 5)
 
