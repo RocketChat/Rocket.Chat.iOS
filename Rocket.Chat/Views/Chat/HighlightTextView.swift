@@ -68,11 +68,13 @@ class HighlightTextView: UITextView {
                     runBounds.origin.x = origins[index].x + xOffset
                     runBounds.origin.y = origins[index].y
 
+                    let path = UIBezierPath(roundedRect: runBounds, cornerRadius: 5)
+
                     let highlightColor = color.cgColor
                     context.setFillColor(highlightColor)
                     context.setStrokeColor(highlightColor)
-                    context.strokePath()
-                    context.fill(runBounds)
+                    context.addPath(path.cgPath)
+                    context.drawPath(using: .fillStroke)
                 }
             }
         }
