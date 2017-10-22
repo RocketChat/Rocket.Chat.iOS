@@ -57,7 +57,7 @@ extension NSMutableAttributedString {
     func setBackgroundColor(_ color: UIColor, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSAttributedStringKey.backgroundColor: color
+                NSAttributedStringKey(rawValue: "highlightColor"): color
             ], range: attributeRange)
         }
     }
@@ -73,7 +73,7 @@ extension NSMutableAttributedString {
                 for range in ranges {
                     let range = NSRange(range, in: string)
                     setBackgroundColor(UIColor.background(for: $0), range: range)
-                    setFontColor(UIColor.font(for: $0), range: range)
+//                    setFontColor(UIColor.font(for: $0), range: range)
                     setFont(MessageTextFontAttributes.boldFont, range: range)
                 }
             }
