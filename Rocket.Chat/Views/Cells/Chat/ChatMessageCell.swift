@@ -14,7 +14,7 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
 }
 
 fileprivate enum Regex: String {
-    case hashtag = "(?:^#|\\s#)[\\p{L}0-9_]*"
+    case hashtag = "(?<!\\S)#[\\p{L}0-9_]+"
 }
 
 final class ChatMessageCell: UICollectionViewCell {
