@@ -213,17 +213,6 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
-    fileprivate func highlightFrame(forRange range: NSRange, inTextView textView: UITextView) -> CGRect? {
-        let beginning = textView.beginningOfDocument
-        guard let start = textView.position(from: beginning, offset: range.location), let end = textView.position(from: start, offset: range.length), let textRange = textView.textRange(from: start, to: end) else {
-            return nil
-        }
-
-        let rect = textView.firstRect(for: textRange)
-
-        return textView.convert(rect, from: textView)
-    }
-
     fileprivate func updateMessageContent() {
         if let text = MessageTextCacheManager.shared.message(for: message) {
             if message.temporary {
