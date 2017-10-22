@@ -43,8 +43,6 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
-    var highlightViews: [UIView] = []
-
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelText: HighlightTextView! {
@@ -105,21 +103,11 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
-    private func clearHighlights() {
-        for view in highlightViews {
-            view.removeFromSuperview()
-        }
-
-        highlightViews.removeAll()
-    }
-
     override func prepareForReuse() {
         labelUsername.text = ""
         labelText.text = ""
         labelDate.text = ""
         sequential = false
-
-        clearHighlights()
 
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
@@ -243,37 +231,8 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             labelText.attributedText = text
-
-//            highlightMentions()
         }
     }
-
-//    fileprivate func highlightMentions() {
-//        clearHighlights()
-//
-//        message.mentions.forEach {
-//            if let username = $0.username {
-//                let ranges = message.text.ranges(of: "@\(username)")
-//                for range in ranges {
-//                    let range = NSRange(range, in: message.text)
-//                    guard let frame = highlightFrame(forRange: range, inTextView: labelText) else {
-//                        continue
-//                    }
-//
-////                    frame = frame.insetBy(dx: -1.2, dy: 2)
-////                    frame = frame.offsetBy(dx: 0, dy: 2)
-//
-//                    let v = UIView(frame: frame)
-//                    v.layer.cornerRadius = 2
-//                    v.backgroundColor = UIColor.background(for: $0)
-//
-//                    highlightViews.append(v)
-//                    labelText.addSubview(v)
-//                    labelText.sendSubview(toBack: v)
-//                }
-//            }
-//        }
-//    }
 
     fileprivate func updateMessage() {
         guard delegate != nil else { return }
