@@ -288,47 +288,13 @@ extension AuthViewController {
     @objc func loginServiceButtonDidPress(_ button: UIButton) {
         guard let service = customAuthButtons.filter({ $0.value == button }).keys.first else { return }
         guard let loginService = LoginService.find(service: service) else { return }
-        guard let host = loginService.serverURL, !host.isEmpty else { return }
-        guard let clientId = loginService.clientId else { return }
-        guard let authorizePath = loginService.authorizePath else { return }
-        guard let tokenPath = loginService.tokenPath else { return }
-        guard let callbackURL = URL(string: "https://\(serverURL.host ?? "")/_oauth/\(service)") else { return }
 
-        oauthSwift = OAuth2Swift(
-            consumerKey: clientId,
-            consumerSecret: "",
-            authorizeUrl: "\(host)\(authorizePath)",
-            accessTokenUrl: "\(host)\(tokenPath)",
-            responseType: "token"
-        )
-
-        guard let oauthSwift = oauthSwift else { return }
-
-        let handler = WebViewController()
-        oauthSwift.removeCallbackNotificationObserver()
-        handler.targetURL = URL(string: "\(host)\(authorizePath)")
-        handler.viewDidLoad()
-        navigationController?.pushViewController(handler, animated: true)
-        handler.didNavigate = { purl in
-            guard let purl = purl else { return false }
-            guard var urlComponents = URLComponents(url: purl, resolvingAgainstBaseURL: true) else { return true }
-
-            urlComponents.query = urlComponents.query?.removingPercentEncoding
-
-            guard let url = urlComponents.url else { return true }
-
-            if url.host == callbackURL.host && url.path == callbackURL.path, let fragment = url.fragment {
-                let fragmentJSON = JSON(parseJSON: NSString(string: fragment).removingPercentEncoding ?? "")
-                AuthManager.auth(token: fragmentJSON["credentialToken"].string ?? "", secret: fragmentJSON["credentialSecret"].string ?? "", completion: self.handleAuthenticationResponse)
-                return true
-            }
-            return false
-        }
-        oauthSwift.authorizeURLHandler = handler
-
-        let state = "{\"loginStyle\":\"popup\",\"credentialToken\":\"\(String.random(40))\",\"isCordova\":true}".base64Encoded()
-        let handle = oauthSwift.authorize(withCallbackURL: callbackURL, scope: loginService.scope ?? "",
-                                          state: state ?? "", success: loginServiceSuccess, failure: loginServiceFailure)
+        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
+            guard let this = self else { return }
+            AuthManager.auth(token: credentials.token, secret: credentials.secret, completion: this.handleAuthenticationResponse)
+        }, failure: { [weak self] in
+            self?.alert(title: "Authentication Error", message: "Login with \(service) could not be made.")
+        })
     }
 
     func updateLoginServices(changes: RealmCollectionChange<Results<LoginService>>) {
@@ -361,13 +327,5 @@ extension AuthViewController {
         default:
             break
         }
-    }
-
-    func loginServiceSuccess(_ credential: OAuthSwiftCredential, _ response: OAuthSwiftResponse?, _ parameters: OAuthSwift.Parameters) {
-
-    }
-
-    func loginServiceFailure(_ error: OAuthSwiftError) {
-
     }
 }
