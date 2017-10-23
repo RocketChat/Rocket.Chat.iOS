@@ -12,8 +12,13 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class LoginServiceSpec: RealmTestCase {
+class LoginServiceSpec: XCTestCase {
+    func createTestRealm() throws -> Realm {
+        return try Realm(configuration: Realm.Configuration(inMemoryIdentifier: String.random(40)))
+    }
+
     let testJSON = JSON(parseJSON: """
+        {
             \"mergeUsers\" : false,
             \"clientId\" : \"NhT7feA98YvKj6v6p\",
             \"scope\" : \"openid\",
@@ -29,14 +34,17 @@ class LoginServiceSpec: RealmTestCase {
             \"buttonLabelColor\" : \"#FFFFFF\",
             \"tokenPath\" : \"/oauth/token\",
             \"usernameField\" : \"\"
+        }
         """)
 
     func testFind() throws {
         let realm = try createTestRealm()
 
         let github = LoginService()
+        github.identifier = "githubid"
         github.service = "github"
         let google = LoginService()
+        google.identifier = "googleid"
         google.service = "google"
 
         try realm.write {
