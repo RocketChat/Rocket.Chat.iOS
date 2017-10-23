@@ -311,6 +311,26 @@ extension AuthManager {
     }
 
     /**
+        This method authenticates the user with a credential token
+        and a credential secret (retrieved via an OAuth method)
+
+        - parameter token: The credential token
+        - parameter secret: The credential secret
+        - parameter completion: The completion block that'll be called in case
+            of success or error.
+     */
+    static func auth(token: String, secret: String, completion: @escaping MessageCompletion) {
+        let params = [
+            "oauth": [
+                "credentialToken": token,
+                "credentialSecret": secret
+                ] as [String: Any]
+        ]
+
+        AuthManager.auth(params: params, completion: completion)
+    }
+
+    /**
         Returns the username suggestion for the logged in user.
     */
     static func usernameSuggestion(completion: @escaping MessageCompletion) {

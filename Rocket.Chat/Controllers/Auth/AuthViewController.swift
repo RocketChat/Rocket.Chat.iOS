@@ -319,7 +319,7 @@ extension AuthViewController {
 
             if url.host == callbackURL.host && url.path == callbackURL.path, let fragment = url.fragment {
                 let fragmentJSON = JSON(parseJSON: NSString(string: fragment).removingPercentEncoding ?? "")
-                self.loginWithCustomOAuth(token: fragmentJSON["credentialToken"].string ?? "", secret: fragmentJSON["credentialSecret"].string ?? "")
+                AuthManager.auth(token: fragmentJSON["credentialToken"].string ?? "", secret: fragmentJSON["credentialSecret"].string ?? "", completion: self.handleAuthenticationResponse)
                 return true
             }
             return false
@@ -361,17 +361,6 @@ extension AuthViewController {
         default:
             break
         }
-    }
-
-    func loginWithCustomOAuth(token: String, secret: String) {
-        let params = [
-            "oauth": [
-                "credentialToken": token,
-                "credentialSecret": secret
-                ] as [String: Any]
-        ]
-
-        AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
     }
 
     func loginServiceSuccess(_ credential: OAuthSwiftCredential, _ response: OAuthSwiftResponse?, _ parameters: OAuthSwift.Parameters) {
