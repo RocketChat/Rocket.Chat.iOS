@@ -11,6 +11,7 @@ import UIKit
 protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol {
     func openURL(url: URL)
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
+    func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
 }
 
 final class ChatMessageCell: UICollectionViewCell {
@@ -19,6 +20,7 @@ final class ChatMessageCell: UICollectionViewCell {
     static let identifier = "ChatMessageCell"
 
     weak var longPressGesture: UILongPressGestureRecognizer?
+    weak var usernameTapGesture: UITapGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
     var message: Message! {
         didSet {
@@ -115,12 +117,21 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     func insertGesturesIfNeeded() {
-        if self.longPressGesture == nil {
+        if longPressGesture == nil {
             let gesture = UILongPressGestureRecognizer(target: self, action: #selector(handleLongPressMessageCell(recognizer:)))
             gesture.minimumPressDuration = 0.5
             gesture.delegate = self
-            self.addGestureRecognizer(gesture)
-            self.longPressGesture = gesture
+            addGestureRecognizer(gesture)
+
+            longPressGesture = gesture
+        }
+
+        if usernameTapGesture == nil {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
+            gesture.delegate = self
+            labelUsername.addGestureRecognizer(gesture)
+
+            usernameTapGesture = gesture
         }
     }
 
@@ -238,6 +249,10 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
+    }
+
+    @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
+        delegate?.handleUsernameTapMessageCell(message, view: contentView, recognizer: recognizer)
     }
 
 }
