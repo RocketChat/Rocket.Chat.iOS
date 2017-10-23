@@ -319,11 +319,11 @@ extension AuthManager {
         - parameter completion: The completion block that'll be called in case
             of success or error.
      */
-    static func auth(token: String, secret: String, completion: @escaping MessageCompletion) {
+    static func auth(credentials: OAuthCredentials, completion: @escaping MessageCompletion) {
         let params = [
             "oauth": [
-                "credentialToken": token,
-                "credentialSecret": secret
+                "credentialToken": credentials.token,
+                "credentialSecret": credentials.secret
                 ] as [String: Any]
         ]
 
