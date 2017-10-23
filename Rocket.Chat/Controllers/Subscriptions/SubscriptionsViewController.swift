@@ -293,8 +293,8 @@ extension SubscriptionsViewController {
         assigned = true
 
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
-        usersToken = realm.objects(User.self).addNotificationBlock(handleModelUpdates)
+        subscriptionsToken = subscriptions?.observe(handleModelUpdates)
+        usersToken = realm.objects(User.self).observe(handleModelUpdates)
 
         groupSubscription()
     }

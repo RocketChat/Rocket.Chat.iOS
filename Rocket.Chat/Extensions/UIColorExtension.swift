@@ -55,6 +55,10 @@ extension UIColor {
         return UIColor(rgb: 0xEAEAEA, alphaVal: 1)
     }
 
+    static func RCSeparatorGrey() -> UIColor {
+        return UIColor(rgb: 0xC2C2C2, alphaVal: 0.5)
+    }
+
     static func RCDarkBlue() -> UIColor {
         return UIColor(rgb: 0x0a4469, alphaVal: 1)
     }
