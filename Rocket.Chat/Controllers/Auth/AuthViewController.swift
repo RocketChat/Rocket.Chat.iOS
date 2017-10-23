@@ -296,7 +296,7 @@ extension AuthViewController {
             guard let this = self else { return }
             AuthManager.auth(credentials: credentials, completion: this.handleAuthenticationResponse)
         }, failure: { [weak self] in
-            self?.alert(title: "Authentication Error", message: "Login with \(service) could not be made.")
+            self?.alert(title: localized("alert.login_service_error.title"), message: localized("alert.login_service_error.title"))
         })
     }
 
