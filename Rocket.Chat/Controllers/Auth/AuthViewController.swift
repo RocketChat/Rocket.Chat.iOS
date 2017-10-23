@@ -310,8 +310,8 @@ extension AuthViewController {
                 button.layer.cornerRadius = 3
                 button.setTitle($0.buttonLabelText ?? "", for: .normal)
                 button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
-                button.setTitleColor(.white, for: .normal)
-                button.backgroundColor = .black
+                button.setTitleColor(UIColor(hex: $0.buttonLabelColor), for: .normal)
+                button.backgroundColor = UIColor(hex: $0.buttonColor)
                 button.addTarget(self, action: #selector(loginServiceButtonDidPress(_:)), for: .touchUpInside)
 
                 authButtonsStackView.addArrangedSubview(button)
@@ -328,6 +328,8 @@ extension AuthViewController {
                 }
 
                 button.setTitle($0.buttonLabelText ?? "", for: .normal)
+                button.setTitleColor(UIColor(hex: $0.buttonLabelColor), for: .normal)
+                button.backgroundColor = UIColor(hex: $0.buttonColor)
             }
 
             deletions.map { res[$0] }.forEach {
