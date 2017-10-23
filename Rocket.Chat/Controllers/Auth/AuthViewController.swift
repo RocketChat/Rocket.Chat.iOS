@@ -285,12 +285,16 @@ extension AuthViewController {
     }
 
     @objc func loginServiceButtonDidPress(_ button: UIButton) {
-        guard let service = customAuthButtons.filter({ $0.value == button }).keys.first else { return }
-        guard let loginService = LoginService.find(service: service) else { return }
+        guard let service = customAuthButtons.filter({ $0.value == button }).keys.first,
+              let realm = Realm.shared,
+              let loginService = LoginService.find(service: service, realm: realm)
+        else {
+            return
+        }
 
         OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
             guard let this = self else { return }
-            AuthManager.auth(token: credentials.token, secret: credentials.secret, completion: this.handleAuthenticationResponse)
+            AuthManager.auth(credentials: credentials, completion: this.handleAuthenticationResponse)
         }, failure: { [weak self] in
             self?.alert(title: "Authentication Error", message: "Login with \(service) could not be made.")
         })

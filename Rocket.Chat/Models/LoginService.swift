@@ -26,10 +26,10 @@ class LoginService: BaseModel {
 }
 
 extension LoginService {
-    static func find(service: String) -> LoginService? {
+    static func find(service: String, realm: Realm) -> LoginService? {
         var object: LoginService?
 
-        if let findObject = Realm.shared?.objects(LoginService.self).filter("service == '\(service)'").first {
+        if let findObject = realm.objects(LoginService.self).filter("service == '\(service)'").first {
             object = findObject
         }
 
