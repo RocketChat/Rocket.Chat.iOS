@@ -32,8 +32,18 @@ class OAuthManager {
     private static var oauthSwift: OAuth2Swift?
 
     static func callbackURL(for loginService: LoginService, at server: URL) -> URL? {
-        guard let service = loginService.service else { return nil }
-        return URL(string: "https://\(server.host ?? "")/_oauth/\(service)")
+        guard
+            let service = loginService.service,
+            let host = server.host
+        else {
+            return nil
+        }
+
+        return URL(string: "https://\(host)/_oauth/\(service)")
+    }
+
+    static func state() -> String? {
+        return "{\"loginStyle\":\"popup\",\"credentialToken\":\"\(String.random(40))\",\"isCordova\":true}".base64Encoded()
     }
 
     static func authorize(loginService: LoginService, at server: URL, viewController: UIViewController, success: @escaping (OAuthCredentials) -> Void, failure: @escaping () -> Void) {
@@ -42,8 +52,11 @@ class OAuthManager {
             let clientId = loginService.clientId,
             let authorizePath = loginService.authorizePath,
             let tokenPath = loginService.tokenPath,
-            let callbackURL = callbackURL(for: loginService, at: server)
+            let scope = loginService.scope,
+            let callbackURL = callbackURL(for: loginService, at: server),
+            let state = state()
         else {
+            failure()
             return
         }
 
@@ -55,20 +68,18 @@ class OAuthManager {
             responseType: "token"
         )
 
-        guard let oauthSwift = oauthSwift else { return }
+        guard let oauthSwift = oauthSwift else {
+            failure()
+            return
+        }
 
         let handler = WebViewController()
         oauthSwift.removeCallbackNotificationObserver()
         handler.targetURL = URL(string: "\(host)\(authorizePath)")
         handler.viewDidLoad()
         viewController.navigationController?.pushViewController(handler, animated: true)
-        handler.didNavigate = { purl in
-            guard let purl = purl else { return false }
-            guard var urlComponents = URLComponents(url: purl, resolvingAgainstBaseURL: true) else { return true }
-
-            urlComponents.query = urlComponents.query?.removingPercentEncoding
-
-            guard let url = urlComponents.url else { return true }
+        handler.didNavigate = { url in
+            guard let url = url else { return false }
 
             if url.host == callbackURL.host && url.path == callbackURL.path, let fragment = url.fragment {
                 let fragmentJSON = JSON(parseJSON: NSString(string: fragment).removingPercentEncoding ?? "")
@@ -85,8 +96,7 @@ class OAuthManager {
         }
         oauthSwift.authorizeURLHandler = handler
 
-        let state = "{\"loginStyle\":\"popup\",\"credentialToken\":\"\(String.random(40))\",\"isCordova\":true}".base64Encoded()
-        oauthSwift.authorize(withCallbackURL: callbackURL, scope: loginService.scope ?? "",
-                             state: state ?? "", success: { _,_,_  in }, failure: { _ in failure() })
+        oauthSwift.authorize(withCallbackURL: callbackURL, scope: scope,
+                             state: state, success: { _, _, _  in }, failure: { _ in failure() })
     }
 }
