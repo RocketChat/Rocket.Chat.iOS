@@ -23,6 +23,8 @@ class LoginService: BaseModel {
     @objc dynamic var tokenSentVia: String?
     @objc dynamic var usernameField: String?
     @objc dynamic var mergeUsers = false
+    @objc dynamic var loginStyle: String?
+    @objc dynamic var buttonColor: String?
 }
 
 extension LoginService {

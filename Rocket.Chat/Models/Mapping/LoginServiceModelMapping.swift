@@ -25,5 +25,7 @@ extension LoginService: ModelMappeable {
         self.tokenSentVia = values["tokenSentVia"].string ?? ""
         self.usernameField = values["usernameField"].string ?? ""
         self.mergeUsers = values["mergeUsers"].bool ?? false
+        self.loginStyle = values["loginStyle"].string
+        self.buttonColor = values["buttonColor"].string
     }
 }
