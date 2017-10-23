@@ -206,6 +206,7 @@
 		807371A01F96937100D53ADF /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719F1F96937100D53ADF /* LoginService.swift */; };
 		807371A21F96968C00D53ADF /* LoginServiceModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371A11F96968C00D53ADF /* LoginServiceModelMapping.swift */; };
 		807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */; };
+		807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */; };
 		80A63C4F1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */; };
 		80A63C511F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */; };
 		80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */; };
@@ -471,6 +472,7 @@
 		8073719F1F96937100D53ADF /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginService.swift; path = Models/LoginService.swift; sourceTree = "<group>"; };
 		807371A11F96968C00D53ADF /* LoginServiceModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginServiceModelMapping.swift; path = Models/Mapping/LoginServiceModelMapping.swift; sourceTree = "<group>"; };
 		807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginServiceModelHandler.swift; path = Models/Handler/LoginServiceModelHandler.swift; sourceTree = "<group>"; };
+		807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginServiceSpec.swift; path = Models/LoginServiceSpec.swift; sourceTree = "<group>"; };
 		80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequest.swift; sourceTree = "<group>"; };
 		80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequest.swift; sourceTree = "<group>"; };
@@ -609,6 +611,7 @@
 				41FE55521F6038D60071E97A /* DatabaseManagerSpec.swift */,
 				411119B71F6825C30019854B /* NetworkManagerSpec.swift */,
 				B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */,
+				807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1897,6 +1900,7 @@
 				80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */,
 				77C2612C1F97453600724A1F /* CustomFieldsSpec.swift in Sources */,
 				77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */,
+				807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
 				D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */,
