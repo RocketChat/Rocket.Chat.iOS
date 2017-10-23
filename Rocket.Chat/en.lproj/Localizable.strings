@@ -31,6 +31,9 @@
 "alert.socket_error.invalid_user.title" = "Session expired";
 "alert.socket_error.invalid_user.message" = "Your session has expired. Please log in again.";
 
+"alert.login_service_error.title" = "Authentication Error";
+"alert.login_service_error.message" = "Could not authenticate using this service. Please, try again.";
+
 // Socket Connection
 "connection.offline.banner.message" = "You're offline, try connecting again";
 
