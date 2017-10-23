@@ -11,8 +11,6 @@ import UIKit
 import SafariServices
 import OnePasswordExtension
 import RealmSwift
-import OAuthSwift
-import SwiftyJSON
 
 final class AuthViewController: BaseViewController {
 
@@ -21,7 +19,6 @@ final class AuthViewController: BaseViewController {
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
 
-    var oauthSwift: OAuth2Swift?
     var loginServicesToken: NotificationToken?
 
     @IBOutlet weak var viewFields: UIView! {
@@ -279,7 +276,7 @@ extension AuthViewController: UITextFieldDelegate {
 extension AuthViewController {
     func setupLoginServices() {
         self.loginServicesToken?.invalidate()
-        
+
         self.loginServicesToken = LoginServiceManager.observe { [weak self] changes in
             self?.updateLoginServices(changes: changes)
         }
