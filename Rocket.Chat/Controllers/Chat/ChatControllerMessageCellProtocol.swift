@@ -19,6 +19,34 @@ extension ChatViewController: ChatMessageCellProtocol {
         }
     }
 
+    func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
+        guard let username = message.user?.name else { return }
+        if username == AuthManager.currentUser()?.username { return }
+
+        func openDirectMessage() -> Bool {
+            guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
+
+            let controller = ChatViewController.shared
+            controller?.subscription = directMessageRoom
+
+            return true
+        }
+
+        // Check if already have a direct message room with this user
+        if openDirectMessage() == true { return }
+
+        // If not, create a new direct message
+        SubscriptionManager.createDirectMessage(username, completion: { response in
+            guard !response.isError() else { return }
+
+            guard let auth = AuthManager.isAuthenticated() else { return }
+
+            SubscriptionManager.updateSubscriptions(auth) { _ in
+                _ = openDirectMessage()
+            }
+        })
+    }
+
     func openURL(url: URL) {
         let controller = SFSafariViewController(url: url)
         present(controller, animated: true, completion: nil)
