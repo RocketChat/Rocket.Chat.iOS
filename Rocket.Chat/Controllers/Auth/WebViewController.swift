@@ -17,6 +17,8 @@ class WebViewController: OAuthWebViewController {
 
     var didNavigate: ((URL?) -> Bool)?
 
+    var activityIndicator: UIActivityIndicatorView!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -26,6 +28,14 @@ class WebViewController: OAuthWebViewController {
         view.addSubview(webView)
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": webView]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": webView]))
+
+        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        activityIndicator.layer.cornerRadius = 10
+        activityIndicator.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        activityIndicator.center = view.center
+
+        view.addSubview(activityIndicator)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -35,7 +45,7 @@ class WebViewController: OAuthWebViewController {
 
     override func handle(_ url: URL) {
         targetURL = url
-        self.loadAddressURL()
+        loadAddressURL()
     }
 
     func loadAddressURL() {
@@ -57,6 +67,16 @@ extension WebViewController: WKNavigationDelegate {
         }
 
         decisionHandler(.allow)
+    }
+
+    func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
+        activityIndicator.startAnimating()
+        activityIndicator.isHidden = false
+    }
+
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        activityIndicator.stopAnimating()
+        activityIndicator.isHidden = true
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
