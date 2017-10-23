@@ -207,7 +207,7 @@
 		807371A21F96968C00D53ADF /* LoginServiceModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371A11F96968C00D53ADF /* LoginServiceModelMapping.swift */; };
 		807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */; };
 		807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */; };
-		807A8F691F9E4A5400CC78DB /* RealmTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F681F9E4A5400CC78DB /* RealmTestCase.swift */; };
+		807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */; };
 		80A63C4F1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */; };
 		80A63C511F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */; };
 		80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */; };
@@ -474,7 +474,7 @@
 		807371A11F96968C00D53ADF /* LoginServiceModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginServiceModelMapping.swift; path = Models/Mapping/LoginServiceModelMapping.swift; sourceTree = "<group>"; };
 		807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginServiceModelHandler.swift; path = Models/Handler/LoginServiceModelHandler.swift; sourceTree = "<group>"; };
 		807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginServiceSpec.swift; path = Models/LoginServiceSpec.swift; sourceTree = "<group>"; };
-		807A8F681F9E4A5400CC78DB /* RealmTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTestCase.swift; sourceTree = "<group>"; };
+		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
 		80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequest.swift; sourceTree = "<group>"; };
 		80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequest.swift; sourceTree = "<group>"; };
@@ -608,12 +608,12 @@
 				41BA89231D303D8B00CBF526 /* AuthManagerSpec.swift */,
 				411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */,
 				41DC7A1E1D3865FE00896FC0 /* MessageManagerSpec.swift */,
+				807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */,
 				416296FB1F41D42800BCCEDD /* DownloadManagerSpec.swift */,
 				4147CE801F5EE03300C322C3 /* ServerManagerSpec.swift */,
 				41FE55521F6038D60071E97A /* DatabaseManagerSpec.swift */,
 				411119B71F6825C30019854B /* NetworkManagerSpec.swift */,
 				B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */,
-				807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -685,6 +685,7 @@
 				68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */,
 				D1411A291F6777F300D6EDF7 /* ChannelSpec.swift */,
 				D1411A2B1F6779A200D6EDF7 /* MentionSpec.swift */,
+				807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */,
 				77C261281F97453600724A1F /* CustomFields */,
 			);
 			name = Models;
@@ -1011,7 +1012,6 @@
 		41DF76F61D2C50720028DBF8 /* Rocket.ChatTests */ = {
 			isa = PBXGroup;
 			children = (
-				807A8F681F9E4A5400CC78DB /* RealmTestCase.swift */,
 				D18675E71F70A55D00406FB4 /* API */,
 				D1DA25261F695AC700DB6ABB /* Controllers */,
 				416133361D46DB0900E09DA2 /* Models */,
@@ -1895,6 +1895,7 @@
 				925FF7511E8EFCAD00982043 /* SettingsViewModelTests.swift in Sources */,
 				41DC7A241D386CA800896FC0 /* DateExtensionsSpec.swift in Sources */,
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,
+				807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */,
 				80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
 				802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */,
@@ -1925,7 +1926,6 @@
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
 				8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */,
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,
-				807A8F691F9E4A5400CC78DB /* RealmTestCase.swift in Sources */,
 				4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
 				4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */,
