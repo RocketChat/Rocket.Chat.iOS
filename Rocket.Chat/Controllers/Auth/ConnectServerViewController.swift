@@ -9,7 +9,6 @@
 import UIKit
 import SwiftyJSON
 import semver
-import RealmSwift
 
 final class ConnectServerViewController: BaseViewController {
 
