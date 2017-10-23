@@ -277,10 +277,12 @@ extension AuthViewController: UITextFieldDelegate {
 
 // MARK: Login Services
 extension AuthViewController {
-
     func setupLoginServices() {
         self.loginServicesToken?.invalidate()
-        self.loginServicesToken = LoginServiceManager.observe(block: updateLoginServices)
+        
+        self.loginServicesToken = LoginServiceManager.observe { [weak self] changes in
+            self?.updateLoginServices(changes: changes)
+        }
 
         LoginServiceManager.subscribe()
     }
@@ -299,7 +301,7 @@ extension AuthViewController {
 
     func updateLoginServices(changes: RealmCollectionChange<Results<LoginService>>) {
         switch changes {
-        case .update(let res, let deletions, let insertions, _ /*let modifications*/):
+        case .update(let res, let deletions, let insertions, let modifications):
             insertions.map { res[$0] }.forEach {
                 guard $0.custom, !($0.serverURL?.isEmpty ?? true) else { return }
 
@@ -316,13 +318,27 @@ extension AuthViewController {
                 customAuthButtons[$0.service ?? ""] = button
             }
 
+            modifications.map { res[$0] }.forEach {
+                guard $0.custom,
+                      let identifier = $0.identifier,
+                      let button = self.customAuthButtons[identifier]
+                else {
+                    return
+                }
+
+                button.setTitle($0.buttonLabelText ?? "", for: .normal)
+            }
+
             deletions.map { res[$0] }.forEach {
-                guard $0.custom else { return }
-                guard let button = self.customAuthButtons[$0.identifier ?? ""] else { return }
+                guard $0.custom,
+                      let identifier = $0.identifier,
+                      let button = self.customAuthButtons[identifier]
+                else {
+                    return
+                }
 
                 authButtonsStackView.removeArrangedSubview(button)
-
-                customAuthButtons.removeValue(forKey: $0.identifier ?? "")
+                customAuthButtons.removeValue(forKey: identifier)
             }
         default:
             break
