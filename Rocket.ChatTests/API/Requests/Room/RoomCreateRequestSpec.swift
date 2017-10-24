@@ -16,7 +16,7 @@ class RoomCreateRequestSpec: XCTestCase {
         let paramRoomName = "foo"
         let paramReadOnly = false
 
-        let _request = RoomCreateRequest(
+        let _request = SubscriptionCreateRequest(
             roomName: paramRoomName,
             type: .channel,
             readOnly: paramReadOnly
