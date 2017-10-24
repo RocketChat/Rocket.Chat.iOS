@@ -324,7 +324,7 @@ extension AuthManager {
             "oauth": [
                 "credentialToken": credentials.token,
                 "credentialSecret": credentials.secret
-                ] as [String: Any]
+            ] as [String: Any]
         ]
 
         AuthManager.auth(params: params, completion: completion)

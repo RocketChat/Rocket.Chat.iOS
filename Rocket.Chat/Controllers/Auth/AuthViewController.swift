@@ -274,6 +274,7 @@ extension AuthViewController: UITextFieldDelegate {
 }
 
 // MARK: Login Services
+
 extension AuthViewController {
     func setupLoginServices() {
         self.loginServicesToken?.invalidate()
@@ -293,11 +294,17 @@ extension AuthViewController {
             return
         }
 
-        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
-            guard let this = self else { return }
-            AuthManager.auth(credentials: credentials, completion: this.handleAuthenticationResponse)
+        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self,
+                               success: { [weak self] credentials in
+
+            guard let strongSelf = self else { return }
+            AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
+
         }, failure: { [weak self] in
-            self?.alert(title: localized("alert.login_service_error.title"), message: localized("alert.login_service_error.title"))
+
+            self?.alert(title: localized("alert.login_service_error.title"),
+                        message: localized("alert.login_service_error.title"))
+
         })
     }
 

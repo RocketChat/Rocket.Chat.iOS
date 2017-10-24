@@ -14,10 +14,9 @@ struct LoginServiceManager {
     static func subscribe() {
         let object = [
             "msg": "sub",
-            "id": "6kSKFW4kkTyEDeG3E",
             "name": "meteor.loginServiceConfiguration",
             "params": []
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.subscribe(object, eventName: "meteor_accounts_loginServiceConfiguration") { _ in }
     }
