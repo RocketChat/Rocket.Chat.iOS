@@ -41,6 +41,7 @@ class UserReviewManager {
         return Date().addingTimeInterval(week)
     }
 
+    @discardableResult
     func requestReview() -> Bool {
         if availableForReview {
             if #available(iOS 10.3, *) {
