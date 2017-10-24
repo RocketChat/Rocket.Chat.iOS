@@ -57,10 +57,10 @@ class SubscriptionCreateRequest: APIRequest {
 
 extension APIResult where T == SubscriptionCreateRequest {
     var success: Bool? {
-        result?.raw?["success"].boolValue
+        return raw?["success"].boolValue
     }
 
     var error: String? {
-        return result?.raw?["error"].string
+        return raw?["error"].string
     }
 }
