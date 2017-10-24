@@ -20,7 +20,7 @@ extension ChatViewController: ChatMessageCellProtocol {
     }
 
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
-        guard let username = message.user?.name else { return }
+        guard let username = message.user?.username else { return }
         if username == AuthManager.currentUser()?.username { return }
 
         func openDirectMessage() -> Bool {
