@@ -44,6 +44,8 @@ final class AuthViewController: BaseViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    @IBOutlet var accountCreationFields: [UIView]!
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -51,6 +53,10 @@ final class AuthViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = serverURL.host
+
+        if AppManager.applicationDisableRegistration {
+           accountCreationFields.forEach({ $0.isHidden = true })
+        }
 
         self.updateAuthenticationMethods()
     }
