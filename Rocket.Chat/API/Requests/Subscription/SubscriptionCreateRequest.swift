@@ -54,3 +54,13 @@ class SubscriptionCreateRequest: APIRequest {
         return "application/json"
     }
 }
+
+extension APIResult where T == SubscriptionCreateRequest {
+    var success: Bool? {
+        result?.raw?["success"].boolValue
+    }
+
+    var error: String? {
+        return result?.raw?["error"].string
+    }
+}
