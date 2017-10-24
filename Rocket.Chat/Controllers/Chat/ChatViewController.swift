@@ -566,7 +566,10 @@ final class ChatViewController: SLKTextViewController {
         guard !isAppendingMessages else {
             Log.debug("[APPEND MESSAGES] Blocked trying to append \(messages.count) messages")
 
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: { [weak self] in
+            // This message can be called many times during the app execution and we need
+            // to call them one per time, to avoid adding the same message multiple times
+            // to the list.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
                 self?.appendMessages(messages: messages, completion: completion)
             })
 
