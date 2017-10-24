@@ -99,7 +99,7 @@ CHECKOUT OPTIONS:
     :commit: 26b54aefeced8039e85f1174ed5e2cd2dfc0251f
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
-    :commit: 9ed57435f793d7ed6afa370519a221f28a53e620
+    :commit: 76b734a222b48f85f906efa9b6b9190a910ff120
     :git: https://github.com/rafaelks/SlackTextViewController.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
