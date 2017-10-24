@@ -38,6 +38,8 @@ final class ConnectServerViewController: BaseViewController {
         }
     }
 
+    @IBOutlet weak var labelSSLRequired: UILabel!
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -65,6 +67,7 @@ final class ConnectServerViewController: BaseViewController {
         DatabaseManager.cleanInvalidDatabases()
 
         if let applicationServerURL = AppManager.applicationServerURL {
+            labelSSLRequired.isHidden = true
             textFieldServerURL.text = applicationServerURL.host
             connect()
         }
