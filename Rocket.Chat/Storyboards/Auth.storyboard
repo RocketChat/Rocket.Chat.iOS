@@ -376,6 +376,8 @@
                         <outlet property="textFieldUsername" destination="ygD-Jl-GJ5" id="HM8-dg-2wc"/>
                         <outlet property="viewFields" destination="CS6-d2-2aP" id="Ecf-ES-nkV"/>
                         <outlet property="visibleViewBottomConstraint" destination="lUZ-pb-lT4" id="duq-Zd-6bF"/>
+                        <outletCollection property="accountCreationFields" destination="80Q-az-ZIG" collectionClass="NSMutableArray" id="Sem-ob-dRe"/>
+                        <outletCollection property="accountCreationFields" destination="eRg-uf-0XQ" collectionClass="NSMutableArray" id="bYH-8u-OsY"/>
                         <segue destination="DCX-We-7Nh" kind="show" identifier="RequestUsername" id="O3e-MC-N7z"/>
                         <segue destination="Yxu-n9-29o" kind="show" identifier="TwoFactor" id="eFz-02-3gC"/>
                     </connections>
@@ -773,6 +775,6 @@
         <image name="OnePassword-Button" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oar-7v-T9W"/>
+        <segue reference="O3e-MC-N7z"/>
     </inferredMetricsTieBreakers>
 </document>
