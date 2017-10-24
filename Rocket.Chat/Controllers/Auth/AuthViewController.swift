@@ -51,6 +51,7 @@ final class AuthViewController: BaseViewController {
     var customAuthButtons = [String: UIButton]()
 
     deinit {
+        loginServicesToken?.invalidate()
         NotificationCenter.default.removeObserver(self)
     }
 
