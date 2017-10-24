@@ -17,10 +17,9 @@ extension User: ModelHandler {
         realm.add(self, update: true)
 
         guard let identifier = self.identifier else { return }
-        if let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first {
-            subscription.otherUserId = identifier
-            realm.add(subscription, update: true)
-        }
+        guard let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first else { return }
+        subscription.otherUserId = identifier
+        realm.add(subscription, update: true)
     }
 
     func update(_ values: JSON, realm: Realm) {
@@ -28,10 +27,9 @@ extension User: ModelHandler {
         realm.add(self, update: true)
 
         guard let identifier = self.identifier else { return }
-        if let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first {
-            subscription.otherUserId = identifier
-            realm.add(subscription, update: true)
-        }
+        guard let subscription = realm.objects(Subscription.self).filter("otherUserId = %@", identifier).first else { return }
+        subscription.otherUserId = identifier
+        realm.add(subscription, update: true)
     }
 
     func remove(_ values: JSON, realm: Realm) {
