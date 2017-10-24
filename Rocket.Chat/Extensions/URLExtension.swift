@@ -44,9 +44,8 @@ extension URL {
         components.path = ""
         components.port = self.port != nil ? self.port : nil
 
-        var newURL = components.url
-        newURL = newURL?.appendingPathComponent("_timesync")
-        return newURL
+        guard let newURL = components.url else { return nil }
+        return newURL.appendingPathComponent("_timesync")
     }
 
     func validateURL() -> URL? {
@@ -56,9 +55,8 @@ extension URL {
         components.path = self.host != nil ? self.path : ""
         components.port = self.port != nil ? self.port : nil
 
-        var newURL = components.url
-        newURL = newURL?.appendingPathComponent("api/info")
-        return newURL
+        guard let newURL = components.url else { return nil }
+        return newURL.appendingPathComponent("api/info")
     }
 
     func socketURL() -> URL? {
@@ -69,12 +67,9 @@ extension URL {
         components.path = self.host != nil ? self.path : ""
         components.port = self.port != nil ? self.port : nil
 
-        var newURL = components.url
-        if !pathComponents.contains("websocket") {
-            newURL = newURL?.appendingPathComponent("websocket")
-        }
-
-        return newURL
+        guard let newURL = components.url else { return nil }
+        guard !pathComponents.contains("websocket") else { return nil }
+        return newURL.appendingPathComponent("websocket")
     }
 
 }
