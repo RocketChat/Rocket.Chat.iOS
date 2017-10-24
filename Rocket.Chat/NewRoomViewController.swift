@@ -83,7 +83,7 @@ class NewRoomViewController: BaseViewController {
         guard let publicRoom = setValues["public room"] as? Bool else { return }
         guard let readOnlyRoom = setValues["read only room"] as? Bool else { return }
 
-        let roomType: RoomCreateType
+        let roomType: SubscriptionCreateType
         if publicRoom {
             roomType = .channel
         } else {
@@ -102,8 +102,8 @@ class NewRoomViewController: BaseViewController {
         }
     }
 
-    fileprivate func executeRequestCreateRoom(roomName: String, roomType: RoomCreateType, readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
-        API.shared.fetch(RoomCreateRequest(roomName: roomName, type: roomType, readOnly: readOnlyRoom)) { result in
+    fileprivate func executeRequestCreateRoom(roomName: String, roomType: SubscriptionCreateType, readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
+        API.shared.fetch(SubscriptionCreateRequest(name: roomName, type: roomType, readOnly: readOnlyRoom)) { result in
 
             guard let success = result?.raw?["success"].boolValue,
                 success == true else {
