@@ -34,13 +34,13 @@ protocol APIRequest {
 }
 
 extension APIRequest {
-    var method: String {
+	var method: String {
         return "GET"
     }
 
-    var contentType: String? {
+	var contentType: String? {
         return nil
-    }
+	}
 
     var query: String? {
         return nil
