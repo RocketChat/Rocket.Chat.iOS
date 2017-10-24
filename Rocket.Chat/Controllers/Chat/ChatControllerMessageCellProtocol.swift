@@ -33,7 +33,9 @@ extension ChatViewController: ChatMessageCellProtocol {
         }
 
         // Check if already have a direct message room with this user
-        if openDirectMessage() == true { return }
+        if openDirectMessage() == true {
+            return
+        }
 
         // If not, create a new direct message
         SubscriptionManager.createDirectMessage(username, completion: { response in
