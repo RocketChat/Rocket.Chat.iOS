@@ -94,7 +94,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
 
             file = UploadHelper.file(
                 for: imageData,
-                name: "\(filename).jpeg",
+                name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
                 mimeType: mimeType ?? "image/jpeg"
             )
         }

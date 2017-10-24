@@ -35,6 +35,9 @@
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "We're still working on this feature, stay tunned!";
 
+"alert.socket_error.invalid_user.title" = "Session expired";
+"alert.socket_error.invalid_user.message" = "Your session has expired. Please log in again.";
+
 // Socket Connection
 "connection.offline.banner.message" = "You're offline, try connecting again";
 
@@ -62,6 +65,15 @@
 "user_menu.invisible" = "Invisible";
 "user_menu.settings" = "My Account";
 "user_menu.logout" = "Logout";
+
+// New Room View
+"new_room.cell.public_channel.title" = "Public Channel";
+"new_room.cell.public_chanell.description" = "Everyone can access this channel";
+"new_room.cell.read_only.title" = "Read only channel";
+"new_room.cell.read_only.description" = "Only admin can write new messages";
+"new_room.group.channel.name" = "Channel Name";
+"new_room.group.channel.footer" = "Names must be all lower case and shorter than 22 characters";
+"new_room.cell.channel_name.title" = "Channel Name";
 
 // Chat
 "chat.channel_preview_view.title" = "This is a preview of #%@";

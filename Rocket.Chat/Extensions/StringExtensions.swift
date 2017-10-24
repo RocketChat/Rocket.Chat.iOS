@@ -75,4 +75,8 @@ extension String {
 
         return ranges
     }
+
+    func removingWhitespaces() -> String {
+        return components(separatedBy: .whitespaces).joined()
+    }
 }
