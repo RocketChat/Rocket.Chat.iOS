@@ -39,6 +39,7 @@ PODS:
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
   - MobilePlayer (1.2.0)
+  - OAuthSwift (1.2.0)
   - RCMarkdownParser (3.0.3)
   - ReachabilitySwift (4.1.0)
   - Realm (3.0.0):
@@ -62,6 +63,7 @@ DEPENDENCIES:
   - Fabric
   - Google/SignIn
   - MobilePlayer
+  - OAuthSwift
   - RCMarkdownParser
   - ReachabilitySwift
   - RealmSwift
@@ -118,6 +120,7 @@ SPEC CHECKSUMS:
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
+  OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
   RCMarkdownParser: 062a5f014134dffe7cf1b0d0dc34c3abb4b0f203
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   Realm: dec0de73be8c57506e39db72694d513c189493b3
@@ -130,6 +133,6 @@ SPEC CHECKSUMS:
   Starscream: b512c62f6706421221b5ceb2ba01a9f58aca5bea
   SwiftyJSON: c4d27c2ca659d5c91460cd17cc60fd212b26074d
 
-PODFILE CHECKSUM: 0541d13241484be6f12684c356bfd5c32da20054
+PODFILE CHECKSUM: d0bff1fbe3b90ec7618c2aae0c3cf6906c0e1900
 
 COCOAPODS: 1.3.1

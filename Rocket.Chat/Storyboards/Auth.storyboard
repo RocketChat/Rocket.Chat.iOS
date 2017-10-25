@@ -5,7 +5,8 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -178,7 +179,7 @@
                                         <rect key="frame" x="0.0" y="216.5" width="375" height="275"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CS6-d2-2aP">
-                                                <rect key="frame" x="25" y="65" width="325" height="125"/>
+                                                <rect key="frame" x="25" y="60" width="325" height="125"/>
                                                 <subviews>
                                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email or username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ygD-Jl-GJ5">
                                                         <rect key="frame" x="15" y="0.0" width="295" height="64"/>
@@ -303,19 +304,24 @@
                                                     <constraint firstAttribute="width" constant="270" id="Z2i-mq-Huf"/>
                                                 </constraints>
                                             </view>
-                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wbQ-cx-bGA">
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hgB-Cn-akk">
                                                 <rect key="frame" x="25" y="10" width="325" height="40"/>
-                                                <color key="backgroundColor" red="0.84705882352941175" green="0.25490196078431371" blue="0.19607843137254902" alpha="1" colorSpace="calibratedRGB"/>
+                                                <subviews>
+                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sR6-SI-5gv" userLabel="Google Sign In Button">
+                                                        <rect key="frame" x="-25" y="-226.5" width="0.0" height="22"/>
+                                                        <color key="backgroundColor" red="0.84705882349999995" green="0.25490196079999999" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" image="Auth-Google"/>
+                                                        <connections>
+                                                            <action selector="buttonAuthenticateGoogleDidPressed:" destination="hgH-Tx-WGh" eventType="touchUpInside" id="k7r-6o-Rik"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="40" id="CiU-ZU-TnO"/>
+                                                    <constraint firstAttribute="height" constant="40" id="iNA-ab-ccn"/>
                                                 </constraints>
-                                                <state key="normal" image="Auth-Google"/>
-                                                <connections>
-                                                    <action selector="buttonAuthenticateGoogleDidPressed:" destination="hgH-Tx-WGh" eventType="touchUpInside" id="FXy-bk-SkH"/>
-                                                </connections>
-                                            </button>
+                                            </stackView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80Q-az-ZIG">
-                                                <rect key="frame" x="123" y="200" width="129" height="30"/>
+                                                <rect key="frame" x="123" y="195" width="129" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="30" id="VcL-JM-zlz"/>
                                                     <constraint firstAttribute="width" constant="129" id="heS-Zx-yGu"/>
@@ -331,18 +337,18 @@
                                             </button>
                                         </subviews>
                                         <constraints>
-                                            <constraint firstItem="CS6-d2-2aP" firstAttribute="top" secondItem="wbQ-cx-bGA" secondAttribute="bottom" constant="15" id="3gW-we-VdF"/>
+                                            <constraint firstItem="hgB-Cn-akk" firstAttribute="leading" secondItem="2nm-iJ-O4P" secondAttribute="leading" constant="25" id="1dx-ks-FdF"/>
                                             <constraint firstItem="CS6-d2-2aP" firstAttribute="centerY" secondItem="2nm-iJ-O4P" secondAttribute="centerY" id="5ou-gG-G7A"/>
-                                            <constraint firstAttribute="trailing" secondItem="wbQ-cx-bGA" secondAttribute="trailing" constant="25" id="76a-ng-sdM"/>
-                                            <constraint firstItem="wbQ-cx-bGA" firstAttribute="leading" secondItem="2nm-iJ-O4P" secondAttribute="leading" constant="25" id="Hqb-Y5-Jat"/>
+                                            <constraint firstItem="CS6-d2-2aP" firstAttribute="top" secondItem="hgB-Cn-akk" secondAttribute="bottom" constant="10" id="9Wf-pb-Z7r"/>
                                             <constraint firstAttribute="trailing" secondItem="CS6-d2-2aP" secondAttribute="trailing" constant="25" id="Jye-eA-s5c"/>
                                             <constraint firstItem="eRg-uf-0XQ" firstAttribute="centerX" secondItem="2nm-iJ-O4P" secondAttribute="centerX" id="Ot5-cA-r9b"/>
                                             <constraint firstItem="80Q-az-ZIG" firstAttribute="centerX" secondItem="2nm-iJ-O4P" secondAttribute="centerX" id="Pzn-gx-UNV"/>
+                                            <constraint firstItem="hgB-Cn-akk" firstAttribute="top" secondItem="2nm-iJ-O4P" secondAttribute="top" constant="10" id="SE3-NE-kC6"/>
                                             <constraint firstItem="CS6-d2-2aP" firstAttribute="leading" secondItem="2nm-iJ-O4P" secondAttribute="leading" constant="25" id="b9d-YO-CL7"/>
                                             <constraint firstAttribute="height" constant="275" id="bGS-Ch-O8Q"/>
                                             <constraint firstItem="80Q-az-ZIG" firstAttribute="top" secondItem="CS6-d2-2aP" secondAttribute="bottom" constant="10" id="dMV-VC-1AD"/>
-                                            <constraint firstItem="wbQ-cx-bGA" firstAttribute="top" secondItem="2nm-iJ-O4P" secondAttribute="top" constant="10" id="e0C-7T-i3i"/>
                                             <constraint firstAttribute="bottom" secondItem="eRg-uf-0XQ" secondAttribute="bottom" id="lsg-j9-Kac"/>
+                                            <constraint firstAttribute="trailing" secondItem="hgB-Cn-akk" secondAttribute="trailing" constant="25" id="tJz-pI-wQ1"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -369,7 +375,8 @@
                     <navigationItem key="navigationItem" title="Authentication" id="Lfp-fv-5Pu"/>
                     <connections>
                         <outlet property="activityIndicator" destination="EG7-WS-QYQ" id="RjP-38-HEH"/>
-                        <outlet property="buttonAuthenticateGoogle" destination="wbQ-cx-bGA" id="TI2-GN-cLb"/>
+                        <outlet property="authButtonsStackView" destination="hgB-Cn-akk" id="zLx-l9-kvd"/>
+                        <outlet property="buttonAuthenticateGoogle" destination="sR6-SI-5gv" id="KHM-fB-UoH"/>
                         <outlet property="onePasswordButton" destination="PjJ-Db-hlk" id="F8y-7r-2zK"/>
                         <outlet property="textFieldPassword" destination="A9R-8V-1bd" id="Ayd-9m-hp2"/>
                         <outlet property="textFieldUsername" destination="ygD-Jl-GJ5" id="HM8-dg-2wc"/>
@@ -772,6 +779,6 @@
         <image name="OnePassword-Button" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="oar-7v-T9W"/>
+        <segue reference="O3e-MC-N7z"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -199,8 +199,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func setupTextViewSettings() {
-        textInputbar.autoHideRightButton = true
-
         textView.registerMarkdownFormattingSymbol("*", withTitle: "Bold")
         textView.registerMarkdownFormattingSymbol("_", withTitle: "Italic")
         textView.registerMarkdownFormattingSymbol("~", withTitle: "Strike")
