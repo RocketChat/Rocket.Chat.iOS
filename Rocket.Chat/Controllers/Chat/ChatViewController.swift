@@ -403,7 +403,7 @@ final class ChatViewController: SLKTextViewController {
         }
 
         if subscription.roomReadOnly {
-            textInputbar.textView.placeholder = "This room is read only"
+            textInputbar.textView.placeholder = localized("chat.read_only")
             textInputbar.isUserInteractionEnabled = false
         } else {
             textInputbar.textView.placeholder = ""
