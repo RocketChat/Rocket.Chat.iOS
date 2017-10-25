@@ -81,6 +81,14 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var labelServer: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
+    @IBOutlet weak var buttonAddChannel: UIButton! {
+        didSet {
+            if let image = UIImage(named: "Add") {
+                buttonAddChannel.tintColor = .RCLightBlue()
+                buttonAddChannel.setImage(image, for: .normal)
+            }
+        }
+    }
     @IBOutlet weak var imageViewArrowDown: UIImageView! {
         didSet {
             imageViewArrowDown.image = imageViewArrowDown.image?.imageWithTint(.RCLightBlue())
@@ -579,6 +587,10 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
 
     func userDidPressedOption() {
         dismissUserMenu()
+    }
+
+    @IBAction func buttonAddChannelDidTap(sender: Any) {
+        performSegue(withIdentifier: "New Channel", sender: sender)
     }
 
 }
