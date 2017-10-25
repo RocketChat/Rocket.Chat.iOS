@@ -69,7 +69,7 @@ DEPENDENCIES:
   - semver (from `https://github.com/rafaelks/Semver.Swift.git`, branch `chore/swift4`)
   - SideMenuController (from `https://github.com/rafaelks/SideMenuController.git`)
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
-  - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`, branch `fix/revert.1`)
+  - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`)
   - Starscream
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, tag `4.0.0-alpha.1`)
 
@@ -82,7 +82,6 @@ EXTERNAL SOURCES:
   SimpleImageViewer:
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
-    :branch: fix/revert.1
     :git: https://github.com/rafaelks/SlackTextViewController.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -99,7 +98,7 @@ CHECKOUT OPTIONS:
     :commit: 26b54aefeced8039e85f1174ed5e2cd2dfc0251f
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
-    :commit: 1450171f6a0a8b468a38c195c85652a2d43e87dc
+    :commit: 3311b89d69e401d52f008a5bc0f53fc4b337588c
     :git: https://github.com/rafaelks/SlackTextViewController.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -130,6 +129,6 @@ SPEC CHECKSUMS:
   Starscream: b512c62f6706421221b5ceb2ba01a9f58aca5bea
   SwiftyJSON: c4d27c2ca659d5c91460cd17cc60fd212b26074d
 
-PODFILE CHECKSUM: 9f88894aef0ca9ea5409affa432cdc5d425198af
+PODFILE CHECKSUM: d9f85d5d45d36aac8e8d32431c8b3238f1e7644d
 
 COCOAPODS: 1.3.1
