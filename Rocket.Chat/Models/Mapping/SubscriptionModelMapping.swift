@@ -23,7 +23,6 @@ extension Subscription: ModelMappeable {
         self.open = values["open"].bool ?? false
         self.alert = values["alert"].bool ?? false
         self.favorite = values["f"].bool ?? false
-        self.readOnly = values["ro"].bool ?? false
 
         if let typeString = values["t"].string {
             self.type = SubscriptionType(rawValue: typeString) ?? .channel
@@ -40,6 +39,15 @@ extension Subscription: ModelMappeable {
 
         if let lastSeen = values["ls"]["$date"].double {
             self.lastSeen = Date.dateFromInterval(lastSeen)
+        }
+    }
+
+    func mapRoom(_ values: JSON) {
+        self.roomDescription = values["description"].string ?? ""
+        self.roomTopic = values["topic"].string ?? ""
+
+        if let readOnly = values["ro"].bool {
+            self.roomReadOnly = readOnly
         }
     }
 }

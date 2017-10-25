@@ -401,6 +401,14 @@ final class ChatViewController: SLKTextViewController {
             setTextInputbarHidden(true, animated: false)
             showChatPreviewModeView()
         }
+
+        if subscription.roomReadOnly {
+            textInputbar.textView.placeholder = "This room is read only"
+            textInputbar.isUserInteractionEnabled = false
+        } else {
+            textInputbar.textView.placeholder = ""
+            textInputbar.isUserInteractionEnabled = true
+        }
     }
 
     internal func updateSubscriptionMessages() {
