@@ -638,12 +638,20 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func blockMessageSending(reason: String) {
         textInputbar.textView.placeholder = reason
+        textInputbar.textView.placeholderColor = .black
+        textInputbar.backgroundColor = .white
         textInputbar.isUserInteractionEnabled = false
+        leftButton.isEnabled = false
+        rightButton.isEnabled = false
     }
 
     fileprivate func allowMessageSending() {
         textInputbar.textView.placeholder = ""
+        textInputbar.textView.placeholderColor = .placeholderGray
+        textInputbar.backgroundColor = .backgroundWhite
         textInputbar.isUserInteractionEnabled = true
+        leftButton.isEnabled = true
+        rightButton.isEnabled = true
     }
 
     fileprivate func showChatPreviewModeView() {
