@@ -45,8 +45,7 @@ class Subscription: BaseModel {
 
     @objc dynamic var roomTopic: String?
     @objc dynamic var roomDescription: String?
-
-    @objc dynamic var readOnly = false
+    @objc dynamic var roomReadOnly = false
 
     @objc dynamic var otherUserId: String?
     var directMessageUser: User? {
