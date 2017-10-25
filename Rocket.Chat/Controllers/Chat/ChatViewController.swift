@@ -402,7 +402,7 @@ final class ChatViewController: SLKTextViewController {
             showChatPreviewModeView()
         }
 
-        if subscription.roomReadOnly {
+        if subscription.roomReadOnly && subscription.roomOwner != AuthManager.currentUser() {
             blockMessageSending(reason: localized("chat.read_only"))
         } else {
             allowMessageSending()
@@ -638,7 +638,6 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func blockMessageSending(reason: String) {
         textInputbar.textView.placeholder = reason
-        textInputbar.textView.placeholderColor = .black
         textInputbar.backgroundColor = .white
         textInputbar.isUserInteractionEnabled = false
         leftButton.isEnabled = false
@@ -647,7 +646,6 @@ final class ChatViewController: SLKTextViewController {
 
     fileprivate func allowMessageSending() {
         textInputbar.textView.placeholder = ""
-        textInputbar.textView.placeholderColor = .placeholderGray
         textInputbar.backgroundColor = .backgroundWhite
         textInputbar.isUserInteractionEnabled = true
         leftButton.isEnabled = true
