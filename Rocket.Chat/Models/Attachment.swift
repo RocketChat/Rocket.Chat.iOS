@@ -72,7 +72,6 @@ extension Attachment {
             return nil
         }
 
-
         let urlString = "\(baseURL)\(pathPercentEncoded)?rc_uid=\(userId)&rc_token=\(token)"
 
         return URL(string: urlString)
