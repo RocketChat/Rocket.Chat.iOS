@@ -30,6 +30,17 @@ final class AuthSettings: BaseModel {
     @objc dynamic var isGoogleAuthenticationEnabled = false
     @objc dynamic var isLDAPAuthenticationEnabled = false
 
+    // Registration
+    enum RegistrationFormAccess: String {
+        case isPublic = "Public", isDisabled = "Disabled", isSecretURL = "Secret URL"
+    }
+    @objc dynamic var rawRegistrationForm: String?
+    var registrationForm: RegistrationFormAccess {
+        guard let rawValue = rawRegistrationForm,
+            let value = RegistrationFormAccess(rawValue: rawValue) else { return .isPublic }
+        return value
+    }
+
     // File upload
     @objc dynamic var uploadStorageType: String?
 

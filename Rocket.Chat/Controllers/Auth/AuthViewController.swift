@@ -54,8 +54,9 @@ final class AuthViewController: BaseViewController {
         super.viewDidLoad()
         title = serverURL.host
 
-        if AppManager.applicationDisableRegistration {
-           accountCreationFields.forEach({ $0.isHidden = true })
+        if let registrationForm = AuthSettingsManager.shared.settings?.registrationForm {
+           let isRegistrationHidden = registrationForm != .isPublic
+           accountCreationFields.forEach { $0.isHidden = isRegistrationHidden }
         }
 
         self.updateAuthenticationMethods()

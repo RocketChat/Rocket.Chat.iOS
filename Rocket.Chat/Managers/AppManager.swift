@@ -35,19 +35,4 @@ struct AppManager {
     static var supportsMultiServer: Bool {
         return applicationServerURL == nil
     }
-
-    private static let kApplicationDisableRegistrationKey = "RC_DISABLE_REGISTRATION"
-
-    /**
-     The app allows the user to disable registrations from the app
-     by adding the value "RC_DISABLE_REGISTRATIONS" to the Info.plist file. This will imply
-     in not allowing the user to create a new account from the app. This can be
-     useful for private servers.
-     
-     - returns: True if registrations are disabled. Defaults to false.
-     */
-    static var applicationDisableRegistration: Bool {
-        let disable = Bundle.main.object(forInfoDictionaryKey: kApplicationDisableRegistrationKey) as? Bool
-        return disable ?? false
-    }
 }
