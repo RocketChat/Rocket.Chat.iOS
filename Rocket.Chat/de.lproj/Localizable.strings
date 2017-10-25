@@ -67,6 +67,7 @@
 "chat.channel_preview_view.join" = "Kanal beitreten";
 "chat.dm.start_conversation" = "Dies ist der Anfang deines Gesprächs mit %@";
 "chat.channel.start_conversation" = "Dies ist der Beginn der Konversation auf %@";
+"chat.read_only" = "This room is read only";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
