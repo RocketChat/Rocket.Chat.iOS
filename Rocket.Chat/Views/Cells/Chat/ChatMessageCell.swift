@@ -21,6 +21,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
     weak var longPressGesture: UILongPressGestureRecognizer?
     weak var usernameTapGesture: UITapGestureRecognizer?
+    weak var avatarTapGesture: UITapGestureRecognizer?
     weak var delegate: ChatMessageCellProtocol?
     var message: Message! {
         didSet {
@@ -132,6 +133,14 @@ final class ChatMessageCell: UICollectionViewCell {
             labelUsername.addGestureRecognizer(gesture)
 
             usernameTapGesture = gesture
+        }
+
+        if avatarTapGesture == nil {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(handleUsernameTapGestureCell(recognizer:)))
+            gesture.delegate = self
+            avatarView.addGestureRecognizer(gesture)
+
+            avatarTapGesture = gesture
         }
     }
 

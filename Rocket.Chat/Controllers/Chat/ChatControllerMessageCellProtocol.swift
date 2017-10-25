@@ -20,8 +20,21 @@ extension ChatViewController: ChatMessageCellProtocol {
     }
 
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
+        guard let currentUser = AuthManager.currentUser() else { return }
         guard let username = message.user?.username else { return }
-        if username == AuthManager.currentUser()?.username { return }
+        guard let currentOpenedSubscription = ChatViewController.shared?.subscription else { return }
+
+        // If tapping in a user of current DM, don't do anything
+        if currentOpenedSubscription.type == .directMessage {
+            if currentOpenedSubscription.otherUserId == message.user?.identifier {
+                return
+            }
+        }
+
+        // If tapping in itself, don't do anything
+        if username == currentUser.username {
+            return
+        }
 
         func openDirectMessage() -> Bool {
             guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
