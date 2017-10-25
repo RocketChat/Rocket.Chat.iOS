@@ -47,10 +47,27 @@ class Subscription: BaseModel {
     @objc dynamic var roomDescription: String?
     @objc dynamic var roomReadOnly = false
 
+    @objc dynamic var roomOwnerId: String?
+    var roomOwner: User? {
+        guard
+            let realm = Realm.shared,
+            let roomOwnerId = roomOwnerId
+        else {
+            return nil
+        }
+
+        return realm.objects(User.self).filter("identifier = '\(roomOwnerId)'").first
+    }
+
     @objc dynamic var otherUserId: String?
     var directMessageUser: User? {
-        guard let realm = Realm.shared else { return nil }
-        guard let otherUserId = otherUserId else { return nil }
+        guard
+            let realm = Realm.shared,
+            let otherUserId = otherUserId
+        else {
+            return nil
+        }
+        
         return realm.objects(User.self).filter("identifier = '\(otherUserId)'").first
     }
 

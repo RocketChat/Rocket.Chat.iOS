@@ -49,5 +49,9 @@ extension Subscription: ModelMappeable {
         if let readOnly = values["ro"].bool {
             self.roomReadOnly = readOnly
         }
+
+        if let ownerId = values["u"]["_id"].string {
+            self.roomOwnerId = ownerId
+        }
     }
 }
