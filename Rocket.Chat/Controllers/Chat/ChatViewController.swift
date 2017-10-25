@@ -403,11 +403,9 @@ final class ChatViewController: SLKTextViewController {
         }
 
         if subscription.roomReadOnly {
-            textInputbar.textView.placeholder = localized("chat.read_only")
-            textInputbar.isUserInteractionEnabled = false
+            blockMessageSending(reason: localized("chat.read_only"))
         } else {
-            textInputbar.textView.placeholder = ""
-            textInputbar.isUserInteractionEnabled = true
+            allowMessageSending()
         }
     }
 
@@ -636,6 +634,16 @@ final class ChatViewController: SLKTextViewController {
                 })
             }
         }
+    }
+
+    fileprivate func blockMessageSending(reason: String) {
+        textInputbar.textView.placeholder = reason
+        textInputbar.isUserInteractionEnabled = false
+    }
+
+    fileprivate func allowMessageSending() {
+        textInputbar.textView.placeholder = ""
+        textInputbar.isUserInteractionEnabled = true
     }
 
     fileprivate func showChatPreviewModeView() {
