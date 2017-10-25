@@ -23,6 +23,7 @@ extension Subscription: ModelMappeable {
         self.open = values["open"].bool ?? false
         self.alert = values["alert"].bool ?? false
         self.favorite = values["f"].bool ?? false
+        self.readOnly = values["ro"].bool ?? false
 
         if let typeString = values["t"].string {
             self.type = SubscriptionType(rawValue: typeString) ?? .channel
