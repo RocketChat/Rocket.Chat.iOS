@@ -67,7 +67,7 @@ class Subscription: BaseModel {
         else {
             return nil
         }
-        
+
         return realm.objects(User.self).filter("identifier = '\(otherUserId)'").first
     }
 

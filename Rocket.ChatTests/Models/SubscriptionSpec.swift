@@ -84,6 +84,29 @@ class SubscriptionSpec: XCTestCase {
         })
     }
 
+    func testMapRoom() {
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name",
+            "u": [ "_id": "user-id", "username": "username" ],
+            "topic": "room-topic",
+            "muted": [ "username" ],
+            "jitsiTimeout": [ "$date": 1480377601 ],
+            "ro": true,
+            "description": "room-description"
+        ])
+
+        let subscription = Subscription()
+
+        subscription.mapRoom(object)
+
+        XCTAssertEqual(subscription.roomTopic, "room-topic")
+        XCTAssertEqual(subscription.roomDescription, "room-description")
+        XCTAssertEqual(subscription.roomReadOnly, true)
+        XCTAssertEqual(subscription.roomOwnerId, "user-id")
+    }
+
     func testSubscriptionDisplayNameHonorFullnameSettings() {
         let settings = AuthSettings()
         settings.useUserRealName = false
@@ -201,5 +224,4 @@ class SubscriptionSpec: XCTestCase {
         XCTAssertEqual(group.displayName(), "special-group", "Subscription.displayName() will return name for groups when 'allowSpecialCharsOnRoomNames' is disabled")
         XCTAssertNotEqual(group.displayName(), "special group", "Subscription.displayName() will return name for groups when 'allowSpecialCharsOnRoomNames' is disabled")
     }
-
 }
