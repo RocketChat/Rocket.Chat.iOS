@@ -1,8 +1,8 @@
 PODS:
   - 1PasswordExtension (1.8.4)
-  - Crashlytics (3.8.6):
-    - Fabric (~> 1.6.3)
-  - Fabric (1.6.13)
+  - Crashlytics (3.9.0):
+    - Fabric (~> 1.7.0)
+  - Fabric (1.7.0)
   - FirebaseAnalytics (3.9.0):
     - FirebaseCore (~> 3.6)
     - FirebaseInstanceID (~> 1.0)
@@ -16,36 +16,37 @@ PODS:
   - Google/SignIn (3.1.0):
     - Google/Core
     - GoogleSignIn (~> 4.0)
-  - GoogleSignIn (4.1.0):
+  - GoogleSignIn (4.1.1):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
     - GTMOAuth2 (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
-  - GoogleToolboxForMac/DebugUtils (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/Defines (2.1.1)
-  - GoogleToolboxForMac/NSData+zlib (2.1.1):
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
-    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
-    - GoogleToolboxForMac/Defines (= 2.1.1)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GoogleToolboxForMac/DebugUtils (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/Defines (2.1.3)
+  - GoogleToolboxForMac/NSData+zlib (2.1.3):
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.3)
+    - GoogleToolboxForMac/Defines (= 2.1.3)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
   - GTMOAuth2 (1.1.5):
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.1.11):
-    - GTMSessionFetcher/Full (= 1.1.11)
-  - GTMSessionFetcher/Core (1.1.11)
-  - GTMSessionFetcher/Full (1.1.11):
-    - GTMSessionFetcher/Core (= 1.1.11)
+  - GTMSessionFetcher (1.1.12):
+    - GTMSessionFetcher/Full (= 1.1.12)
+  - GTMSessionFetcher/Core (1.1.12)
+  - GTMSessionFetcher/Full (1.1.12):
+    - GTMSessionFetcher/Core (= 1.1.12)
   - MobilePlayer (1.2.0)
+  - OAuthSwift (1.2.0)
   - RCMarkdownParser (3.0.3)
-  - ReachabilitySwift (4.0-beta1)
-  - Realm (2.10.1):
-    - Realm/Headers (= 2.10.1)
-  - Realm/Headers (2.10.1)
-  - RealmSwift (2.10.1):
-    - Realm (= 2.10.1)
+  - ReachabilitySwift (4.1.0)
+  - Realm (3.0.0):
+    - Realm/Headers (= 3.0.0)
+  - Realm/Headers (3.0.0)
+  - RealmSwift (3.0.0):
+    - Realm (= 3.0.0)
   - SDWebImage (3.8.2):
     - SDWebImage/Core (= 3.8.2)
   - SDWebImage/Core (3.8.2)
@@ -53,7 +54,7 @@ PODS:
   - SideMenuController (0.2.4.1)
   - SimpleImageViewer (1.0.2)
   - SlackTextViewController (1.9.5)
-  - Starscream (2.1.1)
+  - Starscream (3.0.2)
   - SwiftyJSON (4.0.0-alpha.1)
 
 DEPENDENCIES:
@@ -62,21 +63,19 @@ DEPENDENCIES:
   - Fabric
   - Google/SignIn
   - MobilePlayer
+  - OAuthSwift
   - RCMarkdownParser
-  - ReachabilitySwift (from `https://github.com/ashleymills/Reachability.swift.git`, branch `develop`)
+  - ReachabilitySwift
   - RealmSwift
   - SDWebImage (~> 3)
   - semver (from `https://github.com/rafaelks/Semver.Swift.git`, branch `chore/swift4`)
   - SideMenuController (from `https://github.com/rafaelks/SideMenuController.git`)
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
   - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`, branch `master`)
-  - Starscream (from `https://github.com/daltoniam/Starscream.git`, branch `swift4`)
+  - Starscream
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, tag `4.0.0-alpha.1`)
 
 EXTERNAL SOURCES:
-  ReachabilitySwift:
-    :branch: develop
-    :git: https://github.com/ashleymills/Reachability.swift.git
   semver:
     :branch: chore/swift4
     :git: https://github.com/rafaelks/Semver.Swift.git
@@ -87,17 +86,11 @@ EXTERNAL SOURCES:
   SlackTextViewController:
     :branch: master
     :git: https://github.com/rafaelks/SlackTextViewController.git
-  Starscream:
-    :branch: swift4
-    :git: https://github.com/daltoniam/Starscream.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
     :tag: 4.0.0-alpha.1
 
 CHECKOUT OPTIONS:
-  ReachabilitySwift:
-    :commit: 6451cd109ef2e88a0763387de44668e17cb1b49e
-    :git: https://github.com/ashleymills/Reachability.swift.git
   semver:
     :commit: a8ad3f3c1b168dfa6a8f1f7de2e5cae59239d9bf
     :git: https://github.com/rafaelks/Semver.Swift.git
@@ -108,40 +101,38 @@ CHECKOUT OPTIONS:
     :commit: 26b54aefeced8039e85f1174ed5e2cd2dfc0251f
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
-    :commit: 9ed57435f793d7ed6afa370519a221f28a53e620
+    :commit: 3311b89d69e401d52f008a5bc0f53fc4b337588c
     :git: https://github.com/rafaelks/SlackTextViewController.git
-  Starscream:
-    :commit: e9d10000eca3f682650fb674eecc73ad709b316a
-    :git: https://github.com/daltoniam/Starscream.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
     :tag: 4.0.0-alpha.1
 
 SPEC CHECKSUMS:
   1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
-  Crashlytics: 95d05f4e4c19a771250c4bd9ce344d996de32bbf
-  Fabric: 2fb5676bc811af011a04513451f463dac6803206
+  Crashlytics: 64aad5dd97249dd3ff94b979fea140144590cdd3
+  Fabric: e6be012366472553807dada21243c5ab8d904151
   FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   Google: 98da4b1a60ed0beb80a290387a28333406a1eb90
-  GoogleSignIn: 8c599fc10d25b2af86a3f82fd9631e863f2b1400
-  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
+  GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
-  GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
+  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
+  OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
   RCMarkdownParser: 062a5f014134dffe7cf1b0d0dc34c3abb4b0f203
-  ReachabilitySwift: fa4416f5356466392a733d21b41873ebe052bf40
-  Realm: fc7a317a5c2c9ba91f5f235ede4e2ea76e9eba0c
-  RealmSwift: 505ed6c15942a2e76f5cfa78a8667cfa997ee75b
+  ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
+  Realm: dec0de73be8c57506e39db72694d513c189493b3
+  RealmSwift: 44a7090b16d1b22a406c6bf129bdd602db1bbecc
   SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
   semver: df3895a55a097c7a819a80e7375e95b29e136157
   SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
   SimpleImageViewer: 209dc6f6ee0eeed8ec3386b699eae9dca625d560
   SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
-  Starscream: 087670fe088bb12c04398fc343442a4b9eb96b86
+  Starscream: b512c62f6706421221b5ceb2ba01a9f58aca5bea
   SwiftyJSON: c4d27c2ca659d5c91460cd17cc60fd212b26074d
 
-PODFILE CHECKSUM: d79d13915969296b4f7712eed3cf63b5934fd9c0
+PODFILE CHECKSUM: d0bff1fbe3b90ec7618c2aae0c3cf6906c0e1900
 
 COCOAPODS: 1.3.1

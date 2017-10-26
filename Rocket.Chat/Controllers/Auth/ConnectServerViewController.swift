@@ -181,7 +181,6 @@ final class ConnectServerViewController: BaseViewController {
 
             let index = DatabaseManager.createNewDatabaseInstance(serverURL: socketURL.absoluteString)
             DatabaseManager.changeDatabaseInstance(index: index)
-
             SocketManager.connect(socketURL) { (_, connected) in
                 AuthSettingsManager.updatePublicSettings(nil) { (settings) in
                     self?.serverPublicSettings = settings
