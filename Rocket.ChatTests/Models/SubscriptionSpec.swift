@@ -224,4 +224,18 @@ class SubscriptionSpec: XCTestCase {
         XCTAssertEqual(group.displayName(), "special-group", "Subscription.displayName() will return name for groups when 'allowSpecialCharsOnRoomNames' is disabled")
         XCTAssertNotEqual(group.displayName(), "special group", "Subscription.displayName() will return name for groups when 'allowSpecialCharsOnRoomNames' is disabled")
     }
+
+    func testRoomOwnerId() throws {
+        let user = User()
+        user.identifier = "room-owner-id"
+
+        let subscription = Subscription()
+        subscription.roomOwnerId = user.identifier
+
+        Realm.executeOnMainThread { realm in
+            realm.add(user)
+        }
+
+        XCTAssertEqual(subscription.roomOwner, user, "roomOwner is correct")
+    }
 }
