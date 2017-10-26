@@ -79,8 +79,10 @@ final class MainViewController: BaseViewController {
             let controller = storyboardAuth.instantiateInitialViewController()
             let application = UIApplication.shared
 
+
+               
             if let window = application.keyWindow {
-                window.rootViewController = controller
+                window.rootViewController = controller!
             }
         }
     }
