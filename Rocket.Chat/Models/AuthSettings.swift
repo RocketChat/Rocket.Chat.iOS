@@ -54,4 +54,7 @@ final class AuthSettings: BaseModel {
 
         return hiddenTypes
     }
+
+    // Custom fields
+    @objc dynamic var rawCustomFields: String?
 }

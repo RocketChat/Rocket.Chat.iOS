@@ -28,6 +28,12 @@
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "Entschuldigung, aber dieses Feature ist noch nicht verfügbar.";
 
+"alert.socket_error.invalid_user.title" = "Sitzung abgelaufen";
+"alert.socket_error.invalid_user.message" = "Ihre Sitzung ist abgelaufen, bitte loggen Sie sich erneut ein.";
+
+"alert.login_service_error.title" = "Authentifizierungsproblem";
+"alert.login_service_error.message" = "Authentifizierung konnte mit diesem Dienst nicht durchgeführt werden. Bitte versuche es erneut.";
+
 // Socket Connection
 "connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
 
