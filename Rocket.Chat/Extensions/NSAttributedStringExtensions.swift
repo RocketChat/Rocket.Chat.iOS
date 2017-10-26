@@ -19,6 +19,10 @@ extension NSAttributedString {
     }
 }
 
+extension NSAttributedStringKey {
+    public static let highlightBackgroundColor = NSAttributedStringKey(rawValue: "highlightBackgroundColor")
+}
+
 extension NSMutableAttributedString {
 
     func trimCharacters(in set: CharacterSet) {
@@ -57,9 +61,18 @@ extension NSMutableAttributedString {
     func setBackgroundColor(_ color: UIColor, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSAttributedStringKey(rawValue: "highlightColor"): color
+                NSAttributedStringKey.highlightBackgroundColor: color
             ], range: attributeRange)
         }
+    }
+
+    func setLineSpacing(_ font: UIFont) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = font.lineHeight * 0.1
+
+        self.addAttributes([
+            NSAttributedStringKey.paragraphStyle: paragraphStyle
+            ], range: NSRange(location: 0, length: self.length))
     }
 
     func transformMarkdown() -> NSAttributedString {
@@ -75,6 +88,7 @@ extension NSMutableAttributedString {
                     setBackgroundColor(UIColor.background(for: $0), range: range)
                     setFontColor(UIColor.font(for: $0), range: range)
                     setFont(MessageTextFontAttributes.boldFont, range: range)
+                    setLineSpacing(MessageTextFontAttributes.boldFont)
                 }
             }
         }
