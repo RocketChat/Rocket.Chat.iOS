@@ -35,6 +35,9 @@
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "Desculpe, mas esta função ainda não está disponível.";
 
+"alert.socket_error.invalid_user.title" = "Sessão expirada";
+"alert.socket_error.invalid_user.message" = "Esta sessão expirou. Por favor, logue-se novamente.";
+
 // Socket Connection
 "connection.offline.banner.message" = "Você está offline, conecte novamente";
 
@@ -62,6 +65,15 @@
 "user_menu.invisible" = "Invisível";
 "user_menu.settings" = "Minha conta";
 "user_menu.logout" = "Sair";
+
+// New Room View
+"new_room.cell.public_channel.title" = "Canal Público";
+"new_room.cell.public_chanell.description" = "Todos conseguem acessar esse canal";
+"new_room.cell.read_only.title" = "Canal somente leitura";
+"new_room.cell.read_only.description" = "Somente o admin pode escrever novas mensagens";
+"new_room.group.channel.name" = "Nome do canal";
+"new_room.group.channel.footer" = "O nome precisa ser escrito em minúsculo e ter menos que 22 caracteres";
+"new_room.cell.channel_name.title" = "Nome do canal";
 
 // Chat
 "chat.channel_preview_view.title" = "Esta é uma pré-visualização de #%@";
