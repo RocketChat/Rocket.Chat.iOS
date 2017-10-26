@@ -79,4 +79,13 @@ class StringExtensionSpec: XCTestCase {
         XCTAssertEqual(result5, expected5, "string has no whitespaces")
     }
 
+    // MARK: Base64
+
+    func testBase64() {
+        XCTAssertEqual("test".base64Encoded(), "dGVzdA==", "base64Encoded encodes correctly")
+        XCTAssertEqual("dGVzdA==".base64Decoded(), "test", "base64Decoded decodes correctly")
+
+        let randomString = String.random(10)
+        XCTAssertEqual(randomString.base64Encoded()?.base64Decoded(), randomString, "base64Encoded <-> base64Decoded pass random test")
+    }
 }
