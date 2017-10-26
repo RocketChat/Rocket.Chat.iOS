@@ -28,11 +28,19 @@
 "alert.feature.wip.title" = "Oups!";
 "alert.feature.wip.message" = "Cette fonctionnalité est en cours de développement, restez au courant!";
 
+"alert.socket_error.invalid_user.title" = "Session expirée";
+"alert.socket_error.invalid_user.message" = "Votre session a expiré. Veuillez vous identifier à nouveau.";
+
+"alert.login_service_error.title" = "Erreur d'authentification";
+"alert.login_service_error.message" = "Authentification impossible avec ce service. Veuilez réessayer s'il vous plaît.";
+
 // Socket Connection
 "connection.offline.banner.message" = "Vous êtes déconnecté, essayez de nouveau";
 
 // Auth
 "auth.connect.button_connect" = "Se connecter";
+"auth.connect.ssl_required" = "Votre serveur doit supporter le SSL";
+"auth.connect.connecting" = "Connexion en cours. Tenez bon.";
 
 // Subscriptions
 "subscriptions.search" = "Chercher";
