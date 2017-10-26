@@ -42,4 +42,15 @@ class NSURLExtensionSpec: XCTestCase {
         XCTAssertNil(URL(string: "http://", scheme: "https")?.absoluteString, "will return nil when hostless")
         XCTAssertNil(URL(string: "", scheme: "https"), "will return nil when empty")
     }
+
+    func testQueryParameters() {
+        let testURL: URL! = URL(string: "https://open.rocket.chat/?query1=test1&query2=test2")
+
+        guard let queryParameters = testURL.queryParameters else {
+            XCTFail("queryParameters is not nil")
+            return
+        }
+
+        XCTAssert(queryParameters == ["query1": "test1", "query2": "test2"], "queryParameters returns dictionary correctly")
+    }
 }

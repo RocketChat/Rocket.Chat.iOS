@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SafariServices
 import OnePasswordExtension
+import RealmSwift
 
 final class AuthViewController: BaseViewController {
 
@@ -17,6 +18,8 @@ final class AuthViewController: BaseViewController {
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
+
+    var loginServicesToken: NotificationToken?
 
     @IBOutlet weak var viewFields: UIView! {
         didSet {
@@ -44,7 +47,11 @@ final class AuthViewController: BaseViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    @IBOutlet weak var authButtonsStackView: UIStackView!
+    var customAuthButtons = [String: UIButton]()
+
     deinit {
+        loginServicesToken?.invalidate()
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -57,6 +64,8 @@ final class AuthViewController: BaseViewController {
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        setupLoginServices()
 
         NotificationCenter.default.addObserver(
             self,
@@ -261,5 +270,89 @@ extension AuthViewController: UITextFieldDelegate {
         }
 
         return true
+    }
+}
+
+// MARK: Login Services
+
+extension AuthViewController {
+    func setupLoginServices() {
+        self.loginServicesToken?.invalidate()
+
+        self.loginServicesToken = LoginServiceManager.observe { [weak self] changes in
+            self?.updateLoginServices(changes: changes)
+        }
+
+        LoginServiceManager.subscribe()
+    }
+
+    @objc func loginServiceButtonDidPress(_ button: UIButton) {
+        guard let service = customAuthButtons.filter({ $0.value == button }).keys.first,
+              let realm = Realm.shared,
+              let loginService = LoginService.find(service: service, realm: realm)
+        else {
+            return
+        }
+
+        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self,
+                               success: { [weak self] credentials in
+
+            guard let strongSelf = self else { return }
+            AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
+
+        }, failure: { [weak self] in
+
+            self?.alert(title: localized("alert.login_service_error.title"),
+                        message: localized("alert.login_service_error.title"))
+
+        })
+    }
+
+    func updateLoginServices(changes: RealmCollectionChange<Results<LoginService>>) {
+        switch changes {
+        case .update(let res, let deletions, let insertions, let modifications):
+            insertions.map { res[$0] }.forEach {
+                guard $0.custom, !($0.serverURL?.isEmpty ?? true) else { return }
+
+                let button = UIButton()
+                button.layer.cornerRadius = 3
+                button.setTitle($0.buttonLabelText ?? "", for: .normal)
+                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+                button.setTitleColor(UIColor(hex: $0.buttonLabelColor), for: .normal)
+                button.backgroundColor = UIColor(hex: $0.buttonColor)
+                button.addTarget(self, action: #selector(loginServiceButtonDidPress(_:)), for: .touchUpInside)
+
+                authButtonsStackView.addArrangedSubview(button)
+
+                customAuthButtons[$0.service ?? ""] = button
+            }
+
+            modifications.map { res[$0] }.forEach {
+                guard $0.custom,
+                      let identifier = $0.identifier,
+                      let button = self.customAuthButtons[identifier]
+                else {
+                    return
+                }
+
+                button.setTitle($0.buttonLabelText ?? "", for: .normal)
+                button.setTitleColor(UIColor(hex: $0.buttonLabelColor), for: .normal)
+                button.backgroundColor = UIColor(hex: $0.buttonColor)
+            }
+
+            deletions.map { res[$0] }.forEach {
+                guard $0.custom,
+                      let identifier = $0.identifier,
+                      let button = self.customAuthButtons[identifier]
+                else {
+                    return
+                }
+
+                authButtonsStackView.removeArrangedSubview(button)
+                customAuthButtons.removeValue(forKey: identifier)
+            }
+        default:
+            break
+        }
     }
 }
