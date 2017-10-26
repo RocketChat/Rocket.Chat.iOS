@@ -9,7 +9,6 @@
 import UIKit
 
 extension ChatViewController: SocketConnectionHandler {
-
     func socketDidConnect(socket: SocketManager) {
         hideHeaderStatusView()
 
@@ -31,4 +30,7 @@ extension ChatViewController: SocketConnectionHandler {
         chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
     }
 
+    func socketDidReturnError(socket: SocketManager, error: SocketError) {
+        // handle errors
+    }
 }
