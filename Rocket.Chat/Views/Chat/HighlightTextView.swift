@@ -66,7 +66,7 @@ class HighlightTextView: UITextView {
                     runBounds.origin.x = origins[index].x + xOffset + scrollViewInset
                     runBounds.origin.y = origins[index].y - scrollViewInset
 
-                    let path = UIBezierPath(roundedRect: runBounds, cornerRadius: 5)
+                    let path = UIBezierPath(roundedRect: runBounds, cornerRadius: 3)
 
                     let highlightColor = color.cgColor
                     context.setFillColor(highlightColor)
