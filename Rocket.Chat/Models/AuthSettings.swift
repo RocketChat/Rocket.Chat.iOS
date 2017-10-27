@@ -10,6 +10,12 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+enum RegistrationFormAccess: String {
+    case isPublic = "Public"
+    case isDisabled = "Disabled"
+    case isSecretURL = "Secret URL"
+}
+
 final class AuthSettings: BaseModel {
     @objc dynamic var siteURL: String?
     @objc dynamic var cdnPrefixURL: String?
@@ -31,13 +37,12 @@ final class AuthSettings: BaseModel {
     @objc dynamic var isLDAPAuthenticationEnabled = false
 
     // Registration
-    enum RegistrationFormAccess: String {
-        case isPublic = "Public", isDisabled = "Disabled", isSecretURL = "Secret URL"
-    }
     @objc dynamic var rawRegistrationForm: String?
     var registrationForm: RegistrationFormAccess {
         guard let rawValue = rawRegistrationForm,
-            let value = RegistrationFormAccess(rawValue: rawValue) else { return .isPublic }
+              let value = RegistrationFormAccess(rawValue: rawValue) else {
+            return .isPublic
+        }
         return value
     }
 

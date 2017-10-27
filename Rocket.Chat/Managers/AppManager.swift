@@ -35,4 +35,5 @@ struct AppManager {
     static var supportsMultiServer: Bool {
         return applicationServerURL == nil
     }
+
 }
