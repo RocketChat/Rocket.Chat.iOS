@@ -17,7 +17,7 @@ def shared_pods
   pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git', :branch => 'master'
   pod 'MobilePlayer'
-  pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git', :branch => 'feat/animated_image_view'
+  pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
 
   # Text Processing
   pod 'RCMarkdownParser'
