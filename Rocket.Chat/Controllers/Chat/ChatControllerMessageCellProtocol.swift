@@ -9,6 +9,7 @@
 import UIKit
 import SafariServices
 import MobilePlayer
+import FLAnimatedImage
 import SimpleImageViewer
 
 extension ChatViewController: ChatMessageCellProtocol {
@@ -82,12 +83,13 @@ extension ChatViewController: ChatMessageCellProtocol {
         present(controller, animated: true, completion: nil)
     }
 
-    func openImageFromCell(attachment: Attachment, thumbnail: UIImageView) {
+    func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView) {
         textView.resignFirstResponder()
 
-        if let image = thumbnail.image {
+        if thumbnail.animatedImage != nil || thumbnail.image != nil {
             let configuration = ImageViewerConfiguration { config in
-                config.image = image
+                config.image = thumbnail.image
+                config.animatedImage = thumbnail.animatedImage
                 config.imageView = thumbnail
             }
             present(ImageViewerController(configuration: configuration), animated: true)
