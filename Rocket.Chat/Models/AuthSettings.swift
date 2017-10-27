@@ -39,8 +39,10 @@ final class AuthSettings: BaseModel {
     // Registration
     @objc dynamic var rawRegistrationForm: String?
     var registrationForm: RegistrationFormAccess {
-        guard let rawValue = rawRegistrationForm,
-              let value = RegistrationFormAccess(rawValue: rawValue) else {
+        guard
+            let rawValue = rawRegistrationForm,
+            let value = RegistrationFormAccess(rawValue: rawValue)
+        else {
             return .isPublic
         }
         return value
