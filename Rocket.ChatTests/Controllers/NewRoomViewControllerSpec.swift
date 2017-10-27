@@ -11,6 +11,7 @@ import RealmSwift
 @testable import Rocket_Chat
 
 class NewRoomViewControllerSpec: XCTestCase {
+
     func testDefaultsValues() {
         let controller = NewRoomViewController()
         let setValues = controller.setValues
@@ -29,4 +30,5 @@ class NewRoomViewControllerSpec: XCTestCase {
             }
         }
     }
+
 }
