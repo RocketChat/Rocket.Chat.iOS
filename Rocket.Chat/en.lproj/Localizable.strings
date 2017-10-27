@@ -31,11 +31,16 @@
 "alert.socket_error.invalid_user.title" = "Session expired";
 "alert.socket_error.invalid_user.message" = "Your session has expired. Please log in again.";
 
+"alert.login_service_error.title" = "Authentication Error";
+"alert.login_service_error.message" = "Could not authenticate using this service. Please, try again.";
+
 // Socket Connection
 "connection.offline.banner.message" = "You're offline, try connecting again";
 
 // Auth
 "auth.connect.button_connect" = "Connect";
+"auth.connect.ssl_required" = "It is required that your server supports SSL";
+"auth.connect.connecting" = "Connection in progress. Hold tight";
 
 // Subscriptions
 "subscriptions.search" = "Search";
@@ -59,11 +64,21 @@
 "user_menu.settings" = "My Account";
 "user_menu.logout" = "Logout";
 
+// New Room View
+"new_room.cell.public_channel.title" = "Public Channel";
+"new_room.cell.public_chanell.description" = "Everyone can access this channel";
+"new_room.cell.read_only.title" = "Read only channel";
+"new_room.cell.read_only.description" = "Only admin can write new messages";
+"new_room.group.channel.name" = "Channel Name";
+"new_room.group.channel.footer" = "Names must be all lower case and shorter than 22 characters";
+"new_room.cell.channel_name.title" = "Channel Name";
+
 // Chat
 "chat.channel_preview_view.title" = "This is a preview of #%@";
 "chat.channel_preview_view.join" = "Join Channel";
 "chat.dm.start_conversation" = "This is the start of your conversation with %@";
 "chat.channel.start_conversation" = "This is the start of the conversation on %@";
+"chat.read_only" = "This room is read only";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Block messages from user";

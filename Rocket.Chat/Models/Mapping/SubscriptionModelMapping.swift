@@ -41,4 +41,17 @@ extension Subscription: ModelMappeable {
             self.lastSeen = Date.dateFromInterval(lastSeen)
         }
     }
+
+    func mapRoom(_ values: JSON) {
+        self.roomDescription = values["description"].string ?? ""
+        self.roomTopic = values["topic"].string ?? ""
+
+        if let readOnly = values["ro"].bool {
+            self.roomReadOnly = readOnly
+        }
+
+        if let ownerId = values["u"]["_id"].string {
+            self.roomOwnerId = ownerId
+        }
+    }
 }

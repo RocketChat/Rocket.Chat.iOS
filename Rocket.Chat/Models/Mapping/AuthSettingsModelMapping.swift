@@ -39,6 +39,8 @@ extension AuthSettings: ModelMappeable {
         self.isGoogleAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Google")?.bool ?? false
         self.isLDAPAuthenticationEnabled = objectForKey(object: values, key: "LDAP_Enable")?.bool ?? false
 
+        self.rawRegistrationForm = objectForKey(object: values, key: "Accounts_RegistrationForm")?.string
+
         // Upload
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
 

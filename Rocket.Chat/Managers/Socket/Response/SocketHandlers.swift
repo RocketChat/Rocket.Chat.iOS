@@ -85,6 +85,8 @@ extension SocketManager {
                 User.handle(msg: msg, primaryKey: identifier, values: fields)
             case "subscriptions":
                 Subscription.handle(msg: msg, primaryKey: identifier, values: fields)
+            case "meteor_accounts_loginServiceConfiguration":
+                LoginService.handle(msg: msg, primaryKey: identifier, values: fields)
             default:
                 break
             }

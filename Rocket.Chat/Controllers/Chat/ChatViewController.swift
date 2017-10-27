@@ -75,7 +75,7 @@ final class ChatViewController: SLKTextViewController {
             markAsRead()
             typingIndicatorView?.dismissIndicator()
 
-            if let oldValue = oldValue, oldValue != subscription {
+            if let oldValue = oldValue, oldValue.identifier != subscription.identifier {
                 unsubscribe(for: oldValue)
             }
         }
@@ -199,8 +199,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func setupTextViewSettings() {
-        textInputbar.autoHideRightButton = true
-
         textView.registerMarkdownFormattingSymbol("*", withTitle: "Bold")
         textView.registerMarkdownFormattingSymbol("_", withTitle: "Italic")
         textView.registerMarkdownFormattingSymbol("~", withTitle: "Strike")
@@ -403,6 +401,12 @@ final class ChatViewController: SLKTextViewController {
             setTextInputbarHidden(true, animated: false)
             showChatPreviewModeView()
         }
+
+        if subscription.roomReadOnly && subscription.roomOwner != AuthManager.currentUser() {
+            blockMessageSending(reason: localized("chat.read_only"))
+        } else {
+            allowMessageSending()
+        }
     }
 
     internal func updateSubscriptionMessages() {
@@ -412,14 +416,14 @@ final class ChatViewController: SLKTextViewController {
 
         dataController.loadedAllMessages = false
         isRequestingHistory = false
-        loadMoreMessagesFrom(date: nil)
         updateMessagesQueryNotificationBlock()
+        loadMoreMessagesFrom(date: nil)
 
         MessageManager.changes(subscription)
-        typingEvent()
+        registerTypingEvent()
     }
 
-    fileprivate func typingEvent() {
+    fileprivate func registerTypingEvent() {
         typingIndicatorView?.interval = 0
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
@@ -448,10 +452,6 @@ final class ChatViewController: SLKTextViewController {
             }
 
             if insertions.count > 0 {
-                if insertions.count > 1 && self.isRequestingHistory {
-                    return
-                }
-
                 var newMessages: [Message] = []
                 for insertion in insertions {
                     let newMessage = Message(value: self.messagesQuery[insertion])
@@ -566,8 +566,19 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func appendMessages(messages: [Message], completion: VoidCompletion?) {
-        guard !isAppendingMessages else { return }
         guard let collectionView = self.collectionView else { return }
+        guard !isAppendingMessages else {
+            Log.debug("[APPEND MESSAGES] Blocked trying to append \(messages.count) messages")
+
+            // This message can be called many times during the app execution and we need
+            // to call them one per time, to avoid adding the same message multiple times
+            // to the list.
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+                self?.appendMessages(messages: messages, completion: completion)
+            })
+
+            return
+        }
 
         isAppendingMessages = true
 
@@ -623,6 +634,22 @@ final class ChatViewController: SLKTextViewController {
                 })
             }
         }
+    }
+
+    fileprivate func blockMessageSending(reason: String) {
+        textInputbar.textView.placeholder = reason
+        textInputbar.backgroundColor = .white
+        textInputbar.isUserInteractionEnabled = false
+        leftButton.isEnabled = false
+        rightButton.isEnabled = false
+    }
+
+    fileprivate func allowMessageSending() {
+        textInputbar.textView.placeholder = ""
+        textInputbar.backgroundColor = .backgroundWhite
+        textInputbar.isUserInteractionEnabled = true
+        leftButton.isEnabled = true
+        rightButton.isEnabled = true
     }
 
     fileprivate func showChatPreviewModeView() {
