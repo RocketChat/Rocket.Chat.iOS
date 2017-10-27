@@ -12,7 +12,7 @@ class PickerViewDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDelegate
 
     typealias SelectHandler = (String) -> Void
 
-    internal let data: [String]
+    internal var data: [String]
     internal let selectHandler: SelectHandler
 
     required init(data: [String], selectHandler: @escaping SelectHandler) {

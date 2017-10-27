@@ -14,6 +14,7 @@ final class SignupViewController: BaseViewController {
     internal var requesting = false
 
     var serverPublicSettings: AuthSettings?
+    let compoundPickerDelegate = CompoundPickerViewDelegate()
 
     @IBOutlet weak var viewFields: UIView! {
         didSet {
