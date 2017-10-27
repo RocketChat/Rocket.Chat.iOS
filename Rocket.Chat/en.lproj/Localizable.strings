@@ -39,6 +39,8 @@
 
 // Auth
 "auth.connect.button_connect" = "Connect";
+"auth.connect.ssl_required" = "It is required that your server supports SSL";
+"auth.connect.connecting" = "Connection in progress. Hold tight";
 
 // Subscriptions
 "subscriptions.search" = "Search";
