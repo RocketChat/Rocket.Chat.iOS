@@ -49,7 +49,8 @@ extension SignupViewController {
         let pickerDelegate = PickerViewDelegate(data: model.options) {
             textField.text = $0
         }
-        compoundPickerDelegate.append(pickerDelegate)
+
+        compoundPickers.append(pickerDelegate)
 
         pickerView.dataSource = pickerDelegate
         pickerView.delegate = pickerDelegate
