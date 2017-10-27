@@ -39,21 +39,18 @@ extension SignupViewController {
     }
 
     private func setupField(_ textField: UITextField, with model: CustomField) {
-        switch model {
-        case let selectField as SelectField:
+        if let selectField = model as? SelectField {
             setupSelectField(textField, with: selectField)
-            break
-        default:
-            break
         }
     }
 
     private func setupSelectField(_ textField: UITextField, with model: SelectField) {
         let pickerView = UIPickerView()
-        let pickerDelegate = PickerViewDelegate(source: model.options) {
+
+        let pickerDelegate = PickerViewDelegate(data: model.options) {
             textField.text = $0
         }
-        compoundPickerDelegate.append(pickerDelegate)
+
         pickerView.dataSource = pickerDelegate
         pickerView.delegate = pickerDelegate
         pickerView.showsSelectionIndicator = true
