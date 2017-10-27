@@ -9,6 +9,7 @@
 import UIKit
 
 extension SignupViewController {
+
     func setupCustomFields() {
         customTextFields = getCustomTextFields()
 
@@ -34,14 +35,12 @@ extension SignupViewController {
         textField.returnKeyType = .next
         textField.placeholder = model.name
         textField.delegate = self
-        setupField(textField, with: model)
-        return textField
-    }
 
-    private func setupField(_ textField: UITextField, with model: CustomField) {
         if let selectField = model as? SelectField {
             setupSelectField(textField, with: selectField)
         }
+
+        return textField
     }
 
     private func setupSelectField(_ textField: UITextField, with model: SelectField) {
@@ -50,6 +49,7 @@ extension SignupViewController {
         let pickerDelegate = PickerViewDelegate(data: model.options) {
             textField.text = $0
         }
+        compoundPickerDelegate.append(pickerDelegate)
 
         pickerView.dataSource = pickerDelegate
         pickerView.delegate = pickerDelegate
