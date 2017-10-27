@@ -26,7 +26,8 @@ def shared_pods
   pod 'RealmSwift'
 
   # Network
-  pod 'SDWebImage', '~> 3'
+  pod 'SDWebImage', '~> 4'
+  pod 'SDWebImage/GIF'
   pod 'Starscream'
   pod 'ReachabilitySwift'
 
