@@ -12,11 +12,11 @@ class PickerViewDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDelegate
 
     typealias SelectHandler = (String) -> Void
 
-    private let source: [String]
+    private let data: [String]
     private let selectHandler: SelectHandler
 
-    init(source: [String], selectHandler: @escaping SelectHandler) {
-        self.source = source
+    init(data: [String], selectHandler: @escaping SelectHandler) {
+        self.data = data
         self.selectHandler = selectHandler
     }
 
@@ -25,14 +25,15 @@ class PickerViewDelegate: NSObject, UIPickerViewDataSource, UIPickerViewDelegate
     }
 
     public func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return source.count
+        return data.count
     }
 
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return source[row]
+        return data[row]
     }
 
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        selectHandler(source[row])
+        selectHandler(data[row])
     }
+
 }
