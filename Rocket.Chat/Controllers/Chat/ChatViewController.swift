@@ -401,6 +401,12 @@ final class ChatViewController: SLKTextViewController {
             setTextInputbarHidden(true, animated: false)
             showChatPreviewModeView()
         }
+
+        if subscription.roomReadOnly && subscription.roomOwner != AuthManager.currentUser() {
+            blockMessageSending(reason: localized("chat.read_only"))
+        } else {
+            allowMessageSending()
+        }
     }
 
     internal func updateSubscriptionMessages() {
@@ -628,6 +634,22 @@ final class ChatViewController: SLKTextViewController {
                 })
             }
         }
+    }
+
+    fileprivate func blockMessageSending(reason: String) {
+        textInputbar.textView.placeholder = reason
+        textInputbar.backgroundColor = .white
+        textInputbar.isUserInteractionEnabled = false
+        leftButton.isEnabled = false
+        rightButton.isEnabled = false
+    }
+
+    fileprivate func allowMessageSending() {
+        textInputbar.textView.placeholder = ""
+        textInputbar.backgroundColor = .backgroundWhite
+        textInputbar.isUserInteractionEnabled = true
+        leftButton.isEnabled = true
+        rightButton.isEnabled = true
     }
 
     fileprivate func showChatPreviewModeView() {
