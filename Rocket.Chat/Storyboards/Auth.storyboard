@@ -150,7 +150,6 @@
                     <connections>
                         <outlet property="activityIndicator" destination="DW6-kC-gDS" id="A6O-hz-inh"/>
                         <outlet property="buttonClose" destination="qto-hL-6xQ" id="xhS-iM-45M"/>
-                        <outlet property="labelSSLRequired" destination="608-B5-MyM" id="2Lv-Tq-hId"/>
                         <outlet property="textFieldServerURL" destination="0ea-ze-woy" id="XkR-cW-Db7"/>
                         <outlet property="viewFields" destination="x11-i1-wfS" id="HPU-Y3-fmw"/>
                         <outlet property="visibleViewBottomConstraint" destination="zwG-Q5-5tg" id="orH-pL-Ddp"/>
@@ -378,13 +377,12 @@
                         <outlet property="activityIndicator" destination="EG7-WS-QYQ" id="RjP-38-HEH"/>
                         <outlet property="authButtonsStackView" destination="hgB-Cn-akk" id="zLx-l9-kvd"/>
                         <outlet property="buttonAuthenticateGoogle" destination="sR6-SI-5gv" id="KHM-fB-UoH"/>
+                        <outlet property="buttonRegister" destination="80Q-az-ZIG" id="Uzu-Rv-3vk"/>
                         <outlet property="onePasswordButton" destination="PjJ-Db-hlk" id="F8y-7r-2zK"/>
                         <outlet property="textFieldPassword" destination="A9R-8V-1bd" id="Ayd-9m-hp2"/>
                         <outlet property="textFieldUsername" destination="ygD-Jl-GJ5" id="HM8-dg-2wc"/>
                         <outlet property="viewFields" destination="CS6-d2-2aP" id="Ecf-ES-nkV"/>
                         <outlet property="visibleViewBottomConstraint" destination="lUZ-pb-lT4" id="duq-Zd-6bF"/>
-                        <outletCollection property="accountCreationFields" destination="80Q-az-ZIG" collectionClass="NSMutableArray" id="Sem-ob-dRe"/>
-                        <outletCollection property="accountCreationFields" destination="eRg-uf-0XQ" collectionClass="NSMutableArray" id="bYH-8u-OsY"/>
                         <segue destination="DCX-We-7Nh" kind="show" identifier="RequestUsername" id="O3e-MC-N7z"/>
                         <segue destination="Yxu-n9-29o" kind="show" identifier="TwoFactor" id="eFz-02-3gC"/>
                     </connections>
@@ -406,7 +404,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qTE-FD-RGC">
-                                <rect key="frame" x="0.0" y="68" width="375" height="599"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hBN-QI-i7b" userLabel="Content">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="192"/>
