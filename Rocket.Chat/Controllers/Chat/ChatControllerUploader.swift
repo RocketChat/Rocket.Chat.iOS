@@ -70,31 +70,41 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         var filename = String.random()
         var file: FileUpload?
-        var assetURL: URL?
 
-        if let tempAssetURL = info[UIImagePickerControllerReferenceURL] as? URL {
-            assetURL = tempAssetURL
+        if let assetURL = info[UIImagePickerControllerReferenceURL] as? URL,
+            let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject {
+            if let resource = PHAssetResource.assetResources(for: asset).first {
+                filename = resource.originalFilename
+            }
 
-            if let asset = PHAsset.fetchAssets(withALAssetURLs: [tempAssetURL], options: nil).firstObject {
-                if let resource = PHAssetResource.assetResources(for: asset).first {
-                    filename = resource.originalFilename
+            let mimeType = UploadHelper.mimeTypeFor(assetURL)
+
+            if mimeType == "image/gif" {
+                PHImageManager.default().requestImageData(for: asset, options: nil) { data, _, _, _ in
+                    guard let data = data else { return }
+
+                    let file = UploadHelper.file(
+                        for: data,
+                        name: "\(filename.components(separatedBy: ".").first ?? "image").gif",
+                        mimeType: "image/gif"
+                    )
+
+                    self.upload(file)
+                    self.dismiss(animated: true, completion: nil)
                 }
+
+                return
             }
         }
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let resizedImage = image.resizeWith(width: 1024) ?? image
             guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
-            var mimeType: String?
-
-            if let assetURL = assetURL {
-                mimeType = UploadHelper.mimeTypeFor(assetURL)
-            }
 
             file = UploadHelper.file(
                 for: imageData,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
-                mimeType: mimeType ?? "image/jpeg"
+                mimeType: "image/jpeg"
             )
         }
 
