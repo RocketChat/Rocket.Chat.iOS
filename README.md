@@ -1,6 +1,6 @@
 # Rocket.Chat iOS native application
 
-[![Build Status](https://circleci.com/gh/RocketChat/Rocket.Chat.iOS/tree/develop.svg?style=svg)](https://circleci.com/gh/RocketChat/Rocket.Chat.iOS/tree/develop)
+[![Build Status](https://circleci.com/gh/RocketChat/Rocket.Chat.iOS/tree/develop.svg?style=shield)](https://circleci.com/gh/RocketChat/Rocket.Chat.iOS/tree/develop)
 [![codecov](https://codecov.io/gh/RocketChat/Rocket.Chat.iOS/branch/develop/graph/badge.svg)](https://codecov.io/gh/RocketChat/Rocket.Chat.iOS)
 
 # Get it from the store
