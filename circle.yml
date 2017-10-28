@@ -1,6 +1,6 @@
 machine:
   xcode:
-    version: "9.0"
+    version: '9.0'
 dependencies:
   pre:
     - gem install bundler
@@ -11,3 +11,5 @@ dependencies:
 test:
   override:
     - ./Scripts/test.sh
+  post:
+    - 'bash <(curl -s https://codecov.io/bash)'
