@@ -29,7 +29,7 @@
 "alert.feature.wip.message" = "Stále pracujeme na této funkci, ale není ještě dokončena.";
 
 "alert.socket_error.invalid_user.title" = "Relace vypršela";
-"alert.socket_error.invalid_user.message" = "Platnost vaší relace vypršela. Přihlaste se znovu, prosím.";
+"alert.socket_error.invalid_user.message" = "Platnost Vaší relace vypršela. Přihlaste se znovu, prosím.";
 
 "alert.login_service_error.title" = "Chyba ověření";
 "alert.login_service_error.message" = "Nelze ověřit pomocí této služby. Prosím zkuste to znovu.";
@@ -91,7 +91,7 @@
 
 // Chat Message Report
 "chat.message.report.success.title" = "Zpráva byla nahlášena";
-"chat.message.report.success.message" = "Zpráva byla úspěšně nahlášena, děkuji!";
+"chat.message.report.success.message" = "Zpráva byla úspěšně nahlášena, děkujeme!";
 
 // Chat Upload
 "chat.upload.uploading_image" = "Nahrát obrázek";
