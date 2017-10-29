@@ -39,6 +39,7 @@ class MessageTextCacheManager {
         } else {
             text.setFont(MessageTextFontAttributes.defaultFont)
             text.setFontColor(MessageTextFontAttributes.defaultFontColor)
+            text.setLineSpacing(MessageTextFontAttributes.defaultFont)
         }
 
         resultText = NSMutableAttributedString(attributedString: text.transformMarkdown())
