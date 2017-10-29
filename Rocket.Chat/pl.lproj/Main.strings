@@ -1,0 +1,6 @@
+
+/* Class = "UIButton"; normalTitle = "Connect to a new server"; ObjectID = "5qg-i6-CkS"; */
+"5qg-i6-CkS.normalTitle" = "Połącz z nowym serwerem";
+
+/* Class = "UILabel"; text = "User is not authenticated"; ObjectID = "zvI-Ne-wdZ"; */
+"zvI-Ne-wdZ.text" = "Użytkownik nie jest uwierzytelniony";
