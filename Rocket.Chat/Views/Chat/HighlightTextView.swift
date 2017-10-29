@@ -35,22 +35,22 @@ class HighlightTextView: UITextView {
         context.translateBy(x: 0, y: bounds.size.height)
         context.scaleBy(x: 1.0, y: -1.0)
 
-        let lines = CTFrameGetLines(totalframe) as NSArray
+        guard let lines = CTFrameGetLines(totalframe) as? [CTLine] else {
+            return
+        }
 
         var origins = [CGPoint](repeating: .zero, count: lines.count)
         CTFrameGetLineOrigins(totalframe, CFRangeMake(0, lines.count), &origins)
 
         for index in 0..<lines.count {
-            // swiftlint:disable force_cast
-            let line = lines[index] as! CTLine
-            // swiftlint:enable force_cast
+            let line: CTLine = lines[index]
 
-            let glyphRuns = CTLineGetGlyphRuns(line) as NSArray
+            guard let glyphRuns = CTLineGetGlyphRuns(line) as? [CTRun] else {
+                continue
+            }
 
             for i in 0..<glyphRuns.count {
-                // swiftlint:disable force_cast
-                let run = glyphRuns[i] as! CTRun
-                // swiftlint:enable force_cast
+                let run: CTRun = glyphRuns[i]
 
                 let attributes = CTRunGetAttributes(run) as NSDictionary
                 let dicObject = attributes.object(forKey: NSAttributedStringKey.highlightBackgroundColor)
