@@ -53,13 +53,15 @@ class HighlightTextView: UITextView {
                 // swiftlint:enable force_cast
 
                 let attributes = CTRunGetAttributes(run) as NSDictionary
+                let dicObject = attributes.object(forKey: NSAttributedStringKey.highlightBackgroundColor)
 
-                if let color: UIColor = attributes.object(forKey: NSAttributedStringKey.highlightBackgroundColor) as? UIColor {
+                if let color: UIColor = dicObject as? UIColor {
                     var runBounds: CGRect = .zero
                     var ascent: CGFloat = 0
                     var descent: CGFloat = 0
 
-                    runBounds.size.width = CGFloat(CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, nil))
+                    let width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, nil)
+                    runBounds.size.width = CGFloat(width)
                     runBounds.size.height = ascent + descent
 
                     let xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, nil)
