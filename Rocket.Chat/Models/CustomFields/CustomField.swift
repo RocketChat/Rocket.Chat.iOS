@@ -16,7 +16,6 @@ class CustomField {
     }
 
     var name: String = ""
-
     var required: Bool = false
 
     func map(_ values: JSON, realm: Realm?) {
