@@ -1,0 +1,143 @@
+/* 
+ Localizable.strings
+ Rocket.Chat
+
+ Created by Artur Rymarz on 10/28/17.
+ Copyright © 2016 Rocket.Chat. All rights reserved.
+ */
+
+
+// Global
+"global.ok" = "OK";
+"global.cancel" = "Anuluj";
+
+// Errors
+"error.socket.default_error_title" = "Ups!";
+"error.socket.default_error_message" = "Wystąpił nieoczekiwany błąd, spróbuj ponownie.";
+
+// Alerts
+"alert.connection.invalid_url.title" = "Ups!";
+"alert.connection.invalid_url.message" = "URL który wprowadziłeś jest niepoprawny. Proszę sprawdzić jego poprawność i spróbować ponownie.";
+
+"alert.connection.invalid_version.title" = "Ups!";
+"alert.connection.invalid_version.message" = "Serwer na który próbujesz się połączyć korzysta z wersji aplikacji, która nie jest już wspierana przez aplikację: %@.\n\nWymagana wersja to %@.";
+
+"alert.settings.set_mail_app.title" = "Ups!";
+"alert.settings.set_mail_app.message" = "Brak kont e-mail. Aby wysyłać wiadomości e-mail proszę skonfiguruj konto e-mail.";
+
+"alert.feature.wip.title" = "Ups!";
+"alert.feature.wip.message" = "Wciąż pracujemy nad tą funkcją. Bądź czujny!";
+
+"alert.socket_error.invalid_user.title" = "Sesja wygasła";
+"alert.socket_error.invalid_user.message" = "Twoja sesja wygasła. Zaloguj się ponownie.";
+
+"alert.login_service_error.title" = "Błąd uwierzytelniania";
+"alert.login_service_error.message" = "Nie można zalogować przy użyciu tej usługi. Proszę spróbować ponownie.";
+
+// Socket Connection
+"connection.offline.banner.message" = "Jesteś w trybie offline, połącz się ponownie";
+
+// Auth
+"auth.connect.button_connect" = "Połącz";
+"auth.connect.ssl_required" = "Wymagane jest, aby Twój serwer wspierał SSL";
+"auth.connect.connecting" = "Trwa łączenie. Trzymaj się";
+
+// Subscriptions
+"subscriptions.search" = "Szukaj";
+"subscriptions.search_results" = "Wyniki";
+"subscriptions.search.load_more_results" = "Załaduj więcej wyników";
+"subscriptions.unreads" = "Nieprzeczytane";
+"subscriptions.favorites" = "Ulubione";
+"subscriptions.channels" = "Kanały";
+"subscriptions.direct_messages" = "Prywatne wiadomości";
+
+// Servers
+"servers.add_new_team" = "Dodaj nowy Zespół";
+"servers.action.connect" = "Połącz";
+"servers.action.remove" = "Usuń zespół";
+
+// User Menu
+"user_menu.online" = "Dostępny";
+"user_menu.away" = "Zaraz wracam";
+"user_menu.busy" = "Zajęty";
+"user_menu.invisible" = "Ukryty";
+"user_menu.settings" = "Moje Konto";
+"user_menu.logout" = "Wyloguj";
+
+// New Room View
+"new_room.cell.public_channel.title" = "Kanał publiczny";
+"new_room.cell.public_chanell.description" = "Każdy ma dostęp do tego kanału";
+"new_room.cell.read_only.title" = "Kanał tylko do odczytu";
+"new_room.cell.read_only.description" = "Tylko administrator może pisać wiadomości";
+"new_room.group.channel.name" = "Nazwa kanału";
+"new_room.group.channel.footer" = "Nazwa musi być z małych liter oraz być krótsza niż 22 znaki";
+"new_room.cell.channel_name.title" = "Nazwa kanału";
+
+// Chat
+"chat.channel_preview_view.title" = "Jest to podgląd kanału #%@";
+"chat.channel_preview_view.join" = "Dołącz do kanału";
+"chat.dm.start_conversation" = "To początek Twojej rozmowy z %@";
+"chat.channel.start_conversation" = "To początek rozmowy na kanale %@";
+"chat.read_only" = "Ten kanał jest tylko do odczytu";
+
+// Chat Message Actions
+"chat.message.actions.block" = "Blokuj wiadomości od użytkownika";
+"chat.message.actions.report" = "Zgłoś wiadomość";
+"chat.message.actions.copy" = "Kopiuj";
+"chat.message.actions.pin" = "Przypnij wiadomość";
+"chat.message.actions.unpin" = "Odepnij wiadomość";
+"chat.message.actions.quote" = "Cytuj wiadomość";
+"chat.message.actions.reply" = "Odpowiedz na wiadomość";
+
+// Chat Message Report
+"chat.message.report.success.title" = "Wiadomość zgłoszona";
+"chat.message.report.success.message" = "Wiadomość została poprawnie zgłoszona, dziękujemy!";
+
+// Chat Upload
+"chat.upload.uploading_image" = "Przesyłanie zdjęcia";
+"chat.upload.uploading_video" = "Przesyłanie wideo";
+"chat.upload.uploading_file" = "Przesyłanie \"%@\"";
+"chat.upload.take_photo" = "Zrób zdjęcie";
+"chat.upload.choose_from_library" = "Wybierz plik z biblioteki";
+"chat.upload.import_file" = "Importuj plik z...";
+
+// Chat Download
+"chat.download.downloading_file" = "Pobieranie \"%@\"";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "Dotknij aby otworzyć plik";
+
+// Message Types
+"chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";
+"chat.message.type.user_added_by" = "Użytkownik %@ został dodany przez %@";
+"chat.message.type.user_removed_by" = "Użytkownik %@ został usunięty przez %@";
+"chat.message.type.user_left" = "Opuścił pokój";
+"chat.message.type.user_joined" = "Dołączył do pokoju";
+"chat.message.type.user_muted" = "Użytkownik %@ został wyciszony przez %@";
+"chat.message.type.user_unmuted" = "Wyciszenie zostało wyłączone użytkowniki %@ przez %@";
+"chat.message.type.welcome" = "Witaj %@";
+"chat.message.type.message_removed" = "Wiadomość usunięta";
+"chat.message.type.subscription_role_added" = "%@ otrzymał rolę %@ przez %@";
+"chat.message.type.subscription_role_removed" = "%@ utracił rolę %@ przez %@";
+"chat.message.type.room_archived" = "Kanał został zarchiwizowany przez %@";
+"chat.message.type.room_unarchived" = "Kanał został od archiwizowany przez %@";
+
+// Chat Information
+"chat.info.title" = "Informacje";
+"chat.info.item.topic" = "Temat";
+"chat.info.item.no_topic" = "Brak tematu";
+"chat.info.item.description" = "Opis";
+"chat.info.item.no_description" = "Brak opisu";
+"chat.info.item.notifications" = "Powiadomienia";
+"chat.info.item.members" = "Członkowie";
+"chat.info.item.pinned" = "Przypięte";
+"chat.info.item.starred" = "Oznaczone gwiazdką";
+
+// Members List
+"chat.members.list.title" = "Członkowie (%d)";
+
+// Messages List
+"chat.messages.list.title" = "Wiadomości";
+"chat.messages.list.empty" = "Nie znaleziono wiadomości";
+"chat.messages.pinned.list.title" = "Przypięte wiadomości";
+"chat.messages.starred.list.title" = "Wiadomości oznaczone gwiazdką";
