@@ -21,7 +21,6 @@ final class Auth: Object {
             return nil
         }
 
-
         components.path = ""
 
         return components.url
