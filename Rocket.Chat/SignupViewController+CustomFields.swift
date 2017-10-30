@@ -56,6 +56,7 @@ extension SignupViewController {
         pickerView.delegate = pickerDelegate
         pickerView.showsSelectionIndicator = true
         textField.inputView = pickerView
+        textField.text = model.defaultValue
     }
 
     private func createSeparatorView() -> UIView {
