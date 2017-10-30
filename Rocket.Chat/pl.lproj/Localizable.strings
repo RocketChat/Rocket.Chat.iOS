@@ -134,7 +134,7 @@
 "chat.info.item.starred" = "Oznaczone gwiazdką";
 
 // Members List
-"chat.members.list.title" = "Członkowie (%d)";
+"chat.members.list.title" = "Członkowie";
 
 // Messages List
 "chat.messages.list.title" = "Wiadomości";

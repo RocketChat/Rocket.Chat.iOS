@@ -134,7 +134,7 @@
 "chat.info.item.starred" = "Starred";
 
 // Members List
-"chat.members.list.title" = "Members (%d)";
+"chat.members.list.title" = "Members";
 
 // Messages List
 "chat.messages.list.title" = "Messages";
