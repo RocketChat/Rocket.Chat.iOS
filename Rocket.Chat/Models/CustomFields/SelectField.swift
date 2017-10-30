@@ -14,6 +14,7 @@ class SelectField: CustomField {
     override class var type: String {
         return "select"
     }
+
     var options: [String] = []
     @objc dynamic var defaultValue: String = ""
 

@@ -9,6 +9,7 @@
 import UIKit
 
 extension SignupViewController {
+
     func setupCustomFields() {
         customTextFields = getCustomTextFields()
 
@@ -22,19 +23,40 @@ extension SignupViewController {
 
     private func getCustomTextFields() -> [UITextField] {
         return AuthSettingsManager.settings?.customFields.map { customField in
-            createTextField(with: customField.name)
+            createTextField(with: customField)
         } ?? []
     }
 
-    private func createTextField(with name: String) -> UITextField {
+    private func createTextField(with model: CustomField) -> UITextField {
         let textField = UITextField()
         textField.heightAnchor.constraint(equalToConstant: 62).isActive = true
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
         textField.returnKeyType = .next
-        textField.placeholder = name
+        textField.placeholder = model.name
         textField.delegate = self
+
+        if let selectField = model as? SelectField {
+            setupSelectField(textField, with: selectField)
+        }
+
         return textField
+    }
+
+    private func setupSelectField(_ textField: UITextField, with model: SelectField) {
+        let pickerView = UIPickerView()
+
+        let pickerDelegate = PickerViewDelegate(data: model.options) {
+            textField.text = $0
+        }
+
+        compoundPickers.append(pickerDelegate)
+
+        pickerView.dataSource = pickerDelegate
+        pickerView.delegate = pickerDelegate
+        pickerView.showsSelectionIndicator = true
+        textField.inputView = pickerView
+        textField.text = model.defaultValue
     }
 
     private func createSeparatorView() -> UIView {
