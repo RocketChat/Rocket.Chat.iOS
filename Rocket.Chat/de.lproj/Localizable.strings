@@ -123,7 +123,7 @@
 "chat.info.item.starred" = "Favorisiert";
 
 // Members List
-"chat.members.list.title" = "Mitglieder (%d)";
+"chat.members.list.title" = "Mitglieder";
 
 // Messages List
 "chat.messages.list.title" = "Nachrichten";
