@@ -110,6 +110,8 @@ extension MembersListViewController {
         if let cell = membersTableView.dequeueReusableCell(withIdentifier: LoaderTableViewCell.identifier) as? LoaderTableViewCell {
             self.loaderCell = cell
         }
+
+        title = data.title
     }
 
     func registerCells() {
