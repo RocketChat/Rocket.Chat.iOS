@@ -53,5 +53,9 @@ extension Subscription: ModelMappeable {
         if let ownerId = values["u"]["_id"].string {
             self.roomOwnerId = ownerId
         }
+
+        if let updatedAt = values["_updatedAt"]["$date"].double {
+            self.roomUpdatedAt = Date.dateFromInterval(updatedAt)
+        }
     }
 }
