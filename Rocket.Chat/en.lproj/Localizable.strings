@@ -79,6 +79,7 @@
 "chat.dm.start_conversation" = "This is the start of your conversation with %@";
 "chat.channel.start_conversation" = "This is the start of the conversation on %@";
 "chat.read_only" = "This room is read only";
+"chat.muted" = "You have been muted";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Block messages from user";
