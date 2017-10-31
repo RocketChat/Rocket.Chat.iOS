@@ -159,9 +159,9 @@ extension AuthManager {
     */
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
-        guard let urlApi = auth.serverApiURL else { return }
+        guard let apiHost = auth.apiHost else { return }
 
-        API.shared.host = urlApi
+        API.shared.host = apiHost
         API.shared.authToken = auth.token
         API.shared.userId = auth.userId
 
@@ -198,15 +198,17 @@ extension AuthManager {
     /**
         Method that creates an User account.
      */
-    static func signup(with name: String, _ email: String, _ password: String, completion: @escaping MessageCompletion) {
+    static func signup(with name: String, _ email: String, _ password: String, customFields: [String: String] = [String: String](), completion: @escaping MessageCompletion) {
+        let param = [
+            "email": email,
+            "pass": password,
+            "name": name
+        ].union(dictionary: customFields)
+
         let object = [
             "msg": "method",
             "method": "registerUser",
-            "params": [[
-                "email": email,
-                "pass": password,
-                "name": name
-            ]]
+            "params": [param]
         ] as [String: Any]
 
         SocketManager.send(object) { (response) in
@@ -309,6 +311,26 @@ extension AuthManager {
     }
 
     /**
+        This method authenticates the user with a credential token
+        and a credential secret (retrieved via an OAuth method)
+
+        - parameter token: The credential token
+        - parameter secret: The credential secret
+        - parameter completion: The completion block that'll be called in case
+            of success or error.
+     */
+    static func auth(credentials: OAuthCredentials, completion: @escaping MessageCompletion) {
+        let params = [
+            "oauth": [
+                "credentialToken": credentials.token,
+                "credentialSecret": credentials.secret
+            ] as [String: Any]
+        ]
+
+        AuthManager.auth(params: params, completion: completion)
+    }
+
+    /**
         Returns the username suggestion for the logged in user.
     */
     static func usernameSuggestion(completion: @escaping MessageCompletion) {
@@ -339,7 +361,6 @@ extension AuthManager {
      */
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
-            SocketManager.clear()
             GIDSignIn.sharedInstance().signOut()
 
             DatabaseManager.removerSelectedDatabase()
