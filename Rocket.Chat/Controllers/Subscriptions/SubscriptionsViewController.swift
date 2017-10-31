@@ -81,6 +81,14 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var labelServer: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
+    @IBOutlet weak var buttonAddChannel: UIButton! {
+        didSet {
+            if let image = UIImage(named: "Add") {
+                buttonAddChannel.tintColor = .RCLightBlue()
+                buttonAddChannel.setImage(image, for: .normal)
+            }
+        }
+    }
     @IBOutlet weak var imageViewArrowDown: UIImageView! {
         didSet {
             imageViewArrowDown.image = imageViewArrowDown.image?.imageWithTint(.RCLightBlue())
@@ -174,6 +182,7 @@ extension SubscriptionsViewController {
             isSearchingRemotely = false
             searchResult = []
 
+            updateAll()
             groupSubscription()
             tableView.reloadData()
             tableView.tableFooterView = nil
@@ -293,8 +302,8 @@ extension SubscriptionsViewController {
         assigned = true
 
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.addNotificationBlock(handleModelUpdates)
-        usersToken = realm.objects(User.self).addNotificationBlock(handleModelUpdates)
+        subscriptionsToken = subscriptions?.observe(handleModelUpdates)
+        usersToken = realm.objects(User.self).observe(handleModelUpdates)
 
         groupSubscription()
     }
@@ -579,6 +588,10 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
 
     func userDidPressedOption() {
         dismissUserMenu()
+    }
+
+    @IBAction func buttonAddChannelDidTap(sender: Any) {
+        performSegue(withIdentifier: "New Channel", sender: sender)
     }
 
 }

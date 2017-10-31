@@ -38,6 +38,8 @@ final class ConnectServerViewController: BaseViewController {
         }
     }
 
+    @IBOutlet weak var labelSSLRequired: UILabel!
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -52,6 +54,7 @@ final class ConnectServerViewController: BaseViewController {
         }
 
         textFieldServerURL.placeholder = defaultURL
+        labelSSLRequired.text = localized("auth.connect.ssl_required")
 
         if let nav = navigationController as? BaseNavigationController {
             nav.setTransparentTheme()
@@ -65,6 +68,8 @@ final class ConnectServerViewController: BaseViewController {
         DatabaseManager.cleanInvalidDatabases()
 
         if let applicationServerURL = AppManager.applicationServerURL {
+            textFieldServerURL.isEnabled = false
+            labelSSLRequired.text = localized("auth.connect.connecting")
             textFieldServerURL.text = applicationServerURL.host
             connect()
         }
@@ -134,8 +139,6 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     func connect() {
-        textFieldServerURL.text = url?.absoluteString
-
         guard let url = url else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
 
@@ -178,7 +181,6 @@ final class ConnectServerViewController: BaseViewController {
 
             let index = DatabaseManager.createNewDatabaseInstance(serverURL: socketURL.absoluteString)
             DatabaseManager.changeDatabaseInstance(index: index)
-
             SocketManager.connect(socketURL) { (_, connected) in
                 AuthSettingsManager.updatePublicSettings(nil) { (settings) in
                     self?.serverPublicSettings = settings
