@@ -182,6 +182,7 @@ extension SubscriptionsViewController {
             isSearchingRemotely = false
             searchResult = []
 
+            updateAll()
             groupSubscription()
             tableView.reloadData()
             tableView.tableFooterView = nil
