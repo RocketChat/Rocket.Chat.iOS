@@ -39,8 +39,8 @@
 
 // Auth
 "auth.connect.button_connect" = "Conectar";
-"servers.action.connect" = "Conectar";
-"servers.action.remove" = "Remover time";
+"auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
+"auth.connect.connecting" = "Conectando no servidor";
 
 // Subscriptions
 "subscriptions.search" = "Busca";
@@ -53,6 +53,8 @@
 
 // Servers
 "servers.add_new_team" = "Adicionar novo time";
+"servers.action.connect" = "Conectar";
+"servers.action.remove" = "Remover time";
 
 // User Menu
 "user_menu.online" = "Disponível";
