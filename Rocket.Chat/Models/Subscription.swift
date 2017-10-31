@@ -48,6 +48,8 @@ class Subscription: BaseModel {
     @objc dynamic var roomUpdatedAt: Date?
     @objc dynamic var roomReadOnly = false
 
+    let roomMuted = RealmSwift.List<String>()
+
     @objc dynamic var roomOwnerId: String?
     var roomOwner: User? {
         guard let roomOwnerId = roomOwnerId else { return nil }

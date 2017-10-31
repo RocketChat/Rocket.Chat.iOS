@@ -77,6 +77,7 @@
 "chat.dm.start_conversation" = "Este é o começo de sua conversa com %@";
 "chat.channel.start_conversation" = "Este é o começo da conversa em %@";
 "chat.read_only" = "Este canal é somente leitura";
+"chat.muted" = "Você foi silenciado";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Bloquear mensagens do usuário";

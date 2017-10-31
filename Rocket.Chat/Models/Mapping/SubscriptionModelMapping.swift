@@ -46,6 +46,11 @@ extension Subscription: ModelMappeable {
         self.roomDescription = values["description"].string ?? ""
         self.roomTopic = values["topic"].string ?? ""
 
+        self.roomMuted.removeAll()
+        if let roomMuted = values["muted"].array?.flatMap({ $0.string }) {
+            self.roomMuted.append(objectsIn: roomMuted)
+        }
+
         if let readOnly = values["ro"].bool {
             self.roomReadOnly = readOnly
         }
