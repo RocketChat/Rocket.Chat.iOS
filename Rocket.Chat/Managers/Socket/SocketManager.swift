@@ -47,6 +47,12 @@ class SocketManager {
         request.setValue(url.host ?? "", forHTTPHeaderField: "Host")
 
         sharedInstance.socket = WebSocket(request: request)
+        
+        // 如果要忽略SSL证书验证，请设置此项，因此可以使用自签名SSL证书。
+        sharedInstance.socket?.disableSSLCertValidation = true
+        // Set enabled cipher suites to AES 256 and AES 128
+        sharedInstance.socket?.enabledSSLCipherSuites = [TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256]
+        
         sharedInstance.socket?.advancedDelegate = sharedInstance
         sharedInstance.socket?.pongDelegate = sharedInstance
         sharedInstance.socket?.connect()

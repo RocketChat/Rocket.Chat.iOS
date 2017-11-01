@@ -75,9 +75,9 @@ class ServerManager {
         guard let url = serverURL.timestampURL() else { return }
 
         let request = URLRequest(url: url)
-        let session = URLSession.shared
-
-        let task = session.dataTask(with: request, completionHandler: { (data, _, _) in
+//        let session = URLSession.shared
+        // set SSL Session by Bruce at 2017-10-26 11:28:14
+        let task = SSLSession.getURLSession().dataTask(with: request, completionHandler: { (data, _, _) in
             if let data = data {
                 if let timestamp = String(data: data, encoding: .utf8) {
                     if let timestampDouble = Double(timestamp) {

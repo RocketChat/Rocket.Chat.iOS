@@ -111,9 +111,11 @@ class UploadManager {
             ]]
 
             let request = self.requestUpload(uploadURL, file: file, formData: JSON(headers))
-            let config = URLSessionConfiguration.default
-            let session = URLSession(configuration: config)
-            let task = session.uploadTask(with: request, from: file.data, completionHandler: { (_, _, error) in
+//            let config = URLSessionConfiguration.default
+//            let session = URLSession(configuration: config)
+            
+            // get SSL Session by Bruce at 2017-10-26 11:08:50
+            let task = SSLSession.getURLSession().uploadTask(with: request, from: file.data, completionHandler: { (_, _, error) in
                 if error != nil {
                     completion(nil, true)
                 } else {
