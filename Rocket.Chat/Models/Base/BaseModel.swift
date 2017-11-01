@@ -16,4 +16,8 @@ class BaseModel: Object {
     override static func primaryKey() -> String? {
         return "identifier"
     }
+
+    static func find(withIdentifier identifier: String) -> Self? {
+        return Realm.shared?.objects(self).filter("identifier = '\(identifier)'").first
+    }
 }

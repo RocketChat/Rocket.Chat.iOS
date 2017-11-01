@@ -20,13 +20,14 @@ def shared_pods
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
 
   # Text Processing
-  pod 'RCMarkdownParser'
+  pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
 
   # Database
   pod 'RealmSwift'
 
   # Network
-  pod 'SDWebImage', '~> 3'
+  pod 'SDWebImage', '~> 4'
+  pod 'SDWebImage/GIF'
   pod 'Starscream'
   pod 'ReachabilitySwift'
 

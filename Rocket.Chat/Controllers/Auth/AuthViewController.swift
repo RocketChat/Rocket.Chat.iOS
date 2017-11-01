@@ -47,6 +47,8 @@ final class AuthViewController: BaseViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    @IBOutlet var buttonRegister: UIButton!
+
     @IBOutlet weak var authButtonsStackView: UIStackView!
     var customAuthButtons = [String: UIButton]()
 
@@ -58,6 +60,10 @@ final class AuthViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         title = serverURL.host
+
+        if let registrationForm = AuthSettingsManager.shared.settings?.registrationForm {
+           buttonRegister.isHidden = registrationForm != .isPublic
+        }
 
         self.updateAuthenticationMethods()
     }

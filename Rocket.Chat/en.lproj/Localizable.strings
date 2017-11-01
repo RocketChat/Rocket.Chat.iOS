@@ -39,6 +39,8 @@
 
 // Auth
 "auth.connect.button_connect" = "Connect";
+"auth.connect.ssl_required" = "It is required that your server supports SSL";
+"auth.connect.connecting" = "Connection in progress. Hold tight";
 
 // Subscriptions
 "subscriptions.search" = "Search";
@@ -76,6 +78,7 @@
 "chat.channel_preview_view.join" = "Join Channel";
 "chat.dm.start_conversation" = "This is the start of your conversation with %@";
 "chat.channel.start_conversation" = "This is the start of the conversation on %@";
+"chat.read_only" = "This room is read only";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Block messages from user";
@@ -131,7 +134,7 @@
 "chat.info.item.starred" = "Starred";
 
 // Members List
-"chat.members.list.title" = "Members (%d)";
+"chat.members.list.title" = "Members";
 
 // Messages List
 "chat.messages.list.title" = "Messages";

@@ -39,8 +39,8 @@
 
 // Auth
 "auth.connect.button_connect" = "Conectar";
-"servers.action.connect" = "Conectar";
-"servers.action.remove" = "Remover time";
+"auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
+"auth.connect.connecting" = "Conectando no servidor";
 
 // Subscriptions
 "subscriptions.search" = "Busca";
@@ -53,6 +53,8 @@
 
 // Servers
 "servers.add_new_team" = "Adicionar novo time";
+"servers.action.connect" = "Conectar";
+"servers.action.remove" = "Remover time";
 
 // User Menu
 "user_menu.online" = "Disponível";
@@ -76,6 +78,7 @@
 "chat.channel_preview_view.join" = "Entrar";
 "chat.dm.start_conversation" = "Este é o começo de sua conversa com %@";
 "chat.channel.start_conversation" = "Este é o começo da conversa em %@";
+"chat.read_only" = "Este canal é somente leitura";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Bloquear mensagens do usuário";
@@ -131,7 +134,7 @@
 "chat.info.item.starred" = "Favoritas";
 
 // Members List
-"chat.members.list.title" = "Membros (%d)";
+"chat.members.list.title" = "Membros";
 
 // Messages List
 "chat.messages.list.title" = "Mensagens";

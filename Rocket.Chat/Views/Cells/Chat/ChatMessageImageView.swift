@@ -8,9 +8,10 @@
 
 import UIKit
 import SDWebImage
+import FLAnimatedImage
 
 protocol ChatMessageImageViewProtocol: class {
-    func openImageFromCell(attachment: Attachment, thumbnail: UIImageView)
+    func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView)
 }
 
 final class ChatMessageImageView: UIView {
@@ -25,7 +26,7 @@ final class ChatMessageImageView: UIView {
 
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var activityIndicatorImageView: UIActivityIndicatorView!
-    @IBOutlet weak var imageView: UIImageView! {
+    @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
             imageView.layer.cornerRadius = 3
             imageView.layer.borderColor = UIColor.lightGray.withAlphaComponent(0.1).cgColor
