@@ -180,7 +180,8 @@ final class ConnectServerViewController: BaseViewController {
             SocketManager.connect(socketURL) { (_, connected) in
                 if !connected {
                     self?.stopConnecting()
-                    self?.alert(title: "Connection Error", message: "Could not connect to this server")
+                    self?.alert(title: localized("alert.connection.socket_error.title"),
+                                message: localized("alert.connection.socket_error.message"))
                     return
                 }
 
