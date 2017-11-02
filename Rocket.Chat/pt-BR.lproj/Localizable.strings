@@ -19,6 +19,9 @@
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "A URL que você inseriu está incorreta ou é inválida. Confira se ela está informada corretamente e tente novamente, por favor!";
 
+"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.message" = "Não foi possível conectar a este servidor!";
+
 "alert.connection.invalid_version.title" = "Oops!";
 "alert.connection.invalid_version.message" = "O servidor que você está conectando não é suportado mais por esta versão do aplicativo: %@.\n\nEsta versão do aplicativo requer a versão %@ do servidor para funcionar corretamente.";
 
