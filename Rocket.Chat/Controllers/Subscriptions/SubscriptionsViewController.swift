@@ -247,17 +247,8 @@ extension SubscriptionsViewController {
         tableView?.reloadData()
     }
 
-    func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        if isSearchingLocally || isSearchingRemotely {
-            updateSearched()
-        } else {
-            updateAll()
-        }
-
-        groupSubscription()
-
-        updateCurrentUserInformation()
-        SubscriptionManager.updateUnreadApplicationBadge()
+    func handleModelUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
+        Log.debug("[MODEL UPDATES] Handling model updates in SubscriptionViewController")
 
         // Update titleView information with subscription, can be
         // some status changes
@@ -265,8 +256,19 @@ extension SubscriptionsViewController {
             ChatViewController.shared?.chatTitleView?.subscription = subscription
         }
 
+        SubscriptionManager.updateUnreadApplicationBadge()
+
         // If side panel is visible, reload the data
         if MainChatViewController.shared?.sidePanelVisible ?? false {
+            if isSearchingLocally || isSearchingRemotely {
+                updateSearched()
+            } else {
+                updateAll()
+            }
+
+            groupSubscription()
+            updateCurrentUserInformation()
+
             tableView?.reloadData()
         }
     }
