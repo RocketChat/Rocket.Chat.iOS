@@ -21,10 +21,11 @@ class HighlightTextView: UITextView {
             return
         }
 
-        let scrollViewInset: CGFloat = 5
+        text = nil
+
         let framesetter: CTFramesetter = CTFramesetterCreateWithAttributedString(string)
         let path: CGMutablePath = CGMutablePath()
-        path.addRect(CGRect(x: 0, y: 0, width: bounds.size.width - 2 * scrollViewInset, height: bounds.size.height))
+        path.addRect(CGRect(x: 0, y: 0, width: bounds.size.width, height: bounds.size.height))
         let totalframe: CTFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)
 
         guard let context: CGContext = UIGraphicsGetCurrentContext() else {
@@ -65,18 +66,24 @@ class HighlightTextView: UITextView {
                     runBounds.size.height = ascent + descent
 
                     let xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, nil)
-                    runBounds.origin.x = origins[index].x + xOffset + scrollViewInset
-                    runBounds.origin.y = origins[index].y - scrollViewInset
+                    runBounds.origin.x = origins[index].x + xOffset
+                    runBounds.origin.y = origins[index].y - 4
 
-                    let path = UIBezierPath(roundedRect: runBounds, cornerRadius: 3)
-
-                    let highlightColor = color.cgColor
-                    context.setFillColor(highlightColor)
-                    context.setStrokeColor(highlightColor)
-                    context.addPath(path.cgPath)
-                    context.drawPath(using: .fillStroke)
+                    drawBackground(runBounds, color, context)
                 }
             }
         }
+
+        CTFrameDraw(totalframe, context)
+    }
+
+    private func drawBackground(_ runBounds: CGRect, _ color: UIColor, _ context: CGContext) {
+        let path = UIBezierPath(roundedRect: runBounds, cornerRadius: 3)
+
+        let highlightColor = color.cgColor
+        context.setFillColor(highlightColor)
+        context.setStrokeColor(highlightColor)
+        context.addPath(path.cgPath)
+        context.drawPath(using: .fillStroke)
     }
 }
