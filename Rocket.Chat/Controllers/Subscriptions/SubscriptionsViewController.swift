@@ -109,7 +109,7 @@ final class SubscriptionsViewController: BaseViewController {
     var searchResult: [Subscription]?
     var subscriptions: Results<Subscription>?
     var subscriptionsToken: NotificationToken?
-    var usersToken: NotificationToken?
+    var currentUserToken: NotificationToken?
 
     var groupInfomation: [[String: String]]?
     var groupSubscriptions: [[Subscription]]?
@@ -247,16 +247,16 @@ extension SubscriptionsViewController {
         tableView?.reloadData()
     }
 
-    func handleModelUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        Log.debug("[MODEL UPDATES] Handling model updates in SubscriptionViewController")
+    func handleCurrentUserUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
+        updateCurrentUserInformation()
+    }
 
+    func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
         // Update titleView information with subscription, can be
         // some status changes
         if let subscription = ChatViewController.shared?.subscription {
             ChatViewController.shared?.chatTitleView?.subscription = subscription
         }
-
-        SubscriptionManager.updateUnreadApplicationBadge()
 
         // If side panel is visible, reload the data
         if MainChatViewController.shared?.sidePanelVisible ?? false {
@@ -267,8 +267,6 @@ extension SubscriptionsViewController {
             }
 
             groupSubscription()
-            updateCurrentUserInformation()
-
             tableView?.reloadData()
         }
     }
@@ -304,8 +302,12 @@ extension SubscriptionsViewController {
         assigned = true
 
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.observe(handleModelUpdates)
-        usersToken = realm.objects(User.self).observe(handleModelUpdates)
+        subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
+
+        if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
+            let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
+            currentUserToken = query.observe(handleCurrentUserUpdates)
+        }
 
         groupSubscription()
     }
