@@ -19,6 +19,9 @@
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "The URL you entered is invalid. Check it and try again, please!";
 
+"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.message" = "Could not connect to this server!";
+
 "alert.connection.invalid_version.title" = "Oops!";
 "alert.connection.invalid_version.message" = "The server you're trying to connect is using a version that's not supported by the app anymore: %@.\n\nWe require version %@.";
 
