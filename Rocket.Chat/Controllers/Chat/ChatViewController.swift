@@ -572,8 +572,12 @@ final class ChatViewController: SLKTextViewController {
 
             // This message can be called many times during the app execution and we need
             // to call them one per time, to avoid adding the same message multiple times
-            // to the list.
+            // to the list. Also, we keep the subscription identifier in order to make sure
+            // we're updating the same subscription, because this view controller is reused
+            // for all the chats.
+            let oldSubscriptionIdentifier = self.subscription.identifier
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+                guard oldSubscriptionIdentifier == self?.subscription.identifier else { return }
                 self?.appendMessages(messages: messages, completion: completion)
             })
 
