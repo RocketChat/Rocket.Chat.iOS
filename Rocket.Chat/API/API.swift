@@ -34,7 +34,8 @@ class API {
             return
         }
 
-        let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
+//        let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
+        let task = SSLSession.getURLSession().dataTask(with: request) { (data, _, _) in
             guard let data = data else { return }
             let json = try? JSON(data: data)
             completion?(APIResult<R>(raw: json))
