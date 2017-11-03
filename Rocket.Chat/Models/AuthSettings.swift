@@ -10,6 +10,12 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
+enum RegistrationFormAccess: String {
+    case isPublic = "Public"
+    case isDisabled = "Disabled"
+    case isSecretURL = "Secret URL"
+}
+
 final class AuthSettings: BaseModel {
     @objc dynamic var siteURL: String?
     @objc dynamic var cdnPrefixURL: String?
@@ -29,6 +35,18 @@ final class AuthSettings: BaseModel {
     @objc dynamic var isUsernameEmailAuthenticationEnabled = false
     @objc dynamic var isGoogleAuthenticationEnabled = false
     @objc dynamic var isLDAPAuthenticationEnabled = false
+
+    // Registration
+    @objc dynamic var rawRegistrationForm: String?
+    var registrationForm: RegistrationFormAccess {
+        guard
+            let rawValue = rawRegistrationForm,
+            let value = RegistrationFormAccess(rawValue: rawValue)
+        else {
+            return .isPublic
+        }
+        return value
+    }
 
     // File upload
     @objc dynamic var uploadStorageType: String?
@@ -54,4 +72,7 @@ final class AuthSettings: BaseModel {
 
         return hiddenTypes
     }
+
+    // Custom fields
+    @objc dynamic var rawCustomFields: String?
 }

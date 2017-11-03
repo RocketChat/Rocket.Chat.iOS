@@ -32,6 +32,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
+        SubscriptionManager.updateUnreadApplicationBadge()
+
         if AuthManager.isAuthenticated() != nil {
             UserManager.setUserPresence(status: .away) { (_) in
                 SocketManager.disconnect({ (_, _) in })

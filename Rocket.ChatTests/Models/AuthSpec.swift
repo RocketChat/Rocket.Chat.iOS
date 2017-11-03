@@ -43,4 +43,11 @@ class AuthSpec: XCTestCase {
             XCTAssert(first?.serverURL == serverURL, "Auth object was created with success")
         })
     }
+
+    func testAPIHost() {
+        let object = Auth()
+        object.serverURL = "wss://team.rocket.chat/websocket"
+
+        XCTAssertEqual(object.apiHost?.absoluteString, "https://team.rocket.chat", "apiHost returns API Host correctly")
+    }
 }

@@ -55,6 +55,10 @@ extension UIColor {
         return UIColor(rgb: 0xEAEAEA, alphaVal: 1)
     }
 
+    static func RCSeparatorGrey() -> UIColor {
+        return UIColor(rgb: 0xC2C2C2, alphaVal: 0.5)
+    }
+
     static func RCDarkBlue() -> UIColor {
         return UIColor(rgb: 0x0a4469, alphaVal: 1)
     }
@@ -115,5 +119,16 @@ extension UIColor {
         }
 
         return .link
+    }
+}
+
+// MARK: UIKit default colors
+extension UIColor {
+    static var placeholderGray: UIColor {
+        return UIColor(red: 199/255, green: 199/255, blue: 205/255, alpha: 1)
+    }
+
+    static var backgroundWhite: UIColor {
+        return UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
     }
 }

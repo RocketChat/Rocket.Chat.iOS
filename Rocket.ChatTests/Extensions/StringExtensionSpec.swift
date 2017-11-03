@@ -47,4 +47,45 @@ class StringExtensionSpec: XCTestCase {
         XCTAssert(string.distance(from: ranges[1].lowerBound, to: ranges[1].upperBound) == 4, "will word 2 have correct size")
     }
 
+    func testRemovingWhitespaces() {
+        // arrange
+        let withWhitespaces1 = "a b c d "
+        let expected1 = "abcd"
+
+        let withWhitespaces2 = " a b c d "
+        let expected2 = "abcd"
+
+        let withWhitespaces3 = " a      b c d "
+        let expected3 = "abcd"
+
+        let withWhitespaces4 = "  "
+        let expected4 = ""
+
+        let withWhitespaces5 = " a "
+        let expected5 = "a"
+
+        // act
+        let result1 = withWhitespaces1.removingWhitespaces()
+        let result2 = withWhitespaces2.removingWhitespaces()
+        let result3 = withWhitespaces3.removingWhitespaces()
+        let result4 = withWhitespaces4.removingWhitespaces()
+        let result5 = withWhitespaces5.removingWhitespaces()
+
+        // assert
+        XCTAssertEqual(result1, expected1, "string has no whitespaces")
+        XCTAssertEqual(result2, expected2, "string has no whitespaces")
+        XCTAssertEqual(result3, expected3, "string has no whitespaces")
+        XCTAssertEqual(result4, expected4, "string has no whitespaces")
+        XCTAssertEqual(result5, expected5, "string has no whitespaces")
+    }
+
+    // MARK: Base64
+
+    func testBase64() {
+        XCTAssertEqual("test".base64Encoded(), "dGVzdA==", "base64Encoded encodes correctly")
+        XCTAssertEqual("dGVzdA==".base64Decoded(), "test", "base64Decoded decodes correctly")
+
+        let randomString = String.random(10)
+        XCTAssertEqual(randomString.base64Encoded()?.base64Decoded(), randomString, "base64Encoded <-> base64Decoded pass random test")
+    }
 }
