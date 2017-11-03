@@ -225,7 +225,7 @@ extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
         let cellData = data.cell(at: indexPath.row)
 
         if let message = cellData.message {
-            return CGSize(width: fullWidth, height: ChatMessageCell.cellMediaHeightFor(message: message, sequential: false))
+            return CGSize(width: fullWidth, height: ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: false))
         }
 
         if cellData.date != nil {
