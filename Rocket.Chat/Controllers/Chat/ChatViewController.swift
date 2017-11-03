@@ -169,15 +169,21 @@ final class ChatViewController: SLKTextViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        let insets = UIEdgeInsets(
-            top: 0,
-            left: 0,
-            bottom: chatPreviewModeView?.frame.height ?? 0,
-            right: 0
-        )
+        guard let collectionView = collectionView else { return }
 
-        collectionView?.contentInset = insets
-        collectionView?.scrollIndicatorInsets = insets
+        var contentInsets = collectionView.contentInset
+        contentInsets.bottom = self.chatPreviewModeView?.frame.height ?? 0
+        if #available(iOS 11, *) {
+            contentInsets.right = collectionView.safeAreaInsets.right
+            contentInsets.left = collectionView.safeAreaInsets.left
+        }
+        collectionView.contentInset = contentInsets
+
+        var scrollIndicatorInsets = collectionView.scrollIndicatorInsets
+        scrollIndicatorInsets.right = 0
+        scrollIndicatorInsets.left = 0
+        scrollIndicatorInsets.bottom = self.chatPreviewModeView?.frame.height ?? 0
+        collectionView.scrollIndicatorInsets = scrollIndicatorInsets
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -814,7 +820,11 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let fullWidth = collectionView.bounds.size.width
+        var fullWidth = collectionView.bounds.size.width
+
+        if #available(iOS 11, *) {
+            fullWidth -= collectionView.safeAreaInsets.right + collectionView.safeAreaInsets.left
+        }
 
         if let obj = dataController.itemAt(indexPath) {
             if obj.type == .header {
@@ -835,7 +845,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
             if let message = obj.message {
                 let sequential = dataController.hasSequentialMessageAt(indexPath)
-                let height = ChatMessageCell.cellMediaHeightFor(message: message, sequential: sequential)
+                let height = ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: sequential)
                 return CGSize(width: fullWidth, height: height)
             }
         }
