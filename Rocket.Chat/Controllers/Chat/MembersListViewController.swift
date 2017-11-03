@@ -17,9 +17,7 @@ class MembersListViewData {
     var showing: Int = 0
     var total: Int = 0
 
-    var title: String {
-        return String(format: localized("chat.members.list.title"), total)
-    }
+    var title: String = localized("chat.members.list.title")
 
     var isShowingAllMembers: Bool {
         return showing >= total
@@ -49,6 +47,7 @@ class MembersListViewData {
 
                 self.currentPage += 1
 
+                self.title = "\(localized("chat.members.list.title")) (\(self.total))"
                 self.isLoadingMoreMembers = false
                 completion?()
             }
@@ -110,6 +109,8 @@ extension MembersListViewController {
         if let cell = membersTableView.dequeueReusableCell(withIdentifier: LoaderTableViewCell.identifier) as? LoaderTableViewCell {
             self.loaderCell = cell
         }
+
+        title = data.title
     }
 
     func registerCells() {

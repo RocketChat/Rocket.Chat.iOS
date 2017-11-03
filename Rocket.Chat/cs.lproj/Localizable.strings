@@ -134,7 +134,7 @@
 "chat.info.item.starred" = "S hvězdičkou";
 
 // Members List
-"chat.members.list.title" = "Členové (%d)";
+"chat.members.list.title" = "Členové";
 
 // Messages List
 "chat.messages.list.title" = "Zprávy";

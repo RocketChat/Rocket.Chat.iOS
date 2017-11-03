@@ -233,7 +233,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "spotlight",
             "params": [text, NSNull(), ["rooms": true, "users": true]]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else {

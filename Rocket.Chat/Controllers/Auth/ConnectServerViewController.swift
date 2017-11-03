@@ -170,18 +170,24 @@ final class ConnectServerViewController: BaseViewController {
         validate { [weak self] (_, error) in
             guard !error else {
                 DispatchQueue.main.async {
-                    self?.connecting = false
-                    self?.textFieldServerURL.alpha = 1
-                    self?.activityIndicator.stopAnimating()
+                    self?.stopConnecting()
                     self?.alertInvalidURL()
                 }
 
                 return
             }
 
-            let index = DatabaseManager.createNewDatabaseInstance(serverURL: socketURL.absoluteString)
-            DatabaseManager.changeDatabaseInstance(index: index)
             SocketManager.connect(socketURL) { (_, connected) in
+                if !connected {
+                    self?.stopConnecting()
+                    self?.alert(title: localized("alert.connection.socket_error.title"),
+                                message: localized("alert.connection.socket_error.message"))
+                    return
+                }
+
+                let index = DatabaseManager.createNewDatabaseInstance(serverURL: socketURL.absoluteString)
+                DatabaseManager.changeDatabaseInstance(index: index)
+
                 AuthSettingsManager.updatePublicSettings(nil) { (settings) in
                     self?.serverPublicSettings = settings
 
@@ -189,9 +195,7 @@ final class ConnectServerViewController: BaseViewController {
                         self?.performSegue(withIdentifier: "Auth", sender: nil)
                     }
 
-                    self?.connecting = false
-                    self?.textFieldServerURL.alpha = 1
-                    self?.activityIndicator.stopAnimating()
+                    self?.stopConnecting()
                 }
             }
         }
@@ -220,6 +224,11 @@ final class ConnectServerViewController: BaseViewController {
         }
     }
 
+    func stopConnecting() {
+        connecting = false
+        textFieldServerURL.alpha = 1
+        activityIndicator.stopAnimating()
+    }
 }
 
 extension ConnectServerViewController: UITextFieldDelegate {
