@@ -63,6 +63,8 @@ final class ChatViewController: SLKTextViewController {
     var isRequestingHistory = false
     var isAppendingMessages = false
 
+    var subscriptionToken: NotificationToken?
+
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messagesQuery: Results<Message>!
@@ -70,6 +72,20 @@ final class ChatViewController: SLKTextViewController {
     var subscription: Subscription! {
         didSet {
             guard !subscription.isInvalidated else { return }
+
+            subscriptionToken?.invalidate()
+            subscriptionToken = subscription.observe { [weak self] changes in
+                switch changes {
+                case .change(let propertyChanges):
+                    propertyChanges.forEach {
+                        if $0.name == "roomReadOnly" || $0.name == "roomMuted" {
+                            self?.updateMessageSendingPermission()
+                        }
+                    }
+                default:
+                    break
+                }
+            }
 
             updateSubscriptionInfo()
             markAsRead()
@@ -372,9 +388,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     internal func updateSubscriptionInfo() {
-        if let token = messagesToken {
-            token.invalidate()
-        }
+        messagesToken?.invalidate()
 
         title = subscription?.displayName()
         chatTitleView?.subscription = subscription
@@ -408,11 +422,7 @@ final class ChatViewController: SLKTextViewController {
             showChatPreviewModeView()
         }
 
-        if subscription.roomReadOnly && subscription.roomOwner != AuthManager.currentUser() {
-            blockMessageSending(reason: localized("chat.read_only"))
-        } else {
-            allowMessageSending()
-        }
+        updateMessageSendingPermission()
     }
 
     internal func updateSubscriptionMessages() {
@@ -646,22 +656,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    fileprivate func blockMessageSending(reason: String) {
-        textInputbar.textView.placeholder = reason
-        textInputbar.backgroundColor = .white
-        textInputbar.isUserInteractionEnabled = false
-        leftButton.isEnabled = false
-        rightButton.isEnabled = false
-    }
-
-    fileprivate func allowMessageSending() {
-        textInputbar.textView.placeholder = ""
-        textInputbar.backgroundColor = .backgroundWhite
-        textInputbar.isUserInteractionEnabled = true
-        leftButton.isEnabled = true
-        rightButton.isEnabled = true
-    }
-
     fileprivate func showChatPreviewModeView() {
         chatPreviewModeView?.removeFromSuperview()
 
@@ -885,4 +879,39 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         self.subscription = subscription
     }
 
+}
+
+// MARK: Block Message Sending
+
+extension ChatViewController {
+    fileprivate func updateMessageSendingPermission() {
+        guard let currentUser = AuthManager.currentUser() else {
+            allowMessageSending()
+            return
+        }
+
+        if subscription.roomReadOnly && subscription.roomOwner != currentUser {
+            blockMessageSending(reason: localized("chat.read_only"))
+        } else if let username = currentUser.username, subscription.roomMuted.contains(username) {
+            blockMessageSending(reason: localized("chat.muted"))
+        } else {
+            allowMessageSending()
+        }
+    }
+
+    fileprivate func blockMessageSending(reason: String) {
+        textInputbar.textView.placeholder = reason
+        textInputbar.backgroundColor = .white
+        textInputbar.isUserInteractionEnabled = false
+        leftButton.isEnabled = false
+        rightButton.isEnabled = false
+    }
+
+    fileprivate func allowMessageSending() {
+        textInputbar.textView.placeholder = ""
+        textInputbar.backgroundColor = .backgroundWhite
+        textInputbar.isUserInteractionEnabled = true
+        leftButton.isEnabled = true
+        rightButton.isEnabled = true
+    }
 }
