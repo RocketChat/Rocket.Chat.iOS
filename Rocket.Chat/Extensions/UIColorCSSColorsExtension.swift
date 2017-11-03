@@ -122,18 +122,18 @@ public extension UIColor {
             hexString = String(hexString.characters.dropFirst())
             
         }
-        if hexString.characters.count == 3 || hexString.characters.count == 4 {
+        if hexString.count == 3 || hexString.count == 4 {
             let redHex = hexString.substring(to: hexString.characters.index(hexString.startIndex, offsetBy: 1))
             let greenHex = hexString.substring(with: Range<String.Index>(hexString.characters.index(hexString.startIndex, offsetBy: 1) ..< hexString.characters.index(hexString.startIndex, offsetBy: 2)))
             let blueHex = hexString.substring(with: Range<String.Index>(hexString.characters.index(hexString.startIndex, offsetBy: 2) ..< hexString.characters.index(hexString.startIndex, offsetBy: 3)))
             var alphaHex = ""
-            if hexString.characters.count == 4 {
+            if hexString.count == 4 {
                 alphaHex = hexString.substring(from: hexString.characters.index(hexString.startIndex, offsetBy: 3))
             }
             
             hexString = redHex + redHex + greenHex + greenHex + blueHex + blueHex + alphaHex + alphaHex
         }
-        let hasAlpha = hexString.characters.count > 7
+        let hasAlpha = hexString.count > 7
         if (!hasAlpha) {
             hexString += "ff"
         }

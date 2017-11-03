@@ -21,9 +21,9 @@ class StringExtensionSpec: XCTestCase {
     }
 
     func testRandomStringCanHaveDifferentSizes() {
-        XCTAssert(String.random(10).characters.count == 10, "Random string have 10 characters")
-        XCTAssert(String.random(20).characters.count == 20, "Random string have 20 characters")
-        XCTAssert(String.random(100).characters.count == 100, "Random string have 100 characters")
+        XCTAssert(String.random(10).count == 10, "Random string have 10 characters")
+        XCTAssert(String.random(20).count == 20, "Random string have 20 characters")
+        XCTAssert(String.random(100).count == 100, "Random string have 100 characters")
     }
 
     // MARK: SHA-256

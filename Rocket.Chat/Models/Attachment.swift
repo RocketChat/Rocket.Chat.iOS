@@ -12,15 +12,15 @@ import RealmSwift
 
 class Attachment: BaseModel {
     var type: MessageType {
-        if audioURL?.characters.count ?? 0 > 0 {
+        if audioURL?.count ?? 0 > 0 {
             return .audio
         }
 
-        if videoURL?.characters.count ?? 0 > 0 {
+        if videoURL?.count ?? 0 > 0 {
             return .video
         }
 
-        if imageURL?.characters.count ?? 0 > 0 {
+        if imageURL?.count ?? 0 > 0 {
             return .image
         }
 
