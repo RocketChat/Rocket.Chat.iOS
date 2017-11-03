@@ -31,11 +31,16 @@
 "alert.socket_error.invalid_user.title" = "Sitzung abgelaufen";
 "alert.socket_error.invalid_user.message" = "Ihre Sitzung ist abgelaufen, bitte loggen Sie sich erneut ein.";
 
+"alert.login_service_error.title" = "Authentifizierungsproblem";
+"alert.login_service_error.message" = "Authentifizierung konnte mit diesem Dienst nicht durchgeführt werden. Bitte versuche es erneut.";
+
 // Socket Connection
 "connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
 
 // Auth
 "auth.connect.button_connect" = "Verbinden";
+"auth.connect.ssl_required" = "Es ist erforderlich, dass Ihr Server SSL unterstützt";
+"auth.connect.connecting" = "Verbindung läuft. Halt fest";
 
 // Subscriptions
 "subscriptions.search" = "Suche";
@@ -64,6 +69,7 @@
 "chat.channel_preview_view.join" = "Kanal beitreten";
 "chat.dm.start_conversation" = "Dies ist der Anfang deines Gesprächs mit %@";
 "chat.channel.start_conversation" = "Dies ist der Beginn der Konversation auf %@";
+"chat.read_only" = "This room is read only";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
@@ -119,7 +125,7 @@
 "chat.info.item.starred" = "Favorisiert";
 
 // Members List
-"chat.members.list.title" = "Mitglieder (%d)";
+"chat.members.list.title" = "Mitglieder";
 
 // Messages List
 "chat.messages.list.title" = "Nachrichten";

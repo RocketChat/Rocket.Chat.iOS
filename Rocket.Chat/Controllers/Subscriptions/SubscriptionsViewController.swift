@@ -81,6 +81,14 @@ final class SubscriptionsViewController: BaseViewController {
 
     @IBOutlet weak var labelServer: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
+    @IBOutlet weak var buttonAddChannel: UIButton! {
+        didSet {
+            if let image = UIImage(named: "Add") {
+                buttonAddChannel.tintColor = .RCLightBlue()
+                buttonAddChannel.setImage(image, for: .normal)
+            }
+        }
+    }
     @IBOutlet weak var imageViewArrowDown: UIImageView! {
         didSet {
             imageViewArrowDown.image = imageViewArrowDown.image?.imageWithTint(.RCLightBlue())
@@ -101,7 +109,7 @@ final class SubscriptionsViewController: BaseViewController {
     var searchResult: [Subscription]?
     var subscriptions: Results<Subscription>?
     var subscriptionsToken: NotificationToken?
-    var usersToken: NotificationToken?
+    var currentUserToken: NotificationToken?
 
     var groupInfomation: [[String: String]]?
     var groupSubscriptions: [[Subscription]]?
@@ -174,6 +182,7 @@ extension SubscriptionsViewController {
             isSearchingRemotely = false
             searchResult = []
 
+            updateAll()
             groupSubscription()
             tableView.reloadData()
             tableView.tableFooterView = nil
@@ -238,18 +247,11 @@ extension SubscriptionsViewController {
         tableView?.reloadData()
     }
 
-    func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        if isSearchingLocally || isSearchingRemotely {
-            updateSearched()
-        } else {
-            updateAll()
-        }
-
-        groupSubscription()
-
+    func handleCurrentUserUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
         updateCurrentUserInformation()
-        SubscriptionManager.updateUnreadApplicationBadge()
+    }
 
+    func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
         // Update titleView information with subscription, can be
         // some status changes
         if let subscription = ChatViewController.shared?.subscription {
@@ -258,6 +260,13 @@ extension SubscriptionsViewController {
 
         // If side panel is visible, reload the data
         if MainChatViewController.shared?.sidePanelVisible ?? false {
+            if isSearchingLocally || isSearchingRemotely {
+                updateSearched()
+            } else {
+                updateAll()
+            }
+
+            groupSubscription()
             tableView?.reloadData()
         }
     }
@@ -293,8 +302,12 @@ extension SubscriptionsViewController {
         assigned = true
 
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.observe(handleModelUpdates)
-        usersToken = realm.objects(User.self).observe(handleModelUpdates)
+        subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
+
+        if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
+            let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
+            currentUserToken = query.observe(handleCurrentUserUpdates)
+        }
 
         groupSubscription()
     }
@@ -579,6 +592,10 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
 
     func userDidPressedOption() {
         dismissUserMenu()
+    }
+
+    @IBAction func buttonAddChannelDidTap(sender: Any) {
+        performSegue(withIdentifier: "New Channel", sender: sender)
     }
 
 }
