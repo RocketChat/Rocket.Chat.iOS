@@ -123,12 +123,12 @@ public extension UIColor {
             
         }
         if hexString.count == 3 || hexString.count == 4 {
-            let redHex = hexString.substring(to: hexString.index(hexString.startIndex, offsetBy: 1))
-            let greenHex = hexString.substring(with: Range<String.Index>(hexString.index(hexString.startIndex, offsetBy: 1) ..< hexString.index(hexString.startIndex, offsetBy: 2)))
-            let blueHex = hexString.substring(with: Range<String.Index>(hexString.index(hexString.startIndex, offsetBy: 2) ..< hexString.index(hexString.startIndex, offsetBy: 3)))
+            let redHex = String(hexString[..<hexString.index(hexString.startIndex, offsetBy: 1)])
+            let greenHex = String(hexString[Range<String.Index>(hexString.index(hexString.startIndex, offsetBy: 1) ..< hexString.index(hexString.startIndex, offsetBy: 2))])
+            let blueHex = String(hexString[Range<String.Index>(hexString.index(hexString.startIndex, offsetBy: 2) ..< hexString.index(hexString.startIndex, offsetBy: 3))])
             var alphaHex = ""
             if hexString.count == 4 {
-                alphaHex = hexString.substring(from: hexString.index(hexString.startIndex, offsetBy: 3))
+                alphaHex = String(hexString[hexString.index(hexString.startIndex, offsetBy: 3)...])
             }
             
             hexString = redHex + redHex + greenHex + greenHex + blueHex + blueHex + alphaHex + alphaHex
