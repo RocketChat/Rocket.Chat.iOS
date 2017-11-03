@@ -19,6 +19,9 @@
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "A URL que você inseriu está incorreta ou é inválida. Confira se ela está informada corretamente e tente novamente, por favor!";
 
+"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.message" = "Não foi possível conectar a este servidor!";
+
 "alert.connection.invalid_version.title" = "Oops!";
 "alert.connection.invalid_version.message" = "O servidor que você está conectando não é suportado mais por esta versão do aplicativo: %@.\n\nEsta versão do aplicativo requer a versão %@ do servidor para funcionar corretamente.";
 
@@ -31,13 +34,16 @@
 "alert.socket_error.invalid_user.title" = "Sessão expirada";
 "alert.socket_error.invalid_user.message" = "Esta sessão expirou. Por favor, logue-se novamente.";
 
+"alert.login_service_error.title" = "Erro na Autenticação";
+"alert.login_service_error.message" = "A autenticação com este serviço não pôde ser feita. Por favor, tente novamente.";
+
 // Socket Connection
 "connection.offline.banner.message" = "Você está offline, conecte novamente";
 
 // Auth
 "auth.connect.button_connect" = "Conectar";
-"servers.action.connect" = "Conectar";
-"servers.action.remove" = "Remover time";
+"auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
+"auth.connect.connecting" = "Conectando no servidor";
 
 // Subscriptions
 "subscriptions.search" = "Busca";
@@ -50,6 +56,8 @@
 
 // Servers
 "servers.add_new_team" = "Adicionar novo time";
+"servers.action.connect" = "Conectar";
+"servers.action.remove" = "Remover time";
 
 // User Menu
 "user_menu.online" = "Disponível";
@@ -59,11 +67,21 @@
 "user_menu.settings" = "Minha conta";
 "user_menu.logout" = "Sair";
 
+// New Room View
+"new_room.cell.public_channel.title" = "Canal Público";
+"new_room.cell.public_chanell.description" = "Todos conseguem acessar esse canal";
+"new_room.cell.read_only.title" = "Canal somente leitura";
+"new_room.cell.read_only.description" = "Somente o admin pode escrever novas mensagens";
+"new_room.group.channel.name" = "Nome do canal";
+"new_room.group.channel.footer" = "O nome precisa ser escrito em minúsculo e ter menos que 22 caracteres";
+"new_room.cell.channel_name.title" = "Nome do canal";
+
 // Chat
 "chat.channel_preview_view.title" = "Esta é uma pré-visualização de #%@";
 "chat.channel_preview_view.join" = "Entrar";
 "chat.dm.start_conversation" = "Este é o começo de sua conversa com %@";
 "chat.channel.start_conversation" = "Este é o começo da conversa em %@";
+"chat.read_only" = "Este canal é somente leitura";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Bloquear mensagens do usuário";
@@ -119,7 +137,7 @@
 "chat.info.item.starred" = "Favoritas";
 
 // Members List
-"chat.members.list.title" = "Membros (%d)";
+"chat.members.list.title" = "Membros";
 
 // Messages List
 "chat.messages.list.title" = "Mensagens";
