@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13526" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -45,7 +45,7 @@
                         </constraints>
                     </view>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Text" translatesAutoresizingMaskIntoConstraints="NO" id="jz0-wl-Wig" customClass="HighlightTextView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="42" y="23" width="300" height="44"/>
+                        <rect key="frame" x="47" y="23" width="293" height="44"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
                         <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
@@ -69,14 +69,14 @@
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="7" id="9Lf-Mp-5cE"/>
                 <constraint firstAttribute="trailing" secondItem="sWJ-OU-dZk" secondAttribute="trailing" constant="8" id="D1b-Il-xxS"/>
                 <constraint firstItem="sWJ-OU-dZk" firstAttribute="top" secondItem="jz0-wl-Wig" secondAttribute="bottom" id="Lyf-cS-mP3"/>
-                <constraint firstAttribute="trailing" secondItem="jz0-wl-Wig" secondAttribute="trailing" constant="10" id="MNF-wW-H2n"/>
+                <constraint firstAttribute="trailing" secondItem="jz0-wl-Wig" secondAttribute="trailing" constant="12" id="MNF-wW-H2n"/>
                 <constraint firstAttribute="trailing" secondItem="pvK-41-cNi" secondAttribute="trailing" priority="900" constant="2" id="OVZ-S3-Gij"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pvK-41-cNi" secondAttribute="trailing" constant="8" id="aJ8-MB-U5b"/>
                 <constraint firstAttribute="bottom" secondItem="sWJ-OU-dZk" secondAttribute="bottom" constant="5" id="enA-12-xWg"/>
                 <constraint firstItem="40K-VI-9eL" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="evW-4R-3TS"/>
                 <constraint firstItem="dHe-RL-dFU" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="5" id="myV-aY-DuJ"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="2" id="nFi-sf-ZfI"/>
-                <constraint firstItem="jz0-wl-Wig" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="2" id="p6w-Ph-zM4"/>
+                <constraint firstItem="jz0-wl-Wig" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="p6w-Ph-zM4"/>
             </constraints>
             <size key="customSize" width="352" height="332"/>
             <variation key="default">
