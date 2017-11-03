@@ -60,8 +60,7 @@ struct SubscriptionManager {
                     list?.forEach { object in
                         if let rid = object["_id"].string {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
-                                subscription.roomDescription = object["description"].string ?? ""
-                                subscription.roomTopic = object["topic"].string ?? ""
+                                subscription.mapRoom(object)
                                 subscriptions.append(subscription)
                             }
                         }
@@ -70,8 +69,7 @@ struct SubscriptionManager {
                     updated?.forEach { object in
                         if let rid = object["_id"].string {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
-                                subscription.roomDescription = object["description"].string ?? ""
-                                subscription.roomTopic = object["topic"].string ?? ""
+                                subscription.mapRoom(object)
                                 subscriptions.append(subscription)
                             }
                         }
@@ -208,7 +206,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "spotlight",
             "params": [text, NSNull(), ["rooms": true, "users": true]]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else {

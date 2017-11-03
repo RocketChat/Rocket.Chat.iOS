@@ -112,20 +112,7 @@ final class SubscriptionUserStatusView: UIView {
         // RKS NOTE: I know that this isn't the best place, but we need to fix
         // this crash ASAP. In the future we may have a centered place for all
         // database notifications.
-        ChatViewController.shared?.messagesToken?.stop()
-        SubscriptionsViewController.shared?.usersToken?.stop()
-        SubscriptionsViewController.shared?.subscriptionsToken?.stop()
-
-        AuthManager.logout {
-            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let controller = storyboardChat.instantiateInitialViewController()
-            let application = UIApplication.shared
-
-            if let window = application.keyWindow {
-                window.rootViewController = controller
-                window.makeKeyAndVisible()
-            }
-        }
+        MainChatViewController.shared?.logout()
     }
 
 }
