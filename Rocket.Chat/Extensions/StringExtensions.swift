@@ -20,7 +20,7 @@ extension String {
 
         for _ in 0..<length {
             let randomValue = arc4random_uniform(UInt32(base.count))
-            randomString += "\(base[base.characters.index(base.startIndex, offsetBy: Int(randomValue))])"
+            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
         }
 
         return randomString
