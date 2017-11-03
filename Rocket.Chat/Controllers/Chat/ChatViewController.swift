@@ -300,7 +300,7 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: Message
     fileprivate func sendMessage() {
-        guard let messageText = textView.text, messageText.characters.count > 0 else { return }
+        guard let messageText = textView.text, messageText.count > 0 else { return }
 
         let replyString = self.replyString
         stopReplying()

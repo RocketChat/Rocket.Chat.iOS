@@ -77,7 +77,7 @@ extension Subscription {
     }
 
     func isValid() -> Bool {
-        return self.rid.characters.count > 0
+        return self.rid.count > 0
     }
 
     func isJoined() -> Bool {

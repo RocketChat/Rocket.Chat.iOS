@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChatHeaderViewStatusDelegate: class {
+protocol ChatHeaderViewStatusDelegate: NSObjectProtocol {
     func viewStatusButtonRefreshDidPressed(_ view: ChatHeaderViewStatus)
 }
 

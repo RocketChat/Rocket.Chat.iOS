@@ -19,7 +19,7 @@ extension String {
         var randomString: String = ""
 
         for _ in 0..<length {
-            let randomValue = arc4random_uniform(UInt32(base.characters.count))
+            let randomValue = arc4random_uniform(UInt32(base.count))
             randomString += "\(base[base.characters.index(base.startIndex, offsetBy: Int(randomValue))])"
         }
 
@@ -70,8 +70,8 @@ extension String {
     func ranges(of string: String) -> [Range<Index>] {
         var ranges = [Range<Index>]()
 
-        let pCount = string.characters.count
-        let strCount = self.characters.count
+        let pCount = string.count
+        let strCount = self.count
 
         if strCount < pCount { return [] }
 
