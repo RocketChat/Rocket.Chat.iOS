@@ -140,6 +140,7 @@ extension SocketManager {
                 UserManager.userDataChanges()
                 UserManager.changes()
                 SubscriptionManager.changes(auth)
+                SubscriptionManager.subscribeRoomChanges()
 
                 if let userId = auth.userId {
                     PushManager.updateUser(userId)
