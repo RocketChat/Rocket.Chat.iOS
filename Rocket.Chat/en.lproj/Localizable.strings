@@ -29,7 +29,7 @@
 "alert.settings.set_mail_app.message" = "No Mail Accounts. Please set up a Mail account in order to send email.";
 
 "alert.feature.wip.title" = "Oops!";
-"alert.feature.wip.message" = "We're still working on this feature, stay tunned!";
+"alert.feature.wip.message" = "We're still working on this feature, stay tuned!";
 
 "alert.socket_error.invalid_user.title" = "Session expired";
 "alert.socket_error.invalid_user.message" = "Your session has expired. Please log in again.";
@@ -82,6 +82,7 @@
 "chat.dm.start_conversation" = "This is the start of your conversation with %@";
 "chat.channel.start_conversation" = "This is the start of the conversation on %@";
 "chat.read_only" = "This room is read only";
+"chat.muted" = "You have been muted";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Block messages from user";
