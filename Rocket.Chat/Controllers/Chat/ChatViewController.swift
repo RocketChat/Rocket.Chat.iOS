@@ -33,7 +33,7 @@ final class ChatViewController: SLKTextViewController {
             self.buttonScrollToBottom.superview?.layoutIfNeeded()
 
             if self.showButtonScrollToBottom {
-                self.buttonScrollToBottomMarginConstraint?.constant = -64
+                self.buttonScrollToBottomMarginConstraint?.constant = -self.textInputbar.frame.height - 40
             } else {
                 self.buttonScrollToBottomMarginConstraint?.constant = 50
             }
