@@ -370,7 +370,7 @@ extension SubscriptionsViewController {
                 ])
 
                 unreadGroup = unreadGroup.sorted {
-                    return $0.type.rawValue < $1.type.rawValue
+                    return ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
                 }
 
                 groupSubscriptions?.append(unreadGroup)
@@ -383,7 +383,7 @@ extension SubscriptionsViewController {
                 ])
 
                 favoriteGroup = favoriteGroup.sorted {
-                    return $0.type.rawValue < $1.type.rawValue
+                    return ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
                 }
 
                 groupSubscriptions?.append(favoriteGroup)
