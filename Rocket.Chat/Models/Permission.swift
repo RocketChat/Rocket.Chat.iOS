@@ -9,6 +9,12 @@
 import Foundation
 import RealmSwift
 
+enum PermissionType: String {
+    case createChannel = "create-c"
+    case createDirect = "create-d"
+    case createPrivate = "create-p"
+}
+
 class Permission: BaseModel {
-    let roles = RealmSwift.List<String>()
+    var roles = [Role]()
 }
