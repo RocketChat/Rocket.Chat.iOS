@@ -50,7 +50,7 @@ struct PermissionManager {
         }
     }
 
-    static func roles(for permission: PermissionType) -> [Role]? {
+    static func roles(for permission: PermissionType) -> List<String>? {
         let object = Realm.shared?.object(ofType: Permission.self, forPrimaryKey: permission.rawValue)
         return object?.roles
     }

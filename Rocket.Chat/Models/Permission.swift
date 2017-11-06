@@ -16,8 +16,5 @@ enum PermissionType: String {
 }
 
 class Permission: BaseModel {
-    var rawRoles = RealmSwift.List<String>()
-    var roles: [Role] {
-        return Array(rawRoles.flatMap { Role(rawValue: $0) })
-    }
+    var roles = List<String>()
 }
