@@ -40,6 +40,7 @@ struct FormCell {
     let cell: FormTableViewCell
     let key: String
     let defaultValue: Any
+    let enabled: Bool
 }
 
 enum FormTableViewCell {
@@ -59,7 +60,7 @@ enum FormTableViewCell {
         return getClass().identifier
     }
 
-    func createCell(table: UITableView, delegate: FormTableViewDelegate, key: String) -> FormTableViewCellProtocol? {
+    func createCell(table: UITableView, delegate: FormTableViewDelegate, key: String, enabled: Bool = true) -> FormTableViewCellProtocol? {
         let cellIdentifier = self.getIdentifier()
         guard var cell = table.dequeueReusableCell(withIdentifier: cellIdentifier) as? FormTableViewCellProtocol else { return nil }
 
@@ -68,12 +69,14 @@ enum FormTableViewCell {
             if let cell = cell as? CheckTableViewCell {
                 cell.labelTitle.text = title
                 cell.labelDescription.text = description
+                cell.switchOption.isEnabled = enabled
             }
 
         case .textField(let placeholder, let icon):
             if let cell = cell as? TextFieldTableViewCell {
                 cell.textFieldInput.placeholder = placeholder
                 cell.imgLeftIcon.image = icon
+                cell.textFieldInput.isEnabled = enabled
             }
         }
 

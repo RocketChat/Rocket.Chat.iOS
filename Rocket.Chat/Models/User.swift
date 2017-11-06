@@ -35,7 +35,10 @@ class User: BaseModel {
     @objc dynamic var username: String?
     @objc dynamic var name: String?
     var emails = List<Email>()
-    var roles = [Role]()
+    var rawRoles = RealmSwift.List<String>()
+    var roles: [Role] {
+        return Array(rawRoles.flatMap { Role(rawValue: $0) })
+    }
 
     @objc fileprivate dynamic var privateStatus = UserStatus.offline.rawValue
     var status: UserStatus {

@@ -55,3 +55,15 @@ struct PermissionManager {
         return object?.roles
     }
 }
+
+extension User {
+    func hasPermission(_ permission: PermissionType) -> Bool {
+        guard let permissionRoles = PermissionManager.roles(for: permission) else { return false }
+        for userRole in self.roles {
+            for permissionRole in permissionRoles where userRole == permissionRole {
+                    return true
+            }
+        }
+        return false
+    }
+}

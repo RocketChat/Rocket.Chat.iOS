@@ -24,8 +24,9 @@ extension User: ModelMappeable {
             self.name = name
         }
 
-        if let roles = values["roles"].array?.flatMap({ $0.string }).flatMap({ Role(rawValue: $0) }) {
-            self.roles = roles
+        self.rawRoles.removeAll()
+        if let rawRoles = values["roles"].array?.flatMap({ $0.string }) {
+            self.rawRoles.append(contentsOf: rawRoles)
         }
 
         if let status = values["status"].string {
