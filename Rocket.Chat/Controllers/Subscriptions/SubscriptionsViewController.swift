@@ -177,7 +177,7 @@ extension SubscriptionsViewController {
         guard let auth = AuthManager.isAuthenticated() else { return }
         subscriptions = auth.subscriptions.filterBy(name: text)
 
-        if text.characters.count == 0 {
+        if text.count == 0 {
             isSearchingLocally = false
             isSearchingRemotely = false
             searchResult = []
@@ -216,7 +216,7 @@ extension SubscriptionsViewController {
         SubscriptionManager.spotlight(text) { [weak self] result in
             let currentText = self?.textFieldSearch.text ?? ""
 
-            if currentText.characters.count == 0 {
+            if currentText.count == 0 {
                 return
             }
 
@@ -521,7 +521,7 @@ extension SubscriptionsViewController: UITextFieldDelegate {
         searchText = (currentText as NSString).replacingCharacters(in: range, with: string)
 
         if string == "\n" {
-            if currentText.characters.count > 0 {
+            if currentText.count > 0 {
                 searchOnSpotlight(currentText)
             }
 
