@@ -33,7 +33,7 @@ final class ChatViewController: SLKTextViewController {
             self.buttonScrollToBottom.superview?.layoutIfNeeded()
 
             if self.showButtonScrollToBottom {
-                self.buttonScrollToBottomMarginConstraint?.constant = -64
+                self.buttonScrollToBottomMarginConstraint?.constant = -self.textInputbar.frame.height - 40
             } else {
                 self.buttonScrollToBottomMarginConstraint?.constant = 50
             }
@@ -63,6 +63,8 @@ final class ChatViewController: SLKTextViewController {
     var isRequestingHistory = false
     var isAppendingMessages = false
 
+    var subscriptionToken: NotificationToken?
+
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messagesQuery: Results<Message>!
@@ -70,6 +72,20 @@ final class ChatViewController: SLKTextViewController {
     var subscription: Subscription! {
         didSet {
             guard !subscription.isInvalidated else { return }
+
+            subscriptionToken?.invalidate()
+            subscriptionToken = subscription.observe { [weak self] changes in
+                switch changes {
+                case .change(let propertyChanges):
+                    propertyChanges.forEach {
+                        if $0.name == "roomReadOnly" || $0.name == "roomMuted" {
+                            self?.updateMessageSendingPermission()
+                        }
+                    }
+                default:
+                    break
+                }
+            }
 
             updateSubscriptionInfo()
             markAsRead()
@@ -169,15 +185,21 @@ final class ChatViewController: SLKTextViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        let insets = UIEdgeInsets(
-            top: 0,
-            left: 0,
-            bottom: chatPreviewModeView?.frame.height ?? 0,
-            right: 0
-        )
+        guard let collectionView = collectionView else { return }
 
-        collectionView?.contentInset = insets
-        collectionView?.scrollIndicatorInsets = insets
+        var contentInsets = collectionView.contentInset
+        contentInsets.bottom = self.chatPreviewModeView?.frame.height ?? 0
+        if #available(iOS 11, *) {
+            contentInsets.right = collectionView.safeAreaInsets.right
+            contentInsets.left = collectionView.safeAreaInsets.left
+        }
+        collectionView.contentInset = contentInsets
+
+        var scrollIndicatorInsets = collectionView.scrollIndicatorInsets
+        scrollIndicatorInsets.right = 0
+        scrollIndicatorInsets.left = 0
+        scrollIndicatorInsets.bottom = self.chatPreviewModeView?.frame.height ?? 0
+        collectionView.scrollIndicatorInsets = scrollIndicatorInsets
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -366,9 +388,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     internal func updateSubscriptionInfo() {
-        if let token = messagesToken {
-            token.invalidate()
-        }
+        messagesToken?.invalidate()
 
         title = subscription?.displayName()
         chatTitleView?.subscription = subscription
@@ -402,11 +422,7 @@ final class ChatViewController: SLKTextViewController {
             showChatPreviewModeView()
         }
 
-        if subscription.roomReadOnly && subscription.roomOwner != AuthManager.currentUser() {
-            blockMessageSending(reason: localized("chat.read_only"))
-        } else {
-            allowMessageSending()
-        }
+        updateMessageSendingPermission()
     }
 
     internal func updateSubscriptionMessages() {
@@ -572,8 +588,12 @@ final class ChatViewController: SLKTextViewController {
 
             // This message can be called many times during the app execution and we need
             // to call them one per time, to avoid adding the same message multiple times
-            // to the list.
+            // to the list. Also, we keep the subscription identifier in order to make sure
+            // we're updating the same subscription, because this view controller is reused
+            // for all the chats.
+            let oldSubscriptionIdentifier = self.subscription.identifier
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
+                guard oldSubscriptionIdentifier == self?.subscription.identifier else { return }
                 self?.appendMessages(messages: messages, completion: completion)
             })
 
@@ -634,22 +654,6 @@ final class ChatViewController: SLKTextViewController {
                 })
             }
         }
-    }
-
-    fileprivate func blockMessageSending(reason: String) {
-        textInputbar.textView.placeholder = reason
-        textInputbar.backgroundColor = .white
-        textInputbar.isUserInteractionEnabled = false
-        leftButton.isEnabled = false
-        rightButton.isEnabled = false
-    }
-
-    fileprivate func allowMessageSending() {
-        textInputbar.textView.placeholder = ""
-        textInputbar.backgroundColor = .backgroundWhite
-        textInputbar.isUserInteractionEnabled = true
-        leftButton.isEnabled = true
-        rightButton.isEnabled = true
     }
 
     fileprivate func showChatPreviewModeView() {
@@ -810,7 +814,11 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let fullWidth = collectionView.bounds.size.width
+        var fullWidth = collectionView.bounds.size.width
+
+        if #available(iOS 11, *) {
+            fullWidth -= collectionView.safeAreaInsets.right + collectionView.safeAreaInsets.left
+        }
 
         if let obj = dataController.itemAt(indexPath) {
             if obj.type == .header {
@@ -831,7 +839,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
             if let message = obj.message {
                 let sequential = dataController.hasSequentialMessageAt(indexPath)
-                let height = ChatMessageCell.cellMediaHeightFor(message: message, sequential: sequential)
+                let height = ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: sequential)
                 return CGSize(width: fullWidth, height: height)
             }
         }
@@ -871,4 +879,39 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         self.subscription = subscription
     }
 
+}
+
+// MARK: Block Message Sending
+
+extension ChatViewController {
+    fileprivate func updateMessageSendingPermission() {
+        guard let currentUser = AuthManager.currentUser() else {
+            allowMessageSending()
+            return
+        }
+
+        if subscription.roomReadOnly && subscription.roomOwner != currentUser {
+            blockMessageSending(reason: localized("chat.read_only"))
+        } else if let username = currentUser.username, subscription.roomMuted.contains(username) {
+            blockMessageSending(reason: localized("chat.muted"))
+        } else {
+            allowMessageSending()
+        }
+    }
+
+    fileprivate func blockMessageSending(reason: String) {
+        textInputbar.textView.placeholder = reason
+        textInputbar.backgroundColor = .white
+        textInputbar.isUserInteractionEnabled = false
+        leftButton.isEnabled = false
+        rightButton.isEnabled = false
+    }
+
+    fileprivate func allowMessageSending() {
+        textInputbar.textView.placeholder = ""
+        textInputbar.backgroundColor = .backgroundWhite
+        textInputbar.isUserInteractionEnabled = true
+        leftButton.isEnabled = true
+        rightButton.isEnabled = true
+    }
 }
