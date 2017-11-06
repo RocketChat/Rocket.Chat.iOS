@@ -24,6 +24,10 @@ extension User: ModelMappeable {
             self.name = name
         }
 
+        if let roles = values["roles"].array?.flatMap({ $0.string }).flatMap({ Role(rawValue: $0) }) {
+            self.roles = roles
+        }
+
         if let status = values["status"].string {
             self.status = UserStatus(rawValue: status) ?? .offline
         }
