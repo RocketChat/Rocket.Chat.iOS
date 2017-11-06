@@ -106,7 +106,7 @@ CHECKOUT OPTIONS:
     :commit: a8ad3f3c1b168dfa6a8f1f7de2e5cae59239d9bf
     :git: https://github.com/rafaelks/Semver.Swift.git
   SideMenuController:
-    :commit: cdbd18adad4b2735fa345f650df621b6d365058b
+    :commit: 267ddbc263304534df12e2b0dfbe8343f60891ab
     :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
     :commit: 0a225b78544a268a94aaa1d302e2116b10fd1dd4
