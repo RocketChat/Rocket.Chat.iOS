@@ -11,7 +11,7 @@ import Foundation
 struct DraftMessageManager {
 
     static let userDefaults = UserDefaults.standard
-    static var currentServerKey: String {
+    static var selectedServerKey: String {
         return DatabaseManager.servers?[DatabaseManager.selectedIndex][ServerPersistKeys.serverURL] ?? ""
     }
 
@@ -20,28 +20,28 @@ struct DraftMessageManager {
     }
 
     static func clearServerDraftMessages() {
-        guard !currentServerKey.isEmpty else { return }
-        userDefaults.set(nil, forKey: currentServerKey)
+        guard !selectedServerKey.isEmpty else { return }
+        userDefaults.set(nil, forKey: selectedServerKey)
     }
 
     static func update(draftMessage: String, for subscription: Subscription) {
-        guard !currentServerKey.isEmpty else { return }
+        guard !selectedServerKey.isEmpty else { return }
         let subscriptionKey = draftMessageKey(for: subscription.rid)
 
-        if var currentServerDraftMessages = userDefaults.dictionary(forKey: currentServerKey) {
+        if var currentServerDraftMessages = userDefaults.dictionary(forKey: selectedServerKey) {
             currentServerDraftMessages[subscriptionKey] = draftMessage
-            userDefaults.set(currentServerDraftMessages, forKey: currentServerKey)
+            userDefaults.set(currentServerDraftMessages, forKey: selectedServerKey)
         } else {
-            userDefaults.set([subscriptionKey: draftMessage], forKey: currentServerKey)
+            userDefaults.set([subscriptionKey: draftMessage], forKey: selectedServerKey)
         }
     }
 
     static func draftMessage(for subscription: Subscription) -> String {
-        guard !currentServerKey.isEmpty else { return "" }
+        guard !selectedServerKey.isEmpty else { return "" }
         let subscriptionKey = draftMessageKey(for: subscription.rid)
 
-        if let subscriptionsDraftMessages = userDefaults.dictionary(forKey: currentServerKey),
-                let draftMessage = subscriptionsDraftMessages[subscriptionKey] as? String {
+        if let serverDraftMessages = userDefaults.dictionary(forKey: selectedServerKey),
+                let draftMessage = serverDraftMessages[subscriptionKey] as? String {
             return draftMessage
         } else {
             return ""
