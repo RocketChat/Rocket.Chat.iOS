@@ -66,6 +66,7 @@ final class MainViewController: BaseViewController {
                     UserManager.userDataChanges()
                     UserManager.changes()
                     SubscriptionManager.changes(auth)
+                    SubscriptionManager.subscribeRoomChanges()
 
                     if let userIdentifier = auth.userId {
                         PushManager.updateUser(userIdentifier)

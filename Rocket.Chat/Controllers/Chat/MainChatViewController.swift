@@ -80,7 +80,8 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
     func logout() {
         ChatViewController.shared?.messagesToken?.invalidate()
-        SubscriptionsViewController.shared?.usersToken?.invalidate()
+        ChatViewController.shared?.subscriptionToken?.invalidate()
+        SubscriptionsViewController.shared?.currentUserToken?.invalidate()
         SubscriptionsViewController.shared?.subscriptionsToken?.invalidate()
 
         AuthManager.logout {
