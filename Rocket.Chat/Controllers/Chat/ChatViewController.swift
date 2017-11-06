@@ -94,7 +94,7 @@ final class ChatViewController: SLKTextViewController {
             if let oldValue = oldValue, oldValue.identifier != subscription.identifier {
                 unsubscribe(for: oldValue)
             }
-            
+
             if let draftMessage = UserDefaults.standard.string(forKey: subscription.rid) {
                 textView.text = draftMessage
             } else {
@@ -383,7 +383,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     // MARK: Subscription
-    
+
     func updateSubscriptionDraft(message: String) {
         let userDefaults = UserDefaults.standard
         userDefaults.set(message, forKey: subscription.rid)
