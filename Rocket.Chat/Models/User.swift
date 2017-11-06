@@ -8,6 +8,7 @@
 
 import Foundation
 import RealmSwift
+import Realm
 import SwiftyJSON
 
 enum UserPresence: String {
@@ -18,10 +19,23 @@ enum UserStatus: String {
     case offline, online, busy, away
 }
 
+enum Role: String {
+    case admin = "admin"
+    case moderator = "moderator"
+    case owner = "owner"
+    case user = "user"
+    case bot = "bot"
+    case guest = "guest"
+    case liveChatAgent = "livechat-agent"
+    case liveChatManager = "livechat-manager"
+    case liveChatGuest = "livechat-guest"
+}
+
 class User: BaseModel {
     @objc dynamic var username: String?
     @objc dynamic var name: String?
     var emails = List<Email>()
+    var roles = [Role]()
 
     @objc fileprivate dynamic var privateStatus = UserStatus.offline.rawValue
     var status: UserStatus {
@@ -49,3 +63,4 @@ extension User {
     }
 
 }
+
