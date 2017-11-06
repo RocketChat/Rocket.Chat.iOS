@@ -66,7 +66,7 @@
 
 // New Room View
 "new_room.cell.public_channel.title" = "Kanał publiczny";
-"new_room.cell.public_chanell.description" = "Każdy ma dostęp do tego kanału";
+"new_room.cell.public_channel.description" = "Każdy ma dostęp do tego kanału";
 "new_room.cell.read_only.title" = "Kanał tylko do odczytu";
 "new_room.cell.read_only.description" = "Tylko administrator może pisać wiadomości";
 "new_room.group.channel.name" = "Nazwa kanału";

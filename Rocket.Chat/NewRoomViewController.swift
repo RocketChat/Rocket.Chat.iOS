@@ -16,12 +16,8 @@ class NewRoomViewController: BaseViewController {
             name: nil,
             footer: nil,
             cells: [
-                FormCell(
-                    cell: .check(title: localized("new_room.cell.public_channel.title"), description: localized("new_room.cell.public_chanell.description")),
-                    key: "public room",
-                    defaultValue: true,
-                    enabled: AuthManager.currentUser()?.hasPermission(.createPrivate) ?? false
-                ),
+                createPublicChannelSwitch(allowPublic: AuthManager.currentUser()?.hasPermission(.createPublicChannels) ?? false,
+                                          allowPrivate: AuthManager.currentUser()?.hasPermission(.createPublicChannels) ?? false),
                 FormCell(
                     cell: .check(title: localized("new_room.cell.read_only.title"), description: localized("new_room.cell.read_only.description")),
                     key: "read only room",
@@ -44,6 +40,24 @@ class NewRoomViewController: BaseViewController {
         )
     ]
 
+    fileprivate static func createPublicChannelSwitch(allowPublic: Bool, allowPrivate: Bool) -> FormCell {
+        var description: String = ""
+        if allowPublic && allowPrivate {
+            description = localized("new_room.cell.public_channel.description")
+        } else if allowPublic {
+            description = localized("new_room.cell.public_channel.description.public_only")
+        } else if allowPrivate {
+            description = localized("new_room.cell.public_channel.description.private_only")
+        }
+
+        return FormCell(
+            cell: .check(title: localized("new_room.cell.public_channel.title"), description: description),
+            key: "public room",
+            defaultValue: allowPublic,
+            enabled: allowPublic && allowPrivate
+        )
+    }
+
     var referenceOfCells: [String: FormTableViewCellProtocol] = [:]
     lazy var setValues: [String: Any] = {
         return tableViewData.reduce([String: Any]()) { (dict, entry) in
@@ -61,6 +75,16 @@ class NewRoomViewController: BaseViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillHide, object: nil)
+
+        let createPrivate = AuthManager.currentUser()?.hasPermission(.createPrivateChannels) ?? false
+        let createPublic = AuthManager.currentUser()?.hasPermission(.createPublicChannels) ?? false
+
+        if !createPrivate && !createPublic {
+            alert(title: localized("alert.authorization_error.title"),
+                  message: localized("alert.authorization_error.create_channel.description")) { _ in
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 
     deinit {

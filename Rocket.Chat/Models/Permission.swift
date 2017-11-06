@@ -10,9 +10,9 @@ import Foundation
 import RealmSwift
 
 enum PermissionType: String {
-    case createChannel = "create-c"
-    case createDirect = "create-d"
-    case createPrivate = "create-p"
+    case createPublicChannels = "create-c"
+    case createDirectMessages = "create-d"
+    case createPrivateChannels = "create-p"
 }
 
 class Permission: BaseModel {
