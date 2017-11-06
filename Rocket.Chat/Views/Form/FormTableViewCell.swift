@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol FormTableViewDelegate: class {
+protocol FormTableViewDelegate: NSObjectProtocol {
     func updateDictValue(key: String, value: Any)
     func getPreviousValue(key: String) -> Any?
 }

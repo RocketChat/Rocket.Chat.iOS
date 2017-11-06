@@ -17,6 +17,6 @@ class MessageURL: BaseModel {
     @objc dynamic var imageURL: String?
 
     func isValid() -> Bool {
-        return title?.characters.count ?? 0 > 0 && textDescription?.characters.count ?? 0 > 0
+        return title?.count ?? 0 > 0 && textDescription?.count ?? 0 > 0
     }
 }
