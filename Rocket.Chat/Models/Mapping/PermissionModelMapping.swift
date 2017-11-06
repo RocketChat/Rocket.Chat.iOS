@@ -16,9 +16,9 @@ extension Permission: ModelMappeable {
             self.identifier = values["_id"].string
         }
 
-        self.rawRoles.removeAll()
-        if let rawRoles = values["roles"].array?.flatMap({ $0.string }) {
-            self.rawRoles.append(contentsOf: rawRoles)
+        self.roles.removeAll()
+        if let roles = values["roles"].array?.flatMap({ $0.string }) {
+            self.roles.append(contentsOf: roles)
         }
     }
 }
