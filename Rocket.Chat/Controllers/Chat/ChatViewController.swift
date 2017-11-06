@@ -485,25 +485,27 @@ final class ChatViewController: SLKTextViewController {
             }
 
             let messagesCount = self.messagesQuery.count
-            var indexPathModifications: [Int] = []
 
-            for modified in modifications {
-                if messagesCount < modified + 1 {
-                    continue
-                }
-
-                let message = Message(value: self.messagesQuery[modified])
-                let index = self.dataController.update(message)
-                if index >= 0 && !indexPathModifications.contains(index) {
-                    indexPathModifications.append(index)
-                }
-            }
-
-            if indexPathModifications.count > 0 {
+            if modifications.count > 0 {
                 DispatchQueue.main.async {
                     let isAtBottom = self.chatLogIsAtBottom()
+
                     UIView.performWithoutAnimation {
                         self.collectionView?.performBatchUpdates({
+                            var indexPathModifications: [Int] = []
+
+                            for modified in modifications {
+                                if messagesCount < modified + 1 {
+                                    continue
+                                }
+
+                                let message = Message(value: self.messagesQuery[modified])
+                                let index = self.dataController.update(message)
+                                if index >= 0 && !indexPathModifications.contains(index) {
+                                    indexPathModifications.append(index)
+                                }
+                            }
+
                             self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
                         }, completion: { _ in
                             if isAtBottom {
