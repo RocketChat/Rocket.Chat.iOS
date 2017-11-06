@@ -95,11 +95,7 @@ final class ChatViewController: SLKTextViewController {
                 unsubscribe(for: oldValue)
             }
 
-            if let draftMessage = UserDefaults.standard.string(forKey: subscription.rid) {
-                textView.text = draftMessage
-            } else {
-                textView.text = ""
-            }
+            textView.text = DraftMessageManager.draftMessage(for: subscription)
         }
     }
 
@@ -319,7 +315,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func textViewDidChange(_ textView: UITextView) {
-        updateSubscriptionDraft(message: textView.text)
+        DraftMessageManager.update(draftMessage: textView.text, for: subscription)
         if textView.text?.isEmpty ?? true {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         } else {
@@ -354,7 +350,7 @@ final class ChatViewController: SLKTextViewController {
         })
 
         if let message = message {
-            updateSubscriptionDraft(message: "")
+            DraftMessageManager.update(draftMessage: "", for: subscription)
             textView.text = ""
             rightButton.isEnabled = true
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
@@ -383,12 +379,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     // MARK: Subscription
-
-    func updateSubscriptionDraft(message: String) {
-        let userDefaults = UserDefaults.standard
-        userDefaults.set(message, forKey: subscription.rid)
-        userDefaults.synchronize()
-    }
 
     fileprivate func markAsRead() {
         SubscriptionManager.markAsRead(subscription) { _ in
