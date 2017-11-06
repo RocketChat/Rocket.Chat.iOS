@@ -67,8 +67,12 @@ extension NSMutableAttributedString {
     }
 
     func highlightMentions(for message: Message) {
+        var handledHighlights: [String] = []
+
         message.mentions.forEach {
-            if let username = $0.username {
+            if let username = $0.username, !handledHighlights.contains(username) {
+                handledHighlights.append(username)
+
                 let ranges = string.ranges(of: "@\(username)")
                 for range in ranges {
                     let range = NSRange(range, in: string)
@@ -80,8 +84,12 @@ extension NSMutableAttributedString {
     }
 
     func highlightChannels(for message: Message) {
+        var handledHighlights: [String] = []
+
         message.channels.forEach {
-            if let name = $0.name {
+            if let name = $0.name, !handledHighlights.contains(name) {
+                handledHighlights.append(name)
+
                 let ranges = string.ranges(of: "#\(name)")
                 for range in ranges {
                     let range = NSRange(range, in: string)
