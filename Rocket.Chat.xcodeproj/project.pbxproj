@@ -230,6 +230,7 @@
 		89AEB7F81F7D225D00112A09 /* SubscriptionCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AEB7F71F7D225D00112A09 /* SubscriptionCreateRequest.swift */; };
 		89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFF3C71F94374D00D07A30 /* NewRoomViewControllerSpec.swift */; };
 		925FF74E1E8EFB3E00982043 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */; };
+		998869E81FB0E57A00FD36B7 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998869E71FB0E57A00FD36B7 /* DraftMessageManager.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
 		B5893BF41F6C4A5F00365768 /* UserReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */; };
 		B5893BF61F6C4B1D00365768 /* UserReviewManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */; };
@@ -514,6 +515,7 @@
 		89AEB7F71F7D225D00112A09 /* SubscriptionCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCreateRequest.swift; sourceTree = "<group>"; };
 		89AFF3C71F94374D00D07A30 /* NewRoomViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewRoomViewControllerSpec.swift; path = Controllers/NewRoomViewControllerSpec.swift; sourceTree = "<group>"; };
 		925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		998869E71FB0E57A00FD36B7 /* DraftMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DraftMessageManager.swift; path = Managers/DraftMessageManager.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TintedTextField.swift; path = Views/Subscriptions/TintedTextField.swift; sourceTree = "<group>"; };
 		B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserReviewManager.swift; path = Managers/UserReviewManager.swift; sourceTree = "<group>"; };
 		B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserReviewManagerSpec.swift; path = Managers/UserReviewManagerSpec.swift; sourceTree = "<group>"; };
@@ -811,6 +813,7 @@
 				419ECCA31F3CA21A005F224B /* DownloadManager.swift */,
 				412F8DD81F599EF100AF7786 /* DatabaseManager.swift */,
 				80113DF91F9E086D0048F2C2 /* OAuthManager.swift */,
+				998869E71FB0E57A00FD36B7 /* DraftMessageManager.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -1893,6 +1896,7 @@
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				800FCD4D1F728EC800D9A692 /* ChannelInfoDescriptionCell.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
+				998869E81FB0E57A00FD36B7 /* DraftMessageManager.swift in Sources */,
 				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
 				897083D51F8CF08100233561 /* TextFieldTableViewCell.swift in Sources */,
