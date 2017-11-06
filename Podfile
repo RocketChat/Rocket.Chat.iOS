@@ -28,7 +28,7 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 4'
   pod 'SDWebImage/GIF'
-  pod 'Starscream'
+  pod 'Starscream', :git => 'https://github.com/RocketChat/Starscream.git', :branch => 'fix/host_header_remove_port'
   pod 'ReachabilitySwift'
 
   # Authentication SDKs
