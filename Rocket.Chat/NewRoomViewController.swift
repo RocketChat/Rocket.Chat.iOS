@@ -19,12 +19,14 @@ class NewRoomViewController: BaseViewController {
                 FormCell(
                     cell: .check(title: localized("new_room.cell.public_channel.title"), description: localized("new_room.cell.public_chanell.description")),
                     key: "public room",
-                    defaultValue: true
+                    defaultValue: true,
+                    enabled: AuthManager.currentUser()?.hasPermission(.createPrivate) ?? false
                 ),
                 FormCell(
                     cell: .check(title: localized("new_room.cell.read_only.title"), description: localized("new_room.cell.read_only.description")),
                     key: "read only room",
-                    defaultValue: false
+                    defaultValue: false,
+                    enabled: true
                 )
             ]
         ),
@@ -35,7 +37,8 @@ class NewRoomViewController: BaseViewController {
                 FormCell(
                     cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag")),
                     key: "room name",
-                    defaultValue: ""
+                    defaultValue: "",
+                    enabled: true
                 )
             ]
         )
@@ -161,7 +164,7 @@ extension NewRoomViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableViewData[indexPath.section].cells[indexPath.row]
 
-        if let newChannelCell = data.cell.createCell(table: tableView, delegate: self, key: data.key),
+        if let newChannelCell = data.cell.createCell(table: tableView, delegate: self, key: data.key, enabled: data.enabled),
             let newCell = newChannelCell as? UITableViewCell {
 
             referenceOfCells[data.key] = newChannelCell

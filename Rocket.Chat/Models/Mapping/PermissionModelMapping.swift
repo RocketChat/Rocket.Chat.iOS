@@ -12,9 +12,13 @@ import RealmSwift
 
 extension Permission: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
-        self.roles.removeAll()
-        if let roles = values["roles"].array?.flatMap({ $0.string }).flatMap({ Role(rawValue: $0) }) {
-            self.roles.append(contentsOf: roles)
+        if self.identifier == nil {
+            self.identifier = values["_id"].string
+        }
+
+        self.rawRoles.removeAll()
+        if let rawRoles = values["roles"].array?.flatMap({ $0.string }) {
+            self.rawRoles.append(contentsOf: rawRoles)
         }
     }
 }
