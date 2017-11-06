@@ -63,10 +63,15 @@ class SubscriptionsPageViewController: UIPageViewController {
         super.viewDidLayoutSubviews()
 
         let pageControlHeight = CGFloat(44)
+        var safeAreaBottomConstraint = CGFloat(0)
+
+        if #available(iOS 11.0, *) {
+            safeAreaBottomConstraint = view.safeAreaInsets.bottom
+        }
 
         pageControl?.frame = CGRect(
             x: 0,
-            y: view.frame.height - pageControlHeight,
+            y: view.frame.height - pageControlHeight - safeAreaBottomConstraint,
             width: view.frame.width,
             height: pageControlHeight
         )
