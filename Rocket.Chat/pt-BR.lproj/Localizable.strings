@@ -107,6 +107,7 @@
 "chat.upload.uploading_video" = "Enviando video";
 "chat.upload.uploading_file" = "Enviando \"%@\"";
 "chat.upload.take_photo" = "Tirar uma foto";
+"chat.upload.shoot_video" = "Gravar um vídeo";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
 
