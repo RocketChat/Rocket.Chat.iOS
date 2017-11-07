@@ -19,6 +19,9 @@
 "alert.connection.invalid_url.title" = "Ups!";
 "alert.connection.invalid_url.message" = "URL który wprowadziłeś jest niepoprawny. Proszę sprawdzić jego poprawność i spróbować ponownie.";
 
+"alert.connection.socket_error.title" = "Ups!";
+"alert.connection.socket_error.message" = "Nie udało się połączyć z wybranym serwerem!";
+
 "alert.connection.invalid_version.title" = "Ups!";
 "alert.connection.invalid_version.message" = "Serwer na który próbujesz się połączyć korzysta z wersji aplikacji, która nie jest już wspierana przez aplikację: %@.\n\nWymagana wersja to %@.";
 
@@ -33,6 +36,9 @@
 
 "alert.login_service_error.title" = "Błąd uwierzytelniania";
 "alert.login_service_error.message" = "Nie można zalogować przy użyciu tej usługi. Proszę spróbować ponownie.";
+
+"alert.authorization_error.title" = "Błąd autoryzacji";
+"alert.authorization_error.create_channel.description" = "Nie możesz utworzyć kanału";
 
 // Socket Connection
 "connection.offline.banner.message" = "Jesteś w trybie offline, połącz się ponownie";
@@ -65,8 +71,12 @@
 "user_menu.logout" = "Wyloguj";
 
 // New Room View
+"new_room_title" = "Nowy kanał";
+"new_room_create" = "Utwórz";
 "new_room.cell.public_channel.title" = "Kanał publiczny";
 "new_room.cell.public_channel.description" = "Każdy ma dostęp do tego kanału";
+"new_room.cell.public_channel.description.public_only" = "Możesz utworzyć tylko kanały publiczne";
+"new_room.cell.public_channel.description.private_only" = "Możesz utworzyć tylko kanały prywatne";
 "new_room.cell.read_only.title" = "Kanał tylko do odczytu";
 "new_room.cell.read_only.description" = "Tylko administrator może pisać wiadomości";
 "new_room.group.channel.name" = "Nazwa kanału";
@@ -79,6 +89,7 @@
 "chat.dm.start_conversation" = "To początek Twojej rozmowy z %@";
 "chat.channel.start_conversation" = "To początek rozmowy na kanale %@";
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
+"chat.muted" = "Zostałeś wyciszony na tym kanale";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Blokuj wiadomości od użytkownika";
@@ -98,6 +109,7 @@
 "chat.upload.uploading_video" = "Przesyłanie wideo";
 "chat.upload.uploading_file" = "Przesyłanie \"%@\"";
 "chat.upload.take_photo" = "Zrób zdjęcie";
+"chat.upload.shoot_video" = "Nagraj wideo";
 "chat.upload.choose_from_library" = "Wybierz plik z biblioteki";
 "chat.upload.import_file" = "Importuj plik z...";
 
@@ -141,3 +153,9 @@
 "chat.messages.list.empty" = "Nie znaleziono wiadomości";
 "chat.messages.pinned.list.title" = "Przypięte wiadomości";
 "chat.messages.starred.list.title" = "Wiadomości oznaczone gwiazdką";
+
+// Settings
+"myaccount.settings.title" = "Ustawienia";
+"myaccount.settings.contactus" = "Kontakt";
+"myaccount.settings.license" = "Licencja";
+"myaccount.settings.version" = "Wersja: %@ (%@)";

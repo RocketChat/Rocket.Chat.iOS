@@ -11,6 +11,13 @@ import RealmSwift
 
 class NewRoomViewController: BaseViewController {
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        title = localized("new_room_title")
+        navigationItem.rightBarButtonItem?.title = localized("new_room_create")
+    }
+
     static var user: User? {
         return AuthManager.currentUser()
     }

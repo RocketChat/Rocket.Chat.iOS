@@ -71,6 +71,8 @@
 "user_menu.logout" = "Logout";
 
 // New Room View
+"new_room_title" = "New Channel";
+"new_room_create" = "Create";
 "new_room.cell.public_channel.title" = "Public Channel";
 "new_room.cell.public_channel.description" = "Everyone can access this channel";
 "new_room.cell.public_channel.description.public_only" = "You can only create public channels";
@@ -151,3 +153,9 @@
 "chat.messages.list.empty" = "No messages found";
 "chat.messages.pinned.list.title" = "Pinned Messages";
 "chat.messages.starred.list.title" = "Starred Messages";
+
+// Settings
+"myaccount.settings.title" = "Settings";
+"myaccount.settings.contactus" = "Contact us";
+"myaccount.settings.license" = "License";
+"myaccount.settings.version" = "Version: %@ (%@)";
