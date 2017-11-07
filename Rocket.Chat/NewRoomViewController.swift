@@ -40,7 +40,7 @@ class NewRoomViewController: BaseViewController {
         )
     ]
 
-    fileprivate static func createPublicChannelSwitch(allowPublic: Bool, allowPrivate: Bool) -> FormCell {
+    static func createPublicChannelSwitch(allowPublic: Bool, allowPrivate: Bool) -> FormCell {
         var description: String = ""
         if allowPublic && allowPrivate {
             description = localized("new_room.cell.public_channel.description")
