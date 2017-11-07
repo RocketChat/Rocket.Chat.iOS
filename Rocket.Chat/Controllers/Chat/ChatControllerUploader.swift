@@ -21,11 +21,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             }))
 
             alert.addAction(UIAlertAction(title: localized("chat.upload.shoot_video"), style: .default, handler: { (_) in
-                AVAudioSession.sharedInstance().requestRecordPermission { granted in
-                    if granted {
-                        self.openCamera(video: true)
-                    }
-                }
+                self.openCamera(video: true)
             }))
         }
 
