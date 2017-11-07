@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */; };
+		14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */; };
 		15A2FD223558011BFDE03883 /* Pods_Rocket_ChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */; };
 		4101BF011F8D0A1700F67E89 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101BF001F8D0A1700F67E89 /* AppManager.swift */; };
 		4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */; };
@@ -283,6 +285,8 @@
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		1499781B1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Main.strings; sourceTree = "<group>"; };
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MentionsTextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		4101BF001F8D0A1700F67E89 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppManager.swift; path = Managers/AppManager.swift; sourceTree = "<group>"; };
 		4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppManagerSpec.swift; path = Managers/AppManagerSpec.swift; sourceTree = "<group>"; };
@@ -1253,6 +1257,8 @@
 				897083CF1F8CF08100233561 /* CheckTableViewCell.xib */,
 				897083D01F8CF08100233561 /* TextFieldTableViewCell.swift */,
 				897083D11F8CF08100233561 /* TextFieldTableViewCell.xib */,
+				14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */,
+				14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1522,6 +1528,7 @@
 				41DF76E81D2C50710028DBF8 /* Main.storyboard in Resources */,
 				41F167EB1DAC4D5500775CCA /* ChatTitleView.xib in Resources */,
 				41FF36071DBEC0BA0074E20A /* ChatMessageVideoView.xib in Resources */,
+				14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */,
 				800FCD511F728EC800D9A692 /* MemberCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1877,6 +1884,7 @@
 				41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */,
 				806401311FB09DE800990572 /* Permission.swift in Sources */,
 				4159720C1D3DB854002258F4 /* Email.swift in Sources */,
+				14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */,
 				412719461E6B403700461FEE /* RegisterUsernameViewController.swift in Sources */,
 				41BAE3E71D71B26C00C2445A /* URLExtension.swift in Sources */,
 				4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */,
