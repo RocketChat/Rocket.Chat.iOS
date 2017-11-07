@@ -19,6 +19,14 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             alert.addAction(UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
                 self.openCamera()
             }))
+
+            alert.addAction(UIAlertAction(title: localized("chat.upload.shoot_video"), style: .default, handler: { (_) in
+                AVAudioSession.sharedInstance().requestRecordPermission { granted in
+                    if granted {
+                        self.openCamera(video: true)
+                    }
+                }
+            }))
         }
 
         alert.addAction(UIAlertAction(title: localized("chat.upload.choose_from_library"), style: .default, handler: { (_) in
@@ -39,7 +47,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         present(alert, animated: true, completion: nil)
     }
 
-    fileprivate func openCamera() {
+    fileprivate func openCamera(video: Bool = false) {
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
             return assertionFailure("Device camera is not availbale")
         }
@@ -49,7 +57,8 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .camera
         imagePicker.cameraFlashMode = .off
-        imagePicker.cameraCaptureMode = .photo
+        imagePicker.mediaTypes = video ? [kUTTypeMovie as String] : [kUTTypeImage as String]
+        imagePicker.cameraCaptureMode = video ? .video : .photo
         self.present(imagePicker, animated: true, completion: nil)
     }
 

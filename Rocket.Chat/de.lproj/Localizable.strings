@@ -89,6 +89,7 @@
 "chat.upload.uploading_video" = "Video wird hochgeladen";
 "chat.upload.uploading_file" = "Hochladen \"%@\"";
 "chat.upload.take_photo" = "Foto aufnehmen";
+"chat.upload.shoot_video" = "Video drehen";
 "chat.upload.choose_from_library" = "Foto & Video Mediathek";
 "chat.upload.import_file" = "Importiere Datei aus...";
 
