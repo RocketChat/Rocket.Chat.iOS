@@ -57,7 +57,7 @@ class DraftMessageManagerSpec: XCTestCase {
         UserDefaults.standard.set(nil, forKey: ServerPersistKeys.servers)
         DraftMessageManager.clearServerDraftMessages()
 
-        XCTAssertEqual(UserDefaults.standard.dictionary(forKey: testServerURL) != nil, true, "no server data was cleared when clearing draft messages for a empty server")
+        XCTAssertNotNil(UserDefaults.standard.dictionary(forKey: testServerURL), "no server data was cleared when clearing draft messages for a empty server")
     }
 
     func testClearServerDraftMessages() {
@@ -66,7 +66,7 @@ class DraftMessageManagerSpec: XCTestCase {
         DraftMessageManager.update(draftMessage: draftMessage, for: subscription)
 
         DraftMessageManager.clearServerDraftMessages()
-        XCTAssertEqual(UserDefaults.standard.dictionary(forKey: DraftMessageManager.selectedServerKey) == nil, true, "successfully cleared selected server draft messages")
+        XCTAssertNil(UserDefaults.standard.dictionary(forKey: DraftMessageManager.selectedServerKey), "successfully cleared selected server draft messages")
     }
 
 }
