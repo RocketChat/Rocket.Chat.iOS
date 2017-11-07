@@ -31,4 +31,21 @@ class NewRoomViewControllerSpec: XCTestCase {
         }
     }
 
+    func testCreatePublicChannelSwitch() {
+        var sw = NewRoomViewController.createPublicChannelSwitch(allowPublic: true, allowPrivate: true)
+        XCTAssertTrue(sw.enabled, "switch is enabled when public and private is allowed")
+        XCTAssertEqual(sw.defaultValue as? Bool, true, "switch defaultValue is true when public and private is allowed")
+
+        sw = NewRoomViewController.createPublicChannelSwitch(allowPublic: true, allowPrivate: false)
+        XCTAssertFalse(sw.enabled, "switch is disabled when only public is allowed")
+        XCTAssertEqual(sw.defaultValue as? Bool, true, "switch defaultValue is true when only public is allowed")
+
+        sw = NewRoomViewController.createPublicChannelSwitch(allowPublic: false, allowPrivate: true)
+        XCTAssertFalse(sw.enabled, "switch is disabled when only private is allowed")
+        XCTAssertEqual(sw.defaultValue as? Bool, false, "switch defaultValue is false when only private is allowed")
+
+        sw = NewRoomViewController.createPublicChannelSwitch(allowPublic: false, allowPrivate: false)
+        XCTAssertFalse(sw.enabled, "switch is disabled when none is allowed")
+        XCTAssertEqual(sw.defaultValue as? Bool, false, "switch defaultValue is false when none is allowed")
+    }
 }

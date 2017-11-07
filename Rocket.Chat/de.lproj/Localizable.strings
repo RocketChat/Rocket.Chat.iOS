@@ -135,7 +135,7 @@
 
 // New Room List
 "new_room.cell.public_channel.title" = "Öffentlicher Kanal";
-"new_room.cell.public_chanell.description" = "Jeder Benutzer kann einem öffentlichen Raum beitreten.";
+"new_room.cell.public_channel.description" = "Jeder Benutzer kann einem öffentlichen Raum beitreten.";
 "new_room.cell.read_only.title" = "Schreibgeschützter Kanal";
 "new_room.cell.read_only.description" = "Nur Moderatoren oder Admins können in schreibgeschützten Kanälen schreiben";
 "new_room.group.channel.name" = "Channel Name";

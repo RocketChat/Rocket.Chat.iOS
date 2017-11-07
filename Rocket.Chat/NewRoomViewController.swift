@@ -11,20 +11,24 @@ import RealmSwift
 
 class NewRoomViewController: BaseViewController {
 
+    static var user: User? {
+        return AuthManager.currentUser()
+    }
+
     let tableViewData: [SectionForm] = [
         SectionForm(
             name: nil,
             footer: nil,
             cells: [
-                FormCell(
-                    cell: .check(title: localized("new_room.cell.public_channel.title"), description: localized("new_room.cell.public_chanell.description")),
-                    key: "public room",
-                    defaultValue: true
+                createPublicChannelSwitch(
+                    allowPublic: user?.hasPermission(.createPublicChannels) ?? false,
+                    allowPrivate: user?.hasPermission(.createPublicChannels) ?? false
                 ),
                 FormCell(
                     cell: .check(title: localized("new_room.cell.read_only.title"), description: localized("new_room.cell.read_only.description")),
                     key: "read only room",
-                    defaultValue: false
+                    defaultValue: false,
+                    enabled: true
                 )
             ]
         ),
@@ -35,11 +39,30 @@ class NewRoomViewController: BaseViewController {
                 FormCell(
                     cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag")),
                     key: "room name",
-                    defaultValue: ""
+                    defaultValue: "",
+                    enabled: true
                 )
             ]
         )
     ]
+
+    static func createPublicChannelSwitch(allowPublic: Bool, allowPrivate: Bool) -> FormCell {
+        var description: String = ""
+        if allowPublic && allowPrivate {
+            description = localized("new_room.cell.public_channel.description")
+        } else if allowPublic {
+            description = localized("new_room.cell.public_channel.description.public_only")
+        } else if allowPrivate {
+            description = localized("new_room.cell.public_channel.description.private_only")
+        }
+
+        return FormCell(
+            cell: .check(title: localized("new_room.cell.public_channel.title"), description: description),
+            key: "public room",
+            defaultValue: allowPublic,
+            enabled: allowPublic && allowPrivate
+        )
+    }
 
     var referenceOfCells: [String: FormTableViewCellProtocol] = [:]
     lazy var setValues: [String: Any] = {
@@ -58,6 +81,17 @@ class NewRoomViewController: BaseViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillHide, object: nil)
+
+        let user = NewRoomViewController.user
+        let createPrivate = user?.hasPermission(.createPrivateChannels) ?? false
+        let createPublic = user?.hasPermission(.createPublicChannels) ?? false
+
+        if !createPrivate && !createPublic {
+            alert(title: localized("alert.authorization_error.title"),
+                  message: localized("alert.authorization_error.create_channel.description")) { _ in
+                self.dismiss(animated: true, completion: nil)
+            }
+        }
     }
 
     deinit {
@@ -161,7 +195,7 @@ extension NewRoomViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableViewData[indexPath.section].cells[indexPath.row]
 
-        if let newChannelCell = data.cell.createCell(table: tableView, delegate: self, key: data.key),
+        if let newChannelCell = data.cell.createCell(table: tableView, delegate: self, key: data.key, enabled: data.enabled),
             let newCell = newChannelCell as? UITableViewCell {
 
             referenceOfCells[data.key] = newChannelCell

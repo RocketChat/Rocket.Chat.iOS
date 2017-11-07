@@ -37,6 +37,9 @@
 "alert.login_service_error.title" = "Authentication Error";
 "alert.login_service_error.message" = "Could not authenticate using this service. Please, try again.";
 
+"alert.authorization_error.title" = "Authorization Error";
+"alert.authorization_error.create_channel.description" = "You can't create channels";
+
 // Socket Connection
 "connection.offline.banner.message" = "You're offline, try connecting again";
 
@@ -69,7 +72,9 @@
 
 // New Room View
 "new_room.cell.public_channel.title" = "Public Channel";
-"new_room.cell.public_chanell.description" = "Everyone can access this channel";
+"new_room.cell.public_channel.description" = "Everyone can access this channel";
+"new_room.cell.public_channel.description.public_only" = "You can only create public channels";
+"new_room.cell.public_channel.description.private_only" = "You can only create private channels";
 "new_room.cell.read_only.title" = "Read only channel";
 "new_room.cell.read_only.description" = "Only admin can write new messages";
 "new_room.group.channel.name" = "Channel Name";
