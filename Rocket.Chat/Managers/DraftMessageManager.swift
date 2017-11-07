@@ -74,9 +74,9 @@ struct DraftMessageManager {
         if let serverDraftMessages = userDefaults.dictionary(forKey: selectedServerKey),
             let draftMessage = serverDraftMessages[subscriptionKey] as? String {
             return draftMessage
-        } else {
-            return ""
         }
+
+        return ""
     }
 
 }
