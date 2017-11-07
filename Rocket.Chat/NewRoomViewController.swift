@@ -43,6 +43,18 @@ class NewRoomViewController: BaseViewController {
                     enabled: true
                 )
             ]
+        ),
+        SectionForm(
+            name: localized("new_room.group.invite_users"),
+            footer: nil,
+            cells: [
+                FormCell(
+                    cell: .mentionsTextField(placeholder: localized("new_room.cell.invite_users.placeholder"), icon: #imageLiteral(resourceName: "Mention")),
+                    key: "users list",
+                    defaultValue: "",
+                    enabled: true
+                )
+            ]
         )
     ]
 
@@ -78,6 +90,7 @@ class NewRoomViewController: BaseViewController {
     override func viewDidLoad() {
         CheckTableViewCell.registerCell(for: tableView)
         TextFieldTableViewCell.registerCell(for: tableView)
+        MentionsTextFieldTableViewCell.registerCell(for: tableView)
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillHide, object: nil)

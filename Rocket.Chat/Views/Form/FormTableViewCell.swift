@@ -46,6 +46,7 @@ struct FormCell {
 enum FormTableViewCell {
     case check(title: String, description: String)
     case textField(placeholder: String?, icon: UIImage?)
+    case mentionsTextField(placeholder: String?, icon: UIImage?)
 
     func getClass() -> FormTableViewCellProtocol.Type {
         switch self {
@@ -53,6 +54,8 @@ enum FormTableViewCell {
             return CheckTableViewCell.self
         case .textField:
             return TextFieldTableViewCell.self
+        case .mentionsTextField:
+            return MentionsTextFieldTableViewCell.self
         }
     }
 
@@ -74,6 +77,13 @@ enum FormTableViewCell {
 
         case .textField(let placeholder, let icon):
             if let cell = cell as? TextFieldTableViewCell {
+                cell.textFieldInput.placeholder = placeholder
+                cell.imgLeftIcon.image = icon
+                cell.textFieldInput.isEnabled = enabled
+            }
+
+        case .mentionsTextField(let placeholder, let icon):
+            if let cell = cell as? MentionsTextFieldTableViewCell {
                 cell.textFieldInput.placeholder = placeholder
                 cell.imgLeftIcon.image = icon
                 cell.textFieldInput.isEnabled = enabled
