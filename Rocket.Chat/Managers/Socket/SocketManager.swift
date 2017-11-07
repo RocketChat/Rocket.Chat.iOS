@@ -141,6 +141,7 @@ extension SocketManager {
                 UserManager.changes()
                 SubscriptionManager.changes(auth)
                 SubscriptionManager.subscribeRoomChanges()
+                PermissionManager.changes()
                 PermissionManager.updatePermissions()
 
                 if let userId = auth.userId {

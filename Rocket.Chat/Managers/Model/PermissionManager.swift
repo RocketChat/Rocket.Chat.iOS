@@ -10,6 +10,26 @@ import Foundation
 import RealmSwift
 
 struct PermissionManager {
+    static func changes() {
+        let eventName = "permissions-changed"
+        let request = [
+            "msg": "sub",
+            "name": "stream-notify-logged",
+            "params": [eventName, false]
+            ] as [String: Any]
+
+        SocketManager.subscribe(request, eventName: eventName) { response in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+
+            let object = response.result["fields"]["args"][1]
+
+            Realm.execute({ (realm) in
+                let permission = Permission.getOrCreate(realm: realm, values: object, updates: { _ in })
+                realm.add(permission, update: true)
+            })
+        }
+    }
+
     static func updatePermissions() {
         let requestPermissions = [
             "msg": "method",
