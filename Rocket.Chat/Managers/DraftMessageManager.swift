@@ -25,7 +25,7 @@ struct DraftMessageManager {
 
     /**
          This method takes a subscription id and returns a more meaningful key
-         for us to persist.
+         than the id only for us to persist.
 
          - parameter identifier: The subscription id to update or retrieve a draft message.
      */
@@ -63,9 +63,9 @@ struct DraftMessageManager {
 
     /**
          This method takes a subscription and returns the current cached draft message
-         that is related to it.
+         that is related to it, if any.
 
-         - parameter subscription: The subscription we that we need the draft message.
+         - parameter subscription: The subscription we that we need to retrieve a draft message.
      */
     static func draftMessage(for subscription: Subscription) -> String {
         guard !selectedServerKey.isEmpty else { return "" }
