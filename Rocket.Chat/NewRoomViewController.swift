@@ -11,13 +11,19 @@ import RealmSwift
 
 class NewRoomViewController: BaseViewController {
 
+    static var user: User? {
+        return AuthManager.currentUser()
+    }
+
     let tableViewData: [SectionForm] = [
         SectionForm(
             name: nil,
             footer: nil,
             cells: [
-                createPublicChannelSwitch(allowPublic: AuthManager.currentUser()?.hasPermission(.createPublicChannels) ?? false,
-                                          allowPrivate: AuthManager.currentUser()?.hasPermission(.createPublicChannels) ?? false),
+                createPublicChannelSwitch(
+                    allowPublic: user?.hasPermission(.createPublicChannels) ?? false,
+                    allowPrivate: user?.hasPermission(.createPublicChannels) ?? false
+                ),
                 FormCell(
                     cell: .check(title: localized("new_room.cell.read_only.title"), description: localized("new_room.cell.read_only.description")),
                     key: "read only room",
@@ -76,8 +82,9 @@ class NewRoomViewController: BaseViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillHide, object: nil)
 
-        let createPrivate = AuthManager.currentUser()?.hasPermission(.createPrivateChannels) ?? false
-        let createPublic = AuthManager.currentUser()?.hasPermission(.createPublicChannels) ?? false
+        let user = NewRoomViewController.user
+        let createPrivate = user?.hasPermission(.createPrivateChannels) ?? false
+        let createPublic = user?.hasPermission(.createPublicChannels) ?? false
 
         if !createPrivate && !createPublic {
             alert(title: localized("alert.authorization_error.title"),

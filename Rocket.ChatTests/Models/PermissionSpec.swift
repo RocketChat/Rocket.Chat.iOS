@@ -13,10 +13,6 @@ import SwiftyJSON
 @testable import Rocket_Chat
 
 class PermissionSpec: XCTestCase {
-    func createTestRealm() throws -> Realm {
-        return try Realm(configuration: Realm.Configuration(inMemoryIdentifier: String.random(40)))
-    }
-
     let testJSON = JSON([
         "_id": "snippet-message",
         "roles": [
