@@ -14,10 +14,7 @@ struct DraftMessageManager {
 
     /**
          This property gets the selected server's URL for us to use it as a identification
-         to store and retrieve its subscriptions's draft messages. If the server URL
-         wind up changing the clients will need to logout and add a new server, since we clear
-         the cache when the user logouts, using the server URL will help us to avoid keeping invalid
-         server draft messages stored.
+         to store and retrieve its subscriptions's draft messages.
      */
     static var selectedServerKey: String {
         return DatabaseManager.servers?[DatabaseManager.selectedIndex][ServerPersistKeys.serverURL] ?? ""
