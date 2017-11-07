@@ -66,7 +66,7 @@
 
 // New Room View
 "new_room.cell.public_channel.title" = "Veřejný kanál";
-"new_room.cell.public_chanell.description" = "K tomuto kanálu má přístup každý";
+"new_room.cell.public_channel.description" = "K tomuto kanálu má přístup každý";
 "new_room.cell.read_only.title" = "Kanál pouze pro čtení";
 "new_room.cell.read_only.description" = "Pouze admin může psát nové zprávy";
 "new_room.group.channel.name" = "Jméno kanálu";
