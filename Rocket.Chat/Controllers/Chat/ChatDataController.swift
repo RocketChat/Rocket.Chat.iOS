@@ -196,7 +196,10 @@ final class ChatDataController {
     func update(_ message: Message) -> Int {
         for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
-                MessageTextCacheManager.shared.update(for: message)
+                if obj.message?.text != message.text {
+                    MessageTextCacheManager.shared.update(for: message)
+                }
+
                 data[idx].message = message
                 return obj.indexPath.row
         }
