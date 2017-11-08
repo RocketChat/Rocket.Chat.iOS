@@ -48,9 +48,9 @@ class ChatDataControllerSpec: XCTestCase {
 
         controller.insert([obj2, obj1, obj3])
 
-        XCTAssertEqual(controller.indexPathOf(obj1.identifier)?.row, 1, "obj0 found in correct row")
-        XCTAssertEqual(controller.indexPathOf(obj2.identifier)?.row, 2, "obj1 found in correct row")
-        XCTAssertEqual(controller.indexPathOf(obj3.identifier)?.row, 3, "obj2 found in correct row")
+        XCTAssertEqual(controller.indexPathOf(obj1.identifier)?.row, 1, "obj1 found in correct row")
+        XCTAssertEqual(controller.indexPathOf(obj2.identifier)?.row, 2, "obj2 found in correct row")
+        XCTAssertEqual(controller.indexPathOf(obj3.identifier)?.row, 3, "obj3 found in correct row")
     }
 
     func testIndexPathOfMessage() {
@@ -141,7 +141,7 @@ class ChatDataControllerSpec: XCTestCase {
 
         message.text = "Foobar, updated"
 
-        let index = controller.update(message, asyncUpdate: nil)
+        let index = controller.update(message, completion: nil)
         XCTAssertEqual(index, 1, "indexPath is the message indexPath row")
         XCTAssertEqual(controller.data[index].message?.text, "Foobar, updated", "Message text was updated")
     }
