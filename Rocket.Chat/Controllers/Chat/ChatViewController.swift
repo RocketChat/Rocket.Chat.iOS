@@ -69,11 +69,17 @@ final class ChatViewController: SLKTextViewController {
     var messagesToken: NotificationToken!
     var messagesQuery: Results<Message>!
     var messages: [Message] = []
-    var subscription: Subscription! {
+    var subscription: Subscription? {
         didSet {
-            guard !subscription.isInvalidated else { return }
-
             subscriptionToken?.invalidate()
+
+            guard
+                let subscription = subscription,
+                !subscription.isInvalidated
+            else {
+                return
+            }
+
             subscriptionToken = subscription.observe { [weak self] changes in
                 switch changes {
                 case .change(let propertyChanges):
@@ -315,7 +321,10 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func textViewDidChange(_ textView: UITextView) {
+        guard let subscription = self.subscription else { return }
+
         DraftMessageManager.update(draftMessage: textView.text, for: subscription)
+
         if textView.text?.isEmpty ?? true {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         } else {
@@ -325,6 +334,7 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: Message
     fileprivate func sendMessage() {
+        guard let subscription = subscription else { return }
         guard let messageText = textView.text, messageText.count > 0 else { return }
 
         let replyString = self.replyString
@@ -339,7 +349,7 @@ final class ChatViewController: SLKTextViewController {
             message?.internalType = ""
             message?.createdAt = Date.serverDate
             message?.text = "\(messageText)\(replyString)"
-            message?.subscription = self.subscription
+            message?.subscription = subscription
             message?.identifier = String.random(18)
             message?.temporary = true
             message?.user = AuthManager.currentUser()
@@ -351,9 +361,10 @@ final class ChatViewController: SLKTextViewController {
 
         if let message = message {
             DraftMessageManager.update(draftMessage: "", for: subscription)
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+
             textView.text = ""
             rightButton.isEnabled = true
-            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
 
             SubscriptionManager.sendTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
@@ -381,6 +392,8 @@ final class ChatViewController: SLKTextViewController {
     // MARK: Subscription
 
     fileprivate func markAsRead() {
+        guard let subscription = subscription else { return }
+
         SubscriptionManager.markAsRead(subscription) { _ in
             // Nothing, for now
         }
@@ -392,9 +405,11 @@ final class ChatViewController: SLKTextViewController {
     }
 
     internal func updateSubscriptionInfo() {
+        guard let subscription = subscription else { return }
+
         messagesToken?.invalidate()
 
-        title = subscription?.displayName()
+        title = subscription.displayName()
         chatTitleView?.subscription = subscription
         textView.resignFirstResponder()
 
@@ -410,10 +425,10 @@ final class ChatViewController: SLKTextViewController {
             }
         })
 
-        if self.subscription.isValid() {
+        if subscription.isValid() {
             self.updateSubscriptionMessages()
         } else {
-            self.subscription.fetchRoomIdentifier({ [weak self] response in
+            subscription.fetchRoomIdentifier({ [weak self] response in
                 self?.subscription = response
             })
         }
@@ -430,6 +445,8 @@ final class ChatViewController: SLKTextViewController {
     }
 
     internal func updateSubscriptionMessages() {
+        guard let subscription = subscription else { return }
+
         messagesQuery = subscription.fetchMessagesQueryResults()
 
         activityIndicator.startAnimating()
@@ -444,6 +461,8 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func registerTypingEvent() {
+        guard let subscription = subscription else { return }
+
         typingIndicatorView?.interval = 0
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
@@ -523,7 +542,9 @@ final class ChatViewController: SLKTextViewController {
     }
 
     func loadHistoryFromRemote(date: Date?) {
-        let tempSubscription = Subscription(value: self.subscription)
+        guard let subscription = subscription else { return }
+
+        let tempSubscription = Subscription(value: subscription)
 
         MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
             DispatchQueue.main.async {
@@ -548,6 +569,8 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func loadMoreMessagesFrom(date: Date?, loadRemoteHistory: Bool = true) {
+        guard let subscription = subscription else { return }
+
         if isRequestingHistory || dataController.loadedAllMessages {
             return
         }
@@ -588,7 +611,13 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func appendMessages(messages: [Message], completion: VoidCompletion?) {
-        guard let collectionView = self.collectionView else { return }
+        guard
+            let subscription = subscription,
+            let collectionView = collectionView
+        else {
+            return
+        }
+
         guard !isAppendingMessages else {
             Log.debug("[APPEND MESSAGES] Blocked trying to append \(messages.count) messages")
 
@@ -597,9 +626,9 @@ final class ChatViewController: SLKTextViewController {
             // to the list. Also, we keep the subscription identifier in order to make sure
             // we're updating the same subscription, because this view controller is reused
             // for all the chats.
-            let oldSubscriptionIdentifier = self.subscription.identifier
+            let oldSubscriptionIdentifier = subscription.identifier
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1, execute: { [weak self] in
-                guard oldSubscriptionIdentifier == self?.subscription.identifier else { return }
+                guard oldSubscriptionIdentifier == self?.subscription?.identifier else { return }
                 self?.appendMessages(messages: messages, completion: completion)
             })
 
@@ -621,9 +650,8 @@ final class ChatViewController: SLKTextViewController {
             for message in tempMessages {
                 var insert = true
 
-                for obj in self.dataController.data
-                    where message.identifier == obj.message?.identifier {
-                        insert = false
+                for obj in self.dataController.data where message.identifier == obj.message?.identifier {
+                    insert = false
                 }
 
                 if insert {
@@ -714,8 +742,13 @@ extension ChatViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard dataController.data.count > indexPath.row else { return UICollectionViewCell() }
-        guard let obj = dataController.itemAt(indexPath) else { return UICollectionViewCell() }
+        guard
+            dataController.data.count > indexPath.row,
+            let subscription = subscription,
+            let obj = dataController.itemAt(indexPath)
+        else {
+            return UICollectionViewCell()
+        }
 
         if obj.type == .message {
             return cellForMessage(obj, at: indexPath)
@@ -820,6 +853,8 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        guard let subscription = subscription else { return .zero }
+
         var fullWidth = collectionView.bounds.size.width
 
         if #available(iOS 11, *) {
@@ -890,8 +925,12 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
 // MARK: Block Message Sending
 
 extension ChatViewController {
+
     fileprivate func updateMessageSendingPermission() {
-        guard let currentUser = AuthManager.currentUser() else {
+        guard
+            let subscription = subscription,
+            let currentUser = AuthManager.currentUser()
+        else {
             allowMessageSending()
             return
         }
@@ -920,4 +959,5 @@ extension ChatViewController {
         leftButton.isEnabled = true
         rightButton.isEnabled = true
     }
+
 }
