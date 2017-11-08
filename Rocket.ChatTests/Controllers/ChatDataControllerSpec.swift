@@ -48,6 +48,8 @@ class ChatDataControllerSpec: XCTestCase {
 
         controller.insert([obj2, obj1, obj3])
 
+        // We begin from 1 since a Day Separator is prepended by default
+
         XCTAssertEqual(controller.indexPathOf(obj1.identifier)?.row, 1, "obj1 found in correct row")
         XCTAssertEqual(controller.indexPathOf(obj2.identifier)?.row, 2, "obj2 found in correct row")
         XCTAssertEqual(controller.indexPathOf(obj3.identifier)?.row, 3, "obj3 found in correct row")
