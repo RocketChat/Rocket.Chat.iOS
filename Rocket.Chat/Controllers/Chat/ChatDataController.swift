@@ -87,6 +87,15 @@ final class ChatDataController {
         }.first
     }
 
+    func indexPathOfMessage(identifier: String) -> IndexPath? {
+        return data.filter { item in
+            guard let messageIdentifier = item.message?.identifier else { return false }
+            return messageIdentifier == identifier
+        }.flatMap { item in
+            item.indexPath
+        }.first
+    }
+
     // swiftlint:disable function_body_length cyclomatic_complexity
     @discardableResult
     func insert(_ items: [ChatData]) -> ([IndexPath], [IndexPath]) {
@@ -193,11 +202,11 @@ final class ChatDataController {
         return (indexPaths, removedIndexPaths)
     }
 
-    func update(_ message: Message) -> Int {
+    func update(_ message: Message, asyncUpdate: (() -> Void)?) -> Int {
         for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
                 if obj.message?.text != message.text {
-                    MessageTextCacheManager.shared.update(for: message)
+                    MessageTextCacheManager.shared.update(for: message, asyncUpdate: asyncUpdate)
                 }
 
                 data[idx].message = message
