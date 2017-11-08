@@ -71,8 +71,8 @@
 "user_menu.logout" = "Logout";
 
 // New Room View
-"new_room_title" = "New Channel";
-"new_room_create" = "Create";
+"new_room.title" = "New Channel";
+"new_room.buttons.create" = "Create";
 "new_room.cell.public_channel.title" = "Public Channel";
 "new_room.cell.public_channel.description" = "Everyone can access this channel";
 "new_room.cell.public_channel.description.public_only" = "You can only create public channels";
