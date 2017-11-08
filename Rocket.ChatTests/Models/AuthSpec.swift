@@ -11,7 +11,19 @@ import RealmSwift
 
 @testable import Rocket_Chat
 
+// MARK: Test Instance
+
+extension Auth {
+    static func testInstance() -> Auth {
+        let auth = Auth()
+        auth.settings = AuthSettings.testInstance()
+        return auth
+    }
+}
+
 class AuthSpec: XCTestCase {
+
+    // MARK: Setup
 
     override func setUp() {
         super.setUp()
@@ -24,6 +36,8 @@ class AuthSpec: XCTestCase {
             realm.deleteAll()
         })
     }
+
+    // MARK: Tests
 
     func testAuthObject() {
         let serverURL = "http://foobar.com"
