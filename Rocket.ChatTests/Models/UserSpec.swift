@@ -12,6 +12,16 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+// MARK: Test Instance
+
+extension User {
+    static func testInstance() -> User {
+        let user = User()
+        user.username = "user-username"
+        return user
+    }
+}
+
 class UserSpec: XCTestCase {
 
     func testUserObject() {
