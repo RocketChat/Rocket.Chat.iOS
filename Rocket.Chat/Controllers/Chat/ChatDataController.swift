@@ -202,11 +202,11 @@ final class ChatDataController {
         return (indexPaths, removedIndexPaths)
     }
 
-    func update(_ message: Message, asyncUpdate: (() -> Void)?) -> Int {
+    func update(_ message: Message, completion: (() -> Void)?) -> Int {
         for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
                 if obj.message?.text != message.text {
-                    MessageTextCacheManager.shared.update(for: message, asyncUpdate: asyncUpdate)
+                    MessageTextCacheManager.shared.update(for: message, completion: completion)
                 }
 
                 data[idx].message = message

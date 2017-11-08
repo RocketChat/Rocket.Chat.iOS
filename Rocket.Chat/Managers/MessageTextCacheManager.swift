@@ -26,7 +26,7 @@ class MessageTextCacheManager {
         cache.removeObject(forKey: cachedKey(for: identifier))
     }
 
-    @discardableResult func update(for message: Message, asyncUpdate: (() -> Void)?) -> NSMutableAttributedString? {
+    @discardableResult func update(for message: Message, completion: (() -> Void)?) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
         let key = cachedKey(for: identifier)
 
@@ -49,7 +49,9 @@ class MessageTextCacheManager {
             finalText.highlightMentions(mentions, username: username)
             finalText.highlightChannels(channels)
             self.cache.setObject(finalText, forKey: key)
-            asyncUpdate?()
+            DispatchQueue.main.async {
+                completion?()
+            }
         }
 
         return text
@@ -63,7 +65,7 @@ class MessageTextCacheManager {
         if let cachedVersion = cache.object(forKey: key) {
             resultText = cachedVersion
         } else {
-            if let result = update(for: message, asyncUpdate: nil) {
+            if let result = update(for: message, completion: nil) {
                 resultText = result
             } else {
                 resultText = NSAttributedString(string: message.text)
