@@ -155,7 +155,7 @@
 "chat.messages.starred.list.title" = "Messages favoris";
 
 // Settings
-"myaccount.settings.title" = "Settings";
-"myaccount.settings.contactus" = "Contact us";
-"myaccount.settings.license" = "License";
-"myaccount.settings.version" = "Version: %@ (%@)";
+"myaccount.settings.title" = "Réglages";
+"myaccount.settings.contactus" = "Contactez-nous";
+"myaccount.settings.license" = "Licence";
+"myaccount.settings.version" = "Version : %@ (%@)";
