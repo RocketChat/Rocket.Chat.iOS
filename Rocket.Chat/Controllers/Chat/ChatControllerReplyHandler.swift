@@ -12,8 +12,13 @@ import SlackTextViewController
 extension ChatViewController {
 
     func quoteStringFor(_ message: Message) -> String? {
-        guard let url = subscription.auth?.baseURL() else { return nil }
-        guard let id = message.identifier else { return nil }
+        guard
+            let subscription = subscription,
+            let url = subscription.auth?.baseURL(),
+            let id = message.identifier
+        else {
+            return nil
+        }
 
         let path: String
 
@@ -30,7 +35,12 @@ extension ChatViewController {
     }
 
     func replyStringFor(_ message: Message) -> String? {
-        guard let quoteString = quoteStringFor(message) else { return nil }
+        guard
+            let subscription = subscription,
+            let quoteString = quoteStringFor(message)
+        else {
+            return nil
+        }
 
         guard
             subscription.type != .directMessage,
