@@ -12,6 +12,19 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+// MARK: Test Instance
+
+extension Message {
+    static func testInstance() -> Message {
+        let message = Message()
+        message.user = User.testInstance()
+        message.subscription = Subscription.testInstance()
+        message.identifier = "message-identifier"
+        message.subscription.type = .channel
+        return message
+    }
+}
+
 class MessageSpec: XCTestCase {
 
     override func setUp() {
@@ -63,4 +76,40 @@ class MessageSpec: XCTestCase {
         XCTAssert(message.identifier == "message-json-1", "Message object was created with success")
     }
 
+}
+
+// MARK: quoteString & replyString
+
+extension MessageSpec {
+    func testQuoteString() {
+        let message = Message.testInstance()
+
+        message.subscription.type = .channel
+        XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/channel/subscription-name?msg=message-identifier)", "channel quoteString is correct")
+        message.subscription.type = .group
+        XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/group/subscription-name?msg=message-identifier)", "group quoteString is correct")
+        message.subscription.type = .directMessage
+        XCTAssertEqual(message.quoteString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm quoteString is correct")
+
+        message.identifier = nil
+        XCTAssertNil(message.quoteString, "quoteString is nil when message identifier is nil")
+        message.subscription.auth?.settings?.siteURL = nil
+        XCTAssertNil(message.quoteString, "quoteString is nil when there's no siteURL")
+    }
+
+    func testReplyString() {
+        let message = Message.testInstance()
+
+        message.subscription.type = .channel
+        XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/channel/subscription-name?msg=message-identifier)", "channel replyString is correct")
+        message.subscription.type = .group
+        XCTAssertEqual(message.replyString, " @user-username [ ](https://open.rocket.chat/group/subscription-name?msg=message-identifier)", "group replyString is correct")
+        message.subscription.type = .directMessage
+        XCTAssertEqual(message.replyString, " [ ](https://open.rocket.chat/direct/subscription-name?msg=message-identifier)", "dm replyString is correct")
+
+        message.identifier = nil
+        XCTAssertNil(message.replyString, "replyString is nil when message identifier is nil")
+        message.subscription.auth?.settings?.siteURL = nil
+        XCTAssertNil(message.replyString, "replyString is nil when there's no siteURL")
+    }
 }

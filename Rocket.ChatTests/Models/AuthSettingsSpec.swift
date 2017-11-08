@@ -11,7 +11,17 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class AuthSettingsModelMappingSpec: XCTestCase {
+// MARK: Test Instance
+
+extension AuthSettings {
+    static func testInstance() -> AuthSettings {
+        let settings = AuthSettings()
+        settings.siteURL = "https://open.rocket.chat"
+        return settings
+    }
+}
+
+class AuthSettingsSpec: XCTestCase {
 
     // MARK: Registration Form
 
