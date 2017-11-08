@@ -71,8 +71,8 @@
 "user_menu.logout" = "Wyloguj";
 
 // New Room View
-"new_room_title" = "Nowy kanał";
-"new_room_create" = "Utwórz";
+"new_room.title" = "Nowy kanał";
+"new_room.buttons.create" = "Utwórz";
 "new_room.cell.public_channel.title" = "Kanał publiczny";
 "new_room.cell.public_channel.description" = "Każdy ma dostęp do tego kanału";
 "new_room.cell.public_channel.description.public_only" = "Możesz utworzyć tylko kanały publiczne";

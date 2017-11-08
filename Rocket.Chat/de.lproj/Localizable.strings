@@ -19,6 +19,9 @@
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfe deine Eingabe und probiere es noch einmal.";
 
+"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.message" = "Could not connect to this server!";
+
 "alert.connection.invalid_version.title" = "Oops!";
 "alert.connection.invalid_version.message" = "Der Serverversion, mit der du dich verbinden möchtest, wird nicht mehr unterstützt: %@.\n\nWir benötigen Version %@.";
 
@@ -33,6 +36,9 @@
 
 "alert.login_service_error.title" = "Authentifizierungsproblem";
 "alert.login_service_error.message" = "Authentifizierung konnte mit diesem Dienst nicht durchgeführt werden. Bitte versuche es erneut.";
+
+"alert.authorization_error.title" = "Authorization Error";
+"alert.authorization_error.create_channel.description" = "You can't create channels";
 
 // Socket Connection
 "connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
@@ -64,12 +70,26 @@
 "user_menu.settings" = "Mein Account";
 "user_menu.logout" = "Logout";
 
+// New Room View
+"new_room.title" = "New Channel";
+"new_room.buttons.create" = "Create";
+"new_room.cell.public_channel.title" = "Öffentlicher Kanal";
+"new_room.cell.public_channel.description" = "Jeder Benutzer kann einem öffentlichen Raum beitreten.";
+"new_room.cell.public_channel.description.public_only" = "You can only create public channels";
+"new_room.cell.public_channel.description.private_only" = "You can only create private channels";
+"new_room.cell.read_only.title" = "Schreibgeschützter Kanal";
+"new_room.cell.read_only.description" = "Nur Moderatoren oder Admins können in schreibgeschützten Kanälen schreiben";
+"new_room.group.channel.name" = "Channel Name";
+"new_room.cell.channel_name.title" = "Channel Name";
+"new_room.group.channel.footer" = "Der Name muss komplett in Kleinbuchstaben und kürzer als 22 Zeichen sein.";
+
 // Chat
 "chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
 "chat.channel_preview_view.join" = "Kanal beitreten";
 "chat.dm.start_conversation" = "Dies ist der Anfang deines Gesprächs mit %@";
 "chat.channel.start_conversation" = "Dies ist der Beginn der Konversation auf %@";
 "chat.read_only" = "This room is read only";
+"chat.muted" = "You have been muted";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
@@ -134,11 +154,8 @@
 "chat.messages.pinned.list.title" = "Angeheftete Nachrichten";
 "chat.messages.starred.list.title" = "Favorisierte Nachrichten";
 
-// New Room List
-"new_room.cell.public_channel.title" = "Öffentlicher Kanal";
-"new_room.cell.public_channel.description" = "Jeder Benutzer kann einem öffentlichen Raum beitreten.";
-"new_room.cell.read_only.title" = "Schreibgeschützter Kanal";
-"new_room.cell.read_only.description" = "Nur Moderatoren oder Admins können in schreibgeschützten Kanälen schreiben";
-"new_room.group.channel.name" = "Channel Name";
-"new_room.cell.channel_name.title" = "Channel Name";
-"new_room.group.channel.footer" = "Der Name muss komplett in Kleinbuchstaben und kürzer als 22 Zeichen sein.";
+// Settings
+"myaccount.settings.title" = "Settings";
+"myaccount.settings.contactus" = "Contact us";
+"myaccount.settings.license" = "License";
+"myaccount.settings.version" = "Version: %@ (%@)";
