@@ -100,7 +100,7 @@ class ChatDataControllerSpec: XCTestCase {
 
         message.text = "Foobar, updated"
 
-        let index = controller.update(message, completion: nil)
+        let index = controller.update(message)
         XCTAssertEqual(index, 1, "indexPath is the message indexPath row")
         XCTAssertEqual(controller.data[index].message?.text, "Foobar, updated", "Message text was updated")
     }
