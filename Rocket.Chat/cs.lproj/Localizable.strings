@@ -19,6 +19,9 @@
 "alert.connection.invalid_url.title" = "Jejky!";
 "alert.connection.invalid_url.message" = "Zadaná adresa URL je neplatná. Zkontrolujte to a zkuste to znovu, prosím!";
 
+"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.message" = "Could not connect to this server!";
+
 "alert.connection.invalid_version.title" = "Jejky!";
 "alert.connection.invalid_version.message" = "Server na který se pokoušíte připojit, používá verzi, která aplikace již nepodporuje: %@.\n\nJe požadováa verze %@.";
 
@@ -33,6 +36,9 @@
 
 "alert.login_service_error.title" = "Chyba ověření";
 "alert.login_service_error.message" = "Nelze ověřit pomocí této služby. Prosím zkuste to znovu.";
+
+"alert.authorization_error.title" = "Authorization Error";
+"alert.authorization_error.create_channel.description" = "You can't create channels";
 
 // Socket Connection
 "connection.offline.banner.message" = "Jste offline, zkuste se znovu připojit";
@@ -65,8 +71,12 @@
 "user_menu.logout" = "Odhlásit";
 
 // New Room View
+"new_room.title" = "New Channel";
+"new_room.buttons.create" = "Create";
 "new_room.cell.public_channel.title" = "Veřejný kanál";
 "new_room.cell.public_channel.description" = "K tomuto kanálu má přístup každý";
+"new_room.cell.public_channel.description.public_only" = "You can only create public channels";
+"new_room.cell.public_channel.description.private_only" = "You can only create private channels";
 "new_room.cell.read_only.title" = "Kanál pouze pro čtení";
 "new_room.cell.read_only.description" = "Pouze admin může psát nové zprávy";
 "new_room.group.channel.name" = "Jméno kanálu";
@@ -79,6 +89,7 @@
 "chat.dm.start_conversation" = "Toto je začátek vaší konverzace s %@";
 "chat.channel.start_conversation" = "Toto je začátek konverzace %@";
 "chat.read_only" = "Tato místnost je pouze pro čtení";
+"chat.muted" = "You have been muted";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Blokovat zprávy od uživatele";
@@ -98,6 +109,7 @@
 "chat.upload.uploading_video" = "Nahrát video";
 "chat.upload.uploading_file" = "Nahrávání \"%@\"";
 "chat.upload.take_photo" = "Vyfotit fotografii";
+"chat.upload.shoot_video" = "Shoot Video";
 "chat.upload.choose_from_library" = "Vybrat z knihovny";
 "chat.upload.import_file" = "Importovat soubor z...";
 
@@ -141,3 +153,9 @@
 "chat.messages.list.empty" = "Nebyly nalezeny žádné zprávy";
 "chat.messages.pinned.list.title" = "Připnuté zprávy";
 "chat.messages.starred.list.title" = "Zprávy s hvězdičkou";
+
+// Settings
+"myaccount.settings.title" = "Settings";
+"myaccount.settings.contactus" = "Contact us";
+"myaccount.settings.license" = "License";
+"myaccount.settings.version" = "Version: %@ (%@)";

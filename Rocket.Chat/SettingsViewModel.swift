@@ -15,8 +15,20 @@ private enum BundleInfoKey: String {
 
 final class SettingsViewModel {
 
+    internal var title: String {
+        return localized("myaccount.settings.title")
+    }
+
+    internal var contactus: String {
+        return localized("myaccount.settings.contactus")
+    }
+
+    internal var license: String {
+        return localized("myaccount.settings.license")
+    }
+
     internal var formattedVersion: String {
-        return "Version: \(version) (\(build))"
+        return String(format: localized("myaccount.settings.version"), version, build)
     }
 
     internal var version: String {

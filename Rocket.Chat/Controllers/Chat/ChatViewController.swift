@@ -94,6 +94,8 @@ final class ChatViewController: SLKTextViewController {
             if let oldValue = oldValue, oldValue.identifier != subscription.identifier {
                 unsubscribe(for: oldValue)
             }
+
+            textView.text = DraftMessageManager.draftMessage(for: subscription)
         }
     }
 
@@ -313,6 +315,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func textViewDidChange(_ textView: UITextView) {
+        DraftMessageManager.update(draftMessage: textView.text, for: subscription)
         if textView.text?.isEmpty ?? true {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         } else {
@@ -347,6 +350,7 @@ final class ChatViewController: SLKTextViewController {
         })
 
         if let message = message {
+            DraftMessageManager.update(draftMessage: "", for: subscription)
             textView.text = ""
             rightButton.isEnabled = true
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
