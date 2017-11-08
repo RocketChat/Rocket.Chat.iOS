@@ -361,7 +361,7 @@ final class ChatViewController: SLKTextViewController {
                     message.map(response.result["result"], realm: realm)
                     realm.add(message, update: true)
 
-                    MessageTextCacheManager.shared.update(for: message, asyncUpdate: nil)
+                    MessageTextCacheManager.shared.update(for: message, completion: nil)
                 })
             }
         }
@@ -370,7 +370,9 @@ final class ChatViewController: SLKTextViewController {
     fileprivate func updateCellForMessage(identifier: String) {
         guard let indexPath = self.dataController.indexPathOfMessage(identifier: identifier) else { return }
 
-        self.collectionView?.reloadItems(at: [indexPath])
+        UIView.performWithoutAnimation {
+            collectionView?.reloadItems(at: [indexPath])
+        }
     }
 
     fileprivate func chatLogIsAtBottom() -> Bool {
@@ -511,11 +513,9 @@ final class ChatViewController: SLKTextViewController {
 
                                 let message = Message(value: self.messagesQuery[modified])
                                 let identifier = message.identifier
-                                let index = self.dataController.update(message, asyncUpdate: { [weak self] in
+                                let index = self.dataController.update(message, completion: { [weak self] in
                                     guard let identifier = identifier else { return }
-                                    DispatchQueue.main.async {
-                                        self?.updateCellForMessage(identifier: identifier)
-                                    }
+                                    self?.updateCellForMessage(identifier: identifier)
                                 })
                                 if index >= 0 && !indexPathModifications.contains(index) {
                                     indexPathModifications.append(index)
