@@ -216,9 +216,11 @@ extension ChatViewController {
     }
 
     func upload(_ file: FileUpload) {
+        guard let subscription = subscription else { return }
+
         startLoadingUpload(file: file)
 
-        UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { _ in
+        UploadManager.shared.upload(file: file, subscription: subscription, progress: { _ in
             // We currently don't have progress being called.
         }, completion: { [unowned self] (response, error) in
             self.stopLoadingUpload()
