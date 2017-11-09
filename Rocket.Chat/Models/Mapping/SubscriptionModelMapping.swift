@@ -13,12 +13,12 @@ import RealmSwift
 extension Subscription: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
-            self.identifier = values["_id"].string ?? ""
+            self.identifier = values["_id"].stringValue
         }
 
-        self.rid = values["rid"].string ?? ""
-        self.name = values["name"].string ?? ""
-        self.fname = values["fname"].string ?? ""
+        self.rid = values["rid"].stringValue
+        self.name = values["name"].stringValue
+        self.fname = values["fname"].stringValue
         self.unread = values["unread"].int ?? 0
         self.open = values["open"].bool ?? false
         self.alert = values["alert"].bool ?? false
@@ -29,7 +29,7 @@ extension Subscription: ModelMappeable {
         }
 
         if self.type == .directMessage {
-            let userId = values["u"]["_id"].string ?? ""
+            let userId = values["u"]["_id"].stringValue
             self.otherUserId = self.rid.replacingOccurrences(of: userId, with: "")
         }
 

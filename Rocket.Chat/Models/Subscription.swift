@@ -106,7 +106,7 @@ extension Subscription {
             SubscriptionManager.createDirectMessage(name, completion: { [weak self] (response) in
                 guard !response.isError() else { return }
 
-                let rid = response.result["result"]["rid"].string ?? ""
+                let rid = response.result["result"]["rid"].stringValue
                 Realm.executeOnMainThread({ realm in
                     if let obj = self {
                         obj.rid = rid
