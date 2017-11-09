@@ -14,8 +14,8 @@ class CustomField {
     class var type: String {
         return ""
     }
-    var name: String = ""
 
+    var name: String = ""
     var required: Bool = false
 
     func map(_ values: JSON, realm: Realm?) {

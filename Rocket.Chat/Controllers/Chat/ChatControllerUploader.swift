@@ -20,6 +20,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             alert.addAction(UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
                 self.openCamera()
             }))
+
+            alert.addAction(UIAlertAction(title: localized("chat.upload.shoot_video"), style: .default, handler: { (_) in
+                self.openCamera(video: true)
+            }))
         }
 
         alert.addAction(UIAlertAction(title: localized("chat.upload.choose_from_library"), style: .default, handler: { (_) in
@@ -40,7 +44,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         present(alert, animated: true, completion: nil)
     }
 
-    fileprivate func openCamera() {
+    fileprivate func openCamera(video: Bool = false) {
         guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
             return assertionFailure("Device camera is not availbale")
         }
@@ -50,7 +54,8 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .camera
         imagePicker.cameraFlashMode = .off
-        imagePicker.cameraCaptureMode = .photo
+        imagePicker.mediaTypes = video ? [kUTTypeMovie as String] : [kUTTypeImage as String]
+        imagePicker.cameraCaptureMode = video ? .video : .photo
         self.present(imagePicker, animated: true, completion: nil)
     }
 
@@ -71,31 +76,41 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         var filename = String.random()
         var file: FileUpload?
-        var assetURL: URL?
 
-        if let tempAssetURL = info[UIImagePickerControllerReferenceURL] as? URL {
-            assetURL = tempAssetURL
+        if let assetURL = info[UIImagePickerControllerReferenceURL] as? URL,
+            let asset = PHAsset.fetchAssets(withALAssetURLs: [assetURL], options: nil).firstObject {
+            if let resource = PHAssetResource.assetResources(for: asset).first {
+                filename = resource.originalFilename
+            }
 
-            if let asset = PHAsset.fetchAssets(withALAssetURLs: [tempAssetURL], options: nil).firstObject {
-                if let resource = PHAssetResource.assetResources(for: asset).first {
-                    filename = resource.originalFilename
+            let mimeType = UploadHelper.mimeTypeFor(assetURL)
+
+            if mimeType == "image/gif" {
+                PHImageManager.default().requestImageData(for: asset, options: nil) { data, _, _, _ in
+                    guard let data = data else { return }
+
+                    let file = UploadHelper.file(
+                        for: data,
+                        name: "\(filename.components(separatedBy: ".").first ?? "image").gif",
+                        mimeType: "image/gif"
+                    )
+
+                    self.upload(file)
+                    self.dismiss(animated: true, completion: nil)
                 }
+
+                return
             }
         }
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let resizedImage = image.resizeWith(width: 1024) ?? image
             guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
-            var mimeType: String?
-
-            if let assetURL = assetURL {
-                mimeType = UploadHelper.mimeTypeFor(assetURL)
-            }
 
             file = UploadHelper.file(
                 for: imageData,
                 name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
-                mimeType: mimeType ?? "image/jpeg"
+                mimeType: "image/jpeg"
             )
         }
 
@@ -244,9 +259,11 @@ extension ChatViewController {
     }
 
     func upload(_ file: FileUpload) {
+        guard let subscription = subscription else { return }
+
         startLoadingUpload(file: file)
 
-        UploadManager.shared.upload(file: file, subscription: self.subscription, progress: { _ in
+        UploadManager.shared.upload(file: file, subscription: subscription, progress: { _ in
             // We currently don't have progress being called.
         }, completion: { [unowned self] (response, error) in
             self.stopLoadingUpload()

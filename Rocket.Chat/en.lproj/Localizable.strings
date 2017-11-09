@@ -19,6 +19,9 @@
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "The URL you entered is invalid. Check it and try again, please!";
 
+"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.message" = "Could not connect to this server!";
+
 "alert.connection.invalid_version.title" = "Oops!";
 "alert.connection.invalid_version.message" = "The server you're trying to connect is using a version that's not supported by the app anymore: %@.\n\nWe require version %@.";
 
@@ -33,7 +36,7 @@
 "alert.audio_message.error.message" = "An error has occurred. Please, record your message again.";
 
 "alert.feature.wip.title" = "Oops!";
-"alert.feature.wip.message" = "We're still working on this feature, stay tunned!";
+"alert.feature.wip.message" = "We're still working on this feature, stay tuned!";
 
 "alert.socket_error.invalid_user.title" = "Session expired";
 "alert.socket_error.invalid_user.message" = "Your session has expired. Please log in again.";
@@ -41,11 +44,16 @@
 "alert.login_service_error.title" = "Authentication Error";
 "alert.login_service_error.message" = "Could not authenticate using this service. Please, try again.";
 
+"alert.authorization_error.title" = "Authorization Error";
+"alert.authorization_error.create_channel.description" = "You can't create channels";
+
 // Socket Connection
 "connection.offline.banner.message" = "You're offline, try connecting again";
 
 // Auth
 "auth.connect.button_connect" = "Connect";
+"auth.connect.ssl_required" = "It is required that your server supports SSL";
+"auth.connect.connecting" = "Connection in progress. Hold tight";
 
 // Subscriptions
 "subscriptions.search" = "Search";
@@ -70,8 +78,12 @@
 "user_menu.logout" = "Logout";
 
 // New Room View
+"new_room.title" = "New Channel";
+"new_room.buttons.create" = "Create";
 "new_room.cell.public_channel.title" = "Public Channel";
-"new_room.cell.public_chanell.description" = "Everyone can access this channel";
+"new_room.cell.public_channel.description" = "Everyone can access this channel";
+"new_room.cell.public_channel.description.public_only" = "You can only create public channels";
+"new_room.cell.public_channel.description.private_only" = "You can only create private channels";
 "new_room.cell.read_only.title" = "Read only channel";
 "new_room.cell.read_only.description" = "Only admin can write new messages";
 "new_room.group.channel.name" = "Channel Name";
@@ -83,6 +95,8 @@
 "chat.channel_preview_view.join" = "Join Channel";
 "chat.dm.start_conversation" = "This is the start of your conversation with %@";
 "chat.channel.start_conversation" = "This is the start of the conversation on %@";
+"chat.read_only" = "This room is read only";
+"chat.muted" = "You have been muted";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Block messages from user";
@@ -102,6 +116,7 @@
 "chat.upload.uploading_video" = "Uploading video";
 "chat.upload.uploading_file" = "Uploading \"%@\"";
 "chat.upload.take_photo" = "Take Photo";
+"chat.upload.shoot_video" = "Shoot Video";
 "chat.upload.choose_from_library" = "Choose From Library";
 "chat.upload.import_file" = "Import File From...";
 
@@ -138,10 +153,16 @@
 "chat.info.item.starred" = "Starred";
 
 // Members List
-"chat.members.list.title" = "Members (%d)";
+"chat.members.list.title" = "Members";
 
 // Messages List
 "chat.messages.list.title" = "Messages";
 "chat.messages.list.empty" = "No messages found";
 "chat.messages.pinned.list.title" = "Pinned Messages";
 "chat.messages.starred.list.title" = "Starred Messages";
+
+// Settings
+"myaccount.settings.title" = "Settings";
+"myaccount.settings.contactus" = "Contact us";
+"myaccount.settings.license" = "License";
+"myaccount.settings.version" = "Version: %@ (%@)";

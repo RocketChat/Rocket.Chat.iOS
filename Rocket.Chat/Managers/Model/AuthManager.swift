@@ -159,9 +159,9 @@ extension AuthManager {
     */
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
-        guard let urlApi = auth.serverApiURL else { return }
+        guard let apiHost = auth.apiHost else { return }
 
-        API.shared.host = urlApi
+        API.shared.host = apiHost
         API.shared.authToken = auth.token
         API.shared.userId = auth.userId
 
@@ -363,6 +363,7 @@ extension AuthManager {
         SocketManager.disconnect { (_, _) in
             GIDSignIn.sharedInstance().signOut()
 
+            DraftMessageManager.clearServerDraftMessages()
             DatabaseManager.removerSelectedDatabase()
 
             Realm.executeOnMainThread({ (realm) in

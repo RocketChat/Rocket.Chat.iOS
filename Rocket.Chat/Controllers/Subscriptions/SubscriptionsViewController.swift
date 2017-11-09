@@ -109,7 +109,7 @@ final class SubscriptionsViewController: BaseViewController {
     var searchResult: [Subscription]?
     var subscriptions: Results<Subscription>?
     var subscriptionsToken: NotificationToken?
-    var usersToken: NotificationToken?
+    var currentUserToken: NotificationToken?
 
     var groupInfomation: [[String: String]]?
     var groupSubscriptions: [[Subscription]]?
@@ -177,11 +177,12 @@ extension SubscriptionsViewController {
         guard let auth = AuthManager.isAuthenticated() else { return }
         subscriptions = auth.subscriptions.filterBy(name: text)
 
-        if text.characters.count == 0 {
+        if text.count == 0 {
             isSearchingLocally = false
             isSearchingRemotely = false
             searchResult = []
 
+            updateAll()
             groupSubscription()
             tableView.reloadData()
             tableView.tableFooterView = nil
@@ -215,7 +216,7 @@ extension SubscriptionsViewController {
         SubscriptionManager.spotlight(text) { [weak self] result in
             let currentText = self?.textFieldSearch.text ?? ""
 
-            if currentText.characters.count == 0 {
+            if currentText.count == 0 {
                 return
             }
 
@@ -246,18 +247,11 @@ extension SubscriptionsViewController {
         tableView?.reloadData()
     }
 
-    func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        if isSearchingLocally || isSearchingRemotely {
-            updateSearched()
-        } else {
-            updateAll()
-        }
-
-        groupSubscription()
-
+    func handleCurrentUserUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
         updateCurrentUserInformation()
-        SubscriptionManager.updateUnreadApplicationBadge()
+    }
 
+    func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
         // Update titleView information with subscription, can be
         // some status changes
         if let subscription = ChatViewController.shared?.subscription {
@@ -266,6 +260,13 @@ extension SubscriptionsViewController {
 
         // If side panel is visible, reload the data
         if MainChatViewController.shared?.sidePanelVisible ?? false {
+            if isSearchingLocally || isSearchingRemotely {
+                updateSearched()
+            } else {
+                updateAll()
+            }
+
+            groupSubscription()
             tableView?.reloadData()
         }
     }
@@ -301,8 +302,12 @@ extension SubscriptionsViewController {
         assigned = true
 
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.observe(handleModelUpdates)
-        usersToken = realm.objects(User.self).observe(handleModelUpdates)
+        subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
+
+        if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
+            let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
+            currentUserToken = query.observe(handleCurrentUserUpdates)
+        }
 
         groupSubscription()
     }
@@ -365,7 +370,7 @@ extension SubscriptionsViewController {
                 ])
 
                 unreadGroup = unreadGroup.sorted {
-                    return $0.type.rawValue < $1.type.rawValue
+                    return ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
                 }
 
                 groupSubscriptions?.append(unreadGroup)
@@ -378,7 +383,7 @@ extension SubscriptionsViewController {
                 ])
 
                 favoriteGroup = favoriteGroup.sorted {
-                    return $0.type.rawValue < $1.type.rawValue
+                    return ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
                 }
 
                 groupSubscriptions?.append(favoriteGroup)
@@ -516,7 +521,7 @@ extension SubscriptionsViewController: UITextFieldDelegate {
         searchText = (currentText as NSString).replacingCharacters(in: range, with: string)
 
         if string == "\n" {
-            if currentText.characters.count > 0 {
+            if currentText.count > 0 {
                 searchOnSpotlight(currentText)
             }
 
