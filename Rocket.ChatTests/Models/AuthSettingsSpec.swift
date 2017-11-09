@@ -11,16 +11,52 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class AuthSettingsModelMappingSpec: XCTestCase {
+// MARK: Test Instance
+
+extension AuthSettings {
+    static func testInstance() -> AuthSettings {
+        let settings = AuthSettings()
+        settings.siteURL = "https://open.rocket.chat"
+        return settings
+    }
+}
+
+class AuthSettingsSpec: XCTestCase {
+
+    // MARK: Registration Form
+
+    func testRegistrationFormPublic() {
+        let authSettings = AuthSettings()
+        authSettings.rawRegistrationForm = "Public"
+        XCTAssertEqual(authSettings.registrationForm, .isPublic, "type is public for Public")
+    }
+
+    func testRegistrationFormDisabled() {
+        let authSettings = AuthSettings()
+        authSettings.rawRegistrationForm = "Disabled"
+        XCTAssertEqual(authSettings.registrationForm, .isDisabled, "type is disabled for Disabled")
+    }
+
+    func testRegistrationFormSecretURL() {
+        let authSettings = AuthSettings()
+        authSettings.rawRegistrationForm = "Secret URL"
+        XCTAssertEqual(authSettings.registrationForm, .isSecretURL, "type is secretURL for Secret URL")
+    }
+
+    func testRegistrationFormInvalid() {
+        let authSettings = AuthSettings()
+        authSettings.rawRegistrationForm = "Foobar"
+        XCTAssertEqual(authSettings.registrationForm, .isPublic, "type is public for invalid")
+    }
+
+    // MARK: Custom Fields
+
     func testCustomFieldsCorrectJsonMapToArray() {
-        // arrange
         let authSettings = AuthSettings()
         authSettings.rawCustomFields = jsonCustomFields()
 
-        // act
         let customFields = authSettings.customFields
 
-        // assert
         XCTAssertEqual(customFields.count, 2, "will have correct custom fields")
     }
 
@@ -30,14 +66,11 @@ class AuthSettingsModelMappingSpec: XCTestCase {
     }
 
     func testCustomFieldsBadJsonMapToEmptyArray() {
-        // arrange
         let authSettings = AuthSettings()
         authSettings.rawCustomFields = ""
 
-        // act
         let customFields = authSettings.customFields
 
-        // assert
         XCTAssert(customFields.isEmpty, "will have empty array of custom fields")
     }
 }

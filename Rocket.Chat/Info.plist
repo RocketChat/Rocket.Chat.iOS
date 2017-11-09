@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.7.0</string>
+	<string>1.7.2</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>109</string>
+	<string>115</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -69,7 +69,9 @@
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>
-	<string>To take photos and upload it</string>
+	<string>To take photos and record videos</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To record and upload audio and videos</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To upload photos from your library</string>
 	<key>NSMicrophoneUsageDescription</key>

@@ -11,7 +11,19 @@ import RealmSwift
 
 @testable import Rocket_Chat
 
+// MARK: Test Instance
+
+extension Auth {
+    static func testInstance() -> Auth {
+        let auth = Auth()
+        auth.settings = AuthSettings.testInstance()
+        return auth
+    }
+}
+
 class AuthSpec: XCTestCase {
+
+    // MARK: Setup
 
     override func setUp() {
         super.setUp()
@@ -24,6 +36,8 @@ class AuthSpec: XCTestCase {
             realm.deleteAll()
         })
     }
+
+    // MARK: Tests
 
     func testAuthObject() {
         let serverURL = "http://foobar.com"
@@ -42,5 +56,12 @@ class AuthSpec: XCTestCase {
             XCTAssert(results.count == 1, "Auth object was created with success")
             XCTAssert(first?.serverURL == serverURL, "Auth object was created with success")
         })
+    }
+
+    func testAPIHost() {
+        let object = Auth()
+        object.serverURL = "wss://team.rocket.chat/websocket"
+
+        XCTAssertEqual(object.apiHost?.absoluteString, "https://team.rocket.chat", "apiHost returns API Host correctly")
     }
 }

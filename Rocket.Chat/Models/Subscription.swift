@@ -45,12 +45,21 @@ class Subscription: BaseModel {
 
     @objc dynamic var roomTopic: String?
     @objc dynamic var roomDescription: String?
+    @objc dynamic var roomUpdatedAt: Date?
+    @objc dynamic var roomReadOnly = false
+
+    let roomMuted = RealmSwift.List<String>()
+
+    @objc dynamic var roomOwnerId: String?
+    var roomOwner: User? {
+        guard let roomOwnerId = roomOwnerId else { return nil }
+        return User.find(withIdentifier: roomOwnerId)
+    }
 
     @objc dynamic var otherUserId: String?
     var directMessageUser: User? {
-        guard let realm = Realm.shared else { return nil }
         guard let otherUserId = otherUserId else { return nil }
-        return realm.objects(User.self).filter("identifier = '\(otherUserId)'").first
+        return User.find(withIdentifier: otherUserId)
     }
 
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
@@ -71,7 +80,7 @@ extension Subscription {
     }
 
     func isValid() -> Bool {
-        return self.rid.characters.count > 0
+        return self.rid.count > 0
     }
 
     func isJoined() -> Bool {

@@ -1,0 +1,161 @@
+/* 
+  Localizable.strings
+  Rocket.Chat
+
+  Created by Rafael K. Streit on 8/27/16.
+  Copyright © 2016 Rocket.Chat. All rights reserved.
+*/
+
+
+// Global
+"global.ok" = "OK";
+"global.cancel" = "Zrušit";
+
+// Errors
+"error.socket.default_error_title" = "Jejky!";
+"error.socket.default_error_message" = "Něco se pokazilo, zkuste to prosím znovu.";
+
+// Alerts
+"alert.connection.invalid_url.title" = "Jejky!";
+"alert.connection.invalid_url.message" = "Zadaná adresa URL je neplatná. Zkontrolujte to a zkuste to znovu, prosím!";
+
+"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.message" = "Could not connect to this server!";
+
+"alert.connection.invalid_version.title" = "Jejky!";
+"alert.connection.invalid_version.message" = "Server na který se pokoušíte připojit, používá verzi, která aplikace již nepodporuje: %@.\n\nJe požadováa verze %@.";
+
+"alert.settings.set_mail_app.title" = "Jejky!";
+"alert.settings.set_mail_app.message" = "Žádné mailové účty. Prosím nastavte účet pošty, aby bylo možné odesílat e-maily.";
+
+"alert.feature.wip.title" = "Jejky!";
+"alert.feature.wip.message" = "Stále pracujeme na této funkci, ale není ještě dokončena.";
+
+"alert.socket_error.invalid_user.title" = "Relace vypršela";
+"alert.socket_error.invalid_user.message" = "Platnost Vaší relace vypršela. Přihlaste se znovu, prosím.";
+
+"alert.login_service_error.title" = "Chyba ověření";
+"alert.login_service_error.message" = "Nelze ověřit pomocí této služby. Prosím zkuste to znovu.";
+
+"alert.authorization_error.title" = "Authorization Error";
+"alert.authorization_error.create_channel.description" = "You can't create channels";
+
+// Socket Connection
+"connection.offline.banner.message" = "Jste offline, zkuste se znovu připojit";
+
+// Auth
+"auth.connect.button_connect" = "Připojit";
+"auth.connect.ssl_required" = "Je nutné, aby Váš server podporoval protokol SSL";
+"auth.connect.connecting" = "Připojení probíhá. Držte se pevně";
+
+// Subscriptions
+"subscriptions.search" = "Hledat";
+"subscriptions.search_results" = "Výsledky";
+"subscriptions.search.load_more_results" = "Nahrát více výsledků";
+"subscriptions.unreads" = "Nepřečtené";
+"subscriptions.favorites" = "Oblíbené";
+"subscriptions.channels" = "Kanály";
+"subscriptions.direct_messages" = "Přímé zprávy";
+
+// Servers
+"servers.add_new_team" = "Přidat nový tým";
+"servers.action.connect" = "Připojit";
+"servers.action.remove" = "Odstranit tým";
+
+// User Menu
+"user_menu.online" = "Online";
+"user_menu.away" = "Pryč";
+"user_menu.busy" = "Zaneprázdněn";
+"user_menu.invisible" = "Neviditelný";
+"user_menu.settings" = "Můj účet";
+"user_menu.logout" = "Odhlásit";
+
+// New Room View
+"new_room.title" = "New Channel";
+"new_room.buttons.create" = "Create";
+"new_room.cell.public_channel.title" = "Veřejný kanál";
+"new_room.cell.public_channel.description" = "K tomuto kanálu má přístup každý";
+"new_room.cell.public_channel.description.public_only" = "You can only create public channels";
+"new_room.cell.public_channel.description.private_only" = "You can only create private channels";
+"new_room.cell.read_only.title" = "Kanál pouze pro čtení";
+"new_room.cell.read_only.description" = "Pouze admin může psát nové zprávy";
+"new_room.group.channel.name" = "Jméno kanálu";
+"new_room.group.channel.footer" = "Názvy musí být malým písmen a kratší než 22 znaků";
+"new_room.cell.channel_name.title" = "Jméno kanálu";
+
+// Chat
+"chat.channel_preview_view.title" = "Toto je náhled kanálu #%@";
+"chat.channel_preview_view.join" = "Připojit se do kanálu";
+"chat.dm.start_conversation" = "Toto je začátek vaší konverzace s %@";
+"chat.channel.start_conversation" = "Toto je začátek konverzace %@";
+"chat.read_only" = "Tato místnost je pouze pro čtení";
+"chat.muted" = "You have been muted";
+
+// Chat Message Actions
+"chat.message.actions.block" = "Blokovat zprávy od uživatele";
+"chat.message.actions.report" = "Nahlásit zprávu";
+"chat.message.actions.copy" = "Kopírovat";
+"chat.message.actions.pin" = "Připnout zprávu";
+"chat.message.actions.unpin" = "Odepnout zprávu";
+"chat.message.actions.quote" = "Citace zprávy";
+"chat.message.actions.reply" = "Odpovědět na zprávu";
+
+// Chat Message Report
+"chat.message.report.success.title" = "Zpráva byla nahlášena";
+"chat.message.report.success.message" = "Zpráva byla úspěšně nahlášena, děkujeme!";
+
+// Chat Upload
+"chat.upload.uploading_image" = "Nahrát obrázek";
+"chat.upload.uploading_video" = "Nahrát video";
+"chat.upload.uploading_file" = "Nahrávání \"%@\"";
+"chat.upload.take_photo" = "Vyfotit fotografii";
+"chat.upload.shoot_video" = "Shoot Video";
+"chat.upload.choose_from_library" = "Vybrat z knihovny";
+"chat.upload.import_file" = "Importovat soubor z...";
+
+// Chat Download
+"chat.download.downloading_file" = "Stahuji \"%@\"";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "Klikněte pro otevření souboru";
+
+// Message Types
+"chat.message.type.room_name_changed" = "Jméno místnosti bylo změněno: %@ by %@";
+"chat.message.type.user_added_by" = "Uživatel %@ byl přidán %@";
+"chat.message.type.user_removed_by" = "Uživatel %@ byl odebrán %@";
+"chat.message.type.user_left" = "Opustil kanál";
+"chat.message.type.user_joined" = "Připojil se do kanálu";
+"chat.message.type.user_muted" = "Uživatel %@ byl ztlumen (uživatelem %@)";
+"chat.message.type.user_unmuted" = "Uživateli %@ bylo zrušeno ztlumení (uživatelem %@)";
+"chat.message.type.welcome" = "Vítejte %@";
+"chat.message.type.message_removed" = "Zpráva odebrána";
+"chat.message.type.subscription_role_added" = "%@ was set %@ by %@";
+"chat.message.type.subscription_role_removed" = "%@ is no longer %@ by %@";
+"chat.message.type.room_archived" = "Tato místnost byla archivována uživatelem %@";
+"chat.message.type.room_unarchived" = "Tato místnost byla vyndána z archivu uživatelem %@";
+
+// Chat Information
+"chat.info.title" = "Info";
+"chat.info.item.topic" = "Téma";
+"chat.info.item.no_topic" = "Bez tématu";
+"chat.info.item.description" = "Popis";
+"chat.info.item.no_description" = "Žádný popis";
+"chat.info.item.notifications" = "Upozornění";
+"chat.info.item.members" = "Členové";
+"chat.info.item.pinned" = "Připnuto";
+"chat.info.item.starred" = "S hvězdičkou";
+
+// Members List
+"chat.members.list.title" = "Členové";
+
+// Messages List
+"chat.messages.list.title" = "Zprávy";
+"chat.messages.list.empty" = "Nebyly nalezeny žádné zprávy";
+"chat.messages.pinned.list.title" = "Připnuté zprávy";
+"chat.messages.starred.list.title" = "Zprávy s hvězdičkou";
+
+// Settings
+"myaccount.settings.title" = "Settings";
+"myaccount.settings.contactus" = "Contact us";
+"myaccount.settings.license" = "License";
+"myaccount.settings.version" = "Version: %@ (%@)";
