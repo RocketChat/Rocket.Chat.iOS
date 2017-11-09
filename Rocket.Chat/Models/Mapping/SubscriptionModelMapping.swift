@@ -43,8 +43,8 @@ extension Subscription: ModelMappeable {
     }
 
     func mapRoom(_ values: JSON) {
-        self.roomDescription = values["description"].string ?? ""
-        self.roomTopic = values["topic"].string ?? ""
+        self.roomDescription = values["description"].stringValue
+        self.roomTopic = values["topic"].stringValue
 
         self.roomMuted.removeAll()
         if let roomMuted = values["muted"].array?.flatMap({ $0.string }) {
@@ -57,10 +57,6 @@ extension Subscription: ModelMappeable {
 
         if let ownerId = values["u"]["_id"].string {
             self.roomOwnerId = ownerId
-        }
-
-        if let updatedAt = values["_updatedAt"]["$date"].double {
-            self.roomUpdatedAt = Date.dateFromInterval(updatedAt)
         }
     }
 }
