@@ -10,49 +10,6 @@ import UIKit
 import SlackTextViewController
 
 extension ChatViewController {
-
-    func quoteStringFor(_ message: Message) -> String? {
-        guard
-            let subscription = subscription,
-            let url = subscription.auth?.baseURL(),
-            let id = message.identifier
-        else {
-            return nil
-        }
-
-        let path: String
-
-        switch subscription.type {
-        case .channel:
-            path = "channel"
-        case .group:
-            path = "group"
-        case .directMessage:
-            path = "direct"
-        }
-
-        return " [ ](\(url)/\(path)/\(subscription.name)?msg=\(id))"
-    }
-
-    func replyStringFor(_ message: Message) -> String? {
-        guard
-            let subscription = subscription,
-            let quoteString = quoteStringFor(message)
-        else {
-            return nil
-        }
-
-        guard
-            subscription.type != .directMessage,
-            let username = message.user?.username,
-            username != AuthManager.currentUser()?.username
-        else {
-            return quoteString
-        }
-
-        return " @\(username)\(quoteString)"
-    }
-
     func setupReplyView() {
         replyView = ReplyView.instantiateFromNib()
         replyView.backgroundColor = textInputbar.addonContentView.backgroundColor
@@ -80,7 +37,7 @@ extension ChatViewController {
 
         textView.becomeFirstResponder()
 
-        replyString = (onlyQuote ? quoteStringFor(message) : replyStringFor(message)) ?? ""
+        replyString = (onlyQuote ? message.quoteString : message.replyString) ?? ""
 
         scrollToBottom()
     }
