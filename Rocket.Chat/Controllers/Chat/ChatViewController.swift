@@ -372,9 +372,17 @@ final class ChatViewController: SLKTextViewController {
                     message.map(response.result["result"], realm: realm)
                     realm.add(message, update: true)
 
-                    MessageTextCacheManager.shared.update(for: message)
+                    MessageTextCacheManager.shared.update(for: message, completion: nil)
                 })
             }
+        }
+    }
+
+    fileprivate func updateCellForMessage(identifier: String) {
+        guard let indexPath = self.dataController.indexPathOfMessage(identifier: identifier) else { return }
+
+        UIView.performWithoutAnimation {
+            collectionView?.reloadItems(at: [indexPath])
         }
     }
 
@@ -523,7 +531,11 @@ final class ChatViewController: SLKTextViewController {
                                 }
 
                                 let message = Message(value: self.messagesQuery[modified])
-                                let index = self.dataController.update(message)
+                                let identifier = message.identifier
+                                let index = self.dataController.update(message, completion: { [weak self] in
+                                    guard let identifier = identifier else { return }
+                                    self?.updateCellForMessage(identifier: identifier)
+                                })
                                 if index >= 0 && !indexPathModifications.contains(index) {
                                     indexPathModifications.append(index)
                                 }
