@@ -64,7 +64,7 @@ class LoginServiceSpec: XCTestCase {
         XCTAssertEqual(loginService.scope, "openid")
         XCTAssertEqual(loginService.custom, true)
         XCTAssertEqual(loginService.authorizePath, "/oauth/authorize")
-        XCTAssertEqual(loginService.serverURL, "https://open.rocket.chat")
+        XCTAssertEqual(loginService.serverUrl, "https://open.rocket.chat")
         XCTAssertEqual(loginService.service, "openrocketchat")
         XCTAssertEqual(loginService.loginStyle, "popup")
         XCTAssertEqual(loginService.tokenSentVia, "header")
