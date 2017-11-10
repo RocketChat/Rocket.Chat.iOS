@@ -65,7 +65,11 @@ class OAuthManager {
     }
 
     static func credentialsForUrlFragment(_ fragment: String) -> OAuthCredentials? {
-        let fragmentJSON = JSON(parseJSON: NSString(string: fragment).removingPercentEncoding ?? "")
+        guard let normalizedFragment = fragment.removingPercentEncoding else {
+            return nil
+        }
+
+        let fragmentJSON = JSON(parseJSON: normalizedFragment)
         return OAuthCredentials(json: fragmentJSON)
     }
 
