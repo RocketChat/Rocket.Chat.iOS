@@ -14,9 +14,6 @@ class OAuthViewController: OAuthWebViewController {
 
     var authorizeUrl: URL?
     var callbackUrl: URL?
-    var webView: WKWebView!
-
-    var activityIndicator: UIActivityIndicatorView!
 
     var success: ((OAuthCredentials) -> Void)?
     var failure: (() -> Void)?
@@ -27,31 +24,27 @@ class OAuthViewController: OAuthWebViewController {
         self.callbackUrl = callbackUrl
         self.success = success
         self.failure = failure
-        self.viewDidLoad()
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        webView = WKWebView(frame: view.bounds)
+    lazy var webView: WKWebView = {
+        let webView = WKWebView(frame: view.bounds)
         webView.navigationDelegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": webView]))
         view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": webView]))
+        return webView
+    }()
 
-        activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
         activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
         activityIndicator.layer.cornerRadius = 10
         activityIndicator.backgroundColor = UIColor.black.withAlphaComponent(0.5)
         activityIndicator.center = view.center
-
         view.addSubview(activityIndicator)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-    }
+        return activityIndicator
+    }()
 
     override func handle(_ url: URL) {
         let req = URLRequest(url: url)
