@@ -14,15 +14,15 @@ extension Message: ModelMappeable {
     //swiftlint:disable cyclomatic_complexity function_body_length
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
-            self.identifier = values["_id"].string ?? ""
+            self.identifier = values["_id"].stringValue
         }
 
-        self.rid = values["rid"].string ?? ""
-        self.text = values["msg"].string ?? ""
-        self.avatar = values["avatar"].string ?? ""
-        self.alias = values["alias"].string ?? ""
+        self.rid = values["rid"].stringValue
+        self.text = values["msg"].stringValue
+        self.avatar = values["avatar"].stringValue
+        self.alias = values["alias"].stringValue
         self.internalType = values["t"].string ?? "t"
-        self.role = values["role"].string ?? ""
+        self.role = values["role"].stringValue
         self.pinned = values["pinned"].bool ?? false
         self.groupable = values["groupable"].bool ?? true
 
