@@ -55,4 +55,22 @@ class OAuthViewControllerSpec: XCTestCase {
         _ = controller.activityIndicator
         XCTAssert(controller.view.subviews.contains { view in view as? UIActivityIndicatorView != nil })
     }
+
+    func testWebViewDidStartProvisionalNavigation() {
+        let controller = OAuthViewController.testInstance()
+
+        controller.webView(controller.webView, didStartProvisionalNavigation: nil)
+
+        XCTAssertTrue(controller.activityIndicator.isAnimating)
+        XCTAssertFalse(controller.activityIndicator.isHidden)
+    }
+
+    func testWebViewDidFinishNavigation() {
+        let controller = OAuthViewController.testInstance()
+
+        controller.webView(controller.webView, didFinish: nil)
+
+        XCTAssertFalse(controller.activityIndicator.isAnimating)
+        XCTAssertTrue(controller.activityIndicator.isHidden)
+    }
 }
