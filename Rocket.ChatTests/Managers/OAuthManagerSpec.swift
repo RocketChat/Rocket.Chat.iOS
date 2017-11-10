@@ -67,4 +67,17 @@ class OAuthManagerSpec: XCTestCase {
 
         XCTAssertNil(OAuthManager.oauthSwift(for: loginService), "oauthSwift is nil")
     }
+
+    func testCredentialsForUrlFragment() {
+        let fragment = "%7B%22credentialToken%22:%22token%22,%22credentialSecret%22:%22secret%22%7D"
+
+        let credentials = OAuthManager.credentialsForUrlFragment(fragment)
+
+        XCTAssertEqual(credentials?.token, "token", "token is correct")
+        XCTAssertEqual(credentials?.secret, "secret", "secret is correct")
+
+        let malformedFragment = "%7B%22credentialToken%22:%22token%22,%22credentialSecret%22:%22secret%22%7"
+
+        XCTAssertNil(OAuthManager.credentialsForUrlFragment(malformedFragment), "credentials is nil for malformed fragment")
+    }
 }

@@ -93,4 +93,8 @@ extension String {
     func removingWhitespaces() -> String {
         return components(separatedBy: .whitespaces).joined()
     }
+
+    var removingPercentEncoding: String? {
+        return NSString(string: self).removingPercentEncoding
+    }
 }
