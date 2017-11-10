@@ -13,7 +13,7 @@ class LoginService: BaseModel {
     @objc dynamic var service: String?
     @objc dynamic var clientId: String?
     @objc dynamic var custom = false
-    @objc dynamic var serverURL: String?
+    @objc dynamic var serverUrl: String?
     @objc dynamic var tokenPath: String?
     @objc dynamic var identityPath: String?
     @objc dynamic var authorizePath: String?
@@ -32,24 +32,24 @@ class LoginService: BaseModel {
 extension LoginService {
     var authorizeUrl: String? {
         guard
-            let serverURL = serverURL,
+            let serverUrl = serverUrl,
             let authorizePath = authorizePath
         else {
             return nil
         }
 
-        return "\(serverURL)\(authorizePath)"
+        return "\(serverUrl)\(authorizePath)"
     }
 
     var accessTokenUrl: String? {
         guard
-            let serverURL = serverURL,
+            let serverUrl = serverUrl,
             let tokenPath = tokenPath
             else {
                 return nil
         }
 
-        return "\(serverURL)\(tokenPath)"
+        return "\(serverUrl)\(tokenPath)"
     }
 }
 

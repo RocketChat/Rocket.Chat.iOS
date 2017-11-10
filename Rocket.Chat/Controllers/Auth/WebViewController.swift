@@ -46,7 +46,6 @@ class WebViewController: OAuthWebViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
     }
 
     override func handle(_ url: URL) {

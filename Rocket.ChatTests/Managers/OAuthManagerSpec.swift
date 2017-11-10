@@ -53,4 +53,18 @@ class OAuthManagerSpec: XCTestCase {
     func testState() {
         XCTAssertNotNil(OAuthManager.state(), "returns non nil state")
     }
+
+    func testOauthSwiftForLoginService() {
+        let loginService = LoginService()
+        loginService.serverUrl = "https://open.rocket.chat/"
+        loginService.authorizePath = "authorize_path"
+        loginService.tokenPath = "token_path"
+        loginService.clientId = "client_id"
+
+        XCTAssertNotNil(OAuthManager.oauthSwift(for: loginService), "oauthSwift is not nil")
+
+        loginService.authorizePath = nil
+
+        XCTAssertNil(OAuthManager.oauthSwift(for: loginService), "oauthSwift is nil")
+    }
 }
