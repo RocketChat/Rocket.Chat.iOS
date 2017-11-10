@@ -12,19 +12,19 @@ import RealmSwift
 
 extension LoginService: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
-        self.service = values["service"].string ?? ""
-        self.clientId = values["clientId"].string ?? ""
-        self.custom = values["custom"].bool ?? false
-        self.serverUrl = values["serverURL"].string ?? ""
-        self.tokenPath = values["tokenPath"].string ?? ""
-        self.identityPath = values["identityPath"].string ?? ""
-        self.authorizePath = values["authorizePath"].string ?? ""
-        self.scope = values["scope"].string ?? ""
-        self.buttonLabelText = values["buttonLabelText"].string ?? ""
-        self.buttonLabelColor = values["buttonLabelColor"].string ?? ""
-        self.tokenSentVia = values["tokenSentVia"].string ?? ""
-        self.usernameField = values["usernameField"].string ?? ""
-        self.mergeUsers = values["mergeUsers"].bool ?? false
+        self.service = values["service"].stringValue
+        self.clientId = values["clientId"].stringValue
+        self.custom = values["custom"].boolValue
+        self.serverUrl = values["serverURL"].stringValue
+        self.tokenPath = values["tokenPath"].stringValue
+        self.identityPath = values["identityPath"].stringValue
+        self.authorizePath = values["authorizePath"].stringValue
+        self.scope = values["scope"].stringValue
+        self.buttonLabelText = values["buttonLabelText"].stringValue
+        self.buttonLabelColor = values["buttonLabelColor"].stringValue
+        self.tokenSentVia = values["tokenSentVia"].stringValue
+        self.usernameField = values["usernameField"].stringValue
+        self.mergeUsers = values["mergeUsers"].boolValue
         self.loginStyle = values["loginStyle"].string
         self.buttonColor = values["buttonColor"].string
     }

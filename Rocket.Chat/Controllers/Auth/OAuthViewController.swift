@@ -1,5 +1,5 @@
 //
-//  WebViewController.swift
+//  OAuthViewController.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 10/18/17.
@@ -10,18 +10,23 @@ import OAuthSwift
 import UIKit
 import WebKit
 
-class WebViewController: OAuthWebViewController {
+class OAuthViewController: OAuthWebViewController {
 
-    var targetURL: URL?
+    var authorizeUrl: URL?
+    var callbackUrl: URL?
     var webView: WKWebView!
-
-    var didNavigate: ((URL?) -> Bool)?
 
     var activityIndicator: UIActivityIndicatorView!
 
-    convenience init(authorizeURL: URL?) {
+    var success: ((OAuthCredentials) -> Void)?
+    var failure: (() -> Void)?
+
+    convenience init(authorizeUrl: URL, callbackUrl: URL, success: @escaping (OAuthCredentials) -> Void, failure: @escaping () -> Void) {
         self.init()
-        self.targetURL = authorizeURL
+        self.authorizeUrl = authorizeUrl
+        self.callbackUrl = callbackUrl
+        self.success = success
+        self.failure = failure
         self.viewDidLoad()
     }
 
@@ -49,29 +54,36 @@ class WebViewController: OAuthWebViewController {
     }
 
     override func handle(_ url: URL) {
-        targetURL = url
-        loadAddressURL()
-    }
-
-    func loadAddressURL() {
-        guard let url = targetURL else {
-            return
-        }
         let req = URLRequest(url: url)
         webView.load(req)
     }
 }
 
-extension WebViewController: WKNavigationDelegate {
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-
-        if didNavigate?(navigationAction.request.url) ?? false {
-            decisionHandler(.allow)
-            dismissWebViewController()
-            return
+extension OAuthViewController: WKNavigationDelegate {
+    func oauthCredentials(from url: URL) -> OAuthCredentials? {
+        guard let fragment = url.fragment else {
+            return nil
         }
 
+        return OAuthManager.credentialsForUrlFragment(fragment)
+    }
+
+    func isCallback(url: URL) -> Bool {
+        return url.host == callbackUrl?.host && url.path == callbackUrl?.path
+    }
+
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         decisionHandler(.allow)
+        guard let url = navigationAction.request.url, isCallback(url: url) else { return }
+
+        if url.fragment != nil {
+            dismissWebViewController()
+            if let credentials = oauthCredentials(from: url) {
+                success?(credentials)
+            } else {
+                failure?()
+            }
+        }
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {
