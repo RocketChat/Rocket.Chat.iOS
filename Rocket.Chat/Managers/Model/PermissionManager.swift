@@ -70,15 +70,15 @@ struct PermissionManager {
         }
     }
 
-    static func roles(for permission: PermissionType) -> List<String>? {
-        let object = Realm.shared?.object(ofType: Permission.self, forPrimaryKey: permission.rawValue)
+    static func roles(for permission: PermissionType, realm: Realm? = Realm.shared) -> List<String>? {
+        let object = realm?.object(ofType: Permission.self, forPrimaryKey: permission.rawValue)
         return object?.roles
     }
 }
 
 extension User {
-    func hasPermission(_ permission: PermissionType) -> Bool {
-        guard let permissionRoles = PermissionManager.roles(for: permission) else { return false }
+    func hasPermission(_ permission: PermissionType, realm: Realm? = Realm.shared) -> Bool {
+        guard let permissionRoles = PermissionManager.roles(for: permission, realm: realm) else { return false }
         for userRole in self.roles {
             for permissionRole in permissionRoles where userRole == permissionRole {
                     return true
