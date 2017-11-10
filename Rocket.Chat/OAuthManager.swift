@@ -31,11 +31,13 @@ class OAuthCredentials {
 class OAuthManager {
     private static var oauthSwift: OAuth2Swift?
 
+    @discardableResult
     static func authorize(loginService: LoginService, at server: URL, viewController: UIViewController, success: @escaping (OAuthCredentials) -> Void, failure: @escaping () -> Void) -> Bool {
         guard
-            let callbackURL = callbackURL(for: loginService, server: server),
+            let callbackUrl = callbackUrl(for: loginService, server: server),
             let oauthSwift = oauthSwift(for: loginService),
-            let authorizeURL = loginService.authorizeUrl,
+            let authorizeUrlString = loginService.authorizeUrl,
+            let authorizeUrl = URL(string: authorizeUrlString),
             let scope = loginService.scope,
             let state = state()
         else {
@@ -45,31 +47,12 @@ class OAuthManager {
 
         self.oauthSwift = oauthSwift
 
-        let handler = WebViewController(authorizeURL: URL(string: authorizeURL))
+        let handler = OAuthViewController(authorizeUrl: authorizeUrl, callbackUrl: callbackUrl, success: success, failure: failure)
         oauthSwift.removeCallbackNotificationObserver()
         viewController.navigationController?.pushViewController(handler, animated: true)
-        handler.didNavigate = { url in
-            guard
-                let url = url,
-                url.host == callbackURL.host &&
-                url.path == callbackURL.path,
-                let fragment = url.fragment
-            else {
-                return false
-            }
-
-            guard let credentials = credentialsForUrlFragment(fragment) else {
-                failure()
-                return true
-            }
-
-            success(credentials)
-            return true
-        }
 
         oauthSwift.authorizeURLHandler = handler
-        return oauthSwift.authorize(withCallbackURL: callbackURL, scope: scope,
-                             state: state, success: { _, _, _  in }, failure: { _ in failure() }) != nil
+        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { _ in failure() }) != nil
     }
 
     static func credentialsForUrlFragment(_ fragment: String) -> OAuthCredentials? {
@@ -81,7 +64,7 @@ class OAuthManager {
         return OAuthCredentials(json: fragmentJSON)
     }
 
-    static func callbackURL(for loginService: LoginService, server: URL) -> URL? {
+    static func callbackUrl(for loginService: LoginService, server: URL) -> URL? {
         guard
             let host = server.host,
             let service = loginService.service

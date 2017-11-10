@@ -195,7 +195,7 @@
 		800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800FCD481F728E6A00D9A692 /* ChannelInfoUserCell.swift */; };
 		800FCD501F728EC800D9A692 /* MemberCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800FCD491F728E6A00D9A692 /* MemberCell.swift */; };
 		800FCD511F728EC800D9A692 /* MemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800FCD4A1F728E6A00D9A692 /* MemberCell.xib */; };
-		80113DF81F98330C0048F2C2 /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80113DF71F98330B0048F2C2 /* WebViewController.swift */; };
+		80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80113DF71F98330B0048F2C2 /* OAuthViewController.swift */; };
 		80113DFA1F9E086D0048F2C2 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80113DF91F9E086D0048F2C2 /* OAuthManager.swift */; };
 		80235D1B1F74070100A56CA5 /* SubscriptionMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */; };
 		80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */; };
@@ -485,7 +485,7 @@
 		800FCD481F728E6A00D9A692 /* ChannelInfoUserCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChannelInfoUserCell.swift; sourceTree = "<group>"; };
 		800FCD491F728E6A00D9A692 /* MemberCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberCell.swift; sourceTree = "<group>"; };
 		800FCD4A1F728E6A00D9A692 /* MemberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCell.xib; sourceTree = "<group>"; };
-		80113DF71F98330B0048F2C2 /* WebViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebViewController.swift; path = Controllers/Auth/WebViewController.swift; sourceTree = "<group>"; };
+		80113DF71F98330B0048F2C2 /* OAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthViewController.swift; path = Controllers/Auth/OAuthViewController.swift; sourceTree = "<group>"; };
 		80113DF91F9E086D0048F2C2 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequest.swift; sourceTree = "<group>"; };
 		80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequestSpec.swift; sourceTree = "<group>"; };
@@ -794,7 +794,7 @@
 				414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */,
 				77BA814E1F87B2BE00F295F4 /* SignupViewController+CustomFields.swift */,
 				412719431E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift */,
-				80113DF71F98330B0048F2C2 /* WebViewController.swift */,
+				80113DF71F98330B0048F2C2 /* OAuthViewController.swift */,
 				412719451E6B403700461FEE /* RegisterUsernameViewController.swift */,
 				41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */,
 			);
@@ -1907,7 +1907,7 @@
 				41DAE93E1D318F350098E068 /* Subscription.swift in Sources */,
 				41D4ABAB1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
-				80113DF81F98330C0048F2C2 /* WebViewController.swift in Sources */,
+				80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */,
 				41BD37E11E290F2900CBC4C2 /* UserModelMapping.swift in Sources */,
 				412BCC871E55C6B800F7F4EE /* ChatMessageTextView.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,

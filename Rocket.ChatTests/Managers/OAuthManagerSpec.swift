@@ -36,18 +36,18 @@ class OAuthManagerSpec: XCTestCase {
         XCTAssertNil(OAuthCredentials(json: json), "credentials is nil")
     }
 
-    func testCallbackURL() {
+    func testCallbackUrl() {
         let loginService = LoginService()
         loginService.service = "github"
 
         let serverURL: URL! = URL(string: "https://open.rocket.chat")
         let expectedURL: URL! = URL(string: "https://open.rocket.chat/_oauth/github")
 
-        XCTAssertEqual(OAuthManager.callbackURL(for: loginService, server: serverURL), expectedURL, "callbackURL returns expected url")
+        XCTAssertEqual(OAuthManager.callbackUrl(for: loginService, server: serverURL), expectedURL, "callbackURL returns expected url")
 
         let malformedServerURL: URL! = URL(string: "open.rocket.chat")
 
-        XCTAssertNil(OAuthManager.callbackURL(for: loginService, server: malformedServerURL), "callbackURL returns nil with malformed server URL")
+        XCTAssertNil(OAuthManager.callbackUrl(for: loginService, server: malformedServerURL), "callbackURL returns nil with malformed server URL")
     }
 
     func testState() {
