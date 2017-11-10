@@ -75,4 +75,28 @@ class LoginServiceSpec: XCTestCase {
         XCTAssertEqual(loginService.tokenPath, "/oauth/token")
         XCTAssertEqual(loginService.usernameField, "")
     }
+
+    func testAuthorizeUrl() {
+        let service = LoginService()
+        service.serverUrl = "https://open.rocket.chat/"
+        service.authorizePath = "authorize_path"
+
+        XCTAssertEqual(service.authorizeUrl, "https://open.rocket.chat/authorize_path")
+
+        service.authorizePath = nil
+
+        XCTAssertNil(service.authorizeUrl, "https://open.rocket.chat/authorize_path")
+    }
+
+    func testAccessTokenUrl() {
+        let service = LoginService()
+        service.serverUrl = "https://open.rocket.chat/"
+        service.tokenPath = "token_path"
+
+        XCTAssertEqual(service.accessTokenUrl, "https://open.rocket.chat/token_path")
+
+        service.tokenPath = nil
+
+        XCTAssertNil(service.accessTokenUrl, "https://open.rocket.chat/token_path")
+    }
 }
