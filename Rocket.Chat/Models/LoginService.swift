@@ -27,6 +27,34 @@ class LoginService: BaseModel {
     @objc dynamic var buttonColor: String?
 }
 
+// MARK: OAuth helper extensions
+
+extension LoginService {
+    var authorizeUrl: String? {
+        guard
+            let serverURL = serverURL,
+            let authorizePath = authorizePath
+        else {
+            return nil
+        }
+
+        return "\(serverURL)\(authorizePath)"
+    }
+
+    var accessTokenUrl: String? {
+        guard
+            let serverURL = serverURL,
+            let tokenPath = tokenPath
+            else {
+                return nil
+        }
+
+        return "\(serverURL)\(tokenPath)"
+    }
+}
+
+// MARK: Realm extensions
+
 extension LoginService {
     static func find(service: String, realm: Realm) -> LoginService? {
         var object: LoginService?

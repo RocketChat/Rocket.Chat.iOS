@@ -19,6 +19,12 @@ class WebViewController: OAuthWebViewController {
 
     var activityIndicator: UIActivityIndicatorView!
 
+    convenience init(authorizeURL: URL?) {
+        self.init()
+        self.targetURL = authorizeURL
+        self.viewDidLoad()
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
