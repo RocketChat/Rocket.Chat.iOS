@@ -85,23 +85,14 @@ class OAuthManagerSpec: XCTestCase {
         let loginService = LoginService()
 
         let url: URL! = URL(string: "https://open.rocket.chat/")
-
         let valid = OAuthManager.authorize(loginService: loginService, at: url, viewController: UIViewController(), success: { _ in }, failure: { })
 
         XCTAssertFalse(valid)
     }
 
     func testAuthorizeWithValidLoginService() {
-        let loginService = LoginService()
-        loginService.service = "github"
-        loginService.scope = "user"
-        loginService.serverUrl = "https://github.com"
-        loginService.tokenPath = "/login/oauth/access_token"
-        loginService.authorizePath = "/login/oauth/authorize"
-        loginService.clientId = "client-id"
-
+        let loginService = LoginService.testInstance()
         let url: URL! = URL(string: "https://open.rocket.chat")
-
         let valid = OAuthManager.authorize(loginService: loginService, at: url, viewController: UIViewController(), success: { _ in }, failure: { })
 
         XCTAssertTrue(valid)

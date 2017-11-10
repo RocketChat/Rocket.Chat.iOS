@@ -65,9 +65,10 @@ extension OAuthViewController: WKNavigationDelegate {
         return url.host == callbackUrl?.host && url.path == callbackUrl?.path
     }
 
-    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+    @discardableResult
+    func willNavigate(_ webView: WKWebView, to url: URL?, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) -> Bool {
         decisionHandler(.allow)
-        guard let url = navigationAction.request.url, isCallback(url: url) else { return }
+        guard let url = url, isCallback(url: url) else { return false }
 
         if url.fragment != nil {
             dismissWebViewController()
@@ -77,6 +78,12 @@ extension OAuthViewController: WKNavigationDelegate {
                 failure?()
             }
         }
+
+        return true
+    }
+
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        willNavigate(webView, to: navigationAction.request.url, decisionHandler: decisionHandler)
     }
 
     func webView(_ webView: WKWebView, didStartProvisionalNavigation navigation: WKNavigation!) {

@@ -12,6 +12,19 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+extension LoginService {
+    static func testInstance() -> LoginService {
+        let loginService = LoginService()
+        loginService.service = "github"
+        loginService.scope = "user"
+        loginService.serverUrl = "https://github.com"
+        loginService.tokenPath = "/login/oauth/access_token"
+        loginService.authorizePath = "/login/oauth/authorize"
+        loginService.clientId = "client-id"
+        return loginService
+    }
+}
+
 class LoginServiceSpec: XCTestCase, RealmTestCase {
     let testJSON = JSON(parseJSON: """
         {
