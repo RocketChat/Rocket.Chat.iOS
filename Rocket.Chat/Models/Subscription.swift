@@ -47,6 +47,8 @@ class Subscription: BaseModel {
     @objc dynamic var roomDescription: String?
     @objc dynamic var roomReadOnly = false
 
+    let roomMuted = RealmSwift.List<String>()
+
     @objc dynamic var roomOwnerId: String?
     var roomOwner: User? {
         guard let roomOwnerId = roomOwnerId else { return nil }
@@ -77,7 +79,7 @@ extension Subscription {
     }
 
     func isValid() -> Bool {
-        return self.rid.characters.count > 0
+        return self.rid.count > 0
     }
 
     func isJoined() -> Bool {
@@ -104,7 +106,7 @@ extension Subscription {
             SubscriptionManager.createDirectMessage(name, completion: { [weak self] (response) in
                 guard !response.isError() else { return }
 
-                let rid = response.result["result"]["rid"].string ?? ""
+                let rid = response.result["result"]["rid"].stringValue
                 Realm.executeOnMainThread({ realm in
                     if let obj = self {
                         obj.rid = rid

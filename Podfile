@@ -15,7 +15,7 @@ def shared_pods
 
   # UI
   pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
-  pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git', :branch => 'master'
+  pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
   pod 'MobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
 
@@ -28,7 +28,7 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 4'
   pod 'SDWebImage/GIF'
-  pod 'Starscream'
+  pod 'Starscream', '~> 2'
   pod 'ReachabilitySwift'
 
   # Authentication SDKs

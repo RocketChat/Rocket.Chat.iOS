@@ -61,7 +61,7 @@ final class ChatMessageTextView: UIView {
         labelTitle.text = viewModel?.title
         labelDescription.attributedText = NSMutableAttributedString(string: viewModel?.text ?? "").transformMarkdown()
 
-        if viewModel?.title.characters.count == 0 {
+        if viewModel?.title.count == 0 {
             labelTitleHeightConstraint.constant = 0
         } else {
             labelTitleHeightConstraint.constant = ChatMessageTextView.defaultTitleHeight

@@ -34,6 +34,49 @@ class ChatDataControllerSpec: XCTestCase {
         XCTAssertEqual(indexPaths.count, 2, "indexPaths will have two results")
     }
 
+    func testIndexPathOf() {
+        let controller = ChatDataController()
+
+        var obj2 = ChatData(type: .message, timestamp: Date())
+        obj2.timestamp = Date().addingTimeInterval(1.0)
+
+        var obj1 = ChatData(type: .message, timestamp: Date())
+        obj1.timestamp = Date()
+
+        var obj3 = ChatData(type: .message, timestamp: Date())
+        obj3.timestamp = Date().addingTimeInterval(2.0)
+
+        controller.insert([obj2, obj1, obj3])
+
+        // We begin from 1 since a Day Separator is prepended by default
+
+        XCTAssertEqual(controller.indexPathOf(obj1.identifier)?.row, 1, "obj1 found in correct row")
+        XCTAssertEqual(controller.indexPathOf(obj2.identifier)?.row, 2, "obj2 found in correct row")
+        XCTAssertEqual(controller.indexPathOf(obj3.identifier)?.row, 3, "obj3 found in correct row")
+    }
+
+    func testIndexPathOfMessage() {
+        let controller = ChatDataController()
+
+        let message = Message()
+        let identifier = "message"
+        message.identifier = identifier
+
+        var obj2 = ChatData(type: .message, timestamp: Date())
+        obj2.message = message
+        obj2.timestamp = Date().addingTimeInterval(1.0)
+
+        var obj1 = ChatData(type: .header, timestamp: Date())
+        obj1.timestamp = Date()
+
+        var obj3 = ChatData(type: .daySeparator, timestamp: Date())
+        obj3.timestamp = Date().addingTimeInterval(2.0)
+
+        controller.insert([obj2, obj1, obj3])
+
+        XCTAssertEqual(controller.indexPathOfMessage(identifier: identifier)?.row, 2, "message found in correct row")
+    }
+
     func testInsertMultipleObjects() {
         let controller = ChatDataController()
 
@@ -100,7 +143,7 @@ class ChatDataControllerSpec: XCTestCase {
 
         message.text = "Foobar, updated"
 
-        let index = controller.update(message)
+        let index = controller.update(message, completion: nil)
         XCTAssertEqual(index, 1, "indexPath is the message indexPath row")
         XCTAssertEqual(controller.data[index].message?.text, "Foobar, updated", "Message text was updated")
     }
