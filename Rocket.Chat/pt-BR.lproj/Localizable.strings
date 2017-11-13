@@ -37,6 +37,9 @@
 "alert.login_service_error.title" = "Erro na Autenticação";
 "alert.login_service_error.message" = "A autenticação com este serviço não pôde ser feita. Por favor, tente novamente.";
 
+"alert.authorization_error.title" = "Erro de Autorização";
+"alert.authorization_error.create_channel.description" = "Você não pode criar canais";
+
 // Socket Connection
 "connection.offline.banner.message" = "Você está offline, conecte novamente";
 
@@ -68,8 +71,12 @@
 "user_menu.logout" = "Sair";
 
 // New Room View
+"new_room.title" = "Novo Canal";
+"new_room.buttons.create" = "Criar";
 "new_room.cell.public_channel.title" = "Canal Público";
-"new_room.cell.public_chanell.description" = "Todos conseguem acessar esse canal";
+"new_room.cell.public_channel.description" = "Todos conseguem acessar esse canal";
+"new_room.cell.public_channel.description.public_only" = "Você só pode criar canais públicos";
+"new_room.cell.public_channel.description.private_only" = "Você só pode criar canais privados";
 "new_room.cell.read_only.title" = "Canal somente leitura";
 "new_room.cell.read_only.description" = "Somente o admin pode escrever novas mensagens";
 "new_room.group.channel.name" = "Nome do canal";
@@ -82,6 +89,7 @@
 "chat.dm.start_conversation" = "Este é o começo de sua conversa com %@";
 "chat.channel.start_conversation" = "Este é o começo da conversa em %@";
 "chat.read_only" = "Este canal é somente leitura";
+"chat.muted" = "Você foi silenciado";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Bloquear mensagens do usuário";
@@ -101,6 +109,7 @@
 "chat.upload.uploading_video" = "Enviando video";
 "chat.upload.uploading_file" = "Enviando \"%@\"";
 "chat.upload.take_photo" = "Tirar uma foto";
+"chat.upload.shoot_video" = "Gravar um vídeo";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
 
@@ -144,3 +153,9 @@
 "chat.messages.list.empty" = "Nenhuma mensagem encontrada";
 "chat.messages.pinned.list.title" = "Mensagens Pinadas";
 "chat.messages.starred.list.title" = "Mensagens Favoritas";
+
+// Settings
+"myaccount.settings.title" = "Configurações";
+"myaccount.settings.contactus" = "Entre em contato";
+"myaccount.settings.license" = "Licença";
+"myaccount.settings.version" = "Versão: %@ (%@)";

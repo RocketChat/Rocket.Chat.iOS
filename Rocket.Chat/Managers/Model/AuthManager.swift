@@ -363,6 +363,7 @@ extension AuthManager {
         SocketManager.disconnect { (_, _) in
             GIDSignIn.sharedInstance().signOut()
 
+            DraftMessageManager.clearServerDraftMessages()
             DatabaseManager.removerSelectedDatabase()
 
             Realm.executeOnMainThread({ (realm) in

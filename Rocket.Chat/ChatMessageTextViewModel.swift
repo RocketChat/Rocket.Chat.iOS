@@ -22,7 +22,7 @@ final class ChatMessageTextViewModel {
     }
 
     var text: String {
-        if attachment.titleLink.characters.count > 0 {
+        if attachment.titleLink.count > 0 {
             return localized("chat.message.open_file")
         }
 
