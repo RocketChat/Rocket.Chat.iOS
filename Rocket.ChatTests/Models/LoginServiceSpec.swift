@@ -12,6 +12,19 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+extension LoginService {
+    static func testInstance() -> LoginService {
+        let loginService = LoginService()
+        loginService.service = "github"
+        loginService.scope = "user"
+        loginService.serverUrl = "https://github.com"
+        loginService.tokenPath = "/login/oauth/access_token"
+        loginService.authorizePath = "/login/oauth/authorize"
+        loginService.clientId = "client-id"
+        return loginService
+    }
+}
+
 class LoginServiceSpec: XCTestCase, RealmTestCase {
     let testJSON = JSON(parseJSON: """
         {
@@ -60,7 +73,7 @@ class LoginServiceSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(loginService.scope, "openid")
         XCTAssertEqual(loginService.custom, true)
         XCTAssertEqual(loginService.authorizePath, "/oauth/authorize")
-        XCTAssertEqual(loginService.serverURL, "https://open.rocket.chat")
+        XCTAssertEqual(loginService.serverUrl, "https://open.rocket.chat")
         XCTAssertEqual(loginService.service, "openrocketchat")
         XCTAssertEqual(loginService.loginStyle, "popup")
         XCTAssertEqual(loginService.tokenSentVia, "header")
@@ -70,5 +83,29 @@ class LoginServiceSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(loginService.buttonLabelColor, "#FFFFFF")
         XCTAssertEqual(loginService.tokenPath, "/oauth/token")
         XCTAssertEqual(loginService.usernameField, "")
+    }
+
+    func testAuthorizeUrl() {
+        let service = LoginService()
+        service.serverUrl = "https://open.rocket.chat/"
+        service.authorizePath = "authorize_path"
+
+        XCTAssertEqual(service.authorizeUrl, "https://open.rocket.chat/authorize_path")
+
+        service.authorizePath = nil
+
+        XCTAssertNil(service.authorizeUrl, "https://open.rocket.chat/authorize_path")
+    }
+
+    func testAccessTokenUrl() {
+        let service = LoginService()
+        service.serverUrl = "https://open.rocket.chat/"
+        service.tokenPath = "token_path"
+
+        XCTAssertEqual(service.accessTokenUrl, "https://open.rocket.chat/token_path")
+
+        service.tokenPath = nil
+
+        XCTAssertNil(service.accessTokenUrl, "https://open.rocket.chat/token_path")
     }
 }
