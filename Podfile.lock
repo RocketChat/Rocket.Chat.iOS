@@ -59,8 +59,8 @@ PODS:
   - SimpleImageViewer (1.0.2):
     - SDWebImage (~> 4)
     - SDWebImage/GIF
-  - SlackTextViewController (1.9.5)
-  - Starscream (3.0.2)
+  - SlackTextViewController (1.9.6)
+  - Starscream (2.1.1)
   - SwiftyJSON (4.0.0-alpha.1)
 
 DEPENDENCIES:
@@ -78,8 +78,8 @@ DEPENDENCIES:
   - semver (from `https://github.com/rafaelks/Semver.Swift.git`, branch `chore/swift4`)
   - SideMenuController (from `https://github.com/rafaelks/SideMenuController.git`)
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
-  - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`, branch `master`)
-  - Starscream
+  - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`)
+  - Starscream (~> 2)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, tag `4.0.0-alpha.1`)
 
 EXTERNAL SOURCES:
@@ -93,7 +93,6 @@ EXTERNAL SOURCES:
   SimpleImageViewer:
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
-    :branch: master
     :git: https://github.com/rafaelks/SlackTextViewController.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -107,13 +106,13 @@ CHECKOUT OPTIONS:
     :commit: a8ad3f3c1b168dfa6a8f1f7de2e5cae59239d9bf
     :git: https://github.com/rafaelks/Semver.Swift.git
   SideMenuController:
-    :commit: cdbd18adad4b2735fa345f650df621b6d365058b
+    :commit: 267ddbc263304534df12e2b0dfbe8343f60891ab
     :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
     :commit: 0a225b78544a268a94aaa1d302e2116b10fd1dd4
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
-    :commit: 3311b89d69e401d52f008a5bc0f53fc4b337588c
+    :commit: 944b7cc4de734638cdefdecb9c7d7846fc3ab252
     :git: https://github.com/rafaelks/SlackTextViewController.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
@@ -142,10 +141,10 @@ SPEC CHECKSUMS:
   semver: df3895a55a097c7a819a80e7375e95b29e136157
   SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
   SimpleImageViewer: 329a155b04fcb93c5da0e296044250ad113c3158
-  SlackTextViewController: fbcdadbb8090673f604484ff5b6eb8d77baed42a
-  Starscream: b512c62f6706421221b5ceb2ba01a9f58aca5bea
+  SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
+  Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftyJSON: c4d27c2ca659d5c91460cd17cc60fd212b26074d
 
-PODFILE CHECKSUM: ec867a52962f20983e17dfba01fa3111b28f24d0
+PODFILE CHECKSUM: 42dc31e86f83b38f451401d906d49255e1f906c3
 
 COCOAPODS: 1.3.1

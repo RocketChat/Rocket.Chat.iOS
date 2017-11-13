@@ -101,7 +101,7 @@ class UploadManager {
             let result = response.result
 
             guard let auth = AuthManager.isAuthenticated() else { return }
-            guard let uploadURL = URL(string: result["result"]["url"].string ?? "") else { return }
+            guard let uploadURL = URL(string: result["result"]["url"].stringValue) else { return }
             guard let fileToken = result["result"]["token"].string else { return }
             guard let fileIdentifier = result["result"]["fileId"].string else { return }
 
@@ -137,7 +137,7 @@ class UploadManager {
                                     "size": file.size,
                                     "name": file.name,
                                     "_id": fileIdentifier,
-                                    "url": response.result["result"]["path"].string ?? ""
+                                    "url": response.result["result"]["path"].stringValue
                                 ]
                             ], completion: completion)
                         }
@@ -172,7 +172,7 @@ class UploadManager {
             }
 
             let result = response.result
-            guard let uploadURL = URL(string: result["result"]["upload"].string ?? "") else { return }
+            guard let uploadURL = URL(string: result["result"]["upload"].stringValue) else { return }
             guard let downloadURL = result["result"]["download"].string else { return }
 
             let request = self.requestUpload(uploadURL, file: file, formData: result["result"]["postData"])
