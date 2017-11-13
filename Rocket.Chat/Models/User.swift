@@ -22,6 +22,7 @@ class User: BaseModel {
     @objc dynamic var username: String?
     @objc dynamic var name: String?
     var emails = List<Email>()
+    var roles = List<String>()
 
     @objc fileprivate dynamic var privateStatus = UserStatus.offline.rawValue
     var status: UserStatus {

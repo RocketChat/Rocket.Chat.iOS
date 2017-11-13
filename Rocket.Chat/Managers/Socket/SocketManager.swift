@@ -43,12 +43,13 @@ class SocketManager {
         sharedInstance.serverURL = url
         sharedInstance.internalConnectionHandler = completion
 
-        var request = URLRequest(url: url)
-        request.setValue(url.host ?? "", forHTTPHeaderField: "Host")
-
-        sharedInstance.socket = WebSocket(request: request)
-        sharedInstance.socket?.advancedDelegate = sharedInstance
+        sharedInstance.socket = WebSocket(url: url)
+        sharedInstance.socket?.delegate = sharedInstance
         sharedInstance.socket?.pongDelegate = sharedInstance
+        sharedInstance.socket?.headers = [
+            "Host": url.host ?? ""
+        ]
+
         sharedInstance.socket?.connect()
     }
 
@@ -140,6 +141,9 @@ extension SocketManager {
                 UserManager.userDataChanges()
                 UserManager.changes()
                 SubscriptionManager.changes(auth)
+                SubscriptionManager.subscribeRoomChanges()
+                PermissionManager.changes()
+                PermissionManager.updatePermissions()
 
                 if let userId = auth.userId {
                     PushManager.updateUser(userId)
@@ -170,7 +174,7 @@ extension SocketManager {
 
 // MARK: WebSocketDelegate
 
-extension SocketManager: WebSocketAdvancedDelegate {
+extension SocketManager: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
         Log.debug("Socket (\(socket)) did connect")
@@ -184,7 +188,7 @@ extension SocketManager: WebSocketAdvancedDelegate {
         SocketManager.send(object)
     }
 
-    func websocketDidDisconnect(socket: WebSocket, error: Error?) {
+    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Log.debug("[WebSocket] did disconnect with error (\(String(describing: error)))")
 
         events = [:]
@@ -200,11 +204,11 @@ extension SocketManager: WebSocketAdvancedDelegate {
         }
     }
 
-    func websocketDidReceiveData(socket: WebSocket, data: Data, response: WebSocket.WSResponse) {
+    func websocketDidReceiveData(socket: WebSocket, data: Data) {
         Log.debug("[WebSocket] did receive data (\(data))")
     }
 
-    func websocketDidReceiveMessage(socket: WebSocket, text: String, response: WebSocket.WSResponse) {
+    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         let json = JSON(parseJSON: text)
 
         // JSON is invalid
@@ -220,21 +224,13 @@ extension SocketManager: WebSocketAdvancedDelegate {
         self.handleMessage(json, socket: socket)
     }
 
-    func websocketHttpUpgrade(socket: WebSocket, request: String) {
-        Log.debug("[WebSocket] http upgrade request (\(request))")
-    }
-
-    func websocketHttpUpgrade(socket: WebSocket, response: String) {
-        Log.debug("[WebSocket] http upgrade response (\(response))")
-    }
-
 }
 
 // MARK: WebSocketPongDelegate
 
 extension SocketManager: WebSocketPongDelegate {
 
-    func websocketDidReceivePong(socket: WebSocketClient, data: Data?) {
+    func websocketDidReceivePong(socket: WebSocket, data: Data?) {
         Log.debug("[WebSocket] did receive pong")
     }
 

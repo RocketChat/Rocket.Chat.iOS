@@ -58,8 +58,8 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
-    static func cellMediaHeightFor(message: Message, sequential: Bool = true) -> CGFloat {
-        let fullWidth = UIScreen.main.bounds.size.width
+    static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
+        let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
         let height = attributedString?.heightForView(withWidth: fullWidth - 62)
 
@@ -226,7 +226,7 @@ final class ChatMessageCell: UICollectionViewCell {
         avatarView.imageURL = URL(string: message.avatar)
         avatarView.user = message.user
 
-        if message.alias.characters.count > 0 {
+        if message.alias.count > 0 {
             labelUsername.text = message.alias
         } else {
             labelUsername.text = message.user?.displayName() ?? "Unknown"

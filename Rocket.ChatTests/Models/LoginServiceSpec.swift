@@ -12,11 +12,7 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class LoginServiceSpec: XCTestCase {
-    func createTestRealm() throws -> Realm {
-        return try Realm(configuration: Realm.Configuration(inMemoryIdentifier: String.random(40)))
-    }
-
+class LoginServiceSpec: XCTestCase, RealmTestCase {
     let testJSON = JSON(parseJSON: """
         {
             \"mergeUsers\" : false,
@@ -38,7 +34,7 @@ class LoginServiceSpec: XCTestCase {
         """)
 
     func testFind() throws {
-        let realm = try createTestRealm()
+        let realm = testRealm()
 
         let github = LoginService()
         github.identifier = "githubid"
