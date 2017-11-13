@@ -68,7 +68,7 @@ class OAuthManager {
         guard
             let host = server.host,
             let service = loginService.service
-            else {
+        else {
                 return nil
         }
 
@@ -84,7 +84,7 @@ class OAuthManager {
             let authorizeUrl = loginService.authorizeUrl,
             let accessTokenUrl = loginService.accessTokenUrl,
             let clientId = loginService.clientId
-            else {
+        else {
                 return nil
         }
 

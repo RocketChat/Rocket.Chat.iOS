@@ -31,7 +31,7 @@ class OAuthManagerSpec: XCTestCase {
     func testOAuthCredentialsFail() {
         let json = JSON([
             "credentialSecret": "dj_4JCx3Ix8fL4IEPnH-redacted"
-            ])
+        ])
 
         XCTAssertNil(OAuthCredentials(json: json), "credentials is nil")
     }
