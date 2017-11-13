@@ -31,12 +31,45 @@ class OAuthCredentials {
 class OAuthManager {
     private static var oauthSwift: OAuth2Swift?
 
-    static func callbackURL(for loginService: LoginService, at server: URL) -> URL? {
+    @discardableResult
+    static func authorize(loginService: LoginService, at server: URL, viewController: UIViewController, success: @escaping (OAuthCredentials) -> Void, failure: @escaping () -> Void) -> Bool {
         guard
-            let service = loginService.service,
-            let host = server.host
+            let callbackUrl = callbackUrl(for: loginService, server: server),
+            let oauthSwift = oauthSwift(for: loginService),
+            let authorizeUrlString = loginService.authorizeUrl,
+            let authorizeUrl = URL(string: authorizeUrlString),
+            let scope = loginService.scope,
+            let state = state()
         else {
+            failure()
+            return false
+        }
+
+        self.oauthSwift = oauthSwift
+
+        let handler = OAuthViewController(authorizeUrl: authorizeUrl, callbackUrl: callbackUrl, success: success, failure: failure)
+        oauthSwift.removeCallbackNotificationObserver()
+        viewController.navigationController?.pushViewController(handler, animated: true)
+
+        oauthSwift.authorizeURLHandler = handler
+        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { _ in failure() }) != nil
+    }
+
+    static func credentialsForUrlFragment(_ fragment: String) -> OAuthCredentials? {
+        guard let normalizedFragment = fragment.removingPercentEncoding else {
             return nil
+        }
+
+        let fragmentJSON = JSON(parseJSON: normalizedFragment)
+        return OAuthCredentials(json: fragmentJSON)
+    }
+
+    static func callbackUrl(for loginService: LoginService, server: URL) -> URL? {
+        guard
+            let host = server.host,
+            let service = loginService.service
+        else {
+                return nil
         }
 
         return URL(string: "https://\(host)/_oauth/\(service)")
@@ -46,57 +79,21 @@ class OAuthManager {
         return "{\"loginStyle\":\"popup\",\"credentialToken\":\"\(String.random(40))\",\"isCordova\":true}".base64Encoded()
     }
 
-    static func authorize(loginService: LoginService, at server: URL, viewController: UIViewController, success: @escaping (OAuthCredentials) -> Void, failure: @escaping () -> Void) {
+    static func oauthSwift(for loginService: LoginService) -> OAuth2Swift? {
         guard
-            let host = loginService.serverURL, !host.isEmpty,
-            let clientId = loginService.clientId,
-            let authorizePath = loginService.authorizePath,
-            let tokenPath = loginService.tokenPath,
-            let scope = loginService.scope,
-            let callbackURL = callbackURL(for: loginService, at: server),
-            let state = state()
+            let authorizeUrl = loginService.authorizeUrl,
+            let accessTokenUrl = loginService.accessTokenUrl,
+            let clientId = loginService.clientId
         else {
-            failure()
-            return
+                return nil
         }
 
-        oauthSwift = OAuth2Swift(
+        return OAuth2Swift(
             consumerKey: clientId,
             consumerSecret: "",
-            authorizeUrl: "\(host)\(authorizePath)",
-            accessTokenUrl: "\(host)\(tokenPath)",
+            authorizeUrl: authorizeUrl,
+            accessTokenUrl: accessTokenUrl,
             responseType: "token"
         )
-
-        guard let oauthSwift = oauthSwift else {
-            failure()
-            return
-        }
-
-        let handler = WebViewController()
-        oauthSwift.removeCallbackNotificationObserver()
-        handler.targetURL = URL(string: "\(host)\(authorizePath)")
-        handler.viewDidLoad()
-        viewController.navigationController?.pushViewController(handler, animated: true)
-        handler.didNavigate = { url in
-            guard let url = url else { return false }
-
-            if url.host == callbackURL.host && url.path == callbackURL.path, let fragment = url.fragment {
-                let fragmentJSON = JSON(parseJSON: NSString(string: fragment).removingPercentEncoding ?? "")
-
-                guard let credentials = OAuthCredentials(json: fragmentJSON) else {
-                    failure()
-                    return true
-                }
-
-                success(credentials)
-                return true
-            }
-            return false
-        }
-        oauthSwift.authorizeURLHandler = handler
-
-        oauthSwift.authorize(withCallbackURL: callbackURL, scope: scope,
-                             state: state, success: { _, _, _  in }, failure: { _ in failure() })
     }
 }
