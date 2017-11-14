@@ -119,9 +119,6 @@ class NewRoomViewController: BaseViewController {
     private func fetchUsers(name: String) {
         guard let realm = Realm.shared else { return }
 
-        //        searchResult = [:]
-
-        //        if prefix == "@" && word.count > 0 {
         let users = realm.objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", name))
 
         for user in users {
@@ -129,34 +126,6 @@ class NewRoomViewController: BaseViewController {
                 print(username)
             }
         }
-
-//        SubscriptionManager.spotlight(name) { [weak self] result in
-//            let currentText = self?.textFieldSearch.text ?? ""
-
-//            if currentText.count == 0 {
-//                return
-//            }
-//
-//            self?.activityViewSearching.stopAnimating()
-//            self?.isSearchingRemotely = true
-//            self?.searchResult = result
-//            self?.groupSubscription()
-//            self?.tableView.reloadData()
-//        }
-
-
-//        API.shared.fetch(UsersListRequest(name: name)) { result in
-//            guard let members = result?.users else {
-//                return
-//            }
-//
-//            for member in members {
-//                if let user = member {
-//                    print(user.username!)
-//                    self.users.append(user)
-//                }
-//            }
-//        }
     }
 
     deinit {
