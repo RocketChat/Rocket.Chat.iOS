@@ -9,12 +9,16 @@
 import Foundation
 import SwiftyJSON
 
+typealias APICompletionHandler<T: APIRequest> = (_ result: APIResult<T>?) -> Void
+
 class API: NSObject {
     static let shared: API! = API(host: "https://open.rocket.chat")
 
     var host: URL
     var authToken: String?
     var userId: String?
+
+    var completionHandlers: [Int: APICompletionHandler<APIRequest>]?
 
     convenience init?(host: String) {
         guard let url = URL(string: host) else {
@@ -28,7 +32,7 @@ class API: NSObject {
         self.host = host
     }
 
-    func fetch<R>(_ request: R, options: APIRequestOptions = .none, completion: ((_ result: APIResult<R>?) -> Void)?) {
+    func fetch<R>(_ request: R, options: APIRequestOptions = .none, completion: APICompletionHandler<R>?) {
         guard let request = request.request(for: self, options: options) else {
             completion?(nil)
             return
@@ -49,6 +53,7 @@ class API: NSObject {
             completion?(APIResult<R>(raw: json))
         }
 
+        completionHandlers[task.taskIdentifier] = completion
         task.resume()
     }
 }
@@ -56,7 +61,9 @@ class API: NSObject {
 extension API: URLSessionTaskDelegate {
 
     func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
+        task.suspend()
 
+        
     }
 
 }
