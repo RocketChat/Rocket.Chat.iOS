@@ -71,6 +71,8 @@
 "user_menu.logout" = "Sair";
 
 // New Room View
+"new_room.title" = "Novo Canal";
+"new_room.buttons.create" = "Criar";
 "new_room.cell.public_channel.title" = "Canal Público";
 "new_room.cell.public_channel.description" = "Todos conseguem acessar esse canal";
 "new_room.cell.public_channel.description.public_only" = "Você só pode criar canais públicos";
@@ -151,3 +153,9 @@
 "chat.messages.list.empty" = "Nenhuma mensagem encontrada";
 "chat.messages.pinned.list.title" = "Mensagens Pinadas";
 "chat.messages.starred.list.title" = "Mensagens Favoritas";
+
+// Settings
+"myaccount.settings.title" = "Configurações";
+"myaccount.settings.contactus" = "Entre em contato";
+"myaccount.settings.license" = "Licença";
+"myaccount.settings.version" = "Versão: %@ (%@)";

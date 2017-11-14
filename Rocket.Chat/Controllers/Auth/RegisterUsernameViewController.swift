@@ -39,7 +39,7 @@ final class RegisterUsernameViewController: BaseViewController {
             self?.stopLoading()
 
             if !response.isError() {
-                self?.textFieldUsername.text = response.result["result"].string ?? ""
+                self?.textFieldUsername.text = response.result["result"].stringValue
             }
         }
     }
