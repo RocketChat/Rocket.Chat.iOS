@@ -12,6 +12,19 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+// MARK: Test Instance
+
+extension Subscription {
+    static func testInstance() -> Subscription {
+        let subscription = Subscription()
+        subscription.auth = Auth.testInstance()
+        subscription.rid = "subscription-rid"
+        subscription.name = "subscription-name"
+        subscription.identifier = "subscription-identifier"
+        return subscription
+    }
+}
+
 class SubscriptionSpec: XCTestCase {
 
     override func setUp() {

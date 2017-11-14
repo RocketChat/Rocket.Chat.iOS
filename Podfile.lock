@@ -60,7 +60,7 @@ PODS:
     - SDWebImage (~> 4)
     - SDWebImage/GIF
   - SlackTextViewController (1.9.6)
-  - Starscream (3.0.2.1)
+  - Starscream (2.1.1)
   - SwiftyJSON (4.0.0-alpha.1)
   - TagListView (1.3.0)
 
@@ -80,7 +80,7 @@ DEPENDENCIES:
   - SideMenuController (from `https://github.com/rafaelks/SideMenuController.git`)
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
   - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`)
-  - Starscream (from `https://github.com/RocketChat/Starscream.git`, branch `fix/host_header_remove_port`)
+  - Starscream (~> 2)
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`, tag `4.0.0-alpha.1`)
   - TagListView (~> 1.0)
 
@@ -96,9 +96,6 @@ EXTERNAL SOURCES:
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
     :git: https://github.com/rafaelks/SlackTextViewController.git
-  Starscream:
-    :branch: fix/host_header_remove_port
-    :git: https://github.com/RocketChat/Starscream.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
     :tag: 4.0.0-alpha.1
@@ -119,9 +116,6 @@ CHECKOUT OPTIONS:
   SlackTextViewController:
     :commit: 944b7cc4de734638cdefdecb9c7d7846fc3ab252
     :git: https://github.com/rafaelks/SlackTextViewController.git
-  Starscream:
-    :commit: 39d484ddc2ef16d1a897ec11f0abde67ba314f82
-    :git: https://github.com/RocketChat/Starscream.git
   SwiftyJSON:
     :git: https://github.com/SwiftyJSON/SwiftyJSON.git
     :tag: 4.0.0-alpha.1
@@ -150,10 +144,10 @@ SPEC CHECKSUMS:
   SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
   SimpleImageViewer: 329a155b04fcb93c5da0e296044250ad113c3158
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
-  Starscream: 9affaa1eb85c8791721d423b6d9abb249b3a289d
+  Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftyJSON: c4d27c2ca659d5c91460cd17cc60fd212b26074d
   TagListView: 669f7d4455003c877655875d34829731c4191528
 
-PODFILE CHECKSUM: 07fd982bb2894e34c83dce29af0240109f00bbd0
+PODFILE CHECKSUM: 577e6e8de482eddf0761564f54eb65f82230384f
 
 COCOAPODS: 1.3.1
