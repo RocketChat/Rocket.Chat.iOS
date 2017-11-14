@@ -22,8 +22,10 @@ class PostMessageRequest: APIRequest {
     }
 
     func body() -> Data? {
+        guard let roomId = message.subscription?.rid else { return nil }
+
         let body = JSON([
-            "roomId": message.subscription?.rid ?? "",
+            "roomId": roomId,
             "text": message.text
         ])
 
