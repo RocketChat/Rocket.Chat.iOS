@@ -65,18 +65,6 @@ extension URL {
         return newURL
     }
 
-    func validateURL() -> URL? {
-        var components = URLComponents()
-        components.scheme = "https"
-        components.host = self.host != nil ? self.host : self.path
-        components.path = self.host != nil ? self.path : ""
-        components.port = self.port != nil ? self.port : nil
-
-        var newURL = components.url
-        newURL = newURL?.appendingPathComponent("api/info")
-        return newURL
-    }
-
     func socketURL() -> URL? {
         let pathComponents = self.pathComponents
         var components = URLComponents()

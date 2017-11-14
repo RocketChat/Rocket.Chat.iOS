@@ -53,7 +53,6 @@ class MessageURLSpec: XCTestCase {
         object.textDescription = "foobarbaz"
 
         XCTAssertTrue(object.isValid())
-
     }
 
     func testIsValidWithInvalidAttributes() {

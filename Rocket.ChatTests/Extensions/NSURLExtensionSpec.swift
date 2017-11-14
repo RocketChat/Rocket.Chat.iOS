@@ -39,6 +39,7 @@ class NSURLExtensionSpec: XCTestCase {
         XCTAssertEqual(URL(string: "http://open.rocket.chat/path", scheme: "https")?.absoluteString, "https://open.rocket.chat/path", "will keep path")
         XCTAssertEqual(URL(string: "http://open.rocket.chat?query=test", scheme: "https")?.absoluteString, "https://open.rocket.chat?query=test", "will keep query")
         XCTAssertEqual(URL(string: "http://open.rocket.chat/path?query=test", scheme: "https")?.absoluteString, "https://open.rocket.chat/path?query=test", "will keep path & query")
+        XCTAssertEqual(URL(string: "http://open.rocket.chat:3000/path?query=test", scheme: "https")?.absoluteString, "https://open.rocket.chat:3000/path?query=test", "will keep path & query & port")
         XCTAssertNil(URL(string: "http://", scheme: "https")?.absoluteString, "will return nil when hostless")
         XCTAssertNil(URL(string: "", scheme: "https"), "will return nil when empty")
     }
@@ -51,6 +52,10 @@ class NSURLExtensionSpec: XCTestCase {
             return
         }
 
-        XCTAssert(queryParameters == ["query1": "test1", "query2": "test2"], "queryParameters returns dictionary correctly")
+        XCTAssertEqual(queryParameters, ["query1": "test1", "query2": "test2"], "queryParameters returns dictionary correctly")
+
+        let testURL2: URL! = URL(string: "https://open.rocket.chat/")
+
+        XCTAssertNil(testURL2.queryParameters, "queryParameters is nil when there are no queries")
     }
 }
