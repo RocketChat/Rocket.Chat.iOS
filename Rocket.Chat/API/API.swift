@@ -18,7 +18,7 @@ class API: NSObject {
     var authToken: String?
     var userId: String?
 
-    var completionHandlers: [Int: APICompletionHandler<APIRequest>]?
+    var completionHandlers: [Int: APICompletionHandler]?
 
     convenience init?(host: String) {
         guard let url = URL(string: host) else {
