@@ -7,6 +7,8 @@ coverage:
   precision: 2 
   round: down
   range: 70...100
+  ignore:  
+    - "Rocket.ChatTests/"
 
   status:
     project: yes
