@@ -15,6 +15,8 @@ class NewRoomViewController: BaseViewController {
         return AuthManager.currentUser()
     }
 
+    var users = [User]()
+
     let tableViewData: [SectionForm] = [
         SectionForm(
             name: nil,
@@ -107,6 +109,49 @@ class NewRoomViewController: BaseViewController {
         }
     }
 
+    private func fetchUsers(name: String) {
+        guard let realm = Realm.shared else { return }
+
+        //        searchResult = [:]
+
+        //        if prefix == "@" && word.count > 0 {
+        let users = realm.objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", name))
+
+        for user in users {
+            if let username = user.username {
+                print(username)
+            }
+        }
+
+//        SubscriptionManager.spotlight(name) { [weak self] result in
+//            let currentText = self?.textFieldSearch.text ?? ""
+
+//            if currentText.count == 0 {
+//                return
+//            }
+//
+//            self?.activityViewSearching.stopAnimating()
+//            self?.isSearchingRemotely = true
+//            self?.searchResult = result
+//            self?.groupSubscription()
+//            self?.tableView.reloadData()
+//        }
+
+
+//        API.shared.fetch(UsersListRequest(name: name)) { result in
+//            guard let members = result?.users else {
+//                return
+//            }
+//
+//            for member in members {
+//                if let user = member {
+//                    print(user.username!)
+//                    self.users.append(user)
+//                }
+//            }
+//        }
+    }
+
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -194,10 +239,19 @@ extension NewRoomViewController: FormTableViewDelegate {
                 cellRoomName.imgLeftIcon.image = #imageLiteral(resourceName: "Lock")
             }
         }
+        else if key == "users list",
+            let name = value as? String {
+            fetchUsers(name: name)
+        }
     }
 
     func getPreviousValue(key: String) -> Any? {
         return setValues[key]
+    }
+
+    func updateTable() {
+        tableView.beginUpdates()
+        tableView.endUpdates()
     }
 }
 
@@ -219,7 +273,14 @@ extension NewRoomViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(tableViewData[indexPath.section].cells[indexPath.row].cell.getClass().defaultHeight)
+        let height = CGFloat(tableViewData[indexPath.section].cells[indexPath.row].cell.getClass().defaultHeight)
+
+        if height < 0,
+            let cell = tableView.cellForRow(at: indexPath) as? MentionsTextFieldTableViewCell {
+            return cell.height()
+        }
+
+        return height
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
