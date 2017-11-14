@@ -69,7 +69,7 @@ final class AvatarView: UIView {
     }
 
     internal func initialsFor(_ username: String) -> String {
-        guard username.characters.count > 0 else {
+        guard username.count > 0 else {
             return "?"
         }
 
@@ -85,7 +85,7 @@ final class AvatarView: UIView {
             let firstString = first[..<indexFirst]
 
             var lastString: Substring = ""
-            if last.characters.count >= lastOffset {
+            if last.count >= lastOffset {
                 let indexLast = last.index(last.startIndex, offsetBy: lastOffset)
                 lastString = last[..<indexLast]
 
@@ -111,7 +111,7 @@ final class AvatarView: UIView {
             initials = username
             color = 0x000000
         } else {
-            let position = username.characters.count % avatarColors.count
+            let position = username.count % avatarColors.count
             color = avatarColors[position]
             initials = initialsFor(username)
         }

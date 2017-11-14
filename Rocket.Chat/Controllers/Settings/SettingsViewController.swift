@@ -14,10 +14,28 @@ final class SettingsViewController: UITableViewController {
 
     private let viewModel = SettingsViewModel()
 
+    @IBOutlet weak var labelContactUs: UILabel! {
+        didSet {
+            labelContactUs.text = viewModel.contactus
+        }
+    }
+
+    @IBOutlet weak var labelLicense: UILabel! {
+        didSet {
+            labelLicense.text = viewModel.license
+        }
+    }
+
     @IBOutlet weak var labelVersion: UILabel! {
         didSet {
             labelVersion.text = viewModel.formattedVersion
         }
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        title = viewModel.title
     }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
