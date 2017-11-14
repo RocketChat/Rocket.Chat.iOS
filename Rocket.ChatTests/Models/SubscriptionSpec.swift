@@ -18,6 +18,7 @@ extension Subscription {
     static func testInstance() -> Subscription {
         let subscription = Subscription()
         subscription.auth = Auth.testInstance()
+        subscription.rid = "subscription-rid"
         subscription.name = "subscription-name"
         subscription.identifier = "subscription-identifier"
         return subscription
