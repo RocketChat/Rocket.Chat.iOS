@@ -139,10 +139,8 @@ extension DatabaseManager {
      - parameter serverUrl: The URL of the server
      */
     static func serverIndexForUrl(_ serverUrl: String) -> Int? {
-        guard let servers = servers else { return nil }
-        return servers.index(where: {
-            guard let url = $0[ServerPersistKeys.serverURL] else { return false }
-            return url == serverUrl
-        })
+        return servers?.index {
+            $0[ServerPersistKeys.serverURL] == serverUrl
+        }
     }
 }

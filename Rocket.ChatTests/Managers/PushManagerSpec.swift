@@ -11,16 +11,9 @@ import XCTest
 
 import UserNotifications
 
-class PushManagerSpec: XCTestCase {
-    func testSetupNotificationCenter() {
-        PushManager.setupNotificationCenter()
-        XCTAssert(UNUserNotificationCenter.current().delegate === PushManager.delegate)
-    }
-}
-
-class PushNotificationSpec: XCTestCase {
-    func testInit() {
-        let raw = [
+extension PushNotification {
+    static func testRaw() -> [AnyHashable: Any] {
+        return  [
             "aps": [
                 "alert": [
                     "title": "@user in #general",
@@ -29,13 +22,51 @@ class PushNotificationSpec: XCTestCase {
                 ],
                 "badge": 5
             ],
-            "ejson": "{\"host\":\"https://cardoso.rocket.chat/\",\"rid\":\"9euspXGgYsbEE5hi8\",\"sender\":{\"_id\":\"iBENea3v3cbD7RTry\",\"username\":\"cardoso\",\"name\":\"Matheus Cardoso\"},\"type\":\"c\",\"name\":\"general\"}",
+            "ejson": "{\"host\":\"https://open.rocket.chat/\",\"rid\":\"9euspXGgYsbEE5hi8\",\"sender\":{\"_id\":\"iBENea3v3cbD7RTry\",\"username\":\"johnny.appleseed\",\"name\":\"Johnny Appleseed\"},\"type\":\"c\",\"name\":\"general\"}",
             "messageFrom": "push"
         ] as [AnyHashable: Any]
+    }
 
-        let notification = PushNotification(raw: raw)
+    static func testRawInvalid() -> [AnyHashable: Any] {
+        return  [
+            "aps": [
+                "alert": [
+                    "title": "@user in #general",
+                    "body": "Hello @you",
+                    "sound": "chime.aiff"
+                ],
+                "badge": 5
+            ],
+            "ejson": "",
+            "messageFrom": "push"
+            ] as [AnyHashable: Any]
+    }
+}
+
+class PushManagerSpec: XCTestCase {
+    func testSetupNotificationCenter() {
+        PushManager.setupNotificationCenter()
+        XCTAssert(UNUserNotificationCenter.current().delegate === PushManager.delegate)
+    }
+
+    func testHandleNotificationRaw() {
+        XCTAssertFalse(PushManager.handleNotification(raw: PushNotification.testRaw()))
+
+        DatabaseManager.setupTestServers()
+
+        XCTAssertFalse(PushManager.handleNotification(raw: PushNotification.testRawInvalid()))
+        XCTAssert(PushManager.handleNotification(raw: PushNotification.testRaw()))
+
+        AppManager.changeSelectedServer(index: 1)
+        XCTAssert(PushManager.handleNotification(raw: PushNotification.testRaw()))
+    }
+}
+
+class PushNotificationSpec: XCTestCase {
+    func testInit() {
+        let notification = PushNotification(raw: PushNotification.testRaw())
 
         XCTAssertEqual(notification?.roomId, "9euspXGgYsbEE5hi8")
-        XCTAssertEqual(notification?.host, "https://cardoso.rocket.chat/")
+        XCTAssertEqual(notification?.host, "https://open.rocket.chat/")
     }
 }
