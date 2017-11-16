@@ -156,11 +156,7 @@ final class ChatViewController: SLKTextViewController {
             socketDidDisconnect(socket: SocketManager.sharedInstance)
         }
 
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        if let subscription = subscriptions.first {
-            self.subscription = subscription
-        }
+        setupInitialSubscription()
 
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
@@ -172,6 +168,21 @@ final class ChatViewController: SLKTextViewController {
         }
 
         setupReplyView()
+    }
+
+    func setupInitialSubscription() {
+        guard let auth = AuthManager.isAuthenticated() else { return }
+
+        if let notificationRoomId = PushManager.lastNotificationRoomId,
+            let subscription = auth.subscriptions.filter("rid = %@", notificationRoomId).first {
+            // user tapped notification
+            self.subscription = subscription
+            PushManager.lastNotificationRoomId = nil
+        } else {
+            // user opened app or changed server
+            let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
+            self.subscription = subscriptions.first
+        }
     }
 
     @objc internal func reconnect() {

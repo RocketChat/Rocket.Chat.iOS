@@ -7,11 +7,17 @@
 //
 
 import Foundation
+import SwiftyJSON
+import RealmSwift
+import UserNotifications
 
 final class PushManager {
+    static let delegate = UserNotificationCenterDelegate()
 
     static let kDeviceTokenKey = "deviceToken"
     static let kPushIdentifierKey = "pushIdentifier"
+
+    static var lastNotificationRoomId: String?
 
     static func updatePushToken() {
         guard let deviceToken = getDeviceToken() else { return }
@@ -61,4 +67,64 @@ final class PushManager {
         return deviceToken
     }
 
+}
+
+// MARK: Handle Notifications
+
+struct PushNotification {
+
+    let host: String
+    let roomId: String
+
+    init?(raw: [AnyHashable: Any]) {
+        guard let _json = raw["ejson"] as? String else { return nil }
+        let json = JSON(parseJSON: _json)
+
+        guard
+            let host = json["host"].string,
+            let roomId = json["rid"].string
+        else {
+            return nil
+        }
+
+        self.host = host
+        self.roomId = roomId
+    }
+}
+
+extension PushManager {
+    static func handleNotification(raw: [AnyHashable: Any]) -> Bool {
+        guard let notification = PushNotification(raw: raw) else { return false }
+        handleNotification(notification)
+        return true
+    }
+
+    fileprivate static func hostToServerUrl(_ host: String) -> String? {
+        return URL(string: host)?.socketURL()?.absoluteString
+    }
+
+    static func handleNotification(_ notification: PushNotification) {
+        guard
+            let serverUrl = hostToServerUrl(notification.host),
+            let index = DatabaseManager.serverIndexForUrl(serverUrl)
+        else {
+            return
+        }
+
+        lastNotificationRoomId = notification.roomId
+
+        if index != DatabaseManager.selectedIndex {
+            AppManager.changeSelectedServer(index: index)
+        }
+    }
+}
+
+class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        PushManager.handleNotification(raw: response.notification.request.content.userInfo)
+    }
 }
