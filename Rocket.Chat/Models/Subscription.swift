@@ -155,7 +155,6 @@ extension Subscription {
 
 }
 
-
 // MARK: Queries
 extension Subscription {
     static func find(rid: String, realm: Realm) -> Subscription? {

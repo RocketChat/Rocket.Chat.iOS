@@ -21,4 +21,10 @@ class AppManagerSpec: XCTestCase {
         }
     }
 
+    func testChangeToServerIfExists() {
+        DatabaseManager.createNewDatabaseInstance(serverURL: "wss://open.rocket.chat/websocket")
+
+        XCTAssert(AppManager.changeToServerIfExists(serverUrl: "wss://open.rocket.chat/websocket"), "changes to existing server")
+        XCTAssertFalse(AppManager.changeToServerIfExists(serverUrl: "wss://none.chat/websocket"), "does not change to unexisting server")
+    }
 }
