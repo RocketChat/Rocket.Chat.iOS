@@ -27,4 +27,8 @@ class AppManagerSpec: XCTestCase {
         XCTAssert(AppManager.changeToServerIfExists(serverUrl: "wss://open.rocket.chat/websocket"), "changes to existing server")
         XCTAssertFalse(AppManager.changeToServerIfExists(serverUrl: "wss://none.chat/websocket"), "does not change to unexisting server")
     }
+
+    func testReloadApp() {
+        XCTAssert(AppManager.reloadApp(), "reloads app correctly")
+    }
 }

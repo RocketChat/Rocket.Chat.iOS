@@ -56,13 +56,11 @@ extension AppManager {
         return true
     }
 
-    static func reloadApp() {
-        let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let controller = storyboardChat.instantiateInitialViewController()
-        let application = UIApplication.shared
-
-        if let window = application.windows.first {
-            window.rootViewController = controller
-        }
+    @discardableResult
+    static func reloadApp() -> Bool {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()
+        let window = UIApplication.shared.windows.first
+        window?.rootViewController = controller
+        return window?.rootViewController != nil
     }
 }
