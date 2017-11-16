@@ -9,16 +9,12 @@
 import Foundation
 import SwiftyJSON
 
-typealias APICompletionHandler<T: APIRequest> = (_ result: APIResult<T>?) -> Void
-
 class API: NSObject {
     static let shared: API! = API(host: "https://open.rocket.chat")
 
     var host: URL
     var authToken: String?
     var userId: String?
-
-    var completionHandlers: [Int: APICompletionHandler]?
 
     convenience init?(host: String) {
         guard let url = URL(string: host) else {
@@ -32,38 +28,40 @@ class API: NSObject {
         self.host = host
     }
 
-    func fetch<R>(_ request: R, options: APIRequestOptions = .none, completion: APICompletionHandler<R>?) {
+    func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil, _ completion: ((_ result: APIResult<R>?) -> Void)?) {
         guard let request = request.request(for: self, options: options) else {
             completion?(nil)
             return
         }
 
-        let configuration = URLSessionConfiguration.ephemeral
-        configuration.timeoutIntervalForRequest = 30
+        var session: URLSession = URLSession.shared
 
-        let session = URLSession(
-            configuration: configuration,
-            delegate: self,
-            delegateQueue: nil
-        )
+        if let sessionDelegate = sessionDelegate {
+            let configuration = URLSessionConfiguration.ephemeral
+            configuration.timeoutIntervalForRequest = 30
 
-        let task = session.dataTask(with: request) { (data, _, _) in
-            guard let data = data else { return }
+            session = URLSession(
+                configuration: configuration,
+                delegate: sessionDelegate,
+                delegateQueue: nil
+            )
+        }
+
+        let task = session.dataTask(with: request) { (data, _, error) in
+            guard error == nil else {
+                completion?(APIResult<R>(error: error))
+                return
+            }
+
+            guard let data = data else {
+                completion?(APIResult<R>(error: error))
+                return
+            }
+
             let json = try? JSON(data: data)
             completion?(APIResult<R>(raw: json))
         }
 
-        completionHandlers[task.taskIdentifier] = completion
         task.resume()
     }
-}
-
-extension API: URLSessionTaskDelegate {
-
-    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
-        task.suspend()
-
-        
-    }
-
 }
