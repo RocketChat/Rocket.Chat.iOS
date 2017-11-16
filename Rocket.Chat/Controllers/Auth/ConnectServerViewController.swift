@@ -143,22 +143,9 @@ final class ConnectServerViewController: BaseViewController {
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
 
         // Check if server already exists and connect to that instead
-        if let servers = DatabaseManager.servers {
-            let sameServerIndex = servers.index(where: {
-                if let stringServerUrl = $0[ServerPersistKeys.serverURL],
-                    let serverUrl = URL(string: stringServerUrl) {
-
-                    return serverUrl == socketURL
-                } else {
-                    return false
-                }
-            })
-
-            if let sameServerIndex = sameServerIndex {
-                MainChatViewController.shared?.changeSelectedServer(index: sameServerIndex)
-                textFieldServerURL.resignFirstResponder()
-                return
-            }
+        if let index = DatabaseManager.serverIndexForUrl(socketURL.absoluteString) {
+            AppManager.changeSelectedServer(index: index)
+            return
         }
 
         connecting = true

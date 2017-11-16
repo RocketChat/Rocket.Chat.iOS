@@ -132,3 +132,17 @@ struct DatabaseManager {
     }
 
 }
+
+extension DatabaseManager {
+    /**
+     This method returns an index for the server with this URL if it already exists.
+     - parameter serverUrl: The URL of the server
+     */
+    static func serverIndexForUrl(_ serverUrl: String) -> Int? {
+        guard let servers = DatabaseManager.servers else { return nil }
+        return servers.index(where: {
+            guard let url = $0[ServerPersistKeys.serverURL] else { return false }
+            return url == serverUrl
+        })
+    }
+}

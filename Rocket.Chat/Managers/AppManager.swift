@@ -37,3 +37,20 @@ struct AppManager {
     }
 
 }
+
+extension AppManager {
+    static func changeSelectedServer(index: Int) {
+        DatabaseManager.selectDatabase(at: index)
+        DatabaseManager.changeDatabaseInstance(index: index)
+
+        SocketManager.disconnect { (_, _) in
+            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
+            let controller = storyboardChat.instantiateInitialViewController()
+            let application = UIApplication.shared
+
+            if let window = application.windows.first {
+                window.rootViewController = controller
+            }
+        }
+    }
+}
