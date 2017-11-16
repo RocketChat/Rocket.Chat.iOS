@@ -59,8 +59,6 @@ class PushManagerSpec: XCTestCase {
         AppManager.changeSelectedServer(index: 1)
         XCTAssert(PushManager.handleNotification(raw: PushNotification.testRaw()))
     }
-
-    
 }
 
 class PushNotificationSpec: XCTestCase {
