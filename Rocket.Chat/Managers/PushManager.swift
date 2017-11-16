@@ -93,7 +93,8 @@ struct PushNotification {
 }
 
 extension PushManager {
-    static func setupNotificationCenter(_ notificationCenter: UNUserNotificationCenter = .current()) {
+    static func setupNotificationCenter() {
+        let notificationCenter = UNUserNotificationCenter.current()
         notificationCenter.delegate = PushManager.delegate
         notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in }
     }
