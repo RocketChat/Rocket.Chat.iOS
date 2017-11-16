@@ -72,17 +72,14 @@ final class PushManager {
 // MARK: Handle Notifications
 
 struct PushNotification {
-
     let host: String
     let roomId: String
 
     init?(raw: [AnyHashable: Any]) {
-        guard let _json = raw["ejson"] as? String else { return nil }
-        let json = JSON(parseJSON: _json)
-
         guard
-            let host = json["host"].string,
-            let roomId = json["rid"].string
+            let json = JSON(parseJSON: (raw["ejson"] as? String) ?? "").dictionary,
+            let host = json["host"]?.string,
+            let roomId = json["rid"]?.string
         else {
             return nil
         }
