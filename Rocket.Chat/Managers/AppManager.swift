@@ -48,6 +48,14 @@ extension AppManager {
         }
     }
 
+    static func changeToServerIfExists(serverUrl: String) -> Bool {
+        guard let index = DatabaseManager.serverIndexForUrl(serverUrl) else {
+            return false
+        }
+        changeSelectedServer(index: index)
+        return true
+    }
+
     static func reloadApp() {
         let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
         let controller = storyboardChat.instantiateInitialViewController()
