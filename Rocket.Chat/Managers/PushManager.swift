@@ -102,20 +102,20 @@ extension PushManager {
     @discardableResult
     static func handleNotification(raw: [AnyHashable: Any]) -> Bool {
         guard let notification = PushNotification(raw: raw) else { return false }
-        handleNotification(notification)
-        return true
+        return handleNotification(notification)
     }
 
     fileprivate static func hostToServerUrl(_ host: String) -> String? {
         return URL(string: host)?.socketURL()?.absoluteString
     }
 
-    static func handleNotification(_ notification: PushNotification) {
+    @discardableResult
+    static func handleNotification(_ notification: PushNotification) -> Bool {
         guard
             let serverUrl = hostToServerUrl(notification.host),
             let index = DatabaseManager.serverIndexForUrl(serverUrl)
         else {
-            return
+            return false
         }
 
         // side effect: needed for Subscription.notificationSubscription()
@@ -126,6 +126,8 @@ extension PushManager {
         } else {
             ChatViewController.shared?.subscription = Subscription.notificationSubscription()
         }
+
+        return true
     }
 }
 
