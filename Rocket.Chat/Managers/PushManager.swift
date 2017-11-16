@@ -93,6 +93,11 @@ struct PushNotification {
 }
 
 extension PushManager {
+    static func setupNotificationCenter(_ notificationCenter: UNUserNotificationCenter = .current()) {
+        notificationCenter.delegate = PushManager.delegate
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in }
+    }
+
     static func handleNotification(raw: [AnyHashable: Any]) -> Bool {
         guard let notification = PushNotification(raw: raw) else { return false }
         handleNotification(notification)
