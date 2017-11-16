@@ -18,11 +18,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Launcher().prepareToLaunch(with: launchOptions)
 
-        let notificationCenter = UNUserNotificationCenter.current()
-        notificationCenter.delegate = PushManager.delegate
-        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in }
+        PushManager.setupNotificationCenter()
         application.registerForRemoteNotifications()
-
         if let launchOptions = launchOptions,
            let notification = launchOptions[.remoteNotification] as? [AnyHashable: Any] {
             PushManager.handleNotification(raw: notification)

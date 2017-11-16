@@ -44,13 +44,17 @@ extension AppManager {
         DatabaseManager.changeDatabaseInstance(index: index)
 
         SocketManager.disconnect { (_, _) in
-            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let controller = storyboardChat.instantiateInitialViewController()
-            let application = UIApplication.shared
+            reloadApp()
+        }
+    }
 
-            if let window = application.windows.first {
-                window.rootViewController = controller
-            }
+    static func reloadApp() {
+        let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let controller = storyboardChat.instantiateInitialViewController()
+        let application = UIApplication.shared
+
+        if let window = application.windows.first {
+            window.rootViewController = controller
         }
     }
 }

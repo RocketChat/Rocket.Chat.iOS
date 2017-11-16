@@ -85,14 +85,7 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         SubscriptionsViewController.shared?.subscriptionsToken?.invalidate()
 
         AuthManager.logout {
-            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let controller = storyboardChat.instantiateInitialViewController()
-            let application = UIApplication.shared
-
-            if let window = application.keyWindow {
-                window.rootViewController = controller
-                window.makeKeyAndVisible()
-            }
+            AppManager.reloadApp()
         }
     }
 
