@@ -116,10 +116,13 @@ extension PushManager {
             return
         }
 
+        // side effect: needed for SubscriptionManager.initialSubscription() & .notificationSubscription()
         lastNotificationRoomId = notification.roomId
 
         if index != DatabaseManager.selectedIndex {
             AppManager.changeSelectedServer(index: index)
+        } else {
+            ChatViewController.shared?.subscription = SubscriptionManager.notificationSubscription()
         }
     }
 }
