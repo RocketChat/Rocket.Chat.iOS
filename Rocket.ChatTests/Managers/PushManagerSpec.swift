@@ -37,7 +37,6 @@ extension PushNotification {
                 ],
                 "badge": 5
             ],
-            "ejson": "",
             "messageFrom": "push"
             ] as [AnyHashable: Any]
     }
@@ -60,6 +59,8 @@ class PushManagerSpec: XCTestCase {
         AppManager.changeSelectedServer(index: 1)
         XCTAssert(PushManager.handleNotification(raw: PushNotification.testRaw()))
     }
+
+    
 }
 
 class PushNotificationSpec: XCTestCase {
@@ -68,5 +69,15 @@ class PushNotificationSpec: XCTestCase {
 
         XCTAssertEqual(notification?.roomId, "9euspXGgYsbEE5hi8")
         XCTAssertEqual(notification?.host, "https://open.rocket.chat/")
+    }
+}
+
+class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        PushManager.handleNotification(raw: response.notification.request.content.userInfo)
     }
 }
