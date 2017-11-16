@@ -55,6 +55,7 @@ final class ConnectServerViewController: BaseViewController {
             navigationItem.leftBarButtonItem = nil
         }
 
+        infoRequestHandler.delegate = self
         textFieldServerURL.placeholder = defaultURL
         labelSSLRequired.text = localized("auth.connect.ssl_required")
 
@@ -159,7 +160,6 @@ final class ConnectServerViewController: BaseViewController {
 
         API.shared.host = url
 
-        infoRequestHandler.delegate = self
         infoRequestHandler.url = url
         infoRequestHandler.validate()
     }
