@@ -202,7 +202,7 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     func validate(completion: @escaping RequestCompletion) {
-        API.shared.fetch(InfoRequest()) { result in
+        API.shared.fetch(InfoRequest(), sessionDelegate: self) { result in
             guard let version = result?.version else {
                 return completion(nil, true)
             }
@@ -229,6 +229,60 @@ final class ConnectServerViewController: BaseViewController {
         textFieldServerURL.alpha = 1
         activityIndicator.stopAnimating()
     }
+}
+
+extension ConnectServerViewController: URLSessionTaskDelegate {
+
+    func urlSession(_ session: URLSession, task: URLSessionTask, willPerformHTTPRedirection response: HTTPURLResponse, newRequest request: URLRequest, completionHandler: @escaping (URLRequest?) -> Void) {
+        task.suspend()
+
+        if let location = response.allHeaderFields["Location"] as? String {
+            var url = URLComponents(string: location)
+            url?.scheme = "https"
+            url?.query = nil
+
+            if let newURL = url?.url {
+                let newAPI = API(host: newURL)
+                newAPI.fetch(InfoRequest(), sessionDelegate: self) { result in
+                    guard
+                        result?.error == nil,
+                        let newHost = newURL.host
+                    else {
+                        DispatchQueue.main.async {
+                            self.stopConnecting()
+                            self.alertInvalidURL()
+                        }
+
+                        return
+                    }
+
+                    let alert = UIAlertController(
+                        title: localized("connection.server.redirect.alert.title"),
+                        message: String(format: localized("connection.server.redirect.alert.message"), newHost),
+                        preferredStyle: .alert
+                    )
+
+                    alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: { _ in
+                        DispatchQueue.main.async {
+                            self.stopConnecting()
+                        }
+                    }))
+
+                    alert.addAction(UIAlertAction(title: localized("connection.server.redirect.alert.confirm"), style: .default, handler: { _ in
+                        DispatchQueue.main.async {
+                            self.textFieldServerURL.text = newHost
+                            self.connect()
+                        }
+                    }))
+
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }
+            }
+        }
+    }
+
 }
 
 extension ConnectServerViewController: UITextFieldDelegate {
