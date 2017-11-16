@@ -156,7 +156,7 @@ final class ChatViewController: SLKTextViewController {
             socketDidDisconnect(socket: SocketManager.sharedInstance)
         }
 
-        self.subscription = SubscriptionManager.initialSubscription()
+        self.subscription = .initialSubscription()
 
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)

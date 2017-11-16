@@ -376,24 +376,3 @@ extension SubscriptionManager {
         SocketManager.send(request, completion: completion)
     }
 }
-
-// MARK: Initial Subscription
-extension SubscriptionManager {
-    static func notificationSubscription() -> Subscription? {
-        guard let roomId = PushManager.lastNotificationRoomId else { return nil }
-        return AuthManager.isAuthenticated()?.subscriptions.filter("rid = %@", roomId).first
-    }
-
-    static func lastSeenSubscription() -> Subscription? {
-        return AuthManager.isAuthenticated()?.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false).first
-    }
-
-    static func initialSubscription() -> Subscription? {
-        if let subscription = notificationSubscription() {
-            PushManager.lastNotificationRoomId = nil
-            return subscription
-        } else {
-            return lastSeenSubscription()
-        }
-    }
-}

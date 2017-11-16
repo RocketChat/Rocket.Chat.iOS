@@ -155,8 +155,9 @@ extension Subscription {
 
 }
 
-extension Subscription {
 
+// MARK: Queries
+extension Subscription {
     static func find(rid: String, realm: Realm) -> Subscription? {
         var object: Subscription?
 
@@ -174,5 +175,23 @@ extension Subscription {
         )
 
         return Realm.shared?.objects(Subscription.self).filter(predicate).first
+    }
+
+    static func notificationSubscription() -> Subscription? {
+        guard let roomId = PushManager.lastNotificationRoomId else { return nil }
+        return AuthManager.isAuthenticated()?.subscriptions.filter("rid = %@", roomId).first
+    }
+
+    static func lastSeenSubscription() -> Subscription? {
+        return AuthManager.isAuthenticated()?.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false).first
+    }
+
+    static func initialSubscription() -> Subscription? {
+        if let subscription = notificationSubscription() {
+            PushManager.lastNotificationRoomId = nil
+            return subscription
+        } else {
+            return lastSeenSubscription()
+        }
     }
 }
