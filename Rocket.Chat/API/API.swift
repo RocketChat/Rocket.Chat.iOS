@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class API: NSObject {
+class API {
     static let shared: API! = API(host: "https://open.rocket.chat")
 
     var host: URL
