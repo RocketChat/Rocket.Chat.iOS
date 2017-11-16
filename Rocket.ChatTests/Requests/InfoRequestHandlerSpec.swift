@@ -36,10 +36,12 @@ class InfoRequestHandlerFakeDelegate: InfoRequestHandlerDelegate {
 
 class InfoRequestHandlerSpec: XCTestCase {
 
-    let controller = InfoRequestHandlerFakeDelegate()
+    var controller = InfoRequestHandlerFakeDelegate()
     let instance = InfoRequestHandler()
 
     override func setUp() {
+        controller = InfoRequestHandlerFakeDelegate()
+
         instance.delegate = controller
         instance.url = URL(string: "https://open.rocket.chat")
     }
@@ -66,6 +68,27 @@ class InfoRequestHandlerSpec: XCTestCase {
     func testServerChangedUrlEmptyDelegateMethod() {
         instance.delegate?.serverChangedURL(nil)
         XCTAssertNil(controller.newServerURL, "newURL can also be nil")
+    }
+
+    func testValidateServerResponseSuccess() {
+        let result = InfoResult(raw: ["info": ["version": "0.54.0"]])
+        instance.validateServerResponse(result: result)
+        XCTAssertTrue(controller.isServerValid, "server is valid after validation for valid result")
+        XCTAssertTrue(controller.isURLValid, "url is valid after validation for valid result")
+    }
+
+    func testValidateServerResponseError() {
+        let result = InfoResult(error: nil)
+        instance.validateServerResponse(result: result)
+        XCTAssertFalse(controller.isServerValid, "server is invalid after validation for emtpy result")
+        XCTAssertFalse(controller.isURLValid, "url is invalid after validation for empty result")
+    }
+
+    func testValidateServerResponseInvalid() {
+        let result = InfoResult(raw: ["foo": "bar"])
+        instance.validateServerResponse(result: result)
+        XCTAssertFalse(controller.isServerValid, "server is invalid after validation for invalid result")
+        XCTAssertFalse(controller.isURLValid, "url is invalid after validation for invalid result")
     }
 
 }

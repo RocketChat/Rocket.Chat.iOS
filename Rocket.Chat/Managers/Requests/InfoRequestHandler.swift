@@ -24,28 +24,7 @@ class InfoRequestHandler: NSObject {
 
     func validate() {
         API.shared.fetch(InfoRequest(), sessionDelegate: self) { [weak self] result in
-            guard let version = result?.version else {
-                self?.delegate?.serverIsValid()
-                return
-            }
-
-            if let minVersion = Bundle.main.object(forInfoDictionaryKey: "RC_MIN_SERVER_VERSION") as? String {
-                if Semver.lt(version, minVersion) {
-                    let alert = UIAlertController(
-                        title: localized("alert.connection.invalid_version.title"),
-                        message: String(format: localized("alert.connection.invalid_version.message"), version, minVersion),
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-
-                    if let controller = self?.delegate?.viewControllerToPresentAlerts {
-                        controller.present(alert, animated: true, completion: nil)
-                    }
-                }
-            }
-
-            self?.delegate?.serverIsValid()
+            self?.validateServerResponse(result: result)
         }
     }
 
@@ -58,6 +37,35 @@ class InfoRequestHandler: NSObject {
 
         alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
         delegate?.viewControllerToPresentAlerts?.present(alert, animated: true, completion: nil)
+    }
+
+    func validateServerResponse(result: InfoResult?) {
+        guard let version = result?.version else {
+            delegate?.urlNotValid()
+            return
+        }
+
+        if let minVersion = Bundle.main.object(forInfoDictionaryKey: "RC_MIN_SERVER_VERSION") as? String {
+            validateServerVersion(minVersion: minVersion, version: version)
+        }
+
+        delegate?.serverIsValid()
+    }
+
+    func validateServerVersion(minVersion: String, version: String) {
+        if Semver.lt(version, minVersion) {
+            let alert = UIAlertController(
+                title: localized("alert.connection.invalid_version.title"),
+                message: String(format: localized("alert.connection.invalid_version.message"), version, minVersion),
+                preferredStyle: .alert
+            )
+
+            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
+
+            if let controller = delegate?.viewControllerToPresentAlerts {
+                controller.present(alert, animated: true, completion: nil)
+            }
+        }
     }
 
 }
