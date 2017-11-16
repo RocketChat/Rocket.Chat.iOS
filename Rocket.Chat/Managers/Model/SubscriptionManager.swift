@@ -377,20 +377,23 @@ extension SubscriptionManager {
     }
 }
 
-// MARK:
+// MARK: Initial Subscription
 extension SubscriptionManager {
-    static func initialSubscription(auth: Auth? = AuthManager.isAuthenticated(),
-                                    notificationRoomId: String? = PushManager.lastNotificationRoomId) -> Subscription? {
-        guard let auth = auth else { return nil }
+    static func notificationSubscription() -> Subscription? {
+        guard let roomId = PushManager.lastNotificationRoomId else { return nil }
+        return AuthManager.isAuthenticated()?.subscriptions.filter("rid = %@", roomId).first
+    }
 
-        if let notificationRoomId = notificationRoomId,
-            let subscription = auth.subscriptions.filter("rid = %@", notificationRoomId).first {
+    static func lastSeenSubscription() -> Subscription? {
+        return AuthManager.isAuthenticated()?.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false).first
+    }
+
+    static func initialSubscription() -> Subscription? {
+        if let subscription = notificationSubscription() {
             PushManager.lastNotificationRoomId = nil
             return subscription
         } else {
-            // user opened app or changed server
-            let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-            return subscriptions.first
+            return lastSeenSubscription()
         }
     }
 }
