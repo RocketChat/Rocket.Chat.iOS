@@ -132,24 +132,16 @@ final class ConnectServerViewController: BaseViewController {
         present(alert, animated: true, completion: nil)
     }
 
-    func changeToServerIfExists(serverUrl: String) -> Bool {
-        guard let index = DatabaseManager.serverIndexForUrl(serverUrl) else {
-            return false
-        }
-        AppManager.changeSelectedServer(index: index)
-        return true
-    }
-
     func connect() {
         guard let url = url else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
-
-        if changeToServerIfExists(serverUrl: socketURL.absoluteString) { return }
 
         connecting = true
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
+
+        if AppManager.changeToServerIfExists(serverUrl: socketURL.absoluteString) { return }
 
         API.shared.host = url
         validate { [weak self] (_, error) in
