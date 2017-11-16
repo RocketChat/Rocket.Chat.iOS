@@ -98,6 +98,7 @@ extension PushManager {
         notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in }
     }
 
+    @discardableResult
     static func handleNotification(raw: [AnyHashable: Any]) -> Bool {
         guard let notification = PushNotification(raw: raw) else { return false }
         handleNotification(notification)
