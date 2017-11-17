@@ -106,4 +106,31 @@ class DatabaseManagerSpec: XCTestCase {
         XCTAssertEqual(DatabaseManager.serverIndexForUrl("wss://open.rocket.chat/websocket"), 1, "correct index for open.rocket.chat")
         XCTAssertNil(DatabaseManager.serverIndexForUrl("wss://unexisting.chat/websocket"), "index is nil for unexisting server")
     }
+
+    func testCopyServerInformationNilServers() {
+        UserDefaults.standard.removeObject(forKey: ServerPersistKeys.servers)
+        let newIndex = DatabaseManager.copyServerInformation(from: 0, with: "foo.com")
+        XCTAssertEqual(newIndex, -1, "newIndex is a invalid index")
+    }
+
+    func testCopyServerInformationNoServers() {
+        UserDefaults.standard.set([], forKey: ServerPersistKeys.servers)
+        let newIndex = DatabaseManager.copyServerInformation(from: 0, with: "foo.com")
+        XCTAssertEqual(newIndex, -1, "newIndex is a invalid index")
+    }
+
+    func testCopyServerInformationValidServer() {
+        let servers = [[
+            ServerPersistKeys.databaseName: "foo.realm",
+            ServerPersistKeys.serverURL: "wss://foo.com/websocket",
+            ServerPersistKeys.token: "1",
+            ServerPersistKeys.userId: "1"
+        ]]
+
+        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+
+        let newIndex = DatabaseManager.copyServerInformation(from: 0, with: "foo.com")
+        XCTAssertEqual(newIndex, 0, "newIndex is 0")
+    }
+
 }
