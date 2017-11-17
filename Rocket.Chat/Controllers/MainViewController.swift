@@ -46,29 +46,9 @@ final class MainViewController: BaseViewController {
 
         if let auth = AuthManager.isAuthenticated() {
             AuthManager.persistAuthInformation(auth)
-            openChat()
+            AppManager.openChat()
         } else {
-            let storyboardAuth = UIStoryboard(name: "Auth", bundle: Bundle.main)
-            let controller = storyboardAuth.instantiateInitialViewController()
-            let application = UIApplication.shared
-
-            if let window = application.keyWindow, let controller = controller {
-                let transition = CATransition()
-                transition.type = kCATransitionFade
-                window.set(rootViewController: controller, withTransition: transition)
-            }
-        }
-    }
-
-    func openChat() {
-        let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
-        let controller = storyboardChat.instantiateInitialViewController()
-        let application = UIApplication.shared
-
-        if let window = application.keyWindow, let controller = controller {
-            let transition = CATransition()
-            transition.type = kCATransitionFade
-            window.set(rootViewController: controller, withTransition: transition)
+            AppManager.openAuth()
         }
     }
 
