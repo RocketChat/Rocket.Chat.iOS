@@ -154,6 +154,7 @@ final class ChatViewController: SLKTextViewController {
 
         if !SocketManager.isConnected() {
             socketDidDisconnect(socket: SocketManager.sharedInstance)
+            reconnect()
         }
 
         self.subscription = .initialSubscription()
@@ -171,6 +172,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     @objc internal func reconnect() {
+        chatHeaderViewStatus?.labelTitle.text = localized("connection.connecting.banner.message")
         chatHeaderViewStatus?.activityIndicator.startAnimating()
         chatHeaderViewStatus?.buttonRefresh.isHidden = true
 
@@ -180,6 +182,7 @@ final class ChatViewController: SLKTextViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             if !SocketManager.isConnected() {
+                self.chatHeaderViewStatus?.labelTitle.text = localized("connection.offline.banner.message")
                 self.chatHeaderViewStatus?.activityIndicator.stopAnimating()
                 self.chatHeaderViewStatus?.buttonRefresh.isHidden = false
             }
