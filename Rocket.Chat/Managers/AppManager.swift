@@ -75,7 +75,7 @@ extension AppManager {
         }
 
         openStoryboard(with: "Main")
-        return window?.rootViewController != nil
+        return UIApplication.shared.keyWindow?.rootViewController != nil
     }
 
     static func openChat() {
