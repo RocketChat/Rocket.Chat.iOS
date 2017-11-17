@@ -40,6 +40,11 @@
 "alert.authorization_error.title" = "Błąd autoryzacji";
 "alert.authorization_error.create_channel.description" = "Nie możesz utworzyć kanału";
 
+// Connection Redirect
+"connection.server.redirect.alert.title" = "Server changed it's URL";
+"connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
+"connection.server.redirect.alert.confirm" = "Yes, change the URL";
+
 // Socket Connection
 "connection.offline.banner.message" = "Jesteś w trybie offline, połącz się ponownie";
 
