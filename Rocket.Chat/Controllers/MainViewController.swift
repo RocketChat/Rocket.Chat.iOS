@@ -46,9 +46,9 @@ final class MainViewController: BaseViewController {
 
         if let auth = AuthManager.isAuthenticated() {
             AuthManager.persistAuthInformation(auth)
-            AppManager.openChat()
+            WindowManager.open(.chat)
         } else {
-            AppManager.openAuth()
+            WindowManager.open(.auth)
         }
     }
 
