@@ -98,6 +98,14 @@ final class ChatViewController: SLKTextViewController {
                 }
             }
 
+            if let oldValue = oldValue {
+                if oldValue.identifier != subscription.identifier {
+                    emptySubscriptionState()
+                }
+            } else {
+                emptySubscriptionState()
+            }
+
             updateSubscriptionInfo()
             markAsRead()
             typingIndicatorView?.dismissIndicator()
@@ -418,15 +426,27 @@ final class ChatViewController: SLKTextViewController {
         SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
     }
 
-    internal func updateSubscriptionInfo() {
+    internal func emptySubscriptionState() {
+        clearListData()
+        updateJoinedView()
+
+        activityIndicator?.startAnimating()
+        textView.resignFirstResponder()
+    }
+
+    internal func updateJoinedView() {
         guard let subscription = subscription else { return }
 
-        messagesToken?.invalidate()
+        if subscription.isJoined() {
+            setTextInputbarHidden(false, animated: false)
+            chatPreviewModeView?.removeFromSuperview()
+        } else {
+            setTextInputbarHidden(true, animated: false)
+            showChatPreviewModeView()
+        }
+    }
 
-        title = subscription.displayName()
-        chatTitleView?.subscription = subscription
-        textView.resignFirstResponder()
-
+    internal func clearListData() {
         collectionView?.performBatchUpdates({
             let indexPaths = self.dataController.clear()
             self.collectionView?.deleteItems(at: indexPaths)
@@ -438,21 +458,22 @@ final class ChatViewController: SLKTextViewController {
                 self.closeSidebarAfterSubscriptionUpdate = false
             }
         })
+    }
+
+    internal func updateSubscriptionInfo() {
+        guard let subscription = subscription else { return }
+
+        messagesToken?.invalidate()
+
+        title = subscription.displayName()
+        chatTitleView?.subscription = subscription
 
         if subscription.isValid() {
-            self.updateSubscriptionMessages()
+            updateSubscriptionMessages()
         } else {
             subscription.fetchRoomIdentifier({ [weak self] response in
                 self?.subscription = response
             })
-        }
-
-        if subscription.isJoined() {
-            setTextInputbarHidden(false, animated: false)
-            chatPreviewModeView?.removeFromSuperview()
-        } else {
-            setTextInputbarHidden(true, animated: false)
-            showChatPreviewModeView()
         }
 
         updateMessageSendingPermission()
@@ -463,14 +484,13 @@ final class ChatViewController: SLKTextViewController {
 
         messagesQuery = subscription.fetchMessagesQueryResults()
 
-        activityIndicator.startAnimating()
-
         dataController.loadedAllMessages = false
         isRequestingHistory = false
+
         updateMessagesQueryNotificationBlock()
         loadMoreMessagesFrom(date: nil)
-
         MessageManager.changes(subscription)
+
         registerTypingEvent()
     }
 

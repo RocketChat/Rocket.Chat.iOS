@@ -9,25 +9,39 @@
 import XCTest
 @testable import Rocket_Chat
 
-extension DatabaseManager {
-    static func setupTestServers() {
-        let servers = [[
-            ServerPersistKeys.databaseName: "foo.realm",
-            ServerPersistKeys.serverURL: "wss://foo.com/websocket",
-            ServerPersistKeys.token: "1",
-            ServerPersistKeys.userId: "1"
-        ], [
-            ServerPersistKeys.databaseName: "open.realm",
-            ServerPersistKeys.serverURL: "wss://open.rocket.chat/websocket",
-            ServerPersistKeys.token: "1",
-            ServerPersistKeys.userId: "1"
-        ]]
+private let testServers = [[
+    ServerPersistKeys.databaseName: "foo.realm",
+    ServerPersistKeys.serverURL: "wss://foo.com/websocket",
+    ServerPersistKeys.token: "1",
+    ServerPersistKeys.userId: "1"
+], [
+    ServerPersistKeys.databaseName: "open.realm",
+    ServerPersistKeys.serverURL: "wss://open.rocket.chat/websocket",
+    ServerPersistKeys.token: "1",
+    ServerPersistKeys.userId: "1"
+]]
 
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+extension DatabaseManager {
+
+    static func setupTestServers() {
+        UserDefaults.standard.set(testServers, forKey: ServerPersistKeys.servers)
+        DatabaseManager.selectDatabase(at: 0)
+    }
+
+    static func clearAllServers() {
+        UserDefaults.standard.set([], forKey: ServerPersistKeys.servers)
+    }
+
+    static func removeServersKey() {
+        UserDefaults.standard.removeObject(forKey: ServerPersistKeys.servers)
     }
 }
 
 class DatabaseManagerSpec: XCTestCase {
+
+    override func setUp() {
+        DatabaseManager.setupTestServers()
+    }
 
     func testSelectedIndex() {
         UserDefaults.standard.set(0, forKey: ServerPersistKeys.selectedIndex)
@@ -40,8 +54,7 @@ class DatabaseManagerSpec: XCTestCase {
     }
 
     func testServersListEmpty() {
-        let servers: [[String: String]] = []
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        DatabaseManager.clearAllServers()
         XCTAssertEqual(DatabaseManager.servers?.count, 0, "no servers into empty list")
     }
 
@@ -88,7 +101,54 @@ class DatabaseManagerSpec: XCTestCase {
         XCTAssertEqual(DatabaseManager.selectedIndex, 0, "first item is selected")
     }
 
-    func testCreateNewDatabaseInstance() {
+    func testCleanInvalidDatabasesNilList() {
+        DatabaseManager.removeServersKey()
+        XCTAssertNoThrow(DatabaseManager.cleanInvalidDatabases(), "clean works fine with nil list")
+    }
+
+    func testCleanInvalidDatabasesEmptyList() {
+        DatabaseManager.clearAllServers()
+        XCTAssertNoThrow(DatabaseManager.cleanInvalidDatabases(), "clean works fine with empty list")
+    }
+
+    func testChangeDatabaseInstanceWhenAllEmtpy() {
+        DatabaseManager.clearAllServers()
+
+        realmConfiguration = nil
+        DatabaseManager.changeDatabaseInstance()
+
+        XCTAssertNil(realmConfiguration, "realmConfiguration is still nil when there is no server")
+    }
+
+    func testCreateNewDatabaseInstanceWhenServersIsNil() {
+        let serverURL = "wss://new.foo.bar"
+
+        DatabaseManager.removeServersKey()
+        DatabaseManager.createNewDatabaseInstance(serverURL: serverURL)
+
+        let servers = DatabaseManager.servers
+        let server = servers?.last
+
+        XCTAssertEqual(server?[ServerPersistKeys.serverURL], serverURL, "server was added sucessffuly")
+        XCTAssertNotNil(server?[ServerPersistKeys.databaseName], "new server database name isn't nil")
+    }
+
+    func testCreateNewDatabaseInstanceWhenAllEmtpy() {
+        let serverURL = "wss://new.foo.bar"
+
+        DatabaseManager.clearAllServers()
+        DatabaseManager.createNewDatabaseInstance(serverURL: serverURL)
+
+        let servers = DatabaseManager.servers
+        let server = servers?.last
+
+        XCTAssertEqual(server?[ServerPersistKeys.serverURL], serverURL, "server was added sucessffuly")
+        XCTAssertNotNil(server?[ServerPersistKeys.databaseName], "new server database name isn't nil")
+    }
+
+    func testCreateNewDatabaseInstanceWhenServersExists() {
+        DatabaseManager.setupTestServers()
+
         let serverURL = "wss://new.foo.bar"
 
         DatabaseManager.createNewDatabaseInstance(serverURL: serverURL)
@@ -106,4 +166,29 @@ class DatabaseManagerSpec: XCTestCase {
         XCTAssertEqual(DatabaseManager.serverIndexForUrl("wss://open.rocket.chat/websocket"), 1, "correct index for open.rocket.chat")
         XCTAssertNil(DatabaseManager.serverIndexForUrl("wss://unexisting.chat/websocket"), "index is nil for unexisting server")
     }
+
+    func testCopyServerInformationNilServers() {
+        DatabaseManager.removeServersKey()
+        let newIndex = DatabaseManager.copyServerInformation(from: 0, with: "foo.com")
+        XCTAssertEqual(newIndex, -1, "newIndex is a invalid index")
+    }
+
+    func testCopyServerInformationNoServers() {
+        DatabaseManager.clearAllServers()
+        let newIndex = DatabaseManager.copyServerInformation(from: 0, with: "foo.com")
+        XCTAssertEqual(newIndex, -1, "newIndex is a invalid index")
+    }
+
+    func testCopyServerInformationValidServer() {
+        DatabaseManager.setupTestServers()
+        let newIndex = DatabaseManager.copyServerInformation(from: 0, with: "foo.com")
+        XCTAssertEqual(newIndex, testServers.count - 1, "newIndex is latest server")
+    }
+
+    func testRemoveSelectedDatabase() {
+        DatabaseManager.setupTestServers()
+        DatabaseManager.removeSelectedDatabase()
+        XCTAssertEqual(DatabaseManager.servers?.count ?? 0, testServers.count - 1, "servers lists minus one")
+    }
+
 }

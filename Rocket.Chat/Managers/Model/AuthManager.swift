@@ -368,7 +368,7 @@ extension AuthManager {
             GIDSignIn.sharedInstance().signOut()
 
             DraftMessageManager.clearServerDraftMessages()
-            DatabaseManager.removerSelectedDatabase()
+            DatabaseManager.removeSelectedDatabase()
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
