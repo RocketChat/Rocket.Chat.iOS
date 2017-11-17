@@ -56,21 +56,33 @@ extension AppManager {
         return true
     }
 
+    static func openStoryboard(with name: String, transitionType: String = kCATransitionFade) {
+        let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
+        let controller = storyboardChat.instantiateInitialViewController()
+        let application = UIApplication.shared
+
+        if let window = application.keyWindow, let controller = controller {
+            let transition = CATransition()
+            transition.type = transitionType
+            window.set(rootViewController: controller, withTransition: transition)
+        }
+    }
+
     @discardableResult
     static func reloadApp() -> Bool {
         SocketManager.disconnect { (_, _) in
 
         }
 
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()
-        let window = UIApplication.shared.keyWindow
-
-        if let window = window, let controller = controller {
-            let transition = CATransition()
-            transition.type = kCATransitionFade
-            window.set(rootViewController: controller, withTransition: transition)
-        }
-
+        openStoryboard(with: "Main")
         return window?.rootViewController != nil
+    }
+
+    static func openChat() {
+        openStoryboard(with: "Chat")
+    }
+
+    static func openAuth() {
+        openStoryboard(with: "Auth")
     }
 }

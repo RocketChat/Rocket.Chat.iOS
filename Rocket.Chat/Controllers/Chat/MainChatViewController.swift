@@ -91,17 +91,7 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
 
     func openAddNewTeamController() {
         SocketManager.disconnect { (_, _) in
-            // Do nothing
-        }
-
-        let storyboardAuth = UIStoryboard(name: "Auth", bundle: Bundle.main)
-        let controller = storyboardAuth.instantiateInitialViewController()
-        let application = UIApplication.shared
-
-        if let window = application.keyWindow, let controller = controller {
-            let transition = CATransition()
-            transition.type = kCATransitionFromBottom
-            window.set(rootViewController: controller, withTransition: transition)
+            AppManager.openAuth()
         }
     }
 }
