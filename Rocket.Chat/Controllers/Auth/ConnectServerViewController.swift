@@ -120,7 +120,6 @@ final class ConnectServerViewController: BaseViewController {
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-
         AppManager.reloadApp()
     }
 

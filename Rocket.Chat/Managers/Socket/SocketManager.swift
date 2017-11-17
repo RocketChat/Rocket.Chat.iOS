@@ -64,6 +64,8 @@ class SocketManager {
     }
 
     static func clear() {
+        sharedInstance.events = [:]
+        sharedInstance.queue = [:]
         sharedInstance.internalConnectionHandler = nil
         sharedInstance.connectionHandlers.removeAll()
     }
@@ -99,7 +101,7 @@ class SocketManager {
             list.append(completion)
             sharedInstance.events[eventName] = list
         } else {
-            self.send(object, completion: completion)
+            send(object, completion: completion)
             sharedInstance.events[eventName] = [completion]
         }
     }
@@ -112,9 +114,7 @@ class SocketManager {
 
         send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
-
             sharedInstance.events.removeValue(forKey: eventName)
-
             completion?(response)
         }
     }
@@ -134,6 +134,8 @@ extension SocketManager {
             }
 
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
+                SocketManager.clear()
+
                 AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
 
                 })
@@ -145,8 +147,14 @@ extension SocketManager {
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
 
-                if let userId = auth.userId {
-                    PushManager.updateUser(userId)
+                // If we have some subscription opened, let's
+                // try to subscribe to it again
+                if let subscription = ChatViewController.shared?.subscription, !subscription.isInvalidated {
+                    ChatViewController.shared?.subscription = subscription
+                }
+
+                if let userIdentifier = auth.userId {
+                    PushManager.updateUser(userIdentifier)
                 }
             })
         })

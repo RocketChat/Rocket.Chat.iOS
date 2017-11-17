@@ -90,13 +90,13 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     }
 
     func openAddNewTeamController() {
-        SocketManager.disconnect { (_, _) in
-            self.performSegue(withIdentifier: "Auth", sender: nil)
-        }
+        SocketManager.disconnect { (_, _) in }
+        WindowManager.open(.auth)
     }
 }
 
 extension MainChatViewController: SocketConnectionHandler {
+
     func socketDidConnect(socket: SocketManager) {
 
     }
@@ -108,18 +108,19 @@ extension MainChatViewController: SocketConnectionHandler {
     func socketDidReturnError(socket: SocketManager, error: SocketError) {
         switch error.error {
         case .invalidUser:
-            alert(title: localized("alert.socket_error.invalid_user.title"),
-                  message: localized("alert.socket_error.invalid_user.message")) { _ in
+            let alert = UIAlertController(
+                title: localized("alert.socket_error.invalid_user.title"),
+                message: localized("alert.socket_error.invalid_user.message"),
+                preferredStyle: .alert
+            )
+
+            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: { _ in
                 self.logout()
-            }
-        default:
-            break
+            }))
+
+            self.present(alert, animated: true, completion: nil)
+        default: break
         }
     }
 
-    func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
-        present(alert, animated: true, completion: nil)
-    }
 }
