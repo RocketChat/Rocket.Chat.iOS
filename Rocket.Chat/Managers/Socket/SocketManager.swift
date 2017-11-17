@@ -99,8 +99,12 @@ class SocketManager {
             list.append(completion)
             sharedInstance.events[eventName] = list
         } else {
-            self.send(object, completion: completion)
-            sharedInstance.events[eventName] = [completion]
+            send(object, completion: { (response) in
+                if !response.isError() {
+                    self.sharedInstance.events[eventName] = [completion]
+                    completion(response)
+                }
+            })
         }
     }
 
