@@ -29,6 +29,7 @@ class AppManagerSpec: XCTestCase {
     }
 
     func testReloadApp() {
-        XCTAssert(AppManager.reloadApp(), "reloads app correctly")
+        AppManager.reloadApp()
+        XCTAssertNotNil(UIApplication.shared.keyWindow?.rootViewController, "reloads app correctly")
     }
 }
