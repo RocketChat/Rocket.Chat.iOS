@@ -125,6 +125,8 @@ final class ChatViewController: SLKTextViewController {
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        messagesToken?.invalidate()
+        subscriptionToken?.invalidate()
     }
 
     override func awakeFromNib() {
