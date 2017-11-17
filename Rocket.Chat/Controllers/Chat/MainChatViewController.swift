@@ -85,35 +85,13 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         SubscriptionsViewController.shared?.subscriptionsToken?.invalidate()
 
         AuthManager.logout {
-            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let controller = storyboardChat.instantiateInitialViewController()
-            let application = UIApplication.shared
-
-            if let window = application.keyWindow {
-                window.rootViewController = controller
-                window.makeKeyAndVisible()
-            }
+            AppManager.reloadApp()
         }
     }
 
     func openAddNewTeamController() {
         SocketManager.disconnect { (_, _) in
             self.performSegue(withIdentifier: "Auth", sender: nil)
-        }
-    }
-
-    func changeSelectedServer(index: Int) {
-        DatabaseManager.selectDatabase(at: index)
-        DatabaseManager.changeDatabaseInstance(index: index)
-
-        SocketManager.disconnect { (_, _) in
-            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let controller = storyboardChat.instantiateInitialViewController()
-            let application = UIApplication.shared
-
-            if let window = application.windows.first {
-                window.rootViewController = controller
-            }
         }
     }
 }

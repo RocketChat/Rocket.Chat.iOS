@@ -129,14 +129,7 @@ final class SignupViewController: BaseViewController {
 
                     if user.username != nil {
                         self?.dismiss(animated: true, completion: nil)
-
-                        let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-                        let controller = storyboardChat.instantiateInitialViewController()
-                        let application = UIApplication.shared
-
-                        if let window = application.windows.first {
-                            window.rootViewController = controller
-                        }
+                        AppManager.reloadApp()
                     } else {
                         self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
