@@ -91,25 +91,6 @@ class InfoRequestHandlerSpec: XCTestCase {
         XCTAssertFalse(controller.isURLValid, "url is invalid after validation for invalid result")
     }
 
-    func testValidateTransformNewURLHTTP() {
-        let newURL = "http://foo.com/"
-        XCTAssertEqual(instance.transformNewURL(newURL)?.absoluteString, "https://foo.com/", "new url will have HTTPS")
-    }
-
-    func testValidateTransformNewURLQueryNotEmpty() {
-        let newURL = "https://foo.com/?foo=bar"
-        XCTAssertEqual(instance.transformNewURL(newURL)?.absoluteString, "https://foo.com/", "new url won't have query params")
-    }
-
-    func testValidateTransformNewURLPathNotEmpty() {
-        let url = "https://foo.com/foo/bar"
-        guard let newURL = instance.transformNewURL(url) else {
-            return XCTFail("newURL must be valid")
-        }
-
-        XCTAssertEqual(newURL.absoluteString, "https://foo.com/foo/bar", "new url will maintain path")
-    }
-
     func testHandleRedirectInfoResultError() {
         guard let newURL = URL(string: "https://foo.com") else {
             return XCTFail("newURL must be valid")
