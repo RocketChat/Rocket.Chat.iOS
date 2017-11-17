@@ -34,10 +34,10 @@ struct DatabaseManager {
     }
 
     /**
-        Remover selected server and select the
+        Remove selected server and select the
         first one.
      */
-    static func removerSelectedDatabase() {
+    static func removeSelectedDatabase() {
         removeDatabase(at: selectedIndex)
         selectDatabase(at: 0)
     }
