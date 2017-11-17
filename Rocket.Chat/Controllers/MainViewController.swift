@@ -83,7 +83,7 @@ extension MainViewController: InfoRequestHandlerDelegate {
             let url = URL(string: newURL ?? ""),
             let socketURL = url.socketURL()
         else {
-            WindowManager.open(.chat)
+            return WindowManager.open(.chat)
         }
 
         let newIndex = DatabaseManager.copyServerInformation(
