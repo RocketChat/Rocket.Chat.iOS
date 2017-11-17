@@ -85,10 +85,6 @@ final class ChatViewController: SLKTextViewController {
                 reconnect()
             }
 
-            if let oldValue = oldValue, oldValue.identifier != subscription.identifier {
-                unsubscribe(for: oldValue)
-            }
-
             subscriptionToken = subscription.observe { [weak self] changes in
                 switch changes {
                 case .change(let propertyChanges):
@@ -105,6 +101,10 @@ final class ChatViewController: SLKTextViewController {
             updateSubscriptionInfo()
             markAsRead()
             typingIndicatorView?.dismissIndicator()
+
+            if let oldValue = oldValue, oldValue.identifier != subscription.identifier {
+                unsubscribe(for: oldValue)
+            }
 
             textView.text = DraftMessageManager.draftMessage(for: subscription)
         }
