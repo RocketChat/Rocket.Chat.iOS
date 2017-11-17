@@ -90,9 +90,8 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     }
 
     func openAddNewTeamController() {
-        SocketManager.disconnect { (_, _) in
-            AppManager.openAuth()
-        }
+        SocketManager.disconnect { (_, _) in }
+        WindowManager.open(.auth)
     }
 }
 
