@@ -7,11 +7,17 @@
 //
 
 import Foundation
+import SwiftyJSON
+import RealmSwift
+import UserNotifications
 
 final class PushManager {
+    static let delegate = UserNotificationCenterDelegate()
 
     static let kDeviceTokenKey = "deviceToken"
     static let kPushIdentifierKey = "pushIdentifier"
+
+    static var lastNotificationRoomId: String?
 
     static func updatePushToken() {
         guard let deviceToken = getDeviceToken() else { return }
@@ -61,4 +67,73 @@ final class PushManager {
         return deviceToken
     }
 
+}
+
+// MARK: Handle Notifications
+
+struct PushNotification {
+    let host: String
+    let roomId: String
+
+    init?(raw: [AnyHashable: Any]) {
+        guard
+            let json = JSON(parseJSON: (raw["ejson"] as? String) ?? "").dictionary,
+            let host = json["host"]?.string,
+            let roomId = json["rid"]?.string
+        else {
+            return nil
+        }
+
+        self.host = host
+        self.roomId = roomId
+    }
+}
+
+extension PushManager {
+    static func setupNotificationCenter() {
+        let notificationCenter = UNUserNotificationCenter.current()
+        notificationCenter.delegate = PushManager.delegate
+        notificationCenter.requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in }
+    }
+
+    @discardableResult
+    static func handleNotification(raw: [AnyHashable: Any]) -> Bool {
+        guard let notification = PushNotification(raw: raw) else { return false }
+        return handleNotification(notification)
+    }
+
+    fileprivate static func hostToServerUrl(_ host: String) -> String? {
+        return URL(string: host)?.socketURL()?.absoluteString
+    }
+
+    @discardableResult
+    static func handleNotification(_ notification: PushNotification) -> Bool {
+        guard
+            let serverUrl = hostToServerUrl(notification.host),
+            let index = DatabaseManager.serverIndexForUrl(serverUrl)
+        else {
+            return false
+        }
+
+        // side effect: needed for Subscription.notificationSubscription()
+        lastNotificationRoomId = notification.roomId
+
+        if index != DatabaseManager.selectedIndex {
+            AppManager.changeSelectedServer(index: index)
+        } else {
+            ChatViewController.shared?.subscription = Subscription.notificationSubscription()
+        }
+
+        return true
+    }
+}
+
+class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .sound])
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        PushManager.handleNotification(raw: response.notification.request.content.userInfo)
+    }
 }
