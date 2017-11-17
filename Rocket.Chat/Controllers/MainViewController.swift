@@ -51,7 +51,10 @@ final class MainViewController: BaseViewController {
 
         if let auth = AuthManager.isAuthenticated() {
             AuthManager.persistAuthInformation(auth)
-            infoRequestHandler.validate()
+
+            if let url = auth.apiHost {
+                infoRequestHandler.validate(with: url)
+            }
         } else {
             let storyboardAuth = UIStoryboard(name: "Auth", bundle: Bundle.main)
             let controller = storyboardAuth.instantiateInitialViewController()
@@ -126,8 +129,8 @@ extension MainViewController: InfoRequestHandlerDelegate {
 
     func serverChangedURL(_ newURL: String?) {
         guard
-            let url = newURL,
-            let socketURL = URL(string: url)?.socketURL()
+            let url = URL(string: newURL ?? ""),
+            let socketURL = url.socketURL()
         else {
             return self.resumeAuth()
         }
@@ -143,7 +146,11 @@ extension MainViewController: InfoRequestHandlerDelegate {
         AuthManager.recoverAuthIfNeeded()
 
         DispatchQueue.main.async {
-            self.infoRequestHandler.validate()
+            if let auth = AuthManager.isAuthenticated() {
+                if let apiHost = auth.apiHost {
+                    self.infoRequestHandler.validate(with: apiHost)
+                }
+            }
         }
     }
 

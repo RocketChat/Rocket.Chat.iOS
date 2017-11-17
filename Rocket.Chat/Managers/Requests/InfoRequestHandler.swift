@@ -23,10 +23,8 @@ class InfoRequestHandler: NSObject {
     var url: URL?
     var validateServerVersion = true
 
-    func validate() {
-        guard let selectedHost = AuthManager.isAuthenticated()?.apiHost else { return }
-
-        API.shared.host = selectedHost
+    func validate(with url: URL) {
+        API.shared.host = url
         API.shared.fetch(InfoRequest(), sessionDelegate: self) { [weak self] result in
             self?.validateServerResponse(result: result)
         }
@@ -86,6 +84,8 @@ extension InfoRequestHandler: URLSessionTaskDelegate {
                 handleRedirect(newURL)
             }
         }
+
+        completionHandler(nil)
     }
 
     func transformNewURL(_ newURL: String) -> URL? {
