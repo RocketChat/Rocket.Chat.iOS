@@ -21,8 +21,12 @@ class InfoRequestHandler: NSObject {
 
     weak var delegate: InfoRequestHandlerDelegate?
     var url: URL?
+    var validateServerVersion = true
 
     func validate() {
+        guard let selectedHost = AuthManager.isAuthenticated()?.apiHost else { return }
+
+        API.shared.host = selectedHost
         API.shared.fetch(InfoRequest(), sessionDelegate: self) { [weak self] result in
             self?.validateServerResponse(result: result)
         }
@@ -39,20 +43,22 @@ class InfoRequestHandler: NSObject {
         delegate?.viewControllerToPresentAlerts?.present(alert, animated: true, completion: nil)
     }
 
-    func validateServerResponse(result: InfoResult?) {
+    internal func validateServerResponse(result: InfoResult?) {
         guard let version = result?.version else {
             delegate?.urlNotValid()
             return
         }
 
-        if let minVersion = Bundle.main.object(forInfoDictionaryKey: "RC_MIN_SERVER_VERSION") as? String {
-            validateServerVersion(minVersion: minVersion, version: version)
+        if validateServerVersion {
+            if let minVersion = Bundle.main.object(forInfoDictionaryKey: "RC_MIN_SERVER_VERSION") as? String {
+                validateServerVersion(minVersion: minVersion, version: version)
+            }
         }
 
         delegate?.serverIsValid()
     }
 
-    func validateServerVersion(minVersion: String, version: String) {
+    internal func validateServerVersion(minVersion: String, version: String) {
         if Semver.lt(version, minVersion) {
             let alert = UIAlertController(
                 title: localized("alert.connection.invalid_version.title"),

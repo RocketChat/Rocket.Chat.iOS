@@ -43,6 +43,35 @@ struct DatabaseManager {
     }
 
     /**
+        Copy a server information with a new URL
+        and remove the old one.
+    */
+    static func copyServerInformation(from: Int, with newURL: String) -> Int {
+        guard
+            let servers = self.servers,
+            servers.count > 0
+        else {
+            return -1
+        }
+
+        let selectedServer = servers[from]
+        let newIndex = createNewDatabaseInstance(serverURL: newURL)
+
+        if var servers = self.servers {
+            var newServer = servers[newIndex]
+            newServer[ServerPersistKeys.userId] = selectedServer[ServerPersistKeys.userId]
+            newServer[ServerPersistKeys.token] = selectedServer[ServerPersistKeys.token]
+            servers[newIndex] = newServer
+
+            UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+
+            removeDatabase(at: from)
+        }
+
+        return newIndex - 1
+    }
+
+    /**
         Removes server information at some index.
      
         parameter index: The database index user wants to delete.
@@ -87,7 +116,7 @@ struct DatabaseManager {
         so we can populate the authentication information
         when user logins.
      
-        - parameter serverURL: The serve URL.
+        - parameter serverURL: The server URL.
      */
     @discardableResult
     static func createNewDatabaseInstance(serverURL: String) -> Int {

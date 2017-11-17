@@ -37,6 +37,21 @@ class ServerManager {
     static let shared = ServerManager()
     var timestampOffset = 0.0
 
+    static func updateServerURL(newURL url: String) {
+        let defaults = UserDefaults.standard
+        let selectedIndex = DatabaseManager.selectedIndex
+
+        guard
+            var servers = DatabaseManager.servers,
+            servers.count > selectedIndex
+        else {
+                return
+        }
+
+        servers[selectedIndex][ServerPersistKeys.serverURL] = url
+        defaults.set(servers, forKey: ServerPersistKeys.servers)
+    }
+
     /**
         This method will get the selected database information
         locally and update a few settings that are important to
