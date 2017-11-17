@@ -80,7 +80,9 @@ extension MessageManager {
         ] as [String: Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
-            guard !response.isError() else { return Log.debug(response.result.string) }
+            guard !response.isError() else {
+                return Log.debug(response.result.string)
+            }
 
             let object = response.result["fields"]["args"][0]
             let subscriptionIdentifier = subscription.identifier
