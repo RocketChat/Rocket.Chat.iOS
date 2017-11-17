@@ -133,12 +133,12 @@ final class ConnectServerViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
 
-        if AppManager.changeToServerIfExists(serverUrl: socketURL.absoluteString) { return }
-
-        API.shared.host = url
+        if AppManager.changeToServerIfExists(serverUrl: socketURL.absoluteString) {
+            return
+        }
 
         infoRequestHandler.url = url
-        infoRequestHandler.validate()
+        infoRequestHandler.validate(with: url)
     }
 
     func connectWebSocket() {
@@ -195,19 +195,27 @@ extension ConnectServerViewController: InfoRequestHandlerDelegate {
     var viewControllerToPresentAlerts: UIViewController? { return self }
 
     func urlNotValid() {
-        stopConnecting()
+        DispatchQueue.main.async {
+            self.stopConnecting()
+        }
     }
 
     func serverIsValid() {
-        connectWebSocket()
+        DispatchQueue.main.async {
+            self.connectWebSocket()
+        }
     }
 
     func serverChangedURL(_ newURL: String?) {
         if let url = newURL {
-            textFieldServerURL.text = url
-            connect()
+            DispatchQueue.main.async {
+                self.textFieldServerURL.text = url
+                self.connect()
+            }
         } else {
-            stopConnecting()
+            DispatchQueue.main.async {
+                self.stopConnecting()
+            }
         }
     }
 
