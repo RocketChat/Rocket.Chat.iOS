@@ -146,11 +146,14 @@ extension MainViewController: InfoRequestHandlerDelegate {
         AuthManager.recoverAuthIfNeeded()
 
         DispatchQueue.main.async {
-            if let auth = AuthManager.isAuthenticated() {
-                if let apiHost = auth.apiHost {
-                    self.infoRequestHandler.validate(with: apiHost)
-                }
+            guard
+                let auth = AuthManager.isAuthenticated(),
+                let apiHost = auth.apiHost
+            else {
+                return
             }
+
+            self.infoRequestHandler.validate(with: apiHost)
         }
     }
 
