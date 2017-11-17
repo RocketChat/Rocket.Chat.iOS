@@ -99,6 +99,8 @@
 		4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */; };
 		4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */; };
 		4199A9891DABCC570035F820 /* Emojione.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4199A9881DABCC570035F820 /* Emojione.swift */; };
+		419D78831FBDB7E0005FC7A2 /* InfoRequestHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D78821FBDB7E0005FC7A2 /* InfoRequestHandler.swift */; };
+		419D78871FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D78861FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift */; };
 		419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */ = {isa = PBXBuildFile; fileRef = 419D84FD1DF599CA0021F034 /* ChatHeaderViewStatus.xib */; };
 		419D85001DF599DA0021F034 /* ChatHeaderViewStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419D84FF1DF599DA0021F034 /* ChatHeaderViewStatus.swift */; };
 		419EAF291E26562E002C8DA5 /* UserCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 419EAF281E26562E002C8DA5 /* UserCoordinator.swift */; };
@@ -383,6 +385,8 @@
 		4192054B1D52F4FC004EEC5F /* SubscriptionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionCell.swift; path = Views/Cells/Subscription/SubscriptionCell.swift; sourceTree = "<group>"; };
 		4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UIColorExtension.swift; path = Extensions/UIColorExtension.swift; sourceTree = "<group>"; };
 		4199A9881DABCC570035F820 /* Emojione.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Emojione.swift; sourceTree = "<group>"; };
+		419D78821FBDB7E0005FC7A2 /* InfoRequestHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InfoRequestHandler.swift; path = Managers/Requests/InfoRequestHandler.swift; sourceTree = "<group>"; };
+		419D78861FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRequestHandlerSpec.swift; sourceTree = "<group>"; };
 		419D84FD1DF599CA0021F034 /* ChatHeaderViewStatus.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatHeaderViewStatus.xib; path = Views/Chat/ChatHeaderViewStatus.xib; sourceTree = "<group>"; };
 		419D84FF1DF599DA0021F034 /* ChatHeaderViewStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatHeaderViewStatus.swift; path = Views/Chat/ChatHeaderViewStatus.swift; sourceTree = "<group>"; };
 		419EAF281E26562E002C8DA5 /* UserCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCoordinator.swift; sourceTree = "<group>"; };
@@ -662,6 +666,7 @@
 		41552F691D3035DB0081438D /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				419D78851FBDCF5A005FC7A2 /* Requests */,
 				417A70011D47916C00FF46EE /* Socket */,
 				4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */,
 				41BA89231D303D8B00CBF526 /* AuthManagerSpec.swift */,
@@ -832,6 +837,7 @@
 				411EDECE1E30F2D700BC7BE3 /* Uploader */,
 				D32E28201DFD86AC00D6019C /* Launcher */,
 				41F1702C1D425358007E6948 /* Socket */,
+				419D78811FBDB78D005FC7A2 /* Requests */,
 				41552F641D30307D0081438D /* Model */,
 				4101BF001F8D0A1700F67E89 /* AppManager.swift */,
 				D1C536CB1F688B2F00EBA8D9 /* MarkdownManager.swift */,
@@ -931,6 +937,22 @@
 			);
 			name = Emojione;
 			path = External/Emojione;
+			sourceTree = "<group>";
+		};
+		419D78811FBDB78D005FC7A2 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				419D78821FBDB7E0005FC7A2 /* InfoRequestHandler.swift */,
+			);
+			name = Requests;
+			sourceTree = "<group>";
+		};
+		419D78851FBDCF5A005FC7A2 /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				419D78861FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift */,
+			);
+			path = Requests;
 			sourceTree = "<group>";
 		};
 		41A79C0D1D2F084F00A1968E /* Models */ = {
@@ -1985,6 +2007,7 @@
 				807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */,
 				41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */,
 				77BA814F1F87B2BE00F295F4 /* SignupViewController+CustomFields.swift in Sources */,
+				419D78831FBDB7E0005FC7A2 /* InfoRequestHandler.swift in Sources */,
 				41EE157E1E05BED600754D45 /* ChatControllerAutocomplete.swift in Sources */,
 				80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */,
 				4162E1531D651A8800AAAE49 /* UserManager.swift in Sources */,
@@ -2063,6 +2086,7 @@
 				D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */,
 				80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */,
 				77C2612C1F97453600724A1F /* CustomFieldsSpec.swift in Sources */,
+				419D78871FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift in Sources */,
 				77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */,
 				807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
