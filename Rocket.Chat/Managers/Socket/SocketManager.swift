@@ -135,9 +135,9 @@ extension SocketManager {
 
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
                 AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
-                    
+
                 })
-                
+
                 UserManager.userDataChanges()
                 UserManager.changes()
                 SubscriptionManager.changes(auth)
