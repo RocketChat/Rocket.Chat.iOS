@@ -257,7 +257,7 @@ extension SubscriptionsViewController {
         if let subscription = ChatViewController.shared?.subscription {
             ChatViewController.shared?.chatTitleView?.subscription = subscription
         } else {
-            ChatViewController.shared?.chatTitleView?.subscription = .initialSubscription()
+            ChatViewController.shared?.subscription = .initialSubscription()
         }
 
         // If side panel is visible, reload the data
