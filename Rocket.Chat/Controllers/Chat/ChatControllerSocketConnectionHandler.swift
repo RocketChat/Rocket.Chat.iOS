@@ -14,13 +14,9 @@ extension ChatViewController: SocketConnectionHandler {
         hideHeaderStatusView()
 
         DispatchQueue.main.async { [weak self] in
-            if let subscription = self?.subscription {
-                if subscription.isValid() {
-                    self?.subscription = subscription
-                }
-            }
-
-            if self?.subscription == nil {
+            if let subscription = self?.subscription, !subscription.isInvalidated, subscription.isValid() {
+                self?.subscription = subscription
+            } else {
                 self?.subscription = .initialSubscription()
             }
         }
