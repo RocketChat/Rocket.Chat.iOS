@@ -42,6 +42,7 @@
 
 // Socket Connection
 "connection.offline.banner.message" = "Você está offline, conecte novamente";
+"connection.connecting.banner.message" = "Conectando...";
 
 // Auth
 "auth.connect.button_connect" = "Conectar";

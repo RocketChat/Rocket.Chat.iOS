@@ -117,7 +117,6 @@ final class ConnectServerViewController: BaseViewController {
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-
         AppManager.reloadApp()
     }
 
@@ -141,7 +140,9 @@ final class ConnectServerViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
 
-        if AppManager.changeToServerIfExists(serverUrl: socketURL.absoluteString) { return }
+        if AppManager.changeToServerIfExists(serverUrl: socketURL.absoluteString) {
+            return
+        }
 
         API.shared.host = url
         validate { [weak self] (_, error) in
@@ -157,8 +158,11 @@ final class ConnectServerViewController: BaseViewController {
             SocketManager.connect(socketURL) { (_, connected) in
                 if !connected {
                     self?.stopConnecting()
-                    self?.alert(title: localized("alert.connection.socket_error.title"),
-                                message: localized("alert.connection.socket_error.message"))
+                    self?.alert(
+                        title: localized("alert.connection.socket_error.title"),
+                        message: localized("alert.connection.socket_error.message")
+                    )
+
                     return
                 }
 

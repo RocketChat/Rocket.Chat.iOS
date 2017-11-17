@@ -80,6 +80,11 @@ final class ChatViewController: SLKTextViewController {
                 return
             }
 
+            if !SocketManager.isConnected() {
+                socketDidDisconnect(socket: SocketManager.sharedInstance)
+                reconnect()
+            }
+
             subscriptionToken = subscription.observe { [weak self] changes in
                 switch changes {
                 case .change(let propertyChanges):
@@ -120,6 +125,8 @@ final class ChatViewController: SLKTextViewController {
     deinit {
         NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
+        messagesToken?.invalidate()
+        subscriptionToken?.invalidate()
     }
 
     override func awakeFromNib() {
@@ -154,9 +161,10 @@ final class ChatViewController: SLKTextViewController {
 
         if !SocketManager.isConnected() {
             socketDidDisconnect(socket: SocketManager.sharedInstance)
+            reconnect()
         }
 
-        self.subscription = .initialSubscription()
+        subscription = .initialSubscription()
 
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
@@ -171,6 +179,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     @objc internal func reconnect() {
+        chatHeaderViewStatus?.labelTitle.text = localized("connection.connecting.banner.message")
         chatHeaderViewStatus?.activityIndicator.startAnimating()
         chatHeaderViewStatus?.buttonRefresh.isHidden = true
 
@@ -180,6 +189,7 @@ final class ChatViewController: SLKTextViewController {
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
             if !SocketManager.isConnected() {
+                self.chatHeaderViewStatus?.labelTitle.text = localized("connection.offline.banner.message")
                 self.chatHeaderViewStatus?.activityIndicator.stopAnimating()
                 self.chatHeaderViewStatus?.buttonRefresh.isHidden = false
             }
@@ -753,7 +763,8 @@ extension ChatViewController {
         guard
             dataController.data.count > indexPath.row,
             let subscription = subscription,
-            let obj = dataController.itemAt(indexPath)
+            let obj = dataController.itemAt(indexPath),
+            !(obj.message?.isInvalidated ?? false)
         else {
             return UICollectionViewCell()
         }
@@ -861,7 +872,9 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let subscription = subscription else { return .zero }
+        guard let subscription = subscription, !subscription.isInvalidated else {
+            return .zero
+        }
 
         var fullWidth = collectionView.bounds.size.width
 
