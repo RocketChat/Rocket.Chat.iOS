@@ -80,19 +80,12 @@ extension InfoRequestHandler: URLSessionTaskDelegate {
         task.suspend()
 
         if let location = response.allHeaderFields["Location"] as? String {
-            if let newURL = transformNewURL(location) {
+            if let newURL = URL(string: location, scheme: "https") {
                 handleRedirect(newURL)
             }
         }
 
         completionHandler(nil)
-    }
-
-    func transformNewURL(_ newURL: String) -> URL? {
-        var url = URLComponents(string: newURL)
-        url?.scheme = "https"
-        url?.query = nil
-        return url?.url
     }
 
     func handleRedirect(_ newURL: URL) {
