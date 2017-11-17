@@ -56,11 +56,9 @@ extension AppManager {
         return true
     }
 
-    @discardableResult
-    static func reloadApp() -> Bool {
-        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()
-        let window = UIApplication.shared.windows.first
-        window?.rootViewController = controller
-        return window?.rootViewController != nil
+    static func reloadApp() {
+        SocketManager.disconnect { (_, _) in
+            WindowManager.open(.main)
+        }
     }
 }

@@ -65,6 +65,10 @@ struct AuthManager {
         if let index = index {
             server = servers[index]
         } else {
+            if DatabaseManager.selectedIndex >= servers.count {
+                DatabaseManager.selectDatabase(at: 0)
+            }
+
             server = servers[DatabaseManager.selectedIndex]
         }
 

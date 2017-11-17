@@ -46,55 +46,9 @@ final class MainViewController: BaseViewController {
 
         if let auth = AuthManager.isAuthenticated() {
             AuthManager.persistAuthInformation(auth)
-
-            AuthManager.resume(auth, completion: { [weak self] response in
-                guard !response.isError() else {
-                    self?.labelAuthenticationStatus.isHidden = false
-                    self?.buttonConnect.isHidden = false
-                    self?.activityIndicator.stopAnimating()
-
-                    self?.openChat()
-
-                    return
-                }
-
-                SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                    AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
-
-                    })
-
-                    UserManager.userDataChanges()
-                    UserManager.changes()
-                    SubscriptionManager.changes(auth)
-                    SubscriptionManager.subscribeRoomChanges()
-                    PermissionManager.changes()
-                    PermissionManager.updatePermissions()
-
-                    if let userIdentifier = auth.userId {
-                        PushManager.updateUser(userIdentifier)
-                    }
-
-                    self?.openChat()
-                })
-            })
+            WindowManager.open(.chat)
         } else {
-            let storyboardAuth = UIStoryboard(name: "Auth", bundle: Bundle.main)
-            let controller = storyboardAuth.instantiateInitialViewController()
-            let application = UIApplication.shared
-
-            if let window = application.keyWindow {
-                window.rootViewController = controller
-            }
-        }
-    }
-
-    func openChat() {
-        let storyboardChat = UIStoryboard(name: "Chat", bundle: Bundle.main)
-        let controller = storyboardChat.instantiateInitialViewController()
-        let application = UIApplication.shared
-
-        if let window = application.keyWindow {
-            window.rootViewController = controller
+            WindowManager.open(.auth)
         }
     }
 
