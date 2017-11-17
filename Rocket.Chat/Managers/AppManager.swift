@@ -37,3 +37,30 @@ struct AppManager {
     }
 
 }
+
+extension AppManager {
+    static func changeSelectedServer(index: Int) {
+        DatabaseManager.selectDatabase(at: index)
+        DatabaseManager.changeDatabaseInstance(index: index)
+
+        SocketManager.disconnect { (_, _) in
+            reloadApp()
+        }
+    }
+
+    static func changeToServerIfExists(serverUrl: String) -> Bool {
+        guard let index = DatabaseManager.serverIndexForUrl(serverUrl) else {
+            return false
+        }
+        changeSelectedServer(index: index)
+        return true
+    }
+
+    @discardableResult
+    static func reloadApp() -> Bool {
+        let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()
+        let window = UIApplication.shared.windows.first
+        window?.rootViewController = controller
+        return window?.rootViewController != nil
+    }
+}

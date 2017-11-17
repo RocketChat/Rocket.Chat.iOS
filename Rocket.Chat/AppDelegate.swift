@@ -18,8 +18,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Launcher().prepareToLaunch(with: launchOptions)
 
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { (_, _) in }
+        PushManager.setupNotificationCenter()
         application.registerForRemoteNotifications()
+        if let launchOptions = launchOptions,
+           let notification = launchOptions[.remoteNotification] as? [AnyHashable: Any] {
+            PushManager.handleNotification(raw: notification)
+        }
 
         return true
     }
@@ -50,14 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     // MARK: Remote Notification
-
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
-        Log.debug("Notification: \(userInfo)")
-    }
-
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        Log.debug("Notification: \(userInfo)")
-    }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         UserDefaults.standard.set(deviceToken.hexString, forKey: PushManager.kDeviceTokenKey)

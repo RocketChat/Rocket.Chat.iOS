@@ -18,6 +18,7 @@ extension Subscription {
     static func testInstance() -> Subscription {
         let subscription = Subscription()
         subscription.auth = Auth.testInstance()
+        subscription.rid = "subscription-rid"
         subscription.name = "subscription-name"
         subscription.identifier = "subscription-identifier"
         return subscription
@@ -263,5 +264,82 @@ class SubscriptionSpec: XCTestCase {
         }
 
         XCTAssertEqual(subscription.directMessageUser, user, "directMessageUser is correct")
+    }
+}
+
+// MARK: Test Queries
+extension SubscriptionSpec: RealmTestCase {
+    func testFindByRoomId() throws {
+        let realm = testRealm()
+
+        let sub1 = Subscription()
+        sub1.identifier = "sub1-identifier"
+        sub1.rid = "sub1-rid"
+
+        let sub2 = Subscription()
+        sub2.identifier = "sub2-identifier"
+        sub2.rid = "sub2-rid"
+
+        try realm.write {
+            realm.add(sub1)
+            realm.add(sub2)
+        }
+
+        XCTAssertEqual(Subscription.find(rid: "sub2-rid", realm: realm), sub2)
+        XCTAssertEqual(Subscription.find(rid: "sub1-rid", realm: realm), sub1)
+    }
+
+    func testFindByNameAndType() throws {
+        let realm = testRealm()
+
+        let sub1 = Subscription()
+        sub1.identifier = "sub1-identifier"
+        sub1.name = "sub1-name"
+        sub1.type = .directMessage
+
+        let sub2 = Subscription()
+        sub2.identifier = "sub2-identifier"
+        sub2.name = "sub2-name"
+        sub2.type = .channel
+
+        try realm.write {
+            realm.add(sub1)
+            realm.add(sub2)
+        }
+
+        XCTAssertEqual(Subscription.find(name: "sub1-name", subscriptionType: [.directMessage], realm: realm), sub1)
+        XCTAssertEqual(Subscription.find(name: "sub2-name", subscriptionType: [.channel], realm: realm), sub2)
+    }
+
+    func testInitialSubscription() throws {
+        let realm = testRealm()
+
+        let auth = Auth.testInstance()
+
+        let sub1 = Subscription()
+        sub1.identifier = "sub1-identifier"
+        sub1.rid = "sub1-rid"
+        sub1.lastSeen = Date()
+        sub1.auth = auth
+
+        let sub2 = Subscription()
+        sub2.identifier = "sub2-identifier"
+        sub2.rid = "sub2-rid"
+        sub2.lastSeen = Date().addingTimeInterval(-1.0)
+        sub2.auth = auth
+
+        try realm.write {
+            realm.add(auth)
+            realm.add(sub1)
+            realm.add(sub2)
+        }
+
+        // if there's no last notification room id (user didn't launch app by tapping notification)
+        XCTAssertEqual(Subscription.initialSubscription(auth: auth), sub1)
+
+        PushManager.lastNotificationRoomId = "sub2-rid"
+
+        // if there's no last notification room id (user launched app by tapping notification)
+        XCTAssertEqual(Subscription.initialSubscription(auth: auth), sub2)
     }
 }

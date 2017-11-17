@@ -9,6 +9,24 @@
 import XCTest
 @testable import Rocket_Chat
 
+extension DatabaseManager {
+    static func setupTestServers() {
+        let servers = [[
+            ServerPersistKeys.databaseName: "foo.realm",
+            ServerPersistKeys.serverURL: "wss://foo.com/websocket",
+            ServerPersistKeys.token: "1",
+            ServerPersistKeys.userId: "1"
+        ], [
+            ServerPersistKeys.databaseName: "open.realm",
+            ServerPersistKeys.serverURL: "wss://open.rocket.chat/websocket",
+            ServerPersistKeys.token: "1",
+            ServerPersistKeys.userId: "1"
+        ]]
+
+        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+    }
+}
+
 class DatabaseManagerSpec: XCTestCase {
 
     func testSelectedIndex() {
@@ -28,15 +46,8 @@ class DatabaseManagerSpec: XCTestCase {
     }
 
     func testServersList() {
-        let servers = [[
-            ServerPersistKeys.databaseName: "foo.realm",
-            ServerPersistKeys.serverURL: "wss://foo.com/websocket",
-            ServerPersistKeys.token: "1",
-            ServerPersistKeys.userId: "1"
-        ]]
-
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
-        XCTAssertEqual(DatabaseManager.servers?.count, 1, "1 server into the list")
+        DatabaseManager.setupTestServers()
+        XCTAssertEqual(DatabaseManager.servers?.count, 2, "2 servers into the list")
     }
 
     func testSelectDatabase() {
@@ -89,4 +100,10 @@ class DatabaseManagerSpec: XCTestCase {
         XCTAssertNotNil(server?[ServerPersistKeys.databaseName], "new server database name isn't nil")
     }
 
+    func testServerIndexForUrl() {
+        DatabaseManager.setupTestServers()
+        XCTAssertEqual(DatabaseManager.serverIndexForUrl("wss://foo.com/websocket"), 0, "correct index for foo.com")
+        XCTAssertEqual(DatabaseManager.serverIndexForUrl("wss://open.rocket.chat/websocket"), 1, "correct index for open.rocket.chat")
+        XCTAssertNil(DatabaseManager.serverIndexForUrl("wss://unexisting.chat/websocket"), "index is nil for unexisting server")
+    }
 }

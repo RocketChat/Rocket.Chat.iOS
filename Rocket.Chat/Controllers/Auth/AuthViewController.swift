@@ -150,14 +150,7 @@ final class AuthViewController: BaseViewController {
 
                     DispatchQueue.main.async {
                         self?.dismiss(animated: true, completion: nil)
-
-                        let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-                        let controller = storyboardChat.instantiateInitialViewController()
-                        let application = UIApplication.shared
-
-                        if let window = application.windows.first {
-                            window.rootViewController = controller
-                        }
+                        AppManager.reloadApp()
                     }
                 } else {
                     DispatchQueue.main.async {
@@ -318,7 +311,7 @@ extension AuthViewController {
         switch changes {
         case .update(let res, let deletions, let insertions, let modifications):
             insertions.map { res[$0] }.forEach {
-                guard $0.custom, !($0.serverURL?.isEmpty ?? true) else { return }
+                guard $0.custom, !($0.serverUrl?.isEmpty ?? true) else { return }
 
                 let button = UIButton()
                 button.layer.cornerRadius = 3
