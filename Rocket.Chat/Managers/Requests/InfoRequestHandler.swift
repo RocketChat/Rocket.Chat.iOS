@@ -82,48 +82,52 @@ extension InfoRequestHandler: URLSessionTaskDelegate {
         task.suspend()
 
         if let location = response.allHeaderFields["Location"] as? String {
-            var url = URLComponents(string: location)
-            url?.scheme = "https"
-            url?.query = nil
-
-            if let newURL = url?.url {
-                let newAPI = API(host: newURL)
-                newAPI.fetch(InfoRequest(), sessionDelegate: self) { result in
-                    guard
-                        result?.error == nil,
-                        let controller = self.delegate?.viewControllerToPresentAlerts,
-                        let newHost = newURL.host
-                    else {
-                        DispatchQueue.main.async {
-                            self.delegate?.urlNotValid()
-                        }
-
-                        return
-                    }
-
-                    let alert = UIAlertController(
-                        title: localized("connection.server.redirect.alert.title"),
-                        message: String(format: localized("connection.server.redirect.alert.message"), newHost),
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: { _ in
-                        DispatchQueue.main.async {
-                            self.delegate?.serverChangedURL(nil)
-                        }
-                    }))
-
-                    alert.addAction(UIAlertAction(title: localized("connection.server.redirect.alert.confirm"), style: .default, handler: { _ in
-                        DispatchQueue.main.async {
-                            self.delegate?.serverChangedURL(newHost)
-                        }
-                    }))
-
-                    DispatchQueue.main.async {
-                        controller.present(alert, animated: true, completion: nil)
-                    }
-                }
+            if let newURL = transformNewURL(location) {
+                handleRedirect(newURL)
             }
+        }
+    }
+
+    func transformNewURL(_ newURL: String) -> URL? {
+        var url = URLComponents(string: newURL)
+        url?.scheme = "https"
+        url?.query = nil
+        return url?.url
+    }
+
+    func handleRedirect(_ newURL: URL) {
+        API(host: newURL).fetch(InfoRequest(), sessionDelegate: self) { result in
+            guard let result = result else { return }
+            self.handleRedirectInfoResult(result, for: newURL)
+        }
+    }
+
+    func handleRedirectInfoResult(_ result: InfoResult, for url: URL) {
+        guard
+            result.raw != nil,
+            let controller = self.delegate?.viewControllerToPresentAlerts,
+            let newHost = url.host
+        else {
+            self.delegate?.urlNotValid()
+            return
+        }
+
+        let alert = UIAlertController(
+            title: localized("connection.server.redirect.alert.title"),
+            message: String(format: localized("connection.server.redirect.alert.message"), newHost),
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: { _ in
+            self.delegate?.serverChangedURL(nil)
+        }))
+
+        alert.addAction(UIAlertAction(title: localized("connection.server.redirect.alert.confirm"), style: .default, handler: { _ in
+            self.delegate?.serverChangedURL(newHost)
+        }))
+
+        DispatchQueue.main.async {
+            controller.present(alert, animated: true, completion: nil)
         }
     }
 
