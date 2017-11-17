@@ -763,7 +763,8 @@ extension ChatViewController {
         guard
             dataController.data.count > indexPath.row,
             let subscription = subscription,
-            let obj = dataController.itemAt(indexPath)
+            let obj = dataController.itemAt(indexPath),
+            !(obj.message?.isInvalidated ?? false)
         else {
             return UICollectionViewCell()
         }
