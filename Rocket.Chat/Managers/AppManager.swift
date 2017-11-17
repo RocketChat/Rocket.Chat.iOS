@@ -56,10 +56,8 @@ extension AppManager {
         return true
     }
 
-    @discardableResult
-    static func reloadApp() -> Bool {
+    static func reloadApp() {
         SocketManager.disconnect { (_, _) in }
         WindowManager.open(.main)
-        return UIApplication.shared.keyWindow?.rootViewController != nil
     }
 }
