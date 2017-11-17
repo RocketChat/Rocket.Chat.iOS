@@ -145,6 +145,12 @@ extension SocketManager {
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
 
+                // If we have some subscription opened, let's
+                // try to subscribe to it again
+                if let subscription = ChatViewController.shared?.subscription, !subscription.isInvalidated {
+                    MessageManager.changes(subscription)
+                }
+
                 if let userIdentifier = auth.userId {
                     PushManager.updateUser(userIdentifier)
                 }
