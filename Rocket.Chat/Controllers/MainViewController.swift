@@ -135,6 +135,7 @@ extension MainViewController: InfoRequestHandlerDelegate {
                 DatabaseManager.selectDatabase(at: newIndex)
                 DatabaseManager.cleanInvalidDatabases()
                 DatabaseManager.changeDatabaseInstance()
+                AuthManager.recoverAuthIfNeeded()
 
                 DispatchQueue.main.async {
                     self.infoRequestHandler.validate()
