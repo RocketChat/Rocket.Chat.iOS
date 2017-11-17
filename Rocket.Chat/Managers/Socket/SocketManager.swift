@@ -135,9 +135,9 @@ extension SocketManager {
 
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
                 AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
-
+                    
                 })
-
+                
                 UserManager.userDataChanges()
                 UserManager.changes()
                 SubscriptionManager.changes(auth)
@@ -145,8 +145,8 @@ extension SocketManager {
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
 
-                if let userId = auth.userId {
-                    PushManager.updateUser(userId)
+                if let userIdentifier = auth.userId {
+                    PushManager.updateUser(userIdentifier)
                 }
             })
         })
