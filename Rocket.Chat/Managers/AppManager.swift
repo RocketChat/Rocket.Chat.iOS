@@ -57,7 +57,8 @@ extension AppManager {
     }
 
     static func reloadApp() {
-        SocketManager.disconnect { (_, _) in }
-        WindowManager.open(.main)
+        SocketManager.disconnect { (_, _) in
+            WindowManager.open(.main)
+        }
     }
 }
