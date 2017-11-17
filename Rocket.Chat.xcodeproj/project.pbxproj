@@ -116,6 +116,7 @@
 		41ADDD491E9DBB100007A458 /* LoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ADDD481E9DBB100007A458 /* LoaderView.swift */; };
 		41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41ADDD4A1E9E787E0007A458 /* LoaderViewSpec.swift */; };
 		41B4B2341E40B1D200F4D252 /* ChatControllerUploader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B4B2331E40B1D200F4D252 /* ChatControllerUploader.swift */; };
+		41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */; };
 		41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BA89231D303D8B00CBF526 /* AuthManagerSpec.swift */; };
 		41BAE3E71D71B26C00C2445A /* URLExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BAE3E61D71B26C00C2445A /* URLExtension.swift */; };
 		41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */; };
@@ -399,6 +400,7 @@
 		41ADDD481E9DBB100007A458 /* LoaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoaderView.swift; path = Views/Loader/LoaderView.swift; sourceTree = "<group>"; };
 		41ADDD4A1E9E787E0007A458 /* LoaderViewSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoaderViewSpec.swift; path = Views/LoaderViewSpec.swift; sourceTree = "<group>"; };
 		41B4B2331E40B1D200F4D252 /* ChatControllerUploader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatControllerUploader.swift; path = Controllers/Chat/ChatControllerUploader.swift; sourceTree = "<group>"; };
+		41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UIWindowExtensions.swift; path = Extensions/UIWindowExtensions.swift; sourceTree = "<group>"; };
 		41BA89231D303D8B00CBF526 /* AuthManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthManagerSpec.swift; path = Managers/AuthManagerSpec.swift; sourceTree = "<group>"; };
 		41BAE3E61D71B26C00C2445A /* URLExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URLExtension.swift; path = Extensions/URLExtension.swift; sourceTree = "<group>"; };
 		41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSURLExtensionSpec.swift; path = Extensions/NSURLExtensionSpec.swift; sourceTree = "<group>"; };
@@ -865,6 +867,7 @@
 				41E53A161E546F5500C3FBB3 /* UINibExtensions.swift */,
 				41A1748B1DD9F2F900188E3B /* UIViewControllerExtension.swift */,
 				77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */,
+				41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */,
 			);
 			name = Extensions;
 			sourceTree = "<group>";
@@ -1860,6 +1863,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				41499C8F1F2A116900790EA7 /* ServerManager.swift in Sources */,
+				41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */,
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
 				41852E891F92BBEC00D1C499 /* ChatControllerReplyHandler.swift in Sources */,
 				D1C536CC1F688B2F00EBA8D9 /* MarkdownManager.swift in Sources */,

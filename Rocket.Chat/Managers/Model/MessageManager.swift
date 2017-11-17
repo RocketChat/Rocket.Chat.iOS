@@ -43,9 +43,11 @@ extension MessageManager {
         let validMessages = List<Message>()
 
         SocketManager.send(request) { response in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-            let list = response.result["result"]["messages"].array
+            guard !response.isError() else {
+                return Log.debug(response.result.string)
+            }
 
+            let list = response.result["result"]["messages"].array
             let subscriptionIdentifier = subscription.identifier
 
             Realm.execute({ (realm) in

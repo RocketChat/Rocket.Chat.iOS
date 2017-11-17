@@ -58,9 +58,19 @@ extension AppManager {
 
     @discardableResult
     static func reloadApp() -> Bool {
+        SocketManager.disconnect { (_, _) in
+
+        }
+
         let controller = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()
-        let window = UIApplication.shared.windows.first
-        window?.rootViewController = controller
+        let window = UIApplication.shared.keyWindow
+
+        if let window = window, let controller = controller {
+            let transition = CATransition()
+            transition.type = kCATransitionFade
+            window.set(rootViewController: controller, withTransition: transition)
+        }
+
         return window?.rootViewController != nil
     }
 }
