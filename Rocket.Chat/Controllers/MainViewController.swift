@@ -61,7 +61,7 @@ final class MainViewController: BaseViewController {
             WindowManager.open(.auth)
         }
     }
- 
+
 }
 
 extension MainViewController: InfoRequestHandlerDelegate {
