@@ -125,24 +125,25 @@ extension MainViewController: InfoRequestHandlerDelegate {
     }
 
     func serverChangedURL(_ newURL: String?) {
-        if let url = newURL {
-            if let socketURL = URL(string: url)?.socketURL() {
-                let newIndex = DatabaseManager.copyServerInformation(
-                    from: DatabaseManager.selectedIndex,
-                    with: socketURL.absoluteString
-                )
+        guard
+            let url = newURL,
+            let socketURL = URL(string: url)?.socketURL()
+        else {
+            return self.resumeAuth()
+        }
 
-                DatabaseManager.selectDatabase(at: newIndex)
-                DatabaseManager.cleanInvalidDatabases()
-                DatabaseManager.changeDatabaseInstance()
-                AuthManager.recoverAuthIfNeeded()
+        let newIndex = DatabaseManager.copyServerInformation(
+            from: DatabaseManager.selectedIndex,
+            with: socketURL.absoluteString
+        )
 
-                DispatchQueue.main.async {
-                    self.infoRequestHandler.validate()
-                }
-            }
-        } else {
-            self.resumeAuth()
+        DatabaseManager.selectDatabase(at: newIndex)
+        DatabaseManager.cleanInvalidDatabases()
+        DatabaseManager.changeDatabaseInstance()
+        AuthManager.recoverAuthIfNeeded()
+
+        DispatchQueue.main.async {
+            self.infoRequestHandler.validate()
         }
     }
 
