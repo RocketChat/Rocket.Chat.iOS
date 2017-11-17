@@ -27,8 +27,10 @@ final class ChatTitleView: UIView {
         return UILayoutFittingExpandedSize
     }
 
-    var subscription: Subscription! {
+    var subscription: Subscription? {
         didSet {
+            guard let subscription = subscription else { return }
+
             labelTitle.text = subscription.displayName()
 
             switch subscription.type {

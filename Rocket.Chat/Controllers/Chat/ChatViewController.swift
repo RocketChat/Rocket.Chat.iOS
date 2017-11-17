@@ -80,6 +80,15 @@ final class ChatViewController: SLKTextViewController {
                 return
             }
 
+            if !SocketManager.isConnected() {
+                socketDidDisconnect(socket: SocketManager.sharedInstance)
+                reconnect()
+            }
+
+            if let oldValue = oldValue, oldValue.identifier != subscription.identifier {
+                unsubscribe(for: oldValue)
+            }
+
             subscriptionToken = subscription.observe { [weak self] changes in
                 switch changes {
                 case .change(let propertyChanges):
@@ -96,10 +105,6 @@ final class ChatViewController: SLKTextViewController {
             updateSubscriptionInfo()
             markAsRead()
             typingIndicatorView?.dismissIndicator()
-
-            if let oldValue = oldValue, oldValue.identifier != subscription.identifier {
-                unsubscribe(for: oldValue)
-            }
 
             textView.text = DraftMessageManager.draftMessage(for: subscription)
         }
@@ -157,7 +162,7 @@ final class ChatViewController: SLKTextViewController {
             reconnect()
         }
 
-        self.subscription = .initialSubscription()
+        subscription = .initialSubscription()
 
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
