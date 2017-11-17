@@ -118,13 +118,7 @@ final class ConnectServerViewController: BaseViewController {
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
 
-        let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let controller = storyboardChat.instantiateInitialViewController()
-        let application = UIApplication.shared
-
-        if let window = application.windows.first {
-            window.rootViewController = controller
-        }
+        AppManager.reloadApp()
     }
 
     func alertInvalidURL() {
@@ -142,29 +136,12 @@ final class ConnectServerViewController: BaseViewController {
         guard let url = url else { return alertInvalidURL() }
         guard let socketURL = url.socketURL() else { return alertInvalidURL() }
 
-        // Check if server already exists and connect to that instead
-        if let servers = DatabaseManager.servers {
-            let sameServerIndex = servers.index(where: {
-                if let stringServerUrl = $0[ServerPersistKeys.serverURL],
-                    let serverUrl = URL(string: stringServerUrl) {
-
-                    return serverUrl == socketURL
-                } else {
-                    return false
-                }
-            })
-
-            if let sameServerIndex = sameServerIndex {
-                MainChatViewController.shared?.changeSelectedServer(index: sameServerIndex)
-                textFieldServerURL.resignFirstResponder()
-                return
-            }
-        }
-
         connecting = true
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
+
+        if AppManager.changeToServerIfExists(serverUrl: socketURL.absoluteString) { return }
 
         API.shared.host = url
         validate { [weak self] (_, error) in

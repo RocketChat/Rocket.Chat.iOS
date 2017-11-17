@@ -156,11 +156,7 @@ final class ChatViewController: SLKTextViewController {
             socketDidDisconnect(socket: SocketManager.sharedInstance)
         }
 
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        let subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        if let subscription = subscriptions.first {
-            self.subscription = subscription
-        }
+        self.subscription = .initialSubscription()
 
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
