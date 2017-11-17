@@ -872,7 +872,9 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        guard let subscription = subscription else { return .zero }
+        guard let subscription = subscription, !subscription.isInvalidated else {
+            return .zero
+        }
 
         var fullWidth = collectionView.bounds.size.width
 
