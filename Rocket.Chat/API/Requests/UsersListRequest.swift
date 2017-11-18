@@ -15,7 +15,7 @@ class UsersListRequest: APIRequest {
     var query: String?
 
     init(name: String) {
-        self.query = "query={ \"name\": { \"$regex\": \"\(name)\" } }"
+        self.query = "query={ \"username\": { \"$regex\": \"\(name)\" } }"
     }
 }
 
