@@ -101,6 +101,8 @@ class NewRoomViewController: BaseViewController {
         TextFieldTableViewCell.registerCell(for: tableView)
         MentionsTextFieldTableViewCell.registerCell(for: tableView)
 
+        tableView.keyboardDismissMode = .interactive
+
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillHide, object: nil)
 
@@ -117,15 +119,25 @@ class NewRoomViewController: BaseViewController {
     }
 
     private func fetchUsers(name: String) {
-        guard let realm = Realm.shared else { return }
+        API.shared.fetch(UsersListRequest(name: name)) { (result) in
+            guard let users = result?.users else {
+                return
+            }
 
-        let users = realm.objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", name))
-
-        for user in users {
-            if let username = user.username {
-                print(username)
+            for user in users where ((user?.username) != nil) {
+                print(user?.username ?? "no ussername")
             }
         }
+
+//        guard let realm = Realm.shared else { return }
+//
+//        let users = realm.objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", name))
+//
+//        for user in users {
+//            if let username = user.username {
+//                print(username)
+//            }
+//        }
     }
 
     deinit {
@@ -214,8 +226,7 @@ extension NewRoomViewController: FormTableViewDelegate {
             } else {
                 cellRoomName.imgLeftIcon.image = #imageLiteral(resourceName: "Lock")
             }
-        }
-        else if key == "users list",
+        } else if key == "users list",
             let name = value as? String {
             fetchUsers(name: name)
         }
@@ -225,9 +236,22 @@ extension NewRoomViewController: FormTableViewDelegate {
         return setValues[key]
     }
 
-    func updateTable() {
+    func updateTable(key: String) {
         tableView.beginUpdates()
         tableView.endUpdates()
+
+        var section = 0
+        for sectionForm in tableViewData {
+            var row = 0
+            for cell in sectionForm.cells {
+                if cell.key == key {
+                    tableView.scrollToRow(at: IndexPath(row: row, section: section), at: .none, animated: true)
+                    return
+                }
+                row += 1
+            }
+            section += 1
+        }
     }
 }
 
