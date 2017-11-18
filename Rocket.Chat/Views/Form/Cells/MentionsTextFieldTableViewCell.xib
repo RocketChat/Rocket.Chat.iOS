@@ -34,8 +34,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                 <connections>
-                                    <action selector="textFieldDidEndEditing:" destination="aDp-QN-FVz" eventType="editingDidEnd" id="v1c-fU-ATN"/>
-                                    <action selector="textFieldInputEditingChanged:" destination="aDp-QN-FVz" eventType="editingChanged" id="c7j-Ns-ZFZ"/>
+                                    <action selector="textFieldInputEditingChanged:" destination="aDp-QN-FVz" eventType="editingChanged" id="i4q-gK-fZa"/>
                                 </connections>
                             </textField>
                         </subviews>

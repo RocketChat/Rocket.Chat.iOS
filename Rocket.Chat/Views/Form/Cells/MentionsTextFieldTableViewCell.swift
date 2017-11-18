@@ -21,10 +21,13 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
     @IBOutlet weak var imgLeftIcon: UIImageView!
     @IBOutlet weak var textFieldInput: UITextField!
 
+    private var users: [String: TagView] = [:]
+
     override func awakeFromNib() {
         super.awakeFromNib()
 
         textFieldInput.clearButtonMode = .whileEditing
+        textFieldInput.delegate = self
         tagListView.textFont = UIFont.systemFont(ofSize: 16)
         tagListView.delegate = self
     }
@@ -43,29 +46,39 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
         delegate?.updateDictValue(key: key ?? "", value: textFieldInput.text ?? "")
     }
 
-    @IBAction func textFieldDidEndEditing(_ sender: Any) {
-        guard let name = textFieldInput.text, name.count > 0 else {
-            return
-        }
-
-        textFieldInput.text = nil
-        tagListView.addTag(name)
-        delegate?.updateTable()
-    }
-
     override func prepareForReuse() {
         super.prepareForReuse()
 
+        users.removeAll()
         tagListView.removeAllTags()
     }
 
     // MARK: Tag
-    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        print("Tag pressed: \(title), \(sender)")
+    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        for tag in users where tag.value === tagView {
+            users.removeValue(forKey: tag.key)
+        }
+
+        tagListView.removeTagView(tagView)
+        delegate?.updateTable(key: key ?? "")
     }
 
-    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        print("Tag removed: \(title), \(sender)")
+}
+
+extension MentionsTextFieldTableViewCell: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        guard let name = textFieldInput.text, name.count > 0 else {
+            return true
+        }
+
+        textFieldInput.text = nil
+
+        if users[name] == nil {
+            users[name] = tagListView.addTag(name)
+            delegate?.updateTable(key: key ?? "")
+        }
+
+        return false
     }
 
 }
