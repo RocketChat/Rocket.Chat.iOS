@@ -43,6 +43,11 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
     }
 
     @IBAction func textFieldInputEditingChanged(_ sender: Any) {
+        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.fetchUsers), object: nil)
+        self.perform(#selector(self.fetchUsers), with: nil, afterDelay: 1)
+    }
+
+    @objc private func fetchUsers() {
         delegate?.updateDictValue(key: key ?? "", value: textFieldInput.text ?? "")
     }
 
