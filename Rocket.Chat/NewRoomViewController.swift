@@ -125,7 +125,7 @@ class NewRoomViewController: BaseViewController {
             }
 
             for user in users where ((user?.username) != nil) {
-                print(user?.username ?? "no ussername")
+                print(user?.username ?? "no username")
             }
         }
 
