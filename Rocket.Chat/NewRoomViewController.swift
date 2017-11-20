@@ -22,8 +22,6 @@ class NewRoomViewController: BaseViewController {
         return AuthManager.currentUser()
     }
 
-    var invitedUsers = [String]()
-
     let tableViewData: [SectionForm] = [
         SectionForm(
             name: nil,
@@ -48,7 +46,7 @@ class NewRoomViewController: BaseViewController {
                 FormCell(
                     cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag")),
                     key: "room name",
-                    defaultValue: "",
+                    defaultValue: [],
                     enabled: true
                 )
             ]
@@ -137,9 +135,13 @@ class NewRoomViewController: BaseViewController {
     }
 
     @IBAction func buttonCreateDidPressed(_ sender: UIButton) {
-        guard let roomName = setValues["room name"] as? String else { return }
-        guard let publicRoom = setValues["public room"] as? Bool else { return }
-        guard let readOnlyRoom = setValues["read only room"] as? Bool else { return }
+        guard
+            let roomName = setValues["room name"] as? String,
+            let publicRoom = setValues["public room"] as? Bool,
+            let membersRoom = setValues["users list"] as? [String],
+            let readOnlyRoom = setValues["read only room"] as? Bool else {
+                return
+        }
 
         let roomType: SubscriptionCreateType
         if publicRoom {
@@ -149,7 +151,7 @@ class NewRoomViewController: BaseViewController {
         }
 
         sender.isEnabled = false
-        executeRequestCreateRoom(roomName: roomName, roomType: roomType, readOnlyRoom: readOnlyRoom) { [weak self] success, errorMessage in
+        executeRequestCreateRoom(roomName: roomName, roomType: roomType, members: membersRoom, readOnlyRoom: readOnlyRoom) { [weak self] success, errorMessage in
 
             if success {
                 self?.dismiss(animated: true, completion: nil)
@@ -160,8 +162,8 @@ class NewRoomViewController: BaseViewController {
         }
     }
 
-    fileprivate func executeRequestCreateRoom(roomName: String, roomType: SubscriptionCreateType, readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
-        API.shared.fetch(SubscriptionCreateRequest(name: roomName, type: roomType, readOnly: readOnlyRoom)) { result in
+    fileprivate func executeRequestCreateRoom(roomName: String, roomType: SubscriptionCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
+        API.shared.fetch(SubscriptionCreateRequest(name: roomName, type: roomType, members: members, readOnly: readOnlyRoom)) { result in
 
             guard let success = result?.success, success == true else {
                     completion(false, result?.error)
@@ -204,9 +206,6 @@ extension NewRoomViewController: FormTableViewDelegate {
             } else {
                 cellRoomName.imgLeftIcon.image = #imageLiteral(resourceName: "Lock")
             }
-        } else if key == "users list",
-        let users = value as? [String] {
-            invitedUsers = users
         }
     }
 
