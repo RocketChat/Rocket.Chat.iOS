@@ -119,6 +119,8 @@ class NewRoomViewController: BaseViewController {
     }
 
     private func fetchUsers(name: String) {
+        if name.count == 0 { return }
+
         API.shared.fetch(UsersListRequest(name: name)) { (result) in
             guard let users = result?.users else {
                 return
@@ -128,16 +130,6 @@ class NewRoomViewController: BaseViewController {
                 print(user?.username ?? "no username")
             }
         }
-
-//        guard let realm = Realm.shared else { return }
-//
-//        let users = realm.objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", name))
-//
-//        for user in users {
-//            if let username = user.username {
-//                print(username)
-//            }
-//        }
     }
 
     deinit {

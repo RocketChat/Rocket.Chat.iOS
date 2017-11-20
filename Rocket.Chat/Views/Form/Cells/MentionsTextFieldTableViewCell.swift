@@ -20,6 +20,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
     @IBOutlet private weak var tagListView: TagListView!
     @IBOutlet weak var imgLeftIcon: UIImageView!
     @IBOutlet weak var textFieldInput: UITextField!
+    @IBOutlet weak var tagViewTopConstraint: NSLayoutConstraint!
 
     private var users: [String: TagView] = [:]
 
@@ -30,6 +31,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
         textFieldInput.delegate = self
         tagListView.textFont = UIFont.systemFont(ofSize: 16)
         tagListView.delegate = self
+        tagViewTopConstraint.constant = 0
     }
 
     func height() -> CGFloat {
@@ -65,9 +67,13 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
         }
 
         tagListView.removeTagView(tagView)
+        updateTagViewConstraint()
         delegate?.updateTable(key: key ?? "")
     }
 
+    private func updateTagViewConstraint() {
+        tagViewTopConstraint.constant = tagListView.tagViews.count > 0 ? 12 : 0
+    }
 }
 
 extension MentionsTextFieldTableViewCell: UITextFieldDelegate {
@@ -80,6 +86,7 @@ extension MentionsTextFieldTableViewCell: UITextFieldDelegate {
 
         if users[name] == nil {
             users[name] = tagListView.addTag(name)
+            updateTagViewConstraint()
             delegate?.updateTable(key: key ?? "")
         }
 
