@@ -103,6 +103,7 @@
             <connections>
                 <outlet property="imgLeftIcon" destination="hEU-Fp-6Qh" id="llq-Ah-GdT"/>
                 <outlet property="tagListView" destination="Bss-XT-eWG" id="nTS-Gc-djB"/>
+                <outlet property="tagViewTopConstraint" destination="3N1-AN-aQJ" id="54Q-a1-Nk8"/>
                 <outlet property="textFieldInput" destination="jY1-nQ-wvl" id="SMU-3K-usB"/>
             </connections>
             <point key="canvasLocation" x="88" y="168.5"/>
