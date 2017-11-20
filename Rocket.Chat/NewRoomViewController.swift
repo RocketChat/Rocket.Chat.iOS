@@ -22,7 +22,7 @@ class NewRoomViewController: BaseViewController {
         return AuthManager.currentUser()
     }
 
-    var users = [User]()
+    var invitedUsers = [String]()
 
     let tableViewData: [SectionForm] = [
         SectionForm(
@@ -118,20 +118,6 @@ class NewRoomViewController: BaseViewController {
         }
     }
 
-    private func fetchUsers(name: String) {
-        if name.count == 0 { return }
-
-        API.shared.fetch(UsersListRequest(name: name)) { (result) in
-            guard let users = result?.users else {
-                return
-            }
-
-            for user in users where ((user?.username) != nil) {
-                print(user?.username ?? "no username")
-            }
-        }
-    }
-
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -219,8 +205,8 @@ extension NewRoomViewController: FormTableViewDelegate {
                 cellRoomName.imgLeftIcon.image = #imageLiteral(resourceName: "Lock")
             }
         } else if key == "users list",
-            let name = value as? String {
-            fetchUsers(name: name)
+        let users = value as? [String] {
+            invitedUsers = users
         }
     }
 

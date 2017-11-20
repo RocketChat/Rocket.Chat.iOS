@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import TagListView
+import SearchTextField
 
 class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol, TagListViewDelegate {
     static let identifier = "kMentionsTextFieldTableViewCell"
@@ -19,19 +20,35 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
 
     @IBOutlet private weak var tagListView: TagListView!
     @IBOutlet weak var imgLeftIcon: UIImageView!
-    @IBOutlet weak var textFieldInput: UITextField!
+    @IBOutlet weak var textFieldInput: SearchTextField!
     @IBOutlet weak var tagViewTopConstraint: NSLayoutConstraint!
 
+    private var usersList = [String: String]()
     private var users: [String: TagView] = [:]
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
         textFieldInput.clearButtonMode = .whileEditing
-        textFieldInput.delegate = self
         tagListView.textFont = UIFont.systemFont(ofSize: 16)
         tagListView.delegate = self
         tagViewTopConstraint.constant = 0
+
+        textFieldInput.itemSelectionHandler = { filteredResults, itemPosition in
+            let item = filteredResults[itemPosition]
+            self.addUserToInviteList(name: item.title)
+            self.textFieldInput.text = nil
+            self.delegate?.updateDictValue(key: self.key ?? "", value: self.invitedUsers())
+        }
+    }
+
+    private func invitedUsers() -> [String] {
+        var invitedUsers = [String]()
+        for user in usersList where users[user.value] != nil {
+            invitedUsers.append(user.key)
+        }
+
+        return invitedUsers
     }
 
     func height() -> CGFloat {
@@ -50,7 +67,36 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
     }
 
     @objc private func fetchUsers() {
-        delegate?.updateDictValue(key: key ?? "", value: textFieldInput.text ?? "")
+        guard
+            let name = textFieldInput.text,
+            name.count > 0 else {
+                textFieldInput.filterStrings([])
+                return
+        }
+
+        API.shared.fetch(UsersListRequest(name: name)) { (result) in
+            guard let users = result?.users else {
+                self.textFieldInput.filterStrings([])
+                return
+            }
+
+            var usernames = [String]()
+            for user in users {
+                if let unwrappedUser = user,
+                    let username = unwrappedUser.username,
+                    let identifier = unwrappedUser.identifier,
+                    let loggedIdentifier = AuthManager.currentUser()?.identifier,
+                    loggedIdentifier != identifier,
+                    username.count > 0 {
+                    usernames.append(username)
+                    self.usersList[identifier] = username
+                }
+            }
+
+            DispatchQueue.main.async {
+                self.textFieldInput.filterStrings(usernames)
+            }
+        }
     }
 
     override func prepareForReuse() {
@@ -68,29 +114,19 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
 
         tagListView.removeTagView(tagView)
         updateTagViewConstraint()
+        delegate?.updateDictValue(key: key ?? "", value: self.invitedUsers())
         delegate?.updateTable(key: key ?? "")
     }
 
     private func updateTagViewConstraint() {
         tagViewTopConstraint.constant = tagListView.tagViews.count > 0 ? 12 : 0
     }
-}
 
-extension MentionsTextFieldTableViewCell: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        guard let name = textFieldInput.text, name.count > 0 else {
-            return true
-        }
-
-        textFieldInput.text = nil
-
+    func addUserToInviteList(name: String) {
         if users[name] == nil {
             users[name] = tagListView.addTag(name)
             updateTagViewConstraint()
             delegate?.updateTable(key: key ?? "")
         }
-
-        return false
     }
-
 }
