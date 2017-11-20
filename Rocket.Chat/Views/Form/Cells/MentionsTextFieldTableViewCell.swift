@@ -23,7 +23,6 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
     @IBOutlet weak var textFieldInput: SearchTextField!
     @IBOutlet weak var tagViewTopConstraint: NSLayoutConstraint!
 
-    private var usersList = [String: String]()
     private var users: [String: TagView] = [:]
 
     override func awakeFromNib() {
@@ -44,7 +43,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
 
     private func invitedUsers() -> [String] {
         var invitedUsers = [String]()
-        for user in usersList where users[user.value] != nil {
+        for user in users {
             invitedUsers.append(user.key)
         }
 
@@ -89,7 +88,6 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
                     loggedIdentifier != identifier,
                     username.count > 0 {
                     usernames.append(username)
-                    self.usersList[identifier] = username
                 }
             }
 
