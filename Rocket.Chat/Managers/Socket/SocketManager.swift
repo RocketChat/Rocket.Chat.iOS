@@ -84,7 +84,7 @@ class SocketManager {
         }
 
         if let raw = json.rawString() {
-            Log.debug("Socket will send message: \(raw)")
+            Log.debug("[WebSocket] \(sharedInstance.socket?.currentURL.description ?? "nil")\n -  will send message: \(raw)")
 
             sharedInstance.socket?.write(string: raw)
 
@@ -185,7 +185,7 @@ extension SocketManager {
 extension SocketManager: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
-        Log.debug("Socket (\(socket)) did connect")
+        Log.debug("[WebSocket] \(socket.currentURL)\n -  did connect")
 
         let object = [
             "msg": "connect",
@@ -197,7 +197,7 @@ extension SocketManager: WebSocketDelegate {
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        Log.debug("[WebSocket] did disconnect with error (\(String(describing: error)))")
+        Log.debug("[WebSocket] \(socket.currentURL)\n - did disconnect with error (\(String(describing: error)))")
 
         events = [:]
         queue = [:]
@@ -221,12 +221,12 @@ extension SocketManager: WebSocketDelegate {
 
         // JSON is invalid
         guard json.exists() else {
-            Log.debug("[WebSocket] did receive invalid JSON object: \(text)")
+            Log.debug("[WebSocket] \(socket.currentURL)\n - did receive invalid JSON object:\n\(text)")
             return
         }
 
         if let raw = json.rawString() {
-            Log.debug("[WebSocket] did receive JSON message: \(raw)")
+            Log.debug("[WebSocket] \(socket.currentURL)\n - did receive JSON message:\n\(raw)")
         }
 
         self.handleMessage(json, socket: socket)
