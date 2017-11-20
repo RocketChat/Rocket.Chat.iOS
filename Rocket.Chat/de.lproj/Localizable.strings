@@ -82,6 +82,8 @@
 "new_room.group.channel.name" = "Channel Name";
 "new_room.cell.channel_name.title" = "Channel Name";
 "new_room.group.channel.footer" = "Der Name muss komplett in Kleinbuchstaben und kürzer als 22 Zeichen sein.";
+"new_room.group.invite_users" = "Invite users";
+"new_room.cell.invite_users.placeholder" = "Usernames";
 
 // Chat
 "chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
