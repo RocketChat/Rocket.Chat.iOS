@@ -150,7 +150,7 @@ extension MainChatViewController: InfoRequestHandlerDelegate {
             let url = URL(string: newURL ?? ""),
             let socketURL = url.socketURL()
         else {
-            return WindowManager.open(.chat)
+            return
         }
 
         let newIndex = DatabaseManager.copyServerInformation(
