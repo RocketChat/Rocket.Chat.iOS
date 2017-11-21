@@ -59,6 +59,8 @@ class SocketManager {
             return
         }
 
+        sharedInstance.events = [:]
+        sharedInstance.queue = [:]
         sharedInstance.internalConnectionHandler = completion
         sharedInstance.socket?.disconnect()
     }
