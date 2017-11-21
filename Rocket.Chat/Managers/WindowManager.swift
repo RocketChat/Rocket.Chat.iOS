@@ -11,7 +11,6 @@ import UIKit
 enum Storyboard: String {
     case auth = "Auth"
     case chat = "Chat"
-    case main = "Main"
 }
 
 class WindowManager {
