@@ -135,6 +135,8 @@ struct SubscriptionManager {
     }
 
     static func changes(_ auth: Auth) {
+        let serverURL = auth.serverURL
+
         let eventName = "\(auth.userId ?? "")/subscriptions-changed"
         let request = [
             "msg": "sub",
@@ -149,7 +151,7 @@ struct SubscriptionManager {
             let object = response.result["fields"]["args"][1]
 
             Realm.execute({ (realm) in
-                guard let currentAuth = AuthManager.isAuthenticated(), currentAuth == auth else { return }
+                guard let auth = AuthManager.isAuthenticated(), auth.serverURL == serverURL else { return }
                 let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
                     object?.auth = msg == "removed" ? nil : auth
                 })
