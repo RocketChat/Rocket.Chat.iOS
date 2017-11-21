@@ -43,6 +43,7 @@ extension AppManager {
     static func changeSelectedServer(index: Int) {
         DatabaseManager.selectDatabase(at: index)
         DatabaseManager.changeDatabaseInstance(index: index)
+        AuthSettingsManager.shared.clearCachedSettings()
 
         SocketManager.disconnect { (_, _) in
             reloadApp()

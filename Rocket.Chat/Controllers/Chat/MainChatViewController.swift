@@ -10,6 +10,7 @@ import UIKit
 import SideMenuController
 
 class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
+    let infoRequestHandler = InfoRequestHandler()
     let socketHandlerToken = String.random(5)
 
     static var shared: MainChatViewController? {
@@ -45,9 +46,16 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.delegate = self
+        delegate = self
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
+        if let auth = AuthManager.isAuthenticated() {
+            if let apiHost = auth.apiHost {
+                infoRequestHandler.delegate = self
+                infoRequestHandler.validate(with: apiHost)
+            }
+        }
 
         performSegue(withIdentifier: "showCenterController", sender: nil)
         performSegue(withIdentifier: "containSideMenu", sender: nil)
@@ -120,6 +128,50 @@ extension MainChatViewController: SocketConnectionHandler {
 
             self.present(alert, animated: true, completion: nil)
         default: break
+        }
+    }
+
+}
+
+extension MainChatViewController: InfoRequestHandlerDelegate {
+
+    var viewControllerToPresentAlerts: UIViewController? { return self }
+
+    func urlNotValid() {
+        // Do nothing
+    }
+
+    func serverIsValid() {
+        // Do nothing
+    }
+
+    func serverChangedURL(_ newURL: String?) {
+        guard
+            let url = URL(string: newURL ?? ""),
+            let socketURL = url.socketURL()
+        else {
+            return WindowManager.open(.chat)
+        }
+
+        let newIndex = DatabaseManager.copyServerInformation(
+            from: DatabaseManager.selectedIndex,
+            with: socketURL.absoluteString
+        )
+
+        DatabaseManager.selectDatabase(at: newIndex)
+        DatabaseManager.cleanInvalidDatabases()
+        DatabaseManager.changeDatabaseInstance()
+        AuthManager.recoverAuthIfNeeded()
+
+        DispatchQueue.main.async {
+            guard
+                let auth = AuthManager.isAuthenticated(),
+                let apiHost = auth.apiHost
+            else {
+                return
+            }
+
+            self.infoRequestHandler.validate(with: apiHost)
         }
     }
 
