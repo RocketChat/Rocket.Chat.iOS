@@ -149,7 +149,7 @@ struct SubscriptionManager {
             let object = response.result["fields"]["args"][1]
 
             Realm.execute({ (realm) in
-                guard let auth = AuthManager.isAuthenticated() else { return }
+                guard let currentAuth = AuthManager.isAuthenticated(), currentAuth == auth else { return }
                 let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
                     object?.auth = msg == "removed" ? nil : auth
                 })
