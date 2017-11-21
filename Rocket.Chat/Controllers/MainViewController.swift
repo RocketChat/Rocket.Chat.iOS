@@ -27,14 +27,6 @@ final class MainViewController: BaseViewController {
         }
     }
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        AuthManager.recoverAuthIfNeeded()
-
-        infoRequestHandler.delegate = self
-        infoRequestHandler.validateServerVersion = false
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -44,22 +36,6 @@ final class MainViewController: BaseViewController {
         labelAuthenticationStatus.isHidden = true
         buttonConnect.isHidden = true
         activityIndicator.startAnimating()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-
-        if let auth = AuthManager.isAuthenticated() {
-            AuthManager.persistAuthInformation(auth)
-
-            if let url = auth.apiHost {
-                infoRequestHandler.validate(with: url)
-            } else {
-                WindowManager.open(.chat)
-            }
-        } else {
-            WindowManager.open(.auth)
-        }
     }
 
 }

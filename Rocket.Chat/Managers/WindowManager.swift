@@ -28,7 +28,7 @@ class WindowManager {
         let controller = storyboardChat.instantiateInitialViewController()
         let application = UIApplication.shared
 
-        if let window = application.keyWindow, let controller = controller {
+        if let window = application.windows.first, let controller = controller {
             let transition = CATransition()
             transition.type = transitionType
             window.set(rootViewController: controller, withTransition: transition)
