@@ -651,7 +651,8 @@ final class ChatViewController: SLKTextViewController {
     fileprivate func appendMessages(messages: [Message], completion: VoidCompletion?) {
         guard
             let subscription = subscription,
-            let collectionView = collectionView
+            let collectionView = collectionView,
+            !subscription.isInvalidated
         else {
             return
         }
