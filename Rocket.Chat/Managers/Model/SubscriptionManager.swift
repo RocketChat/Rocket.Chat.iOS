@@ -135,6 +135,8 @@ struct SubscriptionManager {
     }
 
     static func changes(_ auth: Auth) {
+        guard !auth.isInvalidated else { return }
+
         let serverURL = auth.serverURL
 
         let eventName = "\(auth.userId ?? "")/subscriptions-changed"
