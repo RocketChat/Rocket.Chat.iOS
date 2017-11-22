@@ -24,13 +24,7 @@ final class AvatarView: UIView {
 
     var user: User? {
         didSet {
-            if let user = user {
-                if !user.isInvalidated {
-                    updateAvatar()
-                }
-            } else {
-                updateAvatar()
-            }
+            updateAvatar()
         }
     }
 
@@ -44,10 +38,16 @@ final class AvatarView: UIView {
     @IBOutlet weak var imageView: UIImageView!
 
     private func userAvatarURL() -> URL? {
-        guard let username = user?.username else { return nil }
-        guard let auth = AuthManager.isAuthenticated() else { return nil }
-        guard let baseURL = auth.baseURL() else { return nil }
-        guard let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else { return nil }
+        guard
+            let user = user, !user.isInvalidated,
+            let username = user.username,
+            let auth = AuthManager.isAuthenticated(),
+            let baseURL = auth.baseURL(),
+            let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        else {
+            return nil
+        }
+
         return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
     }
 
@@ -108,8 +108,13 @@ final class AvatarView: UIView {
     }
 
     private func setAvatarWithInitials() {
-        let username = self.user?.username ?? "?"
+        guard let user = user, !user.isInvalidated else {
+            labelInitials?.text = "?"
+            backgroundColor = .black
+            return
+        }
 
+        let username = user.username ?? "?"
         var initials = ""
         var color: UInt = 0x000000
 
