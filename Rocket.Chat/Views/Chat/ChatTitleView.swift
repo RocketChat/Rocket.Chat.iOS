@@ -29,7 +29,12 @@ final class ChatTitleView: UIView {
 
     var subscription: Subscription? {
         didSet {
-            guard let subscription = subscription else { return }
+            guard
+                let subscription = subscription,
+                !subscription.isInvalidated
+            else {
+                return
+            }
 
             labelTitle.text = subscription.displayName()
 
