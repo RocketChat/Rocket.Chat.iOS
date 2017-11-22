@@ -18,6 +18,7 @@ def shared_pods
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
   pod 'MobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
+  pod 'Eureka'
 
   # Text Processing
   pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
