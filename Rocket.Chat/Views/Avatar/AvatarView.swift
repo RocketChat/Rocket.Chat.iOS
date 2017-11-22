@@ -24,7 +24,13 @@ final class AvatarView: UIView {
 
     var user: User? {
         didSet {
-            updateAvatar()
+            if let user = user {
+                if !user.isInvalidated {
+                    updateAvatar()
+                }
+            } else {
+                updateAvatar()
+            }
         }
     }
 
