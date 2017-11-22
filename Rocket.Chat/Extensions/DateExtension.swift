@@ -56,6 +56,12 @@ extension Date {
         return comp.weekday ?? -1
     }
 
+    func sameDayAs(_ otherDate: Date) -> Bool {
+        return day == otherDate.day &&
+            month == otherDate.month &&
+            year == otherDate.year
+    }
+
 }
 
 // MARK: Extensions to sync timezone with server
