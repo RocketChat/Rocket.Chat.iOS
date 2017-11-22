@@ -128,9 +128,7 @@ final class ChatDataController {
                 // Check if already contains some separator with this data
                 var insert = true
                 for obj in data.filter({ $0.type == .daySeparator })
-                    where firstMessage.timestamp.day == obj.timestamp.day &&
-                        firstMessage.timestamp.month == obj.timestamp.month &&
-                        firstMessage.timestamp.year == obj.timestamp.year {
+                    where firstMessage.timestamp.sameDayAs(obj.timestamp) {
                             insert = false
                 }
 
@@ -157,21 +155,18 @@ final class ChatDataController {
 
         for newObj in items {
             if let lastObj = lastObj {
-                if lastObj.type == .message && (
-                    lastObj.timestamp.day != newObj.timestamp.day ||
-                    lastObj.timestamp.month != newObj.timestamp.month ||
-                    lastObj.timestamp.year != newObj.timestamp.year) {
+                if lastObj.type == .message && !lastObj.timestamp.sameDayAs(newObj.timestamp) {
 
                     // Check if already contains some separator with this data
                     var insert = true
-                    for obj in data.filter({ $0.type == .daySeparator })
-                        where lastObj.timestamp.day == obj.timestamp.day &&
-                            lastObj.timestamp.month == obj.timestamp.month &&
-                            lastObj.timestamp.year == obj.timestamp.year {
+                    for obj in newItems.filter({ $0.type == .daySeparator })
+                        where lastObj.timestamp.sameDayAs(obj.timestamp) {
                                 insert = false
                     }
 
-                    if insert {
+                    if newItems.count == 0 {
+                        insertDaySeparator(from: newObj)
+                    } else if insert {
                         insertDaySeparator(from: lastObj)
                     }
                 }
