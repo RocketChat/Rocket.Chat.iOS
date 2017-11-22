@@ -65,13 +65,6 @@ class SocketManager {
         sharedInstance.socket?.disconnect()
     }
 
-    static func clear() {
-        sharedInstance.events = [:]
-        sharedInstance.queue = [:]
-        sharedInstance.internalConnectionHandler = nil
-        sharedInstance.connectionHandlers.removeAll()
-    }
-
     // MARK: Messages
 
     static func send(_ object: [String: Any], completion: MessageCompletion? = nil) {
@@ -136,8 +129,6 @@ extension SocketManager {
             }
 
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                SocketManager.clear()
-
                 AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
 
                 })
