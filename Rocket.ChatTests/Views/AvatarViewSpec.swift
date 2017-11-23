@@ -48,4 +48,65 @@ class AvatarViewSpec: XCTestCase {
         XCTAssertTrue(avatarView.initialsFor("!.!") == "!!")
     }
 
+    func testAvatarUpdatesFromImageURLChangesAvatarInitials() {
+        guard
+            let avatarView = AvatarView.instantiateFromNib(),
+            let imageURL = URL(string: "http://foo.com")
+        else {
+            XCTAssert(false)
+            return
+        }
+
+        avatarView.imageURL = imageURL
+        XCTAssertEqual(avatarView.labelInitials.text, "?", "label text will be ?")
+        XCTAssertEqual(avatarView.backgroundColor, .black, "background color is black")
+    }
+
+    func testAvatarUpdatesFromUserChanges() {
+        guard let avatarView = AvatarView.instantiateFromNib() else {
+            XCTAssert(false)
+            return
+        }
+
+        let user = User()
+        user.username = "foo.bar"
+
+        avatarView.user = user
+        XCTAssertEqual(avatarView.labelInitials.text, "FB", "label text will be FB")
+        XCTAssertEqual(avatarView.backgroundColor, UIColor(hex: "#00BCD4"), "background color is not black")
+    }
+
+    func testAvatarUpdatesFromUserChangesEmptyUsername() {
+        guard let avatarView = AvatarView.instantiateFromNib() else {
+            XCTAssert(false)
+            return
+        }
+
+        let user = User()
+
+        avatarView.user = user
+        XCTAssertEqual(avatarView.labelInitials.text, "?", "label text will be ?")
+        XCTAssertEqual(avatarView.backgroundColor, UIColor(hex: "#000000"), "background color is black")
+    }
+
+    func testUpdateFontSizeValidNumber() {
+        guard let avatarView = AvatarView.instantiateFromNib() else {
+            XCTAssert(false)
+            return
+        }
+
+        avatarView.labelInitialsFontSize = 10
+        XCTAssertEqual(avatarView.labelInitials.font.pointSize, 10, "label size will be changed")
+    }
+
+    func testUpdateFontSizeInvalidNumber() {
+        guard let avatarView = AvatarView.instantiateFromNib() else {
+            XCTAssert(false)
+            return
+        }
+
+        avatarView.labelInitialsFontSize = nil
+        XCTAssertEqual(avatarView.labelInitials.font.pointSize, 16, "label size will be the default")
+    }
+
 }
