@@ -19,6 +19,8 @@ final class AuthViewController: BaseViewController {
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
 
+    let socketHandlerToken = String.random(5)
+
     var loginServicesToken: NotificationToken?
 
     @IBOutlet weak var viewFields: UIView! {
@@ -66,6 +68,8 @@ final class AuthViewController: BaseViewController {
         }
 
         self.updateAuthenticationMethods()
+
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -144,24 +148,21 @@ final class AuthViewController: BaseViewController {
         }
 
         API.shared.fetch(MeRequest()) { [weak self] result in
-            self?.stopLoading()
+            guard let strongSelf = self else { return }
+
+            strongSelf.stopLoading()
+            SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
+
             if let user = result?.user {
                 if user.username != nil {
 
                     DispatchQueue.main.async {
-                        self?.dismiss(animated: true, completion: nil)
-
-                        let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-                        let controller = storyboardChat.instantiateInitialViewController()
-                        let application = UIApplication.shared
-
-                        if let window = application.windows.first {
-                            window.rootViewController = controller
-                        }
+                        strongSelf.dismiss(animated: true, completion: nil)
+                        AppManager.reloadApp()
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                        strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
                 }
             }
@@ -318,7 +319,7 @@ extension AuthViewController {
         switch changes {
         case .update(let res, let deletions, let insertions, let modifications):
             insertions.map { res[$0] }.forEach {
-                guard $0.custom, !($0.serverURL?.isEmpty ?? true) else { return }
+                guard $0.custom, !($0.serverUrl?.isEmpty ?? true) else { return }
 
                 let button = UIButton()
                 button.layer.cornerRadius = 3
@@ -359,6 +360,16 @@ extension AuthViewController {
             }
         default:
             break
+        }
+    }
+}
+extension AuthViewController: SocketConnectionHandler {
+    func socketDidConnect(socket: SocketManager) { }
+    func socketDidReturnError(socket: SocketManager, error: SocketError) { }
+
+    func socketDidDisconnect(socket: SocketManager) {
+        alert(title: localized("error.socket.default_error_title"), message: localized("error.socket.default_error_message")) { _ in
+            self.navigationController?.popViewController(animated: true)
         }
     }
 }
