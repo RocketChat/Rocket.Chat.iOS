@@ -13,6 +13,11 @@ enum PermissionType: String {
     case createPublicChannels = "create-c"
     case createDirectMessages = "create-d"
     case createPrivateChannels = "create-p"
+
+    case viewStatistics = "view-statistics"
+    case viewRoomAdministration = "view-room-administration"
+    case viewUserAdministration = "view-user-administration"
+    case viewPrivilegedSetting = "view-privileged-setting"
 }
 
 class Permission: BaseModel {
