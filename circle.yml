@@ -1,25 +1,25 @@
 version: 2
 
 jobs:
-	build-and-test:
-		macos:
-			xcode: "9.1"
-		steps:
-			- checkout
-			- run:
-				name: Install CocoaPods
-				command: |
-					curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-					pod install
+  build-and-test:
+    macos:
+      xcode: "9.1"
+    steps:
+      - checkout
+      - run:
+        name: Install CocoaPods
+        command: |
+          curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+          pod install
 
-			- run:
-				name: Run tests on iOS 11
-				command: fastlane scan
-				environment:
-					SCAN_DEVICE: iPhone SE
-					SCAN_SCHEME: Rocket.Chat
+      - run:
+        name: Run tests on iOS 11
+        command: fastlane scan
+        environment:
+          SCAN_DEVICE: iPhone SE
+          SCAN_SCHEME: Rocket.Chat
 
-			- run:
-				name: Codecov.ios
-				command: bash <(curl -s https://codecov.io/bash)
+      - run:
+        name: Codecov.ios
+        command: bash <(curl -s https://codecov.io/bash)
 
