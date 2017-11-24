@@ -17,6 +17,7 @@ extension AuthSettings {
     static func testInstance() -> AuthSettings {
         let settings = AuthSettings()
         settings.siteURL = "https://open.rocket.chat"
+        settings.cdnPrefixURL = "https://open.rocket.chat"
         return settings
     }
 }
