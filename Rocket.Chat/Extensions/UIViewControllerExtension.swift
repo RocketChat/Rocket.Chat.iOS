@@ -89,3 +89,19 @@ extension UIViewController {
     }
 
 }
+
+extension UIViewController {
+
+    static var nib: UINib {
+        return UINib(nibName: "\(self)", bundle: nil)
+    }
+
+    static func instantiateFromNib() -> Self? {
+        func instanceFromNib<T: UIViewController>() -> T? {
+            return nib.instantiate() as? T
+        }
+
+        return instanceFromNib()
+    }
+
+}
