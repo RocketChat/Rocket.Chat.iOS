@@ -124,4 +124,22 @@ class ChatTitleViewModelSpec: XCTestCase {
         XCTAssertEqual(model.title, subscription.displayName(), "title is subscription displayName()")
     }
 
+    func testSubscriptionUserNilAfterSubscriptionUpdate() {
+        let model = ChatTitleViewModel()
+        let subscription = Subscription.testInstance()
+        subscription.privateType = "c"
+        model.subscription = subscription
+
+        let user = User.testInstance()
+        user.status = .busy
+        model.user = user
+
+        model.subscription = subscription
+
+        XCTAssertNotNil(model.subscription, "subscription is nil")
+        XCTAssertEqual(model.iconColor, .RCGray(), "default color is gray")
+        XCTAssertEqual(model.imageName, "Hashtag", "default icon is hashtag")
+        XCTAssertEqual(model.title, subscription.displayName(), "title is subscription displayName()")
+    }
+
 }
