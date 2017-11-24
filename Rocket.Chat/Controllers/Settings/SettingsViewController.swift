@@ -36,6 +36,11 @@ final class SettingsViewController: UITableViewController {
         super.viewDidLoad()
 
         title = viewModel.title
+
+        if viewModel.canViewAdminPanel {
+            let buttonAdmin = UIBarButtonItem(title: "Admin", style: .plain, target: self, action: #selector(buttonAdminDidPressed(_:)))
+            navigationItem.rightBarButtonItem = buttonAdmin
+        }
     }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
@@ -44,10 +49,19 @@ final class SettingsViewController: UITableViewController {
         }
     }
 
+    @objc func buttonAdminDidPressed(_ sender: Any) {
+        guard let adminURL = URL(string: "https://open.rocket.chat/admin/info?layout=embedded") else { return }
+
+        if let controller = WebViewControllerEmbedded.instantiateFromNib() {
+            controller.url = adminURL
+            navigationController?.pushViewController(controller, animated: true)
+        }
+    }
+
     func cellTermsOfServiceDidPressed() {
         guard let url = viewModel.licenseURL else { return }
         let controller = SFSafariViewController(url: url)
-        navigationController?.pushViewController(controller, animated: true)
+        present(controller, animated: true, completion: nil)
     }
 
     func cellContactDidPressed() {
