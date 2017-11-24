@@ -20,9 +20,7 @@ final class ChatTitleViewModel {
                 return
             }
 
-            if let otherUser = subscription.directMessageUser {
-                user = otherUser
-            }
+            user = subscription.directMessageUser
         }
     }
 
