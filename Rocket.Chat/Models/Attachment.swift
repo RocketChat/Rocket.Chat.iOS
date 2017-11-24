@@ -60,11 +60,11 @@ class Attachment: BaseModel {
 
 extension Attachment {
 
-    fileprivate static func fullURLWith(_ path: String?) -> URL? {
+    fileprivate static func fullURLWith(_ path: String?, auth: Auth? = nil) -> URL? {
         guard
             let path = path?.replacingOccurrences(of: "//", with: "/"),
             let pathPercentEncoded = NSString(string: path).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
-            let auth = AuthManager.isAuthenticated(),
+            let auth = auth ?? AuthManager.isAuthenticated(),
             let userId = auth.userId,
             let token = auth.token,
             let baseURL = auth.baseURL()
@@ -73,29 +73,28 @@ extension Attachment {
         }
 
         let urlString = "\(baseURL)\(pathPercentEncoded)?rc_uid=\(userId)&rc_token=\(token)"
-
         return URL(string: urlString)
     }
 
-    func fullFileURL() -> URL? {
-        return Attachment.fullURLWith(titleLink)
+    func fullFileURL(auth: Auth? = nil) -> URL? {
+        return Attachment.fullURLWith(titleLink, auth: auth)
     }
 
-    func fullVideoURL() -> URL? {
-        return Attachment.fullURLWith(videoURL)
+    func fullVideoURL(auth: Auth? = nil) -> URL? {
+        return Attachment.fullURLWith(videoURL, auth: auth)
     }
 
-    func fullImageURL() -> URL? {
+    func fullImageURL(auth: Auth? = nil) -> URL? {
         guard let imageURL = imageURL else { return nil }
         if imageURL.contains("http://") || imageURL.contains("https://") {
             return URL(string: imageURL)
         }
 
-        return Attachment.fullURLWith(imageURL)
+        return Attachment.fullURLWith(imageURL, auth: auth)
     }
 
-    func fullAudioURL() -> URL? {
-        return Attachment.fullURLWith(audioURL)
+    func fullAudioURL(auth: Auth? = nil) -> URL? {
+        return Attachment.fullURLWith(audioURL, auth: auth)
     }
 
 }
