@@ -20,24 +20,24 @@ jobs:
           SCAN_DEVICE: iPhone SE (10.3)
           SCAN_SCHEME: Rocket.Chat
 
-  test-ios11.1:
-    macos:
-      xcode: "9.1"
-    steps:
-      - checkout
+  # test-ios11.1:
+  #   macos:
+  #     xcode: "9.1"
+  #   steps:
+  #     - checkout
 
-      - run:
-        name: Install CocoaPods
-        command: |
-          curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-          pod install
+  #     - run:
+  #       name: Install CocoaPods
+  #       command: |
+  #         curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
+  #         pod install
 
-      - run:
-        name: Run tests on iOS 11.1
-        command: fastlane scan
-        environment:
-          SCAN_DEVICE: iPhone SE (11.1)
-          SCAN_SCHEME: Rocket.Chat
+  #     - run:
+  #       name: Run tests on iOS 11.1
+  #       command: fastlane scan
+  #       environment:
+  #         SCAN_DEVICE: iPhone SE (11.1)
+  #         SCAN_SCHEME: Rocket.Chat
 
 workflows:
   version: 2
@@ -46,5 +46,5 @@ workflows:
       - test-ios10.3
   test-ios11.1:
     jobs:
-      - test-ios11.1
+      - test-ios10.3
 
