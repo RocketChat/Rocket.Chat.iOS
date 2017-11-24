@@ -9,12 +9,15 @@
 import UIKit
 
 extension ChatViewController: SocketConnectionHandler {
+
     func socketDidConnect(socket: SocketManager) {
         hideHeaderStatusView()
 
         DispatchQueue.main.async { [weak self] in
-            if let subscription = self?.subscription {
+            if let subscription = self?.subscription, !subscription.isInvalidated, subscription.isValid() {
                 self?.subscription = subscription
+            } else {
+                self?.subscription = .initialSubscription()
             }
         }
 
@@ -31,6 +34,7 @@ extension ChatViewController: SocketConnectionHandler {
     }
 
     func socketDidReturnError(socket: SocketManager, error: SocketError) {
-        // handle errors
+        // Handle errors
     }
+
 }
