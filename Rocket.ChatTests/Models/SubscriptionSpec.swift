@@ -75,8 +75,8 @@ class SubscriptionSpec: XCTestCase {
             "open": false,
             "alert": true,
             "f": false,
-            "ts": ["$date": 1234567891011],
-            "ls": ["$date": 1234567891011]
+            "ts": ["$date": 123456789],
+            "ls": ["$date": 123456789]
         ])
 
         Realm.executeOnMainThread({ realm in
