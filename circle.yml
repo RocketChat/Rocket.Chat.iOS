@@ -60,6 +60,9 @@ jobs:
       - run:
           name: Run tests on iPhone iOS 11.0
           command: ./Scripts/test-11.0-iphone.sh
+      - run:
+          name: Codecov
+          command: bash <(curl -s https://codecov.io/bash) -J 'Rocket.Chat'
 
 workflows:
   version: 2
