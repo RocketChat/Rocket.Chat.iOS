@@ -36,15 +36,12 @@ extension WebViewControllerEmbedded: WKNavigationDelegate {
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         let token = AuthManager.isAuthenticated()?.token ?? ""
 
-        let authenticationJavaScriptMethod = """
-        Meteor.loginWithToken("\(token)", function() {
-            console.log('Iframe command [login-with-token]: result', arguments);
-        });
-        """
+        //swiftlint:disable
+        let authenticationJavaScriptMethod = "Meteor.loginWithToken('\(token)', function() { })"
+        //swiftlint:enable
 
-        webView.evaluateJavaScript(authenticationJavaScriptMethod) { (response, error) in
-            dump(response)
-            dump(error)
+        webView.evaluateJavaScript(authenticationJavaScriptMethod) { (_, _) in
+            // Do nothing
         }
     }
 

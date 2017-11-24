@@ -50,7 +50,13 @@ final class SettingsViewController: UITableViewController {
     }
 
     @objc func buttonAdminDidPressed(_ sender: Any) {
-        guard let adminURL = URL(string: "https://open.rocket.chat/admin/info?layout=embedded") else { return }
+        guard
+            let auth = AuthManager.isAuthenticated(),
+            let baseURL = auth.settings?.siteURL,
+            let adminURL = URL(string: "\(baseURL)/admin/info?layout=embedded")
+        else {
+            return
+        }
 
         if let controller = WebViewControllerEmbedded.instantiateFromNib() {
             controller.url = adminURL
