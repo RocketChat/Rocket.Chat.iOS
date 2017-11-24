@@ -37,7 +37,7 @@ jobs:
           name: Run tests on iPhone iOS 10.3
           command: ./Scripts/test-10.3-iphone.sh
 
-  test-iphone-ipad11.0:
+  test-ipad-ios11.0:
       macos:
         xcode: "9.0"
       steps:
@@ -66,16 +66,17 @@ workflows:
   lint:
     jobs:
       - lint
-  test-ipad-ios10.3:
+  test-iphone-ios11.0:
     jobs:
-      - test-ipad-ios10.3
+      - test-iphone-ios11.0
   test-iphone-ios10.3:
     jobs:
       - test-iphone-ios10.3
-  test-ipad-ios11.1:
+  test-ipad-ios10.3:
     jobs:
-      - test-ipad-ios11.1
-  test-iphone-ios11.1:
+      - test-ipad-ios10.3
+  test-ipad-ios11.0:
     jobs:
-      - test-iphone-ios11.1
+      - test-ipad-ios11.0
+  
 
