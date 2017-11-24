@@ -1,7 +1,7 @@
 version: 2
 
 jobs:
-  test-ios10.3:
+  lint:
     macos:
       xcode: "9.0"
     steps:
@@ -10,10 +10,10 @@ jobs:
           name: Update Dependencies
           command: ./Scripts/update_dependencies.sh
       - run:
-          name: Run tests on iOS 10.3
-          command: ./Scripts/test.sh
+          name: Lint
+          command: swiftlint
 
-  test-ios11.1:
+  test-ipad-ios10.3:
     macos:
       xcode: "9.0"
     steps:
@@ -22,15 +22,60 @@ jobs:
           name: Update Dependencies
           command: ./Scripts/update_dependencies.sh
       - run:
-          name: Run tests on iOS 11.0
-          command: ./Scripts/test.sh
+          name: Run tests on iPad iOS 10.3
+          command: ./Scripts/test-10.3-ipad.sh
+
+  test-iphone-ios10.3:
+    macos:
+      xcode: "9.0"
+    steps:
+      - checkout
+      - run:
+          name: Update Dependencies
+          command: ./Scripts/update_dependencies.sh
+      - run:
+          name: Run tests on iPhone iOS 10.3
+          command: ./Scripts/test-10.3-iphone.sh
+
+  test-iphone-ipad11.0:
+      macos:
+        xcode: "9.0"
+      steps:
+        - checkout
+        - run:
+            name: Update Dependencies
+            command: ./Scripts/update_dependencies.sh
+        - run:
+            name: Run tests on iPad iOS 11.0
+            command: ./Scripts/test-11.0-ipad.sh
+
+  test-iphone-ios11.0:
+    macos:
+      xcode: "9.0"
+    steps:
+      - checkout
+      - run:
+          name: Update Dependencies
+          command: ./Scripts/update_dependencies.sh
+      - run:
+          name: Run tests on iPhone iOS 11.0
+          command: ./Scripts/test-11.0-iphone.sh
 
 workflows:
   version: 2
-  test-ios10.3:
+  lint:
     jobs:
-      - test-ios10.3
-  test-ios11.1:
+      - lint
+  test-ipad-ios10.3:
     jobs:
-      - test-ios11.1
+      - test-ipad-ios10.3
+  test-iphone-ios10.3:
+    jobs:
+      - test-iphone-ios10.3
+  test-ipad-ios11.1:
+    jobs:
+      - test-ipad-ios11.1
+  test-iphone-ios11.1:
+    jobs:
+      - test-iphone-ios11.1
 
