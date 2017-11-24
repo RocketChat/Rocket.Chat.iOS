@@ -169,6 +169,12 @@ extension AuthManager {
         API.shared.authToken = auth.token
         API.shared.userId = auth.userId
 
+        // Turn all users offline
+        Realm.execute({ (realm) in
+            let users = realm.objects(User.self)
+            users.setValue("offline", forKey: "privateStatus")
+        })
+
         SocketManager.connect(url) { (socket, _) in
             guard SocketManager.isConnected() else {
                 guard let response = SocketResponse(
