@@ -7,16 +7,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install CocoaPods
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-            pod install
+          name: Update Dependencies
+          command: ./Scripts/update_dependencies.sh
       - run:
           name: Run tests on iOS 10.3
-          command: fastlane scan
-          environment:
-            SCAN_DEVICE: iPhone SE (10.3)
-            SCAN_SCHEME: Rocket.Chat
+          command: ./Scripts/test.sh
 
   test-ios11.1:
     macos:
@@ -24,16 +19,11 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Install CocoaPods
-          command: |
-            curl https://cocoapods-specs.circleci.com/fetch-cocoapods-repo-from-s3.sh | bash -s cf
-            pod install
+          name: Update Dependencies
+          command: ./Scripts/update_dependencies.sh
       - run:
-          name: Run tests on iOS 11.1
-          command: fastlane scan
-          environment:
-            SCAN_DEVICE: iPhone SE (11.1)
-            SCAN_SCHEME: Rocket.Chat
+          name: Run tests on iOS 11.0
+          command: ./Scripts/test.sh
 
 workflows:
   version: 2
