@@ -18,7 +18,6 @@ final class Launcher: LauncherProtocol {
             PersistencyCoordinator(),
             BugTrackingCoordinator(),
             NetworkCoordinator(),
-            UserCoordinator(),
             TimestampCoordinator()
         ]
     }()
