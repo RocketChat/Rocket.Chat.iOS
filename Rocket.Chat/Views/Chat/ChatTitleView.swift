@@ -33,7 +33,7 @@ final class ChatTitleView: UIView {
         didSet {
             viewModel.subscription = subscription
             labelTitle.text = viewModel.title
-            icon.image = viewModel.image
+            icon.image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)
         }
     }
 
