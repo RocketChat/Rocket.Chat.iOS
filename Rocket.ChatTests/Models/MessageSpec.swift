@@ -69,8 +69,8 @@ class MessageSpec: XCTestCase {
             "_id": "message-json-1",
             "rid": "123",
             "msg": "Foo Bar Baz",
-            "ts": ["$date": 1234567891011],
-            "_updatedAt": ["$date": 1234567891011],
+            "ts": ["$date": 123456789],
+            "_updatedAt": ["$date": 123456789],
             "u": ["_id": "123", "username": "foo"]
         ])
 
