@@ -15,6 +15,7 @@ import SwiftyJSON
 // MARK: Test Instance
 
 extension Message {
+
     static func testInstance() -> Message {
         let message = Message()
         message.user = User.testInstance()
@@ -24,6 +25,7 @@ extension Message {
         message.subscription.type = .channel
         return message
     }
+
 }
 
 class MessageSpec: XCTestCase {
@@ -67,8 +69,8 @@ class MessageSpec: XCTestCase {
             "_id": "message-json-1",
             "rid": "123",
             "msg": "Foo Bar Baz",
-            "ts": ["$date": 1234567891011],
-            "_updatedAt": ["$date": 1234567891011],
+            "ts": ["$date": 123456789],
+            "_updatedAt": ["$date": 123456789],
             "u": ["_id": "123", "username": "foo"]
         ])
 
@@ -77,11 +79,76 @@ class MessageSpec: XCTestCase {
         XCTAssert(message.identifier == "message-json-1", "Message object was created with success")
     }
 
+    func testMessageTypeAttachmentImage() {
+        let attachment = Attachment()
+        attachment.imageURL = "https://foo.bar"
+
+        let message = Message.testInstance()
+        message.attachments.removeAll()
+        message.attachments.append(attachment)
+
+        XCTAssertEqual(message.type, .image, "message type is image")
+    }
+
+    func testMessageTypeAttachmentVideo() {
+        let attachment = Attachment()
+        attachment.videoURL = "https://foo.bar"
+
+        let message = Message.testInstance()
+        message.attachments.removeAll()
+        message.attachments.append(attachment)
+
+        XCTAssertEqual(message.type, .video, "message type is video")
+    }
+
+    func testMessageTypeAttachmentAudio() {
+        let attachment = Attachment()
+        attachment.audioURL = "https://foo.bar"
+
+        let message = Message.testInstance()
+        message.attachments.removeAll()
+        message.attachments.append(attachment)
+
+        XCTAssertEqual(message.type, .audio, "message type is audio")
+    }
+
+    func testMessageTypeAttachmentDefault() {
+        let attachment = Attachment()
+
+        let message = Message.testInstance()
+        message.attachments.removeAll()
+        message.attachments.append(attachment)
+
+        XCTAssertEqual(message.type, .textAttachment, "message type is textAttachment")
+    }
+
+    func testMessageTypeURLValid() {
+        let messageURL = MessageURL.testInstance()
+
+        let message = Message.testInstance()
+        message.urls.removeAll()
+        message.urls.append(messageURL)
+
+        XCTAssertEqual(message.type, .url, "message type is url")
+    }
+
+    func testMessageTypeURLInvalid() {
+        let messageURL = MessageURL.testInstance()
+        messageURL.title = ""
+
+        let message = Message.testInstance()
+        message.urls.removeAll()
+        message.urls.append(messageURL)
+
+        XCTAssertEqual(message.type, .text, "message type is text")
+    }
+
 }
 
 // MARK: quoteString & replyString
 
 extension MessageSpec {
+
     func testQuoteString() {
         let message = Message.testInstance()
 
@@ -113,4 +180,5 @@ extension MessageSpec {
         message.subscription.auth?.settings?.siteURL = nil
         XCTAssertNil(message.replyString, "replyString is nil when there's no siteURL")
     }
+
 }

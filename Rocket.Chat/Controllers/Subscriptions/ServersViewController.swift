@@ -36,7 +36,7 @@ class ServersViewController: UIViewController {
             if indexPath.row == DatabaseManager.selectedIndex {
                 SubscriptionsPageViewController.shared?.showSubscriptionsList()
             } else {
-                MainChatViewController.shared?.changeSelectedServer(index: indexPath.row)
+                AppManager.changeSelectedServer(index: indexPath.row)
             }
         }
     }
