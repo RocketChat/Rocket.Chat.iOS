@@ -41,7 +41,7 @@ class PostMessageRequestSpec: XCTestCase {
 
     func testResult() {
         let _result = JSON([
-            "ts": 1481748965123,
+            "ts": 148174896,
             "channel": "general",
             "message": [
                 "alias": "",

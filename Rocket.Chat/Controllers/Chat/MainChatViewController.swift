@@ -10,6 +10,7 @@ import UIKit
 import SideMenuController
 
 class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
+    let infoRequestHandler = InfoRequestHandler()
     let socketHandlerToken = String.random(5)
 
     static var shared: MainChatViewController? {
@@ -45,9 +46,16 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.delegate = self
+        delegate = self
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+
+        if let auth = AuthManager.isAuthenticated() {
+            if let apiHost = auth.apiHost {
+                infoRequestHandler.delegate = self
+                infoRequestHandler.validate(with: apiHost)
+            }
+        }
 
         performSegue(withIdentifier: "showCenterController", sender: nil)
         performSegue(withIdentifier: "containSideMenu", sender: nil)
@@ -85,40 +93,18 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         SubscriptionsViewController.shared?.subscriptionsToken?.invalidate()
 
         AuthManager.logout {
-            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let controller = storyboardChat.instantiateInitialViewController()
-            let application = UIApplication.shared
-
-            if let window = application.keyWindow {
-                window.rootViewController = controller
-                window.makeKeyAndVisible()
-            }
+            AppManager.reloadApp()
         }
     }
 
     func openAddNewTeamController() {
-        SocketManager.disconnect { (_, _) in
-            self.performSegue(withIdentifier: "Auth", sender: nil)
-        }
-    }
-
-    func changeSelectedServer(index: Int) {
-        DatabaseManager.selectDatabase(at: index)
-        DatabaseManager.changeDatabaseInstance(index: index)
-
-        SocketManager.disconnect { (_, _) in
-            let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-            let controller = storyboardChat.instantiateInitialViewController()
-            let application = UIApplication.shared
-
-            if let window = application.windows.first {
-                window.rootViewController = controller
-            }
-        }
+        SocketManager.disconnect { (_, _) in }
+        WindowManager.open(.auth)
     }
 }
 
 extension MainChatViewController: SocketConnectionHandler {
+
     func socketDidConnect(socket: SocketManager) {
 
     }
@@ -130,18 +116,63 @@ extension MainChatViewController: SocketConnectionHandler {
     func socketDidReturnError(socket: SocketManager, error: SocketError) {
         switch error.error {
         case .invalidUser:
-            alert(title: localized("alert.socket_error.invalid_user.title"),
-                  message: localized("alert.socket_error.invalid_user.message")) { _ in
+            let alert = UIAlertController(
+                title: localized("alert.socket_error.invalid_user.title"),
+                message: localized("alert.socket_error.invalid_user.message"),
+                preferredStyle: .alert
+            )
+
+            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: { _ in
                 self.logout()
-            }
-        default:
-            break
+            }))
+
+            self.present(alert, animated: true, completion: nil)
+        default: break
         }
     }
 
-    func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
-        present(alert, animated: true, completion: nil)
+}
+
+extension MainChatViewController: InfoRequestHandlerDelegate {
+
+    var viewControllerToPresentAlerts: UIViewController? { return self }
+
+    func urlNotValid() {
+        // Do nothing
     }
+
+    func serverIsValid() {
+        // Do nothing
+    }
+
+    func serverChangedURL(_ newURL: String?) {
+        guard
+            let url = URL(string: newURL ?? ""),
+            let socketURL = url.socketURL()
+        else {
+            return
+        }
+
+        let newIndex = DatabaseManager.copyServerInformation(
+            from: DatabaseManager.selectedIndex,
+            with: socketURL.absoluteString
+        )
+
+        DatabaseManager.selectDatabase(at: newIndex)
+        DatabaseManager.cleanInvalidDatabases()
+        DatabaseManager.changeDatabaseInstance()
+        AuthManager.recoverAuthIfNeeded()
+
+        DispatchQueue.main.async {
+            guard
+                let auth = AuthManager.isAuthenticated(),
+                let apiHost = auth.apiHost
+            else {
+                return
+            }
+
+            self.infoRequestHandler.validate(with: apiHost)
+        }
+    }
+
 }

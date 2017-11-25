@@ -53,6 +53,7 @@ class UserReviewManager {
             nextDateForReview = calculateNextDateForReview()
             return true
         }
+
         return false
     }
 }

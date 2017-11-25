@@ -12,7 +12,22 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+extension MessageURL {
+
+    static func testInstance() -> MessageURL {
+        let messageURL = MessageURL()
+        messageURL.identifier = "123"
+        messageURL.targetURL = "http://www.rocket.chat"
+        messageURL.title = "title"
+        messageURL.textDescription = "description"
+        messageURL.imageURL = "http://qux.quux.corge"
+        return messageURL
+    }
+
+}
+
 class MessageURLSpec: XCTestCase {
+
     override func setUp() {
         super.setUp()
 
@@ -27,13 +42,7 @@ class MessageURLSpec: XCTestCase {
     }
 
     func testMessageURLObject() {
-        let object = MessageURL()
-
-        object.identifier = "123"
-        object.title = "Foo Bar Baz"
-        object.textDescription = "foobarbaz"
-        object.targetURL =  "http://foo.bar.baz"
-        object.imageURL = "http://qux.quux.corge"
+        let object = MessageURL.testInstance()
 
         Realm.execute({ realm in
             realm.add(object, update: true)
@@ -45,24 +54,26 @@ class MessageURLSpec: XCTestCase {
     }
 
     func testIsValidWithValidAttributes() {
-
-        let object = MessageURL()
-
-        object.identifier = "123"
-        object.title = "Foo Bar Baz"
-        object.textDescription = "foobarbaz"
-
+        let object = MessageURL.testInstance()
         XCTAssertTrue(object.isValid())
     }
 
     func testIsValidWithInvalidAttributes() {
-
-        let object = MessageURL()
-
-        object.identifier = "123"
-        object.title = ""
-        object.textDescription = "foobarbaz"
-
+        let object = MessageURL.testInstance()
+        object.textDescription = ""
         XCTAssertFalse(object.isValid())
     }
+
+    func testIsValidWithNilTitle() {
+        let object = MessageURL.testInstance()
+        object.title = nil
+        XCTAssertFalse(object.isValid())
+    }
+
+    func testIsValidWithNilDescription() {
+        let object = MessageURL.testInstance()
+        object.textDescription = nil
+        XCTAssertFalse(object.isValid())
+    }
+
 }
