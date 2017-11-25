@@ -44,20 +44,16 @@
                             <constraint firstAttribute="width" constant="35" id="Cny-FU-tGi"/>
                         </constraints>
                     </view>
-                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Text" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jz0-wl-Wig">
-                        <rect key="frame" x="42" y="23" width="300" height="44"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="textColor" red="0.20000000000000001" green="0.20000000000000001" blue="0.20000000000000001" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="15"/>
-                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES" shipmentTrackingNumber="YES" flightNumber="YES" lookupSuggestion="YES"/>
-                    </textView>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sWJ-OU-dZk" userLabel="Media Views">
                         <rect key="frame" x="47" y="67" width="297" height="260"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="260" id="4Ab-x2-r5e"/>
                         </constraints>
                     </stackView>
+                    <view contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="2eJ-5r-Kgq" customClass="HighlightTextView" customModule="Rocket_Chat" customModuleProvider="target">
+                        <rect key="frame" x="47" y="23" width="297" height="44"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </view>
                 </subviews>
             </view>
             <constraints>
@@ -65,18 +61,18 @@
                 <constraint firstItem="40K-VI-9eL" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="2" id="4Ig-wg-cUQ"/>
                 <constraint firstItem="dHe-RL-dFU" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="5" id="4Zr-IT-efr"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="2" id="796-8s-tZB"/>
-                <constraint firstItem="jz0-wl-Wig" firstAttribute="top" secondItem="pvK-41-cNi" secondAttribute="bottom" id="80Z-tY-8gt"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="7" id="9Lf-Mp-5cE"/>
                 <constraint firstAttribute="trailing" secondItem="sWJ-OU-dZk" secondAttribute="trailing" constant="8" id="D1b-Il-xxS"/>
-                <constraint firstItem="sWJ-OU-dZk" firstAttribute="top" secondItem="jz0-wl-Wig" secondAttribute="bottom" id="Lyf-cS-mP3"/>
-                <constraint firstAttribute="trailing" secondItem="jz0-wl-Wig" secondAttribute="trailing" constant="12" id="MNF-wW-H2n"/>
                 <constraint firstAttribute="trailing" secondItem="pvK-41-cNi" secondAttribute="trailing" priority="900" constant="2" id="OVZ-S3-Gij"/>
                 <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="pvK-41-cNi" secondAttribute="trailing" constant="8" id="aJ8-MB-U5b"/>
+                <constraint firstItem="sWJ-OU-dZk" firstAttribute="top" secondItem="2eJ-5r-Kgq" secondAttribute="bottom" id="cqm-ha-bqT"/>
                 <constraint firstAttribute="bottom" secondItem="sWJ-OU-dZk" secondAttribute="bottom" constant="5" id="enA-12-xWg"/>
                 <constraint firstItem="40K-VI-9eL" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="evW-4R-3TS"/>
                 <constraint firstItem="dHe-RL-dFU" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="5" id="myV-aY-DuJ"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="2" id="nFi-sf-ZfI"/>
-                <constraint firstItem="jz0-wl-Wig" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="p6w-Ph-zM4"/>
+                <constraint firstItem="2eJ-5r-Kgq" firstAttribute="top" secondItem="40K-VI-9eL" secondAttribute="bottom" id="oBU-c9-0bJ"/>
+                <constraint firstItem="2eJ-5r-Kgq" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="7" id="wIX-xY-yjb"/>
+                <constraint firstAttribute="trailing" secondItem="2eJ-5r-Kgq" secondAttribute="trailing" constant="8" id="xan-6S-aXM"/>
             </constraints>
             <size key="customSize" width="352" height="332"/>
             <variation key="default">
@@ -90,7 +86,7 @@
                 <outlet property="avatarViewContainer" destination="dHe-RL-dFU" id="Gdl-Cs-ReM"/>
                 <outlet property="labelDate" destination="pvK-41-cNi" id="0kK-Vz-QXR"/>
                 <outlet property="labelDateHeightConstraint" destination="eQ8-bg-xoj" id="aA2-7L-pkh"/>
-                <outlet property="labelText" destination="jz0-wl-Wig" id="5SL-P7-rDb"/>
+                <outlet property="labelText" destination="2eJ-5r-Kgq" id="sJA-pT-wJJ"/>
                 <outlet property="labelUsername" destination="40K-VI-9eL" id="OIn-tg-dp0"/>
                 <outlet property="labelUsernameHeightConstraint" destination="pkt-kd-3cU" id="Sop-iF-Lm6"/>
                 <outlet property="mediaViews" destination="sWJ-OU-dZk" id="mcz-me-bl8"/>

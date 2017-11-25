@@ -8,24 +8,22 @@
 
 import Foundation
 
-class HighlightTextView: UITextView {
+class HighlightTextView: UIView {
 
-    override var attributedText: NSAttributedString! {
+    var message: NSAttributedString! {
         didSet {
             setNeedsDisplay()
         }
     }
 
     override func draw(_ rect: CGRect) {
-        guard let string = attributedText else {
+        guard let string = message else {
             return
         }
 
-        text = nil
-
         let framesetter: CTFramesetter = CTFramesetterCreateWithAttributedString(string)
         let path: CGMutablePath = CGMutablePath()
-        path.addRect(CGRect(x: 0, y: 0, width: bounds.size.width, height: bounds.size.height))
+        path.addRect(CGRect(x: 0, y: 0, width: bounds.size.width - 16, height: bounds.size.height))
         let totalframe: CTFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)
 
         guard let context: CGContext = UIGraphicsGetCurrentContext() else {
