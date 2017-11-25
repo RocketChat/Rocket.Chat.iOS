@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140C84E91FC9CF0400032A59 /* UsersListRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C84E81FC9CF0400032A59 /* UsersListRequestSpec.swift */; };
 		143C763C1FB8DBAD00B51D95 /* UsersListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C763B1FB8DBAD00B51D95 /* UsersListRequest.swift */; };
 		14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */; };
 		14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */; };
@@ -295,6 +296,7 @@
 
 /* Begin PBXFileReference section */
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		140C84E81FC9CF0400032A59 /* UsersListRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListRequestSpec.swift; sourceTree = "<group>"; };
 		143C763B1FB8DBAD00B51D95 /* UsersListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListRequest.swift; sourceTree = "<group>"; };
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCell.swift; sourceTree = "<group>"; };
@@ -1345,6 +1347,7 @@
 				80235D201F7442C100A56CA5 /* Subscription */,
 				D18675E91F70A58B00406FB4 /* InfoRequestSpec.swift */,
 				80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */,
+				140C84E81FC9CF0400032A59 /* UsersListRequestSpec.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -2113,6 +2116,7 @@
 				D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
 				993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */,
+				140C84E91FC9CF0400032A59 /* UsersListRequestSpec.swift in Sources */,
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
 				8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */,
