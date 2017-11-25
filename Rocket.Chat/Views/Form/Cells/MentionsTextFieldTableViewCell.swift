@@ -73,27 +73,31 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
                 return
         }
 
-        API.shared.fetch(UsersListRequest(name: name)) { (result) in
+        API.shared.fetch(UsersListRequest(name: name)) { [weak self] (result) in
             guard let users = result?.users else {
-                self.textFieldInput.filterStrings([])
+                self?.textFieldInput.filterStrings([])
                 return
             }
 
-            var usernames = [String]()
-            for user in users {
-                if let unwrappedUser = user,
-                    let username = unwrappedUser.username,
-                    let identifier = unwrappedUser.identifier,
-                    let loggedIdentifier = AuthManager.currentUser()?.identifier,
-                    loggedIdentifier != identifier,
-                    username.count > 0 {
-                    usernames.append(username)
-                }
-            }
+            self?.setFilter(users: users)
+        }
+    }
 
-            DispatchQueue.main.async {
-                self.textFieldInput.filterStrings(usernames)
+    private func setFilter(users: [User?]) {
+        var usernames = [String]()
+        for user in users {
+            if let unwrappedUser = user,
+                let username = unwrappedUser.username,
+                let identifier = unwrappedUser.identifier,
+                let loggedIdentifier = AuthManager.currentUser()?.identifier,
+                loggedIdentifier != identifier,
+                username.count > 0 {
+                usernames.append(username)
             }
+        }
+
+        DispatchQueue.main.async {
+            self.textFieldInput.filterStrings(usernames)
         }
     }
 
@@ -120,7 +124,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
         tagViewTopConstraint.constant = tagListView.tagViews.count > 0 ? 12 : 0
     }
 
-    func addUserToInviteList(name: String) {
+    private func addUserToInviteList(name: String) {
         if users[name] == nil {
             users[name] = tagListView.addTag(name)
             updateTagViewConstraint()

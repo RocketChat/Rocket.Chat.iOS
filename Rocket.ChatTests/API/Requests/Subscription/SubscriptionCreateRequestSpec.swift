@@ -15,10 +15,12 @@ class SubscriptionCreateRequestSpec: XCTestCase {
     func testRequest() {
         let paramRoomName = "foo"
         let paramReadOnly = false
+        let paramMembers = ["example"]
 
         let _request = SubscriptionCreateRequest(
             name: paramRoomName,
             type: .channel,
+            members: paramMembers,
             readOnly: paramReadOnly
         )
 
@@ -36,6 +38,7 @@ class SubscriptionCreateRequestSpec: XCTestCase {
         XCTAssertEqual(request.httpMethod, "POST", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
         XCTAssertEqual(bodyJson["name"].string, paramRoomName, "parameter read only is correct")
+        XCTAssertEqual(bodyJson["members"].array?.first?.string, paramMembers.first, "parameter members is correct")
         XCTAssertEqual(bodyJson["readOnly"].bool, paramReadOnly, "read only was set as false")
 
         let _requestGroup = SubscriptionCreateRequest(
