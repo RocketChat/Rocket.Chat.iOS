@@ -11,7 +11,15 @@ import SwiftyJSON
 
 class APIResult<T: APIRequest> {
     let raw: JSON?
+    let error: Error?
+
+    init(error: Error?) {
+        self.raw = nil
+        self.error = error
+    }
+
     init(raw: JSON?) {
         self.raw = raw
+        self.error = nil
     }
 }

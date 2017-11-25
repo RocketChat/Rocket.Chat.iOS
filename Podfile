@@ -10,7 +10,7 @@ def shared_pods
   pod 'Crashlytics'
 
   # Code utilities
-  pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :tag => '4.0.0-alpha.1'
+  pod 'SwiftyJSON'
   pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
 
   # UI
@@ -62,3 +62,4 @@ post_install do |installer|
     end
   end
 end
+

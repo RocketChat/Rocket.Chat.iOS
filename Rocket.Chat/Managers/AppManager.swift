@@ -37,3 +37,38 @@ struct AppManager {
     }
 
 }
+
+extension AppManager {
+
+    static func changeSelectedServer(index: Int) {
+        DatabaseManager.selectDatabase(at: index)
+        DatabaseManager.changeDatabaseInstance(index: index)
+        AuthSettingsManager.shared.clearCachedSettings()
+
+        SocketManager.disconnect { (_, _) in
+            reloadApp()
+        }
+    }
+
+    static func changeToServerIfExists(serverUrl: String) -> Bool {
+        guard let index = DatabaseManager.serverIndexForUrl(serverUrl) else {
+            return false
+        }
+
+        changeSelectedServer(index: index)
+        return true
+    }
+
+    static func reloadApp() {
+        SocketManager.disconnect { (_, _) in
+            DispatchQueue.main.async {
+                if AuthManager.isAuthenticated() != nil {
+                    WindowManager.open(.chat)
+                } else {
+                    WindowManager.open(.auth)
+                }
+            }
+        }
+    }
+
+}
