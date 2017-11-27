@@ -195,7 +195,10 @@ extension AuthManager {
 
             SocketManager.send(object) { (response) in
                 guard !response.isError() else {
-                    completion(response)
+                    SocketManager.disconnect({ (_, _) in
+                        completion(response)
+                    })
+
                     return
                 }
 
