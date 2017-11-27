@@ -147,7 +147,7 @@ final class AuthViewController: BaseViewController {
             return
         }
 
-        API.shared.fetch(MeRequest()) { [weak self] result in
+        API.current()?.fetch(MeRequest(), succeeded: { [weak self] result in
             guard let strongSelf = self else { return }
 
             strongSelf.stopLoading()
@@ -166,7 +166,7 @@ final class AuthViewController: BaseViewController {
                     }
                 }
             }
-        }
+        })
     }
 
     // MARK: Loaders

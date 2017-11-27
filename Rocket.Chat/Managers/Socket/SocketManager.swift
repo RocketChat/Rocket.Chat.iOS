@@ -128,6 +128,12 @@ extension SocketManager {
                 return
             }
 
+            API.current()?.fetch(InfoRequest(), succeeded: { result in
+                Realm.executeOnMainThread { _ in
+                    AuthManager.isAuthenticated()?.serverVersion = result?.version ?? ""
+                }
+            })
+
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
                 AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
 
@@ -139,6 +145,12 @@ extension SocketManager {
                 SubscriptionManager.subscribeRoomChanges()
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
+
+                API.current()?.fetch(CommandsRequest(), succeeded: { result in
+                    print(result?.raw?.description ?? "erou")
+                }, errored: { error in
+                    print(error)
+                })
 
                 // If we have some subscription opened, let's
                 // try to subscribe to it again

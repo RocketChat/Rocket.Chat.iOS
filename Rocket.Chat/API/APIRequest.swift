@@ -23,6 +23,8 @@ enum APIRequestOptions {
 }
 
 protocol APIRequest {
+    var requiredVersion: Version { get }
+
     var path: String { get }
     var method: String { get }
     var contentType: String? { get }
@@ -34,6 +36,10 @@ protocol APIRequest {
 }
 
 extension APIRequest {
+    var requiredVersion: Version {
+        return .zero
+    }
+
 	var method: String {
         return "GET"
     }

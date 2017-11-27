@@ -42,7 +42,7 @@ class MembersListViewData {
             let request = SubscriptionMembersRequest(roomId: subscription.rid, type: subscription.type)
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
 
-            API.shared.fetch(request, options: options, { result in
+            API.current()?.fetch(request, options: options, succeeded: { result in
                 self.showing += result?.count ?? 0
                 self.total = result?.total ?? 0
                 if let members = result?.members {
