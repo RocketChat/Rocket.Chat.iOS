@@ -215,6 +215,8 @@
 		803975901FCC1DFF00129562 /* APIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039758F1FCC1DFF00129562 /* APIExtensions.swift */; };
 		805886711FCC3F4800259A02 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886701FCC3F4800259A02 /* Version.swift */; };
 		805886731FCC53EF00259A02 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886721FCC53EF00259A02 /* APIError.swift */; };
+		8058867A1FCC984900259A02 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886791FCC984900259A02 /* Command.swift */; };
+		8058867E1FCC993D00259A02 /* CommandModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8058867D1FCC993D00259A02 /* CommandModelMapping.swift */; };
 		806401311FB09DE800990572 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401301FB09DE800990572 /* Permission.swift */; };
 		806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401321FB09EC400990572 /* PermissionModelMapping.swift */; };
 		806401351FB09F8A00990572 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401341FB09F8A00990572 /* PermissionManager.swift */; };
@@ -344,11 +346,11 @@
 		4151807A1EAE249F0000A039 /* ChatMessageTextViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageTextViewModelSpec.swift; path = Views/Chat/ChatMessageTextViewModelSpec.swift; sourceTree = "<group>"; };
 		4151B44D1E2CF19A00F8AA1B /* UserModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserModelHandler.swift; path = Models/Handler/UserModelHandler.swift; sourceTree = "<group>"; };
 		4151B4531E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionModelHandler.swift; path = Models/Handler/SubscriptionModelHandler.swift; sourceTree = "<group>"; };
-		4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionModelMapping.swift; path = Models/Mapping/SubscriptionModelMapping.swift; sourceTree = "<group>"; };
-		4151B4571E2D1D2E00F8AA1B /* MessageModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageModelMapping.swift; path = Models/Mapping/MessageModelMapping.swift; sourceTree = "<group>"; };
-		4151B4591E2D1DD400F8AA1B /* AttachmentModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AttachmentModelMapping.swift; path = Models/Mapping/AttachmentModelMapping.swift; sourceTree = "<group>"; };
-		4151B45B1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettingsModelMapping.swift; path = Models/Mapping/AuthSettingsModelMapping.swift; sourceTree = "<group>"; };
-		4151B45D1E2D32EA00F8AA1B /* MessageURLModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageURLModelMapping.swift; path = Models/Mapping/MessageURLModelMapping.swift; sourceTree = "<group>"; };
+		4151B4551E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubscriptionModelMapping.swift; sourceTree = "<group>"; };
+		4151B4571E2D1D2E00F8AA1B /* MessageModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageModelMapping.swift; sourceTree = "<group>"; };
+		4151B4591E2D1DD400F8AA1B /* AttachmentModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachmentModelMapping.swift; sourceTree = "<group>"; };
+		4151B45B1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSettingsModelMapping.swift; sourceTree = "<group>"; };
+		4151B45D1E2D32EA00F8AA1B /* MessageURLModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageURLModelMapping.swift; sourceTree = "<group>"; };
 		41552F651D30308C0081438D /* AuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthManager.swift; path = Managers/Model/AuthManager.swift; sourceTree = "<group>"; };
 		41552F671D3035D80081438D /* SocketManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketManagerSpec.swift; path = Managers/SocketManagerSpec.swift; sourceTree = "<group>"; };
 		4159720B1D3DB854002258F4 /* Email.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Email.swift; path = Models/Email.swift; sourceTree = "<group>"; };
@@ -418,7 +420,7 @@
 		41BD37D81E290D8600CBC4C2 /* ModelMappeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelMappeable.swift; path = Models/Base/ModelMappeable.swift; sourceTree = "<group>"; };
 		41BD37DA1E290D9C00CBC4C2 /* ModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelHandler.swift; path = Models/Base/ModelHandler.swift; sourceTree = "<group>"; };
 		41BD37DC1E290DDB00CBC4C2 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseModel.swift; path = Models/Base/BaseModel.swift; sourceTree = "<group>"; };
-		41BD37E01E290F2900CBC4C2 /* UserModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserModelMapping.swift; path = Models/Mapping/UserModelMapping.swift; sourceTree = "<group>"; };
+		41BD37E01E290F2900CBC4C2 /* UserModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModelMapping.swift; sourceTree = "<group>"; };
 		41C275DE1D848005003C88CF /* AvatarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AvatarView.swift; path = Views/Avatar/AvatarView.swift; sourceTree = "<group>"; };
 		41C275E01D84815C003C88CF /* AvatarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = AvatarView.xib; path = Views/Avatar/AvatarView.xib; sourceTree = "<group>"; };
 		41C45AEE1DFAD42800D9969C /* ChatDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatDataController.swift; path = Controllers/Chat/ChatDataController.swift; sourceTree = "<group>"; };
@@ -518,8 +520,10 @@
 		8039758F1FCC1DFF00129562 /* APIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIExtensions.swift; sourceTree = "<group>"; };
 		805886701FCC3F4800259A02 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
 		805886721FCC53EF00259A02 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		805886791FCC984900259A02 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Command.swift; path = Models/Command.swift; sourceTree = "<group>"; };
+		8058867D1FCC993D00259A02 /* CommandModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModelMapping.swift; sourceTree = "<group>"; };
 		806401301FB09DE800990572 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Permission.swift; path = Models/Permission.swift; sourceTree = "<group>"; };
-		806401321FB09EC400990572 /* PermissionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionModelMapping.swift; path = Models/Mapping/PermissionModelMapping.swift; sourceTree = "<group>"; };
+		806401321FB09EC400990572 /* PermissionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionModelMapping.swift; sourceTree = "<group>"; };
 		806401341FB09F8A00990572 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManager.swift; path = Managers/Model/PermissionManager.swift; sourceTree = "<group>"; };
 		806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMessageRequest.swift; sourceTree = "<group>"; };
 		806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMessageRequestSpec.swift; sourceTree = "<group>"; };
@@ -527,7 +531,7 @@
 		8073719B1F963FA400D53ADF /* APITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITestCase.swift; sourceTree = "<group>"; };
 		8073719D1F9688B200D53ADF /* LoginServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginServiceManager.swift; path = Managers/Model/LoginServiceManager.swift; sourceTree = "<group>"; };
 		8073719F1F96937100D53ADF /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginService.swift; path = Models/LoginService.swift; sourceTree = "<group>"; };
-		807371A11F96968C00D53ADF /* LoginServiceModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginServiceModelMapping.swift; path = Models/Mapping/LoginServiceModelMapping.swift; sourceTree = "<group>"; };
+		807371A11F96968C00D53ADF /* LoginServiceModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceModelMapping.swift; sourceTree = "<group>"; };
 		807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginServiceModelHandler.swift; path = Models/Handler/LoginServiceModelHandler.swift; sourceTree = "<group>"; };
 		807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LoginServiceSpec.swift; path = Models/LoginServiceSpec.swift; sourceTree = "<group>"; };
 		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
@@ -558,9 +562,9 @@
 		B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserReviewManagerSpec.swift; path = Managers/UserReviewManagerSpec.swift; sourceTree = "<group>"; };
 		BCF38696E8EC385488688390 /* Pods-Rocket.Chat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.debug.xcconfig"; sourceTree = "<group>"; };
 		D10E9C191F643457007F1796 /* Channel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Channel.swift; path = Models/Channel.swift; sourceTree = "<group>"; };
-		D10E9C1D1F643474007F1796 /* ChannelModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelModelMapping.swift; path = Models/Mapping/ChannelModelMapping.swift; sourceTree = "<group>"; };
+		D10E9C1D1F643474007F1796 /* ChannelModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChannelModelMapping.swift; sourceTree = "<group>"; };
 		D10E9C1F1F6434A7007F1796 /* NSRangeExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSRangeExtensions.swift; path = Extensions/NSRangeExtensions.swift; sourceTree = "<group>"; };
-		D10E9C211F643616007F1796 /* MentionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MentionModelMapping.swift; path = Models/Mapping/MentionModelMapping.swift; sourceTree = "<group>"; };
+		D10E9C211F643616007F1796 /* MentionModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MentionModelMapping.swift; sourceTree = "<group>"; };
 		D12D34021F69C76400AED992 /* SubscriptionExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionExtensions.swift; path = Extensions/Models/SubscriptionExtensions.swift; sourceTree = "<group>"; };
 		D1411A291F6777F300D6EDF7 /* ChannelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChannelSpec.swift; path = Models/ChannelSpec.swift; sourceTree = "<group>"; };
 		D1411A2B1F6779A200D6EDF7 /* MentionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MentionSpec.swift; path = Models/MentionSpec.swift; sourceTree = "<group>"; };
@@ -981,6 +985,7 @@
 				41A79C0E1D2F085F00A1968E /* User.swift */,
 				8073719F1F96937100D53ADF /* LoginService.swift */,
 				806401301FB09DE800990572 /* Permission.swift */,
+				805886791FCC984900259A02 /* Command.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -1026,8 +1031,10 @@
 				D10E9C211F643616007F1796 /* MentionModelMapping.swift */,
 				807371A11F96968C00D53ADF /* LoginServiceModelMapping.swift */,
 				806401321FB09EC400990572 /* PermissionModelMapping.swift */,
+				8058867D1FCC993D00259A02 /* CommandModelMapping.swift */,
 			);
 			name = Mapping;
+			path = Models/Mapping;
 			sourceTree = "<group>";
 		};
 		41BD37DF1E290F1500CBC4C2 /* Handler */ = {
@@ -1947,6 +1954,7 @@
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
+				8058867E1FCC993D00259A02 /* CommandModelMapping.swift in Sources */,
 				411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */,
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
 				597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */,
@@ -2073,6 +2081,7 @@
 				597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */,
 				414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */,
 				41B4B2341E40B1D200F4D252 /* ChatControllerUploader.swift in Sources */,
+				8058867A1FCC984900259A02 /* Command.swift in Sources */,
 				807371A21F96968C00D53ADF /* LoginServiceModelMapping.swift in Sources */,
 				4133EDCF1DA2834E005AA783 /* ChatMessageImageView.swift in Sources */,
 				419ECCA21F3C8F15005F224B /* ChatControllerHeaderStatus.swift in Sources */,

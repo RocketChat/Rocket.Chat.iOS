@@ -147,7 +147,15 @@ extension SocketManager {
                 PermissionManager.updatePermissions()
 
                 API.current()?.fetch(CommandsRequest(), succeeded: { result in
-                    print(result?.raw?.description ?? "erou")
+                    guard let commands = result?.commands else {
+                        return
+                    }
+
+                    commands.forEach { command in
+                        Realm.executeOnMainThread { realm in
+                            realm.add(command, update: true)
+                        }
+                    }
                 }, errored: { error in
                     print(error)
                 })
