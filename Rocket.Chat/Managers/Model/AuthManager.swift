@@ -195,11 +195,15 @@ extension AuthManager {
 
             SocketManager.send(object) { (response) in
                 guard !response.isError() else {
-                    completion(response)
+                    SocketManager.disconnect({ (_, _) in
+                        completion(response)
+                    })
+
                     return
                 }
 
                 PushManager.updatePushToken()
+                SocketManager.sharedInstance.isUserAuthenticated = true
                 completion(response)
             }
         }
@@ -275,6 +279,7 @@ extension AuthManager {
                 realm.add(auth)
             })
 
+            SocketManager.sharedInstance.isUserAuthenticated = true
             ServerManager.timestampSync()
             completion(response)
         }
