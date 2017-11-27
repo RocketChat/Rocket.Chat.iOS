@@ -66,20 +66,19 @@ jobs:
 
 workflows:
   version: 2
-  lint:
+  build-and-test:
     jobs:
       - lint
-  test-iphone-ios11.0:
-    jobs:
-      - test-iphone-ios11.0
-  test-iphone-ios10.3:
-    jobs:
-      - test-iphone-ios10.3
-  test-ipad-ios10.3:
-    jobs:
-      - test-ipad-ios10.3
-  test-ipad-ios11.0:
-    jobs:
-      - test-ipad-ios11.0
+      - test-iphone-ios11.0:
+          requires:
+            - lint
+      - test-iphone-ios10.3:
+          requires:
+            - lint
+      - test-ipad-ios10.3:
+          requires:
+            - lint
+      - test-ipad-ios11.0:
+          requires:
+            - lint
   
-
