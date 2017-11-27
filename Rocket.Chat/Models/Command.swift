@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-class Command : Object {
+class Command: Object {
     @objc dynamic var command: String = ""
     @objc dynamic var clientOnly: Bool = false
     @objc dynamic var params: String = ""

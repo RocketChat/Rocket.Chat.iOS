@@ -17,7 +17,7 @@ extension ChatViewController {
         searchResult = [:]
 
         if prefix == "@" && word.count > 0 {
-            let users = realm.objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", word))
+            let users = realm.objects(User.self).filter("username BEGINSWITH[c] %@", word)
 
             for user in users {
                 if let username = user.username {
@@ -40,6 +40,12 @@ extension ChatViewController {
                 searchResult[channel.name] = channel.type == .channel ? UIImage(named: "Hashtag") : UIImage(named: "Lock")
             }
 
+        } else if prefix == "/" && word.count > 0 {
+            let commands = realm.objects(Command.self).filter("command BEGINSWITH[c] %@", word)
+
+            for command in commands {
+                searchResult[command.command] = command
+            }
         }
 
         let show = (searchResult.count > 0)
