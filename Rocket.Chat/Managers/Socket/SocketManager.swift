@@ -146,19 +146,7 @@ extension SocketManager {
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
 
-                API.current()?.fetch(CommandsRequest(), succeeded: { result in
-                    guard let commands = result?.commands else {
-                        return
-                    }
-
-                    commands.forEach { command in
-                        Realm.executeOnMainThread { realm in
-                            realm.add(command, update: true)
-                        }
-                    }
-                }, errored: { error in
-                    print(error)
-                })
+                API.current()?.client(CommandsClient.self).fetchCommands()
 
                 // If we have some subscription opened, let's
                 // try to subscribe to it again

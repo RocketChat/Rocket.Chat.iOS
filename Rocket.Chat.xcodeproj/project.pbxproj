@@ -217,6 +217,8 @@
 		805886731FCC53EF00259A02 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886721FCC53EF00259A02 /* APIError.swift */; };
 		8058867A1FCC984900259A02 /* Command.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886791FCC984900259A02 /* Command.swift */; };
 		8058867E1FCC993D00259A02 /* CommandModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8058867D1FCC993D00259A02 /* CommandModelMapping.swift */; };
+		805886821FCCA46B00259A02 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886811FCCA46B00259A02 /* APIClient.swift */; };
+		805886841FCCA52400259A02 /* CommandsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886831FCCA52400259A02 /* CommandsClient.swift */; };
 		806401311FB09DE800990572 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401301FB09DE800990572 /* Permission.swift */; };
 		806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401321FB09EC400990572 /* PermissionModelMapping.swift */; };
 		806401351FB09F8A00990572 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401341FB09F8A00990572 /* PermissionManager.swift */; };
@@ -522,6 +524,8 @@
 		805886721FCC53EF00259A02 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		805886791FCC984900259A02 /* Command.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Command.swift; path = Models/Command.swift; sourceTree = "<group>"; };
 		8058867D1FCC993D00259A02 /* CommandModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModelMapping.swift; sourceTree = "<group>"; };
+		805886811FCCA46B00259A02 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		805886831FCCA52400259A02 /* CommandsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsClient.swift; sourceTree = "<group>"; };
 		806401301FB09DE800990572 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Permission.swift; path = Models/Permission.swift; sourceTree = "<group>"; };
 		806401321FB09EC400990572 /* PermissionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionModelMapping.swift; sourceTree = "<group>"; };
 		806401341FB09F8A00990572 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManager.swift; path = Managers/Model/PermissionManager.swift; sourceTree = "<group>"; };
@@ -1308,6 +1312,14 @@
 			path = /Users/cardoso/dev/RocketChat/Rocket.Chat.iOS/Rocket.Chat/Extensions/API;
 			sourceTree = "<absolute>";
 		};
+		805886801FCCA44200259A02 /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				805886831FCCA52400259A02 /* CommandsClient.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
 		806C59A01FBB0BA700C32D0A /* Message */ = {
 			isa = PBXGroup;
 			children = (
@@ -1378,8 +1390,10 @@
 		D1D535EA1F7081E6006625D2 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				805886801FCCA44200259A02 /* Clients */,
 				D1D535EF1F70863C006625D2 /* Requests */,
 				D1D535EB1F7081FA006625D2 /* API.swift */,
+				805886811FCCA46B00259A02 /* APIClient.swift */,
 				805886721FCC53EF00259A02 /* APIError.swift */,
 				D1D535ED1F708628006625D2 /* APIRequest.swift */,
 				D15C83851F70991F001AB155 /* APIResult.swift */,
@@ -2014,6 +2028,7 @@
 				41CABFFA1F5047E200E0B289 /* ChatLoaderCell.swift in Sources */,
 				8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
+				805886821FCCA46B00259A02 /* APIClient.swift in Sources */,
 				4102E3AD1E53273E004BAA82 /* SettingsViewController.swift in Sources */,
 				D10E9C1E1F643474007F1796 /* ChannelModelMapping.swift in Sources */,
 				4101BF011F8D0A1700F67E89 /* AppManager.swift in Sources */,
@@ -2061,6 +2076,7 @@
 				4147CE7B1F5EA41000C322C3 /* ServersViewController.swift in Sources */,
 				411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */,
 				800E22861F8507E400DA84F1 /* SubscriptionMessagesRequest.swift in Sources */,
+				805886841FCCA52400259A02 /* CommandsClient.swift in Sources */,
 				41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */,
 				80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */,
 				41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */,
