@@ -153,22 +153,22 @@ final class ChatDataController {
             }
         }
 
+        func needsSeparator(_ obj: ChatData) -> Bool {
+            if obj.type != .message { return false }
+
+            return data.filter({
+                $0.type == .daySeparator && $0.timestamp.sameDayAs(obj.timestamp)
+            }).count == 0 && newItems.filter({
+                $0.type == .daySeparator && $0.timestamp.sameDayAs(obj.timestamp)
+            }).count == 0
+        }
+
         for newObj in items {
             if let lastObj = lastObj {
-                if lastObj.type == .message && !lastObj.timestamp.sameDayAs(newObj.timestamp) {
-
-                    // Check if already contains some separator with this data
-                    var insert = true
-                    for obj in newItems.filter({ $0.type == .daySeparator })
-                        where lastObj.timestamp.sameDayAs(obj.timestamp) {
-                                insert = false
-                    }
-
-                    if newItems.count == 0 {
-                        insertDaySeparator(from: newObj)
-                    } else if insert {
-                        insertDaySeparator(from: lastObj)
-                    }
+                if needsSeparator(lastObj) {
+                    insertDaySeparator(from: lastObj)
+                } else if needsSeparator(newObj) {
+                    insertDaySeparator(from: newObj)
                 }
             }
 
