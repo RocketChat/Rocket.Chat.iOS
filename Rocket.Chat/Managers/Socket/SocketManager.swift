@@ -33,6 +33,8 @@ class SocketManager {
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
     var events: [String: [MessageCompletion]] = [:]
+    
+    var isUserAuthenticated = false
 
     internal var internalConnectionHandler: SocketCompletion?
     internal var connectionHandlers: [String: SocketConnectionHandler] = [:]
@@ -59,6 +61,7 @@ class SocketManager {
             return
         }
 
+        sharedInstance.isUserAuthenticated = false
         sharedInstance.events = [:]
         sharedInstance.queue = [:]
         sharedInstance.internalConnectionHandler = completion
@@ -192,6 +195,7 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Log.debug("[WebSocket] \(socket.currentURL)\n - did disconnect with error (\(String(describing: error)))")
 
+        isUserAuthenticated = false
         events = [:]
         queue = [:]
 

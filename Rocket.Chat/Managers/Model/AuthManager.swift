@@ -200,6 +200,7 @@ extension AuthManager {
                 }
 
                 PushManager.updatePushToken()
+                SocketManager.sharedInstance.isUserAuthenticated = true
                 completion(response)
             }
         }
@@ -275,6 +276,7 @@ extension AuthManager {
                 realm.add(auth)
             })
 
+            SocketManager.sharedInstance.isUserAuthenticated = true
             ServerManager.timestampSync()
             completion(response)
         }
