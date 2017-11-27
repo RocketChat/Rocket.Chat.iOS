@@ -19,10 +19,6 @@ extension NSAttributedString {
     }
 }
 
-extension NSAttributedStringKey {
-    public static let highlightBackgroundColor = NSAttributedStringKey(rawValue: "highlightBackgroundColor")
-}
-
 extension NSMutableAttributedString {
 
     func trimCharacters(in set: CharacterSet) {
@@ -61,7 +57,7 @@ extension NSMutableAttributedString {
     func setBackgroundColor(_ color: UIColor, range: NSRange? = nil) {
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
             self.addAttributes([
-                NSAttributedStringKey.highlightBackgroundColor: color
+                NSAttributedStringKey.backgroundColor: color
             ], range: attributeRange)
         }
     }

@@ -8,80 +8,109 @@
 
 import Foundation
 
-class HighlightTextView: UIView {
+class HighlightLayoutManager: NSLayoutManager {
+
+    override func fillBackgroundRectArray(_ rectArray: UnsafePointer<CGRect>, count rectCount: Int, forCharacterRange charRange: NSRange, color: UIColor) {
+
+        let cornerRadius: CGFloat = 5
+        let path = CGMutablePath.init()
+
+        if rectCount == 1 || (rectCount == 2 && (rectArray[1].maxX < rectArray[0].maxX)) {
+            path.addRect(rectArray[0].insetBy(dx: cornerRadius, dy: cornerRadius))
+
+            if rectCount == 2 {
+                path.addRect(rectArray[1].insetBy(dx: cornerRadius, dy: cornerRadius))
+            }
+        } else {
+            let lastRect = rectCount - 1
+
+            path.move(to: CGPoint(x: rectArray[0].minX + cornerRadius, y: rectArray[0].maxY + cornerRadius))
+
+            path.addLine(to: CGPoint(x: rectArray[0].minX + cornerRadius, y: rectArray[0].minY + cornerRadius))
+            path.addLine(to: CGPoint(x: rectArray[0].maxX - cornerRadius, y: rectArray[0].minY + cornerRadius))
+
+            path.addLine(to: CGPoint(x: rectArray[0].maxX - cornerRadius, y: rectArray[lastRect].minY - cornerRadius))
+            path.addLine(to: CGPoint(x: rectArray[lastRect].maxX - cornerRadius, y: rectArray[lastRect].minY - cornerRadius))
+
+            path.addLine(to: CGPoint(x: rectArray[lastRect].maxX - cornerRadius, y: rectArray[lastRect].maxY - cornerRadius))
+            path.addLine(to: CGPoint(x: rectArray[lastRect].minX + cornerRadius, y: rectArray[lastRect].maxY - cornerRadius))
+
+            path.addLine(to: CGPoint(x: rectArray[lastRect].minX + cornerRadius, y: rectArray[0].maxY + cornerRadius))
+
+            path.closeSubpath()
+        }
+
+        color.set()
+
+        guard let ctx = UIGraphicsGetCurrentContext() else {
+            return
+        }
+
+        ctx.setLineWidth(cornerRadius * 2.0)
+        ctx.setLineJoin(.round)
+
+        ctx.setAllowsAntialiasing(true)
+        ctx.setShouldAntialias(true)
+
+        ctx.addPath(path)
+        ctx.drawPath(using: .fillStroke)
+    }
+}
+
+@IBDesignable class HighlightTextView: UIView {
+
+    // Should be private at all?
+    private(set) var textView: UITextView!
 
     var message: NSAttributedString! {
         didSet {
-            setNeedsDisplay()
+            textView.attributedText = message
         }
     }
 
-    override func draw(_ rect: CGRect) {
-        guard let string = message else {
-            return
-        }
+    override init(frame: CGRect) {
+        super.init(frame: frame)
 
-        let framesetter: CTFramesetter = CTFramesetterCreateWithAttributedString(string)
-        let path: CGMutablePath = CGMutablePath()
-        path.addRect(CGRect(x: 0, y: 0, width: bounds.size.width - 16, height: bounds.size.height))
-        let totalframe: CTFrame = CTFramesetterCreateFrame(framesetter, CFRangeMake(0, 0), path, nil)
-
-        guard let context: CGContext = UIGraphicsGetCurrentContext() else {
-            return
-        }
-
-        context.textMatrix = .identity
-        context.translateBy(x: 0, y: bounds.size.height)
-        context.scaleBy(x: 1.0, y: -1.0)
-
-        guard let lines = CTFrameGetLines(totalframe) as? [CTLine] else {
-            return
-        }
-
-        var origins = [CGPoint](repeating: .zero, count: lines.count)
-        CTFrameGetLineOrigins(totalframe, CFRangeMake(0, lines.count), &origins)
-
-        for index in 0..<lines.count {
-            let line: CTLine = lines[index]
-
-            guard let glyphRuns = CTLineGetGlyphRuns(line) as? [CTRun] else {
-                continue
-            }
-
-            for i in 0..<glyphRuns.count {
-                let run: CTRun = glyphRuns[i]
-
-                let attributes = CTRunGetAttributes(run) as NSDictionary
-                let dicObject = attributes.object(forKey: NSAttributedStringKey.highlightBackgroundColor)
-
-                if let color: UIColor = dicObject as? UIColor {
-                    var runBounds: CGRect = .zero
-                    var ascent: CGFloat = 0
-                    var descent: CGFloat = 0
-
-                    let width = CTRunGetTypographicBounds(run, CFRangeMake(0, 0), &ascent, &descent, nil)
-                    runBounds.size.width = CGFloat(width)
-                    runBounds.size.height = ascent + descent
-
-                    let xOffset = CTLineGetOffsetForStringIndex(line, CTRunGetStringRange(run).location, nil)
-                    runBounds.origin.x = origins[index].x + xOffset
-                    runBounds.origin.y = origins[index].y - 4
-
-                    drawBackground(runBounds, color, context)
-                }
-            }
-        }
-
-        CTFrameDraw(totalframe, context)
+        setup()
     }
 
-    private func drawBackground(_ runBounds: CGRect, _ color: UIColor, _ context: CGContext) {
-        let path = UIBezierPath(roundedRect: runBounds, cornerRadius: 3)
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
 
-        let highlightColor = color.cgColor
-        context.setFillColor(highlightColor)
-        context.setStrokeColor(highlightColor)
-        context.addPath(path.cgPath)
-        context.drawPath(using: .fillStroke)
+        setup()
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+
+        setup()
+    }
+
+    private func setup() {
+        textView = UITextView()
+        let textStorage = NSTextStorage()
+        let layoutManager = HighlightLayoutManager()
+        textStorage.addLayoutManager(layoutManager)
+        let textContainer = NSTextContainer.init(size: bounds.size)
+        layoutManager.addTextContainer(textContainer)
+        textView = UITextView.init(frame: .zero, textContainer: textContainer)
+        textView.textContainerInset = .zero
+        textView.textContainer.lineFragmentPadding = 0
+        textView.backgroundColor = .clear
+        textView.isSelectable = false
+
+        addSubview(textView)
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        textView.frame = bounds
+    }
+
+    override func prepareForInterfaceBuilder() {
+        super.prepareForInterfaceBuilder()
+
+        textView.text = "HighlightTextView"
     }
 }

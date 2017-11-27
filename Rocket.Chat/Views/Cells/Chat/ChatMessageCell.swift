@@ -48,7 +48,11 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
-    @IBOutlet weak var labelText: HighlightTextView!
+    @IBOutlet weak var labelText: HighlightTextView! {
+        didSet {
+            labelText.textView.delegate = self
+        }
+    }
 
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
@@ -56,7 +60,7 @@ final class ChatMessageCell: UICollectionViewCell {
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
-        let height = attributedString?.heightForView(withWidth: fullWidth - 71)
+        let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
         var total = (height ?? 0) + (sequential ? 8 : 29)
         total += 16
@@ -269,18 +273,14 @@ extension ChatMessageCell: UIGestureRecognizerDelegate {
 
 }
 
-//extension ChatMessageCell: UITextViewDelegate {
-//
-//    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-//        if URL.scheme == "http" || URL.scheme == "https" {
-//            delegate?.openURL(url: URL)
-//            return false
-//        }
-//
-//        return true
-//    }
-//}
-//
-//extension ChatMessageCell: NSLayoutManager {
-//}
+extension ChatMessageCell: UITextViewDelegate {
 
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if URL.scheme == "http" || URL.scheme == "https" {
+            delegate?.openURL(url: URL)
+            return false
+        }
+
+        return true
+    }
+}
