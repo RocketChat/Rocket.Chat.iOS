@@ -33,7 +33,7 @@ class SocketManager {
     var socket: WebSocket?
     var queue: [String: MessageCompletion] = [:]
     var events: [String: [MessageCompletion]] = [:]
-    
+
     var isUserAuthenticated = false
 
     internal var internalConnectionHandler: SocketCompletion?
