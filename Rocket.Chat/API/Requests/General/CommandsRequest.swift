@@ -17,5 +17,11 @@ struct CommandsRequest: APIRequest {
 }
 
 extension APIResult where T == CommandsRequest {
-
+    var commands: [Command]? {
+        return raw?["commands"].arrayValue.map {
+            let command = Command()
+            command.map($0, realm: nil)
+            return command
+        }.flatMap { $0 }
+    }
 }
