@@ -57,7 +57,7 @@ class MessagesListViewData {
             let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
 
-            API.shared.fetch(request, options: options, { result in
+            API.current()?.fetch(request, options: options, succeeded: { result in
                 DispatchQueue.main.async {
                     self.showing += result?.count ?? 0
                     self.total = result?.total ?? 0

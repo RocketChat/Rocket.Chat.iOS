@@ -211,6 +211,10 @@
 		802498F31F7ACD76005477EC /* ChatMessageAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */; };
 		802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */; };
 		803782B71FB4751D00DED049 /* RealmTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803782B61FB4751D00DED049 /* RealmTestCase.swift */; };
+		803975861FCC13AA00129562 /* CommandsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803975851FCC13AA00129562 /* CommandsRequest.swift */; };
+		803975901FCC1DFF00129562 /* APIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8039758F1FCC1DFF00129562 /* APIExtensions.swift */; };
+		805886711FCC3F4800259A02 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886701FCC3F4800259A02 /* Version.swift */; };
+		805886731FCC53EF00259A02 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886721FCC53EF00259A02 /* APIError.swift */; };
 		806401311FB09DE800990572 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401301FB09DE800990572 /* Permission.swift */; };
 		806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401321FB09EC400990572 /* PermissionModelMapping.swift */; };
 		806401351FB09F8A00990572 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401341FB09F8A00990572 /* PermissionManager.swift */; };
@@ -510,6 +514,10 @@
 		802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = ChatMessageAudioView.xib; path = Views/Cells/Chat/ChatMessageAudioView.xib; sourceTree = "<group>"; };
 		802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChatMessageAudioView.swift; path = Views/Cells/Chat/ChatMessageAudioView.swift; sourceTree = "<group>"; };
 		803782B61FB4751D00DED049 /* RealmTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTestCase.swift; sourceTree = "<group>"; };
+		803975851FCC13AA00129562 /* CommandsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsRequest.swift; sourceTree = "<group>"; };
+		8039758F1FCC1DFF00129562 /* APIExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIExtensions.swift; sourceTree = "<group>"; };
+		805886701FCC3F4800259A02 /* Version.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Version.swift; sourceTree = "<group>"; };
+		805886721FCC53EF00259A02 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		806401301FB09DE800990572 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Permission.swift; path = Models/Permission.swift; sourceTree = "<group>"; };
 		806401321FB09EC400990572 /* PermissionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionModelMapping.swift; path = Models/Mapping/PermissionModelMapping.swift; sourceTree = "<group>"; };
 		806401341FB09F8A00990572 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManager.swift; path = Managers/Model/PermissionManager.swift; sourceTree = "<group>"; };
@@ -857,6 +865,7 @@
 		4174CB1D1D2DB3270086DAC8 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				803975911FCC1E0A00129562 /* API */,
 				414EFF901E54FE35004F001F /* Models */,
 				597ECBA11E3708A50041C5C5 /* DataExtension.swift */,
 				41E991D31D343A9F00BDDCA8 /* DateExtension.swift */,
@@ -1274,6 +1283,24 @@
 			path = Authentication;
 			sourceTree = "<group>";
 		};
+		803975841FCC136C00129562 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
+				803975851FCC13AA00129562 /* CommandsRequest.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
+		803975911FCC1E0A00129562 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8039758F1FCC1DFF00129562 /* APIExtensions.swift */,
+			);
+			name = API;
+			path = /Users/cardoso/dev/RocketChat/Rocket.Chat.iOS/Rocket.Chat/Extensions/API;
+			sourceTree = "<absolute>";
+		};
 		806C59A01FBB0BA700C32D0A /* Message */ = {
 			isa = PBXGroup;
 			children = (
@@ -1346,8 +1373,10 @@
 			children = (
 				D1D535EF1F70863C006625D2 /* Requests */,
 				D1D535EB1F7081FA006625D2 /* API.swift */,
+				805886721FCC53EF00259A02 /* APIError.swift */,
 				D1D535ED1F708628006625D2 /* APIRequest.swift */,
 				D15C83851F70991F001AB155 /* APIResult.swift */,
+				805886701FCC3F4800259A02 /* Version.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1355,10 +1384,10 @@
 		D1D535EF1F70863C006625D2 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				803975841FCC136C00129562 /* General */,
 				806C59A01FBB0BA700C32D0A /* Message */,
 				802498EC1F7A82CD005477EC /* Authentication */,
 				80235D1C1F740AAC00A56CA5 /* Subscription */,
-				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
 				80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */,
 			);
 			path = Requests;
@@ -1910,6 +1939,7 @@
 				41552F661D30308C0081438D /* AuthManager.swift in Sources */,
 				D10E9C1A1F643457007F1796 /* Channel.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
+				803975861FCC13AA00129562 /* CommandsRequest.swift in Sources */,
 				413996171F3B44500075F96E /* UploadHelper.swift in Sources */,
 				7798B4151F852B720074B2F4 /* SelectField.swift in Sources */,
 				80113DFA1F9E086D0048F2C2 /* OAuthManager.swift in Sources */,
@@ -1993,6 +2023,7 @@
 				807371A01F96937100D53ADF /* LoginService.swift in Sources */,
 				802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */,
 				41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */,
+				805886731FCC53EF00259A02 /* APIError.swift in Sources */,
 				D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */,
 				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,
@@ -2000,6 +2031,7 @@
 				800FCD3E1F72893E00D9A692 /* MembersListViewController.swift in Sources */,
 				806401351FB09F8A00990572 /* PermissionManager.swift in Sources */,
 				4180204F1E718E370012A092 /* ChannelInfoViewController.swift in Sources */,
+				805886711FCC3F4800259A02 /* Version.swift in Sources */,
 				4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */,
 				415DC7F61F67F5D30039FB4F /* NetworkManager.swift in Sources */,
 				807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */,
@@ -2048,6 +2080,7 @@
 				8073719A1F94E83600D53ADF /* SocketError.swift in Sources */,
 				41D894021F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift in Sources */,
 				41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */,
+				803975901FCC1DFF00129562 /* APIExtensions.swift in Sources */,
 				77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */,
 				41BD37DD1E290DDB00CBC4C2 /* BaseModel.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
