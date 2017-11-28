@@ -87,7 +87,7 @@ extension String: VersionConvertible {
             dotComponents.count >= 3,
             let major = Int(dotComponents[0]),
             let minor = Int(dotComponents[1]),
-            let patch = Int(dotComponents[0])
+            let patch = Int(dotComponents[2])
         else {
             return nil
         }

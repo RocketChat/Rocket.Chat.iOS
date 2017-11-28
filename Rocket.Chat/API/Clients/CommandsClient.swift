@@ -10,9 +10,6 @@ import RealmSwift
 
 struct CommandsClient: APIClient {
     let api: API
-    init(api: API) {
-        self.api = api
-    }
 
     func fetchCommands() {
         api.fetch(CommandsRequest(), succeeded: { result in

@@ -16,21 +16,6 @@ protocol APIRequestMiddleware {
     func handle<R: APIRequest>(_ request: inout R) -> APIError?
 }
 
-struct APIRequestVersionValidator: APIRequestMiddleware {
-    let api: API
-    init(api: API) {
-        self.api = api
-    }
-
-    func handle<R: APIRequest>(_ request: inout R) -> APIError? {
-        if api.version < request.requiredVersion {
-            return APIError.version(available: api.version, required: request.requiredVersion)
-        }
-
-        return nil
-    }
-}
-
 class API {
     let host: URL
     let version: Version
