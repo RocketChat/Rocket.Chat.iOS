@@ -429,7 +429,7 @@
 		41C45AEE1DFAD42800D9969C /* ChatDataController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatDataController.swift; path = Controllers/Chat/ChatDataController.swift; sourceTree = "<group>"; };
 		41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatLoaderCell.xib; path = Views/Cells/Chat/ChatLoaderCell.xib; sourceTree = "<group>"; };
 		41CABFF91F5047E200E0B289 /* ChatLoaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatLoaderCell.swift; path = Views/Cells/Chat/ChatLoaderCell.swift; sourceTree = "<group>"; };
-		41CABFFB1F50515100E0B289 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArrayExtensions.swift; path = ../Extensions.swift/ArrayExtensions.swift; sourceTree = "<group>"; };
+		41CABFFB1F50515100E0B289 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatMessageDaySeparator.xib; path = Views/Cells/Chat/ChatMessageDaySeparator.xib; sourceTree = "<group>"; };
 		41D3A62F1E0805490011949D /* ChatMessageDaySeparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatMessageDaySeparator.swift; path = Views/Cells/Chat/ChatMessageDaySeparator.swift; sourceTree = "<group>"; };
 		41D4ABAA1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCollectionViewFlowLayout.swift; path = Helpers/ChatCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -895,8 +895,7 @@
 				41BAE3E61D71B26C00C2445A /* URLExtension.swift */,
 				4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */,
 			);
-			name = Extensions;
-			path = Extensions.swift;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		417A70011D47916C00FF46EE /* Socket */ = {
@@ -1312,9 +1311,8 @@
 			children = (
 				8039758F1FCC1DFF00129562 /* APIExtensions.swift */,
 			);
-			name = API;
-			path = /Users/cardoso/dev/RocketChat/Rocket.Chat.iOS/Rocket.Chat/Extensions.swift/API;
-			sourceTree = "<absolute>";
+			path = API;
+			sourceTree = "<group>";
 		};
 		805886801FCCA44200259A02 /* Clients */ = {
 			isa = PBXGroup;
