@@ -43,6 +43,7 @@ class RunCommandRequest: APIRequest {
 }
 
 extension APIResult where T == RunCommandRequest {
-
+    var success: Bool? {
+        return raw?["success"].boolValue
+    }
 }
-
