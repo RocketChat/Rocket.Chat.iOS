@@ -219,6 +219,7 @@
 		8058867E1FCC993D00259A02 /* CommandModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8058867D1FCC993D00259A02 /* CommandModelMapping.swift */; };
 		805886821FCCA46B00259A02 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886811FCCA46B00259A02 /* APIClient.swift */; };
 		805886841FCCA52400259A02 /* CommandsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886831FCCA52400259A02 /* CommandsClient.swift */; };
+		805886861FCCA7D100259A02 /* RunCommandRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805886851FCCA7D100259A02 /* RunCommandRequest.swift */; };
 		806401311FB09DE800990572 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401301FB09DE800990572 /* Permission.swift */; };
 		806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401321FB09EC400990572 /* PermissionModelMapping.swift */; };
 		806401351FB09F8A00990572 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401341FB09F8A00990572 /* PermissionManager.swift */; };
@@ -526,6 +527,7 @@
 		8058867D1FCC993D00259A02 /* CommandModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandModelMapping.swift; sourceTree = "<group>"; };
 		805886811FCCA46B00259A02 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
 		805886831FCCA52400259A02 /* CommandsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsClient.swift; sourceTree = "<group>"; };
+		805886851FCCA7D100259A02 /* RunCommandRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunCommandRequest.swift; sourceTree = "<group>"; };
 		806401301FB09DE800990572 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Permission.swift; path = Models/Permission.swift; sourceTree = "<group>"; };
 		806401321FB09EC400990572 /* PermissionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionModelMapping.swift; sourceTree = "<group>"; };
 		806401341FB09F8A00990572 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManager.swift; path = Managers/Model/PermissionManager.swift; sourceTree = "<group>"; };
@@ -1299,6 +1301,7 @@
 			children = (
 				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
 				803975851FCC13AA00129562 /* CommandsRequest.swift */,
+				805886851FCCA7D100259A02 /* RunCommandRequest.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -2092,6 +2095,7 @@
 				D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
+				805886861FCCA7D100259A02 /* RunCommandRequest.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
 				597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */,

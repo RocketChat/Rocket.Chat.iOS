@@ -319,7 +319,32 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
-        sendMessage()
+        guard
+            let subscription = subscription,
+            let messageText = textView.text
+        else {
+            return
+        }
+
+        DraftMessageManager.update(draftMessage: "", for: subscription)
+        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        textView.text = ""
+        self.scrollToBottom()
+
+        let replyString = self.replyString
+        stopReplying()
+
+        let text = "\(messageText)\(replyString)"
+
+        if text.first == "/" &&  text.count > 1 {
+            let components = text.components(separatedBy: " ")
+            let command = String(components[0].dropFirst())
+            let params = components.dropFirst().joined(separator: " ")
+            sendCommand(command: command, params: params)
+            return
+        }
+
+        sendTextMessage(text: text)
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -327,7 +352,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressReturnKey(_ keyCommand: UIKeyCommand?) {
-        sendMessage()
+        didPressRightButton(nil)
     }
 
     override func textViewDidBeginEditing(_ textView: UITextView) {
@@ -347,22 +372,35 @@ final class ChatViewController: SLKTextViewController {
     }
 
     // MARK: Message
-    fileprivate func sendMessage() {
-        guard let subscription = subscription else { return }
-        guard let messageText = textView.text, messageText.count > 0 else { return }
+    @discardableResult
+    fileprivate func sendCommand(command: String, params: String) -> Bool {
+        guard
+            let subscription = subscription,
+            command.count > 0
+        else {
+            return false
+        }
 
-        let replyString = self.replyString
-        stopReplying()
+        let client = API.current()?.client(CommandsClient.self)
+        client?.runCommand(command: command, params: params, roomId: subscription.rid)
 
-        self.scrollToBottom()
-        rightButton.isEnabled = false
+        return true
+    }
+
+    fileprivate func sendTextMessage(text: String) {
+        guard
+            let subscription = subscription,
+            text.count > 0
+        else {
+            return
+        }
 
         var message: Message?
         Realm.executeOnMainThread({ (realm) in
             message = Message()
             message?.internalType = ""
             message?.createdAt = Date.serverDate
-            message?.text = "\(messageText)\(replyString)"
+            message?.text = text
             message?.subscription = subscription
             message?.identifier = String.random(18)
             message?.temporary = true
@@ -374,12 +412,6 @@ final class ChatViewController: SLKTextViewController {
         })
 
         if let message = message {
-            DraftMessageManager.update(draftMessage: "", for: subscription)
-            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
-
-            textView.text = ""
-            rightButton.isEnabled = true
-
             SubscriptionManager.sendTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
                     message.temporary = false
