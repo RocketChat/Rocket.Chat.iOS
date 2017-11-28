@@ -16,7 +16,21 @@ protocol APIRequestMiddleware {
     func handle<R: APIRequest>(_ request: inout R) -> APIError?
 }
 
-class API {
+protocol APIFetcher {
+    func fetch<R>(_ request: R, succeeded: ((_ result: APIResult<R>?) -> Void)?, errored: ((APIError) -> Void)?)
+    func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?,
+                  succeeded: ((_ result: APIResult<R>?) -> Void)?, errored: ((APIError) -> Void)?)
+}
+
+extension APIFetcher {
+    func fetch<R>(_ request: R, succeeded: ((APIResult<R>?) -> Void)?, errored: ((APIError) -> Void)?) {
+        fetch(request, options: .none, sessionDelegate: nil, succeeded: succeeded, errored: errored)
+    }
+}
+
+typealias AnyAPIFetcher = Any & APIFetcher
+
+class API: APIFetcher {
     let host: URL
     let version: Version
 
@@ -42,7 +56,6 @@ class API {
 
     func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,
                   succeeded: ((_ result: APIResult<R>?) -> Void)?, errored: ((APIError) -> Void)? = nil) {
-
         var transformedRequest = request
         for middleware in requestMiddlewares {
             if let error = middleware.handle(&transformedRequest) {

@@ -203,6 +203,8 @@
 		80113DFA1F9E086D0048F2C2 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80113DF91F9E086D0048F2C2 /* OAuthManager.swift */; };
 		8017510F1FCDD75300EAC0DF /* VersionMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8017510E1FCDD75300EAC0DF /* VersionMiddleware.swift */; };
 		801751121FCDD9D700EAC0DF /* VersionMiddlewareSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801751111FCDD9D700EAC0DF /* VersionMiddlewareSpec.swift */; };
+		801751141FCDE38700EAC0DF /* MockAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801751131FCDE38700EAC0DF /* MockAPI.swift */; };
+		801751171FCDFE3100EAC0DF /* CommandsClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801751161FCDFE3100EAC0DF /* CommandsClientSpec.swift */; };
 		8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */; };
 		80235D1B1F74070100A56CA5 /* SubscriptionMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */; };
 		80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */; };
@@ -513,6 +515,8 @@
 		80113DF91F9E086D0048F2C2 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
 		8017510E1FCDD75300EAC0DF /* VersionMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionMiddleware.swift; sourceTree = "<group>"; };
 		801751111FCDD9D700EAC0DF /* VersionMiddlewareSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionMiddlewareSpec.swift; sourceTree = "<group>"; };
+		801751131FCDE38700EAC0DF /* MockAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockAPI.swift; sourceTree = "<group>"; };
+		801751161FCDFE3100EAC0DF /* CommandsClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsClientSpec.swift; sourceTree = "<group>"; };
 		8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PushManagerSpec.swift; path = Managers/PushManagerSpec.swift; sourceTree = "<group>"; };
 		80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequest.swift; sourceTree = "<group>"; };
 		80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequestSpec.swift; sourceTree = "<group>"; };
@@ -1277,6 +1281,14 @@
 			path = Middlewares;
 			sourceTree = "<group>";
 		};
+		801751151FCDFE0D00EAC0DF /* Clients */ = {
+			isa = PBXGroup;
+			children = (
+				801751161FCDFE3100EAC0DF /* CommandsClientSpec.swift */,
+			);
+			path = Clients;
+			sourceTree = "<group>";
+		};
 		80235D1C1F740AAC00A56CA5 /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
@@ -1390,10 +1402,12 @@
 		D18675E71F70A55D00406FB4 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				80A63C561F71D2E400FE5AC4 /* APISpec.swift */,
+				801751151FCDFE0D00EAC0DF /* Clients */,
 				801751101FCDD99C00EAC0DF /* Middlewares */,
 				D18675E81F70A56800406FB4 /* Requests */,
 				8073719B1F963FA400D53ADF /* APITestCase.swift */,
-				80A63C561F71D2E400FE5AC4 /* APISpec.swift */,
+				801751131FCDE38700EAC0DF /* MockAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1413,8 +1427,8 @@
 		D1D535EA1F7081E6006625D2 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				8017510D1FCDD72700EAC0DF /* Middlewares */,
 				805886801FCCA44200259A02 /* Clients */,
+				8017510D1FCDD72700EAC0DF /* Middlewares */,
 				D1D535EF1F70863C006625D2 /* Requests */,
 				D1D535EB1F7081FA006625D2 /* API.swift */,
 				805886811FCCA46B00259A02 /* APIClient.swift */,
@@ -2177,6 +2191,7 @@
 				D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
 				993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */,
+				801751171FCDFE3100EAC0DF /* CommandsClientSpec.swift in Sources */,
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
 				8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */,
@@ -2198,6 +2213,7 @@
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
 				8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */,
+				801751141FCDE38700EAC0DF /* MockAPI.swift in Sources */,
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,
 				89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */,
 				4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */,
