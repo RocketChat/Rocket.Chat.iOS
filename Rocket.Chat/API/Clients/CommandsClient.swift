@@ -29,4 +29,12 @@ struct CommandsClient: APIClient {
             print(error)
         })
     }
+
+    func runCommand(command: String, params: String, roomId: String) {
+        api.fetch(RunCommandRequest(command: command, params: params, roomId: roomId), succeeded: { result in
+            print(result?.raw?.description)
+        }, errored: { error in
+            print(error)
+        })
+    }
 }
