@@ -35,19 +35,9 @@ struct Version {
 
 extension Version: Comparable {
     static func < (lhs: Version, rhs: Version) -> Bool {
-        if lhs.major < rhs.major {
-            return true
-
-        }
-        if lhs.minor < rhs.minor {
-            return true
-
-        }
-        if lhs.patch < rhs.patch {
-            return true
-
-        }
-
+        if lhs.major < rhs.major { return true }
+        if lhs.minor < rhs.minor { return true }
+        if lhs.patch < rhs.patch { return true }
         return false
     }
 
