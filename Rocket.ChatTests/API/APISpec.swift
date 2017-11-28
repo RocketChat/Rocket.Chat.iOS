@@ -17,4 +17,11 @@ class APISpec: APITestCase {
         XCTAssertNotNil(API(host: "http://localhost"), "API is not nil")
     }
 
+    struct TestClient: APIClient {
+        let api: AnyAPIFetcher
+    }
+
+    func testClient() {
+        XCTAssert(api === api.client(TestClient.self).api as? API)
+    }
 }
