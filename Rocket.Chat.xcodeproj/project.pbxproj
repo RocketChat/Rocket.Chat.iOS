@@ -201,7 +201,8 @@
 		800FCD511F728EC800D9A692 /* MemberCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800FCD4A1F728E6A00D9A692 /* MemberCell.xib */; };
 		80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80113DF71F98330B0048F2C2 /* OAuthViewController.swift */; };
 		80113DFA1F9E086D0048F2C2 /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80113DF91F9E086D0048F2C2 /* OAuthManager.swift */; };
-		8017510F1FCDD75300EAC0DF /* APIRequestVersionValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8017510E1FCDD75300EAC0DF /* APIRequestVersionValidator.swift */; };
+		8017510F1FCDD75300EAC0DF /* VersionMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8017510E1FCDD75300EAC0DF /* VersionMiddleware.swift */; };
+		801751121FCDD9D700EAC0DF /* VersionMiddlewareSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801751111FCDD9D700EAC0DF /* VersionMiddlewareSpec.swift */; };
 		8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */; };
 		80235D1B1F74070100A56CA5 /* SubscriptionMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */; };
 		80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */; };
@@ -510,7 +511,8 @@
 		800FCD4A1F728E6A00D9A692 /* MemberCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberCell.xib; sourceTree = "<group>"; };
 		80113DF71F98330B0048F2C2 /* OAuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthViewController.swift; path = Controllers/Auth/OAuthViewController.swift; sourceTree = "<group>"; };
 		80113DF91F9E086D0048F2C2 /* OAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OAuthManager.swift; sourceTree = "<group>"; };
-		8017510E1FCDD75300EAC0DF /* APIRequestVersionValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestVersionValidator.swift; sourceTree = "<group>"; };
+		8017510E1FCDD75300EAC0DF /* VersionMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionMiddleware.swift; sourceTree = "<group>"; };
+		801751111FCDD9D700EAC0DF /* VersionMiddlewareSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionMiddlewareSpec.swift; sourceTree = "<group>"; };
 		8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PushManagerSpec.swift; path = Managers/PushManagerSpec.swift; sourceTree = "<group>"; };
 		80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequest.swift; sourceTree = "<group>"; };
 		80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequestSpec.swift; sourceTree = "<group>"; };
@@ -1262,7 +1264,15 @@
 		8017510D1FCDD72700EAC0DF /* Middlewares */ = {
 			isa = PBXGroup;
 			children = (
-				8017510E1FCDD75300EAC0DF /* APIRequestVersionValidator.swift */,
+				8017510E1FCDD75300EAC0DF /* VersionMiddleware.swift */,
+			);
+			path = Middlewares;
+			sourceTree = "<group>";
+		};
+		801751101FCDD99C00EAC0DF /* Middlewares */ = {
+			isa = PBXGroup;
+			children = (
+				801751111FCDD9D700EAC0DF /* VersionMiddlewareSpec.swift */,
 			);
 			path = Middlewares;
 			sourceTree = "<group>";
@@ -1380,9 +1390,10 @@
 		D18675E71F70A55D00406FB4 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				801751101FCDD99C00EAC0DF /* Middlewares */,
+				D18675E81F70A56800406FB4 /* Requests */,
 				8073719B1F963FA400D53ADF /* APITestCase.swift */,
 				80A63C561F71D2E400FE5AC4 /* APISpec.swift */,
-				D18675E81F70A56800406FB4 /* Requests */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -2081,7 +2092,7 @@
 				800FCD4C1F728EC800D9A692 /* ChannelInfoCellProtocol.swift in Sources */,
 				800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */,
 				419ECCA41F3CA21A005F224B /* DownloadManager.swift in Sources */,
-				8017510F1FCDD75300EAC0DF /* APIRequestVersionValidator.swift in Sources */,
+				8017510F1FCDD75300EAC0DF /* VersionMiddleware.swift in Sources */,
 				419D85001DF599DA0021F034 /* ChatHeaderViewStatus.swift in Sources */,
 				41AC3CD91DCCA0C9002DC39A /* AutocompleteCell.swift in Sources */,
 				D1C536CE1F688B7100EBA8D9 /* UIFontExtensions.swift in Sources */,
@@ -2190,6 +2201,7 @@
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,
 				89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */,
 				4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */,
+				801751121FCDD9D700EAC0DF /* VersionMiddlewareSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
 				4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */,
 				D1411A2C1F6779A200D6EDF7 /* MentionSpec.swift in Sources */,

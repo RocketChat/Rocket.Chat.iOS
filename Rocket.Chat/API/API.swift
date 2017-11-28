@@ -37,7 +37,7 @@ class API {
         self.host = host
         self.version = version
 
-        requestMiddlewares.append(APIRequestVersionValidator(api: self))
+        requestMiddlewares.append(VersionMiddleware(api: self))
     }
 
     func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,

@@ -26,7 +26,7 @@ enum SubscriptionCreateType {
 }
 
 class SubscriptionCreateRequest: APIRequest {
-    let method: String = "POST"
+    let method = "POST"
     var path: String {
         return type.path
     }

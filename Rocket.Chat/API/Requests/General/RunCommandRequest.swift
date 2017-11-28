@@ -12,7 +12,7 @@ import SwiftyJSON
 typealias RunCommandResult = APIResult<RunCommandRequest>
 
 class RunCommandRequest: APIRequest {
-    let method: String = "POST"
+    let method = "POST"
     let path = "/api/v1/commands.run"
     let requiredVersion = Version(major: 0, minor: 60, patch: 0)
 
