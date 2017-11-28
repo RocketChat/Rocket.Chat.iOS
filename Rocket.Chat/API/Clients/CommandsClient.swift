@@ -13,9 +13,11 @@ struct CommandsClient: APIClient {
 
     func fetchCommands(realm: Realm? = Realm.shared) {
         api.fetch(CommandsRequest(), succeeded: { result in
-            result.commands?.forEach { command in
-                try? realm?.write {
-                    realm?.add(command, update: true)
+            DispatchQueue.main.async {
+                result.commands?.forEach { command in
+                    try? realm?.write {
+                        realm?.add(command, update: true)
+                    }
                 }
             }
         }, errored: nil)
