@@ -81,7 +81,7 @@ class DownloadManager {
                     DispatchQueue.main.async {
                         completion()
                     }
-                } catch (let writeError) {
+                } catch let writeError {
                     print("error writing file \(localUrl) : \(writeError)")
 
                     DispatchQueue.main.async {
