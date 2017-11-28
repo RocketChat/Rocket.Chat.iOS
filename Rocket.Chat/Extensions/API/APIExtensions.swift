@@ -9,9 +9,9 @@
 import Foundation
 
 extension API {
-    static func current() -> API? {
+    static func current(auth: Auth? = AuthManager.isAuthenticated()) -> API? {
         guard
-            let auth = AuthManager.isAuthenticated(),
+            let auth = auth,
             let host = auth.apiHost else {
             return nil
         }

@@ -13,7 +13,7 @@ typealias CommandsResult = APIResult<CommandsRequest>
 
 struct CommandsRequest: APIRequest {
     let path = "/api/v1/commands.list"
-    let requiredVersion = Version(major: 0, minor: 60, patch: 0)
+    let requiredVersion = Version(0, 60, 0)
 }
 
 extension APIResult where T == CommandsRequest {

@@ -14,9 +14,9 @@ struct Version {
     let identifier: String?
     let metadata: String?
 
-    static let zero: Version = Version(major: 0, minor: 0, patch: 0)
+    static let zero: Version = Version(0, 0, 0)
 
-    init(major: Int, minor: Int, patch: Int, identifier: String? = nil, metadata: String? = nil) {
+    init(_ major: Int = 0, _ minor: Int = 0, _ patch: Int = 0, _ identifier: String? = nil, _ metadata: String? = nil) {
         self.major = major
         self.minor = minor
         self.patch = patch
@@ -108,8 +108,7 @@ extension String: VersionConvertible {
             metadata = nil
         }
 
-        return Version(major: major, minor: minor, patch: patch,
-                       identifier: identifier, metadata: metadata)
+        return Version(major, minor, patch, identifier, metadata)
 
     }
 }
