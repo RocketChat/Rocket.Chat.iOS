@@ -10,6 +10,7 @@
 import SwiftyJSON
 
 typealias RunCommandResult = APIResult<RunCommandRequest>
+typealias RunCommandSucceeded = (RunCommandResult) -> Void
 
 class RunCommandRequest: APIRequest {
     let method = "POST"
