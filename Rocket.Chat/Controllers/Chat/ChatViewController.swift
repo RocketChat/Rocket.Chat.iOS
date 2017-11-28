@@ -382,7 +382,7 @@ final class ChatViewController: SLKTextViewController {
         }
 
         let client = API.current()?.client(CommandsClient.self)
-        client?.runCommand(command: command, params: params, roomId: subscription.rid)
+        client?.runCommand(command: command, params: params, roomId: subscription.rid, errored: alertApiError)
 
         return true
     }
@@ -1034,4 +1034,17 @@ extension ChatViewController {
         rightButton.isEnabled = true
     }
 
+}
+
+// MARK: Alerter
+extension ChatViewController: Alerter {
+    func alertApiError(_ error: APIError) {
+        switch error {
+        case .version(let available, let required):
+            alert(title: localized("Feature not supported"),
+                  message: "This server's version is: \(available).\nThis feature is only supported in version \(required) and above.")
+        default:
+            break
+        }
+    }
 }

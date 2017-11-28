@@ -33,6 +33,12 @@ struct Version {
     }
 }
 
+extension Version: CustomStringConvertible {
+    var description: String {
+        return String(self)
+    }
+}
+
 extension Version: Comparable {
     static func < (lhs: Version, rhs: Version) -> Bool {
         if lhs.major < rhs.major { return true }
