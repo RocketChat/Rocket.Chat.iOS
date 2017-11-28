@@ -17,6 +17,10 @@ extension Auth {
     static func testInstance() -> Auth {
         let auth = Auth()
         auth.settings = AuthSettings.testInstance()
+        auth.serverURL = "wss://open.rocket.chat/websocket"
+        auth.serverVersion = "1.2.3"
+        auth.userId = "auth-userid"
+        auth.token = "auth-token"
         return auth
     }
 }

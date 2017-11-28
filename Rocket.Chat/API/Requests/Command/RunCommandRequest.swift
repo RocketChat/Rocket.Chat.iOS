@@ -15,7 +15,7 @@ typealias RunCommandSucceeded = (RunCommandResult) -> Void
 class RunCommandRequest: APIRequest {
     let method = "POST"
     let path = "/api/v1/commands.run"
-    let requiredVersion = Version(major: 0, minor: 60, patch: 0)
+    let requiredVersion = Version(0, 60, 0)
 
     let command: String
     let params: String

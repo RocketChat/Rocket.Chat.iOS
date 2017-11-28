@@ -207,6 +207,7 @@
 		801751171FCDFE3100EAC0DF /* CommandsClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801751161FCDFE3100EAC0DF /* CommandsClientSpec.swift */; };
 		8017511A1FCE143300EAC0DF /* RunCommandRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801751191FCE143300EAC0DF /* RunCommandRequestSpec.swift */; };
 		8017511C1FCE1B2500EAC0DF /* VersionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8017511B1FCE1B2500EAC0DF /* VersionSpec.swift */; };
+		8017511F1FCE253200EAC0DF /* APIExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8017511E1FCE253200EAC0DF /* APIExtensionsSpec.swift */; };
 		8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */; };
 		80235D1B1F74070100A56CA5 /* SubscriptionMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */; };
 		80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */; };
@@ -425,7 +426,7 @@
 		41B554C61FBF0F9D000510B7 /* WindowManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WindowManager.swift; path = Managers/WindowManager.swift; sourceTree = "<group>"; };
 		41BA89231D303D8B00CBF526 /* AuthManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthManagerSpec.swift; path = Managers/AuthManagerSpec.swift; sourceTree = "<group>"; };
 		41BAE3E61D71B26C00C2445A /* URLExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLExtension.swift; sourceTree = "<group>"; };
-		41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSURLExtensionSpec.swift; path = Extensions/NSURLExtensionSpec.swift; sourceTree = "<group>"; };
+		41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSURLExtensionSpec.swift; sourceTree = "<group>"; };
 		41BD37D81E290D8600CBC4C2 /* ModelMappeable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelMappeable.swift; path = Models/Base/ModelMappeable.swift; sourceTree = "<group>"; };
 		41BD37DA1E290D9C00CBC4C2 /* ModelHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ModelHandler.swift; path = Models/Base/ModelHandler.swift; sourceTree = "<group>"; };
 		41BD37DC1E290DDB00CBC4C2 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BaseModel.swift; path = Models/Base/BaseModel.swift; sourceTree = "<group>"; };
@@ -450,8 +451,8 @@
 		41DC7A1A1D38454500896FC0 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Message.swift; path = Models/Message.swift; sourceTree = "<group>"; };
 		41DC7A1C1D38471700896FC0 /* MessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManager.swift; path = Managers/Model/MessageManager.swift; sourceTree = "<group>"; };
 		41DC7A1E1D3865FE00896FC0 /* MessageManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageManagerSpec.swift; path = Managers/MessageManagerSpec.swift; sourceTree = "<group>"; };
-		41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StringExtensionSpec.swift; path = Extensions/StringExtensionSpec.swift; sourceTree = "<group>"; };
-		41DC7A231D386CA800896FC0 /* DateExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DateExtensionsSpec.swift; path = Extensions/DateExtensionsSpec.swift; sourceTree = "<group>"; };
+		41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringExtensionSpec.swift; sourceTree = "<group>"; };
+		41DC7A231D386CA800896FC0 /* DateExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtensionsSpec.swift; sourceTree = "<group>"; };
 		41DCB8251DDC828200E1197F /* SubscriptionSearchMoreView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = SubscriptionSearchMoreView.xib; path = Views/Sections/SubscriptionSearchMoreView.xib; sourceTree = "<group>"; };
 		41DCB8271DDC82E000E1197F /* SubscriptionSearchMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionSearchMoreView.swift; path = Views/Sections/SubscriptionSearchMoreView.swift; sourceTree = "<group>"; };
 		41DF76DF1D2C50710028DBF8 /* Rocket.Chat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rocket.Chat.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -498,7 +499,7 @@
 		77BA814E1F87B2BE00F295F4 /* SignupViewController+CustomFields.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SignupViewController+CustomFields.swift"; sourceTree = "<group>"; };
 		77BA81501F87C4CB00F295F4 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		77C261241F97445300724A1F /* AuthSettingsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthSettingsSpec.swift; path = Models/AuthSettingsSpec.swift; sourceTree = "<group>"; };
-		77C261261F97445F00724A1F /* DictionaryExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DictionaryExtensionsSpec.swift; path = Extensions/DictionaryExtensionsSpec.swift; sourceTree = "<group>"; };
+		77C261261F97445F00724A1F /* DictionaryExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DictionaryExtensionsSpec.swift; sourceTree = "<group>"; };
 		77C261291F97453600724A1F /* CustomFieldsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomFieldsSpec.swift; sourceTree = "<group>"; };
 		77C2612A1F97453600724A1F /* SelectFieldSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFieldSpec.swift; sourceTree = "<group>"; };
 		77C2612B1F97453600724A1F /* TextFieldSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldSpec.swift; sourceTree = "<group>"; };
@@ -521,6 +522,7 @@
 		801751161FCDFE3100EAC0DF /* CommandsClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandsClientSpec.swift; sourceTree = "<group>"; };
 		801751191FCE143300EAC0DF /* RunCommandRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunCommandRequestSpec.swift; sourceTree = "<group>"; };
 		8017511B1FCE1B2500EAC0DF /* VersionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionSpec.swift; sourceTree = "<group>"; };
+		8017511E1FCE253200EAC0DF /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
 		8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PushManagerSpec.swift; path = Managers/PushManagerSpec.swift; sourceTree = "<group>"; };
 		80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequest.swift; sourceTree = "<group>"; };
 		80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequestSpec.swift; sourceTree = "<group>"; };
@@ -590,7 +592,7 @@
 		D18675E91F70A58B00406FB4 /* InfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoRequestSpec.swift; sourceTree = "<group>"; };
 		D18675EB1F716A0D00406FB4 /* LoginRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequest.swift; sourceTree = "<group>"; };
 		D18675ED1F716FBC00406FB4 /* LoginRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRequestSpec.swift; sourceTree = "<group>"; };
-		D1A403D81F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NSAttributedStringExtensionsSpec.swift; path = Extensions/NSAttributedStringExtensionsSpec.swift; sourceTree = "<group>"; };
+		D1A403D81F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensionsSpec.swift; sourceTree = "<group>"; };
 		D1C536CB1F688B2F00EBA8D9 /* MarkdownManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MarkdownManager.swift; path = Managers/MarkdownManager.swift; sourceTree = "<group>"; };
 		D1C536CD1F688B7100EBA8D9 /* UIFontExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIFontExtensions.swift; sourceTree = "<group>"; };
 		D1D535EB1F7081FA006625D2 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
@@ -1087,13 +1089,14 @@
 		41DC7A201D386B2C00896FC0 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				8017511D1FCE252100EAC0DF /* API */,
 				77C261261F97445F00724A1F /* DictionaryExtensionsSpec.swift */,
 				41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */,
 				41DC7A231D386CA800896FC0 /* DateExtensionsSpec.swift */,
 				41BAE3E81D71C15A00C2445A /* NSURLExtensionSpec.swift */,
 				D1A403D81F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift */,
 			);
-			name = Extensions;
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		41DF76D61D2C50710028DBF8 = {
@@ -1299,6 +1302,14 @@
 				801751191FCE143300EAC0DF /* RunCommandRequestSpec.swift */,
 			);
 			path = Command;
+			sourceTree = "<group>";
+		};
+		8017511D1FCE252100EAC0DF /* API */ = {
+			isa = PBXGroup;
+			children = (
+				8017511E1FCE253200EAC0DF /* APIExtensionsSpec.swift */,
+			);
+			path = API;
 			sourceTree = "<group>";
 		};
 		80235D1C1F740AAC00A56CA5 /* Subscription */ = {
@@ -2182,6 +2193,7 @@
 				417A70031D47918200FF46EE /* ResponseMessageSpec.swift in Sources */,
 				D18675EE1F716FBC00406FB4 /* LoginRequestSpec.swift in Sources */,
 				41BA89241D303D8B00CBF526 /* AuthManagerSpec.swift in Sources */,
+				8017511F1FCE253200EAC0DF /* APIExtensionsSpec.swift in Sources */,
 				803782B71FB4751D00DED049 /* RealmTestCase.swift in Sources */,
 				41DC7A241D386CA800896FC0 /* DateExtensionsSpec.swift in Sources */,
 				41552F681D3035D80081438D /* SocketManagerSpec.swift in Sources */,

@@ -13,12 +13,12 @@ import XCTest
 class VersionMiddlewareSpec: XCTestCase {
     class TestRequest: APIRequest {
         let path = "/test"
-        var requiredVersion = Version(major: 0, minor: 60, patch: 0)
+        var requiredVersion = Version(0, 60, 0)
     }
 
     func testHandleRequest() {
-        let available = Version(major: 0, minor: 60, patch: 0)
-        let required = Version(major: 0, minor: 61, patch: 0)
+        let available = Version(0, 60, 0)
+        let required = Version(0, 61, 0)
 
         let api: API! = API(host: "https://open.rocket.chat", version: available)
         let middleware = VersionMiddleware(api: api)

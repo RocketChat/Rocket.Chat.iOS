@@ -40,18 +40,18 @@ class VersionSpec: XCTestCase {
     }
 
     func testComparable() {
-        var version1 = Version(major: 0, minor: 1, patch: 2)
-        var version2 = Version(major: 2, minor: 1, patch: 0)
+        var version1 = Version(0, 1, 2)
+        var version2 = Version(2, 1, 0)
 
         XCTAssert(version2 > version1)
 
-        version1 = Version(major: 0, minor: 1, patch: 2)
-        version2 = Version(major: 0, minor: 2, patch: 1)
+        version1 = Version(0, 1, 2)
+        version2 = Version(0, 2, 1)
 
         XCTAssert(version2 > version1)
 
-        version1 = Version(major: 2, minor: 1, patch: 0)
-        version2 = Version(major: 0, minor: 1, patch: 2)
+        version1 = Version(2, 1, 0)
+        version2 = Version(0, 1, 2)
 
         XCTAssert(version2 > version1)
     }
