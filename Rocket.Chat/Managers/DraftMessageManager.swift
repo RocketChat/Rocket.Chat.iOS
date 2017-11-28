@@ -17,7 +17,16 @@ struct DraftMessageManager {
          to store and retrieve its subscriptions's draft messages.
      */
     static var selectedServerKey: String {
-        return DatabaseManager.servers?[DatabaseManager.selectedIndex][ServerPersistKeys.serverURL] ?? ""
+        let selectedIndex = DatabaseManager.selectedIndex
+
+        guard
+            let servers = DatabaseManager.servers,
+            servers.count > selectedIndex
+        else {
+            return ""
+        }
+
+        return servers[selectedIndex][ServerPersistKeys.serverURL] ?? ""
     }
 
     /**

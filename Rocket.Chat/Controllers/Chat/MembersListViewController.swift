@@ -38,7 +38,11 @@ class MembersListViewData {
 
         if let subscription = subscription {
             isLoadingMoreMembers = true
-            API.shared.fetch(SubscriptionMembersRequest(roomId: subscription.rid, type: subscription.type), options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
+
+            let request = SubscriptionMembersRequest(roomId: subscription.rid, type: subscription.type)
+            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+
+            API.shared.fetch(request, options: options, { result in
                 self.showing += result?.count ?? 0
                 self.total = result?.total ?? 0
                 if let members = result?.members {
@@ -50,7 +54,7 @@ class MembersListViewData {
                 self.title = "\(localized("chat.members.list.title")) (\(self.total))"
                 self.isLoadingMoreMembers = false
                 completion?()
-            }
+            })
         }
     }
 }

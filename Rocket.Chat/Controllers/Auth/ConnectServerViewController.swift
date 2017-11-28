@@ -14,6 +14,8 @@ final class ConnectServerViewController: BaseViewController {
 
     internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
+    internal let infoRequestHandler = InfoRequestHandler()
+
     var url: URL? {
         guard var urlText = textFieldServerURL.text else { return nil }
         if urlText.isEmpty {
@@ -53,6 +55,7 @@ final class ConnectServerViewController: BaseViewController {
             navigationItem.leftBarButtonItem = nil
         }
 
+        infoRequestHandler.delegate = self
         textFieldServerURL.placeholder = defaultURL
         labelSSLRequired.text = localized("auth.connect.ssl_required")
 
@@ -117,110 +120,52 @@ final class ConnectServerViewController: BaseViewController {
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
-
-        let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-        let controller = storyboardChat.instantiateInitialViewController()
-        let application = UIApplication.shared
-
-        if let window = application.windows.first {
-            window.rootViewController = controller
-        }
-    }
-
-    func alertInvalidURL() {
-        let alert = UIAlertController(
-            title: localized("alert.connection.invalid_url.title"),
-            message: localized("alert.connection.invalid_url.message"),
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-        present(alert, animated: true, completion: nil)
+        AppManager.reloadApp()
     }
 
     func connect() {
-        guard let url = url else { return alertInvalidURL() }
-        guard let socketURL = url.socketURL() else { return alertInvalidURL() }
-
-        // Check if server already exists and connect to that instead
-        if let servers = DatabaseManager.servers {
-            let sameServerIndex = servers.index(where: {
-                if let stringServerUrl = $0[ServerPersistKeys.serverURL],
-                    let serverUrl = URL(string: stringServerUrl) {
-
-                    return serverUrl == socketURL
-                } else {
-                    return false
-                }
-            })
-
-            if let sameServerIndex = sameServerIndex {
-                MainChatViewController.shared?.changeSelectedServer(index: sameServerIndex)
-                textFieldServerURL.resignFirstResponder()
-                return
-            }
-        }
+        guard let url = url else { return infoRequestHandler.alertInvalidURL() }
+        guard let socketURL = url.socketURL() else { return infoRequestHandler.alertInvalidURL() }
 
         connecting = true
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
 
-        API.shared.host = url
-        validate { [weak self] (_, error) in
-            guard !error else {
-                DispatchQueue.main.async {
-                    self?.stopConnecting()
-                    self?.alertInvalidURL()
-                }
+        if AppManager.changeToServerIfExists(serverUrl: socketURL.absoluteString) {
+            return
+        }
+
+        infoRequestHandler.url = url
+        infoRequestHandler.validate(with: url)
+    }
+
+    func connectWebSocket() {
+        guard let socketURL = infoRequestHandler.url?.socketURL() else { return infoRequestHandler.alertInvalidURL() }
+
+        SocketManager.connect(socketURL) { [weak self] (_, connected) in
+            if !connected {
+                self?.stopConnecting()
+                self?.alert(
+                    title: localized("alert.connection.socket_error.title"),
+                    message: localized("alert.connection.socket_error.message")
+                )
 
                 return
             }
 
-            SocketManager.connect(socketURL) { (_, connected) in
-                if !connected {
-                    self?.stopConnecting()
-                    self?.alert(title: localized("alert.connection.socket_error.title"),
-                                message: localized("alert.connection.socket_error.message"))
-                    return
+            let index = DatabaseManager.createNewDatabaseInstance(serverURL: socketURL.absoluteString)
+            DatabaseManager.changeDatabaseInstance(index: index)
+
+            AuthSettingsManager.updatePublicSettings(nil) { (settings) in
+                self?.serverPublicSettings = settings
+
+                if connected {
+                    self?.performSegue(withIdentifier: "Auth", sender: nil)
                 }
 
-                let index = DatabaseManager.createNewDatabaseInstance(serverURL: socketURL.absoluteString)
-                DatabaseManager.changeDatabaseInstance(index: index)
-
-                AuthSettingsManager.updatePublicSettings(nil) { (settings) in
-                    self?.serverPublicSettings = settings
-
-                    if connected {
-                        self?.performSegue(withIdentifier: "Auth", sender: nil)
-                    }
-
-                    self?.stopConnecting()
-                }
+                self?.stopConnecting()
             }
-        }
-    }
-
-    func validate(completion: @escaping RequestCompletion) {
-        API.shared.fetch(InfoRequest()) { result in
-            guard let version = result?.version else {
-                return completion(nil, true)
-            }
-
-            if let minVersion = Bundle.main.object(forInfoDictionaryKey: "RC_MIN_SERVER_VERSION") as? String {
-                if Semver.lt(version, minVersion) {
-                    let alert = UIAlertController(
-                        title: localized("alert.connection.invalid_version.title"),
-                        message: String(format: localized("alert.connection.invalid_version.message"), version, minVersion),
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
-
-            completion(result?.raw, false)
         }
     }
 
@@ -240,6 +185,37 @@ extension ConnectServerViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         connect()
         return true
+    }
+
+}
+
+extension ConnectServerViewController: InfoRequestHandlerDelegate {
+
+    var viewControllerToPresentAlerts: UIViewController? { return self }
+
+    func urlNotValid() {
+        DispatchQueue.main.async {
+            self.stopConnecting()
+        }
+    }
+
+    func serverIsValid() {
+        DispatchQueue.main.async {
+            self.connectWebSocket()
+        }
+    }
+
+    func serverChangedURL(_ newURL: String?) {
+        if let url = newURL {
+            DispatchQueue.main.async {
+                self.textFieldServerURL.text = url
+                self.connect()
+            }
+        } else {
+            DispatchQueue.main.async {
+                self.stopConnecting()
+            }
+        }
     }
 
 }

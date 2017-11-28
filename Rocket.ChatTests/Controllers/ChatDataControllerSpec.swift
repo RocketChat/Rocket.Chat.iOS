@@ -48,11 +48,11 @@ class ChatDataControllerSpec: XCTestCase {
 
         controller.insert([obj2, obj1, obj3])
 
-        // We begin from 1 since a Day Separator is prepended by default
+        // We begin from 2 since a Day Separator + a Header/Loader is prepended by default
 
-        XCTAssertEqual(controller.indexPathOf(obj1.identifier)?.row, 1, "obj1 found in correct row")
-        XCTAssertEqual(controller.indexPathOf(obj2.identifier)?.row, 2, "obj2 found in correct row")
-        XCTAssertEqual(controller.indexPathOf(obj3.identifier)?.row, 3, "obj3 found in correct row")
+        XCTAssertEqual(controller.indexPathOf(obj1.identifier)?.row, 2, "obj1 found in correct row")
+        XCTAssertEqual(controller.indexPathOf(obj2.identifier)?.row, 3, "obj2 found in correct row")
+        XCTAssertEqual(controller.indexPathOf(obj3.identifier)?.row, 4, "obj3 found in correct row")
     }
 
     func testIndexPathOfMessage() {
@@ -69,12 +69,18 @@ class ChatDataControllerSpec: XCTestCase {
         var obj1 = ChatData(type: .header, timestamp: Date())
         obj1.timestamp = Date()
 
-        var obj3 = ChatData(type: .daySeparator, timestamp: Date())
+        var obj3 = ChatData(type: .message, timestamp: Date())
         obj3.timestamp = Date().addingTimeInterval(2.0)
 
         controller.insert([obj2, obj1, obj3])
 
-        XCTAssertEqual(controller.indexPathOfMessage(identifier: identifier)?.row, 2, "message found in correct row")
+        // 0. loader/header <- added by default
+        // 1. day separator <- added by default
+        // 2. obj1
+        // 3. obj2
+        // 4. obj3
+
+        XCTAssertEqual(controller.indexPathOfMessage(identifier: identifier)?.row, 3, "message found in correct row")
     }
 
     func testInsertMultipleObjects() {
@@ -99,7 +105,9 @@ class ChatDataControllerSpec: XCTestCase {
 
         let (indexPaths, _) = controller.insert([obj1, obj2])
         XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-        XCTAssertEqual(indexPaths.count, 3, "indexPaths will have three results")
+
+        // we will have 4 because header or loader + a day separator are added by default
+        XCTAssertEqual(indexPaths.count, 4, "indexPaths will have four results")
     }
 
     func testInsertMultipleObjectsWithDifferentDates() {

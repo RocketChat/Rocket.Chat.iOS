@@ -24,7 +24,7 @@ class User: BaseModel {
     var emails = List<Email>()
     var roles = List<String>()
 
-    @objc fileprivate dynamic var privateStatus = UserStatus.offline.rawValue
+    @objc internal dynamic var privateStatus = UserStatus.offline.rawValue
     var status: UserStatus {
         get { return UserStatus(rawValue: privateStatus) ?? UserStatus.offline }
         set { privateStatus = newValue.rawValue }
@@ -47,6 +47,20 @@ extension User {
         }
 
         return username ?? ""
+    }
+
+    func avatarURL(_ auth: Auth? = nil) -> URL? {
+        guard
+            !isInvalidated,
+            let username = username,
+            let auth = auth ?? AuthManager.isAuthenticated(),
+            let baseURL = auth.baseURL(),
+            let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        else {
+            return nil
+        }
+
+        return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
     }
 
 }

@@ -43,4 +43,14 @@ class DateExtension: XCTestCase {
         XCTAssertEqual(date.day, "26", "Day is correct")
     }
 
+    func testSameDayAs() {
+        let date = Date()
+        XCTAssertTrue(date.sameDayAs(date))
+
+        let oneDay = 86400.0
+        let date2 = date.addingTimeInterval(oneDay)
+
+        XCTAssertFalse(date.sameDayAs(date2))
+    }
+
 }

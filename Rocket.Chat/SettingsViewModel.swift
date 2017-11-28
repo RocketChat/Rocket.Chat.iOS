@@ -8,7 +8,7 @@
 
 import UIKit
 
-private enum BundleInfoKey: String {
+internal enum BundleInfoKey: String {
     case version = "CFBundleShortVersionString"
     case build = "CFBundleVersion"
 }
@@ -63,7 +63,7 @@ final class SettingsViewModel {
 
     // MARK: Helpers
 
-    private func appInfo(_ info: BundleInfoKey) -> String {
+    internal func appInfo(_ info: BundleInfoKey) -> String {
         return Bundle.main.infoDictionary?[info.rawValue] as? String ?? ""
     }
 }

@@ -65,6 +65,10 @@ struct AuthManager {
         if let index = index {
             server = servers[index]
         } else {
+            if DatabaseManager.selectedIndex >= servers.count {
+                DatabaseManager.selectDatabase(at: 0)
+            }
+
             server = servers[DatabaseManager.selectedIndex]
         }
 
@@ -165,6 +169,12 @@ extension AuthManager {
         API.shared.authToken = auth.token
         API.shared.userId = auth.userId
 
+        // Turn all users offline
+        Realm.execute({ (realm) in
+            let users = realm.objects(User.self)
+            users.setValue("offline", forKey: "privateStatus")
+        })
+
         SocketManager.connect(url) { (socket, _) in
             guard SocketManager.isConnected() else {
                 guard let response = SocketResponse(
@@ -185,11 +195,15 @@ extension AuthManager {
 
             SocketManager.send(object) { (response) in
                 guard !response.isError() else {
-                    completion(response)
+                    SocketManager.disconnect({ (_, _) in
+                        completion(response)
+                    })
+
                     return
                 }
 
                 PushManager.updatePushToken()
+                SocketManager.sharedInstance.isUserAuthenticated = true
                 completion(response)
             }
         }
@@ -265,6 +279,7 @@ extension AuthManager {
                 realm.add(auth)
             })
 
+            SocketManager.sharedInstance.isUserAuthenticated = true
             ServerManager.timestampSync()
             completion(response)
         }
@@ -364,7 +379,7 @@ extension AuthManager {
             GIDSignIn.sharedInstance().signOut()
 
             DraftMessageManager.clearServerDraftMessages()
-            DatabaseManager.removerSelectedDatabase()
+            DatabaseManager.removeSelectedDatabase()
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()

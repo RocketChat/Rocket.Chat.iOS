@@ -64,4 +64,12 @@ class AuthSpec: XCTestCase {
 
         XCTAssertEqual(object.apiHost?.absoluteString, "https://team.rocket.chat", "apiHost returns API Host correctly")
     }
+
+    func testAPIHostInvalidServerURL() {
+        let object = Auth()
+        object.serverURL = ""
+
+        XCTAssertNil(object.apiHost, "apiHost will be nil when serverURL is an invalid URL")
+    }
+
 }
