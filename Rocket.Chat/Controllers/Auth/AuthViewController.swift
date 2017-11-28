@@ -153,7 +153,7 @@ final class AuthViewController: BaseViewController {
             strongSelf.stopLoading()
             SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
 
-            if let user = result?.user {
+            if let user = result.user {
                 if user.username != nil {
 
                     DispatchQueue.main.async {

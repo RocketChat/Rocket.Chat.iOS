@@ -13,22 +13,16 @@ struct CommandsClient: APIClient {
 
     func fetchCommands(realm: Realm? = Realm.shared) {
         api.fetch(CommandsRequest(), succeeded: { result in
-            guard let commands = result?.commands else {
-                return
-            }
-
-            commands.forEach { command in
+            result.commands?.forEach { command in
                 try? realm?.write {
                     realm?.add(command, update: true)
                 }
             }
-        }, errored: { error in
-            print(error)
-        })
+        }, errored: nil)
     }
 
     func runCommand(command: String, params: String, roomId: String,
-                    succeeded: ((RunCommandResult?) -> Void)? = nil, errored: ((APIError) -> Void)? = nil) {
+                    succeeded: RunCommandSucceeded? = nil, errored: APIErrored? = nil) {
         api.fetch(RunCommandRequest(command: command, params: params, roomId: roomId),
                   succeeded: succeeded, errored: errored)
     }

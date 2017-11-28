@@ -133,7 +133,7 @@ extension SocketManager {
 
             API.current()?.fetch(InfoRequest(), succeeded: { result in
                 Realm.executeOnMainThread { _ in
-                    AuthManager.isAuthenticated()?.serverVersion = result?.version ?? ""
+                    AuthManager.isAuthenticated()?.serverVersion = result.version ?? ""
                 }
             })
 

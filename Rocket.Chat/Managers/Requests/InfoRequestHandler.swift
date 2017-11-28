@@ -89,7 +89,6 @@ extension InfoRequestHandler: URLSessionTaskDelegate {
 
     func handleRedirect(_ newURL: URL) {
         API(host: newURL).fetch(InfoRequest(), sessionDelegate: self, succeeded: { result in
-            guard let result = result else { return }
             self.handleRedirectInfoResult(result, for: newURL)
         })
     }

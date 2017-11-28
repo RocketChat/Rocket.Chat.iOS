@@ -13,7 +13,7 @@ import SwiftyJSON
 class MockAPI: APIFetcher {
     var nextResult = JSON([])
 
-    func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?, succeeded: ((APIResult<R>?) -> Void)?, errored: ((APIError) -> Void)?) {
+    func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?, succeeded: ((APIResult<R>) -> Void)?, errored: APIErrored?) {
         succeeded?(APIResult<R>(raw: nextResult))
     }
 }

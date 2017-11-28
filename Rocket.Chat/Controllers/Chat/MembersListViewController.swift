@@ -43,9 +43,9 @@ class MembersListViewData {
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
 
             API.current()?.fetch(request, options: options, succeeded: { result in
-                self.showing += result?.count ?? 0
-                self.total = result?.total ?? 0
-                if let members = result?.members {
+                self.showing += result.count ?? 0
+                self.total = result.total ?? 0
+                if let members = result.members {
                     self.membersPages.append(members.flatMap { $0 })
                 }
 
