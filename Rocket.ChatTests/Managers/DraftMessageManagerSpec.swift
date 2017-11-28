@@ -14,11 +14,7 @@ class DraftMessageManagerSpec: XCTestCase {
     var servers: [[String: String]] = []
     let testServerURL = "wss://foo.com/websocket"
     let draftMessage = "Testing draft messages per channel"
-    let subscription: Subscription = {
-        let subscription = Subscription()
-        subscription.rid = "testing-id"
-        return subscription
-    }()
+    let subscription = Subscription.testInstance()
 
     override func setUp() {
         super.setUp()
@@ -28,7 +24,31 @@ class DraftMessageManagerSpec: XCTestCase {
             ServerPersistKeys.serverURL: testServerURL,
             ServerPersistKeys.token: "1",
             ServerPersistKeys.userId: "1"
+        ], [
+            ServerPersistKeys.databaseName: "foo.realm"
         ]]
+    }
+
+    func testUpdateDraftMessageWithNoServers() {
+        UserDefaults.standard.removeObject(forKey: ServerPersistKeys.servers)
+        XCTAssertNoThrow(DraftMessageManager.update(draftMessage: "foo", for: subscription))
+    }
+
+    func testReturnDraftMessageWithNoServers() {
+        UserDefaults.standard.removeObject(forKey: ServerPersistKeys.servers)
+        XCTAssertEqual(DraftMessageManager.draftMessage(for: subscription), "", "it should return empty string")
+    }
+
+    func testReturnDraftMessageWithNotFoundServer() {
+        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        DatabaseManager.selectDatabase(at: 100)
+        XCTAssertEqual(DraftMessageManager.draftMessage(for: subscription), "", "it should return empty string")
+    }
+
+    func testReturnDraftMessageWithEmptyServerURLKey() {
+        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        DatabaseManager.selectDatabase(at: 1)
+        XCTAssertEqual(DraftMessageManager.draftMessage(for: subscription), "", "it should return empty string")
     }
 
     func testUpdateDraftMessage() {

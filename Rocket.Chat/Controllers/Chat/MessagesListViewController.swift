@@ -53,8 +53,11 @@ class MessagesListViewData {
 
         if let subscription = subscription {
             isLoadingMoreMessages = true
-            API.shared.fetch(SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query),
-                             options: .paginated(count: pageSize, offset: currentPage*pageSize)) { result in
+
+            let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
+            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+
+            API.shared.fetch(request, options: options, { result in
                 DispatchQueue.main.async {
                     self.showing += result?.count ?? 0
                     self.total = result?.total ?? 0
@@ -83,7 +86,7 @@ class MessagesListViewData {
                     self.isLoadingMoreMessages = false
                     completion?()
                 }
-            }
+            })
         }
     }
 }

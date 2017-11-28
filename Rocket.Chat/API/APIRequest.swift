@@ -54,6 +54,7 @@ extension APIRequest {
         var components = URLComponents(url: api.host, resolvingAgainstBaseURL: false)
         components?.path = path
         components?.query = query
+
         if let optionsQuery = options.query {
             components?.query = "\(query ?? "")&\(optionsQuery)"
         }

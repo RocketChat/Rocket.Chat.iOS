@@ -28,14 +28,36 @@ class API {
         self.host = host
     }
 
-    func fetch<R>(_ request: R, options: APIRequestOptions = .none, completion: ((_ result: APIResult<R>?) -> Void)?) {
+    func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil, _ completion: ((_ result: APIResult<R>?) -> Void)?) {
         guard let request = request.request(for: self, options: options) else {
             completion?(nil)
             return
         }
 
-        let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
-            guard let data = data else { return }
+        var session: URLSession = URLSession.shared
+
+        if let sessionDelegate = sessionDelegate {
+            let configuration = URLSessionConfiguration.ephemeral
+            configuration.timeoutIntervalForRequest = 30
+
+            session = URLSession(
+                configuration: configuration,
+                delegate: sessionDelegate,
+                delegateQueue: nil
+            )
+        }
+
+        let task = session.dataTask(with: request) { (data, _, error) in
+            guard error == nil else {
+                completion?(APIResult<R>(error: error))
+                return
+            }
+
+            guard let data = data else {
+                completion?(APIResult<R>(error: error))
+                return
+            }
+
             let json = try? JSON(data: data)
             completion?(APIResult<R>(raw: json))
         }

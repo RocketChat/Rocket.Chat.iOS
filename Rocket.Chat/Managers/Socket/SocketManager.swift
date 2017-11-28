@@ -34,6 +34,8 @@ class SocketManager {
     var queue: [String: MessageCompletion] = [:]
     var events: [String: [MessageCompletion]] = [:]
 
+    var isUserAuthenticated = false
+
     internal var internalConnectionHandler: SocketCompletion?
     internal var connectionHandlers: [String: SocketConnectionHandler] = [:]
 
@@ -59,13 +61,11 @@ class SocketManager {
             return
         }
 
+        sharedInstance.isUserAuthenticated = false
+        sharedInstance.events = [:]
+        sharedInstance.queue = [:]
         sharedInstance.internalConnectionHandler = completion
         sharedInstance.socket?.disconnect()
-    }
-
-    static func clear() {
-        sharedInstance.internalConnectionHandler = nil
-        sharedInstance.connectionHandlers.removeAll()
     }
 
     // MARK: Messages
@@ -82,7 +82,7 @@ class SocketManager {
         }
 
         if let raw = json.rawString() {
-            Log.debug("Socket will send message: \(raw)")
+            Log.debug("[WebSocket] \(sharedInstance.socket?.currentURL.description ?? "nil")\n -  will send message: \(raw)")
 
             sharedInstance.socket?.write(string: raw)
 
@@ -99,7 +99,7 @@ class SocketManager {
             list.append(completion)
             sharedInstance.events[eventName] = list
         } else {
-            self.send(object, completion: completion)
+            send(object, completion: completion)
             sharedInstance.events[eventName] = [completion]
         }
     }
@@ -112,9 +112,7 @@ class SocketManager {
 
         send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
-
             sharedInstance.events.removeValue(forKey: eventName)
-
             completion?(response)
         }
     }
@@ -145,8 +143,14 @@ extension SocketManager {
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
 
-                if let userId = auth.userId {
-                    PushManager.updateUser(userId)
+                // If we have some subscription opened, let's
+                // try to subscribe to it again
+                if let subscription = ChatViewController.shared?.subscription, !subscription.isInvalidated {
+                    ChatViewController.shared?.subscription = subscription
+                }
+
+                if let userIdentifier = auth.userId {
+                    PushManager.updateUser(userIdentifier)
                 }
             })
         })
@@ -177,7 +181,7 @@ extension SocketManager {
 extension SocketManager: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
-        Log.debug("Socket (\(socket)) did connect")
+        Log.debug("[WebSocket] \(socket.currentURL)\n -  did connect")
 
         let object = [
             "msg": "connect",
@@ -189,8 +193,9 @@ extension SocketManager: WebSocketDelegate {
     }
 
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
-        Log.debug("[WebSocket] did disconnect with error (\(String(describing: error)))")
+        Log.debug("[WebSocket] \(socket.currentURL)\n - did disconnect with error (\(String(describing: error)))")
 
+        isUserAuthenticated = false
         events = [:]
         queue = [:]
 
@@ -213,12 +218,12 @@ extension SocketManager: WebSocketDelegate {
 
         // JSON is invalid
         guard json.exists() else {
-            Log.debug("[WebSocket] did receive invalid JSON object: \(text)")
+            Log.debug("[WebSocket] \(socket.currentURL)\n - did receive invalid JSON object:\n\(text)")
             return
         }
 
         if let raw = json.rawString() {
-            Log.debug("[WebSocket] did receive JSON message: \(raw)")
+            Log.debug("[WebSocket] \(socket.currentURL)\n - did receive JSON message:\n\(raw)")
         }
 
         self.handleMessage(json, socket: socket)

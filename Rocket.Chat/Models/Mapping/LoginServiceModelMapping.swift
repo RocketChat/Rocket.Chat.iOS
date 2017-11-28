@@ -15,7 +15,7 @@ extension LoginService: ModelMappeable {
         self.service = values["service"].stringValue
         self.clientId = values["clientId"].stringValue
         self.custom = values["custom"].boolValue
-        self.serverURL = values["serverURL"].stringValue
+        self.serverUrl = values["serverURL"].stringValue
         self.tokenPath = values["tokenPath"].stringValue
         self.identityPath = values["identityPath"].stringValue
         self.authorizePath = values["authorizePath"].stringValue
