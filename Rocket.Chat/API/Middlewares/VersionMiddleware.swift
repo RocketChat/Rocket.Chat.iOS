@@ -1,12 +1,12 @@
 //
-//  APIRequestVersionValidator.swift
+//  VersionValidator.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 11/28/17.
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 
-struct APIRequestVersionValidator: APIRequestMiddleware {
+struct VersionMiddleware: APIRequestMiddleware {
     let api: API
 
     func handle<R: APIRequest>(_ request: inout R) -> APIError? {

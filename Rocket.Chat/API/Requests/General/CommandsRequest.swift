@@ -12,7 +12,7 @@ import SwiftyJSON
 typealias CommandsResult = APIResult<CommandsRequest>
 
 struct CommandsRequest: APIRequest {
-    let path: String = "/api/v1/commands.list"
+    let path = "/api/v1/commands.list"
     let requiredVersion = Version(major: 0, minor: 60, patch: 0)
 }
 
