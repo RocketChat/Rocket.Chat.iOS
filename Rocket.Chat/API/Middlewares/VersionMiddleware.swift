@@ -1,5 +1,5 @@
 //
-//  VersionValidator.swift
+//  VersionMiddleware.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 11/28/17.
