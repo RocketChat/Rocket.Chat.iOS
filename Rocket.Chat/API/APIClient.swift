@@ -13,6 +13,6 @@ extension API {
 }
 
 protocol APIClient {
-    var api: API { get }
-    init(api: API)
+    var api: AnyAPIFetcher { get }
+    init(api: AnyAPIFetcher)
 }
