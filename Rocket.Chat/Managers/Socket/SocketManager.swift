@@ -131,11 +131,7 @@ extension SocketManager {
                 return
             }
 
-            API.current()?.fetch(InfoRequest(), succeeded: { result in
-                Realm.executeOnMainThread { _ in
-                    AuthManager.isAuthenticated()?.serverVersion = result.version ?? ""
-                }
-            })
+            API.current()?.client(InfoClient.self).fetchInfo()
 
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
                 AuthSettingsManager.updatePublicSettings(auth, completion: { _ in

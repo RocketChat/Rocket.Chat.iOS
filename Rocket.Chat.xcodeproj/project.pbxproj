@@ -208,6 +208,8 @@
 		8017511A1FCE143300EAC0DF /* RunCommandRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801751191FCE143300EAC0DF /* RunCommandRequestSpec.swift */; };
 		8017511C1FCE1B2500EAC0DF /* VersionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8017511B1FCE1B2500EAC0DF /* VersionSpec.swift */; };
 		8017511F1FCE253200EAC0DF /* APIExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8017511E1FCE253200EAC0DF /* APIExtensionsSpec.swift */; };
+		801751211FCE29A900EAC0DF /* InfoClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801751201FCE29A900EAC0DF /* InfoClient.swift */; };
+		801751231FCE2A7300EAC0DF /* InfoClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801751221FCE2A7300EAC0DF /* InfoClientSpec.swift */; };
 		8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */; };
 		80235D1B1F74070100A56CA5 /* SubscriptionMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */; };
 		80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */; };
@@ -523,6 +525,8 @@
 		801751191FCE143300EAC0DF /* RunCommandRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RunCommandRequestSpec.swift; sourceTree = "<group>"; };
 		8017511B1FCE1B2500EAC0DF /* VersionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VersionSpec.swift; sourceTree = "<group>"; };
 		8017511E1FCE253200EAC0DF /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
+		801751201FCE29A900EAC0DF /* InfoClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoClient.swift; sourceTree = "<group>"; };
+		801751221FCE2A7300EAC0DF /* InfoClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoClientSpec.swift; sourceTree = "<group>"; };
 		8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PushManagerSpec.swift; path = Managers/PushManagerSpec.swift; sourceTree = "<group>"; };
 		80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequest.swift; sourceTree = "<group>"; };
 		80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequestSpec.swift; sourceTree = "<group>"; };
@@ -1292,6 +1296,7 @@
 			isa = PBXGroup;
 			children = (
 				801751161FCDFE3100EAC0DF /* CommandsClientSpec.swift */,
+				801751221FCE2A7300EAC0DF /* InfoClientSpec.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -1372,6 +1377,7 @@
 			isa = PBXGroup;
 			children = (
 				805886831FCCA52400259A02 /* CommandsClient.swift */,
+				801751201FCE29A900EAC0DF /* InfoClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -2148,6 +2154,7 @@
 				41B554C71FBF0F9D000510B7 /* WindowManager.swift in Sources */,
 				41900C271D9FE35400308EF4 /* Attachment.swift in Sources */,
 				412719441E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift in Sources */,
+				801751211FCE29A900EAC0DF /* InfoClient.swift in Sources */,
 				41499C911F2A1A7200790EA7 /* TimestampCoordinator.swift in Sources */,
 				80A63C4F1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift in Sources */,
 				D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */,
@@ -2215,6 +2222,7 @@
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
 				D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */,
+				801751231FCE2A7300EAC0DF /* InfoClientSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
 				993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */,
 				801751171FCDFE3100EAC0DF /* CommandsClientSpec.swift in Sources */,
