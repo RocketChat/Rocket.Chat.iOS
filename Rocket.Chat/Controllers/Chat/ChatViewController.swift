@@ -11,7 +11,7 @@ import SlackTextViewController
 import SimpleImageViewer
 
 // swiftlint:disable file_length type_body_length
-final class ChatViewController: SLKTextViewController {
+final class ChatViewController: SLKTextViewController, Alerter {
 
     var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
@@ -373,7 +373,7 @@ final class ChatViewController: SLKTextViewController {
         guard let subscription = subscription else { return }
 
         let client = API.current()?.client(CommandsClient.self)
-        client?.runCommand(command: command, params: params, roomId: subscription.rid, errored: alertApiError)
+        client?.runCommand(command: command, params: params, roomId: subscription.rid, errored: alertAPIError)
     }
 
     fileprivate func sendTextMessage(text: String) {
@@ -1026,12 +1026,15 @@ extension ChatViewController {
 }
 
 // MARK: Alerter
-extension ChatViewController: Alerter {
-    func alertApiError(_ error: APIError) {
+extension ChatViewController {
+    func alertAPIError(_ error: APIError) {
         switch error {
         case .version(let available, let required):
-            alert(title: localized("alert.unsupported_feature.title"),
-                  message: String(format: localized("alert.unsupported_feature.message"), available.description, required.description))
+            let message = String(format: localized("alert.unsupported_feature.message"), available.description, required.description)
+            alert(
+                title: localized("alert.unsupported_feature.title"),
+                message: message
+            )
         default:
             break
         }
