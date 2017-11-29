@@ -27,7 +27,7 @@ protocol APIRequest {
 
     var path: String { get }
     var method: String { get }
-    var contentType: String? { get }
+    var contentType: String { get }
 
     var query: String? { get }
 
@@ -44,8 +44,8 @@ extension APIRequest {
         return "GET"
     }
 
-	var contentType: String? {
-        return nil
+	var contentType: String {
+        return "application/json"
 	}
 
     var query: String? {
@@ -73,16 +73,14 @@ extension APIRequest {
         request.httpMethod = method
         request.httpBody = self.body()
 
+        request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+
         if let token = api.authToken {
             request.addValue(token, forHTTPHeaderField: "X-Auth-Token")
         }
 
         if let userId = api.userId {
             request.addValue(userId, forHTTPHeaderField: "X-User-Id")
-        }
-
-        if let contentType = self.contentType {
-            request.addValue(contentType, forHTTPHeaderField: "Content-Type")
         }
 
         return request

@@ -49,10 +49,6 @@ class SubscriptionCreateRequest: APIRequest {
 
         return try? JSONSerialization.data(withJSONObject: json)
     }
-
-    var contentType: String? {
-        return "application/json"
-    }
 }
 
 extension APIResult where T == SubscriptionCreateRequest {

@@ -31,10 +31,6 @@ class PostMessageRequest: APIRequest {
 
         return body.rawString()?.data(using: .utf8)
     }
-
-    var contentType: String? {
-        return "application/json"
-    }
 }
 
 extension APIResult where T == PostMessageRequest {
