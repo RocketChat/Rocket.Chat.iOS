@@ -336,10 +336,7 @@ final class ChatViewController: SLKTextViewController {
 
         let text = "\(messageText)\(replyString)"
 
-        if text.first == "/" &&  text.count > 1 {
-            let components = text.components(separatedBy: " ")
-            let command = String(components[0].dropFirst())
-            let params = components.dropFirst().joined(separator: " ")
+        if let (command, params) = text.commandAndParams() {
             sendCommand(command: command, params: params)
             return
         }
