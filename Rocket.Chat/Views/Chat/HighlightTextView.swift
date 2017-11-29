@@ -80,12 +80,6 @@ class HighlightLayoutManager: NSLayoutManager {
         setup()
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-
-        setup()
-    }
-
     private func setup() {
         textView = UITextView()
         let textStorage = NSTextStorage()
@@ -94,12 +88,16 @@ class HighlightLayoutManager: NSLayoutManager {
         let textContainer = NSTextContainer.init(size: bounds.size)
         layoutManager.addTextContainer(textContainer)
         textView = UITextView.init(frame: .zero, textContainer: textContainer)
+        configureTextView()
+
+        addSubview(textView)
+    }
+
+    private func configureTextView() {
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
         textView.backgroundColor = .clear
         textView.isSelectable = false
-
-        addSubview(textView)
     }
 
     override func layoutSubviews() {
