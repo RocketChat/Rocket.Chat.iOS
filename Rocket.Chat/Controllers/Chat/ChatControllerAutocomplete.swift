@@ -40,11 +40,16 @@ extension ChatViewController {
                 searchResult[channel.name] = channel.type == .channel ? UIImage(named: "Hashtag") : UIImage(named: "Lock")
             }
 
-        } else if prefix == "/" && word.count > 0 {
-            let commands = realm.objects(Command.self).filter("command BEGINSWITH[c] %@", word)
+        } else if prefix == "/" {
+            let commands: Results<Command>
+            if word.count > 0 {
+                commands = realm.objects(Command.self).filter("command BEGINSWITH[c] %@", word)
+            } else {
+                commands = realm.objects(Command.self)
+            }
 
-            for command in commands {
-                searchResult[command.command] = command
+            commands.forEach {
+                searchResult[$0.command] = $0
             }
         }
 
