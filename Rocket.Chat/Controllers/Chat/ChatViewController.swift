@@ -1030,8 +1030,8 @@ extension ChatViewController: Alerter {
     func alertApiError(_ error: APIError) {
         switch error {
         case .version(let available, let required):
-            alert(title: localized("Feature not supported"),
-                  message: "This server's version is: \(available).\nThis feature is only supported in version \(required) and above.")
+            alert(title: localized("alert.unsupported_feature.title"),
+                  message: String(format: localized("alert.unsupported_feature.message"), available.description, required.description))
         default:
             break
         }
