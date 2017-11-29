@@ -109,6 +109,5 @@ extension String: VersionConvertible {
         }
 
         return Version(major, minor, patch, identifier, metadata)
-
     }
 }
