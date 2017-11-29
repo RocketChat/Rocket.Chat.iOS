@@ -46,7 +46,7 @@ class HighlightLayoutManager: NSLayoutManager {
             return
         }
 
-        ctx.setLineWidth(cornerRadius * 2.0)
+        ctx.setLineWidth(cornerRadius * 1.9)
         ctx.setLineJoin(.round)
 
         ctx.setAllowsAntialiasing(true)
