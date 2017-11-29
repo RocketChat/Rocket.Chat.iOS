@@ -369,19 +369,11 @@ final class ChatViewController: SLKTextViewController {
     }
 
     // MARK: Message
-    @discardableResult
-    fileprivate func sendCommand(command: String, params: String) -> Bool {
-        guard
-            let subscription = subscription,
-            command.count > 0
-        else {
-            return false
-        }
+    func sendCommand(command: String, params: String) {
+        guard let subscription = subscription else { return }
 
         let client = API.current()?.client(CommandsClient.self)
         client?.runCommand(command: command, params: params, roomId: subscription.rid, errored: alertApiError)
-
-        return true
     }
 
     fileprivate func sendTextMessage(text: String) {
