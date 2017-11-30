@@ -63,7 +63,7 @@ final class ChatMessageCell: UICollectionViewCell {
         let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
         var total = (height ?? 0) + (sequential ? 8 : 29)
-        total += 16
+
         for url in message.urls {
             guard url.isValid() else { continue }
             total += ChatMessageURLView.defaultHeight
