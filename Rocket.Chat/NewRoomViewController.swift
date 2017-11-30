@@ -58,7 +58,7 @@ class NewRoomViewController: BaseViewController {
                 FormCell(
                     cell: .mentionsTextField(placeholder: localized("new_room.cell.invite_users.placeholder"), icon: #imageLiteral(resourceName: "Mention")),
                     key: "users list",
-                    defaultValue: "",
+                    defaultValue: [],
                     enabled: true
                 )
             ]
