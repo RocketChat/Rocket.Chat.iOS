@@ -38,5 +38,12 @@ class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
             return result + attrs.frame.height
         }
+
+        CATransaction.begin()
+        CATransaction.setDisableActions(true)
+    }
+
+    override func finalizeCollectionViewUpdates() {
+        CATransaction.commit()
     }
 }
