@@ -19,10 +19,7 @@ class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
-        let transform = CGAffineTransform(translationX: 0, y: heightOfInsertedItems)
-        let offset = proposedContentOffset.applying(transform)
-        heightOfInsertedItems = 0.0
-        return offset
+        return targetContentOffset(forProposedContentOffset: proposedContentOffset)
     }
 
     override func prepare(forCollectionViewUpdates updateItems: [UICollectionViewUpdateItem]) {
