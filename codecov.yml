@@ -11,7 +11,7 @@ coverage:
   status:
     project:
       enabled: yes
-      threshold: 0.5
+      threshold: 0.5%
     patch: no
     changes: no
 
