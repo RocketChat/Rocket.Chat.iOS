@@ -66,7 +66,7 @@ final class AuthViewController: BaseViewController {
         if let registrationForm = AuthSettingsManager.shared.settings?.registrationForm {
            buttonRegister.isHidden = registrationForm != .isPublic
         }
-        
+
         if !AppManager.supportsMultiServer {
             self.navigationItem.hidesBackButton = true
         }
