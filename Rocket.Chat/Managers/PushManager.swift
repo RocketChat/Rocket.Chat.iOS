@@ -73,19 +73,25 @@ final class PushManager {
 
 struct PushNotification {
     let host: String
+    let username: String
     let roomId: String
+    let roomType: SubscriptionType
 
     init?(raw: [AnyHashable: Any]) {
         guard
             let json = JSON(parseJSON: (raw["ejson"] as? String) ?? "").dictionary,
             let host = json["host"]?.string,
+            let username = json["sender"]?["username"].string,
+            let roomType = json["type"]?.string,
             let roomId = json["rid"]?.string
             else {
                 return nil
         }
 
         self.host = host
+        self.username = username
         self.roomId = roomId
+        self.roomType = SubscriptionType(rawValue: roomType) ?? .group
     }
 }
 
@@ -159,9 +165,11 @@ extension PushManager {
         }
 
         if let reply = reply {
+            let appendage = subscription.type == .directMessage ? "" : " @\(notification.username)"
+
             let message = Message()
             message.subscription = subscription
-            message.text = reply
+            message.text = "\(reply)\(appendage)"
 
             let backgroundTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             API.shared.fetch(PostMessageRequest(message: message), { _ in
