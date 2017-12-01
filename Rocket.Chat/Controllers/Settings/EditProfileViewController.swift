@@ -144,9 +144,16 @@ public class EditProfileViewController: FormViewController {
                 guard let success = result?.success else { return }
                 if success {
                     print(result?.user)
-                } else {
                     DispatchQueue.main.async {
-                        let saveErrorView = UIAlertController(title: "Save Error", message: "Profile could not be saved.", preferredStyle: .alert)
+                        let saveSuccessView = UIAlertController(title: "Saved", message: "Profile was updated!", preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "Okay", style: .default)
+                        saveSuccessView.addAction(defaultAction)
+                        self.present(saveSuccessView, animated: true)
+                    }
+                } else {
+                    print(result?.errorMessage)
+                    DispatchQueue.main.async {
+                        let saveErrorView = UIAlertController(title: "Save Error", message: result?.errorMessage, preferredStyle: .alert)
                         let defaultAction = UIAlertAction(title: "Okay", style: .default)
                         saveErrorView.addAction(defaultAction)
                         self.present(saveErrorView, animated: true)

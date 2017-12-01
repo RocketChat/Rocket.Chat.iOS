@@ -32,11 +32,16 @@ class UserUpdateRequest: APIRequest {
         let body = JSON([
             "userId": userId,
 //            "data.email": user.emails,
-            "name": name,
-            "username": username
+            "data": [
+                "name": name,
+                "username": username
+                ]
             ])
         
-        return body.rawString()?.data(using: .utf8)
+        let string = body.rawString()
+        let data = string?.data(using: .utf8)
+        
+        return data
     }
     
     var contentType: String? {
@@ -55,5 +60,9 @@ extension APIResult where T == UserUpdateRequest {
     
     var success: Bool {
         return raw?["success"].boolValue ?? false
+    }
+    
+    var errorMessage: String? {
+        return raw?["error"].stringValue
     }
 }

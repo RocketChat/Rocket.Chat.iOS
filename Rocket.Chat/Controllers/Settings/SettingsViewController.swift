@@ -25,14 +25,19 @@ final class SettingsViewController: FormViewController {
             }
             <<< ButtonRow("account") {
                 $0.title = viewModel.account
+                $0.presentationMode = .segueName(segueName: "toEditProfileView", onDismiss: nil)
             }
             <<< ButtonRow("contact") {
                 $0.title = viewModel.contactus
+            }.onCellSelection { _, _ in
+                self.cellContactDidPressed()
             }
             <<< ButtonRow("license") {
                 $0.title = viewModel.license
+            }.onCellSelection { _, _ in
+                self.cellTermsOfServiceDidPressed()
             }
-            <<< ButtonRow("version") {
+            <<< LabelRow("version") {
                 $0.title = viewModel.formattedVersion
             }
 
@@ -45,11 +50,11 @@ final class SettingsViewController: FormViewController {
         }
     }
 
-//    func cellTermsOfServiceDidPressed() {
-//        guard let url = viewModel.licenseURL else { return }
-//        let controller = SFSafariViewController(url: url)
-//        navigationController?.pushViewController(controller, animated: true)
-//    }
+    func cellTermsOfServiceDidPressed() {
+        guard let url = viewModel.licenseURL else { return }
+        let controller = SFSafariViewController(url: url)
+        navigationController?.pushViewController(controller, animated: true)
+    }
 
     func cellContactDidPressed() {
         if !MFMailComposeViewController.canSendMail() {
@@ -69,20 +74,9 @@ final class SettingsViewController: FormViewController {
         controller.setToRecipients([viewModel.supportEmail])
         controller.setSubject(viewModel.supportEmailSubject)
         controller.setMessageBody(viewModel.supportEmailBody, isHTML: true)
+        
         present(controller, animated: true)
     }
-
-    // MARK: UITableViewDelegate
-
-//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.row == 0 {
-//            cellContactDidPressed()
-//        } else if indexPath.row == 1 {
-//            cellTermsOfServiceDidPressed()
-//        }
-//
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
 }
 
 extension SettingsViewController: MFMailComposeViewControllerDelegate {
