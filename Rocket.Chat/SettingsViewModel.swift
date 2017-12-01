@@ -60,6 +60,14 @@ final class SettingsViewModel {
     internal var licenseURL: URL? {
         return URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
     }
+    
+    internal var profile: String {
+        return localized("myaccount.settings.profile")
+    }
+    
+    internal var account: String {
+        return localized("myaccount.settings.account")
+    }
 
     // MARK: Helpers
 

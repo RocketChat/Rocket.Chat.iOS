@@ -9,31 +9,32 @@
 import UIKit
 import MessageUI
 import SafariServices
+import Eureka
 
-final class SettingsViewController: UITableViewController {
+final class SettingsViewController: FormViewController {
 
     private let viewModel = SettingsViewModel()
-
-    @IBOutlet weak var labelContactUs: UILabel! {
-        didSet {
-            labelContactUs.text = viewModel.contactus
-        }
-    }
-
-    @IBOutlet weak var labelLicense: UILabel! {
-        didSet {
-            labelLicense.text = viewModel.license
-        }
-    }
-
-    @IBOutlet weak var labelVersion: UILabel! {
-        didSet {
-            labelVersion.text = viewModel.formattedVersion
-        }
-    }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        form +++ Section()
+            <<< ButtonRow("profile") {
+                $0.title = viewModel.profile
+                $0.presentationMode = .segueName(segueName: "toEditProfileView", onDismiss: nil)
+            }
+            <<< ButtonRow("account") {
+                $0.title = viewModel.account
+            }
+            <<< ButtonRow("contact") {
+                $0.title = viewModel.contactus
+            }
+            <<< ButtonRow("license") {
+                $0.title = viewModel.license
+            }
+            <<< ButtonRow("version") {
+                $0.title = viewModel.formattedVersion
+            }
 
         title = viewModel.title
     }
@@ -44,11 +45,11 @@ final class SettingsViewController: UITableViewController {
         }
     }
 
-    func cellTermsOfServiceDidPressed() {
-        guard let url = viewModel.licenseURL else { return }
-        let controller = SFSafariViewController(url: url)
-        navigationController?.pushViewController(controller, animated: true)
-    }
+//    func cellTermsOfServiceDidPressed() {
+//        guard let url = viewModel.licenseURL else { return }
+//        let controller = SFSafariViewController(url: url)
+//        navigationController?.pushViewController(controller, animated: true)
+//    }
 
     func cellContactDidPressed() {
         if !MFMailComposeViewController.canSendMail() {
@@ -59,7 +60,7 @@ final class SettingsViewController: UITableViewController {
             )
 
             alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+            present(alert, animated: true)
             return
         }
 
@@ -68,20 +69,20 @@ final class SettingsViewController: UITableViewController {
         controller.setToRecipients([viewModel.supportEmail])
         controller.setSubject(viewModel.supportEmailSubject)
         controller.setMessageBody(viewModel.supportEmailBody, isHTML: true)
-        present(controller, animated: true, completion: nil)
+        present(controller, animated: true)
     }
 
     // MARK: UITableViewDelegate
 
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            cellContactDidPressed()
-        } else if indexPath.row == 1 {
-            cellTermsOfServiceDidPressed()
-        }
-
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
+//    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if indexPath.row == 0 {
+//            cellContactDidPressed()
+//        } else if indexPath.row == 1 {
+//            cellTermsOfServiceDidPressed()
+//        }
+//
+//        tableView.deselectRow(at: indexPath, animated: true)
+//    }
 }
 
 extension SettingsViewController: MFMailComposeViewControllerDelegate {

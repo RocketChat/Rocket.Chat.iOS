@@ -165,3 +165,5 @@
 "myaccount.settings.contactus" = "Contact us";
 "myaccount.settings.license" = "License";
 "myaccount.settings.version" = "Version: %@ (%@)";
+"myaccount.settings.profile" = "Profile";
+"myaccount.settings.account" = "Account";

@@ -18,7 +18,10 @@ def shared_pods
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
   pod 'MobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
-  pod 'Eureka'
+  pod 'Eureka', '~> 4.0'
+  pod 'GenericPasswordRow', '~> 3.0'
+  pod 'ImageRow', '~> 3.0'
+  pod 'ViewRow', :git => 'https://github.com/EurekaCommunity/ViewRow'
 
   # Text Processing
   pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
@@ -49,7 +52,7 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
-  swift4Targets = ['OAuthSwift']
+  swift4Targets = ['OAuthSwift', 'Eureka', 'GenericPasswordRow', 'ImageRow']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'
