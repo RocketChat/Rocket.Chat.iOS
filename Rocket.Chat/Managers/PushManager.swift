@@ -156,8 +156,8 @@ extension PushManager {
 
         // side effect: needed for Subscription.notificationSubscription()
         lastNotificationRoomId = notification.roomId
-        guard let subscription = Subscription.notificationSubscription() else { return false }
 
+        let subscription: Subscription? = .notificationSubscription()
         if index != DatabaseManager.selectedIndex {
             AppManager.changeSelectedServer(index: index)
         } else {
@@ -165,7 +165,7 @@ extension PushManager {
         }
 
         if let reply = reply {
-            let appendage = subscription.type == .directMessage ? "" : " @\(notification.username)"
+            let appendage = notification.roomType == .directMessage ? "" : " @\(notification.username)"
 
             let message = Message()
             message.subscription = subscription
