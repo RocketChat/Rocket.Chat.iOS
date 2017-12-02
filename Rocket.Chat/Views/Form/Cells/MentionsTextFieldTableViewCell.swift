@@ -42,12 +42,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
     }
 
     private func invitedUsers() -> [String] {
-        var invitedUsers = [String]()
-        for user in users {
-            invitedUsers.append(user.key)
-        }
-
-        return invitedUsers
+        return users.map { $0.key }
     }
 
     func height() -> CGFloat {
@@ -61,44 +56,28 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
     }
 
     @IBAction func textFieldInputEditingChanged(_ sender: Any) {
-        NSObject.cancelPreviousPerformRequests(withTarget: self, selector: #selector(self.fetchUsers), object: nil)
-        self.perform(#selector(self.fetchUsers), with: nil, afterDelay: 1)
+        fetchUsers()
     }
 
-    @objc private func fetchUsers() {
+    private func fetchUsers() {
         guard
+            let realm = Realm.shared,
             let name = textFieldInput.text,
-            name.count > 0 else {
-                textFieldInput.filterStrings([])
-                return
+            name.count > 0
+        else {
+            textFieldInput.filterStrings([])
+            return
         }
 
-        API.shared.fetch(UsersListRequest(name: name)) { [weak self] (result) in
-            guard let users = result?.users else {
-                self?.textFieldInput.filterStrings([])
-                return
-            }
+        let users = realm.objects(User.self).filter(
+            NSPredicate(format: "name CONTAINS %@ OR username CONTAINS %@", name, name)
+        )
 
-            self?.setFilter(users: users)
-        }
-    }
-
-    private func setFilter(users: [User?]) {
-        var usernames = [String]()
-        for user in users {
-            if let unwrappedUser = user,
-                let username = unwrappedUser.username,
-                let identifier = unwrappedUser.identifier,
-                let loggedIdentifier = AuthManager.currentUser()?.identifier,
-                loggedIdentifier != identifier,
-                username.count > 0 {
-                usernames.append(username)
-            }
+        let usernames = Array(users).flatMap { $0.username }.filter {
+            AuthManager.currentUser()?.username != $0
         }
 
-        DispatchQueue.main.async {
-            self.textFieldInput.filterStrings(usernames)
-        }
+        textFieldInput.filterStrings(usernames)
     }
 
     override func prepareForReuse() {

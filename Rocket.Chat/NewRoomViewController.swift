@@ -139,8 +139,9 @@ class NewRoomViewController: BaseViewController {
             let roomName = setValues["room name"] as? String,
             let publicRoom = setValues["public room"] as? Bool,
             let membersRoom = setValues["users list"] as? [String],
-            let readOnlyRoom = setValues["read only room"] as? Bool else {
-                return
+            let readOnlyRoom = setValues["read only room"] as? Bool
+        else {
+            return
         }
 
         let roomType: SubscriptionCreateType
