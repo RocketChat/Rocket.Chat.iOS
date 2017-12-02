@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		140C84E91FC9CF0400032A59 /* UsersListRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C84E81FC9CF0400032A59 /* UsersListRequestSpec.swift */; };
 		140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */; };
-		143C763C1FB8DBAD00B51D95 /* UsersListRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 143C763B1FB8DBAD00B51D95 /* UsersListRequest.swift */; };
 		14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */; };
 		14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */; };
 		15A2FD223558011BFDE03883 /* Pods_Rocket_ChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */; };
@@ -297,9 +295,7 @@
 
 /* Begin PBXFileReference section */
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		140C84E81FC9CF0400032A59 /* UsersListRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListRequestSpec.swift; sourceTree = "<group>"; };
 		140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCellSpec.swift; sourceTree = "<group>"; };
-		143C763B1FB8DBAD00B51D95 /* UsersListRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsersListRequest.swift; sourceTree = "<group>"; };
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MentionsTextFieldTableViewCell.xib; sourceTree = "<group>"; };
@@ -1358,7 +1354,6 @@
 				80235D201F7442C100A56CA5 /* Subscription */,
 				D18675E91F70A58B00406FB4 /* InfoRequestSpec.swift */,
 				80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */,
-				140C84E81FC9CF0400032A59 /* UsersListRequestSpec.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -1382,7 +1377,6 @@
 				80235D1C1F740AAC00A56CA5 /* Subscription */,
 				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
 				80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */,
-				143C763B1FB8DBAD00B51D95 /* UsersListRequest.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -2017,7 +2011,6 @@
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
 				800FCD4E1F728EC800D9A692 /* ChannelInfoDetailCell.swift in Sources */,
 				4151B45C1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift in Sources */,
-				143C763C1FB8DBAD00B51D95 /* UsersListRequest.swift in Sources */,
 				806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */,
 				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,
 				41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */,
@@ -2127,7 +2120,6 @@
 				D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* NSURLExtensionSpec.swift in Sources */,
 				993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */,
-				140C84E91FC9CF0400032A59 /* UsersListRequestSpec.swift in Sources */,
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
 				8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */,
