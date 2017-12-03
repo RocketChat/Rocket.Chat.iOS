@@ -59,8 +59,8 @@ class HighlightLayoutManager: NSLayoutManager {
 
 @IBDesignable class HighlightTextView: UIView {
 
-    // Should be private at all?
-    private(set) var textView: UITextView!
+    private var textView: UITextView!
+    weak var delegate: ChatMessageCellProtocol?
 
     var message: NSAttributedString! {
         didSet {
@@ -81,7 +81,6 @@ class HighlightLayoutManager: NSLayoutManager {
     }
 
     private func setup() {
-        textView = UITextView()
         let textStorage = NSTextStorage()
         let layoutManager = HighlightLayoutManager()
         textStorage.addLayoutManager(layoutManager)
@@ -97,7 +96,9 @@ class HighlightLayoutManager: NSLayoutManager {
         textView.textContainerInset = .zero
         textView.textContainer.lineFragmentPadding = 0
         textView.backgroundColor = .clear
-        textView.isSelectable = false
+        textView.dataDetectorTypes = .all
+        textView.isEditable = false
+        textView.delegate = self
     }
 
     override func layoutSubviews() {
@@ -110,5 +111,17 @@ class HighlightLayoutManager: NSLayoutManager {
         super.prepareForInterfaceBuilder()
 
         textView.text = "HighlightTextView"
+    }
+}
+
+extension HighlightTextView: UITextViewDelegate {
+
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        if URL.scheme == "http" || URL.scheme == "https" {
+            delegate?.openURL(url: URL)
+            return false
+        }
+
+        return true
     }
 }
