@@ -32,8 +32,8 @@ final class PushManager {
                 "token": ["apn": deviceToken],
                 "appName": Bundle.main.bundleIdentifier ?? "main",
                 "metadata": [:]
-                ]]
-            ] as [String: Any]
+            ]]
+        ] as [String: Any]
 
         SocketManager.send(request)
     }
@@ -44,7 +44,7 @@ final class PushManager {
             "method": "raix:push-setuser",
             "userId": userIdentifier,
             "params": [getOrCreatePushId()]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(request)
     }
@@ -84,7 +84,7 @@ struct PushNotification {
             let username = json["sender"]?["username"].string,
             let roomType = json["type"]?.string,
             let roomId = json["rid"]?.string
-            else {
+        else {
                 return nil
         }
 
@@ -101,7 +101,7 @@ extension UNNotificationAction {
     static var reply: UNNotificationAction {
         return UNTextInputNotificationAction(
             identifier: "REPLY",
-            title: "Repla",
+            title: "Reply",
             options: .authenticationRequired
         )
     }
