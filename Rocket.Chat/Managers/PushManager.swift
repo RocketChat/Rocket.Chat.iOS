@@ -85,7 +85,7 @@ struct PushNotification {
             let roomType = json["type"]?.string,
             let roomId = json["rid"]?.string
         else {
-                return nil
+            return nil
         }
 
         self.host = host
@@ -150,8 +150,8 @@ extension PushManager {
         guard
             let serverUrl = hostToServerUrl(notification.host),
             let index = DatabaseManager.serverIndexForUrl(serverUrl)
-            else {
-                return false
+        else {
+            return false
         }
 
         // side effect: needed for Subscription.notificationSubscription()
@@ -187,7 +187,9 @@ class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        PushManager.handleNotification(raw: response.notification.request.content.userInfo,
-                                       reply: (response as? UNTextInputNotificationResponse)?.userText)
+        PushManager.handleNotification(
+            raw: response.notification.request.content.userInfo,
+            reply: (response as? UNTextInputNotificationResponse)?.userText
+        )
     }
 }
