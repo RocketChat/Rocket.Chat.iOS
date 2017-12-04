@@ -35,6 +35,14 @@ class User: BaseModel {
 
 extension User {
 
+    func hasPermission(_ permission: PermissionType) -> Bool {
+        for userRole in roles where userRole == permission.rawValue {
+            return true
+        }
+
+        return false
+    }
+
     func displayName() -> String {
         guard let settings = AuthSettingsManager.settings else {
             return username ?? ""
@@ -61,6 +69,13 @@ extension User {
         }
 
         return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
+    }
+
+    var canViewAdminPanel: Bool {
+        return hasPermission(.viewPrivilegedSetting) ||
+            hasPermission(.viewStatistics) ||
+            hasPermission(.viewUserAdministration) ||
+            hasPermission(.viewRoomAdministration)
     }
 
 }

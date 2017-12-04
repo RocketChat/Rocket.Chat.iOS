@@ -150,6 +150,20 @@ class UserSpec: XCTestCase {
         XCTAssertEqual(user.status, .offline, "default status is offline")
     }
 
+    func testUserCanViewAdminPanelFalse() {
+        let user = User.testInstance()
+        XCTAssertFalse(user.canViewAdminPanel, "user cannot view admin panel by default")
+    }
+
+    func testUserCanViewAdminPanelTrue() {
+        let user = User.testInstance()
+
+        user.roles.removeAll()
+        user.roles.append(PermissionType.viewUserAdministration.rawValue)
+
+        XCTAssertTrue(user.canViewAdminPanel, "user cannot view admin panel by default")
+    }
+
     func testMap() {
         let testJSON = JSON([
             "_id": "nSYqWzZ4GsKTX4dyK",
