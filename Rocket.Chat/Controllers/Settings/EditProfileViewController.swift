@@ -117,12 +117,19 @@ public class EditProfileViewController: FormViewController {
             }
             
             <<< GenericPasswordRow("password_confirmation") {
-                $0.placeholder = "Create a password"
+                $0.placeholder = "Confirm your new password"
                 // Validation with confirmation field
+                $0.add(rule: RuleEqualsToRow(form: form, tag: "password", msg: "Confirmation does not match password."))
             }
             
             <<< ButtonRow("save_password") {
                 $0.title = "Save Password"
+                $0.disabled = Condition.function(["password", "password_confirmation"], { form in
+                    let password = (form.rowBy(tag: "password") as? GenericPasswordRow)?.value
+                    let confirmation = (form.rowBy(tag: "password_confirmation") as? GenericPasswordRow)?.value
+                    return !(password == confirmation)
+                })
+                $0.onCellSelection(self.savePassword)
             }
     }
     
@@ -135,7 +142,7 @@ public class EditProfileViewController: FormViewController {
             let newEmail = Email()
             newEmail.email = (form.rowBy(tag: "email") as! TextRow).value!
             updatedUser.emails.append(newEmail)
-        
+
             let selectedIndex = DatabaseManager.selectedIndex
             guard let servers = DatabaseManager.servers, let userId = servers[selectedIndex][ServerPersistKeys.userId] else { return }
             let updateRequest = UserUpdateRequest(userId: userId, user: updatedUser)
@@ -146,6 +153,47 @@ public class EditProfileViewController: FormViewController {
                     print(result?.user)
                     DispatchQueue.main.async {
                         let saveSuccessView = UIAlertController(title: "Saved", message: "Profile was updated!", preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "Okay", style: .default)
+                        saveSuccessView.addAction(defaultAction)
+                        self.present(saveSuccessView, animated: true)
+                    }
+                } else {
+                    print(result?.errorMessage)
+                    DispatchQueue.main.async {
+                        let saveErrorView = UIAlertController(title: "Save Error", message: result?.errorMessage, preferredStyle: .alert)
+                        let defaultAction = UIAlertAction(title: "Okay", style: .default)
+                        saveErrorView.addAction(defaultAction)
+                        self.present(saveErrorView, animated: true)
+                    }
+                }
+                
+            })
+        } else {
+            let validationErrorView = UIAlertController(title: "Validation Error", message: validationErrors.first?.msg, preferredStyle: .alert)
+            let defaultAction = UIAlertAction(title: "Okay", style: .default)
+            validationErrorView.addAction(defaultAction)
+            present(validationErrorView, animated: true)
+        }
+    }
+    
+    func savePassword(cell: ButtonCellOf<String>, row: ButtonRow) {
+        let validationErrors = form.validate()
+        if validationErrors.isEmpty {
+            
+            guard let password = (form.rowBy(tag: "password") as! GenericPasswordRow).value else {
+                return
+            }
+            
+            let selectedIndex = DatabaseManager.selectedIndex
+            guard let servers = DatabaseManager.servers, let userId = servers[selectedIndex][ServerPersistKeys.userId] else { return }
+            let updateRequest = UserPasswordUpdateRequest(userId: userId, password: password)
+            API.shared.fetch(updateRequest, { result in
+                print("done")
+                guard let success = result?.success else { return }
+                if success {
+                    print(result?.user)
+                    DispatchQueue.main.async {
+                        let saveSuccessView = UIAlertController(title: "Saved", message: "Password was updated!", preferredStyle: .alert)
                         let defaultAction = UIAlertAction(title: "Okay", style: .default)
                         saveSuccessView.addAction(defaultAction)
                         self.present(saveSuccessView, animated: true)
