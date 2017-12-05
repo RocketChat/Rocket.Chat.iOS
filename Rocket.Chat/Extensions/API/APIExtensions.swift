@@ -12,7 +12,8 @@ extension API {
     static func current(auth: Auth? = AuthManager.isAuthenticated()) -> API? {
         guard
             let auth = auth,
-            let host = auth.apiHost else {
+            let host = auth.apiHost
+        else {
             return nil
         }
 
