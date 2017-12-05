@@ -17,7 +17,7 @@ extension API {
             return nil
         }
 
-        let api = API(host: host)
+        let api = API(host: host, version: Version(auth.serverVersion) ?? .zero)
         api.userId = auth.userId
         api.authToken = auth.token
 

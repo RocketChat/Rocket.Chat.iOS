@@ -11,11 +11,11 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class PostMessageRequestSpec: XCTestCase {
+class PostMessageRequestSpec: APITestCase {
     func testRequest() {
         let _request = PostMessageRequest(roomId: "roomId", text: "text")
 
-        guard let request = _request.request(for: API.shared) else {
+        guard let request = _request.request(for: api) else {
             return XCTFail("request is not nil")
         }
         guard let httpBody = request.httpBody else {
