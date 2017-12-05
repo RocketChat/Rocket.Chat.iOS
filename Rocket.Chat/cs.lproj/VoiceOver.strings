@@ -1,0 +1,10 @@
+/* 
+  VoiceOver.strings
+  Rocket.Chat
+
+  Created by Matheus Cardoso on 12/5/17.
+  Copyright © 2017 Rocket.Chat. All rights reserved.
+*/
+
+"auth.connect.urlfield.label" = "Server URL";
+"auth.connect.urlfield.hint" = "Insert your server's URL here.";
