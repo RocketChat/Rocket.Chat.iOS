@@ -97,4 +97,13 @@ extension String {
     var removingPercentEncoding: String? {
         return NSString(string: self).removingPercentEncoding
     }
+
+    func commandAndParams() -> (command: String, params: String)? {
+        guard self.first == "/" && self.count > 1 else { return nil }
+
+        let components = self.components(separatedBy: " ")
+        let command = String(components[0].dropFirst())
+        let params = components.dropFirst().joined(separator: " ")
+        return (command: command, params: params)
+    }
 }

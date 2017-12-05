@@ -131,6 +131,8 @@ extension SocketManager {
                 return
             }
 
+            API.current()?.client(InfoClient.self).fetchInfo()
+
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
                 AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
 
@@ -142,6 +144,8 @@ extension SocketManager {
                 SubscriptionManager.subscribeRoomChanges()
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
+
+                API.current()?.client(CommandsClient.self).fetchCommands()
 
                 // If we have some subscription opened, let's
                 // try to subscribe to it again

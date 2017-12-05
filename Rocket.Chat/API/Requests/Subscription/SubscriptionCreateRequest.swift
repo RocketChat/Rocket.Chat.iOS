@@ -26,7 +26,7 @@ enum SubscriptionCreateType {
 }
 
 class SubscriptionCreateRequest: APIRequest {
-    let method: String = "POST"
+    let method = "POST"
     var path: String {
         return type.path
     }
@@ -48,10 +48,6 @@ class SubscriptionCreateRequest: APIRequest {
         ]
 
         return try? JSONSerialization.data(withJSONObject: json)
-    }
-
-    var contentType: String? {
-        return "application/json"
     }
 }
 

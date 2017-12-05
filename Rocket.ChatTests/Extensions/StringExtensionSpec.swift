@@ -88,4 +88,21 @@ class StringExtensionSpec: XCTestCase {
         let randomString = String.random(10)
         XCTAssertEqual(randomString.base64Encoded()?.base64Decoded(), randomString, "base64Encoded <-> base64Decoded pass random test")
     }
+
+    // MARK: Others
+
+    func testCommandAndParams() {
+        let string = "/gimme hello world"
+
+        guard let (command, params) = string.commandAndParams() else {
+            return XCTFail("string is valid command")
+        }
+
+        XCTAssertEqual(command, "gimme")
+        XCTAssertEqual(params, "hello world")
+
+        let string2 = "gimme"
+
+        XCTAssertNil(string2.commandAndParams())
+    }
 }
