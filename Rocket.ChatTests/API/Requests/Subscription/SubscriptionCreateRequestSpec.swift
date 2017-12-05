@@ -11,7 +11,7 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class SubscriptionCreateRequestSpec: XCTestCase {
+class SubscriptionCreateRequestSpec: APITestCase {
     func testRequest() {
         let paramRoomName = "foo"
         let paramReadOnly = false
@@ -24,7 +24,7 @@ class SubscriptionCreateRequestSpec: XCTestCase {
             readOnly: paramReadOnly
         )
 
-        guard let request = _request.request(for: API.shared) else {
+        guard let request = _request.request(for: api) else {
             return XCTFail("request is not nil")
         }
         guard let httpBody = request.httpBody else {
@@ -47,7 +47,7 @@ class SubscriptionCreateRequestSpec: XCTestCase {
             readOnly: paramReadOnly
         )
 
-        guard let requestGroup = _requestGroup.request(for: API.shared) else {
+        guard let requestGroup = _requestGroup.request(for: api) else {
             return XCTFail("request is not nil")
         }
 

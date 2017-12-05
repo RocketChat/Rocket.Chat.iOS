@@ -164,10 +164,9 @@ class NewRoomViewController: BaseViewController {
     }
 
     fileprivate func executeRequestCreateRoom(roomName: String, roomType: SubscriptionCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
-        API.shared.fetch(SubscriptionCreateRequest(name: roomName, type: roomType, members: members, readOnly: readOnlyRoom)) { result in
-
-            guard let success = result?.success, success == true else {
-                    completion(false, result?.error)
+        API.current()?.fetch(SubscriptionCreateRequest(name: roomName, type: roomType, readOnly: readOnlyRoom), succeeded: { result in
+            guard let success = result.success, success == true else {
+                    completion(false, result.error)
                     return
             }
 
@@ -184,7 +183,7 @@ class NewRoomViewController: BaseViewController {
                     completion(false, nil)
                 }
             }
-        }
+        })
     }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {

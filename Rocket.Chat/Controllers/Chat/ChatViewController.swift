@@ -11,7 +11,7 @@ import SlackTextViewController
 import SimpleImageViewer
 
 // swiftlint:disable file_length type_body_length
-final class ChatViewController: SLKTextViewController {
+final class ChatViewController: SLKTextViewController, Alerter {
 
     var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
@@ -250,7 +250,7 @@ final class ChatViewController: SLKTextViewController {
         textView.registerMarkdownFormattingSymbol("```", withTitle: "Preformatted")
         textView.registerMarkdownFormattingSymbol(">", withTitle: "Quote")
 
-        registerPrefixes(forAutoCompletion: ["@", "#"])
+        registerPrefixes(forAutoCompletion: ["@", "#", "/"])
     }
 
     fileprivate func setupTitleView() {
@@ -319,7 +319,29 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
-        sendMessage()
+        guard
+            let subscription = subscription,
+            let messageText = textView.text
+        else {
+            return
+        }
+
+        DraftMessageManager.update(draftMessage: "", for: subscription)
+        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        textView.text = ""
+        self.scrollToBottom()
+
+        let replyString = self.replyString
+        stopReplying()
+
+        let text = "\(messageText)\(replyString)"
+
+        if let (command, params) = text.commandAndParams() {
+            sendCommand(command: command, params: params)
+            return
+        }
+
+        sendTextMessage(text: text)
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -327,7 +349,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressReturnKey(_ keyCommand: UIKeyCommand?) {
-        sendMessage()
+        didPressRightButton(nil)
     }
 
     override func textViewDidBeginEditing(_ textView: UITextView) {
@@ -347,22 +369,27 @@ final class ChatViewController: SLKTextViewController {
     }
 
     // MARK: Message
-    fileprivate func sendMessage() {
+    func sendCommand(command: String, params: String) {
         guard let subscription = subscription else { return }
-        guard let messageText = textView.text, messageText.count > 0 else { return }
 
-        let replyString = self.replyString
-        stopReplying()
+        let client = API.current()?.client(CommandsClient.self)
+        client?.runCommand(command: command, params: params, roomId: subscription.rid, errored: alertAPIError)
+    }
 
-        self.scrollToBottom()
-        rightButton.isEnabled = false
+    fileprivate func sendTextMessage(text: String) {
+        guard
+            let subscription = subscription,
+            text.count > 0
+        else {
+            return
+        }
 
         var message: Message?
         Realm.executeOnMainThread({ (realm) in
             message = Message()
             message?.internalType = ""
             message?.createdAt = Date.serverDate
-            message?.text = "\(messageText)\(replyString)"
+            message?.text = text
             message?.subscription = subscription
             message?.identifier = String.random(18)
             message?.temporary = true
@@ -374,12 +401,6 @@ final class ChatViewController: SLKTextViewController {
         })
 
         if let message = message {
-            DraftMessageManager.update(draftMessage: "", for: subscription)
-            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
-
-            textView.text = ""
-            rightButton.isEnabled = true
-
             SubscriptionManager.sendTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
                     message.temporary = false
@@ -527,6 +548,7 @@ final class ChatViewController: SLKTextViewController {
             if insertions.count > 0 {
                 var newMessages: [Message] = []
                 for insertion in insertions {
+                    guard insertion < self.messagesQuery.count else { continue }
                     let newMessage = Message(value: self.messagesQuery[insertion])
                     newMessages.append(newMessage)
                 }
@@ -541,8 +563,6 @@ final class ChatViewController: SLKTextViewController {
                 return
             }
 
-            let messagesCount = self.messagesQuery.count
-
             if modifications.count > 0 {
                 DispatchQueue.main.async {
                     let isAtBottom = self.chatLogIsAtBottom()
@@ -552,9 +572,7 @@ final class ChatViewController: SLKTextViewController {
                             var indexPathModifications: [Int] = []
 
                             for modified in modifications {
-                                if messagesCount < modified + 1 {
-                                    continue
-                                }
+                                guard modified < self.messagesQuery.count else { continue }
 
                                 let message = Message(value: self.messagesQuery[modified])
                                 let identifier = message.identifier
@@ -1002,4 +1020,20 @@ extension ChatViewController {
         rightButton.isEnabled = true
     }
 
+}
+
+// MARK: Alerter
+extension ChatViewController {
+    func alertAPIError(_ error: APIError) {
+        switch error {
+        case .version(let available, let required):
+            let message = String(format: localized("alert.unsupported_feature.message"), available.description, required.description)
+            alert(
+                title: localized("alert.unsupported_feature.title"),
+                message: message
+            )
+        default:
+            break
+        }
+    }
 }

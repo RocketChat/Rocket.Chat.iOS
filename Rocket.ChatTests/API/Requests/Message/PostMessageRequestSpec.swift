@@ -11,13 +11,11 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class PostMessageRequestSpec: XCTestCase {
+class PostMessageRequestSpec: APITestCase {
     func testRequest() {
-        let message = Message.testInstance()
+        let _request = PostMessageRequest(roomId: "roomId", text: "text")
 
-        let _request = PostMessageRequest(message: message)
-
-        guard let request = _request.request(for: API.shared) else {
+        guard let request = _request.request(for: api) else {
             return XCTFail("request is not nil")
         }
         guard let httpBody = request.httpBody else {
@@ -30,13 +28,8 @@ class PostMessageRequestSpec: XCTestCase {
         XCTAssertEqual(request.url?.path, "/api/v1/chat.postMessage", "path is correct")
         XCTAssertEqual(request.httpMethod, "POST", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
-        XCTAssertEqual(bodyJson["text"].string, message.text, "text is correct")
-        XCTAssertEqual(bodyJson["roomId"].string, "subscription-rid", "roomId is correct")
-
-        message.subscription = nil
-        let invalidRequest = PostMessageRequest(message: message)
-        XCTAssertNil(invalidRequest.body(), "body is nil for message without subscription")
-
+        XCTAssertEqual(bodyJson["text"].string, "text", "text is correct")
+        XCTAssertEqual(bodyJson["roomId"].string, "roomId", "roomId is correct")
     }
 
     func testResult() {
