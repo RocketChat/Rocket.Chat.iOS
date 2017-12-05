@@ -12,6 +12,7 @@ import RealmSwift
 final class Auth: Object {
     // Server
     @objc dynamic var serverURL = ""
+    @objc dynamic var serverVersion = ""
 
     var apiHost: URL? {
         guard

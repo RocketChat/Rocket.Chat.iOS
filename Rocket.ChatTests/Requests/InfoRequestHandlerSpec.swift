@@ -78,7 +78,7 @@ class InfoRequestHandlerSpec: XCTestCase {
     }
 
     func testValidateServerResponseError() {
-        let result = InfoResult(error: nil)
+        let result = InfoResult(raw: nil)
         instance.validateServerResponse(result: result)
         XCTAssertFalse(controller.isServerValid, "server is invalid after validation for emtpy result")
         XCTAssertFalse(controller.isURLValid, "url is invalid after validation for empty result")
@@ -96,7 +96,7 @@ class InfoRequestHandlerSpec: XCTestCase {
             return XCTFail("newURL must be valid")
         }
 
-        let result = InfoResult(error: nil)
+        let result = InfoResult(raw: nil)
         instance.handleRedirectInfoResult(result, for: newURL)
         XCTAssertFalse(controller.isURLValid, "url is not valid")
     }
