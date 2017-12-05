@@ -165,7 +165,7 @@ extension PushManager {
             let message = "\(reply)\(appendage)"
 
             let backgroundTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-            API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), { _ in
+            API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), succeeded: { _ in
                 UIApplication.shared.endBackgroundTask(backgroundTask)
             })
         }

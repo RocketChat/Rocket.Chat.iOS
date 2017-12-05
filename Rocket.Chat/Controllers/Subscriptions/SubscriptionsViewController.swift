@@ -424,6 +424,14 @@ extension SubscriptionsViewController {
 
 extension SubscriptionsViewController: UITableViewDataSource {
 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
     func numberOfSections(in tableView: UITableView) -> Int {
         return groupInfomation?.count ?? 0
     }

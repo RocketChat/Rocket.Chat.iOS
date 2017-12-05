@@ -24,10 +24,9 @@ class InfoRequestHandler: NSObject {
     var validateServerVersion = true
 
     func validate(with url: URL) {
-        API.shared.host = url
-        API.shared.fetch(InfoRequest(), sessionDelegate: self) { [weak self] result in
+        API(host: url).fetch(InfoRequest(), sessionDelegate: self, succeeded: { [weak self] result in
             self?.validateServerResponse(result: result)
-        }
+        })
     }
 
     func alertInvalidURL() {
@@ -89,10 +88,9 @@ extension InfoRequestHandler: URLSessionTaskDelegate {
     }
 
     func handleRedirect(_ newURL: URL) {
-        API(host: newURL).fetch(InfoRequest(), sessionDelegate: self) { result in
-            guard let result = result else { return }
+        API(host: newURL).fetch(InfoRequest(), sessionDelegate: self, succeeded: { result in
             self.handleRedirectInfoResult(result, for: newURL)
-        }
+        })
     }
 
     func handleRedirectInfoResult(_ result: InfoResult, for url: URL) {
