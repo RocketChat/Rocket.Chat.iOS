@@ -40,6 +40,9 @@
 "alert.authorization_error.title" = "Erro de Autorização";
 "alert.authorization_error.create_channel.description" = "Você não pode criar canais";
 
+"alert.unsupported_feature.title" = "Funcionalidade não disponível";
+"alert.unsupported_feature.message" = "A versão deste servidor é: %@. Esta funcionalidade é disponível apenas nas versões a partir de %@.";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";
 "connection.server.redirect.alert.message" = "Parece que este servidor mudou a URL para:\n\n%@\n\Gostaria de atualizar a URL?";
