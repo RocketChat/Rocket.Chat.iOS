@@ -229,6 +229,9 @@
 		802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F01F7A9BB4005477EC /* MeRequestSpec.swift */; };
 		802498F31F7ACD76005477EC /* ChatMessageAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */; };
 		802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */; };
+		80307E3C1FD75BE1006AD9EF /* VOTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80307E3B1FD75BE1006AD9EF /* VOTextField.swift */; };
+		80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80307E3D1FD75CB1006AD9EF /* VOLocalized.swift */; };
+		80307E411FD75DC0006AD9EF /* VoiceOver.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80307E431FD75DC0006AD9EF /* VoiceOver.strings */; };
 		803782B71FB4751D00DED049 /* RealmTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803782B61FB4751D00DED049 /* RealmTestCase.swift */; };
 		806401311FB09DE800990572 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401301FB09DE800990572 /* Permission.swift */; };
 		806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401321FB09EC400990572 /* PermissionModelMapping.swift */; };
@@ -341,7 +344,7 @@
 		412F8DD81F599EF100AF7786 /* DatabaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatabaseManager.swift; path = Managers/DatabaseManager.swift; sourceTree = "<group>"; };
 		4133EDCE1DA2834E005AA783 /* ChatMessageImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageImageView.swift; sourceTree = "<group>"; };
 		4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageImageView.xib; sourceTree = "<group>"; };
-		413996161F3B44500075F96E /* UploadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadHelper.swift; path = Helpers/UploadHelper.swift; sourceTree = "<group>"; };
+		413996161F3B44500075F96E /* UploadHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadHelper.swift; sourceTree = "<group>"; };
 		4147CE781F5EA3D000C322C3 /* SubscriptionsPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionsPageViewController.swift; path = Controllers/Subscriptions/SubscriptionsPageViewController.swift; sourceTree = "<group>"; };
 		4147CE7A1F5EA41000C322C3 /* ServersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServersViewController.swift; path = Controllers/Subscriptions/ServersViewController.swift; sourceTree = "<group>"; };
 		4147CE7C1F5EAAB300C322C3 /* ServerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerCell.swift; path = ../Cells/Subscription/ServerCell.swift; sourceTree = "<group>"; };
@@ -442,9 +445,9 @@
 		41CABFFB1F50515100E0B289 /* ArrayExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrayExtensions.swift; sourceTree = "<group>"; };
 		41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageDaySeparator.xib; sourceTree = "<group>"; };
 		41D3A62F1E0805490011949D /* ChatMessageDaySeparator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageDaySeparator.swift; sourceTree = "<group>"; };
-		41D4ABAA1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatCollectionViewFlowLayout.swift; path = Helpers/ChatCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		41D4ABAA1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		41D5BC301DAFBEF4009A493A /* UIViewExtentions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExtentions.swift; sourceTree = "<group>"; };
-		41D701D51E67111E00FED2EE /* MessageTextFontAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTextFontAttributes.swift; path = Helpers/MessageTextFontAttributes.swift; sourceTree = "<group>"; };
+		41D701D51E67111E00FED2EE /* MessageTextFontAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageTextFontAttributes.swift; sourceTree = "<group>"; };
 		41D701D71E6763D100FED2EE /* NSAttributedStringExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSAttributedStringExtensions.swift; sourceTree = "<group>"; };
 		41D7CA861E644E47000F38EA /* MessageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageExtensions.swift; sourceTree = "<group>"; };
 		41D894011F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDirectMessageHeaderCell.swift; sourceTree = "<group>"; };
@@ -547,6 +550,14 @@
 		802498F01F7A9BB4005477EC /* MeRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeRequestSpec.swift; sourceTree = "<group>"; };
 		802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageAudioView.xib; sourceTree = "<group>"; };
 		802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAudioView.swift; sourceTree = "<group>"; };
+		80307E3B1FD75BE1006AD9EF /* VOTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOTextField.swift; sourceTree = "<group>"; };
+		80307E3D1FD75CB1006AD9EF /* VOLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOLocalized.swift; sourceTree = "<group>"; };
+		80307E421FD75DC0006AD9EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/VoiceOver.strings; sourceTree = "<group>"; };
+		80307E441FD75DCB006AD9EF /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/VoiceOver.strings"; sourceTree = "<group>"; };
+		80307E451FD75DCF006AD9EF /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/VoiceOver.strings; sourceTree = "<group>"; };
+		80307E461FD75DD1006AD9EF /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/VoiceOver.strings; sourceTree = "<group>"; };
+		80307E471FD75DD2006AD9EF /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/VoiceOver.strings; sourceTree = "<group>"; };
+		80307E481FD75DD5006AD9EF /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		803782B61FB4751D00DED049 /* RealmTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTestCase.swift; sourceTree = "<group>"; };
 		806401301FB09DE800990572 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Permission.swift; path = Models/Permission.swift; sourceTree = "<group>"; };
 		806401321FB09EC400990572 /* PermissionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionModelMapping.swift; sourceTree = "<group>"; };
@@ -1088,11 +1099,12 @@
 		41D701D41E67103C00FED2EE /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				80307E3A1FD75BD3006AD9EF /* VoiceOver */,
 				41D701D51E67111E00FED2EE /* MessageTextFontAttributes.swift */,
 				413996161F3B44500075F96E /* UploadHelper.swift */,
 				41D4ABAA1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift */,
 			);
-			name = Helpers;
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 		41DC7A201D386B2C00896FC0 /* Extensions */ = {
@@ -1148,6 +1160,7 @@
 				41833F4D1DEF16B600E54655 /* Keys.plist */,
 				4116C52C1E69B15400AC4E43 /* GoogleService-Info.plist */,
 				41EB22381E5F056600AA3AE7 /* Localizable.strings */,
+				80307E431FD75DC0006AD9EF /* VoiceOver.strings */,
 				597ECBA01E3708980041C5C5 /* Rocket.Chat.entitlements */,
 			);
 			path = Rocket.Chat;
@@ -1376,6 +1389,15 @@
 				802498F01F7A9BB4005477EC /* MeRequestSpec.swift */,
 			);
 			path = Authentication;
+			sourceTree = "<group>";
+		};
+		80307E3A1FD75BD3006AD9EF /* VoiceOver */ = {
+			isa = PBXGroup;
+			children = (
+				80307E3B1FD75BE1006AD9EF /* VOTextField.swift */,
+				80307E3D1FD75CB1006AD9EF /* VOLocalized.swift */,
+			);
+			path = VoiceOver;
 			sourceTree = "<group>";
 		};
 		806C59A01FBB0BA700C32D0A /* Message */ = {
@@ -1673,6 +1695,7 @@
 				412E1F3C1DB6D55000531FDA /* ChatMessageURLView.xib in Resources */,
 				41833F4E1DEF16B600E54655 /* Keys.plist in Resources */,
 				41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */,
+				80307E411FD75DC0006AD9EF /* VoiceOver.strings in Resources */,
 				897083D41F8CF08100233561 /* CheckTableViewCell.xib in Resources */,
 				412731D51DE0A55C00FC45A0 /* ChatPreviewModeView.xib in Resources */,
 				41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */,
@@ -2032,6 +2055,7 @@
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
+				80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */,
 				411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */,
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
 				597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */,
@@ -2136,6 +2160,7 @@
 				800FCD4C1F728EC800D9A692 /* ChannelInfoCellProtocol.swift in Sources */,
 				800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */,
 				419ECCA41F3CA21A005F224B /* DownloadManager.swift in Sources */,
+				80307E3C1FD75BE1006AD9EF /* VOTextField.swift in Sources */,
 				419D85001DF599DA0021F034 /* ChatHeaderViewStatus.swift in Sources */,
 				41AC3CD91DCCA0C9002DC39A /* AutocompleteCell.swift in Sources */,
 				D1C536CE1F688B7100EBA8D9 /* UIFontExtensions.swift in Sources */,
@@ -2300,6 +2325,19 @@
 				41A6191A1FA7065400CFFA69 /* cs */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		80307E431FD75DC0006AD9EF /* VoiceOver.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80307E421FD75DC0006AD9EF /* en */,
+				80307E441FD75DCB006AD9EF /* pt-BR */,
+				80307E451FD75DCF006AD9EF /* de */,
+				80307E461FD75DD1006AD9EF /* fr */,
+				80307E471FD75DD2006AD9EF /* pl */,
+				80307E481FD75DD5006AD9EF /* cs */,
+			);
+			name = VoiceOver.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
