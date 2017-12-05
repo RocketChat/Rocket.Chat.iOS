@@ -9,6 +9,7 @@
 import RealmSwift
 import SlackTextViewController
 import SimpleImageViewer
+import AudioToolbox
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
@@ -117,6 +118,8 @@ final class ChatViewController: SLKTextViewController {
             textView.text = DraftMessageManager.draftMessage(for: subscription)
         }
     }
+    var isWritingMessage: Bool = false
+    var recorderManager: AudioMessageRecorder?
 
     // MARK: View Life Cycle
 
@@ -160,6 +163,16 @@ final class ChatViewController: SLKTextViewController {
 
         rightButton.isEnabled = false
 
+        textInputbar.rightButton.layer.zPosition = 2
+        textInputbar.gestureRecognizers?.forEach({ $0.delaysTouchesBegan = false })
+
+        scrollView?.gestureRecognizers?.forEach({ $0.delaysTouchesBegan = false })
+
+        recorderManager = AudioMessageRecorder()
+        recorderManager?.set(recorderDelegate: self)
+
+        removeToolbarRightButtonSelectors()
+        setupToolbarRightButtonWithAudioRecorder()
         setupTitleView()
         setupTextViewSettings()
         setupScrollToBottomButton()
@@ -243,6 +256,8 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func setupTextViewSettings() {
+        textInputbar.autoHideRightButton = false
+
         textView.registerMarkdownFormattingSymbol("*", withTitle: "Bold")
         textView.registerMarkdownFormattingSymbol("_", withTitle: "Italic")
         textView.registerMarkdownFormattingSymbol("~", withTitle: "Strike")
@@ -259,6 +274,7 @@ final class ChatViewController: SLKTextViewController {
         chatTitleView = view
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(chatTitleViewDidPressed))
+        gesture.delaysTouchesBegan = false
         chatTitleView?.addGestureRecognizer(gesture)
     }
 
@@ -266,6 +282,31 @@ final class ChatViewController: SLKTextViewController {
         buttonScrollToBottom.layer.cornerRadius = 25
         buttonScrollToBottom.layer.borderColor = UIColor.lightGray.cgColor
         buttonScrollToBottom.layer.borderWidth = 1
+    }
+
+    fileprivate func setupToolbarRightButtonWithAudioRecorder() {
+        removeToolbarRightButtonSelectors()
+
+        textInputbar.rightButton.setImage(UIImage(named: "Microphone"), for: .normal)
+        textInputbar.rightButton.setTitle("", for: .normal)
+
+        textInputbar.rightButton.addTarget(self, action: #selector(recordAudioMessage), for: .touchDown)
+        textInputbar.rightButton.addTarget(self, action: #selector(stopAudioRecord), for: .touchUpInside)
+        textInputbar.rightButton.addTarget(self, action: #selector(stopAudioRecord), for: .touchCancel)
+    }
+
+    fileprivate func setupToolbarRightButtonWithMessageSender() {
+        removeToolbarRightButtonSelectors()
+
+        textInputbar.rightButton.setImage(UIImage(named: "Paper Plane"), for: .normal)
+        textInputbar.rightButton.addTarget(self, action: #selector(sendMessage), for: .touchUpInside)
+    }
+
+    fileprivate func removeToolbarRightButtonSelectors() {
+        textInputbar.rightButton.removeTarget(self, action: #selector(recordAudioMessage), for: .touchDown)
+        textInputbar.rightButton.removeTarget(self, action: #selector(stopAudioRecord), for: .touchUpInside)
+        textInputbar.rightButton.removeTarget(self, action: #selector(stopAudioRecord), for: .touchCancel)
+        textInputbar.rightButton.removeTarget(self, action: #selector(sendMessage), for: .touchUpInside)
     }
 
     override class func collectionViewLayout(for decoder: NSCoder) -> UICollectionViewLayout {
@@ -319,7 +360,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
-        sendMessage()
+
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -341,13 +382,22 @@ final class ChatViewController: SLKTextViewController {
 
         if textView.text?.isEmpty ?? true {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+
+            isWritingMessage = false
+            setupToolbarRightButtonWithAudioRecorder()
+
         } else {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
+
+            if !isWritingMessage {
+                isWritingMessage = !isWritingMessage
+                setupToolbarRightButtonWithMessageSender()
+            }
         }
     }
 
     // MARK: Message
-    fileprivate func sendMessage() {
+    @objc fileprivate func sendMessage() {
         guard let subscription = subscription else { return }
         guard let messageText = textView.text, messageText.count > 0 else { return }
 
@@ -390,6 +440,9 @@ final class ChatViewController: SLKTextViewController {
                 })
             }
         }
+
+        isWritingMessage = false
+        setupToolbarRightButtonWithAudioRecorder()
     }
 
     fileprivate func updateCellForMessage(identifier: String) {
@@ -758,6 +811,57 @@ final class ChatViewController: SLKTextViewController {
 
     @IBAction func buttonScrollToBottomPressed(_ sender: UIButton) {
         scrollToBottom(true)
+    }
+
+    // MARK: Right Button Background View
+
+    var microphoneCircleView: UIView?
+    var startTime: NSDate?
+
+    fileprivate func createCircleView() -> UIView? {
+        guard let imageViewFrameSize = textInputbar.rightButton.imageView?.frame.size else { return nil }
+
+        let circleView = UIView(frame: CGRect(x: imageViewFrameSize.width / 2, y: imageViewFrameSize.height / 2, width: 0, height: 0))
+        circleView.layer.cornerRadius = 65
+        circleView.layer.zPosition = -1
+        circleView.backgroundColor = view.tintColor
+
+        UIView.animate(withDuration: 0.1) {
+            circleView.frame.size = CGSize(width: 130, height: 130)
+        }
+
+        circleView.layer.anchorPoint = CGPoint(x: 1.0, y: 1.0)
+
+        return circleView
+    }
+
+    // MARK: Audio Message Recorder Helpers
+
+    @objc func recordAudioMessage() {
+        microphoneCircleView = createCircleView()
+
+        guard let circleView = microphoneCircleView else { return }
+
+        textInputbar.rightButton.setTitleColor(UIColor.white, for: .highlighted)
+        textInputbar.rightButton.tintColor = UIColor.white
+        textInputbar.rightButton.addSubview(circleView)
+
+        AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
+
+        startTime = NSDate()
+
+        recorderManager?.record()
+    }
+
+    @objc func stopAudioRecord() {
+        if let circleView = microphoneCircleView {
+            circleView.removeFromSuperview()
+        }
+
+        textInputbar.rightButton.tintColor = view.tintColor
+        self.textView.resignFirstResponder()
+
+        recorderManager?.stop()
     }
 }
 
