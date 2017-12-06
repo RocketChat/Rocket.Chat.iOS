@@ -68,15 +68,10 @@ final class ChatViewController: SLKTextViewController, Alerter {
     let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messagesQuery: Results<Message>!
-    var messages: [Message] = [] {
-        didSet {
-            messagesUsernames.formUnion(messages.map { $0.user?.username }.flatMap { $0 })
-        }
-    }
-    var messagesUsernames: Set<String> = []
+    var messages: [Message] = []
+
     var subscription: Subscription? {
         didSet {
-            messagesUsernames.removeAll()
             subscriptionToken?.invalidate()
 
             guard
