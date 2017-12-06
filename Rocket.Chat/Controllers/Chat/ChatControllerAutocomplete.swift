@@ -16,10 +16,10 @@ extension ChatViewController {
 
         var result = [(String, Any)]()
 
-        let users = (word.count > 0 ? realm.objects(User.self).filter("username BEGINSWITH[c] %@", word)
+        let users = (word.count > 0 ? realm.objects(User.self).filter("username CONTAINS[c] %@", word)
             : realm.objects(User.self)).sorted(by: { user, _ in
                 guard let username = user.username else { return false }
-                return messagesUsernames.contains(username)
+                return preferenceUsernames.contains(username)
             })
 
         (0..<min(5, users.count)).forEach {
@@ -36,7 +36,7 @@ extension ChatViewController {
         searchResult = []
 
         if prefix == "@" {
-            searchResult = searchUsers(by: word, preferenceUsernames: messagesUsernames)
+            searchResult = searchUsers(by: word, preferenceUsernames: dataController.messagesUsernames)
 
             if "here".contains(word) || word.count == 0 {
                 searchResult.append(("here", UIImage(named: "Hashtag") as Any))
