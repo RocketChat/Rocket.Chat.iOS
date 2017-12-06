@@ -53,7 +53,8 @@ final class ChatViewController: SLKTextViewController, Alerter {
 
     var replyView: ReplyView!
     var replyString: String = ""
-    
+
+    var editView: EditView!
     var editedMessage: Message?
 
     var dataController = ChatDataController()
@@ -186,6 +187,7 @@ final class ChatViewController: SLKTextViewController, Alerter {
         }
 
         setupReplyView()
+        setupEditView()
     }
 
     @objc internal func reconnect() {
@@ -336,6 +338,7 @@ final class ChatViewController: SLKTextViewController, Alerter {
         let replyString = self.replyString
         stopReplying()
 
+
         let text = "\(messageText)\(replyString)"
 
         if let (command, params) = text.commandAndParams() {
@@ -348,6 +351,8 @@ final class ChatViewController: SLKTextViewController, Alerter {
         } else {
             sendTextMessage(text: text)
         }
+
+        stopEditing()
         
     }
 
