@@ -370,11 +370,10 @@ extension SubscriptionManager {
         }
     }
     
-    
     static func editTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
-            "method": "update",
+            "method": "updateMessage",
             "params": [[
                 "_id": message.identifier ?? "",
                 "rid": message.subscription.rid,
@@ -387,7 +386,6 @@ extension SubscriptionManager {
             completion(response)
         }
     }
-
 
     static func toggleFavorite(_ subscription: Subscription, completion: @escaping MessageCompletion) {
         let request = [

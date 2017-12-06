@@ -53,6 +53,8 @@ final class ChatViewController: SLKTextViewController, Alerter {
 
     var replyView: ReplyView!
     var replyString: String = ""
+    
+    var editedMessage: Message?
 
     var dataController = ChatDataController()
 
@@ -340,8 +342,13 @@ final class ChatViewController: SLKTextViewController, Alerter {
             sendCommand(command: command, params: params)
             return
         }
-
-        sendTextMessage(text: text)
+        
+        if editedMessage != nil {
+            editTextMessage(text: text)
+        } else {
+            sendTextMessage(text: text)
+        }
+        
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -410,6 +417,30 @@ final class ChatViewController: SLKTextViewController, Alerter {
                     MessageTextCacheManager.shared.update(for: message, completion: nil)
                 })
             }
+        }
+    }
+    
+    fileprivate func editTextMessage(text: String) {
+        guard
+            let editedMessage = editedMessage,
+            text.count > 0
+            else {
+                return
+        }
+
+        Realm.executeOnMainThread({ (realm) in
+            editedMessage.text = text
+            editedMessage.updatedAt = Date.serverDate
+            realm.add(editedMessage, update: true)
+        })
+
+        MessageTextCacheManager.shared.update(for: editedMessage, completion: nil)
+        
+        SubscriptionManager.editTextMessage(editedMessage) { (_) in
+            Realm.executeOnMainThread({ (_) in
+                MessageTextCacheManager.shared.update(for: editedMessage, completion: nil)
+                self.editedMessage = nil
+            })
         }
     }
 
