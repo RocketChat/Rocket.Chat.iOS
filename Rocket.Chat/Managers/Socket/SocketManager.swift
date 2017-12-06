@@ -34,6 +34,8 @@ class SocketManager {
     var queue: [String: MessageCompletion] = [:]
     var events: [String: [MessageCompletion]] = [:]
 
+    var isUserAuthenticated = false
+
     internal var internalConnectionHandler: SocketCompletion?
     internal var connectionHandlers: [String: SocketConnectionHandler] = [:]
 
@@ -59,6 +61,7 @@ class SocketManager {
             return
         }
 
+        sharedInstance.isUserAuthenticated = false
         sharedInstance.events = [:]
         sharedInstance.queue = [:]
         sharedInstance.internalConnectionHandler = completion
@@ -128,6 +131,8 @@ extension SocketManager {
                 return
             }
 
+            API.current()?.client(InfoClient.self).fetchInfo()
+
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
                 AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
 
@@ -139,6 +144,8 @@ extension SocketManager {
                 SubscriptionManager.subscribeRoomChanges()
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
+
+                API.current()?.client(CommandsClient.self).fetchCommands()
 
                 // If we have some subscription opened, let's
                 // try to subscribe to it again
@@ -192,6 +199,7 @@ extension SocketManager: WebSocketDelegate {
     func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Log.debug("[WebSocket] \(socket.currentURL)\n - did disconnect with error (\(String(describing: error)))")
 
+        isUserAuthenticated = false
         events = [:]
         queue = [:]
 

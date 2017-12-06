@@ -38,6 +38,7 @@ class MessageTextCacheManager {
         } else {
             text.setFont(MessageTextFontAttributes.defaultFont)
             text.setFontColor(MessageTextFontAttributes.defaultFontColor)
+            text.setLineSpacing(MessageTextFontAttributes.defaultFont)
         }
 
         let mentions = Array(message.mentions.flatMap { $0.username })
