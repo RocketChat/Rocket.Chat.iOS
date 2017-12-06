@@ -19,6 +19,7 @@ extension UIView {
         return VOLocalizedString("\(accessibilityIdentifier).hint")
     }
 }
+
 func VOLocalizedString(_ key: String) -> String? {
     let string = NSLocalizedString(key, tableName: "VoiceOver", bundle: Bundle.main, value: "", comment: "")
     return string != "" ? string : nil

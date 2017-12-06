@@ -6,5 +6,11 @@
   Copyright © 2017 Rocket.Chat. All rights reserved.
 */
 
+// MARK: Auth
 "auth.connect.urlfield.label" = "Server URL";
 "auth.connect.urlfield.hint" = "Insert your server's URL here.";
+
+// MARK: Subscriptions
+"subscriptions.main.userview.label" = "Session information";
+"subscriptions.main.userview.hint" = "Double tap to change status.";
+"subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
