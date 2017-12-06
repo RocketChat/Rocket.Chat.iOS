@@ -54,10 +54,10 @@ class PushManagerSpec: XCTestCase {
         DatabaseManager.setupTestServers()
 
         XCTAssertFalse(PushManager.handleNotification(raw: PushNotification.testRawInvalid()))
-        XCTAssert(PushManager.handleNotification(raw: PushNotification.testRaw()))
+        XCTAssert(PushManager.handleNotification(raw: PushNotification.testRaw(), reply: "test"))
 
         AppManager.changeSelectedServer(index: 1)
-        XCTAssert(PushManager.handleNotification(raw: PushNotification.testRaw()))
+        XCTAssert(PushManager.handleNotification(raw: PushNotification.testRaw(), reply: "test"))
     }
 }
 

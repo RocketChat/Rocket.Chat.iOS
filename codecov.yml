@@ -6,10 +6,12 @@ codecov:
 coverage:
   precision: 2 
   round: down
-  range: 70...100
+  range: 40...100
 
   status:
-    project: yes
+    project:
+      enabled: yes
+      threshold: 0.5%
     patch: no
     changes: no
 

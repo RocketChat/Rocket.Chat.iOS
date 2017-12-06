@@ -12,28 +12,24 @@ import SwiftyJSON
 typealias PostMessageResult = APIResult<PostMessageRequest>
 
 class PostMessageRequest: APIRequest {
-    let method: String = "POST"
+    let method = "POST"
     let path = "/api/v1/chat.postMessage"
 
-    let message: Message
+    let roomId: String
+    let text: String
 
-    init(message: Message) {
-        self.message = message
+    init(roomId: String, text: String) {
+        self.roomId = roomId
+        self.text = text
     }
 
     func body() -> Data? {
-        guard let roomId = message.subscription?.rid else { return nil }
-
         let body = JSON([
             "roomId": roomId,
-            "text": message.text
+            "text": text
         ])
 
         return body.rawString()?.data(using: .utf8)
-    }
-
-    var contentType: String? {
-        return "application/json"
     }
 }
 
