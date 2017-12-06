@@ -11,33 +11,45 @@ import RealmSwift
 
 extension ChatViewController {
 
+    fileprivate func searchUsers(by word: String, realm: Realm? = Realm.shared, preferenceUsernames: Set<String>) -> [(String, Any)] {
+        guard let realm = realm else { return [] }
+
+        var result = [(String, Any)]()
+
+        let users = (word.count > 0 ? realm.objects(User.self).filter("username BEGINSWITH[c] %@", word)
+            : realm.objects(User.self)).sorted(by: { user, _ in
+                guard let username = user.username else { return false }
+                return messagesUsernames.contains(username)
+            })
+
+        (0..<min(5, users.count)).forEach {
+            guard let username = users[$0].username else { return }
+            result.append((username, users[$0]))
+        }
+
+        return result
+    }
+
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
         guard let realm = Realm.shared else { return }
 
-        searchResult = [:]
+        searchResult = []
 
-        if prefix == "@" && word.count > 0 {
-            let users = realm.objects(User.self).filter("username BEGINSWITH[c] %@", word)
+        if prefix == "@" {
+            searchResult = searchUsers(by: word, preferenceUsernames: messagesUsernames)
 
-            for user in users {
-                if let username = user.username {
-                    searchResult[username] = user
-                }
+            if "here".contains(word) || word.count == 0 {
+                searchResult.append(("here", UIImage(named: "Hashtag") as Any))
             }
 
-            if "here".contains(word) {
-                searchResult["here"] = UIImage(named: "Hashtag")
+            if "all".contains(word) || word.count == 0 {
+                searchResult.append(("all", UIImage(named: "Hashtag") as Any))
             }
-
-            if "all".contains(word) {
-                searchResult["all"] = UIImage(named: "Hashtag")
-            }
-
         } else if prefix == "#" && word.count > 0 {
             let channels = realm.objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p') && name BEGINSWITH[c] %@", word)
 
             for channel in channels {
-                searchResult[channel.name] = channel.type == .channel ? UIImage(named: "Hashtag") : UIImage(named: "Lock")
+                searchResult.append((channel.name, (channel.type == .channel ? UIImage(named: "Hashtag") : UIImage(named: "Lock")) as Any))
             }
 
         } else if prefix == "/" {
@@ -49,7 +61,7 @@ extension ChatViewController {
             }
 
             commands.forEach {
-                searchResult[$0.command] = $0
+                searchResult.append(($0.command, $0))
             }
         }
 
@@ -62,7 +74,7 @@ extension ChatViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResult.keys.count
+        return searchResult.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -74,7 +86,7 @@ extension ChatViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let key = Array(searchResult.keys)[indexPath.row]
+        let key = searchResult[indexPath.row].0
         acceptAutoCompletion(with: "\(key) ", keepPrefix: true)
     }
 
@@ -84,8 +96,7 @@ extension ChatViewController {
         }
         cell.selectionStyle = .default
 
-        let key = Array(searchResult.keys)[indexPath.row]
-        if let user = searchResult[key] as? User {
+        if let user = searchResult[indexPath.row].1 as? User {
             cell.avatarView.isHidden = false
             cell.imageViewIcon.isHidden = true
             cell.avatarView.user = user
@@ -93,12 +104,12 @@ extension ChatViewController {
             cell.avatarView.isHidden = true
             cell.imageViewIcon.isHidden = false
 
-            if let image = searchResult[key] as? UIImage {
+            if let image = searchResult[indexPath.row].1 as? UIImage {
                 cell.imageViewIcon.image = image.imageWithTint(.lightGray)
             }
         }
 
-        cell.labelTitle.text = key
+        cell.labelTitle.text = searchResult[indexPath.row].0
         return cell
     }
 }
