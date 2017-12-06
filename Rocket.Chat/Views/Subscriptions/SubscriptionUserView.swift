@@ -9,23 +9,33 @@
 import UIKit
 
 class SubscriptionUserView: UIView {
+    override var accessibilityIdentifier: String? {
+        get { return "subscriptions.main.userview" }
+        set { }
+    }
+
     override var accessibilityLabel: String? {
-        get { return "Session information" } set { }
+        get { return localizedAccessibilityLabel }
+        set { }
     }
 
     override var accessibilityValue: String? {
         get {
-            let user = AuthManager.currentUser()
-            let serverName = AuthManager.isAuthenticated()?.settings?.serverName
-            return """
-                Server: \(serverName ?? "unknown").
-                User: \(user?.name ?? "unknown")
-                Status: \(user?.status.rawValue ?? "unknown")
-            """
-        } set { }
+            guard
+                let user = AuthManager.currentUser(),
+                let userName = user.name,
+                let serverName = AuthManager.isAuthenticated()?.settings?.serverName,
+                let format = VOLocalizedString("subscriptions.main.userview.value")
+            else {
+                return nil
+            }
+            return String(format: format, serverName, user.name ?? "unknown", user.status.rawValue)
+        }
+        set { }
     }
 
     override var accessibilityHint: String? {
-        get { return "Double tap to change status" } set { }
+        get { return localizedAccessibilityHint }
+        set { }
     }
 }
