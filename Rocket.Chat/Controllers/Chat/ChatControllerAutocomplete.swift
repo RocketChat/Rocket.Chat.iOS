@@ -10,33 +10,13 @@ import UIKit
 import RealmSwift
 
 extension ChatViewController {
-
-    fileprivate func searchUsers(by word: String, realm: Realm? = Realm.shared, preferenceUsernames: Set<String>) -> [(String, Any)] {
-        guard let realm = realm else { return [] }
-
-        var result = [(String, Any)]()
-
-        let users = (word.count > 0 ? realm.objects(User.self).filter("username CONTAINS[c] %@", word)
-            : realm.objects(User.self)).sorted(by: { user, _ in
-                guard let username = user.username else { return false }
-                return preferenceUsernames.contains(username)
-            })
-
-        (0..<min(5, users.count)).forEach {
-            guard let username = users[$0].username else { return }
-            result.append((username, users[$0]))
-        }
-
-        return result
-    }
-
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
         guard let realm = Realm.shared else { return }
 
         searchResult = []
 
         if prefix == "@" {
-            searchResult = searchUsers(by: word, preferenceUsernames: dataController.messagesUsernames)
+            searchResult = User.search(usernameContaining: word, preference: dataController.messagesUsernames)
 
             if "here".contains(word) || word.count == 0 {
                 searchResult.append(("here", UIImage(named: "Hashtag") as Any))
