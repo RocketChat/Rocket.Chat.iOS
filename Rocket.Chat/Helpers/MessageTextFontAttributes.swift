@@ -17,6 +17,6 @@ struct MessageTextFontAttributes {
 
     static let defaultFont = UIFont.systemFont(ofSize: defaultFontSize)
     static let italicFont = UIFont.italicSystemFont(ofSize: defaultFontSize)
-    static let boldFont = UIFont.systemFont(ofSize: defaultFontSize)
+    static let boldFont = UIFont.boldSystemFont(ofSize: defaultFontSize)
 
 }
