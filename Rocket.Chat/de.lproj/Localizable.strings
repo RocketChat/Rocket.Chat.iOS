@@ -103,6 +103,7 @@
 // Chat Message Actions
 "chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
 "chat.message.actions.report" = "Nachricht melden";
+"chat.message.actions.edit" = "Nachricht bearbeiten";
 "chat.message.actions.copy" = "Kopieren";
 "chat.message.actions.pin" = "Nachricht anheften";
 "chat.message.actions.unpin" = "Nachricht lösen";

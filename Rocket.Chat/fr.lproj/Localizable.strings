@@ -103,6 +103,7 @@
 // Chat Message Actions
 "chat.message.actions.block" = "Bloquer les messages de l'utilisateur";
 "chat.message.actions.report" = "Signaler le message";
+"chat.message.actions.edit" = "Modifier le message";
 "chat.message.actions.copy" = "Copier";
 "chat.message.actions.pin" = "Épingler le message";
 "chat.message.actions.unpin" = "Désépingler le message";
