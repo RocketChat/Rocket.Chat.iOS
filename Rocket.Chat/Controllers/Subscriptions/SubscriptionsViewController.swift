@@ -50,7 +50,7 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     weak var viewUserMenu: SubscriptionUserStatusView?
-    @IBOutlet weak var viewUser: UIView! {
+    @IBOutlet weak var viewUser: SubscriptionUserView! {
         didSet {
             let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
             viewUser.addGestureRecognizer(gesture)
