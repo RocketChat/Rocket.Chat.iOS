@@ -29,7 +29,7 @@ final class SettingsViewModel {
 
     internal var canViewAdminPanel: Bool {
         guard let user = AuthManager.currentUser(), !user.isInvalidated else { return false }
-        return user.canViewAdminPanel
+        return user.canViewAdminPanel()
     }
 
     internal var formattedVersion: String {

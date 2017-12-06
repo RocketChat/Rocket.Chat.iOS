@@ -74,19 +74,3 @@ struct PermissionManager {
         return realm?.object(ofType: Permission.self, forPrimaryKey: permission.rawValue)?.roles
     }
 }
-
-extension User {
-
-    func hasPermission(_ permission: PermissionType, realm: Realm? = Realm.shared) -> Bool {
-        guard let permissionRoles = PermissionManager.roles(for: permission, realm: realm) else { return false }
-
-        for userRole in self.roles {
-            for permissionRole in permissionRoles where userRole == permissionRole {
-                return true
-            }
-        }
-
-        return false
-    }
-
-}
