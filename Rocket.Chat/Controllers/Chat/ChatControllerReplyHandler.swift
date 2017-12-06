@@ -15,7 +15,7 @@ extension ChatViewController {
         replyView.backgroundColor = textInputbar.addonContentView.backgroundColor
         replyView.frame = textInputbar.addonContentView.bounds
         replyView.onClose = stopReplying
-
+        replyView.alpha = 0
         textInputbar.addonContentView.addSubview(replyView)
     }
 
