@@ -272,3 +272,31 @@ extension ChatMessageCell: UIGestureRecognizerDelegate {
     }
 
 }
+
+// MARK: Accessibility
+
+extension ChatMessageCell {
+    override func awakeFromNib() {
+        isAccessibilityElement = true
+    }
+
+    override var accessibilityIdentifier: String? {
+        get { return "message" }
+        set { }
+    }
+
+    override var accessibilityLabel: String? {
+        get { return message?.accessibilityLabel }
+        set { }
+    }
+
+    override var accessibilityValue: String? {
+        get { return message?.accessibilityValue }
+        set { }
+    }
+
+    override var accessibilityHint: String? {
+        get { return "Double tap and hold for actions" }
+        set { }
+    }
+}
