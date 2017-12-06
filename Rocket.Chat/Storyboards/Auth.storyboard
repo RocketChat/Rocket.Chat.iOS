@@ -183,8 +183,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CS6-d2-2aP">
                                                 <rect key="frame" x="25" y="60" width="325" height="125"/>
                                                 <subviews>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email or username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ygD-Jl-GJ5">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email or username" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ygD-Jl-GJ5" customClass="VOTextField" customModule="Rocket_Chat" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="0.0" width="295" height="64"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="auth.authentication.emailorusername"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="64" id="A8j-8r-aDb"/>
                                                         </constraints>
@@ -195,8 +196,9 @@
                                                             <outlet property="delegate" destination="hgH-Tx-WGh" id="MWx-6N-Hkv"/>
                                                         </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A9R-8V-1bd">
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="A9R-8V-1bd" customClass="VOTextField" customModule="Rocket_Chat" customModuleProvider="target">
                                                         <rect key="frame" x="15" y="63" width="295" height="62"/>
+                                                        <accessibility key="accessibilityConfiguration" identifier="auth.authentication.password"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="62" id="d4K-pt-waR"/>
                                                         </constraints>

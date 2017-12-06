@@ -14,6 +14,11 @@ extension UIView {
         return VOLocalizedString("\(accessibilityIdentifier).label")
     }
 
+    var localizedAccessibilityValue: String? {
+        guard let accessibilityIdentifier = accessibilityIdentifier else { return nil }
+        return VOLocalizedString("\(accessibilityIdentifier).value")
+    }
+
     var localizedAccessibilityHint: String? {
         guard let accessibilityIdentifier = accessibilityIdentifier else { return nil }
         return VOLocalizedString("\(accessibilityIdentifier).hint")
