@@ -294,9 +294,4 @@ extension ChatMessageCell {
         get { return message?.accessibilityValue }
         set { }
     }
-
-    override var accessibilityHint: String? {
-        get { return "Double tap and hold for actions" }
-        set { }
-    }
 }
