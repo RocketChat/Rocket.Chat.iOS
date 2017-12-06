@@ -11,7 +11,7 @@
 "auth.connect.urlfield.hint" = "Insira aqui a URL do servidor.";
 
 "auth.authentication.emailorusername.label" = "Email ou nome de usuário";
-"auth.authentication.emailorusername.hint" = "Insert aqui o seu email ou nome de usuário.";
+"auth.authentication.emailorusername.hint" = "Insira aqui o seu email ou nome de usuário.";
 "auth.authentication.password.label" = "Senha";
 "auth.authentication.password.label" = "Insira aqui a sua senha.";
 
