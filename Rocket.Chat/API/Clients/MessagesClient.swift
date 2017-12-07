@@ -12,8 +12,7 @@ import SwiftyJSON
 struct MessagesClient: APIClient {
     let api: AnyAPIFetcher
 
-    func sendMessage(text: String, subscription: Subscription, user: User? = AuthManager.currentUser(), realm: Realm? = Realm.shared) {
-        let id = String.random(18)
+    func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.shared) {
         let message = Message()
         message.internalType = ""
         message.createdAt = Date.serverDate
