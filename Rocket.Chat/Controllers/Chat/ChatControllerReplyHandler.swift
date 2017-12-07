@@ -32,6 +32,7 @@ extension ChatViewController {
         }), completion: ({ _ in
             UIView.animate(withDuration: 0.25) {
                 self.replyView.alpha = 1
+                self.clearEditing()
             }
         }))
 
@@ -40,6 +41,11 @@ extension ChatViewController {
         replyString = (onlyQuote ? message.quoteString : message.replyString) ?? ""
 
         scrollToBottom()
+    }
+
+    func clearReplying() {
+        self.replyView.alpha = 0
+        replyString = ""
     }
 
     func stopReplying() {
@@ -56,7 +62,7 @@ extension ChatViewController {
             }
         }))
 
-        replyString = ""
+        clearReplying()
     }
 
 }
