@@ -8,13 +8,7 @@
 
 import UIKit
 
-class BaseViewController: UIViewController {
-    func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
-        present(alert, animated: true, completion: nil)
-    }
-
+class BaseViewController: UIViewController, Alerter {
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -25,5 +19,16 @@ class BaseViewController: UIViewController {
             action: nil
         )
     }
+}
 
+protocol Alerter {
+    func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)?)
+}
+
+extension Alerter where Self: UIViewController {
+    func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)? = nil) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
+        present(alert, animated: true, completion: nil)
+    }
 }
