@@ -353,10 +353,13 @@ extension SubscriptionManager {
         }
     }
 
-    static func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
+    static func sendEditTextMessage(_ message: Message, isEdit: Bool = false, completion: @escaping MessageCompletion) {
+
+        let methodName: String = isEdit ? "updateMessage" : "sendMessage"
+
         let request = [
             "msg": "method",
-            "method": "sendMessage",
+            "method": methodName,
             "params": [[
                 "_id": message.identifier ?? "",
                 "rid": message.subscription.rid,
@@ -364,23 +367,6 @@ extension SubscriptionManager {
                 ]]
             ] as [String: Any]
 
-        SocketManager.send(request) { (response) in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-            completion(response)
-        }
-    }
-    
-    static func editTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
-        let request = [
-            "msg": "method",
-            "method": "updateMessage",
-            "params": [[
-                "_id": message.identifier ?? "",
-                "rid": message.subscription.rid,
-                "msg": message.text
-                ]]
-            ] as [String: Any]
-        
         SocketManager.send(request) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }
             completion(response)
