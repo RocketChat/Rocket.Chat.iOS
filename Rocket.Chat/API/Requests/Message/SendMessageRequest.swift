@@ -41,4 +41,3 @@ class SendMessageRequest: APIRequest {
 extension APIResult where T == SendMessageRequest {
 
 }
-
