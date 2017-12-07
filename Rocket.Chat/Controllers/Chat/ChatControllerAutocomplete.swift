@@ -19,17 +19,17 @@ extension ChatViewController {
             searchResult = User.search(usernameContaining: word, preference: dataController.messagesUsernames)
 
             if "here".contains(word) || word.count == 0 {
-                searchResult.append(("here", UIImage(named: "Hashtag") as Any))
+                searchResult.append(("here", "@"))
             }
 
             if "all".contains(word) || word.count == 0 {
-                searchResult.append(("all", UIImage(named: "Hashtag") as Any))
+                searchResult.append(("all", "@"))
             }
         } else if prefix == "#" && word.count > 0 {
             let channels = realm.objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p') && name BEGINSWITH[c] %@", word)
 
             for channel in channels {
-                searchResult.append((channel.name, (channel.type == .channel ? UIImage(named: "Hashtag") : UIImage(named: "Lock")) as Any))
+                searchResult.append((channel.name, "#"))
             }
 
         } else if prefix == "/" {
@@ -41,7 +41,7 @@ extension ChatViewController {
             }
 
             commands.forEach {
-                searchResult.append(($0.command, $0))
+                searchResult.append(($0.command, "/"))
             }
         }
 
@@ -70,23 +70,22 @@ extension ChatViewController {
         acceptAutoCompletion(with: "\(key) ", keepPrefix: true)
     }
 
-    private func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
+    private func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> UITableViewCell {
         guard let cell = autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as? AutocompleteCell else {
-            return AutocompleteCell(style: .`default`, reuseIdentifier: AutocompleteCell.identifier)
+            return UITableViewCell()
         }
+
         cell.selectionStyle = .default
 
         if let user = searchResult[indexPath.row].1 as? User {
-            cell.avatarView.isHidden = false
-            cell.imageViewIcon.isHidden = true
+            cell.avatarView.labelInitials.textColor = .white
             cell.avatarView.user = user
         } else {
-            cell.avatarView.isHidden = true
-            cell.imageViewIcon.isHidden = false
-
-            if let image = searchResult[indexPath.row].1 as? UIImage {
-                cell.imageViewIcon.image = image.imageWithTint(.lightGray)
-            }
+            let type = searchResult[indexPath.row].1 as? String ?? "#"
+            cell.avatarView.imageView.image = nil
+            cell.avatarView.labelInitials.textColor = .lightGray
+            cell.avatarView.labelInitials.text = type
+            cell.avatarView.backgroundColor = .white
         }
 
         cell.labelTitle.text = searchResult[indexPath.row].0
