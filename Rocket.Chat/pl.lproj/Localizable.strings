@@ -99,6 +99,7 @@
 "chat.channel.start_conversation" = "To początek rozmowy na kanale %@";
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
+"chat.edit_mode" = "Edytuj wiadomość. Blisko, aby anulować.";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Blokuj wiadomości od użytkownika";

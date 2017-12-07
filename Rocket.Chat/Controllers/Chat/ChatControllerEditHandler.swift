@@ -21,7 +21,7 @@ extension ChatViewController {
 
     func edit(message: Message) {
         editView.alpha = 0
-        editView.message.text = "EDIT. CLOSE TO CANCEL"
+        editView.message.text = localized("chat.edit_mode")
 
         self.editedMessage = message
 
