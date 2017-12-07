@@ -54,10 +54,4 @@ struct MessagesClient: APIClient {
             }
         })
     }
-
-    func runCommand(command: String, params: String, roomId: String,
-                    succeeded: RunCommandSucceeded? = nil, errored: APIErrored? = nil) {
-        api.fetch(RunCommandRequest(command: command, params: params, roomId: roomId),
-                  succeeded: succeeded, errored: errored)
-    }
 }
