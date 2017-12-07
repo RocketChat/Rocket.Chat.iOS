@@ -55,6 +55,8 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
         let color = UIColor.red
         attributedString.setBackgroundColor(color, range: wordRange)
 
-        assert(attributedString, has: (NSAttributedStringKey.backgroundColor, color), in: wordRange, "setBackgroundColor will work")
+        assert(attributedString,
+               has: (NSAttributedStringKey.backgroundColor, color),
+               in: wordRange, "setBackgroundColor will work")
     }
 }

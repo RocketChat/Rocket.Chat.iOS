@@ -111,7 +111,7 @@
                                             <constraint firstItem="TPV-i5-hsW" firstAttribute="top" secondItem="qEc-o0-IxJ" secondAttribute="top" id="wnP-Wx-bpV"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ArO-ez-uRr" userLabel="User View">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ArO-ez-uRr" userLabel="User View" customClass="SubscriptionUserView" customModule="Rocket_Chat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="85"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow Down" translatesAutoresizingMaskIntoConstraints="NO" id="QXa-y8-P03">
@@ -175,6 +175,9 @@
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" red="0.1843137255" green="0.20392156859999999" blue="0.23921568630000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <accessibility key="accessibilityConfiguration">
+                                            <bool key="isElement" value="YES"/>
+                                        </accessibility>
                                         <constraints>
                                             <constraint firstItem="2Qq-vp-NoK" firstAttribute="leading" secondItem="xrn-W8-pS8" secondAttribute="trailing" constant="8" id="0KT-3u-ReC"/>
                                             <constraint firstItem="V2s-Ct-SCW" firstAttribute="top" secondItem="2Qq-vp-NoK" secondAttribute="bottom" constant="10" id="0Wk-gc-yvb"/>
