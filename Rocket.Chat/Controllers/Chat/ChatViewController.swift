@@ -385,33 +385,8 @@ final class ChatViewController: SLKTextViewController, Alerter {
             return
         }
 
-        var message: Message?
-        Realm.executeOnMainThread({ (realm) in
-            message = Message()
-            message?.internalType = ""
-            message?.createdAt = Date.serverDate
-            message?.text = text
-            message?.subscription = subscription
-            message?.identifier = String.random(18)
-            message?.temporary = true
-            message?.user = AuthManager.currentUser()
-
-            if let message = message {
-                realm.add(message)
-            }
-        })
-
-        if let message = message {
-            SubscriptionManager.sendTextMessage(message) { response in
-                Realm.executeOnMainThread({ (realm) in
-                    message.temporary = false
-                    message.map(response.result["result"], realm: realm)
-                    realm.add(message, update: true)
-
-                    MessageTextCacheManager.shared.update(for: message, completion: nil)
-                })
-            }
-        }
+        guard let client = API.current()?.client(MessagesClient.self) else { return }
+        client.sendMessage(text: text, subscription: subscription)
     }
 
     fileprivate func updateCellForMessage(identifier: String) {
