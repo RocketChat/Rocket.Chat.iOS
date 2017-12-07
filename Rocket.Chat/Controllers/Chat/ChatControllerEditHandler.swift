@@ -25,18 +25,13 @@ extension ChatViewController {
 
         self.editedMessage = message
 
-        UIView.animate(withDuration: 0.25, animations: ({
-            self.textInputbar.addonContentViewHeight = 50
-            self.textInputbar.layoutIfNeeded()
-            self.editView.frame = self.textInputbar.addonContentView.bounds
-            self.textDidUpdate(false)
-        }), completion: ({ _ in
+        show(viewToShow: editView) { (_) in
             UIView.animate(withDuration: 0.25) {
                 self.textView.text = message.text
                 self.editView.alpha = 1
                 self.clearReplying()
             }
-        }))
+        }
 
         textView.becomeFirstResponder()
 
@@ -49,20 +44,31 @@ extension ChatViewController {
         textView.text = ""
     }
 
-    func stopEditing() {
-        editView.alpha = 1
+    func show(viewToShow: UIView, finished: @escaping (Bool) -> Void) {
+        UIView.animate(withDuration: 0.25, animations: {
+            self.textInputbar.addonContentViewHeight = 50
+            self.textInputbar.layoutIfNeeded()
+            viewToShow.frame = self.textInputbar.addonContentView.bounds
+            self.textDidUpdate(false)
+        }, completion: finished)
+    }
 
+    func hide(viewToHide: UIView) {
         UIView.animate(withDuration: 0.25, animations: ({
-            self.editView.alpha = 0
+            viewToHide.alpha = 0
         }), completion: ({ _ in
             UIView.animate(withDuration: 0.25) {
                 self.textInputbar.addonContentViewHeight = 0
                 self.textInputbar.layoutIfNeeded()
-                self.editView.frame = self.textInputbar.addonContentView.bounds
+                viewToHide.frame = self.textInputbar.addonContentView.bounds
                 self.textDidUpdate(false)
             }
         }))
+    }
 
+    func stopEditing() {
+        editView.alpha = 1
+        hide(viewToHide: editView)
         clearEditing()
     }
 
