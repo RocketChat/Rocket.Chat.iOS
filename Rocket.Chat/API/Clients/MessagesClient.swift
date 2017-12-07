@@ -44,7 +44,7 @@ struct MessagesClient: APIClient {
         }, errored: { error in
             switch error {
             case .version:
-                // old server version: fallback to web sockets
+                // TODO: Remove SendMessage Fallback + old methods after Rocket.Chat 1.0
                 SubscriptionManager.sendTextMessage(message, completion: { response in
                     updateMessage(json: response.result["result"])
                 })
