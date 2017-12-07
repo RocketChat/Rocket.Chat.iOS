@@ -99,6 +99,7 @@
 "chat.channel.start_conversation" = "Ceci est le début de votre conversation sur %@";
 "chat.read_only" = "This room is read only";
 "chat.muted" = "You have been muted";
+"chat.edit_mode" = "Modifier le message. Fermer pour annuler.";
 
 // Chat Message Actions
 "chat.message.actions.block" = "Bloquer les messages de l'utilisateur";
