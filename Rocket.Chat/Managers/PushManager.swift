@@ -141,14 +141,10 @@ extension PushManager {
         return handleNotification(notification, reply: reply)
     }
 
-    fileprivate static func hostToServerUrl(_ host: String) -> String? {
-        return URL(string: host)?.socketURL()?.absoluteString
-    }
-
     @discardableResult
     static func handleNotification(_ notification: PushNotification, reply: String? = nil) -> Bool {
         guard
-            let serverUrl = hostToServerUrl(notification.host),
+            let serverUrl = URL(string: notification.host)?.socketURL()?.absoluteString,
             let index = DatabaseManager.serverIndexForUrl(serverUrl)
         else {
             return false
@@ -157,22 +153,19 @@ extension PushManager {
         // side effect: needed for Subscription.notificationSubscription()
         lastNotificationRoomId = notification.roomId
 
-        let subscription: Subscription? = .notificationSubscription()
         if index != DatabaseManager.selectedIndex {
             AppManager.changeSelectedServer(index: index)
         } else {
-            ChatViewController.shared?.subscription = subscription
+            ChatViewController.shared?.subscription = .notificationSubscription()
         }
 
         if let reply = reply {
             let appendage = notification.roomType == .directMessage ? "" : " @\(notification.username)"
 
-            let message = Message()
-            message.subscription = subscription
-            message.text = "\(reply)\(appendage)"
+            let message = "\(reply)\(appendage)"
 
             let backgroundTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-            API.shared.fetch(PostMessageRequest(message: message), { _ in
+            API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), succeeded: { _ in
                 UIApplication.shared.endBackgroundTask(backgroundTask)
             })
         }

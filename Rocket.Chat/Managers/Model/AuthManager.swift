@@ -16,8 +16,8 @@ struct AuthManager {
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
-    static func isAuthenticated() -> Auth? {
-        guard let realm = Realm.shared else { return nil }
+    static func isAuthenticated(realm: Realm? = Realm.shared) -> Auth? {
+        guard let realm = realm else { return nil }
         return realm.objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false).first
     }
 
@@ -142,6 +142,7 @@ struct AuthManager {
             auth.serverURL = serverURL
             auth.token = token
             auth.userId = userId
+            auth.serverVersion = server[ServerPersistKeys.serverVersion] ?? ""
 
             PushManager.updatePushToken()
 
@@ -164,11 +165,6 @@ extension AuthManager {
     */
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
-        guard let apiHost = auth.apiHost else { return }
-
-        API.shared.host = apiHost
-        API.shared.authToken = auth.token
-        API.shared.userId = auth.userId
 
         // Turn all users offline
         Realm.execute({ (realm) in
@@ -260,9 +256,6 @@ extension AuthManager {
             auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
             auth.token = result["result"]["token"].string
             auth.userId = result["result"]["id"].string
-
-            API.shared.authToken = auth.token
-            API.shared.userId = auth.userId
 
             if let date = result["result"]["tokenExpires"]["$date"].double {
                 auth.tokenExpires = Date.dateFromInterval(date)

@@ -40,6 +40,9 @@
 "alert.authorization_error.title" = "Błąd autoryzacji";
 "alert.authorization_error.create_channel.description" = "Nie możesz utworzyć kanału";
 
+"alert.unsupported_feature.title" = "Feature not supported";
+"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above.";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
@@ -88,6 +91,8 @@
 "new_room.group.channel.name" = "Nazwa kanału";
 "new_room.group.channel.footer" = "Nazwa musi być z małych liter oraz być krótsza niż 22 znaki";
 "new_room.cell.channel_name.title" = "Nazwa kanału";
+"new_room.group.invite_users" = "Zaproś użytkowników";
+"new_room.cell.invite_users.placeholder" = "Nazwy użytkowników";
 
 // Chat
 "chat.channel_preview_view.title" = "Jest to podgląd kanału #%@";

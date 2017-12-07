@@ -12,7 +12,7 @@ import SwiftyJSON
 typealias InfoResult = APIResult<InfoRequest>
 
 class InfoRequest: APIRequest {
-    let path: String = "/api/v1/info"
+    let path = "/api/v1/info"
 }
 
 extension APIResult where T == InfoRequest {
