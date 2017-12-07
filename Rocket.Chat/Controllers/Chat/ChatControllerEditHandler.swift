@@ -25,7 +25,6 @@ extension ChatViewController {
 
         self.editedMessage = message
 
-
         UIView.animate(withDuration: 0.25, animations: ({
             self.textInputbar.addonContentViewHeight = 50
             self.textInputbar.layoutIfNeeded()
@@ -35,12 +34,19 @@ extension ChatViewController {
             UIView.animate(withDuration: 0.25) {
                 self.textView.text = message.text
                 self.editView.alpha = 1
+                self.clearReplying()
             }
         }))
 
         textView.becomeFirstResponder()
 
         scrollToBottom()
+    }
+
+    func clearEditing() {
+        self.editView.alpha = 0
+        editedMessage = nil
+        textView.text = ""
     }
 
     func stopEditing() {
@@ -57,9 +63,7 @@ extension ChatViewController {
             }
         }))
 
-        editedMessage = nil
-        textView.text = ""
-        
+        clearEditing()
     }
 
 }
