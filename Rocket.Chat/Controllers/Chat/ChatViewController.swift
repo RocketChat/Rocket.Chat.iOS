@@ -527,6 +527,7 @@ final class ChatViewController: SLKTextViewController {
             if insertions.count > 0 {
                 var newMessages: [Message] = []
                 for insertion in insertions {
+                    guard insertion < self.messagesQuery.count else { continue }
                     let newMessage = Message(value: self.messagesQuery[insertion])
                     newMessages.append(newMessage)
                 }
@@ -541,8 +542,6 @@ final class ChatViewController: SLKTextViewController {
                 return
             }
 
-            let messagesCount = self.messagesQuery.count
-
             if modifications.count > 0 {
                 DispatchQueue.main.async {
                     let isAtBottom = self.chatLogIsAtBottom()
@@ -552,9 +551,7 @@ final class ChatViewController: SLKTextViewController {
                             var indexPathModifications: [Int] = []
 
                             for modified in modifications {
-                                if messagesCount < modified + 1 {
-                                    continue
-                                }
+                                guard modified < self.messagesQuery.count else { continue }
 
                                 let message = Message(value: self.messagesQuery[modified])
                                 let identifier = message.identifier
