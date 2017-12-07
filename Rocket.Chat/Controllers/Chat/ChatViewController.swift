@@ -56,7 +56,7 @@ final class ChatViewController: SLKTextViewController, Alerter {
 
     var dataController = ChatDataController()
 
-    var searchResult: [String: Any] = [:]
+    var searchResult: [(String, Any)] = []
 
     var closeSidebarAfterSubscriptionUpdate = false
 
@@ -69,6 +69,7 @@ final class ChatViewController: SLKTextViewController, Alerter {
     var messagesToken: NotificationToken!
     var messagesQuery: Results<Message>!
     var messages: [Message] = []
+
     var subscription: Subscription? {
         didSet {
             subscriptionToken?.invalidate()
