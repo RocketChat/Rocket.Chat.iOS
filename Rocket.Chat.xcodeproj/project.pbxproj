@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */; };
+		14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */; };
+		14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */; };
 		1435BFA31F9B601600FB2768 /* HighlightTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BFA21F9B601600FB2768 /* HighlightTextView.swift */; };
 		15A2FD223558011BFDE03883 /* Pods_Rocket_ChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */; };
 		4101BF011F8D0A1700F67E89 /* AppManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4101BF001F8D0A1700F67E89 /* AppManager.swift */; };
@@ -317,8 +320,11 @@
 
 /* Begin PBXFileReference section */
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCellSpec.swift; sourceTree = "<group>"; };
 		1435BFA21F9B601600FB2768 /* HighlightTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightTextView.swift; sourceTree = "<group>"; };
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCell.swift; sourceTree = "<group>"; };
+		14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MentionsTextFieldTableViewCell.xib; sourceTree = "<group>"; };
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		4101BF001F8D0A1700F67E89 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppManager.swift; path = Managers/AppManager.swift; sourceTree = "<group>"; };
 		4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppManagerSpec.swift; path = Managers/AppManagerSpec.swift; sourceTree = "<group>"; };
@@ -663,6 +669,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		140C84EA1FC9DB9600032A59 /* CreateChannel */ = {
+			isa = PBXGroup;
+			children = (
+				140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */,
+			);
+			name = CreateChannel;
+			sourceTree = "<group>";
+		};
 		4102E3AB1E53272C004BAA82 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -827,6 +841,7 @@
 		4171ABA31E7C0556009FC3F0 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				140C84EA1FC9DB9600032A59 /* CreateChannel */,
 				418C743F1FA3626200499577 /* UIPickerView */,
 				D3CFAFBE1E907FC100BADC0A /* Chat */,
 				4171ABA41E7C056E009FC3F0 /* AvatarViewSpec.swift */,
@@ -1448,6 +1463,8 @@
 				897083CF1F8CF08100233561 /* CheckTableViewCell.xib */,
 				897083D01F8CF08100233561 /* TextFieldTableViewCell.swift */,
 				897083D11F8CF08100233561 /* TextFieldTableViewCell.xib */,
+				14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */,
+				14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -1731,6 +1748,8 @@
 				41EB22361E5F056600AA3AE7 /* Localizable.strings in Resources */,
 				41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */,
 				41F167EB1DAC4D5500775CCA /* ChatTitleView.xib in Resources */,
+				41FF36071DBEC0BA0074E20A /* ChatMessageVideoView.xib in Resources */,
+				14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */,
 				800FCD511F728EC800D9A692 /* MemberCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1888,11 +1907,13 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SearchTextField/SearchTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework",
 				"${BUILT_PRODUCTS_DIR}/semver/semver.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -1909,11 +1930,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SearchTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TagListView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/semver.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1985,11 +2008,13 @@
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SearchTextField/SearchTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
+				"${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework",
 				"${BUILT_PRODUCTS_DIR}/semver/semver.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2006,11 +2031,13 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SearchTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TagListView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/semver.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2089,6 +2116,7 @@
 				41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */,
 				806401311FB09DE800990572 /* Permission.swift in Sources */,
 				4159720C1D3DB854002258F4 /* Email.swift in Sources */,
+				14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */,
 				8013F8861FD6B76600EE1A4E /* CommandsRequest.swift in Sources */,
 				412719461E6B403700461FEE /* RegisterUsernameViewController.swift in Sources */,
 				806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */,
@@ -2290,6 +2318,7 @@
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
 				8013F8811FD6B6C600EE1A4E /* CommandsClientSpec.swift in Sources */,
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
+				140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */,
 				8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */,
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,
 				89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */,
