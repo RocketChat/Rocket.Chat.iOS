@@ -338,14 +338,13 @@ final class ChatViewController: SLKTextViewController, Alerter {
         let replyString = self.replyString
         stopReplying()
 
-
         let text = "\(messageText)\(replyString)"
 
         if let (command, params) = text.commandAndParams() {
             sendCommand(command: command, params: params)
             return
         }
-        
+
         if editedMessage != nil {
             editTextMessage(text: text)
         } else {
@@ -353,7 +352,6 @@ final class ChatViewController: SLKTextViewController, Alerter {
         }
 
         stopEditing()
-        
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -413,7 +411,7 @@ final class ChatViewController: SLKTextViewController, Alerter {
         })
 
         if let message = message {
-            SubscriptionManager.sendTextMessage(message) { response in
+            SubscriptionManager.sendEditTextMessage(message) { response in
                 Realm.executeOnMainThread({ (realm) in
                     message.temporary = false
                     message.map(response.result["result"], realm: realm)
@@ -424,7 +422,7 @@ final class ChatViewController: SLKTextViewController, Alerter {
             }
         }
     }
-    
+
     fileprivate func editTextMessage(text: String) {
         guard
             let editedMessage = editedMessage,
@@ -440,8 +438,8 @@ final class ChatViewController: SLKTextViewController, Alerter {
         })
 
         MessageTextCacheManager.shared.update(for: editedMessage, completion: nil)
-        
-        SubscriptionManager.editTextMessage(editedMessage) { (_) in
+
+        SubscriptionManager.sendEditTextMessage(editedMessage, isEdit: true) { (_) in
             Realm.executeOnMainThread({ (_) in
                 MessageTextCacheManager.shared.update(for: editedMessage, completion: nil)
                 self.editedMessage = nil

@@ -38,7 +38,7 @@ extension ChatViewController {
                 })
             }
         }))
-        
+
         if let clientUserId = API.current()?.userId, let messageUserId = message.user?.identifier, clientUserId == messageUserId {
             alert.addAction(UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
                 self.edit(message: message)
