@@ -50,7 +50,7 @@ final class SubscriptionsViewController: BaseViewController {
     }
 
     weak var viewUserMenu: SubscriptionUserStatusView?
-    @IBOutlet weak var viewUser: UIView! {
+    @IBOutlet weak var viewUser: SubscriptionUserView! {
         didSet {
             let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
             viewUser.addGestureRecognizer(gesture)
@@ -423,6 +423,14 @@ extension SubscriptionsViewController {
 }
 
 extension SubscriptionsViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return groupInfomation?.count ?? 0

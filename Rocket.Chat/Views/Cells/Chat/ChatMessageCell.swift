@@ -22,7 +22,11 @@ final class ChatMessageCell: UICollectionViewCell {
     weak var longPressGesture: UILongPressGestureRecognizer?
     weak var usernameTapGesture: UITapGestureRecognizer?
     weak var avatarTapGesture: UITapGestureRecognizer?
-    weak var delegate: ChatMessageCellProtocol?
+    weak var delegate: ChatMessageCellProtocol? {
+        didSet {
+            labelText.delegate = delegate
+        }
+    }
     var message: Message! {
         didSet {
             updateMessage()
@@ -48,12 +52,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
-    @IBOutlet weak var labelText: UITextView! {
-        didSet {
-            labelText.textContainerInset = .zero
-            labelText.delegate = self
-        }
-    }
+    @IBOutlet weak var labelText: HighlightTextView!
 
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
@@ -61,7 +60,7 @@ final class ChatMessageCell: UICollectionViewCell {
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
-        let height = attributedString?.heightForView(withWidth: fullWidth - 62)
+        let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
         var total = (height ?? 0) + (sequential ? 8 : 29)
 
@@ -108,7 +107,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         labelUsername.text = ""
-        labelText.text = ""
+        labelText.message = nil
         labelDate.text = ""
         sequential = false
 
@@ -239,7 +238,7 @@ final class ChatMessageCell: UICollectionViewCell {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
             }
 
-            labelText.attributedText = text
+            labelText.message = text
         }
     }
 
@@ -272,16 +271,4 @@ extension ChatMessageCell: UIGestureRecognizerDelegate {
         return false
     }
 
-}
-
-extension ChatMessageCell: UITextViewDelegate {
-
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        if URL.scheme == "http" || URL.scheme == "https" {
-            delegate?.openURL(url: URL)
-            return false
-        }
-
-        return true
-    }
 }
