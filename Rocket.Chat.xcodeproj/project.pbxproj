@@ -190,6 +190,8 @@
 		77C2612E1F97453600724A1F /* TextFieldSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C2612B1F97453600724A1F /* TextFieldSpec.swift */; };
 		77CCB6BE1F8D0597004BBF67 /* DictionaryExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */; };
 		7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */; };
+		80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CF01FD9505A00F5ECF9 /* SendMessageRequest.swift */; };
+		80054CF31FD951B100F5ECF9 /* MessagesClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CF21FD951B100F5ECF9 /* MessagesClient.swift */; };
 		800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E22831F8500A200DA84F1 /* MessagesListViewController.swift */; };
 		800E22861F8507E400DA84F1 /* SubscriptionMessagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */; };
 		800FCD3E1F72893E00D9A692 /* MembersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */; };
@@ -512,6 +514,8 @@
 		77C2612A1F97453600724A1F /* SelectFieldSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectFieldSpec.swift; sourceTree = "<group>"; };
 		77C2612B1F97453600724A1F /* TextFieldSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextFieldSpec.swift; sourceTree = "<group>"; };
 		77CCB6BD1F8D0597004BBF67 /* DictionaryExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictionaryExtensions.swift; sourceTree = "<group>"; };
+		80054CF01FD9505A00F5ECF9 /* SendMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageRequest.swift; sourceTree = "<group>"; };
+		80054CF21FD951B100F5ECF9 /* MessagesClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesClient.swift; sourceTree = "<group>"; };
 		800E22831F8500A200DA84F1 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessagesListViewController.swift; path = Controllers/Chat/MessagesListViewController.swift; sourceTree = "<group>"; };
 		800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMessagesRequest.swift; sourceTree = "<group>"; };
 		800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MembersListViewController.swift; path = Controllers/Chat/MembersListViewController.swift; sourceTree = "<group>"; };
@@ -1307,6 +1311,7 @@
 		8013F86E1FD6B59D00EE1A4E /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				80054CF21FD951B100F5ECF9 /* MessagesClient.swift */,
 				8013F8701FD6B5B000EE1A4E /* CommandsClient.swift */,
 				8013F86F1FD6B5B000EE1A4E /* InfoClient.swift */,
 			);
@@ -1407,6 +1412,7 @@
 			isa = PBXGroup;
 			children = (
 				806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */,
+				80054CF01FD9505A00F5ECF9 /* SendMessageRequest.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -2107,6 +2113,7 @@
 				80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */,
 				41BD37E11E290F2900CBC4C2 /* UserModelMapping.swift in Sources */,
 				412BCC871E55C6B800F7F4EE /* ChatMessageTextView.swift in Sources */,
+				80054CF31FD951B100F5ECF9 /* MessagesClient.swift in Sources */,
 				8013F86D1FD6B59A00EE1A4E /* APIClient.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
@@ -2189,6 +2196,7 @@
 				D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
+				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
 				597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */,
