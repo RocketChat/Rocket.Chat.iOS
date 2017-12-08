@@ -22,7 +22,7 @@ extension User {
     }
 }
 
-class UserSpec: XCTestCase {
+class UserSpec: XCTestCase, RealmTestCase {
 
     func testUserObject() {
         let object = User()
@@ -148,6 +148,31 @@ class UserSpec: XCTestCase {
     func testDefaultStatus() {
         let user = User.testInstance()
         XCTAssertEqual(user.status, .offline, "default status is offline")
+    }
+
+    func testUserCanViewAdminPanelFalse() {
+        let user = User.testInstance()
+        XCTAssertFalse(user.canViewAdminPanel(), "user cannot view admin panel by default")
+    }
+
+    func testUserCanViewAdminPanelTrue() throws {
+        let user = User.testInstance()
+        user.roles.removeAll()
+        user.roles.append("admin")
+
+        let permissionType = PermissionType.viewRoomAdministration
+
+        let permission = Permission()
+        permission.identifier = permissionType.rawValue
+        permission.roles.append("admin")
+
+        let realm = testRealm()
+        try realm.write {
+            realm.add(user)
+            realm.add(permission)
+        }
+
+        XCTAssertTrue(user.canViewAdminPanel(realm: realm), "user cannot view admin panel by default")
     }
 
     func testMap() {
