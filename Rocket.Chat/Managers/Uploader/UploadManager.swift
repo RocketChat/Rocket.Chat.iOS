@@ -76,6 +76,20 @@ class UploadManager {
 
     // swiftlint:disable function_body_length
     func uploadToUFSFile(store: String, file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
+
+        if let api = API.current() {
+            let req = UploadRequest(roomId: subscription.rid, data: file.data, filename: file.name,
+                                    mimetype: file.type, msg: "asdf", description: "asdf")
+
+            api.fetch(req, succeeded: { result in
+                print(result.raw?.description as Any)
+            }, errored: { error in
+                print(error)
+            })
+        }
+
+        return // Only while i figure out what's wrong. Will add the version fallback here later.
+
         // Normalize the store name, cause setting is not the same value
         // In the future, we do plan to change it and return the correct value
         let normalizedStore = store == "FileSystem" ? "fileSystem" : "rocketchat_uploads"
