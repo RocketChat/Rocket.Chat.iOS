@@ -19,3 +19,6 @@
 "subscriptions.main.userview.label" = "Session information";
 "subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
 "subscriptions.main.userview.hint" = "Double tap to change status.";
+
+// MARK: Message
+"message.label" = "Message from %@ at %@.";

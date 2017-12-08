@@ -27,6 +27,11 @@ final class SettingsViewModel {
         return localized("myaccount.settings.license")
     }
 
+    internal var canViewAdminPanel: Bool {
+        guard let user = AuthManager.currentUser(), !user.isInvalidated else { return false }
+        return user.canViewAdminPanel()
+    }
+
     internal var formattedVersion: String {
         return String(format: localized("myaccount.settings.version"), version, build)
     }
