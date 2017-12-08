@@ -45,7 +45,7 @@ class UploadRequest: APIRequest {
         let boundary = "\r\n-----------------------\(self.boundary)\r\n".data(using: .utf8) ?? Data()
 
         data.append(boundary)
-        data.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n\r\n".data(using: .utf8) ?? Data())
+        data.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8) ?? Data())
         data.append("Content-Type: \(mimetype)\r\n\r\n".data(using: .utf8) ?? Data())
         data.append(self.data)
 
