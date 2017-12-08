@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import MobileCoreServices
+import AVFoundation
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -194,6 +195,48 @@ extension ChatViewController: UIDocumentPickerDelegate {
         }
     }
 
+}
+
+// MARK: AVAudioRecorderDelegate
+
+extension ChatViewController: AVAudioRecorderDelegate {
+
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        if error != nil {
+            let alert = UIAlertController(title: localized("alert.audio_message.error.title"), message: localized("alert.audio_message.error.message"), preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+    }
+
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        if flag {
+            let start = startTime ?? NSDate()
+
+            let seconds = Int(abs(start.timeIntervalSinceNow))
+
+            let alert = UIAlertController(
+                title: localized("alert.audio_message.success.title"),
+                message: String(format: localized("alert.audio_message.success.message"),
+                                String(format: "%.2d:%.2d", seconds / 60, seconds % 60)),
+                preferredStyle: .alert
+            )
+
+            alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+            alert.addAction(UIAlertAction(title: localized("alert.audio_message.success.send"), style: .default, handler: { _ in
+
+                var file: FileUpload?
+                let assetURL = recorder.url
+
+                file = UploadHelper.file(for: assetURL)
+
+                if let file = file {
+                    self.upload(file)
+                }
+            }))
+            present(alert, animated: true, completion: nil)
+        }
+    }
 }
 
 // MARK: Uploading a FileUpload
