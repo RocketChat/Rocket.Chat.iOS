@@ -11,9 +11,10 @@ import SwiftyJSON
 typealias SendMessageResult = APIResult<SendMessageRequest>
 
 class SendMessageRequest: APIRequest {
+    let requiredVersion = Version(0, 60, 0)
+
     let method = "POST"
     let path = "/api/v1/chat.sendMessage"
-    let requiredVersion = Version(0, 60, 0)
 
     let id: String
     let roomId: String
