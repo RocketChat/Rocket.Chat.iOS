@@ -45,7 +45,7 @@ struct MessagesClient: APIClient {
             switch error {
             case .version:
                 // TODO: Remove SendMessage Fallback + old methods after Rocket.Chat 1.0
-                SubscriptionManager.sendTextMessage(message, completion: { response in
+                SubscriptionManager.sendEditTextMessage(message, completion: { response in
                     updateMessage(json: response.result["result"])
                 })
             default:
