@@ -33,7 +33,13 @@ struct ChatData {
 
 final class ChatDataController {
 
-    var data: [ChatData] = []
+    var messagesUsernames: Set<String> = []
+    var data: [ChatData] = [] {
+        didSet {
+            messagesUsernames.removeAll()
+            messagesUsernames.formUnion(data.flatMap { $0.message?.user?.username })
+        }
+    }
     var loadedAllMessages = false
 
     func clear() -> [IndexPath] {
