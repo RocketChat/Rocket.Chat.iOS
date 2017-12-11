@@ -51,11 +51,11 @@ class UploadRequest: APIRequest {
         data.appendString("Content-Disposition: form-data; name=\"msg\"\r\n\r\n")
         data.appendString(msg)
 
-        data.appendString(boundaryPrefix)
+        data.appendString("\r\n".appending(boundaryPrefix))
         data.appendString("Content-Disposition: form-data; name=\"description\"\r\n\r\n")
         data.appendString(description)
 
-        data.appendString(boundaryPrefix)
+        data.appendString("\r\n".appending(boundaryPrefix))
         data.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
         data.appendString("Content-Type: application/octet-stream\r\n\r\n")
         data.append(self.data)
