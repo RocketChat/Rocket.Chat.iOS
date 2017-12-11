@@ -67,6 +67,10 @@ final class AuthViewController: BaseViewController {
            buttonRegister.isHidden = registrationForm != .isPublic
         }
 
+        if !AppManager.supportsMultiServer {
+            self.navigationItem.hidesBackButton = true
+        }
+
         self.updateAuthenticationMethods()
 
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
