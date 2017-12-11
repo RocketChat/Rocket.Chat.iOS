@@ -46,7 +46,19 @@ class NewRoomViewController: BaseViewController {
                 FormCell(
                     cell: .textField(placeholder: localized("new_room.cell.channel_name.title"), icon: #imageLiteral(resourceName: "Hashtag")),
                     key: "room name",
-                    defaultValue: "",
+                    defaultValue: [],
+                    enabled: true
+                )
+            ]
+        ),
+        SectionForm(
+            name: localized("new_room.group.invite_users"),
+            footer: nil,
+            cells: [
+                FormCell(
+                    cell: .mentionsTextField(placeholder: localized("new_room.cell.invite_users.placeholder"), icon: #imageLiteral(resourceName: "Mention")),
+                    key: "users list",
+                    defaultValue: [],
                     enabled: true
                 )
             ]
@@ -85,6 +97,9 @@ class NewRoomViewController: BaseViewController {
     override func viewDidLoad() {
         CheckTableViewCell.registerCell(for: tableView)
         TextFieldTableViewCell.registerCell(for: tableView)
+        MentionsTextFieldTableViewCell.registerCell(for: tableView)
+
+        tableView.keyboardDismissMode = .interactive
 
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillChangeFrame(_:)), name: .UIKeyboardWillHide, object: nil)
@@ -120,9 +135,14 @@ class NewRoomViewController: BaseViewController {
     }
 
     @IBAction func buttonCreateDidPressed(_ sender: UIButton) {
-        guard let roomName = setValues["room name"] as? String else { return }
-        guard let publicRoom = setValues["public room"] as? Bool else { return }
-        guard let readOnlyRoom = setValues["read only room"] as? Bool else { return }
+        guard
+            let roomName = setValues["room name"] as? String,
+            let publicRoom = setValues["public room"] as? Bool,
+            let membersRoom = setValues["users list"] as? [String],
+            let readOnlyRoom = setValues["read only room"] as? Bool
+        else {
+            return
+        }
 
         let roomType: SubscriptionCreateType
         if publicRoom {
@@ -132,7 +152,7 @@ class NewRoomViewController: BaseViewController {
         }
 
         sender.isEnabled = false
-        executeRequestCreateRoom(roomName: roomName, roomType: roomType, readOnlyRoom: readOnlyRoom) { [weak self] success, errorMessage in
+        executeRequestCreateRoom(roomName: roomName, roomType: roomType, members: membersRoom, readOnlyRoom: readOnlyRoom) { [weak self] success, errorMessage in
 
             if success {
                 self?.dismiss(animated: true, completion: nil)
@@ -143,9 +163,8 @@ class NewRoomViewController: BaseViewController {
         }
     }
 
-    fileprivate func executeRequestCreateRoom(roomName: String, roomType: SubscriptionCreateType, readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
+    fileprivate func executeRequestCreateRoom(roomName: String, roomType: SubscriptionCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
         API.current()?.fetch(SubscriptionCreateRequest(name: roomName, type: roomType, readOnly: readOnlyRoom), succeeded: { result in
-
             guard let success = result.success, success == true else {
                     completion(false, result.error)
                     return
@@ -193,6 +212,24 @@ extension NewRoomViewController: FormTableViewDelegate {
     func getPreviousValue(key: String) -> Any? {
         return setValues[key]
     }
+
+    func updateTable(key: String) {
+        tableView.beginUpdates()
+        tableView.endUpdates()
+
+        var section = 0
+        for sectionForm in tableViewData {
+            var row = 0
+            for cell in sectionForm.cells {
+                if cell.key == key {
+                    tableView.scrollToRow(at: IndexPath(row: row, section: section), at: .none, animated: true)
+                    return
+                }
+                row += 1
+            }
+            section += 1
+        }
+    }
 }
 
 // MARK: UITableViewDelegate
@@ -213,7 +250,14 @@ extension NewRoomViewController: UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return CGFloat(tableViewData[indexPath.section].cells[indexPath.row].cell.getClass().defaultHeight)
+        let height = CGFloat(tableViewData[indexPath.section].cells[indexPath.row].cell.getClass().defaultHeight)
+
+        if height < 0,
+            let cell = tableView.cellForRow(at: indexPath) as? MentionsTextFieldTableViewCell {
+            return cell.height()
+        }
+
+        return height
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
