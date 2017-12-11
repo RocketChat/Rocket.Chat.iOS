@@ -12,7 +12,7 @@ import AVFoundation
 class AudioMessageRecorder: NSObject, AVAudioRecorderDelegate {
 
     private var recorder: AVAudioRecorder?
-    private var recorderDelegate: AVAudioRecorderDelegate? = nil
+    private weak var recorderDelegate: AVAudioRecorderDelegate?
 
     // MARK: Audio Session Helpers
 
