@@ -36,7 +36,7 @@ def shared_pods
   # Authentication SDKs
   pod 'OAuthSwift'
   pod '1PasswordExtension'
-  pod 'Google/SignIn'
+  pod 'GoogleSignIn'
 end
 
 target 'Rocket.Chat' do
