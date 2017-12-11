@@ -17,7 +17,11 @@ class UploadRequest: APIRequest {
     var path: String {
         return "/api/v1/rooms.upload/\(roomId)"
     }
+
     let contentType: String
+    var contentLength: String? {
+        return "\(self.body()?.count ?? 0)"
+    }
 
     let roomId: String
     let data: Data
@@ -26,7 +30,7 @@ class UploadRequest: APIRequest {
     let msg: String
     let description: String
 
-    let boundary = String.random(16)
+    let boundary = "Boundary-\(String.random())"
 
     init(roomId: String, data: Data, filename: String, mimetype: String, msg: String, description: String) {
         self.roomId = roomId
@@ -36,28 +40,26 @@ class UploadRequest: APIRequest {
         self.msg = msg
         self.description = description
 
-        self.contentType = "multipart/form-data; boundary=-----------------------\(boundary)"
+        self.contentType = "multipart/form-data; boundary=\(boundary)"
     }
 
     func body() -> Data? {
         var data = Data()
+        let boundaryPrefix = "--\(boundary)\r\n"
 
-        let boundary = "\r\n-----------------------\(self.boundary)\r\n".data(using: .utf8) ?? Data()
+        data.appendString(boundaryPrefix)
+        data.appendString("Content-Disposition: form-data; name=\"msg\"\r\n\r\n")
+        data.appendString(msg)
 
-        data.append(boundary)
-        data.append("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n".data(using: .utf8) ?? Data())
-        data.append("Content-Type: \(mimetype)\r\n\r\n".data(using: .utf8) ?? Data())
+        data.appendString(boundaryPrefix)
+        data.appendString("Content-Disposition: form-data; name=\"description\"\r\n\r\n")
+        data.appendString(description)
+
+        data.appendString(boundaryPrefix)
+        data.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
+        data.appendString("Content-Type: application/octet-stream\r\n\r\n")
         data.append(self.data)
-
-        data.append(boundary)
-        data.append("Content-Disposition: form-data; name=\"msg\"\r\n\r\n".data(using: .utf8) ?? Data())
-        data.append(msg.data(using: .utf8) ?? Data())
-
-        data.append(boundary)
-        data.append("Content-Disposition: form-data; name=\"description\"\r\n\r\n".data(using: .utf8) ?? Data())
-        data.append(description.data(using: .utf8) ?? Data())
-
-        data.append("\r\n-----------------------\(self.boundary)--\r\n".data(using: .utf8) ?? Data())
+        data.appendString("\r\n--".appending(boundary.appending("--")))
 
         return data
     }

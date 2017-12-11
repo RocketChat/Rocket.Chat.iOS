@@ -48,6 +48,10 @@ extension APIRequest {
         return "application/json"
 	}
 
+    var contentLength: String? {
+        return nil
+    }
+
     var query: String? {
         return nil
     }
@@ -71,9 +75,13 @@ extension APIRequest {
 
         var request = URLRequest(url: url)
         request.httpMethod = method
-        request.httpBody = self.body()
+        request.httpBody = body()
 
         request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+
+        if let contentLength = contentLength {
+            request.addValue(contentLength, forHTTPHeaderField: "Content-Length")
+        }
 
         if let token = api.authToken {
             request.addValue(token, forHTTPHeaderField: "X-Auth-Token")
