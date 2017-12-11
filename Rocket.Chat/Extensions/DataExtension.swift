@@ -34,4 +34,12 @@ extension Data {
             return nil
         }
     }
+
+    mutating func appendString(_ string: String) {
+        if let data = string.data(using: .utf8, allowLossyConversion: false) {
+            append(data)
+        } else {
+            assertionFailure("data is invalid")
+        }
+    }
 }
