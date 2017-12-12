@@ -18,6 +18,7 @@ protocol ModelMappeable {
 }
 
 extension ModelMappeable where Self: BaseModel {
+
     static func getOrCreate(realm: Realm, values: JSON, updates: UpdateBlock<Self>?) -> Self {
         var object: Self!
 
@@ -35,4 +36,5 @@ extension ModelMappeable where Self: BaseModel {
         updates?(object)
         return object
     }
+
 }
