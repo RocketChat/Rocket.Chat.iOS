@@ -43,9 +43,9 @@ final class ChatMessageTextViewModel {
         self.attachment = attachment
     }
 
-    func toggleCollpase() {
-        Realm.executeOnMainThread({ _ in
+    func toggleCollpase(_ completion: VoidCompletion? = nil) {
+        Realm.execute({ _ in
             self.attachment.collapsed = !self.attachment.collapsed
-        })
+        }, completion: completion)
     }
 }
