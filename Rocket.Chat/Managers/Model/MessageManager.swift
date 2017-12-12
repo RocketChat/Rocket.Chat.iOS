@@ -62,7 +62,7 @@ extension MessageManager {
                             return
                         }
                     }
-                    
+
                     let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
                         object?.subscription = detachedSubscription
                     })
