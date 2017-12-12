@@ -77,9 +77,10 @@ struct DatabaseManager {
         parameter index: The database index user wants to delete.
      */
     static func removeDatabase(at index: Int) {
-        var servers = self.servers
-        servers?.remove(at: index)
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        if var servers = self.servers, servers.count > index {
+            servers.remove(at: index)
+            UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        }
     }
 
     /**
