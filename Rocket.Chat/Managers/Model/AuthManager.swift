@@ -374,11 +374,11 @@ extension AuthManager {
             DraftMessageManager.clearServerDraftMessages()
             DatabaseManager.removeSelectedDatabase()
 
+            completion()
+
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
             })
-
-            completion()
         }
     }
 

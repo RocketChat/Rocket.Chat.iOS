@@ -43,6 +43,9 @@
 "alert.unsupported_feature.title" = "Feature not supported";
 "alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above.";
 
+"alert.push_token_error.title" = "Warning";
+"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0.";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
