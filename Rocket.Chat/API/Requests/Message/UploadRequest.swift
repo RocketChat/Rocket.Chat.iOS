@@ -19,9 +19,6 @@ class UploadRequest: APIRequest {
     }
 
     let contentType: String
-    var contentLength: String? {
-        return "\(self.body()?.count ?? 0)"
-    }
 
     let roomId: String
     let data: Data
