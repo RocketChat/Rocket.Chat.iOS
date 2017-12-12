@@ -169,7 +169,7 @@ struct DatabaseManager {
             let server = AuthManager.selectedServerInformation(index: index),
             let databaseName = server[ServerPersistKeys.databaseName]
         else {
-                return nil
+            return nil
         }
 
         let configuration = Realm.Configuration(
