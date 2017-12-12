@@ -32,4 +32,3 @@ extension APIResult where T == PushTokenDeleteRequest {
         return raw?["success"].boolValue
     }
 }
-
