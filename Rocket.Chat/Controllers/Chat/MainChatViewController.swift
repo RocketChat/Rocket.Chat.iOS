@@ -87,7 +87,7 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     // MARK: Authentication & Server management
 
     func logout() {
-        let api = API.current()
+        API.current()?.client(PushClient.self).deletePushToken()
 
         ChatViewController.shared?.messagesToken?.invalidate()
         ChatViewController.shared?.subscriptionToken?.invalidate()
@@ -95,7 +95,6 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         SubscriptionsViewController.shared?.subscriptionsToken?.invalidate()
 
         AuthManager.logout {
-            api?.client(PushClient.self).deletePushToken()
             AppManager.changeSelectedServer(index: 0)
         }
     }
