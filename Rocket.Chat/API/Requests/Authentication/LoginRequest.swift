@@ -12,7 +12,7 @@ import SwiftyJSON
 typealias LoginResult = APIResult<LoginRequest>
 
 class LoginRequest: APIRequest {
-    let method: String = "POST"
+    let method: HTTPMethod = .post
     let path = "/api/v1/login"
 
     let username: String

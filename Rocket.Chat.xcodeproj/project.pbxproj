@@ -233,6 +233,7 @@
 		8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F88D1FD6B83C00EE1A4E /* CommandModelMapping.swift */; };
 		8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */; };
 		801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */; };
+		80213C0E1FE0639E00809E14 /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80213C0D1FE0639E00809E14 /* HTTPMethod.swift */; };
 		80235D1B1F74070100A56CA5 /* SubscriptionMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */; };
 		80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */; };
 		80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */; };
@@ -568,6 +569,7 @@
 		8013F88D1FD6B83C00EE1A4E /* CommandModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandModelMapping.swift; sourceTree = "<group>"; };
 		8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PushManagerSpec.swift; path = Managers/PushManagerSpec.swift; sourceTree = "<group>"; };
 		801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUserView.swift; sourceTree = "<group>"; };
+		80213C0D1FE0639E00809E14 /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequest.swift; sourceTree = "<group>"; };
 		80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequestSpec.swift; sourceTree = "<group>"; };
 		80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -1418,6 +1420,14 @@
 			path = Command;
 			sourceTree = "<group>";
 		};
+		80213C0F1FE063B200809E14 /* HTTP */ = {
+			isa = PBXGroup;
+			children = (
+				80213C0D1FE0639E00809E14 /* HTTPMethod.swift */,
+			);
+			path = HTTP;
+			sourceTree = "<group>";
+		};
 		80235D1C1F740AAC00A56CA5 /* Subscription */ = {
 			isa = PBXGroup;
 			children = (
@@ -1559,6 +1569,7 @@
 		D1D535EA1F7081E6006625D2 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				80213C0F1FE063B200809E14 /* HTTP */,
 				8013F8741FD6B5D100EE1A4E /* Middlewares */,
 				8013F86E1FD6B59D00EE1A4E /* Clients */,
 				D1D535EF1F70863C006625D2 /* Requests */,
@@ -2185,6 +2196,7 @@
 				4174CB171D2D9BB70086DAC8 /* AuthViewController.swift in Sources */,
 				418688111E53CC86002F785C /* ChatControllerMessageActions.swift in Sources */,
 				411498E31FC7A99C00D66542 /* ChatTitleViewModel.swift in Sources */,
+				80213C0E1FE0639E00809E14 /* HTTPMethod.swift in Sources */,
 				41F3C1001DB577ED000E0C76 /* MessageURL.swift in Sources */,
 				4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */,
 				41DC7A1D1D38471700896FC0 /* MessageManager.swift in Sources */,

@@ -12,7 +12,7 @@ import SwiftyJSON
 typealias PostMessageResult = APIResult<PostMessageRequest>
 
 class PostMessageRequest: APIRequest {
-    let method = "POST"
+    let method: HTTPMethod = .post
     let path = "/api/v1/chat.postMessage"
 
     let roomId: String

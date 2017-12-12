@@ -13,7 +13,7 @@ typealias PushTokenDeleteResult = APIResult<PushTokenDeleteRequest>
 class PushTokenDeleteRequest: APIRequest {
     let requiredVersion = Version(0, 60, 0)
 
-    let method = "DELETE"
+    let method: HTTPMethod = .delete
     let path = "/api/v1/push.token"
 
     let token: String
