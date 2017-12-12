@@ -32,7 +32,7 @@ class UploadRequest: APIRequest {
 
     let boundary = "Boundary-\(String.random())"
 
-    init(roomId: String, data: Data, filename: String, mimetype: String, msg: String, description: String) {
+    init(roomId: String, data: Data, filename: String, mimetype: String, msg: String = "", description: String = "") {
         self.roomId = roomId
         self.data = data
         self.filename = filename
