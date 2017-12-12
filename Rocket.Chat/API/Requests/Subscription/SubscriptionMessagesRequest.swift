@@ -1,5 +1,5 @@
 //
-//  SubscriptionMembersRequest.swift
+//  SubscriptionMessagesRequest.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 9/21/17.
