@@ -15,6 +15,7 @@ struct MessagesClient: APIClient {
     func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.shared) {
         let message = Message()
         message.internalType = ""
+        message.updatedAt = Date.serverDate
         message.createdAt = Date.serverDate
         message.text = text
         message.subscription = subscription
