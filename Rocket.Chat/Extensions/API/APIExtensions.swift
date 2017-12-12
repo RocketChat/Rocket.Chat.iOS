@@ -23,4 +23,10 @@ extension API {
 
         return api
     }
+
+    static func server(index: Int) -> API? {
+        let realm = DatabaseManager.databaseInstace(index: index)
+        let auth = AuthManager.isAuthenticated(realm: realm)
+        return current(auth: auth)
+    }
 }

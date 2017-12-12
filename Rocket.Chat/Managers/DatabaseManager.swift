@@ -146,7 +146,7 @@ struct DatabaseManager {
      */
     static func changeDatabaseInstance(index: Int? = nil) {
         guard
-            let server = AuthManager.selectedServerInformation(),
+            let server = AuthManager.selectedServerInformation(index: index),
             let databaseName = server[ServerPersistKeys.databaseName]
         else {
             return
@@ -160,6 +160,24 @@ struct DatabaseManager {
         realmConfiguration = configuration
     }
 
+    /**
+     This method gets the realm associated with this server
+    */
+    static func databaseInstace(index: Int) -> Realm? {
+        guard
+            let server = AuthManager.selectedServerInformation(index: index),
+            let databaseName = server[ServerPersistKeys.databaseName]
+        else {
+                return nil
+        }
+
+        let configuration = Realm.Configuration(
+            fileURL: URL(fileURLWithPath: RLMRealmPathForFile(databaseName), isDirectory: false),
+            deleteRealmIfMigrationNeeded: true
+        )
+
+        return try? Realm(configuration: configuration)
+    }
 }
 
 extension DatabaseManager {
