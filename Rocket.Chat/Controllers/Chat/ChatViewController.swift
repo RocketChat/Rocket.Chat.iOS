@@ -535,32 +535,25 @@ final class ChatViewController: SLKTextViewController, Alerter {
                 })
             }
 
-            if modifications.count == 0 {
-                return
-            }
-
             if modifications.count > 0 {
-                DispatchQueue.main.async {
-                    let isAtBottom = self.chatLogIsAtBottom()
+                let isAtBottom = self.chatLogIsAtBottom()
 
+                var indexPathModifications: [Int] = []
+
+                for modified in modifications {
+                    guard modified < self.messagesQuery.count else { continue }
+
+                    let message = Message(value: self.messagesQuery[modified])
+                    let index = self.dataController.update(message)
+
+                    if index >= 0 && !indexPathModifications.contains(index) {
+                        indexPathModifications.append(index)
+                    }
+                }
+
+                if indexPathModifications.count > 0 {
                     UIView.performWithoutAnimation {
                         self.collectionView?.performBatchUpdates({
-                            var indexPathModifications: [Int] = []
-
-                            for modified in modifications {
-                                guard modified < self.messagesQuery.count else { continue }
-
-                                let message = Message(value: self.messagesQuery[modified])
-                                let identifier = message.identifier
-                                let index = self.dataController.update(message, completion: { [weak self] in
-                                    guard let identifier = identifier else { return }
-                                    self?.updateCellForMessage(identifier: identifier)
-                                })
-                                if index >= 0 && !indexPathModifications.contains(index) {
-                                    indexPathModifications.append(index)
-                                }
-                            }
-
                             self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
                         }, completion: { _ in
                             if isAtBottom {
