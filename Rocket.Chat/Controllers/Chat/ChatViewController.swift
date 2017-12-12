@@ -854,7 +854,7 @@ final class ChatViewController: SLKTextViewController, Alerter {
         AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
 
         startTime = NSDate()
-
+        textView.resignFirstResponder()
         recorderManager?.record()
     }
 
