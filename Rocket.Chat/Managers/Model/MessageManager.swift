@@ -54,6 +54,15 @@ extension MessageManager {
                 guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
 
                 list?.forEach { object in
+                    let mockNewMessage = Message()
+                    mockNewMessage.map(object, realm: realm)
+
+                    if let existingMessage = realm.object(ofType: Message.self, forPrimaryKey: object["identifier"].stringValue) {
+                        if existingMessage.updatedAt?.timeIntervalSince1970 == mockNewMessage.updatedAt?.timeIntervalSince1970 {
+                            return
+                        }
+                    }
+                    
                     let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
                         object?.subscription = detachedSubscription
                     })
