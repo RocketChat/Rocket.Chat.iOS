@@ -59,7 +59,7 @@ final class PushManager {
         return pushId
     }
 
-    fileprivate static func getDeviceToken() -> String? {
+    static func getDeviceToken() -> String? {
         guard let deviceToken = UserDefaults.standard.string(forKey: kDeviceTokenKey) else {
             return nil
         }

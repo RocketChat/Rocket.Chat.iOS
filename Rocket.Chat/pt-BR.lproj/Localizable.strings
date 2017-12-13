@@ -50,6 +50,9 @@
 "alert.unsupported_feature.title" = "Funcionalidade não disponível";
 "alert.unsupported_feature.message" = "A versão deste servidor é: %@. Esta funcionalidade é disponível apenas nas versões a partir de %@.";
 
+"alert.push_token_error.title" = "Aviso";
+"alert.push_token_error.message" = "Você ainda pode receber notificações deste servidor por causa de um problema com servidores de versão menor que 0.60.0.";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";
 "connection.server.redirect.alert.message" = "Parece que este servidor mudou a URL para:\n\n%@\n\Gostaria de atualizar a URL?";
