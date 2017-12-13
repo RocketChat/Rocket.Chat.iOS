@@ -146,7 +146,7 @@ struct DatabaseManager {
      */
     static func changeDatabaseInstance(index: Int? = nil) {
         guard
-            let server = AuthManager.selectedServerInformation(),
+            let server = AuthManager.selectedServerInformation(index: index),
             let databaseName = server[ServerPersistKeys.databaseName]
         else {
             return
