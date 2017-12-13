@@ -202,40 +202,41 @@ extension ChatViewController: UIDocumentPickerDelegate {
 extension ChatViewController: AVAudioRecorderDelegate {
 
     func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
-        if error != nil {
-            let alert = UIAlertController(title: localized("alert.audio_message.error.title"), message: localized("alert.audio_message.error.message"), preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
+        guard error != nil else { return }
+
+        alert(
+            title: localized("alert.audio_message.error.title"),
+            message: localized("alert.audio_message.error.message")
+        )
     }
 
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        if flag {
-            let start = startTime ?? NSDate()
+        guard flag == true else { return }
 
-            let seconds = Int(abs(start.timeIntervalSinceNow))
+        let start = startTime ?? NSDate()
+        let seconds = Int(abs(start.timeIntervalSinceNow))
 
-            let alert = UIAlertController(
-                title: localized("alert.audio_message.success.title"),
-                message: String(format: localized("alert.audio_message.success.message"),
-                                String(format: "%.2d:%.2d", seconds / 60, seconds % 60)),
-                preferredStyle: .alert
-            )
+        let messageTime = String(format: "%.2d:%.2d", seconds / 60, seconds % 60)
+        let message = String(format: localized("alert.audio_message.success.message"), messageTime)
+        let alert = UIAlertController(
+            title: localized("alert.audio_message.success.title"),
+            message: message,
+            preferredStyle: .alert
+        )
 
-            alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
-            alert.addAction(UIAlertAction(title: localized("alert.audio_message.success.send"), style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: localized("alert.audio_message.success.send"), style: .default, handler: { _ in
+            var file: FileUpload?
+            let assetURL = recorder.url
 
-                var file: FileUpload?
-                let assetURL = recorder.url
+            file = UploadHelper.file(for: assetURL)
 
-                file = UploadHelper.file(for: assetURL)
+            if let file = file {
+                self.upload(file)
+            }
+        }))
 
-                if let file = file {
-                    self.upload(file)
-                }
-            }))
-            present(alert, animated: true, completion: nil)
-        }
+        present(alert, animated: true, completion: nil)
     }
 }
 
