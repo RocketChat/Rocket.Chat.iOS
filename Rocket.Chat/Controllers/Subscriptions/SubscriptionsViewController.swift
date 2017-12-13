@@ -52,11 +52,11 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
-    weak var viewUserMenu: SubscriptionUserStatusView?
+    weak var viewUserMenu: UIView? //SubscriptionUserStatusView?
     @IBOutlet weak var viewUser: SubscriptionUserView! {
         didSet {
-            let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
-            viewUser.addGestureRecognizer(gesture)
+            // let gesture = UITapGestureRecognizer(target: self, action: #selector(viewUserDidTap))
+            // viewUser.addGestureRecognizer(gesture)
         }
     }
 
@@ -275,7 +275,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             searchResult = []
 
             updateAll()
-            groupSubscription()
             tableView.reloadData()
             tableView.tableFooterView = nil
 
@@ -360,16 +359,13 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         }
 
         // If side panel is visible, reload the data
-        if MainChatViewController.shared?.sidePanelVisible ?? false {
-            if isSearchingLocally || isSearchingRemotely {
-                updateSearched()
-            } else {
-                updateAll()
-            }
-
-            groupSubscription()
-            tableView?.reloadData()
+        if isSearchingLocally || isSearchingRemotely {
+            updateSearched()
+        } else {
+            updateAll()
         }
+
+        tableView?.reloadData()
     }
 
     func updateCurrentUserInformation() {
@@ -398,18 +394,17 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     func subscribeModelChanges() {
         guard !assigned else { return }
         guard let realm = Realm.shared else { return }
+        guard let auth = AuthManager.isAuthenticated() else { return }
 
         assigned = true
 
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
+//        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
+//        subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
 
         if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
             let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
             currentUserToken = query.observe(handleCurrentUserUpdates)
         }
-
-        groupSubscription()
     }
 
     func subscription(for indexPath: IndexPath) -> Subscription? {

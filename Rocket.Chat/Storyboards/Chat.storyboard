@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8cV-un-sd9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="A1E-cs-q8E">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -56,8 +56,8 @@
                     <connections>
                         <outlet property="activityIndicatorContainer" destination="fbt-TF-z7U" id="Nmz-IG-SvM"/>
                         <outlet property="buttonScrollToBottom" destination="Stw-bA-gXV" id="u7H-cM-6TS"/>
-                        <segue destination="RHh-7Y-nF1" kind="show" identifier="Channel Info" modalPresentationStyle="formSheet" id="eAr-eM-2e1"/>
-                        <segue destination="nt8-Vp-nWB" kind="show" identifier="Channel Actions" modalPresentationStyle="formSheet" id="on8-Tf-r4t"/>
+                        <segue destination="RHh-7Y-nF1" kind="show" identifier="Channel Info" id="eAr-eM-2e1"/>
+                        <segue destination="nt8-Vp-nWB" kind="show" identifier="Channel Actions" id="on8-Tf-r4t"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA8-7w-0ga" userLabel="First Responder" sceneMemberID="firstResponder"/>

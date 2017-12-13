@@ -53,8 +53,6 @@ class MembersListViewData {
                 }
 
                 self.currentPage += 1
-
-                self.title = "\(localized("chat.members.list.title")) (\(self.total))"
                 self.isLoadingMoreMembers = false
                 completion?()
             })

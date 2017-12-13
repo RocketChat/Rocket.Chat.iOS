@@ -105,7 +105,7 @@ final class SubscriptionCell: UITableViewCell {
 
         if subscription.type == .directMessage {
             viewStatus.isHidden = false
-            viewStatus.backgroundColor = color
+//            viewStatus.backgroundColor = color
         } else {
             viewStatus.isHidden = true
         }

@@ -107,7 +107,6 @@ final class AvatarView: UIView {
         let username = self.user?.username ?? "?"
         let text = subscription == "?" ? username : subscription
 
-        let username = user.username ?? "?"
         var initials = ""
         var color: UInt = 0x000000
 
@@ -115,7 +114,7 @@ final class AvatarView: UIView {
             initials = text
             color = 0x000000
         } else {
-            let position = text.characters.count % avatarColors.count
+            let position = text.count % avatarColors.count
             color = avatarColors[position]
             initials = initialsFor(text)
         }
