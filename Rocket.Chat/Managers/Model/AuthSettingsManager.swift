@@ -38,7 +38,7 @@ final class AuthSettingsManager {
                 return
             }
 
-            Realm.execute({ realm in
+            Realm.executeOnMainThread({ realm in
                 let settings = AuthManager.isAuthenticated()?.settings ?? AuthSettings()
                 settings.map(response.result["result"], realm: realm)
                 realm.add(settings, update: true)
