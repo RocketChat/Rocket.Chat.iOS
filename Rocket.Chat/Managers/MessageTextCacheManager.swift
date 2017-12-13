@@ -26,7 +26,7 @@ class MessageTextCacheManager {
         cache.removeObject(forKey: cachedKey(for: identifier))
     }
 
-    @discardableResult func update(for message: Message, completion: (() -> Void)?) -> NSMutableAttributedString? {
+    @discardableResult func update(for message: Message) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
         let key = cachedKey(for: identifier)
 
@@ -44,18 +44,14 @@ class MessageTextCacheManager {
         let mentions = Array(message.mentions.flatMap { $0.username })
         let channels = Array(message.channels.flatMap { $0.name })
         let username = AuthManager.currentUser()?.username
-        DispatchQueue.global(qos: .background).async {
-            let finalText = NSMutableAttributedString(attributedString: text.transformMarkdown())
-            finalText.trimCharacters(in: .whitespaces)
-            finalText.highlightMentions(mentions, username: username)
-            finalText.highlightChannels(channels)
-            self.cache.setObject(finalText, forKey: key)
-            DispatchQueue.main.async {
-                completion?()
-            }
-        }
 
-        return text
+        let finalText = NSMutableAttributedString(attributedString: text.transformMarkdown())
+        finalText.trimCharacters(in: .whitespaces)
+        finalText.highlightMentions(mentions, username: username)
+        finalText.highlightChannels(channels)
+        self.cache.setObject(finalText, forKey: key)
+
+        return finalText
     }
 
     func message(for message: Message) -> NSMutableAttributedString? {
@@ -66,7 +62,7 @@ class MessageTextCacheManager {
         if let cachedVersion = cache.object(forKey: key) {
             resultText = cachedVersion
         } else {
-            if let result = update(for: message, completion: nil) {
+            if let result = update(for: message) {
                 resultText = result
             } else {
                 resultText = NSAttributedString(string: message.text)

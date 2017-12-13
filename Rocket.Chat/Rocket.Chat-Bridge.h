@@ -10,8 +10,6 @@
 #define Rocket_Chat_Bridge_h
 
 #import "CommonCrypto/CommonCrypto.h"
-
-// Google Authentication
-#import <Google/SignIn.h>
+#import <UIKit/UIKit.h>
 
 #endif /* Rocket_Chat_Bridge_h */

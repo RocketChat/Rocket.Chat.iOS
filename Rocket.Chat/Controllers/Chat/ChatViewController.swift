@@ -12,7 +12,7 @@ import SimpleImageViewer
 import AudioToolbox
 
 // swiftlint:disable file_length type_body_length
-final class ChatViewController: SLKTextViewController, Alerter {
+final class ChatViewController: SLKTextViewController {
 
     var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
@@ -589,32 +589,25 @@ final class ChatViewController: SLKTextViewController, Alerter {
                 })
             }
 
-            if modifications.count == 0 {
-                return
-            }
-
             if modifications.count > 0 {
-                DispatchQueue.main.async {
-                    let isAtBottom = self.chatLogIsAtBottom()
+                let isAtBottom = self.chatLogIsAtBottom()
 
+                var indexPathModifications: [Int] = []
+
+                for modified in modifications {
+                    guard modified < self.messagesQuery.count else { continue }
+
+                    let message = Message(value: self.messagesQuery[modified])
+                    let index = self.dataController.update(message)
+
+                    if index >= 0 && !indexPathModifications.contains(index) {
+                        indexPathModifications.append(index)
+                    }
+                }
+
+                if indexPathModifications.count > 0 {
                     UIView.performWithoutAnimation {
                         self.collectionView?.performBatchUpdates({
-                            var indexPathModifications: [Int] = []
-
-                            for modified in modifications {
-                                guard modified < self.messagesQuery.count else { continue }
-
-                                let message = Message(value: self.messagesQuery[modified])
-                                let identifier = message.identifier
-                                let index = self.dataController.update(message, completion: { [weak self] in
-                                    guard let identifier = identifier else { return }
-                                    self?.updateCellForMessage(identifier: identifier)
-                                })
-                                if index >= 0 && !indexPathModifications.contains(index) {
-                                    indexPathModifications.append(index)
-                                }
-                            }
-
                             self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
                         }, completion: { _ in
                             if isAtBottom {
@@ -948,8 +941,9 @@ extension ChatViewController {
             withReuseIdentifier: ChatMessageDaySeparator.identifier,
             for: indexPath
         ) as? ChatMessageDaySeparator else {
-                return UICollectionViewCell()
+            return UICollectionViewCell()
         }
+
         cell.labelTitle.text = obj.timestamp.formatted("MMM dd, YYYY")
         return cell
     }
@@ -961,6 +955,7 @@ extension ChatViewController {
         ) as? ChatChannelHeaderCell else {
             return UICollectionViewCell()
         }
+
         cell.subscription = subscription
         return cell
     }
@@ -1064,7 +1059,7 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         guard let auth = AuthManager.isAuthenticated() else { return }
         guard let subscription = self.subscription else { return }
 
-        Realm.executeOnMainThread({ _ in
+        Realm.execute({ _ in
             subscription.auth = auth
         })
 
