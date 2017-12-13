@@ -97,6 +97,12 @@ final class AuthViewController: BaseViewController {
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? SignupViewController {
+            var components = URLComponents(url: serverURL, resolvingAgainstBaseURL: false)
+            components?.scheme = "https"
+            controller.apiHost = components?.url
+        }
+
         if segue.identifier == "TwoFactor" {
             if let controller = segue.destination as? TwoFactorAuthenticationViewController {
                 controller.username = textFieldUsername.text ?? ""

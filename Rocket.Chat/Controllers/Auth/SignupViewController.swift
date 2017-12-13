@@ -13,6 +13,7 @@ final class SignupViewController: BaseViewController {
 
     internal var requesting = false
 
+    var apiHost: URL?
     var serverPublicSettings: AuthSettings?
     let compoundPickers = CompoundPickerViewDelegate()
 
@@ -104,11 +105,25 @@ final class SignupViewController: BaseViewController {
 
     // MARK: Request username
     fileprivate func signup() {
+        guard let apiHost = apiHost else { return }
+
         startLoading()
 
         let name = textFieldName.text ?? ""
         let email = textFieldEmail.text ?? ""
         let password = textFieldPassword.text ?? ""
+
+        let request = RegisterRequest(name: name, email: email, password: password, customFields: getCustomFieldsParams())
+
+        API(host: apiHost).fetch(request, succeeded: { [weak self] result in
+            print(result.raw?.description ?? "")
+            self?.stopLoading()
+        }, errored: { [weak self] error in
+            print(error)
+            self?.stopLoading()
+        })
+
+        return
 
         AuthManager.signup(with: name, email, password, customFields: getCustomFieldsParams()) { [weak self] (response) in
             self?.stopLoading()

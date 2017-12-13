@@ -229,6 +229,7 @@
 		8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F88D1FD6B83C00EE1A4E /* CommandModelMapping.swift */; };
 		8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */; };
 		801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */; };
+		80213C111FE1453300809E14 /* RegisterRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80213C101FE1453300809E14 /* RegisterRequest.swift */; };
 		80235D1B1F74070100A56CA5 /* SubscriptionMembersRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */; };
 		80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */; };
 		80235D241F7466FF00A56CA5 /* LoaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */; };
@@ -560,6 +561,7 @@
 		8013F88D1FD6B83C00EE1A4E /* CommandModelMapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommandModelMapping.swift; sourceTree = "<group>"; };
 		8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PushManagerSpec.swift; path = Managers/PushManagerSpec.swift; sourceTree = "<group>"; };
 		801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionUserView.swift; sourceTree = "<group>"; };
+		80213C101FE1453300809E14 /* RegisterRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterRequest.swift; sourceTree = "<group>"; };
 		80235D1A1F74070100A56CA5 /* SubscriptionMembersRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequest.swift; sourceTree = "<group>"; };
 		80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMembersRequestSpec.swift; sourceTree = "<group>"; };
 		80235D231F7466FE00A56CA5 /* LoaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoaderTableViewCell.swift; sourceTree = "<group>"; };
@@ -1423,6 +1425,7 @@
 			children = (
 				D18675EB1F716A0D00406FB4 /* LoginRequest.swift */,
 				802498ED1F7A8380005477EC /* MeRequest.swift */,
+				80213C101FE1453300809E14 /* RegisterRequest.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -2283,6 +2286,7 @@
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,
 				41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
+				80213C111FE1453300809E14 /* RegisterRequest.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* SubscriptionCreateRequest.swift in Sources */,
