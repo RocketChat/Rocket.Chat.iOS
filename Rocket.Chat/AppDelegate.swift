@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // but if not, just open the authentication screen.
         if let auth = AuthManager.isAuthenticated() {
             AuthManager.persistAuthInformation(auth)
-            WindowManager.open(.chat)
+            WindowManager.open(.subscriptions)
         } else {
             WindowManager.open(.auth)
         }

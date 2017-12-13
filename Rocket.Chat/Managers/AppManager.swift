@@ -63,7 +63,7 @@ extension AppManager {
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {
-                    WindowManager.open(.chat)
+                    WindowManager.open(.subscriptions)
                 } else {
                     WindowManager.open(.auth)
                 }
