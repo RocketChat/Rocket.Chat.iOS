@@ -28,6 +28,13 @@
 "alert.settings.set_mail_app.title" = "Ups!";
 "alert.settings.set_mail_app.message" = "Brak kont e-mail. Aby wysyłać wiadomości e-mail proszę skonfiguruj konto e-mail.";
 
+"alert.audio_message.success.send" = "Send"; //TODO
+"alert.audio_message.success.title" = "Success"; //TODO
+"alert.audio_message.success.message" = "You message was successfully recorded. Recording time: %@."; //TODO
+
+"alert.audio_message.error.title" = "Ooops!"; //TODO
+"alert.audio_message.error.message" = "An error has occurred. Please, record your message again."; //TODO
+
 "alert.feature.wip.title" = "Ups!";
 "alert.feature.wip.message" = "Wciąż pracujemy nad tą funkcją. Bądź czujny!";
 
