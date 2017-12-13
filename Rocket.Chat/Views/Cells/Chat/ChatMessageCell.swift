@@ -27,8 +27,16 @@ final class ChatMessageCell: UICollectionViewCell {
             labelText.delegate = delegate
         }
     }
+
     var message: Message! {
         didSet {
+            if oldValue != nil && oldValue.identifier == message?.identifier {
+                if oldValue.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
+                    Log.debug("message is cached")
+                    return
+                }
+            }
+
             updateMessage()
         }
     }
@@ -110,6 +118,7 @@ final class ChatMessageCell: UICollectionViewCell {
         labelText.message = nil
         labelDate.text = ""
         sequential = false
+        message = nil
 
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
@@ -243,14 +252,18 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     fileprivate func updateMessage() {
-        guard delegate != nil else { return }
+        guard
+            delegate != nil,
+            message != nil
+        else {
+            return
+        }
 
         if !sequential {
             updateMessageHeader()
         }
 
         updateMessageContent()
-
         insertGesturesIfNeeded()
         insertAttachments()
     }
@@ -276,6 +289,7 @@ extension ChatMessageCell: UIGestureRecognizerDelegate {
 // MARK: Accessibility
 
 extension ChatMessageCell {
+
     override func awakeFromNib() {
         isAccessibilityElement = true
     }
@@ -294,4 +308,5 @@ extension ChatMessageCell {
         get { return message?.accessibilityValue }
         set { }
     }
+
 }

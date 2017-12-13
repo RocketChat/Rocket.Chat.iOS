@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import UserNotifications
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
