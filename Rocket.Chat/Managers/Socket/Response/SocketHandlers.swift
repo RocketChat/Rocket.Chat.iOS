@@ -21,11 +21,16 @@ extension SocketManager {
         }
 
         switch message {
-            case .connected: return handleConnectionMessage(result, socket: socket)
-            case .ping: return handlePingMessage(result, socket: socket)
-            case .changed, .added, .removed: return handleModelUpdates(result, socket: socket)
-            case .updated, .unknown: break
-            case .error: handleError(result, socket: socket)
+        case .connected:
+            return handleConnectionMessage(result, socket: socket)
+        case .ping:
+            return handlePingMessage(result, socket: socket)
+        case .changed, .added, .removed:
+            return handleModelUpdates(result, socket: socket)
+        case .updated, .unknown:
+            break
+        case .error:
+            handleError(result, socket: socket)
         }
 
         // Call completion block
@@ -50,6 +55,11 @@ extension SocketManager {
 
     fileprivate func handleError(_ result: SocketResponse, socket: WebSocket) {
         // Do nothing?
+        let error = SocketError(json: result.result["error"])
+
+        for (_, handler) in connectionHandlers {
+            handler.socketDidReturnError(socket: self, error: error)
+        }
     }
 
     fileprivate func handleEventSubscription(_ result: SocketResponse, socket: WebSocket) {
@@ -71,13 +81,14 @@ extension SocketManager {
             let fields = result.result["fields"]
 
             switch collection {
-                case "users":
-                    User.handle(msg: msg, primaryKey: identifier, values: fields)
-                    break
-                case "subscriptions":
-                    Subscription.handle(msg: msg, primaryKey: identifier, values: fields)
-                    break
-                default: break
+            case "users":
+                User.handle(msg: msg, primaryKey: identifier, values: fields)
+            case "subscriptions":
+                Subscription.handle(msg: msg, primaryKey: identifier, values: fields)
+            case "meteor_accounts_loginServiceConfiguration":
+                LoginService.handle(msg: msg, primaryKey: identifier, values: fields)
+            default:
+                break
             }
         }
     }

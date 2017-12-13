@@ -28,34 +28,13 @@ final class ChatTitleView: UIView {
         return UILayoutFittingExpandedSize
     }
 
-    var subscription: Subscription! {
+    let viewModel = ChatTitleViewModel()
+
+    var subscription: Subscription? {
         didSet {
-            buttonTitle.setTitle(subscription.displayName(), for: .normal)
-
-            switch subscription.type {
-            case .channel:
-                icon.image = UIImage(named: "Hashtag")?.imageWithTint(.RCGray())
-                break
-            case .directMessage:
-                var color = UIColor.RCGray()
-
-                if let user = subscription.directMessageUser {
-                    color = { _ -> UIColor in
-                        switch user.status {
-                        case .online: return .RCOnline()
-                        case .offline: return .RCGray()
-                        case .away: return .RCAway()
-                        case .busy: return .RCBusy()
-                        }
-                    }(())
-                }
-
-                icon.image = UIImage(named: "Mentions")?.imageWithTint(color)
-                break
-            case .group:
-                icon.image = UIImage(named: "Lock")?.imageWithTint(.RCGray())
-                break
-            }
+            viewModel.subscription = subscription
+            buttonTitle.setTitle(viewModel.title, for: .normal)
+            icon.image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)
         }
     }
 

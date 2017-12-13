@@ -25,6 +25,7 @@ struct ServerPersistKeys {
     // Authentication information
     static let token = "kAuthToken"
     static let serverURL = "kAuthServerURL"
+    static let serverVersion = "kAuthServerVersion"
     static let userId = "kUserId"
 
     // Display information
@@ -54,7 +55,7 @@ class ServerManager {
             let iconURL = settings.serverFaviconURL,
             var servers = DatabaseManager.servers,
             servers.count > selectedIndex
-            else {
+        else {
                 return
         }
 
@@ -70,9 +71,13 @@ class ServerManager {
         timestamp of the user that's using the app.
      */
     static func timestampSync() {
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        guard let serverURL = URL(string: auth.serverURL) else { return }
-        guard let url = serverURL.timestampURL() else { return }
+        guard
+            let auth = AuthManager.isAuthenticated(),
+            let serverURL = URL(string: auth.serverURL),
+            let url = serverURL.timestampURL()
+        else {
+            return
+        }
 
         let request = URLRequest(url: url)
         let session = URLSession.shared

@@ -11,6 +11,7 @@ import SwiftyJSON
 
 class APIResult<T: APIRequest> {
     let raw: JSON?
+
     init(raw: JSON?) {
         self.raw = raw
     }

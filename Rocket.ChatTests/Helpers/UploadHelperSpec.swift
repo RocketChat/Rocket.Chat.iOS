@@ -17,10 +17,12 @@ class UploadHelperSpec: XCTestCase {
 
         guard
             let image = UIImage(named: "Logo"),
-            let data = UIImagePNGRepresentation(image),
-            let file = UploadHelper.file(for: data, name: name, mimeType: mimetype) else {
+            let data = UIImagePNGRepresentation(image)
+        else {
                 return XCTAssertTrue(false, "File wasn't created successfuly")
         }
+
+        let file = UploadHelper.file(for: data, name: name, mimeType: mimetype)
 
         XCTAssert(file.name == name, "file name is equal to name")
         XCTAssert(file.type == mimetype, "file type is equal to mimetype")

@@ -46,12 +46,20 @@ class Subscription: BaseModel {
     @objc dynamic var roomTopic: String?
     @objc dynamic var roomDescription: String?
     @objc dynamic var roomUpdatedAt: Date?
+    @objc dynamic var roomReadOnly = false
+
+    let roomMuted = RealmSwift.List<String>()
+
+    @objc dynamic var roomOwnerId: String?
+    var roomOwner: User? {
+        guard let roomOwnerId = roomOwnerId else { return nil }
+        return User.find(withIdentifier: roomOwnerId)
+    }
 
     @objc dynamic var otherUserId: String?
     var directMessageUser: User? {
-        guard let realm = Realm.shared else { return nil }
         guard let otherUserId = otherUserId else { return nil }
-        return realm.objects(User.self).filter("identifier = '\(otherUserId)'").first
+        return User.find(withIdentifier: otherUserId)
     }
 
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
@@ -72,7 +80,7 @@ extension Subscription {
     }
 
     func isValid() -> Bool {
-        return self.rid.characters.count > 0
+        return self.rid.count > 0
     }
 
     func isJoined() -> Bool {
@@ -85,7 +93,7 @@ extension Subscription {
                 guard !response.isError() else { return }
 
                 let result = response.result["result"]
-                Realm.executeOnMainThread({ realm in
+                Realm.execute({ realm in
                     if let obj = self {
                         obj.update(result, realm: realm)
                         realm.add(obj, update: true)
@@ -99,8 +107,8 @@ extension Subscription {
             SubscriptionManager.createDirectMessage(name, completion: { [weak self] (response) in
                 guard !response.isError() else { return }
 
-                let rid = response.result["result"]["rid"].string ?? ""
-                Realm.executeOnMainThread({ realm in
+                let rid = response.result["result"]["rid"].stringValue
+                Realm.execute({ realm in
                     if let obj = self {
                         obj.rid = rid
                         realm.add(obj, update: true)
@@ -141,15 +149,15 @@ extension Subscription {
     }
 
     func updateFavorite(_ favorite: Bool) {
-        Realm.executeOnMainThread({ _ in
+        Realm.execute({ _ in
             self.favorite = favorite
         })
     }
 
 }
 
+// MARK: Queries
 extension Subscription {
-
     static func find(rid: String, realm: Realm) -> Subscription? {
         var object: Subscription?
 
@@ -160,4 +168,30 @@ extension Subscription {
         return object
     }
 
+    static func find(name: String, subscriptionType: [SubscriptionType], realm: Realm? = Realm.shared) -> Subscription? {
+        let predicate = NSPredicate(
+            format: "name == %@ && privateType IN %@",
+            name, subscriptionType.map { $0.rawValue }
+        )
+
+        return realm?.objects(Subscription.self).filter(predicate).first
+    }
+
+    static func notificationSubscription(auth: Auth? = AuthManager.isAuthenticated()) -> Subscription? {
+        guard let roomId = PushManager.lastNotificationRoomId else { return nil }
+        return auth?.subscriptions.filter("rid = %@", roomId).first
+    }
+
+    static func lastSeenSubscription(auth: Auth? = AuthManager.isAuthenticated()) -> Subscription? {
+        return auth?.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false).first
+    }
+
+    static func initialSubscription(auth: Auth? = AuthManager.isAuthenticated()) -> Subscription? {
+        if let subscription = notificationSubscription(auth: auth) {
+            PushManager.lastNotificationRoomId = nil
+            return subscription
+        }
+
+        return lastSeenSubscription(auth: auth)
+    }
 }

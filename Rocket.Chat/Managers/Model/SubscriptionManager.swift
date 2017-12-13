@@ -34,13 +34,13 @@ struct SubscriptionManager {
             "msg": "method",
             "method": "subscriptions/get",
             "params": params
-        ] as [String : Any]
+        ] as [String: Any]
 
         let requestRooms = [
             "msg": "method",
             "method": "rooms/get",
             "params": params
-        ] as [String : Any]
+        ] as [String: Any]
 
         func executeRoomsRequest() {
             SocketManager.send(requestRooms) { response in
@@ -60,13 +60,7 @@ struct SubscriptionManager {
                     list?.forEach { object in
                         if let rid = object["_id"].string {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
-                                subscription.roomDescription = object["description"].string ?? ""
-                                subscription.roomTopic = object["topic"].string ?? ""
-
-                                if let updatedAt = object["_updatedAt"]["$date"].double {
-                                    subscription.roomUpdatedAt = Date.dateFromInterval(updatedAt)
-                                }
-
+                                subscription.mapRoom(object)
                                 subscriptions.append(subscription)
                             }
                         }
@@ -75,13 +69,7 @@ struct SubscriptionManager {
                     updated?.forEach { object in
                         if let rid = object["_id"].string {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
-                                subscription.roomDescription = object["description"].string ?? ""
-                                subscription.roomTopic = object["topic"].string ?? ""
-
-                                if let updatedAt = object["_updatedAt"]["$date"].double {
-                                    subscription.roomUpdatedAt = Date.dateFromInterval(updatedAt)
-                                }
-
+                                subscription.mapRoom(object)
                                 subscriptions.append(subscription)
                             }
                         }
@@ -147,12 +135,16 @@ struct SubscriptionManager {
     }
 
     static func changes(_ auth: Auth) {
+        guard !auth.isInvalidated else { return }
+
+        let serverURL = auth.serverURL
+
         let eventName = "\(auth.userId ?? "")/subscriptions-changed"
         let request = [
             "msg": "sub",
             "name": "stream-notify-user",
             "params": [eventName, false]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -161,7 +153,7 @@ struct SubscriptionManager {
             let object = response.result["fields"]["args"][1]
 
             Realm.execute({ (realm) in
-                guard let auth = AuthManager.isAuthenticated() else { return }
+                guard let auth = AuthManager.isAuthenticated(), auth.serverURL == serverURL else { return }
                 let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
                     object?.auth = msg == "removed" ? nil : auth
                 })
@@ -189,13 +181,7 @@ struct SubscriptionManager {
             Realm.execute({ (realm) in
                 if let rid = object["_id"].string {
                     if let subscription = Subscription.find(rid: rid, realm: realm) {
-                        subscription.roomDescription = object["description"].string ?? ""
-                        subscription.roomTopic = object["topic"].string ?? ""
-
-                        if let updatedAt = object["_updatedAt"]["$date"].double {
-                            subscription.roomUpdatedAt = Date.dateFromInterval(updatedAt)
-                        }
-
+                        subscription.mapRoom(object)
                         realm.add(subscription, update: true)
                     }
                 }
@@ -298,7 +284,7 @@ extension SubscriptionManager {
             }, completion: {
                 var detachedSubscriptions = [Subscription]()
 
-                Realm.executeOnMainThread({ (realm) in
+                Realm.execute({ (realm) in
                     for identifier in identifiers {
                         if let subscription = realm.object(ofType: Subscription.self, forPrimaryKey: identifier) {
                             detachedSubscriptions.append(subscription)

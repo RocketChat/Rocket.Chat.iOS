@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import SafariServices
 import OnePasswordExtension
+import RealmSwift
 
 final class AuthViewController: BaseViewController {
 
@@ -17,6 +18,10 @@ final class AuthViewController: BaseViewController {
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
+
+    let socketHandlerToken = String.random(5)
+
+    var loginServicesToken: NotificationToken?
 
     @IBOutlet weak var viewFields: UIView! {
         didSet {
@@ -44,7 +49,13 @@ final class AuthViewController: BaseViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
+    @IBOutlet var buttonRegister: UIButton!
+
+    @IBOutlet weak var authButtonsStackView: UIStackView!
+    var customAuthButtons = [String: UIButton]()
+
     deinit {
+        loginServicesToken?.invalidate()
         NotificationCenter.default.removeObserver(self)
     }
 
@@ -52,11 +63,19 @@ final class AuthViewController: BaseViewController {
         super.viewDidLoad()
         title = serverURL.host
 
+        if let registrationForm = AuthSettingsManager.shared.settings?.registrationForm {
+           buttonRegister.isHidden = registrationForm != .isPublic
+        }
+
         self.updateAuthenticationMethods()
+
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+
+        setupLoginServices()
 
         NotificationCenter.default.addObserver(
             self,
@@ -128,29 +147,26 @@ final class AuthViewController: BaseViewController {
             return
         }
 
-        API.shared.fetch(MeRequest()) { [weak self] result in
-            self?.stopLoading()
-            if let user = result?.user {
+        API.current()?.fetch(MeRequest(), succeeded: { [weak self] result in
+            guard let strongSelf = self else { return }
+
+            strongSelf.stopLoading()
+            SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
+
+            if let user = result.user {
                 if user.username != nil {
 
                     DispatchQueue.main.async {
-                        self?.dismiss(animated: true, completion: nil)
-
-                        let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-                        let controller = storyboardChat.instantiateInitialViewController()
-                        let application = UIApplication.shared
-
-                        if let window = application.windows.first {
-                            window.rootViewController = controller
-                        }
+                        strongSelf.dismiss(animated: true, completion: nil)
+                        AppManager.reloadApp()
                     }
                 } else {
                     DispatchQueue.main.async {
-                        self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                        strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
                 }
             }
-        }
+        })
     }
 
     // MARK: Loaders
@@ -165,11 +181,14 @@ final class AuthViewController: BaseViewController {
     }
 
     func stopLoading() {
-        textFieldUsername.alpha = 1
-        textFieldPassword.alpha = 1
+        DispatchQueue.main.async(execute: {
+            self.textFieldUsername.alpha = 1
+            self.textFieldPassword.alpha = 1
+            self.activityIndicator.stopAnimating()
+            self.buttonAuthenticateGoogle.isEnabled = true
+        })
+
         connecting = false
-        activityIndicator.stopAnimating()
-        buttonAuthenticateGoogle.isEnabled = true
     }
 
     // MARK: IBAction
@@ -185,7 +204,7 @@ final class AuthViewController: BaseViewController {
                 "username": email,
                 "ldapPass": password,
                 "ldapOptions": []
-            ] as [String : Any]
+            ] as [String: Any]
 
             AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
         } else {
@@ -258,5 +277,99 @@ extension AuthViewController: UITextFieldDelegate {
         }
 
         return true
+    }
+}
+
+// MARK: Login Services
+
+extension AuthViewController {
+    func setupLoginServices() {
+        self.loginServicesToken?.invalidate()
+
+        self.loginServicesToken = LoginServiceManager.observe { [weak self] changes in
+            self?.updateLoginServices(changes: changes)
+        }
+
+        LoginServiceManager.subscribe()
+    }
+
+    @objc func loginServiceButtonDidPress(_ button: UIButton) {
+        guard let service = customAuthButtons.filter({ $0.value == button }).keys.first,
+              let realm = Realm.shared,
+              let loginService = LoginService.find(service: service, realm: realm)
+        else {
+            return
+        }
+
+        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self,
+                               success: { [weak self] credentials in
+
+            guard let strongSelf = self else { return }
+            AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
+
+        }, failure: { [weak self] in
+
+            self?.alert(title: localized("alert.login_service_error.title"),
+                        message: localized("alert.login_service_error.title"))
+
+        })
+    }
+
+    func updateLoginServices(changes: RealmCollectionChange<Results<LoginService>>) {
+        switch changes {
+        case .update(let res, let deletions, let insertions, let modifications):
+            insertions.map { res[$0] }.forEach {
+                guard $0.custom, !($0.serverUrl?.isEmpty ?? true) else { return }
+
+                let button = UIButton()
+                button.layer.cornerRadius = 3
+                button.setTitle($0.buttonLabelText ?? "", for: .normal)
+                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+                button.setTitleColor(UIColor(hex: $0.buttonLabelColor), for: .normal)
+                button.backgroundColor = UIColor(hex: $0.buttonColor)
+                button.addTarget(self, action: #selector(loginServiceButtonDidPress(_:)), for: .touchUpInside)
+
+                authButtonsStackView.addArrangedSubview(button)
+
+                customAuthButtons[$0.service ?? ""] = button
+            }
+
+            modifications.map { res[$0] }.forEach {
+                guard $0.custom,
+                      let identifier = $0.identifier,
+                      let button = self.customAuthButtons[identifier]
+                else {
+                    return
+                }
+
+                button.setTitle($0.buttonLabelText ?? "", for: .normal)
+                button.setTitleColor(UIColor(hex: $0.buttonLabelColor), for: .normal)
+                button.backgroundColor = UIColor(hex: $0.buttonColor)
+            }
+
+            deletions.map { res[$0] }.forEach {
+                guard $0.custom,
+                      let identifier = $0.identifier,
+                      let button = self.customAuthButtons[identifier]
+                else {
+                    return
+                }
+
+                authButtonsStackView.removeArrangedSubview(button)
+                customAuthButtons.removeValue(forKey: identifier)
+            }
+        default:
+            break
+        }
+    }
+}
+extension AuthViewController: SocketConnectionHandler {
+    func socketDidConnect(socket: SocketManager) { }
+    func socketDidReturnError(socket: SocketManager, error: SocketError) { }
+
+    func socketDidDisconnect(socket: SocketManager) {
+        alert(title: localized("error.socket.default_error_title"), message: localized("error.socket.default_error_message")) { _ in
+            self.navigationController?.popViewController(animated: true)
+        }
     }
 }

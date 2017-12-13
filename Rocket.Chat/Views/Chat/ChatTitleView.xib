@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -37,8 +37,8 @@
                         <action selector="buttonChannelDidPressed:" destination="iN0-l3-epB" eventType="touchUpInside" id="6AV-Ki-2Vf"/>
                     </connections>
                 </button>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Mentions" translatesAutoresizingMaskIntoConstraints="NO" id="WbB-fC-cwV">
-                    <rect key="frame" x="8" y="15" width="14" height="14"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Arrow Down" translatesAutoresizingMaskIntoConstraints="NO" id="Mdo-Zh-6jT">
+                    <rect key="frame" x="95" y="18.5" width="8" height="8"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="14" id="FEd-ET-JsB"/>
                         <constraint firstAttribute="height" constant="14" id="zOX-0i-ZKw"/>

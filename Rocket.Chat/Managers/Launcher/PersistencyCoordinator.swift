@@ -11,6 +11,8 @@ import RealmSwift
 
 struct PersistencyCoordinator: LauncherProtocol {
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
+        DatabaseManager.cleanInvalidDatabases()
         DatabaseManager.changeDatabaseInstance()
+        AuthManager.recoverAuthIfNeeded()
     }
 }

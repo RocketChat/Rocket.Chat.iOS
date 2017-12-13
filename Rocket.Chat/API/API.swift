@@ -9,39 +9,92 @@
 import Foundation
 import SwiftyJSON
 
-class API {
-    static let shared: API! = API(host: "https://open.rocket.chat")
+protocol APIRequestMiddleware {
+    var api: API { get }
+    init(api: API)
 
-    var host: URL
+    func handle<R: APIRequest>(_ request: inout R) -> APIError?
+}
+
+protocol APIFetcher {
+    func fetch<R>(_ request: R, succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?)
+    func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?,
+                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?)
+}
+
+extension APIFetcher {
+    func fetch<R>(_ request: R, succeeded: ((APIResult<R>) -> Void)?, errored: APIErrored?) {
+        fetch(request, options: .none, sessionDelegate: nil, succeeded: succeeded, errored: errored)
+    }
+}
+
+typealias AnyAPIFetcher = Any & APIFetcher
+
+class API: APIFetcher {
+    let host: URL
+    let version: Version
+
+    var requestMiddlewares = [APIRequestMiddleware]()
+
     var authToken: String?
     var userId: String?
 
-    convenience init?(host: String) {
+    convenience init?(host: String, version: Version = .zero) {
         guard let url = URL(string: host) else {
             return nil
         }
 
-        self.init(host: url)
+        self.init(host: url, version: version)
     }
 
-    init(host: URL) {
+    init(host: URL, version: Version = .zero) {
         self.host = host
+        self.version = version
+
+        requestMiddlewares.append(VersionMiddleware(api: self))
     }
 
-    func fetch<R>(_ request: R, options: APIRequestOptions = .none, completion: ((_ result: APIResult<R>?) -> Void)?) {
-        guard let request = request.request(for: self, options: options) else {
-            completion?(nil)
+    func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,
+                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored? = nil) {
+        var transformedRequest = request
+        for middleware in requestMiddlewares {
+            if let error = middleware.handle(&transformedRequest) {
+                errored?(error)
+                return
+            }
+        }
+
+        guard let request = transformedRequest.request(for: self, options: options) else {
+            errored?(.malformedRequest)
             return
         }
 
-        let task = URLSession.shared.dataTask(with: request) { (data, _, _) in
+        var session: URLSession = URLSession.shared
+
+        if let sessionDelegate = sessionDelegate {
+            let configuration = URLSessionConfiguration.ephemeral
+            configuration.timeoutIntervalForRequest = 30
+
+            session = URLSession(
+                configuration: configuration,
+                delegate: sessionDelegate,
+                delegateQueue: nil
+            )
+        }
+
+        let task = session.dataTask(with: request) { (data, _, error) in
+            if let error = error {
+                errored?(.error(error))
+                return
+            }
+
             guard let data = data else {
-                completion?(nil)
+                errored?(.noData)
                 return
             }
 
             let json = try? JSON(data: data)
-            completion?(APIResult<R>(raw: json))
+            succeeded?(APIResult<R>(raw: json))
         }
 
         task.resume()

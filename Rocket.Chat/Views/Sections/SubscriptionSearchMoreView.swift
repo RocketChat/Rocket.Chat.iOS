@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol SubscriptionSearchMoreViewDelegate: class {
+protocol SubscriptionSearchMoreViewDelegate: NSObjectProtocol {
     func buttonLoadMoreDidPressed()
 }
 

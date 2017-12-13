@@ -19,11 +19,25 @@ extension String {
         var randomString: String = ""
 
         for _ in 0..<length {
-            let randomValue = arc4random_uniform(UInt32(base.characters.count))
-            randomString += "\(base[base.characters.index(base.startIndex, offsetBy: Int(randomValue))])"
+            let randomValue = arc4random_uniform(UInt32(base.count))
+            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
         }
 
         return randomString
+    }
+
+    func base64Encoded() -> String? {
+        if let data = self.data(using: .utf8) {
+            return data.base64EncodedString()
+        }
+        return nil
+    }
+
+    func base64Decoded() -> String? {
+        if let data = Data(base64Encoded: self, options: .ignoreUnknownCharacters) {
+            return String(data: data, encoding: .utf8)
+        }
+        return nil
     }
 
     func sha256() -> String {
@@ -47,7 +61,7 @@ extension String {
 
         var hexString = ""
         for byte in bytes {
-            hexString += String(format:"%02x", UInt8(byte))
+            hexString += String(format: "%02x", UInt8(byte))
         }
 
         return hexString
@@ -56,8 +70,8 @@ extension String {
     func ranges(of string: String) -> [Range<Index>] {
         var ranges = [Range<Index>]()
 
-        let pCount = string.characters.count
-        let strCount = self.characters.count
+        let pCount = string.count
+        let strCount = self.count
 
         if strCount < pCount { return [] }
 
@@ -74,5 +88,22 @@ extension String {
         }
 
         return ranges
+    }
+
+    func removingWhitespaces() -> String {
+        return components(separatedBy: .whitespaces).joined()
+    }
+
+    var removingPercentEncoding: String? {
+        return NSString(string: self).removingPercentEncoding
+    }
+
+    func commandAndParams() -> (command: String, params: String)? {
+        guard self.first == "/" && self.count > 1 else { return nil }
+
+        let components = self.components(separatedBy: " ")
+        let command = String(components[0].dropFirst())
+        let params = components.dropFirst().joined(separator: " ")
+        return (command: command, params: params)
     }
 }

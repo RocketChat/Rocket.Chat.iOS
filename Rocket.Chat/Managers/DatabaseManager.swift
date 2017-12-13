@@ -34,12 +34,41 @@ struct DatabaseManager {
     }
 
     /**
-        Remover selected server and select the
+        Remove selected server and select the
         first one.
      */
-    static func removerSelectedDatabase() {
+    static func removeSelectedDatabase() {
         removeDatabase(at: selectedIndex)
         selectDatabase(at: 0)
+    }
+
+    /**
+        Copy a server information with a new URL
+        and remove the old one.
+    */
+    static func copyServerInformation(from: Int, with newURL: String) -> Int {
+        guard
+            let servers = self.servers,
+            servers.count > 0
+        else {
+            return -1
+        }
+
+        let selectedServer = servers[from]
+        let newIndex = createNewDatabaseInstance(serverURL: newURL)
+
+        if var servers = self.servers {
+            var newServer = servers[newIndex]
+            newServer[ServerPersistKeys.userId] = selectedServer[ServerPersistKeys.userId]
+            newServer[ServerPersistKeys.token] = selectedServer[ServerPersistKeys.token]
+            servers[newIndex] = newServer
+
+            UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+
+            removeDatabase(at: from)
+        }
+
+        return newIndex - 1
     }
 
     /**
@@ -48,9 +77,10 @@ struct DatabaseManager {
         parameter index: The database index user wants to delete.
      */
     static func removeDatabase(at index: Int) {
-        var servers = self.servers
-        servers?.remove(at: index)
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        if var servers = self.servers, servers.count > index {
+            servers.remove(at: index)
+            UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        }
     }
 
     /**
@@ -87,7 +117,7 @@ struct DatabaseManager {
         so we can populate the authentication information
         when user logins.
      
-        - parameter serverURL: The serve URL.
+        - parameter serverURL: The server URL.
      */
     @discardableResult
     static func createNewDatabaseInstance(serverURL: String) -> Int {
@@ -117,7 +147,7 @@ struct DatabaseManager {
      */
     static func changeDatabaseInstance(index: Int? = nil) {
         guard
-            let server = AuthManager.selectedServerInformation(),
+            let server = AuthManager.selectedServerInformation(index: index),
             let databaseName = server[ServerPersistKeys.databaseName]
         else {
             return
@@ -131,4 +161,34 @@ struct DatabaseManager {
         realmConfiguration = configuration
     }
 
+    /**
+     This method gets the realm associated with this server
+    */
+    static func databaseInstace(index: Int) -> Realm? {
+        guard
+            let server = AuthManager.selectedServerInformation(index: index),
+            let databaseName = server[ServerPersistKeys.databaseName]
+        else {
+            return nil
+        }
+
+        let configuration = Realm.Configuration(
+            fileURL: URL(fileURLWithPath: RLMRealmPathForFile(databaseName), isDirectory: false),
+            deleteRealmIfMigrationNeeded: true
+        )
+
+        return try? Realm(configuration: configuration)
+    }
+}
+
+extension DatabaseManager {
+    /**
+     This method returns an index for the server with this URL if it already exists.
+     - parameter serverUrl: The URL of the server
+     */
+    static func serverIndexForUrl(_ serverUrl: String) -> Int? {
+        return servers?.index {
+            $0[ServerPersistKeys.serverURL] == serverUrl
+        }
+    }
 }

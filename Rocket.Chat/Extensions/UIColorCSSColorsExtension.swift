@@ -119,21 +119,21 @@ public extension UIColor {
         }
         let hasHash : Bool = hexString.hasPrefix("#")
         if (hasHash) {
-            hexString = String(hexString.characters.dropFirst())
+            hexString = String(hexString.dropFirst())
             
         }
-        if hexString.characters.count == 3 || hexString.characters.count == 4 {
-            let redHex = hexString.substring(to: hexString.characters.index(hexString.startIndex, offsetBy: 1))
-            let greenHex = hexString.substring(with: Range<String.Index>(hexString.characters.index(hexString.startIndex, offsetBy: 1) ..< hexString.characters.index(hexString.startIndex, offsetBy: 2)))
-            let blueHex = hexString.substring(with: Range<String.Index>(hexString.characters.index(hexString.startIndex, offsetBy: 2) ..< hexString.characters.index(hexString.startIndex, offsetBy: 3)))
+        if hexString.count == 3 || hexString.count == 4 {
+            let redHex = String(hexString[..<hexString.index(hexString.startIndex, offsetBy: 1)])
+            let greenHex = String(hexString[Range<String.Index>(hexString.index(hexString.startIndex, offsetBy: 1) ..< hexString.index(hexString.startIndex, offsetBy: 2))])
+            let blueHex = String(hexString[Range<String.Index>(hexString.index(hexString.startIndex, offsetBy: 2) ..< hexString.index(hexString.startIndex, offsetBy: 3))])
             var alphaHex = ""
-            if hexString.characters.count == 4 {
-                alphaHex = hexString.substring(from: hexString.characters.index(hexString.startIndex, offsetBy: 3))
+            if hexString.count == 4 {
+                alphaHex = String(hexString[hexString.index(hexString.startIndex, offsetBy: 3)...])
             }
             
             hexString = redHex + redHex + greenHex + greenHex + blueHex + blueHex + alphaHex + alphaHex
         }
-        let hasAlpha = hexString.characters.count > 7
+        let hasAlpha = hexString.count > 7
         if (!hasAlpha) {
             hexString += "ff"
         }

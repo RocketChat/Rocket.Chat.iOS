@@ -38,45 +38,39 @@ final class AvatarView: UIView {
     @IBOutlet weak var labelInitials: UILabel!
     var labelInitialsFontSize: CGFloat? {
         didSet {
-            labelInitials?.font = UIFont.systemFont(ofSize: labelInitialsFontSize ?? 0)
+            labelInitials?.font = UIFont.systemFont(ofSize: labelInitialsFontSize ?? 16)
         }
     }
 
     @IBOutlet weak var imageView: UIImageView!
 
-    private func userAvatarURL() -> URL? {
-        guard let username = user?.username else { return nil }
-        guard let auth = AuthManager.isAuthenticated() else { return nil }
-        guard let baseURL = auth.baseURL() else { return nil }
-        guard let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) else { return nil }
-        return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
-    }
-
-    private func updateAvatar() {
+    internal func updateAvatar(completion: VoidCompletion? = nil) {
         setAvatarWithInitials()
 
         var imageURL: URL?
         if let avatar = self.imageURL {
             imageURL = avatar
         } else {
-            imageURL = userAvatarURL()
+            imageURL = user?.avatarURL()
         }
 
         if let imageURL = imageURL {
-            imageView?.sd_setImage(with: imageURL, completed: { [weak self] _, error, _, _ in
-                guard error != nil else {
-                    self?.labelInitials.text = ""
-                    self?.backgroundColor = UIColor.clear
+            imageView?.sd_setImage(with: imageURL, completed: { [weak self] (_, error, _, _) in
+                guard error == nil else {
+                    self?.setAvatarWithInitials()
+                    completion?()
                     return
                 }
 
-                self?.setAvatarWithInitials()
+                self?.labelInitials.text = ""
+                self?.backgroundColor = UIColor.clear
+                completion?()
             })
         }
     }
 
     internal func initialsFor(_ username: String) -> String {
-        guard username.characters.count > 0 else {
+        guard username.count > 0 else {
             return "?"
         }
 
@@ -92,7 +86,7 @@ final class AvatarView: UIView {
             let firstString = first[..<indexFirst]
 
             var lastString: Substring = ""
-            if last.characters.count >= lastOffset {
+            if last.count >= lastOffset {
                 let indexLast = last.index(last.startIndex, offsetBy: lastOffset)
                 lastString = last[..<indexLast]
 
@@ -113,6 +107,7 @@ final class AvatarView: UIView {
         let username = self.user?.username ?? "?"
         let text = subscription == "?" ? username : subscription
 
+        let username = user.username ?? "?"
         var initials = ""
         var color: UInt = 0x000000
 

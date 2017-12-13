@@ -11,13 +11,13 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class SubscriptionMembersRequestSpec: XCTestCase {
+class SubscriptionMembersRequestSpec: APITestCase {
     func testRequestWithRoomId() {
         let _request = SubscriptionMembersRequest(roomId: "ByehQjC44FwMeiLbX")
-        guard let request = _request.request(for: API.shared, options: .paginated(count: 20, offset: 100)) else {
+        guard let request = _request.request(for: api, options: .paginated(count: 20, offset: 100)) else {
             return XCTFail("request is not nil")
         }
-        let url = API.shared.host.appendingPathComponent(_request.path)
+        let url = api.host.appendingPathComponent(_request.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomId=ByehQjC44FwMeiLbX&count=20&offset=100"
 
@@ -27,10 +27,10 @@ class SubscriptionMembersRequestSpec: XCTestCase {
 
     func testRequestWithRoomName() {
         let _request = SubscriptionMembersRequest(roomName: "testing")
-        guard let request = _request.request(for: API.shared, options: .paginated(count: 20, offset: 100)) else {
+        guard let request = _request.request(for: api, options: .paginated(count: 20, offset: 100)) else {
             return XCTFail("request is not nil")
         }
-        let url = API.shared.host.appendingPathComponent(_request.path)
+        let url = api.host.appendingPathComponent(_request.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomName=testing&count=20&offset=100"
 

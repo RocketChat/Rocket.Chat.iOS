@@ -6,12 +6,13 @@
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 
+import GoogleSignIn
+
 extension AuthViewController {
     func authenticateWithGoogle() {
         startLoading()
 
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
+        GIDSignIn.sharedInstance().clientID = "662030055877-9qc3lqsbgif4k1ktl89dqeaec3m163i4.apps.googleusercontent.com"
         GIDSignIn.sharedInstance().delegate = self
         GIDSignIn.sharedInstance().uiDelegate = self
         GIDSignIn.sharedInstance().signIn()
@@ -32,7 +33,7 @@ extension AuthViewController: GIDSignInDelegate {
             "idToken": user.authentication.idToken,
             "expiresIn": Int(user.authentication.accessTokenExpirationDate.timeIntervalSinceNow),
             "scope": "profile"
-        ] as [String : Any]
+        ] as [String: Any]
 
         AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
     }

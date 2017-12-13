@@ -14,7 +14,8 @@ extension ChatViewController: SocketConnectionHandler {
         hideHeaderStatusView()
 
         DispatchQueue.main.async { [weak self] in
-            if let subscription = self?.subscription {
+            guard let subscription = self?.subscription ?? .initialSubscription() else { return }
+            if !subscription.isInvalidated, subscription.isValid() {
                 self?.subscription = subscription
             }
         }
@@ -29,6 +30,10 @@ extension ChatViewController: SocketConnectionHandler {
         chatHeaderViewStatus?.buttonRefresh.isHidden = false
         chatHeaderViewStatus?.backgroundColor = .RCLightGray()
         chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
+    }
+
+    func socketDidReturnError(socket: SocketManager, error: SocketError) {
+        // Handle errors
     }
 
 }

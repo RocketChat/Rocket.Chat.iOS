@@ -10,28 +10,32 @@ def shared_pods
   pod 'Crashlytics'
 
   # Code utilities
-  pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git', :tag => '4.0.0-alpha.1'
+  pod 'SwiftyJSON'
   pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
 
   # UI
-  pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git', :branch => 'chore/swift4_xcode9_ios11'
+  pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
   pod 'MobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
+  pod 'TagListView', '~> 1.0'
+  pod "SearchTextField"
 
   # Text Processing
-  pod 'RCMarkdownParser'
+  pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
 
   # Database
   pod 'RealmSwift'
 
   # Network
-  pod 'SDWebImage', '~> 3'
-  pod 'Starscream', :git => 'https://github.com/daltoniam/Starscream.git', :branch => 'swift4'
-  pod 'ReachabilitySwift', :git => 'https://github.com/ashleymills/Reachability.swift.git', :branch => 'develop'
+  pod 'SDWebImage', '~> 4'
+  pod 'SDWebImage/GIF'
+  pod 'Starscream', '~> 2'
+  pod 'ReachabilitySwift'
 
   # Authentication SDKs
+  pod 'OAuthSwift'
   pod '1PasswordExtension'
-  pod 'Google/SignIn'
+  pod 'GoogleSignIn'
 end
 
 target 'Rocket.Chat' do
@@ -45,9 +49,16 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
+  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'
     end
+    if swift4Targets.include? target.name
+      target.build_configurations.each do |config|
+        config.build_settings['SWIFT_VERSION'] = '4.0'
+      end
+    end
   end
 end
+

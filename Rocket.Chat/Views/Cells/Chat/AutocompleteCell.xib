@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -18,13 +18,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="482" height="54.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EvE-ak-5w6">
-                        <rect key="frame" x="20" y="19.5" width="16" height="16"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="16" id="ruE-Z6-lMT"/>
-                            <constraint firstAttribute="height" constant="16" id="vNL-eC-oWn"/>
-                        </constraints>
-                    </imageView>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IHT-nZ-nga" customClass="AvatarView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="15" y="15" width="25" height="25"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -49,13 +42,10 @@
                     <constraint firstItem="IHT-nZ-nga" firstAttribute="leading" secondItem="hWz-Y4-uEw" secondAttribute="leading" constant="15" id="QU7-B7-ieL"/>
                     <constraint firstItem="IHT-nZ-nga" firstAttribute="centerY" secondItem="hWz-Y4-uEw" secondAttribute="centerY" id="Vf4-6N-Z9w"/>
                     <constraint firstItem="Gvu-r5-Qh8" firstAttribute="leading" secondItem="IHT-nZ-nga" secondAttribute="trailing" constant="8" id="XZx-s3-v4q"/>
-                    <constraint firstItem="EvE-ak-5w6" firstAttribute="leading" secondItem="hWz-Y4-uEw" secondAttribute="leading" constant="20" id="edb-Ea-R1z"/>
-                    <constraint firstItem="EvE-ak-5w6" firstAttribute="centerY" secondItem="hWz-Y4-uEw" secondAttribute="centerY" id="mfx-Te-hmh"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
                 <outlet property="avatarViewContainer" destination="IHT-nZ-nga" id="K7p-pN-6nI"/>
-                <outlet property="imageViewIcon" destination="EvE-ak-5w6" id="SlX-F9-X9q"/>
                 <outlet property="labelTitle" destination="Gvu-r5-Qh8" id="6zE-nV-DP7"/>
             </connections>
             <point key="canvasLocation" x="-190" y="-94.5"/>

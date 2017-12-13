@@ -12,15 +12,15 @@ import RealmSwift
 
 class Attachment: BaseModel {
     var type: MessageType {
-        if audioURL?.characters.count ?? 0 > 0 {
+        if audioURL?.count ?? 0 > 0 {
             return .audio
         }
 
-        if videoURL?.characters.count ?? 0 > 0 {
+        if videoURL?.count ?? 0 > 0 {
             return .video
         }
 
-        if imageURL?.characters.count ?? 0 > 0 {
+        if imageURL?.count ?? 0 > 0 {
             return .image
         }
 
@@ -60,36 +60,41 @@ class Attachment: BaseModel {
 
 extension Attachment {
 
-    fileprivate static func fullURLWith(_ path: String?) -> URL? {
-        guard let path = path?.replacingOccurrences(of: "//", with: "/") else { return nil }
-        guard let auth = AuthManager.isAuthenticated() else { return nil }
-        guard let userId = auth.userId else { return nil }
-        guard let token = auth.token else { return nil }
-        guard let baseURL = auth.baseURL() else { return nil }
-        let pathNoSpaces = path.replacingOccurrences(of: " ", with: "%20")
-        let urlString = "\(baseURL)\(pathNoSpaces)?rc_uid=\(userId)&rc_token=\(token)"
+    fileprivate static func fullURLWith(_ path: String?, auth: Auth? = nil) -> URL? {
+        guard
+            let path = path?.replacingOccurrences(of: "//", with: "/"),
+            let pathPercentEncoded = NSString(string: path).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+            let auth = auth ?? AuthManager.isAuthenticated(),
+            let userId = auth.userId,
+            let token = auth.token,
+            let baseURL = auth.baseURL()
+        else {
+            return nil
+        }
+
+        let urlString = "\(baseURL)\(pathPercentEncoded)?rc_uid=\(userId)&rc_token=\(token)"
         return URL(string: urlString)
     }
 
-    func fullFileURL() -> URL? {
-        return Attachment.fullURLWith(titleLink)
+    func fullFileURL(auth: Auth? = nil) -> URL? {
+        return Attachment.fullURLWith(titleLink, auth: auth)
     }
 
-    func fullVideoURL() -> URL? {
-        return Attachment.fullURLWith(videoURL)
+    func fullVideoURL(auth: Auth? = nil) -> URL? {
+        return Attachment.fullURLWith(videoURL, auth: auth)
     }
 
-    func fullImageURL() -> URL? {
+    func fullImageURL(auth: Auth? = nil) -> URL? {
         guard let imageURL = imageURL else { return nil }
         if imageURL.contains("http://") || imageURL.contains("https://") {
             return URL(string: imageURL)
         }
 
-        return Attachment.fullURLWith(imageURL)
+        return Attachment.fullURLWith(imageURL, auth: auth)
     }
 
-    func fullAudioURL() -> URL? {
-        return Attachment.fullURLWith(audioURL)
+    func fullAudioURL(auth: Auth? = nil) -> URL? {
+        return Attachment.fullURLWith(audioURL, auth: auth)
     }
 
 }

@@ -9,14 +9,15 @@
 import Foundation
 import RealmSwift
 import Realm
+import GoogleSignIn
 
 struct AuthManager {
 
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
-    static func isAuthenticated() -> Auth? {
-        guard let realm = Realm.shared else { return nil }
+    static func isAuthenticated(realm: Realm? = Realm.shared) -> Auth? {
+        guard let realm = realm else { return nil }
         return realm.objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false).first
     }
 
@@ -65,6 +66,10 @@ struct AuthManager {
         if let index = index {
             server = servers[index]
         } else {
+            if DatabaseManager.selectedIndex >= servers.count {
+                DatabaseManager.selectDatabase(at: 0)
+            }
+
             server = servers[DatabaseManager.selectedIndex]
         }
 
@@ -137,6 +142,7 @@ struct AuthManager {
             auth.serverURL = serverURL
             auth.token = token
             auth.userId = userId
+            auth.serverVersion = server[ServerPersistKeys.serverVersion] ?? ""
 
             PushManager.updatePushToken()
 
@@ -160,8 +166,11 @@ extension AuthManager {
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
         guard let url = URL(string: auth.serverURL) else { return }
 
-        API.shared.authToken = auth.token
-        API.shared.userId = auth.userId
+        // Turn all users offline
+        Realm.execute({ (realm) in
+            let users = realm.objects(User.self)
+            users.setValue("offline", forKey: "privateStatus")
+        })
 
         SocketManager.connect(url) { (socket, _) in
             guard SocketManager.isConnected() else {
@@ -183,11 +192,15 @@ extension AuthManager {
 
             SocketManager.send(object) { (response) in
                 guard !response.isError() else {
-                    completion(response)
+                    SocketManager.disconnect({ (_, _) in
+                        completion(response)
+                    })
+
                     return
                 }
 
                 PushManager.updatePushToken()
+                SocketManager.sharedInstance.isUserAuthenticated = true
                 completion(response)
             }
         }
@@ -196,16 +209,18 @@ extension AuthManager {
     /**
         Method that creates an User account.
      */
-    static func signup(with name: String, _ email: String, _ password: String, completion: @escaping MessageCompletion) {
+    static func signup(with name: String, _ email: String, _ password: String, customFields: [String: String] = [String: String](), completion: @escaping MessageCompletion) {
+        let param = [
+            "email": email,
+            "pass": password,
+            "name": name
+        ].union(dictionary: customFields)
+
         let object = [
             "msg": "method",
             "method": "registerUser",
-            "params": [[
-                "email": email,
-                "pass": password,
-                "name": name
-            ]]
-        ] as [String : Any]
+            "params": [param]
+        ] as [String: Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
@@ -225,7 +240,7 @@ extension AuthManager {
             "msg": "method",
             "method": "login",
             "params": [params]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
@@ -241,9 +256,6 @@ extension AuthManager {
             auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
             auth.token = result["result"]["token"].string
             auth.userId = result["result"]["id"].string
-
-            API.shared.authToken = auth.token
-            API.shared.userId = auth.userId
 
             if let date = result["result"]["tokenExpires"]["$date"].double {
                 auth.tokenExpires = Date.dateFromInterval(date)
@@ -261,6 +273,7 @@ extension AuthManager {
                 realm.add(auth)
             })
 
+            SocketManager.sharedInstance.isUserAuthenticated = true
             ServerManager.timestampSync()
             completion(response)
         }
@@ -307,13 +320,33 @@ extension AuthManager {
     }
 
     /**
+        This method authenticates the user with a credential token
+        and a credential secret (retrieved via an OAuth method)
+
+        - parameter token: The credential token
+        - parameter secret: The credential secret
+        - parameter completion: The completion block that'll be called in case
+            of success or error.
+     */
+    static func auth(credentials: OAuthCredentials, completion: @escaping MessageCompletion) {
+        let params = [
+            "oauth": [
+                "credentialToken": credentials.token,
+                "credentialSecret": credentials.secret
+            ] as [String: Any]
+        ]
+
+        AuthManager.auth(params: params, completion: completion)
+    }
+
+    /**
         Returns the username suggestion for the logged in user.
     */
     static func usernameSuggestion(completion: @escaping MessageCompletion) {
         let object = [
             "msg": "method",
             "method": "getUsernameSuggestion"
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
@@ -326,7 +359,7 @@ extension AuthManager {
             "msg": "method",
             "method": "setUsername",
             "params": [username]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
@@ -337,16 +370,16 @@ extension AuthManager {
      */
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
-            SocketManager.clear()
             GIDSignIn.sharedInstance().signOut()
 
-            DatabaseManager.removerSelectedDatabase()
+            DraftMessageManager.clearServerDraftMessages()
+            DatabaseManager.removeSelectedDatabase()
+
+            completion()
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
             })
-
-            completion()
         }
     }
 

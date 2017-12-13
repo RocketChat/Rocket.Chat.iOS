@@ -16,6 +16,6 @@ extension Mention: ModelMappeable {
             self.identifier = String.random()
         }
 
-        self.username = values["username"].string ?? ""
+        self.username = values["username"].stringValue
     }
 }

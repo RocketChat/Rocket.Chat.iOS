@@ -12,6 +12,21 @@ import RealmSwift
 final class Auth: Object {
     // Server
     @objc dynamic var serverURL = ""
+    @objc dynamic var serverVersion = ""
+
+    var apiHost: URL? {
+        guard
+            let socketURL = URL(string: serverURL, scheme: "https"),
+            var components = URLComponents(url: socketURL, resolvingAgainstBaseURL: true)
+        else {
+            return nil
+        }
+
+        components.path = ""
+
+        return components.url
+    }
+
     @objc dynamic var settings: AuthSettings?
 
     // Token

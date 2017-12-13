@@ -62,27 +62,58 @@ extension NSMutableAttributedString {
         }
     }
 
+    func setLineSpacing(_ font: UIFont) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = font.lineHeight * 0.1
+
+        self.addAttributes([
+            NSAttributedStringKey.paragraphStyle: paragraphStyle
+            ], range: NSRange(location: 0, length: self.length))
+    }
+
     func transformMarkdown() -> NSAttributedString {
         return MarkdownManager.parser.attributedStringFromAttributedMarkdownString(self)
     }
 
-    func highlightMentions(for message: Message) {
-        message.mentions.forEach {
-            if let username = $0.username {
-                let ranges = string.ranges(of: "@\(username)")
+    func highlightMentions(_ mentions: [String], username: String?) {
+        var handledHighlights: [String] = []
+
+        mentions.forEach { mention in
+            if !handledHighlights.contains(mention) {
+                handledHighlights.append(mention)
+
+                let background: UIColor
+                let font: UIColor
+                if mention == username {
+                    background = .primaryAction
+                    font = .white
+                } else if mention == "all" || mention == "here" {
+                    background = .attention
+                    font = .white
+                } else {
+                    background = .white
+                    font = .link
+                }
+
+                let ranges = string.ranges(of: "@\(mention)")
                 for range in ranges {
                     let range = NSRange(range, in: string)
-                    setBackgroundColor(UIColor.background(for: $0), range: range)
-                    setFontColor(UIColor.font(for: $0), range: range)
+                    setBackgroundColor(background, range: range)
+                    setFontColor(font, range: range)
+                    setFont(MessageTextFontAttributes.boldFont, range: range)
                 }
             }
         }
     }
 
-    func highlightChannels(for message: Message) {
-        message.channels.forEach {
-            if let name = $0.name {
-                let ranges = string.ranges(of: "#\(name)")
+    func highlightChannels(_ channels: [String]) {
+        var handledHighlights: [String] = []
+
+        channels.forEach { channel in
+            if !handledHighlights.contains(channel) {
+                handledHighlights.append(channel)
+
+                let ranges = string.ranges(of: "#\(channel)")
                 for range in ranges {
                     let range = NSRange(range, in: string)
                     setFontColor(.link, range: range)

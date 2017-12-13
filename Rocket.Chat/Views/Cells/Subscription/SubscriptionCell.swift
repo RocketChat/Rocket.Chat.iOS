@@ -104,19 +104,6 @@ final class SubscriptionCell: UITableViewCell {
         guard let subscription = self.subscription else { return }
 
         if subscription.type == .directMessage {
-            var color: UIColor = .RCInvisible()
-
-            if let user = subscription.directMessageUser {
-                color = { _ -> UIColor in
-                    switch user.status {
-                        case .online: return .RCOnline()
-                        case .offline: return .RCInvisible()
-                        case .away: return .RCAway()
-                        case .busy: return .RCBusy()
-                    }
-                }(())
-            }
-
             viewStatus.isHidden = false
             viewStatus.backgroundColor = color
         } else {

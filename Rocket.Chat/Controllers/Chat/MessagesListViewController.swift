@@ -56,12 +56,13 @@ class MessagesListViewData {
 
             let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
-            API.shared.fetch(request, options: options) { result in
-                DispatchQueue.main.async {
-                    self.showing += result?.count ?? 0
-                    self.total = result?.total ?? 0
 
-                    if let messages = result?.getMessages() {
+            API.current()?.fetch(request, options: options, succeeded: { result in
+                DispatchQueue.main.async {
+                    self.showing += result.count ?? 0
+                    self.total = result.total ?? 0
+
+                    if let messages = result.getMessages() {
                         let messages = messages.flatMap { $0 }
                         guard var lastMessage = messages.first else {
                             self.isLoadingMoreMessages = false
@@ -89,7 +90,7 @@ class MessagesListViewData {
                     self.isLoadingMoreMessages = false
                     completion?()
                 }
-            }
+            })
         }
     }
 }
@@ -230,7 +231,7 @@ extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
         let cellData = data.cell(at: indexPath.row)
 
         if let message = cellData.message {
-            return CGSize(width: fullWidth, height: ChatMessageCell.cellMediaHeightFor(message: message, sequential: false))
+            return CGSize(width: fullWidth, height: ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: false))
         }
 
         if cellData.date != nil {

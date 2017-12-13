@@ -11,14 +11,14 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class LoginRequestSpec: XCTestCase {
+class LoginRequestSpec: APITestCase {
     func testRequest() {
         let _request = LoginRequest("testUsername", "testPassword")
-        guard let request = _request.request(for: API.shared) else {
+        guard let request = _request.request(for: api) else {
             return XCTFail("request is not nil")
         }
 
-        let expectedURL = API.shared.host.appendingPathComponent(_request.path)
+        let expectedURL = api.host.appendingPathComponent(_request.path)
 
         XCTAssertEqual(request.url, expectedURL, "url is correct")
         XCTAssertEqual(request.httpMethod, "POST", "http method is correct")

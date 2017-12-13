@@ -19,7 +19,7 @@ struct UploadHelper {
             - data: The file Data to be based on.
         - returns: FileUpload object, if content is valid.
      */
-    static func file(for data: Data, name: String, mimeType: String) -> FileUpload? {
+    static func file(for data: Data, name: String, mimeType: String) -> FileUpload {
         return FileUpload(
             name: name,
             size: sizeFor(data),

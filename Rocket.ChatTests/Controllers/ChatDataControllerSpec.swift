@@ -34,6 +34,55 @@ class ChatDataControllerSpec: XCTestCase {
         XCTAssertEqual(indexPaths.count, 2, "indexPaths will have two results")
     }
 
+    func testIndexPathOf() {
+        let controller = ChatDataController()
+
+        var obj2 = ChatData(type: .message, timestamp: Date())
+        obj2.timestamp = Date().addingTimeInterval(1.0)
+
+        var obj1 = ChatData(type: .message, timestamp: Date())
+        obj1.timestamp = Date()
+
+        var obj3 = ChatData(type: .message, timestamp: Date())
+        obj3.timestamp = Date().addingTimeInterval(2.0)
+
+        controller.insert([obj2, obj1, obj3])
+
+        // We begin from 2 since a Day Separator + a Header/Loader is prepended by default
+
+        XCTAssertEqual(controller.indexPathOf(obj1.identifier)?.row, 2, "obj1 found in correct row")
+        XCTAssertEqual(controller.indexPathOf(obj2.identifier)?.row, 3, "obj2 found in correct row")
+        XCTAssertEqual(controller.indexPathOf(obj3.identifier)?.row, 4, "obj3 found in correct row")
+    }
+
+    func testIndexPathOfMessage() {
+        let controller = ChatDataController()
+
+        let message = Message()
+        let identifier = "message"
+        message.identifier = identifier
+
+        var obj2 = ChatData(type: .message, timestamp: Date())
+        obj2.message = message
+        obj2.timestamp = Date().addingTimeInterval(1.0)
+
+        var obj1 = ChatData(type: .header, timestamp: Date())
+        obj1.timestamp = Date()
+
+        var obj3 = ChatData(type: .message, timestamp: Date())
+        obj3.timestamp = Date().addingTimeInterval(2.0)
+
+        controller.insert([obj2, obj1, obj3])
+
+        // 0. loader/header <- added by default
+        // 1. day separator <- added by default
+        // 2. obj1
+        // 3. obj2
+        // 4. obj3
+
+        XCTAssertEqual(controller.indexPathOfMessage(identifier: identifier)?.row, 3, "message found in correct row")
+    }
+
     func testInsertMultipleObjects() {
         let controller = ChatDataController()
 
@@ -56,7 +105,9 @@ class ChatDataControllerSpec: XCTestCase {
 
         let (indexPaths, _) = controller.insert([obj1, obj2])
         XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
-        XCTAssertEqual(indexPaths.count, 3, "indexPaths will have three results")
+
+        // we will have 4 because header or loader + a day separator are added by default
+        XCTAssertEqual(indexPaths.count, 4, "indexPaths will have four results")
     }
 
     func testInsertMultipleObjectsWithDifferentDates() {
@@ -88,6 +139,7 @@ class ChatDataControllerSpec: XCTestCase {
         let controller = ChatDataController()
 
         let message = Message()
+        message.updatedAt = Date().addingTimeInterval(-1000)
         message.identifier = "update-1"
         message.text = "Foobar"
 
@@ -98,9 +150,12 @@ class ChatDataControllerSpec: XCTestCase {
         XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
         XCTAssertEqual(indexPaths.count, 2, "indexPaths will have three results")
 
-        message.text = "Foobar, updated"
+        let newMessage = Message()
+        newMessage.identifier = "update-1"
+        newMessage.updatedAt = Date()
+        newMessage.text = "Foobar, updated"
 
-        let index = controller.update(message)
+        let index = controller.update(newMessage)
         XCTAssertEqual(index, 1, "indexPath is the message indexPath row")
         XCTAssertEqual(controller.data[index].message?.text, "Foobar, updated", "Message text was updated")
     }

@@ -39,7 +39,7 @@ final class RegisterUsernameViewController: BaseViewController {
             self?.stopLoading()
 
             if !response.isError() {
-                self?.textFieldUsername.text = response.result["result"].string ?? ""
+                self?.textFieldUsername.text = response.result["result"].stringValue
             }
         }
     }
@@ -108,14 +108,7 @@ final class RegisterUsernameViewController: BaseViewController {
                 }
             } else {
                 self?.dismiss(animated: true, completion: nil)
-
-                let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-                let controller = storyboardChat.instantiateInitialViewController()
-                let application = UIApplication.shared
-
-                if let window = application.windows.first {
-                    window.rootViewController = controller
-                }
+                AppManager.reloadApp()
             }
         }
     }

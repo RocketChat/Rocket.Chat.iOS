@@ -12,6 +12,19 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
+// MARK: Test Instance
+
+extension Subscription {
+    static func testInstance() -> Subscription {
+        let subscription = Subscription()
+        subscription.auth = Auth.testInstance()
+        subscription.rid = "subscription-rid"
+        subscription.name = "subscription-name"
+        subscription.identifier = "subscription-identifier"
+        return subscription
+    }
+}
+
 class SubscriptionSpec: XCTestCase {
 
     override func setUp() {
@@ -62,8 +75,8 @@ class SubscriptionSpec: XCTestCase {
             "open": false,
             "alert": true,
             "f": false,
-            "ts": ["$date": 1234567891011],
-            "ls": ["$date": 1234567891011]
+            "ts": ["$date": 123456789],
+            "ls": ["$date": 123456789]
         ])
 
         Realm.executeOnMainThread({ realm in
@@ -82,6 +95,29 @@ class SubscriptionSpec: XCTestCase {
             XCTAssert(first?.identifier == "subs-from-json-1", "Subscription object was created with success")
             XCTAssert(auth.subscriptions.first?.identifier == first?.identifier, "Auth relationship with Subscription is OK")
         })
+    }
+
+    func testMapRoom() {
+        let object = JSON([
+            "_id": "room-id",
+            "t": "c",
+            "name": "room-name",
+            "u": [ "_id": "user-id", "username": "username" ],
+            "topic": "room-topic",
+            "muted": [ "username" ],
+            "jitsiTimeout": [ "$date": 1480377601 ],
+            "ro": true,
+            "description": "room-description"
+        ])
+
+        let subscription = Subscription()
+
+        subscription.mapRoom(object)
+
+        XCTAssertEqual(subscription.roomTopic, "room-topic")
+        XCTAssertEqual(subscription.roomDescription, "room-description")
+        XCTAssertEqual(subscription.roomReadOnly, true)
+        XCTAssertEqual(subscription.roomOwnerId, "user-id")
     }
 
     func testSubscriptionDisplayNameHonorFullnameSettings() {
@@ -202,4 +238,108 @@ class SubscriptionSpec: XCTestCase {
         XCTAssertNotEqual(group.displayName(), "special group", "Subscription.displayName() will return name for groups when 'allowSpecialCharsOnRoomNames' is disabled")
     }
 
+    func testRoomOwner() {
+        let user = User()
+        user.identifier = "room-owner-id"
+
+        let subscription = Subscription()
+        subscription.roomOwnerId = user.identifier
+
+        Realm.executeOnMainThread { realm in
+            realm.add(user)
+        }
+
+        XCTAssertEqual(subscription.roomOwner, user, "roomOwner is correct")
+    }
+
+    func testDirectMessageUser() {
+        let user = User()
+        user.identifier = "other-user-id"
+
+        let subscription = Subscription()
+        subscription.otherUserId = user.identifier
+
+        Realm.executeOnMainThread { realm in
+            realm.add(user)
+        }
+
+        XCTAssertEqual(subscription.directMessageUser, user, "directMessageUser is correct")
+    }
+}
+
+// MARK: Test Queries
+extension SubscriptionSpec: RealmTestCase {
+    func testFindByRoomId() throws {
+        let realm = testRealm()
+
+        let sub1 = Subscription()
+        sub1.identifier = "sub1-identifier"
+        sub1.rid = "sub1-rid"
+
+        let sub2 = Subscription()
+        sub2.identifier = "sub2-identifier"
+        sub2.rid = "sub2-rid"
+
+        try realm.write {
+            realm.add(sub1)
+            realm.add(sub2)
+        }
+
+        XCTAssertEqual(Subscription.find(rid: "sub2-rid", realm: realm), sub2)
+        XCTAssertEqual(Subscription.find(rid: "sub1-rid", realm: realm), sub1)
+    }
+
+    func testFindByNameAndType() throws {
+        let realm = testRealm()
+
+        let sub1 = Subscription()
+        sub1.identifier = "sub1-identifier"
+        sub1.name = "sub1-name"
+        sub1.type = .directMessage
+
+        let sub2 = Subscription()
+        sub2.identifier = "sub2-identifier"
+        sub2.name = "sub2-name"
+        sub2.type = .channel
+
+        try realm.write {
+            realm.add(sub1)
+            realm.add(sub2)
+        }
+
+        XCTAssertEqual(Subscription.find(name: "sub1-name", subscriptionType: [.directMessage], realm: realm), sub1)
+        XCTAssertEqual(Subscription.find(name: "sub2-name", subscriptionType: [.channel], realm: realm), sub2)
+    }
+
+    func testInitialSubscription() throws {
+        let realm = testRealm()
+
+        let auth = Auth.testInstance()
+
+        let sub1 = Subscription()
+        sub1.identifier = "sub1-identifier"
+        sub1.rid = "sub1-rid"
+        sub1.lastSeen = Date()
+        sub1.auth = auth
+
+        let sub2 = Subscription()
+        sub2.identifier = "sub2-identifier"
+        sub2.rid = "sub2-rid"
+        sub2.lastSeen = Date().addingTimeInterval(-1.0)
+        sub2.auth = auth
+
+        try realm.write {
+            realm.add(auth)
+            realm.add(sub1)
+            realm.add(sub2)
+        }
+
+        // if there's no last notification room id (user didn't launch app by tapping notification)
+        XCTAssertEqual(Subscription.initialSubscription(auth: auth), sub1)
+
+        PushManager.lastNotificationRoomId = "sub2-rid"
+
+        // if there's no last notification room id (user launched app by tapping notification)
+        XCTAssertEqual(Subscription.initialSubscription(auth: auth), sub2)
+    }
 }

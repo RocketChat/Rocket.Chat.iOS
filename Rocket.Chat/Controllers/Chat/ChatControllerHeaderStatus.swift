@@ -54,17 +54,7 @@ extension ChatViewController {
 extension ChatViewController: ChatHeaderViewStatusDelegate {
 
     func viewStatusButtonRefreshDidPressed(_ view: ChatHeaderViewStatus) {
-        view.activityIndicator.startAnimating()
-        view.buttonRefresh.isHidden = true
-
-        SocketManager.reconnect()
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            if !SocketManager.isConnected() {
-                view.activityIndicator.stopAnimating()
-                view.buttonRefresh.isHidden = false
-            }
-        }
+        reconnect()
     }
 
 }

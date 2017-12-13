@@ -10,36 +10,39 @@ import UIKit
 import RealmSwift
 
 extension ChatViewController {
-
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
         guard let realm = Realm.shared else { return }
 
-        searchResult = [:]
+        searchResult = []
 
-        if prefix == "@" && word.characters.count > 0 {
-            let users = realm.objects(User.self).filter(NSPredicate(format: "username BEGINSWITH[c] %@", word))
+        if prefix == "@" {
+            searchResult = User.search(usernameContaining: word, preference: dataController.messagesUsernames)
 
-            for user in users {
-                if let username = user.username {
-                    searchResult[username] = user
-                }
+            if "here".contains(word) || word.count == 0 {
+                searchResult.append(("here", "@"))
             }
 
-            if "here".contains(word) {
-                searchResult["here"] = UIImage(named: "Hashtag")
+            if "all".contains(word) || word.count == 0 {
+                searchResult.append(("all", "@"))
             }
-
-            if "all".contains(word) {
-                searchResult["all"] = UIImage(named: "Hashtag")
-            }
-
-        } else if prefix == "#" && word.characters.count > 0 {
+        } else if prefix == "#" && word.count > 0 {
             let channels = realm.objects(Subscription.self).filter("auth != nil && (privateType == 'c' || privateType == 'p') && name BEGINSWITH[c] %@", word)
 
             for channel in channels {
-                searchResult[channel.name] = channel.type == .channel ? UIImage(named: "Hashtag") : UIImage(named: "Lock")
+                searchResult.append((channel.name, "#"))
             }
 
+        } else if prefix == "/" {
+            let commands: Results<Command>
+            if word.count > 0 {
+                commands = realm.objects(Command.self).filter("command BEGINSWITH[c] %@", word)
+            } else {
+                commands = realm.objects(Command.self)
+            }
+
+            commands.forEach {
+                searchResult.append(($0.command, "/"))
+            }
         }
 
         let show = (searchResult.count > 0)
@@ -51,7 +54,7 @@ extension ChatViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResult.keys.count
+        return searchResult.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -63,31 +66,29 @@ extension ChatViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let key = Array(searchResult.keys)[indexPath.row]
+        let key = searchResult[indexPath.row].0
         acceptAutoCompletion(with: "\(key) ", keepPrefix: true)
     }
 
-    private func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> AutocompleteCell {
+    private func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> UITableViewCell {
         guard let cell = autoCompletionView.dequeueReusableCell(withIdentifier: AutocompleteCell.identifier) as? AutocompleteCell else {
-            return AutocompleteCell(style: .`default`, reuseIdentifier: AutocompleteCell.identifier)
+            return UITableViewCell()
         }
+
         cell.selectionStyle = .default
 
-        let key = Array(searchResult.keys)[indexPath.row]
-        if let user = searchResult[key] as? User {
-            cell.avatarView.isHidden = false
-            cell.imageViewIcon.isHidden = true
+        if let user = searchResult[indexPath.row].1 as? User {
+            cell.avatarView.labelInitials.textColor = .white
             cell.avatarView.user = user
         } else {
-            cell.avatarView.isHidden = true
-            cell.imageViewIcon.isHidden = false
-
-            if let image = searchResult[key] as? UIImage {
-                cell.imageViewIcon.image = image.imageWithTint(.lightGray)
-            }
+            let type = searchResult[indexPath.row].1 as? String ?? "#"
+            cell.avatarView.imageView.image = nil
+            cell.avatarView.labelInitials.textColor = .lightGray
+            cell.avatarView.labelInitials.text = type
+            cell.avatarView.backgroundColor = .white
         }
 
-        cell.labelTitle.text = key
+        cell.labelTitle.text = searchResult[indexPath.row].0
         return cell
     }
 }

@@ -11,7 +11,7 @@ import UIKit
 class MembersListViewData {
     var subscription: Subscription?
 
-    let pageSize = 100
+    let pageSize = 50
     var currentPage = 0
 
     var showing: Int = 0
@@ -40,28 +40,24 @@ class MembersListViewData {
 
         if let subscription = subscription {
             isLoadingMoreMembers = true
-            let request = SubscriptionMembersRequest(
-                roomId: subscription.rid,
-                type: subscription.type
-            )
 
-            let options = APIRequestOptions.paginated(
-                count: pageSize,
-                offset: currentPage * pageSize
-            )
+            let request = SubscriptionMembersRequest(roomId: subscription.rid, type: subscription.type)
+            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
 
-            API.shared.fetch(request, options: options) { result in
-                self.showing += result?.count ?? 0
-                self.total = result?.total ?? 0
-                if let members = result?.members {
+            API.current()?.fetch(request, options: options, succeeded: { result in
+                self.showing += result.count ?? 0
+                self.total = result.total ?? 0
+
+                if let members = result.members {
                     self.membersPages.append(members.flatMap { $0 })
                 }
 
                 self.currentPage += 1
 
+                self.title = "\(localized("chat.members.list.title")) (\(self.total))"
                 self.isLoadingMoreMembers = false
                 completion?()
-            }
+            })
         }
     }
 }
@@ -75,20 +71,33 @@ class MembersListViewController: BaseViewController {
     @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
         let data = MembersListViewData()
         data.subscription = self.data.subscription
-        data.loadMoreMembers {
-            self.data = data
+        data.loadMoreMembers { [weak self] in
+            self?.data = data
+
             DispatchQueue.main.async {
-                self.membersTableView.reloadData()
-                self.membersTableView.refreshControl?.endRefreshing()
+                if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
+                    self?.membersTableView?.refreshControl?.endRefreshing()
+                }
+
+                UIView.performWithoutAnimation {
+                    self?.membersTableView?.reloadData()
+                }
             }
         }
     }
 
     func loadMoreMembers() {
-        data.loadMoreMembers {
+        data.loadMoreMembers { [weak self] in
             DispatchQueue.main.async {
-                self.membersTableView.reloadData()
-                self.membersTableView.refreshControl?.endRefreshing()
+                self?.title = self?.data.title
+
+                if self?.membersTableView?.refreshControl?.isRefreshing ?? false {
+                    self?.membersTableView?.refreshControl?.endRefreshing()
+                }
+
+                UIView.performWithoutAnimation {
+                    self?.membersTableView?.reloadData()
+                }
             }
         }
     }
@@ -107,6 +116,8 @@ extension MembersListViewController {
         if let cell = membersTableView.dequeueReusableCell(withIdentifier: LoaderTableViewCell.identifier) as? LoaderTableViewCell {
             self.loaderCell = cell
         }
+
+        title = data.title
     }
 
     func registerCells() {

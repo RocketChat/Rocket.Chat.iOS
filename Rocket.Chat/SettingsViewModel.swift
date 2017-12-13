@@ -8,15 +8,32 @@
 
 import UIKit
 
-private enum BundleInfoKey: String {
+internal enum BundleInfoKey: String {
     case version = "CFBundleShortVersionString"
     case build = "CFBundleVersion"
 }
 
 final class SettingsViewModel {
 
+    internal var title: String {
+        return localized("myaccount.settings.title")
+    }
+
+    internal var contactus: String {
+        return localized("myaccount.settings.contactus")
+    }
+
+    internal var license: String {
+        return localized("myaccount.settings.license")
+    }
+
+    internal var canViewAdminPanel: Bool {
+        guard let user = AuthManager.currentUser(), !user.isInvalidated else { return false }
+        return user.canViewAdminPanel()
+    }
+
     internal var formattedVersion: String {
-        return "Version: \(version) (\(build))"
+        return String(format: localized("myaccount.settings.version"), version, build)
     }
 
     internal var version: String {
@@ -51,7 +68,7 @@ final class SettingsViewModel {
 
     // MARK: Helpers
 
-    private func appInfo(_ info: BundleInfoKey) -> String {
+    internal func appInfo(_ info: BundleInfoKey) -> String {
         return Bundle.main.infoDictionary?[info.rawValue] as? String ?? ""
     }
 }

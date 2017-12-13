@@ -33,7 +33,13 @@ struct ChatData {
 
 final class ChatDataController {
 
-    var data: [ChatData] = []
+    var messagesUsernames: Set<String> = []
+    var data: [ChatData] = [] {
+        didSet {
+            messagesUsernames.removeAll()
+            messagesUsernames.formUnion(data.flatMap { $0.message?.user?.username })
+        }
+    }
     var loadedAllMessages = false
 
     func clear() -> [IndexPath] {
@@ -87,6 +93,15 @@ final class ChatDataController {
         }.first
     }
 
+    func indexPathOfMessage(identifier: String) -> IndexPath? {
+        return data.filter { item in
+            guard let messageIdentifier = item.message?.identifier else { return false }
+            return messageIdentifier == identifier
+        }.flatMap { item in
+            item.indexPath
+        }.first
+    }
+
     // swiftlint:disable function_body_length cyclomatic_complexity
     @discardableResult
     func insert(_ items: [ChatData]) -> ([IndexPath], [IndexPath]) {
@@ -119,9 +134,7 @@ final class ChatDataController {
                 // Check if already contains some separator with this data
                 var insert = true
                 for obj in data.filter({ $0.type == .daySeparator })
-                    where firstMessage.timestamp.day == obj.timestamp.day &&
-                        firstMessage.timestamp.month == obj.timestamp.month &&
-                        firstMessage.timestamp.year == obj.timestamp.year {
+                    where firstMessage.timestamp.sameDayAs(obj.timestamp) {
                             insert = false
                 }
 
@@ -146,25 +159,22 @@ final class ChatDataController {
             }
         }
 
+        func needsSeparator(_ obj: ChatData) -> Bool {
+            if obj.type != .message { return false }
+
+            return data.filter({
+                $0.type == .daySeparator && $0.timestamp.sameDayAs(obj.timestamp)
+            }).count == 0 && newItems.filter({
+                $0.type == .daySeparator && $0.timestamp.sameDayAs(obj.timestamp)
+            }).count == 0
+        }
+
         for newObj in items {
             if let lastObj = lastObj {
-                if lastObj.type == .message && (
-                    lastObj.timestamp.day != newObj.timestamp.day ||
-                    lastObj.timestamp.month != newObj.timestamp.month ||
-                    lastObj.timestamp.year != newObj.timestamp.year) {
-
-                    // Check if already contains some separator with this data
-                    var insert = true
-                    for obj in data.filter({ $0.type == .daySeparator })
-                        where lastObj.timestamp.day == obj.timestamp.day &&
-                            lastObj.timestamp.month == obj.timestamp.month &&
-                            lastObj.timestamp.year == obj.timestamp.year {
-                                insert = false
-                    }
-
-                    if insert {
-                        insertDaySeparator(from: lastObj)
-                    }
+                if needsSeparator(lastObj) {
+                    insertDaySeparator(from: lastObj)
+                } else if needsSeparator(newObj) {
+                    insertDaySeparator(from: newObj)
                 }
             }
 
@@ -196,7 +206,14 @@ final class ChatDataController {
     func update(_ message: Message) -> Int {
         for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
-                MessageTextCacheManager.shared.update(for: message)
+                if obj.message?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
+                    return -1
+                }
+
+                if obj.message?.text != message.text {
+                    MessageTextCacheManager.shared.update(for: message)
+                }
+
                 data[idx].message = message
                 return obj.indexPath.row
         }

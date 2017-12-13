@@ -8,6 +8,7 @@
 
 import Foundation
 import SimpleImageViewer
+import FLAnimatedImage
 
 // MARK: UIDocumentInteractionControllerDelegate
 
@@ -65,8 +66,13 @@ extension ChatViewController {
 
         func open() {
             let configuration = ImageViewerConfiguration { config in
-                if let data = try? Data(contentsOf: localFileURL) {
-                    config.image = UIImage(data: data)
+                if let data = try? Data(contentsOf: localFileURL),
+                    let contentType = data.imageContentType {
+                    if contentType == .gif {
+                        config.animatedImage = FLAnimatedImage(gifData: data)
+                    } else {
+                        config.image = UIImage(data: data)
+                    }
                 }
             }
             present(ImageViewerController(configuration: configuration), animated: false)

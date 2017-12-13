@@ -28,7 +28,6 @@ class MessageTextCacheManager {
 
     @discardableResult func update(for message: Message) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
-        let resultText: NSMutableAttributedString
         let key = cachedKey(for: identifier)
 
         let text = NSMutableAttributedString(string: message.textNormalized())
@@ -39,15 +38,20 @@ class MessageTextCacheManager {
         } else {
             text.setFont(MessageTextFontAttributes.defaultFont)
             text.setFontColor(MessageTextFontAttributes.defaultFontColor)
+            text.setLineSpacing(MessageTextFontAttributes.defaultFont)
         }
 
-        resultText = NSMutableAttributedString(attributedString: text.transformMarkdown())
-        resultText.trimCharacters(in: .whitespaces)
-        resultText.highlightMentions(for: message)
-        resultText.highlightChannels(for: message)
+        let mentions = Array(message.mentions.flatMap { $0.username })
+        let channels = Array(message.channels.flatMap { $0.name })
+        let username = AuthManager.currentUser()?.username
 
-        cache.setObject(resultText, forKey: key)
-        return resultText
+        let finalText = NSMutableAttributedString(attributedString: text.transformMarkdown())
+        finalText.trimCharacters(in: .whitespaces)
+        finalText.highlightMentions(mentions, username: username)
+        finalText.highlightChannels(channels)
+        self.cache.setObject(finalText, forKey: key)
+
+        return finalText
     }
 
     func message(for message: Message) -> NSMutableAttributedString? {

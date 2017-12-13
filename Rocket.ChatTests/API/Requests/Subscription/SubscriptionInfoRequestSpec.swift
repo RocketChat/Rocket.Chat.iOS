@@ -11,13 +11,13 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class SubscriptionInfoRequestSpec: XCTestCase {
+class SubscriptionInfoRequestSpec: APITestCase {
     func testRequestWithRoomId() {
         let _request = SubscriptionInfoRequest(roomId: "ByehQjC44FwMeiLbX")
-        guard let request = _request.request(for: API.shared) else {
+        guard let request = _request.request(for: api) else {
             return XCTFail("request is not nil")
         }
-        let url = API.shared.host.appendingPathComponent(_request.path)
+        let url = api.host.appendingPathComponent(_request.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomId=ByehQjC44FwMeiLbX"
 
@@ -27,10 +27,10 @@ class SubscriptionInfoRequestSpec: XCTestCase {
 
     func testRequestWithRoomName() {
         let _request = SubscriptionInfoRequest(roomName: "testing")
-        guard let request = _request.request(for: API.shared) else {
+        guard let request = _request.request(for: api) else {
             return XCTFail("request is not nil")
         }
-        let url = API.shared.host.appendingPathComponent(_request.path)
+        let url = api.host.appendingPathComponent(_request.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomName=testing"
 

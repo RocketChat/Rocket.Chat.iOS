@@ -33,8 +33,8 @@ class ChannelInfoViewController: BaseViewController {
                     ChannelInfoUserCellData(user: subscription.directMessageUser)
                 ], channelInfoData]
             } else {
-                let topic = subscription.roomTopic?.characters.count ?? 0 == 0 ? localized("chat.info.item.no_topic") : subscription.roomTopic
-                let description = subscription.roomDescription?.characters.count ?? 0 == 0 ? localized("chat.info.item.no_description") : subscription.roomDescription
+                let topic = subscription.roomTopic?.count ?? 0 == 0 ? localized("chat.info.item.no_topic") : subscription.roomTopic
+                let description = subscription.roomDescription?.count ?? 0 == 0 ? localized("chat.info.item.no_description") : subscription.roomDescription
 
                 tableViewData = [[
                     ChannelInfoBasicCellData(title: "#\(subscription.displayName())"),

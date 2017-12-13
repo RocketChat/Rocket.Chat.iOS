@@ -38,20 +38,31 @@ extension MessageManager {
             "params": ["\(subscription.rid)", lastDate, size, [
                 "$date": Date().timeIntervalSince1970 * 1000
             ]]
-        ] as [String : Any]
+        ] as [String: Any]
 
         let validMessages = List<Message>()
 
         SocketManager.send(request) { response in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-            let list = response.result["result"]["messages"].array
+            guard !response.isError() else {
+                return Log.debug(response.result.string)
+            }
 
+            let list = response.result["result"]["messages"].array
             let subscriptionIdentifier = subscription.identifier
 
             Realm.execute({ (realm) in
                 guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
 
                 list?.forEach { object in
+                    let mockNewMessage = Message()
+                    mockNewMessage.map(object, realm: realm)
+
+                    if let existingMessage = realm.object(ofType: Message.self, forPrimaryKey: object["identifier"].stringValue) {
+                        if existingMessage.updatedAt?.timeIntervalSince1970 == mockNewMessage.updatedAt?.timeIntervalSince1970 {
+                            return
+                        }
+                    }
+
                     let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
                         object?.subscription = detachedSubscription
                     })
@@ -75,10 +86,12 @@ extension MessageManager {
             "name": "stream-room-messages",
             "id": eventName,
             "params": [eventName, false]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
-            guard !response.isError() else { return Log.debug(response.result.string) }
+            guard !response.isError() else {
+                return Log.debug(response.result.string)
+            }
 
             let object = response.result["fields"]["args"][0]
             let subscriptionIdentifier = subscription.identifier
@@ -101,7 +114,7 @@ extension MessageManager {
             "msg": "method",
             "method": "reportMessage",
             "params": [messageIdentifier, "Message reported by user."]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -116,7 +129,7 @@ extension MessageManager {
             "msg": "method",
             "method": "pinMessage",
             "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request, completion: completion)
     }
@@ -128,7 +141,7 @@ extension MessageManager {
             "msg": "method",
             "method": "unpinMessage",
             "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request, completion: completion)
     }
