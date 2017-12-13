@@ -826,8 +826,9 @@ extension ChatViewController {
             withReuseIdentifier: ChatMessageDaySeparator.identifier,
             for: indexPath
         ) as? ChatMessageDaySeparator else {
-                return UICollectionViewCell()
+            return UICollectionViewCell()
         }
+
         cell.labelTitle.text = obj.timestamp.formatted("MMM dd, YYYY")
         return cell
     }
@@ -839,6 +840,7 @@ extension ChatViewController {
         ) as? ChatChannelHeaderCell else {
             return UICollectionViewCell()
         }
+
         cell.subscription = subscription
         return cell
     }

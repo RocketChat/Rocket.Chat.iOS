@@ -102,13 +102,7 @@ class ChatMessageTextViewModelSpec: XCTestCase {
     func testToggleCollpased() {
         let attachment = Attachment()
         let model = ChatMessageTextViewModel(withAttachment: attachment)
-
-        let expectation = XCTestExpectation(description: "toggle value change")
-        model.toggleCollpase {
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 2)
-
+        model.toggleCollpase()
         XCTAssertTrue(model.collapsed)
     }
 }
