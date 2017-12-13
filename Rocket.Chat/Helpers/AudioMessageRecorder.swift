@@ -62,6 +62,9 @@ class AudioMessageRecorder: NSObject, AVAudioRecorderDelegate {
         recorder?.delegate = recorderDelegate
         recorder?.isMeteringEnabled = true
         recorder?.prepareToRecord()
+
+        setSession(active: true)
+        recorder?.record()
     }
 
     private func setSession(active: Bool) {
