@@ -11,7 +11,7 @@ import SlackTextViewController
 import SimpleImageViewer
 
 // swiftlint:disable file_length type_body_length
-final class ChatViewController: SLKTextViewController, Alerter {
+final class ChatViewController: SLKTextViewController {
 
     var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
