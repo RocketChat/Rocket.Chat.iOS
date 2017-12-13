@@ -93,7 +93,11 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         SubscriptionsViewController.shared?.subscriptionsToken?.invalidate()
 
         AuthManager.logout {
-            AppManager.reloadApp()
+            if DatabaseManager.servers?.count ?? 0 > 0 {
+                AppManager.changeSelectedServer(index: 0)
+            } else {
+                AppManager.reloadApp()
+            }
         }
     }
 
