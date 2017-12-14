@@ -76,98 +76,76 @@ class UploadManager {
 
     // swiftlint:disable function_body_length
     func uploadToUFSFile(store: String, file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
-        if let api = API.current() {
-            let req = UploadRequest(
-                roomId: subscription.rid,
-                data: file.data,
-                filename: file.name,
-                mimetype: file.type
-            )
+        // Normalize the store name, cause setting is not the same value
+        // In the future, we do plan to change it and return the correct value
+        let normalizedStore = store == "FileSystem" ? "fileSystem" : "rocketchat_uploads"
+        let request = [
+            "msg": "method",
+            "method": "ufsCreate",
+            "params": [[
+                "name": file.name,
+                "size": file.size,
+                "type": file.type,
+                "rid": subscription.rid,
+                "description": "",
+                "store": normalizedStore
+            ]]
+        ] as [String: Any]
 
-            api.fetch(req, succeeded: { _ in
-                completion(nil, false)
-            }, errored: { error in
-                if case .version = error {
-                    // TODO: Remove Upload fallback after Rocket.Chat 1.0
-                    oldUploadMethod()
-                } else {
+        SocketManager.send(request) { [unowned self] (response) in
+            guard !response.isError() else {
+                completion(response, true)
+                return
+            }
+
+            let result = response.result
+
+            guard let auth = AuthManager.isAuthenticated() else { return }
+            guard let uploadURL = URL(string: result["result"]["url"].stringValue) else { return }
+            guard let fileToken = result["result"]["token"].string else { return }
+            guard let fileIdentifier = result["result"]["fileId"].string else { return }
+
+            let headers = [[
+                "name": "Cookie",
+                "value": "rc_uid=\(auth.userId ?? ""); rc_token=\(auth.token ?? "")"
+            ]]
+
+            let request = self.requestUpload(uploadURL, file: file, formData: JSON(headers))
+            let config = URLSessionConfiguration.default
+            let session = URLSession(configuration: config)
+            let task = session.uploadTask(with: request, from: file.data, completionHandler: { (_, _, error) in
+                if error != nil {
                     completion(nil, true)
-                }
-            })
-        }
+                } else {
+                    let request = [
+                        "msg": "method",
+                        "method": "ufsComplete",
+                        "params": [fileIdentifier, normalizedStore, fileToken]
+                    ] as [String: Any]
 
-        func oldUploadMethod() {
-            // Normalize the store name, cause setting is not the same value
-            // In the future, we do plan to change it and return the correct value
-            let normalizedStore = store == "FileSystem" ? "fileSystem" : "rocketchat_uploads"
-            let request = [
-                "msg": "method",
-                "method": "ufsCreate",
-                "params": [[
-                    "name": file.name,
-                    "size": file.size,
-                    "type": file.type,
-                    "rid": subscription.rid,
-                    "description": "",
-                    "store": normalizedStore
-                ]]
-            ] as [String: Any]
+                    SocketManager.send(request) { [unowned self] (response) in
+                        guard !response.isError() else {
+                            completion(response, true)
+                            return
+                        }
 
-            SocketManager.send(request) { [unowned self] (response) in
-                guard !response.isError() else {
-                    completion(response, true)
-                    return
-                }
-
-                let result = response.result
-
-                guard let auth = AuthManager.isAuthenticated() else { return }
-                guard let uploadURL = URL(string: result["result"]["url"].stringValue) else { return }
-                guard let fileToken = result["result"]["token"].string else { return }
-                guard let fileIdentifier = result["result"]["fileId"].string else { return }
-
-                let headers = [[
-                    "name": "Cookie",
-                    "value": "rc_uid=\(auth.userId ?? ""); rc_token=\(auth.token ?? "")"
-                ]]
-
-                let request = self.requestUpload(uploadURL, file: file, formData: JSON(headers))
-                let config = URLSessionConfiguration.default
-                let session = URLSession(configuration: config)
-                let task = session.uploadTask(with: request, from: file.data, completionHandler: { (_, _, error) in
-                    if error != nil {
-                        completion(nil, true)
-                    } else {
-                        let request = [
-                            "msg": "method",
-                            "method": "ufsComplete",
-                            "params": [fileIdentifier, normalizedStore, fileToken]
-                        ] as [String: Any]
-
-                        SocketManager.send(request) { [unowned self] (response) in
-                            guard !response.isError() else {
-                                completion(response, true)
-                                return
-                            }
-
-                            DispatchQueue.main.async {
-                                self.sendFileMessage(params: [
-                                    subscription.rid,
-                                    NSNull(), [
-                                        "type": file.type,
-                                        "size": file.size,
-                                        "name": file.name,
-                                        "_id": fileIdentifier,
-                                        "url": response.result["result"]["path"].stringValue
-                                    ]
-                                ], completion: completion)
-                            }
+                        DispatchQueue.main.async {
+                            self.sendFileMessage(params: [
+                                subscription.rid,
+                                NSNull(), [
+                                    "type": file.type,
+                                    "size": file.size,
+                                    "name": file.name,
+                                    "_id": fileIdentifier,
+                                    "url": response.result["result"]["path"].stringValue
+                                ]
+                            ], completion: completion)
                         }
                     }
-                })
+                }
+            })
 
-                task.resume()
-            }
+            task.resume()
         }
     }
 
