@@ -20,18 +20,10 @@ class SubscriptionsTitleView: UIView {
             labelUser.text = "@\(user.username ?? user.displayName())"
 
             switch user.status {
-            case .online:
-                viewStatus.backgroundColor = .RCOnline()
-                break
-            case .busy:
-                viewStatus.backgroundColor = .RCBusy()
-                break
-            case .away:
-                viewStatus.backgroundColor = .RCAway()
-                break
-            case .offline:
-                viewStatus.backgroundColor = .RCInvisible()
-                break
+            case .online: viewStatus.backgroundColor = .RCOnline()
+            case .busy: viewStatus.backgroundColor = .RCBusy()
+            case .away: viewStatus.backgroundColor = .RCAway()
+            case .offline: viewStatus.backgroundColor = .RCInvisible()
             }
         }
     }

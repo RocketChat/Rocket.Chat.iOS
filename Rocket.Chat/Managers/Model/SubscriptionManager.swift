@@ -171,7 +171,7 @@ struct SubscriptionManager {
             "msg": "sub",
             "name": "stream-notify-user",
             "params": [eventName, false]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -201,7 +201,7 @@ extension SubscriptionManager {
             "name": "stream-notify-room",
             "id": eventName,
             "params": [eventName, false]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -221,7 +221,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "stream-notify-room",
             "params": ["\(subscription.rid)/typing", username, isTyping]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -239,7 +239,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "spotlight",
             "params": [text, NSNull(), ["rooms": true, "users": true]]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else {
@@ -306,7 +306,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "createDirectMessage",
             "params": [username]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -319,7 +319,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "getRoomByTypeAndName",
             "params": ["c", name]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -332,7 +332,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "joinRoom",
             "params": [rid]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -349,7 +349,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "readMessages",
             "params": [subscription.rid]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -366,7 +366,7 @@ extension SubscriptionManager {
                 "rid": message.subscription.rid,
                 "msg": message.text
             ]]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -379,7 +379,7 @@ extension SubscriptionManager {
             "msg": "method",
             "method": "toggleFavorite",
             "params": [subscription.rid, !subscription.favorite]
-        ] as [String : Any]
+        ] as [String: Any]
 
         SocketManager.send(request, completion: completion)
     }

@@ -1,4 +1,4 @@
-
+//
 //  ChatViewController.swift
 //  Rocket.Chat
 //

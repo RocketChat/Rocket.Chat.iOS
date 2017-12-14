@@ -65,13 +65,7 @@ class ServersViewController: UIViewController {
                 DatabaseManager.changeDatabaseInstance(index: indexPath.row)
 
                 SocketManager.disconnect { (_, _) in
-                    let storyboardChat = UIStoryboard(name: "Main", bundle: Bundle.main)
-                    let controller = storyboardChat.instantiateInitialViewController()
-                    let application = UIApplication.shared
-
-                    if let window = application.windows.first {
-                        window.rootViewController = controller
-                    }
+                    WindowManager.open(.subscriptions)
                 }
 
                 AppManager.changeSelectedServer(index: indexPath.row)

@@ -34,7 +34,9 @@ final class ChatTitleView: UIView {
         didSet {
             viewModel.subscription = subscription
             buttonTitle.setTitle(viewModel.title, for: .normal)
-            icon.image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)
+
+            let image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)
+            buttonTitle.setImage(image, for: .normal)
         }
     }
 
