@@ -29,6 +29,8 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        SocketManager.reconnect()
+
         updateAll()
         setupSearchBar()
         setupServerButton()
@@ -311,7 +313,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 extension SubscriptionsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 75
     }
 
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

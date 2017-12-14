@@ -47,6 +47,7 @@ class Subscription: BaseModel {
     @objc dynamic var roomDescription: String?
     @objc dynamic var roomUpdatedAt: Date?
     @objc dynamic var roomReadOnly = false
+    @objc dynamic var roomLastMessage: Message?
 
     let roomMuted = RealmSwift.List<String>()
 

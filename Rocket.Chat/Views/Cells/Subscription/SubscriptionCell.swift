@@ -29,14 +29,16 @@ final class SubscriptionCell: UITableViewCell {
     @IBOutlet weak var viewStatus: UIView! {
         didSet {
             viewStatus.layer.masksToBounds = true
-            viewStatus.layer.cornerRadius = 3
+            viewStatus.layer.cornerRadius = 4.5
+            viewStatus.layer.borderColor = UIColor.white.cgColor
+            viewStatus.layer.borderWidth = 1
         }
     }
 
     weak var avatarView: AvatarView!
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
-            avatarViewContainer.layer.cornerRadius = 4
+            avatarViewContainer.layer.cornerRadius = 20
             avatarViewContainer.layer.masksToBounds = true
 
             if let avatarView = AvatarView.instantiateFromNib() {
@@ -50,6 +52,7 @@ final class SubscriptionCell: UITableViewCell {
     }
 
     @IBOutlet weak var labelName: UILabel!
+    @IBOutlet weak var labelLastMessage: UILabel!
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUnread: UILabel! {
         didSet {
@@ -63,6 +66,7 @@ final class SubscriptionCell: UITableViewCell {
         avatarView.user = nil
         avatarView.subscription = nil
         labelName.text = ""
+        labelLastMessage.text = ""
         labelUnread.text = ""
         labelUnread.alpha = 0
     }
@@ -75,6 +79,7 @@ final class SubscriptionCell: UITableViewCell {
         avatarView.subscription = subscription
         avatarView.user = subscription.directMessageUser
         labelName.text = subscription.displayName()
+        labelLastMessage.text = subscription.roomLastMessage?.text
 
         let nameFontSize = labelName.font.pointSize
         let dateFontSize = labelDate.font.pointSize

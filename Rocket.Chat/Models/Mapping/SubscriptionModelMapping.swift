@@ -42,7 +42,7 @@ extension Subscription: ModelMappeable {
         }
     }
 
-    func mapRoom(_ values: JSON) {
+    func mapRoom(_ values: JSON, realm: Realm?) {
         self.roomDescription = values["description"].stringValue
         self.roomTopic = values["topic"].stringValue
 
@@ -61,6 +61,14 @@ extension Subscription: ModelMappeable {
 
         if let updatedAt = values["_updatedAt"]["$date"].double {
             self.roomUpdatedAt = Date.dateFromInterval(updatedAt)
+        }
+
+        if values["lastMessage"].dictionary != nil {
+            let message = Message()
+            message.map(values["lastMessage"], realm: realm)
+            realm?.add(message, update: true)
+
+            self.roomLastMessage = message
         }
     }
 }
