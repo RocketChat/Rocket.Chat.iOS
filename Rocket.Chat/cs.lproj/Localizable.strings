@@ -28,6 +28,13 @@
 "alert.settings.set_mail_app.title" = "Jejky!";
 "alert.settings.set_mail_app.message" = "Žádné mailové účty. Prosím nastavte účet pošty, aby bylo možné odesílat e-maily.";
 
+"alert.audio_message.success.send" = "Send"; //TODO
+"alert.audio_message.success.title" = "Success"; //TODO
+"alert.audio_message.success.message" = "You message was successfully recorded. Recording time: %@."; //TODO
+
+"alert.audio_message.error.title" = "Ooops!"; //TODO
+"alert.audio_message.error.message" = "An error has occurred. Please, record your message again."; //TODO
+
 "alert.feature.wip.title" = "Jejky!";
 "alert.feature.wip.message" = "Stále pracujeme na této funkci, ale není ještě dokončena.";
 
@@ -42,6 +49,9 @@
 
 "alert.unsupported_feature.title" = "Feature not supported";
 "alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above.";
+
+"alert.push_token_error.title" = "Warning";
+"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0.";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";

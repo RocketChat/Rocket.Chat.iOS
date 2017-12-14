@@ -13,7 +13,7 @@ typealias SendMessageResult = APIResult<SendMessageRequest>
 class SendMessageRequest: APIRequest {
     let requiredVersion = Version(0, 60, 0)
 
-    let method = "POST"
+    let method: HTTPMethod = .post
     let path = "/api/v1/chat.sendMessage"
 
     let id: String

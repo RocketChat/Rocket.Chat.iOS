@@ -9,6 +9,7 @@
 import UIKit
 
 class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
+
     var heightOfInsertedItems: CGFloat = 0.0
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint) -> CGPoint {
@@ -43,4 +44,5 @@ class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
     override func finalizeCollectionViewUpdates() {
         CATransaction.commit()
     }
+
 }
