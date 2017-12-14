@@ -13,7 +13,7 @@ typealias UploadResult = APIResult<UploadRequest>
 class UploadRequest: APIRequest {
     let requiredVersion = Version(0, 60, 0)
 
-    let method = "POST"
+    let method: HTTPMethod = .post
     var path: String {
         return "/api/v1/rooms.upload/\(roomId)"
     }
@@ -62,6 +62,8 @@ class UploadRequest: APIRequest {
     }
 }
 
-extension APIResult where T == SendMessageRequest {
-
+extension APIResult where T == UploadRequest {
+    var error: String? {
+        return raw?["error"].string
+    }
 }
