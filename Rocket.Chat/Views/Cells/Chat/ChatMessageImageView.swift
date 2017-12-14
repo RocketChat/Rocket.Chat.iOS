@@ -20,6 +20,11 @@ final class ChatMessageImageView: UIView {
     weak var delegate: ChatMessageImageViewProtocol?
     var attachment: Attachment! {
         didSet {
+            if oldValue != nil && oldValue.identifier == attachment.identifier {
+                Log.debug("attachment is cached")
+                return
+            }
+
             updateMessageInformation()
         }
     }

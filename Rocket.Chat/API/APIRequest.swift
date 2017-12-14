@@ -26,7 +26,7 @@ protocol APIRequest {
     var requiredVersion: Version { get }
 
     var path: String { get }
-    var method: String { get }
+    var method: HTTPMethod { get }
     var contentType: String { get }
 
     var query: String? { get }
@@ -40,8 +40,8 @@ extension APIRequest {
         return .zero
     }
 
-	var method: String {
-        return "GET"
+	var method: HTTPMethod {
+        return .get
     }
 
 	var contentType: String {
@@ -70,7 +70,7 @@ extension APIRequest {
         }
 
         var request = URLRequest(url: url)
-        request.httpMethod = method
+        request.httpMethod = method.rawValue
         request.httpBody = body()
 
         request.addValue(contentType, forHTTPHeaderField: "Content-Type")
