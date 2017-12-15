@@ -65,7 +65,13 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var reactionsListView: ReactionListView!
+    @IBOutlet weak var reactionsListView: ReactionListView! {
+        didSet {
+            reactionsListView.reactionTapRecognized = { view, sender in
+                view.model = view.model.highlighted(!view.model.highlight)
+            }
+        }
+    }
     @IBOutlet weak var reactionsListViewConstraint: NSLayoutConstraint!
 
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
@@ -260,17 +266,17 @@ final class ChatMessageCell: UICollectionViewCell {
         reactionsListViewConstraint.constant = message.reactions.count > 0 ? 24 : 0
 
         let models = Array(message.reactions.map { reaction -> ReactionViewModel in
-            let highlighted: Bool
+            let highlight: Bool
             if let username = username {
-                highlighted = reaction.usernames.contains(username)
+                highlight = reaction.usernames.contains(username)
             } else {
-                highlighted = false
+                highlight = false
             }
 
             return ReactionViewModel(
                 emoji: reaction.emoji ?? "?",
                 count: reaction.usernames.count.description,
-                highlighted: highlighted
+                highlight: highlight
             )
         })
 

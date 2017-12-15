@@ -19,8 +19,7 @@ struct ReactionListViewModel {
 class ReactionListView: UIView {
     @IBOutlet var scrollView: UIScrollView! {
         didSet {
-            scrollView.showsVerticalScrollIndicator = false
-            scrollView.showsHorizontalScrollIndicator = false
+            setupScrollView()
         }
     }
     @IBOutlet weak var reactionsStack: UIStackView!
@@ -31,6 +30,8 @@ class ReactionListView: UIView {
         }
     }
 
+    var reactionTapRecognized: (ReactionView, UITapGestureRecognizer) -> Void = { _, _ in }
+
     func map(_ model: ReactionListViewModel) {
         let views = model.reactionViewModels.map { reactionViewModel -> ReactionView in
             let view = ReactionView()
@@ -39,7 +40,13 @@ class ReactionListView: UIView {
         }
 
         reactionsStack.arrangedSubviews.forEach(reactionsStack.removeArrangedSubview)
-        views.forEach(reactionsStack.addArrangedSubview)
+
+        views.forEach { view in
+            reactionsStack.addArrangedSubview(view)
+            view.tapRecognized = { sender in
+                self.reactionTapRecognized(view, sender)
+            }
+        }
     }
 
     override init(frame: CGRect) {
@@ -57,7 +64,9 @@ class ReactionListView: UIView {
 extension ReactionListView {
     private func commonInit() {
         Bundle.main.loadNibNamed("ReactionListView", owner: self, options: nil)
+    }
 
+    private func setupScrollView() {
         addSubview(scrollView)
 
         addConstraints(
@@ -70,5 +79,8 @@ extension ReactionListView {
                 withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": scrollView]
             )
         )
+
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
     }
 }
