@@ -33,6 +33,7 @@ class ReactionListView: UIView {
             return view
         }
 
+        reactionsStack.arrangedSubviews.forEach(reactionsStack.removeArrangedSubview)
         views.forEach(reactionsStack.addArrangedSubview)
     }
 
@@ -64,10 +65,5 @@ extension ReactionListView {
                 withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": scrollView]
             )
         )
-
-        model = ReactionListViewModel(reactionViewModels: [
-            ReactionViewModel(emoji: ":see_no_evil:", count: "3"),
-            ReactionViewModel(emoji: ":raised_hands:", count: "2")
-        ])
     }
 }
