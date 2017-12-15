@@ -26,13 +26,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EEy-8J-xdI" userLabel="Emoji View">
-                    <rect key="frame" x="0.0" y="6" width="24" height="12"/>
+                    <rect key="frame" x="2" y="3" width="18" height="18"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e3A-p7-yD2" userLabel="Emoji Image">
-                            <rect key="frame" x="0.0" y="0.0" width="24" height="12"/>
+                            <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙈" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.001" translatesAutoresizingMaskIntoConstraints="NO" id="07q-cm-V4o" userLabel="Emoji Label">
-                            <rect key="frame" x="-0.5" y="0.0" width="24" height="12"/>
+                            <rect key="frame" x="-0.5" y="0.0" width="18" height="18"/>
                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -50,20 +50,19 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s03-Lq-brP" userLabel="Count Label">
-                    <rect key="frame" x="24" y="5.5" width="7" height="13.5"/>
+                    <rect key="frame" x="22" y="5.5" width="9" height="13.5"/>
                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" red="0.80000001190000003" green="0.80000001190000003" blue="0.80000001190000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="s03-Lq-brP" secondAttribute="trailing" constant="2" id="3VF-Zm-Zde"/>
-                <constraint firstItem="EEy-8J-xdI" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.5" id="3aT-9g-20X"/>
-                <constraint firstItem="EEy-8J-xdI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Bfn-2C-pcr"/>
-                <constraint firstItem="s03-Lq-brP" firstAttribute="leading" secondItem="EEy-8J-xdI" secondAttribute="trailing" id="EGq-BK-jEc"/>
+                <constraint firstItem="EEy-8J-xdI" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.75" id="3aT-9g-20X"/>
+                <constraint firstItem="EEy-8J-xdI" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="2" id="Bfn-2C-pcr"/>
+                <constraint firstItem="s03-Lq-brP" firstAttribute="leading" secondItem="EEy-8J-xdI" secondAttribute="trailing" constant="2" id="EGq-BK-jEc"/>
                 <constraint firstItem="EEy-8J-xdI" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="EPb-t4-FC7"/>
-                <constraint firstItem="EEy-8J-xdI" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="height" id="oUY-EH-gGf"/>
+                <constraint firstItem="EEy-8J-xdI" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.75" id="oUY-EH-gGf"/>
                 <constraint firstItem="s03-Lq-brP" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="rtV-mL-WyR"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

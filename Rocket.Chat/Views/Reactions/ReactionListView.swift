@@ -17,7 +17,12 @@ struct ReactionListViewModel {
 }
 
 class ReactionListView: UIView {
-    @IBOutlet var scrollView: UIScrollView!
+    @IBOutlet var scrollView: UIScrollView! {
+        didSet {
+            scrollView.showsVerticalScrollIndicator = false
+            scrollView.showsHorizontalScrollIndicator = false
+        }
+    }
     @IBOutlet weak var reactionsStack: UIStackView!
 
     var model = ReactionListViewModel() {
