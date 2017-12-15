@@ -65,12 +65,14 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var reactionsListViewConstraint: NSLayoutConstraint!
+
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
         let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
-        var total = (height ?? 0) + (sequential ? 8 : 29) + 24
+        var total = (height ?? 0) + (sequential ? 8 : 29) + (message.reactions.count > 0 ? 24 : 0)
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -266,6 +268,8 @@ final class ChatMessageCell: UICollectionViewCell {
         updateMessageContent()
         insertGesturesIfNeeded()
         insertAttachments()
+
+        reactionsListViewConstraint.constant = message.reactions.count > 0 ? 24 : 0
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {

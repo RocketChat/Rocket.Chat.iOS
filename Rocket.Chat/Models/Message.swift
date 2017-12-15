@@ -70,6 +70,8 @@ class Message: BaseModel {
     var attachments = List<Attachment>()
     var urls = List<MessageURL>()
 
+    var reactions = List<MessageReaction>()
+
     var type: MessageType {
         if let attachment = attachments.first {
             return attachment.type

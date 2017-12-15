@@ -105,6 +105,7 @@
                 <outlet property="labelUsernameHeightConstraint" destination="pkt-kd-3cU" id="Sop-iF-Lm6"/>
                 <outlet property="mediaViews" destination="sWJ-OU-dZk" id="mcz-me-bl8"/>
                 <outlet property="mediaViewsHeightConstraint" destination="4Ab-x2-r5e" id="W2f-II-O9Y"/>
+                <outlet property="reactionsListViewConstraint" destination="un3-x5-7Av" id="hj4-Bd-W8t"/>
             </connections>
             <point key="canvasLocation" x="699" y="660"/>
         </collectionViewCell>
