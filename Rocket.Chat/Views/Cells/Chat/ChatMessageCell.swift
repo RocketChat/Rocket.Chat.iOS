@@ -70,7 +70,7 @@ final class ChatMessageCell: UICollectionViewCell {
         let attributedString = MessageTextCacheManager.shared.message(for: message)
         let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
-        var total = (height ?? 0) + (sequential ? 8 : 29)
+        var total = (height ?? 0) + (sequential ? 8 : 29) + 24
 
         for url in message.urls {
             guard url.isValid() else { continue }
