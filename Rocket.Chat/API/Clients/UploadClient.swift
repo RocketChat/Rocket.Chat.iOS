@@ -37,14 +37,4 @@ struct UploadClient: APIClient {
             }
         })
     }
-
-    func deletePushToken(token: String? = PushManager.getDeviceToken()) {
-        guard let token = token else { return }
-
-        api.fetch(PushTokenDeleteRequest(token: token), succeeded: nil, errored: { error in
-            if case .version = error {
-                Alert(key: "alert.push_token_error").present()
-            }
-        })
-    }
 }
