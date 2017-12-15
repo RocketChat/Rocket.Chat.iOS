@@ -301,8 +301,6 @@ final class ChatMessageCell: UICollectionViewCell {
         updateReactions()
     }
 
-
-
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
     }
