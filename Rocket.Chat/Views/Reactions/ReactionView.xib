@@ -32,7 +32,7 @@
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙈" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.001" translatesAutoresizingMaskIntoConstraints="NO" id="07q-cm-V4o" userLabel="Emoji Label">
                             <rect key="frame" x="-0.5" y="0.0" width="24" height="24"/>
-                            <fontDescription key="fontDescription" type="system" pointSize="500"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
