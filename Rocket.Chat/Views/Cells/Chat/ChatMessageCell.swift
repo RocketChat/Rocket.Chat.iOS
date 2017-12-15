@@ -65,6 +65,7 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var reactionsListView: ReactionListView!
     @IBOutlet weak var reactionsListViewConstraint: NSLayoutConstraint!
 
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
@@ -223,6 +224,7 @@ final class ChatMessageCell: UICollectionViewCell {
         }
 
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
+        
     }
 
     fileprivate func updateMessageHeader() {
@@ -270,6 +272,9 @@ final class ChatMessageCell: UICollectionViewCell {
         insertAttachments()
 
         reactionsListViewConstraint.constant = message.reactions.count > 0 ? 24 : 0
+        reactionsListView.model = ReactionListViewModel(reactionViewModels: Array(message.reactions.map {
+            ReactionViewModel(emoji: $0.emoji ?? "?", count: $0.usernames.count.description)
+        }))
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
