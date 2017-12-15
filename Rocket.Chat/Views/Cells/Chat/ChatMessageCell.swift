@@ -68,7 +68,7 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var reactionsListView: ReactionListView! {
         didSet {
             reactionsListView.reactionTapRecognized = { view, sender in
-                view.model = view.model.highlighted(!view.model.highlight)
+                MessageManager.react(self.message, emoji: view.model.emoji, completion: { _ in })
             }
         }
     }

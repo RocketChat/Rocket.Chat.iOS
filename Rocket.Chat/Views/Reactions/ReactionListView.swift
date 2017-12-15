@@ -12,7 +12,7 @@ struct ReactionListViewModel {
     let reactionViewModels: [ReactionViewModel]
 
     init(reactionViewModels: [ReactionViewModel] = []) {
-        self.reactionViewModels = reactionViewModels.sorted { $0.count > $1.count }
+        self.reactionViewModels = reactionViewModels.sorted { $0.emoji > $1.emoji }
     }
 }
 
