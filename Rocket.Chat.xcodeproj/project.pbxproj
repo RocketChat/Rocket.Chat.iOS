@@ -261,6 +261,10 @@
 		807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
+		809B530E1FE2EFA100833DD2 /* ReactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530D1FE2EFA100833DD2 /* ReactionListView.swift */; };
+		809B53101FE2F17D00833DD2 /* ReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530F1FE2F17D00833DD2 /* ReactionView.swift */; };
+		809B53121FE2F2F900833DD2 /* ReactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809B53111FE2F2F900833DD2 /* ReactionView.xib */; };
+		809B53141FE3294400833DD2 /* ReactionListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809B53131FE3294400833DD2 /* ReactionListView.xib */; };
 		80A63C4F1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */; };
 		80A63C511F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */; };
 		80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */; };
@@ -604,6 +608,10 @@
 		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManagerSpec.swift; path = Managers/PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionSpec.swift; path = Models/PermissionSpec.swift; sourceTree = "<group>"; };
+		809B530D1FE2EFA100833DD2 /* ReactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionListView.swift; sourceTree = "<group>"; };
+		809B530F1FE2F17D00833DD2 /* ReactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionView.swift; sourceTree = "<group>"; };
+		809B53111FE2F2F900833DD2 /* ReactionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionView.xib; sourceTree = "<group>"; };
+		809B53131FE3294400833DD2 /* ReactionListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionListView.xib; sourceTree = "<group>"; };
 		80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequest.swift; sourceTree = "<group>"; };
 		80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequest.swift; sourceTree = "<group>"; };
@@ -780,6 +788,7 @@
 		4161332F1D46CA2800E09DA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				809B530C1FE2EF7C00833DD2 /* Reactions */,
 				41C275DD1D847FEE003C88CF /* Avatar */,
 				897083CC1F8CF08100233561 /* Form */,
 				416133301D46CA3100E09DA2 /* Cells */,
@@ -1499,6 +1508,17 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
+		809B530C1FE2EF7C00833DD2 /* Reactions */ = {
+			isa = PBXGroup;
+			children = (
+				809B530F1FE2F17D00833DD2 /* ReactionView.swift */,
+				809B53111FE2F2F900833DD2 /* ReactionView.xib */,
+				809B530D1FE2EFA100833DD2 /* ReactionListView.swift */,
+				809B53131FE3294400833DD2 /* ReactionListView.xib */,
+			);
+			path = Reactions;
+			sourceTree = "<group>";
+		};
 		80E99F2A1FD8B4AC00B70B59 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -1788,6 +1808,7 @@
 				41A91AEF1E51C51A005C94B1 /* SubscriptionUserStatusView.xib in Resources */,
 				412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */,
 				41C275E11D84815C003C88CF /* AvatarView.xib in Resources */,
+				809B53121FE2F2F900833DD2 /* ReactionView.xib in Resources */,
 				416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */,
 				4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */,
 				41CABFF81F5047D600E0B289 /* ChatLoaderCell.xib in Resources */,
@@ -1802,6 +1823,7 @@
 				897083D41F8CF08100233561 /* CheckTableViewCell.xib in Resources */,
 				412731D51DE0A55C00FC45A0 /* ChatPreviewModeView.xib in Resources */,
 				41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */,
+				809B53141FE3294400833DD2 /* ReactionListView.xib in Resources */,
 				41865AF41FC8B25100A5E48F /* WebViewControllerEmbedded.xib in Resources */,
 				411F7D961F5179B50080E8AD /* ChatChannelHeaderCell.xib in Resources */,
 				41DCB8261DDC828200E1197F /* SubscriptionSearchMoreView.xib in Resources */,
@@ -2183,6 +2205,7 @@
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
 				41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */,
 				806401311FB09DE800990572 /* Permission.swift in Sources */,
+				809B530E1FE2EFA100833DD2 /* ReactionListView.swift in Sources */,
 				4159720C1D3DB854002258F4 /* Email.swift in Sources */,
 				14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */,
 				8013F8861FD6B76600EE1A4E /* CommandsRequest.swift in Sources */,
@@ -2260,6 +2283,7 @@
 				1435BFA31F9B601600FB2768 /* HighlightTextView.swift in Sources */,
 				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,
+				809B53101FE2F17D00833DD2 /* ReactionView.swift in Sources */,
 				D15C83861F70991F001AB155 /* APIResult.swift in Sources */,
 				800FCD3E1F72893E00D9A692 /* MembersListViewController.swift in Sources */,
 				806401351FB09F8A00990572 /* PermissionManager.swift in Sources */,
