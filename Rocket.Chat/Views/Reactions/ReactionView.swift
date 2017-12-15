@@ -16,8 +16,6 @@ struct ReactionViewModel {
 class ReactionView: UIView {
     @IBOutlet var contentView: UIView! {
         didSet {
-            contentView.backgroundColor = .backgroundWhite
-            //contentView.layer.backgroundColor = UIColor(red: 45, green: 224, blue: 165, alpha: 0.15).cgColor
             contentView.layer.borderColor = UIColor.gray.cgColor
             contentView.layer.borderWidth = 1
             contentView.layer.cornerRadius = 4
