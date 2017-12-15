@@ -224,7 +224,6 @@ final class ChatMessageCell: UICollectionViewCell {
         }
 
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
-        
     }
 
     fileprivate func updateMessageHeader() {
@@ -255,6 +254,29 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
+    fileprivate func updateReactions() {
+        let username = AuthManager.currentUser()?.username
+
+        reactionsListViewConstraint.constant = message.reactions.count > 0 ? 24 : 0
+
+        let models = Array(message.reactions.map { reaction -> ReactionViewModel in
+            let highlighted: Bool
+            if let username = username {
+                highlighted = reaction.usernames.contains(username)
+            } else {
+                highlighted = false
+            }
+
+            return ReactionViewModel(
+                emoji: reaction.emoji ?? "?",
+                count: reaction.usernames.count.description,
+                highlighted: highlighted
+            )
+        })
+
+        reactionsListView.model = ReactionListViewModel(reactionViewModels: models)
+    }
+
     fileprivate func updateMessage() {
         guard
             delegate != nil,
@@ -270,12 +292,10 @@ final class ChatMessageCell: UICollectionViewCell {
         updateMessageContent()
         insertGesturesIfNeeded()
         insertAttachments()
-
-        reactionsListViewConstraint.constant = message.reactions.count > 0 ? 24 : 0
-        reactionsListView.model = ReactionListViewModel(reactionViewModels: Array(message.reactions.map {
-            ReactionViewModel(emoji: $0.emoji ?? "?", count: $0.usernames.count.description)
-        }))
+        updateReactions()
     }
+
+
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
         delegate?.handleLongPressMessageCell(message, view: contentView, recognizer: recognizer)
