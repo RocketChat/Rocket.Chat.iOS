@@ -540,14 +540,9 @@ final class ChatViewController: SLKTextViewController {
 
         updateMessagesQueryNotificationBlock()
         loadMoreMessagesFrom(date: nil)
-        MessageManager.changes(subscription)
-
-        registerTypingEvent()
     }
 
-    fileprivate func registerTypingEvent() {
-        guard let subscription = subscription else { return }
-
+    func registerTypingEvent(_ subscription: Subscription) {
         typingIndicatorView?.interval = 0
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
