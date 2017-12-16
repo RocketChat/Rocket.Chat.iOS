@@ -21,6 +21,11 @@ extension ChatViewController: SocketConnectionHandler {
         }
 
         rightButton.isEnabled = true
+
+        if let subscription = subscription {
+            MessageManager.changes(subscription)
+            registerTypingEvent(subscription)
+        }
     }
 
     func socketDidDisconnect(socket: SocketManager) {
@@ -35,5 +40,4 @@ extension ChatViewController: SocketConnectionHandler {
     func socketDidReturnError(socket: SocketManager, error: SocketError) {
         // Handle errors
     }
-
 }
