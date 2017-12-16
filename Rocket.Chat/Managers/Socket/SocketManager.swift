@@ -147,12 +147,6 @@ extension SocketManager {
 
                 API.current()?.client(CommandsClient.self).fetchCommands()
 
-                // If we have some subscription opened, let's
-                // try to subscribe to it again
-                /*if let subscription = ChatViewController.shared?.subscription, !subscription.isInvalidated {
-                    ChatViewController.shared?.subscription = subscription
-                }*/
-
                 if let userIdentifier = auth.userId {
                     PushManager.updateUser(userIdentifier)
                 }
