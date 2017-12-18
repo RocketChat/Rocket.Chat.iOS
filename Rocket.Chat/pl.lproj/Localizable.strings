@@ -47,11 +47,14 @@
 "alert.authorization_error.title" = "Błąd autoryzacji";
 "alert.authorization_error.create_channel.description" = "Nie możesz utworzyć kanału";
 
-"alert.unsupported_feature.title" = "Feature not supported";
-"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above.";
+"alert.unsupported_feature.title" = "Feature not supported"; //TODO
+"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above."; //TODO
 
-"alert.push_token_error.title" = "Warning";
-"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0.";
+"alert.push_token_error.title" = "Warning"; //TODO
+"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0."; //TODO
+
+"alert.upload_error.title" = "Upload Error"; //TODO
+"alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again."; //TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
