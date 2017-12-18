@@ -53,6 +53,9 @@
 "alert.push_token_error.title" = "Aviso";
 "alert.push_token_error.message" = "Você ainda pode receber notificações deste servidor por causa de um problema com servidores de versão menor que 0.60.0.";
 
+"alert.upload_error.title" = "Erro de Upload";
+"alert.upload_error.message" = "Algo de errado aconteceu ao fazer o upload do seu arquivo. Por favor, tente novamente.";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";
 "connection.server.redirect.alert.message" = "Parece que este servidor mudou a URL para:\n\n%@\n\Gostaria de atualizar a URL?";

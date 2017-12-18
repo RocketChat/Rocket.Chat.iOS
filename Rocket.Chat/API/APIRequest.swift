@@ -71,7 +71,7 @@ extension APIRequest {
 
         var request = URLRequest(url: url)
         request.httpMethod = method.rawValue
-        request.httpBody = self.body()
+        request.httpBody = body()
 
         request.addValue(contentType, forHTTPHeaderField: "Content-Type")
 
