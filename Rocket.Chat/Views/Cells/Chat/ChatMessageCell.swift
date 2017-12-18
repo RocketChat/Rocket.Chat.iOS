@@ -342,4 +342,9 @@ extension ChatMessageCell {
         set { }
     }
 
+    override var accessibilityHint: String? {
+        get { return message?.accessibilityHint }
+        set { }
+    }
+
 }

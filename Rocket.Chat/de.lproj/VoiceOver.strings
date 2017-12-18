@@ -22,3 +22,4 @@
 
 // MARK: Message
 "message.label" = "Message from %@ at %@.";
+"message.hint" = "Reactions: %@";
