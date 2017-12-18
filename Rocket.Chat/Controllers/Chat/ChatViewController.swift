@@ -472,6 +472,11 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    internal func subscribe(for subscription: Subscription) {
+        MessageManager.changes(subscription)
+        registerTypingEvent(subscription)
+    }
+
     internal func unsubscribe(for subscription: Subscription) {
         SocketManager.unsubscribe(eventName: subscription.rid)
         SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
@@ -540,6 +545,7 @@ final class ChatViewController: SLKTextViewController {
 
         updateMessagesQueryNotificationBlock()
         loadMoreMessagesFrom(date: nil)
+        subscribe(for: subscription)
     }
 
     func registerTypingEvent(_ subscription: Subscription) {
