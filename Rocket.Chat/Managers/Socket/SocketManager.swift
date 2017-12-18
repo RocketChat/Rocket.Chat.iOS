@@ -95,6 +95,11 @@ class SocketManager {
     }
 
     static func subscribe(_ object: [String: Any], eventName: String, completion: @escaping MessageCompletion) {
+        guard SocketManager.isConnected() else {
+            Log.debug("Error: tried to subscribe to event '\(eventName)' while not connected to socket.")
+            return
+        }
+
         if var list = sharedInstance.events[eventName] {
             list.append(completion)
             sharedInstance.events[eventName] = list
@@ -226,7 +231,6 @@ extension SocketManager: WebSocketDelegate {
 
         self.handleMessage(json, socket: socket)
     }
-
 }
 
 // MARK: WebSocketPongDelegate
