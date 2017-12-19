@@ -17,12 +17,13 @@ struct ReactionListViewModel {
 }
 
 class ReactionListView: UIView {
-    @IBOutlet var scrollView: UIScrollView! {
+    @IBOutlet var contentView: UIView! {
         didSet {
-            setupScrollView()
+            setupContentView()
         }
     }
     @IBOutlet weak var reactionsStack: UIStackView!
+    @IBOutlet weak var fixedStack: UIStackView!
 
     var model = ReactionListViewModel() {
         didSet {
@@ -66,21 +67,18 @@ extension ReactionListView {
         Bundle.main.loadNibNamed("ReactionListView", owner: self, options: nil)
     }
 
-    private func setupScrollView() {
-        addSubview(scrollView)
+    private func setupContentView() {
+        addSubview(contentView)
 
         addConstraints(
             NSLayoutConstraint.constraints(
-                withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": scrollView]
+                withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": contentView]
             )
         )
         addConstraints(
             NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": scrollView]
+                withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": contentView]
             )
         )
-
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.showsHorizontalScrollIndicator = false
     }
 }

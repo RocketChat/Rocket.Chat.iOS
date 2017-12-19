@@ -263,8 +263,6 @@ final class ChatMessageCell: UICollectionViewCell {
     fileprivate func updateReactions() {
         let username = AuthManager.currentUser()?.username
 
-        reactionsListViewConstraint.constant = message.reactions.count > 0 ? 24 : 0
-
         let models = Array(message.reactions.map { reaction -> ReactionViewModel in
             let highlight: Bool
             if let username = username {
@@ -281,6 +279,14 @@ final class ChatMessageCell: UICollectionViewCell {
         })
 
         reactionsListView.model = ReactionListViewModel(reactionViewModels: models)
+
+        if message.reactions.count > 0 {
+            reactionsListView.isHidden = false
+            reactionsListViewConstraint.constant = 24
+        } else {
+            reactionsListView.isHidden = true
+            reactionsListViewConstraint.constant = 0
+        }
     }
 
     fileprivate func updateMessage() {
