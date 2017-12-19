@@ -13,7 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReactionListView" customModule="Rocket_Chat" customModuleProvider="target">
             <connections>
-                <outlet property="contentView" destination="x3N-yb-VYD" id="Cpt-HA-zhm"/>
+                <outlet property="contentView" destination="x3N-yb-VYD" id="igk-MZ-hbC"/>
                 <outlet property="fixedStack" destination="qq3-So-nNU" id="d2E-AV-bSw"/>
                 <outlet property="reactionsStack" destination="Bp4-sy-uGs" id="uEV-LB-epe"/>
             </connections>
