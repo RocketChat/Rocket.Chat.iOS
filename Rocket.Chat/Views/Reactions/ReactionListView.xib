@@ -7,33 +7,65 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReactionListView" customModule="Rocket_Chat" customModuleProvider="target">
             <connections>
+                <outlet property="contentView" destination="x3N-yb-VYD" id="Cpt-HA-zhm"/>
+                <outlet property="fixedStack" destination="qq3-So-nNU" id="d2E-AV-bSw"/>
                 <outlet property="reactionsStack" destination="Bp4-sy-uGs" id="uEV-LB-epe"/>
-                <outlet property="scrollView" destination="vUh-ZA-FsI" id="jA3-bt-1uD"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vUh-ZA-FsI">
-            <rect key="frame" x="0.0" y="0.0" width="567" height="46"/>
+        <view contentMode="scaleToFill" id="x3N-yb-VYD">
+            <rect key="frame" x="0.0" y="0.0" width="293" height="24"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Bp4-sy-uGs">
-                    <rect key="frame" x="0.0" y="0.0" width="50" height="46"/>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUh-ZA-FsI">
+                    <rect key="frame" x="0.0" y="0.0" width="271" height="24"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Bp4-sy-uGs">
+                            <rect key="frame" x="0.0" y="0.0" width="46" height="24"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsi-I6-DeZ">
+                                    <rect key="frame" x="0.0" y="0.0" width="46" height="24"/>
+                                    <state key="normal" title="Button"/>
+                                </button>
+                            </subviews>
+                        </stackView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Bp4-sy-uGs" firstAttribute="leading" secondItem="vUh-ZA-FsI" secondAttribute="leading" id="4Sx-bI-RnH"/>
+                        <constraint firstItem="Bp4-sy-uGs" firstAttribute="bottom" secondItem="vUh-ZA-FsI" secondAttribute="bottom" id="Cmk-Dq-PRC"/>
+                        <constraint firstItem="Bp4-sy-uGs" firstAttribute="height" secondItem="vUh-ZA-FsI" secondAttribute="height" id="ZEt-Lz-RmV"/>
+                        <constraint firstAttribute="trailing" secondItem="Bp4-sy-uGs" secondAttribute="trailing" id="qk2-Vg-GiD"/>
+                        <constraint firstItem="Bp4-sy-uGs" firstAttribute="top" secondItem="vUh-ZA-FsI" secondAttribute="top" id="rtK-Sd-fTK"/>
+                    </constraints>
+                </scrollView>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="qq3-So-nNU">
+                    <rect key="frame" x="271" y="0.0" width="22" height="24"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="detailDisclosure" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="krd-Ha-lhQ">
+                            <rect key="frame" x="0.0" y="1" width="22" height="22"/>
+                        </button>
+                    </subviews>
                 </stackView>
             </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="Bp4-sy-uGs" firstAttribute="trailing" secondItem="vUh-ZA-FsI" secondAttribute="trailing" id="0yg-TW-kaq"/>
-                <constraint firstItem="Bp4-sy-uGs" firstAttribute="leading" secondItem="vUh-ZA-FsI" secondAttribute="leading" id="4Sx-bI-RnH"/>
-                <constraint firstItem="Bp4-sy-uGs" firstAttribute="bottom" secondItem="vUh-ZA-FsI" secondAttribute="bottom" id="Cmk-Dq-PRC"/>
-                <constraint firstItem="Bp4-sy-uGs" firstAttribute="height" secondItem="vUh-ZA-FsI" secondAttribute="height" id="ZEt-Lz-RmV"/>
-                <constraint firstItem="Bp4-sy-uGs" firstAttribute="top" secondItem="vUh-ZA-FsI" secondAttribute="top" id="rtK-Sd-fTK"/>
+                <constraint firstItem="vUh-ZA-FsI" firstAttribute="top" secondItem="deX-xy-GKB" secondAttribute="top" id="1d3-Yi-E4A"/>
+                <constraint firstItem="qq3-So-nNU" firstAttribute="centerY" secondItem="deX-xy-GKB" secondAttribute="centerY" id="DOe-1C-Zfb"/>
+                <constraint firstItem="qq3-So-nNU" firstAttribute="leading" secondItem="vUh-ZA-FsI" secondAttribute="trailing" id="KU5-Gz-2sa"/>
+                <constraint firstItem="vUh-ZA-FsI" firstAttribute="leading" secondItem="x3N-yb-VYD" secondAttribute="leading" id="NBF-hi-kbs"/>
+                <constraint firstItem="qq3-So-nNU" firstAttribute="height" secondItem="x3N-yb-VYD" secondAttribute="height" id="VCx-PM-PUr"/>
+                <constraint firstItem="deX-xy-GKB" firstAttribute="trailing" secondItem="qq3-So-nNU" secondAttribute="trailing" id="vtg-gI-7fI"/>
+                <constraint firstItem="vUh-ZA-FsI" firstAttribute="bottom" secondItem="deX-xy-GKB" secondAttribute="bottom" id="y7R-zZ-TUi"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <viewLayoutGuide key="safeArea" id="2LA-wb-v0m"/>
-            <point key="canvasLocation" x="278.5" y="-686"/>
-        </scrollView>
+            <viewLayoutGuide key="safeArea" id="deX-xy-GKB"/>
+            <point key="canvasLocation" x="386.5" y="-405"/>
+        </view>
     </objects>
 </document>

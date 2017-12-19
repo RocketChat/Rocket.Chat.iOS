@@ -102,9 +102,8 @@ extension Message: ModelMappeable {
         }
 
         // Reactions
+        self.reactions.removeAll()
         if let reactions = values["reactions"].dictionary {
-            self.reactions.removeAll()
-
             reactions.enumerated().flatMap {
                 let reaction = MessageReaction()
                 reaction.map(emoji: $1.key, json: $1.value)
