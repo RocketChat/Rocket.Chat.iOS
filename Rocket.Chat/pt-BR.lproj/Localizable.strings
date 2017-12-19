@@ -28,6 +28,13 @@
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "Conta Mail não encontrada. Por favor, configure uma conta no aplicativo Mail para conseguir enviar emails.";
 
+"alert.audio_message.success.send" = "Enviar";
+"alert.audio_message.success.title" = "Sucesso";
+"alert.audio_message.success.message" = "Sua mensagem foi gravada com sucesso. Tempo de gravação: %@.";
+
+"alert.audio_message.error.title" = "Ooops!";
+"alert.audio_message.error.message" = "Ocorreu um erro. Por favor, grave a sua mensagem novamente.";
+
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "Desculpe, mas esta função ainda não está disponível.";
 
@@ -42,6 +49,12 @@
 
 "alert.unsupported_feature.title" = "Funcionalidade não disponível";
 "alert.unsupported_feature.message" = "A versão deste servidor é: %@. Esta funcionalidade é disponível apenas nas versões a partir de %@.";
+
+"alert.push_token_error.title" = "Aviso";
+"alert.push_token_error.message" = "Você ainda pode receber notificações deste servidor por causa de um problema com servidores de versão menor que 0.60.0.";
+
+"alert.upload_error.title" = "Erro de Upload";
+"alert.upload_error.message" = "Algo de errado aconteceu ao fazer o upload do seu arquivo. Por favor, tente novamente.";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";

@@ -100,5 +100,16 @@ extension Message: ModelMappeable {
                 self.channels.append(obj)
             }
         }
+
+        // Reactions
+        if let reactions = values["reactions"].dictionary {
+            self.reactions.removeAll()
+
+            reactions.enumerated().flatMap {
+                let reaction = MessageReaction()
+                reaction.map(emoji: $1.key, json: $1.value)
+                return reaction
+            }.forEach(self.reactions.append)
+        }
     }
 }
