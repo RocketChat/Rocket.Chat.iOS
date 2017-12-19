@@ -40,7 +40,10 @@ class ReactionListView: UIView {
             return view
         }
 
-        reactionsStack.arrangedSubviews.forEach(reactionsStack.removeArrangedSubview)
+        reactionsStack.arrangedSubviews.forEach {
+            reactionsStack.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        }
 
         views.forEach { view in
             reactionsStack.addArrangedSubview(view)
@@ -69,6 +72,7 @@ extension ReactionListView {
 
     private func setupContentView() {
         addSubview(contentView)
+        contentView.translatesAutoresizingMaskIntoConstraints = false
 
         addConstraints(
             NSLayoutConstraint.constraints(
