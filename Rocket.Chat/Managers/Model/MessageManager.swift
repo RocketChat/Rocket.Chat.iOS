@@ -146,6 +146,18 @@ extension MessageManager {
         SocketManager.send(request, completion: completion)
     }
 
+    static func react(_ message: Message, emoji: String, completion: @escaping MessageCompletion) {
+        guard let messageIdentifier = message.identifier else { return }
+
+        let request = [
+            "msg": "method",
+            "method": "setReaction",
+            "params": [emoji, messageIdentifier]
+        ] as [String: Any]
+
+        SocketManager.send(request, completion: completion)
+    }
+
     static func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
         guard let userIdentifier = user.identifier else { return }
 

@@ -65,12 +65,21 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var reactionsListView: ReactionListView! {
+        didSet {
+            reactionsListView.reactionTapRecognized = { view, sender in
+                MessageManager.react(self.message, emoji: view.model.emoji, completion: { _ in })
+            }
+        }
+    }
+    @IBOutlet weak var reactionsListViewConstraint: NSLayoutConstraint!
+
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
         let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
-        var total = (height ?? 0) + (sequential ? 8 : 29)
+        var total = (height ?? 0) + (sequential ? 8 : 29) + (message.reactions.count > 0 ? 24 : 0)
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -251,6 +260,29 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
+    fileprivate func updateReactions() {
+        let username = AuthManager.currentUser()?.username
+
+        reactionsListViewConstraint.constant = message.reactions.count > 0 ? 24 : 0
+
+        let models = Array(message.reactions.map { reaction -> ReactionViewModel in
+            let highlight: Bool
+            if let username = username {
+                highlight = reaction.usernames.contains(username)
+            } else {
+                highlight = false
+            }
+
+            return ReactionViewModel(
+                emoji: reaction.emoji ?? "?",
+                count: reaction.usernames.count.description,
+                highlight: highlight
+            )
+        })
+
+        reactionsListView.model = ReactionListViewModel(reactionViewModels: models)
+    }
+
     fileprivate func updateMessage() {
         guard
             delegate != nil,
@@ -266,6 +298,7 @@ final class ChatMessageCell: UICollectionViewCell {
         updateMessageContent()
         insertGesturesIfNeeded()
         insertAttachments()
+        updateReactions()
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
@@ -306,6 +339,11 @@ extension ChatMessageCell {
 
     override var accessibilityValue: String? {
         get { return message?.accessibilityValue }
+        set { }
+    }
+
+    override var accessibilityHint: String? {
+        get { return message?.accessibilityHint }
         set { }
     }
 
