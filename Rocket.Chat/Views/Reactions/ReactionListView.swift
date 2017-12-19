@@ -17,13 +17,12 @@ struct ReactionListViewModel {
 }
 
 class ReactionListView: UIView {
-    @IBOutlet var contentView: UIView! {
+    @IBOutlet var scrollView: UIScrollView! {
         didSet {
-            setupContentView()
+            setupScrollView()
         }
     }
     @IBOutlet weak var reactionsStack: UIStackView!
-    @IBOutlet weak var fixedStack: UIStackView!
 
     var model = ReactionListViewModel() {
         didSet {
@@ -70,18 +69,18 @@ extension ReactionListView {
         Bundle.main.loadNibNamed("ReactionListView", owner: self, options: nil)
     }
 
-    private func setupContentView() {
-        addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+    private func setupScrollView() {
+        addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         addConstraints(
             NSLayoutConstraint.constraints(
-                withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": contentView]
+                withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": scrollView]
             )
         )
         addConstraints(
             NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": contentView]
+                withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": scrollView]
             )
         )
     }
