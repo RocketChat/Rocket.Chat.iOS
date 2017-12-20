@@ -12,6 +12,11 @@ extension ChatViewController {
     func presentActionsFor(_ message: Message, view: UIView) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
+        alert.addAction(UIAlertAction(title: "Add Reaction", style: .default, handler: { _ in
+            let controller = EmojiPickerController()
+            self.present(controller, animated: true)
+        }))
+
         let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
         alert.addAction(UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
             if message.pinned {
