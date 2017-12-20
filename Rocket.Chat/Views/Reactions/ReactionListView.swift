@@ -39,7 +39,10 @@ class ReactionListView: UIView {
             return view
         }
 
-        reactionsStack.arrangedSubviews.forEach(reactionsStack.removeArrangedSubview)
+        reactionsStack.arrangedSubviews.forEach {
+            reactionsStack.removeArrangedSubview($0)
+            $0.removeFromSuperview()
+        }
 
         views.forEach { view in
             reactionsStack.addArrangedSubview(view)
@@ -68,6 +71,7 @@ extension ReactionListView {
 
     private func setupScrollView() {
         addSubview(scrollView)
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
 
         addConstraints(
             NSLayoutConstraint.constraints(
@@ -79,8 +83,5 @@ extension ReactionListView {
                 withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": scrollView]
             )
         )
-
-        scrollView.showsVerticalScrollIndicator = false
-        scrollView.showsHorizontalScrollIndicator = false
     }
 }
