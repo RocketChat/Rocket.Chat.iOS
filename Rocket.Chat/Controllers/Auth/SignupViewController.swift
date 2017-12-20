@@ -122,10 +122,11 @@ final class SignupViewController: BaseViewController {
 
         client.register(name: name, email: email, username: username,
                         password: password, customFields: getCustomFieldsParams(),
-                        succeeded: { [weak self] result in
+                        succeeded: { [weak self] _ in
             client.login(username: username, password: password, succeeded: { _ in
+                self?.dismiss(animated: true, completion: nil)
                 AppManager.reloadApp()
-            }, errored: { [weak self] _ in
+            }, errored: { _ in
                 DispatchQueue.main.async {
                     self?.stopLoading()
                 }

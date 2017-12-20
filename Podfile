@@ -10,7 +10,6 @@ def shared_pods
   pod 'Crashlytics'
 
   # Code utilities
-  pod 'PromiseKit'
   pod 'SwiftyJSON'
   pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
 
