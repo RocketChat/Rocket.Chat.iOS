@@ -15,7 +15,9 @@ struct AuthClient: APIClient {
         self.api = api
     }
 
-    func register(name: String, email: String, username: String, password: String, customFields: [String: String] = [:]) {
+    func register(name: String, email: String, username: String,
+                  password: String, customFields: [String: String] = [:],
+                  succeeded: RegisterSucceeded? = nil, errored: APIErrored? = nil) {
         let request = RegisterRequest(
             name: name, email: email, username: username,
             password: password, customFields: customFields
@@ -24,18 +26,27 @@ struct AuthClient: APIClient {
         api.fetch(request, succeeded: { result in
             if let error = result.error {
                 Alert.registerError.withMessage(error).present()
-            } else {
-                // login?
+                errored?(APIError.custom(message: error))
+                return
             }
-        }, errored: { _ in
-                Alert.registerError.present()
+            succeeded?(result)
+        }, errored: { error in
+            Alert.registerError.present()
+            errored?(error)
         })
     }
 
-    func login(username: String, password: String) {
+    func login(username: String, password: String,
+               succeeded: LoginSucceeded? = nil, errored: APIErrored? = nil) {
         let request = LoginRequest(username, password)
 
         api.fetch(request, succeeded: { result in
+            if let error = result.error {
+                Alert.loginError.withMessage(error).present()
+                errored?(APIError.custom(message: error))
+                return
+            }
+
             let auth = Auth()
             auth.lastSubscriptionFetch = nil
             auth.lastAccess = Date()
@@ -57,8 +68,10 @@ struct AuthClient: APIClient {
 
             SocketManager.sharedInstance.isUserAuthenticated = true
             ServerManager.timestampSync()
-        }, errored: { _ in
-
+            succeeded?(result)
+        }, errored: { error in
+            Alert.loginError.present()
+            errored?(error)
         })
     }
 }

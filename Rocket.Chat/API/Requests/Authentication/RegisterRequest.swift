@@ -9,6 +9,7 @@
 import SwiftyJSON
 
 typealias RegisterResult = APIResult<RegisterRequest>
+typealias RegisterSucceeded = (RegisterResult) -> Void
 
 class RegisterRequest: APIRequest {
     let version = Version(0, 50, 0)

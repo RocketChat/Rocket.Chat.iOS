@@ -11,8 +11,9 @@ import Foundation
 typealias APIErrored = (APIError) -> Void
 
 enum APIError {
-    case version(available: Version, required: Version)
     case error(Error)
     case noData
     case malformedRequest
+    case version(available: Version, required: Version)
+    case custom(message: String)
 }

@@ -118,50 +118,19 @@ final class SignupViewController: BaseViewController {
         let username = textFieldUsername.text ?? ""
         let password = textFieldPassword.text ?? ""
 
-        let request = RegisterRequest(
-            name: name, email: email, username: username,
-            password: password, customFields: getCustomFieldsParams()
-        )
+        let client = API(host: apiHost).client(AuthClient.self)
 
-        let authResponseHandler = { [weak self] (response: SocketResponse) in
-            self?.stopLoading()
-
-            if response.isError() {
-                if let error = response.result["error"].dictionary {
-                    let alert = UIAlertController(
-                        title: localized("error.socket.default_error_title"),
-                        message: error["message"]?.string ?? localized("error.socket.default_error_message"),
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alert, animated: true, completion: nil)
-                }
-            } else {
-                if let user = AuthManager.currentUser() {
-
-                    if user.username != nil {
-                        self?.dismiss(animated: true, completion: nil)
-                        AppManager.reloadApp()
-                    } else {
-                        self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
-                    }
-                }
-            }
-        }
-
-        API(host: apiHost).fetch(request, succeeded: { [weak self] result in
-            DispatchQueue.main.async {
-                if let error = result.error {
-                    Alert.registerError.withMessage(error).present()
+        client.register(name: name, email: email, username: username,
+                        password: password, customFields: getCustomFieldsParams(),
+                        succeeded: { [weak self] result in
+            client.login(username: username, password: password, succeeded: { _ in
+                AppManager.reloadApp()
+            }, errored: { [weak self] _ in
+                DispatchQueue.main.async {
                     self?.stopLoading()
-                } else {
-                    AuthManager.auth(username, password: password, completion: authResponseHandler)
                 }
-            }
-        }, errored: { [weak self] error in
-            Alert.registerError.present()
-
+            })
+        }, errored: { [weak self] _ in
             DispatchQueue.main.async {
                 self?.stopLoading()
             }

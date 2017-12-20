@@ -56,6 +56,9 @@
 "alert.upload_error.title" = "Erro de Upload";
 "alert.upload_error.message" = "Algo de errado aconteceu ao fazer o upload do seu arquivo. Por favor, tente novamente.";
 
+"alert.login_error.title" = "Erro de Login";
+"alert.login_error.message" = "Algo de errado aconteceu ao fazer login. Por favor, tente novamente.";
+
 "alert.register_error.title" = "Erro no registro";
 "alert.register_error.message" = "Algo de errado aconteceu no seu registro. Por favor, tente novamente.";
 

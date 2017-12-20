@@ -10,6 +10,7 @@
 import SwiftyJSON
 
 typealias LoginResult = APIResult<LoginRequest>
+typealias LoginSucceeded = (LoginResult) -> Void
 
 class LoginRequest: APIRequest {
     let method: HTTPMethod = .post
@@ -33,6 +34,10 @@ class LoginRequest: APIRequest {
 }
 
 extension APIResult where T == LoginRequest {
+    var error: String? {
+        return raw?["error"].string
+    }
+
     var data: JSON? {
         return raw?["data"]
     }
