@@ -13,7 +13,8 @@ class EmojiPickerController: UIViewController {
 
     override func loadView() {
         super.loadView()
-        emojiPicker = EmojiPicker()
+
+        emojiPicker = EmojiPicker(frame: view.frame)
         view.addSubview(emojiPicker)
 
         view.addConstraints(

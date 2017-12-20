@@ -33,8 +33,7 @@ class EmojiPicker: UIView {
         Bundle.main.loadNibNamed("EmojiPicker", owner: self, options: nil)
 
         addSubview(contentView)
-        contentView.frame = bounds
-        contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
+        contentView.translatesAutoresizingMaskIntoConstraints = false
 
         addConstraints(
             NSLayoutConstraint.constraints(
