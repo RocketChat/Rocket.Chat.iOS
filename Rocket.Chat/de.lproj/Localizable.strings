@@ -56,6 +56,10 @@
 "alert.upload_error.title" = "Upload Error"; //TODO
 "alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again."; //TODO
 
+
+"alert.register_error.title" = "Registration Error"; //TODO
+"alert.register_error.message" = "Something wrong happened when registering. Please try again."; //TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";

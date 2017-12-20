@@ -31,6 +31,7 @@ final class SignupViewController: BaseViewController {
 
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
+    @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var fieldsContainer: UIStackView!
@@ -70,6 +71,7 @@ final class SignupViewController: BaseViewController {
     func startLoading() {
         textFieldName.alpha = 0.5
         textFieldEmail.alpha = 0.5
+        textFieldUsername.alpha = 0.5
         textFieldPassword.alpha = 0.5
         customTextFields.forEach { $0.alpha = 0.5 }
 
@@ -78,6 +80,7 @@ final class SignupViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldName.resignFirstResponder()
         textFieldEmail.resignFirstResponder()
+        textFieldUsername.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
         customTextFields.forEach { $0.resignFirstResponder() }
     }
@@ -85,6 +88,7 @@ final class SignupViewController: BaseViewController {
     func stopLoading() {
         textFieldName.alpha = 1
         textFieldEmail.alpha = 1
+        textFieldUsername.alpha = 1
         textFieldPassword.alpha = 1
         customTextFields.forEach { $0.alpha = 1 }
 
@@ -111,21 +115,15 @@ final class SignupViewController: BaseViewController {
 
         let name = textFieldName.text ?? ""
         let email = textFieldEmail.text ?? ""
+        let username = textFieldUsername.text ?? ""
         let password = textFieldPassword.text ?? ""
 
-        let request = RegisterRequest(name: name, email: email, password: password, customFields: getCustomFieldsParams())
+        let request = RegisterRequest(
+            name: name, email: email, username: username,
+            password: password, customFields: getCustomFieldsParams()
+        )
 
-        API(host: apiHost).fetch(request, succeeded: { [weak self] result in
-            print(result.raw?.description ?? "")
-            self?.stopLoading()
-        }, errored: { [weak self] error in
-            print(error)
-            self?.stopLoading()
-        })
-
-        return
-
-        AuthManager.signup(with: name, email, password, customFields: getCustomFieldsParams()) { [weak self] (response) in
+        let authResponseHandler = { [weak self] (response: SocketResponse) in
             self?.stopLoading()
 
             if response.isError() {
@@ -151,6 +149,23 @@ final class SignupViewController: BaseViewController {
                 }
             }
         }
+
+        API(host: apiHost).fetch(request, succeeded: { [weak self] result in
+            DispatchQueue.main.async {
+                if let error = result.error {
+                    Alert.registerError.withMessage(error).present()
+                    self?.stopLoading()
+                } else {
+                    AuthManager.auth(username, password: password, completion: authResponseHandler)
+                }
+            }
+        }, errored: { [weak self] error in
+            Alert.registerError.present()
+
+            DispatchQueue.main.async {
+                self?.stopLoading()
+            }
+        })
     }
 
     private func getCustomFieldsParams() -> [String: String] {

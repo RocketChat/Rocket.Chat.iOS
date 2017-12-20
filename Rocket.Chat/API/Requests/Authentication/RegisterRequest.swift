@@ -11,16 +11,18 @@ import SwiftyJSON
 typealias RegisterResult = APIResult<RegisterRequest>
 
 class RegisterRequest: APIRequest {
-    let method: String = "POST"
+    let version = Version(0, 50, 0)
+
+    let method: HTTPMethod = .post
     let path = "/api/v1/users.register"
 
     let name: String
     let email: String
+    let username: String
     let password: String
     let customFields: [String: String]
-    let username: String?
 
-    init(name: String, email: String, password: String, username: String? = nil, customFields: [String: String] = [:]) {
+    init(name: String, email: String, username: String, password: String, customFields: [String: String] = [:]) {
         self.name = name
         self.email = email
         self.password = password
@@ -29,18 +31,19 @@ class RegisterRequest: APIRequest {
     }
 
     func body() -> Data? {
-        var body = JSON([
+        let body = JSON([
             "name": name,
             "email": email,
-            "password": password,
+            "username": username,
+            "pass": password
         ].union(dictionary: customFields))
-
-        username.flatMap { body["username"] = JSON($0) }
 
         return body.rawString()?.data(using: .utf8)
     }
 }
 
 extension APIResult where T == RegisterRequest {
-
+    var error: String? {
+        return raw?["error"].string
+    }
 }
