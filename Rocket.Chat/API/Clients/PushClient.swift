@@ -19,7 +19,7 @@ struct PushClient: APIClient {
 
         api.fetch(PushTokenDeleteRequest(token: token), succeeded: nil, errored: { error in
             if case .version = error {
-                Alert(key: "alert.push_token_error").present()
+                Alert.pushTokenError.present()
             }
         })
     }

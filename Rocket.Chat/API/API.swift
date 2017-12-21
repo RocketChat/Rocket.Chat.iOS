@@ -17,7 +17,9 @@ protocol APIRequestMiddleware {
 }
 
 protocol APIFetcher {
-    func fetch<R>(_ request: R, succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?)
+    var host: URL { get }
+
+    func fetch<R>(_ request: R, succeeded: ((APIResult<R>) -> Void)?, errored: APIErrored?)
     func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?,
                   succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?)
 }

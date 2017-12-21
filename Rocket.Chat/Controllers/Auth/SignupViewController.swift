@@ -13,6 +13,7 @@ final class SignupViewController: BaseViewController {
 
     internal var requesting = false
 
+    var apiHost: URL?
     var serverPublicSettings: AuthSettings?
     let compoundPickers = CompoundPickerViewDelegate()
 
@@ -30,6 +31,7 @@ final class SignupViewController: BaseViewController {
 
     @IBOutlet weak var textFieldName: UITextField!
     @IBOutlet weak var textFieldEmail: UITextField!
+    @IBOutlet weak var textFieldUsername: UITextField!
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var fieldsContainer: UIStackView!
@@ -69,6 +71,7 @@ final class SignupViewController: BaseViewController {
     func startLoading() {
         textFieldName.alpha = 0.5
         textFieldEmail.alpha = 0.5
+        textFieldUsername.alpha = 0.5
         textFieldPassword.alpha = 0.5
         customTextFields.forEach { $0.alpha = 0.5 }
 
@@ -77,6 +80,7 @@ final class SignupViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldName.resignFirstResponder()
         textFieldEmail.resignFirstResponder()
+        textFieldUsername.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
         customTextFields.forEach { $0.resignFirstResponder() }
     }
@@ -84,6 +88,7 @@ final class SignupViewController: BaseViewController {
     func stopLoading() {
         textFieldName.alpha = 1
         textFieldEmail.alpha = 1
+        textFieldUsername.alpha = 1
         textFieldPassword.alpha = 1
         customTextFields.forEach { $0.alpha = 1 }
 
@@ -104,38 +109,33 @@ final class SignupViewController: BaseViewController {
 
     // MARK: Request username
     fileprivate func signup() {
+        guard let apiHost = apiHost else { return }
+
         startLoading()
 
         let name = textFieldName.text ?? ""
         let email = textFieldEmail.text ?? ""
+        let username = textFieldUsername.text ?? ""
         let password = textFieldPassword.text ?? ""
 
-        AuthManager.signup(with: name, email, password, customFields: getCustomFieldsParams()) { [weak self] (response) in
-            self?.stopLoading()
+        let client = API(host: apiHost).client(AuthClient.self)
 
-            if response.isError() {
-                if let error = response.result["error"].dictionary {
-                    let alert = UIAlertController(
-                        title: localized("error.socket.default_error_title"),
-                        message: error["message"]?.string ?? localized("error.socket.default_error_message"),
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alert, animated: true, completion: nil)
+        client.register(name: name, email: email, username: username,
+                        password: password, customFields: getCustomFieldsParams(),
+                        succeeded: { [weak self] _ in
+            client.login(username: username, password: password, succeeded: { _ in
+                self?.dismiss(animated: true, completion: nil)
+                AppManager.reloadApp()
+            }, errored: { _ in
+                DispatchQueue.main.async {
+                    self?.stopLoading()
                 }
-            } else {
-                if let user = AuthManager.currentUser() {
-
-                    if user.username != nil {
-                        self?.dismiss(animated: true, completion: nil)
-                        AppManager.reloadApp()
-                    } else {
-                        self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
-                    }
-                }
+            })
+        }, errored: { [weak self] _ in
+            DispatchQueue.main.async {
+                self?.stopLoading()
             }
-        }
+        })
     }
 
     private func getCustomFieldsParams() -> [String: String] {

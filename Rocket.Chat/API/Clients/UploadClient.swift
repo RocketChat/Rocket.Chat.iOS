@@ -24,7 +24,7 @@ struct UploadClient: APIClient {
 
         api.fetch(req, succeeded: { result in
             if let error = result.error {
-                Alert(key: "alert.upload_error").withMessage(error).present()
+                Alert.uploadError.withMessage(error).present()
             }
             completion?()
         }, errored: { error in
@@ -32,7 +32,7 @@ struct UploadClient: APIClient {
                 // TODO: Remove Upload fallback after Rocket.Chat 1.0
                 versionFallback?()
             } else {
-                Alert(key: "alert.upload_error").present()
+                Alert.uploadError.present()
                 completion?()
             }
         })
