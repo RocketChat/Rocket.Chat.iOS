@@ -55,7 +55,6 @@ final class ChatViewController: SLKTextViewController {
     var replyView: ReplyView!
     var replyString: String = ""
 
-    var editView: EditView!
     var editedMessage: Message?
 
     var dataController = ChatDataController()
@@ -200,7 +199,6 @@ final class ChatViewController: SLKTextViewController {
         }
 
         setupReplyView()
-        setupEditView()
     }
 
     @objc internal func reconnect() {
@@ -446,7 +444,6 @@ final class ChatViewController: SLKTextViewController {
             client.sendMessage(text: text, subscription: subscription)
         }
         
-        stopEditing()
         isWritingMessage = false
         setupToolbarRightButtonWithAudioRecorder()
     }
@@ -454,7 +451,6 @@ final class ChatViewController: SLKTextViewController {
     override func didCommitTextEditing(_ sender: Any) {
         sendTextMessage()
         super.didCommitTextEditing(sender)
-        
     }
 
     fileprivate func editTextMessage(text: String) {

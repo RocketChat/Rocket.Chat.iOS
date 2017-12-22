@@ -43,7 +43,6 @@ extension ChatViewController {
             alert.addAction(UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
                 self.editedMessage = message
                 self.editText(message.text)
-                //self.edit(message: message)
             }))
         }
 
