@@ -25,7 +25,7 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H0W-CD-Tmy" userLabel="Emoji Image">
                     <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙈" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hk6-3B-0Qu" userLabel="Emoji Label">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙈" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.01" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hk6-3B-0Qu" userLabel="Emoji Label">
                     <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                     <fontDescription key="fontDescription" type="system" pointSize="46"/>
                     <nil key="textColor"/>

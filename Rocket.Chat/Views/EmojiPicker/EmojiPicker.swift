@@ -10,8 +10,20 @@ import UIKit
 
 class EmojiPicker: UIView {
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var searchBar: UISearchBar!
-    @IBOutlet weak var categoriesView: UISegmentedControl!
+    @IBOutlet weak var categoriesView: UITabBar! {
+        didSet {
+            let items = Emojione.categories.keys.map {
+                return UITabBarItem(title: $0, image: nil, selectedImage: nil)
+            }
+            categoriesView.setItems(items, animated: true)
+        }
+    }
+
+    @IBOutlet weak var searchBar: UISearchBar! {
+        didSet {
+
+        }
+    }
 
     @IBOutlet weak var emojisCollectionView: UICollectionView! {
         didSet {
