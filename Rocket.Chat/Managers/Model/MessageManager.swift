@@ -54,6 +54,15 @@ extension MessageManager {
                 guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
 
                 list?.forEach { object in
+                    let mockNewMessage = Message()
+                    mockNewMessage.map(object, realm: realm)
+
+                    if let existingMessage = realm.object(ofType: Message.self, forPrimaryKey: object["identifier"].stringValue) {
+                        if existingMessage.updatedAt?.timeIntervalSince1970 == mockNewMessage.updatedAt?.timeIntervalSince1970 {
+                            return
+                        }
+                    }
+
                     let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
                         object?.subscription = detachedSubscription
                     })
@@ -132,6 +141,18 @@ extension MessageManager {
             "msg": "method",
             "method": "unpinMessage",
             "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
+        ] as [String: Any]
+
+        SocketManager.send(request, completion: completion)
+    }
+
+    static func react(_ message: Message, emoji: String, completion: @escaping MessageCompletion) {
+        guard let messageIdentifier = message.identifier else { return }
+
+        let request = [
+            "msg": "method",
+            "method": "setReaction",
+            "params": [emoji, messageIdentifier]
         ] as [String: Any]
 
         SocketManager.send(request, completion: completion)

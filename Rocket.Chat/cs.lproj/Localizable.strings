@@ -28,6 +28,13 @@
 "alert.settings.set_mail_app.title" = "Jejky!";
 "alert.settings.set_mail_app.message" = "Žádné mailové účty. Prosím nastavte účet pošty, aby bylo možné odesílat e-maily.";
 
+"alert.audio_message.success.send" = "Send"; //TODO
+"alert.audio_message.success.title" = "Success"; //TODO
+"alert.audio_message.success.message" = "You message was successfully recorded. Recording time: %@."; //TODO
+
+"alert.audio_message.error.title" = "Ooops!"; //TODO
+"alert.audio_message.error.message" = "An error has occurred. Please, record your message again."; //TODO
+
 "alert.feature.wip.title" = "Jejky!";
 "alert.feature.wip.message" = "Stále pracujeme na této funkci, ale není ještě dokončena.";
 
@@ -37,11 +44,17 @@
 "alert.login_service_error.title" = "Chyba ověření";
 "alert.login_service_error.message" = "Nelze ověřit pomocí této služby. Prosím zkuste to znovu.";
 
-"alert.authorization_error.title" = "Authorization Error";
-"alert.authorization_error.create_channel.description" = "You can't create channels";
+"alert.authorization_error.title" = "Authorization Error"; //TODO
+"alert.authorization_error.create_channel.description" = "You can't create channels"; //TODO
 
-"alert.unsupported_feature.title" = "Feature not supported";
-"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above.";
+"alert.unsupported_feature.title" = "Feature not supported"; //TODO
+"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above."; //TODO
+
+"alert.push_token_error.title" = "Warning"; //TODO
+"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0."; //TODO
+
+"alert.upload_error.title" = "Upload Error"; //TODO
+"alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again."; //TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";

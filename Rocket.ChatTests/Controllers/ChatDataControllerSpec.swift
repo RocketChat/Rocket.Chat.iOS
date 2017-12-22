@@ -139,6 +139,7 @@ class ChatDataControllerSpec: XCTestCase {
         let controller = ChatDataController()
 
         let message = Message()
+        message.updatedAt = Date().addingTimeInterval(-1000)
         message.identifier = "update-1"
         message.text = "Foobar"
 
@@ -149,9 +150,12 @@ class ChatDataControllerSpec: XCTestCase {
         XCTAssertNotNil(indexPaths, "indexPaths can't be nil")
         XCTAssertEqual(indexPaths.count, 2, "indexPaths will have three results")
 
-        message.text = "Foobar, updated"
+        let newMessage = Message()
+        newMessage.identifier = "update-1"
+        newMessage.updatedAt = Date()
+        newMessage.text = "Foobar, updated"
 
-        let index = controller.update(message, completion: nil)
+        let index = controller.update(newMessage)
         XCTAssertEqual(index, 1, "indexPath is the message indexPath row")
         XCTAssertEqual(controller.data[index].message?.text, "Foobar, updated", "Message text was updated")
     }
