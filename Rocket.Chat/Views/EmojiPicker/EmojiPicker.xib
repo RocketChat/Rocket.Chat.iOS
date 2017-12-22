@@ -41,7 +41,7 @@
                     <rect key="frame" x="0.0" y="213" width="358" height="49"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <items>
-                        <tabBarItem selectedImage="Arrow Down" systemItem="more" id="tFl-3o-oCD"/>
+                        <tabBarItem selectedImage="food" id="tFl-3o-oCD"/>
                         <tabBarItem systemItem="more" id="BH7-d2-wTT"/>
                         <tabBarItem title="Item" id="nbM-FJ-tYh"/>
                         <tabBarItem title="Item" id="Hv1-YH-J0S"/>
@@ -71,6 +71,6 @@
         </view>
     </objects>
     <resources>
-        <image name="Arrow Down" width="25" height="25"/>
+        <image name="food" width="34" height="34"/>
     </resources>
 </document>
