@@ -29,7 +29,7 @@ extension ChatViewController {
             self.textInputbar.layoutIfNeeded()
             self.replyView.frame = self.textInputbar.addonContentView.bounds
             self.textDidUpdate(false)
-        }, completion: { (finished) in
+        }, completion: { (_) in
             UIView.animate(withDuration: 0.25) {
                 self.replyView.alpha = 1
             }
