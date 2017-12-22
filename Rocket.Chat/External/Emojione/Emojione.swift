@@ -4044,7 +4044,7 @@ struct Emojione {
         "man_zombie": "\u{0001f9df}\u{00002642}"
     ]
 
-    private static let categories: [String: [String]] = [
+    static let categories: [String: [String]] = [
         "symbols": [
             ":interrobang:",
             ":tm:",
