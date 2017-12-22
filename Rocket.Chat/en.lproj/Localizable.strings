@@ -28,6 +28,13 @@
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "No Mail Accounts. Please set up a Mail account in order to send email.";
 
+"alert.audio_message.success.send" = "Send";
+"alert.audio_message.success.title" = "Success";
+"alert.audio_message.success.message" = "Your message was successfully recorded. Recording time: %@.";
+
+"alert.audio_message.error.title" = "Ooops!";
+"alert.audio_message.error.message" = "An error has occurred. Please, record your message again.";
+
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "We're still working on this feature, stay tuned!";
 
@@ -42,6 +49,12 @@
 
 "alert.unsupported_feature.title" = "Feature not supported";
 "alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above.";
+
+"alert.push_token_error.title" = "Warning";
+"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0.";
+
+"alert.upload_error.title" = "Upload Error";
+"alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again.";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
