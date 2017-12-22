@@ -450,6 +450,12 @@ final class ChatViewController: SLKTextViewController {
         isWritingMessage = false
         setupToolbarRightButtonWithAudioRecorder()
     }
+    
+    override func didCommitTextEditing(_ sender: Any) {
+        sendTextMessage()
+        super.didCommitTextEditing(sender)
+        
+    }
 
     fileprivate func editTextMessage(text: String) {
         guard
