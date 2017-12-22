@@ -282,7 +282,7 @@ extension SubscriptionManager {
             }, completion: {
                 var detachedSubscriptions = [Subscription]()
 
-                Realm.executeOnMainThread({ (realm) in
+                Realm.execute({ (realm) in
                     for identifier in identifiers {
                         if let subscription = realm.object(ofType: Subscription.self, forPrimaryKey: identifier) {
                             detachedSubscriptions.append(subscription)
