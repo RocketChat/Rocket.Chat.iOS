@@ -32,10 +32,14 @@ class EmojiPickerController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        center.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+
+        emojiPicker.searchBar.becomeFirstResponder()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-
+        let center = NotificationCenter.default
+        center.removeObserver(self)
     }
 
     override func keyboardWillShow(_ notification: Notification) {
@@ -53,8 +57,22 @@ class EmojiPickerController: UIViewController {
             if #available(iOS 11, *) {
                 self.additionalSafeAreaInsets.bottom = convertedRect.size.height
                 self.view.layoutIfNeeded()
-            } else {
-                self.view.layoutMargins.bottom = convertedRect.size.height
+            }
+        }
+    }
+
+    override func keyboardWillHide(_ notification: Notification) {
+        guard
+            let userInfo = notification.userInfo,
+            let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
+        else {
+            return
+        }
+
+        UIView.animate(withDuration: animationDuration.doubleValue) {
+            if #available(iOS 11, *) {
+                self.additionalSafeAreaInsets.bottom = 0
+                self.view.layoutIfNeeded()
             }
         }
     }
