@@ -12,10 +12,13 @@ class EmojiPicker: UIView {
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var categoriesView: UITabBar! {
         didSet {
-            let items = Emojione.categories.keys.map {
-                return UITabBarItem(title: $0, image: nil, selectedImage: nil)
+            let items = Emojione.categories.keys.map { category -> UITabBarItem in
+                let item = UITabBarItem(title: nil, image: UIImage(named: category) ?? UIImage(named: "custom"), selectedImage: nil)
+                item.imageInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
+                return item
             }
             categoriesView.setItems(items, animated: true)
+            categoriesView.delegate = self
         }
     }
 
@@ -100,6 +103,13 @@ extension EmojiPicker: UICollectionViewDataSource {
         cell.emojiView.emojiLabel.text = Emojione.transform(string: Emojione.categories[key]?[indexPath.row] ?? "NO")
 
         return cell
+    }
+}
+
+extension EmojiPicker: UITabBarDelegate {
+    func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        guard let index = tabBar.items?.index(of: item) else { return }
+        emojisCollectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .centeredVertically, animated: true)
     }
 }
 
