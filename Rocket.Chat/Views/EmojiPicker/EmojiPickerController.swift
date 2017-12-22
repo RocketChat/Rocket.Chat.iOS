@@ -9,7 +9,16 @@
 import UIKit
 
 class EmojiPickerController: UIViewController {
-    var emojiPicker: EmojiPicker! = nil
+
+    var emojiPicked: ((String) -> Void)?
+    private var emojiPicker: EmojiPicker! {
+        didSet {
+            emojiPicker.emojiPicked = { emoji in
+                self.emojiPicked?(emoji)
+                self.dismiss(animated: true)
+            }
+        }
+    }
 
     override func loadView() {
         super.loadView()
@@ -40,6 +49,7 @@ class EmojiPickerController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         let center = NotificationCenter.default
         center.removeObserver(self)
+        emojiPicker.searchBar.resignFirstResponder()
     }
 
     override func keyboardWillShow(_ notification: Notification) {
