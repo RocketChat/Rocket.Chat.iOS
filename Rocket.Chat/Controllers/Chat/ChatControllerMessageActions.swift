@@ -15,6 +15,10 @@ extension ChatViewController {
         alert.addAction(UIAlertAction(title: "Add Reaction", style: .default, handler: { _ in
             let controller = EmojiPickerController()
             self.present(controller, animated: true)
+
+            controller.emojiPicked = { emoji in
+                MessageManager.react(message, emoji: emoji, completion: { _ in })
+            }
         }))
 
         let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")

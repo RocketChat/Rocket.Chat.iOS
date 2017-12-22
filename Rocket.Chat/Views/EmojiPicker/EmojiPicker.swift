@@ -34,6 +34,8 @@ class EmojiPicker: UIView {
         }
     }
 
+    var emojiPicked: ((String) -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -64,10 +66,10 @@ class EmojiPicker: UIView {
 
     private func setupCollectionView() {
         emojisCollectionView.dataSource = self
+        emojisCollectionView.delegate = self
 
         let emojiCellNib = UINib(nibName: "EmojiCollectionViewCell", bundle: nil)
         emojisCollectionView.register(emojiCellNib, forCellWithReuseIdentifier: "EmojiCollectionViewCell")
-
         emojisCollectionView.register(EmojiPickerSectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "EmojiPickerSectionHeaderView")
 
         (emojisCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionHeadersPinToVisibleBounds = true
@@ -106,10 +108,32 @@ extension EmojiPicker: UICollectionViewDataSource {
     }
 }
 
+extension EmojiPicker: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard
+            let category = Emojione.categories[Array(Emojione.categories.keys)[indexPath.section]]
+        else {
+            return
+        }
+
+        emojiPicked?(category[indexPath.row])
+    }
+}
+
 extension EmojiPicker: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let index = tabBar.items?.index(of: item) else { return }
-        emojisCollectionView.scrollToItem(at: IndexPath(row: 0, section: index), at: .centeredVertically, animated: true)
+
+        let indexPath = IndexPath(row: 1, section: index)
+        if let attributes = emojisCollectionView.layoutAttributesForSupplementaryElement(
+            ofKind: UICollectionElementKindSectionHeader, at: indexPath) {
+            let topOfHeader = CGPoint(x: 0, y: attributes.frame.origin.y - emojisCollectionView.contentInset.top)
+            emojisCollectionView.setContentOffset(topOfHeader, animated:true)
+        }
     }
 }
 
