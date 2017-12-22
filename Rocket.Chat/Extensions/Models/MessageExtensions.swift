@@ -138,4 +138,20 @@ extension Message {
         get { return textNormalized() }
         set { }
     }
+
+    override var accessibilityHint: String? {
+        get {
+            guard let format = VOLocalizedString("message.hint") else { return nil }
+
+            return String(format: format, self.reactions.reduce("") {
+                return $0 + """
+                \(Emojione.transform(string: $1.emoji ?? ""))
+                \($1.usernames.count): \($1.usernames.joined(separator: ", "))
+
+                """
+            })
+        }
+
+        set { }
+    }
 }

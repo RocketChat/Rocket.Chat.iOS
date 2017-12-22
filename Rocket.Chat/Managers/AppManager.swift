@@ -45,7 +45,7 @@ extension AppManager {
         DatabaseManager.changeDatabaseInstance(index: index)
         AuthSettingsManager.shared.clearCachedSettings()
 
-        SocketManager.disconnect { (_, _) in
+        SocketManager.disconnect { _, _ in
             reloadApp()
         }
     }
