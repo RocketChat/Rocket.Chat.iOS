@@ -24,6 +24,8 @@ class EmojiPickerController: UIViewController {
         super.loadView()
 
         emojiPicker = EmojiPicker(frame: view.frame)
+        emojiPicker.translatesAutoresizingMaskIntoConstraints = false
+
         view.addSubview(emojiPicker)
 
         view.addConstraints(
@@ -53,6 +55,8 @@ class EmojiPickerController: UIViewController {
     }
 
     override func keyboardWillShow(_ notification: Notification) {
+        guard traitCollection.horizontalSizeClass == .regular else { return }
+
         guard
             let userInfo = notification.userInfo,
             let rect = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
@@ -64,14 +68,20 @@ class EmojiPickerController: UIViewController {
         let convertedRect = view.convert(rect, from: nil)
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
-            if #available(iOS 11, *) {
-                self.additionalSafeAreaInsets.bottom = convertedRect.size.height
-                self.view.layoutIfNeeded()
+            if self.traitCollection.horizontalSizeClass == .regular {
+                if #available(iOS 11, *) {
+                    self.additionalSafeAreaInsets.bottom = convertedRect.size.height
+                    self.view.layoutIfNeeded()
+                }
+            } else {
+                
             }
         }
     }
 
     override func keyboardWillHide(_ notification: Notification) {
+        guard traitCollection.horizontalSizeClass == .regular else { return }
+
         guard
             let userInfo = notification.userInfo,
             let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
