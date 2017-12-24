@@ -132,7 +132,7 @@ extension EmojiPicker: UITabBarDelegate {
         if let attributes = emojisCollectionView.layoutAttributesForSupplementaryElement(
             ofKind: UICollectionElementKindSectionHeader, at: indexPath) {
             let topOfHeader = CGPoint(x: 0, y: attributes.frame.origin.y - emojisCollectionView.contentInset.top)
-            emojisCollectionView.setContentOffset(topOfHeader, animated:true)
+            emojisCollectionView.setContentOffset(topOfHeader, animated: true)
         }
     }
 }
