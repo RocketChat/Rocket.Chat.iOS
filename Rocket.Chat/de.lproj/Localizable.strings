@@ -28,13 +28,6 @@
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "Es sind keine Mail Accounts konfiguriert. Bitte richte einen Mail Account ein um Emails senden zu können.";
 
-"alert.audio_message.success.send" = "Senden";
-"alert.audio_message.success.title" = "Erfolg";
-"alert.audio_message.success.message" = "You message was successfully recorded. Recording time: %@."; //TODO
-
-"alert.audio_message.error.title" = "Ooops!"; //TODO
-"alert.audio_message.error.message" = "An error has occurred. Please, record your message again."; //TODO
-
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "Entschuldigung, aber dieses Feature ist noch nicht verfügbar.";
 
