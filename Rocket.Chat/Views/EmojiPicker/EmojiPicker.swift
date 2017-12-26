@@ -102,7 +102,7 @@ extension EmojiPicker: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmojiCollectionViewCell", for: indexPath) as? EmojiCollectionViewCell else { return UICollectionViewCell() }
 
         let key = Array(Emojione.categories.keys)[indexPath.section]
-        cell.emojiView.emojiLabel.text = Emojione.transform(string: Emojione.categories[key]?[indexPath.row] ?? "NO")
+        cell.emojiView.emojiLabel.text = Emojione.transform(string: Emojione.categories[key]?[indexPath.row].shortname ?? "NO")
 
         return cell
     }
@@ -124,7 +124,7 @@ extension EmojiPicker: UICollectionViewDelegateFlowLayout {
             return
         }
 
-        emojiPicked?(category[indexPath.row])
+        emojiPicked?(category[indexPath.row].shortname)
     }
 }
 
