@@ -49,7 +49,7 @@ class EmojiPickerController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         let center = NotificationCenter.default
         center.removeObserver(self)
-        emojiPicker.searchBar.resignFirstResponder()
+        emojiPicker.endEditing(true)
     }
 
     override func keyboardWillShow(_ notification: Notification) {
