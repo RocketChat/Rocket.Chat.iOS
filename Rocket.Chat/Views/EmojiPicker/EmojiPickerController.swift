@@ -55,8 +55,6 @@ class EmojiPickerController: UIViewController {
     }
 
     override func keyboardWillShow(_ notification: Notification) {
-        guard traitCollection.horizontalSizeClass == .regular else { return }
-
         guard
             let userInfo = notification.userInfo,
             let rect = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
@@ -68,20 +66,19 @@ class EmojiPickerController: UIViewController {
         let convertedRect = view.convert(rect, from: nil)
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
-            if self.traitCollection.horizontalSizeClass == .regular {
-                if #available(iOS 11, *) {
+            if #available(iOS 11, *) {
+                if self.traitCollection.horizontalSizeClass == .compact {
+                    // iPad
+                } else {
                     self.additionalSafeAreaInsets.bottom = convertedRect.size.height
-                    self.view.layoutIfNeeded()
                 }
-            } else {
-                
+
+                self.view.layoutIfNeeded()
             }
         }
     }
 
     override func keyboardWillHide(_ notification: Notification) {
-        guard traitCollection.horizontalSizeClass == .regular else { return }
-
         guard
             let userInfo = notification.userInfo,
             let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
@@ -91,7 +88,12 @@ class EmojiPickerController: UIViewController {
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
             if #available(iOS 11, *) {
-                self.additionalSafeAreaInsets.bottom = 0
+                if self.traitCollection.horizontalSizeClass == .compact {
+                    // iPad
+                } else {
+                    self.additionalSafeAreaInsets.bottom = 0
+                }
+
                 self.view.layoutIfNeeded()
             }
         }
