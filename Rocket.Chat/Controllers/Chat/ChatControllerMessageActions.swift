@@ -21,7 +21,7 @@ extension ChatViewController {
                 presenter.sourceView = view
                 presenter.sourceRect = view.bounds
             }
-            
+
             self.present(controller, animated: true)
 
             controller.emojiPicked = { emoji in
