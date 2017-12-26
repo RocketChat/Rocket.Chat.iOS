@@ -108,7 +108,11 @@ extension EmojiPicker: UICollectionViewDataSource {
     }
 }
 
-extension EmojiPicker: UICollectionViewDelegate {
+extension EmojiPicker: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 36.0, height: 36.0)
+    }
+
     func collectionView(_ collectionView: UICollectionView, shouldSelectItemAt indexPath: IndexPath) -> Bool {
         return true
     }

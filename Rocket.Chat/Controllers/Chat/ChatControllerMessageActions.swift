@@ -14,7 +14,13 @@ extension ChatViewController {
 
         alert.addAction(UIAlertAction(title: "Add Reaction", style: .default, handler: { _ in
             let controller = EmojiPickerController()
-            controller.modalPresentationStyle = .formSheet
+            controller.modalPresentationStyle = .popover
+
+            if let presenter = controller.popoverPresentationController {
+                presenter.sourceView = view
+                presenter.sourceRect = view.bounds
+            }
+            
             self.present(controller, animated: true)
 
             controller.emojiPicked = { emoji in
