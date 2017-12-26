@@ -15,6 +15,7 @@ extension ChatViewController {
         alert.addAction(UIAlertAction(title: "Add Reaction", style: .default, handler: { _ in
             let controller = EmojiPickerController()
             controller.modalPresentationStyle = .popover
+            controller.preferredContentSize = CGSize(width: 600.0, height: 400.0)
 
             if let presenter = controller.popoverPresentationController {
                 presenter.sourceView = view

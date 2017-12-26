@@ -9,15 +9,18 @@
 import UIKit
 
 class EmojiPicker: UIView {
+    let emojisByCategories = Emojione.categories.filter({ key, _ in key != "modifier" && key != "regional"})
+
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var categoriesView: UITabBar! {
         didSet {
-            let items = Emojione.categories.keys.map { category -> UITabBarItem in
+            let categoryItems = emojisByCategories.keys.map { category -> UITabBarItem in
                 let item = UITabBarItem(title: nil, image: UIImage(named: category) ?? UIImage(named: "custom"), selectedImage: nil)
                 item.imageInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
                 return item
             }
-            categoriesView.setItems(items, animated: true)
+
+            categoriesView.setItems(categoryItems, animated: false)
             categoriesView.delegate = self
         }
     }
@@ -78,7 +81,7 @@ class EmojiPicker: UIView {
 
 extension EmojiPicker: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return Emojione.categories.keys.count
+        return emojisByCategories.keys.count
     }
 
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -88,21 +91,21 @@ extension EmojiPicker: UICollectionViewDataSource {
             for: indexPath
         ) as? EmojiPickerSectionHeaderView else { return UICollectionReusableView() }
 
-        headerView.textLabel.text = Array(Emojione.categories.keys)[indexPath.section]
+        headerView.textLabel.text = Array(emojisByCategories.keys)[indexPath.section]
 
         return headerView
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let key = Array(Emojione.categories.keys)[section]
-        return Emojione.categories[key]?.count ?? 0
+        let key = Array(emojisByCategories.keys)[section]
+        return emojisByCategories[key]?.count ?? 0
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmojiCollectionViewCell", for: indexPath) as? EmojiCollectionViewCell else { return UICollectionViewCell() }
 
-        let key = Array(Emojione.categories.keys)[indexPath.section]
-        cell.emojiView.emojiLabel.text = Emojione.transform(string: Emojione.categories[key]?[indexPath.row].shortname ?? "NO")
+        let key = Array(emojisByCategories.keys)[indexPath.section]
+        cell.emojiView.emojiLabel.text = Emojione.transform(string: emojisByCategories[key]?[indexPath.row].shortname ?? "NO")
 
         return cell
     }
@@ -119,12 +122,16 @@ extension EmojiPicker: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard
-            let category = Emojione.categories[Array(Emojione.categories.keys)[indexPath.section]]
+            let category = emojisByCategories[Array(emojisByCategories.keys)[indexPath.section]]
         else {
             return
         }
 
         emojiPicked?(category[indexPath.row].shortname)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 28.0)
     }
 }
 
@@ -152,10 +159,10 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 
         addSubview(textLabel)
 
-        textLabel.font = UIFont.systemFont(ofSize: UIFont.systemFontSize + 16)
+        textLabel.font = .systemFont(ofSize: UIFont.systemFontSize + 10)
         textLabel.textAlignment = .left
         textLabel.numberOfLines = 0
-        textLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+        textLabel.lineBreakMode = .byWordWrapping
         textLabel.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
@@ -165,7 +172,11 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 
             NSLayoutConstraint(item: textLabel, attribute: .trailing, relatedBy: .equal,
                                toItem: self, attribute: .trailingMargin,
-                               multiplier: 1.0, constant: 0.0)
+                               multiplier: 1.0, constant: 0.0),
+
+            NSLayoutConstraint(item: textLabel, attribute: .height, relatedBy: .equal,
+                               toItem: nil, attribute: .height,
+                               multiplier: 1.0, constant: 26.0)
         ])
 
         backgroundColor = .white

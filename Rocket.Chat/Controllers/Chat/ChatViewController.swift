@@ -1145,12 +1145,15 @@ extension ChatViewController {
             let rect = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
             let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
         else {
-                return
+            return
         }
 
         let convertedRect = view.convert(rect, from: nil)
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
+            if let collectionView = self.collectionView {
+                collectionView.contentOffset = collectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: convertedRect.height))
+            }
             if #available(iOS 11, *) {
                 self.additionalSafeAreaInsets.bottom = convertedRect.size.height
                 self.view.layoutIfNeeded()
