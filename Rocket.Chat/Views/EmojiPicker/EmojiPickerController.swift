@@ -44,8 +44,6 @@ class EmojiPickerController: UIViewController {
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         center.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
-
-        emojiPicker.searchBar.becomeFirstResponder()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
