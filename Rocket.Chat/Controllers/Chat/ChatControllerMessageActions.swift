@@ -13,6 +13,8 @@ extension ChatViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: "Add Reaction", style: .default, handler: { _ in
+            self.view.endEditing(true)
+
             let controller = EmojiPickerController()
             controller.modalPresentationStyle = .popover
             controller.preferredContentSize = CGSize(width: 600.0, height: 400.0)
