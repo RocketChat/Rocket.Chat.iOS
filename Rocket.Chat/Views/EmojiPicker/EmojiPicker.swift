@@ -205,6 +205,7 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
         addSubview(textLabel)
 
         textLabel.font = .systemFont(ofSize: UIFont.systemFontSize + 10)
+        textLabel.textColor = .gray
         textLabel.textAlignment = .left
         textLabel.numberOfLines = 0
         textLabel.lineBreakMode = .byWordWrapping
@@ -213,7 +214,7 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
         NSLayoutConstraint.activate([
             NSLayoutConstraint(item: textLabel, attribute: .leading, relatedBy: .equal,
                                toItem: self, attribute: .leadingMargin,
-                               multiplier: 1.0, constant: 0.0),
+                               multiplier: 1.0, constant: -8.0),
 
             NSLayoutConstraint(item: textLabel, attribute: .trailing, relatedBy: .equal,
                                toItem: self, attribute: .trailingMargin,
