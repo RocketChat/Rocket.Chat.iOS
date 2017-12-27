@@ -106,7 +106,12 @@ class EmojiPicker: UIView {
         emojisCollectionView.register(emojiCellNib, forCellWithReuseIdentifier: "EmojiCollectionViewCell")
         emojisCollectionView.register(EmojiPickerSectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "EmojiPickerSectionHeaderView")
 
-        (emojisCollectionView.collectionViewLayout as? UICollectionViewFlowLayout)?.sectionHeadersPinToVisibleBounds = true
+        if let layout = emojisCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+            layout.sectionHeadersPinToVisibleBounds = true
+            layout.headerReferenceSize = CGSize(width: self.frame.width, height: 26.0)
+        }
+
+        emojisCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 8.0, bottom: 0.0, right: 8.0)
     }
 }
 
@@ -176,12 +181,15 @@ extension EmojiPicker: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
         guard let index = tabBar.items?.index(of: item) else { return }
 
+        searchBar.resignFirstResponder()
+        searchBar.text = ""
+
+        emojisCollectionView.reloadData()
+        emojisCollectionView.layoutIfNeeded()
+
         let indexPath = IndexPath(row: 1, section: index)
-        if let attributes = emojisCollectionView.layoutAttributesForSupplementaryElement(
-            ofKind: UICollectionElementKindSectionHeader, at: indexPath) {
-            let topOfHeader = CGPoint(x: 0, y: attributes.frame.origin.y - emojisCollectionView.contentInset.top)
-            emojisCollectionView.setContentOffset(topOfHeader, animated: false)
-        }
+        emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+        emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -28.0)), animated: false)
     }
 }
 
