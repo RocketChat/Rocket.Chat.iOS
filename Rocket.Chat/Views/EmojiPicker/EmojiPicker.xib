@@ -34,7 +34,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="9CP-Lf-X2h">
-                    <rect key="frame" x="0.0" y="0.0" width="328" height="56"/>
+                    <rect key="frame" x="0.0" y="0.0" width="366" height="56"/>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsS-oy-Hnj">
@@ -54,11 +54,6 @@
                         <tabBarItem title="Item" id="mb9-I1-vXt"/>
                     </items>
                 </tabBar>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xgx-fx-bFn" userLabel="Skin Tone Button">
-                    <rect key="frame" x="328" y="0.0" width="38" height="56"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="34"/>
-                    <state key="normal" title="🏻"/>
-                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -68,12 +63,9 @@
                 <constraint firstItem="9CP-Lf-X2h" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="9bt-qt-vVX"/>
                 <constraint firstItem="BXL-xf-mV0" firstAttribute="top" secondItem="9CP-Lf-X2h" secondAttribute="bottom" id="ETf-20-wuu"/>
                 <constraint firstItem="lsS-oy-Hnj" firstAttribute="top" secondItem="BXL-xf-mV0" secondAttribute="bottom" id="NDc-bT-0jc"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Xgx-fx-bFn" secondAttribute="trailing" id="OvW-Gb-bCw"/>
                 <constraint firstItem="BXL-xf-mV0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="TLx-5m-LQ0"/>
-                <constraint firstItem="Xgx-fx-bFn" firstAttribute="leading" secondItem="9CP-Lf-X2h" secondAttribute="trailing" id="YEl-bP-LIw"/>
-                <constraint firstItem="Xgx-fx-bFn" firstAttribute="centerY" secondItem="9CP-Lf-X2h" secondAttribute="centerY" id="eXF-xr-nB0"/>
-                <constraint firstItem="Xgx-fx-bFn" firstAttribute="height" secondItem="9CP-Lf-X2h" secondAttribute="height" id="sih-4M-Dfk"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="lsS-oy-Hnj" secondAttribute="trailing" id="tvy-P3-gwq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="9CP-Lf-X2h" secondAttribute="trailing" id="xoI-Ic-oIY"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="BXL-xf-mV0" secondAttribute="trailing" id="ym1-Mq-Trt"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
