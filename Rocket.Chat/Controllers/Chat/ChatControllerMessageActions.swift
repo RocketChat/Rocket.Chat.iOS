@@ -24,7 +24,11 @@ extension ChatViewController {
                 presenter.sourceRect = view.bounds
             }
 
-            self.present(controller, animated: true)
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                self.navigationController?.pushViewController(controller, animated: true)
+            } else {
+                self.present(controller, animated: true)
+            }
 
             controller.emojiPicked = { emoji in
                 MessageManager.react(message, emoji: emoji, completion: { _ in })

@@ -15,7 +15,12 @@ class EmojiPickerController: UIViewController {
         didSet {
             emojiPicker.emojiPicked = { emoji in
                 self.emojiPicked?(emoji)
-                self.dismiss(animated: true)
+
+                if self.navigationController?.topViewController == self {
+                    self.navigationController?.popViewController(animated: true)
+                } else {
+                    self.dismiss(animated: true)
+                }
             }
         }
     }
@@ -53,6 +58,8 @@ class EmojiPickerController: UIViewController {
     }
 
     override func keyboardWillShow(_ notification: Notification) {
+        guard UIDevice.current.userInterfaceIdiom == .phone else { return }
+
         guard
             let userInfo = notification.userInfo,
             let rect = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue,
@@ -65,18 +72,15 @@ class EmojiPickerController: UIViewController {
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
             if #available(iOS 11, *) {
-                if self.traitCollection.horizontalSizeClass == .compact {
-                    // iPad
-                } else {
-                    self.additionalSafeAreaInsets.bottom = convertedRect.size.height
-                }
-
+                self.additionalSafeAreaInsets.bottom = convertedRect.size.height
                 self.view.layoutIfNeeded()
             }
         }
     }
 
     override func keyboardWillHide(_ notification: Notification) {
+        guard UIDevice.current.userInterfaceIdiom == .phone else { return }
+
         guard
             let userInfo = notification.userInfo,
             let animationDuration = userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber
@@ -86,12 +90,7 @@ class EmojiPickerController: UIViewController {
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
             if #available(iOS 11, *) {
-                if self.traitCollection.horizontalSizeClass == .compact {
-                    // iPad
-                } else {
-                    self.additionalSafeAreaInsets.bottom = 0
-                }
-
+                self.additionalSafeAreaInsets.bottom = 0
                 self.view.layoutIfNeeded()
             }
         }
