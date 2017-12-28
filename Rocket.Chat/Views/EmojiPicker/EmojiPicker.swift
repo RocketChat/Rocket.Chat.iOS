@@ -50,8 +50,9 @@ class EmojiPicker: UIView {
     @IBOutlet weak var categoriesView: UITabBar! {
         didSet {
             let categoryItems = categories.map { category -> UITabBarItem in
-                let item = UITabBarItem(title: nil, image: UIImage(named: category.name) ?? UIImage(named: "custom"), selectedImage: nil)
-                item.imageInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
+                let image = UIImage(named: category.name) ?? UIImage(named: "custom")
+                let item = UITabBarItem(title: nil, image: image, selectedImage: image)
+                item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
                 return item
             }
 
@@ -114,10 +115,10 @@ class EmojiPicker: UIView {
 
         if let layout = emojisCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionHeadersPinToVisibleBounds = true
-            layout.headerReferenceSize = CGSize(width: self.frame.width, height: 20.0)
+            layout.headerReferenceSize = CGSize(width: self.frame.width, height: 20)
         }
 
-        emojisCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 8.0, bottom: 0.0, right: 8.0)
+        emojisCollectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }
 }
 
