@@ -1,0 +1,16 @@
+/* 
+  EmojiPicker.strings
+  Rocket.Chat
+
+  Created by Matheus Cardoso on 12/27/17.
+  Copyright © 2017 Rocket.Chat. All rights reserved.
+*/
+
+"categories.people" = "PESSOAS";
+"categories.nature" = "ANIMAIS & NATUREZA";
+"categories.food" = "COMIDAS & BEBIDAS";
+"categories.activity" = "ATIVIDADE";
+"categories.travel" = "VIAGEM & LUGARES";
+"categories.objects" = "OBJETOS";
+"categories.symbols" = "SÍMBOLOS";
+"categories.flags" = "BANDEIRAS";
