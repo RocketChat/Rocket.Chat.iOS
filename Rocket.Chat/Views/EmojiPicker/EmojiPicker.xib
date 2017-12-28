@@ -20,11 +20,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="477" height="319"/>
+            <rect key="frame" x="0.0" y="0.0" width="477" height="351"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BXL-xf-mV0">
-                    <rect key="frame" x="0.0" y="56" width="477" height="227"/>
+                    <rect key="frame" x="0.0" y="56" width="477" height="252"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SeJ-e5-ygJ">
                         <size key="itemSize" width="50" height="50"/>
@@ -41,10 +41,10 @@
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsS-oy-Hnj">
-                    <rect key="frame" x="0.0" y="283" width="477" height="36"/>
+                    <rect key="frame" x="0.0" y="308" width="477" height="43"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="36" id="YO9-TE-LJz"/>
+                        <constraint firstAttribute="height" constant="43" id="IkW-fw-eXV"/>
                     </constraints>
                     <items/>
                 </tabBar>
@@ -64,7 +64,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="-12.5" y="-101.5"/>
+            <point key="canvasLocation" x="-43.5" y="-144.5"/>
         </view>
     </objects>
 </document>
