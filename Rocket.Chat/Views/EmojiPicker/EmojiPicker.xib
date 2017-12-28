@@ -20,11 +20,11 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="366" height="262"/>
+            <rect key="frame" x="0.0" y="0.0" width="477" height="319"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BXL-xf-mV0">
-                    <rect key="frame" x="0.0" y="56" width="366" height="162"/>
+                    <rect key="frame" x="0.0" y="56" width="477" height="227"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SeJ-e5-ygJ">
                         <size key="itemSize" width="50" height="50"/>
@@ -34,25 +34,19 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <searchBar contentMode="redraw" searchBarStyle="minimal" translatesAutoresizingMaskIntoConstraints="NO" id="9CP-Lf-X2h">
-                    <rect key="frame" x="0.0" y="0.0" width="366" height="56"/>
+                    <rect key="frame" x="0.0" y="0.0" width="477" height="56"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="56" id="m1y-8s-7bv"/>
+                    </constraints>
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsS-oy-Hnj">
-                    <rect key="frame" x="0.0" y="218" width="366" height="44"/>
+                    <rect key="frame" x="0.0" y="283" width="477" height="36"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="44" id="YO9-TE-LJz"/>
+                        <constraint firstAttribute="height" constant="36" id="YO9-TE-LJz"/>
                     </constraints>
-                    <items>
-                        <tabBarItem selectedImage="food" id="tFl-3o-oCD"/>
-                        <tabBarItem systemItem="more" id="BH7-d2-wTT"/>
-                        <tabBarItem title="Item" id="nbM-FJ-tYh"/>
-                        <tabBarItem title="Item" id="Hv1-YH-J0S"/>
-                        <tabBarItem title="Item" id="WXM-gn-ECb"/>
-                        <tabBarItem title="Item" id="6I3-vK-ngn"/>
-                        <tabBarItem title="Item" id="EJK-U1-uSb"/>
-                        <tabBarItem title="Item" id="mb9-I1-vXt"/>
-                    </items>
+                    <items/>
                 </tabBar>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -70,10 +64,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <point key="canvasLocation" x="30" y="-130"/>
+            <point key="canvasLocation" x="-12.5" y="-101.5"/>
         </view>
     </objects>
-    <resources>
-        <image name="food" width="34" height="34"/>
-    </resources>
 </document>

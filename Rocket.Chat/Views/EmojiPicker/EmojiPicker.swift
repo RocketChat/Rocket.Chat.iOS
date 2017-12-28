@@ -11,6 +11,10 @@ import UIKit
 fileprivate typealias EmojiCategory = (name: String, emojis: [Emoji])
 
 class EmojiPicker: UIView {
+    fileprivate func localized(_ string: String) -> String {
+        return NSLocalizedString(string, tableName: "EmojiPicker", bundle: Bundle.main, value: "", comment: "")
+    }
+
     fileprivate let categories: [EmojiCategory] = [
         (name: "activity", emojis: Emojione.activity),
         (name: "people", emojis: Emojione.people),
@@ -47,12 +51,14 @@ class EmojiPicker: UIView {
         didSet {
             let categoryItems = categories.map { category -> UITabBarItem in
                 let item = UITabBarItem(title: nil, image: UIImage(named: category.name) ?? UIImage(named: "custom"), selectedImage: nil)
-                item.imageInsets = UIEdgeInsets(top: 9, left: 0, bottom: -9, right: 0)
+                item.imageInsets = UIEdgeInsets(top: 12, left: 0, bottom: 0, right: 0)
                 return item
             }
 
             categoriesView.setItems(categoryItems, animated: false)
+
             categoriesView.delegate = self
+            categoriesView.layoutIfNeeded()
         }
     }
 
@@ -108,7 +114,7 @@ class EmojiPicker: UIView {
 
         if let layout = emojisCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.sectionHeadersPinToVisibleBounds = true
-            layout.headerReferenceSize = CGSize(width: self.frame.width, height: 26.0)
+            layout.headerReferenceSize = CGSize(width: self.frame.width, height: 20.0)
         }
 
         emojisCollectionView.contentInset = UIEdgeInsets(top: 0.0, left: 8.0, bottom: 0.0, right: 8.0)
@@ -127,7 +133,7 @@ extension EmojiPicker: UICollectionViewDataSource {
             for: indexPath
         ) as? EmojiPickerSectionHeaderView else { return UICollectionReusableView() }
 
-        headerView.textLabel.text = currentCategories[indexPath.section].name
+        headerView.textLabel.text = self.localized("categories.\(currentCategories[indexPath.section].name)")
 
         return headerView
     }
@@ -167,7 +173,7 @@ extension EmojiPicker: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 28.0)
+        return CGSize(width: collectionView.bounds.width, height: 20.0)
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
@@ -189,7 +195,7 @@ extension EmojiPicker: UITabBarDelegate {
 
         let indexPath = IndexPath(row: 1, section: index)
         emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-        emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -28.0)), animated: false)
+        emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -20.0)), animated: false)
     }
 }
 
@@ -204,7 +210,7 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 
         addSubview(textLabel)
 
-        textLabel.font = .systemFont(ofSize: UIFont.systemFontSize + 10)
+        textLabel.font = .systemFont(ofSize: UIFont.systemFontSize + 4)
         textLabel.textColor = .gray
         textLabel.textAlignment = .left
         textLabel.numberOfLines = 0
@@ -222,7 +228,7 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 
             NSLayoutConstraint(item: textLabel, attribute: .height, relatedBy: .equal,
                                toItem: nil, attribute: .height,
-                               multiplier: 1.0, constant: 26.0)
+                               multiplier: 1.0, constant: 20.0)
         ])
 
         backgroundColor = .white

@@ -283,6 +283,7 @@
 		80A63C551F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */; };
 		80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C561F71D2E400FE5AC4 /* APISpec.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
+		80C7DD5E1FF46B8000E6647C /* EmojiPicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* EmojiPicker.strings */; };
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
 		80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB5731F8DA55C00FC9715 /* ReplyView.swift */; };
 		80D838DC1FDE91A100EFC67E /* RecordingAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D838DB1FDE91A100EFC67E /* RecordingAudioView.xib */; };
@@ -642,6 +643,12 @@
 		80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C561F71D2E400FE5AC4 /* APISpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISpec.swift; sourceTree = "<group>"; };
 		80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthViewControllerSpec.swift; path = Controllers/OAuthViewControllerSpec.swift; sourceTree = "<group>"; };
+		80C7DD5F1FF46B8000E6647C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
+		80C7DD611FF46B8300E6647C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/EmojiPicker.strings"; sourceTree = "<group>"; };
+		80C7DD621FF46B8600E6647C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
+		80C7DD631FF46B8700E6647C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
+		80C7DD641FF46B8800E6647C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
+		80C7DD651FF46B8C00E6647C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
 		80CFB5711F8D697100FC9715 /* ReplyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReplyView.xib; sourceTree = "<group>"; };
 		80CFB5731F8DA55C00FC9715 /* ReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyView.swift; sourceTree = "<group>"; };
 		80D838DB1FDE91A100EFC67E /* RecordingAudioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordingAudioView.xib; sourceTree = "<group>"; };
@@ -1472,6 +1479,7 @@
 				8020CCEF1FEAB4A7003424F4 /* EmojiPicker.swift */,
 				8020CCF41FEAD8C9003424F4 /* EmojiPickerController.swift */,
 				806465F11FED81C9001F27DB /* EmojiPicker.xcassets */,
+				80C7DD601FF46B8000E6647C /* EmojiPicker.strings */,
 			);
 			path = EmojiPicker;
 			sourceTree = "<group>";
@@ -1873,6 +1881,7 @@
 				411F7D961F5179B50080E8AD /* ChatChannelHeaderCell.xib in Resources */,
 				41DCB8261DDC828200E1197F /* SubscriptionSearchMoreView.xib in Resources */,
 				4102E3AA1E532323004BAA82 /* Settings.storyboard in Resources */,
+				80C7DD5E1FF46B8000E6647C /* EmojiPicker.strings in Resources */,
 				419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */,
 				4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */,
 				80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */,
@@ -2543,6 +2552,19 @@
 				80307E481FD75DD5006AD9EF /* cs */,
 			);
 			name = VoiceOver.strings;
+			sourceTree = "<group>";
+		};
+		80C7DD601FF46B8000E6647C /* EmojiPicker.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				80C7DD5F1FF46B8000E6647C /* en */,
+				80C7DD611FF46B8300E6647C /* pt-BR */,
+				80C7DD621FF46B8600E6647C /* de */,
+				80C7DD631FF46B8700E6647C /* cs */,
+				80C7DD641FF46B8800E6647C /* pl */,
+				80C7DD651FF46B8C00E6647C /* fr */,
+			);
+			name = EmojiPicker.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
