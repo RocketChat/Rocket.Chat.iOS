@@ -110,7 +110,7 @@ class EmojiPicker: UIView {
         }
 
         set {
-            EmojiPicker.defaults?.set(currentSkinToneIndex, forKey: "currentSkinToneIndex")
+            EmojiPicker.defaults?.set(newValue, forKey: "currentSkinToneIndex")
         }
     }
 

@@ -43,6 +43,10 @@ class EmojiPickerController: UIViewController {
                 withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": emojiPicker]
             )
         )
+
+        if self.navigationController?.topViewController == self {
+            navigationController?.navigationBar.topItem?.title = ""
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
