@@ -75,6 +75,43 @@ class EmojiPicker: UIView {
         }
     }
 
+    let skinTones: [(name: String?, color: UIColor)] = [
+        (name: nil, color: #colorLiteral(red: 0.999120295, green: 0.8114234805, blue: 0.06628075987, alpha: 1)),
+        (name: "tone1", color: #colorLiteral(red: 0.9791174531, green: 0.8912416697, blue: 0.7634990811, alpha: 1)),
+        (name: "tone2", color: #colorLiteral(red: 0.8864725232, green: 0.8108071685, blue: 0.6322135925, alpha: 1)),
+        (name: "tone3", color: #colorLiteral(red: 0.8586704731, green: 0.6372342706, blue: 0.4515766501, alpha: 1)),
+        (name: "tone4", color: #colorLiteral(red: 0.6580494642, green: 0.5000503063, blue: 0.3285613656, alpha: 1)),
+        (name: "tone5", color: #colorLiteral(red: 0.3705755472, green: 0.3079021573, blue: 0.2594769299, alpha: 1))
+    ]
+
+    static let defaults = UserDefaults(suiteName: "EmojiPicker")
+    var currentSkinToneIndex: Int = EmojiPicker.defaults?.integer(forKey: "currentSkinToneIndex") ?? 0 {
+        didSet {
+            EmojiPicker.defaults?.set(currentSkinToneIndex, forKey: "currentSkinToneIndex")
+        }
+    }
+
+    var currentSkinTone: (name: String?, color: UIColor) {
+        return skinTones[currentSkinToneIndex]
+    }
+
+    @IBOutlet weak var skinToneButton: UIButton! {
+        didSet {
+            skinToneButton.layer.cornerRadius = skinToneButton.frame.width/2
+            skinToneButton.backgroundColor = currentSkinTone.color
+            skinToneButton.showsTouchWhenHighlighted = true
+            skinToneButton.layer.borderWidth = 1.0
+            skinToneButton.layer.borderColor = UIColor.lightGray.cgColor.copy(alpha: 0.5)
+        }
+    }
+
+    @IBAction func didPressSkinToneButton(_ sender: UIButton) {
+        currentSkinToneIndex += 1
+        currentSkinToneIndex = currentSkinToneIndex % skinTones.count
+        skinToneButton.backgroundColor = currentSkinTone.color
+        emojisCollectionView.reloadData()
+    }
+
     var emojiPicked: ((String) -> Void)?
 
     override init(frame: CGRect) {
@@ -147,7 +184,13 @@ extension EmojiPicker: UICollectionViewDataSource {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmojiCollectionViewCell", for: indexPath) as? EmojiCollectionViewCell else { return UICollectionViewCell() }
 
         let emoji = currentCategories[indexPath.section].emojis[indexPath.row]
-        cell.emojiView.emojiLabel.text = Emojione.transform(string: emoji.shortname)
+
+        if emoji.supportsTones, let currentTone = currentSkinTone.name {
+            let shortname = String(emoji.shortname.dropLast()) + "_\(currentTone):"
+            cell.emojiView.emojiLabel.text = Emojione.transform(string: shortname)
+        } else {
+            cell.emojiView.emojiLabel.text = Emojione.transform(string: emoji.shortname)
+        }
 
         return cell
     }
@@ -170,7 +213,16 @@ extension EmojiPicker: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        emojiPicked?(currentCategories[indexPath.section].emojis[indexPath.row].shortname)
+
+        let emoji = currentCategories[indexPath.section].emojis[indexPath.row]
+
+        if emoji.supportsTones, let currentTone = currentSkinTone.name {
+            let shortname = String(emoji.shortname.dropLast()) + "_\(currentTone):"
+            emojiPicked?(shortname)
+        } else {
+            emojiPicked?(emoji.shortname)
+        }
+
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
