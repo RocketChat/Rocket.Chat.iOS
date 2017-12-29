@@ -6,6 +6,7 @@
   Copyright © 2017 Rocket.Chat. All rights reserved.
 */
 
+"categories.recent" = "FREQUENTLY USED";
 "categories.people" = "SMILEYS & PEOPLE";
 "categories.nature" = "ANIMALS & NATURE";
 "categories.food" = "FOOD & DRINK";
