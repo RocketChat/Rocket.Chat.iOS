@@ -256,9 +256,9 @@ extension EmojiPicker: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.bounds.width, height: 36.0)
     }
 
-    func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
-        if let item = categoriesView.items?[indexPath.section] {
-            categoriesView.selectedItem = item
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        if let first = collectionView.indexPathsForVisibleItems.first {
+            categoriesView.selectedItem = categoriesView.items?[first.section]
         }
     }
 }
@@ -275,7 +275,7 @@ extension EmojiPicker: UITabBarDelegate {
 
         let indexPath = IndexPath(row: 1, section: index)
         emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-        emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -20.0)), animated: false)
+        emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -36.0)), animated: false)
     }
 }
 
