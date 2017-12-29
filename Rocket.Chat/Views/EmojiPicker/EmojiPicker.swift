@@ -11,11 +11,29 @@ import UIKit
 fileprivate typealias EmojiCategory = (name: String, emojis: [Emoji])
 
 class EmojiPicker: UIView {
+    static let defaults = UserDefaults(suiteName: "EmojiPicker")
+
     fileprivate func localized(_ string: String) -> String {
         return NSLocalizedString(string, tableName: "EmojiPicker", bundle: Bundle.main, value: "", comment: "")
     }
 
-    fileprivate let categories: [EmojiCategory] = [
+    var recentEmojis: [Emoji] {
+        get {
+            if let data = EmojiPicker.defaults?.value(forKey:"recentEmojis") as? Data {
+                let emojis = try? PropertyListDecoder().decode(Array<Emoji>.self, from: data)
+                return emojis ?? []
+            }
+
+            return []
+        }
+
+        set {
+            let emojis = newValue.count < 31 ? newValue : Array(newValue.dropLast(newValue.count - 30))
+            EmojiPicker.defaults?.set(try? PropertyListEncoder().encode(emojis), forKey: "recentEmojis")
+        }
+    }
+
+    fileprivate let defaultCategories: [EmojiCategory] = [
         (name: "activity", emojis: Emojione.activity),
         (name: "people", emojis: Emojione.people),
         (name: "travel", emojis: Emojione.travel),
@@ -27,7 +45,7 @@ class EmojiPicker: UIView {
     ]
     fileprivate var searchedCategories: [(name: String, emojis: [Emoji])] = []
     fileprivate func searchCategories(string: String) -> [EmojiCategory] {
-        return categories.map {
+        return defaultCategories.map {
             let emojis = $0.emojis.filter {
                 $0.name.contains(string) || $0.shortname.contains(string) ||
                 $0.keywords.joined(separator: " ").contains(string) ||
@@ -39,17 +57,19 @@ class EmojiPicker: UIView {
     }
 
     var isSearching: Bool {
-        return searchBar.text != nil && searchBar.text?.isEmpty != true
+        return searchBar?.text != nil && searchBar?.text?.isEmpty != true
     }
 
     fileprivate var currentCategories: [EmojiCategory] {
+        let recentCategory = (name: "recent", emojis: recentEmojis)
+        let categories = (recentEmojis.count > 0 ? [recentCategory] : []) + defaultCategories
         return isSearching ? searchedCategories : categories
     }
 
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var categoriesView: UITabBar! {
         didSet {
-            let categoryItems = categories.map { category -> UITabBarItem in
+            let categoryItems = currentCategories.map { category -> UITabBarItem in
                 let image = UIImage(named: category.name) ?? UIImage(named: "custom")
                 let item = UITabBarItem(title: nil, image: image, selectedImage: image)
                 item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
@@ -84,9 +104,12 @@ class EmojiPicker: UIView {
         (name: "tone5", color: #colorLiteral(red: 0.3705755472, green: 0.3079021573, blue: 0.2594769299, alpha: 1))
     ]
 
-    static let defaults = UserDefaults(suiteName: "EmojiPicker")
-    var currentSkinToneIndex: Int = EmojiPicker.defaults?.integer(forKey: "currentSkinToneIndex") ?? 0 {
-        didSet {
+    var currentSkinToneIndex: Int {
+        get {
+            return EmojiPicker.defaults?.integer(forKey: "currentSkinToneIndex") ?? 0
+        }
+
+        set {
             EmojiPicker.defaults?.set(currentSkinToneIndex, forKey: "currentSkinToneIndex")
         }
     }
@@ -221,6 +244,10 @@ extension EmojiPicker: UICollectionViewDelegateFlowLayout {
             emojiPicked?(shortname)
         } else {
             emojiPicked?(emoji.shortname)
+        }
+
+        if !recentEmojis.contains { $0.shortname == emoji.shortname  } {
+            recentEmojis = [emoji] + recentEmojis
         }
 
     }
