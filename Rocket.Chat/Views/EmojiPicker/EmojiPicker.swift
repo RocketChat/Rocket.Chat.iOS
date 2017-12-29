@@ -244,10 +244,11 @@ extension EmojiPicker: UICollectionViewDelegateFlowLayout {
             emojiPicked?(emoji.shortname)
         }
 
-        if !recentEmojis.contains { $0.shortname == emoji.shortname  } {
-            recentEmojis = [emoji] + recentEmojis
+        if let index = recentEmojis.index(where: { $0.shortname == emoji.shortname  }) {
+            recentEmojis.remove(at: index)
         }
 
+        recentEmojis = [emoji] + recentEmojis
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
