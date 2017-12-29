@@ -34,13 +34,13 @@ class EmojiPicker: UIView {
     }
 
     fileprivate let defaultCategories: [EmojiCategory] = [
-        (name: "activity", emojis: Emojione.activity),
         (name: "people", emojis: Emojione.people),
-        (name: "travel", emojis: Emojione.travel),
         (name: "nature", emojis: Emojione.nature),
+        (name: "food", emojis: Emojione.food),
+        (name: "activity", emojis: Emojione.activity),
+        (name: "travel", emojis: Emojione.travel),
         (name: "objects", emojis: Emojione.objects),
         (name: "symbols", emojis: Emojione.symbols),
-        (name: "food", emojis: Emojione.food),
         (name: "flags", emojis: Emojione.flags)
     ]
     fileprivate var searchedCategories: [(name: String, emojis: [Emoji])] = []
