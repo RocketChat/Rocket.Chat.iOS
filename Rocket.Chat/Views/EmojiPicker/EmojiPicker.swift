@@ -253,7 +253,7 @@ extension EmojiPicker: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: 20.0)
+        return CGSize(width: collectionView.bounds.width, height: 36.0)
     }
 
     func collectionView(_ collectionView: UICollectionView, willDisplaySupplementaryView view: UICollectionReusableView, forElementKind elementKind: String, at indexPath: IndexPath) {
@@ -290,7 +290,7 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 
         addSubview(textLabel)
 
-        textLabel.font = .systemFont(ofSize: UIFont.systemFontSize + 4)
+        textLabel.font = .boldSystemFont(ofSize: UIFont.systemFontSize)
         textLabel.textColor = .gray
         textLabel.textAlignment = .left
         textLabel.numberOfLines = 0
@@ -308,7 +308,7 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 
             NSLayoutConstraint(item: textLabel, attribute: .height, relatedBy: .equal,
                                toItem: nil, attribute: .height,
-                               multiplier: 1.0, constant: 20.0)
+                               multiplier: 1.0, constant: 36.0)
         ])
 
         backgroundColor = .white
