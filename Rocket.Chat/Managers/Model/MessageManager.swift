@@ -102,6 +102,7 @@ extension MessageManager {
                     object?.subscription = detachedSubscription
                 })
 
+                message.temporary = false
                 realm.add(message, update: true)
             })
         }
