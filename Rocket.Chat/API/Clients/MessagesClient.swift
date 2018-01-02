@@ -15,7 +15,7 @@ struct MessagesClient: APIClient {
     func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.shared) {
         let message = Message()
         message.internalType = ""
-        message.updatedAt = Date.serverDate.addingTimeInterval(-1000)
+        message.updatedAt = nil
         message.createdAt = Date.serverDate
         message.text = text
         message.subscription = subscription
@@ -23,16 +23,17 @@ struct MessagesClient: APIClient {
         message.identifier = id
         message.temporary = true
 
-        try? realm?.write {
-            realm?.add(message)
+        Realm.executeOnMainThread { (realm) in
+            realm.add(message)
         }
 
         func updateMessage(json: JSON) {
             DispatchQueue.main.async {
-                try? realm?.write {
+                Realm.executeOnMainThread { (realm) in
                     message.temporary = false
+                    message.updatedAt = Date()
                     message.map(json, realm: realm)
-                    realm?.add(message, update: true)
+                    realm.add(message, update: true)
                 }
 
                 MessageTextCacheManager.shared.update(for: message)
