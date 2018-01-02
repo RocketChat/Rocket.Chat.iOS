@@ -47,6 +47,8 @@ class EmojiPickerController: UIViewController {
         if self.navigationController?.topViewController == self {
             navigationController?.navigationBar.topItem?.title = ""
         }
+
+        title = NSLocalizedString("controller.title", tableName: "EmojiPicker", bundle: Bundle.main, value: "", comment: "")
     }
 
     override func viewWillAppear(_ animated: Bool) {

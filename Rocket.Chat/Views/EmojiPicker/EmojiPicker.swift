@@ -85,6 +85,7 @@ class EmojiPicker: UIView {
 
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
+            searchBar.placeholder = localized("searchbar.placeholder")
             searchBar.delegate = self
         }
     }
@@ -192,7 +193,7 @@ extension EmojiPicker: UICollectionViewDataSource {
             for: indexPath
         ) as? EmojiPickerSectionHeaderView else { return UICollectionReusableView() }
 
-        headerView.textLabel.text = self.localized("categories.\(currentCategories[indexPath.section].name)")
+        headerView.textLabel.text = localized("categories.\(currentCategories[indexPath.section].name)")
 
         return headerView
     }

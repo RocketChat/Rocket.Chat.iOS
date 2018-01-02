@@ -6,6 +6,9 @@
   Copyright © 2017 Rocket.Chat. All rights reserved.
 */
 
+"controller.title" = "Escolha uma reação";
+"searchbar.placeholder" = "Procure um emoji";
+
 "categories.recent" = "UTILIZADOS FREQUENTEMENTE";
 "categories.people" = "PESSOAS";
 "categories.nature" = "ANIMAIS & NATUREZA";
