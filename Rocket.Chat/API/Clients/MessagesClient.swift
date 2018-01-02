@@ -23,17 +23,17 @@ struct MessagesClient: APIClient {
         message.identifier = id
         message.temporary = true
 
-        Realm.executeOnMainThread { (realm) in
-            realm.add(message)
+        try? realm?.write {
+            realm?.add(message)
         }
 
         func updateMessage(json: JSON) {
             DispatchQueue.main.async {
-                Realm.executeOnMainThread { (realm) in
+                try? realm?.write {
                     message.temporary = false
                     message.updatedAt = Date()
                     message.map(json, realm: realm)
-                    realm.add(message, update: true)
+                    realm?.add(message, update: true)
                 }
 
                 MessageTextCacheManager.shared.update(for: message)
