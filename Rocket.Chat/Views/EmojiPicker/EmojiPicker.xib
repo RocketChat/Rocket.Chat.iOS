@@ -25,7 +25,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="BXL-xf-mV0">
-                    <rect key="frame" x="0.0" y="56" width="477" height="252"/>
+                    <rect key="frame" x="0.0" y="56" width="477" height="251"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="SeJ-e5-ygJ">
                         <size key="itemSize" width="50" height="50"/>
@@ -42,7 +42,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </searchBar>
                 <tabBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lsS-oy-Hnj">
-                    <rect key="frame" x="0.0" y="308" width="477" height="43"/>
+                    <rect key="frame" x="0.0" y="307" width="477" height="43"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="43" id="IkW-fw-eXV"/>
@@ -65,7 +65,7 @@
             <constraints>
                 <constraint firstItem="9CP-Lf-X2h" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="4PQ-6Q-Qzr"/>
                 <constraint firstItem="lsS-oy-Hnj" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="6Jh-LC-OBK"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="lsS-oy-Hnj" secondAttribute="bottom" id="82C-tm-8do"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="lsS-oy-Hnj" secondAttribute="bottom" constant="1" id="82C-tm-8do"/>
                 <constraint firstItem="9CP-Lf-X2h" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="9bt-qt-vVX"/>
                 <constraint firstItem="BXL-xf-mV0" firstAttribute="top" secondItem="9CP-Lf-X2h" secondAttribute="bottom" id="ETf-20-wuu"/>
                 <constraint firstItem="AnS-O8-BYG" firstAttribute="leading" secondItem="9CP-Lf-X2h" secondAttribute="trailing" id="MGU-mh-XQx"/>
