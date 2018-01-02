@@ -78,7 +78,7 @@ class EmojiPickerController: UIViewController {
 
         UIView.animate(withDuration: animationDuration.doubleValue) {
             if #available(iOS 11, *) {
-                self.additionalSafeAreaInsets.bottom = convertedRect.size.height
+                self.additionalSafeAreaInsets.bottom = convertedRect.size.height - self.view.safeAreaInsets.bottom
                 self.view.layoutIfNeeded()
             }
         }
