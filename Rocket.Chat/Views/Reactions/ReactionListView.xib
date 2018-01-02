@@ -17,29 +17,28 @@
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUh-ZA-FsI">
-            <rect key="frame" x="0.0" y="0.0" width="567" height="46"/>
+        <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vUh-ZA-FsI">
+            <rect key="frame" x="0.0" y="0.0" width="567" height="47"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Bp4-sy-uGs">
-                    <rect key="frame" x="0.0" y="0.0" width="68" height="46"/>
+                    <rect key="frame" x="0.0" y="8" width="68" height="31"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jH5-CI-tIQ">
-                            <rect key="frame" x="0.0" y="0.0" width="68" height="46"/>
+                            <rect key="frame" x="0.0" y="0.0" width="68" height="31"/>
                             <state key="normal" title="Reactions"/>
                         </button>
                     </subviews>
                 </stackView>
             </subviews>
             <constraints>
+                <constraint firstItem="Bp4-sy-uGs" firstAttribute="top" secondItem="2LA-wb-v0m" secondAttribute="top" constant="8" id="0EL-pZ-Fme"/>
                 <constraint firstItem="Bp4-sy-uGs" firstAttribute="trailing" secondItem="vUh-ZA-FsI" secondAttribute="trailing" id="0yg-TW-kaq"/>
                 <constraint firstItem="Bp4-sy-uGs" firstAttribute="leading" secondItem="vUh-ZA-FsI" secondAttribute="leading" id="4Sx-bI-RnH"/>
-                <constraint firstItem="Bp4-sy-uGs" firstAttribute="bottom" secondItem="vUh-ZA-FsI" secondAttribute="bottom" id="Cmk-Dq-PRC"/>
-                <constraint firstItem="Bp4-sy-uGs" firstAttribute="height" secondItem="vUh-ZA-FsI" secondAttribute="height" id="ZEt-Lz-RmV"/>
-                <constraint firstItem="Bp4-sy-uGs" firstAttribute="top" secondItem="vUh-ZA-FsI" secondAttribute="top" id="rtK-Sd-fTK"/>
+                <constraint firstItem="2LA-wb-v0m" firstAttribute="bottom" secondItem="Bp4-sy-uGs" secondAttribute="bottom" constant="8" id="xHd-L3-V0X"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="2LA-wb-v0m"/>
-            <point key="canvasLocation" x="278.5" y="-686"/>
+            <point key="canvasLocation" x="278.5" y="-690.5"/>
         </scrollView>
     </objects>
 </document>
