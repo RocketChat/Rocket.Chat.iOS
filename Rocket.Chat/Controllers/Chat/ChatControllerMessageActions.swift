@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension ChatViewController {
     func presentActionsFor(_ message: Message, view: UIView) {
@@ -33,6 +34,22 @@ extension ChatViewController {
             controller.emojiPicked = { emoji in
                 MessageManager.react(message, emoji: emoji, completion: { _ in })
             }
+
+            controller.customEmojis = {
+                if let emojis = Realm.shared?.objects(CustomEmoji.self) {
+                    return emojis.flatMap { emoji -> Emoji? in
+                        if let name = emoji.name, let ext = emoji.ext,
+                            let encodedName = "\(name).\(ext)".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+                            let serverUrl = AuthManager.isAuthenticated()?.apiHost {
+                            return Emoji(name, name, false, Array(emoji.aliases), [], "\(serverUrl)/emoji-custom/\(encodedName)")
+                        }
+
+                        return nil
+                    }
+                }
+
+                return []
+            }()
         }))
 
         let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")

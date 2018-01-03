@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 fileprivate typealias EmojiCategory = (name: String, emojis: [Emoji])
 
@@ -15,6 +16,11 @@ class EmojiPicker: UIView {
 
     fileprivate func localized(_ string: String) -> String {
         return NSLocalizedString(string, tableName: "EmojiPicker", bundle: Bundle.main, value: "", comment: "")
+    }
+
+    var customEmojis: [Emoji] = []
+    var customCategory: (name: String, emojis: [Emoji]) {
+        return (name: "custom", emojis: self.customEmojis)
     }
 
     var recentEmojis: [Emoji] {
@@ -33,6 +39,10 @@ class EmojiPicker: UIView {
         }
     }
 
+    var recentCategory: (name: String, emojis: [Emoji]) {
+        return (name: "recent", emojis: recentEmojis)
+    }
+
     fileprivate let defaultCategories: [EmojiCategory] = [
         (name: "people", emojis: Emojione.people),
         (name: "nature", emojis: Emojione.nature),
@@ -45,7 +55,7 @@ class EmojiPicker: UIView {
     ]
     fileprivate var searchedCategories: [(name: String, emojis: [Emoji])] = []
     fileprivate func searchCategories(string: String) -> [EmojiCategory] {
-        return defaultCategories.map {
+        return ([customCategory] + defaultCategories).map {
             let emojis = $0.emojis.filter {
                 $0.name.contains(string) || $0.shortname.contains(string) ||
                 $0.keywords.joined(separator: " ").contains(string) ||
@@ -61,8 +71,8 @@ class EmojiPicker: UIView {
     }
 
     fileprivate var currentCategories: [EmojiCategory] {
-        let recentCategory = (name: "recent", emojis: recentEmojis)
-        let categories = (recentEmojis.count > 0 ? [recentCategory] : []) + defaultCategories
+        let categories = (recentEmojis.count > 0 ? [recentCategory] : []) + (customEmojis.count > 0 ? [customCategory] : []) + defaultCategories
+
         return isSearching ? searchedCategories : categories
     }
 
@@ -207,7 +217,10 @@ extension EmojiPicker: UICollectionViewDataSource {
 
         let emoji = currentCategories[indexPath.section].emojis[indexPath.row]
 
-        if emoji.supportsTones, let currentTone = currentSkinTone.name {
+        if let file = emoji.customFile {
+            cell.emojiView.emojiLabel.text = ""
+            cell.emojiView.emojiImageView.sd_setImage(with: URL(string: file), completed: nil)
+        } else if emoji.supportsTones, let currentTone = currentSkinTone.name {
             let shortname = String(emoji.shortname.dropLast()) + "_\(currentTone):"
             cell.emojiView.emojiLabel.text = Emojione.transform(string: shortname)
         } else {
