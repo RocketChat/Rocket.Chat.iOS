@@ -12,7 +12,7 @@ extension ChatViewController {
     func presentActionsFor(_ message: Message, view: UIView) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
-        alert.addAction(UIAlertAction(title: "Add Reaction", style: .default, handler: { _ in
+        alert.addAction(UIAlertAction(title: localized("chat.message.actions.react"), style: .default, handler: { _ in
             self.view.endEditing(true)
 
             let controller = EmojiPickerController()
