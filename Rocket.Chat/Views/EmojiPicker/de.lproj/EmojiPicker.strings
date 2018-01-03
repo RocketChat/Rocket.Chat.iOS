@@ -3,18 +3,19 @@
   Rocket.Chat
 
   Created by Matheus Cardoso on 12/27/17.
+  Translated by soundstorm
   Copyright © 2017 Rocket.Chat. All rights reserved.
 */
 
-"controller.title" = "Choose a reaction";
-"searchbar.placeholder" = "Search for an emoji";
+"controller.title" = "Reaktion auswählen";
+"searchbar.placeholder" = "Nach einem Emoji suchen";
 
-"categories.recent" = "FREQUENTLY USED";
-"categories.people" = "SMILEYS & PEOPLE";
-"categories.nature" = "ANIMALS & NATURE";
-"categories.food" = "FOOD & DRINK";
-"categories.activity" = "ACTIVITY";
-"categories.travel" = "TRAVEL & PLACES";
-"categories.objects" = "OBJECTS";
-"categories.symbols" = "SYMBOLS";
-"categories.flags" = "FLAGS";
+"categories.recent" = "OFT BENUTZT";
+"categories.people" = "SMILEYS & PERSONEN";
+"categories.nature" = "TIERE & NATUR";
+"categories.food" = "ESSEN & TRINKEN";
+"categories.activity" = "AKTIVITÄT";
+"categories.travel" = "REISEN & ORTE";
+"categories.objects" = "OBJEKTE";
+"categories.symbols" = "SYMBOLE";
+"categories.flags" = "FLAGGEN";
