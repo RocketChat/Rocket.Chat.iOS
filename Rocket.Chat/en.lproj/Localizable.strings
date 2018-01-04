@@ -109,6 +109,7 @@
 "chat.muted" = "You have been muted";
 
 // Chat Message Actions
+"chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Block messages from user";
 "chat.message.actions.report" = "Report Message";
 "chat.message.actions.copy" = "Copy";
