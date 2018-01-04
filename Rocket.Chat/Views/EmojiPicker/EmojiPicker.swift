@@ -83,21 +83,7 @@ class EmojiPicker: UIView {
     }
 
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var categoriesView: UITabBar! {
-        didSet {
-            let categoryItems = currentCategories.map { category -> UITabBarItem in
-                let image = UIImage(named: category.name) ?? UIImage(named: "custom")
-                let item = UITabBarItem(title: nil, image: image, selectedImage: image)
-                item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-                return item
-            }
-
-            categoriesView.setItems(categoryItems, animated: false)
-
-            categoriesView.delegate = self
-            categoriesView.layoutIfNeeded()
-        }
-    }
+    @IBOutlet weak var categoriesView: UITabBar!
 
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
@@ -106,11 +92,7 @@ class EmojiPicker: UIView {
         }
     }
 
-    @IBOutlet weak var emojisCollectionView: UICollectionView! {
-        didSet {
-            setupCollectionView()
-        }
-    }
+    @IBOutlet weak var emojisCollectionView: UICollectionView!
 
     let skinTones: [(name: String?, color: UIColor)] = [
         (name: nil, color: #colorLiteral(red: 0.999120295, green: 0.8114234805, blue: 0.06628075987, alpha: 1)),
@@ -194,6 +176,26 @@ class EmojiPicker: UIView {
         }
 
         emojisCollectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
+    }
+
+    private func setupCategoriesView() {
+        let categoryItems = currentCategories.map { category -> UITabBarItem in
+            let image = UIImage(named: category.name) ?? UIImage(named: "custom")
+            let item = UITabBarItem(title: nil, image: image, selectedImage: image)
+            item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            return item
+        }
+
+        categoriesView.setItems(categoryItems, animated: false)
+
+        categoriesView.delegate = self
+        categoriesView.layoutIfNeeded()
+    }
+
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        setupCategoriesView()
+        setupCollectionView()
     }
 }
 
