@@ -109,6 +109,7 @@
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
 
 // Chat Message Actions
+"chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Blokuj wiadomości od użytkownika";
 "chat.message.actions.report" = "Zgłoś wiadomość";
 "chat.message.actions.copy" = "Kopiuj";
