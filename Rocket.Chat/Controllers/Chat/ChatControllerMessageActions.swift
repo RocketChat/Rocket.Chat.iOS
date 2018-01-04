@@ -25,31 +25,24 @@ extension ChatViewController {
                 presenter.sourceRect = view.bounds
             }
 
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                self.navigationController?.pushViewController(controller, animated: true)
-            } else {
-                self.present(controller, animated: true)
-            }
-
             controller.emojiPicked = { emoji in
                 MessageManager.react(message, emoji: emoji, completion: { _ in })
             }
 
             controller.customEmojis = {
-                if let emojis = Realm.shared?.objects(CustomEmoji.self) {
-                    return emojis.flatMap { emoji -> Emoji? in
-                        if let name = emoji.name, let ext = emoji.ext,
-                            let encodedName = "\(name).\(ext)".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
-                            let serverUrl = AuthManager.isAuthenticated()?.apiHost {
-                            return Emoji(name, name, false, Array(emoji.aliases), [], "\(serverUrl)/emoji-custom/\(encodedName)")
-                        }
+                guard let emojis = Realm.shared?.objects(CustomEmoji.self) else { return [] }
 
-                        return nil
-                    }
+                return emojis.flatMap { emoji -> Emoji? in
+                    guard let name = emoji.name, let imageUrl = emoji.imageUrl() else { return nil }
+                    return Emoji(name, name, false, Array(emoji.aliases), [], imageUrl)
                 }
-
-                return []
             }()
+
+            if UIDevice.current.userInterfaceIdiom == .phone {
+                self.navigationController?.pushViewController(controller, animated: true)
+            } else {
+                self.present(controller, animated: true)
+            }
         }))
 
         let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")

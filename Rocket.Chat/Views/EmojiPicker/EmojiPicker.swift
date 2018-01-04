@@ -40,6 +40,12 @@ class EmojiPicker: UIView {
     }
 
     var recentCategory: (name: String, emojis: [Emoji]) {
+        // remove invalid custom emojis
+        let recentEmojis = self.recentEmojis.filter {
+            guard let imageUrl = $0.imageUrl else { return true }
+            return customEmojis.contains(where: { $0.imageUrl == imageUrl })
+        }
+
         return (name: "recent", emojis: recentEmojis)
     }
 
@@ -217,8 +223,7 @@ extension EmojiPicker: UICollectionViewDataSource {
 
         let emoji = currentCategories[indexPath.section].emojis[indexPath.row]
 
-        if let file = emoji.customFile {
-            cell.emojiView.emojiLabel.text = ""
+        if let file = emoji.imageUrl {
             cell.emojiView.emojiImageView.sd_setImage(with: URL(string: file), completed: nil)
         } else if emoji.supportsTones, let currentTone = currentSkinTone.name {
             let shortname = String(emoji.shortname.dropLast()) + "_\(currentTone):"
