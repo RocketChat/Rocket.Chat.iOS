@@ -17,12 +17,12 @@ class CustomEmoji: BaseModel {
 }
 
 extension CustomEmoji {
-    func imageUrl(realm: Realm? = Realm.shared) -> String? {
+    func imageUrl(serverUrl: String? = AuthManager.isAuthenticated()?.apiHost?.absoluteString) -> String? {
         guard
             let name = name,
             let ext = ext,
             let encodedName = "\(name).\(ext)".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
-            let serverUrl = AuthManager.isAuthenticated(realm: realm)?.apiHost
+            let serverUrl = serverUrl
         else {
             return nil
         }
