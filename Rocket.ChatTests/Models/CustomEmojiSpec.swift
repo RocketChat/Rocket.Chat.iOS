@@ -76,7 +76,7 @@ class CustomEmojiSpec: XCTestCase, RealmTestCase {
         XCTAssert(CustomEmoji.withShortname(":ce1:", realm: realm) == nil)
         XCTAssert(CustomEmoji.withShortname(":ce2:", realm: realm) == emojis[2])
         XCTAssert(CustomEmoji.withShortname(":ce3:", realm: realm) == nil)
-        
+
         XCTAssert(CustomEmoji.withShortname("::", realm: realm) == nil)
     }
 }
