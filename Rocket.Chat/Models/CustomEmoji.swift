@@ -16,6 +16,27 @@ class CustomEmoji: BaseModel {
     @objc dynamic var ext: String?
 }
 
+extension CustomEmoji {
+    func imageUrl(realm: Realm? = Realm.shared) -> String? {
+        guard
+            let name = name,
+            let ext = ext,
+            let encodedName = "\(name).\(ext)".addingPercentEncoding(withAllowedCharacters: .urlHostAllowed),
+            let serverUrl = AuthManager.isAuthenticated(realm: realm)?.apiHost
+        else {
+            return nil
+        }
+
+        return "\(serverUrl)/emoji-custom/\(encodedName)"
+    }
+
+    static func withShortname(_ shortname: String, realm: Realm? = Realm.shared) -> CustomEmoji? {
+        guard let realm = realm, shortname.count > 2 else { return nil }
+        let shortname = String(shortname.dropFirst().dropLast())
+        return realm.objects(CustomEmoji.self).filter { $0.name == shortname || $0.aliases.contains(shortname) }.first
+    }
+}
+
 extension CustomEmoji: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
         if identifier == nil {
