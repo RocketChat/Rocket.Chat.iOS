@@ -14,15 +14,15 @@ struct Emoji: Codable {
     let alternates: [String]
     let keywords: [String]
 
-    let customFile: String?
+    let imageUrl: String?
 
-    init(_ name: String, _ shortname: String, _ supportsTones: Bool, _ alternates: [String], _ keywords: [String], _ customFile: String? = nil) {
+    init(_ name: String, _ shortname: String, _ supportsTones: Bool, _ alternates: [String], _ keywords: [String], _ imageUrl: String? = nil) {
         self.name = name
         self.shortname = shortname
         self.supportsTones = supportsTones
         self.alternates = alternates
         self.keywords = keywords
-        self.customFile = customFile
+        self.imageUrl = imageUrl
     }
 }
 
