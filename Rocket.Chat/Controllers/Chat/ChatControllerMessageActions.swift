@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension ChatViewController {
     func presentActionsFor(_ message: Message, view: UIView) {
@@ -24,14 +25,16 @@ extension ChatViewController {
                 presenter.sourceRect = view.bounds
             }
 
+            controller.emojiPicked = { emoji in
+                MessageManager.react(message, emoji: emoji, completion: { _ in })
+            }
+
+            controller.customEmojis = CustomEmoji.emojis()
+
             if UIDevice.current.userInterfaceIdiom == .phone {
                 self.navigationController?.pushViewController(controller, animated: true)
             } else {
                 self.present(controller, animated: true)
-            }
-
-            controller.emojiPicked = { emoji in
-                MessageManager.react(message, emoji: emoji, completion: { _ in })
             }
         }))
 

@@ -11,6 +11,8 @@ import UIKit
 class EmojiPickerController: UIViewController {
 
     var emojiPicked: ((String) -> Void)?
+    var customEmojis: [Emoji] = []
+
     private var emojiPicker: EmojiPicker! {
         didSet {
             emojiPicker.emojiPicked = { emoji in
@@ -22,6 +24,8 @@ class EmojiPickerController: UIViewController {
                     self.dismiss(animated: true)
                 }
             }
+
+            emojiPicker.customEmojis = customEmojis
         }
     }
 

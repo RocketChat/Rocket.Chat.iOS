@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 fileprivate typealias EmojiCategory = (name: String, emojis: [Emoji])
 
@@ -15,6 +16,11 @@ class EmojiPicker: UIView {
 
     fileprivate func localized(_ string: String) -> String {
         return NSLocalizedString(string, tableName: "EmojiPicker", bundle: Bundle.main, value: "", comment: "")
+    }
+
+    var customEmojis: [Emoji] = []
+    var customCategory: (name: String, emojis: [Emoji]) {
+        return (name: "custom", emojis: self.customEmojis)
     }
 
     var recentEmojis: [Emoji] {
@@ -33,6 +39,16 @@ class EmojiPicker: UIView {
         }
     }
 
+    var recentCategory: (name: String, emojis: [Emoji]) {
+        // remove invalid custom emojis
+        let recentEmojis = self.recentEmojis.filter {
+            guard case let .custom(imageUrl) = $0.type else { return true }
+            return customEmojis.contains(where: { $0.imageUrl == imageUrl })
+        }
+
+        return (name: "recent", emojis: recentEmojis)
+    }
+
     fileprivate let defaultCategories: [EmojiCategory] = [
         (name: "people", emojis: Emojione.people),
         (name: "nature", emojis: Emojione.nature),
@@ -45,7 +61,7 @@ class EmojiPicker: UIView {
     ]
     fileprivate var searchedCategories: [(name: String, emojis: [Emoji])] = []
     fileprivate func searchCategories(string: String) -> [EmojiCategory] {
-        return defaultCategories.map {
+        return ([customCategory] + defaultCategories).map {
             let emojis = $0.emojis.filter {
                 $0.name.contains(string) || $0.shortname.contains(string) ||
                 $0.keywords.joined(separator: " ").contains(string) ||
@@ -61,27 +77,16 @@ class EmojiPicker: UIView {
     }
 
     fileprivate var currentCategories: [EmojiCategory] {
-        let recentCategory = (name: "recent", emojis: recentEmojis)
-        let categories = (recentEmojis.count > 0 ? [recentCategory] : []) + defaultCategories
-        return isSearching ? searchedCategories : categories
+        if isSearching { return searchedCategories }
+
+        let recent = (recentEmojis.count > 0 ? [recentCategory] : [])
+        let custom = (customEmojis.count > 0 ? [customCategory] : [])
+
+        return recent + custom + defaultCategories
     }
 
     @IBOutlet weak var contentView: UIView!
-    @IBOutlet weak var categoriesView: UITabBar! {
-        didSet {
-            let categoryItems = currentCategories.map { category -> UITabBarItem in
-                let image = UIImage(named: category.name) ?? UIImage(named: "custom")
-                let item = UITabBarItem(title: nil, image: image, selectedImage: image)
-                item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-                return item
-            }
-
-            categoriesView.setItems(categoryItems, animated: false)
-
-            categoriesView.delegate = self
-            categoriesView.layoutIfNeeded()
-        }
-    }
+    @IBOutlet weak var categoriesView: UITabBar!
 
     @IBOutlet weak var searchBar: UISearchBar! {
         didSet {
@@ -90,11 +95,7 @@ class EmojiPicker: UIView {
         }
     }
 
-    @IBOutlet weak var emojisCollectionView: UICollectionView! {
-        didSet {
-            setupCollectionView()
-        }
-    }
+    @IBOutlet weak var emojisCollectionView: UICollectionView!
 
     let skinTones: [(name: String?, color: UIColor)] = [
         (name: nil, color: #colorLiteral(red: 0.999120295, green: 0.8114234805, blue: 0.06628075987, alpha: 1)),
@@ -179,6 +180,26 @@ class EmojiPicker: UIView {
 
         emojisCollectionView.contentInset = UIEdgeInsets(top: 0, left: 8, bottom: 0, right: 8)
     }
+
+    private func setupCategoriesView() {
+        let categoryItems = currentCategories.map { category -> UITabBarItem in
+            let image = UIImage(named: category.name) ?? UIImage(named: "custom")
+            let item = UITabBarItem(title: nil, image: image, selectedImage: image)
+            item.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+            return item
+        }
+
+        categoriesView.setItems(categoryItems, animated: false)
+
+        categoriesView.delegate = self
+        categoriesView.layoutIfNeeded()
+    }
+
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        setupCategoriesView()
+        setupCollectionView()
+    }
 }
 
 extension EmojiPicker: UICollectionViewDataSource {
@@ -207,7 +228,9 @@ extension EmojiPicker: UICollectionViewDataSource {
 
         let emoji = currentCategories[indexPath.section].emojis[indexPath.row]
 
-        if emoji.supportsTones, let currentTone = currentSkinTone.name {
+        if let file = emoji.imageUrl {
+            cell.emojiView.emojiImageView.sd_setImage(with: URL(string: file), completed: nil)
+        } else if emoji.supportsTones, let currentTone = currentSkinTone.name {
             let shortname = String(emoji.shortname.dropLast()) + "_\(currentTone):"
             cell.emojiView.emojiLabel.text = Emojione.transform(string: shortname)
         } else {
