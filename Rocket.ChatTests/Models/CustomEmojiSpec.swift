@@ -20,7 +20,7 @@ extension CustomEmoji {
             "aliases": [ "emoji-alias" ],
             "extension": "emoji-file-extension",
             "_updatedAt": [ "$date": 1480377601 ]
-            ])
+        ])
 
         let object = CustomEmoji()
         object.map(json, realm: nil)

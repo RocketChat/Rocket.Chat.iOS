@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol {
     func openURL(url: URL)
@@ -273,7 +272,6 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             let emoji = reaction.emoji ?? "?"
-
             let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl()
 
             return ReactionViewModel(
