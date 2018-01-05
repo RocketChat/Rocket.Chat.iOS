@@ -7,10 +7,11 @@
 //
 
 import UIKit
+import FLAnimatedImage
 
 class EmojiView: UIView {
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var emojiImageView: UIImageView!
+    @IBOutlet weak var emojiImageView: FLAnimatedImageView!
     @IBOutlet weak var emojiLabel: UILabel!
 
     override init(frame: CGRect) {
@@ -44,4 +45,11 @@ class EmojiView: UIView {
 
 class EmojiCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var emojiView: EmojiView!
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.emojiView.emojiLabel.text = ""
+        self.emojiView.emojiImageView.image = nil
+        self.emojiView.emojiImageView.animatedImage = nil
+    }
 }
