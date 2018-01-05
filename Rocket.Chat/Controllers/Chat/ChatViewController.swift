@@ -371,7 +371,6 @@ final class ChatViewController: SLKTextViewController {
         
         let replyString = self.replyString
         stopReplying()
-        
         let text = "\(messageText)\(replyString)"
         
         if let (command, params) = text.commandAndParams() {
