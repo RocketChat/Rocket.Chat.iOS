@@ -32,6 +32,26 @@ class AttachmentSpec: XCTestCase {
         XCTAssertNil(attachment.fullFileURL(auth: auth)?.absoluteString, "it should return nil")
     }
 
+    func testTitleLinkDownloadTrue() {
+        let attachment = Attachment()
+        attachment.map([
+            "title_link_download": true,
+            "title_link": "http://foo.bar/file.jpeg"
+            ], realm: nil)
+
+        XCTAssertTrue(attachment.titleLinkDownload, "titleLink isn't downloadable")
+    }
+
+    func testTitleLinkDownloadFalse() {
+        let attachment = Attachment()
+        attachment.map([
+            "title_link_download": false,
+            "title_link": "http://foo.bar/file.jpeg"
+        ], realm: nil)
+
+        XCTAssertFalse(attachment.titleLinkDownload, "titleLink isn't downloadable")
+    }
+
     func testAttachmentFilePath() {
         let attachment = Attachment()
         attachment.titleLink = "/foo/bar"
