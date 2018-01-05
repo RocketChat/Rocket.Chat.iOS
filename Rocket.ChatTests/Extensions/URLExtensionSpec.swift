@@ -61,15 +61,15 @@ class URLExtensionSpec: XCTestCase {
 
     func testRemoveDuplicatedSlashes() {
         guard
-            var urlNormal = URL(string: "https://foo.com/bar/foo/baz"),
-            var urlDuplicated = URL(string: "https://foo.com//bar//foo//baz//"),
-            var urlDuplicatedQueries = URL(string: "https://foo.com//bar//foo//baz//?foo=bar&baz=yay")
+            let urlNormal = URL(string: "https://foo.com/bar/foo/baz"),
+            let urlDuplicated = URL(string: "https://foo.com//bar//foo//baz//"),
+            let urlDuplicatedQueries = URL(string: "https://foo.com//bar//foo//baz//?foo=bar&baz=yay")
         else {
             return XCTFail("urls are not valid")
         }
 
-        XCTAssertEqual(urlNormal.removingDuplicatedSlashes().absoluteString, "https://foo.com/bar/foo/baz")
-        XCTAssertEqual(urlDuplicated.removingDuplicatedSlashes().absoluteString, "https://foo.com/bar/foo/baz/")
-        XCTAssertEqual(urlDuplicatedQueries.removingDuplicatedSlashes().absoluteString, "https://foo.com/bar/foo/baz/?foo=bar&baz=yay")
+        XCTAssertEqual(urlNormal.removingDuplicatedSlashes()?.absoluteString, "https://foo.com/bar/foo/baz")
+        XCTAssertEqual(urlDuplicated.removingDuplicatedSlashes()?.absoluteString, "https://foo.com/bar/foo/baz/")
+        XCTAssertEqual(urlDuplicatedQueries.removingDuplicatedSlashes()?.absoluteString, "https://foo.com/bar/foo/baz/?foo=bar&baz=yay")
     }
 }
