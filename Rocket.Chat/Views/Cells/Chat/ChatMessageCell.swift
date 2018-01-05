@@ -79,7 +79,7 @@ final class ChatMessageCell: UICollectionViewCell {
         let attributedString = MessageTextCacheManager.shared.message(for: message)
         let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
-        var total = (height ?? 0) + (sequential ? 8 : 29) + (message.reactions.count > 0 ? 24 : 0)
+        var total = (height ?? 0) + (sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -282,7 +282,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
         if message.reactions.count > 0 {
             reactionsListView.isHidden = false
-            reactionsListViewConstraint.constant = 24
+            reactionsListViewConstraint.constant = 40
         } else {
             reactionsListView.isHidden = true
             reactionsListViewConstraint.constant = 0

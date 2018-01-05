@@ -33,7 +33,7 @@ extension Attachment: ModelMappeable {
         self.thumbURL = values["thumb_url"].string
         self.color = values["color"].string
 
-        self.titleLinkDownload = values["title_link_download"].bool ?? true
+        self.titleLinkDownload = values["title_link_download"].boolValue
 
         self.imageURL = encode(url: values["image_url"].string)
         self.imageType = values["image_type"].string

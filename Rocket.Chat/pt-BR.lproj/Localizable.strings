@@ -28,13 +28,6 @@
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "Conta Mail não encontrada. Por favor, configure uma conta no aplicativo Mail para conseguir enviar emails.";
 
-"alert.audio_message.success.send" = "Enviar";
-"alert.audio_message.success.title" = "Sucesso";
-"alert.audio_message.success.message" = "Sua mensagem foi gravada com sucesso. Tempo de gravação: %@.";
-
-"alert.audio_message.error.title" = "Ooops!";
-"alert.audio_message.error.message" = "Ocorreu um erro. Por favor, grave a sua mensagem novamente.";
-
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "Desculpe, mas esta função ainda não está disponível.";
 
@@ -115,8 +108,10 @@
 "chat.read_only" = "Este canal é somente leitura";
 "chat.muted" = "Você foi silenciado";
 "chat.edit_mode" = "Editando mensagem. Feche para cancelar.";
+"chat.loading_messages" = "Carregando mensagens...";
 
 // Chat Message Actions
+"chat.message.actions.react" = "Adicionar reação";
 "chat.message.actions.block" = "Bloquear mensagens do usuário";
 "chat.message.actions.report" = "Reportar mensagem";
 "chat.message.actions.edit" = "Editar mensagem";

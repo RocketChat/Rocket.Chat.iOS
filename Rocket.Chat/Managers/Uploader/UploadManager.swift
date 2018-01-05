@@ -14,7 +14,6 @@ public typealias UploadCompletionBlock = (SocketResponse?, Bool) -> Void
 
 struct FileUpload {
     var name: String
-    var size: Int
     var type: String
     var data: Data
 }
@@ -84,7 +83,6 @@ class UploadManager {
             "method": "ufsCreate",
             "params": [[
                 "name": file.name,
-                "size": file.size,
                 "type": file.type,
                 "rid": subscription.rid,
                 "description": "",
@@ -134,7 +132,6 @@ class UploadManager {
                                 subscription.rid,
                                 NSNull(), [
                                     "type": file.type,
-                                    "size": file.size,
                                     "name": file.name,
                                     "_id": fileIdentifier,
                                     "url": response.result["result"]["path"].stringValue
@@ -157,7 +154,6 @@ class UploadManager {
             "params": [
                 "rocketchat-uploads", [
                     "name": file.name,
-                    "size": file.size,
                     "type": file.type
                 ], [
                     "rid": subscription.rid
@@ -190,7 +186,6 @@ class UploadManager {
                             subscription.rid,
                             "s3", [
                                 "type": file.type,
-                                "size": file.size,
                                 "name": file.name,
                                 "_id": fileIdentifier,
                                 "url": downloadURL

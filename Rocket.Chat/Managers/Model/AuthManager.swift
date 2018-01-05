@@ -373,13 +373,13 @@ extension AuthManager {
             GIDSignIn.sharedInstance().signOut()
 
             DraftMessageManager.clearServerDraftMessages()
-            DatabaseManager.removeSelectedDatabase()
-
-            completion()
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
             })
+
+            DatabaseManager.removeSelectedDatabase()
+            completion()
         }
     }
 
