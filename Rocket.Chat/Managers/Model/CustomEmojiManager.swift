@@ -15,7 +15,7 @@ struct CustomEmojiManager {
             "msg": "method",
             "method": "listEmojiCustom",
             "params": []
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(requestEmojis) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }

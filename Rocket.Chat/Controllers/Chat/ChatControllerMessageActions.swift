@@ -29,14 +29,7 @@ extension ChatViewController {
                 MessageManager.react(message, emoji: emoji, completion: { _ in })
             }
 
-            controller.customEmojis = {
-                guard let emojis = Realm.shared?.objects(CustomEmoji.self) else { return [] }
-
-                return emojis.flatMap { emoji -> Emoji? in
-                    guard let name = emoji.name, let imageUrl = emoji.imageUrl() else { return nil }
-                    return Emoji(name, name, false, Array(emoji.aliases), [], imageUrl)
-                }
-            }()
+            controller.customEmojis = CustomEmoji.emojis()
 
             if UIDevice.current.userInterfaceIdiom == .phone {
                 self.navigationController?.pushViewController(controller, animated: true)

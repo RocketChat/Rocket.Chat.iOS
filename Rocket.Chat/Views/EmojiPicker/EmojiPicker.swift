@@ -77,9 +77,12 @@ class EmojiPicker: UIView {
     }
 
     fileprivate var currentCategories: [EmojiCategory] {
-        let categories = (recentEmojis.count > 0 ? [recentCategory] : []) + (customEmojis.count > 0 ? [customCategory] : []) + defaultCategories
+        if isSearching { return searchedCategories }
 
-        return isSearching ? searchedCategories : categories
+        let recent = (recentEmojis.count > 0 ? [recentCategory] : [])
+        let custom = (customEmojis.count > 0 ? [customCategory] : [])
+
+        return recent + custom + defaultCategories
     }
 
     @IBOutlet weak var contentView: UIView!

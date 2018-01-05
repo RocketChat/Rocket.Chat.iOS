@@ -35,6 +35,15 @@ extension CustomEmoji {
         let shortname = String(shortname.dropFirst().dropLast())
         return realm.objects(CustomEmoji.self).filter { $0.name == shortname || $0.aliases.contains(shortname) }.first
     }
+
+    static func emojis() -> [Emoji] {
+        guard let emojis = Realm.shared?.objects(CustomEmoji.self) else { return [] }
+
+        return emojis.flatMap { emoji -> Emoji? in
+            guard let name = emoji.name, let imageUrl = emoji.imageUrl() else { return nil }
+            return Emoji(name, name, false, Array(emoji.aliases), [], imageUrl)
+        }
+    }
 }
 
 extension CustomEmoji: ModelMappeable {
