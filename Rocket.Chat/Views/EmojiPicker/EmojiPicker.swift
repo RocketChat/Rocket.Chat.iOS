@@ -42,7 +42,7 @@ class EmojiPicker: UIView {
     var recentCategory: (name: String, emojis: [Emoji]) {
         // remove invalid custom emojis
         let recentEmojis = self.recentEmojis.filter {
-            guard let imageUrl = $0.imageUrl else { return true }
+            guard case let .custom(imageUrl) = $0.type else { return true }
             return customEmojis.contains(where: { $0.imageUrl == imageUrl })
         }
 

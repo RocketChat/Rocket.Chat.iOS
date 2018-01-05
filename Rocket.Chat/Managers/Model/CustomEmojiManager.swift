@@ -21,7 +21,6 @@ struct CustomEmojiManager {
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             let emojis = List<CustomEmoji>()
-
             let list = response.result["result"].array
 
             Realm.execute({ realm in
