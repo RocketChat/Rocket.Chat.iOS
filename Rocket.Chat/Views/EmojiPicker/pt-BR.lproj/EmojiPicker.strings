@@ -10,6 +10,7 @@
 "searchbar.placeholder" = "Procure um emoji";
 
 "categories.recent" = "UTILIZADOS FREQUENTEMENTE";
+"categories.custom" = "CUSTOM";
 "categories.people" = "PESSOAS";
 "categories.nature" = "ANIMAIS & NATUREZA";
 "categories.food" = "COMIDAS & BEBIDAS";

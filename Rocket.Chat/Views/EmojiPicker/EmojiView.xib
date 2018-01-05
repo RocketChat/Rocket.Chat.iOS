@@ -22,17 +22,16 @@
             <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H0W-CD-Tmy" userLabel="Emoji Image">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H0W-CD-Tmy" userLabel="Emoji Image" customClass="FLAnimatedImageView">
                     <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="🙈" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.01" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hk6-3B-0Qu" userLabel="Emoji Label">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.01" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hk6-3B-0Qu" userLabel="Emoji Label">
                     <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
                     <fontDescription key="fontDescription" type="system" pointSize="46"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="TMW-zh-2ug" firstAttribute="trailing" secondItem="H0W-CD-Tmy" secondAttribute="trailing" id="03O-I3-lDz"/>
                 <constraint firstItem="H0W-CD-Tmy" firstAttribute="top" secondItem="TMW-zh-2ug" secondAttribute="top" id="4l7-e9-Wwl"/>
