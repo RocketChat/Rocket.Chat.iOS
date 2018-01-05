@@ -271,8 +271,12 @@ final class ChatMessageCell: UICollectionViewCell {
                 highlight = false
             }
 
+            let emoji = reaction.emoji ?? "?"
+            let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl()
+
             return ReactionViewModel(
-                emoji: reaction.emoji ?? "?",
+                emoji: emoji,
+                imageUrl: imageUrl,
                 count: reaction.usernames.count.description,
                 highlight: highlight
             )

@@ -7,22 +7,6 @@
 
 import Foundation
 
-struct Emoji: Codable {
-    let name: String
-    let shortname: String
-    let supportsTones: Bool
-    let alternates: [String]
-    let keywords: [String]
-
-    init(_ name: String, _ shortname: String, _ supportsTones: Bool, _ alternates: [String], _ keywords: [String]) {
-        self.name = name
-        self.shortname = shortname
-        self.supportsTones = supportsTones
-        self.alternates = alternates
-        self.keywords = keywords
-    }
-}
-
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 struct Emojione {
