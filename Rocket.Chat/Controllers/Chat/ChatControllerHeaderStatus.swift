@@ -47,6 +47,15 @@ extension ChatViewController {
         chatHeaderViewStatus?.removeFromSuperview()
     }
 
+    func showLoadingMessagesHeaderStatusView() {
+        showHeaderStatusView()
+
+        chatHeaderViewStatus?.labelTitle.text = localized("chat.loading_messages")
+        chatHeaderViewStatus?.buttonRefresh.isHidden = true
+        chatHeaderViewStatus?.backgroundColor = .RCLightGray()
+        chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
+        chatHeaderViewStatus?.activityIndicator.startAnimating()
+    }
 }
 
 // MARK: ChatHeaderViewStatusDelegate
