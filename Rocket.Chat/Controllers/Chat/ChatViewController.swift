@@ -572,12 +572,17 @@ final class ChatViewController: SLKTextViewController {
 
         let tempSubscription = Subscription(value: subscription)
 
-        showLoadingMessagesHeaderStatusView()
+        if date == nil {
+            showLoadingMessagesHeaderStatusView()
+        }
 
         MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
-                self?.hideHeaderStatusView()
+
+                if date == nil {
+                    self?.hideHeaderStatusView()
+                }
 
                 self?.isRequestingHistory = false
                 self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
