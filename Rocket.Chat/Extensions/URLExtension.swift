@@ -81,17 +81,12 @@ extension URL {
         return newURL
     }
 
-    mutating func removingDuplicatedSlashes() -> URL {
+    func removingDuplicatedSlashes() -> URL? {
         let newURLPath = self.path.replacingOccurrences(of: "//", with: "/")
 
         var newURL = URLComponents(url: self, resolvingAgainstBaseURL: true)
         newURL?.path = newURLPath
-
-        if let newURL = newURL?.url {
-            self = newURL
-        }
-
-        return self
+        return newURL?.url
     }
 
 }
