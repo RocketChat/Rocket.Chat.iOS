@@ -45,6 +45,7 @@ extension AppManager {
             DatabaseManager.selectDatabase(at: index)
             DatabaseManager.changeDatabaseInstance(index: index)
             AuthSettingsManager.shared.clearCachedSettings()
+            AuthSettingsManager.shared.updateCachedSettings()
             AuthManager.recoverAuthIfNeeded()
 
             reloadApp()
