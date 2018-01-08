@@ -61,7 +61,7 @@
 
 // Auth
 "auth.connect.button_connect" = "Verbinden";
-"auth.connect.ssl_required" = "Es ist erforderlich, dass Ihr Server SSL unterstützt";
+"auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
 "auth.connect.connecting" = "Verbindung läuft. Warte kurz!";
 
 // Subscriptions
