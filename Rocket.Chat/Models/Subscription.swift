@@ -148,7 +148,7 @@ extension Subscription {
     }
 
     func updateFavorite(_ favorite: Bool) {
-        Realm.execute({ _ in
+        Realm.executeOnMainThread({ _ in
             self.favorite = favorite
         })
     }
