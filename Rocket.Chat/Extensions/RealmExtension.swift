@@ -34,17 +34,21 @@ extension Realm {
         })
 
         if let backgroundTaskId = backgroundTaskId {
-            guard let realm = self.shared else { return }
+            guard let config = self.shared?.configuration else { return }
 
-            try? realm.write {
-                execution(realm)
+            DispatchQueue.global(qos: .background).async {
+                if let realm = try? Realm(configuration: config) {
+                    try? realm.write {
+                        execution(realm)
+                    }
+                }
+
+                DispatchQueue.main.async {
+                    completion?()
+                }
+
+                UIApplication.shared.endBackgroundTask(backgroundTaskId)
             }
-
-            DispatchQueue.main.async {
-                completion?()
-            }
-
-            UIApplication.shared.endBackgroundTask(backgroundTaskId)
         }
     }
 
