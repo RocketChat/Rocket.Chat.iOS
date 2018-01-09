@@ -16,9 +16,9 @@ extension NSAttributedString {
         return emojis.reduce(mutableSelf) { attributedString, emoji in
             guard case let .custom(imageUrl) = emoji.type else { return attributedString }
 
-            let shortname = ":\(emoji.shortname):"
+            let regexPattern = ":\(emoji.shortname):|:\(emoji.alternates.joined(separator: ":|:")):"
 
-            guard let regex = try? NSRegularExpression(pattern: shortname, options: []) else { return attributedString }
+            guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }
 
             let matches = regex.matches(in: attributedString.string, options: [], range: NSRange(location: 0, length: attributedString.length))
 
@@ -27,7 +27,7 @@ extension NSAttributedString {
                 imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
                 imageAttachment.contents = imageUrl.data(using: .utf8)
                 let imageString = NSAttributedString(attachment: imageAttachment)
-                attributedString.replaceCharacters(in: NSRange(location: match.range.location, length: shortname.count), with: imageString)
+                attributedString.replaceCharacters(in: match.range, with: imageString)
             }
 
             return attributedString
