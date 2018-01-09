@@ -7,15 +7,19 @@
 */
 
 // MARK: Auth
-"auth.connect.urlfield.label" = "Server URL";
-"auth.connect.urlfield.hint" = "Insert your server's URL here.";
+"auth.connect.urlfield.label" = "URL do servidor";
+"auth.connect.urlfield.hint" = "Insira aqui a URL do servidor.";
 
-"auth.authentication.emailorusername.label" = "Email or Username";
-"auth.authentication.emailorusername.hint" = "Insert your email or username here.";
-"auth.authentication.password.label" = "Password";
-"auth.authentication.password.label" = "Insert your password here.";
+"auth.authentication.emailorusername.label" = "Email ou nome de usuário";
+"auth.authentication.emailorusername.hint" = "Insira aqui o seu email ou nome de usuário.";
+"auth.authentication.password.label" = "Senha";
+"auth.authentication.password.label" = "Insira aqui a sua senha.";
 
 // MARK: Subscriptions
-"subscriptions.main.userview.label" = "Session information";
-"subscriptions.main.userview.value" = "Server: %@. User: %@. Status: %@.";
-"subscriptions.main.userview.hint" = "Double tap to change status.";
+"subscriptions.main.userview.label" = "Informação da sessão";
+"subscriptions.main.userview.value" = "Servidor: %@. Usuário: %@. Status: %@.";
+"subscriptions.main.userview.hint" = "Toque duplo para mudar o status.";
+
+// MARK: Message
+"message.label" = "Mensagem de %@ em %@.";
+"message.hint" = "Reações: %@";

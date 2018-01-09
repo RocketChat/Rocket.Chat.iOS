@@ -9,6 +9,7 @@
 import Foundation
 import RealmSwift
 import Realm
+import GoogleSignIn
 
 struct AuthManager {
 
@@ -372,12 +373,13 @@ extension AuthManager {
             GIDSignIn.sharedInstance().signOut()
 
             DraftMessageManager.clearServerDraftMessages()
-            DatabaseManager.removeSelectedDatabase()
 
             Realm.executeOnMainThread({ (realm) in
                 realm.deleteAll()
             })
 
+            AuthSettingsManager.shared.clearCachedSettings()
+            DatabaseManager.removeSelectedDatabase()
             completion()
         }
     }

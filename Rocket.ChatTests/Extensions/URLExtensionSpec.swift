@@ -1,5 +1,5 @@
 //
-//  NSURLExtensionSpec.swift
+//  URLExtensionSpec.swift
 //  Rocket.Chat
 //
 //  Created by Rafael K. Streit on 8/27/16.
@@ -10,7 +10,7 @@ import XCTest
 
 @testable import Rocket_Chat
 
-class NSURLExtensionSpec: XCTestCase {
+class URLExtensionSpec: XCTestCase {
 
     func testSocketURLComponents() {
         let tests = [
@@ -57,5 +57,19 @@ class NSURLExtensionSpec: XCTestCase {
         let testURL2: URL! = URL(string: "https://open.rocket.chat/")
 
         XCTAssertNil(testURL2.queryParameters, "queryParameters is nil when there are no queries")
+    }
+
+    func testRemoveDuplicatedSlashes() {
+        guard
+            let urlNormal = URL(string: "https://foo.com/bar/foo/baz"),
+            let urlDuplicated = URL(string: "https://foo.com//bar//foo//baz//"),
+            let urlDuplicatedQueries = URL(string: "https://foo.com//bar//foo//baz//?foo=bar&baz=yay")
+        else {
+            return XCTFail("urls are not valid")
+        }
+
+        XCTAssertEqual(urlNormal.removingDuplicatedSlashes()?.absoluteString, "https://foo.com/bar/foo/baz")
+        XCTAssertEqual(urlDuplicated.removingDuplicatedSlashes()?.absoluteString, "https://foo.com/bar/foo/baz/")
+        XCTAssertEqual(urlDuplicatedQueries.removingDuplicatedSlashes()?.absoluteString, "https://foo.com/bar/foo/baz/?foo=bar&baz=yay")
     }
 }

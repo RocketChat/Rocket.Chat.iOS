@@ -11,7 +11,7 @@ import SlackTextViewController
 import SimpleImageViewer
 
 // swiftlint:disable file_length type_body_length
-final class ChatViewController: SLKTextViewController, Alerter {
+final class ChatViewController: SLKTextViewController {
 
     var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
@@ -56,7 +56,7 @@ final class ChatViewController: SLKTextViewController, Alerter {
 
     var dataController = ChatDataController()
 
-    var searchResult: [String: Any] = [:]
+    var searchResult: [(String, Any)] = []
 
     var closeSidebarAfterSubscriptionUpdate = false
 
@@ -69,6 +69,7 @@ final class ChatViewController: SLKTextViewController, Alerter {
     var messagesToken: NotificationToken!
     var messagesQuery: Results<Message>!
     var messages: [Message] = []
+
     var subscription: Subscription? {
         didSet {
             subscriptionToken?.invalidate()
@@ -384,33 +385,8 @@ final class ChatViewController: SLKTextViewController, Alerter {
             return
         }
 
-        var message: Message?
-        Realm.executeOnMainThread({ (realm) in
-            message = Message()
-            message?.internalType = ""
-            message?.createdAt = Date.serverDate
-            message?.text = text
-            message?.subscription = subscription
-            message?.identifier = String.random(18)
-            message?.temporary = true
-            message?.user = AuthManager.currentUser()
-
-            if let message = message {
-                realm.add(message)
-            }
-        })
-
-        if let message = message {
-            SubscriptionManager.sendTextMessage(message) { response in
-                Realm.executeOnMainThread({ (realm) in
-                    message.temporary = false
-                    message.map(response.result["result"], realm: realm)
-                    realm.add(message, update: true)
-
-                    MessageTextCacheManager.shared.update(for: message, completion: nil)
-                })
-            }
-        }
+        guard let client = API.current()?.client(MessagesClient.self) else { return }
+        client.sendMessage(text: text, subscription: subscription)
     }
 
     fileprivate func updateCellForMessage(identifier: String) {
@@ -440,6 +416,11 @@ final class ChatViewController: SLKTextViewController, Alerter {
         SubscriptionManager.markAsRead(subscription) { _ in
             // Nothing, for now
         }
+    }
+
+    internal func subscribe(for subscription: Subscription) {
+        MessageManager.changes(subscription)
+        registerTypingEvent(subscription)
     }
 
     internal func unsubscribe(for subscription: Subscription) {
@@ -510,14 +491,10 @@ final class ChatViewController: SLKTextViewController, Alerter {
 
         updateMessagesQueryNotificationBlock()
         loadMoreMessagesFrom(date: nil)
-        MessageManager.changes(subscription)
-
-        registerTypingEvent()
+        subscribe(for: subscription)
     }
 
-    fileprivate func registerTypingEvent() {
-        guard let subscription = subscription else { return }
-
+    func registerTypingEvent(_ subscription: Subscription) {
         typingIndicatorView?.interval = 0
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
@@ -559,32 +536,25 @@ final class ChatViewController: SLKTextViewController, Alerter {
                 })
             }
 
-            if modifications.count == 0 {
-                return
-            }
-
             if modifications.count > 0 {
-                DispatchQueue.main.async {
-                    let isAtBottom = self.chatLogIsAtBottom()
+                let isAtBottom = self.chatLogIsAtBottom()
 
+                var indexPathModifications: [Int] = []
+
+                for modified in modifications {
+                    guard modified < self.messagesQuery.count else { continue }
+
+                    let message = Message(value: self.messagesQuery[modified])
+                    let index = self.dataController.update(message)
+
+                    if index >= 0 && !indexPathModifications.contains(index) {
+                        indexPathModifications.append(index)
+                    }
+                }
+
+                if indexPathModifications.count > 0 {
                     UIView.performWithoutAnimation {
                         self.collectionView?.performBatchUpdates({
-                            var indexPathModifications: [Int] = []
-
-                            for modified in modifications {
-                                guard modified < self.messagesQuery.count else { continue }
-
-                                let message = Message(value: self.messagesQuery[modified])
-                                let identifier = message.identifier
-                                let index = self.dataController.update(message, completion: { [weak self] in
-                                    guard let identifier = identifier else { return }
-                                    self?.updateCellForMessage(identifier: identifier)
-                                })
-                                if index >= 0 && !indexPathModifications.contains(index) {
-                                    indexPathModifications.append(index)
-                                }
-                            }
-
                             self.collectionView?.reloadItems(at: indexPathModifications.map { IndexPath(row: $0, section: 0) })
                         }, completion: { _ in
                             if isAtBottom {
@@ -602,9 +572,18 @@ final class ChatViewController: SLKTextViewController, Alerter {
 
         let tempSubscription = Subscription(value: subscription)
 
+        if date == nil {
+            showLoadingMessagesHeaderStatusView()
+        }
+
         MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
+
+                if date == nil {
+                    self?.hideHeaderStatusView()
+                }
+
                 self?.isRequestingHistory = false
                 self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
 
@@ -857,8 +836,9 @@ extension ChatViewController {
             withReuseIdentifier: ChatMessageDaySeparator.identifier,
             for: indexPath
         ) as? ChatMessageDaySeparator else {
-                return UICollectionViewCell()
+            return UICollectionViewCell()
         }
+
         cell.labelTitle.text = obj.timestamp.formatted("MMM dd, YYYY")
         return cell
     }
@@ -870,6 +850,7 @@ extension ChatViewController {
         ) as? ChatChannelHeaderCell else {
             return UICollectionViewCell()
         }
+
         cell.subscription = subscription
         return cell
     }
@@ -973,7 +954,7 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         guard let auth = AuthManager.isAuthenticated() else { return }
         guard let subscription = self.subscription else { return }
 
-        Realm.executeOnMainThread({ _ in
+        Realm.execute({ _ in
             subscription.auth = auth
         })
 

@@ -40,8 +40,14 @@
 "alert.authorization_error.title" = "Błąd autoryzacji";
 "alert.authorization_error.create_channel.description" = "Nie możesz utworzyć kanału";
 
-"alert.unsupported_feature.title" = "Feature not supported";
-"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above.";
+"alert.unsupported_feature.title" = "Feature not supported"; //TODO
+"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above."; //TODO
+
+"alert.push_token_error.title" = "Warning"; //TODO
+"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0."; //TODO
+
+"alert.upload_error.title" = "Upload Error"; //TODO
+"alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again."; //TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
@@ -91,6 +97,8 @@
 "new_room.group.channel.name" = "Nazwa kanału";
 "new_room.group.channel.footer" = "Nazwa musi być z małych liter oraz być krótsza niż 22 znaki";
 "new_room.cell.channel_name.title" = "Nazwa kanału";
+"new_room.group.invite_users" = "Zaproś użytkowników";
+"new_room.cell.invite_users.placeholder" = "Nazwy użytkowników";
 
 // Chat
 "chat.channel_preview_view.title" = "Jest to podgląd kanału #%@";
@@ -99,8 +107,10 @@
 "chat.channel.start_conversation" = "To początek rozmowy na kanale %@";
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
+"chat.loading_messages" = "Loading messages..."; //TODO
 
 // Chat Message Actions
+"chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Blokuj wiadomości od użytkownika";
 "chat.message.actions.report" = "Zgłoś wiadomość";
 "chat.message.actions.copy" = "Kopiuj";
