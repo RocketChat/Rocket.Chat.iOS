@@ -26,7 +26,11 @@ struct BugTrackingCoordinator: LauncherProtocol {
             return
         }
 
+        #if BETA || DEBUG
         Instabug.start(withToken: instabug, invocationEvent: .floatingButton)
+        #else
+        Instabug.start(withToken: instabug, invocationEvent: .shake)
+        #endif
     }
 
     private func launchFabric() {
