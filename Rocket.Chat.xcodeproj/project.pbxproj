@@ -280,6 +280,9 @@
 		809B53121FE2F2F900833DD2 /* ReactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809B53111FE2F2F900833DD2 /* ReactionView.xib */; };
 		809B53141FE3294400833DD2 /* ReactionListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809B53131FE3294400833DD2 /* ReactionListView.xib */; };
 		809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B53151FE3D3DC00833DD2 /* MessageReaction.swift */; };
+		80A2F39020056C5E005D2DCA /* EmojiSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */; };
+		80A2F39220057AD0005D2DCA /* EmojiAutocompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */; };
+		80A2F39420057B48005D2DCA /* EmojiAutocompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A2F39320057B48005D2DCA /* EmojiAutocompleteCell.xib */; };
 		80A63C4F1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */; };
 		80A63C511F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */; };
 		80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */; };
@@ -641,6 +644,9 @@
 		809B53111FE2F2F900833DD2 /* ReactionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionView.xib; sourceTree = "<group>"; };
 		809B53131FE3294400833DD2 /* ReactionListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionListView.xib; sourceTree = "<group>"; };
 		809B53151FE3D3DC00833DD2 /* MessageReaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReaction.swift; sourceTree = "<group>"; };
+		80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearcher.swift; sourceTree = "<group>"; };
+		80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiAutocompleteCell.swift; sourceTree = "<group>"; };
+		80A2F39320057B48005D2DCA /* EmojiAutocompleteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiAutocompleteCell.xib; sourceTree = "<group>"; };
 		80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequest.swift; sourceTree = "<group>"; };
 		80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequest.swift; sourceTree = "<group>"; };
@@ -1482,6 +1488,9 @@
 				8020CCF41FEAD8C9003424F4 /* EmojiPickerController.swift */,
 				806465F11FED81C9001F27DB /* EmojiPicker.xcassets */,
 				80C7DD601FF46B8000E6647C /* EmojiPicker.strings */,
+				80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */,
+				80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */,
+				80A2F39320057B48005D2DCA /* EmojiAutocompleteCell.xib */,
 			);
 			path = EmojiPicker;
 			sourceTree = "<group>";
@@ -1862,6 +1871,7 @@
 				412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */,
 				41C275E11D84815C003C88CF /* AvatarView.xib in Resources */,
 				809B53121FE2F2F900833DD2 /* ReactionView.xib in Resources */,
+				80A2F39420057B48005D2DCA /* EmojiAutocompleteCell.xib in Resources */,
 				416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */,
 				4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */,
 				41CABFF81F5047D600E0B289 /* ChatLoaderCell.xib in Resources */,
@@ -2292,6 +2302,7 @@
 				41DC7A1D1D38471700896FC0 /* MessageManager.swift in Sources */,
 				412F8DD91F599EF100AF7786 /* DatabaseManager.swift in Sources */,
 				41A79C131D2F09F200A1968E /* Auth.swift in Sources */,
+				80A2F39020056C5E005D2DCA /* EmojiSearcher.swift in Sources */,
 				41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */,
 				8013F8711FD6B5B000EE1A4E /* InfoClient.swift in Sources */,
 				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
@@ -2391,6 +2402,7 @@
 				D1D535F11F70864C006625D2 /* InfoRequest.swift in Sources */,
 				411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */,
 				D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */,
+				80A2F39220057AD0005D2DCA /* EmojiAutocompleteCell.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
