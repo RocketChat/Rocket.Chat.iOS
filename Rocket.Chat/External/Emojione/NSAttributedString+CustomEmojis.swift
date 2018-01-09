@@ -24,10 +24,8 @@ extension NSAttributedString {
 
             for match in matches {
                 let imageAttachment = NSTextAttachment()
-                imageAttachment.bounds = CGRect(x: 0, y: -5, width: 18.0, height: 18.0)
-                SDWebImageDownloader().downloadImage(with: URL(string: imageUrl), options: [], progress: nil, completed: { image, _, _, _ in
-                    imageAttachment.image = image
-                })
+                imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
+                imageAttachment.contents = imageUrl.data(using: .utf8)
                 let imageString = NSAttributedString(attachment: imageAttachment)
                 attributedString.replaceCharacters(in: NSRange(location: match.range.location, length: shortname.count), with: imageString)
             }
