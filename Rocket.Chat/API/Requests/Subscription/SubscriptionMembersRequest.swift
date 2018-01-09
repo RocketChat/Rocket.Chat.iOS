@@ -25,6 +25,8 @@ fileprivate extension SubscriptionType {
 }
 
 class SubscriptionMembersRequest: APIRequest {
+    let requiredVersion = Version(0, 59, 0)
+
     var path: String {
         return type.path
     }

@@ -13,7 +13,6 @@
 # Reporting an Issue
 
 [Github Issues](https://github.com/RocketChat/Rocket.Chat.iOS/issues) are used to track todos, bugs, feature requests, and more.
-Please note we are still in very early stages development, so expect lots of bugs, etc. until we can reach a first alpha version.
 
 ## The app isn't connecting to your server?
 Make sure your server supports WebSocket. These are the minimum requirements for Apache 2.4 and Nginx 1.3 or greater.

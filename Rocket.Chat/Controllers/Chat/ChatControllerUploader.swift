@@ -220,33 +220,45 @@ extension ChatViewController {
 
         startLoadingUpload(file: file)
 
-        UploadManager.shared.upload(file: file, subscription: subscription, progress: { _ in
-            // We currently don't have progress being called.
-        }, completion: { [unowned self] (response, error) in
-            self.stopLoadingUpload()
+        func stopLoadingUpload() {
+            DispatchQueue.main.async { [weak self] in
+                self?.stopLoadingUpload()
+            }
+        }
 
-            if error {
-                var errorMessage = localized("error.socket.default_error_message")
+        let client = API.current()?.client(UploadClient.self)
+        client?.upload(roomId: subscription.rid, data: file.data, filename: file.name, mimetype: file.type,
+                       completion: stopLoadingUpload, versionFallback: { deprecatedMethod() })
 
-                if let response = response {
-                    if let message = response.result["error"]["message"].string {
-                        errorMessage = message
+        func deprecatedMethod() {
+            UploadManager.shared.upload(file: file, subscription: subscription, progress: { _ in
+                // We currently don't have progress being called.
+            }, completion: { [unowned self] (response, error) in
+                self.stopLoadingUpload()
+
+                if error {
+                    var errorMessage = localized("error.socket.default_error_message")
+
+                    if let response = response {
+                        if let message = response.result["error"]["message"].string {
+                            errorMessage = message
+                        }
+                    }
+
+                    let alert = UIAlertController(
+                        title: localized("error.socket.default_error_title"),
+                        message: errorMessage,
+                        preferredStyle: .alert
+                    )
+
+                    alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
+
+                    DispatchQueue.main.async {
+                        self.present(alert, animated: true, completion: nil)
                     }
                 }
-
-                let alert = UIAlertController(
-                    title: localized("error.socket.default_error_title"),
-                    message: errorMessage,
-                    preferredStyle: .alert
-                )
-
-                alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-
-                DispatchQueue.main.async {
-                    self.present(alert, animated: true, completion: nil)
-                }
-            }
-        })
+            })
+        }
     }
 
 }

@@ -27,8 +27,16 @@ final class ChatMessageCell: UICollectionViewCell {
             labelText.delegate = delegate
         }
     }
+
     var message: Message! {
         didSet {
+            if oldValue != nil && oldValue.identifier == message?.identifier {
+                if oldValue.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
+                    Log.debug("message is cached")
+                    return
+                }
+            }
+
             updateMessage()
         }
     }
@@ -57,12 +65,21 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var reactionsListView: ReactionListView! {
+        didSet {
+            reactionsListView.reactionTapRecognized = { view, sender in
+                MessageManager.react(self.message, emoji: view.model.emoji, completion: { _ in })
+            }
+        }
+    }
+    @IBOutlet weak var reactionsListViewConstraint: NSLayoutConstraint!
+
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
         let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
-        var total = (height ?? 0) + (sequential ? 8 : 29)
+        var total = (height ?? 0) + (sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -110,6 +127,7 @@ final class ChatMessageCell: UICollectionViewCell {
         labelText.message = nil
         labelDate.text = ""
         sequential = false
+        message = nil
 
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
@@ -242,17 +260,55 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
+    fileprivate func updateReactions() {
+        let username = AuthManager.currentUser()?.username
+
+        let models = Array(message.reactions.map { reaction -> ReactionViewModel in
+            let highlight: Bool
+            if let username = username {
+                highlight = reaction.usernames.contains(username)
+            } else {
+                highlight = false
+            }
+
+            let emoji = reaction.emoji ?? "?"
+            let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl()
+
+            return ReactionViewModel(
+                emoji: emoji,
+                imageUrl: imageUrl,
+                count: reaction.usernames.count.description,
+                highlight: highlight
+            )
+        })
+
+        reactionsListView.model = ReactionListViewModel(reactionViewModels: models)
+
+        if message.reactions.count > 0 {
+            reactionsListView.isHidden = false
+            reactionsListViewConstraint.constant = 40
+        } else {
+            reactionsListView.isHidden = true
+            reactionsListViewConstraint.constant = 0
+        }
+    }
+
     fileprivate func updateMessage() {
-        guard delegate != nil else { return }
+        guard
+            delegate != nil,
+            message != nil
+        else {
+            return
+        }
 
         if !sequential {
             updateMessageHeader()
         }
 
         updateMessageContent()
-
         insertGesturesIfNeeded()
         insertAttachments()
+        updateReactions()
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
@@ -269,6 +325,36 @@ extension ChatMessageCell: UIGestureRecognizerDelegate {
 
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRequireFailureOf otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return false
+    }
+
+}
+
+// MARK: Accessibility
+
+extension ChatMessageCell {
+
+    override func awakeFromNib() {
+        isAccessibilityElement = true
+    }
+
+    override var accessibilityIdentifier: String? {
+        get { return "message" }
+        set { }
+    }
+
+    override var accessibilityLabel: String? {
+        get { return message?.accessibilityLabel }
+        set { }
+    }
+
+    override var accessibilityValue: String? {
+        get { return message?.accessibilityValue }
+        set { }
+    }
+
+    override var accessibilityHint: String? {
+        get { return message?.accessibilityHint }
+        set { }
     }
 
 }

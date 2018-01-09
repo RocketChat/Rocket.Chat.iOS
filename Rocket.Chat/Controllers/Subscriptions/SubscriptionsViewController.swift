@@ -569,7 +569,12 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
         view.addSubview(viewUserMenu)
         self.viewUserMenu = viewUserMenu
 
-        newFrame.origin.y = 84
+        if #available(iOS 11.0, *) {
+            newFrame.origin.y = 64 + view.safeAreaInsets.top
+        } else {
+            newFrame.origin.y = 84
+        }
+
         UIView.animate(withDuration: 0.15) {
             viewUserMenu.frame = newFrame
             self.imageViewArrowDown.transform = CGAffineTransform(rotationAngle: CGFloat.pi)

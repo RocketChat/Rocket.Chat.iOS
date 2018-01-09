@@ -26,24 +26,27 @@ enum SubscriptionCreateType {
 }
 
 class SubscriptionCreateRequest: APIRequest {
-    let method = "POST"
+    let method: HTTPMethod = .post
     var path: String {
         return type.path
     }
 
     let name: String
     let type: SubscriptionCreateType
+    let members: [String]
     let readOnly: Bool
 
-    init(name: String, type: SubscriptionCreateType, readOnly: Bool = false) {
+    init(name: String, type: SubscriptionCreateType, members: [String] = [], readOnly: Bool = false) {
         self.name = name
         self.type = type
+        self.members = members
         self.readOnly = readOnly
     }
 
     func body() -> Data? {
         let json: [String: Any] = [
             "name": name,
+            "members": members,
             "readOnly": readOnly
         ]
 

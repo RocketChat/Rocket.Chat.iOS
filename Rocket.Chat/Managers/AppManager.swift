@@ -41,11 +41,13 @@ struct AppManager {
 extension AppManager {
 
     static func changeSelectedServer(index: Int) {
-        DatabaseManager.selectDatabase(at: index)
-        DatabaseManager.changeDatabaseInstance(index: index)
-        AuthSettingsManager.shared.clearCachedSettings()
+        SocketManager.disconnect { _, _ in
+            DatabaseManager.selectDatabase(at: index)
+            DatabaseManager.changeDatabaseInstance(index: index)
+            AuthSettingsManager.shared.clearCachedSettings()
+            AuthSettingsManager.shared.updateCachedSettings()
+            AuthManager.recoverAuthIfNeeded()
 
-        SocketManager.disconnect { (_, _) in
             reloadApp()
         }
     }
