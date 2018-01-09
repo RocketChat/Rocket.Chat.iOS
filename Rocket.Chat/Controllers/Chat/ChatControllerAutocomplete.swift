@@ -14,6 +14,7 @@ extension ChatViewController {
         guard let realm = Realm.shared else { return }
 
         searchResult = []
+        searchWord = word
 
         if prefix == "@" {
             searchResult = User.search(usernameContaining: word, preference: dataController.messagesUsernames)
@@ -44,7 +45,7 @@ extension ChatViewController {
                 searchResult.append(($0.command, "/"))
             }
         } else if prefix == ":" {
-            let emojis = EmojiSearcher.standard.search(shortname: word)
+            let emojis = EmojiSearcher.standard.search(shortname: word.lowercased())
 
             emojis.forEach {
                 searchResult.append(($0.suggestion, $0.emoji))
@@ -102,6 +103,8 @@ extension ChatViewController {
                 }
 
                 cell.shortnameLabel.text = searchResult[indexPath.row].0
+
+                cell.highlight(string: searchWord.lowercased())
 
                 return cell
             }

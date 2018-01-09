@@ -57,6 +57,7 @@ final class ChatViewController: SLKTextViewController {
     var dataController = ChatDataController()
 
     var searchResult: [(String, Any)] = []
+    var searchWord: String = ""
 
     var closeSidebarAfterSubscriptionUpdate = false
 
