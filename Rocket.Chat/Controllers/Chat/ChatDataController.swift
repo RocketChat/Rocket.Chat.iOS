@@ -33,7 +33,13 @@ struct ChatData {
 
 final class ChatDataController {
 
-    var data: [ChatData] = []
+    var messagesUsernames: Set<String> = []
+    var data: [ChatData] = [] {
+        didSet {
+            messagesUsernames.removeAll()
+            messagesUsernames.formUnion(data.flatMap { $0.message?.user?.username })
+        }
+    }
     var loadedAllMessages = false
 
     func clear() -> [IndexPath] {
@@ -197,11 +203,15 @@ final class ChatDataController {
         return (indexPaths, removedIndexPaths)
     }
 
-    func update(_ message: Message, completion: (() -> Void)?) -> Int {
+    func update(_ message: Message) -> Int {
         for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
+                if obj.message?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
+                    return -1
+                }
+
                 if obj.message?.text != message.text {
-                    MessageTextCacheManager.shared.update(for: message, completion: completion)
+                    MessageTextCacheManager.shared.update(for: message)
                 }
 
                 data[idx].message = message

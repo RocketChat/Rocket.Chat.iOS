@@ -25,6 +25,7 @@ struct ServerPersistKeys {
     // Authentication information
     static let token = "kAuthToken"
     static let serverURL = "kAuthServerURL"
+    static let serverVersion = "kAuthServerVersion"
     static let userId = "kUserId"
 
     // Display information
@@ -55,7 +56,7 @@ class ServerManager {
             var servers = DatabaseManager.servers,
             servers.count > selectedIndex
         else {
-                return
+            return
         }
 
         servers[selectedIndex][ServerPersistKeys.serverName] = serverName

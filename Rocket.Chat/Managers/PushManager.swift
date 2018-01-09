@@ -59,7 +59,7 @@ final class PushManager {
         return pushId
     }
 
-    fileprivate static func getDeviceToken() -> String? {
+    static func getDeviceToken() -> String? {
         guard let deviceToken = UserDefaults.standard.string(forKey: kDeviceTokenKey) else {
             return nil
         }
@@ -165,7 +165,7 @@ extension PushManager {
             let message = "\(reply)\(appendage)"
 
             let backgroundTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-            API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), { _ in
+            API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), succeeded: { _ in
                 UIApplication.shared.endBackgroundTask(backgroundTask)
             })
         }

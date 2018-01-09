@@ -10,8 +10,7 @@ import Foundation
 import RealmSwift
 
 struct MessageManager {
-    static let initialHistorySize = 30
-    static let laterHistorySize = 60
+    static let historySize = 60
 }
 
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
@@ -22,20 +21,17 @@ extension MessageManager {
 
     static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletionObjectsList<Message>) {
         var lastDate: Any!
-        var size: Int
 
         if let lastMessageDate = lastMessageDate {
             lastDate = ["$date": lastMessageDate.timeIntervalSince1970 * 1000]
-            size = laterHistorySize
         } else {
             lastDate = NSNull()
-            size = initialHistorySize
         }
 
         let request = [
             "msg": "method",
             "method": "loadHistory",
-            "params": ["\(subscription.rid)", lastDate, size, [
+            "params": ["\(subscription.rid)", lastDate, historySize, [
                 "$date": Date().timeIntervalSince1970 * 1000
             ]]
         ] as [String: Any]
@@ -54,6 +50,15 @@ extension MessageManager {
                 guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
 
                 list?.forEach { object in
+                    let mockNewMessage = Message()
+                    mockNewMessage.map(object, realm: realm)
+
+                    if let existingMessage = realm.object(ofType: Message.self, forPrimaryKey: object["identifier"].stringValue) {
+                        if existingMessage.updatedAt?.timeIntervalSince1970 == mockNewMessage.updatedAt?.timeIntervalSince1970 {
+                            return
+                        }
+                    }
+
                     let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
                         object?.subscription = detachedSubscription
                     })
@@ -93,6 +98,7 @@ extension MessageManager {
                     object?.subscription = detachedSubscription
                 })
 
+                message.temporary = false
                 realm.add(message, update: true)
             })
         }
@@ -132,6 +138,18 @@ extension MessageManager {
             "msg": "method",
             "method": "unpinMessage",
             "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
+        ] as [String: Any]
+
+        SocketManager.send(request, completion: completion)
+    }
+
+    static func react(_ message: Message, emoji: String, completion: @escaping MessageCompletion) {
+        guard let messageIdentifier = message.identifier else { return }
+
+        let request = [
+            "msg": "method",
+            "method": "setReaction",
+            "params": [emoji, messageIdentifier]
         ] as [String: Any]
 
         SocketManager.send(request, completion: completion)

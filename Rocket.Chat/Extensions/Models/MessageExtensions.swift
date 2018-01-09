@@ -9,7 +9,6 @@
 import UIKit
 
 extension Message {
-
     func isSystemMessage() -> Bool {
         return !(
             type == .text ||
@@ -110,5 +109,49 @@ extension Message {
 
         return text
     }
+}
 
+// MARK: Accessibility
+extension Message {
+    override var accessibilityLabel: String? {
+        get {
+            guard
+                let createdAt = createdAt,
+                let user = user,
+                let format = VOLocalizedString("message.label")
+            else {
+                return nil
+            }
+
+            let formatter = DateFormatter()
+            formatter.dateStyle = .short
+            formatter.timeStyle = .short
+            formatter.doesRelativeDateFormatting = true
+            let date = formatter.string(from: createdAt)
+
+            return String(format: format, user.displayName(), date)
+        }
+        set { }
+    }
+
+    override var accessibilityValue: String? {
+        get { return textNormalized() }
+        set { }
+    }
+
+    override var accessibilityHint: String? {
+        get {
+            guard let format = VOLocalizedString("message.hint") else { return nil }
+
+            return String(format: format, self.reactions.reduce("") {
+                return $0 + """
+                \(Emojione.transform(string: $1.emoji ?? ""))
+                \($1.usernames.count): \($1.usernames.joined(separator: ", "))
+
+                """
+            })
+        }
+
+        set { }
+    }
 }

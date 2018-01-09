@@ -62,6 +62,15 @@ extension NSMutableAttributedString {
         }
     }
 
+    func setLineSpacing(_ font: UIFont) {
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = font.lineHeight * 0.1
+
+        self.addAttributes([
+            NSAttributedStringKey.paragraphStyle: paragraphStyle
+            ], range: NSRange(location: 0, length: self.length))
+    }
+
     func transformMarkdown() -> NSAttributedString {
         return MarkdownManager.parser.attributedStringFromAttributedMarkdownString(self)
     }
@@ -91,6 +100,7 @@ extension NSMutableAttributedString {
                     let range = NSRange(range, in: string)
                     setBackgroundColor(background, range: range)
                     setFontColor(font, range: range)
+                    setFont(MessageTextFontAttributes.boldFont, range: range)
                 }
             }
         }

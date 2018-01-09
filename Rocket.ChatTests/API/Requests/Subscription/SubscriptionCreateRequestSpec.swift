@@ -11,18 +11,20 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class SubscriptionCreateRequestSpec: XCTestCase {
+class SubscriptionCreateRequestSpec: APITestCase {
     func testRequest() {
         let paramRoomName = "foo"
         let paramReadOnly = false
+        let paramMembers = ["example"]
 
         let _request = SubscriptionCreateRequest(
             name: paramRoomName,
             type: .channel,
+            members: paramMembers,
             readOnly: paramReadOnly
         )
 
-        guard let request = _request.request(for: API.shared) else {
+        guard let request = _request.request(for: api) else {
             return XCTFail("request is not nil")
         }
         guard let httpBody = request.httpBody else {
@@ -36,6 +38,7 @@ class SubscriptionCreateRequestSpec: XCTestCase {
         XCTAssertEqual(request.httpMethod, "POST", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
         XCTAssertEqual(bodyJson["name"].string, paramRoomName, "parameter read only is correct")
+        XCTAssertEqual(bodyJson["members"].array?.first?.string, paramMembers.first, "parameter members is correct")
         XCTAssertEqual(bodyJson["readOnly"].bool, paramReadOnly, "read only was set as false")
 
         let _requestGroup = SubscriptionCreateRequest(
@@ -44,7 +47,7 @@ class SubscriptionCreateRequestSpec: XCTestCase {
             readOnly: paramReadOnly
         )
 
-        guard let requestGroup = _requestGroup.request(for: API.shared) else {
+        guard let requestGroup = _requestGroup.request(for: api) else {
             return XCTFail("request is not nil")
         }
 

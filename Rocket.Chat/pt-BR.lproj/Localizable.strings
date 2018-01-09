@@ -40,6 +40,15 @@
 "alert.authorization_error.title" = "Erro de Autorização";
 "alert.authorization_error.create_channel.description" = "Você não pode criar canais";
 
+"alert.unsupported_feature.title" = "Funcionalidade não disponível";
+"alert.unsupported_feature.message" = "A versão deste servidor é: %@. Esta funcionalidade é disponível apenas nas versões a partir de %@.";
+
+"alert.push_token_error.title" = "Aviso";
+"alert.push_token_error.message" = "Você ainda pode receber notificações deste servidor por causa de um problema com servidores de versão menor que 0.60.0.";
+
+"alert.upload_error.title" = "Erro de Upload";
+"alert.upload_error.message" = "Algo de errado aconteceu ao fazer o upload do seu arquivo. Por favor, tente novamente.";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";
 "connection.server.redirect.alert.message" = "Parece que este servidor mudou a URL para:\n\n%@\n\Gostaria de atualizar a URL?";
@@ -88,6 +97,8 @@
 "new_room.group.channel.name" = "Nome do canal";
 "new_room.group.channel.footer" = "O nome precisa ser escrito em minúsculo e ter menos que 22 caracteres";
 "new_room.cell.channel_name.title" = "Nome do canal";
+"new_room.group.invite_users" = "Invite users";
+"new_room.cell.invite_users.placeholder" = "Usernames";
 
 // Chat
 "chat.channel_preview_view.title" = "Esta é uma pré-visualização de #%@";
@@ -96,8 +107,10 @@
 "chat.channel.start_conversation" = "Este é o começo da conversa em %@";
 "chat.read_only" = "Este canal é somente leitura";
 "chat.muted" = "Você foi silenciado";
+"chat.loading_messages" = "Carregando mensagens...";
 
 // Chat Message Actions
+"chat.message.actions.react" = "Adicionar reação";
 "chat.message.actions.block" = "Bloquear mensagens do usuário";
 "chat.message.actions.report" = "Reportar mensagem";
 "chat.message.actions.copy" = "Copiar";
