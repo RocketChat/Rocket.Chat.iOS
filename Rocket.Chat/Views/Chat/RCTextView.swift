@@ -156,8 +156,4 @@ extension RCTextView: UITextViewDelegate {
 
         return true
     }
-
-    func textViewDidChange(_ textView: UITextView) {
-
-    }
 }
