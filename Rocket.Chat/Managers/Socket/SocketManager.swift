@@ -95,6 +95,11 @@ class SocketManager {
     }
 
     static func subscribe(_ object: [String: Any], eventName: String, completion: @escaping MessageCompletion) {
+        guard SocketManager.isConnected() else {
+            Log.debug("Error: tried to subscribe to event '\(eventName)' while not connected to socket.")
+            return
+        }
+
         if var list = sharedInstance.events[eventName] {
             list.append(completion)
             sharedInstance.events[eventName] = list
@@ -131,6 +136,8 @@ extension SocketManager {
                 return
             }
 
+            API.current()?.client(InfoClient.self).fetchInfo()
+
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
                 AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
 
@@ -142,12 +149,9 @@ extension SocketManager {
                 SubscriptionManager.subscribeRoomChanges()
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
+                CustomEmojiManager.sync()
 
-                // If we have some subscription opened, let's
-                // try to subscribe to it again
-                if let subscription = ChatViewController.shared?.subscription, !subscription.isInvalidated {
-                    ChatViewController.shared?.subscription = subscription
-                }
+                API.current()?.client(CommandsClient.self).fetchCommands()
 
                 if let userIdentifier = auth.userId {
                     PushManager.updateUser(userIdentifier)
@@ -228,7 +232,6 @@ extension SocketManager: WebSocketDelegate {
 
         self.handleMessage(json, socket: socket)
     }
-
 }
 
 // MARK: WebSocketPongDelegate

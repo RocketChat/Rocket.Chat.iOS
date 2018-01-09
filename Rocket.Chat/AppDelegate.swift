@@ -9,6 +9,7 @@
 import UIKit
 import RealmSwift
 import UserNotifications
+import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -29,6 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // but if not, just open the authentication screen.
         if let auth = AuthManager.isAuthenticated() {
             AuthManager.persistAuthInformation(auth)
+            AuthSettingsManager.shared.updateCachedSettings()
             WindowManager.open(.chat)
         } else {
             WindowManager.open(.auth)

@@ -35,6 +35,18 @@ class User: BaseModel {
 
 extension User {
 
+    func hasPermission(_ permission: PermissionType, realm: Realm? = Realm.shared) -> Bool {
+        guard let permissionRoles = PermissionManager.roles(for: permission, realm: realm) else { return false }
+
+        for userRole in self.roles {
+            for permissionRole in permissionRoles where userRole == permissionRole {
+                return true
+            }
+        }
+
+        return false
+    }
+
     func displayName() -> String {
         guard let settings = AuthSettingsManager.settings else {
             return username ?? ""
@@ -61,6 +73,13 @@ extension User {
         }
 
         return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
+    }
+
+    func canViewAdminPanel(realm: Realm? = Realm.shared) -> Bool {
+        return hasPermission(.viewPrivilegedSetting, realm: realm) ||
+            hasPermission(.viewStatistics, realm: realm) ||
+            hasPermission(.viewUserAdministration, realm: realm) ||
+            hasPermission(.viewRoomAdministration, realm: realm)
     }
 
 }

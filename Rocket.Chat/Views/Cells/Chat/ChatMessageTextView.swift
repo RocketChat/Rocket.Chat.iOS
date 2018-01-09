@@ -103,7 +103,9 @@ final class ChatMessageTextView: UIView {
         delegate?.viewDidCollpaseChange(view: self)
 
         if let attachment = viewModel?.attachment {
-            delegate?.openFileFromCell(attachment: attachment)
+            if attachment.titleLinkDownload {
+                delegate?.openFileFromCell(attachment: attachment)
+            }
         }
     }
 

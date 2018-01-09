@@ -42,6 +42,7 @@ class ServersViewController: UIViewController {
     }
 
     func removeServer(at indexPath: IndexPath) {
+        API.server(index: indexPath.row)?.client(PushClient.self).deletePushToken()
         DatabaseManager.removeDatabase(at: indexPath.row)
         servers = DatabaseManager.servers ?? []
         tableView.reloadData()

@@ -23,9 +23,11 @@ enum APIRequestOptions {
 }
 
 protocol APIRequest {
+    var requiredVersion: Version { get }
+
     var path: String { get }
-    var method: String { get }
-    var contentType: String? { get }
+    var method: HTTPMethod { get }
+    var contentType: String { get }
 
     var query: String? { get }
 
@@ -34,12 +36,16 @@ protocol APIRequest {
 }
 
 extension APIRequest {
-	var method: String {
-        return "GET"
+    var requiredVersion: Version {
+        return .zero
     }
 
-	var contentType: String? {
-        return nil
+	var method: HTTPMethod {
+        return .get
+    }
+
+	var contentType: String {
+        return "application/json"
 	}
 
     var query: String? {
@@ -64,8 +70,10 @@ extension APIRequest {
         }
 
         var request = URLRequest(url: url)
-        request.httpMethod = method
-        request.httpBody = self.body()
+        request.httpMethod = method.rawValue
+        request.httpBody = body()
+
+        request.addValue(contentType, forHTTPHeaderField: "Content-Type")
 
         if let token = api.authToken {
             request.addValue(token, forHTTPHeaderField: "X-Auth-Token")
@@ -73,10 +81,6 @@ extension APIRequest {
 
         if let userId = api.userId {
             request.addValue(userId, forHTTPHeaderField: "X-User-Id")
-        }
-
-        if let contentType = self.contentType {
-            request.addValue(contentType, forHTTPHeaderField: "Content-Type")
         }
 
         return request

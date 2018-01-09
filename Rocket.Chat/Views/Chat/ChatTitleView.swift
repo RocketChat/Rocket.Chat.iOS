@@ -31,6 +31,8 @@ final class ChatTitleView: UIView {
 
     var subscription: Subscription? {
         didSet {
+            guard let subscription = subscription, !subscription.isInvalidated else { return }
+
             viewModel.subscription = subscription
             labelTitle.text = viewModel.title
             icon.image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)

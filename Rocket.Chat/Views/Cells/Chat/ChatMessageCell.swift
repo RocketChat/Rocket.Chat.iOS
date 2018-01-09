@@ -22,9 +22,21 @@ final class ChatMessageCell: UICollectionViewCell {
     weak var longPressGesture: UILongPressGestureRecognizer?
     weak var usernameTapGesture: UITapGestureRecognizer?
     weak var avatarTapGesture: UITapGestureRecognizer?
-    weak var delegate: ChatMessageCellProtocol?
+    weak var delegate: ChatMessageCellProtocol? {
+        didSet {
+            labelText.delegate = delegate
+        }
+    }
+
     var message: Message! {
         didSet {
+            if oldValue != nil && oldValue.identifier == message?.identifier {
+                if oldValue.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
+                    Log.debug("message is cached")
+                    return
+                }
+            }
+
             updateMessage()
         }
     }
@@ -48,22 +60,26 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
-    @IBOutlet weak var labelText: UITextView! {
-        didSet {
-            labelText.textContainerInset = .zero
-            labelText.delegate = self
-        }
-    }
+    @IBOutlet weak var labelText: HighlightTextView!
 
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
+    @IBOutlet weak var reactionsListView: ReactionListView! {
+        didSet {
+            reactionsListView.reactionTapRecognized = { view, sender in
+                MessageManager.react(self.message, emoji: view.model.emoji, completion: { _ in })
+            }
+        }
+    }
+    @IBOutlet weak var reactionsListViewConstraint: NSLayoutConstraint!
+
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
-        let height = attributedString?.heightForView(withWidth: fullWidth - 62)
+        let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
-        var total = (height ?? 0) + (sequential ? 8 : 29)
+        var total = (height ?? 0) + (sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -108,9 +124,10 @@ final class ChatMessageCell: UICollectionViewCell {
 
     override func prepareForReuse() {
         labelUsername.text = ""
-        labelText.text = ""
+        labelText.message = nil
         labelDate.text = ""
         sequential = false
+        message = nil
 
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
@@ -239,21 +256,59 @@ final class ChatMessageCell: UICollectionViewCell {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
             }
 
-            labelText.attributedText = text
+            labelText.message = text
+        }
+    }
+
+    fileprivate func updateReactions() {
+        let username = AuthManager.currentUser()?.username
+
+        let models = Array(message.reactions.map { reaction -> ReactionViewModel in
+            let highlight: Bool
+            if let username = username {
+                highlight = reaction.usernames.contains(username)
+            } else {
+                highlight = false
+            }
+
+            let emoji = reaction.emoji ?? "?"
+            let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl()
+
+            return ReactionViewModel(
+                emoji: emoji,
+                imageUrl: imageUrl,
+                count: reaction.usernames.count.description,
+                highlight: highlight
+            )
+        })
+
+        reactionsListView.model = ReactionListViewModel(reactionViewModels: models)
+
+        if message.reactions.count > 0 {
+            reactionsListView.isHidden = false
+            reactionsListViewConstraint.constant = 40
+        } else {
+            reactionsListView.isHidden = true
+            reactionsListViewConstraint.constant = 0
         }
     }
 
     fileprivate func updateMessage() {
-        guard delegate != nil else { return }
+        guard
+            delegate != nil,
+            message != nil
+        else {
+            return
+        }
 
         if !sequential {
             updateMessageHeader()
         }
 
         updateMessageContent()
-
         insertGesturesIfNeeded()
         insertAttachments()
+        updateReactions()
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
@@ -274,14 +329,32 @@ extension ChatMessageCell: UIGestureRecognizerDelegate {
 
 }
 
-extension ChatMessageCell: UITextViewDelegate {
+// MARK: Accessibility
 
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        if URL.scheme == "http" || URL.scheme == "https" {
-            delegate?.openURL(url: URL)
-            return false
-        }
+extension ChatMessageCell {
 
-        return true
+    override func awakeFromNib() {
+        isAccessibilityElement = true
     }
+
+    override var accessibilityIdentifier: String? {
+        get { return "message" }
+        set { }
+    }
+
+    override var accessibilityLabel: String? {
+        get { return message?.accessibilityLabel }
+        set { }
+    }
+
+    override var accessibilityValue: String? {
+        get { return message?.accessibilityValue }
+        set { }
+    }
+
+    override var accessibilityHint: String? {
+        get { return message?.accessibilityHint }
+        set { }
+    }
+
 }
