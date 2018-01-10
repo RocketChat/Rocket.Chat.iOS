@@ -280,11 +280,15 @@
 		809B53121FE2F2F900833DD2 /* ReactionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809B53111FE2F2F900833DD2 /* ReactionView.xib */; };
 		809B53141FE3294400833DD2 /* ReactionListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 809B53131FE3294400833DD2 /* ReactionListView.xib */; };
 		809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B53151FE3D3DC00833DD2 /* MessageReaction.swift */; };
+		80A2F39020056C5E005D2DCA /* EmojiSearcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */; };
+		80A2F39220057AD0005D2DCA /* EmojiAutocompleteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */; };
+		80A2F39420057B48005D2DCA /* EmojiAutocompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80A2F39320057B48005D2DCA /* EmojiAutocompleteCell.xib */; };
 		80A63C4F1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */; };
 		80A63C511F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */; };
 		80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */; };
 		80A63C551F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */; };
 		80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C561F71D2E400FE5AC4 /* APISpec.swift */; };
+		80A97F012006293D00A2774C /* EmojiSearcherSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
 		80C7DD5E1FF46B8000E6647C /* EmojiPicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* EmojiPicker.strings */; };
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
@@ -641,11 +645,15 @@
 		809B53111FE2F2F900833DD2 /* ReactionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionView.xib; sourceTree = "<group>"; };
 		809B53131FE3294400833DD2 /* ReactionListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactionListView.xib; sourceTree = "<group>"; };
 		809B53151FE3D3DC00833DD2 /* MessageReaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageReaction.swift; sourceTree = "<group>"; };
+		80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearcher.swift; sourceTree = "<group>"; };
+		80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiAutocompleteCell.swift; sourceTree = "<group>"; };
+		80A2F39320057B48005D2DCA /* EmojiAutocompleteCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiAutocompleteCell.xib; sourceTree = "<group>"; };
 		80A63C4E1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequest.swift; sourceTree = "<group>"; };
 		80A63C501F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequest.swift; sourceTree = "<group>"; };
 		80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C561F71D2E400FE5AC4 /* APISpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISpec.swift; sourceTree = "<group>"; };
+		80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearcherSpec.swift; sourceTree = "<group>"; };
 		80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthViewControllerSpec.swift; path = Controllers/OAuthViewControllerSpec.swift; sourceTree = "<group>"; };
 		80C7DD5F1FF46B8000E6647C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
 		80C7DD611FF46B8300E6647C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/EmojiPicker.strings"; sourceTree = "<group>"; };
@@ -823,8 +831,6 @@
 		4161332F1D46CA2800E09DA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				8020CCF31FEAD8AA003424F4 /* EmojiPicker */,
-				809B530C1FE2EF7C00833DD2 /* Reactions */,
 				41C275DD1D847FEE003C88CF /* Avatar */,
 				897083CC1F8CF08100233561 /* Form */,
 				416133301D46CA3100E09DA2 /* Cells */,
@@ -1077,19 +1083,20 @@
 		4199A9861DABCC2E0035F820 /* External */ = {
 			isa = PBXGroup;
 			children = (
-				4199A9871DABCC570035F820 /* Emojione */,
+				4199A9871DABCC570035F820 /* RCEmojiKit */,
 			);
-			name = External;
+			path = External;
 			sourceTree = "<group>";
 		};
-		4199A9871DABCC570035F820 /* Emojione */ = {
+		4199A9871DABCC570035F820 /* RCEmojiKit */ = {
 			isa = PBXGroup;
 			children = (
-				4199A9881DABCC570035F820 /* Emojione.swift */,
 				8069D26D1FFF876D00C75926 /* Emoji.swift */,
+				4199A9881DABCC570035F820 /* Emojione.swift */,
+				80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */,
+				80A97EFD200628A300A2774C /* Views */,
 			);
-			name = Emojione;
-			path = External/Emojione;
+			path = RCEmojiKit;
 			sourceTree = "<group>";
 		};
 		419D78811FBDB78D005FC7A2 /* Requests */ = {
@@ -1275,6 +1282,7 @@
 		41DF76F61D2C50720028DBF8 /* Rocket.ChatTests */ = {
 			isa = PBXGroup;
 			children = (
+				80A97EFE2006291E00A2774C /* External */,
 				803782B61FB4751D00DED049 /* RealmTestCase.swift */,
 				D18675E71F70A55D00406FB4 /* API */,
 				D1DA25261F695AC700DB6ABB /* Controllers */,
@@ -1474,8 +1482,6 @@
 		8020CCF31FEAD8AA003424F4 /* EmojiPicker */ = {
 			isa = PBXGroup;
 			children = (
-				806465EB1FED19B9001F27DB /* EmojiView.xib */,
-				806465ED1FED1AFE001F27DB /* EmojiView.swift */,
 				806465EF1FED21DF001F27DB /* EmojiCollectionViewCell.xib */,
 				8020CCF11FEAB4C3003424F4 /* EmojiPicker.xib */,
 				8020CCEF1FEAB4A7003424F4 /* EmojiPicker.swift */,
@@ -1561,7 +1567,7 @@
 			path = Message;
 			sourceTree = "<group>";
 		};
-		809B530C1FE2EF7C00833DD2 /* Reactions */ = {
+		809B530C1FE2EF7C00833DD2 /* Reaction */ = {
 			isa = PBXGroup;
 			children = (
 				809B530F1FE2F17D00833DD2 /* ReactionView.swift */,
@@ -1569,7 +1575,36 @@
 				809B530D1FE2EFA100833DD2 /* ReactionListView.swift */,
 				809B53131FE3294400833DD2 /* ReactionListView.xib */,
 			);
-			path = Reactions;
+			path = Reaction;
+			sourceTree = "<group>";
+		};
+		80A97EFD200628A300A2774C /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				806465EB1FED19B9001F27DB /* EmojiView.xib */,
+				806465ED1FED1AFE001F27DB /* EmojiView.swift */,
+				80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */,
+				80A2F39320057B48005D2DCA /* EmojiAutocompleteCell.xib */,
+				8020CCF31FEAD8AA003424F4 /* EmojiPicker */,
+				809B530C1FE2EF7C00833DD2 /* Reaction */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		80A97EFE2006291E00A2774C /* External */ = {
+			isa = PBXGroup;
+			children = (
+				80A97EFF2006292500A2774C /* RCEmojiKit */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
+		80A97EFF2006292500A2774C /* RCEmojiKit */ = {
+			isa = PBXGroup;
+			children = (
+				80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */,
+			);
+			path = RCEmojiKit;
 			sourceTree = "<group>";
 		};
 		80E99F2A1FD8B4AC00B70B59 /* API */ = {
@@ -1862,6 +1897,7 @@
 				412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */,
 				41C275E11D84815C003C88CF /* AvatarView.xib in Resources */,
 				809B53121FE2F2F900833DD2 /* ReactionView.xib in Resources */,
+				80A2F39420057B48005D2DCA /* EmojiAutocompleteCell.xib in Resources */,
 				416133341D46CA7200E09DA2 /* ChatMessageCell.xib in Resources */,
 				4174CB0F1D2D995F0086DAC8 /* Auth.storyboard in Resources */,
 				41CABFF81F5047D600E0B289 /* ChatLoaderCell.xib in Resources */,
@@ -2308,6 +2344,7 @@
 				41DC7A1D1D38471700896FC0 /* MessageManager.swift in Sources */,
 				412F8DD91F599EF100AF7786 /* DatabaseManager.swift in Sources */,
 				41A79C131D2F09F200A1968E /* Auth.swift in Sources */,
+				80A2F39020056C5E005D2DCA /* EmojiSearcher.swift in Sources */,
 				41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */,
 				8013F8711FD6B5B000EE1A4E /* InfoClient.swift in Sources */,
 				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
@@ -2407,6 +2444,7 @@
 				D1D535F11F70864C006625D2 /* InfoRequest.swift in Sources */,
 				411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */,
 				D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */,
+				80A2F39220057AD0005D2DCA /* EmojiAutocompleteCell.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
@@ -2507,6 +2545,7 @@
 				8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */,
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,
 				89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */,
+				80A97F012006293D00A2774C /* EmojiSearcherSpec.swift in Sources */,
 				4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */,
 				8013F88C1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
