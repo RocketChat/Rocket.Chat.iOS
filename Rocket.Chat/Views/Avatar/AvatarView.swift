@@ -21,44 +21,56 @@ final class AvatarView: UIView {
         didSet {
             if let imageURL = imageURL {
                 imageView?.sd_setImage(with: imageURL, placeholderImage: nil, options: .retryFailed) { [weak self] (_, error, _, _) in
-                    guard error == nil else {
-                        self?.setAvatarWithInitials()
-                        return
-                    }
+                    guard error == nil else { return }
 
                     self?.labelInitials.text = ""
                     self?.backgroundColor = UIColor.clear
                 }
-            } else if emoji == nil {
-                setAvatarWithInitials()
+            }
+        }
+    }
+
+    var avatarURL: URL? {
+        didSet {
+            if avatarURL != nil {
+                updateAvatar()
             }
         }
     }
 
     var user: User? {
         didSet {
-            if let imageURL = user?.avatarURL() {
-                self.imageURL = imageURL
+            if user != nil {
+                updateAvatar()
             }
         }
     }
 
     var emoji: String? {
         didSet {
-            if let emoji = emoji {
-                let emojiCharacter = Emojione.transform(string: emoji)
-
-                if emojiCharacter != emoji {
-                    labelInitials.text = emojiCharacter
-                } else if let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl() {
-                    imageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
-                    labelInitials.text = ""
-                }
-
-                backgroundColor = .clear
-            } else if imageURL == nil {
-                setAvatarWithInitials()
+            if emoji != nil {
+                updateAvatar()
             }
+        }
+    }
+
+    func updateAvatar() {
+        setAvatarWithInitials()
+
+        if let emoji = emoji {
+            let emojiCharacter = Emojione.transform(string: emoji)
+
+            if emojiCharacter != emoji {
+                labelInitials.text = emojiCharacter
+            } else if let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl() {
+                imageURL = URL(string: imageUrl)
+            }
+
+            backgroundColor = .clear
+        } else if let avatarURL = avatarURL {
+            self.imageURL = avatarURL
+        } else if let avatarURL = user?.avatarURL() {
+            self.imageURL = avatarURL
         }
     }
 
@@ -126,6 +138,18 @@ final class AvatarView: UIView {
 
         labelInitials?.text = initials.uppercased()
         backgroundColor = UIColor(rgb: color, alphaVal: 1)
+    }
+
+    func prepareForReuse() {
+        avatarURL = nil
+        imageURL = nil
+        user = nil
+        emoji = nil
+
+        imageView.image = nil
+        imageView.animatedImage = nil
+
+        labelInitials.text = ""
     }
 
 }
