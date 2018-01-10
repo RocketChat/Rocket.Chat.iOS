@@ -35,4 +35,10 @@ class EmojiAutocompleteCell: UITableViewCell {
             }
         }
     }
+
+    override func prepareForReuse() {
+        emojiView.emojiLabel.text = ""
+        emojiView.emojiImageView.image = nil
+        emojiView.emojiImageView.animatedImage = nil
+    }
 }

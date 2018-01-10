@@ -45,7 +45,7 @@ extension ChatViewController {
                 searchResult.append(($0.command, "/"))
             }
         } else if prefix == ":" {
-            let emojis = EmojiSearcher.standard.search(shortname: word.lowercased())
+            let emojis = EmojiSearcher.standard.search(shortname: word.lowercased(), custom: CustomEmoji.emojis())
 
             emojis.forEach {
                 searchResult.append(($0.suggestion, $0.emoji))
