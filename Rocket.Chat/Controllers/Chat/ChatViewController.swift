@@ -308,7 +308,7 @@ final class ChatViewController: SLKTextViewController {
         autoCompletionView.register(UINib(
             nibName: "EmojiAutocompleteCell",
             bundle: Bundle.main
-        ), forCellReuseIdentifier: "EmojiAutocompleteCell")
+        ), forCellReuseIdentifier: EmojiAutocompleteCell.identifier)
     }
 
     internal func scrollToBottom(_ animated: Bool = false) {

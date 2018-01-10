@@ -94,7 +94,7 @@ extension ChatViewController {
             cell.avatarView.labelInitials.textColor = .white
             cell.avatarView.user = user
         } else if let emoji = searchResult[indexPath.row].1 as? Emoji {
-            if let cell = autoCompletionView.dequeueReusableCell(withIdentifier: "EmojiAutocompleteCell") as? EmojiAutocompleteCell {
+            if let cell = autoCompletionView.dequeueReusableCell(withIdentifier: EmojiAutocompleteCell.identifier) as? EmojiAutocompleteCell {
 
                 if case let .custom(imageUrl) = emoji.type {
                     cell.emojiView.emojiImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
