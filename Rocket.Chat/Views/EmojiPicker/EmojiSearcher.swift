@@ -19,10 +19,8 @@ class EmojiSearcher {
 
     func search(shortname: String, custom: [Emoji]) -> [EmojiSearchResult] {
         return (emojis + custom).flatMap { emoji -> EmojiSearchResult? in
-            if let suggestion = emoji.shortname.contains(shortname) ? emoji.shortname : nil {
-                return (emoji: emoji, suggestion: suggestion)
-            } else if let suggestion = emoji.alternates.filter({ $0.contains(shortname) }).first {
-                return (emoji: emoji, suggestion: suggestion)
+            if let suggestion = emoji.shortname.contains(shortname) ? emoji.shortname : emoji.alternates.filter({ $0.contains(shortname) }).first {
+                return (emoji: emoji, suggestion: suggestion.contains(":") ? suggestion : ":\(suggestion):")
             }
 
             return nil
