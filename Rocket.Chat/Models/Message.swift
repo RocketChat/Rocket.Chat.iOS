@@ -58,6 +58,7 @@ class Message: BaseModel {
 
     @objc dynamic var alias = ""
     @objc dynamic var avatar = ""
+    @objc dynamic var emoji: String? = nil
 
     @objc dynamic var role = ""
 

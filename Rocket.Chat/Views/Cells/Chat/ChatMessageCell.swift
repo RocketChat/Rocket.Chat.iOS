@@ -240,8 +240,11 @@ final class ChatMessageCell: UICollectionViewCell {
             labelDate.text = formatter.string(from: createdAt)
         }
 
-        avatarView.imageURL = URL(string: message.avatar)
         avatarView.user = message.user
+        if !message.avatar.isEmpty {
+            avatarView.imageURL = URL(string: message.avatar)
+        }
+        avatarView.emoji = message.emoji
 
         if message.alias.count > 0 {
             labelUsername.text = message.alias
