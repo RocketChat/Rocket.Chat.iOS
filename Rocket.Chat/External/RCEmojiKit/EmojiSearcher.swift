@@ -31,14 +31,5 @@ open class EmojiSearcher {
 }
 
 public extension EmojiSearcher {
-    public static let standard = EmojiSearcher(emojis:
-            Emojione.people +
-            Emojione.nature +
-            Emojione.food +
-            Emojione.activity +
-            Emojione.travel +
-            Emojione.objects +
-            Emojione.symbols +
-            Emojione.flags
-    )
+    public static let standard = EmojiSearcher(emojis: Emojione.all)
 }

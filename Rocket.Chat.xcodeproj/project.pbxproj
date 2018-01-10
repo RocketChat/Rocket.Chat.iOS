@@ -1091,8 +1091,8 @@
 		4199A9871DABCC570035F820 /* RCEmojiKit */ = {
 			isa = PBXGroup;
 			children = (
-				4199A9881DABCC570035F820 /* Emojione.swift */,
 				8069D26D1FFF876D00C75926 /* Emoji.swift */,
+				4199A9881DABCC570035F820 /* Emojione.swift */,
 				80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */,
 				80A97EFD200628A300A2774C /* Views */,
 			);
