@@ -8,21 +8,21 @@
 
 import Foundation
 
-enum EmojiType {
+public enum EmojiType {
     case standard
     case custom(imageUrl: String)
 }
 
-struct Emoji: Codable {
-    let name: String
-    let shortname: String
-    let supportsTones: Bool
-    let alternates: [String]
-    let keywords: [String]
+public struct Emoji: Codable {
+    public let name: String
+    public let shortname: String
+    public let supportsTones: Bool
+    public let alternates: [String]
+    public let keywords: [String]
 
-    let imageUrl: String?
+    public let imageUrl: String?
 
-    var type: EmojiType {
+    public var type: EmojiType {
         if let imageUrl = imageUrl {
             return .custom(imageUrl: imageUrl)
         }
@@ -30,7 +30,7 @@ struct Emoji: Codable {
         return .standard
     }
 
-    init(_ name: String, _ shortname: String, _ supportsTones: Bool, _ alternates: [String], _ keywords: [String], _ imageUrl: String? = nil) {
+    public init(_ name: String, _ shortname: String, _ supportsTones: Bool, _ alternates: [String], _ keywords: [String], _ imageUrl: String? = nil) {
         self.name = name
         self.shortname = shortname
         self.supportsTones = supportsTones
