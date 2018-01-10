@@ -319,7 +319,7 @@ extension AuthViewController {
         switch changes {
         case .update(let res, let deletions, let insertions, let modifications):
             insertions.map { res[$0] }.forEach {
-                guard $0.custom, !($0.serverUrl?.isEmpty ?? true) else { return }
+                guard !($0.serverUrl?.isEmpty ?? true) else { return }
 
                 let button = UIButton()
                 button.layer.cornerRadius = 3
@@ -335,7 +335,7 @@ extension AuthViewController {
             }
 
             modifications.map { res[$0] }.forEach {
-                guard $0.custom,
+                guard
                       let identifier = $0.identifier,
                       let button = self.customAuthButtons[identifier]
                 else {

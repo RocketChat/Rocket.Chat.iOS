@@ -9,6 +9,19 @@
 import Foundation
 import RealmSwift
 
+enum LoginServiceType {
+    case github
+    case custom
+    case invalid
+
+    init(string: String) {
+        switch string {
+        case "github": self = .github
+        default: self = .invalid
+        }
+    }
+}
+
 class LoginService: BaseModel {
     @objc dynamic var service: String?
     @objc dynamic var clientId: String?
@@ -25,6 +38,18 @@ class LoginService: BaseModel {
     @objc dynamic var mergeUsers = false
     @objc dynamic var loginStyle: String?
     @objc dynamic var buttonColor: String?
+
+    var type: LoginServiceType {
+        if custom == true {
+            return .custom
+        }
+
+        if let service = service {
+            return LoginServiceType(string: service)
+        }
+
+        return .invalid
+    }
 }
 
 // MARK: OAuth helper extensions
