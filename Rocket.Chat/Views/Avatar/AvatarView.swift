@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FLAnimatedImage
 
 let avatarColors: [UInt] = [
     0xF44336, 0xE91E63, 0x9C27B0, 0x673AB7, 0x3F51B5,
@@ -18,13 +19,46 @@ final class AvatarView: UIView {
 
     var imageURL: URL? {
         didSet {
-            updateAvatar()
+            if let imageURL = imageURL {
+                imageView?.sd_setImage(with: imageURL, placeholderImage: nil, options: .retryFailed) { [weak self] (_, error, _, _) in
+                    guard error == nil else {
+                        self?.setAvatarWithInitials()
+                        return
+                    }
+
+                    self?.labelInitials.text = ""
+                    self?.backgroundColor = UIColor.clear
+                }
+            } else if emoji == nil {
+                setAvatarWithInitials()
+            }
         }
     }
 
     var user: User? {
         didSet {
-            updateAvatar()
+            if let imageURL = user?.avatarURL() {
+                self.imageURL = imageURL
+            }
+        }
+    }
+
+    var emoji: String? {
+        didSet {
+            if let emoji = emoji {
+                let emojiCharacter = Emojione.transform(string: emoji)
+
+                if emojiCharacter != emoji {
+                    labelInitials.text = emojiCharacter
+                } else if let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl() {
+                    imageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
+                    labelInitials.text = ""
+                }
+
+                backgroundColor = .clear
+            } else if imageURL == nil {
+                setAvatarWithInitials()
+            }
         }
     }
 
@@ -35,32 +69,7 @@ final class AvatarView: UIView {
         }
     }
 
-    @IBOutlet weak var imageView: UIImageView!
-
-    internal func updateAvatar(completion: VoidCompletion? = nil) {
-        setAvatarWithInitials()
-
-        var imageURL: URL?
-        if let avatar = self.imageURL {
-            imageURL = avatar
-        } else {
-            imageURL = user?.avatarURL()
-        }
-
-        if let imageURL = imageURL {
-            imageView?.sd_setImage(with: imageURL, completed: { [weak self] (_, error, _, _) in
-                guard error == nil else {
-                    self?.setAvatarWithInitials()
-                    completion?()
-                    return
-                }
-
-                self?.labelInitials.text = ""
-                self?.backgroundColor = UIColor.clear
-                completion?()
-            })
-        }
-    }
+    @IBOutlet weak var imageView: FLAnimatedImageView!
 
     internal func initialsFor(_ username: String) -> String {
         guard username.count > 0 else {

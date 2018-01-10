@@ -31,7 +31,8 @@ class SendMessageRequest: APIRequest {
             "message": [
                 "_id": id,
                 "rid": roomId,
-                "msg": text
+                "msg": text,
+                "emoji": ":party_parrot:"
             ]
         ])
 
