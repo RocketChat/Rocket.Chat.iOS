@@ -8,16 +8,16 @@
 
 import Foundation
 
-typealias EmojiSearchResult = (emoji: Emoji, suggestion: String)
+public typealias EmojiSearchResult = (emoji: Emoji, suggestion: String)
 
-class EmojiSearcher {
-    let emojis: [Emoji]
+open class EmojiSearcher {
+    public let emojis: [Emoji]
 
-    init(emojis: [Emoji]) {
+    public init(emojis: [Emoji]) {
         self.emojis = emojis
     }
 
-    func search(shortname: String, custom: [Emoji]) -> [EmojiSearchResult] {
+    public func search(shortname: String, custom: [Emoji] = []) -> [EmojiSearchResult] {
         return (emojis + custom).flatMap { emoji -> EmojiSearchResult? in
             if let suggestion = emoji.shortname.contains(shortname) ? emoji.shortname : emoji.alternates.filter({ $0.contains(shortname) }).first {
                 return (emoji: emoji, suggestion: suggestion.contains(":") ? suggestion : ":\(suggestion):")
@@ -30,8 +30,8 @@ class EmojiSearcher {
     }
 }
 
-extension EmojiSearcher {
-    static let standard = EmojiSearcher(emojis:
+public extension EmojiSearcher {
+    public static let standard = EmojiSearcher(emojis:
             Emojione.people +
             Emojione.nature +
             Emojione.food +
