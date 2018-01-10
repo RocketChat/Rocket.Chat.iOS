@@ -17,8 +17,8 @@ class EmojiSearcher {
         self.emojis = emojis
     }
 
-    func search(shortname: String, maxResults: Int? = nil) -> [EmojiSearchResult] {
-        let results = emojis.flatMap { emoji -> EmojiSearchResult? in
+    func search(shortname: String, custom: [Emoji]) -> [EmojiSearchResult] {
+        return (emojis + custom).flatMap { emoji -> EmojiSearchResult? in
             if let suggestion = emoji.shortname.contains(shortname) ? emoji.shortname : nil {
                 return (emoji: emoji, suggestion: suggestion)
             } else if let suggestion = emoji.alternates.filter({ $0.contains(shortname) }).first {
@@ -26,15 +26,9 @@ class EmojiSearcher {
             }
 
             return nil
+        }.sorted {
+            ($0.suggestion.count - shortname.count) < ($1.suggestion.count - shortname.count)
         }
-
-        guard let maxResults = maxResults else { return results }
-
-        let overflow = results.count - maxResults
-
-        guard overflow > 0 else { return results }
-
-        return Array(results.dropLast(overflow))
     }
 }
 
