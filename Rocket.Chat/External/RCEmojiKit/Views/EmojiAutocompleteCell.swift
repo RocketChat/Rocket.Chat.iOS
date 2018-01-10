@@ -9,6 +9,8 @@
 import UIKit
 
 class EmojiAutocompleteCell: UITableViewCell {
+    static let identifier = "EmojiAutocompleteCell"
+
     @IBOutlet weak var emojiView: EmojiView!
     @IBOutlet weak var shortnameLabel: UILabel!
 
