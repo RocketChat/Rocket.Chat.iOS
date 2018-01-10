@@ -13,7 +13,7 @@ import RealmSwift
 extension LoginService: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
         service = values["service"].stringValue
-        clientId = values["clientId"].stringValue
+        clientId = values["clientId"].string
         custom = values["custom"].boolValue
         serverUrl = values["serverURL"].stringValue
         tokenPath = values["tokenPath"].stringValue
@@ -40,7 +40,7 @@ extension LoginService: ModelMappeable {
         tokenPath = "/login/oauth/access_token"
         identityPath = "https://api.github.com/user"
         authorizePath = "/login/oauth/authorize"
-        buttonLabelText = "GitHub"
+        buttonLabelText = "github"
         buttonLabelColor = "#ffffff"
         buttonColor = "#4c4c4c"
     }
