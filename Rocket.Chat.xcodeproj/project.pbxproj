@@ -829,6 +829,8 @@
 		4161332F1D46CA2800E09DA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */,
+				80A2F39320057B48005D2DCA /* EmojiAutocompleteCell.xib */,
 				8020CCF31FEAD8AA003424F4 /* EmojiPicker */,
 				809B530C1FE2EF7C00833DD2 /* Reactions */,
 				41C275DD1D847FEE003C88CF /* Avatar */,
@@ -1093,6 +1095,7 @@
 			children = (
 				4199A9881DABCC570035F820 /* Emojione.swift */,
 				8069D26D1FFF876D00C75926 /* Emoji.swift */,
+				80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */,
 			);
 			name = Emojione;
 			path = External/Emojione;
@@ -1488,9 +1491,6 @@
 				8020CCF41FEAD8C9003424F4 /* EmojiPickerController.swift */,
 				806465F11FED81C9001F27DB /* EmojiPicker.xcassets */,
 				80C7DD601FF46B8000E6647C /* EmojiPicker.strings */,
-				80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */,
-				80A2F39120057AD0005D2DCA /* EmojiAutocompleteCell.swift */,
-				80A2F39320057B48005D2DCA /* EmojiAutocompleteCell.xib */,
 			);
 			path = EmojiPicker;
 			sourceTree = "<group>";
