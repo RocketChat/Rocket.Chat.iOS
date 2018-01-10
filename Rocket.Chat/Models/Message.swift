@@ -57,8 +57,8 @@ class Message: BaseModel {
     @objc dynamic var pinned: Bool = false
 
     @objc dynamic var alias = ""
-    @objc dynamic var avatar = ""
-    @objc dynamic var emoji: String? = nil
+    @objc dynamic var avatar: String?
+    @objc dynamic var emoji: String?
 
     @objc dynamic var role = ""
 

@@ -129,6 +129,8 @@ final class ChatMessageCell: UICollectionViewCell {
         sequential = false
         message = nil
 
+        avatarView.prepareForReuse()
+
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
         }
@@ -241,8 +243,8 @@ final class ChatMessageCell: UICollectionViewCell {
         }
 
         avatarView.user = message.user
-        if !message.avatar.isEmpty {
-            avatarView.imageURL = URL(string: message.avatar)
+        if let avatar = message.avatar {
+            avatarView.avatarURL = URL(string: avatar)
         }
         avatarView.emoji = message.emoji
 
