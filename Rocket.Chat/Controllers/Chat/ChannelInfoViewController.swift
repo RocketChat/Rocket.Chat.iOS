@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FLEX
 
 fileprivate typealias ListSegueData = (title: String, query: String?)
 
@@ -22,6 +23,14 @@ class ChannelInfoViewController: BaseViewController {
         didSet {
             guard let subscription = self.subscription else { return }
 
+            #if DEBUG
+                let flex = [ChannelInfoDetailCellData(title: localized("Open FLEX"), detail: "", action: {
+                    FLEXManager.shared().showExplorer()
+                })]
+            #else
+                let flex = []
+            #endif
+
             let channelInfoData = [
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
@@ -31,7 +40,7 @@ class ChannelInfoViewController: BaseViewController {
             if subscription.type == .directMessage {
                 tableViewData = [[
                     ChannelInfoUserCellData(user: subscription.directMessageUser)
-                ], channelInfoData]
+                ], channelInfoData, flex]
             } else {
                 let topic = subscription.roomTopic?.count ?? 0 == 0 ? localized("chat.info.item.no_topic") : subscription.roomTopic
                 let description = subscription.roomDescription?.count ?? 0 == 0 ? localized("chat.info.item.no_description") : subscription.roomDescription
@@ -46,7 +55,7 @@ class ChannelInfoViewController: BaseViewController {
                         title: localized("chat.info.item.description"),
                         description: description
                     )
-                ], channelInfoData]
+                ], channelInfoData, flex]
             }
         }
     }
