@@ -354,13 +354,13 @@ extension SubscriptionManager {
     }
 
     static func sendTextMessage(_ message: Message, videoConferenceCall: Bool = false, completion: @escaping MessageCompletion) {
-        
+
         var params = [[
             "_id": message.identifier ?? "",
             "rid": message.subscription.rid,
             "msg": message.text
             ]] as [[String: Any]]
-        
+
         if videoConferenceCall {
             params[0]["t"] = "jitsi_call_started"
             params[0]["groupable"] = false
@@ -371,7 +371,7 @@ extension SubscriptionManager {
                 "params": ""
                 ]] as [[String: Any]]
         }
-        
+
         let request = [
             "msg": "method",
             "method": "sendMessage",

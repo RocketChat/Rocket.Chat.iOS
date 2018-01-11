@@ -23,8 +23,11 @@ final class AuthSettings: BaseModel {
     // Server information
     @objc dynamic var serverName: String?
     @objc dynamic var serverId: String?
-    @objc dynamic var videoChatPrefix: String?
     @objc dynamic var serverFaviconURL: String?
+
+    // Video Conference
+    @objc dynamic var videoChatServerUrl: String?
+    @objc dynamic var videoChatPrefix: String?
 
     // Layout: User Interface
     @objc dynamic var useUserRealName = false

@@ -9,12 +9,17 @@
 import RealmSwift
 import SwiftyJSON
 
+enum APIInternalType: String {
+    case jitsiCallStarted = "jitsi_call_started"
+    case empty = ""
+}
+
 struct MessagesClient: APIClient {
     let api: AnyAPIFetcher
 
     func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.shared, isVideoConferenceCall: Bool = false) {
         let message = Message()
-        message.internalType = isVideoConferenceCall ? "jitsi_call_started" : ""
+        message.internalType = isVideoConferenceCall ? APIInternalType.jitsiCallStarted.rawValue : APIInternalType.empty.rawValue
         message.updatedAt = nil
         message.createdAt = Date.serverDate
         message.text = text

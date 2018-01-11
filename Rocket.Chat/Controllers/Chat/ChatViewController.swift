@@ -371,17 +371,22 @@ final class ChatViewController: SLKTextViewController {
             else {
                 return
         }
+
         DraftMessageManager.update(draftMessage: "", for: subscription)
         SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         textView.text = ""
+
         self.scrollToBottom()
         let replyString = videochatUrl == nil ? self.replyString : ""
         stopReplying()
+
         let text = "\(messageText)\(replyString)"
+
         if let (command, params) = text.commandAndParams() {
             sendCommand(command: command, params: params)
             return
         }
+
         guard
             text.count > 0
         else {

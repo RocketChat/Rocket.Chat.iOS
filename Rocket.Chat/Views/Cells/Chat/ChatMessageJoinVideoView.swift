@@ -27,7 +27,7 @@ final class ChatMessageJoinVideoView: UIView {
             joinChatButton.tintColor = .green
         }
     }
-    
+
     @IBAction func joinChatPressed(_ sender: Any) {
         delegate?.openVideoChat()
     }
