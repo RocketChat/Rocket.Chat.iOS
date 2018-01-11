@@ -37,6 +37,12 @@ enum MessageType: String {
 
         return sequential.contains(self)
     }
+
+    var actionable: Bool {
+        let actionable: [MessageType] = [.text, .textAttachment, .image, .audio, .video, .url]
+
+        return actionable.contains(self)
+    }
 }
 
 class Message: BaseModel {

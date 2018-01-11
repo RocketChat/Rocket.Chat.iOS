@@ -11,6 +11,8 @@ import RealmSwift
 
 extension ChatViewController {
     func presentActionsFor(_ message: Message, view: UIView) {
+        guard message.type.actionable else { return }
+
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.react"), style: .default, handler: { _ in
@@ -77,11 +79,11 @@ extension ChatViewController {
             self?.reply(to: message)
         }))
 
-        alert.addAction(UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { [weak self] _ in
-            if API.current()?.client(MessagesClient.self).deleteMessage(message, asUser: true) == true {
-
-            }
-        }) )
+        if let user = AuthManager.currentUser(), AuthManager.isAuthenticated()?.settings?.user(user, canDeleteMessage: message) == .allowed {
+            alert.addAction(UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { [weak self] _ in
+                API.current()?.client(MessagesClient.self).deleteMessage(message, asUser: true)
+            }))
+        }
 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
