@@ -81,7 +81,7 @@ final class AuthSettings: BaseModel {
 
         func timeElapsed() -> Bool {
             if messageAllowDeletingBlockDeleteInMinutes < 1 { return false }
-            return Date().timeIntervalSince(createdAt)/60 > Double(messageAllowDeletingBlockDeleteInMinutes)
+            return Date.serverDate.timeIntervalSince(createdAt)/60 > Double(messageAllowDeletingBlockDeleteInMinutes)
         }
 
         if user.hasPermission(.deleteMessage) {
