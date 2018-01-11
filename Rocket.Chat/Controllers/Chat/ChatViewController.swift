@@ -151,7 +151,7 @@ final class ChatViewController: SLKTextViewController {
 
         let videoButton = UIBarButtonItem(image: #imageLiteral(resourceName: "facetime"), style: .plain, target: self, action: #selector(startVideoCall))
         navigationItem.rightBarButtonItem = videoButton
-        
+
         collectionView?.isPrefetchingEnabled = true
 
         isInverted = false
@@ -189,10 +189,10 @@ final class ChatViewController: SLKTextViewController {
 
         setupReplyView()
     }
-    
+
     @objc func startVideoCall() {
         if let url = getVideoconferenceURL() {
-            sendTextMessage(videochatUrl: url)
+            sendTextMessage(messageText: url, videochatUrl: true)
         }
     }
 
@@ -329,7 +329,8 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
-        sendTextMessage()
+        guard let messageText = textView.text else { return }
+        sendTextMessage(messageText: messageText)
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -364,20 +365,16 @@ final class ChatViewController: SLKTextViewController {
         client?.runCommand(command: command, params: params, roomId: subscription.rid, errored: alertAPIError)
     }
 
-    fileprivate func sendTextMessage(videochatUrl: String? = nil) {
-        guard
-            let subscription = subscription,
-            let messageText = videochatUrl ?? textView.text
-            else {
-                return
-        }
+    fileprivate func sendTextMessage(messageText: String, videochatUrl: Bool = false) {
+
+        guard let subscription = subscription else { return }
 
         DraftMessageManager.update(draftMessage: "", for: subscription)
         SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         textView.text = ""
 
         self.scrollToBottom()
-        let replyString = videochatUrl == nil ? self.replyString : ""
+        let replyString = videochatUrl ? self.replyString : ""
         stopReplying()
 
         let text = "\(messageText)\(replyString)"
@@ -388,15 +385,16 @@ final class ChatViewController: SLKTextViewController {
         }
 
         guard
-            text.count > 0
+            text.count > 0,
+            let client = API.current()?.client(MessagesClient.self)
         else {
             return
         }
 
-        guard let client = API.current()?.client(MessagesClient.self) else { return }
-        if let videochatUrl = videochatUrl {
+        // TODO: this will be simplified after solving the commented line issue
+        if videochatUrl {
             //client.sendMessage(text: "", subscription: subscription, isVideoConferenceCall: true)
-            client.sendMessage(text: videochatUrl, subscription: subscription, isVideoConferenceCall: false)
+            client.sendMessage(text: text, subscription: subscription, isVideoConferenceCall: false)
         } else {
             client.sendMessage(text: text, subscription: subscription)
         }
