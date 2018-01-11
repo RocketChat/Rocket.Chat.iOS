@@ -55,4 +55,24 @@ struct MessagesClient: APIClient {
             }
         })
     }
+
+    @discardableResult
+    func deleteMessage(_ message: Message, asUser: Bool) -> Bool {
+        guard
+            let id = message.identifier,
+            !message.rid.isEmpty
+        else {
+            return false
+        }
+
+        api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser), succeeded: { result in
+            if result.success == true {
+                message.internalType = MessageType.messageRemoved.rawValue
+            }
+        }, errored: { error in
+
+        })
+
+        return true
+    }
 }
