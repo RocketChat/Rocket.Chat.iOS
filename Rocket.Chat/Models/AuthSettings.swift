@@ -73,9 +73,13 @@ final class AuthSettings: BaseModel {
     }
 
     func user(_ user: User, canDeleteMessage message: Message) -> MessageDeletePermission {
+        if !message.type.actionable { return .notActionable }
+
+        if user.hasPermission(.forceDeleteMessage) { return .allowed }
+
         if message.user != user { return .differentUser }
         if !messageAllowDeleting { return .serverBlocked }
-        if !message.type.actionable { return .notActionable }
+
         if messageAllowDeletingBlockDeleteInMinutes < 1 { return .allowed }
 
         if let timeInterval = message.createdAt?.timeIntervalSince(Date()) {
