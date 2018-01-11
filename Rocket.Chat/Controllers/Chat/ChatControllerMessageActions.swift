@@ -77,6 +77,12 @@ extension ChatViewController {
             self?.reply(to: message)
         }))
 
+        alert.addAction(UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { [weak self] _ in
+            if API.current()?.client(MessagesClient.self).deleteMessage(message, asUser: true) == true {
+
+            }
+        }) )
+
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
