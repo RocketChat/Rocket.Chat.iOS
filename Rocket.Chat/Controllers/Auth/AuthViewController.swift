@@ -323,7 +323,7 @@ extension AuthViewController {
 
                 let button = UIButton()
 
-                if $0.service == "github" {
+                if $0.type == .github {
                     button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
                 } else {
                     button.setTitle($0.buttonLabelText ?? "", for: .normal)
