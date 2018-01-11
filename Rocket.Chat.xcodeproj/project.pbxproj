@@ -261,6 +261,7 @@
 		806465EE1FED1AFE001F27DB /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806465ED1FED1AFE001F27DB /* EmojiView.swift */; };
 		806465F01FED21DF001F27DB /* EmojiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 806465EF1FED21DF001F27DB /* EmojiCollectionViewCell.xib */; };
 		806465F21FED81C9001F27DB /* EmojiPicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 806465F11FED81C9001F27DB /* EmojiPicker.xcassets */; };
+		806728FD200789F4009FE94D /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806728FC200789F4009FE94D /* SettingsNavigationController.swift */; };
 		8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D26D1FFF876D00C75926 /* Emoji.swift */; };
 		806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */; };
 		806C59A51FBB2F4C00C32D0A /* PostMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */; };
@@ -626,6 +627,7 @@
 		806465ED1FED1AFE001F27DB /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		806465EF1FED21DF001F27DB /* EmojiCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiCollectionViewCell.xib; sourceTree = "<group>"; };
 		806465F11FED81C9001F27DB /* EmojiPicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = EmojiPicker.xcassets; sourceTree = "<group>"; };
+		806728FC200789F4009FE94D /* SettingsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
 		8069D26D1FFF876D00C75926 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMessageRequest.swift; sourceTree = "<group>"; };
 		806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMessageRequestSpec.swift; sourceTree = "<group>"; };
@@ -755,6 +757,7 @@
 			children = (
 				4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */,
 				925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */,
+				806728FC200789F4009FE94D /* SettingsNavigationController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -2291,6 +2294,7 @@
 				4112DC5A1FFFB9B2005995E1 /* ModelMappeable.swift in Sources */,
 				809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */,
 				D10E9C1A1F643457007F1796 /* Channel.swift in Sources */,
+				806728FD200789F4009FE94D /* SettingsNavigationController.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
 				413996171F3B44500075F96E /* UploadHelper.swift in Sources */,
 				7798B4151F852B720074B2F4 /* SelectField.swift in Sources */,
