@@ -81,7 +81,7 @@ extension ChatViewController {
 
         if let user = AuthManager.currentUser(), AuthManager.isAuthenticated()?.settings?.user(user, canDeleteMessage: message) == .allowed {
             alert.addAction(UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { [weak self] _ in
-                API.current()?.client(MessagesClient.self).deleteMessage(message, asUser: true)
+                API.current()?.client(MessagesClient.self).deleteMessage(message, asUser: false)
             }))
         }
 
