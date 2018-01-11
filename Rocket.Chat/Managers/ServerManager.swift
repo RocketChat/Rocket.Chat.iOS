@@ -56,7 +56,7 @@ class ServerManager {
             var servers = DatabaseManager.servers,
             servers.count > selectedIndex
         else {
-                return
+            return
         }
 
         servers[selectedIndex][ServerPersistKeys.serverName] = serverName
