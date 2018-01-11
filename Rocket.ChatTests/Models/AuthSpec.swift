@@ -25,7 +25,7 @@ extension Auth {
     }
 }
 
-class AuthSpec: XCTestCase {
+class AuthSpec: XCTestCase, RealmTestCase {
 
     // MARK: Setup
 
@@ -74,6 +74,30 @@ class AuthSpec: XCTestCase {
         object.serverURL = ""
 
         XCTAssertNil(object.apiHost, "apiHost will be nil when serverURL is an invalid URL")
+    }
+
+    func testCanDeleteMessage() {
+        let realm = testRealm()
+
+        let auth = Auth.testInstance()
+        auth.userId = "uid"
+
+        let user = User.testInstance()
+        user.identifier = "uid"
+
+        let message = Message.testInstance()
+        message.identifier = "mid"
+        message.user = user
+
+        try? realm.write {
+            realm.add(auth)
+            realm.add(user)
+
+            auth.settings?.messageAllowDeleting = true
+            auth.settings?.messageAllowDeletingBlockDeleteInMinutes = 0
+        }
+
+        XCTAssert(auth.canDeleteMessage(message) == .allowed)
     }
 
 }
