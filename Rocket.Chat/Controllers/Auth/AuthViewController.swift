@@ -68,8 +68,6 @@ final class AuthViewController: BaseViewController {
         }
 
         self.updateAuthenticationMethods()
-
-        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -94,6 +92,14 @@ final class AuthViewController: BaseViewController {
         if !connecting {
             textFieldUsername.becomeFirstResponder()
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -178,6 +184,7 @@ final class AuthViewController: BaseViewController {
         textFieldUsername.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
         buttonAuthenticateGoogle.isEnabled = false
+        navigationItem.hidesBackButton = true
     }
 
     func stopLoading() {
@@ -186,6 +193,7 @@ final class AuthViewController: BaseViewController {
             self.textFieldPassword.alpha = 1
             self.activityIndicator.stopAnimating()
             self.buttonAuthenticateGoogle.isEnabled = true
+            self.navigationItem.hidesBackButton = false
         })
 
         connecting = false
