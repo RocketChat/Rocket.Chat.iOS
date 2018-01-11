@@ -322,6 +322,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
+        sendTextMessage()
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -363,21 +364,21 @@ final class ChatViewController: SLKTextViewController {
             else {
                 return
         }
-        
+
         DraftMessageManager.update(draftMessage: "", for: subscription)
         SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         textView.text = ""
         self.scrollToBottom()
-        
+
         let replyString = self.replyString
         stopReplying()
         let text = "\(messageText)\(replyString)"
-        
+
         if let (command, params) = text.commandAndParams() {
             sendCommand(command: command, params: params)
             return
         }
-        
+
         if editedMessage != nil {
             editTextMessage(text: text)
         } else {
@@ -389,12 +390,12 @@ final class ChatViewController: SLKTextViewController {
             client.sendMessage(text: text, subscription: subscription)
         }
     }
-    
+
     override func didCommitTextEditing(_ sender: Any) {
         sendTextMessage()
         super.didCommitTextEditing(sender)
     }
-    
+
     fileprivate func editTextMessage(text: String) {
         guard
             let editedMessage = editedMessage,
@@ -402,13 +403,13 @@ final class ChatViewController: SLKTextViewController {
             else {
                 return
         }
-        
+
         Realm.executeOnMainThread({ (realm) in
             editedMessage.text = text
             editedMessage.updatedAt = Date.serverDate
             realm.add(editedMessage, update: true)
         })
-        
+
         MessageTextCacheManager.shared.update(for: editedMessage)
         SubscriptionManager.sendEditTextMessage(editedMessage, isEdit: true) { (_) in
             Realm.executeOnMainThread({ (_) in
