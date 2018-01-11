@@ -22,7 +22,6 @@ class DeleteMessageRequest: APIRequest {
     let msgId: String
     let asUser: Bool
 
-
     init(roomId: String, msgId: String, asUser: Bool) {
         self.msgId = msgId
         self.roomId = roomId

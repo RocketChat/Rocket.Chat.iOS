@@ -66,12 +66,9 @@ struct MessagesClient: APIClient {
         }
 
         api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser), succeeded: { result in
-            if result.success == true {
-                message.internalType = MessageType.messageRemoved.rawValue
-            }
-        }, errored: { error in
-
-        })
+            guard result.success == true else { return }
+            message.internalType = MessageType.messageRemoved.rawValue
+        }, errored: nil)
 
         return true
     }
