@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import SafariServices
+import FLEX
 
 final class SettingsViewController: UITableViewController {
 
@@ -100,7 +101,21 @@ final class SettingsViewController: UITableViewController {
             cellTermsOfServiceDidPressed()
         }
 
+        #if DEBUG || BETA
+            if indexPath.section == 1, indexPath.row == 0 {
+                FLEXManager.shared().showExplorer()
+            }
+        #endif
+
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        #if DEBUG || BETA
+            return 2
+        #else
+            return 1
+        #endif
     }
 }
 
