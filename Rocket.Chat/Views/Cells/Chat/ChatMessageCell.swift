@@ -43,6 +43,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
+            avatarViewContainer.layer.cornerRadius = 4
             if let avatarView = AvatarView.instantiateFromNib() {
                 avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
