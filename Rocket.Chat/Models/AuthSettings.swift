@@ -63,6 +63,32 @@ final class AuthSettings: BaseModel {
     @objc dynamic var messageShowDeletedStatus: Bool = false
     @objc dynamic var messageAllowDeletingBlockDeleteInMinutes: Int = 0
 
+    enum MessageDeletePermission {
+        case allowed
+        case timeElapsed
+        case differentUser
+        case serverBlocked
+        case notActionable
+        case invalidMessage
+    }
+
+    func user(_ user: User, canDeleteMessage message: Message) -> MessageDeletePermission {
+        if message.user != user { return .differentUser }
+        if !messageAllowDeleting { return .serverBlocked }
+        if !message.type.actionable { return .notActionable }
+        if messageAllowDeletingBlockDeleteInMinutes < 1 { return .allowed }
+
+        if let timeInterval = message.createdAt?.timeIntervalSince(Date()) {
+            if timeInterval/60 <= Double(messageAllowDeletingBlockDeleteInMinutes) {
+                return .allowed
+            }
+
+            return .timeElapsed
+        }
+
+        return .invalidMessage
+    }
+
     var hiddenTypes: Set<MessageType> {
         var hiddenTypes = Set<MessageType>()
 
