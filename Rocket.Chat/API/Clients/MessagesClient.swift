@@ -57,7 +57,7 @@ struct MessagesClient: APIClient {
     }
 
     @discardableResult
-    func deleteMessage(_ message: Message, asUser: Bool) -> Bool {
+    func deleteMessage(_ message: Message, asUser: Bool, realm: Realm? = Realm.shared) -> Bool {
         guard
             let id = message.identifier,
             !message.rid.isEmpty
@@ -67,7 +67,11 @@ struct MessagesClient: APIClient {
 
         api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser), succeeded: { result in
             guard result.success == true else { return }
-            message.internalType = MessageType.messageRemoved.rawValue
+            DispatchQueue.main.async {
+                try? realm?.write {
+                    message.internalType = MessageType.messageRemoved.rawValue
+                }
+            }
         }, errored: nil)
 
         return true
