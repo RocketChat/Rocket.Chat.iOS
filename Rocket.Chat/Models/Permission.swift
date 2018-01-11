@@ -19,6 +19,7 @@ enum PermissionType: String {
     case viewUserAdministration = "view-user-administration"
     case viewPrivilegedSetting = "view-privileged-setting"
 
+    case deleteMessage = "delete-message"
     case forceDeleteMessage = "force-delete-message"
 }
 
