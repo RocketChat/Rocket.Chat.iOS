@@ -52,7 +52,9 @@ class OAuthManager {
         viewController.navigationController?.pushViewController(handler, animated: true)
 
         oauthSwift.authorizeURLHandler = handler
-        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { _ in failure() }) != nil
+        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { error in
+            failure()
+        }) != nil
     }
 
     static func credentialsForUrlFragment(_ fragment: String) -> OAuthCredentials? {

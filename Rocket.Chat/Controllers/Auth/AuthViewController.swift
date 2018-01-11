@@ -310,7 +310,7 @@ extension AuthViewController {
         }, failure: { [weak self] in
 
             self?.alert(title: localized("alert.login_service_error.title"),
-                        message: localized("alert.login_service_error.title"))
+                        message: localized("alert.login_service_error.message"))
 
         })
     }
@@ -319,12 +319,18 @@ extension AuthViewController {
         switch changes {
         case .update(let res, let deletions, let insertions, let modifications):
             insertions.map { res[$0] }.forEach {
-                guard $0.custom, !($0.serverUrl?.isEmpty ?? true) else { return }
+                guard !($0.serverUrl?.isEmpty ?? true) else { return }
 
                 let button = UIButton()
+
+                if $0.type == .github {
+                    button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
+                } else {
+                    button.setTitle($0.buttonLabelText ?? "", for: .normal)
+                }
+
                 button.layer.cornerRadius = 3
-                button.setTitle($0.buttonLabelText ?? "", for: .normal)
-                button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 17.0)
+                button.titleLabel?.font = .boldSystemFont(ofSize: 17.0)
                 button.setTitleColor(UIColor(hex: $0.buttonLabelColor), for: .normal)
                 button.backgroundColor = UIColor(hex: $0.buttonColor)
                 button.addTarget(self, action: #selector(loginServiceButtonDidPress(_:)), for: .touchUpInside)
@@ -335,7 +341,7 @@ extension AuthViewController {
             }
 
             modifications.map { res[$0] }.forEach {
-                guard $0.custom,
+                guard
                       let identifier = $0.identifier,
                       let button = self.customAuthButtons[identifier]
                 else {
