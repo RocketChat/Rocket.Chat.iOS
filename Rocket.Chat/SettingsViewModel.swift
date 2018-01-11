@@ -66,6 +66,14 @@ final class SettingsViewModel {
         return URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
     }
 
+    internal var numberOfSections: Int {
+        if canViewAdminPanel {
+            return 2
+        }
+
+        return 1
+    }
+
     // MARK: Helpers
 
     internal func appInfo(_ info: BundleInfoKey) -> String {
