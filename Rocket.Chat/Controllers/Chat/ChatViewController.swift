@@ -57,6 +57,7 @@ final class ChatViewController: SLKTextViewController {
     var dataController = ChatDataController()
 
     var searchResult: [(String, Any)] = []
+    var searchWord: String = ""
 
     var closeSidebarAfterSubscriptionUpdate = false
 
@@ -251,7 +252,7 @@ final class ChatViewController: SLKTextViewController {
         textView.registerMarkdownFormattingSymbol("```", withTitle: "Preformatted")
         textView.registerMarkdownFormattingSymbol(">", withTitle: "Quote")
 
-        registerPrefixes(forAutoCompletion: ["@", "#", "/"])
+        registerPrefixes(forAutoCompletion: ["@", "#", "/", ":"])
     }
 
     fileprivate func setupTitleView() {
@@ -303,6 +304,11 @@ final class ChatViewController: SLKTextViewController {
             nibName: "AutocompleteCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: AutocompleteCell.identifier)
+
+        autoCompletionView.register(UINib(
+            nibName: "EmojiAutocompleteCell",
+            bundle: Bundle.main
+        ), forCellReuseIdentifier: EmojiAutocompleteCell.identifier)
     }
 
     internal func scrollToBottom(_ animated: Bool = false) {

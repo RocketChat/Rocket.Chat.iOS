@@ -95,10 +95,12 @@ final class SettingsViewController: UITableViewController {
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            cellContactDidPressed()
-        } else if indexPath.row == 1 {
-            cellTermsOfServiceDidPressed()
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                cellContactDidPressed()
+            } else if indexPath.row == 1 {
+                cellTermsOfServiceDidPressed()
+            }
         }
 
         #if DEBUG || BETA
