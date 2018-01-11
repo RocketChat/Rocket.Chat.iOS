@@ -82,8 +82,8 @@ final class AuthSettings: BaseModel {
 
         if messageAllowDeletingBlockDeleteInMinutes < 1 { return .allowed }
 
-        if let timeInterval = message.createdAt?.timeIntervalSince(Date()) {
-            if timeInterval/60 <= Double(messageAllowDeletingBlockDeleteInMinutes) {
+        if let createdAt = message.createdAt {
+            if Date().timeIntervalSince(createdAt)/60 <= Double(messageAllowDeletingBlockDeleteInMinutes) {
                 return .allowed
             }
 
