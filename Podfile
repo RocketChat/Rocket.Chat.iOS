@@ -38,6 +38,9 @@ def shared_pods
   pod 'OAuthSwift'
   pod '1PasswordExtension'
   pod 'GoogleSignIn'
+
+  # Debugging
+  pod 'FLEX', '~> 2.0', :configurations => ['Debug']
 end
 
 target 'Rocket.Chat' do
