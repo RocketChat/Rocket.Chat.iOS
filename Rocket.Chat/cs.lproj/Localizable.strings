@@ -118,6 +118,7 @@
 "chat.message.actions.unpin" = "Odepnout zprávu";
 "chat.message.actions.quote" = "Citace zprávy";
 "chat.message.actions.reply" = "Odpovědět na zprávu";
+"Send" = "Odeslat"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Zpráva byla nahlášena";
