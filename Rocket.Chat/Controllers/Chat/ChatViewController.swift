@@ -411,7 +411,7 @@ final class ChatViewController: SLKTextViewController {
         })
 
         MessageTextCacheManager.shared.update(for: editedMessage)
-        SubscriptionManager.sendEditTextMessage(editedMessage, isEdit: true) { (_) in
+        SubscriptionManager.editTextMessage(editedMessage) { (_) in
             Realm.executeOnMainThread({ (_) in
                 MessageTextCacheManager.shared.update(for: editedMessage)
                 self.editedMessage = nil

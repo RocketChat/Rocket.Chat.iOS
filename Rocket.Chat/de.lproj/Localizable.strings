@@ -106,9 +106,9 @@
 "chat.channel_preview_view.join" = "Kanal beitreten";
 "chat.dm.start_conversation" = "Dies ist der Anfang deines Gesprächs mit %@";
 "chat.channel.start_conversation" = "Dies ist der Beginn der Konversation auf %@";
-"chat.edit_mode" = "Nachricht bearbeiten. Schließen um abzubrechen.";
 "chat.read_only" = "Dieser Raum ist schreibgeschützt";
 "chat.muted" = "Du wurdest stummgeschaltet";
+"chat.edit_mode" = "Nachricht bearbeiten. Schließen um abzubrechen.";
 "chat.loading_messages" = "Nachrichten werden geladen...";
 
 // Chat Message Actions

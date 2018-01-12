@@ -15,7 +15,7 @@ extension ChatViewController {
         replyView.backgroundColor = textInputbar.addonContentView.backgroundColor
         replyView.frame = textInputbar.addonContentView.bounds
         replyView.onClose = stopReplying
-        replyView.alpha = 0
+
         textInputbar.addonContentView.addSubview(replyView)
     }
 
@@ -34,7 +34,7 @@ extension ChatViewController {
                 self.replyView.alpha = 1
             }
         })
-        
+
         textView.becomeFirstResponder()
 
         replyString = (onlyQuote ? message.quoteString : message.replyString) ?? ""
@@ -43,7 +43,7 @@ extension ChatViewController {
     }
 
     func clearReplying() {
-        self.replyView.alpha = 0
+        replyView.alpha = 0
         replyString = ""
     }
 
