@@ -19,7 +19,8 @@ extension Message: ModelMappeable {
 
         self.rid = values["rid"].stringValue
         self.text = values["msg"].stringValue
-        self.avatar = values["avatar"].stringValue
+        self.avatar = values["avatar"].string
+        self.emoji = values["emoji"].string
         self.alias = values["alias"].stringValue
         self.internalType = values["t"].string ?? "t"
         self.role = values["role"].stringValue

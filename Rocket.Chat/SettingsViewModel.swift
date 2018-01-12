@@ -66,12 +66,23 @@ final class SettingsViewModel {
         return URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
     }
 
-    internal var numberOfSections: Int {
-        if canViewAdminPanel {
-            return 2
-        }
+    #if DEBUG || BETA
+    internal var canOpenFLEX = true
+    #else
+    internal var canOpenFLEX = false
+    #endif
 
-        return 1
+    internal var numberOfSections: Int {
+        return 3
+    }
+
+    internal func numberOfRowsInSection(_ section: Int) -> Int {
+        switch section {
+        case 0: return 3
+        case 1: return (canViewAdminPanel ? 1 : 0)
+        case 2: return (canOpenFLEX ? 1 : 0)
+        default: return 0
+        }
     }
 
     // MARK: Helpers
