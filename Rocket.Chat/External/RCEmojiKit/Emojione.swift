@@ -10,6 +10,18 @@ import Foundation
 // swiftlint:disable type_body_length
 // swiftlint:disable file_length
 struct Emojione {
+    static var all: [Emoji] {
+        return
+            Emojione.people +
+            Emojione.nature +
+            Emojione.food +
+            Emojione.activity +
+            Emojione.travel +
+            Emojione.objects +
+            Emojione.symbols +
+            Emojione.flags
+    }
+
     static let values = [
         "interrobang": "\u{00002049}\u{0000fe0f}",
         "tm": "\u{00002122}\u{0000fe0f}",

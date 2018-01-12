@@ -45,11 +45,11 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(realm.objects(Message.self).first?.temporary, true)
 
         let expectation = XCTestExpectation(description: "message updated in realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             if realm.objects(Message.self).first?.temporary == false {
                 expectation.fulfill()
             }
         })
-        wait(for: [expectation], timeout: 1.1)
+        wait(for: [expectation], timeout: 0.6)
     }
 }
