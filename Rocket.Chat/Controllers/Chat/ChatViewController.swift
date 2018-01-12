@@ -426,12 +426,26 @@ final class ChatViewController: SLKTextViewController {
 
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
+        MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
+            guard
+                let strongSelf = self,
+                let index = strongSelf.dataController.delete(msgId: msgId),
+                let collectionView = strongSelf.collectionView
+            else {
+                return
+            }
+
+            collectionView.performBatchUpdates({
+                collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
+            })
+        }
         registerTypingEvent(subscription)
     }
 
     internal func unsubscribe(for subscription: Subscription) {
         SocketManager.unsubscribe(eventName: subscription.rid)
         SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
+        SocketManager.unsubscribe(eventName: "\(subscription.rid)/deleteMessage")
     }
 
     internal func emptySubscriptionState() {

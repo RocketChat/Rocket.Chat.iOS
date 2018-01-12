@@ -210,7 +210,7 @@ final class ChatDataController {
                     return -1
                 }
 
-                if obj.message?.text != message.text {
+                if obj.message?.text != message.text || obj.message?.type != message.type {
                     MessageTextCacheManager.shared.update(for: message)
                 }
 
@@ -219,6 +219,15 @@ final class ChatDataController {
         }
 
         return -1
+    }
+
+    func delete(msgId: String) -> Int? {
+        if let index = data.index(where: { $0.message?.identifier == msgId }) {
+            data.remove(at: index)
+            return index
+        }
+
+        return nil
     }
 
     func oldestMessage() -> Message? {

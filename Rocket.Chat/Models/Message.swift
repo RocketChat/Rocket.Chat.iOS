@@ -33,7 +33,7 @@ enum MessageType: String {
     case roomUnarchived = "room-unarchived"
 
     var sequential: Bool {
-        let sequential: [MessageType] = [.text, .textAttachment]
+        let sequential: [MessageType] = [.text, .textAttachment, .messageRemoved]
 
         return sequential.contains(self)
     }
