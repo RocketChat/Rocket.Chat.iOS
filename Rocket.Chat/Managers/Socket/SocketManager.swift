@@ -149,6 +149,7 @@ extension SocketManager {
                 SubscriptionManager.subscribeRoomChanges()
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
+                CustomEmojiManager.sync()
 
                 API.current()?.client(CommandsClient.self).fetchCommands()
 
