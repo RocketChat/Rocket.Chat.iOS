@@ -43,6 +43,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
+            avatarViewContainer.layer.cornerRadius = 4
             if let avatarView = AvatarView.instantiateFromNib() {
                 avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
@@ -60,7 +61,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
-    @IBOutlet weak var labelText: HighlightTextView!
+    @IBOutlet weak var labelText: RCTextView!
 
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
@@ -128,6 +129,8 @@ final class ChatMessageCell: UICollectionViewCell {
         labelDate.text = ""
         sequential = false
         message = nil
+
+        avatarView.prepareForReuse()
 
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
@@ -240,8 +243,11 @@ final class ChatMessageCell: UICollectionViewCell {
             labelDate.text = formatter.string(from: createdAt)
         }
 
-        avatarView.imageURL = URL(string: message.avatar)
         avatarView.user = message.user
+        if let avatar = message.avatar {
+            avatarView.avatarURL = URL(string: avatar)
+        }
+        avatarView.emoji = message.emoji
 
         if message.alias.count > 0 {
             labelUsername.text = message.alias
