@@ -378,6 +378,7 @@ extension AuthManager {
                 realm.deleteAll()
             })
 
+            AuthSettingsManager.shared.clearCachedSettings()
             DatabaseManager.removeSelectedDatabase()
             completion()
         }
