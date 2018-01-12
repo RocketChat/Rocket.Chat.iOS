@@ -181,7 +181,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
             auth.settings?.messageAllowDeletingBlockDeleteInMinutes = 0
         }
 
-        XCTAssert(auth.canDeleteMessage(message) == .allowed)x
+        XCTAssert(auth.canDeleteMessage(message) == .allowed)
     }
 
 }
