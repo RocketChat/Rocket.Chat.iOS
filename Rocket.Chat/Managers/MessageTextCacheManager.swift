@@ -45,10 +45,12 @@ class MessageTextCacheManager {
         let channels = Array(message.channels.flatMap { $0.name })
         let username = AuthManager.currentUser()?.username
 
-        let finalText = NSMutableAttributedString(attributedString: text.transformMarkdown())
+        let attributedString = text.transformMarkdown().applyingCustomEmojis(CustomEmoji.emojis())
+        let finalText = NSMutableAttributedString(attributedString: attributedString)
         finalText.trimCharacters(in: .whitespaces)
         finalText.highlightMentions(mentions, username: username)
         finalText.highlightChannels(channels)
+
         self.cache.setObject(finalText, forKey: key)
 
         return finalText
