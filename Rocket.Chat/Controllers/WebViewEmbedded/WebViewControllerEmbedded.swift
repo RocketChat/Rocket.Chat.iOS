@@ -29,7 +29,7 @@ class WebViewControllerEmbedded: UIViewController {
         super.viewWillAppear(animated)
 
         if !urlLoaded {
-            if let url = url {
+            if let url = url?.removingDuplicatedSlashes() {
                 let request = URLRequest(url: url)
 
                 let webView = WKWebView(frame: view.frame)

@@ -14,6 +14,7 @@ extension ChatViewController {
         guard let realm = Realm.shared else { return }
 
         searchResult = []
+        searchWord = word
 
         if prefix == "@" {
             searchResult = User.search(usernameContaining: word, preference: dataController.messagesUsernames)
@@ -43,6 +44,12 @@ extension ChatViewController {
             commands.forEach {
                 searchResult.append(($0.command, "/"))
             }
+        } else if prefix == ":" {
+            let emojis = EmojiSearcher.standard.search(shortname: word.lowercased(), custom: CustomEmoji.emojis())
+
+            emojis.forEach {
+                searchResult.append(($0.suggestion, $0.emoji))
+            }
         }
 
         let show = (searchResult.count > 0)
@@ -66,8 +73,14 @@ extension ChatViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let key = searchResult[indexPath.row].0
-        acceptAutoCompletion(with: "\(key) ", keepPrefix: true)
+        let result = searchResult[indexPath.row]
+        let key = result.0
+
+        if result.1 as? Emoji == nil {
+            acceptAutoCompletion(with: "\(key) ", keepPrefix: true)
+        } else {
+            acceptAutoCompletion(with: "\(key) ", keepPrefix: false)
+        }
     }
 
     private func autoCompletionCellForRowAtIndexPath(_ indexPath: IndexPath) -> UITableViewCell {
@@ -80,6 +93,21 @@ extension ChatViewController {
         if let user = searchResult[indexPath.row].1 as? User {
             cell.avatarView.labelInitials.textColor = .white
             cell.avatarView.user = user
+        } else if let emoji = searchResult[indexPath.row].1 as? Emoji {
+            if let cell = autoCompletionView.dequeueReusableCell(withIdentifier: EmojiAutocompleteCell.identifier) as? EmojiAutocompleteCell {
+
+                if case let .custom(imageUrl) = emoji.type {
+                    cell.emojiView.emojiImageView.sd_setImage(with: URL(string: imageUrl), completed: nil)
+                } else {
+                    cell.emojiView.emojiLabel.text = Emojione.transform(string: emoji.shortname)
+                }
+
+                cell.shortnameLabel.text = searchResult[indexPath.row].0
+
+                cell.highlight(string: searchWord.lowercased())
+
+                return cell
+            }
         } else {
             let type = searchResult[indexPath.row].1 as? String ?? "#"
             cell.avatarView.imageView.image = nil

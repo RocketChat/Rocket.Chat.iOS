@@ -107,8 +107,10 @@
 "chat.channel.start_conversation" = "This is the start of the conversation on %@";
 "chat.read_only" = "This room is read only";
 "chat.muted" = "You have been muted";
+"chat.loading_messages" = "Loading messages...";
 
 // Chat Message Actions
+"chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Block messages from user";
 "chat.message.actions.report" = "Report Message";
 "chat.message.actions.copy" = "Copy";
