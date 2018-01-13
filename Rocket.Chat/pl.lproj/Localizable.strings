@@ -107,8 +107,10 @@
 "chat.channel.start_conversation" = "To początek rozmowy na kanale %@";
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
+"chat.loading_messages" = "Loading messages..."; //TODO
 
 // Chat Message Actions
+"chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Blokuj wiadomości od użytkownika";
 "chat.message.actions.report" = "Zgłoś wiadomość";
 "chat.message.actions.copy" = "Kopiuj";

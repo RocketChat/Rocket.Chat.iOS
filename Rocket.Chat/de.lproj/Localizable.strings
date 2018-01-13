@@ -61,7 +61,7 @@
 
 // Auth
 "auth.connect.button_connect" = "Verbinden";
-"auth.connect.ssl_required" = "Es ist erforderlich, dass Ihr Server SSL unterstützt";
+"auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
 "auth.connect.connecting" = "Verbindung läuft. Warte kurz!";
 
 // Subscriptions
@@ -108,8 +108,10 @@
 "chat.channel.start_conversation" = "Dies ist der Beginn der Konversation auf %@";
 "chat.read_only" = "Dieser Raum ist schreibgeschützt";
 "chat.muted" = "Du wurdest stummgeschaltet";
+"chat.loading_messages" = "Nachrichten werden geladen...";
 
 // Chat Message Actions
+"chat.message.actions.react" = "Reaktion hinzufügen";
 "chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
 "chat.message.actions.report" = "Nachricht melden";
 "chat.message.actions.copy" = "Kopieren";
