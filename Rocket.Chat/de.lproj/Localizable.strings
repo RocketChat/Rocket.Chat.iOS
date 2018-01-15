@@ -118,7 +118,7 @@
 // Chat Upload
 "chat.upload.uploading_image" = "Bild wird hochgeladen";
 "chat.upload.uploading_video" = "Video wird hochgeladen";
-"chat.upload.uploading_file" = "Hochladen \"%@\"";
+"chat.upload.uploading_file" = "Lade \"%@\" hoch";
 "chat.upload.take_photo" = "Foto aufnehmen";
 "chat.upload.shoot_video" = "Video drehen";
 "chat.upload.choose_from_library" = "Foto & Video Mediathek";
