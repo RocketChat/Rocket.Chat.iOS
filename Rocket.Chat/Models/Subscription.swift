@@ -92,7 +92,7 @@ extension Subscription {
                 guard !response.isError() else { return }
 
                 let result = response.result["result"]
-                Realm.execute({ realm in
+                Realm.executeOnMainThread({ realm in
                     if let obj = self {
                         obj.update(result, realm: realm)
                         realm.add(obj, update: true)
@@ -107,7 +107,7 @@ extension Subscription {
                 guard !response.isError() else { return }
 
                 let rid = response.result["result"]["rid"].stringValue
-                Realm.execute({ realm in
+                Realm.executeOnMainThread({ realm in
                     if let obj = self {
                         obj.rid = rid
                         realm.add(obj, update: true)
