@@ -49,8 +49,10 @@ final class ChatMessageImageView: UIView {
             addGestureRecognizer(tapGesture)
         }
 
-        let imageURL = attachment.fullImageURL()
-        if attachment.imageURL!.starts(with: "http://") {
+		guard let imageURL = attachment.fullImageURL() else {
+			return
+		}
+        if imageURL.absoluteString.starts(with: "http://") {
 			labelTitle.text = localized("alert.insecure_image")
 		} else {
 			labelTitle.text = attachment.title
