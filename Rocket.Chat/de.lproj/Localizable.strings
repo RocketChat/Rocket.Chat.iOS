@@ -1,13 +1,3 @@
-/*
- Localizable.strings
- Rocket.Chat
-
- Created by Rafael K. Streit on 8/27/16.
- Modified by Luca Zimmermann on 01/03/18
- Copyright © 2016 Rocket.Chat. All rights reserved.
- */
-
-
 // Global
 "global.ok" = "OK";
 "global.cancel" = "Abbrechen";
@@ -128,7 +118,7 @@
 // Chat Upload
 "chat.upload.uploading_image" = "Bild wird hochgeladen";
 "chat.upload.uploading_video" = "Video wird hochgeladen";
-"chat.upload.uploading_file" = "Hochladen \"%@\"";
+"chat.upload.uploading_file" = "Lade \"%@\" hoch";
 "chat.upload.take_photo" = "Foto aufnehmen";
 "chat.upload.shoot_video" = "Video drehen";
 "chat.upload.choose_from_library" = "Foto & Video Mediathek";
