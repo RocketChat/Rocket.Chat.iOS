@@ -101,7 +101,7 @@ extension UNNotificationAction {
     static var reply: UNNotificationAction {
         return UNTextInputNotificationAction(
             identifier: "REPLY",
-            title: localized("Reply"),
+            title: localized("notifications.action.reply"),
             options: .authenticationRequired
         )
     }
