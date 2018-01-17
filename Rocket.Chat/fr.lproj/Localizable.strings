@@ -22,6 +22,8 @@
 "alert.feature.wip.title" = "Oups!";
 "alert.feature.wip.message" = "Cette fonctionnalité est en cours de développement, restez au courant!";
 
+"alert.insecure_image" = "Insecure resource not loaded";
+
 "alert.socket_error.invalid_user.title" = "Session expirée";
 "alert.socket_error.invalid_user.message" = "Votre session a expiré. Veuillez vous identifier à nouveau.";
 

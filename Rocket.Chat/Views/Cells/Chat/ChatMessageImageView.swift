@@ -49,9 +49,12 @@ final class ChatMessageImageView: UIView {
             addGestureRecognizer(tapGesture)
         }
 
-        labelTitle.text = attachment.title
-
         let imageURL = attachment.fullImageURL()
+        if attachment.imageURL!.starts(with: "http://") {
+			labelTitle.text = localized("alert.insecure_image")
+		} else {
+			labelTitle.text = attachment.title
+		}
         activityIndicatorImageView.startAnimating()
         imageView.sd_setImage(with: imageURL, completed: { [weak self] _, _, _, _ in
             self?.activityIndicatorImageView.stopAnimating()

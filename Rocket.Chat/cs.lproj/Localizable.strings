@@ -22,6 +22,8 @@
 "alert.feature.wip.title" = "Jejky!";
 "alert.feature.wip.message" = "Stále pracujeme na této funkci, ale není ještě dokončena.";
 
+"alert.insecure_image" = "Insecure resource not loaded";
+
 "alert.socket_error.invalid_user.title" = "Relace vypršela";
 "alert.socket_error.invalid_user.message" = "Platnost Vaší relace vypršela. Přihlaste se znovu, prosím.";
 
