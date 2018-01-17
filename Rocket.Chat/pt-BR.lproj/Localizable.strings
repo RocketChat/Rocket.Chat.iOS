@@ -22,7 +22,8 @@
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "Desculpe, mas esta função ainda não está disponível.";
 
-"alert.insecure_image" = "Insecure resource not loaded";
+"alert.insecure_image.title" = "Insecure resource";
+"alert.insecure_image.message" = "The resource of the image is insecure and therefor not loaded. Only SSL resources are allowed.";
 
 "alert.socket_error.invalid_user.title" = "Sessão expirada";
 "alert.socket_error.invalid_user.message" = "Esta sessão expirou. Por favor, logue-se novamente.";
