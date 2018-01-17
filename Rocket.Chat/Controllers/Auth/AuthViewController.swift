@@ -263,6 +263,22 @@ final class AuthViewController: BaseViewController {
             self?.authenticateWithUsernameOrEmail()
         }
     }
+
+    @IBAction func forgotPasswordPressed(_ sender: UIButton) {
+        let alert = UIAlertController(title: "Forgot your password?", message: "Enter your e-mail and we will send you instructions on how to recover it.", preferredStyle: .alert)
+
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "john.appleseed@apple.com"
+        })
+
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+
+        alert.addAction(UIAlertAction(title: "Send", style: .default, handler: { action in
+
+        }))
+
+        present(alert, animated: true)
+    }
 }
 
 extension AuthViewController: UITextFieldDelegate {
