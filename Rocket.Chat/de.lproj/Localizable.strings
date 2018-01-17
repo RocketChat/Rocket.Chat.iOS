@@ -22,7 +22,8 @@
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "Entschuldigung, aber diese Funktion ist noch nicht verfügbar.";
 
-"alert.insecure_image" = "Unsichere Bildquelle nicht geladen";
+"alert.insecure_image.title" = "Unsichere Quelle";
+"alert.insecure_image.message" = "Die Bildquelle is unsicher und wurde daher nicht geladen. Nur SSL Quellen sind erlaubt.";
 
 "alert.socket_error.invalid_user.title" = "Sitzung abgelaufen";
 "alert.socket_error.invalid_user.message" = "Ihre Sitzung ist abgelaufen, bitte loggen Sie sich erneut ein.";

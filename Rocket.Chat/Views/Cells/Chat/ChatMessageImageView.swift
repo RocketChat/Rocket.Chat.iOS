@@ -55,7 +55,7 @@ final class ChatMessageImageView: UIView {
 		}
         if imageURL.absoluteString.starts(with: "http://") {
         	isLoadable = false
-			labelTitle.text = localized("alert.insecure_image") + " (" + attachment.title + ")"
+			labelTitle.text = localized("alert.insecure_image.title") + " (" + attachment.title + ")"
 		} else {
 			labelTitle.text = attachment.title
 		}
@@ -68,6 +68,8 @@ final class ChatMessageImageView: UIView {
     @objc func didTapView() {
     	if isLoadable {
 	        delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
+		} else {
+			Alert(title: localized("alert.insecure_image.title"), message: localized("alert.insecure_image.message")).present()
 		}
     }
 }
