@@ -54,6 +54,10 @@
 "auth.connect.ssl_required" = "Votre serveur doit supporter le SSL";
 "auth.connect.connecting" = "Connexion en cours. Tenez bon.";
 
+"auth.forgot_password.title" = "Forgot your password?"; //TODO
+"auth.forgot_password.message" = "Enter your e-mail"; //TODO
+"auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again."; //TODO
+
 // Subscriptions
 "subscriptions.search" = "Chercher";
 "subscriptions.search_results" = "Résultats";

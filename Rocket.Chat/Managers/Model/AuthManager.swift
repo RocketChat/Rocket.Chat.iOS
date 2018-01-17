@@ -342,7 +342,7 @@ extension AuthManager {
     /**
      Sends forgot password request for e-mail.
      */
-    static func sendForgotPassword(email: String, completion: @escaping MessageCompletion) {
+    static func sendForgotPassword(email: String, completion: @escaping MessageCompletion = { _ in }) {
         let object = [
             "msg": "method",
             "method": "sendForgotPasswordEmail",
