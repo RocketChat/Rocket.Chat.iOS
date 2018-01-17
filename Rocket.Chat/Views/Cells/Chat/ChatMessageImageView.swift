@@ -16,6 +16,7 @@ protocol ChatMessageImageViewProtocol: class {
 
 final class ChatMessageImageView: UIView {
     static let defaultHeight = CGFloat(250)
+    var isLoadable = true
 
     weak var delegate: ChatMessageImageViewProtocol?
     var attachment: Attachment! {
@@ -53,6 +54,7 @@ final class ChatMessageImageView: UIView {
 			return
 		}
         if imageURL.absoluteString.starts(with: "http://") {
+        	isLoadable = false
 			labelTitle.text = localized("alert.insecure_image")
 		} else {
 			labelTitle.text = attachment.title
@@ -64,6 +66,8 @@ final class ChatMessageImageView: UIView {
     }
 
     @objc func didTapView() {
-        delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
+    	if isLoadable {
+	        delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
+		}
     }
 }
