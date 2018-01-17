@@ -54,6 +54,10 @@
 "auth.connect.ssl_required" = "It is required that your server supports SSL";
 "auth.connect.connecting" = "Connection in progress. Hold tight";
 
+"auth.forgot_password.title" = "Forgot your password?";
+"auth.forgot_password.message" = "Enter your e-mail";
+"auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again.";
+
 // Subscriptions
 "subscriptions.search" = "Search";
 "subscriptions.search_results" = "Results";
