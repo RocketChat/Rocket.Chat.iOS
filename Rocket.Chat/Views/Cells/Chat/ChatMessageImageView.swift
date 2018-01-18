@@ -53,14 +53,16 @@ final class ChatMessageImageView: UIView {
 		guard let imageURL = attachment.fullImageURL() else {
 			return
 		}
+		var placeholderImage: UIImage?
         if imageURL.absoluteString.starts(with: "http://") {
         	isLoadable = false
 			labelTitle.text = localized("alert.insecure_image.title") + " (" + attachment.title + ")"
+			placeholderImage = UIImage(named: "Insecure Image")
 		} else {
 			labelTitle.text = attachment.title
 		}
         activityIndicatorImageView.startAnimating()
-        imageView.sd_setImage(with: imageURL, completed: { [weak self] _, _, _, _ in
+        imageView.sd_setImage(with: imageURL, placeholderImage: placeholderImage, completed: { [weak self] _, _, _, _ in
             self?.activityIndicatorImageView.stopAnimating()
         })
     }
@@ -69,7 +71,7 @@ final class ChatMessageImageView: UIView {
     	if isLoadable {
 	        delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
 		} else {
-			Alert(title: localized("alert.insecure_image.title"), message: localized("alert.insecure_image.message")).present()
+			Alert(key: "alert.insecure_image").present()
 		}
     }
 }
