@@ -11,7 +11,11 @@ import FLAnimatedImage
 
 class EmojiView: UIView {
     @IBOutlet var contentView: UIView!
-    @IBOutlet weak var emojiImageView: FLAnimatedImageView!
+    @IBOutlet weak var emojiImageView: FLAnimatedImageView! {
+        didSet {
+            emojiImageView.contentMode = .scaleAspectFit
+        }
+    }
     @IBOutlet weak var emojiLabel: UILabel!
 
     override init(frame: CGRect) {

@@ -1,12 +1,3 @@
-/* 
- Localizable.strings
- Rocket.Chat
-
- Created by Artur Rymarz on 10/28/17.
- Copyright © 2016 Rocket.Chat. All rights reserved.
- */
-
-
 // Global
 "global.ok" = "OK";
 "global.cancel" = "Anuluj";
@@ -119,6 +110,7 @@
 "chat.message.actions.quote" = "Cytuj wiadomość";
 "chat.message.actions.reply" = "Odpowiedz na wiadomość";
 "chat.message.actions.delete" = "Delete message"; //TODO
+"Send" = "Wysłać"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Wiadomość zgłoszona";
