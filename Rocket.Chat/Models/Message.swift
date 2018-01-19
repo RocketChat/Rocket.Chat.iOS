@@ -92,6 +92,9 @@ class Message: BaseModel {
 
         return MessageType(rawValue: internalType) ?? .text
     }
+
+    // Internal
+    @objc dynamic var markedForDeletion: Bool = false
 }
 
 extension Message {
