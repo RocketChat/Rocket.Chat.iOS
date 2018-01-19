@@ -58,6 +58,7 @@ class AvatarViewSpec: XCTestCase {
         }
 
         avatarView.imageURL = imageURL
+        avatarView.updateAvatar()
         XCTAssertEqual(avatarView.labelInitials.text, "?", "label text will be ?")
         XCTAssertEqual(avatarView.backgroundColor, .black, "background color is black")
     }
