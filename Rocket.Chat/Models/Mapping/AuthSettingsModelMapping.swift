@@ -41,6 +41,9 @@ extension AuthSettings: ModelMappeable {
 
         self.rawRegistrationForm = objectForKey(object: values, key: "Accounts_RegistrationForm")?.string
 
+        // Accounts
+        self.emailVerification = objectForKey(object: values, key: "Accounts_EmailVerification")?.bool ?? false
+
         // Upload
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
 

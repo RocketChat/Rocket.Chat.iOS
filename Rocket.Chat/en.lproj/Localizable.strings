@@ -40,6 +40,9 @@
 "alert.upload_error.title" = "Upload Error";
 "alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again.";
 
+"alert.email_verification.title" = "Email verification";
+"alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again.";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
