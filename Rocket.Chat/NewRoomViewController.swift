@@ -172,7 +172,7 @@ class NewRoomViewController: BaseViewController {
             guard let name = result.name else {
                     completion(false, result.error)
                     return
-			}
+            }
 
             guard let auth = AuthManager.isAuthenticated() else { return }
 
