@@ -169,11 +169,15 @@ class NewRoomViewController: BaseViewController {
                     completion(false, result.error)
                     return
             }
+            guard let name = result.name else {
+                    completion(false, result.error)
+                    return
+			}
 
             guard let auth = AuthManager.isAuthenticated() else { return }
 
             SubscriptionManager.updateSubscriptions(auth) { _ in
-                if let newRoom = Realm.shared?.objects(Subscription.self).filter("name == '\(roomName)' && privateType != 'd'").first {
+                if let newRoom = Realm.shared?.objects(Subscription.self).filter("name == '\(name)' && privateType != 'd'").first {
 
                     let controller = ChatViewController.shared
                     controller?.subscription = newRoom

@@ -62,4 +62,8 @@ extension APIResult where T == SubscriptionCreateRequest {
     var error: String? {
         return raw?["error"].string
     }
+
+    var name: String? {
+        return raw?["group"]["name"].string
+    }
 }
