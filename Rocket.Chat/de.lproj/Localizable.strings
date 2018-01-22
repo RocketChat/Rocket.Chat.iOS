@@ -91,6 +91,9 @@
 "new_room.group.invite_users" = "Benutzer einladen";
 "new_room.cell.invite_users.placeholder" = "Benutzernamen";
 
+// Notifications
+"notifications.action.reply" = "Antworten";
+
 // Chat
 "chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
 "chat.channel_preview_view.join" = "Kanal beitreten";
