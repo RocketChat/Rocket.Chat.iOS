@@ -127,7 +127,7 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         if let view = ChatMessageImageView.instantiateFromNib() {
             view.attachment = attachment
             let title = view.labelTitle?.text
-            XCTAssert(title == attachment.title, "Should be redular title")
+            XCTAssert(title == attachment.title, "Should be regular title")
             XCTAssertTrue(view.isLoadable)
         } else {
             XCTFail("View create failed")
