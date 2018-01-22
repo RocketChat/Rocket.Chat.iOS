@@ -165,13 +165,9 @@ class NewRoomViewController: BaseViewController {
 
     fileprivate func executeRequestCreateRoom(roomName: String, roomType: SubscriptionCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
         API.current()?.fetch(SubscriptionCreateRequest(name: roomName, type: roomType, readOnly: readOnlyRoom), succeeded: { result in
-            guard let success = result.success, success == true else {
-                    completion(false, result.error)
-                    return
-            }
-            guard let name = result.name else {
-                    completion(false, result.error)
-                    return
+            guard let success = result.success, let name = result.name, success == true else {
+                completion(false, result.error)
+                return
             }
 
             guard let auth = AuthManager.isAuthenticated() else { return }
