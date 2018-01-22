@@ -46,6 +46,11 @@ struct SubscriptionManager {
             SocketManager.send(requestRooms) { response in
                 guard !response.isError() else { return Log.debug(response.result.string) }
 
+                guard let auth = AuthManager.isAuthenticated() else { return }
+                Realm.executeOnMainThread { _ in
+                    auth.lastSubscriptionFetch = Date.serverDate
+                }
+
                 let subscriptions = List<Subscription>()
 
                 // List is used the first time user opens the app
@@ -55,8 +60,6 @@ struct SubscriptionManager {
                 let updated = response.result["result"]["update"].array
 
                 Realm.execute({ realm in
-                    guard let auth = AuthManager.isAuthenticated() else { return }
-
                     list?.forEach { object in
                         if let rid = object["_id"].string {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
@@ -75,7 +78,6 @@ struct SubscriptionManager {
                         }
                     }
 
-                    auth.lastSubscriptionFetch = Date.serverDate
                     realm.add(subscriptions, update: true)
                 }, completion: {
                     completion(response)
@@ -282,7 +284,7 @@ extension SubscriptionManager {
             }, completion: {
                 var detachedSubscriptions = [Subscription]()
 
-                Realm.execute({ (realm) in
+                Realm.executeOnMainThread({ (realm) in
                     for identifier in identifiers {
                         if let subscription = realm.object(ofType: Subscription.self, forPrimaryKey: identifier) {
                             detachedSubscriptions.append(subscription)
