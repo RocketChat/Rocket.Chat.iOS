@@ -91,6 +91,9 @@
 "new_room.group.invite_users" = "Invite users";
 "new_room.cell.invite_users.placeholder" = "Usernames";
 
+// Notifications
+"notifications.action.reply" = "Reply";
+
 // Chat
 "chat.channel_preview_view.title" = "Toto je náhled kanálu #%@";
 "chat.channel_preview_view.join" = "Připojit se do kanálu";
