@@ -126,7 +126,7 @@ final class SignupViewController: BaseViewController {
                 }
             } else {
 
-                guard AuthManager.isAuthenticated()?.settings?.emailVerification == false else {
+                guard AuthSettingsManager.settings?.emailVerification == false else {
                     Alert(key: "alert.email_verification").present { _ in
                         self?.navigationController?.popViewController(animated: true)
                     }
