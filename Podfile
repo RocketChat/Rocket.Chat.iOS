@@ -40,7 +40,7 @@ def shared_pods
   pod 'GoogleSignIn'
 
   # Debugging
-  pod 'FLEX', '~> 2.0', :configurations => ['Debug']
+  pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
 end
 
 target 'Rocket.Chat' do
