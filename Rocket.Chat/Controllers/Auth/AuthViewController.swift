@@ -156,7 +156,6 @@ final class AuthViewController: BaseViewController {
         API.current()?.fetch(MeRequest(), succeeded: { [weak self] result in
             guard let strongSelf = self else { return }
 
-            strongSelf.stopLoading()
             SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
 
             if let user = result.user {
@@ -184,6 +183,7 @@ final class AuthViewController: BaseViewController {
         textFieldUsername.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
         buttonAuthenticateGoogle.isEnabled = false
+        customAuthButtons.forEach { _, button in button.isEnabled = false }
         navigationItem.hidesBackButton = true
     }
 
@@ -193,6 +193,7 @@ final class AuthViewController: BaseViewController {
             self.textFieldPassword.alpha = 1
             self.activityIndicator.stopAnimating()
             self.buttonAuthenticateGoogle.isEnabled = true
+            self.customAuthButtons.forEach { _, button in button.isEnabled = true }
             self.navigationItem.hidesBackButton = false
         })
 
@@ -347,6 +348,8 @@ extension AuthViewController {
             return
         }
 
+        startLoading()
+
         OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self,
                                success: { [weak self] credentials in
 
@@ -357,6 +360,8 @@ extension AuthViewController {
 
             self?.alert(title: localized("alert.login_service_error.title"),
                         message: localized("alert.login_service_error.message"))
+
+            self?.stopLoading()
 
         })
     }
