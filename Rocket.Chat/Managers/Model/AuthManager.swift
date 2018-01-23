@@ -222,14 +222,7 @@ extension AuthManager {
             "params": [param]
         ] as [String: Any]
 
-        SocketManager.send(object) { (response) in
-            guard !response.isError() else {
-                completion(response)
-                return
-            }
-
-            self.auth(email, password: password, completion: completion)
-        }
+        SocketManager.send(object, completion: completion)
     }
 
     /**
