@@ -74,12 +74,12 @@ class OAuthManager {
     static func callbackUrl(for loginService: LoginService, server: URL) -> URL? {
         guard
             let host = server.host,
-            let service = loginService.service
+            let callbackPath = loginService.callbackPath ?? loginService.service
         else {
             return nil
         }
 
-        return URL(string: "https://\(host)/_oauth/\(service)?close")
+        return URL(string: "https://\(host)/_oauth/\(callbackPath)")
     }
 
     static func state() -> String? {

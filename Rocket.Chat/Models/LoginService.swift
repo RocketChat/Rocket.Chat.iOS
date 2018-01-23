@@ -54,6 +54,7 @@ class LoginService: BaseModel {
     }
 
     @objc dynamic var responseType: String?
+    @objc dynamic var callbackPath: String?
 }
 
 // MARK: OAuth helper extensions
