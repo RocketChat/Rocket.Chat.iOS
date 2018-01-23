@@ -38,7 +38,7 @@ final class ChatMessageImageView: UIView {
             imageView.layer.borderWidth = 1
         }
     }
-
+    @IBOutlet weak var detail: UITextView!
     private lazy var tapGesture: UITapGestureRecognizer = {
         return UITapGestureRecognizer(target: self, action: #selector(didTapView))
     }()
@@ -50,6 +50,7 @@ final class ChatMessageImageView: UIView {
         }
 
         labelTitle.text = attachment.title
+        detail.text = attachment.description
 
         let imageURL = attachment.fullImageURL()
         activityIndicatorImageView.startAnimating()
@@ -60,5 +61,7 @@ final class ChatMessageImageView: UIView {
 
     @objc func didTapView() {
         delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
+        labelTitle.isHidden = true
+        detail.isHidden = true
     }
 }
