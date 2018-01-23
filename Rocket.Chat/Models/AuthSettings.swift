@@ -36,6 +36,9 @@ final class AuthSettings: BaseModel {
     @objc dynamic var isGoogleAuthenticationEnabled = false
     @objc dynamic var isLDAPAuthenticationEnabled = false
 
+    // Accounts
+    @objc dynamic var emailVerification = false
+
     // Registration
     @objc dynamic var rawRegistrationForm: String?
     var registrationForm: RegistrationFormAccess {

@@ -40,6 +40,9 @@
 "alert.upload_error.title" = "Erro de Upload";
 "alert.upload_error.message" = "Algo de errado aconteceu ao fazer o upload do seu arquivo. Por favor, tente novamente.";
 
+"alert.email_verification.title" = "Verificação de email";
+"alert.email_verification.message" = "Nós enviamos um email para confirmar seu registro. Se você não receber um email em breve, por favor volte e tente novamente.";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";
 "connection.server.redirect.alert.message" = "Parece que este servidor mudou a URL para:\n\n%@\n\Gostaria de atualizar a URL?";
@@ -53,6 +56,10 @@
 "auth.connect.button_connect" = "Conectar";
 "auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
 "auth.connect.connecting" = "Conectando no servidor";
+
+"auth.forgot_password.title" = "Esqueceu sua senha?";
+"auth.forgot_password.message" = "Digite seu e-mail";
+"auth.forgot_password.success" = "Se esse e-mail for registrado, nós enviaremos instruções de como resetar sua senha. Se você não receber um e-mail em breve, por favor volte e tente novamente.";
 
 // Subscriptions
 "subscriptions.search" = "Busca";
@@ -90,6 +97,9 @@
 "new_room.cell.channel_name.title" = "Nome do canal";
 "new_room.group.invite_users" = "Invite users";
 "new_room.cell.invite_users.placeholder" = "Usernames";
+
+// Notifications
+"notifications.action.reply" = "Reply";
 
 // Chat
 "chat.channel_preview_view.title" = "Esta é uma pré-visualização de #%@";

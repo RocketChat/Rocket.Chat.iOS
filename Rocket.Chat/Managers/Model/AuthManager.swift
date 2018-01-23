@@ -222,14 +222,7 @@ extension AuthManager {
             "params": [param]
         ] as [String: Any]
 
-        SocketManager.send(object) { (response) in
-            guard !response.isError() else {
-                completion(response)
-                return
-            }
-
-            self.auth(email, password: password, completion: completion)
-        }
+        SocketManager.send(object, completion: completion)
     }
 
     /**
@@ -337,6 +330,19 @@ extension AuthManager {
         ]
 
         AuthManager.auth(params: params, completion: completion)
+    }
+
+    /**
+     Sends forgot password request for e-mail.
+     */
+    static func sendForgotPassword(email: String, completion: @escaping MessageCompletion = { _ in }) {
+        let object = [
+            "msg": "method",
+            "method": "sendForgotPasswordEmail",
+            "params": [email]
+            ] as [String: Any]
+
+        SocketManager.send(object, completion: completion)
     }
 
     /**
