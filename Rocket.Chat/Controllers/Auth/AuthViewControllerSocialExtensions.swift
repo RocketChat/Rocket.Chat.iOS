@@ -1,5 +1,5 @@
 //
-//  AuthViewControllerGoogleExtensions.swift
+//  AuthViewControllerSocialExtensions.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Kellermann Streit on 04/03/17.
@@ -7,6 +7,41 @@
 //
 
 import GoogleSignIn
+import FBSDKLoginKit
+
+// MARK: Facebook
+
+extension AuthViewController {
+    func authenticateWithFacebook() {
+        startLoading()
+        facebookLoginManager.logIn(withReadPermissions: [], from: self, handler: self.facebookSignIn)
+    }
+
+    func facebookSignIn(result: FBSDKLoginManagerLoginResult!, error: Error!) {
+        guard
+            error == nil,
+            let token = FBSDKAccessToken.current(),
+            let accessToken = token.tokenString,
+            let idToken = token.userID,
+            let expirationDate = token.expirationDate
+        else {
+            stopLoading()
+            return
+        }
+
+        let params = [
+            "serviceName": "facebook",
+            "accessToken": accessToken,
+            "idToken": idToken,
+            "expiresIn": Int(expirationDate.timeIntervalSinceNow),
+            "scope": "profile"
+        ] as [String: Any]
+
+        AuthManager.auth(params: params, completion: self.handleAuthenticationResponse)
+    }
+}
+
+// MARK: Google
 
 extension AuthViewController {
     func authenticateWithGoogle() {

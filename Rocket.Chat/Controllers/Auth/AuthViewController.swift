@@ -12,6 +12,8 @@ import SafariServices
 import OnePasswordExtension
 import RealmSwift
 
+import FBSDKLoginKit
+
 final class AuthViewController: BaseViewController {
 
     internal var connecting = false
@@ -44,6 +46,13 @@ final class AuthViewController: BaseViewController {
     @IBOutlet weak var buttonAuthenticateGoogle: UIButton! {
         didSet {
             buttonAuthenticateGoogle.layer.cornerRadius = 3
+        }
+    }
+
+    let facebookLoginManager = FBSDKLoginManager()
+    @IBOutlet weak var buttonAuthenticateFacebook: UIButton! {
+        didSet {
+            buttonAuthenticateFacebook.layer.cornerRadius = 3
         }
     }
 
@@ -126,6 +135,7 @@ final class AuthViewController: BaseViewController {
     // MARK: Authentication methods
     fileprivate func updateAuthenticationMethods() {
         guard let settings = self.serverPublicSettings else { return }
+        self.buttonAuthenticateFacebook.isHidden = !settings.isFacebookAuthenticationEnabled
         self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
     }
 
@@ -183,6 +193,7 @@ final class AuthViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldUsername.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
+        buttonAuthenticateFacebook.isEnabled = false
         buttonAuthenticateGoogle.isEnabled = false
         navigationItem.hidesBackButton = true
     }
@@ -192,6 +203,7 @@ final class AuthViewController: BaseViewController {
             self.textFieldUsername.alpha = 1
             self.textFieldPassword.alpha = 1
             self.activityIndicator.stopAnimating()
+            self.buttonAuthenticateFacebook.isEnabled = true
             self.buttonAuthenticateGoogle.isEnabled = true
             self.navigationItem.hidesBackButton = false
         })
@@ -218,6 +230,10 @@ final class AuthViewController: BaseViewController {
         } else {
             AuthManager.auth(email, password: password, completion: self.handleAuthenticationResponse)
         }
+    }
+
+    @IBAction func buttonAuthenticateFacebookDidPressed(_ sender: Any) {
+        authenticateWithFacebook()
     }
 
     @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {

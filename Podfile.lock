@@ -1,8 +1,18 @@
 PODS:
   - 1PasswordExtension (1.8.5)
+  - Bolts (1.9.0):
+    - Bolts/AppLinks (= 1.9.0)
+    - Bolts/Tasks (= 1.9.0)
+  - Bolts/AppLinks (1.9.0):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.9.0)
   - Crashlytics (3.9.3):
     - Fabric (~> 1.7.2)
   - Fabric (1.7.2)
+  - FBSDKCoreKit (4.29.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.29.0):
+    - FBSDKCoreKit
   - FLAnimatedImage (1.0.12)
   - FLEX (2.4.0)
   - GoogleSignIn (4.1.1):
@@ -61,6 +71,7 @@ DEPENDENCIES:
   - 1PasswordExtension
   - Crashlytics
   - Fabric
+  - FBSDKLoginKit
   - FLEX (~> 2.0)
   - GoogleSignIn
   - Instabug
@@ -112,8 +123,11 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
+  Bolts: ac6567323eac61e203f6a9763667d0f711be34c8
   Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
   Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  FBSDKCoreKit: 6f139173dc63a1deaff4430a55f2fe5bb222d2af
+  FBSDKLoginKit: 56a057ca6822535ea0faa25f57a7c41edb697fd4
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
@@ -137,6 +151,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TagListView: 669f7d4455003c877655875d34829731c4191528
 
-PODFILE CHECKSUM: 4146baca3a7d4ba80c6a7f78e43b531ef00b4700
+PODFILE CHECKSUM: 17fbce3f01c209dc1d8c87fe6370e2bb3e572a98
 
 COCOAPODS: 1.3.1

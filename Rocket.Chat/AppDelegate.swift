@@ -9,7 +9,9 @@
 import UIKit
 import RealmSwift
 import UserNotifications
+
 import GoogleSignIn
+import FBSDKLoginKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -36,6 +38,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             WindowManager.open(.auth)
         }
 
+        FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
+
         return true
     }
 
@@ -57,11 +61,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
-        return GIDSignIn.sharedInstance().handle(
+        let facebook = FBSDKApplicationDelegate.sharedInstance().application(
+            app,
+            open: url,
+            sourceApplication: options[.sourceApplication] as? String,
+            annotation: options[.annotation]
+        )
+
+        let google = GIDSignIn.sharedInstance().handle(
             url,
             sourceApplication: options[.sourceApplication] as? String,
             annotation: options[.annotation]
         )
+
+        return facebook || google
     }
 
     // MARK: Remote Notification
