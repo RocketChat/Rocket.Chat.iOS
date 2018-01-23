@@ -49,12 +49,14 @@ extension LoginService: ModelMappeable {
     func mapFacebook() {
         serverUrl = "https://facebook.com"
         scope = "email"
-        responseType = ""
         tokenPath = "https://graph.facebook.com/v2.8/oauth/access_token"
         identityPath = "https://graph.facebook.com/v2.8/me"
         authorizePath = "/v2.9/dialog/oauth"
         buttonLabelText = "facebook"
         buttonLabelColor = "#ffffff"
         buttonColor = "#325c99"
+
+        responseType = ""
+        callbackPath = "facebook?close"
     }
 }
