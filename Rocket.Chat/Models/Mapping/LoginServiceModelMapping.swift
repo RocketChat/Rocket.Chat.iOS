@@ -13,7 +13,7 @@ import RealmSwift
 extension LoginService: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
         service = values["service"].stringValue
-        clientId = values["clientId"].string
+        clientId = values["clientId"].string ?? values["appId"].string
         custom = values["custom"].boolValue
         serverUrl = values["serverURL"].stringValue
         tokenPath = values["tokenPath"].stringValue
@@ -30,6 +30,7 @@ extension LoginService: ModelMappeable {
 
         switch type {
         case .github: mapGitHub()
+        case .facebook: mapFacebook()
         case .custom: break
         case .invalid: break
         }
@@ -41,6 +42,16 @@ extension LoginService: ModelMappeable {
         identityPath = "https://api.github.com/user"
         authorizePath = "/login/oauth/authorize"
         buttonLabelText = "github"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#4c4c4c"
+    }
+
+    func mapFacebook() {
+        serverUrl = "https://facebook.com"
+        tokenPath = "/v2.8/oauth/access_token"
+        identityPath = "https://graph.facebook.com/v2.8/me"
+        authorizePath = "/v2.9/dialog/oauth"
+        buttonLabelText = "facebook"
         buttonLabelColor = "#ffffff"
         buttonColor = "#4c4c4c"
     }

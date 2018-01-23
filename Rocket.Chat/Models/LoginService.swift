@@ -11,12 +11,14 @@ import RealmSwift
 
 enum LoginServiceType {
     case github
+    case facebook
     case custom
     case invalid
 
     init(string: String) {
         switch string {
         case "github": self = .github
+        case "facebook": self = .facebook
         default: self = .invalid
         }
     }
