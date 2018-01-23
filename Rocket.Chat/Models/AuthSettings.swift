@@ -33,6 +33,7 @@ final class AuthSettings: BaseModel {
 
     // Authentication methods
     @objc dynamic var isUsernameEmailAuthenticationEnabled = false
+    @objc dynamic var isFacebookAuthenticationEnabled = false
     @objc dynamic var isGoogleAuthenticationEnabled = false
     @objc dynamic var isLDAPAuthenticationEnabled = false
 

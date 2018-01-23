@@ -36,6 +36,7 @@ extension AuthSettings: ModelMappeable {
 
         // Authentication methods
         self.isUsernameEmailAuthenticationEnabled = objectForKey(object: values, key: "Accounts_ShowFormLogin")?.bool ?? true
+        self.isFacebookAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Facebook")?.bool ?? false
         self.isGoogleAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Google")?.bool ?? false
         self.isLDAPAuthenticationEnabled = objectForKey(object: values, key: "LDAP_Enable")?.bool ?? false
 

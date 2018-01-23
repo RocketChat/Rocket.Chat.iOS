@@ -28,6 +28,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.662030055877-9qc3lqsbgif4k1ktl89dqeaec3m163i4</string>
+                <string>fb835103589938459</string>
 			</array>
 		</dict>
 	</array>
@@ -103,5 +104,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+    <key>FacebookAppID</key>
+    <string>835103589938459</string>
+    <key>FacebookDisplayName</key>
+    <string>Rocket.Chat</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-share-api</string>
+        <string>fbauth2</string>
+        <string>fbshareextension</string>
+    </array>
 </dict>
 </plist>

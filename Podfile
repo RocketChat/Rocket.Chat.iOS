@@ -38,6 +38,7 @@ def shared_pods
   pod 'OAuthSwift'
   pod '1PasswordExtension'
   pod 'GoogleSignIn'
+  pod 'FBSDKLoginKit'
 
   # Debugging
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
