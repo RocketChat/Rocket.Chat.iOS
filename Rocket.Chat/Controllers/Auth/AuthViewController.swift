@@ -377,6 +377,7 @@ extension AuthViewController {
                 switch $0.type {
                 case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
                 case .facebook: button.setImage(#imageLiteral(resourceName: "facebook"), for: .normal)
+                case .linkedin: button.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
                 default: button.setTitle($0.buttonLabelText ?? "", for: .normal)
                 }
 
