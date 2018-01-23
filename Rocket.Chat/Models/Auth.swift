@@ -71,16 +71,25 @@ extension Auth {
             return .unknown
         }
 
-        guard message.type.actionable else { return .notActionable }
+        if !message.type.actionable {
+            return .notActionable
+        }
 
-        if user.hasPermission(.forceDeleteMessage, realm: self.realm) { return .allowed }
+        if user.hasPermission(.forceDeleteMessage, realm: self.realm) {
+            return .allowed
+        }
 
         func timeElapsed() -> Bool {
-            if settings.messageAllowDeletingBlockDeleteInMinutes < 1 { return false }
+            if settings.messageAllowDeletingBlockDeleteInMinutes < 1 {
+                return false
+            }
+
             return Date.serverDate.timeIntervalSince(createdAt)/60 > Double(settings.messageAllowDeletingBlockDeleteInMinutes)
         }
 
-        if user.hasPermission(.deleteMessage, realm: self.realm) { return timeElapsed() ? .timeElapsed : .allowed }
+        if user.hasPermission(.deleteMessage, realm: self.realm) {
+            return timeElapsed() ? .timeElapsed : .allowed
+        }
 
         if message.user != user { return .differentUser }
         if !settings.messageAllowDeleting { return .serverBlocked }
