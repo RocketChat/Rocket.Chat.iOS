@@ -70,7 +70,7 @@ extension OAuthViewController: WKNavigationDelegate {
         decisionHandler(.allow)
         guard let url = url, isCallback(url: url) else { return false }
 
-        if url.fragment != nil {
+        if url.fragment != nil && !url.absoluteString.contains("&access_token=") {
             dismissWebViewController()
             if let credentials = oauthCredentials(from: url) {
                 success?(credentials)
@@ -97,6 +97,6 @@ extension OAuthViewController: WKNavigationDelegate {
     }
 
     func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        dismissWebViewController()
+
     }
 }

@@ -329,7 +329,7 @@ extension AuthManager {
             of success or error.
      */
     static func auth(credentials: OAuthCredentials, completion: @escaping MessageCompletion) {
-        let params = [
+        var params = [
             "oauth": [
                 "credentialToken": credentials.token,
                 "credentialSecret": credentials.secret

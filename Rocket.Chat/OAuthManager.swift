@@ -13,18 +13,18 @@ import SwiftyJSON
 
 class OAuthCredentials {
     let token: String
-    let secret: String
+    let secret: String?
 
-    init?(json: JSON) {
-        guard
-            let token = json["credentialToken"].string,
-            let secret = json["credentialSecret"].string
-        else {
-            return nil
-        }
-
+    init(token: String, secret: String?) {
         self.token = token
         self.secret = secret
+    }
+
+    init?(json: JSON) {
+        guard let token = json["credentialToken"].string else { return nil }
+
+        self.token = token
+        self.secret = json["credentialSecret"].string
     }
 }
 
@@ -63,7 +63,19 @@ class OAuthManager {
         }
 
         let fragmentJSON = JSON(parseJSON: normalizedFragment)
-        return OAuthCredentials(json: fragmentJSON)
+
+        if let credentials = OAuthCredentials(json: fragmentJSON) {
+            return credentials
+        }
+
+        if let start = normalizedFragment.range(of: "&access_token="),
+            let end = normalizedFragment.range(of: "&expires_in", range: start.upperBound..<normalizedFragment.endIndex) {
+            let substring = normalizedFragment[start.upperBound..<end.lowerBound]
+
+            return OAuthCredentials(token: String(substring), secret: nil)
+        }
+
+        return nil
     }
 
     static func callbackUrl(for loginService: LoginService, server: URL) -> URL? {
@@ -71,7 +83,7 @@ class OAuthManager {
             let host = server.host,
             let service = loginService.service
         else {
-                return nil
+            return nil
         }
 
         return URL(string: "https://\(host)/_oauth/\(service)")
