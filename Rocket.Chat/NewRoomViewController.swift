@@ -165,15 +165,15 @@ class NewRoomViewController: BaseViewController {
 
     fileprivate func executeRequestCreateRoom(roomName: String, roomType: SubscriptionCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
         API.current()?.fetch(SubscriptionCreateRequest(name: roomName, type: roomType, readOnly: readOnlyRoom), succeeded: { result in
-            guard let success = result.success, success == true else {
-                    completion(false, result.error)
-                    return
+            guard let success = result.success, let name = result.name, success == true else {
+                completion(false, result.error)
+                return
             }
 
             guard let auth = AuthManager.isAuthenticated() else { return }
 
             SubscriptionManager.updateSubscriptions(auth) { _ in
-                if let newRoom = Realm.shared?.objects(Subscription.self).filter("name == '\(roomName)' && privateType != 'd'").first {
+                if let newRoom = Realm.shared?.objects(Subscription.self).filter("name == '\(name)' && privateType != 'd'").first {
 
                     let controller = ChatViewController.shared
                     controller?.subscription = newRoom

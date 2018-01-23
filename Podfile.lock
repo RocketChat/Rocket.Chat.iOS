@@ -25,21 +25,21 @@ PODS:
   - GTMSessionFetcher/Core (1.1.12)
   - GTMSessionFetcher/Full (1.1.12):
     - GTMSessionFetcher/Core (= 1.1.12)
-  - Instabug (7.7.1):
-    - Instabug/Instabug (= 7.7.1)
-    - Instabug/InstabugCore (= 7.7.1)
-  - Instabug/Instabug (7.7.1):
+  - Instabug (7.8):
+    - Instabug/Instabug (= 7.8)
+    - Instabug/InstabugCore (= 7.8)
+  - Instabug/Instabug (7.8):
     - Instabug/InstabugCore
-  - Instabug/InstabugCore (7.7.1)
+  - Instabug/InstabugCore (7.8)
   - MobilePlayer (1.2.0)
   - OAuthSwift (1.2.0)
   - RCMarkdownParser (3.0.4)
   - ReachabilitySwift (4.1.0)
-  - Realm (3.0.2):
-    - Realm/Headers (= 3.0.2)
-  - Realm/Headers (3.0.2)
-  - RealmSwift (3.0.2):
-    - Realm (= 3.0.2)
+  - Realm (3.1.0):
+    - Realm/Headers (= 3.1.0)
+  - Realm/Headers (3.1.0)
+  - RealmSwift (3.1.0):
+    - Realm (= 3.1.0)
   - SDWebImage (4.2.3):
     - SDWebImage/Core (= 4.2.3)
   - SDWebImage/Core (4.2.3)
@@ -104,7 +104,7 @@ CHECKOUT OPTIONS:
     :commit: 267ddbc263304534df12e2b0dfbe8343f60891ab
     :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
-    :commit: 0a225b78544a268a94aaa1d302e2116b10fd1dd4
+    :commit: 0398657e933c8c8f06831a93d2cc96610e18a4f2
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
     :commit: 944b7cc4de734638cdefdecb9c7d7846fc3ab252
@@ -120,13 +120,13 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
-  Instabug: a20a64eabc9307f29df0202e86de7fe6dc979577
+  Instabug: 51b8f0502289c3ec3e2e66672a988d3fe6ab563a
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
   RCMarkdownParser: db98166953cad4d0045d28f627d93330b36eb7ff
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
-  RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
+  Realm: 09513d7c054678d65cd02ce09871f805b0d758ac
+  RealmSwift: e868fee9b10e5490ad94b6b6ecd9027944da1824
   SDWebImage: 791bb72962b3492327ddcac4b1880bd1b5458431
   SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
   semver: df3895a55a097c7a819a80e7375e95b29e136157
