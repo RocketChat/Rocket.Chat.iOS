@@ -115,6 +115,7 @@ class ChatMessageTextViewModelSpec: XCTestCase {
             let title = view.labelTitle?.text
             XCTAssert(title == attachment.title + " (" + localized("alert.insecure_image.title") +  ")", "Should have insecurity warning")
             XCTAssertFalse(view.isLoadable)
+            XCTAssertEqual(view.placeholderImage, UIImage(named: "Insecure Image"))
         } else {
             XCTFail("View create failed")
         }
@@ -129,6 +130,7 @@ class ChatMessageTextViewModelSpec: XCTestCase {
             let title = view.labelTitle?.text
             XCTAssert(title == attachment.title, "Should be regular title")
             XCTAssertTrue(view.isLoadable)
+            XCTAssertNil(view.placeholderImage)
         } else {
             XCTFail("View create failed")
         }
