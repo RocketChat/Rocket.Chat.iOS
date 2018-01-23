@@ -68,13 +68,6 @@ class OAuthManager {
             return credentials
         }
 
-        if let start = normalizedFragment.range(of: "&access_token="),
-            let end = normalizedFragment.range(of: "&expires_in", range: start.upperBound..<normalizedFragment.endIndex) {
-            let substring = normalizedFragment[start.upperBound..<end.lowerBound]
-
-            return OAuthCredentials(token: String(substring), secret: nil)
-        }
-
         return nil
     }
 
@@ -86,7 +79,7 @@ class OAuthManager {
             return nil
         }
 
-        return URL(string: "https://\(host)/_oauth/\(service)")
+        return URL(string: "https://\(host)/_oauth/\(service)?close")
     }
 
     static func state() -> String? {
@@ -107,7 +100,7 @@ class OAuthManager {
             consumerSecret: "",
             authorizeUrl: authorizeUrl,
             accessTokenUrl: accessTokenUrl,
-            responseType: "token"
+            responseType: loginService.responseType ?? "token"
         )
     }
 }
