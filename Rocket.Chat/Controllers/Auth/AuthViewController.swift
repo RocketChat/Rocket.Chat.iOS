@@ -263,6 +263,44 @@ final class AuthViewController: BaseViewController {
             self?.authenticateWithUsernameOrEmail()
         }
     }
+
+    @IBAction func forgotPasswordPressed(_ sender: UIButton) {
+
+        let alert = UIAlertController(title: localized("auth.forgot_password.title"), message: localized("auth.forgot_password.message"), preferredStyle: .alert)
+
+        let sendAction = UIAlertAction(title: localized("Send"), style: .default, handler: { _ in
+
+            guard let text = alert.textFields?.first?.text else { return }
+
+            AuthManager.sendForgotPassword(email: text, completion: { result in
+                guard !result.isError() else {
+                    Alert(title: localized("auth.forgot_password.title"), message: localized("error.socket.default_error_message")).present()
+                    return
+                }
+
+                Alert(title: localized("auth.forgot_password.title"), message: localized("auth.forgot_password.success")).present()
+            })
+        })
+
+        sendAction.isEnabled = false
+
+        alert.addTextField(configurationHandler: { textField in
+
+            textField.placeholder = "john.appleseed@apple.com"
+            textField.textContentType = UITextContentType.emailAddress
+            textField.keyboardType = .emailAddress
+            _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
+
+                sendAction.isEnabled = textField.text?.isValidEmail ?? false
+            }
+        })
+
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+
+        alert.addAction(sendAction)
+
+        present(alert, animated: true)
+    }
 }
 
 extension AuthViewController: UITextFieldDelegate {

@@ -54,6 +54,10 @@
 "auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
 "auth.connect.connecting" = "Conectando no servidor";
 
+"auth.forgot_password.title" = "Esqueceu sua senha?";
+"auth.forgot_password.message" = "Digite seu e-mail";
+"auth.forgot_password.success" = "Se esse e-mail for registrado, nós enviaremos instruções de como resetar sua senha. Se você não receber um e-mail em breve, por favor volte e tente novamente.";
+
 // Subscriptions
 "subscriptions.search" = "Busca";
 "subscriptions.search_results" = "Resultados";
