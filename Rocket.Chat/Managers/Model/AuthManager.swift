@@ -25,9 +25,7 @@ struct AuthManager {
         - returns: Current user object, if exists.
     */
     static func currentUser() -> User? {
-        guard let realm = Realm.shared else { return nil }
-        guard let auth = isAuthenticated() else { return nil }
-        return realm.object(ofType: User.self, forPrimaryKey: auth.userId)
+        return isAuthenticated()?.user
     }
 
     /**
