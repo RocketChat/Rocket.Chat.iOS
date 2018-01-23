@@ -340,6 +340,19 @@ extension AuthManager {
     }
 
     /**
+     Sends forgot password request for e-mail.
+     */
+    static func sendForgotPassword(email: String, completion: @escaping MessageCompletion = { _ in }) {
+        let object = [
+            "msg": "method",
+            "method": "sendForgotPasswordEmail",
+            "params": [email]
+            ] as [String: Any]
+
+        SocketManager.send(object, completion: completion)
+    }
+
+    /**
         Returns the username suggestion for the logged in user.
     */
     static func usernameSuggestion(completion: @escaping MessageCompletion) {
