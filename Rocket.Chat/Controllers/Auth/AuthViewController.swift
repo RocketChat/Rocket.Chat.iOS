@@ -369,10 +369,10 @@ extension AuthViewController {
 
                 let button = UIButton()
 
-                if $0.type == .github {
-                    button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
-                } else {
-                    button.setTitle($0.buttonLabelText ?? "", for: .normal)
+                switch $0.type {
+                case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
+                case .facebook: button.setImage(#imageLiteral(resourceName: "facebook"), for: .normal)
+                default: button.setTitle($0.buttonLabelText ?? "", for: .normal)
                 }
 
                 button.layer.cornerRadius = 3

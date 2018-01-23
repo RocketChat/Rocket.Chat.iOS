@@ -55,6 +55,6 @@ extension LoginService: ModelMappeable {
         authorizePath = "/v2.9/dialog/oauth"
         buttonLabelText = "facebook"
         buttonLabelColor = "#ffffff"
-        buttonColor = "#4c4c4c"
+        buttonColor = "#325c99"
     }
 }
