@@ -58,6 +58,19 @@ extension OAuthViewController: WKNavigationDelegate {
             return nil
         }
 
+        /*let string = url.absoluteString
+        if url.absoluteString.contains("?code=") {
+            guard
+                let start = string.range(of: "?code="),
+                let end = string.range(of: "&state=", range: start.upperBound..<string.endIndex)
+            else {
+                return nil
+            }
+
+            let substring = string[start.upperBound..<end.lowerBound]
+            return OAuthCredentials(token: String(substring), secret: nil)
+        }*/
+
         return OAuthManager.credentialsForUrlFragment(fragment)
     }
 
@@ -70,7 +83,7 @@ extension OAuthViewController: WKNavigationDelegate {
         decisionHandler(.allow)
         guard let url = url, isCallback(url: url) else { return false }
 
-        if url.fragment != nil && !url.absoluteString.contains("&access_token=") {
+        if url.fragment != nil && !url.absoluteString.contains("?code=") {
             dismissWebViewController()
             if let credentials = oauthCredentials(from: url) {
                 success?(credentials)

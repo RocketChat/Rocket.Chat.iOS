@@ -52,6 +52,8 @@ class LoginService: BaseModel {
 
         return .invalid
     }
+
+    @objc dynamic var responseType: String?
 }
 
 // MARK: OAuth helper extensions
@@ -76,7 +78,7 @@ extension LoginService {
                 return nil
         }
 
-        return "\(serverUrl)\(tokenPath)"
+        return tokenPath.contains("://") ? tokenPath : "\(serverUrl)\(tokenPath)"
     }
 }
 
