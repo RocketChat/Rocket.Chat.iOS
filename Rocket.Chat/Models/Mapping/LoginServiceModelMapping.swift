@@ -31,6 +31,7 @@ extension LoginService: ModelMappeable {
         switch type {
         case .github: mapGitHub()
         case .facebook: mapFacebook()
+        case .linkedin: mapLinkedIn()
         case .custom: break
         case .invalid: break
         }
@@ -49,7 +50,7 @@ extension LoginService: ModelMappeable {
     func mapFacebook() {
         serverUrl = "https://facebook.com"
         scope = "email"
-        tokenPath = "https://graph.facebook.com/v2.8/oauth/access_token"
+        tokenPath = "https://graph.facebook.com/oauth/v2/accessToken"
         identityPath = "https://graph.facebook.com/v2.8/me"
         authorizePath = "/v2.9/dialog/oauth"
         buttonLabelText = "facebook"
@@ -58,5 +59,18 @@ extension LoginService: ModelMappeable {
 
         responseType = ""
         callbackPath = "facebook?close"
+    }
+
+    func mapLinkedIn() {
+        serverUrl = "https://linkedin.com"
+        tokenPath = "/oauth/v2/accessToken"
+        identityPath = "https://api.github.com/v1/people/"
+        authorizePath = "/oauth/v2/authorization"
+        buttonLabelText = "linkedin"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#325c99"
+
+        responseType = "code"
+        callbackPath = "linkedin?close"
     }
 }
