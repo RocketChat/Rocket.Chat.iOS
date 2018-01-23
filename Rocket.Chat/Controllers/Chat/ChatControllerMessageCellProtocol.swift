@@ -91,6 +91,7 @@ extension ChatViewController: ChatMessageCellProtocol {
                 config.image = thumbnail.image
                 config.animatedImage = thumbnail.animatedImage
                 config.imageView = thumbnail
+                config.allowSharing = true
             }
             present(ImageViewerController(configuration: configuration), animated: true)
         } else {
