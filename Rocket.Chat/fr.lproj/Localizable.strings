@@ -40,6 +40,9 @@
 "alert.upload_error.title" = "Erreur de téléchargement";
 "alert.upload_error.message" = "Quelque chose de mal est survenu lors du téléchargement de votre fichier. Veuillez réessayer.";
 
+"alert.email_verification.title" = "Email verification"; //TODO
+"alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Le serveur a changé son URL";
 "connection.server.redirect.alert.message" = "On dirait que ce serveur a changé son adresse URL:\n\n%@\n\nVoulez-vous mettre à jour l'URL?";

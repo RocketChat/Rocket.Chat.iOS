@@ -40,6 +40,9 @@
 "alert.upload_error.title" = "Fehler beim Hochladen";
 "alert.upload_error.message" = "Irgendetwas ist beim Hochladen der Datei schiefgelaufen. Bitte erneut versuchen";
 
+"alert.email_verification.title" = "Email verification"; //TODO
+"alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
 "connection.server.redirect.alert.message" = "Es scheint, als hätte der Server die URL zu Folgender geändert:\n\n%@\n\nJetzt URL aktualisieren?";
