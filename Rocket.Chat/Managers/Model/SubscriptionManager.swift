@@ -47,8 +47,9 @@ struct SubscriptionManager {
                 guard !response.isError() else { return Log.debug(response.result.string) }
 
                 guard let auth = AuthManager.isAuthenticated() else { return }
-                Realm.executeOnMainThread { _ in
+                Realm.executeOnMainThread { realm in
                     auth.lastSubscriptionFetch = Date.serverDate
+                    realm.add(auth, update: true)
                 }
 
                 let subscriptions = List<Subscription>()
