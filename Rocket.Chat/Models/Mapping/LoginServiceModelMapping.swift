@@ -68,7 +68,7 @@ extension LoginService: ModelMappeable {
         authorizePath = "/oauth/v2/authorization"
         buttonLabelText = "linkedin"
         buttonLabelColor = "#ffffff"
-        buttonColor = "#325c99"
+        buttonColor = "#1b86bc"
 
         responseType = "code"
         callbackPath = "linkedin?close"
