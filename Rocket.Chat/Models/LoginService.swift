@@ -98,3 +98,25 @@ extension LoginService {
         return object
     }
 }
+
+// MARK: Standard Login Services extensions
+
+extension LoginService {
+    static var facebook: LoginService {
+        let service = LoginService()
+        service.mapFacebook()
+        return service
+    }
+
+    static var github: LoginService {
+        let service = LoginService()
+        service.mapGitHub()
+        return service
+    }
+
+    static var linkedin: LoginService {
+        let service = LoginService()
+        service.mapLinkedIn()
+        return service
+    }
+}

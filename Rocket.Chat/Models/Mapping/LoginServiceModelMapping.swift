@@ -38,6 +38,9 @@ extension LoginService: ModelMappeable {
     }
 
     func mapGitHub() {
+        service = "github"
+        scope = ""
+
         serverUrl = "https://github.com"
         tokenPath = "/login/oauth/access_token"
         identityPath = "https://api.github.com/user"
@@ -48,6 +51,9 @@ extension LoginService: ModelMappeable {
     }
 
     func mapFacebook() {
+        service = "facebook"
+        scope = ""
+
         serverUrl = "https://facebook.com"
         scope = "email"
         tokenPath = "https://graph.facebook.com/oauth/v2/accessToken"
@@ -62,6 +68,9 @@ extension LoginService: ModelMappeable {
     }
 
     func mapLinkedIn() {
+        service = "linkedin"
+        scope = ""
+
         serverUrl = "https://linkedin.com"
         tokenPath = "/oauth/v2/accessToken"
         identityPath = "https://api.github.com/v1/people/"
