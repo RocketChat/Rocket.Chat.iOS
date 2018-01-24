@@ -127,6 +127,18 @@ final class AuthViewController: BaseViewController {
     fileprivate func updateAuthenticationMethods() {
         guard let settings = self.serverPublicSettings else { return }
         self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
+
+        if settings.isFacebookAuthenticationEnabled {
+            addOAuthButton(for: .facebook)
+        }
+
+        if settings.isGitHubAuthenticationEnabled {
+            addOAuthButton(for: .github)
+        }
+
+        if settings.isLinkedInAuthenticationEnabled {
+            addOAuthButton(for: .linkedin)
+        }
     }
 
     internal func handleAuthenticationResponse(_ response: SocketResponse) {
@@ -366,30 +378,37 @@ extension AuthViewController {
         })
     }
 
+    func addOAuthButton(for loginService: LoginService) {
+        guard let service = loginService.service else { return }
+
+        let button = customAuthButtons[service] ?? UIButton()
+
+        switch loginService.type {
+        case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
+        case .facebook: button.setImage(#imageLiteral(resourceName: "facebook"), for: .normal)
+        case .linkedin: button.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
+        default: button.setTitle(loginService.buttonLabelText ?? "", for: .normal)
+        }
+
+        button.layer.cornerRadius = 3
+        button.titleLabel?.font = .boldSystemFont(ofSize: 17.0)
+        button.setTitleColor(UIColor(hex: loginService.buttonLabelColor), for: .normal)
+        button.backgroundColor = UIColor(hex: loginService.buttonColor)
+
+        if !authButtonsStackView.subviews.contains(button) {
+            authButtonsStackView.addArrangedSubview(button)
+            button.addTarget(self, action: #selector(loginServiceButtonDidPress(_:)), for: .touchUpInside)
+            customAuthButtons[service] = button
+        }
+    }
+
     func updateLoginServices(changes: RealmCollectionChange<Results<LoginService>>) {
         switch changes {
         case .update(let res, let deletions, let insertions, let modifications):
             insertions.map { res[$0] }.forEach {
                 guard !($0.serverUrl?.isEmpty ?? true) else { return }
 
-                let button = UIButton()
-
-                switch $0.type {
-                case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
-                case .facebook: button.setImage(#imageLiteral(resourceName: "facebook"), for: .normal)
-                case .linkedin: button.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
-                default: button.setTitle($0.buttonLabelText ?? "", for: .normal)
-                }
-
-                button.layer.cornerRadius = 3
-                button.titleLabel?.font = .boldSystemFont(ofSize: 17.0)
-                button.setTitleColor(UIColor(hex: $0.buttonLabelColor), for: .normal)
-                button.backgroundColor = UIColor(hex: $0.buttonColor)
-                button.addTarget(self, action: #selector(loginServiceButtonDidPress(_:)), for: .touchUpInside)
-
-                authButtonsStackView.addArrangedSubview(button)
-
-                customAuthButtons[$0.service ?? ""] = button
+                self.addOAuthButton(for: $0)
             }
 
             modifications.map { res[$0] }.forEach {
