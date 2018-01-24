@@ -61,6 +61,11 @@ final class AuthSettings: BaseModel {
     @objc dynamic var hideMessageUserMutedUnmuted: Bool = false
     @objc dynamic var hideMessageUserRemoved: Bool = false
 
+    // Message
+    @objc dynamic var messageShowDeletedStatus: Bool = true
+    @objc dynamic var messageAllowDeleting: Bool = true
+    @objc dynamic var messageAllowDeletingBlockDeleteInMinutes: Int = 0
+
     var hiddenTypes: Set<MessageType> {
         var hiddenTypes = Set<MessageType>()
 
