@@ -25,7 +25,7 @@ extension Auth {
     }
 }
 
-class AuthSpec: XCTestCase {
+class AuthSpec: XCTestCase, RealmTestCase {
 
     // MARK: Setup
 
@@ -74,6 +74,114 @@ class AuthSpec: XCTestCase {
         object.serverURL = ""
 
         XCTAssertNil(object.apiHost, "apiHost will be nil when serverURL is an invalid URL")
+    }
+
+    //swiftlint:disable function_body_length
+    func testCanDeleteMessage() {
+        let realm = testRealm()
+
+        let user1 = User.testInstance()
+        user1.identifier = "uid1"
+
+        let user2 = User.testInstance()
+        user2.identifier = "uid2"
+
+        let auth = Auth.testInstance()
+        auth.userId = user1.identifier
+
+        let message = Message.testInstance()
+        message.identifier = "mid"
+        message.user = user1
+
+        // standard test
+
+        try? realm.write {
+            realm.add(auth)
+            realm.add(user1)
+            realm.add(user2)
+
+            auth.settings?.messageAllowDeleting = true
+            auth.settings?.messageAllowDeletingBlockDeleteInMinutes = 0
+        }
+
+        XCTAssert(auth.canDeleteMessage(message) == .allowed)
+
+        // invalid message
+
+        try? realm.write {
+            message.createdAt = nil
+        }
+
+        XCTAssert(auth.canDeleteMessage(message) == .unknown)
+
+        // non actionable message type
+
+        try? realm.write {
+            message.createdAt = Date()
+            message.internalType = MessageType.userJoined.rawValue
+        }
+
+        XCTAssert(auth.canDeleteMessage(message) == .notActionable)
+
+        // time elapsed
+
+        try? realm.write {
+            message.internalType = MessageType.text.rawValue
+            message.createdAt = Date(timeInterval: -1000, since: Date())
+            auth.settings?.messageAllowDeletingBlockDeleteInMinutes = 1
+        }
+
+        XCTAssert(auth.canDeleteMessage(message) == .timeElapsed)
+
+        // different user
+
+        try? realm.write {
+            message.user = user2
+        }
+
+        XCTAssert(auth.canDeleteMessage(message) == .differentUser)
+
+        // server blocked
+
+        try? realm.write {
+            auth.settings?.messageAllowDeleting = false
+            message.user = user1
+        }
+
+        XCTAssert(auth.canDeleteMessage(message) == .serverBlocked)
+
+        // force-delete-message permission
+
+        let forcePermission = Permission()
+        forcePermission.identifier = PermissionType.forceDeleteMessage.rawValue
+        forcePermission.roles.append("admin")
+
+        try? realm.write {
+            message.user = user2
+            realm.add(forcePermission)
+            user1.roles.append("admin")
+        }
+
+        XCTAssert(auth.canDeleteMessage(message) == .allowed)
+
+        // delete-message permission time elapsed
+
+        let permission = Permission()
+        permission.identifier = PermissionType.deleteMessage.rawValue
+        permission.roles.append("admin")
+
+        try? realm.write {
+            forcePermission.roles.removeAll()
+            realm.add(permission)
+        }
+
+        XCTAssert(auth.canDeleteMessage(message) == .timeElapsed)
+
+        try? realm.write {
+            auth.settings?.messageAllowDeletingBlockDeleteInMinutes = 0
+        }
+
+        XCTAssert(auth.canDeleteMessage(message) == .allowed)
     }
 
 }

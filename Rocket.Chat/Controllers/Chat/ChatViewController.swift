@@ -426,12 +426,22 @@ final class ChatViewController: SLKTextViewController {
 
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
+        MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
+            guard let collectionView = self?.collectionView else { return }
+
+            self?.dataController.delete(msgId: msgId)
+
+            collectionView.performBatchUpdates({
+                collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+            })
+        }
         registerTypingEvent(subscription)
     }
 
     internal func unsubscribe(for subscription: Subscription) {
         SocketManager.unsubscribe(eventName: subscription.rid)
         SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
+        SocketManager.unsubscribe(eventName: "\(subscription.rid)/deleteMessage")
     }
 
     internal func emptySubscriptionState() {
@@ -926,6 +936,8 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
             }
 
             if let message = obj.message {
+                guard !message.markedForDeletion else { return .zero }
+
                 let sequential = dataController.hasSequentialMessageAt(indexPath)
                 let height = ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: sequential)
                 return CGSize(width: fullWidth, height: height)
