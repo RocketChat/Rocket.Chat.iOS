@@ -115,7 +115,7 @@ class ChatMessageTextViewModelSpec: XCTestCase {
             let title = view.labelTitle?.text
             XCTAssert(title == attachment.title + " (" + localized("alert.insecure_image.title") +  ")", "Should have insecurity warning")
             XCTAssertFalse(view.isLoadable)
-            XCTAssertEqual(view.placeholderImage, UIImage(named: "Insecure Image"))
+            XCTAssertEqual(view.placeholderImage, UIImage(named: "Resource Unavailable"))
         } else {
             XCTFail("View create failed")
         }

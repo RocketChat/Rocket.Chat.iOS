@@ -49,7 +49,8 @@ final class ChatMessageImageView: UIView {
         if imageURL.absoluteString.starts(with: "http://") {
             isLoadable = false
             labelTitle.text = attachment.title + " (" + localized("alert.insecure_image.title") + ")"
-            placeholderImage = UIImage(named: "Insecure Image")
+            placeholderImage = UIImage(named: "Resource Unavailable")
+            imageView.contentMode = UIViewContentMode.scaleAspectFit
         }
     }
 
