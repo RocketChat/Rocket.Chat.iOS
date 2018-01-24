@@ -65,14 +65,8 @@ struct MessagesClient: APIClient {
             return false
         }
 
-        api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser), succeeded: { result in
-            guard result.success == true else { return }
-            /*DispatchQueue.main.async {
-                try? realm?.write {
-                    message.internalType = MessageType.messageRemoved.rawValue
-                }
-            }*/
-        }, errored: nil)
+        api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser),
+                  succeeded: nil, errored: nil)
 
         return true
     }
