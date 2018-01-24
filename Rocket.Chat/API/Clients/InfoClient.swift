@@ -15,7 +15,6 @@ struct InfoClient: APIClient {
         api.fetch(InfoRequest(), succeeded: { result in
             realm?.execute({ realm in
                 AuthManager.isAuthenticated(realm: realm)?.serverVersion = result.version ?? ""
-                print("version: \(result.version ?? "")")
             })
         }, errored: nil)
     }
