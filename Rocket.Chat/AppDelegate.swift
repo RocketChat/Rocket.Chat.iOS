@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AuthSettingsManager.shared.updateCachedSettings()
             WindowManager.open(.chat)
         } else {
-            WindowManager.open(.auth)
+            WindowManager.open(.auth(serverUrl: ""))
         }
 
         return true
@@ -57,6 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        if handleDeepLink(url) {
+            return true
+        }
+
         return GIDSignIn.sharedInstance().handle(
             url,
             sourceApplication: options[.sourceApplication] as? String,
@@ -74,4 +78,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.debug("Fail to register for notification: \(error)")
     }
 
+    // MARK: Deep Link
+
+    func handleDeepLink(_ url: URL) -> Bool {
+        guard let deepLink = DeepLink(url: url) else { return false }
+        return AppManager.handleDeepLink(deepLink)
+    }
 }
