@@ -61,16 +61,43 @@ extension AppManager {
         return true
     }
 
+    static func addServer(serverUrl: String) {
+        SocketManager.disconnect { _, _ in }
+        WindowManager.open(.auth(serverUrl: serverUrl))
+    }
+
+    static func changeToOrAddServer(serverUrl: String) {
+        if changeToServerIfExists(serverUrl: serverUrl) {
+            return
+        }
+
+        addServer(serverUrl: serverUrl)
+    }
+
     static func reloadApp() {
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {
                     WindowManager.open(.chat)
                 } else {
-                    WindowManager.open(.auth)
+                    WindowManager.open(.auth(serverUrl: ""))
                 }
             }
         }
     }
+}
 
+// MARK: Deep Link
+
+extension AppManager {
+    static func handleDeepLink(_ deepLink: DeepLink) -> Bool {
+        switch deepLink {
+        case let .auth(host):
+            changeToOrAddServer(serverUrl: host)
+        default:
+            return false
+        }
+
+        return true
+    }
 }
