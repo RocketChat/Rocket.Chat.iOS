@@ -119,6 +119,7 @@
 "chat.message.actions.unpin" = "Odepnout zprávu";
 "chat.message.actions.quote" = "Citace zprávy";
 "chat.message.actions.reply" = "Odpovědět na zprávu";
+"chat.message.actions.delete" = "Delete message"; //TODO
 "Send" = "Odeslat"; //SLKTextInputbar.m
 
 // Chat Message Report

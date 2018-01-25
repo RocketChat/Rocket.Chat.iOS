@@ -13,7 +13,7 @@ import RealmSwift
 extension LoginService: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
         service = values["service"].stringValue
-        clientId = values["clientId"].string
+        clientId = values["clientId"].string ?? values["appId"].string
         custom = values["custom"].boolValue
         serverUrl = values["serverURL"].stringValue
         tokenPath = values["tokenPath"].stringValue
@@ -30,12 +30,17 @@ extension LoginService: ModelMappeable {
 
         switch type {
         case .github: mapGitHub()
+        case .facebook: mapFacebook()
+        case .linkedin: mapLinkedIn()
         case .custom: break
         case .invalid: break
         }
     }
 
     func mapGitHub() {
+        service = "github"
+        scope = ""
+
         serverUrl = "https://github.com"
         tokenPath = "/login/oauth/access_token"
         identityPath = "https://api.github.com/user"
@@ -43,5 +48,38 @@ extension LoginService: ModelMappeable {
         buttonLabelText = "github"
         buttonLabelColor = "#ffffff"
         buttonColor = "#4c4c4c"
+    }
+
+    func mapFacebook() {
+        service = "facebook"
+        scope = ""
+
+        serverUrl = "https://facebook.com"
+        scope = "email"
+        tokenPath = "https://graph.facebook.com/oauth/v2/accessToken"
+        identityPath = "https://graph.facebook.com/v2.8/me"
+        authorizePath = "/v2.9/dialog/oauth"
+        buttonLabelText = "facebook"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#325c99"
+
+        responseType = ""
+        callbackPath = "facebook?close"
+    }
+
+    func mapLinkedIn() {
+        service = "linkedin"
+        scope = ""
+
+        serverUrl = "https://linkedin.com"
+        tokenPath = "/oauth/v2/accessToken"
+        identityPath = "https://api.github.com/v1/people/"
+        authorizePath = "/oauth/v2/authorization"
+        buttonLabelText = "linkedin"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#1b86bc"
+
+        responseType = "code"
+        callbackPath = "linkedin?close"
     }
 }

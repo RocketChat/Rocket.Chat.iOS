@@ -119,6 +119,7 @@
 "chat.message.actions.unpin" = "Remover pino da mensagem";
 "chat.message.actions.quote" = "Citar mensagem";
 "chat.message.actions.reply" = "Responder mensagem";
+"chat.message.actions.delete" = "Deletar mensagem";
 "Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
