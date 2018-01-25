@@ -15,6 +15,7 @@ import RealmSwift
 final class AuthViewController: BaseViewController {
 
     internal var connecting = false
+
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
@@ -95,10 +96,12 @@ final class AuthViewController: BaseViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
@@ -367,10 +370,10 @@ extension AuthViewController {
             return
         }
 
-        startLoading()
-
         OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
             guard let strongSelf = self else { return }
+
+            strongSelf.startLoading()
             AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
         }, failure: { [weak self] in
             self?.alert(
