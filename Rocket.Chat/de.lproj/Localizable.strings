@@ -43,8 +43,8 @@
 "alert.upload_error.title" = "Fehler beim Hochladen";
 "alert.upload_error.message" = "Irgendetwas ist beim Hochladen der Datei schiefgelaufen. Bitte erneut versuchen";
 
-"alert.email_verification.title" = "Email verification"; //TODO
-"alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
+"alert.email_verification.title" = "E-Mail Bestätigung";
+"alert.email_verification.message" = "Wir haben dir eine E-Mail zur Bestätigung deiner Registrierung geschickt. Solltest du keine Mail erhalten haben versuche es noch einmal.";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
@@ -60,9 +60,9 @@
 "auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
 "auth.connect.connecting" = "Verbindung läuft. Warte kurz!";
 
-"auth.forgot_password.title" = "Forgot your password?"; //TODO
-"auth.forgot_password.message" = "Enter your e-mail"; //TODO
-"auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again."; //TODO
+"auth.forgot_password.title" = "Passwort vergessen?";
+"auth.forgot_password.message" = "E-Mail-Adresse eingeben";
+"auth.forgot_password.success" = "Wenn diese E-Mail-Adresse hinterlegt ist, werden Anweisungen zum Zurücksetzen des Passworts verschickt. Wenn du keine Mail bekommen hast, versuche es noch einmal.";
 
 // Subscriptions
 "subscriptions.search" = "Suche";
@@ -122,7 +122,7 @@
 "chat.message.actions.unpin" = "Nachricht lösen";
 "chat.message.actions.quote" = "Nachricht zitieren";
 "chat.message.actions.reply" = "Nachricht beantworten";
-"chat.message.actions.delete" = "Delete message"; //TODO
+"chat.message.actions.delete" = "Nachricht löschen";
 "Send" = "Senden"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -143,6 +143,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Antippen zum Öffnen";
+"chat.message.open_browser" = "Im Browser öffnen";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Raum umbenannt zu: %@ von %@";
