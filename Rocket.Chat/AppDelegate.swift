@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             AuthSettingsManager.shared.updateCachedSettings()
             WindowManager.open(.chat)
         } else {
-            WindowManager.open(.auth(serverUrl: ""))
+            WindowManager.open(.auth(serverUrl: "", credentials: nil))
         }
 
         return true

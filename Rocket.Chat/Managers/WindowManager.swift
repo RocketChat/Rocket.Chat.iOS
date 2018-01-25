@@ -9,7 +9,7 @@
 import UIKit
 
 enum Storyboard {
-    case auth(serverUrl: String)
+    case auth(serverUrl: String, credentials: DeepLinkCredentials?)
     case chat
 
     var name: String {
@@ -29,7 +29,7 @@ enum Storyboard {
         _ = controller?.view
 
         switch self {
-        case let .auth(serverUrl):
+        case let .auth(serverUrl, credentials):
             let navigationController = (controller as? UINavigationController)
             let controller = navigationController?.topViewController as? ConnectServerViewController
             _ = controller?.view
@@ -37,6 +37,7 @@ enum Storyboard {
 
             if serverUrl.count > 0 {
                 controller?.connect()
+                controller?.deepLinkCredentials = credentials
             }
         default:
             break

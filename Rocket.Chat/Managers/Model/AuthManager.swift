@@ -182,15 +182,7 @@ extension AuthManager {
                 return completion(response)
             }
 
-            let object = [
-                "msg": "method",
-                "method": "login",
-                "params": [[
-                    "resume": auth.token ?? ""
-                ]]
-            ] as [String: Any]
-
-            SocketManager.send(object) { (response) in
+            AuthManager.auth(token: auth.token ?? "") { (response) in
                 guard !response.isError() else {
                     SocketManager.disconnect({ (_, _) in
                         completion(response)
@@ -204,6 +196,16 @@ extension AuthManager {
                 completion(response)
             }
         }
+    }
+
+    static func auth(token: String, completion: @escaping MessageCompletion) {
+        let object = [
+            "msg": "method",
+            "method": "login",
+            "params": [["resume": token]]
+        ] as [String: Any]
+
+        SocketManager.send(object, completion: completion)
     }
 
     /**

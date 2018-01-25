@@ -61,17 +61,17 @@ extension AppManager {
         return true
     }
 
-    static func addServer(serverUrl: String) {
+    static func addServer(serverUrl: String, credentials: DeepLinkCredentials? = nil) {
         SocketManager.disconnect { _, _ in }
-        WindowManager.open(.auth(serverUrl: serverUrl))
+        WindowManager.open(.auth(serverUrl: serverUrl, credentials: credentials))
     }
 
-    static func changeToOrAddServer(serverUrl: String) {
+    static func changeToOrAddServer(serverUrl: String, credentials: DeepLinkCredentials? = nil) {
         if changeToServerIfExists(serverUrl: serverUrl) {
             return
         }
 
-        addServer(serverUrl: serverUrl)
+        addServer(serverUrl: serverUrl, credentials: credentials)
     }
 
     static func reloadApp() {
@@ -80,7 +80,7 @@ extension AppManager {
                 if AuthManager.isAuthenticated() != nil {
                     WindowManager.open(.chat)
                 } else {
-                    WindowManager.open(.auth(serverUrl: ""))
+                    WindowManager.open(.auth(serverUrl: "", credentials: nil))
                 }
             }
         }
@@ -92,8 +92,8 @@ extension AppManager {
 extension AppManager {
     static func handleDeepLink(_ deepLink: DeepLink) -> Bool {
         switch deepLink {
-        case let .auth(host):
-            changeToOrAddServer(serverUrl: host)
+        case let .auth(host, credentials):
+            changeToOrAddServer(serverUrl: host, credentials: credentials)
         default:
             return false
         }
