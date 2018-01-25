@@ -82,6 +82,7 @@
 "user_menu.away" = "Pryč";
 "user_menu.busy" = "Zaneprázdněn";
 "user_menu.invisible" = "Neviditelný";
+"user_menu.admin" = "Administration"; //TODO
 "user_menu.settings" = "Můj účet";
 "user_menu.logout" = "Odhlásit";
 

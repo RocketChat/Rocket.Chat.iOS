@@ -82,6 +82,7 @@
 "user_menu.away" = "Away";
 "user_menu.busy" = "Busy";
 "user_menu.invisible" = "Invisible";
+"user_menu.admin" = "Administration";
 "user_menu.settings" = "My Account";
 "user_menu.logout" = "Logout";
 
