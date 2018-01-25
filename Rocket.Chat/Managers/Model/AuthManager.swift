@@ -25,9 +25,7 @@ struct AuthManager {
         - returns: Current user object, if exists.
     */
     static func currentUser() -> User? {
-        guard let realm = Realm.shared else { return nil }
-        guard let auth = isAuthenticated() else { return nil }
-        return realm.object(ofType: User.self, forPrimaryKey: auth.userId)
+        return isAuthenticated()?.user
     }
 
     /**
@@ -222,14 +220,7 @@ extension AuthManager {
             "params": [param]
         ] as [String: Any]
 
-        SocketManager.send(object) { (response) in
-            guard !response.isError() else {
-                completion(response)
-                return
-            }
-
-            self.auth(email, password: password, completion: completion)
-        }
+        SocketManager.send(object, completion: completion)
     }
 
     /**
@@ -329,7 +320,7 @@ extension AuthManager {
             of success or error.
      */
     static func auth(credentials: OAuthCredentials, completion: @escaping MessageCompletion) {
-        let params = [
+        var params = [
             "oauth": [
                 "credentialToken": credentials.token,
                 "credentialSecret": credentials.secret
@@ -337,6 +328,19 @@ extension AuthManager {
         ]
 
         AuthManager.auth(params: params, completion: completion)
+    }
+
+    /**
+     Sends forgot password request for e-mail.
+     */
+    static func sendForgotPassword(email: String, completion: @escaping MessageCompletion = { _ in }) {
+        let object = [
+            "msg": "method",
+            "method": "sendForgotPasswordEmail",
+            "params": [email]
+            ] as [String: Any]
+
+        SocketManager.send(object, completion: completion)
     }
 
     /**

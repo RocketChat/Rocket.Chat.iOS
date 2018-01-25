@@ -1,12 +1,3 @@
-/* 
-  Localizable.strings
-  Rocket.Chat
-
-  Created by Rafael K. Streit on 8/27/16.
-  Copyright © 2016 Rocket.Chat. All rights reserved.
-*/
-
-
 // Global
 "global.ok" = "OK";
 "global.cancel" = "Cancel";
@@ -49,6 +40,9 @@
 "alert.upload_error.title" = "Upload Error";
 "alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again.";
 
+"alert.email_verification.title" = "Email verification";
+"alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again.";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
@@ -62,6 +56,10 @@
 "auth.connect.button_connect" = "Connect";
 "auth.connect.ssl_required" = "It is required that your server supports SSL";
 "auth.connect.connecting" = "Connection in progress. Hold tight";
+
+"auth.forgot_password.title" = "Forgot your password?";
+"auth.forgot_password.message" = "Enter your e-mail";
+"auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again.";
 
 // Subscriptions
 "subscriptions.search" = "Search";
@@ -101,6 +99,9 @@
 "new_room.group.invite_users" = "Invite users";
 "new_room.cell.invite_users.placeholder" = "Usernames";
 
+// Notifications
+"notifications.action.reply" = "Reply";
+
 // Chat
 "chat.channel_preview_view.title" = "This is a preview of #%@";
 "chat.channel_preview_view.join" = "Join Channel";
@@ -119,6 +120,8 @@
 "chat.message.actions.unpin" = "Unpin message";
 "chat.message.actions.quote" = "Quote message";
 "chat.message.actions.reply" = "Reply to message";
+"chat.message.actions.delete" = "Delete message";
+"Send" = "Send"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Message Reported";
