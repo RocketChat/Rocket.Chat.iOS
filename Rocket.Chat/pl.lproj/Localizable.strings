@@ -22,8 +22,8 @@
 "alert.feature.wip.title" = "Ups!";
 "alert.feature.wip.message" = "Wciąż pracujemy nad tą funkcją. Bądź czujny!";
 
-"alert.insecure_image.title" = "Insecure resource";
-"alert.insecure_image.message" = "The resource of the image is insecure and therefor not loaded. Only SSL resources are allowed.";
+"alert.insecure_image.title" = "Insecure resource"; //TODO
+"alert.insecure_image.message" = "The resource of the image is insecure and therefor not loaded. Only SSL resources are allowed."; //TODO
 
 "alert.socket_error.invalid_user.title" = "Sesja wygasła";
 "alert.socket_error.invalid_user.message" = "Twoja sesja wygasła. Zaloguj się ponownie.";
