@@ -54,6 +54,8 @@ class MembersListViewData {
                 self.title = "\(localized("chat.members.list.title")) (\(self.total))"
                 self.isLoadingMoreMembers = false
                 completion?()
+            }, errored: { [weak self] _ in
+                // TODO: Handle error
             })
         }
     }
