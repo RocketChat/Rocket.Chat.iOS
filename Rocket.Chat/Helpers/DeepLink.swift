@@ -12,7 +12,7 @@ typealias DeepLinkCredentials = (token: String, userId: String)
 
 enum DeepLink {
     case auth(host: String, credentials: DeepLinkCredentials?)
-    case room
+    case room(host: String, roomId: String)
 
     init?(url: URL) {
         guard
@@ -34,7 +34,11 @@ enum DeepLink {
 
             self = .auth(host: host, credentials: credentials)
         case "room":
-            self = .room
+            guard let roomId = url.queryParameters?["rid"] else {
+                return nil
+            }
+
+            self = .room(host: host, roomId: roomId)
         default:
             return nil
         }

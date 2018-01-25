@@ -17,8 +17,6 @@ final class PushManager {
     static let kDeviceTokenKey = "deviceToken"
     static let kPushIdentifierKey = "pushIdentifier"
 
-    static var lastNotificationRoomId: String?
-
     static func updatePushToken() {
         guard let deviceToken = getDeviceToken() else { return }
         guard let userIdentifier = AuthManager.isAuthenticated()?.userId else { return }
@@ -151,7 +149,7 @@ extension PushManager {
         }
 
         // side effect: needed for Subscription.notificationSubscription()
-        lastNotificationRoomId = notification.roomId
+        AppManager.initialRoomId = notification.roomId
 
         if index != DatabaseManager.selectedIndex {
             AppManager.changeSelectedServer(index: index)

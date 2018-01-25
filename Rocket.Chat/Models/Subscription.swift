@@ -177,7 +177,7 @@ extension Subscription {
     }
 
     static func notificationSubscription(auth: Auth? = AuthManager.isAuthenticated()) -> Subscription? {
-        guard let roomId = PushManager.lastNotificationRoomId else { return nil }
+        guard let roomId = AppManager.initialRoomId else { return nil }
         return auth?.subscriptions.filter("rid = %@", roomId).first
     }
 
@@ -187,7 +187,7 @@ extension Subscription {
 
     static func initialSubscription(auth: Auth? = AuthManager.isAuthenticated()) -> Subscription? {
         if let subscription = notificationSubscription(auth: auth) {
-            PushManager.lastNotificationRoomId = nil
+            AppManager.initialRoomId = nil
             return subscription
         }
 

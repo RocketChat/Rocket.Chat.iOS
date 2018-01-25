@@ -36,6 +36,13 @@ struct AppManager {
         return applicationServerURL == nil
     }
 
+    /**
+     Default room Id
+
+     If set, App will go straight to this room after launching
+    */
+    static var initialRoomId: String?
+
 }
 
 extension AppManager {
@@ -94,6 +101,9 @@ extension AppManager {
         switch deepLink {
         case let .auth(host, credentials):
             changeToOrAddServer(serverUrl: host, credentials: credentials)
+        case let .room(host, roomId):
+            AppManager.initialRoomId = roomId
+            changeToOrAddServer(serverUrl: host)
         default:
             return false
         }
