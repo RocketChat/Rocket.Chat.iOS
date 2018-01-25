@@ -43,6 +43,9 @@
 "alert.upload_error.title" = "Fehler beim Hochladen";
 "alert.upload_error.message" = "Irgendetwas ist beim Hochladen der Datei schiefgelaufen. Bitte erneut versuchen";
 
+"alert.email_verification.title" = "Email verification"; //TODO
+"alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
 "connection.server.redirect.alert.message" = "Es scheint, als hätte der Server die URL zu Folgender geändert:\n\n%@\n\nJetzt URL aktualisieren?";
@@ -56,6 +59,10 @@
 "auth.connect.button_connect" = "Verbinden";
 "auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
 "auth.connect.connecting" = "Verbindung läuft. Warte kurz!";
+
+"auth.forgot_password.title" = "Forgot your password?"; //TODO
+"auth.forgot_password.message" = "Enter your e-mail"; //TODO
+"auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again."; //TODO
 
 // Subscriptions
 "subscriptions.search" = "Suche";
@@ -94,6 +101,9 @@
 "new_room.group.invite_users" = "Benutzer einladen";
 "new_room.cell.invite_users.placeholder" = "Benutzernamen";
 
+// Notifications
+"notifications.action.reply" = "Antworten";
+
 // Chat
 "chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
 "chat.channel_preview_view.join" = "Kanal beitreten";
@@ -112,6 +122,7 @@
 "chat.message.actions.unpin" = "Nachricht lösen";
 "chat.message.actions.quote" = "Nachricht zitieren";
 "chat.message.actions.reply" = "Nachricht beantworten";
+"chat.message.actions.delete" = "Delete message"; //TODO
 "Send" = "Senden"; //SLKTextInputbar.m
 
 // Chat Message Report

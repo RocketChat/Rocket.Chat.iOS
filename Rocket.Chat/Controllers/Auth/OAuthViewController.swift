@@ -74,7 +74,7 @@ extension OAuthViewController: WKNavigationDelegate {
             dismissWebViewController()
             if let credentials = oauthCredentials(from: url) {
                 success?(credentials)
-            } else {
+            } else if !url.absoluteString.contains("code=") {
                 failure?()
             }
         }
