@@ -82,6 +82,7 @@
 "user_menu.away" = "Zaraz wracam";
 "user_menu.busy" = "Zajęty";
 "user_menu.invisible" = "Ukryty";
+"user_menu.admin" = "Administration"; //TODO
 "user_menu.settings" = "Moje Konto";
 "user_menu.logout" = "Wyloguj";
 
