@@ -125,15 +125,23 @@ final class SignupViewController: BaseViewController {
                     self?.present(alert, animated: true, completion: nil)
                 }
             } else {
-                if let user = AuthManager.currentUser() {
 
+                guard AuthSettingsManager.settings?.emailVerification == false else {
+                    Alert(key: "alert.email_verification").present { _ in
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                    return
+                }
+
+                AuthManager.auth(email, password: password, completion: { _ in
+                    guard let user = AuthManager.currentUser() else { return }
                     if user.username != nil {
                         self?.dismiss(animated: true, completion: nil)
                         AppManager.reloadApp()
                     } else {
                         self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
-                }
+                })
             }
         }
     }
