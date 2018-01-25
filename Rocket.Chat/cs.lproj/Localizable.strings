@@ -143,6 +143,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Klikněte pro otevření souboru";
+"chat.message.open_browser" = "Open in Browser"; //TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Jméno místnosti bylo změněno: %@ by %@";

@@ -143,6 +143,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Tap to open the file";
+"chat.message.open_browser" = "Open in Browser";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Room name changed to: %@ by %@";
