@@ -244,10 +244,11 @@ final class ChatMessageCell: UICollectionViewCell {
         }
 
         avatarView.user = message.user
+        avatarView.emoji = message.emoji
+
         if let avatar = message.avatar {
             avatarView.avatarURL = URL(string: avatar)
         }
-        avatarView.emoji = message.emoji
 
         if message.alias.count > 0 {
             labelUsername.text = message.alias
