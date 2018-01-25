@@ -18,7 +18,6 @@ protocol ChatMessageImageViewProtocol: class {
 final class ChatMessageImageView: UIView {
     static let defaultHeight = CGFloat(250)
     var isLoadable = true
-    var placeholderImage: UIImage?
 
     weak var delegate: ChatMessageImageViewProtocol?
     var attachment: Attachment! {
@@ -46,19 +45,20 @@ final class ChatMessageImageView: UIView {
         return UITapGestureRecognizer(target: self, action: #selector(didTapView))
     }()
 
-    private func checkHttpImage(imageURL: URL) {
+    private func getImage() -> URL? {
+        guard let imageURL = attachment.fullImageURL() else {
+            return nil
+        }
         if imageURL.absoluteString.starts(with: "http://") {
             isLoadable = false
             labelTitle.text = attachment.title + " (" + localized("alert.insecure_image.title") + ")"
-            placeholderImage = UIImage(named: "Resource Unavailable")
             imageView.contentMode = UIViewContentMode.center
+            imageView.sd_setImage(with: nil, placeholderImage: UIImage(named: "Resource Unavailable"))
+            return nil
         }
-    }/*
-
-    private func openImageExternal(imageURL: URL) {
-        let controller = SFSafariViewController(url: imageURL)
-        present(controller, animated: true)
-    }*/
+        labelTitle.text = attachment.title
+        return imageURL
+    }
 
     fileprivate func updateMessageInformation() {
         let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
@@ -66,15 +66,12 @@ final class ChatMessageImageView: UIView {
             addGestureRecognizer(tapGesture)
         }
 
-        guard let imageURL = attachment.fullImageURL() else {
+        guard let imageURL = getImage() else {
             return
         }
 
-        labelTitle.text = attachment.title
-        checkHttpImage(imageURL: imageURL)
-
         activityIndicatorImageView.startAnimating()
-        imageView.sd_setImage(with: imageURL, placeholderImage: placeholderImage, completed: { [weak self] _, _, _, _ in
+        imageView.sd_setImage(with: imageURL, completed: { [weak self] _, _, _, _ in
             self?.activityIndicatorImageView.stopAnimating()
         })
     }
@@ -86,24 +83,9 @@ final class ChatMessageImageView: UIView {
             guard let imageURL = attachment.fullImageURL() else {
                 return
             }
-            ChatViewController.shared?.ask(key: "alert.insecure_image", buttonA: localized("global.ok"), buttonB: localized("chat.message.open_browser"), callbackB: { _ in
+            Ask(key: "alert.insecure_image", buttonB: localized("chat.message.open_browser"), handlerB: { _ in
                 ChatViewController.shared?.openURL(url: imageURL)
-            })
-        }
-    }
-}
-
-extension ChatViewController {
-    func ask(key: String, buttonA: String, buttonB: String, callbackA: ((UIAlertAction) -> Swift.Void)? = nil, callbackB: ((UIAlertAction) -> Swift.Void)? = nil) {
-        let alert = UIAlertController(
-            title: localized(key + ".title"),
-            message: localized(key + ".message"),
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: buttonA, style: .default, handler: callbackA))
-        alert.addAction(UIAlertAction(title: buttonB, style: .default, handler: callbackB))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
+            }).present()
         }
     }
 }
