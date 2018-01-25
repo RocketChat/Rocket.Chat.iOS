@@ -44,7 +44,7 @@ class DeleteMessageRequestSpec: APITestCase {
                 ],
                 "_id": "i68rmSm0Tslr4S4DMu"
             ],
-            "ts": 1515706859821,
+            "ts": 1515706859,
             "success": true
         ])
 
