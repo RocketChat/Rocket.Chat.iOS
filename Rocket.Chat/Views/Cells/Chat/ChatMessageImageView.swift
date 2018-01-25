@@ -9,7 +9,6 @@
 import UIKit
 import SDWebImage
 import FLAnimatedImage
-import SafariServices
 
 protocol ChatMessageImageViewProtocol: class {
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView)

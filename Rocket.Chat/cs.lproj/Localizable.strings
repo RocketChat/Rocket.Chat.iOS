@@ -22,8 +22,8 @@
 "alert.feature.wip.title" = "Jejky!";
 "alert.feature.wip.message" = "Stále pracujeme na této funkci, ale není ještě dokončena.";
 
-"alert.insecure_image.title" = "Insecure resource";
-"alert.insecure_image.message" = "The resource of the image is insecure and therefor not loaded. Only SSL resources are allowed.";
+"alert.insecure_image.title" = "Insecure resource"; //TODO
+"alert.insecure_image.message" = "The resource of the image is insecure and therefor not loaded. Only SSL resources are allowed."; //TODO
 
 "alert.socket_error.invalid_user.title" = "Relace vypršela";
 "alert.socket_error.invalid_user.message" = "Platnost Vaší relace vypršela. Přihlaste se znovu, prosím.";
