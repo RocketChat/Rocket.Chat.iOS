@@ -8,8 +8,10 @@
 
 import Foundation
 
+typealias DeepLinkCredentials = (token: String, userId: String)
+
 enum DeepLink {
-    case auth(host: String)
+    case auth(host: String, credentials: DeepLinkCredentials?)
     case room
 
     init?(url: URL) {
@@ -23,7 +25,14 @@ enum DeepLink {
 
         switch actionString {
         case "auth":
-            self = .auth(host: host)
+            var credentials: DeepLinkCredentials? = nil
+
+            if let token = url.queryParameters?["token"],
+                let userId = url.queryParameters?["userId"] {
+                credentials = (token: token, userId: userId)
+            }
+
+            self = .auth(host: host, credentials: credentials)
         case "room":
             self = .room
         default:

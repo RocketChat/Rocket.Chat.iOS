@@ -16,6 +16,8 @@ final class ConnectServerViewController: BaseViewController {
     internal var connecting = false
     internal let infoRequestHandler = InfoRequestHandler()
 
+    var deepLinkCredentials: DeepLinkCredentials?
+
     var url: URL? {
         guard var urlText = textFieldServerURL.text else { return nil }
         if urlText.isEmpty {
@@ -102,6 +104,11 @@ final class ConnectServerViewController: BaseViewController {
         if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
             controller.serverURL = url?.socketURL()
             controller.serverPublicSettings = self.serverPublicSettings
+
+            if let credentials = deepLinkCredentials {
+                _ = controller.view
+                controller.authenticateWithDeepLinkCredentials(credentials)
+            }
         }
     }
 
