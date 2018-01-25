@@ -9,12 +9,17 @@
 import RealmSwift
 import SwiftyJSON
 
+enum APIInternalType: String {
+    case jitsiCallStarted = "jitsi_call_started"
+    case empty = ""
+}
+
 struct MessagesClient: APIClient {
     let api: AnyAPIFetcher
 
-    func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.shared) {
+    func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.shared, isVideoConferenceCall: Bool = false) {
         let message = Message()
-        message.internalType = ""
+        message.internalType = isVideoConferenceCall ? APIInternalType.jitsiCallStarted.rawValue : APIInternalType.empty.rawValue
         message.updatedAt = nil
         message.createdAt = Date.serverDate
         message.text = text
@@ -47,7 +52,7 @@ struct MessagesClient: APIClient {
             switch error {
             case .version:
                 // TODO: Remove SendMessage Fallback + old methods after Rocket.Chat 1.0
-                SubscriptionManager.sendTextMessage(message, completion: { response in
+                SubscriptionManager.sendTextMessage(message, videoConferenceCall: isVideoConferenceCall, completion: { response in
                     updateMessage(json: response.result["result"])
                 })
             default:

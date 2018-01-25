@@ -109,6 +109,7 @@
 "chat.read_only" = "Este canal é somente leitura";
 "chat.muted" = "Você foi silenciado";
 "chat.loading_messages" = "Carregando mensagens...";
+"chat.videochat.click_to_join" = "Clique para se juntar!";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Adicionar reação";

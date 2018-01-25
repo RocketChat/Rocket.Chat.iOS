@@ -40,6 +40,29 @@ final class AuthSettingsManager {
 
             Realm.executeOnMainThread({ realm in
                 let settings = AuthManager.isAuthenticated()?.settings ?? AuthSettings()
+                var serverId: String?
+                var videoChatPrefix: String?
+                var videoChatServerUrl: String?
+
+                if let lst = response.result["result"].array, lst.count > 0 {
+                    for item in lst {
+                        if item["_id"] == "uniqueID" {
+                            serverId = item["value"].stringValue
+                        } else if item["_id"] == "Jitsi_URL_Room_Prefix" {
+                            videoChatPrefix = item["value"].stringValue
+                        } else if item["_id"] == "Jitsi_Domain" {
+                            videoChatServerUrl = item["value"].stringValue
+                        }
+
+                        if serverId != nil && videoChatPrefix != nil {
+                            break
+                        }
+                    }
+                    settings.serverId = serverId
+                    settings.videoChatPrefix = videoChatPrefix
+                    settings.videoChatServerUrl = videoChatServerUrl
+                    print("ServerID: \(settings.serverId ?? "---") | Prefix: \(settings.videoChatPrefix ?? "---")")
+                }
                 settings.map(response.result["result"], realm: realm)
                 realm.add(settings, update: true)
 

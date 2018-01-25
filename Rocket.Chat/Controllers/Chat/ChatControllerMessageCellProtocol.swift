@@ -109,4 +109,11 @@ extension ChatViewController: ChatMessageCellProtocol {
         collectionView?.reloadItems(at: [indexPath])
     }
 
+    func openVideoChat() {
+        if let urlPath = getVideoconferenceURL(), let url = URL(string: urlPath) {
+            print(urlPath)
+            openURL(url: url)
+        }
+    }
+
 }

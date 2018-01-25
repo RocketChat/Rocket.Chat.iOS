@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol {
+protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol, ChatMessageJoinVideoViewProtocol {
     func openURL(url: URL)
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
@@ -103,6 +103,9 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             if type == .audio {
+                total += ChatMessageAudioView.defaultHeight
+            }
+            if message.internalType == "jitsi_call_started" {
                 total += ChatMessageAudioView.defaultHeight
             }
         }
@@ -231,6 +234,16 @@ final class ChatMessageCell: UICollectionViewCell {
                 return
             }
         }
+        
+        if message.internalType == "jitsi_call_started" {
+            if let view = ChatMessageJoinVideoView.instantiateFromNib() {
+                view.translatesAutoresizingMaskIntoConstraints = false
+                view.delegate = delegate
+                view.roomUrl = message.rid
+                mediaViews.addArrangedSubview(view)
+                mediaViewHeight += ChatMessageJoinVideoView.defaultHeight
+            }
+        }
 
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
     }
@@ -261,8 +274,17 @@ final class ChatMessageCell: UICollectionViewCell {
             if message.temporary {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
             }
-
-            labelText.message = text
+            
+            if message.internalType == "jitsi_call_started" {
+                let videoCallText = "Started a Video Call!"
+                let msg = NSMutableAttributedString(string: videoCallText)
+                let range = NSRange(location: 0, length: videoCallText.count)
+                msg.addAttribute(NSAttributedStringKey.font, value: UIFont.italicSystemFont(ofSize: 14), range: range)
+                msg.addAttribute(NSAttributedStringKey.foregroundColor, value: UIColor.lightGray, range: range)
+                labelText.message = msg
+            } else {
+                labelText.message = text
+            }
         }
     }
 

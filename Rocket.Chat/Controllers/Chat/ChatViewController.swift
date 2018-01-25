@@ -150,6 +150,9 @@ final class ChatViewController: SLKTextViewController {
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
 
+        let videoButton = UIBarButtonItem(image: #imageLiteral(resourceName: "facetime"), style: .plain, target: self, action: #selector(startVideoCall))
+        navigationItem.rightBarButtonItem = videoButton
+
         collectionView?.isPrefetchingEnabled = true
 
         isInverted = false
@@ -186,6 +189,12 @@ final class ChatViewController: SLKTextViewController {
         }
 
         setupReplyView()
+    }
+
+    @objc func startVideoCall() {
+        if let url = getVideoconferenceURL() {
+            sendTextMessage(messageText: url, videochatUrl: true)
+        }
     }
 
     @objc internal func reconnect() {
@@ -326,29 +335,8 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
-        guard
-            let subscription = subscription,
-            let messageText = textView.text
-        else {
-            return
-        }
-
-        DraftMessageManager.update(draftMessage: "", for: subscription)
-        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
-        textView.text = ""
-        self.scrollToBottom()
-
-        let replyString = self.replyString
-        stopReplying()
-
-        let text = "\(messageText)\(replyString)"
-
-        if let (command, params) = text.commandAndParams() {
-            sendCommand(command: command, params: params)
-            return
-        }
-
-        sendTextMessage(text: text)
+        guard let messageText = textView.text else { return }
+        sendTextMessage(messageText: messageText)
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -383,16 +371,39 @@ final class ChatViewController: SLKTextViewController {
         client?.runCommand(command: command, params: params, roomId: subscription.rid, errored: alertAPIError)
     }
 
-    fileprivate func sendTextMessage(text: String) {
+    fileprivate func sendTextMessage(messageText: String, videochatUrl: Bool = false) {
+
+        guard let subscription = subscription else { return }
+
+        DraftMessageManager.update(draftMessage: "", for: subscription)
+        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        textView.text = ""
+
+        self.scrollToBottom()
+        let replyString = videochatUrl ? self.replyString : ""
+        stopReplying()
+
+        let text = "\(messageText)\(replyString)"
+
+        if let (command, params) = text.commandAndParams() {
+            sendCommand(command: command, params: params)
+            return
+        }
+
         guard
-            let subscription = subscription,
-            text.count > 0
+            text.count > 0,
+            let client = API.current()?.client(MessagesClient.self)
         else {
             return
         }
 
-        guard let client = API.current()?.client(MessagesClient.self) else { return }
-        client.sendMessage(text: text, subscription: subscription)
+        // TODO: this will be simplified after solving the commented line issue
+        if videochatUrl {
+            //client.sendMessage(text: "", subscription: subscription, isVideoConferenceCall: true)
+            client.sendMessage(text: text, subscription: subscription, isVideoConferenceCall: false)
+        } else {
+            client.sendMessage(text: text, subscription: subscription)
+        }
     }
 
     fileprivate func updateCellForMessage(identifier: String) {

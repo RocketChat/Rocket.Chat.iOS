@@ -293,6 +293,10 @@
 		80A97F012006293D00A2774C /* EmojiSearcherSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
 		80C7DD5E1FF46B8000E6647C /* EmojiPicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* EmojiPicker.strings */; };
+		80CCD77420035772002E016B /* ChatControllerVideoconference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCD77320035771002E016B /* ChatControllerVideoconference.swift */; };
+		80CCD776200358E2002E016B /* MD5Hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCD775200358E2002E016B /* MD5Hash.swift */; };
+		80CCD7792003595E002E016B /* ChatMessageJoinVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CCD7772003595E002E016B /* ChatMessageJoinVideoView.xib */; };
+		80CCD77A2003595E002E016B /* ChatMessageJoinVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CCD7782003595E002E016B /* ChatMessageJoinVideoView.swift */; };
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
 		80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB5731F8DA55C00FC9715 /* ReplyView.swift */; };
 		80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F281FD8B2B800B70B59 /* UserExtensions.swift */; };
@@ -667,6 +671,10 @@
 		80C7DD631FF46B8700E6647C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
 		80C7DD641FF46B8800E6647C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
 		80C7DD651FF46B8C00E6647C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
+		80CCD77320035771002E016B /* ChatControllerVideoconference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatControllerVideoconference.swift; sourceTree = "<group>"; };
+		80CCD775200358E2002E016B /* MD5Hash.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MD5Hash.swift; sourceTree = "<group>"; };
+		80CCD7772003595E002E016B /* ChatMessageJoinVideoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageJoinVideoView.xib; sourceTree = "<group>"; };
+		80CCD7782003595E002E016B /* ChatMessageJoinVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageJoinVideoView.swift; sourceTree = "<group>"; };
 		80CFB5711F8D697100FC9715 /* ReplyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReplyView.xib; sourceTree = "<group>"; };
 		80CFB5731F8DA55C00FC9715 /* ReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyView.swift; sourceTree = "<group>"; };
 		80E99F281FD8B2B800B70B59 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
@@ -890,6 +898,8 @@
 				411F7D951F5179B50080E8AD /* ChatChannelHeaderCell.xib */,
 				41CABFF91F5047E200E0B289 /* ChatLoaderCell.swift */,
 				41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */,
+				80CCD7782003595E002E016B /* ChatMessageJoinVideoView.swift */,
+				80CCD7772003595E002E016B /* ChatMessageJoinVideoView.xib */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1225,6 +1235,7 @@
 				413996161F3B44500075F96E /* UploadHelper.swift */,
 				41D4ABAA1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift */,
 				80054CFF1FDB1FA200F5ECF9 /* Alert.swift */,
+				80CCD775200358E2002E016B /* MD5Hash.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1333,6 +1344,7 @@
 				41852E881F92BBEC00D1C499 /* ChatControllerReplyHandler.swift */,
 				41C45AEE1DFAD42800D9969C /* ChatDataController.swift */,
 				4180204E1E718E370012A092 /* ChannelInfoViewController.swift */,
+				80CCD77320035771002E016B /* ChatControllerVideoconference.swift */,
 			);
 			name = Chat;
 			sourceTree = "<group>";
@@ -1907,6 +1919,7 @@
 			files = (
 				412A95D71FD94ED000954AA6 /* ChatMessageVideoView.xib in Resources */,
 				41AC3CD31DCC9873002DC39A /* AutocompleteCell.xib in Resources */,
+				80CCD7792003595E002E016B /* ChatMessageJoinVideoView.xib in Resources */,
 				41A91AEF1E51C51A005C94B1 /* SubscriptionUserStatusView.xib in Resources */,
 				412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */,
 				41C275E11D84815C003C88CF /* AvatarView.xib in Resources */,
@@ -2309,6 +2322,7 @@
 				4112DC5A1FFFB9B2005995E1 /* ModelMappeable.swift in Sources */,
 				809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */,
 				D10E9C1A1F643457007F1796 /* Channel.swift in Sources */,
+				80CCD776200358E2002E016B /* MD5Hash.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
 				413996171F3B44500075F96E /* UploadHelper.swift in Sources */,
 				7798B4151F852B720074B2F4 /* SelectField.swift in Sources */,
@@ -2362,6 +2376,7 @@
 				41DC7A1D1D38471700896FC0 /* MessageManager.swift in Sources */,
 				412F8DD91F599EF100AF7786 /* DatabaseManager.swift in Sources */,
 				41A79C131D2F09F200A1968E /* Auth.swift in Sources */,
+				80CCD77420035772002E016B /* ChatControllerVideoconference.swift in Sources */,
 				80A2F39020056C5E005D2DCA /* EmojiSearcher.swift in Sources */,
 				41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */,
 				8013F8711FD6B5B000EE1A4E /* InfoClient.swift in Sources */,
@@ -2459,6 +2474,7 @@
 				412719441E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift in Sources */,
 				41499C911F2A1A7200790EA7 /* TimestampCoordinator.swift in Sources */,
 				80A63C4F1F719F9600FE5AC4 /* SubscriptionInfoRequest.swift in Sources */,
+				80CCD77A2003595E002E016B /* ChatMessageJoinVideoView.swift in Sources */,
 				D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */,
 				D1D535F11F70864C006625D2 /* InfoRequest.swift in Sources */,
 				411D76E51F39F05A00B0A8DF /* AuthSettingsManager.swift in Sources */,

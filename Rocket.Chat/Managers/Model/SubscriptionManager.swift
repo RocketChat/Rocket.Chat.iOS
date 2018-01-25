@@ -356,15 +356,29 @@ extension SubscriptionManager {
         }
     }
 
-    static func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
+    static func sendTextMessage(_ message: Message, videoConferenceCall: Bool = false, completion: @escaping MessageCompletion) {
+
+        var params = [[
+            "_id": message.identifier ?? "",
+            "rid": message.subscription.rid,
+            "msg": message.text
+            ]] as [[String: Any]]
+
+        if videoConferenceCall {
+            params[0]["t"] = "jitsi_call_started"
+            params[0]["groupable"] = false
+            params[0]["actionLinks"] = [[
+                "label": "Click To Join!",
+                "icon": "icon-videocam",
+                "method_id": "joinJitsiCall",
+                "params": ""
+                ]] as [[String: Any]]
+        }
+
         let request = [
             "msg": "method",
             "method": "sendMessage",
-            "params": [[
-                "_id": message.identifier ?? "",
-                "rid": message.subscription.rid,
-                "msg": message.text
-            ]]
+            "params": params
         ] as [String: Any]
 
         SocketManager.send(request) { (response) in
