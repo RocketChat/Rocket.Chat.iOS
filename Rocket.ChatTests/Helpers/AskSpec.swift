@@ -43,13 +43,25 @@ class AskSpec: XCTestCase {
         XCTAssertNotNil(ask.handlers[1], "HandlerB exists")
     }
 
-    func testIndividual() {
+    func testIndividualTitleMessage() {
         let title = "test"
         let message = "me"
         let buttonA = "foo"
         let ask = Ask(title: title, message: message, buttons: [buttonA], handlers: [nil])
 
         XCTAssert(ask.title == title, "Title matches")
+        XCTAssert(ask.buttons[0] == buttonA, "First button title matches")
+        XCTAssert(ask.buttons.count == 1, "One button")
+        XCTAssertNil(ask.handlers[0])
+    }
+
+    func testIndividualKey() {
+        let key = "alert.connection.invalid_url"
+        let buttonA = "foo"
+        let ask = Ask(key: key, buttons: [buttonA], handlers: [nil])
+
+        XCTAssert(ask.title == localized(key + ".title"), "Title matches")
+        XCTAssert(ask.message == localized(key + ".message"), "Message matches")
         XCTAssert(ask.buttons[0] == buttonA, "First button title matches")
         XCTAssert(ask.buttons.count == 1, "One button")
         XCTAssertNil(ask.handlers[0])
