@@ -99,14 +99,9 @@ extension ChatViewController {
 
     fileprivate func report(message: Message) {
         MessageManager.report(message) { (_) in
-            let alert = UIAlertController(
-                title: localized("chat.message.report.success.title"),
-                message: localized("chat.message.report.success.message"),
-                preferredStyle: .alert
-            )
-
-            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            Alert(
+                key: "chat.message.report.success.title"
+            ).present()
         }
     }
 }
