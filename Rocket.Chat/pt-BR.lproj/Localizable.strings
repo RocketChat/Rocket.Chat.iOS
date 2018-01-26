@@ -22,8 +22,8 @@
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "Desculpe, mas esta função ainda não está disponível.";
 
-"alert.insecure_image.title" = "Insecure resource";
-"alert.insecure_image.message" = "The resource of the image is insecure and therefor not loaded. Only SSL resources are allowed.";
+"alert.insecure_image.title" = "URL insegura";
+"alert.insecure_image.message" = "A URL deste arquivo é insegura e por isto ele não foi carregado. Apenas arquivos com SSL são carregados no chat. Para abrir ele no navegador, clique no botão abaixo.";
 
 "alert.socket_error.invalid_user.title" = "Sessão expirada";
 "alert.socket_error.invalid_user.message" = "Esta sessão expirou. Por favor, logue-se novamente.";
@@ -143,7 +143,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Toque para abrir";
-"chat.message.open_browser" = "Open in Browser"; //TODO
+"chat.message.open_browser" = "Abrir no Safari";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";
