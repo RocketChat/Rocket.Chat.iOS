@@ -123,15 +123,10 @@ class NewRoomViewController: BaseViewController {
     fileprivate func showErrorAlert(_ errorMessage: String?) {
         let errorMessage = errorMessage ?? localized("error.socket.default_error.message")
 
-        let alert = UIAlertController(
+        Alert(
             title: localized("error.socket.default_error.title"),
-            message: errorMessage,
-            preferredStyle: .alert
-        )
-        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-        DispatchQueue.main.async {
-            self.present(alert, animated: true, completion: nil)
-        }
+            message: errorMessage
+        ).present()
     }
 
     @IBAction func buttonCreateDidPressed(_ sender: UIButton) {
