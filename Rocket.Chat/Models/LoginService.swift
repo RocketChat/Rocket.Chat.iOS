@@ -11,12 +11,16 @@ import RealmSwift
 
 enum LoginServiceType {
     case github
+    case facebook
+    case linkedin
     case custom
     case invalid
 
     init(string: String) {
         switch string {
         case "github": self = .github
+        case "facebook": self = .facebook
+        case "linkedin": self = .linkedin
         default: self = .invalid
         }
     }
@@ -50,6 +54,9 @@ class LoginService: BaseModel {
 
         return .invalid
     }
+
+    @objc dynamic var responseType: String?
+    @objc dynamic var callbackPath: String?
 }
 
 // MARK: OAuth helper extensions
@@ -74,7 +81,7 @@ extension LoginService {
                 return nil
         }
 
-        return "\(serverUrl)\(tokenPath)"
+        return tokenPath.contains("://") ? tokenPath : "\(serverUrl)\(tokenPath)"
     }
 }
 
@@ -89,5 +96,27 @@ extension LoginService {
         }
 
         return object
+    }
+}
+
+// MARK: Standard Login Services extensions
+
+extension LoginService {
+    static var facebook: LoginService {
+        let service = LoginService()
+        service.mapFacebook()
+        return service
+    }
+
+    static var github: LoginService {
+        let service = LoginService()
+        service.mapGitHub()
+        return service
+    }
+
+    static var linkedin: LoginService {
+        let service = LoginService()
+        service.mapLinkedIn()
+        return service
     }
 }

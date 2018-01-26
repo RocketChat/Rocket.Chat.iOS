@@ -40,6 +40,9 @@
 "alert.upload_error.title" = "Upload Error"; //TODO
 "alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again."; //TODO
 
+"alert.email_verification.title" = "Email verification"; //TODO
+"alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
@@ -53,6 +56,10 @@
 "auth.connect.button_connect" = "Połącz";
 "auth.connect.ssl_required" = "Wymagane jest, aby Twój serwer wspierał SSL";
 "auth.connect.connecting" = "Trwa łączenie. Trzymaj się";
+
+"auth.forgot_password.title" = "Forgot your password?"; //TODO
+"auth.forgot_password.message" = "Enter your e-mail"; //TODO
+"auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again."; //TODO
 
 // Subscriptions
 "subscriptions.search" = "Szukaj";
@@ -112,6 +119,7 @@
 "chat.message.actions.unpin" = "Odepnij wiadomość";
 "chat.message.actions.quote" = "Cytuj wiadomość";
 "chat.message.actions.reply" = "Odpowiedz na wiadomość";
+"chat.message.actions.delete" = "Delete message"; //TODO
 "Send" = "Wysłać"; //SLKTextInputbar.m
 
 // Chat Message Report

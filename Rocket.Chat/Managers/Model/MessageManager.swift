@@ -104,6 +104,28 @@ extension MessageManager {
         }
     }
 
+    static func subscribeDeleteMessage(_ subscription: Subscription, completion: @escaping (_ msgId: String) -> Void) {
+        let eventName = "\(subscription.rid)/deleteMessage"
+        let request = [
+            "msg": "sub",
+            "name": "stream-notify-room",
+            "id": eventName,
+            "params": [eventName, false]
+            ] as [String: Any]
+
+        SocketManager.subscribe(request, eventName: eventName) { response in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+
+            if let msgId = response.result["fields"]["args"][0]["_id"].string {
+                Realm.executeOnMainThread({ realm in
+                    guard let message = realm.object(ofType: Message.self, forPrimaryKey: msgId) else { return }
+                    realm.delete(message)
+                    completion(msgId)
+                })
+            }
+        }
+    }
+
     static func report(_ message: Message, completion: @escaping MessageCompletion) {
         guard let messageIdentifier = message.identifier else { return }
 
