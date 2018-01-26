@@ -18,11 +18,11 @@ class AskSpec: XCTestCase {
 
         XCTAssert(ask.title == title, "Title matches")
         XCTAssert(ask.message == message, "Message matches")
-        XCTAssert(ask.buttons[0] == localized("global.ok"), "First button is OK")
-        XCTAssert(ask.buttons[1] == localized("global.cancel"), "Second button is Cancel")
+        XCTAssert(ask.buttons[0].title == localized("global.ok"), "First button is OK")
+        XCTAssert(ask.buttons[1].title == localized("global.cancel"), "Second button is Cancel")
         XCTAssert(ask.buttons.count == 2, "Two buttons")
-        XCTAssertNil(ask.handlers[0])
-        XCTAssertNil(ask.handlers[1])
+        XCTAssertNil(ask.buttons[0].handler)
+        XCTAssertNil(ask.buttons[1].handler)
     }
 
     func testKey() {
@@ -36,34 +36,34 @@ class AskSpec: XCTestCase {
 
         XCTAssert(ask.title == localized(key + ".title"), "Title matches")
         XCTAssert(ask.message == localized(key + ".message"), "Message matches")
-        XCTAssert(ask.buttons[0] == buttonA, "First button title matches")
-        XCTAssert(ask.buttons[1] == buttonB, "Second button title matches")
+        XCTAssert(ask.buttons[0].title == buttonA, "First button title matches")
+        XCTAssert(ask.buttons[1].title == buttonB, "Second button title matches")
         XCTAssert(ask.buttons.count == 2, "Two buttons")
-        XCTAssertNotNil(ask.handlers[0], "HandlerA exists")
-        XCTAssertNotNil(ask.handlers[1], "HandlerB exists")
+        XCTAssertNotNil(ask.buttons[0].handler, "HandlerA exists")
+        XCTAssertNotNil(ask.buttons[1].handler, "HandlerB exists")
     }
 
     func testIndividualTitleMessage() {
         let title = "test"
         let message = "me"
         let buttonA = "foo"
-        let ask = Ask(title: title, message: message, buttons: [buttonA], handlers: [nil])
+        let ask = Ask(title: title, message: message, buttons: [(title: buttonA, handler: nil)])
 
         XCTAssert(ask.title == title, "Title matches")
-        XCTAssert(ask.buttons[0] == buttonA, "First button title matches")
+        XCTAssert(ask.buttons[0].title == buttonA, "First button title matches")
         XCTAssert(ask.buttons.count == 1, "One button")
-        XCTAssertNil(ask.handlers[0])
+        XCTAssertNil(ask.buttons[0].handler)
     }
 
     func testIndividualKey() {
         let key = "alert.connection.invalid_url"
         let buttonA = "foo"
-        let ask = Ask(key: key, buttons: [buttonA], handlers: [nil])
+        let ask = Ask(key: key, buttons: [(title: buttonA, handler: nil)])
 
         XCTAssert(ask.title == localized(key + ".title"), "Title matches")
         XCTAssert(ask.message == localized(key + ".message"), "Message matches")
-        XCTAssert(ask.buttons[0] == buttonA, "First button title matches")
+        XCTAssert(ask.buttons[0].title == buttonA, "First button title matches")
         XCTAssert(ask.buttons.count == 1, "One button")
-        XCTAssertNil(ask.handlers[0])
+        XCTAssertNil(ask.buttons[0].handler)
     }
 }

@@ -7,17 +7,14 @@
 //
 
 protocol Asker: class {
-    func ask(title: String, message: String, buttons: [String], handlers: [((UIAlertAction) -> Void)?])
+    func ask(title: String, message: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)])
 }
 
 extension UIViewController: Asker {
-    func ask(title: String, message: String, buttons: [String], handlers: [((UIAlertAction) -> Void)?]) {
+    func ask(title: String, message: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)]) {
         let ask = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        if buttons.count != handlers.count {
-            return
-        }
         for i in 0..<buttons.count {
-            ask.addAction(UIAlertAction(title: buttons[i], style: .default, handler: handlers[i]))
+            ask.addAction(UIAlertAction(title: buttons[i].title, style: .default, handler: buttons[i].handler))
         }
         present(ask, animated: true, completion: nil)
     }
@@ -26,28 +23,25 @@ extension UIViewController: Asker {
 struct Ask {
     let title: String
     let message: String
-    let buttons: [String]
-    let handlers: [((UIAlertAction) -> Void)?]
+    let buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)]
 
-    init(title: String, message: String, buttons: [String], handlers: [((UIAlertAction) -> Void)?]) {
+    init(title: String, message: String, buttons: [(String, ((UIAlertAction) -> Void)?)]) {
         self.title = title
         self.message = message
         self.buttons = buttons
-        self.handlers = handlers
     }
 
-    init(key: String, buttons: [String], handlers: [((UIAlertAction) -> Void)?]) {
+    init(key: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)]) {
         self.title = NSLocalizedString("\(key).title", comment: "")
         self.message = NSLocalizedString("\(key).message", comment: "")
         self.buttons = buttons
-        self.handlers = handlers
     }
 
     init(title: String, message: String, buttonA: String? = nil, handlerA: ((UIAlertAction) -> Void)? = nil, buttonB: String? = nil, handlerB: ((UIAlertAction) -> Void)? = nil) {
         self.init(title: title,
                   message: message,
-                  buttons: [buttonA ?? NSLocalizedString("global.ok", comment: ""), buttonB ?? NSLocalizedString("global.cancel", comment: "")],
-                  handlers: [handlerA, handlerB])
+                  buttons: [(title: buttonA ?? NSLocalizedString("global.ok", comment: ""), handler: handlerA),
+                            (title: buttonB ?? NSLocalizedString("global.cancel", comment: ""), handler: handlerB)])
     }
 
     init(key: String, buttonA: String? = nil, handlerA: ((UIAlertAction) -> Void)? = nil, buttonB: String? = nil, handlerB: ((UIAlertAction) -> Void)? = nil) {
@@ -65,7 +59,7 @@ struct Ask {
             window.rootViewController = UIViewController()
             window.windowLevel = UIWindowLevelAlert + 1
             window.makeKeyAndVisible()
-            window.rootViewController?.ask(title: title, message: message, buttons: buttons, handlers: handlers)
+            window.rootViewController?.ask(title: title, message: message, buttons: buttons)
         }
 
         if Thread.isMainThread {
