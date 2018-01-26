@@ -120,6 +120,18 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         }
     }
 
+    func testImageNoUrl() {
+        let attachment = Attachment()
+        attachment.title = "nil"
+        if let view = ChatMessageImageView.instantiateFromNib() {
+            view.attachment = attachment
+            let title = view.labelTitle?.text
+            XCTAssert(title == "Label", "Should be default value")
+        } else {
+            XCTFail("View create failed")
+        }
+    }
+
     func testHttpsImage() {
         let attachment = Attachment()
         attachment.imageURL = "https://rocket.chat/"
