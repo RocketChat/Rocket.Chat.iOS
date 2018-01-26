@@ -45,14 +45,14 @@ class OAuthManager {
             return false
         }
 
-        self.oauthSwift = oauthSwift
-
         let handler = OAuthViewController(authorizeUrl: authorizeUrl, callbackUrl: callbackUrl, success: success, failure: failure)
-        oauthSwift.removeCallbackNotificationObserver()
         viewController.navigationController?.pushViewController(handler, animated: true)
 
+        oauthSwift.removeCallbackNotificationObserver()
         oauthSwift.authorizeURLHandler = handler
-        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { error in
+        self.oauthSwift = oauthSwift
+
+        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { _ in
             failure()
         }) != nil
     }
@@ -92,7 +92,7 @@ class OAuthManager {
             let accessTokenUrl = loginService.accessTokenUrl,
             let clientId = loginService.clientId
         else {
-                return nil
+            return nil
         }
 
         return OAuth2Swift(

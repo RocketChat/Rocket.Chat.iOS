@@ -167,6 +167,8 @@ extension PushManager {
             let backgroundTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), succeeded: { _ in
                 UIApplication.shared.endBackgroundTask(backgroundTask)
+            }, errored: { _ in
+                // TODO: Handle error
             })
         }
 

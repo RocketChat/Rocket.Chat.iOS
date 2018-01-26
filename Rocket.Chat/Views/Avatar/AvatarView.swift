@@ -8,6 +8,7 @@
 
 import UIKit
 import FLAnimatedImage
+import SDWebImage
 
 let avatarColors: [UInt] = [
     0xF44336, 0xE91E63, 0x9C27B0, 0x673AB7, 0x3F51B5,
@@ -20,7 +21,8 @@ final class AvatarView: UIView {
     var imageURL: URL? {
         didSet {
             if let imageURL = imageURL {
-                imageView?.sd_setImage(with: imageURL, placeholderImage: nil, options: .retryFailed) { [weak self] (_, error, _, _) in
+                let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages, .highPriority]
+                imageView?.sd_setImage(with: imageURL, placeholderImage: nil, options: options) { [weak self] (_, error, _, _) in
                     guard error == nil else { return }
 
                     self?.labelInitials.text = ""
