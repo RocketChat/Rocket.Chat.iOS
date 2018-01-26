@@ -155,14 +155,9 @@ final class AuthViewController: BaseViewController {
                     return
                 }
 
-                let alert = UIAlertController(
-                    title: localized("error.socket.default_error.title"),
-                    message: error["message"]?.string ?? localized("error.socket.default_error.message"),
-                    preferredStyle: .alert
-                )
-
-                alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                present(alert, animated: true, completion: nil)
+                Alert(
+                    key: "error.socket.default_error"
+                ).present()
             }
 
             return
