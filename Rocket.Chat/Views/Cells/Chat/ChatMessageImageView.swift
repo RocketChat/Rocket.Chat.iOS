@@ -70,7 +70,9 @@ final class ChatMessageImageView: UIView {
         }
 
         activityIndicatorImageView.startAnimating()
-        imageView.sd_setImage(with: imageURL, completed: { [weak self] _, _, _, _ in
+
+        let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages]
+        imageView.sd_setImage(with: imageURL, placeholderImage: nil, options: options, completed: { [weak self] _, _, _, _ in
             self?.activityIndicatorImageView.stopAnimating()
         })
     }
