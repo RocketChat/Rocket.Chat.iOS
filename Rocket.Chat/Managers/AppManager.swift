@@ -97,17 +97,19 @@ extension AppManager {
 // MARK: Deep Link
 
 extension AppManager {
-    static func handleDeepLink(_ deepLink: DeepLink) -> Bool {
+    static func handleDeepLink(_ url: URL) -> DeepLink? {
+        guard let deepLink = DeepLink(url: url) else { return nil }
+        AppManager.handleDeepLink(deepLink)
+        return deepLink
+    }
+
+    static func handleDeepLink(_ deepLink: DeepLink) {
         switch deepLink {
         case let .auth(host, credentials):
             changeToOrAddServer(serverUrl: host, credentials: credentials)
         case let .room(host, roomId):
             AppManager.initialRoomId = roomId
             changeToOrAddServer(serverUrl: host)
-        default:
-            return false
         }
-
-        return true
     }
 }
