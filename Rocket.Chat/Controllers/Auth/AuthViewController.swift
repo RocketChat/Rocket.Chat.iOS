@@ -156,8 +156,8 @@ final class AuthViewController: BaseViewController {
                 }
 
                 let alert = UIAlertController(
-                    title: localized("error.socket.default_error_title"),
-                    message: error["message"]?.string ?? localized("error.socket.default_error_message"),
+                    title: localized("error.socket.default_error.title"),
+                    message: error["message"]?.string ?? localized("error.socket.default_error.message"),
                     preferredStyle: .alert
                 )
 
@@ -296,7 +296,7 @@ final class AuthViewController: BaseViewController {
                 guard !result.isError() else {
                     Alert(
                         title: localized("auth.forgot_password.title"),
-                        message: localized("error.socket.default_error_message")
+                        message: localized("error.socket.default_error.message")
                     ).present()
                     return
                 }
@@ -454,7 +454,7 @@ extension AuthViewController: SocketConnectionHandler {
     func socketDidReturnError(socket: SocketManager, error: SocketError) { }
 
     func socketDidDisconnect(socket: SocketManager) {
-        alert(title: localized("error.socket.default_error_title"), message: localized("error.socket.default_error_message")) { _ in
+        alert(title: localized("error.socket.default_error.title"), message: localized("error.socket.default_error.message")) { _ in
             self.navigationController?.popViewController(animated: true)
         }
     }

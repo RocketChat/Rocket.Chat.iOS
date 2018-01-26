@@ -3,8 +3,8 @@
 "global.cancel" = "Abbrechen";
 
 // Errors
-"error.socket.default_error_title" = "Oops!";
-"error.socket.default_error_message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
+"error.socket.default_error.title" = "Oops!";
+"error.socket.default_error.message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Oops!";
