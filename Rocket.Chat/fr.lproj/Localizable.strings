@@ -40,6 +40,9 @@
 "alert.upload_error.title" = "Erreur de téléchargement";
 "alert.upload_error.message" = "Quelque chose de mal est survenu lors du téléchargement de votre fichier. Veuillez réessayer.";
 
+"alert.email_verification.title" = "Email verification"; //TODO
+"alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Le serveur a changé son URL";
 "connection.server.redirect.alert.message" = "On dirait que ce serveur a changé son adresse URL:\n\n%@\n\nVoulez-vous mettre à jour l'URL?";
@@ -53,6 +56,10 @@
 "auth.connect.button_connect" = "Se connecter";
 "auth.connect.ssl_required" = "Votre serveur doit supporter le SSL";
 "auth.connect.connecting" = "Connexion en cours. Tenez bon.";
+
+"auth.forgot_password.title" = "Forgot your password?"; //TODO
+"auth.forgot_password.message" = "Enter your e-mail"; //TODO
+"auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again."; //TODO
 
 // Subscriptions
 "subscriptions.search" = "Chercher";
@@ -112,6 +119,7 @@
 "chat.message.actions.unpin" = "Désépingler le message";
 "chat.message.actions.quote" = "Citer le message";
 "chat.message.actions.reply" = "Répondre au message";
+"chat.message.actions.delete" = "Delete message"; //TODO
 "Send" = "Dépêcher"; //SLKTextInputbar.m
 
 // Chat Message Report

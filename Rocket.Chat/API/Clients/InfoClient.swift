@@ -13,11 +13,9 @@ struct InfoClient: APIClient {
 
     func fetchInfo(realm: Realm? = Realm.shared) {
         api.fetch(InfoRequest(), succeeded: { result in
-            DispatchQueue.main.async {
-                try? realm?.write {
-                    AuthManager.isAuthenticated(realm: realm)?.serverVersion = result.version ?? ""
-                }
-            }
+            realm?.execute({ realm in
+                AuthManager.isAuthenticated(realm: realm)?.serverVersion = result.version ?? ""
+            })
         }, errored: nil)
     }
 }

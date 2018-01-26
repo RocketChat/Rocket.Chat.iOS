@@ -26,6 +26,9 @@ class InfoRequestHandler: NSObject {
     func validate(with url: URL) {
         API(host: url).fetch(InfoRequest(), sessionDelegate: self, succeeded: { [weak self] result in
             self?.validateServerResponse(result: result)
+        }, errored: { [weak self] _ in
+            self?.delegate?.urlNotValid()
+            self?.alertInvalidURL()
         })
     }
 
@@ -90,6 +93,8 @@ extension InfoRequestHandler: URLSessionTaskDelegate {
     func handleRedirect(_ newURL: URL) {
         API(host: newURL).fetch(InfoRequest(), sessionDelegate: self, succeeded: { result in
             self.handleRedirectInfoResult(result, for: newURL)
+        }, errored: { [weak self] _ in
+            self?.delegate?.urlNotValid()
         })
     }
 

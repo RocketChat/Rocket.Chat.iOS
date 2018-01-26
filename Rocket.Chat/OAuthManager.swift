@@ -13,18 +13,18 @@ import SwiftyJSON
 
 class OAuthCredentials {
     let token: String
-    let secret: String
+    let secret: String?
 
-    init?(json: JSON) {
-        guard
-            let token = json["credentialToken"].string,
-            let secret = json["credentialSecret"].string
-        else {
-            return nil
-        }
-
+    init(token: String, secret: String?) {
         self.token = token
         self.secret = secret
+    }
+
+    init?(json: JSON) {
+        guard let token = json["credentialToken"].string else { return nil }
+
+        self.token = token
+        self.secret = json["credentialSecret"].string
     }
 }
 
@@ -45,14 +45,14 @@ class OAuthManager {
             return false
         }
 
-        self.oauthSwift = oauthSwift
-
         let handler = OAuthViewController(authorizeUrl: authorizeUrl, callbackUrl: callbackUrl, success: success, failure: failure)
-        oauthSwift.removeCallbackNotificationObserver()
         viewController.navigationController?.pushViewController(handler, animated: true)
 
+        oauthSwift.removeCallbackNotificationObserver()
         oauthSwift.authorizeURLHandler = handler
-        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { error in
+        self.oauthSwift = oauthSwift
+
+        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { _ in
             failure()
         }) != nil
     }
@@ -63,18 +63,23 @@ class OAuthManager {
         }
 
         let fragmentJSON = JSON(parseJSON: normalizedFragment)
-        return OAuthCredentials(json: fragmentJSON)
+
+        if let credentials = OAuthCredentials(json: fragmentJSON) {
+            return credentials
+        }
+
+        return nil
     }
 
     static func callbackUrl(for loginService: LoginService, server: URL) -> URL? {
         guard
             let host = server.host,
-            let service = loginService.service
+            let callbackPath = loginService.callbackPath ?? loginService.service
         else {
-                return nil
+            return nil
         }
 
-        return URL(string: "https://\(host)/_oauth/\(service)")
+        return URL(string: "https://\(host)/_oauth/\(callbackPath)")
     }
 
     static func state() -> String? {
@@ -87,7 +92,7 @@ class OAuthManager {
             let accessTokenUrl = loginService.accessTokenUrl,
             let clientId = loginService.clientId
         else {
-                return nil
+            return nil
         }
 
         return OAuth2Swift(
@@ -95,7 +100,7 @@ class OAuthManager {
             consumerSecret: "",
             authorizeUrl: authorizeUrl,
             accessTokenUrl: accessTokenUrl,
-            responseType: "token"
+            responseType: loginService.responseType ?? "token"
         )
     }
 }

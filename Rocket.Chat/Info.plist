@@ -32,7 +32,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>138</string>
+	<string>139</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -72,6 +72,8 @@
 	<string>To take photos and record videos</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>To record and upload audio and videos</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To save images to your library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To upload photos from your library</string>
 	<key>RC_MIN_SERVER_VERSION</key>
