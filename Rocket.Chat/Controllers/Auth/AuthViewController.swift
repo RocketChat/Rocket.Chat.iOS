@@ -186,6 +186,8 @@ final class AuthViewController: BaseViewController {
                     }
                 }
             }
+            }, errored: { [weak self] _ in
+                // TODO: Handle error
         })
     }
 
