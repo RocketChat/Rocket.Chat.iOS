@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
-        if handleDeepLink(url) {
+        if AppManager.handleDeepLink(url) != nil {
             return true
         }
 
@@ -76,12 +76,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         Log.debug("Fail to register for notification: \(error)")
-    }
-
-    // MARK: Deep Link
-
-    func handleDeepLink(_ url: URL) -> Bool {
-        guard let deepLink = DeepLink(url: url) else { return false }
-        return AppManager.handleDeepLink(deepLink)
     }
 }
