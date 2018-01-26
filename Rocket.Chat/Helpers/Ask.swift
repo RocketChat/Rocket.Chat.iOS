@@ -7,14 +7,14 @@
 //
 
 protocol Asker: class {
-    func ask(title: String, message: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)])
+    func ask(title: String, message: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)], deleteOption: Int8)
 }
 
 extension UIViewController: Asker {
-    func ask(title: String, message: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)]) {
+    func ask(title: String, message: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)], deleteOption: Int8 = -1) {
         let ask = UIAlertController(title: title, message: message, preferredStyle: .alert)
         for i in 0..<buttons.count {
-            ask.addAction(UIAlertAction(title: buttons[i].title, style: .default, handler: buttons[i].handler))
+            ask.addAction(UIAlertAction(title: buttons[i].title, style: deleteOption == i ? .destructive : .default, handler: buttons[i].handler))
         }
         present(ask, animated: true, completion: nil)
     }
@@ -24,17 +24,20 @@ struct Ask {
     let title: String
     let message: String
     let buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)]
+    let deleteOption: Int8
 
-    init(title: String, message: String, buttons: [(String, ((UIAlertAction) -> Void)?)]) {
+    init(title: String, message: String, buttons: [(String, ((UIAlertAction) -> Void)?)], deleteOption: Int8 = -1) {
         self.title = title
         self.message = message
         self.buttons = buttons
+        self.deleteOption = deleteOption
     }
 
-    init(key: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)]) {
+    init(key: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)], deleteOption: Int8 = -1) {
         self.title = NSLocalizedString("\(key).title", comment: "")
         self.message = NSLocalizedString("\(key).message", comment: "")
         self.buttons = buttons
+        self.deleteOption = deleteOption
     }
 
     init(title: String, message: String, buttonA: String? = nil, handlerA: ((UIAlertAction) -> Void)? = nil, buttonB: String? = nil, handlerB: ((UIAlertAction) -> Void)? = nil) {
