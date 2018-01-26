@@ -96,8 +96,8 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
             if response.isError() {
                 if let error = response.result["error"].dictionary {
                     let alert = UIAlertController(
-                        title: localized("error.socket.default_error_title"),
-                        message: error["message"]?.string ?? localized("error.socket.default_error_message"),
+                        title: localized("error.socket.default_error.title"),
+                        message: error["message"]?.string ?? localized("error.socket.default_error.message"),
                         preferredStyle: .alert
                     )
 

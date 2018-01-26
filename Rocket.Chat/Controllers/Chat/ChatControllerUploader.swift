@@ -237,7 +237,7 @@ extension ChatViewController {
                 self.stopLoadingUpload()
 
                 if error {
-                    var errorMessage = localized("error.socket.default_error_message")
+                    var errorMessage = localized("error.socket.default_error.message")
 
                     if let response = response {
                         if let message = response.result["error"]["message"].string {
@@ -246,7 +246,7 @@ extension ChatViewController {
                     }
 
                     let alert = UIAlertController(
-                        title: localized("error.socket.default_error_title"),
+                        title: localized("error.socket.default_error.title"),
                         message: errorMessage,
                         preferredStyle: .alert
                     )

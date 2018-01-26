@@ -121,10 +121,10 @@ class NewRoomViewController: BaseViewController {
     }
 
     fileprivate func showErrorAlert(_ errorMessage: String?) {
-        let errorMessage = errorMessage ?? localized("error.socket.default_error_message")
+        let errorMessage = errorMessage ?? localized("error.socket.default_error.message")
 
         let alert = UIAlertController(
-            title: localized("error.socket.default_error_title"),
+            title: localized("error.socket.default_error.title"),
             message: errorMessage,
             preferredStyle: .alert
         )

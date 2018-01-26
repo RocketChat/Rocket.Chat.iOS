@@ -3,8 +3,8 @@
 "global.cancel" = "Annuler";
 
 // Errors
-"error.socket.default_error_title" = "Oups!";
-"error.socket.default_error_message" = "Une erreur s'est produite, veuillez réessayer.";
+"error.socket.default_error.title" = "Oups!";
+"error.socket.default_error.message" = "Une erreur s'est produite, veuillez réessayer.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Oups!";

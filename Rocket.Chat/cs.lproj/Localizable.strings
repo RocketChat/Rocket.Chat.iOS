@@ -3,8 +3,8 @@
 "global.cancel" = "Zrušit";
 
 // Errors
-"error.socket.default_error_title" = "Jejky!";
-"error.socket.default_error_message" = "Něco se pokazilo, zkuste to prosím znovu.";
+"error.socket.default_error.title" = "Jejky!";
+"error.socket.default_error.message" = "Něco se pokazilo, zkuste to prosím znovu.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Jejky!";
