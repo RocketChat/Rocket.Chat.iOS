@@ -1,5 +1,6 @@
 // Global
 "global.ok" = "OK";
+"global.no" = "Não";
 "global.cancel" = "Cancelar";
 
 // Errors
@@ -123,6 +124,9 @@
 "chat.message.actions.quote" = "Citar mensagem";
 "chat.message.actions.reply" = "Responder mensagem";
 "chat.message.actions.delete" = "Deletar mensagem";
+"chat.message.actions.delete.confirm.title" = "Delete this message?"; // TODO
+"chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone."; //TODO
+"chat.message.actions.delete.confirm.yes" = "Yes, delete"; // TODO
 "Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
