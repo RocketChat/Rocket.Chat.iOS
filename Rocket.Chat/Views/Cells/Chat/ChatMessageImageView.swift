@@ -16,6 +16,7 @@ protocol ChatMessageImageViewProtocol: class {
 
 final class ChatMessageImageView: UIView {
     static let defaultHeight = CGFloat(250)
+    var isLoadable = true
 
     weak var delegate: ChatMessageImageViewProtocol?
     var attachment: Attachment! {
@@ -43,15 +44,31 @@ final class ChatMessageImageView: UIView {
         return UITapGestureRecognizer(target: self, action: #selector(didTapView))
     }()
 
+    private func getImage() -> URL? {
+        guard let imageURL = attachment.fullImageURL() else {
+            return nil
+        }
+        if imageURL.absoluteString.starts(with: "http://") {
+            isLoadable = false
+            labelTitle.text = attachment.title + " (" + localized("alert.insecure_image.title") + ")"
+            imageView.contentMode = UIViewContentMode.center
+            imageView.sd_setImage(with: nil, placeholderImage: UIImage(named: "Resource Unavailable"))
+            return nil
+        }
+        labelTitle.text = attachment.title
+        return imageURL
+    }
+
     fileprivate func updateMessageInformation() {
         let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
         if !containsGesture {
             addGestureRecognizer(tapGesture)
         }
 
-        labelTitle.text = attachment.title
+        guard let imageURL = getImage() else {
+            return
+        }
 
-        let imageURL = attachment.fullImageURL()
         activityIndicatorImageView.startAnimating()
 
         let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages]
@@ -61,6 +78,15 @@ final class ChatMessageImageView: UIView {
     }
 
     @objc func didTapView() {
-        delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
+        if isLoadable {
+            delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
+        } else {
+            guard let imageURL = attachment.fullImageURL() else {
+                return
+            }
+            Ask(key: "alert.insecure_image", buttonB: localized("chat.message.open_browser"), handlerB: { _ in
+                ChatViewController.shared?.openURL(url: imageURL)
+            }).present()
+        }
     }
 }
