@@ -22,6 +22,9 @@
 "alert.feature.wip.title" = "Oups!";
 "alert.feature.wip.message" = "Cette fonctionnalité est en cours de développement, restez au courant!";
 
+"alert.insecure_image.title" = "Insecure resource"; //TODO
+"alert.insecure_image.message" = "The resource of the image is insecure and therefore not loaded. Only SSL resources are allowed."; //TODO
+
 "alert.socket_error.invalid_user.title" = "Session expirée";
 "alert.socket_error.invalid_user.message" = "Votre session a expiré. Veuillez vous identifier à nouveau.";
 
@@ -140,6 +143,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Toucher pour ouvrir le fichier";
+"chat.message.open_browser" = "Open in Browser"; //TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nom de la salle changée pour : %@ by %@";
