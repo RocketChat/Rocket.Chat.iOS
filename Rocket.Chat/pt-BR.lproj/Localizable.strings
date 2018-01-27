@@ -127,7 +127,6 @@
 "chat.message.actions.delete.confirm.title" = "Deletar esta mensagem?";
 "chat.message.actions.delete.confirm.message" = "Tem certeza que deseja deletar esta mensagem? A mensagem não poderá ser recuperada.";
 "chat.message.actions.delete.confirm.yes" = "Sim, deletar";
-
 "Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
