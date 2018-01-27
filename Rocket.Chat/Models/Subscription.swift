@@ -157,14 +157,8 @@ extension Subscription {
 
 // MARK: Queries
 extension Subscription {
-    static func find(rid: String, realm: Realm) -> Subscription? {
-        var object: Subscription?
-
-        if let findObject = realm.objects(Subscription.self).filter("rid == '\(rid)'").first {
-            object = findObject
-        }
-
-        return object
+    static func find(rid: String, realm: Realm? = Realm.shared) -> Subscription? {
+        return realm?.objects(Subscription.self).filter("rid == '\(rid)'").first
     }
 
     static func find(name: String, subscriptionType: [SubscriptionType], realm: Realm? = Realm.shared) -> Subscription? {

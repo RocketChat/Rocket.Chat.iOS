@@ -59,26 +59,31 @@ extension AppManager {
         }
     }
 
-    static func changeToServerIfExists(serverUrl: String) -> Bool {
+    static func changeToServerIfExists(serverUrl: String, roomId: String? = nil) -> Bool {
         guard let index = DatabaseManager.serverIndexForUrl(serverUrl) else {
             return false
         }
 
-        changeSelectedServer(index: index)
+        if index != DatabaseManager.selectedIndex {
+            AppManager.initialRoomId = roomId
+            changeSelectedServer(index: index)
+        } else if let roomId = roomId, let subscription = Subscription.find(rid: roomId) {
+            ChatViewController.shared?.subscription = subscription
+        }
+
         return true
     }
 
-    static func addServer(serverUrl: String, credentials: DeepLinkCredentials? = nil) {
+    static func addServer(serverUrl: String, credentials: DeepLinkCredentials? = nil, roomId: String? = nil) {
         SocketManager.disconnect { _, _ in }
+        AppManager.initialRoomId = roomId
         WindowManager.open(.auth(serverUrl: serverUrl, credentials: credentials))
     }
 
-    static func changeToOrAddServer(serverUrl: String, credentials: DeepLinkCredentials? = nil) {
-        if changeToServerIfExists(serverUrl: serverUrl) {
-            return
+    static func changeToOrAddServer(serverUrl: String, credentials: DeepLinkCredentials? = nil, roomId: String? = nil) {
+        guard let url = URL(string: serverUrl)?.socketURL(), changeToServerIfExists(serverUrl: url.absoluteString, roomId: roomId) else {
+            return addServer(serverUrl: serverUrl, credentials: credentials, roomId: roomId)
         }
-
-        addServer(serverUrl: serverUrl, credentials: credentials)
     }
 
     static func reloadApp() {
@@ -108,8 +113,7 @@ extension AppManager {
         case let .auth(host, credentials):
             changeToOrAddServer(serverUrl: host, credentials: credentials)
         case let .room(host, roomId):
-            AppManager.initialRoomId = roomId
-            changeToOrAddServer(serverUrl: host)
+            changeToOrAddServer(serverUrl: host, roomId: roomId)
         }
     }
 }
