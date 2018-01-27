@@ -72,6 +72,8 @@ class Message: BaseModel {
 
     @objc dynamic var groupable = true
 
+    @objc dynamic var offline = false
+
     var mentions = List<Mention>()
     var channels = List<Channel>()
     var attachments = List<Attachment>()

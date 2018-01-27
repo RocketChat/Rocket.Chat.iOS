@@ -10,8 +10,39 @@ import UIKit
 import RealmSwift
 
 extension ChatViewController {
+    func presentOfflineActionsFor(_ message: Message, view: UIView) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        let resend = UIAlertAction(title: localized("chat.message.actions.resend"), style: .default, handler: { _ in
+            guard
+                let subscription = self.subscription,
+                let client = API.current()?.client(MessagesClient.self)
+            else {
+                    return
+            }
+
+            client.sendMessage(message, subscription: subscription)
+        })
+
+        alert.addAction(resend)
+
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = view
+            presenter.sourceRect = view.bounds
+        }
+
+        present(alert, animated: true, completion: nil)
+    }
+
     func presentActionsFor(_ message: Message, view: UIView) {
         guard message.type.actionable else { return }
+
+        guard !message.offline else {
+            presentOfflineActionsFor(message, view: view)
+            return
+        }
+
+        guard !message.temporary else { return }
 
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 

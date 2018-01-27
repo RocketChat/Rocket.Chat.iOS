@@ -8,6 +8,7 @@
 
 import Foundation
 import SwiftyJSON
+import Reachability
 
 protocol APIRequestMiddleware {
     var api: API { get }
@@ -73,7 +74,7 @@ class API: APIFetcher {
 
         if let sessionDelegate = sessionDelegate {
             let configuration = URLSessionConfiguration.ephemeral
-            configuration.timeoutIntervalForRequest = 30
+            configuration.timeoutIntervalForRequest = 5
 
             session = URLSession(
                 configuration: configuration,

@@ -160,8 +160,6 @@ final class ChatViewController: SLKTextViewController {
 
         leftButton.setImage(UIImage(named: "Upload"), for: .normal)
 
-        rightButton.isEnabled = false
-
         setupTitleView()
         setupTextViewSettings()
         setupScrollToBottomButton()

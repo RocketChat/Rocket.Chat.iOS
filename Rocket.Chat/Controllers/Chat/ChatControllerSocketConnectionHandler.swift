@@ -19,8 +19,6 @@ extension ChatViewController: SocketConnectionHandler {
                 self?.subscription = subscription
             }
         }
-
-        rightButton.isEnabled = true
     }
 
     func socketDidDisconnect(socket: SocketManager) {
