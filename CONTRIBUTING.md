@@ -41,6 +41,10 @@ pod install
 
 Also refer to [Guidelines](#project.pbxproj) for modifying files.
 
+## Issues needing help
+
+Didn't found a bug or want a new feature not already reported? Check out [the issues with "Help wanted"](https://github.com/RocketChat/Rocket.Chat.iOS/labels/help%20wanted) or other issues, for those no branch exists.
+
 ## Guidelines
 
 ### project.pbxproj
