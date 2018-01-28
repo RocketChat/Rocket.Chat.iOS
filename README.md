@@ -12,6 +12,8 @@
 
 [![Rocket.Chat on Apple AppStore](https://user-images.githubusercontent.com/551004/29770691-a2082ff4-8bc6-11e7-89a6-964cd405ea8e.png)](https://geo.itunes.apple.com/us/app/rocket-chat/id1148741252?mt=8)
 
+![Screenshots](https://user-images.githubusercontent.com/193273/35487347-d01d115c-047a-11e8-8de6-942e00eb49b3.png)
+
 # Reporting an Issue
 
 [Github Issues](https://github.com/RocketChat/Rocket.Chat.iOS/issues) are used to track todos, bugs, feature requests, and more.
