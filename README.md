@@ -22,7 +22,7 @@ Also check the commuinty on [open.rocket.chat](https://open.rocket.chat/channel/
 
 ## How to report an Issue
 
-If you found a bug, please include the current version number (Sidebar > Dropdown > My Account). Please also menion the device. Some features only work with newer versions of Rocket.Chat servers, you can get the current version number (even if you're not admin) via `https://chat.server/api/info`.
+If you found a bug, please include the current version number (Sidebar > Dropdown > My Account). Please also mention the device. Some features only work with newer versions of Rocket.Chat servers, you can get the current version number (even if you're not admin) via `https://chat.server/api/info`.
 
 Please include as much information as you can provide. E.g. try to write down steps to reproduce a bug so we can investigate. If you like to help, see [how to contribute](#Contribute).
 
