@@ -99,6 +99,37 @@ extension AppManager {
     }
 }
 
+// MARK: Open DM
+
+extension AppManager {
+    static func openDirectMessage(username: String) {
+        func openDirectMessage() -> Bool {
+            guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
+
+            let controller = ChatViewController.shared
+            controller?.subscription = directMessageRoom
+
+            return true
+        }
+
+        // Check if already have a direct message room with this user
+        if openDirectMessage() == true {
+            return
+        }
+
+        // If not, create a new direct message
+        SubscriptionManager.createDirectMessage(username, completion: { response in
+            guard !response.isError() else { return }
+
+            guard let auth = AuthManager.isAuthenticated() else { return }
+
+            SubscriptionManager.updateSubscriptions(auth) { _ in
+                _ = openDirectMessage()
+            }
+        })
+    }
+}
+
 // MARK: Deep Link
 
 extension AppManager {
@@ -114,6 +145,10 @@ extension AppManager {
             changeToOrAddServer(serverUrl: host, credentials: credentials)
         case let .room(host, roomId):
             changeToOrAddServer(serverUrl: host, roomId: roomId)
+        case let .mention(name):
+            openDirectMessage(username: name)
+        default:
+            break
         }
     }
 }

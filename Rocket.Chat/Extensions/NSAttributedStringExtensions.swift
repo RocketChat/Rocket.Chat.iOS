@@ -62,13 +62,21 @@ extension NSMutableAttributedString {
         }
     }
 
+    func setLink(_ link: String, range: NSRange? = nil) {
+        if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
+            self.addAttributes([
+                NSAttributedStringKey.link: link
+            ], range: attributeRange)
+        }
+    }
+
     func setLineSpacing(_ font: UIFont) {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = font.lineHeight * 0.1
 
         self.addAttributes([
             NSAttributedStringKey.paragraphStyle: paragraphStyle
-            ], range: NSRange(location: 0, length: self.length))
+        ], range: NSRange(location: 0, length: self.length))
     }
 
     func transformMarkdown() -> NSAttributedString {
@@ -101,6 +109,7 @@ extension NSMutableAttributedString {
                     setBackgroundColor(background, range: range)
                     setFontColor(font, range: range)
                     setFont(MessageTextFontAttributes.boldFont, range: range)
+                    setLink("rocketchat://mention?name=\(mention)", range: range)
                 }
             }
         }
@@ -117,6 +126,7 @@ extension NSMutableAttributedString {
                 for range in ranges {
                     let range = NSRange(range, in: string)
                     setFontColor(.link, range: range)
+                    setLink("rocketchat://channel?name=\(channel)", range: range)
                 }
             }
         }
