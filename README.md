@@ -10,7 +10,7 @@
 
 [About Rocket.Chat](https://github.com/RocketChat/Rocket.Chat/#about-rocketchat)
 
-# Get it from the store
+# Download from the App Store
 
 [![Rocket.Chat on Apple AppStore](https://user-images.githubusercontent.com/551004/29770691-a2082ff4-8bc6-11e7-89a6-964cd405ea8e.png)](https://geo.itunes.apple.com/us/app/rocket-chat/id1148741252?mt=8)
 
@@ -20,17 +20,17 @@
 
 [Github Issues](https://github.com/RocketChat/Rocket.Chat.iOS/issues) are used to track todos, bugs, feature requests, and more.
 
-Also check the commuinty on [open.rocket.chat](https://open.rocket.chat/channel/iosnativeapp), we'd like to help.
+Also check the community on [open.rocket.chat](https://open.rocket.chat/channel/iosnativeapp). We'd like to help.
 
 ## How to report an Issue
 
 If you found a bug, please include the current version number (Sidebar > Dropdown > My Account). Please also mention the device. Some features only work with newer versions of Rocket.Chat servers, you can get the current version number (even if you're not admin) via `https://chat.server/api/info`.
 
-Please include as much information as you can provide. E.g. try to write down steps to reproduce a bug so we can investigate. If you like to help, see [how to contribute](#Contribute).
+Please include as much information as you can provide. E.g. try to write down steps to reproduce the bug so we can investigate. If you would like to help, see [how to contribute](#Contribute).
 
 Is your bug critical regarding security? [Read here](https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/SECURITY.md)
 
-## The app isn't connecting to your server?
+## The app can't connect to your server?
 Make sure your server supports WebSocket as well as SSL. Apache supports WebSockets from 2.4 on, Nginx with 1.3 or greater.
 
 # Contribute
