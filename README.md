@@ -1,3 +1,5 @@
+![Rocket.Chat logo](https://rocket.chat/images/logo/logo-dark.svg?v3)
+
 # Rocket.Chat iOS native application
 
 [![Build Status](https://circleci.com/gh/RocketChat/Rocket.Chat.iOS/tree/develop.svg?style=shield)](https://circleci.com/gh/RocketChat/Rocket.Chat.iOS/tree/develop)
