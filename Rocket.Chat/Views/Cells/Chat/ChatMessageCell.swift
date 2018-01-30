@@ -95,7 +95,7 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             if type == .image {
-                total += ChatMessageImageView.defaultHeight
+                total += ChatMessageImageView.heightFor(withText: attachment.desc, width: width)
             }
 
             if type == .video {

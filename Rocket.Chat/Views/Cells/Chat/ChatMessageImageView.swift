@@ -31,6 +31,9 @@ final class ChatMessageImageView: UIView {
     }
 
     @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailTextHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fullHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicatorImageView: UIActivityIndicatorView!
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
@@ -56,7 +59,27 @@ final class ChatMessageImageView: UIView {
             return nil
         }
         labelTitle.text = attachment.title
+        detailText.text = attachment.desc
+        //TODO: Test stuff
+        detailText.lineBreakMode = .byWordWrapping
+        detailText.numberOfLines = 0
+        detailText.textAlignment = .left
+        let attributedString = NSAttributedString(string: attachment.desc ?? "")
+        let labelWidth = detailText.bounds.size.width
+        let labelHeight = attributedString.heightForView(withWidth: labelWidth)
+        Log.debug("LABEL HEIGHT: " + String(describing: labelHeight))
+        detailTextHeightConstraint.constant = ChatMessageImageView.defaultHeight + (labelHeight ?? 0)
+        fullHeightConstraint.constant = ChatMessageImageView.defaultHeight + (labelHeight ?? 0)
+        detailText.sizeToFit()
         return imageURL
+    }
+
+    static func heightFor(withText text: String?, width: CGFloat) -> CGFloat {
+        let attributedString = NSMutableAttributedString(string: text ?? "")
+
+        let fullWidth = width //UIScreen.main.bounds.size.width
+        let height = attributedString.heightForView(withWidth: fullWidth - 55)
+        return self.defaultHeight + (height ?? 0)
     }
 
     fileprivate func updateMessageInformation() {
