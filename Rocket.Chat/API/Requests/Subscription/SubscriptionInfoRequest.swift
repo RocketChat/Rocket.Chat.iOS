@@ -51,13 +51,6 @@ class SubscriptionInfoRequest: APIRequest {
 }
 
 extension APIResult where T == SubscriptionInfoRequest {
-    var subscription: Subscription? {
-        guard let channel = channel else { return nil }
-        let subscription = Subscription()
-        subscription.map(channel, realm: nil)
-        return subscription
-    }
-
     var channel: JSON? {
         return raw?["channel"]
     }

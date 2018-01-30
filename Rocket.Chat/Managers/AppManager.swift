@@ -134,8 +134,7 @@ extension AppManager {
         func openChannel() -> Bool {
             guard let channel = Subscription.find(name: name, subscriptionType: [.channel]) else { return false }
 
-            let controller = ChatViewController.shared
-            controller?.subscription = channel
+            ChatViewController.shared?.subscription = channel
 
             return true
         }
@@ -148,12 +147,17 @@ extension AppManager {
         // If not, fetch it
         let request = SubscriptionInfoRequest(roomName: name)
         API.current()?.fetch(request, succeeded: { result in
-            Realm.executeOnMainThread({ realm in
-                guard let subscription = result.subscription else { return }
-                realm.add(subscription, update: true)
-            })
-
             DispatchQueue.main.async {
+                Realm.executeOnMainThread({ realm in
+                    guard let values = result.channel else { return }
+
+                    let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
+                        object?.rid = object?.identifier ?? ""
+                    })
+
+                    realm.add(subscription, update: true)
+                })
+
                 _ = openChannel()
             }
         })
