@@ -31,8 +31,9 @@ final class ChatHeaderViewStatus: UIView {
         labelTitle.textColor = color
         activityIndicator.color = color
 
-        let refreshImage = buttonRefresh.image(for: .normal)?.imageWithTint(color)
+        let refreshImage = buttonRefresh.image(for: .normal)?.withRenderingMode(.alwaysTemplate)
         buttonRefresh.setImage(refreshImage, for: .normal)
+        buttonRefresh.tintColor = color
     }
 
     // MARK: IBAction
