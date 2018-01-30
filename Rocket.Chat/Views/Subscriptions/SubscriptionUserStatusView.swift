@@ -54,7 +54,8 @@ final class SubscriptionUserStatusView: UIView {
 
     @IBOutlet weak var imageViewSettings: UIImageView! {
         didSet {
-            imageViewSettings.image = imageViewSettings.image?.imageWithTint(.RCLightBlue())
+            imageViewSettings.image = imageViewSettings.image?.withRenderingMode(.alwaysTemplate)
+            imageViewSettings.tintColor = .RCLightBlue()
         }
     }
 
@@ -67,7 +68,8 @@ final class SubscriptionUserStatusView: UIView {
 
     @IBOutlet weak var imageViewLogout: UIImageView! {
         didSet {
-            imageViewLogout.image = imageViewLogout.image?.imageWithTint(.RCLightBlue())
+            imageViewLogout.image = imageViewLogout.image?.withRenderingMode(.alwaysTemplate)
+            imageViewLogout.tintColor = .RCLightBlue()
         }
     }
 
