@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct AppManager {
 
@@ -99,7 +100,7 @@ extension AppManager {
     }
 }
 
-// MARK: Open DM
+// MARK: Open Rooms
 
 extension AppManager {
     static func openDirectMessage(username: String) {
@@ -128,6 +129,35 @@ extension AppManager {
             }
         })
     }
+
+    static func openChannel(name: String) {
+        func openChannel() -> Bool {
+            guard let channel = Subscription.find(name: name, subscriptionType: [.channel]) else { return false }
+
+            let controller = ChatViewController.shared
+            controller?.subscription = channel
+
+            return true
+        }
+
+        // Check if we already have this channel
+        if openChannel() == true {
+            return
+        }
+
+        // If not, fetch it
+        let request = SubscriptionInfoRequest(roomName: name)
+        API.current()?.fetch(request, succeeded: { result in
+            Realm.executeOnMainThread({ realm in
+                guard let subscription = result.subscription else { return }
+                realm.add(subscription, update: true)
+            })
+
+            DispatchQueue.main.async {
+                _ = openChannel()
+            }
+        })
+    }
 }
 
 // MARK: Deep Link
@@ -147,8 +177,8 @@ extension AppManager {
             changeToOrAddServer(serverUrl: host, roomId: roomId)
         case let .mention(name):
             openDirectMessage(username: name)
-        default:
-            break
+        case let .channel(name):
+            openChannel(name: name)
         }
     }
 }
