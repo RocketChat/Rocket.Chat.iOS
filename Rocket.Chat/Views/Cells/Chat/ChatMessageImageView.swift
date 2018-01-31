@@ -53,6 +53,7 @@ final class ChatMessageImageView: UIView {
         }
         if imageURL.absoluteString.starts(with: "http://") {
             isLoadable = false
+            detailText.text = ""
             labelTitle.text = attachment.title + " (" + localized("alert.insecure_image.title") + ")"
             imageView.contentMode = UIViewContentMode.center
             imageView.sd_setImage(with: nil, placeholderImage: UIImage(named: "Resource Unavailable"))
@@ -60,25 +61,17 @@ final class ChatMessageImageView: UIView {
         }
         labelTitle.text = attachment.title
         detailText.text = attachment.desc
-        //TODO: Test stuff
-        detailText.lineBreakMode = .byWordWrapping
-        detailText.numberOfLines = 0
-        detailText.textAlignment = .left
-        let attributedString = NSAttributedString(string: attachment.desc ?? "")
-        let labelWidth = detailText.bounds.size.width
-        let labelHeight = attributedString.heightForView(withWidth: labelWidth)
-        Log.debug("LABEL HEIGHT: " + String(describing: labelHeight))
-        detailTextHeightConstraint.constant = ChatMessageImageView.defaultHeight + (labelHeight ?? 0)
-        fullHeightConstraint.constant = ChatMessageImageView.defaultHeight + (labelHeight ?? 0)
-        detailText.sizeToFit()
+        let fullHeight = ChatMessageImageView.heightFor(withText: attachment.desc)
+        fullHeightConstraint.constant = fullHeight
+        detailTextHeightConstraint.constant = fullHeight - ChatMessageImageView.defaultHeight
         return imageURL
     }
 
-    static func heightFor(withText text: String?, width: CGFloat) -> CGFloat {
-        let attributedString = NSMutableAttributedString(string: text ?? "")
+    static func heightFor(withText text: String?) -> CGFloat {
+        let attributedString = NSMutableAttributedString(string: text ?? "", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)])
 
-        let fullWidth = width //UIScreen.main.bounds.size.width
-        let height = attributedString.heightForView(withWidth: fullWidth - 55)
+        let labelWidth = UIScreen.main.bounds.size.width - 55
+        let height = attributedString.heightForView(withWidth: labelWidth)
         return self.defaultHeight + (height ?? 0)
     }
 
