@@ -95,7 +95,7 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             if type == .image {
-                total += ChatMessageImageView.heightFor(withText: attachment.desc, width: width)
+                total += ChatMessageImageView.heightFor(withText: attachment.desc)
             }
 
             if type == .video {
@@ -205,7 +205,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageImageView.defaultHeight
+                    mediaViewHeight += ChatMessageImageView.heightFor(withText: attachment.desc)
                 }
 
             case .video:
