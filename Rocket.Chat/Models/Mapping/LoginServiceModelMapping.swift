@@ -28,10 +28,14 @@ extension LoginService: ModelMappeable {
         loginStyle = values["loginStyle"].string
         buttonColor = values["buttonColor"].string
 
+        loginUrl = values["login_url"].string
+
         switch type {
         case .github: mapGitHub()
         case .facebook: mapFacebook()
         case .linkedin: mapLinkedIn()
+        case .saml: break
+        case .cas: break
         case .custom: break
         case .invalid: break
         }

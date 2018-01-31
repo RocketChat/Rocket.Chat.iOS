@@ -372,6 +372,27 @@ extension AuthViewController {
             return
         }
 
+        if loginService.type == .cas {
+            guard
+                let loginUrlString = loginService.loginUrl,
+                let loginUrl = URL(string: loginUrlString),
+                let host = serverURL.host,
+                let callbackUrl = URL(string: "https://\(host)/_cas/\(String.random(17))")
+            else {
+                return
+            }
+
+            let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
+                AuthManager.auth(casCredentialToken: $0, completion: self.handleAuthenticationResponse)
+            }, failure: {
+
+            })
+
+            present(controller, animated: true)
+
+            return
+        }
+
         OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
             guard let strongSelf = self else { return }
 
@@ -415,7 +436,7 @@ extension AuthViewController {
         switch changes {
         case .update(let res, let deletions, let insertions, let modifications):
             insertions.map { res[$0] }.forEach {
-                guard !($0.serverUrl?.isEmpty ?? true) else { return }
+                guard $0.isValid else { return }
                 self.addOAuthButton(for: $0)
             }
 
