@@ -29,8 +29,9 @@ extension LoginService: ModelMappeable {
         buttonColor = values["buttonColor"].string
 
         switch type {
-        case .github: mapGitHub()
         case .facebook: mapFacebook()
+        case .gitlab: mapGitLab()
+        case .github: mapGitHub()
         case .linkedin: mapLinkedIn()
         case .custom: break
         case .invalid: break
@@ -48,6 +49,21 @@ extension LoginService: ModelMappeable {
         buttonLabelText = "github"
         buttonLabelColor = "#ffffff"
         buttonColor = "#4c4c4c"
+    }
+
+    func mapGitLab() {
+        service = "gitlab"
+        scope = ""
+
+        serverUrl = "https://gitlab.com"
+        tokenPath = "/oauth/token"
+        identityPath = "https://gitlab.com/user/api/v4/user"
+        authorizePath = "/oauth/authorize"
+        buttonLabelText = "gitlab"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#373d47"
+
+        callbackPath = "gitlab?close"
     }
 
     func mapFacebook() {

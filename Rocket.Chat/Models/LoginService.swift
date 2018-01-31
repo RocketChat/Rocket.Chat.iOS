@@ -13,13 +13,15 @@ enum LoginServiceType {
     case github
     case facebook
     case linkedin
+    case gitlab
     case custom
     case invalid
 
     init(string: String) {
         switch string {
-        case "github": self = .github
         case "facebook": self = .facebook
+        case "github": self = .github
+        case "gitlab": self = .gitlab
         case "linkedin": self = .linkedin
         default: self = .invalid
         }
@@ -111,6 +113,12 @@ extension LoginService {
     static var github: LoginService {
         let service = LoginService()
         service.mapGitHub()
+        return service
+    }
+
+    static var gitlab: LoginService {
+        let service = LoginService()
+        service.mapGitLab()
         return service
     }
 
