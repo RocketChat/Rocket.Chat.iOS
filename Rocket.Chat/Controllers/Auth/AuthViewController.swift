@@ -15,6 +15,7 @@ import RealmSwift
 final class AuthViewController: BaseViewController {
 
     internal var connecting = false
+
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
@@ -95,10 +96,12 @@ final class AuthViewController: BaseViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         SocketManager.removeConnectionHandler(token: socketHandlerToken)
     }
 
@@ -183,6 +186,8 @@ final class AuthViewController: BaseViewController {
                     }
                 }
             }
+            }, errored: { [weak self] _ in
+                // TODO: Handle error
         })
     }
 
@@ -283,40 +288,45 @@ final class AuthViewController: BaseViewController {
     }
 
     @IBAction func forgotPasswordPressed(_ sender: UIButton) {
-
-        let alert = UIAlertController(title: localized("auth.forgot_password.title"), message: localized("auth.forgot_password.message"), preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: localized("auth.forgot_password.title"),
+            message: localized("auth.forgot_password.message"),
+            preferredStyle: .alert
+        )
 
         let sendAction = UIAlertAction(title: localized("Send"), style: .default, handler: { _ in
-
             guard let text = alert.textFields?.first?.text else { return }
 
             AuthManager.sendForgotPassword(email: text, completion: { result in
                 guard !result.isError() else {
-                    Alert(title: localized("auth.forgot_password.title"), message: localized("error.socket.default_error_message")).present()
+                    Alert(
+                        title: localized("auth.forgot_password.title"),
+                        message: localized("error.socket.default_error_message")
+                    ).present()
                     return
                 }
 
-                Alert(title: localized("auth.forgot_password.title"), message: localized("auth.forgot_password.success")).present()
+                Alert(
+                    title: localized("auth.forgot_password.title"),
+                    message: localized("auth.forgot_password.success")
+                ).present()
             })
         })
 
         sendAction.isEnabled = false
 
         alert.addTextField(configurationHandler: { textField in
-
             textField.placeholder = "john.appleseed@apple.com"
             textField.textContentType = UITextContentType.emailAddress
             textField.keyboardType = .emailAddress
-            _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
 
+            _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
                 sendAction.isEnabled = textField.text?.isValidEmail ?? false
             }
         })
 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
-
         alert.addAction(sendAction)
-
         present(alert, animated: true)
     }
 }
@@ -347,6 +357,7 @@ extension AuthViewController: UITextFieldDelegate {
 // MARK: Login Services
 
 extension AuthViewController {
+
     func setupLoginServices() {
         self.loginServicesToken?.invalidate()
 
@@ -358,28 +369,26 @@ extension AuthViewController {
     }
 
     @objc func loginServiceButtonDidPress(_ button: UIButton) {
-        guard let service = customAuthButtons.filter({ $0.value == button }).keys.first,
-              let realm = Realm.shared,
-              let loginService = LoginService.find(service: service, realm: realm)
+        guard
+            let service = customAuthButtons.filter({ $0.value == button }).keys.first,
+            let realm = Realm.shared,
+            let loginService = LoginService.find(service: service, realm: realm)
         else {
             return
         }
 
-        startLoading()
-
-        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self,
-                               success: { [weak self] credentials in
-
+        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
             guard let strongSelf = self else { return }
+
+            strongSelf.startLoading()
             AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
-
         }, failure: { [weak self] in
-
-            self?.alert(title: localized("alert.login_service_error.title"),
-                        message: localized("alert.login_service_error.message"))
+            self?.alert(
+                title: localized("alert.login_service_error.title"),
+                message: localized("alert.login_service_error.message")
+            )
 
             self?.stopLoading()
-
         })
     }
 
@@ -412,14 +421,13 @@ extension AuthViewController {
         case .update(let res, let deletions, let insertions, let modifications):
             insertions.map { res[$0] }.forEach {
                 guard !($0.serverUrl?.isEmpty ?? true) else { return }
-
                 self.addOAuthButton(for: $0)
             }
 
             modifications.map { res[$0] }.forEach {
                 guard
-                      let identifier = $0.identifier,
-                      let button = self.customAuthButtons[identifier]
+                    let identifier = $0.identifier,
+                    let button = self.customAuthButtons[identifier]
                 else {
                     return
                 }
@@ -430,9 +438,10 @@ extension AuthViewController {
             }
 
             deletions.map { res[$0] }.forEach {
-                guard $0.custom,
-                      let identifier = $0.identifier,
-                      let button = self.customAuthButtons[identifier]
+                guard
+                    $0.custom,
+                    let identifier = $0.identifier,
+                    let button = self.customAuthButtons[identifier]
                 else {
                     return
                 }
@@ -440,12 +449,12 @@ extension AuthViewController {
                 authButtonsStackView.removeArrangedSubview(button)
                 customAuthButtons.removeValue(forKey: identifier)
             }
-        default:
-            break
+        default: break
         }
     }
 }
 extension AuthViewController: SocketConnectionHandler {
+
     func socketDidConnect(socket: SocketManager) { }
     func socketDidReturnError(socket: SocketManager, error: SocketError) { }
 
@@ -454,4 +463,5 @@ extension AuthViewController: SocketConnectionHandler {
             self.navigationController?.popViewController(animated: true)
         }
     }
+
 }
