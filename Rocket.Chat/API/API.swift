@@ -8,7 +8,6 @@
 
 import Foundation
 import SwiftyJSON
-import Reachability
 
 protocol APIRequestMiddleware {
     var api: API { get }
@@ -53,6 +52,7 @@ class API: APIFetcher {
         self.version = version
 
         requestMiddlewares.append(VersionMiddleware(api: self))
+        requestMiddlewares.append(ReachabilityMiddleware(api: self))
     }
 
     func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,
@@ -74,7 +74,7 @@ class API: APIFetcher {
 
         if let sessionDelegate = sessionDelegate {
             let configuration = URLSessionConfiguration.ephemeral
-            configuration.timeoutIntervalForRequest = 5
+            configuration.timeoutIntervalForRequest = 30
 
             session = URLSession(
                 configuration: configuration,
