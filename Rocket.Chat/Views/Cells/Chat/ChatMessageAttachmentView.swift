@@ -2,7 +2,7 @@
 //  ChatMessageAttachmentView.swift
 //  Rocket.Chat
 //
-//  Created by Luca Justin Zimmermann on 01.02.18.
+//  Created by Luca Justin Zimmermann on 01/02/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
