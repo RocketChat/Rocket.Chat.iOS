@@ -64,13 +64,25 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUL-A6-lfN">
                             <rect key="frame" x="0.0" y="0.0" width="200" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="»" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Cd8-E0-gTo">
+                            <rect key="frame" x="-15" y="0.0" width="15" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="17" id="0pC-8V-3ZS"/>
+                                <constraint firstAttribute="width" constant="15" id="PkU-HO-vrQ"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
+                        <constraint firstItem="Cd8-E0-gTo" firstAttribute="top" secondItem="Tel-Pv-Ok2" secondAttribute="top" id="5a6-Af-GDn"/>
                         <constraint firstItem="qUL-A6-lfN" firstAttribute="leading" secondItem="Tel-Pv-Ok2" secondAttribute="leading" id="GZU-1e-6lu"/>
+                        <constraint firstItem="Cd8-E0-gTo" firstAttribute="leading" secondItem="Tel-Pv-Ok2" secondAttribute="leading" constant="-15" id="JM6-XW-qw3"/>
                         <constraint firstItem="qUL-A6-lfN" firstAttribute="top" secondItem="Tel-Pv-Ok2" secondAttribute="top" id="OB7-Hx-Bn3"/>
                         <constraint firstAttribute="bottom" secondItem="qUL-A6-lfN" secondAttribute="bottom" id="RvB-Np-Rfp"/>
                         <constraint firstAttribute="height" constant="17" id="jux-Dv-ZtT"/>
