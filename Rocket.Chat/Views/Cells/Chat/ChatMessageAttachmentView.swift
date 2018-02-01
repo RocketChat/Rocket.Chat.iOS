@@ -11,8 +11,11 @@ class ChatMessageAttachmentView: UIView {
         return 0
     }
 
-    static func heightFor(withText text: String?) -> CGFloat {
-        let attributedString = NSMutableAttributedString(string: text ?? "", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)])
+    static func heightFor(withText description: String?) -> CGFloat {
+        guard let text = description, text != "" else {
+            return self.defaultHeight
+        }
+        let attributedString = NSMutableAttributedString(string: text, attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)])
 
         let labelWidth = UIScreen.main.bounds.size.width - 55
         let height = attributedString.heightForView(withWidth: labelWidth)
