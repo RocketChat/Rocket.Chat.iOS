@@ -160,7 +160,7 @@ extension AppManager {
 
                 _ = openChannel()
             }
-        })
+        }, errored: nil)
     }
 }
 
