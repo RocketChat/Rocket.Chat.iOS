@@ -99,11 +99,11 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             if type == .video {
-                total += ChatMessageVideoView.defaultHeight
+                total += ChatMessageVideoView.heightFor(withText: attachment.desc)
             }
 
             if type == .audio {
-                total += ChatMessageAudioView.defaultHeight
+                total += ChatMessageAudioView.heightFor(withText: attachment.desc)
             }
         }
 
@@ -215,7 +215,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageVideoView.defaultHeight
+                    mediaViewHeight += ChatMessageVideoView.heightFor(withText: attachment.desc)
                 }
 
             case .audio:
@@ -224,7 +224,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageAudioView.defaultHeight
+                    mediaViewHeight += ChatMessageAudioView.heightFor(withText: attachment.desc)
                 }
 
             default:

@@ -14,8 +14,10 @@ protocol ChatMessageImageViewProtocol: class {
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView)
 }
 
-final class ChatMessageImageView: UIView {
-    static let defaultHeight = CGFloat(250)
+final class ChatMessageImageView: ChatMessageAttachmentView {
+    override static var defaultHeight: CGFloat {
+        return 250
+    }
     var isLoadable = true
 
     weak var delegate: ChatMessageImageViewProtocol?
@@ -65,14 +67,6 @@ final class ChatMessageImageView: UIView {
         fullHeightConstraint.constant = fullHeight
         detailTextHeightConstraint.constant = fullHeight - ChatMessageImageView.defaultHeight
         return imageURL
-    }
-
-    static func heightFor(withText text: String?) -> CGFloat {
-        let attributedString = NSMutableAttributedString(string: text ?? "", attributes: [NSAttributedStringKey.font: UIFont.systemFont(ofSize: 14.0)])
-
-        let labelWidth = UIScreen.main.bounds.size.width - 55
-        let height = attributedString.heightForView(withWidth: labelWidth)
-        return self.defaultHeight + (height ?? 0)
     }
 
     fileprivate func updateMessageInformation() {
