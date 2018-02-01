@@ -88,7 +88,17 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IyF-zS-EUS">
                             <rect key="frame" x="0.0" y="0.0" width="200" height="17"/>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="»" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rsy-I8-4XA">
+                            <rect key="frame" x="-15" y="0.0" width="15" height="17"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="15" id="T08-Tm-fnX"/>
+                                <constraint firstAttribute="height" constant="17" id="URL-To-LD1"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
@@ -97,8 +107,10 @@
                         <constraint firstItem="IyF-zS-EUS" firstAttribute="top" secondItem="BQh-ow-7um" secondAttribute="top" id="F7Y-3s-HfK"/>
                         <constraint firstItem="IyF-zS-EUS" firstAttribute="leading" secondItem="BQh-ow-7um" secondAttribute="leading" id="Hcx-Dz-5N7"/>
                         <constraint firstAttribute="height" constant="17" id="LKm-f2-0Gb"/>
+                        <constraint firstItem="Rsy-I8-4XA" firstAttribute="leading" secondItem="BQh-ow-7um" secondAttribute="leading" constant="-15" id="P2K-3b-ghl"/>
                         <constraint firstAttribute="trailing" secondItem="IyF-zS-EUS" secondAttribute="trailing" id="XDG-72-XW6"/>
                         <constraint firstAttribute="bottom" secondItem="IyF-zS-EUS" secondAttribute="bottom" id="i5Q-aP-qX1"/>
+                        <constraint firstItem="Rsy-I8-4XA" firstAttribute="top" secondItem="BQh-ow-7um" secondAttribute="top" id="iic-9u-IGb"/>
                     </constraints>
                 </view>
             </subviews>
