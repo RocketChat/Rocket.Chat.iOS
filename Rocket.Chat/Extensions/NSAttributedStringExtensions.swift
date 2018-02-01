@@ -63,8 +63,6 @@ extension NSMutableAttributedString {
     }
 
     func setMention(_ mention: String, range: NSRange? = nil) {
-        guard mention != "all" && mention != "here" else { return }
-
         let link = "rocketchat://mention?name=\(mention)"
 
         if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
@@ -120,7 +118,11 @@ extension NSMutableAttributedString {
                 let ranges = string.ranges(of: "@\(mention)")
                 for range in ranges {
                     let range = NSRange(range, in: string)
-                    setMention(mention, range: range)
+
+                    if mention != "all" && mention != "here" && mention != username {
+                        setMention(mention, range: range)
+                    }
+
                     setBackgroundColor(background, range: range)
                     setFontColor(font, range: range)
                     setFont(MessageTextFontAttributes.boldFont, range: range)
