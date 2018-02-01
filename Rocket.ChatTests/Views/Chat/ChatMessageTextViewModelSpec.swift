@@ -105,4 +105,44 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         model.toggleCollpase()
         XCTAssertTrue(model.collapsed)
     }
+
+    func testHttpImage() {
+        let attachment = Attachment()
+        attachment.imageURL = "http://rocket.chat/"
+        attachment.title = "http"
+        if let view = ChatMessageImageView.instantiateFromNib() {
+            view.attachment = attachment
+            let title = view.labelTitle?.text
+            XCTAssert(title == attachment.title + " (" + localized("alert.insecure_image.title") +  ")", "Should have insecurity warning")
+            XCTAssertFalse(view.isLoadable)
+        } else {
+            XCTFail("View create failed")
+        }
+    }
+
+    func testImageNoUrl() {
+        let attachment = Attachment()
+        attachment.title = "nil"
+        if let view = ChatMessageImageView.instantiateFromNib() {
+            view.attachment = attachment
+            let title = view.labelTitle?.text
+            XCTAssert(title == "Label", "Should be default value")
+        } else {
+            XCTFail("View create failed")
+        }
+    }
+
+    func testHttpsImage() {
+        let attachment = Attachment()
+        attachment.imageURL = "https://rocket.chat/"
+        attachment.title = "https"
+        if let view = ChatMessageImageView.instantiateFromNib() {
+            view.attachment = attachment
+            let title = view.labelTitle?.text
+            XCTAssert(title == attachment.title, "Should be regular title")
+            XCTAssertTrue(view.isLoadable)
+        } else {
+            XCTFail("View create failed")
+        }
+    }
 }
