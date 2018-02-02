@@ -12,11 +12,18 @@ import SwiftyJSON
 public typealias UploadProgressBlock = (Int) -> Void
 public typealias UploadCompletionBlock = (SocketResponse?, Bool) -> Void
 
-struct FileUpload {
+class FileUpload {
     var name: String
-    var size: Int
-    var type: String
-    var data: Data
+    let size: Int
+    let type: String
+    let data: Data
+    
+    init(name: String, size: Int, type: String, data: Data) {
+        self.name = name
+        self.size = size
+        self.type = type
+        self.data = data
+    }
 }
 
 class UploadManager {
