@@ -94,7 +94,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
                         mimeType: "image/gif"
                     )
 
-                    self.upload(file)
+                    self.uploadDialog(file)
                     self.dismiss(animated: true, completion: nil)
                 }
 
@@ -136,7 +136,7 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
 
         if let file = file {
-            upload(file)
+            uploadDialog(file)
         }
 
         dismiss(animated: true, completion: nil)
@@ -189,7 +189,7 @@ extension ChatViewController: UIDocumentPickerDelegate {
     func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         if controller.documentPickerMode == .import {
             if let file = UploadHelper.file(for: url) {
-                upload(file)
+                uploadDialog(file)
             }
         }
     }
@@ -215,10 +215,10 @@ extension ChatViewController {
         hideHeaderStatusView()
     }
 
-    func upload(_ file: FileUpload) {
+    func upload(_ file: FileUpload, description: String?) {
         guard let subscription = subscription else { return }
 
-        startLoadingUpload(file: file)
+        self.startLoadingUpload(file: file)
 
         func stopLoadingUpload() {
             DispatchQueue.main.async { [weak self] in
@@ -227,7 +227,7 @@ extension ChatViewController {
         }
 
         let client = API.current()?.client(UploadClient.self)
-        client?.upload(roomId: subscription.rid, data: file.data, filename: file.name, mimetype: file.type,
+        client?.upload(roomId: subscription.rid, data: file.data, filename: file.name, mimetype: file.type, description: description ?? "",
                        completion: stopLoadingUpload, versionFallback: { deprecatedMethod() })
 
         func deprecatedMethod() {
@@ -258,6 +258,29 @@ extension ChatViewController {
                     }
                 }
             })
+        }
+    }
+
+    func uploadDialog(_ file: FileUpload) {
+        let alert = UIAlertController(title: localized("alert.upload_dialog.title"), message: "", preferredStyle: .alert)
+        alert.addTextField { (_ fileName) -> Void in
+            fileName.placeholder = localized("alert.upload_dialog.placeholder.title")
+            fileName.text = file.name
+        }
+        alert.addTextField { (_ fileDescription) -> Void in
+            fileDescription.placeholder = localized("alert.upload_dialog.placeholder.description")
+        }
+        alert.addAction(UIAlertAction(title: localized("alert.upload_dialog.action.upload"), style: .default, handler: { _ in
+            let name = alert.textFields?[0].text ?? ""
+            if name != "" {
+                file.name = name
+            }
+            let description = alert.textFields?[1].text
+            self.upload(file, description: description)
+        }))
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel))
+        DispatchQueue.main.async {
+        	self.present(alert, animated: true, completion: nil)
         }
     }
 
