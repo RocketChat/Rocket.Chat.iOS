@@ -73,14 +73,9 @@ final class SettingsViewController: UITableViewController {
 
     func cellContactDidPressed() {
         if !MFMailComposeViewController.canSendMail() {
-            let alert = UIAlertController(
-                title: localized("alert.settings.set_mail_app.title"),
-                message: localized("alert.settings.set_mail_app.message"),
-                preferredStyle: .alert
-            )
-
-            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+            Alert(
+                key: "alert.settings.set_mail_app"
+            ).present()
             return
         }
 
