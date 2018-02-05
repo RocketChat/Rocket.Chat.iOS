@@ -2,11 +2,11 @@
 
 Great to have you here! Here are a few ways you can help make this project better!
 
-## Testflight builds
+## TestFlight builds
 
-If you're reporting issues, you may request for Testflight (beta) access via [open.rocket.chat](https://open.rocket.chat/channel/iosnativeapp).
+If you're reporting issues, you may request for TestFlight (beta) access via [open.rocket.chat](https://open.rocket.chat/channel/iosnativeapp).
 
-If you have a Testflight pre-release installed you have following options:
+If you have a TestFlight pre-release installed you have following options:
 
 - Open FLEX via Sidebar > Dropdown > My Account
   - You can open the Menu and have a peek on the Network traffic if some action was not executing as promised
@@ -43,7 +43,7 @@ Also refer to [Guidelines](#project.pbxproj) for modifying files.
 
 ## Issues needing help
 
-Didn't found a bug or want a new feature not already reported? Check out [the issues with "Help wanted"](https://github.com/RocketChat/Rocket.Chat.iOS/labels/help%20wanted) or other issues, for those no branch exists.
+Didn't found a bug or want a new feature not already reported? Check out [the issues with "help wanted"](https://github.com/RocketChat/Rocket.Chat.iOS/labels/help%20wanted) or other issues, for those no branch exists.
 
 ## Guidelines
 
@@ -52,7 +52,7 @@ Didn't found a bug or want a new feature not already reported? Check out [the is
 Don't change this file unless required (added files). This includes signing of the application itself. The "Team" will be red in the `Rocket.Chat.xcodeproj`, that's fine.
 ![signing](https://user-images.githubusercontent.com/193273/35477109-ad451daa-03bc-11e8-828b-9238bdda438e.png)
 
-### New to swift?
+### New to Swift?
 
 Search engines like Google help most of the times or consider searching on platforms like [StackOverflow](https://stackoverflow.com/search?q=)
 
