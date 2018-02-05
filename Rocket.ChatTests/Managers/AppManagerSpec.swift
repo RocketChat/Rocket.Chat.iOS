@@ -37,7 +37,6 @@ class AppManagerSpec: XCTestCase {
         guard let url = URL(string: "rocketchat://auth") else { return XCTFail("malformed url") }
         XCTAssertNil(AppManager.handleDeepLink(url))
     }
-    
 
     func testDeepLinkAuthOnlyCredentials() {
         guard let url = URL(string: "rocketchat://auth?token=token&userId=userId") else { return XCTFail("malformed url") }
