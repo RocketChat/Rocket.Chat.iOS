@@ -1,5 +1,6 @@
 // Global
 "global.ok" = "OK";
+"global.no" = "Ne";
 "global.cancel" = "Zrušit";
 
 // Errors
@@ -123,6 +124,9 @@
 "chat.message.actions.quote" = "Citace zprávy";
 "chat.message.actions.reply" = "Odpovědět na zprávu";
 "chat.message.actions.delete" = "Delete message"; //TODO
+"chat.message.actions.delete.confirm.title" = "Delete this message?"; // TODO
+"chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone."; //TODO
+"chat.message.actions.delete.confirm.yes" = "Yes, delete"; // TODO
 "Send" = "Odeslat"; //SLKTextInputbar.m
 
 // Chat Message Report
