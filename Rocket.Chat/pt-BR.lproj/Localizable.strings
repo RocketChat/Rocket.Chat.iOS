@@ -1,10 +1,11 @@
 // Global
 "global.ok" = "OK";
+"global.no" = "Não";
 "global.cancel" = "Cancelar";
 
 // Errors
-"error.socket.default_error_title" = "Oops!";
-"error.socket.default_error_message" = "Algo errado aconteceu, por favor tente novamente.";
+"error.socket.default_error.title" = "Oops!";
+"error.socket.default_error.message" = "Algo errado aconteceu, por favor tente novamente.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Oops!";
@@ -123,6 +124,9 @@
 "chat.message.actions.quote" = "Citar mensagem";
 "chat.message.actions.reply" = "Responder mensagem";
 "chat.message.actions.delete" = "Deletar mensagem";
+"chat.message.actions.delete.confirm.title" = "Deletar esta mensagem?";
+"chat.message.actions.delete.confirm.message" = "Tem certeza que deseja deletar esta mensagem? A mensagem não poderá ser recuperada.";
+"chat.message.actions.delete.confirm.yes" = "Sim, deletar";
 "Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
