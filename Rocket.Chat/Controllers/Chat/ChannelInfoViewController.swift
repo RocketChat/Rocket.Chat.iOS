@@ -94,7 +94,7 @@ class ChannelInfoViewController: BaseViewController {
 
     func showStarredList() {
         guard let userId = AuthManager.currentUser()?.identifier else {
-            alert(title: localized("error.socket.default_error_title"), message: "error.socket.default_error_message")
+            alert(title: localized("error.socket.default_error.title"), message: localized("error.socket.default_error.message"))
             return
         }
 
