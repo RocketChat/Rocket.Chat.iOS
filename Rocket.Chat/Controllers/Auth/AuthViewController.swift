@@ -238,6 +238,11 @@ final class AuthViewController: BaseViewController {
         }
     }
 
+    func authenticateWithDeepLinkCredentials(_ credentials: DeepLinkCredentials) {
+        startLoading()
+        AuthManager.auth(token: credentials.token, completion: self.handleAuthenticationResponse)
+    }
+
     @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {
         authenticateWithGoogle()
     }
