@@ -16,6 +16,8 @@ extension ChatViewController: ChatMessageCellProtocol {
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
         let controller = ReactorListViewController()
         controller.modalPresentationStyle = .popover
+        _ = controller.view
+        controller.reactorListView.registerReactorNib(MemberCell.nib)
 
         if let presenter = controller.popoverPresentationController {
             presenter.sourceView = reactionView
