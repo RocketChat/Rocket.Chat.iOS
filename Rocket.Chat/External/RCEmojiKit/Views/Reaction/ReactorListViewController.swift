@@ -62,10 +62,12 @@ class ReactorListViewController: UIViewController {
             )
         )
 
+        title = NSLocalizedString("reactorlist.title", tableName: "RCEmojiKit", bundle: Bundle.main, value: "", comment: "")
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
         if self.navigationController?.topViewController == self {
             navigationController?.navigationBar.topItem?.title = ""
         }
-
-        title = NSLocalizedString("reactorlist.title", tableName: "RCEmojiKit", bundle: Bundle.main, value: "", comment: "")
     }
 }

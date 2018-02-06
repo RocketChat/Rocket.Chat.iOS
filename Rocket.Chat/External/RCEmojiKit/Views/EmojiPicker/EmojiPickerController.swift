@@ -48,10 +48,6 @@ class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
             )
         )
 
-        if self.navigationController?.topViewController == self {
-            navigationController?.navigationBar.topItem?.title = ""
-        }
-
         title = localized("emojipicker.title")
     }
 
@@ -59,6 +55,10 @@ class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         center.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+
+        if self.navigationController?.topViewController == self {
+            navigationController?.navigationBar.topItem?.title = ""
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {
