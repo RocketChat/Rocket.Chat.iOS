@@ -19,7 +19,8 @@ extension Message: ModelMappeable {
 
         self.rid = values["rid"].stringValue
         self.text = values["msg"].stringValue
-        self.avatar = values["avatar"].stringValue
+        self.avatar = values["avatar"].string
+        self.emoji = values["emoji"].string
         self.alias = values["alias"].stringValue
         self.internalType = values["t"].string ?? "t"
         self.role = values["role"].stringValue
@@ -99,6 +100,16 @@ extension Message: ModelMappeable {
                 obj.map(channel, realm: realm)
                 self.channels.append(obj)
             }
+        }
+
+        // Reactions
+        self.reactions.removeAll()
+        if let reactions = values["reactions"].dictionary {
+            reactions.enumerated().flatMap {
+                let reaction = MessageReaction()
+                reaction.map(emoji: $1.key, json: $1.value)
+                return reaction
+            }.forEach(self.reactions.append)
         }
     }
 }

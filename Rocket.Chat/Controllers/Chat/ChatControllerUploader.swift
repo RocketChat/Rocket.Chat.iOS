@@ -9,7 +9,6 @@
 import UIKit
 import Photos
 import MobileCoreServices
-import AVFoundation
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -197,49 +196,6 @@ extension ChatViewController: UIDocumentPickerDelegate {
 
 }
 
-// MARK: AVAudioRecorderDelegate
-
-extension ChatViewController: AVAudioRecorderDelegate {
-
-    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
-        guard error != nil else { return }
-
-        alert(
-            title: localized("alert.audio_message.error.title"),
-            message: localized("alert.audio_message.error.message")
-        )
-    }
-
-    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
-        guard flag == true else { return }
-
-        let start = startTime ?? NSDate()
-        let seconds = Int(abs(start.timeIntervalSinceNow))
-
-        let messageTime = String(format: "%.2d:%.2d", seconds / 60, seconds % 60)
-        let message = String(format: localized("alert.audio_message.success.message"), messageTime)
-        let alert = UIAlertController(
-            title: localized("alert.audio_message.success.title"),
-            message: message,
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
-        alert.addAction(UIAlertAction(title: localized("alert.audio_message.success.send"), style: .default, handler: { _ in
-            var file: FileUpload?
-            let assetURL = recorder.url
-
-            file = UploadHelper.file(for: assetURL)
-
-            if let file = file {
-                self.upload(file)
-            }
-        }))
-
-        present(alert, animated: true, completion: nil)
-    }
-}
-
 // MARK: Uploading a FileUpload
 
 extension ChatViewController {
@@ -264,33 +220,38 @@ extension ChatViewController {
 
         startLoadingUpload(file: file)
 
-        UploadManager.shared.upload(file: file, subscription: subscription, progress: { _ in
-            // We currently don't have progress being called.
-        }, completion: { [unowned self] (response, error) in
-            self.stopLoadingUpload()
-
-            if error {
-                var errorMessage = localized("error.socket.default_error_message")
-
-                if let response = response {
-                    if let message = response.result["error"]["message"].string {
-                        errorMessage = message
-                    }
-                }
-
-                let alert = UIAlertController(
-                    title: localized("error.socket.default_error_title"),
-                    message: errorMessage,
-                    preferredStyle: .alert
-                )
-
-                alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-
-                DispatchQueue.main.async {
-                    self.present(alert, animated: true, completion: nil)
-                }
+        func stopLoadingUpload() {
+            DispatchQueue.main.async { [weak self] in
+                self?.stopLoadingUpload()
             }
-        })
+        }
+
+        let client = API.current()?.client(UploadClient.self)
+        client?.upload(roomId: subscription.rid, data: file.data, filename: file.name, mimetype: file.type,
+                       completion: stopLoadingUpload, versionFallback: { deprecatedMethod() })
+
+        func deprecatedMethod() {
+            UploadManager.shared.upload(file: file, subscription: subscription, progress: { _ in
+                // We currently don't have progress being called.
+            }, completion: { [unowned self] (response, error) in
+                self.stopLoadingUpload()
+
+                if error {
+                    var errorMessage = localized("error.socket.default_error.message")
+
+                    if let response = response {
+                        if let message = response.result["error"]["message"].string {
+                            errorMessage = message
+                        }
+                    }
+
+                    Alert(
+                        title: localized("error.socket.default_error.title"),
+                        message: errorMessage
+                    ).present()
+                }
+            })
+        }
     }
 
 }

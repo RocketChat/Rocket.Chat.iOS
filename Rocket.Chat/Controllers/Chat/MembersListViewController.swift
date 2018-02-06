@@ -55,6 +55,8 @@ class MembersListViewData {
                 self.currentPage += 1
                 self.isLoadingMoreMembers = false
                 completion?()
+            }, errored: { [weak self] _ in
+                // TODO: Handle error
             })
         }
     }

@@ -1,26 +1,18 @@
-/*
- Localizable.strings
- Rocket.Chat
-
- Created by Rafael K. Streit on 8/27/16.
- Copyright © 2016 Rocket.Chat. All rights reserved.
- */
-
-
 // Global
 "global.ok" = "OK";
+"global.no" = "Nein";
 "global.cancel" = "Abbrechen";
 
 // Errors
-"error.socket.default_error_title" = "Oops!";
-"error.socket.default_error_message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
+"error.socket.default_error.title" = "Oops!";
+"error.socket.default_error.message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfe deine Eingabe und probiere es noch einmal.";
 
 "alert.connection.socket_error.title" = "Oops!";
-"alert.connection.socket_error.message" = "Could not connect to this server!";
+"alert.connection.socket_error.message" = "Konnte keine Verbindung zum Server herstellen!";
 
 "alert.connection.invalid_version.title" = "Oops!";
 "alert.connection.invalid_version.message" = "Der Serverversion, mit der du dich verbinden möchtest, wird nicht mehr unterstützt: %@.\n\nWir benötigen Version %@.";
@@ -28,15 +20,11 @@
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "Es sind keine Mail Accounts konfiguriert. Bitte richte einen Mail Account ein um Emails senden zu können.";
 
-"alert.audio_message.success.send" = "Senden";
-"alert.audio_message.success.title" = "Erfolg";
-"alert.audio_message.success.message" = "You message was successfully recorded. Recording time: %@."; //TODO
-
-"alert.audio_message.error.title" = "Ooops!"; //TODO
-"alert.audio_message.error.message" = "An error has occurred. Please, record your message again."; //TODO
-
 "alert.feature.wip.title" = "Oops!";
-"alert.feature.wip.message" = "Entschuldigung, aber dieses Feature ist noch nicht verfügbar.";
+"alert.feature.wip.message" = "Entschuldigung, aber diese Funktion ist noch nicht verfügbar.";
+
+"alert.insecure_image.title" = "Unsichere Quelle";
+"alert.insecure_image.message" = "Die Bildquelle is unsicher und wurde daher nicht geladen. Nur SSL Quellen sind erlaubt.";
 
 "alert.socket_error.invalid_user.title" = "Sitzung abgelaufen";
 "alert.socket_error.invalid_user.message" = "Ihre Sitzung ist abgelaufen, bitte loggen Sie sich erneut ein.";
@@ -44,28 +32,38 @@
 "alert.login_service_error.title" = "Authentifizierungsproblem";
 "alert.login_service_error.message" = "Authentifizierung konnte mit diesem Dienst nicht durchgeführt werden. Bitte versuche es erneut.";
 
-"alert.authorization_error.title" = "Authorization Error";
-"alert.authorization_error.create_channel.description" = "You can't create channels";
+"alert.authorization_error.title" = "Authentifizierungsproblem";
+"alert.authorization_error.create_channel.description" = "Du kannst keine Kanäle erstellen";
 
-"alert.unsupported_feature.title" = "Feature not supported";
-"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above.";
+"alert.unsupported_feature.title" = "Funktion nicht unterstützt";
+"alert.unsupported_feature.message" = "Die Serverversion ist: %@. Diese Funktion wird nur in Version %@ und höher unterstützt.";
 
-"alert.push_token_error.title" = "Warning";
-"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0.";
+"alert.push_token_error.title" = "Warnung";
+"alert.push_token_error.message" = "Es kann aufgrund eines Problems mit Servern älter als 0.60.0 sein, dass trotzdem Push Nachrichten von diesem Server zugestellt werden.";
+
+"alert.upload_error.title" = "Fehler beim Hochladen";
+"alert.upload_error.message" = "Irgendetwas ist beim Hochladen der Datei schiefgelaufen. Bitte erneut versuchen";
+
+"alert.email_verification.title" = "E-Mail Bestätigung";
+"alert.email_verification.message" = "Wir haben dir eine E-Mail zur Bestätigung deiner Registrierung geschickt. Solltest du keine Mail erhalten haben versuche es noch einmal.";
 
 // Connection Redirect
-"connection.server.redirect.alert.title" = "Server changed it's URL";
-"connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
-"connection.server.redirect.alert.confirm" = "Yes, change the URL";
+"connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
+"connection.server.redirect.alert.message" = "Es scheint, als hätte der Server die URL zu Folgender geändert:\n\n%@\n\nJetzt URL aktualisieren?";
+"connection.server.redirect.alert.confirm" = "Ja, URL aktualisieren";
 
 // Socket Connection
 "connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
-"connection.connecting.banner.message" = "Connecting...";
+"connection.connecting.banner.message" = "Verbinde...";
 
 // Auth
 "auth.connect.button_connect" = "Verbinden";
-"auth.connect.ssl_required" = "Es ist erforderlich, dass Ihr Server SSL unterstützt";
-"auth.connect.connecting" = "Verbindung läuft. Halt fest";
+"auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
+"auth.connect.connecting" = "Verbindung läuft. Warte kurz!";
+
+"auth.forgot_password.title" = "Passwort vergessen?";
+"auth.forgot_password.message" = "E-Mail-Adresse eingeben";
+"auth.forgot_password.success" = "Wenn diese E-Mail-Adresse hinterlegt ist, werden Anweisungen zum Zurücksetzen des Passworts verschickt. Wenn du keine Mail bekommen hast, versuche es noch einmal.";
 
 // Subscriptions
 "subscriptions.search" = "Suche";
@@ -86,33 +84,39 @@
 "user_menu.away" = "Abwesend";
 "user_menu.busy" = "Beschäftigt";
 "user_menu.invisible" = "Unsichtbar";
+"user_menu.admin" = "Administration";
 "user_menu.settings" = "Mein Account";
 "user_menu.logout" = "Logout";
 
 // New Room View
-"new_room.title" = "New Channel";
-"new_room.buttons.create" = "Create";
+"new_room.title" = "Neuer Kanal";
+"new_room.buttons.create" = "Erstellen";
 "new_room.cell.public_channel.title" = "Öffentlicher Kanal";
 "new_room.cell.public_channel.description" = "Jeder Benutzer kann einem öffentlichen Raum beitreten.";
-"new_room.cell.public_channel.description.public_only" = "You can only create public channels";
-"new_room.cell.public_channel.description.private_only" = "You can only create private channels";
+"new_room.cell.public_channel.description.public_only" = "Du kannst nur öffentliche Räume erstellen";
+"new_room.cell.public_channel.description.private_only" = "Du kannst nur private Räume erstellen";
 "new_room.cell.read_only.title" = "Schreibgeschützter Kanal";
 "new_room.cell.read_only.description" = "Nur Moderatoren oder Admins können in schreibgeschützten Kanälen schreiben";
-"new_room.group.channel.name" = "Channel Name";
-"new_room.cell.channel_name.title" = "Channel Name";
+"new_room.group.channel.name" = "Name des Kanals";
+"new_room.cell.channel_name.title" = "Name des Kanals";
 "new_room.group.channel.footer" = "Der Name muss komplett in Kleinbuchstaben und kürzer als 22 Zeichen sein.";
-"new_room.group.invite_users" = "Invite users";
-"new_room.cell.invite_users.placeholder" = "Usernames";
+"new_room.group.invite_users" = "Benutzer einladen";
+"new_room.cell.invite_users.placeholder" = "Benutzernamen";
+
+// Notifications
+"notifications.action.reply" = "Antworten";
 
 // Chat
 "chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
 "chat.channel_preview_view.join" = "Kanal beitreten";
 "chat.dm.start_conversation" = "Dies ist der Anfang deines Gesprächs mit %@";
 "chat.channel.start_conversation" = "Dies ist der Beginn der Konversation auf %@";
-"chat.read_only" = "This room is read only";
-"chat.muted" = "You have been muted";
+"chat.read_only" = "Dieser Raum ist schreibgeschützt";
+"chat.muted" = "Du wurdest stummgeschaltet";
+"chat.loading_messages" = "Nachrichten werden geladen...";
 
 // Chat Message Actions
+"chat.message.actions.react" = "Reaktion hinzufügen";
 "chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
 "chat.message.actions.report" = "Nachricht melden";
 "chat.message.actions.copy" = "Kopieren";
@@ -120,6 +124,11 @@
 "chat.message.actions.unpin" = "Nachricht lösen";
 "chat.message.actions.quote" = "Nachricht zitieren";
 "chat.message.actions.reply" = "Nachricht beantworten";
+"chat.message.actions.delete" = "Nachricht löschen";
+"chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
+"chat.message.actions.delete.confirm.message" = "Bist du sicher, dass du diese Nachricht löschen möchtest? Sie kann dann nicht wiederhergestellt werden.";
+"chat.message.actions.delete.confirm.yes" = "Ja, löschen";
+"Send" = "Senden"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Nachricht gemeldet";
@@ -128,7 +137,7 @@
 // Chat Upload
 "chat.upload.uploading_image" = "Bild wird hochgeladen";
 "chat.upload.uploading_video" = "Video wird hochgeladen";
-"chat.upload.uploading_file" = "Hochladen \"%@\"";
+"chat.upload.uploading_file" = "Lade \"%@\" hoch";
 "chat.upload.take_photo" = "Foto aufnehmen";
 "chat.upload.shoot_video" = "Video drehen";
 "chat.upload.choose_from_library" = "Foto & Video Mediathek";
@@ -139,6 +148,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Antippen zum Öffnen";
+"chat.message.open_browser" = "Im Browser öffnen";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Raum umbenannt zu: %@ von %@";
@@ -146,14 +156,14 @@
 "chat.message.type.user_removed_by" = "Benutzer %@ entfernt von %@";
 "chat.message.type.user_left" = "Hat den Kanal verlassen";
 "chat.message.type.user_joined" = "Hat den Kanal betreten";
-"chat.message.type.user_muted" = "Benutzer %@ stillgestellt von %@";
-"chat.message.type.user_unmuted" = "Benutzer %@ laut gestellt von %@";
+"chat.message.type.user_muted" = "Benutzer %@ stumm geschaltet von %@";
+"chat.message.type.user_unmuted" = "Stummschaltung von %@ wurde aufgehoben von %@";
 "chat.message.type.welcome" = "Willkommen %@";
 "chat.message.type.message_removed" = "Nachricht entfernt";
 "chat.message.type.subscription_role_added" = "%@ wurde zu %@ geändert von %@";
-"chat.message.type.subscription_role_removed" = "%@ ist nicht mehr länger %@ geändert von %@";
+"chat.message.type.subscription_role_removed" = "%@ ist nicht mehr länger %@ von %@";
 "chat.message.type.room_archived" = "Dieser Raum wurde archiviert von %@";
-"chat.message.type.room_unarchived" = "Dieser Raum wurde hervorgekramt von %@";
+"chat.message.type.room_unarchived" = "Dieser Raum wurde wiederhergestellt von %@";
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -176,7 +186,7 @@
 "chat.messages.starred.list.title" = "Favorisierte Nachrichten";
 
 // Settings
-"myaccount.settings.title" = "Settings";
-"myaccount.settings.contactus" = "Contact us";
-"myaccount.settings.license" = "License";
+"myaccount.settings.title" = "Einstellungen";
+"myaccount.settings.contactus" = "Kontaktiere uns";
+"myaccount.settings.license" = "Lizenz";
 "myaccount.settings.version" = "Version: %@ (%@)";

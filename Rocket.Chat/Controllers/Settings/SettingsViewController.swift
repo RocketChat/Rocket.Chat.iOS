@@ -9,6 +9,7 @@
 import UIKit
 import MessageUI
 import SafariServices
+import FLEX
 
 final class SettingsViewController: UITableViewController {
 
@@ -32,35 +33,18 @@ final class SettingsViewController: UITableViewController {
         }
     }
 
+    override var navigationController: SettingsNavigationController? {
+        return super.navigationController as? SettingsNavigationController
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = viewModel.title
-
-        if viewModel.canViewAdminPanel {
-            let buttonAdmin = UIBarButtonItem(title: "Admin", style: .plain, target: self, action: #selector(buttonAdminDidPressed(_:)))
-            navigationItem.rightBarButtonItem = buttonAdmin
-        }
     }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true) {
             UserReviewManager.shared.requestReview()
-        }
-    }
-
-    @objc func buttonAdminDidPressed(_ sender: Any) {
-        guard
-            let auth = AuthManager.isAuthenticated(),
-            let baseURL = auth.settings?.siteURL,
-            let adminURL = URL(string: "\(baseURL)/admin/info?layout=embedded")
-        else {
-            return
-        }
-
-        if let controller = WebViewControllerEmbedded.instantiateFromNib() {
-            controller.url = adminURL
-            navigationController?.pushViewController(controller, animated: true)
         }
     }
 
@@ -72,14 +56,9 @@ final class SettingsViewController: UITableViewController {
 
     func cellContactDidPressed() {
         if !MFMailComposeViewController.canSendMail() {
-            let alert = UIAlertController(
-                title: localized("alert.settings.set_mail_app.title"),
-                message: localized("alert.settings.set_mail_app.message"),
-                preferredStyle: .alert
-            )
-
-            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+            Alert(
+                key: "alert.settings.set_mail_app"
+            ).present()
             return
         }
 
@@ -94,13 +73,27 @@ final class SettingsViewController: UITableViewController {
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            cellContactDidPressed()
-        } else if indexPath.row == 1 {
-            cellTermsOfServiceDidPressed()
+        if indexPath.section == 0 {
+            if indexPath.row == 0 {
+                cellContactDidPressed()
+            } else if indexPath.row == 1 {
+                cellTermsOfServiceDidPressed()
+            }
+        }
+
+        if indexPath.section == 1, indexPath.row == 0 {
+            FLEXManager.shared().showExplorer()
         }
 
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return viewModel.numberOfSections
+    }
+
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRowsInSection(section)
     }
 }
 

@@ -15,7 +15,7 @@ struct MessagesClient: APIClient {
     func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.shared) {
         let message = Message()
         message.internalType = ""
-        message.updatedAt = Date.serverDate.addingTimeInterval(-1000)
+        message.updatedAt = nil
         message.createdAt = Date.serverDate
         message.text = text
         message.subscription = subscription
@@ -31,6 +31,7 @@ struct MessagesClient: APIClient {
             DispatchQueue.main.async {
                 try? realm?.write {
                     message.temporary = false
+                    message.updatedAt = Date()
                     message.map(json, realm: realm)
                     realm?.add(message, update: true)
                 }
@@ -53,5 +54,20 @@ struct MessagesClient: APIClient {
                 break
             }
         })
+    }
+
+    @discardableResult
+    func deleteMessage(_ message: Message, asUser: Bool, realm: Realm? = Realm.shared) -> Bool {
+        guard
+            let id = message.identifier,
+            !message.rid.isEmpty
+        else {
+            return false
+        }
+
+        api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser),
+                  succeeded: nil, errored: nil)
+
+        return true
     }
 }

@@ -21,46 +21,8 @@ extension ChatViewController: ChatMessageCellProtocol {
     }
 
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
-        guard let currentUser = AuthManager.currentUser() else { return }
         guard let username = message.user?.username else { return }
-        guard let currentOpenedSubscription = ChatViewController.shared?.subscription else { return }
-
-        // If tapping in a user of current DM, don't do anything
-        if currentOpenedSubscription.type == .directMessage {
-            if currentOpenedSubscription.otherUserId == message.user?.identifier {
-                return
-            }
-        }
-
-        // If tapping in itself, don't do anything
-        if username == currentUser.username {
-            return
-        }
-
-        func openDirectMessage() -> Bool {
-            guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
-
-            let controller = ChatViewController.shared
-            controller?.subscription = directMessageRoom
-
-            return true
-        }
-
-        // Check if already have a direct message room with this user
-        if openDirectMessage() == true {
-            return
-        }
-
-        // If not, create a new direct message
-        SubscriptionManager.createDirectMessage(username, completion: { response in
-            guard !response.isError() else { return }
-
-            guard let auth = AuthManager.isAuthenticated() else { return }
-
-            SubscriptionManager.updateSubscriptions(auth) { _ in
-                _ = openDirectMessage()
-            }
-        })
+        AppManager.openDirectMessage(username: username)
     }
 
     func openURL(url: URL) {
@@ -91,6 +53,7 @@ extension ChatViewController: ChatMessageCellProtocol {
                 config.image = thumbnail.image
                 config.animatedImage = thumbnail.animatedImage
                 config.imageView = thumbnail
+                config.allowSharing = true
             }
             present(ImageViewerController(configuration: configuration), animated: true)
         } else {

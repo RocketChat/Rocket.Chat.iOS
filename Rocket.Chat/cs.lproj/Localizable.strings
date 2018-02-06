@@ -1,19 +1,11 @@
-/* 
-  Localizable.strings
-  Rocket.Chat
-
-  Created by Rafael K. Streit on 8/27/16.
-  Copyright © 2016 Rocket.Chat. All rights reserved.
-*/
-
-
 // Global
 "global.ok" = "OK";
+"global.no" = "Ne";
 "global.cancel" = "Zrušit";
 
 // Errors
-"error.socket.default_error_title" = "Jejky!";
-"error.socket.default_error_message" = "Něco se pokazilo, zkuste to prosím znovu.";
+"error.socket.default_error.title" = "Jejky!";
+"error.socket.default_error.message" = "Něco se pokazilo, zkuste to prosím znovu.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Jejky!";
@@ -28,15 +20,11 @@
 "alert.settings.set_mail_app.title" = "Jejky!";
 "alert.settings.set_mail_app.message" = "Žádné mailové účty. Prosím nastavte účet pošty, aby bylo možné odesílat e-maily.";
 
-"alert.audio_message.success.send" = "Send"; //TODO
-"alert.audio_message.success.title" = "Success"; //TODO
-"alert.audio_message.success.message" = "You message was successfully recorded. Recording time: %@."; //TODO
-
-"alert.audio_message.error.title" = "Ooops!"; //TODO
-"alert.audio_message.error.message" = "An error has occurred. Please, record your message again."; //TODO
-
 "alert.feature.wip.title" = "Jejky!";
 "alert.feature.wip.message" = "Stále pracujeme na této funkci, ale není ještě dokončena.";
+
+"alert.insecure_image.title" = "Insecure resource"; //TODO
+"alert.insecure_image.message" = "The resource of the image is insecure and therefore not loaded. Only SSL resources are allowed."; //TODO
 
 "alert.socket_error.invalid_user.title" = "Relace vypršela";
 "alert.socket_error.invalid_user.message" = "Platnost Vaší relace vypršela. Přihlaste se znovu, prosím.";
@@ -44,14 +32,20 @@
 "alert.login_service_error.title" = "Chyba ověření";
 "alert.login_service_error.message" = "Nelze ověřit pomocí této služby. Prosím zkuste to znovu.";
 
-"alert.authorization_error.title" = "Authorization Error";
-"alert.authorization_error.create_channel.description" = "You can't create channels";
+"alert.authorization_error.title" = "Authorization Error"; //TODO
+"alert.authorization_error.create_channel.description" = "You can't create channels"; //TODO
 
-"alert.unsupported_feature.title" = "Feature not supported";
-"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above.";
+"alert.unsupported_feature.title" = "Feature not supported"; //TODO
+"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above."; //TODO
 
-"alert.push_token_error.title" = "Warning";
-"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0.";
+"alert.push_token_error.title" = "Warning"; //TODO
+"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0."; //TODO
+
+"alert.upload_error.title" = "Upload Error"; //TODO
+"alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again."; //TODO
+
+"alert.email_verification.title" = "Email verification"; //TODO
+"alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
@@ -66,6 +60,10 @@
 "auth.connect.button_connect" = "Připojit";
 "auth.connect.ssl_required" = "Je nutné, aby Váš server podporoval protokol SSL";
 "auth.connect.connecting" = "Připojení probíhá. Držte se pevně";
+
+"auth.forgot_password.title" = "Forgot your password?"; //TODO
+"auth.forgot_password.message" = "Enter your e-mail"; //TODO
+"auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again."; //TODO
 
 // Subscriptions
 "subscriptions.search" = "Hledat";
@@ -86,6 +84,7 @@
 "user_menu.away" = "Pryč";
 "user_menu.busy" = "Zaneprázdněn";
 "user_menu.invisible" = "Neviditelný";
+"user_menu.admin" = "Administration"; //TODO
 "user_menu.settings" = "Můj účet";
 "user_menu.logout" = "Odhlásit";
 
@@ -104,15 +103,20 @@
 "new_room.group.invite_users" = "Invite users";
 "new_room.cell.invite_users.placeholder" = "Usernames";
 
+// Notifications
+"notifications.action.reply" = "Reply";
+
 // Chat
 "chat.channel_preview_view.title" = "Toto je náhled kanálu #%@";
 "chat.channel_preview_view.join" = "Připojit se do kanálu";
 "chat.dm.start_conversation" = "Toto je začátek vaší konverzace s %@";
 "chat.channel.start_conversation" = "Toto je začátek konverzace %@";
 "chat.read_only" = "Tato místnost je pouze pro čtení";
-"chat.muted" = "You have been muted";
+"chat.muted" = "You have been muted"; //TODO
+"chat.loading_messages" = "Loading messages..."; //TODO
 
 // Chat Message Actions
+"chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Blokovat zprávy od uživatele";
 "chat.message.actions.report" = "Nahlásit zprávu";
 "chat.message.actions.copy" = "Kopírovat";
@@ -120,6 +124,11 @@
 "chat.message.actions.unpin" = "Odepnout zprávu";
 "chat.message.actions.quote" = "Citace zprávy";
 "chat.message.actions.reply" = "Odpovědět na zprávu";
+"chat.message.actions.delete" = "Delete message"; //TODO
+"chat.message.actions.delete.confirm.title" = "Delete this message?"; // TODO
+"chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone."; //TODO
+"chat.message.actions.delete.confirm.yes" = "Yes, delete"; // TODO
+"Send" = "Odeslat"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Zpráva byla nahlášena";
@@ -139,6 +148,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Klikněte pro otevření souboru";
+"chat.message.open_browser" = "Open in Browser"; //TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Jméno místnosti bylo změněno: %@ by %@";

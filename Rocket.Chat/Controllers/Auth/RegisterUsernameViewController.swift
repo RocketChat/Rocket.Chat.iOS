@@ -97,14 +97,10 @@ final class RegisterUsernameViewController: BaseViewController {
 
             if response.isError() {
                 if let error = response.result["error"].dictionary {
-                    let alert = UIAlertController(
-                        title: localized("error.socket.default_error_title"),
-                        message: error["message"]?.string ?? localized("error.socket.default_error_message"),
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alert, animated: true, completion: nil)
+                    Alert(
+                        title: localized("error.socket.default_error.title"),
+                        message: error["message"]?.string ?? localized("error.socket.default_error.message")
+                    ).present()
                 }
             } else {
                 self?.dismiss(animated: true, completion: nil)

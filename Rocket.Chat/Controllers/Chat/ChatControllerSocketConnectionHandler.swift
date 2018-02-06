@@ -35,5 +35,4 @@ extension ChatViewController: SocketConnectionHandler {
     func socketDidReturnError(socket: SocketManager, error: SocketError) {
         // Handle errors
     }
-
 }

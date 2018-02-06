@@ -43,6 +43,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
+            avatarViewContainer.layer.cornerRadius = 4
             if let avatarView = AvatarView.instantiateFromNib() {
                 avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
@@ -60,17 +61,26 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
-    @IBOutlet weak var labelText: HighlightTextView!
+    @IBOutlet weak var labelText: RCTextView!
 
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
+
+    @IBOutlet weak var reactionsListView: ReactionListView! {
+        didSet {
+            reactionsListView.reactionTapRecognized = { view, sender in
+                MessageManager.react(self.message, emoji: view.model.emoji, completion: { _ in })
+            }
+        }
+    }
+    @IBOutlet weak var reactionsListViewConstraint: NSLayoutConstraint!
 
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
         let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
-        var total = (height ?? 0) + (sequential ? 8 : 29)
+        var total = (height ?? 0) + (sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -119,6 +129,8 @@ final class ChatMessageCell: UICollectionViewCell {
         labelDate.text = ""
         sequential = false
         message = nil
+
+        avatarView.prepareForReuse()
 
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
@@ -231,8 +243,12 @@ final class ChatMessageCell: UICollectionViewCell {
             labelDate.text = formatter.string(from: createdAt)
         }
 
-        avatarView.imageURL = URL(string: message.avatar)
         avatarView.user = message.user
+        avatarView.emoji = message.emoji
+
+        if let avatar = message.avatar {
+            avatarView.avatarURL = URL(string: avatar)
+        }
 
         if message.alias.count > 0 {
             labelUsername.text = message.alias
@@ -251,6 +267,39 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
+    fileprivate func updateReactions() {
+        let username = AuthManager.currentUser()?.username
+
+        let models = Array(message.reactions.map { reaction -> ReactionViewModel in
+            let highlight: Bool
+            if let username = username {
+                highlight = reaction.usernames.contains(username)
+            } else {
+                highlight = false
+            }
+
+            let emoji = reaction.emoji ?? "?"
+            let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl()
+
+            return ReactionViewModel(
+                emoji: emoji,
+                imageUrl: imageUrl,
+                count: reaction.usernames.count.description,
+                highlight: highlight
+            )
+        })
+
+        reactionsListView.model = ReactionListViewModel(reactionViewModels: models)
+
+        if message.reactions.count > 0 {
+            reactionsListView.isHidden = false
+            reactionsListViewConstraint.constant = 40
+        } else {
+            reactionsListView.isHidden = true
+            reactionsListViewConstraint.constant = 0
+        }
+    }
+
     fileprivate func updateMessage() {
         guard
             delegate != nil,
@@ -266,6 +315,7 @@ final class ChatMessageCell: UICollectionViewCell {
         updateMessageContent()
         insertGesturesIfNeeded()
         insertAttachments()
+        updateReactions()
     }
 
     @objc func handleLongPressMessageCell(recognizer: UIGestureRecognizer) {
@@ -306,6 +356,11 @@ extension ChatMessageCell {
 
     override var accessibilityValue: String? {
         get { return message?.accessibilityValue }
+        set { }
+    }
+
+    override var accessibilityHint: String? {
+        get { return message?.accessibilityHint }
         set { }
     }
 

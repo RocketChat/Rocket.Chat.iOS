@@ -45,13 +45,12 @@ class SocketManager {
         sharedInstance.serverURL = url
         sharedInstance.internalConnectionHandler = completion
 
-        sharedInstance.socket = WebSocket(url: url)
-        sharedInstance.socket?.delegate = sharedInstance
-        sharedInstance.socket?.pongDelegate = sharedInstance
-        sharedInstance.socket?.headers = [
-            "Host": url.host ?? ""
-        ]
+        var request = URLRequest(url: url)
+        request.setValue(url.host ?? "", forHTTPHeaderField: "Host")
 
+        sharedInstance.socket = WebSocket(request: request)
+        sharedInstance.socket?.advancedDelegate = sharedInstance
+        sharedInstance.socket?.pongDelegate = sharedInstance
         sharedInstance.socket?.connect()
     }
 
@@ -95,6 +94,11 @@ class SocketManager {
     }
 
     static func subscribe(_ object: [String: Any], eventName: String, completion: @escaping MessageCompletion) {
+        guard SocketManager.isConnected() else {
+            Log.debug("Error: tried to subscribe to event '\(eventName)' while not connected to socket.")
+            return
+        }
+
         if var list = sharedInstance.events[eventName] {
             list.append(completion)
             sharedInstance.events[eventName] = list
@@ -144,14 +148,9 @@ extension SocketManager {
                 SubscriptionManager.subscribeRoomChanges()
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
+                CustomEmojiManager.sync()
 
                 API.current()?.client(CommandsClient.self).fetchCommands()
-
-                // If we have some subscription opened, let's
-                // try to subscribe to it again
-                if let subscription = ChatViewController.shared?.subscription, !subscription.isInvalidated {
-                    ChatViewController.shared?.subscription = subscription
-                }
 
                 if let userIdentifier = auth.userId {
                     PushManager.updateUser(userIdentifier)
@@ -182,7 +181,7 @@ extension SocketManager {
 
 // MARK: WebSocketDelegate
 
-extension SocketManager: WebSocketDelegate {
+extension SocketManager: WebSocketAdvancedDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
         Log.debug("[WebSocket] \(socket.currentURL)\n -  did connect")
@@ -196,7 +195,7 @@ extension SocketManager: WebSocketDelegate {
         SocketManager.send(object)
     }
 
-    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
+    func websocketDidDisconnect(socket: WebSocket, error: Error?) {
         Log.debug("[WebSocket] \(socket.currentURL)\n - did disconnect with error (\(String(describing: error)))")
 
         isUserAuthenticated = false
@@ -213,11 +212,11 @@ extension SocketManager: WebSocketDelegate {
         }
     }
 
-    func websocketDidReceiveData(socket: WebSocket, data: Data) {
+    func websocketDidReceiveData(socket: WebSocket, data: Data, response: WebSocket.WSResponse) {
         Log.debug("[WebSocket] did receive data (\(data))")
     }
 
-    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
+    func websocketDidReceiveMessage(socket: WebSocket, text: String, response: WebSocket.WSResponse) {
         let json = JSON(parseJSON: text)
 
         // JSON is invalid
@@ -233,13 +232,20 @@ extension SocketManager: WebSocketDelegate {
         self.handleMessage(json, socket: socket)
     }
 
+    func websocketHttpUpgrade(socket: WebSocket, request: String) {
+        Log.debug("[WebSocket] http upgrade request (\(request))")
+    }
+
+    func websocketHttpUpgrade(socket: WebSocket, response: String) {
+        Log.debug("[WebSocket] http upgrade response (\(response))")
+    }
 }
 
 // MARK: WebSocketPongDelegate
 
 extension SocketManager: WebSocketPongDelegate {
 
-    func websocketDidReceivePong(socket: WebSocket, data: Data?) {
+    func websocketDidReceivePong(socket: WebSocketClient, data: Data?) {
         Log.debug("[WebSocket] did receive pong")
     }
 
