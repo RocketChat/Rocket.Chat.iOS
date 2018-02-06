@@ -14,6 +14,8 @@ class WebViewControllerEmbedded: UIViewController {
     var urlLoaded = false
     var url: URL?
     weak var webView: WKWebView!
+    @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var navigationBar: UINavigationBar!
 
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
@@ -32,10 +34,26 @@ class WebViewControllerEmbedded: UIViewController {
             if let url = url?.removingDuplicatedSlashes() {
                 let request = URLRequest(url: url)
 
-                let webView = WKWebView(frame: view.frame)
+                let webView = WKWebView(frame: containerView.frame)
+
                 webView.navigationDelegate = self
                 webView.load(request)
-                view.addSubview(webView)
+                containerView.addSubview(webView)
+
+                view.addConstraints(
+                    NSLayoutConstraint.constraints(
+                        withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": webView]
+                    )
+                )
+
+                view.addConstraints(
+                    NSLayoutConstraint.constraints(
+                        withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": webView]
+                    )
+                )
+
+                webView.translatesAutoresizingMaskIntoConstraints = false
+                containerView.translatesAutoresizingMaskIntoConstraints = false
 
                 self.webView = webView
                 self.urlLoaded = true
@@ -44,6 +62,9 @@ class WebViewControllerEmbedded: UIViewController {
         }
     }
 
+    @IBAction func donePressed(_ sender: Any) {
+        self.dismiss(animated: true)
+    }
 }
 
 extension WebViewControllerEmbedded: WKNavigationDelegate {
