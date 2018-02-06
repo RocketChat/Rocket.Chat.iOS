@@ -33,14 +33,22 @@
                             </navigationItem>
                         </items>
                     </navigationBar>
+                    <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5Z-v1-IZm" userLabel="Status Bar View">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                        <color key="backgroundColor" red="0.97592383623123169" green="0.97666221857070923" blue="0.97603815793991089" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
                 </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="nxf-0n-Miu" firstAttribute="trailing" secondItem="V5Z-v1-IZm" secondAttribute="trailing" id="3Yk-h5-BWb"/>
                     <constraint firstItem="HG4-Ws-W1H" firstAttribute="leading" secondItem="nxf-0n-Miu" secondAttribute="leading" id="96F-8H-XKz"/>
                     <constraint firstItem="nxf-0n-Miu" firstAttribute="bottom" secondItem="HG4-Ws-W1H" secondAttribute="bottom" id="Ovy-BB-54c"/>
                     <constraint firstItem="fcy-bN-E23" firstAttribute="top" secondItem="nxf-0n-Miu" secondAttribute="top" id="XCB-hP-Z9p"/>
                     <constraint firstItem="fcy-bN-E23" firstAttribute="leading" secondItem="nxf-0n-Miu" secondAttribute="leading" id="anX-9X-d1e"/>
+                    <constraint firstItem="fcy-bN-E23" firstAttribute="top" secondItem="V5Z-v1-IZm" secondAttribute="bottom" id="erO-yb-Lpw"/>
+                    <constraint firstAttribute="top" secondItem="V5Z-v1-IZm" secondAttribute="top" id="hO4-gT-Nwl"/>
                     <constraint firstItem="HG4-Ws-W1H" firstAttribute="top" secondItem="fcy-bN-E23" secondAttribute="bottom" id="iYp-Cm-Xwn"/>
+                    <constraint firstItem="V5Z-v1-IZm" firstAttribute="leading" secondItem="nxf-0n-Miu" secondAttribute="leading" id="mfi-XO-MVO"/>
                     <constraint firstItem="nxf-0n-Miu" firstAttribute="trailing" secondItem="fcy-bN-E23" secondAttribute="trailing" id="nCi-dy-Gim"/>
                     <constraint firstItem="nxf-0n-Miu" firstAttribute="trailing" secondItem="HG4-Ws-W1H" secondAttribute="trailing" id="oDm-MS-eSt"/>
                 </constraints>
