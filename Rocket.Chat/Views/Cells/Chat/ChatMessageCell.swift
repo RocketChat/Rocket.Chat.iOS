@@ -12,7 +12,7 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
     func openURL(url: URL)
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
-    func handleLongPressReaction(_ view: ReactionView)
+    func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView)
 }
 
 final class ChatMessageCell: UICollectionViewCell {
@@ -74,7 +74,7 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             reactionsListView.reactionLongPressRecognized = { view, sender in
-                self.delegate?.handleLongPressReaction(view)
+                self.delegate?.handleLongPress(reactionListView: self.reactionsListView, reactionView: view)
             }
         }
     }
