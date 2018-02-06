@@ -6,7 +6,7 @@
   Copyright © 2017 Rocket.Chat. All rights reserved.
 */
 
-"controller.title" = "Choose a reaction"; //TODO
+"emojipicker.title" = "Choose a reaction"; //TODO
 "searchbar.placeholder" = "Search for an emoji"; //TODO
 
 "categories.recent" = "FREQUENTLY USED"; //TODO
