@@ -62,8 +62,8 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
             return nil
         }
         labelTitle.text = attachment.title
-        detailText.text = attachment.desc
-        let fullHeight = ChatMessageImageView.heightFor(withText: attachment.desc)
+        detailText.text = attachment.descriptionText
+        let fullHeight = ChatMessageImageView.heightFor(withText: attachment.descriptionText)
         fullHeightConstraint.constant = fullHeight
         detailTextHeightConstraint.constant = fullHeight - ChatMessageImageView.defaultHeight
         return imageURL
