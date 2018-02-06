@@ -70,6 +70,7 @@ class ReactorListView: UIView {
     }
 
     var closePressed: () -> Void = { }
+    var selectedReactor: (String) -> Void = { _ in }
 
     var model: ReactorListViewModel = .emptyState {
         didSet {
@@ -164,5 +165,10 @@ extension ReactorListView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 40
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        selectedReactor(model.reactionViewModels[indexPath.section].reactors[indexPath.row])
     }
 }
