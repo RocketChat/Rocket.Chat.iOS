@@ -28,7 +28,6 @@ class ReactionView: UIView {
         }
     }
 
-
     @IBOutlet weak var emojiView: EmojiView!
     @IBOutlet weak var countLabel: UILabel!
 

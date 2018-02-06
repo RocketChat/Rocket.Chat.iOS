@@ -91,7 +91,8 @@ final class SubscriptionsViewController: BaseViewController {
     }
     @IBOutlet weak var imageViewArrowDown: UIImageView! {
         didSet {
-            imageViewArrowDown.image = imageViewArrowDown.image?.imageWithTint(.RCLightBlue())
+            imageViewArrowDown.image = imageViewArrowDown.image?.withRenderingMode(.alwaysTemplate)
+            imageViewArrowDown.tintColor = .RCLightBlue()
         }
     }
 
@@ -556,9 +557,15 @@ extension SubscriptionsViewController: SubscriptionSearchMoreViewDelegate {
 }
 
 extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
+    internal var canViewAdminPanel: Bool {
+        guard let user = AuthManager.currentUser(), !user.isInvalidated else { return false }
+        return user.canViewAdminPanel()
+    }
 
     func presentUserMenu() {
         guard let viewUserMenu = SubscriptionUserStatusView.instantiateFromNib() else { return }
+
+        viewUserMenu.showAdmin = canViewAdminPanel
 
         var newFrame = view.frame
         newFrame.origin.y = -newFrame.height
@@ -612,5 +619,4 @@ extension SubscriptionsViewController: SubscriptionUserStatusViewProtocol {
     @IBAction func buttonAddChannelDidTap(sender: Any) {
         performSegue(withIdentifier: "New Channel", sender: sender)
     }
-
 }

@@ -50,9 +50,10 @@ class ChatMessageAudioView: UIView {
             } else {
                 player?.pause()
             }
-            let pause = #imageLiteral(resourceName: "Player Pause").imageWithTint(.RCDarkGray())
-            let play = #imageLiteral(resourceName: "Player Play").imageWithTint(.RCDarkGray())
+            let pause = #imageLiteral(resourceName: "Player Pause").withRenderingMode(.alwaysTemplate)
+            let play = #imageLiteral(resourceName: "Player Play").withRenderingMode(.alwaysTemplate)
             playButton.setImage(playing ? pause : play, for: .normal)
+            playButton.imageView?.tintColor = .RCDarkGray()
         }
     }
 

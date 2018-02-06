@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,10 +16,49 @@
             <view key="view" contentMode="scaleToFill" id="aBh-u0-dTh">
                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HG4-Ws-W1H">
+                        <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fcy-bN-E23">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <items>
+                            <navigationItem title="Title" id="56W-Iz-450">
+                                <barButtonItem key="leftBarButtonItem" systemItem="done" id="222-Jh-zRV">
+                                    <connections>
+                                        <action selector="donePressed:" destination="RLo-2z-2cW" id="rL1-WG-uFF"/>
+                                    </connections>
+                                </barButtonItem>
+                            </navigationItem>
+                        </items>
+                    </navigationBar>
+                    <view contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V5Z-v1-IZm" userLabel="Status Bar View">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="20"/>
+                        <color key="backgroundColor" red="0.97592383623123169" green="0.97666221857070923" blue="0.97603815793991089" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </view>
+                </subviews>
                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="nxf-0n-Miu" firstAttribute="trailing" secondItem="V5Z-v1-IZm" secondAttribute="trailing" id="3Yk-h5-BWb"/>
+                    <constraint firstItem="HG4-Ws-W1H" firstAttribute="leading" secondItem="nxf-0n-Miu" secondAttribute="leading" id="96F-8H-XKz"/>
+                    <constraint firstItem="nxf-0n-Miu" firstAttribute="bottom" secondItem="HG4-Ws-W1H" secondAttribute="bottom" id="Ovy-BB-54c"/>
+                    <constraint firstItem="fcy-bN-E23" firstAttribute="top" secondItem="nxf-0n-Miu" secondAttribute="top" id="XCB-hP-Z9p"/>
+                    <constraint firstItem="fcy-bN-E23" firstAttribute="leading" secondItem="nxf-0n-Miu" secondAttribute="leading" id="anX-9X-d1e"/>
+                    <constraint firstItem="fcy-bN-E23" firstAttribute="top" secondItem="V5Z-v1-IZm" secondAttribute="bottom" id="erO-yb-Lpw"/>
+                    <constraint firstAttribute="top" secondItem="V5Z-v1-IZm" secondAttribute="top" id="hO4-gT-Nwl"/>
+                    <constraint firstItem="HG4-Ws-W1H" firstAttribute="top" secondItem="fcy-bN-E23" secondAttribute="bottom" id="iYp-Cm-Xwn"/>
+                    <constraint firstItem="V5Z-v1-IZm" firstAttribute="leading" secondItem="nxf-0n-Miu" secondAttribute="leading" id="mfi-XO-MVO"/>
+                    <constraint firstItem="nxf-0n-Miu" firstAttribute="trailing" secondItem="fcy-bN-E23" secondAttribute="trailing" id="nCi-dy-Gim"/>
+                    <constraint firstItem="nxf-0n-Miu" firstAttribute="trailing" secondItem="HG4-Ws-W1H" secondAttribute="trailing" id="oDm-MS-eSt"/>
+                </constraints>
                 <viewLayoutGuide key="safeArea" id="nxf-0n-Miu"/>
             </view>
-            <point key="canvasLocation" x="-92" y="-160"/>
+            <connections>
+                <outlet property="containerView" destination="HG4-Ws-W1H" id="6DT-hY-Aoy"/>
+                <outlet property="navigationBar" destination="fcy-bN-E23" id="9QA-vy-rZq"/>
+            </connections>
+            <point key="canvasLocation" x="-92.5" y="-160.5"/>
         </viewController>
     </objects>
 </document>
