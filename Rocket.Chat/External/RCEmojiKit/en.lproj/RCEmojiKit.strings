@@ -20,7 +20,5 @@
 "categories.symbols" = "SYMBOLS";
 "categories.flags" = "FLAGS";
 
-"reactorlist.title" = "Users";
-"reactorlist.header.title.single" = "1 person reacted with %@";
-"reactorlist.header.title.multiple" = "%@ people reacted with %@";
+"reactorlist.title" = "Reactions";
 
