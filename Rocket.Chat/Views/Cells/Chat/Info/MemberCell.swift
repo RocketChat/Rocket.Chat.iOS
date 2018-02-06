@@ -70,3 +70,27 @@ class MemberCell: UITableViewCell {
     }
 
 }
+
+// MARK: ReactorCell
+
+extension MemberCell: ReactorPresenter {
+    var reactor: String {
+        set {
+            if let user = User.find(username: newValue) {
+                data = MemberCellData(member: user)
+            } else {
+                User.fetch(username: newValue, completion: { user in
+                    guard let user = user else { return }
+
+                    DispatchQueue.main.async {
+                        self.data = MemberCellData(member: user)
+                    }
+                })
+            }
+        }
+
+        get {
+            return data?.member.username ?? ""
+        }
+    }
+}

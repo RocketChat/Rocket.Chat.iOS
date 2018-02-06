@@ -15,7 +15,7 @@ class ReactorListViewController: UIViewController {
         }
     }
 
-    private var reactorListView: ReactorListView! {
+    var reactorListView: ReactorListView! {
         didSet {
             reactorListView.closePressed = {
                 self.dismiss(animated: true, completion: nil)
