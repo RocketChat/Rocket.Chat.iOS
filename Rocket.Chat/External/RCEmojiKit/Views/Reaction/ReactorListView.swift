@@ -144,13 +144,13 @@ extension ReactorListView: UITableViewDelegate {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
         view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
 
-        let stackView = UIStackView(frame: CGRect(x: 8, y: 8, width: tableView.frame.size.width - 8, height: 24))
+        let stackView = UIStackView(frame: CGRect(x: 24, y: 8, width: tableView.frame.size.width - 24, height: 24))
         stackView.spacing = 8
 
         let reactionView = ReactionView()
         reactionView.model = model.reactionViewModels[section]
 
-        let label = UILabel(frame: CGRect(x: 60, y: 0, width: tableView.frame.size.width - 60, height: 40))
+        let label = UILabel()
         label.textAlignment = .left
         label.text = reactionView.model.emoji
 

@@ -34,7 +34,7 @@ class UserInfoRequest: APIRequest {
 
 extension APIResult where T == UserInfoRequest {
     var user: User? {
-        guard let raw = raw else { return nil }
+        guard let raw = raw?["user"] else { return nil }
 
         let user = User()
         user.map(raw, realm: nil)

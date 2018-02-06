@@ -98,6 +98,8 @@ extension ReactionView {
     }
 
     @objc private func longPressRecognized(_ sender: UILongPressGestureRecognizer) {
-        longPressRecognized(sender)
+        if sender.state == .began {
+            longPressRecognized(sender)
+        }
     }
 }
