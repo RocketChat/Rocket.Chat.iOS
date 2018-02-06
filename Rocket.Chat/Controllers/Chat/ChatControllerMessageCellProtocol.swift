@@ -33,7 +33,11 @@ extension ChatViewController: ChatMessageCellProtocol {
 
         controller.model = ReactorListViewModel(reactionViewModels: models)
 
-        present(controller, animated: true)
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.navigationController?.pushViewController(controller, animated: true)
+        } else {
+            self.present(controller, animated: true)
+        }
     }
 
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
