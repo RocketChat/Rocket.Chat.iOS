@@ -64,6 +64,8 @@ class ReactorListView: UIView {
 
     @IBOutlet weak var reactorTableView: UITableView! {
         didSet {
+            reactorTableView.bounces = false
+
             reactorTableView.dataSource = self
             reactorTableView.delegate = self
         }
