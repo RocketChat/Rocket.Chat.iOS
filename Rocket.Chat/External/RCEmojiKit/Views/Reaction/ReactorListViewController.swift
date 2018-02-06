@@ -9,6 +9,13 @@
 import Foundation
 
 class ReactorListViewController: UIViewController {
+    override var preferredContentSize: CGSize {
+        set { }
+        get {
+            return reactorListView.reactorTableView.contentSize
+        }
+    }
+
     var model: ReactorListViewModel = .emptyState {
         didSet {
             reactorListView?.model = model

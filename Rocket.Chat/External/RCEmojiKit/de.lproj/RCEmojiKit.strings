@@ -20,6 +20,4 @@
 "categories.symbols" = "SYMBOLE";
 "categories.flags" = "FLAGGEN";
 
-"reactorlist.title" = "Users"; //TODO
-"reactorlist.header.title.single" = "1 person reacted with %@"; //TODO
-"reactorlist.header.title.multiple" = "%@ people reacted with %@"; //TODO
+"reactorlist.title" = "Reactions"; //TODO

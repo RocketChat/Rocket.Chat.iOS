@@ -37,23 +37,6 @@ class DefaultReactorCell: UITableViewCell, ReactorPresenter {
 struct ReactorListViewModel: RCEmojiKitLocalizable {
     let reactionViewModels: [ReactionViewModel]
 
-    func titleForHeaderInSection(_ section: Int) -> String {
-        let reactionViewModel = reactionViewModels[section]
-
-        if reactionViewModel.reactors.count > 1 {
-            return String(
-                format: localized("reactorlist.header.title.multiple"),
-                reactionViewModels[section].count,
-                reactionViewModels[section].emoji
-            )
-        } else {
-            return String(
-                format: localized("reactorlist.header.title.single"),
-                reactionViewModels[section].emoji
-            )
-        }
-    }
-
     static var emptyState: ReactorListViewModel {
         return ReactorListViewModel(reactionViewModels: [])
     }
@@ -73,6 +56,7 @@ class ReactorListView: UIView {
 
     var closePressed: () -> Void = { }
     var selectedReactor: (String) -> Void = { _ in }
+    var configureCell: (ReactorCell) -> Void = { _ in }
 
     var model: ReactorListViewModel = .emptyState {
         didSet {
@@ -122,6 +106,8 @@ extension ReactorListView: UITableViewDataSource {
         let dequeuedCell = tableView.dequeueReusableCell(withIdentifier: "ReactorCell")
         var cell = dequeuedCell as? ReactorCell ?? DefaultReactorCell()
 
+        configureCell(cell)
+
         cell.reactor = model.reactionViewModels[indexPath.section].reactors[indexPath.row]
 
         return cell
@@ -134,10 +120,6 @@ extension ReactorListView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return model.reactionViewModels[section].reactors.count
     }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return model.titleForHeaderInSection(section)
-    }
 }
 
 // MARK: UITableViewDelegate
@@ -147,7 +129,7 @@ extension ReactorListView: UITableViewDelegate {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
         view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
 
-        let stackView = UIStackView(frame: CGRect(x: 24, y: 8, width: tableView.frame.size.width - 24, height: 24))
+        let stackView = UIStackView(frame: CGRect(x: 16, y: 8, width: tableView.frame.size.width - 16, height: 24))
         stackView.spacing = 8
 
         let reactionView = ReactionView()
