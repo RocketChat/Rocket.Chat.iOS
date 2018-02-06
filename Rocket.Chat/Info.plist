@@ -27,6 +27,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>rocketchat</string>
 				<string>com.googleusercontent.apps.662030055877-9qc3lqsbgif4k1ktl89dqeaec3m163i4</string>
 			</array>
 		</dict>

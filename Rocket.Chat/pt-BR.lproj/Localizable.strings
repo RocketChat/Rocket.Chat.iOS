@@ -4,8 +4,8 @@
 "global.cancel" = "Cancelar";
 
 // Errors
-"error.socket.default_error_title" = "Oops!";
-"error.socket.default_error_message" = "Algo errado aconteceu, por favor tente novamente.";
+"error.socket.default_error.title" = "Oops!";
+"error.socket.default_error.message" = "Algo errado aconteceu, por favor tente novamente.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Oops!";

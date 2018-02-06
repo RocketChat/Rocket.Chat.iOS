@@ -4,8 +4,8 @@
 "global.cancel" = "Anuluj";
 
 // Errors
-"error.socket.default_error_title" = "Ups!";
-"error.socket.default_error_message" = "Wystąpił nieoczekiwany błąd, spróbuj ponownie.";
+"error.socket.default_error.title" = "Ups!";
+"error.socket.default_error.message" = "Wystąpił nieoczekiwany błąd, spróbuj ponownie.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Ups!";
