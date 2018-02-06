@@ -19,7 +19,8 @@ final class ChatTitleView: UIView {
 
     @IBOutlet weak var imageArrowDown: UIImageView! {
         didSet {
-            imageArrowDown.image = imageArrowDown.image?.imageWithTint(.RCGray())
+            imageArrowDown.image = imageArrowDown.image?.withRenderingMode(.alwaysTemplate)
+            imageArrowDown.tintColor = .RCGray()
         }
     }
 
@@ -35,7 +36,8 @@ final class ChatTitleView: UIView {
 
             viewModel.subscription = subscription
             labelTitle.text = viewModel.title
-            icon.image = UIImage(named: viewModel.imageName)?.imageWithTint(viewModel.iconColor)
+            icon.image = UIImage(named: viewModel.imageName)?.withRenderingMode(.alwaysTemplate)
+            icon.tintColor = viewModel.iconColor
         }
     }
 
