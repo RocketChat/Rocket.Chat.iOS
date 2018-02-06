@@ -42,29 +42,9 @@ final class SettingsViewController: UITableViewController {
         title = viewModel.title
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.fullScreen = false
-    }
-
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true) {
             UserReviewManager.shared.requestReview()
-        }
-    }
-
-    func openAdminPanel() {
-        guard
-            let auth = AuthManager.isAuthenticated(),
-            let baseURL = auth.settings?.siteURL,
-            let adminURL = URL(string: "\(baseURL)/admin/info?layout=embedded")
-            else {
-                return
-        }
-
-        if let controller = WebViewControllerEmbedded.instantiateFromNib() {
-            controller.url = adminURL
-            navigationController?.fullScreen = true
-            navigationController?.pushViewController(controller, animated: true)
         }
     }
 
@@ -76,14 +56,9 @@ final class SettingsViewController: UITableViewController {
 
     func cellContactDidPressed() {
         if !MFMailComposeViewController.canSendMail() {
-            let alert = UIAlertController(
-                title: localized("alert.settings.set_mail_app.title"),
-                message: localized("alert.settings.set_mail_app.message"),
-                preferredStyle: .alert
-            )
-
-            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-            present(alert, animated: true, completion: nil)
+            Alert(
+                key: "alert.settings.set_mail_app"
+            ).present()
             return
         }
 
@@ -107,10 +82,6 @@ final class SettingsViewController: UITableViewController {
         }
 
         if indexPath.section == 1, indexPath.row == 0 {
-            openAdminPanel()
-        }
-
-        if indexPath.section == 2, indexPath.row == 0 {
             FLEXManager.shared().showExplorer()
         }
 

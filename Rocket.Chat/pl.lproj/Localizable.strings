@@ -1,10 +1,11 @@
 // Global
 "global.ok" = "OK";
+"global.no" = "Nie";
 "global.cancel" = "Anuluj";
 
 // Errors
-"error.socket.default_error_title" = "Ups!";
-"error.socket.default_error_message" = "Wystąpił nieoczekiwany błąd, spróbuj ponownie.";
+"error.socket.default_error.title" = "Ups!";
+"error.socket.default_error.message" = "Wystąpił nieoczekiwany błąd, spróbuj ponownie.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Ups!";
@@ -21,6 +22,9 @@
 
 "alert.feature.wip.title" = "Ups!";
 "alert.feature.wip.message" = "Wciąż pracujemy nad tą funkcją. Bądź czujny!";
+
+"alert.insecure_image.title" = "Insecure resource"; //TODO
+"alert.insecure_image.message" = "The resource of the image is insecure and therefore not loaded. Only SSL resources are allowed."; //TODO
 
 "alert.socket_error.invalid_user.title" = "Sesja wygasła";
 "alert.socket_error.invalid_user.message" = "Twoja sesja wygasła. Zaloguj się ponownie.";
@@ -121,6 +125,9 @@
 "chat.message.actions.quote" = "Cytuj wiadomość";
 "chat.message.actions.reply" = "Odpowiedz na wiadomość";
 "chat.message.actions.delete" = "Delete message"; //TODO
+"chat.message.actions.delete.confirm.title" = "Delete this message?"; // TODO
+"chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone."; //TODO
+"chat.message.actions.delete.confirm.yes" = "Yes, delete"; // TODO
 "Send" = "Wysłać"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -141,6 +148,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Dotknij aby otworzyć plik";
+"chat.message.open_browser" = "Open in Browser"; //TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";

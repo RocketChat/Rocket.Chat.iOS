@@ -91,7 +91,8 @@ final class SubscriptionsViewController: BaseViewController {
     }
     @IBOutlet weak var imageViewArrowDown: UIImageView! {
         didSet {
-            imageViewArrowDown.image = imageViewArrowDown.image?.imageWithTint(.RCLightBlue())
+            imageViewArrowDown.image = imageViewArrowDown.image?.withRenderingMode(.alwaysTemplate)
+            imageViewArrowDown.tintColor = .RCLightBlue()
         }
     }
 

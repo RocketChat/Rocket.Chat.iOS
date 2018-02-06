@@ -1,10 +1,11 @@
 // Global
 "global.ok" = "OK";
+"global.no" = "Não";
 "global.cancel" = "Cancelar";
 
 // Errors
-"error.socket.default_error_title" = "Oops!";
-"error.socket.default_error_message" = "Algo errado aconteceu, por favor tente novamente.";
+"error.socket.default_error.title" = "Oops!";
+"error.socket.default_error.message" = "Algo errado aconteceu, por favor tente novamente.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Oops!";
@@ -21,6 +22,9 @@
 
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "Desculpe, mas esta função ainda não está disponível.";
+
+"alert.insecure_image.title" = "URL insegura";
+"alert.insecure_image.message" = "A URL deste arquivo é insegura e por isto ele não foi carregado. Apenas arquivos com SSL são carregados no chat. Para abrir ele no navegador, clique no botão abaixo.";
 
 "alert.socket_error.invalid_user.title" = "Sessão expirada";
 "alert.socket_error.invalid_user.message" = "Esta sessão expirou. Por favor, logue-se novamente.";
@@ -121,6 +125,9 @@
 "chat.message.actions.quote" = "Citar mensagem";
 "chat.message.actions.reply" = "Responder mensagem";
 "chat.message.actions.delete" = "Deletar mensagem";
+"chat.message.actions.delete.confirm.title" = "Deletar esta mensagem?";
+"chat.message.actions.delete.confirm.message" = "Tem certeza que deseja deletar esta mensagem? A mensagem não poderá ser recuperada.";
+"chat.message.actions.delete.confirm.yes" = "Sim, deletar";
 "Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -141,6 +148,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Toque para abrir";
+"chat.message.open_browser" = "Abrir no Safari";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";

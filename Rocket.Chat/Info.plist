@@ -27,12 +27,13 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>rocketchat</string>
 				<string>com.googleusercontent.apps.662030055877-9qc3lqsbgif4k1ktl89dqeaec3m163i4</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>138</string>
+	<string>139</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -72,6 +73,8 @@
 	<string>To take photos and record videos</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>To record and upload audio and videos</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To save images to your library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To upload photos from your library</string>
 	<key>RC_MIN_SERVER_VERSION</key>
@@ -103,7 +106,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
-	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>To save images to your library</string>
 </dict>
 </plist>
