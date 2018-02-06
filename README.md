@@ -14,7 +14,7 @@
 
 [![Rocket.Chat on Apple AppStore](https://user-images.githubusercontent.com/551004/29770691-a2082ff4-8bc6-11e7-89a6-964cd405ea8e.png)](https://geo.itunes.apple.com/us/app/rocket-chat/id1148741252?mt=8)
 
-![Screenshots](https://user-images.githubusercontent.com/193273/35487347-d01d115c-047a-11e8-8de6-942e00eb49b3.png)
+![Screenshots](https://user-images.githubusercontent.com/193273/35874456-d530ee04-0b6c-11e8-8c19-79dee8140114.png)
 
 # Reporting an Issue
 
@@ -35,7 +35,7 @@ Make sure your server supports WebSocket as well as SSL. Apache supports WebSock
 
 # Contribute
 
-You'd like to help and having a Mac? Or reported some issues and check if they are really solved with a pull request in the beta? Great! We have written down a [Contribution guide](https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/CONTRIBUTING.md) so you can start easily.
+Are you an iOS developer and would like to help? Found a bug that you would like to report or a missing feature that you would like to request? Great! We have written down a [Contribution guide](https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/CONTRIBUTING.md) so you can start easily.
 
 # Donate
 
