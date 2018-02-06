@@ -204,6 +204,10 @@ extension AuthManager {
         }
     }
 
+    static func auth(token: String, completion: @escaping MessageCompletion) {
+        auth(params: ["resume": token], completion: completion)
+    }
+
     /**
         Method that creates an User account.
      */
