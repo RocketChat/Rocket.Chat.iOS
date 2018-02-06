@@ -12,7 +12,10 @@ class ReactorListViewController: UIViewController {
     override var preferredContentSize: CGSize {
         set { }
         get {
-            return reactorListView.reactorTableView.contentSize
+            reactorListView.layoutIfNeeded()
+            let height = min(reactorListView.reactorTableView.contentSize.height, 400)
+            let width = CGFloat(300)
+            return CGSize(width: width, height: height)
         }
     }
 
