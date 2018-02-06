@@ -54,10 +54,6 @@ struct ReactorListViewModel: RCEmojiKitLocalizable {
         }
     }
 
-    init(reactionViewModels: [ReactionViewModel]) {
-        self.reactionViewModels = reactionViewModels.sorted { $0.emoji > $1.emoji }
-    }
-
     static var emptyState: ReactorListViewModel {
         return ReactorListViewModel(reactionViewModels: [])
     }
