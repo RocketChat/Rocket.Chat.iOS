@@ -97,15 +97,15 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             if type == .image {
-                total += ChatMessageImageView.heightFor(withText: attachment.desc)
+                total += ChatMessageImageView.heightFor(withText: attachment.descriptionText)
             }
 
             if type == .video {
-                total += ChatMessageVideoView.heightFor(withText: attachment.desc)
+                total += ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
             }
 
             if type == .audio {
-                total += ChatMessageAudioView.heightFor(withText: attachment.desc)
+                total += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
             }
         }
 
@@ -207,7 +207,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageImageView.heightFor(withText: attachment.desc)
+                    mediaViewHeight += ChatMessageImageView.heightFor(withText: attachment.descriptionText)
                 }
 
             case .video:
@@ -217,7 +217,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageVideoView.heightFor(withText: attachment.desc)
+                    mediaViewHeight += ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
                 }
 
             case .audio:
@@ -226,7 +226,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageAudioView.heightFor(withText: attachment.desc)
+                    mediaViewHeight += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
                 }
 
             default:
