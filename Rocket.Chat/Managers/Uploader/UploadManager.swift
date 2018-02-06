@@ -12,18 +12,11 @@ import SwiftyJSON
 public typealias UploadProgressBlock = (Int) -> Void
 public typealias UploadCompletionBlock = (SocketResponse?, Bool) -> Void
 
-class FileUpload {
+struct FileUpload {
     var name: String
-    let size: Int
-    let type: String
-    let data: Data
-
-    init(name: String, size: Int, type: String, data: Data) {
-        self.name = name
-        self.size = size
-        self.type = type
-        self.data = data
-    }
+    var size: Int
+    var type: String
+    var data: Data
 }
 
 class UploadManager {
@@ -69,20 +62,20 @@ class UploadManager {
         return request
     }
 
-    func upload(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
+    func upload(file: FileUpload, fileName: String, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
         guard let settings = AuthSettingsManager.settings else { return }
         guard let store = settings.uploadStorageType else { return }
 
         // TODO: AmazonS3 method was removed from server version 0.57
         if store == "AmazonS3" {
-            uploadToAmazonS3(file: file, subscription: subscription, progress: progress, completion: completion)
+            uploadToAmazonS3(file: file, fileName: fileName, subscription: subscription, progress: progress, completion: completion)
         } else {
-            uploadToUFSFile(store: store, file: file, subscription: subscription, progress: progress, completion: completion)
+            uploadToUFSFile(store: store, file: file, fileName: fileName, subscription: subscription, progress: progress, completion: completion)
         }
     }
 
-    // swiftlint:disable function_body_length
-    func uploadToUFSFile(store: String, file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
+    // swiftlint:disable function_body_length function_parameter_count
+    func uploadToUFSFile(store: String, file: FileUpload, fileName: String, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
         // Normalize the store name, cause setting is not the same value
         // In the future, we do plan to change it and return the correct value
         let normalizedStore = store == "FileSystem" ? "fileSystem" : "rocketchat_uploads"
@@ -90,7 +83,7 @@ class UploadManager {
             "msg": "method",
             "method": "ufsCreate",
             "params": [[
-                "name": file.name,
+                "name": fileName,
                 "size": file.size,
                 "type": file.type,
                 "rid": subscription.rid,
@@ -142,7 +135,7 @@ class UploadManager {
                                 NSNull(), [
                                     "type": file.type,
                                     "size": file.size,
-                                    "name": file.name,
+                                    "name": fileName,
                                     "_id": fileIdentifier,
                                     "url": response.result["result"]["path"].stringValue
                                 ]
@@ -157,13 +150,13 @@ class UploadManager {
     }
 
     // TODO: AmazonS3 method was removed from server version 0.57
-    func uploadToAmazonS3(file: FileUpload, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
+    func uploadToAmazonS3(file: FileUpload, fileName: String, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
         let request = [
             "msg": "method",
             "method": "slingshot/uploadRequest",
             "params": [
                 "rocketchat-uploads", [
-                    "name": file.name,
+                    "name": fileName,
                     "size": file.size,
                     "type": file.type
                 ], [
@@ -198,7 +191,7 @@ class UploadManager {
                             "s3", [
                                 "type": file.type,
                                 "size": file.size,
-                                "name": file.name,
+                                "name": fileName,
                                 "_id": fileIdentifier,
                                 "url": downloadURL
                             ]

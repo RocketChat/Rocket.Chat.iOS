@@ -200,10 +200,10 @@ extension ChatViewController: UIDocumentPickerDelegate {
 
 extension ChatViewController {
 
-    func startLoadingUpload(file: FileUpload) {
+    func startLoadingUpload(_ fileName: String) {
         showHeaderStatusView()
 
-        let message = String(format: localized("chat.upload.uploading_file"), file.name)
+        let message = String(format: localized("chat.upload.uploading_file"), fileName)
         chatHeaderViewStatus?.labelTitle.text = message
         chatHeaderViewStatus?.buttonRefresh.isHidden = true
         chatHeaderViewStatus?.backgroundColor = .RCLightGray()
@@ -215,10 +215,10 @@ extension ChatViewController {
         hideHeaderStatusView()
     }
 
-    func upload(_ file: FileUpload, description: String?) {
+    func upload(_ file: FileUpload, fileName: String, description: String?) {
         guard let subscription = subscription else { return }
 
-        self.startLoadingUpload(file: file)
+        startLoadingUpload(fileName)
 
         func stopLoadingUpload() {
             DispatchQueue.main.async { [weak self] in
@@ -227,11 +227,11 @@ extension ChatViewController {
         }
 
         let client = API.current()?.client(UploadClient.self)
-        client?.upload(roomId: subscription.rid, data: file.data, filename: file.name, mimetype: file.type, description: description ?? "",
+        client?.upload(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "",
                        completion: stopLoadingUpload, versionFallback: { deprecatedMethod() })
 
         func deprecatedMethod() {
-            UploadManager.shared.upload(file: file, subscription: subscription, progress: { _ in
+            UploadManager.shared.upload(file: file, fileName: fileName, subscription: subscription, progress: { _ in
                 // We currently don't have progress being called.
             }, completion: { [unowned self] (response, error) in
                 self.stopLoadingUpload()
@@ -256,24 +256,31 @@ extension ChatViewController {
 
     func uploadDialog(_ file: FileUpload) {
         let alert = UIAlertController(title: localized("alert.upload_dialog.title"), message: "", preferredStyle: .alert)
-        alert.addTextField { (_ fileName) -> Void in
-            fileName.placeholder = localized("alert.upload_dialog.placeholder.title")
-            fileName.text = file.name
+        var fileName: UITextField?
+        var fileDescription: UITextField?
+
+        alert.addTextField { (_ field) -> Void in
+            fileName = field
+            fileName?.placeholder = localized("alert.upload_dialog.placeholder.title")
+            fileName?.text = file.name
         }
-        alert.addTextField { (_ fileDescription) -> Void in
-            fileDescription.placeholder = localized("alert.upload_dialog.placeholder.description")
+        alert.addTextField { (_ field) -> Void in
+            fileDescription = field
+            fileDescription?.autocorrectionType = .yes
+            fileDescription?.autocapitalizationType = .sentences
+            fileDescription?.placeholder = localized("alert.upload_dialog.placeholder.description")
         }
         alert.addAction(UIAlertAction(title: localized("alert.upload_dialog.action.upload"), style: .default, handler: { _ in
-            let name = alert.textFields?[0].text ?? ""
-            if name != "" {
-                file.name = name
+            var name = file.name
+            if fileName?.text?.isEmpty == false {
+                name = fileName?.text ?? file.name
             }
-            let description = alert.textFields?[1].text
-            self.upload(file, description: description)
+            let description = fileDescription?.text
+            self.upload(file, fileName: name, description: description)
         }))
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel))
         DispatchQueue.main.async {
-        	self.present(alert, animated: true, completion: nil)
+            self.present(alert, animated: true, completion: nil)
         }
     }
 
