@@ -1,5 +1,5 @@
 /* 
-  EmojiPicker.strings
+  RCEmojiKit.strings
   Rocket.Chat
 
   Created by Matheus Cardoso on 12/27/17.
@@ -19,3 +19,7 @@
 "categories.objects" = "OBJETOS";
 "categories.symbols" = "SÍMBOLOS";
 "categories.flags" = "BANDEIRAS";
+
+"reactorlist.title" = "Usuários";
+"reactorlist.header.title.single" = "1 pessoa reagiu com %@";
+"reactorlist.header.title.multiple" = "%@ pessoas reagiram com %@";

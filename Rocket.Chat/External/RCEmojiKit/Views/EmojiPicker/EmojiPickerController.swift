@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmojiPickerController: UIViewController {
+class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
 
     var emojiPicked: ((String) -> Void)?
     var customEmojis: [Emoji] = []
@@ -52,7 +52,7 @@ class EmojiPickerController: UIViewController {
             navigationController?.navigationBar.topItem?.title = ""
         }
 
-        title = NSLocalizedString("controller.title", tableName: "EmojiPicker", bundle: Bundle.main, value: "", comment: "")
+        title = localized("emojipicker.title")
     }
 
     override func viewWillAppear(_ animated: Bool) {

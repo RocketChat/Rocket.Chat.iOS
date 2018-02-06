@@ -1,0 +1,53 @@
+//
+//  ReactorListViewController.swift
+//  Rocket.Chat
+//
+//  Created by Matheus Cardoso on 2/5/18.
+//  Copyright © 2018 Rocket.Chat. All rights reserved.
+//
+
+import Foundation
+
+class ReactorListViewController: UIViewController {
+    var model: ReactorListViewModel = .emptyState {
+        didSet {
+            reactorListView?.model = model
+        }
+    }
+
+    private var reactorListView: ReactorListView! {
+        didSet {
+            reactorListView.closePressed = {
+                self.dismiss(animated: true, completion: nil)
+            }
+
+            reactorListView.model = model
+        }
+    }
+
+    override func loadView() {
+        super.loadView()
+
+        reactorListView = ReactorListView(frame: view.frame)
+        reactorListView.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(reactorListView)
+
+        view.addConstraints(
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": reactorListView]
+            )
+        )
+        view.addConstraints(
+            NSLayoutConstraint.constraints(
+                withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": reactorListView]
+            )
+        )
+
+        if self.navigationController?.topViewController == self {
+            navigationController?.navigationBar.topItem?.title = ""
+        }
+
+        title = NSLocalizedString("reactorlist.title", tableName: "RCEmojiKit", bundle: Bundle.main, value: "", comment: "")
+    }
+}
