@@ -25,6 +25,14 @@ class ReactorListViewController: UIViewController {
         }
     }
 
+    func close(animated: Bool) {
+        if navigationController?.topViewController == self {
+            navigationController?.popViewController(animated: animated)
+        } else {
+            dismiss(animated: animated)
+        }
+    }
+
     override func loadView() {
         super.loadView()
 

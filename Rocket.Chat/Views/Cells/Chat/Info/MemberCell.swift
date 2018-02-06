@@ -69,6 +69,9 @@ class MemberCell: UITableViewCell {
         }
     }
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
 }
 
 // MARK: ReactorCell

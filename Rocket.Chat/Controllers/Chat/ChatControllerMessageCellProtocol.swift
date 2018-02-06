@@ -33,6 +33,11 @@ extension ChatViewController: ChatMessageCellProtocol {
 
         controller.model = ReactorListViewModel(reactionViewModels: models)
 
+        controller.reactorListView.selectedReactor = { username in
+            controller.close(animated: true)
+            AppManager.openDirectMessage(username: username)
+        }
+
         if UIDevice.current.userInterfaceIdiom == .phone {
             self.navigationController?.pushViewController(controller, animated: true)
         } else {
