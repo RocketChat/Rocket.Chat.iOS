@@ -27,11 +27,6 @@ final class SettingsViewModel {
         return localized("myaccount.settings.license")
     }
 
-    internal var canViewAdminPanel: Bool {
-        guard let user = AuthManager.currentUser(), !user.isInvalidated else { return false }
-        return user.canViewAdminPanel()
-    }
-
     internal var formattedVersion: String {
         return String(format: localized("myaccount.settings.version"), version, build)
     }
@@ -64,6 +59,24 @@ final class SettingsViewModel {
 
     internal var licenseURL: URL? {
         return URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
+    }
+
+    #if DEBUG || BETA
+    internal var canOpenFLEX = true
+    #else
+    internal var canOpenFLEX = false
+    #endif
+
+    internal var numberOfSections: Int {
+        return 2
+    }
+
+    internal func numberOfRowsInSection(_ section: Int) -> Int {
+        switch section {
+        case 0: return 3
+        case 1: return (canOpenFLEX ? 1 : 0)
+        default: return 0
+        }
     }
 
     // MARK: Helpers

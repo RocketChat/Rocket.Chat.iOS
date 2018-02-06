@@ -46,11 +46,11 @@ struct SubscriptionManager {
             SocketManager.send(requestRooms) { response in
                 guard !response.isError() else { return Log.debug(response.result.string) }
 
-                guard let auth = AuthManager.isAuthenticated() else { return }
-                Realm.executeOnMainThread { realm in
-                    auth.lastSubscriptionFetch = Date.serverDate
+                Realm.execute({ realm in
+                    guard let auth = AuthManager.isAuthenticated() else { return }
+                    auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
                     realm.add(auth, update: true)
-                }
+                })
 
                 let subscriptions = List<Subscription>()
 
