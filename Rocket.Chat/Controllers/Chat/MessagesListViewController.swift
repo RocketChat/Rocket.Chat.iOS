@@ -205,7 +205,9 @@ extension MessagesListViewController: UICollectionViewDataSource {
 
         if let date = cellData.date,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageDaySeparator.identifier, for: indexPath) as? ChatMessageDaySeparator {
-            cell.labelTitle.text = date.formatted("MMM dd, YYYY")
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateStyle = .medium
+            cell.labelTitle.text = dateFormatter.string(from: date)
             return cell
         }
 
