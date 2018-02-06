@@ -1,9 +1,8 @@
 /* 
-  EmojiPicker.strings
+  RCEmojiKit.strings
   Rocket.Chat
 
-  Created by Matheus Cardoso on 12/27/17.
-  Translated by soundstorm
+  Created by Matheus Cardoso on 12/27/17. Translated by soundstorm
   Copyright © 2017 Rocket.Chat. All rights reserved.
 */
 
@@ -20,3 +19,7 @@
 "categories.objects" = "OBJEKTE";
 "categories.symbols" = "SYMBOLE";
 "categories.flags" = "FLAGGEN";
+
+"reactorlist.title" = "Users"; //TODO
+"reactorlist.header.title.single" = "1 person reacted with %@"; //TODO
+"reactorlist.header.title.multiple" = "%@ people reacted with %@"; //TODO

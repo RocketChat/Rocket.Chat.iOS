@@ -13,6 +13,19 @@ import FLAnimatedImage
 import SimpleImageViewer
 
 extension ChatViewController: ChatMessageCellProtocol {
+    func handleLongPressReaction(_ view: ReactionView) {
+        let controller = ReactorListViewController()
+        controller.modalPresentationStyle = .popover
+
+        if let presenter = controller.popoverPresentationController {
+            presenter.sourceView = view
+            presenter.sourceRect = view.bounds
+        }
+
+        controller.model = ReactorListViewModel(reactionViewModels: [view.model])
+
+        present(controller, animated: true)
+    }
 
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
