@@ -93,15 +93,16 @@ extension MemberCell: ReactorPresenter {
         set {
             if let user = User.find(username: newValue) {
                 data = MemberCellData(member: user)
-            } else {
-                User.fetch(username: newValue, completion: { user in
-                    guard let user = user else { return }
-
-                    DispatchQueue.main.async {
-                        self.data = MemberCellData(member: user)
-                    }
-                })
+                return
             }
+
+            User.fetch(username: newValue, completion: { user in
+                guard let user = user else { return }
+
+                DispatchQueue.main.async {
+                    self.data = MemberCellData(member: user)
+                }
+            })
         }
 
         get {

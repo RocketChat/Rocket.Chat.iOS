@@ -66,6 +66,9 @@ class ReactorListViewController: UIViewController {
     }
 
     override func viewWillAppear(_ animated: Bool) {
+        
+        // remove title from back button
+
         if self.navigationController?.topViewController == self {
             navigationController?.navigationBar.topItem?.title = ""
         }

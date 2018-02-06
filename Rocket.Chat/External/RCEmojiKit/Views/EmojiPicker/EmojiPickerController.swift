@@ -56,6 +56,8 @@ class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
         center.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         center.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
 
+        // remove title from back button
+
         if self.navigationController?.topViewController == self {
             navigationController?.navigationBar.topItem?.title = ""
         }
