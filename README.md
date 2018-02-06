@@ -1,4 +1,4 @@
-![Rocket.Chat logo](https://github.com/RocketChat/Rocket.Chat.Artwork/blob/master/Logos/logo-dark.svg?raw=true)
+![Rocket.Chat logo](https://raw.githubusercontent.com/RocketChat/Rocket.Chat.Artwork/master/Logos/logo-dark.svg?sanitize=true)
 
 # Rocket.Chat iOS native application
 
