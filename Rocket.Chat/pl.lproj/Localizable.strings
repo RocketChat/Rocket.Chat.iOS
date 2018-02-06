@@ -1,10 +1,11 @@
 // Global
 "global.ok" = "OK";
+"global.no" = "Nie";
 "global.cancel" = "Anuluj";
 
 // Errors
-"error.socket.default_error_title" = "Ups!";
-"error.socket.default_error_message" = "Wystąpił nieoczekiwany błąd, spróbuj ponownie.";
+"error.socket.default_error.title" = "Ups!";
+"error.socket.default_error.message" = "Wystąpił nieoczekiwany błąd, spróbuj ponownie.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Ups!";
@@ -83,6 +84,7 @@
 "user_menu.away" = "Zaraz wracam";
 "user_menu.busy" = "Zajęty";
 "user_menu.invisible" = "Ukryty";
+"user_menu.admin" = "Administration"; //TODO
 "user_menu.settings" = "Moje Konto";
 "user_menu.logout" = "Wyloguj";
 
@@ -123,6 +125,9 @@
 "chat.message.actions.quote" = "Cytuj wiadomość";
 "chat.message.actions.reply" = "Odpowiedz na wiadomość";
 "chat.message.actions.delete" = "Delete message"; //TODO
+"chat.message.actions.delete.confirm.title" = "Delete this message?"; // TODO
+"chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone."; //TODO
+"chat.message.actions.delete.confirm.yes" = "Yes, delete"; // TODO
 "Send" = "Wysłać"; //SLKTextInputbar.m
 
 // Chat Message Report
