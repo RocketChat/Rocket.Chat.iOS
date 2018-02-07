@@ -70,8 +70,12 @@ workflows:
     jobs:
       - lint:
          filters:
-           tags:
-             ignore: /^((docs-|docs\/|wip-|wip\/).*|.*(-docs|-wip))$/
+           branches:
+             ignore:
+               - /^docs[-\/].*$/
+               - /^wip[-\/].*$/
+               - /^.*-docs$/
+               - /^.*-wip$/
       - test-iphone-ios11.0:
           requires:
             - lint
