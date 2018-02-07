@@ -45,7 +45,7 @@
 "alert.upload_error.message" = "Coś poszło nie tak w trakcie wysyłania pliku. Spróbuj ponownie.";
 
 "alert.email_verification.title" = "Weryfikacja e-mail";
-"alert.email_verification.message" = "wysłaliśmy Ci e-mail z potwierdzeniem rejestracji. Jeżeli wkrótce nie otrzmasz maila spróbuj ponownie się zarejestrować.";
+"alert.email_verification.message" = "Wysłaliśmy Ci e-mail z potwierdzeniem rejestracji. Jeżeli wkrótce nie otrzymasz maila spróbuj ponownie się zarejestrować.";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Serwer zmienił swój adres";
@@ -63,7 +63,7 @@
 
 "auth.forgot_password.title" = "Zapomniałeś hasła?";
 "auth.forgot_password.message" = "Wprowadź e-mail";
-"auth.forgot_password.success" = "Jeżeli ten e-mail jest zarejestrowany wyślemy Ci instrukcje jak zresetować hasło. Jeżeli wkrótce nie otrzmasz maila spróbuj.";
+"auth.forgot_password.success" = "Jeżeli ten e-mail jest zarejestrowany wyślemy Ci instrukcje jak zresetować hasło. Jeżeli wkrótce nie otrzymasz maila spróbuj ponownie.";
 
 // Subscriptions
 "subscriptions.search" = "Szukaj";
