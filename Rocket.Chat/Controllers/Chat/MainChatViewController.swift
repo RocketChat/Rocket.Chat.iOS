@@ -101,8 +101,7 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     }
 
     func openAddNewTeamController() {
-        SocketManager.disconnect { (_, _) in }
-        WindowManager.open(.auth)
+        AppManager.addServer(serverUrl: "")
     }
 }
 

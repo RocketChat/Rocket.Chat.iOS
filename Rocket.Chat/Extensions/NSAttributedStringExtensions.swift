@@ -62,13 +62,33 @@ extension NSMutableAttributedString {
         }
     }
 
+    func setMention(_ mention: String, range: NSRange? = nil) {
+        let link = "rocketchat://mention?name=\(mention)"
+
+        if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
+            self.addAttributes([
+                NSAttributedStringKey.link: link
+            ], range: attributeRange)
+        }
+    }
+
+    func setChannel(_ channel: String, range: NSRange? = nil) {
+        let link = "rocketchat://channel?name=\(channel)"
+
+        if let attributeRange = range != nil ? range : NSRange(location: 0, length: self.length) {
+            self.addAttributes([
+                NSAttributedStringKey.link: link
+            ], range: attributeRange)
+        }
+    }
+
     func setLineSpacing(_ font: UIFont) {
         let paragraphStyle = NSMutableParagraphStyle()
         paragraphStyle.lineSpacing = font.lineHeight * 0.1
 
         self.addAttributes([
             NSAttributedStringKey.paragraphStyle: paragraphStyle
-            ], range: NSRange(location: 0, length: self.length))
+        ], range: NSRange(location: 0, length: self.length))
     }
 
     func transformMarkdown() -> NSAttributedString {
@@ -98,6 +118,11 @@ extension NSMutableAttributedString {
                 let ranges = string.ranges(of: "@\(mention)")
                 for range in ranges {
                     let range = NSRange(range, in: string)
+
+                    if mention != "all" && mention != "here" && mention != username {
+                        setMention(mention, range: range)
+                    }
+
                     setBackgroundColor(background, range: range)
                     setFontColor(font, range: range)
                     setFont(MessageTextFontAttributes.boldFont, range: range)
@@ -116,6 +141,7 @@ extension NSMutableAttributedString {
                 let ranges = string.ranges(of: "#\(channel)")
                 for range in ranges {
                     let range = NSRange(range, in: string)
+                    setChannel(channel, range: range)
                     setFontColor(.link, range: range)
                 }
             }
