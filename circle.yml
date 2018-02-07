@@ -7,6 +7,9 @@ jobs:
     steps:
       - checkout
       - run:
+          filters:
+            tags:
+              ignore: /^((docs-|docs\/|wip-|wip\/).*|.*(-docs|-wip))$/
           name: Update Dependencies
           command: ./Scripts/update_dependencies.sh
       - run:
