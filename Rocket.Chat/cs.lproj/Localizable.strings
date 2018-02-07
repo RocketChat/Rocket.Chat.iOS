@@ -44,6 +44,11 @@
 "alert.upload_error.title" = "Upload Error"; //TODO
 "alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again."; //TODO
 
+"alert.upload_dialog.title" = "Upload file"; //TODO
+"alert.upload_dialog.placeholder.title" = "Title"; //TODO
+"alert.upload_dialog.placeholder.description" = "Description"; //TODO
+"alert.upload_dialog.action.upload" = "Upload"; //TODO
+
 "alert.email_verification.title" = "Email verification"; //TODO
 "alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
 
@@ -84,6 +89,7 @@
 "user_menu.away" = "Pryč";
 "user_menu.busy" = "Zaneprázdněn";
 "user_menu.invisible" = "Neviditelný";
+"user_menu.admin" = "Administration"; //TODO
 "user_menu.settings" = "Můj účet";
 "user_menu.logout" = "Odhlásit";
 
