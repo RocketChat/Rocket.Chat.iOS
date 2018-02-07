@@ -7,9 +7,6 @@ jobs:
     steps:
       - checkout
       - run:
-          filters:
-            tags:
-              ignore: /^((docs-|docs\/|wip-|wip\/).*|.*(-docs|-wip))$/
           name: Update Dependencies
           command: ./Scripts/update_dependencies.sh
       - run:
@@ -71,7 +68,10 @@ workflows:
   version: 2
   build-and-test:
     jobs:
-      - lint
+      - lint:
+         filters:
+           tags:
+             ignore: /^((docs-|docs\/|wip-|wip\/).*|.*(-docs|-wip))$/
       - test-iphone-ios11.0:
           requires:
             - lint
