@@ -78,6 +78,8 @@ Also describe the changes you made on the message mentioning `@RocketChat/ios`. 
 
 You may share working results prior to finishing, please include [WIP] in the title. This way anyone can look at your code: you can ask for help within the PR if you don't know how to solve a problem.
 
-You may include `[skip ci]` or `[ci skip]` in your commit message (not title) if you know, that you still have some bugs. Or simply name your branch `some-branch-name-wip` - the `-wip` tells our CI to skip this branch for builds. Once you are ready, you can rename your branch and push your working commits (only a push will trigger CI). This makes it easier to save time and resources on continuous integration.
+If you are committing work in progress, please name your branche like `some-branch-name-wip`. The `*-wip`/`wip-*`/`wip/*` tells our CI to skip this branch for builds. Once you are ready, you can rename your branch and push your working commits (only a push will trigger CI). This makes it easier to save time and resources on continuous integration.
+
+If working on docs or nothing related to the sourcecode of the App, you may want to name your branch `*-docs`/`docs-*`/`docs/*`. This has the same effect as `wip` above.
 
 Your PR is automatically inspected by various tools, check their response and try to improve your code accordingly. Requests that fail to build or have wrong coding style won't be merged.
