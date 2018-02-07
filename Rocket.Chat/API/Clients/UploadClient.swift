@@ -14,12 +14,13 @@ struct UploadClient: APIClient {
         self.api = api
     }
 
-    func upload(roomId: String, data: Data, filename: String, mimetype: String, completion: (() -> Void)? = nil, versionFallback: (() -> Void)? = nil) {
+    func upload(roomId: String, data: Data, filename: String, mimetype: String, description: String, completion: (() -> Void)? = nil, versionFallback: (() -> Void)? = nil) {
         let req = UploadRequest(
             roomId: roomId,
             data: data,
             filename: filename,
-            mimetype: mimetype
+            mimetype: mimetype,
+            description: description
         )
 
         api.fetch(req, succeeded: { result in

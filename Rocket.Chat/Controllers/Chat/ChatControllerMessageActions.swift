@@ -16,7 +16,7 @@ extension ChatViewController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.react"), style: .default, handler: { _ in
-            self.react(message: message)
+            self.react(message: message, view: view)
         }))
 
         let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
@@ -76,7 +76,7 @@ extension ChatViewController {
 
     // MARK: Actions
 
-    fileprivate func react(message: Message) {
+    fileprivate func react(message: Message, view: UIView) {
         self.view.endEditing(true)
 
         let controller = EmojiPickerController()

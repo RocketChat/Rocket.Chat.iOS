@@ -44,6 +44,11 @@
 "alert.upload_error.title" = "Upload Error";
 "alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again.";
 
+"alert.upload_dialog.title" = "Upload file";
+"alert.upload_dialog.placeholder.title" = "Title";
+"alert.upload_dialog.placeholder.description" = "Description";
+"alert.upload_dialog.action.upload" = "Upload";
+
 "alert.email_verification.title" = "Email verification";
 "alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again.";
 
@@ -84,6 +89,7 @@
 "user_menu.away" = "Away";
 "user_menu.busy" = "Busy";
 "user_menu.invisible" = "Invisible";
+"user_menu.admin" = "Administration";
 "user_menu.settings" = "My Account";
 "user_menu.logout" = "Logout";
 
