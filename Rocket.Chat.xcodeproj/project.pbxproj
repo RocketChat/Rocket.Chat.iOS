@@ -16,6 +16,8 @@
 		35E892C4201BF2C900B4BE5A /* AlertSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C3201BF2C900B4BE5A /* AlertSpec.swift */; };
 		35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD300201A57EA00B4BE5A /* Ask.swift */; };
 		35BCD303201A9FB800B4BE5A /* AskSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD302201A9FB800B4BE5A /* AskSpec.swift */; };
+		35C7D19A202B130400B4BE5A /* RCDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C7D199202B130400B4BE5A /* RCDateFormatter.swift */; };
+		35E892C4201BF2C900B4BE5A /* AlertSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C3201BF2C900B4BE5A /* AlertSpec.swift */; };
 		35E892C6201CDCBC00B4BE5A /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C5201CDCBC00B4BE5A /* OAuthManager.swift */; };
 		35E892C8201CDD1600B4BE5A /* NewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C7201CDD1600B4BE5A /* NewRoomViewController.swift */; };
 		35E892CA201CDD9700B4BE5A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C9201CDD9700B4BE5A /* SettingsViewModel.swift */; };
@@ -372,6 +374,7 @@
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		35BCD300201A57EA00B4BE5A /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
 		35BCD302201A9FB800B4BE5A /* AskSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskSpec.swift; sourceTree = "<group>"; };
+		35C7D199202B130400B4BE5A /* RCDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCDateFormatter.swift; sourceTree = "<group>"; };
 		35D2F140200A45E800B4BE5A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		35E892C3201BF2C900B4BE5A /* AlertSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSpec.swift; sourceTree = "<group>"; };
 		35E892C5201CDCBC00B4BE5A /* OAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OAuthManager.swift; path = Managers/OAuthManager.swift; sourceTree = "<group>"; };
@@ -776,7 +779,7 @@
 			children = (
 				35E892C9201CDD9700B4BE5A /* SettingsViewModel.swift */,
 				4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */,
-				806728FC200789F4009FE94D /* SettingsNavigationControlle r.swift */,
+				806728FC200789F4009FE94D /* SettingsNavigationController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1243,6 +1246,7 @@
 				80054CFF1FDB1FA200F5ECF9 /* Alert.swift */,
 				800F38EC2019492D0005CB78 /* DeepLink.swift */,
 				35BCD300201A57EA00B4BE5A /* Ask.swift */,
+				35C7D199202B130400B4BE5A /* RCDateFormatter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -2313,6 +2317,7 @@
 				8013F86B1FD6B59A00EE1A4E /* Version.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
+				35C7D19A202B130400B4BE5A /* RCDateFormatter.swift in Sources */,
 				800FCD501F728EC800D9A692 /* MemberCell.swift in Sources */,
 				77CCB6BE1F8D0597004BBF67 /* DictionaryExtensions.swift in Sources */,
 				80054CF71FD9AA1B00F5ECF9 /* UploadRequest.swift in Sources */,
