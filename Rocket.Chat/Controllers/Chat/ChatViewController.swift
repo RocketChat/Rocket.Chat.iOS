@@ -855,9 +855,7 @@ extension ChatViewController {
             return UICollectionViewCell()
         }
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateStyle = .medium
-        cell.labelTitle.text = dateFormatter.string(from: obj.timestamp)
+        cell.labelTitle.text = RCDateFormatter.date(obj.timestamp)
         return cell
     }
 
