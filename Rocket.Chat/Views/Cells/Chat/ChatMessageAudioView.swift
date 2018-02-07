@@ -9,12 +9,18 @@
 import UIKit
 import AVFoundation
 
-class ChatMessageAudioView: UIView {
-    static let defaultHeight = CGFloat(80)
+class ChatMessageAudioView: ChatMessageAttachmentView {
+    override static var defaultHeight: CGFloat {
+        return 80
+    }
 
     var attachment: Attachment? {
         didSet {
             self.titleLabel.text = attachment?.title
+            self.detailText.text = attachment?.descriptionText
+            let fullHeight = ChatMessageAudioView.heightFor(withText: attachment?.descriptionText)
+            fullHeightConstraint.constant = fullHeight
+            detailTextHeightConstraint.constant = fullHeight - ChatMessageAudioView.defaultHeight
             loading = true
             playing = false
             updateAudio()
@@ -22,6 +28,9 @@ class ChatMessageAudioView: UIView {
     }
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailTextHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fullHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var timeSlider: UISlider! {
         didSet {
