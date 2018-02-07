@@ -44,6 +44,11 @@
 "alert.upload_error.title" = "Błąd wysyłania";
 "alert.upload_error.message" = "Coś poszło nie tak w trakcie wysyłania pliku. Spróbuj ponownie.";
 
+"alert.upload_dialog.title" = "Wyślij plik";
+"alert.upload_dialog.placeholder.title" = "Tytuł";
+"alert.upload_dialog.placeholder.description" = "Opis";
+"alert.upload_dialog.action.upload" = "Wyślij";
+
 "alert.email_verification.title" = "Weryfikacja e-mail";
 "alert.email_verification.message" = "Wysłaliśmy Ci e-mail z potwierdzeniem rejestracji. Jeżeli wkrótce nie otrzymasz maila spróbuj ponownie się zarejestrować.";
 
