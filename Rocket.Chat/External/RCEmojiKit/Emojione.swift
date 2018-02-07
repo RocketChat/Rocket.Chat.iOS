@@ -4053,10 +4053,8 @@ struct Emojione {
         "woman_genie": "\u{0001f9de}\u{0000200d}\u{00002640}\u{0000fe0f}",
         "man_genie": "\u{0001f9de}\u{0000200d}\u{00002642}\u{0000fe0f}",
         "woman_zombie": "\u{0001f9df}\u{0000200d}\u{00002640}\u{0000fe0f}",
-        "man_zombie": "\u{0001f9df}\u{0000200d}\u{00002642}\u{0000fe0f}",
+        "man_zombie": "\u{0001f9df}\u{0000200d}\u{00002642}\u{0000fe0f}"
     ]
-
-    
 
     static let symbols: [Emoji] = [
             Emoji("exclamation question mark", ":interrobang:", false, [], ["exclamation", "interrobang", "mark", "punctuation", "question"]),
@@ -5620,8 +5618,8 @@ struct Emojione {
             Emoji("regional indicator symbol letter d", ":regional_indicator_d:", false, [], [""]),
             Emoji("regional indicator symbol letter c", ":regional_indicator_c:", false, [], [""]),
             Emoji("regional indicator symbol letter b", ":regional_indicator_b:", false, [], [""]),
-            Emoji("regional indicator symbol letter a", ":regional_indicator_a:", false, [], [""]),]
-    
+            Emoji("regional indicator symbol letter a", ":regional_indicator_a:", false, [], [""])]
+
     static func transform(string: String) -> String {
         let oldString = string as NSString
         var transformedString = string as NSString

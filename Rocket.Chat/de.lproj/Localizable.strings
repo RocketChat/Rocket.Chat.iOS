@@ -1,10 +1,11 @@
 // Global
 "global.ok" = "OK";
+"global.no" = "Nein";
 "global.cancel" = "Abbrechen";
 
 // Errors
-"error.socket.default_error_title" = "Oops!";
-"error.socket.default_error_message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
+"error.socket.default_error.title" = "Oops!";
+"error.socket.default_error.message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
 
 // Alerts
 "alert.connection.invalid_url.title" = "Oops!";
@@ -83,6 +84,7 @@
 "user_menu.away" = "Abwesend";
 "user_menu.busy" = "Beschäftigt";
 "user_menu.invisible" = "Unsichtbar";
+"user_menu.admin" = "Administration";
 "user_menu.settings" = "Mein Account";
 "user_menu.logout" = "Logout";
 
@@ -123,6 +125,9 @@
 "chat.message.actions.quote" = "Nachricht zitieren";
 "chat.message.actions.reply" = "Nachricht beantworten";
 "chat.message.actions.delete" = "Nachricht löschen";
+"chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
+"chat.message.actions.delete.confirm.message" = "Bist du sicher, dass du diese Nachricht löschen möchtest? Sie kann dann nicht wiederhergestellt werden.";
+"chat.message.actions.delete.confirm.yes" = "Ja, löschen";
 "Send" = "Senden"; //SLKTextInputbar.m
 
 // Chat Message Report
