@@ -151,13 +151,13 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         let attachment = Attachment()
         attachment.imageURL = "https://rocket.chat/"
         attachment.title = "https"
-        attachment.desc = "I have description, that is maybe longer than one line and breaks on phones."
+        attachment.descriptionText = "I have description, that is maybe longer than one line and breaks on phones."
         if let view = ChatMessageImageView.instantiateFromNib() {
             view.attachment = attachment
             let title = view.labelTitle?.text
             XCTAssertEqual(title, attachment.title, "Should be regular title")
             XCTAssertGreaterThan(view.fullHeightConstraint.constant, ChatMessageImageView.defaultHeight)
-            XCTAssertEqual(view.detailText.text, attachment.desc, "Attachment with description should be higher than without")
+            XCTAssertEqual(view.detailText.text, attachment.descriptionText, "Attachment with description should be higher than without")
             XCTAssertTrue(view.isLoadable)
         } else {
             XCTFail("View create failed")
