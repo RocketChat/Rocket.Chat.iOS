@@ -6,16 +6,16 @@
   Copyright © 2017 Rocket.Chat. All rights reserved.
 */
 
-"controller.title" = "Choose a reaction";
-"searchbar.placeholder" = "Search for an emoji";
+"controller.title" = "Wybier reakcję";
+"searchbar.placeholder" = "Wyszukaj emoji";
 
-"categories.recent" = "FREQUENTLY USED";
-"categories.custom" = "CUSTOM";
-"categories.people" = "SMILEYS & PEOPLE";
-"categories.nature" = "ANIMALS & NATURE";
-"categories.food" = "FOOD & DRINK";
-"categories.activity" = "ACTIVITY";
-"categories.travel" = "TRAVEL & PLACES";
-"categories.objects" = "OBJECTS";
-"categories.symbols" = "SYMBOLS";
-"categories.flags" = "FLAGS";
+"categories.recent" = "CZĘSTO UŻYWANE";
+"categories.custom" = "INNE";
+"categories.people" = "BUŹKI I OSOBY";
+"categories.nature" = "ZWIERZĘTA I NATURA";
+"categories.food" = "ŻYWNOŚĆ I NAPOJE";
+"categories.activity" = "AKTYWNOŚĆ";
+"categories.travel" = "PODRÓŻE I MIEJSCA";
+"categories.objects" = "OBIEKTY";
+"categories.symbols" = "SYMBOLE";
+"categories.flags" = "FLAGI";
