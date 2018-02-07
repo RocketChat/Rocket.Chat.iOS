@@ -52,7 +52,7 @@
                     <constraint firstItem="vQw-Lj-ju1" firstAttribute="leading" secondItem="QCs-d6-xj4" secondAttribute="trailing" constant="8" id="eZD-nV-aQF"/>
                 </constraints>
             </tableViewCellContentView>
-            <inset key="separatorInset" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <inset key="separatorInset" minX="59" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="avatarViewContainer" destination="QCs-d6-xj4" id="EZe-g6-4fQ"/>
                 <outlet property="nameLabel" destination="vQw-Lj-ju1" id="vV9-SJ-Evs"/>
