@@ -1,23 +1,23 @@
 /*
-  RCEmojiKit.strings
-  Rocket.Chat
+ EmojiPicker.strings
+ Rocket.Chat
 
-  Created by Matheus Cardoso on 12/27/17.
-  Copyright © 2017 Rocket.Chat. All rights reserved.
-*/
+ Created by Matheus Cardoso on 12/27/17.
+ Copyright © 2017 Rocket.Chat. All rights reserved.
+ */
 
-"emojipicker.title" = "Choose a reaction"; //TODO
-"searchbar.placeholder" = "Search for an emoji"; //TODO
+"controller.title" = "Wybierz reakcję";
+"searchbar.placeholder" = "Wyszukaj emoji";
 
-"categories.recent" = "FREQUENTLY USED"; //TODO
-"categories.custom" = "CUSTOM"; //TODO
-"categories.people" = "SMILEYS & PEOPLE"; //TODO
-"categories.nature" = "ANIMALS & NATURE"; //TODO
-"categories.food" = "FOOD & DRINK"; //TODO
-"categories.activity" = "ACTIVITY"; //TODO
-"categories.travel" = "TRAVEL & PLACES"; //TODO
-"categories.objects" = "OBJECTS"; //TODO
-"categories.symbols" = "SYMBOLS"; //TODO
-"categories.flags" = "FLAGS"; //TODO
+"categories.recent" = "CZĘSTO UŻYWANE";
+"categories.custom" = "INNE";
+"categories.people" = "BUŹKI I OSOBY";
+"categories.nature" = "ZWIERZĘTA I NATURA";
+"categories.food" = "ŻYWNOŚĆ I NAPOJE";
+"categories.activity" = "AKTYWNOŚĆ";
+"categories.travel" = "PODRÓŻE I MIEJSCA";
+"categories.objects" = "OBIEKTY";
+"categories.symbols" = "SYMBOLE";
+"categories.flags" = "FLAGI";
 
 "reactorlist.title" = "Reactions"; //TODO
