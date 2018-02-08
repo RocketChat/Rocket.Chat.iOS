@@ -202,7 +202,7 @@ final class AuthViewController: BaseViewController {
                     }
                 }
             }
-        }, errored: { _ in
+        }, errored: { [weak self] _ in
             self?.stopLoading()
         })
     }
