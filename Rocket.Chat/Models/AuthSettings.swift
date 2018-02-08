@@ -39,6 +39,9 @@ final class AuthSettings: BaseModel {
     @objc dynamic var isGitHubAuthenticationEnabled = false
     @objc dynamic var isLDAPAuthenticationEnabled = false
 
+    @objc dynamic var isCASEnabled = false
+    @objc dynamic var casLoginUrl: String?
+
     // Accounts
     @objc dynamic var emailVerification = false
 

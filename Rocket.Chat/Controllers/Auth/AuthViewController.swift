@@ -142,6 +142,10 @@ final class AuthViewController: BaseViewController {
         if settings.isLinkedInAuthenticationEnabled {
             addOAuthButton(for: .linkedin)
         }
+
+        if settings.isCASEnabled {
+            addOAuthButton(for: .cas)
+        }
     }
 
     internal func handleAuthenticationResponse(_ response: SocketResponse) {
@@ -424,6 +428,7 @@ extension AuthViewController {
 
         button.layer.cornerRadius = 3
         button.titleLabel?.font = .boldSystemFont(ofSize: 17.0)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setTitleColor(UIColor(hex: loginService.buttonLabelColor), for: .normal)
         button.backgroundColor = UIColor(hex: loginService.buttonColor)
 

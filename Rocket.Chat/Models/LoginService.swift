@@ -131,4 +131,10 @@ extension LoginService {
         service.mapLinkedIn()
         return service
     }
+
+    static var cas: LoginService {
+        let service = LoginService()
+        service.mapCAS()
+        return service
+    }
 }
