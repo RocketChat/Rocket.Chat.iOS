@@ -188,7 +188,7 @@ class NewRoomViewController: BaseViewController {
                     completion(false, nil)
                 }
             }
-        }, errored: { [weak self] _ in
+        }, errored: { _ in
             // TODO: Handle error
         })
     }

@@ -14,8 +14,10 @@ protocol ChatMessageImageViewProtocol: class {
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView)
 }
 
-final class ChatMessageImageView: UIView {
-    static let defaultHeight = CGFloat(250)
+final class ChatMessageImageView: ChatMessageAttachmentView {
+    override static var defaultHeight: CGFloat {
+        return 250
+    }
     var isLoadable = true
 
     weak var delegate: ChatMessageImageViewProtocol?
@@ -31,6 +33,9 @@ final class ChatMessageImageView: UIView {
     }
 
     @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailTextHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fullHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicatorImageView: UIActivityIndicatorView!
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
@@ -50,12 +55,17 @@ final class ChatMessageImageView: UIView {
         }
         if imageURL.absoluteString.starts(with: "http://") {
             isLoadable = false
+            detailText.text = ""
             labelTitle.text = attachment.title + " (" + localized("alert.insecure_image.title") + ")"
             imageView.contentMode = UIViewContentMode.center
             imageView.sd_setImage(with: nil, placeholderImage: UIImage(named: "Resource Unavailable"))
             return nil
         }
         labelTitle.text = attachment.title
+        detailText.text = attachment.descriptionText
+        let fullHeight = ChatMessageImageView.heightFor(withText: attachment.descriptionText)
+        fullHeightConstraint.constant = fullHeight
+        detailTextHeightConstraint.constant = fullHeight - ChatMessageImageView.defaultHeight
         return imageURL
     }
 
