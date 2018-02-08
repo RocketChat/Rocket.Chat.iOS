@@ -35,22 +35,27 @@
 "alert.authorization_error.title" = "Błąd autoryzacji";
 "alert.authorization_error.create_channel.description" = "Nie możesz utworzyć kanału";
 
-"alert.unsupported_feature.title" = "Feature not supported"; //TODO
-"alert.unsupported_feature.message" = "This server's version is: %@. This feature is only supported in versions %@ and above."; //TODO
+"alert.unsupported_feature.title" = "Opcja nie jest wspierana";
+"alert.unsupported_feature.message" = "Wersja serwera to: %@. Ta opcja jest tylko wspierana w wersji %@ lub wyższej.";
 
-"alert.push_token_error.title" = "Warning"; //TODO
-"alert.push_token_error.message" = "You may still receive push notifications from this server due to a problem with servers of version below 0.60.0."; //TODO
+"alert.push_token_error.title" = "Ostrzeżenie";
+"alert.push_token_error.message" = "Możesz ciągle otrzymywać powiadomienia z tego serwera z powodu błędu na serwerach w wersji poniżej 0.60.0.";
 
-"alert.upload_error.title" = "Upload Error"; //TODO
-"alert.upload_error.message" = "Something wrong happened when uploading your file. Please try again."; //TODO
+"alert.upload_error.title" = "Błąd wysyłania";
+"alert.upload_error.message" = "Coś poszło nie tak w trakcie wysyłania pliku. Spróbuj ponownie.";
 
-"alert.email_verification.title" = "Email verification"; //TODO
-"alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
+"alert.upload_dialog.title" = "Wyślij plik";
+"alert.upload_dialog.placeholder.title" = "Tytuł";
+"alert.upload_dialog.placeholder.description" = "Opis";
+"alert.upload_dialog.action.upload" = "Wyślij";
+
+"alert.email_verification.title" = "Weryfikacja e-mail";
+"alert.email_verification.message" = "Wysłaliśmy Ci e-mail z potwierdzeniem rejestracji. Jeżeli wkrótce nie otrzymasz maila spróbuj ponownie się zarejestrować.";
 
 // Connection Redirect
-"connection.server.redirect.alert.title" = "Server changed it's URL";
-"connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
-"connection.server.redirect.alert.confirm" = "Yes, change the URL";
+"connection.server.redirect.alert.title" = "Serwer zmienił swój adres";
+"connection.server.redirect.alert.message" = "Wygląda na to, że serwer zmienił swój adres na:\n\n%@\n\nCzy chciałbyś zaktualizować adres?";
+"connection.server.redirect.alert.confirm" = "Tak, zmień adres";
 
 // Socket Connection
 "connection.offline.banner.message" = "Jesteś w trybie offline, połącz się ponownie";
@@ -61,9 +66,9 @@
 "auth.connect.ssl_required" = "Wymagane jest, aby Twój serwer wspierał SSL";
 "auth.connect.connecting" = "Trwa łączenie. Trzymaj się";
 
-"auth.forgot_password.title" = "Forgot your password?"; //TODO
-"auth.forgot_password.message" = "Enter your e-mail"; //TODO
-"auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again."; //TODO
+"auth.forgot_password.title" = "Zapomniałeś hasła?";
+"auth.forgot_password.message" = "Wprowadź e-mail";
+"auth.forgot_password.success" = "Jeżeli ten e-mail jest zarejestrowany wyślemy Ci instrukcje jak zresetować hasło. Jeżeli wkrótce nie otrzymasz maila spróbuj ponownie.";
 
 // Subscriptions
 "subscriptions.search" = "Szukaj";
@@ -84,7 +89,7 @@
 "user_menu.away" = "Zaraz wracam";
 "user_menu.busy" = "Zajęty";
 "user_menu.invisible" = "Ukryty";
-"user_menu.admin" = "Administration"; //TODO
+"user_menu.admin" = "Zarządzanie";
 "user_menu.settings" = "Moje Konto";
 "user_menu.logout" = "Wyloguj";
 
@@ -104,7 +109,7 @@
 "new_room.cell.invite_users.placeholder" = "Nazwy użytkowników";
 
 // Notifications
-"notifications.action.reply" = "Reply";
+"notifications.action.reply" = "Odpowiedz";
 
 // Chat
 "chat.channel_preview_view.title" = "Jest to podgląd kanału #%@";
@@ -113,10 +118,10 @@
 "chat.channel.start_conversation" = "To początek rozmowy na kanale %@";
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
-"chat.loading_messages" = "Loading messages..."; //TODO
+"chat.loading_messages" = "Ładowanie wiadomości...";
 
 // Chat Message Actions
-"chat.message.actions.react" = "Add Reaction";
+"chat.message.actions.react" = "Dodaje reakcję";
 "chat.message.actions.block" = "Blokuj wiadomości od użytkownika";
 "chat.message.actions.report" = "Zgłoś wiadomość";
 "chat.message.actions.copy" = "Kopiuj";
@@ -124,11 +129,11 @@
 "chat.message.actions.unpin" = "Odepnij wiadomość";
 "chat.message.actions.quote" = "Cytuj wiadomość";
 "chat.message.actions.reply" = "Odpowiedz na wiadomość";
-"chat.message.actions.delete" = "Delete message"; //TODO
-"chat.message.actions.delete.confirm.title" = "Delete this message?"; // TODO
-"chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone."; //TODO
-"chat.message.actions.delete.confirm.yes" = "Yes, delete"; // TODO
-"Send" = "Wysłać"; //SLKTextInputbar.m
+"chat.message.actions.delete" = "Usuń wiadomość";
+"chat.message.actions.delete.confirm.title" = "Usunąć wiadomość?";
+"chat.message.actions.delete.confirm.message" = "Czy na pewno usunąć tą wiadomość? Tej czynności nie można cofnąć.";
+"chat.message.actions.delete.confirm.yes" = "Tak, usuń";
+"Send" = "Wyślij"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Wiadomość zgłoszona";
@@ -148,7 +153,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Dotknij aby otworzyć plik";
-"chat.message.open_browser" = "Open in Browser"; //TODO
+"chat.message.open_browser" = "Otwórz w przeglądarce";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";
