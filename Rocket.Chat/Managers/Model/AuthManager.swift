@@ -342,7 +342,7 @@ extension AuthManager {
      of success or error.
      */
     static func auth(casCredentialToken: String, completion: @escaping MessageCompletion) {
-        var params = [
+        let params = [
             "cas": [
                 "credentialToken": casCredentialToken
             ] as [String: Any]

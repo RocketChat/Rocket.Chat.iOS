@@ -1,4 +1,3 @@
-
 //
 //  CASViewController.swift
 //  Rocket.Chat
@@ -11,8 +10,13 @@ import UIKit
 import WebKit
 
 class CASViewController: UIViewController {
-    var loginUrl: URL?
-    var callbackUrl: URL?
+    var baseUrl: URL!
+    var loginUrl: URL!
+    var callbackUrl: URL!
+
+    var callbackUrlEncoded: String {
+        return callbackUrl.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+    }
 
     var success: ((String) -> Void)?
     var failure: (() -> Void)?
@@ -46,13 +50,7 @@ class CASViewController: UIViewController {
     }()
 
     override func viewDidLoad() {
-        guard
-            let loginUrl = loginUrl,
-            let callbackUrl = callbackUrl?.absoluteString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed),
-            let url = URL(string: "\(loginUrl.absoluteString)?service=\(callbackUrl)")
-        else {
-            return
-        }
+        guard let url = URL(string: "\(loginUrl.absoluteString)?service=\(callbackUrlEncoded)") else { return }
 
         let req = URLRequest(url: url)
         webView.load(req)
@@ -75,14 +73,24 @@ extension CASViewController: WKNavigationDelegate {
         guard let url = url, isCallback(url: url) else { return false }
 
         if let credentials = casCredentialToken(from: url) {
-            success?(credentials)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+                self.success?(credentials)
+            }
         } else {
             failure?()
         }
 
-        dismiss(animated: true, completion: nil)
+        close(animated: true)
 
         return true
+    }
+
+    func close(animated: Bool) {
+        if navigationController?.topViewController == self {
+            navigationController?.popViewController(animated: animated)
+        } else {
+            dismiss(animated: animated, completion: nil)
+        }
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
@@ -98,9 +106,4 @@ extension CASViewController: WKNavigationDelegate {
         activityIndicator.stopAnimating()
         activityIndicator.isHidden = true
     }
-
-    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
-        dismiss(animated: true, completion: nil)
-    }
 }
-
