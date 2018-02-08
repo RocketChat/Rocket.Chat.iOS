@@ -51,7 +51,6 @@ class LoginService: BaseModel {
 
     @objc dynamic var loginUrl: String?
 
-
     var isValid: Bool {
         return !(serverUrl?.isEmpty ?? true) || type == .saml || type == .cas
     }

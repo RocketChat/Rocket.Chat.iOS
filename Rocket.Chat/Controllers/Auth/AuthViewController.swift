@@ -181,8 +181,8 @@ final class AuthViewController: BaseViewController {
                     }
                 }
             }
-            }, errored: { [weak self] _ in
-                // TODO: Handle error
+        }, errored: { [weak self] _ in
+            self?.stopLoading()
         })
     }
 
@@ -384,11 +384,13 @@ extension AuthViewController {
 
             let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
                 AuthManager.auth(casCredentialToken: $0, completion: self.handleAuthenticationResponse)
-            }, failure: {
-
+            }, failure: { [weak self] in
+                self?.stopLoading()
             })
 
-            present(controller, animated: true)
+            self.startLoading()
+
+            navigationController?.pushViewController(controller, animated: true)
 
             return
         }
