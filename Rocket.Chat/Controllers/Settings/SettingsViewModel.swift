@@ -27,6 +27,10 @@ final class SettingsViewModel {
         return localized("myaccount.settings.license")
     }
 
+    internal var appicon: String {
+        return localized("myaccount.settings.appicon")
+    }
+
     internal var formattedVersion: String {
         return String(format: localized("myaccount.settings.version"), version, build)
     }
@@ -61,6 +65,14 @@ final class SettingsViewModel {
         return URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
     }
 
+    internal var canChangeAppIcon: Bool {
+        if #available(iOS 10.3, *) {
+            return UIApplication.shared.supportsAlternateIcons
+        } else {
+            return false
+        }
+    }
+
     #if DEBUG || BETA
     internal var canOpenFLEX = true
     #else
@@ -73,7 +85,7 @@ final class SettingsViewModel {
 
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
-        case 0: return 3
+        case 0: return (canChangeAppIcon ? 4 : 3)
         case 1: return (canOpenFLEX ? 1 : 0)
         default: return 0
         }
