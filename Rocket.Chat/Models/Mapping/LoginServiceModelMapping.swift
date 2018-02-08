@@ -86,4 +86,12 @@ extension LoginService: ModelMappeable {
         responseType = "code"
         callbackPath = "linkedin?close"
     }
+
+    func mapCAS() {
+        service = "cas"
+
+        buttonLabelText = "CAS"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#13679a"
+    }
 }
