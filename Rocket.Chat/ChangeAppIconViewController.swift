@@ -14,7 +14,7 @@ final class ChangeAppIconViewController: UIViewController {
 
     @IBOutlet weak var labelHeaderTitle: UILabel! {
         didSet {
-
+            labelHeaderTitle.text = viewModel.header
         }
     }
 
