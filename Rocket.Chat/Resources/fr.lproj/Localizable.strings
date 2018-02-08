@@ -193,4 +193,9 @@
 "myaccount.settings.title" = "Réglages";
 "myaccount.settings.contactus" = "Contactez-nous";
 "myaccount.settings.license" = "Licence";
+"myaccount.settings.appicon" = "Application Icon"; // TODO:
 "myaccount.settings.version" = "Version : %@ (%@)";
+
+// Change Application Icon
+"myaccount.settings.changeicon.title" = "Choose Icon"; // TODO:
+"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat icon looks like on your device. Please choose one of below icons, whichever you like the most."; // TODO:
