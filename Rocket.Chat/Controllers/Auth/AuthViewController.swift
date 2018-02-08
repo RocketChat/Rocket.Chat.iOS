@@ -24,11 +24,24 @@ final class AuthViewController: BaseViewController {
 
     var loginServicesToken: NotificationToken?
 
+    @IBOutlet weak var viewFieldsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewFields: UIView! {
         didSet {
             viewFields.layer.cornerRadius = 4
             viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
             viewFields.layer.borderWidth = 0.5
+        }
+    }
+
+    var hideViewFields: Bool = false {
+        didSet {
+            if hideViewFields {
+                viewFields.isHidden = true
+                viewFieldsHeightConstraint.constant = 0
+            } else {
+                viewFields.isHidden = false
+                viewFieldsHeightConstraint.constant = 100
+            }
         }
     }
 
@@ -68,7 +81,9 @@ final class AuthViewController: BaseViewController {
            buttonRegister.isHidden = registrationForm != .isPublic
         }
 
-        self.updateAuthenticationMethods()
+        hideViewFields = !(AuthSettingsManager.settings?.isUsernameEmailAuthenticationEnabled ?? true)
+
+        updateAuthenticationMethods()
     }
 
     override func viewDidAppear(_ animated: Bool) {
