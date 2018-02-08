@@ -75,12 +75,12 @@ extension CASViewController: WKNavigationDelegate {
         if let credentials = casCredentialToken(from: url) {
             DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
                 self.success?(credentials)
+                self.close(animated: true)
             }
         } else {
             failure?()
+            close(animated: true)
         }
-
-        close(animated: true)
 
         return true
     }
