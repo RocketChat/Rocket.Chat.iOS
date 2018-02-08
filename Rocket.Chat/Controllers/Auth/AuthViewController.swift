@@ -64,6 +64,7 @@ final class AuthViewController: BaseViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet var buttonRegister: UIButton!
+    @IBOutlet weak var buttonResetPassword: UIButton!
 
     @IBOutlet weak var authButtonsStackView: UIStackView!
     var customAuthButtons = [String: UIButton]()
@@ -82,6 +83,7 @@ final class AuthViewController: BaseViewController {
         }
 
         hideViewFields = !(AuthSettingsManager.settings?.isUsernameEmailAuthenticationEnabled ?? true)
+        buttonResetPassword.isHidden = !(AuthSettingsManager.settings?.isPasswordResetEnabled ?? true)
 
         updateAuthenticationMethods()
     }
