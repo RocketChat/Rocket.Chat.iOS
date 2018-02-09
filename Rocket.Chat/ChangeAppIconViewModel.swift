@@ -19,6 +19,7 @@ final class ChangeAppIconViewModel {
         return localized("myaccount.settings.changeicon.header")
     }
 
+    // Adding more available icons require proper entries in Info.plist file
     let availableIcons = [
         "Default",
         "Black",
