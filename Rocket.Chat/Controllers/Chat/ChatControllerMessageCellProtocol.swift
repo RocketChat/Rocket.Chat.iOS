@@ -13,6 +13,53 @@ import FLAnimatedImage
 import SimpleImageViewer
 
 extension ChatViewController: ChatMessageCellProtocol {
+    func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
+
+        // set up controller
+
+        let controller = ReactorListViewController()
+        controller.modalPresentationStyle = .popover
+        _ = controller.view
+
+        // configure cells
+
+        controller.reactorListView.registerReactorNib(MemberCell.nib)
+        controller.reactorListView.configureCell = {
+            guard let cell = $0 as? MemberCell else { return }
+            cell.hideStatus = true
+        }
+
+        // set up model
+
+        var models = reactionListView.model.reactionViewModels
+
+        if let index = models.index(where: { $0.emoji == reactionView.model.emoji }) {
+            models.remove(at: index)
+            models.insert(reactionView.model, at: 0)
+        }
+
+        controller.model = ReactorListViewModel(reactionViewModels: models)
+
+        // present (push on iPhone, popover on iPad)
+
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.navigationController?.pushViewController(controller, animated: true)
+        } else {
+            if let presenter = controller.popoverPresentationController {
+                presenter.sourceView = reactionView
+                presenter.sourceRect = reactionView.bounds
+            }
+
+            self.present(controller, animated: true)
+        }
+
+        // on select reactor
+
+        controller.reactorListView.selectedReactor = { username in
+            controller.close(animated: true)
+            AppManager.openDirectMessage(username: username)
+        }
+    }
 
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
