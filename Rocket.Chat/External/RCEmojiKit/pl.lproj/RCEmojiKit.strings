@@ -1,10 +1,10 @@
-/* 
-  EmojiPicker.strings
-  Rocket.Chat
+/*
+ EmojiPicker.strings
+ Rocket.Chat
 
-  Created by Matheus Cardoso on 12/27/17.
-  Copyright © 2017 Rocket.Chat. All rights reserved.
-*/
+ Created by Matheus Cardoso on 12/27/17.
+ Copyright © 2017 Rocket.Chat. All rights reserved.
+ */
 
 "controller.title" = "Wybierz reakcję";
 "searchbar.placeholder" = "Wyszukaj emoji";
@@ -19,3 +19,5 @@
 "categories.objects" = "OBIEKTY";
 "categories.symbols" = "SYMBOLE";
 "categories.flags" = "FLAGI";
+
+"reactorlist.title" = "Reactions"; //TODO

@@ -1,13 +1,12 @@
 /* 
-  EmojiPicker.strings
+  RCEmojiKit.strings
   Rocket.Chat
 
-  Created by Matheus Cardoso on 12/27/17.
-  Translated by soundstorm
+  Created by Matheus Cardoso on 12/27/17. Translated by soundstorm
   Copyright © 2017 Rocket.Chat. All rights reserved.
 */
 
-"controller.title" = "Reaktion auswählen";
+"emojipicker.title" = "Reaktion auswählen";
 "searchbar.placeholder" = "Nach einem Emoji suchen";
 
 "categories.recent" = "OFT BENUTZT";
@@ -20,3 +19,5 @@
 "categories.objects" = "OBJEKTE";
 "categories.symbols" = "SYMBOLE";
 "categories.flags" = "FLAGGEN";
+
+"reactorlist.title" = "Reactions"; //TODO
