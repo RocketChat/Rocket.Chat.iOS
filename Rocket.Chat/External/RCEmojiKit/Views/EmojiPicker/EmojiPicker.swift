@@ -11,12 +11,8 @@ import SDWebImage
 
 fileprivate typealias EmojiCategory = (name: String, emojis: [Emoji])
 
-class EmojiPicker: UIView {
+class EmojiPicker: UIView, RCEmojiKitLocalizable {
     static let defaults = UserDefaults(suiteName: "EmojiPicker")
-
-    fileprivate func localized(_ string: String) -> String {
-        return NSLocalizedString(string, tableName: "EmojiPicker", bundle: Bundle.main, value: "", comment: "")
-    }
 
     var customEmojis: [Emoji] = []
     var customCategory: (name: String, emojis: [Emoji]) {
