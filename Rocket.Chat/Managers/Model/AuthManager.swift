@@ -324,10 +324,27 @@ extension AuthManager {
             of success or error.
      */
     static func auth(credentials: OAuthCredentials, completion: @escaping MessageCompletion) {
-        var params = [
+        let params = [
             "oauth": [
-                "credentialToken": credentials.token,
-                "credentialSecret": credentials.secret
+                "credentialToken": credentials.token ?? "",
+                "credentialSecret": credentials.secret ?? ""
+            ] as [String: Any]
+        ]
+
+        AuthManager.auth(params: params, completion: completion)
+    }
+
+    /**
+     This method authenticates the user with a CAS credential token
+
+     - parameter token: The credential token
+     - parameter completion: The completion block that'll be called in case
+     of success or error.
+     */
+    static func auth(casCredentialToken: String, completion: @escaping MessageCompletion) {
+        let params = [
+            "cas": [
+                "credentialToken": casCredentialToken
             ] as [String: Any]
         ]
 
