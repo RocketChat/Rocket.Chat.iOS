@@ -335,6 +335,23 @@ extension AuthManager {
     }
 
     /**
+     This method authenticates the user with a CAS credential token
+
+     - parameter token: The credential token
+     - parameter completion: The completion block that'll be called in case
+     of success or error.
+     */
+    static func auth(casCredentialToken: String, completion: @escaping MessageCompletion) {
+        let params = [
+            "cas": [
+                "credentialToken": casCredentialToken
+            ] as [String: Any]
+        ]
+
+        AuthManager.auth(params: params, completion: completion)
+    }
+
+    /**
      Sends forgot password request for e-mail.
      */
     static func sendForgotPassword(email: String, completion: @escaping MessageCompletion = { _ in }) {
