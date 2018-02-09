@@ -24,11 +24,24 @@ final class AuthViewController: BaseViewController {
 
     var loginServicesToken: NotificationToken?
 
+    @IBOutlet weak var viewFieldsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewFields: UIView! {
         didSet {
             viewFields.layer.cornerRadius = 4
             viewFields.layer.borderColor = UIColor.RCLightGray().cgColor
             viewFields.layer.borderWidth = 0.5
+        }
+    }
+
+    var hideViewFields: Bool = false {
+        didSet {
+            if hideViewFields {
+                viewFields.isHidden = true
+                viewFieldsHeightConstraint.constant = 0
+            } else {
+                viewFields.isHidden = false
+                viewFieldsHeightConstraint.constant = 100
+            }
         }
     }
 
@@ -51,6 +64,7 @@ final class AuthViewController: BaseViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet var buttonRegister: UIButton!
+    @IBOutlet weak var buttonResetPassword: UIButton!
 
     @IBOutlet weak var authButtonsStackView: UIStackView!
     var customAuthButtons = [String: UIButton]()
@@ -68,7 +82,10 @@ final class AuthViewController: BaseViewController {
            buttonRegister.isHidden = registrationForm != .isPublic
         }
 
-        self.updateAuthenticationMethods()
+        hideViewFields = !(AuthSettingsManager.settings?.isUsernameEmailAuthenticationEnabled ?? true)
+        buttonResetPassword.isHidden = !(AuthSettingsManager.settings?.isPasswordResetEnabled ?? true)
+
+        updateAuthenticationMethods()
     }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -142,6 +159,10 @@ final class AuthViewController: BaseViewController {
         if settings.isLinkedInAuthenticationEnabled {
             addOAuthButton(for: .linkedin)
         }
+
+        if settings.isCASEnabled {
+            addOAuthButton(for: .cas)
+        }
     }
 
     internal func handleAuthenticationResponse(_ response: SocketResponse) {
@@ -181,8 +202,8 @@ final class AuthViewController: BaseViewController {
                     }
                 }
             }
-            }, errored: { _ in
-                // TODO: Handle error
+        }, errored: { [weak self] _ in
+            self?.stopLoading()
         })
     }
 
@@ -372,6 +393,29 @@ extension AuthViewController {
             return
         }
 
+        if loginService.type == .cas {
+            guard
+                let loginUrlString = loginService.loginUrl,
+                let loginUrl = URL(string: loginUrlString),
+                let host = serverURL.host,
+                let callbackUrl = URL(string: "https://\(host)/_cas/\(String.random(17))")
+            else {
+                return
+            }
+
+            let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
+                AuthManager.auth(casCredentialToken: $0, completion: self.handleAuthenticationResponse)
+            }, failure: { [weak self] in
+                self?.stopLoading()
+            })
+
+            self.startLoading()
+
+            navigationController?.pushViewController(controller, animated: true)
+
+            return
+        }
+
         OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
             guard let strongSelf = self else { return }
 
@@ -401,6 +445,7 @@ extension AuthViewController {
 
         button.layer.cornerRadius = 3
         button.titleLabel?.font = .boldSystemFont(ofSize: 17.0)
+        button.titleLabel?.adjustsFontSizeToFitWidth = true
         button.setTitleColor(UIColor(hex: loginService.buttonLabelColor), for: .normal)
         button.backgroundColor = UIColor(hex: loginService.buttonColor)
 
@@ -415,7 +460,7 @@ extension AuthViewController {
         switch changes {
         case .update(let res, let deletions, let insertions, let modifications):
             insertions.map { res[$0] }.forEach {
-                guard !($0.serverUrl?.isEmpty ?? true) else { return }
+                guard $0.isValid else { return }
                 self.addOAuthButton(for: $0)
             }
 
