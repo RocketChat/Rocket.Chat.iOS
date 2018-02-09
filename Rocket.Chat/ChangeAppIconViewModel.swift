@@ -19,6 +19,14 @@ final class ChangeAppIconViewModel {
         return localized("myaccount.settings.changeicon.header")
     }
 
+    internal var errorTitle: String {
+        return localized("myaccount.settings.changeicon.errortitle")
+    }
+
+    internal var iosVersionMessage: String {
+        return localized("myaccount.settings.changeicon.iosversion")
+    }
+
     // Adding more available icons require proper entries in Info.plist file
     let availableIcons = [
         "Default",
