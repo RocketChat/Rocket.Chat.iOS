@@ -57,6 +57,10 @@ class LoginService: BaseModel {
             return true
         }
 
+        if type == .saml {
+            return true
+        }
+
         return !(serverUrl?.isEmpty ?? true)
     }
 
