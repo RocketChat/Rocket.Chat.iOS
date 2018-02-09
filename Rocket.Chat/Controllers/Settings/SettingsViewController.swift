@@ -85,7 +85,6 @@ final class SettingsViewController: UITableViewController {
                 return assert(false, "controller won't load")
         }
 
-        // TODO: present?
         show(changeIconController, sender: nil)
     }
 

@@ -199,5 +199,5 @@
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose Icon";
-"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat icon looks like on your device. Please choose one of below icons, whichever you like the most.";
+"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of icons below, whichever you like the most.";
 
