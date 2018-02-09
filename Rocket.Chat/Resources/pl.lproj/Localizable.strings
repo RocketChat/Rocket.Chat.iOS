@@ -198,5 +198,7 @@
 "myaccount.settings.version" = "Wersja: %@ (%@)";
 
 // Change Application Icon
-"myaccount.settings.changeicon.title" = "Wybierz ikonę"; // TODO:
+"myaccount.settings.changeicon.title" = "Wybierz ikonę";
 "myaccount.settings.changeicon.header" = "Możesz zmienić to jak wygląda ikona aplikacji Rocket.Chat na Twoim urządzeniu. Wybierz jedną z ikon poniżej, która podoba Ci się najbardziej.";
+"myaccount.settings.changeicon.errortitle" = "Nie można zmienić ikony";
+"myaccount.settings.changeicon.iosversion" = "Alternatywne ikony aplikacji nie są wspierane na systemie poniżej wersji 10.3";

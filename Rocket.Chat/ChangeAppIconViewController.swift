@@ -41,12 +41,12 @@ final class ChangeAppIconViewController: UIViewController {
                 self.reportError(message: (error as NSError).localizedDescription)
             }
         } else {
-            reportError(message: "Alternate application icons are not supported on iOS version below 10.3")
+            reportError(message: viewModel.iosVersionMessage)
         }
     }
 
     private func reportError(message: String?) {
-        let alert = UIAlertController(title: "Cannot Change Icon",
+        let alert = UIAlertController(title: viewModel.errorTitle,
                                       message: message,
                                       preferredStyle: .alert)
 
