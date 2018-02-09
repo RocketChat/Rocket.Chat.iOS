@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol MembersListDelegate {
+protocol MembersListDelegate: class {
     func membersList(_ controller: MembersListViewController, didSelectUser user: User)
 }
 
@@ -71,7 +71,7 @@ class MembersListViewController: BaseViewController {
 
     var data = MembersListViewData()
 
-    var delegate: MembersListDelegate?
+    weak var delegate: MembersListDelegate?
 
     @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
         let data = MembersListViewData()
