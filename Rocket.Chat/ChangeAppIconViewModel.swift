@@ -23,6 +23,10 @@ final class ChangeAppIconViewModel {
     let availableIcons = [
         "Default",
         "Black",
-        "Red"
+        "Red",
+        "BnW",
+        "Grey",
+        "White",
+        "Blue"
     ]
 }

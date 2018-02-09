@@ -39,7 +39,6 @@ final class ChangeAppIconViewController: UIViewController {
                 }
 
                 self.reportError(message: (error as NSError).localizedDescription)
-
             }
         } else {
             reportError(message: "Alternate application icons are not supported on iOS version below 10.3")
