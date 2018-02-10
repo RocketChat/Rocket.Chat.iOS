@@ -51,6 +51,7 @@ final class DrawingViewController: UIViewController {
 
     @IBAction private func endDrawing() {
         UIGraphicsBeginImageContext(mainImageView.bounds.size)
+
         mainImageView.image?.draw(in: CGRect(x: 0, y: 0,
                                                width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
 
@@ -84,17 +85,17 @@ final class DrawingViewController: UIViewController {
         swiped = false
 
         if let touch = touches.first {
-            lastPoint = touch.location(in: view)
+            lastPoint = touch.location(in: tempImageView)
         }
     }
 
     func drawLineFrom(fromPoint: CGPoint, toPoint: CGPoint) {
-        UIGraphicsBeginImageContext(view.frame.size)
+        UIGraphicsBeginImageContext(tempImageView.frame.size)
         guard let context = UIGraphicsGetCurrentContext() else {
             return
         }
 
-        tempImageView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height))
+        tempImageView.image?.draw(in: CGRect(x: 0, y: 0, width: tempImageView.frame.size.width, height: tempImageView.frame.size.height))
 
         context.move(to: fromPoint)
         context.addLine(to: toPoint)
@@ -114,7 +115,7 @@ final class DrawingViewController: UIViewController {
         swiped = true
 
         if let touch = touches.first {
-            let currentPoint = touch.location(in: view)
+            let currentPoint = touch.location(in: tempImageView)
             drawLineFrom(fromPoint: lastPoint, toPoint: currentPoint)
 
             lastPoint = currentPoint
@@ -128,8 +129,8 @@ final class DrawingViewController: UIViewController {
 
         // Merge tempImageView into mainImageView
         UIGraphicsBeginImageContext(mainImageView.frame.size)
-        mainImageView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: .normal, alpha: 1.0)
-        tempImageView.image?.draw(in: CGRect(x: 0, y: 0, width: view.frame.size.width, height: view.frame.size.height), blendMode: .normal, alpha: opacity)
+        mainImageView.image?.draw(in: CGRect(x: 0, y: 0, width: mainImageView.frame.size.width, height: mainImageView.frame.size.height), blendMode: .normal, alpha: 1.0)
+        tempImageView.image?.draw(in: CGRect(x: 0, y: 0, width: tempImageView.frame.size.width, height: tempImageView.frame.size.height), blendMode: .normal, alpha: opacity)
         mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
