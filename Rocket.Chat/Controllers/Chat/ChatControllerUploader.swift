@@ -278,6 +278,17 @@ extension ChatViewController {
             let description = fileDescription?.text
             self.upload(file, fileName: name, description: description)
         }))
+        alert.addAction(UIAlertAction(title: localized("alert.upload_dialog.action.edit"), style: .default, handler: { _ in
+            DispatchQueue.main.async {
+                self.performSegue(withIdentifier: "Drawing", sender: nil)
+            }
+//            var name = file.name
+//            if fileName?.text?.isEmpty == false {
+//                name = fileName?.text ?? file.name
+//            }
+//            let description = fileDescription?.text
+//            self.upload(file, fileName: name, description: description)
+        }))
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel))
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
