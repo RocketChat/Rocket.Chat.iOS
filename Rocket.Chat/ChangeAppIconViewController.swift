@@ -12,13 +12,13 @@ final class ChangeAppIconViewController: UIViewController {
 
     private let viewModel = ChangeAppIconViewModel()
 
-    @IBOutlet weak var labelHeaderTitle: UILabel! {
+    @IBOutlet private weak var labelHeaderTitle: UILabel! {
         didSet {
             labelHeaderTitle.text = viewModel.header
         }
     }
 
-    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet private weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
