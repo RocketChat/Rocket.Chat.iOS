@@ -10,6 +10,7 @@
 		0B3A9764202C692D0019CA92 /* ChangeAppIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */; };
 		0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */; };
 		0B3A9769202C76080019CA92 /* ChangeAppIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */; };
+		140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */; };
 		140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */; };
 		1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BFA21F9B601600FB2768 /* RCTextView.swift */; };
 		14F8A220202E5CBF00175FDC /* Black-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F8A213202E5CBD00175FDC /* Black-29@3x.png */; };
@@ -429,6 +430,7 @@
 		0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewModel.swift; sourceTree = "<group>"; };
 		0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconCell.swift; path = Controllers/Settings/ChangeAppIconCell.swift; sourceTree = "<group>"; };
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconViewModelSpec.swift; path = Settings/ChangeAppIconViewModelSpec.swift; sourceTree = "<group>"; };
 		140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCellSpec.swift; sourceTree = "<group>"; };
 		1435BFA21F9B601600FB2768 /* RCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTextView.swift; sourceTree = "<group>"; };
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -908,6 +910,14 @@
 				68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		140A95DC202F1E4D003FD564 /* AppIcon */ = {
+			isa = PBXGroup;
+			children = (
+				140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */,
+			);
+			name = AppIcon;
 			sourceTree = "<group>";
 		};
 		140C84EA1FC9DB9600032A59 /* CreateChannel */ = {
@@ -1939,6 +1949,7 @@
 		925FF74F1E8EFC9200982043 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				140A95DC202F1E4D003FD564 /* AppIcon */,
 				41F8487D1FA38B0A00C9AE84 /* SettingsViewModelSpec.swift */,
 			);
 			name = Settings;
@@ -2251,7 +2262,7 @@
 				41DCB8261DDC828200E1197F /* SubscriptionSearchMoreView.xib in Resources */,
 				4102E3AA1E532323004BAA82 /* Settings.storyboard in Resources */,
 				14F8A288202E659000175FDC /* White-60@3x.png in Resources */,
-				80C7DD5E1FF46B8000E6647C /* EmojiPicker.strings in Resources */,
+				80C7DD5E1FF46B8000E6647C /* RCEmojiKit.strings in Resources */,
 				14F8A25E202E64B200175FDC /* BnW-76@2x.png in Resources */,
 				80C7DD5E1FF46B8000E6647C /* RCEmojiKit.strings in Resources */,
 				419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */,
@@ -2271,7 +2282,6 @@
 				41D894041F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib in Resources */,
 				14F8A220202E5CBF00175FDC /* Black-29@3x.png in Resources */,
 				14F8A26E202E653E00175FDC /* Grey-76@3x.png in Resources */,
-				806465F21FED81C9001F27DB /* EmojiPicker.xcassets in Resources */,
 				802498F31F7ACD76005477EC /* ChatMessageAudioView.xib in Resources */,
 				41EB22361E5F056600AA3AE7 /* Localizable.strings in Resources */,
 				41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */,
@@ -2890,6 +2900,7 @@
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
 				8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */,
 				418C74451FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift in Sources */,
+				140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */,
 				8013F8821FD6B6C600EE1A4E /* InfoClientSpec.swift in Sources */,
 				77C261251F97445300724A1F /* AuthSettingsSpec.swift in Sources */,
 				80054CF51FD96AFE00F5ECF9 /* MessagesClientSpec.swift in Sources */,
