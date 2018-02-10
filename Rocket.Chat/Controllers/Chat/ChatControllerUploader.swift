@@ -33,6 +33,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             self.openDocumentPicker()
         }))
 
+        alert.addAction(UIAlertAction(title: localized("chat.upload.draw"), style: .default, handler: { (_) in
+            self.openDrawing()
+        }))
+
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
@@ -56,6 +60,22 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         imagePicker.mediaTypes = video ? [kUTTypeMovie as String] : [kUTTypeImage as String]
         imagePicker.cameraCaptureMode = video ? .video : .photo
         self.present(imagePicker, animated: true, completion: nil)
+    }
+
+    fileprivate func openDrawing(file: FileUpload? = nil, name: String? = nil, description: String? = nil) {
+        let storyboard = UIStoryboard(name: "Drawing", bundle: Bundle.main)
+
+        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
+
+            if let drawingController = controller.viewControllers.first as? DrawingViewController {
+                drawingController.delegate = self
+                if let file = file {
+                    drawingController.setFileToUpload(file: file, name: name, description: description)
+                }
+            }
+
+            present(controller, animated: true, completion: nil)
+        }
     }
 
     fileprivate func openPhotosLibrary() {
@@ -280,19 +300,18 @@ extension ChatViewController {
         }))
         alert.addAction(UIAlertAction(title: localized("alert.upload_dialog.action.edit"), style: .default, handler: { _ in
             DispatchQueue.main.async {
-                self.performSegue(withIdentifier: "Drawing", sender: nil)
+                self.openDrawing(file: file)
             }
-//            var name = file.name
-//            if fileName?.text?.isEmpty == false {
-//                name = fileName?.text ?? file.name
-//            }
-//            let description = fileDescription?.text
-//            self.upload(file, fileName: name, description: description)
         }))
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel))
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
         }
     }
+}
 
+extension ChatViewController: DrawingControllerDelegate {
+    func finishedEditing(with file: FileUpload, description: String?) {
+        upload(file, fileName: file.name, description: description)
+    }
 }

@@ -29,20 +29,55 @@
         <!--Drawing View Controller-->
         <scene sceneID="M8l-0S-CaY">
             <objects>
-                <viewController id="u7Q-N1-jHC" customClass="DrawingViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DrawingViewController" id="u7Q-N1-jHC" customClass="DrawingViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="yfh-qx-jAT">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xFp-Dg-6Qj">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aec-Zt-dVY">
+                                <rect key="frame" x="0.0" y="64" width="375" height="559"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="aec-Zt-dVY" firstAttribute="top" secondItem="MB8-Ng-0ga" secondAttribute="top" id="1xc-ET-obD"/>
+                            <constraint firstItem="aec-Zt-dVY" firstAttribute="leading" secondItem="MB8-Ng-0ga" secondAttribute="leading" id="CuO-Sm-QiQ"/>
+                            <constraint firstItem="xFp-Dg-6Qj" firstAttribute="top" secondItem="MB8-Ng-0ga" secondAttribute="top" id="HsX-n4-Ect"/>
+                            <constraint firstItem="MB8-Ng-0ga" firstAttribute="bottom" secondItem="xFp-Dg-6Qj" secondAttribute="bottom" id="I1C-Wa-txA"/>
+                            <constraint firstItem="MB8-Ng-0ga" firstAttribute="bottom" secondItem="aec-Zt-dVY" secondAttribute="bottom" id="Jb8-VS-w38"/>
+                            <constraint firstItem="xFp-Dg-6Qj" firstAttribute="leading" secondItem="MB8-Ng-0ga" secondAttribute="leading" id="j3c-wa-Y2x"/>
+                            <constraint firstItem="MB8-Ng-0ga" firstAttribute="trailing" secondItem="xFp-Dg-6Qj" secondAttribute="trailing" id="okZ-hi-7u1"/>
+                            <constraint firstItem="MB8-Ng-0ga" firstAttribute="trailing" secondItem="aec-Zt-dVY" secondAttribute="trailing" id="s9X-7x-HBs"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="MB8-Ng-0ga"/>
                     </view>
+                    <toolbarItems>
+                        <barButtonItem title="Reset" id="5z5-OY-5Fu">
+                            <connections>
+                                <action selector="reset" destination="u7Q-N1-jHC" id="LNy-UF-m1h"/>
+                            </connections>
+                        </barButtonItem>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="hTF-JV-YqJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="CeV-xI-soZ">
                             <connections>
                                 <action selector="closeDrawing" destination="u7Q-N1-jHC" id="1LT-yX-i9G"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="ZHw-8B-1L6">
+                            <connections>
+                                <action selector="endDrawing" destination="u7Q-N1-jHC" id="Vlp-lY-spG"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="mainImageView" destination="xFp-Dg-6Qj" id="i2R-cM-seM"/>
+                        <outlet property="tempImageView" destination="aec-Zt-dVY" id="bH0-0F-L8l"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ei-Ec-eqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
