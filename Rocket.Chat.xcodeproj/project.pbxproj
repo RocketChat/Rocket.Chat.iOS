@@ -2086,7 +2086,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh \"${SRCROOT}/Scripts/swiftlint.sh\"";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n    \"${PODS_ROOT}/SwiftLint/swiftlint\"\nfi";
 		};
 		D88FD9F92178058BA7FF2938 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
