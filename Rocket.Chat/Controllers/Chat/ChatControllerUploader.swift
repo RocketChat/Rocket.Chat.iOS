@@ -62,16 +62,13 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         self.present(imagePicker, animated: true, completion: nil)
     }
 
-    fileprivate func openDrawing(file: FileUpload? = nil, name: String? = nil, description: String? = nil) {
+    fileprivate func openDrawing() {
         let storyboard = UIStoryboard(name: "Drawing", bundle: Bundle.main)
 
         if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
 
             if let drawingController = controller.viewControllers.first as? DrawingViewController {
                 drawingController.delegate = self
-                if let file = file {
-                    drawingController.setFileToUpload(file: file, name: name, description: description)
-                }
             }
 
             present(controller, animated: true, completion: nil)
@@ -298,11 +295,6 @@ extension ChatViewController {
             let description = fileDescription?.text
             self.upload(file, fileName: name, description: description)
         }))
-        alert.addAction(UIAlertAction(title: localized("alert.upload_dialog.action.edit"), style: .default, handler: { _ in
-            DispatchQueue.main.async {
-                self.openDrawing(file: file)
-            }
-        }))
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel))
         DispatchQueue.main.async {
             self.present(alert, animated: true, completion: nil)
@@ -311,7 +303,7 @@ extension ChatViewController {
 }
 
 extension ChatViewController: DrawingControllerDelegate {
-    func finishedEditing(with file: FileUpload, description: String?) {
-        upload(file, fileName: file.name, description: description)
+    func finishedEditing(with file: FileUpload) {
+        upload(file, fileName: file.name, description: nil)
     }
 }

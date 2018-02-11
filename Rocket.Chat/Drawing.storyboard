@@ -13,11 +13,15 @@
         <!--Navigation Controller-->
         <scene sceneID="01z-T1-P1i">
             <objects>
-                <navigationController id="XL4-O9-WOn" sceneMemberID="viewController">
+                <navigationController toolbarHidden="NO" id="XL4-O9-WOn" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="X6A-UJ-oXc">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s0e-Eg-ymu">
+                        <rect key="frame" x="0.0" y="623" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="u7Q-N1-jHC" kind="relationship" relationship="rootViewController" id="ZsH-aX-nPr"/>
                     </connections>

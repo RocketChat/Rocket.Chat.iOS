@@ -11,12 +11,6 @@ import UIKit
 final class DrawingViewController: UIViewController {
     weak var delegate: DrawingControllerDelegate?
 
-    // Editing image variables
-    private var baseImage: UIImage?
-    private var uploadFile: FileUpload?
-    private var fileName: String?
-    private var fileDescription: String?
-
     // Drawing variables
     var lastPoint: CGPoint = .zero
     var leftTopPoint = CGPoint(x: CGFloat.greatestFiniteMagnitude,
@@ -33,24 +27,18 @@ final class DrawingViewController: UIViewController {
     @IBOutlet private weak var mainImageView: UIImageView!
     @IBOutlet private weak var tempImageView: UIImageView!
 
-    func setFileToUpload(file: FileUpload, name: String?, description: String?) {
-        if let image = UIImage(data: file.data) {
-            uploadFile = file
-            baseImage = image
-            fileName = name
-            fileDescription = description
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = localized("todo - drawing")
+        title = localized("chat.upload.draw")
         reset()
     }
 
     @IBAction private func reset() {
-        mainImageView.image = baseImage
+        mainImageView.image = nil
+        leftTopPoint = CGPoint(x: CGFloat.greatestFiniteMagnitude,
+                                   y: CGFloat.greatestFiniteMagnitude)
+        rightBottomPoint = .zero
     }
 
     @IBAction private func endDrawing() {
@@ -87,9 +75,8 @@ final class DrawingViewController: UIViewController {
         }
 
         delegate?.finishedEditing(with: UploadHelper.file(for: imageData,
-                                                          name: fileName ?? "drawing.jpeg",
-                                                          mimeType: "image/jpeg"),
-                                  description: fileDescription)
+                                                          name: "drawing.jpeg",
+                                                          mimeType: "image/jpeg"))
         dismiss(animated: true, completion: nil)
     }
 

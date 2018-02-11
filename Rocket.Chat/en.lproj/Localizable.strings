@@ -147,6 +147,7 @@
 "chat.upload.shoot_video" = "Shoot Video";
 "chat.upload.choose_from_library" = "Choose From Library";
 "chat.upload.import_file" = "Import File From...";
+"chat.upload.draw" = "Draw a picture";
 
 // Chat Download
 "chat.download.downloading_file" = "Downloading \"%@\"";

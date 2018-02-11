@@ -9,5 +9,5 @@
 import Foundation
 
 protocol DrawingControllerDelegate: class {
-    func finishedEditing(with file: FileUpload, description: String?)
+    func finishedEditing(with file: FileUpload)
 }
