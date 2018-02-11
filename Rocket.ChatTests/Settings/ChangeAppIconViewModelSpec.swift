@@ -23,4 +23,18 @@ class ChangeAppIconViewModelSpec: XCTestCase {
             XCTAssertNotNil(UIImage(named: name), "There is no icon named \(name)")
         }
     }
+
+    func testStringsOverall() {
+        XCTAssertNotNil(model.title)
+        XCTAssertNotEqual(model.title, "")
+
+        XCTAssertNotNil(model.header)
+        XCTAssertNotEqual(model.header, "")
+
+        XCTAssertNotNil(model.errorTitle)
+        XCTAssertNotEqual(model.errorTitle, "")
+
+        XCTAssertNotNil(model.iosVersionMessage)
+        XCTAssertNotEqual(model.iosVersionMessage, "")
+    }
 }
