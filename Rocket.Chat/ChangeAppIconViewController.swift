@@ -46,14 +46,11 @@ final class ChangeAppIconViewController: UIViewController {
     }
 
     private func reportError(message: String?) {
-        let alert = UIAlertController(title: viewModel.errorTitle,
-                                      message: message,
-                                      preferredStyle: .alert)
+        guard let message = message else {
+            return
+        }
 
-        let done = UIAlertAction(title: "OK", style: .default, handler: nil)
-        alert.addAction(done)
-
-        present(alert, animated: true)
+        alert(title: viewModel.errorTitle, message: message, handler: nil)
     }
 
 }

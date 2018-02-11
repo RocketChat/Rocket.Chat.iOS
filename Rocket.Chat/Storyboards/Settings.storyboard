@@ -130,6 +130,7 @@
                         <outlet property="labelContactUs" destination="SsA-Jk-og1" id="BZe-mM-eck"/>
                         <outlet property="labelLicense" destination="kCF-5t-4W3" id="bt0-I5-0WI"/>
                         <outlet property="labelVersion" destination="vOz-GO-Ifh" id="14X-a4-dRc"/>
+                        <segue destination="14p-5u-LKz" kind="show" identifier="AppIcon" id="5Rh-qB-fEf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O5x-0L-i2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -149,7 +150,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CMI-Gv-ffZ">
-                                <rect key="frame" x="32" y="73.5" width="311" height="577.5"/>
+                                <rect key="frame" x="32" y="117.5" width="311" height="533.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" id="Cn2-Qm-hul">
                                     <size key="itemSize" width="60" height="60"/>
@@ -183,7 +184,7 @@
                                 </cells>
                             </collectionView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUb-00-j2C">
-                                <rect key="frame" x="32" y="36" width="311" height="21.5"/>
+                                <rect key="frame" x="32" y="80" width="311" height="21.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -227,6 +228,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Default" width="90" height="90"/>
+        <image name="Default" width="60" height="60"/>
     </resources>
 </document>
