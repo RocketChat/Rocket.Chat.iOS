@@ -77,15 +77,7 @@ final class SettingsViewController: UITableViewController {
     }
 
     func cellAppIconDidPressed() {
-        let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
-
-        guard
-            let changeIconController = storyboard.instantiateViewController(withIdentifier: "ChangeAppIconViewController") as? ChangeAppIconViewController
-            else {
-                return assert(false, "controller won't load")
-        }
-
-        show(changeIconController, sender: nil)
+        performSegue(withIdentifier: "AppIcon", sender: nil)
     }
 
     // MARK: UITableViewDelegate
