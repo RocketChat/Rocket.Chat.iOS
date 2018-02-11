@@ -515,7 +515,7 @@ final class ChatViewController: SLKTextViewController {
         guard let user = AuthManager.currentUser() else { return }
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username, username == user.username  else { return }
+            guard let username = username, username == user.username else { return }
 
             let isAtBottom = self?.chatLogIsAtBottom()
 
