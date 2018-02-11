@@ -19,6 +19,10 @@ final class DrawingViewController: UIViewController {
 
     // Drawing variables
     var lastPoint: CGPoint = .zero
+    var leftTopPoint = CGPoint(x: CGFloat.greatestFiniteMagnitude,
+                               y: CGFloat.greatestFiniteMagnitude)
+    var rightBottomPoint: CGPoint = .zero
+
     var red: CGFloat = 0.0
     var green: CGFloat = 0.0
     var blue: CGFloat = 0.0
@@ -50,10 +54,24 @@ final class DrawingViewController: UIViewController {
     }
 
     @IBAction private func endDrawing() {
-        UIGraphicsBeginImageContext(mainImageView.bounds.size)
+        let croppedRect = CGRect(x: leftTopPoint.x,
+                                 y: leftTopPoint.y,
+                                 width: rightBottomPoint.x - leftTopPoint.x,
+                                 height: rightBottomPoint.y - leftTopPoint.y)
 
-        mainImageView.image?.draw(in: CGRect(x: 0, y: 0,
-                                               width: mainImageView.frame.size.width, height: mainImageView.frame.size.height))
+        UIGraphicsBeginImageContext(croppedRect.size)
+
+        let context = UIGraphicsGetCurrentContext()
+        context?.clip(to: CGRect(x: 0,
+                                 y: 0,
+                                 width: croppedRect.size.width,
+                                 height: croppedRect.size.height))
+
+        let drawRect = CGRect(x: -croppedRect.origin.x,
+                              y: -croppedRect.origin.y,
+                              width: mainImageView.frame.size.width,
+                              height: mainImageView.frame.size.height)
+        mainImageView.image?.draw(in: drawRect)
 
         guard let image = UIGraphicsGetImageFromCurrentImageContext() else {
             dismiss(animated: true, completion: nil)
@@ -109,6 +127,24 @@ final class DrawingViewController: UIViewController {
         tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         tempImageView.alpha = opacity
         UIGraphicsEndImageContext()
+
+        // Remember extremes of drawing
+        adjustExtremes(for: fromPoint)
+        adjustExtremes(for: toPoint)
+    }
+
+    private func adjustExtremes(for point: CGPoint) {
+        if point.x < leftTopPoint.x {
+            leftTopPoint.x = point.x - brushWidth
+        } else if point.x > rightBottomPoint.x {
+            rightBottomPoint.x = point.x + brushWidth
+        }
+
+        if point.y < leftTopPoint.y {
+            leftTopPoint.y = point.y - brushWidth
+        } else if point.y > rightBottomPoint.y {
+            rightBottomPoint.y = point.y + brushWidth
+        }
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
