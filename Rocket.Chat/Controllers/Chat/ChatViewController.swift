@@ -512,12 +512,10 @@ final class ChatViewController: SLKTextViewController {
 
     func registerTypingEvent(_ subscription: Subscription) {
         typingIndicatorView?.interval = 0
-        let user = AuthManager.currentUser()
+        guard let user = AuthManager.currentUser() else { return }
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username else { return }
-
-            if username == user?.username { return }
+            guard let username = username, username == user.username  else { return }
 
             let isAtBottom = self?.chatLogIsAtBottom()
 
