@@ -64,6 +64,17 @@
                                 <action selector="reset" destination="u7Q-N1-jHC" id="LNy-UF-m1h"/>
                             </connections>
                         </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="GR2-Ra-9pU"/>
+                        <barButtonItem enabled="NO" title="Brush:" id="zNJ-OE-uJe"/>
+                        <barButtonItem title="Width" id="Inn-dx-cVT"/>
+                        <barButtonItem title="Opacity" id="ubJ-AB-CWU">
+                            <connections>
+                                <segue destination="mo2-C9-pFT" kind="popoverPresentation" popoverAnchorBarButtonItem="ubJ-AB-CWU" id="fus-lc-ZLe">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem title="Color" id="1AR-Ra-oNL"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="hTF-JV-YqJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="CeV-xI-soZ">
@@ -86,6 +97,37 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9ei-Ec-eqf" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-69" y="111"/>
+        </scene>
+        <!--Drawing Brush Opacity View Controller-->
+        <scene sceneID="Oym-c4-ezg">
+            <objects>
+                <viewController id="mo2-C9-pFT" customClass="DrawingBrushOpacityViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="o59-8g-a35">
+                        <rect key="frame" x="0.0" y="0.0" width="120" height="20"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lIY-Ns-JYG">
+                                <rect key="frame" x="6" y="0.0" width="108" height="21"/>
+                                <connections>
+                                    <action selector="opacityChanged:" destination="mo2-C9-pFT" eventType="valueChanged" id="ALe-SH-UQK"/>
+                                </connections>
+                            </slider>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Ea5-lv-CCB" firstAttribute="bottom" secondItem="lIY-Ns-JYG" secondAttribute="bottom" id="XU1-Tn-kD4"/>
+                            <constraint firstItem="lIY-Ns-JYG" firstAttribute="leading" secondItem="Ea5-lv-CCB" secondAttribute="leading" constant="8" id="XxY-Uz-Of0"/>
+                            <constraint firstItem="lIY-Ns-JYG" firstAttribute="top" secondItem="Ea5-lv-CCB" secondAttribute="top" id="jdr-Ha-QFx"/>
+                            <constraint firstItem="Ea5-lv-CCB" firstAttribute="trailing" secondItem="lIY-Ns-JYG" secondAttribute="trailing" constant="8" id="l91-GQ-5t7"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Ea5-lv-CCB"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="120" height="20"/>
+                    <size key="freeformSize" width="120" height="20"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pal-YH-QeJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-70" y="596"/>
         </scene>
     </scenes>
 </document>

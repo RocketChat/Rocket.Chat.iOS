@@ -12,17 +12,15 @@ final class DrawingViewController: UIViewController {
     weak var delegate: DrawingControllerDelegate?
 
     // Drawing variables
-    var lastPoint: CGPoint = .zero
-    var leftTopPoint = CGPoint(x: CGFloat.greatestFiniteMagnitude,
+    private var lastPoint: CGPoint = .zero
+    private var leftTopPoint = CGPoint(x: CGFloat.greatestFiniteMagnitude,
                                y: CGFloat.greatestFiniteMagnitude)
-    var rightBottomPoint: CGPoint = .zero
+    private var rightBottomPoint: CGPoint = .zero
 
-    var red: CGFloat = 0.0
-    var green: CGFloat = 0.0
-    var blue: CGFloat = 0.0
-    var brushWidth: CGFloat = 10.0
-    var opacity: CGFloat = 1.0
-    var swiped = false
+    private var brushColor = UIColor(hex: "#000000")
+    private var brushWidth: CGFloat = 10.0
+    private var brushOpacity: CGFloat = 1.0
+    private var swiped = false
 
     @IBOutlet private weak var mainImageView: UIImageView!
     @IBOutlet private weak var tempImageView: UIImageView!
@@ -32,6 +30,23 @@ final class DrawingViewController: UIViewController {
 
         title = localized("chat.upload.draw")
         reset()
+    }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let controller = segue.destination as? DrawingBrushWidthViewController {
+            controller.delegate = self
+        } else if let controller = segue.destination as? DrawingBrushOpacityViewController {
+            controller.delegate = self
+        } else if let controller = segue.destination as? DrawingBrushColorViewController {
+            controller.delegate = self
+        }
+
+        guard let popoverController = segue.destination.popoverPresentationController else {
+            return
+        }
+        popoverController.sourceView = view
+        popoverController.sourceRect = view.bounds
+        popoverPresentationController?.delegate = self
     }
 
     @IBAction private func reset() {
@@ -106,13 +121,13 @@ final class DrawingViewController: UIViewController {
         context.addLine(to: toPoint)
         context.setLineCap(.round)
         context.setLineWidth(brushWidth)
-        context.setStrokeColor(red: red, green: green, blue: blue, alpha: 1.0)
+        context.setStrokeColor(brushColor.cgColor)
         context.setBlendMode(.normal)
 
         context.strokePath()
 
         tempImageView.image = UIGraphicsGetImageFromCurrentImageContext()
-        tempImageView.alpha = opacity
+        tempImageView.alpha = brushOpacity
         UIGraphicsEndImageContext()
 
         // Remember extremes of drawing
@@ -153,11 +168,35 @@ final class DrawingViewController: UIViewController {
         // Merge tempImageView into mainImageView
         UIGraphicsBeginImageContext(mainImageView.frame.size)
         mainImageView.image?.draw(in: CGRect(x: 0, y: 0, width: mainImageView.frame.size.width, height: mainImageView.frame.size.height), blendMode: .normal, alpha: 1.0)
-        tempImageView.image?.draw(in: CGRect(x: 0, y: 0, width: tempImageView.frame.size.width, height: tempImageView.frame.size.height), blendMode: .normal, alpha: opacity)
+        tempImageView.image?.draw(in: CGRect(x: 0, y: 0, width: tempImageView.frame.size.width, height: tempImageView.frame.size.height), blendMode: .normal, alpha: brushOpacity)
         mainImageView.image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
 
         tempImageView.image = nil
     }
 
+}
+
+extension DrawingViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return .none
+    }
+}
+
+extension DrawingViewController: DrawingBrushWidthDelegate {
+    func brushWidthChanged(width: CGFloat) {
+        brushWidth = width
+    }
+}
+
+extension DrawingViewController: DrawingBrushOpacityDelegate {
+    func brushOpacityChanged(opacity: CGFloat) {
+        brushOpacity = opacity
+    }
+}
+
+extension DrawingViewController: DrawingBrushColorDelegate {
+    func brushColorPicked(color: UIColor) {
+        brushColor = color
+    }
 }
