@@ -103,11 +103,11 @@
             <objects>
                 <viewController id="mo2-C9-pFT" customClass="DrawingBrushOpacityViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o59-8g-a35">
-                        <rect key="frame" x="0.0" y="0.0" width="120" height="20"/>
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lIY-Ns-JYG">
-                                <rect key="frame" x="6" y="0.0" width="108" height="21"/>
+                                <rect key="frame" x="6" y="0.0" width="138" height="31"/>
                                 <connections>
                                     <action selector="opacityChanged:" destination="mo2-C9-pFT" eventType="valueChanged" id="ALe-SH-UQK"/>
                                 </connections>
@@ -122,8 +122,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ea5-lv-CCB"/>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="120" height="20"/>
-                    <size key="freeformSize" width="120" height="20"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="150" height="30"/>
+                    <size key="freeformSize" width="150" height="30"/>
+                    <connections>
+                        <outlet property="slider" destination="lIY-Ns-JYG" id="sCP-Jz-wF7"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pal-YH-QeJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

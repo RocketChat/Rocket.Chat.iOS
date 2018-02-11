@@ -36,6 +36,7 @@ final class DrawingViewController: UIViewController {
         if let controller = segue.destination as? DrawingBrushWidthViewController {
             controller.delegate = self
         } else if let controller = segue.destination as? DrawingBrushOpacityViewController {
+            controller.setCurrectOpacity(brushOpacity)
             controller.delegate = self
         } else if let controller = segue.destination as? DrawingBrushColorViewController {
             controller.delegate = self
@@ -46,7 +47,7 @@ final class DrawingViewController: UIViewController {
         }
         popoverController.sourceView = view
         popoverController.sourceRect = view.bounds
-        popoverPresentationController?.delegate = self
+        popoverController.delegate = self
     }
 
     @IBAction private func reset() {
