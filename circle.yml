@@ -11,7 +11,7 @@ jobs:
           command: ./Scripts/update_dependencies.sh
       - run:
           name: Lint
-          command: swiftlint
+          command: ./Pods/SwiftLint/swiftlint
 
   test-ipad-ios10.3:
     macos:
