@@ -10,4 +10,24 @@ import UIKit
 
 final class DrawingBrushWidthViewController: UIViewController {
     weak var delegate: DrawingBrushWidthDelegate?
+    
+    private var width: Float = 1
+    @IBOutlet private weak var slider: UISlider!
+    @IBOutlet weak var widthLabel: UILabel!
+
+    @IBAction func opacityChanged(_ sender: UISlider) {
+        widthLabel.text = String(format: "%.2f", sender.value)
+        delegate?.brushWidthChanged(width: CGFloat(sender.value))
+    }
+
+    func setCurrentWidth(_ width: CGFloat) {
+        self.width = Float(width)
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        widthLabel.text = String(format: "%.2f", width)
+        slider.value = width
+    }
 }

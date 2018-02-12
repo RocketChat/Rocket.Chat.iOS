@@ -10,4 +10,16 @@ import UIKit
 
 final class DrawingBrushColorViewController: UIViewController {
     weak var delegate: DrawingBrushColorDelegate?
+
+    private var color = UIColor.black
+
+    func setCurrentColor(_ color: UIColor) {
+        self.color = color
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        view.backgroundColor = color // temp
+    }
 }

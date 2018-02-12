@@ -22,6 +22,8 @@ final class DrawingViewController: UIViewController {
     private var brushOpacity: CGFloat = 1.0
     private var swiped = false
 
+    private let extraSpace: CGFloat = 10.0
+
     @IBOutlet private weak var mainImageView: UIImageView!
     @IBOutlet private weak var tempImageView: UIImageView!
 
@@ -34,11 +36,13 @@ final class DrawingViewController: UIViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? DrawingBrushWidthViewController {
+            controller.setCurrentWidth(brushWidth)
             controller.delegate = self
         } else if let controller = segue.destination as? DrawingBrushOpacityViewController {
             controller.setCurrectOpacity(brushOpacity)
             controller.delegate = self
         } else if let controller = segue.destination as? DrawingBrushColorViewController {
+            controller.setCurrentColor(brushColor)
             controller.delegate = self
         }
 
@@ -138,15 +142,15 @@ final class DrawingViewController: UIViewController {
 
     private func adjustExtremes(for point: CGPoint) {
         if point.x < leftTopPoint.x {
-            leftTopPoint.x = point.x - brushWidth
+            leftTopPoint.x = point.x - brushWidth - extraSpace
         } else if point.x > rightBottomPoint.x {
-            rightBottomPoint.x = point.x + brushWidth
+            rightBottomPoint.x = point.x + brushWidth + extraSpace
         }
 
         if point.y < leftTopPoint.y {
-            leftTopPoint.y = point.y - brushWidth
+            leftTopPoint.y = point.y - brushWidth - extraSpace
         } else if point.y > rightBottomPoint.y {
-            rightBottomPoint.y = point.y + brushWidth
+            rightBottomPoint.y = point.y + brushWidth + extraSpace
         }
     }
 

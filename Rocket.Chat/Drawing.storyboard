@@ -66,7 +66,13 @@
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="GR2-Ra-9pU"/>
                         <barButtonItem enabled="NO" title="Brush:" id="zNJ-OE-uJe"/>
-                        <barButtonItem title="Width" id="Inn-dx-cVT"/>
+                        <barButtonItem title="Width" id="Inn-dx-cVT">
+                            <connections>
+                                <segue destination="N6q-Pk-jBJ" kind="popoverPresentation" popoverAnchorBarButtonItem="Inn-dx-cVT" id="PgU-Gh-EgK">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem title="Opacity" id="ubJ-AB-CWU">
                             <connections>
                                 <segue destination="mo2-C9-pFT" kind="popoverPresentation" popoverAnchorBarButtonItem="ubJ-AB-CWU" id="fus-lc-ZLe">
@@ -74,7 +80,13 @@
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Color" id="1AR-Ra-oNL"/>
+                        <barButtonItem title="Color" id="1AR-Ra-oNL">
+                            <connections>
+                                <segue destination="Uue-c0-V7G" kind="popoverPresentation" popoverAnchorBarButtonItem="1AR-Ra-oNL" id="3a6-nt-A3q">
+                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                </segue>
+                            </connections>
+                        </barButtonItem>
                     </toolbarItems>
                     <navigationItem key="navigationItem" id="hTF-JV-YqJ">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="CeV-xI-soZ">
@@ -103,34 +115,103 @@
             <objects>
                 <viewController id="mo2-C9-pFT" customClass="DrawingBrushOpacityViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o59-8g-a35">
-                        <rect key="frame" x="0.0" y="0.0" width="150" height="30"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="35"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lIY-Ns-JYG">
-                                <rect key="frame" x="6" y="0.0" width="138" height="31"/>
+                                <rect key="frame" x="6" y="0.0" width="151" height="36"/>
                                 <connections>
                                     <action selector="opacityChanged:" destination="mo2-C9-pFT" eventType="valueChanged" id="ALe-SH-UQK"/>
                                 </connections>
                             </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgE-Yk-oqb">
+                                <rect key="frame" x="163" y="9" width="29" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="Ea5-lv-CCB" firstAttribute="trailing" secondItem="cgE-Yk-oqb" secondAttribute="trailing" constant="8" id="2g4-mI-v6y"/>
                             <constraint firstItem="Ea5-lv-CCB" firstAttribute="bottom" secondItem="lIY-Ns-JYG" secondAttribute="bottom" id="XU1-Tn-kD4"/>
                             <constraint firstItem="lIY-Ns-JYG" firstAttribute="leading" secondItem="Ea5-lv-CCB" secondAttribute="leading" constant="8" id="XxY-Uz-Of0"/>
                             <constraint firstItem="lIY-Ns-JYG" firstAttribute="top" secondItem="Ea5-lv-CCB" secondAttribute="top" id="jdr-Ha-QFx"/>
-                            <constraint firstItem="Ea5-lv-CCB" firstAttribute="trailing" secondItem="lIY-Ns-JYG" secondAttribute="trailing" constant="8" id="l91-GQ-5t7"/>
+                            <constraint firstItem="cgE-Yk-oqb" firstAttribute="centerY" secondItem="o59-8g-a35" secondAttribute="centerY" id="yRd-9V-Thh"/>
+                            <constraint firstItem="cgE-Yk-oqb" firstAttribute="leading" secondItem="lIY-Ns-JYG" secondAttribute="trailing" constant="8" id="ztl-8O-dfS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ea5-lv-CCB"/>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="150" height="30"/>
-                    <size key="freeformSize" width="150" height="30"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="35"/>
+                    <size key="freeformSize" width="200" height="35"/>
                     <connections>
+                        <outlet property="opacityLabel" destination="cgE-Yk-oqb" id="1nZ-v0-2IA"/>
                         <outlet property="slider" destination="lIY-Ns-JYG" id="sCP-Jz-wF7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pal-YH-QeJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-70" y="596"/>
+            <point key="canvasLocation" x="-70.400000000000006" y="595.50224887556226"/>
+        </scene>
+        <!--Drawing Brush Width View Controller-->
+        <scene sceneID="BRH-4F-Fug">
+            <objects>
+                <viewController id="N6q-Pk-jBJ" customClass="DrawingBrushWidthViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="WMG-X7-uwT">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="35"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="eo7-Lr-t3S">
+                                <rect key="frame" x="6" y="0.0" width="151" height="36"/>
+                                <connections>
+                                    <action selector="opacityChanged:" destination="N6q-Pk-jBJ" eventType="valueChanged" id="SHu-gd-OZP"/>
+                                </connections>
+                            </slider>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIq-Uy-r7c">
+                                <rect key="frame" x="163" y="9" width="29" height="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="j2F-tH-Vc8" firstAttribute="bottom" secondItem="eo7-Lr-t3S" secondAttribute="bottom" id="2FJ-xr-DZP"/>
+                            <constraint firstItem="eo7-Lr-t3S" firstAttribute="top" secondItem="j2F-tH-Vc8" secondAttribute="top" id="5Ca-CB-aW5"/>
+                            <constraint firstItem="GIq-Uy-r7c" firstAttribute="leading" secondItem="eo7-Lr-t3S" secondAttribute="trailing" constant="8" id="8m9-OA-5UH"/>
+                            <constraint firstItem="j2F-tH-Vc8" firstAttribute="trailing" secondItem="GIq-Uy-r7c" secondAttribute="trailing" constant="8" id="MmD-w3-IS9"/>
+                            <constraint firstItem="GIq-Uy-r7c" firstAttribute="centerY" secondItem="WMG-X7-uwT" secondAttribute="centerY" id="XDa-1Q-khF"/>
+                            <constraint firstItem="eo7-Lr-t3S" firstAttribute="leading" secondItem="j2F-tH-Vc8" secondAttribute="leading" constant="8" id="rdh-oF-HCF"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="j2F-tH-Vc8"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="35"/>
+                    <size key="freeformSize" width="200" height="35"/>
+                    <connections>
+                        <outlet property="slider" destination="eo7-Lr-t3S" id="uXZ-Vd-ClE"/>
+                        <outlet property="widthLabel" destination="GIq-Uy-r7c" id="NXU-CS-Iov"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dCC-ig-EyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-424" y="595"/>
+        </scene>
+        <!--Drawing Brush Color View Controller-->
+        <scene sceneID="Njr-l7-1gP">
+            <objects>
+                <viewController id="Uue-c0-V7G" customClass="DrawingBrushColorViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="cvs-xe-iZf">
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="Z7Y-eX-IWj"/>
+                    </view>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
+                    <size key="freeformSize" width="200" height="200"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Mai-aj-bt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="310" y="668"/>
         </scene>
     </scenes>
 </document>
