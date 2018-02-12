@@ -2,7 +2,7 @@
 
 set -e
 
--# Swiftlint		
+-# Swiftlint
  -brew install swiftlint
 
 # Update all external dependencies
