@@ -203,7 +203,39 @@
                     <view key="view" contentMode="scaleToFill" id="cvs-xe-iZf">
                         <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="1S8-I2-Uca">
+                                <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="jaE-8K-ph7">
+                                    <size key="itemSize" width="40" height="40"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="DrawingBrushColorCell" id="mFi-mM-W1o">
+                                        <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="Uue-c0-V7G" id="KTc-Ng-CfY"/>
+                                    <outlet property="delegate" destination="Uue-c0-V7G" id="O06-fg-LNN"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="1S8-I2-Uca" firstAttribute="leading" secondItem="Z7Y-eX-IWj" secondAttribute="leading" id="Xcc-5N-NdS"/>
+                            <constraint firstItem="Z7Y-eX-IWj" firstAttribute="bottom" secondItem="1S8-I2-Uca" secondAttribute="bottom" id="bZq-hZ-QmA"/>
+                            <constraint firstItem="1S8-I2-Uca" firstAttribute="top" secondItem="Z7Y-eX-IWj" secondAttribute="top" id="hZB-CV-ZdS"/>
+                            <constraint firstItem="Z7Y-eX-IWj" firstAttribute="trailing" secondItem="1S8-I2-Uca" secondAttribute="trailing" id="rv4-kp-Qoa"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="Z7Y-eX-IWj"/>
                     </view>
                     <value key="contentSizeForViewInPopover" type="size" width="200" height="200"/>
@@ -211,7 +243,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mai-aj-bt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="310" y="668"/>
+            <point key="canvasLocation" x="308.80000000000001" y="667.4662668665668"/>
         </scene>
     </scenes>
 </document>

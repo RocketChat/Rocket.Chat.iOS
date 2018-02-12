@@ -10,7 +10,7 @@ import UIKit
 
 final class DrawingBrushWidthViewController: UIViewController {
     weak var delegate: DrawingBrushWidthDelegate?
-    
+
     private var width: Float = 1
     @IBOutlet private weak var slider: UISlider!
     @IBOutlet weak var widthLabel: UILabel!

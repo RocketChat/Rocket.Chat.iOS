@@ -10,7 +10,7 @@ import UIKit
 
 final class DrawingBrushOpacityViewController: UIViewController {
     weak var delegate: DrawingBrushOpacityDelegate?
-    
+
     private var opacity: Float = 1
     @IBOutlet private weak var slider: UISlider!
     @IBOutlet weak var opacityLabel: UILabel!
