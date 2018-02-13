@@ -156,6 +156,11 @@
 "chat.message.open_file" = "Klikněte pro otevření souboru";
 "chat.message.open_browser" = "Open in Browser"; //TODO
 
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!"; // TODO
+"chat.drawing.messageTitle" = "You have to draw something before sending it."; // TODO
+"chat.drawing.fileName" = "Drawing"; // TODO
+
 // Message Types
 "chat.message.type.room_name_changed" = "Jméno místnosti bylo změněno: %@ by %@";
 "chat.message.type.user_added_by" = "Uživatel %@ byl přidán %@";

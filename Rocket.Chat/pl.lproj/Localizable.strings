@@ -156,6 +156,11 @@
 "chat.message.open_file" = "Dotknij aby otworzyć plik";
 "chat.message.open_browser" = "Otwórz w przeglądarce";
 
+// Chat Drawing
+"chat.drawing.errorTitle" = "Ups!";
+"chat.drawing.messageTitle" = "Przed wysłaniem musisz coś narysować.";
+"chat.drawing.fileName" = "Rysunek";
+
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";
 "chat.message.type.user_added_by" = "Użytkownik %@ został dodany przez %@";

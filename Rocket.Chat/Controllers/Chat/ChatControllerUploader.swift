@@ -304,6 +304,6 @@ extension ChatViewController {
 
 extension ChatViewController: DrawingControllerDelegate {
     func finishedEditing(with file: FileUpload) {
-        upload(file, fileName: file.name, description: nil)
+        uploadDialog(file)
     }
 }

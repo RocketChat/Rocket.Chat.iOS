@@ -17,20 +17,20 @@ final class DrawingViewController: UIViewController {
                                y: CGFloat.greatestFiniteMagnitude)
     private var rightBottomPoint: CGPoint = .zero
 
-    private var brushColor = UIColor(hex: "#000000")
-    private var brushWidth: CGFloat = 10.0
-    private var brushOpacity: CGFloat = 1.0
+    private var brushColor = DrawingViewModel.defaultBrushColor
+    private var brushWidth: CGFloat = DrawingViewModel.defaultBrushWidth
+    private var brushOpacity: CGFloat = DrawingViewModel.defaultBrushOpacity
     private var swiped = false
-
-    private let extraSpace: CGFloat = 10.0
 
     @IBOutlet private weak var mainImageView: UIImageView!
     @IBOutlet private weak var tempImageView: UIImageView!
 
+    private let viewModel = DrawingViewModel()
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = localized("chat.upload.draw")
+        title = viewModel.title
         reset()
     }
 
@@ -56,12 +56,19 @@ final class DrawingViewController: UIViewController {
 
     @IBAction private func reset() {
         mainImageView.image = nil
+
+        lastPoint = .zero
         leftTopPoint = CGPoint(x: CGFloat.greatestFiniteMagnitude,
                                    y: CGFloat.greatestFiniteMagnitude)
         rightBottomPoint = .zero
     }
 
     @IBAction private func endDrawing() {
+        if mainImageView.image == nil {
+            alert(title: viewModel.errorTitle, message: viewModel.errorMessage)
+            return
+        }
+
         let croppedRect = CGRect(x: leftTopPoint.x,
                                  y: leftTopPoint.y,
                                  width: rightBottomPoint.x - leftTopPoint.x,
@@ -95,7 +102,7 @@ final class DrawingViewController: UIViewController {
         }
 
         delegate?.finishedEditing(with: UploadHelper.file(for: imageData,
-                                                          name: "drawing.jpeg",
+                                                          name: viewModel.fileName,
                                                           mimeType: "image/jpeg"))
         dismiss(animated: true, completion: nil)
     }
@@ -142,15 +149,15 @@ final class DrawingViewController: UIViewController {
 
     private func adjustExtremes(for point: CGPoint) {
         if point.x < leftTopPoint.x {
-            leftTopPoint.x = point.x - brushWidth - extraSpace
+            leftTopPoint.x = point.x - 2 * brushWidth
         } else if point.x > rightBottomPoint.x {
-            rightBottomPoint.x = point.x + brushWidth + extraSpace
+            rightBottomPoint.x = point.x + 2 * brushWidth
         }
 
         if point.y < leftTopPoint.y {
-            leftTopPoint.y = point.y - brushWidth - extraSpace
+            leftTopPoint.y = point.y - 2 * brushWidth
         } else if point.y > rightBottomPoint.y {
-            rightBottomPoint.y = point.y + brushWidth + extraSpace
+            rightBottomPoint.y = point.y + 2 * brushWidth
         }
     }
 
