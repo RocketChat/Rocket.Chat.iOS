@@ -14,6 +14,8 @@ class SAMLViewController: UIViewController {
     var issuerUrl: URL!
     var provider: String = ""
 
+    var completed: Bool = false
+
     var success: ((String) -> Void)?
     var failure: (() -> Void)?
 
@@ -54,6 +56,14 @@ class SAMLViewController: UIViewController {
         let req = URLRequest(url: url)
         webView.load(req)
     }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        if !completed {
+            failure?()
+        }
+    }
 }
 
 extension SAMLViewController: WKNavigationDelegate {
@@ -67,6 +77,7 @@ extension SAMLViewController: WKNavigationDelegate {
         guard let url = url, isCallback(url: url) else { return false }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + 3) { [weak self] in
+            self?.completed = true
             self?.success?(self?.credentialToken ?? "")
             self?.close(animated: true)
         }
