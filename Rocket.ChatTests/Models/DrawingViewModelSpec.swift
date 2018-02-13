@@ -21,4 +21,3 @@ class DrawingViewModelSpec: XCTestCase {
         XCTAssertNotNil(model.errorMessage)
     }
 }
-
