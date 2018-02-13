@@ -28,7 +28,15 @@ extension LoginService: ModelMappeable {
         loginStyle = values["loginStyle"].string
         buttonColor = values["buttonColor"].string
 
+        // CAS
+
         loginUrl = values["login_url"].string
+
+        // SAML
+
+        entryPoint = values["entryPoint"].string
+        issuer = values["issuer"].string
+        provider = values["clientConfig"]["provider"].string
 
         switch type {
         case .github: mapGitHub()

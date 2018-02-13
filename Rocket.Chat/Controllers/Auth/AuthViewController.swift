@@ -394,17 +394,22 @@ extension AuthViewController {
         }
 
         if loginService.type == .cas {
+            presentCASViewController(for: loginService)
+        }
+
+        if loginService.type == .saml {
             guard
-                let loginUrlString = loginService.loginUrl,
-                let loginUrl = URL(string: loginUrlString),
-                let host = serverURL.host,
-                let callbackUrl = URL(string: "https://\(host)/_cas/\(String.random(17))")
+                let entryPointUrlString = loginService.entryPoint,
+                let issuerUrlString = loginService.issuer,
+                let entryPointUrl = URL(string: entryPointUrlString),
+                let issuerUrl = URL(string: issuerUrlString),
+                let provider = loginService.provider
             else {
                 return
             }
 
-            let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
-                AuthManager.auth(casCredentialToken: $0, completion: self.handleAuthenticationResponse)
+            let controller = SAMLViewController(issuerUrl: issuerUrl, entryPointUrl: entryPointUrl, provider: provider, success: {
+                AuthManager.auth(samlCredentialToken: $0, completion: self.handleAuthenticationResponse)
             }, failure: { [weak self] in
                 self?.stopLoading()
             })
@@ -429,6 +434,29 @@ extension AuthViewController {
 
             self?.stopLoading()
         })
+    }
+
+    func presentCASViewController(for loginService: LoginService) {
+        guard
+            let loginUrlString = loginService.loginUrl,
+            let loginUrl = URL(string: loginUrlString),
+            let host = serverURL.host,
+            let callbackUrl = URL(string: "https://\(host)/_cas/\(String.random(17))")
+        else {
+            return
+        }
+
+        let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
+            AuthManager.auth(casCredentialToken: $0, completion: self.handleAuthenticationResponse)
+        }, failure: { [weak self] in
+            self?.stopLoading()
+        })
+
+        self.startLoading()
+
+        navigationController?.pushViewController(controller, animated: true)
+
+        return
     }
 
     func addOAuthButton(for loginService: LoginService) {
