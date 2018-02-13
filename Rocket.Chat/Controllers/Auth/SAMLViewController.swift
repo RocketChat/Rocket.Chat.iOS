@@ -10,8 +10,7 @@ import UIKit
 import WebKit
 
 class SAMLViewController: UIViewController {
-    var entryPointUrl: URL!
-    var issuerUrl: URL!
+    var serverUrl: URL!
     var provider: String = ""
 
     var completed: Bool = false
@@ -21,10 +20,9 @@ class SAMLViewController: UIViewController {
 
     let credentialToken = String.random(17)
 
-    convenience init(issuerUrl: URL, entryPointUrl: URL, provider: String, success: @escaping (String) -> Void, failure: @escaping () -> Void) {
+    convenience init(serverUrl: URL, provider: String, success: @escaping (String) -> Void, failure: @escaping () -> Void) {
         self.init()
-        self.entryPointUrl = entryPointUrl
-        self.issuerUrl = issuerUrl
+        self.serverUrl = serverUrl
         self.provider = provider
         self.success = success
         self.failure = failure
@@ -51,7 +49,12 @@ class SAMLViewController: UIViewController {
     }()
 
     override func viewDidLoad() {
-        guard let url = URL(string: "\(issuerUrl.absoluteString)/_saml/authorize/\(provider)/\(credentialToken)") else { return }
+        guard
+            let url = URL(string: "\(serverUrl.absoluteString)/_saml/authorize/\(provider)/\(credentialToken)")
+        else {
+            failure?()
+            return
+        }
 
         let req = URLRequest(url: url)
         webView.load(req)
@@ -68,7 +71,7 @@ class SAMLViewController: UIViewController {
 
 extension SAMLViewController: WKNavigationDelegate {
     func isCallback(url: URL) -> Bool {
-        return url.host == issuerUrl?.host && url.path == "/_saml/validate/\(provider)"
+        return url.host == serverUrl.host && url.path == "/_saml/validate/\(provider)"
     }
 
     @discardableResult
