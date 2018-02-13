@@ -300,6 +300,7 @@
 		80A63C551F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */; };
 		80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C561F71D2E400FE5AC4 /* APISpec.swift */; };
 		80A97F012006293D00A2774C /* EmojiSearcherSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */; };
+		80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
 		80C7DD5E1FF46B8000E6647C /* EmojiPicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* EmojiPicker.strings */; };
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
@@ -677,6 +678,7 @@
 		80A63C541F71BF3A00FE5AC4 /* UserInfoRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoRequestSpec.swift; sourceTree = "<group>"; };
 		80A63C561F71D2E400FE5AC4 /* APISpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISpec.swift; sourceTree = "<group>"; };
 		80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearcherSpec.swift; sourceTree = "<group>"; };
+		80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SAMLViewController.swift; path = Controllers/Auth/SAMLViewController.swift; sourceTree = "<group>"; };
 		80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthViewControllerSpec.swift; path = Controllers/OAuthViewControllerSpec.swift; sourceTree = "<group>"; };
 		80C7DD5F1FF46B8000E6647C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
 		80C7DD611FF46B8300E6647C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/EmojiPicker.strings"; sourceTree = "<group>"; };
@@ -992,6 +994,7 @@
 				412719431E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift */,
 				80113DF71F98330B0048F2C2 /* OAuthViewController.swift */,
 				80D955C1202154A300E3F281 /* CASViewController.swift */,
+				80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */,
 				412719451E6B403700461FEE /* RegisterUsernameViewController.swift */,
 				41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */,
 			);
@@ -2522,6 +2525,7 @@
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* SubscriptionCreateRequest.swift in Sources */,
+				80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
