@@ -991,15 +991,16 @@ extension ChatViewController {
     fileprivate func updateMessageSendingPermission() {
         guard
             let subscription = subscription,
-            let currentUser = AuthManager.currentUser()
+            let currentUser = AuthManager.currentUser(),
+            let username = currentUser.username
         else {
             allowMessageSending()
             return
         }
 
-        if subscription.roomReadOnly && subscription.roomOwner != currentUser {
+        if subscription.roomReadOnly && subscription.roomOwner != currentUser && !currentUser.hasPermission(.postReadOnly) {
             blockMessageSending(reason: localized("chat.read_only"))
-        } else if let username = currentUser.username, subscription.roomMuted.contains(username) {
+        } else if subscription.roomMuted.contains(username) {
             blockMessageSending(reason: localized("chat.muted"))
         } else {
             allowMessageSending()
