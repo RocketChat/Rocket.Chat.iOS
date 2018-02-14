@@ -368,7 +368,7 @@ extension AuthManager {
             "msg": "method",
             "method": "sendForgotPasswordEmail",
             "params": [email]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
