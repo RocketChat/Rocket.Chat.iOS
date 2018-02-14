@@ -14,10 +14,10 @@ import Eureka
 final class SettingsViewController: FormViewController {
 
     private let viewModel = SettingsViewModel()
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         form +++ Section()
             <<< ButtonRow("profile") {
                 $0.title = viewModel.profile
@@ -74,7 +74,7 @@ final class SettingsViewController: FormViewController {
         controller.setToRecipients([viewModel.supportEmail])
         controller.setSubject(viewModel.supportEmailSubject)
         controller.setMessageBody(viewModel.supportEmailBody, isHTML: true)
-        
+
         present(controller, animated: true)
     }
 }

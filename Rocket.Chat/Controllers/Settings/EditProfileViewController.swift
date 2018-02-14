@@ -12,12 +12,12 @@ import GenericPasswordRow
 import ViewRow
 
 public class EditProfileViewController: FormViewController {
-    
+
     var user: User?
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         let meRequest = UserMeRequest()
         API.shared.fetch(meRequest, { result in
             print(result?.mee)
@@ -26,23 +26,21 @@ public class EditProfileViewController: FormViewController {
                 self.buildForm()
             }
 //            performSelector(onMainThread: self.buildForm, with: nil, waitUntilDone: true)
-            
         })
-
     }
+
     func buildForm() {
         guard let user = user else { return }
-        
+
         form +++ Section()
             // MARK: Edit Profile
             <<< ViewRow<UIView>()
                 .cellSetup { (cell, _) in
-                    
                     cell.view = UIView()
                     cell.height = { return CGFloat(160) }
                     guard let avatarContainerView = cell.view else { return }
                     avatarContainerView.frame.size = CGSize(width: 320, height: 160)
-                    
+
                     if let avatarView = AvatarView.instantiateFromNib() {
                         avatarView.frame = CGRect(
                             x: (320 / 2) - 75,
@@ -55,9 +53,10 @@ public class EditProfileViewController: FormViewController {
                         avatarView.layer.masksToBounds = true
                         avatarContainerView.addSubview(avatarView)
                     }
+
                     cell.contentView.addSubview(avatarContainerView)
                 }
-            
+
             <<< TextRow("name") {
                 $0.title = "Name"
                 $0.add(rule: RuleRequired())
@@ -73,7 +72,7 @@ public class EditProfileViewController: FormViewController {
                 $0.validationOptions = .validatesOnChangeAfterBlurred
                 // Validation on leave
             }
-        
+
             <<< TextRow("email") {
                 $0.title = "Email"
                 $0.add(rule: RuleRequired())
@@ -102,26 +101,26 @@ public class EditProfileViewController: FormViewController {
                     }
                 }
             }
-            
+
             <<< ButtonRow("save_profile") {
                 $0.title = "Save Profile"
                 $0.onCellSelection(self.saveProfile)
             }
-            
+
             // MARK: Edit Password
             +++ Section("Password")
-            
+
             <<< GenericPasswordRow("password") {
                 $0.placeholder = "Create a password"
                 // Validation with confirmation field
             }
-            
+
             <<< GenericPasswordRow("password_confirmation") {
                 $0.placeholder = "Confirm your new password"
                 // Validation with confirmation field
                 $0.add(rule: RuleEqualsToRow(form: form, tag: "password", msg: "Confirmation does not match password."))
             }
-            
+
             <<< ButtonRow("save_password") {
                 $0.title = "Save Password"
                 $0.disabled = Condition.function(["password", "password_confirmation"], { form in
@@ -132,7 +131,7 @@ public class EditProfileViewController: FormViewController {
                 $0.onCellSelection(self.savePassword)
             }
     }
-    
+
     func saveProfile(cell: ButtonCellOf<String>, row: ButtonRow) {
         let validationErrors = form.validate()
         if validationErrors.isEmpty {
@@ -166,7 +165,6 @@ public class EditProfileViewController: FormViewController {
                         self.present(saveErrorView, animated: true)
                     }
                 }
-                
             })
         } else {
             let validationErrorView = UIAlertController(title: "Validation Error", message: validationErrors.first?.msg, preferredStyle: .alert)
@@ -175,15 +173,13 @@ public class EditProfileViewController: FormViewController {
             present(validationErrorView, animated: true)
         }
     }
-    
+
     func savePassword(cell: ButtonCellOf<String>, row: ButtonRow) {
         let validationErrors = form.validate()
         if validationErrors.isEmpty {
-            
             guard let password = (form.rowBy(tag: "password") as! GenericPasswordRow).value else {
                 return
             }
-            
             let selectedIndex = DatabaseManager.selectedIndex
             guard let servers = DatabaseManager.servers, let userId = servers[selectedIndex][ServerPersistKeys.userId] else { return }
             let updateRequest = UserPasswordUpdateRequest(userId: userId, password: password)
@@ -207,7 +203,6 @@ public class EditProfileViewController: FormViewController {
                         self.present(saveErrorView, animated: true)
                     }
                 }
-                
             })
         } else {
             let validationErrorView = UIAlertController(title: "Validation Error", message: validationErrors.first?.msg, preferredStyle: .alert)

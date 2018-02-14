@@ -18,33 +18,33 @@ extension APIResult where T == UserMeRequest {
     var mee: JSON? {
         return raw
     }
-    
+
     var user: User? {
-        let u = User()
-        u.name = name
-        u.username = username
-        
+        let updatingUser = User()
+        updatingUser.name = name
+        updatingUser.username = username
+
         guard let emails = emails else { return u }
         for dict in emails {
             let email = Email(value: ["email": dict.dictionaryValue["address"]?.stringValue, "verified": dict.dictionaryValue["verified"]?.intValue])
-            u.emails.append(email)
+            updatingUser.emails.append(email)
         }
-        
-        return u
+
+        return updatingUser
     }
-    
+
     var id: String? {
         return mee?["_id"].string
     }
-    
+
     var name: String? {
         return mee?["name"].string
     }
-    
+
     var username: String? {
         return mee?["username"].string
     }
-    
+
     var emails: [JSON]? {
         return mee?["emails"].array
     }
