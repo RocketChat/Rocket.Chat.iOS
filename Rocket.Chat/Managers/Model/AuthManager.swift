@@ -326,7 +326,7 @@ extension AuthManager {
     static func auth(credentials: OAuthCredentials, completion: @escaping MessageCompletion) {
         let params = [
             "oauth": [
-                "credentialToken": credentials.token ?? "",
+                "credentialToken": credentials.token,
                 "credentialSecret": credentials.secret ?? ""
             ] as [String: Any]
         ]
