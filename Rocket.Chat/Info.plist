@@ -17,7 +17,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.8.0</string>
+	<string>2.0.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
 	<key>CFBundleURLTypes</key>
@@ -27,12 +27,13 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
+				<string>rocketchat</string>
 				<string>com.googleusercontent.apps.662030055877-9qc3lqsbgif4k1ktl89dqeaec3m163i4</string>
 			</array>
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>132</string>
+	<string>141</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
@@ -57,6 +58,8 @@
 	<true/>
 	<key>NSAppTransportSecurity</key>
 	<dict>
+		<key>NSAllowsArbitraryLoadsInWebContent</key>
+		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
 			<key>rocket.chat</key>
@@ -72,6 +75,8 @@
 	<string>To take photos and record videos</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>To record and upload audio and videos</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>To save images to your library</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>To upload photos from your library</string>
 	<key>RC_MIN_SERVER_VERSION</key>
@@ -103,5 +108,194 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>CFBundleIcons</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon-20</string>
+				<string>AppIcon-29</string>
+				<string>AppIcon-40</string>
+				<string>AppIcon-60</string>
+				<string>AppIcon-76</string>
+				<string>AppIcon-83.5</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>Black</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Black-29</string>
+					<string>Black-40</string>
+					<string>Black-60</string>
+					<string>Black-76</string>
+					<string>Black-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Red</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Red-29</string>
+					<string>Red-40</string>
+					<string>Red-60</string>
+					<string>Red-76</string>
+					<string>Red-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>BnW</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>BnW-29</string>
+					<string>BnW-40</string>
+					<string>BnW-60</string>
+					<string>BnW-76</string>
+					<string>BnW-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Grey</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Grey-29</string>
+					<string>Grey-40</string>
+					<string>Grey-60</string>
+					<string>Grey-76</string>
+					<string>Grey-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>White</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>White-29</string>
+					<string>White-40</string>
+					<string>White-60</string>
+					<string>White-76</string>
+					<string>White-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Blue</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Blue-29</string>
+					<string>Blue-40</string>
+					<string>Blue-60</string>
+					<string>Blue-76</string>
+					<string>Blue-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
+	<key>CFBundleIcons~ipad</key>
+	<dict>
+		<key>CFBundlePrimaryIcon</key>
+		<dict>
+			<key>CFBundleIconFiles</key>
+			<array>
+				<string>AppIcon-20</string>
+				<string>AppIcon-29</string>
+				<string>AppIcon-40</string>
+				<string>AppIcon-76</string>
+				<string>AppIcon-83.5</string>
+			</array>
+			<key>UIPrerenderedIcon</key>
+			<false/>
+		</dict>
+		<key>CFBundleAlternateIcons</key>
+		<dict>
+			<key>Black</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Black-29</string>
+					<string>Black-40</string>
+					<string>Black-76</string>
+					<string>Black-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Red</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Red-29</string>
+					<string>Red-40</string>
+					<string>Red-76</string>
+					<string>Red-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>BnW</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>BnW-29</string>
+					<string>BnW-40</string>
+					<string>BnW-76</string>
+					<string>BnW-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Grey</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Grey-29</string>
+					<string>Grey-40</string>
+					<string>Grey-76</string>
+					<string>Grey-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>White</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>White-29</string>
+					<string>White-40</string>
+					<string>White-76</string>
+					<string>White-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+			<key>Blue</key>
+			<dict>
+				<key>CFBundleIconFiles</key>
+				<array>
+					<string>Blue-29</string>
+					<string>Blue-40</string>
+					<string>Blue-76</string>
+					<string>Blue-83.5</string>
+				</array>
+				<key>UIPrerenderedIcon</key>
+				<false/>
+			</dict>
+		</dict>
+	</dict>
 </dict>
 </plist>

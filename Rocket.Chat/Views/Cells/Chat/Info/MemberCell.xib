@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="253" height="53"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Gpp-Mo-P08" id="JEZ-6W-A0m">
-                <rect key="frame" x="0.0" y="0.0" width="253" height="52.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="253" height="53"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S39-gJ-qtV" userLabel="StatusView">
@@ -28,7 +28,7 @@
                         </constraints>
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vQw-Lj-ju1" userLabel="NameLabel">
-                        <rect key="frame" x="67" y="18" width="170" height="18"/>
+                        <rect key="frame" x="67" y="18" width="162" height="18"/>
                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                         <color key="textColor" red="0.1843137255" green="0.20392156859999999" blue="0.16134180240000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
@@ -52,11 +52,12 @@
                     <constraint firstItem="vQw-Lj-ju1" firstAttribute="leading" secondItem="QCs-d6-xj4" secondAttribute="trailing" constant="8" id="eZD-nV-aQF"/>
                 </constraints>
             </tableViewCellContentView>
-            <inset key="separatorInset" minX="24" minY="0.0" maxX="0.0" maxY="0.0"/>
+            <inset key="separatorInset" minX="59" minY="0.0" maxX="0.0" maxY="0.0"/>
             <connections>
                 <outlet property="avatarViewContainer" destination="QCs-d6-xj4" id="EZe-g6-4fQ"/>
                 <outlet property="nameLabel" destination="vQw-Lj-ju1" id="vV9-SJ-Evs"/>
                 <outlet property="statusView" destination="S39-gJ-qtV" id="sy7-7C-SCX"/>
+                <outlet property="statusViewWidthConstraint" destination="Sxo-VE-pM9" id="luK-q0-4II"/>
             </connections>
             <point key="canvasLocation" x="-158.5" y="55.5"/>
         </tableViewCell>

@@ -19,10 +19,12 @@ extension Message {
     static func testInstance() -> Message {
         let message = Message()
         message.user = User.testInstance()
+        message.rid = "message-rid"
         message.text = "message-text"
         message.subscription = Subscription.testInstance()
         message.identifier = "message-identifier"
         message.subscription.type = .channel
+        message.createdAt = Date()
         return message
     }
 

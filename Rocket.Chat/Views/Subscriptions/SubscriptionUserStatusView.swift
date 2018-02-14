@@ -45,6 +45,32 @@ final class SubscriptionUserStatusView: UIView {
         }
     }
 
+    @IBOutlet weak var adminView: UIView!
+    @IBOutlet weak var adminConstraint: NSLayoutConstraint! {
+        didSet {
+            adminConstraint.constant = showAdmin ? 44 : 0
+        }
+    }
+
+    var showAdmin: Bool = false {
+        didSet {
+            adminConstraint?.constant = showAdmin ? 44 : 0
+            adminView.isHidden = !showAdmin
+        }
+    }
+
+    @IBOutlet weak var labelAdmin: UILabel! {
+        didSet {
+            labelAdmin.text = localized("user_menu.admin")
+        }
+    }
+
+    @IBOutlet weak var imageViewAdmin: UIImageView! {
+        didSet {
+            imageViewAdmin.image = imageViewAdmin.image?.imageWithTint(.RCLightBlue())
+        }
+    }
+
     @IBOutlet weak var buttonSettings: UIView!
     @IBOutlet weak var labelSettings: UILabel! {
         didSet {
@@ -54,7 +80,8 @@ final class SubscriptionUserStatusView: UIView {
 
     @IBOutlet weak var imageViewSettings: UIImageView! {
         didSet {
-            imageViewSettings.image = imageViewSettings.image?.imageWithTint(.RCLightBlue())
+            imageViewSettings.image = imageViewSettings.image?.withRenderingMode(.alwaysTemplate)
+            imageViewSettings.tintColor = .RCLightBlue()
         }
     }
 
@@ -67,7 +94,8 @@ final class SubscriptionUserStatusView: UIView {
 
     @IBOutlet weak var imageViewLogout: UIImageView! {
         didSet {
-            imageViewLogout.image = imageViewLogout.image?.imageWithTint(.RCLightBlue())
+            imageViewLogout.image = imageViewLogout.image?.withRenderingMode(.alwaysTemplate)
+            imageViewLogout.tintColor = .RCLightBlue()
         }
     }
 
@@ -97,6 +125,10 @@ final class SubscriptionUserStatusView: UIView {
         }
     }
 
+    @IBAction func buttonAdminDidPressed(_ sender: Any) {
+        openAdminPanel()
+    }
+
     @IBAction func buttonSettingsDidPressed(_ sender: Any) {
         let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
 
@@ -113,6 +145,22 @@ final class SubscriptionUserStatusView: UIView {
         // this crash ASAP. In the future we may have a centered place for all
         // database notifications.
         MainChatViewController.shared?.logout()
+    }
+
+    func openAdminPanel() {
+        guard
+            let auth = AuthManager.isAuthenticated(),
+            let baseURL = auth.settings?.siteURL,
+            let adminURL = URL(string: "\(baseURL)/admin/info?layout=embedded")
+        else {
+            return
+        }
+
+        if let controller = WebViewControllerEmbedded.instantiateFromNib() {
+            controller.url = adminURL
+            controller.navigationBar.topItem?.title = localized("user_menu.admin")
+            parentController?.present(controller, animated: true)
+        }
     }
 
 }

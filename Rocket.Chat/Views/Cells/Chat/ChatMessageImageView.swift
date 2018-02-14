@@ -14,8 +14,11 @@ protocol ChatMessageImageViewProtocol: class {
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView)
 }
 
-final class ChatMessageImageView: UIView {
-    static let defaultHeight = CGFloat(250)
+final class ChatMessageImageView: ChatMessageAttachmentView {
+    override static var defaultHeight: CGFloat {
+        return 250
+    }
+    var isLoadable = true
 
     weak var delegate: ChatMessageImageViewProtocol?
     var attachment: Attachment! {
@@ -30,6 +33,9 @@ final class ChatMessageImageView: UIView {
     }
 
     @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailTextHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fullHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var activityIndicatorImageView: UIActivityIndicatorView!
     @IBOutlet weak var imageView: FLAnimatedImageView! {
         didSet {
@@ -43,22 +49,54 @@ final class ChatMessageImageView: UIView {
         return UITapGestureRecognizer(target: self, action: #selector(didTapView))
     }()
 
+    private func getImage() -> URL? {
+        guard let imageURL = attachment.fullImageURL() else {
+            return nil
+        }
+        if imageURL.absoluteString.starts(with: "http://") {
+            isLoadable = false
+            detailText.text = ""
+            labelTitle.text = attachment.title + " (" + localized("alert.insecure_image.title") + ")"
+            imageView.contentMode = UIViewContentMode.center
+            imageView.sd_setImage(with: nil, placeholderImage: UIImage(named: "Resource Unavailable"))
+            return nil
+        }
+        labelTitle.text = attachment.title
+        detailText.text = attachment.descriptionText
+        let fullHeight = ChatMessageImageView.heightFor(withText: attachment.descriptionText)
+        fullHeightConstraint.constant = fullHeight
+        detailTextHeightConstraint.constant = fullHeight - ChatMessageImageView.defaultHeight
+        return imageURL
+    }
+
     fileprivate func updateMessageInformation() {
         let containsGesture = gestureRecognizers?.contains(tapGesture) ?? false
         if !containsGesture {
             addGestureRecognizer(tapGesture)
         }
 
-        labelTitle.text = attachment.title
+        guard let imageURL = getImage() else {
+            return
+        }
 
-        let imageURL = attachment.fullImageURL()
         activityIndicatorImageView.startAnimating()
-        imageView.sd_setImage(with: imageURL, completed: { [weak self] _, _, _, _ in
+
+        let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages]
+        imageView.sd_setImage(with: imageURL, placeholderImage: nil, options: options, completed: { [weak self] _, _, _, _ in
             self?.activityIndicatorImageView.stopAnimating()
         })
     }
 
     @objc func didTapView() {
-        delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
+        if isLoadable {
+            delegate?.openImageFromCell(attachment: attachment, thumbnail: imageView)
+        } else {
+            guard let imageURL = attachment.fullImageURL() else {
+                return
+            }
+            Ask(key: "alert.insecure_image", buttonB: localized("chat.message.open_browser"), handlerB: { _ in
+                ChatViewController.shared?.openURL(url: imageURL)
+            }).present()
+        }
     }
 }

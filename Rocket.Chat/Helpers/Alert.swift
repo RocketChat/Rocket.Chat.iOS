@@ -32,13 +32,13 @@ struct Alert {
                   message: NSLocalizedString("\(key).message", comment: ""))
     }
 
-    func present() {
+    func present(handler: ((UIAlertAction) -> Void)? = nil) {
         func present() {
             let window = UIWindow(frame: UIScreen.main.bounds)
             window.rootViewController = UIViewController()
             window.windowLevel = UIWindowLevelAlert + 1
             window.makeKeyAndVisible()
-            window.rootViewController?.alert(title: title, message: message)
+            window.rootViewController?.alert(title: title, message: message, handler: handler)
         }
 
         if Thread.isMainThread {
@@ -46,6 +46,14 @@ struct Alert {
         } else {
             DispatchQueue.main.async(execute: present)
         }
+    }
+}
+
+// MARK: Defaults
+
+extension Alert {
+    static var defaultError: Alert {
+        return Alert(key: "error.socket.default_error")
     }
 }
 

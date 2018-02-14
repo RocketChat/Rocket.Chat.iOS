@@ -43,6 +43,16 @@ class SettingsViewModelSpec: XCTestCase {
         XCTAssertNotNil(model.licenseURL, "license URL is not nil")
     }
 
+    func testCanChangeAppIcon() {
+        // Since we are running tests on iOS 10.3 it should always return true
+        XCTAssertTrue(model.canChangeAppIcon, "invalid value for canChangeAppIcon")
+    }
+
+    func testNumberOfRowsInSection() {
+        XCTAssertTrue(model.numberOfRowsInSection(0) == 4, "incorrect rows number")
+        XCTAssertTrue(model.numberOfRowsInSection(1) == 1, "incorrect rows number")
+    }
+
     func testStringsOverall() {
         XCTAssertNotNil(model.title)
         XCTAssertNotEqual(model.title, "")
@@ -61,6 +71,9 @@ class SettingsViewModelSpec: XCTestCase {
 
         XCTAssertNotNil(model.supportEmailSubject)
         XCTAssertNotEqual(model.supportEmailSubject, "")
+
+        XCTAssertNotNil(model.appicon)
+        XCTAssertNotEqual(model.appicon, "")
     }
 
 }

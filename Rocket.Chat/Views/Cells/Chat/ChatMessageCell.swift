@@ -12,6 +12,7 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
     func openURL(url: URL)
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
+    func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView)
 }
 
 final class ChatMessageCell: UICollectionViewCell {
@@ -43,6 +44,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
+            avatarViewContainer.layer.cornerRadius = 4
             if let avatarView = AvatarView.instantiateFromNib() {
                 avatarView.frame = avatarViewContainer.bounds
                 avatarViewContainer.addSubview(avatarView)
@@ -60,7 +62,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUsername: UILabel!
-    @IBOutlet weak var labelText: HighlightTextView!
+    @IBOutlet weak var labelText: RCTextView!
 
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
@@ -70,6 +72,10 @@ final class ChatMessageCell: UICollectionViewCell {
             reactionsListView.reactionTapRecognized = { view, sender in
                 MessageManager.react(self.message, emoji: view.model.emoji, completion: { _ in })
             }
+
+            reactionsListView.reactionLongPressRecognized = { view, sender in
+                self.delegate?.handleLongPress(reactionListView: self.reactionsListView, reactionView: view)
+            }
         }
     }
     @IBOutlet weak var reactionsListViewConstraint: NSLayoutConstraint!
@@ -77,9 +83,11 @@ final class ChatMessageCell: UICollectionViewCell {
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
-        let height = attributedString?.heightForView(withWidth: fullWidth - 55)
 
-        var total = (height ?? 0) + (sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
+        var total = (CGFloat)(sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
+        if attributedString?.string ?? "" != "" {
+            total += (attributedString?.heightForView(withWidth: fullWidth - 55) ?? 0)
+        }
 
         for url in message.urls {
             guard url.isValid() else { continue }
@@ -94,15 +102,15 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             if type == .image {
-                total += ChatMessageImageView.defaultHeight
+                total += ChatMessageImageView.heightFor(withText: attachment.descriptionText)
             }
 
             if type == .video {
-                total += ChatMessageVideoView.defaultHeight
+                total += ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
             }
 
             if type == .audio {
-                total += ChatMessageAudioView.defaultHeight
+                total += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
             }
         }
 
@@ -128,6 +136,8 @@ final class ChatMessageCell: UICollectionViewCell {
         labelDate.text = ""
         sequential = false
         message = nil
+
+        avatarView.prepareForReuse()
 
         for view in mediaViews.arrangedSubviews {
             view.removeFromSuperview()
@@ -202,7 +212,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageImageView.defaultHeight
+                    mediaViewHeight += ChatMessageImageView.heightFor(withText: attachment.descriptionText)
                 }
 
             case .video:
@@ -212,7 +222,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageVideoView.defaultHeight
+                    mediaViewHeight += ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
                 }
 
             case .audio:
@@ -221,7 +231,7 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageAudioView.defaultHeight
+                    mediaViewHeight += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
                 }
 
             default:
@@ -233,15 +243,16 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     fileprivate func updateMessageHeader() {
-        let formatter = DateFormatter()
-        formatter.timeStyle = .short
-
         if let createdAt = message.createdAt {
-            labelDate.text = formatter.string(from: createdAt)
+            labelDate.text = RCDateFormatter.time(createdAt)
         }
 
-        avatarView.imageURL = URL(string: message.avatar)
         avatarView.user = message.user
+        avatarView.emoji = message.emoji
+
+        if let avatar = message.avatar {
+            avatarView.avatarURL = URL(string: avatar)
+        }
 
         if message.alias.count > 0 {
             labelUsername.text = message.alias
@@ -278,7 +289,8 @@ final class ChatMessageCell: UICollectionViewCell {
                 emoji: emoji,
                 imageUrl: imageUrl,
                 count: reaction.usernames.count.description,
-                highlight: highlight
+                highlight: highlight,
+                reactors: Array(reaction.usernames)
             )
         })
 
