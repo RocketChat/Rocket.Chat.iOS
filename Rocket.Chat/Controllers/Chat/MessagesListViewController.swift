@@ -90,7 +90,7 @@ class MessagesListViewData {
                     self.isLoadingMoreMessages = false
                     completion?()
                 }
-            }, errored: { [weak self] _ in
+            }, errored: { _ in
                 // TODO: Handle error
             })
         }
@@ -208,7 +208,7 @@ extension MessagesListViewController: UICollectionViewDataSource {
 
         if let date = cellData.date,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ChatMessageDaySeparator.identifier, for: indexPath) as? ChatMessageDaySeparator {
-            cell.labelTitle.text = date.formatted("MMM dd, YYYY")
+            cell.labelTitle.text = RCDateFormatter.date(date)
             return cell
         }
 

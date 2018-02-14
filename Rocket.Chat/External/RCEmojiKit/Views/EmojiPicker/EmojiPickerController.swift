@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmojiPickerController: UIViewController {
+class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
 
     var emojiPicked: ((String) -> Void)?
     var customEmojis: [Emoji] = []
@@ -48,17 +48,19 @@ class EmojiPickerController: UIViewController {
             )
         )
 
-        if self.navigationController?.topViewController == self {
-            navigationController?.navigationBar.topItem?.title = ""
-        }
-
-        title = NSLocalizedString("controller.title", tableName: "EmojiPicker", bundle: Bundle.main, value: "", comment: "")
+        title = localized("emojipicker.title")
     }
 
     override func viewWillAppear(_ animated: Bool) {
         let center = NotificationCenter.default
         center.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
         center.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+
+        // remove title from back button
+
+        if self.navigationController?.topViewController == self {
+            navigationController?.navigationBar.topItem?.title = ""
+        }
     }
 
     override func viewWillDisappear(_ animated: Bool) {

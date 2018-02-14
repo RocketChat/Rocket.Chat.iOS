@@ -1,12 +1,12 @@
 /* 
-  EmojiPicker.strings
+  RCEmojiKit.strings
   Rocket.Chat
 
   Created by Matheus Cardoso on 12/27/17.
   Copyright © 2017 Rocket.Chat. All rights reserved.
 */
 
-"controller.title" = "Choose a reaction";
+"emojipicker.title" = "Choose a reaction";
 "searchbar.placeholder" = "Search for an emoji";
 
 "categories.recent" = "FREQUENTLY USED";
@@ -19,3 +19,6 @@
 "categories.objects" = "OBJECTS";
 "categories.symbols" = "SYMBOLS";
 "categories.flags" = "FLAGS";
+
+"reactorlist.title" = "Reactions";
+

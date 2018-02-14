@@ -1,0 +1,23 @@
+/*
+  RCEmojiKit.strings
+  Rocket.Chat
+
+  Created by Matheus Cardoso on 12/27/17.
+  Copyright © 2017 Rocket.Chat. All rights reserved.
+*/
+
+"emojipicker.title" = "Choose a reaction"; //TODO
+"searchbar.placeholder" = "Search for an emoji"; //TODO
+
+"categories.recent" = "FREQUENTLY USED"; //TODO
+"categories.custom" = "CUSTOM"; //TODO
+"categories.people" = "SMILEYS & PEOPLE"; //TODO
+"categories.nature" = "ANIMALS & NATURE"; //TODO
+"categories.food" = "FOOD & DRINK"; //TODO
+"categories.activity" = "ACTIVITY"; //TODO
+"categories.travel" = "TRAVEL & PLACES"; //TODO
+"categories.objects" = "OBJECTS"; //TODO
+"categories.symbols" = "SYMBOLS"; //TODO
+"categories.flags" = "FLAGS"; //TODO
+
+"reactorlist.title" = "Reactions"; //TODO

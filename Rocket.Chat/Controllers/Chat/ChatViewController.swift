@@ -533,9 +533,10 @@ final class ChatViewController: SLKTextViewController {
 
     func registerTypingEvent(_ subscription: Subscription) {
         typingIndicatorView?.interval = 0
+        guard let user = AuthManager.currentUser() else { return Log.debug("Could not register TypingEvent") }
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username else { return }
+            guard let username = username, username != user.username else { return }
 
             let isAtBottom = self?.chatLogIsAtBottom()
 
@@ -872,7 +873,7 @@ extension ChatViewController {
             return UICollectionViewCell()
         }
 
-        cell.labelTitle.text = obj.timestamp.formatted("MMM dd, YYYY")
+        cell.labelTitle.text = RCDateFormatter.date(obj.timestamp)
         return cell
     }
 

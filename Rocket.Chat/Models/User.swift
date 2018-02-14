@@ -83,3 +83,40 @@ extension User {
     }
 
 }
+
+// MARK: Query
+
+extension User {
+    static func find(username: String, realm: Realm? = Realm.shared) -> User? {
+        guard
+            let realm = realm,
+            let user = realm.objects(User.self).filter("username = %@", username).first
+        else {
+            return nil
+        }
+
+        return user
+    }
+
+    static func fetch(username: String, realm: Realm? = Realm.shared, api: API? = API.current(), completion: @escaping (User?) -> Void) {
+        guard
+            let realm = realm,
+            let api = api
+        else {
+            return
+        }
+
+        api.fetch(UserInfoRequest(username: username), succeeded: {
+            guard let user = $0.user else { return completion(nil) }
+
+            realm.execute({ realm in
+                let user = user
+                realm.add(user, update: true)
+            })
+
+            completion(user)
+        }, errored: { _ in
+            completion(nil)
+        })
+    }
+}

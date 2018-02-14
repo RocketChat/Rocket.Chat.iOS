@@ -33,12 +33,12 @@ class CommandsClientSpec: XCTestCase, RealmTestCase {
         client.fetchCommands(realm: realm)
 
         let expectation = XCTestExpectation(description: "two commands added to realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             if realm.objects(Command.self).count == 2 {
                 expectation.fulfill()
             }
         })
-        wait(for: [expectation], timeout: 1.2)
+        wait(for: [expectation], timeout: 1.0)
     }
 
     func testRunCommand() {

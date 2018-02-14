@@ -12,9 +12,11 @@
 		14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */; };
 		14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */; };
 		15A2FD223558011BFDE03883 /* Pods_Rocket_ChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */; };
-		35E892C4201BF2C900B4BE5A /* AlertSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C3201BF2C900B4BE5A /* AlertSpec.swift */; };
+		35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */; };
 		35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD300201A57EA00B4BE5A /* Ask.swift */; };
 		35BCD303201A9FB800B4BE5A /* AskSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD302201A9FB800B4BE5A /* AskSpec.swift */; };
+		35C7D19A202B130400B4BE5A /* RCDateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35C7D199202B130400B4BE5A /* RCDateFormatter.swift */; };
+		35E892C4201BF2C900B4BE5A /* AlertSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C3201BF2C900B4BE5A /* AlertSpec.swift */; };
 		35E892C6201CDCBC00B4BE5A /* OAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C5201CDCBC00B4BE5A /* OAuthManager.swift */; };
 		35E892C8201CDD1600B4BE5A /* NewRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C7201CDD1600B4BE5A /* NewRoomViewController.swift */; };
 		35E892CA201CDD9700B4BE5A /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35E892C9201CDD9700B4BE5A /* SettingsViewModel.swift */; };
@@ -263,6 +265,11 @@
 		80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80307E3D1FD75CB1006AD9EF /* VOLocalized.swift */; };
 		80307E411FD75DC0006AD9EF /* VoiceOver.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80307E431FD75DC0006AD9EF /* VoiceOver.strings */; };
 		803782B71FB4751D00DED049 /* RealmTestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 803782B61FB4751D00DED049 /* RealmTestCase.swift */; };
+		8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */; };
+		8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C0412028C7EF007E21FA /* ReactorListView.swift */; };
+		8041C0442028C828007E21FA /* ReactorListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8041C0432028C828007E21FA /* ReactorListView.xib */; };
+		8041C04620290A48007E21FA /* RCEmojiKitLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */; };
+		8041C048202BA234007E21FA /* RCEmojiKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8041C047202BA233007E21FA /* RCEmojiKit.xcassets */; };
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
 		805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC361FFC08870033151B /* CustomEmoji.swift */; };
 		805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC381FFE54820033151B /* CustomEmojiSpec.swift */; };
@@ -272,7 +279,6 @@
 		806465EC1FED19B9001F27DB /* EmojiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 806465EB1FED19B9001F27DB /* EmojiView.xib */; };
 		806465EE1FED1AFE001F27DB /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806465ED1FED1AFE001F27DB /* EmojiView.swift */; };
 		806465F01FED21DF001F27DB /* EmojiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 806465EF1FED21DF001F27DB /* EmojiCollectionViewCell.xib */; };
-		806465F21FED81C9001F27DB /* EmojiPicker.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 806465F11FED81C9001F27DB /* EmojiPicker.xcassets */; };
 		806728FD200789F4009FE94D /* SettingsNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806728FC200789F4009FE94D /* SettingsNavigationController.swift */; };
 		806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806728FE20079734009FE94D /* DeleteMessageRequest.swift */; };
 		8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */; };
@@ -305,9 +311,10 @@
 		80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A63C561F71D2E400FE5AC4 /* APISpec.swift */; };
 		80A97F012006293D00A2774C /* EmojiSearcherSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
-		80C7DD5E1FF46B8000E6647C /* EmojiPicker.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* EmojiPicker.strings */; };
+		80C7DD5E1FF46B8000E6647C /* RCEmojiKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */; };
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
 		80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB5731F8DA55C00FC9715 /* ReplyView.swift */; };
+		80D955C2202154A300E3F281 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D955C1202154A300E3F281 /* CASViewController.swift */; };
 		80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F281FD8B2B800B70B59 /* UserExtensions.swift */; };
 		80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */; };
 		80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */; };
@@ -373,9 +380,11 @@
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MentionsTextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAttachmentView.swift; sourceTree = "<group>"; };
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		35BCD300201A57EA00B4BE5A /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
 		35BCD302201A9FB800B4BE5A /* AskSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskSpec.swift; sourceTree = "<group>"; };
+		35C7D199202B130400B4BE5A /* RCDateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCDateFormatter.swift; sourceTree = "<group>"; };
 		35D2F140200A45E800B4BE5A /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		35E892C3201BF2C900B4BE5A /* AlertSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertSpec.swift; sourceTree = "<group>"; };
 		35E892C5201CDCBC00B4BE5A /* OAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OAuthManager.swift; path = Managers/OAuthManager.swift; sourceTree = "<group>"; };
@@ -667,6 +676,11 @@
 		80307E471FD75DD2006AD9EF /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		80307E481FD75DD5006AD9EF /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		803782B61FB4751D00DED049 /* RealmTestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmTestCase.swift; sourceTree = "<group>"; };
+		8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListViewController.swift; sourceTree = "<group>"; };
+		8041C0412028C7EF007E21FA /* ReactorListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactorListView.swift; sourceTree = "<group>"; };
+		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
+		8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCEmojiKitLocalizable.swift; sourceTree = "<group>"; };
+		8041C047202BA233007E21FA /* RCEmojiKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RCEmojiKit.xcassets; sourceTree = "<group>"; };
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
 		805DEC361FFC08870033151B /* CustomEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmoji.swift; sourceTree = "<group>"; };
 		805DEC381FFE54820033151B /* CustomEmojiSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiSpec.swift; sourceTree = "<group>"; };
@@ -676,7 +690,6 @@
 		806465EB1FED19B9001F27DB /* EmojiView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiView.xib; sourceTree = "<group>"; };
 		806465ED1FED1AFE001F27DB /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
 		806465EF1FED21DF001F27DB /* EmojiCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiCollectionViewCell.xib; sourceTree = "<group>"; };
-		806465F11FED81C9001F27DB /* EmojiPicker.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = EmojiPicker.xcassets; sourceTree = "<group>"; };
 		806728FC200789F4009FE94D /* SettingsNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsNavigationController.swift; sourceTree = "<group>"; };
 		806728FE20079734009FE94D /* DeleteMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMessageRequest.swift; sourceTree = "<group>"; };
 		8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMessageRequestSpec.swift; sourceTree = "<group>"; };
@@ -709,14 +722,15 @@
 		80A63C561F71D2E400FE5AC4 /* APISpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APISpec.swift; sourceTree = "<group>"; };
 		80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiSearcherSpec.swift; sourceTree = "<group>"; };
 		80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthViewControllerSpec.swift; path = Controllers/OAuthViewControllerSpec.swift; sourceTree = "<group>"; };
-		80C7DD5F1FF46B8000E6647C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
-		80C7DD611FF46B8300E6647C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/EmojiPicker.strings"; sourceTree = "<group>"; };
-		80C7DD621FF46B8600E6647C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
-		80C7DD631FF46B8700E6647C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
-		80C7DD641FF46B8800E6647C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
-		80C7DD651FF46B8C00E6647C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/EmojiPicker.strings; sourceTree = "<group>"; };
+		80C7DD5F1FF46B8000E6647C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
+		80C7DD611FF46B8300E6647C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/RCEmojiKit.strings"; sourceTree = "<group>"; };
+		80C7DD621FF46B8600E6647C /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
+		80C7DD631FF46B8700E6647C /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
+		80C7DD641FF46B8800E6647C /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
+		80C7DD651FF46B8C00E6647C /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		80CFB5711F8D697100FC9715 /* ReplyView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReplyView.xib; sourceTree = "<group>"; };
 		80CFB5731F8DA55C00FC9715 /* ReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyView.swift; sourceTree = "<group>"; };
+		80D955C1202154A300E3F281 /* CASViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CASViewController.swift; path = Controllers/Auth/CASViewController.swift; sourceTree = "<group>"; };
 		80E99F281FD8B2B800B70B59 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
 		80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
 		80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensionsSpec.swift; sourceTree = "<group>"; };
@@ -810,7 +824,7 @@
 			children = (
 				35E892C9201CDD9700B4BE5A /* SettingsViewModel.swift */,
 				4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */,
-				806728FC200789F4009FE94D /* SettingsNavigationControlle r.swift */,
+				806728FC200789F4009FE94D /* SettingsNavigationController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -937,6 +951,17 @@
 				413FB6D11FE17DF900F010AA /* ChatLoaderCell.xib */,
 				413FB6CB1FE17DF800F010AA /* ChatMessageDaySeparator.swift */,
 				413FB6C91FE17DF800F010AA /* ChatMessageDaySeparator.xib */,
+				41D3A62F1E0805490011949D /* ChatMessageDaySeparator.swift */,
+				41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */,
+				41AC3CD81DCCA0C9002DC39A /* AutocompleteCell.swift */,
+				41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */,
+				41D894011F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift */,
+				41D894031F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib */,
+				411F7D931F5179A50080E8AD /* ChatChannelHeaderCell.swift */,
+				411F7D951F5179B50080E8AD /* ChatChannelHeaderCell.xib */,
+				41CABFF91F5047E200E0B289 /* ChatLoaderCell.swift */,
+				41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */,
+				35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -1020,6 +1045,7 @@
 				414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */,
 				412719431E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift */,
 				80113DF71F98330B0048F2C2 /* OAuthViewController.swift */,
+				80D955C1202154A300E3F281 /* CASViewController.swift */,
 				412719451E6B403700461FEE /* RegisterUsernameViewController.swift */,
 				41597DCD1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift */,
 			);
@@ -1155,6 +1181,9 @@
 				4199A9881DABCC570035F820 /* Emojione.swift */,
 				80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */,
 				80A97EFD200628A300A2774C /* Views */,
+				80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */,
+				8041C047202BA233007E21FA /* RCEmojiKit.xcassets */,
+				8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */,
 			);
 			path = RCEmojiKit;
 			sourceTree = "<group>";
@@ -1278,6 +1307,7 @@
 				413FB6C41FE17DBB00F010AA /* MessageTextFontAttributes.swift */,
 				800F38EC2019492D0005CB78 /* DeepLink.swift */,
 				35BCD300201A57EA00B4BE5A /* Ask.swift */,
+				35C7D199202B130400B4BE5A /* RCDateFormatter.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1553,8 +1583,6 @@
 				8020CCF11FEAB4C3003424F4 /* EmojiPicker.xib */,
 				8020CCEF1FEAB4A7003424F4 /* EmojiPicker.swift */,
 				8020CCF41FEAD8C9003424F4 /* EmojiPickerController.swift */,
-				806465F11FED81C9001F27DB /* EmojiPicker.xcassets */,
-				80C7DD601FF46B8000E6647C /* EmojiPicker.strings */,
 			);
 			path = EmojiPicker;
 			sourceTree = "<group>";
@@ -1643,6 +1671,9 @@
 				809B53111FE2F2F900833DD2 /* ReactionView.xib */,
 				809B530D1FE2EFA100833DD2 /* ReactionListView.swift */,
 				809B53131FE3294400833DD2 /* ReactionListView.xib */,
+				8041C0412028C7EF007E21FA /* ReactorListView.swift */,
+				8041C0432028C828007E21FA /* ReactorListView.xib */,
+				8041C03F2028C7A1007E21FA /* ReactorListViewController.swift */,
 			);
 			path = Reaction;
 			sourceTree = "<group>";
@@ -1981,17 +2012,19 @@
 				41833F4E1DEF16B600E54655 /* Keys.plist in Resources */,
 				4124FCC91F7A6BF9008ED4C3 /* ChannelInfoActionCell.xib in Resources */,
 				41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */,
+				8041C0442028C828007E21FA /* ReactorListView.xib in Resources */,
 				8020CCF21FEAB4C3003424F4 /* EmojiPicker.xib in Resources */,
 				80307E411FD75DC0006AD9EF /* VoiceOver.strings in Resources */,
 				897083D41F8CF08100233561 /* CheckTableViewCell.xib in Resources */,
 				412731D51DE0A55C00FC45A0 /* ChatPreviewModeView.xib in Resources */,
 				41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */,
 				809B53141FE3294400833DD2 /* ReactionListView.xib in Resources */,
+				8041C048202BA234007E21FA /* RCEmojiKit.xcassets in Resources */,
 				41865AF41FC8B25100A5E48F /* WebViewControllerEmbedded.xib in Resources */,
 				413FB6D41FE17DF900F010AA /* ChatDirectMessageHeaderCell.xib in Resources */,
 				41DCB8261DDC828200E1197F /* SubscriptionSearchMoreView.xib in Resources */,
 				4102E3AA1E532323004BAA82 /* Settings.storyboard in Resources */,
-				80C7DD5E1FF46B8000E6647C /* EmojiPicker.strings in Resources */,
+				80C7DD5E1FF46B8000E6647C /* RCEmojiKit.strings in Resources */,
 				419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */,
 				4124FCC81F7A6BF5008ED4C3 /* ChannelInfoUserCell.xib in Resources */,
 				4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */,
@@ -2001,7 +2034,6 @@
 				41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */,
 				897083D61F8CF08100233561 /* TextFieldTableViewCell.xib in Resources */,
 				41D894041F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib in Resources */,
-				806465F21FED81C9001F27DB /* EmojiPicker.xcassets in Resources */,
 				802498F31F7ACD76005477EC /* ChatMessageAudioView.xib in Resources */,
 				41EB22361E5F056600AA3AE7 /* Localizable.strings in Resources */,
 				41E2F9FF1D414DE800238DFD /* Chat.storyboard in Resources */,
@@ -2111,7 +2143,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "sh \"${SRCROOT}/Scripts/swiftlint.sh\"";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n    \"${PODS_ROOT}/SwiftLint/swiftlint\"\nfi";
 		};
 		D88FD9F92178058BA7FF2938 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2357,6 +2389,7 @@
 				8013F86B1FD6B59A00EE1A4E /* Version.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
+				35C7D19A202B130400B4BE5A /* RCDateFormatter.swift in Sources */,
 				800FCD501F728EC800D9A692 /* MemberCell.swift in Sources */,
 				77CCB6BE1F8D0597004BBF67 /* DictionaryExtensions.swift in Sources */,
 				41BD37D91E290D8600CBC4C2 /* ModelMappeable.swift in Sources */,
@@ -2380,6 +2413,7 @@
 				805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */,
 				35E892C8201CDD1600B4BE5A /* NewRoomViewController.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
+				8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */,
 				41DC7A1B1D38454500896FC0 /* Message.swift in Sources */,
 				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
@@ -2457,6 +2491,7 @@
 				412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */,
 				413FB6E11FE17EB700F010AA /* SubscriptionsTitleView.swift in Sources */,
 				8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */,
+				80D955C2202154A300E3F281 /* CASViewController.swift in Sources */,
 				8013F8871FD6B76600EE1A4E /* RunCommandRequest.swift in Sources */,
 				41DAE93C1D318E280098E068 /* SubscriptionManager.swift in Sources */,
 				413FB6B91FE17D5E00F010AA /* MessageExtensions.swift in Sources */,
@@ -2465,6 +2500,7 @@
 				41D8EC941F78151A00764B36 /* ChannelActionsViewController.swift in Sources */,
 				D10E9C1E1F643474007F1796 /* ChannelModelMapping.swift in Sources */,
 				4101BF011F8D0A1700F67E89 /* AppManager.swift in Sources */,
+				8041C04620290A48007E21FA /* RCEmojiKitLocalizable.swift in Sources */,
 				414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */,
 				41EE15821E05BF9600754D45 /* ChatControllerSocketConnectionHandler.swift in Sources */,
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
@@ -2491,6 +2527,8 @@
 				800FCD3E1F72893E00D9A692 /* MembersListViewController.swift in Sources */,
 				806401351FB09F8A00990572 /* PermissionManager.swift in Sources */,
 				413FB6DD1FE17E4500F010AA /* LoaderView.swift in Sources */,
+				35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */,
+				8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */,
 				4180204F1E718E370012A092 /* ChannelInfoViewController.swift in Sources */,
 				8013F8721FD6B5B000EE1A4E /* CommandsClient.swift in Sources */,
 				4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */,
@@ -2523,6 +2561,7 @@
 				411119B61F680DB00019854B /* NetworkCoordinator.swift in Sources */,
 				800E22861F8507E400DA84F1 /* SubscriptionMessagesRequest.swift in Sources */,
 				41494B921D63C6280004F369 /* UIImageExtension.swift in Sources */,
+				35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */,
 				80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */,
 				41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */,
 				41B554C71FBF0F9D000510B7 /* WindowManager.swift in Sources */,
@@ -2710,7 +2749,7 @@
 			name = VoiceOver.strings;
 			sourceTree = "<group>";
 		};
-		80C7DD601FF46B8000E6647C /* EmojiPicker.strings */ = {
+		80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
 				80C7DD5F1FF46B8000E6647C /* en */,
@@ -2720,7 +2759,7 @@
 				80C7DD641FF46B8800E6647C /* pl */,
 				80C7DD651FF46B8C00E6647C /* fr */,
 			);
-			name = EmojiPicker.strings;
+			name = RCEmojiKit.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
