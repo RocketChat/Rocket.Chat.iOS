@@ -40,6 +40,7 @@ def shared_pods
   pod 'GoogleSignIn'
 
   # Debugging
+  pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
 end
 
