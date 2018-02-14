@@ -29,6 +29,7 @@ class Attachment: BaseModel {
 
     @objc dynamic var collapsed: Bool = false
     @objc dynamic var text: String?
+    @objc dynamic var descriptionText: String?
     @objc dynamic var thumbURL: String?
     @objc dynamic var color: String?
 

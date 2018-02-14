@@ -17,8 +17,6 @@ final class PushManager {
     static let kDeviceTokenKey = "deviceToken"
     static let kPushIdentifierKey = "pushIdentifier"
 
-    static var lastNotificationRoomId: String?
-
     static func updatePushToken() {
         guard let deviceToken = getDeviceToken() else { return }
         guard let userIdentifier = AuthManager.isAuthenticated()?.userId else { return }
@@ -101,7 +99,7 @@ extension UNNotificationAction {
     static var reply: UNNotificationAction {
         return UNTextInputNotificationAction(
             identifier: "REPLY",
-            title: "Reply",
+            title: localized("notifications.action.reply"),
             options: .authenticationRequired
         )
     }
@@ -151,7 +149,7 @@ extension PushManager {
         }
 
         // side effect: needed for Subscription.notificationSubscription()
-        lastNotificationRoomId = notification.roomId
+        AppManager.initialRoomId = notification.roomId
 
         if index != DatabaseManager.selectedIndex {
             AppManager.changeSelectedServer(index: index)
@@ -167,6 +165,8 @@ extension PushManager {
             let backgroundTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
             API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), succeeded: { _ in
                 UIApplication.shared.endBackgroundTask(backgroundTask)
+            }, errored: { _ in
+                // TODO: Handle error
             })
         }
 

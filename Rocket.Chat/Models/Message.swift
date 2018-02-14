@@ -33,9 +33,15 @@ enum MessageType: String {
     case roomUnarchived = "room-unarchived"
 
     var sequential: Bool {
-        let sequential: [MessageType] = [.text, .textAttachment]
+        let sequential: [MessageType] = [.text, .textAttachment, .messageRemoved]
 
         return sequential.contains(self)
+    }
+
+    var actionable: Bool {
+        let actionable: [MessageType] = [.text, .textAttachment, .image, .audio, .video, .url]
+
+        return actionable.contains(self)
     }
 }
 
@@ -57,7 +63,8 @@ class Message: BaseModel {
     @objc dynamic var pinned: Bool = false
 
     @objc dynamic var alias = ""
-    @objc dynamic var avatar = ""
+    @objc dynamic var avatar: String?
+    @objc dynamic var emoji: String?
 
     @objc dynamic var role = ""
 
@@ -85,6 +92,9 @@ class Message: BaseModel {
 
         return MessageType(rawValue: internalType) ?? .text
     }
+
+    // Internal
+    @objc dynamic var markedForDeletion: Bool = false
 }
 
 extension Message {

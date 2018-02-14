@@ -11,31 +11,12 @@ import RealmSwift
 
 extension ChatViewController {
     func presentActionsFor(_ message: Message, view: UIView) {
+        guard message.type.actionable else { return }
+
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.react"), style: .default, handler: { _ in
-            self.view.endEditing(true)
-
-            let controller = EmojiPickerController()
-            controller.modalPresentationStyle = .popover
-            controller.preferredContentSize = CGSize(width: 600.0, height: 400.0)
-
-            if let presenter = controller.popoverPresentationController {
-                presenter.sourceView = view
-                presenter.sourceRect = view.bounds
-            }
-
-            controller.emojiPicked = { emoji in
-                MessageManager.react(message, emoji: emoji, completion: { _ in })
-            }
-
-            controller.customEmojis = CustomEmoji.emojis()
-
-            if UIDevice.current.userInterfaceIdiom == .phone {
-                self.navigationController?.pushViewController(controller, animated: true)
-            } else {
-                self.present(controller, animated: true)
-            }
+            self.react(message: message, view: view)
         }))
 
         let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
@@ -55,15 +36,16 @@ extension ChatViewController {
             self.report(message: message)
         }))
 
-        alert.addAction(UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
-            guard let user = message.user else { return }
-
-            DispatchQueue.main.async {
-                MessageManager.blockMessagesFrom(user, completion: {
-                    self?.updateSubscriptionInfo()
-                })
-            }
-        }))
+        if AuthManager.isAuthenticated()?.canBlockMessage(message) == .allowed {
+            alert.addAction(UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
+                guard let user = message.user else { return }
+                DispatchQueue.main.async {
+                    MessageManager.blockMessagesFrom(user, completion: {
+                        self?.updateSubscriptionInfo()
+                    })
+                }
+            }))
+        }
 
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.copy"), style: .default, handler: { (_) in
             UIPasteboard.general.string = message.text
@@ -77,6 +59,19 @@ extension ChatViewController {
             self?.reply(to: message)
         }))
 
+        if  AuthManager.isAuthenticated()?.canEditMessage(message) == .allowed {
+            alert.addAction(UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
+                self.messageToEdit = message
+                self.editText(message.text)
+            }))
+        }
+
+        if AuthManager.isAuthenticated()?.canDeleteMessage(message) == .allowed {
+            alert.addAction(UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { _ in
+                self.delete(message: message)
+            }))
+        }
+
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
@@ -89,16 +84,45 @@ extension ChatViewController {
 
     // MARK: Actions
 
+    fileprivate func react(message: Message, view: UIView) {
+        self.view.endEditing(true)
+
+        let controller = EmojiPickerController()
+        controller.modalPresentationStyle = .popover
+        controller.preferredContentSize = CGSize(width: 600.0, height: 400.0)
+
+        if let presenter = controller.popoverPresentationController {
+            presenter.sourceView = view
+            presenter.sourceRect = view.bounds
+        }
+
+        controller.emojiPicked = { emoji in
+            MessageManager.react(message, emoji: emoji, completion: { _ in })
+        }
+
+        controller.customEmojis = CustomEmoji.emojis()
+
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.navigationController?.pushViewController(controller, animated: true)
+        } else {
+            self.present(controller, animated: true)
+        }
+    }
+
+    fileprivate func delete(message: Message) {
+        Ask(key: "chat.message.actions.delete.confirm", buttons: [
+            (title: localized("global.no"), handler: nil),
+            (title: localized("chat.message.actions.delete.confirm.yes"), handler: { _ in
+                API.current()?.client(MessagesClient.self).deleteMessage(message, asUser: false)
+            })
+        ], deleteOption: 1).present()
+    }
+
     fileprivate func report(message: Message) {
         MessageManager.report(message) { (_) in
-            let alert = UIAlertController(
-                title: localized("chat.message.report.success.title"),
-                message: localized("chat.message.report.success.message"),
-                preferredStyle: .alert
-            )
-
-            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            Alert(
+                key: "chat.message.report.success.title"
+            ).present()
         }
     }
 }
