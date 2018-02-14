@@ -40,7 +40,9 @@ final class Auth: Object {
 
     var user: User? {
         guard let userId = userId else { return nil }
-        return Realm.shared?.object(ofType: User.self, forPrimaryKey: userId)
+
+        let realm = self.realm ?? Realm.shared
+        return realm?.object(ofType: User.self, forPrimaryKey: userId)
     }
 
     // Subscriptions
