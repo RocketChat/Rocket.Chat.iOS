@@ -1,5 +1,5 @@
 //
-//  PostMessageRequest.swift
+//  RunCommandRequest.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 11/13/17.
