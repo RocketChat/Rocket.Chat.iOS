@@ -33,6 +33,12 @@ final class SettingsViewController: UITableViewController {
         }
     }
 
+    @IBOutlet weak var labelApp: UILabel! {
+        didSet {
+            labelApp.text = viewModel.appicon
+        }
+    }
+
     override var navigationController: SettingsNavigationController? {
         return super.navigationController as? SettingsNavigationController
     }
@@ -70,6 +76,10 @@ final class SettingsViewController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
 
+    func cellAppIconDidPressed() {
+        performSegue(withIdentifier: "AppIcon", sender: nil)
+    }
+
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -78,6 +88,8 @@ final class SettingsViewController: UITableViewController {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
                 cellTermsOfServiceDidPressed()
+            } else if indexPath.row == 3 {
+                cellAppIconDidPressed()
             }
         }
 

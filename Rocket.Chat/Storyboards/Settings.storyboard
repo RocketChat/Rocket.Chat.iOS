@@ -6,6 +6,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -71,12 +72,29 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="Lk4-H3-Y3R" style="IBUITableViewCellStyleDefault" id="lxd-VJ-cx9">
+                                        <rect key="frame" x="0.0" y="167" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lxd-VJ-cx9" id="qDS-Nm-GOO">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Application Icon" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Lk4-H3-Y3R">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="" id="zht-D2-Ukj">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="oil-aF-gql" style="IBUITableViewCellStyleDefault" id="yhE-s9-IkN">
-                                        <rect key="frame" x="0.0" y="203" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="247" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="yhE-s9-IkN" id="G20-Xa-L7g">
                                             <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
@@ -108,14 +126,94 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="labelApp" destination="Lk4-H3-Y3R" id="jIL-6y-wNg"/>
                         <outlet property="labelContactUs" destination="SsA-Jk-og1" id="BZe-mM-eck"/>
                         <outlet property="labelLicense" destination="kCF-5t-4W3" id="bt0-I5-0WI"/>
                         <outlet property="labelVersion" destination="vOz-GO-Ifh" id="14X-a4-dRc"/>
+                        <segue destination="14p-5u-LKz" kind="show" identifier="AppIcon" id="5Rh-qB-fEf"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O5x-0L-i2I" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="281" y="2"/>
+        </scene>
+        <!--Change App Icon View Controller-->
+        <scene sceneID="PDd-r9-Apx">
+            <objects>
+                <viewController storyboardIdentifier="ChangeAppIconViewController" id="14p-5u-LKz" customClass="ChangeAppIconViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JKU-DW-qdz"/>
+                        <viewControllerLayoutGuide type="bottom" id="7NQ-6y-yb7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LTX-gx-DDs">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CMI-Gv-ffZ">
+                                <rect key="frame" x="32" y="117.5" width="311" height="533.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" id="Cn2-Qm-hul">
+                                    <size key="itemSize" width="60" height="60"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="changeAppIconCell" id="Dij-aQ-j2u" customClass="ChangeAppIconCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Default" translatesAutoresizingMaskIntoConstraints="NO" id="gMM-lt-jYl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                            <integer key="value" value="10"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </imageView>
+                                            </subviews>
+                                        </view>
+                                        <constraints>
+                                            <constraint firstItem="gMM-lt-jYl" firstAttribute="top" secondItem="Dij-aQ-j2u" secondAttribute="top" id="1YT-Hf-Gzl"/>
+                                            <constraint firstAttribute="bottom" secondItem="gMM-lt-jYl" secondAttribute="bottom" id="6ir-dY-gvJ"/>
+                                            <constraint firstItem="gMM-lt-jYl" firstAttribute="leading" secondItem="Dij-aQ-j2u" secondAttribute="leading" id="RTl-fu-9L1"/>
+                                            <constraint firstAttribute="trailing" secondItem="gMM-lt-jYl" secondAttribute="trailing" id="sFT-bm-04c"/>
+                                        </constraints>
+                                        <connections>
+                                            <outlet property="iconImageView" destination="gMM-lt-jYl" id="loY-Mj-oK2"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUb-00-j2C">
+                                <rect key="frame" x="32" y="80" width="311" height="21.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="CMI-Gv-ffZ" firstAttribute="leading" secondItem="LTX-gx-DDs" secondAttribute="leadingMargin" constant="16" id="330-Ry-TxB"/>
+                            <constraint firstItem="CMI-Gv-ffZ" firstAttribute="top" secondItem="WUb-00-j2C" secondAttribute="bottom" constant="16" id="SP1-Rv-8HH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WUb-00-j2C" secondAttribute="trailing" constant="16" id="ZTc-RO-O4W"/>
+                            <constraint firstItem="WUb-00-j2C" firstAttribute="top" secondItem="JKU-DW-qdz" secondAttribute="bottom" constant="16" id="aGk-Ct-znl"/>
+                            <constraint firstItem="7NQ-6y-yb7" firstAttribute="top" secondItem="CMI-Gv-ffZ" secondAttribute="bottom" constant="16" id="ayq-BJ-Z7P"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CMI-Gv-ffZ" secondAttribute="trailing" constant="16" id="cU9-Ew-wQB"/>
+                            <constraint firstItem="WUb-00-j2C" firstAttribute="leading" secondItem="LTX-gx-DDs" secondAttribute="leadingMargin" constant="16" id="xDr-Yb-e86"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="collectionView" destination="CMI-Gv-ffZ" id="jc7-8c-VJT"/>
+                        <outlet property="labelHeaderTitle" destination="WUb-00-j2C" id="Jxf-Zg-9QW"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nbz-CG-3c9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1159.2" y="2.2488755622188905"/>
         </scene>
         <!--Settings Navigation Controller-->
         <scene sceneID="TSb-WP-AcF">
@@ -134,4 +232,7 @@
             <point key="canvasLocation" x="-545" y="3"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Default" width="60" height="60"/>
+    </resources>
 </document>
