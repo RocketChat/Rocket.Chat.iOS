@@ -21,6 +21,8 @@ enum PermissionType: String {
 
     case deleteMessage = "delete-message"
     case forceDeleteMessage = "force-delete-message"
+
+    case postReadOnly = "post-readonly"
 }
 
 class Permission: BaseModel {
