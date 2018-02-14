@@ -512,9 +512,10 @@ final class ChatViewController: SLKTextViewController {
 
     func registerTypingEvent(_ subscription: Subscription) {
         typingIndicatorView?.interval = 0
+        guard let user = AuthManager.currentUser() else { return Log.debug("Could not register TypingEvent") }
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username else { return }
+            guard let username = username, username != user.username else { return }
 
             let isAtBottom = self?.chatLogIsAtBottom()
 
@@ -855,7 +856,7 @@ extension ChatViewController {
             return UICollectionViewCell()
         }
 
-        cell.labelTitle.text = obj.timestamp.formatted("MMM dd, YYYY")
+        cell.labelTitle.text = RCDateFormatter.date(obj.timestamp)
         return cell
     }
 
@@ -972,11 +973,14 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         guard let auth = AuthManager.isAuthenticated() else { return }
         guard let subscription = self.subscription else { return }
 
-        Realm.execute({ _ in
+        Realm.executeOnMainThread({ realm in
             subscription.auth = auth
+            realm.add(subscription, update: true)
         })
 
         self.subscription = subscription
+
+        updateJoinedView()
     }
 
 }
@@ -988,15 +992,16 @@ extension ChatViewController {
     fileprivate func updateMessageSendingPermission() {
         guard
             let subscription = subscription,
-            let currentUser = AuthManager.currentUser()
+            let currentUser = AuthManager.currentUser(),
+            let username = currentUser.username
         else {
             allowMessageSending()
             return
         }
 
-        if subscription.roomReadOnly && subscription.roomOwner != currentUser {
+        if subscription.roomReadOnly && subscription.roomOwner != currentUser && !currentUser.hasPermission(.postReadOnly) {
             blockMessageSending(reason: localized("chat.read_only"))
-        } else if let username = currentUser.username, subscription.roomMuted.contains(username) {
+        } else if subscription.roomMuted.contains(username) {
             blockMessageSending(reason: localized("chat.muted"))
         } else {
             allowMessageSending()

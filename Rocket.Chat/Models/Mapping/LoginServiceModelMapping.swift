@@ -28,11 +28,23 @@ extension LoginService: ModelMappeable {
         loginStyle = values["loginStyle"].string
         buttonColor = values["buttonColor"].string
 
+        // CAS
+
+        loginUrl = values["login_url"].string
+
+        // SAML
+
+        entryPoint = values["entryPoint"].string
+        issuer = values["issuer"].string
+        provider = values["clientConfig"]["provider"].string
+
         switch type {
         case .facebook: mapFacebook()
         case .gitlab: mapGitLab()
         case .github: mapGitHub()
         case .linkedin: mapLinkedIn()
+        case .saml: break
+        case .cas: break
         case .custom: break
         case .invalid: break
         }
@@ -97,5 +109,13 @@ extension LoginService: ModelMappeable {
 
         responseType = "code"
         callbackPath = "linkedin?close"
+    }
+
+    func mapCAS() {
+        service = "cas"
+
+        buttonLabelText = "CAS"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#13679a"
     }
 }

@@ -337,7 +337,7 @@ extension SubscriptionSpec: RealmTestCase {
         // if there's no last notification room id (user didn't launch app by tapping notification)
         XCTAssertEqual(Subscription.initialSubscription(auth: auth), sub1)
 
-        PushManager.lastNotificationRoomId = "sub2-rid"
+        AppManager.initialRoomId = "sub2-rid"
 
         // if there's no last notification room id (user launched app by tapping notification)
         XCTAssertEqual(Subscription.initialSubscription(auth: auth), sub2)

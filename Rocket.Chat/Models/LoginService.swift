@@ -14,6 +14,8 @@ enum LoginServiceType {
     case facebook
     case linkedin
     case gitlab
+    case saml
+    case cas
     case custom
     case invalid
 
@@ -23,6 +25,8 @@ enum LoginServiceType {
         case "github": self = .github
         case "gitlab": self = .gitlab
         case "linkedin": self = .linkedin
+        case "saml": self = .saml
+        case "cas": self = .cas
         default: self = .invalid
         }
     }
@@ -44,6 +48,29 @@ class LoginService: BaseModel {
     @objc dynamic var mergeUsers = false
     @objc dynamic var loginStyle: String?
     @objc dynamic var buttonColor: String?
+
+    // CAS
+
+    @objc dynamic var loginUrl: String?
+
+    // SAML
+
+    @objc dynamic var entryPoint: String?
+    @objc dynamic var issuer: String?
+    @objc dynamic var provider: String?
+
+    // true if LoginService has enough information to be used
+    var isValid: Bool {
+        if type == .cas && loginUrl != nil {
+            return true
+        }
+
+        if type == .saml {
+            return true
+        }
+
+        return !(serverUrl?.isEmpty ?? true)
+    }
 
     var type: LoginServiceType {
         if custom == true {
@@ -125,6 +152,12 @@ extension LoginService {
     static var linkedin: LoginService {
         let service = LoginService()
         service.mapLinkedIn()
+        return service
+    }
+
+    static var cas: LoginService {
+        let service = LoginService()
+        service.mapCAS()
         return service
     }
 }

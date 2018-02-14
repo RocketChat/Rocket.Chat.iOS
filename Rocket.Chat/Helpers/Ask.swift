@@ -62,7 +62,7 @@ struct Ask {
             window.rootViewController = UIViewController()
             window.windowLevel = UIWindowLevelAlert + 1
             window.makeKeyAndVisible()
-            window.rootViewController?.ask(title: title, message: message, buttons: buttons)
+            window.rootViewController?.ask(title: title, message: message, buttons: buttons, deleteOption: deleteOption)
         }
 
         if Thread.isMainThread {
