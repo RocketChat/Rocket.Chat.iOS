@@ -100,7 +100,7 @@ class OAuthManager {
             consumerSecret: "",
             authorizeUrl: authorizeUrl,
             accessTokenUrl: accessTokenUrl,
-            responseType: loginService.responseType ?? "token"
+            responseType: "code"
         )
     }
 }
