@@ -17,7 +17,9 @@ public class EditProfileViewController: FormViewController {
 
     public override func viewDidLoad() {
         super.viewDidLoad()
-
+    }
+    
+    public override func viewWillAppear(_ animated: Bool) {
         let meRequest = UserMeRequest()
         API.shared.fetch(meRequest, { result in
             print(result?.mee)
@@ -25,14 +27,16 @@ public class EditProfileViewController: FormViewController {
             DispatchQueue.main.async {
                 self.buildForm()
             }
-//            performSelector(onMainThread: self.buildForm, with: nil, waitUntilDone: true)
+            //            performSelector(onMainThread: self.buildForm, with: nil, waitUntilDone: true)
         })
+        
+        super.viewWillAppear(animated)
     }
 
     func buildForm() {
         guard let user = user else { return }
 
-        form +++ Section()
+        form = Section()
             // MARK: Edit Profile
             <<< ViewRow<UIView>()
                 .cellSetup { (cell, _) in
@@ -52,6 +56,8 @@ public class EditProfileViewController: FormViewController {
                         avatarView.layer.cornerRadius = 15
                         avatarView.layer.masksToBounds = true
                         avatarContainerView.addSubview(avatarView)
+                        let gesture = UITapGestureRecognizer(target: self, action: #selector(self.avatarImageTapped(_:)))
+                        avatarView.addGestureRecognizer(gesture)
                     }
 
                     cell.contentView.addSubview(avatarContainerView)
@@ -93,7 +99,7 @@ public class EditProfileViewController: FormViewController {
                 }
                 if !row.isValid {
                     for (index, validationMsg) in row.validationErrors.map({ $0.msg }).enumerated() {
-                        let labelRow = LabelRow() {
+                        let labelRow = LabelRow {
                             $0.title = validationMsg
                             $0.cell.height = { 30 }
                         }
@@ -118,7 +124,7 @@ public class EditProfileViewController: FormViewController {
             <<< GenericPasswordRow("password_confirmation") {
                 $0.placeholder = "Confirm your new password"
                 // Validation with confirmation field
-                $0.add(rule: RuleEqualsToRow(form: form, tag: "password", msg: "Confirmation does not match password."))
+                //$0.add(rule: RuleEqualsToRow(form: form, tag: "password", msg: "Confirmation does not match password."))
             }
 
             <<< ButtonRow("save_password") {
@@ -131,15 +137,32 @@ public class EditProfileViewController: FormViewController {
                 $0.onCellSelection(self.savePassword)
             }
     }
+    
+    // This function will be called when user taps on his avatar
+    @objc func avatarImageTapped(_ sender: UITapGestureRecognizer) {
+        
+    }
 
     func saveProfile(cell: ButtonCellOf<String>, row: ButtonRow) {
         let validationErrors = form.validate()
         if validationErrors.isEmpty {
+
+            // Get form values
+            guard let name = (form.rowBy(tag: "name") as? TextRow)?.value, let username = (form.rowBy(tag: "username") as? TextRow)?.value, let email = (form.rowBy(tag: "email") as? TextRow)?.value else {
+                let validationErrorView = UIAlertController(title: "Generic Error", message: "Something went wrong. Please try again.", preferredStyle: .alert)
+                let defaultAction = UIAlertAction(title: "Okay", style: .default)
+                validationErrorView.addAction(defaultAction)
+                present(validationErrorView, animated: true)
+                return
+            }
+
+            // Build User Object
             let updatedUser = User()
-            updatedUser.name = (form.rowBy(tag: "name") as! TextRow).value
-            updatedUser.username = (form.rowBy(tag: "username") as! TextRow).value
+            updatedUser.name = name
+            updatedUser.username = username
+
             let newEmail = Email()
-            newEmail.email = (form.rowBy(tag: "email") as! TextRow).value!
+            newEmail.email = email
             updatedUser.emails.append(newEmail)
 
             let selectedIndex = DatabaseManager.selectedIndex
@@ -177,7 +200,7 @@ public class EditProfileViewController: FormViewController {
     func savePassword(cell: ButtonCellOf<String>, row: ButtonRow) {
         let validationErrors = form.validate()
         if validationErrors.isEmpty {
-            guard let password = (form.rowBy(tag: "password") as! GenericPasswordRow).value else {
+            guard let password = (form.rowBy(tag: "password") as? GenericPasswordRow)?.value else {
                 return
             }
             let selectedIndex = DatabaseManager.selectedIndex

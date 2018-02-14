@@ -272,6 +272,7 @@
 		D32E28251DFD86C300D6019C /* LauncherProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28221DFD86C300D6019C /* LauncherProtocol.swift */; };
 		D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */; };
 		D3CFAFBD1E907D8900BADC0A /* ChatMessageTextViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */; };
+		E246DBF02034DA1F00B3E580 /* EditAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E246DBEF2034DA1F00B3E580 /* EditAccountViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -573,6 +574,7 @@
 		D32E28221DFD86C300D6019C /* LauncherProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LauncherProtocol.swift; sourceTree = "<group>"; };
 		D32E28231DFD86C300D6019C /* PersistencyCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistencyCoordinator.swift; sourceTree = "<group>"; };
 		D3CFAFBC1E907D8900BADC0A /* ChatMessageTextViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageTextViewModel.swift; sourceTree = "<group>"; };
+		E246DBEF2034DA1F00B3E580 /* EditAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditAccountViewController.swift; path = Controllers/Settings/EditAccountViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -617,6 +619,7 @@
 				4102E3AC1E53273E004BAA82 /* SettingsViewController.swift */,
 				925FF74D1E8EFB3E00982043 /* SettingsViewModel.swift */,
 				950F0A1E1FC637C7005A6926 /* EditProfileViewController.swift */,
+				E246DBEF2034DA1F00B3E580 /* EditAccountViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1621,7 +1624,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1704,7 +1707,7 @@
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleSignIn.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2021,6 +2024,7 @@
 				807371A01F96937100D53ADF /* LoginService.swift in Sources */,
 				802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */,
 				41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */,
+				E246DBF02034DA1F00B3E580 /* EditAccountViewController.swift in Sources */,
 				D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */,
 				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
 				412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */,

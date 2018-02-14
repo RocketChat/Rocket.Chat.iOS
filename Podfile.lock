@@ -1,9 +1,9 @@
 PODS:
-  - 1PasswordExtension (1.8.4)
-  - Crashlytics (3.9.3):
-    - Fabric (~> 1.7.2)
+  - 1PasswordExtension (1.8.5)
+  - Crashlytics (3.10.0):
+    - Fabric (~> 1.7.3)
   - Eureka (4.0.1)
-  - Fabric (1.7.2)
+  - Fabric (1.7.3)
   - FirebaseAnalytics (3.9.0):
     - FirebaseCore (~> 3.6)
     - FirebaseInstanceID (~> 1.0)
@@ -20,7 +20,7 @@ PODS:
   - Google/SignIn (3.1.0):
     - Google/Core
     - GoogleSignIn (~> 4.0)
-  - GoogleSignIn (4.1.1):
+  - GoogleSignIn (4.1.2):
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
     - GTMOAuth2 (~> 1.0)
@@ -35,28 +35,28 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.3)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
-  - GTMOAuth2 (1.1.5):
+  - GTMOAuth2 (1.1.6):
     - GTMSessionFetcher (~> 1.1)
-  - GTMSessionFetcher (1.1.12):
-    - GTMSessionFetcher/Full (= 1.1.12)
-  - GTMSessionFetcher/Core (1.1.12)
-  - GTMSessionFetcher/Full (1.1.12):
-    - GTMSessionFetcher/Core (= 1.1.12)
+  - GTMSessionFetcher (1.1.13):
+    - GTMSessionFetcher/Full (= 1.1.13)
+  - GTMSessionFetcher/Core (1.1.13)
+  - GTMSessionFetcher/Full (1.1.13):
+    - GTMSessionFetcher/Core (= 1.1.13)
   - ImageRow (3.0.0):
     - Eureka (~> 4.0)
   - MobilePlayer (1.2.0)
   - OAuthSwift (1.2.0)
   - RCMarkdownParser (3.0.4)
   - ReachabilitySwift (4.1.0)
-  - Realm (3.0.2):
-    - Realm/Headers (= 3.0.2)
-  - Realm/Headers (3.0.2)
-  - RealmSwift (3.0.2):
-    - Realm (= 3.0.2)
-  - SDWebImage (4.2.2):
-    - SDWebImage/Core (= 4.2.2)
-  - SDWebImage/Core (4.2.2)
-  - SDWebImage/GIF (4.2.2):
+  - Realm (3.1.1):
+    - Realm/Headers (= 3.1.1)
+  - Realm/Headers (3.1.1)
+  - RealmSwift (3.1.1):
+    - Realm (= 3.1.1)
+  - SDWebImage (4.3.0):
+    - SDWebImage/Core (= 4.3.0)
+  - SDWebImage/Core (4.3.0)
+  - SDWebImage/GIF (4.3.0):
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
   - semver (1.0.0)
@@ -67,7 +67,7 @@ PODS:
   - SlackTextViewController (1.9.6)
   - Starscream (2.1.1)
   - SwiftyJSON (4.0.0)
-  - ViewRow (0.2.0):
+  - ViewRow (0.3.0):
     - Eureka (>= 4.0.0)
 
 DEPENDENCIES:
@@ -119,46 +119,46 @@ CHECKOUT OPTIONS:
     :commit: 267ddbc263304534df12e2b0dfbe8343f60891ab
     :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
-    :commit: 0a225b78544a268a94aaa1d302e2116b10fd1dd4
+    :commit: 0398657e933c8c8f06831a93d2cc96610e18a4f2
     :git: https://github.com/cardoso/SimpleImageViewer.git
   SlackTextViewController:
     :commit: 944b7cc4de734638cdefdecb9c7d7846fc3ab252
     :git: https://github.com/rafaelks/SlackTextViewController.git
   ViewRow:
-    :commit: f6518ba4224e33f168b89dc30b6d8ec3ba1a8c77
+    :commit: fbfc539796f8a00102a671b338c1c3bbb39a6b89
     :git: https://github.com/EurekaCommunity/ViewRow
 
 SPEC CHECKSUMS:
-  1PasswordExtension: e775a29310c65851e5a6cec1afc349ab4e334e47
-  Crashlytics: dbb07d01876c171c5ccbdf7826410380189e452c
+  1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
+  Crashlytics: a989ef242b66605577a425733797f810bd2725eb
   Eureka: c8bd5cc07143b6f66268c208d28a246c99b41955
-  Fabric: 9cd6a848efcf1b8b07497e0b6a2e7d336353ba15
+  Fabric: bb495bb9a7a7677c6d03a1f8b83d95bc49b47e41
   FirebaseAnalytics: e5fe8486efc01bec33f6bf82e2fa9fce4b124052
   FirebaseCore: 9691ee2ade70c098d7cf92440f4303f16d83ca75
   FirebaseInstanceID: b9eedd6846fb5e1f0f7279e1deaa7a7e4cf8392e
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   GenericPasswordRow: 27a52c727c47b2e4d50c2295d1cc7d32c5883e70
   Google: 98da4b1a60ed0beb80a290387a28333406a1eb90
-  GoogleSignIn: 3fdaa34a2ba04dbd7a25d7db39aecb0da98d5bdc
+  GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
-  GTMOAuth2: be83fd28d63ae3087e7d351b1f39c1a7e24ab6e7
-  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
+  GTMSessionFetcher: 5bb1eae636127de695590f50e7d248483eb891e6
   ImageRow: 048123c296de9a6ac3998c415a6706c45ce480af
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
   RCMarkdownParser: db98166953cad4d0045d28f627d93330b36eb7ff
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
-  Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
-  RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
-  SDWebImage: 89a9d32cd520bbb46eb14e541d5109b3564af198
+  Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
+  RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
+  SDWebImage: 6da6c8bca115addc4de8613362e1b15f66333825
   semver: df3895a55a097c7a819a80e7375e95b29e136157
   SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
   SimpleImageViewer: 329a155b04fcb93c5da0e296044250ad113c3158
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
   Starscream: 142bd8ef24592d985daee9fa48c936070b85b15f
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
-  ViewRow: 14475b337be9748b12a6df33d0a160bd5bd7765c
+  ViewRow: e278428ff53da5eab18b191d3e19a16f3e299fc1
 
 PODFILE CHECKSUM: ee7c9324a1850935fc9a10fa7bd9c99e6f63a58e
 
-COCOAPODS: 1.3.1
+COCOAPODS: 1.4.0

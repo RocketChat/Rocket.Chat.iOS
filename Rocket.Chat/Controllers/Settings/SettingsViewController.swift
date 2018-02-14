@@ -25,7 +25,7 @@ final class SettingsViewController: FormViewController {
             }
             <<< ButtonRow("account") {
                 $0.title = viewModel.account
-                $0.presentationMode = .segueName(segueName: "toEditProfileView", onDismiss: nil)
+                $0.presentationMode = .segueName(segueName: "toEditAccountView", onDismiss: nil)
             }
             <<< ButtonRow("contact") {
                 $0.title = viewModel.contactus

@@ -24,7 +24,7 @@ extension APIResult where T == UserMeRequest {
         updatingUser.name = name
         updatingUser.username = username
 
-        guard let emails = emails else { return u }
+        guard let emails = emails else { return updatingUser }
         for dict in emails {
             let email = Email(value: ["email": dict.dictionaryValue["address"]?.stringValue, "verified": dict.dictionaryValue["verified"]?.intValue])
             updatingUser.emails.append(email)
