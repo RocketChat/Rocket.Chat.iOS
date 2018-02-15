@@ -74,7 +74,9 @@ final class ChatViewController: SLKTextViewController {
 
     var subscription: Subscription? {
         didSet {
+            // clean up
             subscriptionToken?.invalidate()
+            didCancelTextEditing(self)
 
             guard
                 let subscription = subscription,
@@ -320,6 +322,15 @@ final class ChatViewController: SLKTextViewController {
         showButtonScrollToBottom = false
     }
 
+    func resetMessageSending() {
+        textView.text = ""
+
+        if let subscription = subscription {
+            DraftMessageManager.update(draftMessage: "", for: subscription)
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        }
+    }
+
     // MARK: SlackTextViewController
 
     override func canPressRightButton() -> Bool {
@@ -327,17 +338,10 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
-        guard
-            let subscription = subscription,
-            let messageText = textView.text
-        else {
-            return
-        }
+        guard let messageText = textView.text else { return }
 
-        DraftMessageManager.update(draftMessage: "", for: subscription)
-        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
-        textView.text = ""
-        self.scrollToBottom()
+        resetMessageSending()
+        scrollToBottom()
 
         let replyString = self.replyString
         stopReplying()
@@ -353,14 +357,19 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didCommitTextEditing(_ sender: Any) {
-        guard let messageToEdit = messageToEdit else { return }
-        editTextMessage(message: messageToEdit, text: textView.text)
+        if let messageToEdit = messageToEdit {
+            editTextMessage(message: messageToEdit, text: textView.text)
+        }
+
+        resetMessageSending()
+        messageToEdit = nil
+
         super.didCommitTextEditing(sender)
     }
 
     override func didCancelTextEditing(_ sender: Any) {
-        super.didCancelTextEditing(sender)
         messageToEdit = nil
+        super.didCancelTextEditing(sender)
     }
 
     override func didPressLeftButton(_ sender: Any?) {
