@@ -26,7 +26,7 @@ extension Realm {
         }
     }
 
-    static func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
+    func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
         var backgroundTaskId: UIBackgroundTaskIdentifier?
 
         backgroundTaskId = UIApplication.shared.beginBackgroundTask(withName: "chat.rocket.realm.background", expirationHandler: {
@@ -34,11 +34,13 @@ extension Realm {
         })
 
         if let backgroundTaskId = backgroundTaskId {
-            DispatchQueue.global(qos: .background).async {
-                guard let realm = self.shared else { return }
+            let config = self.configuration
 
-                try? realm.write {
-                    execution(realm)
+            DispatchQueue.global(qos: .background).async {
+                if let realm = try? Realm(configuration: config) {
+                    try? realm.write {
+                        execution(realm)
+                    }
                 }
 
                 DispatchQueue.main.async {
@@ -48,6 +50,10 @@ extension Realm {
                 UIApplication.shared.endBackgroundTask(backgroundTaskId)
             }
         }
+    }
+
+    static func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
+        Realm.shared?.execute(execution, completion: completion)
     }
 
     static func executeOnMainThread(_ execution: @escaping (Realm) -> Void) {

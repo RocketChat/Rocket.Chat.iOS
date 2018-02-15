@@ -25,9 +25,7 @@ struct AuthManager {
         - returns: Current user object, if exists.
     */
     static func currentUser() -> User? {
-        guard let realm = Realm.shared else { return nil }
-        guard let auth = isAuthenticated() else { return nil }
-        return realm.object(ofType: User.self, forPrimaryKey: auth.userId)
+        return isAuthenticated()?.user
     }
 
     /**
@@ -206,6 +204,10 @@ extension AuthManager {
         }
     }
 
+    static func auth(token: String, completion: @escaping MessageCompletion) {
+        auth(params: ["resume": token], completion: completion)
+    }
+
     /**
         Method that creates an User account.
      */
@@ -222,14 +224,7 @@ extension AuthManager {
             "params": [param]
         ] as [String: Any]
 
-        SocketManager.send(object) { (response) in
-            guard !response.isError() else {
-                completion(response)
-                return
-            }
-
-            self.auth(email, password: password, completion: completion)
-        }
+        SocketManager.send(object, completion: completion)
     }
 
     /**
@@ -332,11 +327,50 @@ extension AuthManager {
         let params = [
             "oauth": [
                 "credentialToken": credentials.token,
-                "credentialSecret": credentials.secret
+                "credentialSecret": credentials.secret ?? ""
             ] as [String: Any]
         ]
 
         AuthManager.auth(params: params, completion: completion)
+    }
+
+    /**
+     This method authenticates the user with a CAS credential token
+
+     - parameter token: The credential token
+     - parameter completion: The completion block that'll be called in case
+     of success or error.
+     */
+    static func auth(casCredentialToken: String, completion: @escaping MessageCompletion) {
+        let params = [
+            "cas": [
+                "credentialToken": casCredentialToken
+            ] as [String: Any]
+        ]
+
+        AuthManager.auth(params: params, completion: completion)
+    }
+
+    static func auth(samlCredentialToken: String, completion: @escaping MessageCompletion) {
+        let params = [
+            "saml": true,
+            "credentialToken": samlCredentialToken
+        ] as [String: Any]
+
+        AuthManager.auth(params: params, completion: completion)
+    }
+
+    /**
+     Sends forgot password request for e-mail.
+     */
+    static func sendForgotPassword(email: String, completion: @escaping MessageCompletion = { _ in }) {
+        let object = [
+            "msg": "method",
+            "method": "sendForgotPasswordEmail",
+            "params": [email]
+            ] as [String: Any]
+
+        SocketManager.send(object, completion: completion)
     }
 
     /**
@@ -378,6 +412,7 @@ extension AuthManager {
                 realm.deleteAll()
             })
 
+            AuthSettingsManager.shared.clearCachedSettings()
             DatabaseManager.removeSelectedDatabase()
             completion()
         }

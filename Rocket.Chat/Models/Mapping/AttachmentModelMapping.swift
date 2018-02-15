@@ -30,12 +30,20 @@ extension Attachment: ModelMappeable {
 
         self.collapsed = values["collapsed"].bool ?? false
         self.text = values["text"].string
+        self.descriptionText = values["description"].string
         self.thumbURL = values["thumb_url"].string
         self.color = values["color"].string
 
         self.titleLinkDownload = values["title_link_download"].boolValue
 
-        self.imageURL = encode(url: values["image_url"].string)
+        if let imageURL = values["image_url"].string {
+            if imageURL.contains("https://") || imageURL.contains("http://") {
+                self.imageURL = imageURL
+            } else {
+                self.imageURL = encode(url: imageURL)
+            }
+        }
+
         self.imageType = values["image_type"].string
         self.imageSize = values["image_size"].int ?? 0
 

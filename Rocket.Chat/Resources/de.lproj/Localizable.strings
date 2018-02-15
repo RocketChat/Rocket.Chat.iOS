@@ -1,0 +1,206 @@
+// Global
+"global.ok" = "OK";
+"global.no" = "Nein";
+"global.cancel" = "Abbrechen";
+
+// Errors
+"error.socket.default_error.title" = "Oops!";
+"error.socket.default_error.message" = "Da ist wohl etwas schiefgelaufen, bitte probiere es noch einmal.";
+
+// Alerts
+"alert.connection.invalid_url.title" = "Oops!";
+"alert.connection.invalid_url.message" = "Die eingegebene URL ist ungültig. Bitte überprüfe deine Eingabe und probiere es noch einmal.";
+
+"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.socket_error.message" = "Konnte keine Verbindung zum Server herstellen!";
+
+"alert.connection.invalid_version.title" = "Oops!";
+"alert.connection.invalid_version.message" = "Der Serverversion, mit der du dich verbinden möchtest, wird nicht mehr unterstützt: %@.\n\nWir benötigen Version %@.";
+
+"alert.settings.set_mail_app.title" = "Oops!";
+"alert.settings.set_mail_app.message" = "Es sind keine Mail Accounts konfiguriert. Bitte richte einen Mail Account ein um Emails senden zu können.";
+
+"alert.feature.wip.title" = "Oops!";
+"alert.feature.wip.message" = "Entschuldigung, aber diese Funktion ist noch nicht verfügbar.";
+
+"alert.insecure_image.title" = "Unsichere Quelle";
+"alert.insecure_image.message" = "Die Bildquelle is unsicher und wurde daher nicht geladen. Nur SSL Quellen sind erlaubt.";
+
+"alert.socket_error.invalid_user.title" = "Sitzung abgelaufen";
+"alert.socket_error.invalid_user.message" = "Ihre Sitzung ist abgelaufen, bitte loggen Sie sich erneut ein.";
+
+"alert.login_service_error.title" = "Authentifizierungsproblem";
+"alert.login_service_error.message" = "Authentifizierung konnte mit diesem Dienst nicht durchgeführt werden. Bitte versuche es erneut.";
+
+"alert.authorization_error.title" = "Authentifizierungsproblem";
+"alert.authorization_error.create_channel.description" = "Du kannst keine Kanäle erstellen";
+
+"alert.unsupported_feature.title" = "Funktion nicht unterstützt";
+"alert.unsupported_feature.message" = "Die Serverversion ist: %@. Diese Funktion wird nur in Version %@ und höher unterstützt.";
+
+"alert.push_token_error.title" = "Warnung";
+"alert.push_token_error.message" = "Es kann aufgrund eines Problems mit Servern älter als 0.60.0 sein, dass trotzdem Push Nachrichten von diesem Server zugestellt werden.";
+
+"alert.upload_error.title" = "Fehler beim Hochladen";
+"alert.upload_error.message" = "Irgendetwas ist beim Hochladen der Datei schiefgelaufen. Bitte erneut versuchen";
+
+"alert.upload_dialog.title" = "Datei hochladen";
+"alert.upload_dialog.placeholder.title" = "Titel";
+"alert.upload_dialog.placeholder.description" = "Beschreibung";
+"alert.upload_dialog.action.upload" = "Hochladen";
+
+"alert.email_verification.title" = "E-Mail Bestätigung";
+"alert.email_verification.message" = "Wir haben dir eine E-Mail zur Bestätigung deiner Registrierung geschickt. Solltest du keine Mail erhalten haben versuche es noch einmal.";
+
+// Connection Redirect
+"connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
+"connection.server.redirect.alert.message" = "Es scheint, als hätte der Server die URL zu Folgender geändert:\n\n%@\n\nJetzt URL aktualisieren?";
+"connection.server.redirect.alert.confirm" = "Ja, URL aktualisieren";
+
+// Socket Connection
+"connection.offline.banner.message" = "Du bist offline. Versuche neu zu verbinden...";
+"connection.connecting.banner.message" = "Verbinde...";
+
+// Auth
+"auth.connect.button_connect" = "Verbinden";
+"auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
+"auth.connect.connecting" = "Verbindung läuft. Warte kurz!";
+
+"auth.forgot_password.title" = "Passwort vergessen?";
+"auth.forgot_password.message" = "E-Mail-Adresse eingeben";
+"auth.forgot_password.success" = "Wenn diese E-Mail-Adresse hinterlegt ist, werden Anweisungen zum Zurücksetzen des Passworts verschickt. Wenn du keine Mail bekommen hast, versuche es noch einmal.";
+
+// Subscriptions
+"subscriptions.search" = "Suche";
+"subscriptions.search_results" = "Ergebnisse";
+"subscriptions.search.load_more_results" = "Mehr Ergebnisse...";
+"subscriptions.unreads" = "Ungelesen";
+"subscriptions.favorites" = "Favoriten";
+"subscriptions.channels" = "Kanäle";
+"subscriptions.direct_messages" = "Direktnachrichten";
+
+// Servers
+"servers.add_new_team" = "Neues Team hinzufügen";
+"servers.action.connect" = "Verbinden";
+"servers.action.remove" = "Team entfernen";
+
+// User Menu
+"user_menu.online" = "Online";
+"user_menu.away" = "Abwesend";
+"user_menu.busy" = "Beschäftigt";
+"user_menu.invisible" = "Unsichtbar";
+"user_menu.admin" = "Administration";
+"user_menu.settings" = "Mein Account";
+"user_menu.logout" = "Logout";
+
+// New Room View
+"new_room.title" = "Neuer Kanal";
+"new_room.buttons.create" = "Erstellen";
+"new_room.cell.public_channel.title" = "Öffentlicher Kanal";
+"new_room.cell.public_channel.description" = "Jeder Benutzer kann einem öffentlichen Raum beitreten.";
+"new_room.cell.public_channel.description.public_only" = "Du kannst nur öffentliche Räume erstellen";
+"new_room.cell.public_channel.description.private_only" = "Du kannst nur private Räume erstellen";
+"new_room.cell.read_only.title" = "Schreibgeschützter Kanal";
+"new_room.cell.read_only.description" = "Nur Moderatoren oder Admins können in schreibgeschützten Kanälen schreiben";
+"new_room.group.channel.name" = "Name des Kanals";
+"new_room.cell.channel_name.title" = "Name des Kanals";
+"new_room.group.channel.footer" = "Der Name muss komplett in Kleinbuchstaben und kürzer als 22 Zeichen sein.";
+"new_room.group.invite_users" = "Benutzer einladen";
+"new_room.cell.invite_users.placeholder" = "Benutzernamen";
+
+// Notifications
+"notifications.action.reply" = "Antworten";
+
+// Chat
+"chat.channel_preview_view.title" = "Das ist eine Vorschau von #%@";
+"chat.channel_preview_view.join" = "Kanal beitreten";
+"chat.dm.start_conversation" = "Dies ist der Anfang deines Gesprächs mit %@";
+"chat.channel.start_conversation" = "Dies ist der Beginn der Konversation auf %@";
+"chat.read_only" = "Dieser Raum ist schreibgeschützt";
+"chat.muted" = "Du wurdest stummgeschaltet";
+"chat.edit_mode" = "Nachricht bearbeiten. Schließen um abzubrechen.";
+"chat.loading_messages" = "Nachrichten werden geladen...";
+
+// Chat Message Actions
+"chat.message.actions.react" = "Reaktion hinzufügen";
+"chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
+"chat.message.actions.report" = "Nachricht melden";
+"chat.message.actions.edit" = "Nachricht bearbeiten";
+"chat.message.actions.copy" = "Kopieren";
+"chat.message.actions.pin" = "Nachricht anheften";
+"chat.message.actions.unpin" = "Nachricht lösen";
+"chat.message.actions.quote" = "Nachricht zitieren";
+"chat.message.actions.reply" = "Nachricht beantworten";
+"chat.message.actions.delete" = "Nachricht löschen";
+"chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
+"chat.message.actions.delete.confirm.message" = "Bist du sicher, dass du diese Nachricht löschen möchtest? Sie kann dann nicht wiederhergestellt werden.";
+"chat.message.actions.delete.confirm.yes" = "Ja, löschen";
+"Send" = "Senden"; //SLKTextInputbar.m
+
+// Chat Message Report
+"chat.message.report.success.title" = "Nachricht gemeldet";
+"chat.message.report.success.message" = "Die ausgewählte Nachricht wurde erfolgreich gemeldet. Vielen Dank!";
+
+// Chat Upload
+"chat.upload.uploading_image" = "Bild wird hochgeladen";
+"chat.upload.uploading_video" = "Video wird hochgeladen";
+"chat.upload.uploading_file" = "Lade \"%@\" hoch";
+"chat.upload.take_photo" = "Foto aufnehmen";
+"chat.upload.shoot_video" = "Video aufnehmen";
+"chat.upload.choose_from_library" = "Foto & Video Mediathek";
+"chat.upload.import_file" = "Importiere Datei aus...";
+
+// Chat Download
+"chat.download.downloading_file" = "Wird heruntergeladen \"%@\"";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "Antippen zum Öffnen";
+"chat.message.open_browser" = "Im Browser öffnen";
+
+// Message Types
+"chat.message.type.room_name_changed" = "Raum umbenannt zu: %@ von %@";
+"chat.message.type.user_added_by" = "Benutzer %@ hinzugefügt von %@";
+"chat.message.type.user_removed_by" = "Benutzer %@ entfernt von %@";
+"chat.message.type.user_left" = "Hat den Kanal verlassen";
+"chat.message.type.user_joined" = "Hat den Kanal betreten";
+"chat.message.type.user_muted" = "Benutzer %@ stumm geschaltet von %@";
+"chat.message.type.user_unmuted" = "Stummschaltung von %@ wurde aufgehoben von %@";
+"chat.message.type.welcome" = "Willkommen %@";
+"chat.message.type.message_removed" = "Nachricht entfernt";
+"chat.message.type.subscription_role_added" = "%@ wurde zu %@ geändert von %@";
+"chat.message.type.subscription_role_removed" = "%@ ist nicht mehr länger %@ von %@";
+"chat.message.type.room_archived" = "Dieser Raum wurde archiviert von %@";
+"chat.message.type.room_unarchived" = "Dieser Raum wurde wiederhergestellt von %@";
+
+// Chat Information
+"chat.info.title" = "Info";
+"chat.info.item.topic" = "Thema";
+"chat.info.item.no_topic" = "Ohne Thema";
+"chat.info.item.description" = "Beschreibung";
+"chat.info.item.no_description" = "Ohne Beschreibung";
+"chat.info.item.notifications" = "Benachrichtigungen";
+"chat.info.item.members" = "Teilnehmer";
+"chat.info.item.pinned" = "Angeheftet";
+"chat.info.item.starred" = "Favorisiert";
+
+// Members List
+"chat.members.list.title" = "Mitglieder";
+
+// Messages List
+"chat.messages.list.title" = "Nachrichten";
+"chat.messages.list.empty" = "Keine Nachrichten gefunden";
+"chat.messages.pinned.list.title" = "Angeheftete Nachrichten";
+"chat.messages.starred.list.title" = "Favorisierte Nachrichten";
+
+// Settings
+"myaccount.settings.title" = "Einstellungen";
+"myaccount.settings.contactus" = "Kontaktiere uns";
+"myaccount.settings.license" = "Lizenz";
+"myaccount.settings.appicon" = "App Icon"; // TODO:
+"myaccount.settings.version" = "Version: %@ (%@)";
+
+// Change Application Icon
+"myaccount.settings.changeicon.title" = "Icon auswählen";
+"myaccount.settings.changeicon.header" = "Du kannst eines der unterstehenden Icons für die App wählen, welches auf deinem Homescreen angezeigt wird.";
+"myaccount.settings.changeicon.errortitle" = "Konnte App Icon nicht ändern";
+"myaccount.settings.changeicon.iosversion" = "Alternative App Icons werden nicht von iOS älter als 10.3 unterstützt.";

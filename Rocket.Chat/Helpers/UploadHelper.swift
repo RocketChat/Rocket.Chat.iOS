@@ -22,6 +22,7 @@ struct UploadHelper {
     static func file(for data: Data, name: String, mimeType: String) -> FileUpload {
         return FileUpload(
             name: name,
+            size: sizeFor(data),
             type: mimeType,
             data: data
         )
@@ -43,6 +44,17 @@ struct UploadHelper {
             name: nameFor(url),
             mimeType: mimeTypeFor(url)
         )
+    }
+
+    /**
+        This method returns the size of some Data object.
+
+        - parameters:
+          - data: The data object to be inspected.
+        - returns: The size of the data
+     */
+    static func sizeFor(_ data: Data) -> Int {
+        return (data as NSData).length
     }
 
     /**

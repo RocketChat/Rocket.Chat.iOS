@@ -10,8 +10,7 @@ import Foundation
 import RealmSwift
 
 struct MessageManager {
-    static let initialHistorySize = 30
-    static let laterHistorySize = 60
+    static let historySize = 60
 }
 
 let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
@@ -22,20 +21,17 @@ extension MessageManager {
 
     static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletionObjectsList<Message>) {
         var lastDate: Any!
-        var size: Int
 
         if let lastMessageDate = lastMessageDate {
             lastDate = ["$date": lastMessageDate.timeIntervalSince1970 * 1000]
-            size = laterHistorySize
         } else {
             lastDate = NSNull()
-            size = initialHistorySize
         }
 
         let request = [
             "msg": "method",
             "method": "loadHistory",
-            "params": ["\(subscription.rid)", lastDate, size, [
+            "params": ["\(subscription.rid)", lastDate, historySize, [
                 "$date": Date().timeIntervalSince1970 * 1000
             ]]
         ] as [String: Any]
@@ -105,6 +101,28 @@ extension MessageManager {
                 message.temporary = false
                 realm.add(message, update: true)
             })
+        }
+    }
+
+    static func subscribeDeleteMessage(_ subscription: Subscription, completion: @escaping (_ msgId: String) -> Void) {
+        let eventName = "\(subscription.rid)/deleteMessage"
+        let request = [
+            "msg": "sub",
+            "name": "stream-notify-room",
+            "id": eventName,
+            "params": [eventName, false]
+            ] as [String: Any]
+
+        SocketManager.subscribe(request, eventName: eventName) { response in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+
+            if let msgId = response.result["fields"]["args"][0]["_id"].string {
+                Realm.executeOnMainThread({ realm in
+                    guard let message = realm.object(ofType: Message.self, forPrimaryKey: msgId) else { return }
+                    realm.delete(message)
+                    completion(msgId)
+                })
+            }
         }
     }
 

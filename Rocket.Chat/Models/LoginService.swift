@@ -9,6 +9,27 @@
 import Foundation
 import RealmSwift
 
+enum LoginServiceType {
+    case github
+    case facebook
+    case linkedin
+    case saml
+    case cas
+    case custom
+    case invalid
+
+    init(string: String) {
+        switch string {
+        case "github": self = .github
+        case "facebook": self = .facebook
+        case "linkedin": self = .linkedin
+        case "saml": self = .saml
+        case "cas": self = .cas
+        default: self = .invalid
+        }
+    }
+}
+
 class LoginService: BaseModel {
     @objc dynamic var service: String?
     @objc dynamic var clientId: String?
@@ -25,6 +46,44 @@ class LoginService: BaseModel {
     @objc dynamic var mergeUsers = false
     @objc dynamic var loginStyle: String?
     @objc dynamic var buttonColor: String?
+
+    // CAS
+
+    @objc dynamic var loginUrl: String?
+
+    // SAML
+
+    @objc dynamic var entryPoint: String?
+    @objc dynamic var issuer: String?
+    @objc dynamic var provider: String?
+
+    // true if LoginService has enough information to be used
+    var isValid: Bool {
+        if type == .cas && loginUrl != nil {
+            return true
+        }
+
+        if type == .saml {
+            return true
+        }
+
+        return !(serverUrl?.isEmpty ?? true)
+    }
+
+    var type: LoginServiceType {
+        if custom == true {
+            return .custom
+        }
+
+        if let service = service {
+            return LoginServiceType(string: service)
+        }
+
+        return .invalid
+    }
+
+    @objc dynamic var responseType: String?
+    @objc dynamic var callbackPath: String?
 }
 
 // MARK: OAuth helper extensions
@@ -49,7 +108,7 @@ extension LoginService {
                 return nil
         }
 
-        return "\(serverUrl)\(tokenPath)"
+        return tokenPath.contains("://") ? tokenPath : "\(serverUrl)\(tokenPath)"
     }
 }
 
@@ -64,5 +123,33 @@ extension LoginService {
         }
 
         return object
+    }
+}
+
+// MARK: Standard Login Services extensions
+
+extension LoginService {
+    static var facebook: LoginService {
+        let service = LoginService()
+        service.mapFacebook()
+        return service
+    }
+
+    static var github: LoginService {
+        let service = LoginService()
+        service.mapGitHub()
+        return service
+    }
+
+    static var linkedin: LoginService {
+        let service = LoginService()
+        service.mapLinkedIn()
+        return service
+    }
+
+    static var cas: LoginService {
+        let service = LoginService()
+        service.mapCAS()
+        return service
     }
 }

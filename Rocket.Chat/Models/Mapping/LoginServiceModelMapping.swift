@@ -12,20 +12,94 @@ import RealmSwift
 
 extension LoginService: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
-        self.service = values["service"].stringValue
-        self.clientId = values["clientId"].stringValue
-        self.custom = values["custom"].boolValue
-        self.serverUrl = values["serverURL"].stringValue
-        self.tokenPath = values["tokenPath"].stringValue
-        self.identityPath = values["identityPath"].stringValue
-        self.authorizePath = values["authorizePath"].stringValue
-        self.scope = values["scope"].stringValue
-        self.buttonLabelText = values["buttonLabelText"].stringValue
-        self.buttonLabelColor = values["buttonLabelColor"].stringValue
-        self.tokenSentVia = values["tokenSentVia"].stringValue
-        self.usernameField = values["usernameField"].stringValue
-        self.mergeUsers = values["mergeUsers"].boolValue
-        self.loginStyle = values["loginStyle"].string
-        self.buttonColor = values["buttonColor"].string
+        service = values["service"].stringValue
+        clientId = values["clientId"].string ?? values["appId"].string
+        custom = values["custom"].boolValue
+        serverUrl = values["serverURL"].stringValue
+        tokenPath = values["tokenPath"].stringValue
+        identityPath = values["identityPath"].stringValue
+        authorizePath = values["authorizePath"].stringValue
+        scope = values["scope"].stringValue
+        buttonLabelText = values["buttonLabelText"].stringValue
+        buttonLabelColor = values["buttonLabelColor"].stringValue
+        tokenSentVia = values["tokenSentVia"].stringValue
+        usernameField = values["usernameField"].stringValue
+        mergeUsers = values["mergeUsers"].boolValue
+        loginStyle = values["loginStyle"].string
+        buttonColor = values["buttonColor"].string
+
+        // CAS
+
+        loginUrl = values["login_url"].string
+
+        // SAML
+
+        entryPoint = values["entryPoint"].string
+        issuer = values["issuer"].string
+        provider = values["clientConfig"]["provider"].string
+
+        switch type {
+        case .github: mapGitHub()
+        case .facebook: mapFacebook()
+        case .linkedin: mapLinkedIn()
+        case .saml: break
+        case .cas: break
+        case .custom: break
+        case .invalid: break
+        }
+    }
+
+    func mapGitHub() {
+        service = "github"
+        scope = ""
+
+        serverUrl = "https://github.com"
+        tokenPath = "/login/oauth/access_token"
+        identityPath = "https://api.github.com/user"
+        authorizePath = "/login/oauth/authorize"
+        buttonLabelText = "github"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#4c4c4c"
+    }
+
+    func mapFacebook() {
+        service = "facebook"
+        scope = ""
+
+        serverUrl = "https://facebook.com"
+        scope = "email"
+        tokenPath = "https://graph.facebook.com/oauth/v2/accessToken"
+        identityPath = "https://graph.facebook.com/v2.8/me"
+        authorizePath = "/v2.9/dialog/oauth"
+        buttonLabelText = "facebook"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#325c99"
+
+        responseType = ""
+        callbackPath = "facebook?close"
+    }
+
+    func mapLinkedIn() {
+        service = "linkedin"
+        scope = ""
+
+        serverUrl = "https://linkedin.com"
+        tokenPath = "/oauth/v2/accessToken"
+        identityPath = "https://api.github.com/v1/people/"
+        authorizePath = "/oauth/v2/authorization"
+        buttonLabelText = "linkedin"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#1b86bc"
+
+        responseType = "code"
+        callbackPath = "linkedin?close"
+    }
+
+    func mapCAS() {
+        service = "cas"
+
+        buttonLabelText = "CAS"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#13679a"
     }
 }

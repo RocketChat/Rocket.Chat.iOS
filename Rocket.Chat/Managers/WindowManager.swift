@@ -8,23 +8,56 @@
 
 import UIKit
 
-enum Storyboard: String {
-    case auth = "Auth"
-    case chat = "Chat"
+enum Storyboard {
+    case auth(serverUrl: String, credentials: DeepLinkCredentials?)
+    case chat
+
+    var name: String {
+        switch self {
+        case .auth:
+            return "Auth"
+        case .chat:
+            return "Chat"
+        }
+    }
+
+    func initialViewController() -> UIViewController? {
+        let storyboardChat = UIStoryboard(name: name, bundle: Bundle.main)
+        let controller = storyboardChat.instantiateInitialViewController()
+
+        // preload view
+        _ = controller?.view
+
+        switch self {
+        case let .auth(serverUrl, credentials):
+            let navigationController = (controller as? UINavigationController)
+            let controller = navigationController?.topViewController as? ConnectServerViewController
+            _ = controller?.view
+            controller?.textFieldServerURL.text = serverUrl
+
+            if serverUrl.count > 0 {
+                controller?.connect()
+                controller?.deepLinkCredentials = credentials
+            }
+        default:
+            break
+        }
+
+        return controller
+    }
 }
 
 class WindowManager {
 
     /**
         This method will transform the keyWindow.rootViewController
-        into the initial view controller of storyboar with name param.
+        into the initial view controller of storyboard with name param.
 
         - parameter name: The name of the Storyboard to be instantiated.
         - parameter transitionType: The transition to open new view controller.
      */
-    static func open(_ name: Storyboard, transitionType: String = kCATransitionFade) {
-        let storyboardChat = UIStoryboard(name: name.rawValue, bundle: Bundle.main)
-        let controller = storyboardChat.instantiateInitialViewController()
+    static func open(_ storyboard: Storyboard, transitionType: String = kCATransitionFade) {
+        let controller = storyboard.initialViewController()
         let application = UIApplication.shared
 
         if let window = application.windows.first, let controller = controller {
