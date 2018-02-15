@@ -53,8 +53,7 @@ final class ChatViewController: SLKTextViewController {
 
     var replyView: ReplyView!
     var replyString: String = ""
-
-    var editedMessage: Message?
+    var messageToEdit: Message?
 
     var dataController = ChatDataController()
 
@@ -328,7 +327,40 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
-        sendTextMessage()
+        guard
+            let subscription = subscription,
+            let messageText = textView.text
+        else {
+            return
+        }
+
+        DraftMessageManager.update(draftMessage: "", for: subscription)
+        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        textView.text = ""
+        self.scrollToBottom()
+
+        let replyString = self.replyString
+        stopReplying()
+
+        let text = "\(messageText)\(replyString)"
+
+        if let (command, params) = text.commandAndParams() {
+            sendCommand(command: command, params: params)
+            return
+        }
+
+        sendTextMessage(text: text)
+    }
+
+    override func didCommitTextEditing(_ sender: Any) {
+        guard let messageToEdit = messageToEdit else { return }
+        editTextMessage(message: messageToEdit, text: textView.text)
+        super.didCommitTextEditing(sender)
+    }
+
+    override func didCancelTextEditing(_ sender: Any) {
+        super.didCancelTextEditing(sender)
+        messageToEdit = nil
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -355,6 +387,10 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    override func textViewDidEndEditing(_ textView: UITextView) {
+
+    }
+
     // MARK: Message
     func sendCommand(command: String, params: String) {
         guard let subscription = subscription else { return }
@@ -363,64 +399,29 @@ final class ChatViewController: SLKTextViewController {
         client?.runCommand(command: command, params: params, roomId: subscription.rid, errored: alertAPIError)
     }
 
-    fileprivate func sendTextMessage() {
+    fileprivate func sendTextMessage(text: String) {
         guard
             let subscription = subscription,
-            let messageText = textView.text
-            else {
-                return
-        }
-
-        DraftMessageManager.update(draftMessage: "", for: subscription)
-        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
-        textView.text = ""
-        self.scrollToBottom()
-
-        let replyString = self.replyString
-        stopReplying()
-        let text = "\(messageText)\(replyString)"
-
-        if let (command, params) = text.commandAndParams() {
-            sendCommand(command: command, params: params)
+            text.count > 0
+        else {
             return
         }
 
-        if editedMessage != nil {
-            editTextMessage(text: text)
-        } else {
-            guard text.count > 0
-                else {
-                    return
-            }
-            guard let client = API.current()?.client(MessagesClient.self) else { return }
-            client.sendMessage(text: text, subscription: subscription)
-        }
+        guard let client = API.current()?.client(MessagesClient.self) else { return }
+        client.sendMessage(text: text, subscription: subscription)
     }
 
-    override func didCommitTextEditing(_ sender: Any) {
-        sendTextMessage()
-        super.didCommitTextEditing(sender)
-    }
-
-    fileprivate func editTextMessage(text: String) {
-        guard
-            let editedMessage = editedMessage,
-            text.count > 0
-            else {
-                return
-        }
-
+    fileprivate func editTextMessage(message: Message, text: String) {
         Realm.executeOnMainThread({ (realm) in
-            editedMessage.text = text
-            editedMessage.updatedAt = Date.serverDate
-            realm.add(editedMessage, update: true)
+            message.text = text
+            message.updatedAt = Date.serverDate
+            realm.add(message, update: true)
         })
 
-        MessageTextCacheManager.shared.update(for: editedMessage)
-        SubscriptionManager.editTextMessage(editedMessage) { (_) in
+        MessageTextCacheManager.shared.update(for: message)
+        SubscriptionManager.editTextMessage(message) { (_) in
             Realm.executeOnMainThread({ (_) in
-                MessageTextCacheManager.shared.update(for: editedMessage)
-                self.editedMessage = nil
+                MessageTextCacheManager.shared.update(for: message)
             })
         }
     }
@@ -542,10 +543,9 @@ final class ChatViewController: SLKTextViewController {
 
     func registerTypingEvent(_ subscription: Subscription) {
         typingIndicatorView?.interval = 0
-        guard let user = AuthManager.currentUser() else { return Log.debug("Could not register TypingEvent") }
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username, username != user.username else { return }
+            guard let username = username else { return }
 
             let isAtBottom = self?.chatLogIsAtBottom()
 
