@@ -184,4 +184,93 @@ class AuthSpec: XCTestCase, RealmTestCase {
         XCTAssert(auth.canDeleteMessage(message) == .allowed)
     }
 
+    //swiftlint:disable function_body_length
+    func testCanEditMessage() {
+        let realm = testRealm()
+
+        let user1 = User.testInstance()
+        user1.identifier = "uid1"
+
+        let user2 = User.testInstance()
+        user2.identifier = "uid2"
+
+        let auth = Auth.testInstance()
+        auth.userId = user1.identifier
+
+        let message = Message.testInstance()
+        message.identifier = "mid"
+        message.user = user1
+
+        // standard test
+
+        try? realm.write {
+            realm.add(auth)
+            realm.add(user1)
+            realm.add(user2)
+
+            auth.settings?.messageAllowEditing = true
+            auth.settings?.messageAllowEditingBlockEditInMinutes = 0
+        }
+
+        XCTAssert(auth.canEditMessage(message) == .allowed)
+
+        // invalid message
+
+        try? realm.write {
+            message.createdAt = nil
+        }
+
+        XCTAssert(auth.canEditMessage(message) == .unknown)
+
+        // non actionable message type
+
+        try? realm.write {
+            message.createdAt = Date()
+            message.internalType = MessageType.userJoined.rawValue
+        }
+
+        XCTAssert(auth.canEditMessage(message) == .notActionable)
+
+        // time elapsed
+
+        try? realm.write {
+            message.internalType = MessageType.text.rawValue
+            message.createdAt = Date(timeInterval: -1000, since: Date())
+            auth.settings?.messageAllowEditingBlockEditInMinutes = 1
+        }
+
+        XCTAssert(auth.canEditMessage(message) == .timeElapsed)
+
+        // different user
+
+        try? realm.write {
+            message.user = user2
+        }
+
+        XCTAssert(auth.canEditMessage(message) == .differentUser)
+
+        // server blocked
+
+        try? realm.write {
+            auth.settings?.messageAllowEditing = false
+            message.user = user1
+        }
+
+        XCTAssert(auth.canEditMessage(message) == .serverBlocked)
+
+        // edit-message
+
+        let permission = Permission()
+        permission.identifier = PermissionType.editMessage.rawValue
+        permission.roles.append("admin")
+
+        try? realm.write {
+            user1.roles.append("admin")
+            message.user = user2
+            realm.add(permission)
+        }
+
+        XCTAssert(auth.canEditMessage(message) == .allowed)
+    }
+
 }

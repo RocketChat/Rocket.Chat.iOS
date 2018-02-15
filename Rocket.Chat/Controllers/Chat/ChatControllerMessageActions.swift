@@ -46,13 +46,6 @@ extension ChatViewController {
             }
         }))
 
-        if let clientUserId = API.current()?.userId, let messageUserId = message.user?.identifier, clientUserId == messageUserId {
-            alert.addAction(UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
-                self.editedMessage = message
-                self.editText(message.text)
-            }))
-        }
-
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.copy"), style: .default, handler: { (_) in
             UIPasteboard.general.string = message.text
         }))
@@ -64,6 +57,13 @@ extension ChatViewController {
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { [weak self] (_) in
             self?.reply(to: message)
         }))
+
+        if  AuthManager.isAuthenticated()?.canEditMessage(message) == .allowed {
+            alert.addAction(UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
+                self.editedMessage = message
+                self.editText(message.text)
+            }))
+        }
 
         if AuthManager.isAuthenticated()?.canDeleteMessage(message) == .allowed {
             alert.addAction(UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { _ in
