@@ -46,4 +46,3 @@ extension APIResult where T == UpdateMessageRequest {
         return message
     }
 }
-
