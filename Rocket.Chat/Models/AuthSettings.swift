@@ -76,7 +76,7 @@ final class AuthSettings: BaseModel {
 
     @objc dynamic var messageShowEditedStatus: Bool = true
     @objc dynamic var messageAllowEditing: Bool = true
-    @objc dynamic var messageAllowEditingBloEditInMinutes: Int = 0
+    @objc dynamic var messageAllowEditingBlockEditInMinutes: Int = 0
 
     var hiddenTypes: Set<MessageType> {
         var hiddenTypes = Set<MessageType>()

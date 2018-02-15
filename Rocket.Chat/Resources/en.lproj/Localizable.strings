@@ -125,7 +125,7 @@
 "chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Block messages from user";
 "chat.message.actions.report" = "Report Message";
-"chat.message.actions.edit" = "Edit Message";
+"chat.message.actions.edit" = "Edit message";
 "chat.message.actions.copy" = "Copy";
 "chat.message.actions.pin" = "Pin message";
 "chat.message.actions.unpin" = "Unpin message";
