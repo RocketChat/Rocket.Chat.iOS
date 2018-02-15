@@ -374,24 +374,6 @@ extension SubscriptionManager {
         }
     }
 
-    static func editTextMessage(_ message: Message, text: String, completion: @escaping MessageCompletion) {
-
-        let request = [
-            "msg": "method",
-            "method": "updateMessage",
-            "params": [[
-                "_id": message.identifier ?? "",
-                "rid": message.subscription.rid,
-                "msg": text
-            ]]
-        ] as [String: Any]
-
-        SocketManager.send(request) { (response) in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-            completion(response)
-        }
-    }
-
     static func toggleFavorite(_ subscription: Subscription, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",

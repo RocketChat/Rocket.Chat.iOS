@@ -49,6 +49,14 @@ struct Alert {
     }
 }
 
+// MARK: Defaults
+
+extension Alert {
+    static var defaultError: Alert {
+        return Alert(key: "error.socket.default_error")
+    }
+}
+
 // MARK: Formatting
 extension Alert {
     func withMessage(_ message: String? = nil, formatted args: CVarArg...) -> Alert {
