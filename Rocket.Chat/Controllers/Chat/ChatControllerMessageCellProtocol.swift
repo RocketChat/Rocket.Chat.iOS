@@ -13,6 +13,53 @@ import FLAnimatedImage
 import SimpleImageViewer
 
 extension ChatViewController: ChatMessageCellProtocol {
+    func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
+
+        // set up controller
+
+        let controller = ReactorListViewController()
+        controller.modalPresentationStyle = .popover
+        _ = controller.view
+
+        // configure cells
+
+        controller.reactorListView.registerReactorNib(MemberCell.nib)
+        controller.reactorListView.configureCell = {
+            guard let cell = $0 as? MemberCell else { return }
+            cell.hideStatus = true
+        }
+
+        // set up model
+
+        var models = reactionListView.model.reactionViewModels
+
+        if let index = models.index(where: { $0.emoji == reactionView.model.emoji }) {
+            models.remove(at: index)
+            models.insert(reactionView.model, at: 0)
+        }
+
+        controller.model = ReactorListViewModel(reactionViewModels: models)
+
+        // present (push on iPhone, popover on iPad)
+
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.navigationController?.pushViewController(controller, animated: true)
+        } else {
+            if let presenter = controller.popoverPresentationController {
+                presenter.sourceView = reactionView
+                presenter.sourceRect = reactionView.bounds
+            }
+
+            self.present(controller, animated: true)
+        }
+
+        // on select reactor
+
+        controller.reactorListView.selectedReactor = { username in
+            controller.close(animated: true)
+            AppManager.openDirectMessage(username: username)
+        }
+    }
 
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
         if recognizer.state == .began {
@@ -21,46 +68,8 @@ extension ChatViewController: ChatMessageCellProtocol {
     }
 
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
-        guard let currentUser = AuthManager.currentUser() else { return }
         guard let username = message.user?.username else { return }
-        guard let currentOpenedSubscription = ChatViewController.shared?.subscription else { return }
-
-        // If tapping in a user of current DM, don't do anything
-        if currentOpenedSubscription.type == .directMessage {
-            if currentOpenedSubscription.otherUserId == message.user?.identifier {
-                return
-            }
-        }
-
-        // If tapping in itself, don't do anything
-        if username == currentUser.username {
-            return
-        }
-
-        func openDirectMessage() -> Bool {
-            guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
-
-            let controller = ChatViewController.shared
-            controller?.subscription = directMessageRoom
-
-            return true
-        }
-
-        // Check if already have a direct message room with this user
-        if openDirectMessage() == true {
-            return
-        }
-
-        // If not, create a new direct message
-        SubscriptionManager.createDirectMessage(username, completion: { response in
-            guard !response.isError() else { return }
-
-            guard let auth = AuthManager.isAuthenticated() else { return }
-
-            SubscriptionManager.updateSubscriptions(auth) { _ in
-                _ = openDirectMessage()
-            }
-        })
+        AppManager.openDirectMessage(username: username)
     }
 
     func openURL(url: URL) {
@@ -91,6 +100,7 @@ extension ChatViewController: ChatMessageCellProtocol {
                 config.image = thumbnail.image
                 config.animatedImage = thumbnail.animatedImage
                 config.imageView = thumbnail
+                config.allowSharing = true
             }
             present(ImageViewerController(configuration: configuration), animated: true)
         } else {

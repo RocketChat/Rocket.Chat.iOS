@@ -23,6 +23,7 @@ extension Message {
         message.subscription = Subscription.testInstance()
         message.identifier = "message-identifier"
         message.subscription.type = .channel
+        message.createdAt = Date()
         return message
     }
 

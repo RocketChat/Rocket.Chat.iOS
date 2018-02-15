@@ -58,10 +58,6 @@ class UserInfoRequestSpec: APITestCase {
 
         let result = UserInfoResult(raw: json)
 
-        XCTAssertEqual(result.user, json["user"], "user is correct")
-        XCTAssertEqual(result.id, "nSYqWzZ4GsKTX4dyK", "id is correct")
-        XCTAssertEqual(result.type, "user", "type is correct")
-        XCTAssertEqual(result.name, "Example User", "name is correct")
-        XCTAssertEqual(result.username, "example", "username is correct")
+        XCTAssertEqual(result.user?.identifier, "nSYqWzZ4GsKTX4dyK", "id is correct")
     }
 }

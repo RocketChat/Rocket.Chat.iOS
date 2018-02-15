@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EmojiView" customModule="Rocket_Chat" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="Vba-nv-h9j" id="kaC-oV-CWN"/>
+                <outlet property="emojiImageView" destination="H0W-CD-Tmy" id="cud-3e-IRn"/>
+                <outlet property="emojiLabel" destination="hk6-3B-0Qu" id="OR1-yS-3Wu"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Vba-nv-h9j">
+            <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H0W-CD-Tmy" userLabel="Emoji Image" customClass="FLAnimatedImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumScaleFactor="0.01" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hk6-3B-0Qu" userLabel="Emoji Label">
+                    <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="46"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <constraints>
+                <constraint firstItem="TMW-zh-2ug" firstAttribute="trailing" secondItem="H0W-CD-Tmy" secondAttribute="trailing" id="03O-I3-lDz"/>
+                <constraint firstItem="H0W-CD-Tmy" firstAttribute="top" secondItem="TMW-zh-2ug" secondAttribute="top" id="4l7-e9-Wwl"/>
+                <constraint firstItem="hk6-3B-0Qu" firstAttribute="top" secondItem="TMW-zh-2ug" secondAttribute="top" id="ABv-Pn-H1j"/>
+                <constraint firstItem="TMW-zh-2ug" firstAttribute="bottom" secondItem="H0W-CD-Tmy" secondAttribute="bottom" id="KR6-4y-pDo"/>
+                <constraint firstItem="TMW-zh-2ug" firstAttribute="trailing" secondItem="hk6-3B-0Qu" secondAttribute="trailing" id="MTe-eS-ddz"/>
+                <constraint firstItem="TMW-zh-2ug" firstAttribute="bottom" secondItem="hk6-3B-0Qu" secondAttribute="bottom" id="Wfv-ZQ-ZB4"/>
+                <constraint firstItem="H0W-CD-Tmy" firstAttribute="leading" secondItem="TMW-zh-2ug" secondAttribute="leading" id="qkf-Dr-7SX"/>
+                <constraint firstItem="hk6-3B-0Qu" firstAttribute="leading" secondItem="TMW-zh-2ug" secondAttribute="leading" id="w2c-fN-yqg"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="TMW-zh-2ug"/>
+            <point key="canvasLocation" x="-149" y="-344"/>
+        </view>
+    </objects>
+</document>

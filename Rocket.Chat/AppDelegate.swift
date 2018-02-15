@@ -30,9 +30,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // but if not, just open the authentication screen.
         if let auth = AuthManager.isAuthenticated() {
             AuthManager.persistAuthInformation(auth)
+            AuthSettingsManager.shared.updateCachedSettings()
             WindowManager.open(.chat)
         } else {
-            WindowManager.open(.auth)
+            WindowManager.open(.auth(serverUrl: "", credentials: nil))
         }
 
         return true
@@ -56,6 +57,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {
+        if AppManager.handleDeepLink(url) != nil {
+            return true
+        }
+
         return GIDSignIn.sharedInstance().handle(
             url,
             sourceApplication: options[.sourceApplication] as? String,
@@ -72,5 +77,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         Log.debug("Fail to register for notification: \(error)")
     }
-
 }

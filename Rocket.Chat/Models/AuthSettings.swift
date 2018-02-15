@@ -33,8 +33,19 @@ final class AuthSettings: BaseModel {
 
     // Authentication methods
     @objc dynamic var isUsernameEmailAuthenticationEnabled = false
+    @objc dynamic var isPasswordResetEnabled = true
+
     @objc dynamic var isGoogleAuthenticationEnabled = false
+    @objc dynamic var isFacebookAuthenticationEnabled = false
+    @objc dynamic var isLinkedInAuthenticationEnabled = false
+    @objc dynamic var isGitHubAuthenticationEnabled = false
     @objc dynamic var isLDAPAuthenticationEnabled = false
+
+    @objc dynamic var isCASEnabled = false
+    @objc dynamic var casLoginUrl: String?
+
+    // Accounts
+    @objc dynamic var emailVerification = false
 
     // Registration
     @objc dynamic var rawRegistrationForm: String?
@@ -57,6 +68,11 @@ final class AuthSettings: BaseModel {
     @objc dynamic var hideMessageUserAdded: Bool = false
     @objc dynamic var hideMessageUserMutedUnmuted: Bool = false
     @objc dynamic var hideMessageUserRemoved: Bool = false
+
+    // Message
+    @objc dynamic var messageShowDeletedStatus: Bool = true
+    @objc dynamic var messageAllowDeleting: Bool = true
+    @objc dynamic var messageAllowDeletingBlockDeleteInMinutes: Int = 0
 
     var hiddenTypes: Set<MessageType> {
         var hiddenTypes = Set<MessageType>()

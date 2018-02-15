@@ -55,4 +55,19 @@ struct MessagesClient: APIClient {
             }
         })
     }
+
+    @discardableResult
+    func deleteMessage(_ message: Message, asUser: Bool, realm: Realm? = Realm.shared) -> Bool {
+        guard
+            let id = message.identifier,
+            !message.rid.isEmpty
+        else {
+            return false
+        }
+
+        api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser),
+                  succeeded: nil, errored: nil)
+
+        return true
+    }
 }

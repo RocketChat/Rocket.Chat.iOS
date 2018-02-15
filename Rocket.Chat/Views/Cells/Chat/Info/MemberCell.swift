@@ -39,6 +39,18 @@ class MemberCell: UITableViewCell {
         }
     }
 
+    @IBOutlet weak var statusViewWidthConstraint: NSLayoutConstraint! {
+        didSet {
+            statusViewWidthConstraint?.constant = hideStatus ? 0 : 8
+        }
+    }
+
+    var hideStatus: Bool = false {
+        didSet {
+            statusViewWidthConstraint?.constant = hideStatus ? 0 : 8
+        }
+    }
+
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
             avatarViewContainer.layer.masksToBounds = true
@@ -69,4 +81,32 @@ class MemberCell: UITableViewCell {
         }
     }
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+    }
+}
+
+// MARK: ReactorCell
+
+extension MemberCell: ReactorPresenter {
+    var reactor: String {
+        set {
+            if let user = User.find(username: newValue) {
+                data = MemberCellData(member: user)
+                return
+            }
+
+            User.fetch(username: newValue, completion: { user in
+                guard let user = user else { return }
+
+                DispatchQueue.main.async {
+                    self.data = MemberCellData(member: user)
+                }
+            })
+        }
+
+        get {
+            return data?.member.username ?? ""
+        }
+    }
 }
