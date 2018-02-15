@@ -421,18 +421,7 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func editTextMessage(message: Message, text: String) {
-        Realm.executeOnMainThread({ (realm) in
-            message.text = text
-            message.updatedAt = Date.serverDate
-            realm.add(message, update: true)
-        })
-
-        MessageTextCacheManager.shared.update(for: message)
-        SubscriptionManager.editTextMessage(message) { (_) in
-            Realm.executeOnMainThread({ (_) in
-                MessageTextCacheManager.shared.update(for: message)
-            })
-        }
+        SubscriptionManager.editTextMessage(message, text: text, completion: { _ in })
     }
 
     fileprivate func updateCellForMessage(identifier: String) {
