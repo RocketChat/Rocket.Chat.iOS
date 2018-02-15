@@ -374,7 +374,7 @@ extension SubscriptionManager {
         }
     }
 
-    static func editTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
+    static func editTextMessage(_ message: Message, text: String, completion: @escaping MessageCompletion) {
 
         let request = [
             "msg": "method",
@@ -382,7 +382,7 @@ extension SubscriptionManager {
             "params": [[
                 "_id": message.identifier ?? "",
                 "rid": message.subscription.rid,
-                "msg": message.text
+                "msg": text
             ]]
         ] as [String: Any]
 
