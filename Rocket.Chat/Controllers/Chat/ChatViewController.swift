@@ -416,12 +416,13 @@ final class ChatViewController: SLKTextViewController {
             return
         }
 
-        guard let client = API.current()?.client(MessagesClient.self) else { return }
+        guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
         client.sendMessage(text: text, subscription: subscription)
     }
 
     fileprivate func editTextMessage(message: Message, text: String) {
-        SubscriptionManager.editTextMessage(message, text: text, completion: { _ in })
+        guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
+        client.updateMessage(message, text: text)
     }
 
     fileprivate func updateCellForMessage(identifier: String) {
