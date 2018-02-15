@@ -512,9 +512,10 @@ final class ChatViewController: SLKTextViewController {
 
     func registerTypingEvent(_ subscription: Subscription) {
         typingIndicatorView?.interval = 0
+        guard let user = AuthManager.currentUser() else { return Log.debug("Could not register TypingEvent") }
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username else { return }
+            guard let username = username, username != user.username else { return }
 
             let isAtBottom = self?.chatLogIsAtBottom()
 
@@ -991,15 +992,16 @@ extension ChatViewController {
     fileprivate func updateMessageSendingPermission() {
         guard
             let subscription = subscription,
-            let currentUser = AuthManager.currentUser()
+            let currentUser = AuthManager.currentUser(),
+            let username = currentUser.username
         else {
             allowMessageSending()
             return
         }
 
-        if subscription.roomReadOnly && subscription.roomOwner != currentUser {
+        if subscription.roomReadOnly && subscription.roomOwner != currentUser && !currentUser.hasPermission(.postReadOnly) {
             blockMessageSending(reason: localized("chat.read_only"))
-        } else if let username = currentUser.username, subscription.roomMuted.contains(username) {
+        } else if subscription.roomMuted.contains(username) {
             blockMessageSending(reason: localized("chat.muted"))
         } else {
             allowMessageSending()
