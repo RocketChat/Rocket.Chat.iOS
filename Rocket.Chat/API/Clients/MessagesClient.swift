@@ -58,10 +58,8 @@ struct MessagesClient: APIClient {
                 SubscriptionManager.sendTextMessage(message, completion: { response in
                     updateMessage(json: response.result["result"])
                 })
-            case .noConnection:
-                setMessageOffline()
             default:
-                break
+                setMessageOffline()
             }
         })
     }

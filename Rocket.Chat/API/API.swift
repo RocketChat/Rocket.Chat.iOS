@@ -52,7 +52,6 @@ class API: APIFetcher {
         self.version = version
 
         requestMiddlewares.append(VersionMiddleware(api: self))
-        requestMiddlewares.append(ReachabilityMiddleware(api: self))
     }
 
     func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,

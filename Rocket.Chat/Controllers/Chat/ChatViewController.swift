@@ -319,10 +319,6 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: SlackTextViewController
 
-    override func canPressRightButton() -> Bool {
-        return SocketManager.isConnected()
-    }
-
     override func didPressRightButton(_ sender: Any?) {
         guard
             let subscription = subscription,

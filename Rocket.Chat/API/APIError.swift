@@ -15,5 +15,4 @@ enum APIError {
     case error(Error)
     case noData
     case malformedRequest
-    case noConnection
 }

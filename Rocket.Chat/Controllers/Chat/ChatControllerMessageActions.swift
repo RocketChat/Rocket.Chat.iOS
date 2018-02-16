@@ -18,13 +18,25 @@ extension ChatViewController {
                 let subscription = self.subscription,
                 let client = API.current()?.client(MessagesClient.self)
             else {
-                    return
+                return
+            }
+
+            client.sendMessage(message, subscription: subscription)
+        })
+
+        let resendAll = UIAlertAction(title: localized("chat.message.actions.resend_all"), style: .default, handler: { _ in
+            guard
+                let subscription = self.subscription,
+                let client = API.current()?.client(MessagesClient.self)
+            else {
+                return
             }
 
             client.sendMessage(message, subscription: subscription)
         })
 
         alert.addAction(resend)
+        alert.addAction(resendAll)
 
         if let presenter = alert.popoverPresentationController {
             presenter.sourceView = view
