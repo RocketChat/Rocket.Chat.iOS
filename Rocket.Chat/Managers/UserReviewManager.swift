@@ -9,16 +9,16 @@
 import Foundation
 import StoreKit
 
-class UserReviewManager {
+final class UserReviewManager {
     static let shared = UserReviewManager()
 
-    let nextDateForReviewKey: String = "kNextDateForReview"
+    private let nextDateForReviewKey: String = "kNextDateForReview"
 
     private let defaults = UserDefaults.standard
 
-    let week: TimeInterval = 604800
+    private let week: TimeInterval = 604800
 
-    var nextDateForReview: Date {
+    private var nextDateForReview: Date {
         get {
             if let date = defaults.object(forKey: nextDateForReviewKey) as? Date {
                 return date
@@ -33,11 +33,11 @@ class UserReviewManager {
         }
     }
 
-    var availableForReview: Bool {
+    private var availableForReview: Bool {
         return nextDateForReview < Date()
     }
 
-    func calculateNextDateForReview() -> Date {
+    private func calculateNextDateForReview() -> Date {
         return Date().addingTimeInterval(week)
     }
 
@@ -46,8 +46,6 @@ class UserReviewManager {
         if availableForReview {
             if #available(iOS 10.3, *) {
                 SKStoreReviewController.requestReview()
-            } else {
-                // Fallback on earlier versions
             }
 
             nextDateForReview = calculateNextDateForReview()

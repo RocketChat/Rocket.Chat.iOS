@@ -97,6 +97,7 @@ extension ChatViewController {
 
         controller.emojiPicked = { emoji in
             MessageManager.react(message, emoji: emoji, completion: { _ in })
+            UserReviewManager.shared.requestReview()
         }
 
         controller.customEmojis = CustomEmoji.emojis()
