@@ -396,10 +396,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    override func textViewDidEndEditing(_ textView: UITextView) {
-
-    }
-
     // MARK: Message
     func sendCommand(command: String, params: String) {
         guard let subscription = subscription else { return }
