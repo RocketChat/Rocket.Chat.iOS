@@ -21,20 +21,22 @@
             <rect key="frame" x="0.0" y="0.0" width="567" height="47"/>
             <subviews>
                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Bp4-sy-uGs">
-                    <rect key="frame" x="0.0" y="8" width="68" height="31"/>
+                    <rect key="frame" x="0.0" y="8" width="68" height="30"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jH5-CI-tIQ">
-                            <rect key="frame" x="0.0" y="0.0" width="68" height="31"/>
+                            <rect key="frame" x="0.0" y="0.0" width="68" height="30"/>
                             <state key="normal" title="Reactions"/>
                         </button>
                     </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="3Q1-SR-Qac"/>
+                    </constraints>
                 </stackView>
             </subviews>
             <constraints>
-                <constraint firstItem="Bp4-sy-uGs" firstAttribute="top" secondItem="2LA-wb-v0m" secondAttribute="top" constant="8" id="0EL-pZ-Fme"/>
                 <constraint firstItem="Bp4-sy-uGs" firstAttribute="trailing" secondItem="vUh-ZA-FsI" secondAttribute="trailing" id="0yg-TW-kaq"/>
                 <constraint firstItem="Bp4-sy-uGs" firstAttribute="leading" secondItem="vUh-ZA-FsI" secondAttribute="leading" id="4Sx-bI-RnH"/>
-                <constraint firstItem="2LA-wb-v0m" firstAttribute="bottom" secondItem="Bp4-sy-uGs" secondAttribute="bottom" constant="8" id="xHd-L3-V0X"/>
+                <constraint firstItem="Bp4-sy-uGs" firstAttribute="centerY" secondItem="vUh-ZA-FsI" secondAttribute="centerY" id="lE6-qp-L1L"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="2LA-wb-v0m"/>
