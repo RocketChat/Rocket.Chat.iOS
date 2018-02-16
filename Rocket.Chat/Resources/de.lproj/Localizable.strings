@@ -118,12 +118,14 @@
 "chat.channel.start_conversation" = "Dies ist der Beginn der Konversation auf %@";
 "chat.read_only" = "Dieser Raum ist schreibgeschützt";
 "chat.muted" = "Du wurdest stummgeschaltet";
+"chat.edit_mode" = "Nachricht bearbeiten. Schließen um abzubrechen.";
 "chat.loading_messages" = "Nachrichten werden geladen...";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Reaktion hinzufügen";
 "chat.message.actions.block" = "Nachrichten von Benutzer blockieren";
 "chat.message.actions.report" = "Nachricht melden";
+"chat.message.actions.edit" = "Nachricht bearbeiten";
 "chat.message.actions.copy" = "Kopieren";
 "chat.message.actions.pin" = "Nachricht anheften";
 "chat.message.actions.unpin" = "Nachricht lösen";

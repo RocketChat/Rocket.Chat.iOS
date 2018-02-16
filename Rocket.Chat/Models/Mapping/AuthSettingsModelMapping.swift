@@ -61,9 +61,13 @@ extension AuthSettings: ModelMappeable {
         self.hideMessageUserRemoved = objectForKey(object: values, key: "Message_HideType_ru")?.bool ?? false
 
         // Message
-        self.messageShowDeletedStatus = objectForKey(object: values, key: "Message_ShowDeletedStatus")?.bool ?? false
+        self.messageShowDeletedStatus = objectForKey(object: values, key: "Message_ShowDeletedStatus")?.bool ?? true
         self.messageAllowDeleting = objectForKey(object: values, key: "Message_AllowDeleting")?.bool ?? true
         self.messageAllowDeletingBlockDeleteInMinutes = objectForKey(object: values, key: "Message_AllowDeleting_BlockDeleteInMinutes")?.int ?? 0
+
+        self.messageShowEditedStatus = objectForKey(object: values, key: "Message_ShowEditedStatus")?.bool ?? true
+        self.messageAllowEditing = objectForKey(object: values, key: "Message_AllowEditing")?.bool ?? true
+        self.messageAllowEditingBlockEditInMinutes = objectForKey(object: values, key: "Message_AllowEditing_BlockEditInMinutes")?.int ?? 0
 
         // Custom Fields
         self.rawCustomFields = objectForKey(object: values, key: "Accounts_CustomFields")?.string?.removingWhitespaces()

@@ -52,4 +52,47 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         })
         wait(for: [expectation], timeout: 0.6)
     }
+
+    func testUpdateMessage() {
+        let api = MockAPI()
+        let realm = testRealm()
+        let client = MessagesClient(api: api)
+
+        let message = Message.testInstance()
+        message.identifier = "message-identifier"
+
+        try? realm.write {
+            realm.add(message)
+        }
+
+        api.nextResult = JSON([
+            "success": true,
+            "message": [
+                "_id": "message-identifier",
+                "rid": "GENERAL",
+                "msg": "edit-test",
+                "ts": "2017-01-05T17:06:14.403Z",
+                "u": [
+                    "_id": "R4jgcQaQhvvK6K3iY",
+                    "username": "graywolf336"
+                ],
+                "_updatedAt": "2017-01-05T19:42:20.433Z",
+                "editedAt": "2017-01-05T19:42:20.431Z",
+                "editedBy": [
+                    "_id": "R4jgcQaQhvvK6K3iY",
+                    "username": "graywolf336"
+                ]
+            ]
+        ])
+
+        client.updateMessage(message, text: "edit-test", realm: realm)
+
+        let expectation = XCTestExpectation(description: "message updated in realm")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            if realm.objects(Message.self).first?.text == "edit-test" {
+                expectation.fulfill()
+            }
+        })
+        wait(for: [expectation], timeout: 0.6)
+    }
 }
