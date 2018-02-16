@@ -70,6 +70,8 @@ extension AppManager {
             changeSelectedServer(index: index)
         } else if let roomId = roomId, let subscription = Subscription.find(rid: roomId) {
             ChatViewController.shared?.subscription = subscription
+        } else {
+            changeSelectedServer(index: index)
         }
 
         return true
