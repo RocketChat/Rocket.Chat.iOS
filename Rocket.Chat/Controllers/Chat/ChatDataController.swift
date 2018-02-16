@@ -204,7 +204,7 @@ final class ChatDataController {
         for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
                 if obj.message?.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
-                    return -1
+                   return -1
                 }
 
                 if obj.message?.text != message.text || obj.message?.type != message.type {

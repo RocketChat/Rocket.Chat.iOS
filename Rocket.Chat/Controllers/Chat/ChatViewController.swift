@@ -53,6 +53,7 @@ final class ChatViewController: SLKTextViewController {
 
     var replyView: ReplyView!
     var replyString: String = ""
+    var messageToEdit: Message?
 
     var dataController = ChatDataController()
 
@@ -73,7 +74,9 @@ final class ChatViewController: SLKTextViewController {
 
     var subscription: Subscription? {
         didSet {
+            // clean up
             subscriptionToken?.invalidate()
+            didCancelTextEditing(self)
 
             guard
                 let subscription = subscription,
@@ -319,6 +322,15 @@ final class ChatViewController: SLKTextViewController {
         showButtonScrollToBottom = false
     }
 
+    func resetMessageSending() {
+        textView.text = ""
+
+        if let subscription = subscription {
+            DraftMessageManager.update(draftMessage: "", for: subscription)
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        }
+    }
+
     // MARK: SlackTextViewController
 
     override func canPressRightButton() -> Bool {
@@ -326,17 +338,10 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
-        guard
-            let subscription = subscription,
-            let messageText = textView.text
-        else {
-            return
-        }
+        guard let messageText = textView.text else { return }
 
-        DraftMessageManager.update(draftMessage: "", for: subscription)
-        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
-        textView.text = ""
-        self.scrollToBottom()
+        resetMessageSending()
+        scrollToBottom()
 
         let replyString = self.replyString
         stopReplying()
@@ -349,6 +354,22 @@ final class ChatViewController: SLKTextViewController {
         }
 
         sendTextMessage(text: text)
+    }
+
+    override func didCommitTextEditing(_ sender: Any) {
+        if let messageToEdit = messageToEdit {
+            editTextMessage(message: messageToEdit, text: textView.text)
+        }
+
+        resetMessageSending()
+        messageToEdit = nil
+
+        super.didCommitTextEditing(sender)
+    }
+
+    override func didCancelTextEditing(_ sender: Any) {
+        messageToEdit = nil
+        super.didCancelTextEditing(sender)
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -391,8 +412,13 @@ final class ChatViewController: SLKTextViewController {
             return
         }
 
-        guard let client = API.current()?.client(MessagesClient.self) else { return }
+        guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
         client.sendMessage(text: text, subscription: subscription)
+    }
+
+    fileprivate func editTextMessage(message: Message, text: String) {
+        guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
+        client.updateMessage(message, text: text)
     }
 
     fileprivate func updateCellForMessage(identifier: String) {
@@ -512,10 +538,9 @@ final class ChatViewController: SLKTextViewController {
 
     func registerTypingEvent(_ subscription: Subscription) {
         typingIndicatorView?.interval = 0
-        guard let user = AuthManager.currentUser() else { return Log.debug("Could not register TypingEvent") }
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username, username != user.username else { return }
+            guard let username = username else { return }
 
             let isAtBottom = self?.chatLogIsAtBottom()
 

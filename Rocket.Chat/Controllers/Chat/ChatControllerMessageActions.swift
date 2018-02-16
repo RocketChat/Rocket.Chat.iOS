@@ -58,6 +58,13 @@ extension ChatViewController {
             self?.reply(to: message)
         }))
 
+        if  AuthManager.isAuthenticated()?.canEditMessage(message) == .allowed {
+            alert.addAction(UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
+                self.messageToEdit = message
+                self.editText(message.text)
+            }))
+        }
+
         if AuthManager.isAuthenticated()?.canDeleteMessage(message) == .allowed {
             alert.addAction(UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { _ in
                 self.delete(message: message)

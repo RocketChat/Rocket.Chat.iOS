@@ -118,12 +118,14 @@
 "chat.channel.start_conversation" = "To początek rozmowy na kanale %@";
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
+"chat.edit_mode" = "Edytuj wiadomość. Blisko, aby anulować.";
 "chat.loading_messages" = "Ładowanie wiadomości...";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Dodaje reakcję";
 "chat.message.actions.block" = "Blokuj wiadomości od użytkownika";
 "chat.message.actions.report" = "Zgłoś wiadomość";
+"chat.message.actions.edit" = "Edytuj wiadomość";
 "chat.message.actions.copy" = "Kopiuj";
 "chat.message.actions.pin" = "Przypnij wiadomość";
 "chat.message.actions.unpin" = "Odepnij wiadomość";
