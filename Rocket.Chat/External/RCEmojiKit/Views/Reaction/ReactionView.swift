@@ -14,9 +14,14 @@ struct ReactionViewModel {
     let imageUrl: String?
     let count: String
     let highlight: Bool
+    let reactors: [String]
 
     func highlighted(_ highlight: Bool) -> ReactionViewModel {
-        return ReactionViewModel(emoji: emoji, imageUrl: imageUrl, count: count, highlight: highlight)
+        return ReactionViewModel(emoji: emoji, imageUrl: imageUrl, count: count, highlight: highlight, reactors: reactors)
+    }
+
+    static var emptyState: ReactionViewModel {
+        return ReactionViewModel(emoji: "❓", imageUrl: nil, count: "?", highlight: false, reactors: [])
     }
 }
 
@@ -28,13 +33,13 @@ class ReactionView: UIView {
         }
     }
 
-
     @IBOutlet weak var emojiView: EmojiView!
     @IBOutlet weak var countLabel: UILabel!
 
     var tapRecognized: (UITapGestureRecognizer) -> Void = { _ in }
+    var longPressRecognized: (UILongPressGestureRecognizer) -> Void = { _ in }
 
-    var model: ReactionViewModel = ReactionViewModel(emoji: "❓", imageUrl: nil, count: "?", highlight: false) {
+    var model: ReactionViewModel = .emptyState {
         didSet {
             map(model)
         }
@@ -78,6 +83,11 @@ extension ReactionView {
         addGestureRecognizer(
             UITapGestureRecognizer(target: self, action: #selector(tapRecognized(_:)))
         )
+
+        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(longPressRecognized(_:)))
+        longPress.minimumPressDuration = 0.320
+
+        addGestureRecognizer(longPress)
     }
 }
 
@@ -85,5 +95,11 @@ extension ReactionView {
 extension ReactionView {
     @objc private func tapRecognized(_ sender: UITapGestureRecognizer) {
         tapRecognized(sender)
+    }
+
+    @objc private func longPressRecognized(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            longPressRecognized(sender)
+        }
     }
 }

@@ -11,8 +11,12 @@ import Foundation
 struct ReactionListViewModel {
     let reactionViewModels: [ReactionViewModel]
 
-    init(reactionViewModels: [ReactionViewModel] = []) {
+    init(reactionViewModels: [ReactionViewModel]) {
         self.reactionViewModels = reactionViewModels.sorted { $0.emoji > $1.emoji }
+    }
+
+    static var emptyState: ReactionListViewModel {
+        return ReactionListViewModel(reactionViewModels: [])
     }
 }
 
@@ -24,13 +28,14 @@ class ReactionListView: UIView {
     }
     @IBOutlet weak var reactionsStack: UIStackView!
 
-    var model = ReactionListViewModel() {
+    var model: ReactionListViewModel = .emptyState {
         didSet {
             map(model)
         }
     }
 
     var reactionTapRecognized: (ReactionView, UITapGestureRecognizer) -> Void = { _, _ in }
+    var reactionLongPressRecognized: (ReactionView, UILongPressGestureRecognizer) -> Void = { _, _ in }
 
     func map(_ model: ReactionListViewModel) {
         let views = model.reactionViewModels.map { reactionViewModel -> ReactionView in
@@ -49,6 +54,10 @@ class ReactionListView: UIView {
             view.tapRecognized = { sender in
                 self.reactionTapRecognized(view, sender)
             }
+
+            view.longPressRecognized = { sender in
+                self.reactionLongPressRecognized(view, sender)
+            }
         }
     }
 
@@ -64,6 +73,7 @@ class ReactionListView: UIView {
 }
 
 // MARK: Initialization
+
 extension ReactionListView {
     private func commonInit() {
         Bundle.main.loadNibNamed("ReactionListView", owner: self, options: nil)

@@ -33,14 +33,9 @@ class InfoRequestHandler: NSObject {
     }
 
     func alertInvalidURL() {
-        let alert = UIAlertController(
-            title: localized("alert.connection.invalid_url.title"),
-            message: localized("alert.connection.invalid_url.message"),
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-        delegate?.viewControllerToPresentAlerts?.present(alert, animated: true, completion: nil)
+        Alert(
+            key: "alert.connection.invalid_url"
+        ).present()
     }
 
     internal func validateServerResponse(result: InfoResult?) {
@@ -60,17 +55,10 @@ class InfoRequestHandler: NSObject {
 
     internal func validateServerVersion(minVersion: String, version: String) {
         if Semver.lt(version, minVersion) {
-            let alert = UIAlertController(
+            Alert(
                 title: localized("alert.connection.invalid_version.title"),
-                message: String(format: localized("alert.connection.invalid_version.message"), version, minVersion),
-                preferredStyle: .alert
-            )
-
-            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-
-            if let controller = delegate?.viewControllerToPresentAlerts {
-                controller.present(alert, animated: true, completion: nil)
-            }
+                message: String(format: localized("alert.connection.invalid_version.message"), version, minVersion)
+            ).present()
         }
     }
 
