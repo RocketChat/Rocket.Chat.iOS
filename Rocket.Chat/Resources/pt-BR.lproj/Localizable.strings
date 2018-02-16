@@ -118,7 +118,6 @@
 "chat.channel.start_conversation" = "Este é o começo da conversa em %@";
 "chat.read_only" = "Este canal é somente leitura";
 "chat.muted" = "Você foi silenciado";
-"chat.edit_mode" = "Editando mensagem. Feche para cancelar.";
 "chat.loading_messages" = "Carregando mensagens...";
 
 // Chat Message Actions
