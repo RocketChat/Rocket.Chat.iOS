@@ -365,7 +365,7 @@ extension ChatMessageCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+
         isAccessibilityElement = true
     }
 
