@@ -157,6 +157,7 @@ final class ChatMessageCell: UICollectionViewCell {
         avatarView.prepareForReuse()
 
         for view in mediaViews.arrangedSubviews {
+            mediaViews.removeArrangedSubview(view)
             view.removeFromSuperview()
         }
     }
