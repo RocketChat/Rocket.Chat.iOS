@@ -71,6 +71,10 @@ final class ChatMessageCell: UICollectionViewCell {
         didSet {
             reactionsListView.reactionTapRecognized = { view, sender in
                 MessageManager.react(self.message, emoji: view.model.emoji, completion: { _ in })
+
+                if self.isAddingReaction(emoji: view.model.emoji) {
+                    UserReviewManager.shared.requestReview()
+                }
             }
 
             reactionsListView.reactionLongPressRecognized = { view, sender in
@@ -78,6 +82,19 @@ final class ChatMessageCell: UICollectionViewCell {
             }
         }
     }
+
+    private func isAddingReaction(emoji tappedEmoji: String) -> Bool {
+        guard let currentUser = AuthManager.currentUser()?.username else {
+            return false
+        }
+
+        if message.reactions.first(where: { $0.emoji == tappedEmoji && $0.usernames.contains(currentUser) }) != nil {
+            return false
+        }
+
+        return true
+    }
+
     @IBOutlet weak var reactionsListViewConstraint: NSLayoutConstraint!
 
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
