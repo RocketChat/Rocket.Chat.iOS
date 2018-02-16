@@ -118,7 +118,6 @@
 "chat.channel.start_conversation" = "Ceci est le début de votre conversation sur %@";
 "chat.read_only" = "Cette pièce est en lecture seule";
 "chat.muted" = "Vous avez été mis en sourdine";
-"chat.edit_mode" = "Modifier le message. Fermer pour annuler.";
 "chat.loading_messages" = "Chargement des messages...";
 
 // Chat Message Actions
