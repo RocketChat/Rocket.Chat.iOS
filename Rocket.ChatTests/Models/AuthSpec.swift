@@ -75,7 +75,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         XCTAssertEqual(object.apiHost?.absoluteString, "https://team.rocket.chat/subdirectory/", "apiHost returns API Host correctly")
     }
- 
+
     func testAPIHostInvalidServerURL() {
         let object = Auth()
         object.serverURL = ""
