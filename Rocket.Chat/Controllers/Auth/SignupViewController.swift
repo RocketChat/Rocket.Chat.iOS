@@ -115,25 +115,29 @@ final class SignupViewController: BaseViewController {
 
             if response.isError() {
                 if let error = response.result["error"].dictionary {
-                    let alert = UIAlertController(
-                        title: localized("error.socket.default_error_title"),
-                        message: error["message"]?.string ?? localized("error.socket.default_error_message"),
-                        preferredStyle: .alert
-                    )
-
-                    alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-                    self?.present(alert, animated: true, completion: nil)
+                    Alert(
+                        title: "error.socket.default_error",
+                        message: error["message"]?.string ?? localized("error.socket.default_error.message")
+                    ).present()
                 }
             } else {
-                if let user = AuthManager.currentUser() {
 
+                guard AuthSettingsManager.settings?.emailVerification == false else {
+                    Alert(key: "alert.email_verification").present { _ in
+                        self?.navigationController?.popViewController(animated: true)
+                    }
+                    return
+                }
+
+                AuthManager.auth(email, password: password, completion: { _ in
+                    guard let user = AuthManager.currentUser() else { return }
                     if user.username != nil {
                         self?.dismiss(animated: true, completion: nil)
                         AppManager.reloadApp()
                     } else {
                         self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
-                }
+                })
             }
         }
     }

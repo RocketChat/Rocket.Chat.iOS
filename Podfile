@@ -8,6 +8,7 @@ def shared_pods
   # Crash Report
   pod 'Fabric'
   pod 'Crashlytics'
+  pod 'Instabug'
 
   # Code utilities
   pod 'SwiftyJSON'
@@ -19,7 +20,7 @@ def shared_pods
   pod 'MobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
   pod 'TagListView', '~> 1.0'
-  pod "SearchTextField"
+  pod 'SearchTextField'
 
   # Text Processing
   pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
@@ -30,13 +31,17 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 4'
   pod 'SDWebImage/GIF'
-  pod 'Starscream', '~> 2'
+  pod 'Starscream'
   pod 'ReachabilitySwift'
 
   # Authentication SDKs
   pod 'OAuthSwift'
   pod '1PasswordExtension'
   pod 'GoogleSignIn'
+
+  # Debugging
+  pod 'SwiftLint', :configurations => ['Debug']
+  pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
 end
 
 target 'Rocket.Chat' do
