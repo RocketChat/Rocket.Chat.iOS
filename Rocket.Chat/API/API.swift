@@ -48,7 +48,7 @@ class API: APIFetcher {
     }
 
     init(host: URL, version: Version = .zero) {
-        self.host = host.httpServerURL() ?? host
+        self.host = host
         self.version = version
 
         requestMiddlewares.append(VersionMiddleware(api: self))
