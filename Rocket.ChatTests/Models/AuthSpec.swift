@@ -317,5 +317,4 @@ class AuthSpec: XCTestCase, RealmTestCase {
         XCTAssert(auth.canBlockMessage(message) == .notActionable)
 
     }
-
 }
