@@ -53,10 +53,12 @@ final class ChatViewController: SLKTextViewController {
 
     var replyView: ReplyView!
     var replyString: String = ""
+    var messageToEdit: Message?
 
     var dataController = ChatDataController()
 
     var searchResult: [(String, Any)] = []
+    var searchWord: String = ""
 
     var closeSidebarAfterSubscriptionUpdate = false
 
@@ -72,7 +74,9 @@ final class ChatViewController: SLKTextViewController {
 
     var subscription: Subscription? {
         didSet {
+            // clean up
             subscriptionToken?.invalidate()
+            didCancelTextEditing(self)
 
             guard
                 let subscription = subscription,
@@ -251,7 +255,7 @@ final class ChatViewController: SLKTextViewController {
         textView.registerMarkdownFormattingSymbol("```", withTitle: "Preformatted")
         textView.registerMarkdownFormattingSymbol(">", withTitle: "Quote")
 
-        registerPrefixes(forAutoCompletion: ["@", "#", "/"])
+        registerPrefixes(forAutoCompletion: ["@", "#", "/", ":"])
     }
 
     fileprivate func setupTitleView() {
@@ -303,6 +307,11 @@ final class ChatViewController: SLKTextViewController {
             nibName: "AutocompleteCell",
             bundle: Bundle.main
         ), forCellReuseIdentifier: AutocompleteCell.identifier)
+
+        autoCompletionView.register(UINib(
+            nibName: "EmojiAutocompleteCell",
+            bundle: Bundle.main
+        ), forCellReuseIdentifier: EmojiAutocompleteCell.identifier)
     }
 
     internal func scrollToBottom(_ animated: Bool = false) {
@@ -313,6 +322,15 @@ final class ChatViewController: SLKTextViewController {
         showButtonScrollToBottom = false
     }
 
+    func resetMessageSending() {
+        textView.text = ""
+
+        if let subscription = subscription {
+            DraftMessageManager.update(draftMessage: "", for: subscription)
+            SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+        }
+    }
+
     // MARK: SlackTextViewController
 
     override func canPressRightButton() -> Bool {
@@ -320,17 +338,10 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressRightButton(_ sender: Any?) {
-        guard
-            let subscription = subscription,
-            let messageText = textView.text
-        else {
-            return
-        }
+        guard let messageText = textView.text else { return }
 
-        DraftMessageManager.update(draftMessage: "", for: subscription)
-        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
-        textView.text = ""
-        self.scrollToBottom()
+        resetMessageSending()
+        scrollToBottom()
 
         let replyString = self.replyString
         stopReplying()
@@ -343,6 +354,22 @@ final class ChatViewController: SLKTextViewController {
         }
 
         sendTextMessage(text: text)
+    }
+
+    override func didCommitTextEditing(_ sender: Any) {
+        if let messageToEdit = messageToEdit {
+            editTextMessage(message: messageToEdit, text: textView.text)
+        }
+
+        resetMessageSending()
+        messageToEdit = nil
+
+        super.didCommitTextEditing(sender)
+    }
+
+    override func didCancelTextEditing(_ sender: Any) {
+        messageToEdit = nil
+        super.didCancelTextEditing(sender)
     }
 
     override func didPressLeftButton(_ sender: Any?) {
@@ -385,8 +412,13 @@ final class ChatViewController: SLKTextViewController {
             return
         }
 
-        guard let client = API.current()?.client(MessagesClient.self) else { return }
+        guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
         client.sendMessage(text: text, subscription: subscription)
+    }
+
+    fileprivate func editTextMessage(message: Message, text: String) {
+        guard let client = API.current()?.client(MessagesClient.self) else { return Alert.defaultError.present() }
+        client.updateMessage(message, text: text)
     }
 
     fileprivate func updateCellForMessage(identifier: String) {
@@ -420,12 +452,22 @@ final class ChatViewController: SLKTextViewController {
 
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
+        MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
+            guard let collectionView = self?.collectionView else { return }
+
+            self?.dataController.delete(msgId: msgId)
+
+            collectionView.performBatchUpdates({
+                collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+            })
+        }
         registerTypingEvent(subscription)
     }
 
     internal func unsubscribe(for subscription: Subscription) {
         SocketManager.unsubscribe(eventName: subscription.rid)
         SocketManager.unsubscribe(eventName: "\(subscription.rid)/typing")
+        SocketManager.unsubscribe(eventName: "\(subscription.rid)/deleteMessage")
     }
 
     internal func emptySubscriptionState() {
@@ -839,7 +881,7 @@ extension ChatViewController {
             return UICollectionViewCell()
         }
 
-        cell.labelTitle.text = obj.timestamp.formatted("MMM dd, YYYY")
+        cell.labelTitle.text = RCDateFormatter.date(obj.timestamp)
         return cell
     }
 
@@ -920,6 +962,8 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
             }
 
             if let message = obj.message {
+                guard !message.markedForDeletion else { return .zero }
+
                 let sequential = dataController.hasSequentialMessageAt(indexPath)
                 let height = ChatMessageCell.cellMediaHeightFor(message: message, width: fullWidth, sequential: sequential)
                 return CGSize(width: fullWidth, height: height)
@@ -954,11 +998,14 @@ extension ChatViewController: ChatPreviewModeViewProtocol {
         guard let auth = AuthManager.isAuthenticated() else { return }
         guard let subscription = self.subscription else { return }
 
-        Realm.execute({ _ in
+        Realm.executeOnMainThread({ realm in
             subscription.auth = auth
+            realm.add(subscription, update: true)
         })
 
         self.subscription = subscription
+
+        updateJoinedView()
     }
 
 }
@@ -970,15 +1017,16 @@ extension ChatViewController {
     fileprivate func updateMessageSendingPermission() {
         guard
             let subscription = subscription,
-            let currentUser = AuthManager.currentUser()
+            let currentUser = AuthManager.currentUser(),
+            let username = currentUser.username
         else {
             allowMessageSending()
             return
         }
 
-        if subscription.roomReadOnly && subscription.roomOwner != currentUser {
+        if subscription.roomReadOnly && subscription.roomOwner != currentUser && !currentUser.hasPermission(.postReadOnly) {
             blockMessageSending(reason: localized("chat.read_only"))
-        } else if let username = currentUser.username, subscription.roomMuted.contains(username) {
+        } else if subscription.roomMuted.contains(username) {
             blockMessageSending(reason: localized("chat.muted"))
         } else {
             allowMessageSending()

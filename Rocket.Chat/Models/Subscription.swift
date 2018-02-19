@@ -92,7 +92,7 @@ extension Subscription {
                 guard !response.isError() else { return }
 
                 let result = response.result["result"]
-                Realm.execute({ realm in
+                Realm.executeOnMainThread({ realm in
                     if let obj = self {
                         obj.update(result, realm: realm)
                         realm.add(obj, update: true)
@@ -107,7 +107,7 @@ extension Subscription {
                 guard !response.isError() else { return }
 
                 let rid = response.result["result"]["rid"].stringValue
-                Realm.execute({ realm in
+                Realm.executeOnMainThread({ realm in
                     if let obj = self {
                         obj.rid = rid
                         realm.add(obj, update: true)
@@ -157,14 +157,8 @@ extension Subscription {
 
 // MARK: Queries
 extension Subscription {
-    static func find(rid: String, realm: Realm) -> Subscription? {
-        var object: Subscription?
-
-        if let findObject = realm.objects(Subscription.self).filter("rid == '\(rid)'").first {
-            object = findObject
-        }
-
-        return object
+    static func find(rid: String, realm: Realm? = Realm.shared) -> Subscription? {
+        return realm?.objects(Subscription.self).filter("rid == '\(rid)'").first
     }
 
     static func find(name: String, subscriptionType: [SubscriptionType], realm: Realm? = Realm.shared) -> Subscription? {
@@ -177,7 +171,7 @@ extension Subscription {
     }
 
     static func notificationSubscription(auth: Auth? = AuthManager.isAuthenticated()) -> Subscription? {
-        guard let roomId = PushManager.lastNotificationRoomId else { return nil }
+        guard let roomId = AppManager.initialRoomId else { return nil }
         return auth?.subscriptions.filter("rid = %@", roomId).first
     }
 
@@ -187,7 +181,7 @@ extension Subscription {
 
     static func initialSubscription(auth: Auth? = AuthManager.isAuthenticated()) -> Subscription? {
         if let subscription = notificationSubscription(auth: auth) {
-            PushManager.lastNotificationRoomId = nil
+            AppManager.initialRoomId = nil
             return subscription
         }
 

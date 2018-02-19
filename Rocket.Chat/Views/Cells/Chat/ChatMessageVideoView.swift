@@ -14,8 +14,10 @@ protocol ChatMessageVideoViewProtocol: class {
     func openVideoFromCell(attachment: Attachment)
 }
 
-final class ChatMessageVideoView: UIView {
-    static let defaultHeight = CGFloat(250)
+final class ChatMessageVideoView: ChatMessageAttachmentView {
+    override static var defaultHeight: CGFloat {
+        return 250
+    }
 
     weak var delegate: ChatMessageVideoViewProtocol?
     var attachment: Attachment! {
@@ -25,6 +27,9 @@ final class ChatMessageVideoView: UIView {
     }
 
     @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailTextHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var fullHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewPreview: UIImageView! {
         didSet {
             imageViewPreview.layer.cornerRadius = 4
@@ -38,6 +43,10 @@ final class ChatMessageVideoView: UIView {
         buttonPlay.isHidden = true
         activityIndicator.startAnimating()
         labelTitle.text = attachment.title
+        detailText.text = attachment.descriptionText
+        let fullHeight = ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
+        fullHeightConstraint.constant = fullHeight
+        detailTextHeightConstraint.constant = fullHeight - ChatMessageVideoView.defaultHeight
 
         guard let videoURL = attachment.fullVideoURL() else { return }
         guard let thumbURL = attachment.videoThumbPath else { return }

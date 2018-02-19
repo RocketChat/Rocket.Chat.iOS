@@ -74,9 +74,19 @@ class SubscriptionCreateRequestSpec: APITestCase {
             "error": "error-test"
         ])
 
+        let _result_private = JSON([
+            "group": [
+                "name": "groupname",
+                "t": "p"
+            ]
+        ])
+
         let result = APIResult<SubscriptionCreateRequest>(raw: _result)
+        let result_private = APIResult<SubscriptionCreateRequest>(raw: _result_private)
 
         XCTAssertEqual(result.success, true, "success is correct")
         XCTAssertEqual(result.error, "error-test", "error is correct")
+        XCTAssertEqual(result.name, "channelname", "name is correct")
+        XCTAssertEqual(result_private.name, "groupname", "name is correct")
     }
 }

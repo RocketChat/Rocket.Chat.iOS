@@ -26,18 +26,16 @@ class InfoRequestHandler: NSObject {
     func validate(with url: URL) {
         API(host: url).fetch(InfoRequest(), sessionDelegate: self, succeeded: { [weak self] result in
             self?.validateServerResponse(result: result)
+        }, errored: { [weak self] _ in
+            self?.delegate?.urlNotValid()
+            self?.alertInvalidURL()
         })
     }
 
     func alertInvalidURL() {
-        let alert = UIAlertController(
-            title: localized("alert.connection.invalid_url.title"),
-            message: localized("alert.connection.invalid_url.message"),
-            preferredStyle: .alert
-        )
-
-        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-        delegate?.viewControllerToPresentAlerts?.present(alert, animated: true, completion: nil)
+        Alert(
+            key: "alert.connection.invalid_url"
+        ).present()
     }
 
     internal func validateServerResponse(result: InfoResult?) {
@@ -57,17 +55,10 @@ class InfoRequestHandler: NSObject {
 
     internal func validateServerVersion(minVersion: String, version: String) {
         if Semver.lt(version, minVersion) {
-            let alert = UIAlertController(
+            Alert(
                 title: localized("alert.connection.invalid_version.title"),
-                message: String(format: localized("alert.connection.invalid_version.message"), version, minVersion),
-                preferredStyle: .alert
-            )
-
-            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: nil))
-
-            if let controller = delegate?.viewControllerToPresentAlerts {
-                controller.present(alert, animated: true, completion: nil)
-            }
+                message: String(format: localized("alert.connection.invalid_version.message"), version, minVersion)
+            ).present()
         }
     }
 
@@ -90,6 +81,8 @@ extension InfoRequestHandler: URLSessionTaskDelegate {
     func handleRedirect(_ newURL: URL) {
         API(host: newURL).fetch(InfoRequest(), sessionDelegate: self, succeeded: { result in
             self.handleRedirectInfoResult(result, for: newURL)
+        }, errored: { [weak self] _ in
+            self?.delegate?.urlNotValid()
         })
     }
 

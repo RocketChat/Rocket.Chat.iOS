@@ -71,12 +71,13 @@ extension OAuthViewController: WKNavigationDelegate {
         guard let url = url, isCallback(url: url) else { return false }
 
         if url.fragment != nil {
-            dismissWebViewController()
             if let credentials = oauthCredentials(from: url) {
                 success?(credentials)
-            } else {
+            } else if !url.absoluteString.contains("code=") {
                 failure?()
             }
+
+            dismissWebViewController()
         }
 
         return true

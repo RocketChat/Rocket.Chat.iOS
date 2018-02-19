@@ -55,7 +55,7 @@ class API: APIFetcher {
     }
 
     func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,
-                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored? = nil) {
+                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) {
         var transformedRequest = request
         for middleware in requestMiddlewares {
             if let error = middleware.handle(&transformedRequest) {

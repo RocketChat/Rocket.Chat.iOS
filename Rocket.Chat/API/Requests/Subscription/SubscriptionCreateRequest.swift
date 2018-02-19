@@ -62,4 +62,11 @@ extension APIResult where T == SubscriptionCreateRequest {
     var error: String? {
         return raw?["error"].string
     }
+
+    var name: String? {
+        guard let group = raw?["group"], group["t"] == "p" else {
+            return raw?["channel"]["name"].string
+        }
+        return raw?["group"]["name"].string
+    }
 }

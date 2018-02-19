@@ -33,23 +33,11 @@ class UserInfoRequest: APIRequest {
 }
 
 extension APIResult where T == UserInfoRequest {
-    var user: JSON? {
-        return raw?["user"]
-    }
+    var user: User? {
+        guard let raw = raw?["user"] else { return nil }
 
-    var id: String? {
-        return user?["_id"].string
-    }
-
-    var type: String? {
-        return user?["type"].string
-    }
-
-    var name: String? {
-        return user?["name"].string
-    }
-
-    var username: String? {
-        return user?["username"].string
+        let user = User()
+        user.map(raw, realm: nil)
+        return user
     }
 }

@@ -18,6 +18,13 @@ enum PermissionType: String {
     case viewRoomAdministration = "view-room-administration"
     case viewUserAdministration = "view-user-administration"
     case viewPrivilegedSetting = "view-privileged-setting"
+
+    case deleteMessage = "delete-message"
+    case forceDeleteMessage = "force-delete-message"
+
+    case editMessage = "edit-message"
+
+    case postReadOnly = "post-readonly"
 }
 
 class Permission: BaseModel {
