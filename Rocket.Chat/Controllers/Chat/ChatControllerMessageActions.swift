@@ -10,8 +10,93 @@ import UIKit
 import RealmSwift
 
 extension ChatViewController {
-    func presentOfflineActionsFor(_ message: Message, view: UIView) {
+    func presentActionsFor(_ message: Message, view: UIView) {
+        guard !message.temporary, message.type.actionable else { return }
+
+        var actions: [UIAlertAction] = []
+
+        if !message.failed {
+            actions = actionsForMessage(message, view: view)
+        } else {
+            actions = offlineActionsForMessage(message)
+        }
+
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+
+        actions.forEach(alert.addAction)
+
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = view
+            presenter.sourceRect = view.bounds
+        }
+
+        present(alert, animated: true, completion: nil)
+    }
+
+    func actionsForMessage(_ message: Message, view: UIView) -> [UIAlertAction] {
+        guard let messageUser = message.user else { return [] }
+
+        let react = UIAlertAction(title: localized("chat.message.actions.react"), style: .default, handler: { _ in
+            self.react(message: message, view: view)
+        })
+
+        let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
+        let pin = UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
+            if message.pinned {
+                MessageManager.unpin(message, completion: { (_) in
+                    // Do nothing
+                })
+            } else {
+                MessageManager.pin(message, completion: { (_) in
+                    // Do nothing
+                })
+            }
+        })
+
+        let report = UIAlertAction(title: localized("chat.message.actions.report"), style: .default, handler: { (_) in
+            self.report(message: message)
+        })
+
+        let copy = UIAlertAction(title: localized("chat.message.actions.copy"), style: .default, handler: { (_) in
+            UIPasteboard.general.string = message.text
+        })
+
+        let reply = UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { [weak self] (_) in
+            self?.reply(to: message)
+        })
+
+        let quote = UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { [weak self] (_) in
+            self?.reply(to: message, onlyQuote: true)
+        })
+
+        var actions = [react, pin, report, copy, reply, quote]
+
+        if AuthManager.currentUser() != messageUser {
+            let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
+                DispatchQueue.main.async {
+                    MessageManager.blockMessagesFrom(messageUser, completion: {
+                        self?.updateSubscriptionInfo()
+                    })
+                }
+            })
+
+            actions.append(block)
+        }
+
+        if AuthManager.isAuthenticated()?.canDeleteMessage(message) == .allowed {
+            let delete = UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { _ in
+                self.delete(message: message)
+            })
+
+            actions.append(delete)
+        }
+
+        return actions
+    }
+
+    func offlineActionsForMessage(_ message: Message) -> [UIAlertAction] {
 
         let resend = UIAlertAction(title: localized("chat.message.actions.resend"), style: .default, handler: { _ in
             guard
@@ -21,7 +106,8 @@ extension ChatViewController {
                 return
             }
 
-            client.sendMessage(message, subscription: subscription)
+            self.dataController.delete(msgId: message.identifier ?? "")
+            client.sendMessage(text: message.text, subscription: subscription)
         })
 
         let resendAll = UIAlertAction(title: localized("chat.message.actions.resend_all"), style: .default, handler: { _ in
@@ -32,89 +118,10 @@ extension ChatViewController {
                 return
             }
 
-            client.sendMessage(message, subscription: subscription)
+            client.sendMessage(text: message.text, subscription: subscription)
         })
 
-        alert.addAction(resend)
-        alert.addAction(resendAll)
-
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = view
-            presenter.sourceRect = view.bounds
-        }
-
-        present(alert, animated: true, completion: nil)
-    }
-
-    func presentActionsFor(_ message: Message, view: UIView) {
-        guard message.type.actionable else { return }
-
-        guard !message.offline else {
-            presentOfflineActionsFor(message, view: view)
-            return
-        }
-
-        guard !message.temporary else { return }
-
-        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
-        alert.addAction(UIAlertAction(title: localized("chat.message.actions.react"), style: .default, handler: { _ in
-            self.react(message: message, view: view)
-        }))
-
-        let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
-        alert.addAction(UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
-            if message.pinned {
-                MessageManager.unpin(message, completion: { (_) in
-                    // Do nothing
-                })
-            } else {
-                MessageManager.pin(message, completion: { (_) in
-                    // Do nothing
-                })
-            }
-        }))
-
-        alert.addAction(UIAlertAction(title: localized("chat.message.actions.report"), style: .default, handler: { (_) in
-            self.report(message: message)
-        }))
-
-        alert.addAction(UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
-            guard let user = message.user else { return }
-
-            DispatchQueue.main.async {
-                MessageManager.blockMessagesFrom(user, completion: {
-                    self?.updateSubscriptionInfo()
-                })
-            }
-        }))
-
-        alert.addAction(UIAlertAction(title: localized("chat.message.actions.copy"), style: .default, handler: { (_) in
-            UIPasteboard.general.string = message.text
-        }))
-
-        alert.addAction(UIAlertAction(title: localized("chat.message.actions.quote"), style: .default, handler: { [weak self] (_) in
-            self?.reply(to: message, onlyQuote: true)
-        }))
-
-        alert.addAction(UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { [weak self] (_) in
-            self?.reply(to: message)
-        }))
-
-        if AuthManager.isAuthenticated()?.canDeleteMessage(message) == .allowed {
-            alert.addAction(UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { _ in
-                self.delete(message: message)
-            }))
-        }
-
-        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
-
-        if let presenter = alert.popoverPresentationController {
-            presenter.sourceView = view
-            presenter.sourceRect = view.bounds
-        }
-
-        present(alert, animated: true, completion: nil)
+        return [resend, resendAll]
     }
 
     // MARK: Actions

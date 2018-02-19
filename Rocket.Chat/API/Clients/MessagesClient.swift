@@ -23,7 +23,7 @@ struct MessagesClient: APIClient {
             DispatchQueue.main.async {
                 try? realm?.write {
                     message.temporary = false
-                    message.offline = false
+                    message.failed = false
                     message.updatedAt = Date()
                     message.map(json, realm: realm)
                     realm?.add(message, update: true)
@@ -36,9 +36,12 @@ struct MessagesClient: APIClient {
         func setMessageOffline() {
             DispatchQueue.main.async {
                 try? realm?.write {
-                    message.offline = true
+                    message.temporary = false
+                    message.failed = true
                     realm?.add(message, update: true)
                 }
+
+                MessageTextCacheManager.shared.update(for: message)
             }
         }
 

@@ -72,7 +72,7 @@ class Message: BaseModel {
 
     @objc dynamic var groupable = true
 
-    @objc dynamic var offline = false
+    @objc dynamic var failed = false
 
     var mentions = List<Mention>()
     var channels = List<Channel>()

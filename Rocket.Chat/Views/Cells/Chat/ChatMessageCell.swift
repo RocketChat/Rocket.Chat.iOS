@@ -267,8 +267,8 @@ final class ChatMessageCell: UICollectionViewCell {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
             }
 
-            if message.offline {
-                text.setFontColor(MessageTextFontAttributes.offlineFontColor)
+            if message.failed {
+                text.setFontColor(MessageTextFontAttributes.failedFontColor)
             }
 
             labelText.message = text
