@@ -18,7 +18,7 @@ extension ChatViewController {
         if !message.failed {
             actions = actionsForMessage(message, view: view)
         } else {
-            actions = offlineActionsForMessage(message)
+            actions = actionsForFailedMessage(message)
         }
 
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
@@ -96,7 +96,7 @@ extension ChatViewController {
         return actions
     }
 
-    func offlineActionsForMessage(_ message: Message) -> [UIAlertAction] {
+    func actionsForFailedMessage(_ message: Message) -> [UIAlertAction] {
 
         let resend = UIAlertAction(title: localized("chat.message.actions.resend"), style: .default, handler: { _ in
             guard
@@ -106,8 +106,24 @@ extension ChatViewController {
                 return
             }
 
-            self.dataController.delete(msgId: message.identifier ?? "")
-            client.sendMessage(text: message.text, subscription: subscription)
+            var _messageToResend: (identifier: String, text: String)? = nil
+
+            Realm.executeOnMainThread { realm in
+                guard
+                    let identifier = message.identifier,
+                    let failedMessage = subscription.messages.filter("identifier = %@", identifier).first
+                else {
+                    return
+                }
+
+                _messageToResend = (identifier: identifier, text: failedMessage.text)
+                realm.delete(failedMessage)
+            }
+
+            guard let messageToResend = _messageToResend else { return }
+
+            self.dataController.delete(msgId: messageToResend.identifier)
+            client.sendMessage(text: messageToResend.text, subscription: subscription)
         })
 
         let resendAll = UIAlertAction(title: localized("chat.message.actions.resend_all"), style: .default, handler: { _ in
@@ -118,7 +134,18 @@ extension ChatViewController {
                 return
             }
 
-            client.sendMessage(text: message.text, subscription: subscription)
+            var messagesToResend: [(identifier: String, text: String)] = []
+
+            Realm.executeOnMainThread { realm in
+                let failedMessages = subscription.messages.filter("failed = true")
+                messagesToResend = failedMessages.map { (identifier: $0.identifier ?? "", text: $0.text) }
+                realm.delete(failedMessages)
+            }
+
+            messagesToResend.forEach {
+                self.dataController.delete(msgId: $0.identifier)
+                client.sendMessage(text: $0.text, subscription: subscription)
+            }
         })
 
         return [resend, resendAll]
