@@ -14,7 +14,7 @@ struct MessageTextFontAttributes {
 
     static let defaultFontColor = UIColor.darkGray
     static let systemFontColor = UIColor.lightGray
-    static let failedFontColor = UIColor.brown
+    static let failedFontColor = UIColor.lightGray
 
     static let defaultFont = UIFont.systemFont(ofSize: defaultFontSize)
     static let italicFont = UIFont.italicSystemFont(ofSize: defaultFontSize)
