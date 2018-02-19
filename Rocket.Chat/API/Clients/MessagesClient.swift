@@ -34,10 +34,11 @@ struct MessagesClient: APIClient {
         }
 
         func setMessageOffline() {
-            DispatchQueue.main.async {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                 try? realm?.write {
                     message.temporary = false
                     message.failed = true
+                    message.updatedAt = Date()
                     realm?.add(message, update: true)
                 }
 
