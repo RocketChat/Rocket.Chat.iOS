@@ -37,7 +37,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
 
         //Try to do [WIP] PR
-           
         return true
     }
 
