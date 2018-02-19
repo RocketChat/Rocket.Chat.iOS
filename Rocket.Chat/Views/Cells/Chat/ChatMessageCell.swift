@@ -64,6 +64,8 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelText: RCTextView!
 
+    @IBOutlet weak var statusView: UIImageView!
+
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
@@ -315,6 +317,14 @@ final class ChatMessageCell: UICollectionViewCell {
             message != nil
         else {
             return
+        }
+
+        if message?.failed ?? true {
+            statusView.isHidden = false
+            statusView.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
+            statusView.tintColor = .red
+        } else {
+            statusView.isHidden = true
         }
 
         if !sequential {

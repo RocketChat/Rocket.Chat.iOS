@@ -65,10 +65,18 @@
                             <constraint firstAttribute="height" constant="40" id="un3-x5-7Av"/>
                         </constraints>
                     </view>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Exclamation" translatesAutoresizingMaskIntoConstraints="NO" id="Gxd-Cw-G69">
+                        <rect key="frame" x="133" y="5" width="16" height="16"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="16" id="NhW-py-xNz"/>
+                            <constraint firstAttribute="height" constant="16" id="cco-0E-Vbd"/>
+                        </constraints>
+                    </imageView>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="sWJ-OU-dZk" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="47" id="1TD-TH-eBP"/>
+                <constraint firstItem="Gxd-Cw-G69" firstAttribute="centerY" secondItem="pvK-41-cNi" secondAttribute="centerY" id="3p5-a3-GUZ"/>
                 <constraint firstItem="40K-VI-9eL" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="2" id="4Ig-wg-cUQ"/>
                 <constraint firstItem="dHe-RL-dFU" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="5" id="4Zr-IT-efr"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="2" id="796-8s-tZB"/>
@@ -76,6 +84,7 @@
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="7" id="9Lf-Mp-5cE"/>
                 <constraint firstAttribute="trailing" secondItem="sWJ-OU-dZk" secondAttribute="trailing" constant="8" id="D1b-Il-xxS"/>
                 <constraint firstItem="Idm-4q-rB2" firstAttribute="top" secondItem="sWJ-OU-dZk" secondAttribute="bottom" id="J8K-SC-v89"/>
+                <constraint firstItem="Gxd-Cw-G69" firstAttribute="leading" secondItem="pvK-41-cNi" secondAttribute="trailing" constant="7" id="LKE-Pc-HmH"/>
                 <constraint firstAttribute="trailing" secondItem="pvK-41-cNi" secondAttribute="trailing" priority="900" constant="2" id="OVZ-S3-Gij"/>
                 <constraint firstAttribute="trailing" secondItem="Idm-4q-rB2" secondAttribute="trailing" constant="8" id="Wzj-wo-r7j"/>
                 <constraint firstItem="sWJ-OU-dZk" firstAttribute="top" secondItem="2eJ-5r-Kgq" secondAttribute="bottom" id="cqm-ha-bqT"/>
@@ -106,8 +115,12 @@
                 <outlet property="mediaViewsHeightConstraint" destination="4Ab-x2-r5e" id="W2f-II-O9Y"/>
                 <outlet property="reactionsListView" destination="Idm-4q-rB2" id="Ngi-hA-zYt"/>
                 <outlet property="reactionsListViewConstraint" destination="un3-x5-7Av" id="hj4-Bd-W8t"/>
+                <outlet property="statusView" destination="Gxd-Cw-G69" id="shS-p3-TpK"/>
             </connections>
             <point key="canvasLocation" x="699" y="660"/>
         </collectionViewCell>
     </objects>
+    <resources>
+        <image name="Exclamation" width="20" height="20"/>
+    </resources>
 </document>
