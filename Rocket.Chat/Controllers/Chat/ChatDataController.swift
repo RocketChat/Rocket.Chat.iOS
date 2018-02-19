@@ -64,10 +64,30 @@ final class ChatDataController {
 
         guard
             let prevMessage = itemAt(prevIndexPath)?.message,
-            let message = itemAt(indexPath)?.message,
+            let message = itemAt(indexPath)?.message
+        else {
+            return false
+        }
+
+        guard
             message.type.sequential && prevMessage.type.sequential &&
-            message.groupable && prevMessage.groupable &&
-            !(message.markedForDeletion || prevMessage.markedForDeletion),
+            message.groupable && prevMessage.groupable
+        else {
+            return false
+        }
+
+        // don't group if marked for deletion
+        guard !(message.markedForDeletion || prevMessage.markedForDeletion) else {
+            return false
+        }
+
+        // don't group failed messages
+        guard !(message.failed || prevMessage.failed) else {
+            return false
+        }
+
+        // unwrap dates
+        guard
             let date = message.createdAt,
             let prevDate = prevMessage.createdAt
         else {
