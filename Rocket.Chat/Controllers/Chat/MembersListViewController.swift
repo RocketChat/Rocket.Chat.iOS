@@ -160,7 +160,7 @@ extension MembersListViewController: UITableViewDataSource {
         if indexPath.row == data.members.count {
             return self.loaderCell
         }
-
+    
         if let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier) as? MemberCell {
             cell.data = MemberCellData(member: data.member(at: indexPath.row))
             return cell
@@ -183,12 +183,40 @@ extension MembersListViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let user = data.member(at: indexPath.row)
-        delegate?.membersList(self, didSelectUser: user)
+        self.checkUserBlockState(user)
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == data.members.count - data.pageSize/2 {
             loadMoreMembers()
+        }
+    }
+}
+
+extension MembersListViewController {
+    func checkUserBlockState(_ user: User) {
+        let isBlocked = MessageManager.blockedUsersList.contains(user.identifier!);
+        if isBlocked == true {
+            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+            
+            alert.addAction(UIAlertAction(title: "Open Profile", style: .default, handler: { [weak self] _ in
+                self?.delegate?.membersList(self!, didSelectUser: user)
+            }))
+            alert.addAction(UIAlertAction(title: "Unblock", style: .destructive, handler: { _ in
+                MessageManager.unblockMessagesFrom(user, completion: {
+                    //Do nothing
+                })
+            }))
+            alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+            
+            if let presenter = alert.popoverPresentationController {
+                presenter.sourceView = view
+                presenter.sourceRect = view.bounds
+            }
+            
+            present(alert, animated: true, completion: nil)
+        } else {
+            delegate?.membersList(self, didSelectUser: user)
         }
     }
 }
