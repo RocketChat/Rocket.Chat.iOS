@@ -133,6 +133,8 @@
 "chat.message.actions.delete.confirm.title" = "Delete this message?"; // TODO
 "chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone."; //TODO
 "chat.message.actions.delete.confirm.yes" = "Yes, delete"; // TODO
+"chat.message.actions.resend" = "Resend"; //TODO
+"chat.message.actions.resend_all" = "Resend all"; //TODO
 "Send" = "Odeslat"; //SLKTextInputbar.m
 
 // Chat Message Report

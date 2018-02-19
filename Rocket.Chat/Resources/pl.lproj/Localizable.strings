@@ -133,6 +133,8 @@
 "chat.message.actions.delete.confirm.title" = "Usunąć wiadomość?";
 "chat.message.actions.delete.confirm.message" = "Czy na pewno usunąć tą wiadomość? Tej czynności nie można cofnąć.";
 "chat.message.actions.delete.confirm.yes" = "Tak, usuń";
+"chat.message.actions.resend" = "Resend"; //TODO
+"chat.message.actions.resend_all" = "Resend all"; //TODO
 "Send" = "Wyślij"; //SLKTextInputbar.m
 
 // Chat Message Report
