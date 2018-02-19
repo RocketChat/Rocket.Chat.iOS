@@ -36,7 +36,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             WindowManager.open(.auth(serverUrl: "", credentials: nil))
         }
 
-        //Try to do [WIP] PR
         return true
     }
 
