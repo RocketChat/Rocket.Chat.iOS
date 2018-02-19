@@ -16,12 +16,12 @@ import SwiftyJSON
 
 extension Message {
 
-    static func testInstance() -> Message {
+    static func testInstance(_ name: String = "message") -> Message {
         let message = Message()
         message.user = User.testInstance()
-        message.text = "message-text"
+        message.text = "\(name)-text"
         message.subscription = Subscription.testInstance()
-        message.identifier = "message-identifier"
+        message.identifier = "\(name)-identifier"
         message.subscription.type = .channel
         message.createdAt = Date()
         return message

@@ -87,6 +87,8 @@ final class ChatViewController: SLKTextViewController {
                 reconnect()
             }
 
+            subscription.setTemporaryMessagesFailed()
+
             subscriptionToken = subscription.observe { [weak self] changes in
                 switch changes {
                 case .change(let propertyChanges):

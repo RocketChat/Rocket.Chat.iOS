@@ -342,4 +342,34 @@ extension SubscriptionSpec: RealmTestCase {
         // if there's no last notification room id (user launched app by tapping notification)
         XCTAssertEqual(Subscription.initialSubscription(auth: auth), sub2)
     }
+
+    func testSetTemporaryMessagesFailed() {
+        let realm = testRealm()
+
+        let sub = Subscription.testInstance()
+
+        let msg1 = Message.testInstance("msg1")
+        msg1.subscription = sub
+        msg1.failed = false
+        msg1.temporary = true
+
+        let msg2 = Message.testInstance("msg2")
+        msg2.subscription = sub
+        msg2.failed = false
+        msg2.temporary = true
+
+        try? realm.write {
+            realm.add(sub, update: true)
+            realm.add(msg1, update: true)
+            realm.add(msg2, update: true)
+        }
+
+        sub.setTemporaryMessagesFailed()
+
+        XCTAssert(msg1.failed == true)
+        XCTAssert(msg1.temporary == false)
+
+        XCTAssert(msg2.failed == true)
+        XCTAssert(msg2.temporary == false)
+    }
 }
