@@ -195,10 +195,10 @@ extension MembersListViewController: UITableViewDelegate {
 
 extension MembersListViewController {
     func checkUserBlockState(_ user: User) {
-        let isBlocked = MessageManager.blockedUsersList.contains(user.identifier!);
+        let isBlocked = MessageManager.blockedUsersList.contains(user.identifier!)
         if isBlocked == true {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            
+
             alert.addAction(UIAlertAction(title: "Open Profile", style: .default, handler: { [weak self] _ in
                 self?.delegate?.membersList(self!, didSelectUser: user)
             }))
@@ -208,12 +208,12 @@ extension MembersListViewController {
                 })
             }))
             alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
-            
+
             if let presenter = alert.popoverPresentationController {
                 presenter.sourceView = view
                 presenter.sourceRect = view.bounds
             }
-            
+
             present(alert, animated: true, completion: nil)
         } else {
             delegate?.membersList(self, didSelectUser: user)
