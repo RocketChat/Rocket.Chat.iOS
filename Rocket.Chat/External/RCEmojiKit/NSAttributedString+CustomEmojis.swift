@@ -16,7 +16,9 @@ extension NSAttributedString {
         return emojis.reduce(mutableSelf) { attributedString, emoji in
             guard case let .custom(imageUrl) = emoji.type else { return attributedString }
 
-            let regexPattern = ":\(emoji.shortname):|:\(emoji.alternates.joined(separator: ":|:")):"
+            let alternates = emoji.alternates.filter { !$0.isEmpty }
+
+            let regexPattern = ":\(emoji.shortname):" + (alternates.isEmpty ? "" : "|:\(alternates.joined(separator: ":|:")):")
 
             guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }
 
