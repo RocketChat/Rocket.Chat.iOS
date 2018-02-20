@@ -84,20 +84,20 @@ extension ChatViewController {
 
     func presentActionForBlockedUser(_ message: Message, view: UIView) {
         guard message.type.actionable else { return }
-        
+
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-        
+
         alert.addAction(UIAlertAction(title: "Unblock", style: .default, handler: { _ in
             //Should call method for unblocking user
         }))
-        
+
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
-        
+
         if let presenter = alert.popoverPresentationController {
             presenter.sourceView = view
             presenter.sourceRect = view.bounds
         }
-        
+
         present(alert, animated: true, completion: nil)
     }
     
