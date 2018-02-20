@@ -145,3 +145,25 @@ extension Auth {
         return .allowed
     }
 }
+
+extension Auth {
+    enum CanBlockMessageResult {
+        case allowed
+        case notActionable
+        case myOwn
+        case unknown
+    }
+
+    func canBlockMessage(_ message: Message) -> CanBlockMessageResult {
+        guard let user = user else { return .unknown }
+
+        if !message.type.actionable {
+            return .notActionable
+        }
+        if message.user == user {
+            return .myOwn
+        }
+
+        return .allowed
+    }
+}

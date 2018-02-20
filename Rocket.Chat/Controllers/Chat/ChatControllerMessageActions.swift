@@ -36,15 +36,16 @@ extension ChatViewController {
             self.report(message: message)
         }))
 
-        alert.addAction(UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
-            guard let user = message.user else { return }
-
-            DispatchQueue.main.async {
-                MessageManager.blockMessagesFrom(user, completion: {
-                    self?.updateSubscriptionInfo()
-                })
-            }
-        }))
+        if AuthManager.isAuthenticated()?.canBlockMessage(message) == .allowed {
+            alert.addAction(UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
+                guard let user = message.user else { return }
+                DispatchQueue.main.async {
+                    MessageManager.blockMessagesFrom(user, completion: {
+                        self?.updateSubscriptionInfo()
+                    })
+                }
+            }))
+        }
 
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.copy"), style: .default, handler: { (_) in
             UIPasteboard.general.string = message.text

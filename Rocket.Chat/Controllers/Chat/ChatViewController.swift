@@ -377,7 +377,11 @@ final class ChatViewController: SLKTextViewController {
     }
 
     override func didPressReturnKey(_ keyCommand: UIKeyCommand?) {
-        didPressRightButton(nil)
+        if messageToEdit != nil {
+            didCommitTextEditing(self)
+        } else {
+            didPressRightButton(self)
+        }
     }
 
     override func textViewDidBeginEditing(_ textView: UITextView) {
