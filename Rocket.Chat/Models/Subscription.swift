@@ -155,6 +155,28 @@ extension Subscription {
         })
     }
 
+    func lastMessageText() -> String {
+        guard let lastMessage = roomLastMessage else {
+            return "No message"
+        }
+
+        var text = lastMessage.text
+
+        if text.isEmpty {
+            if lastMessage.attachments.count > 0 {
+                text = "Sent an attachment."
+            }
+        }
+
+        if type != .directMessage {
+            if let userLastMessage = lastMessage.user?.displayName() {
+                text = "\(userLastMessage): \(text)"
+            }
+        }
+
+        return text
+    }
+
 }
 
 // MARK: Queries

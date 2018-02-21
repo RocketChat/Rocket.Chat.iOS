@@ -305,7 +305,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     @objc func openUserContextMenu() {
-        performSegue(withIdentifier: "User", sender: nil)
+        // performSegue(withIdentifier: "User", sender: nil)
     }
 
 }

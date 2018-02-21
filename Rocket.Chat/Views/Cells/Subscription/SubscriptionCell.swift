@@ -78,7 +78,7 @@ final class SubscriptionCell: UITableViewCell {
         avatarView.user = subscription.directMessageUser
         labelName.text = subscription.displayName()
 
-        labelLastMessage.text = subscription.roomLastMessage?.text ?? "No message"
+        labelLastMessage.text = subscription.lastMessageText()
 
         let nameFontSize = labelName.font.pointSize
         let dateFontSize = labelDate.font.pointSize
@@ -109,7 +109,15 @@ final class SubscriptionCell: UITableViewCell {
 
         if subscription.type == .directMessage {
             viewStatus.isHidden = false
-//            viewStatus.backgroundColor = color
+
+            if let user = subscription.directMessageUser {
+                switch user.status {
+                case .online: viewStatus.backgroundColor = .RCOnline()
+                case .busy: viewStatus.backgroundColor = .RCBusy()
+                case .away: viewStatus.backgroundColor = .RCAway()
+                case .offline: viewStatus.backgroundColor = .RCInvisible()
+                }
+            }
         } else {
             viewStatus.isHidden = true
         }
