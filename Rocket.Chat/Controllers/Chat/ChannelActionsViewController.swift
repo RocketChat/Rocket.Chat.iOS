@@ -29,19 +29,18 @@ class ChannelActionsViewController: BaseViewController {
             let data = [[
                 ChannelInfoUserCellData(user: subscription.directMessageUser)
             ], [
-                ChannelInfoActionCellData(icon: UIImage(named: "Message"), title: "Message", action: nil),
-                ChannelInfoActionCellData(icon: UIImage(named: "Call"), title: "Voice call", action: nil),
-                ChannelInfoActionCellData(icon: UIImage(named: "Video"), title: "Video call", action: nil)
+                ChannelInfoActionCellData(icon: UIImage(named: "Message"), title: "Message", action: nil)
+//                ChannelInfoActionCellData(icon: UIImage(named: "Call"), title: "Voice call", action: nil),
+//                ChannelInfoActionCellData(icon: UIImage(named: "Video"), title: "Video call", action: nil)
             ], [
                 ChannelInfoActionCellData(icon: UIImage(named: "Attachments"), title: "Files", action: nil),
                 ChannelInfoActionCellData(icon: UIImage(named: "Mentions"), title: "Mentions", action: nil),
-                ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: "Members", action: showMembersList),
-                ChannelInfoActionCellData(icon: UIImage(named: "Starred"), title: "Starred", action: showStarredList),
+                ChannelInfoActionCellData(icon: UIImage(named: "Members"), title: "Members", action: showMembersList),
+                ChannelInfoActionCellData(icon: UIImage(named: "Star Off"), title: "Starred", action: showStarredList),
                 ChannelInfoActionCellData(icon: UIImage(named: "Search"), title: "Search", action: nil),
                 ChannelInfoActionCellData(icon: UIImage(named: "Share"), title: "Share", action: nil),
                 ChannelInfoActionCellData(icon: UIImage(named: "Pinned"), title: "Pinned", action: showPinnedList),
-                ChannelInfoActionCellData(icon: UIImage(named: "Snipped"), title: "Snippets", action: nil),
-                ChannelInfoActionCellData(icon: UIImage(named: "Downloads"), title: "Downloads", action: nil)
+                ChannelInfoActionCellData(icon: UIImage(named: "Snippets"), title: "Snippets", action: nil)
             ]]
 
             tableViewData = data
