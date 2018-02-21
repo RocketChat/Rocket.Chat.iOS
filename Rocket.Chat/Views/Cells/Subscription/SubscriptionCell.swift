@@ -38,13 +38,11 @@ final class SubscriptionCell: UITableViewCell {
     weak var avatarView: AvatarView!
     @IBOutlet weak var avatarViewContainer: UIView! {
         didSet {
-            avatarViewContainer.layer.cornerRadius = 20
+            avatarViewContainer.layer.cornerRadius = 4
             avatarViewContainer.layer.masksToBounds = true
 
             if let avatarView = AvatarView.instantiateFromNib() {
                 avatarView.frame = avatarViewContainer.bounds
-                avatarView.layer.cornerRadius = 4
-                avatarView.layer.masksToBounds = true
                 avatarViewContainer.addSubview(avatarView)
                 self.avatarView = avatarView
             }
@@ -79,7 +77,8 @@ final class SubscriptionCell: UITableViewCell {
         avatarView.subscription = subscription
         avatarView.user = subscription.directMessageUser
         labelName.text = subscription.displayName()
-        labelLastMessage.text = subscription.roomLastMessage?.text
+
+        labelLastMessage.text = subscription.roomLastMessage?.text ?? "No message"
 
         let nameFontSize = labelName.font.pointSize
         let dateFontSize = labelDate.font.pointSize

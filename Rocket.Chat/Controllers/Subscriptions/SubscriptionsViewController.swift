@@ -31,7 +31,6 @@ final class SubscriptionsViewController: BaseViewController {
 
         SocketManager.reconnect()
 
-        updateAll()
         setupSearchBar()
         setupServerButton()
         setupTitleView()
@@ -40,7 +39,8 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateCurrentUserInformation()
+
+        updateData()
 
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: animated)
