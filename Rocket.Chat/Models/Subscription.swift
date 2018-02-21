@@ -156,22 +156,26 @@ extension Subscription {
     }
 
     func lastMessageText() -> String {
-        guard let lastMessage = roomLastMessage else {
+        guard
+            let lastMessage = roomLastMessage,
+            let userLastMessage = lastMessage.user
+        else {
             return "No message"
         }
 
+        let isFromCurrentUser = userLastMessage.identifier == AuthManager.currentUser()?.identifier
         var text = lastMessage.text
 
-        if text.isEmpty {
-            if lastMessage.attachments.count > 0 {
-                text = "Sent an attachment."
+        if text.isEmpty && lastMessage.attachments.count > 0 {
+            text = "sent an attachment"
+        } else {
+            if !isFromCurrentUser {
+                text = ": \(text)"
             }
         }
 
-        if type != .directMessage {
-            if let userLastMessage = lastMessage.user?.displayName() {
-                text = "\(userLastMessage): \(text)"
-            }
+        if !isFromCurrentUser {
+            text = "\(userLastMessage.displayName())\(text)"
         }
 
         return text

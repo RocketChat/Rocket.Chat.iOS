@@ -83,6 +83,10 @@ final class SubscriptionCell: UITableViewCell {
         let nameFontSize = labelName.font.pointSize
         let dateFontSize = labelDate.font.pointSize
 
+        if let roomUpdatedAt = subscription.roomUpdatedAt {
+            labelDate.text = dateFormatted(date: roomUpdatedAt)
+        }
+
         if subscription.unread > 0 {
             labelName.font = UIFont.boldSystemFont(ofSize: nameFontSize)
             labelDate.font = UIFont.boldSystemFont(ofSize: dateFontSize)
@@ -97,10 +101,6 @@ final class SubscriptionCell: UITableViewCell {
 
             labelUnread.alpha = 0
             labelUnread.text =  ""
-        }
-
-        if let roomUpdatedAt = subscription.roomUpdatedAt {
-            labelDate.text = dateFormatted(date: roomUpdatedAt)
         }
     }
 
