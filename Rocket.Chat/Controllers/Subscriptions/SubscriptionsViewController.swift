@@ -348,7 +348,11 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         searchController?.searchBar.resignFirstResponder()
 
-        if let controller = UIStoryboard(name: "Chat", bundle: Bundle.main).instantiateInitialViewController() as? ChatViewController {
+        if let nav = splitViewController?.detailViewController as? BaseNavigationController {
+            if let chatController = nav.viewControllers.first as? ChatViewController {
+                chatController.subscription = subscription
+            }
+        } else if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
             controller.subscription = subscription
             navigationController?.pushViewController(controller, animated: true)
         }
