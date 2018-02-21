@@ -279,10 +279,12 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             updateAll()
         }
 
-        updateBackButton()
-        updateCurrentUserInformation()
+        OperationQueue.main.addOperation {
+            self.updateBackButton()
+            self.tableView.reloadData()
+        }
+
         SubscriptionManager.updateUnreadApplicationBadge()
-        tableView?.reloadData()
     }
 
     func handleCurrentUserUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
