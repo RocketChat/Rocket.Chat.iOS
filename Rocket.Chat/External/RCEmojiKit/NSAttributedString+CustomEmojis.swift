@@ -24,7 +24,16 @@ extension NSAttributedString {
 
             let matches = regex.matches(in: attributedString.string, options: [], range: NSRange(location: 0, length: attributedString.length))
 
-            for match in matches {
+            // exclude matches inside code tags
+            let codeRanges = attributedString.string.codeRanges()
+
+            let filteredMatches = matches.filter { match in
+                !codeRanges.contains { range in
+                    match.range(at: 0).location >= range.location && match.range(at: 0).length <= range.length
+                }
+            }
+
+            for match in filteredMatches {
                 let imageAttachment = NSTextAttachment()
                 imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
                 imageAttachment.contents = imageUrl.data(using: .utf8)
@@ -34,5 +43,13 @@ extension NSAttributedString {
 
             return attributedString
         }
+    }
+}
+
+extension String {
+    func codeRanges() -> [NSRange] {
+        let codeRegex = try? NSRegularExpression(pattern: "(```)(?:[a-zA-Z]+)?((?:.|\r|\n)*?)(```)", options: [.anchorsMatchLines])
+        let codeMatches = codeRegex?.matches(in: self, options: [], range: NSRange(location: 0, length: count)) ?? []
+        return codeMatches.map { $0.range(at: 0) }
     }
 }
