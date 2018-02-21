@@ -22,17 +22,20 @@ jobs:
           name: Update Dependencies
           command: ./Scripts/update_dependencies.sh
       - run:
-          name: Run tests on iPad iOS 10.3
-          command: ./Scripts/test-clean.sh "10.3.1" "iPad Air 2"
+          name: Build for testing
+          command: ./Scripts/build_for_testing.sh
       - run:
-          name: Run tests on iPhone iOS 10.3
-          command: ./Scripts/test.sh "10.3.1" "iPhone 5"
+          name: Run tests on iPad iOS 10.3
+          command: ./Scripts/test_without_building.sh "10.3.1" "iPad Air 2"
       - run:
           name: Run tests on iPad iOS 11.0
-          command: ./Scripts/test.sh "11.0" "iPad Air 2"
+          command: ./Scripts/test_without_building.sh "11.0" "iPad Air 2"
+      - run:
+          name: Run tests on iPhone iOS 10.3
+          command: ./Scripts/test_without_building.sh "10.3.1" "iPhone 5s"
       - run:
           name: Run tests on iPhone iOS 11.0
-          command: ./Scripts/test-coverage.sh "11.0" "iPhone 8"
+          command: ./Scripts/test_without_building.sh "11.0" "iPhone 8"
       - run:
           name: Codecov
           command: bash <(curl -s https://codecov.io/bash) -J 'Rocket.Chat'
