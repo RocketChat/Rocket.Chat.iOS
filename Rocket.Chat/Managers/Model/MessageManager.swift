@@ -199,5 +199,25 @@ extension MessageManager {
             }
         })
     }
+    
+    static func unblockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
+        guard let userIdentifier = user.identifier else { return }
+        var blockedUsers: [String] = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
+        blockedUsers.remove(object: userIdentifier)
+        UserDefaults.standard.setValue(blockedUsers, forKey: kBlockedUsersIndentifiers)
+        self.blockedUsersList = blockedUsers
+
+        Realm.execute({ (realm) in
+            let messages = realm.objects(Message.self).filter("user.identifier = '\(userIdentifier)'")
+
+            for message in messages {
+                message.userBlocked = false
+            }
+
+            DispatchQueue.main.async {
+                completion()
+            }
+        })
+    }
 
 }
