@@ -163,7 +163,7 @@
         <!--Split View Controller-->
         <scene sceneID="xwn-PL-3sB">
             <objects>
-                <splitViewController id="GCf-VY-VV6" sceneMemberID="viewController">
+                <splitViewController presentsWithGesture="NO" id="GCf-VY-VV6" sceneMemberID="viewController">
                     <connections>
                         <segue destination="M6P-WE-AWB" kind="relationship" relationship="masterViewController" id="kFT-O8-SmH"/>
                         <segue destination="Q7Z-N2-FIp" kind="relationship" relationship="detailViewController" id="ANx-bz-Lqe"/>
@@ -705,7 +705,7 @@
     </scenes>
     <resources>
         <image name="Add" width="15" height="15"/>
-        <image name="Logout" width="29" height="22"/>
+        <image name="Logout" width="19" height="18"/>
         <image name="Settings" width="20" height="20"/>
     </resources>
 </document>

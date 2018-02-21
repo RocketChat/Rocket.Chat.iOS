@@ -180,8 +180,8 @@ class NewRoomViewController: BaseViewController {
             SubscriptionManager.updateSubscriptions(auth) { _ in
                 if let newRoom = Realm.shared?.objects(Subscription.self).filter("name == '\(name)' && privateType != 'd'").first {
 
-                    let controller = ChatViewController.shared
-                    controller?.subscription = newRoom
+                    // let controller = ChatViewController.shared
+                    // controller?.subscription = newRoom
 
                     completion(true, nil)
                 } else {

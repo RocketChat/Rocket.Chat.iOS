@@ -263,28 +263,26 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         subscriptions = auth.subscriptions.sorted(byKeyPath: "roomUpdatedAt", ascending: false).filterBy(name: searchText)
     }
 
+    func updateSubscriptionsList() {
+        OperationQueue.main.addOperation {
+            self.updateBackButton()
+
+            for cell in self.tableView.visibleCells {
+                if let subscriptionCell = cell as? SubscriptionCell {
+                    let subscription = subscriptionCell.subscription
+                    let newObject = self.subscriptions?.filter("identifier = %@", subscription?.identifier).first
+                    subscriptionCell.subscription = newObject
+                }
+            }
+        }
+    }
+
     func updateData() {
         guard !isSearchingLocally && !isSearchingRemotely else { return }
 
         updateAll()
         updateCurrentUserInformation()
-
-        tableView?.reloadData()
-    }
-
-    func handleModelUpdates<T>(_: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        if isSearchingLocally || isSearchingRemotely {
-            updateSearched()
-        } else {
-            updateAll()
-        }
-
-        OperationQueue.main.addOperation {
-            self.updateBackButton()
-            self.tableView.reloadData()
-        }
-
-        SubscriptionManager.updateUnreadApplicationBadge()
+        updateSubscriptionsList()
     }
 
     func handleCurrentUserUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
@@ -298,7 +296,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
             updateAll()
         }
 
-        tableView?.reloadData()
+        updateSubscriptionsList()
     }
 
     func updateCurrentUserInformation() {

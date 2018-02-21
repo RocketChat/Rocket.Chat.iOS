@@ -94,8 +94,9 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
             guard let imageURL = attachment.fullImageURL() else {
                 return
             }
+
             Ask(key: "alert.insecure_image", buttonB: localized("chat.message.open_browser"), handlerB: { _ in
-                ChatViewController.shared?.openURL(url: imageURL)
+                // ChatViewController.shared?.openURL(url: imageURL)
             }).present()
         }
     }

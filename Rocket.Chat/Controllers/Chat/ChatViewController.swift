@@ -90,14 +90,6 @@ final class ChatViewController: SLKTextViewController {
                 }
             }
 
-            if let oldValue = oldValue {
-                if oldValue.identifier != subscription.identifier {
-                    emptySubscriptionState()
-                }
-            } else {
-                emptySubscriptionState()
-            }
-
             updateSubscriptionInfo()
             markAsRead()
             typingIndicatorView?.dismissIndicator()
@@ -111,14 +103,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     // MARK: View Life Cycle
-
-    static var shared: ChatViewController? {
-        if let nav = UIApplication.shared.delegate?.window??.rootViewController as? UINavigationController {
-            return nav.viewControllers.last as? ChatViewController
-        }
-
-        return nil
-    }
 
     deinit {
         messagesToken?.invalidate()
@@ -136,6 +120,7 @@ final class ChatViewController: SLKTextViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.barTintColor = UIColor.white
         navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)

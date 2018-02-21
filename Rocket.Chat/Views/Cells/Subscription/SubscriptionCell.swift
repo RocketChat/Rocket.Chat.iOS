@@ -74,8 +74,12 @@ final class SubscriptionCell: UITableViewCell {
 
         updateStatus()
 
-        avatarView.subscription = subscription
-        avatarView.user = subscription.directMessageUser
+        if let user = subscription.directMessageUser {
+            avatarView.user = user
+        } else {
+            avatarView.subscription = subscription
+        }
+
         labelName.text = subscription.displayName()
 
         labelLastMessage.text = subscription.lastMessageText()

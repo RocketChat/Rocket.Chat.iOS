@@ -68,8 +68,6 @@ extension AppManager {
         if index != DatabaseManager.selectedIndex {
             AppManager.initialRoomId = roomId
             changeSelectedServer(index: index)
-        } else if let roomId = roomId, let subscription = Subscription.find(rid: roomId) {
-            ChatViewController.shared?.subscription = subscription
         } else {
             changeSelectedServer(index: index)
         }
@@ -109,8 +107,9 @@ extension AppManager {
         func openDirectMessage() -> Bool {
             guard let directMessageRoom = Subscription.find(name: username, subscriptionType: [.directMessage]) else { return false }
 
-            let controller = ChatViewController.shared
-            controller?.subscription = directMessageRoom
+            // TODO: Have to fix here
+            // let controller = ChatViewController.shared
+            // controller?.subscription = directMessageRoom
 
             completion?()
 
@@ -138,7 +137,7 @@ extension AppManager {
         func openChannel() -> Bool {
             guard let channel = Subscription.find(name: name, subscriptionType: [.channel]) else { return false }
 
-            ChatViewController.shared?.subscription = channel
+            // ChatViewController.shared?.subscription = channel
 
             return true
         }
