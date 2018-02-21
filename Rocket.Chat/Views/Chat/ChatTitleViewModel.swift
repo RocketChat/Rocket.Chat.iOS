@@ -41,13 +41,13 @@ final class ChatTitleViewModel {
 
     var imageName: String {
         guard let subscription = subscription else {
-            return "Hashtag"
+            return "Channel Small"
         }
 
         switch subscription.type {
-        case .channel: return "Hashtag"
-        case .directMessage: return "Mention"
-        case .group: return "Lock"
+        case .channel: return "Channel Small"
+        case .directMessage: return "DM Small"
+        case .group: return "Group Small"
         }
     }
 
