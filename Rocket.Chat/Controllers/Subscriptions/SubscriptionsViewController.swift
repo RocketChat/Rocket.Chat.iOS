@@ -20,7 +20,7 @@ final class SubscriptionsViewController: BaseViewController {
     var isSearchingLocally = false
     var isSearchingRemotely = false
     var searchResult: [Subscription]?
-    var subscriptions: [Subscription]?
+    var subscriptions: Results<Subscription>?
     var subscriptionsToken: NotificationToken?
     var currentUserToken: NotificationToken?
 
@@ -35,6 +35,8 @@ final class SubscriptionsViewController: BaseViewController {
         setupServerButton()
         setupTitleView()
         updateBackButton()
+
+        subscribeModelChanges()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -61,6 +63,24 @@ final class SubscriptionsViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         segue.destination.modalPresentationCapturesStatusBarAppearance = true
+    }
+
+    // MARK: Subscriptions
+
+    func subscribeModelChanges() {
+        guard !assigned else { return }
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let realm = Realm.shared else { return }
+
+        assigned = true
+
+        subscriptions = auth.subscriptions.sorted(byKeyPath: "roomUpdatedAt", ascending: false)
+        subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
+
+        if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
+            let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
+            currentUserToken = query.observe(handleCurrentUserUpdates)
+        }
     }
 
     // MARK: Setup Views
@@ -186,7 +206,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: text).sortedByLastMessageDate()
+        subscriptions = auth.subscriptions.filterBy(name: text)
         searchText = text
 
         if text.count == 0 {
@@ -235,12 +255,12 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func updateAll() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sortedByLastMessageDate()
+        subscriptions = auth.subscriptions.sorted(byKeyPath: "roomUpdatedAt", ascending: false)
     }
 
     func updateSearched() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: searchText).sortedByLastMessageDate()
+        subscriptions = auth.subscriptions.sorted(byKeyPath: "roomUpdatedAt", ascending: false).filterBy(name: searchText)
     }
 
     func updateData() {
@@ -270,7 +290,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        // If side panel is visible, reload the data
         if isSearchingLocally || isSearchingRemotely {
             updateSearched()
         } else {
