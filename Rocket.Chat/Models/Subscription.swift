@@ -167,7 +167,7 @@ extension Subscription {
         var text = lastMessage.text
 
         if text.isEmpty && lastMessage.attachments.count > 0 {
-            text = "sent an attachment"
+            text = " sent an attachment"
         } else {
             if !isFromCurrentUser {
                 text = ": \(text)"
