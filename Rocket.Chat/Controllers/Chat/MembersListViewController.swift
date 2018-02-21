@@ -198,7 +198,6 @@ extension MembersListViewController {
         let isBlocked = MessageManager.blockedUsersList.contains(user.identifier!)
         if isBlocked == true {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-
             alert.addAction(UIAlertAction(title: "Open Profile", style: .default, handler: { [weak self] _ in
                 self?.delegate?.membersList(self!, didSelectUser: user)
             }))
@@ -213,7 +212,6 @@ extension MembersListViewController {
                 presenter.sourceView = view
                 presenter.sourceRect = view.bounds
             }
-
             present(alert, animated: true, completion: nil)
         } else {
             delegate?.membersList(self, didSelectUser: user)
