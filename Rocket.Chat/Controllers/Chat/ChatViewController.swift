@@ -48,7 +48,6 @@ final class ChatViewController: SLKTextViewController {
 
     weak var chatTitleView: ChatTitleView?
     weak var chatPreviewModeView: ChatPreviewModeView?
-    weak var chatHeaderViewStatus: ChatHeaderViewStatus?
     var documentController: UIDocumentInteractionController?
 
     var replyView: ReplyView!
@@ -60,34 +59,22 @@ final class ChatViewController: SLKTextViewController {
     var searchResult: [(String, Any)] = []
     var searchWord: String = ""
 
-    var closeSidebarAfterSubscriptionUpdate = false
-
     var isRequestingHistory = false
     var isAppendingMessages = false
 
     var subscriptionToken: NotificationToken?
 
-    let socketHandlerToken = String.random(5)
     var messagesToken: NotificationToken!
     var messagesQuery: Results<Message>!
     var messages: [Message] = []
 
     var subscription: Subscription? {
         didSet {
-            // clean up
-            subscriptionToken?.invalidate()
-            didCancelTextEditing(self)
-
             guard
                 let subscription = subscription,
                 !subscription.isInvalidated
             else {
                 return
-            }
-
-            if !SocketManager.isConnected() {
-                socketDidDisconnect(socket: SocketManager.sharedInstance)
-                reconnect()
             }
 
             subscriptionToken = subscription.observe { [weak self] changes in
@@ -134,8 +121,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
         messagesToken?.invalidate()
         subscriptionToken?.invalidate()
     }
@@ -183,14 +168,6 @@ final class ChatViewController: SLKTextViewController {
             action: nil
         )
 
-        NotificationCenter.default.addObserver(self, selector: #selector(reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
-
-        if !SocketManager.isConnected() {
-            socketDidDisconnect(socket: SocketManager.sharedInstance)
-            reconnect()
-        }
-
         subscription = .initialSubscription()
 
         view.bringSubview(toFront: activityIndicatorContainer)
@@ -208,24 +185,6 @@ final class ChatViewController: SLKTextViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
-    }
-
-    @objc internal func reconnect() {
-        chatHeaderViewStatus?.labelTitle.text = localized("connection.connecting.banner.message")
-        chatHeaderViewStatus?.activityIndicator.startAnimating()
-        chatHeaderViewStatus?.buttonRefresh.isHidden = true
-
-        if !SocketManager.isConnected() {
-            SocketManager.reconnect()
-        }
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            if !SocketManager.isConnected() {
-                self.chatHeaderViewStatus?.labelTitle.text = localized("connection.offline.banner.message")
-                self.chatHeaderViewStatus?.activityIndicator.stopAnimating()
-                self.chatHeaderViewStatus?.buttonRefresh.isHidden = false
-            }
-        }
     }
 
     override func viewWillLayoutSubviews() {
@@ -521,11 +480,6 @@ final class ChatViewController: SLKTextViewController {
             self.collectionView?.deleteItems(at: indexPaths)
         }, completion: { _ in
             CATransaction.commit()
-
-            if self.closeSidebarAfterSubscriptionUpdate {
-//                MainChatViewController.closeSideMenuIfNeeded()
-                self.closeSidebarAfterSubscriptionUpdate = false
-            }
         })
     }
 
@@ -640,7 +594,7 @@ final class ChatViewController: SLKTextViewController {
         let tempSubscription = Subscription(value: subscription)
 
         if date == nil {
-            showLoadingMessagesHeaderStatusView()
+//            showLoadingMessagesHeaderStatusView()
         }
 
         MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
@@ -648,7 +602,7 @@ final class ChatViewController: SLKTextViewController {
                 self?.activityIndicator.stopAnimating()
 
                 if date == nil {
-                    self?.hideHeaderStatusView()
+//                    self?.hideHeaderStatusView()
                 }
 
                 self?.isRequestingHistory = false
