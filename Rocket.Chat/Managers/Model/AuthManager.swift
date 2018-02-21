@@ -351,6 +351,15 @@ extension AuthManager {
         AuthManager.auth(params: params, completion: completion)
     }
 
+    static func auth(samlCredentialToken: String, completion: @escaping MessageCompletion) {
+        let params = [
+            "saml": true,
+            "credentialToken": samlCredentialToken
+        ] as [String: Any]
+
+        AuthManager.auth(params: params, completion: completion)
+    }
+
     /**
      Sends forgot password request for e-mail.
      */
@@ -359,7 +368,7 @@ extension AuthManager {
             "msg": "method",
             "method": "sendForgotPasswordEmail",
             "params": [email]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }

@@ -51,7 +51,7 @@ struct MessagesClient: APIClient {
                     updateMessage(json: response.result["result"])
                 })
             default:
-                break
+                Alert.defaultError.present()
             }
         })
     }
@@ -66,7 +66,36 @@ struct MessagesClient: APIClient {
         }
 
         api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser),
-                  succeeded: nil, errored: nil)
+                  succeeded: nil, errored: { _ in Alert.defaultError.present() })
+
+        return true
+    }
+
+    @discardableResult
+    func updateMessage(_ message: Message, text: String, realm: Realm? = Realm.shared) -> Bool {
+        guard
+            let id = message.identifier,
+            !message.rid.isEmpty
+        else {
+            return false
+        }
+
+        let request = UpdateMessageRequest(roomId: message.rid, msgId: id, text: text)
+
+        api.fetch(request, succeeded: { response in
+            guard let message = response.message else {
+                return Alert.defaultError.present()
+            }
+
+            DispatchQueue.main.async {
+                try? realm?.write {
+                    realm?.add(message, update: true)
+                }
+
+                MessageTextCacheManager.shared.update(for: message)
+            }
+
+        }, errored: { _ in Alert.defaultError.present() })
 
         return true
     }

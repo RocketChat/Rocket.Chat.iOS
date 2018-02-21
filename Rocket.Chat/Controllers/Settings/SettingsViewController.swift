@@ -9,7 +9,10 @@
 import UIKit
 import MessageUI
 import SafariServices
+
+#if BETA || DEBUG
 import FLEX
+#endif
 
 final class SettingsViewController: UITableViewController {
 
@@ -30,6 +33,12 @@ final class SettingsViewController: UITableViewController {
     @IBOutlet weak var labelVersion: UILabel! {
         didSet {
             labelVersion.text = viewModel.formattedVersion
+        }
+    }
+
+    @IBOutlet weak var labelApp: UILabel! {
+        didSet {
+            labelApp.text = viewModel.appicon
         }
     }
 
@@ -70,6 +79,10 @@ final class SettingsViewController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
 
+    func cellAppIconDidPressed() {
+        performSegue(withIdentifier: "AppIcon", sender: nil)
+    }
+
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -78,11 +91,15 @@ final class SettingsViewController: UITableViewController {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
                 cellTermsOfServiceDidPressed()
+            } else if indexPath.row == 3 {
+                cellAppIconDidPressed()
             }
         }
 
         if indexPath.section == 1, indexPath.row == 0 {
+            #if BETA || DEBUG
             FLEXManager.shared().showExplorer()
+            #endif
         }
 
         tableView.deselectRow(at: indexPath, animated: true)

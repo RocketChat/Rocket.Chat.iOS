@@ -51,9 +51,19 @@ class LoginService: BaseModel {
 
     @objc dynamic var loginUrl: String?
 
+    // SAML
+
+    @objc dynamic var entryPoint: String?
+    @objc dynamic var issuer: String?
+    @objc dynamic var provider: String?
+
     // true if LoginService has enough information to be used
     var isValid: Bool {
         if type == .cas && loginUrl != nil {
+            return true
+        }
+
+        if type == .saml {
             return true
         }
 
@@ -72,7 +82,6 @@ class LoginService: BaseModel {
         return .invalid
     }
 
-    @objc dynamic var responseType: String?
     @objc dynamic var callbackPath: String?
 }
 
