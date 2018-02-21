@@ -132,10 +132,10 @@ final class SubscriptionCell: UITableViewCell {
         }
 
         if calendar.isDateInToday(date) {
-            return date.formatted("HH:mm")
+            return RCDateFormatter.time(date)
         }
 
-        return date.formatted("dd/MM/yyyy")
+        return RCDateFormatter.date(date, dateStyle: .short)
     }
 
 }
