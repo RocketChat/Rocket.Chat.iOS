@@ -144,6 +144,7 @@
 		414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FF51D46320F00093E10 /* ResponseMessage.swift */; };
 		414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FF91D46395400093E10 /* SocketManager.swift */; };
 		414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414A1FFB1D46395900093E10 /* SocketResponse.swift */; };
+		414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */; };
 		414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */; };
 		414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 414EFF911E54FE69004F001F /* AuthExtensions.swift */; };
 		415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */; };
@@ -572,6 +573,7 @@
 		414A1FF51D46320F00093E10 /* ResponseMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResponseMessage.swift; path = Managers/Socket/Response/ResponseMessage.swift; sourceTree = "<group>"; };
 		414A1FF91D46395400093E10 /* SocketManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketManager.swift; path = Managers/Socket/SocketManager.swift; sourceTree = "<group>"; };
 		414A1FFB1D46395900093E10 /* SocketResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SocketResponse.swift; path = Managers/Socket/Response/SocketResponse.swift; sourceTree = "<group>"; };
+		414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainSplitViewController.swift; path = Controllers/Base/MainSplitViewController.swift; sourceTree = "<group>"; };
 		414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SignupViewController.swift; path = Controllers/Auth/SignupViewController.swift; sourceTree = "<group>"; };
 		414EFF911E54FE69004F001F /* AuthExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthExtensions.swift; sourceTree = "<group>"; };
 		415066871EB8B541003AEA1C /* MessageTextCacheManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageTextCacheManager.swift; path = Managers/MessageTextCacheManager.swift; sourceTree = "<group>"; };
@@ -1296,6 +1298,7 @@
 			children = (
 				4174CB141D2D99A30086DAC8 /* BaseNavigationController.swift */,
 				4174CB121D2D99960086DAC8 /* BaseViewController.swift */,
+				414B3B24203E2F2C0078D3D9 /* MainSplitViewController.swift */,
 			);
 			name = Base;
 			sourceTree = "<group>";
@@ -2884,6 +2887,7 @@
 				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,
 				41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */,
+				414B3B25203E2F2C0078D3D9 /* MainSplitViewController.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,

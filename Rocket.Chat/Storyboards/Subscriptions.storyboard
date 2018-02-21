@@ -160,10 +160,10 @@
             </objects>
             <point key="canvasLocation" x="-574" y="255"/>
         </scene>
-        <!--Split View Controller-->
+        <!--Main Split View Controller-->
         <scene sceneID="xwn-PL-3sB">
             <objects>
-                <splitViewController presentsWithGesture="NO" id="GCf-VY-VV6" sceneMemberID="viewController">
+                <splitViewController presentsWithGesture="NO" id="GCf-VY-VV6" customClass="MainSplitViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="M6P-WE-AWB" kind="relationship" relationship="masterViewController" id="kFT-O8-SmH"/>
                         <segue destination="Q7Z-N2-FIp" kind="relationship" relationship="detailViewController" id="ANx-bz-Lqe"/>

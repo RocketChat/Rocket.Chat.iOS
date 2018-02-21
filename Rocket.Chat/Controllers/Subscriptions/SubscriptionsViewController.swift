@@ -269,9 +269,10 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
             for cell in self.tableView.visibleCells {
                 if let subscriptionCell = cell as? SubscriptionCell {
-                    let subscription = subscriptionCell.subscription
-                    let newObject = self.subscriptions?.filter("identifier = %@", subscription?.identifier).first
-                    subscriptionCell.subscription = newObject
+                    if let identifier = subscriptionCell.subscription?.identifier {
+                        let newObject = self.subscriptions?.filter("identifier = %@", identifier).first
+                        subscriptionCell.subscription = newObject
+                    }
                 }
             }
         }
