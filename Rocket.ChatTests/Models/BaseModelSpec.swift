@@ -23,6 +23,16 @@ class BaseModelSpec: XCTestCase {
         })
     }
 
+    override func tearDown() {
+        super.tearDown()
+
+        Realm.executeOnMainThread({ realm in
+            for obj in realm.objects(BaseModel.self) {
+                realm.delete(obj)
+            }
+        })
+    }
+
     func testBaseModelBasicInstructions() {
         Realm.executeOnMainThread({ realm in
             let object = BaseModel()
@@ -56,11 +66,11 @@ class BaseModelSpec: XCTestCase {
 
     func testDeleteWithIdentifier() {
         let object1 = BaseModel()
-        object1.identifier = "1"
+        object1.identifier = "obj1"
         let object2 = BaseModel()
-        object2.identifier = "2"
+        object2.identifier = "obj2"
         let object3 = BaseModel()
-        object1.identifier = "3"
+        object3.identifier = "obj3"
 
         Realm.executeOnMainThread({ realm in
             realm.add(object1)
@@ -69,9 +79,9 @@ class BaseModelSpec: XCTestCase {
         })
 
         Realm.executeOnMainThread({ _ in
-            XCTAssert(BaseModel.delete(withIdentifier: "1"))
-            XCTAssert(BaseModel.delete(withIdentifier: "3"))
-            XCTAssert(BaseModel.delete(withIdentifier: "3") == false)
+            XCTAssert(BaseModel.delete(withIdentifier: "obj1"))
+            XCTAssert(BaseModel.delete(withIdentifier: "obj3"))
+            XCTAssert(BaseModel.delete(withIdentifier: "obj3") == false)
         })
 
         XCTAssert(Realm.shared?.objects(BaseModel.self).count == 1)
