@@ -40,7 +40,7 @@ class API: APIFetcher {
     var userId: String?
 
     convenience init?(host: String, version: Version = .zero) {
-        guard let url = URL(string: host) else {
+        guard let url = URL(string: host)?.httpServerURL() else {
             return nil
         }
 
