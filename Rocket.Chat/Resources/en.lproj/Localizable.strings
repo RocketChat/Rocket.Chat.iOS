@@ -119,6 +119,7 @@
 "chat.read_only" = "This room is read only";
 "chat.muted" = "You have been muted";
 "chat.loading_messages" = "Loading messages...";
+"chat.unread_separator" = "new messages";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Add Reaction";

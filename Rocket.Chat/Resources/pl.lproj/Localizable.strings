@@ -119,6 +119,7 @@
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
 "chat.loading_messages" = "Ładowanie wiadomości...";
+"chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
 "chat.message.actions.react" = "Dodaje reakcję";

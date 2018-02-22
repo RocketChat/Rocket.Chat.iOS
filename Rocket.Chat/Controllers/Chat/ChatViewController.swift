@@ -916,7 +916,7 @@ extension ChatViewController {
             return UICollectionViewCell()
         }
 
-        cell.labelTitle.text = "unread"
+        cell.labelTitle.text = localized("chat.unread_separator")
         return cell
     }
 

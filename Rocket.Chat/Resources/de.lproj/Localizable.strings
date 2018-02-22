@@ -119,6 +119,7 @@
 "chat.read_only" = "Dieser Raum ist schreibgeschützt";
 "chat.muted" = "Du wurdest stummgeschaltet";
 "chat.loading_messages" = "Nachrichten werden geladen...";
+"chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
 "chat.message.actions.react" = "Reaktion hinzufügen";
