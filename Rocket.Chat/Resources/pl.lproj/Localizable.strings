@@ -90,7 +90,7 @@
 "user_menu.busy" = "Zajęty";
 "user_menu.invisible" = "Ukryty";
 "user_menu.admin" = "Zarządzanie";
-"user_menu.settings" = "Moje Konto";
+"user_menu.preferences" = "Preferencje";
 "user_menu.logout" = "Wyloguj";
 
 // New Room View
@@ -192,7 +192,7 @@
 "chat.messages.starred.list.title" = "Wiadomości oznaczone gwiazdką";
 
 // Settings
-"myaccount.settings.title" = "Ustawienia";
+"myaccount.settings.title" = "Preferencje";
 "myaccount.settings.contactus" = "Kontakt";
 "myaccount.settings.license" = "Licencja";
 "myaccount.settings.appicon" = "Ikona aplikacji";
