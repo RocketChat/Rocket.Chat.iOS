@@ -10,6 +10,12 @@ import UIKit
 
 final class MainSplitViewController: UISplitViewController {
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        preferredDisplayMode = .allVisible
+    }
+
 }
 
 // MARK: UISplitViewControllerDelegate

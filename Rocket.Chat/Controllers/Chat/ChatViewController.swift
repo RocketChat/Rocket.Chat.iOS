@@ -90,6 +90,7 @@ final class ChatViewController: SLKTextViewController {
                 }
             }
 
+            emptySubscriptionState()
             updateSubscriptionInfo()
             markAsRead()
             typingIndicatorView?.dismissIndicator()
@@ -152,8 +153,6 @@ final class ChatViewController: SLKTextViewController {
             target: nil,
             action: nil
         )
-
-        subscription = .initialSubscription()
 
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)

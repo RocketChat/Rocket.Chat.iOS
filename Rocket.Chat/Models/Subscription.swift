@@ -163,15 +163,21 @@ extension Subscription {
             return "No message"
         }
 
-        let isFromCurrentUser = userLastMessage.identifier == AuthManager.currentUser()?.identifier
         var text = lastMessage.text
 
-        if text.isEmpty && lastMessage.attachments.count > 0 {
+        let isFromCurrentUser = userLastMessage.identifier == AuthManager.currentUser()?.identifier
+        let isOnlyAttachment = text.isEmpty && lastMessage.attachments.count > 0
+
+        if isOnlyAttachment {
             text = " sent an attachment"
         } else {
             if !isFromCurrentUser {
                 text = ": \(text)"
             }
+        }
+
+        if isFromCurrentUser && isOnlyAttachment {
+            text = "You\(text)"
         }
 
         if !isFromCurrentUser {
