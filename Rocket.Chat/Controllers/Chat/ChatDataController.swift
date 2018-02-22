@@ -44,6 +44,7 @@ final class ChatDataController {
     var loadedAllMessages = false
     var lastSeen: Date = Date()
     var unreadSeparator = false
+    var dismissUnreadSeparator = false
 
     func clear() -> [IndexPath] {
         var indexPaths: [IndexPath] = []

@@ -86,6 +86,7 @@ final class ChatViewController: SLKTextViewController {
             }
 
             dataController.unreadSeparator = false
+            dataController.dismissUnreadSeparator = false
             dataController.lastSeen = subscription.lastSeen ?? Date()
 
             if !SocketManager.isConnected() {
@@ -354,6 +355,10 @@ final class ChatViewController: SLKTextViewController {
         let replyString = self.replyString
         stopReplying()
 
+        dataController.dismissUnreadSeparator = true
+        dataController.lastSeen = subscription?.lastSeen ?? Date()
+        syncCollectionView()
+
         let text = "\(messageText)\(replyString)"
 
         if let (command, params) = text.commandAndParams() {
@@ -621,6 +626,14 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    func syncCollectionView() {
+        collectionView?.performBatchUpdates({
+            let (indexPaths, removedIndexPaths) = dataController.insert([])
+            collectionView?.insertItems(at: indexPaths)
+            collectionView?.deleteItems(at: removedIndexPaths)
+        }, completion: nil)
+    }
+
     func loadHistoryFromRemote(date: Date?) {
         guard let subscription = subscription else { return }
 
@@ -643,13 +656,7 @@ final class ChatViewController: SLKTextViewController {
 
                 if messages.count == 0 {
                     self?.dataController.loadedAllMessages = true
-
-                    self?.collectionView?.performBatchUpdates({
-                        if let (indexPaths, removedIndexPaths) = self?.dataController.insert([]) {
-                            self?.collectionView?.insertItems(at: indexPaths)
-                            self?.collectionView?.deleteItems(at: removedIndexPaths)
-                        }
-                    }, completion: nil)
+                    self?.syncCollectionView()
                 } else {
                     self?.dataController.loadedAllMessages = false
                 }
@@ -990,7 +997,11 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
             }
 
             if obj.type == .unreadSeparator {
-                return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
+                if dataController.dismissUnreadSeparator {
+                    return CGSize(width: fullWidth, height: 0)
+                } else {
+                    return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
+                }
             }
 
             if let message = obj.message {
