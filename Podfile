@@ -58,6 +58,10 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'
+      if config.name == 'Debug'
+        config.build_settings['OTHER_SWIFT_FLAGS'] = ['$(inherited)', '-Onone']
+        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
+      end
     end
     if swift4Targets.include? target.name
       target.build_configurations.each do |config|
