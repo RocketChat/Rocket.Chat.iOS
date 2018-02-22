@@ -84,7 +84,6 @@ class LoginService: BaseModel {
         return .invalid
     }
 
-    @objc dynamic var responseType: String?
     @objc dynamic var callbackPath: String?
 }
 

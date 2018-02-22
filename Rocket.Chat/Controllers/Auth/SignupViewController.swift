@@ -130,12 +130,14 @@ final class SignupViewController: BaseViewController {
                 }
 
                 AuthManager.auth(email, password: password, completion: { _ in
-                    guard let user = AuthManager.currentUser() else { return }
-                    if user.username != nil {
-                        self?.dismiss(animated: true, completion: nil)
-                        AppManager.reloadApp()
-                    } else {
-                        self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        guard let user = AuthManager.currentUser() else { return }
+                        if user.username != nil {
+                            self?.dismiss(animated: true, completion: nil)
+                            AppManager.reloadApp()
+                        } else {
+                            self?.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                        }
                     }
                 })
             }

@@ -91,7 +91,6 @@ extension LoginService: ModelMappeable {
         buttonLabelColor = "#ffffff"
         buttonColor = "#325c99"
 
-        responseType = ""
         callbackPath = "facebook?close"
     }
 
@@ -107,7 +106,6 @@ extension LoginService: ModelMappeable {
         buttonLabelColor = "#ffffff"
         buttonColor = "#1b86bc"
 
-        responseType = "code"
         callbackPath = "linkedin?close"
     }
 

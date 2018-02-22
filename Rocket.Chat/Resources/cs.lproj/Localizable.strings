@@ -117,13 +117,14 @@
 "chat.dm.start_conversation" = "Toto je začátek vaší konverzace s %@";
 "chat.channel.start_conversation" = "Toto je začátek konverzace %@";
 "chat.read_only" = "Tato místnost je pouze pro čtení";
-"chat.muted" = "You have been muted"; //TODO
+"chat.muted" = "You have been muted";
 "chat.loading_messages" = "Loading messages..."; //TODO
 
 // Chat Message Actions
 "chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Blokovat zprávy od uživatele";
 "chat.message.actions.report" = "Nahlásit zprávu";
+"chat.message.actions.edit" = "Upravit zprávu";
 "chat.message.actions.copy" = "Kopírovat";
 "chat.message.actions.pin" = "Připnout zprávu";
 "chat.message.actions.unpin" = "Odepnout zprávu";

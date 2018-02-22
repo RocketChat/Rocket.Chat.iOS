@@ -9,7 +9,10 @@
 import UIKit
 import MessageUI
 import SafariServices
+
+#if BETA || DEBUG
 import FLEX
+#endif
 
 final class SettingsViewController: UITableViewController {
 
@@ -94,7 +97,9 @@ final class SettingsViewController: UITableViewController {
         }
 
         if indexPath.section == 1, indexPath.row == 0 {
+            #if BETA || DEBUG
             FLEXManager.shared().showExplorer()
+            #endif
         }
 
         tableView.deselectRow(at: indexPath, animated: true)

@@ -36,15 +36,16 @@ extension ChatViewController {
             self.report(message: message)
         }))
 
-        alert.addAction(UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
-            guard let user = message.user else { return }
-
-            DispatchQueue.main.async {
-                MessageManager.blockMessagesFrom(user, completion: {
-                    self?.updateSubscriptionInfo()
-                })
-            }
-        }))
+        if AuthManager.isAuthenticated()?.canBlockMessage(message) == .allowed {
+            alert.addAction(UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
+                guard let user = message.user else { return }
+                DispatchQueue.main.async {
+                    MessageManager.blockMessagesFrom(user, completion: {
+                        self?.updateSubscriptionInfo()
+                    })
+                }
+            }))
+        }
 
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.copy"), style: .default, handler: { (_) in
             UIPasteboard.general.string = message.text
@@ -57,6 +58,13 @@ extension ChatViewController {
         alert.addAction(UIAlertAction(title: localized("chat.message.actions.reply"), style: .default, handler: { [weak self] (_) in
             self?.reply(to: message)
         }))
+
+        if  AuthManager.isAuthenticated()?.canEditMessage(message) == .allowed {
+            alert.addAction(UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
+                self.messageToEdit = message
+                self.editText(message.text)
+            }))
+        }
 
         if AuthManager.isAuthenticated()?.canDeleteMessage(message) == .allowed {
             alert.addAction(UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { _ in
@@ -90,6 +98,7 @@ extension ChatViewController {
 
         controller.emojiPicked = { emoji in
             MessageManager.react(message, emoji: emoji, completion: { _ in })
+            UserReviewManager.shared.requestReview()
         }
 
         controller.customEmojis = CustomEmoji.emojis()

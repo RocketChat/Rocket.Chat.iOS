@@ -89,6 +89,7 @@
 "user_menu.away" = "Absent";
 "user_menu.busy" = "Occupé";
 "user_menu.invisible" = "Invisible";
+"user_menu.admin" = "Administration"; //TODO
 "user_menu.settings" = "Mon compte";
 "user_menu.logout" = "Se déconnecter";
 
@@ -123,6 +124,7 @@
 "chat.message.actions.react" = "Ajouter une réaction";
 "chat.message.actions.block" = "Bloquer les messages de l'utilisateur";
 "chat.message.actions.report" = "Signaler le message";
+"chat.message.actions.edit" = "Modifier le message";
 "chat.message.actions.copy" = "Copier";
 "chat.message.actions.pin" = "Épingler le message";
 "chat.message.actions.unpin" = "Désépingler le message";
