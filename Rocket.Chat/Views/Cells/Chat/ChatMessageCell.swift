@@ -332,16 +332,21 @@ final class ChatMessageCell: UICollectionViewCell {
     fileprivate func updateMessage() {
         guard
             delegate != nil,
-            message != nil
+            let message = message
         else {
             return
         }
 
-        if message?.failed ?? true {
+        switch (message.failed, message.temporary) {
+        case (true, _):
             statusView.isHidden = false
             statusView.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
             statusView.tintColor = .red
-        } else {
+        case (false, true):
+            statusView.isHidden = false
+            statusView.image = UIImage(named: "Clock")?.withRenderingMode(.alwaysTemplate)
+            statusView.tintColor = .gray
+        case (false, false):
             statusView.isHidden = true
         }
 
