@@ -14,6 +14,7 @@ enum LoginServiceType {
     case facebook
     case linkedin
     case gitlab
+    case twitter
     case saml
     case cas
     case custom
@@ -25,6 +26,7 @@ enum LoginServiceType {
         case "github": self = .github
         case "gitlab": self = .gitlab
         case "linkedin": self = .linkedin
+        case "twitter": self = .twitter
         case "saml": self = .saml
         case "cas": self = .cas
         default: self = .invalid

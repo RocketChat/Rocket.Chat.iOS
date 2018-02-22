@@ -40,6 +40,7 @@ extension LoginService: ModelMappeable {
         case .gitlab: mapGitLab()
         case .github: mapGitHub()
         case .linkedin: mapLinkedIn()
+        case .twitter: mapTwitter()
         case .saml: break
         case .cas: break
         case .custom: break
@@ -108,5 +109,18 @@ extension LoginService: ModelMappeable {
         buttonLabelText = "CAS"
         buttonLabelColor = "#ffffff"
         buttonColor = "#13679a"
+    }
+    
+    func mapTwitter() {
+        service = "twitter"
+        scope = ""
+        
+        serverUrl = "https://api.twitter.com"
+        tokenPath = "/oauth/access_token"
+        authorizePath = "/oauth/authorize"
+        buttonLabelText = "twitter"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#00aced"
+        
     }
 }
