@@ -5625,21 +5625,21 @@ struct Emojione {
         var transformedString = string as NSString
 
         let regex = try? NSRegularExpression(pattern: ":([-+\\w]+):", options: [])
-        let matches = regex?.matches(in: transformedString as String, options: [], range: NSRange(location: 0, length: transformedString.length)) ?? []
+        let ranges = regex?.matches(
+            in: transformedString as String,
+            options: [],
+            range: NSRange(location: 0, length: transformedString.length)
+        ).filter {
+            $0.numberOfRanges == 2
+        }.map {
+            $0.range(at: 1)
+        } ?? []
 
         // exclude matches inside code tags
-        let codeRanges = string.codeRanges()
+        let filteredRanges = string.filterOutRangesInsideCode(ranges: ranges)
 
-        let filteredMatches = matches.filter { match in
-            !codeRanges.contains { range in
-                match.range(at: 0).location >= range.location && match.range(at: 0).length <= range.length
-            }
-        }
-
-        for result in filteredMatches {
-            guard result.numberOfRanges == 2 else { continue }
-
-            let shortname = oldString.substring(with: result.range(at: 1))
+        for range in filteredRanges {
+            let shortname = oldString.substring(with: range)
             if let emoji = values[shortname] {
                 transformedString = transformedString.replacingOccurrences(of: ":\(shortname):", with: emoji) as NSString
             }
