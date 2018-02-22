@@ -155,6 +155,12 @@ extension LoginService {
         return service
     }
 
+    static var twitter: LoginService {
+        let service = LoginService()
+        service.mapTwitter()
+        return service
+    }
+
     static var cas: LoginService {
         let service = LoginService()
         service.mapCAS()

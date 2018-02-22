@@ -110,17 +110,16 @@ extension LoginService: ModelMappeable {
         buttonLabelColor = "#ffffff"
         buttonColor = "#13679a"
     }
-    
+
     func mapTwitter() {
         service = "twitter"
         scope = ""
-        
+
         serverUrl = "https://api.twitter.com"
         tokenPath = "/oauth/access_token"
         authorizePath = "/oauth/authorize"
         buttonLabelText = "twitter"
         buttonLabelColor = "#ffffff"
         buttonColor = "#00aced"
-        
     }
 }
