@@ -34,11 +34,20 @@ extension NSAttributedString {
             }
 
             for match in filteredMatches {
+
+            // ranges subtracting lengths of previous ranges
+            let ranges = matches.map { $0.range }.reduce([NSRange](), { total, current in
+                let offset = total.reduce(0, { $0 + $1.length - 1 })
+                let range = NSRange(location: current.location - offset, length: current.length)
+                return total + [range]
+            })
+
+            for range in ranges {
                 let imageAttachment = NSTextAttachment()
                 imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
                 imageAttachment.contents = imageUrl.data(using: .utf8)
                 let imageString = NSAttributedString(attachment: imageAttachment)
-                attributedString.replaceCharacters(in: match.range, with: imageString)
+                attributedString.replaceCharacters(in: range, with: imageString)
             }
 
             return attributedString
