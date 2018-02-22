@@ -20,6 +20,7 @@ extension Message {
         let message = Message()
         message.user = User.testInstance()
         message.text = "\(name)-text"
+        message.rid = "\(name)-rid"
         message.subscription = Subscription.testInstance()
         message.identifier = "\(name)-identifier"
         message.subscription.type = .channel

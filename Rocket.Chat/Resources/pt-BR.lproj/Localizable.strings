@@ -124,6 +124,7 @@
 "chat.message.actions.react" = "Adicionar reação";
 "chat.message.actions.block" = "Bloquear mensagens do usuário";
 "chat.message.actions.report" = "Reportar mensagem";
+"chat.message.actions.edit" = "Editar mensagem";
 "chat.message.actions.copy" = "Copiar";
 "chat.message.actions.pin" = "Pinar mensagem";
 "chat.message.actions.unpin" = "Remover pino da mensagem";

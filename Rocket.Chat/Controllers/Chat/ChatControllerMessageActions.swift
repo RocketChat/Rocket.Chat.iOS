@@ -73,7 +73,7 @@ extension ChatViewController {
 
         var actions = [react, pin, report, copy, reply, quote]
 
-        if AuthManager.currentUser() != messageUser {
+        if AuthManager.isAuthenticated()?.canBlockMessage(message) == .allowed {
             let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
                 DispatchQueue.main.async {
                     MessageManager.blockMessagesFrom(messageUser, completion: {
@@ -83,6 +83,15 @@ extension ChatViewController {
             })
 
             actions.append(block)
+        }
+
+        if  AuthManager.isAuthenticated()?.canEditMessage(message) == .allowed {
+            let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
+                self.messageToEdit = message
+                self.editText(message.text)
+            })
+
+            actions.append(edit)
         }
 
         if AuthManager.isAuthenticated()?.canDeleteMessage(message) == .allowed {
@@ -167,6 +176,7 @@ extension ChatViewController {
 
         controller.emojiPicked = { emoji in
             MessageManager.react(message, emoji: emoji, completion: { _ in })
+            UserReviewManager.shared.requestReview()
         }
 
         controller.customEmojis = CustomEmoji.emojis()

@@ -96,7 +96,7 @@ extension MemberCell: ReactorPresenter {
                 return
             }
 
-            User.fetch(username: newValue, completion: { user in
+            User.fetch(by: .username(newValue), completion: { user in
                 guard let user = user else { return }
 
                 DispatchQueue.main.async {

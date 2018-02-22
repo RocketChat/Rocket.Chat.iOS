@@ -7,13 +7,13 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Update Dependencies
-          command: ./Scripts/update_dependencies.sh
+          name: Install Swiftlint
+          command: ./Scripts/install_swiftlint.sh
       - run:
           name: Lint
           command: swiftlint
 
-  test-ipad-ios10.3:
+  test:
     macos:
       xcode: "9.0"
     steps:
@@ -21,45 +21,21 @@ jobs:
       - run:
           name: Update Dependencies
           command: ./Scripts/update_dependencies.sh
+      - run:
+          name: Build for testing
+          command: ./Scripts/build_for_testing.sh
       - run:
           name: Run tests on iPad iOS 10.3
-          command: ./Scripts/test-10.3-ipad.sh
-
-  test-iphone-ios10.3:
-    macos:
-      xcode: "9.0"
-    steps:
-      - checkout
+          command: ./Scripts/test_without_building.sh "10.3.1" "iPad Air 2"
       - run:
-          name: Update Dependencies
-          command: ./Scripts/update_dependencies.sh
+          name: Run tests on iPad iOS 11.0
+          command: ./Scripts/test_without_building.sh "11.0" "iPad Air 2"
       - run:
           name: Run tests on iPhone iOS 10.3
-          command: ./Scripts/test-10.3-iphone.sh
-
-  test-ipad-ios11.0:
-      macos:
-        xcode: "9.0"
-      steps:
-        - checkout
-        - run:
-            name: Update Dependencies
-            command: ./Scripts/update_dependencies.sh
-        - run:
-            name: Run tests on iPad iOS 11.0
-            command: ./Scripts/test-11.0-ipad.sh
-
-  test-iphone-ios11.0:
-    macos:
-      xcode: "9.0"
-    steps:
-      - checkout
-      - run:
-          name: Update Dependencies
-          command: ./Scripts/update_dependencies.sh
+          command: ./Scripts/test_without_building.sh "10.3.1" "iPhone 5s"
       - run:
           name: Run tests on iPhone iOS 11.0
-          command: ./Scripts/test-11.0-iphone.sh
+          command: ./Scripts/test_without_building_coverage.sh "11.0" "iPhone 8"
       - run:
           name: Codecov
           command: bash <(curl -s https://codecov.io/bash) -J 'Rocket.Chat'
@@ -76,16 +52,7 @@ workflows:
                - /^wip[-\/].*$/
                - /^.*-docs$/
                - /^.*-wip$/
-      - test-iphone-ios11.0:
+      - test:
           requires:
             - lint
-      - test-iphone-ios10.3:
-          requires:
-            - lint
-      - test-ipad-ios10.3:
-          requires:
-            - lint
-      - test-ipad-ios11.0:
-          requires:
-            - lint
-  
+
