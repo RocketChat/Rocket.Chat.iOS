@@ -13,6 +13,7 @@ enum LoginServiceType {
     case github
     case facebook
     case linkedin
+    case gitlab
     case saml
     case cas
     case custom
@@ -20,8 +21,9 @@ enum LoginServiceType {
 
     init(string: String) {
         switch string {
-        case "github": self = .github
         case "facebook": self = .facebook
+        case "github": self = .github
+        case "gitlab": self = .gitlab
         case "linkedin": self = .linkedin
         case "saml": self = .saml
         case "cas": self = .cas
@@ -36,7 +38,6 @@ class LoginService: BaseModel {
     @objc dynamic var custom = false
     @objc dynamic var serverUrl: String?
     @objc dynamic var tokenPath: String?
-    @objc dynamic var identityPath: String?
     @objc dynamic var authorizePath: String?
     @objc dynamic var scope: String?
     @objc dynamic var buttonLabelText: String?
@@ -103,8 +104,8 @@ extension LoginService {
         guard
             let serverUrl = serverUrl,
             let tokenPath = tokenPath
-            else {
-                return nil
+        else {
+            return nil
         }
 
         return tokenPath.contains("://") ? tokenPath : "\(serverUrl)\(tokenPath)"
@@ -137,6 +138,12 @@ extension LoginService {
     static var github: LoginService {
         let service = LoginService()
         service.mapGitHub()
+        return service
+    }
+
+    static var gitlab: LoginService {
+        let service = LoginService()
+        service.mapGitLab()
         return service
     }
 

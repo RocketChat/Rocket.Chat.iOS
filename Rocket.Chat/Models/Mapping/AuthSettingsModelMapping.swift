@@ -37,8 +37,9 @@ extension AuthSettings: ModelMappeable {
         // Authentication methods
         self.isGoogleAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Google")?.bool ?? false
         self.isFacebookAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Facebook")?.bool ?? false
-        self.isLinkedInAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Linkedin")?.bool ?? false
         self.isGitHubAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Github")?.bool ?? false
+        self.isGitLabAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Gitlab")?.bool ?? false
+        self.isLinkedInAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Linkedin")?.bool ?? false
         self.isLDAPAuthenticationEnabled = objectForKey(object: values, key: "LDAP_Enable")?.bool ?? false
         self.isCASEnabled = objectForKey(object: values, key: "CAS_enabled")?.bool ?? false
         self.casLoginUrl = objectForKey(object: values, key: "CAS_login_url")?.string
