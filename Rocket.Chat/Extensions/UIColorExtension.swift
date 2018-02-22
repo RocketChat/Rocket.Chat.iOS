@@ -19,6 +19,24 @@ extension UIColor {
         )
     }
 
+    // MARK: Color from strings (good|warning|danger)
+
+    static func normalizeColorFromString(string: String) -> UIColor {
+        if string == "warning" {
+            return UIColor(rgb: 0xFCB316, alphaVal: 1)
+        }
+
+        if string == "danger" {
+            return UIColor(rgb: 0xD30230, alphaVal: 1)
+        }
+
+        if string == "good" {
+            return UIColor(rgb: 0x35AC19, alphaVal: 1)
+        }
+
+        return UIColor(hex: string)
+    }
+
     // MARK: Status
 
     static func RCOnline() -> UIColor {

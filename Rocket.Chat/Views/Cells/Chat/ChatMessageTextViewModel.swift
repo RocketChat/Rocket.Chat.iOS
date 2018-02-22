@@ -12,9 +12,11 @@ import RealmSwift
 final class ChatMessageTextViewModel {
 
     var color: UIColor {
-        return  attachment.color != nil
-            ? UIColor(hex: attachment.color)
-            : UIColor.lightGray
+        if let color = attachment.color {
+            return UIColor.normalizeColorFromString(string: color)
+        }
+
+        return .lightGray
     }
 
     var title: String {
