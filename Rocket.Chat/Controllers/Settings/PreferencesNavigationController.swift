@@ -9,6 +9,7 @@
 import UIKit
 
 class PreferencesNavigationController: BaseNavigationController {
+
     private var mediumScreenFrame: CGRect = .zero
     private var fullScreenFrame: CGRect = .zero
     private var frame: CGRect?
@@ -23,6 +24,8 @@ class PreferencesNavigationController: BaseNavigationController {
     }
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+
         mediumScreenFrame = CGRect(origin: .zero, size: CGSize(width: 540, height: 620))
 
         if let frame = UIApplication.shared.keyWindow?.frame {
@@ -39,4 +42,5 @@ class PreferencesNavigationController: BaseNavigationController {
             self.view.superview?.bounds = frame
         }
     }
+
 }
