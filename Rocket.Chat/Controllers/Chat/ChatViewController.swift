@@ -453,13 +453,7 @@ final class ChatViewController: SLKTextViewController {
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
         MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
-            guard let collectionView = self?.collectionView else { return }
-
-            self?.dataController.delete(msgId: msgId)
-
-            collectionView.performBatchUpdates({
-                collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
-            })
+            self?.deleteMessage(msgId: msgId)
         }
         registerTypingEvent(subscription)
     }
@@ -501,6 +495,17 @@ final class ChatViewController: SLKTextViewController {
                 MainChatViewController.closeSideMenuIfNeeded()
                 self.closeSidebarAfterSubscriptionUpdate = false
             }
+        })
+    }
+
+    internal func deleteMessage(msgId: String) {
+        guard let collectionView = collectionView else { return }
+        dataController.delete(msgId: msgId)
+        collectionView.performBatchUpdates({
+            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        })
+        Realm.execute({ _ in
+            Message.delete(withIdentifier: msgId)
         })
     }
 

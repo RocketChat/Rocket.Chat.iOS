@@ -134,6 +134,10 @@
 "chat.message.actions.delete.confirm.title" = "Delete this message?";
 "chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone.";
 "chat.message.actions.delete.confirm.yes" = "Yes, delete";
+"chat.message.actions.discard" = "Discard message";
+"chat.message.actions.discard.confirm.title" = "Discard this message?";
+"chat.message.actions.discard.confirm.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone.";
+"chat.message.actions.discard.confirm.yes" = "Yes, discard";
 "chat.message.actions.resend" = "Resend";
 "chat.message.actions.resend_all" = "Resend all";
 "Send" = "Send"; //SLKTextInputbar.m

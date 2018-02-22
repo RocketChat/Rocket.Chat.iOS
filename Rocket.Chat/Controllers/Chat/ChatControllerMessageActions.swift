@@ -157,7 +157,11 @@ extension ChatViewController {
             }
         })
 
-        return [resend, resendAll]
+        let discard = UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { _ in
+            self.discard(message: message)
+        })
+
+        return [resend, resendAll, discard]
     }
 
     // MARK: Actions
@@ -193,6 +197,16 @@ extension ChatViewController {
             (title: localized("global.no"), handler: nil),
             (title: localized("chat.message.actions.delete.confirm.yes"), handler: { _ in
                 API.current()?.client(MessagesClient.self).deleteMessage(message, asUser: false)
+            })
+        ], deleteOption: 1).present()
+    }
+
+    fileprivate func discard(message: Message) {
+        Ask(key: "chat.message.actions.discard.confirm", buttons: [
+            (title: localized("global.no"), handler: nil),
+            (title: localized("chat.message.actions.discard.confirm.yes"), handler: { [weak self] _ in
+                guard let msgId = message.identifier else { return }
+                self?.deleteMessage(msgId: msgId)
             })
         ], deleteOption: 1).present()
     }

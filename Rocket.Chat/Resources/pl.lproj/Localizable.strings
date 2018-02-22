@@ -136,6 +136,9 @@
 "chat.message.actions.delete.confirm.yes" = "Tak, usuń";
 "chat.message.actions.resend" = "Wyślij ponownie";
 "chat.message.actions.resend_all" = "Wyślij wszystkie ponownie";
+"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
+"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
 "Send" = "Wyślij"; //SLKTextInputbar.m
 
 // Chat Message Report
