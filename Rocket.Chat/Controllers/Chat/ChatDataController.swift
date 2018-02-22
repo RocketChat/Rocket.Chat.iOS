@@ -10,6 +10,7 @@ import Foundation
 
 enum ChatDataType {
     case daySeparator
+    case unreadSeparator
     case message
     case loader
     case header
@@ -32,7 +33,6 @@ struct ChatData {
 }
 
 final class ChatDataController {
-
     var messagesUsernames: Set<String> = []
     var data: [ChatData] = [] {
         didSet {
@@ -40,7 +40,10 @@ final class ChatDataController {
             messagesUsernames.formUnion(data.flatMap { $0.message?.user?.username })
         }
     }
+
     var loadedAllMessages = false
+    var lastSeen: Date = Date()
+    var unreadSeparator = false
 
     func clear() -> [IndexPath] {
         var indexPaths: [IndexPath] = []
@@ -118,6 +121,12 @@ final class ChatDataController {
             newItems.append(separator)
         }
 
+        func insertUnreadSeparator() {
+            let separator = ChatData(type: .unreadSeparator, timestamp: lastSeen)
+            identifiers.append(separator.identifier)
+            newItems.append(separator)
+        }
+
         if loadedAllMessages {
             if data.filter({ $0.type == .header }).count == 0 {
                 let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0))
@@ -156,7 +165,16 @@ final class ChatDataController {
             }
         }
 
-        func needsSeparator(_ obj: ChatData) -> Bool {
+        func needsUnreadSeparator(_ obj: ChatData) -> Bool {
+            if obj.timestamp > lastSeen && !unreadSeparator {
+                unreadSeparator = true
+                return true
+            }
+
+            return false
+        }
+
+        func needsDateSeparator(_ obj: ChatData) -> Bool {
             if obj.type != .message { return false }
 
             return data.filter({
@@ -168,11 +186,15 @@ final class ChatDataController {
 
         for newObj in items {
             if let lastObj = lastObj {
-                if needsSeparator(lastObj) {
+                if needsDateSeparator(lastObj) {
                     insertDaySeparator(from: lastObj)
-                } else if needsSeparator(newObj) {
+                } else if needsDateSeparator(newObj) {
                     insertDaySeparator(from: newObj)
                 }
+            }
+
+            if needsUnreadSeparator(newObj) {
+                insertUnreadSeparator()
             }
 
             newItems.append(newObj)

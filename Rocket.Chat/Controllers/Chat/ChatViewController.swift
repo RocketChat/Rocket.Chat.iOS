@@ -85,6 +85,9 @@ final class ChatViewController: SLKTextViewController {
                 return
             }
 
+            dataController.unreadSeparator = false
+            dataController.lastSeen = subscription.lastSeen ?? Date()
+
             if !SocketManager.isConnected() {
                 socketDidDisconnect(socket: SocketManager.sharedInstance)
                 reconnect()
@@ -292,6 +295,11 @@ final class ChatViewController: SLKTextViewController {
             nibName: "ChatMessageDaySeparator",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
+
+        collectionView?.register(UINib(
+            nibName: "ChatMessageUnreadSeparator",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatMessageUnreadSeparator.identifier)
 
         collectionView?.register(UINib(
             nibName: "ChatChannelHeaderCell",
@@ -841,6 +849,10 @@ extension ChatViewController {
             return cellForDaySeparator(obj, at: indexPath)
         }
 
+        if obj.type == .unreadSeparator {
+            return cellForUnreadSeparator(obj, at: indexPath)
+        }
+
         if obj.type == .loader {
             return cellForLoader(obj, at: indexPath)
         }
@@ -886,6 +898,18 @@ extension ChatViewController {
         }
 
         cell.labelTitle.text = RCDateFormatter.date(obj.timestamp)
+        return cell
+    }
+
+    func cellForUnreadSeparator(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatMessageUnreadSeparator.identifier,
+            for: indexPath
+        ) as? ChatMessageUnreadSeparator else {
+            return UICollectionViewCell()
+        }
+
+        cell.labelTitle.text = "unread"
         return cell
     }
 
@@ -963,6 +987,10 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
             if obj.type == .daySeparator {
                 return CGSize(width: fullWidth, height: ChatMessageDaySeparator.minimumHeight)
+            }
+
+            if obj.type == .unreadSeparator {
+                return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
             }
 
             if let message = obj.message {

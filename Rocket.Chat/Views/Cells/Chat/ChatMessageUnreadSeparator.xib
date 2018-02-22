@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="w1I-Aj-piR" customClass="ChatMessageUnreadSeparator" customModule="Rocket_Chat" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="451" height="168"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="451" height="168"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d7U-KC-tDO">
+                        <rect key="frame" x="0.0" y="84" width="451" height="1"/>
+                        <color key="backgroundColor" red="1" green="0.36665294370000001" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="Iy2-nc-JTR"/>
+                        </constraints>
+                    </view>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yPI-uU-Njv">
+                        <rect key="frame" x="166" y="74" width="120" height="21"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="120" id="95Q-yr-2ly"/>
+                            <constraint firstAttribute="height" constant="21" id="Xra-CV-FVb"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="0.36665294370000001" blue="0.078431372550000003" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="d7U-KC-tDO" firstAttribute="centerY" secondItem="w1I-Aj-piR" secondAttribute="centerY" id="4Q0-jm-RTa"/>
+                <constraint firstAttribute="trailing" secondItem="d7U-KC-tDO" secondAttribute="trailing" id="L51-7p-ECV"/>
+                <constraint firstItem="yPI-uU-Njv" firstAttribute="centerX" secondItem="w1I-Aj-piR" secondAttribute="centerX" id="R56-eY-Y89"/>
+                <constraint firstItem="yPI-uU-Njv" firstAttribute="centerY" secondItem="w1I-Aj-piR" secondAttribute="centerY" id="WbX-Vs-8f9"/>
+                <constraint firstItem="d7U-KC-tDO" firstAttribute="leading" secondItem="w1I-Aj-piR" secondAttribute="leading" id="dCw-w4-WT8"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VTs-sC-2mq"/>
+            <size key="customSize" width="451" height="168"/>
+            <connections>
+                <outlet property="labelTitle" destination="yPI-uU-Njv" id="Qbg-Yy-0OQ"/>
+            </connections>
+            <point key="canvasLocation" x="-31.5" y="58"/>
+        </collectionViewCell>
+    </objects>
+</document>

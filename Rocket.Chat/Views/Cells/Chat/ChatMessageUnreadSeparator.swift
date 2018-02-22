@@ -1,5 +1,5 @@
 //
-//  ChatMessageDaySeparator.swift
+//  ChatMessageUnreadSeparator.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Kellermann Streit on 19/12/16.
@@ -8,10 +8,10 @@
 
 import UIKit
 
-final class ChatMessageDaySeparator: UICollectionViewCell {
+final class ChatMessageUnreadSeparator: UICollectionViewCell {
 
     static let minimumHeight = CGFloat(40)
-    static let identifier = "ChatMessageUnreadSeparator"
+    static let identifier = "ChatMessageDaySeparator"
 
     @IBOutlet weak var labelTitle: UILabel!
 
