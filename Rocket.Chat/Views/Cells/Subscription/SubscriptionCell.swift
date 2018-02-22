@@ -81,7 +81,6 @@ final class SubscriptionCell: UITableViewCell {
         }
 
         labelName.text = subscription.displayName()
-
         labelLastMessage.text = subscription.lastMessageText()
 
         let nameFontSize = labelName.font.pointSize

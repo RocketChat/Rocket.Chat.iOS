@@ -10,9 +10,10 @@ import UIKit
 
 final class MainSplitViewController: UISplitViewController {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func awakeFromNib() {
+        super.awakeFromNib()
 
+        delegate = self
         preferredDisplayMode = .allVisible
     }
 
@@ -23,7 +24,7 @@ final class MainSplitViewController: UISplitViewController {
 extension MainSplitViewController: UISplitViewControllerDelegate {
 
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
-        return false
+        return true
     }
 
 }

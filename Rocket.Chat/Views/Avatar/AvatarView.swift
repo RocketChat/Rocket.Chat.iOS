@@ -64,8 +64,6 @@ final class AvatarView: UIView {
     }
 
     func updateAvatar() {
-        setAvatarWithInitials()
-
         if let emoji = emoji {
             let emojiCharacter = Emojione.transform(string: emoji)
 
@@ -77,9 +75,11 @@ final class AvatarView: UIView {
 
             backgroundColor = .clear
         } else if let avatarURL = avatarURL {
-            self.imageURL = avatarURL
+            imageURL = avatarURL
         } else if let avatarURL = user?.avatarURL() {
-            self.imageURL = avatarURL
+            imageURL = avatarURL
+        } else {
+            setAvatarWithInitials()
         }
     }
 

@@ -164,6 +164,10 @@ final class ChatViewController: SLKTextViewController {
         }
 
         setupReplyView()
+
+        if subscription == nil {
+            subscription = .initialSubscription()
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

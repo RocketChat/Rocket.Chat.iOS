@@ -264,15 +264,12 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func updateSubscriptionsList() {
-        OperationQueue.main.addOperation {
+        DispatchQueue.main.async {
             self.updateBackButton()
 
-            for cell in self.tableView.visibleCells {
-                if let subscriptionCell = cell as? SubscriptionCell {
-                    if let identifier = subscriptionCell.subscription?.identifier {
-                        let newObject = self.subscriptions?.filter("identifier = %@", identifier).first
-                        subscriptionCell.subscription = newObject
-                    }
+            for indexPath in self.tableView.indexPathsForVisibleRows ?? [] {
+                if let subscriptionCell = self.tableView.cellForRow(at: indexPath) as? SubscriptionCell {
+                    subscriptionCell.subscription = self.subscriptions?[indexPath.row]
                 }
             }
         }
@@ -286,18 +283,28 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         updateSubscriptionsList()
     }
 
-    func handleCurrentUserUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
+    func handleCurrentUserUpdates<T>(changes: RealmCollectionChange<Results<T>>?) {
         updateCurrentUserInformation()
     }
 
-    func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<RealmSwift.Results<T>>?) {
-        if isSearchingLocally || isSearchingRemotely {
-            updateSearched()
-        } else {
-            updateAll()
+    func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<Results<T>>?) {
+//        if isSearchingLocally || isSearchingRemotely {
+//            updateSearched()
+//        } else {
+//            updateAll()
+//        }
+
+        guard case .update(_, _, let insertions, let modifications)? = changes else {
+            return
         }
 
-        updateSubscriptionsList()
+        if insertions.count > 0 {
+
+        }
+
+        if modifications.count > 0 {
+
+        }
     }
 
     func updateCurrentUserInformation() {

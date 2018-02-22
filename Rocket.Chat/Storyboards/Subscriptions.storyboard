@@ -166,7 +166,7 @@
                 <splitViewController presentsWithGesture="NO" id="GCf-VY-VV6" customClass="MainSplitViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="M6P-WE-AWB" kind="relationship" relationship="masterViewController" id="kFT-O8-SmH"/>
-                        <segue destination="Q7Z-N2-FIp" kind="relationship" relationship="detailViewController" id="ANx-bz-Lqe"/>
+                        <segue destination="Q7Z-N2-FIp" kind="relationship" relationship="detailViewController" id="ObY-Ks-BM2"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ptW-TO-Sai" userLabel="First Responder" sceneMemberID="firstResponder"/>
