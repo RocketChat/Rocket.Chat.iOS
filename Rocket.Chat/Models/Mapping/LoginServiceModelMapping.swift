@@ -17,7 +17,6 @@ extension LoginService: ModelMappeable {
         custom = values["custom"].boolValue
         serverUrl = values["serverURL"].stringValue
         tokenPath = values["tokenPath"].stringValue
-        identityPath = values["identityPath"].stringValue
         authorizePath = values["authorizePath"].stringValue
         scope = values["scope"].stringValue
         buttonLabelText = values["buttonLabelText"].stringValue
@@ -29,11 +28,9 @@ extension LoginService: ModelMappeable {
         buttonColor = values["buttonColor"].string
 
         // CAS
-
         loginUrl = values["login_url"].string
 
         // SAML
-
         entryPoint = values["entryPoint"].string
         issuer = values["issuer"].string
         provider = values["clientConfig"]["provider"].string
@@ -56,7 +53,6 @@ extension LoginService: ModelMappeable {
 
         serverUrl = "https://github.com"
         tokenPath = "/login/oauth/access_token"
-        identityPath = "https://api.github.com/user"
         authorizePath = "/login/oauth/authorize"
         buttonLabelText = "github"
         buttonLabelColor = "#ffffff"
@@ -65,11 +61,10 @@ extension LoginService: ModelMappeable {
 
     func mapGitLab() {
         service = "gitlab"
-        scope = ""
+        scope = "read_user"
 
         serverUrl = "https://gitlab.com"
         tokenPath = "/oauth/token"
-        identityPath = "https://gitlab.com/user/api/v4/user"
         authorizePath = "/oauth/authorize"
         buttonLabelText = "gitlab"
         buttonLabelColor = "#ffffff"
@@ -85,7 +80,6 @@ extension LoginService: ModelMappeable {
         serverUrl = "https://facebook.com"
         scope = "email"
         tokenPath = "https://graph.facebook.com/oauth/v2/accessToken"
-        identityPath = "https://graph.facebook.com/v2.8/me"
         authorizePath = "/v2.9/dialog/oauth"
         buttonLabelText = "facebook"
         buttonLabelColor = "#ffffff"
@@ -100,7 +94,6 @@ extension LoginService: ModelMappeable {
 
         serverUrl = "https://linkedin.com"
         tokenPath = "/oauth/v2/accessToken"
-        identityPath = "https://api.github.com/v1/people/"
         authorizePath = "/oauth/v2/authorization"
         buttonLabelText = "linkedin"
         buttonLabelColor = "#ffffff"

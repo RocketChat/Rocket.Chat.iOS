@@ -38,7 +38,6 @@ class LoginService: BaseModel {
     @objc dynamic var custom = false
     @objc dynamic var serverUrl: String?
     @objc dynamic var tokenPath: String?
-    @objc dynamic var identityPath: String?
     @objc dynamic var authorizePath: String?
     @objc dynamic var scope: String?
     @objc dynamic var buttonLabelText: String?
@@ -105,8 +104,8 @@ extension LoginService {
         guard
             let serverUrl = serverUrl,
             let tokenPath = tokenPath
-            else {
-                return nil
+        else {
+            return nil
         }
 
         return tokenPath.contains("://") ? tokenPath : "\(serverUrl)\(tokenPath)"
