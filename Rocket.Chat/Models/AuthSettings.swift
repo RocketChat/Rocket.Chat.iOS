@@ -37,8 +37,9 @@ final class AuthSettings: BaseModel {
 
     @objc dynamic var isGoogleAuthenticationEnabled = false
     @objc dynamic var isFacebookAuthenticationEnabled = false
-    @objc dynamic var isLinkedInAuthenticationEnabled = false
     @objc dynamic var isGitHubAuthenticationEnabled = false
+    @objc dynamic var isGitLabAuthenticationEnabled = false
+    @objc dynamic var isLinkedInAuthenticationEnabled = false
     @objc dynamic var isLDAPAuthenticationEnabled = false
 
     @objc dynamic var isCASEnabled = false
@@ -73,6 +74,10 @@ final class AuthSettings: BaseModel {
     @objc dynamic var messageShowDeletedStatus: Bool = true
     @objc dynamic var messageAllowDeleting: Bool = true
     @objc dynamic var messageAllowDeletingBlockDeleteInMinutes: Int = 0
+
+    @objc dynamic var messageShowEditedStatus: Bool = true
+    @objc dynamic var messageAllowEditing: Bool = true
+    @objc dynamic var messageAllowEditingBlockEditInMinutes: Int = 0
 
     var hiddenTypes: Set<MessageType> {
         var hiddenTypes = Set<MessageType>()

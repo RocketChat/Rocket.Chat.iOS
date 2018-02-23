@@ -357,6 +357,7 @@ extension SubscriptionManager {
     }
 
     static func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
+
         let request = [
             "msg": "method",
             "method": "sendMessage",
@@ -364,8 +365,8 @@ extension SubscriptionManager {
                 "_id": message.identifier ?? "",
                 "rid": message.subscription.rid,
                 "msg": message.text
-            ]]
-        ] as [String: Any]
+                ]]
+            ] as [String: Any]
 
         SocketManager.send(request) { (response) in
             guard !response.isError() else { return Log.debug(response.result.string) }

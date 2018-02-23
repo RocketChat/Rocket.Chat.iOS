@@ -275,13 +275,17 @@ extension SubscriptionsViewController {
     }
 
     func updateCurrentUserInformation() {
-        guard let settings = AuthSettingsManager.settings else { return }
         guard let user = AuthManager.currentUser() else { return }
         guard let labelUsername = self.labelUsername else { return }
         guard let viewUserStatus = self.viewUserStatus else { return }
         guard let avatarView = self.avatarView else { return }
 
-        labelServer.text = settings.serverName
+        if let settings = AuthSettingsManager.settings {
+            labelServer.text = settings.serverName
+        } else {
+            labelServer.text = "Rocket.Chat"
+        }
+
         labelUsername.text = user.displayName()
         avatarView.user = user
 
