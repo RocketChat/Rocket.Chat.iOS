@@ -39,7 +39,6 @@ class LoginServiceSpec: XCTestCase, RealmTestCase {
             \"tokenSentVia\" : \"header\",
             \"buttonColor\" : \"#13679A\",
             \"buttonLabelText\" : \"Open\",
-            \"identityPath\" : \"/oauth/userinfo\",
             \"buttonLabelColor\" : \"#FFFFFF\",
             \"tokenPath\" : \"/oauth/token\",
             \"usernameField\" : \"\"
@@ -52,6 +51,7 @@ class LoginServiceSpec: XCTestCase, RealmTestCase {
         let github = LoginService()
         github.identifier = "githubid"
         github.service = "github"
+
         let google = LoginService()
         google.identifier = "googleid"
         google.service = "google"
@@ -79,7 +79,6 @@ class LoginServiceSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(loginService.tokenSentVia, "header")
         XCTAssertEqual(loginService.buttonColor, "#13679A")
         XCTAssertEqual(loginService.buttonLabelText, "Open")
-        XCTAssertEqual(loginService.identityPath, "/oauth/userinfo")
         XCTAssertEqual(loginService.buttonLabelColor, "#FFFFFF")
         XCTAssertEqual(loginService.tokenPath, "/oauth/token")
         XCTAssertEqual(loginService.usernameField, "")
