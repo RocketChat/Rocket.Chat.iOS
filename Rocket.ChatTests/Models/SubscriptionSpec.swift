@@ -15,12 +15,12 @@ import SwiftyJSON
 // MARK: Test Instance
 
 extension Subscription {
-    static func testInstance() -> Subscription {
+    static func testInstance(_ name: String = "subscription") -> Subscription {
         let subscription = Subscription()
         subscription.auth = Auth.testInstance()
-        subscription.rid = "subscription-rid"
-        subscription.name = "subscription-name"
-        subscription.identifier = "subscription-identifier"
+        subscription.rid = "\(name)-rid"
+        subscription.name = "\(name)-name"
+        subscription.identifier = "\(name)-identifier"
         return subscription
     }
 }
