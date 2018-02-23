@@ -164,6 +164,10 @@ final class AuthViewController: BaseViewController {
             addOAuthButton(for: .linkedin)
         }
 
+        if settings.isTwitterAuthenticationEnabled {
+            addOAuthButton(for: .twitter)
+        }
+
         if settings.isCASEnabled {
             addOAuthButton(for: .cas)
         }
@@ -479,6 +483,7 @@ extension AuthViewController {
         case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
         case .gitlab: button.setImage(#imageLiteral(resourceName: "gitlab"), for: .normal)
         case .linkedin: button.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
+        case .twitter: button.setImage(#imageLiteral(resourceName: "twitter"), for: .normal)
         default: button.setTitle(loginService.buttonLabelText ?? "", for: .normal)
         }
 
