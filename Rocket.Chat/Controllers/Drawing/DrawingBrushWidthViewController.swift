@@ -19,7 +19,7 @@ final class DrawingBrushWidthViewController: UIViewController {
             widthLabel.text = localized("chat.drawing.settings.width")
         }
     }
-    
+
     @IBAction func opacityChanged(_ sender: UISlider) {
         widthLabel.text = String(format: "%.2f", sender.value)
         delegate?.brushWidthChanged(width: CGFloat(sender.value))
