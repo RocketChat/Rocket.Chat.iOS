@@ -59,28 +59,32 @@
                         <viewLayoutGuide key="safeArea" id="MB8-Ng-0ga"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Reset" id="5z5-OY-5Fu">
+                        <barButtonItem title="Reset" image="Reset" id="5z5-OY-5Fu">
+                            <color key="tintColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="reset" destination="u7Q-N1-jHC" id="LNy-UF-m1h"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="GR2-Ra-9pU"/>
-                        <barButtonItem enabled="NO" title="Brush:" id="zNJ-OE-uJe"/>
-                        <barButtonItem title="Width" id="Inn-dx-cVT">
+                        <barButtonItem enabled="NO" title="Settings:" id="zNJ-OE-uJe"/>
+                        <barButtonItem title="Width" image="Width" id="Inn-dx-cVT">
+                            <color key="tintColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="N6q-Pk-jBJ" kind="popoverPresentation" popoverAnchorBarButtonItem="Inn-dx-cVT" id="PgU-Gh-EgK">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Opacity" id="ubJ-AB-CWU">
+                        <barButtonItem title="Opacity" image="Opacity" id="ubJ-AB-CWU">
+                            <color key="tintColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="mo2-C9-pFT" kind="popoverPresentation" popoverAnchorBarButtonItem="ubJ-AB-CWU" id="fus-lc-ZLe">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Color" id="1AR-Ra-oNL">
+                        <barButtonItem title="Color" image="Color" id="1AR-Ra-oNL">
+                            <color key="tintColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="Uue-c0-V7G" kind="popoverPresentation" popoverAnchorBarButtonItem="1AR-Ra-oNL" id="3a6-nt-A3q">
                                     <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
@@ -103,6 +107,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="mainImageView" destination="xFp-Dg-6Qj" id="i2R-cM-seM"/>
+                        <outlet property="settingsItem" destination="zNJ-OE-uJe" id="dda-He-TbS"/>
                         <outlet property="tempImageView" destination="aec-Zt-dVY" id="bH0-0F-L8l"/>
                     </connections>
                 </viewController>
@@ -115,18 +120,24 @@
             <objects>
                 <viewController id="mo2-C9-pFT" customClass="DrawingBrushOpacityViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o59-8g-a35">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="35"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="65"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="lIY-Ns-JYG">
-                                <rect key="frame" x="6" y="0.0" width="151" height="36"/>
+                                <rect key="frame" x="6" y="32" width="150" height="34"/>
                                 <connections>
                                     <action selector="opacityChanged:" destination="mo2-C9-pFT" eventType="valueChanged" id="ALe-SH-UQK"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgE-Yk-oqb">
-                                <rect key="frame" x="163" y="9" width="29" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="162" y="40" width="30" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opacity" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uvK-6C-jZS">
+                                <rect key="frame" x="8" y="8" width="184" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -134,18 +145,22 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Ea5-lv-CCB" firstAttribute="trailing" secondItem="cgE-Yk-oqb" secondAttribute="trailing" constant="8" id="2g4-mI-v6y"/>
+                            <constraint firstItem="uvK-6C-jZS" firstAttribute="leading" secondItem="Ea5-lv-CCB" secondAttribute="leading" constant="8" id="DCu-MD-l1s"/>
                             <constraint firstItem="Ea5-lv-CCB" firstAttribute="bottom" secondItem="lIY-Ns-JYG" secondAttribute="bottom" id="XU1-Tn-kD4"/>
                             <constraint firstItem="lIY-Ns-JYG" firstAttribute="leading" secondItem="Ea5-lv-CCB" secondAttribute="leading" constant="8" id="XxY-Uz-Of0"/>
-                            <constraint firstItem="lIY-Ns-JYG" firstAttribute="top" secondItem="Ea5-lv-CCB" secondAttribute="top" id="jdr-Ha-QFx"/>
-                            <constraint firstItem="cgE-Yk-oqb" firstAttribute="centerY" secondItem="o59-8g-a35" secondAttribute="centerY" id="yRd-9V-Thh"/>
+                            <constraint firstItem="cgE-Yk-oqb" firstAttribute="centerY" secondItem="lIY-Ns-JYG" secondAttribute="centerY" id="Zpx-l5-z5a"/>
+                            <constraint firstItem="uvK-6C-jZS" firstAttribute="top" secondItem="Ea5-lv-CCB" secondAttribute="top" constant="8" id="cl0-nW-QD4"/>
+                            <constraint firstItem="lIY-Ns-JYG" firstAttribute="top" secondItem="uvK-6C-jZS" secondAttribute="bottom" constant="8" id="mWJ-Xz-4eJ"/>
+                            <constraint firstItem="Ea5-lv-CCB" firstAttribute="trailing" secondItem="uvK-6C-jZS" secondAttribute="trailing" constant="8" id="tQH-Q3-0rD"/>
                             <constraint firstItem="cgE-Yk-oqb" firstAttribute="leading" secondItem="lIY-Ns-JYG" secondAttribute="trailing" constant="8" id="ztl-8O-dfS"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Ea5-lv-CCB"/>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="200" height="35"/>
-                    <size key="freeformSize" width="200" height="35"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="65"/>
+                    <size key="freeformSize" width="200" height="65"/>
                     <connections>
                         <outlet property="opacityLabel" destination="cgE-Yk-oqb" id="1nZ-v0-2IA"/>
+                        <outlet property="opacityTitle" destination="uvK-6C-jZS" id="J66-L6-xoZ"/>
                         <outlet property="slider" destination="lIY-Ns-JYG" id="sCP-Jz-wF7"/>
                     </connections>
                 </viewController>
@@ -158,18 +173,24 @@
             <objects>
                 <viewController id="N6q-Pk-jBJ" customClass="DrawingBrushWidthViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WMG-X7-uwT">
-                        <rect key="frame" x="0.0" y="0.0" width="200" height="35"/>
+                        <rect key="frame" x="0.0" y="0.0" width="200" height="65"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="10" minValue="0.0" maxValue="20" translatesAutoresizingMaskIntoConstraints="NO" id="eo7-Lr-t3S">
-                                <rect key="frame" x="6" y="0.0" width="151" height="36"/>
+                                <rect key="frame" x="6" y="32" width="150" height="34"/>
                                 <connections>
                                     <action selector="opacityChanged:" destination="N6q-Pk-jBJ" eventType="valueChanged" id="SHu-gd-OZP"/>
                                 </connections>
                             </slider>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0.00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GIq-Uy-r7c">
-                                <rect key="frame" x="163" y="9" width="29" height="17"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <rect key="frame" x="162" y="40" width="30" height="17"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Width" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnP-r0-Kae">
+                                <rect key="frame" x="8" y="8" width="184" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -177,19 +198,23 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="j2F-tH-Vc8" firstAttribute="bottom" secondItem="eo7-Lr-t3S" secondAttribute="bottom" id="2FJ-xr-DZP"/>
-                            <constraint firstItem="eo7-Lr-t3S" firstAttribute="top" secondItem="j2F-tH-Vc8" secondAttribute="top" id="5Ca-CB-aW5"/>
                             <constraint firstItem="GIq-Uy-r7c" firstAttribute="leading" secondItem="eo7-Lr-t3S" secondAttribute="trailing" constant="8" id="8m9-OA-5UH"/>
+                            <constraint firstItem="ZnP-r0-Kae" firstAttribute="top" secondItem="j2F-tH-Vc8" secondAttribute="top" constant="8" id="GsB-XD-nfn"/>
+                            <constraint firstItem="j2F-tH-Vc8" firstAttribute="trailing" secondItem="ZnP-r0-Kae" secondAttribute="trailing" constant="8" id="Jej-9g-rO9"/>
+                            <constraint firstItem="GIq-Uy-r7c" firstAttribute="centerY" secondItem="eo7-Lr-t3S" secondAttribute="centerY" id="L1I-VO-aj3"/>
+                            <constraint firstItem="ZnP-r0-Kae" firstAttribute="leading" secondItem="j2F-tH-Vc8" secondAttribute="leading" constant="8" id="LBg-Sx-6Od"/>
                             <constraint firstItem="j2F-tH-Vc8" firstAttribute="trailing" secondItem="GIq-Uy-r7c" secondAttribute="trailing" constant="8" id="MmD-w3-IS9"/>
-                            <constraint firstItem="GIq-Uy-r7c" firstAttribute="centerY" secondItem="WMG-X7-uwT" secondAttribute="centerY" id="XDa-1Q-khF"/>
                             <constraint firstItem="eo7-Lr-t3S" firstAttribute="leading" secondItem="j2F-tH-Vc8" secondAttribute="leading" constant="8" id="rdh-oF-HCF"/>
+                            <constraint firstItem="eo7-Lr-t3S" firstAttribute="top" secondItem="ZnP-r0-Kae" secondAttribute="bottom" constant="8" id="rqr-H5-1QI"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="j2F-tH-Vc8"/>
                     </view>
-                    <value key="contentSizeForViewInPopover" type="size" width="200" height="35"/>
-                    <size key="freeformSize" width="200" height="35"/>
+                    <value key="contentSizeForViewInPopover" type="size" width="200" height="65"/>
+                    <size key="freeformSize" width="200" height="65"/>
                     <connections>
                         <outlet property="slider" destination="eo7-Lr-t3S" id="uXZ-Vd-ClE"/>
                         <outlet property="widthLabel" destination="GIq-Uy-r7c" id="NXU-CS-Iov"/>
+                        <outlet property="widthTitle" destination="ZnP-r0-Kae" id="iPG-h3-cRz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCC-ig-EyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -246,4 +271,10 @@
             <point key="canvasLocation" x="308.80000000000001" y="667.4662668665668"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Color" width="32" height="32"/>
+        <image name="Opacity" width="32" height="32"/>
+        <image name="Reset" width="32" height="32"/>
+        <image name="Width" width="32" height="32"/>
+    </resources>
 </document>

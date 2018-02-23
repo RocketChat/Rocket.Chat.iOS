@@ -30,4 +30,8 @@ final class DrawingViewModel {
     internal var fileName: String {
         return localized("chat.drawing.fileName")
     }
+
+    internal var brushSettingsLabel: String {
+        return localized("chat.drawing.settings.brush")
+    }
 }

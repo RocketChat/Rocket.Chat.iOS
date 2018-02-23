@@ -160,6 +160,9 @@
 "chat.drawing.errorTitle" = "Oops!"; // TODO
 "chat.drawing.messageTitle" = "You have to draw something before sending it."; // TODO
 "chat.drawing.fileName" = "Drawing"; // TODO
+"chat.drawing.settings.brush" = "Brush"; // TODO
+"chat.drawing.settings.opacity" = "Opacity"; // TODO
+"chat.drawing.settings.width" = "Width"; // TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Raum umbenannt zu: %@ von %@";

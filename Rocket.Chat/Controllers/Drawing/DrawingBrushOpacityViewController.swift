@@ -14,6 +14,11 @@ final class DrawingBrushOpacityViewController: UIViewController {
     private var opacity: Float = 1
     @IBOutlet private weak var slider: UISlider!
     @IBOutlet weak var opacityLabel: UILabel!
+    @IBOutlet weak var opacityTitle: UILabel! {
+        didSet {
+            opacityTitle.text = localized("chat.drawing.settings.opacity")
+        }
+    }
 
     @IBAction func opacityChanged(_ sender: UISlider) {
         opacityLabel.text = String(format: "%.2f", sender.value)

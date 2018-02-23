@@ -160,6 +160,9 @@
 "chat.drawing.errorTitle" = "Ups!";
 "chat.drawing.messageTitle" = "Przed wysłaniem musisz coś narysować.";
 "chat.drawing.fileName" = "Rysunek";
+"chat.drawing.settings.brush" = "Pędzel";
+"chat.drawing.settings.opacity" = "Nieprzezroczystość";
+"chat.drawing.settings.width" = "Szerokość";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";

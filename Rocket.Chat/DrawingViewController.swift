@@ -9,6 +9,12 @@
 import UIKit
 
 final class DrawingViewController: UIViewController {
+    @IBOutlet private weak var settingsItem: UIBarButtonItem! {
+        didSet {
+            settingsItem.title = viewModel.brushSettingsLabel
+        }
+    }
+
     weak var delegate: DrawingControllerDelegate?
 
     // Drawing variables
