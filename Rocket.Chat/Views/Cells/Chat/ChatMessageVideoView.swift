@@ -28,6 +28,7 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
 
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailTextIndicator: UILabel!
     @IBOutlet weak var detailTextHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var fullHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewPreview: UIImageView! {
@@ -44,6 +45,7 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
         activityIndicator.startAnimating()
         labelTitle.text = attachment.title
         detailText.text = attachment.descriptionText
+        detailTextIndicator.isHidden = attachment.descriptionText?.isEmpty ?? true
         let fullHeight = ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
         fullHeightConstraint.constant = fullHeight
         detailTextHeightConstraint.constant = fullHeight - ChatMessageVideoView.defaultHeight
