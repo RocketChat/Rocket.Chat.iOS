@@ -134,7 +134,7 @@
 "chat.message.actions.delete.confirm.title" = "Delete this message?"; // TODO
 "chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone."; //TODO
 "chat.message.actions.delete.confirm.yes" = "Yes, delete"; // TODO
-"Send" = "Dépêcher"; //SLKTextInputbar.m
+"Send" = "Envoyer"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Message signalé";
