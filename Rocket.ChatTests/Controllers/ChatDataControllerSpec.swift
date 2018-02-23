@@ -25,7 +25,7 @@ class ChatDataControllerSpec: XCTestCase {
 
         XCTAssertNotNil(message, "Message can't be nil")
 
-        var obj = ChatData(type: .message, timestamp: Date())
+        var obj = ChatData(type: .message, timestamp: Date().addingTimeInterval(-1))
         obj.message = message
         XCTAssertNotNil(obj, "obj can't be nil")
 
@@ -140,7 +140,7 @@ class ChatDataControllerSpec: XCTestCase {
         var obj1 = ChatData(type: .message, timestamp: Date().addingTimeInterval(-100000))
         obj1.message = message1
 
-        var obj2 = ChatData(type: .message, timestamp: Date())
+        var obj2 = ChatData(type: .message, timestamp: Date().addingTimeInterval(-1))
         obj2.message = message2
 
         let (indexPaths, _) = controller.insert([obj1, obj2])
