@@ -148,6 +148,13 @@
 "chat.upload.shoot_video" = "Shoot Video";
 "chat.upload.choose_from_library" = "Vybrat z knihovny";
 "chat.upload.import_file" = "Importovat soubor z...";
+"chat.upload.paint" = "Nahrát výkres";
+"chat.upload.choice_pick" = "Vyberte si svou volbu";
+"chat.upload.empty" = "Prázdný";
+"chat.upload.nothing" = "Ujistěte se, že kreslíte příspěvek";
+"chat.upload.import" = "Vyberte obrázek z knihovny";
+"chat.upload.tosave" = "Uložit to do Knihovny";
+
 
 // Chat Download
 "chat.download.downloading_file" = "Stahuji \"%@\"";

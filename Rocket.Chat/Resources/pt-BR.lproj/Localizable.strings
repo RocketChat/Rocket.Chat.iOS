@@ -148,6 +148,13 @@
 "chat.upload.shoot_video" = "Gravar um vídeo";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
+"chat.upload.paint" = "Carregar um desenho";
+"chat.upload.choice_pick" = "Escolha sua escolha";
+"chat.upload.empty" = "Vazio";
+"chat.upload.nothing" = "Certifique-se de desenhar para publicar";
+"chat.upload.import" = "Escolha uma imagem da biblioteca";
+"chat.upload.tosave" = "Salve isso na Biblioteca";
+
 
 // Chat Download
 "chat.download.downloading_file" = "Baixando \"%@\"";
