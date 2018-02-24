@@ -213,7 +213,7 @@ extension MembersListViewController {
             }
             present(alert, animated: true, completion: nil)
         } else {
-            delegate?.membersList(self, didSelectUser: user);
+            delegate?.membersList(self, didSelectUser: user)
         }
     }
 }
