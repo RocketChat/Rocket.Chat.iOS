@@ -321,44 +321,32 @@ class AuthSpec: XCTestCase, RealmTestCase {
     func testCanUnblockUser() {
         let realm = testRealm()
 
-        let user1 = User.testInstance()
-        user1.identifier = "uid1"
-
-        let user2 = User.testInstance()
-        user2.identifier = "uid2"
+        let user = User.testInstance()
+        user.identifier = "uid1"
 
         let auth = Auth.testInstance()
-        auth.userId = user1.identifier
+        auth.userId = user.identifier
 
         let message = Message.testInstance()
         message.identifier = "mid"
-        message.user = user2
+        message.user = user
+        message.userBlocked = true
 
-        // block-message
+        // block-user
 
         try? realm.write {
             realm.add(auth)
-            realm.add(user1)
-            realm.add(user2)
+            realm.add(user)
         }
 
-        XCTAssert(auth.canBlockMessage(message) == .allowed)
+        XCTAssert(auth.canUnblockUser(message.user!) == .allowed)
 
-        // my own message
+        // non actionable user status
 
         try? realm.write {
-            message.user = user1
+            message.userBlocked = false;
         }
 
-        XCTAssert(auth.canBlockMessage(message) == .myOwn)
-
-        // non actionable message type
-
-        try? realm.write {
-            message.createdAt = Date()
-            message.internalType = MessageType.userJoined.rawValue
-        }
-
-        XCTAssert(auth.canBlockMessage(message) == .notActionable)
+        XCTAssert(auth.canUnblockUser(message.user!) == .notActionable)
     }
 }
