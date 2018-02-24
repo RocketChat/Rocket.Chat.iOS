@@ -10,8 +10,7 @@ import UIKit
 
 final class ChatMessageUnreadSeparator: UICollectionViewCell {
     static var minimumHeight: CGFloat = 40
-
-    static let identifier = "ChatMessageDaySeparator"
+    static let identifier = "ChatMessageUnreadSeparator"
 
     @IBOutlet weak var labelTitle: UILabel!
 }
