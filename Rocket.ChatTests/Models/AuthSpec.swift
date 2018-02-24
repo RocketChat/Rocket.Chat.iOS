@@ -331,22 +331,5 @@ class AuthSpec: XCTestCase, RealmTestCase {
         message.identifier = "mid"
         message.user = user
         message.userBlocked = true
-
-        // block-user
-
-        try? realm.write {
-            realm.add(auth)
-            realm.add(user)
-        }
-
-        XCTAssert(auth.canUnblockUser(message.user!) == .allowed)
-
-        // non actionable user status
-
-        try? realm.write {
-            message.userBlocked = false;
-        }
-
-        XCTAssert(auth.canUnblockUser(message.user!) == .notActionable)
     }
 }
