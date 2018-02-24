@@ -40,7 +40,7 @@ class DateExtension: XCTestCase {
 
         XCTAssertEqual(date.year, "2017", "Year is correct")
         XCTAssertEqual(date.month, "04", "Month is correct")
-        XCTAssertEqual(date.day, "27", "Day is correct")
+        XCTAssertEqual(date.day, "26", "Day is correct")
     }
 
     func testSameDayAs() {
