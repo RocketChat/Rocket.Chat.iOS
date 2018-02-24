@@ -317,4 +317,19 @@ class AuthSpec: XCTestCase, RealmTestCase {
         XCTAssert(auth.canBlockMessage(message) == .notActionable)
 
     }
+
+    func testCanUnblockUser() {
+        let realm = testRealm()
+
+        let user = User.testInstance()
+        user.identifier = "uid1"
+
+        let auth = Auth.testInstance()
+        auth.userId = user.identifier
+
+        let message = Message.testInstance()
+        message.identifier = "mid"
+        message.user = user
+        message.userBlocked = true
+    }
 }
