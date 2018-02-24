@@ -342,7 +342,15 @@ class AuthSpec: XCTestCase, RealmTestCase {
             realm.add(user2)
         }
 
-        XCTAssert(auth.canUnblockUser(message.user!) == .allowed)
+        XCTAssert(auth.canBlockMessage(message) == .allowed)
+
+        // my own message
+
+        try? realm.write {
+            message.user = user1
+        }
+
+        XCTAssert(auth.canBlockMessage(message) == .myOwn)
 
         // non actionable message type
 
@@ -351,6 +359,6 @@ class AuthSpec: XCTestCase, RealmTestCase {
             message.internalType = MessageType.userJoined.rawValue
         }
 
-        XCTAssert(auth.canUnblockUser(message.user!) == .notActionable)
+        XCTAssert(auth.canBlockMessage(message) == .notActionable)
     }
 }
