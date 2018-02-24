@@ -199,7 +199,7 @@ extension MessageManager {
             }
         })
     }
-    
+
     static func unblockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
         guard let userIdentifier = user.identifier else { return }
         var blockedUsers: [String] = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
