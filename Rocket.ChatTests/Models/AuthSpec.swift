@@ -334,7 +334,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
         message.identifier = "mid"
         message.user = user2
         message.userBlocked = false
-        // unblock-user
+        // user state is "unblocked"
 
         try? realm.write {
             realm.add(auth)
@@ -343,5 +343,11 @@ class AuthSpec: XCTestCase, RealmTestCase {
         }
 
         XCTAssert(auth.canUnblockUser(message.user!) == .notActionable)
+
+        // user state is "blocked"
+
+        MessageManager.blockedUsersList.append(message.user!.identifier!)
+        XCTAssert(auth.canUnblockUser(message.user!) == .allowed)
+        MessageManager.blockedUsersList.remove(object: message.user!.identifier!)
     }
 }
