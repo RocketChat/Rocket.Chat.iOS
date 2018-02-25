@@ -4,25 +4,24 @@ import MobileCoreServices
 import RealmSwift
 import SlackTextViewController
 import SimpleImageViewer
-extension DrawingViewController:UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+extension DrawingViewController: UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
         print(info)
         if let imagePicked =  info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.selectedImage = imagePicked
             self.imageView.image = selectedImage
-            dismiss(animated: true,completion:  nil )
+            dismiss(animated: true, completion:  nil )
         }
     }
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil )
     }
     func shareDrawingClicked1() {
-        if self.imageView.image != nil  {
+        if self.imageView.image != nil {
         ChatViewController.toUploadPic = self.imageView.image
         dismiss(animated: true, completion: nil)
         performSegue(withIdentifier: "goback", sender: nil)
-        }
-        else {
+        } else {
             alert(title: "chat.upload.empty", message: "chat.upload.nothing")
         }
     }
@@ -48,7 +47,7 @@ extension DrawingViewController:UINavigationControllerDelegate, UIImagePickerCon
     }
     func swapToolClicked1() {
         if !isdrawing {
-            swapTool.setImage(#imageLiteral(resourceName: "erase") , for: .normal)
+            swapTool.setImage(#imageLiteral(resourceName: "erase"), for: .normal)
             tool.backgroundColor =  UIColor.clear
             color = lastColor
             brushSize = 5.0
