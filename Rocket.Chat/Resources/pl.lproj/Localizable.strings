@@ -184,7 +184,7 @@
 
 // Members List
 "chat.members.list.title" = "Członkowie";
-"chat.member.unblock.title" = "Odblokować";
+"chat.member.unblock.title" = "Odblokuj";
 "chat.member.open.profile.title" = "Otwórz profil";
 
 // Messages List
