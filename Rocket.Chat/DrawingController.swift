@@ -9,28 +9,25 @@
 import UIKit
 import Photos
 import MobileCoreServices
-extension DrawingViewController{
-    
+extension DrawingViewController {
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = true
-        if let touch=touches.first{
+        if let touch=touches.first {
             var currentPoint = touch.location(in: self.view)
             drawLines(fromPoint: lastPoint, toPoint: currentPoint)
             lastPoint = currentPoint
         }
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        if !swiped{
+        if !swiped {
             drawLines(fromPoint: lastPoint, toPoint: lastPoint)
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         swiped = false
-        if let touch = touches.first
-        {
+        if let touch = touches.first {
             lastPoint = touch.location(in: self.view)
-        }
-        
+        }      
     }
     func drawLines(fromPoint:CGPoint , toPoint:CGPoint) {
         UIGraphicsBeginImageContext(self.view.frame.size)
