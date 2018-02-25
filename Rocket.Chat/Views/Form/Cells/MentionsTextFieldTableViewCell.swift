@@ -70,7 +70,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
         }
 
         let users = realm.objects(User.self).filter(
-            NSPredicate(format: "name CONTAINS[c] %@ OR username CONTAINS[c] %@", name, name)
+            NSPredicate(format: "name CONTAINS[cd] %@ OR username CONTAINS[cd] %@", name, name)
         )
 
         let usernames = Array(users).flatMap { $0.username }.filter {
