@@ -4,14 +4,10 @@ import MobileCoreServices
 import RealmSwift
 import SlackTextViewController
 import SimpleImageViewer
-
-
-
-extension DrawingViewController:UINavigationControllerDelegate, UIImagePickerControllerDelegate{
-    
+extension DrawingViewController:UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         print(info)
-        if let imagePicked =  info[UIImagePickerControllerOriginalImage] as? UIImage{
+        if let imagePicked =  info[UIImagePickerControllerOriginalImage] as? UIImage {
             self.selectedImage = imagePicked
             self.imageView.image = selectedImage
             dismiss(animated: true,completion:  nil )
@@ -30,7 +26,6 @@ extension DrawingViewController:UINavigationControllerDelegate, UIImagePickerCon
             alert(title: "chat.upload.empty", message: "chat.upload.nothing")
         }
     }
-
    func saveClicked1() {
         let actionSheet = UIAlertController(title: "chat.upload.choice_pick", message: "", preferredStyle: .actionSheet)
         actionSheet.addAction(UIAlertAction(title: "chat.upload.import", style: .default, handler: { (_) in

@@ -30,8 +30,9 @@ extension DrawingViewController{
         {
             lastPoint = touch.location(in: self.view)
         }
+        
     }
-    func drawLines(fromPoint:CGPoint , toPoint:CGPoint){
+    func drawLines(fromPoint:CGPoint , toPoint:CGPoint) {
         UIGraphicsBeginImageContext(self.view.frame.size)
         imageView?.image?.draw(in: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         var context = UIGraphicsGetCurrentContext()
@@ -41,7 +42,6 @@ extension DrawingViewController{
         context?.setLineCap(CGLineCap.round)
         context?.setLineWidth((40-2)*brushsize.value)
         color = color.withAlphaComponent(opacity.value)
-        
         context?.setStrokeColor(color.cgColor)
         context?.strokePath()
         imageView.image = UIGraphicsGetImageFromCurrentImageContext()

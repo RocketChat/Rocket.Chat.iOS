@@ -5,7 +5,7 @@
 //
 
 import UIKit
-@objc protocol colorDelegate{
+@objc protocol colorDelegate {
     @objc optional func pickedColor(color:UIColor)
 }
 class ColorPicker: UIView {
@@ -33,13 +33,13 @@ class ColorPicker: UIView {
         }
     }
     //Changes the selected color, updates the UI, and notifies the delegate.
-    func selectedColor(sColor: UIColor){
+    func selectedColor(sColor: UIColor) {
         if sColor != selectedColor {
             var hue: CGFloat = 0
             var saturation: CGFloat = 0
             var brightness: CGFloat = 0
             var alpha: CGFloat = 0
-            if sColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha){
+            if sColor.getHue(&hue, saturation: &saturation, brightness: &brightness, alpha: &alpha) {
                 currentSelectionY = CGFloat (hue * self.frame.size.width)
                 self.setNeedsDisplay()
             }
@@ -59,7 +59,7 @@ class ColorPicker: UIView {
         let touch =  touches.first
         updateColor(touch: touch!)
     }
-    func updateColor(touch: UITouch){
+    func updateColor(touch: UITouch) {
         currentSelectionY = (touch.location(in: self).y)
         selectedColor = UIColor(hue: (currentSelectionY / self.frame.size.height), saturation: 1.0, brightness: 1.0, alpha: 1.0)
         self.delegate.pickedColor!(color: selectedColor)

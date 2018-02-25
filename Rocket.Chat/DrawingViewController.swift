@@ -13,22 +13,21 @@ import MobileCoreServices
 import RealmSwift
 import SlackTextViewController
 import SimpleImageViewer
-class DrawingViewController: UIViewController, colorDelegate  {
+class DrawingViewController: UIViewController, colorDelegate {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var colorPickerView: ColorPicker!
     @IBOutlet weak var editimg: UIImageView!
     @IBOutlet weak var swapTool: UIButton!
     @IBOutlet weak var brushsize: SSSlider!
     @IBOutlet weak var opacity: SSSlider!
-    var selectedImage:UIImage!
-    var color:UIColor!
-    var lastColor:UIColor!
-    var tool:UIImageView!
+    var selectedImage: UIImage!
+    var color: UIColor!
+    var lastColor: UIColor!
+    var tool: UIImageView!
     var isdrawing = true
     var lastPoint = CGPoint.zero
-    var brushSize:CGFloat = 5.0
+    var brushSize: CGFloat = 5.0
     var swiped = false
-    
     @IBAction func swapToolClicked(_ sender: Any) {
         self.swapToolClicked1()
     }
@@ -38,7 +37,6 @@ class DrawingViewController: UIViewController, colorDelegate  {
     @IBAction func shareDrawingClicked(_ sender: Any) {
         self.shareDrawingClicked1()
     }
-
     @IBAction func saveClicked(_ sender: Any) {
         self.saveClicked1()
     }
@@ -47,16 +45,13 @@ class DrawingViewController: UIViewController, colorDelegate  {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        colorPickerView.delegate = self;
+        colorPickerView.delegate = self
         color = UIColor(red: 0/255, green: 167/255, blue: 255/255, alpha: 1.0)
     }
-    
     func pickedColor(color: UIColor) {
-        self.color = color;
+        self.color = color
         editimg.backgroundColor = color
     }
-    
-  
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -65,5 +60,3 @@ class DrawingViewController: UIViewController, colorDelegate  {
         return false
     }
 }
-
-
