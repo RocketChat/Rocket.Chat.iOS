@@ -20,7 +20,7 @@ extension DrawingViewController {
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !swiped {
-            drawLines(fromPoint: lastPoint, toPoint: lastPoint)
+            drawLines(fromPoint: lastPoint , toPoint: lastPoint)
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -29,7 +29,7 @@ extension DrawingViewController {
             lastPoint = touch.location(in: self.view)
         }      
     }
-    func drawLines(fromPoint:CGPoint , toPoint:CGPoint) {
+    func drawLines(fromPoint: CGPoint , toPoint: CGPoint) {
         UIGraphicsBeginImageContext(self.view.frame.size)
         imageView?.image?.draw(in: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         var context = UIGraphicsGetCurrentContext()
