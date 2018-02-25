@@ -5,7 +5,6 @@
 //  Created by Anirudh Vajjala on 22/02/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
-
 import SSSlider
 import UIKit
 import Photos
