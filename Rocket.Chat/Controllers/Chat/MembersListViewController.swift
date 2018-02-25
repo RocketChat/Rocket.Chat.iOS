@@ -197,10 +197,10 @@ extension MembersListViewController {
     func checkUserBlockState(_ user: User) {
         if AuthManager.isAuthenticated()?.canUnblockUser(user) == .allowed {
             let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: "Open Profile", style: .default, handler: { [weak self] _ in
+            alert.addAction(UIAlertAction(title: localized("chat.member.unblock.title"), style: .default, handler: { [weak self] _ in
                 self?.delegate?.membersList(self!, didSelectUser: user)
             }))
-            alert.addAction(UIAlertAction(title: "Unblock", style: .destructive, handler: { _ in
+            alert.addAction(UIAlertAction(title: localized("chat.member.open.profile.title"), style: .destructive, handler: { _ in
                 MessageManager.unblockMessagesFrom(user, completion: {
                     //Do nothing
                 })

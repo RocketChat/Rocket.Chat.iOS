@@ -184,6 +184,8 @@
 
 // Members List
 "chat.members.list.title" = "Členové";
+"chat.member.unblock.title" = "Odblokovat";
+"chat.member.open.profile.title" = "Otevřít profil";
 
 // Messages List
 "chat.messages.list.title" = "Zprávy";
