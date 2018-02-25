@@ -11,15 +11,44 @@ import UIKit
 final class DrawingBrushColorViewController: UIViewController {
     weak var delegate: DrawingBrushColorDelegate?
     private let viewModel = DrawingBrushColorViewModel()
+    @IBOutlet private weak var colorPreview: UIView! {
+        didSet {
+            colorPreview.backgroundColor = color
+        }
+    }
+    @IBOutlet private weak var colorPickerView: ColorPickerView! {
+        didSet {
+            colorPickerView.delegate = self
+        }
+    }
+    @IBOutlet private weak var selectedColorLabel: UILabel! {
+        didSet {
+            selectedColorLabel.text = viewModel.selectedColorLabel
+        }
+    }
+    @IBOutlet private weak var othersLabel: UILabel! {
+        didSet {
+            othersLabel.text = viewModel.othersLabel
+        }
+    }
 
-    private var color = UIColor.black
+    private var color = UIColor.black {
+        didSet {
+            if colorPreview != nil {
+                colorPreview.backgroundColor = color
+            }
+            delegate?.brushColorPicked(color: color)
+        }
+    }
 
     func setCurrentColor(_ color: UIColor) {
         self.color = color
     }
+}
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+extension DrawingBrushColorViewController: ColorPickerDelegate {
+    func colorPicker(_ picker: ColorPickerView, didPick color: UIColor) {
+        self.color = color
     }
 }
 

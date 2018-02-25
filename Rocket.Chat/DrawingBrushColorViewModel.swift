@@ -11,8 +11,15 @@ import Foundation
 final class DrawingBrushColorViewModel {
     internal let cellIdentifier = "DrawingBrushColorCell"
 
+    internal var selectedColorLabel: String {
+        return localized("chat.drawing.settings.color.selected")
+    }
+
+    internal var othersLabel: String {
+        return localized("chat.drawing.settings.color.others")
+    }
+
     internal let availableColors: [UIColor] = [
-        // default
         .black,
         .darkGray,
         .lightGray,

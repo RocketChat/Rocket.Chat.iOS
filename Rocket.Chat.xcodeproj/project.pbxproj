@@ -7,24 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B3A9764202C692D0019CA92 /* ChangeAppIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */; };
+		0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */; };
+		0B3A9769202C76080019CA92 /* ChangeAppIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */; };
 		0BB9678A2031A74B0051D68C /* DrawingBrushColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */; };
 		0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8602032DB20004BFAAF /* DrawingBrushColorSpec.swift */; };
 		0BC0E8632032DD95004BFAAF /* DrawingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8622032DD95004BFAAF /* DrawingViewModel.swift */; };
 		0BC0E8652032DF9B004BFAAF /* DrawingViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */; };
+		140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */; };
 		140A95E1202F526C003FD564 /* Drawing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140A95E0202F526C003FD564 /* Drawing.storyboard */; };
 		140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95E3202F536D003FD564 /* DrawingViewController.swift */; };
 		140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95E5202F7074003FD564 /* DrawingControllerDelegate.swift */; };
 		140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */; };
 		1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BFA21F9B601600FB2768 /* RCTextView.swift */; };
+		14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A6A83020421DF8008C210D /* ColorPickerView.swift */; };
 		14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */; };
 		14BAFAE020308EF30054A2E6 /* DrawingBrushOpacityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAFADF20308EF30054A2E6 /* DrawingBrushOpacityViewController.swift */; };
 		14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAFAE120308F010054A2E6 /* DrawingBrushColorViewController.swift */; };
-		0B3A9764202C692D0019CA92 /* ChangeAppIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */; };
-		0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */; };
-		0B3A9769202C76080019CA92 /* ChangeAppIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */; };
-		140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */; };
-		140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */; };
-		1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BFA21F9B601600FB2768 /* RCTextView.swift */; };
 		14F8A220202E5CBF00175FDC /* Black-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F8A213202E5CBD00175FDC /* Black-29@3x.png */; };
 		14F8A223202E5CBF00175FDC /* Black-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F8A216202E5CBE00175FDC /* Black-76@2x.png */; };
 		14F8A224202E5CBF00175FDC /* Black-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F8A217202E5CBE00175FDC /* Black-60@3x.png */; };
@@ -441,28 +440,25 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewController.swift; sourceTree = "<group>"; };
+		0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewModel.swift; sourceTree = "<group>"; };
+		0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconCell.swift; path = Controllers/Settings/ChangeAppIconCell.swift; sourceTree = "<group>"; };
 		0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorViewModel.swift; sourceTree = "<group>"; };
 		0BC0E8602032DB20004BFAAF /* DrawingBrushColorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorSpec.swift; sourceTree = "<group>"; };
 		0BC0E8622032DD95004BFAAF /* DrawingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModel.swift; sourceTree = "<group>"; };
 		0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModelSpec.swift; sourceTree = "<group>"; };
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconViewModelSpec.swift; path = Settings/ChangeAppIconViewModelSpec.swift; sourceTree = "<group>"; };
 		140A95E0202F526C003FD564 /* Drawing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
 		140A95E3202F536D003FD564 /* DrawingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
 		140A95E5202F7074003FD564 /* DrawingControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrawingControllerDelegate.swift; path = Controllers/Drawing/DrawingControllerDelegate.swift; sourceTree = "<group>"; };
 		140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCellSpec.swift; sourceTree = "<group>"; };
 		1435BFA21F9B601600FB2768 /* RCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTextView.swift; sourceTree = "<group>"; };
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		14A6A83020421DF8008C210D /* ColorPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPickerView.swift; path = Views/ColorPicker/ColorPickerView.swift; sourceTree = "<group>"; };
 		14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrawingBrushWidthViewController.swift; path = Controllers/Drawing/DrawingBrushWidthViewController.swift; sourceTree = "<group>"; };
 		14BAFADF20308EF30054A2E6 /* DrawingBrushOpacityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrawingBrushOpacityViewController.swift; path = Controllers/Drawing/DrawingBrushOpacityViewController.swift; sourceTree = "<group>"; };
 		14BAFAE120308F010054A2E6 /* DrawingBrushColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrawingBrushColorViewController.swift; path = Controllers/Drawing/DrawingBrushColorViewController.swift; sourceTree = "<group>"; };
-		0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewController.swift; sourceTree = "<group>"; };
-		0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewModel.swift; sourceTree = "<group>"; };
-		0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconCell.swift; path = Controllers/Settings/ChangeAppIconCell.swift; sourceTree = "<group>"; };
-		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconViewModelSpec.swift; path = Settings/ChangeAppIconViewModelSpec.swift; sourceTree = "<group>"; };
-		140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCellSpec.swift; sourceTree = "<group>"; };
-		1435BFA21F9B601600FB2768 /* RCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTextView.swift; sourceTree = "<group>"; };
-		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		14F8A213202E5CBD00175FDC /* Black-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-29@3x.png"; sourceTree = "<group>"; };
 		14F8A216202E5CBE00175FDC /* Black-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-76@2x.png"; sourceTree = "<group>"; };
 		14F8A217202E5CBE00175FDC /* Black-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-60@3x.png"; sourceTree = "<group>"; };
@@ -944,9 +940,18 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		140A95DC202F1E4D003FD564 /* AppIcon */ = {
+			isa = PBXGroup;
+			children = (
+				140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */,
+			);
+			name = AppIcon;
+			sourceTree = "<group>";
+		};
 		140A95E2202F5321003FD564 /* Drawing */ = {
 			isa = PBXGroup;
 			children = (
+				14A6A82F20421DED008C210D /* Color Picker */,
 				140A95E3202F536D003FD564 /* DrawingViewController.swift */,
 				140A95E5202F7074003FD564 /* DrawingControllerDelegate.swift */,
 				14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */,
@@ -958,20 +963,20 @@
 			name = Drawing;
 			sourceTree = "<group>";
 		};
-		140A95DC202F1E4D003FD564 /* AppIcon */ = {
-			isa = PBXGroup;
-			children = (
-				140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */,
-			);
-			name = AppIcon;
-			sourceTree = "<group>";
-		};
 		140C84EA1FC9DB9600032A59 /* CreateChannel */ = {
 			isa = PBXGroup;
 			children = (
 				140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */,
 			);
 			name = CreateChannel;
+			sourceTree = "<group>";
+		};
+		14A6A82F20421DED008C210D /* Color Picker */ = {
+			isa = PBXGroup;
+			children = (
+				14A6A83020421DF8008C210D /* ColorPickerView.swift */,
+			);
+			name = "Color Picker";
 			sourceTree = "<group>";
 		};
 		14F8A210202E5B2A00175FDC /* AlternateIcons */ = {
@@ -2910,6 +2915,7 @@
 				41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
+				14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* SubscriptionCreateRequest.swift in Sources */,
 				80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */,

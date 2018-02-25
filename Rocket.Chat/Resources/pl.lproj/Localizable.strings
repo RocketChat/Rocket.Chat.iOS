@@ -164,6 +164,8 @@
 "chat.drawing.settings.brush" = "Pędzel";
 "chat.drawing.settings.opacity" = "Nieprzezroczystość";
 "chat.drawing.settings.width" = "Szerokość";
+"chat.drawing.settings.color.selected" = "Wybrany kolor";
+"chat.drawing.settings.color.others" = "Wybierz kolor poniżej:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";

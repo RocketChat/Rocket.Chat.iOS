@@ -18,5 +18,7 @@ class DrawingBrushColorSpec: XCTestCase {
     func testIfModelHasEnoughData() {
         XCTAssertNotNil(model.cellIdentifier)
         XCTAssertTrue(model.availableColors.count > 0)
+        XCTAssertNotNil(model.selectedColorLabel)
+        XCTAssertNotNil(model.othersLabel)
     }
 }

@@ -164,6 +164,8 @@
 "chat.drawing.settings.brush" = "Brush"; // TODO
 "chat.drawing.settings.opacity" = "Opacity"; // TODO
 "chat.drawing.settings.width" = "Width"; // TODO
+"chat.drawing.settings.color.selected" = "Selected color"; // TODO
+"chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Jméno místnosti bylo změněno: %@ by %@";
