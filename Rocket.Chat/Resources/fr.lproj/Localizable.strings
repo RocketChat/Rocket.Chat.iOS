@@ -44,12 +44,12 @@
 "alert.upload_error.title" = "Erreur de téléchargement";
 "alert.upload_error.message" = "Quelque chose de mal est survenu lors du téléchargement de votre fichier. Veuillez réessayer.";
 
-"alert.upload_dialog.title" = "Upload file"; //TODO
-"alert.upload_dialog.placeholder.title" = "Title"; //TODO
-"alert.upload_dialog.placeholder.description" = "Description"; //TODO
+"alert.upload_dialog.title" = "Envoyer un fichier";
+"alert.upload_dialog.placeholder.title" = "Titre";
+"alert.upload_dialog.placeholder.description" = "Description";
 "alert.upload_dialog.action.upload" = "Upload"; //TODO
 
-"alert.email_verification.title" = "Email verification"; //TODO
+"alert.email_verification.title" = "Email de vérification";
 "alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
 
 // Connection Redirect
@@ -66,8 +66,8 @@
 "auth.connect.ssl_required" = "Votre serveur doit supporter le SSL";
 "auth.connect.connecting" = "Connexion en cours. Tenez bon.";
 
-"auth.forgot_password.title" = "Forgot your password?"; //TODO
-"auth.forgot_password.message" = "Enter your e-mail"; //TODO
+"auth.forgot_password.title" = "Mot de passe oublié ?";
+"auth.forgot_password.message" = "Entrez votre email";
 "auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again."; //TODO
 
 // Subscriptions
@@ -89,7 +89,7 @@
 "user_menu.away" = "Absent";
 "user_menu.busy" = "Occupé";
 "user_menu.invisible" = "Invisible";
-"user_menu.admin" = "Administration"; //TODO
+"user_menu.admin" = "Administration";
 "user_menu.settings" = "Mon compte";
 "user_menu.logout" = "Se déconnecter";
 
@@ -130,11 +130,11 @@
 "chat.message.actions.unpin" = "Désépingler le message";
 "chat.message.actions.quote" = "Citer le message";
 "chat.message.actions.reply" = "Répondre au message";
-"chat.message.actions.delete" = "Delete message"; //TODO
-"chat.message.actions.delete.confirm.title" = "Delete this message?"; // TODO
-"chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone."; //TODO
-"chat.message.actions.delete.confirm.yes" = "Yes, delete"; // TODO
-"Send" = "Dépêcher"; //SLKTextInputbar.m
+"chat.message.actions.delete" = "Supprimer le message";
+"chat.message.actions.delete.confirm.title" = "Supprimer ce message ?";
+"chat.message.actions.delete.confirm.message" = "Êtes-vous sûr de vouloir supprimer ce message ? Ceci est irréversible";
+"chat.message.actions.delete.confirm.yes" = "Oui, supprimer";
+"Send" = "Envoyer"; //SLKTextInputbar.m
 
 // Chat Message Report
 "chat.message.report.success.title" = "Message signalé";
@@ -154,7 +154,7 @@
 
 // Chat Cell Static Messages
 "chat.message.open_file" = "Toucher pour ouvrir le fichier";
-"chat.message.open_browser" = "Open in Browser"; //TODO
+"chat.message.open_browser" = "Ouvrir dans un navigateur";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nom de la salle changée pour : %@ by %@";
@@ -195,11 +195,11 @@
 "myaccount.settings.title" = "Réglages";
 "myaccount.settings.contactus" = "Contactez-nous";
 "myaccount.settings.license" = "Licence";
-"myaccount.settings.appicon" = "Application Icon"; // TODO:
+"myaccount.settings.appicon" = "Icône de l'application";
 "myaccount.settings.version" = "Version : %@ (%@)";
 
 // Change Application Icon
-"myaccount.settings.changeicon.title" = "Choose Icon"; // TODO:
+"myaccount.settings.changeicon.title" = "Choisir une icône";
 "myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of icons below, whichever you like the most."; // TODO:
-"myaccount.settings.changeicon.errortitle" = "Cannot change icon"; // TODO:
+"myaccount.settings.changeicon.errortitle" = "Impossible de changer l'icône";
 "myaccount.settings.changeicon.iosversion" = "Alternate application icons are not supported on iOS version below 10.3"; // TODO:
