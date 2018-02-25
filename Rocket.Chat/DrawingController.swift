@@ -20,7 +20,7 @@ extension DrawingViewController {
     }
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         if !swiped {
-            drawLines(fromPoint: lastPoint , toPoint: lastPoint)
+            drawLines(fromPoint: lastPoint, toPoint: lastPoint)
         }
     }
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
