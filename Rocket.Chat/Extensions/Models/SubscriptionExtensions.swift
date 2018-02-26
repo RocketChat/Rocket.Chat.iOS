@@ -15,7 +15,7 @@ extension LinkingObjects where Element == Subscription {
     }
 
     func filterBy(name: String) -> Results<Subscription> {
-        return self.filter("name CONTAINS[c] %@", name)
+        return self.filter("name CONTAINS[cd] %@", name)
     }
 }
 
@@ -25,6 +25,6 @@ extension Results where Element == Subscription {
     }
 
     func filterBy(name: String) -> Results<Subscription> {
-        return self.filter("name CONTAINS[c] %@", name)
+        return self.filter("name CONTAINS[cd] %@", name)
     }
 }
