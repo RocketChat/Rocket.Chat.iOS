@@ -134,6 +134,11 @@
 "chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
 "chat.message.actions.delete.confirm.message" = "Bist du sicher, dass du diese Nachricht löschen möchtest? Sie kann dann nicht wiederhergestellt werden.";
 "chat.message.actions.delete.confirm.yes" = "Ja, löschen";
+"chat.message.actions.resend" = "Resend"; //TODO
+"chat.message.actions.resend_all" = "Resend all"; //TODO
+"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
+"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
 "Send" = "Senden"; //SLKTextInputbar.m
 
 // Chat Message Report

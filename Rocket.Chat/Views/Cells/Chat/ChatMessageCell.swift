@@ -64,6 +64,8 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelText: RCTextView!
 
+    @IBOutlet weak var statusView: UIImageView!
+
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
@@ -285,6 +287,10 @@ final class ChatMessageCell: UICollectionViewCell {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
             }
 
+            if message.failed {
+                text.setFontColor(MessageTextFontAttributes.failedFontColor)
+            }
+
             labelText.message = text
         }
     }
@@ -326,9 +332,22 @@ final class ChatMessageCell: UICollectionViewCell {
     fileprivate func updateMessage() {
         guard
             delegate != nil,
-            message != nil
+            let message = message
         else {
             return
+        }
+
+        switch (message.failed, message.temporary) {
+        case (true, _):
+            statusView.isHidden = false
+            statusView.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
+            statusView.tintColor = .red
+        case (false, true):
+            statusView.isHidden = false
+            statusView.image = UIImage(named: "Clock")?.withRenderingMode(.alwaysTemplate)
+            statusView.tintColor = .gray
+        case (false, false):
+            statusView.isHidden = true
         }
 
         if !sequential {

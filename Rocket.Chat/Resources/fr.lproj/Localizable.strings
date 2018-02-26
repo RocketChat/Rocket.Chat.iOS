@@ -134,6 +134,11 @@
 "chat.message.actions.delete.confirm.title" = "Supprimer ce message ?";
 "chat.message.actions.delete.confirm.message" = "Êtes-vous sûr de vouloir supprimer ce message ? Ceci est irréversible";
 "chat.message.actions.delete.confirm.yes" = "Oui, supprimer";
+"chat.message.actions.resend" = "Resend"; //TODO
+"chat.message.actions.resend_all" = "Resend all"; //TODO
+"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
+"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
 "Send" = "Envoyer"; //SLKTextInputbar.m
 
 // Chat Message Report
