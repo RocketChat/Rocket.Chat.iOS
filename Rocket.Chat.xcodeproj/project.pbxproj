@@ -234,6 +234,7 @@
 		41E2FA011D414EA100238DFD /* Subscriptions.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41E2FA001D414EA100238DFD /* Subscriptions.storyboard */; };
 		41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */; };
 		41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E2FA061D41513C00238DFD /* ChatViewController.swift */; };
+		41E423002044216000543877 /* UIColorExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E422FF2044216000543877 /* UIColorExtensionSpec.swift */; };
 		41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E53A161E546F5500C3FBB3 /* UINibExtensions.swift */; };
 		41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E991D31D343A9F00BDDCA8 /* DateExtension.swift */; };
 		41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB22321E5E474200AA3AE7 /* UploadVideoCompression.swift */; };
@@ -668,6 +669,7 @@
 		41E2FA001D414EA100238DFD /* Subscriptions.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = Subscriptions.storyboard; path = Storyboards/Subscriptions.storyboard; sourceTree = "<group>"; };
 		41E2FA041D414F0400238DFD /* SubscriptionsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SubscriptionsViewController.swift; path = Controllers/Subscriptions/SubscriptionsViewController.swift; sourceTree = "<group>"; };
 		41E2FA061D41513C00238DFD /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatViewController.swift; path = Controllers/Chat/ChatViewController.swift; sourceTree = "<group>"; };
+		41E422FF2044216000543877 /* UIColorExtensionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionSpec.swift; sourceTree = "<group>"; };
 		41E53A161E546F5500C3FBB3 /* UINibExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINibExtensions.swift; sourceTree = "<group>"; };
 		41E991D31D343A9F00BDDCA8 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
 		41EB22321E5E474200AA3AE7 /* UploadVideoCompression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadVideoCompression.swift; path = Managers/Uploader/Helpers/UploadVideoCompression.swift; sourceTree = "<group>"; };
@@ -1541,6 +1543,7 @@
 				41DC7A211D386B4700896FC0 /* StringExtensionSpec.swift */,
 				41DC7A231D386CA800896FC0 /* DateExtensionsSpec.swift */,
 				41BAE3E81D71C15A00C2445A /* URLExtensionSpec.swift */,
+				41E422FF2044216000543877 /* UIColorExtensionSpec.swift */,
 				D1A403D81F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift */,
 			);
 			path = Extensions;
@@ -2904,6 +2907,7 @@
 				80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */,
 				77C2612C1F97453600724A1F /* CustomFieldsSpec.swift in Sources */,
 				80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */,
+				41E423002044216000543877 /* UIColorExtensionSpec.swift in Sources */,
 				419D78871FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift in Sources */,
 				411498E11FC7A85400D66542 /* ChatTitleViewModelSpec.swift in Sources */,
 				80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */,
