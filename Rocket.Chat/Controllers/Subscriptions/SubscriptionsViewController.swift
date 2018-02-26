@@ -29,8 +29,6 @@ final class SubscriptionsViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        SocketManager.reconnect()
-
         setupSearchBar()
         setupServerButton()
         setupTitleView()
