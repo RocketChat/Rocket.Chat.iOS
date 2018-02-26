@@ -14,6 +14,7 @@ import SimpleImageViewer
 final class ChatViewController: SLKTextViewController {
 
     var activityIndicator: LoaderView!
+    static var toUploadPic: UIImage!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
         didSet {
             let width = activityIndicatorContainer.bounds.width
