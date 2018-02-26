@@ -134,6 +134,7 @@
                 <outlet property="activityIndicator" destination="Zfk-42-wzd" id="i5o-bH-OZH"/>
                 <outlet property="detailText" destination="IyF-zS-EUS" id="Dyg-3O-O8b"/>
                 <outlet property="detailTextHeightConstraint" destination="LKm-f2-0Gb" id="vTM-RG-rzw"/>
+                <outlet property="detailTextIndicator" destination="Rsy-I8-4XA" id="KhS-mU-te9"/>
                 <outlet property="fullHeightConstraint" destination="Kaf-6a-MaT" id="Ag4-ah-TaR"/>
                 <outlet property="playButton" destination="xU6-9R-Yqd" id="GKv-Fd-yRN"/>
                 <outlet property="timeLabel" destination="OMe-up-GvD" id="ROA-oh-fEI"/>
