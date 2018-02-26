@@ -90,7 +90,7 @@
 "user_menu.busy" = "Occupé";
 "user_menu.invisible" = "Invisible";
 "user_menu.admin" = "Administration";
-"user_menu.settings" = "Mon compte";
+"user_menu.preferences" = "Mon compte";
 "user_menu.logout" = "Se déconnecter";
 
 // New Room View
@@ -192,7 +192,7 @@
 "chat.messages.starred.list.title" = "Messages favoris";
 
 // Settings
-"myaccount.settings.title" = "Réglages";
+"myaccount.settings.title" = "Réglages"; // TODO: new text: Preferences
 "myaccount.settings.contactus" = "Contactez-nous";
 "myaccount.settings.license" = "Licence";
 "myaccount.settings.appicon" = "Icône de l'application";

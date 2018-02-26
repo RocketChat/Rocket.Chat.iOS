@@ -1,5 +1,5 @@
 //
-//  SettingsNavigationController.swift
+//  PreferencesNavigationController.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 1/11/18.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsNavigationController: BaseNavigationController {
+class PreferencesNavigationController: BaseNavigationController {
 
     private var mediumScreenFrame: CGRect = .zero
     private var fullScreenFrame: CGRect = .zero

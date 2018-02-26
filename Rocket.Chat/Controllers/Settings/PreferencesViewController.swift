@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  PreferencesViewController.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Kellermann Streit on 14/02/17.
@@ -14,9 +14,9 @@ import SafariServices
 import FLEX
 #endif
 
-final class SettingsViewController: UITableViewController {
+final class PreferencesViewController: UITableViewController {
 
-    private let viewModel = SettingsViewModel()
+    private let viewModel = PreferencesViewModel()
 
     @IBOutlet weak var labelContactUs: UILabel! {
         didSet {
@@ -42,8 +42,8 @@ final class SettingsViewController: UITableViewController {
         }
     }
 
-    override var navigationController: SettingsNavigationController? {
-        return super.navigationController as? SettingsNavigationController
+    override var navigationController: PreferencesNavigationController? {
+        return super.navigationController as? PreferencesNavigationController
     }
 
     override func viewDidLoad() {
@@ -90,13 +90,13 @@ final class SettingsViewController: UITableViewController {
             if indexPath.row == 0 {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
-                cellTermsOfServiceDidPressed()
-            } else if indexPath.row == 3 {
                 cellAppIconDidPressed()
             }
-        }
-
-        if indexPath.section == 1, indexPath.row == 0 {
+        } else if indexPath.section == 1 {
+            if indexPath.row == 0 {
+                cellTermsOfServiceDidPressed()
+            }
+        } else if indexPath.section == 2, indexPath.row == 0 {
             #if BETA || DEBUG
             FLEXManager.shared().showExplorer()
             #endif
@@ -114,7 +114,7 @@ final class SettingsViewController: UITableViewController {
     }
 }
 
-extension SettingsViewController: MFMailComposeViewControllerDelegate {
+extension PreferencesViewController: MFMailComposeViewControllerDelegate {
 
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         dismiss(animated: true, completion: nil)

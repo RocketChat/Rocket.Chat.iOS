@@ -90,7 +90,7 @@
 "user_menu.busy" = "Busy";
 "user_menu.invisible" = "Invisible";
 "user_menu.admin" = "Administration";
-"user_menu.settings" = "My Account";
+"user_menu.preferences" = "Preferences";
 "user_menu.logout" = "Logout";
 
 // New Room View
@@ -192,14 +192,14 @@
 "chat.messages.starred.list.title" = "Starred Messages";
 
 // Settings
-"myaccount.settings.title" = "Settings";
+"myaccount.settings.title" = "Preferences";
 "myaccount.settings.contactus" = "Contact us";
 "myaccount.settings.license" = "License";
 "myaccount.settings.appicon" = "Application Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
 
 // Change Application Icon
-"myaccount.settings.changeicon.title" = "Choose Icon";
-"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of icons below, whichever you like the most.";
+"myaccount.settings.changeicon.title" = "Choose an icon";
+"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of the icons below, whichever you like the most.";
 "myaccount.settings.changeicon.errortitle" = "Cannot change icon";
 "myaccount.settings.changeicon.iosversion" = "Alternate application icons are not supported on iOS version below 10.3";
