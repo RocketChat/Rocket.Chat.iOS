@@ -157,49 +157,49 @@
 "chat.message.open_browser" = "Ανοίξτε στο πρόγραμμα Περιήγησης";
 
 // Message Types
-"chat.message.type.room_name_changed" = "Room name changed to: %@ by %@";
-"chat.message.type.user_added_by" = "User %@ added by %@";
-"chat.message.type.user_removed_by" = "User %@ removed by %@";
-"chat.message.type.user_left" = "Has left the channel";
-"chat.message.type.user_joined" = "Has joined the channel";
-"chat.message.type.user_muted" = "User %@ muted by %@";
-"chat.message.type.user_unmuted" = "User %@ unmuted by %@";
-"chat.message.type.welcome" = "Welcome %@";
-"chat.message.type.message_removed" = "Message removed";
-"chat.message.type.subscription_role_added" = "%@ was set %@ by %@";
-"chat.message.type.subscription_role_removed" = "%@ is no longer %@ by %@";
-"chat.message.type.room_archived" = "This room has been archived by %@";
-"chat.message.type.room_unarchived" = "This room has been unarchived by %@";
+"chat.message.type.room_name_changed" = "Το όνομα του δωματίου άλλαξε σε: %@ by %@";
+"chat.message.type.user_added_by" = "Ο χρήστης %@ προστέθηκε από %@";
+"chat.message.type.user_removed_by" = "Ο χρήστης %@ αφαιρέθηκε από %@";
+"chat.message.type.user_left" = "Έφυγε από το κανάλι";
+"chat.message.type.user_joined" = "Συνδέθηκε με το κανάλι";
+"chat.message.type.user_muted" = "Ο χρήστης %@ τέθηκε σε σίγαση από %@";
+"chat.message.type.user_unmuted" = "Για το χρήστη %@ ματαιώθηκε η σίγαση από %@";
+"chat.message.type.welcome" = "Καλως ήρθατε %@";
+"chat.message.type.message_removed" = "Το μήνυμα αφαιρέθηκε";
+"chat.message.type.subscription_role_added" = "%@ τέθηκε σε %@ από %@";
+"chat.message.type.subscription_role_removed" = "%@ δεν ισχύει πλέον %@ για %@";
+"chat.message.type.room_archived" = "Αυτό το δωμάτιο αρχειοθετήθηκε από %@";
+"chat.message.type.room_unarchived" = "Αυτό το δωμάτιο απο-αρχειοποιήθηκε από %@";
 
 // Chat Information
-"chat.info.title" = "Info";
-"chat.info.item.topic" = "Topic";
-"chat.info.item.no_topic" = "No topic";
-"chat.info.item.description" = "Description";
-"chat.info.item.no_description" = "No description";
-"chat.info.item.notifications" = "Notifications";
-"chat.info.item.members" = "Members";
-"chat.info.item.pinned" = "Pinned";
-"chat.info.item.starred" = "Starred";
+"chat.info.title" = "Πληροφορία";
+"chat.info.item.topic" = "Θέμα";
+"chat.info.item.no_topic" = "Όχι θέμα";
+"chat.info.item.description" = "Περιγραφή";
+"chat.info.item.no_description" = "Έλλειψη περιγραφής";
+"chat.info.item.notifications" = "Ειδοποιήσεις";
+"chat.info.item.members" = "Μέλη";
+"chat.info.item.pinned" = "Καρφιτσωμένα";
+"chat.info.item.starred" = "Αστερωμένα";
 
 // Members List
-"chat.members.list.title" = "Members";
+"chat.members.list.title" = "Μέλη";
 
 // Messages List
-"chat.messages.list.title" = "Messages";
-"chat.messages.list.empty" = "No messages found";
-"chat.messages.pinned.list.title" = "Pinned Messages";
-"chat.messages.starred.list.title" = "Starred Messages";
+"chat.messages.list.title" = "Μηνύματα";
+"chat.messages.list.empty" = "Δεν βρέθηκαν μηνύματα";
+"chat.messages.pinned.list.title" = "Καρφιτσωμένα Μηνύματα";
+"chat.messages.starred.list.title" = "Αστερωμένα Μηνύματα";
 
 // Settings
-"myaccount.settings.title" = "Settings";
-"myaccount.settings.contactus" = "Contact us";
-"myaccount.settings.license" = "License";
-"myaccount.settings.appicon" = "Application Icon";
-"myaccount.settings.version" = "Version: %@ (%@)";
+"myaccount.settings.title" = "Ρυθμίσεις";
+"myaccount.settings.contactus" = "Επικοινωνήστε μαζί μας";
+"myaccount.settings.license" = "Άδεια";
+"myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
+"myaccount.settings.version" = "Έκδοση: %@ (%@)";
 
 // Change Application Icon
-"myaccount.settings.changeicon.title" = "Choose Icon";
-"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of icons below, whichever you like the most.";
-"myaccount.settings.changeicon.errortitle" = "Cannot change icon";
-"myaccount.settings.changeicon.iosversion" = "Alternate application icons are not supported on iOS version below 10.3";
+"myaccount.settings.changeicon.title" = "Επιλέξτε Εικονίδιο";
+"myaccount.settings.changeicon.header" = "Μπορείτε να αλλάξετε πώς το δικό σας Rocket.Chat+ εικονίδιο θα φαίνεται στην συσκευή σας. Παρακαλούμε επιλέξτε ένα από τα παρακάτω εικονίδια, όποιο σας αρέσει πιο πολύ.";
+"myaccount.settings.changeicon.errortitle" = "Δεν μπορούμε να αλλάξουμε εικονίδιο";
+"myaccount.settings.changeicon.iosversion" = "Εναλλακτικά εικονίδια εφαρμογής δεν υποστηρίζονται σε iOS εκδόσεις μικρότερες από 10.3";
