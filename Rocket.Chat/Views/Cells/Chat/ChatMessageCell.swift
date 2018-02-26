@@ -131,8 +131,8 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             if !attachment.collapsed {
-                for field in attachment.fields {
-                    total += ChatMessageTextView.heightFor(collapsed: false, withText: field.value)
+                attachment.fields.forEach {
+                    total += ChatMessageTextView.heightFor(collapsed: false, withText: $0.value)
                 }
             }
         }
