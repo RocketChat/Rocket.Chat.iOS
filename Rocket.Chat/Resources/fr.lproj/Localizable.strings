@@ -119,6 +119,7 @@
 "chat.read_only" = "Cette pièce est en lecture seule";
 "chat.muted" = "Vous avez été mis en sourdine";
 "chat.loading_messages" = "Chargement des messages...";
+"chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
 "chat.message.actions.react" = "Ajouter une réaction";
