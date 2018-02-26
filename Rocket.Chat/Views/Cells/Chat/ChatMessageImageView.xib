@@ -110,6 +110,7 @@
                 <outlet property="activityIndicatorImageView" destination="yoy-xe-Xj2" id="nC9-gt-ZSs"/>
                 <outlet property="detailText" destination="qUL-A6-lfN" id="C9S-z6-0Ba"/>
                 <outlet property="detailTextHeightConstraint" destination="jux-Dv-ZtT" id="fi6-Me-OxS"/>
+                <outlet property="detailTextIndicator" destination="Cd8-E0-gTo" id="png-2c-Ysm"/>
                 <outlet property="fullHeightConstraint" destination="qUL-A6-lom" id="GZy-2w-aqI"/>
                 <outlet property="imageView" destination="wQ2-4D-y5T" id="3w3-O4-0xj"/>
                 <outlet property="labelTitle" destination="q2f-Tt-feU" id="B5R-a0-mNO"/>

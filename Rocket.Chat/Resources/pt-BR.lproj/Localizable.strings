@@ -90,7 +90,7 @@
 "user_menu.busy" = "Ocupado";
 "user_menu.invisible" = "Invisível";
 "user_menu.admin" = "Administração";
-"user_menu.settings" = "Minha conta";
+"user_menu.preferences" = "Minha conta"; // TODO: new text: Preferences
 "user_menu.logout" = "Sair";
 
 // New Room View
@@ -134,6 +134,11 @@
 "chat.message.actions.delete.confirm.title" = "Deletar esta mensagem?";
 "chat.message.actions.delete.confirm.message" = "Tem certeza que deseja deletar esta mensagem? A mensagem não poderá ser recuperada.";
 "chat.message.actions.delete.confirm.yes" = "Sim, deletar";
+"chat.message.actions.delete.discard.title" = "Descartar esta mensagem?";
+"chat.message.actions.delete.discard.message" = "Esta mensagem não foi enviada. Você deseja descartá-la? A mensagem não poderá ser recuperada.";
+"chat.message.actions.delete.discard.yes" = "Sim, descartar";
+"chat.message.actions.resend" = "Reenviar";
+"chat.message.actions.resend_all" = "Reenviar todas";
 "Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -192,7 +197,7 @@
 "chat.messages.starred.list.title" = "Mensagens Favoritas";
 
 // Settings
-"myaccount.settings.title" = "Configurações";
+"myaccount.settings.title" = "Configurações"; // TODO: new text: Preferences
 "myaccount.settings.contactus" = "Entre em contato";
 "myaccount.settings.license" = "Licença";
 "myaccount.settings.appicon" = "Ícone do App";

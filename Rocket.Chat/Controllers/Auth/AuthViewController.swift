@@ -156,6 +156,10 @@ final class AuthViewController: BaseViewController {
             addOAuthButton(for: .github)
         }
 
+        if settings.isGitLabAuthenticationEnabled {
+            addOAuthButton(for: .gitlab)
+        }
+
         if settings.isLinkedInAuthenticationEnabled {
             addOAuthButton(for: .linkedin)
         }
@@ -473,8 +477,9 @@ extension AuthViewController {
         let button = customAuthButtons[service] ?? UIButton()
 
         switch loginService.type {
-        case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
         case .facebook: button.setImage(#imageLiteral(resourceName: "facebook"), for: .normal)
+        case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
+        case .gitlab: button.setImage(#imageLiteral(resourceName: "gitlab"), for: .normal)
         case .linkedin: button.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
         default: button.setTitle(loginService.buttonLabelText ?? "", for: .normal)
         }
