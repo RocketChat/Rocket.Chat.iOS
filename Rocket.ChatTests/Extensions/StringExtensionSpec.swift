@@ -79,6 +79,34 @@ class StringExtensionSpec: XCTestCase {
         XCTAssertEqual(result5, expected5, "string has no whitespaces")
     }
 
+    func testRemovingWhitespacesAndNewlines() {
+        let withWhitespaces1 = "a b\n\n c\n d \n"
+        let expected1 = "abcd"
+
+        let withWhitespaces2 = "\n\n\n\n\n\nabcd"
+        let expected2 = "abcd"
+
+        let result1 = withWhitespaces1.removingWhitespaces()
+        let result2 = withWhitespaces2.removingWhitespaces()
+
+        XCTAssertEqual(result1, expected1, "string has no whitespaces and no new lines")
+        XCTAssertEqual(result2, expected2, "string has no whitespaces and no new lines")
+    }
+
+    func testNewlines() {
+        let withWhitespaces1 = "a b\n\n c\n d \n"
+        let expected1 = "a b c d "
+
+        let withWhitespaces2 = "\n\n\n\n\n\nabcd"
+        let expected2 = "abcd"
+
+        let result1 = withWhitespaces1.removingNewLines()
+        let result2 = withWhitespaces2.removingNewLines()
+
+        XCTAssertEqual(result1, expected1, "string has no new lines")
+        XCTAssertEqual(result2, expected2, "string has no new lines")
+    }
+
     // MARK: Base64
 
     func testBase64() {

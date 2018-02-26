@@ -8,6 +8,13 @@
 
 import UIKit
 
+enum SystemMessageColor: String {
+    case warning
+    case danger
+    case good
+    case unknown
+}
+
 extension UIColor {
 
     convenience init(rgb: UInt, alphaVal: CGFloat) {
@@ -22,19 +29,14 @@ extension UIColor {
     // MARK: Color from strings (good|warning|danger)
 
     static func normalizeColorFromString(string: String) -> UIColor {
-        if string == "warning" {
-            return UIColor(rgb: 0xFCB316, alphaVal: 1)
-        }
+        let color = SystemMessageColor(rawValue: string) ?? .unknown
 
-        if string == "danger" {
-            return UIColor(rgb: 0xD30230, alphaVal: 1)
+        switch color {
+        case .warning: return UIColor(rgb: 0xFCB316, alphaVal: 1)
+        case .danger: return UIColor(rgb: 0xD30230, alphaVal: 1)
+        case .good: return UIColor(rgb: 0x35AC19, alphaVal: 1)
+        default: return UIColor(hex: string)
         }
-
-        if string == "good" {
-            return UIColor(rgb: 0x35AC19, alphaVal: 1)
-        }
-
-        return UIColor(hex: string)
     }
 
     // MARK: Status

@@ -13,17 +13,17 @@ import XCTest
 class UIColorExtensionSpec: XCTestCase {
 
     func testNormalizedColorFromStringWarning() {
-        let warningColor = UIColor.normalizeColorFromString(string: "warning")
+        let warningColor = UIColor.normalizeColorFromString(string: SystemMessageColor.warning.rawValue)
         XCTAssertEqual(warningColor.hexDescription(), "fcb316")
     }
 
     func testNormalizedColorFromStringDanger() {
-        let warningColor = UIColor.normalizeColorFromString(string: "danger")
+        let warningColor = UIColor.normalizeColorFromString(string: SystemMessageColor.danger.rawValue)
         XCTAssertEqual(warningColor.hexDescription(), "d30230")
     }
 
     func testNormalizedColorFromStringGood() {
-        let warningColor = UIColor.normalizeColorFromString(string: "good")
+        let warningColor = UIColor.normalizeColorFromString(string: SystemMessageColor.good.rawValue)
         XCTAssertEqual(warningColor.hexDescription(), "35ac19")
     }
 
