@@ -49,7 +49,7 @@ extension UIColor {
         )
     }
 
-    // MARK: Color from strings (good|warning|danger)
+    // MARK: Color from strings
 
     static func normalizeColorFromString(string: String) -> UIColor {
         return SystemMessageColor(rawValue: string).color
