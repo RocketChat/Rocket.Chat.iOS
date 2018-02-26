@@ -1,0 +1,24 @@
+/* 
+  RCEmojiKit.strings
+  Rocket.Chat
+
+  Created by Matheus Cardoso on 12/27/17.
+  Copyright © 2017 Rocket.Chat. All rights reserved.
+*/
+
+"emojipicker.title" = "Επιλέξτε μια αντίδραση";
+"searchbar.placeholder" = "Αναζητήστε ένα emoji";
+
+"categories.recent" = "ΣΥΧΝΑ ΧΡΗΣΙΜΟΠΟΙΟΥΜΕΝΑ";
+"categories.custom" = "ΠΡΟΣΑΡΜΟΓΗ";
+"categories.people" = "ΧΑΜΟΓΕΛΑ & ΑΝΘΡΩΠΟΙ";
+"categories.nature" = "ΖΩΑ & ΦΥΣΗ";
+"categories.food" = "ΦΑΓΗΤΟ & ΠΟΤΟ";
+"categories.activity" = "ΔΡΑΣΤΗΡΙΟΤΗΤΑ";
+"categories.travel" = "ΤΑΞΙΔΙ & ΜΕΡΗ";
+"categories.objects" = "ΑΝΤΙΚΕΙΜΕΝΑ";
+"categories.symbols" = "ΣΥΜΒΟΛΑ";
+"categories.flags" = "ΣΗΜΑΙΕΣ";
+
+"reactorlist.title" = "Αντιδράσεις";
+

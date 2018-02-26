@@ -1,0 +1,205 @@
+// Global
+"global.ok" = "OK";
+"global.no" = "Όχι";
+"global.cancel" = "Ακύρωση";
+
+// Errors
+"error.socket.default_error.title" = "Ωχ!";
+"error.socket.default_error.message" = "Συνέβη κάποιο σφάλμα, παρακαλούμε ξαναπροσπαθήστε.";
+
+// Alerts
+"alert.connection.invalid_url.title" = "Ωχ!";
+"alert.connection.invalid_url.message" = "Το URL που εισάγατε είναι άκυρο. Παρακαλούμε ελέγξτε το και ξαναπροσπαθήστε!";
+
+"alert.connection.socket_error.title" = "Ωχ!";
+"alert.connection.socket_error.message" = "Δεν είναι δυνατή η σύνδεση σε αυτόν τον εξυπηρετητή!";
+
+"alert.connection.invalid_version.title" = "Ωχ!";
+"alert.connection.invalid_version.message" = "Ο εξυπηρετητής που προσπαθείτε να συνδεθείτεχρησιμοποιεί μια έκδοση που δεν υποστηρίζεται πλέον από την εφαρμογή: %@.\n\nΧρειαζόμαστε έκδοση %@.";
+
+"alert.settings.set_mail_app.title" = "Ωχ!";
+"alert.settings.set_mail_app.message" = "Δεν βρέθηκαν Λογαριασμοί Mail. Παρακαλούμε εγκαταστήστε ένα λογαριασμό Mail ώστε να στέλνετε email.";
+
+"alert.feature.wip.title" = "Ωχ!";
+"alert.feature.wip.message" = "Ακόμη εργαζόμαστε για αυτή τη λειτουργικότητα, μείνετε συντονισμένοι!";
+
+"alert.insecure_image.title" = "Μη ασφαλής πόρος";
+"alert.insecure_image.message" = "Ο πόρος της εικόνας είναι μή ασφαλής και κατά συνέπεια δεν φορτώνεται. Επιτρέπονται μόνο πόροι SSL.";
+
+"alert.socket_error.invalid_user.title" = "Η σύνοδος έληξε";
+"alert.socket_error.invalid_user.message" = "Η σύνοδός σας έχει λήξει. Παρακαλούμε ξανασυνδεθείτε.";
+
+"alert.login_service_error.title" = "Λάθος Επαλήθευσης ταυτότητας";
+"alert.login_service_error.message" = "Δεν είναι δυνατό να επαληθεύσουμε την ταυτότητα με αυτή την υπηρεσία. Παρακαλούμε, ξαναπροσπαθήστε.";
+
+"alert.authorization_error.title" = "Λάθος Επαλήθευσης ταυτότητας";
+"alert.authorization_error.create_channel.description" = "Δεν μπορείτε να δημιουργήστετε κανάλια";
+
+"alert.unsupported_feature.title" = "Η λειτουργικότητα δεν υποστηρίζεται";
+"alert.unsupported_feature.message" = "Η έκδοση του εξυπηρετητή είναι: %@. Αητή η λειτουργικότητα υποστηρίζεται μονο σε εκδόσεις %@ και άνω.";
+
+"alert.push_token_error.title" = "Προειδοποίηση";
+"alert.push_token_error.message" = "Μπορεί ακόμη να λαμβάνετε ειδοποιήσεις ώθησης από αυτό τον εξυπηρετητή εξαιτίας ενός προβλήματος σε εξυπηρετητές έκδοσης κάτω από 0.60.0.";
+
+"alert.upload_error.title" = "Σφάλμα στο ανέβασμα";
+"alert.upload_error.message" = "Συνέβη κάποιο σφάλμα ενώ ανεβάζατε το αρχείο σας. Παρακαλούμε ξαναπροσπαθείστε.";
+
+"alert.upload_dialog.title" = "Ανένβασμα αρχείου";
+"alert.upload_dialog.placeholder.title" = "Τίτλος";
+"alert.upload_dialog.placeholder.description" = "Περιγραφή";
+"alert.upload_dialog.action.upload" = "Ανεβάστε";
+
+"alert.email_verification.title" = "Επαλήθευση Email";
+"alert.email_verification.message" = "Σας στείλαμε ένα email για να επιβεβαιώσουμε την εγγραφή σας. Αν δεν το λάβετε σύντομα, παρακαλούμε επιστρέψτε και ξαναπροσπαθήστε.";
+
+// Connection Redirect
+"connection.server.redirect.alert.title" = "Έχει αλλάξει το URL του Εξυπηρετητή";
+"connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
+"connection.server.redirect.alert.confirm" = "Ναι, αλλάξτε το URL";
+
+// Socket Connection
+"connection.offline.banner.message" = "Βρίσκεστε εκτός σύνδεσης, προσπαθήστε να συνδεθείτε ξανά";
+"connection.connecting.banner.message" = "Συνδεόμαστε...";
+
+// Auth
+"auth.connect.button_connect" = "Σύνδεση";
+"auth.connect.ssl_required" = "Απαιτείται ο εξυπηρετητής σας να υποστηρίζει SSL";
+"auth.connect.connecting" = "Σύνδεση σε εξέλλιξη. Περιμένετε παρακαλώ";
+
+"auth.forgot_password.title" = "Ξεχάσατε το συνθηματικό σας;";
+"auth.forgot_password.message" = "Εισάγετε το e-mail σας";
+"auth.forgot_password.success" = "Αν αυτό το email είναι ήδη εγγεγραμμένο, θα σας στείλουμε οδηγίες για να αλλάξετε το συνθηματικό σας. Αν δεν λάβετε σύντομα ένα email, παρακαλούμε να επανέλθετε και να ξαναπροσπαθήσετε.";
+
+// Subscriptions
+"subscriptions.search" = "Αναζήτηση";
+"subscriptions.search_results" = "Αποτελέσματα";
+"subscriptions.search.load_more_results" = "Φορτώστε περισσότερα αποτελέσματα";
+"subscriptions.unreads" = "Αδιάβαστα";
+"subscriptions.favorites" = "Αγαπημένα";
+"subscriptions.channels" = "Κανάλια";
+"subscriptions.direct_messages" = "Άμεσα Μηνύματα";
+
+// Servers
+"servers.add_new_team" = "Προσθέστε νέα ομάδας";
+"servers.action.connect" = "Σύνδεση";
+"servers.action.remove" = "Αφαιρέστε ομάδα";
+
+// User Menu
+"user_menu.online" = "Σε σύνδεση";
+"user_menu.away" = "Λείπω";
+"user_menu.busy" = "Απασχολημένος";
+"user_menu.invisible" = "Αόρατος";
+"user_menu.admin" = "Διαχείριση";
+"user_menu.settings" = "Ο Λογαριασμός μου";
+"user_menu.logout" = "Αποσύνδεση";
+
+// New Room View
+"new_room.title" = "Νέο Κανάλι";
+"new_room.buttons.create" = "Δημιουργία";
+"new_room.cell.public_channel.title" = "Δημόσιο Κανάλι";
+"new_room.cell.public_channel.description" = "Ο καθένας μπορεί να έχει πρόσβαση σε αυτό το κανάλι";
+"new_room.cell.public_channel.description.public_only" = "Μπορείτε να δημιουργείτε μόνο δημόσια κανάλια";
+"new_room.cell.public_channel.description.private_only" = "Μπορείτε να δημιουργείτε μόνο ιδιωτικά κανάλια";
+"new_room.cell.read_only.title" = "Κανάλι μόνο ανάγνωσης";
+"new_room.cell.read_only.description" = "Μόνο ο διαχειριστής μπορεί να γράψει νέα μηνύματα";
+"new_room.group.channel.name" = "Όνομα Καναλιού";
+"new_room.group.channel.footer" = "Τα ονόματα πρέπει να χρησιμοποιούν πεζά γράμματα και να είναι μικρότερα από 22 χαρακτήρες";
+"new_room.cell.channel_name.title" = "Όνομα Καναλιού";
+"new_room.group.invite_users" = "Προσκαλέστε χρήστες";
+"new_room.cell.invite_users.placeholder" = "Ονόματα χρηστών";
+
+// Notifications
+"notifications.action.reply" = "Απάντηση";
+
+// Chat
+"chat.channel_preview_view.title" = "Αυτό είναι προεπισκόπιση του #%@";
+"chat.channel_preview_view.join" = "Συνδεθείτε στο Κανάλι";
+"chat.dm.start_conversation" = "Αυτή είναι η αρχή της συνομιλίας σας με %@";
+"chat.channel.start_conversation" = "Αυτή είναι η αρχή της συνομιλίας σας για %@";
+"chat.read_only" = "Αυτό το δωμάτιο είναι μόνο για ανάγνωση";
+"chat.muted" = "Έχετε τεθεί σε σίγαση";
+"chat.loading_messages" = "Φόρτωση μηνυμάτων...";
+
+// Chat Message Actions
+"chat.message.actions.react" = "Προσθέστε Αντίδραση";
+"chat.message.actions.block" = "Φράξτε μηνύματα από χρήστη";
+"chat.message.actions.report" = "Αναφέρατε μήνυμα";
+"chat.message.actions.edit" = "Επεξεργαστείτε μήνυμα";
+"chat.message.actions.copy" = "Αντιγράψτε";
+"chat.message.actions.pin" = "Καρφιτσώστε μήνυμα";
+"chat.message.actions.unpin" = "Ξεκαρφιτσώστε μήνυμα";
+"chat.message.actions.quote" = "Επιδείξτε μήνυμα";
+"chat.message.actions.reply" = "Απαντήστε σε μήνυμα";
+"chat.message.actions.delete" = "Διαγράψτε μήνυμα";
+"chat.message.actions.delete.confirm.title" = "Να διαγράψουμε αυτό το μήνυμα?";
+"chat.message.actions.delete.confirm.message" = "Σίγουρα θέλετε να διαγράψετε αυτό το μήνυμα? Αυτή η διαδικασία δεν μπορεί να ακυρωθεί.";
+"chat.message.actions.delete.confirm.yes" = "Ναι, διαγράψτε";
+"Send" = "Αποστολή"; //SLKTextInputbar.m
+
+// Chat Message Report
+"chat.message.report.success.title" = "Το Μήνυμα Αναφέρθηκε";
+"chat.message.report.success.message" = "Το Μήνυμα αναφέρθηκε επιτυχώς, ευχαριστώ!";
+
+// Chat Upload
+"chat.upload.uploading_image" = "Ανεβάζουμε εικόνα";
+"chat.upload.uploading_video" = "Ανεβάζουμε video";
+"chat.upload.uploading_file" = "Ανεβάζουμε \"%@\"";
+"chat.upload.take_photo" = "Τραβήξτε Φωτογραφία";
+"chat.upload.shoot_video" = "Τραβήξτε Video";
+"chat.upload.choose_from_library" = "Επιλέξτε από τη Βιβλιοθήκη";
+"chat.upload.import_file" = "Εισαγωγή Αρχείου Από...";
+
+// Chat Download
+"chat.download.downloading_file" = "Κατεβάζουμε \"%@\"";
+
+// Chat Cell Static Messages
+"chat.message.open_file" = "Πατήστε για να ανοίξετε το αρχείο";
+"chat.message.open_browser" = "Ανοίξτε στο πρόγραμμα Περιήγησης";
+
+// Message Types
+"chat.message.type.room_name_changed" = "Room name changed to: %@ by %@";
+"chat.message.type.user_added_by" = "User %@ added by %@";
+"chat.message.type.user_removed_by" = "User %@ removed by %@";
+"chat.message.type.user_left" = "Has left the channel";
+"chat.message.type.user_joined" = "Has joined the channel";
+"chat.message.type.user_muted" = "User %@ muted by %@";
+"chat.message.type.user_unmuted" = "User %@ unmuted by %@";
+"chat.message.type.welcome" = "Welcome %@";
+"chat.message.type.message_removed" = "Message removed";
+"chat.message.type.subscription_role_added" = "%@ was set %@ by %@";
+"chat.message.type.subscription_role_removed" = "%@ is no longer %@ by %@";
+"chat.message.type.room_archived" = "This room has been archived by %@";
+"chat.message.type.room_unarchived" = "This room has been unarchived by %@";
+
+// Chat Information
+"chat.info.title" = "Info";
+"chat.info.item.topic" = "Topic";
+"chat.info.item.no_topic" = "No topic";
+"chat.info.item.description" = "Description";
+"chat.info.item.no_description" = "No description";
+"chat.info.item.notifications" = "Notifications";
+"chat.info.item.members" = "Members";
+"chat.info.item.pinned" = "Pinned";
+"chat.info.item.starred" = "Starred";
+
+// Members List
+"chat.members.list.title" = "Members";
+
+// Messages List
+"chat.messages.list.title" = "Messages";
+"chat.messages.list.empty" = "No messages found";
+"chat.messages.pinned.list.title" = "Pinned Messages";
+"chat.messages.starred.list.title" = "Starred Messages";
+
+// Settings
+"myaccount.settings.title" = "Settings";
+"myaccount.settings.contactus" = "Contact us";
+"myaccount.settings.license" = "License";
+"myaccount.settings.appicon" = "Application Icon";
+"myaccount.settings.version" = "Version: %@ (%@)";
+
+// Change Application Icon
+"myaccount.settings.changeicon.title" = "Choose Icon";
+"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of icons below, whichever you like the most.";
+"myaccount.settings.changeicon.errortitle" = "Cannot change icon";
+"myaccount.settings.changeicon.iosversion" = "Alternate application icons are not supported on iOS version below 10.3";

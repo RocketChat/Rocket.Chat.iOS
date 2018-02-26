@@ -821,6 +821,9 @@
 		80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
 		80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensionsSpec.swift; sourceTree = "<group>"; };
 		80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+CustomEmojis.swift"; sourceTree = "<group>"; };
+		848088BA204370E8005022E8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
+		848088BB204370E8005022E8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
+		848088BC204370E9005022E8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		890DA8AD1F942A35007C022B /* SubscriptionCreateRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCreateRequestSpec.swift; sourceTree = "<group>"; };
 		897083CE1F8CF08100233561 /* CheckTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckTableViewCell.swift; sourceTree = "<group>"; };
 		897083CF1F8CF08100233561 /* CheckTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CheckTableViewCell.xib; sourceTree = "<group>"; };
@@ -2186,6 +2189,7 @@
 				pl,
 				cs,
 				fr,
+				el,
 			);
 			mainGroup = 41DF76D61D2C50710028DBF8;
 			productRefGroup = 41DF76E01D2C50710028DBF8 /* Products */;
@@ -2990,6 +2994,7 @@
 				35D2F140200A45E800B4BE5A /* fr */,
 				1499781C1FA605CE007E013D /* pl */,
 				41A6191A1FA7065400CFFA69 /* cs */,
+				848088BB204370E8005022E8 /* el */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3003,6 +3008,7 @@
 				80307E461FD75DD1006AD9EF /* fr */,
 				80307E471FD75DD2006AD9EF /* pl */,
 				80307E481FD75DD5006AD9EF /* cs */,
+				848088BC204370E9005022E8 /* el */,
 			);
 			name = VoiceOver.strings;
 			sourceTree = "<group>";
@@ -3016,6 +3022,7 @@
 				80C7DD631FF46B8700E6647C /* cs */,
 				80C7DD641FF46B8800E6647C /* pl */,
 				80C7DD651FF46B8C00E6647C /* fr */,
+				848088BA204370E8005022E8 /* el */,
 			);
 			name = RCEmojiKit.strings;
 			sourceTree = "<group>";
