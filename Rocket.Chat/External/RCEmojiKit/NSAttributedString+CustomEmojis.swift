@@ -28,16 +28,17 @@ extension NSAttributedString {
                 range: NSRange(location: 0, length: attributedString.length)
             ).map {
                 $0.range(at: 0)
-            }.reduce([NSRange](), { total, current in // subtract previous ranges lengths from each range location
+            }
+
+            // exclude matches inside code tags
+            let filteredRanges = attributedString.string.filterOutRangesInsideCode(ranges: ranges)
+            let transformedRanges = filteredRanges.reduce([NSRange](), { total, current in // subtract previous ranges lengths from each range location
                 let offset = total.reduce(0, { $0 + $1.length - 1 })
                 let range = NSRange(location: current.location - offset, length: current.length)
                 return total + [range]
             })
 
-            // exclude matches inside code tags
-            let filteredRanges = attributedString.string.filterOutRangesInsideCode(ranges: ranges)
-
-            for range in filteredRanges {
+            for range in transformedRanges {
                 let imageAttachment = NSTextAttachment()
                 imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
                 imageAttachment.contents = imageUrl.data(using: .utf8)
@@ -61,8 +62,8 @@ extension String {
         let codeRanges = self.codeRanges()
 
         let filteredMatches = ranges.filter { range in
-            !codeRanges.contains {
-                range.location >= $0.location && range.length <= $0.length
+            !codeRanges.contains { codeRange in
+                NSIntersectionRange(codeRange, range).length == range.length
             }
         }
 
