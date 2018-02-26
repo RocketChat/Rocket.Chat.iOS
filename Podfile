@@ -38,6 +38,7 @@ def shared_pods
   pod 'OAuthSwift'
   pod '1PasswordExtension'
   pod 'GoogleSignIn'
+  pod 'TwitterKit'
 
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
