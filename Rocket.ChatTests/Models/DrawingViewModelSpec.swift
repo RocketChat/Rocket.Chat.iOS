@@ -19,6 +19,5 @@ class DrawingViewModelSpec: XCTestCase {
         XCTAssertNotNil(model.title)
         XCTAssertNotNil(model.errorTitle)
         XCTAssertNotNil(model.errorMessage)
-        XCTAssertNotNil(model.brushSettingsLabel)
     }
 }
