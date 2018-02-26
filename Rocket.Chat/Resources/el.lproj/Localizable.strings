@@ -4,23 +4,23 @@
 "global.cancel" = "Ακύρωση";
 
 // Errors
-"error.socket.default_error.title" = "Ωχ!";
+"error.socket.default_error.title" = "Ωπ!";
 "error.socket.default_error.message" = "Συνέβη κάποιο σφάλμα, παρακαλούμε ξαναπροσπαθήστε.";
 
 // Alerts
-"alert.connection.invalid_url.title" = "Ωχ!";
+"alert.connection.invalid_url.title" = "Ωπ!";
 "alert.connection.invalid_url.message" = "Το URL που εισάγατε είναι άκυρο. Παρακαλούμε ελέγξτε το και ξαναπροσπαθήστε!";
 
-"alert.connection.socket_error.title" = "Ωχ!";
+"alert.connection.socket_error.title" = "Ωπ!";
 "alert.connection.socket_error.message" = "Δεν είναι δυνατή η σύνδεση σε αυτόν τον εξυπηρετητή!";
 
-"alert.connection.invalid_version.title" = "Ωχ!";
+"alert.connection.invalid_version.title" = "Ωπ!";
 "alert.connection.invalid_version.message" = "Ο εξυπηρετητής που προσπαθείτε να συνδεθείτεχρησιμοποιεί μια έκδοση που δεν υποστηρίζεται πλέον από την εφαρμογή: %@.\n\nΧρειαζόμαστε έκδοση %@.";
 
-"alert.settings.set_mail_app.title" = "Ωχ!";
+"alert.settings.set_mail_app.title" = "Ωπ!";
 "alert.settings.set_mail_app.message" = "Δεν βρέθηκαν Λογαριασμοί Mail. Παρακαλούμε εγκαταστήστε ένα λογαριασμό Mail ώστε να στέλνετε email.";
 
-"alert.feature.wip.title" = "Ωχ!";
+"alert.feature.wip.title" = "Ωπ!";
 "alert.feature.wip.message" = "Ακόμη εργαζόμαστε για αυτή τη λειτουργικότητα, μείνετε συντονισμένοι!";
 
 "alert.insecure_image.title" = "Μη ασφαλής πόρος";
