@@ -99,10 +99,10 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         XCTAssertFalse(model.collapsed)
     }
 
-    func testToggleCollpased() {
+    func testToggleCollapsed() {
         let attachment = Attachment()
         let model = ChatMessageTextViewModel(withAttachment: attachment)
-        model.toggleCollpase()
+        model.toggleCollapse()
         XCTAssertTrue(model.collapsed)
     }
 

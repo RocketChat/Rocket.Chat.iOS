@@ -129,6 +129,12 @@ final class ChatMessageCell: UICollectionViewCell {
             if type == .audio {
                 total += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
             }
+
+            if !attachment.collapsed {
+                for field in attachment.fields {
+                    total += ChatMessageTextView.heightFor(collapsed: false, withText: field.value)
+                }
+            }
         }
 
         return total
@@ -221,6 +227,15 @@ final class ChatMessageCell: UICollectionViewCell {
 
                     mediaViews.addArrangedSubview(view)
                     mediaViewHeight += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text)
+
+                    if !attachment.collapsed {
+                        attachment.fields.forEach {
+                            guard let view = ChatMessageTextView.instantiateFromNib() else { return }
+                            view.viewModel = ChatMessageAttachmentFieldViewModel(withAttachment: attachment, andAttachmentField: $0)
+                            mediaViews.addArrangedSubview(view)
+                            mediaViewHeight += ChatMessageTextView.heightFor(collapsed: false, withText: $0.value)
+                        }
+                    }
                 }
 
             case .image:

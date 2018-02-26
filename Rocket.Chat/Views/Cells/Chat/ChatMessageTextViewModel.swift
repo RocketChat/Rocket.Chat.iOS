@@ -9,8 +9,17 @@
 import UIKit
 import RealmSwift
 
-final class ChatMessageTextViewModel {
+protocol ChatMessageTextViewModelProtocol {
+    var color: UIColor { get }
+    var title: String { get }
+    var text: String { get }
+    var thumbURL: URL? { get }
+    var collapsed: Bool { get }
+    var attachment: Attachment { get }
+    func toggleCollapse()
+}
 
+final class ChatMessageTextViewModel: ChatMessageTextViewModelProtocol {
     var color: UIColor {
         return  attachment.color != nil
             ? UIColor(hex: attachment.color)
@@ -18,7 +27,7 @@ final class ChatMessageTextViewModel {
     }
 
     var title: String {
-        return attachment.title
+        return "\(collapsed ? "▶" : "▼") \(attachment.title)"
     }
 
     var text: String {
@@ -43,7 +52,45 @@ final class ChatMessageTextViewModel {
         self.attachment = attachment
     }
 
-    func toggleCollpase() {
+    func toggleCollapse() {
+        Realm.executeOnMainThread({ _ in
+            self.attachment.collapsed = !self.attachment.collapsed
+        })
+    }
+}
+
+final class ChatMessageAttachmentFieldViewModel: ChatMessageTextViewModelProtocol {
+    var color: UIColor {
+        return  attachment.color != nil
+            ? UIColor(hex: attachment.color)
+            : UIColor.lightGray
+    }
+
+    var title: String {
+        return attachmentField.title
+    }
+
+    var text: String {
+        return attachmentField.value
+    }
+
+    var thumbURL: URL? {
+        return nil
+    }
+
+    var collapsed: Bool {
+        return attachment.collapsed
+    }
+
+    let attachment: Attachment
+    let attachmentField: AttachmentField
+
+    init(withAttachment attachment: Attachment, andAttachmentField attachmentField: AttachmentField) {
+        self.attachment = attachment
+        self.attachmentField = attachmentField
+    }
+
+    func toggleCollapse() {
         Realm.executeOnMainThread({ _ in
             self.attachment.collapsed = !self.attachment.collapsed
         })
