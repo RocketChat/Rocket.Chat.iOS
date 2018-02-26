@@ -90,7 +90,7 @@
 "user_menu.busy" = "Zajęty";
 "user_menu.invisible" = "Ukryty";
 "user_menu.admin" = "Zarządzanie";
-"user_menu.settings" = "Moje Konto";
+"user_menu.preferences" = "Preferencje";
 "user_menu.logout" = "Wyloguj";
 
 // New Room View
@@ -119,6 +119,7 @@
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
 "chat.loading_messages" = "Ładowanie wiadomości...";
+"chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
 "chat.message.actions.react" = "Dodaje reakcję";
@@ -134,6 +135,11 @@
 "chat.message.actions.delete.confirm.title" = "Usunąć wiadomość?";
 "chat.message.actions.delete.confirm.message" = "Czy na pewno usunąć tą wiadomość? Tej czynności nie można cofnąć.";
 "chat.message.actions.delete.confirm.yes" = "Tak, usuń";
+"chat.message.actions.resend" = "Wyślij ponownie";
+"chat.message.actions.resend_all" = "Wyślij wszystkie ponownie";
+"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
+"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
 "Send" = "Wyślij"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -192,7 +198,7 @@
 "chat.messages.starred.list.title" = "Wiadomości oznaczone gwiazdką";
 
 // Settings
-"myaccount.settings.title" = "Ustawienia";
+"myaccount.settings.title" = "Preferencje";
 "myaccount.settings.contactus" = "Kontakt";
 "myaccount.settings.license" = "Licencja";
 "myaccount.settings.appicon" = "Ikona aplikacji";

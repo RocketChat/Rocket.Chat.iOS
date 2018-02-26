@@ -85,6 +85,10 @@ extension User {
 }
 
 // MARK: Query
+enum UserQueryParameter {
+    case userId(String)
+    case username(String)
+}
 
 extension User {
     static func find(username: String, realm: Realm? = Realm.shared) -> User? {
@@ -98,7 +102,7 @@ extension User {
         return user
     }
 
-    static func fetch(username: String, realm: Realm? = Realm.shared, api: API? = API.current(), completion: @escaping (User?) -> Void) {
+    static func fetch(by queryParameter: UserQueryParameter, realm: Realm? = Realm.shared, api: API? = API.current(), completion: @escaping (User?) -> Void) {
         guard
             let realm = realm,
             let api = api
@@ -106,7 +110,15 @@ extension User {
             return
         }
 
-        api.fetch(UserInfoRequest(username: username), succeeded: {
+        let request: UserInfoRequest
+        switch queryParameter {
+        case .userId(let userId):
+            request = UserInfoRequest(userId: userId)
+        case .username(let username):
+            request = UserInfoRequest(username: username)
+        }
+
+        api.fetch(request, succeeded: {
             guard let user = $0.user else { return completion(nil) }
 
             realm.execute({ realm in

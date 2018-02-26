@@ -234,10 +234,10 @@
                         <constraint firstAttribute="bottom" secondItem="oBw-8B-vGW" secondAttribute="bottom" id="xwd-Hl-Q7s"/>
                     </constraints>
                 </view>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ztk-2z-v0d" userLabel="My Account">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ztk-2z-v0d" userLabel="Preferences">
                     <rect key="frame" x="0.0" y="220" width="375" height="44"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Account" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aC7-W8-j4A">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Preferences" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aC7-W8-j4A">
                             <rect key="frame" x="35" y="12" width="332" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="okL-sD-asZ"/>
@@ -361,8 +361,8 @@
         </view>
     </objects>
     <resources>
-        <image name="Admin" width="20" height="20"/>
-        <image name="Logout" width="20" height="20"/>
-        <image name="User" width="20" height="20"/>
+        <image name="Admin" width="22" height="22"/>
+        <image name="Logout" width="29" height="22"/>
+        <image name="User" width="21" height="22"/>
     </resources>
 </document>

@@ -90,7 +90,7 @@
 "user_menu.busy" = "Beschäftigt";
 "user_menu.invisible" = "Unsichtbar";
 "user_menu.admin" = "Administration";
-"user_menu.settings" = "Mein Account";
+"user_menu.preferences" = "Mein Account"; // TODO: new text: Preferences
 "user_menu.logout" = "Logout";
 
 // New Room View
@@ -119,6 +119,7 @@
 "chat.read_only" = "Dieser Raum ist schreibgeschützt";
 "chat.muted" = "Du wurdest stummgeschaltet";
 "chat.loading_messages" = "Nachrichten werden geladen...";
+"chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
 "chat.message.actions.react" = "Reaktion hinzufügen";
@@ -134,6 +135,11 @@
 "chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
 "chat.message.actions.delete.confirm.message" = "Bist du sicher, dass du diese Nachricht löschen möchtest? Sie kann dann nicht wiederhergestellt werden.";
 "chat.message.actions.delete.confirm.yes" = "Ja, löschen";
+"chat.message.actions.resend" = "Resend"; //TODO
+"chat.message.actions.resend_all" = "Resend all"; //TODO
+"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
+"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
 "Send" = "Senden"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -192,7 +198,7 @@
 "chat.messages.starred.list.title" = "Favorisierte Nachrichten";
 
 // Settings
-"myaccount.settings.title" = "Einstellungen";
+"myaccount.settings.title" = "Einstellungen"; // TODO: new text: Preferences
 "myaccount.settings.contactus" = "Kontaktiere uns";
 "myaccount.settings.license" = "Lizenz";
 "myaccount.settings.appicon" = "App Icon"; // TODO:

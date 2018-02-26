@@ -85,10 +85,16 @@ final class ChatViewController: SLKTextViewController {
                 return
             }
 
+            dataController.unreadSeparator = false
+            dataController.dismissUnreadSeparator = false
+            dataController.lastSeen = subscription.lastSeen ?? Date()
+
             if !SocketManager.isConnected() {
                 socketDidDisconnect(socket: SocketManager.sharedInstance)
                 reconnect()
             }
+
+            subscription.setTemporaryMessagesFailed()
 
             subscriptionToken = subscription.observe { [weak self] changes in
                 switch changes {
@@ -162,8 +168,6 @@ final class ChatViewController: SLKTextViewController {
         shouldScrollToBottomAfterKeyboardShows = false
 
         leftButton.setImage(UIImage(named: "Upload"), for: .normal)
-
-        rightButton.isEnabled = false
 
         setupTitleView()
         setupTextViewSettings()
@@ -294,6 +298,11 @@ final class ChatViewController: SLKTextViewController {
         ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
 
         collectionView?.register(UINib(
+            nibName: "ChatMessageUnreadSeparator",
+            bundle: Bundle.main
+        ), forCellWithReuseIdentifier: ChatMessageUnreadSeparator.identifier)
+
+        collectionView?.register(UINib(
             nibName: "ChatChannelHeaderCell",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatChannelHeaderCell.identifier)
@@ -333,10 +342,6 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: SlackTextViewController
 
-    override func canPressRightButton() -> Bool {
-        return SocketManager.isConnected()
-    }
-
     override func didPressRightButton(_ sender: Any?) {
         guard let messageText = textView.text else { return }
 
@@ -345,6 +350,10 @@ final class ChatViewController: SLKTextViewController {
 
         let replyString = self.replyString
         stopReplying()
+
+        dataController.dismissUnreadSeparator = true
+        dataController.lastSeen = subscription?.lastSeen ?? Date()
+        syncCollectionView()
 
         let text = "\(messageText)\(replyString)"
 
@@ -457,13 +466,7 @@ final class ChatViewController: SLKTextViewController {
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
         MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
-            guard let collectionView = self?.collectionView else { return }
-
-            self?.dataController.delete(msgId: msgId)
-
-            collectionView.performBatchUpdates({
-                collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
-            })
+            self?.deleteMessage(msgId: msgId)
         }
         registerTypingEvent(subscription)
     }
@@ -508,6 +511,17 @@ final class ChatViewController: SLKTextViewController {
         })
     }
 
+    internal func deleteMessage(msgId: String) {
+        guard let collectionView = collectionView else { return }
+        dataController.delete(msgId: msgId)
+        collectionView.performBatchUpdates({
+            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        })
+        Realm.execute({ _ in
+            Message.delete(withIdentifier: msgId)
+        })
+    }
+
     internal func updateSubscriptionInfo() {
         guard let subscription = subscription else { return }
 
@@ -542,9 +556,10 @@ final class ChatViewController: SLKTextViewController {
 
     func registerTypingEvent(_ subscription: Subscription) {
         typingIndicatorView?.interval = 0
+        guard let user = AuthManager.currentUser() else { return Log.debug("Could not register TypingEvent") }
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username else { return }
+            guard let username = username, username != user.username else { return }
 
             let isAtBottom = self?.chatLogIsAtBottom()
 
@@ -613,6 +628,14 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
+    func syncCollectionView() {
+        collectionView?.performBatchUpdates({
+            let (indexPaths, removedIndexPaths) = dataController.insert([])
+            collectionView?.insertItems(at: indexPaths)
+            collectionView?.deleteItems(at: removedIndexPaths)
+        }, completion: nil)
+    }
+
     func loadHistoryFromRemote(date: Date?) {
         guard let subscription = subscription else { return }
 
@@ -635,13 +658,7 @@ final class ChatViewController: SLKTextViewController {
 
                 if messages.count == 0 {
                     self?.dataController.loadedAllMessages = true
-
-                    self?.collectionView?.performBatchUpdates({
-                        if let (indexPaths, removedIndexPaths) = self?.dataController.insert([]) {
-                            self?.collectionView?.insertItems(at: indexPaths)
-                            self?.collectionView?.deleteItems(at: removedIndexPaths)
-                        }
-                    }, completion: nil)
+                    self?.syncCollectionView()
                 } else {
                     self?.dataController.loadedAllMessages = false
                 }
@@ -841,6 +858,10 @@ extension ChatViewController {
             return cellForDaySeparator(obj, at: indexPath)
         }
 
+        if obj.type == .unreadSeparator {
+            return cellForUnreadSeparator(obj, at: indexPath)
+        }
+
         if obj.type == .loader {
             return cellForLoader(obj, at: indexPath)
         }
@@ -886,6 +907,18 @@ extension ChatViewController {
         }
 
         cell.labelTitle.text = RCDateFormatter.date(obj.timestamp)
+        return cell
+    }
+
+    func cellForUnreadSeparator(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView?.dequeueReusableCell(
+            withReuseIdentifier: ChatMessageUnreadSeparator.identifier,
+            for: indexPath
+        ) as? ChatMessageUnreadSeparator else {
+            return UICollectionViewCell()
+        }
+
+        cell.labelTitle.text = localized("chat.unread_separator")
         return cell
     }
 
@@ -963,6 +996,14 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
             if obj.type == .daySeparator {
                 return CGSize(width: fullWidth, height: ChatMessageDaySeparator.minimumHeight)
+            }
+
+            if obj.type == .unreadSeparator {
+                if dataController.dismissUnreadSeparator {
+                    return CGSize(width: fullWidth, height: 0)
+                } else {
+                    return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
+                }
             }
 
             if let message = obj.message {
