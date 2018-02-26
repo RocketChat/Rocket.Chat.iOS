@@ -15,7 +15,7 @@
 "alert.connection.socket_error.message" = "Δεν είναι δυνατή η σύνδεση σε αυτόν τον εξυπηρετητή!";
 
 "alert.connection.invalid_version.title" = "Ωπ!";
-"alert.connection.invalid_version.message" = "Ο εξυπηρετητής που προσπαθείτε να συνδεθείτεχρησιμοποιεί μια έκδοση που δεν υποστηρίζεται πλέον από την εφαρμογή: %@.\n\nΧρειαζόμαστε έκδοση %@.";
+"alert.connection.invalid_version.message" = "Ο εξυπηρετητής που προσπαθείτε να συνδεθείτε χρησιμοποιεί μια έκδοση που δεν υποστηρίζεται πλέον από την εφαρμογή: %@.\n\nΧρειαζόμαστε έκδοση %@.";
 
 "alert.settings.set_mail_app.title" = "Ωπ!";
 "alert.settings.set_mail_app.message" = "Δεν βρέθηκαν Λογαριασμοί Mail. Παρακαλούμε εγκαταστήστε ένα λογαριασμό Mail ώστε να στέλνετε email.";
@@ -54,7 +54,7 @@
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Έχει αλλάξει το URL του Εξυπηρετητή";
-"connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
+"connection.server.redirect.alert.message" = "Φαίνεται ότι αυτός ο εξυπηρετής έχει αλλάξει το URL του σε:\n\n%@\n\nΘα θέλατε να ενημερώσετε το URL?";
 "connection.server.redirect.alert.confirm" = "Ναι, αλλάξτε το URL";
 
 // Socket Connection
