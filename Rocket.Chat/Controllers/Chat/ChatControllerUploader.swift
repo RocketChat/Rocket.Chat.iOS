@@ -32,6 +32,11 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         alert.addAction(UIAlertAction(title: localized("chat.upload.import_file"), style: .default, handler: { (_) in
             self.openDocumentPicker()
         }))
+        
+        alert.addAction(UIAlertAction(title: localized("chat.upload.paint"),
+                                      style: .default, handler: { (_) in
+                                        self.openPainter()
+        }))
 
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
@@ -57,7 +62,9 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         imagePicker.cameraCaptureMode = video ? .video : .photo
         self.present(imagePicker, animated: true, completion: nil)
     }
-
+    fileprivate func openPainter() {
+        performSegue(withIdentifier: "Painter", sender: self)
+    }
     fileprivate func openPhotosLibrary() {
         let picker = UIImagePickerController()
         picker.delegate = self
@@ -145,7 +152,28 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         dismiss(animated: true, completion: nil)
     }
-
+    override func viewDidAppear(_ animated: Bool) {
+        if ChatViewController.toUploadPic != nil{
+            self.shareDrawing(temp: ChatViewController.toUploadPic)
+            ChatViewController.toUploadPic = nil
+        }
+    }
+    func shareDrawing(temp: UIImage) {
+        let filename = String.random()
+        var file: FileUpload?
+        if let image = temp as? UIImage {
+            let resizedImage = image.resizeWith(width: 1024) ?? image
+            guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
+            file = UploadHelper.file(
+                for: imageData,
+                name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
+                mimeType: "image/jpeg"
+            )
+        }
+        if let file = file {
+            self.uploadDialog(file)
+        }
+    }
 }
 
 // MARK: UIDocumentMenuDelegate

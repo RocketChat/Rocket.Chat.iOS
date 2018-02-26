@@ -154,6 +154,12 @@
 "chat.upload.shoot_video" = "Shoot Video";
 "chat.upload.choose_from_library" = "Choose From Library";
 "chat.upload.import_file" = "Import File From...";
+"chat.upload.paint" = "Upload a drawing";
+"chat.upload.choice_pick" = "Pick Your Choice";
+"chat.upload.empty" = "Empty";
+"chat.upload.nothing" = "Make sure that you draw to post";
+"chat.upload.import" = "Pick an Image from Library";
+"chat.upload.tosave" = "Save this to Library";
 
 // Chat Download
 "chat.download.downloading_file" = "Downloading \"%@\"";

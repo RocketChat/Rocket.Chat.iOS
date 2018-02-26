@@ -21,6 +21,8 @@ def shared_pods
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
   pod 'TagListView', '~> 1.0'
   pod 'SearchTextField'
+  pod "SSSlider"
+
 
   # Text Processing
   pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
