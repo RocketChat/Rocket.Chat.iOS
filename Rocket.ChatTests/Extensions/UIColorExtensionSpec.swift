@@ -13,24 +13,31 @@ import XCTest
 class UIColorExtensionSpec: XCTestCase {
 
     func testNormalizedColorFromStringWarning() {
-        let warningColor = UIColor.normalizeColorFromString(string: SystemMessageColor.warning.rawValue)
-        XCTAssertEqual(warningColor.hexDescription(), "fcb316")
+        let name = SystemMessageColor.warning.rawValue
+        let colorObject = SystemMessageColor(rawValue: name).color
+        let colorResult = UIColor.normalizeColorFromString(string: name)
+        XCTAssertEqual(colorResult.cgColor, colorObject.cgColor)
     }
 
     func testNormalizedColorFromStringDanger() {
-        let warningColor = UIColor.normalizeColorFromString(string: SystemMessageColor.danger.rawValue)
-        XCTAssertEqual(warningColor.hexDescription(), "d30230")
+        let name = SystemMessageColor.danger.rawValue
+        let colorObject = SystemMessageColor(rawValue: name).color
+        let colorResult = UIColor.normalizeColorFromString(string: name)
+        XCTAssertEqual(colorResult.cgColor, colorObject.cgColor)
     }
 
     func testNormalizedColorFromStringGood() {
-        let warningColor = UIColor.normalizeColorFromString(string: SystemMessageColor.good.rawValue)
-        XCTAssertEqual(warningColor.hexDescription(), "35ac19")
+        let name = SystemMessageColor.good.rawValue
+        let colorObject = SystemMessageColor(rawValue: name).color
+        let colorResult = UIColor.normalizeColorFromString(string: name)
+        XCTAssertEqual(colorResult.cgColor, colorObject.cgColor)
     }
 
     func testNormalizedColorFromStringOther() {
-        let randomColor = "990088"
-        let warningColor = UIColor.normalizeColorFromString(string: randomColor)
-        XCTAssertEqual(warningColor.hexDescription(), randomColor)
+        let name = "#998800"
+        let colorObject = SystemMessageColor(rawValue: name).color
+        let colorResult = UIColor.normalizeColorFromString(string: name)
+        XCTAssertEqual(colorResult.cgColor, colorObject.cgColor)
     }
 
 }
