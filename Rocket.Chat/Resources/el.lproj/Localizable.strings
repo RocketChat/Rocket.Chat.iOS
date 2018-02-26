@@ -54,7 +54,7 @@
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Έχει αλλάξει το URL του Εξυπηρετητή";
-"connection.server.redirect.alert.message" = "Φαίνεται ότι αυτός ο εξυπηρετής έχει αλλάξει το URL του σε:\n\n%@\n\nΘα θέλατε να ενημερώσετε το URL?";
+"connection.server.redirect.alert.message" = "Φαίνεται ότι αυτός ο εξυπηρετής έχει αλλάξει το URL του σε:\n\n%@\n\nΘα θέλατε να ενημερώσετε το URL;";
 "connection.server.redirect.alert.confirm" = "Ναι, αλλάξτε το URL";
 
 // Socket Connection
@@ -63,8 +63,8 @@
 
 // Auth
 "auth.connect.button_connect" = "Σύνδεση";
-"auth.connect.ssl_required" = "Απαιτείται ο εξυπηρετητής σας να υποστηρίζει SSL";
-"auth.connect.connecting" = "Σύνδεση σε εξέλλιξη. Περιμένετε παρακαλώ";
+"auth.connect.ssl_required" = "Απαιτείται υποστήριξη SSL στον εξυπηρετητή";
+"auth.connect.connecting" = "Σύνδεση σε εξέλιξη. Περιμένετε παρακαλώ";
 
 "auth.forgot_password.title" = "Ξεχάσατε το συνθηματικό σας;";
 "auth.forgot_password.message" = "Εισάγετε το e-mail σας";
@@ -131,8 +131,8 @@
 "chat.message.actions.quote" = "Επιδείξτε μήνυμα";
 "chat.message.actions.reply" = "Απαντήστε σε μήνυμα";
 "chat.message.actions.delete" = "Διαγράψτε μήνυμα";
-"chat.message.actions.delete.confirm.title" = "Να διαγράψουμε αυτό το μήνυμα?";
-"chat.message.actions.delete.confirm.message" = "Σίγουρα θέλετε να διαγράψετε αυτό το μήνυμα? Αυτή η διαδικασία δεν μπορεί να ακυρωθεί.";
+"chat.message.actions.delete.confirm.title" = "Να διαγράψουμε αυτό το μήνυμα;";
+"chat.message.actions.delete.confirm.message" = "Σίγουρα θέλετε να διαγράψετε αυτό το μήνυμα; Αυτή η διαδικασία δεν μπορεί να ακυρωθεί.";
 "chat.message.actions.delete.confirm.yes" = "Ναι, διαγράψτε";
 "Send" = "Αποστολή"; //SLKTextInputbar.m
 
@@ -164,12 +164,12 @@
 "chat.message.type.user_joined" = "Συνδέθηκε με το κανάλι";
 "chat.message.type.user_muted" = "Ο χρήστης %@ τέθηκε σε σίγαση από %@";
 "chat.message.type.user_unmuted" = "Για το χρήστη %@ ματαιώθηκε η σίγαση από %@";
-"chat.message.type.welcome" = "Καλως ήρθατε %@";
+"chat.message.type.welcome" = "Καλωσήρθατε %@";
 "chat.message.type.message_removed" = "Το μήνυμα αφαιρέθηκε";
 "chat.message.type.subscription_role_added" = "%@ τέθηκε σε %@ από %@";
 "chat.message.type.subscription_role_removed" = "%@ δεν ισχύει πλέον %@ για %@";
 "chat.message.type.room_archived" = "Αυτό το δωμάτιο αρχειοθετήθηκε από %@";
-"chat.message.type.room_unarchived" = "Αυτό το δωμάτιο απο-αρχειοποιήθηκε από %@";
+"chat.message.type.room_unarchived" = "Αυτό το δωμάτιο ξεαρχειοθετήθηκε από %@";
 
 // Chat Information
 "chat.info.title" = "Πληροφορία";
