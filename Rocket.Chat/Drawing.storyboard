@@ -66,7 +66,6 @@
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="GR2-Ra-9pU"/>
-                        <barButtonItem enabled="NO" title="Settings:" id="zNJ-OE-uJe"/>
                         <barButtonItem title="Width" image="Width" id="Inn-dx-cVT">
                             <color key="tintColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
@@ -106,8 +105,8 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="colorItem" destination="1AR-Ra-oNL" id="gsv-NZ-Qld"/>
                         <outlet property="mainImageView" destination="xFp-Dg-6Qj" id="i2R-cM-seM"/>
-                        <outlet property="settingsItem" destination="zNJ-OE-uJe" id="dda-He-TbS"/>
                         <outlet property="tempImageView" destination="aec-Zt-dVY" id="bH0-0F-L8l"/>
                     </connections>
                 </viewController>
@@ -316,9 +315,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Color" width="32" height="32"/>
-        <image name="Opacity" width="32" height="32"/>
-        <image name="Reset" width="32" height="32"/>
-        <image name="Width" width="32" height="32"/>
+        <image name="Color" width="14" height="20"/>
+        <image name="Opacity" width="19" height="20"/>
+        <image name="Reset" width="19" height="20"/>
+        <image name="Width" width="19" height="20"/>
     </resources>
 </document>

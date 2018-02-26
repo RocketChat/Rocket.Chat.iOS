@@ -9,11 +9,7 @@
 import UIKit
 
 final class DrawingViewController: UIViewController {
-    @IBOutlet private weak var settingsItem: UIBarButtonItem! {
-        didSet {
-            settingsItem.title = viewModel.brushSettingsLabel
-        }
-    }
+    @IBOutlet weak var colorItem: UIBarButtonItem!
 
     weak var delegate: DrawingControllerDelegate?
 
@@ -216,5 +212,6 @@ extension DrawingViewController: DrawingBrushOpacityDelegate {
 extension DrawingViewController: DrawingBrushColorDelegate {
     func brushColorPicked(color: UIColor) {
         brushColor = color
+        colorItem.tintColor = color
     }
 }

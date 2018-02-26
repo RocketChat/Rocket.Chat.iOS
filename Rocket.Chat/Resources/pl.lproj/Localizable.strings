@@ -167,7 +167,6 @@
 "chat.drawing.errorTitle" = "Ups!";
 "chat.drawing.messageTitle" = "Przed wysłaniem musisz coś narysować.";
 "chat.drawing.fileName" = "Rysunek";
-"chat.drawing.settings.brush" = "Pędzel";
 "chat.drawing.settings.opacity" = "Nieprzezroczystość";
 "chat.drawing.settings.width" = "Szerokość";
 "chat.drawing.settings.color.selected" = "Wybrany kolor";
