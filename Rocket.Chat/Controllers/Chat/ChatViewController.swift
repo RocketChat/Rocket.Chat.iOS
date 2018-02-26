@@ -90,6 +90,8 @@ final class ChatViewController: SLKTextViewController {
                 reconnect()
             }
 
+            subscription.setTemporaryMessagesFailed()
+
             subscriptionToken = subscription.observe { [weak self] changes in
                 switch changes {
                 case .change(let propertyChanges):
@@ -162,8 +164,6 @@ final class ChatViewController: SLKTextViewController {
         shouldScrollToBottomAfterKeyboardShows = false
 
         leftButton.setImage(UIImage(named: "Upload"), for: .normal)
-
-        rightButton.isEnabled = false
 
         setupTitleView()
         setupTextViewSettings()
@@ -333,10 +333,6 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: SlackTextViewController
 
-    override func canPressRightButton() -> Bool {
-        return SocketManager.isConnected()
-    }
-
     override func didPressRightButton(_ sender: Any?) {
         guard let messageText = textView.text else { return }
 
@@ -457,13 +453,7 @@ final class ChatViewController: SLKTextViewController {
     internal func subscribe(for subscription: Subscription) {
         MessageManager.changes(subscription)
         MessageManager.subscribeDeleteMessage(subscription) { [weak self] msgId in
-            guard let collectionView = self?.collectionView else { return }
-
-            self?.dataController.delete(msgId: msgId)
-
-            collectionView.performBatchUpdates({
-                collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
-            })
+            self?.deleteMessage(msgId: msgId)
         }
         registerTypingEvent(subscription)
     }
@@ -508,6 +498,17 @@ final class ChatViewController: SLKTextViewController {
         })
     }
 
+    internal func deleteMessage(msgId: String) {
+        guard let collectionView = collectionView else { return }
+        dataController.delete(msgId: msgId)
+        collectionView.performBatchUpdates({
+            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        })
+        Realm.execute({ _ in
+            Message.delete(withIdentifier: msgId)
+        })
+    }
+
     internal func updateSubscriptionInfo() {
         guard let subscription = subscription else { return }
 
@@ -542,9 +543,10 @@ final class ChatViewController: SLKTextViewController {
 
     func registerTypingEvent(_ subscription: Subscription) {
         typingIndicatorView?.interval = 0
+        guard let user = AuthManager.currentUser() else { return Log.debug("Could not register TypingEvent") }
 
         SubscriptionManager.subscribeTypingEvent(subscription) { [weak self] username, flag in
-            guard let username = username else { return }
+            guard let username = username, username != user.username else { return }
 
             let isAtBottom = self?.chatLogIsAtBottom()
 

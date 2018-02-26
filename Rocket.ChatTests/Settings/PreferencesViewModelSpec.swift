@@ -1,5 +1,5 @@
 //
-//  SettingsViewModelSpec.swift
+//  PreferencesViewModelSpec.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Ramos on 31/03/17.
@@ -10,10 +10,10 @@ import XCTest
 
 @testable import Rocket_Chat
 
-class SettingsViewModelSpec: XCTestCase {
+class PreferencesViewModelSpec: XCTestCase {
 
     let info = Bundle.main.infoDictionary
-    let model = SettingsViewModel()
+    let model = PreferencesViewModel()
 
     func testAppVersion() {
         let version = info?["CFBundleShortVersionString"] as? String
@@ -49,8 +49,10 @@ class SettingsViewModelSpec: XCTestCase {
     }
 
     func testNumberOfRowsInSection() {
-        XCTAssertTrue(model.numberOfRowsInSection(0) == 4, "incorrect rows number")
-        XCTAssertTrue(model.numberOfRowsInSection(1) == 1, "incorrect rows number")
+        XCTAssertTrue(model.numberOfSections == 3, "incorrect sections number")
+        XCTAssertTrue(model.numberOfRowsInSection(0) == 2, "incorrect rows number")
+        XCTAssertTrue(model.numberOfRowsInSection(1) == 2, "incorrect rows number")
+        XCTAssertTrue(model.numberOfRowsInSection(2) == 1, "incorrect rows number")
     }
 
     func testStringsOverall() {
