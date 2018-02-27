@@ -28,6 +28,7 @@ extension BlockedUsersListViewController {
     override func viewDidLoad() {
         registerCells()
         self.labelEmptyList.text = localized("blocked.list.empty.title")
+        title = localized("blocked.users.title")
     }
 
     func registerCells() {
