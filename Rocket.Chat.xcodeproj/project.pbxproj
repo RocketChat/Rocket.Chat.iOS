@@ -13,6 +13,7 @@
 		0B9AB2C120444ECD00ABEA05 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */; };
 		0B9AB2C320444ED600ABEA05 /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */; };
 		0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */; };
+		0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */; };
 		140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */; };
 		140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */; };
 		1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BFA21F9B601600FB2768 /* RCTextView.swift */; };
@@ -438,6 +439,7 @@
 		0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageViewController.swift; path = Controllers/Language/LanguageViewController.swift; sourceTree = "<group>"; };
 		0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
 		0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeLanguageCell.swift; path = Controllers/Language/ChangeLanguageCell.swift; sourceTree = "<group>"; };
+		0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageViewModelSpec.swift; path = Settings/LanguageViewModelSpec.swift; sourceTree = "<group>"; };
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconViewModelSpec.swift; path = Settings/ChangeAppIconViewModelSpec.swift; sourceTree = "<group>"; };
 		140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCellSpec.swift; sourceTree = "<group>"; };
@@ -921,6 +923,14 @@
 				0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */,
 				0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */,
 				0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */,
+			);
+			name = Language;
+			sourceTree = "<group>";
+		};
+		0BBCC2C0204546BB001E3B6D /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */,
 			);
 			name = Language;
 			sourceTree = "<group>";
@@ -1975,6 +1985,7 @@
 		925FF74F1E8EFC9200982043 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				0BBCC2C0204546BB001E3B6D /* Language */,
 				140A95DC202F1E4D003FD564 /* AppIcon */,
 				41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */,
 			);
@@ -2961,6 +2972,7 @@
 				89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */,
 				80A97F012006293D00A2774C /* EmojiSearcherSpec.swift in Sources */,
 				4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */,
+				0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */,
 				8013F88C1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
 				4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */,
