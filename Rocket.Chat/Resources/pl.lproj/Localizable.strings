@@ -200,6 +200,7 @@
 "myaccount.settings.title" = "Preferencje";
 "myaccount.settings.contactus" = "Kontakt";
 "myaccount.settings.license" = "Licencja";
+"myaccount.settings.language" = "Język";
 "myaccount.settings.appicon" = "Ikona aplikacji";
 "myaccount.settings.version" = "Wersja: %@ (%@)";
 
@@ -208,3 +209,8 @@
 "myaccount.settings.changeicon.header" = "Możesz zmienić to jak wygląda ikona aplikacji Rocket.Chat na Twoim urządzeniu. Wybierz jedną z ikon poniżej, która podoba Ci się najbardziej.";
 "myaccount.settings.changeicon.errortitle" = "Nie można zmienić ikony";
 "myaccount.settings.changeicon.iosversion" = "Alternatywne ikony aplikacji nie są wspierane na systemie poniżej wersji 10.3";
+
+// Change Language
+"myaccount.settings.language.title" = "Zmień język";
+"myaccount.settings.language.reset" = "Przywróć domyślny język";
+"myaccount.settings.language.message" = "Ustawienia języka zostały zmienione. Musisz ponownie uruchomić Rocket.Chat+ aby nowe ustawienia zostały zastosowane.";

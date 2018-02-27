@@ -27,6 +27,10 @@ final class PreferencesViewModel {
         return localized("myaccount.settings.license")
     }
 
+    internal var language: String {
+        return localized("myaccount.settings.language")
+    }
+
     internal var appicon: String {
         return localized("myaccount.settings.appicon")
     }

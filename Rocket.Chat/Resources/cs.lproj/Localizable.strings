@@ -200,6 +200,7 @@
 "myaccount.settings.title" = "Preferences"; // TODO: new text: Preferences
 "myaccount.settings.contactus" = "Contact us";
 "myaccount.settings.license" = "License";
+"myaccount.settings.language" = "Language"; // TODO
 "myaccount.settings.appicon" = "Application Icon"; // TODO:
 "myaccount.settings.version" = "Version: %@ (%@)";
 
@@ -208,3 +209,8 @@
 "myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of icons below, whichever you like the most."; // TODO:
 "myaccount.settings.changeicon.errortitle" = "Cannot change icon"; // TODO:
 "myaccount.settings.changeicon.iosversion" = "Alternate application icons are not supported on iOS version below 10.3"; // TODO:
+
+// Change Language
+"myaccount.settings.language.title" = "Change Language"; // TODO
+"myaccount.settings.language.reset" = "Reset to Default"; // TODO
+"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+  before the new settings will take effect."; // TODO

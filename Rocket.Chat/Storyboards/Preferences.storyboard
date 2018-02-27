@@ -149,6 +149,7 @@
                     <connections>
                         <outlet property="labelApp" destination="Lk4-H3-Y3R" id="jIL-6y-wNg"/>
                         <outlet property="labelContactUs" destination="SsA-Jk-og1" id="BZe-mM-eck"/>
+                        <outlet property="labelLanguage" destination="TK4-N1-2eh" id="MEN-VF-dcq"/>
                         <outlet property="labelLicense" destination="kCF-5t-4W3" id="bt0-I5-0WI"/>
                         <outlet property="labelVersion" destination="vOz-GO-Ifh" id="14X-a4-dRc"/>
                         <segue destination="14p-5u-LKz" kind="show" identifier="AppIcon" id="5Rh-qB-fEf"/>
@@ -159,10 +160,10 @@
             </objects>
             <point key="canvasLocation" x="281" y="2"/>
         </scene>
-        <!--View Controller-->
+        <!--Language View Controller-->
         <scene sceneID="MkL-bx-7wj">
             <objects>
-                <viewController id="G2F-kh-af5" sceneMemberID="viewController">
+                <viewController id="G2F-kh-af5" customClass="LanguageViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WbP-u7-V4d"/>
                         <viewControllerLayoutGuide type="bottom" id="djw-HG-fPw"/>
@@ -170,12 +171,70 @@
                     <view key="view" contentMode="scaleToFill" id="FLg-ue-pj0">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="O2t-TO-Adc">
+                                <rect key="frame" x="0.0" y="126" width="375" height="541"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <view key="tableFooterView" contentMode="scaleToFill" id="nUJ-61-3ze">
+                                    <rect key="frame" x="0.0" y="72" width="375" height="1"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </view>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="changeLanguageCell" id="sY4-I5-aIQ" customClass="ChangeLanguageCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sY4-I5-aIQ" id="25c-Ax-QXV">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RlI-T9-Hhq">
+                                                    <rect key="frame" x="16" y="8" width="343" height="27.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="RlI-T9-Hhq" secondAttribute="bottom" constant="8" id="T0q-D6-g2f"/>
+                                                <constraint firstItem="RlI-T9-Hhq" firstAttribute="leading" secondItem="25c-Ax-QXV" secondAttribute="leading" constant="16" id="uFW-1H-DZg"/>
+                                                <constraint firstItem="RlI-T9-Hhq" firstAttribute="top" secondItem="25c-Ax-QXV" secondAttribute="top" constant="8" id="ulu-nk-xbf"/>
+                                                <constraint firstAttribute="trailing" secondItem="RlI-T9-Hhq" secondAttribute="trailing" constant="16" id="xlL-0b-T8v"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="titleLabel" destination="RlI-T9-Hhq" id="Y0Y-pS-EKy"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="G2F-kh-af5" id="iX6-I8-Lim"/>
+                                    <outlet property="delegate" destination="G2F-kh-af5" id="1Zw-Qi-8bb"/>
+                                </connections>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IRL-st-I4I">
+                                <rect key="frame" x="8" y="80" width="359" height="30"/>
+                                <state key="normal" title="Reset Language"/>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="0.93844169379999998" green="0.93565088510000005" blue="0.95562607050000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="djw-HG-fPw" firstAttribute="top" secondItem="O2t-TO-Adc" secondAttribute="bottom" id="Fg3-va-Iq2"/>
+                            <constraint firstItem="IRL-st-I4I" firstAttribute="leading" secondItem="FLg-ue-pj0" secondAttribute="leading" constant="8" id="GOm-15-U03"/>
+                            <constraint firstAttribute="trailing" secondItem="O2t-TO-Adc" secondAttribute="trailing" id="NsY-gc-VA7"/>
+                            <constraint firstItem="O2t-TO-Adc" firstAttribute="top" secondItem="IRL-st-I4I" secondAttribute="bottom" constant="16" id="oHQ-No-EBC"/>
+                            <constraint firstItem="O2t-TO-Adc" firstAttribute="leading" secondItem="FLg-ue-pj0" secondAttribute="leading" id="rhs-qd-zRs"/>
+                            <constraint firstItem="IRL-st-I4I" firstAttribute="top" secondItem="WbP-u7-V4d" secondAttribute="bottom" constant="16" id="ugt-ns-mKy"/>
+                            <constraint firstAttribute="trailing" secondItem="IRL-st-I4I" secondAttribute="trailing" constant="8" id="xXA-zw-RxQ"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="resetButton" destination="IRL-st-I4I" id="bnU-iS-TNl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m7u-yK-b5N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1159" y="-685"/>
+            <point key="canvasLocation" x="1157.5999999999999" y="-685.00749625187416"/>
         </scene>
         <!--Change App Icon View Controller-->
         <scene sceneID="PDd-r9-Apx">

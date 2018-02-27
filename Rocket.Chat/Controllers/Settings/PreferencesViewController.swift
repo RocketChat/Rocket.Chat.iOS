@@ -36,6 +36,12 @@ final class PreferencesViewController: UITableViewController {
         }
     }
 
+    @IBOutlet weak var labelLanguage: UILabel! {
+        didSet {
+            labelLanguage.text = viewModel.language
+        }
+    }
+
     @IBOutlet weak var labelApp: UILabel! {
         didSet {
             labelApp.text = viewModel.appicon
