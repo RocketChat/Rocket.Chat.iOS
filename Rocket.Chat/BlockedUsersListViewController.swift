@@ -1,5 +1,5 @@
 //
-//  blockedUsersListViewController.swift
+//  BlockedUsersListViewController.swift
 //  Rocket.Chat
 //
 //  Created by Hrayr Yeghiazaryan on 26.02.2018.

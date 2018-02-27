@@ -200,6 +200,7 @@
 "myaccount.settings.appicon" = "Application Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
 "blocked.list.empty.title" = "Empty";
+"blocked.users.title" = "Blocked Users";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose Icon";

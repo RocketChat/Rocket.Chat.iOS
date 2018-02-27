@@ -200,6 +200,7 @@
 "myaccount.settings.appicon" = "Application Icon"; // TODO:
 "myaccount.settings.version" = "Version: %@ (%@)";
 "blocked.list.empty.title" = "Prázdný";
+"blocked.users.title" = "Blokovaní uživatelé";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose Icon"; // TODO:
