@@ -22,6 +22,10 @@ struct Emojione {
             Emojione.flags
     }
 
+    static var regex: String = {
+        Emojione.values.keys.reduce("") { $0.isEmpty ? ":\($1):" : "\($0)|:\($1):" }
+    }()
+
     static let values = [
         "interrobang": "\u{00002049}\u{0000fe0f}",
         "tm": "\u{00002122}\u{0000fe0f}",
@@ -5619,32 +5623,4 @@ struct Emojione {
             Emoji("regional indicator symbol letter c", ":regional_indicator_c:", false, [], [""]),
             Emoji("regional indicator symbol letter b", ":regional_indicator_b:", false, [], [""]),
             Emoji("regional indicator symbol letter a", ":regional_indicator_a:", false, [], [""])]
-
-    static func transform(string: String) -> String {
-        let oldString = string as NSString
-        var transformedString = string as NSString
-
-        let regex = try? NSRegularExpression(pattern: ":([-+\\w]+):", options: [])
-        let ranges = regex?.matches(
-            in: transformedString as String,
-            options: [],
-            range: NSRange(location: 0, length: transformedString.length)
-        ).filter {
-            $0.numberOfRanges == 2
-        }.map {
-            $0.range(at: 1)
-        } ?? []
-
-        // exclude matches inside code tags
-        let filteredRanges = string.filterOutRangesInsideCode(ranges: ranges)
-
-        for range in filteredRanges {
-            let shortname = oldString.substring(with: range)
-            if let emoji = values[shortname] {
-                transformedString = transformedString.replacingOccurrences(of: ":\(shortname):", with: emoji) as NSString
-            }
-        }
-
-        return transformedString as String
-    }
 }

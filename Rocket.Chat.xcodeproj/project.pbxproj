@@ -346,6 +346,7 @@
 		807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */; };
 		807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */; };
 		807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */; };
+		807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53C2044B49800E21429 /* Emojione+Transform.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
 		809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530A1FE2B1AB00833DD2 /* UploadClient.swift */; };
@@ -787,6 +788,7 @@
 		807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceModelHandler.swift; sourceTree = "<group>"; };
 		807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceSpec.swift; sourceTree = "<group>"; };
 		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
+		807FB53C2044B49800E21429 /* Emojione+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emojione+Transform.swift"; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManagerSpec.swift; path = Managers/PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
 		809B530A1FE2B1AB00833DD2 /* UploadClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadClient.swift; sourceTree = "<group>"; };
@@ -1392,6 +1394,7 @@
 				8069D26D1FFF876D00C75926 /* Emoji.swift */,
 				80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */,
 				4199A9881DABCC570035F820 /* Emojione.swift */,
+				807FB53C2044B49800E21429 /* Emojione+Transform.swift */,
 				80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */,
 				80A97EFD200628A300A2774C /* Views */,
 				80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */,
@@ -2683,6 +2686,7 @@
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,
 				419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */,
 				D10E9C201F6434A7007F1796 /* NSRangeExtensions.swift in Sources */,
+				807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */,
 				7798B4191F852D670074B2F4 /* CustomField.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
 				41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */,
