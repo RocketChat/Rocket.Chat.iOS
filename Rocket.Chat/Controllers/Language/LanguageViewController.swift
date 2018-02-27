@@ -25,7 +25,6 @@ final class LanguageViewController: UIViewController {
 
     @objc private func resetLanguage() {
         UserDefaults.standard.removeObject(forKey: "AppleLanguages")
-        UserDefaults.standard.synchronize()
         showMessage()
     }
 
