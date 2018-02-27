@@ -199,6 +199,7 @@
 "myaccount.settings.license" = "Licencja";
 "myaccount.settings.appicon" = "Ikona aplikacji";
 "myaccount.settings.version" = "Wersja: %@ (%@)";
+"blocked.list.empty.title" = "Pusty";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Wybierz ikonę";

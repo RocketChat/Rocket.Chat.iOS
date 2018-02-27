@@ -19,6 +19,10 @@ final class SettingsViewModel {
         return localized("myaccount.settings.title")
     }
 
+    internal var blockedUsersList: String {
+        return "Blocked Users"
+    }
+
     internal var contactus: String {
         return localized("myaccount.settings.contactus")
     }

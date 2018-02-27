@@ -18,6 +18,11 @@ final class SettingsViewController: UITableViewController {
 
     private let viewModel = SettingsViewModel()
 
+    @IBOutlet weak var labelBlockedUsers: UILabel! {
+        didSet {
+            labelBlockedUsers.text = viewModel.blockedUsersList
+        }
+    }
     @IBOutlet weak var labelContactUs: UILabel! {
         didSet {
             labelContactUs.text = viewModel.contactus
@@ -83,15 +88,16 @@ final class SettingsViewController: UITableViewController {
         performSegue(withIdentifier: "AppIcon", sender: nil)
     }
 
+
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            if indexPath.row == 0 {
+            if indexPath.row == 1 {
                 cellContactDidPressed()
-            } else if indexPath.row == 1 {
+            } else if indexPath.row == 2 {
                 cellTermsOfServiceDidPressed()
-            } else if indexPath.row == 3 {
+            } else if indexPath.row == 4 {
                 cellAppIconDidPressed()
             }
         }
