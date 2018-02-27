@@ -13,6 +13,6 @@ final class ChangeLanguageCell: UITableViewCell {
 
     func setLanguageName(for identifier: String) {
         let locale = NSLocale(localeIdentifier: identifier)
-        titleLabel.text = locale.displayName(forKey: .identifier, value: identifier)
+        titleLabel.text = locale.displayName(forKey: .identifier, value: identifier)?.capitalized
     }
 }
