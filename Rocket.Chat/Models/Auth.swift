@@ -167,3 +167,20 @@ extension Auth {
         return .allowed
     }
 }
+
+extension Auth {
+    enum CanUnblockUserResult {
+        case allowed
+        case notActionable
+        case unknown
+    }
+
+    func canUnblockUser(_ user: User) -> CanUnblockUserResult {
+        guard let userIdentifire = user.identifier else { return .unknown }
+        let isBlocked = MessageManager.blockedUsersList.contains(userIdentifire)
+        if !isBlocked {
+            return .notActionable
+        }
+        return .allowed
+    }
+}

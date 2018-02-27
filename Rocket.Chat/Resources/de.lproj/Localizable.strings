@@ -190,6 +190,8 @@
 
 // Members List
 "chat.members.list.title" = "Mitglieder";
+"chat.member.unblock.title" = "Entsperren";
+"chat.member.open.profile.title" = "Profil öffnen";
 
 // Messages List
 "chat.messages.list.title" = "Nachrichten";
