@@ -15,7 +15,7 @@ protocol ChatMessageTextViewProtocol: class {
 
 final class ChatMessageTextView: UIView {
 
-    static let defaultHeight = CGFloat(50)
+    static let defaultHeight = CGFloat(52)
     static let defaultTitleHeight = CGFloat(17)
 
     @IBOutlet weak var imageViewThumbWidthConstraint: NSLayoutConstraint!
@@ -85,12 +85,12 @@ final class ChatMessageTextView: UIView {
     }
 
     static func heightFor(collapsed: Bool, withText text: String?) -> CGFloat {
-        let width = UIScreen.main.bounds.size.width - 80
+        let width = UIScreen.main.bounds.size.width - 140
         var textHeight: CGFloat = 0
 
         if let text = text, text.count > 0 {
             let attributedString = NSMutableAttributedString(string: text).transformMarkdown()
-            textHeight = (attributedString.heightForView(withWidth: width) ?? 0) + 10
+            textHeight += (attributedString.heightForView(withWidth: width) ?? 0) + 4
         }
 
         let totalHeight = defaultTitleHeight + textHeight
