@@ -154,7 +154,7 @@
 "chat.upload.shoot_video" = "Gravar um vídeo";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
-"chat.upload.draw" = "Draw a picture"; // TODO
+"chat.upload.draw" = "Desenhar algo";
 
 // Chat Download
 "chat.download.downloading_file" = "Baixando \"%@\"";
@@ -164,8 +164,8 @@
 "chat.message.open_browser" = "Abrir no Safari";
 
 // Chat Drawing
-"chat.drawing.errorTitle" = "Oops!"; // TODO
-"chat.drawing.messageTitle" = "You have to draw something before sending it."; // TODO
+"chat.drawing.errorTitle" = "Oops!";
+"chat.drawing.messageTitle" = "Você precisa desenhar algo antes de enviar.";
 "chat.drawing.fileName" = "Drawing"; // TODO
 "chat.drawing.settings.opacity" = "Opacity"; // TODO
 "chat.drawing.settings.width" = "Width"; // TODO
