@@ -157,6 +157,7 @@
                         <outlet property="labelApp" destination="Lk4-H3-Y3R" id="jIL-6y-wNg"/>
                         <outlet property="labelContactUs" destination="SsA-Jk-og1" id="BZe-mM-eck"/>
                         <outlet property="labelLicense" destination="kCF-5t-4W3" id="bt0-I5-0WI"/>
+                        <outlet property="labelProfile" destination="v4Z-mC-WTf" id="F5v-mS-hxv"/>
                         <outlet property="labelVersion" destination="vOz-GO-Ifh" id="14X-a4-dRc"/>
                         <segue destination="14p-5u-LKz" kind="show" identifier="AppIcon" id="5Rh-qB-fEf"/>
                     </connections>
@@ -168,7 +169,7 @@
         <!--Edit Profile-->
         <scene sceneID="rNW-HR-C7F">
             <objects>
-                <tableViewController title="Edit Profile" id="MdX-88-2ZI" sceneMemberID="viewController">
+                <tableViewController title="Edit Profile" id="MdX-88-2ZI" customClass="EditProfileTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="SMn-di-20j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -184,6 +185,9 @@
                                         <constraint firstAttribute="width" constant="150" id="j9r-r1-1BQ"/>
                                     </constraints>
                                     <state key="normal" title="Picture"/>
+                                    <connections>
+                                        <action selector="didPressPictureButton:" destination="MdX-88-2ZI" eventType="touchUpInside" id="3eK-Aa-Ghn"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -210,6 +214,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="MdX-88-2ZI" id="12u-rC-RM4"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -235,6 +242,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" textContentType="nickname"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="MdX-88-2ZI" id="1rr-aw-wQ5"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -260,6 +270,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="MdX-88-2ZI" id="Efc-zT-XdO"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -289,6 +302,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="MdX-88-2ZI" id="qpO-Tp-RgK"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -314,6 +330,9 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="MdX-88-2ZI" id="XkR-Fr-jRe"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -333,8 +352,20 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Edit Profile" id="PfG-WE-aXd">
-                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="bkN-sd-siR"/>
+                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="bkN-sd-siR">
+                            <connections>
+                                <action selector="saveProfile:" destination="MdX-88-2ZI" id="hJd-KA-S8n"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="email" destination="8e8-Ux-MZf" id="VfH-Lj-PNU"/>
+                        <outlet property="name" destination="yDN-bF-Vmu" id="2eI-KR-Eex"/>
+                        <outlet property="newPassword" destination="uVe-0p-QKg" id="84R-fe-l7h"/>
+                        <outlet property="passwordConfirmation" destination="DX6-bF-5hx" id="Czu-Ne-How"/>
+                        <outlet property="picture" destination="Idc-3J-DI4" id="FML-Z9-tdm"/>
+                        <outlet property="username" destination="wls-OZ-1ZV" id="AgF-EO-95F"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="q8D-7Z-aMs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

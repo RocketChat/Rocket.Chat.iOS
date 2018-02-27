@@ -92,7 +92,7 @@ final class PreferencesViewModel {
         case 0: return 1
         case 1: return (canChangeAppIcon ? 2 : 1)
         case 2: return 2
-        case 2: return (canOpenFLEX ? 1 : 0)
+        case 3: return (canOpenFLEX ? 1 : 0)
         default: return 0
         }
     }
