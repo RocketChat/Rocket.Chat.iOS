@@ -197,10 +197,10 @@
 "chat.messages.starred.list.title" = "Mensagens Favoritas";
 
 // Settings
-"myaccount.settings.title" = "Configurações"; // TODO: new text: Preferences
+"myaccount.settings.title" = "Configurações";
 "myaccount.settings.contactus" = "Entre em contato";
 "myaccount.settings.license" = "Licença";
-"myaccount.settings.language" = "Language"; // TODO
+"myaccount.settings.language" = "Idioma";
 "myaccount.settings.appicon" = "Ícone do App";
 "myaccount.settings.version" = "Versão: %@ (%@)";
 
@@ -211,6 +211,6 @@
 "myaccount.settings.changeicon.iosversion" = "Esta funcionalidade está disponível somente para usuários com versão do iOS superior a 10.3.";
 
 // Change Language
-"myaccount.settings.language.title" = "Change Language"; // TODO
-"myaccount.settings.language.reset" = "Reset to Default"; // TODO
-"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+  before the new settings will take effect."; // TODO
+"myaccount.settings.language.title" = "Alterar Idioma";
+"myaccount.settings.language.reset" = "Restaurar o Padrão";
+"myaccount.settings.language.message" = "Você mudou o idioma. Você precisa fechar o aplicativo e abrir novamente para que as alterações tenham efeito.";
