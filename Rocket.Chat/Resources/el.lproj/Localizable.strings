@@ -194,6 +194,7 @@
 // Settings
 "myaccount.settings.title" = "Ρυθμίσεις";
 "myaccount.settings.contactus" = "Επικοινωνήστε μαζί μας";
+"myaccount.settings.profile" = "Profile"; // TODO: 
 "myaccount.settings.license" = "Άδεια";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";

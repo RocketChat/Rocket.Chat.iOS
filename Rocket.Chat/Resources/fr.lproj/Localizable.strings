@@ -200,6 +200,7 @@
 // Settings
 "myaccount.settings.title" = "Réglages"; // TODO: new text: Preferences
 "myaccount.settings.contactus" = "Contactez-nous";
+"myaccount.settings.profile" = "Profile"; // TODO: 
 "myaccount.settings.license" = "Licence";
 "myaccount.settings.appicon" = "Icône de l'application";
 "myaccount.settings.version" = "Version : %@ (%@)";

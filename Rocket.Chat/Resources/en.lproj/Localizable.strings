@@ -201,6 +201,7 @@
 // Settings
 "myaccount.settings.title" = "Preferences";
 "myaccount.settings.contactus" = "Contact us";
+"myaccount.settings.profile" = "Profile";
 "myaccount.settings.license" = "License";
 "myaccount.settings.appicon" = "Application Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";

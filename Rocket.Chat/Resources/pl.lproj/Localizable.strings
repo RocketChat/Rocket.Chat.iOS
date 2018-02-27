@@ -200,6 +200,7 @@
 // Settings
 "myaccount.settings.title" = "Preferencje";
 "myaccount.settings.contactus" = "Kontakt";
+"myaccount.settings.profile" = "Profile"; // TODO: 
 "myaccount.settings.license" = "Licencja";
 "myaccount.settings.appicon" = "Ikona aplikacji";
 "myaccount.settings.version" = "Wersja: %@ (%@)";
