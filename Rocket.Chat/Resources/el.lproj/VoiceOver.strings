@@ -1,0 +1,25 @@
+/* 
+  VoiceOver.strings
+  Rocket.Chat
+
+  Created by Matheus Cardoso on 12/5/17.
+  Copyright © 2017 Rocket.Chat. All rights reserved.
+*/
+
+// MARK: Auth
+"auth.connect.urlfield.label" = "URL Εξυπηρετητή";
+"auth.connect.urlfield.hint" = "Εισάγετε εδώ το URL του εξυπηρετητή σας.";
+
+"auth.authentication.emailorusername.label" = "Email ή Όνομα χρήστη";
+"auth.authentication.emailorusername.hint" = "Εισάγετε εδώ το email ή το Όνομα χρήστη σας.";
+"auth.authentication.password.label" = "Συνθηματικό";
+"auth.authentication.password.label" = "Εισάγετε εδώ το Συνθηματικό σας.";
+
+// MARK: Subscriptions
+"subscriptions.main.userview.label" = "Πληροφορία Συνόδου";
+"subscriptions.main.userview.value" = "Εξυπηρετητής: %@. Χρήστης: %@. Κατάσταση: %@.";
+"subscriptions.main.userview.hint" = "Πατήστε δύο φορές για αλλαγή κατάστασης.";
+
+// MARK: Message
+"message.label" = "Μήνυμα από %@ at %@.";
+"message.hint" = "Αντιδράσεις: %@";
