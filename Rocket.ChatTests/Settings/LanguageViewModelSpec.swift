@@ -16,6 +16,7 @@ class LanguageViewModelSpec: XCTestCase {
 
     func testCellIdentifier() {
         XCTAssert(model.cellIdentifier == "changeLanguageCell", "incorrect cell's identifier")
+        XCTAssert(model.resetCellIdentifier == "changeLanguageResetCell", "incorrect cell's identifier")
     }
 
     func testAvailableLanguages() {

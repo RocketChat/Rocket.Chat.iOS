@@ -10,6 +10,7 @@ import Foundation
 
 final class LanguageViewModel {
     let cellIdentifier = "changeLanguageCell"
+    let resetCellIdentifier = "changeLanguageResetCell"
 
     internal var languages: [String] {
         return Bundle.main.localizations.filter({ code -> Bool in

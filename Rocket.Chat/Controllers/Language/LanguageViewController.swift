@@ -12,22 +12,10 @@ final class LanguageViewController: UIViewController {
     private let viewModel = LanguageViewModel()
     private let kAppLanguagesKey = "AppleLanguages"
 
-    @IBOutlet weak var resetButton: UIButton! {
-        didSet {
-            resetButton.setTitle(viewModel.resetLabel, for: .normal)
-            resetButton.addTarget(self, action: #selector(resetLanguage), for: .touchUpInside)
-        }
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
         title = viewModel.title
-    }
-
-    @objc private func resetLanguage() {
-        UserDefaults.standard.removeObject(forKey: kAppLanguagesKey)
-        showMessage()
     }
 
     private func showMessage() {
@@ -38,11 +26,25 @@ final class LanguageViewController: UIViewController {
 }
 
 extension LanguageViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
+    }
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.languages.count
+        return section == 0 ? viewModel.languages.count : 1
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.section == 1 {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.resetCellIdentifier, for: indexPath) as? ChangeLanguageResetCell else {
+                fatalError("Could not dequeue reusable cell with identifier \(viewModel.cellIdentifier)")
+            }
+
+            cell.resetLabel.text = viewModel.resetLabel
+
+            return cell
+        }
+
         guard let cell = tableView.dequeueReusableCell(withIdentifier: viewModel.cellIdentifier, for: indexPath) as? ChangeLanguageCell else {
             fatalError("Could not dequeue reusable cell with identifier \(viewModel.cellIdentifier)")
         }
@@ -63,10 +65,17 @@ extension LanguageViewController: UITableViewDataSource {
 
 extension LanguageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let lang = viewModel.languages[indexPath.row]
+        if indexPath.section == 0 {
+            let lang = viewModel.languages[indexPath.row]
 
-        UserDefaults.standard.set([lang], forKey: kAppLanguagesKey)
+            UserDefaults.standard.set([lang], forKey: kAppLanguagesKey)
+        } else {
+            UserDefaults.standard.removeObject(forKey: kAppLanguagesKey)
+            showMessage()
+        }
+
         showMessage()
         tableView.deselectRow(at: indexPath, animated: true)
+        tableView.reloadData()
     }
 }
