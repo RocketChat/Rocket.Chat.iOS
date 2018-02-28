@@ -22,16 +22,23 @@ extension NSAttributedString {
 
             guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }
 
-            let matches = regex.matches(in: attributedString.string, options: [], range: NSRange(location: 0, length: attributedString.length))
+            let ranges = regex.matches(
+                in: attributedString.string,
+                options: [],
+                range: NSRange(location: 0, length: attributedString.length)
+            ).map {
+                $0.range(at: 0)
+            }
 
-            // ranges subtracting lengths of previous ranges
-            let ranges = matches.map { $0.range }.reduce([NSRange](), { total, current in
+            // exclude matches inside code tags
+            let filteredRanges = attributedString.string.filterOutRangesInsideCode(ranges: ranges)
+            let transformedRanges = filteredRanges.reduce([NSRange](), { total, current in // subtract previous ranges lengths from each range location
                 let offset = total.reduce(0, { $0 + $1.length - 1 })
                 let range = NSRange(location: current.location - offset, length: current.length)
                 return total + [range]
             })
 
-            for range in ranges {
+            for range in transformedRanges {
                 let imageAttachment = NSTextAttachment()
                 imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
                 imageAttachment.contents = imageUrl.data(using: .utf8)
@@ -41,5 +48,25 @@ extension NSAttributedString {
 
             return attributedString
         }
+    }
+}
+
+extension String {
+    func codeRanges() -> [NSRange] {
+        let codeRegex = try? NSRegularExpression(pattern: "(```)(?:[a-zA-Z]+)?((?:.|\r|\n)*?)(```)", options: [.anchorsMatchLines])
+        let codeMatches = codeRegex?.matches(in: self, options: [], range: NSRange(location: 0, length: count)) ?? []
+        return codeMatches.map { $0.range(at: 0) }
+    }
+
+    func filterOutRangesInsideCode(ranges: [NSRange]) -> [NSRange] {
+        let codeRanges = self.codeRanges()
+
+        let filteredRanges = ranges.filter { range in
+            !codeRanges.contains { codeRange in
+                NSIntersectionRange(codeRange, range).length == range.length
+            }
+        }
+
+        return filteredRanges
     }
 }
