@@ -37,15 +37,36 @@ extension User: ModelMappeable {
             self.utcOffset = utcOffset
         }
 
-        if let emails = values["emails"].array {
-            self.emails.append(contentsOf: emails.flatMap { emailJSON -> Email? in
+        if let emailsRaw = values["emails"].array {
+            let emails = emailsRaw.flatMap { emailRaw -> Email? in
                 let email = Email(value: [
-                    "email": emailJSON["address"].stringValue,
-                    "verified": emailJSON["verified"].boolValue
+                    "email": emailRaw["address"].stringValue,
+                    "verified": emailRaw["verified"].boolValue
                     ])
+
                 guard !email.email.isEmpty else { return nil }
+
                 return email
-            })
+            }
+
+            if let realm = realm {
+                let appendEmailsUsingRealmObjects = {
+                    emails.forEach({ email in
+                        let realmEmail = realm.create(Email.self, value: email, update: true)
+                        self.emails.append(realmEmail)
+                    })
+                }
+
+                if realm.isInWriteTransaction {
+                    appendEmailsUsingRealmObjects()
+                } else {
+                    try? realm.write {
+                        appendEmailsUsingRealmObjects()
+                    }
+                }
+            } else {
+                self.emails.append(contentsOf: emails)
+            }
         }
     }
 }
