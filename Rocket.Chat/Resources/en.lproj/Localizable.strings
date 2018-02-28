@@ -214,4 +214,4 @@
 // Change Language
 "myaccount.settings.language.title" = "Change Language";
 "myaccount.settings.language.reset" = "Reset to Default";
-"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+  before the new settings will take effect.";
+"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+ before the new settings will take effect.";
