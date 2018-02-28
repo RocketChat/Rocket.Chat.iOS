@@ -112,6 +112,9 @@ final class ChatViewController: SLKTextViewController {
             if let oldValue = oldValue {
                 if oldValue.identifier != subscription.identifier {
                     emptySubscriptionState()
+                } else if self.closeSidebarAfterSubscriptionUpdate {
+                    MainChatViewController.closeSideMenuIfNeeded()
+                    self.closeSidebarAfterSubscriptionUpdate = false
                 }
             } else {
                 emptySubscriptionState()
