@@ -29,30 +29,25 @@ class EditProfileTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let userId = api?.userId {
-            fetchUserData(userId: userId)
-        }
+        fetchUserData()
     }
 
     // MARK: Data handling
 
-    func fetchUserData(userId: String) {
-        if let userId = api?.userId {
-            let meRequest = UserInfoRequest(userId: userId)
-            api?.fetch(meRequest, succeeded: { (result) in
-                self.user = result.user
-                self.isLoading = false
-                self.tableView.reloadData()
-            }, errored: { (error) in
-                print(error)
-            })
-        }
+    func fetchUserData() {
+        let meRequest = UserMeRequest()
+        api?.fetch(meRequest, succeeded: { (result) in
+            self.user = result.user
+            self.isLoading = false
+            self.tableView.reloadData()
+        }, errored: { (error) in
+            print(error)
+        })
     }
 
     func bindUserData() {
         DispatchQueue.main.async {
-            self.name.text = self.user?.displayName()
+            self.name.text = self.user?.name
             self.username.text = self.user?.username
             self.email.text = self.user?.emails.first?.email
         }
