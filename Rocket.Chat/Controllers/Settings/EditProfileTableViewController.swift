@@ -17,18 +17,45 @@ class EditProfileTableViewController: UITableViewController {
     @IBOutlet weak var passwordConfirmation: UITextField!
     @IBOutlet weak var picture: UIButton!
 
+    let api = API.current()
     var isLoading = true
+    var user: User? = User() {
+        didSet {
+            bindUserData()
+        }
+    }
 
     // MARK: View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(EditProfileTableViewController.reloadThatShit), userInfo: nil, repeats: false)
+
+        if let userId = api?.userId {
+            fetchUserData(userId: userId)
+        }
     }
 
-    @objc func reloadThatShit() {
-        isLoading = false
-        tableView.reloadData()
+    // MARK: Data handling
+
+    func fetchUserData(userId: String) {
+        if let userId = api?.userId {
+            let meRequest = UserInfoRequest(userId: userId)
+            api?.fetch(meRequest, succeeded: { (result) in
+                self.user = result.user
+                self.isLoading = false
+                self.tableView.reloadData()
+            }, errored: { (error) in
+                print(error)
+            })
+        }
+    }
+
+    func bindUserData() {
+        DispatchQueue.main.async {
+            self.name.text = self.user?.displayName()
+            self.username.text = self.user?.username
+            self.email.text = self.user?.emails.first?.email
+        }
     }
 
     // MARK: Actions
