@@ -15,7 +15,6 @@ class EditProfileTableViewController: UITableViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var newPassword: UITextField!
     @IBOutlet weak var passwordConfirmation: UITextField!
-    @IBOutlet weak var picture: UIButton!
 
     let api = API.current()
     var isLoading = true
@@ -35,7 +34,7 @@ class EditProfileTableViewController: UITableViewController {
     // MARK: Data handling
 
     func fetchUserData() {
-        let meRequest = UserMeRequest()
+        let meRequest = MeRequest()
         api?.fetch(meRequest, succeeded: { (result) in
             self.user = result.user
             self.isLoading = false
@@ -56,10 +55,6 @@ class EditProfileTableViewController: UITableViewController {
     // MARK: Actions
 
     @IBAction func saveProfile(_ sender: UIBarButtonItem) {
-
-    }
-
-    @IBAction func didPressPictureButton(_ sender: UIButton) {
 
     }
 
