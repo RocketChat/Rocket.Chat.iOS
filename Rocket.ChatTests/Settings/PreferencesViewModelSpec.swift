@@ -50,7 +50,7 @@ class PreferencesViewModelSpec: XCTestCase {
 
     func testNumberOfRowsInSection() {
         XCTAssertTrue(model.numberOfSections == 3, "incorrect sections number")
-        XCTAssertTrue(model.numberOfRowsInSection(0) == 2, "incorrect rows number")
+        XCTAssertTrue(model.numberOfRowsInSection(0) == 3, "incorrect rows number")
         XCTAssertTrue(model.numberOfRowsInSection(1) == 2, "incorrect rows number")
         XCTAssertTrue(model.numberOfRowsInSection(2) == 1, "incorrect rows number")
     }
