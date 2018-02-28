@@ -208,9 +208,10 @@
 "chat.messages.starred.list.title" = "Mensagens Favoritas";
 
 // Settings
-"myaccount.settings.title" = "Configurações"; // TODO: new text: Preferences
+"myaccount.settings.title" = "Configurações";
 "myaccount.settings.contactus" = "Entre em contato";
 "myaccount.settings.license" = "Licença";
+"myaccount.settings.language" = "Idioma";
 "myaccount.settings.appicon" = "Ícone do App";
 "myaccount.settings.version" = "Versão: %@ (%@)";
 
@@ -219,3 +220,8 @@
 "myaccount.settings.changeicon.header" = "Você pode escolher o ícone do Rocket.Chat+ para mudar a aparência em sua home screen. Escolha o ícone abaixo que você mais gostar.";
 "myaccount.settings.changeicon.errortitle" = "Não podemos alterar seu ícone";
 "myaccount.settings.changeicon.iosversion" = "Esta funcionalidade está disponível somente para usuários com versão do iOS superior a 10.3.";
+
+// Change Language
+"myaccount.settings.language.title" = "Alterar Idioma";
+"myaccount.settings.language.reset" = "Restaurar o Padrão";
+"myaccount.settings.language.message" = "Você mudou o idioma. Você precisa fechar o aplicativo e abrir novamente para que as alterações tenham efeito.";
