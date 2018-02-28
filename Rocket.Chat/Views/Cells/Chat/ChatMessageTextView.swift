@@ -85,12 +85,13 @@ final class ChatMessageTextView: UIView {
     }
 
     static func heightFor(collapsed: Bool, withText text: String?) -> CGFloat {
-        let width = UIScreen.main.bounds.size.width - 140
-        var textHeight: CGFloat = 0
+        let width = UIScreen.main.bounds.size.width - 73
+        var textHeight: CGFloat = 1
 
         if let text = text, text.count > 0 {
-            let attributedString = NSMutableAttributedString(string: text).transformMarkdown()
-            textHeight += (attributedString.heightForView(withWidth: width) ?? 0) + 4
+            let attributedString = NSMutableAttributedString(string: text)
+            attributedString.setFont(.systemFont(ofSize: 13.0))
+            textHeight += (attributedString.transformMarkdown().heightForView(withWidth: width) ?? 0)
         }
 
         let totalHeight = defaultTitleHeight + textHeight
