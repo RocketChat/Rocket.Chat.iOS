@@ -119,6 +119,7 @@
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
 "chat.loading_messages" = "Ładowanie wiadomości...";
+"chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
 "chat.message.actions.react" = "Dodaje reakcję";
@@ -153,6 +154,7 @@
 "chat.upload.shoot_video" = "Nagraj wideo";
 "chat.upload.choose_from_library" = "Wybierz plik z biblioteki";
 "chat.upload.import_file" = "Importuj plik z...";
+"chat.upload.draw" = "Narysuj obrazek";
 
 // Chat Download
 "chat.download.downloading_file" = "Pobieranie \"%@\"";
@@ -160,6 +162,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Dotknij aby otworzyć plik";
 "chat.message.open_browser" = "Otwórz w przeglądarce";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Ups!";
+"chat.drawing.messageTitle" = "Przed wysłaniem musisz coś narysować.";
+"chat.drawing.fileName" = "Rysunek";
+"chat.drawing.settings.opacity" = "Nieprzezroczystość";
+"chat.drawing.settings.width" = "Szerokość";
+"chat.drawing.settings.color.selected" = "Wybrany kolor";
+"chat.drawing.settings.color.others" = "Wybierz kolor poniżej:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";

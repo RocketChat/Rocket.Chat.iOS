@@ -119,6 +119,7 @@
 "chat.read_only" = "This room is read only";
 "chat.muted" = "You have been muted";
 "chat.loading_messages" = "Loading messages...";
+"chat.unread_separator" = "new messages";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Add Reaction";
@@ -154,6 +155,7 @@
 "chat.upload.shoot_video" = "Shoot Video";
 "chat.upload.choose_from_library" = "Choose From Library";
 "chat.upload.import_file" = "Import File From...";
+"chat.upload.draw" = "Draw something";
 
 // Chat Download
 "chat.download.downloading_file" = "Downloading \"%@\"";
@@ -161,6 +163,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Tap to open the file";
 "chat.message.open_browser" = "Open in Browser";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!";
+"chat.drawing.messageTitle" = "You have to draw something before sending it.";
+"chat.drawing.fileName" = "Drawing";
+"chat.drawing.settings.opacity" = "Opacity";
+"chat.drawing.settings.width" = "Width";
+"chat.drawing.settings.color.selected" = "Selected color";
+"chat.drawing.settings.color.others" = "Choose color below:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Room name changed to: %@ by %@";

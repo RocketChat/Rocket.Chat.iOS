@@ -11,6 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 extension Attachment: ModelMappeable {
+
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
             self.identifier = String.random(30)
@@ -21,7 +22,7 @@ extension Attachment: ModelMappeable {
         }
 
         if let title = values["title"].string {
-            self.title = title
+            self.title = title.removingNewLines()
         }
 
         if let titleLink = values["title_link"].string {
@@ -77,4 +78,5 @@ extension Attachment: ModelMappeable {
 
         return encoded.joined(separator: "/")
     }
+
 }

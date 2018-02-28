@@ -119,6 +119,7 @@
 "chat.read_only" = "Tato místnost je pouze pro čtení";
 "chat.muted" = "You have been muted";
 "chat.loading_messages" = "Loading messages..."; //TODO
+"chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
 "chat.message.actions.react" = "Add Reaction";
@@ -153,6 +154,7 @@
 "chat.upload.shoot_video" = "Shoot Video";
 "chat.upload.choose_from_library" = "Vybrat z knihovny";
 "chat.upload.import_file" = "Importovat soubor z...";
+"chat.upload.draw" = "Draw a picture"; // TODO
 
 // Chat Download
 "chat.download.downloading_file" = "Stahuji \"%@\"";
@@ -160,6 +162,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Klikněte pro otevření souboru";
 "chat.message.open_browser" = "Open in Browser"; //TODO
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!"; // TODO
+"chat.drawing.messageTitle" = "You have to draw something before sending it."; // TODO
+"chat.drawing.fileName" = "Drawing"; // TODO
+"chat.drawing.settings.opacity" = "Opacity"; // TODO
+"chat.drawing.settings.width" = "Width"; // TODO
+"chat.drawing.settings.color.selected" = "Selected color"; // TODO
+"chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Jméno místnosti bylo změněno: %@ by %@";
