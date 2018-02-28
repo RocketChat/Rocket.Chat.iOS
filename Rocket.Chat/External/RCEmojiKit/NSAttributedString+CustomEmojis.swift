@@ -61,12 +61,12 @@ extension String {
     func filterOutRangesInsideCode(ranges: [NSRange]) -> [NSRange] {
         let codeRanges = self.codeRanges()
 
-        let filteredMatches = ranges.filter { range in
+        let filteredRanges = ranges.filter { range in
             !codeRanges.contains { codeRange in
                 NSIntersectionRange(codeRange, range).length == range.length
             }
         }
 
-        return filteredMatches
+        return filteredRanges
     }
 }
