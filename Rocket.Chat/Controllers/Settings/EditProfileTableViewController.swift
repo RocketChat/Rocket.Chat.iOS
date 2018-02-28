@@ -17,10 +17,18 @@ class EditProfileTableViewController: UITableViewController {
     @IBOutlet weak var passwordConfirmation: UITextField!
     @IBOutlet weak var picture: UIButton!
 
+    var isLoading = true
+
     // MARK: View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        Timer.scheduledTimer(timeInterval: 3, target: self, selector: #selector(EditProfileTableViewController.reloadThatShit), userInfo: nil, repeats: false)
+    }
+
+    @objc func reloadThatShit() {
+        isLoading = false
+        tableView.reloadData()
     }
 
     // MARK: Actions
@@ -31,6 +39,12 @@ class EditProfileTableViewController: UITableViewController {
 
     @IBAction func didPressPictureButton(_ sender: UIButton) {
 
+    }
+
+    // MARK: UITableViewDataSource
+
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return isLoading ? 0 : 2
     }
 
 }
