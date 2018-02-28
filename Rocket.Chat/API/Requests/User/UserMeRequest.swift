@@ -20,20 +20,9 @@ extension APIResult where T == UserMeRequest {
     }
 
     var user: User? {
+        guard let raw = userRaw else { return nil }
         let user = User()
-        user.identifier = userRaw?["_id"].string
-        user.name = userRaw?["name"].string
-        user.username = userRaw?["username"].string
-
-        guard let emails = userRaw?["emails"].array else { return user }
-        user.emails.append(contentsOf: emails.flatMap { (emailJSON) -> Email? in
-            let email = Email(value: [
-                "email": emailJSON["address"].stringValue,
-                "verified": emailJSON["verified"].boolValue
-                ])
-            guard !email.email.isEmpty else { return nil }
-            return email
-        })
+        user.map(raw, realm: nil)
 
         return user
     }

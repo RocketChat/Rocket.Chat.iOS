@@ -36,5 +36,16 @@ extension User: ModelMappeable {
         if let utcOffset = values["utcOffset"].double {
             self.utcOffset = utcOffset
         }
+
+        if let emails = values["emails"].array {
+            self.emails.append(contentsOf: emails.flatMap { emailJSON -> Email? in
+                let email = Email(value: [
+                    "email": emailJSON["address"].stringValue,
+                    "verified": emailJSON["verified"].boolValue
+                    ])
+                guard !email.email.isEmpty else { return nil }
+                return email
+            })
+        }
     }
 }
