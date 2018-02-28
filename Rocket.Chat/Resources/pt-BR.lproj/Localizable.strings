@@ -154,6 +154,7 @@
 "chat.upload.shoot_video" = "Gravar um vídeo";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
+"chat.upload.draw" = "Desenhar algo";
 
 // Chat Download
 "chat.download.downloading_file" = "Baixando \"%@\"";
@@ -161,6 +162,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Toque para abrir";
 "chat.message.open_browser" = "Abrir no Safari";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!";
+"chat.drawing.messageTitle" = "Você precisa desenhar algo antes de enviar.";
+"chat.drawing.fileName" = "Drawing"; // TODO
+"chat.drawing.settings.opacity" = "Opacity"; // TODO
+"chat.drawing.settings.width" = "Width"; // TODO
+"chat.drawing.settings.color.selected" = "Selected color"; // TODO
+"chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";
