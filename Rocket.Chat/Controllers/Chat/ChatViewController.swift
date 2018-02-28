@@ -85,9 +85,7 @@ final class ChatViewController: SLKTextViewController {
                 return
             }
 
-            dataController.unreadSeparator = false
-            dataController.dismissUnreadSeparator = false
-            dataController.lastSeen = subscription.lastSeen ?? Date()
+            resetUnreadSeparator()
 
             if !SocketManager.isConnected() {
                 socketDidDisconnect(socket: SocketManager.sharedInstance)
@@ -341,6 +339,14 @@ final class ChatViewController: SLKTextViewController {
             DraftMessageManager.update(draftMessage: "", for: subscription)
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         }
+    }
+
+    func resetUnreadSeparator() {
+        dataController.dismissUnreadSeparator = true
+        syncCollectionView()
+        dataController.unreadSeparator = false
+        dataController.dismissUnreadSeparator = false
+        dataController.lastSeen = subscription?.lastSeen ?? Date()
     }
 
     // MARK: SlackTextViewController
