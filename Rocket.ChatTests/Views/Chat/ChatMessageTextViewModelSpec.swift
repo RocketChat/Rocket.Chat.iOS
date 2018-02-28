@@ -32,7 +32,11 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         attachment.title = "Message title"
         let model = ChatMessageTextViewModel(withAttachment: attachment)
 
-        XCTAssert(model.title == attachment.title, "Should have a title")
+        XCTAssert(model.title == "▼ Message title", "ucollapsed test is correct")
+
+        attachment.collapsed = true
+
+        XCTAssert(model.title == "▶ Message title", "collapsed test is correct")
     }
 
     func testText() {
@@ -40,7 +44,8 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         attachment.text = "Lorem ipsum"
         let model = ChatMessageTextViewModel(withAttachment: attachment)
 
-        XCTAssert(model.text == attachment.text, "Should have a text")
+        XCTAssert(model.text == "Lorem ipsum", "text is correct")
+
     }
 
     func testTextTitleLink() {
@@ -99,10 +104,10 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         XCTAssertFalse(model.collapsed)
     }
 
-    func testToggleCollpased() {
+    func testToggleCollapsed() {
         let attachment = Attachment()
         let model = ChatMessageTextViewModel(withAttachment: attachment)
-        model.toggleCollpase()
+        model.toggleCollapse()
         XCTAssertTrue(model.collapsed)
     }
 

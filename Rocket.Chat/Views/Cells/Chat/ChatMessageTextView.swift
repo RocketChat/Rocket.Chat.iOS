@@ -9,13 +9,13 @@
 import UIKit
 
 protocol ChatMessageTextViewProtocol: class {
-    func viewDidCollpaseChange(view: UIView)
+    func viewDidCollapseChange(view: UIView)
     func openFileFromCell(attachment: Attachment)
 }
 
 final class ChatMessageTextView: UIView {
 
-    static let defaultHeight = CGFloat(50)
+    static let defaultHeight = CGFloat(52)
     static let defaultTitleHeight = CGFloat(17)
 
     @IBOutlet weak var imageViewThumbWidthConstraint: NSLayoutConstraint!
@@ -32,7 +32,7 @@ final class ChatMessageTextView: UIView {
 
     weak var delegate: ChatMessageTextViewProtocol?
 
-    var viewModel: ChatMessageTextViewModel? {
+    var viewModel: ChatMessageTextViewModelProtocol? {
         didSet {
             prepareView()
         }
@@ -44,7 +44,7 @@ final class ChatMessageTextView: UIView {
         return UITapGestureRecognizer(target: self, action: #selector(viewDidTapped(_:)))
     }()
 
-    private func prepareView() {
+    func prepareView() {
         addGestureIfNeeded()
         updateLeftBorder()
         updateLabels()
@@ -85,22 +85,25 @@ final class ChatMessageTextView: UIView {
     }
 
     static func heightFor(collapsed: Bool, withText text: String?) -> CGFloat {
-        guard let text = text, text != "", collapsed else {
-            return self.defaultHeight
+        let width = UIScreen.main.bounds.size.width - 73
+        var textHeight: CGFloat = 1
+
+        if let text = text, text.count > 0 {
+            let attributedString = NSMutableAttributedString(string: text)
+            attributedString.setFont(.systemFont(ofSize: 13.0))
+            textHeight += (attributedString.transformMarkdown().heightForView(withWidth: width) ?? 0)
         }
 
-        let attributedString = NSMutableAttributedString(string: text).transformMarkdown()
+        let totalHeight = defaultTitleHeight + textHeight
 
-        let fullWidth = UIScreen.main.bounds.size.width
-        let height = attributedString.heightForView(withWidth: fullWidth - 80)
-        return max(self.defaultHeight, height ?? 0) + 10
+        return collapsed ? min(totalHeight, defaultHeight) : totalHeight
     }
 
     // MARK: Actions
 
     @objc func viewDidTapped(_ sender: Any) {
-        viewModel?.toggleCollpase()
-        delegate?.viewDidCollpaseChange(view: self)
+        viewModel?.toggleCollapse()
+        delegate?.viewDidCollapseChange(view: self)
 
         if let attachment = viewModel?.attachment {
             if attachment.titleLinkDownload {
