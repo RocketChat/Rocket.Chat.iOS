@@ -385,6 +385,7 @@
 		897083D71F8CF08100233561 /* FormTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897083D21F8CF08100233561 /* FormTableViewCell.swift */; };
 		89AEB7F81F7D225D00112A09 /* SubscriptionCreateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AEB7F71F7D225D00112A09 /* SubscriptionCreateRequest.swift */; };
 		89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFF3C71F94374D00D07A30 /* NewRoomViewControllerSpec.swift */; };
+		992E3A512046CE9D00A6D861 /* UserMeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 992E3A502046CE9D00A6D861 /* UserMeRequest.swift */; };
 		993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */; };
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
 		99D888F82045DFC500E51306 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */; };
@@ -840,6 +841,7 @@
 		897083D21F8CF08100233561 /* FormTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTableViewCell.swift; sourceTree = "<group>"; };
 		89AEB7F71F7D225D00112A09 /* SubscriptionCreateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionCreateRequest.swift; sourceTree = "<group>"; };
 		89AFF3C71F94374D00D07A30 /* NewRoomViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewRoomViewControllerSpec.swift; path = Controllers/NewRoomViewControllerSpec.swift; sourceTree = "<group>"; };
+		992E3A502046CE9D00A6D861 /* UserMeRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMeRequest.swift; sourceTree = "<group>"; };
 		993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DraftMessageManagerSpec.swift; path = Managers/DraftMessageManagerSpec.swift; sourceTree = "<group>"; };
 		99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DraftMessageManager.swift; path = Managers/DraftMessageManager.swift; sourceTree = "<group>"; };
 		99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTableViewController.swift; path = Controllers/Settings/EditProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -1985,6 +1987,7 @@
 			children = (
 				80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */,
 				99D888FA204623A900E51306 /* UserUpdateRequest.swift */,
+				992E3A502046CE9D00A6D861 /* UserMeRequest.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -2775,6 +2778,7 @@
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
 				35E892C6201CDCBC00B4BE5A /* OAuthManager.swift in Sources */,
 				897083D51F8CF08100233561 /* TextFieldTableViewCell.swift in Sources */,
+				992E3A512046CE9D00A6D861 /* UserMeRequest.swift in Sources */,
 				802498EE1F7A8380005477EC /* MeRequest.swift in Sources */,
 				897083D71F8CF08100233561 /* FormTableViewCell.swift in Sources */,
 				412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */,
