@@ -101,7 +101,7 @@ class EditProfileTableViewController: UITableViewController {
             }
         }
 
-        let updateUserRequest = UserUpdateRequest(userId: userId, user: user, password: password)
+        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
         api?.fetch(updateUserRequest, succeeded: { result in
             print(result)
         }, errored: { error in

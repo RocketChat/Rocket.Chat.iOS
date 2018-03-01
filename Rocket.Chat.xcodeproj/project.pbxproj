@@ -388,7 +388,7 @@
 		993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */; };
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
 		99D888F82045DFC500E51306 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */; };
-		99D888FB204623A900E51306 /* UserUpdateRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888FA204623A900E51306 /* UserUpdateRequest.swift */; };
+		99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888FA204623A900E51306 /* UpdateUserRequest.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
 		B5893BF41F6C4A5F00365768 /* UserReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */; };
 		B5893BF61F6C4B1D00365768 /* UserReviewManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */; };
@@ -843,7 +843,7 @@
 		993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DraftMessageManagerSpec.swift; path = Managers/DraftMessageManagerSpec.swift; sourceTree = "<group>"; };
 		99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DraftMessageManager.swift; path = Managers/DraftMessageManager.swift; sourceTree = "<group>"; };
 		99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTableViewController.swift; path = Controllers/Settings/EditProfileTableViewController.swift; sourceTree = "<group>"; };
-		99D888FA204623A900E51306 /* UserUpdateRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserUpdateRequest.swift; sourceTree = "<group>"; };
+		99D888FA204623A900E51306 /* UpdateUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserRequest.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TintedTextField.swift; sourceTree = "<group>"; };
 		AAC8D92081FF042E089F3063 /* Pods-Rocket.Chat.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.beta.xcconfig"; sourceTree = "<group>"; };
 		B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserReviewManager.swift; path = Managers/UserReviewManager.swift; sourceTree = "<group>"; };
@@ -1984,7 +1984,7 @@
 			isa = PBXGroup;
 			children = (
 				80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */,
-				99D888FA204623A900E51306 /* UserUpdateRequest.swift */,
+				99D888FA204623A900E51306 /* UpdateUserRequest.swift */,
 			);
 			path = User;
 			sourceTree = "<group>";
@@ -2815,7 +2815,7 @@
 				35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */,
 				8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */,
 				4180204F1E718E370012A092 /* ChannelInfoViewController.swift in Sources */,
-				99D888FB204623A900E51306 /* UserUpdateRequest.swift in Sources */,
+				99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */,
 				8013F8721FD6B5B000EE1A4E /* CommandsClient.swift in Sources */,
 				4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */,
 				8020CCF01FEAB4A7003424F4 /* EmojiPicker.swift in Sources */,
