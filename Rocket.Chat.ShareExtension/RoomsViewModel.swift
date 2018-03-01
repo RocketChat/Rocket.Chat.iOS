@@ -49,4 +49,8 @@ extension RoomsViewModel {
     func cellForRowAt(_ indexPath: IndexPath) -> RoomCell {
         return sections[indexPath.section].roomCells[indexPath.row]
     }
+
+    func titleForHeaderInSection(_ section: Int) -> String {
+        return sections[section].title
+    }
 }
