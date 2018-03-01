@@ -12,7 +12,7 @@ import Foundation
 typealias UserUpdateResult = APIResult<UserUpdateRequest>
 
 class UserUpdateRequest: APIRequest {
-    let method: String = "POST"
+    let method: HTTPMethod = .post
     let path = "/api/v1/users.update"
 
     let userId: String
