@@ -13,7 +13,7 @@
         <!--open.rocket.chat-->
         <scene sceneID="ceB-am-kn3">
             <objects>
-                <viewController id="j1y-V4-xli" customClass="RoomsViewController" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="j1y-V4-xli" customClass="SERoomsViewController" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" opaque="NO" contentMode="scaleToFill" id="wbc-yd-nQP">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -69,20 +69,35 @@
             </objects>
             <point key="canvasLocation" x="1241" y="325"/>
         </scene>
-        <!--View Controller-->
+        <!--Servers View Controller-->
         <scene sceneID="WYc-cv-v8S">
             <objects>
-                <viewController id="zfm-EI-TkZ" sceneMemberID="viewController">
+                <viewController id="zfm-EI-TkZ" customClass="SEServersViewController" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="mbJ-qF-U5I">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="N4q-ru-lmk">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="CgR-Bd-oKd" firstAttribute="trailing" secondItem="N4q-ru-lmk" secondAttribute="trailing" id="46j-uA-Ld2"/>
+                            <constraint firstItem="N4q-ru-lmk" firstAttribute="leading" secondItem="CgR-Bd-oKd" secondAttribute="leading" id="NN3-bD-bbt"/>
+                            <constraint firstItem="N4q-ru-lmk" firstAttribute="top" secondItem="CgR-Bd-oKd" secondAttribute="top" id="dNc-yh-EQ5"/>
+                            <constraint firstItem="CgR-Bd-oKd" firstAttribute="bottom" secondItem="N4q-ru-lmk" secondAttribute="bottom" id="yuf-h0-0ZJ"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="CgR-Bd-oKd"/>
                     </view>
+                    <connections>
+                        <outlet property="tableView" destination="N4q-ru-lmk" id="Sir-ek-NuU"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rmu-5l-4h1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1241" y="-364"/>
+            <point key="canvasLocation" x="1240.8" y="-364.7676161919041"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="e9T-nQ-T3J">

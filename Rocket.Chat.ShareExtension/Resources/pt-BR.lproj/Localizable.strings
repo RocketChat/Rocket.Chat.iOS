@@ -6,7 +6,9 @@
   Copyright © 2018 Rocket.Chat. All rights reserved.
 */
 
-"rooms.section.favorites" = "Favorites"; //TODO
-"rooms.section.channels" = "Channels"; //TODO
-"rooms.section.groups" = "Private Groups"; //TODO
-"rooms.section.directMessages" = "Direct Messages"; //TODO
+"servers.title" = "Servers";
+
+"rooms.section.favorites" = "Favorites";
+"rooms.section.channels" = "Channels";
+"rooms.section.groups" = "Private Groups";
+"rooms.section.directMessages" = "Direct Messages";

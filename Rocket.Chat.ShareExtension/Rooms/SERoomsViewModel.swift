@@ -1,5 +1,5 @@
 //
-//  RoomsViewModel.swift
+//  SERoomsViewModel.swift
 //  Rocket.Chat.ShareExtension
 //
 //  Created by Matheus Cardoso on 2/28/18.
@@ -8,31 +8,40 @@
 
 import Foundation
 
-enum RoomsSectionType {
+enum SERoomsSectionType {
     case favorites
     case channels
     case groups
     case directMessages
 }
 
-struct RoomsSection {
-    let type: RoomsSectionType
-    let roomCells: [RoomCell]
+struct SERoomsSection {
+    let type: SERoomsSectionType
+    let roomCells: [SERoomCell]
 
     var title: String {
         return localized("rooms.section.\(String(describing: self.type))")
     }
 }
 
-struct RoomCell {
+struct SERoomCell {
     let title: String
 }
 
-struct RoomsViewModel {
-    let sections: [RoomsSection]
+struct SERoomsViewModel {
+    let title: String
+    let sections: [SERoomsSection]
+
+    func withTitle(_ title: String) -> SERoomsViewModel {
+        return SERoomsViewModel(title: title, sections: sections)
+    }
+
+    static var emptyState: SERoomsViewModel {
+        return SERoomsViewModel(title: "Loading...", sections: [])
+    }
 }
 
-extension RoomsViewModel {
+extension SERoomsViewModel {
     var numberOfSections: Int {
         return sections.count
     }
@@ -46,7 +55,7 @@ extension RoomsViewModel {
         }
     }
 
-    func cellForRowAt(_ indexPath: IndexPath) -> RoomCell {
+    func cellForRowAt(_ indexPath: IndexPath) -> SERoomCell {
         return sections[indexPath.section].roomCells[indexPath.row]
     }
 
