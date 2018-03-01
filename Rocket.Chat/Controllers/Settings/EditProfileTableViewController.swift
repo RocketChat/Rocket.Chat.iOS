@@ -101,10 +101,16 @@ class EditProfileTableViewController: UITableViewController {
             }
         }
 
-        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
-        api?.fetch(updateUserRequest, succeeded: { result in
-            print(result)
-        }, errored: { error in
+//        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
+//        api?.fetch(updateUserRequest, succeeded: { result in
+//            print(result)
+//        }, errored: { error in
+//            print(error)
+//        })
+        let setAvatarRequest = SetAvatarRequest(userId: userId, avatar: UIImage(named: "Launch Screen Icon")!)
+        api?.fetch(setAvatarRequest, succeeded: { (result) in
+            print(result.raw)
+        }, errored: { (error) in
             print(error)
         })
     }
