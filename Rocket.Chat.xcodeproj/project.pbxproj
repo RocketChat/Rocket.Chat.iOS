@@ -365,6 +365,7 @@
 		807FB56B20472A0F00E21429 /* RoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB56A20472A0F00E21429 /* RoomsViewModel.swift */; };
 		807FB56F20472B6A00E21429 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 807FB57120472B6A00E21429 /* Localizable.strings */; };
 		807FB57A20472E0400E21429 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB57920472E0400E21429 /* Localization.swift */; };
+		807FB57D20482DFE00E21429 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB57C20482DFE00E21429 /* SendViewController.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
 		809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530A1FE2B1AB00833DD2 /* UploadClient.swift */; };
@@ -856,6 +857,7 @@
 		807FB57620472B7300E21429 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807FB57720472B8200E21429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807FB57920472E0400E21429 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
+		807FB57C20482DFE00E21429 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManagerSpec.swift; path = Managers/PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
 		809B530A1FE2B1AB00833DD2 /* UploadClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadClient.swift; sourceTree = "<group>"; };
@@ -1992,6 +1994,7 @@
 				807FB55A2046E7DD00E21429 /* RoomsViewController.swift */,
 				807FB56A20472A0F00E21429 /* RoomsViewModel.swift */,
 				807FB568204729E500E21429 /* ServersViewController.swift */,
+				807FB57C20482DFE00E21429 /* SendViewController.swift */,
 				807FB57920472E0400E21429 /* Localization.swift */,
 				807FB55C2046E7DD00E21429 /* MainInterface.storyboard */,
 				807FB55F2046E7DD00E21429 /* Info.plist */,
@@ -3147,6 +3150,7 @@
 				807FB55B2046E7DD00E21429 /* RoomsViewController.swift in Sources */,
 				807FB569204729E500E21429 /* ServersViewController.swift in Sources */,
 				807FB57A20472E0400E21429 /* Localization.swift in Sources */,
+				807FB57D20482DFE00E21429 /* SendViewController.swift in Sources */,
 				807FB56B20472A0F00E21429 /* RoomsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

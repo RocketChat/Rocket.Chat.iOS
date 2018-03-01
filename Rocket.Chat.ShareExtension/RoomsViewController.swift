@@ -34,6 +34,7 @@ class RoomsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
+            tableView.delegate = self
         }
     }
 }
@@ -53,11 +54,19 @@ extension RoomsViewController: UITableViewDataSource {
         let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCellDefault")
 
         cell.textLabel?.text = room.title
+        cell.accessoryType = .disclosureIndicator
 
         return cell
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return model.titleForHeaderInSection(section)
+    }
+}
+
+extension RoomsViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "SendSegue", sender: model.cellForRowAt(indexPath))
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }
