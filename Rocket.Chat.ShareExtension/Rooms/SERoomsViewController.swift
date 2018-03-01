@@ -9,27 +9,8 @@
 import UIKit
 import Social
 
-class SERoomsViewController: UIViewController {
-    private var viewModel = SERoomsViewModel(title: "open.rocket.chat", sections: [
-        SERoomsSection(type: .favorites, roomCells: [
-            SERoomCell(title: "@matheus.cardoso"),
-            SERoomCell(title: "#general"),
-            SERoomCell(title: "#important")
-            ]),
-        SERoomsSection(type: .channels, roomCells: [
-            SERoomCell(title: "#general")
-            ]),
-        SERoomsSection(type: .groups, roomCells: [
-            SERoomCell(title: "#ios-dev-internal"),
-            SERoomCell(title: "#important")
-            ]),
-        SERoomsSection(type: .directMessages, roomCells: [
-            SERoomCell(title: "@matheus.cardoso"),
-            SERoomCell(title: "@rafael.kellermann"),
-            SERoomCell(title: "@filipe.alvarenga"),
-            SERoomCell(title: "@rocket.chat")
-            ])
-        ])
+class SERoomsViewController: SEViewController {
+    private var viewModel = SERoomsViewModel.emptyState
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -44,10 +25,6 @@ class SERoomsViewController: UIViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        updateView()
-    }
-
     func updateView(newViewModel: SERoomsViewModel? = nil) {
         if let newViewModel = newViewModel {
             viewModel = newViewModel
@@ -56,11 +33,18 @@ class SERoomsViewController: UIViewController {
         title = viewModel.title
         tableView.reloadData()
     }
+
+    override func storeUpdated(_ store: SEStore) {
+        viewModel = SERoomsViewModel(store: store)
+
+        title = viewModel.title
+        tableView.reloadData()
+    }
+
 }
 
 extension SERoomsViewController: SEServersViewDelegate {
     func serversViewController(_ serversViewController: SEServersViewController, didSelectServerCell serverCell: SEServerCell) {
-        updateView(newViewModel: viewModel.withTitle(serverCell.title))
         navigationController?.popViewController(animated: true)
     }
 }

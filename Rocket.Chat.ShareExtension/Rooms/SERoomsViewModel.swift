@@ -37,7 +37,7 @@ struct SERoomsViewModel {
     }
 
     static var emptyState: SERoomsViewModel {
-        return SERoomsViewModel(title: "Loading...", sections: [])
+        return SERoomsViewModel(title: "You have no servers", sections: [])
     }
 }
 

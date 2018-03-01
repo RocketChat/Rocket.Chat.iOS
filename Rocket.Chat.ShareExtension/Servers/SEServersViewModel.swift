@@ -19,6 +19,10 @@ struct SEServersViewModel {
     var title: String {
         return localized("servers.title")
     }
+
+    static var emptyState: SEServersViewModel {
+        return SEServersViewModel(serverCells: [])
+    }
 }
 
 extension SEServersViewModel {

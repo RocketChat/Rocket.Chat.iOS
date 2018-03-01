@@ -9,17 +9,14 @@
 import UIKit
 import Social
 
-protocol SEServersViewDelegate {
+protocol SEServersViewDelegate: class {
     func serversViewController(_ serversViewController: SEServersViewController, didSelectServerCell serverCell: SEServerCell)
 }
 
-class SEServersViewController: UIViewController {
-    var delegate: SEServersViewDelegate?
+class SEServersViewController: SEViewController {
+    weak var delegate: SEServersViewDelegate?
 
-    let model = SEServersViewModel(serverCells: [
-        SEServerCell(title: "open.rocket.chat", selected: true),
-        SEServerCell(title: "cardoso.rocket.chat", selected: false)
-    ])
+    private var viewModel = SEServersViewModel.emptyState
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -28,27 +25,25 @@ class SEServersViewController: UIViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        update(model: model)
-    }
+    override func storeUpdated(_ store: SEStore) {
+        viewModel = SEServersViewModel(store: store)
 
-    func update(model: SEServersViewModel) {
-        title = model.title
+        title = viewModel.title
         tableView.reloadData()
     }
 }
 
 extension SEServersViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return model.numberOfSections
+        return viewModel.numberOfSections
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return model.numberOfRowsInSection(section)
+        return viewModel.numberOfRowsInSection(section)
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellModel = model.cellForRowAt(indexPath)
+        let cellModel = viewModel.cellForRowAt(indexPath)
 
         let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCellDefault")
 
@@ -61,6 +56,7 @@ extension SEServersViewController: UITableViewDataSource {
 
 extension SEServersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        delegate?.serversViewController(self, didSelectServerCell: model.cellForRowAt(indexPath))
+        store.selectedServer = indexPath.row
+        delegate?.serversViewController(self, didSelectServerCell: viewModel.cellForRowAt(indexPath))
     }
 }

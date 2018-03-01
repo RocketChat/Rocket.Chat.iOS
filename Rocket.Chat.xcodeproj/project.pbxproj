@@ -390,6 +390,10 @@
 		8076FDD3204864A400114F28 /* MessageReaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B53151FE3D3DC00833DD2 /* MessageReaction.swift */; };
 		8076FDD6204864E700114F28 /* User+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDD5204864E700114F28 /* User+Query.swift */; };
 		8076FDD82048654F00114F28 /* User+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDD72048654F00114F28 /* User+Extensions.swift */; };
+		8076FDDA20489F5900114F28 /* SEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDD920489F5900114F28 /* SEViewController.swift */; };
+		8076FDDC2048A0E600114F28 /* SEServersViewModel+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDDB2048A0E600114F28 /* SEServersViewModel+Store.swift */; };
+		8076FDDE2048A31C00114F28 /* SERoomsViewModel+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDDD2048A31C00114F28 /* SERoomsViewModel+Store.swift */; };
+		8076FDE22048A7C500114F28 /* SEComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDE12048A7C500114F28 /* SEComposeViewController.swift */; };
 		807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */; };
 		807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */; };
 		807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB55A2046E7DD00E21429 /* SERoomsViewController.swift */; };
@@ -399,7 +403,6 @@
 		807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB56A20472A0F00E21429 /* SERoomsViewModel.swift */; };
 		807FB56F20472B6A00E21429 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 807FB57120472B6A00E21429 /* Localizable.strings */; };
 		807FB57A20472E0400E21429 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB57920472E0400E21429 /* Localization.swift */; };
-		807FB57D20482DFE00E21429 /* SendViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB57C20482DFE00E21429 /* SendViewController.swift */; };
 		807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB581204837AF00E21429 /* SEServersViewModel.swift */; };
 		807FB58420483A4D00E21429 /* ServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE7A1F5EA41000C322C3 /* ServersViewController.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
@@ -897,6 +900,10 @@
 		8076FDD02048646500114F28 /* Message+Reply.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Message+Reply.swift"; sourceTree = "<group>"; };
 		8076FDD5204864E700114F28 /* User+Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Query.swift"; sourceTree = "<group>"; };
 		8076FDD72048654F00114F28 /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
+		8076FDD920489F5900114F28 /* SEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEViewController.swift; sourceTree = "<group>"; };
+		8076FDDB2048A0E600114F28 /* SEServersViewModel+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SEServersViewModel+Store.swift"; sourceTree = "<group>"; };
+		8076FDDD2048A31C00114F28 /* SERoomsViewModel+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SERoomsViewModel+Store.swift"; sourceTree = "<group>"; };
+		8076FDE12048A7C500114F28 /* SEComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeViewController.swift; sourceTree = "<group>"; };
 		807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceSpec.swift; sourceTree = "<group>"; };
 		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
 		807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Rocket.Chat.ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -913,7 +920,6 @@
 		807FB57620472B7300E21429 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807FB57720472B8200E21429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807FB57920472E0400E21429 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
-		807FB57C20482DFE00E21429 /* SendViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendViewController.swift; sourceTree = "<group>"; };
 		807FB581204837AF00E21429 /* SEServersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServersViewModel.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManagerSpec.swift; path = Managers/PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
@@ -2104,14 +2110,23 @@
 			path = User;
 			sourceTree = "<group>";
 		};
+		8076FDE02048A69200114F28 /* Compose */ = {
+			isa = PBXGroup;
+			children = (
+				8076FDE12048A7C500114F28 /* SEComposeViewController.swift */,
+			);
+			path = Compose;
+			sourceTree = "<group>";
+		};
 		807FB5592046E7DD00E21429 /* Rocket.Chat.ShareExtension */ = {
 			isa = PBXGroup;
 			children = (
 				8076FD9920484A6000114F28 /* SEStore.swift */,
+				8076FDD920489F5900114F28 /* SEViewController.swift */,
 				807FB5802048378500E21429 /* Servers */,
 				807FB57E2048376900E21429 /* Rooms */,
+				8076FDE02048A69200114F28 /* Compose */,
 				807FB56C20472B2700E21429 /* Resources */,
-				807FB57C20482DFE00E21429 /* SendViewController.swift */,
 				807FB57920472E0400E21429 /* Localization.swift */,
 				807FB55C2046E7DD00E21429 /* MainInterface.storyboard */,
 				807FB55F2046E7DD00E21429 /* Info.plist */,
@@ -2132,6 +2147,7 @@
 			children = (
 				807FB55A2046E7DD00E21429 /* SERoomsViewController.swift */,
 				807FB56A20472A0F00E21429 /* SERoomsViewModel.swift */,
+				8076FDDD2048A31C00114F28 /* SERoomsViewModel+Store.swift */,
 			);
 			path = Rooms;
 			sourceTree = "<group>";
@@ -2141,6 +2157,7 @@
 			children = (
 				807FB568204729E500E21429 /* SEServersViewController.swift */,
 				807FB581204837AF00E21429 /* SEServersViewModel.swift */,
+				8076FDDB2048A0E600114F28 /* SEServersViewModel+Store.swift */,
 			);
 			path = Servers;
 			sourceTree = "<group>";
@@ -3337,12 +3354,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				8076FD9B20484DBF00114F28 /* DatabaseManager.swift in Sources */,
+				8076FDDC2048A0E600114F28 /* SEServersViewModel+Store.swift in Sources */,
 				807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */,
 				8076FDCC204863DF00114F28 /* AuthExtensions.swift in Sources */,
 				8076FDD3204864A400114F28 /* MessageReaction.swift in Sources */,
+				8076FDDA20489F5900114F28 /* SEViewController.swift in Sources */,
 				8076FDCA204863B900114F28 /* Channel.swift in Sources */,
 				8076FDBD2048598100114F28 /* Subscription.swift in Sources */,
 				8076FDCB204863C500114F28 /* Attachment.swift in Sources */,
+				8076FDE22048A7C500114F28 /* SEComposeViewController.swift in Sources */,
 				8076FDC82048639700114F28 /* Message.swift in Sources */,
 				807FB569204729E500E21429 /* SEServersViewController.swift in Sources */,
 				8076FDA72048538500114F28 /* Realm+Shared.swift in Sources */,
@@ -3354,13 +3374,13 @@
 				8076FDD22048648D00114F28 /* Email.swift in Sources */,
 				807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */,
 				8076FDCD204863FC00114F28 /* MessageURL.swift in Sources */,
-				807FB57D20482DFE00E21429 /* SendViewController.swift in Sources */,
 				8076FD9D2048510100114F28 /* AuthSettings.swift in Sources */,
 				8076FD9A20484A6000114F28 /* SEStore.swift in Sources */,
 				8076FD9E2048510C00114F28 /* AuthManager.swift in Sources */,
 				8076FDA52048534200114F28 /* String+Random.swift in Sources */,
 				807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */,
 				8076FDCE2048642400114F28 /* User.swift in Sources */,
+				8076FDDE2048A31C00114F28 /* SERoomsViewModel+Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

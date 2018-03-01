@@ -1,5 +1,5 @@
 //
-//  SendViewController.swift
+//  SEComposeViewController.swift
 //  Rocket.Chat.ShareExtension
 //
 //  Created by Matheus Cardoso on 3/1/18.
