@@ -62,9 +62,9 @@ extension Message: ModelMappeable {
         if let attachments = values["attachments"].array {
             self.attachments.removeAll()
 
-            for attachment in attachments {
+            attachments.forEach {
                 let obj = Attachment()
-                obj.map(attachment, realm: realm)
+                obj.map($0, realm: realm)
                 self.attachments.append(obj)
             }
         }

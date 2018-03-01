@@ -154,6 +154,7 @@
 "chat.upload.shoot_video" = "Gravar um vídeo";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
+"chat.upload.draw" = "Desenhar algo";
 
 // Chat Download
 "chat.download.downloading_file" = "Baixando \"%@\"";
@@ -161,6 +162,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Toque para abrir";
 "chat.message.open_browser" = "Abrir no Safari";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!";
+"chat.drawing.messageTitle" = "Você precisa desenhar algo antes de enviar.";
+"chat.drawing.fileName" = "Drawing"; // TODO
+"chat.drawing.settings.opacity" = "Opacity"; // TODO
+"chat.drawing.settings.width" = "Width"; // TODO
+"chat.drawing.settings.color.selected" = "Selected color"; // TODO
+"chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";
@@ -198,10 +208,11 @@
 "chat.messages.starred.list.title" = "Mensagens Favoritas";
 
 // Settings
-"myaccount.settings.title" = "Configurações"; // TODO: new text: Preferences
+"myaccount.settings.title" = "Configurações";
 "myaccount.settings.contactus" = "Entre em contato";
 "myaccount.settings.profile" = "Perfil";
 "myaccount.settings.license" = "Licença";
+"myaccount.settings.language" = "Idioma";
 "myaccount.settings.appicon" = "Ícone do App";
 "myaccount.settings.version" = "Versão: %@ (%@)";
 
@@ -210,3 +221,8 @@
 "myaccount.settings.changeicon.header" = "Você pode escolher o ícone do Rocket.Chat+ para mudar a aparência em sua home screen. Escolha o ícone abaixo que você mais gostar.";
 "myaccount.settings.changeicon.errortitle" = "Não podemos alterar seu ícone";
 "myaccount.settings.changeicon.iosversion" = "Esta funcionalidade está disponível somente para usuários com versão do iOS superior a 10.3.";
+
+// Change Language
+"myaccount.settings.language.title" = "Alterar Idioma";
+"myaccount.settings.language.reset" = "Restaurar o Padrão";
+"myaccount.settings.language.message" = "Você mudou o idioma. Você precisa fechar o aplicativo e abrir novamente para que as alterações tenham efeito.";

@@ -119,6 +119,7 @@
 "chat.read_only" = "Αυτό το δωμάτιο είναι μόνο για ανάγνωση";
 "chat.muted" = "Έχετε τεθεί σε σίγαση";
 "chat.loading_messages" = "Φόρτωση μηνυμάτων...";
+"chat.unread_separator" = "new messages";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Προσθέστε Αντίδραση";
@@ -134,6 +135,12 @@
 "chat.message.actions.delete.confirm.title" = "Να διαγράψουμε αυτό το μήνυμα;";
 "chat.message.actions.delete.confirm.message" = "Σίγουρα θέλετε να διαγράψετε αυτό το μήνυμα; Αυτή η διαδικασία δεν μπορεί να ακυρωθεί.";
 "chat.message.actions.delete.confirm.yes" = "Ναι, διαγράψτε";
+"chat.message.actions.discard" = "Discard message";
+"chat.message.actions.discard.confirm.title" = "Discard this message?";
+"chat.message.actions.discard.confirm.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone.";
+"chat.message.actions.discard.confirm.yes" = "Yes, discard";
+"chat.message.actions.resend" = "Resend";
+"chat.message.actions.resend_all" = "Resend all";
 "Send" = "Αποστολή"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -148,6 +155,7 @@
 "chat.upload.shoot_video" = "Τραβήξτε Video";
 "chat.upload.choose_from_library" = "Επιλέξτε από τη Βιβλιοθήκη";
 "chat.upload.import_file" = "Εισαγωγή Αρχείου Από...";
+"chat.upload.draw" = "Draw something";
 
 // Chat Download
 "chat.download.downloading_file" = "Κατεβάζουμε \"%@\"";
@@ -155,6 +163,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Πατήστε για να ανοίξετε το αρχείο";
 "chat.message.open_browser" = "Ανοίξτε στο πρόγραμμα Περιήγησης";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!";
+"chat.drawing.messageTitle" = "You have to draw something before sending it.";
+"chat.drawing.fileName" = "Drawing";
+"chat.drawing.settings.opacity" = "Opacity";
+"chat.drawing.settings.width" = "Width";
+"chat.drawing.settings.color.selected" = "Selected color";
+"chat.drawing.settings.color.others" = "Choose color below:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Το όνομα του δωματίου άλλαξε σε: %@ by %@";
@@ -196,6 +213,7 @@
 "myaccount.settings.contactus" = "Επικοινωνήστε μαζί μας";
 "myaccount.settings.profile" = "Profile"; // TODO: 
 "myaccount.settings.license" = "Άδεια";
+"myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
 
@@ -204,3 +222,8 @@
 "myaccount.settings.changeicon.header" = "Μπορείτε να αλλάξετε πώς το δικό σας Rocket.Chat+ εικονίδιο θα φαίνεται στην συσκευή σας. Παρακαλούμε επιλέξτε ένα από τα παρακάτω εικονίδια, όποιο σας αρέσει πιο πολύ.";
 "myaccount.settings.changeicon.errortitle" = "Δεν μπορούμε να αλλάξουμε εικονίδιο";
 "myaccount.settings.changeicon.iosversion" = "Εναλλακτικά εικονίδια εφαρμογής δεν υποστηρίζονται σε iOS εκδόσεις μικρότερες από 10.3";
+
+// Change Language
+"myaccount.settings.language.title" = "Change Language";
+"myaccount.settings.language.reset" = "Reset to Default";
+"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+ before the new settings will take effect.";

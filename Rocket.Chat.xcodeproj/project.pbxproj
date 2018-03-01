@@ -10,9 +10,25 @@
 		0B3A9764202C692D0019CA92 /* ChangeAppIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */; };
 		0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */; };
 		0B3A9769202C76080019CA92 /* ChangeAppIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */; };
+		0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */; };
+		0B9AB2C120444ECD00ABEA05 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */; };
+		0B9AB2C320444ED600ABEA05 /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */; };
+		0BB9678A2031A74B0051D68C /* DrawingBrushColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */; };
+		0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */; };
+		0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */; };
+		0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8602032DB20004BFAAF /* DrawingBrushColorSpec.swift */; };
+		0BC0E8632032DD95004BFAAF /* DrawingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8622032DD95004BFAAF /* DrawingViewModel.swift */; };
+		0BC0E8652032DF9B004BFAAF /* DrawingViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */; };
 		140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */; };
+		140A95E1202F526C003FD564 /* Drawing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140A95E0202F526C003FD564 /* Drawing.storyboard */; };
+		140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95E3202F536D003FD564 /* DrawingViewController.swift */; };
+		140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95E5202F7074003FD564 /* DrawingControllerDelegate.swift */; };
 		140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */; };
 		1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BFA21F9B601600FB2768 /* RCTextView.swift */; };
+		14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A6A83020421DF8008C210D /* ColorPickerView.swift */; };
+		14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */; };
+		14BAFAE020308EF30054A2E6 /* DrawingBrushOpacityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAFADF20308EF30054A2E6 /* DrawingBrushOpacityViewController.swift */; };
+		14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAFAE120308F010054A2E6 /* DrawingBrushColorViewController.swift */; };
 		14F8A220202E5CBF00175FDC /* Black-29@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F8A213202E5CBD00175FDC /* Black-29@3x.png */; };
 		14F8A223202E5CBF00175FDC /* Black-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F8A216202E5CBE00175FDC /* Black-76@2x.png */; };
 		14F8A224202E5CBF00175FDC /* Black-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = 14F8A217202E5CBE00175FDC /* Black-60@3x.png */; };
@@ -347,6 +363,8 @@
 		807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */; };
 		807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */; };
 		807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */; };
+		807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53C2044B49800E21429 /* Emojione+Transform.swift */; };
+		807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53E2045F36D00E21429 /* EmojioneSpec.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
 		809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530A1FE2B1AB00833DD2 /* UploadClient.swift */; };
@@ -438,11 +456,27 @@
 		0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewController.swift; sourceTree = "<group>"; };
 		0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewModel.swift; sourceTree = "<group>"; };
 		0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconCell.swift; path = Controllers/Settings/ChangeAppIconCell.swift; sourceTree = "<group>"; };
+		0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeLanguageResetCell.swift; path = Controllers/Language/ChangeLanguageResetCell.swift; sourceTree = "<group>"; };
+		0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageViewController.swift; path = Controllers/Language/LanguageViewController.swift; sourceTree = "<group>"; };
+		0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
+		0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorViewModel.swift; sourceTree = "<group>"; };
+		0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeLanguageCell.swift; path = Controllers/Language/ChangeLanguageCell.swift; sourceTree = "<group>"; };
+		0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageViewModelSpec.swift; path = Settings/LanguageViewModelSpec.swift; sourceTree = "<group>"; };
+		0BC0E8602032DB20004BFAAF /* DrawingBrushColorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorSpec.swift; sourceTree = "<group>"; };
+		0BC0E8622032DD95004BFAAF /* DrawingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModel.swift; sourceTree = "<group>"; };
+		0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModelSpec.swift; sourceTree = "<group>"; };
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconViewModelSpec.swift; path = Settings/ChangeAppIconViewModelSpec.swift; sourceTree = "<group>"; };
+		140A95E0202F526C003FD564 /* Drawing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
+		140A95E3202F536D003FD564 /* DrawingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewController.swift; sourceTree = "<group>"; };
+		140A95E5202F7074003FD564 /* DrawingControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrawingControllerDelegate.swift; path = Controllers/Drawing/DrawingControllerDelegate.swift; sourceTree = "<group>"; };
 		140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCellSpec.swift; sourceTree = "<group>"; };
 		1435BFA21F9B601600FB2768 /* RCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTextView.swift; sourceTree = "<group>"; };
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		14A6A83020421DF8008C210D /* ColorPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPickerView.swift; path = Views/ColorPicker/ColorPickerView.swift; sourceTree = "<group>"; };
+		14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrawingBrushWidthViewController.swift; path = Controllers/Drawing/DrawingBrushWidthViewController.swift; sourceTree = "<group>"; };
+		14BAFADF20308EF30054A2E6 /* DrawingBrushOpacityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrawingBrushOpacityViewController.swift; path = Controllers/Drawing/DrawingBrushOpacityViewController.swift; sourceTree = "<group>"; };
+		14BAFAE120308F010054A2E6 /* DrawingBrushColorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrawingBrushColorViewController.swift; path = Controllers/Drawing/DrawingBrushColorViewController.swift; sourceTree = "<group>"; };
 		14F8A213202E5CBD00175FDC /* Black-29@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-29@3x.png"; sourceTree = "<group>"; };
 		14F8A216202E5CBE00175FDC /* Black-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-76@2x.png"; sourceTree = "<group>"; };
 		14F8A217202E5CBE00175FDC /* Black-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Black-60@3x.png"; sourceTree = "<group>"; };
@@ -528,6 +562,9 @@
 		411EDED41E3102CB00BC7BE3 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadManager.swift; path = Managers/Uploader/UploadManager.swift; sourceTree = "<group>"; };
 		411F7D931F5179A50080E8AD /* ChatChannelHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatChannelHeaderCell.swift; sourceTree = "<group>"; };
 		411F7D951F5179B50080E8AD /* ChatChannelHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatChannelHeaderCell.xib; sourceTree = "<group>"; };
+		412184A420472F7900DAAA88 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
+		412184A520472F7900DAAA88 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		412184A620472F7900DAAA88 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		412719431E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewControllerGoogleExtensions.swift; path = Controllers/Auth/AuthViewControllerGoogleExtensions.swift; sourceTree = "<group>"; };
 		412719451E6B403700461FEE /* RegisterUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterUsernameViewController.swift; path = Controllers/Auth/RegisterUsernameViewController.swift; sourceTree = "<group>"; };
 		412731D41DE0A55C00FC45A0 /* ChatPreviewModeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatPreviewModeView.xib; path = ../Cells/Subscription/ChatPreviewModeView.xib; sourceTree = "<group>"; };
@@ -795,6 +832,8 @@
 		807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceModelHandler.swift; sourceTree = "<group>"; };
 		807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceSpec.swift; sourceTree = "<group>"; };
 		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
+		807FB53C2044B49800E21429 /* Emojione+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emojione+Transform.swift"; sourceTree = "<group>"; };
+		807FB53E2045F36D00E21429 /* EmojioneSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojioneSpec.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManagerSpec.swift; path = Managers/PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
 		809B530A1FE2B1AB00833DD2 /* UploadClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadClient.swift; sourceTree = "<group>"; };
@@ -924,6 +963,25 @@
 			name = ChangeAppIcon;
 			sourceTree = "<group>";
 		};
+		0B9AB2BF20444EB300ABEA05 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */,
+				0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */,
+				0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */,
+				0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */,
+			);
+			name = Language;
+			sourceTree = "<group>";
+		};
+		0BBCC2C0204546BB001E3B6D /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */,
+			);
+			name = Language;
+			sourceTree = "<group>";
+		};
 		106DAA428B5BF7289FB70C65 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -941,12 +999,35 @@
 			name = AppIcon;
 			sourceTree = "<group>";
 		};
+		140A95E2202F5321003FD564 /* Drawing */ = {
+			isa = PBXGroup;
+			children = (
+				14A6A82F20421DED008C210D /* Color Picker */,
+				140A95E3202F536D003FD564 /* DrawingViewController.swift */,
+				140A95E5202F7074003FD564 /* DrawingControllerDelegate.swift */,
+				14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */,
+				14BAFADF20308EF30054A2E6 /* DrawingBrushOpacityViewController.swift */,
+				14BAFAE120308F010054A2E6 /* DrawingBrushColorViewController.swift */,
+				0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */,
+				0BC0E8622032DD95004BFAAF /* DrawingViewModel.swift */,
+			);
+			name = Drawing;
+			sourceTree = "<group>";
+		};
 		140C84EA1FC9DB9600032A59 /* CreateChannel */ = {
 			isa = PBXGroup;
 			children = (
 				140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */,
 			);
 			name = CreateChannel;
+			sourceTree = "<group>";
+		};
+		14A6A82F20421DED008C210D /* Color Picker */ = {
+			isa = PBXGroup;
+			children = (
+				14A6A83020421DF8008C210D /* ColorPickerView.swift */,
+			);
+			name = "Color Picker";
 			sourceTree = "<group>";
 		};
 		14F8A210202E5B2A00175FDC /* AlternateIcons */ = {
@@ -1061,6 +1142,7 @@
 		4102E3AB1E53272C004BAA82 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				0B9AB2BF20444EB300ABEA05 /* Language */,
 				0B3A9767202C75A60019CA92 /* ChangeAppIcon */,
 				35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */,
 				4102E3AC1E53273E004BAA82 /* PreferencesViewController.swift */,
@@ -1217,6 +1299,8 @@
 				77C261281F97453600724A1F /* CustomFields */,
 				80247B3E1FE8582700878833 /* MessageReactionSpec.swift */,
 				805DEC381FFE54820033151B /* CustomEmojiSpec.swift */,
+				0BC0E8602032DB20004BFAAF /* DrawingBrushColorSpec.swift */,
+				0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1252,6 +1336,7 @@
 				41E2FA021D414ECC00238DFD /* Chat */,
 				4102E3AB1E53272C004BAA82 /* Preferences */,
 				41E2FA031D414ED400238DFD /* Subscriptions */,
+				140A95E2202F5321003FD564 /* Drawing */,
 				41865AF01FC8B1EC00A5E48F /* WebViewEmbedded */,
 			);
 			name = Controllers;
@@ -1264,6 +1349,7 @@
 				4174CB0E1D2D995F0086DAC8 /* Auth.storyboard */,
 				41E2F9FE1D414DE800238DFD /* Chat.storyboard */,
 				41E2FA001D414EA100238DFD /* Subscriptions.storyboard */,
+				140A95E0202F526C003FD564 /* Drawing.storyboard */,
 				4102E3A91E532323004BAA82 /* Preferences.storyboard */,
 			);
 			name = Storyboards;
@@ -1412,6 +1498,7 @@
 				8069D26D1FFF876D00C75926 /* Emoji.swift */,
 				80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */,
 				4199A9881DABCC570035F820 /* Emojione.swift */,
+				807FB53C2044B49800E21429 /* Emojione+Transform.swift */,
 				80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */,
 				80A97EFD200628A300A2774C /* Views */,
 				80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */,
@@ -1930,6 +2017,7 @@
 			isa = PBXGroup;
 			children = (
 				80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */,
+				807FB53E2045F36D00E21429 /* EmojioneSpec.swift */,
 			);
 			path = RCEmojiKit;
 			sourceTree = "<group>";
@@ -1976,6 +2064,7 @@
 		925FF74F1E8EFC9200982043 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				0BBCC2C0204546BB001E3B6D /* Language */,
 				140A95DC202F1E4D003FD564 /* AppIcon */,
 				41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */,
 			);
@@ -2216,6 +2305,7 @@
 				cs,
 				fr,
 				el,
+				es,
 			);
 			mainGroup = 41DF76D61D2C50710028DBF8;
 			productRefGroup = 41DF76E01D2C50710028DBF8 /* Products */;
@@ -2274,6 +2364,7 @@
 				806465EC1FED19B9001F27DB /* EmojiView.xib in Resources */,
 				41833F4E1DEF16B600E54655 /* Keys.plist in Resources */,
 				41DF76ED1D2C50720028DBF8 /* LaunchScreen.storyboard in Resources */,
+				140A95E1202F526C003FD564 /* Drawing.storyboard in Resources */,
 				8041C0442028C828007E21FA /* ReactorListView.xib in Resources */,
 				8020CCF21FEAB4C3003424F4 /* EmojiPicker.xib in Resources */,
 				80307E411FD75DC0006AD9EF /* VoiceOver.strings in Resources */,
@@ -2669,6 +2760,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14BAFAE020308EF30054A2E6 /* DrawingBrushOpacityViewController.swift in Sources */,
 				41499C8F1F2A116900790EA7 /* ServerManager.swift in Sources */,
 				41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */,
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
@@ -2695,11 +2787,13 @@
 				4112DC5A1FFFB9B2005995E1 /* ModelMappeable.swift in Sources */,
 				809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */,
 				D10E9C1A1F643457007F1796 /* Channel.swift in Sources */,
+				0B9AB2C120444ECD00ABEA05 /* LanguageViewController.swift in Sources */,
 				806728FD200789F4009FE94D /* PreferencesNavigationController.swift in Sources */,
 				415972101D3DBDA0002258F4 /* RealmExtension.swift in Sources */,
 				413996171F3B44500075F96E /* UploadHelper.swift in Sources */,
 				7798B4151F852B720074B2F4 /* SelectField.swift in Sources */,
 				805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */,
+				0BC0E8632032DD95004BFAAF /* DrawingViewModel.swift in Sources */,
 				35E892C8201CDD1600B4BE5A /* NewRoomViewController.swift in Sources */,
 				416133321D46CA4E00E09DA2 /* ChatMessageCell.swift in Sources */,
 				8041C0422028C7EF007E21FA /* ReactorListView.swift in Sources */,
@@ -2709,6 +2803,7 @@
 				80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */,
 				411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */,
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
+				0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */,
 				597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */,
 				D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */,
 				D10E9C221F643616007F1796 /* MentionModelMapping.swift in Sources */,
@@ -2716,7 +2811,9 @@
 				4162E1551D654A7400AAAE49 /* SocketHandlers.swift in Sources */,
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,
 				419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */,
+				14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */,
 				D10E9C201F6434A7007F1796 /* NSRangeExtensions.swift in Sources */,
+				807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */,
 				7798B4191F852D670074B2F4 /* CustomField.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
 				41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */,
@@ -2762,13 +2859,16 @@
 				41D4ABAB1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
 				80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */,
+				0B9AB2C320444ED600ABEA05 /* LanguageViewModel.swift in Sources */,
 				41BD37E11E290F2900CBC4C2 /* UserModelMapping.swift in Sources */,
 				412BCC871E55C6B800F7F4EE /* ChatMessageTextView.swift in Sources */,
+				140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */,
 				80054CF31FD951B100F5ECF9 /* MessagesClient.swift in Sources */,
 				80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */,
 				8013F86D1FD6B59A00EE1A4E /* APIClient.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
+				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
 				800FCD4D1F728EC800D9A692 /* ChannelInfoDescriptionCell.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
 				99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */,
@@ -2776,6 +2876,7 @@
 				41E2FA071D41513C00238DFD /* ChatViewController.swift in Sources */,
 				805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */,
 				4151B45E1E2D32EA00F8AA1B /* MessageURLModelMapping.swift in Sources */,
+				0BB9678A2031A74B0051D68C /* DrawingBrushColorViewModel.swift in Sources */,
 				35E892C6201CDCBC00B4BE5A /* OAuthManager.swift in Sources */,
 				897083D51F8CF08100233561 /* TextFieldTableViewCell.swift in Sources */,
 				802498EE1F7A8380005477EC /* MeRequest.swift in Sources */,
@@ -2871,6 +2972,7 @@
 				35E892CC201CDDED00B4BE5A /* SignupViewController+CustomFields.swift in Sources */,
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
+				0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
 				80054CFE1FDAFF5200F5ECF9 /* PushClient.swift in Sources */,
@@ -2879,6 +2981,7 @@
 				41B4B2341E40B1D200F4D252 /* ChatControllerUploader.swift in Sources */,
 				807371A21F96968C00D53ADF /* LoginServiceModelMapping.swift in Sources */,
 				4133EDCF1DA2834E005AA783 /* ChatMessageImageView.swift in Sources */,
+				140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */,
 				419ECCA21F3C8F15005F224B /* ChatControllerHeaderStatus.swift in Sources */,
 				8073719A1F94E83600D53ADF /* SocketError.swift in Sources */,
 				41D894021F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift in Sources */,
@@ -2893,6 +2996,7 @@
 				41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */,
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
+				14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* SubscriptionCreateRequest.swift in Sources */,
 				80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */,
@@ -2930,6 +3034,7 @@
 				D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */,
 				80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */,
 				77C2612C1F97453600724A1F /* CustomFieldsSpec.swift in Sources */,
+				0BC0E8652032DF9B004BFAAF /* DrawingViewModelSpec.swift in Sources */,
 				80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */,
 				41E423002044216000543877 /* UIColorExtensionSpec.swift in Sources */,
 				419D78871FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift in Sources */,
@@ -2969,14 +3074,17 @@
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
 				8013F8811FD6B6C600EE1A4E /* CommandsClientSpec.swift in Sources */,
+				0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */,
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
 				8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */,
+				807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */,
 				140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */,
 				8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */,
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,
 				89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */,
 				80A97F012006293D00A2774C /* EmojiSearcherSpec.swift in Sources */,
 				4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */,
+				0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */,
 				8013F88C1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
 				4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */,
@@ -3027,6 +3135,7 @@
 				1499781C1FA605CE007E013D /* pl */,
 				41A6191A1FA7065400CFFA69 /* cs */,
 				848088BB204370E8005022E8 /* el */,
+				412184A520472F7900DAAA88 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3041,6 +3150,7 @@
 				80307E471FD75DD2006AD9EF /* pl */,
 				80307E481FD75DD5006AD9EF /* cs */,
 				848088BC204370E9005022E8 /* el */,
+				412184A620472F7900DAAA88 /* es */,
 			);
 			name = VoiceOver.strings;
 			sourceTree = "<group>";
@@ -3055,6 +3165,7 @@
 				80C7DD641FF46B8800E6647C /* pl */,
 				80C7DD651FF46B8C00E6647C /* fr */,
 				848088BA204370E8005022E8 /* el */,
+				412184A420472F7900DAAA88 /* es */,
 			);
 			name = RCEmojiKit.strings;
 			sourceTree = "<group>";

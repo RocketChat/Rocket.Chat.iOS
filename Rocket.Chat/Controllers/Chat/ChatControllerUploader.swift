@@ -33,6 +33,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             self.openDocumentPicker()
         }))
 
+        alert.addAction(UIAlertAction(title: localized("chat.upload.draw"), style: .default, handler: { (_) in
+            self.openDrawing()
+        }))
+
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
@@ -56,6 +60,19 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         imagePicker.mediaTypes = video ? [kUTTypeMovie as String] : [kUTTypeImage as String]
         imagePicker.cameraCaptureMode = video ? .video : .photo
         self.present(imagePicker, animated: true, completion: nil)
+    }
+
+    fileprivate func openDrawing() {
+        let storyboard = UIStoryboard(name: "Drawing", bundle: Bundle.main)
+
+        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
+
+            if let drawingController = controller.viewControllers.first as? DrawingViewController {
+                drawingController.delegate = self
+            }
+
+            present(controller, animated: true, completion: nil)
+        }
     }
 
     fileprivate func openPhotosLibrary() {
@@ -283,5 +300,10 @@ extension ChatViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+}
 
+extension ChatViewController: DrawingControllerDelegate {
+    func finishedEditing(with file: FileUpload) {
+        uploadDialog(file)
+    }
 }

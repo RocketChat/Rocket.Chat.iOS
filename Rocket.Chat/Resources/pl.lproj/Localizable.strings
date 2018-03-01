@@ -154,6 +154,7 @@
 "chat.upload.shoot_video" = "Nagraj wideo";
 "chat.upload.choose_from_library" = "Wybierz plik z biblioteki";
 "chat.upload.import_file" = "Importuj plik z...";
+"chat.upload.draw" = "Narysuj obrazek";
 
 // Chat Download
 "chat.download.downloading_file" = "Pobieranie \"%@\"";
@@ -161,6 +162,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Dotknij aby otworzyć plik";
 "chat.message.open_browser" = "Otwórz w przeglądarce";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Ups!";
+"chat.drawing.messageTitle" = "Przed wysłaniem musisz coś narysować.";
+"chat.drawing.fileName" = "Rysunek";
+"chat.drawing.settings.opacity" = "Nieprzezroczystość";
+"chat.drawing.settings.width" = "Szerokość";
+"chat.drawing.settings.color.selected" = "Wybrany kolor";
+"chat.drawing.settings.color.others" = "Wybierz kolor poniżej:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";
@@ -202,6 +212,7 @@
 "myaccount.settings.contactus" = "Kontakt";
 "myaccount.settings.profile" = "Profile"; // TODO: 
 "myaccount.settings.license" = "Licencja";
+"myaccount.settings.language" = "Język";
 "myaccount.settings.appicon" = "Ikona aplikacji";
 "myaccount.settings.version" = "Wersja: %@ (%@)";
 
@@ -210,3 +221,8 @@
 "myaccount.settings.changeicon.header" = "Możesz zmienić to jak wygląda ikona aplikacji Rocket.Chat na Twoim urządzeniu. Wybierz jedną z ikon poniżej, która podoba Ci się najbardziej.";
 "myaccount.settings.changeicon.errortitle" = "Nie można zmienić ikony";
 "myaccount.settings.changeicon.iosversion" = "Alternatywne ikony aplikacji nie są wspierane na systemie poniżej wersji 10.3";
+
+// Change Language
+"myaccount.settings.language.title" = "Zmień język";
+"myaccount.settings.language.reset" = "Przywróć domyślny język";
+"myaccount.settings.language.message" = "Ustawienia języka zostały zmienione. Musisz ponownie uruchomić Rocket.Chat+ aby nowe ustawienia zostały zastosowane.";

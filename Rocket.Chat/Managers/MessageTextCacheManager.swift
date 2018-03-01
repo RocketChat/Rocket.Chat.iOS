@@ -30,7 +30,9 @@ class MessageTextCacheManager {
         guard let identifier = message.identifier else { return nil }
         let key = cachedKey(for: identifier)
 
-        let text = NSMutableAttributedString(string: message.textNormalized())
+        let text = NSMutableAttributedString(attributedString:
+            NSAttributedString(string: message.textNormalized()).applyingCustomEmojis(CustomEmoji.emojis())
+        )
 
         if message.isSystemMessage() {
             text.setFont(MessageTextFontAttributes.italicFont)
@@ -45,7 +47,7 @@ class MessageTextCacheManager {
         let channels = Array(message.channels.flatMap { $0.name })
         let username = AuthManager.currentUser()?.username
 
-        let attributedString = text.transformMarkdown().applyingCustomEmojis(CustomEmoji.emojis())
+        let attributedString = text.transformMarkdown()
         let finalText = NSMutableAttributedString(attributedString: attributedString)
         finalText.trimCharacters(in: .whitespaces)
         finalText.highlightMentions(mentions, username: username)

@@ -154,6 +154,7 @@
 "chat.upload.shoot_video" = "Prise Video";
 "chat.upload.choose_from_library" = "Choisir de la librairie";
 "chat.upload.import_file" = "Importer un fichier depuis…";
+"chat.upload.draw" = "Draw a picture"; // TODO
 
 // Chat Download
 "chat.download.downloading_file" = "Téléchargement de \"%@\"";
@@ -161,6 +162,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Toucher pour ouvrir le fichier";
 "chat.message.open_browser" = "Ouvrir dans un navigateur";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!"; // TODO
+"chat.drawing.messageTitle" = "You have to draw something before sending it."; // TODO
+"chat.drawing.fileName" = "Drawing"; // TODO
+"chat.drawing.settings.opacity" = "Opacity"; // TODO
+"chat.drawing.settings.width" = "Width"; // TODO
+"chat.drawing.settings.color.selected" = "Selected color"; // TODO
+"chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nom de la salle changée pour : %@ by %@";
@@ -202,6 +212,7 @@
 "myaccount.settings.contactus" = "Contactez-nous";
 "myaccount.settings.profile" = "Profile"; // TODO: 
 "myaccount.settings.license" = "Licence";
+"myaccount.settings.language" = "Language"; // TODO
 "myaccount.settings.appicon" = "Icône de l'application";
 "myaccount.settings.version" = "Version : %@ (%@)";
 
@@ -210,3 +221,8 @@
 "myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of icons below, whichever you like the most."; // TODO:
 "myaccount.settings.changeicon.errortitle" = "Impossible de changer l'icône";
 "myaccount.settings.changeicon.iosversion" = "Alternate application icons are not supported on iOS version below 10.3"; // TODO:
+
+// Change Language
+"myaccount.settings.language.title" = "Change Language"; // TODO
+"myaccount.settings.language.reset" = "Reset to Default"; // TODO
+"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+  before the new settings will take effect."; // TODO

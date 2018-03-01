@@ -31,6 +31,10 @@ final class PreferencesViewModel {
         return localized("myaccount.settings.license")
     }
 
+    internal var language: String {
+        return localized("myaccount.settings.language")
+    }
+
     internal var appicon: String {
         return localized("myaccount.settings.appicon")
     }
@@ -90,7 +94,7 @@ final class PreferencesViewModel {
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return (canChangeAppIcon ? 2 : 1)
+        case 1: return (canChangeAppIcon ? 3 : 2)
         case 2: return 2
         case 3: return (canOpenFLEX ? 1 : 0)
         default: return 0
