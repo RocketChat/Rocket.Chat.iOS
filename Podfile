@@ -4,6 +4,11 @@ platform :ios, '10.0'
 use_frameworks!
 inhibit_all_warnings!
 
+def database_pods
+  pod 'RealmSwift'
+  pod 'SwiftyJSON'
+end
+
 def shared_pods
   # Crash Report
   pod 'Fabric'
@@ -11,7 +16,6 @@ def shared_pods
   pod 'Instabug'
 
   # Code utilities
-  pod 'SwiftyJSON'
   pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
 
   # UI
@@ -26,7 +30,7 @@ def shared_pods
   pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
 
   # Database
-  pod 'RealmSwift'
+  database_pods
 
   # Network
   pod 'SDWebImage', '~> 4'
@@ -42,6 +46,10 @@ def shared_pods
   # Debugging
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
+end
+
+target 'Rocket.Chat.ShareExtension' do
+  database_pods
 end
 
 target 'Rocket.Chat' do

@@ -7,31 +7,6 @@
 //
 
 import Foundation
-import SwiftyJSON
-
-/**
-    This keys are used to store all servers and
-    database information to each server user is
-    connected to.
- */
-struct ServerPersistKeys {
-    // Server controls
-    static let servers = "kServers"
-    static let selectedIndex = "kSelectedIndex"
-
-    // Database
-    static let databaseName = "kDatabaseName"
-
-    // Authentication information
-    static let token = "kAuthToken"
-    static let serverURL = "kAuthServerURL"
-    static let serverVersion = "kAuthServerVersion"
-    static let userId = "kUserId"
-
-    // Display information
-    static let serverIconURL = "kServerIconURL"
-    static let serverName = "kServerName"
-}
 
 class ServerManager {
 

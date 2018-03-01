@@ -10,6 +10,30 @@ import Foundation
 import RealmSwift
 import Realm
 
+/**
+ This keys are used to store all servers and
+ database information to each server user is
+ connected to.
+ */
+struct ServerPersistKeys {
+    // Server controls
+    static let servers = "kServers"
+    static let selectedIndex = "kSelectedIndex"
+
+    // Database
+    static let databaseName = "kDatabaseName"
+
+    // Authentication information
+    static let token = "kAuthToken"
+    static let serverURL = "kAuthServerURL"
+    static let serverVersion = "kAuthServerVersion"
+    static let userId = "kUserId"
+
+    // Display information
+    static let serverIconURL = "kServerIconURL"
+    static let serverName = "kServerName"
+}
+
 struct DatabaseManager {
 
     /**
@@ -112,12 +136,12 @@ struct DatabaseManager {
     }
 
     /**
-        This method will create a new database before user
-        even authenticated into the server. This is used
-        so we can populate the authentication information
-        when user logins.
-     
-        - parameter serverURL: The server URL.
+     This method will create a new database before user
+     even authenticated into the server. This is used
+     so we can populate the authentication information
+     when user logins.
+
+     - parameter serverURL: The server URL.
      */
     @discardableResult
     static func createNewDatabaseInstance(serverURL: String) -> Int {
@@ -127,7 +151,7 @@ struct DatabaseManager {
         servers.append([
             ServerPersistKeys.databaseName: "\(String.random()).realm",
             ServerPersistKeys.serverURL: serverURL
-        ])
+            ])
 
         let index = servers.count - 1
         defaults.set(servers, forKey: ServerPersistKeys.servers)
@@ -136,21 +160,21 @@ struct DatabaseManager {
     }
 
     /**
-        This method is responsible to get the server
-        information that's stored locally on device and
-        use it to change the database configuration being
-        used by the currently instance.
- 
-        - parameter index: If the index you want to use isn't stored
-            into the UserDefaults.standard, you can for the index
-            using this parameter.
+     This method is responsible to get the server
+     information that's stored locally on device and
+     use it to change the database configuration being
+     used by the currently instance.
+
+     - parameter index: If the index you want to use isn't stored
+     into the UserDefaults.standard, you can for the index
+     using this parameter.
      */
     static func changeDatabaseInstance(index: Int? = nil) {
         guard
             let server = AuthManager.selectedServerInformation(index: index),
             let databaseName = server[ServerPersistKeys.databaseName]
-        else {
-            return
+            else {
+                return
         }
 
         let configuration = Realm.Configuration(
