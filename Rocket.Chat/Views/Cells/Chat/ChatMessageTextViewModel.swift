@@ -16,6 +16,7 @@ protocol ChatMessageTextViewModelProtocol {
     var thumbURL: URL? { get }
     var collapsed: Bool { get }
     var attachment: Attachment { get }
+    var isFile: Bool { get }
     func toggleCollapse()
 }
 
@@ -29,11 +30,15 @@ final class ChatMessageTextViewModel: ChatMessageTextViewModelProtocol {
     }
 
     var title: String {
+        guard !isFile else {
+            return attachment.title
+        }
+
         return "\(collapsed ? "▶" : "▼") \(attachment.title)"
     }
 
     var text: String {
-        if attachment.titleLinkDownload && attachment.titleLink.count > 0 {
+        guard !isFile else {
             return localized("chat.message.open_file")
         }
 
@@ -45,7 +50,15 @@ final class ChatMessageTextViewModel: ChatMessageTextViewModelProtocol {
     }
 
     var collapsed: Bool {
+        guard !isFile else {
+            return false
+        }
+
         return attachment.collapsed
+    }
+
+    var isFile: Bool {
+        return attachment.isFile
     }
 
     let attachment: Attachment
@@ -55,6 +68,10 @@ final class ChatMessageTextViewModel: ChatMessageTextViewModelProtocol {
     }
 
     func toggleCollapse() {
+        guard !isFile else {
+            return
+        }
+
         Realm.executeOnMainThread({ _ in
             self.attachment.collapsed = !self.attachment.collapsed
         })
@@ -82,6 +99,10 @@ final class ChatMessageAttachmentFieldViewModel: ChatMessageTextViewModelProtoco
 
     var collapsed: Bool {
         return attachment.collapsed
+    }
+
+    var isFile: Bool {
+        return false
     }
 
     let attachment: Attachment
