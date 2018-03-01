@@ -79,7 +79,38 @@ class EditProfileTableViewController: UITableViewController {
     // MARK: Actions
 
     @IBAction func saveProfile(_ sender: UIBarButtonItem) {
+        guard let user = user, let userId = user.identifier else { return }
+        guard let name = name.text, let username = username.text, let email = email.text,
+            !name.isEmpty, !username.isEmpty, !email.isEmpty else {
+                // TODO: Alert about empty fields
+                return
+        }
 
+        user.name = name
+        user.username = username
+        user.emails.first?.email = email
+
+        var password: String?
+
+        if let newPassword = newPassword.text, let passwordConfirmation = passwordConfirmation.text,
+                !newPassword.isEmpty, !passwordConfirmation.isEmpty {
+            if newPassword == passwordConfirmation {
+                password = newPassword
+            } else {
+                // TODO: Alert about password confirmation not matching
+            }
+        }
+
+        let updateUserRequest = UserUpdateRequest(userId: userId, user: user, password: password)
+        api?.fetch(updateUserRequest, succeeded: { result in
+            print(result)
+        }, errored: { error in
+            print(error)
+        })
+    }
+
+    @IBAction func didPressAvatarButton(_ sender: UIButton) {
+        print("tapping")
     }
 
     // MARK: UITableViewDataSource
