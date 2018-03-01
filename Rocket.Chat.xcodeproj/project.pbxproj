@@ -358,9 +358,13 @@
 		807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371A51F96A4FF00D53ADF /* LoginServiceModelHandler.swift */; };
 		807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */; };
 		807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */; };
-		807FB55B2046E7DD00E21429 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB55A2046E7DD00E21429 /* ShareViewController.swift */; };
+		807FB55B2046E7DD00E21429 /* RoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB55A2046E7DD00E21429 /* RoomsViewController.swift */; };
 		807FB55E2046E7DD00E21429 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 807FB55C2046E7DD00E21429 /* MainInterface.storyboard */; };
 		807FB5622046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		807FB569204729E500E21429 /* ServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB568204729E500E21429 /* ServersViewController.swift */; };
+		807FB56B20472A0F00E21429 /* RoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB56A20472A0F00E21429 /* RoomsViewModel.swift */; };
+		807FB56F20472B6A00E21429 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 807FB57120472B6A00E21429 /* Localizable.strings */; };
+		807FB57A20472E0400E21429 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB57920472E0400E21429 /* Localization.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
 		809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530A1FE2B1AB00833DD2 /* UploadClient.swift */; };
@@ -839,9 +843,19 @@
 		807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceSpec.swift; sourceTree = "<group>"; };
 		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
 		807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Rocket.Chat.ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
-		807FB55A2046E7DD00E21429 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		807FB55A2046E7DD00E21429 /* RoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsViewController.swift; sourceTree = "<group>"; };
 		807FB55D2046E7DD00E21429 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
 		807FB55F2046E7DD00E21429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		807FB568204729E500E21429 /* ServersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServersViewController.swift; sourceTree = "<group>"; };
+		807FB56A20472A0F00E21429 /* RoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsViewModel.swift; sourceTree = "<group>"; };
+		807FB57020472B6A00E21429 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		807FB57220472B6D00E21429 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
+		807FB57320472B6F00E21429 /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
+		807FB57420472B7000E21429 /* cs */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = cs; path = cs.lproj/Localizable.strings; sourceTree = "<group>"; };
+		807FB57520472B7200E21429 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
+		807FB57620472B7300E21429 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
+		807FB57720472B8200E21429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		807FB57920472E0400E21429 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManagerSpec.swift; path = Managers/PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
 		809B530A1FE2B1AB00833DD2 /* UploadClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadClient.swift; sourceTree = "<group>"; };
@@ -1974,11 +1988,23 @@
 		807FB5592046E7DD00E21429 /* Rocket.Chat.ShareExtension */ = {
 			isa = PBXGroup;
 			children = (
-				807FB55A2046E7DD00E21429 /* ShareViewController.swift */,
+				807FB56C20472B2700E21429 /* Resources */,
+				807FB55A2046E7DD00E21429 /* RoomsViewController.swift */,
+				807FB56A20472A0F00E21429 /* RoomsViewModel.swift */,
+				807FB568204729E500E21429 /* ServersViewController.swift */,
+				807FB57920472E0400E21429 /* Localization.swift */,
 				807FB55C2046E7DD00E21429 /* MainInterface.storyboard */,
 				807FB55F2046E7DD00E21429 /* Info.plist */,
 			);
 			path = Rocket.Chat.ShareExtension;
+			sourceTree = "<group>";
+		};
+		807FB56C20472B2700E21429 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				807FB57120472B6A00E21429 /* Localizable.strings */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		809B530C1FE2EF7C00833DD2 /* Reaction */ = {
@@ -2461,6 +2487,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				807FB55E2046E7DD00E21429 /* MainInterface.storyboard in Resources */,
+				807FB56F20472B6A00E21429 /* Localizable.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3117,7 +3144,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				807FB55B2046E7DD00E21429 /* ShareViewController.swift in Sources */,
+				807FB55B2046E7DD00E21429 /* RoomsViewController.swift in Sources */,
+				807FB569204729E500E21429 /* ServersViewController.swift in Sources */,
+				807FB57A20472E0400E21429 /* Localization.swift in Sources */,
+				807FB56B20472A0F00E21429 /* RoomsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3184,6 +3214,20 @@
 				807FB55D2046E7DD00E21429 /* Base */,
 			);
 			name = MainInterface.storyboard;
+			sourceTree = "<group>";
+		};
+		807FB57120472B6A00E21429 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				807FB57020472B6A00E21429 /* pt-BR */,
+				807FB57220472B6D00E21429 /* de */,
+				807FB57320472B6F00E21429 /* pl */,
+				807FB57420472B7000E21429 /* cs */,
+				807FB57520472B7200E21429 /* fr */,
+				807FB57620472B7300E21429 /* el */,
+				807FB57720472B8200E21429 /* en */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 		80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */ = {
