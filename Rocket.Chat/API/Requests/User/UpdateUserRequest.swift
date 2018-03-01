@@ -6,8 +6,8 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import SwiftyJSON
 import Foundation
+import SwiftyJSON
 
 typealias UserUpdateResult = APIResult<UpdateUserRequest>
 
@@ -37,7 +37,8 @@ class UpdateUserRequest: APIRequest {
             "data": [
                 "name": name,
                 "username": username,
-                "email": email.email
+                "email": email.email,
+                "verified": true
             ]
         ])
 
