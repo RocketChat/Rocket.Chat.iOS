@@ -277,9 +277,6 @@
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80Q-az-ZIG">
                                                         <rect key="frame" x="0.0" y="0.0" width="129" height="28"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="129" id="heS-Zx-yGu"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                         <color key="tintColor" red="0.039215686270000001" green="0.2666666667" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Create new account">
@@ -291,9 +288,6 @@
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F1w-ZF-CH6">
                                                         <rect key="frame" x="0.0" y="28" width="129" height="28"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="129" id="qVw-at-YXC"/>
-                                                        </constraints>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="13"/>
                                                         <color key="tintColor" red="0.039215686270000001" green="0.2666666667" blue="0.41176470590000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                         <state key="normal" title="Forgot password">
@@ -396,8 +390,12 @@
                         <outlet property="activityIndicator" destination="EG7-WS-QYQ" id="RjP-38-HEH"/>
                         <outlet property="authButtonsStackView" destination="hgB-Cn-akk" id="zLx-l9-kvd"/>
                         <outlet property="buttonAuthenticateGoogle" destination="sR6-SI-5gv" id="KHM-fB-UoH"/>
+                        <outlet property="buttonPrivacy" destination="ECh-vu-DIh" id="lHk-7G-5e5"/>
                         <outlet property="buttonRegister" destination="80Q-az-ZIG" id="Uzu-Rv-3vk"/>
                         <outlet property="buttonResetPassword" destination="F1w-ZF-CH6" id="fsl-n7-hGH"/>
+                        <outlet property="buttonTermsOfService" destination="rjd-Cn-8Yj" id="YsB-ni-G01"/>
+                        <outlet property="labelAnd" destination="WZs-vv-q8v" id="akm-Q4-QJL"/>
+                        <outlet property="labelProceedingAgreeing" destination="zmi-CC-Ety" id="zNz-Pk-xHV"/>
                         <outlet property="onePasswordButton" destination="PjJ-Db-hlk" id="F8y-7r-2zK"/>
                         <outlet property="textFieldPassword" destination="A9R-8V-1bd" id="Ayd-9m-hp2"/>
                         <outlet property="textFieldUsername" destination="ygD-Jl-GJ5" id="HM8-dg-2wc"/>
