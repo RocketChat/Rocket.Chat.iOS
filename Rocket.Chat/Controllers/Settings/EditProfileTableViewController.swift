@@ -15,6 +15,17 @@ class EditProfileTableViewController: UITableViewController {
     @IBOutlet weak var email: UITextField!
     @IBOutlet weak var newPassword: UITextField!
     @IBOutlet weak var passwordConfirmation: UITextField!
+    @IBOutlet weak var avatarButton: UIButton!
+
+    var avatarView: AvatarView = {
+        guard let avatarView = AvatarView.instantiateFromNib() else { return AvatarView() }
+        avatarView.isUserInteractionEnabled = false
+        avatarView.translatesAutoresizingMaskIntoConstraints = false
+        avatarView.layer.cornerRadius = 15
+        avatarView.layer.masksToBounds = true
+
+        return avatarView
+    }()
 
     let api = API.current()
     var isLoading = true
@@ -28,17 +39,29 @@ class EditProfileTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setupAvatarButton()
         fetchUserData()
     }
 
-    // MARK: Data handling
+    // MARK: Setup
+
+    func setupAvatarButton() {
+        avatarButton.addSubview(avatarView)
+        avatarView.topAnchor.constraint(equalTo: avatarButton.topAnchor).isActive = true
+        avatarView.bottomAnchor.constraint(equalTo: avatarButton.bottomAnchor).isActive = true
+        avatarView.leadingAnchor.constraint(equalTo: avatarButton.leadingAnchor).isActive = true
+        avatarView.trailingAnchor.constraint(equalTo: avatarButton.trailingAnchor).isActive = true
+    }
 
     func fetchUserData() {
         let meRequest = MeRequest()
         api?.fetch(meRequest, succeeded: { (result) in
             self.user = result.user
             self.isLoading = false
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }, errored: { (error) in
             print(error)
         })
@@ -46,6 +69,7 @@ class EditProfileTableViewController: UITableViewController {
 
     func bindUserData() {
         DispatchQueue.main.async {
+            self.avatarView.user = self.user
             self.name.text = self.user?.name
             self.username.text = self.user?.username
             self.email.text = self.user?.emails.first?.email
