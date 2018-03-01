@@ -84,7 +84,7 @@ final class AuthViewController: BaseViewController {
         if let registrationForm = AuthSettingsManager.shared.settings?.registrationForm {
            buttonRegister.isHidden = registrationForm != .isPublic
         }
-        
+
         textFieldUsername.placeholder = localized("auth.login.username.placeholder")
         textFieldPassword.placeholder = localized("auth.login.password.placeholder")
         buttonRegister.setTitle(localized("auth.login.buttonRegister"), for: .normal)
