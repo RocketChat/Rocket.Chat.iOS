@@ -12,7 +12,7 @@ private func getServers() -> [(name: String, host: String)] {
     return DatabaseManager.servers?.flatMap {
         guard
             let name = $0[ServerPersistKeys.serverName],
-            let host = $0[ServerPersistKeys.serverURL]
+            let host = URL(string: $0[ServerPersistKeys.serverURL] ?? "")?.host
         else {
             return nil
         }

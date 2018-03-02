@@ -6,6 +6,8 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
+import Foundation
+
 extension SEServersViewModel {
     init(store: SEStore) {
         serverCells = store.servers.enumerated().map {

@@ -36,6 +36,12 @@ final class PreferencesViewController: UITableViewController {
         }
     }
 
+    @IBOutlet weak var labelLanguage: UILabel! {
+        didSet {
+            labelLanguage.text = viewModel.language
+        }
+    }
+
     @IBOutlet weak var labelApp: UILabel! {
         didSet {
             labelApp.text = viewModel.appicon
@@ -57,13 +63,13 @@ final class PreferencesViewController: UITableViewController {
         }
     }
 
-    func cellTermsOfServiceDidPressed() {
+    private func cellTermsOfServiceDidPressed() {
         guard let url = viewModel.licenseURL else { return }
         let controller = SFSafariViewController(url: url)
         present(controller, animated: true, completion: nil)
     }
 
-    func cellContactDidPressed() {
+    private func cellContactDidPressed() {
         if !MFMailComposeViewController.canSendMail() {
             Alert(
                 key: "alert.settings.set_mail_app"
@@ -79,8 +85,12 @@ final class PreferencesViewController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
 
-    func cellAppIconDidPressed() {
+    private func cellAppIconDidPressed() {
         performSegue(withIdentifier: "AppIcon", sender: nil)
+    }
+
+    private func cellLanguageDidPressed() {
+        performSegue(withIdentifier: "Language", sender: nil)
     }
 
     // MARK: UITableViewDelegate
@@ -90,6 +100,8 @@ final class PreferencesViewController: UITableViewController {
             if indexPath.row == 0 {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
+                cellLanguageDidPressed()
+            } else if indexPath.row == 2 {
                 cellAppIconDidPressed()
             }
         } else if indexPath.section == 1 {

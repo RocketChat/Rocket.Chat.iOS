@@ -10,7 +10,12 @@
 		0B3A9764202C692D0019CA92 /* ChangeAppIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */; };
 		0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */; };
 		0B3A9769202C76080019CA92 /* ChangeAppIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */; };
+		0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */; };
+		0B9AB2C120444ECD00ABEA05 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */; };
+		0B9AB2C320444ED600ABEA05 /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */; };
 		0BB9678A2031A74B0051D68C /* DrawingBrushColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */; };
+		0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */; };
+		0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */; };
 		0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8602032DB20004BFAAF /* DrawingBrushColorSpec.swift */; };
 		0BC0E8632032DD95004BFAAF /* DrawingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8622032DD95004BFAAF /* DrawingViewModel.swift */; };
 		0BC0E8652032DF9B004BFAAF /* DrawingViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */; };
@@ -408,6 +413,8 @@
 		807FB57A20472E0400E21429 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB57920472E0400E21429 /* Localization.swift */; };
 		807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB581204837AF00E21429 /* SEServersViewModel.swift */; };
 		807FB58420483A4D00E21429 /* ServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE7A1F5EA41000C322C3 /* ServersViewController.swift */; };
+		807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53C2044B49800E21429 /* Emojione+Transform.swift */; };
+		807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53E2045F36D00E21429 /* EmojioneSpec.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
 		809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530A1FE2B1AB00833DD2 /* UploadClient.swift */; };
@@ -518,7 +525,12 @@
 		0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewController.swift; sourceTree = "<group>"; };
 		0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewModel.swift; sourceTree = "<group>"; };
 		0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconCell.swift; path = Controllers/Settings/ChangeAppIconCell.swift; sourceTree = "<group>"; };
+		0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeLanguageResetCell.swift; path = Controllers/Language/ChangeLanguageResetCell.swift; sourceTree = "<group>"; };
+		0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageViewController.swift; path = Controllers/Language/LanguageViewController.swift; sourceTree = "<group>"; };
+		0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
 		0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorViewModel.swift; sourceTree = "<group>"; };
+		0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeLanguageCell.swift; path = Controllers/Language/ChangeLanguageCell.swift; sourceTree = "<group>"; };
+		0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageViewModelSpec.swift; path = Settings/LanguageViewModelSpec.swift; sourceTree = "<group>"; };
 		0BC0E8602032DB20004BFAAF /* DrawingBrushColorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorSpec.swift; sourceTree = "<group>"; };
 		0BC0E8622032DD95004BFAAF /* DrawingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModel.swift; sourceTree = "<group>"; };
 		0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModelSpec.swift; sourceTree = "<group>"; };
@@ -619,6 +631,9 @@
 		411EDED41E3102CB00BC7BE3 /* UploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UploadManager.swift; path = Managers/Uploader/UploadManager.swift; sourceTree = "<group>"; };
 		411F7D931F5179A50080E8AD /* ChatChannelHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatChannelHeaderCell.swift; sourceTree = "<group>"; };
 		411F7D951F5179B50080E8AD /* ChatChannelHeaderCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatChannelHeaderCell.xib; sourceTree = "<group>"; };
+		412184A420472F7900DAAA88 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
+		412184A520472F7900DAAA88 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		412184A620472F7900DAAA88 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/VoiceOver.strings; sourceTree = "<group>"; };
 		412719431E6B353B00461FEE /* AuthViewControllerGoogleExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthViewControllerGoogleExtensions.swift; path = Controllers/Auth/AuthViewControllerGoogleExtensions.swift; sourceTree = "<group>"; };
 		412719451E6B403700461FEE /* RegisterUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterUsernameViewController.swift; path = Controllers/Auth/RegisterUsernameViewController.swift; sourceTree = "<group>"; };
 		412731D41DE0A55C00FC45A0 /* ChatPreviewModeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ChatPreviewModeView.xib; path = ../Cells/Subscription/ChatPreviewModeView.xib; sourceTree = "<group>"; };
@@ -927,6 +942,8 @@
 		807FB57720472B8200E21429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807FB57920472E0400E21429 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		807FB581204837AF00E21429 /* SEServersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServersViewModel.swift; sourceTree = "<group>"; };
+		807FB53C2044B49800E21429 /* Emojione+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emojione+Transform.swift"; sourceTree = "<group>"; };
+		807FB53E2045F36D00E21429 /* EmojioneSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojioneSpec.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManagerSpec.swift; path = Managers/PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
 		809B530A1FE2B1AB00833DD2 /* UploadClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadClient.swift; sourceTree = "<group>"; };
@@ -1061,6 +1078,25 @@
 				0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */,
 			);
 			name = ChangeAppIcon;
+			sourceTree = "<group>";
+		};
+		0B9AB2BF20444EB300ABEA05 /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */,
+				0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */,
+				0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */,
+				0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */,
+			);
+			name = Language;
+			sourceTree = "<group>";
+		};
+		0BBCC2C0204546BB001E3B6D /* Language */ = {
+			isa = PBXGroup;
+			children = (
+				0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */,
+			);
+			name = Language;
 			sourceTree = "<group>";
 		};
 		106DAA428B5BF7289FB70C65 /* Frameworks */ = {
@@ -1224,6 +1260,7 @@
 		4102E3AB1E53272C004BAA82 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				0B9AB2BF20444EB300ABEA05 /* Language */,
 				0B3A9767202C75A60019CA92 /* ChangeAppIcon */,
 				35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */,
 				4102E3AC1E53273E004BAA82 /* PreferencesViewController.swift */,
@@ -1582,6 +1619,7 @@
 				8069D26D1FFF876D00C75926 /* Emoji.swift */,
 				80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */,
 				4199A9881DABCC570035F820 /* Emojione.swift */,
+				807FB53C2044B49800E21429 /* Emojione+Transform.swift */,
 				80A2F38F20056C5E005D2DCA /* EmojiSearcher.swift */,
 				80A97EFD200628A300A2774C /* Views */,
 				80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */,
@@ -2209,6 +2247,7 @@
 			isa = PBXGroup;
 			children = (
 				80A97F002006293D00A2774C /* EmojiSearcherSpec.swift */,
+				807FB53E2045F36D00E21429 /* EmojioneSpec.swift */,
 			);
 			path = RCEmojiKit;
 			sourceTree = "<group>";
@@ -2255,6 +2294,7 @@
 		925FF74F1E8EFC9200982043 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				0BBCC2C0204546BB001E3B6D /* Language */,
 				140A95DC202F1E4D003FD564 /* AppIcon */,
 				41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */,
 			);
@@ -2522,6 +2562,7 @@
 				cs,
 				fr,
 				el,
+				es,
 			);
 			mainGroup = 41DF76D61D2C50710028DBF8;
 			productRefGroup = 41DF76E01D2C50710028DBF8 /* Products */;
@@ -3048,6 +3089,7 @@
 				4112DC5A1FFFB9B2005995E1 /* ModelMappeable.swift in Sources */,
 				809B53161FE3D3DC00833DD2 /* MessageReaction.swift in Sources */,
 				D10E9C1A1F643457007F1796 /* Channel.swift in Sources */,
+				0B9AB2C120444ECD00ABEA05 /* LanguageViewController.swift in Sources */,
 				806728FD200789F4009FE94D /* PreferencesNavigationController.swift in Sources */,
 				415972101D3DBDA0002258F4 /* Realm+Shared.swift in Sources */,
 				413996171F3B44500075F96E /* UploadHelper.swift in Sources */,
@@ -3063,6 +3105,7 @@
 				80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */,
 				411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */,
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
+				0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */,
 				597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */,
 				D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */,
 				D10E9C221F643616007F1796 /* MentionModelMapping.swift in Sources */,
@@ -3073,6 +3116,7 @@
 				419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */,
 				14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */,
 				D10E9C201F6434A7007F1796 /* NSRangeExtensions.swift in Sources */,
+				807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */,
 				7798B4191F852D670074B2F4 /* CustomField.swift in Sources */,
 				8076FDB52048571200114F28 /* Auth+User.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
@@ -3121,6 +3165,7 @@
 				41D4ABAB1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
 				80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */,
+				0B9AB2C320444ED600ABEA05 /* LanguageViewModel.swift in Sources */,
 				41BD37E11E290F2900CBC4C2 /* UserModelMapping.swift in Sources */,
 				412BCC871E55C6B800F7F4EE /* ChatMessageTextView.swift in Sources */,
 				140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */,
@@ -3238,6 +3283,7 @@
 				35E892CC201CDDED00B4BE5A /* SignupViewController+CustomFields.swift in Sources */,
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
+				0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
 				8076FDC72048632300114F28 /* Subscription+Queries.swift in Sources */,
@@ -3346,12 +3392,14 @@
 				0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */,
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
 				8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */,
+				807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */,
 				140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */,
 				8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */,
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,
 				89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */,
 				80A97F012006293D00A2774C /* EmojiSearcherSpec.swift in Sources */,
 				4101BF031F8D11FB00F67E89 /* AppManagerSpec.swift in Sources */,
+				0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */,
 				8013F88C1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
 				4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */,
@@ -3443,6 +3491,7 @@
 				1499781C1FA605CE007E013D /* pl */,
 				41A6191A1FA7065400CFFA69 /* cs */,
 				848088BB204370E8005022E8 /* el */,
+				412184A520472F7900DAAA88 /* es */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -3457,6 +3506,7 @@
 				80307E471FD75DD2006AD9EF /* pl */,
 				80307E481FD75DD5006AD9EF /* cs */,
 				848088BC204370E9005022E8 /* el */,
+				412184A620472F7900DAAA88 /* es */,
 			);
 			name = VoiceOver.strings;
 			sourceTree = "<group>";
@@ -3493,6 +3543,7 @@
 				80C7DD641FF46B8800E6647C /* pl */,
 				80C7DD651FF46B8C00E6647C /* fr */,
 				848088BA204370E8005022E8 /* el */,
+				412184A420472F7900DAAA88 /* es */,
 			);
 			name = RCEmojiKit.strings;
 			sourceTree = "<group>";

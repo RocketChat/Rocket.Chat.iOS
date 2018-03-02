@@ -85,9 +85,7 @@ final class ChatViewController: SLKTextViewController {
                 return
             }
 
-            dataController.unreadSeparator = false
-            dataController.dismissUnreadSeparator = false
-            dataController.lastSeen = subscription.lastSeen ?? Date()
+            resetUnreadSeparator()
 
             if !SocketManager.isConnected() {
                 socketDidDisconnect(socket: SocketManager.sharedInstance)
@@ -112,6 +110,9 @@ final class ChatViewController: SLKTextViewController {
             if let oldValue = oldValue {
                 if oldValue.identifier != subscription.identifier {
                     emptySubscriptionState()
+                } else if self.closeSidebarAfterSubscriptionUpdate {
+                    MainChatViewController.closeSideMenuIfNeeded()
+                    self.closeSidebarAfterSubscriptionUpdate = false
                 }
             } else {
                 emptySubscriptionState()
@@ -338,6 +339,14 @@ final class ChatViewController: SLKTextViewController {
             DraftMessageManager.update(draftMessage: "", for: subscription)
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         }
+    }
+
+    func resetUnreadSeparator() {
+        dataController.dismissUnreadSeparator = true
+        syncCollectionView()
+        dataController.unreadSeparator = false
+        dataController.dismissUnreadSeparator = false
+        dataController.lastSeen = subscription?.lastSeen ?? Date()
     }
 
     // MARK: SlackTextViewController
@@ -680,10 +689,6 @@ final class ChatViewController: SLKTextViewController {
             messages.append(contentsOf: newMessages)
             appendMessages(messages: newMessages, completion: { [weak self] in
                 self?.activityIndicator.stopAnimating()
-
-                if date == nil {
-                    self?.scrollToBottom()
-                }
 
                 if SocketManager.isConnected() {
                     if !loadRemoteHistory {

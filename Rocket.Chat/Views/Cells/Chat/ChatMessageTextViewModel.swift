@@ -9,8 +9,18 @@
 import UIKit
 import RealmSwift
 
-final class ChatMessageTextViewModel {
+protocol ChatMessageTextViewModelProtocol {
+    var color: UIColor { get }
+    var title: String { get }
+    var text: String { get }
+    var thumbURL: URL? { get }
+    var collapsed: Bool { get }
+    var attachment: Attachment { get }
+    var isFile: Bool { get }
+    func toggleCollapse()
+}
 
+final class ChatMessageTextViewModel: ChatMessageTextViewModelProtocol {
     var color: UIColor {
         if let color = attachment.color {
             return UIColor.normalizeColorFromString(string: color)
@@ -20,11 +30,15 @@ final class ChatMessageTextViewModel {
     }
 
     var title: String {
-        return attachment.title
+        guard !isFile else {
+            return attachment.title
+        }
+
+        return "\(collapsed ? "▶" : "▼") \(attachment.title)"
     }
 
     var text: String {
-        if attachment.titleLinkDownload && attachment.titleLink.count > 0 {
+        guard !isFile else {
             return localized("chat.message.open_file")
         }
 
@@ -36,7 +50,15 @@ final class ChatMessageTextViewModel {
     }
 
     var collapsed: Bool {
+        guard !isFile else {
+            return false
+        }
+
         return attachment.collapsed
+    }
+
+    var isFile: Bool {
+        return attachment.isFile
     }
 
     let attachment: Attachment
@@ -45,7 +67,53 @@ final class ChatMessageTextViewModel {
         self.attachment = attachment
     }
 
-    func toggleCollpase() {
+    func toggleCollapse() {
+        guard !isFile else {
+            return
+        }
+
+        Realm.executeOnMainThread({ _ in
+            self.attachment.collapsed = !self.attachment.collapsed
+        })
+    }
+}
+
+final class ChatMessageAttachmentFieldViewModel: ChatMessageTextViewModelProtocol {
+    var color: UIColor {
+        return  attachment.color != nil
+            ? UIColor(hex: attachment.color)
+            : UIColor.lightGray
+    }
+
+    var title: String {
+        return attachmentField.title
+    }
+
+    var text: String {
+        return attachmentField.value
+    }
+
+    var thumbURL: URL? {
+        return nil
+    }
+
+    var collapsed: Bool {
+        return attachment.collapsed
+    }
+
+    var isFile: Bool {
+        return false
+    }
+
+    let attachment: Attachment
+    let attachmentField: AttachmentField
+
+    init(withAttachment attachment: Attachment, andAttachmentField attachmentField: AttachmentField) {
+        self.attachment = attachment
+        self.attachmentField = attachmentField
+    }
+
+    func toggleCollapse() {
         Realm.executeOnMainThread({ _ in
             self.attachment.collapsed = !self.attachment.collapsed
         })
