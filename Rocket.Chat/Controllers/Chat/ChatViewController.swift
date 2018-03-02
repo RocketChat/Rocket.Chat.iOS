@@ -684,10 +684,6 @@ final class ChatViewController: SLKTextViewController {
             appendMessages(messages: newMessages, completion: { [weak self] in
                 self?.activityIndicator.stopAnimating()
 
-                if date == nil {
-                    self?.scrollToBottom()
-                }
-
                 if SocketManager.isConnected() {
                     if !loadRemoteHistory {
                         self?.isRequestingHistory = false
