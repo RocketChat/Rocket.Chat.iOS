@@ -199,15 +199,17 @@
 "chat.info.item.starred" = "Mis en favoris";
 
 // Members List
-"chat.members.list.title" = "Members";
-"chat.member.unblock.title" = "Unblock";
 "chat.members.list.title" = "Membres";
+"chat.member.unblock.title" = "Débloquer";
+"chat.member.open.profile.title" = "Ouvrir le profil";
 
 // Messages List
 "chat.messages.list.title" = "Messages";
 "chat.messages.list.empty" = "Aucun messages trouvé";
 "chat.messages.pinned.list.title" = "Messages épinglés";
 "chat.messages.starred.list.title" = "Messages favoris";
+"blocked.list.empty.title" = "Vide";
+"blocked.users.title" = "Utilisateurs bloqués";
 
 // Settings
 "myaccount.settings.title" = "Réglages"; // TODO: new text: Preferences
