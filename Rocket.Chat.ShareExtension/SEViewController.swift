@@ -10,6 +10,7 @@ import UIKit
 
 enum SEError: Error {
     case noServers
+    case canceled
 }
 
 class SEViewController: UIViewController, SEStoreSubscriber {
@@ -39,5 +40,9 @@ class SEViewController: UIViewController, SEStoreSubscriber {
         present(alert, animated: true, completion: {
             self.extensionContext?.cancelRequest(withError: SEError.noServers)
         })
+    }
+
+    func cancelShareExtension() {
+        self.extensionContext?.cancelRequest(withError: SEError.canceled)
     }
 }

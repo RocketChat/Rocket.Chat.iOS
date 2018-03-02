@@ -39,6 +39,11 @@
                         <viewLayoutGuide key="safeArea" id="1Xd-am-t49"/>
                     </view>
                     <navigationItem key="navigationItem" title="open.rocket.chat" id="9Q1-vx-xCK">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="osv-Om-cpa">
+                            <connections>
+                                <action selector="cancelButtonPressed:" destination="j1y-V4-xli" id="4b2-MV-hWV"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="edit" id="gQz-O8-IRL">
                             <connections>
                                 <segue destination="zfm-EI-TkZ" kind="show" id="vzt-R0-7Zk"/>

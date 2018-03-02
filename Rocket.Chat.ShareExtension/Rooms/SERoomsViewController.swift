@@ -33,6 +33,9 @@ class SERoomsViewController: SEViewController {
         tableView.reloadData()
     }
 
+    @IBAction func cancelButtonPressed(_ sender: Any) {
+        cancelShareExtension()
+    }
 }
 
 extension SERoomsViewController: SEServersViewDelegate {
