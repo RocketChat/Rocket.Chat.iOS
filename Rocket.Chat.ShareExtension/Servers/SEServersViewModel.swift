@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SEServerCell {
+struct SEServerCell: SECell {
     let title: String
     let detail: String
     let selected: Bool
@@ -26,6 +26,8 @@ struct SEServersViewModel {
     }
 }
 
+// MARK: DataSource
+
 extension SEServersViewModel {
     var numberOfSections: Int {
         return 1
@@ -42,5 +44,14 @@ extension SEServersViewModel {
 
     func cellForRowAt(_ indexPath: IndexPath) -> SEServerCell {
         return serverCells[indexPath.row]
+    }
+}
+
+// MARK: Delegate
+
+extension SEServersViewModel {
+    func didSelectRowAt(_ indexPath: IndexPath) {
+        store.selectedServerIndex = indexPath.row
+        store.sceneTransition = .pop
     }
 }

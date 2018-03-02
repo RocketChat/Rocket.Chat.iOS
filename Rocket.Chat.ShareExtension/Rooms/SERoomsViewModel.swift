@@ -9,6 +9,7 @@
 import Foundation
 
 enum SERoomsSectionType {
+    case server
     case favorites
     case channels
     case groups
@@ -17,14 +18,14 @@ enum SERoomsSectionType {
 
 struct SERoomsSection {
     let type: SERoomsSectionType
-    let roomCells: [SERoomCell]
+    let cells: [SECell]
 
     var title: String {
         return localized("rooms.section.\(String(describing: self.type))")
     }
 }
 
-struct SERoomCell {
+struct SERoomCell: SECell {
     let title: String
 }
 
@@ -41,6 +42,8 @@ struct SERoomsViewModel {
     }
 }
 
+// MARK: DataSource
+
 extension SERoomsViewModel {
     var numberOfSections: Int {
         return sections.count
@@ -49,17 +52,34 @@ extension SERoomsViewModel {
     func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
         case 0..<sections.count:
-            return sections[section].roomCells.count
+            return sections[section].cells.count
         default:
             return 0
         }
     }
 
-    func cellForRowAt(_ indexPath: IndexPath) -> SERoomCell {
-        return sections[indexPath.section].roomCells[indexPath.row]
+    func cellForRowAt(_ indexPath: IndexPath) -> SECell {
+        return sections[indexPath.section].cells[indexPath.row]
     }
 
     func titleForHeaderInSection(_ section: Int) -> String {
         return sections[section].title
+    }
+}
+
+// MARK: Delegate
+
+extension SERoomsViewModel {
+    func didSelectRowAt(_ indexPath: IndexPath) {
+        let cell = cellForRowAt(indexPath)
+
+        switch cell {
+        case is SEServerCell:
+            store.sceneTransition = .push(.servers)
+        case is SERoomCell:
+            store.sceneTransition = .push(.compose)
+        default:
+            break
+        }
     }
 }

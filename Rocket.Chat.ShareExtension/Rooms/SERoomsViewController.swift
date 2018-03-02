@@ -9,19 +9,13 @@
 import UIKit
 import Social
 
-class SERoomsViewController: SEViewController {
+final class SERoomsViewController: SEViewController {
     private var viewModel = SERoomsViewModel.emptyState
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
-        }
-    }
-
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let serversViewController = segue.destination as? SEServersViewController {
-            serversViewController.delegate = self
         }
     }
 
@@ -38,12 +32,6 @@ class SERoomsViewController: SEViewController {
     }
 }
 
-extension SERoomsViewController: SEServersViewDelegate {
-    func serversViewController(_ serversViewController: SEServersViewController, didSelectServerCell serverCell: SEServerCell) {
-        navigationController?.popViewController(animated: true)
-    }
-}
-
 extension SERoomsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return viewModel.numberOfSections
@@ -56,9 +44,19 @@ extension SERoomsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellModel = viewModel.cellForRowAt(indexPath)
 
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCellDefault")
+        let cell: UITableViewCell
 
-        cell.textLabel?.text = cellModel.title
+        if let cellModel = cellModel as? SERoomCell {
+            cell = UITableViewCell(style: .default, reuseIdentifier: cellModel.reuseIdentifier)
+            cell.textLabel?.text = cellModel.title
+        } else if let cellModel = cellModel as? SEServerCell {
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellModel.reuseIdentifier)
+            cell.textLabel?.text = cellModel.title
+            cell.detailTextLabel?.text = cellModel.detail
+        } else {
+            cell = UITableViewCell(style: .default, reuseIdentifier: cellModel.reuseIdentifier)
+        }
+
         cell.accessoryType = .disclosureIndicator
 
         return cell
@@ -71,7 +69,7 @@ extension SERoomsViewController: UITableViewDataSource {
 
 extension SERoomsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        performSegue(withIdentifier: "SendSegue", sender: viewModel.cellForRowAt(indexPath))
+        viewModel.didSelectRowAt(indexPath)
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }

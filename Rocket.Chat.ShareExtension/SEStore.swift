@@ -25,7 +25,7 @@ protocol SEStoreSubscriber: class {
     func storeUpdated(_ store: SEStore)
 }
 
-class SEStore {
+final class SEStore {
     var servers = getServers() {
         didSet {
             notifySubscribers()
@@ -33,6 +33,18 @@ class SEStore {
     }
 
     var selectedServerIndex: Int = 0 {
+        didSet {
+            notifySubscribers()
+        }
+    }
+
+    var scenes: [SEScene] = [.rooms] {
+        didSet {
+            notifySubscribers()
+        }
+    }
+
+    var sceneTransition: SESceneTransition = .none {
         didSet {
             notifySubscribers()
         }

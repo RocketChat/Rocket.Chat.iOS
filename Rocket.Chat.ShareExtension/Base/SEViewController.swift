@@ -46,3 +46,16 @@ class SEViewController: UIViewController, SEStoreSubscriber {
         self.extensionContext?.cancelRequest(withError: SEError.canceled)
     }
 }
+
+extension SEViewController {
+    static func fromStoryboard<T: SEViewController>() -> T {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let _viewController = storyboard.instantiateViewController(withIdentifier: "\(self)")
+
+        guard let viewController = _viewController as? T else {
+            fatalError("ViewController not found in Main storyboard: \(self)")
+        }
+
+        return viewController
+    }
+}

@@ -283,6 +283,9 @@
 		80054CFC1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */; };
 		80054CFE1FDAFF5200F5ECF9 /* PushClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CFD1FDAFF5200F5ECF9 /* PushClient.swift */; };
 		80054D001FDB1FA200F5ECF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CFF1FDB1FA200F5ECF9 /* Alert.swift */; };
+		800640F22049AF98006D990F /* SEServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800640F12049AF98006D990F /* SEServerCell.swift */; };
+		800640F42049AFB4006D990F /* SEServerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800640F32049AFB4006D990F /* SEServerCell.xib */; };
+		800640F72049BA25006D990F /* SEScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800640F62049BA25006D990F /* SEScene.swift */; };
 		800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E22831F8500A200DA84F1 /* MessagesListViewController.swift */; };
 		800E22861F8507E400DA84F1 /* SubscriptionMessagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */; };
 		800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800F38EC2019492D0005CB78 /* DeepLink.swift */; };
@@ -329,6 +332,7 @@
 		802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F01F7A9BB4005477EC /* MeRequestSpec.swift */; };
 		802498F31F7ACD76005477EC /* ChatMessageAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */; };
 		802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */; };
+		802A4E112049C7340072CD23 /* SENavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A4E102049C7340072CD23 /* SENavigationController.swift */; };
 		80307E3C1FD75BE1006AD9EF /* VOTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80307E3B1FD75BE1006AD9EF /* VOTextField.swift */; };
 		80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80307E3D1FD75CB1006AD9EF /* VOLocalized.swift */; };
 		80307E411FD75DC0006AD9EF /* VoiceOver.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80307E431FD75DC0006AD9EF /* VoiceOver.strings */; };
@@ -402,10 +406,13 @@
 		8076FDE42048CC8600114F28 /* MigrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDE32048CC8600114F28 /* MigrationCoordinator.swift */; };
 		8076FDE62048CD0600114F28 /* UserDefaults+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */; };
 		8076FDE82048D3AD00114F28 /* UserDefaults+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */; };
+		8076FDED2049A5F600114F28 /* SECell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDEC2049A5F600114F28 /* SECell.swift */; };
 		807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */; };
 		807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */; };
+		807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53C2044B49800E21429 /* Emojione+Transform.swift */; };
+		807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53E2045F36D00E21429 /* EmojioneSpec.swift */; };
 		807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB55A2046E7DD00E21429 /* SERoomsViewController.swift */; };
-		807FB55E2046E7DD00E21429 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 807FB55C2046E7DD00E21429 /* MainInterface.storyboard */; };
+		807FB55E2046E7DD00E21429 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 807FB55C2046E7DD00E21429 /* Main.storyboard */; };
 		807FB5622046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		807FB569204729E500E21429 /* SEServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB568204729E500E21429 /* SEServersViewController.swift */; };
 		807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB56A20472A0F00E21429 /* SERoomsViewModel.swift */; };
@@ -413,8 +420,6 @@
 		807FB57A20472E0400E21429 /* Localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB57920472E0400E21429 /* Localization.swift */; };
 		807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB581204837AF00E21429 /* SEServersViewModel.swift */; };
 		807FB58420483A4D00E21429 /* ServersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4147CE7A1F5EA41000C322C3 /* ServersViewController.swift */; };
-		807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53C2044B49800E21429 /* Emojione+Transform.swift */; };
-		807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53E2045F36D00E21429 /* EmojioneSpec.swift */; };
 		808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792351FB145B200EFE77F /* PermissionManagerSpec.swift */; };
 		808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 808792371FB14B3300EFE77F /* PermissionSpec.swift */; };
 		809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530A1FE2B1AB00833DD2 /* UploadClient.swift */; };
@@ -819,6 +824,9 @@
 		80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTokenDeleteRequest.swift; sourceTree = "<group>"; };
 		80054CFD1FDAFF5200F5ECF9 /* PushClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushClient.swift; sourceTree = "<group>"; };
 		80054CFF1FDB1FA200F5ECF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		800640F12049AF98006D990F /* SEServerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServerCell.swift; sourceTree = "<group>"; };
+		800640F32049AFB4006D990F /* SEServerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEServerCell.xib; sourceTree = "<group>"; };
+		800640F62049BA25006D990F /* SEScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEScene.swift; sourceTree = "<group>"; };
 		800E22831F8500A200DA84F1 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessagesListViewController.swift; path = Controllers/Chat/MessagesListViewController.swift; sourceTree = "<group>"; };
 		800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMessagesRequest.swift; sourceTree = "<group>"; };
 		800F38EC2019492D0005CB78 /* DeepLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeepLink.swift; sourceTree = "<group>"; };
@@ -865,6 +873,7 @@
 		802498F01F7A9BB4005477EC /* MeRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeRequestSpec.swift; sourceTree = "<group>"; };
 		802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageAudioView.xib; sourceTree = "<group>"; };
 		802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAudioView.swift; sourceTree = "<group>"; };
+		802A4E102049C7340072CD23 /* SENavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SENavigationController.swift; sourceTree = "<group>"; };
 		80307E3B1FD75BE1006AD9EF /* VOTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOTextField.swift; sourceTree = "<group>"; };
 		80307E3D1FD75CB1006AD9EF /* VOLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VOLocalized.swift; sourceTree = "<group>"; };
 		80307E421FD75DC0006AD9EF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/VoiceOver.strings; sourceTree = "<group>"; };
@@ -925,11 +934,14 @@
 		8076FDE32048CC8600114F28 /* MigrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationCoordinator.swift; sourceTree = "<group>"; };
 		8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Group.swift"; sourceTree = "<group>"; };
 		8076FDE72048CE8000114F28 /* Rocket.Chat.ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rocket.Chat.ShareExtension.entitlements; sourceTree = "<group>"; };
+		8076FDEC2049A5F600114F28 /* SECell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SECell.swift; sourceTree = "<group>"; };
 		807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceSpec.swift; sourceTree = "<group>"; };
 		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
+		807FB53C2044B49800E21429 /* Emojione+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emojione+Transform.swift"; sourceTree = "<group>"; };
+		807FB53E2045F36D00E21429 /* EmojioneSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojioneSpec.swift; sourceTree = "<group>"; };
 		807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Rocket.Chat.ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		807FB55A2046E7DD00E21429 /* SERoomsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomsViewController.swift; sourceTree = "<group>"; };
-		807FB55D2046E7DD00E21429 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		807FB55D2046E7DD00E21429 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		807FB55F2046E7DD00E21429 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		807FB568204729E500E21429 /* SEServersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServersViewController.swift; sourceTree = "<group>"; };
 		807FB56A20472A0F00E21429 /* SERoomsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomsViewModel.swift; sourceTree = "<group>"; };
@@ -942,8 +954,6 @@
 		807FB57720472B8200E21429 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		807FB57920472E0400E21429 /* Localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localization.swift; sourceTree = "<group>"; };
 		807FB581204837AF00E21429 /* SEServersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServersViewModel.swift; sourceTree = "<group>"; };
-		807FB53C2044B49800E21429 /* Emojione+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emojione+Transform.swift"; sourceTree = "<group>"; };
-		807FB53E2045F36D00E21429 /* EmojioneSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojioneSpec.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManagerSpec.swift; path = Managers/PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
 		809B530A1FE2B1AB00833DD2 /* UploadClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadClient.swift; sourceTree = "<group>"; };
@@ -2163,19 +2173,30 @@
 			path = Compose;
 			sourceTree = "<group>";
 		};
+		8076FDEB2049A5CB00114F28 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				8076FDD920489F5900114F28 /* SEViewController.swift */,
+				802A4E102049C7340072CD23 /* SENavigationController.swift */,
+				8076FDEC2049A5F600114F28 /* SECell.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
 		807FB5592046E7DD00E21429 /* Rocket.Chat.ShareExtension */ = {
 			isa = PBXGroup;
 			children = (
-				8076FDE72048CE8000114F28 /* Rocket.Chat.ShareExtension.entitlements */,
 				8076FD9920484A6000114F28 /* SEStore.swift */,
-				8076FDD920489F5900114F28 /* SEViewController.swift */,
+				800640F62049BA25006D990F /* SEScene.swift */,
+				8076FDEB2049A5CB00114F28 /* Base */,
 				807FB5802048378500E21429 /* Servers */,
 				807FB57E2048376900E21429 /* Rooms */,
 				8076FDE02048A69200114F28 /* Compose */,
 				807FB56C20472B2700E21429 /* Resources */,
 				807FB57920472E0400E21429 /* Localization.swift */,
-				807FB55C2046E7DD00E21429 /* MainInterface.storyboard */,
+				807FB55C2046E7DD00E21429 /* Main.storyboard */,
 				807FB55F2046E7DD00E21429 /* Info.plist */,
+				8076FDE72048CE8000114F28 /* Rocket.Chat.ShareExtension.entitlements */,
 			);
 			path = Rocket.Chat.ShareExtension;
 			sourceTree = "<group>";
@@ -2204,6 +2225,8 @@
 				807FB568204729E500E21429 /* SEServersViewController.swift */,
 				807FB581204837AF00E21429 /* SEServersViewModel.swift */,
 				8076FDDB2048A0E600114F28 /* SEServersViewModel+Store.swift */,
+				800640F12049AF98006D990F /* SEServerCell.swift */,
+				800640F32049AFB4006D990F /* SEServerCell.xib */,
 			);
 			path = Servers;
 			sourceTree = "<group>";
@@ -2704,8 +2727,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				807FB55E2046E7DD00E21429 /* MainInterface.storyboard in Resources */,
+				807FB55E2046E7DD00E21429 /* Main.storyboard in Resources */,
 				807FB56F20472B6A00E21429 /* Localizable.strings in Resources */,
+				800640F42049AFB4006D990F /* SEServerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3433,7 +3457,9 @@
 				8076FDC82048639700114F28 /* Message.swift in Sources */,
 				807FB569204729E500E21429 /* SEServersViewController.swift in Sources */,
 				8076FDA72048538500114F28 /* Realm+Shared.swift in Sources */,
+				802A4E112049C7340072CD23 /* SENavigationController.swift in Sources */,
 				8076FDA62048536800114F28 /* BaseModel.swift in Sources */,
+				800640F72049BA25006D990F /* SEScene.swift in Sources */,
 				8076FDBC2048596100114F28 /* URLExtension.swift in Sources */,
 				8076FDB3204856E200114F28 /* Auth.swift in Sources */,
 				807FB57A20472E0400E21429 /* Localization.swift in Sources */,
@@ -3441,11 +3467,13 @@
 				8076FDD22048648D00114F28 /* Email.swift in Sources */,
 				8076FDE82048D3AD00114F28 /* UserDefaults+Group.swift in Sources */,
 				807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */,
+				8076FDED2049A5F600114F28 /* SECell.swift in Sources */,
 				8076FDCD204863FC00114F28 /* MessageURL.swift in Sources */,
 				8076FD9D2048510100114F28 /* AuthSettings.swift in Sources */,
 				8076FD9A20484A6000114F28 /* SEStore.swift in Sources */,
 				8076FD9E2048510C00114F28 /* AuthManager.swift in Sources */,
 				8076FDA52048534200114F28 /* String+Random.swift in Sources */,
+				800640F22049AF98006D990F /* SEServerCell.swift in Sources */,
 				807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */,
 				8076FDCE2048642400114F28 /* User.swift in Sources */,
 				8076FDDE2048A31C00114F28 /* SERoomsViewModel+Store.swift in Sources */,
@@ -3511,12 +3539,12 @@
 			name = VoiceOver.strings;
 			sourceTree = "<group>";
 		};
-		807FB55C2046E7DD00E21429 /* MainInterface.storyboard */ = {
+		807FB55C2046E7DD00E21429 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				807FB55D2046E7DD00E21429 /* Base */,
 			);
-			name = MainInterface.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 		807FB57120472B6A00E21429 /* Localizable.strings */ = {

@@ -9,13 +9,7 @@
 import UIKit
 import Social
 
-protocol SEServersViewDelegate: class {
-    func serversViewController(_ serversViewController: SEServersViewController, didSelectServerCell serverCell: SEServerCell)
-}
-
-class SEServersViewController: SEViewController {
-    weak var delegate: SEServersViewDelegate?
-
+final class SEServersViewController: SEViewController {
     private var viewModel = SEServersViewModel.emptyState
 
     @IBOutlet weak var tableView: UITableView! {
@@ -58,7 +52,6 @@ extension SEServersViewController: UITableViewDataSource {
 
 extension SEServersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        store.selectedServerIndex = indexPath.row
-        delegate?.serversViewController(self, didSelectServerCell: viewModel.cellForRowAt(indexPath))
+        viewModel.didSelectRowAt(indexPath)
     }
 }
