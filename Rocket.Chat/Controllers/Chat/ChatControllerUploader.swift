@@ -8,7 +8,6 @@
 
 import UIKit
 import Photos
-import AVFoundation
 import MobileCoreServices
 
 extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
