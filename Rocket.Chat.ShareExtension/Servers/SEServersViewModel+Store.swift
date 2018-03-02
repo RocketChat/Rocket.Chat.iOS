@@ -9,7 +9,11 @@
 extension SEServersViewModel {
     init(store: SEStore) {
         serverCells = store.servers.enumerated().map {
-            SEServerCell(title: $1, selected: store.selectedServerIndex == $0)
+            SEServerCell(
+                title: $1.name,
+                detail: $1.host,
+                selected: store.selectedServerIndex == $0
+            )
         }
     }
 }

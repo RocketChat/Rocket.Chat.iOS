@@ -46,9 +46,10 @@ extension SEServersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cellModel = viewModel.cellForRowAt(indexPath)
 
-        let cell = UITableViewCell(style: .default, reuseIdentifier: "UITableViewCellDefault")
+        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "UITableViewCellDefault")
 
         cell.textLabel?.text = cellModel.title
+        cell.detailTextLabel?.text = cellModel.detail
         cell.accessoryType = cellModel.selected ? .checkmark : .none
 
         return cell

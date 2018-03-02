@@ -10,6 +10,7 @@ import Foundation
 
 struct SEServerCell {
     let title: String
+    let detail: String
     let selected: Bool
 }
 

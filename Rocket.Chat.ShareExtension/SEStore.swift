@@ -8,9 +8,16 @@
 
 import Foundation
 
-private func getServers() -> [String] {
+private func getServers() -> [(name: String, host: String)] {
     return DatabaseManager.servers?.flatMap {
-        $0[ServerPersistKeys.serverName]
+        guard
+            let name = $0[ServerPersistKeys.serverName],
+            let host = $0[ServerPersistKeys.serverURL]
+        else {
+            return nil
+        }
+
+        return (name, host)
     } ?? []
 }
 

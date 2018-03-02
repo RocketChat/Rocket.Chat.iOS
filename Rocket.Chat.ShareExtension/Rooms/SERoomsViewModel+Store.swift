@@ -30,9 +30,9 @@ extension SERoomsViewModel {
         ]
 
         if store.selectedServerIndex < store.servers.count {
-            title = store.servers[store.selectedServerIndex]
+            title = store.servers[store.selectedServerIndex].host
         } else {
-            title = "No"
+            title = "No servers"
         }
     }
 }
