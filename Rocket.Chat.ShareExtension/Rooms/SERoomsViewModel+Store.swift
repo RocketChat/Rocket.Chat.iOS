@@ -34,10 +34,6 @@ extension SERoomsViewModel {
             ])
         ]
 
-        if store.selectedServerIndex < store.servers.count {
-            title = store.servers[store.selectedServerIndex].name
-        } else {
-            title = "No servers"
-        }
+        title = localized("rooms.title")
     }
 }
