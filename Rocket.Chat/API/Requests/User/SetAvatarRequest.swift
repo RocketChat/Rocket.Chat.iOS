@@ -24,18 +24,33 @@ class SetAvatarRequest: APIRequest {
     }
 
     func body() -> Data? {
-        guard let base64EncodedImageRepresentation = UIImageJPEGRepresentation(avatar, 0.9)?.base64EncodedString() else {
+        guard let imageData = UIImageJPEGRepresentation(avatar, 0.9) else {
             return nil
         }
 
-        let string = "image=@\(base64EncodedImageRepresentation)"
-        let data = string.data(using: .utf8)
+        let boundary = "avatar"
+        var body = Data()
 
-        return data
+        guard let openingBoundary = "--\(boundary)\r\n".data(using: .utf8),
+                let contentInfo = "Content-Disposition: form-data; name=image; filename=imageName.jpg\r\n".data(using: .utf8),
+                let contentType = "Content-Type: image/jpeg\r\n\r\n".data(using: .utf8),
+                let newLine = "\r\n".data(using: .utf8),
+                let closingBoundary = "--\(boundary)--\r\n".data(using: .utf8) else {
+            return nil
+        }
+
+        body.append(openingBoundary)
+        body.append(contentInfo)
+        body.append(contentType)
+        body.append(imageData)
+        body.append(newLine)
+        body.append(closingBoundary)
+
+        return body
     }
 
     var contentType: String? {
-        return "multipart/form-data"
+        return "multipart/form-data; boundary=avatar"
     }
 }
 

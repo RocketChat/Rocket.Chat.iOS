@@ -107,7 +107,7 @@ class EditProfileTableViewController: UITableViewController {
 //        }, errored: { error in
 //            print(error)
 //        })
-        let setAvatarRequest = SetAvatarRequest(userId: userId, avatar: UIImage(named: "Launch Screen Icon")!)
+        let setAvatarRequest = SetAvatarRequest(userId: userId, avatar: UIImage(named: "profile.jpg")!)
         api?.fetch(setAvatarRequest, succeeded: { (result) in
             print(result.raw)
         }, errored: { (error) in
