@@ -19,6 +19,10 @@ final class PreferencesViewModel {
         return localized("myaccount.settings.title")
     }
 
+    internal var blockedUsersList: String {
+        return localized("blocked.users.title")
+    }
+
     internal var contactus: String {
         return localized("myaccount.settings.contactus")
     }
