@@ -200,6 +200,8 @@
 "chat.info.item.starred" = "Αστερωμένα";
 
 // Members List
+"chat.members.list.title" = "Members";
+"chat.member.unblock.title" = "Unblock";
 "chat.members.list.title" = "Μέλη";
 
 // Messages List

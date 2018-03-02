@@ -199,6 +199,8 @@
 "chat.info.item.starred" = "Oznaczone gwiazdką";
 
 // Members List
+"chat.members.list.title" = "Members";
+"chat.member.unblock.title" = "Unblock";
 "chat.members.list.title" = "Członkowie";
 
 // Messages List

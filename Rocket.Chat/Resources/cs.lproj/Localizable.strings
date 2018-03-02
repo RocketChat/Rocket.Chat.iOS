@@ -199,6 +199,8 @@
 "chat.info.item.starred" = "S hvězdičkou";
 
 // Members List
+"chat.members.list.title" = "Members";
+"chat.member.unblock.title" = "Unblock";
 "chat.members.list.title" = "Členové";
 
 // Messages List
