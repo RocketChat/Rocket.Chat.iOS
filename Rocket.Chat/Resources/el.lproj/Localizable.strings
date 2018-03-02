@@ -202,7 +202,7 @@
 // Members List
 "chat.members.list.title" = "Μέλη";
 "chat.member.unblock.title" = "Ξεβουλώνω";
-"chat.member.open.profile.title" = "Ανοίξτε το προφίλ;
+"chat.member.open.profile.title" = "Ανοίξτε το προφίλ";
 
 // Messages List
 "chat.messages.list.title" = "Μηνύματα";
