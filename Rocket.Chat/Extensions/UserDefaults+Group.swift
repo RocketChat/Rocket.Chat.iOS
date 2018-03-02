@@ -10,11 +10,11 @@ import Foundation
 
 extension UserDefaults {
     static var groupSuiteName: String {
-        return "group.chat.rocket.ios"
+        return "group.ios.chat.rocket"
     }
 
-    // swiftlint:disable force_unwrap
     static var group: UserDefaults {
+        // swiftlint:disable force_unwrapping
         return UserDefaults(suiteName: groupSuiteName)!
     }
 }

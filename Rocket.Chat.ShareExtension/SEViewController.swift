@@ -8,6 +8,10 @@
 
 import UIKit
 
+enum SEError: Error {
+    case noServers
+}
+
 class SEViewController: UIViewController, SEStoreSubscriber {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -20,6 +24,20 @@ class SEViewController: UIViewController, SEStoreSubscriber {
     }
 
     func storeUpdated(_ store: SEStore) {
+        guard !store.servers.isEmpty else {
+            return alertNoServers()
+        }
+    }
 
+    func alertNoServers() {
+        let alert = UIAlertController(
+            title: localized("alert.no_servers.title"),
+            message: localized("alert.no_servers.message"),
+            preferredStyle: .alert
+        )
+
+        present(alert, animated: true, completion: {
+            self.extensionContext?.cancelRequest(withError: SEError.noServers)
+        })
     }
 }

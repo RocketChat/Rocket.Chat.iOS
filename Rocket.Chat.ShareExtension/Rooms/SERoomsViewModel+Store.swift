@@ -29,6 +29,10 @@ extension SERoomsViewModel {
             ])
         ]
 
-        title = store.servers[store.selectedServer]
+        if store.selectedServerIndex < store.servers.count {
+            title = store.servers[store.selectedServerIndex]
+        } else {
+            title = "No"
+        }
     }
 }

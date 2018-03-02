@@ -25,18 +25,10 @@ class SERoomsViewController: SEViewController {
         }
     }
 
-    func updateView(newViewModel: SERoomsViewModel? = nil) {
-        if let newViewModel = newViewModel {
-            viewModel = newViewModel
-        }
-
-        title = viewModel.title
-        tableView.reloadData()
-    }
-
     override func storeUpdated(_ store: SEStore) {
-        viewModel = SERoomsViewModel(store: store)
+        super.storeUpdated(store)
 
+        viewModel = SERoomsViewModel(store: store)
         title = viewModel.title
         tableView.reloadData()
     }

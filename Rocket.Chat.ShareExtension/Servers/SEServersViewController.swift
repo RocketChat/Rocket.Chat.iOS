@@ -26,8 +26,9 @@ class SEServersViewController: SEViewController {
     }
 
     override func storeUpdated(_ store: SEStore) {
-        viewModel = SEServersViewModel(store: store)
+        super.storeUpdated(store)
 
+        viewModel = SEServersViewModel(store: store)
         title = viewModel.title
         tableView.reloadData()
     }
@@ -56,7 +57,7 @@ extension SEServersViewController: UITableViewDataSource {
 
 extension SEServersViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        store.selectedServer = indexPath.row
+        store.selectedServerIndex = indexPath.row
         delegate?.serversViewController(self, didSelectServerCell: viewModel.cellForRowAt(indexPath))
     }
 }

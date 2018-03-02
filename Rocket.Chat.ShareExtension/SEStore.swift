@@ -8,18 +8,24 @@
 
 import Foundation
 
+private func getServers() -> [String] {
+    return DatabaseManager.servers?.flatMap {
+        $0[ServerPersistKeys.serverName]
+    } ?? []
+}
+
 protocol SEStoreSubscriber: class {
     func storeUpdated(_ store: SEStore)
 }
 
 class SEStore {
-    var servers = ["open.rocket.chat", "cardoso.rocket.chat"] {
+    var servers = getServers() {
         didSet {
             notifySubscribers()
         }
     }
 
-    var selectedServer = 0 {
+    var selectedServerIndex: Int = 0 {
         didSet {
             notifySubscribers()
         }
