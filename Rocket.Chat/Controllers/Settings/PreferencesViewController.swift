@@ -18,6 +18,12 @@ final class PreferencesViewController: UITableViewController {
 
     private let viewModel = PreferencesViewModel()
 
+    @IBOutlet weak var labelBlockedUsers: UILabel! {
+        didSet {
+            labelBlockedUsers.text = viewModel.blockedUsersList
+        }
+    }
+
     @IBOutlet weak var labelContactUs: UILabel! {
         didSet {
             labelContactUs.text = viewModel.contactus
