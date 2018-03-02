@@ -22,7 +22,7 @@ class ServerManager {
             have information required.
      */
     static func updateServerInformation(from settings: AuthSettings) {
-        let defaults = UserDefaults.standard
+        let defaults = UserDefaults.group
         let selectedIndex = DatabaseManager.selectedIndex
 
         guard

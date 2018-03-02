@@ -40,21 +40,21 @@ struct DatabaseManager {
         - returns: The selected database index.
      */
     static var selectedIndex: Int {
-        return UserDefaults.standard.value(forKey: ServerPersistKeys.selectedIndex) as? Int ?? 0
+        return UserDefaults.group.value(forKey: ServerPersistKeys.selectedIndex) as? Int ?? 0
     }
 
     /**
         - returns: All servers stored locally into the app.
      */
     static var servers: [[String: String]]? {
-        return UserDefaults.standard.value(forKey: ServerPersistKeys.servers) as? [[String: String]]
+        return UserDefaults.group.value(forKey: ServerPersistKeys.servers) as? [[String: String]]
     }
 
     /**
         - parameter index: The database index user wants to select.
      */
     static func selectDatabase(at index: Int) {
-        UserDefaults.standard.set(index, forKey: ServerPersistKeys.selectedIndex)
+        UserDefaults.group.set(index, forKey: ServerPersistKeys.selectedIndex)
     }
 
     /**
@@ -87,7 +87,7 @@ struct DatabaseManager {
             newServer[ServerPersistKeys.token] = selectedServer[ServerPersistKeys.token]
             servers[newIndex] = newServer
 
-            UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+            UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
 
             removeDatabase(at: from)
         }
@@ -103,7 +103,7 @@ struct DatabaseManager {
     static func removeDatabase(at index: Int) {
         if var servers = self.servers, servers.count > index {
             servers.remove(at: index)
-            UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+            UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
         }
     }
 
@@ -132,7 +132,7 @@ struct DatabaseManager {
             selectDatabase(at: 0)
         }
 
-        UserDefaults.standard.set(validServers, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(validServers, forKey: ServerPersistKeys.servers)
     }
 
     /**
@@ -145,7 +145,7 @@ struct DatabaseManager {
      */
     @discardableResult
     static func createNewDatabaseInstance(serverURL: String) -> Int {
-        let defaults = UserDefaults.standard
+        let defaults = UserDefaults.group
         var servers = self.servers ?? []
 
         servers.append([
@@ -166,7 +166,7 @@ struct DatabaseManager {
      used by the currently instance.
 
      - parameter index: If the index you want to use isn't stored
-     into the UserDefaults.standard, you can for the index
+     into the UserDefaults.group, you can for the index
      using this parameter.
      */
     static func changeDatabaseInstance(index: Int? = nil) {

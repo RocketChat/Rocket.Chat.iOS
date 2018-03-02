@@ -26,7 +26,7 @@ struct AuthManager {
         goes wrong on database migration.
      */
     static func persistAuthInformation(_ auth: Auth) {
-        let defaults = UserDefaults.standard
+        let defaults = UserDefaults.group
         let selectedIndex = DatabaseManager.selectedIndex
 
         guard

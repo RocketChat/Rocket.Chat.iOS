@@ -17,7 +17,7 @@ let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
 
 extension MessageManager {
 
-    static var blockedUsersList = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
+    static var blockedUsersList = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 
     static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletionObjectsList<Message>) {
         var lastDate: Any!
@@ -180,9 +180,9 @@ extension MessageManager {
     static func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
         guard let userIdentifier = user.identifier else { return }
 
-        var blockedUsers: [String] = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
+        var blockedUsers: [String] = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
         blockedUsers.append(userIdentifier)
-        UserDefaults.standard.setValue(blockedUsers, forKey: kBlockedUsersIndentifiers)
+        UserDefaults.group.setValue(blockedUsers, forKey: kBlockedUsersIndentifiers)
         self.blockedUsersList = blockedUsers
 
         Realm.execute({ (realm) in

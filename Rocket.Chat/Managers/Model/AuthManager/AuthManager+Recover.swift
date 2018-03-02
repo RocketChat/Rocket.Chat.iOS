@@ -21,7 +21,7 @@ extension AuthManager {
             return
         }
 
-        let defaults = UserDefaults.standard
+        let defaults = UserDefaults.group
 
         guard
             let token = defaults.string(forKey: ServerPersistKeys.token),
