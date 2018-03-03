@@ -1,5 +1,5 @@
 //
-//  NSAttributedString+Extensions.swift
+//  NSAttributedString+CustomEmojis.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 1/5/18.
@@ -18,7 +18,7 @@ extension NSAttributedString {
 
             let alternates = emoji.alternates.filter { !$0.isEmpty }
 
-            let regexPattern = ":\(emoji.shortname):" + (alternates.isEmpty ? "" : "|:\(alternates.joined(separator: ":|:")):")
+            let regexPattern = ([emoji.shortname] + alternates).flatMap { $0.escapingRegex() }.reduce("") { $0.isEmpty ? ":\($1):" : "\($0)|:\($1):" }
 
             guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }
 
@@ -68,5 +68,13 @@ extension String {
         }
 
         return filteredRanges
+    }
+
+    func escapingRegex() -> String? {
+        var escaped = self
+        ["[", "]", "(", ")", "*", "+", "?", ".", "^", "$", "|"].forEach {
+            escaped = escaped.replacingOccurrences(of: $0, with: "\\\($0)")
+        }
+        return escaped
     }
 }

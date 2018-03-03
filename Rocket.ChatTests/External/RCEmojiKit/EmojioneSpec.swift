@@ -23,7 +23,7 @@ class EmojioneSpec: XCTestCase {
         Meow <- :cat:
         :dog: -> Woof
 
-        :family_mwg:
+        :family_mwg: :+1_tone1:
 
         ```
         Meow <- :cat:
@@ -43,7 +43,7 @@ class EmojioneSpec: XCTestCase {
             Meow <- 🐱
             🐶 -> Woof
 
-            👨‍👩‍👧
+            👨‍👩‍👧 👍🏻
 
             ```
             Meow <- :cat:

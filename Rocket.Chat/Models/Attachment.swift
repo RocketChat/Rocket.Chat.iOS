@@ -33,6 +33,10 @@ class Attachment: BaseModel {
         return .textAttachment
     }
 
+    var isFile: Bool {
+        return titleLinkDownload && titleLink.count > 0
+    }
+
     @objc dynamic var collapsed: Bool = false
     @objc dynamic var text: String?
     @objc dynamic var descriptionText: String?

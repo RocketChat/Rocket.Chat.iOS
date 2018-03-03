@@ -84,7 +84,11 @@ final class ChatMessageTextView: UIView {
         }
     }
 
-    static func heightFor(collapsed: Bool, withText text: String?) -> CGFloat {
+    static func heightFor(collapsed: Bool, withText text: String?, isFile: Bool = false) -> CGFloat {
+        guard !isFile else {
+            return defaultHeight
+        }
+
         let width = UIScreen.main.bounds.size.width - 73
         var textHeight: CGFloat = 1
 
@@ -102,8 +106,10 @@ final class ChatMessageTextView: UIView {
     // MARK: Actions
 
     @objc func viewDidTapped(_ sender: Any) {
-        viewModel?.toggleCollapse()
-        delegate?.viewDidCollapseChange(view: self)
+        if viewModel?.isFile == false {
+            viewModel?.toggleCollapse()
+            delegate?.viewDidCollapseChange(view: self)
+        }
 
         if let attachment = viewModel?.attachment {
             if attachment.titleLinkDownload {
