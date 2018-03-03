@@ -101,18 +101,27 @@ class EditProfileTableViewController: UITableViewController {
             }
         }
 
+        guard let image = UIImage(named: "profile.jpg"), let imageData = UIImageJPEGRepresentation(image, 0.9) else {
+            return
+        }
+
+        let client = API.current()?.client(UploadClient.self)
+        client?.uploadAvatar(data: imageData, filename: "profile.jpg", mimetype: "image/jpeg", completion: {
+            
+        })
+
 //        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
 //        api?.fetch(updateUserRequest, succeeded: { result in
 //            print(result)
 //        }, errored: { error in
 //            print(error)
 //        })
-        let setAvatarRequest = SetAvatarRequest(userId: userId, avatar: UIImage(named: "profile.jpg")!)
-        api?.fetch(setAvatarRequest, succeeded: { (result) in
-            print(result.raw)
-        }, errored: { (error) in
-            print(error)
-        })
+//        let setAvatarRequest = SetAvatarRequest(userId: userId, avatar: UIImage(named: "profile.jpg")!)
+//        api?.fetch(setAvatarRequest, succeeded: { (result) in
+//            print(result.raw)
+//        }, errored: { (error) in
+//            print(error)
+//        })
     }
 
     @IBAction func didPressAvatarButton(_ sender: UIButton) {

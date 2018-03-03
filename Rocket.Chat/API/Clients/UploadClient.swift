@@ -38,4 +38,22 @@ struct UploadClient: APIClient {
             }
         })
     }
+
+    func uploadAvatar(data: Data, filename: String, mimetype: String, completion: (() -> Void)? = nil) {
+        let req = UploadAvatarRequest(
+            data: data,
+            filename: filename,
+            mimetype: mimetype
+        )
+
+        api.fetch(req, succeeded: { result in
+            if let error = result.error {
+                Alert(key: "alert.upload_error").withMessage(error).present()
+            }
+            completion?()
+        }, errored: { _ in
+            Alert(key: "alert.upload_error").present()
+            completion?()
+        })
+    }
 }
