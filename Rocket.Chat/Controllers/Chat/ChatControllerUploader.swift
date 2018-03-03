@@ -244,7 +244,7 @@ extension ChatViewController {
         }
 
         let client = API.current()?.client(UploadClient.self)
-        client?.upload(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "",
+        client?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "",
                        completion: stopLoadingUpload, versionFallback: { deprecatedMethod() })
 
         func deprecatedMethod() {

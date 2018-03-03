@@ -14,7 +14,7 @@ struct UploadClient: APIClient {
         self.api = api
     }
 
-    func upload(roomId: String, data: Data, filename: String, mimetype: String, description: String, completion: (() -> Void)? = nil, versionFallback: (() -> Void)? = nil) {
+    func uploadMessage(roomId: String, data: Data, filename: String, mimetype: String, description: String, completion: (() -> Void)? = nil, versionFallback: (() -> Void)? = nil) {
         let req = UploadMessageRequest(
             roomId: roomId,
             data: data,
