@@ -13,7 +13,7 @@ import RealmSwift
 extension LoginService: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
         service = values["service"].stringValue
-        clientId = values["clientId"].string ?? values["appId"].string
+        clientId = values["clientId"].string ?? values["appId"].string ?? values["consumerKey"].string
         custom = values["custom"].boolValue
         serverUrl = values["serverURL"].stringValue
         tokenPath = values["tokenPath"].stringValue
@@ -116,7 +116,7 @@ extension LoginService: ModelMappeable {
         scope = ""
 
         serverUrl = "https://api.twitter.com"
-        tokenPath = "/oauth/access_token"
+        tokenPath = "/oauth2/token"
         authorizePath = "/oauth/authorize"
         buttonLabelText = "twitter"
         buttonLabelColor = "#ffffff"
