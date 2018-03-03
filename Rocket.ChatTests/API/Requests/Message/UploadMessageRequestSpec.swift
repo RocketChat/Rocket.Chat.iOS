@@ -11,9 +11,9 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class UploadRequestSpec: APITestCase {
+class UploadMessageRequestSpec: APITestCase {
     func testRequest() {
-        let _request = UploadRequest(roomId: "rid", data: Data(), filename: "filename.file",
+        let _request = UploadMessageRequest(roomId: "rid", data: Data(), filename: "filename.file",
                                      mimetype: "file/filetype", msg: "msg", description: "desc")
 
         guard let request = _request.request(for: api) else {
