@@ -17,6 +17,7 @@ class SetAvatarRequest: APIRequest {
 
     let userId: String
     let avatar: UIImage
+    let boundary = "Boundary-\(String.random())"
 
     init(userId: String, avatar: UIImage) {
         self.userId = userId
@@ -28,29 +29,21 @@ class SetAvatarRequest: APIRequest {
             return nil
         }
 
-        let boundary = "avatar"
-        var body = Data()
+        var data = Data()
+        let boundaryPrefix = "--\(boundary)\r\n"
 
-        guard let openingBoundary = "--\(boundary)\r\n".data(using: .utf8),
-                let contentInfo = "Content-Disposition: form-data; name=image; filename=imageName.jpg\r\n".data(using: .utf8),
-                let contentType = "Content-Type: image/jpeg\r\n\r\n".data(using: .utf8),
-                let newLine = "\r\n".data(using: .utf8),
-                let closingBoundary = "--\(boundary)--\r\n".data(using: .utf8) else {
-            return nil
-        }
+        data.appendString(boundaryPrefix)
+        data.appendString("\r\n".appending(boundaryPrefix))
+        data.appendString("Content-Disposition: form-data; name=\"image\"; filename=\"profile.jpg\"\r\n")
+        data.appendString("Content-Type: image/jpeg)\r\n\r\n")
+        data.append(imageData)
+        data.appendString("\r\n--".appending(boundary.appending("--")))
 
-        body.append(openingBoundary)
-        body.append(contentInfo)
-        body.append(contentType)
-        body.append(imageData)
-        body.append(newLine)
-        body.append(closingBoundary)
-
-        return body
+        return data
     }
 
     var contentType: String? {
-        return "multipart/form-data; boundary=avatar"
+        return "multipart/form-data; boundary=\(boundary)"
     }
 }
 
