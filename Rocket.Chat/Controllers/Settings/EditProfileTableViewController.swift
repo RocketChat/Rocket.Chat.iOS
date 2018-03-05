@@ -121,7 +121,26 @@ class EditProfileTableViewController: UITableViewController {
     }
 
     @IBAction func didPressAvatarButton(_ sender: UIButton) {
-        print("tapping")
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+//
+//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+//            alert.addAction(UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
+//                self.openCamera()
+//            }))
+//        }
+//
+//        alert.addAction(UIAlertAction(title: localized("chat.upload.choose_from_library"), style: .default, handler: { (_) in
+//            self.openPhotosLibrary()
+//        }))
+//
+//        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+//
+//        if let presenter = alert.popoverPresentationController {
+//            presenter.sourceView = leftButton
+//            presenter.sourceRect = leftButton.bounds
+//        }
+
+        present(alert, animated: true, completion: nil)
     }
 
     // MARK: UITableViewDataSource

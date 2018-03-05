@@ -10,8 +10,7 @@ import UIKit
 import Photos
 import MobileCoreServices
 
-extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
@@ -45,47 +44,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
 
         present(alert, animated: true, completion: nil)
-    }
-
-    fileprivate func openCamera(video: Bool = false) {
-        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-            return assertionFailure("Device camera is not availbale")
-        }
-
-        let imagePicker  = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .camera
-        imagePicker.cameraFlashMode = .off
-        imagePicker.mediaTypes = video ? [kUTTypeMovie as String] : [kUTTypeImage as String]
-        imagePicker.cameraCaptureMode = video ? .video : .photo
-        self.present(imagePicker, animated: true, completion: nil)
-    }
-
-    fileprivate func openDrawing() {
-        let storyboard = UIStoryboard(name: "Drawing", bundle: Bundle.main)
-
-        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
-
-            if let drawingController = controller.viewControllers.first as? DrawingViewController {
-                drawingController.delegate = self
-            }
-
-            present(controller, animated: true, completion: nil)
-        }
-    }
-
-    fileprivate func openPhotosLibrary() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = false
-        picker.sourceType = .savedPhotosAlbum
-
-        if let mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum) {
-            picker.mediaTypes = mediaTypes
-        }
-
-        present(picker, animated: true, completion: nil)
     }
 
     // MARK: UIImagePickerControllerDelegate
