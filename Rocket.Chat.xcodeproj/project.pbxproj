@@ -1144,13 +1144,12 @@
 		4102E3AB1E53272C004BAA82 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				99282260204DE0AE005D2067 /* Profile */,
 				0B9AB2BF20444EB300ABEA05 /* Language */,
 				0B3A9767202C75A60019CA92 /* ChangeAppIcon */,
 				35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */,
 				4102E3AC1E53273E004BAA82 /* PreferencesViewController.swift */,
 				806728FC200789F4009FE94D /* PreferencesNavigationController.swift */,
-				99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */,
-				9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -2072,6 +2071,15 @@
 				41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */,
 			);
 			name = Preferences;
+			sourceTree = "<group>";
+		};
+		99282260204DE0AE005D2067 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */,
+				9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		99D888F92046239100E51306 /* User */ = {
