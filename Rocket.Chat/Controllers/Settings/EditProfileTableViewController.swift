@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EditProfileTableViewController: UITableViewController {
+class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     @IBOutlet weak var name: UITextField!
     @IBOutlet weak var username: UITextField!
@@ -29,6 +29,7 @@ class EditProfileTableViewController: UITableViewController {
 
     let api = API.current()
     var isLoading = true
+    var avatarFile: FileUpload?
     var user: User? = User() {
         didSet {
             bindUserData()
@@ -80,7 +81,7 @@ class EditProfileTableViewController: UITableViewController {
     // MARK: Actions
 
     @IBAction func saveProfile(_ sender: UIBarButtonItem) {
-        guard let user = user, let userId = user.identifier else { return }
+        guard let user = user else { return }
         guard let name = name.text, let username = username.text, let email = email.text,
             !name.isEmpty, !username.isEmpty, !email.isEmpty else {
                 // TODO: Alert about empty fields
@@ -102,15 +103,13 @@ class EditProfileTableViewController: UITableViewController {
             }
         }
 
-        guard let image = UIImage(named: "profile.jpg"), let imageData = UIImageJPEGRepresentation(image, 0.9) else {
-            return
+        if let avatarFile = avatarFile {
+            let client = API.current()?.client(UploadClient.self)
+            client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: {
+                AvatarView.shouldRefreshCache = true
+                self.avatarView.updateAvatar()
+            })
         }
-
-        let client = API.current()?.client(UploadClient.self)
-        client?.uploadAvatar(data: imageData, filename: "profile.jpg", mimetype: "image/jpeg", completion: {
-            AvatarView.shouldRefreshCache = true
-            self.avatarView.updateAvatar()
-        })
 
 //        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
 //        api?.fetch(updateUserRequest, succeeded: { result in
@@ -122,23 +121,18 @@ class EditProfileTableViewController: UITableViewController {
 
     @IBAction func didPressAvatarButton(_ sender: UIButton) {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-//
-//        if UIImagePickerController.isSourceTypeAvailable(.camera) {
-//            alert.addAction(UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
-//                self.openCamera()
-//            }))
-//        }
-//
-//        alert.addAction(UIAlertAction(title: localized("chat.upload.choose_from_library"), style: .default, handler: { (_) in
-//            self.openPhotosLibrary()
-//        }))
-//
-//        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
-//
-//        if let presenter = alert.popoverPresentationController {
-//            presenter.sourceView = leftButton
-//            presenter.sourceRect = leftButton.bounds
-//        }
+
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            alert.addAction(UIAlertAction(title: localized("chat.upload.take_photo"), style: .default, handler: { (_) in
+                self.openCamera()
+            }))
+        }
+
+        alert.addAction(UIAlertAction(title: localized("chat.upload.choose_from_library"), style: .default, handler: { (_) in
+            self.openPhotosLibrary()
+        }))
+
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         present(alert, animated: true, completion: nil)
     }
@@ -147,6 +141,36 @@ class EditProfileTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return isLoading ? 0 : 2
+    }
+
+}
+
+extension EditProfileTableViewController: UINavigationControllerDelegate {}
+
+extension EditProfileTableViewController: UIImagePickerControllerDelegate {
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String: Any]) {
+        let filename = String.random()
+        var file: FileUpload?
+
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            let resizedImage = image.resizeWith(width: 1024) ?? image
+            guard let imageData = UIImageJPEGRepresentation(resizedImage, 0.9) else { return }
+
+            file = UploadHelper.file(
+                for: imageData,
+                name: "\(filename.components(separatedBy: ".").first ?? "image").jpeg",
+                mimeType: "image/jpeg"
+            )
+        }
+
+        avatarFile = file
+
+        dismiss(animated: true, completion: nil)
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
     }
 
 }
