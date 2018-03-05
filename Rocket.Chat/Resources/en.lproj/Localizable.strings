@@ -52,6 +52,14 @@
 "alert.email_verification.title" = "Email verification";
 "alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again.";
 
+"alert.load_profile_error.title" = "Failed to load your profile";
+"alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again.";
+"alert.update_profile_error.title" = "Failed to update";
+"alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please, try again.";
+"alert.update_profile_empty_fields.title" = "Please, fill the empty fields";
+"alert.update_profile_empty_fields.message" = "All your profile information are required and can't stay blank";
+
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
@@ -227,3 +235,8 @@
 "myaccount.settings.language.title" = "Change Language";
 "myaccount.settings.language.reset" = "Reset to Default";
 "myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+ before the new settings will take effect.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "Edit Profile";
+"myaccount.settings.profile.actions.save" = "Save";
+"myaccount.settings.profile.section" = "Profile";

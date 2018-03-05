@@ -68,13 +68,21 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         let meRequest = MeRequest()
         api?.fetch(meRequest, succeeded: { (result) in
-            self.user = result.user
-            self.isLoading = false
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
+            if let errorMessage = result.errorMessage {
+                Alert(key: "alert.load_profile_error").withMessage("errorMessage").present(handler: { _ in
+                    self.navigationController?.popViewController(animated: true)
+                })
+            } else {
+                self.user = result.user
+                self.isLoading = false
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
             }
-        }, errored: { (error) in
-            print(error)
+        }, errored: { (_) in
+            Alert(key: "alert.load_profile_error").present(handler: { _ in
+                self.navigationController?.popViewController(animated: true)
+            })
         })
     }
 
@@ -93,7 +101,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         guard let user = user, let userId = user.identifier else { return }
         guard let name = name.text, let username = username.text, let email = email.text,
             !name.isEmpty, !username.isEmpty, !email.isEmpty else {
-                // TODO: Alert about empty fields
+                Alert(key: "alert.update_profile_empty_fields").present()
                 return
         }
 
@@ -116,9 +124,9 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
         }
 
-        let stopLoading = {
+        let stopLoading = { [weak self] in
             DispatchQueue.main.async {
-                self.navigationItem.rightBarButtonItem = sender
+                self?.navigationItem.rightBarButtonItem = sender
             }
         }
 
@@ -139,15 +147,24 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             })
         }
 
-        isUpdatingUser = true
-        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
-        api?.fetch(updateUserRequest, succeeded: { _ in
-            self.isUpdatingUser = false
-            if !self.isUploadingAvatar {
+        let stopUpdatingUser = { [weak self] in
+            guard let weakSelf = self else { return }
+            weakSelf.isUpdatingUser = false
+            if !weakSelf.isUploadingAvatar {
                 stopLoading()
             }
-        }, errored: { error in
-            print(error)
+        }
+
+        isUpdatingUser = true
+        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
+        api?.fetch(updateUserRequest, succeeded: { result in
+            stopUpdatingUser()
+            if let errorMessage = result.errorMessage {
+                Alert(key: "alert.update_profile_error").withMessage(errorMessage).present()
+            }
+        }, errored: { _ in
+            stopUpdatingUser()
+            Alert(key: "alert.update_profile_error").present()
         })
     }
 
@@ -167,6 +184,10 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         present(alert, animated: true, completion: nil)
+    }
+
+    func hideKeyboard() {
+        view.endEditing(true)
     }
 
     // MARK: UITableViewDataSource
@@ -214,9 +235,9 @@ extension EditProfileTableViewController: UITextFieldDelegate {
         switch textField {
         case name: username.becomeFirstResponder()
         case username: email.becomeFirstResponder()
-        case email: view.endEditing(true)
+        case email: hideKeyboard()
         case newPassword: passwordConfirmation.becomeFirstResponder()
-        case passwordConfirmation: view.endEditing(true)
+        case passwordConfirmation: hideKeyboard()
         default: break
         }
 
