@@ -28,17 +28,17 @@ final class ChatViewController: SLKTextViewController {
     @IBOutlet weak var buttonScrollToBottom: UIButton!
     var buttonScrollToBottomMarginConstraint: NSLayoutConstraint?
 
-    var showButtonScrollToBottom: Bool = false {
+    var scrollToBottomButtonIsVisible: Bool = false {
         didSet {
             self.buttonScrollToBottom.superview?.layoutIfNeeded()
 
-            if self.showButtonScrollToBottom {
-                self.buttonScrollToBottomMarginConstraint?.constant = -self.textInputbar.frame.height - 40
+            if self.scrollToBottomButtonIsVisible {
+                self.buttonScrollToBottomMarginConstraint?.constant = (self.textInputbar.frame.origin.y - self.view.frame.height) - 40
             } else {
                 self.buttonScrollToBottomMarginConstraint?.constant = 50
             }
 
-            if showButtonScrollToBottom != oldValue {
+            if scrollToBottomButtonIsVisible != oldValue {
                 UIView.animate(withDuration: 0.5) {
                     self.buttonScrollToBottom.superview?.layoutIfNeeded()
                 }
@@ -321,7 +321,7 @@ final class ChatViewController: SLKTextViewController {
         let sizeHeight = collectionView?.contentSize.height ?? 0
         let offset = CGPoint(x: 0, y: max(sizeHeight - boundsHeight, 0))
         collectionView?.setContentOffset(offset, animated: animated)
-        showButtonScrollToBottom = false
+        scrollToBottomButtonIsVisible = false
     }
 
     func resetMessageSending() {
@@ -1097,7 +1097,7 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 extension ChatViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
-        
+
         updateKeyboardConstraints()
 
         if scrollView.contentOffset.y < -10 {
@@ -1106,7 +1106,7 @@ extension ChatViewController {
             }
         }
 
-        showButtonScrollToBottom = !chatLogIsAtBottom()
+        scrollToBottomButtonIsVisible = !chatLogIsAtBottom()
     }
 }
 
@@ -1186,5 +1186,3 @@ extension ChatViewController {
         }
     }
 }
-
-
