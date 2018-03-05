@@ -66,6 +66,15 @@
 "auth.connect.ssl_required" = "Se requiere que su servidor sea compatible con SSL";
 "auth.connect.connecting" = "Conexión en progreso. Mantener apretado";
 
+"auth.login.username.placeholder" = "Email or username";
+"auth.login.password.placeholder" = "Password";
+"auth.login.buttonRegister" = "Create new account";
+"auth.login.buttonResetPassword" = "Forgot password";
+"auth.login.agree_label" = "By proceeding you are agreeing to our";
+"auth.login.agree_and" = "and";
+"auth.login.agree_termsofservice" = "Terms of Service";
+"auth.login.agree_privacypolicy" = "Privacy Policy";
+
 "auth.forgot_password.title" = "¿Olvidaste tu contraseña?";
 "auth.forgot_password.message" = "Introduce tu correo electrónico";
 "auth.forgot_password.success" = "Si este correo electrónico está registrado, le enviaremos instrucciones sobre cómo restablecer su contraseña. Si no recibe un correo electrónico en breve, vuelva y vuelva a intentarlo.";
