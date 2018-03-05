@@ -341,10 +341,12 @@ final class ChatViewController: SLKTextViewController {
         dataController.lastSeen = subscription?.lastSeen ?? Date()
     }
 
-    // MARK: Handeling Keyboard
+    // MARK: Handling Keyboard
 
-    weak var keyboardHC: NSLayoutConstraint?
-    weak var textInputbarHC: NSLayoutConstraint?
+    // keyboardHeightConstraint is the same as keyboardHC in SLKTextViewController
+    weak var keyboardHeightConstraint: NSLayoutConstraint?
+    weak var textInputbarBackgroundHeightConstraint: NSLayoutConstraint?
+
     weak var keyboardProxyView: UIView?
     let textInputbarBackground = UIToolbar()
     var oldTextInputbarBgIsTransparent = false
@@ -352,8 +354,8 @@ final class ChatViewController: SLKTextViewController {
     // Enables for the interactive keyboard dismissal.
     // Gets called in scrollViewDidScroll and keyboardDidChangeFrame methods.
     private func updateKeyboardConstraints() {
-        if keyboardHC == nil {
-            keyboardHC = self.view.constraints.first {
+        if keyboardHeightConstraint == nil {
+            keyboardHeightConstraint = self.view.constraints.first {
                 ($0.firstItem as? UIView) == self.view &&
                     ($0.secondItem as? SLKTextInputbar) == self.textInputbar
             }
@@ -381,7 +383,7 @@ final class ChatViewController: SLKTextViewController {
         }
 
         // The conditional check should help prevent unnecessary re-draws.
-        if let keyboardHC = keyboardHC, keyboardHC.constant != keyboardHeight {
+        if let keyboardHC = keyboardHeightConstraint, keyboardHC.constant != keyboardHeight {
             keyboardHC.constant = keyboardHeight
         }
     }
@@ -401,7 +403,7 @@ final class ChatViewController: SLKTextViewController {
                 oldTextInputbarBgIsTransparent = true
             }
 
-            if let textInputbarHC = textInputbarHC, textInputbarHC.constant != view.safeAreaInsets.bottom {
+            if let textInputbarHC = textInputbarBackgroundHeightConstraint, textInputbarHC.constant != view.safeAreaInsets.bottom {
                 textInputbarHC.constant = view.safeAreaInsets.bottom
             }
         }
@@ -412,8 +414,8 @@ final class ChatViewController: SLKTextViewController {
             textInputbar.insertSubview(textInputbarBackground, at: 0)
             textInputbarBackground.translatesAutoresizingMaskIntoConstraints = false
 
-            textInputbarHC = textInputbarBackground.heightAnchor.constraint(equalTo: textInputbar.heightAnchor, multiplier: 1, constant: view.safeAreaInsets.bottom)
-            textInputbarHC?.isActive = true
+            textInputbarBackgroundHeightConstraint = textInputbarBackground.heightAnchor.constraint(equalTo: textInputbar.heightAnchor, multiplier: 1, constant: view.safeAreaInsets.bottom)
+            textInputbarBackgroundHeightConstraint?.isActive = true
 
             textInputbarBackground.widthAnchor.constraint(equalTo: textInputbar.widthAnchor).isActive = true
             textInputbarBackground.topAnchor.constraint(equalTo: textInputbar.topAnchor).isActive = true
