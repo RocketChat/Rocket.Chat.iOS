@@ -24,6 +24,12 @@ final class PreferencesViewController: UITableViewController {
         }
     }
 
+    @IBOutlet weak var labelNotifications: UILabel! {
+        didSet {
+            labelNotifications.text = viewModel.notifications
+        }
+    }
+
     @IBOutlet weak var labelLicense: UILabel! {
         didSet {
             labelLicense.text = viewModel.license
@@ -85,6 +91,10 @@ final class PreferencesViewController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
 
+    private func cellNotificationsDidPressed() {
+        performSegue(withIdentifier: "Notifications", sender: nil)
+    }
+
     private func cellAppIconDidPressed() {
         performSegue(withIdentifier: "AppIcon", sender: nil)
     }
@@ -100,8 +110,10 @@ final class PreferencesViewController: UITableViewController {
             if indexPath.row == 0 {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
-                cellLanguageDidPressed()
+                cellNotificationsDidPressed()
             } else if indexPath.row == 2 {
+                cellLanguageDidPressed()
+            } else if indexPath.row == 3 {
                 cellAppIconDidPressed()
             }
         } else if indexPath.section == 1 {

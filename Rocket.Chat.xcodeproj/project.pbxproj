@@ -13,6 +13,9 @@
 		0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */; };
 		0B9AB2C120444ECD00ABEA05 /* LanguageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */; };
 		0B9AB2C320444ED600ABEA05 /* LanguageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */; };
+		0BAA9A99204D26AA004BFBA9 /* SettingsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9A98204D26AA004BFBA9 /* SettingsRequest.swift */; };
+		0BAA9A9B204D27D3004BFBA9 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9A9A204D27D3004BFBA9 /* Setting.swift */; };
+		0BAA9A9D204D2E56004BFBA9 /* SettingModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9A9C204D2E56004BFBA9 /* SettingModelMapping.swift */; };
 		0BB9678A2031A74B0051D68C /* DrawingBrushColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */; };
 		0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */; };
 		0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */; };
@@ -456,6 +459,9 @@
 		0B7A210C204680D500D11085 /* ChangeLanguageResetCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeLanguageResetCell.swift; path = Controllers/Language/ChangeLanguageResetCell.swift; sourceTree = "<group>"; };
 		0B9AB2C020444ECD00ABEA05 /* LanguageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageViewController.swift; path = Controllers/Language/LanguageViewController.swift; sourceTree = "<group>"; };
 		0B9AB2C220444ED600ABEA05 /* LanguageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguageViewModel.swift; sourceTree = "<group>"; };
+		0BAA9A98204D26AA004BFBA9 /* SettingsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRequest.swift; sourceTree = "<group>"; };
+		0BAA9A9A204D27D3004BFBA9 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
+		0BAA9A9C204D2E56004BFBA9 /* SettingModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModelMapping.swift; sourceTree = "<group>"; };
 		0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorViewModel.swift; sourceTree = "<group>"; };
 		0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeLanguageCell.swift; path = Controllers/Language/ChangeLanguageCell.swift; sourceTree = "<group>"; };
 		0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageViewModelSpec.swift; path = Settings/LanguageViewModelSpec.swift; sourceTree = "<group>"; };
@@ -1539,6 +1545,7 @@
 				8073719F1F96937100D53ADF /* LoginService.swift */,
 				806401301FB09DE800990572 /* Permission.swift */,
 				805DEC361FFC08870033151B /* CustomEmoji.swift */,
+				0BAA9A9A204D27D3004BFBA9 /* Setting.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1586,6 +1593,7 @@
 				D10E9C211F643616007F1796 /* MentionModelMapping.swift */,
 				807371A11F96968C00D53ADF /* LoginServiceModelMapping.swift */,
 				806401321FB09EC400990572 /* PermissionModelMapping.swift */,
+				0BAA9A9C204D2E56004BFBA9 /* SettingModelMapping.swift */,
 			);
 			path = Mapping;
 			sourceTree = "<group>";
@@ -1802,6 +1810,7 @@
 				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
 				80A63C521F71BD2900FE5AC4 /* UserInfoRequest.swift */,
 				80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */,
+				0BAA9A98204D26AA004BFBA9 /* SettingsRequest.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -2865,6 +2874,7 @@
 				802498EE1F7A8380005477EC /* MeRequest.swift in Sources */,
 				897083D71F8CF08100233561 /* FormTableViewCell.swift in Sources */,
 				412BCC8B1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift in Sources */,
+				0BAA9A9B204D27D3004BFBA9 /* Setting.swift in Sources */,
 				41CABFFA1F5047E200E0B289 /* ChatLoaderCell.swift in Sources */,
 				8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */,
 				80D955C2202154A300E3F281 /* CASViewController.swift in Sources */,
@@ -2901,6 +2911,8 @@
 				806401351FB09F8A00990572 /* PermissionManager.swift in Sources */,
 				35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */,
 				8041C0402028C7A1007E21FA /* ReactorListViewController.swift in Sources */,
+				0BAA9A9D204D2E56004BFBA9 /* SettingModelMapping.swift in Sources */,
+				0BAA9A99204D26AA004BFBA9 /* SettingsRequest.swift in Sources */,
 				4180204F1E718E370012A092 /* ChannelInfoViewController.swift in Sources */,
 				8013F8721FD6B5B000EE1A4E /* CommandsClient.swift in Sources */,
 				4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */,
