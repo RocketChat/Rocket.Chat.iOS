@@ -66,6 +66,15 @@
 "auth.connect.ssl_required" = "Απαιτείται υποστήριξη SSL στον εξυπηρετητή";
 "auth.connect.connecting" = "Σύνδεση σε εξέλιξη. Περιμένετε παρακαλώ";
 
+"auth.login.username.placeholder" = "Email ή όνομα χρήστη";
+"auth.login.password.placeholder" = "Συνθηματικό";
+"auth.login.buttonRegister" = "Δημιουργήστε νέο λογαριασμό";
+"auth.login.buttonResetPassword" = "Ξέχασα το συνθηματικό";
+"auth.login.agree_label" = "Συνεχίζοντας συμφωνείτε με τους";
+"auth.login.agree_and" = "και";
+"auth.login.agree_termsofservice" = "Όρους Υπηρεσίας";
+"auth.login.agree_privacypolicy" = "Πολιτική Απορρήτου";
+
 "auth.forgot_password.title" = "Ξεχάσατε το συνθηματικό σας;";
 "auth.forgot_password.message" = "Εισάγετε το e-mail σας";
 "auth.forgot_password.success" = "Αν αυτό το email είναι ήδη εγγεγραμμένο, θα σας στείλουμε οδηγίες για να αλλάξετε το συνθηματικό σας. Αν δεν λάβετε σύντομα ένα email, παρακαλούμε να επανέλθετε και να ξαναπροσπαθήσετε.";
@@ -90,14 +99,14 @@
 "user_menu.busy" = "Απασχολημένος";
 "user_menu.invisible" = "Αόρατος";
 "user_menu.admin" = "Διαχείριση";
-"user_menu.settings" = "Ο Λογαριασμός μου";
+"user_menu.preferences" = "Ο Λογαριασμός μου";
 "user_menu.logout" = "Αποσύνδεση";
 
 // New Room View
 "new_room.title" = "Νέο Κανάλι";
 "new_room.buttons.create" = "Δημιουργία";
 "new_room.cell.public_channel.title" = "Δημόσιο Κανάλι";
-"new_room.cell.public_channel.description" = "Ο καθένας μπορεί να έχει πρόσβαση σε αυτό το κανάλι";
+"new_room.cell.public_channel.description" = "Καθένας μπορεί να έχει πρόσβαση σε αυτό το κανάλι";
 "new_room.cell.public_channel.description.public_only" = "Μπορείτε να δημιουργείτε μόνο δημόσια κανάλια";
 "new_room.cell.public_channel.description.private_only" = "Μπορείτε να δημιουργείτε μόνο ιδιωτικά κανάλια";
 "new_room.cell.read_only.title" = "Κανάλι μόνο ανάγνωσης";
@@ -119,7 +128,7 @@
 "chat.read_only" = "Αυτό το δωμάτιο είναι μόνο για ανάγνωση";
 "chat.muted" = "Έχετε τεθεί σε σίγαση";
 "chat.loading_messages" = "Φόρτωση μηνυμάτων...";
-"chat.unread_separator" = "new messages";
+"chat.unread_separator" = "νέα μηνύματα";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Προσθέστε Αντίδραση";
@@ -135,12 +144,12 @@
 "chat.message.actions.delete.confirm.title" = "Να διαγράψουμε αυτό το μήνυμα;";
 "chat.message.actions.delete.confirm.message" = "Σίγουρα θέλετε να διαγράψετε αυτό το μήνυμα; Αυτή η διαδικασία δεν μπορεί να ακυρωθεί.";
 "chat.message.actions.delete.confirm.yes" = "Ναι, διαγράψτε";
-"chat.message.actions.discard" = "Discard message";
-"chat.message.actions.discard.confirm.title" = "Discard this message?";
-"chat.message.actions.discard.confirm.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone.";
-"chat.message.actions.discard.confirm.yes" = "Yes, discard";
-"chat.message.actions.resend" = "Resend";
-"chat.message.actions.resend_all" = "Resend all";
+"chat.message.actions.discard" = "Απόρριψη μηνύματος";
+"chat.message.actions.discard.confirm.title" = "Να απορριφθεί αυτό το μήνυμα?";
+"chat.message.actions.discard.confirm.message" = "Αυτό το μήνυμα δεν στάλθηκε ακόμη. Θέλετε να το απορρίψετε? Αυτή η ενέργεια δεν μπορεί να ακυρωθεί.";
+"chat.message.actions.discard.confirm.yes" = "Ναι, να απορριφθεί";
+"chat.message.actions.resend" = "Ξαναστέλνω";
+"chat.message.actions.resend_all" = "Τα ξαναστέλνω όλα";
 "Send" = "Αποστολή"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -155,7 +164,7 @@
 "chat.upload.shoot_video" = "Τραβήξτε Video";
 "chat.upload.choose_from_library" = "Επιλέξτε από τη Βιβλιοθήκη";
 "chat.upload.import_file" = "Εισαγωγή Αρχείου Από...";
-"chat.upload.draw" = "Draw something";
+"chat.upload.draw" = "Σχεδιάστε κάτι";
 
 // Chat Download
 "chat.download.downloading_file" = "Κατεβάζουμε \"%@\"";
@@ -165,13 +174,13 @@
 "chat.message.open_browser" = "Ανοίξτε στο πρόγραμμα Περιήγησης";
 
 // Chat Drawing
-"chat.drawing.errorTitle" = "Oops!";
-"chat.drawing.messageTitle" = "You have to draw something before sending it.";
-"chat.drawing.fileName" = "Drawing";
-"chat.drawing.settings.opacity" = "Opacity";
-"chat.drawing.settings.width" = "Width";
-"chat.drawing.settings.color.selected" = "Selected color";
-"chat.drawing.settings.color.others" = "Choose color below:";
+"chat.drawing.errorTitle" = "Ωπ!";
+"chat.drawing.messageTitle" = "Πρέπει να ζωγραφίσετε κάτι πριν να το στείλετε.";
+"chat.drawing.fileName" = "Σχέδιο";
+"chat.drawing.settings.opacity" = "Αδιαφάνεια";
+"chat.drawing.settings.width" = "Πλάτος";
+"chat.drawing.settings.color.selected" = "Επιλεγμένο χρώμα";
+"chat.drawing.settings.color.others" = "Επιλλέξτε χρώμα:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Το όνομα του δωματίου άλλαξε σε: %@ by %@";
@@ -224,6 +233,6 @@
 "myaccount.settings.changeicon.iosversion" = "Εναλλακτικά εικονίδια εφαρμογής δεν υποστηρίζονται σε iOS εκδόσεις μικρότερες από 10.3";
 
 // Change Language
-"myaccount.settings.language.title" = "Change Language";
-"myaccount.settings.language.reset" = "Reset to Default";
-"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+ before the new settings will take effect.";
+"myaccount.settings.language.title" = "Μεταβολή Γλώσσας";
+"myaccount.settings.language.reset" = "Επαναφορά στην Προεπιλεγμένη";
+"myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat+ ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";

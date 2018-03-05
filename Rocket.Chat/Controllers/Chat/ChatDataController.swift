@@ -153,6 +153,13 @@ final class ChatDataController {
             newItems.append(separator)
         }
 
+        if dismissUnreadSeparator {
+            for (idx, obj) in data.enumerated() where obj.type == .unreadSeparator {
+                data.remove(at: idx)
+                removedIndexPaths.append(obj.indexPath)
+            }
+        }
+
         if loadedAllMessages {
             if data.filter({ $0.type == .header }).count == 0 {
                 let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0))
@@ -283,5 +290,4 @@ final class ChatDataController {
 
         return nil
     }
-
 }

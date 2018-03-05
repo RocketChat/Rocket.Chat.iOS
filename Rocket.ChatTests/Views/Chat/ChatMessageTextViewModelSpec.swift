@@ -37,6 +37,13 @@ class ChatMessageTextViewModelSpec: XCTestCase {
         attachment.collapsed = true
 
         XCTAssert(model.title == "▶ Message title", "collapsed test is correct")
+
+        // Don't display collapse icon for files
+
+        attachment.titleLinkDownload = true
+        attachment.titleLink = "test"
+
+        XCTAssert(model.title == "Message title")
     }
 
     func testText() {
