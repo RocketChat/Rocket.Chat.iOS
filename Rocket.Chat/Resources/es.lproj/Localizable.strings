@@ -1,5 +1,5 @@
 // Global
-"global.ok" = "De Acuerdo";
+"global.ok" = "OK";
 "global.no" = "No";
 "global.cancel" = "Cancelar";
 
@@ -9,8 +9,7 @@
 
 // Alerts
 "alert.connection.invalid_url.title" = "Uy!";
-"alert.connection.invalid_url.message" = "
-La URL que ingresó no es válida. Compruébalo y vuelve a intentarlo, por favor!";
+"alert.connection.invalid_url.message" = "La URL que ingresó no es válida. Compruébalo y vuelve a intentarlo, por favor!";
 
 "alert.connection.socket_error.title" = "Uy!";
 "alert.connection.socket_error.message" = "No se pudo conectar a este servidor!";
