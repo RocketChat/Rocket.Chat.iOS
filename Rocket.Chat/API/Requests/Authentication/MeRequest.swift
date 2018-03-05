@@ -25,6 +25,6 @@ extension APIResult where T == MeRequest {
     }
 
     var errorMessage: String? {
-        return raw?["error"].stringValue
+        return raw?["error"].string
     }
 }

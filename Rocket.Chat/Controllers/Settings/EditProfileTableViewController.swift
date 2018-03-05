@@ -10,11 +10,42 @@ import UIKit
 
 class EditProfileTableViewController: UITableViewController, MediaPicker {
 
-    @IBOutlet weak var name: UITextField!
-    @IBOutlet weak var username: UITextField!
-    @IBOutlet weak var email: UITextField!
-    @IBOutlet weak var newPassword: UITextField!
-    @IBOutlet weak var passwordConfirmation: UITextField!
+    @IBOutlet weak var name: UITextField! {
+        didSet {
+            name.placeholder = viewModel.namePlaceholder
+        }
+    }
+
+    @IBOutlet weak var username: UITextField! {
+        didSet {
+            username.placeholder = viewModel.usernamePlaceholder
+        }
+    }
+
+    @IBOutlet weak var email: UITextField! {
+        didSet {
+            email.placeholder = viewModel.emailPlaceholder
+        }
+    }
+
+    @IBOutlet weak var newPassword: UITextField! {
+        didSet {
+            newPassword.placeholder = viewModel.passwordPlaceholder
+        }
+    }
+
+    @IBOutlet weak var passwordConfirmation: UITextField! {
+        didSet {
+            passwordConfirmation.placeholder = viewModel.passwordConfirmationPlaceholder
+        }
+    }
+
+    @IBOutlet weak var saveButton: UIBarButtonItem! {
+        didSet {
+            saveButton.title = viewModel.saveButtonTitle
+        }
+    }
+
     @IBOutlet weak var avatarButton: UIButton!
 
     var avatarView: AvatarView = {
@@ -44,10 +75,16 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
     }
 
+    private let viewModel = EditProfileViewModel()
+
     // MARK: View Life Cycle
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+
+        navigationItem.title = viewModel.title
 
         setupAvatarButton()
         fetchUserData()
@@ -69,7 +106,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         let meRequest = MeRequest()
         api?.fetch(meRequest, succeeded: { (result) in
             if let errorMessage = result.errorMessage {
-                Alert(key: "alert.load_profile_error").withMessage("errorMessage").present(handler: { _ in
+                Alert(key: "alert.load_profile_error").withMessage(errorMessage).present(handler: { _ in
                     self.navigationController?.popViewController(animated: true)
                 })
             } else {
@@ -98,6 +135,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     // MARK: Actions
 
     @IBAction func saveProfile(_ sender: UIBarButtonItem) {
+        hideKeyboard()
+
         guard let user = user, let userId = user.identifier else { return }
         guard let name = name.text, let username = username.text, let email = email.text,
             !name.isEmpty, !username.isEmpty, !email.isEmpty else {
@@ -116,19 +155,11 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             if newPassword == passwordConfirmation {
                 password = newPassword
             } else {
-                // TODO: Alert about password confirmation not matching
+                Alert(key: "alert.password_mismatch_error").present()
             }
         }
 
-        DispatchQueue.main.async {
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
-        }
-
-        let stopLoading = { [weak self] in
-            DispatchQueue.main.async {
-                self?.navigationItem.rightBarButtonItem = sender
-            }
-        }
+        startLoading()
 
         if let avatarFile = avatarFile {
             isUploadingAvatar = true
@@ -138,7 +169,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                 self.isUploadingAvatar = false
 
                 if !self.isUpdatingUser {
-                    stopLoading()
+                    self.stopLoading(sender: sender)
                 }
 
                 self.avatarView.shouldRefreshCache = true
@@ -151,7 +182,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             guard let weakSelf = self else { return }
             weakSelf.isUpdatingUser = false
             if !weakSelf.isUploadingAvatar {
-                stopLoading()
+                self?.stopLoading(sender: sender)
             }
         }
 
@@ -186,14 +217,39 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         present(alert, animated: true, completion: nil)
     }
 
-    func hideKeyboard() {
+    @objc func hideKeyboard() {
         view.endEditing(true)
+    }
+
+    func startLoading() {
+        DispatchQueue.main.async {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
+        }
+    }
+
+    func stopLoading(sender: UIBarButtonItem) {
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationItem.rightBarButtonItem = sender
+        }
     }
 
     // MARK: UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         return isLoading ? 0 : 2
+    }
+
+    // MARK: UITableViewDelegate
+
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        switch section {
+        case 0:
+            return viewModel.profileSectionTitle
+        case 1:
+            return viewModel.passwordSectionTitle
+        default:
+            return ""
+        }
     }
 
 }

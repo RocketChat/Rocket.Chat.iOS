@@ -382,6 +382,7 @@
                         <outlet property="name" destination="yDN-bF-Vmu" id="2eI-KR-Eex"/>
                         <outlet property="newPassword" destination="uVe-0p-QKg" id="84R-fe-l7h"/>
                         <outlet property="passwordConfirmation" destination="DX6-bF-5hx" id="Czu-Ne-How"/>
+                        <outlet property="saveButton" destination="bkN-sd-siR" id="42w-9S-DSd"/>
                         <outlet property="username" destination="wls-OZ-1ZV" id="AgF-EO-95F"/>
                     </connections>
                 </tableViewController>

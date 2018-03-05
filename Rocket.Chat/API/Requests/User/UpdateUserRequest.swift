@@ -71,6 +71,6 @@ extension APIResult where T == UpdateUserRequest {
     }
 
     var errorMessage: String? {
-        return raw?["error"].stringValue
+        return raw?["error"].string
     }
 }

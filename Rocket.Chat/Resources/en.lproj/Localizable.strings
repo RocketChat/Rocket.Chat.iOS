@@ -54,11 +54,12 @@
 
 "alert.load_profile_error.title" = "Failed to load your profile";
 "alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again.";
+"alert.password_mismatch_error.title" = "Your password doesn't match";
+"alert.password_mismatch_error.message" = "The confirmation field doesn't match with the password you've provided. Please, check it and try again.";
 "alert.update_profile_error.title" = "Failed to update";
 "alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please, try again.";
 "alert.update_profile_empty_fields.title" = "Please, fill the empty fields";
 "alert.update_profile_empty_fields.message" = "All your profile information are required and can't stay blank";
-
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
@@ -239,4 +240,10 @@
 // Update Profile
 "myaccount.settings.profile.title" = "Edit Profile";
 "myaccount.settings.profile.actions.save" = "Save";
-"myaccount.settings.profile.section" = "Profile";
+"myaccount.settings.profile.section.profile" = "Profile";
+"myaccount.settings.profile.section.password" = "Password";
+"myaccount.settings.profile.name_placeholder" = "Name";
+"myaccount.settings.profile.username_placeholder" = "Username";
+"myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.password_placeholder" = "New password";
+"myaccount.settings.profile.password_confirmation_placeholder" = "Password confirmation";
