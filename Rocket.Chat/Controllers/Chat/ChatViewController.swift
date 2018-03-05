@@ -347,6 +347,7 @@ final class ChatViewController: SLKTextViewController {
     weak var textInputbarHC: NSLayoutConstraint?
     weak var keyboardProxyView: UIView?
     let textInputbarBackground = UIToolbar()
+    var oldTextInputbarBgIsTransparent = false
 
     // Enables for the interactive keyboard dismissal.
     // Gets called in scrollViewDidScroll and keyboardDidChangeFrame methods.
@@ -378,8 +379,11 @@ final class ChatViewController: SLKTextViewController {
         if #available(iOS 11.0, *) {
             keyboardHeight = keyboardHeight > view.safeAreaInsets.bottom ? keyboardHeight : view.safeAreaInsets.bottom
         }
-
-        keyboardHC?.constant = keyboardHeight
+        
+        // The conditional check should help prevent unnecessary re-draws.
+        if let keyboardHC = keyboardHC, keyboardHC.constant != keyboardHeight {
+            keyboardHC.constant = keyboardHeight
+        }
     }
 
     private func updateTextInputbarBackground() {
@@ -390,12 +394,16 @@ final class ChatViewController: SLKTextViewController {
 
             // Making the old background for textInputView, transparent
             // after the safeAreaInsets are set. (Initially zero)
-            if view.safeAreaInsets.bottom > 0 {
+            // This helps improve the translucency effect of the bar.
+            if oldTextInputbarBgIsTransparent, view.safeAreaInsets.bottom > 0 {
                 textInputbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
                 textInputbar.backgroundColor = UIColor.clear
+                oldTextInputbarBgIsTransparent = true
             }
 
-            textInputbarHC?.constant = view.safeAreaInsets.bottom
+            if let textInputbarHC = textInputbarHC, textInputbarHC.constant != view.safeAreaInsets.bottom {
+                textInputbarHC.constant = view.safeAreaInsets.bottom
+            }
         }
     }
 
