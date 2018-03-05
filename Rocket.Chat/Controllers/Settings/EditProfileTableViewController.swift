@@ -55,6 +55,7 @@ class EditProfileTableViewController: UITableViewController {
     }
 
     func fetchUserData() {
+        AvatarView.shouldRefreshCache = true
         let meRequest = MeRequest()
         api?.fetch(meRequest, succeeded: { (result) in
             self.user = result.user
@@ -105,10 +106,11 @@ class EditProfileTableViewController: UITableViewController {
             return
         }
 
-//        let client = API.current()?.client(UploadClient.self)
-//        client?.uploadAvatar(data: imageData, filename: "profile.jpg", mimetype: "image/jpeg", completion: {
-//            
-//        })
+        let client = API.current()?.client(UploadClient.self)
+        client?.uploadAvatar(data: imageData, filename: "profile.jpg", mimetype: "image/jpeg", completion: {
+            AvatarView.shouldRefreshCache = true
+            self.avatarView.updateAvatar()
+        })
 
 //        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
 //        api?.fetch(updateUserRequest, succeeded: { result in

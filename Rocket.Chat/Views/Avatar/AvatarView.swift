@@ -18,10 +18,20 @@ let avatarColors: [UInt] = [
 
 final class AvatarView: UIView {
 
+    static var shouldRefreshCache = false
+
     var imageURL: URL? {
         didSet {
             if let imageURL = imageURL {
-                let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages, .highPriority]
+                let options: SDWebImageOptions
+
+                if AvatarView.shouldRefreshCache {
+                    options = [.retryFailed, .refreshCached, .scaleDownLargeImages, .highPriority]
+                    AvatarView.shouldRefreshCache = false
+                } else {
+                    options = [.retryFailed, .scaleDownLargeImages, .highPriority]
+                }
+
                 imageView?.sd_setImage(with: imageURL, placeholderImage: nil, options: options) { [weak self] (_, error, _, _) in
                     guard error == nil else { return }
 
