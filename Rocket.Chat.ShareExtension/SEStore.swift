@@ -71,6 +71,12 @@ final class SEStore {
         }
     }
 
+    var composeText = "" {
+        didSet {
+            notifySubscribers()
+        }
+    }
+
     private var subscribers = [SEStoreSubscriber]()
 
     func subscribe(_ subscriber: SEStoreSubscriber) {

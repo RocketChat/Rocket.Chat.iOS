@@ -7,8 +7,30 @@
 //
 
 import UIKit
+import MobileCoreServices
 
-class SENavigationController: UINavigationController {
+final class SENavigationController: UINavigationController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        guard
+            let inputItem = extensionContext?.inputItems.first as? NSExtensionItem,
+            let itemProvider = inputItem.attachments?.first as? NSItemProvider
+        else {
+            return
+        }
+
+        itemProvider.loadItem(forTypeIdentifier: kUTTypeText as String, options: nil) { text, error in
+            guard error == nil, let text = text as? String else { return }
+            store.composeText = text
+        }
+
+        itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
+            guard error == nil, let url = url as? URL else { return }
+            store.composeText = url.absoluteString
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         store.subscribe(self)

@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--open.rocket.chat-->
+        <!--Rooms-->
         <scene sceneID="ceB-am-kn3">
             <objects>
                 <viewController storyboardIdentifier="SERoomsViewController" id="j1y-V4-xli" customClass="SERoomsViewController" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target" sceneMemberID="viewController">
@@ -38,7 +38,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="1Xd-am-t49"/>
                     </view>
-                    <navigationItem key="navigationItem" title="open.rocket.chat" id="9Q1-vx-xCK">
+                    <navigationItem key="navigationItem" title="Rooms" id="9Q1-vx-xCK">
                         <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="osv-Om-cpa">
                             <connections>
                                 <action selector="cancelButtonPressed:" destination="j1y-V4-xli" id="4b2-MV-hWV"/>
@@ -62,9 +62,27 @@
                     <view key="view" contentMode="scaleToFill" id="GsL-eV-J2k">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c0C-DF-YIa">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="D2C-2c-gGX" firstAttribute="trailing" secondItem="c0C-DF-YIa" secondAttribute="trailing" id="7TA-w8-nXQ"/>
+                            <constraint firstItem="D2C-2c-gGX" firstAttribute="bottom" secondItem="c0C-DF-YIa" secondAttribute="bottom" id="R2H-Ih-1TX"/>
+                            <constraint firstItem="c0C-DF-YIa" firstAttribute="leading" secondItem="D2C-2c-gGX" secondAttribute="leading" id="ckE-0h-xjX"/>
+                            <constraint firstItem="c0C-DF-YIa" firstAttribute="top" secondItem="D2C-2c-gGX" secondAttribute="top" id="rSn-Bg-Lil"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="D2C-2c-gGX"/>
                     </view>
+                    <connections>
+                        <outlet property="textView" destination="c0C-DF-YIa" id="0t3-3S-AVl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIb-7q-s7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
