@@ -66,6 +66,15 @@
 "auth.connect.ssl_required" = "Απαιτείται υποστήριξη SSL στον εξυπηρετητή";
 "auth.connect.connecting" = "Σύνδεση σε εξέλιξη. Περιμένετε παρακαλώ";
 
+"auth.login.username.placeholder" = "Email ή όνομα χρήστη";
+"auth.login.password.placeholder" = "Συνθηματικό";
+"auth.login.buttonRegister" = "Δημιουργήστε νέο λογαριασμό";
+"auth.login.buttonResetPassword" = "Ξέχασα το συνθηματικό";
+"auth.login.agree_label" = "Συνεχίζοντας συμφωνείτε με τους";
+"auth.login.agree_and" = "και";
+"auth.login.agree_termsofservice" = "Όρους Υπηρεσίας";
+"auth.login.agree_privacypolicy" = "Πολιτική Απορρήτου";
+
 "auth.forgot_password.title" = "Ξεχάσατε το συνθηματικό σας;";
 "auth.forgot_password.message" = "Εισάγετε το e-mail σας";
 "auth.forgot_password.success" = "Αν αυτό το email είναι ήδη εγγεγραμμένο, θα σας στείλουμε οδηγίες για να αλλάξετε το συνθηματικό σας. Αν δεν λάβετε σύντομα ένα email, παρακαλούμε να επανέλθετε και να ξαναπροσπαθήσετε.";
