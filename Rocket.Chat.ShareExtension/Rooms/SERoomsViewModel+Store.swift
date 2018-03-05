@@ -19,7 +19,7 @@ extension SERoomsViewModel {
             SERoomsSection(type: .channels, cells: channels.map { SERoomCell(title: $0) }),
             SERoomsSection(type: .groups, cells: groups.map { SERoomCell(title: $0) }),
             SERoomsSection(type: .directMessages, cells: directMessages.map { SERoomCell(title: $0) })
-        ]
+        ].filter { !$0.cells.isEmpty }
 
         title = localized("rooms.title")
     }
