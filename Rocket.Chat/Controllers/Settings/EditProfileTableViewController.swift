@@ -64,7 +64,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     func fetchUserData() {
-        AvatarView.shouldRefreshCache = true
+        avatarView.shouldRefreshCache = true
+
         let meRequest = MeRequest()
         api?.fetch(meRequest, succeeded: { (result) in
             self.user = result.user
