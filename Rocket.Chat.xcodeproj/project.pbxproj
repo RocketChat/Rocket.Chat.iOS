@@ -16,6 +16,11 @@
 		0BAA9A99204D26AA004BFBA9 /* SettingsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9A98204D26AA004BFBA9 /* SettingsRequest.swift */; };
 		0BAA9A9B204D27D3004BFBA9 /* Setting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9A9A204D27D3004BFBA9 /* Setting.swift */; };
 		0BAA9A9D204D2E56004BFBA9 /* SettingModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9A9C204D2E56004BFBA9 /* SettingModelMapping.swift */; };
+		0BAA9AA0204D34A1004BFBA9 /* NotificationsPreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9A9F204D34A1004BFBA9 /* NotificationsPreferencesViewController.swift */; };
+		0BAA9AA2204D34AB004BFBA9 /* NotificationsPreferencesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9AA1204D34AB004BFBA9 /* NotificationsPreferencesViewModel.swift */; };
+		0BAA9AA4204D35C7004BFBA9 /* SettingsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9AA3204D35C7004BFBA9 /* SettingsClient.swift */; };
+		0BAA9AA6204D76CC004BFBA9 /* NotificationsSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9AA5204D76CC004BFBA9 /* NotificationsSwitchCell.swift */; };
+		0BAA9AA8204D76D5004BFBA9 /* NotificationsChooseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAA9AA7204D76D5004BFBA9 /* NotificationsChooseCell.swift */; };
 		0BB9678A2031A74B0051D68C /* DrawingBrushColorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */; };
 		0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */; };
 		0BBCC2C2204546CF001E3B6D /* LanguageViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */; };
@@ -462,6 +467,11 @@
 		0BAA9A98204D26AA004BFBA9 /* SettingsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRequest.swift; sourceTree = "<group>"; };
 		0BAA9A9A204D27D3004BFBA9 /* Setting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Setting.swift; sourceTree = "<group>"; };
 		0BAA9A9C204D2E56004BFBA9 /* SettingModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingModelMapping.swift; sourceTree = "<group>"; };
+		0BAA9A9F204D34A1004BFBA9 /* NotificationsPreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPreferencesViewController.swift; sourceTree = "<group>"; };
+		0BAA9AA1204D34AB004BFBA9 /* NotificationsPreferencesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsPreferencesViewModel.swift; sourceTree = "<group>"; };
+		0BAA9AA3204D35C7004BFBA9 /* SettingsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsClient.swift; sourceTree = "<group>"; };
+		0BAA9AA5204D76CC004BFBA9 /* NotificationsSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsSwitchCell.swift; sourceTree = "<group>"; };
+		0BAA9AA7204D76D5004BFBA9 /* NotificationsChooseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsChooseCell.swift; sourceTree = "<group>"; };
 		0BB967892031A74B0051D68C /* DrawingBrushColorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorViewModel.swift; sourceTree = "<group>"; };
 		0BBCC2BE204532F0001E3B6D /* ChangeLanguageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeLanguageCell.swift; path = Controllers/Language/ChangeLanguageCell.swift; sourceTree = "<group>"; };
 		0BBCC2C1204546CF001E3B6D /* LanguageViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = LanguageViewModelSpec.swift; path = Settings/LanguageViewModelSpec.swift; sourceTree = "<group>"; };
@@ -974,6 +984,17 @@
 			name = Language;
 			sourceTree = "<group>";
 		};
+		0BAA9A9E204D3489004BFBA9 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				0BAA9A9F204D34A1004BFBA9 /* NotificationsPreferencesViewController.swift */,
+				0BAA9AA1204D34AB004BFBA9 /* NotificationsPreferencesViewModel.swift */,
+				0BAA9AA5204D76CC004BFBA9 /* NotificationsSwitchCell.swift */,
+				0BAA9AA7204D76D5004BFBA9 /* NotificationsChooseCell.swift */,
+			);
+			name = Notifications;
+			sourceTree = "<group>";
+		};
 		0BBCC2C0204546BB001E3B6D /* Language */ = {
 			isa = PBXGroup;
 			children = (
@@ -1142,6 +1163,7 @@
 		4102E3AB1E53272C004BAA82 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				0BAA9A9E204D3489004BFBA9 /* Notifications */,
 				0B9AB2BF20444EB300ABEA05 /* Language */,
 				0B3A9767202C75A60019CA92 /* ChangeAppIcon */,
 				35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */,
@@ -1845,6 +1867,7 @@
 				8013F86F1FD6B5B000EE1A4E /* InfoClient.swift */,
 				80054CFD1FDAFF5200F5ECF9 /* PushClient.swift */,
 				809B530A1FE2B1AB00833DD2 /* UploadClient.swift */,
+				0BAA9AA3204D35C7004BFBA9 /* SettingsClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -2764,6 +2787,7 @@
 				4151B4561E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift in Sources */,
 				8013F86B1FD6B59A00EE1A4E /* Version.swift in Sources */,
 				4192054C1D52F4FC004EEC5F /* SubscriptionCell.swift in Sources */,
+				0BAA9AA8204D76D5004BFBA9 /* NotificationsChooseCell.swift in Sources */,
 				412E1F3B1DB6D55000531FDA /* ChatMessageURLView.swift in Sources */,
 				35C7D19A202B130400B4BE5A /* RCDateFormatter.swift in Sources */,
 				800FCD501F728EC800D9A692 /* MemberCell.swift in Sources */,
@@ -2802,6 +2826,7 @@
 				419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */,
 				4162E1551D654A7400AAAE49 /* SocketHandlers.swift in Sources */,
 				4174CB151D2D99A30086DAC8 /* BaseNavigationController.swift in Sources */,
+				0BAA9AA2204D34AB004BFBA9 /* NotificationsPreferencesViewModel.swift in Sources */,
 				419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */,
 				14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */,
 				D10E9C201F6434A7007F1796 /* NSRangeExtensions.swift in Sources */,
@@ -2847,6 +2872,7 @@
 				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
 				D1D535EC1F7081FA006625D2 /* API.swift in Sources */,
 				41DAE93E1D318F350098E068 /* Subscription.swift in Sources */,
+				0BAA9AA6204D76CC004BFBA9 /* NotificationsSwitchCell.swift in Sources */,
 				80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */,
 				41D4ABAB1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
@@ -2861,6 +2887,7 @@
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
+				0BAA9AA4204D35C7004BFBA9 /* SettingsClient.swift in Sources */,
 				800FCD4D1F728EC800D9A692 /* ChannelInfoDescriptionCell.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
 				99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */,
@@ -2885,6 +2912,7 @@
 				D10E9C1E1F643474007F1796 /* ChannelModelMapping.swift in Sources */,
 				4101BF011F8D0A1700F67E89 /* AppManager.swift in Sources */,
 				8041C04620290A48007E21FA /* RCEmojiKitLocalizable.swift in Sources */,
+				0BAA9AA0204D34A1004BFBA9 /* NotificationsPreferencesViewController.swift in Sources */,
 				414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */,
 				41EE15821E05BF9600754D45 /* ChatControllerSocketConnectionHandler.swift in Sources */,
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
