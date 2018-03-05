@@ -21,6 +21,20 @@ private func getServers() -> [(name: String, host: String)] {
     } ?? []
 }
 
+// swiftlint:disable large_tuple
+private func getRooms(serverIndex: Int) -> (favorites: [String], channels: [String], groups: [String], directMessages: [String]) {
+    guard let realm = DatabaseManager.databaseInstace(index: serverIndex) else { return ([], [], [], [])}
+
+    let subscriptions = Array(realm.objects(Subscription.self))
+
+    let favorites = subscriptions.filter { $0.favorite }.map { $0.name }
+    let channels = subscriptions.filter { $0.type == .channel }.map { $0.name }
+    let groups = subscriptions.filter { $0.type == .group }.map { $0.name }
+    let directMessages = subscriptions.filter { $0.type == .directMessage }.map { $0.name }
+
+    return (favorites, channels, groups, directMessages)
+}
+
 protocol SEStoreSubscriber: class {
     func storeUpdated(_ store: SEStore)
 }
@@ -34,6 +48,7 @@ final class SEStore {
 
     var selectedServerIndex: Int = 0 {
         didSet {
+            rooms = getRooms(serverIndex: selectedServerIndex)
             notifySubscribers()
         }
     }
@@ -45,6 +60,12 @@ final class SEStore {
     }
 
     var sceneTransition: SESceneTransition = .none {
+        didSet {
+            notifySubscribers()
+        }
+    }
+
+    var rooms = getRooms(serverIndex: 0) {
         didSet {
             notifySubscribers()
         }

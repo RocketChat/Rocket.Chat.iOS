@@ -170,38 +170,33 @@ struct DatabaseManager {
      using this parameter.
      */
     static func changeDatabaseInstance(index: Int? = nil) {
-        guard
-            let server = AuthManager.selectedServerInformation(index: index),
-            let databaseName = server[ServerPersistKeys.databaseName]
-            else {
-                return
-        }
-
-        let configuration = Realm.Configuration(
-            fileURL: URL(fileURLWithPath: RLMRealmPathForFile(databaseName), isDirectory: false),
-            deleteRealmIfMigrationNeeded: true
-        )
-
-        realmConfiguration = configuration
+        realmConfiguration = databaseConfiguration(index: index)
     }
 
     /**
      This method gets the realm associated with this server
     */
     static func databaseInstace(index: Int) -> Realm? {
+        guard let configuration = databaseConfiguration(index: index) else { return nil }
+        return try? Realm(configuration: configuration)
+    }
+
+    /**
+     This method returns the realm configuration associated with this server
+    */
+    static func databaseConfiguration(index: Int? = nil) -> Realm.Configuration? {
         guard
             let server = AuthManager.selectedServerInformation(index: index),
-            let databaseName = server[ServerPersistKeys.databaseName]
+            let databaseName = server[ServerPersistKeys.databaseName],
+            let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppGroup.identifier)
         else {
             return nil
         }
 
-        let configuration = Realm.Configuration(
-            fileURL: URL(fileURLWithPath: RLMRealmPathForFile(databaseName), isDirectory: false),
+        return Realm.Configuration(
+            fileURL: url.appendingPathComponent(databaseName),
             deleteRealmIfMigrationNeeded: true
         )
-
-        return try? Realm(configuration: configuration)
     }
 }
 
