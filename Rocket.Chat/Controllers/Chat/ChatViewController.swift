@@ -379,7 +379,7 @@ final class ChatViewController: SLKTextViewController {
         if #available(iOS 11.0, *) {
             keyboardHeight = keyboardHeight > view.safeAreaInsets.bottom ? keyboardHeight : view.safeAreaInsets.bottom
         }
-        
+
         // The conditional check should help prevent unnecessary re-draws.
         if let keyboardHC = keyboardHC, keyboardHC.constant != keyboardHeight {
             keyboardHC.constant = keyboardHeight
@@ -395,7 +395,7 @@ final class ChatViewController: SLKTextViewController {
             // Making the old background for textInputView, transparent
             // after the safeAreaInsets are set. (Initially zero)
             // This helps improve the translucency effect of the bar.
-            if oldTextInputbarBgIsTransparent, view.safeAreaInsets.bottom > 0 {
+            if !oldTextInputbarBgIsTransparent, view.safeAreaInsets.bottom > 0 {
                 textInputbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
                 textInputbar.backgroundColor = UIColor.clear
                 oldTextInputbarBgIsTransparent = true
