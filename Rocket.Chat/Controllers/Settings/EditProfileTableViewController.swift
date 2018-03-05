@@ -134,6 +134,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                 }
 
                 self.avatarView.shouldRefreshCache = true
+                self.avatarView.avatarPlaceholder = self.avatarView.imageView.image
                 self.avatarView.updateAvatar()
             })
         }
