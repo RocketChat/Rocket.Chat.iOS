@@ -97,11 +97,11 @@ final class PreferencesViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 0 {
-            if indexPath.row == 0 {
+            if indexPath.row == 1 {
                 cellContactDidPressed()
-            } else if indexPath.row == 1 {
-                cellLanguageDidPressed()
             } else if indexPath.row == 2 {
+                cellLanguageDidPressed()
+            } else if indexPath.row == 3 {
                 cellAppIconDidPressed()
             }
         } else if indexPath.section == 1 {

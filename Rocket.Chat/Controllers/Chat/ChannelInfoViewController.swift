@@ -25,7 +25,8 @@ class ChannelInfoViewController: BaseViewController {
             let channelInfoData = [
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
-                ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList)
+                ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList),
+                ChannelInfoDetailCellData(title: "Files list", detail: "", action: showFilesList)
             ]
 
             if subscription.type == .directMessage {
@@ -102,6 +103,10 @@ class ChannelInfoViewController: BaseViewController {
         self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
+    func showFilesList() {
+        self.performSegue(withIdentifier: "toFilesList", sender: subscription)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let membersList = segue.destination as? MembersListViewController {
             membersList.delegate = self
@@ -116,6 +121,10 @@ class ChannelInfoViewController: BaseViewController {
                 messagesList.data.title = segueData.title
                 messagesList.data.query = segueData.query
             }
+        }
+
+        if let fileList = segue.destination as? FilesListViewController {
+            fileList.subscription = self.subscription
         }
     }
 
