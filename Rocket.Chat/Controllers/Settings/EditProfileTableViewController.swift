@@ -27,7 +27,15 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         return avatarView
     }()
 
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: .gray)
+        activityIndicator.startAnimating()
+        return activityIndicator
+    }()
+
     let api = API.current()
+    var isUpdatingUser = false
+    var isUploadingAvatar = false
     var isLoading = true
     var avatarFile: FileUpload?
     var user: User? = User() {
@@ -81,7 +89,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     // MARK: Actions
 
     @IBAction func saveProfile(_ sender: UIBarButtonItem) {
-        guard let user = user else { return }
+        guard let user = user, let userId = user.identifier else { return }
         guard let name = name.text, let username = username.text, let email = email.text,
             !name.isEmpty, !username.isEmpty, !email.isEmpty else {
                 // TODO: Alert about empty fields
@@ -103,20 +111,42 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             }
         }
 
+        DispatchQueue.main.async {
+            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
+        }
+
+        let stopLoading = {
+            DispatchQueue.main.async {
+                self.navigationItem.rightBarButtonItem = sender
+            }
+        }
+
         if let avatarFile = avatarFile {
+            isUploadingAvatar = true
+
             let client = API.current()?.client(UploadClient.self)
             client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: {
-                AvatarView.shouldRefreshCache = true
+                self.isUploadingAvatar = false
+
+                if !self.isUpdatingUser {
+                    stopLoading()
+                }
+
+                self.avatarView.shouldRefreshCache = true
                 self.avatarView.updateAvatar()
             })
         }
 
-//        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
-//        api?.fetch(updateUserRequest, succeeded: { result in
-//            print(result)
-//        }, errored: { error in
-//            print(error)
-//        })
+        isUpdatingUser = true
+        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
+        api?.fetch(updateUserRequest, succeeded: { _ in
+            self.isUpdatingUser = false
+            if !self.isUploadingAvatar {
+                stopLoading()
+            }
+        }, errored: { error in
+            print(error)
+        })
     }
 
     @IBAction func didPressAvatarButton(_ sender: UIButton) {
