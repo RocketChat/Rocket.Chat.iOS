@@ -8,16 +8,25 @@
 
 import Foundation
 
-private func getServers() -> [(name: String, host: String)] {
+struct SEServer {
+    let name: String
+    let host: String
+    let userId: String
+    let token: String
+}
+
+private func getServers() -> [SEServer] {
     return DatabaseManager.servers?.flatMap {
         guard
             let name = $0[ServerPersistKeys.serverName],
-            let host = URL(string: $0[ServerPersistKeys.serverURL] ?? "")?.host
+            let host = URL(string: $0[ServerPersistKeys.serverURL] ?? "")?.host,
+            let userId = $0[ServerPersistKeys.userId],
+            let token = $0[ServerPersistKeys.token]
         else {
             return nil
         }
 
-        return (name, host)
+        return SEServer(name: name, host: host, userId: userId, token: token)
     } ?? []
 }
 

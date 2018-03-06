@@ -81,7 +81,11 @@
                         <viewLayoutGuide key="safeArea" id="D2C-2c-gGX"/>
                     </view>
                     <navigationItem key="navigationItem" id="95u-cF-Hmc">
-                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="tbM-vz-Ho5"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="tbM-vz-Ho5">
+                            <connections>
+                                <action selector="doneButtonPressed:" destination="dWl-7H-NlL" id="WoE-RR-ONI"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="textView" destination="c0C-DF-YIa" id="0t3-3S-AVl"/>
