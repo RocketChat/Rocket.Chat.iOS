@@ -11,9 +11,11 @@
 
 "servers.title" = "Servers";
 
-"rooms.title" = "Rooms";
+"rooms.title" = "Select Rooms";
 "rooms.section.server" = "Select server";
 "rooms.section.favorites" = "Favorites";
 "rooms.section.channels" = "Channels";
 "rooms.section.groups" = "Private Groups";
 "rooms.section.directMessages" = "Direct Messages";
+
+"compose.destination.to" = "To: ";

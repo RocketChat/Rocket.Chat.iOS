@@ -51,8 +51,7 @@ extension SEServersViewModel {
 
 extension SEServersViewModel {
     func didSelectRowAt(_ indexPath: IndexPath) {
-        store.dispatch(.selectServerIndex(indexPath.row))
-        store.dispatch(fetchRooms)
+        selectServer(store: store, serverIndex: indexPath.row)
         store.dispatch(.makeSceneTransition(.pop))
     }
 }

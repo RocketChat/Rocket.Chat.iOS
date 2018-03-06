@@ -64,19 +64,49 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="c0C-DF-YIa">
-                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <rect key="frame" x="0.0" y="94" width="375" height="573"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ar7-Zt-AtF">
+                                <rect key="frame" x="0.0" y="64" width="375" height="30"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yK8-y1-8cb">
+                                        <rect key="frame" x="8" y="4" width="22" height="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Lorem Ipsum, Hello World, ..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1B-AR-mU0">
+                                        <rect key="frame" x="30" y="4" width="174" height="22"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.97592383623123169" green="0.97666221857070923" blue="0.97603815793991089" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstItem="yK8-y1-8cb" firstAttribute="leading" secondItem="Ar7-Zt-AtF" secondAttribute="leading" constant="8" id="G2w-mq-hR7"/>
+                                    <constraint firstAttribute="bottom" secondItem="y1B-AR-mU0" secondAttribute="bottom" constant="4" id="Q9d-OQ-zbA"/>
+                                    <constraint firstAttribute="height" constant="30" id="bun-tg-6ML"/>
+                                    <constraint firstItem="y1B-AR-mU0" firstAttribute="top" secondItem="Ar7-Zt-AtF" secondAttribute="top" constant="4" id="eUq-SG-37k"/>
+                                    <constraint firstAttribute="bottom" secondItem="yK8-y1-8cb" secondAttribute="bottom" constant="4" id="opr-ya-8as"/>
+                                    <constraint firstItem="yK8-y1-8cb" firstAttribute="top" secondItem="Ar7-Zt-AtF" secondAttribute="top" constant="4" id="y8e-Rw-8Qg"/>
+                                    <constraint firstItem="y1B-AR-mU0" firstAttribute="leading" secondItem="yK8-y1-8cb" secondAttribute="trailing" id="yzs-ZD-wxG"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="D2C-2c-gGX" firstAttribute="trailing" secondItem="c0C-DF-YIa" secondAttribute="trailing" id="7TA-w8-nXQ"/>
+                            <constraint firstItem="Ar7-Zt-AtF" firstAttribute="leading" secondItem="D2C-2c-gGX" secondAttribute="leading" id="8AY-Nt-Ky9"/>
+                            <constraint firstItem="Ar7-Zt-AtF" firstAttribute="top" secondItem="D2C-2c-gGX" secondAttribute="top" id="HPq-TE-QEQ"/>
                             <constraint firstItem="D2C-2c-gGX" firstAttribute="bottom" secondItem="c0C-DF-YIa" secondAttribute="bottom" id="R2H-Ih-1TX"/>
                             <constraint firstItem="c0C-DF-YIa" firstAttribute="leading" secondItem="D2C-2c-gGX" secondAttribute="leading" id="ckE-0h-xjX"/>
-                            <constraint firstItem="c0C-DF-YIa" firstAttribute="top" secondItem="D2C-2c-gGX" secondAttribute="top" id="rSn-Bg-Lil"/>
+                            <constraint firstItem="c0C-DF-YIa" firstAttribute="top" secondItem="Ar7-Zt-AtF" secondAttribute="bottom" id="kdc-dp-i28"/>
+                            <constraint firstItem="D2C-2c-gGX" firstAttribute="trailing" secondItem="Ar7-Zt-AtF" secondAttribute="trailing" id="naY-rs-TSu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="D2C-2c-gGX"/>
                     </view>
@@ -88,12 +118,15 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="destinationContainerView" destination="Ar7-Zt-AtF" id="L0r-xs-Btb"/>
+                        <outlet property="destinationLabel" destination="y1B-AR-mU0" id="Rqu-gK-esp"/>
+                        <outlet property="destinationToLabel" destination="yK8-y1-8cb" id="xwS-L9-ltx"/>
                         <outlet property="textView" destination="c0C-DF-YIa" id="0t3-3S-AVl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XIb-7q-s7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1241" y="325"/>
+            <point key="canvasLocation" x="1240.8" y="324.28785607196403"/>
         </scene>
         <!--Servers View Controller-->
         <scene sceneID="WYc-cv-v8S">

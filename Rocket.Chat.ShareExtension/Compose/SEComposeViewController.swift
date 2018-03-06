@@ -10,9 +10,16 @@ import UIKit
 
 class SEComposeViewController: SEViewController {
     @IBOutlet weak var textView: UITextView!
+    @IBOutlet weak var destinationContainerView: UIView!
+    @IBOutlet weak var destinationLabel: UILabel!
+    @IBOutlet weak var destinationToLabel: UILabel! {
+        didSet {
+            destinationToLabel.text = localized("compose.destination.to")
+        }
+    }
 
     override func stateUpdated(_ state: SEState) {
-        title = state.currentRoom.name
+        destinationLabel.text = state.currentRoom.name
         textView.text = state.composeText
     }
 
