@@ -12,6 +12,7 @@ class SEComposeViewController: SEViewController {
     @IBOutlet weak var textView: UITextView!
 
     override func storeUpdated(_ store: SEStore) {
+        title = store.currentRoom.name
         textView.text = store.composeText
     }
 }

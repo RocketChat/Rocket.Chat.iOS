@@ -283,8 +283,6 @@
 		80054CFC1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */; };
 		80054CFE1FDAFF5200F5ECF9 /* PushClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CFD1FDAFF5200F5ECF9 /* PushClient.swift */; };
 		80054D001FDB1FA200F5ECF9 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CFF1FDB1FA200F5ECF9 /* Alert.swift */; };
-		800640F22049AF98006D990F /* SEServerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800640F12049AF98006D990F /* SEServerCell.swift */; };
-		800640F42049AFB4006D990F /* SEServerCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 800640F32049AFB4006D990F /* SEServerCell.xib */; };
 		800640F72049BA25006D990F /* SEScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800640F62049BA25006D990F /* SEScene.swift */; };
 		800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E22831F8500A200DA84F1 /* MessagesListViewController.swift */; };
 		800E22861F8507E400DA84F1 /* SubscriptionMessagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */; };
@@ -826,8 +824,6 @@
 		80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushTokenDeleteRequest.swift; sourceTree = "<group>"; };
 		80054CFD1FDAFF5200F5ECF9 /* PushClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PushClient.swift; sourceTree = "<group>"; };
 		80054CFF1FDB1FA200F5ECF9 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
-		800640F12049AF98006D990F /* SEServerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServerCell.swift; sourceTree = "<group>"; };
-		800640F32049AFB4006D990F /* SEServerCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEServerCell.xib; sourceTree = "<group>"; };
 		800640F62049BA25006D990F /* SEScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEScene.swift; sourceTree = "<group>"; };
 		800E22831F8500A200DA84F1 /* MessagesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MessagesListViewController.swift; path = Controllers/Chat/MessagesListViewController.swift; sourceTree = "<group>"; };
 		800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionMessagesRequest.swift; sourceTree = "<group>"; };
@@ -2229,8 +2225,6 @@
 				807FB568204729E500E21429 /* SEServersViewController.swift */,
 				807FB581204837AF00E21429 /* SEServersViewModel.swift */,
 				8076FDDB2048A0E600114F28 /* SEServersViewModel+Store.swift */,
-				800640F12049AF98006D990F /* SEServerCell.swift */,
-				800640F32049AFB4006D990F /* SEServerCell.xib */,
 			);
 			path = Servers;
 			sourceTree = "<group>";
@@ -2733,7 +2727,6 @@
 			files = (
 				807FB55E2046E7DD00E21429 /* Main.storyboard in Resources */,
 				807FB56F20472B6A00E21429 /* Localizable.strings in Resources */,
-				800640F42049AFB4006D990F /* SEServerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3479,7 +3472,6 @@
 				8076FD9A20484A6000114F28 /* SEStore.swift in Sources */,
 				8076FD9E2048510C00114F28 /* AuthManager.swift in Sources */,
 				8076FDA52048534200114F28 /* String+Random.swift in Sources */,
-				800640F22049AF98006D990F /* SEServerCell.swift in Sources */,
 				807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */,
 				8076FDCE2048642400114F28 /* User.swift in Sources */,
 				8076FDDE2048A31C00114F28 /* SERoomsViewModel+Store.swift in Sources */,

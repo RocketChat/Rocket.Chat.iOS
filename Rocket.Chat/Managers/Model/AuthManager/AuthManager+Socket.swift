@@ -277,4 +277,3 @@ extension AuthManager {
     }
 
 }
-
