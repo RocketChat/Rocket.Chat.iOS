@@ -33,7 +33,12 @@ final class ChatViewController: SLKTextViewController {
             self.buttonScrollToBottom.superview?.layoutIfNeeded()
 
             if self.scrollToBottomButtonIsVisible {
-                self.buttonScrollToBottomMarginConstraint?.constant = (self.textInputbar.frame.origin.y - self.view.frame.height) - 40
+                guard let collectionView = collectionView else {
+                    scrollToBottomButtonIsVisible = false
+                    return
+                }
+                let collectionViewBottom = collectionView.frame.origin.y + collectionView.frame.height
+                self.buttonScrollToBottomMarginConstraint?.constant = (collectionViewBottom - view.frame.height) - 40
             } else {
                 self.buttonScrollToBottomMarginConstraint?.constant = 50
             }
@@ -219,21 +224,7 @@ final class ChatViewController: SLKTextViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        guard let collectionView = collectionView else { return }
-
-        var contentInsets = collectionView.contentInset
-        contentInsets.bottom = self.chatPreviewModeView?.frame.height ?? 0
-        if #available(iOS 11, *) {
-            contentInsets.right = collectionView.safeAreaInsets.right
-            contentInsets.left = collectionView.safeAreaInsets.left
-        }
-        collectionView.contentInset = contentInsets
-
-        var scrollIndicatorInsets = collectionView.scrollIndicatorInsets
-        scrollIndicatorInsets.right = 0
-        scrollIndicatorInsets.left = 0
-        scrollIndicatorInsets.bottom = self.chatPreviewModeView?.frame.height ?? 0
-        collectionView.scrollIndicatorInsets = scrollIndicatorInsets
+        updateChatPreviewModeViewConstraints()
     }
 
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -878,9 +869,26 @@ final class ChatViewController: SLKTextViewController {
         if let previewView = ChatPreviewModeView.instantiateFromNib() {
             previewView.delegate = self
             previewView.subscription = subscription
-            previewView.frame = CGRect(x: 0, y: view.frame.height - previewView.frame.height, width: view.frame.width, height: previewView.frame.height)
+            previewView.translatesAutoresizingMaskIntoConstraints = false
+
             view.addSubview(previewView)
+
+            NSLayoutConstraint.activate([
+                previewView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                previewView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+                previewView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+                ])
+
+            collectionView?.bottomAnchor.constraint(equalTo: previewView.topAnchor).isActive = true
+
             chatPreviewModeView = previewView
+            updateChatPreviewModeViewConstraints()
+        }
+    }
+
+    private func updateChatPreviewModeViewConstraints() {
+        if #available(iOS 11.0, *) {
+            chatPreviewModeView?.bottomInset = view.safeAreaInsets.bottom
         }
     }
 
