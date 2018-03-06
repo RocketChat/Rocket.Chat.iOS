@@ -11,7 +11,7 @@
 
 "servers.title" = "Servers";
 
-"rooms.title" = "Share";
+"rooms.title" = "Rooms";
 "rooms.section.server" = "Select server";
 "rooms.section.favorites" = "Favorites";
 "rooms.section.channels" = "Channels";
