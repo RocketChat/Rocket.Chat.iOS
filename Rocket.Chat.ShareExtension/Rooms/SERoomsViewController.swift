@@ -19,6 +19,12 @@ final class SERoomsViewController: SEViewController {
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        navigationItem.searchController = UISearchController(searchResultsController: nil)
+    }
+
     override func stateUpdated(_ state: SEState) {
         super.stateUpdated(state)
 
