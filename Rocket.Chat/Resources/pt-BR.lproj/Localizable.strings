@@ -52,6 +52,15 @@
 "alert.email_verification.title" = "Verificação de email";
 "alert.email_verification.message" = "Nós enviamos um email para confirmar seu registro. Se você não receber um email em breve, por favor volte e tente novamente.";
 
+"alert.load_profile_error.title" = "Falha ao carregar seu perfil";
+"alert.load_profile_error.message" = "Algo de errado aconteceu ao carregar seu perfil. Por favor, tente novamente.";
+"alert.password_mismatch_error.title" = "Suas senhas não batem";
+"alert.password_mismatch_error.message" = "O campo de confirmação da senha difere da senha escolhida. Por favor, corrija e tente novamente.";
+"alert.update_profile_error.title" = "Falha ao atualizar";
+"alert.update_profile_error.message" = "Algo de errado aconteceu ao atualizar seu perfil. Por favor, tente novamente.";
+"alert.update_profile_empty_fields.title" = "Por favor, preenchar todos os campos";
+"alert.update_profile_empty_fields.message" = "Todas as informações do seu perfil são necessárias e não podem ficar em branco.";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";
 "connection.server.redirect.alert.message" = "Parece que este servidor mudou a URL para:\n\n%@\n\Gostaria de atualizar a URL?";
@@ -235,3 +244,14 @@
 "myaccount.settings.language.title" = "Alterar Idioma";
 "myaccount.settings.language.reset" = "Restaurar o Padrão";
 "myaccount.settings.language.message" = "Você mudou o idioma. Você precisa fechar o aplicativo e abrir novamente para que as alterações tenham efeito.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "Editar Perfil"; 
+"myaccount.settings.profile.actions.save" = "Salvar";
+"myaccount.settings.profile.section.profile" = "Perfil";
+"myaccount.settings.profile.section.password" = "Senha";
+"myaccount.settings.profile.name_placeholder" = "Nome";
+"myaccount.settings.profile.username_placeholder" = "Username";
+"myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.password_placeholder" = "Nova senha";
+"myaccount.settings.profile.password_confirmation_placeholder" = "Confirmação da senha";

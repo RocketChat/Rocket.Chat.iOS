@@ -52,6 +52,15 @@
 "alert.email_verification.title" = "E-Mail Bestätigung";
 "alert.email_verification.message" = "Wir haben dir eine E-Mail zur Bestätigung deiner Registrierung geschickt. Solltest du keine Mail erhalten haben versuche es noch einmal.";
 
+"alert.load_profile_error.title" = "Failed to load your profile"; // TODO
+"alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again."; // TODO
+"alert.password_mismatch_error.title" = "Your password doesn't match"; // TODO
+"alert.password_mismatch_error.message" = "The confirmation field doesn't match with the password you've provided. Please, check it and try again."; // TODO
+"alert.update_profile_error.title" = "Failed to update"; // TODO
+"alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please, try again."; // TODO
+"alert.update_profile_empty_fields.title" = "Please, fill the empty fields"; // TODO
+"alert.update_profile_empty_fields.message" = "All your profile information are required and can't stay blank"; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
 "connection.server.redirect.alert.message" = "Es scheint, als hätte der Server die URL zu Folgender geändert:\n\n%@\n\nJetzt URL aktualisieren?";
@@ -235,3 +244,14 @@
 "myaccount.settings.language.title" = "Sprache ändern";
 "myaccount.settings.language.reset" = "Auf Standard zurücksetzen";
 "myaccount.settings.language.message" = "Die Sprache wurde geändert. Damit die Änderungen wirksam werden, muss die App neu gestartet werden.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "Edit Profile"; // TODO
+"myaccount.settings.profile.actions.save" = "Save"; // TODO
+"myaccount.settings.profile.section.profile" = "Profile"; // TODO
+"myaccount.settings.profile.section.password" = "Password"; // TODO
+"myaccount.settings.profile.name_placeholder" = "Name"; // TODO
+"myaccount.settings.profile.username_placeholder" = "Username"; // TODO
+"myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO
+"myaccount.settings.profile.password_placeholder" = "New password"; // TODO
+"myaccount.settings.profile.password_confirmation_placeholder" = "Password confirmation"; // TODO
