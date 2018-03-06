@@ -19,10 +19,10 @@ final class SERoomsViewController: SEViewController {
         }
     }
 
-    override func storeUpdated(_ store: SEStore) {
-        super.storeUpdated(store)
+    override func stateUpdated(_ state: SEState) {
+        super.stateUpdated(state)
 
-        viewModel = SERoomsViewModel(store: store)
+        viewModel = SERoomsViewModel(state: state)
         title = viewModel.title
         tableView.reloadData()
     }

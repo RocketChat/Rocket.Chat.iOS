@@ -7,13 +7,13 @@
 //
 
 extension SERoomsViewModel {
-    init(store: SEStore) {
-        let server = store.servers[store.selectedServerIndex]
+    init(state: SEState) {
+        let server = state.servers[state.selectedServerIndex]
 
-        let favorites = store.rooms.filter { $0.favorite }.map(SERoomCell.init)
-        let channels = store.rooms.filter { $0.type == .channel }.map(SERoomCell.init)
-        let groups = store.rooms.filter { $0.type == .group }.map(SERoomCell.init)
-        let directMessages = store.rooms.filter { $0.type == .directMessage }.map(SERoomCell.init)
+        let favorites = state.rooms.filter { $0.favorite }.map(SERoomCell.init)
+        let channels = state.rooms.filter { $0.type == .channel }.map(SERoomCell.init)
+        let groups = state.rooms.filter { $0.type == .group }.map(SERoomCell.init)
+        let directMessages = state.rooms.filter { $0.type == .directMessage }.map(SERoomCell.init)
 
         sections = [
             SERoomsSection(type: .server, cells: [

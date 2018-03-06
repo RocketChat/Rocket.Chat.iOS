@@ -11,18 +11,18 @@ import UIKit
 class SEComposeViewController: SEViewController {
     @IBOutlet weak var textView: UITextView!
 
-    override func storeUpdated(_ store: SEStore) {
-        title = store.currentRoom.name
-        textView.text = store.composeText
+    override func stateUpdated(_ state: SEState) {
+        title = state.currentRoom.name
+        textView.text = state.composeText
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
-        let server = store.servers[store.selectedServerIndex]
+        let server = store.state.servers[store.state.selectedServerIndex]
 
         let request = SendMessageRequest(
             id: "ios_se_\(String.random(10))",
-            roomId: store.currentRoom.rid,
-            text: store.composeText
+            roomId: store.state.currentRoom.rid,
+            text: store.state.composeText
         )
 
         let api = API(host: "https://\(server.host)", version: Version(0, 60, 0))
@@ -30,7 +30,9 @@ class SEComposeViewController: SEViewController {
         api?.authToken = server.token
 
         api?.fetch(request, succeeded: { _ in
-
+            DispatchQueue.main.async {
+                store.dispatch(.makeSceneTransition(.finish))
+            }
         }, errored: { _ in
 
         })

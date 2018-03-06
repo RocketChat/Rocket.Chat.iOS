@@ -13,6 +13,8 @@ final class SENavigationController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        initializeStore(store: store)
+
         guard
             let inputItem = extensionContext?.inputItems.first as? NSExtensionItem,
             let itemProvider = inputItem.attachments?.first as? NSItemProvider
@@ -22,12 +24,12 @@ final class SENavigationController: UINavigationController {
 
         itemProvider.loadItem(forTypeIdentifier: kUTTypeText as String, options: nil) { text, error in
             guard error == nil, let text = text as? String else { return }
-            store.composeText = text
+            store.dispatch(.setComposeText(text))
         }
 
         itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
             guard error == nil, let url = url as? URL else { return }
-            store.composeText = url.absoluteString
+            store.dispatch(.setComposeText(url.absoluteString))
         }
     }
 
@@ -40,28 +42,37 @@ final class SENavigationController: UINavigationController {
         super.viewWillDisappear(animated)
         store.unsubscribe(self)
     }
+
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        fatalError("This cannot be called directly")
+    }
+
+    override func popViewController(animated: Bool) -> UIViewController? {
+        store.dispatch(.makeSceneTransition(.pop))
+        return nil
+    }
 }
 
 extension SENavigationController: SEStoreSubscriber {
-    func storeUpdated(_ store: SEStore) {
-        switch store.sceneTransition {
+    func stateUpdated(_ state: SEState) {
+        switch state.navigation.sceneTransition {
         case .none:
             return
         case .pop:
-            popViewController(animated: true)
+            super.popViewController(animated: true)
         case .push(let scene):
             switch scene {
             case .rooms:
-                pushViewController(SERoomsViewController.fromStoryboard(), animated: true)
+                super.pushViewController(SERoomsViewController.fromStoryboard(), animated: true)
             case .servers:
-                pushViewController(SEServersViewController.fromStoryboard(), animated: true)
+                super.pushViewController(SEServersViewController.fromStoryboard(), animated: true)
             case .compose:
-                pushViewController(SEComposeViewController.fromStoryboard(), animated: true)
+                super.pushViewController(SEComposeViewController.fromStoryboard(), animated: true)
             }
         case .finish:
             extensionContext?.cancelRequest(withError: SEError.canceled)
         }
 
-        store.sceneTransition = .none
+        store.dispatch(.makeSceneTransition(.none))
     }
 }

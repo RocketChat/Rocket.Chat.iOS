@@ -78,10 +78,10 @@ extension SERoomsViewModel {
         let cell = cellForRowAt(indexPath)
 
         if cell as? SEServerCell != nil {
-            store.sceneTransition = .push(.servers)
+            store.dispatch(.makeSceneTransition(.push(.servers)))
         } else if let roomCell = cell as? SERoomCell {
-            store.sceneTransition = .push(.compose)
-            store.currentRoom = roomCell.room
+            store.dispatch(.makeSceneTransition(.push(.compose)))
+            store.dispatch(.setCurrentRoom(roomCell.room))
         }
     }
 }

@@ -19,10 +19,10 @@ final class SEServersViewController: SEViewController {
         }
     }
 
-    override func storeUpdated(_ store: SEStore) {
-        super.storeUpdated(store)
+    override func stateUpdated(_ state: SEState) {
+        super.stateUpdated(state)
 
-        viewModel = SEServersViewModel(store: store)
+        viewModel = SEServersViewModel(state: state)
         title = viewModel.title
         tableView.reloadData()
     }

@@ -15,75 +15,57 @@ struct SEServer {
     let token: String
 }
 
-private func getServers() -> [SEServer] {
-    return DatabaseManager.servers?.flatMap {
-        guard
-            let name = $0[ServerPersistKeys.serverName],
-            let host = URL(string: $0[ServerPersistKeys.serverURL] ?? "")?.host,
-            let userId = $0[ServerPersistKeys.userId],
-            let token = $0[ServerPersistKeys.token]
-        else {
-            return nil
-        }
-
-        return SEServer(name: name, host: host, userId: userId, token: token)
-    } ?? []
+struct SEState {
+    var servers: [SEServer] = []
+    var selectedServerIndex: Int = 0
+    var rooms: [Subscription] = []
+    var currentRoom = Subscription()
+    var composeText = ""
+    var navigation = SENavigation(scenes: [], sceneTransition: .none)
 }
 
-private func getRooms(serverIndex: Int) -> [Subscription] {
-    guard let realm = DatabaseManager.databaseInstace(index: serverIndex) else { return [] }
-    return Array(realm.objects(Subscription.self).map(Subscription.init))
+enum SEAction {
+    case setComposeText(String)
+    case setServers([SEServer])
+    case selectServerIndex(Int)
+    case setRooms([Subscription])
+    case setCurrentRoom(Subscription)
+    case makeSceneTransition(SESceneTransition)
+    case setScenes([SEScene])
 }
 
 protocol SEStoreSubscriber: class {
-    func storeUpdated(_ store: SEStore)
+    func stateUpdated(_ state: SEState)
 }
 
 final class SEStore {
-    var servers = getServers() {
-        didSet {
-            notifySubscribers()
+    private(set) var state = SEState()
+    private(set) var subscribers = [SEStoreSubscriber]()
+
+    func dispatch(_ action: SEAction) {
+        switch action {
+        case .setComposeText(let text):
+            state.composeText = text
+        case .setServers(let servers):
+            state.servers = servers
+        case .selectServerIndex(let index):
+            state.selectedServerIndex = index
+        case .setRooms(let rooms):
+            state.rooms = rooms
+        case .setCurrentRoom(let room):
+            state.currentRoom = room
+        case .setScenes(let scenes):
+            state.navigation.scenes = scenes
+        case .makeSceneTransition(let transition):
+            state.navigation.makeTransition(transition)
         }
+
+        notifySubscribers()
     }
 
-    var selectedServerIndex: Int = 0 {
-        didSet {
-            rooms = getRooms(serverIndex: selectedServerIndex)
-            notifySubscribers()
-        }
+    func dispatch(_ actionCreator: (SEStore) -> SEAction) {
+        dispatch(actionCreator(self))
     }
-
-    var scenes: [SEScene] = [.rooms] {
-        didSet {
-            notifySubscribers()
-        }
-    }
-
-    var sceneTransition: SESceneTransition = .none {
-        didSet {
-            notifySubscribers()
-        }
-    }
-
-    var rooms = getRooms(serverIndex: 0) {
-        didSet {
-            notifySubscribers()
-        }
-    }
-
-    var currentRoom = Subscription() {
-        didSet {
-            notifySubscribers()
-        }
-    }
-
-    var composeText = "" {
-        didSet {
-            notifySubscribers()
-        }
-    }
-
-    private var subscribers = [SEStoreSubscriber]()
 
     func subscribe(_ subscriber: SEStoreSubscriber) {
         guard !subscribers.contains(where: { $0 === subscriber }) else {
@@ -91,7 +73,7 @@ final class SEStore {
         }
 
         subscribers.append(subscriber)
-        subscriber.storeUpdated(self)
+        subscriber.stateUpdated(state)
     }
 
     func unsubscribe(_ subscriber: SEStoreSubscriber) {
@@ -104,8 +86,12 @@ final class SEStore {
 
     func notifySubscribers() {
         subscribers.forEach {
-            $0.storeUpdated(self)
+            $0.stateUpdated(state)
         }
+    }
+
+    func clearSubscribers() {
+        subscribers.removeAll()
     }
 }
 

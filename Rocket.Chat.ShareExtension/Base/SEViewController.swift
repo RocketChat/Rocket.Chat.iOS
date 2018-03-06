@@ -24,8 +24,8 @@ class SEViewController: UIViewController, SEStoreSubscriber {
         store.unsubscribe(self)
     }
 
-    func storeUpdated(_ store: SEStore) {
-        guard !store.servers.isEmpty else {
+    func stateUpdated(_ state: SEState) {
+        guard !state.servers.isEmpty else {
             return alertNoServers()
         }
     }
