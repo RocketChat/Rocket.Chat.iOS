@@ -80,6 +80,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="D2C-2c-gGX"/>
                     </view>
+                    <navigationItem key="navigationItem" id="95u-cF-Hmc">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="tbM-vz-Ho5"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="textView" destination="c0C-DF-YIa" id="0t3-3S-AVl"/>
                     </connections>
