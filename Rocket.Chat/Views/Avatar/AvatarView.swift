@@ -18,12 +18,6 @@ let avatarColors: [UInt] = [
 
 final class AvatarView: UIView {
 
-    var shouldRefreshCache = false {
-        didSet {
-            SDImageCache.shared().removeImage(forKey: imageURL?.absoluteString, fromDisk: true)
-        }
-    }
-
     var avatarPlaceholder: UIImage?
     var imageURL: URL? {
         didSet {
@@ -149,7 +143,13 @@ final class AvatarView: UIView {
         backgroundColor = UIColor(rgb: color, alphaVal: 1)
     }
 
+    func removeCacheForCurrentURL(forceUpdate: Bool = false) {
+        SDImageCache.shared().removeImage(forKey: imageURL?.absoluteString, fromDisk: true)
+        if forceUpdate { updateAvatar() }
+    }
+
     func prepareForReuse() {
+        avatarPlaceholder = nil
         avatarURL = nil
         imageURL = nil
         user = nil
