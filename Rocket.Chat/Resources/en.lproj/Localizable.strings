@@ -52,6 +52,8 @@
 "alert.email_verification.title" = "Email verification";
 "alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again.";
 
+"alert.discarding_changes.title" = "Unsaved changes";
+"alert.discarding_changes.message" = "Your unsaved changes have been discarded.";
 "alert.load_profile_error.title" = "Failed to load your profile";
 "alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again.";
 "alert.password_mismatch_error.title" = "Your password doesn't match";

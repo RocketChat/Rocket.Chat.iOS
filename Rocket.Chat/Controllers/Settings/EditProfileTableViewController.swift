@@ -64,15 +64,40 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         return activityIndicator
     }()
 
+    var backButton: UIBarButtonItem?
+    var cancelButton: UIBarButtonItem?
+
     let api = API.current()
     var isUpdatingUser = false
-    var isUploadingAvatar = false
+    var isUploadingAvatar = false {
+        didSet {
+            hasUnsavedNewAvatar = !isUploadingAvatar ? false : hasUnsavedNewAvatar
+        }
+    }
     var isLoading = true
     var avatarFile: FileUpload?
+
     var user: User? = User() {
         didSet {
             bindUserData()
         }
+    }
+
+    var hasUnsavedNewAvatar = false
+    var hasUnsavedChanges: Bool {
+        let passwordInput = validatePasswordInput(shouldAlertUser: false)
+
+        guard
+            !hasUnsavedNewAvatar,
+            user?.name == name.text,
+            user?.username == username.text,
+            user?.emails.first?.email == email.text,
+            passwordInput.password == nil && !passwordInput.invalidInput
+        else {
+            return true
+        }
+
+        return false
     }
 
     private let viewModel = EditProfileViewModel()
@@ -84,10 +109,20 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
 
+        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(hideKeyboard))
+        navigationItem.leftItemsSupplementBackButton = true
         navigationItem.title = viewModel.title
 
         setupAvatarButton()
         fetchUserData()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        if isMovingFromParentViewController && hasUnsavedChanges {
+            Alert(key: "alert.discarding_changes").present()
+        }
     }
 
     // MARK: Setup
@@ -135,7 +170,10 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     // MARK: Actions
 
     @IBAction func saveProfile(_ sender: UIBarButtonItem) {
-        hideKeyboard()
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = cancelButton
+        return
+//        hideKeyboard()
 
         guard
             let user = user,
@@ -212,14 +250,18 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     @objc func hideKeyboard() {
-        view.endEditing(true)
+        navigationItem.hidesBackButton = false
+        var items = navigationItem.leftBarButtonItems
+        items?.remove(object: cancelButton!)
+        navigationItem.setLeftBarButtonItems(items, animated: true)
+//        view.endEditing(true)
     }
 
-    func validatePasswordInput() -> (password: String?, invalidInput: Bool) {
+    func validatePasswordInput(shouldAlertUser: Bool = true) -> (password: String?, invalidInput: Bool) {
         if newPassword.text != nil, !(newPassword.text?.isEmpty ?? true) {
             if passwordConfirmation.text == nil || (passwordConfirmation.text?.isEmpty ?? true) {
                 newPassword.text = nil
-                Alert(key: "alert.missing_password_field_error").present()
+                if shouldAlertUser { Alert(key: "alert.missing_password_field_error").present() }
                 return (nil, true)
             }
         }
@@ -227,7 +269,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         if passwordConfirmation.text != nil, !(passwordConfirmation.text?.isEmpty ?? true) {
             if newPassword.text == nil || (newPassword.text?.isEmpty ?? false) {
                 passwordConfirmation.text = nil
-                Alert(key: "alert.missing_password_field_error").present()
+                if shouldAlertUser { Alert(key: "alert.missing_password_field_error").present() }
                 return (nil, true)
             }
         }
@@ -246,7 +288,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         } else {
             self.newPassword.text = nil
             self.passwordConfirmation.text = nil
-            Alert(key: "alert.password_mismatch_error").present()
+            if shouldAlertUser { Alert(key: "alert.password_mismatch_error").present() }
             return (nil, true)
         }
     }
@@ -306,6 +348,7 @@ extension EditProfileTableViewController: UIImagePickerControllerDelegate {
             avatarView.imageView.image = image
         }
 
+        hasUnsavedNewAvatar = true
         avatarFile = file
 
         dismiss(animated: true, completion: nil)

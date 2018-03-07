@@ -230,7 +230,7 @@
                                                         <constraint firstAttribute="height" constant="44" id="3in-lg-DIE"/>
                                                     </constraints>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="words" textContentType="name"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="MdX-88-2ZI" id="12u-rC-RM4"/>
@@ -258,7 +258,7 @@
                                                         <constraint firstAttribute="height" constant="44" id="Uxq-k4-Hg0"/>
                                                     </constraints>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" textContentType="nickname"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="MdX-88-2ZI" id="1rr-aw-wQ5"/>
@@ -286,7 +286,7 @@
                                                         <constraint firstAttribute="height" constant="44" id="TAc-7M-Bpm"/>
                                                     </constraints>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="emailAddress" textContentType="email"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="MdX-88-2ZI" id="Efc-zT-XdO"/>
@@ -318,7 +318,7 @@
                                                         <constraint firstAttribute="height" constant="44" id="N3a-7V-b4j"/>
                                                     </constraints>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="MdX-88-2ZI" id="qpO-Tp-RgK"/>
@@ -346,7 +346,7 @@
                                                         <constraint firstAttribute="height" constant="44" id="Uba-3P-oyf"/>
                                                     </constraints>
                                                     <nil key="textColor"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <connections>
                                                         <outlet property="delegate" destination="MdX-88-2ZI" id="XkR-Fr-jRe"/>
