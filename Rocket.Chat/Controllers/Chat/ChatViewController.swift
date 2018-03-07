@@ -341,7 +341,7 @@ final class ChatViewController: SLKTextViewController {
     var keyboardFrame: KeyboardFrameView?
     let textInputbarBackground = UIToolbar()
     var oldTextInputbarBgIsTransparent = false
-    
+
     private func enableInteractiveKeyboardDismissal() {
         keyboardFrame = KeyboardFrameView(withDelegate: self)
     }
