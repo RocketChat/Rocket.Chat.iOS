@@ -263,12 +263,13 @@
 		41F3C1001DB577ED000E0C76 /* MessageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F3C0FF1DB577ED000E0C76 /* MessageURL.swift */; };
 		41F8487E1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */; };
 		41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FE55521F6038D60071E97A /* DatabaseManagerSpec.swift */; };
-		4B5CDBA020506FD300936988 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5CDB9720506D1800936988 /* Starscream.framework */; };
 		4B5CDBC520507DEC00936988 /* URLSeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CDBC320507DEB00936988 /* URLSeDelegate.swift */; };
 		4B5CDBC620507DEC00936988 /* SSLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CDBC420507DEB00936988 /* SSLSession.swift */; };
 		4B5CDBCE2050846B00936988 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CDBCD2050846B00936988 /* ShareViewController.swift */; };
 		4B5CDBD12050846B00936988 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B5CDBCF2050846B00936988 /* MainInterface.storyboard */; };
 		4B5CDBD52050846B00936988 /* ClientAuthenticationCertificateShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4B5CDBCB2050846B00936988 /* ClientAuthenticationCertificateShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4B6D89E82050985F0022F9C3 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5CDB9720506D1800936988 /* Starscream.framework */; };
+		4B6D89E92050985F0022F9C3 /* Starscream.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5CDB9720506D1800936988 /* Starscream.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA11E3708A50041C5C5 /* DataExtension.swift */; };
 		597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA31E3708B10041C5C5 /* PushManager.swift */; };
 		68D186DF1ED9714F0030EE8C /* MessageURLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */; };
@@ -474,6 +475,13 @@
 			remoteGlobalIDString = 4B5CDBCA2050846B00936988;
 			remoteInfo = ClientAuthenticationCertificateShareExtension;
 		};
+		4B6D89EA205098600022F9C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B5CDB9120506D1700936988 /* Starscream.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 33CCF0841F5DDC030099B092;
+			remoteInfo = Starscream;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -486,6 +494,17 @@
 				4B5CDBD52050846B00936988 /* ClientAuthenticationCertificateShareExtension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B6D89EC205098600022F9C3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4B6D89E92050985F0022F9C3 /* Starscream.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -963,8 +982,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4B5CDBA020506FD300936988 /* Starscream.framework in Frameworks */,
 				7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */,
+				4B6D89E82050985F0022F9C3 /* Starscream.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2266,11 +2285,13 @@
 				FD5E5CD0D343F2BAB726ADF9 /* 📦 Embed Pods Frameworks */,
 				DE3BF78D94D5B8E723E47DD2 /* 📦 Copy Pods Resources */,
 				4B5CDBC2205076B300936988 /* Embed App Extensions */,
+				4B6D89EC205098600022F9C3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 				4B5CDBD42050846B00936988 /* PBXTargetDependency */,
+				4B6D89EB205098600022F9C3 /* PBXTargetDependency */,
 			);
 			name = Rocket.Chat;
 			productName = Rocket.Chat;
@@ -3252,6 +3273,11 @@
 			target = 4B5CDBCA2050846B00936988 /* ClientAuthenticationCertificateShareExtension */;
 			targetProxy = 4B5CDBD32050846B00936988 /* PBXContainerItemProxy */;
 		};
+		4B6D89EB205098600022F9C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = Starscream;
+			targetProxy = 4B6D89EA205098600022F9C3 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -3350,6 +3376,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3406,6 +3433,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3436,6 +3464,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5XRWRHJ2H4;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3462,6 +3491,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5XRWRHJ2H4;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3574,6 +3604,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3604,6 +3635,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = 5XRWRHJ2H4;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
