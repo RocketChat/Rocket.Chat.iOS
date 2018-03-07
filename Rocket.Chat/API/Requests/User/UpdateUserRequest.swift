@@ -26,9 +26,11 @@ class UpdateUserRequest: APIRequest {
     }
 
     func body() -> Data? {
-        guard let name = user.name,
-                let username = user.username,
-                let email = user.emails.first else {
+        guard
+            let name = user.name,
+            let username = user.username,
+            let email = user.emails.first
+        else {
             return nil
         }
 

@@ -137,26 +137,27 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     @IBAction func saveProfile(_ sender: UIBarButtonItem) {
         hideKeyboard()
 
-        guard let user = user, let userId = user.identifier else { return }
-        guard let name = name.text, let username = username.text, let email = email.text,
-            !name.isEmpty, !username.isEmpty, !email.isEmpty else {
-                Alert(key: "alert.update_profile_empty_fields").present()
-                return
+        guard
+            let user = user,
+            let userId = user.identifier,
+            let name = name.text,
+            let username = username.text,
+            let email = email.text,
+            !name.isEmpty,
+            !username.isEmpty,
+            !email.isEmpty
+        else {
+            Alert(key: "alert.update_profile_empty_fields").present()
+            return
         }
 
         user.name = name
         user.username = username
         user.emails.first?.email = email
 
-        var password: String?
-
-        if let newPassword = newPassword.text, let passwordConfirmation = passwordConfirmation.text,
-                !newPassword.isEmpty, !passwordConfirmation.isEmpty {
-            if newPassword == passwordConfirmation {
-                password = newPassword
-            } else {
-                Alert(key: "alert.password_mismatch_error").present()
-            }
+        let passwordInput = validatePasswordInput()
+        if passwordInput.invalidInput {
+            return
         }
 
         startLoading()
