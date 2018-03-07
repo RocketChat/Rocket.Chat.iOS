@@ -56,6 +56,8 @@
 "alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again.";
 "alert.password_mismatch_error.title" = "Your password doesn't match";
 "alert.password_mismatch_error.message" = "The confirmation field doesn't match with the password you've provided. Please, check it and try again.";
+"alert.missing_password_field_error.title" = "Missing password data";
+"alert.missing_password_field_error.message" = "Fill up both fields on the password section to update your password.";
 "alert.update_profile_error.title" = "Failed to update";
 "alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please, try again.";
 "alert.update_profile_empty_fields.title" = "Please, fill the empty fields";

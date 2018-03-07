@@ -222,6 +222,42 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         view.endEditing(true)
     }
 
+    func validatePasswordInput() -> (password: String?, invalidInput: Bool) {
+        if newPassword.text != nil, !(newPassword.text?.isEmpty ?? true) {
+            if passwordConfirmation.text == nil || (passwordConfirmation.text?.isEmpty ?? true) {
+                newPassword.text = nil
+                Alert(key: "alert.missing_password_field_error").present()
+                return (nil, true)
+            }
+        }
+
+        if passwordConfirmation.text != nil, !(passwordConfirmation.text?.isEmpty ?? true) {
+            if newPassword.text == nil || (newPassword.text?.isEmpty ?? false) {
+                passwordConfirmation.text = nil
+                Alert(key: "alert.missing_password_field_error").present()
+                return (nil, true)
+            }
+        }
+
+        guard
+            let newPassword = newPassword.text,
+            let passwordConfirmation = passwordConfirmation.text,
+            !newPassword.isEmpty,
+            !passwordConfirmation.isEmpty
+        else {
+            return (nil, false)
+        }
+
+        if newPassword == passwordConfirmation {
+            return (newPassword, false)
+        } else {
+            self.newPassword.text = nil
+            self.passwordConfirmation.text = nil
+            Alert(key: "alert.password_mismatch_error").present()
+            return (nil, true)
+        }
+    }
+
     func startLoading() {
         DispatchQueue.main.async {
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
