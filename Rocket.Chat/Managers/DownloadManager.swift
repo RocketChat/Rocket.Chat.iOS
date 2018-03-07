@@ -68,7 +68,7 @@ class DownloadManager {
         let session = URLSession(configuration: sessionConfig)
         let request = URLRequest(url: url)
 
-        let task = session.downloadTask(with: request) { (tempLocalUrl, response, error) in
+        let task = SSLSession.getURLSession().downloadTask(with: request) { (tempLocalUrl, response, error) in
             if let tempLocalUrl = tempLocalUrl, error == nil {
                 // Success
                 if let statusCode = (response as? HTTPURLResponse)?.statusCode {

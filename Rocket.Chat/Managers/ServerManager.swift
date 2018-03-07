@@ -82,7 +82,7 @@ class ServerManager {
         let request = URLRequest(url: url)
         let session = URLSession.shared
 
-        let task = session.dataTask(with: request, completionHandler: { (data, _, _) in
+        let task = SSLSession.getURLSession().dataTask(with: request, completionHandler: { (data, _, _) in
             if let data = data {
                 if let timestamp = String(data: data, encoding: .utf8) {
                     if let timestampDouble = Double(timestamp) {

@@ -263,6 +263,12 @@
 		41F3C1001DB577ED000E0C76 /* MessageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F3C0FF1DB577ED000E0C76 /* MessageURL.swift */; };
 		41F8487E1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */; };
 		41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FE55521F6038D60071E97A /* DatabaseManagerSpec.swift */; };
+		4B5CDBA020506FD300936988 /* Starscream.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B5CDB9720506D1800936988 /* Starscream.framework */; };
+		4B5CDBC520507DEC00936988 /* URLSeDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CDBC320507DEB00936988 /* URLSeDelegate.swift */; };
+		4B5CDBC620507DEC00936988 /* SSLSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CDBC420507DEB00936988 /* SSLSession.swift */; };
+		4B5CDBCE2050846B00936988 /* ShareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5CDBCD2050846B00936988 /* ShareViewController.swift */; };
+		4B5CDBD12050846B00936988 /* MainInterface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4B5CDBCF2050846B00936988 /* MainInterface.storyboard */; };
+		4B5CDBD52050846B00936988 /* ClientAuthenticationCertificateShareExtension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4B5CDBCB2050846B00936988 /* ClientAuthenticationCertificateShareExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA11E3708A50041C5C5 /* DataExtension.swift */; };
 		597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA31E3708B10041C5C5 /* PushManager.swift */; };
 		68D186DF1ED9714F0030EE8C /* MessageURLSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */; };
@@ -447,7 +453,42 @@
 			remoteGlobalIDString = 41DF76DE1D2C50710028DBF8;
 			remoteInfo = Rocket.Chat;
 		};
+		4B5CDB9620506D1800936988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B5CDB9120506D1700936988 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 33CCF0921F5DDC030099B092;
+			remoteInfo = Starscream;
+		};
+		4B5CDB9820506D1800936988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4B5CDB9120506D1700936988 /* Starscream.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 335FA2021F5DF71D00F6D2EC;
+			remoteInfo = "Starscream Tests";
+		};
+		4B5CDBD32050846B00936988 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 41DF76D71D2C50710028DBF8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4B5CDBCA2050846B00936988;
+			remoteInfo = ClientAuthenticationCertificateShareExtension;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4B5CDBC2205076B300936988 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4B5CDBD52050846B00936988 /* ClientAuthenticationCertificateShareExtension.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewController.swift; sourceTree = "<group>"; };
@@ -721,6 +762,14 @@
 		41F3C0FF1DB577ED000E0C76 /* MessageURL.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageURL.swift; sourceTree = "<group>"; };
 		41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PreferencesViewModelSpec.swift; path = Settings/PreferencesViewModelSpec.swift; sourceTree = "<group>"; };
 		41FE55521F6038D60071E97A /* DatabaseManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DatabaseManagerSpec.swift; path = Managers/DatabaseManagerSpec.swift; sourceTree = "<group>"; };
+		4B5CDB9120506D1700936988 /* Starscream.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Starscream.xcodeproj; path = Starscream/Starscream.xcodeproj; sourceTree = "<group>"; };
+		4B5CDBC320507DEB00936988 /* URLSeDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLSeDelegate.swift; sourceTree = "<group>"; };
+		4B5CDBC420507DEB00936988 /* SSLSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SSLSession.swift; sourceTree = "<group>"; };
+		4B5CDBCB2050846B00936988 /* ClientAuthenticationCertificateShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = ClientAuthenticationCertificateShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		4B5CDBCD2050846B00936988 /* ShareViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareViewController.swift; sourceTree = "<group>"; };
+		4B5CDBD02050846B00936988 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/MainInterface.storyboard; sourceTree = "<group>"; };
+		4B5CDBD22050846B00936988 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4B5CDBDA205084B100936988 /* ClientAuthenticationCertificateShareExtension.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = ClientAuthenticationCertificateShareExtension.entitlements; sourceTree = "<group>"; };
 		5108B4F1453CB9F4E425E3F4 /* Pods-Rocket.Chat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.release.xcconfig"; sourceTree = "<group>"; };
 		58C7F7D8D91A05CA5D1C9FE0 /* Pods-Rocket.ChatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		597ECBA01E3708980041C5C5 /* Rocket.Chat.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rocket.Chat.entitlements; sourceTree = "<group>"; };
@@ -914,6 +963,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B5CDBA020506FD300936988 /* Starscream.framework in Frameworks */,
 				7DE1B07114BBD1D46E9CC71B /* Pods_Rocket_Chat.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -927,6 +977,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		41DF76FB1D2C50720028DBF8 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4B5CDBC82050846B00936988 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1645,6 +1702,7 @@
 				41DF76E11D2C50710028DBF8 /* Rocket.Chat */,
 				41DF76F61D2C50720028DBF8 /* Rocket.ChatTests */,
 				41DF77011D2C50720028DBF8 /* Rocket.ChatUITests */,
+				4B5CDBCC2050846B00936988 /* ClientAuthenticationCertificateShareExtension */,
 				41DF76E01D2C50710028DBF8 /* Products */,
 				EE693BBD0CC2727847214E2D /* Pods */,
 				106DAA428B5BF7289FB70C65 /* Frameworks */,
@@ -1657,6 +1715,7 @@
 				41DF76DF1D2C50710028DBF8 /* Rocket.Chat.app */,
 				41DF76F31D2C50720028DBF8 /* Rocket.ChatTests.xctest */,
 				41DF76FE1D2C50720028DBF8 /* Rocket.ChatUITests.xctest */,
+				4B5CDBCB2050846B00936988 /* ClientAuthenticationCertificateShareExtension.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1677,6 +1736,7 @@
 				41DF76E21D2C50710028DBF8 /* AppDelegate.swift */,
 				4174CB201D2DD4690086DAC8 /* Rocket.Chat-Bridge.h */,
 				41DF76EE1D2C50720028DBF8 /* Info.plist */,
+				4B5CDB9120506D1700936988 /* Starscream.xcodeproj */,
 				41833F4D1DEF16B600E54655 /* Keys.plist */,
 				597ECBA01E3708980041C5C5 /* Rocket.Chat.entitlements */,
 			);
@@ -1764,6 +1824,26 @@
 				414A1FF41D4631F600093E10 /* Response */,
 			);
 			name = Socket;
+			sourceTree = "<group>";
+		};
+		4B5CDB9220506D1700936988 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				4B5CDB9720506D1800936988 /* Starscream.framework */,
+				4B5CDB9920506D1800936988 /* Starscream Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		4B5CDBCC2050846B00936988 /* ClientAuthenticationCertificateShareExtension */ = {
+			isa = PBXGroup;
+			children = (
+				4B5CDBDA205084B100936988 /* ClientAuthenticationCertificateShareExtension.entitlements */,
+				4B5CDBCD2050846B00936988 /* ShareViewController.swift */,
+				4B5CDBCF2050846B00936988 /* MainInterface.storyboard */,
+				4B5CDBD22050846B00936988 /* Info.plist */,
+			);
+			path = ClientAuthenticationCertificateShareExtension;
 			sourceTree = "<group>";
 		};
 		7758A7621F8FA34300FAA244 /* UIPickerView */ = {
@@ -2105,6 +2185,8 @@
 				8013F8681FD6B59900EE1A4E /* Version.swift */,
 				D1D535ED1F708628006625D2 /* APIRequest.swift */,
 				D15C83851F70991F001AB155 /* APIResult.swift */,
+				4B5CDBC420507DEB00936988 /* SSLSession.swift */,
+				4B5CDBC320507DEB00936988 /* URLSeDelegate.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -2183,10 +2265,12 @@
 				D88FD9F92178058BA7FF2938 /* [CP] Copy Pods Resources */,
 				FD5E5CD0D343F2BAB726ADF9 /* 📦 Embed Pods Frameworks */,
 				DE3BF78D94D5B8E723E47DD2 /* 📦 Copy Pods Resources */,
+				4B5CDBC2205076B300936988 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4B5CDBD42050846B00936988 /* PBXTargetDependency */,
 			);
 			name = Rocket.Chat;
 			productName = Rocket.Chat;
@@ -2235,21 +2319,42 @@
 			productReference = 41DF76FE1D2C50720028DBF8 /* Rocket.ChatUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		4B5CDBCA2050846B00936988 /* ClientAuthenticationCertificateShareExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4B5CDBD62050846B00936988 /* Build configuration list for PBXNativeTarget "ClientAuthenticationCertificateShareExtension" */;
+			buildPhases = (
+				4B5CDBC72050846B00936988 /* Sources */,
+				4B5CDBC82050846B00936988 /* Frameworks */,
+				4B5CDBC92050846B00936988 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ClientAuthenticationCertificateShareExtension;
+			productName = ClientAuthenticationCertificateShareExtension;
+			productReference = 4B5CDBCB2050846B00936988 /* ClientAuthenticationCertificateShareExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		41DF76D71D2C50710028DBF8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0920;
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = Rocket.Chat;
 				TargetAttributes = {
 					41DF76DE1D2C50710028DBF8 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = S6UPZG7ZR3;
+						DevelopmentTeam = 5XRWRHJ2H4;
 						LastSwiftMigration = 0900;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
@@ -2273,6 +2378,16 @@
 						LastSwiftMigration = 0900;
 						TestTargetID = 41DF76DE1D2C50710028DBF8;
 					};
+					4B5CDBCA2050846B00936988 = {
+						CreatedOnToolsVersion = 9.2;
+						DevelopmentTeam = 5XRWRHJ2H4;
+						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+						};
+					};
 				};
 			};
 			buildConfigurationList = 41DF76DA1D2C50710028DBF8 /* Build configuration list for PBXProject "Rocket.Chat" */;
@@ -2293,14 +2408,38 @@
 			mainGroup = 41DF76D61D2C50710028DBF8;
 			productRefGroup = 41DF76E01D2C50710028DBF8 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 4B5CDB9220506D1700936988 /* Products */;
+					ProjectRef = 4B5CDB9120506D1700936988 /* Starscream.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				41DF76DE1D2C50710028DBF8 /* Rocket.Chat */,
 				41DF76F21D2C50720028DBF8 /* Rocket.ChatTests */,
 				41DF76FD1D2C50720028DBF8 /* Rocket.ChatUITests */,
+				4B5CDBCA2050846B00936988 /* ClientAuthenticationCertificateShareExtension */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		4B5CDB9720506D1800936988 /* Starscream.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = Starscream.framework;
+			remoteRef = 4B5CDB9620506D1800936988 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		4B5CDB9920506D1800936988 /* Starscream Tests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "Starscream Tests.xctest";
+			remoteRef = 4B5CDB9820506D1800936988 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		41DF76DD1D2C50710028DBF8 /* Resources */ = {
@@ -2425,6 +2564,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4B5CDBC92050846B00936988 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B5CDBD12050846B00936988 /* MainInterface.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -2509,7 +2656,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n    \"${PODS_ROOT}/SwiftLint/swiftlint\"\nfi";
+			shellScript = "";
 		};
 		D88FD9F92178058BA7FF2938 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2572,7 +2719,6 @@
 				"${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework",
 				"${BUILT_PRODUCTS_DIR}/semver/semver.framework",
@@ -2600,7 +2746,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TagListView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/semver.framework",
@@ -2683,7 +2828,6 @@
 				"${BUILT_PRODUCTS_DIR}/SideMenuController/SideMenuController.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleImageViewer/SimpleImageViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/SlackTextViewController/SlackTextViewController.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework",
 				"${BUILT_PRODUCTS_DIR}/semver/semver.framework",
@@ -2711,7 +2855,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenuController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SimpleImageViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SlackTextViewController.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TagListView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/semver.framework",
@@ -2916,6 +3059,7 @@
 				80A63C531F71BD2900FE5AC4 /* UserInfoRequest.swift in Sources */,
 				80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */,
 				4162E1531D651A8800AAAE49 /* UserManager.swift in Sources */,
+				4B5CDBC620507DEC00936988 /* SSLSession.swift in Sources */,
 				4112BEEC1E7971A400E734CB /* MainChatViewController.swift in Sources */,
 				800FCD4C1F728EC800D9A692 /* ChannelInfoCellProtocol.swift in Sources */,
 				800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */,
@@ -2971,6 +3115,7 @@
 				77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
+				4B5CDBC520507DEC00936988 /* URLSeDelegate.swift in Sources */,
 				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,
 				41EE15801E05BF1F00754D45 /* ChatControllerMessageCellProtocol.swift in Sources */,
 				41865AF21FC8B23400A5E48F /* WebViewControllerEmbedded.swift in Sources */,
@@ -3081,6 +3226,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4B5CDBC72050846B00936988 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4B5CDBCE2050846B00936988 /* ShareViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -3093,6 +3246,11 @@
 			isa = PBXTargetDependency;
 			target = 41DF76DE1D2C50710028DBF8 /* Rocket.Chat */;
 			targetProxy = 41DF76FF1D2C50720028DBF8 /* PBXContainerItemProxy */;
+		};
+		4B5CDBD42050846B00936988 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4B5CDBCA2050846B00936988 /* ClientAuthenticationCertificateShareExtension */;
+			targetProxy = 4B5CDBD32050846B00936988 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -3118,6 +3276,14 @@
 				412184A520472F7900DAAA88 /* es */,
 			);
 			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		4B5CDBCF2050846B00936988 /* MainInterface.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4B5CDBD02050846B00936988 /* Base */,
+			);
+			name = MainInterface.storyboard;
 			sourceTree = "<group>";
 		};
 		80307E431FD75DC0006AD9EF /* VoiceOver.strings */ = {
@@ -3263,18 +3429,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BCF38696E8EC385488688390 /* Pods-Rocket.Chat.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 5XRWRHJ2H4;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) -Onone -D DEBUG \"-D\" \"COCOAPODS\"";
-				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = rocketchat.collectivetheory.io;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "20a4e4ba-265c-4009-9603-6ccc98746eb1";
+				PROVISIONING_PROFILE_SPECIFIER = "Rocket Dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
@@ -3286,17 +3455,20 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5108B4F1453CB9F4E425E3F4 /* Pods-Rocket.Chat.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 5XRWRHJ2H4;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = rocketchat.collectivetheory.io;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "171b0fa2-18ab-4dd1-9274-39169e6d3ebb";
+				PROVISIONING_PROFILE_SPECIFIER = "Rocket AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
@@ -3425,18 +3597,21 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = AAC8D92081FF042E089F3063 /* Pods-Rocket.Chat.beta.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Rocket.Chat/Rocket.Chat.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = S6UPZG7ZR3;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 5XRWRHJ2H4;
 				INFOPLIST_FILE = Rocket.Chat/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" \"-D\" \"BETA\"";
-				PRODUCT_BUNDLE_IDENTIFIER = chat.rocket.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = rocketchat.collectivetheory.io;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "171b0fa2-18ab-4dd1-9274-39169e6d3ebb";
+				PROVISIONING_PROFILE_SPECIFIER = "Rocket AppStore";
 				SWIFT_OBJC_BRIDGING_HEADER = "Rocket.Chat/Rocket.Chat-Bridge.h";
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
@@ -3474,6 +3649,85 @@
 				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 4.0;
 				TEST_TARGET_NAME = Rocket.Chat;
+			};
+			name = Beta;
+		};
+		4B5CDBD72050846B00936988 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ClientAuthenticationCertificateShareExtension/ClientAuthenticationCertificateShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 5XRWRHJ2H4;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ClientAuthenticationCertificateShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rocketchat.collectivetheory.io.clientauthenticationcertificate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "0c0f2b00-f65a-40bb-929d-e1a101580efe";
+				PROVISIONING_PROFILE_SPECIFIER = "ClientAuthenticationCertificate Dev";
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4B5CDBD82050846B00936988 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ClientAuthenticationCertificateShareExtension/ClientAuthenticationCertificateShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 5XRWRHJ2H4;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ClientAuthenticationCertificateShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rocketchat.collectivetheory.io.clientauthenticationcertificate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "60a779d5-c813-435d-a833-ea06ca513f18";
+				PROVISIONING_PROFILE_SPECIFIER = "ClientAuthentication AppStore";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		4B5CDBD92050846B00936988 /* Beta */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = ClientAuthenticationCertificateShareExtension/ClientAuthenticationCertificateShareExtension.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 5XRWRHJ2H4;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = ClientAuthenticationCertificateShareExtension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = rocketchat.collectivetheory.io.clientauthenticationcertificate;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "60a779d5-c813-435d-a833-ea06ca513f18";
+				PROVISIONING_PROFILE_SPECIFIER = "ClientAuthentication AppStore";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Beta;
 		};
@@ -3516,6 +3770,16 @@
 				41DF770E1D2C50720028DBF8 /* Debug */,
 				41DF770F1D2C50720028DBF8 /* Release */,
 				41E69F0720050A310040ADB2 /* Beta */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4B5CDBD62050846B00936988 /* Build configuration list for PBXNativeTarget "ClientAuthenticationCertificateShareExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4B5CDBD72050846B00936988 /* Debug */,
+				4B5CDBD82050846B00936988 /* Release */,
+				4B5CDBD92050846B00936988 /* Beta */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

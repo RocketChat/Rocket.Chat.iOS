@@ -45,12 +45,18 @@ class SocketManager {
         sharedInstance.serverURL = url
         sharedInstance.internalConnectionHandler = completion
 
+        sharedInstance.socket = WebSocket(url: url)
+
+        sharedInstance.socket?.disableSSLCertValidation = false
+        // Set enabled cipher suites to AES 256 and AES 128
+        sharedInstance.socket?.enabledSSLCipherSuites = [TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256]
+
+        sharedInstance.socket?.advancedDelegate = sharedInstance
+        sharedInstance.socket?.pongDelegate = sharedInstance
+
         var request = URLRequest(url: url)
         request.setValue(url.host ?? "", forHTTPHeaderField: "Host")
 
-        sharedInstance.socket = WebSocket(request: request)
-        sharedInstance.socket?.advancedDelegate = sharedInstance
-        sharedInstance.socket?.pongDelegate = sharedInstance
         sharedInstance.socket?.connect()
     }
 
