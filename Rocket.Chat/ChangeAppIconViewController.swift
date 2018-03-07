@@ -12,12 +12,6 @@ final class ChangeAppIconViewController: UIViewController {
 
     private let viewModel = ChangeAppIconViewModel()
 
-    @IBOutlet private weak var labelHeaderTitle: UILabel! {
-        didSet {
-            labelHeaderTitle.text = viewModel.header
-        }
-    }
-
     @IBOutlet private weak var collectionView: UICollectionView!
 
     override func viewDidLoad() {
@@ -72,7 +66,9 @@ extension ChangeAppIconViewController: UICollectionViewDataSource {
 }
 
 extension ChangeAppIconViewController: UICollectionViewDelegate {
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         changeIcon(name: viewModel.availableIcons[indexPath.row])
     }
+
 }
