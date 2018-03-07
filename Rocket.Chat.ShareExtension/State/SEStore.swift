@@ -8,32 +8,6 @@
 
 import Foundation
 
-struct SEServer {
-    let name: String
-    let host: String
-    let userId: String
-    let token: String
-}
-
-struct SEState {
-    var servers: [SEServer] = []
-    var selectedServerIndex: Int = 0
-    var rooms: [Subscription] = []
-    var currentRoom = Subscription()
-    var composeText = ""
-    var navigation = SENavigation(scenes: [], sceneTransition: .none)
-}
-
-enum SEAction {
-    case setComposeText(String)
-    case setServers([SEServer])
-    case selectServerIndex(Int)
-    case setRooms([Subscription])
-    case setCurrentRoom(Subscription)
-    case makeSceneTransition(SESceneTransition)
-    case setScenes([SEScene])
-}
-
 protocol SEStoreSubscriber: class {
     func stateUpdated(_ state: SEState)
 }
@@ -52,6 +26,8 @@ final class SEStore {
             state.selectedServerIndex = index
         case .setRooms(let rooms):
             state.rooms = rooms
+        case .setSearchRooms(let search):
+            state.searchRooms = search
         case .setCurrentRoom(let room):
             state.currentRoom = room
         case .setScenes(let scenes):

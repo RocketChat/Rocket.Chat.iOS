@@ -22,7 +22,12 @@ final class SERoomsViewController: SEViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        navigationItem.searchController = UISearchController(searchResultsController: nil)
+        let searchController = UISearchController(searchResultsController: nil)
+        searchController.searchBar.delegate = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.hidesNavigationBarDuringPresentation = false
+
+        navigationItem.searchController = searchController
     }
 
     override func stateUpdated(_ state: SEState) {
@@ -37,6 +42,24 @@ final class SERoomsViewController: SEViewController {
         cancelShareExtension()
     }
 }
+
+// MARK: UISearchBarDelegate
+
+extension SERoomsViewController: UISearchBarDelegate {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        store.dispatch(.setSearchRooms(.none))
+    }
+
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        store.dispatch(.setSearchRooms(.started))
+    }
+
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        store.dispatch(.setSearchRooms(.searching(searchText)))
+    }
+}
+
+// MARK: UITableViewDataSource
 
 extension SERoomsViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,6 +95,8 @@ extension SERoomsViewController: UITableViewDataSource {
         return viewModel.titleForHeaderInSection(section)
     }
 }
+
+// MARK: UITableViewDelegate
 
 extension SERoomsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

@@ -10,10 +10,10 @@ extension SERoomsViewModel {
     init(state: SEState) {
         let server = state.servers[state.selectedServerIndex]
 
-        let favorites = state.rooms.filter { $0.favorite }.map(SERoomCell.init)
-        let channels = state.rooms.filter { $0.type == .channel }.map(SERoomCell.init)
-        let groups = state.rooms.filter { $0.type == .group }.map(SERoomCell.init)
-        let directMessages = state.rooms.filter { $0.type == .directMessage }.map(SERoomCell.init)
+        let favorites = state.displayedRooms.filter { $0.favorite }.map(SERoomCell.init)
+        let channels = state.displayedRooms.filter { $0.type == .channel }.map(SERoomCell.init)
+        let groups = state.displayedRooms.filter { $0.type == .group }.map(SERoomCell.init)
+        let directMessages = state.displayedRooms.filter { $0.type == .directMessage }.map(SERoomCell.init)
 
         sections = [
             SERoomsSection(type: .server, cells: [

@@ -436,6 +436,9 @@
 		80977AB6204EEF1E00C41435 /* SEActionCreators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977AB5204EEF1E00C41435 /* SEActionCreators.swift */; };
 		80977AB9204EFBCC00C41435 /* SENavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977AB8204EFBCC00C41435 /* SENavigation.swift */; };
 		80977ABB204EFC0F00C41435 /* SESceneTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977ABA204EFC0F00C41435 /* SESceneTransition.swift */; };
+		80977ABF204F36F200C41435 /* SESearchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977ABE204F36F200C41435 /* SESearchState.swift */; };
+		80977AC2204F37C200C41435 /* SEState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977AC1204F37C200C41435 /* SEState.swift */; };
+		80977AC4204FEEA700C41435 /* SEComposeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977AC3204FEEA700C41435 /* SEComposeViewModel.swift */; };
 		809B530B1FE2B1AB00833DD2 /* UploadClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530A1FE2B1AB00833DD2 /* UploadClient.swift */; };
 		809B530E1FE2EFA100833DD2 /* ReactionListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530D1FE2EFA100833DD2 /* ReactionListView.swift */; };
 		809B53101FE2F17D00833DD2 /* ReactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 809B530F1FE2F17D00833DD2 /* ReactionView.swift */; };
@@ -972,6 +975,9 @@
 		80977AB5204EEF1E00C41435 /* SEActionCreators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEActionCreators.swift; sourceTree = "<group>"; };
 		80977AB8204EFBCC00C41435 /* SENavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SENavigation.swift; sourceTree = "<group>"; };
 		80977ABA204EFC0F00C41435 /* SESceneTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SESceneTransition.swift; sourceTree = "<group>"; };
+		80977ABE204F36F200C41435 /* SESearchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SESearchState.swift; sourceTree = "<group>"; };
+		80977AC1204F37C200C41435 /* SEState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEState.swift; sourceTree = "<group>"; };
+		80977AC3204FEEA700C41435 /* SEComposeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeViewModel.swift; sourceTree = "<group>"; };
 		809B530A1FE2B1AB00833DD2 /* UploadClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadClient.swift; sourceTree = "<group>"; };
 		809B530D1FE2EFA100833DD2 /* ReactionListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionListView.swift; sourceTree = "<group>"; };
 		809B530F1FE2F17D00833DD2 /* ReactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionView.swift; sourceTree = "<group>"; };
@@ -2185,6 +2191,7 @@
 		8076FDE02048A69200114F28 /* Compose */ = {
 			isa = PBXGroup;
 			children = (
+				80977AC3204FEEA700C41435 /* SEComposeViewModel.swift */,
 				8076FDE12048A7C500114F28 /* SEComposeViewController.swift */,
 			);
 			path = Compose;
@@ -2203,9 +2210,7 @@
 		807FB5592046E7DD00E21429 /* Rocket.Chat.ShareExtension */ = {
 			isa = PBXGroup;
 			children = (
-				80977AB5204EEF1E00C41435 /* SEActionCreators.swift */,
-				8076FD9920484A6000114F28 /* SEStore.swift */,
-				80977AB7204EFBBB00C41435 /* Navigation */,
+				80977AC0204F374100C41435 /* State */,
 				8076FDEB2049A5CB00114F28 /* Base */,
 				807FB5802048378500E21429 /* Servers */,
 				807FB57E2048376900E21429 /* Rooms */,
@@ -2255,6 +2260,18 @@
 				80977ABA204EFC0F00C41435 /* SESceneTransition.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		80977AC0204F374100C41435 /* State */ = {
+			isa = PBXGroup;
+			children = (
+				80977AB5204EEF1E00C41435 /* SEActionCreators.swift */,
+				8076FD9920484A6000114F28 /* SEStore.swift */,
+				80977AC1204F37C200C41435 /* SEState.swift */,
+				80977ABE204F36F200C41435 /* SESearchState.swift */,
+				80977AB7204EFBBB00C41435 /* Navigation */,
+			);
+			path = State;
 			sourceTree = "<group>";
 		};
 		809B530C1FE2EF7C00833DD2 /* Reaction */ = {
@@ -3475,11 +3492,13 @@
 				80977AB6204EEF1E00C41435 /* SEActionCreators.swift in Sources */,
 				8076FDDC2048A0E600114F28 /* SEServersViewModel+Store.swift in Sources */,
 				807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */,
+				80977AC4204FEEA700C41435 /* SEComposeViewModel.swift in Sources */,
 				804273E2204EBD51006DF420 /* APIResult.swift in Sources */,
 				8076FDCC204863DF00114F28 /* AuthExtensions.swift in Sources */,
 				8076FDD3204864A400114F28 /* MessageReaction.swift in Sources */,
 				80977AB9204EFBCC00C41435 /* SENavigation.swift in Sources */,
 				8076FDDA20489F5900114F28 /* SEViewController.swift in Sources */,
+				80977AC2204F37C200C41435 /* SEState.swift in Sources */,
 				804273E1204EBD51006DF420 /* APIRequest.swift in Sources */,
 				8076FDCA204863B900114F28 /* Channel.swift in Sources */,
 				8076FDBD2048598100114F28 /* Subscription.swift in Sources */,
@@ -3509,6 +3528,7 @@
 				807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */,
 				8076FDED2049A5F600114F28 /* SECell.swift in Sources */,
 				8076FDCD204863FC00114F28 /* MessageURL.swift in Sources */,
+				80977ABF204F36F200C41435 /* SESearchState.swift in Sources */,
 				8076FD9D2048510100114F28 /* AuthSettings.swift in Sources */,
 				8076FD9A20484A6000114F28 /* SEStore.swift in Sources */,
 				8076FD9E2048510C00114F28 /* AuthManager.swift in Sources */,

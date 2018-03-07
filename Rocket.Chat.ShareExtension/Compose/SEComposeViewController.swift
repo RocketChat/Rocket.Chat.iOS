@@ -19,6 +19,9 @@ class SEComposeViewController: SEViewController {
     }
 
     override func stateUpdated(_ state: SEState) {
+
+        let viewModel = SEComposeViewModel()
+        title = viewModel.title
         destinationLabel.text = state.currentRoom.name
         textView.text = state.composeText
     }

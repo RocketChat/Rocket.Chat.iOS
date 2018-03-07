@@ -18,4 +18,5 @@
 "rooms.section.groups" = "Private Groups";
 "rooms.section.directMessages" = "Direct Messages";
 
+"compose.title" = "Share";
 "compose.destination.to" = "To: ";
