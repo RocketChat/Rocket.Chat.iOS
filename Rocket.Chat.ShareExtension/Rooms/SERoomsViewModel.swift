@@ -66,6 +66,17 @@ extension SERoomsViewModel {
         return sections[indexPath.section].cells[indexPath.row]
     }
 
+    func heightForRowAt(_ indexPath: IndexPath) -> Double {
+        switch cellForRowAt(indexPath) {
+        case is SEServerCellViewModel:
+            return 48.0
+        case is SERoomCell:
+            return 36.0
+        default:
+            return 36.0
+        }
+    }
+
     func titleForHeaderInSection(_ section: Int) -> String {
         return sections[section].title
     }
@@ -77,7 +88,7 @@ extension SERoomsViewModel {
     func didSelectRowAt(_ indexPath: IndexPath) {
         let cell = cellForRowAt(indexPath)
 
-        if cell as? SEServerCell != nil {
+        if cell as? SEServerCellViewModel != nil {
             store.dispatch(.makeSceneTransition(.push(.servers)))
         } else if let roomCell = cell as? SERoomCell {
             store.dispatch(.makeSceneTransition(.push(.compose)))

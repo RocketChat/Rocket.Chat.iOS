@@ -13,6 +13,7 @@ struct SEServer {
     let host: String
     let userId: String
     let token: String
+    let iconUrl: String
 }
 
 enum SEAction {

@@ -16,6 +16,7 @@ final class SEServersViewController: SEViewController {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
+            tableView.register(SEServerTableViewCell.self)
         }
     }
 
@@ -38,15 +39,13 @@ extension SEServersViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cellModel = viewModel.cellForRowAt(indexPath)
-
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "UITableViewCellDefault")
-
-        cell.textLabel?.text = cellModel.title
-        cell.detailTextLabel?.text = cellModel.detail
-        cell.accessoryType = cellModel.selected ? .checkmark : .none
-
+        let cell = tableView.dequeue(SEServerTableViewCell.self, forIndexPath: indexPath)
+        cell.viewModel = viewModel.cellForRowAt(indexPath)
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(viewModel.heightForRowAt(indexPath))
     }
 }
 

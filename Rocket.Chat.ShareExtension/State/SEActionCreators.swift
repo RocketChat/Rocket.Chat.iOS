@@ -14,12 +14,13 @@ func fetchServers(store: SEStore) -> SEAction {
             let name = dict[ServerPersistKeys.serverName],
             let host = URL(string: dict[ServerPersistKeys.serverURL] ?? "")?.host,
             let userId = dict[ServerPersistKeys.userId],
-            let token = dict[ServerPersistKeys.token]
+            let token = dict[ServerPersistKeys.token],
+            let iconUrl = dict[ServerPersistKeys.serverIconURL]
         else {
             return nil
         }
 
-        return SEServer(name: name, host: host, userId: userId, token: token)
+        return SEServer(name: name, host: host, userId: userId, token: token, iconUrl: iconUrl)
     } ?? []
 
     return .setServers(servers)

@@ -8,14 +8,8 @@
 
 import Foundation
 
-struct SEServerCell: SECell {
-    let title: String
-    let detail: String
-    let selected: Bool
-}
-
 struct SEServersViewModel {
-    let serverCells: [SEServerCell]
+    let serverCells: [SEServerCellViewModel]
 
     var title: String {
         return localized("servers.title")
@@ -42,8 +36,12 @@ extension SEServersViewModel {
         }
     }
 
-    func cellForRowAt(_ indexPath: IndexPath) -> SEServerCell {
+    func cellForRowAt(_ indexPath: IndexPath) -> SEServerCellViewModel {
         return serverCells[indexPath.row]
+    }
+
+    func heightForRowAt(_ indexPath: IndexPath) -> Double {
+        return 48.0
     }
 }
 

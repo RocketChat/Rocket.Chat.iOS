@@ -16,6 +16,7 @@ final class SERoomsViewController: SEViewController {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
+            tableView.register(SEServerTableViewCell.self)
         }
     }
 
@@ -78,10 +79,10 @@ extension SERoomsViewController: UITableViewDataSource {
         if let cellModel = cellModel as? SERoomCell {
             cell = UITableViewCell(style: .default, reuseIdentifier: cellModel.reuseIdentifier)
             cell.textLabel?.text = cellModel.title
-        } else if let cellModel = cellModel as? SEServerCell {
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: cellModel.reuseIdentifier)
-            cell.textLabel?.text = cellModel.title
-            cell.detailTextLabel?.text = cellModel.detail
+        } else if let cellModel = cellModel as? SEServerCellViewModel {
+            let serverCell = tableView.dequeue(SEServerTableViewCell.self, forIndexPath: indexPath)
+            serverCell.viewModel = cellModel
+            cell = serverCell
         } else {
             cell = UITableViewCell(style: .default, reuseIdentifier: cellModel.reuseIdentifier)
         }
@@ -89,6 +90,10 @@ extension SERoomsViewController: UITableViewDataSource {
         cell.accessoryType = .disclosureIndicator
 
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return CGFloat(viewModel.heightForRowAt(indexPath))
     }
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

@@ -4,6 +4,10 @@ platform :ios, '10.0'
 use_frameworks!
 inhibit_all_warnings!
 
+def webimage_pod
+  pod 'SDWebImage', '~> 4'
+end
+
 def database_pods
   pod 'RealmSwift'
   pod 'SwiftyJSON'
@@ -33,7 +37,7 @@ def shared_pods
   database_pods
 
   # Network
-  pod 'SDWebImage', '~> 4'
+  webimage_pod
   pod 'SDWebImage/GIF'
   pod 'Starscream'
   pod 'ReachabilitySwift'
@@ -49,6 +53,7 @@ def shared_pods
 end
 
 target 'Rocket.Chat.ShareExtension' do
+  webimage_pod
   database_pods
 end
 

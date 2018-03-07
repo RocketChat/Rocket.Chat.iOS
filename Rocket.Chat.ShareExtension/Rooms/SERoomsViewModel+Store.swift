@@ -17,7 +17,7 @@ extension SERoomsViewModel {
 
         sections = [
             SERoomsSection(type: .server, cells: [
-                SEServerCell(title: server.name, detail: server.host, selected: false)
+                SEServerCellViewModel(iconUrl: server.iconUrl, name: server.name, host: server.host, selected: false)
             ]),
             SERoomsSection(type: .favorites, cells: favorites),
             SERoomsSection(type: .channels, cells: channels),
