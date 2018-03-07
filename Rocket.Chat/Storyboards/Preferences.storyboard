@@ -275,7 +275,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="16" maxX="0.0" maxY="16"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="changeAppIconCell" id="Dij-aQ-j2u" customClass="ChangeAppIconCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="changeAppIconCell" id="Dij-aQ-j2u" customClass="ChangeAppIconCell" customModule="Rocket_Chat" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="16" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -290,19 +290,44 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R01-cG-GhB">
+                                                    <rect key="frame" x="50" y="50" width="11" height="11"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="11" id="2f2-Uz-YKE"/>
+                                                        <constraint firstAttribute="width" constant="11" id="FtQ-pZ-FzM"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Check Circle" translatesAutoresizingMaskIntoConstraints="NO" id="IoI-8P-Eh2">
+                                                    <rect key="frame" x="47" y="47" width="16" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="VCD-Yr-aN5"/>
+                                                        <constraint firstAttribute="width" constant="16" id="gIH-tU-qyM"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="gMM-lt-jYl" firstAttribute="top" secondItem="Dij-aQ-j2u" secondAttribute="top" id="1YT-Hf-Gzl"/>
                                             <constraint firstAttribute="bottom" secondItem="gMM-lt-jYl" secondAttribute="bottom" id="6ir-dY-gvJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="R01-cG-GhB" secondAttribute="trailing" constant="-1" id="D2J-vv-pbR"/>
+                                            <constraint firstAttribute="bottom" secondItem="R01-cG-GhB" secondAttribute="bottom" constant="-1" id="EEv-Lq-4T3"/>
+                                            <constraint firstAttribute="trailing" secondItem="IoI-8P-Eh2" secondAttribute="trailing" constant="-3" id="GC8-tv-2IX"/>
                                             <constraint firstItem="gMM-lt-jYl" firstAttribute="leading" secondItem="Dij-aQ-j2u" secondAttribute="leading" id="RTl-fu-9L1"/>
+                                            <constraint firstAttribute="bottom" secondItem="IoI-8P-Eh2" secondAttribute="bottom" constant="-3" id="qp8-8W-QPm"/>
                                             <constraint firstAttribute="trailing" secondItem="gMM-lt-jYl" secondAttribute="trailing" id="sFT-bm-04c"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="checkImageView" destination="IoI-8P-Eh2" id="Jee-zd-tun"/>
+                                            <outlet property="checkImageViewBackground" destination="R01-cG-GhB" id="lAn-s8-XSo"/>
                                             <outlet property="iconImageView" destination="gMM-lt-jYl" id="loY-Mj-oK2"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="14p-5u-LKz" id="9KF-Z2-hbU"/>
+                                    <outlet property="delegate" destination="14p-5u-LKz" id="5s7-bw-GKf"/>
+                                </connections>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -339,6 +364,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Check Circle" width="20" height="20"/>
         <image name="Default" width="60" height="60"/>
     </resources>
 </document>

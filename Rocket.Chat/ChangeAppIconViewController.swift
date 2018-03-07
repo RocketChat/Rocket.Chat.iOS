@@ -16,10 +16,13 @@ final class ChangeAppIconViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         title = viewModel.title
-        collectionView.delegate = self
-        collectionView.dataSource = self
+
+        collectionView?.register(
+            ReusableViewText.nib,
+            forSupplementaryViewOfKind: UICollectionElementKindSectionHeader,
+            withReuseIdentifier: ReusableViewText.identifier
+        )
     }
 
     private func changeIcon(name: String) {
@@ -27,12 +30,11 @@ final class ChangeAppIconViewController: UIViewController {
 
         if #available(iOS 10.3, *) {
             UIApplication.shared.setAlternateIconName(iconName) { error in
-
-                guard let error = error else {
-                    return
+                if let error = error {
+                    self.reportError(message: (error as NSError).localizedDescription)
                 }
 
-                self.reportError(message: (error as NSError).localizedDescription)
+                self.collectionView.reloadData()
             }
         } else {
             reportError(message: viewModel.iosVersionMessage)
@@ -50,19 +52,57 @@ final class ChangeAppIconViewController: UIViewController {
 }
 
 extension ChangeAppIconViewController: UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return viewModel.availableIcons.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: viewModel.cellIdentifier, for: indexPath) as? ChangeAppIconCell else {
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: viewModel.cellIdentifier,
+            for: indexPath
+        ) as? ChangeAppIconCell else {
             fatalError("Could not dequeue reuable cell as ChangeAppIconCell")
         }
 
-        cell.setIcon(name: viewModel.availableIcons[indexPath.row])
+        let iconName = viewModel.availableIcons[indexPath.row]
 
+        var isSelected = false
+        if #available(iOS 10.3, *) {
+            if let selectedIcon = UIApplication.shared.alternateIconName {
+                isSelected = iconName == selectedIcon
+            } else {
+                isSelected = indexPath.row == 0
+            }
+        }
+
+        cell.setIcon(name: iconName, selected: isSelected)
         return cell
     }
+
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionElementKindSectionHeader {
+            if let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: ReusableViewText.identifier, for: indexPath) as? ReusableViewText {
+                view.labelText.text = viewModel.header
+                return view
+            }
+        }
+
+        return UICollectionReusableView()
+    }
+
+}
+
+extension ChangeAppIconViewController: UICollectionViewDelegateFlowLayout {
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if section == 0 {
+            return CGSize(width: collectionView.frame.width, height: 120)
+        }
+
+        return CGSize(width: 0, height: 0)
+    }
+
 }
 
 extension ChangeAppIconViewController: UICollectionViewDelegate {
