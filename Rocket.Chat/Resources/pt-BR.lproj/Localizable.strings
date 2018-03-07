@@ -56,6 +56,8 @@
 "alert.load_profile_error.message" = "Algo de errado aconteceu ao carregar seu perfil. Por favor, tente novamente.";
 "alert.password_mismatch_error.title" = "Suas senhas não batem";
 "alert.password_mismatch_error.message" = "O campo de confirmação da senha difere da senha escolhida. Por favor, corrija e tente novamente.";
+"alert.missing_password_field_error.title" = "Atualizar senha";
+"alert.missing_password_field_error.message" = "Preencha os dois campos referentes a sua senha para atualizá-la.";
 "alert.update_profile_error.title" = "Falha ao atualizar";
 "alert.update_profile_error.message" = "Algo de errado aconteceu ao atualizar seu perfil. Por favor, tente novamente.";
 "alert.update_profile_empty_fields.title" = "Por favor, preenchar todos os campos";
