@@ -14,14 +14,17 @@ enum SEError: Error {
 }
 
 class SEViewController: UIViewController, SEStoreSubscriber {
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         store.subscribe(self)
+        startAvoidingKeyboard()
     }
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         store.unsubscribe(self)
+        stopAvoidingKeyboard()
     }
 
     func stateUpdated(_ state: SEState) {
@@ -44,6 +47,50 @@ class SEViewController: UIViewController, SEStoreSubscriber {
 
     func cancelShareExtension() {
         self.extensionContext?.cancelRequest(withError: SEError.canceled)
+    }
+
+    // MARK: Avoid Keyboard
+
+    func startAvoidingKeyboard() {
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(onKeyboardFrameWillChange(_:)),
+            name: NSNotification.Name.UIKeyboardWillChangeFrame,
+            object: nil
+        )
+
+        additionalSafeAreaInsets.bottom = 0
+    }
+
+    func stopAvoidingKeyboard() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: NSNotification.Name.UIKeyboardWillChangeFrame,
+            object: nil
+        )
+    }
+
+    @objc private func onKeyboardFrameWillChange(_ notification: Notification) {
+        guard
+            let userInfo = notification.userInfo,
+            let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+        else {
+            return
+        }
+
+        let keyboardFrameInView = view.convert(keyboardFrame, from: nil)
+        let safeAreaFrame = view.safeAreaLayoutGuide.layoutFrame.insetBy(dx: 0, dy: -additionalSafeAreaInsets.bottom)
+        let intersection = safeAreaFrame.intersection(keyboardFrameInView)
+
+        let animationDuration: TimeInterval = (notification.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+        let animationCurveRawNSN = notification.userInfo?[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+        let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+        let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
+
+        UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
+            self.additionalSafeAreaInsets.bottom = intersection.height
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
 
