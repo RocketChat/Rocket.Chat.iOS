@@ -166,36 +166,29 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             isUploadingAvatar = true
 
             let client = API.current()?.client(UploadClient.self)
-            client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: {
-                self.isUploadingAvatar = false
-
-                if !self.isUpdatingUser {
-                    self.stopLoading(sender: sender)
-                }
-
-                self.avatarView.shouldRefreshCache = true
-                self.avatarView.avatarPlaceholder = self.avatarView.imageView.image
-                self.avatarView.updateAvatar()
+            client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] in
+                self?.isUploadingAvatar = false
+                self?.stopLoading(sender: sender)
+                self?.avatarView.avatarPlaceholder = self?.avatarView.imageView.image
+                self?.avatarView.removeCacheForCurrentURL(forceUpdate: true)
             })
         }
 
-        let stopUpdatingUser = { [weak self] in
-            guard let weakSelf = self else { return }
-            weakSelf.isUpdatingUser = false
-            if !weakSelf.isUploadingAvatar {
-                self?.stopLoading(sender: sender)
-            }
+        let stopLoading = { [weak self] in
+            self?.isUpdatingUser = false
+            self?.stopLoading(sender: sender)
         }
 
         isUpdatingUser = true
-        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: password)
+
+        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: passwordInput.password)
         api?.fetch(updateUserRequest, succeeded: { result in
-            stopUpdatingUser()
+            stopLoading()
             if let errorMessage = result.errorMessage {
                 Alert(key: "alert.update_profile_error").withMessage(errorMessage).present()
             }
         }, errored: { _ in
-            stopUpdatingUser()
+            stopLoading()
             Alert(key: "alert.update_profile_error").present()
         })
     }
@@ -265,8 +258,10 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     func stopLoading(sender: UIBarButtonItem) {
-        DispatchQueue.main.async { [weak self] in
-            self?.navigationItem.rightBarButtonItem = sender
+        if !isUpdatingUser, !isUploadingAvatar {
+            DispatchQueue.main.async { [weak self] in
+                self?.navigationItem.rightBarButtonItem = sender
+            }
         }
     }
 
