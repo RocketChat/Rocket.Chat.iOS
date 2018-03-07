@@ -50,20 +50,11 @@ extension User: ModelMappeable {
             }
 
             if let realm = realm {
-                let appendEmailsUsingRealmObjects = {
-                    emails.forEach({ email in
-                        let realmEmail = realm.create(Email.self, value: email, update: true)
+                emails.forEach({ email in
+                    if let realmEmail = realm.object(ofType: Email.self, forPrimaryKey: email.identifier as AnyObject) {
                         self.emails.append(realmEmail)
-                    })
-                }
-
-                if realm.isInWriteTransaction {
-                    appendEmailsUsingRealmObjects()
-                } else {
-                    try? realm.write {
-                        appendEmailsUsingRealmObjects()
                     }
-                }
+                })
             } else {
                 self.emails.append(contentsOf: emails)
             }
