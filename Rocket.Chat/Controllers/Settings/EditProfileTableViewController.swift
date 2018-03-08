@@ -28,18 +28,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
     }
 
-    @IBOutlet weak var newPassword: UITextField! {
-        didSet {
-            newPassword.placeholder = viewModel.passwordPlaceholder
-        }
-    }
-
-    @IBOutlet weak var passwordConfirmation: UITextField! {
-        didSet {
-            passwordConfirmation.placeholder = viewModel.passwordConfirmationPlaceholder
-        }
-    }
-
     @IBOutlet weak var avatarButton: UIButton!
 
     var avatarView: AvatarView = {
@@ -63,36 +51,17 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     var cancelButton: UIBarButtonItem?
 
     let api = API.current()
-    var isUpdatingUser = false
-    var isUploadingAvatar = false {
-        didSet {
-            hasUnsavedNewAvatar = !isUploadingAvatar ? false : hasUnsavedNewAvatar
-        }
-    }
-    var isLoading = true
     var avatarFile: FileUpload?
+
+    var isUpdatingUser = false
+    var isUploadingAvatar = false
+    var isLoading = true
+    var isEditingProfile = false
 
     var user: User? = User() {
         didSet {
             bindUserData()
         }
-    }
-
-    var hasUnsavedNewAvatar = false
-    var hasUnsavedChanges: Bool {
-        let passwordInput = validatePasswordInput(shouldAlertUser: false)
-
-        guard
-            !hasUnsavedNewAvatar,
-            user?.name == name.text,
-            user?.username == username.text,
-            user?.emails.first?.email == email.text,
-            passwordInput.password == nil && !passwordInput.invalidInput
-        else {
-            return true
-        }
-
-        return false
     }
 
     private let viewModel = EditProfileViewModel()
@@ -102,12 +71,13 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tapGesture)
 
         editButton = UIBarButtonItem(title: viewModel.editButtonTitle, style: .plain, target: self, action: #selector(beginEditing))
         saveButton = UIBarButtonItem(title: viewModel.saveButtonTitle, style: .done, target: self, action: #selector(saveProfile(_:)))
         cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(endEditing(shouldKeepUnsavedChanges:)))
-        navigationItem.rightBarButtonItem = editButton
         navigationItem.title = viewModel.title
 
         disableUserInteraction()
@@ -129,16 +99,17 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         avatarView.removeCacheForCurrentURL()
 
         let meRequest = MeRequest()
-        api?.fetch(meRequest, succeeded: { (result) in
+        api?.fetch(meRequest, succeeded: { [weak self] (result) in
             if let errorMessage = result.errorMessage {
                 Alert(key: "alert.load_profile_error").withMessage(errorMessage).present(handler: { _ in
-                    self.navigationController?.popViewController(animated: true)
+                    self?.navigationController?.popViewController(animated: true)
                 })
             } else {
-                self.user = result.user
-                self.isLoading = false
+                self?.user = result.user
+                self?.isLoading = false
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self?.navigationItem.rightBarButtonItem = self?.editButton
+                    self?.tableView.reloadData()
                 }
             }
         }, errored: { (_) in
@@ -160,6 +131,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     // MARK: State Management
 
     @objc func beginEditing() {
+        isEditingProfile = true
         navigationItem.title = viewModel.editingTitle
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.hidesBackButton = true
@@ -172,6 +144,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             bindUserData()
         }
 
+        isEditingProfile = false
         navigationItem.title = viewModel.title
         navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = nil
@@ -218,11 +191,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         user.username = username
         user.emails.first?.email = email
 
-        let passwordInput = validatePasswordInput()
-        if passwordInput.invalidInput {
-            return
-        }
-
         startLoading()
 
         if let avatarFile = avatarFile {
@@ -244,7 +212,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         isUpdatingUser = true
 
-        let updateUserRequest = UpdateUserRequest(userId: userId, user: user, password: passwordInput.password)
+        let updateUserRequest = UpdateUserRequest(userId: userId, user: user)
         api?.fetch(updateUserRequest, succeeded: { result in
             stopLoading()
             if let errorMessage = result.errorMessage {
@@ -279,42 +247,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         view.endEditing(true)
     }
 
-    func validatePasswordInput(shouldAlertUser: Bool = true) -> (password: String?, invalidInput: Bool) {
-        if newPassword.text != nil, !(newPassword.text?.isEmpty ?? true) {
-            if passwordConfirmation.text == nil || (passwordConfirmation.text?.isEmpty ?? true) {
-                newPassword.text = nil
-                if shouldAlertUser { Alert(key: "alert.missing_password_field_error").present() }
-                return (nil, true)
-            }
-        }
-
-        if passwordConfirmation.text != nil, !(passwordConfirmation.text?.isEmpty ?? true) {
-            if newPassword.text == nil || (newPassword.text?.isEmpty ?? false) {
-                passwordConfirmation.text = nil
-                if shouldAlertUser { Alert(key: "alert.missing_password_field_error").present() }
-                return (nil, true)
-            }
-        }
-
-        guard
-            let newPassword = newPassword.text,
-            let passwordConfirmation = passwordConfirmation.text,
-            !newPassword.isEmpty,
-            !passwordConfirmation.isEmpty
-        else {
-            return (nil, false)
-        }
-
-        if newPassword == passwordConfirmation {
-            return (newPassword, false)
-        } else {
-            self.newPassword.text = nil
-            self.passwordConfirmation.text = nil
-            if shouldAlertUser { Alert(key: "alert.password_mismatch_error").present() }
-            return (nil, true)
-        }
-    }
-
     func startLoading() {
         DispatchQueue.main.async {
             self.navigationItem.leftBarButtonItem?.isEnabled = false
@@ -331,6 +263,14 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
     }
 
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let newPassword = segue.destination as? NewPasswordTableViewController {
+            newPassword.user = user
+        }
+    }
+
     // MARK: UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -343,8 +283,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         switch section {
         case 0:
             return viewModel.profileSectionTitle
-        case 1:
-            return viewModel.passwordSectionTitle
         default:
             return ""
         }
@@ -390,8 +328,6 @@ extension EditProfileTableViewController: UITextFieldDelegate {
         case name: username.becomeFirstResponder()
         case username: email.becomeFirstResponder()
         case email: hideKeyboard()
-        case newPassword: passwordConfirmation.becomeFirstResponder()
-        case passwordConfirmation: hideKeyboard()
         default: break
         }
 

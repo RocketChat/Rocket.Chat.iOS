@@ -16,33 +16,25 @@ class UpdateUserRequest: APIRequest {
     let path = "/api/v1/users.update"
 
     let userId: String
-    let user: User
+    let user: User?
     let password: String?
 
-    init(userId: String, user: User, password: String? = nil) {
+    init(userId: String, user: User? = nil, password: String? = nil) {
         self.userId = userId
         self.user = user
         self.password = password
     }
 
     func body() -> Data? {
-        guard
-            let name = user.name,
-            let username = user.username,
-            let email = user.emails.first
-        else {
-            return nil
-        }
+        var body = JSON(["userId": userId, "data": []])
 
-        var body = JSON([
-            "userId": userId,
-            "data": [
-                "name": name,
-                "username": username,
-                "email": email.email,
-                "verified": true
-            ]
-        ])
+        if let user = user, let name = user.name, let username = user.username, let email = user.emails.first?.email,
+                !name.isEmpty, !username.isEmpty, !email.isEmpty {
+            body["data"]["name"].string = user.name
+            body["data"]["username"].string = user.username
+            body["data"]["email"].string = email
+            body["data"]["verified"].bool = true
+        }
 
         if let password = password, !password.isEmpty {
             body["data"]["password"].string = password
