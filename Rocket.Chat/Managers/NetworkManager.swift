@@ -13,6 +13,8 @@ class NetworkManager {
 
     static let shared = NetworkManager()
     var reachability: Reachability?
+    
+    
 
     static var isConnected: Bool {
         if self.shared.reachability != nil {
