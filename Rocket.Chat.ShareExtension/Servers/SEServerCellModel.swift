@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct SEServerCellViewModel: SECell {
+struct SEServerCellModel: SECellModel {
     let iconUrl: String
     let name: String
     let host: String

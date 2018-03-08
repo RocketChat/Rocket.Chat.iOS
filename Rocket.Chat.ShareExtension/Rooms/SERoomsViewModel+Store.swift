@@ -10,14 +10,18 @@ extension SERoomsViewModel {
     init(state: SEState) {
         let server = state.servers[state.selectedServerIndex]
 
-        let favorites = state.displayedRooms.filter { $0.favorite }.map(SERoomCell.init)
-        let channels = state.displayedRooms.filter { $0.type == .channel }.map(SERoomCell.init)
-        let groups = state.displayedRooms.filter { $0.type == .group }.map(SERoomCell.init)
-        let directMessages = state.displayedRooms.filter { $0.type == .directMessage }.map(SERoomCell.init)
+        let roomToCell = { (room: Subscription) -> SERoomCellModel in
+            SERoomCellModel(room: room, avatarBaseUrl: "https://\(server.host)/avatar")
+        }
+
+        let favorites = state.displayedRooms.filter { $0.favorite }.map(roomToCell)
+        let channels = state.displayedRooms.filter { $0.type == .channel }.map(roomToCell)
+        let groups = state.displayedRooms.filter { $0.type == .group }.map(roomToCell)
+        let directMessages = state.displayedRooms.filter { $0.type == .directMessage }.map(roomToCell)
 
         sections = [
             SERoomsSection(type: .server, cells: [
-                SEServerCellViewModel(iconUrl: server.iconUrl, name: server.name, host: server.host, selected: false)
+                SEServerCellModel(iconUrl: server.iconUrl, name: server.name, host: server.host, selected: false)
             ]),
             SERoomsSection(type: .favorites, cells: favorites),
             SERoomsSection(type: .channels, cells: channels),

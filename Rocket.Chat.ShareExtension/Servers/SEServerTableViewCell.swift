@@ -9,17 +9,17 @@
 import UIKit
 import SDWebImage
 
-class SEServerTableViewCell: UITableViewCell, SETableViewRegisterable {
+class SEServerTableViewCell: UITableViewCell, SECell {
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var hostLabel: UILabel!
 
-    var viewModel = SEServerCellViewModel(iconUrl: "", name: "", host: "", selected: false) {
+    var cellModel = SEServerCellModel(iconUrl: "", name: "", host: "", selected: false) {
         didSet {
-            iconView.sd_setImage(with: URL(string: viewModel.iconUrl), completed: nil)
-            nameLabel.text = viewModel.name
-            hostLabel.text = viewModel.host
-            accessoryType = viewModel.selected ? .checkmark : .none
+            iconView.sd_setImage(with: URL(string: cellModel.iconUrl), completed: nil)
+            nameLabel.text = cellModel.name
+            hostLabel.text = cellModel.host
+            accessoryType = cellModel.selected ? .checkmark : .none
         }
     }
 }

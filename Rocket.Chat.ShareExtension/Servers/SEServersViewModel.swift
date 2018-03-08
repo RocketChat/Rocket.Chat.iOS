@@ -9,7 +9,7 @@
 import Foundation
 
 struct SEServersViewModel {
-    let serverCells: [SEServerCellViewModel]
+    let serverCells: [SEServerCellModel]
 
     var title: String {
         return localized("servers.title")
@@ -36,7 +36,7 @@ extension SEServersViewModel {
         }
     }
 
-    func cellForRowAt(_ indexPath: IndexPath) -> SEServerCellViewModel {
+    func cellForRowAt(_ indexPath: IndexPath) -> SEServerCellModel {
         return serverCells[indexPath.row]
     }
 

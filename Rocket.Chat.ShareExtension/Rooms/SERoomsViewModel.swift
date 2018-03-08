@@ -8,14 +8,6 @@
 
 import Foundation
 
-struct SERoomCell: SECell {
-    let room: Subscription
-
-    var title: String {
-        return room.name
-    }
-}
-
 enum SERoomsSectionType {
     case server
     case favorites
@@ -26,7 +18,7 @@ enum SERoomsSectionType {
 
 struct SERoomsSection {
     let type: SERoomsSectionType
-    let cells: [SECell]
+    let cells: [SECellModel]
 
     var title: String {
         return localized("rooms.section.\(String(describing: self.type))")
@@ -62,15 +54,15 @@ extension SERoomsViewModel {
         }
     }
 
-    func cellForRowAt(_ indexPath: IndexPath) -> SECell {
+    func cellForRowAt(_ indexPath: IndexPath) -> SECellModel {
         return sections[indexPath.section].cells[indexPath.row]
     }
 
     func heightForRowAt(_ indexPath: IndexPath) -> Double {
         switch cellForRowAt(indexPath) {
-        case is SEServerCellViewModel:
+        case is SEServerCellModel:
             return 48.0
-        case is SERoomCell:
+        case is SERoomCellModel:
             return 36.0
         default:
             return 36.0
@@ -88,9 +80,9 @@ extension SERoomsViewModel {
     func didSelectRowAt(_ indexPath: IndexPath) {
         let cell = cellForRowAt(indexPath)
 
-        if cell as? SEServerCellViewModel != nil {
+        if cell as? SEServerCellModel != nil {
             store.dispatch(.makeSceneTransition(.push(.servers)))
-        } else if let roomCell = cell as? SERoomCell {
+        } else if let roomCell = cell as? SERoomCellModel {
             store.dispatch(.makeSceneTransition(.push(.compose)))
             store.dispatch(.setCurrentRoom(roomCell.room))
         }

@@ -40,7 +40,7 @@ extension SEServersViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(SEServerTableViewCell.self, forIndexPath: indexPath)
-        cell.viewModel = viewModel.cellForRowAt(indexPath)
+        cell.cellModel = viewModel.cellForRowAt(indexPath)
         return cell
     }
 

@@ -412,7 +412,7 @@
 		8076FDE42048CC8600114F28 /* MigrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDE32048CC8600114F28 /* MigrationCoordinator.swift */; };
 		8076FDE62048CD0600114F28 /* UserDefaults+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */; };
 		8076FDE82048D3AD00114F28 /* UserDefaults+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */; };
-		8076FDED2049A5F600114F28 /* SECell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDEC2049A5F600114F28 /* SECell.swift */; };
+		8076FDED2049A5F600114F28 /* SECellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDEC2049A5F600114F28 /* SECellModel.swift */; };
 		807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */; };
 		807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */; };
 		807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53C2044B49800E21429 /* Emojione+Transform.swift */; };
@@ -464,8 +464,18 @@
 		80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB5731F8DA55C00FC9715 /* ReplyView.swift */; };
 		80D0CE5C204FFAA50056B17F /* SEServerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D0CE5B204FFAA50056B17F /* SEServerTableViewCell.xib */; };
 		80D0CE60205016B40056B17F /* SEServerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE5F205016B40056B17F /* SEServerTableViewCell.swift */; };
-		80D0CE62205023710056B17F /* SETableViewRegisterable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE61205023710056B17F /* SETableViewRegisterable.swift */; };
-		80D0CE64205034280056B17F /* SEServerCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE63205034280056B17F /* SEServerCellViewModel.swift */; };
+		80D0CE62205023710056B17F /* SECell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE61205023710056B17F /* SECell.swift */; };
+		80D0CE64205034280056B17F /* SEServerCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE63205034280056B17F /* SEServerCellModel.swift */; };
+		80D0CE6620503C860056B17F /* SERoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE6520503C860056B17F /* SERoomTableViewCell.swift */; };
+		80D0CE6820503C970056B17F /* SERoomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D0CE6720503C970056B17F /* SERoomTableViewCell.xib */; };
+		80D0CE6C205080AA0056B17F /* SERoomCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */; };
+		80D0CE6D205083280056B17F /* Subscription+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDC420485ABB00114F28 /* Subscription+User.swift */; };
+		80D0CE6F20509C100056B17F /* SERoomAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE6E20509C100056B17F /* SERoomAvatarView.swift */; };
+		80D0CE7120509C230056B17F /* SERoomAvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D0CE7020509C230056B17F /* SERoomAvatarView.xib */; };
+		80D0CE722050BD160056B17F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */; };
+		80D0CE732050BE680056B17F /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
+		80D0CE742050BFBE0056B17F /* AuthManager+CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB82048581F00114F28 /* AuthManager+CurrentUser.swift */; };
+		80D0CE752050BFD20056B17F /* Auth+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB42048571200114F28 /* Auth+User.swift */; };
 		80D955C2202154A300E3F281 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D955C1202154A300E3F281 /* CASViewController.swift */; };
 		80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F281FD8B2B800B70B59 /* UserExtensions.swift */; };
 		80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */; };
@@ -954,7 +964,7 @@
 		8076FDE32048CC8600114F28 /* MigrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationCoordinator.swift; sourceTree = "<group>"; };
 		8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Group.swift"; sourceTree = "<group>"; };
 		8076FDE72048CE8000114F28 /* Rocket.Chat.ShareExtension.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Rocket.Chat.ShareExtension.entitlements; sourceTree = "<group>"; };
-		8076FDEC2049A5F600114F28 /* SECell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SECell.swift; sourceTree = "<group>"; };
+		8076FDEC2049A5F600114F28 /* SECellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SECellModel.swift; sourceTree = "<group>"; };
 		807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceSpec.swift; sourceTree = "<group>"; };
 		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
 		807FB53C2044B49800E21429 /* Emojione+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emojione+Transform.swift"; sourceTree = "<group>"; };
@@ -1012,8 +1022,13 @@
 		80CFB5731F8DA55C00FC9715 /* ReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReplyView.swift; sourceTree = "<group>"; };
 		80D0CE5B204FFAA50056B17F /* SEServerTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEServerTableViewCell.xib; sourceTree = "<group>"; };
 		80D0CE5F205016B40056B17F /* SEServerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServerTableViewCell.swift; sourceTree = "<group>"; };
-		80D0CE61205023710056B17F /* SETableViewRegisterable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SETableViewRegisterable.swift; sourceTree = "<group>"; };
-		80D0CE63205034280056B17F /* SEServerCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServerCellViewModel.swift; sourceTree = "<group>"; };
+		80D0CE61205023710056B17F /* SECell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SECell.swift; sourceTree = "<group>"; };
+		80D0CE63205034280056B17F /* SEServerCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServerCellModel.swift; sourceTree = "<group>"; };
+		80D0CE6520503C860056B17F /* SERoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomTableViewCell.swift; sourceTree = "<group>"; };
+		80D0CE6720503C970056B17F /* SERoomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SERoomTableViewCell.xib; sourceTree = "<group>"; };
+		80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomCellModel.swift; sourceTree = "<group>"; };
+		80D0CE6E20509C100056B17F /* SERoomAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomAvatarView.swift; sourceTree = "<group>"; };
+		80D0CE7020509C230056B17F /* SERoomAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SERoomAvatarView.xib; sourceTree = "<group>"; };
 		80D955C1202154A300E3F281 /* CASViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CASViewController.swift; path = Controllers/Auth/CASViewController.swift; sourceTree = "<group>"; };
 		80E99F281FD8B2B800B70B59 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
 		80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
@@ -2210,8 +2225,8 @@
 			children = (
 				8076FDD920489F5900114F28 /* SEViewController.swift */,
 				802A4E102049C7340072CD23 /* SENavigationController.swift */,
-				8076FDEC2049A5F600114F28 /* SECell.swift */,
-				80D0CE61205023710056B17F /* SETableViewRegisterable.swift */,
+				8076FDEC2049A5F600114F28 /* SECellModel.swift */,
+				80D0CE61205023710056B17F /* SECell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2247,6 +2262,11 @@
 				807FB55A2046E7DD00E21429 /* SERoomsViewController.swift */,
 				807FB56A20472A0F00E21429 /* SERoomsViewModel.swift */,
 				8076FDDD2048A31C00114F28 /* SERoomsViewModel+Store.swift */,
+				80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */,
+				80D0CE6520503C860056B17F /* SERoomTableViewCell.swift */,
+				80D0CE6720503C970056B17F /* SERoomTableViewCell.xib */,
+				80D0CE6E20509C100056B17F /* SERoomAvatarView.swift */,
+				80D0CE7020509C230056B17F /* SERoomAvatarView.xib */,
 			);
 			path = Rooms;
 			sourceTree = "<group>";
@@ -2257,7 +2277,7 @@
 				807FB568204729E500E21429 /* SEServersViewController.swift */,
 				807FB581204837AF00E21429 /* SEServersViewModel.swift */,
 				8076FDDB2048A0E600114F28 /* SEServersViewModel+Store.swift */,
-				80D0CE63205034280056B17F /* SEServerCellViewModel.swift */,
+				80D0CE63205034280056B17F /* SEServerCellModel.swift */,
 				80D0CE5F205016B40056B17F /* SEServerTableViewCell.swift */,
 				80D0CE5B204FFAA50056B17F /* SEServerTableViewCell.xib */,
 			);
@@ -2782,8 +2802,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				80D0CE6820503C970056B17F /* SERoomTableViewCell.xib in Resources */,
 				807FB55E2046E7DD00E21429 /* Main.storyboard in Resources */,
 				807FB56F20472B6A00E21429 /* Localizable.strings in Resources */,
+				80D0CE7120509C230056B17F /* SERoomAvatarView.xib in Resources */,
 				80D0CE5C204FFAA50056B17F /* SEServerTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2929,12 +2951,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
-				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -2957,12 +2979,12 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -3058,12 +3080,12 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage.default-GIF/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 				"${BUILT_PRODUCTS_DIR}/1PasswordExtension/OnePasswordExtension.framework",
-				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
 				"${BUILT_PRODUCTS_DIR}/FLEX/FLEX.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMOAuth2/GTMOAuth2.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
@@ -3083,16 +3105,15 @@
 				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
 				"${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework",
 				"${BUILT_PRODUCTS_DIR}/semver/semver.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OnePasswordExtension.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLEX.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMOAuth2.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
@@ -3501,7 +3522,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				80D0CE62205023710056B17F /* SETableViewRegisterable.swift in Sources */,
+				80D0CE62205023710056B17F /* SECell.swift in Sources */,
 				8076FD9B20484DBF00114F28 /* DatabaseManager.swift in Sources */,
 				80977AB2204EE21F00C41435 /* SendMessageRequest.swift in Sources */,
 				80977AB6204EEF1E00C41435 /* SEActionCreators.swift in Sources */,
@@ -3509,10 +3530,12 @@
 				807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */,
 				80977AC4204FEEA700C41435 /* SEComposeViewModel.swift in Sources */,
 				804273E2204EBD51006DF420 /* APIResult.swift in Sources */,
+				80D0CE6620503C860056B17F /* SERoomTableViewCell.swift in Sources */,
 				80D0CE60205016B40056B17F /* SEServerTableViewCell.swift in Sources */,
 				8076FDCC204863DF00114F28 /* AuthExtensions.swift in Sources */,
-				80D0CE64205034280056B17F /* SEServerCellViewModel.swift in Sources */,
+				80D0CE64205034280056B17F /* SEServerCellModel.swift in Sources */,
 				8076FDD3204864A400114F28 /* MessageReaction.swift in Sources */,
+				80D0CE6C205080AA0056B17F /* SERoomCellModel.swift in Sources */,
 				80977AB9204EFBCC00C41435 /* SENavigation.swift in Sources */,
 				8076FDDA20489F5900114F28 /* SEViewController.swift in Sources */,
 				80977AC2204F37C200C41435 /* SEState.swift in Sources */,
@@ -3523,6 +3546,7 @@
 				8076FDCB204863C500114F28 /* Attachment.swift in Sources */,
 				804273D6204D7F38006DF420 /* AppGroup.swift in Sources */,
 				8076FDE22048A7C500114F28 /* SEComposeViewController.swift in Sources */,
+				80D0CE732050BE680056B17F /* UIColorCSSColorsExtension.swift in Sources */,
 				8076FDC82048639700114F28 /* Message.swift in Sources */,
 				807FB569204729E500E21429 /* SEServersViewController.swift in Sources */,
 				8076FDA72048538500114F28 /* Realm+Shared.swift in Sources */,
@@ -3532,9 +3556,11 @@
 				802A4E112049C7340072CD23 /* SENavigationController.swift in Sources */,
 				8076FDA62048536800114F28 /* BaseModel.swift in Sources */,
 				804273DF204EBD51006DF420 /* APIError.swift in Sources */,
+				80D0CE752050BFD20056B17F /* Auth+User.swift in Sources */,
 				800640F72049BA25006D990F /* SEScene.swift in Sources */,
 				8076FDBC2048596100114F28 /* URLExtension.swift in Sources */,
 				80977AB4204EE41200C41435 /* DataExtension.swift in Sources */,
+				80D0CE6D205083280056B17F /* Subscription+User.swift in Sources */,
 				8076FDB3204856E200114F28 /* Auth.swift in Sources */,
 				807FB57A20472E0400E21429 /* Localization.swift in Sources */,
 				8076FDC9204863AF00114F28 /* Mention.swift in Sources */,
@@ -3543,16 +3569,19 @@
 				80977AB0204EE21F00C41435 /* HTTPMethod.swift in Sources */,
 				80977AB1204EE21F00C41435 /* VersionMiddleware.swift in Sources */,
 				807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */,
-				8076FDED2049A5F600114F28 /* SECell.swift in Sources */,
+				8076FDED2049A5F600114F28 /* SECellModel.swift in Sources */,
 				8076FDCD204863FC00114F28 /* MessageURL.swift in Sources */,
 				80977ABF204F36F200C41435 /* SESearchState.swift in Sources */,
+				80D0CE6F20509C100056B17F /* SERoomAvatarView.swift in Sources */,
 				8076FD9D2048510100114F28 /* AuthSettings.swift in Sources */,
 				8076FD9A20484A6000114F28 /* SEStore.swift in Sources */,
+				80D0CE722050BD160056B17F /* UIColorExtension.swift in Sources */,
 				8076FD9E2048510C00114F28 /* AuthManager.swift in Sources */,
 				8076FDA52048534200114F28 /* String+Random.swift in Sources */,
 				807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */,
 				8076FDCE2048642400114F28 /* User.swift in Sources */,
 				804273DD204EBD51006DF420 /* API.swift in Sources */,
+				80D0CE742050BFBE0056B17F /* AuthManager+CurrentUser.swift in Sources */,
 				8076FDDE2048A31C00114F28 /* SERoomsViewModel+Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

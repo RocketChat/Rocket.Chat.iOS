@@ -49,6 +49,21 @@ extension UIColor {
         )
     }
 
+    // MARK: Avatar Colors
+
+    static var avatarColors: [UIColor] {
+        return [
+            0xF44336, 0xE91E63, 0x9C27B0, 0x673AB7, 0x3F51B5,
+            0x2196F3, 0x03A9F4, 0x00BCD4, 0x009688, 0x4CAF50,
+            0x8BC34A, 0xCDDC39, 0xFFC107, 0xFF9800, 0xFF5722,
+            0x795548, 0x9E9E9E, 0x607D8B
+        ].map { UIColor(rgb: $0, alphaVal: 1.0) }
+    }
+
+    static func forName(_ name: String) -> UIColor {
+        return avatarColors[name.count % avatarColors.count]
+    }
+
     // MARK: Color from strings
 
     static func normalizeColorFromString(string: String) -> UIColor {

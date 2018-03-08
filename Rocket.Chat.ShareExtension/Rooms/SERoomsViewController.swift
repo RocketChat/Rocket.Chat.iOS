@@ -16,6 +16,7 @@ final class SERoomsViewController: SEViewController {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
+            tableView.register(SERoomTableViewCell.self)
             tableView.register(SEServerTableViewCell.self)
         }
     }
@@ -76,15 +77,16 @@ extension SERoomsViewController: UITableViewDataSource {
 
         let cell: UITableViewCell
 
-        if let cellModel = cellModel as? SERoomCell {
-            cell = UITableViewCell(style: .default, reuseIdentifier: cellModel.reuseIdentifier)
-            cell.textLabel?.text = cellModel.title
-        } else if let cellModel = cellModel as? SEServerCellViewModel {
+        if let cellModel = cellModel as? SEServerCellModel {
             let serverCell = tableView.dequeue(SEServerTableViewCell.self, forIndexPath: indexPath)
-            serverCell.viewModel = cellModel
+            serverCell.cellModel = cellModel
             cell = serverCell
+        } else if let cellModel = cellModel as? SERoomCellModel {
+            let roomCell = tableView.dequeue(SERoomTableViewCell.self, forIndexPath: indexPath)
+            roomCell.cellModel = cellModel
+            cell = roomCell
         } else {
-            cell = UITableViewCell(style: .default, reuseIdentifier: cellModel.reuseIdentifier)
+            return UITableViewCell(style: .default, reuseIdentifier: cellModel.reuseIdentifier)
         }
 
         cell.accessoryType = .disclosureIndicator

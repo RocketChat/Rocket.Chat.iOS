@@ -11,7 +11,7 @@ import Foundation
 extension SEServersViewModel {
     init(state: SEState) {
         serverCells = state.servers.enumerated().map {
-            SEServerCellViewModel(
+            SEServerCellModel(
                 iconUrl: $1.iconUrl,
                 name: $1.name,
                 host: $1.host,
