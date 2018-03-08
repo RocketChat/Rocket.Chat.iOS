@@ -17,11 +17,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nS0-Eg-3qo" id="kfF-vr-e76">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ROx-Th-BWU">
-                        <rect key="frame" x="8" y="8" width="367" height="27.5"/>
+                        <rect key="frame" x="18" y="8" width="357" height="27.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjs-6a-i72" customClass="SERoomAvatarView" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="27.5" height="27.5"/>
@@ -31,7 +31,7 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mMj-Ho-Kw7">
-                                <rect key="frame" x="35.5" y="0.0" width="331.5" height="27.5"/>
+                                <rect key="frame" x="35.5" y="0.0" width="321.5" height="27.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -42,7 +42,7 @@
                 <constraints>
                     <constraint firstItem="ROx-Th-BWU" firstAttribute="top" secondItem="kfF-vr-e76" secondAttribute="top" constant="8" id="C9X-4T-DDC"/>
                     <constraint firstAttribute="bottom" secondItem="ROx-Th-BWU" secondAttribute="bottom" constant="8" id="Gzo-zr-iJy"/>
-                    <constraint firstItem="ROx-Th-BWU" firstAttribute="leading" secondItem="kfF-vr-e76" secondAttribute="leading" constant="8" id="Zdf-Nd-6Ji"/>
+                    <constraint firstItem="ROx-Th-BWU" firstAttribute="leading" secondItem="kfF-vr-e76" secondAttribute="leading" constant="18" id="Zdf-Nd-6Ji"/>
                     <constraint firstAttribute="trailing" secondItem="ROx-Th-BWU" secondAttribute="trailing" id="sNR-JA-FWy"/>
                 </constraints>
             </tableViewCellContentView>

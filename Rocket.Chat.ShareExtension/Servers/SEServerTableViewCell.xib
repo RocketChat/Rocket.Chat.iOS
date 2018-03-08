@@ -20,19 +20,19 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="open.rocket.chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXB-a1-Ctk">
-                        <rect key="frame" x="47" y="22.5" width="96" height="15"/>
+                        <rect key="frame" x="57" y="22.5" width="96" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wQE-Mf-ttI">
-                        <rect key="frame" x="8" y="6" width="31" height="31.5"/>
+                        <rect key="frame" x="18" y="6" width="31" height="31.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="wQE-Mf-ttI" secondAttribute="height" multiplier="1:1" id="F4F-a6-Mg2"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rocket.Chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVe-PV-4Ep">
-                        <rect key="frame" x="47" y="6" width="93" height="21"/>
+                        <rect key="frame" x="57" y="6" width="93" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -45,7 +45,7 @@
                     <constraint firstItem="yVe-PV-4Ep" firstAttribute="leading" secondItem="wQE-Mf-ttI" secondAttribute="trailing" constant="8" id="SFV-Wm-iZW"/>
                     <constraint firstItem="wQE-Mf-ttI" firstAttribute="top" secondItem="siZ-qY-8bA" secondAttribute="top" constant="6" id="Wr2-dx-ZFD"/>
                     <constraint firstItem="yVe-PV-4Ep" firstAttribute="top" secondItem="siZ-qY-8bA" secondAttribute="top" constant="6" id="p9N-uN-p9Q"/>
-                    <constraint firstItem="wQE-Mf-ttI" firstAttribute="leading" secondItem="siZ-qY-8bA" secondAttribute="leading" constant="8" id="vKo-fp-6Q8"/>
+                    <constraint firstItem="wQE-Mf-ttI" firstAttribute="leading" secondItem="siZ-qY-8bA" secondAttribute="leading" constant="18" id="vKo-fp-6Q8"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

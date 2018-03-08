@@ -9,24 +9,29 @@
 import UIKit
 
 class SEComposeViewController: SEViewController {
-    @IBOutlet weak var textView: UITextView!
     @IBOutlet weak var destinationContainerView: UIView!
     @IBOutlet weak var destinationLabel: UILabel!
-    @IBOutlet weak var destinationToLabel: UILabel! {
+    @IBOutlet weak var destinationToLabel: UILabel!
+    @IBOutlet weak var textView: UITextView! {
         didSet {
-            destinationToLabel.text = localized("compose.destination.to")
+            textView.delegate = self
+        }
+    }
+
+    var viewModel = SEComposeViewModel(composeText: "", destinationText: "") {
+        didSet {
+            title = viewModel.title
+            destinationLabel.text = viewModel.destinationText
+            textView.text = viewModel.composeText
         }
     }
 
     override func stateUpdated(_ state: SEState) {
-
-        let viewModel = SEComposeViewModel()
-        title = viewModel.title
-        destinationLabel.text = state.currentRoom.name
-        textView.text = state.composeText
+        viewModel = SEComposeViewModel(state: state)
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
+        // TODO: ActionCreator + Loading + Error Handling
         let server = store.state.servers[store.state.selectedServerIndex]
 
         let request = SendMessageRequest(
@@ -46,5 +51,11 @@ class SEComposeViewController: SEViewController {
         }, errored: { _ in
 
         })
+    }
+}
+
+extension SEComposeViewController: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        store.dispatch(.setComposeText(textView.text))
     }
 }

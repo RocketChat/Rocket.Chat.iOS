@@ -9,7 +9,23 @@
 import Foundation
 
 struct SEComposeViewModel {
+    let composeText: String
+    let destinationText: String
+
+    var destinationToText: String {
+        return localized("compose.to")
+    }
+
     var title: String {
         return localized("compose.title")
+    }
+}
+
+// MARK: SEState
+
+extension SEComposeViewModel {
+    init(state: SEState) {
+        composeText = state.composeText
+        destinationText = state.currentRoom.name
     }
 }

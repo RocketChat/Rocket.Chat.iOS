@@ -20,6 +20,21 @@ struct SEServersViewModel {
     }
 }
 
+// MARK: SEState
+
+extension SEServersViewModel {
+    init(state: SEState) {
+        serverCells = state.servers.enumerated().map {
+            SEServerCellModel(
+                iconUrl: $1.iconUrl,
+                name: $1.name,
+                host: $1.host,
+                selected: state.selectedServerIndex == $0
+            )
+        }
+    }
+}
+
 // MARK: DataSource
 
 extension SEServersViewModel {

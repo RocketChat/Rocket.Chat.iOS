@@ -406,8 +406,6 @@
 		8076FDD6204864E700114F28 /* User+Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDD5204864E700114F28 /* User+Query.swift */; };
 		8076FDD82048654F00114F28 /* User+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDD72048654F00114F28 /* User+Extensions.swift */; };
 		8076FDDA20489F5900114F28 /* SEViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDD920489F5900114F28 /* SEViewController.swift */; };
-		8076FDDC2048A0E600114F28 /* SEServersViewModel+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDDB2048A0E600114F28 /* SEServersViewModel+Store.swift */; };
-		8076FDDE2048A31C00114F28 /* SERoomsViewModel+Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDDD2048A31C00114F28 /* SERoomsViewModel+Store.swift */; };
 		8076FDE22048A7C500114F28 /* SEComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDE12048A7C500114F28 /* SEComposeViewController.swift */; };
 		8076FDE42048CC8600114F28 /* MigrationCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDE32048CC8600114F28 /* MigrationCoordinator.swift */; };
 		8076FDE62048CD0600114F28 /* UserDefaults+Group.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */; };
@@ -958,8 +956,6 @@
 		8076FDD5204864E700114F28 /* User+Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Query.swift"; sourceTree = "<group>"; };
 		8076FDD72048654F00114F28 /* User+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "User+Extensions.swift"; sourceTree = "<group>"; };
 		8076FDD920489F5900114F28 /* SEViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEViewController.swift; sourceTree = "<group>"; };
-		8076FDDB2048A0E600114F28 /* SEServersViewModel+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SEServersViewModel+Store.swift"; sourceTree = "<group>"; };
-		8076FDDD2048A31C00114F28 /* SERoomsViewModel+Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SERoomsViewModel+Store.swift"; sourceTree = "<group>"; };
 		8076FDE12048A7C500114F28 /* SEComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeViewController.swift; sourceTree = "<group>"; };
 		8076FDE32048CC8600114F28 /* MigrationCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MigrationCoordinator.swift; sourceTree = "<group>"; };
 		8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UserDefaults+Group.swift"; sourceTree = "<group>"; };
@@ -2261,7 +2257,6 @@
 			children = (
 				807FB55A2046E7DD00E21429 /* SERoomsViewController.swift */,
 				807FB56A20472A0F00E21429 /* SERoomsViewModel.swift */,
-				8076FDDD2048A31C00114F28 /* SERoomsViewModel+Store.swift */,
 				80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */,
 				80D0CE6520503C860056B17F /* SERoomTableViewCell.swift */,
 				80D0CE6720503C970056B17F /* SERoomTableViewCell.xib */,
@@ -2276,7 +2271,6 @@
 			children = (
 				807FB568204729E500E21429 /* SEServersViewController.swift */,
 				807FB581204837AF00E21429 /* SEServersViewModel.swift */,
-				8076FDDB2048A0E600114F28 /* SEServersViewModel+Store.swift */,
 				80D0CE63205034280056B17F /* SEServerCellModel.swift */,
 				80D0CE5F205016B40056B17F /* SEServerTableViewCell.swift */,
 				80D0CE5B204FFAA50056B17F /* SEServerTableViewCell.xib */,
@@ -3526,7 +3520,6 @@
 				8076FD9B20484DBF00114F28 /* DatabaseManager.swift in Sources */,
 				80977AB2204EE21F00C41435 /* SendMessageRequest.swift in Sources */,
 				80977AB6204EEF1E00C41435 /* SEActionCreators.swift in Sources */,
-				8076FDDC2048A0E600114F28 /* SEServersViewModel+Store.swift in Sources */,
 				807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */,
 				80977AC4204FEEA700C41435 /* SEComposeViewModel.swift in Sources */,
 				804273E2204EBD51006DF420 /* APIResult.swift in Sources */,
@@ -3582,7 +3575,6 @@
 				8076FDCE2048642400114F28 /* User.swift in Sources */,
 				804273DD204EBD51006DF420 /* API.swift in Sources */,
 				80D0CE742050BFBE0056B17F /* AuthManager+CurrentUser.swift in Sources */,
-				8076FDDE2048A31C00114F28 /* SERoomsViewModel+Store.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
