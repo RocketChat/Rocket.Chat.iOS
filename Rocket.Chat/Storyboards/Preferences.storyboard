@@ -381,7 +381,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <connections>
-                                                        <outlet property="delegate" destination="MdX-88-2ZI" id="vxC-Ka-GMV"/>
+                                                        <outlet property="delegate" destination="Dtv-3t-Yux" id="jy3-Ox-ihj"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -409,7 +409,7 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                                     <connections>
-                                                        <outlet property="delegate" destination="MdX-88-2ZI" id="ghc-4k-brF"/>
+                                                        <outlet property="delegate" destination="Dtv-3t-Yux" id="oly-2z-Bh2"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>

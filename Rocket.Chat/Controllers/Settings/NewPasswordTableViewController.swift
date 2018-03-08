@@ -80,6 +80,8 @@ class NewPasswordTableViewController: UITableViewController {
 
         let stopLoading = {
             DispatchQueue.main.async {
+                self.newPassword.text = nil
+                self.passwordConfirmation.text = nil
                 self.navigationItem.hidesBackButton = false
                 self.navigationItem.rightBarButtonItem = sender
             }
@@ -110,4 +112,17 @@ class NewPasswordTableViewController: UITableViewController {
             return ""
         }
     }
+}
+
+extension NewPasswordTableViewController: UITextFieldDelegate {
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        switch textField {
+        case newPassword: passwordConfirmation.becomeFirstResponder()
+        default: break
+        }
+
+        return true
+    }
+
 }
