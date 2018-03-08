@@ -222,11 +222,12 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
             let client = API.current()?.client(UploadClient.self)
             client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] in
-                self?.showUpdateUserSuccess()
-                self?.isUploadingAvatar = false
-                self?.stopLoading()
-                self?.avatarView.avatarPlaceholder = self?.avatarView.imageView.image
-                self?.avatarView.removeCacheForCurrentURL(forceUpdate: true)
+                guard let weakSelf = self else { return }
+                if !weakSelf.isUpdatingUser { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
+                weakSelf.isUploadingAvatar = false
+                weakSelf.stopLoading()
+                weakSelf.avatarView.avatarPlaceholder = self?.avatarView.imageView.image
+                weakSelf.avatarView.removeCacheForCurrentURL(forceUpdate: true)
             })
         }
 
@@ -239,8 +240,9 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         let updateUserRequest = UpdateUserRequest(userId: userId, user: user)
         api?.fetch(updateUserRequest, succeeded: { [weak self] result in
+            guard let weakSelf = self else { return }
             stopLoading()
-            self?.showUpdateUserSuccess()
+            if !weakSelf.isUploadingAvatar { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
             if let errorMessage = result.errorMessage {
                 Alert(key: "alert.update_profile_error").withMessage(errorMessage).present()
             }
