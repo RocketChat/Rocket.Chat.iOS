@@ -1,5 +1,5 @@
 //
-//  SettingsViewModel.swift
+//  PreferencesViewModel.swift
 //  Rocket.Chat
 //
 //  Created by Rafael Ramos on 31/03/17.
@@ -13,7 +13,7 @@ internal enum BundleInfoKey: String {
     case build = "CFBundleVersion"
 }
 
-final class SettingsViewModel {
+final class PreferencesViewModel {
 
     internal var title: String {
         return localized("myaccount.settings.title")
@@ -25,6 +25,10 @@ final class SettingsViewModel {
 
     internal var license: String {
         return localized("myaccount.settings.license")
+    }
+
+    internal var language: String {
+        return localized("myaccount.settings.language")
     }
 
     internal var appicon: String {
@@ -80,13 +84,14 @@ final class SettingsViewModel {
     #endif
 
     internal var numberOfSections: Int {
-        return 2
+        return 3
     }
 
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
-        case 0: return (canChangeAppIcon ? 4 : 3)
-        case 1: return (canOpenFLEX ? 1 : 0)
+        case 0: return (canChangeAppIcon ? 3 : 2)
+        case 1: return 2
+        case 2: return (canOpenFLEX ? 1 : 0)
         default: return 0
         }
     }

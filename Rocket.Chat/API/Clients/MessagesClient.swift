@@ -12,6 +12,62 @@ import SwiftyJSON
 struct MessagesClient: APIClient {
     let api: AnyAPIFetcher
 
+    func sendMessage(_ message: Message, subscription: Subscription, realm: Realm? = Realm.shared) {
+        guard let id = message.identifier else { return }
+
+        try? realm?.write {
+            realm?.add(message, update: true)
+        }
+
+        func updateMessage(json: JSON) {
+            DispatchQueue.main.async {
+                try? realm?.write {
+                    message.temporary = false
+                    message.failed = false
+                    message.updatedAt = Date()
+                    message.map(json, realm: realm)
+                    realm?.add(message, update: true)
+                }
+
+                MessageTextCacheManager.shared.update(for: message)
+            }
+        }
+
+        func setMessageOffline() {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                try? realm?.write {
+                    message.temporary = false
+                    message.failed = true
+                    message.updatedAt = Date()
+                    realm?.add(message, update: true)
+                }
+
+                MessageTextCacheManager.shared.update(for: message)
+            }
+        }
+
+        let request = SendMessageRequest(
+            id: id,
+            roomId: subscription.rid,
+            text: message.text
+        )
+
+        api.fetch(request, succeeded: { result in
+            guard let message = result.raw?["message"] else { return }
+            updateMessage(json: message)
+        }, errored: { error in
+            switch error {
+            case .version:
+                // TODO: Remove SendMessage Fallback + old methods after Rocket.Chat 1.0
+                SubscriptionManager.sendTextMessage(message, completion: { response in
+                    updateMessage(json: response.result["result"])
+                })
+            default:
+                setMessageOffline()
+            }
+        })
+    }
+
     func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.shared) {
         let message = Message()
         message.internalType = ""
@@ -23,37 +79,7 @@ struct MessagesClient: APIClient {
         message.identifier = id
         message.temporary = true
 
-        try? realm?.write {
-            realm?.add(message)
-        }
-
-        func updateMessage(json: JSON) {
-            DispatchQueue.main.async {
-                try? realm?.write {
-                    message.temporary = false
-                    message.updatedAt = Date()
-                    message.map(json, realm: realm)
-                    realm?.add(message, update: true)
-                }
-
-                MessageTextCacheManager.shared.update(for: message)
-            }
-        }
-
-        api.fetch(SendMessageRequest(id: id, roomId: subscription.rid, text: text), succeeded: { result in
-            guard let message = result.raw?["message"] else { return }
-            updateMessage(json: message)
-        }, errored: { error in
-            switch error {
-            case .version:
-                // TODO: Remove SendMessage Fallback + old methods after Rocket.Chat 1.0
-                SubscriptionManager.sendTextMessage(message, completion: { response in
-                    updateMessage(json: response.result["result"])
-                })
-            default:
-                Alert.defaultError.present()
-            }
-        })
+        sendMessage(message, subscription: subscription, realm: realm)
     }
 
     @discardableResult

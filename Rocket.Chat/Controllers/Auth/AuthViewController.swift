@@ -65,7 +65,10 @@ final class AuthViewController: BaseViewController {
 
     @IBOutlet var buttonRegister: UIButton!
     @IBOutlet weak var buttonResetPassword: UIButton!
-
+    @IBOutlet weak var labelProceedingAgreeing: UILabel!
+    @IBOutlet weak var buttonTermsOfService: UIButton!
+    @IBOutlet weak var labelAnd: UILabel!
+    @IBOutlet weak var buttonPrivacy: UIButton!
     @IBOutlet weak var authButtonsStackView: UIStackView!
     var customAuthButtons = [String: UIButton]()
 
@@ -82,6 +85,14 @@ final class AuthViewController: BaseViewController {
            buttonRegister.isHidden = registrationForm != .isPublic
         }
 
+        textFieldUsername.placeholder = localized("auth.login.username.placeholder")
+        textFieldPassword.placeholder = localized("auth.login.password.placeholder")
+        buttonRegister.setTitle(localized("auth.login.buttonRegister"), for: .normal)
+        buttonResetPassword.setTitle(localized("auth.login.buttonResetPassword"), for: .normal)
+        labelProceedingAgreeing.text = localized("auth.login.agree_label")
+        buttonTermsOfService.setTitle(localized("auth.login.agree_termsofservice"), for: .normal)
+        labelAnd.text = localized("auth.login.agree_and")
+        buttonPrivacy.setTitle(localized("auth.login.agree_privacypolicy"), for: .normal)
         hideViewFields = !(AuthSettingsManager.settings?.isUsernameEmailAuthenticationEnabled ?? true)
         buttonResetPassword.isHidden = !(AuthSettingsManager.settings?.isPasswordResetEnabled ?? true)
 
@@ -154,6 +165,10 @@ final class AuthViewController: BaseViewController {
 
         if settings.isGitHubAuthenticationEnabled {
             addOAuthButton(for: .github)
+        }
+
+        if settings.isGitLabAuthenticationEnabled {
+            addOAuthButton(for: .gitlab)
         }
 
         if settings.isLinkedInAuthenticationEnabled {
@@ -471,8 +486,9 @@ extension AuthViewController {
         let button = customAuthButtons[service] ?? UIButton()
 
         switch loginService.type {
-        case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
         case .facebook: button.setImage(#imageLiteral(resourceName: "facebook"), for: .normal)
+        case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
+        case .gitlab: button.setImage(#imageLiteral(resourceName: "gitlab"), for: .normal)
         case .linkedin: button.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
         default: button.setTitle(loginService.buttonLabelText ?? "", for: .normal)
         }

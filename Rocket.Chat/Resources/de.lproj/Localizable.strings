@@ -66,6 +66,15 @@
 "auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
 "auth.connect.connecting" = "Verbindung läuft. Warte kurz!";
 
+"auth.login.username.placeholder" = "Email or username";
+"auth.login.password.placeholder" = "Password";
+"auth.login.buttonRegister" = "Create new account";
+"auth.login.buttonResetPassword" = "Forgot password";
+"auth.login.agree_label" = "By proceeding you are agreeing to our";
+"auth.login.agree_and" = "and";
+"auth.login.agree_termsofservice" = "Terms of Service";
+"auth.login.agree_privacypolicy" = "Privacy Policy";
+
 "auth.forgot_password.title" = "Passwort vergessen?";
 "auth.forgot_password.message" = "E-Mail-Adresse eingeben";
 "auth.forgot_password.success" = "Wenn diese E-Mail-Adresse hinterlegt ist, werden Anweisungen zum Zurücksetzen des Passworts verschickt. Wenn du keine Mail bekommen hast, versuche es noch einmal.";
@@ -90,7 +99,7 @@
 "user_menu.busy" = "Beschäftigt";
 "user_menu.invisible" = "Unsichtbar";
 "user_menu.admin" = "Administration";
-"user_menu.settings" = "Mein Account";
+"user_menu.preferences" = "Mein Account"; // TODO: new text: Preferences
 "user_menu.logout" = "Logout";
 
 // New Room View
@@ -119,6 +128,7 @@
 "chat.read_only" = "Dieser Raum ist schreibgeschützt";
 "chat.muted" = "Du wurdest stummgeschaltet";
 "chat.loading_messages" = "Nachrichten werden geladen...";
+"chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
 "chat.message.actions.react" = "Reaktion hinzufügen";
@@ -134,6 +144,11 @@
 "chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
 "chat.message.actions.delete.confirm.message" = "Bist du sicher, dass du diese Nachricht löschen möchtest? Sie kann dann nicht wiederhergestellt werden.";
 "chat.message.actions.delete.confirm.yes" = "Ja, löschen";
+"chat.message.actions.resend" = "Resend"; //TODO
+"chat.message.actions.resend_all" = "Resend all"; //TODO
+"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
+"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
 "Send" = "Senden"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -148,6 +163,7 @@
 "chat.upload.shoot_video" = "Video aufnehmen";
 "chat.upload.choose_from_library" = "Foto & Video Mediathek";
 "chat.upload.import_file" = "Importiere Datei aus...";
+"chat.upload.draw" = "Draw a picture"; // TODO:
 
 // Chat Download
 "chat.download.downloading_file" = "Wird heruntergeladen \"%@\"";
@@ -155,6 +171,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Antippen zum Öffnen";
 "chat.message.open_browser" = "Im Browser öffnen";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!"; // TODO
+"chat.drawing.messageTitle" = "You have to draw something before sending it."; // TODO
+"chat.drawing.fileName" = "Drawing"; // TODO
+"chat.drawing.settings.opacity" = "Opacity"; // TODO
+"chat.drawing.settings.width" = "Width"; // TODO
+"chat.drawing.settings.color.selected" = "Selected color"; // TODO
+"chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Raum umbenannt zu: %@ von %@";
@@ -192,9 +217,10 @@
 "chat.messages.starred.list.title" = "Favorisierte Nachrichten";
 
 // Settings
-"myaccount.settings.title" = "Einstellungen";
+"myaccount.settings.title" = "Einstellungen"; // TODO: new text: Preferences
 "myaccount.settings.contactus" = "Kontaktiere uns";
 "myaccount.settings.license" = "Lizenz";
+"myaccount.settings.language" = "Sprache";
 "myaccount.settings.appicon" = "App Icon"; // TODO:
 "myaccount.settings.version" = "Version: %@ (%@)";
 
@@ -203,3 +229,8 @@
 "myaccount.settings.changeicon.header" = "Du kannst eines der unterstehenden Icons für die App wählen, welches auf deinem Homescreen angezeigt wird.";
 "myaccount.settings.changeicon.errortitle" = "Konnte App Icon nicht ändern";
 "myaccount.settings.changeicon.iosversion" = "Alternative App Icons werden nicht von iOS älter als 10.3 unterstützt.";
+
+// Change Language
+"myaccount.settings.language.title" = "Sprache ändern";
+"myaccount.settings.language.reset" = "Auf Standard zurücksetzen";
+"myaccount.settings.language.message" = "Die Sprache wurde geändert. Damit die Änderungen wirksam werden, muss die App neu gestartet werden.";

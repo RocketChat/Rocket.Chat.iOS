@@ -66,6 +66,15 @@
 "auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
 "auth.connect.connecting" = "Conectando no servidor";
 
+"auth.login.username.placeholder" = "Email or username";
+"auth.login.password.placeholder" = "Password";
+"auth.login.buttonRegister" = "Create new account";
+"auth.login.buttonResetPassword" = "Forgot password";
+"auth.login.agree_label" = "By proceeding you are agreeing to our";
+"auth.login.agree_and" = "and";
+"auth.login.agree_termsofservice" = "Terms of Service";
+"auth.login.agree_privacypolicy" = "Privacy Policy";
+
 "auth.forgot_password.title" = "Esqueceu sua senha?";
 "auth.forgot_password.message" = "Digite seu e-mail";
 "auth.forgot_password.success" = "Se esse e-mail for registrado, nós enviaremos instruções de como resetar sua senha. Se você não receber um e-mail em breve, por favor volte e tente novamente.";
@@ -90,7 +99,7 @@
 "user_menu.busy" = "Ocupado";
 "user_menu.invisible" = "Invisível";
 "user_menu.admin" = "Administração";
-"user_menu.settings" = "Minha conta";
+"user_menu.preferences" = "Minha conta"; // TODO: new text: Preferences
 "user_menu.logout" = "Sair";
 
 // New Room View
@@ -119,6 +128,7 @@
 "chat.read_only" = "Este canal é somente leitura";
 "chat.muted" = "Você foi silenciado";
 "chat.loading_messages" = "Carregando mensagens...";
+"chat.unread_separator" = "novas mensagens";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Adicionar reação";
@@ -134,6 +144,11 @@
 "chat.message.actions.delete.confirm.title" = "Deletar esta mensagem?";
 "chat.message.actions.delete.confirm.message" = "Tem certeza que deseja deletar esta mensagem? A mensagem não poderá ser recuperada.";
 "chat.message.actions.delete.confirm.yes" = "Sim, deletar";
+"chat.message.actions.delete.discard.title" = "Descartar esta mensagem?";
+"chat.message.actions.delete.discard.message" = "Esta mensagem não foi enviada. Você deseja descartá-la? A mensagem não poderá ser recuperada.";
+"chat.message.actions.delete.discard.yes" = "Sim, descartar";
+"chat.message.actions.resend" = "Reenviar";
+"chat.message.actions.resend_all" = "Reenviar todas";
 "Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -148,6 +163,7 @@
 "chat.upload.shoot_video" = "Gravar um vídeo";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
+"chat.upload.draw" = "Desenhar algo";
 
 // Chat Download
 "chat.download.downloading_file" = "Baixando \"%@\"";
@@ -155,6 +171,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Toque para abrir";
 "chat.message.open_browser" = "Abrir no Safari";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!";
+"chat.drawing.messageTitle" = "Você precisa desenhar algo antes de enviar.";
+"chat.drawing.fileName" = "Drawing"; // TODO
+"chat.drawing.settings.opacity" = "Opacity"; // TODO
+"chat.drawing.settings.width" = "Width"; // TODO
+"chat.drawing.settings.color.selected" = "Selected color"; // TODO
+"chat.drawing.settings.color.others" = "Choose color below:"; // TODO
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";
@@ -195,6 +220,7 @@
 "myaccount.settings.title" = "Configurações";
 "myaccount.settings.contactus" = "Entre em contato";
 "myaccount.settings.license" = "Licença";
+"myaccount.settings.language" = "Idioma";
 "myaccount.settings.appicon" = "Ícone do App";
 "myaccount.settings.version" = "Versão: %@ (%@)";
 
@@ -203,3 +229,8 @@
 "myaccount.settings.changeicon.header" = "Você pode escolher o ícone do Rocket.Chat+ para mudar a aparência em sua home screen. Escolha o ícone abaixo que você mais gostar.";
 "myaccount.settings.changeicon.errortitle" = "Não podemos alterar seu ícone";
 "myaccount.settings.changeicon.iosversion" = "Esta funcionalidade está disponível somente para usuários com versão do iOS superior a 10.3.";
+
+// Change Language
+"myaccount.settings.language.title" = "Alterar Idioma";
+"myaccount.settings.language.reset" = "Restaurar o Padrão";
+"myaccount.settings.language.message" = "Você mudou o idioma. Você precisa fechar o aplicativo e abrir novamente para que as alterações tenham efeito.";

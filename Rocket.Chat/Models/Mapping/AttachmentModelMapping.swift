@@ -10,7 +10,20 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
+extension AttachmentField: ModelMappeable {
+    func map(_ values: JSON, realm: Realm?) {
+        if self.identifier == nil {
+            self.identifier = String.random()
+        }
+
+        self.short = values["short"].boolValue
+        self.title = values["title"].stringValue
+        self.value = values["value"].stringValue
+    }
+}
+
 extension Attachment: ModelMappeable {
+
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
             self.identifier = String.random(30)
@@ -21,7 +34,7 @@ extension Attachment: ModelMappeable {
         }
 
         if let title = values["title"].string {
-            self.title = title
+            self.title = title.removingNewLines()
         }
 
         if let titleLink = values["title_link"].string {
@@ -55,10 +68,15 @@ extension Attachment: ModelMappeable {
         self.videoType = values["video_type"].string
         self.videoSize = values["video_size"].int ?? 0
 
-        // Override title & value from fields object
-        if let fields = values["fields"].array?.first {
-            self.title = fields["title"].string ?? self.title
-            self.text = fields["value"].string ?? self.text
+        // Mentions
+        if let fields = values["fields"].array {
+            self.fields.removeAll()
+
+            for field in fields {
+                let obj = AttachmentField()
+                obj.map(field, realm: realm)
+                self.fields.append(obj)
+            }
         }
     }
 
@@ -77,4 +95,5 @@ extension Attachment: ModelMappeable {
 
         return encoded.joined(separator: "/")
     }
+
 }

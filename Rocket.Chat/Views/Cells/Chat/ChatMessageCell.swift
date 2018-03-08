@@ -64,6 +64,8 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var labelUsername: UILabel!
     @IBOutlet weak var labelText: RCTextView!
 
+    @IBOutlet weak var statusView: UIImageView!
+
     @IBOutlet weak var mediaViews: UIStackView!
     @IBOutlet weak var mediaViewsHeightConstraint: NSLayoutConstraint!
 
@@ -115,7 +117,7 @@ final class ChatMessageCell: UICollectionViewCell {
             let type = attachment.type
 
             if type == .textAttachment {
-                total += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text)
+                total += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text, isFile: attachment.isFile)
             }
 
             if type == .image {
@@ -128,6 +130,12 @@ final class ChatMessageCell: UICollectionViewCell {
 
             if type == .audio {
                 total += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
+            }
+
+            if !attachment.collapsed {
+                attachment.fields.forEach {
+                    total += ChatMessageTextView.heightFor(collapsed: false, withText: $0.value)
+                }
             }
         }
 
@@ -220,7 +228,16 @@ final class ChatMessageCell: UICollectionViewCell {
                     view.translatesAutoresizingMaskIntoConstraints = false
 
                     mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text)
+                    mediaViewHeight += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text, isFile: attachment.isFile)
+
+                    if !attachment.collapsed {
+                        attachment.fields.forEach {
+                            guard let view = ChatMessageTextView.instantiateFromNib() else { return }
+                            view.viewModel = ChatMessageAttachmentFieldViewModel(withAttachment: attachment, andAttachmentField: $0)
+                            mediaViews.addArrangedSubview(view)
+                            mediaViewHeight += ChatMessageTextView.heightFor(collapsed: false, withText: $0.value)
+                        }
+                    }
                 }
 
             case .image:
@@ -285,6 +302,10 @@ final class ChatMessageCell: UICollectionViewCell {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
             }
 
+            if message.failed {
+                text.setFontColor(MessageTextFontAttributes.failedFontColor)
+            }
+
             labelText.message = text
         }
     }
@@ -326,9 +347,22 @@ final class ChatMessageCell: UICollectionViewCell {
     fileprivate func updateMessage() {
         guard
             delegate != nil,
-            message != nil
+            let message = message
         else {
             return
+        }
+
+        switch (message.failed, message.temporary) {
+        case (true, _):
+            statusView.isHidden = false
+            statusView.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
+            statusView.tintColor = .red
+        case (false, true):
+            statusView.isHidden = false
+            statusView.image = UIImage(named: "Clock")?.withRenderingMode(.alwaysTemplate)
+            statusView.tintColor = .gray
+        case (false, false):
+            statusView.isHidden = true
         }
 
         if !sequential {

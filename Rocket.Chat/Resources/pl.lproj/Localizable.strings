@@ -66,6 +66,15 @@
 "auth.connect.ssl_required" = "Wymagane jest, aby Twój serwer wspierał SSL";
 "auth.connect.connecting" = "Trwa łączenie. Trzymaj się";
 
+"auth.login.username.placeholder" = "Email or username";
+"auth.login.password.placeholder" = "Password";
+"auth.login.buttonRegister" = "Create new account";
+"auth.login.buttonResetPassword" = "Forgot password";
+"auth.login.agree_label" = "By proceeding you are agreeing to our";
+"auth.login.agree_and" = "and";
+"auth.login.agree_termsofservice" = "Terms of Service";
+"auth.login.agree_privacypolicy" = "Privacy Policy";
+
 "auth.forgot_password.title" = "Zapomniałeś hasła?";
 "auth.forgot_password.message" = "Wprowadź e-mail";
 "auth.forgot_password.success" = "Jeżeli ten e-mail jest zarejestrowany wyślemy Ci instrukcje jak zresetować hasło. Jeżeli wkrótce nie otrzymasz maila spróbuj ponownie.";
@@ -90,7 +99,7 @@
 "user_menu.busy" = "Zajęty";
 "user_menu.invisible" = "Ukryty";
 "user_menu.admin" = "Zarządzanie";
-"user_menu.settings" = "Moje Konto";
+"user_menu.preferences" = "Preferencje";
 "user_menu.logout" = "Wyloguj";
 
 // New Room View
@@ -119,6 +128,7 @@
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
 "chat.loading_messages" = "Ładowanie wiadomości...";
+"chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
 "chat.message.actions.react" = "Dodaje reakcję";
@@ -134,6 +144,11 @@
 "chat.message.actions.delete.confirm.title" = "Usunąć wiadomość?";
 "chat.message.actions.delete.confirm.message" = "Czy na pewno usunąć tą wiadomość? Tej czynności nie można cofnąć.";
 "chat.message.actions.delete.confirm.yes" = "Tak, usuń";
+"chat.message.actions.resend" = "Wyślij ponownie";
+"chat.message.actions.resend_all" = "Wyślij wszystkie ponownie";
+"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
+"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
 "Send" = "Wyślij"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -148,6 +163,7 @@
 "chat.upload.shoot_video" = "Nagraj wideo";
 "chat.upload.choose_from_library" = "Wybierz plik z biblioteki";
 "chat.upload.import_file" = "Importuj plik z...";
+"chat.upload.draw" = "Narysuj obrazek";
 
 // Chat Download
 "chat.download.downloading_file" = "Pobieranie \"%@\"";
@@ -155,6 +171,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Dotknij aby otworzyć plik";
 "chat.message.open_browser" = "Otwórz w przeglądarce";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Ups!";
+"chat.drawing.messageTitle" = "Przed wysłaniem musisz coś narysować.";
+"chat.drawing.fileName" = "Rysunek";
+"chat.drawing.settings.opacity" = "Nieprzezroczystość";
+"chat.drawing.settings.width" = "Szerokość";
+"chat.drawing.settings.color.selected" = "Wybrany kolor";
+"chat.drawing.settings.color.others" = "Wybierz kolor poniżej:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";
@@ -192,9 +217,10 @@
 "chat.messages.starred.list.title" = "Wiadomości oznaczone gwiazdką";
 
 // Settings
-"myaccount.settings.title" = "Ustawienia";
+"myaccount.settings.title" = "Preferencje";
 "myaccount.settings.contactus" = "Kontakt";
 "myaccount.settings.license" = "Licencja";
+"myaccount.settings.language" = "Język";
 "myaccount.settings.appicon" = "Ikona aplikacji";
 "myaccount.settings.version" = "Wersja: %@ (%@)";
 
@@ -203,3 +229,8 @@
 "myaccount.settings.changeicon.header" = "Możesz zmienić to jak wygląda ikona aplikacji Rocket.Chat na Twoim urządzeniu. Wybierz jedną z ikon poniżej, która podoba Ci się najbardziej.";
 "myaccount.settings.changeicon.errortitle" = "Nie można zmienić ikony";
 "myaccount.settings.changeicon.iosversion" = "Alternatywne ikony aplikacji nie są wspierane na systemie poniżej wersji 10.3";
+
+// Change Language
+"myaccount.settings.language.title" = "Zmień język";
+"myaccount.settings.language.reset" = "Przywróć domyślny język";
+"myaccount.settings.language.message" = "Ustawienia języka zostały zmienione. Musisz ponownie uruchomić Rocket.Chat+ aby nowe ustawienia zostały zastosowane.";
