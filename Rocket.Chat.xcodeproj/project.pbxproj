@@ -406,6 +406,7 @@
 		9928225F204DDC8C005D2067 /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */; };
 		993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */; };
 		994EB8042050DD5D0011A9CE /* NewPasswordTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994EB8032050DD5D0011A9CE /* NewPasswordTableViewController.swift */; };
+		996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996154B0205197E7009B9857 /* NewPasswordViewModel.swift */; };
 		998165CA204EBBA10059D346 /* UpdateUserRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998165C9204EBBA10059D346 /* UpdateUserRequestSpec.swift */; };
 		998165CC204EDBA30059D346 /* UploadAvatarRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998165CB204EDBA30059D346 /* UploadAvatarRequestSpec.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
@@ -887,6 +888,7 @@
 		9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewModel.swift; path = Controllers/Settings/EditProfileViewModel.swift; sourceTree = "<group>"; };
 		993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DraftMessageManagerSpec.swift; path = Managers/DraftMessageManagerSpec.swift; sourceTree = "<group>"; };
 		994EB8032050DD5D0011A9CE /* NewPasswordTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewPasswordTableViewController.swift; path = Controllers/Settings/NewPasswordTableViewController.swift; sourceTree = "<group>"; };
+		996154B0205197E7009B9857 /* NewPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewPasswordViewModel.swift; path = Controllers/Settings/NewPasswordViewModel.swift; sourceTree = "<group>"; };
 		998165C9204EBBA10059D346 /* UpdateUserRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserRequestSpec.swift; sourceTree = "<group>"; };
 		998165CB204EDBA30059D346 /* UploadAvatarRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequestSpec.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
@@ -2085,6 +2087,7 @@
 				99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */,
 				9928225E204DDC8C005D2067 /* EditProfileViewModel.swift */,
 				994EB8032050DD5D0011A9CE /* NewPasswordTableViewController.swift */,
+				996154B0205197E7009B9857 /* NewPasswordViewModel.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -2829,6 +2832,7 @@
 				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
 				80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */,
+				996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */,
 				411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */,
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
 				0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */,

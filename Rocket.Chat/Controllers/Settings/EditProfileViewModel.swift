@@ -29,10 +29,6 @@ final class EditProfileViewModel {
         return localized("myaccount.settings.profile.section.profile")
     }
 
-    internal var passwordSectionTitle: String {
-        return localized("myaccount.settings.profile.section.password")
-    }
-
     internal var namePlaceholder: String {
         return localized("myaccount.settings.profile.name_placeholder")
     }
@@ -45,11 +41,7 @@ final class EditProfileViewModel {
         return localized("myaccount.settings.profile.email_placeholder")
     }
 
-    internal var passwordPlaceholder: String {
-        return localized("myaccount.settings.profile.password_placeholder")
-    }
-
-    internal var passwordConfirmationPlaceholder: String {
-        return localized("myaccount.settings.profile.password_confirmation_placeholder")
+    internal var changeYourPasswordTitle: String {
+        return localized("myaccount.settings.profile.actions.change_password")
     }
 }

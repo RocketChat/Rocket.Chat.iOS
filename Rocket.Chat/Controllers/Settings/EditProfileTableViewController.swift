@@ -28,6 +28,12 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
     }
 
+    @IBOutlet weak var changeYourPassword: UILabel! {
+        didSet {
+            changeYourPassword.text = viewModel.changeYourPasswordTitle
+        }
+    }
+
     @IBOutlet weak var avatarButton: UIButton!
 
     var avatarView: AvatarView = {

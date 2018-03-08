@@ -56,12 +56,16 @@
 "alert.load_profile_error.message" = "Algo de errado aconteceu ao carregar seu perfil. Por favor, tente novamente.";
 "alert.password_mismatch_error.title" = "Suas senhas não batem";
 "alert.password_mismatch_error.message" = "O campo de confirmação da senha difere da senha escolhida. Por favor, corrija e tente novamente.";
-"alert.missing_password_field_error.title" = "Atualizar senha";
-"alert.missing_password_field_error.message" = "Preencha os dois campos referentes a sua senha para atualizá-la.";
 "alert.update_profile_error.title" = "Falha ao atualizar";
 "alert.update_profile_error.message" = "Algo de errado aconteceu ao atualizar seu perfil. Por favor, tente novamente.";
+"alert.update_password_error.title" = "Falha ao alterar senha";
+"alert.update_password_error.message" = "Algo de errado aconteceu ao alterar sua senha. Por favor, tente novamente";
 "alert.update_profile_empty_fields.title" = "Por favor, preenchar todos os campos";
 "alert.update_profile_empty_fields.message" = "Todas as informações do seu perfil são necessárias e não podem ficar em branco.";
+"alert.password_empty_fields.title" = "Atualizar senha";
+"alert.password_empty_fields.message" = "Por favor, preencha os dois campos para atualizar sua senha.";
+"alert.update_profile_success.title" = "Perfil atualizado";
+"alert.update_password_success.title" = "Senha alterada";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";
@@ -252,10 +256,16 @@
 "myaccount.settings.editing_profile.title" = "Editar Perfi";
 "myaccount.settings.profile.actions.save" = "Salvar";
 "myaccount.settings.profile.actions.edit" = "Editar";
+"myaccount.settings.profile.actions.change_password" = "Alterar senha";
 "myaccount.settings.profile.section.profile" = "Perfil";
 "myaccount.settings.profile.section.password" = "Senha";
 "myaccount.settings.profile.name_placeholder" = "Nome";
 "myaccount.settings.profile.username_placeholder" = "Username";
 "myaccount.settings.profile.email_placeholder" = "E-mail";
-"myaccount.settings.profile.password_placeholder" = "Nova senha";
-"myaccount.settings.profile.password_confirmation_placeholder" = "Confirmação da senha";
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "Nova senha";
+"myaccount.settings.profile.new_password.section.password" = "Senha";
+"myaccount.settings.profile.new_password.actions.save" = "Salvar";
+"myaccount.settings.profile.new_password.password_placeholder" = "Nova senha";
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Confirmação da senha";

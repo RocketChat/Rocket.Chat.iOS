@@ -317,7 +317,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="3jJ-cl-9vT"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -344,6 +344,7 @@
                     <navigationItem key="navigationItem" title="Edit profile" id="PfG-WE-aXd"/>
                     <connections>
                         <outlet property="avatarButton" destination="Nkg-CL-28B" id="SzP-vj-81c"/>
+                        <outlet property="changeYourPassword" destination="haS-H9-F6X" id="lQ3-db-bQA"/>
                         <outlet property="email" destination="8e8-Ux-MZf" id="VfH-Lj-PNU"/>
                         <outlet property="name" destination="yDN-bF-Vmu" id="2eI-KR-Eex"/>
                         <outlet property="username" destination="wls-OZ-1ZV" id="AgF-EO-95F"/>
@@ -438,6 +439,7 @@
                     <connections>
                         <outlet property="newPassword" destination="b0k-ze-Haa" id="N0e-Tp-Xub"/>
                         <outlet property="passwordConfirmation" destination="Xya-HH-J7i" id="8jG-rg-I5I"/>
+                        <outlet property="saveButton" destination="vu2-Af-lIZ" id="EZn-bK-ADD"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D8n-lf-vZC" userLabel="First Responder" sceneMemberID="firstResponder"/>
