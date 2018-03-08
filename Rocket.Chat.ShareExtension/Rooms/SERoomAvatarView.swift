@@ -46,4 +46,10 @@ class SERoomAvatarView: UIView {
             )
         )
     }
+
+    func prepareForReuse() {
+        imageView.image = nil
+        initialsLabel.backgroundColor = UIColor.clear
+        initialsLabel.text = ""
+    }
 }

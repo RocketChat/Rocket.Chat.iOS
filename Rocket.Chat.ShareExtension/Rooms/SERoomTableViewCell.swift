@@ -16,8 +16,7 @@ class SERoomTableViewCell: UITableViewCell, SECell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        avatarView.imageView.image = nil
-        avatarView.initialsLabel.backgroundColor = UIColor.clear
+        avatarView.prepareForReuse()
         nameLabel.text = ""
     }
 

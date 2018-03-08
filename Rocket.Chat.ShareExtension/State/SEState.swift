@@ -41,7 +41,10 @@ struct SEState {
         case .none:
             return rooms
         case .searching(let search):
-            return rooms.filter { $0.fname.contains(search) || $0.name.contains(search) }
+            let search = search.lowercased()
+            return rooms.filter {
+                $0.fname.lowercased().contains(search) || $0.name.lowercased().contains(search)
+            }
         case .started:
             return rooms
         }

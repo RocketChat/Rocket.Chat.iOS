@@ -56,7 +56,7 @@ extension SEServersViewModel {
     }
 
     func heightForRowAt(_ indexPath: IndexPath) -> Double {
-        return 48.0
+        return 60.0
     }
 }
 

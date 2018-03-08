@@ -2292,8 +2292,8 @@
 			isa = PBXGroup;
 			children = (
 				80977AB5204EEF1E00C41435 /* SEActionCreators.swift */,
-				8076FD9920484A6000114F28 /* SEStore.swift */,
 				80977AC1204F37C200C41435 /* SEState.swift */,
+				8076FD9920484A6000114F28 /* SEStore.swift */,
 				80977ABE204F36F200C41435 /* SESearchState.swift */,
 				80977AB7204EFBBB00C41435 /* Navigation */,
 			);

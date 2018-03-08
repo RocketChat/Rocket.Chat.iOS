@@ -71,6 +71,7 @@ extension SENavigationController: SEStoreSubscriber {
             }
         case .finish:
             extensionContext?.cancelRequest(withError: SEError.canceled)
+            store.clearSubscribers()
         }
 
         store.dispatch(.makeSceneTransition(.none))

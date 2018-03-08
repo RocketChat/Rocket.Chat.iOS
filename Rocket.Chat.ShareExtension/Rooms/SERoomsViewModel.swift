@@ -90,11 +90,11 @@ extension SERoomsViewModel {
     func heightForRowAt(_ indexPath: IndexPath) -> Double {
         switch cellForRowAt(indexPath) {
         case is SEServerCellModel:
-            return 48.0
+            return 60.0
         case is SERoomCellModel:
-            return 36.0
+            return 44.0
         default:
-            return 36.0
+            return 44.0
         }
     }
 

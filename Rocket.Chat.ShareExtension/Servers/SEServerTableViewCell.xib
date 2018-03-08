@@ -12,27 +12,27 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="44" id="hp6-X5-Lc7" customClass="SEServerTableViewCell" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="61" id="hp6-X5-Lc7" customClass="SEServerTableViewCell" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hp6-X5-Lc7" id="siZ-qY-8bA">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="60.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="open.rocket.chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXB-a1-Ctk">
-                        <rect key="frame" x="57" y="22.5" width="96" height="15"/>
+                        <rect key="frame" x="74" y="35.5" width="96" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wQE-Mf-ttI">
-                        <rect key="frame" x="18" y="6" width="31" height="31.5"/>
+                        <rect key="frame" x="18" y="6" width="48" height="48.5"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="wQE-Mf-ttI" secondAttribute="height" multiplier="1:1" id="F4F-a6-Mg2"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rocket.Chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVe-PV-4Ep">
-                        <rect key="frame" x="57" y="6" width="93" height="21"/>
+                        <rect key="frame" x="74" y="10" width="93" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
@@ -40,11 +40,11 @@
                 </subviews>
                 <constraints>
                     <constraint firstItem="CXB-a1-Ctk" firstAttribute="leading" secondItem="wQE-Mf-ttI" secondAttribute="trailing" constant="8" id="1HM-U3-HgH"/>
-                    <constraint firstAttribute="bottom" secondItem="CXB-a1-Ctk" secondAttribute="bottom" constant="6" id="HHY-K4-e55"/>
+                    <constraint firstAttribute="bottom" secondItem="CXB-a1-Ctk" secondAttribute="bottom" constant="10" id="HHY-K4-e55"/>
                     <constraint firstAttribute="bottom" secondItem="wQE-Mf-ttI" secondAttribute="bottom" constant="6" id="R9O-98-MGo"/>
                     <constraint firstItem="yVe-PV-4Ep" firstAttribute="leading" secondItem="wQE-Mf-ttI" secondAttribute="trailing" constant="8" id="SFV-Wm-iZW"/>
                     <constraint firstItem="wQE-Mf-ttI" firstAttribute="top" secondItem="siZ-qY-8bA" secondAttribute="top" constant="6" id="Wr2-dx-ZFD"/>
-                    <constraint firstItem="yVe-PV-4Ep" firstAttribute="top" secondItem="siZ-qY-8bA" secondAttribute="top" constant="6" id="p9N-uN-p9Q"/>
+                    <constraint firstItem="yVe-PV-4Ep" firstAttribute="top" secondItem="siZ-qY-8bA" secondAttribute="top" constant="10" id="p9N-uN-p9Q"/>
                     <constraint firstItem="wQE-Mf-ttI" firstAttribute="leading" secondItem="siZ-qY-8bA" secondAttribute="leading" constant="18" id="vKo-fp-6Q8"/>
                 </constraints>
             </tableViewCellContentView>
@@ -53,7 +53,7 @@
                 <outlet property="iconView" destination="wQE-Mf-ttI" id="JGc-Z6-Cid"/>
                 <outlet property="nameLabel" destination="yVe-PV-4Ep" id="ZHR-FF-s2o"/>
             </connections>
-            <point key="canvasLocation" x="169.5" y="165"/>
+            <point key="canvasLocation" x="169.5" y="173.5"/>
         </tableViewCell>
     </objects>
 </document>
