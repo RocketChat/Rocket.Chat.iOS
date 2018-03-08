@@ -79,9 +79,9 @@ class NewPasswordTableViewController: UITableViewController {
         }
 
         let stopLoading = {
-            DispatchQueue.main.async { [weak self] in
-                self?.navigationItem.hidesBackButton = false
-                self?.navigationItem.rightBarButtonItem = sender
+            DispatchQueue.main.async {
+                self.navigationItem.hidesBackButton = false
+                self.navigationItem.rightBarButtonItem = sender
             }
         }
 

@@ -103,10 +103,26 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     func fetchUserData() {
+        avatarButton.isHidden = true
         avatarView.removeCacheForCurrentURL()
 
+        var fetchUserLoader: MBProgressHUD!
+
+        DispatchQueue.main.async {
+            fetchUserLoader = MBProgressHUD.showAdded(to: self.view, animated: true)
+            fetchUserLoader.mode = .indeterminate
+        }
+
+        let stopLoading = {
+            DispatchQueue.main.async {
+                self.avatarButton.isHidden = false
+                fetchUserLoader.hide(animated: true)
+            }
+        }
+
         let meRequest = MeRequest()
-        api?.fetch(meRequest, succeeded: { [weak self] (result) in
+        api?.fetch(meRequest, succeeded: { [weak self] result in
+            stopLoading()
             if let errorMessage = result.errorMessage {
                 Alert(key: "alert.load_profile_error").withMessage(errorMessage).present(handler: { _ in
                     self?.navigationController?.popViewController(animated: true)
@@ -119,7 +135,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                     self?.tableView.reloadData()
                 }
             }
-        }, errored: { (_) in
+        }, errored: { _ in
+            stopLoading()
             Alert(key: "alert.load_profile_error").present(handler: { _ in
                 self.navigationController?.popViewController(animated: true)
             })
@@ -265,18 +282,17 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     func stopLoading() {
         if !isUpdatingUser, !isUploadingAvatar {
-            DispatchQueue.main.async { [weak self] in
-                self?.navigationItem.leftBarButtonItem?.isEnabled = true
-                self?.endEditing(shouldKeepUnsavedChanges: true)
+            DispatchQueue.main.async {
+                self.navigationItem.leftBarButtonItem?.isEnabled = true
+                self.endEditing(shouldKeepUnsavedChanges: true)
             }
         }
     }
 
     func showUpdateUserSuccess() {
         if !isUpdatingUser, !isUploadingAvatar {
-            DispatchQueue.main.async { [weak self] in
-                guard let weakSelf = self else { return }
-                let successHUD = MBProgressHUD.showAdded(to: weakSelf.view, animated: true)
+            DispatchQueue.main.async {
+                let successHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
                 successHUD.mode = .text
                 successHUD.label.text = localized("alert.update_profile_success.title")
                 successHUD.hide(animated: true, afterDelay: 1.5)
