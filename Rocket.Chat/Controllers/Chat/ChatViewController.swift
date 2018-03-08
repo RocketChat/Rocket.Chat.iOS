@@ -315,6 +315,10 @@ final class ChatViewController: SLKTextViewController {
         scrollToBottomButtonIsVisible = false
     }
 
+    internal func resetScrollToBottomButtonPosition() {
+        scrollToBottomButtonIsVisible = !chatLogIsAtBottom()
+    }
+
     func resetMessageSending() {
         textView.text = ""
 
@@ -457,10 +461,6 @@ final class ChatViewController: SLKTextViewController {
         } else {
             didPressRightButton(self)
         }
-    }
-
-    override func textViewDidBeginEditing(_ textView: UITextView) {
-        scrollToBottom(true)
     }
 
     override func textViewDidChange(_ textView: UITextView) {
@@ -1109,8 +1109,7 @@ extension ChatViewController {
                 loadMoreMessagesFrom(date: message.createdAt)
             }
         }
-
-        scrollToBottomButtonIsVisible = !chatLogIsAtBottom()
+        resetScrollToBottomButtonPosition()
     }
 }
 
@@ -1198,6 +1197,7 @@ extension ChatViewController: KeyboardFrameViewDelegate {
         if let frame = frame {
             updateKeyboardConstraints(frame: frame)
         }
+        resetScrollToBottomButtonPosition()
     }
 
     var keyboardProxyView: UIView? {
