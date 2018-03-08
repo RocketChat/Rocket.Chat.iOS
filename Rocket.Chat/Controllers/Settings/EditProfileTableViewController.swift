@@ -291,17 +291,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
     }
 
-    func showUpdateUserSuccess() {
-        if !isUpdatingUser, !isUploadingAvatar {
-            DispatchQueue.main.async {
-                let successHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
-                successHUD.mode = .text
-                successHUD.label.text = localized("alert.update_profile_success.title")
-                successHUD.hide(animated: true, afterDelay: 1.5)
-            }
-        }
-    }
-
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

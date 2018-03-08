@@ -92,18 +92,7 @@ class NewPasswordTableViewController: UITableViewController {
             if let errorMessage = result.errorMessage {
                 Alert(key: "alert.update_password_error").withMessage(errorMessage).present()
             } else {
-                if let weakSelf = self {
-                    DispatchQueue.main.async {
-                        let successHUD = MBProgressHUD.showAdded(to: weakSelf.view, animated: true)
-                        successHUD.mode = .text
-                        successHUD.label.text = localized("alert.update_password_success.title")
-                        successHUD.hide(animated: true, afterDelay: 1.5)
-                        successHUD.completionBlock = {
-                            weakSelf.newPassword.text = nil
-                            weakSelf.passwordConfirmation.text = nil
-                        }
-                    }
-                }
+                self?.alertSuccess(title: localized("alert.update_password_success.title"))
             }
         }, errored: { _ in
             stopLoading()
