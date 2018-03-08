@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class NewPasswordTableViewController: UITableViewController {
 
@@ -91,10 +92,17 @@ class NewPasswordTableViewController: UITableViewController {
             if let errorMessage = result.errorMessage {
                 Alert(key: "alert.update_password_error").withMessage(errorMessage).present()
             } else {
-                DispatchQueue.main.async {
-                    self?.alert(title: "", message: "Password changed (MBProgressHUD placeholder)", handler: { _ in
-                        self?.navigationController?.popViewController(animated: true)
-                    })
+                if let weakSelf = self {
+                    DispatchQueue.main.async {
+                        let successHUD = MBProgressHUD.showAdded(to: weakSelf.view, animated: true)
+                        successHUD.mode = .text
+                        successHUD.label.text = localized("alert.update_password_success.title")
+                        successHUD.hide(animated: true, afterDelay: 1.5)
+                        successHUD.completionBlock = {
+                            weakSelf.newPassword.text = nil
+                            weakSelf.passwordConfirmation.text = nil
+                        }
+                    }
                 }
             }
         }, errored: { _ in

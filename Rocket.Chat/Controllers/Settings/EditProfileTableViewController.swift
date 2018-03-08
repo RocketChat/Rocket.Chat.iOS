@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class EditProfileTableViewController: UITableViewController, MediaPicker {
 
@@ -204,6 +205,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
             let client = API.current()?.client(UploadClient.self)
             client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] in
+                self?.showUpdateUserSuccess()
                 self?.isUploadingAvatar = false
                 self?.stopLoading()
                 self?.avatarView.avatarPlaceholder = self?.avatarView.imageView.image
@@ -219,8 +221,9 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         isUpdatingUser = true
 
         let updateUserRequest = UpdateUserRequest(userId: userId, user: user)
-        api?.fetch(updateUserRequest, succeeded: { result in
+        api?.fetch(updateUserRequest, succeeded: { [weak self] result in
             stopLoading()
+            self?.showUpdateUserSuccess()
             if let errorMessage = result.errorMessage {
                 Alert(key: "alert.update_profile_error").withMessage(errorMessage).present()
             }
@@ -265,6 +268,18 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             DispatchQueue.main.async { [weak self] in
                 self?.navigationItem.leftBarButtonItem?.isEnabled = true
                 self?.endEditing(shouldKeepUnsavedChanges: true)
+            }
+        }
+    }
+
+    func showUpdateUserSuccess() {
+        if !isUpdatingUser, !isUploadingAvatar {
+            DispatchQueue.main.async { [weak self] in
+                guard let weakSelf = self else { return }
+                let successHUD = MBProgressHUD.showAdded(to: weakSelf.view, animated: true)
+                successHUD.mode = .text
+                successHUD.label.text = localized("alert.update_profile_success.title")
+                successHUD.hide(animated: true, afterDelay: 1.5)
             }
         }
     }

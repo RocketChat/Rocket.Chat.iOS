@@ -65,7 +65,7 @@
 "alert.password_empty_fields.title" = "Please, fill the empty fields"; // TODO
 "alert.password_empty_fields.message" = "Fill up the password and confirmation fields so you can update your password."; // TODO
 "alert.update_profile_success.title" = "Profile updated"; // TODO
-"alert.update_password_success.title" = "Password changed"; // TODO
+"alert.update_password_success.title" = "Password updated"; // TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Le serveur a changé son URL";
