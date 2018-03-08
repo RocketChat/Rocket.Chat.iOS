@@ -10,15 +10,17 @@ import Foundation
 import SDWebImage
 
 extension NSAttributedString {
-    func applyingCustomEmojis(_ emojis: [Emoji]) -> NSAttributedString {
-        let mutableSelf = NSMutableAttributedString(attributedString: self)
+    func applyingCustomEmojis(_ emojis: [String : Emoji]) -> NSAttributedString {
+        let attributedString = NSMutableAttributedString(attributedString: self)
 
-        return emojis.reduce(mutableSelf) { attributedString, emoji in
-            guard case let .custom(imageUrl) = emoji.type else { return attributedString }
-
-            let alternates = emoji.alternates.filter { !$0.isEmpty }
-
-            let regexPattern = ([emoji.shortname] + alternates).flatMap { $0.escapingRegex() }.reduce("") { $0.isEmpty ? ":\($1):" : "\($0)|:\($1):" }
+//        return emojis.reduce(mutableSelf) { attributedString, emoji in
+//            guard case let .custom(imageUrl) = emoji.type else { return attributedString }
+//
+//            let alternates = emoji.alternates.filter { !$0.isEmpty }
+//
+//            let regexPattern = ([emoji.shortname] + alternates).flatMap { $0.escapingRegex() }.reduce("") { $0.isEmpty ? ":\($1):" : "\($0)|:\($1):" }
+            
+            let regexPattern = ":\\w+:"
 
             guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }
 
@@ -41,13 +43,15 @@ extension NSAttributedString {
             for range in transformedRanges {
                 let imageAttachment = NSTextAttachment()
                 imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
-                imageAttachment.contents = imageUrl.data(using: .utf8)
-                let imageString = NSAttributedString(attachment: imageAttachment)
-                attributedString.replaceCharacters(in: range, with: imageString)
+                if let emoji = emojis[attributedString.attributedSubstring(from: range).string], let imageUrl = emoji.imageUrl {
+                    imageAttachment.contents = imageUrl.data(using: .utf8)
+                    let imageString = NSAttributedString(attachment: imageAttachment)
+                    attributedString.replaceCharacters(in: range, with: imageString)
+                }
             }
 
             return attributedString
-        }
+//        }
     }
 }
 

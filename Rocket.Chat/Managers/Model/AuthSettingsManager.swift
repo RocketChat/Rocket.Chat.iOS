@@ -38,7 +38,8 @@ final class AuthSettingsManager {
                 return
             }
 
-            Realm.executeOnMainThread({ realm in
+            // Was executed on main
+            Realm.execute({ realm in
                 let settings = AuthManager.isAuthenticated()?.settings ?? AuthSettings()
                 settings.map(response.result["result"], realm: realm)
                 realm.add(settings, update: true)
@@ -50,8 +51,11 @@ final class AuthSettingsManager {
 
                 let unmanagedSettings = AuthSettings(value: settings)
                 shared.internalSettings = unmanagedSettings
-                ServerManager.updateServerInformation(from: unmanagedSettings)
-                completion(unmanagedSettings)
+                
+                DispatchQueue.main.async {
+                    ServerManager.updateServerInformation(from: unmanagedSettings)
+                    completion(unmanagedSettings)
+                }
             })
         }
     }
