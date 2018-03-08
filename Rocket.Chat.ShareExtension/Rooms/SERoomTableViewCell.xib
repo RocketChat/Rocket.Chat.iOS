@@ -23,7 +23,7 @@
                     <stackView opaque="NO" contentMode="scaleToFill" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="ROx-Th-BWU">
                         <rect key="frame" x="18" y="8" width="357" height="27.5"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjs-6a-i72" customClass="SERoomAvatarView" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sjs-6a-i72" customClass="SEAvatarView" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="27.5" height="27.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

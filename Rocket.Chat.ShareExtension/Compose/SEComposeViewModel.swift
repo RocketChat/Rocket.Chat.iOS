@@ -26,6 +26,17 @@ struct SEComposeViewModel {
 extension SEComposeViewModel {
     init(state: SEState) {
         composeText = state.composeText
-        destinationText = state.currentRoom.name
+
+        let symbol: String
+        switch state.currentRoom.type {
+        case .channel:
+            symbol = "#"
+        case .group:
+            symbol = "#"
+        case .directMessage:
+            symbol = "@"
+        }
+
+        destinationText = "\(symbol)\(state.currentRoom.name)"
     }
 }

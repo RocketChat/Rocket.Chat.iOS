@@ -19,6 +19,15 @@ class SEAvatarView: UIView {
     @IBOutlet weak var initialsLabel: UILabel!
     @IBOutlet weak var imageView: UIImageView!
 
+    var name: String = "" {
+        didSet {
+            if let first = name.first {
+                initialsLabel.text = "\(first)".uppercased()
+                initialsLabel.backgroundColor = UIColor.forName(name)
+            }
+        }
+    }
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -51,5 +60,14 @@ class SEAvatarView: UIView {
         imageView.image = nil
         initialsLabel.backgroundColor = UIColor.clear
         initialsLabel.text = ""
+        initialsLabel.isHidden = false
+        imageView.isHidden = true
+    }
+
+    func setImageUrl(_ url: String) {
+        imageView.sd_setImage(with: URL(string: url)) { [weak self] image, _, _, _ in
+            self?.initialsLabel.isHidden = image != nil
+            self?.imageView.isHidden = image == nil
+        }
     }
 }

@@ -20,37 +20,38 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="open.rocket.chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXB-a1-Ctk">
-                        <rect key="frame" x="74" y="35.5" width="96" height="15"/>
+                        <rect key="frame" x="74.5" y="33.5" width="96" height="15"/>
                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wQE-Mf-ttI">
-                        <rect key="frame" x="18" y="6" width="48" height="48.5"/>
-                        <constraints>
-                            <constraint firstAttribute="width" secondItem="wQE-Mf-ttI" secondAttribute="height" multiplier="1:1" id="F4F-a6-Mg2"/>
-                        </constraints>
-                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rocket.Chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yVe-PV-4Ep">
-                        <rect key="frame" x="74" y="10" width="93" height="21"/>
+                        <rect key="frame" x="74.5" y="12" width="93" height="21"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <nil key="textColor"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5WG-0Z-1kl" customClass="SEAvatarView" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target">
+                        <rect key="frame" x="18" y="6" width="48.5" height="48.5"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="5WG-0Z-1kl" secondAttribute="height" multiplier="1:1" id="VBz-J9-yEf"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="CXB-a1-Ctk" firstAttribute="leading" secondItem="wQE-Mf-ttI" secondAttribute="trailing" constant="8" id="1HM-U3-HgH"/>
-                    <constraint firstAttribute="bottom" secondItem="CXB-a1-Ctk" secondAttribute="bottom" constant="10" id="HHY-K4-e55"/>
-                    <constraint firstAttribute="bottom" secondItem="wQE-Mf-ttI" secondAttribute="bottom" constant="6" id="R9O-98-MGo"/>
-                    <constraint firstItem="yVe-PV-4Ep" firstAttribute="leading" secondItem="wQE-Mf-ttI" secondAttribute="trailing" constant="8" id="SFV-Wm-iZW"/>
-                    <constraint firstItem="wQE-Mf-ttI" firstAttribute="top" secondItem="siZ-qY-8bA" secondAttribute="top" constant="6" id="Wr2-dx-ZFD"/>
-                    <constraint firstItem="yVe-PV-4Ep" firstAttribute="top" secondItem="siZ-qY-8bA" secondAttribute="top" constant="10" id="p9N-uN-p9Q"/>
-                    <constraint firstItem="wQE-Mf-ttI" firstAttribute="leading" secondItem="siZ-qY-8bA" secondAttribute="leading" constant="18" id="vKo-fp-6Q8"/>
+                    <constraint firstAttribute="bottom" secondItem="5WG-0Z-1kl" secondAttribute="bottom" constant="6" id="0Vt-iM-Lpl"/>
+                    <constraint firstItem="5WG-0Z-1kl" firstAttribute="leading" secondItem="siZ-qY-8bA" secondAttribute="leading" constant="18" id="FLy-Ni-h7E"/>
+                    <constraint firstAttribute="bottom" secondItem="CXB-a1-Ctk" secondAttribute="bottom" constant="12" id="HHY-K4-e55"/>
+                    <constraint firstItem="CXB-a1-Ctk" firstAttribute="leading" secondItem="5WG-0Z-1kl" secondAttribute="trailing" constant="8" id="PjL-yl-A5N"/>
+                    <constraint firstItem="5WG-0Z-1kl" firstAttribute="top" secondItem="siZ-qY-8bA" secondAttribute="top" constant="6" id="jPf-sg-VuK"/>
+                    <constraint firstItem="yVe-PV-4Ep" firstAttribute="top" secondItem="siZ-qY-8bA" secondAttribute="top" constant="12" id="p9N-uN-p9Q"/>
+                    <constraint firstItem="yVe-PV-4Ep" firstAttribute="leading" secondItem="5WG-0Z-1kl" secondAttribute="trailing" constant="8" id="rsJ-To-6u6"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>
+                <outlet property="avatarView" destination="5WG-0Z-1kl" id="0oZ-ZA-jFe"/>
                 <outlet property="hostLabel" destination="CXB-a1-Ctk" id="Xtf-OF-ldv"/>
-                <outlet property="iconView" destination="wQE-Mf-ttI" id="JGc-Z6-Cid"/>
                 <outlet property="nameLabel" destination="yVe-PV-4Ep" id="ZHR-FF-s2o"/>
             </connections>
             <point key="canvasLocation" x="169.5" y="173.5"/>

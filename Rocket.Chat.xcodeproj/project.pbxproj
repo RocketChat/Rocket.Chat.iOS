@@ -468,8 +468,8 @@
 		80D0CE6820503C970056B17F /* SERoomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D0CE6720503C970056B17F /* SERoomTableViewCell.xib */; };
 		80D0CE6C205080AA0056B17F /* SERoomCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */; };
 		80D0CE6D205083280056B17F /* Subscription+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDC420485ABB00114F28 /* Subscription+User.swift */; };
-		80D0CE6F20509C100056B17F /* SERoomAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE6E20509C100056B17F /* SERoomAvatarView.swift */; };
-		80D0CE7120509C230056B17F /* SERoomAvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D0CE7020509C230056B17F /* SERoomAvatarView.xib */; };
+		80D0CE6F20509C100056B17F /* SEAvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D0CE6E20509C100056B17F /* SEAvatarView.swift */; };
+		80D0CE7120509C230056B17F /* SEAvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D0CE7020509C230056B17F /* SEAvatarView.xib */; };
 		80D0CE722050BD160056B17F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4192054D1D52F5F1004EEC5F /* UIColorExtension.swift */; };
 		80D0CE732050BE680056B17F /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
 		80D0CE742050BFBE0056B17F /* AuthManager+CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB82048581F00114F28 /* AuthManager+CurrentUser.swift */; };
@@ -1023,8 +1023,8 @@
 		80D0CE6520503C860056B17F /* SERoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomTableViewCell.swift; sourceTree = "<group>"; };
 		80D0CE6720503C970056B17F /* SERoomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SERoomTableViewCell.xib; sourceTree = "<group>"; };
 		80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomCellModel.swift; sourceTree = "<group>"; };
-		80D0CE6E20509C100056B17F /* SERoomAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomAvatarView.swift; sourceTree = "<group>"; };
-		80D0CE7020509C230056B17F /* SERoomAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SERoomAvatarView.xib; sourceTree = "<group>"; };
+		80D0CE6E20509C100056B17F /* SEAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEAvatarView.swift; sourceTree = "<group>"; };
+		80D0CE7020509C230056B17F /* SEAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEAvatarView.xib; sourceTree = "<group>"; };
 		80D955C1202154A300E3F281 /* CASViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CASViewController.swift; path = Controllers/Auth/CASViewController.swift; sourceTree = "<group>"; };
 		80E99F281FD8B2B800B70B59 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
 		80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
@@ -2223,6 +2223,8 @@
 				802A4E102049C7340072CD23 /* SENavigationController.swift */,
 				8076FDEC2049A5F600114F28 /* SECellModel.swift */,
 				80D0CE61205023710056B17F /* SECell.swift */,
+				80D0CE6E20509C100056B17F /* SEAvatarView.swift */,
+				80D0CE7020509C230056B17F /* SEAvatarView.xib */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -2260,8 +2262,6 @@
 				80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */,
 				80D0CE6520503C860056B17F /* SERoomTableViewCell.swift */,
 				80D0CE6720503C970056B17F /* SERoomTableViewCell.xib */,
-				80D0CE6E20509C100056B17F /* SERoomAvatarView.swift */,
-				80D0CE7020509C230056B17F /* SERoomAvatarView.xib */,
 			);
 			path = Rooms;
 			sourceTree = "<group>";
@@ -2799,7 +2799,7 @@
 				80D0CE6820503C970056B17F /* SERoomTableViewCell.xib in Resources */,
 				807FB55E2046E7DD00E21429 /* Main.storyboard in Resources */,
 				807FB56F20472B6A00E21429 /* Localizable.strings in Resources */,
-				80D0CE7120509C230056B17F /* SERoomAvatarView.xib in Resources */,
+				80D0CE7120509C230056B17F /* SEAvatarView.xib in Resources */,
 				80D0CE5C204FFAA50056B17F /* SEServerTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3565,7 +3565,7 @@
 				8076FDED2049A5F600114F28 /* SECellModel.swift in Sources */,
 				8076FDCD204863FC00114F28 /* MessageURL.swift in Sources */,
 				80977ABF204F36F200C41435 /* SESearchState.swift in Sources */,
-				80D0CE6F20509C100056B17F /* SERoomAvatarView.swift in Sources */,
+				80D0CE6F20509C100056B17F /* SEAvatarView.swift in Sources */,
 				8076FD9D2048510100114F28 /* AuthSettings.swift in Sources */,
 				8076FD9A20484A6000114F28 /* SEStore.swift in Sources */,
 				80D0CE722050BD160056B17F /* UIColorExtension.swift in Sources */,

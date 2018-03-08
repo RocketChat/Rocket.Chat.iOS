@@ -10,13 +10,14 @@ import UIKit
 import SDWebImage
 
 class SEServerTableViewCell: UITableViewCell, SECell {
-    @IBOutlet weak var iconView: UIImageView!
+    @IBOutlet weak var avatarView: SEAvatarView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var hostLabel: UILabel!
 
     var cellModel = SEServerCellModel(iconUrl: "", name: "", host: "", selected: false) {
         didSet {
-            iconView.sd_setImage(with: URL(string: cellModel.iconUrl), completed: nil)
+            avatarView.name = cellModel.name
+            avatarView.setImageUrl(cellModel.iconUrl)
             nameLabel.text = cellModel.name
             hostLabel.text = cellModel.host
             accessoryType = cellModel.selected ? .checkmark : .none
