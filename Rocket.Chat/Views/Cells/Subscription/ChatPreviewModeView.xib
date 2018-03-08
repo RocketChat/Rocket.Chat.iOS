@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -63,14 +63,16 @@
                 <constraint firstAttribute="trailing" secondItem="4KQ-U2-uYG" secondAttribute="trailing" constant="10" id="ddX-vu-gcU"/>
                 <constraint firstAttribute="trailing" secondItem="lWX-ee-yg5" secondAttribute="trailing" constant="10" id="j93-uT-D1R"/>
                 <constraint firstItem="ZQ7-XJ-wRD" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="lBh-Lv-dE0"/>
+                <constraint firstItem="ZQ7-XJ-wRD" firstAttribute="centerY" secondItem="4KQ-U2-uYG" secondAttribute="centerY" id="nos-Pz-z3i"/>
                 <constraint firstItem="lWX-ee-yg5" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="6" id="rLV-4I-ia8"/>
-                <constraint firstAttribute="bottom" secondItem="ZQ7-XJ-wRD" secondAttribute="bottom" constant="22" id="voc-iO-tGd"/>
+                <constraint firstItem="4KQ-U2-uYG" firstAttribute="top" secondItem="lWX-ee-yg5" secondAttribute="bottom" constant="8" id="srq-QQ-Hm3"/>
                 <constraint firstAttribute="bottom" secondItem="4KQ-U2-uYG" secondAttribute="bottom" constant="10" id="y2R-bk-Z3r"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
                 <outlet property="activityIndicator" destination="ZQ7-XJ-wRD" id="w4m-lO-Oah"/>
+                <outlet property="bottomConstraint" destination="y2R-bk-Z3r" id="3fb-qo-WCS"/>
                 <outlet property="buttonJoin" destination="4KQ-U2-uYG" id="5YM-Hf-Kyb"/>
                 <outlet property="labelTitle" destination="lWX-ee-yg5" id="jyd-at-M3c"/>
             </connections>
