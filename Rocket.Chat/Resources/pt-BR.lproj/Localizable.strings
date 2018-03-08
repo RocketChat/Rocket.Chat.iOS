@@ -248,8 +248,10 @@
 "myaccount.settings.language.message" = "Você mudou o idioma. Você precisa fechar o aplicativo e abrir novamente para que as alterações tenham efeito.";
 
 // Update Profile
-"myaccount.settings.profile.title" = "Editar Perfil"; 
+"myaccount.settings.profile.title" = "Perfil";
+"myaccount.settings.editing_profile.title" = "Editar Perfi";
 "myaccount.settings.profile.actions.save" = "Salvar";
+"myaccount.settings.profile.actions.edit" = "Editar";
 "myaccount.settings.profile.section.profile" = "Perfil";
 "myaccount.settings.profile.section.password" = "Senha";
 "myaccount.settings.profile.name_placeholder" = "Nome";

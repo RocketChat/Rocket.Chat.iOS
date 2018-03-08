@@ -13,8 +13,16 @@ final class EditProfileViewModel {
         return localized("myaccount.settings.profile.title")
     }
 
+    internal var editingTitle: String {
+        return localized("myaccount.settings.editing_profile.title")
+    }
+
     internal var saveButtonTitle: String {
         return localized("myaccount.settings.profile.actions.save")
+    }
+
+    internal var editButtonTitle: String {
+        return localized("myaccount.settings.profile.actions.edit")
     }
 
     internal var profileSectionTitle: String {

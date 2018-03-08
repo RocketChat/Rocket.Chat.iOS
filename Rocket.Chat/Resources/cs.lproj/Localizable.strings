@@ -248,8 +248,10 @@
 "myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+  before the new settings will take effect."; // TODO
 
 // Update Profile
-"myaccount.settings.profile.title" = "Edit Profile"; // TODO
+"myaccount.settings.profile.title" = "Profile"; // TODO
+"myaccount.settings.editing_profile.title" = "Edit Profile"; // TODO
 "myaccount.settings.profile.actions.save" = "Save"; // TODO
+"myaccount.settings.profile.actions.edit" = "Edit"; // TODO
 "myaccount.settings.profile.section.profile" = "Profile"; // TODO
 "myaccount.settings.profile.section.password" = "Password"; // TODO
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO

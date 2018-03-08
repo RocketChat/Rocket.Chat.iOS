@@ -40,12 +40,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
     }
 
-    @IBOutlet weak var saveButton: UIBarButtonItem! {
-        didSet {
-            saveButton.title = viewModel.saveButtonTitle
-        }
-    }
-
     @IBOutlet weak var avatarButton: UIButton!
 
     var avatarView: AvatarView = {
@@ -64,7 +58,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         return activityIndicator
     }()
 
-    var backButton: UIBarButtonItem?
+    var editButton: UIBarButtonItem?
+    var saveButton: UIBarButtonItem?
     var cancelButton: UIBarButtonItem?
 
     let api = API.current()
@@ -109,20 +104,15 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         tableView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(hideKeyboard)))
 
-        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(hideKeyboard))
-        navigationItem.leftItemsSupplementBackButton = true
+        editButton = UIBarButtonItem(title: viewModel.editButtonTitle, style: .plain, target: self, action: #selector(beginEditing))
+        saveButton = UIBarButtonItem(title: viewModel.saveButtonTitle, style: .done, target: self, action: #selector(saveProfile(_:)))
+        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(endEditing(shouldKeepUnsavedChanges:)))
+        navigationItem.rightBarButtonItem = editButton
         navigationItem.title = viewModel.title
 
+        disableUserInteraction()
         setupAvatarButton()
         fetchUserData()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-
-        if isMovingFromParentViewController && hasUnsavedChanges {
-            Alert(key: "alert.discarding_changes").present()
-        }
     }
 
     // MARK: Setup
@@ -167,13 +157,48 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
     }
 
+    // MARK: State Management
+
+    @objc func beginEditing() {
+        navigationItem.title = viewModel.editingTitle
+        navigationItem.rightBarButtonItem = saveButton
+        navigationItem.hidesBackButton = true
+        navigationItem.leftBarButtonItem = cancelButton
+        enableUserInteraction()
+    }
+
+    @objc func endEditing(shouldKeepUnsavedChanges: Bool = false) {
+        if !shouldKeepUnsavedChanges {
+            bindUserData()
+        }
+
+        navigationItem.title = viewModel.title
+        navigationItem.hidesBackButton = false
+        navigationItem.leftBarButtonItem = nil
+        navigationItem.rightBarButtonItem = editButton
+        disableUserInteraction()
+    }
+
+    func enableUserInteraction() {
+        avatarButton.isEnabled = true
+        name.isEnabled = true
+        username.isEnabled = true
+        email.isEnabled = true
+        name.becomeFirstResponder()
+    }
+
+    func disableUserInteraction() {
+        hideKeyboard()
+        avatarButton.isEnabled = false
+        name.isEnabled = false
+        username.isEnabled = false
+        email.isEnabled = false
+    }
+
     // MARK: Actions
 
     @IBAction func saveProfile(_ sender: UIBarButtonItem) {
-        navigationItem.hidesBackButton = true
-        navigationItem.leftBarButtonItem = cancelButton
-        return
-//        hideKeyboard()
+        hideKeyboard()
 
         guard
             let user = user,
@@ -206,7 +231,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             let client = API.current()?.client(UploadClient.self)
             client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] in
                 self?.isUploadingAvatar = false
-                self?.stopLoading(sender: sender)
+                self?.stopLoading()
                 self?.avatarView.avatarPlaceholder = self?.avatarView.imageView.image
                 self?.avatarView.removeCacheForCurrentURL(forceUpdate: true)
             })
@@ -214,7 +239,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         let stopLoading = { [weak self] in
             self?.isUpdatingUser = false
-            self?.stopLoading(sender: sender)
+            self?.stopLoading()
         }
 
         isUpdatingUser = true
@@ -232,6 +257,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     @IBAction func didPressAvatarButton(_ sender: UIButton) {
+        hideKeyboard()
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -250,11 +276,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     @objc func hideKeyboard() {
-        navigationItem.hidesBackButton = false
-        var items = navigationItem.leftBarButtonItems
-        items?.remove(object: cancelButton!)
-        navigationItem.setLeftBarButtonItems(items, animated: true)
-//        view.endEditing(true)
+        view.endEditing(true)
     }
 
     func validatePasswordInput(shouldAlertUser: Bool = true) -> (password: String?, invalidInput: Bool) {
@@ -295,14 +317,16 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     func startLoading() {
         DispatchQueue.main.async {
+            self.navigationItem.leftBarButtonItem?.isEnabled = false
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
         }
     }
 
-    func stopLoading(sender: UIBarButtonItem) {
+    func stopLoading() {
         if !isUpdatingUser, !isUploadingAvatar {
             DispatchQueue.main.async { [weak self] in
-                self?.navigationItem.rightBarButtonItem = sender
+                self?.navigationItem.leftBarButtonItem?.isEnabled = true
+                self?.endEditing(shouldKeepUnsavedChanges: true)
             }
         }
     }
@@ -348,7 +372,6 @@ extension EditProfileTableViewController: UIImagePickerControllerDelegate {
             avatarView.imageView.image = image
         }
 
-        hasUnsavedNewAvatar = true
         avatarFile = file
 
         dismiss(animated: true, completion: nil)

@@ -369,20 +369,13 @@
                             <outlet property="delegate" destination="MdX-88-2ZI" id="1C5-AO-Chi"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Edit Profile" id="PfG-WE-aXd">
-                        <barButtonItem key="rightBarButtonItem" title="Save" style="done" id="bkN-sd-siR">
-                            <connections>
-                                <action selector="saveProfile:" destination="MdX-88-2ZI" id="hJd-KA-S8n"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Edit Profile" id="PfG-WE-aXd"/>
                     <connections>
                         <outlet property="avatarButton" destination="Nkg-CL-28B" id="SzP-vj-81c"/>
                         <outlet property="email" destination="8e8-Ux-MZf" id="VfH-Lj-PNU"/>
                         <outlet property="name" destination="yDN-bF-Vmu" id="2eI-KR-Eex"/>
                         <outlet property="newPassword" destination="uVe-0p-QKg" id="84R-fe-l7h"/>
                         <outlet property="passwordConfirmation" destination="DX6-bF-5hx" id="Czu-Ne-How"/>
-                        <outlet property="saveButton" destination="bkN-sd-siR" id="42w-9S-DSd"/>
                         <outlet property="username" destination="wls-OZ-1ZV" id="AgF-EO-95F"/>
                     </connections>
                 </tableViewController>
