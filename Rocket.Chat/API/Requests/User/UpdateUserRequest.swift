@@ -26,7 +26,7 @@ class UpdateUserRequest: APIRequest {
     }
 
     func body() -> Data? {
-        var body = JSON(["userId": userId, "data": []])
+        var body = JSON(["userId": userId, "data": [:]])
 
         if let user = user, let name = user.name, let username = user.username, let email = user.emails.first?.email,
                 !name.isEmpty, !username.isEmpty, !email.isEmpty {
