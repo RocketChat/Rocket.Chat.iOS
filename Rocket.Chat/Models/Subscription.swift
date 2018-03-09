@@ -188,3 +188,15 @@ extension Subscription {
         return lastSeenSubscription(auth: auth)
     }
 }
+
+// MARK: Failed Messages
+extension Subscription {
+    func setTemporaryMessagesFailed() {
+        try? realm?.write {
+            messages.filter("temporary = true").forEach {
+                $0.temporary = false
+                $0.failed = true
+            }
+        }
+    }
+}

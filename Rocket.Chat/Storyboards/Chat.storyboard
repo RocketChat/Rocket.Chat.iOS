@@ -10,6 +10,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Drawing-->
+        <scene sceneID="3yF-79-9Jb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Drawing" id="C4t-wc-v6p" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OI3-Q7-WoS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2250" y="-2"/>
+        </scene>
         <!--Rocket.Chat-->
         <scene sceneID="sPN-TU-rHY">
             <objects>
@@ -56,6 +64,7 @@
                         <outlet property="activityIndicatorContainer" destination="fbt-TF-z7U" id="Nmz-IG-SvM"/>
                         <outlet property="buttonScrollToBottom" destination="Stw-bA-gXV" id="u7H-cM-6TS"/>
                         <segue destination="19H-wD-eac" kind="presentation" identifier="Channel Info" modalPresentationStyle="formSheet" id="YRr-aS-4dz"/>
+                        <segue destination="C4t-wc-v6p" kind="presentation" identifier="Drawing" id="avr-qh-WWZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IA8-7w-0ga" userLabel="First Responder" sceneMemberID="firstResponder"/>
