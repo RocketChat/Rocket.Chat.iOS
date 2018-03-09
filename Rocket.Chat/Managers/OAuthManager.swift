@@ -103,7 +103,7 @@ class OAuthManager {
             responseType: "code"
         )
     }
-    
+
     static func oauth1Swift(for loginService: LoginService) -> OAuth1Swift? {
         guard
             let clientId = loginService.clientId,
