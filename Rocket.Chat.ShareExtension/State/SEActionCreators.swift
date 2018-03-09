@@ -45,10 +45,17 @@ func selectServer(store: SEStore, serverIndex: Int) {
 func submitContent(store: SEStore) -> SEAction {
     let server = store.state.servers[store.state.selectedServerIndex]
 
+    let text: String
+    if case let .text(_text) = store.state.content {
+        text = _text
+    } else {
+        text = ""
+    }
+
     let request = SendMessageRequest(
         id: "ios_se_\(String.random(10))",
         roomId: store.state.currentRoom.rid,
-        text: store.state.composeText
+        text: text
     )
 
     let api = API(host: "https://\(server.host)", version: Version(0, 60, 0))

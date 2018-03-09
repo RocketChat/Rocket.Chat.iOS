@@ -24,12 +24,16 @@ final class SENavigationController: UINavigationController {
 
         itemProvider.loadItem(forTypeIdentifier: kUTTypeText as String, options: nil) { text, error in
             guard error == nil, let text = text as? String else { return }
-            store.dispatch(.setComposeText(text))
+            store.dispatch(.setContent(.text(text)))
         }
 
         itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
             guard error == nil, let url = url as? URL else { return }
-            store.dispatch(.setComposeText(url.absoluteString))
+            store.dispatch(.setContent(.text(url.absoluteString)))
+        }
+
+        if itemProvider.hasItemConformingToTypeIdentifier("public.image") {
+            store.dispatch(.setContent(.image(Data())))
         }
     }
 

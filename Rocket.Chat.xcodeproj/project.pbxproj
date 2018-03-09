@@ -349,9 +349,9 @@
 		804273E0204EBD51006DF420 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F8681FD6B59900EE1A4E /* Version.swift */; };
 		804273E1204EBD51006DF420 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D535ED1F708628006625D2 /* APIRequest.swift */; };
 		804273E2204EBD51006DF420 /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15C83851F70991F001AB155 /* APIResult.swift */; };
-		805C87D72051E5C700AD0EB0 /* SEComposeImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 805C87D62051E5C700AD0EB0 /* SEComposeImageView.xib */; };
-		805C87D92052AA1900AD0EB0 /* SEComposeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87D82052AA1900AD0EB0 /* SEComposeImageView.swift */; };
+		805C87D92052AA1900AD0EB0 /* SEComposeImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87D82052AA1900AD0EB0 /* SEComposeImageViewController.swift */; };
 		805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */; };
+		805C87DF2052C7E200AD0EB0 /* SEComposeTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87DE2052C7E200AD0EB0 /* SEComposeTextViewController.swift */; };
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
 		805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC361FFC08870033151B /* CustomEmoji.swift */; };
 		805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC381FFE54820033151B /* CustomEmojiSpec.swift */; };
@@ -367,6 +367,7 @@
 		8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D26D1FFF876D00C75926 /* Emoji.swift */; };
 		806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */; };
 		806C59A51FBB2F4C00C32D0A /* PostMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */; };
+		806F44862052D971000C4039 /* SEComposeContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806F44852052D971000C4039 /* SEComposeContainerViewController.swift */; };
 		8073719A1F94E83600D53ADF /* SocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371991F94E83600D53ADF /* SocketError.swift */; };
 		8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719B1F963FA400D53ADF /* APITestCase.swift */; };
 		8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719D1F9688B200D53ADF /* LoginServiceManager.swift */; };
@@ -920,9 +921,9 @@
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
 		8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCEmojiKitLocalizable.swift; sourceTree = "<group>"; };
 		8041C047202BA233007E21FA /* RCEmojiKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RCEmojiKit.xcassets; sourceTree = "<group>"; };
-		805C87D62051E5C700AD0EB0 /* SEComposeImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEComposeImageView.xib; sourceTree = "<group>"; };
-		805C87D82052AA1900AD0EB0 /* SEComposeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeImageView.swift; sourceTree = "<group>"; };
+		805C87D82052AA1900AD0EB0 /* SEComposeImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeImageViewController.swift; sourceTree = "<group>"; };
 		805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEXibInitializable.swift; sourceTree = "<group>"; };
+		805C87DE2052C7E200AD0EB0 /* SEComposeTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeTextViewController.swift; sourceTree = "<group>"; };
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
 		805DEC361FFC08870033151B /* CustomEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmoji.swift; sourceTree = "<group>"; };
 		805DEC381FFE54820033151B /* CustomEmojiSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiSpec.swift; sourceTree = "<group>"; };
@@ -938,6 +939,7 @@
 		8069D26D1FFF876D00C75926 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMessageRequest.swift; sourceTree = "<group>"; };
 		806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMessageRequestSpec.swift; sourceTree = "<group>"; };
+		806F44852052D971000C4039 /* SEComposeContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeContainerViewController.swift; sourceTree = "<group>"; };
 		807371991F94E83600D53ADF /* SocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocketError.swift; path = Managers/Socket/Response/SocketError.swift; sourceTree = "<group>"; };
 		8073719B1F963FA400D53ADF /* APITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITestCase.swift; sourceTree = "<group>"; };
 		8073719D1F9688B200D53ADF /* LoginServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceManager.swift; sourceTree = "<group>"; };
@@ -2218,8 +2220,9 @@
 			children = (
 				80977AC3204FEEA700C41435 /* SEComposeViewModel.swift */,
 				8076FDE12048A7C500114F28 /* SEComposeViewController.swift */,
-				805C87D82052AA1900AD0EB0 /* SEComposeImageView.swift */,
-				805C87D62051E5C700AD0EB0 /* SEComposeImageView.xib */,
+				806F44852052D971000C4039 /* SEComposeContainerViewController.swift */,
+				805C87DE2052C7E200AD0EB0 /* SEComposeTextViewController.swift */,
+				805C87D82052AA1900AD0EB0 /* SEComposeImageViewController.swift */,
 			);
 			path = Compose;
 			sourceTree = "<group>";
@@ -2806,7 +2809,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				80D0CE6820503C970056B17F /* SERoomTableViewCell.xib in Resources */,
-				805C87D72051E5C700AD0EB0 /* SEComposeImageView.xib in Resources */,
 				807FB55E2046E7DD00E21429 /* Main.storyboard in Resources */,
 				807FB56F20472B6A00E21429 /* Localizable.strings in Resources */,
 				80D0CE7120509C230056B17F /* SEAvatarView.xib in Resources */,
@@ -3557,9 +3559,10 @@
 				80977ABB204EFC0F00C41435 /* SESceneTransition.swift in Sources */,
 				804273E0204EBD51006DF420 /* Version.swift in Sources */,
 				802A4E112049C7340072CD23 /* SENavigationController.swift in Sources */,
-				805C87D92052AA1900AD0EB0 /* SEComposeImageView.swift in Sources */,
+				805C87D92052AA1900AD0EB0 /* SEComposeImageViewController.swift in Sources */,
 				8076FDA62048536800114F28 /* BaseModel.swift in Sources */,
 				804273DF204EBD51006DF420 /* APIError.swift in Sources */,
+				805C87DF2052C7E200AD0EB0 /* SEComposeTextViewController.swift in Sources */,
 				80D0CE752050BFD20056B17F /* Auth+User.swift in Sources */,
 				800640F72049BA25006D990F /* SEScene.swift in Sources */,
 				8076FDBC2048596100114F28 /* URLExtension.swift in Sources */,
@@ -3568,6 +3571,7 @@
 				8076FDB3204856E200114F28 /* Auth.swift in Sources */,
 				807FB57A20472E0400E21429 /* Localization.swift in Sources */,
 				8076FDC9204863AF00114F28 /* Mention.swift in Sources */,
+				806F44862052D971000C4039 /* SEComposeContainerViewController.swift in Sources */,
 				8076FDD22048648D00114F28 /* Email.swift in Sources */,
 				8076FDE82048D3AD00114F28 /* UserDefaults+Group.swift in Sources */,
 				80977AB0204EE21F00C41435 /* HTTPMethod.swift in Sources */,

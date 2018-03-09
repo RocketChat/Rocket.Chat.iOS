@@ -8,6 +8,11 @@
 
 import Foundation
 
+enum SEContent {
+    case text(String)
+    case image(Data)
+}
+
 struct SEServer {
     let name: String
     let host: String
@@ -17,7 +22,7 @@ struct SEServer {
 }
 
 enum SEAction {
-    case setComposeText(String)
+    case setContent(SEContent)
     case setServers([SEServer])
     case selectServerIndex(Int)
     case setRooms([Subscription])
@@ -34,7 +39,7 @@ struct SEState {
     var rooms: [Subscription] = []
     var currentRoom = Subscription()
     var searchRooms: SESearchState = .none
-    var composeText = ""
+    var content: SEContent = .text("")
     var navigation = SENavigation(scenes: [], sceneTransition: .none)
     var submittingContent: Bool = false
 

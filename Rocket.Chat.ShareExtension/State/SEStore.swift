@@ -18,8 +18,8 @@ final class SEStore {
 
     func dispatch(_ action: SEAction) {
         switch action {
-        case .setComposeText(let text):
-            state.composeText = text
+        case .setContent(let content):
+            state.content = content
         case .setServers(let servers):
             state.servers = servers
         case .selectServerIndex(let index):

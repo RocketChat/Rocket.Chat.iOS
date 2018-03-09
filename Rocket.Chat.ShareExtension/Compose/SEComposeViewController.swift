@@ -13,17 +13,12 @@ class SEComposeViewController: SEViewController {
     @IBOutlet weak var destinationContainerView: UIView!
     @IBOutlet weak var destinationLabel: UILabel!
     @IBOutlet weak var destinationToLabel: UILabel!
-    @IBOutlet weak var textView: UITextView! {
-        didSet {
-            textView.delegate = self
-        }
-    }
+    @IBOutlet weak var containerView: UIView!
 
-    var viewModel = SEComposeViewModel(composeText: "", destinationText: "", doneButtonEnabled: false) {
+    var viewModel = SEComposeViewModel(destinationText: "", doneButtonEnabled: false) {
         didSet {
             title = viewModel.title
             destinationLabel.text = viewModel.destinationText
-            textView.text = viewModel.composeText
             doneButton.isEnabled = viewModel.doneButtonEnabled
         }
     }
@@ -34,11 +29,5 @@ class SEComposeViewController: SEViewController {
 
     @IBAction func doneButtonPressed(_ sender: Any) {
         store.dispatch(submitContent)
-    }
-}
-
-extension SEComposeViewController: UITextViewDelegate {
-    func textViewDidChange(_ textView: UITextView) {
-        store.dispatch(.setComposeText(textView.text))
     }
 }

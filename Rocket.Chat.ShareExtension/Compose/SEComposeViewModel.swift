@@ -9,7 +9,6 @@
 import Foundation
 
 struct SEComposeViewModel {
-    let composeText: String
     let destinationText: String
     let doneButtonEnabled: Bool
 
@@ -26,7 +25,6 @@ struct SEComposeViewModel {
 
 extension SEComposeViewModel {
     init(state: SEState) {
-        composeText = state.composeText
         doneButtonEnabled = !state.submittingContent
 
         let symbol: String
