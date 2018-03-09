@@ -40,6 +40,8 @@ class LoginService: BaseModel {
     @objc dynamic var custom = false
     @objc dynamic var serverUrl: String?
     @objc dynamic var tokenPath: String?
+    @objc dynamic var requestTokenUrl: String?
+    @objc dynamic var consumerSecret: String?
     @objc dynamic var authorizePath: String?
     @objc dynamic var scope: String?
     @objc dynamic var buttonLabelText: String?

@@ -103,4 +103,23 @@ class OAuthManager {
             responseType: "code"
         )
     }
+    
+    static func oauth1Swift(for loginService: LoginService) -> OAuth1Swift? {
+        guard
+            let clientId = loginService.clientId,
+            let consumerSecret = loginService.consumerSecret,
+            let requestTokenUrl = loginService.requestTokenUrl,
+            let authorizeUrl = loginService.authorizeUrl,
+            let accessTokenUrl = loginService.accessTokenUrl
+        else {
+                return nil
+        }
+        return OAuth1Swift(
+            consumerKey: clientId,
+            consumerSecret: consumerSecret,
+            requestTokenUrl: requestTokenUrl,
+            authorizeUrl: authorizeUrl,
+            accessTokenUrl: accessTokenUrl
+        )
+    }
 }

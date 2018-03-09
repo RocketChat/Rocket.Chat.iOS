@@ -14,6 +14,8 @@ extension LoginService: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
         service = values["service"].stringValue
         clientId = values["clientId"].string ?? values["appId"].string ?? values["consumerKey"].string
+        consumerSecret = values["consumerSecret"].string
+        requestTokenUrl = values["requestTokenUrl"].stringValue
         custom = values["custom"].boolValue
         serverUrl = values["serverURL"].stringValue
         tokenPath = values["tokenPath"].stringValue
@@ -116,10 +118,12 @@ extension LoginService: ModelMappeable {
         scope = ""
 
         serverUrl = "https://api.twitter.com"
-        tokenPath = "/oauth2/token"
+        requestTokenUrl = "/oauth/request_token"
+        tokenPath = "/oauth/access_token"
         authorizePath = "/oauth/authorize"
         buttonLabelText = "twitter"
         buttonLabelColor = "#ffffff"
         buttonColor = "#00aced"
+        callbackPath = "twitter?close"
     }
 }
