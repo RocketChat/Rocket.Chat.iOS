@@ -483,6 +483,8 @@
 		80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */; };
 		80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */; };
 		80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */; };
+		80FA9066205313E20069038F /* SEContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA9065205313E20069038F /* SEContent.swift */; };
+		80FA9068205314040069038F /* SEServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA9067205314040069038F /* SEServer.swift */; };
 		890DA8AE1F942A35007C022B /* SubscriptionCreateRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DA8AD1F942A35007C022B /* SubscriptionCreateRequestSpec.swift */; };
 		897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897083CE1F8CF08100233561 /* CheckTableViewCell.swift */; };
 		897083D41F8CF08100233561 /* CheckTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897083CF1F8CF08100233561 /* CheckTableViewCell.xib */; };
@@ -1038,6 +1040,8 @@
 		80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
 		80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensionsSpec.swift; sourceTree = "<group>"; };
 		80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+CustomEmojis.swift"; sourceTree = "<group>"; };
+		80FA9065205313E20069038F /* SEContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEContent.swift; sourceTree = "<group>"; };
+		80FA9067205314040069038F /* SEServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServer.swift; sourceTree = "<group>"; };
 		81DE5CC08EFE20733A40A51E /* Pods-Rocket.Chat.ShareExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.ShareExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.ShareExtension/Pods-Rocket.Chat.ShareExtension.release.xcconfig"; sourceTree = "<group>"; };
 		848088BA204370E8005022E8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		848088BB204370E8005022E8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2308,6 +2312,7 @@
 				8076FD9920484A6000114F28 /* SEStore.swift */,
 				80977ABE204F36F200C41435 /* SESearchState.swift */,
 				80977AB7204EFBBB00C41435 /* Navigation */,
+				80FA9064205313D10069038F /* Resources */,
 			);
 			path = State;
 			sourceTree = "<group>";
@@ -2371,6 +2376,15 @@
 				80AE253F203E5A3000DC2867 /* SubscriptionExtensionsSpec.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		80FA9064205313D10069038F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				80FA9065205313E20069038F /* SEContent.swift */,
+				80FA9067205314040069038F /* SEServer.swift */,
+			);
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		897083CC1F8CF08100233561 /* Form */ = {
@@ -3557,6 +3571,7 @@
 				8076FDA72048538500114F28 /* Realm+Shared.swift in Sources */,
 				80977AB3204EE21F00C41435 /* UploadRequest.swift in Sources */,
 				80977ABB204EFC0F00C41435 /* SESceneTransition.swift in Sources */,
+				80FA9066205313E20069038F /* SEContent.swift in Sources */,
 				804273E0204EBD51006DF420 /* Version.swift in Sources */,
 				802A4E112049C7340072CD23 /* SENavigationController.swift in Sources */,
 				805C87D92052AA1900AD0EB0 /* SEComposeImageViewController.swift in Sources */,
@@ -3591,6 +3606,7 @@
 				8076FDCE2048642400114F28 /* User.swift in Sources */,
 				804273DD204EBD51006DF420 /* API.swift in Sources */,
 				80D0CE742050BFBE0056B17F /* AuthManager+CurrentUser.swift in Sources */,
+				80FA9068205314040069038F /* SEServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

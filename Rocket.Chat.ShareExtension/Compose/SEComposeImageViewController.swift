@@ -9,24 +9,45 @@
 import UIKit
 
 struct SEComposeImageViewModel {
-    var titleTextFieldPlaceHhlder {
+    let image: UIImage
+
+    var titleTextFieldPlaceholder: String {
         return localized("compose.image.title.placeholder")
     }
 
-    var descriptionTextFieldPlaceholder {
+    var descriptionTextFieldPlaceholder: String {
         return localized("compose.image.description.placeholder")
     }
 }
 
-class SEComposeImageViewController: SEViewController {
-    @IBOutlet weak var titleTextField: UITextField! {
-        didSet {
+extension SEComposeImageViewModel {
+    init(state: SEState) {
+        if case let .image(image) = state.content {
+            self.image = image
+        } else {
+            self.image = UIImage()
+        }
+    }
+}
 
+class SEComposeImageViewController: SEViewController {
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var descriptionTextField: UITextField!
+
+    var viewModel = SEComposeImageViewModel(image: UIImage()) {
+        didSet {
+            titleTextField.placeholder = viewModel.titleTextFieldPlaceholder
+            descriptionTextField.placeholder = viewModel.descriptionTextFieldPlaceholder
+            imageView.image = viewModel.image
         }
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 
-    @IBOutlet weak var descriptionTextField: UITextField!
-
-
+    override func stateUpdated(_ state: SEState) {
+        viewModel = SEComposeImageViewModel(state: state)
+    }
 }

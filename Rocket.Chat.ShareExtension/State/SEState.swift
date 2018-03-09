@@ -8,19 +8,6 @@
 
 import Foundation
 
-enum SEContent {
-    case text(String)
-    case image(Data)
-}
-
-struct SEServer {
-    let name: String
-    let host: String
-    let userId: String
-    let token: String
-    let iconUrl: String
-}
-
 enum SEAction {
     case setContent(SEContent)
     case setServers([SEServer])

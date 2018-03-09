@@ -32,8 +32,16 @@ final class SENavigationController: UINavigationController {
             store.dispatch(.setContent(.text(url.absoluteString)))
         }
 
-        if itemProvider.hasItemConformingToTypeIdentifier("public.image") {
-            store.dispatch(.setContent(.image(Data())))
+        if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
+            itemProvider.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { item, _ in
+                if let image = item as? UIImage {
+                    store.dispatch(.setContent(.image(image)))
+                }
+
+                if let url = item as? URL, let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                    store.dispatch(.setContent(.image(image)))
+                }
+            })
         }
     }
 
