@@ -12,4 +12,3 @@ enum SEContent {
     case text(String)
     case image(UIImage)
 }
-
