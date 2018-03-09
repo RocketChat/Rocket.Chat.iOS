@@ -10,16 +10,9 @@ import Foundation
 import SDWebImage
 
 extension NSAttributedString {
-    func applyingCustomEmojis(_ emojis: [String : Emoji]) -> NSAttributedString {
+    func applyingCustomEmojis(_ emojis: [String: Emoji]) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(attributedString: self)
 
-//        return emojis.reduce(mutableSelf) { attributedString, emoji in
-//            guard case let .custom(imageUrl) = emoji.type else { return attributedString }
-//
-//            let alternates = emoji.alternates.filter { !$0.isEmpty }
-//
-//            let regexPattern = ([emoji.shortname] + alternates).flatMap { $0.escapingRegex() }.reduce("") { $0.isEmpty ? ":\($1):" : "\($0)|:\($1):" }
-            
             let regexPattern = ":\\w+:"
 
             guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }

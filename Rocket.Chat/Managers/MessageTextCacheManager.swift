@@ -31,7 +31,7 @@ class MessageTextCacheManager {
         let key = cachedKey(for: identifier)
 
         let text = NSMutableAttributedString(attributedString:
-            NSAttributedString(string: message.textNormalized()).applyingCustomEmojis(CustomEmoji.emojiRegex())
+            NSAttributedString(string: message.textNormalized()).applyingCustomEmojis(CustomEmoji.emojiStrings())
         )
 
         if message.isSystemMessage() {

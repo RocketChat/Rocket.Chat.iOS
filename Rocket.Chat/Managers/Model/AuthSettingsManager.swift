@@ -51,7 +51,7 @@ final class AuthSettingsManager {
 
                 let unmanagedSettings = AuthSettings(value: settings)
                 shared.internalSettings = unmanagedSettings
-                
+
                 DispatchQueue.main.async {
                     ServerManager.updateServerInformation(from: unmanagedSettings)
                     completion(unmanagedSettings)

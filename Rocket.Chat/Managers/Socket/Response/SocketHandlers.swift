@@ -21,7 +21,7 @@ extension SocketManager {
             guard let message = result.msg else {
                 return Log.debug("Msg is invalid: \(result.result)")
             }
-            
+
             DispatchQueue.main.async {
                 switch message {
                 case .connected:
@@ -35,7 +35,7 @@ extension SocketManager {
                 case .error:
                     self.handleError(result, socket: socket)
                 }
-                
+
                 // Call completion block
                 guard let identifier = result.id,
                     let completion = self.queue[identifier] else { return }
@@ -85,7 +85,7 @@ extension SocketManager {
                 guard let msg = result.msg else { return }
                 guard let identifier = result.result["id"].string else { return }
                 let fields = result.result["fields"]
-                
+
                 DispatchQueue.main.async {
                     switch collection {
                     case "users":
