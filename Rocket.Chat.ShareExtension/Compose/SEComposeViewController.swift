@@ -9,6 +9,7 @@
 import UIKit
 
 class SEComposeViewController: SEViewController {
+    @IBOutlet weak var doneButton: UIBarButtonItem!
     @IBOutlet weak var destinationContainerView: UIView!
     @IBOutlet weak var destinationLabel: UILabel!
     @IBOutlet weak var destinationToLabel: UILabel!
@@ -18,11 +19,12 @@ class SEComposeViewController: SEViewController {
         }
     }
 
-    var viewModel = SEComposeViewModel(composeText: "", destinationText: "") {
+    var viewModel = SEComposeViewModel(composeText: "", destinationText: "", doneButtonEnabled: false) {
         didSet {
             title = viewModel.title
             destinationLabel.text = viewModel.destinationText
             textView.text = viewModel.composeText
+            doneButton.isEnabled = viewModel.doneButtonEnabled
         }
     }
 
@@ -31,26 +33,7 @@ class SEComposeViewController: SEViewController {
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
-        // TODO: ActionCreator + Loading + Error Handling
-        let server = store.state.servers[store.state.selectedServerIndex]
-
-        let request = SendMessageRequest(
-            id: "ios_se_\(String.random(10))",
-            roomId: store.state.currentRoom.rid,
-            text: store.state.composeText
-        )
-
-        let api = API(host: "https://\(server.host)", version: Version(0, 60, 0))
-        api?.userId = server.userId
-        api?.authToken = server.token
-
-        api?.fetch(request, succeeded: { _ in
-            DispatchQueue.main.async {
-                store.dispatch(.makeSceneTransition(.finish))
-            }
-        }, errored: { _ in
-
-        })
+        store.dispatch(submitContent)
     }
 }
 

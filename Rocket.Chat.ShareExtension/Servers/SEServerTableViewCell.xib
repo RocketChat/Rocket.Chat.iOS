@@ -16,7 +16,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
             <autoresizingMask key="autoresizingMask"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="hp6-X5-Lc7" id="siZ-qY-8bA">
-                <rect key="frame" x="0.0" y="0.0" width="375" height="60.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="open.rocket.chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CXB-a1-Ctk">

@@ -349,6 +349,9 @@
 		804273E0204EBD51006DF420 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F8681FD6B59900EE1A4E /* Version.swift */; };
 		804273E1204EBD51006DF420 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D535ED1F708628006625D2 /* APIRequest.swift */; };
 		804273E2204EBD51006DF420 /* APIResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15C83851F70991F001AB155 /* APIResult.swift */; };
+		805C87D72051E5C700AD0EB0 /* SEComposeImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 805C87D62051E5C700AD0EB0 /* SEComposeImageView.xib */; };
+		805C87D92052AA1900AD0EB0 /* SEComposeImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87D82052AA1900AD0EB0 /* SEComposeImageView.swift */; };
+		805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */; };
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
 		805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC361FFC08870033151B /* CustomEmoji.swift */; };
 		805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC381FFE54820033151B /* CustomEmojiSpec.swift */; };
@@ -917,6 +920,9 @@
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
 		8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCEmojiKitLocalizable.swift; sourceTree = "<group>"; };
 		8041C047202BA233007E21FA /* RCEmojiKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RCEmojiKit.xcassets; sourceTree = "<group>"; };
+		805C87D62051E5C700AD0EB0 /* SEComposeImageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEComposeImageView.xib; sourceTree = "<group>"; };
+		805C87D82052AA1900AD0EB0 /* SEComposeImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeImageView.swift; sourceTree = "<group>"; };
+		805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEXibInitializable.swift; sourceTree = "<group>"; };
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
 		805DEC361FFC08870033151B /* CustomEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmoji.swift; sourceTree = "<group>"; };
 		805DEC381FFE54820033151B /* CustomEmojiSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiSpec.swift; sourceTree = "<group>"; };
@@ -2212,6 +2218,8 @@
 			children = (
 				80977AC3204FEEA700C41435 /* SEComposeViewModel.swift */,
 				8076FDE12048A7C500114F28 /* SEComposeViewController.swift */,
+				805C87D82052AA1900AD0EB0 /* SEComposeImageView.swift */,
+				805C87D62051E5C700AD0EB0 /* SEComposeImageView.xib */,
 			);
 			path = Compose;
 			sourceTree = "<group>";
@@ -2223,6 +2231,7 @@
 				802A4E102049C7340072CD23 /* SENavigationController.swift */,
 				8076FDEC2049A5F600114F28 /* SECellModel.swift */,
 				80D0CE61205023710056B17F /* SECell.swift */,
+				805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */,
 				80D0CE6E20509C100056B17F /* SEAvatarView.swift */,
 				80D0CE7020509C230056B17F /* SEAvatarView.xib */,
 			);
@@ -2797,6 +2806,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80D0CE6820503C970056B17F /* SERoomTableViewCell.xib in Resources */,
+				805C87D72051E5C700AD0EB0 /* SEComposeImageView.xib in Resources */,
 				807FB55E2046E7DD00E21429 /* Main.storyboard in Resources */,
 				807FB56F20472B6A00E21429 /* Localizable.strings in Resources */,
 				80D0CE7120509C230056B17F /* SEAvatarView.xib in Resources */,
@@ -3547,6 +3557,7 @@
 				80977ABB204EFC0F00C41435 /* SESceneTransition.swift in Sources */,
 				804273E0204EBD51006DF420 /* Version.swift in Sources */,
 				802A4E112049C7340072CD23 /* SENavigationController.swift in Sources */,
+				805C87D92052AA1900AD0EB0 /* SEComposeImageView.swift in Sources */,
 				8076FDA62048536800114F28 /* BaseModel.swift in Sources */,
 				804273DF204EBD51006DF420 /* APIError.swift in Sources */,
 				80D0CE752050BFD20056B17F /* Auth+User.swift in Sources */,
@@ -3565,6 +3576,7 @@
 				8076FDED2049A5F600114F28 /* SECellModel.swift in Sources */,
 				8076FDCD204863FC00114F28 /* MessageURL.swift in Sources */,
 				80977ABF204F36F200C41435 /* SESearchState.swift in Sources */,
+				805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */,
 				80D0CE6F20509C100056B17F /* SEAvatarView.swift in Sources */,
 				8076FD9D2048510100114F28 /* AuthSettings.swift in Sources */,
 				8076FD9A20484A6000114F28 /* SEStore.swift in Sources */,

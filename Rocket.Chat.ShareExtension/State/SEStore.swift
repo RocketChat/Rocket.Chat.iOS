@@ -34,6 +34,8 @@ final class SEStore {
             state.navigation.scenes = scenes
         case .makeSceneTransition(let transition):
             state.navigation.makeTransition(transition)
+        case .setSubmittingContent(let submitting):
+            state.submittingContent = submitting
         }
 
         notifySubscribers()

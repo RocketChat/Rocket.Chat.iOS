@@ -25,6 +25,7 @@ enum SEAction {
     case setCurrentRoom(Subscription)
     case makeSceneTransition(SESceneTransition)
     case setScenes([SEScene])
+    case setSubmittingContent(Bool)
 }
 
 struct SEState {
@@ -35,6 +36,7 @@ struct SEState {
     var searchRooms: SESearchState = .none
     var composeText = ""
     var navigation = SENavigation(scenes: [], sceneTransition: .none)
+    var submittingContent: Bool = false
 
     var displayedRooms: [Subscription] {
         switch searchRooms {

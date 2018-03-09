@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SEAvatarView: UIView {
+class SEAvatarView: UIView, SEXibInitializable {
     @IBOutlet var contentView: UIView! {
         didSet {
             contentView.layer.masksToBounds = true
@@ -30,30 +30,12 @@ class SEAvatarView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        commonInit()
+        initializeFromXib()
     }
 
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        commonInit()
-    }
-
-    private func commonInit() {
-        Bundle.main.loadNibNamed(String(describing: type(of: self)), owner: self, options: nil)
-
-        addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-
-        addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": contentView]
-            )
-        )
-        addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": contentView]
-            )
-        )
+        initializeFromXib()
     }
 
     func prepareForReuse() {
