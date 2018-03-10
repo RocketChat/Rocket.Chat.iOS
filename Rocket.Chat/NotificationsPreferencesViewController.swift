@@ -60,17 +60,6 @@ extension NotificationsPreferencesViewController {
 
 extension NotificationsPreferencesViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if indexPath.section == 0 {
-//            let lang = viewModel.languages[indexPath.row]
-//
-//            UserDefaults.standard.set([lang], forKey: kAppLanguagesKey)
-//        } else {
-//            UserDefaults.standard.removeObject(forKey: kAppLanguagesKey)
-//            showMessage()
-//        }
-//
-//        showMessage()
-//        tableView.deselectRow(at: indexPath, animated: true)
-//        tableView.reloadData()
+        let settingModel = viewModel.settings[indexPath.section].elements[indexPath.row]
     }
 }
