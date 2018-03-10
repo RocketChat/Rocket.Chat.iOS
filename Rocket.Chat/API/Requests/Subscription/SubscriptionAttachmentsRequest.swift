@@ -61,7 +61,7 @@ class SubscriptionAttachmentsRequest: APIRequest {
 }
 
 extension APIResult where T == SubscriptionAttachmentsRequest {
-    var messages: [Attachment?]? {
+    var attachments: [Attachment?]? {
         return raw?["files"].arrayValue.map {
             let attachment = Attachment()
             attachment.map($0, realm: nil)
