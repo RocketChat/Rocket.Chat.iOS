@@ -36,25 +36,13 @@ extension NotificationsPreferencesViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let settingModel = viewModel.settings[indexPath.section].elements[indexPath.row]
 
-        switch settingModel.type {
-        case .switch:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: settingModel.type.rawValue, for: indexPath) as? NotificationsSwitchCell else {
-                fatalError("Could not dequeue reusable cell with type \(settingModel.type.rawValue)")
-            }
-
-            cell.leftTitleLabel.text = settingModel.title
-            cell.rightTitleLabel.text = settingModel.title
-
-            return cell
-        case .list:
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: settingModel.type.rawValue, for: indexPath) as? NotificationsChooseCell else {
-                fatalError("Could not dequeue reusable cell with type \(settingModel.type.rawValue)")
-            }
-
-            cell.titleLabel.text = settingModel.title
-
-            return cell
+        guard var cell = tableView.dequeueReusableCell(withIdentifier: settingModel.type.rawValue, for: indexPath) as? UITableViewCell & NotificationsCellProtocol else {
+            fatalError("Could not dequeue reusable cell with type \(settingModel.type.rawValue)")
         }
+
+        cell.cellModel = settingModel
+
+        return cell
     }
 }
 

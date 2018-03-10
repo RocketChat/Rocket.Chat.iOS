@@ -8,46 +8,38 @@
 
 import Foundation
 
+enum NotificationCellType: String {
+    case `switch` = "NotificationsSwitchCell"
+    case list = "NotificationsChooseCell"
+}
+
+protocol NotificationSettingModel {
+    var value: String { get }
+    var type: NotificationCellType { get }
+}
+
 final class NotificationsPreferencesViewModel {
-
-    enum CellType: String {
-        // TODO: refactor to use parameters in case
-        case `switch` = "NotificationsSwitchCell"
-        case list = "NotificationsChooseCell"
-    }
-
-    struct SettingModel {
-        let title: String
-        let type: CellType
-
-        init(title: String, type: CellType) {
-            self.title = title
-            self.type = type
-        }
-    }
 
     internal var title: String {
         return localized("myaccount.settings.notifications.title")
     }
 
-    internal var settings: [(title: String?, elements: [SettingModel])] {
-        return [
-            (title: nil, [
-                SettingModel(title: "Turn on", type: .switch),
-                SettingModel(title: "Counter", type: .switch)
-                ]),
-            (title: "Desktop", [
-                SettingModel(title: "Alerts", type: .list),
-                SettingModel(title: "Audio", type: .list),
-                SettingModel(title: "Sound", type: .list),
-                SettingModel(title: "Duration", type: .list)
-                ]),
-            (title: "Mobile", [
-                SettingModel(title: "Alerts", type: .list)
-                ]),
-            (title: "Email", [
-                SettingModel(title: "Alerts", type: .list)
-                ])
-        ]
-    }
+    internal let settings: [(title: String?, elements: [NotificationSettingModel])] = [
+        (title: nil, [
+            NotificationsSwitchCell.SettingModel(value: "1", type: .switch, leftTitle: "q", leftDescription: "w", rightTitle: "e", rightDescription: "r"),
+            NotificationsSwitchCell.SettingModel(value: "0", type: .switch, leftTitle: "t", leftDescription: "y", rightTitle: "u", rightDescription: "i"),
+            ]),
+        (title: "Desktop", [
+            NotificationsChooseCell.SettingModel(value: "q", type: .list, title: "a"),
+            NotificationsChooseCell.SettingModel(value: "w", type: .list, title: "b"),
+            NotificationsChooseCell.SettingModel(value: "e", type: .list, title: "c"),
+            NotificationsChooseCell.SettingModel(value: "r", type: .list, title: "d")
+            ]),
+        (title: "Mobile", [
+            NotificationsChooseCell.SettingModel(value: "t", type: .list, title: "e")
+            ]),
+        (title: "Email", [
+            NotificationsChooseCell.SettingModel(value: "y", type: .list, title: "f")
+            ])
+    ]
 }
