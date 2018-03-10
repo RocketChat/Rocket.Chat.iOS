@@ -13,38 +13,37 @@ extension NSAttributedString {
     func applyingCustomEmojis(_ emojis: [String: Emoji]) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(attributedString: self)
 
-            let regexPattern = ":\\w+:"
+        let regexPattern = ":\\w+:"
 
-            guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }
-
-            let ranges = regex.matches(
-                in: attributedString.string,
-                options: [],
-                range: NSRange(location: 0, length: attributedString.length)
+        guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }
+        
+        let ranges = regex.matches(
+            in: attributedString.string,
+            options: [],
+            range: NSRange(location: 0, length: attributedString.length)
             ).map {
                 $0.range(at: 0)
+        }
+
+        // exclude matches inside code tags
+        let filteredRanges = attributedString.string.filterOutRangesInsideCode(ranges: ranges)
+        let transformedRanges = filteredRanges.reduce([NSRange](), { total, current in // subtract previous ranges lengths from each range location
+            let offset = total.reduce(0, { $0 + $1.length - 1 })
+            let range = NSRange(location: current.location - offset, length: current.length)
+            return total + [range]
+        })
+
+        for range in transformedRanges {
+            let imageAttachment = NSTextAttachment()
+            imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
+            if let emoji = emojis[attributedString.attributedSubstring(from: range).string], let imageUrl = emoji.imageUrl {
+                imageAttachment.contents = imageUrl.data(using: .utf8)
+                let imageString = NSAttributedString(attachment: imageAttachment)
+                attributedString.replaceCharacters(in: range, with: imageString)
             }
+        }
 
-            // exclude matches inside code tags
-            let filteredRanges = attributedString.string.filterOutRangesInsideCode(ranges: ranges)
-            let transformedRanges = filteredRanges.reduce([NSRange](), { total, current in // subtract previous ranges lengths from each range location
-                let offset = total.reduce(0, { $0 + $1.length - 1 })
-                let range = NSRange(location: current.location - offset, length: current.length)
-                return total + [range]
-            })
-
-            for range in transformedRanges {
-                let imageAttachment = NSTextAttachment()
-                imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
-                if let emoji = emojis[attributedString.attributedSubstring(from: range).string], let imageUrl = emoji.imageUrl {
-                    imageAttachment.contents = imageUrl.data(using: .utf8)
-                    let imageString = NSAttributedString(attachment: imageAttachment)
-                    attributedString.replaceCharacters(in: range, with: imageString)
-                }
-            }
-
-            return attributedString
-//        }
+        return attributedString
     }
 }
 
