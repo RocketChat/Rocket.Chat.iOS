@@ -38,7 +38,7 @@ class FilesListViewController: UIViewController {
 
     func getGroupMessages() {
         guard let subscription = subscription else { return }
-        let request = SubscriptionAttachmentsRequest(roomName: subscription.name, type: subscription.type)
+        let request = SubscriptionAttachmentsRequest(roomId: subscription.rid, type: subscription.type)
         API.current()?.fetch(request, succeeded: { result in
             guard let files: [Attachment] = result.getFiles() else { return }
             self.attchments = files

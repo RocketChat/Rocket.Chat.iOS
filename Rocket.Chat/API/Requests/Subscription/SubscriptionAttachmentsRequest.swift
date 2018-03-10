@@ -58,6 +58,13 @@ class SubscriptionAttachmentsRequest: APIRequest {
             self.query = "roomName=\(roomName)"
         }
     }
+
+    init(roomId: String, type: SubscriptionType = .channel) {
+        self.type = type
+        self.roomId = roomId
+        self.roomName = nil
+        self.query = "roomId=\(roomId)"
+    }
 }
 
 extension APIResult where T == SubscriptionAttachmentsRequest {
