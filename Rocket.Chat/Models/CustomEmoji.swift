@@ -38,7 +38,7 @@ extension CustomEmoji {
 
     static var cachedEmojis: [String: Emoji]?
 
-    static func emojiStrings() -> [String: Emoji] {
+    static var emojiStrings: [String: Emoji] {
         if let emojis = cachedEmojis {
             return emojis
         }

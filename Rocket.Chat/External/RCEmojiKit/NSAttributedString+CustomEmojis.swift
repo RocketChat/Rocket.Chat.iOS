@@ -16,7 +16,7 @@ extension NSAttributedString {
         let regexPattern = ":\\w+:"
 
         guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }
-        
+
         let ranges = regex.matches(
             in: attributedString.string,
             options: [],
@@ -27,19 +27,21 @@ extension NSAttributedString {
 
         // exclude matches inside code tags
         let filteredRanges = attributedString.string.filterOutRangesInsideCode(ranges: ranges)
-        let transformedRanges = filteredRanges.reduce([NSRange](), { total, current in // subtract previous ranges lengths from each range location
-            let offset = total.reduce(0, { $0 + $1.length - 1 })
-            let range = NSRange(location: current.location - offset, length: current.length)
-            return total + [range]
-        })
 
-        for range in transformedRanges {
+        var offset = 0
+        for range in filteredRanges {
             let imageAttachment = NSTextAttachment()
             imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
-            if let emoji = emojis[attributedString.attributedSubstring(from: range).string], let imageUrl = emoji.imageUrl {
+            let transformedRange = NSRange(location: range.location - offset, length: range.length)
+            let replacementString = attributedString.attributedSubstring(from: transformedRange)
+
+            if let emoji = emojis[replacementString.string.replacingOccurrences(of: ":", with: "")], let imageUrl = emoji.imageUrl {
+
                 imageAttachment.contents = imageUrl.data(using: .utf8)
                 let imageString = NSAttributedString(attachment: imageAttachment)
-                attributedString.replaceCharacters(in: range, with: imageString)
+                attributedString.replaceCharacters(in: transformedRange, with: imageString)
+
+                offset += replacementString.length - 1
             }
         }
 
