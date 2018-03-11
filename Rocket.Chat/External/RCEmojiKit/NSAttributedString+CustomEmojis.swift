@@ -13,7 +13,7 @@ extension NSAttributedString {
     func applyingCustomEmojis(_ emojis: [String: Emoji]) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(attributedString: self)
 
-        let regexPattern = ":(\\w+|-)*:"
+        let regexPattern = ":(\\w+|-|\\+)*:"
 
         guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }
 
