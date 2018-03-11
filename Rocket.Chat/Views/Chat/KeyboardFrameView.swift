@@ -52,7 +52,9 @@ class KeyboardFrameView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        delegate?.keyboardDidChangeFrame(frame: self.frame)
+        if self.frame.height > 0 || keyboardProxyView == nil {
+            delegate?.keyboardDidChangeFrame(frame: self.frame)
+        }
     }
 
     required init?(coder aDecoder: NSCoder) {
