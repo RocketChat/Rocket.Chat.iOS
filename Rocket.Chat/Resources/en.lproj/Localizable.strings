@@ -66,6 +66,15 @@
 "auth.connect.ssl_required" = "It is required that your server supports SSL";
 "auth.connect.connecting" = "Connection in progress. Hold tight";
 
+"auth.login.username.placeholder" = "Email or username";
+"auth.login.password.placeholder" = "Password";
+"auth.login.buttonRegister" = "Create new account";
+"auth.login.buttonResetPassword" = "Forgot password";
+"auth.login.agree_label" = "By proceeding you are agreeing to our";
+"auth.login.agree_and" = "and";
+"auth.login.agree_termsofservice" = "Terms of Service";
+"auth.login.agree_privacypolicy" = "Privacy Policy";
+
 "auth.forgot_password.title" = "Forgot your password?";
 "auth.forgot_password.message" = "Enter your e-mail";
 "auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again.";

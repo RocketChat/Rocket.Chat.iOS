@@ -54,7 +54,7 @@ class UploadRequest: APIRequest {
 
         data.appendString("\r\n".appending(boundaryPrefix))
         data.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
-        data.appendString("Content-Type: \(mimetype))\r\n\r\n")
+        data.appendString("Content-Type: \(mimetype)\r\n\r\n")
         data.append(self.data)
         data.appendString("\r\n--".appending(boundary.appending("--")))
 
