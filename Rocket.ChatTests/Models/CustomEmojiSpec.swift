@@ -79,4 +79,32 @@ class CustomEmojiSpec: XCTestCase, RealmTestCase {
 
         XCTAssert(CustomEmoji.withShortname("::", realm: realm) == nil)
     }
+
+    func testCustomEmojiCharacterReplacement() {
+        let singleEmojiString = ":marioparty:"
+        let multipleEmojiString = ":marioparty::rc:"
+        let emojiWithUnderscores = ":party_parrot:"
+        let stringWithoutEmojis = "Hello world!"
+        let stringWithEmojis = "Hello world, this is a :marioparty:!"
+        let stringWithInvalidEmojis = "Hello world! :not_a_valid_emoji:"
+        let stringWithACombinationOfValidAndInvalidEmojis = ":not_a_valid_emoji: Hello world! :marioparty:"
+
+        typealias EmojiReplacementProperties = (string: String, emojis: [String])
+
+        let testStrings: [EmojiReplacementProperties] = [
+            (string: singleEmojiString, emojis: [":marioparty:"]),
+            (string: multipleEmojiString, emojis: [":marioparty:", ":rc:"]),
+            (string: emojiWithUnderscores, emojis: [":party_parrot:"]),
+            (string: stringWithoutEmojis, emojis: []),
+            (string: stringWithEmojis, emojis: [":marioparty:"]),
+            (string: stringWithInvalidEmojis, emojis: []),
+            (string: stringWithACombinationOfValidAndInvalidEmojis, emojis: [":marioparty:"])
+        ]
+
+        for replacementString in testStrings {
+            let emojiString = NSAttributedString(string: replacementString.string).applyingCustomEmojis(CustomEmoji.emojiStrings)
+            let lengthAfterReplacement = (replacementString.string as NSString).length + replacementString.emojis.count - replacementString.emojis.reduce(0, { $0 + ($1 as NSString).length })
+            XCTAssert(emojiString.length == lengthAfterReplacement, "Emoji replacement failed for string: \(replacementString.string)")
+        }
+    }
 }
