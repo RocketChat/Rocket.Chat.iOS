@@ -327,6 +327,19 @@ extension SubscriptionManager {
         }
     }
 
+    static func setCurrentRoom(room rid: String, completion: @escaping MessageCompletion) {
+        let request = [
+            "msg": "method",
+            "method": "setCurrentRoom",
+            "params": [rid]
+        ] as [String: Any]
+
+        SocketManager.send(request) { response in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+            completion(response)
+        }
+    }
+
     static func join(room rid: String, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
