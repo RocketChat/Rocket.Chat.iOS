@@ -27,7 +27,13 @@ class SEComposeViewController: SEViewController {
         }
     }
 
-    var viewModel = SEComposeViewModel(cells: [])
+    @IBOutlet weak var pageControl: UIPageControl!
+
+    var viewModel = SEComposeViewModel(cells: []) {
+        didSet {
+            pageControl.numberOfPages = viewModel.cells.count
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,5 +85,9 @@ extension SEComposeViewController: UICollectionViewDelegateFlowLayout {
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        pageControl.currentPage = Int(scrollView.contentOffset.x / scrollView.frame.size.width)
     }
 }
