@@ -35,11 +35,20 @@ final class SENavigationController: UINavigationController {
 
             if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
                 itemProvider.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { item, _ in
-                    if let image = item as? UIImage {
-                        let content = store.state.content + [.image(image)]
-                        store.dispatch(.setContent(content))
-                    } else if let url = item as? URL, let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                        let content = store.state.content + [.image(image)]
+                    let image: UIImage
+                    var name = "\(String.random(8)).jpeg"
+
+                    if let _image = item as? UIImage {
+                        image = _image
+                    } else if let url = item as? URL, let data = try? Data(contentsOf: url), let _image = UIImage(data: data) {
+                        image = _image
+                        name = url.lastPathComponent
+                    } else {
+                        image = UIImage()
+                    }
+
+                    if let data = UIImageJPEGRepresentation(image, 0.9) {
+                        let content = store.state.content + [.file(SEFile(name: name, mimeType: "image/jpeg", data: data))]
                         store.dispatch(.setContent(content))
                     }
                 })

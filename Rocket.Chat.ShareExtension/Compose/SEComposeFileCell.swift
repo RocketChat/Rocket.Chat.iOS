@@ -13,7 +13,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var descriptionTextField: UITextField!
 
-    var cellModel = SEComposeFileCellModel(image: UIImage(), nameText: "", descriptionText: "") {
+    var cellModel = SEComposeFileCellModel.emptyState {
         didSet {
             imageView.image = cellModel.image
             nameTextField.text = cellModel.nameText

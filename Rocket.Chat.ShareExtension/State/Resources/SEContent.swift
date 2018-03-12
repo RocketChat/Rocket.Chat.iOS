@@ -6,9 +6,15 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import UIKit
+import Foundation
+
+struct SEFile {
+    let name: String
+    let mimeType: String
+    let data: Data
+}
 
 enum SEContent {
     case text(String)
-    case image(UIImage)
+    case file(SEFile)
 }

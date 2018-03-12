@@ -41,8 +41,8 @@ extension SEComposeViewModel {
             switch current {
             case .text(let text):
                 return total + [SEComposeTextCellModel(text: text)]
-            case .image(let image):
-                return total + [SEComposeFileCellModel(image: image, nameText: "", descriptionText: "")]
+            case .file(let file):
+                return total + [SEComposeFileCellModel(file: file)]
             }
         })
     }
