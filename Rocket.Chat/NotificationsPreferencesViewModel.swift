@@ -26,20 +26,42 @@ final class NotificationsPreferencesViewModel {
 
     internal let settings: [(title: String?, elements: [NotificationSettingModel])] = [
         (title: nil, [
-            NotificationsSwitchCell.SettingModel(value: "1", type: .switch, leftTitle: "q", leftDescription: "w", rightTitle: "e", rightDescription: "r"),
-            NotificationsSwitchCell.SettingModel(value: "0", type: .switch, leftTitle: "t", leftDescription: "y", rightTitle: "u", rightDescription: "i"),
+            NotificationsSwitchCell.SettingModel(value: "1",
+                                                 type: .switch,
+                                                 leftTitle: localized("myaccount.settings.notifications.mute.title"),
+                                                 leftDescription: localized("myaccount.settings.notifications.mute.description"),
+                                                 rightTitle: localized("myaccount.settings.notifications.receive.title"),
+                                                 rightDescription: localized("myaccount.settings.notifications.receive.description")),
+            NotificationsSwitchCell.SettingModel(value: "0",
+                                                 type: .switch,
+                                                 leftTitle: localized("myaccount.settings.notifications.hide.title"),
+                                                 leftDescription: localized("myaccount.settings.notifications.hide.description"),
+                                                 rightTitle: localized("myaccount.settings.notifications.show.title"),
+                                                 rightDescription: localized("myaccount.settings.notifications.show.description"))
             ]),
-        (title: "Desktop", [
-            NotificationsChooseCell.SettingModel(value: "q", type: .list, title: "a"),
-            NotificationsChooseCell.SettingModel(value: "w", type: .list, title: "b"),
-            NotificationsChooseCell.SettingModel(value: "e", type: .list, title: "c"),
-            NotificationsChooseCell.SettingModel(value: "r", type: .list, title: "d")
+        (title: localized("myaccount.settings.notifications.desktop"), [
+            NotificationsChooseCell.SettingModel(value: "Placeholder",
+                                                 type: .list,
+                                                 title: localized("myaccount.settings.notifications.desktop.alerts")),
+            NotificationsChooseCell.SettingModel(value: "Placeholder",
+                                                 type: .list,
+                                                 title: localized("myaccount.settings.notifications.desktop.audio")),
+            NotificationsChooseCell.SettingModel(value: "Placeholder",
+                                                 type: .list,
+                                                 title: localized("myaccount.settings.notifications.desktop.sound")),
+            NotificationsChooseCell.SettingModel(value: "Placeholder",
+                                                 type: .list,
+                                                 title: localized("myaccount.settings.notifications.desktop.duration"))
             ]),
-        (title: "Mobile", [
-            NotificationsChooseCell.SettingModel(value: "t", type: .list, title: "e")
+        (title: localized("myaccount.settings.notifications.mobile"), [
+            NotificationsChooseCell.SettingModel(value: "Placeholder",
+                                                 type: .list,
+                                                 title: localized("myaccount.settings.notifications.mobile.alerts"))
             ]),
-        (title: "Email", [
-            NotificationsChooseCell.SettingModel(value: "y", type: .list, title: "f")
+        (title: localized("myaccount.settings.notifications.mail"), [
+            NotificationsChooseCell.SettingModel(value: "Placeholder",
+                                                 type: .list,
+                                                 title: localized("myaccount.settings.notifications.email.alerts"))
             ])
     ]
 }

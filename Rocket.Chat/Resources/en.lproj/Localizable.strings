@@ -235,3 +235,23 @@
 "myaccount.settings.language.title" = "Change Language";
 "myaccount.settings.language.reset" = "Reset to Default";
 "myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+ before the new settings will take effect.";
+
+// Notifications preferences
+"myaccount.settings.notifications.title" = "Notifications Preferences";
+"myaccount.settings.notifications.mute.title" = "Turn OFF";
+"myaccount.settings.notifications.mute.description" = "Mute all notifications";
+"myaccount.settings.notifications.receive.title" = "Turn ON";
+"myaccount.settings.notifications.receive.description" = "Receive alerts";
+"myaccount.settings.notifications.hide.title" = "Hide counter";
+"myaccount.settings.notifications.hide.description" = "Do not display any counter of this channel";
+"myaccount.settings.notifications.show.title" = "Show counter";
+"myaccount.settings.notifications.show.description" = "Display number of unread messages";
+"myaccount.settings.notifications.desktop" = "Desktop";
+"myaccount.settings.notifications.desktop.alerts" = "Alerts:";
+"myaccount.settings.notifications.desktop.audio" = "Audio:";
+"myaccount.settings.notifications.desktop.sound" = "Sound";
+"myaccount.settings.notifications.desktop.duration" = "Notifications Duration:";
+"myaccount.settings.notifications.mobile" = "Mobile";
+"myaccount.settings.notifications.mobile.alerts" = "Alerts:";
+"myaccount.settings.notifications.mail" = "Email";
+"myaccount.settings.notifications.email.alerts" = "Alerts:";
