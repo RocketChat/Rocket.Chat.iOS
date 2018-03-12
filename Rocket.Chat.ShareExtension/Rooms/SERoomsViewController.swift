@@ -16,8 +16,8 @@ final class SERoomsViewController: SEViewController {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
-            tableView.register(SERoomTableViewCell.self)
-            tableView.register(SEServerTableViewCell.self)
+            tableView.register(SERoomCell.self)
+            tableView.register(SEServerCell.self)
         }
     }
 
@@ -78,11 +78,11 @@ extension SERoomsViewController: UITableViewDataSource {
         let cell: UITableViewCell
 
         if let cellModel = cellModel as? SEServerCellModel {
-            let serverCell = tableView.dequeue(SEServerTableViewCell.self, forIndexPath: indexPath)
+            let serverCell = tableView.dequeue(SEServerCell.self, forIndexPath: indexPath)
             serverCell.cellModel = cellModel
             cell = serverCell
         } else if let cellModel = cellModel as? SERoomCellModel {
-            let roomCell = tableView.dequeue(SERoomTableViewCell.self, forIndexPath: indexPath)
+            let roomCell = tableView.dequeue(SERoomCell.self, forIndexPath: indexPath)
             roomCell.cellModel = cellModel
             cell = roomCell
         } else {

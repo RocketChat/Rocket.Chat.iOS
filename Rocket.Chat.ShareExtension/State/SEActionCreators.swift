@@ -45,33 +45,35 @@ func selectServer(store: SEStore, serverIndex: Int) {
 func submitContent(store: SEStore) -> SEAction {
     let server = store.state.servers[store.state.selectedServerIndex]
 
-    let text: String
-    if case let .text(_text) = store.state.content {
-        text = _text
-    } else {
-        text = ""
+    for content in store.state.content {
+        let text: String
+        if case let .text(_text) = content {
+            text = _text
+        } else {
+            text = ""
+        }
+
+        let request = SendMessageRequest(
+            id: "ios_se_\(String.random(10))",
+            roomId: store.state.currentRoom.rid,
+            text: text
+        )
+
+        let api = API(host: "https://\(server.host)", version: Version(0, 60, 0))
+        api?.userId = server.userId
+        api?.authToken = server.token
+
+        api?.fetch(request, succeeded: { _ in
+            DispatchQueue.main.async {
+                store.dispatch(.makeSceneTransition(.finish))
+                store.dispatch(.setSubmittingContent(false))
+            }
+        }, errored: { _ in
+            DispatchQueue.main.async {
+                store.dispatch(.setSubmittingContent(false))
+            }
+        })
     }
-
-    let request = SendMessageRequest(
-        id: "ios_se_\(String.random(10))",
-        roomId: store.state.currentRoom.rid,
-        text: text
-    )
-
-    let api = API(host: "https://\(server.host)", version: Version(0, 60, 0))
-    api?.userId = server.userId
-    api?.authToken = server.token
-
-    api?.fetch(request, succeeded: { _ in
-        DispatchQueue.main.async {
-            store.dispatch(.makeSceneTransition(.finish))
-            store.dispatch(.setSubmittingContent(false))
-        }
-    }, errored: { _ in
-        DispatchQueue.main.async {
-            store.dispatch(.setSubmittingContent(false))
-        }
-    })
 
     return .setSubmittingContent(true)
 }

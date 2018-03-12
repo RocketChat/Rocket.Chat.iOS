@@ -24,16 +24,33 @@ extension SECell {
 }
 
 extension UITableView {
-    func register<T: SECell>(_ registerable: T.Type) {
+    func register<T: SECell>(_ cellType: T.Type) {
         register(
-            UINib(nibName: registerable.nibName, bundle: nil),
-            forCellReuseIdentifier: registerable.reuseIdentifier
+            UINib(nibName: cellType.nibName, bundle: nil),
+            forCellReuseIdentifier: cellType.reuseIdentifier
         )
     }
 
-    func dequeue<T: SECell>(_ registerable: T.Type, forIndexPath indexPath: IndexPath) -> T {
-        guard let cell = dequeueReusableCell(withIdentifier: registerable.reuseIdentifier, for: indexPath) as? T else {
-            fatalError("Tried to dequeue cell '\(registerable)' (not registered or invalid).")
+    func dequeue<T: SECell>(_ cellType: T.Type, forIndexPath indexPath: IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withIdentifier: cellType.reuseIdentifier, for: indexPath) as? T else {
+            fatalError("Tried to dequeue cell '\(cellType)' (not registered or invalid).")
+        }
+
+        return cell
+    }
+}
+
+extension UICollectionView {
+    func register<T: SECell>(_ cellType: T.Type) {
+        register(
+            UINib(nibName: cellType.nibName, bundle: nil),
+            forCellWithReuseIdentifier: cellType.reuseIdentifier
+        )
+    }
+
+    func dequeue<T: SECell>(_ cellType: T.Type, forIndexPath indexPath: IndexPath) -> T {
+        guard let cell = dequeueReusableCell(withReuseIdentifier: cellType.reuseIdentifier, for: indexPath) as? T else {
+            fatalError("Tried to dequeue cell '\(cellType)' (not registered or invalid).")
         }
 
         return cell

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="TXC-GZ-Hsk" customClass="SEComposeTextCell" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="255" height="353"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                <rect key="frame" x="0.0" y="0.0" width="255" height="353"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cFx-mj-yjU">
+                        <rect key="frame" x="20" y="0.0" width="215" height="353"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                    </textView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="cFx-mj-yjU" firstAttribute="top" secondItem="HhP-66-RBb" secondAttribute="top" id="5zW-Bm-wdw"/>
+                <constraint firstItem="HhP-66-RBb" firstAttribute="trailing" secondItem="cFx-mj-yjU" secondAttribute="trailing" constant="20" id="NEp-fH-QQC"/>
+                <constraint firstItem="HhP-66-RBb" firstAttribute="bottom" secondItem="cFx-mj-yjU" secondAttribute="bottom" id="cfi-iR-C0b"/>
+                <constraint firstItem="cFx-mj-yjU" firstAttribute="leading" secondItem="HhP-66-RBb" secondAttribute="leading" constant="20" id="ytF-l5-u6K"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="HhP-66-RBb"/>
+            <size key="customSize" width="255" height="353"/>
+            <connections>
+                <outlet property="textView" destination="cFx-mj-yjU" id="qgd-ca-cAb"/>
+            </connections>
+            <point key="canvasLocation" x="20.5" y="111.5"/>
+        </collectionViewCell>
+    </objects>
+</document>

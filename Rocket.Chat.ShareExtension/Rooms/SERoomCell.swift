@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class SERoomTableViewCell: UITableViewCell, SECell {
+class SERoomCell: UITableViewCell, SECell {
     @IBOutlet weak var avatarView: SEAvatarView!
     @IBOutlet weak var nameLabel: UILabel!
 

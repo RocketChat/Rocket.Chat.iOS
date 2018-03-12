@@ -1,5 +1,5 @@
 //
-//  SECell.swift
+//  SECellModel.swift
 //  Rocket.Chat.ShareExtension
 //
 //  Created by Matheus Cardoso on 3/2/18.

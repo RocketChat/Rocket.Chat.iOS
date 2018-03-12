@@ -9,7 +9,7 @@
 import Foundation
 
 enum SEAction {
-    case setContent(SEContent)
+    case setContent([SEContent])
     case setServers([SEServer])
     case selectServerIndex(Int)
     case setRooms([Subscription])
@@ -26,7 +26,7 @@ struct SEState {
     var rooms: [Subscription] = []
     var currentRoom = Subscription()
     var searchRooms: SESearchState = .none
-    var content: SEContent = .text("")
+    var content: [SEContent] = []
     var navigation = SENavigation(scenes: [], sceneTransition: .none)
     var submittingContent: Bool = false
 

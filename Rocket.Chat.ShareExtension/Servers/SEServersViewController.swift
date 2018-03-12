@@ -16,7 +16,7 @@ final class SEServersViewController: SEViewController {
         didSet {
             tableView.dataSource = self
             tableView.delegate = self
-            tableView.register(SEServerTableViewCell.self)
+            tableView.register(SEServerCell.self)
         }
     }
 
@@ -39,7 +39,7 @@ extension SEServersViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(SEServerTableViewCell.self, forIndexPath: indexPath)
+        let cell = tableView.dequeue(SEServerCell.self, forIndexPath: indexPath)
         cell.cellModel = viewModel.cellForRowAt(indexPath)
         return cell
     }

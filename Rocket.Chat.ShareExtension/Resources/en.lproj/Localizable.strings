@@ -20,5 +20,5 @@
 
 "compose.title" = "Share";
 "compose.destination.to" = "To: ";
-"compose.image.title.placeholder" = "File name";
-"compose.image.description.placeholder" = "File description";
+"compose.file.name.placeholder" = "File name";
+"compose.file.description.placeholder" = "File description";

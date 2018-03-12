@@ -15,33 +15,35 @@ final class SENavigationController: UINavigationController {
 
         initializeStore(store: store)
 
-        guard
-            let inputItem = extensionContext?.inputItems.first as? NSExtensionItem,
-            let itemProvider = inputItem.attachments?.first as? NSItemProvider
-        else {
-            return
+        let attachments = (extensionContext?.inputItems.first as? NSExtensionItem)?.attachments?.flatMap {
+            $0 as? NSItemProvider
         }
 
-        itemProvider.loadItem(forTypeIdentifier: kUTTypeText as String, options: nil) { text, error in
-            guard error == nil, let text = text as? String else { return }
-            store.dispatch(.setContent(.text(text)))
-        }
+        attachments?.forEach { itemProvider in
 
-        itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
-            guard error == nil, let url = url as? URL else { return }
-            store.dispatch(.setContent(.text(url.absoluteString)))
-        }
+            itemProvider.loadItem(forTypeIdentifier: kUTTypeText as String, options: nil) { text, error in
+                guard error == nil, let text = text as? String else { return }
+                let content = store.state.content + [.text(text)]
+                store.dispatch(.setContent(content))
+            }
 
-        if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
-            itemProvider.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { item, _ in
-                if let image = item as? UIImage {
-                    store.dispatch(.setContent(.image(image)))
-                }
+            itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
+                guard error == nil, let url = url as? URL else { return }
+                let content = store.state.content + [.text(url.absoluteString)]
+                store.dispatch(.setContent(content))
+            }
 
-                if let url = item as? URL, let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
-                    store.dispatch(.setContent(.image(image)))
-                }
-            })
+            if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
+                itemProvider.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { item, _ in
+                    if let image = item as? UIImage {
+                        let content = store.state.content + [.image(image)]
+                        store.dispatch(.setContent(content))
+                    } else if let url = item as? URL, let data = try? Data(contentsOf: url), let image = UIImage(data: data) {
+                        let content = store.state.content + [.image(image)]
+                        store.dispatch(.setContent(content))
+                    }
+                })
+            }
         }
     }
 
@@ -79,7 +81,7 @@ extension SENavigationController: SEStoreSubscriber {
             case .servers:
                 super.pushViewController(SEServersViewController.fromStoryboard(), animated: true)
             case .compose:
-                super.pushViewController(SEComposeViewController.fromStoryboard(), animated: true)
+                super.pushViewController(SEComposeHeaderViewController.fromStoryboard(), animated: true)
             }
         case .finish:
             extensionContext?.cancelRequest(withError: SEError.canceled)

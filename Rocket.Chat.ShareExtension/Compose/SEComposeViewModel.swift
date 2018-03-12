@@ -2,41 +2,48 @@
 //  SEComposeViewModel.swift
 //  Rocket.Chat.ShareExtension
 //
-//  Created by Matheus Cardoso on 3/7/18.
+//  Created by Matheus Cardoso on 3/12/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct SEComposeViewModel {
-    let destinationText: String
-    let doneButtonEnabled: Bool
+    let cells: [SEComposeCellModel]
+}
 
-    var destinationToText: String {
-        return localized("compose.to")
+// MARK: DataSource
+
+extension SEComposeViewModel {
+    var numberOfSections: Int {
+        return 1
     }
 
-    var title: String {
-        return localized("compose.title")
+    func numberOfItemsInSection(_ section: Int) -> Int {
+        switch section {
+        case 0:
+            return cells.count
+        default:
+            return 0
+        }
+    }
+
+    func cellForItemAt(_ indexPath: IndexPath) -> SEComposeCellModel {
+        return cells[indexPath.item]
     }
 }
 
-// MARK: SEState
+// MARK: State
 
 extension SEComposeViewModel {
     init(state: SEState) {
-        doneButtonEnabled = !state.submittingContent
-
-        let symbol: String
-        switch state.currentRoom.type {
-        case .channel:
-            symbol = "#"
-        case .group:
-            symbol = "#"
-        case .directMessage:
-            symbol = "@"
-        }
-
-        destinationText = "\(symbol)\(state.currentRoom.name)"
+        cells = state.content.reduce([SEComposeCellModel](), { total, current in
+            switch current {
+            case .text(let text):
+                return total + [SEComposeTextCellModel(text: text)]
+            case .image(let image):
+                return total + [SEComposeFileCellModel(image: image, nameText: "", descriptionText: "")]
+            }
+        })
     }
 }
