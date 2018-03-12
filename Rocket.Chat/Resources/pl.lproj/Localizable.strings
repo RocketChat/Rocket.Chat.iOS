@@ -23,8 +23,8 @@
 "alert.feature.wip.title" = "Ups!";
 "alert.feature.wip.message" = "Wciąż pracujemy nad tą funkcją. Bądź czujny!";
 
-"alert.insecure_image.title" = "Insecure resource"; //TODO
-"alert.insecure_image.message" = "The resource of the image is insecure and therefore not loaded. Only SSL resources are allowed."; //TODO
+"alert.insecure_image.title" = "Niepewne źródło";
+"alert.insecure_image.message" = "Źródło obrazu jest niepewne i nie zostało załadowane. Jedynie źródła SSL są zezwolone.";
 
 "alert.socket_error.invalid_user.title" = "Sesja wygasła";
 "alert.socket_error.invalid_user.message" = "Twoja sesja wygasła. Zaloguj się ponownie.";
@@ -143,7 +143,7 @@
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
 "chat.loading_messages" = "Ładowanie wiadomości...";
-"chat.unread_separator" = "new messages"; //TODO
+"chat.unread_separator" = "nowe wiadomości";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Dodaje reakcję";
@@ -161,9 +161,9 @@
 "chat.message.actions.delete.confirm.yes" = "Tak, usuń";
 "chat.message.actions.resend" = "Wyślij ponownie";
 "chat.message.actions.resend_all" = "Wyślij wszystkie ponownie";
-"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
-"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
-"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
+"chat.message.actions.delete.discard.title" = "Anulować tę wiadomość?";
+"chat.message.actions.delete.discard.message" = "Ta wiadomość nie została jeszcze wysłana. Chcesz ją anulować? Nie można tego cofnąć.";
+"chat.message.actions.delete.discard.yes" = "Tak, anuluj";
 "Send" = "Wyślij"; //SLKTextInputbar.m
 
 // Chat Message Report
