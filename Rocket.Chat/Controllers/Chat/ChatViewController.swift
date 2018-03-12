@@ -167,6 +167,7 @@ final class ChatViewController: SLKTextViewController {
 
         collectionView?.isPrefetchingEnabled = true
         collectionView?.keyboardDismissMode = .interactive
+        enableInteractiveKeyboardDismissal()
 
         isInverted = false
         bounces = true
@@ -181,7 +182,6 @@ final class ChatViewController: SLKTextViewController {
         setupScrollToBottomButton()
 
         NotificationCenter.default.addObserver(self, selector: #selector(reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidChangeFrame(_:)), name: Notification.Name.UIKeyboardDidChangeFrame, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         if !SocketManager.isConnected() {
@@ -315,6 +315,10 @@ final class ChatViewController: SLKTextViewController {
         scrollToBottomButtonIsVisible = false
     }
 
+    internal func resetScrollToBottomButtonPosition() {
+        scrollToBottomButtonIsVisible = !chatLogIsAtBottom()
+    }
+
     func resetMessageSending() {
         textView.text = ""
 
@@ -338,13 +342,18 @@ final class ChatViewController: SLKTextViewController {
     weak var keyboardHeightConstraint: NSLayoutConstraint?
     weak var textInputbarBackgroundHeightConstraint: NSLayoutConstraint?
 
-    weak var keyboardProxyView: UIView?
+    var keyboardFrame: KeyboardFrameView?
     let textInputbarBackground = UIToolbar()
     var oldTextInputbarBgIsTransparent = false
 
+    private func enableInteractiveKeyboardDismissal() {
+        keyboardFrame = KeyboardFrameView(withDelegate: self)
+    }
+
     // Enables for the interactive keyboard dismissal.
-    // Gets called in scrollViewDidScroll and keyboardDidChangeFrame methods.
-    private func updateKeyboardConstraints() {
+    // Gets called updateKeyboardConstraints(frame:) which is a
+    // required method of the KeyboardFrameViewDelegate
+    private func updateKeyboardConstraints(frame: CGRect) {
         if keyboardHeightConstraint == nil {
             keyboardHeightConstraint = self.view.constraints.first {
                 ($0.firstItem as? UIView) == self.view &&
@@ -357,26 +366,13 @@ final class ChatViewController: SLKTextViewController {
         // with no real fix for it provided by Apple in UIKit.
         updateTextInputbarBackground()
 
-        // keyboardProxyView is stored so as to account for an edge case on the iPad
-        // when it is split screen mode, where if a text field on the other app is
-        // active, then the textInputbar gets hidden under the keyboard.
-        if keyboardProxyView == nil {
-            keyboardProxyView = textInputbar.inputAccessoryView.superview
-        }
-
-        let keyboardWindowHeight = keyboardProxyView?.window?.frame.height ?? 0.0
-        let keyboardYOriginInWindow = keyboardProxyView?.frame.origin.y ?? 0.0
-
-        var keyboardHeight = keyboardWindowHeight - keyboardYOriginInWindow
+        var keyboardHeight = frame.height
 
         if #available(iOS 11.0, *) {
             keyboardHeight = keyboardHeight > view.safeAreaInsets.bottom ? keyboardHeight : view.safeAreaInsets.bottom
         }
 
-        // The conditional check should help prevent unnecessary re-draws.
-        if let keyboardHC = keyboardHeightConstraint, keyboardHC.constant != keyboardHeight {
-            keyboardHC.constant = keyboardHeight
-        }
+        keyboardHeightConstraint?.constant = keyboardHeight
     }
 
     private func updateTextInputbarBackground() {
@@ -412,10 +408,6 @@ final class ChatViewController: SLKTextViewController {
             textInputbarBackground.topAnchor.constraint(equalTo: textInputbar.topAnchor).isActive = true
             textInputbarBackground.centerXAnchor.constraint(equalTo: textInputbar.centerXAnchor).isActive = true
         }
-    }
-
-    @objc private func keyboardDidChangeFrame(_ notification: Notification) {
-        updateKeyboardConstraints()
     }
 
     // MARK: SlackTextViewController
@@ -469,10 +461,6 @@ final class ChatViewController: SLKTextViewController {
         } else {
             didPressRightButton(self)
         }
-    }
-
-    override func textViewDidBeginEditing(_ textView: UITextView) {
-        scrollToBottom(true)
     }
 
     override func textViewDidChange(_ textView: UITextView) {
@@ -1116,15 +1104,12 @@ extension ChatViewController {
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         super.scrollViewDidScroll(scrollView)
 
-        updateKeyboardConstraints()
-
         if scrollView.contentOffset.y < -10 {
             if let message = dataController.oldestMessage() {
                 loadMoreMessagesFrom(date: message.createdAt)
             }
         }
-
-        scrollToBottomButtonIsVisible = !chatLogIsAtBottom()
+        resetScrollToBottomButtonPosition()
     }
 }
 
@@ -1202,5 +1187,20 @@ extension ChatViewController {
         default:
             break
         }
+    }
+}
+
+// MARK: KeyboardFrameViewDelegate
+
+extension ChatViewController: KeyboardFrameViewDelegate {
+    func keyboardDidChangeFrame(frame: CGRect?) {
+        if let frame = frame {
+            updateKeyboardConstraints(frame: frame)
+        }
+        resetScrollToBottomButtonPosition()
+    }
+
+    var keyboardProxyView: UIView? {
+        return textInputbar.inputAccessoryView.superview
     }
 }
