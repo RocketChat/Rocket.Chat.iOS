@@ -41,7 +41,7 @@ final class SERoomsViewController: SEViewController {
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {
-        cancelShareExtension()
+        store.dispatch(.finish)
     }
 }
 

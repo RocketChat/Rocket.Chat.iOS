@@ -38,11 +38,11 @@ extension SEComposeViewModel {
 extension SEComposeViewModel {
     init(state: SEState) {
         cells = state.content.reduce([SEComposeCellModel](), { total, current in
-            switch current {
+            switch current.type {
             case .text(let text):
                 return total + [SEComposeTextCellModel(text: text)]
             case .file(let file):
-                return total + [SEComposeFileCellModel(file: file)]
+                return total + [SEComposeFileCellModel(file: file, status: current.status)]
             }
         })
     }

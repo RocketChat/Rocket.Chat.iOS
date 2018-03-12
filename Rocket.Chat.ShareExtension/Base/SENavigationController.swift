@@ -23,13 +23,13 @@ final class SENavigationController: UINavigationController {
 
             itemProvider.loadItem(forTypeIdentifier: kUTTypeText as String, options: nil) { text, error in
                 guard error == nil, let text = text as? String else { return }
-                let content = store.state.content + [.text(text)]
+                let content = store.state.content + [SEContent(type: .text(text))]
                 store.dispatch(.setContent(content))
             }
 
             itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
                 guard error == nil, let url = url as? URL else { return }
-                let content = store.state.content + [.text(url.absoluteString)]
+                let content = store.state.content + [SEContent(type: .text(url.absoluteString))]
                 store.dispatch(.setContent(content))
             }
 
@@ -48,7 +48,8 @@ final class SENavigationController: UINavigationController {
                     }
 
                     if let data = UIImageJPEGRepresentation(image, 0.9) {
-                        let content = store.state.content + [.file(SEFile(name: name, mimeType: "image/jpeg", data: data))]
+                        let file = SEFile(name: name, mimetype: "image/jpeg", data: data)
+                        let content = store.state.content + [SEContent(type: .file(file))]
                         store.dispatch(.setContent(content))
                     }
                 })
@@ -93,7 +94,7 @@ extension SENavigationController: SEStoreSubscriber {
                 super.pushViewController(SEComposeHeaderViewController.fromStoryboard(), animated: true)
             }
         case .finish:
-            extensionContext?.cancelRequest(withError: SEError.canceled)
+            extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
             store.clearSubscribers()
         }
 

@@ -19,6 +19,9 @@
                 <rect key="frame" x="0.0" y="0.0" width="375" height="419"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pRn-eN-ble">
+                        <rect key="frame" x="20" y="0.0" width="335" height="279"/>
+                    </imageView>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ceq-58-6iF">
                         <rect key="frame" x="60" y="309" width="255" height="30"/>
                         <constraints>
@@ -37,14 +40,18 @@
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <textInputTraits key="textInputTraits"/>
                     </textField>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pRn-eN-ble">
-                        <rect key="frame" x="20" y="0.0" width="335" height="279"/>
-                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAJ-tf-3BX">
+                        <rect key="frame" x="329" y="394" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
                 </subviews>
             </view>
             <constraints>
                 <constraint firstItem="Ceq-58-6iF" firstAttribute="leading" secondItem="6ok-su-VBx" secondAttribute="leading" constant="60" id="1gC-r5-CXX"/>
                 <constraint firstAttribute="bottom" secondItem="VAS-Ug-Mtj" secondAttribute="bottom" constant="30" id="4Wn-K4-SOJ"/>
+                <constraint firstItem="dZK-cP-DMA" firstAttribute="bottom" secondItem="jAJ-tf-3BX" secondAttribute="bottom" constant="4" id="8KU-vS-9Bt"/>
                 <constraint firstAttribute="trailing" secondItem="VAS-Ug-Mtj" secondAttribute="trailing" constant="60" id="CTi-nY-2cn"/>
                 <constraint firstItem="pRn-eN-ble" firstAttribute="top" secondItem="dZK-cP-DMA" secondAttribute="top" id="IaZ-gT-TDZ"/>
                 <constraint firstItem="Ceq-58-6iF" firstAttribute="top" secondItem="pRn-eN-ble" secondAttribute="bottom" constant="30" id="LeQ-yc-LMQ"/>
@@ -53,6 +60,7 @@
                 <constraint firstAttribute="trailing" secondItem="Ceq-58-6iF" secondAttribute="trailing" constant="60" id="SEh-RG-ihk"/>
                 <constraint firstAttribute="trailing" secondItem="pRn-eN-ble" secondAttribute="trailing" constant="20" id="ZEY-Gs-B0f"/>
                 <constraint firstItem="VAS-Ug-Mtj" firstAttribute="top" secondItem="Ceq-58-6iF" secondAttribute="bottom" constant="20" id="crv-UX-yDm"/>
+                <constraint firstItem="dZK-cP-DMA" firstAttribute="trailing" secondItem="jAJ-tf-3BX" secondAttribute="trailing" constant="4" id="mUy-wf-1vm"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="dZK-cP-DMA"/>
             <size key="customSize" width="375" height="419"/>
@@ -60,6 +68,7 @@
                 <outlet property="descriptionTextField" destination="VAS-Ug-Mtj" id="0su-46-BJW"/>
                 <outlet property="imageView" destination="pRn-eN-ble" id="K1C-Du-x15"/>
                 <outlet property="nameTextField" destination="Ceq-58-6iF" id="Wht-yH-Gst"/>
+                <outlet property="statusLabel" destination="jAJ-tf-3BX" id="Gb4-eT-8V0"/>
             </connections>
             <point key="canvasLocation" x="33.5" y="37.5"/>
         </collectionViewCell>

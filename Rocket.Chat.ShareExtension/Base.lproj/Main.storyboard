@@ -106,7 +106,7 @@
                         <viewLayoutGuide key="safeArea" id="D2C-2c-gGX"/>
                     </view>
                     <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="95u-cF-Hmc">
-                        <barButtonItem key="rightBarButtonItem" style="done" systemItem="done" id="tbM-vz-Ho5">
+                        <barButtonItem key="rightBarButtonItem" title="Item" style="done" id="tbM-vz-Ho5">
                             <connections>
                                 <action selector="doneButtonPressed:" destination="dWl-7H-NlL" id="WoE-RR-ONI"/>
                             </connections>
@@ -171,57 +171,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0YZ-wH-Gal" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-339.19999999999999" y="-36.881559220389811"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="ddV-9B-SdL">
-            <objects>
-                <viewController storyboardIdentifier="SEComposeTextViewController" id="sTq-ch-2qU" customClass="SEComposeTextViewController" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ZLl-7f-qEr">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="TN2-Ky-t7K">
-                                <rect key="frame" x="20" y="0.0" width="335" height="667"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="TN2-Ky-t7K" firstAttribute="leading" secondItem="ZLl-7f-qEr" secondAttribute="leading" constant="20" id="Bfh-VO-Xfs"/>
-                            <constraint firstAttribute="trailing" secondItem="TN2-Ky-t7K" secondAttribute="trailing" constant="20" id="kqO-3O-zKj"/>
-                            <constraint firstAttribute="bottom" secondItem="TN2-Ky-t7K" secondAttribute="bottom" id="mSr-Zo-Eku"/>
-                            <constraint firstItem="TN2-Ky-t7K" firstAttribute="top" secondItem="ZLl-7f-qEr" secondAttribute="top" id="xl4-U0-mkC"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="amJ-IM-6ea"/>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="fla-K1-TPn"/>
-                    <connections>
-                        <outlet property="textView" destination="TN2-Ky-t7K" id="bMK-YG-ERW"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="6yG-CX-Yub" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2998" y="323"/>
-        </scene>
-        <!--Compose Container View Controller-->
-        <scene sceneID="xMM-Yn-vjd">
-            <objects>
-                <tabBarController id="5Kd-Za-bAX" customClass="SEComposeContainerViewController" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBar key="tabBar" hidden="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="RRV-U9-QAj">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="sTq-ch-2qU" kind="relationship" relationship="viewControllers" id="cZl-eW-phm"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="WpK-gG-J8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2111" y="324"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="ZXv-81-m0W">

@@ -19,13 +19,17 @@ struct SEComposeHeaderViewModel {
     var title: String {
         return localized("compose.title")
     }
+
+    var doneButtonTitle: String {
+        return localized("compose.send")
+    }
 }
 
 // MARK: SEState
 
 extension SEComposeHeaderViewModel {
     init(state: SEState) {
-        doneButtonEnabled = !state.submittingContent
+        doneButtonEnabled = true
 
         let symbol: String
         switch state.currentRoom.type {

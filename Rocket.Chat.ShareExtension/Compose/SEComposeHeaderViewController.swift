@@ -19,6 +19,7 @@ class SEComposeHeaderViewController: SEViewController {
         didSet {
             title = viewModel.title
             destinationLabel.text = viewModel.destinationText
+            doneButton.title = viewModel.doneButtonTitle
             doneButton.isEnabled = viewModel.doneButtonEnabled
         }
     }
@@ -28,6 +29,6 @@ class SEComposeHeaderViewController: SEViewController {
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
-        store.dispatch(submitContent)
+        submitContent(store: store)
     }
 }

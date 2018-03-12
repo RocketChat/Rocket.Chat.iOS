@@ -12,9 +12,10 @@ struct SEComposeFileCellModel: SEComposeCellModel {
     let image: UIImage
     let nameText: String
     let descriptionText: String
+    let statusText: String
 
-    init(file: SEFile) {
-        if file.mimeType == "image/jpeg" {
+    init(file: SEFile, status: SEContentStatus) {
+        if file.mimetype == "image/jpeg" {
             image = UIImage(data: file.data) ?? UIImage()
         } else {
             image = UIImage()
@@ -22,6 +23,8 @@ struct SEComposeFileCellModel: SEComposeCellModel {
 
         nameText = file.name
         descriptionText = ""
+
+        statusText = String(describing: status)
     }
 
     var namePlaceholder: String {
@@ -37,6 +40,6 @@ struct SEComposeFileCellModel: SEComposeCellModel {
 
 extension SEComposeFileCellModel {
     static var emptyState: SEComposeFileCellModel {
-        return SEComposeFileCellModel(file: SEFile(name: "", mimeType: "", data: Data()))
+        return SEComposeFileCellModel(file: SEFile(name: "", mimetype: "", data: Data()), status: .notSent)
     }
 }

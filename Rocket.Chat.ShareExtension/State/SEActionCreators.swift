@@ -42,38 +42,73 @@ func selectServer(store: SEStore, serverIndex: Int) {
     store.dispatch(fetchRooms)
 }
 
-func submitContent(store: SEStore) -> SEAction {
+func submitContent(store: SEStore) {
+    let requests = store.state.content.map { content -> APIRequest in
+        switch content.type {
+        case .file(let file):
+            return UploadRequest(
+                roomId: store.state.currentRoom.rid,
+                data: file.data,
+                filename: file.name,
+                mimetype: file.mimetype
+            )
+        case .text(let text):
+            return SendMessageRequest(
+                id: "ios_se_\(String.random(10))",
+                roomId: store.state.currentRoom.rid,
+                text: text
+            )
+        }
+    }.enumerated()
+
     let server = store.state.servers[store.state.selectedServerIndex]
 
-    for content in store.state.content {
-        let text: String
-        if case let .text(_text) = content {
-            text = _text
-        } else {
-            text = ""
+    let api = API(host: "https://\(server.host)", version: Version(0, 60, 0))
+    api?.userId = server.userId
+    api?.authToken = server.token
+
+    var fileRequests = requests.flatMap { index, request -> (index: Int, request: UploadRequest)? in
+        guard let request = request as? UploadRequest else {
+            return nil
         }
 
-        let request = SendMessageRequest(
-            id: "ios_se_\(String.random(10))",
-            roomId: store.state.currentRoom.rid,
-            text: text
-        )
+        return (index, request)
+    }
 
-        let api = API(host: "https://\(server.host)", version: Version(0, 60, 0))
-        api?.userId = server.userId
-        api?.authToken = server.token
+    var messageRequests = requests.flatMap { index, request -> (index: Int, request: SendMessageRequest)? in
+        guard let request = request as? SendMessageRequest else {
+            return nil
+        }
 
-        api?.fetch(request, succeeded: { _ in
+        return (index, request)
+    }
+
+    func requestNext() {
+        guard let (index, request) = fileRequests.popLast() else {
             DispatchQueue.main.async {
-                store.dispatch(.makeSceneTransition(.finish))
-                store.dispatch(.setSubmittingContent(false))
+                store.dispatch(.finish)
             }
-        }, errored: { _ in
+            return
+        }
+
+        store.dispatch(.setContentStatus(index: index, status: .sending))
+
+        api?.fetch(request, succeeded: { result in
             DispatchQueue.main.async {
-                store.dispatch(.setSubmittingContent(false))
+                if let error = result.error {
+                    store.dispatch(.setContentStatus(index: index, status: .errored(error)))
+                } else {
+                    store.dispatch(.setContentStatus(index: index, status: .succeeded))
+                }
+            }
+
+            requestNext()
+        }, errored: { error in
+            DispatchQueue.main.async {
+                store.dispatch(.setContentStatus(index: index, status: .errored("\(error)")))
             }
         })
     }
 
-    return .setSubmittingContent(true)
+    requestNext()
 }

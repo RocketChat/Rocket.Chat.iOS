@@ -19,6 +19,7 @@
 "rooms.section.directMessages" = "Direct Messages";
 
 "compose.title" = "Share";
+"compose.send" = "Send";
 "compose.destination.to" = "To: ";
 "compose.file.name.placeholder" = "File name";
 "compose.file.description.placeholder" = "File description";
