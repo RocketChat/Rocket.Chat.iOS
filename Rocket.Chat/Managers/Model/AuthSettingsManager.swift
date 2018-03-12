@@ -38,7 +38,6 @@ final class AuthSettingsManager {
                 return
             }
 
-            // Was executed on main
             Realm.execute({ realm in
                 let settings = AuthManager.isAuthenticated()?.settings ?? AuthSettings()
                 settings.map(response.result["result"], realm: realm)
