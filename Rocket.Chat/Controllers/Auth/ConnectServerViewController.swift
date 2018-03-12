@@ -28,7 +28,6 @@ final class ConnectServerViewController: BaseViewController {
         }
         return  URL(string: urlText, scheme: "https")
     }
-    
     var serverPublicSettings: AuthSettings?
 
     @IBOutlet weak var buttonClose: UIBarButtonItem!
@@ -36,7 +35,6 @@ final class ConnectServerViewController: BaseViewController {
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldServerURL: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-    
     @IBOutlet weak var viewFields: UIView! {
         didSet {
             viewFields.layer.cornerRadius = 4
@@ -105,8 +103,6 @@ final class ConnectServerViewController: BaseViewController {
                     } catch {
                             print(error)
                         }
-        
-        
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
@@ -117,10 +113,8 @@ final class ConnectServerViewController: BaseViewController {
                 if reachability.isReachable {
                         print("internet is available")
                     } else {
-            
                             print("internet is not available")
                     }
-        
             }
 
     override func viewDidAppear(_ animated: Bool) {
@@ -154,7 +148,6 @@ final class ConnectServerViewController: BaseViewController {
             }
         }
     }
-
 
     // MARK: Keyboard Handlers
     override func keyboardWillShow(_ notification: Notification) {
