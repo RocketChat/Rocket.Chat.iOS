@@ -29,6 +29,12 @@ class SEComposeHeaderViewController: SEViewController {
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
-        submitContent(store: store)
+        submitMessages(store: store) {
+            submitFiles(store: store) {
+                DispatchQueue.main.async {
+                    store.dispatch(.finish)
+                }
+            }
+        }
     }
 }
