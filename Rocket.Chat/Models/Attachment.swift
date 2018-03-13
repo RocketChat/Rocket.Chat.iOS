@@ -18,15 +18,15 @@ class AttachmentField: BaseModel {
 
 class Attachment: BaseModel {
     var type: MessageType {
-        if !audioURL?.isEmpty ?? false {
+        if !(audioURL?.isEmpty ?? true) {
             return .audio
         }
 
-        if !videoURL?.isEmpty ?? false {
+        if !(videoURL?.isEmpty ?? true) {
             return .video
         }
 
-        if !imageURL?.isEmpty ?? false {
+        if !(imageURL?.isEmpty ?? true) {
             return .image
         }
 
