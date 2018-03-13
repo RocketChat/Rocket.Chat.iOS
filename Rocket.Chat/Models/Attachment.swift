@@ -10,6 +10,12 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
+class AttachmentField: BaseModel {
+    @objc dynamic var short: Bool = false
+    @objc dynamic var title: String = ""
+    @objc dynamic var value: String = ""
+}
+
 class Attachment: BaseModel {
     var type: MessageType {
         if !audioURL?.isEmpty ?? false {
@@ -25,6 +31,10 @@ class Attachment: BaseModel {
         }
 
         return .textAttachment
+    }
+
+    var isFile: Bool {
+        return titleLinkDownload && !titleLink.isEmpty
     }
 
     @objc dynamic var collapsed: Bool = false
@@ -53,6 +63,8 @@ class Attachment: BaseModel {
         let documents = path[0]
         return documents.appendingPathComponent("\(identifier ?? "temp").png")
     }
+
+    var fields = List<AttachmentField>()
 
     override class func ignoredProperties() -> [String] {
         return ["videoThumb"]
