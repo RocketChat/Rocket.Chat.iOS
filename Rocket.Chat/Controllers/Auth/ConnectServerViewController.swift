@@ -16,9 +16,9 @@ final class ConnectServerViewController: BaseViewController {
     internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
     internal let infoRequestHandler = InfoRequestHandler()
-    let reachability = Reachability()!
-        let alert = UIAlertController(title: "Warning", message: " Connect to Internet Please", preferredStyle: .alert)
-
+    let reachability =  Reachability()!
+    let alertController = UIAlertController(title: "Warning!", message:
+        "Connect To Internet!", preferredStyle: UIAlertControllerStyle.alert)
     var deepLinkCredentials: DeepLinkCredentials?
 
     var url: URL? {
@@ -74,15 +74,18 @@ final class ConnectServerViewController: BaseViewController {
         reachability.whenReachable = { reachability in
             DispatchQueue.main.async {
                 self.textFieldServerURL.isEnabled = true
-                self.alert.dismiss(animated: true, completion: nil)
+                self.alertController.dismiss(animated: true, completion: nil)
             }
         }
         reachability.whenUnreachable = { reachability in
             DispatchQueue.main.async {
                 self.textFieldServerURL.isEnabled = false
-                self.present(self.alert, animated: true, completion: nil)
+                self.present(self.alertController, animated: true, completion: nil)
             }
         }
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+        alertController.title = NSLocalizedString("Warning!", comment: "")
+        alertController.message = NSLocalizedString("Connect To Internet Please!", comment: "")
     }
 
     override func viewWillAppear(_ animated: Bool) {
