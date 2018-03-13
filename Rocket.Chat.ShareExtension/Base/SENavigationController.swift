@@ -48,7 +48,7 @@ final class SENavigationController: UINavigationController {
                     }
 
                     if let data = UIImageJPEGRepresentation(image, 0.9) {
-                        let file = SEFile(name: name, mimetype: "image/jpeg", data: data)
+                        let file = SEFile(name: name, description: "", mimetype: "image/jpeg", data: data)
                         let content = store.state.content + [SEContent(type: .file(file))]
                         store.dispatch(.setContent(content))
                     }

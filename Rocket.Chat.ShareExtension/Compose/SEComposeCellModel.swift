@@ -7,5 +7,5 @@
 //
 
 protocol SEComposeCellModel: SECellModel {
-
+    var contentIndex: Int { get }
 }

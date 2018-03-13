@@ -11,9 +11,19 @@ import UIKit
 class SEComposeTextCell: UICollectionViewCell, SECell {
     @IBOutlet weak var textView: UITextView!
 
-    var cellModel = SEComposeTextCellModel(text: "") {
+    var cellModel = SEComposeTextCellModel(contentIndex: 0, text: "") {
         didSet {
             textView.text = cellModel.text
+            textView.delegate = self
         }
+    }
+}
+
+extension SEComposeTextCell: UITextViewDelegate {
+    func textViewDidChange(_ textView: UITextView) {
+        cellModel.text = textView.text
+
+        let content = SEContent(type: .text(textView.text))
+        store.dispatch(.setContentValue(content, index: cellModel.contentIndex))
     }
 }

@@ -7,5 +7,6 @@
 //
 
 struct SEComposeTextCellModel: SEComposeCellModel {
-    let text: String
+    let contentIndex: Int
+    var text: String
 }

@@ -10,7 +10,7 @@ import Foundation
 
 enum SEAction {
     case setContent([SEContent])
-    case setContentStatus(index: Int, status: SEContentStatus)
+    case setContentValue(SEContent, index: Int)
     case setServers([SEServer])
     case selectServerIndex(Int)
     case setRooms([Subscription])

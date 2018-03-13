@@ -41,7 +41,6 @@ class SEComposeViewController: SEViewController {
 
     override func stateUpdated(_ state: SEState) {
         viewModel = SEComposeViewModel(state: state)
-        collectionView.reloadData()
     }
 }
 

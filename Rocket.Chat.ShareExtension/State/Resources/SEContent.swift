@@ -9,9 +9,14 @@
 import Foundation
 
 struct SEFile {
-    let name: String
+    var name: String
+    var description: String
     let mimetype: String
     let data: Data
+
+    static var empty: SEFile {
+        return SEFile(name: "", description: "", mimetype: "", data: Data())
+    }
 }
 
 enum SEContentType {

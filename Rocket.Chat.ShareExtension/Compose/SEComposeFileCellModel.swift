@@ -9,22 +9,28 @@
 import UIKit
 
 struct SEComposeFileCellModel: SEComposeCellModel {
-    let image: UIImage
-    let nameText: String
-    let descriptionText: String
-    let statusText: String
+    let contentIndex: Int
+    var file: SEFile
 
-    init(file: SEFile, status: SEContentStatus) {
+    let image: UIImage
+
+    var nameText: String {
+        return file.name
+    }
+
+    var descriptionText: String {
+        return file.description
+    }
+
+    init(contentIndex: Int, file: SEFile) {
+        self.contentIndex = contentIndex
+        self.file = file
+
         if file.mimetype == "image/jpeg" {
             image = UIImage(data: file.data) ?? UIImage()
         } else {
             image = UIImage()
         }
-
-        nameText = file.name
-        descriptionText = ""
-
-        statusText = String(describing: status)
     }
 
     var namePlaceholder: String {
@@ -40,6 +46,6 @@ struct SEComposeFileCellModel: SEComposeCellModel {
 
 extension SEComposeFileCellModel {
     static var emptyState: SEComposeFileCellModel {
-        return SEComposeFileCellModel(file: SEFile(name: "", mimetype: "", data: Data()), status: .notSent)
+        return SEComposeFileCellModel(contentIndex: 0, file: .empty)
     }
 }

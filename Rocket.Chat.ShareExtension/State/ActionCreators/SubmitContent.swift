@@ -17,7 +17,8 @@ fileprivate extension SEStore {
                     roomId: store.state.currentRoom.rid,
                     data: file.data,
                     filename: file.name,
-                    mimetype: file.mimetype
+                    mimetype: file.mimetype,
+                    description: file.description
                 )
             case .text(let text):
                 return SendMessageRequest(
@@ -55,21 +56,24 @@ func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
             return
         }
 
-        store.dispatch(.setContentStatus(index: index, status: .sending))
+        let content = store.state.content[index]
+        store.dispatch(.setContentValue(content.withStatus(.sending), index: index))
 
         store.api?.fetch(request, succeeded: { result in
             DispatchQueue.main.async {
+                let content = store.state.content[index]
                 if let error = result.error {
-                    store.dispatch(.setContentStatus(index: index, status: .errored(error)))
+                    store.dispatch(.setContentValue(content.withStatus(.errored(error)), index: index))
                 } else {
-                    store.dispatch(.setContentStatus(index: index, status: .succeeded))
+                    store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
                 }
             }
 
             requestNext()
         }, errored: { error in
             DispatchQueue.main.async {
-                store.dispatch(.setContentStatus(index: index, status: .errored("\(error)")))
+                let content = store.state.content[index]
+                store.dispatch(.setContentValue(content.withStatus(.errored("\(error)")), index: index))
             }
 
             requestNext()
@@ -94,17 +98,20 @@ func submitMessages(store: SEStore, completion: @escaping (() -> Void)) {
             return
         }
 
-        store.dispatch(.setContentStatus(index: index, status: .sending))
+        let content = store.state.content[index]
+        store.dispatch(.setContentValue(content.withStatus(.sending), index: index))
 
         store.api?.fetch(request, succeeded: { _ in
             DispatchQueue.main.async {
-                store.dispatch(.setContentStatus(index: index, status: .succeeded))
+                let content = store.state.content[index]
+                store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
             }
 
             requestNext()
         }, errored: { error in
             DispatchQueue.main.async {
-                store.dispatch(.setContentStatus(index: index, status: .errored("\(error)")))
+                let content = store.state.content[index]
+                store.dispatch(.setContentValue(content.withStatus(.errored("\(error)")), index: index))
             }
 
             requestNext()
