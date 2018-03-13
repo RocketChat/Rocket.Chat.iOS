@@ -7,17 +7,18 @@
 //
 
 import UIKit
+import RealmSwift
 
 fileprivate typealias ListSegueData = (title: String, query: String?)
 
-class ChannelInfoViewController: BaseViewController {
+class ChannelInfoViewController: BaseViewController, UITextViewDelegate {
 
     var tableViewData: [[Any]] = [] {
         didSet {
             tableView?.reloadData()
         }
     }
-
+    
     var subscription: Subscription? {
         didSet {
             guard let subscription = self.subscription else { return }
@@ -53,6 +54,7 @@ class ChannelInfoViewController: BaseViewController {
 
     @IBOutlet weak var tableView: UITableView!
     weak var buttonFavorite: UIBarButtonItem?
+    weak var saveButton: UIBarButtonItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -65,6 +67,15 @@ class ChannelInfoViewController: BaseViewController {
                 navigationItem.rightBarButtonItem = buttonFavorite
                 self.buttonFavorite = buttonFavorite
                 updateButtonFavoriteImage()
+            }
+        }
+        
+        if let currentUser = AuthManager.currentUser() {
+            if currentUser.hasPermission(.viewRoomAdministration) {
+                let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
+                navigationItem.rightBarButtonItems?.append(saveButton)
+                self.saveButton = saveButton
+                self.saveButton?.isEnabled = false
             }
         }
     }
@@ -135,6 +146,24 @@ class ChannelInfoViewController: BaseViewController {
         self.subscription?.updateFavorite(!subscription.favorite)
         updateButtonFavoriteImage()
     }
+    
+    @objc func saveButtonTapped(_ sender: Any) {
+        guard let subscription = self.subscription else { return }
+        guard let descriptionCell = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? ChannelInfoDescriptionCell else { return }
+        guard let topicCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? ChannelInfoDescriptionCell else { return }
+        guard let description = descriptionCell.labelDescription.text else { return }
+        guard let topic = topicCell.labelDescription.text else { return }
+        
+        SubscriptionManager.updateRoomDescription(subscription: subscription, description: description) { response in
+            Log.debug(response.msg.debugDescription)
+        }
+        
+        SubscriptionManager.updateRoomTopic(subscription: subscription, topic: topic) { response in
+            Log.debug(response.msg.debugDescription)
+        }
+        
+        self.saveButton?.isEnabled = false
+    }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
         dismiss(animated: true, completion: nil)
@@ -145,7 +174,7 @@ class ChannelInfoViewController: BaseViewController {
 // MARK: UITableViewDelegate
 
 extension ChannelInfoViewController: UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableViewData[indexPath.section][indexPath.row]
 
@@ -173,6 +202,12 @@ extension ChannelInfoViewController: UITableViewDelegate {
         if let data = data as? ChannelInfoDescriptionCellData {
             if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoDescriptionCell.identifier) as? ChannelInfoDescriptionCell {
                 cell.data = data
+                cell.labelDescription.delegate = self
+                
+                if indexPath == IndexPath(row: 2, section: 0) && self.saveButton != nil {
+                    cell.isUserInteractionEnabled = true
+                }
+                
                 return cell
             }
         }
@@ -245,4 +280,21 @@ extension ChannelInfoViewController: MembersListDelegate {
             self.dismiss(animated: true, completion: nil)
         }
     }
+}
+
+// MARK: UITextViewDelegate
+
+extension ChannelInfoViewController {
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let currentDescription = subscription?.roomDescription
+        let newDescription = textView.text
+        
+        if currentDescription == newDescription {
+            self.saveButton?.isEnabled = false
+        } else {
+            self.saveButton?.isEnabled = true
+        }
+    }
+    
 }
