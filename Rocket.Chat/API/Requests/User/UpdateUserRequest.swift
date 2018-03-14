@@ -40,9 +40,8 @@ class UpdateUserRequest: APIRequest {
             body["data"]["password"].string = password
         }
 
-        if !(body["data"]["email"].string?.isEmpty ?? true) || !(password?.isEmpty ?? true) {
-            guard let sha256password = currentPassword?.sha256() else { return nil }
-            body["data"]["currentPassword"].string = sha256password
+        if let currentPassword = currentPassword {
+            body["data"]["currentPassword"].string = currentPassword.sha256()
         }
 
         let string = body.rawString()
