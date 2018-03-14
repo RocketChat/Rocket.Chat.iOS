@@ -87,7 +87,7 @@ class NewPasswordTableViewController: UITableViewController {
             }
         }
 
-        let updatePasswordRequest = UpdateUserRequest(userId: userId, password: newPassword)
+        let updatePasswordRequest = UpdateUserRequest(password: newPassword, currentPassword: "123456")
         api?.fetch(updatePasswordRequest, succeeded: { [weak self] result in
             stopLoading()
 

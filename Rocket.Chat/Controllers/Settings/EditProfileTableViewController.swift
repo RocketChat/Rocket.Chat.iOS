@@ -65,6 +65,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     var isLoading = true
     var isEditingProfile = false
 
+    var currentPassword: String?
     var user: User? = User() {
         didSet {
             bindUserData()
@@ -199,7 +200,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         guard
             let user = user,
-            let userId = user.identifier,
             let name = name.text,
             let username = username.text,
             let email = email.text,
@@ -211,10 +211,47 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             return
         }
 
+        let shouldRequireCurrentPassword = user.emails.first?.email == email
+
         user.name = name
         user.username = username
         user.emails.first?.email = email
 
+        if shouldRequireCurrentPassword {
+            let alert = UIAlertController(
+                title: localized("auth.forgot_password.title"),
+                message: localized("auth.forgot_password.message"),
+                preferredStyle: .alert
+            )
+
+            let updateUserAction = UIAlertAction(title: localized("Send"), style: .default, handler: { _ in
+                self.currentPassword = alert.textFields?.first?.text
+                self.update(user: user)
+            })
+
+            updateUserAction.isEnabled = false
+
+            alert.addTextField(configurationHandler: { textField in
+                textField.placeholder = "Your current password"
+                if #available(iOS 11.0, *) {
+                    textField.textContentType = .password
+                }
+                textField.isSecureTextEntry = true
+
+                _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
+                    updateUserAction.isEnabled = textField.text?.isEmpty ?? false
+                }
+            })
+
+            alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+            alert.addAction(updateUserAction)
+            present(alert, animated: true)
+        } else {
+            update(user: user)
+        }
+    }
+
+    fileprivate func update(user: User) {
         startLoading()
 
         if let avatarFile = avatarFile {
@@ -238,7 +275,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         isUpdatingUser = true
 
-        let updateUserRequest = UpdateUserRequest(userId: userId, user: user)
+        let updateUserRequest = UpdateUserRequest(user: user, currentPassword: currentPassword)
         api?.fetch(updateUserRequest, succeeded: { [weak self] result in
             guard let weakSelf = self else { return }
             stopLoading()
