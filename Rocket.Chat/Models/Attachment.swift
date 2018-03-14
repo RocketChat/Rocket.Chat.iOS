@@ -61,7 +61,8 @@ class Attachment: BaseModel {
     var videoThumbPath: URL? {
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documents = path[0]
-        return documents.appendingPathComponent("\(identifier ?? "temp").png")
+        let thumbName = videoURL?.replacingOccurrences(of: "/", with: "\\") ?? "temp"
+        return documents.appendingPathComponent("\(thumbName).png")
     }
 
     var fields = List<AttachmentField>()
