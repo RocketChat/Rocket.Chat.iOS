@@ -39,6 +39,7 @@ class NewPasswordTableViewController: UITableViewController {
     let api = API.current()
     var user: User!
     var currentPassword: String?
+    var passwordUpdated: ((_ newPasswordViewController: UIViewController?) -> Void)?
 
     // MARK: View Life Cycle
 
@@ -124,7 +125,7 @@ class NewPasswordTableViewController: UITableViewController {
             if let errorMessage = result.errorMessage {
                 Alert(key: "alert.update_password_error").withMessage(errorMessage).present()
             } else {
-                self?.alertSuccess(title: localized("alert.update_password_success.title"))
+                self?.passwordUpdated?(self)
             }
         }, errored: { _ in
             stopLoading()

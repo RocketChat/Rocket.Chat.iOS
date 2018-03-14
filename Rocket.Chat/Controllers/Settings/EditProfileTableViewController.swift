@@ -349,6 +349,16 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let newPassword = segue.destination as? NewPasswordTableViewController {
             newPassword.user = user
+            newPassword.passwordUpdated = { [weak self] newPasswordViewController in
+                DispatchQueue.main.async {
+                    CATransaction.begin()
+                    CATransaction.setCompletionBlock({
+                        self?.alertSuccess(title: localized("alert.update_password_success.title"))
+                    })
+                    newPasswordViewController?.navigationController?.popViewController(animated: true)
+                    CATransaction.commit()
+                }
+            }
         }
     }
 
