@@ -10,7 +10,12 @@ import UIKit
 import Social
 
 final class SERoomsViewController: SEViewController {
-    private var viewModel = SERoomsViewModel.emptyState
+    private var viewModel = SERoomsViewModel.emptyState {
+        didSet {
+            title = viewModel.title
+            tableView.reloadData()
+        }
+    }
 
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -34,10 +39,7 @@ final class SERoomsViewController: SEViewController {
 
     override func stateUpdated(_ state: SEState) {
         super.stateUpdated(state)
-
         viewModel = SERoomsViewModel(state: state)
-        title = viewModel.title
-        tableView.reloadData()
     }
 
     @IBAction func cancelButtonPressed(_ sender: Any) {

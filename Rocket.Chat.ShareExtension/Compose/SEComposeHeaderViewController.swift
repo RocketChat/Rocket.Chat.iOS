@@ -29,6 +29,7 @@ class SEComposeHeaderViewController: SEViewController {
     }
 
     override func stateUpdated(_ state: SEState) {
+        super.stateUpdated(state)
         viewModel = SEComposeHeaderViewModel(state: state)
     }
 

@@ -57,6 +57,7 @@ class SEComposeViewController: SEViewController {
     }
 
     override func stateUpdated(_ state: SEState) {
+        super.stateUpdated(state)
         viewModel = SEComposeViewModel(state: state)
     }
 

@@ -23,3 +23,8 @@
 "compose.destination.to" = "To: ";
 "compose.file.name.placeholder" = "File name";
 "compose.file.description.placeholder" = "File description";
+
+"report.success.title" = "Success";
+"report.success.message" = "Shared your content successfully.";
+"report.error.title" = "Error";
+"report.error.message" = "Something wrong happened while sending your content:";

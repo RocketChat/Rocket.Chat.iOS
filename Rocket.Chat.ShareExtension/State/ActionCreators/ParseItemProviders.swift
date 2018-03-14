@@ -19,7 +19,9 @@ extension NSItemProvider {
             loadItem(forTypeIdentifier: kUTTypeText as String, options: nil) { text, error in
                 guard error == nil, let text = text as? String else { return }
                 let content = store.state.content + [SEContent(type: .text(text))]
-                store.dispatch(.setContent(content))
+                DispatchQueue.main.async {
+                    store.dispatch(.setContent(content))
+                }
             }
 
             return true
@@ -35,7 +37,9 @@ extension NSItemProvider {
             loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
                 guard error == nil, let url = url as? URL else { return }
                 let content = store.state.content + [SEContent(type: .text(url.absoluteString))]
-                store.dispatch(.setContent(content))
+                DispatchQueue.main.async {
+                    store.dispatch(.setContent(content))
+                }
             }
 
             return true
@@ -64,7 +68,9 @@ extension NSItemProvider {
                 if let data = UIImageJPEGRepresentation(image, 0.9) {
                     let file = SEFile(name: name, description: "", mimetype: "image/jpeg", data: data, previewImage: nil)
                     let content = store.state.content + [SEContent(type: .file(file))]
-                    store.dispatch(.setContent(content))
+                    DispatchQueue.main.async {
+                        store.dispatch(.setContent(content))
+                    }
                 }
             })
 
@@ -93,7 +99,9 @@ extension NSItemProvider {
 
                 let file = SEFile(name: name, description: "", mimetype: "video/mp4", data: data, previewImage: image)
                 let content = store.state.content + [SEContent(type: .file(file))]
-                store.dispatch(.setContent(content))
+                DispatchQueue.main.async {
+                    store.dispatch(.setContent(content))
+                }
             })
 
             return true
@@ -124,7 +132,9 @@ extension NSItemProvider {
 
                 let file = SEFile(name: name, description: "", mimetype: mimetype, data: data, previewImage: #imageLiteral(resourceName: "icon_file"))
                 let content = store.state.content + [SEContent(type: .file(file))]
-                store.dispatch(.setContent(content))
+                DispatchQueue.main.async {
+                    store.dispatch(.setContent(content))
+                }
             })
 
             return true
