@@ -66,7 +66,7 @@ extension NSItemProvider {
                 }
 
                 if let data = UIImageJPEGRepresentation(image, 0.9) {
-                    let file = SEFile(name: name, description: "", mimetype: "image/jpeg", data: data, previewImage: nil)
+                    let file = SEFile(name: name, description: "", mimetype: "image/jpeg", data: data)
                     let content = store.state.content + [SEContent(type: .file(file))]
                     DispatchQueue.main.async {
                         store.dispatch(.setContent(content))
@@ -97,7 +97,7 @@ extension NSItemProvider {
 
                 guard let data = _data else { return }
 
-                let file = SEFile(name: name, description: "", mimetype: "video/mp4", data: data, previewImage: image)
+                let file = SEFile(name: name, description: "", mimetype: "video/mp4", data: data)
                 let content = store.state.content + [SEContent(type: .file(file))]
                 DispatchQueue.main.async {
                     store.dispatch(.setContent(content))
@@ -130,7 +130,7 @@ extension NSItemProvider {
                     return
                 }
 
-                let file = SEFile(name: name, description: "", mimetype: mimetype, data: data, previewImage: #imageLiteral(resourceName: "icon_file"))
+                let file = SEFile(name: name, description: "", mimetype: mimetype, data: data)
                 let content = store.state.content + [SEContent(type: .file(file))]
                 DispatchQueue.main.async {
                     store.dispatch(.setContent(content))

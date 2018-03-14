@@ -13,10 +13,9 @@ struct SEFile {
     var description: String
     let mimetype: String
     let data: Data
-    let previewImage: UIImage?
 
     static var empty: SEFile {
-        return SEFile(name: "", description: "", mimetype: "", data: Data(), previewImage: nil)
+        return SEFile(name: "", description: "", mimetype: "", data: Data())
     }
 }
 
