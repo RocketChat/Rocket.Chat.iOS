@@ -479,6 +479,9 @@
 		80D0CE732050BE680056B17F /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
 		80D0CE742050BFBE0056B17F /* AuthManager+CurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB82048581F00114F28 /* AuthManager+CurrentUser.swift */; };
 		80D0CE752050BFD20056B17F /* Auth+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB42048571200114F28 /* Auth+User.swift */; };
+		80D5637220592D32008896D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D5637120592D32008896D6 /* Assets.xcassets */; };
+		80D563752059325A008896D6 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D563742059325A008896D6 /* MimeType.swift */; };
+		80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5637620593533008896D6 /* ParseItemProviders.swift */; };
 		80D955C2202154A300E3F281 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D955C1202154A300E3F281 /* CASViewController.swift */; };
 		80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F281FD8B2B800B70B59 /* UserExtensions.swift */; };
 		80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */; };
@@ -1046,6 +1049,9 @@
 		80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomCellModel.swift; sourceTree = "<group>"; };
 		80D0CE6E20509C100056B17F /* SEAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEAvatarView.swift; sourceTree = "<group>"; };
 		80D0CE7020509C230056B17F /* SEAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEAvatarView.xib; sourceTree = "<group>"; };
+		80D5637120592D32008896D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		80D563742059325A008896D6 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
+		80D5637620593533008896D6 /* ParseItemProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseItemProviders.swift; sourceTree = "<group>"; };
 		80D955C1202154A300E3F281 /* CASViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CASViewController.swift; path = Controllers/Auth/CASViewController.swift; sourceTree = "<group>"; };
 		80E99F281FD8B2B800B70B59 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
 		80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
@@ -2257,13 +2263,7 @@
 				8076FDE12048A7C500114F28 /* SEComposeHeaderViewController.swift */,
 				80FA906F2056A33A0069038F /* SEComposeViewModel.swift */,
 				805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */,
-				80FA90772056C3AE0069038F /* SEComposeCellModel.swift */,
-				80FA90752056C24C0069038F /* SEComposeTextCellModel.swift */,
-				80FA90712056C1190069038F /* SEComposeTextCell.swift */,
-				80FA90732056C1350069038F /* SEComposeTextCell.xib */,
-				80FA906D2056A1F80069038F /* SEComposeFileCellModel.swift */,
-				80FA906920569F890069038F /* SEComposeFileCell.swift */,
-				80FA906B20569FA10069038F /* SEComposeFileCell.xib */,
+				80D563702058A8A7008896D6 /* Cells */,
 			);
 			path = Compose;
 			sourceTree = "<group>";
@@ -2271,8 +2271,8 @@
 		8076FDEB2049A5CB00114F28 /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				8076FDD920489F5900114F28 /* SEViewController.swift */,
 				802A4E102049C7340072CD23 /* SENavigationController.swift */,
+				8076FDD920489F5900114F28 /* SEViewController.swift */,
 				8076FDEC2049A5F600114F28 /* SECellModel.swift */,
 				80D0CE61205023710056B17F /* SECell.swift */,
 				805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */,
@@ -2290,6 +2290,7 @@
 				807FB5802048378500E21429 /* Servers */,
 				807FB57E2048376900E21429 /* Rooms */,
 				8076FDE02048A69200114F28 /* Compose */,
+				80D5637320593245008896D6 /* Helpers */,
 				807FB56C20472B2700E21429 /* Resources */,
 				807FB57920472E0400E21429 /* Localization.swift */,
 				807FB55C2046E7DD00E21429 /* Main.storyboard */,
@@ -2303,6 +2304,7 @@
 			isa = PBXGroup;
 			children = (
 				807FB57120472B6A00E21429 /* Localizable.strings */,
+				80D5637120592D32008896D6 /* Assets.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -2398,6 +2400,28 @@
 			path = RCEmojiKit;
 			sourceTree = "<group>";
 		};
+		80D563702058A8A7008896D6 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				80FA90772056C3AE0069038F /* SEComposeCellModel.swift */,
+				80FA90752056C24C0069038F /* SEComposeTextCellModel.swift */,
+				80FA90712056C1190069038F /* SEComposeTextCell.swift */,
+				80FA90732056C1350069038F /* SEComposeTextCell.xib */,
+				80FA906D2056A1F80069038F /* SEComposeFileCellModel.swift */,
+				80FA906920569F890069038F /* SEComposeFileCell.swift */,
+				80FA906B20569FA10069038F /* SEComposeFileCell.xib */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		80D5637320593245008896D6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				80D563742059325A008896D6 /* MimeType.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		80E99F2A1FD8B4AC00B70B59 /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -2429,6 +2453,7 @@
 			children = (
 				80977AB5204EEF1E00C41435 /* SEActionCreators.swift */,
 				80FA907C2057F4650069038F /* SubmitContent.swift */,
+				80D5637620593533008896D6 /* ParseItemProviders.swift */,
 			);
 			path = ActionCreators;
 			sourceTree = "<group>";
@@ -2875,6 +2900,7 @@
 				807FB56F20472B6A00E21429 /* Localizable.strings in Resources */,
 				80D0CE7120509C230056B17F /* SEAvatarView.xib in Resources */,
 				80FA90742056C1350069038F /* SEComposeTextCell.xib in Resources */,
+				80D5637220592D32008896D6 /* Assets.xcassets in Resources */,
 				80D0CE5C204FFAA50056B17F /* SEServerCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3644,6 +3670,7 @@
 				8076FDC9204863AF00114F28 /* Mention.swift in Sources */,
 				80FA906E2056A1F80069038F /* SEComposeFileCellModel.swift in Sources */,
 				8076FDD22048648D00114F28 /* Email.swift in Sources */,
+				80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */,
 				8076FDE82048D3AD00114F28 /* UserDefaults+Group.swift in Sources */,
 				80977AB0204EE21F00C41435 /* HTTPMethod.swift in Sources */,
 				80977AB1204EE21F00C41435 /* VersionMiddleware.swift in Sources */,
@@ -3657,6 +3684,7 @@
 				8076FD9A20484A6000114F28 /* SEStore.swift in Sources */,
 				80D0CE722050BD160056B17F /* UIColorExtension.swift in Sources */,
 				8076FD9E2048510C00114F28 /* AuthManager.swift in Sources */,
+				80D563752059325A008896D6 /* MimeType.swift in Sources */,
 				8076FDA52048534200114F28 /* String+Random.swift in Sources */,
 				807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */,
 				8076FDCE2048642400114F28 /* User.swift in Sources */,

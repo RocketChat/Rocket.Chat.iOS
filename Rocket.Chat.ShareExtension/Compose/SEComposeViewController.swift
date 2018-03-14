@@ -42,6 +42,16 @@ class SEComposeViewController: SEViewController {
     override func stateUpdated(_ state: SEState) {
         viewModel = SEComposeViewModel(state: state)
     }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
+            return
+        }
+        flowLayout.invalidateLayout()
+        collectionView.setNeedsLayout()
+        collectionView.layoutIfNeeded()
+    }
 }
 
 // MARK: UICollectionViewDataSource
