@@ -64,7 +64,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     var isUpdatingUser = false
     var isUploadingAvatar = false
     var isLoading = true
-    var isEditingProfile = false
 
     var currentPassword: String?
     var user: User? = User() {
@@ -157,7 +156,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     // MARK: State Management
 
     @objc func beginEditing() {
-        isEditingProfile = true
         navigationItem.title = viewModel.editingTitle
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.hidesBackButton = true
@@ -168,7 +166,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     @objc func endEditing() {
         bindUserData()
 
-        isEditingProfile = false
         navigationItem.title = viewModel.title
         navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = nil
@@ -214,14 +211,14 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             return
         }
 
+        var userRaw = JSON([:])
+
+        if name != self.user?.name { userRaw["name"].string = name }
+        if username != self.user?.username { userRaw["username"].string = username }
+        if email != self.user?.emails.first?.email { userRaw["emails"] = [["address": email]] }
+
         let user = User()
-        user.map(JSON([
-            "name": name,
-            "username": username,
-            "emails": [[
-                "address": email
-                ]]
-            ]), realm: nil)
+        user.map(userRaw, realm: nil)
 
         if !(self.user?.emails.first?.email == email) {
             let alert = UIAlertController(
