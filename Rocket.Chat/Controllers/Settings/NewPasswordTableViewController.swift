@@ -38,6 +38,7 @@ class NewPasswordTableViewController: UITableViewController {
     let viewModel = NewPasswordViewModel()
     let api = API.current()
     var user: User!
+    var currentPassword: String?
 
     // MARK: View Life Cycle
 
@@ -56,8 +57,6 @@ class NewPasswordTableViewController: UITableViewController {
     @IBAction func savePassword(sender: UIBarButtonItem!) {
         view.endEditing(true)
 
-        guard let userId = user.identifier else { return }
-
         guard
             let newPassword = newPassword.text,
             let passwordConfirmation = passwordConfirmation.text,
@@ -73,6 +72,37 @@ class NewPasswordTableViewController: UITableViewController {
             return
         }
 
+        let alert = UIAlertController(
+            title: localized("auth.forgot_password.title"),
+            message: localized("auth.forgot_password.message"),
+            preferredStyle: .alert
+        )
+
+        let updatePasswordAction = UIAlertAction(title: localized("Send"), style: .default, handler: { _ in
+            self.currentPassword = alert.textFields?.first?.text
+            self.update(password: newPassword, sender: sender)
+        })
+
+        updatePasswordAction.isEnabled = false
+
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = "Your current password"
+            if #available(iOS 11.0, *) {
+                textField.textContentType = .password
+            }
+            textField.isSecureTextEntry = true
+
+            _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
+                updatePasswordAction.isEnabled = !(textField.text?.isEmpty ?? false)
+            }
+        })
+
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+        alert.addAction(updatePasswordAction)
+        present(alert, animated: true)
+    }
+
+    fileprivate func update(password newPassword: String, sender: UIBarButtonItem) {
         DispatchQueue.main.async {
             self.navigationItem.hidesBackButton = true
             self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
@@ -87,7 +117,7 @@ class NewPasswordTableViewController: UITableViewController {
             }
         }
 
-        let updatePasswordRequest = UpdateUserRequest(password: newPassword, currentPassword: "123456")
+        let updatePasswordRequest = UpdateUserRequest(password: newPassword, currentPassword: currentPassword)
         api?.fetch(updatePasswordRequest, succeeded: { [weak self] result in
             stopLoading()
 

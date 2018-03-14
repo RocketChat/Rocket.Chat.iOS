@@ -214,18 +214,16 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             return
         }
 
-        let shouldRequireCurrentPassword = !(self.user?.emails.first?.email == email)
-
         let user = User()
         user.map(JSON([
             "name": name,
             "username": username,
             "emails": [[
-            "address": email
+                "address": email
                 ]]
             ]), realm: nil)
 
-        if shouldRequireCurrentPassword {
+        if !(self.user?.emails.first?.email == email) {
             let alert = UIAlertController(
                 title: localized("auth.forgot_password.title"),
                 message: localized("auth.forgot_password.message"),
