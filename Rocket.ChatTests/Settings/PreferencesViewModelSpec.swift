@@ -15,14 +15,19 @@ class PreferencesViewModelSpec: XCTestCase {
     let info = Bundle.main.infoDictionary
     let model = PreferencesViewModel()
 
+    override func setUp() {
+        super.setUp()
+        UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+    }
+
     func testAppVersion() {
         let version = info?["CFBundleShortVersionString"] as? String
-        XCTAssert(model.version == version, "show app version")
+        XCTAssertEqual(model.version, version, "show app version")
     }
 
     func testBuildVersion() {
         let build = info?["CFBundleVersion"] as? String
-        XCTAssert(model.build == build, "show build version")
+        XCTAssertEqual(model.build, build, "show build version")
     }
 
     func testFormattedAppVersion() {
@@ -30,13 +35,13 @@ class PreferencesViewModelSpec: XCTestCase {
         let version = info?["CFBundleShortVersionString"] as? String ?? ""
         let formatted = "Version: \(version) (\(build))"
 
-        XCTAssert(model.formattedVersion == formatted, "show app version and build")
+        XCTAssertEqual(model.formattedVersion, formatted, "show app version and build")
     }
 
     func testLicenseURL() {
         let url = URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
         let modelURL = model.licenseURL
-        XCTAssert(modelURL?.absoluteString == url?.absoluteString, "show license url")
+        XCTAssertEqual(modelURL?.absoluteString, url?.absoluteString, "show license url")
     }
 
     func testLicenseURLNotNit() {
