@@ -29,7 +29,13 @@ struct SEComposeHeaderViewModel {
 
 extension SEComposeHeaderViewModel {
     init(state: SEState) {
-        doneButtonEnabled = true
+        doneButtonEnabled = !state.content.contains(where: {
+            if case .sending = $0.status {
+                return true
+            }
+
+            return false
+        })
 
         let symbol: String
         switch state.currentRoom.type {

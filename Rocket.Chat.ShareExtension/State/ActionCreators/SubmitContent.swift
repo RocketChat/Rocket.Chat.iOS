@@ -51,33 +51,36 @@ func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
     }
 
     func requestNext() {
-        guard let (index, request) = fileRequests.popLast() else {
-            completion()
-            return
-        }
+        DispatchQueue.main.async {
+            guard let (index, request) = fileRequests.popLast() else {
+                completion()
+                return
+            }
 
-        let content = store.state.content[index]
-        store.dispatch(.setContentValue(content.withStatus(.sending), index: index))
+            let content = store.state.content[index]
 
-        store.api?.fetch(request, succeeded: { result in
-            DispatchQueue.main.async {
-                let content = store.state.content[index]
-                if let error = result.error {
-                    store.dispatch(.setContentValue(content.withStatus(.errored(error)), index: index))
-                } else {
-                    store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
+            store.dispatch(.setContentValue(content.withStatus(.sending), index: index))
+
+            store.api?.fetch(request, succeeded: { result in
+                DispatchQueue.main.async {
+                    let content = store.state.content[index]
+                    if let error = result.error {
+                        store.dispatch(.setContentValue(content.withStatus(.errored(error)), index: index))
+                    } else {
+                        store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
+                    }
                 }
-            }
 
-            requestNext()
-        }, errored: { error in
-            DispatchQueue.main.async {
-                let content = store.state.content[index]
-                store.dispatch(.setContentValue(content.withStatus(.errored("\(error)")), index: index))
-            }
+                requestNext()
+            }, errored: { error in
+                DispatchQueue.main.async {
+                    let content = store.state.content[index]
+                    store.dispatch(.setContentValue(content.withStatus(.errored("\(error)")), index: index))
+                }
 
-            requestNext()
-        })
+                requestNext()
+            })
+        }
     }
 
     requestNext()
