@@ -66,6 +66,15 @@
 "auth.connect.ssl_required" = "Der Server muss SSL unterstützen";
 "auth.connect.connecting" = "Verbindung läuft. Warte kurz!";
 
+"auth.login.username.placeholder" = "Email or username";
+"auth.login.password.placeholder" = "Password";
+"auth.login.buttonRegister" = "Create new account";
+"auth.login.buttonResetPassword" = "Forgot password";
+"auth.login.agree_label" = "By proceeding you are agreeing to our";
+"auth.login.agree_and" = "and";
+"auth.login.agree_termsofservice" = "Terms of Service";
+"auth.login.agree_privacypolicy" = "Privacy Policy";
+
 "auth.forgot_password.title" = "Passwort vergessen?";
 "auth.forgot_password.message" = "E-Mail-Adresse eingeben";
 "auth.forgot_password.success" = "Wenn diese E-Mail-Adresse hinterlegt ist, werden Anweisungen zum Zurücksetzen des Passworts verschickt. Wenn du keine Mail bekommen hast, versuche es noch einmal.";

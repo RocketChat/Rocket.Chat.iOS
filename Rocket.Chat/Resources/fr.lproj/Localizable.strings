@@ -66,6 +66,15 @@
 "auth.connect.ssl_required" = "Votre serveur doit supporter le SSL";
 "auth.connect.connecting" = "Connexion en cours. Tenez bon.";
 
+"auth.login.username.placeholder" = "Email or username";
+"auth.login.password.placeholder" = "Password";
+"auth.login.buttonRegister" = "Create new account";
+"auth.login.buttonResetPassword" = "Forgot password";
+"auth.login.agree_label" = "By proceeding you are agreeing to our";
+"auth.login.agree_and" = "and";
+"auth.login.agree_termsofservice" = "Terms of Service";
+"auth.login.agree_privacypolicy" = "Privacy Policy";
+
 "auth.forgot_password.title" = "Mot de passe oublié ?";
 "auth.forgot_password.message" = "Entrez votre email";
 "auth.forgot_password.success" = "If this email is registered, we'll send instructions on how to reset your password. If you do not receive an email shortly, please come back and try again."; //TODO
