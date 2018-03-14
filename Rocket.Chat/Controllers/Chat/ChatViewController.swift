@@ -182,6 +182,7 @@ final class ChatViewController: SLKTextViewController {
         setupScrollToBottomButton()
 
         NotificationCenter.default.addObserver(self, selector: #selector(reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         if !SocketManager.isConnected() {
@@ -201,6 +202,11 @@ final class ChatViewController: SLKTextViewController {
         }
 
         setupReplyView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        keyboardFrame?.updateFrame()
     }
 
     @objc internal func reconnect() {
@@ -472,6 +478,18 @@ final class ChatViewController: SLKTextViewController {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         } else {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
+        }
+    }
+
+    @objc override func keyboardWillShow(_ notification: Notification) {
+        // Scroll to the bottom when the collectionView has scrolled more
+        // than scrollToBottomHeightMultiplier times the view's height.
+        let scrollToBottomHeightMultiplier: CGFloat = 1.2
+
+        let contentHeight = collectionView?.contentSize.height ?? 0
+        let contentOffset = collectionView?.contentOffset.y ?? 0
+        if contentHeight - contentOffset < self.view.frame.height * scrollToBottomHeightMultiplier {
+            scrollToBottom()
         }
     }
 
