@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pRn-eN-ble">
-                        <rect key="frame" x="20" y="0.0" width="330" height="322"/>
+                        <rect key="frame" x="0.0" y="0.0" width="370" height="322"/>
                     </imageView>
                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ceq-58-6iF">
                         <rect key="frame" x="60" y="342" width="250" height="30"/>
@@ -49,9 +49,9 @@
                 <constraint firstItem="pRn-eN-ble" firstAttribute="top" secondItem="dZK-cP-DMA" secondAttribute="top" id="IaZ-gT-TDZ"/>
                 <constraint firstItem="Ceq-58-6iF" firstAttribute="top" secondItem="pRn-eN-ble" secondAttribute="bottom" constant="20" id="LeQ-yc-LMQ"/>
                 <constraint firstItem="VAS-Ug-Mtj" firstAttribute="leading" secondItem="6ok-su-VBx" secondAttribute="leading" constant="60" id="MiZ-Wi-ovY"/>
-                <constraint firstItem="pRn-eN-ble" firstAttribute="leading" secondItem="6ok-su-VBx" secondAttribute="leading" constant="20" id="Pwp-Sg-NAH"/>
+                <constraint firstItem="pRn-eN-ble" firstAttribute="leading" secondItem="6ok-su-VBx" secondAttribute="leading" id="Pwp-Sg-NAH"/>
                 <constraint firstAttribute="trailing" secondItem="Ceq-58-6iF" secondAttribute="trailing" constant="60" id="SEh-RG-ihk"/>
-                <constraint firstAttribute="trailing" secondItem="pRn-eN-ble" secondAttribute="trailing" constant="20" id="ZEY-Gs-B0f"/>
+                <constraint firstAttribute="trailing" secondItem="pRn-eN-ble" secondAttribute="trailing" id="ZEY-Gs-B0f"/>
                 <constraint firstItem="VAS-Ug-Mtj" firstAttribute="top" secondItem="Ceq-58-6iF" secondAttribute="bottom" constant="10" id="crv-UX-yDm"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="dZK-cP-DMA"/>
