@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SEComposeViewController: UIViewController {
+class SEComposeViewController: SEViewController {
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             collectionView.register(SEComposeTextCell.self)
@@ -39,14 +39,6 @@ class SEComposeViewController: UIViewController {
         super.viewDidLoad()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        store.subscribe(self)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        store.unsubscribe(self)
-    }
-
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
 
@@ -59,17 +51,18 @@ class SEComposeViewController: UIViewController {
         collectionView.setContentOffset(newOffset, animated: false)
 
         coordinator.animate(alongsideTransition: { [weak self] _ in
-            self?.collectionView.reloadData()
+            self?.collectionView.collectionViewLayout.invalidateLayout()
             self?.collectionView.setContentOffset(newOffset, animated: false)
         }, completion: nil)
     }
-}
 
-// MARK: StoreSubscriber
-
-extension SEComposeViewController: SEStoreSubscriber {
-    func stateUpdated(_ state: SEState) {
+    override func stateUpdated(_ state: SEState) {
         viewModel = SEComposeViewModel(state: state)
+    }
+
+    override func onKeyboardFrameWillChange(_ notification: Notification) {
+        super.onKeyboardFrameWillChange(notification)
+        collectionView.collectionViewLayout.invalidateLayout()
     }
 }
 

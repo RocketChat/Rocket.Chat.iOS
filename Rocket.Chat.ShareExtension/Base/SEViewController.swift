@@ -86,7 +86,7 @@ class SEViewController: UIViewController, SEStoreSubscriber {
         )
     }
 
-    @objc private func onKeyboardFrameWillChange(_ notification: Notification) {
+    @objc func onKeyboardFrameWillChange(_ notification: Notification) {
         guard
             let userInfo = notification.userInfo,
             let keyboardFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
