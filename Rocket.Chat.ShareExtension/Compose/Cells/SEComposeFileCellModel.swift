@@ -27,9 +27,9 @@ struct SEComposeFileCellModel: SEComposeCellModel {
         self.file = file
 
         if file.mimetype == "image/jpeg" {
-            image = UIImage(data: file.data) ?? UIImage()
+            image = UIImage(data: file.data) ?? #imageLiteral(resourceName: "icon_file")
         } else {
-            image = #imageLiteral(resourceName: "icon_file")
+            image = file.previewImage ?? #imageLiteral(resourceName: "icon_file")
         }
     }
 

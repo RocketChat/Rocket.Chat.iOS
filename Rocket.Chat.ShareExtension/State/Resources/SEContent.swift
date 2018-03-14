@@ -6,16 +6,17 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 struct SEFile {
     var name: String
     var description: String
     let mimetype: String
     let data: Data
+    let previewImage: UIImage?
 
     static var empty: SEFile {
-        return SEFile(name: "", description: "", mimetype: "", data: Data())
+        return SEFile(name: "", description: "", mimetype: "", data: Data(), previewImage: nil)
     }
 }
 

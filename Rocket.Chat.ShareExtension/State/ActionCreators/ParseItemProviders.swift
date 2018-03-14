@@ -10,35 +10,45 @@ import UIKit
 import MobileCoreServices
 import AVFoundation
 
-func parseItemProviders(_ itemProviders: [NSItemProvider]) {
-    itemProviders.forEach { itemProvider in
+extension NSItemProvider {
 
-        // MARK: Text / URL
+    // MARK: Text
 
-        if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeText as String) {
-            itemProvider.loadItem(forTypeIdentifier: kUTTypeText as String, options: nil) { text, error in
+    func parseText() -> Bool {
+        if hasItemConformingToTypeIdentifier(kUTTypeText as String) {
+            loadItem(forTypeIdentifier: kUTTypeText as String, options: nil) { text, error in
                 guard error == nil, let text = text as? String else { return }
                 let content = store.state.content + [SEContent(type: .text(text))]
                 store.dispatch(.setContent(content))
             }
 
-            return
+            return true
         }
 
-        if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
-            itemProvider.loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
+        return false
+    }
+
+    // MARK: URL
+
+    func parseUrl() -> Bool {
+        if hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
+            loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
                 guard error == nil, let url = url as? URL else { return }
                 let content = store.state.content + [SEContent(type: .text(url.absoluteString))]
                 store.dispatch(.setContent(content))
             }
 
-            return
+            return true
         }
 
-        // MARK: Image
+        return false
+    }
 
-        if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
-            itemProvider.loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { item, _ in
+    // MARK: Image
+
+    func parseImage() -> Bool {
+        if hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
+            loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { item, _ in
                 let image: UIImage
                 var name = "\(String.random(8)).jpeg"
 
@@ -52,19 +62,51 @@ func parseItemProviders(_ itemProviders: [NSItemProvider]) {
                 }
 
                 if let data = UIImageJPEGRepresentation(image, 0.9) {
-                    let file = SEFile(name: name, description: "", mimetype: "image/jpeg", data: data)
+                    let file = SEFile(name: name, description: "", mimetype: "image/jpeg", data: data, previewImage: nil)
                     let content = store.state.content + [SEContent(type: .file(file))]
                     store.dispatch(.setContent(content))
                 }
             })
 
-            return
+            return true
         }
 
-        // MARK: Any
+        return false
+    }
 
-        if itemProvider.hasItemConformingToTypeIdentifier(kUTTypeItem as String) {
-            itemProvider.loadItem(forTypeIdentifier: kUTTypeItem as String, options: nil, completionHandler: { item, _ in
+    // MARK: Video
+
+    func parseVideo() -> Bool {
+        if hasItemConformingToTypeIdentifier(kUTTypeVideo as String) {
+            loadItem(forTypeIdentifier: kUTTypeVideo as String, options: nil, completionHandler: { item, _ in
+                var _data = item as? Data
+                var name = "\(String.random(8)).mp4"
+                var image: UIImage?
+
+                if let url = item as? URL {
+                    _data = try? Data(contentsOf: url)
+                    name = url.lastPathComponent
+                    image = firstFrame(videoURL: url)
+                }
+
+                guard let data = _data else { return }
+
+                let file = SEFile(name: name, description: "", mimetype: "video/mp4", data: data, previewImage: image)
+                let content = store.state.content + [SEContent(type: .file(file))]
+                store.dispatch(.setContent(content))
+            })
+
+            return true
+        }
+
+        return false
+    }
+
+    // MARK: Any
+
+    func parseAny() -> Bool {
+        if hasItemConformingToTypeIdentifier(kUTTypeItem as String) {
+            loadItem(forTypeIdentifier: kUTTypeItem as String, options: nil, completionHandler: { item, _ in
                 let data: Data
                 let mimetype: String
                 var name = "\(String.random(8)).file"
@@ -80,12 +122,24 @@ func parseItemProviders(_ itemProviders: [NSItemProvider]) {
                     return
                 }
 
-                let file = SEFile(name: name, description: "", mimetype: mimetype, data: data)
+                let file = SEFile(name: name, description: "", mimetype: mimetype, data: data, previewImage: #imageLiteral(resourceName: "icon_file"))
                 let content = store.state.content + [SEContent(type: .file(file))]
                 store.dispatch(.setContent(content))
             })
 
-            return
+            return true
         }
+
+        return false
+    }
+}
+
+func parseItemProviders(_ itemProviders: [NSItemProvider]) {
+    itemProviders.forEach { itemProvider in
+        if itemProvider.parseText() { return }
+        if itemProvider.parseUrl() { return }
+        if itemProvider.parseImage() { return }
+        if itemProvider.parseVideo() { return }
+        if itemProvider.parseAny() { return }
     }
 }
