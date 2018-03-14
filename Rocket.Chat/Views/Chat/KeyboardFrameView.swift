@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SlackTextViewController
 
 protocol KeyboardFrameViewDelegate: class {
     func keyboardDidChangeFrame(frame: CGRect?)
@@ -23,11 +24,17 @@ class KeyboardFrameView: UIView {
         registerForNotification()
     }
 
-    func registerForNotification() {
+    private func registerForNotification() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidChangeFrameNotificationReceived), name: Notification.Name.UIKeyboardDidChangeFrame, object: nil)
     }
 
-    @objc func keyboardDidChangeFrameNotificationReceived() {
+    func updateFrame() {
+        if self.frame.height > 0 || keyboardProxyView == nil || keyboardProxyView?.frame.height == 0 {
+            delegate?.keyboardDidChangeFrame(frame: self.frame)
+        }
+    }
+
+    @objc private func keyboardDidChangeFrameNotificationReceived() {
         delegate?.keyboardDidChangeFrame(frame: nil)
 
         if delegate?.keyboardProxyView != keyboardProxyView {
@@ -36,7 +43,7 @@ class KeyboardFrameView: UIView {
         }
     }
 
-    func attachToKeyboardProxyView() {
+    private func attachToKeyboardProxyView() {
         guard let keyboardProxyView = keyboardProxyView else { return }
 
         keyboardProxyView.addSubview(self)
@@ -52,9 +59,7 @@ class KeyboardFrameView: UIView {
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        if self.frame.height > 0 || keyboardProxyView == nil {
-            delegate?.keyboardDidChangeFrame(frame: self.frame)
-        }
+        updateFrame()
     }
 
     required init?(coder aDecoder: NSCoder) {
