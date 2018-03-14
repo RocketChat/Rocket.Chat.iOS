@@ -31,7 +31,6 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 4'
   pod 'SDWebImage/GIF'
-  pod 'Starscream'
   pod 'ReachabilitySwift'
 
   # Authentication SDKs
@@ -40,7 +39,6 @@ def shared_pods
   pod 'GoogleSignIn'
 
   # Debugging
-  pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
 end
 

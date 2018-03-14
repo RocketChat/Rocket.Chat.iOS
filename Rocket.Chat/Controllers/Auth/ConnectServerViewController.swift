@@ -191,7 +191,55 @@ extension ConnectServerViewController: UITextFieldDelegate {
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        connect()
+        let sharedDefaults = UserDefaults.init(suiteName: "group.rocketchat.collectivetheory.io")
+        let PKCS12Data = sharedDefaults?.value(forKey: "clientCertificate")
+        let password = sharedDefaults?.value(forKey: "certificatePassword")
+
+        if(PKCS12Data == nil){
+            let alert = UIAlertController(title: "Error", message: "You must load your Client Authentication Certificate before connecting.", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }else{
+            if(password == nil)
+            {
+                let alert = UIAlertController(title: "Client Certificate Authentication", message: "Please enter the certificate password.", preferredStyle: .alert)
+
+                alert.addTextField { (textField: UITextField) in
+                    textField.keyboardType = .default
+                    textField.placeholder = "Type your password"
+                    textField.isSecureTextEntry = true
+                }
+
+                alert.addAction(UIAlertAction(title: "Accept", style: .default, handler: { [weak alert] (_) in
+                    let password = alert?.textFields![0] // Force unwrapping because we know it exists.
+                    let key: NSString = kSecImportExportPassphrase as NSString
+                    let options: NSDictionary = [key: password?.text]
+                    var items: CFArray?
+
+                    let securityError = SecPKCS12Import(PKCS12Data as! CFData, options, &items) // swiftlint:disable:this force_cast
+                    if securityError == errSecSuccess
+                    {
+                        let sharedDefaults = UserDefaults.init(suiteName: "group.rocketchat.collectivetheory.io")
+                        sharedDefaults?.set(password?.text, forKey: "certificatePassword")
+                        sharedDefaults?.synchronize()
+                        self.connect()
+                    }
+                    else
+                    {
+                        let alert = UIAlertController(title: "Error", message: "The Client Authentication Certificate password is wrong, please verify.", preferredStyle: UIAlertControllerStyle.alert)
+                        alert.addAction(UIAlertAction(title: "Accept", style: UIAlertActionStyle.default, handler: nil))
+                        self.present(alert, animated: true, completion: nil)
+                    }
+                }))
+
+                self.present(alert, animated: true, completion: nil)
+            }
+            else
+            {
+                self.connect()
+            }
+        }
+
         return true
     }
 

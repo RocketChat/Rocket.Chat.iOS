@@ -614,6 +614,10 @@ final class ChatViewController: SLKTextViewController {
         title = subscription.displayName()
         chatTitleView?.subscription = subscription
 
+        SubscriptionManager.setCurrentRoom(room: subscription.rid) { _ in
+            // Nothing, for now
+        }
+        
         if subscription.isValid() {
             updateSubscriptionMessages()
         } else {

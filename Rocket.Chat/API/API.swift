@@ -82,7 +82,7 @@ class API: APIFetcher {
             )
         }
 
-        let task = session.dataTask(with: request) { (data, _, error) in
+        let task = SSLSession.getURLSession().dataTask(with: request) { (data, _, error) in
             if let error = error {
                 errored?(.error(error))
                 return
