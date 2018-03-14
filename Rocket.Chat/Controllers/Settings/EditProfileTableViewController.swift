@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import SwiftyJSON
 
 class EditProfileTableViewController: UITableViewController, MediaPicker {
 
@@ -85,7 +86,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         editButton = UIBarButtonItem(title: viewModel.editButtonTitle, style: .plain, target: self, action: #selector(beginEditing))
         saveButton = UIBarButtonItem(title: viewModel.saveButtonTitle, style: .done, target: self, action: #selector(saveProfile(_:)))
-        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(endEditing(shouldKeepUnsavedChanges:)))
+        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(endEditing))
         navigationItem.title = viewModel.title
 
         disableUserInteraction()
@@ -164,10 +165,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         enableUserInteraction()
     }
 
-    @objc func endEditing(shouldKeepUnsavedChanges: Bool = false) {
-        if !shouldKeepUnsavedChanges {
-            bindUserData()
-        }
+    @objc func endEditing() {
+        bindUserData()
 
         isEditingProfile = false
         navigationItem.title = viewModel.title
@@ -199,7 +198,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         hideKeyboard()
 
         guard
-            let user = user,
             let name = name.text,
             let username = username.text,
             let email = email.text,
@@ -211,11 +209,21 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             return
         }
 
-        let shouldRequireCurrentPassword = user.emails.first?.email == email
+        guard email.isValidEmail else {
+            Alert(key: "alert.update_profile_empty_fields").present() // TODO: Add invalid e-mail strings
+            return
+        }
 
-        user.name = name
-        user.username = username
-        user.emails.first?.email = email
+        let shouldRequireCurrentPassword = !(self.user?.emails.first?.email == email)
+
+        let user = User()
+        user.map(JSON([
+            "name": name,
+            "username": username,
+            "emails": [[
+            "address": email
+                ]]
+            ]), realm: nil)
 
         if shouldRequireCurrentPassword {
             let alert = UIAlertController(
@@ -239,7 +247,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                 textField.isSecureTextEntry = true
 
                 _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
-                    updateUserAction.isEnabled = textField.text?.isEmpty ?? false
+                    updateUserAction.isEnabled = !(textField.text?.isEmpty ?? false)
                 }
             })
 
@@ -268,23 +276,29 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             })
         }
 
-        let stopLoading = { [weak self] in
+        let stopLoading: (_ shouldEndEditing: Bool) -> Void = { [weak self] shouldEndEditing in
             self?.isUpdatingUser = false
-            self?.stopLoading()
+            self?.stopLoading(shouldEndEditing: shouldEndEditing)
         }
 
         isUpdatingUser = true
 
         let updateUserRequest = UpdateUserRequest(user: user, currentPassword: currentPassword)
         api?.fetch(updateUserRequest, succeeded: { [weak self] result in
-            guard let weakSelf = self else { return }
-            stopLoading()
-            if !weakSelf.isUploadingAvatar { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
             if let errorMessage = result.errorMessage {
+                stopLoading(false)
                 Alert(key: "alert.update_profile_error").withMessage(errorMessage).present()
+                return
             }
+
+            self?.user = result.user
+            stopLoading(true)
+
+            guard let weakSelf = self else { return }
+
+            if !weakSelf.isUploadingAvatar { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
         }, errored: { _ in
-            stopLoading()
+            stopLoading(false)
             Alert(key: "alert.update_profile_error").present()
         })
     }
@@ -319,11 +333,15 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
     }
 
-    func stopLoading() {
+    func stopLoading(shouldEndEditing: Bool = true) {
         if !isUpdatingUser, !isUploadingAvatar {
             DispatchQueue.main.async {
                 self.navigationItem.leftBarButtonItem?.isEnabled = true
-                self.endEditing(shouldKeepUnsavedChanges: true)
+                if shouldEndEditing {
+                    self.endEditing()
+                } else {
+                    self.navigationItem.rightBarButtonItem = self.saveButton
+                }
             }
         }
     }
