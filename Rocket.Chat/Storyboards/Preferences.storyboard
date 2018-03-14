@@ -266,17 +266,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="CMI-Gv-ffZ">
-                                <rect key="frame" x="32" y="133.5" width="311" height="517.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <rect key="frame" x="16" y="64" width="343" height="603"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="16" minimumInteritemSpacing="16" id="Cn2-Qm-hul">
                                     <size key="itemSize" width="60" height="60"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="16" maxX="0.0" maxY="16"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="changeAppIconCell" id="Dij-aQ-j2u" customClass="ChangeAppIconCell" customModule="Rocket_Chat" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                    <collectionViewCell opaque="NO" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="changeAppIconCell" id="Dij-aQ-j2u" customClass="ChangeAppIconCell" customModule="Rocket_Chat" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="16" width="60" height="60"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
@@ -290,41 +290,56 @@
                                                         </userDefinedRuntimeAttribute>
                                                     </userDefinedRuntimeAttributes>
                                                 </imageView>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R01-cG-GhB">
+                                                    <rect key="frame" x="50" y="50" width="11" height="11"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="11" id="2f2-Uz-YKE"/>
+                                                        <constraint firstAttribute="width" constant="11" id="FtQ-pZ-FzM"/>
+                                                    </constraints>
+                                                </view>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Check Circle" translatesAutoresizingMaskIntoConstraints="NO" id="IoI-8P-Eh2">
+                                                    <rect key="frame" x="47" y="47" width="16" height="16"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="16" id="VCD-Yr-aN5"/>
+                                                        <constraint firstAttribute="width" constant="16" id="gIH-tU-qyM"/>
+                                                    </constraints>
+                                                </imageView>
                                             </subviews>
                                         </view>
                                         <constraints>
                                             <constraint firstItem="gMM-lt-jYl" firstAttribute="top" secondItem="Dij-aQ-j2u" secondAttribute="top" id="1YT-Hf-Gzl"/>
                                             <constraint firstAttribute="bottom" secondItem="gMM-lt-jYl" secondAttribute="bottom" id="6ir-dY-gvJ"/>
+                                            <constraint firstAttribute="trailing" secondItem="R01-cG-GhB" secondAttribute="trailing" constant="-1" id="D2J-vv-pbR"/>
+                                            <constraint firstAttribute="bottom" secondItem="R01-cG-GhB" secondAttribute="bottom" constant="-1" id="EEv-Lq-4T3"/>
+                                            <constraint firstAttribute="trailing" secondItem="IoI-8P-Eh2" secondAttribute="trailing" constant="-3" id="GC8-tv-2IX"/>
                                             <constraint firstItem="gMM-lt-jYl" firstAttribute="leading" secondItem="Dij-aQ-j2u" secondAttribute="leading" id="RTl-fu-9L1"/>
+                                            <constraint firstAttribute="bottom" secondItem="IoI-8P-Eh2" secondAttribute="bottom" constant="-3" id="qp8-8W-QPm"/>
                                             <constraint firstAttribute="trailing" secondItem="gMM-lt-jYl" secondAttribute="trailing" id="sFT-bm-04c"/>
                                         </constraints>
                                         <connections>
+                                            <outlet property="checkImageView" destination="IoI-8P-Eh2" id="Jee-zd-tun"/>
+                                            <outlet property="checkImageViewBackground" destination="R01-cG-GhB" id="lAn-s8-XSo"/>
                                             <outlet property="iconImageView" destination="gMM-lt-jYl" id="loY-Mj-oK2"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
+                                <connections>
+                                    <outlet property="dataSource" destination="14p-5u-LKz" id="9KF-Z2-hbU"/>
+                                    <outlet property="delegate" destination="14p-5u-LKz" id="5s7-bw-GKf"/>
+                                </connections>
                             </collectionView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Header title" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUb-00-j2C">
-                                <rect key="frame" x="32" y="80" width="311" height="21.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="CMI-Gv-ffZ" firstAttribute="leading" secondItem="LTX-gx-DDs" secondAttribute="leadingMargin" constant="16" id="330-Ry-TxB"/>
-                            <constraint firstItem="CMI-Gv-ffZ" firstAttribute="top" secondItem="WUb-00-j2C" secondAttribute="bottom" constant="32" id="SP1-Rv-8HH"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="WUb-00-j2C" secondAttribute="trailing" constant="16" id="ZTc-RO-O4W"/>
-                            <constraint firstItem="WUb-00-j2C" firstAttribute="top" secondItem="JKU-DW-qdz" secondAttribute="bottom" constant="16" id="aGk-Ct-znl"/>
-                            <constraint firstItem="7NQ-6y-yb7" firstAttribute="top" secondItem="CMI-Gv-ffZ" secondAttribute="bottom" constant="16" id="ayq-BJ-Z7P"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CMI-Gv-ffZ" secondAttribute="trailing" constant="16" id="cU9-Ew-wQB"/>
-                            <constraint firstItem="WUb-00-j2C" firstAttribute="leading" secondItem="LTX-gx-DDs" secondAttribute="leadingMargin" constant="16" id="xDr-Yb-e86"/>
+                            <constraint firstItem="CMI-Gv-ffZ" firstAttribute="top" secondItem="JKU-DW-qdz" secondAttribute="bottom" id="2IW-gv-Et2"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CMI-Gv-ffZ" secondAttribute="trailing" id="Fkf-FR-4Id"/>
+                            <constraint firstItem="CMI-Gv-ffZ" firstAttribute="leading" secondItem="LTX-gx-DDs" secondAttribute="leadingMargin" id="UhA-Jj-4mu"/>
+                            <constraint firstItem="7NQ-6y-yb7" firstAttribute="top" secondItem="CMI-Gv-ffZ" secondAttribute="bottom" id="dyU-hN-4pJ"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="CMI-Gv-ffZ" id="jc7-8c-VJT"/>
-                        <outlet property="labelHeaderTitle" destination="WUb-00-j2C" id="Jxf-Zg-9QW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nbz-CG-3c9" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -349,6 +364,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Check Circle" width="20" height="20"/>
         <image name="Default" width="60" height="60"/>
     </resources>
 </document>
