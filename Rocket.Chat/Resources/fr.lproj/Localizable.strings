@@ -208,7 +208,7 @@
 "chat.messages.list.empty" = "Aucun messages trouvé";
 "chat.messages.pinned.list.title" = "Messages épinglés";
 "chat.messages.starred.list.title" = "Messages favoris";
-"blocked.list.empty.title" = "Vide";
+"blocked.list.empty.title" = "Vous n'avez aucun utilisateur bloqué";
 "blocked.users.title" = "Utilisateurs bloqués";
 
 // Settings

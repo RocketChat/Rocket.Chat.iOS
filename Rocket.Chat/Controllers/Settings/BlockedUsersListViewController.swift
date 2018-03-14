@@ -29,6 +29,7 @@ extension BlockedUsersListViewController {
         registerCells()
         self.labelEmptyList.text = localized("blocked.list.empty.title")
         title = localized("blocked.users.title")
+        self.membersTableView.separatorStyle = .none
     }
 
     func registerCells() {
@@ -40,7 +41,7 @@ extension BlockedUsersListViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        manageEmptyView()
+        showEmptyStateIfNeeded()
     }
 }
 
@@ -55,8 +56,12 @@ extension BlockedUsersListViewController: UITableViewDataSource {
 
         if let cell = tableView.dequeueReusableCell(withIdentifier: MemberCell.identifier) as? MemberCell {
 
-            guard let user = findUser(userIdentifire: MessageManager.blockedUsersList[indexPath.row], realm: self.realm) else { return cell }
+            guard let user = User.find(withIdentifier: MessageManager.blockedUsersList[indexPath.row]) else { return cell }
             cell.data = MemberCellData(member: user)
+            guard user.name != nil else {
+                cell.nameLabel.text = user.username
+                return cell
+            }
             return cell
         }
 
@@ -73,17 +78,17 @@ extension BlockedUsersListViewController: UITableViewDataSource {
 extension BlockedUsersListViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        guard let user = findUser(userIdentifire: MessageManager.blockedUsersList[indexPath.row], realm: self.realm) else { return }
+        guard let user = User.find(withIdentifier: MessageManager.blockedUsersList[indexPath.row]) else { return }
         guard let username = user.username else { return }
         blockedUserActions(username, user)
     }
 
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        guard let user = findUser(userIdentifire: MessageManager.blockedUsersList[indexPath.row], realm: self.realm) else { return }
+        guard let user = User.find(withIdentifier: MessageManager.blockedUsersList[indexPath.row]) else { return }
         if editingStyle == .delete {
             MessageManager.unblockMessagesFrom(user, completion: {
                 UIView.performWithoutAnimation {
-                    self.manageEmptyView()
+                    self.showEmptyStateIfNeeded()
                     self.membersTableView?.reloadData()
                 }
             })
@@ -105,7 +110,7 @@ extension BlockedUsersListViewController {
             alert.addAction(UIAlertAction(title: localized("chat.member.unblock.title"), style: .destructive, handler: { _ in
                 MessageManager.unblockMessagesFrom(user, completion: {
                     UIView.performWithoutAnimation {
-                        self.manageEmptyView()
+                        self.showEmptyStateIfNeeded()
                         self.membersTableView?.reloadData()
                     }
                 })
@@ -120,19 +125,9 @@ extension BlockedUsersListViewController {
         }
     }
 
-    func findUser(userIdentifire: String, realm: Realm? = Realm.shared) -> User! {
-        guard
-            let realm = realm,
-            let user = realm.object(ofType: User.self, forPrimaryKey: userIdentifire)
-            else {
-                return nil
-        }
-        return user
-    }
-
     // If we don't have blocked users the emptyView won't be hidden
 
-    func manageEmptyView() {
+    func showEmptyStateIfNeeded() {
         if MessageManager.blockedUsersList.count == 0 {
             self.viewEmptyList.isHidden = false
         } else {

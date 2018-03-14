@@ -217,7 +217,7 @@
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Application Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
-"blocked.list.empty.title" = "Vacío";
+"blocked.list.empty.title" = "No tienes usuarios bloqueados";
 "blocked.users.title" = "Usuarios bloqueados";
 
 // Change Application Icon

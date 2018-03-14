@@ -176,8 +176,8 @@ extension Auth {
     }
 
     func canUnblockUser(_ user: User) -> CanUnblockUserResult {
-        guard let userIdentifire = user.identifier else { return .unknown }
-        let isBlocked = MessageManager.blockedUsersList.contains(userIdentifire)
+        guard let userIdentifier = user.identifier else { return .unknown }
+        let isBlocked = MessageManager.blockedUsersList.contains(userIdentifier)
         if !isBlocked {
             return .notActionable
         }

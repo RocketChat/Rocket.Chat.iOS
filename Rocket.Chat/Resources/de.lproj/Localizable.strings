@@ -208,7 +208,7 @@
 "chat.messages.list.empty" = "Keine Nachrichten gefunden";
 "chat.messages.pinned.list.title" = "Angeheftete Nachrichten";
 "chat.messages.starred.list.title" = "Favorisierte Nachrichten";
-"blocked.list.empty.title" = "Leer";
+"blocked.list.empty.title" = "Sie haben keine blockierten Benutzer";
 "blocked.users.title" = "Blockierte Benutzer";
 
 // Settings

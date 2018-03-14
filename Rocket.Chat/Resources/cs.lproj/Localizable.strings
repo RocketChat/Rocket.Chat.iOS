@@ -208,7 +208,7 @@
 "chat.messages.list.empty" = "Nebyly nalezeny žádné zprávy";
 "chat.messages.pinned.list.title" = "Připnuté zprávy";
 "chat.messages.starred.list.title" = "Zprávy s hvězdičkou";
-"blocked.list.empty.title" = "Prázdný";
+"blocked.list.empty.title" = "Nemáte žádné blokované uživatele";
 "blocked.users.title" = "Blokovaní uživatelé";
 
 // Settings

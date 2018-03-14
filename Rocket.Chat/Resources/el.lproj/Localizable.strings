@@ -217,7 +217,7 @@
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
-"blocked.list.empty.title" = "Αδειάζω";
+"blocked.list.empty.title" = "Δεν έχετε αποκλεισμένους χρήστες";
 "blocked.users.title" = "Αποκλεισμένοι χρήστες";
 
 // Change Application Icon

@@ -347,10 +347,10 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         // user state is "blocked"
 
-        guard let userIdentifire = user.identifier else { return }
+        guard let userIdentifier = user.identifier else { return }
 
-        MessageManager.blockedUsersList.append(userIdentifire)
+        MessageManager.blockedUsersList.append(userIdentifier)
         XCTAssert(auth.canUnblockUser(user) == .allowed)
-        MessageManager.blockedUsersList.remove(object: userIdentifire)
+        MessageManager.blockedUsersList.remove(object: userIdentifier)
     }
 }

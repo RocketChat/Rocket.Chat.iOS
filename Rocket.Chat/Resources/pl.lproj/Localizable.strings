@@ -208,7 +208,7 @@
 "chat.messages.list.empty" = "Nie znaleziono wiadomości";
 "chat.messages.pinned.list.title" = "Przypięte wiadomości";
 "chat.messages.starred.list.title" = "Wiadomości oznaczone gwiazdką";
-"blocked.list.empty.title" = "Pusty";
+"blocked.list.empty.title" = "Nie masz zablokowanych użytkowników";
 "blocked.users.title" = "Zablokowani użytkownicy";
 
 // Settings

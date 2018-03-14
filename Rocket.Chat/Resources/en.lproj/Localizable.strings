@@ -209,7 +209,7 @@
 "chat.messages.list.empty" = "No messages found";
 "chat.messages.pinned.list.title" = "Pinned Messages";
 "chat.messages.starred.list.title" = "Starred Messages";
-"blocked.list.empty.title" = "Empty";
+"blocked.list.empty.title" = "You have no blocked users";
 "blocked.users.title" = "Blocked Users";
 
 // Settings
