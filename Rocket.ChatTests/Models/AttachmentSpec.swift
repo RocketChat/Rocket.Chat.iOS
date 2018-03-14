@@ -105,10 +105,10 @@ class AttachmentSpec: XCTestCase {
 
     func testVideoThumbPathValidIdentifier() {
         let attachment = Attachment()
-        attachment.identifier = "foo"
+        attachment.videoURL = "/foo/bar"
 
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
-        let thumbURL = path?.appendingPathComponent("foo.png").absoluteString
+        let thumbURL = path?.appendingPathComponent("\\foo\\bar.png").absoluteString
         XCTAssertEqual(thumbURL, attachment.videoThumbPath?.absoluteString, "thumb path is the same")
     }
 
