@@ -52,6 +52,11 @@ final class PreferencesViewController: UITableViewController {
         return super.navigationController as? PreferencesNavigationController
     }
 
+    @IBOutlet weak var labelRateus: UILabel! {
+        didSet {
+            labelRateus.text = viewModel.rateus
+        }
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         title = viewModel.title
@@ -92,6 +97,17 @@ final class PreferencesViewController: UITableViewController {
     private func cellLanguageDidPressed() {
         performSegue(withIdentifier: "Language", sender: nil)
     }
+    private func rateUsDidPressed() {
+        let appID = "Enter_App_Id"
+        let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"
+        if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
+            if #available(iOS 10.0, *) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            } else {
+                UIApplication.shared.openURL(url)
+            }
+        }
+    }
 
     // MARK: UITableViewDelegate
 
@@ -112,8 +128,11 @@ final class PreferencesViewController: UITableViewController {
             #if BETA || DEBUG
             FLEXManager.shared().showExplorer()
             #endif
+        } else if indexPath.section == 3 {
+            if indexPath.row == 0 {
+                rateUsDidPressed()
+            }
         }
-
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
@@ -131,5 +150,4 @@ extension PreferencesViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         dismiss(animated: true, completion: nil)
     }
-
 }

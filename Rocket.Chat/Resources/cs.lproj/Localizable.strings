@@ -223,6 +223,7 @@
 "myaccount.settings.language" = "Language"; // TODO
 "myaccount.settings.appicon" = "Application Icon"; // TODO:
 "myaccount.settings.version" = "Version: %@ (%@)";
+"myaccount.settings.rateus" = "Rate us";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon"; // TODO:

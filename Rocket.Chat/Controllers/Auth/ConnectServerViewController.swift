@@ -83,7 +83,7 @@ final class ConnectServerViewController: BaseViewController {
                 self.present(self.alertController, animated: true, completion: nil)
             }
         }
-        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default,handler: nil))
+        alertController.addAction(UIAlertAction(title: "OK",style: UIAlertActionStyle.default,handler: nil))
         alertController.title = NSLocalizedString("Warning!", comment: "")
         alertController.message = NSLocalizedString("Connect To Internet Please!", comment: "")
     }
