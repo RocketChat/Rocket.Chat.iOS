@@ -12,32 +12,37 @@ import SwiftyJSON
 typealias UserUpdateResult = APIResult<UpdateUserRequest>
 
 class UpdateUserRequest: APIRequest {
+    let requiredVersion = Version(0, 62, 2)
     let method: HTTPMethod = .post
-    let path = "/api/v1/users.update"
+    let path = "/api/v1/users.updateOwnBasicInfo"
 
-    let userId: String
     let user: User?
+    let currentPassword: String?
     let password: String?
 
-    init(userId: String, user: User? = nil, password: String? = nil) {
-        self.userId = userId
+    init(user: User? = nil, password: String? = nil, currentPassword: String? = nil) {
         self.user = user
         self.password = password
+        self.currentPassword = currentPassword
     }
 
     func body() -> Data? {
-        var body = JSON(["userId": userId, "data": [:]])
+        var body = JSON(["data": [:]])
 
         if let user = user, let name = user.name, let username = user.username, let email = user.emails.first?.email,
                 !name.isEmpty, !username.isEmpty, !email.isEmpty {
             body["data"]["name"].string = user.name
             body["data"]["username"].string = user.username
             body["data"]["email"].string = email
-            body["data"]["verified"].bool = true
         }
 
         if let password = password, !password.isEmpty {
             body["data"]["password"].string = password
+        }
+
+        if !(body["data"]["email"].string?.isEmpty ?? true) || !(password?.isEmpty ?? true) {
+            guard let sha256password = currentPassword?.sha256() else { return nil }
+            body["data"]["currentPassword"].string = sha256password
         }
 
         let string = body.rawString()
