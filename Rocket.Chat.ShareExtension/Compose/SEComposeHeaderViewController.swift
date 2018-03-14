@@ -24,6 +24,10 @@ class SEComposeHeaderViewController: SEViewController {
         }
     }
 
+    override func viewDidLoad() {
+        avoidsKeyboard = false
+    }
+
     override func stateUpdated(_ state: SEState) {
         viewModel = SEComposeHeaderViewModel(state: state)
     }

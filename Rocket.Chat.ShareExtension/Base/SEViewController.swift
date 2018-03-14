@@ -15,6 +15,20 @@ enum SEError: Error {
 
 class SEViewController: UIViewController, SEStoreSubscriber {
 
+    override var shouldAutorotate: Bool {
+        return false
+    }
+
+    var avoidsKeyboard: Bool = true {
+        didSet {
+            if avoidsKeyboard {
+                startAvoidingKeyboard()
+            } else {
+                stopAvoidingKeyboard()
+            }
+        }
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         store.subscribe(self)
@@ -52,6 +66,8 @@ class SEViewController: UIViewController, SEStoreSubscriber {
     // MARK: Avoid Keyboard
 
     func startAvoidingKeyboard() {
+        guard avoidsKeyboard else { return }
+
         NotificationCenter.default.addObserver(
             self,
             selector: #selector(onKeyboardFrameWillChange(_:)),

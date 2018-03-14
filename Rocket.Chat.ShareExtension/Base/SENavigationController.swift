@@ -19,7 +19,10 @@ final class SENavigationController: UINavigationController {
             $0 as? NSItemProvider
         } ?? []
 
-        parseItemProviders(itemProviders)
+        // support only one share for now
+        if let item = itemProviders.first {
+            parseItemProviders([item])
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

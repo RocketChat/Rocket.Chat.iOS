@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SEComposeViewController: SEViewController {
+class SEComposeViewController: UIViewController {
     @IBOutlet weak var collectionView: UICollectionView! {
         didSet {
             collectionView.register(SEComposeTextCell.self)
@@ -39,18 +39,37 @@ class SEComposeViewController: SEViewController {
         super.viewDidLoad()
     }
 
-    override func stateUpdated(_ state: SEState) {
-        viewModel = SEComposeViewModel(state: state)
+    override func viewWillAppear(_ animated: Bool) {
+        store.subscribe(self)
     }
 
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        guard let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout else {
-            return
-        }
-        flowLayout.invalidateLayout()
-        collectionView.setNeedsLayout()
-        collectionView.layoutIfNeeded()
+    override func viewDidDisappear(_ animated: Bool) {
+        store.unsubscribe(self)
+    }
+
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+
+        let offset = collectionView.contentOffset
+        let width = collectionView.bounds.size.width
+
+        let index = round(offset.x / width)
+        let newOffset = CGPoint(x: index * size.width, y: offset.y)
+
+        collectionView.setContentOffset(newOffset, animated: false)
+
+        coordinator.animate(alongsideTransition: { [weak self] _ in
+            self?.collectionView.reloadData()
+            self?.collectionView.setContentOffset(newOffset, animated: false)
+        }, completion: nil)
+    }
+}
+
+// MARK: StoreSubscriber
+
+extension SEComposeViewController: SEStoreSubscriber {
+    func stateUpdated(_ state: SEState) {
+        viewModel = SEComposeViewModel(state: state)
     }
 }
 
@@ -88,8 +107,12 @@ extension SEComposeViewController: UICollectionViewDataSource {
 // MARK: UICollectionViewFlowLayout
 
 extension SEComposeViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return .zero
+    }
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.frame.size
+        return collectionView.bounds.size
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
