@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import RealmSwift
 
 fileprivate typealias ListSegueData = (title: String, query: String?)
 
@@ -71,13 +70,16 @@ class ChannelInfoViewController: BaseViewController, UITextViewDelegate {
         }
         
         if let currentUser = AuthManager.currentUser() {
-            if currentUser.hasPermission(.viewRoomAdministration) {
+            if currentUser == subscription?.roomOwner {
                 let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
                 navigationItem.rightBarButtonItems?.append(saveButton)
                 self.saveButton = saveButton
                 self.saveButton?.isEnabled = false
             }
         }
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tapGesture)
     }
 
     func updateButtonFavoriteImage(_ force: Bool = false, value: Bool = false) {
@@ -149,20 +151,16 @@ class ChannelInfoViewController: BaseViewController, UITextViewDelegate {
     
     @objc func saveButtonTapped(_ sender: Any) {
         guard let subscription = self.subscription else { return }
+        
         guard let descriptionCell = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? ChannelInfoDescriptionCell else { return }
-        guard let topicCell = tableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? ChannelInfoDescriptionCell else { return }
         guard let description = descriptionCell.labelDescription.text else { return }
-        guard let topic = topicCell.labelDescription.text else { return }
         
         SubscriptionManager.updateRoomDescription(subscription: subscription, description: description) { response in
             Log.debug(response.msg.debugDescription)
         }
         
-        SubscriptionManager.updateRoomTopic(subscription: subscription, topic: topic) { response in
-            Log.debug(response.msg.debugDescription)
-        }
-        
         self.saveButton?.isEnabled = false
+        hideKeyboard()
     }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {
@@ -204,8 +202,8 @@ extension ChannelInfoViewController: UITableViewDelegate {
                 cell.data = data
                 cell.labelDescription.delegate = self
                 
-                if indexPath == IndexPath(row: 2, section: 0) && self.saveButton != nil {
-                    cell.isUserInteractionEnabled = true
+                if saveButton != nil && indexPath == IndexPath(row: 2, section: 0) {
+                    cell.labelDescription.isUserInteractionEnabled = true
                 }
                 
                 return cell
@@ -295,6 +293,10 @@ extension ChannelInfoViewController {
         } else {
             self.saveButton?.isEnabled = true
         }
+    }
+    
+    @objc func hideKeyboard() {
+        view.endEditing(true)
     }
     
 }
