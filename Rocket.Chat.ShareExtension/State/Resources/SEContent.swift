@@ -13,9 +13,10 @@ struct SEFile {
     var description: String
     let mimetype: String
     let data: Data
+    let fileUrl: URL?
 
     static var empty: SEFile {
-        return SEFile(name: "", description: "", mimetype: "", data: Data())
+        return SEFile(name: "", description: "", mimetype: "", data: Data(), fileUrl: nil)
     }
 }
 

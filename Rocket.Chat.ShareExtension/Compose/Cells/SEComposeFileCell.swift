@@ -16,6 +16,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
             NotificationCenter.default.addObserver(self, selector: #selector(nameDidChange(_:)), name: .UITextFieldTextDidChange, object: nameTextField)
         }
     }
+    @IBOutlet weak var durationLabel: UILabel!
 
     @IBOutlet weak var descriptionTextField: UITextField! {
         didSet {
@@ -36,6 +37,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
 
             descriptionTextField.text = cellModel.descriptionText
             descriptionTextField.placeholder = cellModel.descriptionPlaceholder
+            durationLabel.text = cellModel.durationText
         }
     }
 

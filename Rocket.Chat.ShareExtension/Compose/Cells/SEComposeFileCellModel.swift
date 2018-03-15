@@ -13,6 +13,7 @@ struct SEComposeFileCellModel: SEComposeCellModel {
     var file: SEFile
 
     let image: UIImage
+    var durationText: String = ""
 
     var nameText: String {
         return file.name
@@ -26,10 +27,13 @@ struct SEComposeFileCellModel: SEComposeCellModel {
         self.contentIndex = contentIndex
         self.file = file
 
-        if file.mimetype == "image/jpeg" {
-            image = UIImage(data: file.data) ?? #imageLiteral(resourceName: "icon_file")
+        if file.mimetype == "image/jpeg", let image = UIImage(data: file.data) {
+            self.image = image
+        } else if let url = file.fileUrl, let videoInfo = VideoInfo(videoURL: url) {
+            self.image = videoInfo.thumbnail
+            self.durationText = videoInfo.durationText
         } else {
-            image = #imageLiteral(resourceName: "icon_file")
+            self.image = #imageLiteral(resourceName: "icon_file")
         }
     }
 

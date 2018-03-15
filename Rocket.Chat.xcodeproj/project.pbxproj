@@ -333,7 +333,7 @@
 		802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F01F7A9BB4005477EC /* MeRequestSpec.swift */; };
 		802498F31F7ACD76005477EC /* ChatMessageAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */; };
 		802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */; };
-		8029B2F22059B6F60067157B /* FirstFrame.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029B2F12059B6F60067157B /* FirstFrame.swift */; };
+		8029B2F22059B6F60067157B /* VideoInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029B2F12059B6F60067157B /* VideoInfo.swift */; };
 		8029B2F42059C1840067157B /* SEReportAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8029B2F32059C1840067157B /* SEReportAlertViewController.swift */; };
 		802A4E112049C7340072CD23 /* SENavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A4E102049C7340072CD23 /* SENavigationController.swift */; };
 		802A4E24204D73100072CD23 /* AppGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 802A4E23204D730F0072CD23 /* AppGroup.swift */; };
@@ -924,7 +924,7 @@
 		802498F01F7A9BB4005477EC /* MeRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeRequestSpec.swift; sourceTree = "<group>"; };
 		802498F21F7ACD76005477EC /* ChatMessageAudioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatMessageAudioView.xib; sourceTree = "<group>"; };
 		802498F41F7ACDB7005477EC /* ChatMessageAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAudioView.swift; sourceTree = "<group>"; };
-		8029B2F12059B6F60067157B /* FirstFrame.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstFrame.swift; sourceTree = "<group>"; };
+		8029B2F12059B6F60067157B /* VideoInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoInfo.swift; sourceTree = "<group>"; };
 		8029B2F32059C1840067157B /* SEReportAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEReportAlertViewController.swift; sourceTree = "<group>"; };
 		802A4E102049C7340072CD23 /* SENavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SENavigationController.swift; sourceTree = "<group>"; };
 		802A4E23204D730F0072CD23 /* AppGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppGroup.swift; sourceTree = "<group>"; };
@@ -2423,7 +2423,7 @@
 			isa = PBXGroup;
 			children = (
 				80D563742059325A008896D6 /* MimeType.swift */,
-				8029B2F12059B6F60067157B /* FirstFrame.swift */,
+				8029B2F12059B6F60067157B /* VideoInfo.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -3633,7 +3633,7 @@
 				807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */,
 				80977AC4204FEEA700C41435 /* SEComposeHeaderViewModel.swift in Sources */,
 				804273E2204EBD51006DF420 /* APIResult.swift in Sources */,
-				8029B2F22059B6F60067157B /* FirstFrame.swift in Sources */,
+				8029B2F22059B6F60067157B /* VideoInfo.swift in Sources */,
 				80D0CE6620503C860056B17F /* SERoomCell.swift in Sources */,
 				80FA90722056C1190069038F /* SEComposeTextCell.swift in Sources */,
 				80D0CE60205016B40056B17F /* SEServerCell.swift in Sources */,
