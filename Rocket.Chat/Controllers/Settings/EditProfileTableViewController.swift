@@ -357,16 +357,10 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let newPassword = segue.destination as? NewPasswordTableViewController {
-            newPassword.user = user
             newPassword.passwordUpdated = { [weak self] newPasswordViewController in
-                DispatchQueue.main.async {
-                    CATransaction.begin()
-                    CATransaction.setCompletionBlock({
-                        self?.alertSuccess(title: localized("alert.update_password_success.title"))
-                    })
-                    newPasswordViewController?.navigationController?.popViewController(animated: true)
-                    CATransaction.commit()
-                }
+                newPasswordViewController?.navigationController?.popViewControler(animated: true, completion: {
+                    self?.alertSuccess(title: localized("alert.update_password_success.title"))
+                })
             }
         }
     }
@@ -381,10 +375,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         switch section {
-        case 0:
-            return viewModel.profileSectionTitle
-        default:
-            return ""
+        case 0: return viewModel.profileSectionTitle
+        default: return ""
         }
     }
 

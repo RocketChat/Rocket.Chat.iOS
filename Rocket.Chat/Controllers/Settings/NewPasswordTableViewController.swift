@@ -37,7 +37,6 @@ class NewPasswordTableViewController: UITableViewController {
 
     let viewModel = NewPasswordViewModel()
     let api = API.current()
-    var user: User!
     var currentPassword: String?
     var passwordUpdated: ((_ newPasswordViewController: UIViewController?) -> Void)?
 
