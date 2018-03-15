@@ -28,13 +28,10 @@ struct SERoomsSection {
 struct SERoomsViewModel {
     let title: String
     let sections: [SERoomsSection]
-
-    func withTitle(_ title: String) -> SERoomsViewModel {
-        return SERoomsViewModel(title: title, sections: sections)
-    }
+    let searchText: String
 
     static var emptyState: SERoomsViewModel {
-        return SERoomsViewModel(title: "Error", sections: [])
+        return SERoomsViewModel(title: "Error", sections: [], searchText: "")
     }
 }
 
@@ -42,6 +39,15 @@ struct SERoomsViewModel {
 
 extension SERoomsViewModel {
     init(state: SEState) {
+        switch state.searchRooms {
+        case .none:
+            searchText = ""
+        case .started:
+            searchText = ""
+        case .searching(let text):
+            searchText = text
+        }
+
         let server = state.servers[state.selectedServerIndex]
 
         let roomToCell = { (room: Subscription) -> SERoomCellModel in
@@ -53,15 +59,15 @@ extension SERoomsViewModel {
         let groups = state.displayedRooms.filter { $0.type == .group }.map(roomToCell)
         let directMessages = state.displayedRooms.filter { $0.type == .directMessage }.map(roomToCell)
 
-        sections = [
-            SERoomsSection(type: .server, cells: [
-                SEServerCellModel(iconUrl: server.iconUrl, name: server.name, host: server.host, selected: false)
-                ]),
+        let serverCell = SEServerCellModel(iconUrl: server.iconUrl, name: server.name, host: server.host, selected: false)
+        let serverSection = searchText.isEmpty ? [SERoomsSection(type: .server, cells: [serverCell])] : []
+
+        sections = serverSection + [
             SERoomsSection(type: .favorites, cells: favorites),
             SERoomsSection(type: .channels, cells: channels),
             SERoomsSection(type: .groups, cells: groups),
             SERoomsSection(type: .directMessages, cells: directMessages)
-            ].filter { !$0.cells.isEmpty }
+        ].filter { !$0.cells.isEmpty }
 
         title = localized("rooms.title")
     }

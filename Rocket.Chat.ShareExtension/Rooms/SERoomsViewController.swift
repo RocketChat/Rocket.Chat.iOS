@@ -13,6 +13,7 @@ final class SERoomsViewController: SEViewController {
     private var viewModel = SERoomsViewModel.emptyState {
         didSet {
             title = viewModel.title
+            navigationItem.searchController?.searchBar.text = viewModel.searchText
             tableView.reloadData()
         }
     }
