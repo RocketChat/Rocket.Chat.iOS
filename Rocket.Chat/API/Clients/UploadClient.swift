@@ -46,13 +46,9 @@ struct UploadClient: APIClient {
             mimetype: mimetype
         )
 
-        api.fetch(req, succeeded: { result in
-            if let error = result.error {
-                Alert(key: "alert.upload_error").withMessage(error).present()
-            }
+        api.fetch(req, succeeded: { _ in
             completion?()
         }, errored: { _ in
-            Alert(key: "alert.upload_error").present()
             completion?()
         })
     }

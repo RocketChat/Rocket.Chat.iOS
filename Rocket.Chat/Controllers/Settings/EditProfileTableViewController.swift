@@ -10,6 +10,7 @@ import UIKit
 import MBProgressHUD
 import SwiftyJSON
 
+// swiftlint:disable file_length type_body_length
 class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     @IBOutlet weak var name: UITextField! {
@@ -70,7 +71,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     var currentPassword: String?
     var user: User? = User() {
         didSet {
-            bindUserData()
+            bindUserData(shouldRefreshAvatar: avatarView.clearImageCacheOnNextLoad)
         }
     }
 
@@ -87,7 +88,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         editButton = UIBarButtonItem(title: viewModel.editButtonTitle, style: .plain, target: self, action: #selector(beginEditing))
         saveButton = UIBarButtonItem(title: viewModel.saveButtonTitle, style: .done, target: self, action: #selector(saveProfile(_:)))
-        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(endEditing))
+        cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(didPressCancelEditingButton))
         navigationItem.title = viewModel.title
 
         disableUserInteraction()
@@ -111,7 +112,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     func fetchUserData() {
         avatarButton.isHidden = true
-        avatarView.removeCacheForCurrentURL()
+        avatarView.clearImageCacheOnNextLoad = true
 
         var fetchUserLoader: MBProgressHUD!
 
@@ -150,9 +151,9 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         })
     }
 
-    func bindUserData() {
+    func bindUserData(shouldRefreshAvatar: Bool = false) {
         DispatchQueue.main.async {
-            self.avatarView.user = self.user
+            if shouldRefreshAvatar { self.avatarView.user = self.user }
             self.name.text = self.user?.name
             self.username.text = self.user?.username
             self.email.text = self.user?.emails.first?.email
@@ -170,8 +171,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         enableUserInteraction()
     }
 
-    @objc func endEditing() {
-        bindUserData()
+    @objc func endEditing(shouldRefreshAvatar: Bool = false) {
+        bindUserData(shouldRefreshAvatar: shouldRefreshAvatar)
 
         navigationItem.title = viewModel.title
         navigationItem.hidesBackButton = false
@@ -277,9 +278,9 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                 guard let weakSelf = self else { return }
                 if !weakSelf.isUpdatingUser { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
                 weakSelf.isUploadingAvatar = false
+                weakSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
+                weakSelf.avatarView.clearImageCacheOnNextLoad = true
                 weakSelf.stopLoading()
-                weakSelf.avatarView.avatarPlaceholder = self?.avatarView.imageView.image
-                weakSelf.avatarView.removeCacheForCurrentURL(forceUpdate: true)
             })
         }
 
@@ -329,6 +330,12 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         present(alert, animated: true, completion: nil)
     }
 
+    @objc func didPressCancelEditingButton() {
+        avatarView.avatarPlaceholder = nil
+        avatarView.imageView.image = nil
+        endEditing(shouldRefreshAvatar: true)
+    }
+
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
@@ -340,7 +347,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
     }
 
-    func stopLoading(shouldEndEditing: Bool = true) {
+    func stopLoading(shouldEndEditing: Bool = true, shouldRefreshAvatar: Bool = false) {
         if !isUpdatingUser, !isUploadingAvatar {
             DispatchQueue.main.async {
                 self.navigationItem.leftBarButtonItem?.isEnabled = true
@@ -391,7 +398,7 @@ extension EditProfileTableViewController: UIImagePickerControllerDelegate {
         var file: FileUpload?
 
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            guard let imageData = UIImageJPEGRepresentation(image, 0.5) else { return }
+            guard let imageData = UIImageJPEGRepresentation(image, 0.1) else { return }
 
             file = UploadHelper.file(
                 for: imageData,
