@@ -46,7 +46,7 @@ class SEComposeHeaderViewController: SEViewController {
         submitMessages(store: store) {
             submitFiles(store: store) {
                 DispatchQueue.main.async {
-                    store.dispatch(.finish)
+                    store.dispatch(.makeSceneTransition(.push(.report)))
                 }
             }
         }

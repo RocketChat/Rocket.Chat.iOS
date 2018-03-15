@@ -10,4 +10,5 @@ enum SEScene {
     case rooms
     case servers
     case compose
+    case report
 }

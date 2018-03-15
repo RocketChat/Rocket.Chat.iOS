@@ -488,6 +488,7 @@
 		80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F281FD8B2B800B70B59 /* UserExtensions.swift */; };
 		80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */; };
 		80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */; };
+		80EF621A205A981600EF739B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41494B911D63C6280004F369 /* UIImageExtension.swift */; };
 		80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */; };
 		80FA9066205313E20069038F /* SEContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA9065205313E20069038F /* SEContent.swift */; };
 		80FA9068205314040069038F /* SEServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA9067205314040069038F /* SEServer.swift */; };
@@ -3693,6 +3694,7 @@
 				8076FD9E2048510C00114F28 /* AuthManager.swift in Sources */,
 				80D563752059325A008896D6 /* MimeType.swift in Sources */,
 				8076FDA52048534200114F28 /* String+Random.swift in Sources */,
+				80EF621A205A981600EF739B /* UIImageExtension.swift in Sources */,
 				807FB56B20472A0F00E21429 /* SERoomsViewModel.swift in Sources */,
 				8076FDCE2048642400114F28 /* User.swift in Sources */,
 				804273DD204EBD51006DF420 /* API.swift in Sources */,

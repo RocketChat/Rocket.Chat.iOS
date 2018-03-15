@@ -53,7 +53,7 @@ extension NSItemProvider {
     func parseImage() -> Bool {
         if hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
             loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { item, _ in
-                let image: UIImage
+                var image: UIImage
                 var name = "\(String.random(8)).jpeg"
 
                 if let _image = item as? UIImage {
@@ -65,40 +65,14 @@ extension NSItemProvider {
                     image = UIImage()
                 }
 
+                image = image.resizeWith(width: 1024) ?? image
+
                 if let data = UIImageJPEGRepresentation(image, 0.9) {
                     let file = SEFile(name: name, description: "", mimetype: "image/jpeg", data: data, fileUrl: item as? URL)
                     let content = store.state.content + [SEContent(type: .file(file))]
                     DispatchQueue.main.async {
                         store.dispatch(.setContent(content))
                     }
-                }
-            })
-
-            return true
-        }
-
-        return false
-    }
-
-    // MARK: Video
-
-    func parseVideo() -> Bool {
-        if hasItemConformingToTypeIdentifier(kUTTypeVideo as String) {
-            loadItem(forTypeIdentifier: kUTTypeVideo as String, options: nil, completionHandler: { item, _ in
-                var _data = item as? Data
-                var name = "\(String.random(8)).mp4"
-
-                if let url = item as? URL {
-                    _data = try? Data(contentsOf: url)
-                    name = url.lastPathComponent
-                }
-
-                guard let data = _data else { return }
-
-                let file = SEFile(name: name, description: "", mimetype: "video/mp4", data: data, fileUrl: item as? URL)
-                let content = store.state.content + [SEContent(type: .file(file))]
-                DispatchQueue.main.async {
-                    store.dispatch(.setContent(content))
                 }
             })
 
@@ -147,7 +121,6 @@ func parseItemProviders(_ itemProviders: [NSItemProvider]) {
         if itemProvider.parseText() { return }
         if itemProvider.parseUrl() { return }
         if itemProvider.parseImage() { return }
-        if itemProvider.parseVideo() { return }
         if itemProvider.parseAny() { return }
     }
 }

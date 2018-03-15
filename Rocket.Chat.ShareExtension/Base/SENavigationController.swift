@@ -56,15 +56,17 @@ extension SENavigationController: SEStoreSubscriber {
                 super.pushViewController(SEServersViewController.fromStoryboard(), animated: true)
             case .compose:
                 super.pushViewController(SEComposeHeaderViewController.fromStoryboard(), animated: true)
+            case .report:
+                let alert = UIAlertController.statusReport(store)
+                alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: { _ in
+                    store.dispatch(.finish)
+                }))
+                present(alert, animated: true, completion: nil)
             }
         case .finish:
-            let alert = UIAlertController.statusReport(store)
-            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
-                self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-                store.clearSubscribers()
-                store.dispatch(.setContent([]))
-            }))
-            present(alert, animated: true, completion: nil)
+            self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+            store.clearSubscribers()
+            store.dispatch(.setContent([]))
         }
 
         store.dispatch(.makeSceneTransition(.none))

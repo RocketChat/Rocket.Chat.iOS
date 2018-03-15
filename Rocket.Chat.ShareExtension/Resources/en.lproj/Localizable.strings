@@ -6,6 +6,8 @@
   Copyright © 2018 Rocket.Chat. All rights reserved.
 */
 
+"global.ok" = "Ok";
+
 "alert.no_servers.title" = "No servers";
 "alert.no_servers.message" = "You need to join at least one Rocket.Chat server in order to share something.";
 
