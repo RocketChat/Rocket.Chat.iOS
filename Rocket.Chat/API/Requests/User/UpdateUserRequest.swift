@@ -44,7 +44,7 @@ class UpdateUserRequest: APIRequest {
         }
 
         if let password = password, !password.isEmpty {
-            body["data"]["password"].string = password
+            body["data"]["newPassword"].string = password
         }
 
         if let currentPassword = currentPassword {
