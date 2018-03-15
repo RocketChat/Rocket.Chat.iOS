@@ -14,15 +14,13 @@ import SwiftyJSON
 class UpdateUserRequestSpec: APITestCase {
 
     func testRequest() {
-        let userId = "3TmCqTLBqFL4QLNPu"
         let password = "123456"
         let user = User()
-        user.identifier = userId
         user.name = "Example User"
         user.username = "example"
         user.emails.append(Email(value: ["email": "example@example.com", "verified": true]))
 
-        let _request = UpdateUserRequest(userId: userId, user: user, password: password)
+        let _request = UpdateUserRequest(user: user, password: password)
 
         guard let request = _request.request(for: api) else {
             return XCTFail("request is not nil")
@@ -34,10 +32,9 @@ class UpdateUserRequestSpec: APITestCase {
             return XCTFail("body is valid json")
         }
 
-        XCTAssertEqual(request.url?.path, "/api/v1/users.update", "path is correct")
+        XCTAssertEqual(request.url?.path, "/api/v1/users.updateOwnBasicInfo", "path is correct")
         XCTAssertEqual(request.httpMethod, "POST", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
-        XCTAssertEqual(bodyJson["userId"].string, userId, "userId is correct")
         XCTAssertEqual(bodyJson["data"]["name"].string, user.name, "name is correct")
         XCTAssertEqual(bodyJson["data"]["username"].string, user.username, "username is correct")
         XCTAssertEqual(bodyJson["data"]["email"].string, user.emails.first?.email, "email is correct")
