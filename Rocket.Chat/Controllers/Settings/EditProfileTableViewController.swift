@@ -54,6 +54,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         return activityIndicator
     }()
 
+    let editingAvatarImage = UIImage(named: "Camera")?.imageWithTint(.RCEditingAvatarColor())
+
     var editButton: UIBarButtonItem?
     var saveButton: UIBarButtonItem?
     var cancelButton: UIBarButtonItem?
@@ -101,6 +103,10 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         avatarView.bottomAnchor.constraint(equalTo: avatarButton.bottomAnchor).isActive = true
         avatarView.leadingAnchor.constraint(equalTo: avatarButton.leadingAnchor).isActive = true
         avatarView.trailingAnchor.constraint(equalTo: avatarButton.trailingAnchor).isActive = true
+
+        if let imageView = avatarButton.imageView {
+            avatarButton.bringSubview(toFront: imageView)
+        }
     }
 
     func fetchUserData() {
@@ -160,6 +166,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = cancelButton
+        avatarButton.setImage(editingAvatarImage, for: .normal)
         enableUserInteraction()
     }
 
@@ -170,6 +177,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = editButton
+        avatarButton.setImage(nil, for: .normal)
         disableUserInteraction()
     }
 
