@@ -1,5 +1,5 @@
 //
-//  SEActionCreators.swift
+//  SelectServer.swift
 //  Rocket.Chat.ShareExtension
 //
 //  Created by Matheus Cardoso on 3/6/18.
@@ -32,12 +32,13 @@ func fetchRooms(store: SEStore) -> SEAction {
     return .setRooms(rooms)
 }
 
-func initializeStore(store: SEStore) {
-    store.dispatch(fetchServers)
-    selectServer(store: store, serverIndex: 0)
-}
-
 func selectServer(store: SEStore, serverIndex: Int) {
     store.dispatch(.selectServerIndex(serverIndex))
     store.dispatch(fetchRooms)
+}
+
+func selectInitialServer(store: SEStore) -> SEAction? {
+    store.dispatch(fetchServers)
+    selectServer(store: store, serverIndex: 0)
+    return nil
 }

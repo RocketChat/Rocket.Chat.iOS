@@ -123,3 +123,15 @@ func submitMessages(store: SEStore, completion: @escaping (() -> Void)) {
 
     requestNext()
 }
+
+func submitContent(_ store: SEStore) -> SEAction? {
+    submitMessages(store: store) {
+        submitFiles(store: store) {
+            DispatchQueue.main.async {
+                store.dispatch(.makeSceneTransition(.push(.report)))
+            }
+        }
+    }
+
+    return nil
+}

@@ -43,12 +43,6 @@ class SEComposeHeaderViewController: SEViewController {
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
-        submitMessages(store: store) {
-            submitFiles(store: store) {
-                DispatchQueue.main.async {
-                    store.dispatch(.makeSceneTransition(.push(.report)))
-                }
-            }
-        }
+        store.dispatch(submitContent)
     }
 }

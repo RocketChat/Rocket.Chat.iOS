@@ -14,7 +14,7 @@ extension NSItemProvider {
 
     // MARK: Text
 
-    func parseText() -> Bool {
+    func parseText(_ store: SEStore) -> Bool {
         if hasItemConformingToTypeIdentifier(kUTTypeText as String) {
             loadItem(forTypeIdentifier: kUTTypeText as String, options: nil) { text, error in
                 guard error == nil, let text = text as? String else { return }
@@ -32,7 +32,7 @@ extension NSItemProvider {
 
     // MARK: URL
 
-    func parseUrl() -> Bool {
+    func parseUrl(_ store: SEStore) -> Bool {
         if hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
             loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
                 guard error == nil, let url = url as? URL else { return }
@@ -50,7 +50,7 @@ extension NSItemProvider {
 
     // MARK: Image
 
-    func parseImage() -> Bool {
+    func parseImage(_ store: SEStore) -> Bool {
         if hasItemConformingToTypeIdentifier(kUTTypeImage as String) {
             loadItem(forTypeIdentifier: kUTTypeImage as String, options: nil, completionHandler: { item, _ in
                 var image: UIImage
@@ -84,7 +84,7 @@ extension NSItemProvider {
 
     // MARK: Any
 
-    func parseAny() -> Bool {
+    func parseAny(_ store: SEStore) -> Bool {
         if hasItemConformingToTypeIdentifier(kUTTypeItem as String) {
             loadItem(forTypeIdentifier: kUTTypeItem as String, options: nil, completionHandler: { item, _ in
                 let data: Data
@@ -116,11 +116,11 @@ extension NSItemProvider {
     }
 }
 
-func parseItemProviders(_ itemProviders: [NSItemProvider]) {
+func parseItemProviders(_ store: SEStore, _ itemProviders: [NSItemProvider]) {
     itemProviders.forEach { itemProvider in
-        if itemProvider.parseText() { return }
-        if itemProvider.parseUrl() { return }
-        if itemProvider.parseImage() { return }
-        if itemProvider.parseAny() { return }
+        if itemProvider.parseText(store) { return }
+        if itemProvider.parseUrl(store) { return }
+        if itemProvider.parseImage(store) { return }
+        if itemProvider.parseAny(store) { return }
     }
 }

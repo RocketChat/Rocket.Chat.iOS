@@ -29,4 +29,4 @@
 "report.success.title" = "Success";
 "report.success.message" = "Shared your content successfully.";
 "report.error.title" = "Error";
-"report.error.message" = "Something wrong happened while sending your content:";
+"report.error.message" = "Something wrong happened while sending your content.";

@@ -8,25 +8,25 @@
 
 "global.ok" = "Ok";
 
-"alert.no_servers.title" = "No servers";
-"alert.no_servers.message" = "You need to join at least one Rocket.Chat server in order to share something.";
+"alert.no_servers.title" = "Sem servidores";
+"alert.no_servers.message" = "Você precisa acessar pelo menos um servidor Rocket.Chat para compartilhar algo.";
 
-"servers.title" = "Servers";
+"servers.title" = "Servidores";
 
-"rooms.title" = "Select Rooms";
-"rooms.section.server" = "Select server";
-"rooms.section.favorites" = "Favorites";
-"rooms.section.channels" = "Channels";
-"rooms.section.groups" = "Private Groups";
-"rooms.section.directMessages" = "Direct Messages";
+"rooms.title" = "Selecionar Canais";
+"rooms.section.server" = "Selecionar servidor";
+"rooms.section.favorites" = "Favoritos";
+"rooms.section.channels" = "Canais";
+"rooms.section.groups" = "Grupos Privados";
+"rooms.section.directMessages" = "Mensagens Diretas";
 
-"compose.title" = "Share";
-"compose.send" = "Send";
-"compose.destination.to" = "To: ";
-"compose.file.name.placeholder" = "File name";
-"compose.file.description.placeholder" = "File description";
+"compose.title" = "Compartilhar";
+"compose.send" = "Enviar";
+"compose.destination.to" = "Para: ";
+"compose.file.name.placeholder" = "Nome do arquivo";
+"compose.file.description.placeholder" = "Descrição do arquivo";
 
-"report.success.title" = "Success";
-"report.success.message" = "Shared your content successfully.";
-"report.error.title" = "Error";
-"report.error.message" = "Something wrong happened while sending your content:";
+"report.success.title" = "Successo";
+"report.success.message" = "Você compartilhou o conteúdo com sucesso.";
+"report.error.title" = "Erro";
+"report.error.message" = "Algo de errado aconteceu enquanto seu conteúdo estava sendo enviado.";

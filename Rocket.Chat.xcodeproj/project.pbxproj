@@ -438,7 +438,7 @@
 		80977AB2204EE21F00C41435 /* SendMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CF01FD9505A00F5ECF9 /* SendMessageRequest.swift */; };
 		80977AB3204EE21F00C41435 /* UploadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CF61FD9AA1B00F5ECF9 /* UploadRequest.swift */; };
 		80977AB4204EE41200C41435 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA11E3708A50041C5C5 /* DataExtension.swift */; };
-		80977AB6204EEF1E00C41435 /* SEActionCreators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977AB5204EEF1E00C41435 /* SEActionCreators.swift */; };
+		80977AB6204EEF1E00C41435 /* SelectServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977AB5204EEF1E00C41435 /* SelectServer.swift */; };
 		80977AB9204EFBCC00C41435 /* SENavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977AB8204EFBCC00C41435 /* SENavigation.swift */; };
 		80977ABB204EFC0F00C41435 /* SESceneTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977ABA204EFC0F00C41435 /* SESceneTransition.swift */; };
 		80977ABF204F36F200C41435 /* SESearchState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80977ABE204F36F200C41435 /* SESearchState.swift */; };
@@ -1011,7 +1011,7 @@
 		807FB581204837AF00E21429 /* SEServersViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServersViewModel.swift; sourceTree = "<group>"; };
 		808792351FB145B200EFE77F /* PermissionManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PermissionManagerSpec.swift; path = Managers/PermissionManagerSpec.swift; sourceTree = "<group>"; };
 		808792371FB14B3300EFE77F /* PermissionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionSpec.swift; sourceTree = "<group>"; };
-		80977AB5204EEF1E00C41435 /* SEActionCreators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEActionCreators.swift; sourceTree = "<group>"; };
+		80977AB5204EEF1E00C41435 /* SelectServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectServer.swift; sourceTree = "<group>"; };
 		80977AB8204EFBCC00C41435 /* SENavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SENavigation.swift; sourceTree = "<group>"; };
 		80977ABA204EFC0F00C41435 /* SESceneTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SESceneTransition.swift; sourceTree = "<group>"; };
 		80977ABE204F36F200C41435 /* SESearchState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SESearchState.swift; sourceTree = "<group>"; };
@@ -2458,7 +2458,7 @@
 		80FA907B2057F43F0069038F /* ActionCreators */ = {
 			isa = PBXGroup;
 			children = (
-				80977AB5204EEF1E00C41435 /* SEActionCreators.swift */,
+				80977AB5204EEF1E00C41435 /* SelectServer.swift */,
 				80D5637620593533008896D6 /* ParseItemProviders.swift */,
 				80FA907C2057F4650069038F /* SubmitContent.swift */,
 			);
@@ -3630,7 +3630,7 @@
 				80FA90702056A33A0069038F /* SEComposeViewModel.swift in Sources */,
 				8076FD9B20484DBF00114F28 /* DatabaseManager.swift in Sources */,
 				80977AB2204EE21F00C41435 /* SendMessageRequest.swift in Sources */,
-				80977AB6204EEF1E00C41435 /* SEActionCreators.swift in Sources */,
+				80977AB6204EEF1E00C41435 /* SelectServer.swift in Sources */,
 				807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */,
 				80977AC4204FEEA700C41435 /* SEComposeHeaderViewModel.swift in Sources */,
 				804273E2204EBD51006DF420 /* APIResult.swift in Sources */,

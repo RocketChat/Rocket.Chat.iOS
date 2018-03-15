@@ -43,8 +43,10 @@ final class SEStore {
         notifySubscribers()
     }
 
-    func dispatch(_ actionCreator: (SEStore) -> SEAction) {
-        dispatch(actionCreator(self))
+    func dispatch(_ actionCreator: (SEStore) -> SEAction?) {
+        if let action = actionCreator(self) {
+            dispatch(action)
+        }
     }
 
     func subscribe(_ subscriber: SEStoreSubscriber) {
