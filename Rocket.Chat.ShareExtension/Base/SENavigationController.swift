@@ -69,8 +69,6 @@ final class SENavigationController: UINavigationController {
 
 extension SENavigationController: SEStoreSubscriber {
     func stateUpdated(_ state: SEState) {
-        
-
         switch state.navigation.sceneTransition {
         case .none:
             return
