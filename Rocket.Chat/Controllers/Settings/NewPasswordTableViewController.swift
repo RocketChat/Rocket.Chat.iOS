@@ -74,12 +74,12 @@ class NewPasswordTableViewController: UITableViewController {
         }
 
         let alert = UIAlertController(
-            title: localized("auth.forgot_password.title"),
-            message: localized("auth.forgot_password.message"),
+            title: localized("myaccount.settings.profile.new_password.password_required.title"),
+            message: localized("myaccount.settings.profile.new_password.password_required.message"),
             preferredStyle: .alert
         )
 
-        let updatePasswordAction = UIAlertAction(title: localized("Send"), style: .default, handler: { _ in
+        let updatePasswordAction = UIAlertAction(title: localized("myaccount.settings.profile.new_password.actions.save"), style: .default, handler: { _ in
             self.currentPassword = alert.textFields?.first?.text
             self.update(password: newPassword, sender: sender)
         })
@@ -87,7 +87,7 @@ class NewPasswordTableViewController: UITableViewController {
         updatePasswordAction.isEnabled = false
 
         alert.addTextField(configurationHandler: { textField in
-            textField.placeholder = "Your current password"
+            textField.placeholder = localized("myaccount.settings.profile.new_password.password_required.placeholder")
             if #available(iOS 11.0, *) {
                 textField.textContentType = .password
             }

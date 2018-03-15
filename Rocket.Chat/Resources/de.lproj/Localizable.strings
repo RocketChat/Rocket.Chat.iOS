@@ -62,6 +62,8 @@
 "alert.update_password_error.message" = "Something wrong happened when changing your password. Please, try again."; // TODO
 "alert.update_profile_empty_fields.title" = "Please, fill the empty fields"; // TODO
 "alert.update_profile_empty_fields.message" = "All your profile information are required and can't stay blank"; // TODO
+"alert.update_profile_invalid_email.title" = "Invalid e-mail"; // TODO
+"alert.update_profile_invalid_email.message" = "It seems that the e-mail you've entered is invalid. Please, fix it and try again."; // TODO
 "alert.password_empty_fields.title" = "Please, fill the empty fields"; // TODO
 "alert.password_empty_fields.message" = "Fill up the password and confirmation fields so you can update your password."; // TODO
 "alert.update_profile_success.title" = "Profile updated"; // TODO
@@ -261,6 +263,9 @@
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO
+"myaccount.settings.profile.password_required.title" = "Enter your password"; // TODO
+"myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail."; // TODO
+"myaccount.settings.profile.password_required.placeholder" = "Password"; // TODO
 
 // New Password
 "myaccount.settings.profile.new_password.title" = "New password"; // TODO
@@ -268,3 +273,6 @@
 "myaccount.settings.profile.new_password.actions.save" = "Save"; // TODO
 "myaccount.settings.profile.new_password.password_placeholder" = "New password"; // TODO
 "myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Password confirmation"; // TODO
+"myaccount.settings.profile.new_password.password_required.title" = "Enter your password"; // TODO
+"myaccount.settings.profile.new_password.password_required.message" = "Your current password is required when setting a new password."; // TODO
+"myaccount.settings.profile.new_password.password_required.placeholder" = "Password"; // TODO

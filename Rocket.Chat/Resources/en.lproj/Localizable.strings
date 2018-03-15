@@ -64,6 +64,8 @@
 "alert.update_password_error.message" = "Something wrong happened when changing your password. Please, try again.";
 "alert.update_profile_empty_fields.title" = "Please, fill the empty fields";
 "alert.update_profile_empty_fields.message" = "All your profile information are required and can't stay blank";
+"alert.update_profile_invalid_email.title" = "Invalid e-mail";
+"alert.update_profile_invalid_email.message" = "It seems that the e-mail you've entered is invalid. Please, fix it and try again.";
 "alert.password_empty_fields.title" = "Please, fill the empty fields";
 "alert.password_empty_fields.message" = "Fill up the password and confirmation fields so you can update your password.";
 "alert.update_profile_success.title" = "Profile updated";
@@ -265,6 +267,9 @@
 "myaccount.settings.profile.name_placeholder" = "Name";
 "myaccount.settings.profile.username_placeholder" = "Username";
 "myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.password_required.title" = "Enter your password";
+"myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail.";
+"myaccount.settings.profile.password_required.placeholder" = "Password";
 
 // New Password
 "myaccount.settings.profile.new_password.title" = "New password";
@@ -272,3 +277,6 @@
 "myaccount.settings.profile.new_password.actions.save" = "Save";
 "myaccount.settings.profile.new_password.password_placeholder" = "New password";
 "myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Password confirmation";
+"myaccount.settings.profile.new_password.password_required.title" = "Enter your password";
+"myaccount.settings.profile.new_password.password_required.message" = "Your current password is required when setting a new password.";
+"myaccount.settings.profile.new_password.password_required.placeholder" = "Password";

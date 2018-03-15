@@ -215,7 +215,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
 
         guard email.isValidEmail else {
-            Alert(key: "alert.update_profile_empty_fields").present() // TODO: Add invalid e-mail strings
+            Alert(key: "alert.update_profile_invalid_email").present()
             return
         }
 
@@ -230,12 +230,12 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
         if !(self.user?.emails.first?.email == email) {
             let alert = UIAlertController(
-                title: localized("auth.forgot_password.title"),
-                message: localized("auth.forgot_password.message"),
+                title: localized("myaccount.settings.profile.password_required.title"),
+                message: localized("myaccount.settings.profile.password_required.message"),
                 preferredStyle: .alert
             )
 
-            let updateUserAction = UIAlertAction(title: localized("Send"), style: .default, handler: { _ in
+            let updateUserAction = UIAlertAction(title: localized("myaccount.settings.profile.actions.save"), style: .default, handler: { _ in
                 self.currentPassword = alert.textFields?.first?.text
                 self.update(user: user)
             })
@@ -243,7 +243,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             updateUserAction.isEnabled = false
 
             alert.addTextField(configurationHandler: { textField in
-                textField.placeholder = "Your current password"
+                textField.placeholder = localized("myaccount.settings.profile.password_required.placeholder")
                 if #available(iOS 11.0, *) {
                     textField.textContentType = .password
                 }
