@@ -22,6 +22,14 @@ class SEComposeHeaderViewController: SEViewController {
             doneButton.title = viewModel.doneButtonTitle
             doneButton.isEnabled = viewModel.doneButtonEnabled
             navigationItem.hidesBackButton = !viewModel.backButtonEnabled
+
+            if viewModel.showsActivityIndicator {
+                activityIndicator.isHidden = false
+                activityIndicator.startAnimating()
+            } else {
+                activityIndicator.isHidden = true
+                activityIndicator.stopAnimating()
+            }
         }
     }
 

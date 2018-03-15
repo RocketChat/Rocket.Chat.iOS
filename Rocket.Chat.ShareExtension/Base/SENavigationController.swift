@@ -62,6 +62,7 @@ extension SENavigationController: SEStoreSubscriber {
             alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
                 self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
                 store.clearSubscribers()
+                store.dispatch(.setContent([]))
             }))
             present(alert, animated: true, completion: nil)
         }

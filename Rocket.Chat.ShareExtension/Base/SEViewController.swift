@@ -15,6 +15,16 @@ enum SEError: Error {
 
 class SEViewController: UIViewController, SEStoreSubscriber {
 
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+        activityIndicator.frame = CGRect(x: 0, y: 0, width: 80, height: 80)
+        activityIndicator.layer.cornerRadius = 10
+        activityIndicator.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+        activityIndicator.center = view.center
+        view.addSubview(activityIndicator)
+        return activityIndicator
+    }()
+
     override var shouldAutorotate: Bool {
         return false
     }

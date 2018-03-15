@@ -10,6 +10,7 @@ import Foundation
 
 struct SEComposeHeaderViewModel {
     let destinationText: String
+    let showsActivityIndicator: Bool
     let doneButtonEnabled: Bool
     let backButtonEnabled: Bool
 
@@ -28,6 +29,7 @@ struct SEComposeHeaderViewModel {
     static var emptyState: SEComposeHeaderViewModel {
         return SEComposeHeaderViewModel(
             destinationText: "",
+            showsActivityIndicator: false,
             doneButtonEnabled: false,
             backButtonEnabled: true
         )
@@ -38,14 +40,15 @@ struct SEComposeHeaderViewModel {
 
 extension SEComposeHeaderViewModel {
     init(state: SEState) {
-        doneButtonEnabled = !state.content.contains(where: {
+        showsActivityIndicator = state.content.contains(where: {
             if case .sending = $0.status {
                 return true
             }
 
             return false
         })
-        backButtonEnabled = doneButtonEnabled
+        doneButtonEnabled = !showsActivityIndicator
+        backButtonEnabled = !showsActivityIndicator
 
         let symbol: String
         switch state.currentRoom.type {
