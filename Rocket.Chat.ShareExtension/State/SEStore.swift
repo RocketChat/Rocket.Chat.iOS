@@ -37,7 +37,6 @@ final class SEStore {
         case .makeSceneTransition(let transition):
             state.navigation.makeTransition(transition)
         case .finish:
-            state.content = []
             state.navigation.makeTransition(.finish)
         }
 

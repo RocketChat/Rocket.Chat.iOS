@@ -17,7 +17,7 @@ extension UIAlertController {
             switch content.status {
             case .errored(let error):
                 title = localized("report.error.title")
-                message = "\(localized("report.error.message")) \(error)"
+                message = "\(error)"
             default:
                 return
             }

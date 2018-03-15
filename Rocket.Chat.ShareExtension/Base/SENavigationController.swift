@@ -35,10 +35,6 @@ final class SENavigationController: UINavigationController {
         store.unsubscribe(self)
     }
 
-    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
-        fatalError("This cannot be called directly")
-    }
-
     override func popViewController(animated: Bool) -> UIViewController? {
         store.dispatch(.makeSceneTransition(.pop))
         return nil
@@ -62,8 +58,12 @@ extension SENavigationController: SEStoreSubscriber {
                 super.pushViewController(SEComposeHeaderViewController.fromStoryboard(), animated: true)
             }
         case .finish:
-            extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
-            store.clearSubscribers()
+            let alert = UIAlertController.statusReport(store)
+            alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { _ in
+                self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
+                store.clearSubscribers()
+            }))
+            present(alert, animated: true, completion: nil)
         }
 
         store.dispatch(.makeSceneTransition(.none))
