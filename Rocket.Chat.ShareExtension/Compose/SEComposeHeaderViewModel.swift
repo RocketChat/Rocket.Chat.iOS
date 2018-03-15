@@ -11,6 +11,7 @@ import Foundation
 struct SEComposeHeaderViewModel {
     let destinationText: String
     let doneButtonEnabled: Bool
+    let backButtonEnabled: Bool
 
     var destinationToText: String {
         return localized("compose.to")
@@ -22,6 +23,14 @@ struct SEComposeHeaderViewModel {
 
     var doneButtonTitle: String {
         return localized("compose.send")
+    }
+
+    static var emptyState: SEComposeHeaderViewModel {
+        return SEComposeHeaderViewModel(
+            destinationText: "",
+            doneButtonEnabled: false,
+            backButtonEnabled: true
+        )
     }
 }
 
@@ -36,6 +45,7 @@ extension SEComposeHeaderViewModel {
 
             return false
         })
+        backButtonEnabled = doneButtonEnabled
 
         let symbol: String
         switch state.currentRoom.type {

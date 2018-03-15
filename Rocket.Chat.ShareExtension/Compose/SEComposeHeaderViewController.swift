@@ -15,12 +15,13 @@ class SEComposeHeaderViewController: SEViewController {
     @IBOutlet weak var destinationToLabel: UILabel!
     @IBOutlet weak var containerView: UIView!
 
-    var viewModel = SEComposeHeaderViewModel(destinationText: "", doneButtonEnabled: false) {
+    var viewModel = SEComposeHeaderViewModel.emptyState {
         didSet {
             title = viewModel.title
             destinationLabel.text = viewModel.destinationText
             doneButton.title = viewModel.doneButtonTitle
             doneButton.isEnabled = viewModel.doneButtonEnabled
+            navigationItem.hidesBackButton = !viewModel.backButtonEnabled
         }
     }
 
