@@ -319,6 +319,7 @@
 		8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F88D1FD6B83C00EE1A4E /* CommandModelMapping.swift */; };
 		8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */; };
 		801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */; };
+		801E9BF82051A8DD00C5D5E1 /* RCEmojiKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */; };
 		8020CCF01FEAB4A7003424F4 /* EmojiPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020CCEF1FEAB4A7003424F4 /* EmojiPicker.swift */; };
 		8020CCF21FEAB4C3003424F4 /* EmojiPicker.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8020CCF11FEAB4C3003424F4 /* EmojiPicker.xib */; };
 		8020CCF51FEAD8C9003424F4 /* EmojiPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8020CCF41FEAD8C9003424F4 /* EmojiPickerController.swift */; };
@@ -390,7 +391,6 @@
 		80AE2544203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80AE2543203E61CF00DC2867 /* ChatMessageUnreadSeparator.xib */; };
 		80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80B3DC0A202DCE1D004249AD /* SAMLViewController.swift */; };
 		80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */; };
-		80C7DD5E1FF46B8000E6647C /* RCEmojiKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */; };
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
 		80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB5731F8DA55C00FC9715 /* ReplyView.swift */; };
 		80D955C2202154A300E3F281 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D955C1202154A300E3F281 /* CASViewController.swift */; };
@@ -2259,7 +2259,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = Rocket.Chat;
 				TargetAttributes = {
 					41DF76DE1D2C50710028DBF8 = {
@@ -2393,9 +2393,8 @@
 				41DCB8261DDC828200E1197F /* SubscriptionSearchMoreView.xib in Resources */,
 				4102E3AA1E532323004BAA82 /* Preferences.storyboard in Resources */,
 				14F8A288202E659000175FDC /* White-60@3x.png in Resources */,
-				80C7DD5E1FF46B8000E6647C /* RCEmojiKit.strings in Resources */,
+				801E9BF82051A8DD00C5D5E1 /* RCEmojiKit.strings in Resources */,
 				14F8A25E202E64B200175FDC /* BnW-76@2x.png in Resources */,
-				80C7DD5E1FF46B8000E6647C /* RCEmojiKit.strings in Resources */,
 				419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */,
 				4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */,
 				14F8A280202E659000175FDC /* White-76@2x.png in Resources */,

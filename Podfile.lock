@@ -1,8 +1,14 @@
 PODS:
   - 1PasswordExtension (1.8.5)
+ develop
+  - Crashlytics (3.10.1):
+    - Fabric (~> 1.7.5)
+  - Fabric (1.7.5)
+
   - Crashlytics (3.10.0):
     - Fabric (~> 1.7.3)
   - Fabric (1.7.3)
+ develop
   - FLAnimatedImage (1.0.12)
   - FLEX (2.4.0)
   - GoogleSignIn (4.1.2):
@@ -20,6 +26,19 @@ PODS:
   - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
   - GTMOAuth2 (1.1.6):
     - GTMSessionFetcher (~> 1.1)
+ develop
+  - GTMSessionFetcher (1.1.14):
+    - GTMSessionFetcher/Full (= 1.1.14)
+  - GTMSessionFetcher/Core (1.1.14)
+  - GTMSessionFetcher/Full (1.1.14):
+    - GTMSessionFetcher/Core (= 1.1.14)
+  - Instabug (7.10.1):
+    - Instabug/Instabug (= 7.10.1)
+    - Instabug/InstabugCore (= 7.10.1)
+  - Instabug/Instabug (7.10.1):
+    - Instabug/InstabugCore
+  - Instabug/InstabugCore (7.10.1)
+
   - GTMSessionFetcher (1.1.13):
     - GTMSessionFetcher/Full (= 1.1.13)
   - GTMSessionFetcher/Core (1.1.13)
@@ -31,6 +50,7 @@ PODS:
   - Instabug/Instabug (7.9.2):
     - Instabug/InstabugCore
   - Instabug/InstabugCore (7.9.2)
+ develop
   - MobilePlayer (1.2.0)
   - OAuthSwift (1.2.0)
   - RCMarkdownParser (3.0.4)
@@ -40,10 +60,17 @@ PODS:
   - Realm/Headers (3.1.1)
   - RealmSwift (3.1.1):
     - Realm (= 3.1.1)
+ develop
+  - SDWebImage (4.3.2):
+    - SDWebImage/Core (= 4.3.2)
+  - SDWebImage/Core (4.3.2)
+  - SDWebImage/GIF (4.3.2):
+
   - SDWebImage (4.3.0):
     - SDWebImage/Core (= 4.3.0)
   - SDWebImage/Core (4.3.0)
   - SDWebImage/GIF (4.3.0):
+ develop
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
   - SearchTextField (1.2.0)
@@ -114,22 +141,36 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   1PasswordExtension: 0e95bdea64ec8ff2f4f693be5467a09fac42a83d
+ develop
+  Crashlytics: aee1a064cbbf99b32efa3f056a5f458d846bc8ff
+  Fabric: ae7146a5f505ea370a1e44820b4b1dc8890e2890
+
   Crashlytics: a989ef242b66605577a425733797f810bd2725eb
   Fabric: bb495bb9a7a7677c6d03a1f8b83d95bc49b47e41
+  develop
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   GoogleSignIn: d9ef55b10f0aa401a5de2747f59b725e4b9732ac
   GoogleToolboxForMac: 2501e2ad72a52eb3dfe7bd9aee7dad11b858bd20
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
+ develop
+  GTMSessionFetcher: 390ea358e5a0d0133153806f744662dad933d06b
+  Instabug: 66f0038544a4fc61c9d86b005820882b1f87c75e
+
   GTMSessionFetcher: 5bb1eae636127de695590f50e7d248483eb891e6
   Instabug: 03f1498c234f8b22ae2acf10b34140e9030c2b71
+ develop
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
   RCMarkdownParser: db98166953cad4d0045d28f627d93330b36eb7ff
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
   RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
+ develop
+  SDWebImage: 29bd3c0bc1f01e5eb59720847c64ad4c4ca1af5d
+
   SDWebImage: 6da6c8bca115addc4de8613362e1b15f66333825
+ develop
   SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
   semver: df3895a55a097c7a819a80e7375e95b29e136157
   SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
@@ -142,4 +183,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 5112d9d450d5c93e078036fd2f02dce6a7c79d1b
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.4.0.rc.1
