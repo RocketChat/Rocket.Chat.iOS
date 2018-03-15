@@ -228,9 +228,11 @@ extension EmojiPicker: UICollectionViewDataSource {
             cell.emojiView.emojiImageView.sd_setImage(with: URL(string: file), completed: nil)
         } else if emoji.supportsTones, let currentTone = currentSkinTone.name {
             let shortname = String(emoji.shortname.dropLast()) + "_\(currentTone):"
-            cell.emojiView.emojiLabel.text = Emojione.transform(string: shortname)
+            let searchString = String(shortname.dropFirst().dropLast())
+            cell.emojiView.emojiLabel.text = Emojione.values[searchString]
         } else {
-            cell.emojiView.emojiLabel.text = Emojione.transform(string: emoji.shortname)
+            let searchString = String(emoji.shortname.dropFirst().dropLast())
+            cell.emojiView.emojiLabel.text = Emojione.values[searchString]
         }
 
         return cell
