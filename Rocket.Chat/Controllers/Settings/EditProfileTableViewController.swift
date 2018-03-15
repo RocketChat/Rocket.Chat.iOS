@@ -229,37 +229,41 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         user.map(userRaw, realm: nil)
 
         if !(self.user?.emails.first?.email == email) {
-            let alert = UIAlertController(
-                title: localized("myaccount.settings.profile.password_required.title"),
-                message: localized("myaccount.settings.profile.password_required.message"),
-                preferredStyle: .alert
-            )
-
-            let updateUserAction = UIAlertAction(title: localized("myaccount.settings.profile.actions.save"), style: .default, handler: { _ in
-                self.currentPassword = alert.textFields?.first?.text
-                self.update(user: user)
-            })
-
-            updateUserAction.isEnabled = false
-
-            alert.addTextField(configurationHandler: { textField in
-                textField.placeholder = localized("myaccount.settings.profile.password_required.placeholder")
-                if #available(iOS 11.0, *) {
-                    textField.textContentType = .password
-                }
-                textField.isSecureTextEntry = true
-
-                _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
-                    updateUserAction.isEnabled = !(textField.text?.isEmpty ?? false)
-                }
-            })
-
-            alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
-            alert.addAction(updateUserAction)
-            present(alert, animated: true)
+            requestPasswordToUpdate(user: user)
         } else {
             update(user: user)
         }
+    }
+
+    fileprivate func requestPasswordToUpdate(user: User) {
+        let alert = UIAlertController(
+            title: localized("myaccount.settings.profile.password_required.title"),
+            message: localized("myaccount.settings.profile.password_required.message"),
+            preferredStyle: .alert
+        )
+
+        let updateUserAction = UIAlertAction(title: localized("myaccount.settings.profile.actions.save"), style: .default, handler: { _ in
+            self.currentPassword = alert.textFields?.first?.text
+            self.update(user: user)
+        })
+
+        updateUserAction.isEnabled = false
+
+        alert.addTextField(configurationHandler: { textField in
+            textField.placeholder = localized("myaccount.settings.profile.password_required.placeholder")
+            if #available(iOS 11.0, *) {
+                textField.textContentType = .password
+            }
+            textField.isSecureTextEntry = true
+
+            _ = NotificationCenter.default.addObserver(forName: .UITextFieldTextDidChange, object: textField, queue: OperationQueue.main) { _ in
+                updateUserAction.isEnabled = !(textField.text?.isEmpty ?? false)
+            }
+        })
+
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+        alert.addAction(updateUserAction)
+        present(alert, animated: true)
     }
 
     fileprivate func update(user: User) {
