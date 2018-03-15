@@ -52,21 +52,7 @@ class SEViewController: UIViewController, SEStoreSubscriber {
     }
 
     func stateUpdated(_ state: SEState) {
-        guard !state.servers.isEmpty else {
-            return alertNoServers()
-        }
-    }
 
-    func alertNoServers() {
-        let alert = UIAlertController(
-            title: localized("alert.no_servers.title"),
-            message: localized("alert.no_servers.message"),
-            preferredStyle: .alert
-        )
-
-        present(alert, animated: true, completion: {
-            self.extensionContext?.cancelRequest(withError: SEError.noServers)
-        })
     }
 
     func cancelShareExtension() {

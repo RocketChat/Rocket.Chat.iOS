@@ -27,7 +27,14 @@ final class SENavigationController: UINavigationController {
         super.viewDidLoad()
 
         store.dispatch(selectInitialServer)
+
+        if store.state.servers.isEmpty {
+            alertNoServers()
+            return
+        }
+
         store.dispatch(loadContent)
+        store.dispatch(.makeSceneTransition(.push(.rooms)))
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -44,10 +51,26 @@ final class SENavigationController: UINavigationController {
         store.dispatch(.makeSceneTransition(.pop))
         return nil
     }
+
+    func alertNoServers() {
+        let alert = UIAlertController(
+            title: localized("alert.no_servers.title"),
+            message: localized("alert.no_servers.message"),
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: { _ in
+            self.extensionContext?.cancelRequest(withError: SEError.noServers)
+        }))
+
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 extension SENavigationController: SEStoreSubscriber {
     func stateUpdated(_ state: SEState) {
+        
+
         switch state.navigation.sceneTransition {
         case .none:
             return

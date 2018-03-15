@@ -33,6 +33,8 @@ extension NSItemProvider {
     // MARK: URL
 
     func parseUrl(_ store: SEStore) -> Bool {
+        guard !hasItemConformingToTypeIdentifier(kUTTypeFileURL as String) else { return false }
+
         if hasItemConformingToTypeIdentifier(kUTTypeURL as String) {
             loadItem(forTypeIdentifier: kUTTypeURL as String, options: nil) { url, error in
                 guard error == nil, let url = url as? URL else { return }
