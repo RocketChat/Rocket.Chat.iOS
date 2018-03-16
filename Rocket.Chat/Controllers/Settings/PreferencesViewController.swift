@@ -98,15 +98,17 @@ final class PreferencesViewController: UITableViewController {
         performSegue(withIdentifier: "Language", sender: nil)
     }
     private func rateUsDidPressed() {
-        let appID = "Enter_App_Id"
-        let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"
-        if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(url)
-            }
-        }
+        let YOURAPPID = "Enter_App_Id"
+//        let urlStr = "itms-apps://itunes.apple.com/app/viewContentsUserReviews?id=\(appID)"
+//        if let url = URL(string: urlStr), UIApplication.shared.canOpenURL(url) {
+//            if #available(iOS 10.0, *) {
+//                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+//            } else {
+//                UIApplication.shared.openURL(url)
+//            }
+//        }
+        let url = URL(string: "itms-apps:itunes.apple.com/us/app/apple-store/id\(YOURAPPID)?mt=8&action=write-review")!
+        UIApplication.shared.openURL(url)
     }
 
     // MARK: UITableViewDelegate
