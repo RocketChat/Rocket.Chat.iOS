@@ -12,7 +12,6 @@ import semver
 import Reachability
 
 final class ConnectServerViewController: BaseViewController {
-
     internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
     internal let infoRequestHandler = InfoRequestHandler()
@@ -45,10 +44,6 @@ final class ConnectServerViewController: BaseViewController {
 
     @IBOutlet weak var labelSSLRequired: UILabel!
 
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -74,19 +69,14 @@ final class ConnectServerViewController: BaseViewController {
         reachability.whenReachable = { reachability in
             DispatchQueue.main.async {
                 self.textFieldServerURL.isEnabled = true
-                self.alertController.dismiss(animated: true, completion: nil)
-            }
-        }
+                self.alertController.dismiss(animated: true, completion: nil) } }
         reachability.whenUnreachable = { reachability in
             DispatchQueue.main.async {
                 self.textFieldServerURL.isEnabled = false
-                self.present(self.alertController, animated: true, completion: nil)
-            }
-        }
-        alertController.addAction(UIAlertAction(title: "OK",style: UIAlertActionStyle.default,handler: nil))
+                self.present(self.alertController, animated: true, completion: nil) } }
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
         alertController.title = NSLocalizedString("Warning!", comment: "")
-        alertController.message = NSLocalizedString("Connect To Internet Please!", comment: "")
-    }
+        alertController.message = NSLocalizedString("Connect To Internet Please!", comment: "")}
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -102,22 +92,21 @@ final class ConnectServerViewController: BaseViewController {
         }
         NotificationCenter.default.addObserver(self, selector: #selector(internetConnection), name: Notification.Name.reachabilityChanged, object: reachability)
                 do {
-                        try reachability.startNotifier()
+                    try reachability.startNotifier()
                     } catch {
                             print(error)
                         }
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewDidDisappear(true)
-                    NotificationCenter.default.removeObserver(self)
     }
     @objc func internetConnection(notification: NSNotification) {
                 guard let reachability = notification.object as? Reachability else {return}
-                if reachability.isReachable {
-                        print("internet is available")
-                    } else {
-                            print("internet is not available")
-                    }
+                if reachability.isReachable { return }
+                   else { return }
             }
 
     override func viewDidAppear(_ animated: Bool) {
