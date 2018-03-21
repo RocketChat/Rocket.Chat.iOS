@@ -66,7 +66,6 @@ struct BrowserManager {
         return defaultBrowser
     }
 
-
     static func open(url: URL) {
         browser.open(url: url)
     }

@@ -13,14 +13,12 @@ import UIKit
 extension UIWindow {
 
     static var topWindow: UIWindow {
-        get {
-            let window = UIWindow(frame: UIScreen.main.bounds)
-            window.rootViewController = UIViewController()
-            window.windowLevel = UIWindowLevelAlert + 1
-            window.makeKeyAndVisible()
+        let window = UIWindow(frame: UIScreen.main.bounds)
+        window.rootViewController = UIViewController()
+        window.windowLevel = UIWindowLevelNormal
+        window.makeKeyAndVisible()
 
-            return window
-        }
+        return window
     }
 
     func set(rootViewController newRootViewController: UIViewController, withTransition transition: CATransition? = nil) {
