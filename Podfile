@@ -15,11 +15,8 @@ def shared_pods
   pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
 
   # UI
-  pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
   pod 'SlackTextViewController', :git => 'https://github.com/rafaelks/SlackTextViewController.git'
-  # pod 'MobilePlayer'
-  pod 'SnapKit', '~> 4.0.0'
-  pod 'VGPlayer', '~> 0.2.0'
+  pod 'MobilePlayer'
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
   pod 'TagListView', '~> 1.0'
   pod 'SearchTextField'
@@ -57,7 +54,7 @@ target 'Rocket.ChatTests' do
 end
 
 post_install do |installer|
-  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField', 'VGPlayer', 'SnapKit']
+  swift4Targets = ['OAuthSwift', 'TagListView', 'SearchTextField']
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'
