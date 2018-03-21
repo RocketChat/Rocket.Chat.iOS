@@ -70,6 +70,7 @@
 		14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */; };
 		14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */; };
 		15A2FD223558011BFDE03883 /* Pods_Rocket_ChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */; };
+		274037AB2062D219009CD1EB /* ChatVideoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 274037AA2062D219009CD1EB /* ChatVideoController.swift */; };
 		35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */; };
 		35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD300201A57EA00B4BE5A /* Ask.swift */; };
 		35BCD303201A9FB800B4BE5A /* AskSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD302201A9FB800B4BE5A /* AskSpec.swift */; };
@@ -498,6 +499,7 @@
 		14F8A291202E65C700175FDC /* Blue-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue-76@2x.png"; sourceTree = "<group>"; };
 		14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MentionsTextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		274037AA2062D219009CD1EB /* ChatVideoController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ChatVideoController.swift; path = Controllers/Chat/ChatVideoController.swift; sourceTree = "<group>"; };
 		35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAttachmentView.swift; sourceTree = "<group>"; };
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		35BCD300201A57EA00B4BE5A /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
@@ -1645,6 +1647,7 @@
 		41E2FA021D414ECC00238DFD /* Chat */ = {
 			isa = PBXGroup;
 			children = (
+				274037AA2062D219009CD1EB /* ChatVideoController.swift */,
 				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
 				800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */,
 				41E2FA061D41513C00238DFD /* ChatViewController.swift */,
@@ -2689,6 +2692,7 @@
 				77CCB6BE1F8D0597004BBF67 /* DictionaryExtensions.swift in Sources */,
 				413FB6C61FE17DBC00F010AA /* MessageTextFontAttributes.swift in Sources */,
 				80054CF71FD9AA1B00F5ECF9 /* UploadRequest.swift in Sources */,
+				274037AB2062D219009CD1EB /* ChatVideoController.swift in Sources */,
 				412A95D61FD94ED000954AA6 /* ChatMessageVideoView.swift in Sources */,
 				800FCD4B1F728EC800D9A692 /* ChannelInfoBasicCell.swift in Sources */,
 				413FB6C21FE17D7D00F010AA /* UIViewControllerExtension.swift in Sources */,

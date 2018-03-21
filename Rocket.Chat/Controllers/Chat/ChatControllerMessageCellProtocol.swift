@@ -26,6 +26,7 @@ extension ChatViewController: ChatMessageCellProtocol {
             guard let cell = $0 as? MemberCell else { return }
             cell.hideStatus = true
         }
+        
         // set up model
         var models = reactionListView.model.reactionViewModels
         if let index = models.index(where: { $0.emoji == reactionView.model.emoji }) {
@@ -103,7 +104,7 @@ extension ChatViewController: ChatMessageCellProtocol {
         openDocument(attachment: attachment)
     }
     
-    func viewDidCollapseChange(view: UIView) {
+    func viewDidCollpaseChange(view: UIView) {
         guard let origin = collectionView?.convert(CGPoint.zero, from: view) else { return }
         guard let indexPath = collectionView?.indexPathForItem(at: origin) else { return }
         collectionView?.reloadItems(at: [indexPath])
