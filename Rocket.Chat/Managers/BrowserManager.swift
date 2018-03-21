@@ -31,6 +31,8 @@ enum BrowserApp: String {
                 of: URLScheme.https.rawValue,
                 with: URLScheme.chromeSecure.rawValue
             )
+        case .chrome where scheme.isEmpty:
+            absoluteString = "\(URLScheme.chromeSecure)\(absoluteString)"
         default:
             break
         }
@@ -47,8 +49,16 @@ extension BrowserApp {
         case .safari, .chrome:
             UIApplication.shared.open(url)
         case .inAppSafari:
-            let controller = SFSafariViewController(url: url)
-            UIWindow.topWindow.rootViewController?.present(controller, animated: true, completion: nil)
+            func present() {
+                let controller = SFSafariViewController(url: url)
+                UIWindow.topWindow.rootViewController?.present(controller, animated: true, completion: nil)
+            }
+
+            if Thread.isMainThread {
+                present()
+            } else {
+                DispatchQueue.main.async(execute: present)
+            }
         }
     }
 }
