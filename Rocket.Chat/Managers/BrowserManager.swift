@@ -13,7 +13,7 @@ enum BrowserApp: String {
     case safari, inAppSafari, chrome
 
     internal enum URLScheme: String {
-        case http = "http://", https = "https://", chrome = "googlechrome://", chromeSecure = "googlechromes://"
+        case http = "http", https = "https", chrome = "googlechrome", chromeSecure = "googlechromes"
     }
 
     func appSchemeURL(forURL url: URL) -> URL? {
