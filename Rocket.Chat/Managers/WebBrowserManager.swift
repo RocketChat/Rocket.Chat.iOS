@@ -1,5 +1,5 @@
 //
-//  BrowserManager.swift
+//  WebBrowserManager.swift
 //  Rocket.Chat
 //
 //  Created by Filipe Alvarenga on 21/03/18.
@@ -9,13 +9,46 @@
 import Foundation
 import SafariServices
 
-enum BrowserApp: String {
+struct WebBrowserManager {
+    static let defaultBrowserKey = "DefaultBrowserKey"
+    static var browser: WebBrowserApp {
+        guard
+            let browserRaw = UserDefaults.standard.string(forKey: defaultBrowserKey),
+            let browser = WebBrowserApp(rawValue: browserRaw),
+            browser.isInstalled
+        else {
+            return .inAppSafari
+        }
+
+        return browser
+    }
+
+    static func open(url: URL) {
+        browser.open(url: url)
+    }
+}
+
+enum WebBrowserApp: String {
     case safari, inAppSafari, chrome
 
     internal enum URLScheme: String {
         case http = "http", https = "https", chrome = "googlechrome", chromeSecure = "googlechromes"
     }
 
+    var isInstalled: Bool {
+        let urlSuffix = "://"
+        switch self {
+        case .safari, .inAppSafari:
+            return true
+        case .chrome:
+            guard let url = URL(string: URLScheme.chrome.rawValue + urlSuffix) else { return false }
+            return UIApplication.shared.canOpenURL(url)
+        }
+    }
+
+}
+
+extension WebBrowserApp {
     func appSchemeURL(forURL url: URL) -> URL? {
         let scheme = url.scheme ?? ""
         var absoluteString = url.absoluteString
@@ -39,9 +72,7 @@ enum BrowserApp: String {
 
         return URL(string: absoluteString)
     }
-}
 
-extension BrowserApp {
     func open(url: URL) {
         guard let url = appSchemeURL(forURL: url) else { return }
 
@@ -60,23 +91,5 @@ extension BrowserApp {
                 DispatchQueue.main.async(execute: present)
             }
         }
-    }
-}
-
-struct BrowserManager {
-    static let defaultBrowserKey = "DefaultBrowserKey"
-    static var browser: BrowserApp {
-        guard
-            let browserRaw = UserDefaults.standard.string(forKey: defaultBrowserKey),
-            let defaultBrowser = BrowserApp(rawValue: browserRaw)
-        else {
-            return .inAppSafari
-        }
-
-        return defaultBrowser
-    }
-
-    static func open(url: URL) {
-        browser.open(url: url)
     }
 }

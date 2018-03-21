@@ -65,8 +65,7 @@ final class PreferencesViewController: UITableViewController {
 
     private func cellTermsOfServiceDidPressed() {
         guard let url = viewModel.licenseURL else { return }
-        let controller = SFSafariViewController(url: url)
-        present(controller, animated: true, completion: nil)
+        WebBrowserManager.open(url: url)
     }
 
     private func cellContactDidPressed() {
