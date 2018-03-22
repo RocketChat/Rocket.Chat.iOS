@@ -10,6 +10,7 @@ import Foundation
 import SafariServices
 
 struct WebBrowserManager {
+    private static let defaults = UserDefaults.standard
     static let defaultBrowserKey = "DefaultBrowserKey"
     static var browser: WebBrowserApp {
         guard
@@ -25,6 +26,10 @@ struct WebBrowserManager {
 
     static func open(url: URL) {
         browser.open(url: url)
+    }
+
+    static func set(defaultBrowser: WebBrowserApp) {
+        defaults.set(defaultBrowser.rawValue, forKey: defaultBrowserKey)
     }
 }
 
