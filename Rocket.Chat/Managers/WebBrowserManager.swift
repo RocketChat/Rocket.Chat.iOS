@@ -40,6 +40,14 @@ enum WebBrowserApp: String {
         case http = "http", https = "https", chrome = "googlechrome", chromeSecure = "googlechromes"
     }
 
+    var name: String {
+        switch self {
+        case .safari: return "Safari"
+        case .inAppSafari: return "In-App Browser"
+        case .chrome: return "Chrome"
+        }
+    }
+
     var isInstalled: Bool {
         let urlSuffix = "://"
         switch self {
