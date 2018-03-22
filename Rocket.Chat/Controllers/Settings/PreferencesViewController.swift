@@ -48,6 +48,12 @@ final class PreferencesViewController: UITableViewController {
         }
     }
 
+    @IBOutlet weak var labelDefaultWebBrowser: UILabel! {
+        didSet {
+            labelDefaultWebBrowser.text = WebBrowserManager.browser.name
+        }
+    }
+
     override var navigationController: PreferencesNavigationController? {
         return super.navigationController as? PreferencesNavigationController
     }
@@ -82,6 +88,16 @@ final class PreferencesViewController: UITableViewController {
         controller.setSubject(viewModel.supportEmailSubject)
         controller.setMessageBody(viewModel.supportEmailBody, isHTML: true)
         present(controller, animated: true, completion: nil)
+    }
+
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let webBrowser = segue.destination as? WebBrowserTableViewController {
+            webBrowser.updateDefaultWebBrowser = { [weak self] in
+                self?.labelDefaultWebBrowser.text = WebBrowserManager.browser.name
+            }
+        }
     }
 
     private func cellAppIconDidPressed() {
