@@ -10,7 +10,7 @@ import UIKit
 
 class WebBrowserTableViewController: UITableViewController {
 
-    let browserCellIdentifier = "WebBrowserCell"
+    let viewModel = WebBrowserViewModel()
     let browsers: [WebBrowserApp] = [.safari, .inAppSafari, .chrome].filter { $0.isInstalled }
     var updateDefaultWebBrowser: (() -> Void)?
 
@@ -18,6 +18,7 @@ class WebBrowserTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = viewModel.title
     }
 
 }
@@ -32,7 +33,7 @@ extension WebBrowserTableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let browser = browsers[indexPath.row]
-        let browserCell = tableView.dequeueReusableCell(withIdentifier: browserCellIdentifier, for: indexPath)
+        let browserCell = tableView.dequeueReusableCell(withIdentifier: viewModel.browserCellIdentifier, for: indexPath)
         browserCell.textLabel?.text = browser.name
         browserCell.accessoryType = browser == WebBrowserManager.browser ? .checkmark : .none
 
@@ -68,6 +69,10 @@ extension WebBrowserTableViewController {
         selectedCell.accessoryType = .none
 
         navigationController?.popViewController(animated: true)
+    }
+
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        return viewModel.footerTitle
     }
 
 }

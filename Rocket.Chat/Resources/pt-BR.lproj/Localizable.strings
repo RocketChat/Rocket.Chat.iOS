@@ -223,6 +223,7 @@
 "myaccount.settings.language" = "Idioma";
 "myaccount.settings.appicon" = "Ícone do App";
 "myaccount.settings.version" = "Versão: %@ (%@)";
+"myaccount.settings.web_browser" = "Navegador";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Escolher Ícone";
@@ -234,3 +235,10 @@
 "myaccount.settings.language.title" = "Alterar Idioma";
 "myaccount.settings.language.reset" = "Restaurar o Padrão";
 "myaccount.settings.language.message" = "Você mudou o idioma. Você precisa fechar o aplicativo e abrir novamente para que as alterações tenham efeito.";
+
+// Choose Web Browser
+"web_browser.safari.title" = "Safari";
+"web_browser.in_app_safari.title" = "Navegador no App";
+"web_browser.chrome.title" = "Chrome";
+"myaccount.settings.web_browser.title" = "Navegador";
+"myaccount.settings.web_browser.footer" = "Este aplicativo será usado para abrir links no Rocket Chat.";

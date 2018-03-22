@@ -48,6 +48,12 @@ final class PreferencesViewController: UITableViewController {
         }
     }
 
+    @IBOutlet weak var labelWebBrowser: UILabel! {
+        didSet {
+            labelWebBrowser.text = viewModel.webBrowser
+        }
+    }
+
     @IBOutlet weak var labelDefaultWebBrowser: UILabel! {
         didSet {
             labelDefaultWebBrowser.text = WebBrowserManager.browser.name

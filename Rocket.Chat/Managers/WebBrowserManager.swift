@@ -42,9 +42,9 @@ enum WebBrowserApp: String {
 
     var name: String {
         switch self {
-        case .safari: return "Safari"
-        case .inAppSafari: return "In-App Browser"
-        case .chrome: return "Chrome"
+        case .safari: return localized("web_browser.safari.title")
+        case .inAppSafari: return localized("web_browser.in_app_safari.title")
+        case .chrome: return localized("web_browser.chrome.title")
         }
     }
 

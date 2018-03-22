@@ -35,6 +35,10 @@ final class PreferencesViewModel {
         return localized("myaccount.settings.appicon")
     }
 
+    internal var webBrowser: String {
+        return localized("myaccount.settings.web_browser")
+    }
+
     internal var formattedVersion: String {
         return String(format: localized("myaccount.settings.version"), version, build)
     }
