@@ -1,9 +1,9 @@
 //
-//  UploadRequestSpec.swift
+//  UploadAvatarRequestSpec.swift
 //  Rocket.ChatTests
 //
-//  Created by Matheus Cardoso on 12/12/17.
-//  Copyright © 2017 Rocket.Chat. All rights reserved.
+//  Created by Filipe Alvarenga on 06/03/18.
+//  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
 import XCTest
@@ -11,18 +11,19 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class UploadRequestSpec: APITestCase {
+class UploadAvatarRequestSpec: APITestCase {
+
     func testRequest() {
-        let _request = UploadRequest(roomId: "rid", data: Data(), filename: "filename.file",
-                                     mimetype: "file/filetype", msg: "msg", description: "desc")
+        let _request = UploadAvatarRequest(data: Data(), filename: "avatar.jpg", mimetype: "image/jpeg")
 
         guard let request = _request.request(for: api) else {
             return XCTFail("request is not nil")
         }
 
         XCTAssertNotNil(request.httpBody)
-        XCTAssertEqual(request.url?.path, "/api/v1/rooms.upload/rid", "path is correct")
+        XCTAssertEqual(request.url?.path, "/api/v1/users.setAvatar", "path is correct")
         XCTAssertEqual(request.httpMethod, "POST", "http method is correct")
         XCTAssert(request.value(forHTTPHeaderField: "Content-Type")?.contains("multipart/form-data") ?? false, "content type is correct")
     }
+
 }

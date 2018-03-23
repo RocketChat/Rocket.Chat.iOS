@@ -27,13 +27,33 @@ extension CustomEmoji {
             return nil
         }
 
-        return "\(serverUrl)/emoji-custom/\(encodedName)"
+        var imageUrl = URL(string: serverUrl)?.httpServerURL()
+        imageUrl?.appendPathComponent("emoji-custom")
+        imageUrl?.appendPathComponent(encodedName)
+        return imageUrl?.absoluteString
     }
 
     static func withShortname(_ shortname: String, realm: Realm? = Realm.shared) -> CustomEmoji? {
         guard let realm = realm, shortname.count > 2 else { return nil }
         let shortname = String(shortname.dropFirst().dropLast())
         return realm.objects(CustomEmoji.self).filter { $0.name == shortname || $0.aliases.contains(shortname) }.first
+    }
+
+    static var cachedEmojis: [String: Emoji]?
+
+    static var emojiStrings: [String: Emoji] {
+        if let emojis = cachedEmojis {
+            return emojis
+        }
+
+        let emojisArray = emojis()
+        let emojiReplacementStrings = emojisArray.reduce([String: Emoji]()) { dict, emoji -> [String: Emoji] in
+            let alternates = emoji.alternates.filter { !$0.isEmpty }
+            let emojiStrings = ([emoji.shortname] + alternates).map { (key: $0, value: emoji) }
+            return dict.union(dictionary: Dictionary(keyValuePairs: emojiStrings))
+        }
+        cachedEmojis = emojiReplacementStrings
+        return emojiReplacementStrings
     }
 
     static func emojis() -> [Emoji] {

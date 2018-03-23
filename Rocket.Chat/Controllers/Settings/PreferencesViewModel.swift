@@ -19,6 +19,10 @@ final class PreferencesViewModel {
         return localized("myaccount.settings.title")
     }
 
+    internal var profile: String {
+        return localized("myaccount.settings.profile")
+    }
+
     internal var contactus: String {
         return localized("myaccount.settings.contactus")
     }
@@ -92,6 +96,7 @@ final class PreferencesViewModel {
 
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
+
         case 0: return (canChangeAppIcon ? 3 : 2)
         case 1: return 2
         case 2: return (canOpenFLEX ? 1 : 0)
