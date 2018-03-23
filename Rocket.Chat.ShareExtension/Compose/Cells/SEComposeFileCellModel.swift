@@ -16,6 +16,8 @@ struct SEComposeFileCellModel: SEComposeCellModel {
     var detailText: String = ""
     var fileSizeText: String = ""
 
+    var originalNameText: String = ""
+
     var nameText: String {
         return file.name
     }
@@ -25,6 +27,7 @@ struct SEComposeFileCellModel: SEComposeCellModel {
     }
 
     init(contentIndex: Int, file: SEFile) {
+        self.originalNameText = file.name
         self.contentIndex = contentIndex
         self.file = file
         self.fileSizeText = "\(Double(file.data.count)/1000000)MB"

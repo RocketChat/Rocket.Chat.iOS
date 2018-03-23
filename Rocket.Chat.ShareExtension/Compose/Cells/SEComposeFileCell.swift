@@ -37,7 +37,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
         return textField
     }()
 
-    lazy var descriptionTextField: UITextField =  {
+    lazy var descriptionTextField: UITextField = {
         let textField = UITextField(
             frame: CGRect(x: 16, y: 0, width: tableView.bounds.width - 16, height: 30.0)
         )
@@ -51,7 +51,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
 
     var cellModel = SEComposeFileCellModel.emptyState {
         didSet {
-            fileDetailView?.titleLabel.text = cellModel.nameText
+            fileDetailView?.titleLabel.text = cellModel.originalNameText
             fileDetailView?.previewImageView.image = cellModel.image
             fileDetailView?.detailLabel.text = cellModel.detailText
             fileDetailView?.fileSizeLabel.text = cellModel.fileSizeText
