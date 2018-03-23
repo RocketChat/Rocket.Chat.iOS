@@ -11,7 +11,7 @@ import SafariServices
 
 struct WebBrowserManager {
     private static let defaults = UserDefaults.standard
-    static let defaultBrowserKey = "DefaultBrowserKey"
+    private static let defaultBrowserKey = "DefaultBrowserKey"
     static var browser: WebBrowserApp {
         guard
             let browserRaw = UserDefaults.standard.string(forKey: defaultBrowserKey),
@@ -22,7 +22,7 @@ struct WebBrowserManager {
 
         if !browser.isInstalled {
             browser = .inAppSafari
-            WebBrowserManager.set(defaultBrowser: browser)
+            clearDefaultBrowser()
         }
 
         return browser
@@ -34,6 +34,10 @@ struct WebBrowserManager {
 
     static func set(defaultBrowser: WebBrowserApp) {
         defaults.set(defaultBrowser.rawValue, forKey: defaultBrowserKey)
+    }
+
+    static func clearDefaultBrowser() {
+        defaults.set(nil, forKey: defaultBrowserKey)
     }
 }
 
