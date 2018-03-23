@@ -8,9 +8,9 @@
 
 import SwiftyJSON
 
-typealias UploadResult = APIResult<UploadRequest>
+typealias UploadMessageResult = APIResult<UploadMessageRequest>
 
-class UploadRequest: APIRequest {
+class UploadMessageRequest: APIRequest {
     let requiredVersion = Version(0, 60, 0)
 
     let method: HTTPMethod = .post
@@ -62,7 +62,7 @@ class UploadRequest: APIRequest {
     }
 }
 
-extension APIResult where T == UploadRequest {
+extension APIResult where T == UploadMessageRequest {
     var error: String? {
         return raw?["error"].string
     }

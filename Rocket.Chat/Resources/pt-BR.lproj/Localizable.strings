@@ -52,6 +52,23 @@
 "alert.email_verification.title" = "Verificação de email";
 "alert.email_verification.message" = "Nós enviamos um email para confirmar seu registro. Se você não receber um email em breve, por favor volte e tente novamente.";
 
+"alert.load_profile_error.title" = "Falha ao carregar seu perfil";
+"alert.load_profile_error.message" = "Algo de errado aconteceu ao carregar seu perfil. Por favor, tente novamente.";
+"alert.password_mismatch_error.title" = "Suas senhas não batem";
+"alert.password_mismatch_error.message" = "O campo de confirmação da senha difere da senha escolhida. Por favor, corrija e tente novamente.";
+"alert.update_profile_error.title" = "Falha ao atualizar";
+"alert.update_profile_error.message" = "Algo de errado aconteceu ao atualizar seu perfil. Por favor, tente novamente.";
+"alert.update_password_error.title" = "Falha ao alterar senha";
+"alert.update_password_error.message" = "Algo de errado aconteceu ao alterar sua senha. Por favor, tente novamente";
+"alert.update_profile_empty_fields.title" = "Por favor, preenchar todos os campos";
+"alert.update_profile_empty_fields.message" = "Todas as informações do seu perfil são necessárias e não podem ficar em branco.";
+"alert.update_profile_invalid_email.title" = "E-mail inválido";
+"alert.update_profile_invalid_email.message" = "Parece que o e-mail está inválido. Por favor, corrija e tente novamente.";
+"alert.password_empty_fields.title" = "Atualizar senha";
+"alert.password_empty_fields.message" = "Por favor, preencha os dois campos para atualizar sua senha.";
+"alert.update_profile_success.title" = "Perfil atualizado";
+"alert.update_password_success.title" = "Senha alterada";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";
 "connection.server.redirect.alert.message" = "Parece que este servidor mudou a URL para:\n\n%@\n\Gostaria de atualizar a URL?";
@@ -66,14 +83,14 @@
 "auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
 "auth.connect.connecting" = "Conectando no servidor";
 
-"auth.login.username.placeholder" = "Email or username";
-"auth.login.password.placeholder" = "Password";
-"auth.login.buttonRegister" = "Create new account";
-"auth.login.buttonResetPassword" = "Forgot password";
-"auth.login.agree_label" = "By proceeding you are agreeing to our";
-"auth.login.agree_and" = "and";
-"auth.login.agree_termsofservice" = "Terms of Service";
-"auth.login.agree_privacypolicy" = "Privacy Policy";
+"auth.login.username.placeholder" = "E-mail ou usuário";
+"auth.login.password.placeholder" = "Senha";
+"auth.login.buttonRegister" = "Criar uma conta";
+"auth.login.buttonResetPassword" = "Esqueci minha senha";
+"auth.login.agree_label" = "Ao proceder você está concordando com os";
+"auth.login.agree_and" = "e";
+"auth.login.agree_termsofservice" = "Termos de Serviço";
+"auth.login.agree_privacypolicy" = "Política de Privacidade";
 
 "auth.forgot_password.title" = "Esqueceu sua senha?";
 "auth.forgot_password.message" = "Digite seu e-mail";
@@ -99,7 +116,7 @@
 "user_menu.busy" = "Ocupado";
 "user_menu.invisible" = "Invisível";
 "user_menu.admin" = "Administração";
-"user_menu.preferences" = "Minha conta"; // TODO: new text: Preferences
+"user_menu.preferences" = "Preferências";
 "user_menu.logout" = "Sair";
 
 // New Room View
@@ -175,11 +192,11 @@
 // Chat Drawing
 "chat.drawing.errorTitle" = "Oops!";
 "chat.drawing.messageTitle" = "Você precisa desenhar algo antes de enviar.";
-"chat.drawing.fileName" = "Drawing"; // TODO
-"chat.drawing.settings.opacity" = "Opacity"; // TODO
-"chat.drawing.settings.width" = "Width"; // TODO
-"chat.drawing.settings.color.selected" = "Selected color"; // TODO
-"chat.drawing.settings.color.others" = "Choose color below:"; // TODO
+"chat.drawing.fileName" = "Desenho";
+"chat.drawing.settings.opacity" = "Opacidade";
+"chat.drawing.settings.width" = "Largura";
+"chat.drawing.settings.color.selected" = "Selecionar cor";
+"chat.drawing.settings.color.others" = "Escolha uma cor:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";
@@ -219,6 +236,7 @@
 // Settings
 "myaccount.settings.title" = "Configurações";
 "myaccount.settings.contactus" = "Entre em contato";
+"myaccount.settings.profile" = "Perfil";
 "myaccount.settings.license" = "Licença";
 "myaccount.settings.language" = "Idioma";
 "myaccount.settings.appicon" = "Ícone do App";
@@ -235,3 +253,28 @@
 "myaccount.settings.language.title" = "Alterar Idioma";
 "myaccount.settings.language.reset" = "Restaurar o Padrão";
 "myaccount.settings.language.message" = "Você mudou o idioma. Você precisa fechar o aplicativo e abrir novamente para que as alterações tenham efeito.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "Perfil";
+"myaccount.settings.editing_profile.title" = "Editar Perfi";
+"myaccount.settings.profile.actions.save" = "Salvar";
+"myaccount.settings.profile.actions.edit" = "Editar";
+"myaccount.settings.profile.actions.change_password" = "Alterar senha";
+"myaccount.settings.profile.section.profile" = "Perfil";
+"myaccount.settings.profile.section.password" = "Senha";
+"myaccount.settings.profile.name_placeholder" = "Nome";
+"myaccount.settings.profile.username_placeholder" = "Username";
+"myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.password_required.title" = "Insira sua senha";
+"myaccount.settings.profile.password_required.message" = "É necessário inserir sua senha para atualizar seu e-mail.";
+"myaccount.settings.profile.password_required.placeholder" = "Senha";
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "Nova senha";
+"myaccount.settings.profile.new_password.section.password" = "Senha";
+"myaccount.settings.profile.new_password.actions.save" = "Salvar";
+"myaccount.settings.profile.new_password.password_placeholder" = "Nova senha";
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Confirmação da senha";
+"myaccount.settings.profile.new_password.password_required.title" = "Insira sua senha";
+"myaccount.settings.profile.new_password.password_required.message" = "É necessário inserir sua senha atual para criar uma nova senha.";
+"myaccount.settings.profile.new_password.password_required.placeholder" = "Senha";
