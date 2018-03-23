@@ -124,7 +124,7 @@
             </objects>
             <point key="canvasLocation" x="1240.8" y="324.28785607196403"/>
         </scene>
-        <!--Servers View Controller-->
+        <!--Title-->
         <scene sceneID="WYc-cv-v8S">
             <objects>
                 <viewController storyboardIdentifier="SEServersViewController" id="zfm-EI-TkZ" customClass="SEServersViewController" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target" sceneMemberID="viewController">
@@ -146,6 +146,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CgR-Bd-oKd"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Title" largeTitleDisplayMode="never" id="3LI-eK-bfy" userLabel="Navigation Item"/>
                     <connections>
                         <outlet property="tableView" destination="N4q-ru-lmk" id="Sir-ek-NuU"/>
                     </connections>
