@@ -157,6 +157,27 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
+                            <tableViewSection headerTitle="" id="3Dr-4N-bXg">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="eC8-4Q-ISr" style="IBUITableViewCellStyleDefault" id="1ea-GJ-HMV">
+                                        <rect key="frame" x="0.0" y="407" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="1ea-GJ-HMV" id="MV7-ze-JTE">
+                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Rate us" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="eC8-4Q-ISr">
+                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
                         </sections>
                         <connections>
                             <outlet property="dataSource" destination="pKS-7b-iHv" id="E6Q-vK-XMA"/>
@@ -175,7 +196,11 @@
                         <outlet property="labelContactUs" destination="SsA-Jk-og1" id="BZe-mM-eck"/>
                         <outlet property="labelLanguage" destination="TK4-N1-2eh" id="MEN-VF-dcq"/>
                         <outlet property="labelLicense" destination="kCF-5t-4W3" id="bt0-I5-0WI"/>
+
+                        <outlet property="labelRateus" destination="eC8-4Q-ISr" id="Cg3-FO-e5J"/>
+
                         <outlet property="labelProfile" destination="v4Z-mC-WTf" id="F5v-mS-hxv"/>
+
                         <outlet property="labelVersion" destination="vOz-GO-Ifh" id="14X-a4-dRc"/>
                         <segue destination="14p-5u-LKz" kind="show" identifier="AppIcon" id="5Rh-qB-fEf"/>
                         <segue destination="G2F-kh-af5" kind="show" identifier="Language" id="UkX-RM-9MT"/>

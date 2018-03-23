@@ -11,6 +11,7 @@ import RealmSwift
 import UserNotifications
 import GoogleSignIn
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -38,7 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
-
     // MARK: AppDelegate LifeCycle
 
     func applicationDidBecomeActive(_ application: UIApplication) {

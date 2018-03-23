@@ -242,6 +242,7 @@
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
+"myaccount.settings.rateus" = "Rate us";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Επιλέξτε Εικονίδιο";

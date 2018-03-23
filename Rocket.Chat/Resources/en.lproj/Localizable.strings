@@ -245,6 +245,7 @@
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Application Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
+"myaccount.settings.rateus" = "Rate us";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon";

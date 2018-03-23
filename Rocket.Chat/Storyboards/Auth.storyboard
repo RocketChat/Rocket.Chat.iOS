@@ -460,7 +460,7 @@
                                                                 </constraints>
                                                                 <color key="textColor" red="0.2901960784" green="0.2901960784" blue="0.2901960784" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
-                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" returnKeyType="next"/>
+                                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" spellCheckingType="no" keyboardAppearance="alert" returnKeyType="next"/>
                                                                 <connections>
                                                                     <outlet property="delegate" destination="VBo-m1-qNx" id="OxB-bN-THu"/>
                                                                 </connections>
@@ -818,6 +818,6 @@
         <image name="OnePassword-Button" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O3e-MC-N7z"/>
+        <segue reference="oar-7v-T9W"/>
     </inferredMetricsTieBreakers>
 </document>
