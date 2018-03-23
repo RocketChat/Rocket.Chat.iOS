@@ -216,6 +216,11 @@ final class AuthViewController: BaseViewController {
                         strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
                 }
+            } else {
+                self?.stopLoading()
+                Alert(
+                    key: "error.socket.default_error"
+                ).present()
             }
         }, errored: { [weak self] _ in
             self?.stopLoading()
