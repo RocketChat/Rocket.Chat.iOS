@@ -501,6 +501,8 @@
 		80FA90762056C24C0069038F /* SEComposeTextCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA90752056C24C0069038F /* SEComposeTextCellModel.swift */; };
 		80FA90782056C3AE0069038F /* SEComposeCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA90772056C3AE0069038F /* SEComposeCellModel.swift */; };
 		80FA907D2057F4650069038F /* SubmitContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA907C2057F4650069038F /* SubmitContent.swift */; };
+		80FE8DEE206584EA0099170E /* SEFileDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80FE8DED206584EA0099170E /* SEFileDetailView.xib */; };
+		80FE8DF0206587510099170E /* SEFileDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FE8DEF206587510099170E /* SEFileDetailView.swift */; };
 		890DA8AE1F942A35007C022B /* SubscriptionCreateRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 890DA8AD1F942A35007C022B /* SubscriptionCreateRequestSpec.swift */; };
 		897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 897083CE1F8CF08100233561 /* CheckTableViewCell.swift */; };
 		897083D41F8CF08100233561 /* CheckTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 897083CF1F8CF08100233561 /* CheckTableViewCell.xib */; };
@@ -1073,6 +1075,8 @@
 		80FA90752056C24C0069038F /* SEComposeTextCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeTextCellModel.swift; sourceTree = "<group>"; };
 		80FA90772056C3AE0069038F /* SEComposeCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeCellModel.swift; sourceTree = "<group>"; };
 		80FA907C2057F4650069038F /* SubmitContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubmitContent.swift; sourceTree = "<group>"; };
+		80FE8DED206584EA0099170E /* SEFileDetailView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEFileDetailView.xib; sourceTree = "<group>"; };
+		80FE8DEF206587510099170E /* SEFileDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEFileDetailView.swift; sourceTree = "<group>"; };
 		81DE5CC08EFE20733A40A51E /* Pods-Rocket.Chat.ShareExtension.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.ShareExtension.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat.ShareExtension/Pods-Rocket.Chat.ShareExtension.release.xcconfig"; sourceTree = "<group>"; };
 		848088BA204370E8005022E8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/RCEmojiKit.strings; sourceTree = "<group>"; };
 		848088BB204370E8005022E8 /* el */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = el; path = el.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -2416,6 +2420,8 @@
 				80FA906D2056A1F80069038F /* SEComposeFileCellModel.swift */,
 				80FA906920569F890069038F /* SEComposeFileCell.swift */,
 				80FA906B20569FA10069038F /* SEComposeFileCell.xib */,
+				80FE8DEF206587510099170E /* SEFileDetailView.swift */,
+				80FE8DED206584EA0099170E /* SEFileDetailView.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -2902,6 +2908,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				80FA906C20569FA10069038F /* SEComposeFileCell.xib in Resources */,
+				80FE8DEE206584EA0099170E /* SEFileDetailView.xib in Resources */,
 				80D0CE6820503C970056B17F /* SERoomCell.xib in Resources */,
 				807FB55E2046E7DD00E21429 /* Main.storyboard in Resources */,
 				807FB56F20472B6A00E21429 /* Localizable.strings in Resources */,
@@ -3686,6 +3693,7 @@
 				8076FDED2049A5F600114F28 /* SECellModel.swift in Sources */,
 				8076FDCD204863FC00114F28 /* MessageURL.swift in Sources */,
 				80977ABF204F36F200C41435 /* SESearchState.swift in Sources */,
+				80FE8DF0206587510099170E /* SEFileDetailView.swift in Sources */,
 				805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */,
 				80D0CE6F20509C100056B17F /* SEAvatarView.swift in Sources */,
 				8076FD9D2048510100114F28 /* AuthSettings.swift in Sources */,

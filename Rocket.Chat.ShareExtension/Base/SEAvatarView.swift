@@ -9,7 +9,7 @@
 import UIKit
 
 class SEAvatarView: UIView, SEXibInitializable {
-    @IBOutlet var contentView: UIView! {
+    @IBOutlet weak var contentView: UIView! {
         didSet {
             contentView.layer.masksToBounds = true
             contentView.layer.cornerRadius = 4.0

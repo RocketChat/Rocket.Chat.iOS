@@ -10,19 +10,40 @@ import UIKit
 import NotificationCenter
 
 class SEComposeFileCell: UICollectionViewCell, SECell {
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var nameTextField: UITextField! {
+    @IBOutlet weak var tableView: UITableView! {
         didSet {
-            NotificationCenter.default.addObserver(self, selector: #selector(nameDidChange(_:)), name: .UITextFieldTextDidChange, object: nameTextField)
-        }
-    }
-    @IBOutlet weak var durationLabel: UILabel!
+            tableView.dataSource = self
 
-    @IBOutlet weak var descriptionTextField: UITextField! {
-        didSet {
-            NotificationCenter.default.addObserver(self, selector: #selector(descriptionDidChange(_:)), name: .UITextFieldTextDidChange, object: descriptionTextField)
+            fileDetailView = SEFileDetailView(
+                frame: CGRect(
+                    x: 0, y: 0,
+                    width: tableView.bounds.width,
+                    height: 100.0
+                )
+            )
+
+            tableView.tableHeaderView = fileDetailView
+            tableView.allowsSelection = false
         }
     }
+
+    var fileDetailView: SEFileDetailView?
+
+    lazy var nameTextField: UITextField = {
+        let textField = UITextField(
+            frame: CGRect(x: 16, y: 0, width: tableView.bounds.width - 16, height: 30.0)
+        )
+        NotificationCenter.default.addObserver(self, selector: #selector(nameDidChange(_:)), name: .UITextFieldTextDidChange, object: textField)
+        return textField
+    }()
+
+    lazy var descriptionTextField: UITextField =  {
+        let textField = UITextField(
+            frame: CGRect(x: 16, y: 0, width: tableView.bounds.width - 16, height: 30.0)
+        )
+        NotificationCenter.default.addObserver(self, selector: #selector(descriptionDidChange(_:)), name: .UITextFieldTextDidChange, object: textField)
+        return textField
+    }()
 
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -30,14 +51,14 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
 
     var cellModel = SEComposeFileCellModel.emptyState {
         didSet {
-            imageView.image = cellModel.image
-
+            fileDetailView?.titleLabel.text = cellModel.nameText
+            fileDetailView?.previewImageView.image = cellModel.image
+            fileDetailView?.detailLabel.text = cellModel.detailText
+            fileDetailView?.fileSizeLabel.text = cellModel.fileSizeText
             nameTextField.text = cellModel.nameText
             nameTextField.placeholder = cellModel.namePlaceholder
-
             descriptionTextField.text = cellModel.descriptionText
             descriptionTextField.placeholder = cellModel.descriptionPlaceholder
-            durationLabel.text = cellModel.durationText
         }
     }
 
@@ -49,5 +70,41 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
     @objc func descriptionDidChange(_ textField: UITextField) {
         cellModel.file.description = descriptionTextField.text ?? ""
         store.dispatch(.setContentValue(SEContent(type: .file(cellModel.file)), index: cellModel.contentIndex))
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+
+        let textFieldFrame = CGRect(x: 16, y: 0, width: tableView.bounds.width - 16, height: 30.0)
+
+        nameTextField.frame = textFieldFrame
+        descriptionTextField.frame = textFieldFrame
+    }
+}
+
+extension SEComposeFileCell: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 2
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell(
+            frame: CGRect(x: 0, y: 0, width: tableView.bounds.width - 16, height: 30.0)
+        )
+
+        switch indexPath.row {
+        case 0:
+            cell.addSubview(nameTextField)
+        case 1:
+            cell.addSubview(descriptionTextField)
+        default:
+            break
+        }
+
+        return cell
     }
 }
