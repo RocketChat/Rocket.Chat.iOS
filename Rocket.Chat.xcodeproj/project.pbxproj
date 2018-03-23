@@ -408,6 +408,7 @@
 		89AFF3C81F94374D00D07A30 /* NewRoomViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 89AFF3C71F94374D00D07A30 /* NewRoomViewControllerSpec.swift */; };
 		993E513A1FB1E18D006403D5 /* DraftMessageManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */; };
 		994DA2B020653FB600083FB8 /* WebBrowserManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */; };
+		994DA2B32065486D00083FB8 /* WebBrowserViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994DA2B22065486D00083FB8 /* WebBrowserViewModelSpec.swift */; };
 		995FEB2F206286D9004EE38F /* WebBrowserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEB2E206286D9004EE38F /* WebBrowserManager.swift */; };
 		9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
@@ -889,6 +890,7 @@
 		89AFF3C71F94374D00D07A30 /* NewRoomViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewRoomViewControllerSpec.swift; path = Controllers/NewRoomViewControllerSpec.swift; sourceTree = "<group>"; };
 		993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DraftMessageManagerSpec.swift; path = Managers/DraftMessageManagerSpec.swift; sourceTree = "<group>"; };
 		994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebBrowserManagerSpec.swift; path = Managers/WebBrowserManagerSpec.swift; sourceTree = "<group>"; };
+		994DA2B22065486D00083FB8 /* WebBrowserViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebBrowserViewModelSpec.swift; path = Settings/WebBrowserViewModelSpec.swift; sourceTree = "<group>"; };
 		995FEB2E206286D9004EE38F /* WebBrowserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebBrowserManager.swift; path = Managers/WebBrowserManager.swift; sourceTree = "<group>"; };
 		9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebBrowserTableViewController.swift; path = Controllers/Settings/WebBrowserTableViewController.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebBrowserViewModel.swift; path = Controllers/Settings/WebBrowserViewModel.swift; sourceTree = "<group>"; };
@@ -2086,11 +2088,20 @@
 		925FF74F1E8EFC9200982043 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
+				994DA2B12065480300083FB8 /* Web Browser */,
 				0BBCC2C0204546BB001E3B6D /* Language */,
 				140A95DC202F1E4D003FD564 /* AppIcon */,
 				41F8487D1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift */,
 			);
 			name = Preferences;
+			sourceTree = "<group>";
+		};
+		994DA2B12065480300083FB8 /* Web Browser */ = {
+			isa = PBXGroup;
+			children = (
+				994DA2B22065486D00083FB8 /* WebBrowserViewModelSpec.swift */,
+			);
+			name = "Web Browser";
 			sourceTree = "<group>";
 		};
 		9960C82E2063F091004A034C /* Web Browser */ = {
@@ -3032,6 +3043,7 @@
 			files = (
 				77C2612E1F97453600724A1F /* TextFieldSpec.swift in Sources */,
 				4171ABA51E7C056E009FC3F0 /* AvatarViewSpec.swift in Sources */,
+				994DA2B32065486D00083FB8 /* WebBrowserViewModelSpec.swift in Sources */,
 				805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */,
 				D18675EA1F70A58B00406FB4 /* InfoRequestSpec.swift in Sources */,
 				808792361FB145B200EFE77F /* PermissionManagerSpec.swift in Sources */,
