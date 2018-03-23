@@ -15,10 +15,14 @@ struct WebBrowserManager {
     static var browser: WebBrowserApp {
         guard
             let browserRaw = UserDefaults.standard.string(forKey: defaultBrowserKey),
-            let browser = WebBrowserApp(rawValue: browserRaw),
-            browser.isInstalled
+            var browser = WebBrowserApp(rawValue: browserRaw)
         else {
             return .inAppSafari
+        }
+
+        if !browser.isInstalled {
+            browser = .inAppSafari
+            WebBrowserManager.set(defaultBrowser: browser)
         }
 
         return browser
