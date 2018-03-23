@@ -52,6 +52,23 @@
 "alert.email_verification.title" = "Επαλήθευση Email";
 "alert.email_verification.message" = "Σας στείλαμε ένα email για να επιβεβαιώσουμε την εγγραφή σας. Αν δεν το λάβετε σύντομα, παρακαλούμε επιστρέψτε και ξαναπροσπαθήστε.";
 
+"alert.load_profile_error.title" = "Failed to load your profile"; // TODO
+"alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again."; // TODO
+"alert.password_mismatch_error.title" = "Your password doesn't match"; // TODO
+"alert.password_mismatch_error.message" = "The confirmation field doesn't match with the password you've provided. Please, check it and try again."; // TODO
+"alert.update_profile_error.title" = "Failed to update"; // TODO
+"alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please, try again."; // TODO
+"alert.update_password_error.title" = "Failed to change password"; // TODO
+"alert.update_password_error.message" = "Something wrong happened when changing your password. Please, try again."; // TODO
+"alert.update_profile_empty_fields.title" = "Please, fill the empty fields"; // TODO
+"alert.update_profile_empty_fields.message" = "All your profile information are required and can't stay blank"; // TODO
+"alert.update_profile_invalid_email.title" = "Invalid e-mail"; // TODO
+"alert.update_profile_invalid_email.message" = "It seems that the e-mail you've entered is invalid. Please, fix it and try again."; // TODO
+"alert.password_empty_fields.title" = "Please, fill the empty fields"; // TODO
+"alert.password_empty_fields.message" = "Fill up the password and confirmation fields so you can update your password."; // TODO
+"alert.update_profile_success.title" = "Profile updated"; // TODO
+"alert.update_password_success.title" = "Password updated"; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Έχει αλλάξει το URL του Εξυπηρετητή";
 "connection.server.redirect.alert.message" = "Φαίνεται ότι αυτός ο εξυπηρετής έχει αλλάξει το URL του σε:\n\n%@\n\nΘα θέλατε να ενημερώσετε το URL;";
@@ -65,6 +82,15 @@
 "auth.connect.button_connect" = "Σύνδεση";
 "auth.connect.ssl_required" = "Απαιτείται υποστήριξη SSL στον εξυπηρετητή";
 "auth.connect.connecting" = "Σύνδεση σε εξέλιξη. Περιμένετε παρακαλώ";
+
+"auth.login.username.placeholder" = "Email ή όνομα χρήστη";
+"auth.login.password.placeholder" = "Συνθηματικό";
+"auth.login.buttonRegister" = "Δημιουργήστε νέο λογαριασμό";
+"auth.login.buttonResetPassword" = "Ξέχασα το συνθηματικό";
+"auth.login.agree_label" = "Συνεχίζοντας συμφωνείτε με τους";
+"auth.login.agree_and" = "και";
+"auth.login.agree_termsofservice" = "Όρους Υπηρεσίας";
+"auth.login.agree_privacypolicy" = "Πολιτική Απορρήτου";
 
 "auth.forgot_password.title" = "Ξεχάσατε το συνθηματικό σας;";
 "auth.forgot_password.message" = "Εισάγετε το e-mail σας";
@@ -90,14 +116,14 @@
 "user_menu.busy" = "Απασχολημένος";
 "user_menu.invisible" = "Αόρατος";
 "user_menu.admin" = "Διαχείριση";
-"user_menu.settings" = "Ο Λογαριασμός μου";
+"user_menu.preferences" = "Ο Λογαριασμός μου";
 "user_menu.logout" = "Αποσύνδεση";
 
 // New Room View
 "new_room.title" = "Νέο Κανάλι";
 "new_room.buttons.create" = "Δημιουργία";
 "new_room.cell.public_channel.title" = "Δημόσιο Κανάλι";
-"new_room.cell.public_channel.description" = "Ο καθένας μπορεί να έχει πρόσβαση σε αυτό το κανάλι";
+"new_room.cell.public_channel.description" = "Καθένας μπορεί να έχει πρόσβαση σε αυτό το κανάλι";
 "new_room.cell.public_channel.description.public_only" = "Μπορείτε να δημιουργείτε μόνο δημόσια κανάλια";
 "new_room.cell.public_channel.description.private_only" = "Μπορείτε να δημιουργείτε μόνο ιδιωτικά κανάλια";
 "new_room.cell.read_only.title" = "Κανάλι μόνο ανάγνωσης";
@@ -119,7 +145,7 @@
 "chat.read_only" = "Αυτό το δωμάτιο είναι μόνο για ανάγνωση";
 "chat.muted" = "Έχετε τεθεί σε σίγαση";
 "chat.loading_messages" = "Φόρτωση μηνυμάτων...";
-"chat.unread_separator" = "new messages";
+"chat.unread_separator" = "νέα μηνύματα";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Προσθέστε Αντίδραση";
@@ -135,12 +161,12 @@
 "chat.message.actions.delete.confirm.title" = "Να διαγράψουμε αυτό το μήνυμα;";
 "chat.message.actions.delete.confirm.message" = "Σίγουρα θέλετε να διαγράψετε αυτό το μήνυμα; Αυτή η διαδικασία δεν μπορεί να ακυρωθεί.";
 "chat.message.actions.delete.confirm.yes" = "Ναι, διαγράψτε";
-"chat.message.actions.discard" = "Discard message";
-"chat.message.actions.discard.confirm.title" = "Discard this message?";
-"chat.message.actions.discard.confirm.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone.";
-"chat.message.actions.discard.confirm.yes" = "Yes, discard";
-"chat.message.actions.resend" = "Resend";
-"chat.message.actions.resend_all" = "Resend all";
+"chat.message.actions.discard" = "Απόρριψη μηνύματος";
+"chat.message.actions.discard.confirm.title" = "Να απορριφθεί αυτό το μήνυμα?";
+"chat.message.actions.discard.confirm.message" = "Αυτό το μήνυμα δεν στάλθηκε ακόμη. Θέλετε να το απορρίψετε? Αυτή η ενέργεια δεν μπορεί να ακυρωθεί.";
+"chat.message.actions.discard.confirm.yes" = "Ναι, να απορριφθεί";
+"chat.message.actions.resend" = "Ξαναστέλνω";
+"chat.message.actions.resend_all" = "Τα ξαναστέλνω όλα";
 "Send" = "Αποστολή"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -155,7 +181,7 @@
 "chat.upload.shoot_video" = "Τραβήξτε Video";
 "chat.upload.choose_from_library" = "Επιλέξτε από τη Βιβλιοθήκη";
 "chat.upload.import_file" = "Εισαγωγή Αρχείου Από...";
-"chat.upload.draw" = "Draw something";
+"chat.upload.draw" = "Σχεδιάστε κάτι";
 
 // Chat Download
 "chat.download.downloading_file" = "Κατεβάζουμε \"%@\"";
@@ -165,13 +191,13 @@
 "chat.message.open_browser" = "Ανοίξτε στο πρόγραμμα Περιήγησης";
 
 // Chat Drawing
-"chat.drawing.errorTitle" = "Oops!";
-"chat.drawing.messageTitle" = "You have to draw something before sending it.";
-"chat.drawing.fileName" = "Drawing";
-"chat.drawing.settings.opacity" = "Opacity";
-"chat.drawing.settings.width" = "Width";
-"chat.drawing.settings.color.selected" = "Selected color";
-"chat.drawing.settings.color.others" = "Choose color below:";
+"chat.drawing.errorTitle" = "Ωπ!";
+"chat.drawing.messageTitle" = "Πρέπει να ζωγραφίσετε κάτι πριν να το στείλετε.";
+"chat.drawing.fileName" = "Σχέδιο";
+"chat.drawing.settings.opacity" = "Αδιαφάνεια";
+"chat.drawing.settings.width" = "Πλάτος";
+"chat.drawing.settings.color.selected" = "Επιλεγμένο χρώμα";
+"chat.drawing.settings.color.others" = "Επιλλέξτε χρώμα:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Το όνομα του δωματίου άλλαξε σε: %@ by %@";
@@ -211,6 +237,7 @@
 // Settings
 "myaccount.settings.title" = "Ρυθμίσεις";
 "myaccount.settings.contactus" = "Επικοινωνήστε μαζί μας";
+"myaccount.settings.profile" = "Profile"; // TODO: 
 "myaccount.settings.license" = "Άδεια";
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
@@ -223,6 +250,30 @@
 "myaccount.settings.changeicon.iosversion" = "Εναλλακτικά εικονίδια εφαρμογής δεν υποστηρίζονται σε iOS εκδόσεις μικρότερες από 10.3";
 
 // Change Language
-"myaccount.settings.language.title" = "Change Language";
-"myaccount.settings.language.reset" = "Reset to Default";
-"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+ before the new settings will take effect.";
+"myaccount.settings.language.title" = "Μεταβολή Γλώσσας";
+"myaccount.settings.language.reset" = "Επαναφορά στην Προεπιλεγμένη";
+"myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat+ ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "Profile"; // TODO
+"myaccount.settings.editing_profile.title" = "Edit Profile"; // TODO
+"myaccount.settings.profile.actions.save" = "Save"; // TODO
+"myaccount.settings.profile.actions.edit" = "Edit"; // TODO
+"myaccount.settings.profile.actions.change_password" = "Change your password"; // TODO
+"myaccount.settings.profile.section.profile" = "Profile"; // TODO
+"myaccount.settings.profile.name_placeholder" = "Name"; // TODO
+"myaccount.settings.profile.username_placeholder" = "Username"; // TODO
+"myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO
+"myaccount.settings.profile.password_required.title" = "Enter your password"; // TODO
+"myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail."; // TODO
+"myaccount.settings.profile.password_required.placeholder" = "Password"; // TODO
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "New password"; // TODO
+"myaccount.settings.profile.new_password.section.password" = "Password"; // TODO
+"myaccount.settings.profile.new_password.actions.save" = "Save"; // TODO
+"myaccount.settings.profile.new_password.password_placeholder" = "New password"; // TODO
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Password confirmation"; // TODO
+"myaccount.settings.profile.new_password.password_required.title" = "Enter your password"; // TODO
+"myaccount.settings.profile.new_password.password_required.message" = "Your current password is required when setting a new password."; // TODO
+"myaccount.settings.profile.new_password.password_required.placeholder" = "Password"; // TODO

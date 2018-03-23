@@ -18,6 +18,12 @@ final class PreferencesViewController: UITableViewController {
 
     private let viewModel = PreferencesViewModel()
 
+    @IBOutlet weak var labelProfile: UILabel! {
+        didSet {
+            labelProfile.text = viewModel.profile
+        }
+    }
+
     @IBOutlet weak var labelContactUs: UILabel! {
         didSet {
             labelContactUs.text = viewModel.contactus
@@ -104,7 +110,7 @@ final class PreferencesViewController: UITableViewController {
             } else if indexPath.row == 3 {
                 cellAppIconDidPressed()
             }
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             if indexPath.row == 0 {
                 cellTermsOfServiceDidPressed()
             }

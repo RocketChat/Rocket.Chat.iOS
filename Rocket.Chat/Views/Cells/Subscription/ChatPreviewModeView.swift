@@ -46,4 +46,15 @@ final class ChatPreviewModeView: UIView {
         }
     }
 
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    private let requiredBottomInset: CGFloat = 10
+
+    var bottomInset: CGFloat {
+        get {
+            return bottomConstraint.constant - requiredBottomInset
+        }
+        set {
+            bottomConstraint.constant = newValue + requiredBottomInset
+        }
+    }
 }

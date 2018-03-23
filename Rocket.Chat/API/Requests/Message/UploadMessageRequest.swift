@@ -8,9 +8,9 @@
 
 import SwiftyJSON
 
-typealias UploadResult = APIResult<UploadRequest>
+typealias UploadMessageResult = APIResult<UploadMessageRequest>
 
-class UploadRequest: APIRequest {
+class UploadMessageRequest: APIRequest {
     let requiredVersion = Version(0, 60, 0)
 
     let method: HTTPMethod = .post
@@ -54,7 +54,7 @@ class UploadRequest: APIRequest {
 
         data.appendString("\r\n".appending(boundaryPrefix))
         data.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
-        data.appendString("Content-Type: \(mimetype))\r\n\r\n")
+        data.appendString("Content-Type: \(mimetype)\r\n\r\n")
         data.append(self.data)
         data.appendString("\r\n--".appending(boundary.appending("--")))
 
@@ -62,7 +62,7 @@ class UploadRequest: APIRequest {
     }
 }
 
-extension APIResult where T == UploadRequest {
+extension APIResult where T == UploadMessageRequest {
     var error: String? {
         return raw?["error"].string
     }
