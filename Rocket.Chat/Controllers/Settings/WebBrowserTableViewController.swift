@@ -11,7 +11,7 @@ import UIKit
 class WebBrowserTableViewController: UITableViewController {
 
     let viewModel = WebBrowserViewModel()
-    let browsers: [WebBrowserApp] = [.safari, .inAppSafari, .chrome].filter { $0.isInstalled }
+    let browsers: [WebBrowserApp] = [.safari, .inAppSafari, .chrome, .opera, .firefox].filter { $0.isInstalled }
     var updateDefaultWebBrowser: (() -> Void)?
 
     // MARK: View Life Cycle

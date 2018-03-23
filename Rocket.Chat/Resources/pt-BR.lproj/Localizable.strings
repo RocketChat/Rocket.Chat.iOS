@@ -240,5 +240,7 @@
 "web_browser.safari.title" = "Safari";
 "web_browser.in_app_safari.title" = "Navegador no App";
 "web_browser.chrome.title" = "Chrome";
+"web_browser.opera.title" = "Opera Mini";
+"web_browser.firefox.title" = "Firefox";
 "myaccount.settings.web_browser.title" = "Navegador";
 "myaccount.settings.web_browser.footer" = "Este aplicativo será usado para abrir links no Rocket Chat.";
