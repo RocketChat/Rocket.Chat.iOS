@@ -102,7 +102,7 @@ final class PreferencesViewController: UITableViewController {
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             if indexPath.row == 1 {
                 cellContactDidPressed()
             } else if indexPath.row == 2 {
