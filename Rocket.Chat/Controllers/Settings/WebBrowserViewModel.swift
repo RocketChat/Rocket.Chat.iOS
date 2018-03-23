@@ -11,6 +11,12 @@ import Foundation
 struct WebBrowserViewModel {
 
     let browserCellIdentifier = "WebBrowserCell"
+    let browsers: [WebBrowserApp] = [
+        .safari,
+        .inAppSafari,
+        .chrome,
+        .opera,
+        .firefox].filter { $0.isInstalled }
 
     internal var title: String {
         return localized("myaccount.settings.web_browser.title")

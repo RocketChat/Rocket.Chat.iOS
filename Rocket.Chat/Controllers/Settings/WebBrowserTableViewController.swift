@@ -11,7 +11,6 @@ import UIKit
 class WebBrowserTableViewController: UITableViewController {
 
     let viewModel = WebBrowserViewModel()
-    let browsers: [WebBrowserApp] = [.safari, .inAppSafari, .chrome, .opera, .firefox].filter { $0.isInstalled }
     var updateDefaultWebBrowser: (() -> Void)?
 
     // MARK: View Life Cycle
@@ -28,11 +27,11 @@ class WebBrowserTableViewController: UITableViewController {
 extension WebBrowserTableViewController {
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return browsers.count
+        return viewModel.browsers.count
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let browser = browsers[indexPath.row]
+        let browser = viewModel.browsers[indexPath.row]
         let browserCell = tableView.dequeueReusableCell(withIdentifier: viewModel.browserCellIdentifier, for: indexPath)
         browserCell.textLabel?.text = browser.name
         browserCell.accessoryType = browser == WebBrowserManager.browser ? .checkmark : .none
@@ -50,7 +49,7 @@ extension WebBrowserTableViewController {
         tableView.deselectRow(at: indexPath, animated: true)
 
         guard
-            let indexOfSelectedBrowser = browsers.index(of: WebBrowserManager.browser),
+            let indexOfSelectedBrowser = viewModel.browsers.index(of: WebBrowserManager.browser),
             let selectedCell = tableView.cellForRow(at: IndexPath(row: indexOfSelectedBrowser, section: 0))
         else {
             return
@@ -61,7 +60,7 @@ extension WebBrowserTableViewController {
             return
         }
 
-        WebBrowserManager.set(defaultBrowser: browsers[indexPath.row])
+        WebBrowserManager.set(defaultBrowser: viewModel.browsers[indexPath.row])
         updateDefaultWebBrowser?()
 
         let newSelectedCell = tableView.cellForRow(at: indexPath)
