@@ -7,9 +7,58 @@
 //
 
 import UIKit
+import Photos
+import MobileCoreServices
 import ObjectiveC
 
 private var viewScrollViewAssociatedKey: UInt8 = 0
+
+protocol MediaPicker: AnyObject { }
+
+extension MediaPicker where Self: UIViewController & UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+    func openCamera(video: Bool = false) {
+        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
+            return assertionFailure("Device camera is not availbale")
+        }
+
+        let imagePicker  = UIImagePickerController()
+        imagePicker.delegate = self
+        imagePicker.allowsEditing = true
+        imagePicker.sourceType = .camera
+        imagePicker.cameraFlashMode = .off
+        imagePicker.mediaTypes = video ? [kUTTypeMovie as String] : [kUTTypeImage as String]
+        imagePicker.cameraCaptureMode = video ? .video : .photo
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+
+    func openPhotosLibrary() {
+        let picker = UIImagePickerController()
+        picker.delegate = self
+        picker.allowsEditing = false
+        picker.sourceType = .savedPhotosAlbum
+
+        if let mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum) {
+            picker.mediaTypes = mediaTypes
+        }
+
+        present(picker, animated: true, completion: nil)
+    }
+}
+
+extension MediaPicker where Self: UIViewController & DrawingControllerDelegate {
+    func openDrawing() {
+        let storyboard = UIStoryboard(name: "Drawing", bundle: Bundle.main)
+
+        if let controller = storyboard.instantiateInitialViewController() as? UINavigationController {
+
+            if let drawingController = controller.viewControllers.first as? DrawingViewController {
+                drawingController.delegate = self
+            }
+
+            present(controller, animated: true, completion: nil)
+        }
+    }
+}
 
 extension UIViewController {
 

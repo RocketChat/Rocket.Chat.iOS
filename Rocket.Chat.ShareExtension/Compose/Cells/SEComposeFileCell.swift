@@ -33,6 +33,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
         let textField = UITextField(
             frame: CGRect(x: 16, y: 0, width: tableView.bounds.width - 16, height: 30.0)
         )
+        textField.contentVerticalAlignment = .center
         NotificationCenter.default.addObserver(self, selector: #selector(nameDidChange(_:)), name: .UITextFieldTextDidChange, object: textField)
         return textField
     }()
@@ -41,6 +42,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
         let textField = UITextField(
             frame: CGRect(x: 16, y: 0, width: tableView.bounds.width - 16, height: 30.0)
         )
+        textField.contentVerticalAlignment = .center
         NotificationCenter.default.addObserver(self, selector: #selector(descriptionDidChange(_:)), name: .UITextFieldTextDidChange, object: textField)
         return textField
     }()
