@@ -66,10 +66,10 @@
 "auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
 "auth.connect.connecting" = "Conectando no servidor";
 
-"auth.login.username.placeholder" = "Email or username";
-"auth.login.password.placeholder" = "Password";
-"auth.login.buttonRegister" = "Create new account";
-"auth.login.buttonResetPassword" = "Forgot password";
+"auth.login.username.placeholder" = "E-mail ou usuário";
+"auth.login.password.placeholder" = "Senha";
+"auth.login.buttonRegister" = "Criar uma conta";
+"auth.login.buttonResetPassword" = "Esqueci minha senha";
 "auth.login.agree_label" = "Ao proceder você está concordando com os";
 "auth.login.agree_and" = "e";
 "auth.login.agree_termsofservice" = "Termos de Serviço";
@@ -175,11 +175,11 @@
 // Chat Drawing
 "chat.drawing.errorTitle" = "Oops!";
 "chat.drawing.messageTitle" = "Você precisa desenhar algo antes de enviar.";
-"chat.drawing.fileName" = "Drawing"; // TODO
-"chat.drawing.settings.opacity" = "Opacity"; // TODO
-"chat.drawing.settings.width" = "Width"; // TODO
-"chat.drawing.settings.color.selected" = "Selected color"; // TODO
-"chat.drawing.settings.color.others" = "Choose color below:"; // TODO
+"chat.drawing.fileName" = "Desenho";
+"chat.drawing.settings.opacity" = "Opacidade";
+"chat.drawing.settings.width" = "Largura";
+"chat.drawing.settings.color.selected" = "Selecionar cor";
+"chat.drawing.settings.color.others" = "Escolha uma cor:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";
