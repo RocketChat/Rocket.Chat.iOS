@@ -282,6 +282,7 @@ final class AuthViewController: BaseViewController {
         var components = URLComponents()
         components.scheme = "https"
         components.host = self.serverURL.host
+        components.path = self.serverURL.path
 
         if var newURL = components.url {
             newURL = newURL.appendingPathComponent("terms-of-service")
@@ -295,6 +296,7 @@ final class AuthViewController: BaseViewController {
         var components = URLComponents()
         components.scheme = "https"
         components.host = self.serverURL.host
+        components.path = self.serverURL.path
 
         if var newURL = components.url {
             newURL = newURL.appendingPathComponent("privacy-policy")
