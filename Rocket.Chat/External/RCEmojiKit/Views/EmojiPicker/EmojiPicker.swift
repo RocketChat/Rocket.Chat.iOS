@@ -165,8 +165,7 @@ class EmojiPicker: UIView, RCEmojiKitLocalizable {
         emojisCollectionView.dataSource = self
         emojisCollectionView.delegate = self
 
-        let emojiCellNib = UINib(nibName: "EmojiCollectionViewCell", bundle: nil)
-        emojisCollectionView.register(emojiCellNib, forCellWithReuseIdentifier: "EmojiCollectionViewCell")
+        emojisCollectionView.register(EmojiCollectionViewCell.self, forCellWithReuseIdentifier: "EmojiCollectionViewCell")
         emojisCollectionView.register(EmojiPickerSectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "EmojiPickerSectionHeaderView")
 
         if let layout = emojisCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
