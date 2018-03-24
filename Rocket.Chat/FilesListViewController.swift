@@ -21,7 +21,7 @@ extension APIResult where T == SubscriptionAttachmentsRequest {
 
 class FilesListViewController: UIViewController {
 
-    @IBOutlet weak var filesCollctionView: UICollectionView!
+    @IBOutlet weak var filesCollectionView: UICollectionView!
     var subscription: Subscription!
     var attachments: [Attachment]!
     override func viewDidLoad() {

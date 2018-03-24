@@ -64,7 +64,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="filesCollctionView" destination="8aH-mv-GYE" id="jqI-Np-xnw"/>
+                        <outlet property="filesCollectionView" destination="8aH-mv-GYE" id="Iju-bG-oqh"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tNc-OD-6kC" userLabel="First Responder" sceneMemberID="firstResponder"/>
