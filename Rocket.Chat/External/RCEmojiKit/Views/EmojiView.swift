@@ -32,28 +32,71 @@ class EmojiView: UIView {
         Bundle.main.loadNibNamed("EmojiView", owner: self, options: nil)
 
         addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+    }
 
-        addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": contentView]
-            )
-        )
-        addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": contentView]
-            )
-        )
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = self.bounds
+        emojiLabel.frame = self.bounds
+        emojiImageView.frame = self.bounds
     }
 }
 
 class EmojiCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var emojiView: EmojiView!
+    enum Emoji {
+        case custom(URL?)
+        case standard(String?)
+    }
+
+    var emojiLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.lineBreakMode = .byClipping
+        lbl.textAlignment = .center
+        lbl.baselineAdjustment = .alignCenters
+        lbl.font = UIFont.systemFont(ofSize: 32)
+        lbl.backgroundColor = UIColor.white
+        return lbl
+    }()
+
+    var emojiImageView: FLAnimatedImageView = {
+        let view = FLAnimatedImageView()
+        view.contentMode = .scaleAspectFit
+        return view
+    }()
+
+    var emoji: Emoji? {
+        didSet {
+            guard let emoji = emoji else {
+                emojiLabel.isHidden = true
+                emojiImageView.isHidden = true
+                return
+            }
+
+            switch emoji {
+            case .custom(let url):
+                emojiImageView.sd_setImage(with: url, completed: nil)
+                emojiImageView.isHidden = false
+            case .standard(let string):
+                emojiLabel.text = string
+                emojiLabel.isHidden = false
+            }
+        }
+    }
+
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        addSubview(emojiLabel)
+        addSubview(emojiImageView)
+    }
 
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.emojiView.emojiLabel.text = ""
-        self.emojiView.emojiImageView.image = nil
-        self.emojiView.emojiImageView.animatedImage = nil
+        emoji = nil
+    }
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        emojiLabel.frame = self.bounds
+        emojiImageView.frame = self.bounds
     }
 }

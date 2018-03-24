@@ -18,23 +18,9 @@
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                 <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bcG-0w-6Tu" customClass="EmojiView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </subviews>
             </view>
-            <constraints>
-                <constraint firstItem="bcG-0w-6Tu" firstAttribute="leading" secondItem="ahk-Cb-cRb" secondAttribute="leading" id="GD6-M1-Fzc"/>
-                <constraint firstItem="bcG-0w-6Tu" firstAttribute="top" secondItem="ahk-Cb-cRb" secondAttribute="top" id="MsH-YI-dz8"/>
-                <constraint firstAttribute="trailing" secondItem="bcG-0w-6Tu" secondAttribute="trailing" id="fDi-sD-93t"/>
-                <constraint firstAttribute="bottom" secondItem="bcG-0w-6Tu" secondAttribute="bottom" id="lHu-RR-nKP"/>
-            </constraints>
+            <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <viewLayoutGuide key="safeArea" id="6BO-fR-jSI"/>
-            <connections>
-                <outlet property="emojiView" destination="bcG-0w-6Tu" id="XHa-FN-zQT"/>
-            </connections>
             <point key="canvasLocation" x="126" y="11"/>
         </collectionViewCell>
     </objects>

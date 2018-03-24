@@ -22,26 +22,17 @@
             <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="H0W-CD-Tmy" userLabel="Emoji Image" customClass="FLAnimatedImageView">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="H0W-CD-Tmy" userLabel="Emoji Image" customClass="FLAnimatedImageView">
                     <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumScaleFactor="0.01" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hk6-3B-0Qu" userLabel="Emoji Label">
-                    <rect key="frame" x="0.0" y="0.0" width="46" height="46"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" minimumScaleFactor="0.01" adjustsLetterSpacingToFitWidth="YES" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hk6-3B-0Qu" userLabel="Emoji Label">
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <fontDescription key="fontDescription" type="system" pointSize="46"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <constraints>
-                <constraint firstItem="TMW-zh-2ug" firstAttribute="trailing" secondItem="H0W-CD-Tmy" secondAttribute="trailing" id="03O-I3-lDz"/>
-                <constraint firstItem="H0W-CD-Tmy" firstAttribute="top" secondItem="TMW-zh-2ug" secondAttribute="top" id="4l7-e9-Wwl"/>
-                <constraint firstItem="hk6-3B-0Qu" firstAttribute="top" secondItem="TMW-zh-2ug" secondAttribute="top" id="ABv-Pn-H1j"/>
-                <constraint firstItem="TMW-zh-2ug" firstAttribute="bottom" secondItem="H0W-CD-Tmy" secondAttribute="bottom" id="KR6-4y-pDo"/>
-                <constraint firstItem="TMW-zh-2ug" firstAttribute="trailing" secondItem="hk6-3B-0Qu" secondAttribute="trailing" id="MTe-eS-ddz"/>
-                <constraint firstItem="TMW-zh-2ug" firstAttribute="bottom" secondItem="hk6-3B-0Qu" secondAttribute="bottom" id="Wfv-ZQ-ZB4"/>
-                <constraint firstItem="H0W-CD-Tmy" firstAttribute="leading" secondItem="TMW-zh-2ug" secondAttribute="leading" id="qkf-Dr-7SX"/>
-                <constraint firstItem="hk6-3B-0Qu" firstAttribute="leading" secondItem="TMW-zh-2ug" secondAttribute="leading" id="w2c-fN-yqg"/>
-            </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <viewLayoutGuide key="safeArea" id="TMW-zh-2ug"/>
             <point key="canvasLocation" x="-149" y="-344"/>
