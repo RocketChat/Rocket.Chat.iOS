@@ -54,10 +54,11 @@ class PreferencesViewModelSpec: XCTestCase {
     }
 
     func testNumberOfRowsInSection() {
-        XCTAssertTrue(model.numberOfSections == 3, "incorrect sections number")
-        XCTAssertTrue(model.numberOfRowsInSection(0) == 3, "incorrect rows number")
-        XCTAssertTrue(model.numberOfRowsInSection(1) == 2, "incorrect rows number")
-        XCTAssertTrue(model.numberOfRowsInSection(2) == 1, "incorrect rows number")
+        XCTAssertTrue(model.numberOfSections == 4, "incorrect sections number")
+        XCTAssertTrue(model.numberOfRowsInSection(0) == 1, "incorrect rows number")
+        XCTAssertTrue(model.numberOfRowsInSection(1) == 3, "incorrect rows number")
+        XCTAssertTrue(model.numberOfRowsInSection(2) == 2, "incorrect rows number")
+        XCTAssertTrue(model.numberOfRowsInSection(3) == 1, "incorrect rows number")
     }
 
     func testStringsOverall() {
