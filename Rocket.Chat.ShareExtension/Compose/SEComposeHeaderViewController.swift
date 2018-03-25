@@ -20,7 +20,6 @@ class SEComposeHeaderViewController: SEViewController {
             title = viewModel.title
             destinationLabel.text = viewModel.destinationText
             doneButton.title = viewModel.doneButtonTitle
-            doneButton.isEnabled = viewModel.doneButtonEnabled
             navigationItem.hidesBackButton = !viewModel.backButtonEnabled
 
             if viewModel.showsActivityIndicator {

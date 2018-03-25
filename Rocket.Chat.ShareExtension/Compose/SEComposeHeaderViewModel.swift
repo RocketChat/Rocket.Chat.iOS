@@ -8,10 +8,15 @@
 
 import Foundation
 
+enum DoneButtonState {
+    case send
+    case cancel
+}
+
 struct SEComposeHeaderViewModel {
     let destinationText: String
     let showsActivityIndicator: Bool
-    let doneButtonEnabled: Bool
+    let doneButtonState: DoneButtonState
     let backButtonEnabled: Bool
 
     var destinationToText: String {
@@ -23,14 +28,19 @@ struct SEComposeHeaderViewModel {
     }
 
     var doneButtonTitle: String {
-        return localized("compose.send")
+        switch doneButtonState {
+        case .send:
+            return localized("compose.send")
+        case .cancel:
+            return localized("compose.cancel")
+        }
     }
 
     static var emptyState: SEComposeHeaderViewModel {
         return SEComposeHeaderViewModel(
             destinationText: "",
             showsActivityIndicator: false,
-            doneButtonEnabled: false,
+            doneButtonState: .send,
             backButtonEnabled: true
         )
     }
@@ -47,7 +57,7 @@ extension SEComposeHeaderViewModel {
 
             return false
         })
-        doneButtonEnabled = !showsActivityIndicator
+        doneButtonState = showsActivityIndicator ? .cancel : .send
         backButtonEnabled = !showsActivityIndicator
 
         let symbol: String
