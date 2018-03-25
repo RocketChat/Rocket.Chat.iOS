@@ -11,10 +11,11 @@ import UIKit
 class SEComposeTextCell: UICollectionViewCell, SECell {
     @IBOutlet weak var textView: UITextView!
 
-    var cellModel = SEComposeTextCellModel(contentIndex: 0, text: "") {
+    var cellModel = SEComposeTextCellModel(contentIndex: 0, text: "", isEnabled: true) {
         didSet {
             textView.text = cellModel.text
             textView.delegate = self
+            textView.isEditable = cellModel.isEnabled
         }
     }
 }

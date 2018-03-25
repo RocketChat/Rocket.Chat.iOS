@@ -9,4 +9,5 @@
 struct SEComposeTextCellModel: SEComposeCellModel {
     let contentIndex: Int
     var text: String
+    var isEnabled: Bool
 }

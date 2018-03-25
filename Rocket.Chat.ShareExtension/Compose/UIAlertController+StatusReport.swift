@@ -1,5 +1,5 @@
 //
-//  SEReportAlertViewController.swift
+//  UIAlertController+StatusReport.swift
 //  Rocket.Chat.ShareExtension
 //
 //  Created by Matheus Cardoso on 3/14/18.

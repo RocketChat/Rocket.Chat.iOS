@@ -29,9 +29,10 @@ class SEComposeViewController: SEViewController {
 
     @IBOutlet weak var pageControl: UIPageControl!
 
-    var viewModel = SEComposeViewModel(cells: []) {
+    var viewModel = SEComposeViewModel(cells: [], isEnabled: true) {
         didSet {
             pageControl.numberOfPages = viewModel.cells.count
+            view.isUserInteractionEnabled = viewModel.isEnabled
         }
     }
 

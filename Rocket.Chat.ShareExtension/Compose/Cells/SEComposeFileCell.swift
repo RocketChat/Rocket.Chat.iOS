@@ -28,6 +28,12 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
     }
 
     var fileDetailView: SEFileDetailView?
+    var isEnabled: Bool = true {
+        didSet {
+            nameTextField.isEnabled = isEnabled
+            descriptionTextField.isEnabled = isEnabled
+        }
+    }
 
     lazy var nameTextField: UITextField = {
         let textField = UITextField(

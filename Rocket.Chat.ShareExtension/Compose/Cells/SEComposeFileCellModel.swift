@@ -26,7 +26,7 @@ struct SEComposeFileCellModel: SEComposeCellModel {
         return file.description
     }
 
-    init(contentIndex: Int, file: SEFile) {
+    init(contentIndex: Int, file: SEFile, isEnabled: Bool) {
         self.originalNameText = file.name
         self.contentIndex = contentIndex
         self.file = file
@@ -56,6 +56,6 @@ struct SEComposeFileCellModel: SEComposeCellModel {
 
 extension SEComposeFileCellModel {
     static var emptyState: SEComposeFileCellModel {
-        return SEComposeFileCellModel(contentIndex: 0, file: .empty)
+        return SEComposeFileCellModel(contentIndex: 0, file: .empty, isEnabled: true)
     }
 }

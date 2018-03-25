@@ -9,7 +9,8 @@
 import UIKit
 
 struct SEComposeViewModel {
-    let cells: [SEComposeCellModel]
+    var cells: [SEComposeCellModel]
+    var isEnabled: Bool
 }
 
 // MARK: DataSource
@@ -37,12 +38,14 @@ extension SEComposeViewModel {
 
 extension SEComposeViewModel {
     init(state: SEState) {
-        cells = state.content.enumerated().reduce([SEComposeCellModel](), { total, current in
+        self.isEnabled = !state.isSubmittingContent
+        self.cells = []
+        self.cells = state.content.enumerated().reduce([SEComposeCellModel](), { total, current in
             switch current.element.type {
             case .text(let text):
-                return total + [SEComposeTextCellModel(contentIndex: current.offset, text: text)]
+                return total + [SEComposeTextCellModel(contentIndex: current.offset, text: text, isEnabled: self.isEnabled)]
             case .file(let file):
-                return total + [SEComposeFileCellModel(contentIndex: current.offset, file: file)]
+                return total + [SEComposeFileCellModel(contentIndex: current.offset, file: file, isEnabled: self.isEnabled)]
             }
         })
     }

@@ -43,4 +43,14 @@ struct SEState {
             return rooms
         }
     }
+
+    var isSubmittingContent: Bool {
+        return content.contains(where: {
+            if case .sending = $0.status {
+                return true
+            }
+
+            return false
+        })
+    }
 }

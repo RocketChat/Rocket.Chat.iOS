@@ -50,13 +50,7 @@ struct SEComposeHeaderViewModel {
 
 extension SEComposeHeaderViewModel {
     init(state: SEState) {
-        showsActivityIndicator = state.content.contains(where: {
-            if case .sending = $0.status {
-                return true
-            }
-
-            return false
-        })
+        showsActivityIndicator = state.isSubmittingContent
         doneButtonState = showsActivityIndicator ? .cancel : .send
         backButtonEnabled = !showsActivityIndicator
 
