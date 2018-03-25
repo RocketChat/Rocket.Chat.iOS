@@ -13,7 +13,7 @@ fileprivate extension SEStore {
         return store.state.content.map { content -> APIRequest in
             switch content.type {
             case .file(let file):
-                return UploadRequest(
+                return UploadMessageRequest(
                     roomId: store.state.currentRoom.rid,
                     data: file.data,
                     filename: file.name,
@@ -42,8 +42,8 @@ fileprivate extension SEStore {
 }
 
 func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
-    var fileRequests = store.contentRequests.flatMap { index, request -> (index: Int, request: UploadRequest)? in
-        guard let request = request as? UploadRequest else {
+    var fileRequests = store.contentRequests.flatMap { index, request -> (index: Int, request: UploadMessageRequest)? in
+        guard let request = request as? UploadMessageRequest else {
             return nil
         }
 
