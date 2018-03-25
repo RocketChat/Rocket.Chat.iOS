@@ -18,12 +18,15 @@ class SERoomCell: UITableViewCell, SECell {
 
         avatarView.prepareForReuse()
         nameLabel.text = ""
+        cellModel = .emptyState
     }
 
-    var cellModel = SERoomCellModel(room: Subscription(), avatarBaseUrl: "") {
+    var cellModel: SERoomCellModel = .emptyState {
         didSet {
             nameLabel.text = cellModel.name
             avatarView.name = cellModel.name
+
+            guard !cellModel.name.isEmpty else { return }
 
             if cellModel.room.type == .directMessage,
                 let name = cellModel.name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) {

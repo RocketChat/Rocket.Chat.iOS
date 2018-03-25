@@ -15,4 +15,8 @@ struct SERoomCellModel: SECellModel {
     var name: String {
         return room.name
     }
+
+    static var emptyState: SERoomCellModel {
+        return SERoomCellModel(room: Subscription(), avatarBaseUrl: "")
+    }
 }
