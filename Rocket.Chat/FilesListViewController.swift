@@ -26,7 +26,7 @@ class FilesListViewController: UIViewController {
     var attachments: [Attachment]!
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.filesCollctionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
+        self.filesCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "collectionCell")
         self.getConversationMessages()
         // Do any additional setup after loading the view.
     }
@@ -43,7 +43,7 @@ class FilesListViewController: UIViewController {
             guard let files: [Attachment] = result.getFiles() else { return }
             self.attachments = files
             DispatchQueue.main.async {
-                self.filesCollctionView.reloadData()
+                self.filesCollectionView.reloadData()
             }
         }, errored: nil)
     }
