@@ -159,11 +159,18 @@ final class ChatViewController: SLKTextViewController {
         registerCells()
     }
 
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.barTintColor = UIColor.white
-        navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
+//        navigationController?.navigationBar.barTintColor = UIColor.white
+//        navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
+        navigationController?.navigationBar.applyTheme(AppDelegate.theme)
+        setNeedsStatusBarAppearanceUpdate()
 
         collectionView?.isPrefetchingEnabled = true
         collectionView?.keyboardDismissMode = .interactive
@@ -202,6 +209,7 @@ final class ChatViewController: SLKTextViewController {
         }
 
         setupReplyView()
+        view.applyTheme(Theme.dark)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -266,6 +274,7 @@ final class ChatViewController: SLKTextViewController {
         let view = ChatTitleView.instantiateFromNib()
         self.navigationItem.titleView = view
         chatTitleView = view
+        view?.applyTheme(AppDelegate.theme)
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(chatTitleViewDidPressed))
         chatTitleView?.addGestureRecognizer(gesture)
@@ -393,6 +402,7 @@ final class ChatViewController: SLKTextViewController {
             if !oldTextInputbarBgIsTransparent, view.safeAreaInsets.bottom > 0 {
                 textInputbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
                 textInputbar.backgroundColor = UIColor.clear
+                textInputbar.barTintColor = UIColor.clear
                 oldTextInputbarBgIsTransparent = true
             }
 
@@ -405,6 +415,7 @@ final class ChatViewController: SLKTextViewController {
     private func insertTextInputbarBackground() {
         if #available(iOS 11.0, *) {
             textInputbar.insertSubview(textInputbarBackground, at: 0)
+            textInputbarBackground.applyTheme(AppDelegate.theme)
             textInputbarBackground.translatesAutoresizingMaskIntoConstraints = false
 
             textInputbarBackgroundHeightConstraint = textInputbarBackground.heightAnchor.constraint(equalTo: textInputbar.heightAnchor, multiplier: 1, constant: view.safeAreaInsets.bottom)

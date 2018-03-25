@@ -424,3 +424,11 @@ extension ChatMessageCell {
     }
 
 }
+
+extension ChatMessageCell {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+        labelDate.textColor = theme.auxiliaryText
+        labelUsername.textColor = theme.titleText
+    }
+}

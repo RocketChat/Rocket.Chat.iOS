@@ -125,3 +125,10 @@ final class ChatMessageTextView: UIView {
         }
     }
 }
+
+extension ChatMessageTextView {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+        viewLeftBorder.backgroundColor = theme.auxiliaryText
+    }
+}
