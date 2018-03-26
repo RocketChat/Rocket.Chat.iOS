@@ -212,9 +212,7 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     func insertAttachments() {
-        var mediaViewHeight = CGFloat(0)
-
-        mediaViewHeight += insertURLs()
+        var mediaViewHeight = insertURLs()
 
         message.attachments.forEach { attachment in
             let type = attachment.type
