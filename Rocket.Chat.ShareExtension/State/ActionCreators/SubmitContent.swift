@@ -41,6 +41,8 @@ fileprivate extension SEStore {
     }
 }
 
+var urlTasks: [URLSessionTask?] = []
+
 func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
     var fileRequests = store.contentRequests.flatMap { index, request -> (index: Int, request: UploadMessageRequest)? in
         guard let request = request as? UploadMessageRequest else {
@@ -61,7 +63,7 @@ func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
 
             store.dispatch(.setContentValue(content.withStatus(.sending), index: index))
 
-            store.api?.fetch(request, succeeded: { result in
+            let task = store.api?.fetch(request, succeeded: { result in
                 DispatchQueue.main.async {
                     let content = store.state.content[index]
                     if let error = result.error {
@@ -80,6 +82,8 @@ func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
 
                 requestNext()
             })
+
+            urlTasks.append(task)
         }
     }
 
@@ -104,7 +108,7 @@ func submitMessages(store: SEStore, completion: @escaping (() -> Void)) {
         let content = store.state.content[index]
         store.dispatch(.setContentValue(content.withStatus(.sending), index: index))
 
-        store.api?.fetch(request, succeeded: { _ in
+        let task = store.api?.fetch(request, succeeded: { _ in
             DispatchQueue.main.async {
                 let content = store.state.content[index]
                 store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
@@ -119,6 +123,8 @@ func submitMessages(store: SEStore, completion: @escaping (() -> Void)) {
 
             requestNext()
         })
+
+        urlTasks.append(task)
     }
 
     requestNext()
@@ -131,6 +137,14 @@ func submitContent(_ store: SEStore) -> SEAction? {
                 store.dispatch(.makeSceneTransition(.push(.report)))
             }
         }
+    }
+
+    return nil
+}
+
+func cancelSubmittingContent(_ store: SEStore) -> SEAction? {
+    urlTasks.forEach {
+        $0?.cancel()
     }
 
     return nil

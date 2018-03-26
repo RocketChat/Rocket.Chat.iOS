@@ -83,9 +83,11 @@ extension SENavigationController: SEStoreSubscriber {
             case .compose:
                 super.pushViewController(SEComposeHeaderViewController.fromStoryboard(), animated: true)
             case .report:
-                let alert = UIAlertController.statusReport(store)
+                let (alert, retry) = UIAlertController.statusReport(store)
                 alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: { _ in
-                    store.dispatch(.finish)
+                    if !retry {
+                        store.dispatch(.finish)
+                    }
                 }))
                 present(alert, animated: true, completion: nil)
             }

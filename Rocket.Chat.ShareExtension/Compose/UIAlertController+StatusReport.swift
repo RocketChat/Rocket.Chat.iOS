@@ -9,20 +9,22 @@
 import UIKit
 
 extension UIAlertController {
-    static func statusReport(_ store: SEStore) -> UIAlertController {
+    static func statusReport(_ store: SEStore) -> (alert: UIAlertController, retry: Bool) {
         var title = localized("report.success.title")
         var message = localized("report.success.message")
+        var retry = false
 
         store.state.content.forEach { content in
             switch content.status {
             case .errored(let error):
                 title = localized("report.error.title")
                 message = "\(error)"
+                retry = true
             default:
                 return
             }
         }
 
-        return UIAlertController(title: title, message: message, preferredStyle: .alert)
+        return (alert: UIAlertController(title: title, message: message, preferredStyle: .alert), retry: retry)
     }
 }

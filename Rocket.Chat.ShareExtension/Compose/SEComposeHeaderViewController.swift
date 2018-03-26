@@ -42,6 +42,11 @@ class SEComposeHeaderViewController: SEViewController {
     }
 
     @IBAction func doneButtonPressed(_ sender: Any) {
-        store.dispatch(submitContent)
+        switch viewModel.doneButtonState {
+        case .send:
+            store.dispatch(submitContent)
+        case .cancel:
+            store.dispatch(cancelSubmittingContent)
+        }
     }
 }
