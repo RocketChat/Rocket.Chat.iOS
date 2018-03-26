@@ -50,6 +50,11 @@ extension AuthSettings: ModelMappeable {
 
         // Accounts
         self.emailVerification = objectForKey(object: values, key: "Accounts_EmailVerification")?.bool ?? false
+        self.isAllowedToEditProfile = objectForKey(object: values, key: "Accounts_AllowUserProfileChange")?.bool ?? false
+        self.isAllowedToEditAvatar = objectForKey(object: values, key: "Accounts_AllowUserAvatarChange")?.bool ?? false
+        self.isAllowedToEditName = objectForKey(object: values, key: "Accounts_AllowRealNameChange")?.bool ?? false
+        self.isAllowedToEditUsername = objectForKey(object: values, key: "Accounts_AllowUsernameChange")?.bool ?? false
+        self.isAllowedToEditPassword = objectForKey(object: values, key: "Accounts_AllowPasswordChange")?.bool ?? false
 
         // Upload
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
