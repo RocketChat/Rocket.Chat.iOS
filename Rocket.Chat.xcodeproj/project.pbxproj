@@ -362,6 +362,7 @@
 		806DB94820695BCF004ED8ED /* AuthViewController+ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94720695BCF004ED8ED /* AuthViewController+ConnectionHandler.swift */; };
 		806DB94A20695CD0004ED8ED /* AuthViewController+AuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94920695CD0004ED8ED /* AuthViewController+AuthenticationHandler.swift */; };
 		806DB94C206980CA004ED8ED /* AuthManager+Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94B206980CA004ED8ED /* AuthManager+Socket.swift */; };
+		806DB94E20698C25004ED8ED /* ChatMessageCell+Accessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94D20698C25004ED8ED /* ChatMessageCell+Accessibility.swift */; };
 		8073719A1F94E83600D53ADF /* SocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371991F94E83600D53ADF /* SocketError.swift */; };
 		8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719B1F963FA400D53ADF /* APITestCase.swift */; };
 		8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719D1F9688B200D53ADF /* LoginServiceManager.swift */; };
@@ -851,6 +852,7 @@
 		806DB94720695BCF004ED8ED /* AuthViewController+ConnectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewController+ConnectionHandler.swift"; sourceTree = "<group>"; };
 		806DB94920695CD0004ED8ED /* AuthViewController+AuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewController+AuthenticationHandler.swift"; sourceTree = "<group>"; };
 		806DB94B206980CA004ED8ED /* AuthManager+Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthManager+Socket.swift"; sourceTree = "<group>"; };
+		806DB94D20698C25004ED8ED /* ChatMessageCell+Accessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChatMessageCell+Accessibility.swift"; sourceTree = "<group>"; };
 		807371991F94E83600D53ADF /* SocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocketError.swift; path = Managers/Socket/Response/SocketError.swift; sourceTree = "<group>"; };
 		8073719B1F963FA400D53ADF /* APITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITestCase.swift; sourceTree = "<group>"; };
 		8073719D1F9688B200D53ADF /* LoginServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceManager.swift; sourceTree = "<group>"; };
@@ -1305,6 +1307,7 @@
 			children = (
 				800FCD431F728E6A00D9A692 /* Info */,
 				416133311D46CA4E00E09DA2 /* ChatMessageCell.swift */,
+				806DB94D20698C25004ED8ED /* ChatMessageCell+Accessibility.swift */,
 				416133331D46CA7200E09DA2 /* ChatMessageCell.xib */,
 				4133EDCE1DA2834E005AA783 /* ChatMessageImageView.swift */,
 				4133EDD01DA2835F005AA783 /* ChatMessageImageView.xib */,
@@ -2936,6 +2939,7 @@
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
 				41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */,
 				806401311FB09DE800990572 /* Permission.swift in Sources */,
+				806DB94E20698C25004ED8ED /* ChatMessageCell+Accessibility.swift in Sources */,
 				809B530E1FE2EFA100833DD2 /* ReactionListView.swift in Sources */,
 				4159720C1D3DB854002258F4 /* Email.swift in Sources */,
 				14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */,
