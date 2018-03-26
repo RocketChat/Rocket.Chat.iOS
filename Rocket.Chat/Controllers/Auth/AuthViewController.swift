@@ -154,32 +154,6 @@ final class AuthViewController: BaseViewController {
         visibleViewBottomConstraint.constant = 0
     }
 
-    // MARK: Authentication methods
-    fileprivate func updateAuthenticationMethods() {
-        guard let settings = self.serverPublicSettings else { return }
-        self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
-
-        if settings.isFacebookAuthenticationEnabled {
-            addOAuthButton(for: .facebook)
-        }
-
-        if settings.isGitHubAuthenticationEnabled {
-            addOAuthButton(for: .github)
-        }
-
-        if settings.isGitLabAuthenticationEnabled {
-            addOAuthButton(for: .gitlab)
-        }
-
-        if settings.isLinkedInAuthenticationEnabled {
-            addOAuthButton(for: .linkedin)
-        }
-
-        if settings.isCASEnabled {
-            addOAuthButton(for: .cas)
-        }
-    }
-
     // MARK: Loaders
     func startLoading() {
         textFieldUsername.alpha = 0.5
@@ -230,6 +204,26 @@ final class AuthViewController: BaseViewController {
     func authenticateWithDeepLinkCredentials(_ credentials: DeepLinkCredentials) {
         startLoading()
         AuthManager.auth(token: credentials.token, completion: self.handleAuthenticationResponse)
+    }
+
+    @objc func loginServiceButtonDidPress(_ button: UIButton) {
+        guard
+            let service = customAuthButtons.filter({ $0.value == button }).keys.first,
+            let realm = Realm.shared,
+            let loginService = LoginService.find(service: service, realm: realm)
+        else {
+            return
+        }
+
+        switch loginService.type {
+        case .cas:
+            presentCASViewController(for: loginService)
+        case .saml:
+            presentSAMLViewController(for: loginService)
+        default:
+            presentOAuthViewController(for: loginService)
+        }
+
     }
 
     @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {
@@ -342,103 +336,5 @@ extension AuthViewController: UITextFieldDelegate {
         }
 
         return true
-    }
-}
-
-// MARK: Login Services
-
-extension AuthViewController {
-
-    func setupLoginServices() {
-        self.loginServicesToken?.invalidate()
-
-        self.loginServicesToken = LoginServiceManager.observe { [weak self] changes in
-            self?.updateLoginServices(changes: changes)
-        }
-
-        LoginServiceManager.subscribe()
-    }
-
-    @objc func loginServiceButtonDidPress(_ button: UIButton) {
-        guard
-            let service = customAuthButtons.filter({ $0.value == button }).keys.first,
-            let realm = Realm.shared,
-            let loginService = LoginService.find(service: service, realm: realm)
-        else {
-            return
-        }
-
-        switch loginService.type {
-        case .cas:
-            presentCASViewController(for: loginService)
-        case .saml:
-            presentSAMLViewController(for: loginService)
-        default:
-            presentOAuthViewController(for: loginService)
-        }
-
-    }
-
-    func addOAuthButton(for loginService: LoginService) {
-        guard let service = loginService.service else { return }
-
-        let button = customAuthButtons[service] ?? UIButton()
-
-        switch loginService.type {
-        case .facebook: button.setImage(#imageLiteral(resourceName: "facebook"), for: .normal)
-        case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
-        case .gitlab: button.setImage(#imageLiteral(resourceName: "gitlab"), for: .normal)
-        case .linkedin: button.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
-        default: button.setTitle(loginService.buttonLabelText ?? "", for: .normal)
-        }
-
-        button.layer.cornerRadius = 3
-        button.titleLabel?.font = .boldSystemFont(ofSize: 17.0)
-        button.titleLabel?.adjustsFontSizeToFitWidth = true
-        button.setTitleColor(UIColor(hex: loginService.buttonLabelColor), for: .normal)
-        button.backgroundColor = UIColor(hex: loginService.buttonColor)
-
-        if !authButtonsStackView.subviews.contains(button) {
-            authButtonsStackView.addArrangedSubview(button)
-            button.addTarget(self, action: #selector(loginServiceButtonDidPress(_:)), for: .touchUpInside)
-            customAuthButtons[service] = button
-        }
-    }
-
-    func updateLoginServices(changes: RealmCollectionChange<Results<LoginService>>) {
-        switch changes {
-        case .update(let res, let deletions, let insertions, let modifications):
-            insertions.map { res[$0] }.forEach {
-                guard $0.isValid else { return }
-                self.addOAuthButton(for: $0)
-            }
-
-            modifications.map { res[$0] }.forEach {
-                guard
-                    let identifier = $0.identifier,
-                    let button = self.customAuthButtons[identifier]
-                else {
-                    return
-                }
-
-                button.setTitle($0.buttonLabelText ?? "", for: .normal)
-                button.setTitleColor(UIColor(hex: $0.buttonLabelColor), for: .normal)
-                button.backgroundColor = UIColor(hex: $0.buttonColor)
-            }
-
-            deletions.map { res[$0] }.forEach {
-                guard
-                    $0.custom,
-                    let identifier = $0.identifier,
-                    let button = self.customAuthButtons[identifier]
-                else {
-                    return
-                }
-
-                authButtonsStackView.removeArrangedSubview(button)
-                customAuthButtons.removeValue(forKey: identifier)
-            }
-        default: break
-        }
     }
 }

@@ -358,7 +358,7 @@
 		8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D26D1FFF876D00C75926 /* Emoji.swift */; };
 		806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */; };
 		806C59A51FBB2F4C00C32D0A /* PostMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */; };
-		806DB94620695A46004ED8ED /* AuthViewController+SSO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94520695A46004ED8ED /* AuthViewController+SSO.swift */; };
+		806DB94620695A46004ED8ED /* AuthViewController+LoginServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94520695A46004ED8ED /* AuthViewController+LoginServices.swift */; };
 		806DB94820695BCF004ED8ED /* AuthViewController+ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94720695BCF004ED8ED /* AuthViewController+ConnectionHandler.swift */; };
 		806DB94A20695CD0004ED8ED /* AuthViewController+AuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94920695CD0004ED8ED /* AuthViewController+AuthenticationHandler.swift */; };
 		8073719A1F94E83600D53ADF /* SocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371991F94E83600D53ADF /* SocketError.swift */; };
@@ -846,7 +846,7 @@
 		8069D26D1FFF876D00C75926 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMessageRequest.swift; sourceTree = "<group>"; };
 		806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMessageRequestSpec.swift; sourceTree = "<group>"; };
-		806DB94520695A46004ED8ED /* AuthViewController+SSO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewController+SSO.swift"; sourceTree = "<group>"; };
+		806DB94520695A46004ED8ED /* AuthViewController+LoginServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewController+LoginServices.swift"; sourceTree = "<group>"; };
 		806DB94720695BCF004ED8ED /* AuthViewController+ConnectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewController+ConnectionHandler.swift"; sourceTree = "<group>"; };
 		806DB94920695CD0004ED8ED /* AuthViewController+AuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewController+AuthenticationHandler.swift"; sourceTree = "<group>"; };
 		807371991F94E83600D53ADF /* SocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocketError.swift; path = Managers/Socket/Response/SocketError.swift; sourceTree = "<group>"; };
@@ -1411,7 +1411,7 @@
 				35E892CB201CDDED00B4BE5A /* SignupViewController+CustomFields.swift */,
 				4174CB0C1D2D994A0086DAC8 /* ConnectServerViewController.swift */,
 				4174CB161D2D9BB70086DAC8 /* AuthViewController.swift */,
-				806DB94520695A46004ED8ED /* AuthViewController+SSO.swift */,
+				806DB94520695A46004ED8ED /* AuthViewController+LoginServices.swift */,
 				806DB94720695BCF004ED8ED /* AuthViewController+ConnectionHandler.swift */,
 				806DB94920695CD0004ED8ED /* AuthViewController+AuthenticationHandler.swift */,
 				414D99151EA0E7CB0020F7E9 /* SignupViewController.swift */,
@@ -2878,7 +2878,7 @@
 				D1C536CC1F688B2F00EBA8D9 /* MarkdownManager.swift in Sources */,
 				418C4DC61DC4C07800ABED4C /* SubscriptionSectionView.swift in Sources */,
 				7758A7641F8FA44400FAA244 /* PickerViewDelegate.swift in Sources */,
-				806DB94620695A46004ED8ED /* AuthViewController+SSO.swift in Sources */,
+				806DB94620695A46004ED8ED /* AuthViewController+LoginServices.swift in Sources */,
 				41D7CA871E644E47000F38EA /* MessageExtensions.swift in Sources */,
 				4151B4561E2D1AFF00F8AA1B /* SubscriptionModelMapping.swift in Sources */,
 				8013F86B1FD6B59A00EE1A4E /* Version.swift in Sources */,

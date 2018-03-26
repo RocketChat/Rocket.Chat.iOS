@@ -789,17 +789,12 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func appendMessages(messages: [Message], completion: VoidCompletion?) {
-        guard
-            let subscription = subscription,
-            let collectionView = collectionView,
-            !subscription.isInvalidated
-        else {
+        guard let subscription = subscription, let collectionView = collectionView, !subscription.isInvalidated else {
             return
         }
 
         guard !isAppendingMessages else {
             Log.debug("[APPEND MESSAGES] Blocked trying to append \(messages.count) messages")
-
             // This message can be called many times during the app execution and we need
             // to call them one per time, to avoid adding the same message multiple times
             // to the list. Also, we keep the subscription identifier in order to make sure
