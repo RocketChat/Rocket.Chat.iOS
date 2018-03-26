@@ -15,16 +15,11 @@ final class Auth: Object {
     @objc dynamic var serverVersion = ""
 
     var apiHost: URL? {
-        guard
-            let socketURL = URL(string: serverURL, scheme: "https"),
-            var components = URLComponents(url: socketURL, resolvingAgainstBaseURL: true)
-        else {
+        guard let socketURL = URL(string: serverURL, scheme: "https") else {
             return nil
         }
 
-        components.path = ""
-
-        return components.url
+        return socketURL.httpServerURL()
     }
 
     @objc dynamic var settings: AuthSettings?
