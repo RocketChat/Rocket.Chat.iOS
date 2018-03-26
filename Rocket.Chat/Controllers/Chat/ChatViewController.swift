@@ -1080,11 +1080,10 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
         if let obj = dataController.itemAt(indexPath) {
             if obj.type == .header {
-                if subscription.type == .directMessage {
-                    return CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
-                } else {
-                    return CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
-                }
+                let isDirectMessage = subscription.type == .directMessage
+                let directMessageHeaderSize = CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
+                let channelHeaderSize = CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
+                return isDirectMessage ? directMessageHeaderSize : channelHeaderSize
             }
 
             if obj.type == .loader {
@@ -1098,9 +1097,9 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
             if obj.type == .unreadSeparator {
                 if dataController.dismissUnreadSeparator {
                     return CGSize(width: fullWidth, height: 0)
-                } else {
-                    return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
                 }
+
+                return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
             }
 
             if let message = obj.message {
