@@ -51,10 +51,8 @@ struct Alert {
 
     func present(handler: ((UIAlertAction) -> Void)? = nil) {
         func present() {
-            let window = UIWindow(frame: UIScreen.main.bounds)
-            window.rootViewController = UIViewController()
+            let window = UIWindow.topWindow
             window.windowLevel = UIWindowLevelAlert + 1
-            window.makeKeyAndVisible()
             window.rootViewController?.alert(title: title, message: message, handler: handler)
         }
 

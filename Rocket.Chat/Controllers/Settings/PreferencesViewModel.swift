@@ -39,6 +39,10 @@ final class PreferencesViewModel {
         return localized("myaccount.settings.appicon")
     }
 
+    internal var webBrowser: String {
+        return localized("myaccount.settings.web_browser")
+    }
+
     internal var formattedVersion: String {
         return String(format: localized("myaccount.settings.version"), version, build)
     }
@@ -94,7 +98,7 @@ final class PreferencesViewModel {
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
         case 0: return 1
-        case 1: return (canChangeAppIcon ? 3 : 2)
+        case 1: return (canChangeAppIcon ? 4 : 3)
         case 2: return 2
         case 3: return (canOpenFLEX ? 1 : 0)
         default: return 0
