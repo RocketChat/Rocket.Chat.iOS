@@ -8,23 +8,28 @@
 
 import UIKit
 
+enum StatusReportType {
+    case success
+    case error
+}
+
 extension UIAlertController {
-    static func statusReport(_ store: SEStore) -> (alert: UIAlertController, retry: Bool) {
+    static func statusReport(_ store: SEStore) -> (alert: UIAlertController, type: StatusReportType) {
         var title = localized("report.success.title")
         var message = localized("report.success.message")
-        var retry = false
+        var type: StatusReportType = .success
 
         store.state.content.forEach { content in
             switch content.status {
             case .errored(let error):
                 title = localized("report.error.title")
                 message = "\(error)"
-                retry = true
+                type = .error
             default:
                 return
             }
         }
 
-        return (alert: UIAlertController(title: title, message: message, preferredStyle: .alert), retry: retry)
+        return (alert: UIAlertController(title: title, message: message, preferredStyle: .alert), type: type)
     }
 }

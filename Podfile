@@ -14,6 +14,10 @@ def database_pods
   pod 'SwiftyJSON'
 end
 
+def ui_pods
+  pod 'MBProgressHUD', '~> 1.1.0'
+end
+
 def shared_pods
   # Crash Report
   pod 'Fabric'
@@ -30,7 +34,7 @@ def shared_pods
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
   pod 'TagListView', '~> 1.0'
   pod 'SearchTextField'
-  pod 'MBProgressHUD', '~> 1.1.0'
+  ui_pods
 
   # Text Processing
   pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
@@ -56,6 +60,7 @@ end
 target 'Rocket.Chat.ShareExtension' do
   webimage_pods
   database_pods
+  ui_pods
 end
 
 target 'Rocket.Chat' do

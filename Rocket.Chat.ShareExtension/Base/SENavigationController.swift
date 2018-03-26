@@ -83,13 +83,17 @@ extension SENavigationController: SEStoreSubscriber {
             case .compose:
                 super.pushViewController(SEComposeHeaderViewController.fromStoryboard(), animated: true)
             case .report:
-                let (alert, retry) = UIAlertController.statusReport(store)
-                alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default, handler: { _ in
-                    if !retry {
+                let (alert, type) = UIAlertController.statusReport(store)
+
+                switch type {
+                case .error:
+                    alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default))
+                    present(alert, animated: true, completion: nil)
+                case .success:
+                    alertSuccess(title: localized("report.success.title")) {
                         store.dispatch(.finish)
                     }
-                }))
-                present(alert, animated: true, completion: nil)
+                }
             }
         case .finish:
             self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
