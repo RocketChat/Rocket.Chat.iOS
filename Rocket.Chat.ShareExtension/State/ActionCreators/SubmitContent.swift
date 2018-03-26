@@ -147,5 +147,7 @@ func cancelSubmittingContent(_ store: SEStore) -> SEAction? {
         $0?.cancel()
     }
 
+    urlTasks.removeAll()
+
     return nil
 }
