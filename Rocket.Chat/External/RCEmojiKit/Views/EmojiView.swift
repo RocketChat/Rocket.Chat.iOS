@@ -32,28 +32,12 @@ class EmojiView: UIView {
         Bundle.main.loadNibNamed("EmojiView", owner: self, options: nil)
 
         addSubview(contentView)
-        contentView.translatesAutoresizingMaskIntoConstraints = false
-
-        addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "|-0-[view]-0-|", options: [], metrics: nil, views: ["view": contentView]
-            )
-        )
-        addConstraints(
-            NSLayoutConstraint.constraints(
-                withVisualFormat: "V:|-0-[view]-0-|", options: [], metrics: nil, views: ["view": contentView]
-            )
-        )
     }
-}
 
-class EmojiCollectionViewCell: UICollectionViewCell {
-    @IBOutlet weak var emojiView: EmojiView!
-
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        self.emojiView.emojiLabel.text = ""
-        self.emojiView.emojiImageView.image = nil
-        self.emojiView.emojiImageView.animatedImage = nil
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        contentView.frame = self.bounds
+        emojiLabel.frame = self.bounds
+        emojiImageView.frame = self.bounds
     }
 }

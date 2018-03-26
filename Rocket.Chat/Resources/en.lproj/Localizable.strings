@@ -246,6 +246,7 @@
 "myaccount.settings.appicon" = "Application Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
 "myaccount.settings.rateus" = "Rate us";
+"myaccount.settings.web_browser" = "Web Browser";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon";
@@ -257,6 +258,15 @@
 "myaccount.settings.language.title" = "Change Language";
 "myaccount.settings.language.reset" = "Reset to Default";
 "myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+ before the new settings will take effect.";
+
+// Choose Web Browser
+"web_browser.safari.title" = "Safari";
+"web_browser.in_app_safari.title" = "In-App Browser";
+"web_browser.chrome.title" = "Chrome";
+"web_browser.opera.title" = "Opera Mini";
+"web_browser.firefox.title" = "Firefox";
+"myaccount.settings.web_browser.title" = "Web browser";
+"myaccount.settings.web_browser.footer" = "This application will be used to open links in Rocket Chat.";
 
 // Update Profile
 "myaccount.settings.profile.title" = "Profile";
