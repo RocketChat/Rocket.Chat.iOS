@@ -59,14 +59,14 @@
                         <viewLayoutGuide key="safeArea" id="MB8-Ng-0ga"/>
                     </view>
                     <toolbarItems>
-                        <barButtonItem title="Reset" image="Reset" id="5z5-OY-5Fu">
+                        <barButtonItem image="Reset" id="5z5-OY-5Fu">
                             <color key="tintColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <action selector="reset" destination="u7Q-N1-jHC" id="LNy-UF-m1h"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="GR2-Ra-9pU"/>
-                        <barButtonItem title="Width" image="Width" id="Inn-dx-cVT">
+                        <barButtonItem image="Width" id="Inn-dx-cVT">
                             <color key="tintColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="N6q-Pk-jBJ" kind="popoverPresentation" popoverAnchorBarButtonItem="Inn-dx-cVT" id="PgU-Gh-EgK">
@@ -74,7 +74,7 @@
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Opacity" image="Opacity" id="ubJ-AB-CWU">
+                        <barButtonItem image="Opacity" id="ubJ-AB-CWU">
                             <color key="tintColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="mo2-C9-pFT" kind="popoverPresentation" popoverAnchorBarButtonItem="ubJ-AB-CWU" id="fus-lc-ZLe">
@@ -82,7 +82,7 @@
                                 </segue>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem title="Color" image="Color" id="1AR-Ra-oNL">
+                        <barButtonItem image="Color" id="1AR-Ra-oNL">
                             <color key="tintColor" red="0.26274509800000001" green="0.26274509800000001" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="Uue-c0-V7G" kind="popoverPresentation" popoverAnchorBarButtonItem="1AR-Ra-oNL" id="3a6-nt-A3q">
