@@ -361,6 +361,7 @@
 		806DB94620695A46004ED8ED /* AuthViewController+LoginServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94520695A46004ED8ED /* AuthViewController+LoginServices.swift */; };
 		806DB94820695BCF004ED8ED /* AuthViewController+ConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94720695BCF004ED8ED /* AuthViewController+ConnectionHandler.swift */; };
 		806DB94A20695CD0004ED8ED /* AuthViewController+AuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94920695CD0004ED8ED /* AuthViewController+AuthenticationHandler.swift */; };
+		806DB94C206980CA004ED8ED /* AuthManager+Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94B206980CA004ED8ED /* AuthManager+Socket.swift */; };
 		8073719A1F94E83600D53ADF /* SocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371991F94E83600D53ADF /* SocketError.swift */; };
 		8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719B1F963FA400D53ADF /* APITestCase.swift */; };
 		8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719D1F9688B200D53ADF /* LoginServiceManager.swift */; };
@@ -849,6 +850,7 @@
 		806DB94520695A46004ED8ED /* AuthViewController+LoginServices.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewController+LoginServices.swift"; sourceTree = "<group>"; };
 		806DB94720695BCF004ED8ED /* AuthViewController+ConnectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewController+ConnectionHandler.swift"; sourceTree = "<group>"; };
 		806DB94920695CD0004ED8ED /* AuthViewController+AuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthViewController+AuthenticationHandler.swift"; sourceTree = "<group>"; };
+		806DB94B206980CA004ED8ED /* AuthManager+Socket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthManager+Socket.swift"; sourceTree = "<group>"; };
 		807371991F94E83600D53ADF /* SocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocketError.swift; path = Managers/Socket/Response/SocketError.swift; sourceTree = "<group>"; };
 		8073719B1F963FA400D53ADF /* APITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITestCase.swift; sourceTree = "<group>"; };
 		8073719D1F9688B200D53ADF /* LoginServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceManager.swift; sourceTree = "<group>"; };
@@ -1235,6 +1237,7 @@
 			isa = PBXGroup;
 			children = (
 				41552F651D30308C0081438D /* AuthManager.swift */,
+				806DB94B206980CA004ED8ED /* AuthManager+Socket.swift */,
 				411D76E41F39F05A00B0A8DF /* AuthSettingsManager.swift */,
 				41DAE93B1D318E280098E068 /* SubscriptionManager.swift */,
 				41DC7A1C1D38471700896FC0 /* MessageManager.swift */,
@@ -3018,6 +3021,7 @@
 				4151B45C1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift in Sources */,
 				806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */,
 				4192054E1D52F5F1004EEC5F /* UIColorExtension.swift in Sources */,
+				806DB94C206980CA004ED8ED /* AuthManager+Socket.swift in Sources */,
 				41DCB8281DDC82E000E1197F /* SubscriptionSearchMoreView.swift in Sources */,
 				41597DCE1E8D3C5B00638E3E /* TwoFactorAuthenticationViewController.swift in Sources */,
 				4147CE791F5EA3D000C322C3 /* SubscriptionsPageViewController.swift in Sources */,
