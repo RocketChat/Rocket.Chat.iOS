@@ -6,10 +6,8 @@
 //  Copyright © 2016 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
 import RealmSwift
 import Realm
-import GoogleSignIn
 
 struct AuthManager {
 

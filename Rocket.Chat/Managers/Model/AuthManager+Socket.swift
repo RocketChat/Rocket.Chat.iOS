@@ -6,7 +6,8 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import RealmSwift
+import GoogleSignIn
 
 // MARK: Socket Management
 
@@ -278,4 +279,3 @@ extension AuthManager {
     }
 
 }
-

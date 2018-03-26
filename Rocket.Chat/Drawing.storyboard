@@ -165,7 +165,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pal-YH-QeJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-70.400000000000006" y="595.50224887556226"/>
+            <point key="canvasLocation" x="-70" y="636"/>
         </scene>
         <!--Drawing Brush Width View Controller-->
         <scene sceneID="BRH-4F-Fug">
@@ -218,7 +218,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dCC-ig-EyP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-424" y="595"/>
+            <point key="canvasLocation" x="-424" y="636"/>
         </scene>
         <!--Drawing Brush Color View Controller-->
         <scene sceneID="Njr-l7-1gP">
@@ -311,7 +311,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Mai-aj-bt5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="308.80000000000001" y="667.4662668665668"/>
+            <point key="canvasLocation" x="253" y="703"/>
         </scene>
     </scenes>
     <resources>
