@@ -55,5 +55,7 @@ class EmojiCollectionViewCell: UICollectionViewCell {
         self.emojiView.emojiLabel.text = ""
         self.emojiView.emojiImageView.image = nil
         self.emojiView.emojiImageView.animatedImage = nil
+        self.layer.shouldRasterize = true
+        self.layer.rasterizationScale = UIScreen.main.scale
     }
 }

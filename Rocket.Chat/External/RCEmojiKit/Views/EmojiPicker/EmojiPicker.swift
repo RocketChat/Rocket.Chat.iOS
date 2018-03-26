@@ -286,17 +286,20 @@ extension EmojiPicker: UICollectionViewDelegateFlowLayout {
 
 extension EmojiPicker: UITabBarDelegate {
     func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        guard let index = tabBar.items?.index(of: item) else { return }
+        guard self.emojisCollectionView.isDragging else {
+            guard let index = tabBar.items?.index(of: item) else { return }
 
-        searchBar.resignFirstResponder()
-        searchBar.text = ""
+            searchBar.resignFirstResponder()
+            searchBar.text = ""
 
-        emojisCollectionView.reloadData()
-        emojisCollectionView.layoutIfNeeded()
+            emojisCollectionView.reloadData()
+            emojisCollectionView.layoutIfNeeded()
 
-        let indexPath = IndexPath(row: 1, section: index)
-        emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-        emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -36.0)), animated: false)
+            let indexPath = IndexPath(row: 1, section: index)
+            emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+            emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -36.0)), animated: false)
+            return
+        }
     }
 }
 
