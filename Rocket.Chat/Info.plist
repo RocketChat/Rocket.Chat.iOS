@@ -242,6 +242,10 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>org-appextension-feature-password-management</string>
+		<string>googlechromes</string>
+		<string>googlechrome</string>
+		<string>opera-http</string>
+		<string>firefox</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>

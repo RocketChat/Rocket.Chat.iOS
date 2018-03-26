@@ -18,6 +18,12 @@ final class PreferencesViewController: UITableViewController {
 
     private let viewModel = PreferencesViewModel()
 
+    @IBOutlet weak var labelProfile: UILabel! {
+        didSet {
+            labelProfile.text = viewModel.profile
+        }
+    }
+
     @IBOutlet weak var labelContactUs: UILabel! {
         didSet {
             labelContactUs.text = viewModel.contactus
@@ -54,6 +60,18 @@ final class PreferencesViewController: UITableViewController {
         }
     }
 
+    @IBOutlet weak var labelWebBrowser: UILabel! {
+        didSet {
+            labelWebBrowser.text = viewModel.webBrowser
+        }
+    }
+
+    @IBOutlet weak var labelDefaultWebBrowser: UILabel! {
+        didSet {
+            labelDefaultWebBrowser.text = WebBrowserManager.browser.name
+        }
+    }
+
     override var navigationController: PreferencesNavigationController? {
         return super.navigationController as? PreferencesNavigationController
     }
@@ -71,8 +89,7 @@ final class PreferencesViewController: UITableViewController {
 
     private func cellTermsOfServiceDidPressed() {
         guard let url = viewModel.licenseURL else { return }
-        let controller = SFSafariViewController(url: url)
-        present(controller, animated: true, completion: nil)
+        WebBrowserManager.open(url: url)
     }
 
     private func cellContactDidPressed() {
@@ -95,6 +112,16 @@ final class PreferencesViewController: UITableViewController {
         performSegue(withIdentifier: "Notifications", sender: nil)
     }
 
+    // MARK: Navigation
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let webBrowser = segue.destination as? WebBrowserTableViewController {
+            webBrowser.updateDefaultWebBrowser = { [weak self] in
+                self?.labelDefaultWebBrowser.text = WebBrowserManager.browser.name
+            }
+        }
+    }
+
     private func cellAppIconDidPressed() {
         performSegue(withIdentifier: "AppIcon", sender: nil)
     }
@@ -106,7 +133,7 @@ final class PreferencesViewController: UITableViewController {
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 0 {
+        if indexPath.section == 1 {
             if indexPath.row == 0 {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
@@ -116,7 +143,7 @@ final class PreferencesViewController: UITableViewController {
             } else if indexPath.row == 3 {
                 cellAppIconDidPressed()
             }
-        } else if indexPath.section == 1 {
+        } else if indexPath.section == 2 {
             if indexPath.row == 0 {
                 cellTermsOfServiceDidPressed()
             }

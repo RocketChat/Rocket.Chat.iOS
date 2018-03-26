@@ -73,15 +73,13 @@ extension ChatViewController: ChatMessageCellProtocol {
     }
 
     func openURL(url: URL) {
-        let controller = SFSafariViewController(url: url)
-        present(controller, animated: true, completion: nil)
+        WebBrowserManager.open(url: url)
     }
 
     func openURLFromCell(url: MessageURL) {
         guard let targetURL = url.targetURL else { return }
         guard let destinyURL = URL(string: targetURL) else { return }
-        let controller = SFSafariViewController(url: destinyURL)
-        present(controller, animated: true, completion: nil)
+        WebBrowserManager.open(url: destinyURL)
     }
 
     func openVideoFromCell(attachment: Attachment) {
