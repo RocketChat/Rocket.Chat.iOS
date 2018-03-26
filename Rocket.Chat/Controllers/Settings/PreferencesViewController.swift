@@ -5,13 +5,12 @@
 //  Created by Rafael Kellermann Streit on 14/02/17.
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
-
 import UIKit
 import MessageUI
 import SafariServices
 
 #if BETA || DEBUG
-import FLEX
+    import FLEX
 #endif
 
 final class PreferencesViewController: UITableViewController {
@@ -21,6 +20,12 @@ final class PreferencesViewController: UITableViewController {
     @IBOutlet weak var labelProfile: UILabel! {
         didSet {
             labelProfile.text = viewModel.profile
+        }
+    }
+
+    @IBOutlet weak var labelBlockedUsers: UILabel! {
+        didSet {
+            labelBlockedUsers.text = viewModel.blockedUsersList
         }
     }
 
@@ -90,7 +95,7 @@ final class PreferencesViewController: UITableViewController {
         if !MFMailComposeViewController.canSendMail() {
             Alert(
                 key: "alert.settings.set_mail_app"
-            ).present()
+                ).present()
             return
         }
 
@@ -121,14 +126,13 @@ final class PreferencesViewController: UITableViewController {
     }
 
     // MARK: UITableViewDelegate
-
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if indexPath.section == 1 {
-            if indexPath.row == 0 {
+            if indexPath.row == 1 {
                 cellContactDidPressed()
-            } else if indexPath.row == 1 {
-                cellLanguageDidPressed()
             } else if indexPath.row == 2 {
+                cellLanguageDidPressed()
+            } else if indexPath.row == 3 {
                 cellAppIconDidPressed()
             }
         } else if indexPath.section == 2 {
@@ -137,7 +141,7 @@ final class PreferencesViewController: UITableViewController {
             }
         } else if indexPath.section == 2, indexPath.row == 0 {
             #if BETA || DEBUG
-            FLEXManager.shared().showExplorer()
+                FLEXManager.shared().showExplorer()
             #endif
         }
 
