@@ -44,6 +44,11 @@ final class NotificationsSwitchCell: UITableViewCell, NotificationsCellProtocol 
             rightTitleLabel.text = model.rightTitle
             rightDescriptionLabel.text = model.rightDescription
             turnSwitch.isOn = model.value.boolValue
+
+            leftTitleLabel.textColor = model.value.boolValue ? .lightGray : .black
+            leftDescriptionLabel.textColor = model.value.boolValue ? .lightGray : .black
+            rightTitleLabel.textColor = model.value.boolValue ? .black : .lightGray
+            rightDescriptionLabel.textColor = model.value.boolValue ? .black : .lightGray
         }
     }
 }
