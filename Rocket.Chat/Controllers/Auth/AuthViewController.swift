@@ -180,53 +180,6 @@ final class AuthViewController: BaseViewController {
         }
     }
 
-    internal func handleAuthenticationResponse(_ response: SocketResponse) {
-        if response.isError() {
-            stopLoading()
-
-            if let error = response.result["error"].dictionary {
-                // User is using 2FA
-                if error["error"]?.string == "totp-required" {
-                    performSegue(withIdentifier: "TwoFactor", sender: nil)
-                    return
-                }
-
-                Alert(
-                    key: "error.socket.default_error"
-                ).present()
-            }
-
-            return
-        }
-
-        API.current()?.fetch(MeRequest(), succeeded: { [weak self] result in
-            guard let strongSelf = self else { return }
-
-            SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
-
-            if let user = result.user {
-                if user.username != nil {
-
-                    DispatchQueue.main.async {
-                        strongSelf.dismiss(animated: true, completion: nil)
-                        AppManager.reloadApp()
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
-                    }
-                }
-            } else {
-                self?.stopLoading()
-                Alert(
-                    key: "error.socket.default_error"
-                ).present()
-            }
-        }, errored: { [weak self] _ in
-            self?.stopLoading()
-        })
-    }
-
     // MARK: Loaders
     func startLoading() {
         textFieldUsername.alpha = 0.5
@@ -426,67 +379,6 @@ extension AuthViewController {
 
     }
 
-    func presentOAuthViewController(for loginService: LoginService) {
-        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
-            guard let strongSelf = self else { return }
-
-            strongSelf.startLoading()
-            AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
-            }, failure: { [weak self] in
-                self?.alert(
-                    title: localized("alert.login_service_error.title"),
-                    message: localized("alert.login_service_error.message")
-                )
-
-                self?.stopLoading()
-        })
-    }
-
-    func presentCASViewController(for loginService: LoginService) {
-        guard
-            let loginUrlString = loginService.loginUrl,
-            let loginUrl = URL(string: loginUrlString),
-            let host = serverURL.host,
-            let callbackUrl = URL(string: "https://\(host)/_cas/\(String.random(17))")
-        else {
-            return
-        }
-
-        let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
-            AuthManager.auth(casCredentialToken: $0, completion: self.handleAuthenticationResponse)
-        }, failure: { [weak self] in
-            self?.stopLoading()
-        })
-
-        self.startLoading()
-
-        navigationController?.pushViewController(controller, animated: true)
-
-        return
-    }
-
-    func presentSAMLViewController(for loginService: LoginService) {
-        guard
-            let provider = loginService.provider,
-            let host = serverURL.host,
-            let serverUrl = URL(string: "https://\(host)")
-        else {
-            return
-        }
-
-        let controller = SAMLViewController(serverUrl: serverUrl, provider: provider, success: {
-            AuthManager.auth(samlCredentialToken: $0, completion: self.handleAuthenticationResponse)
-        }, failure: { [weak self] in
-            self?.stopLoading()
-        })
-
-        self.startLoading()
-
-        navigationController?.pushViewController(controller, animated: true)
-
-        return
-    }
-
     func addOAuthButton(for loginService: LoginService) {
         guard let service = loginService.service else { return }
 
@@ -549,16 +441,4 @@ extension AuthViewController {
         default: break
         }
     }
-}
-extension AuthViewController: SocketConnectionHandler {
-
-    func socketDidConnect(socket: SocketManager) { }
-    func socketDidReturnError(socket: SocketManager, error: SocketError) { }
-
-    func socketDidDisconnect(socket: SocketManager) {
-        alert(title: localized("error.socket.default_error.title"), message: localized("error.socket.default_error.message")) { _ in
-            self.navigationController?.popViewController(animated: true)
-        }
-    }
-
 }
