@@ -51,6 +51,7 @@ final class AuthSettings: BaseModel {
     @objc dynamic var isAllowedToEditAvatar = false
     @objc dynamic var isAllowedToEditName = false
     @objc dynamic var isAllowedToEditUsername = false
+    @objc dynamic var isAllowedToEditEmail = false
     @objc dynamic var isAllowedToEditPassword = false
 
     // Registration

@@ -54,6 +54,7 @@ extension AuthSettings: ModelMappeable {
         self.isAllowedToEditAvatar = objectForKey(object: values, key: "Accounts_AllowUserAvatarChange")?.bool ?? false
         self.isAllowedToEditName = objectForKey(object: values, key: "Accounts_AllowRealNameChange")?.bool ?? false
         self.isAllowedToEditUsername = objectForKey(object: values, key: "Accounts_AllowUsernameChange")?.bool ?? false
+        self.isAllowedToEditEmail = objectForKey(object: values, key: "Accounts_AllowEmailChange")?.bool ?? false
         self.isAllowedToEditPassword = objectForKey(object: values, key: "Accounts_AllowPasswordChange")?.bool ?? false
 
         // Upload
