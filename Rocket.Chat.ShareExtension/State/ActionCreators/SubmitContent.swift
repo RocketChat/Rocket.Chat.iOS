@@ -33,7 +33,7 @@ fileprivate extension SEStore {
     var api: API? {
         let server = state.servers[state.selectedServerIndex]
 
-        let api = API(host: "https://\(server.host)", version: Version(0, 60, 0))
+        let api = API(host: server.host, version: Version(0, 60, 0))
         api?.userId = server.userId
         api?.authToken = server.token
 

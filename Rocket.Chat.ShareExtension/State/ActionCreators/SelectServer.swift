@@ -12,7 +12,7 @@ func fetchServers(store: SEStore) -> SEAction {
     let servers = DatabaseManager.servers?.flatMap { dict -> SEServer? in
         guard
             let name = dict[ServerPersistKeys.serverName],
-            let host = URL(string: dict[ServerPersistKeys.serverURL] ?? "")?.host,
+            let host = URL(string: dict[ServerPersistKeys.serverURL] ?? "")?.httpServerURL()?.absoluteString,
             let userId = dict[ServerPersistKeys.userId],
             let token = dict[ServerPersistKeys.token],
             let iconUrl = dict[ServerPersistKeys.serverIconURL]
