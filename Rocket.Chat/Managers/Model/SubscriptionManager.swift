@@ -339,7 +339,7 @@ extension SubscriptionManager {
             completion(response)
         }
     }
-    
+
     static func updateRoomDescription(subscription: Subscription, description: String, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
@@ -347,13 +347,13 @@ extension SubscriptionManager {
             "id": "16",
             "params": [subscription.rid, "roomDescription", description]
         ] as [String: Any]
-        
+
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
             completion(response)
         }
     }
-    
+
     static func updateRoomTopic(subscription: Subscription, topic: String, completion: @escaping MessageCompletion) {
         let request = [
             "msg": "method",
@@ -361,7 +361,7 @@ extension SubscriptionManager {
             "id": "16",
             "params": [subscription.rid, "roomTopic", topic]
             ] as [String: Any]
-        
+
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
             completion(response)

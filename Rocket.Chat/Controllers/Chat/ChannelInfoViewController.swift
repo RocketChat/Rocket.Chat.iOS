@@ -17,7 +17,7 @@ class ChannelInfoViewController: BaseViewController, UITextViewDelegate {
             tableView?.reloadData()
         }
     }
-    
+
     var subscription: Subscription? {
         didSet {
             guard let subscription = self.subscription else { return }
@@ -68,7 +68,7 @@ class ChannelInfoViewController: BaseViewController, UITextViewDelegate {
                 updateButtonFavoriteImage()
             }
         }
-        
+
         if let currentUser = AuthManager.currentUser() {
             if currentUser == subscription?.roomOwner {
                 let saveButton = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(saveButtonTapped))
@@ -77,7 +77,7 @@ class ChannelInfoViewController: BaseViewController, UITextViewDelegate {
                 self.saveButton?.isEnabled = false
             }
         }
-        
+
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
@@ -148,17 +148,17 @@ class ChannelInfoViewController: BaseViewController, UITextViewDelegate {
         self.subscription?.updateFavorite(!subscription.favorite)
         updateButtonFavoriteImage()
     }
-    
+
     @objc func saveButtonTapped(_ sender: Any) {
         guard let subscription = self.subscription else { return }
-        
+
         guard let descriptionCell = tableView.cellForRow(at: IndexPath(row: 2, section: 0)) as? ChannelInfoDescriptionCell else { return }
         guard let description = descriptionCell.labelDescription.text else { return }
-        
+
         SubscriptionManager.updateRoomDescription(subscription: subscription, description: description) { response in
             Log.debug(response.msg.debugDescription)
         }
-        
+
         self.saveButton?.isEnabled = false
         hideKeyboard()
     }
@@ -172,7 +172,7 @@ class ChannelInfoViewController: BaseViewController, UITextViewDelegate {
 // MARK: UITableViewDelegate
 
 extension ChannelInfoViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let data = tableViewData[indexPath.section][indexPath.row]
 
@@ -201,11 +201,11 @@ extension ChannelInfoViewController: UITableViewDelegate {
             if let cell = tableView.dequeueReusableCell(withIdentifier: ChannelInfoDescriptionCell.identifier) as? ChannelInfoDescriptionCell {
                 cell.data = data
                 cell.labelDescription.delegate = self
-                
+
                 if saveButton != nil && indexPath == IndexPath(row: 2, section: 0) {
                     cell.labelDescription.isUserInteractionEnabled = true
                 }
-                
+
                 return cell
             }
         }
@@ -283,20 +283,20 @@ extension ChannelInfoViewController: MembersListDelegate {
 // MARK: UITextViewDelegate
 
 extension ChannelInfoViewController {
-    
+
     func textViewDidChange(_ textView: UITextView) {
         let currentDescription = subscription?.roomDescription
         let newDescription = textView.text
-        
+
         if currentDescription == newDescription {
             self.saveButton?.isEnabled = false
         } else {
             self.saveButton?.isEnabled = true
         }
     }
-    
+
     @objc func hideKeyboard() {
         view.endEditing(true)
     }
-    
+
 }
