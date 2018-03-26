@@ -11,6 +11,7 @@ import UIKit
 enum StatusReportType {
     case success
     case error
+    case cancelled
 }
 
 extension UIAlertController {

@@ -17,7 +17,9 @@ protocol APIRequestMiddleware {
 }
 
 protocol APIFetcher {
+    @discardableResult
     func fetch<R>(_ request: R, succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask?
+    @discardableResult
     func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?,
                   succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask?
 }

@@ -83,17 +83,7 @@ extension SENavigationController: SEStoreSubscriber {
             case .compose:
                 super.pushViewController(SEComposeHeaderViewController.fromStoryboard(), animated: true)
             case .report:
-                let (alert, type) = UIAlertController.statusReport(store)
-
-                switch type {
-                case .error:
-                    alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default))
-                    present(alert, animated: true, completion: nil)
-                case .success:
-                    alertSuccess(title: localized("report.success.title")) {
-                        store.dispatch(.finish)
-                    }
-                }
+                statusReport()
             }
         case .finish:
             self.extensionContext?.completeRequest(returningItems: nil, completionHandler: nil)
@@ -102,5 +92,21 @@ extension SENavigationController: SEStoreSubscriber {
         }
 
         store.dispatch(.makeSceneTransition(.none))
+    }
+
+    private func statusReport() {
+        let (alert, type) = UIAlertController.statusReport(store)
+
+        switch type {
+        case .error:
+            alert.addAction(UIAlertAction(title: localized("global.ok"), style: .default))
+            present(alert, animated: true, completion: nil)
+        case .success:
+            alertSuccess(title: localized("report.success.title")) {
+                store.dispatch(.finish)
+            }
+        case .cancelled:
+            break
+        }
     }
 }
