@@ -86,6 +86,7 @@
 		14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */; };
 		14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */; };
 		15A2FD223558011BFDE03883 /* Pods_Rocket_ChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */; };
+		334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */; };
 		339B692B2050449700F97392 /* KeyboardFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B6929205042D300F97392 /* KeyboardFrameView.swift */; };
 		35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */; };
 		35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD300201A57EA00B4BE5A /* Ask.swift */; };
@@ -351,7 +352,6 @@
 		806401351FB09F8A00990572 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401341FB09F8A00990572 /* PermissionManager.swift */; };
 		806465EC1FED19B9001F27DB /* EmojiView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 806465EB1FED19B9001F27DB /* EmojiView.xib */; };
 		806465EE1FED1AFE001F27DB /* EmojiView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806465ED1FED1AFE001F27DB /* EmojiView.swift */; };
-		806465F01FED21DF001F27DB /* EmojiCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 806465EF1FED21DF001F27DB /* EmojiCollectionViewCell.xib */; };
 		806728FD200789F4009FE94D /* PreferencesNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806728FC200789F4009FE94D /* PreferencesNavigationController.swift */; };
 		806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806728FE20079734009FE94D /* DeleteMessageRequest.swift */; };
 		8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */; };
@@ -549,6 +549,7 @@
 		14F8A291202E65C700175FDC /* Blue-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue-76@2x.png"; sourceTree = "<group>"; };
 		14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MentionsTextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		339B6929205042D300F97392 /* KeyboardFrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameView.swift; sourceTree = "<group>"; };
 		35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAttachmentView.swift; sourceTree = "<group>"; };
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -836,7 +837,6 @@
 		806401341FB09F8A00990572 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		806465EB1FED19B9001F27DB /* EmojiView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiView.xib; sourceTree = "<group>"; };
 		806465ED1FED1AFE001F27DB /* EmojiView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiView.swift; sourceTree = "<group>"; };
-		806465EF1FED21DF001F27DB /* EmojiCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EmojiCollectionViewCell.xib; sourceTree = "<group>"; };
 		806728FC200789F4009FE94D /* PreferencesNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreferencesNavigationController.swift; path = Controllers/Settings/PreferencesNavigationController.swift; sourceTree = "<group>"; };
 		806728FE20079734009FE94D /* DeleteMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMessageRequest.swift; sourceTree = "<group>"; };
 		8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMessageRequestSpec.swift; sourceTree = "<group>"; };
@@ -1939,7 +1939,7 @@
 		8020CCF31FEAD8AA003424F4 /* EmojiPicker */ = {
 			isa = PBXGroup;
 			children = (
-				806465EF1FED21DF001F27DB /* EmojiCollectionViewCell.xib */,
+				334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */,
 				8020CCF11FEAB4C3003424F4 /* EmojiPicker.xib */,
 				8020CCEF1FEAB4A7003424F4 /* EmojiPicker.swift */,
 				8020CCF41FEAD8C9003424F4 /* EmojiPickerController.swift */,
@@ -2519,7 +2519,6 @@
 				14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */,
 				14F8A243202E5D0600175FDC /* Red-40@2x.png in Resources */,
 				800FCD511F728EC800D9A692 /* MemberCell.xib in Resources */,
-				806465F01FED21DF001F27DB /* EmojiCollectionViewCell.xib in Resources */,
 				14F8A226202E5CBF00175FDC /* Black-29@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3030,6 +3029,7 @@
 				8013F8721FD6B5B000EE1A4E /* CommandsClient.swift in Sources */,
 				4147CE7D1F5EAAB300C322C3 /* ServerCell.swift in Sources */,
 				8020CCF01FEAB4A7003424F4 /* EmojiPicker.swift in Sources */,
+				334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */,
 				415DC7F61F67F5D30039FB4F /* NetworkManager.swift in Sources */,
 				807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */,
 				41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */,
