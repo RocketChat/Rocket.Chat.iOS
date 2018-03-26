@@ -16,13 +16,13 @@ class EmojiCollectionViewCell: UICollectionViewCell {
     }
 
     var emojiLabel: UILabel = {
-        let lbl = UILabel()
-        lbl.lineBreakMode = .byClipping
-        lbl.textAlignment = .center
-        lbl.baselineAdjustment = .alignCenters
-        lbl.font = UIFont.systemFont(ofSize: 32)
-        lbl.backgroundColor = UIColor.white
-        return lbl
+        let emojiLabel = UILabel()
+        emojiLabel.lineBreakMode = .byClipping
+        emojiLabel.textAlignment = .center
+        emojiLabel.baselineAdjustment = .alignCenters
+        emojiLabel.font = UIFont.systemFont(ofSize: 32)
+        emojiLabel.backgroundColor = UIColor.white
+        return emojiLabel
     }()
 
     var emojiImageView: FLAnimatedImageView = {
