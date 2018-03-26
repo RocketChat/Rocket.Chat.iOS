@@ -16,6 +16,11 @@ import FLEX
 
 final class PreferencesViewController: UITableViewController {
 
+    private let kSectionProfile = 0
+    private let kSectionSettings = 1
+    private let kSectionInformation = 2
+    private let kSectionFlex = 3
+
     private let viewModel = PreferencesViewModel()
 
     @IBOutlet weak var labelProfile: UILabel! {
@@ -123,7 +128,7 @@ final class PreferencesViewController: UITableViewController {
     // MARK: UITableViewDelegate
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.section == 1 {
+        if indexPath.section == kSectionSettings {
             if indexPath.row == 0 {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
@@ -131,11 +136,11 @@ final class PreferencesViewController: UITableViewController {
             } else if indexPath.row == 2 {
                 cellAppIconDidPressed()
             }
-        } else if indexPath.section == 2 {
+        } else if indexPath.section == kSectionInformation {
             if indexPath.row == 0 {
                 cellTermsOfServiceDidPressed()
             }
-        } else if indexPath.section == 2, indexPath.row == 0 {
+        } else if indexPath.section == kSectionFlex, indexPath.row == 0 {
             #if BETA || DEBUG
             FLEXManager.shared().showExplorer()
             #endif
