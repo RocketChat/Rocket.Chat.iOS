@@ -10,7 +10,10 @@ import Foundation
 
 extension UserDefaults {
     static var group: UserDefaults {
-        // swiftlint:disable force_unwrapping
-        return UserDefaults(suiteName: AppGroup.identifier)!
+        guard let defaults = UserDefaults(suiteName: AppGroup.identifier) else {
+            fatalError("Could not initialize UserDefaults with suiteName \(AppGroup.identifier)")
+        }
+
+        return defaults
     }
 }
