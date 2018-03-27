@@ -38,7 +38,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
 
     lazy var nameTextField: UITextField = {
         let textField = UITextField(
-            frame: CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: 40.0)
+            frame: CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: cellModel.textFieldHeight)
         )
         textField.contentVerticalAlignment = .center
         NotificationCenter.default.addObserver(self, selector: #selector(nameDidChange(_:)), name: .UITextFieldTextDidChange, object: textField)
@@ -47,7 +47,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
 
     lazy var descriptionTextField: UITextField = {
         let textField = UITextField(
-            frame: CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: 40.0)
+            frame: CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: cellModel.textFieldHeight)
         )
         textField.contentVerticalAlignment = .center
         NotificationCenter.default.addObserver(self, selector: #selector(descriptionDidChange(_:)), name: .UITextFieldTextDidChange, object: textField)
@@ -84,7 +84,7 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let textFieldFrame = CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: 40.0)
+        let textFieldFrame = CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: cellModel.textFieldHeight)
 
         nameTextField.frame = textFieldFrame
         descriptionTextField.frame = textFieldFrame
@@ -102,7 +102,7 @@ extension SEComposeFileCell: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(
-            frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 44.0)
+            frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: cellModel.textFieldHeight)
         )
 
         switch indexPath.row {
@@ -120,6 +120,6 @@ extension SEComposeFileCell: UITableViewDataSource {
 
 extension SEComposeFileCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 40.0
+        return cellModel.textFieldHeight
     }
 }

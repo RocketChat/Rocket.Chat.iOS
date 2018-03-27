@@ -50,6 +50,10 @@ struct SEComposeFileCellModel: SEComposeCellModel {
     var descriptionPlaceholder: String {
         return localized("compose.file.description.placeholder")
     }
+
+    var textFieldHeight: CGFloat {
+        return 44.0
+    }
 }
 
 // MARK: Empty State
