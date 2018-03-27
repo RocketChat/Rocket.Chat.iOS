@@ -7,8 +7,6 @@
 
 import Foundation
 
-// swiftlint:disable force_try
-
 struct Emojione {
     static let all: [Emoji] = {
         return
@@ -25,13 +23,13 @@ struct Emojione {
     static let values: [String: String] = {
         guard let file = Bundle.main.url(forResource: "emojiNames", withExtension: "json") else { return [:] }
         guard let contents = try? Data(contentsOf: file, options: []) else { return [:] }
-        return try! JSONDecoder().decode([String: String].self, from: contents)
+        return (try? JSONDecoder().decode([String: String].self, from: contents)) ?? [:]
     }()
 
     static func getEmojis(fromFile filename: String) -> [Emoji] {
         guard let file = Bundle.main.url(forResource: filename, withExtension: "json") else { return [] }
         guard let contents = try? Data(contentsOf: file, options: []) else { return [] }
-        return try! JSONDecoder().decode([Emoji].self, from: contents)
+        return (try? JSONDecoder().decode([Emoji].self, from: contents)) ?? []
     }
 
     static let symbols: [Emoji] = {
