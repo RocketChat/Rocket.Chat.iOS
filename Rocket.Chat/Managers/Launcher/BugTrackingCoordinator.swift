@@ -58,16 +58,16 @@ struct BugTrackingCoordinator: LauncherProtocol {
         }
 
         if let serverURL = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverURL] {
-            crashlytics.setValue(serverURL, forKey: ServerPersistKeys.serverURL)
+            crashlytics.setObjectValue(serverURL, forKey: ServerPersistKeys.serverURL)
         }
     }
 
-    static func removeUserFromCrashReports() {
+    static func anonymizeCrashReports() {
         let crashlytics = Crashlytics.sharedInstance()
 
         crashlytics.setUserEmail(nil)
         crashlytics.setUserName(nil)
         crashlytics.setUserIdentifier(nil)
-        crashlytics.setValue(nil, forKey: ServerPersistKeys.serverURL)
+        crashlytics.setObjectValue(nil, forKey: ServerPersistKeys.serverURL)
     }
 }
