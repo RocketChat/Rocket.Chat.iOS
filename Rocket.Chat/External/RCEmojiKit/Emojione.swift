@@ -9,15 +9,18 @@ import Foundation
 
 struct Emojione {
     static let all: [Emoji] = {
-        return
-            Emojione.people +
-            Emojione.nature +
-            Emojione.food +
-            Emojione.activity +
-            Emojione.travel +
-            Emojione.objects +
-            Emojione.symbols +
+        var emojis = [Emoji]()
+        [
+            Emojione.people,
+            Emojione.nature,
+            Emojione.food,
+            Emojione.activity,
+            Emojione.travel,
+            Emojione.objects,
+            Emojione.symbols,
             Emojione.flags
+        ].forEach { emojis.append(contentsOf: $0) }
+        return emojis
     }()
 
     static let values: [String: String] = {
