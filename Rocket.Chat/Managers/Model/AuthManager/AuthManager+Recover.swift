@@ -26,8 +26,9 @@ extension AuthManager {
         guard
             let token = defaults.string(forKey: ServerPersistKeys.token),
             let serverURL = defaults.string(forKey: ServerPersistKeys.serverURL),
-            let userId = defaults.string(forKey: ServerPersistKeys.userId) else {
-                return
+            let userId = defaults.string(forKey: ServerPersistKeys.userId)
+        else {
+            return
         }
 
         let servers = [[
@@ -59,8 +60,8 @@ extension AuthManager {
             let token = server[ServerPersistKeys.token],
             let serverURL = server[ServerPersistKeys.serverURL],
             let userId = server[ServerPersistKeys.userId]
-            else {
-                return
+        else {
+            return
         }
 
         DatabaseManager.changeDatabaseInstance()
