@@ -6,27 +6,27 @@
   Copyright © 2018 Rocket.Chat. All rights reserved.
 */
 
-"global.ok" = "Ok"; //TODO
+"global.ok" = "OK";
 
-"alert.no_servers.title" = "No servers"; //TODO
-"alert.no_servers.message" = "You need to join at least one Rocket.Chat server in order to share something."; //TODO
+"alert.no_servers.title" = "Brak serwerów";
+"alert.no_servers.message" = "Aby móc coś udostępnić musisz dołączyć do conajmniej jednego serwera Rocket.Chat.";
 
-"servers.title" = "Servers"; //TODO
+"servers.title" = "Serwery";
 
-"rooms.title" = "Select Rooms"; //TODO
-"rooms.section.server" = "Select server"; //TODO
-"rooms.section.favorites" = "Favorites"; //TODO
-"rooms.section.channels" = "Channels"; //TODO
-"rooms.section.groups" = "Private Groups"; //TODO
-"rooms.section.directMessages" = "Direct Messages"; //TODO
+"rooms.title" = "Wybierz pokój";
+"rooms.section.server" = "Wybierz serwer";
+"rooms.section.favorites" = "Ulubione";
+"rooms.section.channels" = "Kanały";
+"rooms.section.groups" = "Prywatne grupy";
+"rooms.section.directMessages" = "Wiadomość prywatna";
 
-"compose.title" = "Share"; //TODO
-"compose.send" = "Send"; //TODO
-"compose.destination.to" = "To: "; //TODO
-"compose.file.name.placeholder" = "File name"; //TODO
-"compose.file.description.placeholder" = "File description"; //TODO
+"compose.title" = "Udostępnij";
+"compose.send" = "Wyślij";
+"compose.destination.to" = "Do: ";
+"compose.file.name.placeholder" = "Nazwa pliku";
+"compose.file.description.placeholder" = "Opis pliku";
 
-"report.success.title" = "Success"; //TODO
-"report.success.message" = "Shared your content successfully."; //TODO
-"report.error.title" = "Error"; //TODO
-"report.error.message" = "Something wrong happened while sending your content."; //TODO
+"report.success.title" = "Sukces";
+"report.success.message" = "Wybrany plik został poprawnie udostępniony.";
+"report.error.title" = "Błąd";
+"report.error.message" = "Wystąpił błąd w czasie wysyłania pliku.";
