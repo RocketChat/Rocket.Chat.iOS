@@ -93,6 +93,7 @@ extension AppManager {
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {
+                    if let currentUser = AuthManager.currentUser() { BugTrackingCoordinator.identifyCrashReports(withUser: currentUser) }
                     WindowManager.open(.chat)
                 } else {
                     WindowManager.open(.auth(serverUrl: "", credentials: nil))
