@@ -20,7 +20,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="cFx-mj-yjU">
-                        <rect key="frame" x="20" y="0.0" width="215" height="353"/>
+                        <rect key="frame" x="16" y="0.0" width="223" height="353"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -30,9 +30,9 @@
             </view>
             <constraints>
                 <constraint firstItem="cFx-mj-yjU" firstAttribute="top" secondItem="HhP-66-RBb" secondAttribute="top" id="5zW-Bm-wdw"/>
-                <constraint firstItem="HhP-66-RBb" firstAttribute="trailing" secondItem="cFx-mj-yjU" secondAttribute="trailing" constant="20" id="NEp-fH-QQC"/>
+                <constraint firstItem="HhP-66-RBb" firstAttribute="trailing" secondItem="cFx-mj-yjU" secondAttribute="trailing" constant="16" id="NEp-fH-QQC"/>
                 <constraint firstItem="HhP-66-RBb" firstAttribute="bottom" secondItem="cFx-mj-yjU" secondAttribute="bottom" id="cfi-iR-C0b"/>
-                <constraint firstItem="cFx-mj-yjU" firstAttribute="leading" secondItem="HhP-66-RBb" secondAttribute="leading" constant="20" id="ytF-l5-u6K"/>
+                <constraint firstItem="cFx-mj-yjU" firstAttribute="leading" secondItem="HhP-66-RBb" secondAttribute="leading" constant="16" id="ytF-l5-u6K"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="HhP-66-RBb"/>
             <size key="customSize" width="255" height="353"/>

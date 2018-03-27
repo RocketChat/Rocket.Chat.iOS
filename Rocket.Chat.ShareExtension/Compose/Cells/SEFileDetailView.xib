@@ -26,25 +26,25 @@
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="85MB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85X-Bp-8XX">
-                    <rect key="frame" x="102.5" y="66" width="46" height="21"/>
+                    <rect key="frame" x="106.5" y="66" width="46" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMG_2003.jpeg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGn-Px-B1K">
-                    <rect key="frame" x="102.5" y="8" width="117" height="21"/>
+                    <rect key="frame" x="106.5" y="8" width="117" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1024x1024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woO-Ml-3IL">
-                    <rect key="frame" x="102.5" y="37" width="85" height="21"/>
+                    <rect key="frame" x="106.5" y="37" width="85" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f4u-5V-Nht">
-                    <rect key="frame" x="16" y="8" width="79" height="79"/>
+                    <rect key="frame" x="20" y="8" width="79" height="79"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="f4u-5V-Nht" secondAttribute="height" multiplier="1:1" id="vkX-3p-t4A"/>
                     </constraints>
@@ -58,7 +58,7 @@
                 <constraint firstItem="woO-Ml-3IL" firstAttribute="top" secondItem="qGn-Px-B1K" secondAttribute="bottom" constant="8" id="U9n-r0-7Qo"/>
                 <constraint firstItem="mtW-r3-jQb" firstAttribute="bottom" secondItem="f4u-5V-Nht" secondAttribute="bottom" constant="8" id="V8P-0b-HxT"/>
                 <constraint firstItem="f4u-5V-Nht" firstAttribute="top" secondItem="mtW-r3-jQb" secondAttribute="top" constant="8" id="a7N-Wr-nJy"/>
-                <constraint firstItem="f4u-5V-Nht" firstAttribute="leading" secondItem="mtW-r3-jQb" secondAttribute="leading" constant="16" id="bug-DL-Djx"/>
+                <constraint firstItem="f4u-5V-Nht" firstAttribute="leading" secondItem="mtW-r3-jQb" secondAttribute="leading" constant="20" id="bug-DL-Djx"/>
                 <constraint firstItem="woO-Ml-3IL" firstAttribute="centerY" secondItem="mtW-r3-jQb" secondAttribute="centerY" id="ehl-Fs-Off"/>
                 <constraint firstItem="qGn-Px-B1K" firstAttribute="leading" secondItem="f4u-5V-Nht" secondAttribute="trailing" constant="8" id="hZ3-MA-lCf"/>
                 <constraint firstItem="woO-Ml-3IL" firstAttribute="leading" secondItem="f4u-5V-Nht" secondAttribute="trailing" constant="7.5" id="khN-f5-AdB"/>
