@@ -35,12 +35,10 @@ class EditProfileTableViewControllerSpec: XCTestCase {
         authSettings.isAllowedToEditUsername = false
         authSettings.isAllowedToEditEmail = false
         authSettings.isAllowedToEditName = false
-        authSettings.isAllowedToEditPassword = false
 
         AuthSettingsManager.shared.internalSettings = authSettings
 
         XCTAssertEqual(editProfile.canEditAnyInfo, false, "will show edit state without being able to edit anything.")
-        XCTAssertEqual(editProfile.numberOfSections, 1, "will show change password section without being able to update it.")
     }
 
     func testCanEditAnyInfo() {
@@ -70,7 +68,7 @@ class EditProfileTableViewControllerSpec: XCTestCase {
         XCTAssertEqual(editProfile.numberOfSections, 1, "will show change password section without being able to update it.")
     }
 
-    func testEditingState() {
+    func testUserInteractionWithPermissiveSettings() {
         let authSettings = AuthSettings()
         authSettings.isAllowedToEditProfile = true
         authSettings.isAllowedToEditAvatar = true
@@ -86,6 +84,24 @@ class EditProfileTableViewControllerSpec: XCTestCase {
         XCTAssertEqual(editProfile.name.isEnabled, true, "name field is not enabled even though it is allowed to edit name.")
         XCTAssertEqual(editProfile.username.isEnabled, true, "username field is not enabled even though it is allowed to edit username.")
         XCTAssertEqual(editProfile.email.isEnabled, true, "email field is not enabled even though it is allowed to edit email.")
+    }
+
+    func testUserInteractionWithRestritiveSettings() {
+        let authSettings = AuthSettings()
+        authSettings.isAllowedToEditProfile = false
+        authSettings.isAllowedToEditAvatar = false
+        authSettings.isAllowedToEditName = false
+        authSettings.isAllowedToEditUsername = false
+        authSettings.isAllowedToEditEmail = false
+        authSettings.isAllowedToEditName = false
+
+        AuthSettingsManager.shared.internalSettings = authSettings
+        editProfile.enableUserInteraction()
+
+        XCTAssertEqual(editProfile.avatarButton.isEnabled, false, "avatar button is enabled even though it is not allowed to edit avatar.")
+        XCTAssertEqual(editProfile.name.isEnabled, false, "name field is enabled even though it is not allowed to edit name.")
+        XCTAssertEqual(editProfile.username.isEnabled, false, "username field is enabled even though it is not allowed to edit username.")
+        XCTAssertEqual(editProfile.email.isEnabled, false, "email field is enabled even though it is not allowed to edit email.")
     }
 
 }
