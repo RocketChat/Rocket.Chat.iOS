@@ -13,7 +13,19 @@ import SwiftyJSON
 
 class EditProfileTableViewControllerSpec: XCTestCase {
 
-    let editProfile = EditProfileTableViewController()
+    var editProfile: EditProfileTableViewController!
+
+    override func setUp() {
+        super.setUp()
+
+        let storyboard = Storyboard.preferences.instantiate()
+        editProfile = storyboard.instantiateViewController(
+            withIdentifier: EditProfileTableViewController.identifier
+        ) as? EditProfileTableViewController
+
+        // Force viewDidLoad
+        _ = editProfile.view
+    }
 
     func testCanEditProfileOnly() {
         let authSettings = AuthSettings()
