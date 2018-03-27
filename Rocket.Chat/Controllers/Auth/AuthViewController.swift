@@ -216,6 +216,11 @@ final class AuthViewController: BaseViewController {
                         strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
                 }
+            } else {
+                self?.stopLoading()
+                Alert(
+                    key: "error.socket.default_error"
+                ).present()
             }
         }, errored: { [weak self] _ in
             self?.stopLoading()
@@ -282,6 +287,7 @@ final class AuthViewController: BaseViewController {
         var components = URLComponents()
         components.scheme = "https"
         components.host = self.serverURL.host
+        components.path = self.serverURL.path
 
         if var newURL = components.url {
             newURL = newURL.appendingPathComponent("terms-of-service")
@@ -295,6 +301,7 @@ final class AuthViewController: BaseViewController {
         var components = URLComponents()
         components.scheme = "https"
         components.host = self.serverURL.host
+        components.path = self.serverURL.path
 
         if var newURL = components.url {
             newURL = newURL.appendingPathComponent("privacy-policy")

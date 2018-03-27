@@ -23,4 +23,8 @@ extension APIResult where T == MeRequest {
         user.map(raw, realm: nil)
         return user
     }
+
+    var errorMessage: String? {
+        return raw?["error"].string
+    }
 }

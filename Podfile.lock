@@ -31,6 +31,7 @@ PODS:
   - Instabug/Instabug (7.9.2):
     - Instabug/InstabugCore
   - Instabug/InstabugCore (7.9.2)
+  - MBProgressHUD (1.1.0)
   - MobilePlayer (1.2.0)
   - OAuthSwift (1.2.0)
   - RCMarkdownParser (3.0.4)
@@ -65,6 +66,7 @@ DEPENDENCIES:
   - FLEX (~> 2.0)
   - GoogleSignIn
   - Instabug
+  - MBProgressHUD (~> 1.1.0)
   - MobilePlayer
   - OAuthSwift
   - RCMarkdownParser (from `https://github.com/RocketChat/RCMarkdownParser.git`)
@@ -123,6 +125,7 @@ SPEC CHECKSUMS:
   GTMOAuth2: c77fe325e4acd453837e72d91e3b5f13116857b2
   GTMSessionFetcher: 5bb1eae636127de695590f50e7d248483eb891e6
   Instabug: 03f1498c234f8b22ae2acf10b34140e9030c2b71
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
   RCMarkdownParser: db98166953cad4d0045d28f627d93330b36eb7ff
@@ -140,6 +143,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TagListView: 669f7d4455003c877655875d34829731c4191528
 
-PODFILE CHECKSUM: 5112d9d450d5c93e078036fd2f02dce6a7c79d1b
+PODFILE CHECKSUM: 4f829142dc149f546a55aa9554d3cf79b24cfa32
 
 COCOAPODS: 1.4.0
