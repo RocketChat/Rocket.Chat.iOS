@@ -38,6 +38,8 @@ struct BugTrackingCoordinator: LauncherProtocol {
 
         if let currentUser = AuthManager.currentUser() {
             BugTrackingCoordinator.identifyCrashReports(withUser: currentUser)
+        } else {
+            BugTrackingCoordinator.anonymizeCrashReports()
         }
     }
 
