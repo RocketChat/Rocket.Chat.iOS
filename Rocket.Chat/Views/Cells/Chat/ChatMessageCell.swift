@@ -282,10 +282,10 @@ final class ChatMessageCell: UICollectionViewCell {
             avatarView.avatarURL = URL(string: avatar)
         }
 
+        labelUsername.text = message.user?.displayName() ?? "Unknown"
+
         if message.alias.count > 0 {
             labelUsername.text = message.alias
-        } else {
-            labelUsername.text = message.user?.displayName() ?? "Unknown"
         }
     }
 
