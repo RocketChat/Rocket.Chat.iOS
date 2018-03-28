@@ -1,8 +1,8 @@
 //
-//  Localization.swift
-//  Rocket.Chat.ShareExtension
+//  Localized.swift
+//  Rocket.Chat
 //
-//  Created by Matheus Cardoso on 2/28/18.
+//  Created by Matheus Cardoso on 3/28/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
