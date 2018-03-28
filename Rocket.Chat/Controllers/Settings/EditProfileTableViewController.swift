@@ -13,6 +13,8 @@ import SwiftyJSON
 // swiftlint:disable file_length type_body_length
 class EditProfileTableViewController: UITableViewController, MediaPicker {
 
+    static let identifier = String(describing: EditProfileTableViewController.self)
+
     @IBOutlet weak var name: UITextField! {
         didSet {
             name.placeholder = viewModel.namePlaceholder

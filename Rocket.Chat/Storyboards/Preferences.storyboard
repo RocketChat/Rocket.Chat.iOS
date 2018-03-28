@@ -255,7 +255,7 @@
         <!--Edit Profile-->
         <scene sceneID="rNW-HR-C7F">
             <objects>
-                <tableViewController title="Edit Profile" id="MdX-88-2ZI" customClass="EditProfileTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="EditProfileTableViewController" title="Edit Profile" id="MdX-88-2ZI" customClass="EditProfileTableViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="SMn-di-20j">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

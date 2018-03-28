@@ -32,7 +32,7 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 4'
   pod 'SDWebImage/GIF'
-  pod 'Starscream'
+  pod 'Starscream', '~> 2'
   pod 'ReachabilitySwift'
 
   # Authentication SDKs
