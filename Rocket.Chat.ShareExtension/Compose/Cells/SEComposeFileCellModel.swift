@@ -51,8 +51,27 @@ struct SEComposeFileCellModel: SEComposeCellModel {
         return localized("compose.file.description.placeholder")
     }
 
-    var textFieldHeight: CGFloat {
+    var nameHeight: CGFloat {
         return 44.0
+    }
+
+    var descriptionHeight: CGFloat {
+        return 88.0
+    }
+}
+
+// MARK: TableView Delegate
+
+extension SEComposeFileCellModel {
+    func heightForRow(at indexPath: IndexPath) -> CGFloat {
+        switch indexPath.row {
+        case 0:
+            return nameHeight
+        case 1:
+            return descriptionHeight
+        default:
+            return 0.0
+        }
     }
 }
 

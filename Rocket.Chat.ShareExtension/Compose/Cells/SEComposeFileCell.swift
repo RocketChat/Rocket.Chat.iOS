@@ -29,29 +29,22 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
     }
 
     var fileDetailView: SEFileDetailView?
-    var isEnabled: Bool = true {
-        didSet {
-            nameTextField.isEnabled = isEnabled
-            descriptionTextField.isEnabled = isEnabled
-        }
-    }
 
     lazy var nameTextField: UITextField = {
         let textField = UITextField(
-            frame: CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: cellModel.textFieldHeight)
+            frame: CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: cellModel.nameHeight)
         )
-        textField.contentVerticalAlignment = .center
         NotificationCenter.default.addObserver(self, selector: #selector(nameDidChange(_:)), name: .UITextFieldTextDidChange, object: textField)
         return textField
     }()
 
-    lazy var descriptionTextField: UITextField = {
-        let textField = UITextField(
-            frame: CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: cellModel.textFieldHeight)
+    lazy var descriptionTextView: KMPlaceholderTextView = {
+        let textView = KMPlaceholderTextView(
+            frame: CGRect(x: 16, y: 0, width: tableView.bounds.width - 16, height: cellModel.descriptionHeight)
         )
-        textField.contentVerticalAlignment = .center
-        NotificationCenter.default.addObserver(self, selector: #selector(descriptionDidChange(_:)), name: .UITextFieldTextDidChange, object: textField)
-        return textField
+        textView.font = nameTextField.font
+        NotificationCenter.default.addObserver(self, selector: #selector(descriptionDidChange(_:)), name: .UITextViewTextDidChange, object: textView)
+        return textView
     }()
 
     deinit {
@@ -66,8 +59,8 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
             fileDetailView?.fileSizeLabel.text = cellModel.fileSizeText
             nameTextField.text = cellModel.nameText
             nameTextField.placeholder = cellModel.namePlaceholder
-            descriptionTextField.text = cellModel.descriptionText
-            descriptionTextField.placeholder = cellModel.descriptionPlaceholder
+            descriptionTextView.text = cellModel.descriptionText
+            descriptionTextView.placeholder = cellModel.descriptionPlaceholder
         }
     }
 
@@ -77,17 +70,15 @@ class SEComposeFileCell: UICollectionViewCell, SECell {
     }
 
     @objc func descriptionDidChange(_ textField: UITextField) {
-        cellModel.file.description = descriptionTextField.text ?? ""
+        cellModel.file.description = descriptionTextView.text ?? ""
         store.dispatch(.setContentValue(SEContent(type: .file(cellModel.file)), index: cellModel.contentIndex))
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
 
-        let textFieldFrame = CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: cellModel.textFieldHeight)
-
-        nameTextField.frame = textFieldFrame
-        descriptionTextField.frame = textFieldFrame
+        nameTextField.frame = CGRect(x: 20, y: 0, width: tableView.bounds.width - 16, height: cellModel.nameHeight)
+        descriptionTextView.frame = CGRect(x: 16, y: 0, width: tableView.bounds.width - 16, height: cellModel.descriptionHeight)
     }
 }
 
@@ -102,14 +93,14 @@ extension SEComposeFileCell: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(
-            frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: cellModel.textFieldHeight)
+            frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: cellModel.heightForRow(at: indexPath))
         )
 
         switch indexPath.row {
         case 0:
             cell.addSubview(nameTextField)
         case 1:
-            cell.addSubview(descriptionTextField)
+            cell.addSubview(descriptionTextView)
         default:
             break
         }
@@ -120,6 +111,6 @@ extension SEComposeFileCell: UITableViewDataSource {
 
 extension SEComposeFileCell: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellModel.textFieldHeight
+        return cellModel.heightForRow(at: indexPath)
     }
 }

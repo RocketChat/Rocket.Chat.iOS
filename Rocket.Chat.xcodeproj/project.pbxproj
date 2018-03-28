@@ -379,6 +379,7 @@
 		806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806728FE20079734009FE94D /* DeleteMessageRequest.swift */; };
 		8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */; };
 		8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D26D1FFF876D00C75926 /* Emoji.swift */; };
+		806C2AD0206BBB0700EE5F67 /* KMPlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C2ACF206BBB0700EE5F67 /* KMPlaceholderTextView.swift */; };
 		806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */; };
 		806C59A51FBB2F4C00C32D0A /* PostMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */; };
 		806DB94320687697004ED8ED /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CFF1FDB1FA200F5ECF9 /* Alert.swift */; };
@@ -1001,6 +1002,7 @@
 		806728FE20079734009FE94D /* DeleteMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMessageRequest.swift; sourceTree = "<group>"; };
 		8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMessageRequestSpec.swift; sourceTree = "<group>"; };
 		8069D26D1FFF876D00C75926 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
+		806C2ACF206BBB0700EE5F67 /* KMPlaceholderTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KMPlaceholderTextView.swift; sourceTree = "<group>"; };
 		806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMessageRequest.swift; sourceTree = "<group>"; };
 		806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMessageRequestSpec.swift; sourceTree = "<group>"; };
 		807371991F94E83600D53ADF /* SocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = SocketError.swift; path = Managers/Socket/Response/SocketError.swift; sourceTree = "<group>"; };
@@ -2265,6 +2267,14 @@
 			path = VoiceOver;
 			sourceTree = "<group>";
 		};
+		806C2ACE206BBAF200EE5F67 /* External */ = {
+			isa = PBXGroup;
+			children = (
+				806C2ACF206BBB0700EE5F67 /* KMPlaceholderTextView.swift */,
+			);
+			path = External;
+			sourceTree = "<group>";
+		};
 		806C59A01FBB0BA700C32D0A /* Message */ = {
 			isa = PBXGroup;
 			children = (
@@ -2375,6 +2385,7 @@
 		807FB5592046E7DD00E21429 /* Rocket.Chat.ShareExtension */ = {
 			isa = PBXGroup;
 			children = (
+				806C2ACE206BBAF200EE5F67 /* External */,
 				80977AC0204F374100C41435 /* State */,
 				8076FDEB2049A5CB00114F28 /* Base */,
 				807FB5802048378500E21429 /* Servers */,
@@ -3862,6 +3873,7 @@
 				80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */,
 				8076FDE82048D3AD00114F28 /* UserDefaults+Group.swift in Sources */,
 				80977AB0204EE21F00C41435 /* HTTPMethod.swift in Sources */,
+				806C2AD0206BBB0700EE5F67 /* KMPlaceholderTextView.swift in Sources */,
 				80977AB1204EE21F00C41435 /* VersionMiddleware.swift in Sources */,
 				807FB582204837AF00E21429 /* SEServersViewModel.swift in Sources */,
 				8076FDED2049A5F600114F28 /* SECellModel.swift in Sources */,
