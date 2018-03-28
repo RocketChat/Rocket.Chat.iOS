@@ -96,6 +96,7 @@ extension AppManager {
                     if let currentUser = AuthManager.currentUser() {
                         BugTrackingCoordinator.identifyCrashReports(withUser: currentUser)
                     }
+
                     WindowManager.open(.chat)
                 } else {
                     WindowManager.open(.auth(serverUrl: "", credentials: nil))
