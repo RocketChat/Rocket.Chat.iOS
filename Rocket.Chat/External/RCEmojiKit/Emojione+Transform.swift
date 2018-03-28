@@ -12,7 +12,7 @@ extension Emojione {
     static func transform(string: String) -> String {
         var _string = string as NSString
 
-        let regex = try? NSRegularExpression(pattern: ":(\\w+|-|\\+)*:", options: [])
+        let regex = try? NSRegularExpression(pattern: Emojione.regex, options: [])
         let ranges = regex?.matches(
             in: string,
             options: [],
