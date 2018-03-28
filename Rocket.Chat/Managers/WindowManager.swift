@@ -11,6 +11,7 @@ import UIKit
 enum Storyboard {
     case auth(serverUrl: String, credentials: DeepLinkCredentials?)
     case chat
+    case preferences
 
     var name: String {
         switch self {
@@ -18,7 +19,13 @@ enum Storyboard {
             return "Auth"
         case .chat:
             return "Chat"
+        case .preferences:
+            return "Preferences"
         }
+    }
+
+    func instantiate() -> UIStoryboard {
+        return UIStoryboard(name: name, bundle: Bundle.main)
     }
 
     func initialViewController() -> UIViewController? {

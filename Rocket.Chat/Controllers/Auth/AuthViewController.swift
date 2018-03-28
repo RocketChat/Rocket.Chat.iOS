@@ -205,8 +205,9 @@ final class AuthViewController: BaseViewController {
             SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
 
             if let user = result.user {
-                if user.username != nil {
+                BugTrackingCoordinator.identifyCrashReports(withUser: user)
 
+                if user.username != nil {
                     DispatchQueue.main.async {
                         strongSelf.dismiss(animated: true, completion: nil)
                         AppManager.reloadApp()
