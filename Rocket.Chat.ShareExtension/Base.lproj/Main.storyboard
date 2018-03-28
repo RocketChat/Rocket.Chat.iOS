@@ -27,7 +27,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="1Xd-am-t49" firstAttribute="trailing" secondItem="hkN-Zg-RNW" secondAttribute="trailing" id="5ge-dm-kYu"/>
-                            <constraint firstItem="1Xd-am-t49" firstAttribute="bottom" secondItem="hkN-Zg-RNW" secondAttribute="bottom" id="6ox-c7-2WC"/>
+                            <constraint firstAttribute="bottom" secondItem="hkN-Zg-RNW" secondAttribute="bottom" id="6ox-c7-2WC"/>
                             <constraint firstItem="hkN-Zg-RNW" firstAttribute="leading" secondItem="1Xd-am-t49" secondAttribute="leading" id="Uwa-H3-3tf"/>
                             <constraint firstItem="hkN-Zg-RNW" firstAttribute="top" secondItem="1Xd-am-t49" secondAttribute="top" id="txP-7r-Dxa"/>
                         </constraints>
@@ -101,7 +101,7 @@
                             <constraint firstItem="Ar7-Zt-AtF" firstAttribute="top" secondItem="D2C-2c-gGX" secondAttribute="top" id="HPq-TE-QEQ"/>
                             <constraint firstItem="bnm-t3-viZ" firstAttribute="leading" secondItem="D2C-2c-gGX" secondAttribute="leading" id="YH3-wc-ozS"/>
                             <constraint firstItem="D2C-2c-gGX" firstAttribute="trailing" secondItem="Ar7-Zt-AtF" secondAttribute="trailing" id="naY-rs-TSu"/>
-                            <constraint firstItem="D2C-2c-gGX" firstAttribute="bottom" secondItem="bnm-t3-viZ" secondAttribute="bottom" id="y7k-Qk-Lmu"/>
+                            <constraint firstAttribute="bottom" secondItem="bnm-t3-viZ" secondAttribute="bottom" id="y7k-Qk-Lmu"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="D2C-2c-gGX"/>
                     </view>
@@ -142,7 +142,7 @@
                             <constraint firstItem="CgR-Bd-oKd" firstAttribute="trailing" secondItem="N4q-ru-lmk" secondAttribute="trailing" id="46j-uA-Ld2"/>
                             <constraint firstItem="N4q-ru-lmk" firstAttribute="leading" secondItem="CgR-Bd-oKd" secondAttribute="leading" id="NN3-bD-bbt"/>
                             <constraint firstItem="N4q-ru-lmk" firstAttribute="top" secondItem="CgR-Bd-oKd" secondAttribute="top" id="dNc-yh-EQ5"/>
-                            <constraint firstItem="CgR-Bd-oKd" firstAttribute="bottom" secondItem="N4q-ru-lmk" secondAttribute="bottom" id="yuf-h0-0ZJ"/>
+                            <constraint firstAttribute="bottom" secondItem="N4q-ru-lmk" secondAttribute="bottom" id="yuf-h0-0ZJ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CgR-Bd-oKd"/>
                     </view>
@@ -204,7 +204,7 @@
                             <constraint firstItem="UOA-Tx-FnO" firstAttribute="top" secondItem="sb6-1B-tee" secondAttribute="top" id="5yg-mN-wuB"/>
                             <constraint firstItem="sb6-1B-tee" firstAttribute="trailing" secondItem="UOA-Tx-FnO" secondAttribute="trailing" id="9Vc-Zq-4J7"/>
                             <constraint firstItem="UOA-Tx-FnO" firstAttribute="leading" secondItem="sb6-1B-tee" secondAttribute="leading" id="fiy-t0-DRs"/>
-                            <constraint firstItem="sb6-1B-tee" firstAttribute="bottom" secondItem="0oG-JG-0vh" secondAttribute="bottom" id="pUT-Sw-FgT"/>
+                            <constraint firstAttribute="bottom" secondItem="0oG-JG-0vh" secondAttribute="bottom" id="pUT-Sw-FgT"/>
                             <constraint firstItem="0oG-JG-0vh" firstAttribute="centerX" secondItem="sb6-1B-tee" secondAttribute="centerX" id="zbd-1s-6Yd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="sb6-1B-tee"/>

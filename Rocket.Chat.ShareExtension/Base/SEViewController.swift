@@ -100,7 +100,8 @@ class SEViewController: UIViewController, SEStoreSubscriber {
         let animationCurve = UIViewAnimationOptions(rawValue: animationCurveRaw)
 
         UIView.animate(withDuration: animationDuration, delay: 0, options: animationCurve, animations: {
-            self.additionalSafeAreaInsets.bottom = intersection.height
+            let keyboardDisappeared = keyboardFrameInView == .zero
+            self.additionalSafeAreaInsets.bottom = keyboardDisappeared ? 0.0 : intersection.height
             self.view.layoutIfNeeded()
         }, completion: nil)
     }

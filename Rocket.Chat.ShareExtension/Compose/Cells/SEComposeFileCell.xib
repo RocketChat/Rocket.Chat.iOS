@@ -27,7 +27,7 @@
             </view>
             <constraints>
                 <constraint firstItem="CK5-tC-MFO" firstAttribute="top" secondItem="dZK-cP-DMA" secondAttribute="top" id="DnD-0I-83v"/>
-                <constraint firstItem="dZK-cP-DMA" firstAttribute="bottom" secondItem="CK5-tC-MFO" secondAttribute="bottom" id="KMa-6j-i0S"/>
+                <constraint firstAttribute="bottom" secondItem="CK5-tC-MFO" secondAttribute="bottom" id="Fao-u8-mMM"/>
                 <constraint firstItem="dZK-cP-DMA" firstAttribute="trailing" secondItem="CK5-tC-MFO" secondAttribute="trailing" id="V8g-qx-tlG"/>
                 <constraint firstItem="CK5-tC-MFO" firstAttribute="leading" secondItem="dZK-cP-DMA" secondAttribute="leading" id="h3r-Be-fCj"/>
             </constraints>
