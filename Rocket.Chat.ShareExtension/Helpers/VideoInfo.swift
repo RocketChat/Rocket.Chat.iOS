@@ -19,7 +19,7 @@ struct VideoInfo {
         let hours: Int = minutes/60
         let seconds: Int = duration%60
 
-        return " ▶ " + ((hours < 10) ? "0" : "") + "\(hours):" + ((minutes < 10) ? "0" : "") + "\(minutes):" + ((seconds < 10) ? "0" : "") + "\(seconds) "
+        return String(format: " ▶ %02d:%02d:%02d", hours, minutes, seconds) //" ▶ " + ((hours < 10) ? "0" : "") + "\(hours):" + ((minutes < 10) ? "0" : "") + "\(minutes):" + ((seconds < 10) ? "0" : "") + "\(seconds) "
     }
 
     init?(videoURL: URL) {
