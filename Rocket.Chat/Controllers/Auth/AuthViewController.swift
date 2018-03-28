@@ -157,6 +157,15 @@ final class AuthViewController: BaseViewController {
     // MARK: Authentication methods
     fileprivate func updateAuthenticationMethods() {
         guard let settings = self.serverPublicSettings else { return }
+
+        if !(settings.emailOrUsernameFieldPlaceholder?.isEmpty ?? true) {
+            self.textFieldUsername.placeholder = settings.emailOrUsernameFieldPlaceholder
+        }
+
+        if !(settings.passwordFieldPlaceholder?.isEmpty ?? true) {
+            self.textFieldPassword.placeholder = settings.passwordFieldPlaceholder
+        }
+
         self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
 
         if settings.isFacebookAuthenticationEnabled {
