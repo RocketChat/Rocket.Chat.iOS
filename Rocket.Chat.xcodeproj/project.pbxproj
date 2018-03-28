@@ -488,6 +488,7 @@
 		80D955C2202154A300E3F281 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D955C1202154A300E3F281 /* CASViewController.swift */; };
 		80DC9A6C206BA95600032BE0 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DC9A6B206BA95600032BE0 /* Localized.swift */; };
 		80DC9A6E206BA96200032BE0 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DC9A6B206BA95600032BE0 /* Localized.swift */; };
+		80DC9A70206BAC8B00032BE0 /* mimetype.json in Resources */ = {isa = PBXBuildFile; fileRef = 80DC9A6F206BAC8B00032BE0 /* mimetype.json */; };
 		80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F281FD8B2B800B70B59 /* UserExtensions.swift */; };
 		80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */; };
 		80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */; };
@@ -1079,6 +1080,7 @@
 		80D5637620593533008896D6 /* ParseItemProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseItemProviders.swift; sourceTree = "<group>"; };
 		80D955C1202154A300E3F281 /* CASViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CASViewController.swift; path = Controllers/Auth/CASViewController.swift; sourceTree = "<group>"; };
 		80DC9A6B206BA95600032BE0 /* Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
+		80DC9A6F206BAC8B00032BE0 /* mimetype.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mimetype.json; sourceTree = "<group>"; };
 		80E99F281FD8B2B800B70B59 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
 		80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
 		80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensionsSpec.swift; sourceTree = "<group>"; };
@@ -2469,6 +2471,7 @@
 			isa = PBXGroup;
 			children = (
 				80D563742059325A008896D6 /* MimeType.swift */,
+				80DC9A6F206BAC8B00032BE0 /* mimetype.json */,
 				8029B2F12059B6F60067157B /* VideoInfo.swift */,
 			);
 			path = Helpers;
@@ -3010,6 +3013,7 @@
 				80D0CE6820503C970056B17F /* SERoomCell.xib in Resources */,
 				807FB55E2046E7DD00E21429 /* Main.storyboard in Resources */,
 				807FB56F20472B6A00E21429 /* Localizable.strings in Resources */,
+				80DC9A70206BAC8B00032BE0 /* mimetype.json in Resources */,
 				80D0CE7120509C230056B17F /* SEAvatarView.xib in Resources */,
 				80FA90742056C1350069038F /* SEComposeTextCell.xib in Resources */,
 				80D5637220592D32008896D6 /* Assets.xcassets in Resources */,
