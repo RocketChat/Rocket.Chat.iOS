@@ -365,6 +365,8 @@
 		806728FD200789F4009FE94D /* PreferencesNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806728FC200789F4009FE94D /* PreferencesNavigationController.swift */; };
 		806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806728FE20079734009FE94D /* DeleteMessageRequest.swift */; };
 		8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */; };
+		8067DA9F206BF7CD005E3369 /* SpotlightRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067DA9E206BF7CD005E3369 /* SpotlightRequest.swift */; };
+		8067DAA1206BF9E3005E3369 /* SpotlightClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067DAA0206BF9E3005E3369 /* SpotlightClient.swift */; };
 		8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D26D1FFF876D00C75926 /* Emoji.swift */; };
 		806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */; };
 		806C59A51FBB2F4C00C32D0A /* PostMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */; };
@@ -861,6 +863,8 @@
 		806728FC200789F4009FE94D /* PreferencesNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = PreferencesNavigationController.swift; path = Controllers/Settings/PreferencesNavigationController.swift; sourceTree = "<group>"; };
 		806728FE20079734009FE94D /* DeleteMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMessageRequest.swift; sourceTree = "<group>"; };
 		8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMessageRequestSpec.swift; sourceTree = "<group>"; };
+		8067DA9E206BF7CD005E3369 /* SpotlightRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightRequest.swift; sourceTree = "<group>"; };
+		8067DAA0206BF9E3005E3369 /* SpotlightClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightClient.swift; sourceTree = "<group>"; };
 		8069D26D1FFF876D00C75926 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMessageRequest.swift; sourceTree = "<group>"; };
 		806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMessageRequestSpec.swift; sourceTree = "<group>"; };
@@ -1895,6 +1899,7 @@
 			children = (
 				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
 				80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */,
+				8067DA9E206BF7CD005E3369 /* SpotlightRequest.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -1929,6 +1934,7 @@
 				8013F86F1FD6B5B000EE1A4E /* InfoClient.swift */,
 				80054CFD1FDAFF5200F5ECF9 /* PushClient.swift */,
 				809B530A1FE2B1AB00833DD2 /* UploadClient.swift */,
+				8067DAA0206BF9E3005E3369 /* SpotlightClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -2959,6 +2965,7 @@
 				0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */,
 				597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */,
 				D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */,
+				8067DA9F206BF7CD005E3369 /* SpotlightRequest.swift in Sources */,
 				D10E9C221F643616007F1796 /* MentionModelMapping.swift in Sources */,
 				419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */,
 				4162E1551D654A7400AAAE49 /* SocketHandlers.swift in Sources */,
@@ -2967,6 +2974,7 @@
 				419ECCA61F3CA58A005F224B /* ChatControllerDocuments.swift in Sources */,
 				14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */,
 				D10E9C201F6434A7007F1796 /* NSRangeExtensions.swift in Sources */,
+				8067DAA1206BF9E3005E3369 /* SpotlightClient.swift in Sources */,
 				807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */,
 				7798B4191F852D670074B2F4 /* CustomField.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
