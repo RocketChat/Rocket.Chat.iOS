@@ -42,19 +42,6 @@ extension ChatViewController {
             self.react(message: message, view: view)
         })
 
-        let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
-        let pin = UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
-            if message.pinned {
-                MessageManager.unpin(message, completion: { (_) in
-                    // Do nothing
-                })
-            } else {
-                MessageManager.pin(message, completion: { (_) in
-                    // Do nothing
-                })
-            }
-        })
-
         let report = UIAlertAction(title: localized("chat.message.actions.report"), style: .default, handler: { (_) in
             self.report(message: message)
         })
@@ -71,7 +58,24 @@ extension ChatViewController {
             self?.reply(to: message, onlyQuote: true)
         })
 
-        var actions = [react, pin, report, copy, reply, quote]
+        var actions = [react, reply, quote, copy, report]
+
+        if AuthSettingsManager.settings?.messageAllowPinning ?? true {
+            let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
+            let pin = UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
+                if message.pinned {
+                    MessageManager.unpin(message, completion: { (_) in
+                        // Do nothing
+                    })
+                } else {
+                    MessageManager.pin(message, completion: { (_) in
+                        // Do nothing
+                    })
+                }
+            })
+
+            actions.append(pin)
+        }
 
         if AuthManager.isAuthenticated()?.canBlockMessage(message) == .allowed {
             let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
