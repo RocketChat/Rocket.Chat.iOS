@@ -29,7 +29,7 @@ class ReactMessageRequestSpec: APITestCase {
         XCTAssertEqual(request.httpMethod, "POST", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
         XCTAssertEqual(bodyJson["messageId"].string, "msgId", "messageId is correct")
-        XCTAssertEqual(bodyJson["emoji"].string, "msgId", ":party_parrot:")
+        XCTAssertEqual(bodyJson["emoji"].string, "party_parrot", "emoji is correct")
     }
 
     func testResult() {
