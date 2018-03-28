@@ -64,6 +64,30 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     let api = API.current()
     var avatarFile: FileUpload?
 
+    var authSettings: AuthSettings? {
+        return AuthSettingsManager.shared.settings
+    }
+
+    var numberOfSections: Int {
+        guard !isLoading else { return 0 }
+        guard let authSettings = authSettings else { return 1 }
+        return !authSettings.isAllowedToEditProfile || !authSettings.isAllowedToEditPassword ? 1 : 2
+    }
+
+    var canEditAnyInfo: Bool {
+        guard
+            authSettings?.isAllowedToEditProfile ?? false,
+            authSettings?.isAllowedToEditAvatar ?? false ||
+            authSettings?.isAllowedToEditName ?? false ||
+            authSettings?.isAllowedToEditUsername ?? false ||
+            authSettings?.isAllowedToEditEmail ?? false
+        else {
+            return false
+        }
+
+        return true
+    }
+
     var isUpdatingUser = false
     var isUploadingAvatar = false
     var isLoading = true
@@ -139,7 +163,10 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                 self?.user = result.user
                 self?.isLoading = false
                 DispatchQueue.main.async {
-                    self?.navigationItem.rightBarButtonItem = self?.editButton
+                    if self?.canEditAnyInfo ?? false {
+                        self?.navigationItem.rightBarButtonItem = self?.editButton
+                    }
+
                     self?.tableView.reloadData()
                 }
             }
@@ -167,7 +194,11 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = cancelButton
-        avatarButton.setImage(editingAvatarImage, for: .normal)
+
+        if authSettings?.isAllowedToEditAvatar ?? false {
+            avatarButton.setImage(editingAvatarImage, for: .normal)
+        }
+
         enableUserInteraction()
     }
 
@@ -178,24 +209,56 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = editButton
-        avatarButton.setImage(nil, for: .normal)
+
+        if authSettings?.isAllowedToEditAvatar ?? false {
+            avatarButton.setImage(nil, for: .normal)
+        }
+
         disableUserInteraction()
     }
 
     func enableUserInteraction() {
-        avatarButton.isEnabled = true
-        name.isEnabled = true
-        username.isEnabled = true
-        email.isEnabled = true
-        name.becomeFirstResponder()
+        avatarButton.isEnabled = authSettings?.isAllowedToEditAvatar ?? false
+
+        if authSettings?.isAllowedToEditName ?? false {
+            name.isEnabled = true
+        } else {
+            name.isEnabled = false
+            name.textColor = .lightGray
+        }
+
+        if authSettings?.isAllowedToEditUsername ?? false {
+            username.isEnabled = true
+        } else {
+            username.isEnabled = false
+            username.textColor = .lightGray
+        }
+
+        if authSettings?.isAllowedToEditEmail ?? false {
+            email.isEnabled = true
+        } else {
+            email.isEnabled = false
+            email.textColor = .lightGray
+        }
+
+        if authSettings?.isAllowedToEditName ?? false {
+            name.becomeFirstResponder()
+        } else if authSettings?.isAllowedToEditUsername ?? false {
+            username.becomeFirstResponder()
+        } else if authSettings?.isAllowedToEditEmail ?? false {
+            email.becomeFirstResponder()
+        }
     }
 
     func disableUserInteraction() {
         hideKeyboard()
         avatarButton.isEnabled = false
         name.isEnabled = false
+        name.textColor = .black
         username.isEnabled = false
+        username.textColor = .black
         email.isEnabled = false
+        email.textColor = .black
     }
 
     // MARK: Actions
@@ -375,7 +438,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     // MARK: UITableViewDataSource
 
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return isLoading ? 0 : 2
+        return numberOfSections
     }
 
     // MARK: UITableViewDelegate
