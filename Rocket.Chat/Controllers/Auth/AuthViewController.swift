@@ -96,7 +96,7 @@ final class AuthViewController: BaseViewController {
         hideViewFields = !(AuthSettingsManager.settings?.isUsernameEmailAuthenticationEnabled ?? true)
         buttonResetPassword.isHidden = !(AuthSettingsManager.settings?.isPasswordResetEnabled ?? true)
 
-        updateFieldsPlaceholder()
+        updateFieldsPlaceholders()
         updateAuthenticationMethods()
     }
 
@@ -157,7 +157,7 @@ final class AuthViewController: BaseViewController {
 
     // MARK: Authentication methods
 
-    fileprivate func updateFieldsPlaceholder() {
+    fileprivate func updateFieldsPlaceholders() {
         guard let settings = self.serverPublicSettings else { return }
 
         if !(settings.emailOrUsernameFieldPlaceholder?.isEmpty ?? true) {
