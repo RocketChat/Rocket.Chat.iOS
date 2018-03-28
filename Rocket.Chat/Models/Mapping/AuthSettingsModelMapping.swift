@@ -11,6 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 extension AuthSettings: ModelMappeable {
+    //swiftlint:disable function_body_length
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
             self.identifier = String.random()

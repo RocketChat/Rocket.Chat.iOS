@@ -211,6 +211,7 @@ final class ChatMessageCell: UICollectionViewCell {
         return addedHeight
     }
 
+    //swiftlint:disable cyclomatic_complexity
     func insertAttachments() {
         var mediaViewHeight = insertURLs()
 
