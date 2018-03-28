@@ -92,7 +92,8 @@ extension SEComposeViewController: UICollectionViewDataSource {
             fileCell.cellModel = cellModel
             cell = fileCell
         } else {
-            fatalError("Could not dequeue cell for model class '\(type(of: cellModel))'")
+            // should not happen
+            return collectionView.dequeue(SEComposeFileCell.self, forIndexPath: indexPath)
         }
 
         return cell
