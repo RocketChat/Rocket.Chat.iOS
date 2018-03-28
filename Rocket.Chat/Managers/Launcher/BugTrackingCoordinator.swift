@@ -35,5 +35,41 @@ struct BugTrackingCoordinator: LauncherProtocol {
 
     private func launchFabric() {
         Fabric.with([Crashlytics.self])
+
+        if let currentUser = AuthManager.currentUser() {
+            BugTrackingCoordinator.identifyCrashReports(withUser: currentUser)
+        } else {
+            BugTrackingCoordinator.anonymizeCrashReports()
+        }
+    }
+
+    static func identifyCrashReports(withUser user: User) {
+        guard let id = user.identifier else {
+            return
+        }
+
+        let crashlytics = Crashlytics.sharedInstance()
+        crashlytics.setUserIdentifier(id)
+
+        if let name = user.name {
+            crashlytics.setUserName(name)
+        }
+
+        if let email = user.emails.first?.email {
+            crashlytics.setUserEmail(email)
+        }
+
+        if let serverURL = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverURL] {
+            crashlytics.setObjectValue(serverURL, forKey: ServerPersistKeys.serverURL)
+        }
+    }
+
+    static func anonymizeCrashReports() {
+        let crashlytics = Crashlytics.sharedInstance()
+
+        crashlytics.setUserEmail(nil)
+        crashlytics.setUserName(nil)
+        crashlytics.setUserIdentifier(nil)
+        crashlytics.setObjectValue(nil, forKey: ServerPersistKeys.serverURL)
     }
 }
