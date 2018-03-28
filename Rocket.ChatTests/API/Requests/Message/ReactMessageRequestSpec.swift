@@ -13,7 +13,7 @@ import SwiftyJSON
 
 class ReactMessageRequestSpec: APITestCase {
     func testRequest() {
-        let _request = ReactMessageRequest(msgId: "msgId", emoji: ":party_parrot:")
+        let _request = ReactMessageRequest(msgId: "msgId", emoji: "party_parrot")
 
         guard let request = _request.request(for: api) else {
             return XCTFail("request is not nil")
@@ -44,4 +44,3 @@ class ReactMessageRequestSpec: APITestCase {
         XCTAssertNil(nilResult.success, "success is nil if raw is nil")
     }
 }
-

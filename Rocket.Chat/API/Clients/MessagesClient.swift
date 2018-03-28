@@ -125,4 +125,21 @@ struct MessagesClient: APIClient {
 
         return true
     }
+
+    @discardableResult
+    func reactMessage(_ message: Message, emoji: String, realm: Realm? = Realm.shared) -> Bool {
+        guard let id = message.identifier else { return false }
+
+        api.fetch(ReactMessageRequest(msgId: id, emoji: emoji), succeeded: nil, errored: { error in
+            switch error {
+            case .version:
+                // version fallback
+                MessageManager.react(message, emoji: emoji, completion: { _ in })
+            default:
+                Alert.defaultError.present()
+            }
+        })
+
+        return true
+    }
 }

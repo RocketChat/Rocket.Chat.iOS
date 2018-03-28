@@ -72,7 +72,8 @@ final class ChatMessageCell: UICollectionViewCell {
     @IBOutlet weak var reactionsListView: ReactionListView! {
         didSet {
             reactionsListView.reactionTapRecognized = { view, sender in
-                MessageManager.react(self.message, emoji: view.model.emoji, completion: { _ in })
+                let client = API.current()?.client(MessagesClient.self)
+                client?.reactMessage(self.message, emoji: view.model.emoji)
 
                 if self.isAddingReaction(emoji: view.model.emoji) {
                     UserReviewManager.shared.requestReview()
@@ -90,7 +91,7 @@ final class ChatMessageCell: UICollectionViewCell {
             return false
         }
 
-        if message.reactions.first(where: { $0.emoji == tappedEmoji && $0.usernames.contains(currentUser) }) != nil {
+        if Array(message.reactions).first(where: { $0.emoji == tappedEmoji && Array($0.usernames).contains(currentUser) }) != nil {
             return false
         }
 

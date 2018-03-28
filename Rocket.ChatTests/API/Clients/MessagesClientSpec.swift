@@ -95,4 +95,23 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         })
         wait(for: [expectation], timeout: 0.6)
     }
+
+    func testReactMessage() {
+        let api = MockAPI()
+        let realm = testRealm()
+        let client = MessagesClient(api: api)
+
+        let message = Message.testInstance()
+        message.identifier = "message-identifier"
+
+        try? realm.write {
+            realm.add(message)
+        }
+
+        let user = User.testInstance()
+
+        let result = client.reactMessage(message, emoji: "party_parrot", user: user, realm: realm)
+
+        XCTAssert(result)
+    }
 }
