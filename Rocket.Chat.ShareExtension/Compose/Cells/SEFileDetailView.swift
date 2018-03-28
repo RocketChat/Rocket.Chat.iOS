@@ -9,11 +9,7 @@
 import UIKit
 
 class SEFileDetailView: UIView, SEXibInitializable {
-    @IBOutlet weak var contentView: UIView! {
-        didSet {
-           contentView.backgroundColor = #colorLiteral(red: 0.9370916486, green: 0.9369438291, blue: 0.9575446248, alpha: 1)
-        }
-    }
+    @IBOutlet weak var contentView: UIView!
 
     @IBOutlet weak var previewImageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!

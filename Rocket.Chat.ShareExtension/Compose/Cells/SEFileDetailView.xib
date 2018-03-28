@@ -50,7 +50,7 @@
                     </constraints>
                 </imageView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="85X-Bp-8XX" firstAttribute="top" secondItem="woO-Ml-3IL" secondAttribute="bottom" constant="8" id="5Aa-Ig-XcZ"/>
                 <constraint firstItem="f4u-5V-Nht" firstAttribute="width" secondItem="f4u-5V-Nht" secondAttribute="height" multiplier="1:1" id="FdH-cJ-2JV"/>
