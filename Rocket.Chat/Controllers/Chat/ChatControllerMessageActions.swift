@@ -69,7 +69,7 @@ extension ChatViewController {
 
         var actions = [react, reply, quote, copy, report]
 
-        if AuthManager.isAuthenticated()?.canPinMessage(message) == .allowed {
+        if auth.canPinMessage(message) == .allowed {
             let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
             let pin = UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
                 if message.pinned {

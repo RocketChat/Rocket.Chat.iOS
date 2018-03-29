@@ -176,7 +176,7 @@ extension Auth {
     func canPinMessage(_ message: Message) -> CanPinMessageResult {
         guard
             let user = user,
-            let settings = settings
+            let settings = AuthSettingsManager.settings
         else {
             return .unknown
         }
