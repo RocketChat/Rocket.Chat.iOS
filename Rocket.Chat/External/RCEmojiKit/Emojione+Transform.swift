@@ -12,9 +12,9 @@ extension Emojione {
     static func transform(string: String) -> String {
         var _string = string as NSString
 
-        let regex = try? NSRegularExpression(pattern: Emojione.regex, options: [])
+        let regex = try? NSRegularExpression(pattern: ":(\\w|-|\\+)+:", options: [])
         let ranges = regex?.matches(
-            in: string,
+            in: _string as String,
             options: [],
             range: NSRange(location: 0, length: string.count)
         ).map {
