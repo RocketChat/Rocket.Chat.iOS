@@ -21,6 +21,7 @@ def shared_pods
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
   pod 'TagListView', '~> 1.0'
   pod 'SearchTextField'
+  pod 'MBProgressHUD', '~> 1.1.0'
 
   # Text Processing
   pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
@@ -31,7 +32,7 @@ def shared_pods
   # Network
   pod 'SDWebImage', '~> 4'
   pod 'SDWebImage/GIF'
-  pod 'Starscream'
+  pod 'Starscream', '~> 2'
   pod 'ReachabilitySwift'
 
   # Authentication SDKs
@@ -59,6 +60,10 @@ post_install do |installer|
   installer.pods_project.targets.each do |target|
     target.build_configurations.each do |config|
       config.build_settings['SWIFT_VERSION'] = '3.1'
+      if config.name == 'Debug'
+        config.build_settings['OTHER_SWIFT_FLAGS'] = ['$(inherited)', '-Onone']
+        config.build_settings['SWIFT_OPTIMIZATION_LEVEL'] = '-Owholemodule'
+      end
     end
     if swift4Targets.include? target.name
       target.build_configurations.each do |config|

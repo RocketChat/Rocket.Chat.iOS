@@ -37,8 +37,9 @@ extension AuthSettings: ModelMappeable {
         // Authentication methods
         self.isGoogleAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Google")?.bool ?? false
         self.isFacebookAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Facebook")?.bool ?? false
-        self.isLinkedInAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Linkedin")?.bool ?? false
         self.isGitHubAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Github")?.bool ?? false
+        self.isGitLabAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Gitlab")?.bool ?? false
+        self.isLinkedInAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Linkedin")?.bool ?? false
         self.isLDAPAuthenticationEnabled = objectForKey(object: values, key: "LDAP_Enable")?.bool ?? false
         self.isCASEnabled = objectForKey(object: values, key: "CAS_enabled")?.bool ?? false
         self.casLoginUrl = objectForKey(object: values, key: "CAS_login_url")?.string
@@ -47,8 +48,18 @@ extension AuthSettings: ModelMappeable {
         self.rawRegistrationForm = objectForKey(object: values, key: "Accounts_RegistrationForm")?.string
         self.isPasswordResetEnabled = objectForKey(object: values, key: "Accounts_PasswordReset")?.bool ?? true
 
+        // Authentication Placeholder Fields
+        self.emailOrUsernameFieldPlaceholder = objectForKey(object: values, key: "Accounts_EmailOrUsernamePlaceholder")?.stringValue ?? ""
+        self.passwordFieldPlaceholder = objectForKey(object: values, key: "Accounts_PasswordPlaceholder")?.stringValue ?? ""
+
         // Accounts
         self.emailVerification = objectForKey(object: values, key: "Accounts_EmailVerification")?.bool ?? false
+        self.isAllowedToEditProfile = objectForKey(object: values, key: "Accounts_AllowUserProfileChange")?.bool ?? false
+        self.isAllowedToEditAvatar = objectForKey(object: values, key: "Accounts_AllowUserAvatarChange")?.bool ?? false
+        self.isAllowedToEditName = objectForKey(object: values, key: "Accounts_AllowRealNameChange")?.bool ?? false
+        self.isAllowedToEditUsername = objectForKey(object: values, key: "Accounts_AllowUsernameChange")?.bool ?? false
+        self.isAllowedToEditEmail = objectForKey(object: values, key: "Accounts_AllowEmailChange")?.bool ?? false
+        self.isAllowedToEditPassword = objectForKey(object: values, key: "Accounts_AllowPasswordChange")?.bool ?? false
 
         // Upload
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string

@@ -8,6 +8,36 @@
 
 import UIKit
 
+enum SystemMessageColor {
+    case warning
+    case danger
+    case good
+    case unknown(String)
+
+    init(rawValue: String) {
+        switch rawValue {
+        case SystemMessageColor.warning.rawValue: self = .warning
+        case SystemMessageColor.danger.rawValue: self = .danger
+        case SystemMessageColor.good.rawValue: self = .good
+        default:
+            self = .unknown(rawValue)
+        }
+    }
+
+    var rawValue: String {
+        return String(describing: self)
+    }
+
+    var color: UIColor {
+        switch self {
+        case .warning: return UIColor(rgb: 0xFCB316, alphaVal: 1)
+        case .danger: return UIColor(rgb: 0xD30230, alphaVal: 1)
+        case .good: return UIColor(rgb: 0x35AC19, alphaVal: 1)
+        case .unknown(let string): return UIColor(hex: string)
+        }
+    }
+}
+
 extension UIColor {
 
     convenience init(rgb: UInt, alphaVal: CGFloat) {
@@ -17,6 +47,12 @@ extension UIColor {
             blue: CGFloat(rgb & 0x0000FF) / 255.0,
             alpha: CGFloat(alphaVal)
         )
+    }
+
+    // MARK: Color from strings
+
+    static func normalizeColorFromString(string: String) -> UIColor {
+        return SystemMessageColor(rawValue: string).color
     }
 
     // MARK: Status
@@ -41,6 +77,10 @@ extension UIColor {
 
     static func RCBackgroundColor() -> UIColor {
         return UIColor(rgb: 0x2F343D, alphaVal: 1)
+    }
+
+    static func RCEditingAvatarColor() -> UIColor {
+        return UIColor(rgb: 0xEAEAEA, alphaVal: 0.75)
     }
 
     static func RCDarkGray() -> UIColor {

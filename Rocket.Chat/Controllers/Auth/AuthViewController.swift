@@ -65,7 +65,10 @@ final class AuthViewController: BaseViewController {
 
     @IBOutlet var buttonRegister: UIButton!
     @IBOutlet weak var buttonResetPassword: UIButton!
-
+    @IBOutlet weak var labelProceedingAgreeing: UILabel!
+    @IBOutlet weak var buttonTermsOfService: UIButton!
+    @IBOutlet weak var labelAnd: UILabel!
+    @IBOutlet weak var buttonPrivacy: UIButton!
     @IBOutlet weak var authButtonsStackView: UIStackView!
     var customAuthButtons = [String: UIButton]()
 
@@ -82,9 +85,18 @@ final class AuthViewController: BaseViewController {
            buttonRegister.isHidden = registrationForm != .isPublic
         }
 
+        textFieldUsername.placeholder = localized("auth.login.username.placeholder")
+        textFieldPassword.placeholder = localized("auth.login.password.placeholder")
+        buttonRegister.setTitle(localized("auth.login.buttonRegister"), for: .normal)
+        buttonResetPassword.setTitle(localized("auth.login.buttonResetPassword"), for: .normal)
+        labelProceedingAgreeing.text = localized("auth.login.agree_label")
+        buttonTermsOfService.setTitle(localized("auth.login.agree_termsofservice"), for: .normal)
+        labelAnd.text = localized("auth.login.agree_and")
+        buttonPrivacy.setTitle(localized("auth.login.agree_privacypolicy"), for: .normal)
         hideViewFields = !(AuthSettingsManager.settings?.isUsernameEmailAuthenticationEnabled ?? true)
         buttonResetPassword.isHidden = !(AuthSettingsManager.settings?.isPasswordResetEnabled ?? true)
 
+        updateFieldsPlaceholders()
         updateAuthenticationMethods()
     }
 
@@ -144,8 +156,22 @@ final class AuthViewController: BaseViewController {
     }
 
     // MARK: Authentication methods
+
+    fileprivate func updateFieldsPlaceholders() {
+        guard let settings = self.serverPublicSettings else { return }
+
+        if !(settings.emailOrUsernameFieldPlaceholder?.isEmpty ?? true) {
+            self.textFieldUsername.placeholder = settings.emailOrUsernameFieldPlaceholder
+        }
+
+        if !(settings.passwordFieldPlaceholder?.isEmpty ?? true) {
+            self.textFieldPassword.placeholder = settings.passwordFieldPlaceholder
+        }
+    }
+
     fileprivate func updateAuthenticationMethods() {
         guard let settings = self.serverPublicSettings else { return }
+
         self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
 
         if settings.isFacebookAuthenticationEnabled {
@@ -154,6 +180,10 @@ final class AuthViewController: BaseViewController {
 
         if settings.isGitHubAuthenticationEnabled {
             addOAuthButton(for: .github)
+        }
+
+        if settings.isGitLabAuthenticationEnabled {
+            addOAuthButton(for: .gitlab)
         }
 
         if settings.isLinkedInAuthenticationEnabled {
@@ -190,8 +220,9 @@ final class AuthViewController: BaseViewController {
             SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
 
             if let user = result.user {
-                if user.username != nil {
+                BugTrackingCoordinator.identifyCrashReports(withUser: user)
 
+                if user.username != nil {
                     DispatchQueue.main.async {
                         strongSelf.dismiss(animated: true, completion: nil)
                         AppManager.reloadApp()
@@ -201,6 +232,11 @@ final class AuthViewController: BaseViewController {
                         strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
                 }
+            } else {
+                self?.stopLoading()
+                Alert(
+                    key: "error.socket.default_error"
+                ).present()
             }
         }, errored: { [weak self] _ in
             self?.stopLoading()
@@ -267,6 +303,7 @@ final class AuthViewController: BaseViewController {
         var components = URLComponents()
         components.scheme = "https"
         components.host = self.serverURL.host
+        components.path = self.serverURL.path
 
         if var newURL = components.url {
             newURL = newURL.appendingPathComponent("terms-of-service")
@@ -280,6 +317,7 @@ final class AuthViewController: BaseViewController {
         var components = URLComponents()
         components.scheme = "https"
         components.host = self.serverURL.host
+        components.path = self.serverURL.path
 
         if var newURL = components.url {
             newURL = newURL.appendingPathComponent("privacy-policy")
@@ -471,8 +509,9 @@ extension AuthViewController {
         let button = customAuthButtons[service] ?? UIButton()
 
         switch loginService.type {
-        case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
         case .facebook: button.setImage(#imageLiteral(resourceName: "facebook"), for: .normal)
+        case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
+        case .gitlab: button.setImage(#imageLiteral(resourceName: "gitlab"), for: .normal)
         case .linkedin: button.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
         default: button.setTitle(loginService.buttonLabelText ?? "", for: .normal)
         }

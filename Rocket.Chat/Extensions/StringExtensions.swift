@@ -96,7 +96,11 @@ extension String {
     }
 
     func removingWhitespaces() -> String {
-        return components(separatedBy: .whitespaces).joined()
+        return components(separatedBy: .whitespacesAndNewlines).joined()
+    }
+
+    func removingNewLines() -> String {
+        return components(separatedBy: .newlines).joined()
     }
 
     var removingPercentEncoding: String? {

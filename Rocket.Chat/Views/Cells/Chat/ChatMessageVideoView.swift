@@ -28,6 +28,7 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
 
     @IBOutlet weak var labelTitle: UILabel!
     @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailTextIndicator: UILabel!
     @IBOutlet weak var detailTextHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var fullHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var imageViewPreview: UIImageView! {
@@ -44,6 +45,7 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
         activityIndicator.startAnimating()
         labelTitle.text = attachment.title
         detailText.text = attachment.descriptionText
+        detailTextIndicator.isHidden = attachment.descriptionText?.isEmpty ?? true
         let fullHeight = ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
         fullHeightConstraint.constant = fullHeight
         detailTextHeightConstraint.constant = fullHeight - ChatMessageVideoView.defaultHeight
@@ -53,9 +55,7 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
 
         if let imageData = try? Data(contentsOf: thumbURL) {
             if let thumbnail = UIImage(data: imageData) {
-                imageViewPreview.image = thumbnail
-                activityIndicator.stopAnimating()
-                buttonPlay.isHidden = false
+                stopLoadingPreview(thumbnail)
                 return
             }
         }
@@ -66,17 +66,25 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
             imageGenerator.appliesPreferredTrackTransform = true
             let time = CMTimeMake(1, 1)
 
-            if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
+            do {
+                let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
                 let thumbnail = UIImage(cgImage: imageRef)
+                try UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)
 
                 DispatchQueue.main.async {
-                    try? UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)
-
-                    self.activityIndicator.stopAnimating()
-                    self.imageViewPreview.image = thumbnail
-                    self.buttonPlay.isHidden = false
+                    self.stopLoadingPreview(thumbnail)
                 }
+            } catch {
+                self.stopLoadingPreview(nil)
             }
+        }
+    }
+
+    fileprivate func stopLoadingPreview(_ thumbnail: UIImage?) {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.imageViewPreview.image = thumbnail
+            self.buttonPlay.isHidden = false
         }
     }
 

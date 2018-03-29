@@ -26,6 +26,8 @@ extension Realm {
         }
     }
 
+    static let writeQueue = DispatchQueue(label: "chat.rocket.realm.write", qos: .background)
+
     func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
         var backgroundTaskId: UIBackgroundTaskIdentifier?
 
@@ -36,7 +38,7 @@ extension Realm {
         if let backgroundTaskId = backgroundTaskId {
             let config = self.configuration
 
-            DispatchQueue.global(qos: .background).async {
+            Realm.writeQueue.async {
                 if let realm = try? Realm(configuration: config) {
                     try? realm.write {
                         execution(realm)

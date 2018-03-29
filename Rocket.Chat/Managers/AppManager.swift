@@ -84,7 +84,7 @@ extension AppManager {
     }
 
     static func changeToOrAddServer(serverUrl: String, credentials: DeepLinkCredentials? = nil, roomId: String? = nil) {
-        guard let url = URL(string: serverUrl)?.socketURL(), changeToServerIfExists(serverUrl: url.absoluteString, roomId: roomId) else {
+        guard let url = URL(string: serverUrl), changeToServerIfExists(serverUrl: url.absoluteString, roomId: roomId) else {
             return addServer(serverUrl: serverUrl, credentials: credentials, roomId: roomId)
         }
     }
@@ -93,6 +93,10 @@ extension AppManager {
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {
+                    if let currentUser = AuthManager.currentUser() {
+                        BugTrackingCoordinator.identifyCrashReports(withUser: currentUser)
+                    }
+
                     WindowManager.open(.chat)
                 } else {
                     WindowManager.open(.auth(serverUrl: "", credentials: nil))

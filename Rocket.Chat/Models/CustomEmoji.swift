@@ -27,7 +27,10 @@ extension CustomEmoji {
             return nil
         }
 
-        return "\(serverUrl)/emoji-custom/\(encodedName)"
+        var imageUrl = URL(string: serverUrl)?.httpServerURL()
+        imageUrl?.appendPathComponent("emoji-custom")
+        imageUrl?.appendPathComponent(encodedName)
+        return imageUrl?.absoluteString
     }
 
     static func withShortname(_ shortname: String, realm: Realm? = Realm.shared) -> CustomEmoji? {

@@ -18,6 +18,7 @@ class ChatMessageAudioView: ChatMessageAttachmentView {
         didSet {
             self.titleLabel.text = attachment?.title
             self.detailText.text = attachment?.descriptionText
+            self.detailTextIndicator.isHidden = attachment?.descriptionText?.isEmpty ?? true
             let fullHeight = ChatMessageAudioView.heightFor(withText: attachment?.descriptionText)
             fullHeightConstraint.constant = fullHeight
             detailTextHeightConstraint.constant = fullHeight - ChatMessageAudioView.defaultHeight
@@ -29,6 +30,7 @@ class ChatMessageAudioView: ChatMessageAttachmentView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailTextIndicator: UILabel!
     @IBOutlet weak var detailTextHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var fullHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeLabel: UILabel!

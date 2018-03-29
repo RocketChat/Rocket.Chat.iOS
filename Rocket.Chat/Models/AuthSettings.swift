@@ -37,15 +37,26 @@ final class AuthSettings: BaseModel {
 
     @objc dynamic var isGoogleAuthenticationEnabled = false
     @objc dynamic var isFacebookAuthenticationEnabled = false
-    @objc dynamic var isLinkedInAuthenticationEnabled = false
     @objc dynamic var isGitHubAuthenticationEnabled = false
+    @objc dynamic var isGitLabAuthenticationEnabled = false
+    @objc dynamic var isLinkedInAuthenticationEnabled = false
     @objc dynamic var isLDAPAuthenticationEnabled = false
 
     @objc dynamic var isCASEnabled = false
     @objc dynamic var casLoginUrl: String?
 
+    // Authentication Placeholder Fields
+    @objc dynamic var emailOrUsernameFieldPlaceholder: String?
+    @objc dynamic var passwordFieldPlaceholder: String?
+
     // Accounts
     @objc dynamic var emailVerification = false
+    @objc dynamic var isAllowedToEditProfile = false
+    @objc dynamic var isAllowedToEditAvatar = false
+    @objc dynamic var isAllowedToEditName = false
+    @objc dynamic var isAllowedToEditUsername = false
+    @objc dynamic var isAllowedToEditEmail = false
+    @objc dynamic var isAllowedToEditPassword = false
 
     // Registration
     @objc dynamic var rawRegistrationForm: String?
