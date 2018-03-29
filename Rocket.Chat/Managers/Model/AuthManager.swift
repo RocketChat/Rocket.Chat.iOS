@@ -48,6 +48,7 @@ struct AuthManager {
 
         servers[selectedIndex][ServerPersistKeys.token] = token
         servers[selectedIndex][ServerPersistKeys.userId] = userId
+        servers[selectedIndex][ServerPersistKeys.serverVersion] = auth.serverVersion
 
         defaults.set(servers, forKey: ServerPersistKeys.servers)
     }
