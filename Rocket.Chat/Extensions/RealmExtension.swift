@@ -58,11 +58,19 @@ extension Realm {
         Realm.current?.execute(execution, completion: completion)
     }
 
-    static func executeOnMainThread(_ execution: @escaping (Realm) -> Void) {
-        guard let realm = self.current else { return }
+    static func executeOnMainThread(realm: Realm? = nil, _ execution: @escaping (Realm) -> Void) {
+        if let realm = realm {
+            try? realm.write {
+                execution(realm)
+            }
 
-        try? realm.write {
-            execution(realm)
+            return
+        }
+
+        guard let currentRealm = Realm.current else { return }
+
+        try? currentRealm.write {
+            execution(currentRealm)
         }
     }
 
