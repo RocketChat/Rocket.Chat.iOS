@@ -70,7 +70,7 @@ struct PermissionManager {
         }
     }
 
-    static func roles(for permission: PermissionType, realm: Realm? = Realm.shared) -> List<String>? {
+    static func roles(for permission: PermissionType, realm: Realm? = Realm.current) -> List<String>? {
         return realm?.object(ofType: Permission.self, forPrimaryKey: permission.rawValue)?.roles
     }
 }

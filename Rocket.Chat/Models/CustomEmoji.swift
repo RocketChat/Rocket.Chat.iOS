@@ -33,14 +33,14 @@ extension CustomEmoji {
         return imageUrl?.absoluteString
     }
 
-    static func withShortname(_ shortname: String, realm: Realm? = Realm.shared) -> CustomEmoji? {
+    static func withShortname(_ shortname: String, realm: Realm? = Realm.current) -> CustomEmoji? {
         guard let realm = realm, shortname.count > 2 else { return nil }
         let shortname = String(shortname.dropFirst().dropLast())
         return realm.objects(CustomEmoji.self).filter { $0.name == shortname || $0.aliases.contains(shortname) }.first
     }
 
     static func emojis() -> [Emoji] {
-        guard let emojis = Realm.shared?.objects(CustomEmoji.self) else { return [] }
+        guard let emojis = Realm.current?.objects(CustomEmoji.self) else { return [] }
 
         return emojis.flatMap { emoji -> Emoji? in
             guard let name = emoji.name, let imageUrl = emoji.imageUrl() else { return nil }

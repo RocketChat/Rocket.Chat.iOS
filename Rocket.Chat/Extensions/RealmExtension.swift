@@ -14,7 +14,7 @@ var realmConfiguration: Realm.Configuration?
 
 extension Realm {
 
-    static var shared: Realm? {
+    static var current: Realm? {
         if let configuration = realmConfiguration {
             return try? Realm(configuration: configuration)
         } else {
@@ -55,11 +55,11 @@ extension Realm {
     }
 
     static func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
-        Realm.shared?.execute(execution, completion: completion)
+        Realm.current?.execute(execution, completion: completion)
     }
 
     static func executeOnMainThread(_ execution: @escaping (Realm) -> Void) {
-        guard let realm = self.shared else { return }
+        guard let realm = self.current else { return }
 
         try? realm.write {
             execution(realm)
