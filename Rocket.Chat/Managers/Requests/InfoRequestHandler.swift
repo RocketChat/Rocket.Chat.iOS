@@ -24,12 +24,15 @@ class InfoRequestHandler: NSObject {
     var validateServerVersion = true
 
     func validate(with url: URL) {
-        API(host: url).fetch(InfoRequest(), sessionDelegate: self, succeeded: { [weak self] result in
-            self?.validateServerResponse(result: result)
-        }, errored: { [weak self] _ in
-            self?.delegate?.urlNotValid()
-            self?.alertInvalidURL()
-        })
+        API(host: url).fetch(InfoRequest()) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                self?.validateServerResponse(result: resource)
+            case .error:
+                self?.delegate?.urlNotValid()
+                self?.alertInvalidURL()
+            }
+        }
     }
 
     func alertInvalidURL() {
@@ -38,7 +41,7 @@ class InfoRequestHandler: NSObject {
         ).present()
     }
 
-    internal func validateServerResponse(result: InfoResult?) {
+    internal func validateServerResponse(result: InfoResource?) {
         guard let version = result?.version else {
             delegate?.urlNotValid()
             return
@@ -79,14 +82,17 @@ extension InfoRequestHandler: URLSessionTaskDelegate {
     }
 
     func handleRedirect(_ newURL: URL) {
-        API(host: newURL).fetch(InfoRequest(), sessionDelegate: self, succeeded: { result in
-            self.handleRedirectInfoResult(result, for: newURL)
-        }, errored: { [weak self] _ in
-            self?.delegate?.urlNotValid()
-        })
+        API(host: newURL).fetch(InfoRequest()) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                self?.handleRedirectInfoResult(resource, for: newURL)
+            case .error:
+                self?.delegate?.urlNotValid()
+            }
+        }
     }
 
-    func handleRedirectInfoResult(_ result: InfoResult, for url: URL) {
+    func handleRedirectInfoResult(_ result: InfoResource, for url: URL) {
         guard
             result.raw != nil,
             let controller = self.delegate?.viewControllerToPresentAlerts,

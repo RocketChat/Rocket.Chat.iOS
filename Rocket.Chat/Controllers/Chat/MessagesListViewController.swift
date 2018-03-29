@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-extension APIResult where T == SubscriptionMessagesRequest {
+extension SubscriptionMessagesResource {
     func getMessages() -> [Message?]? {
         return raw?["messages"].arrayValue.map { json in
             let message = Message()
@@ -57,11 +57,12 @@ class MessagesListViewData {
             let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
 
-            API.current()?.fetch(request, options: options, succeeded: { result in
-                DispatchQueue.main.async {
-                    self.showing += result.count ?? 0
-                    self.total = result.total ?? 0
-                    if let messages = result.getMessages() {
+            API.current()?.fetch(request, options: options) { response in
+                switch response {
+                case .resource(let resource):
+                    self.showing += resource.count ?? 0
+                    self.total = resource.total ?? 0
+                    if let messages = resource.getMessages() {
                         let messages = messages.flatMap { $0 }
                         guard var lastMessage = messages.first else {
                             self.isLoadingMoreMessages = false
@@ -84,11 +85,11 @@ class MessagesListViewData {
                     self.currentPage += 1
 
                     self.isLoadingMoreMessages = false
-                    completion?()
+                case .error:
+                    Alert.defaultError.present()
                 }
-            }, errored: { _ in
-                // TODO: Handle error
-            })
+                completion?()
+            }
         }
     }
 }

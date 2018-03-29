@@ -23,6 +23,8 @@ enum APIRequestOptions {
 }
 
 protocol APIRequest {
+    associatedtype APIResourceType: APIResource
+
     var requiredVersion: Version { get }
 
     var path: String { get }

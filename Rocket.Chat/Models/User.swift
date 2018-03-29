@@ -118,17 +118,20 @@ extension User {
             request = UserInfoRequest(username: username)
         }
 
-        api.fetch(request, succeeded: {
-            guard let user = $0.user else { return completion(nil) }
+        api.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                guard let user = resource.user else { return completion(nil) }
 
-            realm.execute({ realm in
-                let user = user
-                realm.add(user, update: true)
-            })
+                realm.execute({ realm in
+                    let user = user
+                    realm.add(user, update: true)
+                })
 
-            completion(user)
-        }, errored: { _ in
-            completion(nil)
-        })
+                completion(user)
+            case .error:
+                completion(nil)
+            }
+        }
     }
 }

@@ -12,10 +12,16 @@ struct InfoClient: APIClient {
     let api: AnyAPIFetcher
 
     func fetchInfo(realm: Realm? = Realm.shared) {
-        api.fetch(InfoRequest(), succeeded: { result in
-            realm?.execute({ realm in
-                AuthManager.isAuthenticated(realm: realm)?.serverVersion = result.version ?? ""
-            })
-        }, errored: nil)
+        api.fetch(InfoRequest()) { response in
+            switch response {
+            case .resource(let resource):
+                guard let version = resource.version else { return }
+                realm?.execute({ realm in
+                    AuthManager.isAuthenticated(realm: realm)?.serverVersion = "\(version)"
+                })
+            case .error:
+                return
+            }
+        }
     }
 }

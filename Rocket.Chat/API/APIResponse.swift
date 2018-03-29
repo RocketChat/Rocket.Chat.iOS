@@ -1,5 +1,5 @@
 //
-//  APIResult.swift
+//  APIRespose.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 9/18/17.
@@ -7,12 +7,8 @@
 //
 
 import Foundation
-import SwiftyJSON
 
-class APIResult<T: APIRequest> {
-    let raw: JSON?
-
-    init(raw: JSON?) {
-        self.raw = raw
-    }
+enum APIResponse<T: APIResource> {
+    case resource(T)
+    case error(APIError)
 }

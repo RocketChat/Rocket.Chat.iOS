@@ -154,21 +154,26 @@ extension AppManager {
 
         // If not, fetch it
         let request = SubscriptionInfoRequest(roomName: name)
-        API.current()?.fetch(request, succeeded: { result in
-            DispatchQueue.main.async {
-                Realm.executeOnMainThread({ realm in
-                    guard let values = result.channel else { return }
+        API.current()?.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                DispatchQueue.main.async {
+                    Realm.executeOnMainThread({ realm in
+                        guard let values = resource.channel else { return }
 
-                    let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
-                        object?.rid = object?.identifier ?? ""
+                        let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
+                            object?.rid = object?.identifier ?? ""
+                        })
+
+                        realm.add(subscription, update: true)
                     })
 
-                    realm.add(subscription, update: true)
-                })
-
-                _ = openChannel()
+                    _ = openChannel()
+                }
+            case .error:
+                break
             }
-        }, errored: nil)
+        }
     }
 }
 

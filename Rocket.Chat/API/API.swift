@@ -17,14 +17,14 @@ protocol APIRequestMiddleware {
 }
 
 protocol APIFetcher {
-    func fetch<R>(_ request: R, succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?)
-    func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?,
-                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?)
+    func fetch<R: APIRequest>(_ request: R, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?)
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?,
+                              completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?)
 }
 
 extension APIFetcher {
-    func fetch<R>(_ request: R, succeeded: ((APIResult<R>) -> Void)?, errored: APIErrored?) {
-        fetch(request, options: .none, sessionDelegate: nil, succeeded: succeeded, errored: errored)
+    func fetch<R: APIRequest>(_ request: R, completion: ((APIResponse<R.APIResourceType>) -> Void)?) {
+        fetch(request, options: .none, sessionDelegate: nil, completion: completion)
     }
 }
 
@@ -40,7 +40,7 @@ class API: APIFetcher {
     var userId: String?
 
     convenience init?(host: String, version: Version = .zero) {
-        guard let url = URL(string: host)?.httpServerURL() else {
+        guard let url = URL(string: host) else {
             return nil
         }
 
@@ -54,18 +54,18 @@ class API: APIFetcher {
         requestMiddlewares.append(VersionMiddleware(api: self))
     }
 
-    func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,
-                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) {
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,
+                              completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) {
         var transformedRequest = request
         for middleware in requestMiddlewares {
             if let error = middleware.handle(&transformedRequest) {
-                errored?(error)
+                completion?(.error(error))
                 return
             }
         }
 
         guard let request = transformedRequest.request(for: self, options: options) else {
-            errored?(.malformedRequest)
+            completion?(.error(.malformedRequest))
             return
         }
 
@@ -84,17 +84,17 @@ class API: APIFetcher {
 
         let task = session.dataTask(with: request) { (data, _, error) in
             if let error = error {
-                errored?(.error(error))
+                completion?(.error(.error(error)))
                 return
             }
 
             guard let data = data else {
-                errored?(.noData)
+                completion?(.error(.noData))
                 return
             }
 
             let json = try? JSON(data: data)
-            succeeded?(APIResult<R>(raw: json))
+            completion?(APIResponse<R.APIResourceType>.resource(R.APIResourceType(raw: json)))
         }
 
         task.resume()

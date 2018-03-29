@@ -46,21 +46,25 @@ class MembersListViewData {
             let request = SubscriptionMembersRequest(roomId: subscription.rid, type: subscription.type)
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
 
-            API.current()?.fetch(request, options: options, succeeded: { result in
-                self.showing += result.count ?? 0
-                self.total = result.total ?? 0
-                if let members = result.members {
-                    self.membersPages.append(members.flatMap { $0 })
+            API.current()?.fetch(request) { response in
+                switch response {
+                case .resource(let resource):
+                    self.showing += resource.count ?? 0
+                    self.total = resource.total ?? 0
+                    if let members = resource.members {
+                        self.membersPages.append(members.flatMap { $0 })
+                    }
+
+                    self.currentPage += 1
+
+                    self.title = "\(localized("chat.members.list.title")) (\(self.total))"
+                    self.isLoadingMoreMembers = false
+                case .error:
+                    Alert.defaultError.present()
                 }
 
-                self.currentPage += 1
-
-                self.title = "\(localized("chat.members.list.title")) (\(self.total))"
-                self.isLoadingMoreMembers = false
                 completion?()
-            }, errored: { _ in
-                // TODO: Handle error
-            })
+            }
         }
     }
 }
