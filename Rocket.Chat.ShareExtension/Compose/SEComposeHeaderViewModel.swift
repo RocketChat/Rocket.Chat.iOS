@@ -56,9 +56,7 @@ extension SEComposeHeaderViewModel {
 
         let symbol: String
         switch state.currentRoom.type {
-        case .channel:
-            symbol = "#"
-        case .group:
+        case .channel, .group:
             symbol = "#"
         case .directMessage:
             symbol = "@"
