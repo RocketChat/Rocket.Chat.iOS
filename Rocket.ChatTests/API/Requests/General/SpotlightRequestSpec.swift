@@ -50,4 +50,3 @@ class SpotlightRequestSpec: APITestCase {
         XCTAssertEqual(result.success, true, "success is correct")
     }
 }
-
