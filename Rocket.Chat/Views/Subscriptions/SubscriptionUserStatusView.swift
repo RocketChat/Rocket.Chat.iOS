@@ -130,7 +130,7 @@ final class SubscriptionUserStatusView: UIView {
     }
 
     @IBAction func buttonSettingsDidPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Preferences", bundle: Bundle.main)
+        let storyboard = Storyboard.preferences.instantiate()
 
         if let controller = storyboard.instantiateInitialViewController() {
             controller.modalPresentationStyle = .formSheet

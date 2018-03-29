@@ -405,6 +405,7 @@ extension AuthManager {
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
             GIDSignIn.sharedInstance().signOut()
+            BugTrackingCoordinator.anonymizeCrashReports()
 
             DraftMessageManager.clearServerDraftMessages()
 
