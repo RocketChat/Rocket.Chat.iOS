@@ -12,6 +12,7 @@ import SwiftyJSON
 typealias SpotlightResult = APIResult<SpotlightRequest>
 
 class SpotlightRequest: APIRequest {
+    let version = Version(0, 61, 0)
     let path = "/api/v1/spotlight"
 
     let query: String?

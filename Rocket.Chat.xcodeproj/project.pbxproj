@@ -367,6 +367,7 @@
 		8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */; };
 		8067DA9F206BF7CD005E3369 /* SpotlightRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067DA9E206BF7CD005E3369 /* SpotlightRequest.swift */; };
 		8067DAA1206BF9E3005E3369 /* SpotlightClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067DAA0206BF9E3005E3369 /* SpotlightClient.swift */; };
+		8067DAA4206C1B57005E3369 /* SpotlightRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8067DAA3206C1B57005E3369 /* SpotlightRequestSpec.swift */; };
 		8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8069D26D1FFF876D00C75926 /* Emoji.swift */; };
 		806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */; };
 		806C59A51FBB2F4C00C32D0A /* PostMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */; };
@@ -865,6 +866,7 @@
 		8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteMessageRequestSpec.swift; sourceTree = "<group>"; };
 		8067DA9E206BF7CD005E3369 /* SpotlightRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightRequest.swift; sourceTree = "<group>"; };
 		8067DAA0206BF9E3005E3369 /* SpotlightClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightClient.swift; sourceTree = "<group>"; };
+		8067DAA3206C1B57005E3369 /* SpotlightRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightRequestSpec.swift; sourceTree = "<group>"; };
 		8069D26D1FFF876D00C75926 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostMessageRequest.swift; sourceTree = "<group>"; };
 		806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostMessageRequestSpec.swift; sourceTree = "<group>"; };
@@ -2049,6 +2051,14 @@
 			path = VoiceOver;
 			sourceTree = "<group>";
 		};
+		8067DAA2206C1B42005E3369 /* General */ = {
+			isa = PBXGroup;
+			children = (
+				8067DAA3206C1B57005E3369 /* SpotlightRequestSpec.swift */,
+			);
+			path = General;
+			sourceTree = "<group>";
+		};
 		806C59A01FBB0BA700C32D0A /* Message */ = {
 			isa = PBXGroup;
 			children = (
@@ -2240,6 +2250,7 @@
 		D18675E81F70A56800406FB4 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				8067DAA2206C1B42005E3369 /* General */,
 				998165C8204EBB5E0059D346 /* User */,
 				8013F88A1FD6B79900EE1A4E /* Command */,
 				806C59A31FBB2F3700C32D0A /* Message */,
@@ -3264,6 +3275,7 @@
 				8013F88C1FD6B7D400EE1A4E /* RunCommandRequestSpec.swift in Sources */,
 				4161333E1D46E3AB00E09DA2 /* SubscriptionSpec.swift in Sources */,
 				4147CE811F5EE03300C322C3 /* ServerManagerSpec.swift in Sources */,
+				8067DAA4206C1B57005E3369 /* SpotlightRequestSpec.swift in Sources */,
 				D1411A2C1F6779A200D6EDF7 /* MentionSpec.swift in Sources */,
 				806C59A51FBB2F4C00C32D0A /* PostMessageRequestSpec.swift in Sources */,
 			);
