@@ -68,7 +68,7 @@ extension NSMutableAttributedString {
 extension String {
     func codeRanges() -> [NSRange] {
         let codeRegex = try? NSRegularExpression(pattern: "(```)(?:[a-zA-Z]+)?((?:.|\r|\n)*?)(```)", options: [.anchorsMatchLines])
-        let codeMatches = codeRegex?.matches(in: self, options: [], range: NSRange(location: 0, length: count)) ?? []
+        let codeMatches = codeRegex?.matches(in: self, options: [], range: NSRange(location: 0, length: utf16.count)) ?? []
         return codeMatches.map { $0.range(at: 0) }
     }
 
