@@ -1,5 +1,5 @@
 //
-//  APIRespose.swift
+//  APIResponse.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 9/18/17.
