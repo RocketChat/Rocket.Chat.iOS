@@ -111,7 +111,7 @@ extension MessageManager {
             "name": "stream-notify-room",
             "id": eventName,
             "params": [eventName, false]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -147,7 +147,10 @@ extension MessageManager {
         let request = [
             "msg": "method",
             "method": "pinMessage",
-            "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
+            "params": [[
+                "rid": message.rid,
+                "_id": messageIdentifier
+            ]]
         ] as [String: Any]
 
         SocketManager.send(request, completion: completion)
@@ -159,7 +162,10 @@ extension MessageManager {
         let request = [
             "msg": "method",
             "method": "unpinMessage",
-            "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
+            "params": [[
+                "rid": message.rid,
+                "_id": messageIdentifier
+            ]]
         ] as [String: Any]
 
         SocketManager.send(request, completion: completion)

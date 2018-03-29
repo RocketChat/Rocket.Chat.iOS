@@ -164,3 +164,31 @@ extension Auth {
         return .allowed
     }
 }
+
+extension Auth {
+    enum CanPinMessageResult {
+        case allowed
+        case notActionable
+        case notAllowed
+        case unknown
+    }
+
+    func canPinMessage(_ message: Message) -> CanPinMessageResult {
+        guard
+            let user = user,
+            let settings = settings
+        else {
+            return .unknown
+        }
+
+        if !message.type.actionable {
+            return .notActionable
+        }
+
+        if !settings.messageAllowPinning || !user.hasPermission(.pinMessage) {
+            return .notAllowed
+        }
+
+        return .allowed
+    }
+}
