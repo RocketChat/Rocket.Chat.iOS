@@ -42,12 +42,14 @@ struct SubscriptionManager {
             "params": params
         ] as [String: Any]
 
+        let currentRealm = Realm.current
+
         func executeRoomsRequest() {
             SocketManager.send(requestRooms) { response in
                 guard !response.isError() else { return Log.debug(response.result.string) }
 
-                Realm.execute({ realm in
-                    guard let auth = AuthManager.isAuthenticated() else { return }
+                currentRealm?.execute({ realm in
+                    guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
                     auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
                     realm.add(auth, update: true)
                 })
@@ -60,7 +62,7 @@ struct SubscriptionManager {
                 // Update is used on updates
                 let updated = response.result["result"]["update"].array
 
-                Realm.execute({ realm in
+                currentRealm?.execute({ realm in
                     list?.forEach { object in
                         if let rid = object["_id"].string {
                             if let subscription = Subscription.find(rid: rid, realm: realm) {
@@ -98,8 +100,8 @@ struct SubscriptionManager {
             let updated = response.result["result"]["update"].array
             let removed = response.result["result"]["remove"].array
 
-            Realm.execute({ realm in
-                guard let auth = AuthManager.isAuthenticated() else { return }
+            currentRealm?.execute({ realm in
+                guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
 
                 list?.forEach { object in
                     let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
@@ -149,14 +151,15 @@ struct SubscriptionManager {
             "params": [eventName, false]
         ] as [String: Any]
 
+        let currentRealm = Realm.current
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             let msg = response.result["fields"]["args"][0]
             let object = response.result["fields"]["args"][1]
 
-            Realm.execute({ (realm) in
-                guard let auth = AuthManager.isAuthenticated(), auth.serverURL == serverURL else { return }
+            currentRealm?.execute({ (realm) in
+                guard let auth = AuthManager.isAuthenticated(realm: realm), auth.serverURL == serverURL else { return }
                 let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
                     object?.auth = msg == "removed" ? nil : auth
                 })
@@ -176,12 +179,13 @@ struct SubscriptionManager {
             "params": [eventName, false]
         ] as [String: Any]
 
+        let currentRealm = Realm.current
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             let object = response.result["fields"]["args"][1]
 
-            Realm.execute({ (realm) in
+            currentRealm?.execute({ (realm) in
                 if let rid = object["_id"].string {
                     if let subscription = Subscription.find(rid: rid, realm: realm) {
                         subscription.mapRoom(object)
@@ -242,6 +246,7 @@ extension SubscriptionManager {
             "params": [text, NSNull(), ["rooms": true, "users": true]]
         ] as [String: Any]
 
+        let currentRealm = Realm.current
         SocketManager.send(request) { response in
             guard !response.isError() else {
                 completion([])
@@ -253,7 +258,7 @@ extension SubscriptionManager {
             let rooms = response.result["result"]["rooms"].array
             let users = response.result["result"]["users"].array
 
-            Realm.execute({ (realm) in
+            currentRealm?.execute({ (realm) in
                 rooms?.forEach { object in
                     let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
                         object?.rid = object?.identifier ?? ""
@@ -285,7 +290,7 @@ extension SubscriptionManager {
             }, completion: {
                 var detachedSubscriptions = [Subscription]()
 
-                Realm.executeOnMainThread({ (realm) in
+                Realm.executeOnMainThread(realm: currentRealm, { (realm) in
                     for identifier in identifiers {
                         if let subscription = realm.object(ofType: Subscription.self, forPrimaryKey: identifier) {
                             detachedSubscriptions.append(subscription)
