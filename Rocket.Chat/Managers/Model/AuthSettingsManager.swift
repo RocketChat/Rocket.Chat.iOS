@@ -32,18 +32,19 @@ final class AuthSettingsManager {
             "method": "public-settings/get"
         ] as [String: Any]
 
+        let currentRealm = Realm.current
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
                 completion(nil)
                 return
             }
 
-            Realm.execute({ realm in
-                let settings = AuthManager.isAuthenticated()?.settings ?? AuthSettings()
+            currentRealm?.execute({ realm in
+                let settings = AuthManager.isAuthenticated(realm: realm)?.settings ?? AuthSettings()
                 settings.map(response.result["result"], realm: realm)
                 realm.add(settings, update: true)
 
-                if let auth = AuthManager.isAuthenticated() {
+                if let auth = AuthManager.isAuthenticated(realm: realm) {
                     auth.settings = settings
                     realm.add(auth, update: true)
                 }
