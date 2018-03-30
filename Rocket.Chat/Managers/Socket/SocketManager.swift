@@ -113,7 +113,7 @@ class SocketManager {
         let request = [
             "msg": "unsub",
             "id": eventName
-        ] as [String: Any]
+            ] as [String: Any]
 
         send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
@@ -191,7 +191,7 @@ extension SocketManager: WebSocketDelegate {
             "msg": "connect",
             "version": "1",
             "support": ["1", "pre2", "pre1"]
-        ] as [String: Any]
+            ] as [String: Any]
 
         SocketManager.send(object)
     }
@@ -218,7 +218,8 @@ extension SocketManager: WebSocketDelegate {
     }
 
     static let jsonParseQueue = DispatchQueue(label: "chat.rocket.json.parse", qos: .background)
-    func websocketDidReceiveMessage(socket: WebSocket, text: String, response: WebSocket.WSResponse) {
+
+    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         SocketManager.jsonParseQueue.async {
             let json = JSON(parseJSON: text)
 
@@ -237,6 +238,7 @@ extension SocketManager: WebSocketDelegate {
             }
         }
     }
+
 }
 
 // MARK: WebSocketPongDelegate
@@ -248,3 +250,4 @@ extension SocketManager: WebSocketPongDelegate {
     }
 
 }
+
