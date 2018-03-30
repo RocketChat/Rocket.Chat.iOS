@@ -54,4 +54,3 @@ class PermissionManagerSpec: XCTestCase, RealmTestCase {
         XCTAssertFalse(user.hasPermission(permissionType, realm: realm), "user has no permission")
     }
 }
-

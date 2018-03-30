@@ -39,4 +39,3 @@ class PermissionSpec: XCTestCase {
         XCTAssertTrue(permission.roles.contains("admin"), "has admin role")
     }
 }
-
