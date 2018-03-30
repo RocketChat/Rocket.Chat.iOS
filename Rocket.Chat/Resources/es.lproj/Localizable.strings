@@ -227,7 +227,7 @@
 
 // Members List
 "chat.member.unblock.title" = "Desatascar";
-"chat.member.open.profile.title" = "Perfil abierto";
+"chat.member.open.profile.title" = "Abrir perfil";
 "chat.members.list.title" = "Miembros";
 
 // Messages List
