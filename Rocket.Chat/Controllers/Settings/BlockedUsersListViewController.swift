@@ -19,7 +19,7 @@ class BlockedUsersListViewController: BaseViewController {
     @IBOutlet weak var viewEmptyList: UIView!
     @IBOutlet weak var labelEmptyList: UILabel!
 
-    var realm: Realm? = Realm.shared
+    var realm: Realm? = Realm.current
 }
 
 // MARK: ViewController
