@@ -78,4 +78,3 @@ extension String {
         return escaped
     }
 }
-

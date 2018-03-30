@@ -38,7 +38,6 @@ extension CustomEmoji {
         let shortname = String(shortname.dropFirst().dropLast())
         return realm.objects(CustomEmoji.self).filter { $0.name == shortname || $0.aliases.contains(shortname) }.first
     }
-    
     static func emojis() -> [Emoji] {
         guard let emojis = Realm.current?.objects(CustomEmoji.self) else { return [] }
 

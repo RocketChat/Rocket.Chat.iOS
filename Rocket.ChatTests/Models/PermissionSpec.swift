@@ -16,9 +16,9 @@ class PermissionSpec: XCTestCase {
     let testJSON = JSON([
         "_id": "snippet-message",
         "roles": [
-        "owner",
-        "moderator",
-        "admin"
+            "owner",
+            "moderator",
+            "admin"
         ],
         "_updatedAt": [ "$date": 1480377601 ],
         "meta": [
@@ -28,7 +28,7 @@ class PermissionSpec: XCTestCase {
             "updated": 1480377601
         ],
         "$loki": 1
-    ])
+        ])
 
     func testMap() {
         let permission = Permission()
@@ -39,3 +39,4 @@ class PermissionSpec: XCTestCase {
         XCTAssertTrue(permission.roles.contains("admin"), "has admin role")
     }
 }
+
