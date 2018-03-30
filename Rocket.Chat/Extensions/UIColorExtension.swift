@@ -79,6 +79,10 @@ extension UIColor {
         return UIColor(rgb: 0x2F343D, alphaVal: 1)
     }
 
+    static func RCEditingAvatarColor() -> UIColor {
+        return UIColor(rgb: 0xEAEAEA, alphaVal: 0.75)
+    }
+
     static func RCDarkGray() -> UIColor {
         return UIColor(rgb: 0x333333, alphaVal: 1)
     }

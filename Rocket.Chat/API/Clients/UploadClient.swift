@@ -14,8 +14,8 @@ struct UploadClient: APIClient {
         self.api = api
     }
 
-    func upload(roomId: String, data: Data, filename: String, mimetype: String, description: String, completion: (() -> Void)? = nil, versionFallback: (() -> Void)? = nil) {
-        let req = UploadRequest(
+    func uploadMessage(roomId: String, data: Data, filename: String, mimetype: String, description: String, completion: (() -> Void)? = nil, versionFallback: (() -> Void)? = nil) {
+        let req = UploadMessageRequest(
             roomId: roomId,
             data: data,
             filename: filename,
@@ -36,6 +36,20 @@ struct UploadClient: APIClient {
                 Alert(key: "alert.upload_error").present()
                 completion?()
             }
+        })
+    }
+
+    func uploadAvatar(data: Data, filename: String, mimetype: String, completion: (() -> Void)? = nil) {
+        let req = UploadAvatarRequest(
+            data: data,
+            filename: filename,
+            mimetype: mimetype
+        )
+
+        api.fetch(req, succeeded: { _ in
+            completion?()
+        }, errored: { _ in
+            completion?()
         })
     }
 }

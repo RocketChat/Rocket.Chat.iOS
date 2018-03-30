@@ -6,8 +6,11 @@
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
 
+import MBProgressHUD
+
 protocol Alerter: class {
     func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)?)
+    func alertSuccess(title: String)
 }
 
 extension UIViewController: Alerter {
@@ -15,6 +18,20 @@ extension UIViewController: Alerter {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: handler))
         present(alert, animated: true, completion: nil)
+    }
+
+    func alertSuccess(title: String) {
+        DispatchQueue.main.async {
+            let successHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
+            successHUD.mode = .customView
+
+            let checkmark = UIImage(named: "Checkmark")?.withRenderingMode(.alwaysTemplate)
+            successHUD.customView = UIImageView(image: checkmark)
+            successHUD.isSquare = true
+            successHUD.label.text = title
+
+            successHUD.hide(animated: true, afterDelay: 1.5)
+        }
     }
 }
 

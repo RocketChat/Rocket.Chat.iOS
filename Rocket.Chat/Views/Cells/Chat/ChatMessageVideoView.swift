@@ -55,9 +55,7 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
 
         if let imageData = try? Data(contentsOf: thumbURL) {
             if let thumbnail = UIImage(data: imageData) {
-                imageViewPreview.image = thumbnail
-                activityIndicator.stopAnimating()
-                buttonPlay.isHidden = false
+                stopLoadingPreview(thumbnail)
                 return
             }
         }
@@ -68,17 +66,25 @@ final class ChatMessageVideoView: ChatMessageAttachmentView {
             imageGenerator.appliesPreferredTrackTransform = true
             let time = CMTimeMake(1, 1)
 
-            if let imageRef = try? imageGenerator.copyCGImage(at: time, actualTime: nil) {
+            do {
+                let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
                 let thumbnail = UIImage(cgImage: imageRef)
+                try UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)
 
                 DispatchQueue.main.async {
-                    try? UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)
-
-                    self.activityIndicator.stopAnimating()
-                    self.imageViewPreview.image = thumbnail
-                    self.buttonPlay.isHidden = false
+                    self.stopLoadingPreview(thumbnail)
                 }
+            } catch {
+                self.stopLoadingPreview(nil)
             }
+        }
+    }
+
+    fileprivate func stopLoadingPreview(_ thumbnail: UIImage?) {
+        DispatchQueue.main.async {
+            self.activityIndicator.stopAnimating()
+            self.imageViewPreview.image = thumbnail
+            self.buttonPlay.isHidden = false
         }
     }
 
