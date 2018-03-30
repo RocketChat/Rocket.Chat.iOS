@@ -237,27 +237,6 @@ extension SocketManager: WebSocketDelegate {
             }
         }
     }
-
-    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
-        SocketManager.jsonParseQueue.async {
-            let json = JSON(parseJSON: text)
-
-            // JSON is invalid
-            guard json.exists() else {
-                Log.debug("[WebSocket] \(socket.currentURL)\n - did receive invalid JSON object:\n\(text)")
-                return
-            }
-
-            if let raw = json.rawString() {
-                Log.debug("[WebSocket] \(socket.currentURL)\n - did receive JSON message:\n\(raw)")
-            }
-
-            DispatchQueue.main.async {
-                self.handleMessage(json, socket: socket)
-            }
-        }
-    }
-
 }
 
 // MARK: WebSocketPongDelegate

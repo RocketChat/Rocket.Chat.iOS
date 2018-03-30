@@ -264,7 +264,6 @@
 "myaccount.settings.web_browser.title" = "Web browser"; // TODO
 "myaccount.settings.web_browser.footer" = "This application will be used to open links in Rocket Chat."; // TODO
 
->>>>>>> 8e87ca814daec9f97a15df9bac64472fca6405aa
 // Update Profile
 "myaccount.settings.profile.title" = "Profile"; // TODO
 "myaccount.settings.editing_profile.title" = "Edit Profile"; // TODO

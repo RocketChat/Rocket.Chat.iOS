@@ -165,7 +165,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                 self?.user = result.user
                 self?.isLoading = false
                 DispatchQueue.main.async {
-                    self?.navigationItem.rightBarButtonItem = self?.editButton
                     if self?.canEditAnyInfo ?? false {
                         self?.navigationItem.rightBarButtonItem = self?.editButton
                     }
@@ -196,7 +195,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.hidesBackButton = true
         navigationItem.leftBarButtonItem = cancelButton
-        avatarButton.setImage(editingAvatarImage, for: .normal)
 
         if authSettings?.isAllowedToEditAvatar ?? false {
             avatarButton.setImage(editingAvatarImage, for: .normal)
@@ -211,7 +209,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         navigationItem.hidesBackButton = false
         navigationItem.leftBarButtonItem = nil
         navigationItem.rightBarButtonItem = editButton
-        avatarButton.setImage(nil, for: .normal)
 
         if authSettings?.isAllowedToEditAvatar ?? false {
             avatarButton.setImage(nil, for: .normal)
@@ -220,11 +217,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     func enableUserInteraction() {
-        avatarButton.isEnabled = true
-        name.isEnabled = true
-        username.isEnabled = true
-        email.isEnabled = true
-        name.becomeFirstResponder()
         avatarButton.isEnabled = authSettings?.isAllowedToEditAvatar ?? false
 
         if authSettings?.isAllowedToEditName ?? false {
@@ -261,8 +253,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         hideKeyboard()
         avatarButton.isEnabled = false
         name.isEnabled = false
-        username.isEnabled = false
-        email.isEnabled = false
         name.textColor = .black
         username.isEnabled = false
         username.textColor = .black

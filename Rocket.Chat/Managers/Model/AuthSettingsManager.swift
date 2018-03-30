@@ -39,26 +39,23 @@ final class AuthSettingsManager {
                 return
             }
 
-            Realm.execute({ realm in
-                let settings = AuthManager.isAuthenticated()?.settings ?? AuthSettings()
-                currentRealm?.execute({ realm in
-                    let settings = AuthManager.isAuthenticated(realm: realm)?.settings ?? AuthSettings()
-                    settings.map(response.result["result"], realm: realm)
-                    realm.add(settings, update: true)
+            currentRealm?.execute({ realm in
+                let settings = AuthManager.isAuthenticated(realm: realm)?.settings ?? AuthSettings()
+                settings.map(response.result["result"], realm: realm)
+                realm.add(settings, update: true)
 
-                    if let auth = AuthManager.isAuthenticated(realm: realm) {
-                        auth.settings = settings
-                        realm.add(auth, update: true)
-                    }
+                if let auth = AuthManager.isAuthenticated(realm: realm) {
+                    auth.settings = settings
+                    realm.add(auth, update: true)
+                }
 
-                    let unmanagedSettings = AuthSettings(value: settings)
-                    shared.internalSettings = unmanagedSettings
+                let unmanagedSettings = AuthSettings(value: settings)
+                shared.internalSettings = unmanagedSettings
 
-                    DispatchQueue.main.async {
-                        ServerManager.updateServerInformation(from: unmanagedSettings)
-                        completion(unmanagedSettings)
-                    }
-                })
+                DispatchQueue.main.async {
+                    ServerManager.updateServerInformation(from: unmanagedSettings)
+                    completion(unmanagedSettings)
+                }
             })
         }
     }
@@ -76,3 +73,4 @@ final class AuthSettingsManager {
     }
 
 }
+
