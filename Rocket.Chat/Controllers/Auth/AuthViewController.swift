@@ -96,6 +96,7 @@ final class AuthViewController: BaseViewController {
         hideViewFields = !(AuthSettingsManager.settings?.isUsernameEmailAuthenticationEnabled ?? true)
         buttonResetPassword.isHidden = !(AuthSettingsManager.settings?.isPasswordResetEnabled ?? true)
 
+        updateFieldsPlaceholders()
         updateAuthenticationMethods()
     }
 
@@ -155,8 +156,22 @@ final class AuthViewController: BaseViewController {
     }
 
     // MARK: Authentication methods
+
+    fileprivate func updateFieldsPlaceholders() {
+        guard let settings = self.serverPublicSettings else { return }
+
+        if !(settings.emailOrUsernameFieldPlaceholder?.isEmpty ?? true) {
+            self.textFieldUsername.placeholder = settings.emailOrUsernameFieldPlaceholder
+        }
+
+        if !(settings.passwordFieldPlaceholder?.isEmpty ?? true) {
+            self.textFieldPassword.placeholder = settings.passwordFieldPlaceholder
+        }
+    }
+
     fileprivate func updateAuthenticationMethods() {
         guard let settings = self.serverPublicSettings else { return }
+
         self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
 
         if settings.isFacebookAuthenticationEnabled {
@@ -205,8 +220,9 @@ final class AuthViewController: BaseViewController {
             SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
 
             if let user = result.user {
-                if user.username != nil {
+                BugTrackingCoordinator.identifyCrashReports(withUser: user)
 
+                if user.username != nil {
                     DispatchQueue.main.async {
                         strongSelf.dismiss(animated: true, completion: nil)
                         AppManager.reloadApp()
@@ -216,6 +232,11 @@ final class AuthViewController: BaseViewController {
                         strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
                     }
                 }
+            } else {
+                self?.stopLoading()
+                Alert(
+                    key: "error.socket.default_error"
+                ).present()
             }
         }, errored: { [weak self] _ in
             self?.stopLoading()
@@ -404,7 +425,7 @@ extension AuthViewController {
     @objc func loginServiceButtonDidPress(_ button: UIButton) {
         guard
             let service = customAuthButtons.filter({ $0.value == button }).keys.first,
-            let realm = Realm.shared,
+            let realm = Realm.current,
             let loginService = LoginService.find(service: service, realm: realm)
         else {
             return

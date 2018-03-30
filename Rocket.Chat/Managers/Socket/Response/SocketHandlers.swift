@@ -9,7 +9,6 @@
 import Foundation
 import Starscream
 import SwiftyJSON
-import Crashlytics
 
 extension SocketManager {
 

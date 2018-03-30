@@ -1,4 +1,4 @@
-git sa//
+//
 //  AppDelegate.swift
 //  Rocket.Chat
 //

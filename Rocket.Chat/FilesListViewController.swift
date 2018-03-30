@@ -13,7 +13,7 @@ extension APIResult where T == SubscriptionAttachmentsRequest {
     func getFiles() -> [Attachment]? {
         return raw?["files"].arrayValue.map { json in
             let attachment = Attachment()
-            attachment.attachmentsListMap(json, realm: Realm.shared)
+            attachment.attachmentsListMap(json, realm: Realm.current)
             return attachment
         }
     }
@@ -40,7 +40,9 @@ class FilesListViewController: UIViewController {
         guard let subscription = subscription else { return }
         let request = SubscriptionAttachmentsRequest(roomId: subscription.rid, type: subscription.type)
         API.current()?.fetch(request, succeeded: { result in
-            guard let files: [Attachment] = result.getFiles() else { return }
+            guard let files: [Attachment] = result.getFiles() else {
+
+                return }
             self.attachments = files
             DispatchQueue.main.async {
                 self.filesCollectionView.reloadData()

@@ -18,12 +18,13 @@ struct PermissionManager {
             "params": [eventName, false]
             ] as [String: Any]
 
+        let currentRealm = Realm.current
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             let object = response.result["fields"]["args"][1]
 
-            Realm.execute({ (realm) in
+            currentRealm?.execute({ (realm) in
                 let permission = Permission.getOrCreate(realm: realm, values: object, updates: { _ in })
                 realm.add(permission, update: true)
             })
@@ -37,6 +38,7 @@ struct PermissionManager {
             "params": []
         ] as [String: Any]
 
+        let currentRealm = Realm.current
         SocketManager.send(requestPermissions) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
@@ -49,7 +51,7 @@ struct PermissionManager {
             let updated = response.result["result"]["update"].array
             let removed = response.result["result"]["remove"].array
 
-            Realm.execute({ realm in
+            currentRealm?.execute({ realm in
                 list?.forEach { object in
                     let permission = Permission.getOrCreate(realm: realm, values: object, updates: nil)
                     permissions.append(permission)
@@ -70,7 +72,7 @@ struct PermissionManager {
         }
     }
 
-    static func roles(for permission: PermissionType, realm: Realm? = Realm.shared) -> List<String>? {
+    static func roles(for permission: PermissionType, realm: Realm? = Realm.current) -> List<String>? {
         return realm?.object(ofType: Permission.self, forPrimaryKey: permission.rawValue)?.roles
     }
 }
