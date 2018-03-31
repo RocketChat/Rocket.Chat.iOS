@@ -73,7 +73,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
             NSPredicate(format: "name CONTAINS[cd] %@ OR username CONTAINS[cd] %@", name, name)
         )
 
-        let usernames = Array(users).compactMap { $0.username }.filter {
+        let usernames = Array(users).flatMap { $0.username }.filter {
             AuthManager.currentUser()?.username != $0
         }
 

@@ -43,8 +43,8 @@ class MessageTextCacheManager {
             text.setLineSpacing(MessageTextFontAttributes.defaultFont)
         }
 
-        let mentions = Array(message.mentions.compactMap { $0.username })
-        let channels = Array(message.channels.compactMap { $0.name })
+        let mentions = Array(message.mentions.flatMap { $0.username })
+        let channels = Array(message.channels.flatMap { $0.name })
         let username = AuthManager.currentUser()?.username
 
         let attributedString = text.transformMarkdown()

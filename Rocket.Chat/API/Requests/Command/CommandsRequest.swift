@@ -22,6 +22,6 @@ extension APIResult where T == CommandsRequest {
             let command = Command()
             command.map($0, realm: nil)
             return command
-            }.compactMap { $0 }
+        }.flatMap { $0 }
     }
 }

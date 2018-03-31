@@ -59,7 +59,7 @@ extension CustomEmoji {
     static func emojis() -> [Emoji] {
         guard let emojis = Realm.shared?.objects(CustomEmoji.self) else { return [] }
 
-        return emojis.compactMap { emoji -> Emoji? in
+        return emojis.flatMap { emoji -> Emoji? in
             guard let name = emoji.name, let imageUrl = emoji.imageUrl() else { return nil }
             return Emoji(name, name, false, Array(emoji.aliases), [], imageUrl)
         }
@@ -72,7 +72,7 @@ extension CustomEmoji: ModelMappeable {
             identifier = values["_id"].string
         }
 
-        if let aliases = values["aliases"].array?.compactMap({ $0.string }) {
+        if let aliases = values["aliases"].array?.flatMap({ $0.string }) {
             self.aliases.removeAll()
             self.aliases.append(contentsOf: aliases)
         }

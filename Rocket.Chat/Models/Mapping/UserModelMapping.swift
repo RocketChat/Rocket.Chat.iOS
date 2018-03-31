@@ -24,7 +24,7 @@ extension User: ModelMappeable {
             self.name = name
         }
 
-        if let roles = values["roles"].array?.compactMap({ $0.string }) {
+        if let roles = values["roles"].array?.flatMap({ $0.string }) {
             self.roles.removeAll()
             self.roles.append(contentsOf: roles)
         }
@@ -38,7 +38,7 @@ extension User: ModelMappeable {
         }
 
         if let emailsRaw = values["emails"].array {
-            let emails = emailsRaw.compactMap { emailRaw -> Email? in
+            let emails = emailsRaw.flatMap { emailRaw -> Email? in
                 let email = Email(value: [
                     "email": emailRaw["address"].stringValue,
                     "verified": emailRaw["verified"].boolValue

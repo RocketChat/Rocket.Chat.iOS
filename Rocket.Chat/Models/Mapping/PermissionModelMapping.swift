@@ -16,7 +16,7 @@ extension Permission: ModelMappeable {
             self.identifier = values["_id"].string
         }
 
-        if let roles = values["roles"].array?.compactMap({ $0.string }) {
+        if let roles = values["roles"].array?.flatMap({ $0.string }) {
             self.roles.removeAll()
             self.roles.append(contentsOf: roles)
         }

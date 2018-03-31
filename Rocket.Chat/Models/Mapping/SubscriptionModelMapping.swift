@@ -47,7 +47,7 @@ extension Subscription: ModelMappeable {
         self.roomTopic = values["topic"].stringValue
 
         self.roomMuted.removeAll()
-        if let roomMuted = values["muted"].array?.compactMap({ $0.string }) {
+        if let roomMuted = values["muted"].array?.flatMap({ $0.string }) {
             self.roomMuted.append(objectsIn: roomMuted)
         }
 

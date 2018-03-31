@@ -50,7 +50,7 @@ class MembersListViewData {
                 self.showing += result.count ?? 0
                 self.total = result.total ?? 0
                 if let members = result.members {
-                    self.membersPages.append(members.compactMap { $0 })
+                    self.membersPages.append(members.flatMap { $0 })
                 }
 
                 self.currentPage += 1
