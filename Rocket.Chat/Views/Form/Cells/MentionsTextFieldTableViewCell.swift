@@ -61,7 +61,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
 
     private func fetchUsers() {
         guard
-            let realm = Realm.shared,
+            let realm = Realm.current,
             let name = textFieldInput.text,
             name.count > 0
         else {

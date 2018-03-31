@@ -17,13 +17,14 @@ struct CustomEmojiManager {
             "params": []
         ] as [String: Any]
 
+        let currentRealm = Realm.current
         SocketManager.send(requestEmojis) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             let emojis = List<CustomEmoji>()
             let list = response.result["result"].array
 
-            Realm.execute({ realm in
+            currentRealm?.execute({ realm in
                 realm.delete(realm.objects(CustomEmoji.self))
 
                 list?.forEach { object in
