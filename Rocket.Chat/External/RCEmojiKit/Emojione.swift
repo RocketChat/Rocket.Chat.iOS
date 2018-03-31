@@ -24,7 +24,7 @@ struct Emojione {
     }()
 
     static var regex: String = {
-        Emojione.values.keys.flatMap { $0.escapingRegex() }.reduce("") { $0.isEmpty ? ":\($1):" : "\($0)|:\($1):" }
+        Emojione.values.keys.compactMap { $0.escapingRegex() }.reduce("") { $0.isEmpty ? ":\($1):" : "\($0)|:\($1):" }
     }()
 
     static let values: [String: String] = {
