@@ -11,7 +11,7 @@ import RealmSwift
 struct CommandsClient: APIClient {
     let api: AnyAPIFetcher
 
-    func fetchCommands(realm: Realm? = Realm.shared) {
+    func fetchCommands(realm: Realm? = Realm.current) {
         api.fetch(CommandsRequest(), succeeded: { result in
             DispatchQueue.main.async {
                 result.commands?.forEach { command in
