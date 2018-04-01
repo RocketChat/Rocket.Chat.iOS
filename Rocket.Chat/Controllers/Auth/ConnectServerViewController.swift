@@ -9,13 +9,15 @@
 import UIKit
 import SwiftyJSON
 import semver
+import Reachability
 
 final class ConnectServerViewController: BaseViewController {
-
     internal let defaultURL = "https://open.rocket.chat"
     internal var connecting = false
     internal let infoRequestHandler = InfoRequestHandler()
-
+    let reachability =  Reachability()!
+    let alertController = UIAlertController(title: "Warning!", message:
+        "Connect To Internet!", preferredStyle: UIAlertControllerStyle.alert)
     var deepLinkCredentials: DeepLinkCredentials?
 
     var url: URL? {
@@ -25,7 +27,6 @@ final class ConnectServerViewController: BaseViewController {
         }
         return  URL(string: urlText, scheme: "https")
     }
-
     var serverPublicSettings: AuthSettings?
 
     @IBOutlet weak var buttonClose: UIBarButtonItem!
@@ -33,7 +34,6 @@ final class ConnectServerViewController: BaseViewController {
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
     @IBOutlet weak var textFieldServerURL: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
     @IBOutlet weak var viewFields: UIView! {
         didSet {
             viewFields.layer.cornerRadius = 4
@@ -43,10 +43,6 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     @IBOutlet weak var labelSSLRequired: UILabel!
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
-    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +60,23 @@ final class ConnectServerViewController: BaseViewController {
         if let nav = navigationController as? BaseNavigationController {
             nav.setTransparentTheme()
         }
-    }
+        NotificationCenter.default.addObserver(self, selector: #selector(internetConnection), name: Notification.Name.reachabilityChanged, object: reachability)
+        do {
+            try reachability.startNotifier()
+        } catch {
+            print(error)
+        }
+        reachability.whenReachable = { reachability in
+            DispatchQueue.main.async {
+                self.textFieldServerURL.isEnabled = true
+                self.alertController.dismiss(animated: true, completion: nil) } }
+        reachability.whenUnreachable = { reachability in
+            DispatchQueue.main.async {
+                self.textFieldServerURL.isEnabled = false
+                self.present(self.alertController, animated: true, completion: nil) } }
+        alertController.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        alertController.title = NSLocalizedString("Warning!", comment: "")
+        alertController.message = NSLocalizedString("Connect To Internet Please!", comment: "")}
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -78,7 +90,24 @@ final class ConnectServerViewController: BaseViewController {
             textFieldServerURL.text = applicationServerURL.host
             connect()
         }
+        NotificationCenter.default.addObserver(self, selector: #selector(internetConnection), name: Notification.Name.reachabilityChanged, object: reachability)
+                do {
+                    try reachability.startNotifier()
+                    } catch {
+                            print(error)
+                        }
     }
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(true)
+    }
+    @objc func internetConnection(notification: NSNotification) {
+                guard let reachability = notification.object as? Reachability else {return}
+                if reachability.isReachable { return }
+                   else { return }
+            }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
