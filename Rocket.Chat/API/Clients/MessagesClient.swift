@@ -127,7 +127,7 @@ struct MessagesClient: APIClient {
     }
 
     @discardableResult
-    func reactMessage(_ message: Message, emoji: String, realm: Realm? = Realm.shared) -> Bool {
+    func reactMessage(_ message: Message, emoji: String, realm: Realm? = Realm.current) -> Bool {
         guard let id = message.identifier else { return false }
 
         api.fetch(ReactMessageRequest(msgId: id, emoji: emoji), succeeded: nil, errored: { error in
