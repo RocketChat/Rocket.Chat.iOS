@@ -12,6 +12,7 @@ import SwiftyJSON
 typealias CustomEmojiResult = APIResult<CustomEmojiRequest>
 
 class CustomEmojiRequest: APIRequest {
+    let requiredVersion = Version(0, 61, 0)
     let path = "/api/v1/emoji-custom"
 }
 
@@ -31,5 +32,9 @@ extension APIResult where T == CustomEmojiRequest {
 
     var success: Bool {
         return raw?["success"].bool ?? false
+    }
+
+    var errorMessage: String? {
+        return raw?["error"].string
     }
 }
