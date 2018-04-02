@@ -25,7 +25,7 @@ struct LoginServiceManager {
 // MARK: Realm
 extension LoginServiceManager {
     static func observe(block: @escaping (RealmCollectionChange<Results<LoginService>>) -> Void) -> NotificationToken? {
-        let objects = Realm.shared?.objects(LoginService.self)
+        let objects = Realm.current?.objects(LoginService.self)
         return objects?.observe(block)
     }
 }

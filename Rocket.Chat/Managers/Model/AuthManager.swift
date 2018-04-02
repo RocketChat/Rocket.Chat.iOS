@@ -16,7 +16,7 @@ struct AuthManager {
     /**
         - returns: Last auth object (sorted by lastAccess), if exists.
     */
-    static func isAuthenticated(realm: Realm? = Realm.shared) -> Auth? {
+    static func isAuthenticated(realm: Realm? = Realm.current) -> Auth? {
         guard let realm = realm else { return nil }
         return realm.objects(Auth.self).sorted(byKeyPath: "lastAccess", ascending: false).first
     }
@@ -48,6 +48,7 @@ struct AuthManager {
 
         servers[selectedIndex][ServerPersistKeys.token] = token
         servers[selectedIndex][ServerPersistKeys.userId] = userId
+        servers[selectedIndex][ServerPersistKeys.serverVersion] = auth.serverVersion
 
         defaults.set(servers, forKey: ServerPersistKeys.servers)
     }

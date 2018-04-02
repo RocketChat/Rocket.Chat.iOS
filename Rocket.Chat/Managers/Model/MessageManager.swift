@@ -38,6 +38,7 @@ extension MessageManager {
 
         let validMessages = List<Message>()
 
+        let currentRealm = Realm.current
         SocketManager.send(request) { response in
             guard !response.isError() else {
                 return Log.debug(response.result.string)
@@ -46,7 +47,7 @@ extension MessageManager {
             let list = response.result["result"]["messages"].array
             let subscriptionIdentifier = subscription.identifier
 
-            Realm.execute({ (realm) in
+            currentRealm?.execute({ (realm) in
                 guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
 
                 list?.forEach { object in
@@ -84,6 +85,7 @@ extension MessageManager {
             "params": [eventName, false]
         ] as [String: Any]
 
+        let currentRealm = Realm.current
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else {
                 return Log.debug(response.result.string)
@@ -92,7 +94,7 @@ extension MessageManager {
             let object = response.result["fields"]["args"][0]
             let subscriptionIdentifier = subscription.identifier
 
-            Realm.execute({ (realm) in
+            currentRealm?.execute({ (realm) in
                 guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionIdentifier ?? "") else { return }
                 let message = Message.getOrCreate(realm: realm, values: object, updates: { (object) in
                     object?.subscription = detachedSubscription
@@ -113,11 +115,12 @@ extension MessageManager {
             "params": [eventName, false]
         ] as [String: Any]
 
+        let currentRealm = Realm.current
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
             if let msgId = response.result["fields"]["args"][0]["_id"].string {
-                Realm.executeOnMainThread({ realm in
+                Realm.executeOnMainThread(realm: currentRealm, { realm in
                     guard let message = realm.object(ofType: Message.self, forPrimaryKey: msgId) else { return }
                     realm.delete(message)
                     completion(msgId)
