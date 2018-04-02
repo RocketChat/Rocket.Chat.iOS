@@ -14,7 +14,7 @@ struct SpotlightClient: APIClient {
         self.api = api
     }
 
-    func search(query: String, realm: Realm? = Realm.shared, completion: @escaping ([Subscription]) -> Void) {
+    func search(query: String, realm: Realm? = Realm.current, completion: @escaping ([Subscription]) -> Void) {
         api.fetch(SpotlightRequest(query: query), succeeded: { result in
             guard result.success else {
                 completion([])

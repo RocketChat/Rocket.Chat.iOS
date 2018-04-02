@@ -306,7 +306,7 @@ extension SubscriptionsViewController {
     func subscribeModelChanges() {
         guard !assigned else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
-        guard let realm = Realm.shared else { return }
+        guard let realm = Realm.current else { return }
 
         assigned = true
 
