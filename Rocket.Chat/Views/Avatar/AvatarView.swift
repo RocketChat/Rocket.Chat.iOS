@@ -128,7 +128,7 @@ final class AvatarView: UIView {
 
         let username = user.username ?? "?"
         var initials = ""
-        var color: UIColor = .black
+        var color = UIColor.black
 
         if username == "?" {
             initials = username
