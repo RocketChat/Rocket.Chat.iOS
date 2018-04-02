@@ -151,6 +151,7 @@ final class ConnectServerViewController: BaseViewController {
     func connectWebSocket() {
         guard let serverURL = infoRequestHandler.url else { return infoRequestHandler.alertInvalidURL() }
         guard let socketURL = infoRequestHandler.url?.socketURL() else { return infoRequestHandler.alertInvalidURL() }
+        let serverVersion = infoRequestHandler.version
 
         SocketManager.connect(socketURL) { [weak self] (_, connected) in
             if !connected {
