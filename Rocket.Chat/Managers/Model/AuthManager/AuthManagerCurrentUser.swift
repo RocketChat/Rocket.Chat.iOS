@@ -1,5 +1,5 @@
 //
-//  AuthManager+CurrentUser.swift
+//  AuthManagerCurrentUser.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/1/18.

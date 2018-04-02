@@ -49,15 +49,8 @@ extension User: ModelMappeable {
                 return email
             }
 
-            if let realm = realm {
-                emails.forEach({ email in
-                    if let realmEmail = realm.object(ofType: Email.self, forPrimaryKey: email.identifier as AnyObject) {
-                        self.emails.append(realmEmail)
-                    }
-                })
-            } else {
-                self.emails.append(contentsOf: emails)
-            }
+            self.emails.removeAll()
+            self.emails.append(contentsOf: emails)
         }
     }
 }

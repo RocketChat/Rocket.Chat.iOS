@@ -1,5 +1,5 @@
 //
-//  User+Query.swift
+//  UserQueries.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/1/18.
@@ -14,22 +14,22 @@ enum UserQueryParameter {
 }
 
 extension User {
-    static func find(username: String, realm: Realm? = Realm.shared) -> User? {
+    static func find(username: String, realm: Realm? = Realm.current) -> User? {
         guard
             let realm = realm,
             let user = realm.objects(User.self).filter("username = %@", username).first
-            else {
+        else {
                 return nil
         }
 
         return user
     }
 
-    static func fetch(by queryParameter: UserQueryParameter, realm: Realm? = Realm.shared, api: API? = API.current(), completion: @escaping (User?) -> Void) {
+    static func fetch(by queryParameter: UserQueryParameter, realm: Realm? = Realm.current, api: API? = API.current(), completion: @escaping (User?) -> Void) {
         guard
             let realm = realm,
             let api = api
-            else {
+        else {
                 return
         }
 

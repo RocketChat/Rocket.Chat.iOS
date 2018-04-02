@@ -1,5 +1,5 @@
 //
-//  Subscription+Extensions.swift
+//  SubscriptionUtils.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/1/18.
@@ -9,7 +9,6 @@
 import RealmSwift
 
 extension Subscription {
-
     func displayName() -> String {
         guard let settings = AuthSettingsManager.settings else {
             return name
@@ -96,5 +95,4 @@ extension Subscription {
             self.favorite = favorite
         })
     }
-
 }

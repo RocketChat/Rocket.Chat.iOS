@@ -1,5 +1,5 @@
 //
-//  User+Extensions.swift
+//  UserUtils.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/1/18.
@@ -9,8 +9,7 @@
 import RealmSwift
 
 extension User {
-
-    func hasPermission(_ permission: PermissionType, realm: Realm? = Realm.shared) -> Bool {
+    func hasPermission(_ permission: PermissionType, realm: Realm? = Realm.current) -> Bool {
         guard let permissionRoles = PermissionManager.roles(for: permission, realm: realm) else { return false }
 
         for userRole in self.roles {
@@ -50,11 +49,10 @@ extension User {
         return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
     }
 
-    func canViewAdminPanel(realm: Realm? = Realm.shared) -> Bool {
+    func canViewAdminPanel(realm: Realm? = Realm.current) -> Bool {
         return hasPermission(.viewPrivilegedSetting, realm: realm) ||
             hasPermission(.viewStatistics, realm: realm) ||
             hasPermission(.viewUserAdministration, realm: realm) ||
             hasPermission(.viewRoomAdministration, realm: realm)
     }
-
 }

@@ -1,5 +1,5 @@
 //
-//  Realm+Shared.swift
+//  RealmCurrent.swift
 //  Rocket.Chat
 //
 //  Created by Rafael K. Streit on 7/18/16.
@@ -13,8 +13,7 @@ import RealmSwift
 var realmConfiguration: Realm.Configuration?
 
 extension Realm {
-
-    static var shared: Realm? {
+    static var current: Realm? {
         if let configuration = realmConfiguration {
             return try? Realm(configuration: configuration)
         } else {

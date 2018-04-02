@@ -11,7 +11,7 @@ import RealmSwift
 
 extension ChatViewController {
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
-        guard let realm = Realm.shared else { return }
+        guard let realm = Realm.current else { return }
 
         searchResult = []
         searchWord = word

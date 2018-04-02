@@ -12,7 +12,7 @@ extension Auth {
     var user: User? {
         guard let userId = userId else { return nil }
 
-        let realm = self.realm ?? Realm.shared
+        let realm = self.realm ?? Realm.current
         return realm?.object(ofType: User.self, forPrimaryKey: userId)
     }
 }
