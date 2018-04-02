@@ -4,7 +4,7 @@ This document describes how the mobile team is planning each one of the releases
 
 **What’s a release?**
 
-The release is every version of the app that’s sent to the store as a production release. The release is always a major update, like from (1.0.0 to 1.1.0 or to 2.0.0). Minor releases (from 1.0.0 to 1.0.1) won’t follow this guide and are considered hotfixes releases.
+The release is every version of the app that’s sent to the store as a production release. The release is always a major/minor update, like from (1.0.0 to 1.1.0 or to 2.0.0). Patch releases (from 1.0.0 to 1.0.1) won’t follow this steps and are considered hotfixes releases. Our versioning is following the [Semantic Versioning 2.0.0](https://semver.org) guide.
 
 
 **What are the important days of a release?**
