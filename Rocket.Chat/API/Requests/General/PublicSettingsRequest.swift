@@ -10,7 +10,7 @@ import Foundation
 typealias PublicSettingsResult = APIResult<PublicSettingsRequest>
 
 class PublicSettingsRequest: APIRequest {
-    let requiredVersion = Version(0, 61, 0)
+    let requiredVersion = Version(0, 62, 2)
     let path = "/api/v1/settings.public"
 }
 
