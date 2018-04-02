@@ -1,5 +1,5 @@
 //
-//  ChatMessageCell+Accessibility.swift
+//  ChatMessageCellAccessibility.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/26/18.
