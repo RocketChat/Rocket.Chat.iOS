@@ -427,6 +427,7 @@
 		9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */; };
 		996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996154B0205197E7009B9857 /* NewPasswordViewModel.swift */; };
 		9977302720725B5C009AF465 /* CustomEmojiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302620725B5C009AF465 /* CustomEmojiRequest.swift */; };
+		9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */; };
 		998165CA204EBBA10059D346 /* UpdateUserRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998165C9204EBBA10059D346 /* UpdateUserRequestSpec.swift */; };
 		998165CC204EDBA30059D346 /* UploadAvatarRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998165CB204EDBA30059D346 /* UploadAvatarRequestSpec.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
@@ -932,6 +933,7 @@
 		9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebBrowserTableViewController.swift; path = Controllers/Settings/WebBrowserTableViewController.swift; sourceTree = "<group>"; };
 		996154B0205197E7009B9857 /* NewPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewPasswordViewModel.swift; path = Controllers/Settings/NewPasswordViewModel.swift; sourceTree = "<group>"; };
 		9977302620725B5C009AF465 /* CustomEmojiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequest.swift; sourceTree = "<group>"; };
+		9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequestSpec.swift; sourceTree = "<group>"; };
 		998165C9204EBBA10059D346 /* UpdateUserRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserRequestSpec.swift; sourceTree = "<group>"; };
 		998165CB204EDBA30059D346 /* UploadAvatarRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequestSpec.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
@@ -2198,6 +2200,14 @@
 			path = Emoji;
 			sourceTree = "<group>";
 		};
+		9977302820727DA0009AF465 /* Emoji */ = {
+			isa = PBXGroup;
+			children = (
+				9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */,
+			);
+			path = Emoji;
+			sourceTree = "<group>";
+		};
 		998165C8204EBB5E0059D346 /* User */ = {
 			isa = PBXGroup;
 			children = (
@@ -2249,6 +2259,7 @@
 				806C59A31FBB2F3700C32D0A /* Message */,
 				802498EF1F7A9B92005477EC /* Authentication */,
 				80235D201F7442C100A56CA5 /* Subscription */,
+				9977302820727DA0009AF465 /* Emoji */,
 				D18675E91F70A58B00406FB4 /* InfoRequestSpec.swift */,
 			);
 			path = Requests;
@@ -3220,6 +3231,7 @@
 				8013F8431FD02D8F00EE1A4E /* ChatCollectionViewFlowLayoutSpec.swift in Sources */,
 				77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */,
 				998165CA204EBBA10059D346 /* UpdateUserRequestSpec.swift in Sources */,
+				9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */,
 				807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				990B4B642069DC9900999FE7 /* EditProfileTableViewControllerSpec.swift in Sources */,
