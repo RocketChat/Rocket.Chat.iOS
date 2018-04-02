@@ -1,5 +1,5 @@
 //
-//  AuthViewController+ConnectionHandler.swift
+//  AuthViewControllerConnectionHandler.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/26/18.

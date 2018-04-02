@@ -11,8 +11,21 @@ import RealmSwift
 // MARK: Login Services
 
 extension AuthViewController {
+    func updateFieldsPlaceholders() {
+        guard let settings = self.serverPublicSettings else { return }
+
+        if !(settings.emailOrUsernameFieldPlaceholder?.isEmpty ?? true) {
+            self.textFieldUsername.placeholder = settings.emailOrUsernameFieldPlaceholder
+        }
+
+        if !(settings.passwordFieldPlaceholder?.isEmpty ?? true) {
+            self.textFieldPassword.placeholder = settings.passwordFieldPlaceholder
+        }
+    }
+
     func updateAuthenticationMethods() {
         guard let settings = self.serverPublicSettings else { return }
+
         self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
 
         if settings.isFacebookAuthenticationEnabled {
@@ -44,6 +57,67 @@ extension AuthViewController {
         }
 
         LoginServiceManager.subscribe()
+    }
+
+    func presentOAuthViewController(for loginService: LoginService) {
+        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
+            guard let strongSelf = self else { return }
+
+            strongSelf.startLoading()
+            AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
+            }, failure: { [weak self] in
+                self?.alert(
+                    title: localized("alert.login_service_error.title"),
+                    message: localized("alert.login_service_error.message")
+                )
+
+                self?.stopLoading()
+        })
+    }
+
+    func presentCASViewController(for loginService: LoginService) {
+        guard
+            let loginUrlString = loginService.loginUrl,
+            let loginUrl = URL(string: loginUrlString),
+            let host = serverURL.host,
+            let callbackUrl = URL(string: "https://\(host)/_cas/\(String.random(17))")
+            else {
+                return
+        }
+
+        let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
+            AuthManager.auth(casCredentialToken: $0, completion: self.handleAuthenticationResponse)
+        }, failure: { [weak self] in
+            self?.stopLoading()
+        })
+
+        self.startLoading()
+
+        navigationController?.pushViewController(controller, animated: true)
+
+        return
+    }
+
+    func presentSAMLViewController(for loginService: LoginService) {
+        guard
+            let provider = loginService.provider,
+            let host = serverURL.host,
+            let serverUrl = URL(string: "https://\(host)")
+            else {
+                return
+        }
+
+        let controller = SAMLViewController(serverUrl: serverUrl, provider: provider, success: {
+            AuthManager.auth(samlCredentialToken: $0, completion: self.handleAuthenticationResponse)
+        }, failure: { [weak self] in
+            self?.stopLoading()
+        })
+
+        self.startLoading()
+
+        navigationController?.pushViewController(controller, animated: true)
+
+        return
     }
 
     func addOAuthButton(for loginService: LoginService) {
@@ -106,71 +180,6 @@ extension AuthViewController {
                 customAuthButtons.removeValue(forKey: identifier)
             }
         default: break
-        }
     }
-}
-
-// MARK: Authentication WebViews
-
-extension AuthViewController {
-    func presentOAuthViewController(for loginService: LoginService) {
-        OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
-            guard let strongSelf = self else { return }
-
-            strongSelf.startLoading()
-            AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
-            }, failure: { [weak self] in
-                self?.alert(
-                    title: localized("alert.login_service_error.title"),
-                    message: localized("alert.login_service_error.message")
-                )
-
-                self?.stopLoading()
-        })
-    }
-
-    func presentCASViewController(for loginService: LoginService) {
-        guard
-            let loginUrlString = loginService.loginUrl,
-            let loginUrl = URL(string: loginUrlString),
-            let host = serverURL.host,
-            let callbackUrl = URL(string: "https://\(host)/_cas/\(String.random(17))")
-        else {
-            return
-        }
-
-        let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
-            AuthManager.auth(casCredentialToken: $0, completion: self.handleAuthenticationResponse)
-        }, failure: { [weak self] in
-            self?.stopLoading()
-        })
-
-        self.startLoading()
-
-        navigationController?.pushViewController(controller, animated: true)
-
-        return
-    }
-
-    func presentSAMLViewController(for loginService: LoginService) {
-        guard
-            let provider = loginService.provider,
-            let host = serverURL.host,
-            let serverUrl = URL(string: "https://\(host)")
-        else {
-            return
-        }
-
-        let controller = SAMLViewController(serverUrl: serverUrl, provider: provider, success: {
-            AuthManager.auth(samlCredentialToken: $0, completion: self.handleAuthenticationResponse)
-        }, failure: { [weak self] in
-            self?.stopLoading()
-        })
-
-        self.startLoading()
-
-        navigationController?.pushViewController(controller, animated: true)
-
-        return
     }
 }

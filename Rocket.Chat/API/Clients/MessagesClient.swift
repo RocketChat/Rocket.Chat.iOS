@@ -12,7 +12,7 @@ import SwiftyJSON
 struct MessagesClient: APIClient {
     let api: AnyAPIFetcher
 
-    func sendMessage(_ message: Message, subscription: Subscription, realm: Realm? = Realm.shared) {
+    func sendMessage(_ message: Message, subscription: Subscription, realm: Realm? = Realm.current) {
         guard let id = message.identifier else { return }
 
         try? realm?.write {
@@ -67,7 +67,7 @@ struct MessagesClient: APIClient {
         })
     }
 
-    func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.shared) {
+    func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
         let message = Message()
         message.internalType = ""
         message.updatedAt = nil
@@ -82,7 +82,7 @@ struct MessagesClient: APIClient {
     }
 
     @discardableResult
-    func deleteMessage(_ message: Message, asUser: Bool, realm: Realm? = Realm.shared) -> Bool {
+    func deleteMessage(_ message: Message, asUser: Bool, realm: Realm? = Realm.current) -> Bool {
         guard
             let id = message.identifier,
             !message.rid.isEmpty
@@ -97,7 +97,7 @@ struct MessagesClient: APIClient {
     }
 
     @discardableResult
-    func updateMessage(_ message: Message, text: String, realm: Realm? = Realm.shared) -> Bool {
+    func updateMessage(_ message: Message, text: String, realm: Realm? = Realm.current) -> Bool {
         guard
             let id = message.identifier,
             !message.rid.isEmpty

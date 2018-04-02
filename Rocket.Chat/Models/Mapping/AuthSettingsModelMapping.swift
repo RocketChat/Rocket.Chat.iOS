@@ -49,6 +49,10 @@ extension AuthSettings: ModelMappeable {
         self.rawRegistrationForm = objectForKey(object: values, key: "Accounts_RegistrationForm")?.string
         self.isPasswordResetEnabled = objectForKey(object: values, key: "Accounts_PasswordReset")?.bool ?? true
 
+        // Authentication Placeholder Fields
+        self.emailOrUsernameFieldPlaceholder = objectForKey(object: values, key: "Accounts_EmailOrUsernamePlaceholder")?.stringValue ?? ""
+        self.passwordFieldPlaceholder = objectForKey(object: values, key: "Accounts_PasswordPlaceholder")?.stringValue ?? ""
+
         // Accounts
         self.emailVerification = objectForKey(object: values, key: "Accounts_EmailVerification")?.bool ?? false
         self.isAllowedToEditProfile = objectForKey(object: values, key: "Accounts_AllowUserProfileChange")?.bool ?? false

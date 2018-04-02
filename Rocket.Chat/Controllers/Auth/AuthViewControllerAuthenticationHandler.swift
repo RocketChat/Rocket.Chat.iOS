@@ -9,7 +9,7 @@
 import Foundation
 
 extension AuthViewController {
-    func handleAuthenticationResponse(_ response: SocketResponse) {
+    internal func handleAuthenticationResponse(_ response: SocketResponse) {
         if response.isError() {
             stopLoading()
 
@@ -34,8 +34,9 @@ extension AuthViewController {
             SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
 
             if let user = result.user {
-                if user.username != nil {
+                BugTrackingCoordinator.identifyCrashReports(withUser: user)
 
+                if user.username != nil {
                     DispatchQueue.main.async {
                         strongSelf.dismiss(animated: true, completion: nil)
                         AppManager.reloadApp()

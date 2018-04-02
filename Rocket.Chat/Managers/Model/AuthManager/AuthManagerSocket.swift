@@ -1,5 +1,5 @@
 //
-//  AuthManager+Socket.swift
+//  AuthManagerSocket.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/26/18.
@@ -265,6 +265,7 @@ extension AuthManager {
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
             GIDSignIn.sharedInstance().signOut()
+            BugTrackingCoordinator.anonymizeCrashReports()
 
             DraftMessageManager.clearServerDraftMessages()
 

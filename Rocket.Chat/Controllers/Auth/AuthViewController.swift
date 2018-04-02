@@ -96,6 +96,7 @@ final class AuthViewController: BaseViewController {
         hideViewFields = !(AuthSettingsManager.settings?.isUsernameEmailAuthenticationEnabled ?? true)
         buttonResetPassword.isHidden = !(AuthSettingsManager.settings?.isPasswordResetEnabled ?? true)
 
+        updateFieldsPlaceholders()
         updateAuthenticationMethods()
     }
 
@@ -209,7 +210,7 @@ final class AuthViewController: BaseViewController {
     @objc func loginServiceButtonDidPress(_ button: UIButton) {
         guard
             let service = customAuthButtons.filter({ $0.value == button }).keys.first,
-            let realm = Realm.shared,
+            let realm = Realm.current,
             let loginService = LoginService.find(service: service, realm: realm)
         else {
             return
