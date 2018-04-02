@@ -108,7 +108,6 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
             realm.add(message)
         }
 
-
         let result = client.reactMessage(message, emoji: "party_parrot", realm: realm)
 
         XCTAssert(result)
