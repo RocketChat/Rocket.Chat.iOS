@@ -13,7 +13,7 @@ extension SubscriptionMessagesResource {
     func getMessages() -> [Message?]? {
         return raw?["messages"].arrayValue.map { json in
             let message = Message()
-            message.map(json, realm: Realm.shared)
+            message.map(json, realm: Realm.current)
             return message
         }
     }

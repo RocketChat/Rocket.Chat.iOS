@@ -11,7 +11,7 @@ import RealmSwift
 struct InfoClient: APIClient {
     let api: AnyAPIFetcher
 
-    func fetchInfo(realm: Realm? = Realm.shared) {
+    func fetchInfo(realm: Realm? = Realm.current) {
         api.fetch(InfoRequest()) { response in
             switch response {
             case .resource(let resource):

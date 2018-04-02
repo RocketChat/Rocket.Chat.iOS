@@ -35,7 +35,7 @@ class User: BaseModel {
 
 extension User {
 
-    func hasPermission(_ permission: PermissionType, realm: Realm? = Realm.shared) -> Bool {
+    func hasPermission(_ permission: PermissionType, realm: Realm? = Realm.current) -> Bool {
         guard let permissionRoles = PermissionManager.roles(for: permission, realm: realm) else { return false }
 
         for userRole in self.roles {
@@ -75,7 +75,7 @@ extension User {
         return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
     }
 
-    func canViewAdminPanel(realm: Realm? = Realm.shared) -> Bool {
+    func canViewAdminPanel(realm: Realm? = Realm.current) -> Bool {
         return hasPermission(.viewPrivilegedSetting, realm: realm) ||
             hasPermission(.viewStatistics, realm: realm) ||
             hasPermission(.viewUserAdministration, realm: realm) ||
@@ -91,7 +91,7 @@ enum UserQueryParameter {
 }
 
 extension User {
-    static func find(username: String, realm: Realm? = Realm.shared) -> User? {
+    static func find(username: String, realm: Realm? = Realm.current) -> User? {
         guard
             let realm = realm,
             let user = realm.objects(User.self).filter("username = %@", username).first
@@ -102,7 +102,7 @@ extension User {
         return user
     }
 
-    static func fetch(by queryParameter: UserQueryParameter, realm: Realm? = Realm.shared, api: API? = API.current(), completion: @escaping (User?) -> Void) {
+    static func fetch(by queryParameter: UserQueryParameter, realm: Realm? = Realm.current, api: API? = API.current(), completion: @escaping (User?) -> Void) {
         guard
             let realm = realm,
             let api = api

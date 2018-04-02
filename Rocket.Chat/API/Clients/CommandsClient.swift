@@ -11,17 +11,19 @@ import RealmSwift
 struct CommandsClient: APIClient {
     let api: AnyAPIFetcher
 
-    func fetchCommands(realm: Realm? = Realm.shared) {
+    func fetchCommands(realm: Realm? = Realm.current) {
         api.fetch(CommandsRequest()) { response in
-            switch response {
-            case .resource(let resource):
-                resource.commands?.forEach { command in
-                    try? realm?.write {
-                        realm?.add(command, update: true)
+            DispatchQueue.main.async {
+                switch response {
+                case .resource(let resource):
+                    resource.commands?.forEach { command in
+                        try? realm?.write {
+                            realm?.add(command, update: true)
+                        }
                     }
+                case .error:
+                    break
                 }
-            case .error:
-                break
             }
         }
     }
