@@ -48,7 +48,7 @@ class CustomEmojiRequestSpec: APITestCase {
 
         let nilResult = CustomEmojiResult(raw: nil)
         XCTAssertEqual(nilResult.customEmoji.count, 0)
-        XCTAssertEqual(result.success, false)
+        XCTAssertEqual(nilResult.success, false)
     }
 
 }
