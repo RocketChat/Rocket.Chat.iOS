@@ -354,6 +354,7 @@
 		8041C0442028C828007E21FA /* ReactorListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8041C0432028C828007E21FA /* ReactorListView.xib */; };
 		8041C04620290A48007E21FA /* RCEmojiKitLocalizable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */; };
 		8041C048202BA234007E21FA /* RCEmojiKit.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8041C047202BA233007E21FA /* RCEmojiKit.xcassets */; };
+		805B99952072AF24003F635E /* SpotlightClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805B99942072AF24003F635E /* SpotlightClient.swift */; };
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
 		805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC361FFC08870033151B /* CustomEmoji.swift */; };
 		805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC381FFE54820033151B /* CustomEmojiSpec.swift */; };
@@ -853,6 +854,7 @@
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
 		8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCEmojiKitLocalizable.swift; sourceTree = "<group>"; };
 		8041C047202BA233007E21FA /* RCEmojiKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RCEmojiKit.xcassets; sourceTree = "<group>"; };
+		805B99942072AF24003F635E /* SpotlightClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpotlightClient.swift; sourceTree = "<group>"; };
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
 		805DEC361FFC08870033151B /* CustomEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmoji.swift; sourceTree = "<group>"; };
 		805DEC381FFE54820033151B /* CustomEmojiSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiSpec.swift; sourceTree = "<group>"; };
@@ -1963,6 +1965,7 @@
 				80054CF41FD96AFE00F5ECF9 /* MessagesClientSpec.swift */,
 				8013F87F1FD6B6C600EE1A4E /* CommandsClientSpec.swift */,
 				8013F8801FD6B6C600EE1A4E /* InfoClientSpec.swift */,
+				805B99942072AF24003F635E /* SpotlightClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -3244,6 +3247,7 @@
 				77C261251F97445300724A1F /* AuthSettingsSpec.swift in Sources */,
 				80054CF51FD96AFE00F5ECF9 /* MessagesClientSpec.swift in Sources */,
 				411498E51FC7B8D500D66542 /* AttachmentSpec.swift in Sources */,
+				805B99952072AF24003F635E /* SpotlightClient.swift in Sources */,
 				8013F87C1FD6B64500EE1A4E /* MockAPI.swift in Sources */,
 				41DC7A221D386B4700896FC0 /* StringExtensionSpec.swift in Sources */,
 				68D186DF1ED9714F0030EE8C /* MessageURLSpec.swift in Sources */,
