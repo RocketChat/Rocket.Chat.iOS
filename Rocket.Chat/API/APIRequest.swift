@@ -57,8 +57,8 @@ extension APIRequest {
     }
 
     func request(for api: API, options: APIRequestOptions = .none) -> URLRequest? {
-        let requestedUrl = api.host.appendingPathComponent(path)
-        var components = URLComponents(url: requestedUrl, resolvingAgainstBaseURL: false)
+        var components = URLComponents(url: api.host, resolvingAgainstBaseURL: false)
+        components?.path += path
         components?.query = query
 
         if let optionsQuery = options.query {
