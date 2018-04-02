@@ -54,7 +54,6 @@ extension CustomEmoji {
         cachedEmojis = emojiReplacementStrings
         return emojiReplacementStrings
     }
-    
     static func emojis() -> [Emoji] {
         guard let emojis = Realm.current?.objects(CustomEmoji.self) else { return [] }
 
