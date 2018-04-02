@@ -21,6 +21,15 @@ In general, if it’s a new feature, it’ll be postpone for the next release on
 
 Every month can be a different day between 27th and 5th to plan the next release. The leader of the team will schedule the team and the all team will be able to participate of the planning. At this moment, most of the issues will be assigned to each member of the team.
 
+Example (in April, 2018):
+
+| Day        | Description             |
+|------------|-------------------------|
+| 27th Mar ~ 5th Apr | Planning new cycle      |
+| 5th Apr       | Start new release cycle |
+| 27th Apr       | Release candidate       |
+| 5th May       | Production release       |
+
 
 **How do we organize a release?**
 
