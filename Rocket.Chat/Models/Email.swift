@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import RealmSwift
 
-final class Email: BaseModel {
+final class Email: Object {
     @objc dynamic var email = ""
     @objc dynamic var verified = false
 }

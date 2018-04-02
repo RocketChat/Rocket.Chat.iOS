@@ -153,10 +153,11 @@ extension AppManager {
         }
 
         // If not, fetch it
+        let currentRealm = Realm.current
         let request = SubscriptionInfoRequest(roomName: name)
         API.current()?.fetch(request, succeeded: { result in
             DispatchQueue.main.async {
-                Realm.executeOnMainThread({ realm in
+                Realm.executeOnMainThread(realm: currentRealm, { realm in
                     guard let values = result.channel else { return }
 
                     let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
