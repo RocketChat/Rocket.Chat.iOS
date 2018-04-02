@@ -65,7 +65,6 @@ extension CustomEmoji {
         }
     }
 }
-
 extension CustomEmoji: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
         if identifier == nil {
