@@ -166,7 +166,7 @@ extension PushManager {
             API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), succeeded: { _ in
                 UIApplication.shared.endBackgroundTask(backgroundTask)
             }, errored: { _ in
-                // TODO: Handle error
+                Alert.defaultError.present()
             })
         }
 

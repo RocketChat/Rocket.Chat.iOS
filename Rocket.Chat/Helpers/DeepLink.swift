@@ -28,16 +28,11 @@ enum DeepLink {
         switch actionString {
 
         case "auth":
-            guard let host = url.queryParameters?["host"] else { return nil }
-
-            var credentials: DeepLinkCredentials? = nil
-
-            if let token = url.queryParameters?["token"],
-                let userId = url.queryParameters?["userId"] {
-                credentials = (token: token, userId: userId)
+            guard let auth = DeepLink.parseAuthUrl(url) else {
+                return nil
             }
 
-            self = .auth(host: host, credentials: credentials)
+            self = auth
 
         case "room":
             guard
@@ -65,7 +60,18 @@ enum DeepLink {
 
         default:
             return nil
-
         }
+    }
+
+    private static func parseAuthUrl(_ url: URL) -> DeepLink? {
+        guard let host = url.queryParameters?["host"] else { return nil }
+
+        var credentials: DeepLinkCredentials? = nil
+
+        if let token = url.queryParameters?["token"], let userId = url.queryParameters?["userId"] {
+            credentials = (token: token, userId: userId)
+        }
+
+        return .auth(host: host, credentials: credentials)
     }
 }

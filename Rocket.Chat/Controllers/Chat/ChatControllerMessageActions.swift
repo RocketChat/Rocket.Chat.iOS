@@ -73,13 +73,9 @@ extension ChatViewController {
             let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
             let pin = UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
                 if message.pinned {
-                    MessageManager.unpin(message, completion: { (_) in
-                        // Do nothing
-                    })
+                    MessageManager.unpin(message)
                 } else {
-                    MessageManager.pin(message, completion: { (_) in
-                        // Do nothing
-                    })
+                    MessageManager.pin(message)
                 }
             })
 
@@ -128,7 +124,7 @@ extension ChatViewController {
                 return
             }
 
-            var _messageToResend: (identifier: String, text: String)? = nil
+            var messageToResend: (identifier: String, text: String)? = nil
 
             Realm.executeOnMainThread { realm in
                 guard
@@ -138,14 +134,13 @@ extension ChatViewController {
                     return
                 }
 
-                _messageToResend = (identifier: identifier, text: failedMessage.text)
+                messageToResend = (identifier: identifier, text: failedMessage.text)
                 realm.delete(failedMessage)
             }
 
-            guard let messageToResend = _messageToResend else { return }
-
-            self.dataController.delete(msgId: messageToResend.identifier)
-            client.sendMessage(text: messageToResend.text, subscription: subscription)
+            guard let message = messageToResend else { return }
+            self.dataController.delete(msgId: message.identifier)
+            client.sendMessage(text: message.text, subscription: subscription)
         })
 
         let resendAll = UIAlertAction(title: localized("chat.message.actions.resend_all"), style: .default, handler: { _ in
