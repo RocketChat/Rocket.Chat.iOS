@@ -69,14 +69,14 @@ class MessagesListViewData {
             if isListingMentions {
                 let request = SubscriptionMentionsRequest(roomId: subscription.rid)
                 API.current()?.fetch(request, options: options, succeeded: { result in
-                    self.handle(messages: result.messages, showing: result.count, total: result.total, completion: completion)
+                    self.handle(messagesFetcher: result.fetchMessagesFromRealm, showing: result.count, total: result.total, completion: completion)
                 }, errored: { _ in
                     Alert.defaultError.present()
                 })
             } else {
                 let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
                 API.current()?.fetch(request, options: options, succeeded: { result in
-                    self.handle(messages: result.messages, showing: result.count, total: result.total, completion: completion)
+                    self.handle(messagesFetcher: result.fetchMessagesFromRealm, showing: result.count, total: result.total, completion: completion)
                 }, errored: { _ in
                     Alert.defaultError.present()
                 })
@@ -84,11 +84,11 @@ class MessagesListViewData {
         }
     }
 
-    private func handle(messages: [Message]?, showing: Int?, total: Int?, completion: (() -> Void)? = nil) {
+    private func handle(messagesFetcher: @escaping () -> [Message]?, showing: Int?, total: Int?, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
             self.showing += showing ?? 0
             self.total = total ?? 0
-            if let messages = messages {
+            if let messages = messagesFetcher() {
                 guard var lastMessage = messages.first else {
                     self.isLoadingMoreMessages = false
                     completion?()
