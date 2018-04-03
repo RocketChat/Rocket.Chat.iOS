@@ -12,6 +12,7 @@ import Foundation
 typealias SubscriptionMentionsResult = APIResult<SubscriptionMentionsRequest>
 
 class SubscriptionMentionsRequest: APIRequest {
+    let requiredVersion = Version(0, 63, 0)
     let path = "/api/v1/channels.getAllUserMentionsByChannel"
 
     let roomId: String?
