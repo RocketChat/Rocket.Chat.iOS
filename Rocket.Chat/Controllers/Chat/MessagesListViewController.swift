@@ -19,6 +19,16 @@ extension APIResult where T == SubscriptionMessagesRequest {
     }
 }
 
+extension APIResult where T == SubscriptionMentionsRequest {
+    func fetchMessagesFromRealm() -> [Message]? {
+        return raw?["mentions"].arrayValue.map { json in
+            let message = Message()
+            message.map(json, realm: Realm.current)
+            return message
+        }
+    }
+}
+
 class MessagesListViewData {
     typealias CellData = (message: Message?, date: Date?)
 
