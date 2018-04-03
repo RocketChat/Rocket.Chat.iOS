@@ -200,18 +200,17 @@ struct SubscriptionManager {
     static func subscribeInAppNotifications() {
         guard let user = AuthManager.currentUser() else { return }
 
-        let eventName = "\(user.identifier ?? "")/notifications"
+        let eventName = "\(user.identifier ?? "")/notification"
         let request = [
             "msg": "sub",
             "name": "stream-notify-user",
             "params": [eventName, false]
             ] as [String: Any]
 
-        let currentRealm = Realm.current
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
-            let object = response.result["fields"]["args"][1]
+            let object = response.result["fields"]["args"][0]
             print(object)
 
 //            currentRealm?.execute({ (realm) in
