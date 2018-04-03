@@ -71,8 +71,8 @@ extension Subscription {
             messages = messages.filter("createdAt < %@", lastMessageDate)
         }
 
-        for i in 0..<min(limit, messages.count) {
-            limitedMessages.append(messages[i])
+        for index in 0..<min(limit, messages.count) {
+            limitedMessages.append(messages[index])
         }
 
         return limitedMessages

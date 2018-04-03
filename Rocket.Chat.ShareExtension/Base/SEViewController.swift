@@ -110,9 +110,8 @@ class SEViewController: UIViewController, SEStoreSubscriber {
 extension SEViewController {
     static func fromStoryboard<T: SEViewController>() -> T {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let _viewController = storyboard.instantiateViewController(withIdentifier: "\(self)")
 
-        guard let viewController = _viewController as? T else {
+        guard let viewController = storyboard.instantiateViewController(withIdentifier: "\(self)") as? T else {
             fatalError("ViewController not found in Main storyboard: \(self)")
         }
 
