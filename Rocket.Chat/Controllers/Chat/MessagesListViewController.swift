@@ -55,40 +55,52 @@ class MessagesListViewData {
         if let subscription = subscription {
             isLoadingMoreMessages = true
 
-            let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+            if isListingMentions {
+                let request = SubscriptionMentionsRequest(roomId: subscription.rid)
+                API.current()?.fetch(request, options: options, succeeded: { result in
+                    self.handle(messages: result.messages, showing: result.count, total: result.total, completion: completion)
+                }, errored: { _ in
+                    Alert.defaultError.present()
+                })
+            } else {
+                let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
+                API.current()?.fetch(request, options: options, succeeded: { result in
+                    self.handle(messages: result.messages, showing: result.count, total: result.total, completion: completion)
+                }, errored: { _ in
+                    Alert.defaultError.present()
+                })
+            }
+        }
+    }
 
-            API.current()?.fetch(request, options: options, succeeded: { result in
-                DispatchQueue.main.async {
-                    self.showing += result.count ?? 0
-                    self.total = result.total ?? 0
-                    if let messages = result.fetchMessagesFromRealm() {
-                        guard var lastMessage = messages.first else {
-                            self.isLoadingMoreMessages = false
-                            completion?()
-                            return
-                        }
-                        var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
-                        messages.forEach { message in
-                            if lastMessage.createdAt?.day != message.createdAt?.day ||
-                                lastMessage.createdAt?.month != message.createdAt?.month ||
-                                lastMessage.createdAt?.year != message.createdAt?.year {
-                                cellsPage.append(CellData(message: nil, date: message.createdAt ?? Date(timeIntervalSince1970: 0)))
-                            }
-                            cellsPage.append(CellData(message: message, date: nil))
-                            lastMessage = message
-                        }
-                        self.cellsPages.append(cellsPage)
-                    }
-
-                    self.currentPage += 1
-
+    private func handle(messages: [Message]?, showing: Int?, total: Int?, completion: (() -> Void)? = nil) {
+        DispatchQueue.main.async {
+            self.showing += showing ?? 0
+            self.total = total ?? 0
+            if let messages = messages {
+                guard var lastMessage = messages.first else {
                     self.isLoadingMoreMessages = false
                     completion?()
+                    return
                 }
-            }, errored: { _ in
-                Alert.defaultError.present()
-            })
+                var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
+                messages.forEach { message in
+                    if lastMessage.createdAt?.day != message.createdAt?.day ||
+                        lastMessage.createdAt?.month != message.createdAt?.month ||
+                        lastMessage.createdAt?.year != message.createdAt?.year {
+                        cellsPage.append(CellData(message: nil, date: message.createdAt ?? Date(timeIntervalSince1970: 0)))
+                    }
+                    cellsPage.append(CellData(message: message, date: nil))
+                    lastMessage = message
+                }
+                self.cellsPages.append(cellsPage)
+            }
+
+            self.currentPage += 1
+
+            self.isLoadingMoreMessages = false
+            completion?()
         }
     }
 }
