@@ -13,12 +13,12 @@ import SwiftyJSON
 
 class LoginRequestSpec: APITestCase {
     func testRequest() {
-        let _request = LoginRequest("testUsername", "testPassword")
-        guard let request = _request.request(for: api) else {
+        let preRequest = LoginRequest("testUsername", "testPassword")
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
 
-        let expectedURL = api.host.appendingPathComponent(_request.path)
+        let expectedURL = api.host.appendingPathComponent(preRequest.path)
 
         XCTAssertEqual(request.url, expectedURL, "url is correct")
         XCTAssertEqual(request.httpMethod, "POST", "http method is correct")

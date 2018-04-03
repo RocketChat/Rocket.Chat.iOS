@@ -21,9 +21,9 @@ class UpdateUserRequestSpec: APITestCase {
         user.username = "example"
         user.emails.append(Email(value: ["email": "example@example.com", "verified": true]))
 
-        let _request = UpdateUserRequest(user: user, password: password, currentPassword: currentPassword)
+        let preRequest = UpdateUserRequest(user: user, password: password, currentPassword: currentPassword)
 
-        guard let request = _request.request(for: api) else {
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
         guard let httpBody = request.httpBody else {
