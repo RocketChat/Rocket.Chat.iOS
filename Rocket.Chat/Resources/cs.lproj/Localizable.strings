@@ -223,6 +223,7 @@
 "chat.info.item.members" = "Členové";
 "chat.info.item.pinned" = "Připnuto";
 "chat.info.item.starred" = "S hvězdičkou";
+"chat.info.item.mentions" = "Mentions"; // TODO
 
 // Members List
 "chat.members.list.title" = "Členové";
@@ -232,6 +233,7 @@
 "chat.messages.list.empty" = "Nebyly nalezeny žádné zprávy";
 "chat.messages.pinned.list.title" = "Připnuté zprávy";
 "chat.messages.starred.list.title" = "Zprávy s hvězdičkou";
+"chat.messages.mentions.list.title" = "Mentions"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Preferences"; // TODO: new text: Preferences
