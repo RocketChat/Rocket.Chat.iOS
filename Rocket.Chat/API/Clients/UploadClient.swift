@@ -30,7 +30,6 @@ struct UploadClient: APIClient {
             completion?()
         }, errored: { error in
             if case .version = error {
-                // TODO: Remove Upload fallback after Rocket.Chat 1.0
                 versionFallback?()
             } else {
                 Alert(key: "alert.upload_error").present()
