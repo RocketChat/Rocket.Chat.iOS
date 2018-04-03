@@ -11,9 +11,9 @@ import MobileCoreServices
 
 final class SENavigationController: UINavigationController {
     func loadContent(_ store: SEStore) -> SEAction? {
-        let itemProviders = (extensionContext?.inputItems.first as? NSExtensionItem)?.attachments?.flatMap {
+        let itemProviders = (extensionContext?.inputItems.first as? NSExtensionItem)?.attachments?.compactMap {
             $0 as? NSItemProvider
-            } ?? []
+        } ?? []
 
         // support only one share for now
         if let item = itemProviders.first {

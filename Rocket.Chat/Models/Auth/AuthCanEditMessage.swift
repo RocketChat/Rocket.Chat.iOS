@@ -1,15 +1,13 @@
 //
-//  Auth+CanDeleteMessage.swift
+//  AuthCanEditMessage.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/1/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
-
 extension Auth {
-    enum CanDeleteMessageResult {
+    enum CanEditMessageResult {
         case allowed
         case timeElapsed
         case differentUser
@@ -18,7 +16,7 @@ extension Auth {
         case unknown
     }
 
-    func canDeleteMessage(_ message: Message) -> CanDeleteMessageResult {
+    func canEditMessage(_ message: Message) -> CanEditMessageResult {
         guard
             let createdAt = message.createdAt,
             let user = user,
@@ -31,24 +29,20 @@ extension Auth {
             return .notActionable
         }
 
-        if user.hasPermission(.forceDeleteMessage, realm: self.realm) {
+        if user.hasPermission(.editMessage, realm: self.realm) {
             return .allowed
         }
 
         func timeElapsed() -> Bool {
-            if settings.messageAllowDeletingBlockDeleteInMinutes < 1 {
+            if settings.messageAllowEditingBlockEditInMinutes < 1 {
                 return false
             }
 
             return Date.serverDate.timeIntervalSince(createdAt)/60 > Double(settings.messageAllowDeletingBlockDeleteInMinutes)
         }
 
-        if user.hasPermission(.deleteMessage, realm: self.realm) {
-            return timeElapsed() ? .timeElapsed : .allowed
-        }
-
         if message.user != user { return .differentUser }
-        if !settings.messageAllowDeleting { return .serverBlocked }
+        if !settings.messageAllowEditing { return .serverBlocked }
 
         if timeElapsed() { return .timeElapsed }
 

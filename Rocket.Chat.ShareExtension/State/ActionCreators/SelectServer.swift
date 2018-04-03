@@ -9,7 +9,7 @@
 import Foundation
 
 func fetchServers(store: SEStore) -> SEAction {
-    let servers = DatabaseManager.servers?.flatMap { dict -> SEServer? in
+    let servers = DatabaseManager.servers?.compactMap { dict -> SEServer? in
         guard
             let name = dict[ServerPersistKeys.serverName],
             let host = URL(string: dict[ServerPersistKeys.serverURL] ?? "")?.httpServerURL()?.absoluteString,

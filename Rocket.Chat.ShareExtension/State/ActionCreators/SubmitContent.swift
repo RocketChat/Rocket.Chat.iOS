@@ -44,7 +44,7 @@ fileprivate extension SEStore {
 var urlTasks: [URLSessionTask?] = []
 
 func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
-    var fileRequests = store.contentRequests.flatMap { index, request -> (index: Int, request: UploadMessageRequest)? in
+    var fileRequests = store.contentRequests.compactMap { index, request -> (index: Int, request: UploadMessageRequest)? in
         guard let request = request as? UploadMessageRequest else {
             return nil
         }
@@ -91,7 +91,7 @@ func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
 }
 
 func submitMessages(store: SEStore, completion: @escaping (() -> Void)) {
-    var messageRequests = store.contentRequests.flatMap { index, request -> (index: Int, request: SendMessageRequest)? in
+    var messageRequests = store.contentRequests.compactMap { index, request -> (index: Int, request: SendMessageRequest)? in
         guard let request = request as? SendMessageRequest else {
             return nil
         }
