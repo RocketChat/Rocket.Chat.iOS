@@ -30,7 +30,7 @@ final class AuthSettingsManager {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
-        ] as [String: Any]
+            ] as [String: Any]
 
         let currentRealm = Realm.current
         SocketManager.send(object) { (response) in

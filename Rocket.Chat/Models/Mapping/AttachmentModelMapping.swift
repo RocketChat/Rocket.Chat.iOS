@@ -96,4 +96,57 @@ extension Attachment: ModelMappeable {
         return encoded.joined(separator: "/")
     }
 
+    func attachmentsListMap(_ values: JSON, realm: Realm?) {
+        if self.identifier == nil {
+            self.identifier = String.random(30)
+        }
+
+        if let authorName = values["name"].string {
+            self.title = "@\(authorName)"
+        }
+
+        if let title = values["title"].string {
+            self.title = title.removingNewLines()
+        }
+
+        if let titleLink = values["url"].string {
+            self.titleLink = titleLink
+        }
+
+        self.collapsed = values["collapsed"].bool ?? false
+        self.text = values["text"].string
+        self.descriptionText = values["description"].string
+        self.thumbURL = values["thumb_url"].string
+        self.color = values["color"].string
+
+        self.titleLinkDownload = values["title_link_download"].boolValue
+
+        if let imageURL = values["url"].string {
+            if imageURL.contains("Uploads") {
+                let imageUrlPart = imageURL.components(separatedBy: "Uploads")[1]
+                self.imageURL = "/file-upload" + imageUrlPart
+            }
+        }
+        self.imageType = values["type"].string
+        self.imageSize = values["size"].int ?? 0
+
+        self.audioURL = encode(url: values["url"].string)
+        self.audioType = values["type"].string
+        self.audioSize = values["size"].int ?? 0
+
+        self.videoURL = encode(url: values["url"].string)
+        self.videoType = values["type"].string
+        self.videoSize = values["size"].int ?? 0
+
+        // Mentions
+        if let fields = values["fields"].array {
+            self.fields.removeAll()
+
+            for field in fields {
+                let obj = AttachmentField()
+                obj.map(field, realm: realm)
+                self.fields.append(obj)
+            }
+        }
+    }
 }

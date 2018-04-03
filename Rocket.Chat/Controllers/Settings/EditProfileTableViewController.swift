@@ -168,7 +168,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                     if self?.canEditAnyInfo ?? false {
                         self?.navigationItem.rightBarButtonItem = self?.editButton
                     }
-
                     self?.tableView.reloadData()
                 }
             }
@@ -200,7 +199,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         if authSettings?.isAllowedToEditAvatar ?? false {
             avatarButton.setImage(editingAvatarImage, for: .normal)
         }
-
         enableUserInteraction()
     }
 
@@ -215,7 +213,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         if authSettings?.isAllowedToEditAvatar ?? false {
             avatarButton.setImage(nil, for: .normal)
         }
-
         disableUserInteraction()
     }
 

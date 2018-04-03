@@ -28,7 +28,7 @@ class PermissionSpec: XCTestCase {
             "updated": 1480377601
         ],
         "$loki": 1
-    ])
+        ])
 
     func testMap() {
         let permission = Permission()

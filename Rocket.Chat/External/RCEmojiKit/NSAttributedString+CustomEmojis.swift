@@ -29,6 +29,15 @@ extension NSMutableAttributedString {
         var offset = 0
         var notMatched = [NSRange]()
 
+<<<<<<< allow-user-to-see-attachments-wip
+            let ranges = regex.matches(
+                in: attributedString.string,
+                options: [],
+                range: NSRange(location: 0, length: attributedString.length)
+                ).map {
+                    $0.range(at: 0)
+            }
+=======
         for range in ranges {
             let imageAttachment = NSTextAttachment()
             imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
@@ -36,6 +45,7 @@ extension NSMutableAttributedString {
             let replacementString = string.attributedSubstring(from: transformedRange)
 
             if let emoji = emojis[replacementString.string.replacingOccurrences(of: ":", with: "")], let imageUrl = emoji.imageUrl {
+>>>>>>> develop
 
                 imageAttachment.contents = imageUrl.data(using: .utf8)
                 let imageString = NSAttributedString(attachment: imageAttachment)
