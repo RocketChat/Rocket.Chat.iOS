@@ -133,7 +133,6 @@ final class ConnectServerViewController: BaseViewController {
 
     func connect() {
         guard let url = url else { return infoRequestHandler.alertInvalidURL() }
-        guard url.socketURL() != nil else { return infoRequestHandler.alertInvalidURL() }
 
         connecting = true
         textFieldServerURL.alpha = 0.5

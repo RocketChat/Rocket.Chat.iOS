@@ -13,10 +13,16 @@ import SwiftyJSON
 
 class UploadMessageRequestSpec: APITestCase {
     func testRequest() {
-        let _request = UploadMessageRequest(roomId: "rid", data: Data(), filename: "filename.file",
-                                     mimetype: "file/filetype", msg: "msg", description: "desc")
+        let preRequest = UploadMessageRequest(
+            roomId: "rid",
+            data: Data(),
+            filename: "filename.file",
+            mimetype: "file/filetype",
+            msg: "msg",
+            description: "desc"
+        )
 
-        guard let request = _request.request(for: api) else {
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
 

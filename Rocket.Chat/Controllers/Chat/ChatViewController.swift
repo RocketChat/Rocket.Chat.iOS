@@ -10,6 +10,8 @@ import RealmSwift
 import SlackTextViewController
 import SimpleImageViewer
 
+private typealias NibCellIndentifier = (nibName: String, cellIdentifier: String)
+
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
 
@@ -282,8 +284,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func registerCells() {
-        typealias NibCellIndentifier = (nibName: String, cellIdentifier: String)
-
         let collectionViewCells: [NibCellIndentifier] = [
             (nibName: "ChatLoaderCell", cellIdentifier: ChatLoaderCell.identifier),
             (nibName: "ChatMessageCell", cellIdentifier: ChatMessageCell.identifier),
@@ -789,17 +789,12 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func appendMessages(messages: [Message], completion: VoidCompletion?) {
-        guard
-            let subscription = subscription,
-            let collectionView = collectionView,
-            !subscription.isInvalidated
-        else {
+        guard let subscription = subscription, let collectionView = collectionView, !subscription.isInvalidated else {
             return
         }
 
         guard !isAppendingMessages else {
             Log.debug("[APPEND MESSAGES] Blocked trying to append \(messages.count) messages")
-
             // This message can be called many times during the app execution and we need
             // to call them one per time, to avoid adding the same message multiple times
             // to the list. Also, we keep the subscription identifier in order to make sure
@@ -1080,11 +1075,10 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
         if let obj = dataController.itemAt(indexPath) {
             if obj.type == .header {
-                if subscription.type == .directMessage {
-                    return CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
-                } else {
-                    return CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
-                }
+                let isDirectMessage = subscription.type == .directMessage
+                let directMessageHeaderSize = CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
+                let channelHeaderSize = CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
+                return isDirectMessage ? directMessageHeaderSize : channelHeaderSize
             }
 
             if obj.type == .loader {
@@ -1098,9 +1092,9 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
             if obj.type == .unreadSeparator {
                 if dataController.dismissUnreadSeparator {
                     return CGSize(width: fullWidth, height: 0)
-                } else {
-                    return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
                 }
+
+                return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
             }
 
             if let message = obj.message {
