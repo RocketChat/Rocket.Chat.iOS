@@ -58,10 +58,10 @@ extension NSItemProvider {
                 var image: UIImage
                 var name = "\(String.random(8)).jpeg"
 
-                if let _image = item as? UIImage {
-                    image = _image
-                } else if let url = item as? URL, let data = try? Data(contentsOf: url), let _image = UIImage(data: data) {
-                    image = _image
+                if let itemImage = item as? UIImage {
+                    image = itemImage
+                } else if let url = item as? URL, let data = try? Data(contentsOf: url), let dataImage = UIImage(data: data) {
+                    image = dataImage
                     name = url.lastPathComponent
                 } else {
                     image = UIImage()
@@ -93,11 +93,11 @@ extension NSItemProvider {
                 let mimetype: String
                 var name = "\(String.random(8)).file"
 
-                if let _data = item as? Data {
-                    data = _data
+                if let itemData = item as? Data {
+                    data = itemData
                     mimetype = "application/octet-stream"
-                } else if let url = item as? URL, let _data = try? Data(contentsOf: url) {
-                    data = _data
+                } else if let url = item as? URL, let urlData = try? Data(contentsOf: url) {
+                    data = urlData
                     name = url.lastPathComponent
                     mimetype = url.mimeType()
                 } else {

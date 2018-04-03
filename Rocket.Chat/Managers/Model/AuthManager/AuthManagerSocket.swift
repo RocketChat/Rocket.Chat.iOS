@@ -2,11 +2,7 @@
 //  AuthManagerSocket.swift
 //  Rocket.Chat
 //
-<<<<<<< HEAD:Rocket.Chat/Managers/Model/AuthManager/AuthManagerSocket.swift
 //  Created by Matheus Cardoso on 3/1/18.
-=======
-//  Created by Matheus Cardoso on 3/26/18.
->>>>>>> cf2d58dfa545470232cba22e06701af0c7d6f585:Rocket.Chat/Managers/Model/AuthManager/AuthManagerSocket.swift
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 

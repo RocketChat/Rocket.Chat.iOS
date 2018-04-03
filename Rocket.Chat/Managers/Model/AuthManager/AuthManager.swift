@@ -65,39 +65,4 @@ struct AuthManager {
 
         return server
     }
-
-    /**
-        This method migrates the old authentication storaged format
-        to a new one that supports multiple authentication at the
-        same app installation.
-     
-        Last version using the old format: 1.2.1.
-     */
-    static func recoverOldAuthFormatIfNeeded() {
-        if AuthManager.isAuthenticated() != nil {
-            return
-        }
-
-        let defaults = UserDefaults.standard
-
-        guard
-            let token = defaults.string(forKey: ServerPersistKeys.token),
-            let serverURL = defaults.string(forKey: ServerPersistKeys.serverURL),
-            let userId = defaults.string(forKey: ServerPersistKeys.userId) else {
-                return
-        }
-
-        let servers = [[
-            ServerPersistKeys.databaseName: "\(String.random()).realm",
-            ServerPersistKeys.token: token,
-            ServerPersistKeys.serverURL: serverURL,
-            ServerPersistKeys.userId: userId
-        ]]
-
-        defaults.set(0, forKey: ServerPersistKeys.selectedIndex)
-        defaults.set(servers, forKey: ServerPersistKeys.servers)
-        defaults.removeObject(forKey: ServerPersistKeys.token)
-        defaults.removeObject(forKey: ServerPersistKeys.serverURL)
-        defaults.removeObject(forKey: ServerPersistKeys.userId)
-    }
 }
