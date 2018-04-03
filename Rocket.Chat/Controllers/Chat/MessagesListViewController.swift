@@ -114,6 +114,7 @@ class MessagesListViewController: BaseViewController {
         let data = MessagesListViewData()
         data.subscription = self.data.subscription
         data.query = self.data.query
+        data.isListingMentions = self.data.isListingMentions
         data.loadMoreMessages {
             self.data = data
             DispatchQueue.main.async {
