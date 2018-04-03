@@ -59,7 +59,7 @@ class MembersListViewData {
                 self.isLoadingMoreMembers = false
                 completion?()
             }, errored: { _ in
-                // TODO: Handle error
+                Alert.defaultError.present()
             })
         }
     }

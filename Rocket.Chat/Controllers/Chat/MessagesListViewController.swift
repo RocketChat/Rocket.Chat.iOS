@@ -87,7 +87,7 @@ class MessagesListViewData {
                     completion?()
                 }
             }, errored: { _ in
-                // TODO: Handle error
+                Alert.defaultError.present()
             })
         }
     }
