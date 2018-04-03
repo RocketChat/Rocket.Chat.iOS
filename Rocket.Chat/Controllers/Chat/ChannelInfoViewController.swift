@@ -137,6 +137,7 @@ class ChannelInfoViewController: BaseViewController {
             if let segueData = sender as? ListSegueData {
                 messagesList.data.title = segueData.title
                 messagesList.data.query = segueData.query
+                messagesList.data.isListingMentions = segueData.isListingMentions
             }
         }
     }
