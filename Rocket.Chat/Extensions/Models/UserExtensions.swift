@@ -9,7 +9,7 @@
 import RealmSwift
 
 extension User {
-    static func search(usernameContaining word: String, preference: Set<String> = [], limit: Int = 5, realm: Realm? = Realm.shared) -> [(String, Any)] {
+    static func search(usernameContaining word: String, preference: Set<String> = [], limit: Int = 5, realm: Realm? = Realm.current) -> [(String, Any)] {
         guard let realm = realm else { return [] }
 
         var result = [(String, Any)]()

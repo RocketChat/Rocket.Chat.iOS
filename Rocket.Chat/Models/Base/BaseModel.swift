@@ -18,13 +18,13 @@ class BaseModel: Object {
     }
 
     static func find(withIdentifier identifier: String) -> Self? {
-        return Realm.shared?.objects(self).filter("identifier = '\(identifier)'").first
+        return Realm.current?.objects(self).filter("identifier = '\(identifier)'").first
     }
 
     @discardableResult
     static func delete(withIdentifier identifier: String) -> Bool {
         guard
-            let realm = Realm.shared,
+            let realm = Realm.current,
             let object = realm.objects(self).filter("identifier = '\(identifier)'").first
         else {
             return false

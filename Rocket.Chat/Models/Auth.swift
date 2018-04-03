@@ -38,7 +38,7 @@ final class Auth: Object {
     var user: User? {
         guard let userId = userId else { return nil }
 
-        let realm = self.realm ?? Realm.shared
+        let realm = self.realm ?? Realm.current
         return realm?.object(ofType: User.self, forPrimaryKey: userId)
     }
 
@@ -159,6 +159,34 @@ extension Auth {
         }
         if message.user == user {
             return .myOwn
+        }
+
+        return .allowed
+    }
+}
+
+extension Auth {
+    enum CanPinMessageResult {
+        case allowed
+        case notActionable
+        case notAllowed
+        case unknown
+    }
+
+    func canPinMessage(_ message: Message) -> CanPinMessageResult {
+        guard
+            let user = user,
+            let settings = settings
+        else {
+            return .unknown
+        }
+
+        if !message.type.actionable {
+            return .notActionable
+        }
+
+        if !settings.messageAllowPinning || !user.hasPermission(.pinMessage, realm: self.realm) {
+            return .notAllowed
         }
 
         return .allowed

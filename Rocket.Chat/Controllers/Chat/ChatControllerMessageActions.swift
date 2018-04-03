@@ -21,6 +21,10 @@ extension ChatViewController {
             actions = actionsForFailedMessage(message)
         }
 
+        if actions.count == 0 {
+            return
+        }
+
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         actions.forEach(alert.addAction)
@@ -36,23 +40,15 @@ extension ChatViewController {
     }
 
     func actionsForMessage(_ message: Message, view: UIView) -> [UIAlertAction] {
-        guard let messageUser = message.user else { return [] }
+        guard
+            let messageUser = message.user,
+            let auth = AuthManager.isAuthenticated()
+        else {
+            return []
+        }
 
         let react = UIAlertAction(title: localized("chat.message.actions.react"), style: .default, handler: { _ in
             self.react(message: message, view: view)
-        })
-
-        let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
-        let pin = UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
-            if message.pinned {
-                MessageManager.unpin(message, completion: { (_) in
-                    // Do nothing
-                })
-            } else {
-                MessageManager.pin(message, completion: { (_) in
-                    // Do nothing
-                })
-            }
         })
 
         let report = UIAlertAction(title: localized("chat.message.actions.report"), style: .default, handler: { (_) in
@@ -71,9 +67,22 @@ extension ChatViewController {
             self?.reply(to: message, onlyQuote: true)
         })
 
-        var actions = [react, pin, report, copy, reply, quote]
+        var actions = [react, reply, quote, copy, report]
 
-        if AuthManager.isAuthenticated()?.canBlockMessage(message) == .allowed {
+        if auth.canPinMessage(message) == .allowed {
+            let pinMessage = message.pinned ? localized("chat.message.actions.unpin") : localized("chat.message.actions.pin")
+            let pin = UIAlertAction(title: pinMessage, style: .default, handler: { (_) in
+                if message.pinned {
+                    MessageManager.unpin(message)
+                } else {
+                    MessageManager.pin(message)
+                }
+            })
+
+            actions.append(pin)
+        }
+
+        if auth.canBlockMessage(message) == .allowed {
             let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
                 DispatchQueue.main.async {
                     MessageManager.blockMessagesFrom(messageUser, completion: {
@@ -85,7 +94,7 @@ extension ChatViewController {
             actions.append(block)
         }
 
-        if  AuthManager.isAuthenticated()?.canEditMessage(message) == .allowed {
+        if  auth.canEditMessage(message) == .allowed {
             let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
                 self.messageToEdit = message
                 self.editText(message.text)
@@ -94,7 +103,7 @@ extension ChatViewController {
             actions.append(edit)
         }
 
-        if AuthManager.isAuthenticated()?.canDeleteMessage(message) == .allowed {
+        if auth.canDeleteMessage(message) == .allowed {
             let delete = UIAlertAction(title: localized("chat.message.actions.delete"), style: .destructive, handler: { _ in
                 self.delete(message: message)
             })
@@ -115,7 +124,7 @@ extension ChatViewController {
                 return
             }
 
-            var _messageToResend: (identifier: String, text: String)? = nil
+            var messageToResend: (identifier: String, text: String)? = nil
 
             Realm.executeOnMainThread { realm in
                 guard
@@ -125,14 +134,13 @@ extension ChatViewController {
                     return
                 }
 
-                _messageToResend = (identifier: identifier, text: failedMessage.text)
+                messageToResend = (identifier: identifier, text: failedMessage.text)
                 realm.delete(failedMessage)
             }
 
-            guard let messageToResend = _messageToResend else { return }
-
-            self.dataController.delete(msgId: messageToResend.identifier)
-            client.sendMessage(text: messageToResend.text, subscription: subscription)
+            guard let message = messageToResend else { return }
+            self.dataController.delete(msgId: message.identifier)
+            client.sendMessage(text: message.text, subscription: subscription)
         })
 
         let resendAll = UIAlertAction(title: localized("chat.message.actions.resend_all"), style: .default, handler: { _ in
