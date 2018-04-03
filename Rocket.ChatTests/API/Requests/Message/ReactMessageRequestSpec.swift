@@ -13,9 +13,9 @@ import SwiftyJSON
 
 class ReactMessageRequestSpec: APITestCase {
     func testRequest() {
-        let _request = ReactMessageRequest(msgId: "msgId", emoji: "party_parrot")
+        let reactRequest = ReactMessageRequest(msgId: "msgId", emoji: "party_parrot")
 
-        guard let request = _request.request(for: api) else {
+        guard let request = reactRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
         guard let httpBody = request.httpBody else {
@@ -33,11 +33,11 @@ class ReactMessageRequestSpec: APITestCase {
     }
 
     func testResult() {
-        let _result = JSON([
+        let rawResult = JSON([
             "success": true
         ])
 
-        let result = APIResult<ReactMessageRequest>(raw: _result)
+        let result = APIResult<ReactMessageRequest>(raw: rawResult)
         XCTAssert(result.success == true)
 
         let nilResult = APIResult<ReactMessageRequest>(raw: nil)
