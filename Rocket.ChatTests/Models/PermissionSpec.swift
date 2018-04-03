@@ -16,9 +16,9 @@ class PermissionSpec: XCTestCase {
     let testJSON = JSON([
         "_id": "snippet-message",
         "roles": [
-        "owner",
-        "moderator",
-        "admin"
+            "owner",
+            "moderator",
+            "admin"
         ],
         "_updatedAt": [ "$date": 1480377601 ],
         "meta": [

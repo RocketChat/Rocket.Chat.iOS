@@ -31,13 +31,13 @@ extension URL {
         }
 
         var port = ""
-        if let _port = url.port {
-            port = ":\(_port)"
+        if let validPort = url.port {
+            port = ":\(validPort)"
         }
 
         var query = ""
-        if let _query = url.query, !_query.isEmpty {
-            query = "?\(_query)"
+        if let validQuery = url.query, !validQuery.isEmpty {
+            query = "?\(validQuery)"
         }
 
         if let host = url.host, !host.isEmpty {

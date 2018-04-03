@@ -13,11 +13,11 @@ import SwiftyJSON
 
 class SpotlightRequestSpec: APITestCase {
     func testRequest() {
-        let _request = SpotlightRequest(query: "test")
-        guard let request = _request.request(for: api) else {
+        let spotlightRequest = SpotlightRequest(query: "test")
+        guard let request = spotlightRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
-        let url = api.host.appendingPathComponent(_request.path)
+        let url = api.host.appendingPathComponent(spotlightRequest.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "query=test"
 

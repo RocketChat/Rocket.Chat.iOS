@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-fileprivate typealias EmojiCategory = (name: String, emojis: [Emoji])
+private typealias EmojiCategory = (name: String, emojis: [Emoji])
 
 class EmojiPicker: UIView, RCEmojiKitLocalizable {
     static let defaults = UserDefaults(suiteName: "EmojiPicker")

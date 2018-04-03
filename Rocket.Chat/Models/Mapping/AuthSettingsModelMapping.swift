@@ -11,6 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 extension AuthSettings: ModelMappeable {
+    //swiftlint:disable function_body_length
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
             self.identifier = String.random()
@@ -72,6 +73,8 @@ extension AuthSettings: ModelMappeable {
         self.hideMessageUserRemoved = objectForKey(object: values, key: "Message_HideType_ru")?.bool ?? false
 
         // Message
+        self.messageAllowPinning = objectForKey(object: values, key: "Message_AllowPinning")?.bool ?? true
+
         self.messageShowDeletedStatus = objectForKey(object: values, key: "Message_ShowDeletedStatus")?.bool ?? true
         self.messageAllowDeleting = objectForKey(object: values, key: "Message_AllowDeleting")?.bool ?? true
         self.messageAllowDeletingBlockDeleteInMinutes = objectForKey(object: values, key: "Message_AllowDeleting_BlockDeleteInMinutes")?.int ?? 0
