@@ -10,7 +10,7 @@ import UIKit
 import RealmSwift
 
 extension APIResult where T == SubscriptionMessagesRequest {
-    func getMessages() -> [Message?]? {
+    func fetchMessagesFromRealm() -> [Message]? {
         return raw?["messages"].arrayValue.map { json in
             let message = Message()
             message.map(json, realm: Realm.current)
@@ -61,8 +61,7 @@ class MessagesListViewData {
                 DispatchQueue.main.async {
                     self.showing += result.count ?? 0
                     self.total = result.total ?? 0
-                    if let messages = result.getMessages() {
-                        let messages = messages.compactMap { $0 }
+                    if let messages = result.fetchMessagesFromRealm() {
                         guard var lastMessage = messages.first else {
                             self.isLoadingMoreMessages = false
                             completion?()
