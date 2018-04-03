@@ -11,14 +11,14 @@ import Foundation
 extension Emojione {
 
     static func transform(string: String) -> String {
-        var _string = string as NSString
+        var validString = string as NSString
         var notMatched = [NSRange]()
-        var ranges = getMatches(from: _string)
+        var ranges = getMatches(from: validString)
 
-        (_string, notMatched) = insertEmojis(into: _string, in: (_string as String).filterOutRangesInsideCode(ranges: ranges))
-        ranges = getMatches(from: _string, excludingRanges: notMatched)
-        (_string, _) = insertEmojis(into: _string, in: (_string as String).filterOutRangesInsideCode(ranges: ranges))
-        return _string as String
+        (validString, notMatched) = insertEmojis(into: validString, in: (validString as String).filterOutRangesInsideCode(ranges: ranges))
+        ranges = getMatches(from: validString, excludingRanges: notMatched)
+        (validString, _) = insertEmojis(into: validString, in: (validString as String).filterOutRangesInsideCode(ranges: ranges))
+        return validString as String
     }
 
     static func getMatches(from string: NSString, excludingRanges: [NSRange] = []) -> [NSRange] {

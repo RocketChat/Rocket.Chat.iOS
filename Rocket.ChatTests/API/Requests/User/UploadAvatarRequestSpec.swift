@@ -14,9 +14,9 @@ import SwiftyJSON
 class UploadAvatarRequestSpec: APITestCase {
 
     func testRequest() {
-        let _request = UploadAvatarRequest(data: Data(), filename: "avatar.jpg", mimetype: "image/jpeg")
+        let preRequest = UploadAvatarRequest(data: Data(), filename: "avatar.jpg", mimetype: "image/jpeg")
 
-        guard let request = _request.request(for: api) else {
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
 

@@ -113,7 +113,7 @@ extension MessageManager {
             "name": "stream-notify-room",
             "id": eventName,
             "params": [eventName, false]
-            ] as [String: Any]
+        ] as [String: Any]
 
         let currentRealm = Realm.current
         SocketManager.subscribe(request, eventName: eventName) { response in
@@ -144,28 +144,34 @@ extension MessageManager {
         }
     }
 
-    static func pin(_ message: Message, completion: @escaping MessageCompletion) {
+    static func pin(_ message: Message) {
         guard let messageIdentifier = message.identifier else { return }
 
         let request = [
             "msg": "method",
             "method": "pinMessage",
-            "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
+            "params": [[
+                "rid": message.rid,
+                "_id": messageIdentifier
+            ]]
         ] as [String: Any]
 
-        SocketManager.send(request, completion: completion)
+        SocketManager.send(request)
     }
 
-    static func unpin(_ message: Message, completion: @escaping MessageCompletion) {
+    static func unpin(_ message: Message) {
         guard let messageIdentifier = message.identifier else { return }
 
         let request = [
             "msg": "method",
             "method": "unpinMessage",
-            "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
+            "params": [[
+                "rid": message.rid,
+                "_id": messageIdentifier
+            ]]
         ] as [String: Any]
 
-        SocketManager.send(request, completion: completion)
+        SocketManager.send(request)
     }
 
     static func react(_ message: Message, emoji: String, completion: @escaping MessageCompletion) {

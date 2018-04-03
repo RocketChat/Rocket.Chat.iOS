@@ -1,5 +1,5 @@
 //
-//  SignInViewController+CustomFields.swift
+//  SignInViewControllerCustomFields.swift
 //  Rocket.Chat
 //
 //  Created by Vadym Brusko on 10/6/17.

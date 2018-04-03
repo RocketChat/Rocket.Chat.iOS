@@ -24,6 +24,8 @@ enum PermissionType: String {
 
     case editMessage = "edit-message"
 
+    case pinMessage = "pin-message"
+
     case postReadOnly = "post-readonly"
 }
 

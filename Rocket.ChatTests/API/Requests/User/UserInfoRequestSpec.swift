@@ -13,11 +13,13 @@ import SwiftyJSON
 
 class UserInfoRequestSpec: APITestCase {
     func testRequestWithUserId() {
-        let _request = UserInfoRequest(userId: "nSYqWzZ4GsKTX4dyK")
-        guard let request = _request.request(for: api) else {
+        let preRequest = UserInfoRequest(userId: "nSYqWzZ4GsKTX4dyK")
+
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
-        let url = api.host.appendingPathComponent(_request.path)
+
+        let url = api.host.appendingPathComponent(preRequest.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "userId=nSYqWzZ4GsKTX4dyK"
 
@@ -26,11 +28,13 @@ class UserInfoRequestSpec: APITestCase {
     }
 
     func testRequestWithUsername() {
-        let _request = UserInfoRequest(username: "example")
-        guard let request = _request.request(for: api) else {
+        let preRequest = UserInfoRequest(username: "example")
+
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
-        let url = api.host.appendingPathComponent(_request.path)
+
+        let url = api.host.appendingPathComponent(preRequest.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "username=example"
 

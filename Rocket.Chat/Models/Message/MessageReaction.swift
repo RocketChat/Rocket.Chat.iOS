@@ -22,7 +22,7 @@ final class MessageReaction: BaseModel {
         self.emoji = emoji
 
         self.usernames.removeAll()
-        json["usernames"].array?.flatMap {
+        json["usernames"].array?.compactMap {
             $0.string
         }.forEach(self.usernames.append)
     }
