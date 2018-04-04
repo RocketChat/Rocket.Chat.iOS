@@ -39,7 +39,8 @@ final class AuthSettingsManager {
         }
 
         let currentRealm = Realm.current
-        api?.fetch(PublicSettingsRequest(), succeeded: { result in
+        let options = APIRequestOptions.paginated(count: 0, offset: 0)
+        api?.fetch(PublicSettingsRequest(), options: options, succeeded: { result in
             guard result.success else {
                 completion(nil)
                 return
