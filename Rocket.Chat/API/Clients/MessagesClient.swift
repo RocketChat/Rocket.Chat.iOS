@@ -58,7 +58,6 @@ struct MessagesClient: APIClient {
         }, errored: { error in
             switch error {
             case .version:
-                // TODO: Remove SendMessage Fallback + old methods after Rocket.Chat 1.0
                 SubscriptionManager.sendTextMessage(message, completion: { response in
                     updateMessage(json: response.result["result"])
                 })
@@ -122,6 +121,23 @@ struct MessagesClient: APIClient {
             }
 
         }, errored: { _ in Alert.defaultError.present() })
+
+        return true
+    }
+
+    @discardableResult
+    func reactMessage(_ message: Message, emoji: String, realm: Realm? = Realm.current) -> Bool {
+        guard let id = message.identifier else { return false }
+
+        api.fetch(ReactMessageRequest(msgId: id, emoji: emoji), succeeded: nil, errored: { error in
+            switch error {
+            case .version:
+                // version fallback
+                MessageManager.react(message, emoji: emoji, completion: { _ in })
+            default:
+                Alert.defaultError.present()
+            }
+        })
 
         return true
     }

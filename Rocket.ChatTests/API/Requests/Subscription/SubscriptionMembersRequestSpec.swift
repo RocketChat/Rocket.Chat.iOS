@@ -13,11 +13,11 @@ import SwiftyJSON
 
 class SubscriptionMembersRequestSpec: APITestCase {
     func testRequestWithRoomId() {
-        let _request = SubscriptionMembersRequest(roomId: "ByehQjC44FwMeiLbX")
-        guard let request = _request.request(for: api, options: .paginated(count: 20, offset: 100)) else {
+        let preRequest = SubscriptionMembersRequest(roomId: "ByehQjC44FwMeiLbX")
+        guard let request = preRequest.request(for: api, options: .paginated(count: 20, offset: 100)) else {
             return XCTFail("request is not nil")
         }
-        let url = api.host.appendingPathComponent(_request.path)
+        let url = api.host.appendingPathComponent(preRequest.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomId=ByehQjC44FwMeiLbX&count=20&offset=100"
 
@@ -26,11 +26,11 @@ class SubscriptionMembersRequestSpec: APITestCase {
     }
 
     func testRequestWithRoomName() {
-        let _request = SubscriptionMembersRequest(roomName: "testing")
-        guard let request = _request.request(for: api, options: .paginated(count: 20, offset: 100)) else {
+        let preRequest = SubscriptionMembersRequest(roomName: "testing")
+        guard let request = preRequest.request(for: api, options: .paginated(count: 20, offset: 100)) else {
             return XCTFail("request is not nil")
         }
-        let url = api.host.appendingPathComponent(_request.path)
+        let url = api.host.appendingPathComponent(preRequest.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomName=testing&count=20&offset=100"
 

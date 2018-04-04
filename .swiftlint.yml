@@ -5,7 +5,6 @@ excluded:
   - Rocket.Chat/Extensions/UIColorCSSColorsExtension.swift
 line_length: 300
 reporter: "xcode"
-
 identifier_name:
   excluded:
     - id

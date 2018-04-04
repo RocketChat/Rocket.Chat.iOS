@@ -13,9 +13,9 @@ import SwiftyJSON
 
 class InfoRequestSpec: APITestCase {
     func testRequest() {
-        let _request = InfoRequest()
-        let request1 = _request.request(for: api)
-        let expectedURL = api.host.appendingPathComponent(_request.path)
+        let preRequest = InfoRequest()
+        let request1 = preRequest.request(for: api)
+        let expectedURL = api.host.appendingPathComponent(preRequest.path)
         XCTAssertEqual(request1?.url, expectedURL, "url is correct")
         XCTAssertEqual(request1?.httpMethod, "GET", "http method is correct")
     }

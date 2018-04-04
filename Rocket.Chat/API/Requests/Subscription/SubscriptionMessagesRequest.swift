@@ -61,7 +61,7 @@ class SubscriptionMessagesRequest: APIRequest {
 }
 
 extension APIResult where T == SubscriptionMessagesRequest {
-    var messages: [Message?]? {
+    var messages: [Message]? {
         return raw?["messages"].arrayValue.map {
             let message = Message()
             message.map($0, realm: nil)

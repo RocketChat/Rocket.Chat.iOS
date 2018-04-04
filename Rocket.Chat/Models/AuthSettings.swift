@@ -81,6 +81,8 @@ final class AuthSettings: BaseModel {
     @objc dynamic var hideMessageUserRemoved: Bool = false
 
     // Message
+    @objc dynamic var messageAllowPinning = true
+
     @objc dynamic var messageShowDeletedStatus: Bool = true
     @objc dynamic var messageAllowDeleting: Bool = true
     @objc dynamic var messageAllowDeletingBlockDeleteInMinutes: Int = 0
@@ -88,21 +90,6 @@ final class AuthSettings: BaseModel {
     @objc dynamic var messageShowEditedStatus: Bool = true
     @objc dynamic var messageAllowEditing: Bool = true
     @objc dynamic var messageAllowEditingBlockEditInMinutes: Int = 0
-
-    var hiddenTypes: Set<MessageType> {
-        var hiddenTypes = Set<MessageType>()
-
-        if hideMessageUserJoined { hiddenTypes.insert(.userJoined) }
-        if hideMessageUserLeft { hiddenTypes.insert(.userLeft) }
-        if hideMessageUserAdded { hiddenTypes.insert(.userAdded) }
-        if hideMessageUserRemoved { hiddenTypes.insert(.userRemoved) }
-        if hideMessageUserMutedUnmuted {
-            hiddenTypes.insert(.userMuted)
-            hiddenTypes.insert(.userUnmuted)
-        }
-
-        return hiddenTypes
-    }
 
     // Custom fields
     @objc dynamic var rawCustomFields: String?

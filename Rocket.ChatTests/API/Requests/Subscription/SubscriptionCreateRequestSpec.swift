@@ -17,14 +17,14 @@ class SubscriptionCreateRequestSpec: APITestCase {
         let paramReadOnly = false
         let paramMembers = ["example"]
 
-        let _request = SubscriptionCreateRequest(
+        let preRequest = SubscriptionCreateRequest(
             name: paramRoomName,
             type: .channel,
             members: paramMembers,
             readOnly: paramReadOnly
         )
 
-        guard let request = _request.request(for: api) else {
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
         guard let httpBody = request.httpBody else {
@@ -41,13 +41,13 @@ class SubscriptionCreateRequestSpec: APITestCase {
         XCTAssertEqual(bodyJson["members"].array?.first?.string, paramMembers.first, "parameter members is correct")
         XCTAssertEqual(bodyJson["readOnly"].bool, paramReadOnly, "read only was set as false")
 
-        let _requestGroup = SubscriptionCreateRequest(
+        let preRequestGroup = SubscriptionCreateRequest(
             name: paramRoomName,
             type: .group,
             readOnly: paramReadOnly
         )
 
-        guard let requestGroup = _requestGroup.request(for: api) else {
+        guard let requestGroup = preRequestGroup.request(for: api) else {
             return XCTFail("request is not nil")
         }
 
@@ -55,7 +55,7 @@ class SubscriptionCreateRequestSpec: APITestCase {
     }
 
     func testResult() {
-        let _result = JSON([
+        let mockResult = JSON([
             "channel": [
                 "_id": "ByehQjC44FwMeiLbX",
                 "name": "channelname",
@@ -74,19 +74,19 @@ class SubscriptionCreateRequestSpec: APITestCase {
             "error": "error-test"
         ])
 
-        let _result_private = JSON([
+        let mockResultPrivate = JSON([
             "group": [
                 "name": "groupname",
                 "t": "p"
             ]
         ])
 
-        let result = APIResult<SubscriptionCreateRequest>(raw: _result)
-        let result_private = APIResult<SubscriptionCreateRequest>(raw: _result_private)
+        let result = APIResult<SubscriptionCreateRequest>(raw: mockResult)
+        let resultPrivate = APIResult<SubscriptionCreateRequest>(raw: mockResultPrivate)
 
         XCTAssertEqual(result.success, true, "success is correct")
         XCTAssertEqual(result.error, "error-test", "error is correct")
         XCTAssertEqual(result.name, "channelname", "name is correct")
-        XCTAssertEqual(result_private.name, "groupname", "name is correct")
+        XCTAssertEqual(resultPrivate.name, "groupname", "name is correct")
     }
 }
