@@ -14,14 +14,14 @@ import SwiftyJSON
 class CustomEmojiRequestSpec: APITestCase {
 
     func testRequest() {
-        let _request = CustomEmojiRequest()
-        guard let request = _request.request(for: api) else {
+        let preRequest = CustomEmojiRequest()
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
 
-        let expectedURL = api.host.appendingPathComponent(_request.path)
+        let expectedURL = api.host.appendingPathComponent(preRequest.path)
 
-        XCTAssertEqual(_request.path, "/api/v1/emoji-custom", "url subpath is correct")
+        XCTAssertEqual(preRequest.path, "/api/v1/emoji-custom", "url subpath is correct")
         XCTAssertEqual(request.url, expectedURL, "url is correct")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
     }
