@@ -224,6 +224,7 @@
 "chat.info.item.members" = "Miembros";
 "chat.info.item.pinned" = "Fijado";
 "chat.info.item.starred" = "Sembrado de estrellas";
+"chat.info.item.mentions" = "Mentions"; // TODO
 
 // Members List
 "chat.members.list.title" = "miembros";
@@ -233,6 +234,7 @@
 "chat.messages.list.empty" = "No se han encontrado mensajes";
 "chat.messages.pinned.list.title" = "Mensajes fijados";
 "chat.messages.starred.list.title" = "Mensajes destacados";
+"chat.messages.mentions.list.title" = "Mentions"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Preferencias";

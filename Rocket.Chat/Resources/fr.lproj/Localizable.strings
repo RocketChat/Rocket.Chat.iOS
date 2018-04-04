@@ -223,6 +223,7 @@
 "chat.info.item.members" = "Membres";
 "chat.info.item.pinned" = "Épinglé";
 "chat.info.item.starred" = "Mis en favoris";
+"chat.info.item.mentions" = "Mentions"; // TODO
 
 // Members List
 "chat.members.list.title" = "Membres";
@@ -232,6 +233,7 @@
 "chat.messages.list.empty" = "Aucun messages trouvé";
 "chat.messages.pinned.list.title" = "Messages épinglés";
 "chat.messages.starred.list.title" = "Messages favoris";
+"chat.messages.mentions.list.title" = "Mentions"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Réglages"; // TODO: new text: Preferences
