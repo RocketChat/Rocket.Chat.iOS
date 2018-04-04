@@ -212,6 +212,7 @@ struct SubscriptionManager {
 
             let object = response.result["fields"]["args"][0]
             print(object)
+            AppDelegate.displayNotification(title: object["title"].stringValue, body: object["text"].stringValue)
 
 //            currentRealm?.execute({ (realm) in
 //                if let rid = object["_id"].string {

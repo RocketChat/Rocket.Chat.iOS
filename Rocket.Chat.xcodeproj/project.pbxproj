@@ -91,6 +91,7 @@
 		3330329C20738E6000A9514D /* SubscriptionManager+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3330329B20738E6000A9514D /* SubscriptionManager+Search.swift */; };
 		3330329E20738EBB00A9514D /* SubscriptionManager+Typing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3330329D20738EBB00A9514D /* SubscriptionManager+Typing.swift */; };
 		333032A02073940800A9514D /* RCEmojiKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */; };
+		3331EA102074C37500C9CE30 /* Animation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3331EA0F2074C37500C9CE30 /* Animation.swift */; };
 		334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */; };
 		339B692B2050449700F97392 /* KeyboardFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B6929205042D300F97392 /* KeyboardFrameView.swift */; };
 		33A5C9BE206A561400FE1C8F /* emojiNames.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9BD206A561400FE1C8F /* emojiNames.json */; };
@@ -103,6 +104,9 @@
 		33A5C9D0206A565800FE1C8F /* food.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C7206A565800FE1C8F /* food.json */; };
 		33A5C9D1206A565800FE1C8F /* activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C8206A565800FE1C8F /* activity.json */; };
 		33A5C9D2206A565800FE1C8F /* nature.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C9206A565800FE1C8F /* nature.json */; };
+		33F73B2C2073BDF400F03F29 /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33F73B2A2073BDF400F03F29 /* NotificationView.xib */; };
+		33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2B2073BDF400F03F29 /* NotificationView.swift */; };
+		33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2F2073F24200F03F29 /* NotificationViewController.swift */; };
 		35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */; };
 		35BCD301201A57EA00B4BE5A /* Ask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD300201A57EA00B4BE5A /* Ask.swift */; };
 		35BCD303201A9FB800B4BE5A /* AskSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35BCD302201A9FB800B4BE5A /* AskSpec.swift */; };
@@ -413,7 +417,6 @@
 		80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80CFB5711F8D697100FC9715 /* ReplyView.xib */; };
 		80CFB5741F8DA55C00FC9715 /* ReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80CFB5731F8DA55C00FC9715 /* ReplyView.swift */; };
 		80D955C2202154A300E3F281 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D955C1202154A300E3F281 /* CASViewController.swift */; };
-		80DC9A6A20698FA100032BE0 /* RCEmojiKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */; };
 		80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F281FD8B2B800B70B59 /* UserExtensions.swift */; };
 		80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */; };
 		80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */; };
@@ -574,6 +577,7 @@
 		3330329920738E1500A9514D /* SubscriptionManager+Rooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscriptionManager+Rooms.swift"; sourceTree = "<group>"; };
 		3330329B20738E6000A9514D /* SubscriptionManager+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscriptionManager+Search.swift"; sourceTree = "<group>"; };
 		3330329D20738EBB00A9514D /* SubscriptionManager+Typing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscriptionManager+Typing.swift"; sourceTree = "<group>"; };
+		3331EA0F2074C37500C9CE30 /* Animation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animation.swift; sourceTree = "<group>"; };
 		334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		339B6929205042D300F97392 /* KeyboardFrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameView.swift; sourceTree = "<group>"; };
 		33A5C9BD206A561400FE1C8F /* emojiNames.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emojiNames.json; sourceTree = "<group>"; };
@@ -586,6 +590,9 @@
 		33A5C9C7206A565800FE1C8F /* food.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = food.json; sourceTree = "<group>"; };
 		33A5C9C8206A565800FE1C8F /* activity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activity.json; sourceTree = "<group>"; };
 		33A5C9C9206A565800FE1C8F /* nature.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nature.json; sourceTree = "<group>"; };
+		33F73B2A2073BDF400F03F29 /* NotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationView.xib; sourceTree = "<group>"; };
+		33F73B2B2073BDF400F03F29 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
+		33F73B2F2073F24200F03F29 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAttachmentView.swift; sourceTree = "<group>"; };
 		35AE3FC690B1D3DC4E9DE715 /* Pods-Rocket.ChatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.ChatTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests.release.xcconfig"; sourceTree = "<group>"; };
 		35BCD300201A57EA00B4BE5A /* Ask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ask.swift; sourceTree = "<group>"; };
@@ -1240,6 +1247,23 @@
 			path = Emojis;
 			sourceTree = "<group>";
 		};
+		33F73B292073BDD800F03F29 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				33F73B2B2073BDF400F03F29 /* NotificationView.swift */,
+				33F73B2A2073BDF400F03F29 /* NotificationView.xib */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		33F73B2E2073F1FC00F03F29 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				33F73B2F2073F24200F03F29 /* NotificationViewController.swift */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
 		4102E3AB1E53272C004BAA82 /* Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -1343,6 +1367,7 @@
 				41ADDD471E9DBAE90007A458 /* Loader */,
 				418C4DC41DC4C05000ABED4C /* Sections */,
 				41A91AED1E51C4E5005C94B1 /* Subscriptions */,
+				33F73B292073BDD800F03F29 /* Notification */,
 				7758A7621F8FA34300FAA244 /* UIPickerView */,
 			);
 			path = Views;
@@ -1451,6 +1476,7 @@
 				4102E3AB1E53272C004BAA82 /* Preferences */,
 				41E2FA031D414ED400238DFD /* Subscriptions */,
 				140A95E2202F5321003FD564 /* Drawing */,
+				33F73B2E2073F1FC00F03F29 /* Notification */,
 				41865AF01FC8B1EC00A5E48F /* WebViewEmbedded */,
 			);
 			name = Controllers;
@@ -1804,6 +1830,7 @@
 				4174CB0A1D2D990F0086DAC8 /* Controllers */,
 				0B3A9760202C4DE10019CA92 /* Resources */,
 				41DF76E21D2C50710028DBF8 /* AppDelegate.swift */,
+				3331EA0F2074C37500C9CE30 /* Animation.swift */,
 				4174CB201D2DD4690086DAC8 /* Rocket.Chat-Bridge.h */,
 				41DF76EE1D2C50720028DBF8 /* Info.plist */,
 				41833F4D1DEF16B600E54655 /* Keys.plist */,
@@ -2585,6 +2612,7 @@
 				419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */,
 				4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */,
 				14F8A280202E659000175FDC /* White-76@2x.png in Resources */,
+				33F73B2C2073BDF400F03F29 /* NotificationView.xib in Resources */,
 				33A5C9CD206A565800FE1C8F /* flags.json in Resources */,
 				14F8A272202E653E00175FDC /* Grey-29@3x.png in Resources */,
 				80CFB5721F8D697100FC9715 /* ReplyView.xib in Resources */,
@@ -2999,6 +3027,7 @@
 				415066881EB8B541003AEA1C /* MessageTextCacheManager.swift in Sources */,
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
 				80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */,
+				3331EA102074C37500C9CE30 /* Animation.swift in Sources */,
 				996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */,
 				411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */,
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
@@ -3068,6 +3097,7 @@
 				412BCC871E55C6B800F7F4EE /* ChatMessageTextView.swift in Sources */,
 				140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */,
 				80054CF31FD951B100F5ECF9 /* MessagesClient.swift in Sources */,
+				33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */,
 				80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */,
 				8013F86D1FD6B59A00EE1A4E /* APIClient.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
@@ -3114,6 +3144,7 @@
 				807371A01F96937100D53ADF /* LoginService.swift in Sources */,
 				802498F51F7ACDB7005477EC /* ChatMessageAudioView.swift in Sources */,
 				41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */,
+				33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */,
 				806465EE1FED1AFE001F27DB /* EmojiView.swift in Sources */,
 				D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */,
 				1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */,

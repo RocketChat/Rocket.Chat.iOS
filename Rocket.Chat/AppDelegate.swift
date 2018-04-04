@@ -15,6 +15,7 @@ import GoogleSignIn
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var notificationWindow: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Launcher().prepareToLaunch(with: launchOptions)
@@ -36,7 +37,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             WindowManager.open(.auth(serverUrl: "", credentials: nil))
         }
 
+        initNotificationWindow()
+
         return true
+    }
+
+    func initNotificationWindow() {
+        notificationWindow = UIWindow(frame: UIScreen.main.bounds)
+        notificationWindow?.rootViewController = NotificationViewController()
+        notificationWindow?.windowLevel = UIWindowLevelAlert
+        notificationWindow?.isUserInteractionEnabled = false
+        notificationWindow?.makeKeyAndVisible()
     }
 
     // MARK: AppDelegate LifeCycle
@@ -76,5 +87,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         Log.debug("Fail to register for notification: \(error)")
+    }
+
+    static func displayNotification(title: String, body: String) {
+        let vc = (UIApplication.shared.delegate as? AppDelegate)?.notificationWindow?.rootViewController as? NotificationViewController
+        vc?.displayNotification(title: title, body: body)
     }
 }
