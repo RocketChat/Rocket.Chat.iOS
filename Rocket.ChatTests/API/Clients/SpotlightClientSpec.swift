@@ -1,5 +1,5 @@
 //
-//  SpotlightClient.swift
+//  SpotlightClientSpec.swift
 //  Rocket.ChatTests
 //
 //  Created by Matheus Cardoso on 4/2/18.

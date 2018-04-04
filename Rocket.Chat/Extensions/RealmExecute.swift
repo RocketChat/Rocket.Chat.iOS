@@ -1,31 +1,14 @@
 //
-//  RealmExtension.swift
+//  RealmExecute.swift
 //  Rocket.Chat
 //
-//  Created by Rafael K. Streit on 7/18/16.
-//  Copyright © 2016 Rocket.Chat. All rights reserved.
+//  Created by Matheus Cardoso on 3/1/18.
+//  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
-import SwiftyJSON
 import RealmSwift
 
-var realmConfiguration: Realm.Configuration?
-
 extension Realm {
-
-    static var current: Realm? {
-        if let configuration = realmConfiguration {
-            return try? Realm(configuration: configuration)
-        } else {
-            let configuration = Realm.Configuration(
-                deleteRealmIfMigrationNeeded: true
-            )
-
-            return try? Realm(configuration: configuration)
-        }
-    }
-
     static let writeQueue = DispatchQueue(label: "chat.rocket.realm.write", qos: .background)
 
     func execute(_ execution: @escaping (Realm) -> Void, completion: VoidCompletion? = nil) {
@@ -98,5 +81,4 @@ extension Realm {
             realm.add(objects, update: true)
         })
     }
-
 }
