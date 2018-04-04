@@ -71,7 +71,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // MARK: Remote Notification
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        UserDefaults.standard.set(deviceToken.hexString, forKey: PushManager.kDeviceTokenKey)
+        UserDefaults.group.set(deviceToken.hexString, forKey: PushManager.kDeviceTokenKey)
     }
 
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {

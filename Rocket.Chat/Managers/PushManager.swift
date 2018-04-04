@@ -48,9 +48,9 @@ final class PushManager {
     }
 
     fileprivate static func getOrCreatePushId() -> String {
-        guard let pushId = UserDefaults.standard.string(forKey: kPushIdentifierKey) else {
+        guard let pushId = UserDefaults.group.string(forKey: kPushIdentifierKey) else {
             let randomId = UUID().uuidString.replacingOccurrences(of: "-", with: "")
-            UserDefaults.standard.set(randomId, forKey: kPushIdentifierKey)
+            UserDefaults.group.set(randomId, forKey: kPushIdentifierKey)
             return randomId
         }
 
@@ -58,7 +58,7 @@ final class PushManager {
     }
 
     static func getDeviceToken() -> String? {
-        guard let deviceToken = UserDefaults.standard.string(forKey: kDeviceTokenKey) else {
+        guard let deviceToken = UserDefaults.group.string(forKey: kDeviceTokenKey) else {
             return nil
         }
 
