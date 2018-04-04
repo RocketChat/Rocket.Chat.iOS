@@ -18,4 +18,22 @@ struct InfoClient: APIClient {
             })
         }, errored: nil)
     }
+
+    func fetchLoginServices(realm: Realm? = Realm.current) {
+        api.fetch(LoginServicesRequest(), succeeded: { result in
+            DispatchQueue.main.async {
+                realm?.execute({ realm in
+                    realm.add(result.loginServices, update: true)
+                })
+            }
+        }, errored: { error in
+            switch error {
+            case .version:
+                // version fallback
+                LoginServiceManager.subscribe()
+            default:
+                break
+            }
+        })
+    }
 }

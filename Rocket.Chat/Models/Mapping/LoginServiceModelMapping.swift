@@ -12,8 +12,8 @@ import RealmSwift
 
 extension LoginService: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
-        service = values["service"].stringValue
-        clientId = values["clientId"].string ?? values["appId"].string
+        service = values["name"].string ?? values["service"].string
+        clientId = values["appId"].string ?? values["clientId"].string
         custom = values["custom"].boolValue
         serverUrl = values["serverURL"].stringValue
         tokenPath = values["tokenPath"].stringValue

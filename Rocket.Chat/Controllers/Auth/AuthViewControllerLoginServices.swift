@@ -56,7 +56,7 @@ extension AuthViewController {
             self?.updateLoginServices(changes: changes)
         }
 
-        LoginServiceManager.subscribe()
+        API(host: serverURL).client(InfoClient.self).fetchLoginServices()
     }
 
     func presentOAuthViewController(for loginService: LoginService) {
