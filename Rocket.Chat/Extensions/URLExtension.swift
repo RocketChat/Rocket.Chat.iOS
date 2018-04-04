@@ -70,6 +70,12 @@ extension URL {
         if components.path.contains("websocket") {
             newURL = newURL?.deletingLastPathComponent()
         }
+
+        if var newURLString = newURL?.absoluteString, newURLString.last == "/" {
+            newURLString.removeLast()
+            newURL = URL(string: newURLString)
+        }
+
         return newURL
     }
 
@@ -84,6 +90,11 @@ extension URL {
         var newURL = components.url
         if !pathComponents.contains("websocket") {
             newURL = newURL?.appendingPathComponent("websocket")
+        }
+
+        if var newURLString = newURL?.absoluteString, newURLString.last == "/" {
+            newURLString.removeLast()
+            newURL = URL(string: newURLString)
         }
 
         return newURL

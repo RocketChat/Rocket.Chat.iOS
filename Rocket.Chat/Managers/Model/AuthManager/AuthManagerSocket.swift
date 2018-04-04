@@ -2,7 +2,7 @@
 //  AuthManagerSocket.swift
 //  Rocket.Chat
 //
-//  Created by Matheus Cardoso on 3/26/18.
+//  Created by Matheus Cardoso on 3/1/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
@@ -43,8 +43,8 @@ extension AuthManager {
                 "method": "login",
                 "params": [[
                     "resume": auth.token ?? ""
-                ]]
-            ] as [String: Any]
+                    ]]
+                ] as [String: Any]
 
             SocketManager.send(object) { (response) in
                 guard !response.isError() else {
@@ -74,13 +74,13 @@ extension AuthManager {
             "email": email,
             "pass": password,
             "name": name
-        ].union(dictionary: customFields)
+            ].union(dictionary: customFields)
 
         let object = [
             "msg": "method",
             "method": "registerUser",
             "params": [param]
-        ] as [String: Any]
+            ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
@@ -93,7 +93,7 @@ extension AuthManager {
             "msg": "method",
             "method": "login",
             "params": [params]
-        ] as [String: Any]
+            ] as [String: Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
@@ -186,7 +186,7 @@ extension AuthManager {
             "oauth": [
                 "credentialToken": credentials.token,
                 "credentialSecret": credentials.secret ?? ""
-            ] as [String: Any]
+                ] as [String: Any]
         ]
 
         AuthManager.auth(params: params, completion: completion)
@@ -203,7 +203,7 @@ extension AuthManager {
         let params = [
             "cas": [
                 "credentialToken": casCredentialToken
-            ] as [String: Any]
+                ] as [String: Any]
         ]
 
         AuthManager.auth(params: params, completion: completion)
@@ -213,7 +213,7 @@ extension AuthManager {
         let params = [
             "saml": true,
             "credentialToken": samlCredentialToken
-        ] as [String: Any]
+            ] as [String: Any]
 
         AuthManager.auth(params: params, completion: completion)
     }
@@ -226,7 +226,7 @@ extension AuthManager {
             "msg": "method",
             "method": "sendForgotPasswordEmail",
             "params": [email]
-        ] as [String: Any]
+            ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
@@ -238,7 +238,7 @@ extension AuthManager {
         let object = [
             "msg": "method",
             "method": "getUsernameSuggestion"
-        ] as [String: Any]
+            ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
@@ -251,7 +251,7 @@ extension AuthManager {
             "msg": "method",
             "method": "setUsername",
             "params": [username]
-        ] as [String: Any]
+            ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }

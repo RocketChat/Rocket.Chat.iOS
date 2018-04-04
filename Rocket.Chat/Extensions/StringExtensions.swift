@@ -8,27 +8,11 @@
 
 import Foundation
 
-func localized(_ string: String) -> String {
-    return NSLocalizedString(string, comment: "")
-}
-
 extension String {
     var isValidEmail: Bool {
         let emailFormat = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@", emailFormat)
         return emailPredicate.evaluate(with: self)
-    }
-
-    static func random(_ length: Int = 20) -> String {
-        let base = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-        var randomString: String = ""
-
-        for _ in 0..<length {
-            let randomValue = arc4random_uniform(UInt32(base.count))
-            randomString += "\(base[base.index(base.startIndex, offsetBy: Int(randomValue))])"
-        }
-
-        return randomString
     }
 
     func base64Encoded() -> String? {
