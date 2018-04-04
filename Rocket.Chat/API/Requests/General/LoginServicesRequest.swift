@@ -12,6 +12,7 @@ import SwiftyJSON
 typealias LoginServicesResult = APIResult<LoginServicesRequest>
 
 class LoginServicesRequest: APIRequest {
+    let requiredVersion: Version = Version(0, 63, 0)
     let path = "/api/v1/settings.oauth"
 }
 
