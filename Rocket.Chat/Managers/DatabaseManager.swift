@@ -10,27 +10,51 @@ import Foundation
 import RealmSwift
 import Realm
 
+/**
+ This keys are used to store all servers and
+ database information to each server user is
+ connected to.
+ */
+struct ServerPersistKeys {
+    // Server controls
+    static let servers = "kServers"
+    static let selectedIndex = "kSelectedIndex"
+
+    // Database
+    static let databaseName = "kDatabaseName"
+
+    // Authentication information
+    static let token = "kAuthToken"
+    static let serverURL = "kAuthServerURL"
+    static let serverVersion = "kAuthServerVersion"
+    static let userId = "kUserId"
+
+    // Display information
+    static let serverIconURL = "kServerIconURL"
+    static let serverName = "kServerName"
+}
+
 struct DatabaseManager {
 
     /**
         - returns: The selected database index.
      */
     static var selectedIndex: Int {
-        return UserDefaults.standard.value(forKey: ServerPersistKeys.selectedIndex) as? Int ?? 0
+        return UserDefaults.group.value(forKey: ServerPersistKeys.selectedIndex) as? Int ?? 0
     }
 
     /**
         - returns: All servers stored locally into the app.
      */
     static var servers: [[String: String]]? {
-        return UserDefaults.standard.value(forKey: ServerPersistKeys.servers) as? [[String: String]]
+        return UserDefaults.group.value(forKey: ServerPersistKeys.servers) as? [[String: String]]
     }
 
     /**
         - parameter index: The database index user wants to select.
      */
     static func selectDatabase(at index: Int) {
-        UserDefaults.standard.set(index, forKey: ServerPersistKeys.selectedIndex)
+        UserDefaults.group.set(index, forKey: ServerPersistKeys.selectedIndex)
     }
 
     /**
@@ -63,7 +87,7 @@ struct DatabaseManager {
             newServer[ServerPersistKeys.token] = selectedServer[ServerPersistKeys.token]
             servers[newIndex] = newServer
 
-            UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+            UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
 
             removeDatabase(at: from)
         }
@@ -79,7 +103,7 @@ struct DatabaseManager {
     static func removeDatabase(at index: Int) {
         if var servers = self.servers, servers.count > index {
             servers.remove(at: index)
-            UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+            UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
         }
     }
 
@@ -108,26 +132,26 @@ struct DatabaseManager {
             selectDatabase(at: 0)
         }
 
-        UserDefaults.standard.set(validServers, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(validServers, forKey: ServerPersistKeys.servers)
     }
 
     /**
-        This method will create a new database before user
-        even authenticated into the server. This is used
-        so we can populate the authentication information
-        when user logins.
-     
-        - parameter serverURL: The server URL.
+     This method will create a new database before user
+     even authenticated into the server. This is used
+     so we can populate the authentication information
+     when user logins.
+
+     - parameter serverURL: The server URL.
      */
     @discardableResult
     static func createNewDatabaseInstance(serverURL: String) -> Int {
-        let defaults = UserDefaults.standard
+        let defaults = UserDefaults.group
         var servers = self.servers ?? []
 
         servers.append([
             ServerPersistKeys.databaseName: "\(String.random()).realm",
             ServerPersistKeys.serverURL: serverURL
-        ])
+            ])
 
         let index = servers.count - 1
         defaults.set(servers, forKey: ServerPersistKeys.servers)
@@ -136,48 +160,43 @@ struct DatabaseManager {
     }
 
     /**
-        This method is responsible to get the server
-        information that's stored locally on device and
-        use it to change the database configuration being
-        used by the currently instance.
- 
-        - parameter index: If the index you want to use isn't stored
-            into the UserDefaults.standard, you can for the index
-            using this parameter.
+     This method is responsible to get the server
+     information that's stored locally on device and
+     use it to change the database configuration being
+     used by the currently instance.
+
+     - parameter index: If the index you want to use isn't stored
+     into the UserDefaults.group, you can for the index
+     using this parameter.
      */
     static func changeDatabaseInstance(index: Int? = nil) {
-        guard
-            let server = AuthManager.selectedServerInformation(index: index),
-            let databaseName = server[ServerPersistKeys.databaseName]
-        else {
-            return
-        }
-
-        let configuration = Realm.Configuration(
-            fileURL: URL(fileURLWithPath: RLMRealmPathForFile(databaseName), isDirectory: false),
-            deleteRealmIfMigrationNeeded: true
-        )
-
-        realmConfiguration = configuration
+        realmConfiguration = databaseConfiguration(index: index)
     }
 
     /**
      This method gets the realm associated with this server
     */
     static func databaseInstace(index: Int) -> Realm? {
+        guard let configuration = databaseConfiguration(index: index) else { return nil }
+        return try? Realm(configuration: configuration)
+    }
+
+    /**
+     This method returns the realm configuration associated with this server
+    */
+    static func databaseConfiguration(index: Int? = nil) -> Realm.Configuration? {
         guard
             let server = AuthManager.selectedServerInformation(index: index),
-            let databaseName = server[ServerPersistKeys.databaseName]
+            let databaseName = server[ServerPersistKeys.databaseName],
+            let url = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: AppGroup.identifier)
         else {
             return nil
         }
 
-        let configuration = Realm.Configuration(
-            fileURL: URL(fileURLWithPath: RLMRealmPathForFile(databaseName), isDirectory: false),
+        return Realm.Configuration(
+            fileURL: url.appendingPathComponent(databaseName),
             deleteRealmIfMigrationNeeded: true
         )
-
-        return try? Realm(configuration: configuration)
     }
 }
 

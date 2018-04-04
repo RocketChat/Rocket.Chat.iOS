@@ -62,7 +62,7 @@ class MessagesListViewData {
                     self.showing += result.count ?? 0
                     self.total = result.total ?? 0
                     if let messages = result.getMessages() {
-                        let messages = messages.flatMap { $0 }
+                        let messages = messages.compactMap { $0 }
                         guard var lastMessage = messages.first else {
                             self.isLoadingMoreMessages = false
                             completion?()
@@ -87,7 +87,7 @@ class MessagesListViewData {
                     completion?()
                 }
             }, errored: { _ in
-                // TODO: Handle error
+                Alert.defaultError.present()
             })
         }
     }
