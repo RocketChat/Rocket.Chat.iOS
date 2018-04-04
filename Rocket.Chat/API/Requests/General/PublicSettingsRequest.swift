@@ -12,6 +12,57 @@ typealias PublicSettingsResult = APIResult<PublicSettingsRequest>
 class PublicSettingsRequest: APIRequest {
     let requiredVersion = Version(0, 62, 2)
     let path = "/api/v1/settings.public"
+    let query: String? =
+    """
+    fields={
+        "type":1
+    }&query={
+        "_id":{
+            "$in":[
+                "Site_Url",
+                "CDN_PREFIX",
+                "Site_Name",
+                "Assets_favicon_512",
+                "UI_Use_Real_Name",
+                "UI_Allow_room_names_with_special_chars",
+                "Favorite_Rooms",
+                "Accounts_OAuth_Google",
+                "Accounts_OAuth_Facebook",
+                "Accounts_OAuth_Github",
+                "Accounts_OAuth_Gitlab",
+                "Accounts_OAuth_Linkedin",
+                "LDAP_Enable",
+                "CAS_enabled",
+                "CAS_login_url",
+                "Accounts_ShowFormLogin",
+                "Accounts_RegistrationForm",
+                "Accounts_PasswordReset",
+                "Accounts_EmailOrUsernamePlaceholder",
+                "Accounts_PasswordPlaceholder",
+                "Accounts_EmailVerification",
+                "Accounts_AllowUserProfileChange",
+                "Accounts_AllowUserAvatarChange",
+                "Accounts_AllowRealNameChange",
+                "Accounts_AllowUsernameChange",
+                "Accounts_AllowEmailChange",
+                "Accounts_AllowPasswordChange",
+                "FileUpload_Storage_Type",
+                "Message_HideType_uj",
+                "Message_HideType_ul",
+                "Message_HideType_au",
+                "Message_HideType_mute_unmute",
+                "Message_HideType_ru",
+                "Message_ShowDeletedStatus",
+                "Message_AllowDeleting",
+                "Message_AllowDeleting_BlockDeleteInMinutes",
+                "Message_ShowEditedStatus",
+                "Message_AllowEditing",
+                "Message_AllowEditing_BlockEditInMinutes",
+                "Accounts_CustomFields"
+            ]
+        }
+    }
+    """.removingWhitespaces()
 }
 
 extension APIResult where T == PublicSettingsRequest {
