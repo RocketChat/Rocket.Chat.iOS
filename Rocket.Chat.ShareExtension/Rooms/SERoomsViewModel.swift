@@ -51,7 +51,7 @@ extension SERoomsViewModel {
         let server = state.servers[state.selectedServerIndex]
 
         let roomToCell = { (room: Subscription) -> SERoomCellModel in
-            SERoomCellModel(room: room, avatarBaseUrl: "https://\(server.host)/avatar")
+            SERoomCellModel(room: room, avatarBaseUrl: "\(server.host)/avatar")
         }
 
         let favorites = state.displayedRooms.filter { $0.favorite }.map(roomToCell)
