@@ -30,7 +30,9 @@ struct SEComposeFileCellModel: SEComposeCellModel {
         self.originalNameText = file.name
         self.contentIndex = contentIndex
         self.file = file
-        self.fileSizeText = "\(Double(file.data.count)/1000000)MB"
+
+        let fileSize = Double(file.data.count)/1000000
+        self.fileSizeText = String(format: "%.2fMB", fileSize)
 
         if file.mimetype.contains("image/"), let image = UIImage(data: file.data) {
             self.image = image
