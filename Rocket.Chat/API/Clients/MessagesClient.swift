@@ -126,8 +126,49 @@ struct MessagesClient: APIClient {
     }
 
     @discardableResult
-    func reactMessage(_ message: Message, emoji: String, realm: Realm? = Realm.current) -> Bool {
-        guard let id = message.identifier else { return false }
+    func reactMessage(_ message: Message, emoji: String, user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) -> Bool {
+        guard
+            let id = message.identifier,
+            let username = user?.username
+        else {
+            return false
+        }
+
+        let reactions = List(message.reactions)
+        let message = Message(value: message) // detach from realm
+        message.reactions = reactions
+
+        if let reactionIndex = reactions.index(where: { $0.emoji == emoji }) {
+            let reaction = MessageReaction(value: reactions[reactionIndex])
+            if let usernameIndex = reaction.usernames.index(of: username) {
+                let usernames = List(reaction.usernames)
+                usernames.remove(at: usernameIndex)
+                reaction.usernames = usernames
+                if usernames.isEmpty {
+                    reactions.remove(at: reactionIndex)
+                } else {
+                    reactions[reactionIndex] = reaction
+                }
+            } else {
+                let usernames = List(reaction.usernames)
+                usernames.append(username)
+                reaction.usernames = usernames
+                reactions[reactionIndex] = reaction
+            }
+        } else {
+            let reaction = MessageReaction()
+            reaction.usernames.append(username)
+            reaction.emoji = emoji
+            reactions.append(reaction)
+        }
+
+        message.reactions = reactions
+
+        message.updatedAt = Date()
+
+        try? realm?.write {
+            realm?.add(message, update: true)
+        }
 
         api.fetch(ReactMessageRequest(msgId: id, emoji: emoji), succeeded: nil, errored: { error in
             switch error {
