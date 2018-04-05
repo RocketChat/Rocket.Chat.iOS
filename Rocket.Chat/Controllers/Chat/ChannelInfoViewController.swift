@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate typealias ListSegueData = (title: String, query: String?)
+private typealias ListSegueData = (title: String, query: String?)
 
 class ChannelInfoViewController: BaseViewController {
 

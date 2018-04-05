@@ -13,8 +13,12 @@ protocol Asker: class {
 extension UIViewController: Asker {
     func ask(title: String, message: String, buttons: [(title: String, handler: ((UIAlertAction) -> Void)?)], deleteOption: Int8 = -1) {
         let ask = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        for i in 0..<buttons.count {
-            ask.addAction(UIAlertAction(title: buttons[i].title, style: deleteOption == i ? .destructive : .default, handler: buttons[i].handler))
+        for idx in 0..<buttons.count {
+            ask.addAction(UIAlertAction(
+                title: buttons[idx].title,
+                style: deleteOption == idx ? .destructive : .default,
+                handler: buttons[idx].handler
+            ))
         }
         present(ask, animated: true, completion: nil)
     }

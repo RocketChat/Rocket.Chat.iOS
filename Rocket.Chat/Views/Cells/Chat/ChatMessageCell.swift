@@ -16,7 +16,6 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
 }
 
 final class ChatMessageCell: UICollectionViewCell {
-
     static let minimumHeight = CGFloat(55)
     static let identifier = "ChatMessageCell"
 
@@ -212,62 +211,57 @@ final class ChatMessageCell: UICollectionViewCell {
         return addedHeight
     }
 
+    //swiftlint:disable cyclomatic_complexity
     func insertAttachments() {
-        var mediaViewHeight = CGFloat(0)
-
-        mediaViewHeight += insertURLs()
+        var mediaViewHeight = insertURLs()
 
         message.attachments.forEach { attachment in
             let type = attachment.type
 
             switch type {
             case .textAttachment:
-                if let view = ChatMessageTextView.instantiateFromNib() {
-                    view.viewModel = ChatMessageTextViewModel(withAttachment: attachment)
-                    view.delegate = delegate
-                    view.translatesAutoresizingMaskIntoConstraints = false
+                guard let view = ChatMessageTextView.instantiateFromNib() else { break }
+                view.viewModel = ChatMessageTextViewModel(withAttachment: attachment)
+                view.delegate = delegate
+                view.translatesAutoresizingMaskIntoConstraints = false
 
-                    mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text, isFile: attachment.isFile)
+                mediaViews.addArrangedSubview(view)
+                mediaViewHeight += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text, isFile: attachment.isFile)
 
-                    if !attachment.collapsed {
-                        attachment.fields.forEach {
-                            guard let view = ChatMessageTextView.instantiateFromNib() else { return }
-                            view.viewModel = ChatMessageAttachmentFieldViewModel(withAttachment: attachment, andAttachmentField: $0)
-                            mediaViews.addArrangedSubview(view)
-                            mediaViewHeight += ChatMessageTextView.heightFor(collapsed: false, withText: $0.value)
-                        }
+                if !attachment.collapsed {
+                    attachment.fields.forEach {
+                        guard let view = ChatMessageTextView.instantiateFromNib() else { return }
+                        view.viewModel = ChatMessageAttachmentFieldViewModel(withAttachment: attachment, andAttachmentField: $0)
+                        mediaViews.addArrangedSubview(view)
+                        mediaViewHeight += ChatMessageTextView.heightFor(collapsed: false, withText: $0.value)
                     }
                 }
 
             case .image:
-                if let view = ChatMessageImageView.instantiateFromNib() {
-                    view.attachment = attachment
-                    view.delegate = delegate
-                    view.translatesAutoresizingMaskIntoConstraints = false
+                guard let view = ChatMessageImageView.instantiateFromNib() else { break }
+                view.attachment = attachment
+                view.delegate = delegate
+                view.translatesAutoresizingMaskIntoConstraints = false
 
-                    mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageImageView.heightFor(withText: attachment.descriptionText)
-                }
+                mediaViews.addArrangedSubview(view)
+                mediaViewHeight += ChatMessageImageView.heightFor(withText: attachment.descriptionText)
 
             case .video:
-                if let view = ChatMessageVideoView.instantiateFromNib() {
-                    view.attachment = attachment
-                    view.delegate = delegate
-                    view.translatesAutoresizingMaskIntoConstraints = false
+                guard let view = ChatMessageVideoView.instantiateFromNib() else { break }
+                view.attachment = attachment
+                view.delegate = delegate
+                view.translatesAutoresizingMaskIntoConstraints = false
 
-                    mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
-                }
+                mediaViews.addArrangedSubview(view)
+                mediaViewHeight += ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
 
             case .audio:
-                if let view = ChatMessageAudioView.instantiateFromNib() {
-                    view.attachment = attachment
-                    view.translatesAutoresizingMaskIntoConstraints = false
+                guard let view = ChatMessageAudioView.instantiateFromNib() else { break }
+                view.attachment = attachment
+                view.translatesAutoresizingMaskIntoConstraints = false
 
-                    mediaViews.addArrangedSubview(view)
-                    mediaViewHeight += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
-                }
+                mediaViews.addArrangedSubview(view)
+                mediaViewHeight += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
 
             default:
                 return
@@ -289,10 +283,10 @@ final class ChatMessageCell: UICollectionViewCell {
             avatarView.avatarURL = URL(string: avatar)
         }
 
+        labelUsername.text = message.user?.displayName() ?? "Unknown"
+
         if message.alias.count > 0 {
             labelUsername.text = message.alias
-        } else {
-            labelUsername.text = message.user?.displayName() ?? "Unknown"
         }
     }
 
@@ -307,40 +301,6 @@ final class ChatMessageCell: UICollectionViewCell {
             }
 
             labelText.message = text
-        }
-    }
-
-    fileprivate func updateReactions() {
-        let username = AuthManager.currentUser()?.username
-
-        let models = Array(message.reactions.map { reaction -> ReactionViewModel in
-            let highlight: Bool
-            if let username = username {
-                highlight = reaction.usernames.contains(username)
-            } else {
-                highlight = false
-            }
-
-            let emoji = reaction.emoji ?? "?"
-            let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl()
-
-            return ReactionViewModel(
-                emoji: emoji,
-                imageUrl: imageUrl,
-                count: reaction.usernames.count.description,
-                highlight: highlight,
-                reactors: Array(reaction.usernames)
-            )
-        })
-
-        reactionsListView.model = ReactionListViewModel(reactionViewModels: models)
-
-        if message.reactions.count > 0 {
-            reactionsListView.isHidden = false
-            reactionsListViewConstraint.constant = 40
-        } else {
-            reactionsListView.isHidden = true
-            reactionsListViewConstraint.constant = 0
         }
     }
 
@@ -382,7 +342,6 @@ final class ChatMessageCell: UICollectionViewCell {
     @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
         delegate?.handleUsernameTapMessageCell(message, view: contentView, recognizer: recognizer)
     }
-
 }
 
 extension ChatMessageCell: UIGestureRecognizerDelegate {
@@ -393,34 +352,40 @@ extension ChatMessageCell: UIGestureRecognizerDelegate {
 
 }
 
-// MARK: Accessibility
+// MARK: Reactions
 
 extension ChatMessageCell {
+    fileprivate func updateReactions() {
+        let username = AuthManager.currentUser()?.username
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+        let models = Array(message.reactions.map { reaction -> ReactionViewModel in
+            let highlight: Bool
+            if let username = username {
+                highlight = reaction.usernames.contains(username)
+            } else {
+                highlight = false
+            }
 
-        isAccessibilityElement = true
+            let emoji = reaction.emoji ?? "?"
+            let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl()
+
+            return ReactionViewModel(
+                emoji: emoji,
+                imageUrl: imageUrl,
+                count: reaction.usernames.count.description,
+                highlight: highlight,
+                reactors: Array(reaction.usernames)
+            )
+        })
+
+        reactionsListView.model = ReactionListViewModel(reactionViewModels: models)
+
+        if message.reactions.count > 0 {
+            reactionsListView.isHidden = false
+            reactionsListViewConstraint.constant = 40
+        } else {
+            reactionsListView.isHidden = true
+            reactionsListViewConstraint.constant = 0
+        }
     }
-
-    override var accessibilityIdentifier: String? {
-        get { return "message" }
-        set { }
-    }
-
-    override var accessibilityLabel: String? {
-        get { return message?.accessibilityLabel }
-        set { }
-    }
-
-    override var accessibilityValue: String? {
-        get { return message?.accessibilityValue }
-        set { }
-    }
-
-    override var accessibilityHint: String? {
-        get { return message?.accessibilityHint }
-        set { }
-    }
-
 }

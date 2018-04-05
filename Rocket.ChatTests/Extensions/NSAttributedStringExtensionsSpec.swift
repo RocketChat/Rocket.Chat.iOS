@@ -27,9 +27,11 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
 
     func testSetFont() {
         let attributedString = NSMutableAttributedString(string: "this > word < is italic")
-        guard let _wordRange = attributedString.string.range(of: "word")
-            else { XCTFail("This will never happen!"); return }
-        let wordRange = NSRange(_wordRange, in: attributedString.string)
+        guard let matchWordRange = attributedString.string.range(of: "word") else {
+            return XCTFail("This will never happen!")
+        }
+
+        let wordRange = NSRange(matchWordRange, in: attributedString.string)
         let font = UIFont.italicSystemFont(ofSize: 12)
         attributedString.setFont(font, range: wordRange)
 
@@ -38,9 +40,11 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
 
     func testSetFontColor() {
         let attributedString = NSMutableAttributedString(string: "this > word < is red")
-        guard let _wordRange = attributedString.string.range(of: "word")
-            else { XCTFail("This will never happen!"); return }
-        let wordRange = NSRange(_wordRange, in: attributedString.string)
+        guard let matchWordRange = attributedString.string.range(of: "word") else {
+            return XCTFail("This will never happen!")
+        }
+
+        let wordRange = NSRange(matchWordRange, in: attributedString.string)
         let color = UIColor.red
         attributedString.setFontColor(color, range: wordRange)
 
@@ -49,14 +53,14 @@ class NSAttributedStringExtensionsSpec: XCTestCase {
 
     func testSetBackgroundColor() {
         let attributedString = NSMutableAttributedString(string: "this > word < is red on the background")
-        guard let _wordRange = attributedString.string.range(of: "word")
-            else { XCTFail("This will never happen!"); return }
-        let wordRange = NSRange(_wordRange, in: attributedString.string)
+        guard let matchWordRange = attributedString.string.range(of: "word") else {
+            return XCTFail("This will never happen!")
+        }
+
+        let wordRange = NSRange(matchWordRange, in: attributedString.string)
         let color = UIColor.red
         attributedString.setBackgroundColor(color, range: wordRange)
 
-        assert(attributedString,
-               has: (NSAttributedStringKey.backgroundColor, color),
-               in: wordRange, "setBackgroundColor will work")
+        assert(attributedString, has: (NSAttributedStringKey.backgroundColor, color), in: wordRange, "setBackgroundColor will work")
     }
 }
