@@ -1,0 +1,32 @@
+/* 
+  Localizable.strings
+  Rocket.Chat
+
+  Created by Matheus Cardoso on 2/28/18.
+  Copyright © 2018 Rocket.Chat. All rights reserved.
+*/
+
+"global.ok" = "Ok"; //TODO
+
+"alert.no_servers.title" = "No servers"; //TODO
+"alert.no_servers.message" = "You need to join at least one Rocket.Chat server in order to share something."; //TODO
+
+"servers.title" = "Servers"; //TODO
+
+"rooms.title" = "Select Rooms"; //TODO
+"rooms.section.server" = "Select server"; //TODO
+"rooms.section.favorites" = "Favorites"; //TODO
+"rooms.section.channels" = "Channels"; //TODO
+"rooms.section.groups" = "Private Groups"; //TODO
+"rooms.section.directMessages" = "Direct Messages"; //TODO
+
+"compose.title" = "Share"; //TODO
+"compose.send" = "Send"; //TODO
+"compose.destination.to" = "To: "; //TODO
+"compose.file.name.placeholder" = "File name"; //TODO
+"compose.file.description.placeholder" = "File description"; //TODO
+
+"report.success.title" = "Success"; //TODO
+"report.success.message" = "Shared your content successfully."; //TODO
+"report.error.title" = "Error"; //TODO
+"report.error.message" = "Something wrong happened while sending your content."; //TODO
