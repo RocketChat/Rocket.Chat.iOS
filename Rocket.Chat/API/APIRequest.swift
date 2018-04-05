@@ -74,6 +74,7 @@ extension APIRequest {
         request.httpBody = body()
 
         request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+        request.addValue(API.userAgent, forHTTPHeaderField: "User-Agent")
 
         if let token = api.authToken {
             request.addValue(token, forHTTPHeaderField: "X-Auth-Token")
