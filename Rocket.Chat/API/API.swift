@@ -41,13 +41,13 @@ class API: APIFetcher {
     var authToken: String?
     var userId: String?
 
-    static var userAgent: String {
+    static let userAgent: String = {
         let info = Bundle.main.infoDictionary
         let appVersion = info?["CFBundleShortVersionString"] as? String ?? "Unknown"
         let bundleVersion = info?["CFBundleVersion"] as? String ?? "-"
         let systemVersion = UIDevice.current.systemVersion
         return "RC Mobile; iOS \(systemVersion); v\(appVersion) (\(bundleVersion))"
-    }
+    }()
 
     convenience init?(host: String, version: Version = .zero) {
         guard let url = URL(string: host)?.httpServerURL() else {
