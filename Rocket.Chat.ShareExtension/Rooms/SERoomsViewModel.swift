@@ -57,7 +57,7 @@ extension SERoomsViewModel {
         let favorites = state.displayedRooms.filter { $0.favorite }.sorted {
             ($0.type.rawValue, $0.name.lowercased()) < ($1.type.rawValue, $1.name.lowercased())
         }.map(roomToCell)
-        
+
         let channels = state.displayedRooms.filter { $0.type == .channel }.map(roomToCell)
         let groups = state.displayedRooms.filter { $0.type == .group }.map(roomToCell)
         let directMessages = state.displayedRooms.filter { $0.type == .directMessage }.map(roomToCell)
