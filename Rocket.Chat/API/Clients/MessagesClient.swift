@@ -135,7 +135,7 @@ struct MessagesClient: APIClient {
         }
 
         let reactions = List(message.reactions)
-        let message = Message(value: message) // detach from realm
+        let message = Message(value: message)
         message.reactions = reactions
 
         if let reactionIndex = reactions.index(where: { $0.emoji == emoji }) {
@@ -163,7 +163,6 @@ struct MessagesClient: APIClient {
         }
 
         message.reactions = reactions
-
         message.updatedAt = Date()
 
         try? realm?.write {
