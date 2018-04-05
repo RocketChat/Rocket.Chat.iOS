@@ -22,6 +22,8 @@ final class AuthViewController: BaseViewController {
 
     let socketHandlerToken = String.random(5)
 
+    var loginServicesToken: NotificationToken?
+
     @IBOutlet weak var viewFieldsHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var viewFields: UIView! {
         didSet {
@@ -71,6 +73,7 @@ final class AuthViewController: BaseViewController {
     var customAuthButtons = [String: UIButton]()
 
     deinit {
+        loginServicesToken?.invalidate()
         NotificationCenter.default.removeObserver(self)
     }
 
