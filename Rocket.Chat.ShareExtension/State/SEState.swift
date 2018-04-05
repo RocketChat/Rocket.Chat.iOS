@@ -31,17 +31,19 @@ struct SEState {
     var navigation = SENavigation(scenes: [], sceneTransition: .none)
 
     var displayedRooms: [Subscription] {
+        let displayedRooms: [Subscription]
         switch searchRooms {
         case .none:
-            return rooms
+            displayedRooms = rooms
         case .searching(let search):
             let search = search.lowercased()
-            return rooms.filter {
+            displayedRooms = rooms.filter {
                 $0.fname.lowercased().contains(search) || $0.name.lowercased().contains(search)
             }
         case .started:
-            return rooms
+            displayedRooms = rooms
         }
+        return displayedRooms.sorted(by: { $0.name < $1.name })
     }
 
     var isSubmittingContent: Bool {
