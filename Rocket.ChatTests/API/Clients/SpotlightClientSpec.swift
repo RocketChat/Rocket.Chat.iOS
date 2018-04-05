@@ -73,6 +73,6 @@ class SpotlightClientSpec: XCTestCase, RealmTestCase {
             }
         })
 
-        wait(for: [expectation], timeout: 0.9)
+        wait(for: [expectation], timeout: 2)
     }
 }
