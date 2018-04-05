@@ -38,7 +38,7 @@ class CommandsClientSpec: XCTestCase, RealmTestCase {
                 expectation.fulfill()
             }
         })
-        wait(for: [expectation], timeout: 1.0)
+        wait(for: [expectation], timeout: 0.5)
     }
 
     func testRunCommand() {

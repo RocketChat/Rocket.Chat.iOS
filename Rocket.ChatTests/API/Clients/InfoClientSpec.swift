@@ -31,11 +31,11 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
         client.fetchInfo(realm: realm)
 
         let expectation = XCTestExpectation(description: "correct info added to realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
             if AuthManager.isAuthenticated(realm: realm)?.serverVersion == "0.59.3" {
                 expectation.fulfill()
             }
         })
-        wait(for: [expectation], timeout: 1.1)
+        wait(for: [expectation], timeout: 0.5)
     }
 }
