@@ -438,6 +438,10 @@
 		807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */; };
 		807C7BF920740F3C006B600E /* AuthCanPinMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7BF820740F3C006B600E /* AuthCanPinMessage.swift */; };
 		807C7C022074307F006B600E /* KMPlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C012074307F006B600E /* KMPlaceholderTextView.swift */; };
+		807C7C0620751ED2006B600E /* SpotlightClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C0520751ED1006B600E /* SpotlightClient.swift */; };
+		807C7C0820751EDC006B600E /* SpotlightRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C0720751EDB006B600E /* SpotlightRequest.swift */; };
+		807C7C0C20751F06006B600E /* SpotlightRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C0B20751F06006B600E /* SpotlightRequestSpec.swift */; };
+		807C7C1020751F40006B600E /* SpotlightClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C0F20751F40006B600E /* SpotlightClientSpec.swift */; };
 		807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53C2044B49800E21429 /* Emojione+Transform.swift */; };
 		807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53E2045F36D00E21429 /* EmojioneSpec.swift */; };
 		807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB55A2046E7DD00E21429 /* SERoomsViewController.swift */; };
@@ -1056,6 +1060,10 @@
 		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
 		807C7BF820740F3C006B600E /* AuthCanPinMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanPinMessage.swift; sourceTree = "<group>"; };
 		807C7C012074307F006B600E /* KMPlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMPlaceholderTextView.swift; sourceTree = "<group>"; };
+		807C7C0520751ED1006B600E /* SpotlightClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightClient.swift; sourceTree = "<group>"; };
+		807C7C0720751EDB006B600E /* SpotlightRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightRequest.swift; sourceTree = "<group>"; };
+		807C7C0B20751F06006B600E /* SpotlightRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightRequestSpec.swift; sourceTree = "<group>"; };
+		807C7C0F20751F40006B600E /* SpotlightClientSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightClientSpec.swift; sourceTree = "<group>"; };
 		807FB53C2044B49800E21429 /* Emojione+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emojione+Transform.swift"; sourceTree = "<group>"; };
 		807FB53E2045F36D00E21429 /* EmojioneSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojioneSpec.swift; sourceTree = "<group>"; };
 		807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Rocket.Chat.ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -2150,6 +2158,7 @@
 		80054CFA1FDAFD3A00F5ECF9 /* General */ = {
 			isa = PBXGroup;
 			children = (
+				807C7C0720751EDB006B600E /* SpotlightRequest.swift */,
 				D1D535F01F70864C006625D2 /* InfoRequest.swift */,
 				80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */,
 				9977302B2072B746009AF465 /* PublicSettingsRequest.swift */,
@@ -2182,6 +2191,7 @@
 		8013F86E1FD6B59D00EE1A4E /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				807C7C0520751ED1006B600E /* SpotlightClient.swift */,
 				80054CF21FD951B100F5ECF9 /* MessagesClient.swift */,
 				8013F8701FD6B5B000EE1A4E /* CommandsClient.swift */,
 				8013F86F1FD6B5B000EE1A4E /* InfoClient.swift */,
@@ -2210,6 +2220,7 @@
 		8013F87E1FD6B66900EE1A4E /* Clients */ = {
 			isa = PBXGroup;
 			children = (
+				807C7C0F20751F40006B600E /* SpotlightClientSpec.swift */,
 				80054CF41FD96AFE00F5ECF9 /* MessagesClientSpec.swift */,
 				8013F87F1FD6B6C600EE1A4E /* CommandsClientSpec.swift */,
 				8013F8801FD6B6C600EE1A4E /* InfoClientSpec.swift */,
@@ -2419,6 +2430,16 @@
 				80D0CE7020509C230056B17F /* SEAvatarView.xib */,
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		807C7C0A20751F06006B600E /* General */ = {
+			isa = PBXGroup;
+			children = (
+				D18675E91F70A58B00406FB4 /* InfoRequestSpec.swift */,
+				807C7C0B20751F06006B600E /* SpotlightRequestSpec.swift */,
+				9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */,
+			);
+			path = General;
 			sourceTree = "<group>";
 		};
 		807FB5592046E7DD00E21429 /* Rocket.Chat.ShareExtension */ = {
@@ -2635,14 +2656,6 @@
 			name = Preferences;
 			sourceTree = "<group>";
 		};
-		9921BFAA2075AF4500BB027A /* General */ = {
-			isa = PBXGroup;
-			children = (
-				9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */,
-			);
-			path = General;
-			sourceTree = "<group>";
-		};
 		99282260204DE0AE005D2067 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -2733,14 +2746,13 @@
 		D18675E81F70A56800406FB4 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
-				9921BFAA2075AF4500BB027A /* General */,
+				807C7C0A20751F06006B600E /* General */,
 				998165C8204EBB5E0059D346 /* User */,
 				8013F88A1FD6B79900EE1A4E /* Command */,
 				806C59A31FBB2F3700C32D0A /* Message */,
 				802498EF1F7A9B92005477EC /* Authentication */,
 				80235D201F7442C100A56CA5 /* Subscription */,
 				9977302820727DA0009AF465 /* Emoji */,
-				D18675E91F70A58B00406FB4 /* InfoRequestSpec.swift */,
 			);
 			path = Requests;
 			sourceTree = "<group>";
@@ -3504,6 +3516,7 @@
 				14BAFAE020308EF30054A2E6 /* DrawingBrushOpacityViewController.swift in Sources */,
 				41499C8F1F2A116900790EA7 /* ServerManager.swift in Sources */,
 				41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */,
+				807C7C0620751ED2006B600E /* SpotlightClient.swift in Sources */,
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
 				41852E891F92BBEC00D1C499 /* ChatControllerReplyHandler.swift in Sources */,
 				D1C536CC1F688B2F00EBA8D9 /* MarkdownManager.swift in Sources */,
@@ -3761,6 +3774,7 @@
 				140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */,
 				419ECCA21F3C8F15005F224B /* ChatControllerHeaderStatus.swift in Sources */,
 				8073719A1F94E83600D53ADF /* SocketError.swift in Sources */,
+				807C7C0820751EDC006B600E /* SpotlightRequest.swift in Sources */,
 				41D894021F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift in Sources */,
 				4112DC581FFFB9B2005995E1 /* BaseModel.swift in Sources */,
 				41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */,
@@ -3810,6 +3824,7 @@
 				8013F8791FD6B63200EE1A4E /* VersionMiddlewareSpec.swift in Sources */,
 				41F8487E1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift in Sources */,
 				808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */,
+				807C7C0C20751F06006B600E /* SpotlightRequestSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
 				802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */,
 				411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */,
@@ -3828,6 +3843,7 @@
 				80247B3F1FE8582700878833 /* MessageReactionSpec.swift in Sources */,
 				8013F8431FD02D8F00EE1A4E /* ChatCollectionViewFlowLayoutSpec.swift in Sources */,
 				77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */,
+				807C7C1020751F40006B600E /* SpotlightClientSpec.swift in Sources */,
 				998165CA204EBBA10059D346 /* UpdateUserRequestSpec.swift in Sources */,
 				9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */,
 				807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */,
