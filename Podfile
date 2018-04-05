@@ -25,7 +25,7 @@ def shared_pods
   pod 'Instabug'
 
   # Code utilities
-  pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
+  pod 'semver'
 
   # UI
   pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'

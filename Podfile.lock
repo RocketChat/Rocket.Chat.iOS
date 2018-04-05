@@ -48,7 +48,7 @@ PODS:
     - FLAnimatedImage (~> 1.0)
     - SDWebImage/Core
   - SearchTextField (1.2.0)
-  - semver (1.0.0)
+  - semver (1.1.0)
   - SideMenuController (0.2.4.1)
   - SimpleImageViewer (1.0.2):
     - SDWebImage (~> 4)
@@ -75,7 +75,7 @@ DEPENDENCIES:
   - SDWebImage (~> 4)
   - SDWebImage/GIF
   - SearchTextField
-  - semver (from `https://github.com/rafaelks/Semver.Swift.git`, branch `chore/swift4`)
+  - semver
   - SideMenuController (from `https://github.com/rafaelks/SideMenuController.git`)
   - SimpleImageViewer (from `https://github.com/cardoso/SimpleImageViewer.git`)
   - SlackTextViewController (from `https://github.com/rafaelks/SlackTextViewController.git`)
@@ -104,6 +104,7 @@ SPEC REPOS:
     - RealmSwift
     - SDWebImage
     - SearchTextField
+    - semver
     - Starscream
     - SwiftLint
     - SwiftyJSON
@@ -112,9 +113,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   RCMarkdownParser:
     :git: https://github.com/RocketChat/RCMarkdownParser.git
-  semver:
-    :branch: chore/swift4
-    :git: https://github.com/rafaelks/Semver.Swift.git
   SideMenuController:
     :git: https://github.com/rafaelks/SideMenuController.git
   SimpleImageViewer:
@@ -126,9 +124,6 @@ CHECKOUT OPTIONS:
   RCMarkdownParser:
     :commit: 8d90207815f563f9e1a1a5b7a0a8fe1c1c94ff34
     :git: https://github.com/RocketChat/RCMarkdownParser.git
-  semver:
-    :commit: a8ad3f3c1b168dfa6a8f1f7de2e5cae59239d9bf
-    :git: https://github.com/rafaelks/Semver.Swift.git
   SideMenuController:
     :commit: 267ddbc263304534df12e2b0dfbe8343f60891ab
     :git: https://github.com/rafaelks/SideMenuController.git
@@ -159,7 +154,7 @@ SPEC CHECKSUMS:
   RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b
   SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SearchTextField: a5bb7e4c33affadb115afdbe8100d84ef10a8024
-  semver: df3895a55a097c7a819a80e7375e95b29e136157
+  semver: 11ae3bc4a6036efbc86b5863ef5fa32c065c8bbd
   SideMenuController: 44670bc1e1c58d9460fc028e246926227edefec0
   SimpleImageViewer: 329a155b04fcb93c5da0e296044250ad113c3158
   SlackTextViewController: b854e62c1c156336bc4fd409c6ca79b5773e8f9d
@@ -168,6 +163,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TagListView: 669f7d4455003c877655875d34829731c4191528
 
-PODFILE CHECKSUM: ee32a59ee0546b3b6750473b49dd187883c8d15a
+PODFILE CHECKSUM: cd80c049291518388b1340f450807c6a00c98e84
 
 COCOAPODS: 1.5.0
