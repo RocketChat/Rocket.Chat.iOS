@@ -97,7 +97,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     var currentPassword: String?
     var user: User? = User() {
         didSet {
-            bindUserData(shouldRefreshAvatar: avatarView.clearImageCacheOnNextLoad)
+            bindUserData()
         }
     }
 
@@ -138,7 +138,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     func fetchUserData() {
         avatarButton.isHidden = true
-        avatarView.clearImageCacheOnNextLoad = true
 
         var fetchUserLoader: MBProgressHUD!
 
@@ -180,9 +179,9 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         })
     }
 
-    func bindUserData(shouldRefreshAvatar: Bool = false) {
+    func bindUserData() {
         DispatchQueue.main.async {
-            if shouldRefreshAvatar { self.avatarView.user = self.user }
+            self.avatarView.user = self.user
             self.name.text = self.user?.name
             self.username.text = self.user?.username
             self.email.text = self.user?.emails.first?.email
@@ -204,8 +203,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         enableUserInteraction()
     }
 
-    @objc func endEditing(shouldRefreshAvatar: Bool = false) {
-        bindUserData(shouldRefreshAvatar: shouldRefreshAvatar)
+    @objc func endEditing() {
+        bindUserData()
 
         navigationItem.title = viewModel.title
         navigationItem.hidesBackButton = false
@@ -344,7 +343,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                 if !weakSelf.isUpdatingUser { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
                 weakSelf.isUploadingAvatar = false
                 weakSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
-                weakSelf.avatarView.clearImageCacheOnNextLoad = true
                 weakSelf.stopLoading()
             })
         }
@@ -398,7 +396,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     @objc func didPressCancelEditingButton() {
         avatarView.avatarPlaceholder = nil
         avatarView.imageView.image = nil
-        endEditing(shouldRefreshAvatar: true)
+        endEditing()
     }
 
     @objc func hideKeyboard() {
