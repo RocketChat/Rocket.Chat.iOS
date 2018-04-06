@@ -30,3 +30,4 @@
 "report.success.message" = "Wybrany plik został poprawnie udostępniony.";
 "report.error.title" = "Błąd";
 "report.error.message" = "Wystąpił błąd w czasie wysyłania pliku.";
+"report.cancelled.message" = "You cancelled the request. The message wasn't sent."; //TODO
