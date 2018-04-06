@@ -73,6 +73,10 @@ extension AuthSettings: ModelMappeable {
         self.hideMessageUserRemoved = objectForKey(object: values, key: "Message_HideType_ru")?.bool ?? false
 
         // Message
+        if let period = objectForKey(object: values, key: "Message_GroupingPeriod")?.int {
+            self.messageGroupingPeriod = period
+        }
+
         self.messageAllowPinning = objectForKey(object: values, key: "Message_AllowPinning")?.bool ?? true
 
         self.messageShowDeletedStatus = objectForKey(object: values, key: "Message_ShowDeletedStatus")?.bool ?? true
