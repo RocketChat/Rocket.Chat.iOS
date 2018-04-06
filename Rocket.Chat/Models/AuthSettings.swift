@@ -16,6 +16,10 @@ enum RegistrationFormAccess: String {
     case isSecretURL = "Secret URL"
 }
 
+struct AuthSettingsDefaults {
+    static let messageGroupingPeriod = 900
+}
+
 final class AuthSettings: BaseModel {
     @objc dynamic var siteURL: String?
     @objc dynamic var cdnPrefixURL: String?
@@ -81,6 +85,8 @@ final class AuthSettings: BaseModel {
     @objc dynamic var hideMessageUserRemoved: Bool = false
 
     // Message
+    @objc dynamic var messageGroupingPeriod = AuthSettingsDefaults.messageGroupingPeriod
+
     @objc dynamic var messageAllowPinning = true
 
     @objc dynamic var messageShowDeletedStatus: Bool = true
