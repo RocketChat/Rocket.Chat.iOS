@@ -27,7 +27,7 @@ final class AuthSettingsManager {
     }
 
     static func updatePublicSettings(serverVersion: Version? = nil, apiHost: URL? = nil, _ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings>) {
-        var api: API?
+        let api: API?
         if let apiHost = apiHost {
             if let serverVersion = serverVersion {
                 api = API(host: apiHost, version: serverVersion)
@@ -75,7 +75,7 @@ final class AuthSettingsManager {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
