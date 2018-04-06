@@ -50,7 +50,7 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
                 expectation.fulfill()
             }
         })
-        wait(for: [expectation], timeout: 0.6)
+        wait(for: [expectation], timeout: 2)
     }
 
     func testUpdateMessage() {
@@ -93,7 +93,7 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
                 expectation.fulfill()
             }
         })
-        wait(for: [expectation], timeout: 0.6)
+        wait(for: [expectation], timeout: 2)
     }
 
     func testReactMessage() {
