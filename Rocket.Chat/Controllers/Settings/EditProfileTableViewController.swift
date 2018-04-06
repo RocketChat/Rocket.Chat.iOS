@@ -290,6 +290,13 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         if username != self.user?.username { userRaw["username"].string = username }
         if email != self.user?.emails.first?.email { userRaw["emails"] = [["address": email]] }
 
+        let shouldUpdateUser = name != self.user?.name || username != self.user?.username || email != self.user?.emails.first?.email
+
+        if !shouldUpdateUser {
+            update(user: nil)
+            return
+        }
+
         let user = User()
         user.map(userRaw, realm: nil)
 
@@ -331,7 +338,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         present(alert, animated: true)
     }
 
-    fileprivate func update(user: User) {
+    fileprivate func update(user: User?) {
         startLoading()
 
         if let avatarFile = avatarFile {
@@ -345,6 +352,10 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                 weakSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
                 weakSelf.stopLoading()
             })
+        }
+
+        guard let user = user else {
+            return
         }
 
         let stopLoading: (_ shouldEndEditing: Bool) -> Void = { [weak self] shouldEndEditing in
