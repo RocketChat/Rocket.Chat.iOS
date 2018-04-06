@@ -6,18 +6,18 @@ PODS:
   - FLAnimatedImage (1.0.12)
   - FLEX (2.4.0)
   - GoogleSignIn (4.1.2):
-    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
-    - GoogleToolboxForMac/NSString+URLArguments (~> 2.1)
+    - "GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)"
+    - "GoogleToolboxForMac/NSString+URLArguments (~> 2.1)"
     - GTMOAuth2 (~> 1.0)
     - GTMSessionFetcher/Core (~> 1.1)
   - GoogleToolboxForMac/DebugUtils (2.1.3):
     - GoogleToolboxForMac/Defines (= 2.1.3)
   - GoogleToolboxForMac/Defines (2.1.3)
-  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3):
+  - "GoogleToolboxForMac/NSDictionary+URLArguments (2.1.3)":
     - GoogleToolboxForMac/DebugUtils (= 2.1.3)
     - GoogleToolboxForMac/Defines (= 2.1.3)
-    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)
-  - GoogleToolboxForMac/NSString+URLArguments (2.1.3)
+    - "GoogleToolboxForMac/NSString+URLArguments (= 2.1.3)"
+  - "GoogleToolboxForMac/NSString+URLArguments (2.1.3)"
   - GTMOAuth2 (1.1.6):
     - GTMSessionFetcher (~> 1.1)
   - GTMSessionFetcher (1.1.13):
@@ -84,6 +84,31 @@ DEPENDENCIES:
   - SwiftyJSON
   - TagListView (~> 1.0)
 
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - 1PasswordExtension
+    - Crashlytics
+    - Fabric
+    - FLAnimatedImage
+    - FLEX
+    - GoogleSignIn
+    - GoogleToolboxForMac
+    - GTMOAuth2
+    - GTMSessionFetcher
+    - Instabug
+    - MBProgressHUD
+    - MobilePlayer
+    - OAuthSwift
+    - ReachabilitySwift
+    - Realm
+    - RealmSwift
+    - SDWebImage
+    - SearchTextField
+    - Starscream
+    - SwiftLint
+    - SwiftyJSON
+    - TagListView
+
 EXTERNAL SOURCES:
   RCMarkdownParser:
     :git: https://github.com/RocketChat/RCMarkdownParser.git
@@ -145,4 +170,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: ee32a59ee0546b3b6750473b49dd187883c8d15a
 
-COCOAPODS: 1.4.0
+COCOAPODS: 1.5.0
