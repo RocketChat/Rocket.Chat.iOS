@@ -2911,6 +2911,7 @@
 				807FB5542046E7DD00E21429 /* Sources */,
 				807FB5552046E7DD00E21429 /* Frameworks */,
 				807FB5562046E7DD00E21429 /* Resources */,
+				4C4E7B083E244B4F308E22B7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3188,6 +3189,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		4C4E7B083E244B4F308E22B7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.Chat.ShareExtension/Pods-Rocket.Chat.ShareExtension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		5A6B94785E51D859BD0468DE /* [CP] Check Pods Manifest.lock */ = {
