@@ -44,7 +44,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func initNotificationWindow() {
         notificationWindow = UIWindow(frame: UIScreen.main.bounds)
-        notificationWindow?.rootViewController = NotificationViewController()
+//        if () {
+            print(NotificationViewController(nibName: "NotificationViewController", bundle: nil))
+//        }
+        notificationWindow?.rootViewController = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
         notificationWindow?.windowLevel = UIWindowLevelAlert
         notificationWindow?.isUserInteractionEnabled = false
         notificationWindow?.makeKeyAndVisible()
@@ -89,8 +92,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Log.debug("Fail to register for notification: \(error)")
     }
 
-    static func displayNotification(title: String, body: String) {
+    static func displayNotification(title: String, body: String, user: User) {
         let vc = (UIApplication.shared.delegate as? AppDelegate)?.notificationWindow?.rootViewController as? NotificationViewController
-        vc?.displayNotification(title: title, body: body)
+        vc?.displayNotification(title: title, body: body, user: user)
     }
 }

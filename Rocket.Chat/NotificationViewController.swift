@@ -10,17 +10,7 @@ import UIKit
 
 class NotificationViewController: UIViewController {
 
-    var notificationView: NotificationView? {
-        didSet {
-            if let oldView = oldValue {
-                oldView.removeFromSuperview()
-            }
-            if let notificationView = notificationView {
-                view.addSubview(notificationView)
-                applyConstraints(to: notificationView)
-            }
-        }
-    }
+    @IBOutlet weak var notificationView: NotificationView!
 
     var notificationViewIsHidden: Bool {
         get {
@@ -42,42 +32,69 @@ class NotificationViewController: UIViewController {
         }
     }
 
-    private var hiddenConstraint: NSLayoutConstraint?
-    private var visibleConstraint: NSLayoutConstraint?
-
-    func applyConstraints(to notificationView: NotificationView) {
-        notificationView.translatesAutoresizingMaskIntoConstraints = false
-        let widthConstraint = notificationView.widthAnchor.constraint(equalTo: view.widthAnchor)
-        widthConstraint.priority = UILayoutPriority.init(rawValue: 999)
-        NSLayoutConstraint.activate([
-//            notificationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            notificationView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            notificationView.widthAnchor.constraint(lessThanOrEqualToConstant: 500),
-            notificationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            widthConstraint
-        ])
-        visibleConstraint = notificationView.topAnchor.constraint(equalTo: view.topAnchor)
-        hiddenConstraint = notificationView.bottomAnchor.constraint(equalTo: view.topAnchor)
-        hiddenConstraint?.isActive = true
-    }
-
-    override func loadView() {
-        super.loadView()
-        view = UIView()
-        view.layer.masksToBounds = true
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        let notificationView = Bundle.main.loadNibNamed("NotificationView", owner: self, options: nil)?.first as? NotificationView
-        notificationView?.translatesAutoresizingMaskIntoConstraints = false
-        self.notificationView = notificationView
+        view.layer.shadowColor = UIColor.black.cgColor
+        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOffset = CGSize(width: 0, height: 0)
     }
 
-    func displayNotification(title: String, body: String) {
+    @IBOutlet private weak var hiddenConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var visibleConstraint: NSLayoutConstraint!
+
+//    func applyConstraints(to notificationView: NotificationView) {
+//        notificationView.translatesAutoresizingMaskIntoConstraints = false
+//
+//        NSLayoutConstraint.deactivate(constraints)
+//        hiddenConstraint?.isActive = false
+//        visibleConstraint?.isActive = false
+//        constraints.removeAll()
+//        switch traitCollection.horizontalSizeClass {
+//        case .compact: applyConstraintsForCompactWidth()
+//        case .regular: applyConstraintsForCompactWidth()
+//        default: break
+//        }
+////        let widthConstraint = notificationView.widthAnchor.constraint(equalTo: view.widthAnchor)
+////        widthConstraint.priority = UILayoutPriority.init(rawValue: 999)
+////        NSLayoutConstraint.activate([
+//////            notificationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//////            notificationView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+////            notificationView.widthAnchor.constraint(lessThanOrEqualToConstant: 500),
+////            notificationView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+////            widthConstraint
+////        ])
+//        visibleConstraint = notificationView.topAnchor.constraint(equalTo: view.topAnchor)
+//        hiddenConstraint = notificationView.bottomAnchor.constraint(equalTo: view.topAnchor)
+//        hiddenConstraint?.isActive = true
+//    }
+
+//    func applyConstraintsForCompactWidth() {
+//        guard let notificationView = notificationView else { return }
+//
+//        constraints = [
+//            notificationView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+//            notificationView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+//        ]
+//        NSLayoutConstraint.activate(constraints)
+//    }
+
+//    override func loadView() {
+//        super.loadView()
+//        view = UIView()
+//        view.layer.masksToBounds = true
+//    }
+//
+//    override func viewDidLoad() {
+//        super.viewDidLoad()
+//        let notificationView = Bundle.main.loadNibNamed("NotificationView", owner: self, options: nil)?.first as? NotificationView
+//        notificationView?.translatesAutoresizingMaskIntoConstraints = false
+//        self.notificationView = notificationView
+//    }
+
+    func displayNotification(title: String, body: String, user: User) {
         guard let notificationView = notificationView else { return }
 
-        notificationView.displayNotification(title: title, body: body)
+        notificationView.displayNotification(title: title, body: body, user: user)
 
         UIView.animate([
             Animation(duration: 0.3, closure: {

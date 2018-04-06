@@ -212,7 +212,11 @@ struct SubscriptionManager {
 
             let object = response.result["fields"]["args"][0]
             print(object)
-            AppDelegate.displayNotification(title: object["title"].stringValue, body: object["text"].stringValue)
+            if let user = User.find(withIdentifier: object["payload"]["sender"]["_id"].stringValue) {
+                AppDelegate.displayNotification(title: object["title"].stringValue, body: object["text"].stringValue, user: user)
+                print("User found!")
+                print(user)
+            }
 
 //            currentRealm?.execute({ (realm) in
 //                if let rid = object["_id"].string {
