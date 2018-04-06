@@ -36,6 +36,6 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
                 expectation.fulfill()
             }
         })
-        wait(for: [expectation], timeout: 1.1)
+        wait(for: [expectation], timeout: 2)
     }
 }
