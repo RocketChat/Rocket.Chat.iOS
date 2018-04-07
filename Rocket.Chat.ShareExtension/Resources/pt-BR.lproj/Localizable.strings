@@ -31,3 +31,4 @@
 "report.success.message" = "Você compartilhou o conteúdo com sucesso.";
 "report.error.title" = "Erro";
 "report.error.message" = "Algo de errado aconteceu enquanto seu conteúdo estava sendo enviado.";
+"report.cancelled.message" = "Você cancelou a requisição. A mensagem não foi enviada.";
