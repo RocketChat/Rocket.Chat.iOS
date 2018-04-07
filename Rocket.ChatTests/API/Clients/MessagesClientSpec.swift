@@ -45,12 +45,16 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(realm.objects(Message.self).first?.temporary, true)
 
         let expectation = XCTestExpectation(description: "message updated in realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
             if realm.objects(Message.self).first?.temporary == false {
                 expectation.fulfill()
             }
         })
-        wait(for: [expectation], timeout: 0.6)
+<<<<<<< HEAD
+        wait(for: [expectation], timeout: 0.5)
+=======
+        wait(for: [expectation], timeout: 2)
+>>>>>>> fd060fffabab275303a89f80863d6804e630d909
     }
 
     func testUpdateMessage() {
@@ -88,12 +92,12 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         client.updateMessage(message, text: "edit-test", realm: realm)
 
         let expectation = XCTestExpectation(description: "message updated in realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
             if realm.objects(Message.self).first?.text == "edit-test" {
                 expectation.fulfill()
             }
         })
-        wait(for: [expectation], timeout: 0.6)
+        wait(for: [expectation], timeout: 2)
     }
 
     func testReactMessage() {
@@ -101,15 +105,53 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
         let realm = testRealm()
         let client = MessagesClient(api: api)
 
-        let message = Message.testInstance()
+        let user = User.testInstance()
+        user.name = "rocket.cat"
+        let message = Message()
+        let rawMessage = JSON([
+            "_id": "9F4WZaNq28ZSr34R5",
+            "_updatedAt": [
+                "$date": 1522943762375
+            ],
+            "rid": "2B6NWL88MoijfZswt",
+            "u": [
+                "name": "John Appleseed",
+                "username": "john.appleseed",
+                "_id": "cBD6dHc7oBvGjkruM"
+            ],
+            "reactions": [
+                ":grin:": [
+                    "usernames": [
+                        "john.appleseed"
+                    ]
+                ]
+            ],
+            "ts": [
+                "$date": 1522868268925
+            ],
+            "msg": "The quick brown fox jumped over the lazy dog"
+        ])
+        message.map(rawMessage, realm: nil)
+
         message.identifier = "message-identifier"
 
         try? realm.write {
             realm.add(message)
         }
 
-        let result = client.reactMessage(message, emoji: "party_parrot", realm: realm)
+        let result = client.reactMessage(message, emoji: ":grin:", user: user, realm: realm)
 
-        XCTAssert(result)
+        XCTAssert(result, "react method accepts parameters")
+        XCTAssert(message.reactions.count == 1, "reaction count remains one after adding to existing reaction")
+        XCTAssert(message.reactions[0].usernames.count == 2, "reaction username count increases by one after adding to existing reaction")
+
+        client.reactMessage(message, emoji: ":party_parrot:", user: user, realm: realm)
+
+        XCTAssert(message.reactions.count == 2, "reaction count remains one after adding new reaction")
+        XCTAssert(message.reactions[1].usernames.count == 1, "reaction username count is one after adding new reaction")
+
+        client.reactMessage(message, emoji: ":party_parrot:", user: user, realm: realm)
+
+        XCTAssert(message.reactions.count == 1, "reaction count decreases by one after removing reaction")
     }
 }

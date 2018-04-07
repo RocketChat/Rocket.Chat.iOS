@@ -49,7 +49,8 @@ class SocketManager {
         sharedInstance.socket?.delegate = sharedInstance
         sharedInstance.socket?.pongDelegate = sharedInstance
         sharedInstance.socket?.headers = [
-            "Host": url.host ?? ""
+            "Host": url.host ?? "",
+            "User-Agent": API.userAgent
         ]
 
         sharedInstance.socket?.connect()
