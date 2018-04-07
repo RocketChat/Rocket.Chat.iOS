@@ -178,7 +178,7 @@ class NewRoomViewController: BaseViewController {
             }
 
             SubscriptionManager.updateSubscriptions(auth) { _ in
-                if let newRoom = Realm.shared?.objects(Subscription.self).filter("name == '\(name)' && privateType != 'd'").first {
+                if let newRoom = Realm.current?.objects(Subscription.self).filter("name == '\(name)' && privateType != 'd'").first {
 
                     let controller = ChatViewController.shared
                     controller?.subscription = newRoom
@@ -189,7 +189,7 @@ class NewRoomViewController: BaseViewController {
                 }
             }
         }, errored: { _ in
-            // TODO: Handle error
+            Alert.defaultError.present()
         })
     }
 

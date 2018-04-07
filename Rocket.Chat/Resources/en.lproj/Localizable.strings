@@ -52,6 +52,26 @@
 "alert.email_verification.title" = "Email verification";
 "alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again.";
 
+"alert.discarding_changes.title" = "Unsaved changes";
+"alert.discarding_changes.message" = "Your unsaved changes have been discarded.";
+"alert.load_profile_error.title" = "Failed to load your profile";
+"alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again.";
+"alert.password_mismatch_error.title" = "Your password doesn't match";
+"alert.password_mismatch_error.message" = "The confirmation field doesn't match with the password you've provided. Please, check it and try again.";
+"alert.update_profile_error.title" = "Failed to update";
+"alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please, try again.";
+"alert.update_password_error.title" = "Failed to change password";
+"alert.update_password_error.message" = "Something wrong happened when changing your password. Please, try again.";
+"alert.update_profile_empty_fields.title" = "Please, fill the empty fields";
+"alert.update_profile_empty_fields.message" = "All your profile information are required and can't stay blank";
+"alert.update_profile_invalid_email.title" = "Invalid e-mail";
+"alert.update_profile_invalid_email.message" = "It seems that the e-mail you've entered is invalid. Please, fix it and try again.";
+"alert.password_empty_fields.title" = "Please, fill the empty fields";
+"alert.password_empty_fields.message" = "Fill up the password and confirmation fields so you can update your password.";
+"alert.update_profile_success.title" = "Profile updated";
+"alert.update_password_success.title" = "Password updated";
+
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
@@ -207,6 +227,7 @@
 "chat.info.item.members" = "Members";
 "chat.info.item.pinned" = "Pinned";
 "chat.info.item.starred" = "Starred";
+"chat.info.item.mentions" = "Mentions";
 
 // Members List
 "chat.members.list.title" = "Members";
@@ -216,14 +237,18 @@
 "chat.messages.list.empty" = "No messages found";
 "chat.messages.pinned.list.title" = "Pinned Messages";
 "chat.messages.starred.list.title" = "Starred Messages";
+"chat.messages.mentions.list.title" = "Mentions";
 
 // Settings
 "myaccount.settings.title" = "Preferences";
 "myaccount.settings.contactus" = "Contact us";
+"myaccount.settings.profile" = "Profile";
 "myaccount.settings.license" = "License";
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Application Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
+"myaccount.settings.web_browser" = "Web Browser";
+
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon";
@@ -235,3 +260,36 @@
 "myaccount.settings.language.title" = "Change Language";
 "myaccount.settings.language.reset" = "Reset to Default";
 "myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+ before the new settings will take effect.";
+
+// Choose Web Browser
+"web_browser.safari.title" = "Safari";
+"web_browser.in_app_safari.title" = "In-App Browser";
+"web_browser.chrome.title" = "Chrome";
+"web_browser.opera.title" = "Opera Mini";
+"web_browser.firefox.title" = "Firefox";
+"myaccount.settings.web_browser.title" = "Web browser";
+"myaccount.settings.web_browser.footer" = "This application will be used to open links in Rocket Chat.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "Profile";
+"myaccount.settings.editing_profile.title" = "Edit Profile";
+"myaccount.settings.profile.actions.save" = "Save";
+"myaccount.settings.profile.actions.edit" = "Edit";
+"myaccount.settings.profile.actions.change_password" = "Change your password";
+"myaccount.settings.profile.section.profile" = "Profile";
+"myaccount.settings.profile.name_placeholder" = "Name";
+"myaccount.settings.profile.username_placeholder" = "Username";
+"myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.password_required.title" = "Enter your password";
+"myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail.";
+"myaccount.settings.profile.password_required.placeholder" = "Password";
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "New password";
+"myaccount.settings.profile.new_password.section.password" = "Password";
+"myaccount.settings.profile.new_password.actions.save" = "Save";
+"myaccount.settings.profile.new_password.password_placeholder" = "New password";
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Password confirmation";
+"myaccount.settings.profile.new_password.password_required.title" = "Enter your password";
+"myaccount.settings.profile.new_password.password_required.message" = "Your current password is required when setting a new password.";
+"myaccount.settings.profile.new_password.password_required.placeholder" = "Password";

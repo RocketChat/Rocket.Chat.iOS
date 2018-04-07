@@ -11,6 +11,7 @@ import SwiftyJSON
 import RealmSwift
 
 extension AuthSettings: ModelMappeable {
+    //swiftlint:disable function_body_length
     func map(_ values: JSON, realm: Realm?) {
         if self.identifier == nil {
             self.identifier = String.random()
@@ -48,8 +49,18 @@ extension AuthSettings: ModelMappeable {
         self.rawRegistrationForm = objectForKey(object: values, key: "Accounts_RegistrationForm")?.string
         self.isPasswordResetEnabled = objectForKey(object: values, key: "Accounts_PasswordReset")?.bool ?? true
 
+        // Authentication Placeholder Fields
+        self.emailOrUsernameFieldPlaceholder = objectForKey(object: values, key: "Accounts_EmailOrUsernamePlaceholder")?.stringValue ?? ""
+        self.passwordFieldPlaceholder = objectForKey(object: values, key: "Accounts_PasswordPlaceholder")?.stringValue ?? ""
+
         // Accounts
         self.emailVerification = objectForKey(object: values, key: "Accounts_EmailVerification")?.bool ?? false
+        self.isAllowedToEditProfile = objectForKey(object: values, key: "Accounts_AllowUserProfileChange")?.bool ?? false
+        self.isAllowedToEditAvatar = objectForKey(object: values, key: "Accounts_AllowUserAvatarChange")?.bool ?? false
+        self.isAllowedToEditName = objectForKey(object: values, key: "Accounts_AllowRealNameChange")?.bool ?? false
+        self.isAllowedToEditUsername = objectForKey(object: values, key: "Accounts_AllowUsernameChange")?.bool ?? false
+        self.isAllowedToEditEmail = objectForKey(object: values, key: "Accounts_AllowEmailChange")?.bool ?? false
+        self.isAllowedToEditPassword = objectForKey(object: values, key: "Accounts_AllowPasswordChange")?.bool ?? false
 
         // Upload
         self.uploadStorageType = objectForKey(object: values, key: "FileUpload_Storage_Type")?.string
@@ -62,6 +73,12 @@ extension AuthSettings: ModelMappeable {
         self.hideMessageUserRemoved = objectForKey(object: values, key: "Message_HideType_ru")?.bool ?? false
 
         // Message
+        if let period = objectForKey(object: values, key: "Message_GroupingPeriod")?.int {
+            self.messageGroupingPeriod = period
+        }
+
+        self.messageAllowPinning = objectForKey(object: values, key: "Message_AllowPinning")?.bool ?? true
+
         self.messageShowDeletedStatus = objectForKey(object: values, key: "Message_ShowDeletedStatus")?.bool ?? true
         self.messageAllowDeleting = objectForKey(object: values, key: "Message_AllowDeleting")?.bool ?? true
         self.messageAllowDeletingBlockDeleteInMinutes = objectForKey(object: values, key: "Message_AllowDeleting_BlockDeleteInMinutes")?.int ?? 0

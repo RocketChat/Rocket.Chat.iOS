@@ -10,19 +10,14 @@ import UIKit
 import FLAnimatedImage
 import SDWebImage
 
-let avatarColors: [UInt] = [
-    0xF44336, 0xE91E63, 0x9C27B0, 0x673AB7, 0x3F51B5,
-    0x2196F3, 0x03A9F4, 0x00BCD4, 0x009688, 0x4CAF50,
-    0x8BC34A, 0xCDDC39, 0xFFC107, 0xFF9800, 0xFF5722,
-    0x795548, 0x9E9E9E, 0x607D8B]
-
 final class AvatarView: UIView {
 
+    var avatarPlaceholder: UIImage?
     var imageURL: URL? {
         didSet {
             if let imageURL = imageURL {
-                let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages, .highPriority]
-                imageView?.sd_setImage(with: imageURL, placeholderImage: nil, options: options) { [weak self] (_, error, _, _) in
+                let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages, .highPriority, .refreshCached]
+                imageView?.sd_setImage(with: imageURL, placeholderImage: avatarPlaceholder, options: options) { [weak self] (_, error, _, _) in
                     guard error == nil else { return }
 
                     self?.labelInitials.text = ""
@@ -127,22 +122,27 @@ final class AvatarView: UIView {
 
         let username = user.username ?? "?"
         var initials = ""
-        var color: UInt = 0x000000
+        var color = UIColor.black
 
         if username == "?" {
             initials = username
-            color = 0x000000
         } else {
-            let position = username.count % avatarColors.count
-            color = avatarColors[position]
+            let position = username.count % UIColor.avatarColors.count
+            color = UIColor.avatarColors[position]
             initials = initialsFor(username)
         }
 
         labelInitials?.text = initials.uppercased()
-        backgroundColor = UIColor(rgb: color, alphaVal: 1)
+        backgroundColor = color
+    }
+
+    func removeCacheForCurrentURL(forceUpdate: Bool = false) {
+        SDImageCache.shared().removeImage(forKey: imageURL?.absoluteString, fromDisk: true)
+        if forceUpdate { updateAvatar() }
     }
 
     func prepareForReuse() {
+        avatarPlaceholder = nil
         avatarURL = nil
         imageURL = nil
         user = nil

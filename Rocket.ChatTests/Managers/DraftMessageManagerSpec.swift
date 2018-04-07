@@ -30,39 +30,39 @@ class DraftMessageManagerSpec: XCTestCase {
     }
 
     func testUpdateDraftMessageWithNoServers() {
-        UserDefaults.standard.removeObject(forKey: ServerPersistKeys.servers)
+        UserDefaults.group.removeObject(forKey: ServerPersistKeys.servers)
         XCTAssertNoThrow(DraftMessageManager.update(draftMessage: "foo", for: subscription))
     }
 
     func testReturnDraftMessageWithNoServers() {
-        UserDefaults.standard.removeObject(forKey: ServerPersistKeys.servers)
+        UserDefaults.group.removeObject(forKey: ServerPersistKeys.servers)
         XCTAssertEqual(DraftMessageManager.draftMessage(for: subscription), "", "it should return empty string")
     }
 
     func testReturnDraftMessageWithNotFoundServer() {
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 100)
         XCTAssertEqual(DraftMessageManager.draftMessage(for: subscription), "", "it should return empty string")
     }
 
     func testReturnDraftMessageWithEmptyServerURLKey() {
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 1)
         XCTAssertEqual(DraftMessageManager.draftMessage(for: subscription), "", "it should return empty string")
     }
 
     func testUpdateDraftMessage() {
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 0)
         DraftMessageManager.update(draftMessage: draftMessage, for: subscription)
 
-        let selectedServerDraftMessages = UserDefaults.standard.dictionary(forKey: DraftMessageManager.selectedServerKey)
+        let selectedServerDraftMessages = UserDefaults.group.dictionary(forKey: DraftMessageManager.selectedServerKey)
         let expectedSelectedServerDraftMessages: [String: Any] = [String(format: "\(subscription.rid)-cacheddraftmessage"): draftMessage]
         XCTAssertEqual(selectedServerDraftMessages as NSObject?, expectedSelectedServerDraftMessages as NSObject, "cached draft messages by server data is correct")
     }
 
     func testDraftMessageRetrieving() {
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 0)
         DraftMessageManager.update(draftMessage: draftMessage, for: subscription)
 
@@ -70,23 +70,23 @@ class DraftMessageManagerSpec: XCTestCase {
     }
 
     func testClearEmptyServerDraftMessages() {
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 0)
         DraftMessageManager.update(draftMessage: draftMessage, for: subscription)
 
-        UserDefaults.standard.set(nil, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(nil, forKey: ServerPersistKeys.servers)
         DraftMessageManager.clearServerDraftMessages()
 
-        XCTAssertNotNil(UserDefaults.standard.dictionary(forKey: testServerURL), "no server data was cleared when clearing draft messages for a empty server")
+        XCTAssertNotNil(UserDefaults.group.dictionary(forKey: testServerURL), "no server data was cleared when clearing draft messages for a empty server")
     }
 
     func testClearServerDraftMessages() {
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 0)
         DraftMessageManager.update(draftMessage: draftMessage, for: subscription)
 
         DraftMessageManager.clearServerDraftMessages()
-        XCTAssertNil(UserDefaults.standard.dictionary(forKey: DraftMessageManager.selectedServerKey), "successfully cleared selected server draft messages")
+        XCTAssertNil(UserDefaults.group.dictionary(forKey: DraftMessageManager.selectedServerKey), "successfully cleared selected server draft messages")
     }
 
 }

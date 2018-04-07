@@ -37,7 +37,7 @@ final class ChatDataController {
     var data: [ChatData] = [] {
         didSet {
             messagesUsernames.removeAll()
-            messagesUsernames.formUnion(data.flatMap { $0.message?.user?.username })
+            messagesUsernames.formUnion(data.compactMap { $0.message?.user?.username })
         }
     }
 
@@ -105,16 +105,19 @@ final class ChatDataController {
 
         let sameUser = message.user == prevMessage.user
 
-        let timeLimit = Message.maximumTimeForSequence
-        let recent = date.timeIntervalSince(prevDate) < timeLimit
+        var timeLimit = AuthSettingsDefaults.messageGroupingPeriod
+        if let settings = AuthSettingsManager.settings {
+            timeLimit = settings.messageGroupingPeriod
+        }
 
+        let recent = Int(date.timeIntervalSince(prevDate)) < timeLimit
         return sameUser && recent
     }
 
     func indexPathOf(_ identifier: String) -> IndexPath? {
         return data.filter { item in
             return item.identifier == identifier
-        }.flatMap { item in
+            }.compactMap { item in
             item.indexPath
         }.first
     }
@@ -123,7 +126,7 @@ final class ChatDataController {
         return data.filter { item in
             guard let messageIdentifier = item.message?.identifier else { return false }
             return messageIdentifier == identifier
-        }.flatMap { item in
+            }.compactMap { item in
             item.indexPath
         }.first
     }

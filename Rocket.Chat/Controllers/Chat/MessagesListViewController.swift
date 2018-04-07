@@ -10,10 +10,20 @@ import UIKit
 import RealmSwift
 
 extension APIResult where T == SubscriptionMessagesRequest {
-    func getMessages() -> [Message?]? {
+    func fetchMessagesFromRealm() -> [Message]? {
         return raw?["messages"].arrayValue.map { json in
             let message = Message()
-            message.map(json, realm: Realm.shared)
+            message.map(json, realm: Realm.current)
+            return message
+        }
+    }
+}
+
+extension APIResult where T == SubscriptionMentionsRequest {
+    func fetchMessagesFromRealm() -> [Message]? {
+        return raw?["mentions"].arrayValue.map { json in
+            let message = Message()
+            message.map(json, realm: Realm.current)
             return message
         }
     }
@@ -32,6 +42,7 @@ class MessagesListViewData {
 
     var title: String = localized("chat.messages.list.title")
 
+    var isListingMentions: Bool = false
     var isShowingAllMessages: Bool {
         return showing >= total
     }
@@ -54,41 +65,62 @@ class MessagesListViewData {
         if let subscription = subscription {
             isLoadingMoreMessages = true
 
-            let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+            if isListingMentions {
+                let request = SubscriptionMentionsRequest(roomId: subscription.rid)
+                API.current()?.fetch(request, options: options, succeeded: { result in
+                    self.handleMessages(
+                        fetchingWith: result.fetchMessagesFromRealm,
+                        showing: result.count,
+                        total: result.total,
+                        completion: completion
+                    )
+                }, errored: { _ in
+                    Alert.defaultError.present()
+                })
+            } else {
+                let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
+                API.current()?.fetch(request, options: options, succeeded: { result in
+                    self.handleMessages(
+                        fetchingWith: result.fetchMessagesFromRealm,
+                        showing: result.count,
+                        total: result.total,
+                        completion: completion
+                    )
+                }, errored: { _ in
+                    Alert.defaultError.present()
+                })
+            }
+        }
+    }
 
-            API.current()?.fetch(request, options: options, succeeded: { result in
-                DispatchQueue.main.async {
-                    self.showing += result.count ?? 0
-                    self.total = result.total ?? 0
-                    if let messages = result.getMessages() {
-                        let messages = messages.flatMap { $0 }
-                        guard var lastMessage = messages.first else {
-                            self.isLoadingMoreMessages = false
-                            completion?()
-                            return
-                        }
-                        var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
-                        messages.forEach { message in
-                            if lastMessage.createdAt?.day != message.createdAt?.day ||
-                                lastMessage.createdAt?.month != message.createdAt?.month ||
-                                lastMessage.createdAt?.year != message.createdAt?.year {
-                                cellsPage.append(CellData(message: nil, date: message.createdAt ?? Date(timeIntervalSince1970: 0)))
-                            }
-                            cellsPage.append(CellData(message: message, date: nil))
-                            lastMessage = message
-                        }
-                        self.cellsPages.append(cellsPage)
-                    }
-
-                    self.currentPage += 1
-
+    private func handleMessages(fetchingWith messagesFetcher: @escaping () -> [Message]?, showing: Int?, total: Int?, completion: (() -> Void)? = nil) {
+        DispatchQueue.main.async {
+            self.showing += showing ?? 0
+            self.total = total ?? 0
+            if let messages = messagesFetcher() {
+                guard var lastMessage = messages.first else {
                     self.isLoadingMoreMessages = false
                     completion?()
+                    return
                 }
-            }, errored: { _ in
-                // TODO: Handle error
-            })
+                var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
+                messages.forEach { message in
+                    if lastMessage.createdAt?.day != message.createdAt?.day ||
+                        lastMessage.createdAt?.month != message.createdAt?.month ||
+                        lastMessage.createdAt?.year != message.createdAt?.year {
+                        cellsPage.append(CellData(message: nil, date: message.createdAt ?? Date(timeIntervalSince1970: 0)))
+                    }
+                    cellsPage.append(CellData(message: message, date: nil))
+                    lastMessage = message
+                }
+                self.cellsPages.append(cellsPage)
+            }
+
+            self.currentPage += 1
+
+            self.isLoadingMoreMessages = false
+            completion?()
         }
     }
 }
@@ -102,6 +134,7 @@ class MessagesListViewController: BaseViewController {
         let data = MessagesListViewData()
         data.subscription = self.data.subscription
         data.query = self.data.query
+        data.isListingMentions = self.data.isListingMentions
         data.loadMoreMessages {
             self.data = data
             DispatchQueue.main.async {

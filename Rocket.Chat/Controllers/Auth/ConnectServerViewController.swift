@@ -102,7 +102,7 @@ final class ConnectServerViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let controller = segue.destination as? AuthViewController, segue.identifier == "Auth" {
-            controller.serverURL = url?.socketURL()
+            controller.serverURL = url
             controller.serverPublicSettings = self.serverPublicSettings
 
             if let credentials = deepLinkCredentials {
@@ -133,14 +133,13 @@ final class ConnectServerViewController: BaseViewController {
 
     func connect() {
         guard let url = url else { return infoRequestHandler.alertInvalidURL() }
-        guard let socketURL = url.socketURL() else { return infoRequestHandler.alertInvalidURL() }
 
         connecting = true
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
 
-        if AppManager.changeToServerIfExists(serverUrl: socketURL.absoluteString) {
+        if AppManager.changeToServerIfExists(serverUrl: url.absoluteString) {
             return
         }
 
@@ -149,6 +148,7 @@ final class ConnectServerViewController: BaseViewController {
     }
 
     func connectWebSocket() {
+        guard let serverURL = infoRequestHandler.url else { return infoRequestHandler.alertInvalidURL() }
         guard let socketURL = infoRequestHandler.url?.socketURL() else { return infoRequestHandler.alertInvalidURL() }
 
         SocketManager.connect(socketURL) { [weak self] (_, connected) in
@@ -162,7 +162,7 @@ final class ConnectServerViewController: BaseViewController {
                 return
             }
 
-            let index = DatabaseManager.createNewDatabaseInstance(serverURL: socketURL.absoluteString)
+            let index = DatabaseManager.createNewDatabaseInstance(serverURL: serverURL.absoluteString)
             DatabaseManager.changeDatabaseInstance(index: index)
 
             AuthSettingsManager.updatePublicSettings(nil) { (settings) in

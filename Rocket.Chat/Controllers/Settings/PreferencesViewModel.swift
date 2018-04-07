@@ -19,6 +19,10 @@ final class PreferencesViewModel {
         return localized("myaccount.settings.title")
     }
 
+    internal var profile: String {
+        return localized("myaccount.settings.profile")
+    }
+
     internal var contactus: String {
         return localized("myaccount.settings.contactus")
     }
@@ -37,6 +41,10 @@ final class PreferencesViewModel {
 
     internal var appicon: String {
         return localized("myaccount.settings.appicon")
+    }
+
+    internal var webBrowser: String {
+        return localized("myaccount.settings.web_browser")
     }
 
     internal var formattedVersion: String {
@@ -88,14 +96,15 @@ final class PreferencesViewModel {
     #endif
 
     internal var numberOfSections: Int {
-        return 3
+        return 4
     }
 
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
-        case 0: return (canChangeAppIcon ? 4 : 3)
-        case 1: return 2
-        case 2: return (canOpenFLEX ? 1 : 0)
+        case 0: return 1
+        case 1: return (canChangeAppIcon ? 4 : 3)
+        case 2: return 2
+        case 3: return (canOpenFLEX ? 1 : 0)
         default: return 0
         }
     }
