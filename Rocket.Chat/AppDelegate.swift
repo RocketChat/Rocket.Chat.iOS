@@ -43,13 +43,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func initNotificationWindow() {
-        notificationWindow = UIWindow(frame: UIScreen.main.bounds)
-//        if () {
-            print(NotificationViewController(nibName: "NotificationViewController", bundle: nil))
-//        }
+        notificationWindow = TransparentToTouchesWindow(frame: UIScreen.main.bounds)
         notificationWindow?.rootViewController = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
         notificationWindow?.windowLevel = UIWindowLevelAlert
-        notificationWindow?.isUserInteractionEnabled = false
         notificationWindow?.makeKeyAndVisible()
     }
 
