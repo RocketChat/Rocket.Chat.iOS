@@ -108,7 +108,6 @@
 		33A5C9D1206A565800FE1C8F /* activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C8206A565800FE1C8F /* activity.json */; };
 		33A5C9D2206A565800FE1C8F /* nature.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C9206A565800FE1C8F /* nature.json */; };
 		33A7AD9E207A2F95000E9D0F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A7AD9D207A2F95000E9D0F /* Notification.swift */; };
-		33F73B2C2073BDF400F03F29 /* NotificationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33F73B2A2073BDF400F03F29 /* NotificationView.xib */; };
 		33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2B2073BDF400F03F29 /* NotificationView.swift */; };
 		33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2F2073F24200F03F29 /* NotificationViewController.swift */; };
 		35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */; };
@@ -740,7 +739,6 @@
 		33A5C9C8206A565800FE1C8F /* activity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activity.json; sourceTree = "<group>"; };
 		33A5C9C9206A565800FE1C8F /* nature.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nature.json; sourceTree = "<group>"; };
 		33A7AD9D207A2F95000E9D0F /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		33F73B2A2073BDF400F03F29 /* NotificationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NotificationView.xib; sourceTree = "<group>"; };
 		33F73B2B2073BDF400F03F29 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		33F73B2F2073F24200F03F29 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAttachmentView.swift; sourceTree = "<group>"; };
@@ -1503,7 +1501,6 @@
 			children = (
 				33383508207926DE006E1D0A /* TransparentToTouchesWindow.swift */,
 				33F73B2B2073BDF400F03F29 /* NotificationView.swift */,
-				33F73B2A2073BDF400F03F29 /* NotificationView.xib */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -3147,7 +3144,6 @@
 				419D84FE1DF599CA0021F034 /* ChatHeaderViewStatus.xib in Resources */,
 				4133EDD11DA2835F005AA783 /* ChatMessageImageView.xib in Resources */,
 				14F8A280202E659000175FDC /* White-76@2x.png in Resources */,
-				33F73B2C2073BDF400F03F29 /* NotificationView.xib in Resources */,
 				33A5C9CD206A565800FE1C8F /* flags.json in Resources */,
 				333207FF20766E4F00AD3290 /* NotificationViewController.xib in Resources */,
 				14F8A272202E653E00175FDC /* Grey-29@3x.png in Resources */,
