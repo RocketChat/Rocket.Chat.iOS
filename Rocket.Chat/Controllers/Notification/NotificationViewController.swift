@@ -10,6 +10,8 @@ import UIKit
 
 class NotificationViewController: UIViewController {
 
+    static let shared = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
+
     @IBOutlet weak var notificationView: NotificationView!
 
     var notificationViewIsHidden: Bool {
@@ -21,21 +23,16 @@ class NotificationViewController: UIViewController {
         }
 
         set {
-            switch newValue {
-            case true:
-                visibleConstraint?.isActive = false
-                hiddenConstraint?.isActive = true
-            case false:
-                hiddenConstraint?.isActive = false
-                visibleConstraint?.isActive = true
-            }
+            visibleConstraint?.isActive = !newValue
+            hiddenConstraint?.isActive = newValue
+            (UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha = newValue ? 1 : 0
         }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.layer.shadowColor = UIColor.black.cgColor
-        view.layer.shadowOpacity = 0.2
+        view.layer.shadowOpacity = 0.3
         view.layer.shadowRadius = 8.0
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
         view.clipsToBounds = true
@@ -61,25 +58,30 @@ class NotificationViewController: UIViewController {
         }
     }
 
-    func displayNotification(title: String, body: String, user: User) {
+    func displayNotification(title: String, body: String, username: String) {
         guard let notificationView = notificationView else { return }
 
-        notificationView.displayNotification(title: title, body: body, user: user)
+        notificationView.displayNotification(title: title, body: body, username: username)
 
-        UIView.animate([
-            Animation(duration: 0.3, closure: {
-                self.notificationViewIsHidden = false
+        UIView.animate(withDuration: 0.3) {
+            self.notificationViewIsHidden = false
+            self.view.layoutIfNeeded()
+        }
+
+        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
+            UIView.animate(withDuration: 0.3) {
+                self.notificationViewIsHidden = true
                 self.view.layoutIfNeeded()
-            })
-        ])
+            }
+        }
+    }
+}
 
-        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false, block: { _ in
-            UIView.animate([
-                Animation(duration: 0.3, closure: {
-                    self.notificationViewIsHidden = true
-                    self.view.layoutIfNeeded()
-                })
-            ])
-        })
+extension NotificationViewController {
+    @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
+        if sender.state == .ended {
+            NotificationManager.didRespondToNotification()
+            timer?.fire()
+        }
     }
 }

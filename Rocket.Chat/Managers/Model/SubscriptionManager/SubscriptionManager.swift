@@ -210,23 +210,10 @@ struct SubscriptionManager {
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
-            let object = response.result["fields"]["args"][0]
-            print(object)
-            if let user = User.find(withIdentifier: object["payload"]["sender"]["_id"].stringValue) {
-                AppDelegate.displayNotification(title: object["title"].stringValue, body: object["text"].stringValue, user: user)
-                print("User found!")
-                print(user)
+            if let data = try? response.result["fields"]["args"][0].rawData() {
+                let notification = try? JSONDecoder().decode(ChatNotification.self, from: data)
+                notification?.post()
             }
-
-//            currentRealm?.execute({ (realm) in
-//                if let rid = object["_id"].string {
-//                    if let subscription = Subscription.find(rid: rid, realm: realm) {
-//                        subscription.mapRoom(object)
-//
-//                        realm.add(subscription, update: true)
-//                    }
-//                }
-//            })
         }
     }
 }

@@ -44,6 +44,12 @@ struct AppManager {
     */
     static var initialRoomId: String?
 
+    /**
+     Room Id for the currently active room.
+    */
+    static var currentRoomId: String? {
+        return ChatViewController.shared?.subscription?.rid
+    }
 }
 
 extension AppManager {

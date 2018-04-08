@@ -60,12 +60,13 @@
                         </label>
                     </subviews>
                     <color key="backgroundColor" white="0.99409537845187712" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <gestureRecognizers/>
                     <constraints>
                         <constraint firstItem="Khg-Fj-whL" firstAttribute="firstBaseline" secondItem="pSR-mg-fTE" secondAttribute="baseline" constant="24" symbolType="layoutAnchor" id="48X-KW-GjT"/>
                         <constraint firstAttribute="trailing" secondItem="pSR-mg-fTE" secondAttribute="trailing" constant="8" id="4QG-mg-IcO"/>
                         <constraint firstAttribute="trailing" secondItem="Khg-Fj-whL" secondAttribute="trailing" constant="8" id="4jL-fR-L6n"/>
                         <constraint firstItem="KOK-7t-SFa" firstAttribute="top" secondItem="PHK-lk-IxG" secondAttribute="top" constant="12" id="7ly-Q4-bZu"/>
-                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="500" id="G6K-9l-94u"/>
+                        <constraint firstAttribute="width" relation="lessThanOrEqual" constant="550" id="G6K-9l-94u"/>
                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="Khg-Fj-whL" secondAttribute="bottom" constant="8" id="eon-ja-4kU"/>
                         <constraint firstAttribute="height" relation="lessThanOrEqual" constant="150" id="g82-JC-2h2"/>
                         <constraint firstAttribute="bottom" secondItem="KOK-7t-SFa" secondAttribute="bottom" priority="250" constant="12" id="glb-6O-WiY"/>
@@ -78,6 +79,7 @@
                         <outlet property="avatarViewContainer" destination="KOK-7t-SFa" id="pg6-OP-A6F"/>
                         <outlet property="bodyLabel" destination="Khg-Fj-whL" id="GaY-eI-DdQ"/>
                         <outlet property="titleLabel" destination="pSR-mg-fTE" id="f4g-xL-MX6"/>
+                        <outletCollection property="gestureRecognizers" destination="0eg-LY-yJc" appends="YES" id="6lE-PV-105"/>
                     </connections>
                 </view>
             </subviews>
@@ -96,5 +98,10 @@
             </variation>
             <point key="canvasLocation" x="34.5" y="69.5"/>
         </view>
+        <tapGestureRecognizer id="0eg-LY-yJc">
+            <connections>
+                <action selector="handleTap:" destination="-1" id="ci7-Qi-5JF"/>
+            </connections>
+        </tapGestureRecognizer>
     </objects>
 </document>

@@ -13,7 +13,7 @@ final class Log {
         guard let text = text else { return }
 
         #if DEBUG
-//        print(text)
+        print(text)
         #endif
     }
 

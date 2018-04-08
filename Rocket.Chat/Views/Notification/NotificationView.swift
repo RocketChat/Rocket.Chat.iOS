@@ -33,16 +33,14 @@ class NotificationView: UIView {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-//        self.layer.borderWidth = 0.5
-//        self.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
         self.layer.cornerRadius = 12
         self.clipsToBounds = true
     }
 
-    func displayNotification(title: String, body: String, user: User) {
+    func displayNotification(title: String, body: String, username: String) {
         titleLabel.text = title
         bodyLabel.text = body
-        avatarView.user = user
+        avatarView.username = username
     }
 
 }

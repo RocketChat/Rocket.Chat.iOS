@@ -39,14 +39,12 @@ extension User {
         guard
             !isInvalidated,
             let username = username,
-            let auth = auth ?? AuthManager.isAuthenticated(),
-            let baseURL = auth.baseURL(),
-            let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+            let auth = auth ?? AuthManager.isAuthenticated()
         else {
             return nil
         }
 
-        return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
+        return User.avatarURL(forUsername: username, auth: auth)
     }
 
     func canViewAdminPanel(realm: Realm? = Realm.current) -> Bool {
@@ -54,5 +52,17 @@ extension User {
             hasPermission(.viewStatistics, realm: realm) ||
             hasPermission(.viewUserAdministration, realm: realm) ||
             hasPermission(.viewRoomAdministration, realm: realm)
+    }
+
+    static func avatarURL(forUsername username: String, auth: Auth? = nil) -> URL? {
+        guard
+            let auth = auth ?? AuthManager.isAuthenticated(),
+            let baseURL = auth.baseURL(),
+            let encodedUsername = username.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+            else {
+                return nil
+        }
+
+        return URL(string: "\(baseURL)/avatar/\(encodedUsername)")
     }
 }
