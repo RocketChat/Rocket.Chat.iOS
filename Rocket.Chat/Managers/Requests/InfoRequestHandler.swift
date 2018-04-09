@@ -21,6 +21,7 @@ class InfoRequestHandler: NSObject {
 
     weak var delegate: InfoRequestHandlerDelegate?
     var url: URL?
+    var version: Version?
     var validateServerVersion = true
 
     func validate(with url: URL) {
@@ -43,6 +44,8 @@ class InfoRequestHandler: NSObject {
             delegate?.urlNotValid()
             return
         }
+
+        self.version = version.version()
 
         if validateServerVersion {
             if let minVersion = Bundle.main.object(forInfoDictionaryKey: "RC_MIN_SERVER_VERSION") as? String {
