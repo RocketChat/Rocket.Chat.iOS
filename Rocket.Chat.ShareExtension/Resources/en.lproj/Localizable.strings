@@ -31,3 +31,4 @@
 "report.success.message" = "Shared your content successfully.";
 "report.error.title" = "Error";
 "report.error.message" = "Something wrong happened while sending your content.";
+"report.cancelled.message" = "You cancelled the request. The message wasn't sent.";
