@@ -10,7 +10,7 @@ import Foundation
 
 struct DraftMessageManager {
 
-    static let userDefaults = UserDefaults.group
+    static let userDefaults = UserDefaults.standard
 
     /**
          This property gets the selected server's URL for us to use it as a identification
