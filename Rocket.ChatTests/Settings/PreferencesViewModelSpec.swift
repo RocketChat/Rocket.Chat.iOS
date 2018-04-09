@@ -17,7 +17,7 @@ class PreferencesViewModelSpec: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        UserDefaults.standard.set(["en"], forKey: "AppleLanguages")
+        UserDefaults.group.set(["en"], forKey: "AppleLanguages")
     }
 
     func testAppVersion() {
