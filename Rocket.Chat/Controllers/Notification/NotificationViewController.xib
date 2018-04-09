@@ -35,10 +35,11 @@
                             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" insetsLayoutMarginsFromSafeArea="NO" id="4JV-l7-f9r">
                                 <rect key="frame" x="0.0" y="0.0" width="359" height="70"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <gestureRecognizers/>
                             </view>
                             <blurEffect style="extraLight"/>
                         </visualEffectView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSR-mg-fTE">
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSR-mg-fTE">
                             <rect key="frame" x="69" y="12.5" width="282" height="20.5"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <nil key="textColor"/>
@@ -52,7 +53,7 @@
                                 <constraint firstAttribute="width" secondItem="KOK-7t-SFa" secondAttribute="height" multiplier="1:1" id="dcq-yW-PH5"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khg-Fj-whL">
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Body" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Khg-Fj-whL">
                             <rect key="frame" x="69" y="36.5" width="282" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -80,6 +81,7 @@
                         <outlet property="bodyLabel" destination="Khg-Fj-whL" id="GaY-eI-DdQ"/>
                         <outlet property="titleLabel" destination="pSR-mg-fTE" id="f4g-xL-MX6"/>
                         <outletCollection property="gestureRecognizers" destination="0eg-LY-yJc" appends="YES" id="6lE-PV-105"/>
+                        <outletCollection property="gestureRecognizers" destination="MDE-Cs-C7p" appends="YES" id="68S-Ej-0vb"/>
                     </connections>
                 </view>
             </subviews>
@@ -103,5 +105,10 @@
                 <action selector="handleTap:" destination="-1" id="ci7-Qi-5JF"/>
             </connections>
         </tapGestureRecognizer>
+        <panGestureRecognizer minimumNumberOfTouches="1" id="MDE-Cs-C7p">
+            <connections>
+                <action selector="handlePan:" destination="-1" id="SLu-y0-hoL"/>
+            </connections>
+        </panGestureRecognizer>
     </objects>
 </document>

@@ -14,6 +14,11 @@ class NotificationViewController: UIViewController {
     static let shared = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
 
     @IBOutlet weak var notificationView: NotificationView!
+    @IBOutlet private weak var hiddenConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var visibleConstraint: NSLayoutConstraint!
+
+    var lastTouchLocation: CGPoint?
+    let animationDuration = 0.3
 
     var notificationViewIsHidden: Bool {
         get {
@@ -39,9 +44,6 @@ class NotificationViewController: UIViewController {
         view.clipsToBounds = true
     }
 
-    @IBOutlet private weak var hiddenConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var visibleConstraint: NSLayoutConstraint!
-
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
@@ -65,13 +67,13 @@ class NotificationViewController: UIViewController {
         notificationView.displayNotification(title: title, body: body, username: username)
         playSound()
 
-        UIView.animate(withDuration: 0.3) {
+        UIView.animate(withDuration: animationDuration) {
             self.notificationViewIsHidden = false
             self.view.layoutIfNeeded()
         }
 
-        timer = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: false) { _ in
-            UIView.animate(withDuration: 0.3) {
+        timer = Timer.scheduledTimer(withTimeInterval: 6.0, repeats: false) { _ in
+            UIView.animate(withDuration: self.animationDuration) {
                 self.notificationViewIsHidden = true
                 self.view.layoutIfNeeded()
             }
@@ -84,6 +86,7 @@ class NotificationViewController: UIViewController {
         AudioServicesCreateSystemSoundID(soundUrl as CFURL, &soundId)
         AudioServicesPlayAlertSound(soundId)
     }
+
 }
 
 extension NotificationViewController {
@@ -91,6 +94,49 @@ extension NotificationViewController {
         if sender.state == .ended {
             NotificationManager.didRespondToNotification()
             timer?.fire()
+        }
+    }
+
+    @IBAction func handlePan(_ sender: UIPanGestureRecognizer) {
+        guard let notificationView = notificationView, !notificationViewIsHidden else { return }
+        switch sender.state {
+        case .began:
+            lastTouchLocation = sender.location(in: view)
+
+        case .changed:
+            guard let lastTouchLocation = lastTouchLocation else { return }
+            let displacement = sender.location(in: view).y - lastTouchLocation.y
+            let newYOffset = notificationView.frame.origin.y + displacement
+
+            if newYOffset <= visibleConstraint.constant {
+                notificationView.frame.origin.y += displacement
+                self.lastTouchLocation = sender.location(in: view)
+
+            } else if notificationView.bounds.contains(sender.location(in: notificationView)),
+                newYOffset <= visibleConstraint.constant + 16 {
+                notificationView.frame.origin.y += displacement / 10
+                self.lastTouchLocation = sender.location(in: view)
+            }
+
+        case .ended:
+            lastTouchLocation = nil
+            if sender.velocity(in: view).y < -25 {
+                timer?.fire()
+            } else {
+                view.setNeedsLayout()
+                UIView.animate(withDuration: animationDuration) {
+                    self.view.layoutIfNeeded()
+                }
+            }
+
+        case .cancelled:
+            lastTouchLocation = nil
+            view.setNeedsLayout()
+            UIView.animate(withDuration: animationDuration) {
+                self.view.layoutIfNeeded()
+            }
+
+        default: break
         }
     }
 }
