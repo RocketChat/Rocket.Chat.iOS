@@ -68,9 +68,9 @@ extension LanguageViewController: UITableViewDelegate {
         if indexPath.section == 0 {
             let lang = viewModel.languages[indexPath.row]
 
-            UserDefaults.standard.set([lang], forKey: kAppLanguagesKey)
+            UserDefaults.group.set([lang], forKey: kAppLanguagesKey)
         } else {
-            UserDefaults.standard.removeObject(forKey: kAppLanguagesKey)
+            UserDefaults.group.removeObject(forKey: kAppLanguagesKey)
             showMessage()
         }
 
