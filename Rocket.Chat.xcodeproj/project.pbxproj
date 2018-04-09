@@ -92,6 +92,7 @@
 		3330329E20738EBB00A9514D /* SubscriptionManager+Typing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3330329D20738EBB00A9514D /* SubscriptionManager+Typing.swift */; };
 		333032A02073940800A9514D /* RCEmojiKit.strings in Resources */ = {isa = PBXBuildFile; fileRef = 80C7DD601FF46B8000E6647C /* RCEmojiKit.strings */; };
 		333207FF20766E4F00AD3290 /* NotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 333207FE20766E4F00AD3290 /* NotificationViewController.xib */; };
+		3336047F207B98EA004C9669 /* chime.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 3336047E207B98EA004C9669 /* chime.mp3 */; };
 		33383509207926DE006E1D0A /* TransparentToTouchesWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33383508207926DE006E1D0A /* TransparentToTouchesWindow.swift */; };
 		334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */; };
 		335F4F03207A31D3005E14AF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F4F02207A31D3005E14AF /* NotificationManager.swift */; };
@@ -722,6 +723,7 @@
 		3330329B20738E6000A9514D /* SubscriptionManager+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscriptionManager+Search.swift"; sourceTree = "<group>"; };
 		3330329D20738EBB00A9514D /* SubscriptionManager+Typing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscriptionManager+Typing.swift"; sourceTree = "<group>"; };
 		333207FE20766E4F00AD3290 /* NotificationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NotificationViewController.xib; sourceTree = "<group>"; };
+		3336047E207B98EA004C9669 /* chime.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = chime.mp3; sourceTree = "<group>"; };
 		33383508207926DE006E1D0A /* TransparentToTouchesWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransparentToTouchesWindow.swift; sourceTree = "<group>"; };
 		334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		335F4F02207A31D3005E14AF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NotificationManager.swift; path = Managers/NotificationManager.swift; sourceTree = "<group>"; };
@@ -1271,6 +1273,7 @@
 		0B3A9760202C4DE10019CA92 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3336047E207B98EA004C9669 /* chime.mp3 */,
 				14F8A210202E5B2A00175FDC /* AlternateIcons */,
 				41DF76E91D2C50710028DBF8 /* Assets.xcassets */,
 				41EB22381E5F056600AA3AE7 /* Localizable.strings */,
@@ -3119,6 +3122,7 @@
 				14F8A22C202E5CBF00175FDC /* Black-76@3x.png in Resources */,
 				14F8A297202E65C700175FDC /* Blue-40@2x.png in Resources */,
 				14F8A271202E653E00175FDC /* Grey-40@3x.png in Resources */,
+				3336047F207B98EA004C9669 /* chime.mp3 in Resources */,
 				14F8A292202E65C700175FDC /* Blue-29@3x.png in Resources */,
 				14F8A294202E65C700175FDC /* Blue-60@3x.png in Resources */,
 				41DF76EA1D2C50710028DBF8 /* Assets.xcassets in Resources */,

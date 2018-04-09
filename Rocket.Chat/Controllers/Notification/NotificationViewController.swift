@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioToolbox
 
 class NotificationViewController: UIViewController {
 
@@ -62,6 +63,7 @@ class NotificationViewController: UIViewController {
         guard let notificationView = notificationView else { return }
 
         notificationView.displayNotification(title: title, body: body, username: username)
+        playSound()
 
         UIView.animate(withDuration: 0.3) {
             self.notificationViewIsHidden = false
@@ -74,6 +76,13 @@ class NotificationViewController: UIViewController {
                 self.view.layoutIfNeeded()
             }
         }
+    }
+
+    private func playSound() {
+        guard let soundUrl = Bundle.main.url(forResource: "chime", withExtension: "mp3") else { return }
+        var soundId: SystemSoundID = 0
+        AudioServicesCreateSystemSoundID(soundUrl as CFURL, &soundId)
+        AudioServicesPlayAlertSound(soundId)
     }
 }
 
