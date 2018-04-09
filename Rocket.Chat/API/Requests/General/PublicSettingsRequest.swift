@@ -58,6 +58,8 @@ class PublicSettingsRequest: APIRequest {
                 "Message_ShowEditedStatus",
                 "Message_AllowEditing",
                 "Message_AllowEditing_BlockEditInMinutes",
+                "Message_AllowPinning",
+                "Message_GroupingPeriod",
                 "Accounts_CustomFields"
             ]
         }
