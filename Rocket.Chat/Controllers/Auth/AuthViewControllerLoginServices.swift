@@ -26,7 +26,9 @@ extension AuthViewController {
     func updateAuthenticationMethods() {
         guard let settings = self.serverPublicSettings else { return }
 
-        self.buttonAuthenticateGoogle.isHidden = !settings.isGoogleAuthenticationEnabled
+        if settings.isGoogleAuthenticationEnabled {
+            addOAuthButton(for: .google)
+        }
 
         if settings.isFacebookAuthenticationEnabled {
             addOAuthButton(for: .facebook)
@@ -126,6 +128,7 @@ extension AuthViewController {
         let button = customAuthButtons[service] ?? UIButton()
 
         switch loginService.type {
+        case .google: button.setImage(#imageLiteral(resourceName: "google"), for: .normal)
         case .facebook: button.setImage(#imageLiteral(resourceName: "facebook"), for: .normal)
         case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
         case .gitlab: button.setImage(#imageLiteral(resourceName: "gitlab"), for: .normal)

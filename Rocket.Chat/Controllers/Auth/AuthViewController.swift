@@ -55,12 +55,6 @@ final class AuthViewController: BaseViewController {
     @IBOutlet weak var textFieldPassword: UITextField!
     @IBOutlet weak var visibleViewBottomConstraint: NSLayoutConstraint!
 
-    @IBOutlet weak var buttonAuthenticateGoogle: UIButton! {
-        didSet {
-            buttonAuthenticateGoogle.layer.cornerRadius = 3
-        }
-    }
-
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     @IBOutlet var buttonRegister: UIButton!
@@ -163,7 +157,6 @@ final class AuthViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldUsername.resignFirstResponder()
         textFieldPassword.resignFirstResponder()
-        buttonAuthenticateGoogle.isEnabled = false
         customAuthButtons.forEach { _, button in button.isEnabled = false }
         navigationItem.hidesBackButton = true
     }
@@ -173,7 +166,6 @@ final class AuthViewController: BaseViewController {
             self.textFieldUsername.alpha = 1
             self.textFieldPassword.alpha = 1
             self.activityIndicator.stopAnimating()
-            self.buttonAuthenticateGoogle.isEnabled = true
             self.customAuthButtons.forEach { _, button in button.isEnabled = true }
             self.navigationItem.hidesBackButton = false
         })
@@ -225,10 +217,6 @@ final class AuthViewController: BaseViewController {
             presentOAuthViewController(for: loginService)
         }
 
-    }
-
-    @IBAction func buttonAuthenticateGoogleDidPressed(_ sender: Any) {
-        authenticateWithGoogle()
     }
 
     @IBAction func buttonTermsDidPressed(_ sender: Any) {
