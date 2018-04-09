@@ -30,3 +30,4 @@
 "report.success.message" = "Shared your content successfully."; //TODO
 "report.error.title" = "Error"; //TODO
 "report.error.message" = "Something wrong happened while sending your content."; //TODO
+"report.cancelled.message" = "You cancelled the request. The message wasn't sent."; //TODO
