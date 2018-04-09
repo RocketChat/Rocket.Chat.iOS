@@ -50,6 +50,7 @@ class MessagesClientSpec: XCTestCase, RealmTestCase {
                 expectation.fulfill()
             }
         })
+
         wait(for: [expectation], timeout: 2)
     }
 
