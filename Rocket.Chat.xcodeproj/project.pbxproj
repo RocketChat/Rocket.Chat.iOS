@@ -86,6 +86,9 @@
 		14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */; };
 		14FBFF791FB267C9000D400B /* MentionsTextFieldTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */; };
 		15A2FD223558011BFDE03883 /* Pods_Rocket_ChatTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68D870A8D54F5431A14607AE /* Pods_Rocket_ChatTests.framework */; };
+		33093DC5207C7EAF00DD81F6 /* ChatNotificationSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33093DC4207C7EAF00DD81F6 /* ChatNotificationSpec.swift */; };
+		33093DC7207C900900DD81F6 /* NotificationManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33093DC6207C900900DD81F6 /* NotificationManagerSpec.swift */; };
+		33093DC9207C949C00DD81F6 /* NotificationViewControllerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33093DC8207C949C00DD81F6 /* NotificationViewControllerSpec.swift */; };
 		3330329820738D4600A9514D /* SubscriptionManager+Messages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3330329720738D4600A9514D /* SubscriptionManager+Messages.swift */; };
 		3330329A20738E1500A9514D /* SubscriptionManager+Rooms.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3330329920738E1500A9514D /* SubscriptionManager+Rooms.swift */; };
 		3330329C20738E6000A9514D /* SubscriptionManager+Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3330329B20738E6000A9514D /* SubscriptionManager+Search.swift */; };
@@ -107,7 +110,7 @@
 		33A5C9D0206A565800FE1C8F /* food.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C7206A565800FE1C8F /* food.json */; };
 		33A5C9D1206A565800FE1C8F /* activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C8206A565800FE1C8F /* activity.json */; };
 		33A5C9D2206A565800FE1C8F /* nature.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C9206A565800FE1C8F /* nature.json */; };
-		33A7AD9E207A2F95000E9D0F /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A7AD9D207A2F95000E9D0F /* Notification.swift */; };
+		33A7AD9E207A2F95000E9D0F /* ChatNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A7AD9D207A2F95000E9D0F /* ChatNotification.swift */; };
 		33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2B2073BDF400F03F29 /* NotificationView.swift */; };
 		33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2F2073F24200F03F29 /* NotificationViewController.swift */; };
 		35A203212022D3F900B4BE5A /* ChatMessageAttachmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */; };
@@ -720,6 +723,9 @@
 		14F8A291202E65C700175FDC /* Blue-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Blue-76@2x.png"; sourceTree = "<group>"; };
 		14FBFF761FB267BF000D400B /* MentionsTextFieldTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCell.swift; sourceTree = "<group>"; };
 		14FBFF781FB267C9000D400B /* MentionsTextFieldTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MentionsTextFieldTableViewCell.xib; sourceTree = "<group>"; };
+		33093DC4207C7EAF00DD81F6 /* ChatNotificationSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatNotificationSpec.swift; sourceTree = "<group>"; };
+		33093DC6207C900900DD81F6 /* NotificationManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationManagerSpec.swift; sourceTree = "<group>"; };
+		33093DC8207C949C00DD81F6 /* NotificationViewControllerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewControllerSpec.swift; sourceTree = "<group>"; };
 		3330329720738D4600A9514D /* SubscriptionManager+Messages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscriptionManager+Messages.swift"; sourceTree = "<group>"; };
 		3330329920738E1500A9514D /* SubscriptionManager+Rooms.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscriptionManager+Rooms.swift"; sourceTree = "<group>"; };
 		3330329B20738E6000A9514D /* SubscriptionManager+Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SubscriptionManager+Search.swift"; sourceTree = "<group>"; };
@@ -740,7 +746,7 @@
 		33A5C9C7206A565800FE1C8F /* food.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = food.json; sourceTree = "<group>"; };
 		33A5C9C8206A565800FE1C8F /* activity.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = activity.json; sourceTree = "<group>"; };
 		33A5C9C9206A565800FE1C8F /* nature.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = nature.json; sourceTree = "<group>"; };
-		33A7AD9D207A2F95000E9D0F /* Notification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		33A7AD9D207A2F95000E9D0F /* ChatNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatNotification.swift; sourceTree = "<group>"; };
 		33F73B2B2073BDF400F03F29 /* NotificationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationView.swift; sourceTree = "<group>"; };
 		33F73B2F2073F24200F03F29 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
 		35A203202022D3F900B4BE5A /* ChatMessageAttachmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageAttachmentView.swift; sourceTree = "<group>"; };
@@ -1601,6 +1607,7 @@
 				411D76E61F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift */,
 				41DC7A1E1D3865FE00896FC0 /* MessageManagerSpec.swift */,
 				807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */,
+				33093DC6207C900900DD81F6 /* NotificationManagerSpec.swift */,
 				416296FB1F41D42800BCCEDD /* DownloadManagerSpec.swift */,
 				4147CE801F5EE03300C322C3 /* ServerManagerSpec.swift */,
 				41FE55521F6038D60071E97A /* DatabaseManagerSpec.swift */,
@@ -1690,6 +1697,7 @@
 				411498E41FC7B8D500D66542 /* AttachmentSpec.swift */,
 				D1411A291F6777F300D6EDF7 /* ChannelSpec.swift */,
 				D1411A2B1F6779A200D6EDF7 /* MentionSpec.swift */,
+				33093DC4207C7EAF00DD81F6 /* ChatNotificationSpec.swift */,
 				807A8F661F9E3D4F00CC78DB /* LoginServiceSpec.swift */,
 				808792371FB14B3300EFE77F /* PermissionSpec.swift */,
 				77C261281F97453600724A1F /* CustomFields */,
@@ -1947,7 +1955,7 @@
 				41900C261D9FE35400308EF4 /* Attachment.swift */,
 				41A87BAC1DA66E700000EE80 /* AuthSettings.swift */,
 				8013F8661FD6B4F400EE1A4E /* Command.swift */,
-				33A7AD9D207A2F95000E9D0F /* Notification.swift */,
+				33A7AD9D207A2F95000E9D0F /* ChatNotification.swift */,
 				8073719F1F96937100D53ADF /* LoginService.swift */,
 				806401301FB09DE800990572 /* Permission.swift */,
 				805DEC361FFC08870033151B /* CustomEmoji.swift */,
@@ -2852,6 +2860,7 @@
 				D1DA25241F695ABF00DB6ABB /* ChatDataControllerSpec.swift */,
 				89AFF3C71F94374D00D07A30 /* NewRoomViewControllerSpec.swift */,
 				80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */,
+				33093DC8207C949C00DD81F6 /* NotificationViewControllerSpec.swift */,
 				990B4B632069DC9900999FE7 /* EditProfileTableViewControllerSpec.swift */,
 			);
 			name = Controllers;
@@ -3829,7 +3838,7 @@
 				807C7C0820751EDC006B600E /* SpotlightRequest.swift in Sources */,
 				41D894021F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift in Sources */,
 				4112DC581FFFB9B2005995E1 /* BaseModel.swift in Sources */,
-				33A7AD9E207A2F95000E9D0F /* Notification.swift in Sources */,
+				33A7AD9E207A2F95000E9D0F /* ChatNotification.swift in Sources */,
 				41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */,
 				8076FDBB2048591A00114F28 /* AuthManagerRecover.swift in Sources */,
 				8013F8671FD6B4F400EE1A4E /* Command.swift in Sources */,
@@ -3898,10 +3907,12 @@
 				77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */,
 				807C7C1020751F40006B600E /* SpotlightClientSpec.swift in Sources */,
 				998165CA204EBBA10059D346 /* UpdateUserRequestSpec.swift in Sources */,
+				33093DC5207C7EAF00DD81F6 /* ChatNotificationSpec.swift in Sources */,
 				9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */,
 				807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */,
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				990B4B642069DC9900999FE7 /* EditProfileTableViewControllerSpec.swift in Sources */,
+				33093DC7207C900900DD81F6 /* NotificationManagerSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
 				D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */,
 				41BAE3E91D71C15A00C2445A /* URLExtensionSpec.swift in Sources */,
@@ -3938,6 +3949,7 @@
 				8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */,
 				807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */,
 				140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */,
+				33093DC9207C949C00DD81F6 /* NotificationViewControllerSpec.swift in Sources */,
 				990FF6D8207438D4007B4A53 /* SubscriptionMentionsRequestSpec.swift in Sources */,
 				8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */,
 				416133381D46DB1D00E09DA2 /* BaseModelSpec.swift in Sources */,

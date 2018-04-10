@@ -1,5 +1,5 @@
 //
-//  Notification.swift
+//  ChatNotification.swift
 //  Rocket.Chat
 //
 //  Created by Samar Sunkaria on 4/8/18.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct ChatNotification {
+struct ChatNotification: Equatable {
     let sender: Sender
     let type: NotificationType
     let title: String
@@ -18,7 +18,7 @@ struct ChatNotification {
 
 extension ChatNotification {
     // swiftlint:disable nesting
-    struct Sender: Codable {
+    struct Sender: Codable, Equatable {
         let name: String
         let username: String
         let id: String
@@ -30,8 +30,10 @@ extension ChatNotification {
         }
     }
 
-    enum NotificationType {
-        case channel(String)
+    typealias ChannelName = String
+
+    enum NotificationType: Equatable {
+        case channel(ChannelName)
         case direct(Sender)
     }
 }
