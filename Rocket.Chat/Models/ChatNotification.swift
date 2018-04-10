@@ -9,11 +9,11 @@
 import Foundation
 
 struct ChatNotification: Equatable {
-    let sender: Sender
-    let type: NotificationType
-    let title: String
-    let body: String
-    let rid: String
+    var sender: Sender
+    var type: NotificationType
+    var title: String
+    var body: String
+    var rid: String
 }
 
 extension ChatNotification {

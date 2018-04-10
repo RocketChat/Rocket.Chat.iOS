@@ -23,6 +23,10 @@ class NotificationViewControllerSpec: XCTestCase {
     func testNotificationIsVisible() {
         NotificationManager.post(notification: notification)
         XCTAssertFalse(NotificationViewController.shared.notificationViewIsHidden, "Notification view should be visible")
+    }
+
+    func testNotificationIsHidden() {
+        NotificationManager.post(notification: notification)
         NotificationViewController.shared.timer?.fire()
         XCTAssertTrue(NotificationViewController.shared.notificationViewIsHidden, "Notification view should be hidden")
     }

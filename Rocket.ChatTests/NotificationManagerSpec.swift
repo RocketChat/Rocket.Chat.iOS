@@ -28,6 +28,19 @@ class NotificationManagerSpec: XCTestCase {
     func testDidRespondToNotification() {
         NotificationManager.post(notification: notification)
         NotificationManager.shared.didRespondToNotification()
-        XCTAssertNil(NotificationManager.shared.notification, "Notification should be nil")
+        XCTAssertNil(NotificationManager.shared.notification, "Stored notification should be nil")
+    }
+
+    func testMultipleNotifications() {
+        var notification1 = notification
+        notification1.title = "Notif1"
+        notification1.post()
+        XCTAssert(NotificationManager.shared.notification == notification1, "First notification should be stored")
+        var notification2 = notification
+        notification2.title = "Notif2"
+        notification2.post()
+        XCTAssert(NotificationManager.shared.notification == notification2, "Second notification should be stored")
+        NotificationManager.shared.didRespondToNotification()
+        XCTAssertNil(NotificationManager.shared.notification, "Stored notification should be nil")
     }
 }
