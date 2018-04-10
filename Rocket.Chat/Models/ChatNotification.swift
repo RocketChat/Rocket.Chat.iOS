@@ -34,6 +34,7 @@ extension ChatNotification {
 
     enum NotificationType: Equatable {
         case channel(ChannelName)
+        case group(ChannelName)
         case direct(Sender)
     }
 }
@@ -47,7 +48,7 @@ extension ChatNotification: Decodable {
 
     enum PayloadKeys: String, CodingKey {
         case sender
-        case channel = "name"
+        case channelName = "name"
         case type
         case rid
     }
@@ -69,8 +70,11 @@ extension ChatNotification: Decodable {
             let sender = try container.decode(Sender.self, forKey: .sender)
             return .direct(sender)
         case "c":
-            let channel = try container.decode(String.self, forKey: .channel)
+            let channel = try container.decode(String.self, forKey: .channelName)
             return .channel(channel)
+        case "p":
+            let group = try container.decode(String.self, forKey: .channelName)
+            return .group(group)
         default:
             throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [PayloadKeys.type], debugDescription: "Type of notification not supported"))
         }
@@ -78,6 +82,11 @@ extension ChatNotification: Decodable {
 }
 
 extension ChatNotification {
+    /// Posts an in-app notification.
+    ///
+    /// **NOTE:** The notification is only posted if the `rid` of the
+    /// notification is different from the `AppManager.currentRoomId`
+
     func post() {
         NotificationManager.post(notification: self)
     }

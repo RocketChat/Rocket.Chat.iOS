@@ -34,7 +34,8 @@ class NotificationManager {
     func didRespondToNotification() {
         guard let notification = notification else { return }
         switch notification.type {
-        case .channel(let name): AppManager.openChannel(name: name)
+        case .channel(let name): AppManager.openRoom(name: name)
+        case .group(let name): AppManager.openRoom(name: name, type: .group)
         case .direct(let sender): AppManager.openDirectMessage(username: sender.username)
         }
         self.notification = nil
