@@ -30,4 +30,21 @@ class NotificationViewControllerSpec: XCTestCase {
         NotificationViewController.shared.timer?.fire()
         XCTAssertTrue(NotificationViewController.shared.notificationViewIsHidden, "Notification view should be hidden")
     }
+
+    func testLayoutForHiddenNotificationView() {
+        let notificationVC = NotificationViewController.shared
+        notificationVC.notificationViewIsHidden = true
+        XCTAssertFalse(notificationVC.visibleConstraint.isActive, "Visible constraint should not be active")
+        XCTAssert(notificationVC.hiddenConstraint.isActive, "Hidden constraint should be active")
+        XCTAssert((UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha == 1, "Status bar should be visible")
+    }
+
+    func testLayoutForVisibleNotificationView() {
+        let notificationVC = NotificationViewController.shared
+        notificationVC.notificationViewIsHidden = false
+        notificationVC.notificationView.layoutIfNeeded()
+        XCTAssert(notificationVC.visibleConstraint.isActive, "Visible constraint should be active")
+        XCTAssertFalse(notificationVC.hiddenConstraint.isActive, "Hidden constraint should not be active")
+        XCTAssert((UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha == 0, "Status bar should not be visible")
+    }
 }

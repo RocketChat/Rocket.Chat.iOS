@@ -14,8 +14,8 @@ class NotificationViewController: UIViewController {
     static let shared = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
 
     @IBOutlet weak var notificationView: NotificationView!
-    @IBOutlet private weak var hiddenConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var visibleConstraint: NSLayoutConstraint!
+    @IBOutlet weak var hiddenConstraint: NSLayoutConstraint!
+    @IBOutlet weak var visibleConstraint: NSLayoutConstraint!
 
     // MARK: - Constants
     var lastTouchLocation: CGPoint?
