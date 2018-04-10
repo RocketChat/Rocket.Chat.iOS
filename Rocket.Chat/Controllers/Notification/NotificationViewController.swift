@@ -17,8 +17,11 @@ class NotificationViewController: UIViewController {
     @IBOutlet private weak var hiddenConstraint: NSLayoutConstraint!
     @IBOutlet private weak var visibleConstraint: NSLayoutConstraint!
 
+    // MARK: - Constants
     var lastTouchLocation: CGPoint?
-    let animationDuration = 0.3
+    let animationDuration: TimeInterval = 0.3
+    let notificationVisibleDuration: TimeInterval = 6.0
+    let soundUrl = Bundle.main.url(forResource: "chime", withExtension: "mp3")
 
     var notificationViewIsHidden: Bool {
         get {
@@ -35,6 +38,7 @@ class NotificationViewController: UIViewController {
         }
     }
 
+    // MARK: - View controller life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         view.layer.shadowColor = UIColor.black.cgColor
@@ -55,6 +59,7 @@ class NotificationViewController: UIViewController {
         }
     }
 
+    // MARK: - Displaying notification
     weak var timer: Timer? {
         willSet {
             timer?.invalidate()
@@ -81,7 +86,7 @@ class NotificationViewController: UIViewController {
     }
 
     private func playSound() {
-        guard let soundUrl = Bundle.main.url(forResource: "chime", withExtension: "mp3") else { return }
+        guard let soundUrl = soundUrl else { return }
         var soundId: SystemSoundID = 0
         AudioServicesCreateSystemSoundID(soundUrl as CFURL, &soundId)
         AudioServicesPlayAlertSound(soundId)
@@ -89,6 +94,7 @@ class NotificationViewController: UIViewController {
 
 }
 
+// MARK: - Gesture Recognizers
 extension NotificationViewController {
     @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
         if sender.state == .ended {
