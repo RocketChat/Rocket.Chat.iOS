@@ -39,7 +39,7 @@
                             </view>
                             <blurEffect style="extraLight"/>
                         </visualEffectView>
-                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSR-mg-fTE">
+                        <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pSR-mg-fTE">
                             <rect key="frame" x="69" y="12.5" width="282" height="20.5"/>
                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                             <nil key="textColor"/>
@@ -90,6 +90,7 @@
                 <constraint firstItem="PHK-lk-IxG" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" priority="750" constant="-16" id="0jV-re-AIy"/>
                 <constraint firstItem="PHK-lk-IxG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="1Q8-oE-2ed"/>
                 <constraint firstItem="PHK-lk-IxG" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="GSl-WQ-03d"/>
+                <constraint firstItem="PHK-lk-IxG" firstAttribute="width" relation="lessThanOrEqual" secondItem="iN0-l3-epB" secondAttribute="width" constant="-16" id="dOu-9J-u0B"/>
                 <constraint firstAttribute="top" secondItem="PHK-lk-IxG" secondAttribute="bottom" constant="16" id="iSN-ku-uLM"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
