@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eFO-g0-vxH">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="eFO-g0-vxH">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Alignment constraints to the first baseline" minToolsVersion="6.0"/>
         <capability name="Baseline standard spacing" minToolsVersion="9.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -260,16 +260,6 @@
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="hgB-Cn-akk">
                                                 <rect key="frame" x="25" y="10" width="325" height="40"/>
-                                                <subviews>
-                                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sR6-SI-5gv" userLabel="Google Sign In Button">
-                                                        <rect key="frame" x="-25" y="-226.5" width="0.0" height="22"/>
-                                                        <color key="backgroundColor" red="0.84705882349999995" green="0.25490196079999999" blue="0.1960784314" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <state key="normal" image="Auth-Google"/>
-                                                        <connections>
-                                                            <action selector="buttonAuthenticateGoogleDidPressed:" destination="hgH-Tx-WGh" eventType="touchUpInside" id="k7r-6o-Rik"/>
-                                                        </connections>
-                                                    </button>
-                                                </subviews>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="40" id="iNA-ab-ccn"/>
                                                 </constraints>
@@ -408,7 +398,6 @@
                     <connections>
                         <outlet property="activityIndicator" destination="EG7-WS-QYQ" id="RjP-38-HEH"/>
                         <outlet property="authButtonsStackView" destination="hgB-Cn-akk" id="zLx-l9-kvd"/>
-                        <outlet property="buttonAuthenticateGoogle" destination="sR6-SI-5gv" id="KHM-fB-UoH"/>
                         <outlet property="buttonPrivacy" destination="ECh-vu-DIh" id="lHk-7G-5e5"/>
                         <outlet property="buttonRegister" destination="80Q-az-ZIG" id="Uzu-Rv-3vk"/>
                         <outlet property="buttonResetPassword" destination="F1w-ZF-CH6" id="fsl-n7-hGH"/>
@@ -813,7 +802,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Auth-Google" width="20" height="20"/>
         <image name="Logo" width="248" height="49"/>
         <image name="OnePassword-Button" width="27" height="27"/>
     </resources>
