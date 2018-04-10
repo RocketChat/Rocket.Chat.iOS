@@ -81,10 +81,10 @@ class ChatNotificationSpec: XCTestCase {
 
         let sender = ChatNotification.Sender(name: "John Appleseed", username: "john.appleseed", id: "UUUUUUUUUUUU")
 
-        XCTAssertTrue(chatNotification.body == "Hey!")
-        XCTAssertTrue(chatNotification.title == "@john.appleseed")
-        XCTAssertTrue(chatNotification.rid == "BBBBBBBBBBB")
-        XCTAssertTrue(chatNotification.sender == sender)
-        XCTAssertTrue(chatNotification.type == .direct(sender))
+        XCTAssertTrue(chatNotification.body == "Hey!", "notification body should be parsed correctly")
+        XCTAssertTrue(chatNotification.title == "@john.appleseed", "notification title should be parsed correctly")
+        XCTAssertTrue(chatNotification.rid == "BBBBBBBBBBB", "notification rid should be parsed correctly")
+        XCTAssertTrue(chatNotification.sender == sender, "notification sender should be parsed correctly")
+        XCTAssertTrue(chatNotification.type == .direct(sender), "notification message type should be parsed correctly")
     }
 }

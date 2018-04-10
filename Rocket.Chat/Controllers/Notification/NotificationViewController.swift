@@ -92,7 +92,7 @@ class NotificationViewController: UIViewController {
 extension NotificationViewController {
     @IBAction func handleTap(_ sender: UITapGestureRecognizer) {
         if sender.state == .ended {
-            NotificationManager.didRespondToNotification()
+            NotificationManager.shared.didRespondToNotification()
             timer?.fire()
         }
     }

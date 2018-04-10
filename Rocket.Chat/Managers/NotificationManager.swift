@@ -19,11 +19,12 @@ class NotificationManager {
         NotificationManager.shared.notification = notification
     }
 
-    static func didRespondToNotification() {
-        guard let notification = NotificationManager.shared.notification else { return }
+    func didRespondToNotification() {
+        guard let notification = notification else { return }
         switch notification.type {
         case .channel(let name): AppManager.openChannel(name: name)
         case .direct(let sender): AppManager.openDirectMessage(username: sender.username)
         }
+        self.notification = nil
     }
 }
