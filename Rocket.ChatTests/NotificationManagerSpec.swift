@@ -20,16 +20,13 @@ class NotificationManagerSpec: XCTestCase {
         rid: "UUUUUUUU"
     )
 
-    override func setUp() {
-        super.setUp()
-        NotificationManager.post(notification: notification)
-    }
-
     func testPostNotification() {
+        NotificationManager.post(notification: notification)
         XCTAssertTrue(NotificationManager.shared.notification == notification, "Notification should be stored")
     }
 
     func testDidRespondToNotification() {
+        NotificationManager.post(notification: notification)
         NotificationManager.shared.didRespondToNotification()
         XCTAssertNil(NotificationManager.shared.notification, "Notification should be nil")
     }

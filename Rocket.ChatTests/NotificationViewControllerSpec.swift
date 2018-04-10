@@ -19,7 +19,7 @@ class NotificationViewControllerSpec: XCTestCase {
         body: "Hey!",
         rid: "UUUUUUUU"
     )
-    
+
     func testNotificationIsVisible() {
         NotificationManager.post(notification: notification)
         XCTAssertFalse(NotificationViewController.shared.notificationViewIsHidden, "Notification view should be visible")
