@@ -87,4 +87,16 @@ class ChatNotificationSpec: XCTestCase {
         XCTAssertTrue(chatNotification.sender == sender, "notification sender should be parsed correctly")
         XCTAssertTrue(chatNotification.type == .direct(sender), "notification message type should be parsed correctly")
     }
+
+    func testPostingNotification() {
+        let notification = ChatNotification(
+            sender: ChatNotification.Sender(name: "John Appleseed", username: "john.appleseed", id: "UUUUUUUUUUUU"),
+            type: .channel("general"),
+            title: "#general",
+            body: "Hey!",
+            rid: "UUUUUUUU"
+        )
+        notification.post()
+        XCTAssert(NotificationManager.shared.notification == notification, "notification should be stored in the notification manager")
+    }
 }
