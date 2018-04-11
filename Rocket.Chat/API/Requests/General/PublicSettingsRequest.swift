@@ -7,9 +7,10 @@
 //
 
 import Foundation
-typealias PublicSettingsResult = APIResult<PublicSettingsRequest>
 
 class PublicSettingsRequest: APIRequest {
+    typealias APIResourceType = PublicSettingsResource
+
     let requiredVersion = Version(0, 62, 2)
     let path = "/api/v1/settings.public"
     let query: String? =
@@ -68,7 +69,7 @@ class PublicSettingsRequest: APIRequest {
     """.removingWhitespaces()
 }
 
-extension APIResult where T == PublicSettingsRequest {
+class PublicSettingsResource: APIResource {
     var authSettings: AuthSettings {
         let authSettings = AuthSettings()
 

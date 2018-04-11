@@ -56,6 +56,7 @@ struct MessagesClient: APIClient {
             switch response {
             case .resource(let resource):
                 guard let message = resource.raw?["message"] else { return }
+
                 updateMessage(json: message)
             case .error(let error):
                 switch error {
@@ -96,10 +97,8 @@ struct MessagesClient: APIClient {
 
         api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser)) { response in
             switch response {
-            case .resource:
-                break
-            case .error:
-                Alert.defaultError.present()
+            case .resource: break
+            case .error: Alert.defaultError.present()
             }
         }
 
@@ -108,10 +107,7 @@ struct MessagesClient: APIClient {
 
     @discardableResult
     func updateMessage(_ message: Message, text: String, realm: Realm? = Realm.current) -> Bool {
-        guard
-            let id = message.identifier,
-            !message.rid.isEmpty
-        else {
+        guard let id = message.identifier, !message.rid.isEmpty else {
             return false
         }
 
@@ -131,8 +127,7 @@ struct MessagesClient: APIClient {
 
                     MessageTextCacheManager.shared.update(for: message)
                 }
-            case .error:
-                Alert.defaultError.present()
+            case .error: Alert.defaultError.present()
             }
         }
 
@@ -141,10 +136,7 @@ struct MessagesClient: APIClient {
 
     @discardableResult
     func reactMessage(_ message: Message, emoji: String, user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) -> Bool {
-        guard
-            let id = message.identifier,
-            let username = user?.username
-        else {
+        guard let id = message.identifier, let username = user?.username else {
             return false
         }
 
@@ -185,8 +177,7 @@ struct MessagesClient: APIClient {
 
         api.fetch(ReactMessageRequest(msgId: id, emoji: emoji)) { response in
             switch response {
-            case .resource:
-                break
+            case .resource: break
             case .error(let error):
                 switch error {
                 case .version:
@@ -196,7 +187,6 @@ struct MessagesClient: APIClient {
                     Alert.defaultError.present()
                 }
             }
-
         }
 
         return true
