@@ -45,9 +45,9 @@ class ChatNotificationSpec: XCTestCase {
 
         XCTAssertTrue(chatNotification.body == "Hello, world!")
         XCTAssertTrue(chatNotification.title == "#general")
-        XCTAssertTrue(chatNotification.rid == "BBBBBBBBBBB")
-        XCTAssertTrue(chatNotification.sender == sender)
-        XCTAssertTrue(chatNotification.type == .channel("general"))
+        XCTAssertTrue(chatNotification.payload.rid == "BBBBBBBBBBB")
+        XCTAssertTrue(chatNotification.payload.sender == sender)
+        XCTAssertTrue(chatNotification.payload.type == .channel("general"))
     }
 
     func testDirectMessageNotificationDecoding() {
@@ -83,18 +83,20 @@ class ChatNotificationSpec: XCTestCase {
 
         XCTAssertTrue(chatNotification.body == "Hey!", "notification body should be parsed correctly")
         XCTAssertTrue(chatNotification.title == "@john.appleseed", "notification title should be parsed correctly")
-        XCTAssertTrue(chatNotification.rid == "BBBBBBBBBBB", "notification rid should be parsed correctly")
-        XCTAssertTrue(chatNotification.sender == sender, "notification sender should be parsed correctly")
-        XCTAssertTrue(chatNotification.type == .direct(sender), "notification message type should be parsed correctly")
+        XCTAssertTrue(chatNotification.payload.rid == "BBBBBBBBBBB", "notification rid should be parsed correctly")
+        XCTAssertTrue(chatNotification.payload.sender == sender, "notification sender should be parsed correctly")
+        XCTAssertTrue(chatNotification.payload.type == .direct(sender), "notification message type should be parsed correctly")
     }
 
     func testPostingNotification() {
         let notification = ChatNotification(
-            sender: ChatNotification.Sender(name: "John Appleseed", username: "john.appleseed", id: "UUUUUUUUUUUU"),
-            type: .channel("general"),
             title: "#general",
             body: "Hey!",
-            rid: "UUUUUUUU"
+            payload: ChatNotification.Payload(
+                sender: ChatNotification.Sender(name: "John Appleseed", username: "john.appleseed", id: "UUUUUUUUUUUU"),
+                type: .channel("general"),
+                rid: "UUUUUUUU"
+            )
         )
         notification.post()
         XCTAssert(NotificationManager.shared.notification == notification, "notification should be stored in the notification manager")

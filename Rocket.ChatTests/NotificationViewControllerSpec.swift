@@ -13,11 +13,13 @@ import XCTest
 class NotificationViewControllerSpec: XCTestCase {
 
     let notification = ChatNotification(
-        sender: ChatNotification.Sender(name: "John Appleseed", username: "john.appleseed", id: "UUUUUUUUUUUU"),
-        type: .channel("general"),
         title: "#general",
         body: "Hey!",
-        rid: "UUUUUUUU"
+        payload: ChatNotification.Payload(
+            sender: ChatNotification.Sender(name: "John Appleseed", username: "john.appleseed", id: "UUUUUUUUUUUU"),
+            type: .channel("general"),
+            rid: "UUUUUUUU"
+        )
     )
 
     func testNotificationIsVisible() {

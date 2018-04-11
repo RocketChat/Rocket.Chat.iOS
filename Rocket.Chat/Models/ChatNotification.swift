@@ -8,12 +8,16 @@
 
 import Foundation
 
-struct ChatNotification: Equatable {
-    var sender: Sender
-    var type: NotificationType
+struct ChatNotification: Decodable, Equatable {
     var title: String
     var body: String
-    var rid: String
+    var payload: Payload
+
+    enum CodingKeys: String, CodingKey {
+        case title
+        case body = "text"
+        case payload
+    }
 }
 
 extension ChatNotification {
@@ -37,37 +41,34 @@ extension ChatNotification {
         case group(ChannelName)
         case direct(Sender)
     }
+
+    struct Payload: Equatable {
+        var sender: Sender
+        var type: NotificationType
+        var rid: String
+
+        enum CodingKeys: String, CodingKey {
+            case sender
+            case channelName = "name"
+            case type
+            case rid
+        }
+    }
 }
 
-extension ChatNotification: Decodable {
-    enum CodingKeys: String, CodingKey {
-        case title
-        case body = "text"
-        case payload
-    }
-
-    enum PayloadKeys: String, CodingKey {
-        case sender
-        case channelName = "name"
-        case type
-        case rid
-    }
-
+extension ChatNotification.Payload: Decodable {
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.title = try container.decode(String.self, forKey: .title)
-        self.body = try container.decode(String.self, forKey: .body).trimmingCharacters(in: .newlines)
-        let payload = try container.nestedContainer(keyedBy: PayloadKeys.self, forKey: .payload)
-        self.sender = try payload.decode(Sender.self, forKey: .sender)
-        self.rid = try payload.decode(String.self, forKey: .rid)
-        self.type = try ChatNotification.notificationType(from: payload)
+        self.sender = try container.decode(ChatNotification.Sender.self, forKey: .sender)
+        self.rid = try container.decode(String.self, forKey: .rid)
+        self.type = try ChatNotification.Payload.notificationType(from: container)
     }
 
-    static func notificationType(from container: KeyedDecodingContainer<ChatNotification.PayloadKeys>) throws -> NotificationType {
+    static func notificationType(from container: KeyedDecodingContainer<CodingKeys>) throws -> ChatNotification.NotificationType {
         let type = try container.decode(String.self, forKey: .type)
         switch type {
         case "d":
-            let sender = try container.decode(Sender.self, forKey: .sender)
+            let sender = try container.decode(ChatNotification.Sender.self, forKey: .sender)
             return .direct(sender)
         case "c":
             let channel = try container.decode(String.self, forKey: .channelName)
@@ -76,7 +77,7 @@ extension ChatNotification: Decodable {
             let group = try container.decode(String.self, forKey: .channelName)
             return .group(group)
         default:
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [PayloadKeys.type], debugDescription: "Type of notification not supported"))
+            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [CodingKeys.type], debugDescription: "Type of notification not supported"))
         }
     }
 }
