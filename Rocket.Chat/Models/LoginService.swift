@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 
 enum LoginServiceType {
+    case google
     case github
     case facebook
     case linkedin
@@ -21,6 +22,7 @@ enum LoginServiceType {
 
     init(string: String) {
         switch string {
+        case "google": self = .google
         case "facebook": self = .facebook
         case "github": self = .github
         case "gitlab": self = .gitlab
@@ -129,6 +131,12 @@ extension LoginService {
 // MARK: Standard Login Services extensions
 
 extension LoginService {
+    static var google: LoginService {
+        let service = LoginService()
+        service.mapGoogle()
+        return service
+    }
+
     static var facebook: LoginService {
         let service = LoginService()
         service.mapFacebook()
