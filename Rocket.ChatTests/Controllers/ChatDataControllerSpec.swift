@@ -237,7 +237,7 @@ class ChatDataControllerSpec: XCTestCase {
         let message2 = Message()
         message2.identifier = "message2-sequential"
         message2.groupable = true
-        message2.createdAt = Date() + (Message.maximumTimeForSequence - 1.0)
+        message2.createdAt = Date() + (Double(AuthSettingsDefaults.messageGroupingPeriod) - 1.0)
 
         var data1 = ChatData(type: .message, timestamp: Date())
         data1.message = message1

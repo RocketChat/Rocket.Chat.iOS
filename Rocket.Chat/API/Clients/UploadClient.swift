@@ -23,12 +23,25 @@ struct UploadClient: APIClient {
             description: description
         )
 
+<<<<<<< HEAD
         api.fetch(req) { response in
             switch response {
             case .resource(let resource):
                 if let error = resource.error {
                     Alert(key: "alert.upload_error").withMessage(error).present()
                 }
+=======
+        api.fetch(req, succeeded: { result in
+            if let error = result.error {
+                Alert(key: "alert.upload_error").withMessage(error).present()
+            }
+            completion?()
+        }, errored: { error in
+            if case .version = error {
+                versionFallback?()
+            } else {
+                Alert(key: "alert.upload_error").present()
+>>>>>>> 6272af93e88c89ca673e9e63097922b41465b1ac
                 completion?()
             case .error(let error):
                 if case .version = error {

@@ -31,13 +31,13 @@ extension URL {
         }
 
         var port = ""
-        if let _port = url.port {
-            port = ":\(_port)"
+        if let validPort = url.port {
+            port = ":\(validPort)"
         }
 
         var query = ""
-        if let _query = url.query, !_query.isEmpty {
-            query = "?\(_query)"
+        if let validQuery = url.query, !validQuery.isEmpty {
+            query = "?\(validQuery)"
         }
 
         if let host = url.host, !host.isEmpty {
@@ -70,6 +70,12 @@ extension URL {
         if components.path.contains("websocket") {
             newURL = newURL?.deletingLastPathComponent()
         }
+
+        if var newURLString = newURL?.absoluteString, newURLString.last == "/" {
+            newURLString.removeLast()
+            newURL = URL(string: newURLString)
+        }
+
         return newURL
     }
 
@@ -84,6 +90,11 @@ extension URL {
         var newURL = components.url
         if !pathComponents.contains("websocket") {
             newURL = newURL?.appendingPathComponent("websocket")
+        }
+
+        if var newURLString = newURL?.absoluteString, newURLString.last == "/" {
+            newURLString.removeLast()
+            newURL = URL(string: newURLString)
         }
 
         return newURL

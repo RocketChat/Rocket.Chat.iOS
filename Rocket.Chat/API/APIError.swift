@@ -10,9 +10,18 @@ import Foundation
 
 typealias APIErrored = (APIError) -> Void
 
-enum APIError {
+enum APIError: CustomStringConvertible {
     case version(available: Version, required: Version)
     case error(Error)
     case noData
     case malformedRequest
+
+    var description: String {
+        switch self {
+        case .error(let error):
+            return error.localizedDescription
+        default:
+            return "\(self)"
+        }
+    }
 }

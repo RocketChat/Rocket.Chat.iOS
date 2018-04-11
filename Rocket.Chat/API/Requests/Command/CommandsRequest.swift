@@ -21,6 +21,6 @@ class CommandsResource: APIResource {
             let command = Command()
             command.map($0, realm: nil)
             return command
-        }.flatMap { $0 }
+            }.compactMap { $0 }
     }
 }

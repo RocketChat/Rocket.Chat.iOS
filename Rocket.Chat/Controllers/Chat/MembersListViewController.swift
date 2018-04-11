@@ -46,7 +46,7 @@ class MembersListViewData {
             let request = SubscriptionMembersRequest(roomId: subscription.rid, type: subscription.type)
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
 
-            API.current()?.fetch(request) { response in
+            API.current()?.fetch(request, options: options) { response in
                 switch response {
                 case .resource(let resource):
                     self.showing += resource.count ?? 0
@@ -59,11 +59,10 @@ class MembersListViewData {
 
                     self.title = "\(localized("chat.members.list.title")) (\(self.total))"
                     self.isLoadingMoreMembers = false
+                    completion?()
                 case .error:
                     Alert.defaultError.present()
                 }
-
-                completion?()
             }
         }
     }
