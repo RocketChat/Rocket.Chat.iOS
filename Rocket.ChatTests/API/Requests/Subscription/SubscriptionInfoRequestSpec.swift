@@ -62,7 +62,7 @@ class SubscriptionInfoRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionInfoResult(raw: json)
+        let result = SubscriptionInfoResource(raw: json)
 
         XCTAssertEqual(result.channel, json["channel"])
         XCTAssertEqual(result.usernames ?? [], ["testing", "testing1", "testing2"])

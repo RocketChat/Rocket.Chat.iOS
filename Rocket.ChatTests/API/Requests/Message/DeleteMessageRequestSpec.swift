@@ -48,11 +48,11 @@ class DeleteMessageRequestSpec: APITestCase {
             "success": true
         ])
 
-        let result = APIResult<DeleteMessageRequest>(raw: mockResult)
+        let result = DeleteMessageResource(raw: mockResult)
 
         XCTAssert(result.success == true)
 
-        let nilResult = APIResult<DeleteMessageRequest>(raw: nil)
+        let nilResult = DeleteMessageResource(raw: nil)
         XCTAssertNil(nilResult.success, "success is nil if raw is nil")
     }
 }

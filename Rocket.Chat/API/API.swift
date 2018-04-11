@@ -20,8 +20,7 @@ protocol APIFetcher {
     @discardableResult
     func fetch<R: APIRequest>(_ request: R, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask?
     @discardableResult
-    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?,
-                              completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask?
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask?
 }
 
 extension APIFetcher {
