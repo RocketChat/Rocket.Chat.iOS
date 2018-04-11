@@ -482,22 +482,6 @@ final class ChatViewController: SLKTextViewController {
         }
     }
 
-    override func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        guard
-            let settings = AuthSettingsManager.settings,
-            let currentText = textView.text,
-            let stringRange = Range(range, in: currentText)
-        else {
-            return true
-        }
-
-        if settings.messageMaxAllowedSize <= 0 {
-            return true
-        }
-
-        return currentText.replacingCharacters(in: stringRange, with: text).utf16.count <= settings.messageMaxAllowedSize
-    }
-
     @objc override func keyboardWillShow(_ notification: Notification) {
         // Scroll to the bottom when the collectionView has scrolled more
         // than scrollToBottomHeightMultiplier times the view's height.
