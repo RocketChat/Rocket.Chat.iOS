@@ -558,6 +558,8 @@
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
+		99C577E8207E36A100CE9B4D /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99C577E7207E36A100CE9B4D /* FileTableViewCell.xib */; };
+		99C577EA207E38FA00CE9B4D /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C577E9207E38FA00CE9B4D /* FileTableViewCell.swift */; };
 		99D888F82045DFC500E51306 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */; };
 		99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888FA204623A900E51306 /* UpdateUserRequest.swift */; };
 		99F41BCE20658B1300B240FC /* EditProfileViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */; };
@@ -1182,6 +1184,8 @@
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebBrowserViewModel.swift; path = Controllers/Settings/WebBrowserViewModel.swift; sourceTree = "<group>"; };
 		99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DraftMessageManager.swift; path = Managers/DraftMessageManager.swift; sourceTree = "<group>"; };
+		99C577E7207E36A100CE9B4D /* FileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
+		99C577E9207E38FA00CE9B4D /* FileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
 		99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTableViewController.swift; path = Controllers/Settings/EditProfileTableViewController.swift; sourceTree = "<group>"; };
 		99D888FA204623A900E51306 /* UpdateUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserRequest.swift; sourceTree = "<group>"; };
 		99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewModelSpec.swift; path = Settings/EditProfileViewModelSpec.swift; sourceTree = "<group>"; };
@@ -1829,6 +1833,8 @@
 				4147CE7E1F5EB27B00C322C3 /* AddServerCell.swift */,
 				412731D61DE0A89B00FC45A0 /* ChatPreviewModeView.swift */,
 				412731D41DE0A55C00FC45A0 /* ChatPreviewModeView.xib */,
+				99C577E7207E36A100CE9B4D /* FileTableViewCell.xib */,
+				99C577E9207E38FA00CE9B4D /* FileTableViewCell.swift */,
 			);
 			name = Subscription;
 			path = ../Subscriptions;
@@ -3036,6 +3042,7 @@
 				14F8A26F202E653E00175FDC /* Grey-83.5@2x.png in Resources */,
 				33A5C9CE206A565800FE1C8F /* people.json in Resources */,
 				33A5C9D1206A565800FE1C8F /* activity.json in Resources */,
+				99C577E8207E36A100CE9B4D /* FileTableViewCell.xib in Resources */,
 				14F8A25F202E64B200175FDC /* BnW-40@2x.png in Resources */,
 				14F8A227202E5CBF00175FDC /* Black-83.5@2x.png in Resources */,
 				41CABFF81F5047D600E0B289 /* ChatLoaderCell.xib in Resources */,
@@ -3546,6 +3553,7 @@
 				4151B45A1E2D1DD400F8AA1B /* AttachmentModelMapping.swift in Sources */,
 				80307E3E1FD75CB1006AD9EF /* VOLocalized.swift in Sources */,
 				807C7BF920740F3C006B600E /* AuthCanPinMessage.swift in Sources */,
+				99C577EA207E38FA00CE9B4D /* FileTableViewCell.swift in Sources */,
 				996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */,
 				411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */,
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
