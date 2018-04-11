@@ -24,9 +24,13 @@ class NotificationManager {
     ///         cannot be empty strings.
 
     static func post(notification: ChatNotification) {
-        guard AppManager.currentRoomId != notification.payload.rid,
+        guard
+            AppManager.currentRoomId != notification.payload.rid,
             !notification.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
-            !notification.body.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+            !notification.body.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        else {
+            return
+        }
 
         NotificationViewController.shared.displayNotification(
             title: notification.title,
@@ -38,7 +42,13 @@ class NotificationManager {
     }
 
     func didRespondToNotification() {
-        guard let notification = notification, let type = notification.payload.type else { return }
+        guard
+            let notification = notification,
+            let type = notification.payload.type
+        else {
+            return
+        }
+
         switch type {
         case .channel:
             guard let name = notification.payload.name else { return }
