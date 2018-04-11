@@ -349,7 +349,6 @@ extension SubscriptionManager {
         let request = [
             "msg": "method",
             "method": "saveRoomSettings",
-            "id": "16",
             "params": [subscription.rid, "roomDescription", description]
         ] as [String: Any]
 
@@ -363,9 +362,8 @@ extension SubscriptionManager {
         let request = [
             "msg": "method",
             "method": "saveRoomSettings",
-            "id": "16",
             "params": [subscription.rid, "roomTopic", topic]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(request) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
