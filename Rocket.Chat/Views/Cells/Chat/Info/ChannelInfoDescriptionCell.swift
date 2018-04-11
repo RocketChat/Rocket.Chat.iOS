@@ -20,7 +20,7 @@ class ChannelInfoDescriptionCell: UITableViewCell, ChannelInfoCellProtocol {
     static let defaultHeight: Float = 80
 
     @IBOutlet weak var labelTitle: UILabel!
-    @IBOutlet weak var labelDescription: UILabel! {
+    @IBOutlet weak var labelDescription: UITextView! {
         didSet {
             labelDescription.textColor = UIColor.RCGray()
         }
