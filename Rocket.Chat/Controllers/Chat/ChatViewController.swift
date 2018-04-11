@@ -495,7 +495,7 @@ final class ChatViewController: SLKTextViewController {
             return true
         }
 
-        return currentText.replacingCharacters(in: stringRange, with: text).count <= settings.messageMaxAllowedSize
+        return currentText.replacingCharacters(in: stringRange, with: text).utf16.count <= settings.messageMaxAllowedSize
     }
 
     @objc override func keyboardWillShow(_ notification: Notification) {
