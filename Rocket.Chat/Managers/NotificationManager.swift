@@ -24,23 +24,30 @@ class NotificationManager {
     ///         cannot be empty strings.
 
     static func post(notification: ChatNotification) {
-        guard AppManager.currentRoomId != notification.payload.rid else { return }
-        guard !notification.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
-        guard !notification.body.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+        guard AppManager.currentRoomId != notification.payload.rid,
+            !notification.title.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty,
+            !notification.body.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else { return }
+
         NotificationViewController.shared.displayNotification(
             title: notification.title,
             body: notification.body.trimmingCharacters(in: .newlines),
             username: notification.payload.sender.username
         )
+
         NotificationManager.shared.notification = notification
     }
 
     func didRespondToNotification() {
-        guard let notification = notification else { return }
-        switch notification.payload.type {
-        case .channel(let name): AppManager.openRoom(name: name)
-        case .group(let name): AppManager.openRoom(name: name, type: .group)
-        case .direct(let sender): AppManager.openDirectMessage(username: sender.username)
+        guard let notification = notification, let type = notification.payload.type else { return }
+        switch type {
+        case .channel:
+            guard let name = notification.payload.name else { return }
+            AppManager.openRoom(name: name)
+        case .group:
+            guard let name = notification.payload.name else { return }
+            AppManager.openRoom(name: name, type: .group)
+        case .directMessage:
+            AppManager.openDirectMessage(username: notification.payload.sender.username)
         }
         self.notification = nil
     }
