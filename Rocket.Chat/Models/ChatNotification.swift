@@ -28,17 +28,9 @@ extension ChatNotification {
         var name: String?
         var sender: Sender
 
-        private var internalType: String
+        internal var internalType: String
         var type: SubscriptionType? {
             return SubscriptionType(rawValue: internalType)
-        }
-
-        init(id: String, rid: String, name: String?, sender: Sender, internalType: String) {
-            self.id = id
-            self.rid = rid
-            self.name = name
-            self.sender = sender
-            self.internalType = internalType
         }
     }
 }
