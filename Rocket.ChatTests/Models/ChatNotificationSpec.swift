@@ -41,13 +41,14 @@ class ChatNotificationSpec: XCTestCase {
             return
         }
 
-        let sender = ChatNotification.Sender(name: "John Appleseed", username: "john.appleseed", id: "UUUUUUUUUUUU")
+        let sender = ChatNotification.Payload.Sender(id: "UUUUUUUUUUUU", name: "John Appleseed", username: "john.appleseed")
 
-        XCTAssertTrue(chatNotification.body == "Hello, world!")
-        XCTAssertTrue(chatNotification.title == "#general")
-        XCTAssertTrue(chatNotification.payload.rid == "BBBBBBBBBBB")
-        XCTAssertTrue(chatNotification.payload.sender == sender)
-        XCTAssertTrue(chatNotification.payload.type == .channel("general"))
+        XCTAssertTrue(chatNotification.body == "Hello, world!", "notification body should be parsed correctly")
+        XCTAssertTrue(chatNotification.title == "#general", "notification title should be parsed correctly")
+        XCTAssertTrue(chatNotification.payload.rid == "BBBBBBBBBBB", "notification rid should be parsed correctly")
+        XCTAssertTrue(chatNotification.payload.sender == sender, "notification sender should be parsed correctly")
+        XCTAssertTrue(chatNotification.payload.type == .channel, "notification message type should be parsed correctly")
+        XCTAssertTrue(chatNotification.payload.name == "general", "notification room name should not be nil")
     }
 
     func testDirectMessageNotificationDecoding() {
@@ -79,13 +80,14 @@ class ChatNotificationSpec: XCTestCase {
             return
         }
 
-        let sender = ChatNotification.Sender(name: "John Appleseed", username: "john.appleseed", id: "UUUUUUUUUUUU")
+        let sender = ChatNotification.Payload.Sender(id: "UUUUUUUUUUUU", name: "John Appleseed", username: "john.appleseed")
 
         XCTAssertTrue(chatNotification.body == "Hey!", "notification body should be parsed correctly")
         XCTAssertTrue(chatNotification.title == "@john.appleseed", "notification title should be parsed correctly")
         XCTAssertTrue(chatNotification.payload.rid == "BBBBBBBBBBB", "notification rid should be parsed correctly")
         XCTAssertTrue(chatNotification.payload.sender == sender, "notification sender should be parsed correctly")
-        XCTAssertTrue(chatNotification.payload.type == .direct(sender), "notification message type should be parsed correctly")
+        XCTAssertTrue(chatNotification.payload.type == .directMessage, "notification message type should be parsed correctly")
+        XCTAssertNil(chatNotification.payload.name, "notification room name should be nil")
     }
 
     func testPostingNotification() {
@@ -93,9 +95,11 @@ class ChatNotificationSpec: XCTestCase {
             title: "#general",
             body: "Hey!",
             payload: ChatNotification.Payload(
-                sender: ChatNotification.Sender(name: "John Appleseed", username: "john.appleseed", id: "UUUUUUUUUUUU"),
-                type: .channel("general"),
-                rid: "UUUUUUUU"
+                id: "AAAAAAA",
+                rid: "UUUUUUUU",
+                name: "general",
+                sender: ChatNotification.Payload.Sender(id: "UUUUUUUUUUUU", name: "John Appleseed", username: "john.appleseed"),
+                internalType: "c"
             )
         )
         notification.post()

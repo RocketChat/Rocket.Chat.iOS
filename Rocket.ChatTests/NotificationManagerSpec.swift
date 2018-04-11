@@ -28,9 +28,11 @@ class NotificationManagerSpec: XCTestCase {
         title: "#general",
         body: "Hey!",
         payload: ChatNotification.Payload(
-            sender: ChatNotification.Sender(name: "John Appleseed", username: "john.appleseed", id: "UUUUUUUUUUUU"),
-            type: .channel("general"),
-            rid: "UUUUUUUU"
+            id: "AAAAAAA",
+            rid: "UUUUUUUU",
+            name: "general",
+            sender: ChatNotification.Payload.Sender(id: "UUUUUUUUUUUU", name: "John Appleseed", username: "john.appleseed"),
+            internalType: "c"
         )
     )
 

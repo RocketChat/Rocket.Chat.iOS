@@ -20,65 +20,48 @@ struct ChatNotification: Decodable, Equatable {
     }
 }
 
+// swiftlint:disable nesting
 extension ChatNotification {
-    // swiftlint:disable nesting
-    struct Sender: Codable, Equatable {
-        let name: String
-        let username: String
-        let id: String
-
-        enum CodingKeys: String, CodingKey {
-            case name
-            case username
-            case id = "_id"
-        }
-    }
-
-    typealias ChannelName = String
-
-    enum NotificationType: Equatable {
-        case channel(ChannelName)
-        case group(ChannelName)
-        case direct(Sender)
-    }
-
-    struct Payload: Equatable {
-        var sender: Sender
-        var type: NotificationType
+    struct Payload: Codable, Equatable {
+        var id: String
         var rid: String
+        var name: String?
+        var sender: Sender
 
-        enum CodingKeys: String, CodingKey {
-            case sender
-            case channelName = "name"
-            case type
-            case rid
+        private var internalType: String
+        var type: SubscriptionType? {
+            return SubscriptionType(rawValue: internalType)
+        }
+
+        init(id: String, rid: String, name: String?, sender: Sender, internalType: String) {
+            self.id = id
+            self.rid = rid
+            self.name = name
+            self.sender = sender
+            self.internalType = internalType
         }
     }
 }
 
-extension ChatNotification.Payload: Decodable {
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        self.sender = try container.decode(ChatNotification.Sender.self, forKey: .sender)
-        self.rid = try container.decode(String.self, forKey: .rid)
-        self.type = try ChatNotification.Payload.notificationType(from: container)
+extension ChatNotification.Payload {
+    struct Sender: Codable, Equatable {
+        let id: String
+        let name: String
+        let username: String
+
+        enum CodingKeys: String, CodingKey {
+            case id = "_id"
+            case name
+            case username
+        }
     }
 
-    static func notificationType(from container: KeyedDecodingContainer<CodingKeys>) throws -> ChatNotification.NotificationType {
-        let type = try container.decode(String.self, forKey: .type)
-        switch type {
-        case "d":
-            let sender = try container.decode(ChatNotification.Sender.self, forKey: .sender)
-            return .direct(sender)
-        case "c":
-            let channel = try container.decode(String.self, forKey: .channelName)
-            return .channel(channel)
-        case "p":
-            let group = try container.decode(String.self, forKey: .channelName)
-            return .group(group)
-        default:
-            throw DecodingError.dataCorrupted(DecodingError.Context(codingPath: [CodingKeys.type], debugDescription: "Type of notification not supported"))
-        }
+    enum CodingKeys: String, CodingKey {
+        case id = "_id"
+        case rid
+        case name
+        case sender
+        case internalType = "type"
     }
 }
 
