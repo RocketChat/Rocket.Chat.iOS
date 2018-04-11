@@ -39,6 +39,7 @@ final class ChatViewController: SLKTextViewController {
                     scrollToBottomButtonIsVisible = false
                     return
                 }
+
                 let collectionViewBottom = collectionView.frame.origin.y + collectionView.frame.height
                 self.buttonScrollToBottomMarginConstraint?.constant = (collectionViewBottom - view.frame.height) - 40
             } else {
@@ -82,7 +83,7 @@ final class ChatViewController: SLKTextViewController {
 
     var subscription: Subscription? {
         didSet {
-            // clean up
+            // Clean up
             subscriptionToken?.invalidate()
             didCancelTextEditing(self)
 
