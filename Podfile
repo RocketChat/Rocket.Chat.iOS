@@ -49,7 +49,6 @@ def shared_pods
   # Authentication SDKs
   pod 'OAuthSwift'
   pod '1PasswordExtension'
-  pod 'GoogleSignIn'
 
   # Debugging
   pod 'Instabug', :configurations => ['Debug', 'Beta']
