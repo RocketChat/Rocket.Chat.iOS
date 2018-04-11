@@ -39,6 +39,7 @@ final class ChatViewController: SLKTextViewController {
                     scrollToBottomButtonIsVisible = false
                     return
                 }
+
                 let collectionViewBottom = collectionView.frame.origin.y + collectionView.frame.height
                 self.buttonScrollToBottomMarginConstraint?.constant = (collectionViewBottom - view.frame.height) - 40
             } else {
@@ -81,7 +82,7 @@ final class ChatViewController: SLKTextViewController {
 
     var subscription: Subscription? {
         didSet {
-            // clean up
+            // Clean up
             subscriptionToken?.invalidate()
             didCancelTextEditing(self)
 
@@ -479,6 +480,22 @@ final class ChatViewController: SLKTextViewController {
         } else {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
         }
+    }
+
+    override func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard
+            let settings = AuthSettingsManager.settings,
+            let currentText = textView.text,
+            let stringRange = Range(range, in: currentText)
+        else {
+            return true
+        }
+
+        if settings.messageMaxAllowedSize <= 0 {
+            return true
+        }
+
+        return currentText.replacingCharacters(in: stringRange, with: text).count <= settings.messageMaxAllowedSize
     }
 
     @objc override func keyboardWillShow(_ notification: Notification) {
