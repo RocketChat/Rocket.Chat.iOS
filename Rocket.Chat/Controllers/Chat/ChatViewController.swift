@@ -61,6 +61,7 @@ final class ChatViewController: SLKTextViewController {
     var replyView: ReplyView!
     var replyString: String = ""
     var messageToEdit: Message?
+    var lastTimeSentTypingEvent: Date?
 
     var dataController = ChatDataController()
 
@@ -472,12 +473,37 @@ final class ChatViewController: SLKTextViewController {
     override func textViewDidChange(_ textView: UITextView) {
         guard let subscription = self.subscription else { return }
 
+        // Intervals
+        let kDefaultTypingInterval = 3 // seconds
+        let kDefaultTypingIntervalCheck = 5 // seconds
+
+        // Update draft text
         DraftMessageManager.update(draftMessage: textView.text, for: subscription)
 
         if textView.text?.isEmpty ?? true {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         } else {
+            // We're not calling this event every char because the web starts flickering
+            // the "typing" view.
+            if let lastTimeSentTypingEvent = lastTimeSentTypingEvent {
+                if Int(Date().timeIntervalSince(lastTimeSentTypingEvent)) < kDefaultTypingInterval {
+                    return
+                }
+            }
+
+            // User is typing right now
+            lastTimeSentTypingEvent = Date()
             SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
+
+            // After 5 seconds without writing, we send an event
+            // telling the server that user is not typing anymore
+            DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(kDefaultTypingIntervalCheck)) { [weak self] in
+                if let lastTimeSentTypingEvent = self?.lastTimeSentTypingEvent {
+                    if Int(Date().timeIntervalSince(lastTimeSentTypingEvent)) >= kDefaultTypingIntervalCheck {
+                        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+                    }
+                }
+            }
         }
     }
 
