@@ -77,7 +77,7 @@ class NotificationViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
 
-        timer = Timer.scheduledTimer(withTimeInterval: 6.0, repeats: false) { _ in
+        timer = Timer.scheduledTimer(withTimeInterval: notificationVisibleDuration, repeats: false) { _ in
             UIView.animate(withDuration: self.animationDuration) {
                 self.notificationViewIsHidden = true
                 self.view.layoutIfNeeded()
