@@ -56,7 +56,6 @@ struct MessagesClient: APIClient {
             switch response {
             case .resource(let resource):
                 guard let message = resource.raw?["message"] else { return }
-
                 updateMessage(json: message)
             case .error(let error):
                 switch error {

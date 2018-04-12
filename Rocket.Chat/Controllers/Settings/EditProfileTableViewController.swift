@@ -381,11 +381,9 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                 self?.user = resource.user
                 stopLoading(true)
 
-                guard let strongSelf = self else { return }
+                guard let weakSelf = self else { return }
 
-                if !strongSelf.isUploadingAvatar {
-                    strongSelf.alertSuccess(title: localized("alert.update_profile_success.title"))
-                }
+                if !weakSelf.isUploadingAvatar { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
             case .error:
                 stopLoading(false)
                 Alert(key: "alert.update_profile_error").present()

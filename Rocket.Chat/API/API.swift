@@ -65,7 +65,8 @@ class API: APIFetcher {
     }
 
     @discardableResult
-    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions = .none,
+                              sessionDelegate: URLSessionTaskDelegate? = nil,
                               completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask? {
         var transformedRequest = request
         for middleware in requestMiddlewares {
