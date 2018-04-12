@@ -6,4 +6,59 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
+import SwiftyJSON
 import Foundation
+import RealmSwift
+
+typealias SubscriptionFilesResult = APIResult<SubscriptionFilesRequest>
+
+fileprivate extension SubscriptionType {
+    var path: String {
+        switch self {
+        case .channel:
+            return "/api/v1/channels.files"
+        case .group:
+            return "/api/v1/groups.files"
+        case .directMessage:
+            return "/api/v1/dm.files"
+        }
+    }
+}
+
+class SubscriptionFilesRequest: APIRequest {
+    var path: String {
+        return type.path
+    }
+
+    var query: String?
+    let roomId: String?
+    let type: SubscriptionType
+
+    init(roomId: String, subscriptionType: SubscriptionType) {
+        self.type = subscriptionType
+        self.roomId = roomId
+        self.query = "roomId=\(roomId)"
+    }
+}
+
+extension APIResult where T == SubscriptionFilesRequest {
+    var files: [File]? {
+        return raw?["files"].arrayValue.map {
+            let file = File()
+            file.map($0, realm: Realm.current)
+            return file
+        }
+    }
+
+    var count: Int? {
+        return raw?["count"].int
+    }
+
+    var offset: Int? {
+        return raw?["offset"].int
+    }
+
+    var total: Int? {
+        return raw?["total"].int
+    }
+}
