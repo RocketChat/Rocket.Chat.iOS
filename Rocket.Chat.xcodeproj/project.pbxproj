@@ -557,9 +557,13 @@
 		998165CC204EDBA30059D346 /* UploadAvatarRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 998165CB204EDBA30059D346 /* UploadAvatarRequestSpec.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
+		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
+		999F25B7207EEE70002E0F68 /* SubscriptionFilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B6207EEE70002E0F68 /* SubscriptionFilesRequest.swift */; };
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
 		99C577E8207E36A100CE9B4D /* FileTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 99C577E7207E36A100CE9B4D /* FileTableViewCell.xib */; };
 		99C577EA207E38FA00CE9B4D /* FileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C577E9207E38FA00CE9B4D /* FileTableViewCell.swift */; };
+		99C577EC207E3A4200CE9B4D /* FilesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C577EB207E3A4200CE9B4D /* FilesListViewController.swift */; };
+		99C577EE207E4F1500CE9B4D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C577ED207E4F1500CE9B4D /* File.swift */; };
 		99D888F82045DFC500E51306 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */; };
 		99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888FA204623A900E51306 /* UpdateUserRequest.swift */; };
 		99F41BCE20658B1300B240FC /* EditProfileViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */; };
@@ -1183,9 +1187,13 @@
 		998165CB204EDBA30059D346 /* UploadAvatarRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequestSpec.swift; sourceTree = "<group>"; };
 		99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadAvatarRequest.swift; sourceTree = "<group>"; };
 		999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WebBrowserViewModel.swift; path = Controllers/Settings/WebBrowserViewModel.swift; sourceTree = "<group>"; };
+		999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileModelMapping.swift; sourceTree = "<group>"; };
+		999F25B6207EEE70002E0F68 /* SubscriptionFilesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionFilesRequest.swift; sourceTree = "<group>"; };
 		99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DraftMessageManager.swift; path = Managers/DraftMessageManager.swift; sourceTree = "<group>"; };
 		99C577E7207E36A100CE9B4D /* FileTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FileTableViewCell.xib; sourceTree = "<group>"; };
 		99C577E9207E38FA00CE9B4D /* FileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileTableViewCell.swift; sourceTree = "<group>"; };
+		99C577EB207E3A4200CE9B4D /* FilesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = FilesListViewController.swift; path = Controllers/Subscriptions/FilesListViewController.swift; sourceTree = "<group>"; };
+		99C577ED207E4F1500CE9B4D /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileTableViewController.swift; path = Controllers/Settings/EditProfileTableViewController.swift; sourceTree = "<group>"; };
 		99D888FA204623A900E51306 /* UpdateUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserRequest.swift; sourceTree = "<group>"; };
 		99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewModelSpec.swift; path = Settings/EditProfileViewModelSpec.swift; sourceTree = "<group>"; };
@@ -1899,6 +1907,7 @@
 				8073719F1F96937100D53ADF /* LoginService.swift */,
 				806401301FB09DE800990572 /* Permission.swift */,
 				805DEC361FFC08870033151B /* CustomEmoji.swift */,
+				99C577ED207E4F1500CE9B4D /* File.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1946,6 +1955,7 @@
 				D10E9C211F643616007F1796 /* MentionModelMapping.swift */,
 				807371A11F96968C00D53ADF /* LoginServiceModelMapping.swift */,
 				806401321FB09EC400990572 /* PermissionModelMapping.swift */,
+				999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */,
 			);
 			path = Mapping;
 			sourceTree = "<group>";
@@ -2080,6 +2090,7 @@
 				4112BEEB1E7971A400E734CB /* MainChatViewController.swift */,
 				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
 				800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */,
+				99C577EB207E3A4200CE9B4D /* FilesListViewController.swift */,
 				41E2FA061D41513C00238DFD /* ChatViewController.swift */,
 				41EE157D1E05BED600754D45 /* ChatControllerAutocomplete.swift */,
 				419ECCA11F3C8F15005F224B /* ChatControllerHeaderStatus.swift */,
@@ -2278,6 +2289,7 @@
 				800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */,
 				89AEB7F71F7D225D00112A09 /* SubscriptionCreateRequest.swift */,
 				990FF6D520740C79007B4A53 /* SubscriptionMentionsRequest.swift */,
+				999F25B6207EEE70002E0F68 /* SubscriptionFilesRequest.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -3606,6 +3618,7 @@
 				4174CB1C1D2DB2080086DAC8 /* LogManager.swift in Sources */,
 				41DC7A1D1D38471700896FC0 /* MessageManager.swift in Sources */,
 				412F8DD91F599EF100AF7786 /* DatabaseManager.swift in Sources */,
+				999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */,
 				41A79C131D2F09F200A1968E /* Auth.swift in Sources */,
 				0B3A9769202C76080019CA92 /* ChangeAppIconCell.swift in Sources */,
 				80A2F39020056C5E005D2DCA /* EmojiSearcher.swift in Sources */,
@@ -3634,6 +3647,7 @@
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
 				800FCD4D1F728EC800D9A692 /* ChannelInfoDescriptionCell.swift in Sources */,
 				41A79C0F1D2F085F00A1968E /* User.swift in Sources */,
+				99C577EC207E3A4200CE9B4D /* FilesListViewController.swift in Sources */,
 				8076FDB92048581F00114F28 /* AuthManagerCurrentUser.swift in Sources */,
 				99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */,
 				8013F86C1FD6B59A00EE1A4E /* APIError.swift in Sources */,
@@ -3680,6 +3694,7 @@
 				806465EE1FED1AFE001F27DB /* EmojiView.swift in Sources */,
 				8076FDB2204856CC00114F28 /* AuthCanEditMessage.swift in Sources */,
 				D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */,
+				99C577EE207E4F1500CE9B4D /* File.swift in Sources */,
 				1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */,
 				8076FDC520485ABB00114F28 /* SubscriptionUser.swift in Sources */,
 				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
@@ -3747,6 +3762,7 @@
 				80A2F39220057AD0005D2DCA /* EmojiAutocompleteCell.swift in Sources */,
 				41DF76E31D2C50710028DBF8 /* AppDelegate.swift in Sources */,
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
+				999F25B7207EEE70002E0F68 /* SubscriptionFilesRequest.swift in Sources */,
 				35E892CC201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift in Sources */,
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
