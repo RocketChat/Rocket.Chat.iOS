@@ -27,7 +27,8 @@ class ChannelInfoViewController: BaseViewController {
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList),
-                shouldListMentions ? ChannelInfoDetailCellData(title: localized("chat.info.item.mentions"), detail: "", action: showMentionsList) : nil
+                shouldListMentions ? ChannelInfoDetailCellData(title: localized("chat.info.item.mentions"), detail: "", action: showMentionsList) : nil,
+                ChannelInfoDetailCellData(title: "Files", detail: "", action: showFilesList)
             ].compactMap({$0})
 
             if subscription.type == .directMessage {
@@ -124,6 +125,16 @@ class ChannelInfoViewController: BaseViewController {
         self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
+    func showFilesList() {
+        let data = ListSegueData(
+            title: "Files",
+            query: nil,
+            isListingMentions: false
+        )
+
+        self.performSegue(withIdentifier: "toFilesList", sender: data)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let membersList = segue.destination as? MembersListViewController {
             membersList.delegate = self
@@ -131,13 +142,20 @@ class ChannelInfoViewController: BaseViewController {
         }
 
         if let messagesList = segue.destination as? MessagesListViewController {
-
             messagesList.data.subscription = self.subscription
 
             if let segueData = sender as? ListSegueData {
                 messagesList.data.title = segueData.title
                 messagesList.data.query = segueData.query
                 messagesList.data.isListingMentions = segueData.isListingMentions
+            }
+        }
+
+        if let filesList = segue.destination as? FilesListViewController {
+            filesList.data.subscription = self.subscription
+
+            if let segueData = sender as? ListSegueData {
+                filesList.data.title = segueData.title
             }
         }
     }
