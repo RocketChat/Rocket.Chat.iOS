@@ -2885,7 +2885,6 @@
 				41DF76DD1D2C50710028DBF8 /* Resources */,
 				FC8FBCDB0132F52FB242368E /* [CP] Embed Pods Frameworks */,
 				FD5E5CD0D343F2BAB726ADF9 /* 📦 Embed Pods Frameworks */,
-				DE3BF78D94D5B8E723E47DD2 /* 📦 Copy Pods Resources */,
 				807FB5672046E7DD00E21429 /* Embed App Extensions */,
 			);
 			buildRules = (
@@ -2909,7 +2908,6 @@
 				41DF76F11D2C50720028DBF8 /* Resources */,
 				DC24B2F8EF9BED399B024C23 /* [CP] Embed Pods Frameworks */,
 				DEFA8FD3D3E972322218FB03 /* 📦 Embed Pods Frameworks */,
-				D9BF98B106C5735CE019D4A1 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3256,21 +3254,6 @@
 			shellPath = /bin/sh;
 			shellScript = "if [ \"${CONFIGURATION}\" = \"Debug\" ]; then\n    \"${PODS_ROOT}/SwiftLint/swiftlint\"\nfi";
 		};
-		D9BF98B106C5735CE019D4A1 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DC24B2F8EF9BED399B024C23 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3331,21 +3314,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DE3BF78D94D5B8E723E47DD2 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DEFA8FD3D3E972322218FB03 /* 📦 Embed Pods Frameworks */ = {
