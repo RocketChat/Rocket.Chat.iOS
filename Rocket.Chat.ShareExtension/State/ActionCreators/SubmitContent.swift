@@ -74,12 +74,12 @@ func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
                 switch response {
                 case .resource(let resource):
                     let content = store.state.content[index]
-                    if let error = resource.error {
-                        DispatchQueue.main.async {
-                            store.dispatch(.setContentValue(content.withStatus(.errored(error)), index: index))
+                    DispatchQueue.main.async {
+                        if let error = resource.error {
+                                store.dispatch(.setContentValue(content.withStatus(.errored(error)), index: index))
+                        } else {
+                                store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
                         }
-                    } else {
-                            store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
                     }
                 case .error(let error):
                     let content = store.state.content[index]
