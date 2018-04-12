@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class FileTableViewCell: UITableViewCell {
 
@@ -17,4 +18,15 @@ class FileTableViewCell: UITableViewCell {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var uploadedAt: UILabel!
 
+    var file: File! {
+        didSet {
+            bindFileData()
+        }
+    }
+
+    func bindFileData() {
+        name.text = file.name
+        username.text = "@\(file.username)"
+        uploadedAt.text = file.uploadedAt?.formatted()
+    }
 }
