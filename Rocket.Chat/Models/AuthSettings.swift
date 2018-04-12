@@ -44,6 +44,7 @@ final class AuthSettings: BaseModel {
     @objc dynamic var isGitHubAuthenticationEnabled = false
     @objc dynamic var isGitLabAuthenticationEnabled = false
     @objc dynamic var isLinkedInAuthenticationEnabled = false
+    @objc dynamic var isWordPressAuthenticationEnabled = false
     @objc dynamic var isLDAPAuthenticationEnabled = false
 
     @objc dynamic var isCASEnabled = false

@@ -15,6 +15,7 @@ enum LoginServiceType {
     case facebook
     case linkedin
     case gitlab
+    case wordpress
     case saml
     case cas
     case custom
@@ -27,6 +28,7 @@ enum LoginServiceType {
         case "github": self = .github
         case "gitlab": self = .gitlab
         case "linkedin": self = .linkedin
+        case "wordpress": self = .wordpress
         case "saml": self = .saml
         case "cas": self = .cas
         default: self = .invalid
@@ -158,6 +160,12 @@ extension LoginService {
     static var linkedin: LoginService {
         let service = LoginService()
         service.mapLinkedIn()
+        return service
+    }
+
+    static var wordpress: LoginService {
+        let service = LoginService()
+        service.mapWordPress()
         return service
     }
 

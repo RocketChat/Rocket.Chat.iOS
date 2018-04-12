@@ -46,6 +46,10 @@ extension AuthViewController {
             addOAuthButton(for: .linkedin)
         }
 
+        if settings.isWordPressAuthenticationEnabled {
+            addOAuthButton(for: .wordpress)
+        }
+
         if settings.isCASEnabled {
             addOAuthButton(for: .cas)
         }
@@ -133,6 +137,7 @@ extension AuthViewController {
         case .github: button.setImage(#imageLiteral(resourceName: "github"), for: .normal)
         case .gitlab: button.setImage(#imageLiteral(resourceName: "gitlab"), for: .normal)
         case .linkedin: button.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
+        case .wordpress: button.setImage(#imageLiteral(resourceName: "wordpress"), for: .normal)
         default: button.setTitle(loginService.buttonLabelText ?? "", for: .normal)
         }
 

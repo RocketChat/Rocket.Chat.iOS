@@ -41,6 +41,7 @@ extension LoginService: ModelMappeable {
         case .gitlab: mapGitLab()
         case .github: mapGitHub()
         case .linkedin: mapLinkedIn()
+        case .wordpress: mapWordPress()
         case .saml: break
         case .cas: break
         case .custom: break
@@ -115,6 +116,18 @@ extension LoginService: ModelMappeable {
         buttonColor = "#1b86bc"
 
         callbackPath = "linkedin?close"
+    }
+
+    func mapWordPress() {
+        service = "wordpress"
+        scope = "openid"
+
+        serverUrl = "https://public-api.wordpress.com"
+        tokenPath = "/oauth2/token"
+        authorizePath = "/oauth2/authorize"
+        buttonLabelText = "wordpress"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#1e8cbe"
     }
 
     func mapCAS() {
