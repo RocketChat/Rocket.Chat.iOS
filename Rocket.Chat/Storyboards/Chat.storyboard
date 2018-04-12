@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8cV-un-sd9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8cV-un-sd9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -267,6 +267,7 @@
                         <outlet property="tableView" destination="BZN-WA-DFR" id="fMf-lW-s3T"/>
                         <segue destination="i6r-e5-U1B" kind="show" identifier="toMembersList" id="Dj3-vx-Ggd"/>
                         <segue destination="GAd-ch-6WH" kind="show" identifier="toMessagesList" id="199-n2-7WG"/>
+                        <segue destination="bID-Vt-oVI" kind="show" identifier="toFilesList" id="eAW-b6-Aqc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Svt-7Y-y44" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -383,6 +384,44 @@
             </objects>
             <point key="canvasLocation" x="4353" y="300"/>
         </scene>
+        <!--Files-->
+        <scene sceneID="fgU-3K-p7j">
+            <objects>
+                <viewController id="bID-Vt-oVI" customClass="FilesListViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ra6-x7-rKP"/>
+                        <viewControllerLayoutGuide type="bottom" id="pYP-pb-GvK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xkp-Sr-T5G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jAU-FE-FIa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="bID-Vt-oVI" id="Waz-cM-o8k"/>
+                                    <outlet property="delegate" destination="bID-Vt-oVI" id="NkB-sj-LT6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pYP-pb-GvK" firstAttribute="top" secondItem="jAU-FE-FIa" secondAttribute="bottom" id="EyZ-Tm-xpQ"/>
+                            <constraint firstItem="jAU-FE-FIa" firstAttribute="top" secondItem="xkp-Sr-T5G" secondAttribute="top" id="p3X-Da-unI"/>
+                            <constraint firstAttribute="trailing" secondItem="jAU-FE-FIa" secondAttribute="trailing" id="sh2-3M-2Sh"/>
+                            <constraint firstItem="jAU-FE-FIa" firstAttribute="leading" secondItem="xkp-Sr-T5G" secondAttribute="leading" id="z5t-g0-QEc"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Files" id="AiB-jG-eeo"/>
+                    <connections>
+                        <outlet property="tableView" destination="jAU-FE-FIa" id="NKt-fm-ycq"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6xo-Ss-83K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4349.6000000000004" y="950.37481259370327"/>
+        </scene>
         <!--Messages-->
         <scene sceneID="yul-vI-y3f">
             <objects>
@@ -425,7 +464,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i4P-ZF-XWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4353" y="949"/>
+            <point key="canvasLocation" x="4350" y="1618"/>
         </scene>
     </scenes>
     <resources>
