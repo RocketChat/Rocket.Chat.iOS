@@ -60,6 +60,7 @@ class PublicSettingsRequest: APIRequest {
                 "Message_AllowEditing_BlockEditInMinutes",
                 "Message_AllowPinning",
                 "Message_GroupingPeriod",
+                "Message_MaxAllowedSize",
                 "Accounts_CustomFields"
             ]
         }

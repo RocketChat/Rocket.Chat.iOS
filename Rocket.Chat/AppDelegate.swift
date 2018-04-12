@@ -9,7 +9,6 @@
 import UIKit
 import RealmSwift
 import UserNotifications
-import GoogleSignIn
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -61,11 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
 
-        return GIDSignIn.sharedInstance().handle(
-            url,
-            sourceApplication: options[.sourceApplication] as? String,
-            annotation: options[.annotation]
-        )
+        return false
     }
 
     // MARK: Remote Notification
