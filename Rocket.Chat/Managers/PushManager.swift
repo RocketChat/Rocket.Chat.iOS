@@ -176,6 +176,10 @@ extension PushManager {
 
 class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if SocketManager.isConnected() {
+            completionHandler([])
+            return
+        }
         completionHandler([.alert, .sound])
     }
 
