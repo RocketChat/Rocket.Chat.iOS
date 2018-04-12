@@ -44,6 +44,12 @@ struct AppManager {
     */
     static var initialRoomId: String?
 
+    /**
+     Room Id for the currently active room.
+    */
+    static var currentRoomId: String? {
+        return ChatViewController.shared?.subscription?.rid
+    }
 }
 
 extension AppManager {
@@ -138,9 +144,9 @@ extension AppManager {
         })
     }
 
-    static func openChannel(name: String) {
-        func openChannel() -> Bool {
-            guard let channel = Subscription.find(name: name, subscriptionType: [.channel]) else { return false }
+    static func openRoom(name: String, type: SubscriptionType = .channel) {
+        func openRoom() -> Bool {
+            guard let channel = Subscription.find(name: name, subscriptionType: [type]) else { return false }
 
             ChatViewController.shared?.subscription = channel
 
@@ -148,7 +154,7 @@ extension AppManager {
         }
 
         // Check if we already have this channel
-        if openChannel() == true {
+        if openRoom() == true {
             return
         }
 
@@ -167,7 +173,8 @@ extension AppManager {
                     realm.add(subscription, update: true)
                 })
 
-                _ = openChannel()
+                _ = openRoom()
+
             }
         }, errored: nil)
     }
@@ -191,7 +198,7 @@ extension AppManager {
         case let .mention(name):
             openDirectMessage(username: name)
         case let .channel(name):
-            openChannel(name: name)
+            openRoom(name: name)
         }
     }
 }
