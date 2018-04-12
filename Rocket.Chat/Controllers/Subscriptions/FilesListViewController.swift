@@ -17,7 +17,7 @@ class FilesListViewData {
     var showing: Int = 0
     var total: Int = 0
 
-    var title: String = localized("chat.messages.list.title") // TODO: Update
+    var title: String = localized("chat.messages.files.list.title")
 
     var isShowingAllFiles: Bool {
         return showing >= total
@@ -91,7 +91,7 @@ class FilesListViewController: BaseViewController {
         guard let label = tableView.backgroundView as? UILabel else { return }
 
         if data.cells.count == 0 {
-            label.text = localized("chat.messages.list.empty") // TODO: Update
+            label.text = localized("chat.messages.files.list.empty")
         } else {
             label.text = ""
         }

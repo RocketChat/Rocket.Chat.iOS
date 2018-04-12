@@ -28,7 +28,7 @@ class ChannelInfoViewController: BaseViewController {
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList),
                 shouldListMentions ? ChannelInfoDetailCellData(title: localized("chat.info.item.mentions"), detail: "", action: showMentionsList) : nil,
-                ChannelInfoDetailCellData(title: "Files", detail: "", action: showFilesList)
+                ChannelInfoDetailCellData(title: localized("chat.info.item.files"), detail: "", action: showFilesList)
             ].compactMap({$0})
 
             if subscription.type == .directMessage {
@@ -127,7 +127,7 @@ class ChannelInfoViewController: BaseViewController {
 
     func showFilesList() {
         let data = ListSegueData(
-            title: "Files",
+            title: localized("chat.messages.files.list.title"),
             query: nil,
             isListingMentions: false
         )

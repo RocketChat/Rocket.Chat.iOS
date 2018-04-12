@@ -228,6 +228,7 @@
 "chat.info.item.pinned" = "Pinned";
 "chat.info.item.starred" = "Starred";
 "chat.info.item.mentions" = "Mentions";
+"chat.info.item.files" = "Files";
 
 // Members List
 "chat.members.list.title" = "Members";
@@ -238,6 +239,8 @@
 "chat.messages.pinned.list.title" = "Pinned Messages";
 "chat.messages.starred.list.title" = "Starred Messages";
 "chat.messages.mentions.list.title" = "Mentions";
+"chat.messages.files.list.title" = "Files";
+"chat.messages.files.list.empty" = "No files found";
 
 // Settings
 "myaccount.settings.title" = "Preferences";

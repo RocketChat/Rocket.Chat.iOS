@@ -224,6 +224,7 @@
 "chat.info.item.pinned" = "Angeheftet";
 "chat.info.item.starred" = "Favorisiert";
 "chat.info.item.mentions" = "Mentions"; // TODO
+"chat.info.item.files" = "Arquivos"; // TODO
 
 // Members List
 "chat.members.list.title" = "Mitglieder";
@@ -234,6 +235,8 @@
 "chat.messages.pinned.list.title" = "Angeheftete Nachrichten";
 "chat.messages.starred.list.title" = "Favorisierte Nachrichten";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
+"chat.messages.files.list.title" = "Files"; // TODO
+"chat.messages.files.list.empty" = "No files found"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Einstellungen"; // TODO: new text: Preferences
