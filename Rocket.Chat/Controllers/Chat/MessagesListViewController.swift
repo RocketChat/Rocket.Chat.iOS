@@ -68,10 +68,10 @@ class MessagesListViewData {
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
             if isListingMentions {
                 let request = SubscriptionMentionsRequest(roomId: subscription.rid)
-                API.current()?.fetch(request, options: options) { response in
+                API.current()?.fetch(request, options: options) { [weak self] response in
                     switch response {
                     case .resource(let resource):
-                        self.handleMessages(
+                        self?.handleMessages(
                             fetchingWith: resource.fetchMessagesFromRealm,
                             showing: resource.count,
                             total: resource.total,
@@ -83,10 +83,10 @@ class MessagesListViewData {
                 }
             } else {
                 let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
-                API.current()?.fetch(request, options: options) { response in
+                API.current()?.fetch(request, options: options) { [weak self] response in
                     switch response {
                     case .resource(let resource):
-                        self.handleMessages(
+                        self?.handleMessages(
                             fetchingWith: resource.fetchMessagesFromRealm,
                             showing: resource.count,
                             total: resource.total,
