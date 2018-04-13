@@ -60,7 +60,7 @@ extension AppManager {
         }
     }
 
-    static func changeToServerIfExists(serverUrl: String, roomId: String? = nil) -> Bool {
+    static func changeToServerIfExists(serverUrl: URL, roomId: String? = nil) -> Bool {
         guard let index = DatabaseManager.serverIndexForUrl(serverUrl) else {
             return false
         }
@@ -84,7 +84,10 @@ extension AppManager {
     }
 
     static func changeToOrAddServer(serverUrl: String, credentials: DeepLinkCredentials? = nil, roomId: String? = nil) {
-        guard let url = URL(string: serverUrl), changeToServerIfExists(serverUrl: url.absoluteString, roomId: roomId) else {
+        guard
+            let url = URL(string: serverUrl),
+            changeToServerIfExists(serverUrl: url, roomId: roomId)
+        else {
             return addServer(serverUrl: serverUrl, credentials: credentials, roomId: roomId)
         }
     }

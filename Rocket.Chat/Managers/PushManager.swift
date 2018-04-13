@@ -70,7 +70,7 @@ final class PushManager {
 // MARK: Handle Notifications
 
 struct PushNotification {
-    let host: String
+    let host: URL
     let username: String
     let roomId: String
     let roomType: SubscriptionType
@@ -78,7 +78,8 @@ struct PushNotification {
     init?(raw: [AnyHashable: Any]) {
         guard
             let json = JSON(parseJSON: (raw["ejson"] as? String) ?? "").dictionary,
-            let host = json["host"]?.string,
+            let hostString = json["host"]?.string,
+            let host = URL(string: hostString),
             let username = json["sender"]?["username"].string,
             let roomType = json["type"]?.string,
             let roomId = json["rid"]?.string
@@ -141,10 +142,7 @@ extension PushManager {
 
     @discardableResult
     static func handleNotification(_ notification: PushNotification, reply: String? = nil) -> Bool {
-        guard
-            let serverUrl = URL(string: notification.host)?.socketURL()?.absoluteString,
-            let index = DatabaseManager.serverIndexForUrl(serverUrl)
-        else {
+        guard let index = DatabaseManager.serverIndexForUrl(notification.host) else {
             return false
         }
 
