@@ -342,9 +342,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     fileprivate func update(user: User?) {
-        startLoading()
-
         if let avatarFile = avatarFile {
+            startLoading()
             isUploadingAvatar = true
 
             let client = API.current()?.client(UploadClient.self)
@@ -358,6 +357,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
 
         guard let user = user else {
+            if !isUploadingAvatar { endEditing() }
             return
         }
 
@@ -366,6 +366,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             self?.stopLoading(shouldEndEditing: shouldEndEditing)
         }
 
+        if !isUploadingAvatar { startLoading() }
         isUpdatingUser = true
 
         let updateUserRequest = UpdateUserRequest(user: user, currentPassword: currentPassword)
