@@ -3086,9 +3086,9 @@
 			projectRoot = "";
 			targets = (
 				41DF76DE1D2C50710028DBF8 /* Rocket.Chat */,
+				807FB5572046E7DD00E21429 /* Rocket.Chat.ShareExtension */,
 				41DF76F21D2C50720028DBF8 /* Rocket.ChatTests */,
 				41DF76FD1D2C50720028DBF8 /* Rocket.ChatUITests */,
-				807FB5572046E7DD00E21429 /* Rocket.Chat.ShareExtension */,
 			);
 		};
 /* End PBXProject section */
