@@ -18,8 +18,8 @@ In case you're interested in playing around with the code or giving something ba
 
 ### Pre-requisites
 
-1. An OSX machine
-2. Xcode 9.x or higher (Swift 4)
+1. A macOS machine
+2. Xcode 9.3.x or higher (Swift 4.1)
 3. Install [CocoaPods](https://cocoapods.org/) (note that you will need to install at least Ruby 2.2.3 for this to work)
 ```
 sudo gem install cocoapods
@@ -50,7 +50,8 @@ Didn't found a bug or want a new feature not already reported? Check out [the is
 ### project.pbxproj
 
 Don't change this file unless required (added files). This includes signing of the application itself. The "Team" will be red in the `Rocket.Chat.xcodeproj`, that's fine.
-![signing](https://user-images.githubusercontent.com/193273/35477109-ad451daa-03bc-11e8-828b-9238bdda438e.png)
+
+<img src=https://user-images.githubusercontent.com/193273/35477109-ad451daa-03bc-11e8-828b-9238bdda438e.png width=500>
 
 ### New to Swift?
 
