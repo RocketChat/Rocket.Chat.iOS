@@ -70,17 +70,19 @@ class NotificationViewController: UIViewController {
         guard let notificationView = notificationView else { return }
 
         notificationView.displayNotification(title: title, body: body, username: username)
-        playSound()
+
+        // Commented out until a setting is added to toggle the sound.
+        // playSound()
 
         UIView.animate(withDuration: animationDuration) {
             self.notificationViewIsHidden = false
             self.view.layoutIfNeeded()
         }
 
-        timer = Timer.scheduledTimer(withTimeInterval: notificationVisibleDuration, repeats: false) { _ in
-            UIView.animate(withDuration: self.animationDuration) {
-                self.notificationViewIsHidden = true
-                self.view.layoutIfNeeded()
+        timer = Timer.scheduledTimer(withTimeInterval: notificationVisibleDuration, repeats: false) { [weak self] _ in
+            UIView.animate(withDuration: self?.animationDuration ?? 0.0) {
+                self?.notificationViewIsHidden = true
+                self?.view.layoutIfNeeded()
             }
         }
     }
