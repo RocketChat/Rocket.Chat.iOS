@@ -518,6 +518,7 @@
 		80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */; };
 		80EF621A205A981600EF739B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41494B911D63C6280004F369 /* UIImageExtension.swift */; };
 		80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */; };
+		80F1F8102080F307007998AB /* MarkdownManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1F80F2080F307007998AB /* MarkdownManagerSpec.swift */; };
 		80FA9066205313E20069038F /* SEContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA9065205313E20069038F /* SEContent.swift */; };
 		80FA9068205314040069038F /* SEServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA9067205314040069038F /* SEServer.swift */; };
 		80FA906A20569F890069038F /* SEComposeFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA906920569F890069038F /* SEComposeFileCell.swift */; };
@@ -1140,6 +1141,7 @@
 		80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
 		80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensionsSpec.swift; sourceTree = "<group>"; };
 		80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+CustomEmojis.swift"; sourceTree = "<group>"; };
+		80F1F80F2080F307007998AB /* MarkdownManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownManagerSpec.swift; sourceTree = "<group>"; };
 		80FA9065205313E20069038F /* SEContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEContent.swift; sourceTree = "<group>"; };
 		80FA9067205314040069038F /* SEServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServer.swift; sourceTree = "<group>"; };
 		80FA906920569F890069038F /* SEComposeFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeFileCell.swift; sourceTree = "<group>"; };
@@ -1560,6 +1562,7 @@
 				993E51391FB1E18D006403D5 /* DraftMessageManagerSpec.swift */,
 				8018B56F1FBE070000C3CC25 /* PushManagerSpec.swift */,
 				994DA2AF20653FB600083FB8 /* WebBrowserManagerSpec.swift */,
+				80F1F80F2080F307007998AB /* MarkdownManagerSpec.swift */,
 			);
 			name = Managers;
 			sourceTree = "<group>";
@@ -3815,6 +3818,7 @@
 				411498E51FC7B8D500D66542 /* AttachmentSpec.swift in Sources */,
 				8013F87C1FD6B64500EE1A4E /* MockAPI.swift in Sources */,
 				41DC7A221D386B4700896FC0 /* StringExtensionSpec.swift in Sources */,
+				80F1F8102080F307007998AB /* MarkdownManagerSpec.swift in Sources */,
 				68D186DF1ED9714F0030EE8C /* MessageURLSpec.swift in Sources */,
 				77C261271F97445F00724A1F /* DictionaryExtensionsSpec.swift in Sources */,
 				418C74411FA3627F00499577 /* PickerViewDelegateSpec.swift in Sources */,
