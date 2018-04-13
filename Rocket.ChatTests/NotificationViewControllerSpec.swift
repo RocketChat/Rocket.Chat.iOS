@@ -51,4 +51,14 @@ class NotificationViewControllerSpec: XCTestCase {
         XCTAssertFalse(notificationVC.hiddenConstraint.isActive, "Hidden constraint should not be active")
         XCTAssert((UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha == 0, "Status bar should not be visible")
     }
+
+    func testNotificationViewControllerIsVisible() {
+        guard let notificaitonWindow = (UIApplication.shared.delegate as? AppDelegate)?.notificationWindow else {
+            XCTFail("Notification window should be stored")
+            return
+        }
+        XCTAssert(UIApplication.shared.windows.contains(notificaitonWindow), "Notification window should be added as a window to the application")
+        XCTAssert(notificaitonWindow.rootViewController == NotificationViewController.shared, "The shared notification view controller should be the root view controller for the notification window")
+        XCTAssert(notificaitonWindow.windowLevel == UIWindowLevelAlert, "Notification window level should be UIWindowLevelAlert")
+    }
 }
