@@ -31,6 +31,7 @@
 		14124CBD205441930028275D /* NotificationsCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14124CBC205441930028275D /* NotificationsCellProtocol.swift */; };
 		142F98B82081E8F30079FFD0 /* NotificationsSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142F98B72081E8F30079FFD0 /* NotificationsSettings.storyboard */; };
 		142F98BA2081F3B90079FFD0 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F98B92081F3B90079FFD0 /* Dynamic.swift */; };
+		142F98BF2082AB5B0079FFD0 /* SubscriptionGetOneRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F98BE2082AB5B0079FFD0 /* SubscriptionGetOneRequest.swift */; };
 		1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BFA21F9B601600FB2768 /* RCTextView.swift */; };
 		14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A6A83020421DF8008C210D /* ColorPickerView.swift */; };
 		14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */; };
@@ -678,6 +679,7 @@
 		14124CBC205441930028275D /* NotificationsCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCellProtocol.swift; sourceTree = "<group>"; };
 		142F98B72081E8F30079FFD0 /* NotificationsSettings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = NotificationsSettings.storyboard; path = Storyboards/NotificationsSettings.storyboard; sourceTree = "<group>"; };
 		142F98B92081F3B90079FFD0 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
+		142F98BE2082AB5B0079FFD0 /* SubscriptionGetOneRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionGetOneRequest.swift; sourceTree = "<group>"; };
 		1435BFA21F9B601600FB2768 /* RCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTextView.swift; sourceTree = "<group>"; };
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		14A6A83020421DF8008C210D /* ColorPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPickerView.swift; path = Views/ColorPicker/ColorPickerView.swift; sourceTree = "<group>"; };
@@ -2384,6 +2386,7 @@
 				800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */,
 				89AEB7F71F7D225D00112A09 /* SubscriptionCreateRequest.swift */,
 				990FF6D520740C79007B4A53 /* SubscriptionMentionsRequest.swift */,
+				142F98BE2082AB5B0079FFD0 /* SubscriptionGetOneRequest.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -3803,6 +3806,7 @@
 				414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */,
 				8076FDB0204856AF00114F28 /* AuthCanBlockMessage.swift in Sources */,
 				8076FDA9204853DE00114F28 /* RealmExecute.swift in Sources */,
+				142F98BF2082AB5B0079FFD0 /* SubscriptionGetOneRequest.swift in Sources */,
 				41B4B2341E40B1D200F4D252 /* ChatControllerUploader.swift in Sources */,
 				807371A21F96968C00D53ADF /* LoginServiceModelMapping.swift in Sources */,
 				4133EDCF1DA2834E005AA783 /* ChatMessageImageView.swift in Sources */,

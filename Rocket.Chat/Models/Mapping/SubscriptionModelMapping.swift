@@ -40,6 +40,15 @@ extension Subscription: ModelMappeable {
         if let lastSeen = values["ls"]["$date"].double {
             self.lastSeen = Date.dateFromInterval(lastSeen)
         }
+
+        self.disableNotifications = values["disableNotifications"].bool ?? false
+        self.emailNotifications = values["emailNotifications"].string
+        self.audioNotificationValue = values["audioNotificationValue"].string
+        if let duration = values["desktopNotificationDuration"].int {
+            self.desktopNotificationDuration = duration
+        }
+        self.audioNotifications = values["audioNotifications"].stringValue
+        self.mobilePushNotifications = values["mobilePushNotifications"].stringValue
     }
 
     func mapRoom(_ values: JSON) {

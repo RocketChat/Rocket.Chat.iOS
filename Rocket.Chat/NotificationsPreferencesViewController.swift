@@ -17,10 +17,37 @@ final class NotificationsPreferencesViewController: UITableViewController {
 
         title = viewModel.title
         viewModel.enableModel.value.bind { [unowned self] _ in
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        guard let subscription = subscription else {
+            return
         }
 
-//        API.current()?.client(SettingsClient.self).fetchSettings()
+        let request = SubscriptionGetOneRequest(roomId: subscription.rid)
+        API.current()?.fetch(request, succeeded: { result in
+            guard let subscription = result.subscription else {
+                return
+            }
+
+            self.viewModel.enableModel.value.value = !subscription.disableNotifications
+            self.viewModel.counterModel.value.value = false // TODO: ???
+//            self.viewModel.desktopAlertsModel.value.value // TODO: ???
+//            self.viewModel.desktopAudioModel.value.value // TODO: ???
+//            self.viewModel.desktopSoundModel.value.value // TODO: ???
+            self.viewModel.desktopDurationModel.value.value = String(subscription.desktopNotificationDuration)
+            self.viewModel.mobileAlertsModel.value.value = subscription.mobilePushNotifications ?? "placeholder"
+            self.viewModel.mailAlertsModel.value.value = subscription.emailNotifications ?? "placeholder"
+
+            }, errored: { error in
+                Alert.defaultError.present()
+        })
     }
 }
 

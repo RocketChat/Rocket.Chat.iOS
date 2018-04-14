@@ -30,7 +30,7 @@ final class NotificationsPreferencesViewModel {
                                                                                  rightTitle: localized("myaccount.settings.notifications.receive.title"),
                                                                                  rightDescription: localized("myaccount.settings.notifications.receive.description"))
 
-    internal let muteModel = NotificationsSwitchCell.SettingModel(value: Dynamic(false),
+    internal let counterModel = NotificationsSwitchCell.SettingModel(value: Dynamic(false),
                                                                   type: .switch,
                                                                   leftTitle: localized("myaccount.settings.notifications.hide.title"),
                                                                   leftDescription: localized("myaccount.settings.notifications.hide.description"),
@@ -62,7 +62,7 @@ final class NotificationsPreferencesViewModel {
                                                                             title: localized("myaccount.settings.notifications.email.alerts"))
 
     internal var settingsCells: [(title: String?, elements: [NotificationSettingModel])] {
-        let firstSection: [(title: String?, elements: [NotificationSettingModel])] = [(title: nil, [enableModel, muteModel])]
+        let firstSection: [(title: String?, elements: [NotificationSettingModel])] = [(title: nil, [enableModel, counterModel])]
 
         guard enableModel.value.value else {
             return firstSection

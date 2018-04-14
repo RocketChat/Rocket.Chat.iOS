@@ -52,6 +52,13 @@ class Subscription: BaseModel {
     @objc dynamic var roomOwnerId: String?
     @objc dynamic var otherUserId: String?
 
+    @objc dynamic var disableNotifications = false
+    @objc dynamic var emailNotifications: String?
+    @objc dynamic var audioNotificationValue: String?
+    @objc dynamic var desktopNotificationDuration = 0
+    @objc dynamic var audioNotifications: String?
+    @objc dynamic var mobilePushNotifications: String?
+
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
 }
 
