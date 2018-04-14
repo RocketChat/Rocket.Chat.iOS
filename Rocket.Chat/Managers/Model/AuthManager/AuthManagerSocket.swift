@@ -7,7 +7,6 @@
 //
 
 import RealmSwift
-import GoogleSignIn
 
 extension AuthManager {
 
@@ -20,7 +19,12 @@ extension AuthManager {
      called in case of success or error.
      */
     static func resume(_ auth: Auth, completion: @escaping MessageCompletion) {
-        guard let url = URL(string: auth.serverURL) else { return }
+        guard
+            let url = URL(string: auth.serverURL),
+            let socketURL = url.socketURL()
+        else {
+            return
+        }
 
         // Turn all users offline
         Realm.execute({ (realm) in
@@ -28,12 +32,12 @@ extension AuthManager {
             users.setValue("offline", forKey: "privateStatus")
         })
 
-        SocketManager.connect(url) { (socket, _) in
+        SocketManager.connect(socketURL) { (socket, _) in
             guard SocketManager.isConnected() else {
                 guard let response = SocketResponse(
                     ["error": "Can't connect to the socket"],
                     socket: socket
-                    ) else { return }
+                ) else { return }
 
                 return completion(response)
             }
@@ -43,8 +47,8 @@ extension AuthManager {
                 "method": "login",
                 "params": [[
                     "resume": auth.token ?? ""
-                    ]]
-                ] as [String: Any]
+                ]]
+            ] as [String: Any]
 
             SocketManager.send(object) { (response) in
                 guard !response.isError() else {
@@ -74,13 +78,13 @@ extension AuthManager {
             "email": email,
             "pass": password,
             "name": name
-            ].union(dictionary: customFields)
+        ].union(dictionary: customFields)
 
         let object = [
             "msg": "method",
             "method": "registerUser",
             "params": [param]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(object, completion: completion)
     }
@@ -93,7 +97,7 @@ extension AuthManager {
             "msg": "method",
             "method": "login",
             "params": [params]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
@@ -262,7 +266,6 @@ extension AuthManager {
      */
     static func logout(completion: @escaping VoidCompletion) {
         SocketManager.disconnect { (_, _) in
-            GIDSignIn.sharedInstance().signOut()
             BugTrackingCoordinator.anonymizeCrashReports()
 
             DraftMessageManager.clearServerDraftMessages()

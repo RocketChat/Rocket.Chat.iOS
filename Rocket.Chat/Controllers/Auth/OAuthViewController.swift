@@ -15,19 +15,23 @@ class OAuthViewController: OAuthWebViewController {
     var authorizeUrl: URL?
     var callbackUrl: URL?
 
+    var userAgent: String?
+
     var success: ((OAuthCredentials) -> Void)?
     var failure: (() -> Void)?
 
-    convenience init(authorizeUrl: URL, callbackUrl: URL, success: @escaping (OAuthCredentials) -> Void, failure: @escaping () -> Void) {
+    convenience init(authorizeUrl: URL, callbackUrl: URL, userAgent: String? = nil, success: @escaping (OAuthCredentials) -> Void, failure: @escaping () -> Void) {
         self.init()
         self.authorizeUrl = authorizeUrl
         self.callbackUrl = callbackUrl
+        self.userAgent = userAgent
         self.success = success
         self.failure = failure
     }
 
     lazy var webView: WKWebView = {
         let webView = WKWebView(frame: view.bounds)
+        webView.customUserAgent = userAgent
         webView.navigationDelegate = self
         webView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(webView)

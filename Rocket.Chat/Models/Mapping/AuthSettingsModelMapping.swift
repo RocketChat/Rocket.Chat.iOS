@@ -87,6 +87,8 @@ extension AuthSettings: ModelMappeable {
         self.messageAllowEditing = objectForKey(object: values, key: "Message_AllowEditing")?.bool ?? true
         self.messageAllowEditingBlockEditInMinutes = objectForKey(object: values, key: "Message_AllowEditing_BlockEditInMinutes")?.int ?? 0
 
+        self.messageMaxAllowedSize = objectForKey(object: values, key: "Message_MaxAllowedSize")?.int ?? 0
+
         // Custom Fields
         self.rawCustomFields = objectForKey(object: values, key: "Accounts_CustomFields")?.string?.removingWhitespaces()
     }
