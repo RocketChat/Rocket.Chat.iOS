@@ -14,7 +14,6 @@ enum NotificationCellType: String {
 }
 
 protocol NotificationSettingModel {
-    var value: Dynamic<String> { get }
     var type: NotificationCellType { get }
 }
 
@@ -24,14 +23,14 @@ final class NotificationsPreferencesViewModel {
         return localized("myaccount.settings.notifications.title")
     }
 
-    internal let enableModel = NotificationsSwitchCell.SettingModel(value: Dynamic("1"),
+    internal let enableModel = NotificationsSwitchCell.SettingModel(value: Dynamic(false),
                                                                                  type: .switch,
                                                                                  leftTitle: localized("myaccount.settings.notifications.mute.title"),
                                                                                  leftDescription: localized("myaccount.settings.notifications.mute.description"),
                                                                                  rightTitle: localized("myaccount.settings.notifications.receive.title"),
                                                                                  rightDescription: localized("myaccount.settings.notifications.receive.description"))
 
-    internal let muteModel = NotificationsSwitchCell.SettingModel(value: Dynamic("0"),
+    internal let muteModel = NotificationsSwitchCell.SettingModel(value: Dynamic(false),
                                                                   type: .switch,
                                                                   leftTitle: localized("myaccount.settings.notifications.hide.title"),
                                                                   leftDescription: localized("myaccount.settings.notifications.hide.description"),
@@ -65,7 +64,7 @@ final class NotificationsPreferencesViewModel {
     internal var settingsCells: [(title: String?, elements: [NotificationSettingModel])] {
         let firstSection: [(title: String?, elements: [NotificationSettingModel])] = [(title: nil, [enableModel, muteModel])]
 
-        guard enableModel.value.value.boolValue else {
+        guard enableModel.value.value else {
             return firstSection
         }
 

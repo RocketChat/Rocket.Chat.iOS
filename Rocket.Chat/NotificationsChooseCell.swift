@@ -10,7 +10,7 @@ import UIKit
 
 final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol {
     struct SettingModel: NotificationSettingModel {
-        var value: Dynamic<String>
+        let value: Dynamic<String>
         var type: NotificationCellType
         let title: String
 
