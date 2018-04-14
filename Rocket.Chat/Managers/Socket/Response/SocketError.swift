@@ -15,7 +15,7 @@ extension SocketError {
 
         init(rawValue: String) {
             switch rawValue {
-            case "error-invalid-user":
+            case "error-invalid-user", "403":
                 self = .invalidUser
             default:
                 self = .other(rawValue)

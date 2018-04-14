@@ -10,7 +10,7 @@ import Foundation
 import SafariServices
 
 struct WebBrowserManager {
-    private static let defaults = UserDefaults.standard
+    private static let defaults = UserDefaults.group
     private static let defaultBrowserKey = "DefaultBrowserKey"
 
     /**
@@ -19,7 +19,7 @@ struct WebBrowserManager {
      */
     static var browser: WebBrowserApp {
         guard
-            let browserRaw = UserDefaults.standard.string(forKey: defaultBrowserKey),
+            let browserRaw = defaults.string(forKey: defaultBrowserKey),
             var browser = WebBrowserApp(rawValue: browserRaw)
         else {
             return .inAppSafari

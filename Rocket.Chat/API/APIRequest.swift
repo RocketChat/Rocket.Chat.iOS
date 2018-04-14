@@ -58,7 +58,7 @@ extension APIRequest {
 
     func request(for api: API, options: APIRequestOptions = .none) -> URLRequest? {
         var components = URLComponents(url: api.host, resolvingAgainstBaseURL: false)
-        components?.path = path
+        components?.path += path
         components?.query = query
 
         if let optionsQuery = options.query {
@@ -74,6 +74,7 @@ extension APIRequest {
         request.httpBody = body()
 
         request.addValue(contentType, forHTTPHeaderField: "Content-Type")
+        request.addValue(API.userAgent, forHTTPHeaderField: "User-Agent")
 
         if let token = api.authToken {
             request.addValue(token, forHTTPHeaderField: "X-Auth-Token")

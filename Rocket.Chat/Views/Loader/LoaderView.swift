@@ -32,8 +32,8 @@ class LoaderView: UIView {
         let circleSize: CGFloat = 10
         let circleRadius = circleSize / 2
         let fillColor = UIColor.RCDarkBlue().cgColor
-        let x: CGFloat = (layer.bounds.size.width - size.width) / 2
-        let y: CGFloat = (layer.bounds.size.height - circleSize) / 2
+        let xPosition: CGFloat = (layer.bounds.size.width - size.width) / 2
+        let yPosition: CGFloat = (layer.bounds.size.height - circleSize) / 2
         let duration: CFTimeInterval = 1.4
         let beginTime = CACurrentMediaTime()
         let beginTimes: [CFTimeInterval] = [0, 0.16, 0.32]
@@ -48,7 +48,7 @@ class LoaderView: UIView {
         animation.isRemovedOnCompletion = false
 
         // Draw circles
-        for i in 0 ..< 3 {
+        for idx in 0 ..< 3 {
             let circleLayer: CAShapeLayer = CAShapeLayer()
             let path: UIBezierPath = UIBezierPath()
 
@@ -67,13 +67,13 @@ class LoaderView: UIView {
 
             let circle = circleLayer as CALayer
             let frame = CGRect(
-                x: x + circleSize * CGFloat(i) + circleSpacing * CGFloat(i),
-                y: y,
+                x: xPosition + circleSize * CGFloat(idx) + circleSpacing * CGFloat(idx),
+                y: yPosition,
                 width: circleSize,
                 height: circleSize
             )
 
-            animation.beginTime = beginTime + beginTimes[i]
+            animation.beginTime = beginTime + beginTimes[idx]
             circle.frame = frame
             circle.add(animation, forKey: "animation")
             layer.addSublayer(circle)
