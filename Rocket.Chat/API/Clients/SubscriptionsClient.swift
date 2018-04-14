@@ -24,12 +24,12 @@ struct SubscriptionsClient: APIClient {
         self.api = api
     }
 
-    func loadHistory(subscription: Subscription, latest: Date?, realm: Realm? = Realm.current, completion: @escaping ([Message]) -> Void) {
+    func loadHistory(subscription: Subscription, oldest: Date?, count: Int = 60, realm: Realm? = Realm.current, completion: @escaping ([Message]) -> Void) {
         guard let subscriptionId = subscription.identifier else {
             return completion([])
         }
 
-        let request = SubscriptionHistoryRequest(roomType: subscription.type, roomId: subscription.rid, latest: latest)
+        let request = SubscriptionHistoryRequest(roomType: subscription.type, roomId: subscription.rid, oldest: oldest, count: count)
 
         var filteredMessages: [Message] = []
 
@@ -60,7 +60,7 @@ struct SubscriptionsClient: APIClient {
         }, errored: { error in
             switch error {
             case .version:
-                MessageManager.getHistory(subscription, lastMessageDate: latest, completion: completion)
+                MessageManager.getHistory(subscription, lastMessageDate: oldest, completion: completion)
             default:
                 completion([])
             }
