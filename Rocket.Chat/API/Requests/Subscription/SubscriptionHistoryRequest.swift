@@ -47,7 +47,6 @@ class SubscriptionHistoryRequest: APIRequest {
     let count: Int?
     let unreads: Bool?
 
-
     init(roomType: SubscriptionType, roomId: String,
          latest: Date? = nil, oldest: Date? = nil, inclusive: Bool? = nil, count: Int? = nil, unreads: Bool? = nil) {
         self.roomType = roomType
@@ -71,16 +70,7 @@ class SubscriptionHistoryRequest: APIRequest {
 }
 
 extension APIResult where T == SubscriptionHistoryRequest {
-    var messages: [Message]? {
-        return raw?["messages"].arrayValue.map {
-            let message = Message()
-            message.map($0, realm: nil)
-            return message
-        }
-    }
-
     var success: Bool? {
         return raw?["success"].bool
     }
 }
-
