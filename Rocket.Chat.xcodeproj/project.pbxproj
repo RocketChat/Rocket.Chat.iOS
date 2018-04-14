@@ -33,6 +33,7 @@
 		140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95E5202F7074003FD564 /* DrawingControllerDelegate.swift */; };
 		140C84ED1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */; };
 		14124CBD205441930028275D /* NotificationsCellProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14124CBC205441930028275D /* NotificationsCellProtocol.swift */; };
+		142F98B82081E8F30079FFD0 /* NotificationsSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142F98B72081E8F30079FFD0 /* NotificationsSettings.storyboard */; };
 		1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BFA21F9B601600FB2768 /* RCTextView.swift */; };
 		14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A6A83020421DF8008C210D /* ColorPickerView.swift */; };
 		14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */; };
@@ -682,6 +683,7 @@
 		140A95E5202F7074003FD564 /* DrawingControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DrawingControllerDelegate.swift; path = Controllers/Drawing/DrawingControllerDelegate.swift; sourceTree = "<group>"; };
 		140C84EC1FC9DBAF00032A59 /* MentionsTextFieldTableViewCellSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MentionsTextFieldTableViewCellSpec.swift; sourceTree = "<group>"; };
 		14124CBC205441930028275D /* NotificationsCellProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsCellProtocol.swift; sourceTree = "<group>"; };
+		142F98B72081E8F30079FFD0 /* NotificationsSettings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = NotificationsSettings.storyboard; path = Storyboards/NotificationsSettings.storyboard; sourceTree = "<group>"; };
 		1435BFA21F9B601600FB2768 /* RCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTextView.swift; sourceTree = "<group>"; };
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		14A6A83020421DF8008C210D /* ColorPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPickerView.swift; path = Views/ColorPicker/ColorPickerView.swift; sourceTree = "<group>"; };
@@ -1795,6 +1797,7 @@
 				41E2FA001D414EA100238DFD /* Subscriptions.storyboard */,
 				140A95E0202F526C003FD564 /* Drawing.storyboard */,
 				4102E3A91E532323004BAA82 /* Preferences.storyboard */,
+				142F98B72081E8F30079FFD0 /* NotificationsSettings.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -3199,6 +3202,7 @@
 				41865AF41FC8B25100A5E48F /* WebViewControllerEmbedded.xib in Resources */,
 				14F8A281202E659000175FDC /* White-40@3x.png in Resources */,
 				14F8A22A202E5CBF00175FDC /* Black-40@2x.png in Resources */,
+				142F98B82081E8F30079FFD0 /* NotificationsSettings.storyboard in Resources */,
 				411F7D961F5179B50080E8AD /* ChatChannelHeaderCell.xib in Resources */,
 				33A5C9CB206A565800FE1C8F /* travel.json in Resources */,
 				14F8A228202E5CBF00175FDC /* Black-40@3x.png in Resources */,
