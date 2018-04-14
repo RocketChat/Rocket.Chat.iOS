@@ -62,7 +62,7 @@ class PreferencesViewModelSpec: XCTestCase {
                 rowsInSecondSection += 1
             }
         }
-        XCTAssertTrue(model.numberOfRowsInSection(1) == 5, "incorrect rows number")
+        XCTAssertTrue(model.numberOfRowsInSection(1) == rowsInSecondSection, "incorrect rows number")
         XCTAssertTrue(model.numberOfRowsInSection(2) == 2, "incorrect rows number")
         XCTAssertTrue(model.numberOfRowsInSection(3) == 1, "incorrect rows number")
     }
