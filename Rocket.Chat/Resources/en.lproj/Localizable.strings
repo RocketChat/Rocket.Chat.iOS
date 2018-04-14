@@ -228,6 +228,7 @@
 "chat.info.item.pinned" = "Pinned";
 "chat.info.item.starred" = "Starred";
 "chat.info.item.mentions" = "Mentions";
+"chat.info.item.notifications" = "Notifications";
 
 // Members List
 "chat.members.list.title" = "Members";

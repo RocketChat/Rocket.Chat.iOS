@@ -10,6 +10,7 @@ import UIKit
 
 final class NotificationsPreferencesViewController: UITableViewController {
     private let viewModel = NotificationsPreferencesViewModel()
+    var subscription: Subscription?
 
     override func viewDidLoad() {
         super.viewDidLoad()

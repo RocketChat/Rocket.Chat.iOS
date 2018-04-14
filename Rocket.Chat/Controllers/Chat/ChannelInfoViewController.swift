@@ -27,6 +27,7 @@ class ChannelInfoViewController: BaseViewController {
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList),
+                ChannelInfoDetailCellData(title: localized("chat.info.item.notifications"), detail: "", action: showNotificationsPreferences),
                 shouldListMentions ? ChannelInfoDetailCellData(title: localized("chat.info.item.mentions"), detail: "", action: showMentionsList) : nil
             ].compactMap({$0})
 
@@ -114,6 +115,10 @@ class ChannelInfoViewController: BaseViewController {
         self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
+    private func showNotificationsPreferences() {
+        performSegue(withIdentifier: "toNotificationsSettings", sender: self)
+    }
+
     func showMentionsList() {
         let data = ListSegueData(
             title: localized("chat.messages.mentions.list.title"),
@@ -139,6 +144,10 @@ class ChannelInfoViewController: BaseViewController {
                 messagesList.data.query = segueData.query
                 messagesList.data.isListingMentions = segueData.isListingMentions
             }
+        }
+
+        if let notificationsSettings = segue.destination as? NotificationsPreferencesViewController {
+            notificationsSettings.subscription = subscription
         }
     }
 
