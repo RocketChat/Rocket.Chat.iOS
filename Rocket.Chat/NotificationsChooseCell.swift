@@ -10,11 +10,11 @@ import UIKit
 
 final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol {
     struct SettingModel: NotificationSettingModel {
-        var value: String
+        var value: Dynamic<String>
         var type: NotificationCellType
         let title: String
 
-        init(value: String, type: NotificationCellType, title: String) {
+        init(value: Dynamic<String>, type: NotificationCellType, title: String) {
             self.value = value
             self.type = type
             self.title = title
@@ -32,7 +32,9 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
             }
 
             titleLabel.text = model.title
-            valueLabel.text = model.value
+            model.value.bindAndFire { [unowned self] value in
+                self.valueLabel.text = value
+            }
         }
     }
 }

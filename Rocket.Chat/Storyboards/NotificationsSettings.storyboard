@@ -51,6 +51,9 @@
                                         </label>
                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ff6-ie-dni">
                                             <rect key="frame" x="163" y="8" width="51" height="31"/>
+                                            <connections>
+                                                <action selector="switchValueChanged:" destination="QxK-uq-TVR" eventType="valueChanged" id="ZpQ-9g-Hit"/>
+                                            </connections>
                                         </switch>
                                     </subviews>
                                     <constraints>

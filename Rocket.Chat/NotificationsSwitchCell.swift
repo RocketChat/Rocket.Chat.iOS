@@ -10,14 +10,14 @@ import UIKit
 
 final class NotificationsSwitchCell: UITableViewCell, NotificationsCellProtocol {
     struct SettingModel: NotificationSettingModel {
-        var value: String
+        let value: Dynamic<String>
         var type: NotificationCellType
         let leftTitle: String
         let leftDescription: String
         let rightTitle: String
         let rightDescription: String
 
-        init(value: String, type: NotificationCellType, leftTitle: String, leftDescription: String, rightTitle: String, rightDescription: String) {
+        init(value: Dynamic<String>, type: NotificationCellType, leftTitle: String, leftDescription: String, rightTitle: String, rightDescription: String) {
             self.value = value
             self.type = type
             self.leftTitle = leftTitle
@@ -43,12 +43,30 @@ final class NotificationsSwitchCell: UITableViewCell, NotificationsCellProtocol 
             leftDescriptionLabel.text = model.leftDescription
             rightTitleLabel.text = model.rightTitle
             rightDescriptionLabel.text = model.rightDescription
-            turnSwitch.isOn = model.value.boolValue
+            turnSwitch.isOn = model.value.value.boolValue
 
-            leftTitleLabel.textColor = model.value.boolValue ? .lightGray : .black
-            leftDescriptionLabel.textColor = model.value.boolValue ? .lightGray : .black
-            rightTitleLabel.textColor = model.value.boolValue ? .black : .lightGray
-            rightDescriptionLabel.textColor = model.value.boolValue ? .black : .lightGray
+            updateCell()
         }
     }
+
+    @IBAction func switchValueChanged(_ sender: UISwitch) {
+        guard let model = cellModel as? SettingModel else {
+            return
+        }
+
+        model.value.value = sender.isOn ? "1" : "0"
+        updateCell()
+    }
+
+    private func updateCell() {
+        guard let model = cellModel as? SettingModel else {
+            return
+        }
+
+        leftTitleLabel.textColor = model.value.value.boolValue ? .lightGray : .black
+        leftDescriptionLabel.textColor = model.value.value.boolValue ? .lightGray : .black
+        rightTitleLabel.textColor = model.value.value.boolValue ? .black : .lightGray
+        rightDescriptionLabel.textColor = model.value.value.boolValue ? .black : .lightGray
+    }
+
 }

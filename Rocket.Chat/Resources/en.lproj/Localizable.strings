@@ -275,7 +275,7 @@
 "myaccount.settings.notifications.desktop" = "Desktop";
 "myaccount.settings.notifications.desktop.alerts" = "Alerts:";
 "myaccount.settings.notifications.desktop.audio" = "Audio:";
-"myaccount.settings.notifications.desktop.sound" = "Sound";
+"myaccount.settings.notifications.desktop.sound" = "Sound:";
 "myaccount.settings.notifications.desktop.duration" = "Notifications Duration:";
 "myaccount.settings.notifications.mobile" = "Mobile";
 "myaccount.settings.notifications.mobile.alerts" = "Alerts:";
