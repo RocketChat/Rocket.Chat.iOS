@@ -10,7 +10,11 @@ import UIKit
 
 final class NotificationsPreferencesViewController: UITableViewController {
     private let viewModel = NotificationsPreferencesViewModel()
-    var subscription: Subscription?
+    var subscription: Subscription? {
+        didSet {
+            updateModel(subscription: subscription)
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,28 +30,31 @@ final class NotificationsPreferencesViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
+//        guard let subscription = subscription else {
+//            return
+//        }
+        // TODO: Do we actually have to call it since we already have subscription fetched? What about updating subscription after changing settings though?
+//        let request = SubscriptionGetOneRequest(roomId: subscription.rid)
+//        API.current()?.fetch(request, succeeded: { result in
+//            self.updateModel(subscription: result.subscription)
+//        }, errored: { _ in
+//            Alert.defaultError.present()
+//        })
+    }
+
+    private func updateModel(subscription: Subscription?) {
         guard let subscription = subscription else {
             return
         }
 
-        let request = SubscriptionGetOneRequest(roomId: subscription.rid)
-        API.current()?.fetch(request, succeeded: { result in
-            guard let subscription = result.subscription else {
-                return
-            }
-
-            self.viewModel.enableModel.value.value = !subscription.disableNotifications
-            self.viewModel.counterModel.value.value = !subscription.hideUnreadStatus
-            self.viewModel.desktopAlertsModel.value.value = subscription.desktopNotifications.rawValue
-            self.viewModel.desktopAudioModel.value.value = subscription.audioNotifications.rawValue
-            self.viewModel.desktopSoundModel.value.value = subscription.audioNotificationValue.rawValue
-            self.viewModel.desktopDurationModel.value.value = subscription.desktopNotificationDuration > 0 ? "\(String(subscription.desktopNotificationDuration)) seconds" : "default"
-            self.viewModel.mobileAlertsModel.value.value = subscription.mobilePushNotifications.rawValue
-            self.viewModel.mailAlertsModel.value.value = subscription.emailNotifications.rawValue
-
-            }, errored: { _ in
-                Alert.defaultError.present()
-        })
+        self.viewModel.enableModel.value.value = !subscription.disableNotifications
+        self.viewModel.counterModel.value.value = !subscription.hideUnreadStatus
+        self.viewModel.desktopAlertsModel.value.value = subscription.desktopNotifications.rawValue
+        self.viewModel.desktopAudioModel.value.value = subscription.audioNotifications.rawValue
+        self.viewModel.desktopSoundModel.value.value = subscription.audioNotificationValue.rawValue
+        self.viewModel.desktopDurationModel.value.value = subscription.desktopNotificationDuration > 0 ? "\(String(subscription.desktopNotificationDuration)) seconds" : "default"
+        self.viewModel.mobileAlertsModel.value.value = subscription.mobilePushNotifications.rawValue
+        self.viewModel.mailAlertsModel.value.value = subscription.emailNotifications.rawValue
     }
 }
 
