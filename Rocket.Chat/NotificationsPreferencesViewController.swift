@@ -25,6 +25,13 @@ final class NotificationsPreferencesViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+
+        // TODO: localize
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveSettings))
+    }
+
+    @objc private func saveSettings() {
+        // TODO: POST saveNotifications
     }
 
     override func viewDidAppear(_ animated: Bool) {

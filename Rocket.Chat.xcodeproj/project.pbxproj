@@ -32,6 +32,7 @@
 		142F98B82081E8F30079FFD0 /* NotificationsSettings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 142F98B72081E8F30079FFD0 /* NotificationsSettings.storyboard */; };
 		142F98BA2081F3B90079FFD0 /* Dynamic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F98B92081F3B90079FFD0 /* Dynamic.swift */; };
 		142F98BF2082AB5B0079FFD0 /* SubscriptionGetOneRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F98BE2082AB5B0079FFD0 /* SubscriptionGetOneRequest.swift */; };
+		142F98C42083C39F0079FFD0 /* DropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 142F98C32083C39F0079FFD0 /* DropDownMenu.swift */; };
 		1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1435BFA21F9B601600FB2768 /* RCTextView.swift */; };
 		14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14A6A83020421DF8008C210D /* ColorPickerView.swift */; };
 		14BAFADE20308EE50054A2E6 /* DrawingBrushWidthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14BAFADD20308EE50054A2E6 /* DrawingBrushWidthViewController.swift */; };
@@ -680,6 +681,7 @@
 		142F98B72081E8F30079FFD0 /* NotificationsSettings.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = NotificationsSettings.storyboard; path = Storyboards/NotificationsSettings.storyboard; sourceTree = "<group>"; };
 		142F98B92081F3B90079FFD0 /* Dynamic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dynamic.swift; sourceTree = "<group>"; };
 		142F98BE2082AB5B0079FFD0 /* SubscriptionGetOneRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionGetOneRequest.swift; sourceTree = "<group>"; };
+		142F98C32083C39F0079FFD0 /* DropDownMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenu.swift; sourceTree = "<group>"; };
 		1435BFA21F9B601600FB2768 /* RCTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCTextView.swift; sourceTree = "<group>"; };
 		1499781C1FA605CE007E013D /* pl */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pl; path = pl.lproj/Localizable.strings; sourceTree = "<group>"; };
 		14A6A83020421DF8008C210D /* ColorPickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ColorPickerView.swift; path = Views/ColorPicker/ColorPickerView.swift; sourceTree = "<group>"; };
@@ -1396,6 +1398,14 @@
 			name = CreateChannel;
 			sourceTree = "<group>";
 		};
+		142F98C22083C3800079FFD0 /* DropDown */ = {
+			isa = PBXGroup;
+			children = (
+				142F98C32083C39F0079FFD0 /* DropDownMenu.swift */,
+			);
+			path = DropDown;
+			sourceTree = "<group>";
+		};
 		14A6A82F20421DED008C210D /* Color Picker */ = {
 			isa = PBXGroup;
 			children = (
@@ -1660,6 +1670,7 @@
 		4161332F1D46CA2800E09DA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				142F98C22083C3800079FFD0 /* DropDown */,
 				41C275DD1D847FEE003C88CF /* Avatar */,
 				897083CC1F8CF08100233561 /* Form */,
 				416133301D46CA3100E09DA2 /* Cells */,
@@ -3830,6 +3841,7 @@
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
 				80DC9A6C206BA95600032BE0 /* Localized.swift in Sources */,
+				142F98C42083C39F0079FFD0 /* DropDownMenu.swift in Sources */,
 				14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* SubscriptionCreateRequest.swift in Sources */,

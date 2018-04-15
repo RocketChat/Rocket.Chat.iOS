@@ -13,7 +13,7 @@
         <scene sceneID="oDZ-UZ-Io5">
             <objects>
                 <tableViewController id="lok-Kf-5pZ" customClass="NotificationsPreferencesViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ZhN-2d-2mL">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="ZhN-2d-2mL">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -96,26 +96,30 @@
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hak-jB-1Is">
-                                            <rect key="frame" x="51.5" y="8" width="315.5" height="27.5"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I40-Pq-b0S" customClass="DropDownMenu" customModule="Rocket_Chat" customModuleProvider="target">
+                                            <rect key="frame" x="51.5" y="8" width="315.5" height="28"/>
+                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="string" keyPath="placeholder" value="Placeholder"/>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                    <color key="value" red="0.23529411759999999" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
+                                        </view>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="hak-jB-1Is" firstAttribute="leading" secondItem="h9u-73-IX5" secondAttribute="trailing" constant="4" id="48E-jE-aPb"/>
+                                        <constraint firstItem="I40-Pq-b0S" firstAttribute="top" secondItem="Fmy-8w-9WV" secondAttribute="top" constant="8" id="3UM-mg-oba"/>
                                         <constraint firstItem="h9u-73-IX5" firstAttribute="leading" secondItem="Fmy-8w-9WV" secondAttribute="leading" constant="8" id="Buw-UX-XOZ"/>
-                                        <constraint firstAttribute="trailing" secondItem="hak-jB-1Is" secondAttribute="trailing" constant="8" id="OXU-l9-fRs"/>
-                                        <constraint firstItem="hak-jB-1Is" firstAttribute="top" secondItem="Fmy-8w-9WV" secondAttribute="top" constant="8" id="Q50-C5-v4t"/>
+                                        <constraint firstAttribute="bottom" secondItem="I40-Pq-b0S" secondAttribute="bottom" constant="8" id="POf-Rp-wpM"/>
                                         <constraint firstItem="h9u-73-IX5" firstAttribute="top" secondItem="Fmy-8w-9WV" secondAttribute="top" constant="8" id="eNd-I7-t4t"/>
+                                        <constraint firstAttribute="trailing" secondItem="I40-Pq-b0S" secondAttribute="trailing" constant="8" id="md8-xa-Sqb"/>
                                         <constraint firstAttribute="bottom" secondItem="h9u-73-IX5" secondAttribute="bottom" constant="8" id="n10-s2-QNA"/>
-                                        <constraint firstAttribute="bottom" secondItem="hak-jB-1Is" secondAttribute="bottom" constant="8" id="sLK-sg-k8J"/>
+                                        <constraint firstItem="I40-Pq-b0S" firstAttribute="leading" secondItem="h9u-73-IX5" secondAttribute="trailing" constant="4" id="vGB-gX-hqU"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
                                     <outlet property="titleLabel" destination="h9u-73-IX5" id="52l-rD-al4"/>
-                                    <outlet property="valueLabel" destination="hak-jB-1Is" id="eCz-cq-1XC"/>
+                                    <outlet property="valueField" destination="I40-Pq-b0S" id="NTc-gQ-ZmY"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -127,7 +131,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Ss-q7-9jP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="289" y="-681"/>
+            <point key="canvasLocation" x="288.80000000000001" y="-681.40929535232385"/>
         </scene>
     </scenes>
 </document>

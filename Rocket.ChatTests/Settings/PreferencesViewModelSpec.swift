@@ -56,7 +56,7 @@ class PreferencesViewModelSpec: XCTestCase {
     func testNumberOfRowsInSection() {
         XCTAssertTrue(model.numberOfSections == 4, "incorrect sections number")
         XCTAssertTrue(model.numberOfRowsInSection(0) == 1, "incorrect rows number")
-        var rowsInSecondSection = 4
+        var rowsInSecondSection = 3
         if #available(iOS 10.3, *) {
             if UIApplication.shared.supportsAlternateIcons {
                 rowsInSecondSection += 1

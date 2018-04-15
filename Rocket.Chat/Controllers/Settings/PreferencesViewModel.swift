@@ -27,10 +27,6 @@ final class PreferencesViewModel {
         return localized("myaccount.settings.contactus")
     }
 
-    internal var notifications: String {
-        return localized("myaccount.settings.notifications")
-    }
-
     internal var license: String {
         return localized("myaccount.settings.license")
     }

@@ -35,12 +35,6 @@ final class PreferencesViewController: UITableViewController {
         }
     }
 
-    @IBOutlet weak var labelNotifications: UILabel! {
-        didSet {
-            labelNotifications.text = viewModel.notifications
-        }
-    }
-
     @IBOutlet weak var labelLicense: UILabel! {
         didSet {
             labelLicense.text = viewModel.license
@@ -113,10 +107,6 @@ final class PreferencesViewController: UITableViewController {
         present(controller, animated: true, completion: nil)
     }
 
-    private func cellNotificationsDidPressed() {
-        performSegue(withIdentifier: "Notifications", sender: nil)
-    }
-
     // MARK: Navigation
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -142,10 +132,8 @@ final class PreferencesViewController: UITableViewController {
             if indexPath.row == 0 {
                 cellContactDidPressed()
             } else if indexPath.row == 1 {
-                cellNotificationsDidPressed()
-            } else if indexPath.row == 2 {
                 cellLanguageDidPressed()
-            } else if indexPath.row == 3 {
+            } else if indexPath.row == 2 {
                 cellAppIconDidPressed()
             }
         } else if indexPath.section == kSectionInformation {

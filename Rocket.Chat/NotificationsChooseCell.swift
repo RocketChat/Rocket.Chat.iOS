@@ -21,9 +21,12 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
         }
     }
 
-    @IBOutlet weak var resetLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var valueLabel: UILabel!
+    @IBOutlet weak var valueField: DropDownMenu! {
+        didSet {
+            valueField.options = ["1", "2", "3", "4"]
+        }
+    }
 
     var cellModel: NotificationSettingModel? {
         didSet {
@@ -33,7 +36,7 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
             titleLabel.text = model.title
             model.value.bindAndFire { [unowned self] value in
-                self.valueLabel.text = value
+                self.valueField.defaultValue = value
             }
         }
     }
