@@ -11,22 +11,20 @@ import UIKit
 final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol {
     struct SettingModel: NotificationSettingModel {
         let value: Dynamic<String>
+        let options: [String]
         var type: NotificationCellType
         let title: String
 
-        init(value: Dynamic<String>, type: NotificationCellType, title: String) {
+        init(value: Dynamic<String>, options: [String], type: NotificationCellType, title: String) {
             self.value = value
+            self.options = options
             self.type = type
             self.title = title
         }
     }
 
     @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var valueField: DropDownMenu! {
-        didSet {
-            valueField.options = ["1", "2", "3", "4"]
-        }
-    }
+    @IBOutlet weak var valueField: DropDownMenu!
 
     var cellModel: NotificationSettingModel? {
         didSet {
@@ -35,6 +33,7 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
             }
 
             titleLabel.text = model.title
+            valueField.options = model.options
             model.value.bindAndFire { [unowned self] value in
                 self.valueField.defaultValue = value
             }
