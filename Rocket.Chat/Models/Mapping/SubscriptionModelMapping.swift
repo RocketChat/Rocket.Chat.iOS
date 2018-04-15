@@ -42,13 +42,30 @@ extension Subscription: ModelMappeable {
         }
 
         self.disableNotifications = values["disableNotifications"].bool ?? false
-        self.emailNotifications = values["emailNotifications"].string
-        self.audioNotificationValue = values["audioNotificationValue"].string
+        self.hideUnreadStatus = values["hideUnreadStatus"].bool ?? false
+        if let desktopNotificationsString = values["desktopNotifications"].string {
+            self.desktopNotifications = SubscriptionNotificationsStatus(rawValue: desktopNotificationsString) ?? .default
+        }
+
+        if let audioNotificationsString = values["audioNotifications"].string {
+            self.audioNotifications = SubscriptionNotificationsStatus(rawValue: audioNotificationsString) ?? .default
+        }
+
+        if let mobilePushNotificationsString = values["mobilePushNotifications"].string {
+            self.mobilePushNotifications = SubscriptionNotificationsStatus(rawValue: mobilePushNotificationsString) ?? .default
+        }
+
+        if let emailNotificationsString = values["emailNotifications"].string {
+            self.emailNotifications = SubscriptionNotificationsStatus(rawValue: emailNotificationsString) ?? .default
+        }
+
+        if let audioNotificationValueString = values["audioNotificationValue"].string {
+            self.audioNotificationValue = SubscriptionNotificationsAudioValue(rawValue: audioNotificationValueString) ?? .default
+        }
+
         if let duration = values["desktopNotificationDuration"].int {
             self.desktopNotificationDuration = duration
         }
-        self.audioNotifications = values["audioNotifications"].stringValue
-        self.mobilePushNotifications = values["mobilePushNotifications"].stringValue
     }
 
     func mapRoom(_ values: JSON) {

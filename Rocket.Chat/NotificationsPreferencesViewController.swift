@@ -23,8 +23,8 @@ final class NotificationsPreferencesViewController: UITableViewController {
         }
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
         guard let subscription = subscription else {
             return
@@ -37,15 +37,15 @@ final class NotificationsPreferencesViewController: UITableViewController {
             }
 
             self.viewModel.enableModel.value.value = !subscription.disableNotifications
-            self.viewModel.counterModel.value.value = false // TODO: ???
-//            self.viewModel.desktopAlertsModel.value.value // TODO: ???
-//            self.viewModel.desktopAudioModel.value.value // TODO: ???
-//            self.viewModel.desktopSoundModel.value.value // TODO: ???
-            self.viewModel.desktopDurationModel.value.value = String(subscription.desktopNotificationDuration)
-            self.viewModel.mobileAlertsModel.value.value = subscription.mobilePushNotifications ?? "placeholder"
-            self.viewModel.mailAlertsModel.value.value = subscription.emailNotifications ?? "placeholder"
+            self.viewModel.counterModel.value.value = !subscription.hideUnreadStatus
+            self.viewModel.desktopAlertsModel.value.value = subscription.desktopNotifications.rawValue
+            self.viewModel.desktopAudioModel.value.value = subscription.audioNotifications.rawValue
+            self.viewModel.desktopSoundModel.value.value = subscription.audioNotificationValue.rawValue
+            self.viewModel.desktopDurationModel.value.value = subscription.desktopNotificationDuration > 0 ? "\(String(subscription.desktopNotificationDuration)) seconds" : "default"
+            self.viewModel.mobileAlertsModel.value.value = subscription.mobilePushNotifications.rawValue
+            self.viewModel.mailAlertsModel.value.value = subscription.emailNotifications.rawValue
 
-            }, errored: { error in
+            }, errored: { _ in
                 Alert.defaultError.present()
         })
     }
