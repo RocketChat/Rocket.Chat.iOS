@@ -97,6 +97,8 @@ final class AuthSettings: BaseModel {
     @objc dynamic var messageAllowEditing: Bool = true
     @objc dynamic var messageAllowEditingBlockEditInMinutes: Int = 0
 
+    @objc dynamic var messageMaxAllowedSize: Int = 0
+
     // Custom fields
     @objc dynamic var rawCustomFields: String?
 }
