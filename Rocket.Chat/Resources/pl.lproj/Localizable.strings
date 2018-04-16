@@ -254,7 +254,7 @@
 // Change Language
 "myaccount.settings.language.title" = "Zmień język";
 "myaccount.settings.language.reset" = "Przywróć domyślny język";
-"myaccount.settings.language.message" = "Ustawienia języka zostały zmienione. Musisz ponownie uruchomić Rocket.Chat+ aby nowe ustawienia zostały zastosowane.";
+"myaccount.settings.language.message" = "Ustawienia języka zostały zmienione. Musisz ponownie uruchomić Rocket.Chat aby nowe ustawienia zostały zastosowane.";
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
