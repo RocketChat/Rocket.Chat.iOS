@@ -14,7 +14,9 @@ extension ChatViewController {
         replyView = ReplyView.instantiateFromNib()
         replyView.backgroundColor = textInputbar.addonContentView.backgroundColor
         replyView.frame = textInputbar.addonContentView.bounds
-        replyView.onClose = stopReplying
+        replyView.onClose = { [weak self] in
+            self?.stopReplying()
+        }
 
         textInputbar.addonContentView.addSubview(replyView)
     }
