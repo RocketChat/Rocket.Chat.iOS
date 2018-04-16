@@ -133,14 +133,13 @@ final class ConnectServerViewController: BaseViewController {
 
     func connect() {
         guard let url = url else { return infoRequestHandler.alertInvalidURL() }
-        guard let socketURL = url.socketURL() else { return infoRequestHandler.alertInvalidURL() }
 
         connecting = true
         textFieldServerURL.alpha = 0.5
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
 
-        if AppManager.changeToServerIfExists(serverUrl: url.absoluteString) {
+        if AppManager.changeToServerIfExists(serverUrl: url) {
             return
         }
 
@@ -151,6 +150,7 @@ final class ConnectServerViewController: BaseViewController {
     func connectWebSocket() {
         guard let serverURL = infoRequestHandler.url else { return infoRequestHandler.alertInvalidURL() }
         guard let socketURL = infoRequestHandler.url?.socketURL() else { return infoRequestHandler.alertInvalidURL() }
+        let serverVersion = infoRequestHandler.version
 
         SocketManager.connect(socketURL) { [weak self] (_, connected) in
             if !connected {
@@ -166,7 +166,7 @@ final class ConnectServerViewController: BaseViewController {
             let index = DatabaseManager.createNewDatabaseInstance(serverURL: serverURL.absoluteString)
             DatabaseManager.changeDatabaseInstance(index: index)
 
-            AuthSettingsManager.updatePublicSettings(nil) { (settings) in
+            AuthSettingsManager.updatePublicSettings(serverVersion: serverVersion, apiHost: serverURL, nil) { (settings) in
                 self?.serverPublicSettings = settings
 
                 if connected {

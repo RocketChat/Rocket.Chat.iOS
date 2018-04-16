@@ -223,6 +223,7 @@
 "chat.info.item.members" = "Membres";
 "chat.info.item.pinned" = "Épinglé";
 "chat.info.item.starred" = "Mis en favoris";
+"chat.info.item.mentions" = "Mentions"; // TODO
 
 // Members List
 "chat.members.list.title" = "Membres";
@@ -232,6 +233,7 @@
 "chat.messages.list.empty" = "Aucun messages trouvé";
 "chat.messages.pinned.list.title" = "Messages épinglés";
 "chat.messages.starred.list.title" = "Messages favoris";
+"chat.messages.mentions.list.title" = "Mentions"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Réglages"; // TODO: new text: Preferences
@@ -245,14 +247,14 @@
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choisir une icône";
-"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of icons below, whichever you like the most."; // TODO:
+"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat icon looks like on your device. Please choose one of icons below, whichever you like the most."; // TODO:
 "myaccount.settings.changeicon.errortitle" = "Impossible de changer l'icône";
 "myaccount.settings.changeicon.iosversion" = "Alternate application icons are not supported on iOS version below 10.3"; // TODO:
 
 // Change Language
 "myaccount.settings.language.title" = "Change Language"; // TODO
 "myaccount.settings.language.reset" = "Reset to Default"; // TODO
-"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+  before the new settings will take effect."; // TODO
+"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat  before the new settings will take effect."; // TODO
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";

@@ -97,7 +97,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     var currentPassword: String?
     var user: User? = User() {
         didSet {
-            bindUserData(shouldRefreshAvatar: avatarView.clearImageCacheOnNextLoad)
+            bindUserData()
         }
     }
 
@@ -138,7 +138,6 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
 
     func fetchUserData() {
         avatarButton.isHidden = true
-        avatarView.clearImageCacheOnNextLoad = true
 
         var fetchUserLoader: MBProgressHUD!
 
@@ -180,9 +179,9 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         })
     }
 
-    func bindUserData(shouldRefreshAvatar: Bool = false) {
+    func bindUserData() {
         DispatchQueue.main.async {
-            if shouldRefreshAvatar { self.avatarView.user = self.user }
+            self.avatarView.user = self.user
             self.name.text = self.user?.name
             self.username.text = self.user?.username
             self.email.text = self.user?.emails.first?.email
@@ -204,8 +203,8 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         enableUserInteraction()
     }
 
-    @objc func endEditing(shouldRefreshAvatar: Bool = false) {
-        bindUserData(shouldRefreshAvatar: shouldRefreshAvatar)
+    @objc func endEditing() {
+        bindUserData()
 
         navigationItem.title = viewModel.title
         navigationItem.hidesBackButton = false
@@ -291,6 +290,13 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         if username != self.user?.username { userRaw["username"].string = username }
         if email != self.user?.emails.first?.email { userRaw["emails"] = [["address": email]] }
 
+        let shouldUpdateUser = name != self.user?.name || username != self.user?.username || email != self.user?.emails.first?.email
+
+        if !shouldUpdateUser {
+            update(user: nil)
+            return
+        }
+
         let user = User()
         user.map(userRaw, realm: nil)
 
@@ -332,10 +338,9 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         present(alert, animated: true)
     }
 
-    fileprivate func update(user: User) {
-        startLoading()
-
+    fileprivate func update(user: User?) {
         if let avatarFile = avatarFile {
+            startLoading()
             isUploadingAvatar = true
 
             let client = API.current()?.client(UploadClient.self)
@@ -344,9 +349,13 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                 if !weakSelf.isUpdatingUser { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
                 weakSelf.isUploadingAvatar = false
                 weakSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
-                weakSelf.avatarView.clearImageCacheOnNextLoad = true
                 weakSelf.stopLoading()
             })
+        }
+
+        guard let user = user else {
+            if !isUploadingAvatar { endEditing() }
+            return
         }
 
         let stopLoading: (_ shouldEndEditing: Bool) -> Void = { [weak self] shouldEndEditing in
@@ -354,6 +363,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             self?.stopLoading(shouldEndEditing: shouldEndEditing)
         }
 
+        if !isUploadingAvatar { startLoading() }
         isUpdatingUser = true
 
         let updateUserRequest = UpdateUserRequest(user: user, currentPassword: currentPassword)
@@ -398,7 +408,7 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     @objc func didPressCancelEditingButton() {
         avatarView.avatarPlaceholder = nil
         avatarView.imageView.image = nil
-        endEditing(shouldRefreshAvatar: true)
+        endEditing()
     }
 
     @objc func hideKeyboard() {

@@ -48,9 +48,9 @@ final class PushManager {
     }
 
     fileprivate static func getOrCreatePushId() -> String {
-        guard let pushId = UserDefaults.standard.string(forKey: kPushIdentifierKey) else {
+        guard let pushId = UserDefaults.group.string(forKey: kPushIdentifierKey) else {
             let randomId = UUID().uuidString.replacingOccurrences(of: "-", with: "")
-            UserDefaults.standard.set(randomId, forKey: kPushIdentifierKey)
+            UserDefaults.group.set(randomId, forKey: kPushIdentifierKey)
             return randomId
         }
 
@@ -58,7 +58,7 @@ final class PushManager {
     }
 
     static func getDeviceToken() -> String? {
-        guard let deviceToken = UserDefaults.standard.string(forKey: kDeviceTokenKey) else {
+        guard let deviceToken = UserDefaults.group.string(forKey: kDeviceTokenKey) else {
             return nil
         }
 
@@ -70,7 +70,7 @@ final class PushManager {
 // MARK: Handle Notifications
 
 struct PushNotification {
-    let host: String
+    let host: URL
     let username: String
     let roomId: String
     let roomType: SubscriptionType
@@ -78,7 +78,8 @@ struct PushNotification {
     init?(raw: [AnyHashable: Any]) {
         guard
             let json = JSON(parseJSON: (raw["ejson"] as? String) ?? "").dictionary,
-            let host = json["host"]?.string,
+            let hostString = json["host"]?.string,
+            let host = URL(string: hostString),
             let username = json["sender"]?["username"].string,
             let roomType = json["type"]?.string,
             let roomId = json["rid"]?.string
@@ -141,10 +142,7 @@ extension PushManager {
 
     @discardableResult
     static func handleNotification(_ notification: PushNotification, reply: String? = nil) -> Bool {
-        guard
-            let serverUrl = URL(string: notification.host)?.socketURL()?.absoluteString,
-            let index = DatabaseManager.serverIndexForUrl(serverUrl)
-        else {
+        guard let index = DatabaseManager.serverIndexForUrl(notification.host) else {
             return false
         }
 
@@ -166,7 +164,7 @@ extension PushManager {
             API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), succeeded: { _ in
                 UIApplication.shared.endBackgroundTask(backgroundTask)
             }, errored: { _ in
-                // TODO: Handle error
+                Alert.defaultError.present()
             })
         }
 
@@ -176,6 +174,10 @@ extension PushManager {
 
 class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if SocketManager.isConnected() {
+            completionHandler([])
+            return
+        }
         completionHandler([.alert, .sound])
     }
 

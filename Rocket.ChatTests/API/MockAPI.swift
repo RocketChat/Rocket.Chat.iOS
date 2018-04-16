@@ -14,7 +14,8 @@ class MockAPI: APIFetcher {
     var nextResult: JSON?
     var nextError: APIError?
 
-    func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?, succeeded: ((APIResult<R>) -> Void)?, errored: APIErrored?) {
+    @discardableResult
+    func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?, succeeded: ((APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask? {
         if let nextResult = nextResult {
             succeeded?(APIResult<R>(raw: nextResult))
         }
@@ -25,5 +26,7 @@ class MockAPI: APIFetcher {
 
         nextResult = nil
         nextError = nil
+
+        return nil
     }
 }

@@ -87,7 +87,7 @@ class AvatarViewSpec: XCTestCase {
 
         avatarView.user = user
         XCTAssertEqual(avatarView.labelInitials.text, "?", "label text will be ?")
-        XCTAssertEqual(avatarView.backgroundColor, UIColor(hex: "#000000"), "background color is black")
+        XCTAssertEqual(avatarView.backgroundColor, .black, "background color is black")
     }
 
     func testUpdateFontSizeValidNumber() {

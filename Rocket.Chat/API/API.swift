@@ -17,14 +17,16 @@ protocol APIRequestMiddleware {
 }
 
 protocol APIFetcher {
-    func fetch<R>(_ request: R, succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?)
+    @discardableResult
+    func fetch<R>(_ request: R, succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask?
+    @discardableResult
     func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?,
-                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?)
+                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask?
 }
 
 extension APIFetcher {
-    func fetch<R>(_ request: R, succeeded: ((APIResult<R>) -> Void)?, errored: APIErrored?) {
-        fetch(request, options: .none, sessionDelegate: nil, succeeded: succeeded, errored: errored)
+    func fetch<R>(_ request: R, succeeded: ((APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask? {
+        return fetch(request, options: .none, sessionDelegate: nil, succeeded: succeeded, errored: errored)
     }
 }
 
@@ -38,6 +40,14 @@ class API: APIFetcher {
 
     var authToken: String?
     var userId: String?
+
+    static let userAgent: String = {
+        let info = Bundle.main.infoDictionary
+        let appVersion = info?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        let bundleVersion = info?["CFBundleVersion"] as? String ?? "-"
+        let systemVersion = UIDevice.current.systemVersion
+        return "RC Mobile; iOS \(systemVersion); v\(appVersion) (\(bundleVersion))"
+    }()
 
     convenience init?(host: String, version: Version = .zero) {
         guard let url = URL(string: host)?.httpServerURL() else {
@@ -54,19 +64,20 @@ class API: APIFetcher {
         requestMiddlewares.append(VersionMiddleware(api: self))
     }
 
+    @discardableResult
     func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,
-                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) {
+                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask? {
         var transformedRequest = request
         for middleware in requestMiddlewares {
             if let error = middleware.handle(&transformedRequest) {
                 errored?(error)
-                return
+                return nil
             }
         }
 
         guard let request = transformedRequest.request(for: self, options: options) else {
             errored?(.malformedRequest)
-            return
+            return nil
         }
 
         var session: URLSession = URLSession.shared
@@ -98,5 +109,7 @@ class API: APIFetcher {
         }
 
         task.resume()
+
+        return task
     }
 }
