@@ -23,6 +23,17 @@ final class NotificationsPreferencesViewModel {
         return localized("myaccount.settings.notifications.title")
     }
 
+    internal var notificationPreferences: NotificationPreferences {
+        return NotificationPreferences.init(desktopNotifications: desktopAlertsModel.value.value,
+                                            disableNotifications: !enableModel.value.value,
+                                            emailNotifications: mailAlertsModel.value.value,
+                                            audioNotificationValue: desktopSoundModel.value.value,
+                                            desktopNotificationDuration: Int(desktopDurationModel.value.value) ?? 0,
+                                            audioNotifications: desktopAudioModel.value.value,
+                                            hideUnreadStatus: !counterModel.value.value,
+                                            mobilePushNotifications: mobileAlertsModel.value.value)
+    }
+
     internal let enableModel = NotificationsSwitchCell.SettingModel(value: Dynamic(false),
                                                                     type: .switch,
                                                                     leftTitle: localized("myaccount.settings.notifications.mute.title"),

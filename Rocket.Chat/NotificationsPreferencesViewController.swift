@@ -26,27 +26,43 @@ final class NotificationsPreferencesViewController: UITableViewController {
             }
         }
 
-        // TODO: localize
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .done, target: self, action: #selector(saveSettings))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: localized("myaccount.settings.notifications.save"), style: .done, target: self, action: #selector(saveSettings))
     }
 
     @objc private func saveSettings() {
-        // TODO: POST saveNotifications
+        guard let subscription = subscription else {
+            Alert(key: "alert.update_notifications_preferences_save_error").present()
+            return
+        }
+
+        let saveNotificationsRequest = SaveNotificationRequest(rid: subscription.rid, notificationPreferences: viewModel.notificationPreferences)
+        API.current()?.fetch(saveNotificationsRequest, succeeded: { [weak self] result in
+            if let errorMessage = result.errorMessage {
+                Alert(key: "alert.update_notifications_preferences_save_error").withMessage(errorMessage).present()
+                return
+            }
+
+            self?.alertSuccess(title: localized("alert.update_notifications_preferences_success.title"))
+            }, errored: { _ in
+                Alert(key: "alert.update_notifications_preferences_save_error").present()
+        })
+
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
 
-//        guard let subscription = subscription else {
-//            return
-//        }
+        guard let subscription = subscription else {
+            return
+        }
+
         // TODO: Do we actually have to call it since we already have subscription fetched? What about updating subscription after changing settings though?
-//        let request = SubscriptionGetOneRequest(roomId: subscription.rid)
-//        API.current()?.fetch(request, succeeded: { result in
-//            self.updateModel(subscription: result.subscription)
-//        }, errored: { _ in
-//            Alert.defaultError.present()
-//        })
+        let request = SubscriptionGetOneRequest(roomId: subscription.rid)
+        API.current()?.fetch(request, succeeded: { result in
+            self.updateModel(subscription: result.subscription)
+        }, errored: { _ in
+            Alert.defaultError.present()
+        })
     }
 
     private func updateModel(subscription: Subscription?) {

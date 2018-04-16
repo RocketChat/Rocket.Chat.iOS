@@ -46,8 +46,6 @@ enum SubscriptionNotificationsStatus: String, CaseIterable {
     case nothing
     case all
     case mentions
-
-//    static let allValues = [`default`, nothing, all, mentions]
 }
 
 enum SubscriptionNotificationsAudioValue: String, CaseIterable {
@@ -59,8 +57,6 @@ enum SubscriptionNotificationsAudioValue: String, CaseIterable {
     case droplet
     case highbell
     case seasons
-
-//    static let allValues = [none, `default`, beep, chelle, ding, droplet, highbell, seasons]
 }
 
 class Subscription: BaseModel {

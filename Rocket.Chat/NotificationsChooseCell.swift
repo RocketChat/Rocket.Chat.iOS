@@ -44,6 +44,10 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
             titleLabel.text = model.title
             valueField.options = model.options
+            valueField.didSelectItem = { index in
+                model.value.value = model.options[index]
+            }
+
             model.value.bindAndFire { [unowned self] value in
                 self.valueField.defaultValue = value
             }
