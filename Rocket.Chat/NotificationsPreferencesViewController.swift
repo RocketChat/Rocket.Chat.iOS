@@ -57,12 +57,12 @@ final class NotificationsPreferencesViewController: UITableViewController {
         }
 
         // TODO: Do we actually have to call it since we already have subscription fetched? What about updating subscription after changing settings though?
-        let request = SubscriptionGetOneRequest(roomId: subscription.rid)
-        API.current()?.fetch(request, succeeded: { result in
-            self.updateModel(subscription: result.subscription)
-        }, errored: { _ in
-            Alert.defaultError.present()
-        })
+//        let request = SubscriptionGetOneRequest(roomId: subscription.rid)
+//        API.current()?.fetch(request, succeeded: { result in
+//            self.updateModel(subscription: result.subscription)
+//        }, errored: { _ in
+//            Alert.defaultError.present()
+//        })
     }
 
     private func updateModel(subscription: Subscription?) {
