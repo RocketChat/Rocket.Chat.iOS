@@ -25,6 +25,7 @@
 		0BC0E8652032DF9B004BFAAF /* DrawingViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */; };
 		0BE9981B2084A2AD004FE3E1 /* SaveNotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE9981A2084A2AD004FE3E1 /* SaveNotificationRequest.swift */; };
 		0BE9981E2084A897004FE3E1 /* NotificationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE9981D2084A897004FE3E1 /* NotificationPreferences.swift */; };
+		0BE998212084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE998202084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift */; };
 		140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */; };
 		140A95E1202F526C003FD564 /* Drawing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140A95E0202F526C003FD564 /* Drawing.storyboard */; };
 		140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95E3202F536D003FD564 /* DrawingViewController.swift */; };
@@ -675,6 +676,7 @@
 		0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModelSpec.swift; sourceTree = "<group>"; };
 		0BE9981A2084A2AD004FE3E1 /* SaveNotificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNotificationRequest.swift; sourceTree = "<group>"; };
 		0BE9981D2084A897004FE3E1 /* NotificationPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferences.swift; sourceTree = "<group>"; };
+		0BE998202084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNotificationRequestSpec.swift; sourceTree = "<group>"; };
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconViewModelSpec.swift; path = Settings/ChangeAppIconViewModelSpec.swift; sourceTree = "<group>"; };
 		140A95E0202F526C003FD564 /* Drawing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
@@ -1373,6 +1375,14 @@
 			isa = PBXGroup;
 			children = (
 				0BE9981D2084A897004FE3E1 /* NotificationPreferences.swift */,
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		0BE9981F2084BF84004FE3E1 /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+				0BE998202084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift */,
 			);
 			path = Notifications;
 			sourceTree = "<group>";
@@ -2893,6 +2903,7 @@
 		D18675E81F70A56800406FB4 /* Requests */ = {
 			isa = PBXGroup;
 			children = (
+				0BE9981F2084BF84004FE3E1 /* Notifications */,
 				807C7C0A20751F06006B600E /* General */,
 				998165C8204EBB5E0059D346 /* User */,
 				8013F88A1FD6B79900EE1A4E /* Command */,
@@ -3906,6 +3917,7 @@
 				802498F11F7A9BB4005477EC /* MeRequestSpec.swift in Sources */,
 				411D76E71F39FA7B00B0A8DF /* AuthSettingsManagerSpec.swift in Sources */,
 				9921BFAC2075AF5F00BB027A /* PublicSettingsRequestSpec.swift in Sources */,
+				0BE998212084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift in Sources */,
 				8013F87D1FD6B64500EE1A4E /* VersionSpec.swift in Sources */,
 				D1411A2A1F6777F300D6EDF7 /* ChannelSpec.swift in Sources */,
 				80A63C571F71D2E400FE5AC4 /* APISpec.swift in Sources */,
