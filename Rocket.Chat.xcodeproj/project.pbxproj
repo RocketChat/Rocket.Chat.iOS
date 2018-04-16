@@ -27,6 +27,7 @@
 		0BE9981E2084A897004FE3E1 /* NotificationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE9981D2084A897004FE3E1 /* NotificationPreferences.swift */; };
 		0BE998212084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE998202084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift */; };
 		0BE998232084C5BC004FE3E1 /* SubscriptionGetOneRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE998222084C5BC004FE3E1 /* SubscriptionGetOneRequestSpec.swift */; };
+		0BE998262084DAA1004FE3E1 /* NotificationsPreferencesViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE998252084DAA1004FE3E1 /* NotificationsPreferencesViewModelSpec.swift */; };
 		140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */; };
 		140A95E1202F526C003FD564 /* Drawing.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 140A95E0202F526C003FD564 /* Drawing.storyboard */; };
 		140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 140A95E3202F536D003FD564 /* DrawingViewController.swift */; };
@@ -679,6 +680,7 @@
 		0BE9981D2084A897004FE3E1 /* NotificationPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferences.swift; sourceTree = "<group>"; };
 		0BE998202084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNotificationRequestSpec.swift; sourceTree = "<group>"; };
 		0BE998222084C5BC004FE3E1 /* SubscriptionGetOneRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionGetOneRequestSpec.swift; sourceTree = "<group>"; };
+		0BE998252084DAA1004FE3E1 /* NotificationsPreferencesViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationsPreferencesViewModelSpec.swift; path = Controllers/NotificationsPreferences/NotificationsPreferencesViewModelSpec.swift; sourceTree = "<group>"; };
 		0F5191CD6C53AEA006C82524 /* Pods_Rocket_Chat.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rocket_Chat.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		140A95DD202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconViewModelSpec.swift; path = Settings/ChangeAppIconViewModelSpec.swift; sourceTree = "<group>"; };
 		140A95E0202F526C003FD564 /* Drawing.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Drawing.storyboard; sourceTree = "<group>"; };
@@ -1387,6 +1389,14 @@
 				0BE998202084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift */,
 			);
 			path = Notifications;
+			sourceTree = "<group>";
+		};
+		0BE998242084DA88004FE3E1 /* NotificationsPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				0BE998252084DAA1004FE3E1 /* NotificationsPreferencesViewModelSpec.swift */,
+			);
+			name = NotificationsPreferences;
 			sourceTree = "<group>";
 		};
 		106DAA428B5BF7289FB70C65 /* Frameworks */ = {
@@ -2953,6 +2963,7 @@
 		D1DA25261F695AC700DB6ABB /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				0BE998242084DA88004FE3E1 /* NotificationsPreferences */,
 				D1DA25241F695ABF00DB6ABB /* ChatDataControllerSpec.swift */,
 				89AFF3C71F94374D00D07A30 /* NewRoomViewControllerSpec.swift */,
 				80C110881FB62F7B00205BB1 /* OAuthViewControllerSpec.swift */,
@@ -3938,6 +3949,7 @@
 				77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */,
 				807C7C1020751F40006B600E /* SpotlightClientSpec.swift in Sources */,
 				998165CA204EBBA10059D346 /* UpdateUserRequestSpec.swift in Sources */,
+				0BE998262084DAA1004FE3E1 /* NotificationsPreferencesViewModelSpec.swift in Sources */,
 				33093DC5207C7EAF00DD81F6 /* ChatNotificationSpec.swift in Sources */,
 				9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */,
 				807A8F671F9E3D4F00CC78DB /* LoginServiceSpec.swift in Sources */,
