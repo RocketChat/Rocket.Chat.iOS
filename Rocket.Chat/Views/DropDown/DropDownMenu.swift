@@ -79,7 +79,17 @@ import UIKit
     }
 
     private var yPosition: CGFloat {
-        return dropDownRect.origin.y + self.frame.origin.y + self.frame.size.height
+        guard let parentView = parentView else {
+            fatalError("Set parentView")
+        }
+
+        let position = dropDownRect.origin.y + self.frame.origin.y + self.frame.size.height
+
+        guard position + menuHeight > parentView.frame.size.height else {
+            return position
+        }
+
+        return dropDownRect.origin.y - menuHeight + 8
     }
 
     override init(frame: CGRect) {
@@ -104,7 +114,6 @@ import UIKit
     @objc func showOrHide() {
         if isShown {
             UIView.animate(withDuration: 0.3, animations: {
-
                 self.dropDownTableView.frame = CGRect(x: self.xPosition, y: self.yPosition, width: self.frame.size.width, height: 0)
             }, completion: { _ in
                 self.isShown = false

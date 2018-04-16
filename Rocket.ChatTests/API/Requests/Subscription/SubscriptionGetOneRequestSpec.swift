@@ -29,6 +29,7 @@ class SubscriptionGetOneRequestSpec: APISpec {
     }
 
     //swiftlint:disable function_body_length
+    //swiftlint:disable opening_brace
     func testProperties() {
         let jsonString = """
             {
