@@ -9,7 +9,10 @@
 import Foundation
 import Fabric
 import Crashlytics
+
+#if BETA || DEBUG
 import Instabug
+#endif
 
 struct BugTrackingCoordinator: LauncherProtocol {
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
@@ -28,8 +31,6 @@ struct BugTrackingCoordinator: LauncherProtocol {
 
         #if BETA || DEBUG
         Instabug.start(withToken: instabug, invocationEvent: .floatingButton)
-        #else
-        Instabug.start(withToken: instabug, invocationEvent: .shake)
         #endif
     }
 
