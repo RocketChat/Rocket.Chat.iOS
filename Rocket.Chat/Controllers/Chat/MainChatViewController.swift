@@ -47,7 +47,6 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         super.viewDidLoad()
 
         delegate = self
-
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         if let auth = AuthManager.isAuthenticated() {
