@@ -17,17 +17,8 @@ import UIKit
         }
     }
 
-    public var parentView: UIView {
-        return (superview?.superview?.superview)! // TODO: set proper parentView
-    }
-
-    private var xPosition: CGFloat {
-        return (parentView.frame.size.width - self.frame.size.width) / 2
-    }
-
-    private var yPosition: CGFloat {
-        return (parentView.frame.size.height - menuHeight) / 2
-    }
+    public var parentView: UIView?
+    public var dropDownRect: CGRect = .zero
 
     public var menuHeight: CGFloat {
         return CGFloat(options.count) * rowHeight
@@ -60,8 +51,10 @@ import UIKit
     private var valueField: UITextField!
 
     private lazy var dropDownTableView: UITableView = {
-        let xPosition = (parentView.frame.size.width - self.frame.size.width) / 2
-        let yPosition = (parentView.frame.size.height - menuHeight) / 2
+        guard let parentView = parentView else {
+            fatalError("Set parentView")
+        }
+
         let frame = CGRect(x: xPosition, y: yPosition, width: self.frame.size.width, height: 0)
 
         let table = UITableView(frame: frame, style: .plain)
@@ -80,6 +73,14 @@ import UIKit
 
     private let rowHeight: CGFloat = 20
     private var isShown = false
+
+    private var xPosition: CGFloat {
+        return dropDownRect.origin.x + self.frame.origin.x
+    }
+
+    private var yPosition: CGFloat {
+        return dropDownRect.origin.y + self.frame.origin.y + self.frame.size.height
+    }
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -100,14 +101,11 @@ import UIKit
 
         font = UIFont.systemFont(ofSize: 14)
     }
-
     @objc func showOrHide() {
-        let xPosition = (parentView.frame.size.width - self.frame.size.width) / 2
-        let yPosition = (parentView.frame.size.height - menuHeight) / 2
-
         if isShown {
             UIView.animate(withDuration: 0.3, animations: {
-                self.dropDownTableView.frame = CGRect(x: xPosition, y: yPosition, width: self.frame.size.width, height: 0)
+
+                self.dropDownTableView.frame = CGRect(x: self.xPosition, y: self.yPosition, width: self.frame.size.width, height: 0)
             }, completion: { _ in
                 self.isShown = false
             })
@@ -115,7 +113,7 @@ import UIKit
             dropDownTableView.reloadData()
 
             UIView.animate(withDuration: 0.3, animations: {
-                self.dropDownTableView.frame = CGRect(x: xPosition, y: yPosition, width: self.frame.size.width, height: self.menuHeight)
+                self.dropDownTableView.frame = CGRect(x: self.xPosition, y: self.yPosition, width: self.frame.size.width, height: self.menuHeight)
             }, completion: { _ in
                 self.isShown = true
             })
@@ -127,12 +125,9 @@ import UIKit
             return
         }
 
-        let xPosition = (parentView.frame.size.width - self.frame.size.width) / 2
-        let yPosition = (parentView.frame.size.height - menuHeight) / 2
-
         dropDownTableView.reloadData()
         UIView.animate(withDuration: 0.3) {
-            self.dropDownTableView.frame = CGRect(x: xPosition, y: yPosition, width: self.frame.size.width, height: self.menuHeight)
+            self.dropDownTableView.frame = CGRect(x: self.xPosition, y: self.yPosition, width: self.frame.size.width, height: self.menuHeight)
         }
     }
 
@@ -168,7 +163,6 @@ extension DropDownMenu: UITableViewDelegate, UITableViewDataSource {
     }
 
     public func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-
         cell.textLabel?.text = options[indexPath.row]
         cell.textLabel?.font = font
         cell.textLabel?.textColor = textColor

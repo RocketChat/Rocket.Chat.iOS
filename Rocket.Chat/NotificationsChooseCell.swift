@@ -23,8 +23,18 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
         }
     }
 
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var valueField: DropDownMenu!
+    @IBOutlet private weak var titleLabel: UILabel!
+    @IBOutlet private weak var valueField: DropDownMenu!
+    weak var tableView: UITableView? {
+        didSet {
+            valueField.parentView = tableView
+        }
+    }
+    var dropDownRect: CGRect = .zero {
+        didSet {
+            valueField.dropDownRect = dropDownRect
+        }
+    }
 
     var cellModel: NotificationSettingModel? {
         didSet {
