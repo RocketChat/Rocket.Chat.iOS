@@ -46,7 +46,6 @@ class SaveNotificationRequestSpec: APITestCase {
         XCTAssertEqual(bodyJson["notifications"]["hideUnreadStatus"].string, notificationPreferences.hideUnreadStatus ? "1" : "0", "hideUnreadStatus is correct")
     }
 
-    //swiftlint:disable opening_brace
     func testResult() {
         let jsonString = """
         {
