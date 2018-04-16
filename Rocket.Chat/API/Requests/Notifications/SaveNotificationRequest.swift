@@ -31,10 +31,10 @@ class SaveNotificationRequest: APIRequest {
             ])
 
         body["notifications"]["disableNotifications"].string = notificationPreferences.disableNotifications ? "1" : "0"
-        body["notifications"]["emailNotifications"].string = notificationPreferences.emailNotifications
-        body["notifications"]["audioNotifications"].string = notificationPreferences.audioNotifications
-        body["notifications"]["mobilePushNotifications"].string = notificationPreferences.mobilePushNotifications
-        body["notifications"]["audioNotificationValue"].string = notificationPreferences.audioNotificationValue
+        body["notifications"]["emailNotifications"].string = notificationPreferences.emailNotifications.rawValue
+        body["notifications"]["audioNotifications"].string = notificationPreferences.audioNotifications.rawValue
+        body["notifications"]["mobilePushNotifications"].string = notificationPreferences.mobilePushNotifications.rawValue
+        body["notifications"]["audioNotificationValue"].string = notificationPreferences.audioNotificationValue.rawValue
         body["notifications"]["desktopNotificationDuration"].string = String(notificationPreferences.desktopNotificationDuration)
         body["notifications"]["hideUnreadStatus"].string = notificationPreferences.hideUnreadStatus ? "1" : "0"
 

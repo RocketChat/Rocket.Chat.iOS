@@ -48,22 +48,22 @@ class NotificationsPreferencesViewModelSpec: XCTestCase {
     func testCellModels() {
         model.enableModel.value.value = true
         model.counterModel.value.value = false
-        model.desktopAlertsModel.value.value = SubscriptionNotificationsStatus.mentions.rawValue
-        model.desktopAudioModel.value.value = SubscriptionNotificationsStatus.mentions.rawValue
-        model.desktopSoundModel.value.value = SubscriptionNotificationsAudioValue.chelle.rawValue
-        model.desktopDurationModel.value.value = String(2)
-        model.mobileAlertsModel.value.value = SubscriptionNotificationsStatus.mentions.rawValue
-        model.mailAlertsModel.value.value = SubscriptionNotificationsStatus.mentions.rawValue
+        model.desktopAlertsModel.value.value = .mentions
+        model.desktopAudioModel.value.value = .mentions
+        model.desktopSoundModel.value.value = .chelle
+        model.desktopDurationModel.value.value = 2
+        model.mobileAlertsModel.value.value = .mentions
+        model.mailAlertsModel.value.value = .mentions
 
         let notificationPreferences = model.notificationPreferences
-        XCTAssertEqual(notificationPreferences.desktopNotifications, SubscriptionNotificationsStatus.mentions.rawValue)
+        XCTAssertEqual(notificationPreferences.desktopNotifications, .mentions)
         XCTAssertEqual(notificationPreferences.disableNotifications, false)
-        XCTAssertEqual(notificationPreferences.emailNotifications, SubscriptionNotificationsStatus.mentions.rawValue)
-        XCTAssertEqual(notificationPreferences.audioNotificationValue, SubscriptionNotificationsAudioValue.chelle.rawValue)
+        XCTAssertEqual(notificationPreferences.emailNotifications, .mentions)
+        XCTAssertEqual(notificationPreferences.audioNotificationValue, .chelle)
         XCTAssertEqual(notificationPreferences.desktopNotificationDuration, 2)
-        XCTAssertEqual(notificationPreferences.audioNotifications, SubscriptionNotificationsStatus.mentions.rawValue)
+        XCTAssertEqual(notificationPreferences.audioNotifications, .mentions)
         XCTAssertEqual(notificationPreferences.hideUnreadStatus, true)
-        XCTAssertEqual(notificationPreferences.mobilePushNotifications, SubscriptionNotificationsStatus.mentions.rawValue)
+        XCTAssertEqual(notificationPreferences.mobilePushNotifications, .mentions)
     }
 
     func testStringsOverall() {

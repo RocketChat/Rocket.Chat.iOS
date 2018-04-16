@@ -9,13 +9,13 @@
 import UIKit
 
 final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol {
-    struct SettingModel: NotificationSettingModel {
-        let value: Dynamic<String>
-        let options: [String]
+    struct SettingModel<T>: NotificationSettingModel {
+        let value: Dynamic<T>
+        let options: [T]
         var type: NotificationCellType
         let title: String
 
-        init(value: Dynamic<String>, options: [String], type: NotificationCellType, title: String) {
+        init(value: Dynamic<T>, options: [T], type: NotificationCellType, title: String) {
             self.value = value
             self.options = options
             self.type = type
@@ -38,19 +38,63 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
     var cellModel: NotificationSettingModel? {
         didSet {
-            guard let model = cellModel as? SettingModel else {
-                return
-            }
+            configureStatusEnumModel()
+            configureAudioEnumModel()
+            configureIntModel()
+        }
+    }
 
-            titleLabel.text = model.title
-            valueField.options = model.options
-            valueField.didSelectItem = { index in
-                model.value.value = model.options[index]
-            }
+    private func configureStatusEnumModel() {
+        guard let model = cellModel as? SettingModel<SubscriptionNotificationsStatus> else {
+            return
+        }
 
-            model.value.bindAndFire { [unowned self] value in
-                self.valueField.defaultValue = value
-            }
+        titleLabel.text = model.title
+        valueField.options = model.options.map({ status -> String in
+            status.rawValue
+        })
+        valueField.didSelectItem = { index in
+            model.value.value = model.options[index]
+        }
+
+        model.value.bindAndFire { [unowned self] value in
+            self.valueField.defaultValue = value.rawValue
+        }
+    }
+
+    private func configureAudioEnumModel() {
+        guard let model = cellModel as? SettingModel<SubscriptionNotificationsAudioValue> else {
+            return
+        }
+
+        titleLabel.text = model.title
+        valueField.options = model.options.map({ status -> String in
+            status.rawValue
+        })
+        valueField.didSelectItem = { index in
+            model.value.value = model.options[index]
+        }
+
+        model.value.bindAndFire { [unowned self] value in
+            self.valueField.defaultValue = value.rawValue
+        }
+    }
+
+    private func configureIntModel() {
+        guard let model = cellModel as? SettingModel<Int> else {
+            return
+        }
+
+        titleLabel.text = model.title
+        valueField.options = model.options.map({ seconds -> String in
+            "\(seconds) seconds"
+        })
+        valueField.didSelectItem = { index in
+            model.value.value = model.options[index]
+        }
+
+        model.value.bindAndFire { [unowned self] value in
+            self.valueField.defaultValue = value == 0 ? "default" : "\(value) seconds"
         }
     }
 }

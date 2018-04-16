@@ -24,14 +24,14 @@ final class NotificationsPreferencesViewModel {
     }
 
     internal var notificationPreferences: NotificationPreferences {
-        return NotificationPreferences.init(desktopNotifications: desktopAlertsModel.value.value,
-                                            disableNotifications: !enableModel.value.value,
-                                            emailNotifications: mailAlertsModel.value.value,
-                                            audioNotificationValue: desktopSoundModel.value.value,
-                                            desktopNotificationDuration: Int(desktopDurationModel.value.value) ?? 0,
-                                            audioNotifications: desktopAudioModel.value.value,
-                                            hideUnreadStatus: !counterModel.value.value,
-                                            mobilePushNotifications: mobileAlertsModel.value.value)
+        return NotificationPreferences(desktopNotifications: desktopAlertsModel.value.value,
+                                       disableNotifications: !enableModel.value.value,
+                                       emailNotifications: mailAlertsModel.value.value,
+                                       audioNotificationValue: desktopSoundModel.value.value,
+                                       desktopNotificationDuration: desktopDurationModel.value.value,
+                                       audioNotifications: desktopAudioModel.value.value,
+                                       hideUnreadStatus: !counterModel.value.value,
+                                       mobilePushNotifications: mobileAlertsModel.value.value)
     }
 
     internal let enableModel = NotificationsSwitchCell.SettingModel(value: Dynamic(false),
@@ -48,43 +48,33 @@ final class NotificationsPreferencesViewModel {
                                                                      rightTitle: localized("myaccount.settings.notifications.show.title"),
                                                                      rightDescription: localized("myaccount.settings.notifications.show.description"))
 
-    internal let desktopAlertsModel = NotificationsChooseCell.SettingModel(value: Dynamic("Placeholder"),
-                                                                           options: SubscriptionNotificationsStatus.allCases.map({ (status) -> String in
-                                                                            status.rawValue
-                                                                           }),
+    internal let desktopAlertsModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsStatus.default),
+                                                                           options: SubscriptionNotificationsStatus.allCases,
                                                                            type: .list,
                                                                            title: localized("myaccount.settings.notifications.desktop.alerts"))
 
-    internal let desktopAudioModel = NotificationsChooseCell.SettingModel(value: Dynamic("Placeholder"),
-                                                                          options: SubscriptionNotificationsStatus.allCases.map({ (status) -> String in
-                                                                            status.rawValue
-                                                                          }),
+    internal let desktopAudioModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsStatus.default),
+                                                                          options: SubscriptionNotificationsStatus.allCases,
                                                                           type: .list,
                                                                           title: localized("myaccount.settings.notifications.desktop.audio"))
 
-    internal let desktopSoundModel = NotificationsChooseCell.SettingModel(value: Dynamic("Placeholder"),
-                                                                          options: SubscriptionNotificationsAudioValue.allCases.map({ (status) -> String in
-                                                                            status.rawValue
-                                                                          }),
+    internal let desktopSoundModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsAudioValue.default),
+                                                                          options: SubscriptionNotificationsAudioValue.allCases,
                                                                           type: .list,
                                                                           title: localized("myaccount.settings.notifications.desktop.sound"))
 
-    internal let desktopDurationModel = NotificationsChooseCell.SettingModel(value: Dynamic("Placeholder"),
-                                                                             options: ["0 seconds", "1 seconds", "2 seconds", "3 seconds", "4 seconds", "5 seconds"],
+    internal let desktopDurationModel = NotificationsChooseCell.SettingModel(value: Dynamic(0),
+                                                                             options: [0, 1, 2, 3, 4, 5],
                                                                              type: .list,
                                                                              title: localized("myaccount.settings.notifications.desktop.duration"))
 
-    internal let mobileAlertsModel = NotificationsChooseCell.SettingModel(value: Dynamic("Placeholder"),
-                                                                          options: SubscriptionNotificationsStatus.allCases.map({ (status) -> String in
-                                                                            status.rawValue
-                                                                          }),
+    internal let mobileAlertsModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsStatus.default),
+                                                                          options: SubscriptionNotificationsStatus.allCases,
                                                                           type: .list,
                                                                           title: localized("myaccount.settings.notifications.mobile.alerts"))
 
-    internal let mailAlertsModel = NotificationsChooseCell.SettingModel(value: Dynamic("Placeholder"),
-                                                                        options: SubscriptionNotificationsStatus.allCases.map({ (status) -> String in
-                                                                            status.rawValue
-                                                                        }),
+    internal let mailAlertsModel = NotificationsChooseCell.SettingModel(value: Dynamic(SubscriptionNotificationsStatus.default),
+                                                                        options: SubscriptionNotificationsStatus.allCases,
                                                                         type: .list,
                                                                         title: localized("myaccount.settings.notifications.email.alerts"))
 

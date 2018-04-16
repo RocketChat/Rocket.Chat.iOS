@@ -9,16 +9,23 @@
 import Foundation
 
 class NotificationPreferences {
-    let desktopNotifications: String
+    let desktopNotifications: SubscriptionNotificationsStatus
     let disableNotifications: Bool
-    let emailNotifications: String
-    let audioNotificationValue: String
+    let emailNotifications: SubscriptionNotificationsStatus
+    let audioNotificationValue: SubscriptionNotificationsAudioValue
     let desktopNotificationDuration: Int
-    let audioNotifications: String
+    let audioNotifications: SubscriptionNotificationsStatus
     let hideUnreadStatus: Bool
-    let mobilePushNotifications: String
+    let mobilePushNotifications: SubscriptionNotificationsStatus
 
-    init(desktopNotifications: String, disableNotifications: Bool, emailNotifications: String, audioNotificationValue: String, desktopNotificationDuration: Int, audioNotifications: String, hideUnreadStatus: Bool, mobilePushNotifications: String) {
+    init(desktopNotifications: SubscriptionNotificationsStatus,
+         disableNotifications: Bool,
+         emailNotifications: SubscriptionNotificationsStatus,
+         audioNotificationValue: SubscriptionNotificationsAudioValue,
+         desktopNotificationDuration: Int,
+         audioNotifications: SubscriptionNotificationsStatus,
+         hideUnreadStatus: Bool,
+         mobilePushNotifications: SubscriptionNotificationsStatus) {
         self.desktopNotifications = desktopNotifications
         self.disableNotifications = disableNotifications
         self.emailNotifications = emailNotifications
