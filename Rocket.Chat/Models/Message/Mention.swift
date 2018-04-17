@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import RealmSwift
 
-final class Mention: BaseModel {
+final class Mention: Object {
     @objc dynamic var username: String?
 }
