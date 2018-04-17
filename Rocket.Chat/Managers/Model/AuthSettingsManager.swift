@@ -40,35 +40,38 @@ final class AuthSettingsManager {
 
         let currentRealm = Realm.current
         let options = APIRequestOptions.paginated(count: 0, offset: 0)
-        api?.fetch(PublicSettingsRequest(), options: options, succeeded: { result in
-            guard result.success else {
-                completion(nil)
-                return
-            }
-
-            currentRealm?.execute({ realm in
-                let settings = result.authSettings
-                realm.add(settings, update: true)
-
-                if let auth = AuthManager.isAuthenticated(realm: realm) {
-                    auth.settings = settings
-                    realm.add(auth, update: true)
+        api?.fetch(PublicSettingsRequest(), options: options) { response in
+            switch response {
+            case .resource(let resource):
+                guard resource.success else {
+                    completion(nil)
+                    return
                 }
 
-                let unmanagedSettings = AuthSettings(value: settings)
-                shared.internalSettings = unmanagedSettings
+                currentRealm?.execute({ realm in
+                    let settings = resource.authSettings
+                    realm.add(settings, update: true)
 
-                DispatchQueue.main.async {
-                    ServerManager.updateServerInformation(from: unmanagedSettings)
-                    completion(unmanagedSettings)
+                    if let auth = AuthManager.isAuthenticated(realm: realm) {
+                        auth.settings = settings
+                        realm.add(auth, update: true)
+                    }
+
+                    let unmanagedSettings = AuthSettings(value: settings)
+                    shared.internalSettings = unmanagedSettings
+
+                    DispatchQueue.main.async {
+                        ServerManager.updateServerInformation(from: unmanagedSettings)
+                        completion(unmanagedSettings)
+                    }
+                })
+            case .error(let error):
+                switch error {
+                case .version: websocketUpdatePublicSettings(currentRealm, auth, completion: completion)
+                default: completion(nil)
                 }
-            })
-        }, errored: { error in
-            switch error {
-            case .version: websocketUpdatePublicSettings(currentRealm, auth, completion: completion)
-            default: completion(nil)
             }
-        })
+        }
     }
 
     private static func websocketUpdatePublicSettings(_ realm: Realm?, _ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings>) {

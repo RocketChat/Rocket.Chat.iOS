@@ -66,7 +66,7 @@ class SubscriptionMembersRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionMembersResult(raw: json)
+        let result = SubscriptionMembersResource(raw: json)
 
         XCTAssertEqual(result.members?.count, json["members"].count, "members is correct")
         XCTAssertEqual(result.count, 2, "count is correct")

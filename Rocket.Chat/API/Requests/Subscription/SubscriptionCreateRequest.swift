@@ -26,6 +26,8 @@ enum SubscriptionCreateType {
 }
 
 class SubscriptionCreateRequest: APIRequest {
+    typealias APIResourceType = SubscriptionCreateResource
+
     let method: HTTPMethod = .post
     var path: String {
         return type.path
@@ -54,7 +56,7 @@ class SubscriptionCreateRequest: APIRequest {
     }
 }
 
-extension APIResult where T == SubscriptionCreateRequest {
+class SubscriptionCreateResource: APIResource {
     var success: Bool? {
         return raw?["success"].boolValue
     }

@@ -8,9 +8,9 @@
 
 import SwiftyJSON
 
-typealias PushTokenDeleteResult = APIResult<PushTokenDeleteRequest>
-
 class PushTokenDeleteRequest: APIRequest {
+    typealias APIResourceType = PushTokenDeleteResource
+
     let requiredVersion = Version(0, 60, 0)
 
     let method: HTTPMethod = .delete
@@ -27,7 +27,7 @@ class PushTokenDeleteRequest: APIRequest {
     }
 }
 
-extension APIResult where T == PushTokenDeleteRequest {
+class PushTokenDeleteResource: APIResource {
     var success: Bool? {
         return raw?["success"].boolValue
     }

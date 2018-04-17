@@ -46,10 +46,10 @@ class MeRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = MeResult(raw: json)
+        let result = MeResource(raw: json)
         XCTAssertEqual(result.user?.identifier, "aobEdbYhXfu5hkeqG")
 
-        let nilResult = MeResult(raw: nil)
+        let nilResult = MeResource(raw: nil)
         XCTAssertEqual(nilResult.user, nil)
     }
 }

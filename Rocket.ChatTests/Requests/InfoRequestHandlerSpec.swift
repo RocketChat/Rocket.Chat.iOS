@@ -71,21 +71,21 @@ class InfoRequestHandlerSpec: XCTestCase {
     }
 
     func testValidateServerResponseSuccess() {
-        let result = InfoResult(raw: ["info": ["version": "0.54.0"]])
+        let result = InfoResource(raw: ["info": ["version": "0.54.0"]])
         instance.validateServerResponse(result: result)
         XCTAssertTrue(controller.isServerValid, "server is valid after validation for valid result")
         XCTAssertTrue(controller.isURLValid, "url is valid after validation for valid result")
     }
 
     func testValidateServerResponseError() {
-        let result = InfoResult(raw: nil)
+        let result = InfoResource(raw: nil)
         instance.validateServerResponse(result: result)
         XCTAssertFalse(controller.isServerValid, "server is invalid after validation for emtpy result")
         XCTAssertFalse(controller.isURLValid, "url is invalid after validation for empty result")
     }
 
     func testValidateServerResponseInvalid() {
-        let result = InfoResult(raw: ["foo": "bar"])
+        let result = InfoResource(raw: ["foo": "bar"])
         instance.validateServerResponse(result: result)
         XCTAssertFalse(controller.isServerValid, "server is invalid after validation for invalid result")
         XCTAssertFalse(controller.isURLValid, "url is invalid after validation for invalid result")
@@ -96,7 +96,7 @@ class InfoRequestHandlerSpec: XCTestCase {
             return XCTFail("newURL must be valid")
         }
 
-        let result = InfoResult(raw: nil)
+        let result = InfoResource(raw: nil)
         instance.handleRedirectInfoResult(result, for: newURL)
         XCTAssertFalse(controller.isURLValid, "url is not valid")
     }
@@ -106,7 +106,7 @@ class InfoRequestHandlerSpec: XCTestCase {
             return XCTFail("newURL must be valid")
         }
 
-        let result = InfoResult(raw: ["version": "0.54.0"])
+        let result = InfoResource(raw: ["version": "0.54.0"])
         instance.handleRedirectInfoResult(result, for: newURL)
         XCTAssertTrue(controller.isURLValid, "url is valid")
     }

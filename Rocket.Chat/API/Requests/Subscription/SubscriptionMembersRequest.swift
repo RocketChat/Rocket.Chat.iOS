@@ -9,8 +9,6 @@
 import SwiftyJSON
 import Foundation
 
-typealias SubscriptionMembersResult = APIResult<SubscriptionMembersRequest>
-
 fileprivate extension SubscriptionType {
     var path: String {
         switch self {
@@ -25,6 +23,8 @@ fileprivate extension SubscriptionType {
 }
 
 class SubscriptionMembersRequest: APIRequest {
+    typealias APIResourceType = SubscriptionMembersResource
+
     let requiredVersion = Version(0, 59, 0)
 
     var path: String {
@@ -52,7 +52,7 @@ class SubscriptionMembersRequest: APIRequest {
     }
 }
 
-extension APIResult where T == SubscriptionMembersRequest {
+class SubscriptionMembersResource: APIResource {
     var members: [User?]? {
         return raw?["members"].arrayValue.map {
             let user = User()
