@@ -43,6 +43,14 @@ final class PreferencesViewModel {
         return localized("myaccount.settings.web_browser")
     }
 
+    internal var trackingTitle: String {
+        return localized("myaccount.settings.web_browser")
+    }
+
+    internal var trackingFooterText: String {
+        return localized("myaccount.settings.web_browser")
+    }
+
     internal var formattedVersion: String {
         return String(format: localized("myaccount.settings.version"), version, build)
     }
@@ -92,7 +100,7 @@ final class PreferencesViewModel {
     #endif
 
     internal var numberOfSections: Int {
-        return 4
+        return 5
     }
 
     internal func numberOfRowsInSection(_ section: Int) -> Int {
@@ -100,7 +108,8 @@ final class PreferencesViewModel {
         case 0: return 1
         case 1: return (canChangeAppIcon ? 4 : 3)
         case 2: return 2
-        case 3: return (canOpenFLEX ? 1 : 0)
+        case 3: return 1
+        case 4: return (canOpenFLEX ? 1 : 0)
         default: return 0
         }
     }
