@@ -51,6 +51,14 @@ final class AvatarView: UIView {
         }
     }
 
+    var username: String? {
+        didSet {
+            if username != nil {
+                updateAvatar()
+            }
+        }
+    }
+
     func updateAvatar() {
         setAvatarWithInitials()
 
@@ -67,6 +75,8 @@ final class AvatarView: UIView {
         } else if let avatarURL = avatarURL {
             self.imageURL = avatarURL
         } else if let avatarURL = user?.avatarURL() {
+            self.imageURL = avatarURL
+        } else if let username = username, let avatarURL = User.avatarURL(forUsername: username) {
             self.imageURL = avatarURL
         }
     }
@@ -115,12 +125,19 @@ final class AvatarView: UIView {
 
     private func setAvatarWithInitials() {
         guard let user = user, !user.isInvalidated else {
+            if let username = self.username {
+                setAvatarWithInitials(forUsername: username)
+                return
+            }
             labelInitials?.text = "?"
             backgroundColor = .black
             return
         }
+        setAvatarWithInitials(forUsername: user.username)
+    }
 
-        let username = user.username ?? "?"
+    private func setAvatarWithInitials(forUsername username: String?) {
+        let username = username ?? "?"
         var initials = ""
         var color = UIColor.black
 

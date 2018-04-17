@@ -139,7 +139,7 @@ final class ConnectServerViewController: BaseViewController {
         activityIndicator.startAnimating()
         textFieldServerURL.resignFirstResponder()
 
-        if AppManager.changeToServerIfExists(serverUrl: url.absoluteString) {
+        if AppManager.changeToServerIfExists(serverUrl: url) {
             return
         }
 

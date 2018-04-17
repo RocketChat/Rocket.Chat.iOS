@@ -14,6 +14,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
+    var notificationWindow: UIWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Launcher().prepareToLaunch(with: launchOptions)
@@ -35,7 +36,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             WindowManager.open(.auth(serverUrl: "", credentials: nil))
         }
 
+        initNotificationWindow()
+
         return true
+    }
+
+    func initNotificationWindow() {
+        notificationWindow = TransparentToTouchesWindow(frame: UIScreen.main.bounds)
+        notificationWindow?.rootViewController = NotificationViewController.shared
+        notificationWindow?.windowLevel = UIWindowLevelAlert
+        notificationWindow?.makeKeyAndVisible()
     }
 
     // MARK: AppDelegate LifeCycle
@@ -53,6 +63,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 SocketManager.disconnect({ (_, _) in })
             }
         }
+    }
+
+    func application(_ application: UIApplication, continue userActivity: NSUserActivity, restorationHandler: @escaping ([Any]?) -> Void) -> Bool {
+        if let url = userActivity.webpageURL, AppManager.handleDeepLink(url) != nil {
+            return true
+        }
+
+        return true
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey: Any] = [:]) -> Bool {

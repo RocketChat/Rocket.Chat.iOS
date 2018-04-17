@@ -47,7 +47,6 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         super.viewDidLoad()
 
         delegate = self
-
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         if let auth = AuthManager.isAuthenticated() {
@@ -117,11 +116,7 @@ extension MainChatViewController: SocketConnectionHandler {
 
     func socketDidReturnError(socket: SocketManager, error: SocketError) {
         switch error.error {
-        case .invalidUser:
-            if !socket.isUserAuthenticated {
-                return
-            }
-
+        case .invalidSession:
             let alert = UIAlertController(
                 title: localized("alert.socket_error.invalid_user.title"),
                 message: localized("alert.socket_error.invalid_user.message"),

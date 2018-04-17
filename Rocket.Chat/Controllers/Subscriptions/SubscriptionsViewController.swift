@@ -311,11 +311,15 @@ extension SubscriptionsViewController {
         assigned = true
 
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
+        subscriptionsToken = subscriptions?.observe({ [weak self] changes in
+            self?.handleSubscriptionUpdates(changes: changes)
+        })
 
         if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
             let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
-            currentUserToken = query.observe(handleCurrentUserUpdates)
+            currentUserToken = query.observe({ [weak self] changes in
+                self?.handleCurrentUserUpdates(changes: changes)
+            })
         }
 
         groupSubscription()

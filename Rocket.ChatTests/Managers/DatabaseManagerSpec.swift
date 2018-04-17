@@ -162,9 +162,18 @@ class DatabaseManagerSpec: XCTestCase {
 
     func testServerIndexForUrl() {
         DatabaseManager.setupTestServers()
-        XCTAssertEqual(DatabaseManager.serverIndexForUrl("wss://foo.com/websocket"), 0, "correct index for foo.com")
-        XCTAssertEqual(DatabaseManager.serverIndexForUrl("wss://open.rocket.chat/websocket"), 1, "correct index for open.rocket.chat")
-        XCTAssertNil(DatabaseManager.serverIndexForUrl("wss://unexisting.chat/websocket"), "index is nil for unexisting server")
+
+        guard
+            let foo = URL(string: "https://foo.com"),
+            let open = URL(string: "https://open.rocket.chat/"),
+            let unexisting = URL(string: "https://unexisting.chat")
+        else {
+            return XCTFail("url(s) can not be nil")
+        }
+
+        XCTAssertEqual(DatabaseManager.serverIndexForUrl(foo), 0, "correct index for foo.com")
+        XCTAssertEqual(DatabaseManager.serverIndexForUrl(open), 1, "correct index for open.rocket.chat")
+        XCTAssertNil(DatabaseManager.serverIndexForUrl(unexisting), "index is nil for unexisting server")
     }
 
     func testCopyServerInformationNilServers() {
