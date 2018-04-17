@@ -51,14 +51,14 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
         titleLabel.text = model.title
         valueField.options = model.options.map({ status -> String in
-            status.rawValue
+            status.localizedCase
         })
         valueField.didSelectItem = { index in
             model.value.value = model.options[index]
         }
 
         model.value.bindAndFire { [unowned self] value in
-            self.valueField.defaultValue = value.rawValue
+            self.valueField.defaultValue = value.localizedCase
         }
     }
 
@@ -69,14 +69,14 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
         titleLabel.text = model.title
         valueField.options = model.options.map({ status -> String in
-            status.rawValue
+            status.localizedCase
         })
         valueField.didSelectItem = { index in
             model.value.value = model.options[index]
         }
 
         model.value.bindAndFire { [unowned self] value in
-            self.valueField.defaultValue = value.rawValue
+            self.valueField.defaultValue = value.localizedCase
         }
     }
 
@@ -87,14 +87,14 @@ final class NotificationsChooseCell: UITableViewCell, NotificationsCellProtocol 
 
         titleLabel.text = model.title
         valueField.options = model.options.map({ seconds -> String in
-            "\(seconds) seconds"
+            "\(seconds) \(localized("myaccount.settings.notifications.duration.seconds"))"
         })
         valueField.didSelectItem = { index in
             model.value.value = model.options[index]
         }
 
         model.value.bindAndFire { [unowned self] value in
-            self.valueField.defaultValue = value == 0 ? "default" : "\(value) seconds"
+            self.valueField.defaultValue = value == 0 ? localized("myaccount.settings.notifications.duration.default") : "\(value) \(localized("myaccount.settings.notifications.duration.seconds"))"
         }
     }
 }

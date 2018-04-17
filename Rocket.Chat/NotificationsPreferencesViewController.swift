@@ -83,26 +83,26 @@ final class NotificationsPreferencesViewController: UITableViewController {
 
 extension NotificationsPreferencesViewController {
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.settingsCells.count
+        return viewModel.numberOfSections()
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.settingsCells[section].elements.count
+        return viewModel.numberOfRows(in: section)
     }
 
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return viewModel.settingsCells[section].title
+        return viewModel.titleForHeader(in: section)
     }
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let settingModel = viewModel.settingsCells[indexPath.section].elements[indexPath.row]
+        let settingModel = viewModel.settingModel(for: indexPath)
         let cell = tableView.dequeueReusableCell(withIdentifier: settingModel.type.rawValue, for: indexPath)
 
         return cell
     }
 
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        let settingModel = viewModel.settingsCells[indexPath.section].elements[indexPath.row]
+        let settingModel = viewModel.settingModel(for: indexPath)
         guard var cell = cell as? NotificationsCellProtocol else {
             fatalError("Could not dequeue reusable cell with type \(settingModel.type.rawValue)")
         }

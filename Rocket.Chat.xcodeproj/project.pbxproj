@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B2B61FF2085CA3E00FC828B /* NotificationsPreferencesEnumsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2B61FE2085CA3E00FC828B /* NotificationsPreferencesEnumsSpec.swift */; };
 		0B3A9764202C692D0019CA92 /* ChangeAppIconViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */; };
 		0B3A9766202C738E0019CA92 /* ChangeAppIconViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */; };
 		0B3A9769202C76080019CA92 /* ChangeAppIconCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */; };
@@ -660,6 +661,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0B2B61FE2085CA3E00FC828B /* NotificationsPreferencesEnumsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NotificationsPreferencesEnumsSpec.swift; path = Controllers/NotificationsPreferences/NotificationsPreferencesEnumsSpec.swift; sourceTree = "<group>"; };
 		0B3A9763202C692D0019CA92 /* ChangeAppIconViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewController.swift; sourceTree = "<group>"; };
 		0B3A9765202C738E0019CA92 /* ChangeAppIconViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeAppIconViewModel.swift; sourceTree = "<group>"; };
 		0B3A9768202C76080019CA92 /* ChangeAppIconCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ChangeAppIconCell.swift; path = Controllers/Settings/ChangeAppIconCell.swift; sourceTree = "<group>"; };
@@ -1395,6 +1397,7 @@
 			isa = PBXGroup;
 			children = (
 				0BE998252084DAA1004FE3E1 /* NotificationsPreferencesViewModelSpec.swift */,
+				0B2B61FE2085CA3E00FC828B /* NotificationsPreferencesEnumsSpec.swift */,
 			);
 			name = NotificationsPreferences;
 			sourceTree = "<group>";
@@ -3947,6 +3950,7 @@
 				80247B3F1FE8582700878833 /* MessageReactionSpec.swift in Sources */,
 				8013F8431FD02D8F00EE1A4E /* ChatCollectionViewFlowLayoutSpec.swift in Sources */,
 				77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */,
+				0B2B61FF2085CA3E00FC828B /* NotificationsPreferencesEnumsSpec.swift in Sources */,
 				807C7C1020751F40006B600E /* SpotlightClientSpec.swift in Sources */,
 				998165CA204EBBA10059D346 /* UpdateUserRequestSpec.swift in Sources */,
 				0BE998262084DAA1004FE3E1 /* NotificationsPreferencesViewModelSpec.swift in Sources */,

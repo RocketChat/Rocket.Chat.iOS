@@ -17,32 +17,18 @@ class NotificationsPreferencesViewModelSpec: XCTestCase {
     func testSettingsCellsWhenNotificationsEnabled() {
         model.enableModel.value.value = false
 
-        let cellModels = model.settingsCells
-
-        XCTAssertEqual(cellModels.count, 1)
-
-        let firstSection = cellModels[0]
-        XCTAssertEqual(firstSection.elements.count, 2)
+        XCTAssertEqual(model.numberOfSections(), 1)
+        XCTAssertEqual(model.numberOfRows(in: 0), 2)
     }
 
     func testSettingsCellsWhenNotificationsDisabled() {
         model.enableModel.value.value = true
 
-        let cellModels = model.settingsCells
-
-        XCTAssertEqual(cellModels.count, 4)
-
-        let firstSection = cellModels[0]
-        XCTAssertEqual(firstSection.elements.count, 2)
-
-        let secondSection = cellModels[1]
-        XCTAssertEqual(secondSection.elements.count, 4)
-
-        let thirdSection = cellModels[2]
-        XCTAssertEqual(thirdSection.elements.count, 1)
-
-        let fourthSection = cellModels[3]
-        XCTAssertEqual(fourthSection.elements.count, 1)
+        XCTAssertEqual(model.numberOfSections(), 4)
+        XCTAssertEqual(model.numberOfRows(in: 0), 2)
+        XCTAssertEqual(model.numberOfRows(in: 1), 4)
+        XCTAssertEqual(model.numberOfRows(in: 2), 1)
+        XCTAssertEqual(model.numberOfRows(in: 3), 1)
     }
 
     func testCellModels() {

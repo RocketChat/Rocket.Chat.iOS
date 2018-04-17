@@ -78,7 +78,7 @@ final class NotificationsPreferencesViewModel {
                                                                         type: .list,
                                                                         title: localized("myaccount.settings.notifications.email.alerts"))
 
-    internal var settingsCells: [(title: String?, elements: [NotificationSettingModel])] {
+    private var settingsCells: [(title: String?, elements: [NotificationSettingModel])] {
         let firstSection: [(title: String?, elements: [NotificationSettingModel])] = [(title: nil, [enableModel, counterModel])]
 
         guard enableModel.value.value else {
@@ -94,4 +94,19 @@ final class NotificationsPreferencesViewModel {
         return firstSection + secondSection
     }
 
+    internal func numberOfSections() -> Int {
+        return settingsCells.count
+    }
+
+    internal func numberOfRows(in section: Int) -> Int {
+        return settingsCells[section].elements.count
+    }
+
+    internal func titleForHeader(in section: Int) -> String? {
+        return settingsCells[section].title
+    }
+
+    internal func settingModel(for indexPath: IndexPath) -> NotificationSettingModel {
+        return settingsCells[indexPath.section].elements[indexPath.row]
+    }
 }

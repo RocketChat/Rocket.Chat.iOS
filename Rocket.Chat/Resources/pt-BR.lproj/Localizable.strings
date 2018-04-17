@@ -224,6 +224,7 @@
 "chat.info.item.pinned" = "Pinadas";
 "chat.info.item.starred" = "Favoritas";
 "chat.info.item.mentions" = "Menções";
+"chat.info.item.notifications" = "Notifications"; // TODO
 
 // Members List
 "chat.members.list.title" = "Membros";
@@ -255,6 +256,53 @@
 "myaccount.settings.language.title" = "Alterar Idioma";
 "myaccount.settings.language.reset" = "Restaurar o Padrão";
 "myaccount.settings.language.message" = "Você mudou o idioma. Você precisa fechar o aplicativo e abrir novamente para que as alterações tenham efeito.";
+
+// Notifications preferences
+"myaccount.settings.notifications.title" = "Notifications Preferences"; // TODO
+"myaccount.settings.notifications.save" = "Save"; // TODO
+
+"myaccount.settings.notifications.mute.title" = "Turn OFF"; // TODO
+"myaccount.settings.notifications.mute.description" = "Mute all notifications"; // TODO
+
+"myaccount.settings.notifications.receive.title" = "Turn ON"; // TODO
+"myaccount.settings.notifications.receive.description" = "Receive alerts"; // TODO
+
+"myaccount.settings.notifications.hide.title" = "Hide counter"; // TODO
+"myaccount.settings.notifications.hide.description" = "Do not display any counter of this channel"; // TODO
+
+"myaccount.settings.notifications.show.title" = "Show counter"; // TODO
+"myaccount.settings.notifications.show.description" = "Display number of unread messages"; // TODO
+
+"myaccount.settings.notifications.desktop" = "Desktop"; // TODO
+"myaccount.settings.notifications.desktop.alerts" = "Alerts:"; // TODO
+"myaccount.settings.notifications.desktop.audio" = "Audio:"; // TODO
+"myaccount.settings.notifications.desktop.sound" = "Sound:"; // TODO
+"myaccount.settings.notifications.desktop.duration" = "Notifications Duration:"; // TODO
+
+"myaccount.settings.notifications.mobile" = "Mobile"; // TODO
+"myaccount.settings.notifications.mobile.alerts" = "Alerts:"; // TODO
+
+"myaccount.settings.notifications.mail" = "Email"; // TODO
+"myaccount.settings.notifications.email.alerts" = "Alerts:"; // TODO
+
+"myaccount.settings.notifications.duration.default" = "Default"; // TODO
+"myaccount.settings.notifications.duration.seconds" = "seconds"; // TODO
+
+// Enum SubscriptionNotificationsStatus
+"subscription.notifications.status.default" = "Default"; // TODO
+"subscription.notifications.status.nothing" = "Nothing"; // TODO
+"subscription.notifications.status.all" = "All"; // TODO
+"subscription.notifications.status.mentions" = "Mentions"; // TODO
+
+// Enum SubscriptionNotificationsAudioValue
+"subscription.notifications.audio.value.none" = "None"; // TODO
+"subscription.notifications.audio.value.default" = "Default"; // TODO
+"subscription.notifications.audio.value.beep" = "Beep"; // TODO
+"subscription.notifications.audio.value.chelle" = "Chelle"; // TODO
+"subscription.notifications.audio.value.ding" = "Ding"; // TODO
+"subscription.notifications.audio.value.droplet" = "Droplet"; // TODO
+"subscription.notifications.audio.value.highbell" = "Highbell"; // TODO
+"subscription.notifications.audio.value.seasons" = "Seasons"; // TODO
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";

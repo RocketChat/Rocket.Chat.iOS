@@ -59,6 +59,27 @@ enum SubscriptionNotificationsAudioValue: String, CaseIterable {
     case seasons
 }
 
+// TODO: move extensions and protocol to different file
+protocol LocalizableEnum {
+    var localizedCase: String { get }
+}
+
+extension SubscriptionNotificationsStatus: LocalizableEnum {
+    var localizedCase: String {
+        return localized("subscription.notifications.status.\(rawValue)")
+    }
+
+}
+
+extension SubscriptionNotificationsAudioValue: LocalizableEnum {
+    var localizedCase: String {
+        return localized("subscription.notifications.audio.value.\(rawValue)")
+    }
+
+}
+
+// move above
+
 class Subscription: BaseModel {
     @objc dynamic var auth: Auth?
 

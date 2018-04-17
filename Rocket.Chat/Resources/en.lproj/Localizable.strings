@@ -290,6 +290,25 @@
 "myaccount.settings.notifications.mail" = "Email";
 "myaccount.settings.notifications.email.alerts" = "Alerts:";
 
+"myaccount.settings.notifications.duration.default" = "Default";
+"myaccount.settings.notifications.duration.seconds" = "seconds";
+
+// Enum SubscriptionNotificationsStatus
+"subscription.notifications.status.default" = "Default";
+"subscription.notifications.status.nothing" = "Nothing";
+"subscription.notifications.status.all" = "All";
+"subscription.notifications.status.mentions" = "Mentions";
+
+// Enum SubscriptionNotificationsAudioValue
+"subscription.notifications.audio.value.none" = "None";
+"subscription.notifications.audio.value.default" = "Default";
+"subscription.notifications.audio.value.beep" = "Beep";
+"subscription.notifications.audio.value.chelle" = "Chelle";
+"subscription.notifications.audio.value.ding" = "Ding";
+"subscription.notifications.audio.value.droplet" = "Droplet";
+"subscription.notifications.audio.value.highbell" = "Highbell";
+"subscription.notifications.audio.value.seasons" = "Seasons";
+
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
 "web_browser.in_app_safari.title" = "In-App Browser";
