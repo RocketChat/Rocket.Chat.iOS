@@ -288,6 +288,11 @@
 "myaccount.settings.notifications.duration.default" = "Default"; // TODO
 "myaccount.settings.notifications.duration.seconds" = "seconds"; // TODO
 
+"alert.update_notifications_preferences_success.title" = "Successfully updated your notification preferences."; // TODO
+
+"alert.update_notifications_preferences_save_error.title" = "Failed to update notifications preferences"; // TODO:
+"alert.update_notifications_preferences_save_error.message" = "Something wrong happened while saving your notification preferences. Please, try again."; // TODO
+
 // Enum SubscriptionNotificationsStatus
 "subscription.notifications.status.default" = "Default"; // TODO
 "subscription.notifications.status.nothing" = "Nothing"; // TODO

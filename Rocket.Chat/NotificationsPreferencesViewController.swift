@@ -26,7 +26,7 @@ final class NotificationsPreferencesViewController: UITableViewController {
             }
         }
 
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: localized("myaccount.settings.notifications.save"), style: .done, target: self, action: #selector(saveSettings))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: viewModel.saveButtonTitle, style: .done, target: self, action: #selector(saveSettings))
     }
 
     @objc private func saveSettings() {
@@ -37,12 +37,16 @@ final class NotificationsPreferencesViewController: UITableViewController {
 
         let saveNotificationsRequest = SaveNotificationRequest(rid: subscription.rid, notificationPreferences: viewModel.notificationPreferences)
         API.current()?.fetch(saveNotificationsRequest, succeeded: { [weak self] result in
+            guard let `self` = self else {
+                return
+            }
+
             if let errorMessage = result.errorMessage {
                 Alert(key: "alert.update_notifications_preferences_save_error").withMessage(errorMessage).present()
                 return
             }
 
-            self?.alertSuccess(title: localized("alert.update_notifications_preferences_success.title"))
+            self.alertSuccess(title: self.viewModel.saveSuccessTitle)
             }, errored: { _ in
                 Alert(key: "alert.update_notifications_preferences_save_error").present()
         })

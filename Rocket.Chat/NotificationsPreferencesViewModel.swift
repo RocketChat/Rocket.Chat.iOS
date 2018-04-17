@@ -23,6 +23,14 @@ final class NotificationsPreferencesViewModel {
         return localized("myaccount.settings.notifications.title")
     }
 
+    internal var saveSuccessTitle: String {
+        return localized("alert.update_notifications_preferences_success.title")
+    }
+
+    internal var saveButtonTitle: String {
+        return localized("myaccount.settings.notifications.save")
+    }
+
     internal var notificationPreferences: NotificationPreferences {
         return NotificationPreferences(desktopNotifications: desktopAlertsModel.value.value,
                                        disableNotifications: !enableModel.value.value,

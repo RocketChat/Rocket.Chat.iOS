@@ -55,6 +55,16 @@ class NotificationsPreferencesViewModelSpec: XCTestCase {
     func testStringsOverall() {
         XCTAssertNotNil(model.title)
         XCTAssertNotEqual(model.title, "")
+
+        XCTAssertNotNil(model.saveButtonTitle)
+        XCTAssertNotEqual(model.saveButtonTitle, "")
+
+        XCTAssertNotNil(model.saveSuccessTitle)
+        XCTAssertNotEqual(model.saveSuccessTitle, "")
+
+        XCTAssertNotEqual(localized("alert.update_notifications_preferences_save_error.title"), "")
+
+        XCTAssertNotEqual(localized("alert.update_notifications_preferences_save_error.message"), "")
     }
 
 }
