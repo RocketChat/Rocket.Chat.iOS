@@ -24,6 +24,9 @@
 		0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8602032DB20004BFAAF /* DrawingBrushColorSpec.swift */; };
 		0BC0E8632032DD95004BFAAF /* DrawingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8622032DD95004BFAAF /* DrawingViewModel.swift */; };
 		0BC0E8652032DF9B004BFAAF /* DrawingViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */; };
+		0BD8CFFB208759A40005866F /* EnumExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8CFFA208759A40005866F /* EnumExtensions.swift */; };
+		0BD8CFFD20875D8C0005866F /* EnumExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8CFFA208759A40005866F /* EnumExtensions.swift */; };
+		0BD8CFFF20875FA20005866F /* SubscriptionNotificationssSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD8CFFE20875FA20005866F /* SubscriptionNotificationssSpec.swift */; };
 		0BE9981B2084A2AD004FE3E1 /* SaveNotificationRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE9981A2084A2AD004FE3E1 /* SaveNotificationRequest.swift */; };
 		0BE9981E2084A897004FE3E1 /* NotificationPreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE9981D2084A897004FE3E1 /* NotificationPreferences.swift */; };
 		0BE998212084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE998202084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift */; };
@@ -680,6 +683,8 @@
 		0BC0E8602032DB20004BFAAF /* DrawingBrushColorSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingBrushColorSpec.swift; sourceTree = "<group>"; };
 		0BC0E8622032DD95004BFAAF /* DrawingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModel.swift; sourceTree = "<group>"; };
 		0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingViewModelSpec.swift; sourceTree = "<group>"; };
+		0BD8CFFA208759A40005866F /* EnumExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumExtensions.swift; sourceTree = "<group>"; };
+		0BD8CFFE20875FA20005866F /* SubscriptionNotificationssSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionNotificationssSpec.swift; sourceTree = "<group>"; };
 		0BE9981A2084A2AD004FE3E1 /* SaveNotificationRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNotificationRequest.swift; sourceTree = "<group>"; };
 		0BE9981D2084A897004FE3E1 /* NotificationPreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationPreferences.swift; sourceTree = "<group>"; };
 		0BE998202084BFAB004FE3E1 /* SaveNotificationRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SaveNotificationRequestSpec.swift; sourceTree = "<group>"; };
@@ -1800,6 +1805,7 @@
 				805DEC381FFE54820033151B /* CustomEmojiSpec.swift */,
 				0BC0E8602032DB20004BFAAF /* DrawingBrushColorSpec.swift */,
 				0BC0E8642032DF9B004BFAAF /* DrawingViewModelSpec.swift */,
+				0BD8CFFE20875FA20005866F /* SubscriptionNotificationssSpec.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1940,6 +1946,7 @@
 				4174CB1E1D2DB3350086DAC8 /* StringExtensions.swift */,
 				8076FDA32048533000114F28 /* String+Random.swift */,
 				8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */,
+				0BD8CFFA208759A40005866F /* EnumExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3642,6 +3649,7 @@
 				806728FD200789F4009FE94D /* PreferencesNavigationController.swift in Sources */,
 				413996171F3B44500075F96E /* UploadHelper.swift in Sources */,
 				7798B4151F852B720074B2F4 /* SelectField.swift in Sources */,
+				0BD8CFFB208759A40005866F /* EnumExtensions.swift in Sources */,
 				805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */,
 				0BC0E8632032DD95004BFAAF /* DrawingViewModel.swift in Sources */,
 				35E892C8201CDD1600B4BE5A /* NewRoomViewController.swift in Sources */,
@@ -3951,6 +3959,7 @@
 				41E423002044216000543877 /* UIColorExtensionSpec.swift in Sources */,
 				419D78871FBDCF6C005FC7A2 /* InfoRequestHandlerSpec.swift in Sources */,
 				411498E11FC7A85400D66542 /* ChatTitleViewModelSpec.swift in Sources */,
+				0BD8CFFF20875FA20005866F /* SubscriptionNotificationssSpec.swift in Sources */,
 				80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */,
 				80247B3F1FE8582700878833 /* MessageReactionSpec.swift in Sources */,
 				8013F8431FD02D8F00EE1A4E /* ChatCollectionViewFlowLayoutSpec.swift in Sources */,
@@ -4038,6 +4047,7 @@
 				80977AB6204EEF1E00C41435 /* SelectServer.swift in Sources */,
 				807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */,
 				80977AC4204FEEA700C41435 /* SEComposeHeaderViewModel.swift in Sources */,
+				0BD8CFFD20875D8C0005866F /* EnumExtensions.swift in Sources */,
 				804273E2204EBD51006DF420 /* APIResponse.swift in Sources */,
 				8029B2F22059B6F60067157B /* VideoInfo.swift in Sources */,
 				80D0CE6620503C860056B17F /* SERoomCell.swift in Sources */,

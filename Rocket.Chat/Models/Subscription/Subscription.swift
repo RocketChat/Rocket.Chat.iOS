@@ -10,31 +10,6 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-// TODO: move it to extension file / remove after 4.2 is released
-
-#if swift(>=4.2)
-#else
-public protocol CaseIterable {
-    associatedtype AllCases: Collection where AllCases.Element == Self
-    static var allCases: AllCases { get }
-}
-extension CaseIterable where Self: Hashable {
-    static var allCases: [Self] {
-        return [Self](AnySequence { () -> AnyIterator<Self> in
-            var raw = 0
-            return AnyIterator {
-                let current = withUnsafeBytes(of: &raw) { $0.load(as: Self.self) }
-                guard current.hashValue == raw else {
-                    return nil
-                }
-                raw += 1
-                return current
-            }
-        })
-    }
-}
-#endif
-
 enum SubscriptionType: String, Equatable {
     case directMessage = "d"
     case channel = "c"
@@ -58,27 +33,6 @@ enum SubscriptionNotificationsAudioValue: String, CaseIterable {
     case highbell
     case seasons
 }
-
-// TODO: move extensions and protocol to different file
-protocol LocalizableEnum {
-    var localizedCase: String { get }
-}
-
-extension SubscriptionNotificationsStatus: LocalizableEnum {
-    var localizedCase: String {
-        return localized("subscription.notifications.status.\(rawValue)")
-    }
-
-}
-
-extension SubscriptionNotificationsAudioValue: LocalizableEnum {
-    var localizedCase: String {
-        return localized("subscription.notifications.audio.value.\(rawValue)")
-    }
-
-}
-
-// move above
 
 class Subscription: BaseModel {
     @objc dynamic var auth: Auth?

@@ -372,6 +372,4 @@ extension SubscriptionSpec: RealmTestCase {
         XCTAssert(msg2.failed == true)
         XCTAssert(msg2.temporary == false)
     }
-
-    // TODO: Test for notifications
 }
