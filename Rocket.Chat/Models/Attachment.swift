@@ -10,13 +10,13 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-class AttachmentField: BaseModel {
+class AttachmentField: Object {
     @objc dynamic var short: Bool = false
     @objc dynamic var title: String = ""
     @objc dynamic var value: String = ""
 }
 
-class Attachment: BaseModel {
+class Attachment: Object {
     var type: MessageType {
         if !(audioURL?.isEmpty ?? true) {
             return .audio
@@ -37,6 +37,7 @@ class Attachment: BaseModel {
         return titleLinkDownload && !titleLink.isEmpty
     }
 
+    @objc dynamic var identifier: String?
     @objc dynamic var collapsed: Bool = false
     @objc dynamic var text: String?
     @objc dynamic var descriptionText: String?

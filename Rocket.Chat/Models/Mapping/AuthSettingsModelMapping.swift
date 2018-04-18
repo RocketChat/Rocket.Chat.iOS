@@ -13,10 +13,6 @@ import RealmSwift
 extension AuthSettings: ModelMappeable {
     //swiftlint:disable function_body_length
     func map(_ values: JSON, realm: Realm?) {
-        if self.identifier == nil {
-            self.identifier = String.random()
-        }
-
         self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
         self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string
 
