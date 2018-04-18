@@ -14,8 +14,24 @@ import Crashlytics
 import Instabug
 #endif
 
+let kCrashReportingDisabledKey = "kCrashReportingDisabledKey"
+
 struct BugTrackingCoordinator: LauncherProtocol {
+
+    static var isCrashReportingDisabled: Bool {
+        return UserDefaults.standard.bool(forKey: kCrashReportingDisabledKey)
+    }
+
+    static func toggleCrashReporting(disabled: Bool) {
+        UserDefaults.standard.set(disabled, forKey: kCrashReportingDisabledKey)
+        BugTrackingCoordinator().prepareToLaunch(with: nil)
+    }
+
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
+        if BugTrackingCoordinator.isCrashReportingDisabled {
+            return
+        }
+
         launchFabric()
         launchInstabug()
     }

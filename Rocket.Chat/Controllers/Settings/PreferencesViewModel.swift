@@ -51,6 +51,10 @@ final class PreferencesViewModel {
         return localized("myaccount.settings.tracking.footer")
     }
 
+    internal var trackingValue: Bool {
+        return !BugTrackingCoordinator.isCrashReportingDisabled
+    }
+
     internal var formattedVersion: String {
         return String(format: localized("myaccount.settings.version"), version, build)
     }

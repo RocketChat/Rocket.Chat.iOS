@@ -172,6 +172,10 @@ final class PreferencesViewController: UITableViewController {
 
         return nil
     }
+
+    // MARK: IBAction
+
+    
 }
 
 extension PreferencesViewController: MFMailComposeViewControllerDelegate {
