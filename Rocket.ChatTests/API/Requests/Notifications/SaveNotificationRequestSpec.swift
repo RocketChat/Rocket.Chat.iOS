@@ -55,7 +55,7 @@ class SaveNotificationRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = UserUpdateResult(raw: json)
+        let result = UpdateUserResource(raw: json)
         XCTAssertTrue(result.success)
     }
 

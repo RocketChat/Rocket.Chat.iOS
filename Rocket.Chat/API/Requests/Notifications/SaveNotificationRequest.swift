@@ -9,9 +9,9 @@
 import Foundation
 import SwiftyJSON
 
-typealias SaveNotificationResult = APIResult<SaveNotificationRequest>
+final class SaveNotificationRequest: APIRequest {
+    typealias APIResourceType = SaveNotificationResource
 
-class SaveNotificationRequest: APIRequest {
     let requiredVersion = Version(0, 63, 0)
     let method: HTTPMethod = .post
     let path = "/api/v1/rooms.saveNotification"
@@ -49,8 +49,7 @@ class SaveNotificationRequest: APIRequest {
     }
 }
 
-extension APIResult where T == SaveNotificationRequest {
-
+final class SaveNotificationResource: APIResource {
     var success: Bool {
         return raw?["success"].boolValue ?? false
     }

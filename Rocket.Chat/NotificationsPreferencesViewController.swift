@@ -36,23 +36,18 @@ final class NotificationsPreferencesViewController: UITableViewController {
         }
 
         let saveNotificationsRequest = SaveNotificationRequest(rid: subscription.rid, notificationPreferences: viewModel.notificationPreferences)
-        API.current()?.fetch(saveNotificationsRequest, succeeded: { [weak self] result in
-            guard let `self` = self else {
-                return
-            }
+        API.current()?.fetch(saveNotificationsRequest) { [weak self] response in
+            guard let strongSelf = self else { return }
 
-            if let errorMessage = result.errorMessage {
-                Alert(key: "alert.update_notifications_preferences_save_error").withMessage(errorMessage).present()
-                return
-            }
-
-            self.alertSuccess(title: self.viewModel.saveSuccessTitle)
-            }, errored: { _ in
+            switch response {
+            case .resource(let resource):
+                strongSelf.alertSuccess(title: strongSelf.viewModel.saveSuccessTitle)
+            case .error:
                 Alert(key: "alert.update_notifications_preferences_save_error").present()
-        })
-
+            }
+        }
     }
-    
+
     private func updateModel(subscription: Subscription?) {
         guard let subscription = subscription else {
             return

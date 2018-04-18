@@ -8,9 +8,9 @@
 
 import SwiftyJSON
 
-typealias SubscriptionGetOneResult = APIResult<SubscriptionGetOneRequest>
+final class SubscriptionGetOneRequest: APIRequest {
+    typealias APIResourceType = SubscriptionGetOneResource
 
-class SubscriptionGetOneRequest: APIRequest {
     let path = "/api/v1/subscriptions.getOne"
 
     let query: String?
@@ -23,7 +23,7 @@ class SubscriptionGetOneRequest: APIRequest {
     }
 }
 
-extension APIResult where T == SubscriptionGetOneRequest {
+final class SubscriptionGetOneResource: APIResource {
     var subscription: Subscription? {
         guard let raw = raw?["subscription"] else { return nil }
 

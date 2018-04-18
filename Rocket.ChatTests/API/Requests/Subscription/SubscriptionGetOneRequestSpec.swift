@@ -75,7 +75,7 @@ class SubscriptionGetOneRequestSpec: APISpec {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionGetOneResult(raw: json)
+        let result = SubscriptionGetOneResource(raw: json)
 
         guard let subscription = result.subscription else {
             XCTAssertNotNil(result.subscription)
@@ -89,9 +89,6 @@ class SubscriptionGetOneRequestSpec: APISpec {
         XCTAssertEqual(subscription.desktopNotificationDuration, 2)
         XCTAssertEqual(subscription.audioNotifications, .all)
         XCTAssertEqual(subscription.mobilePushNotifications, .mentions)
-
-        let nilResult = SubscriptionMentionsResult(raw: nil)
-        XCTAssertNil(nilResult.messages)
     }
 
 }
