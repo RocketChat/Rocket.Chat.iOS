@@ -44,11 +44,11 @@ final class PreferencesViewModel {
     }
 
     internal var trackingTitle: String {
-        return localized("myaccount.settings.web_browser")
+        return localized("myaccount.settings.tracking.title")
     }
 
     internal var trackingFooterText: String {
-        return localized("myaccount.settings.web_browser")
+        return localized("myaccount.settings.tracking.footer")
     }
 
     internal var formattedVersion: String {
