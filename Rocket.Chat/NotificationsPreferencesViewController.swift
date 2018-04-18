@@ -10,11 +10,7 @@ import UIKit
 
 final class NotificationsPreferencesViewController: UITableViewController {
     private let viewModel = NotificationsPreferencesViewModel()
-    var subscription: Subscription? {
-        didSet {
-            updateModel(subscription: subscription)
-        }
-    }
+    var subscription: Subscription?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +21,7 @@ final class NotificationsPreferencesViewController: UITableViewController {
                 self.tableView.reloadData()
             }
         }
+        updateModel(subscription: subscription)
 
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: viewModel.saveButtonTitle, style: .done, target: self, action: #selector(saveSettings))
     }
@@ -40,7 +37,7 @@ final class NotificationsPreferencesViewController: UITableViewController {
             guard let strongSelf = self else { return }
 
             switch response {
-            case .resource(let resource):
+            case .resource:
                 strongSelf.alertSuccess(title: strongSelf.viewModel.saveSuccessTitle)
             case .error:
                 Alert(key: "alert.update_notifications_preferences_save_error").present()
@@ -97,8 +94,4 @@ extension NotificationsPreferencesViewController {
             chooseCell.dropDownRect = tableView.rectForRow(at: indexPath)
         }
     }
-}
-
-extension NotificationsPreferencesViewController {
-
 }
