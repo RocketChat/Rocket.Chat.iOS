@@ -249,14 +249,14 @@
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Επιλέξτε Εικονίδιο";
-"myaccount.settings.changeicon.header" = "Μπορείτε να αλλάξετε πώς το δικό σας Rocket.Chat+ εικονίδιο θα φαίνεται στην συσκευή σας. Παρακαλούμε επιλέξτε ένα από τα παρακάτω εικονίδια, όποιο σας αρέσει πιο πολύ.";
+"myaccount.settings.changeicon.header" = "Μπορείτε να αλλάξετε πώς το δικό σας Rocket.Chat εικονίδιο θα φαίνεται στην συσκευή σας. Παρακαλούμε επιλέξτε ένα από τα παρακάτω εικονίδια, όποιο σας αρέσει πιο πολύ.";
 "myaccount.settings.changeicon.errortitle" = "Δεν μπορούμε να αλλάξουμε εικονίδιο";
 "myaccount.settings.changeicon.iosversion" = "Εναλλακτικά εικονίδια εφαρμογής δεν υποστηρίζονται σε iOS εκδόσεις μικρότερες από 10.3";
 
 // Change Language
 "myaccount.settings.language.title" = "Μεταβολή Γλώσσας";
 "myaccount.settings.language.reset" = "Επαναφορά στην Προεπιλεγμένη";
-"myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat+ ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";
+"myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";
 
 // Notifications preferences
 "myaccount.settings.notifications.title" = "Notifications Preferences"; // TODO

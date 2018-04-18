@@ -83,14 +83,14 @@ class SubscriptionMentionsRequestSpec: APISpec {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionMentionsResult(raw: json)
+        let result = SubscriptionMentionsResource(raw: json)
         XCTAssertNotNil(result.messages)
         XCTAssertEqual(result.count, 2)
         XCTAssertEqual(result.offset, 10)
         XCTAssertEqual(result.total, 2)
         XCTAssertTrue(result.success)
 
-        let nilResult = SubscriptionMentionsResult(raw: nil)
+        let nilResult = SubscriptionMentionsResource(raw: nil)
         XCTAssertNil(nilResult.messages)
     }
 

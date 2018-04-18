@@ -248,7 +248,7 @@
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Escolher Ícone";
-"myaccount.settings.changeicon.header" = "Você pode escolher o ícone do Rocket.Chat+ para mudar a aparência em sua home screen. Escolha o ícone abaixo que você mais gostar.";
+"myaccount.settings.changeicon.header" = "Você pode escolher o ícone do Rocket.Chat para mudar a aparência em sua home screen. Escolha o ícone abaixo que você mais gostar.";
 "myaccount.settings.changeicon.errortitle" = "Não podemos alterar seu ícone";
 "myaccount.settings.changeicon.iosversion" = "Esta funcionalidade está disponível somente para usuários com versão do iOS superior a 10.3.";
 

@@ -1,5 +1,5 @@
 //
-//  AuthViewController+AuthenticationHandler.swift
+//  AuthViewControllerAuthenticationHandler.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/26/18.
@@ -28,32 +28,35 @@ extension AuthViewController {
             return
         }
 
-        API.current()?.fetch(MeRequest(), succeeded: { [weak self] result in
-            guard let strongSelf = self else { return }
+        API.current()?.fetch(MeRequest()) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                guard let strongSelf = self else { return }
 
-            SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
+                SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
 
-            if let user = result.user {
-                BugTrackingCoordinator.identifyCrashReports(withUser: user)
+                if let user = resource.user {
+                    BugTrackingCoordinator.identifyCrashReports(withUser: user)
 
-                if user.username != nil {
-                    DispatchQueue.main.async {
-                        strongSelf.dismiss(animated: true, completion: nil)
-                        AppManager.reloadApp()
+                    if user.username != nil {
+                        DispatchQueue.main.async {
+                            strongSelf.dismiss(animated: true, completion: nil)
+                            AppManager.reloadApp()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                        }
                     }
                 } else {
-                    DispatchQueue.main.async {
-                        strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
-                    }
+                    self?.stopLoading()
+                    Alert(
+                        key: "error.socket.default_error"
+                        ).present()
                 }
-            } else {
+            case .error:
                 self?.stopLoading()
-                Alert(
-                    key: "error.socket.default_error"
-                    ).present()
             }
-            }, errored: { [weak self] _ in
-                self?.stopLoading()
-        })
+        }
     }
 }

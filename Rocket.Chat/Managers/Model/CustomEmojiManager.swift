@@ -12,26 +12,32 @@ import RealmSwift
 struct CustomEmojiManager {
     static func sync() {
         let currentRealm = Realm.current
-        API.current()?.fetch(CustomEmojiRequest(), succeeded: { (result) in
-            guard result.success else { return Log.debug(result.errorMessage) }
+        API.current()?.fetch(CustomEmojiRequest()) { response in
+            switch response {
+            case .resource(let resource):
+                guard resource.success else {
+                    return Log.debug(resource.errorMessage)
+                }
 
-            currentRealm?.execute({ realm in
-                realm.delete(realm.objects(CustomEmoji.self))
+                currentRealm?.execute({ realm in
+                    realm.delete(realm.objects(CustomEmoji.self))
 
-                let emoji = List<CustomEmoji>()
-                result.customEmoji.forEach({ customEmoji in
-                    let realmCustomEmoji = realm.create(CustomEmoji.self, value: customEmoji, update: true)
-                    emoji.append(realmCustomEmoji)
+                    let emoji = List<CustomEmoji>()
+                    resource.customEmoji.forEach({ customEmoji in
+                        let realmCustomEmoji = realm.create(CustomEmoji.self, value: customEmoji, update: true)
+                        emoji.append(realmCustomEmoji)
+                    })
+
+                    realm.add(emoji, update: true)
                 })
-
-                realm.add(emoji, update: true)
-            })
-        }, errored: { error in
-            switch error {
-            case .version: websocketSync(currentRealm)
-            default: break
+            case .error(let error):
+                switch error {
+                case .version: websocketSync(currentRealm)
+                default: break
+                }
             }
-        })
+
+        }
     }
 
     private static func websocketSync(_ realm: Realm?) {

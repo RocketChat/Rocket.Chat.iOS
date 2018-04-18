@@ -15,64 +15,67 @@ struct SpotlightClient: APIClient {
     }
 
     func search(query: String, realm: Realm? = Realm.current, completion: @escaping ([Subscription]) -> Void) {
-        api.fetch(SpotlightRequest(query: query), succeeded: { result in
-            guard result.success else {
-                completion([])
-                return Log.debug(result.error)
-            }
-
-            var subscriptions = [Subscription]()
-            var identifiers = [String]()
-
-            realm?.execute({ (realm) in
-                result.rooms.forEach { object in
-                    let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                        object?.rid = object?.identifier ?? ""
-                    })
-
-                    if let identifier = subscription.identifier {
-                        identifiers.append(identifier)
-                    }
-
-                    subscriptions.append(subscription)
+        api.fetch(SpotlightRequest(query: query)) { response in
+            switch response {
+            case .resource(let resource):
+                guard resource.success else {
+                    completion([])
+                    return Log.debug(resource.error)
                 }
 
-                result.users.forEach { object in
-                    let user = User.getOrCreate(realm: realm, values: object, updates: nil)
-                    let subscription = Subscription()
-                    subscription.identifier = user.identifier ?? ""
-                    subscription.otherUserId = user.identifier
-                    subscription.type = .directMessage
-                    subscription.name = user.username ?? ""
-                    subscription.fname = user.name ?? ""
-                    subscriptions.append(subscription)
+                var subscriptions = [Subscription]()
+                var identifiers = [String]()
 
-                    if let identifier = subscription.identifier {
-                        identifiers.append(identifier)
+                realm?.execute({ (realm) in
+                    resource.rooms.forEach { object in
+                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
+                            object?.rid = object?.identifier ?? ""
+                        })
+
+                        if let identifier = subscription.identifier {
+                            identifiers.append(identifier)
+                        }
+
+                        subscriptions.append(subscription)
                     }
-                }
 
-                realm.add(subscriptions, update: true)
-            }, completion: {
-                var detachedSubscriptions = [Subscription]()
+                    resource.users.forEach { object in
+                        let user = User.getOrCreate(realm: realm, values: object, updates: nil)
+                        let subscription = Subscription()
+                        subscription.identifier = user.identifier ?? ""
+                        subscription.otherUserId = user.identifier
+                        subscription.type = .directMessage
+                        subscription.name = user.username ?? ""
+                        subscription.fname = user.name ?? ""
+                        subscriptions.append(subscription)
 
-                try? realm?.write {
-                    for identifier in identifiers {
-                        if let subscription = realm?.object(ofType: Subscription.self, forPrimaryKey: identifier) {
-                            detachedSubscriptions.append(subscription)
+                        if let identifier = subscription.identifier {
+                            identifiers.append(identifier)
                         }
                     }
-                }
 
-                completion(detachedSubscriptions)
-            })
-        }, errored: { error in
-            switch error {
-            case .version:
-                SubscriptionManager.spotlight(query, completion: completion)
-            default:
-                completion([])
+                    realm.add(subscriptions, update: true)
+                }, completion: {
+                    var detachedSubscriptions = [Subscription]()
+
+                    try? realm?.write {
+                        for identifier in identifiers {
+                            if let subscription = realm?.object(ofType: Subscription.self, forPrimaryKey: identifier) {
+                                detachedSubscriptions.append(subscription)
+                            }
+                        }
+                    }
+
+                    completion(detachedSubscriptions)
+                })
+            case .error(let error):
+                switch error {
+                case .version:
+                    SubscriptionManager.spotlight(query, completion: completion)
+                default:
+                    completion([])
+                }
             }
-        })
+        }
     }
 }

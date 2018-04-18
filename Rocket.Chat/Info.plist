@@ -5,7 +5,7 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
-	<string>Rocket.Chat+</string>
+	<string>Rocket.Chat</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIcons</key>
@@ -222,7 +222,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>156</string>
+	<string>159</string>
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>
