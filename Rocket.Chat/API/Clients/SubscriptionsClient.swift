@@ -24,19 +24,19 @@ struct SubscriptionsClient: APIClient {
         self.api = api
     }
 
-    func loadHistory(subscription: Subscription, oldest: Date?, count: Int = 60, realm: Realm? = Realm.current, completion: @escaping ([Message]) -> Void) {
+    func loadHistory(subscription: Subscription, latest: Date?, count: Int = 60, realm: Realm? = Realm.current, completion: @escaping ([Message]) -> Void) {
         guard let subscriptionId = subscription.identifier else {
             return completion([])
         }
 
-        let request = SubscriptionHistoryRequest(roomType: subscription.type, roomId: subscription.rid, oldest: oldest, count: count)
+        let request = SubscriptionHistoryRequest(roomType: subscription.type, roomId: subscription.rid, latest: latest, count: count)
 
         var filteredMessages: [Message] = []
 
         api.fetch(request) { response in
             switch response {
             case .resource(let resource):
-                realm?.execute({ (realm) in
+                realm?.execute({ realm in
                     guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionId) else { return }
 
                     let messages = resource.messages(realm: Realm.current) ?? []
@@ -49,7 +49,6 @@ struct SubscriptionsClient: APIClient {
                             }
                         }
 
-                        //let message = Message(value: message)
                         message.subscription = detachedSubscription
                         realm.add(message, update: true)
 
@@ -63,7 +62,7 @@ struct SubscriptionsClient: APIClient {
             case .error(let error):
                 switch error {
                 case .version:
-                    MessageManager.getHistory(subscription, lastMessageDate: oldest, completion: completion)
+                    MessageManager.getHistory(subscription, lastMessageDate: latest, completion: completion)
                 default:
                     completion([])
                 }

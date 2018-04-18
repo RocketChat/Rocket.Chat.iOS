@@ -23,7 +23,7 @@ fileprivate extension SubscriptionType {
 }
 
 fileprivate extension String {
-    mutating func appendIfNotNil(_ stringConvertible: CustomStringConvertible?, transform: ((CustomStringConvertible) -> String)?) {
+    mutating func appendIfNotNil<T: CustomStringConvertible>(_ stringConvertible: T?, transform: ((T) -> String)?) {
         if let stringConvertible = stringConvertible {
             self += transform?(stringConvertible) ?? stringConvertible.description
         }
@@ -59,8 +59,8 @@ class SubscriptionHistoryRequest: APIRequest {
 
         var query = "roomId=\(roomId)"
 
-        query.appendIfNotNil(latest) { "&latest=\($0)" }
-        query.appendIfNotNil(oldest) { "&oldest=\($0)" }
+        query.appendIfNotNil(latest) { "&latest=\($0.formatted(Date.apiDateFormat))" }
+        query.appendIfNotNil(oldest) { "&oldest=\($0.formatted(Date.apiDateFormat))" }
         query.appendIfNotNil(inclusive) { "&inclusive=\($0)" }
         query.appendIfNotNil(count) { "&count=\($0)" }
         query.appendIfNotNil(unreads) { "&unreads=\($0)" }

@@ -756,7 +756,7 @@ final class ChatViewController: SLKTextViewController {
         }
 
         let client = API.current()?.client(SubscriptionsClient.self)
-        client?.loadHistory(subscription: tempSubscription, oldest: date) { [weak self] messages in
+        client?.loadHistory(subscription: tempSubscription, latest: date) { [weak self] messages in
             guard let strongSelf = self else { return }
 
             DispatchQueue.main.async {

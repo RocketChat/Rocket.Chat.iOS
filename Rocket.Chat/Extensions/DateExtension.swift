@@ -44,6 +44,8 @@ extension Date {
         return self.formatted("YYYY")
     }
 
+    static var apiDateFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+
     func formatted(_ format: String = "dd/MM/yyyy HH:mm:ss ZZZ") -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
