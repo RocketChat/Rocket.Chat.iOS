@@ -9,8 +9,6 @@
 import SwiftyJSON
 import Foundation
 
-typealias SubscriptionHistoryResult = APIResult<SubscriptionHistoryRequest>
-
 fileprivate extension SubscriptionType {
     var path: String {
         switch self {
@@ -33,6 +31,8 @@ fileprivate extension String {
 }
 
 class SubscriptionHistoryRequest: APIRequest {
+    typealias APIResourceType = SubscriptionHistoryResource
+
     var path: String {
         return roomType.path
     }
@@ -69,7 +69,7 @@ class SubscriptionHistoryRequest: APIRequest {
     }
 }
 
-extension APIResult where T == SubscriptionHistoryRequest {
+class SubscriptionHistoryResource: APIResource {
     var success: Bool? {
         return raw?["success"].bool
     }

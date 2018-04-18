@@ -8,7 +8,7 @@
 
 import RealmSwift
 
-fileprivate extension APIResult where T == SubscriptionHistoryRequest {
+extension SubscriptionHistoryResource {
     func messages(realm: Realm?) -> [Message]? {
         return raw?["messages"].arrayValue.map {
             let message = Message()
@@ -33,37 +33,40 @@ struct SubscriptionsClient: APIClient {
 
         var filteredMessages: [Message] = []
 
-        api.fetch(request, succeeded: { result in
-            realm?.execute({ (realm) in
-                guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionId) else { return }
+        api.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                realm?.execute({ (realm) in
+                    guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionId) else { return }
 
-                let messages = result.messages(realm: Realm.current) ?? []
+                    let messages = resource.messages(realm: Realm.current) ?? []
 
-                messages.forEach { message in
-                    if let existingMessage = realm.object(ofType: Message.self, forPrimaryKey: message.identifier) {
-                        if existingMessage.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
-                            return
+                    messages.forEach { message in
+                        if let existingMessage = realm.object(ofType: Message.self, forPrimaryKey: message.identifier) {
+                            if existingMessage.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
+                                return
+                            }
+                        }
+
+                        //let message = Message(value: message)
+                        message.subscription = detachedSubscription
+                        realm.add(message, update: true)
+
+                        if !message.userBlocked {
+                            filteredMessages.append(message)
                         }
                     }
-
-                    //let message = Message(value: message)
-                    message.subscription = detachedSubscription
-                    realm.add(message, update: true)
-
-                    if !message.userBlocked {
-                        filteredMessages.append(message)
-                    }
+                }, completion: {
+                    completion(filteredMessages)
+                })
+            case .error(let error):
+                switch error {
+                case .version:
+                    MessageManager.getHistory(subscription, lastMessageDate: oldest, completion: completion)
+                default:
+                    completion([])
                 }
-            }, completion: {
-                completion(filteredMessages)
-            })
-        }, errored: { error in
-            switch error {
-            case .version:
-                MessageManager.getHistory(subscription, lastMessageDate: oldest, completion: completion)
-            default:
-                completion([])
             }
-        })
+        }
     }
 }
