@@ -11,7 +11,10 @@
 "alert.connection.invalid_url.title" = "Oups!";
 "alert.connection.invalid_url.message" = "L'URL saisie est invalide. Veuillez la vérifier et réessayer, s'il vous plaît!";
 
-"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.not_secured.title" = "Oups!";
+"alert.connection.not_secured.message" = "Impossible d'établir une connexion sécurisée avec le serveur. S'il vous plaît assurez-vous le serveur prend en charge le protocole SSL.";
+
+"alert.connection.socket_error.title" = "Oups!";
 "alert.connection.socket_error.message" = "Impossible de se connecter à ce serveur!";
 
 "alert.connection.invalid_version.title" = "Oups!";

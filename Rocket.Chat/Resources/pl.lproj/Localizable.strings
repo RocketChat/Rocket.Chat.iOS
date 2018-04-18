@@ -11,6 +11,9 @@
 "alert.connection.invalid_url.title" = "Ups!";
 "alert.connection.invalid_url.message" = "URL który wprowadziłeś jest niepoprawny. Proszę sprawdzić jego poprawność i spróbować ponownie.";
 
+"alert.connection.not_secured.title" = "Oops!"; // TODO
+"alert.connection.not_secured.message" = "Could not establish a secure connection to the server. Please make sure the server supports SSL."; // TODO
+
 "alert.connection.socket_error.title" = "Ups!";
 "alert.connection.socket_error.message" = "Nie udało się połączyć z wybranym serwerem!";
 
