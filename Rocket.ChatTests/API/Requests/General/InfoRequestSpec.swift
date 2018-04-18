@@ -46,9 +46,8 @@ class InfoRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = InfoResult(raw: json)
+        let resource = InfoResource(raw: json)
 
-        XCTAssertEqual(result.info, json["info"])
-        XCTAssertEqual(result.version, "0.47.0-develop")
+        XCTAssertEqual(resource.version, "0.47.0-develop")
     }
 }

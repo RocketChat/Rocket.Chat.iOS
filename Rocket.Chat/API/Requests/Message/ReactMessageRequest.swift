@@ -10,9 +10,9 @@ import Foundation
 
 import SwiftyJSON
 
-typealias ReactMessageResult = APIResult<ReactMessageRequest>
-
 class ReactMessageRequest: APIRequest {
+    typealias APIResourceType = ReactMessageResource
+
     let requiredVersion = Version(0, 62, 0)
 
     let method: HTTPMethod = .post
@@ -36,7 +36,7 @@ class ReactMessageRequest: APIRequest {
     }
 }
 
-extension APIResult where T == ReactMessageRequest {
+class ReactMessageResource: APIResource {
     var success: Bool? {
         return raw?["success"].boolValue
     }

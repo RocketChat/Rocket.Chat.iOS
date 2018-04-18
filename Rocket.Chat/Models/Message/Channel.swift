@@ -7,7 +7,8 @@
 //
 
 import Foundation
+import RealmSwift
 
-final class Channel: BaseModel {
+final class Channel: Object {
     @objc dynamic var name: String?
 }

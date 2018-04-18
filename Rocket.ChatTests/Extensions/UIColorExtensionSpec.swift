@@ -40,4 +40,12 @@ class UIColorExtensionSpec: XCTestCase {
         XCTAssertEqual(colorResult.cgColor, colorObject.cgColor)
     }
 
+    func testNormalizeHexString() {
+        XCTAssert(UIColor.normalizeColorFromString(string: "abc").hexDescription() == "aabbcc")
+        XCTAssert(UIColor.normalizeColorFromString(string: "abc7").hexDescription(true) == "aabbcc77")
+        XCTAssert(UIColor.normalizeColorFromString(string: "#abc7").hexDescription(true) == "aabbcc77")
+        XCTAssert(UIColor.normalizeColorFromString(string: "00FFFF").hexDescription() == "00ffff")
+        XCTAssert(UIColor.normalizeColorFromString(string: "#00FFFF").hexDescription() == "00ffff")
+        XCTAssert(UIColor.normalizeColorFromString(string: "00FFFF77").hexDescription(true) == "00ffff77")
+    }
 }

@@ -42,11 +42,11 @@ class CustomEmojiRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = CustomEmojiResult(raw: json)
+        let result = CustomEmojiResource(raw: json)
         XCTAssertEqual(result.customEmoji.count, 1)
         XCTAssertEqual(result.success, true)
 
-        let nilResult = CustomEmojiResult(raw: nil)
+        let nilResult = CustomEmojiResource(raw: nil)
         XCTAssertEqual(nilResult.customEmoji.count, 0)
         XCTAssertEqual(nilResult.success, false)
     }

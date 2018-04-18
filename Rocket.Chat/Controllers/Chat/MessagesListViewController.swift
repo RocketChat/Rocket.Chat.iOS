@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-extension APIResult where T == SubscriptionMessagesRequest {
+extension SubscriptionMessagesResource {
     func fetchMessagesFromRealm() -> [Message]? {
         return raw?["messages"].arrayValue.map { json in
             let message = Message()
@@ -19,7 +19,7 @@ extension APIResult where T == SubscriptionMessagesRequest {
     }
 }
 
-extension APIResult where T == SubscriptionMentionsRequest {
+extension SubscriptionMentionsResource {
     func fetchMessagesFromRealm() -> [Message]? {
         return raw?["mentions"].arrayValue.map { json in
             let message = Message()
@@ -68,28 +68,34 @@ class MessagesListViewData {
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
             if isListingMentions {
                 let request = SubscriptionMentionsRequest(roomId: subscription.rid)
-                API.current()?.fetch(request, options: options, succeeded: { result in
-                    self.handleMessages(
-                        fetchingWith: result.fetchMessagesFromRealm,
-                        showing: result.count,
-                        total: result.total,
-                        completion: completion
-                    )
-                }, errored: { _ in
-                    Alert.defaultError.present()
-                })
+                API.current()?.fetch(request, options: options) { [weak self] response in
+                    switch response {
+                    case .resource(let resource):
+                        self?.handleMessages(
+                            fetchingWith: resource.fetchMessagesFromRealm,
+                            showing: resource.count,
+                            total: resource.total,
+                            completion: completion
+                        )
+                    case .error:
+                        Alert.defaultError.present()
+                    }
+                }
             } else {
                 let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
-                API.current()?.fetch(request, options: options, succeeded: { result in
-                    self.handleMessages(
-                        fetchingWith: result.fetchMessagesFromRealm,
-                        showing: result.count,
-                        total: result.total,
-                        completion: completion
-                    )
-                }, errored: { _ in
-                    Alert.defaultError.present()
-                })
+                API.current()?.fetch(request, options: options) { [weak self] response in
+                    switch response {
+                    case .resource(let resource):
+                        self?.handleMessages(
+                            fetchingWith: resource.fetchMessagesFromRealm,
+                            showing: resource.count,
+                            total: resource.total,
+                            completion: completion
+                        )
+                    case .error:
+                        Alert.defaultError.present()
+                    }
+                }
             }
         }
     }

@@ -46,6 +46,7 @@ final class ChatDataController {
     var unreadSeparator = false
     var dismissUnreadSeparator = false
 
+    @discardableResult
     func clear() -> [IndexPath] {
         var indexPaths: [IndexPath] = []
 

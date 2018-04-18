@@ -16,7 +16,6 @@ extension MessageURL {
 
     static func testInstance() -> MessageURL {
         let messageURL = MessageURL()
-        messageURL.identifier = "123"
         messageURL.targetURL = "http://www.rocket.chat"
         messageURL.title = "title"
         messageURL.textDescription = "description"
@@ -45,11 +44,11 @@ class MessageURLSpec: XCTestCase {
         let object = MessageURL.testInstance()
 
         Realm.execute({ realm in
-            realm.add(object, update: true)
+            realm.add(object)
             let results = realm.objects(MessageURL.self)
             let first = results.first
             XCTAssert(results.count == 1, "MessageURL object was created with success")
-            XCTAssert(first?.identifier == "123", "MessageURL object was created with success")
+            XCTAssert(first?.title == "title", "MessageURL object was created with success")
         })
     }
 

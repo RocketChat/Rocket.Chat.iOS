@@ -43,7 +43,7 @@ class SpotlightRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SpotlightResult(raw: json)
+        let result = SpotlightResource(raw: json)
 
         XCTAssertEqual(result.users.count, 1, "users is correct")
         XCTAssertEqual(result.rooms.count, 2, "rooms is correct")

@@ -48,12 +48,12 @@ class PublicSettingsRequestSpec: APISpec {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = PublicSettingsResult(raw: json)
+        let result = PublicSettingsResource(raw: json)
         XCTAssertNotNil(result.raw)
         XCTAssertTrue(result.authSettings.isAllowedToEditEmail)
         XCTAssertTrue(result.success)
 
-        let nilResult = PublicSettingsResult(raw: nil)
+        let nilResult = PublicSettingsResource(raw: nil)
         XCTAssertNil(nilResult.raw)
     }
 

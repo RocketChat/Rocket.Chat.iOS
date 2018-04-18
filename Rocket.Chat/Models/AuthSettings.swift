@@ -20,7 +20,7 @@ struct AuthSettingsDefaults {
     static let messageGroupingPeriod = 900
 }
 
-final class AuthSettings: BaseModel {
+final class AuthSettings: Object {
     @objc dynamic var siteURL: String?
     @objc dynamic var cdnPrefixURL: String?
 

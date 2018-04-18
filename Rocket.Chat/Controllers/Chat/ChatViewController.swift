@@ -153,7 +153,6 @@ final class ChatViewController: SLKTextViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
         messagesToken?.invalidate()
         subscriptionToken?.invalidate()
     }

@@ -37,10 +37,10 @@ class ReactMessageRequestSpec: APITestCase {
             "success": true
         ])
 
-        let result = APIResult<ReactMessageRequest>(raw: rawResult)
+        let result = ReactMessageResource(raw: rawResult)
         XCTAssert(result.success == true)
 
-        let nilResult = APIResult<ReactMessageRequest>(raw: nil)
+        let nilResult = ReactMessageResource(raw: nil)
         XCTAssertNil(nilResult.success, "success is nil if raw is nil")
     }
 }

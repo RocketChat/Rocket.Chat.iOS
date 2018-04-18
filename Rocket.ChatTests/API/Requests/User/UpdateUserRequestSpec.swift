@@ -67,12 +67,12 @@ class UpdateUserRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = UserUpdateResult(raw: json)
+        let result = UpdateUserResource(raw: json)
         XCTAssertEqual(result.user?.identifier, "3TmCqTLBqFL4QLNPu")
 
         XCTAssertTrue(result.success)
 
-        let nilResult = UserUpdateResult(raw: nil)
+        let nilResult = UpdateUserResource(raw: nil)
         XCTAssertEqual(nilResult.user, nil)
     }
 
