@@ -62,8 +62,8 @@ class SubscriptionHistoryRequest: APIRequest {
         query.appendIfNotNil(latest) { "&latest=\($0)" }
         query.appendIfNotNil(oldest) { "&oldest=\($0)" }
         query.appendIfNotNil(inclusive) { "&inclusive=\($0)" }
-        query.appendIfNotNil(oldest) { "&count=\($0)" }
-        query.appendIfNotNil(inclusive) { "&unreads=\($0)" }
+        query.appendIfNotNil(count) { "&count=\($0)" }
+        query.appendIfNotNil(unreads) { "&unreads=\($0)" }
 
         self.query = query
     }

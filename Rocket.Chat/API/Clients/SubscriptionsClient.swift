@@ -40,6 +40,7 @@ struct SubscriptionsClient: APIClient {
                     guard let detachedSubscription = realm.object(ofType: Subscription.self, forPrimaryKey: subscriptionId) else { return }
 
                     let messages = resource.messages(realm: Realm.current) ?? []
+                    print("oy")
 
                     messages.forEach { message in
                         if let existingMessage = realm.object(ofType: Message.self, forPrimaryKey: message.identifier) {
