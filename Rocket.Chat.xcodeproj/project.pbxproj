@@ -381,6 +381,7 @@
 		804273E0204EBD51006DF420 /* Version.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013F8681FD6B59900EE1A4E /* Version.swift */; };
 		804273E1204EBD51006DF420 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = D1D535ED1F708628006625D2 /* APIRequest.swift */; };
 		804273E2204EBD51006DF420 /* APIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = D15C83851F70991F001AB155 /* APIResponse.swift */; };
+		8046A1F61FDEA417004B99B2 /* AudioMessageRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8046A1F51FDEA416004B99B2 /* AudioMessageRecorder.swift */; };
 		805C87D92052AA1900AD0EB0 /* SEComposeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */; };
 		805C87DD2052AE1D00AD0EB0 /* SEXibInitializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */; };
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
@@ -525,6 +526,8 @@
 		80D5637220592D32008896D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D5637120592D32008896D6 /* Assets.xcassets */; };
 		80D563752059325A008896D6 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D563742059325A008896D6 /* MimeType.swift */; };
 		80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5637620593533008896D6 /* ParseItemProviders.swift */; };
+		80D838DC1FDE91A100EFC67E /* RecordingAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 80D838DB1FDE91A100EFC67E /* RecordingAudioView.xib */; };
+		80D838DE1FDE91EB00EFC67E /* RecordingAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D838DD1FDE91EB00EFC67E /* RecordingAudioView.swift */; };
 		80D955C2202154A300E3F281 /* CASViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D955C1202154A300E3F281 /* CASViewController.swift */; };
 		80DC9A6C206BA95600032BE0 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DC9A6B206BA95600032BE0 /* Localized.swift */; };
 		80DC9A6E206BA96200032BE0 /* Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80DC9A6B206BA95600032BE0 /* Localized.swift */; };
@@ -1040,6 +1043,7 @@
 		8041C0432028C828007E21FA /* ReactorListView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReactorListView.xib; sourceTree = "<group>"; };
 		8041C04520290A48007E21FA /* RCEmojiKitLocalizable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RCEmojiKitLocalizable.swift; sourceTree = "<group>"; };
 		8041C047202BA233007E21FA /* RCEmojiKit.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = RCEmojiKit.xcassets; sourceTree = "<group>"; };
+		8046A1F51FDEA416004B99B2 /* AudioMessageRecorder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AudioMessageRecorder.swift; sourceTree = "<group>"; };
 		805C87D82052AA1900AD0EB0 /* SEComposeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeViewController.swift; sourceTree = "<group>"; };
 		805C87DC2052AE1D00AD0EB0 /* SEXibInitializable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEXibInitializable.swift; sourceTree = "<group>"; };
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
@@ -1165,6 +1169,8 @@
 		80D5637120592D32008896D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D563742059325A008896D6 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		80D5637620593533008896D6 /* ParseItemProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseItemProviders.swift; sourceTree = "<group>"; };
+		80D838DB1FDE91A100EFC67E /* RecordingAudioView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecordingAudioView.xib; sourceTree = "<group>"; };
+		80D838DD1FDE91EB00EFC67E /* RecordingAudioView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingAudioView.swift; sourceTree = "<group>"; };
 		80D955C1202154A300E3F281 /* CASViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CASViewController.swift; sourceTree = "<group>"; };
 		80DC9A6B206BA95600032BE0 /* Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Localized.swift; sourceTree = "<group>"; };
 		80DC9A6F206BAC8B00032BE0 /* mimetype.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = mimetype.json; sourceTree = "<group>"; };
@@ -2055,6 +2061,7 @@
 				41D701D51E67111E00FED2EE /* MessageTextFontAttributes.swift */,
 				413996161F3B44500075F96E /* UploadHelper.swift */,
 				41D4ABAA1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift */,
+				8046A1F51FDEA416004B99B2 /* AudioMessageRecorder.swift */,
 				80054CFF1FDB1FA200F5ECF9 /* Alert.swift */,
 				800F38EC2019492D0005CB78 /* DeepLink.swift */,
 				35BCD300201A57EA00B4BE5A /* Ask.swift */,
@@ -2198,6 +2205,8 @@
 				80CFB5711F8D697100FC9715 /* ReplyView.xib */,
 				80CFB5731F8DA55C00FC9715 /* ReplyView.swift */,
 				1435BFA21F9B601600FB2768 /* RCTextView.swift */,
+				80D838DB1FDE91A100EFC67E /* RecordingAudioView.xib */,
+				80D838DD1FDE91EB00EFC67E /* RecordingAudioView.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -3136,6 +3145,7 @@
 				14F8A244202E5D0600175FDC /* Red-83.5@2x.png in Resources */,
 				14F8A259202E64B200175FDC /* BnW-40@3x.png in Resources */,
 				14F8A245202E5D0600175FDC /* Red-76@3x.png in Resources */,
+				80D838DC1FDE91A100EFC67E /* RecordingAudioView.xib in Resources */,
 				80235D261F74672D00A56CA5 /* LoaderTableViewCell.xib in Resources */,
 				14F8A25A202E64B200175FDC /* BnW-29@2x.png in Resources */,
 				418C4DC81DC4C08800ABED4C /* SubscriptionSectionView.xib in Resources */,
@@ -3517,6 +3527,7 @@
 				41852E891F92BBEC00D1C499 /* ChatControllerReplyHandler.swift in Sources */,
 				D1C536CC1F688B2F00EBA8D9 /* MarkdownManager.swift in Sources */,
 				418C4DC61DC4C07800ABED4C /* SubscriptionSectionView.swift in Sources */,
+				80D838DE1FDE91EB00EFC67E /* RecordingAudioView.swift in Sources */,
 				7758A7641F8FA44400FAA244 /* PickerViewDelegate.swift in Sources */,
 				8076FDAB2048549C00114F28 /* AuthSettings+HiddenTypes.swift in Sources */,
 				8076FDE42048CC8600114F28 /* MigrationCoordinator.swift in Sources */,
@@ -3764,6 +3775,7 @@
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
 				0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */,
+				8046A1F61FDEA417004B99B2 /* AudioMessageRecorder.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
 				8076FDC72048632300114F28 /* SubscriptionQueries.swift in Sources */,

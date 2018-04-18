@@ -9,6 +9,7 @@
 import UIKit
 import Photos
 import MobileCoreServices
+import AVFoundation
 
 extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func buttonUploadDidPressed() {
@@ -169,6 +170,49 @@ extension ChatViewController: UIDocumentPickerDelegate {
         }
     }
 
+}
+
+// MARK: AVAudioRecorderDelegate
+
+extension ChatViewController: AVAudioRecorderDelegate {
+
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
+        guard error != nil else { return }
+
+        alert(
+            title: localized("alert.audio_message.error.title"),
+            message: localized("alert.audio_message.error.message")
+        )
+    }
+
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+        guard flag == true else { return }
+
+        let start = startTime ?? NSDate()
+        let seconds = Int(abs(start.timeIntervalSinceNow))
+
+        let messageTime = String(format: "%.2d:%.2d", seconds / 60, seconds % 60)
+        let message = String(format: localized("alert.audio_message.success.message"), messageTime)
+        let alert = UIAlertController(
+            title: localized("alert.audio_message.success.title"),
+            message: message,
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+        alert.addAction(UIAlertAction(title: localized("alert.audio_message.success.send"), style: .default, handler: { _ in
+            var file: FileUpload?
+            let assetURL = recorder.url
+
+            file = UploadHelper.file(for: assetURL)
+
+            if let file = file {
+                self.upload(file, fileName: "audio_recording_\(Date()).wav", description: "")
+            }
+        }))
+
+        present(alert, animated: true, completion: nil)
+    }
 }
 
 // MARK: Uploading a FileUpload
