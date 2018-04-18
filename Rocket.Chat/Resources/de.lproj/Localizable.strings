@@ -52,6 +52,8 @@
 "alert.email_verification.title" = "E-Mail Bestätigung";
 "alert.email_verification.message" = "Wir haben dir eine E-Mail zur Bestätigung deiner Registrierung geschickt. Solltest du keine Mail erhalten haben versuche es noch einmal.";
 
+"alert.discarding_changes.title" = "Unsaved changes"; // TODO
+"alert.discarding_changes.message" = "Your unsaved changes have been discarded."; // TODO
 "alert.load_profile_error.title" = "Failed to load your profile"; // TODO
 "alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again."; // TODO
 "alert.password_mismatch_error.title" = "Your password doesn't match"; // TODO
@@ -68,6 +70,13 @@
 "alert.password_empty_fields.message" = "Fill up the password and confirmation fields so you can update your password."; // TODO
 "alert.update_profile_success.title" = "Profile updated"; // TODO
 "alert.update_password_success.title" = "Password updated"; // TODO
+
+"alert.audio_message.success.send" = "Send"; // TODO
+"alert.audio_message.success.title" = "Success"; // TODO
+"alert.audio_message.success.message" = "Your message was successfully recorded. Recording time: %@."; // TODO
+
+"alert.audio_message.error.title" = "Ooops!"; // TODO
+"alert.audio_message.error.message" = "An error has occurred. Please, record your message  again."; // TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Der Server hat seine URL geändert";
@@ -161,11 +170,12 @@
 "chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
 "chat.message.actions.delete.confirm.message" = "Bist du sicher, dass du diese Nachricht löschen möchtest? Sie kann dann nicht wiederhergestellt werden.";
 "chat.message.actions.delete.confirm.yes" = "Ja, löschen";
+"chat.message.actions.discard" = "Discard message"; //TODO
+"chat.message.actions.discard.confirm.title" = "Discard this message?"; //TODO
+"chat.message.actions.discard.confirm.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.discard.confirm.yes" = "Yes, discard"; //TODO
 "chat.message.actions.resend" = "Resend"; //TODO
 "chat.message.actions.resend_all" = "Resend all"; //TODO
-"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
-"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
-"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
 "Send" = "Senden"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -272,6 +282,7 @@
 "myaccount.settings.profile.actions.edit" = "Edit"; // TODO
 "myaccount.settings.profile.actions.change_password" = "Change your password"; // TODO
 "myaccount.settings.profile.section.profile" = "Profile"; // TODO
+"myaccount.settings.profile.section.password" = "Password"; // TODO
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO

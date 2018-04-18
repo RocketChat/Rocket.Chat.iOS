@@ -20,13 +20,6 @@
 "alert.settings.set_mail_app.title" = "Oops!";
 "alert.settings.set_mail_app.message" = "Conta Mail não encontrada. Por favor, configure uma conta no aplicativo Mail para conseguir enviar emails.";
 
-"alert.audio_message.success.send" = "Enviar";
-"alert.audio_message.success.title" = "Sucesso";
-"alert.audio_message.success.message" = "Sua mensagem foi gravada com sucesso. Tempo de gravação: %@.";
-
-"alert.audio_message.error.title" = "Ooops!";
-"alert.audio_message.error.message" = "Ocorreu um erro. Por favor, grave a sua mensagem novamente.";
-
 "alert.feature.wip.title" = "Oops!";
 "alert.feature.wip.message" = "Desculpe, mas esta função ainda não está disponível.";
 
@@ -59,6 +52,8 @@
 "alert.email_verification.title" = "Verificação de email";
 "alert.email_verification.message" = "Nós enviamos um email para confirmar seu registro. Se você não receber um email em breve, por favor volte e tente novamente.";
 
+"alert.discarding_changes.title" = "Mudanças não salvas";
+"alert.discarding_changes.message" = "Suas mudanças não salvas foram descartadas.";
 "alert.load_profile_error.title" = "Falha ao carregar seu perfil";
 "alert.load_profile_error.message" = "Algo de errado aconteceu ao carregar seu perfil. Por favor, tente novamente.";
 "alert.password_mismatch_error.title" = "Suas senhas não batem";
@@ -75,6 +70,13 @@
 "alert.password_empty_fields.message" = "Por favor, preencha os dois campos para atualizar sua senha.";
 "alert.update_profile_success.title" = "Perfil atualizado";
 "alert.update_password_success.title" = "Senha alterada";
+
+"alert.audio_message.success.send" = "Enviar";
+"alert.audio_message.success.title" = "Sucesso";
+"alert.audio_message.success.message" = "Sua mensagem foi gravada com sucesso. Tempo de gravação: %@.";
+
+"alert.audio_message.error.title" = "Ooops!";
+"alert.audio_message.error.message" = "Ocorreu um erro. Por favor, grave a sua mensagem novamente.";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";
@@ -168,9 +170,10 @@
 "chat.message.actions.delete.confirm.title" = "Deletar esta mensagem?";
 "chat.message.actions.delete.confirm.message" = "Tem certeza que deseja deletar esta mensagem? A mensagem não poderá ser recuperada.";
 "chat.message.actions.delete.confirm.yes" = "Sim, deletar";
-"chat.message.actions.delete.discard.title" = "Descartar esta mensagem?";
-"chat.message.actions.delete.discard.message" = "Esta mensagem não foi enviada. Você deseja descartá-la? A mensagem não poderá ser recuperada.";
-"chat.message.actions.delete.discard.yes" = "Sim, descartar";
+"chat.message.actions.discard" = "Descartar mensagem";
+"chat.message.actions.discard.confirm.title" = "Descartar esta mensagem?";
+"chat.message.actions.discard.confirm.message" = "Esta mensagem não foi enviada. Você deseja descartá-la? A mensagem não poderá ser recuperada.";
+"chat.message.actions.discard.confirm.yes" = "Sim, descartar";
 "chat.message.actions.resend" = "Reenviar";
 "chat.message.actions.resend_all" = "Reenviar todas";
 "Send" = "Enviar"; //SLKTextInputbar.m

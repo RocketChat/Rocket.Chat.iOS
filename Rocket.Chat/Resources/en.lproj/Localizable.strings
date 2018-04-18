@@ -71,6 +71,12 @@
 "alert.update_profile_success.title" = "Profile updated";
 "alert.update_password_success.title" = "Password updated";
 
+"alert.audio_message.success.send" = "Send";
+"alert.audio_message.success.title" = "Success";
+"alert.audio_message.success.message" = "Your message was successfully recorded. Recording time: %@.";
+
+"alert.audio_message.error.title" = "Ooops!";
+"alert.audio_message.error.message" = "An error has occurred. Please, record your message again.";
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
@@ -249,7 +255,6 @@
 "myaccount.settings.version" = "Version: %@ (%@)";
 "myaccount.settings.web_browser" = "Web Browser";
 
-
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon";
 "myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat icon looks like on your device. Please choose one of the icons below, whichever you like the most.";
@@ -277,6 +282,7 @@
 "myaccount.settings.profile.actions.edit" = "Edit";
 "myaccount.settings.profile.actions.change_password" = "Change your password";
 "myaccount.settings.profile.section.profile" = "Profile";
+"myaccount.settings.profile.section.password" = "Password";
 "myaccount.settings.profile.name_placeholder" = "Name";
 "myaccount.settings.profile.username_placeholder" = "Username";
 "myaccount.settings.profile.email_placeholder" = "E-mail";
