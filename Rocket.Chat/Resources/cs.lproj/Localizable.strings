@@ -52,6 +52,8 @@
 "alert.email_verification.title" = "Email verification"; //TODO
 "alert.email_verification.message" = "We have sent you an email to confirm your registration. If you do not receive an email shortly, please come back and try again."; //TODO
 
+"alert.discarding_changes.title" = "Unsaved changes"; // TODO
+"alert.discarding_changes.message" = "Your unsaved changes have been discarded."; // TODO
 "alert.load_profile_error.title" = "Failed to load your profile"; // TODO
 "alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again."; // TODO
 "alert.password_mismatch_error.title" = "Your password doesn't match"; // TODO
@@ -161,11 +163,12 @@
 "chat.message.actions.delete.confirm.title" = "Delete this message?"; // TODO
 "chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone."; //TODO
 "chat.message.actions.delete.confirm.yes" = "Yes, delete"; // TODO
+"chat.message.actions.discard" = "Discard message"; //TODO
+"chat.message.actions.discard.confirm.title" = "Discard this message?"; //TODO
+"chat.message.actions.discard.confirm.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.discard.confirm.yes" = "Yes, discard"; //TODO
 "chat.message.actions.resend" = "Resend"; //TODO
 "chat.message.actions.resend_all" = "Resend all"; //TODO
-"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
-"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
-"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
 "Send" = "Odeslat"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -238,7 +241,7 @@
 // Settings
 "myaccount.settings.title" = "Preferences"; // TODO: new text: Preferences
 "myaccount.settings.contactus" = "Contact us";
-"myaccount.settings.profile" = "Profile"; // TODO: 
+"myaccount.settings.profile" = "Profile"; // TODO:
 "myaccount.settings.license" = "License";
 "myaccount.settings.language" = "Language"; // TODO
 "myaccount.settings.appicon" = "Application Icon"; // TODO:
@@ -272,6 +275,7 @@
 "myaccount.settings.profile.actions.edit" = "Edit"; // TODO
 "myaccount.settings.profile.actions.change_password" = "Change your password"; // TODO
 "myaccount.settings.profile.section.profile" = "Profile"; // TODO
+"myaccount.settings.profile.section.password" = "Password"; // TODO
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO

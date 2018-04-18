@@ -52,6 +52,8 @@
 "alert.email_verification.title" = "Επαλήθευση Email";
 "alert.email_verification.message" = "Σας στείλαμε ένα email για να επιβεβαιώσουμε την εγγραφή σας. Αν δεν το λάβετε σύντομα, παρακαλούμε επιστρέψτε και ξαναπροσπαθήστε.";
 
+"alert.discarding_changes.title" = "Unsaved changes"; // TODO
+"alert.discarding_changes.message" = "Your unsaved changes have been discarded."; // TODO
 "alert.load_profile_error.title" = "Failed to load your profile"; // TODO
 "alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again."; // TODO
 "alert.password_mismatch_error.title" = "Your password doesn't match"; // TODO
@@ -239,7 +241,7 @@
 // Settings
 "myaccount.settings.title" = "Ρυθμίσεις";
 "myaccount.settings.contactus" = "Επικοινωνήστε μαζί μας";
-"myaccount.settings.profile" = "Profile"; // TODO: 
+"myaccount.settings.profile" = "Profile"; // TODO:
 "myaccount.settings.license" = "Άδεια";
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
@@ -273,6 +275,7 @@
 "myaccount.settings.profile.actions.edit" = "Edit"; // TODO
 "myaccount.settings.profile.actions.change_password" = "Change your password"; // TODO
 "myaccount.settings.profile.section.profile" = "Profile"; // TODO
+"myaccount.settings.profile.section.password" = "Password"; // TODO
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO
