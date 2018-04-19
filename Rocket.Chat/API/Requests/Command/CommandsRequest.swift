@@ -9,19 +9,18 @@
 
 import SwiftyJSON
 
-typealias CommandsResult = APIResult<CommandsRequest>
-
 struct CommandsRequest: APIRequest {
+    typealias APIResourceType = CommandsResource
     let path = "/api/v1/commands.list"
     let requiredVersion = Version(0, 60, 0)
 }
 
-extension APIResult where T == CommandsRequest {
+class CommandsResource: APIResource {
     var commands: [Command]? {
         return raw?["commands"].arrayValue.map {
             let command = Command()
             command.map($0, realm: nil)
             return command
-        }.flatMap { $0 }
+            }.compactMap { $0 }
     }
 }

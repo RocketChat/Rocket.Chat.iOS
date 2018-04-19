@@ -47,7 +47,6 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
         super.viewDidLoad()
 
         delegate = self
-
         SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         if let auth = AuthManager.isAuthenticated() {
@@ -89,6 +88,11 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     func logout() {
         API.current()?.client(PushClient.self).deletePushToken()
 
+        DispatchQueue.main.async {
+            ChatViewController.shared?.dataController.clear()
+            ChatViewController.shared?.collectionView?.reloadData()
+        }
+
         ChatViewController.shared?.messagesToken?.invalidate()
         ChatViewController.shared?.subscriptionToken?.invalidate()
         SubscriptionsViewController.shared?.currentUserToken?.invalidate()
@@ -117,11 +121,7 @@ extension MainChatViewController: SocketConnectionHandler {
 
     func socketDidReturnError(socket: SocketManager, error: SocketError) {
         switch error.error {
-        case .invalidUser:
-            if !socket.isUserAuthenticated {
-                return
-            }
-
+        case .invalidSession:
             let alert = UIAlertController(
                 title: localized("alert.socket_error.invalid_user.title"),
                 message: localized("alert.socket_error.invalid_user.message"),

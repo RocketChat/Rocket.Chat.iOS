@@ -14,8 +14,8 @@ struct UploadClient: APIClient {
         self.api = api
     }
 
-    func upload(roomId: String, data: Data, filename: String, mimetype: String, description: String, completion: (() -> Void)? = nil, versionFallback: (() -> Void)? = nil) {
-        let req = UploadRequest(
+    func uploadMessage(roomId: String, data: Data, filename: String, mimetype: String, description: String, completion: (() -> Void)? = nil, versionFallback: (() -> Void)? = nil) {
+        let req = UploadMessageRequest(
             roomId: roomId,
             data: data,
             filename: filename,
@@ -23,19 +23,34 @@ struct UploadClient: APIClient {
             description: description
         )
 
-        api.fetch(req, succeeded: { result in
-            if let error = result.error {
-                Alert(key: "alert.upload_error").withMessage(error).present()
-            }
-            completion?()
-        }, errored: { error in
-            if case .version = error {
-                // TODO: Remove Upload fallback after Rocket.Chat 1.0
-                versionFallback?()
-            } else {
-                Alert(key: "alert.upload_error").present()
+        api.fetch(req) { response in
+            switch response {
+            case .resource(let resource):
+                if let error = resource.error {
+                    Alert(key: "alert.upload_error").withMessage(error).present()
+                }
                 completion?()
+            case .error(let error):
+                if case .version = error {
+                    versionFallback?()
+                } else {
+                    Alert(key: "alert.upload_error").present()
+                    completion?()
+                }
             }
-        })
+
+        }
+    }
+
+    func uploadAvatar(data: Data, filename: String, mimetype: String, completion: (() -> Void)? = nil) {
+        let req = UploadAvatarRequest(
+            data: data,
+            filename: filename,
+            mimetype: mimetype
+        )
+
+        api.fetch(req) { _ in
+            completion?()
+        }
     }
 }

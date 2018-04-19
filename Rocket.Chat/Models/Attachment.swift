@@ -10,23 +10,34 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-class Attachment: BaseModel {
+class AttachmentField: Object {
+    @objc dynamic var short: Bool = false
+    @objc dynamic var title: String = ""
+    @objc dynamic var value: String = ""
+}
+
+class Attachment: Object {
     var type: MessageType {
-        if audioURL?.count ?? 0 > 0 {
+        if !(audioURL?.isEmpty ?? true) {
             return .audio
         }
 
-        if videoURL?.count ?? 0 > 0 {
+        if !(videoURL?.isEmpty ?? true) {
             return .video
         }
 
-        if imageURL?.count ?? 0 > 0 {
+        if !(imageURL?.isEmpty ?? true) {
             return .image
         }
 
         return .textAttachment
     }
 
+    var isFile: Bool {
+        return titleLinkDownload && !titleLink.isEmpty
+    }
+
+    @objc dynamic var identifier: String?
     @objc dynamic var collapsed: Bool = false
     @objc dynamic var text: String?
     @objc dynamic var descriptionText: String?
@@ -51,8 +62,11 @@ class Attachment: BaseModel {
     var videoThumbPath: URL? {
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documents = path[0]
-        return documents.appendingPathComponent("\(identifier ?? "temp").png")
+        let thumbName = videoURL?.replacingOccurrences(of: "/", with: "\\") ?? "temp"
+        return documents.appendingPathComponent("\(thumbName).png")
     }
+
+    var fields = List<AttachmentField>()
 
     override class func ignoredProperties() -> [String] {
         return ["videoThumb"]
@@ -62,9 +76,16 @@ class Attachment: BaseModel {
 extension Attachment {
 
     fileprivate static func fullURLWith(_ path: String?, auth: Auth? = nil) -> URL? {
+        guard let path = path else { return nil }
+
+        if path.contains("http://") || path.contains("https://") {
+            return URL(string: path)
+        }
+
+        let pathClean = path.replacingOccurrences(of: "//", with: "/")
+
         guard
-            let path = path?.replacingOccurrences(of: "//", with: "/"),
-            let pathPercentEncoded = NSString(string: path).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+            let pathPercentEncoded = NSString(string: pathClean).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
             let auth = auth ?? AuthManager.isAuthenticated(),
             let userId = auth.userId,
             let token = auth.token,
@@ -86,11 +107,6 @@ extension Attachment {
     }
 
     func fullImageURL(auth: Auth? = nil) -> URL? {
-        guard let imageURL = imageURL else { return nil }
-        if imageURL.contains("http://") || imageURL.contains("https://") {
-            return URL(string: imageURL)
-        }
-
         return Attachment.fullURLWith(imageURL, auth: auth)
     }
 

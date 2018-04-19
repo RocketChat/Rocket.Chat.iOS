@@ -10,8 +10,7 @@ import UIKit
 import Photos
 import MobileCoreServices
 
-extension ChatViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
+extension ChatViewController: MediaPicker, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func buttonUploadDidPressed() {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
@@ -33,6 +32,10 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
             self.openDocumentPicker()
         }))
 
+        alert.addAction(UIAlertAction(title: localized("chat.upload.draw"), style: .default, handler: { (_) in
+            self.openDrawing()
+        }))
+
         alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
 
         if let presenter = alert.popoverPresentationController {
@@ -41,34 +44,6 @@ extension ChatViewController: UIImagePickerControllerDelegate, UINavigationContr
         }
 
         present(alert, animated: true, completion: nil)
-    }
-
-    fileprivate func openCamera(video: Bool = false) {
-        guard UIImagePickerController.isSourceTypeAvailable(.camera) else {
-            return assertionFailure("Device camera is not availbale")
-        }
-
-        let imagePicker  = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.allowsEditing = true
-        imagePicker.sourceType = .camera
-        imagePicker.cameraFlashMode = .off
-        imagePicker.mediaTypes = video ? [kUTTypeMovie as String] : [kUTTypeImage as String]
-        imagePicker.cameraCaptureMode = video ? .video : .photo
-        self.present(imagePicker, animated: true, completion: nil)
-    }
-
-    fileprivate func openPhotosLibrary() {
-        let picker = UIImagePickerController()
-        picker.delegate = self
-        picker.allowsEditing = false
-        picker.sourceType = .savedPhotosAlbum
-
-        if let mediaTypes = UIImagePickerController.availableMediaTypes(for: .savedPhotosAlbum) {
-            picker.mediaTypes = mediaTypes
-        }
-
-        present(picker, animated: true, completion: nil)
     }
 
     // MARK: UIImagePickerControllerDelegate
@@ -227,7 +202,7 @@ extension ChatViewController {
         }
 
         let client = API.current()?.client(UploadClient.self)
-        client?.upload(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "",
+        client?.uploadMessage(roomId: subscription.rid, data: file.data, filename: fileName, mimetype: file.type, description: description ?? "",
                        completion: stopLoadingUpload, versionFallback: { deprecatedMethod() })
 
         func deprecatedMethod() {
@@ -283,5 +258,10 @@ extension ChatViewController {
             self.present(alert, animated: true, completion: nil)
         }
     }
+}
 
+extension ChatViewController: DrawingControllerDelegate {
+    func finishedEditing(with file: FileUpload) {
+        uploadDialog(file)
+    }
 }

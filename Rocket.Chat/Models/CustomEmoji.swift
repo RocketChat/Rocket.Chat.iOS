@@ -27,19 +27,39 @@ extension CustomEmoji {
             return nil
         }
 
-        return "\(serverUrl)/emoji-custom/\(encodedName)"
+        var imageUrl = URL(string: serverUrl)?.httpServerURL()
+        imageUrl?.appendPathComponent("emoji-custom")
+        imageUrl?.appendPathComponent(encodedName)
+        return imageUrl?.absoluteString
     }
 
-    static func withShortname(_ shortname: String, realm: Realm? = Realm.shared) -> CustomEmoji? {
+    static func withShortname(_ shortname: String, realm: Realm? = Realm.current) -> CustomEmoji? {
         guard let realm = realm, shortname.count > 2 else { return nil }
         let shortname = String(shortname.dropFirst().dropLast())
         return realm.objects(CustomEmoji.self).filter { $0.name == shortname || $0.aliases.contains(shortname) }.first
     }
 
-    static func emojis() -> [Emoji] {
-        guard let emojis = Realm.shared?.objects(CustomEmoji.self) else { return [] }
+    static var cachedEmojis: [String: Emoji]?
 
-        return emojis.flatMap { emoji -> Emoji? in
+    static var emojiStrings: [String: Emoji] {
+        if let emojis = cachedEmojis {
+            return emojis
+        }
+
+        let emojisArray = emojis()
+        let emojiReplacementStrings = emojisArray.reduce([String: Emoji]()) { dict, emoji -> [String: Emoji] in
+            let alternates = emoji.alternates.filter { !$0.isEmpty }
+            let emojiStrings = ([emoji.shortname] + alternates).map { (key: $0, value: emoji) }
+            return dict.union(dictionary: Dictionary(keyValuePairs: emojiStrings))
+        }
+        cachedEmojis = emojiReplacementStrings
+        return emojiReplacementStrings
+    }
+
+    static func emojis() -> [Emoji] {
+        guard let emojis = Realm.current?.objects(CustomEmoji.self) else { return [] }
+
+        return emojis.compactMap { emoji -> Emoji? in
             guard let name = emoji.name, let imageUrl = emoji.imageUrl() else { return nil }
             return Emoji(name, name, false, Array(emoji.aliases), [], imageUrl)
         }
@@ -52,7 +72,7 @@ extension CustomEmoji: ModelMappeable {
             identifier = values["_id"].string
         }
 
-        if let aliases = values["aliases"].array?.flatMap({ $0.string }) {
+        if let aliases = values["aliases"].array?.compactMap({ $0.string }) {
             self.aliases.removeAll()
             self.aliases.append(contentsOf: aliases)
         }

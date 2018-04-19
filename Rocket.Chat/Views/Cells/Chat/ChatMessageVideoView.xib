@@ -124,6 +124,7 @@
                 <outlet property="buttonPlay" destination="n1V-Rm-0Fo" id="fna-jr-utX"/>
                 <outlet property="detailText" destination="ewZ-9Z-wIx" id="b06-he-nvs"/>
                 <outlet property="detailTextHeightConstraint" destination="CSD-mw-JZ1" id="d9p-sm-LcA"/>
+                <outlet property="detailTextIndicator" destination="lZQ-Dx-ibR" id="8Xv-Xx-PCR"/>
                 <outlet property="fullHeightConstraint" destination="Mao-am-123" id="La3-Ta-KLl"/>
                 <outlet property="imageViewPreview" destination="Er3-7A-ag7" id="QPs-ru-Own"/>
                 <outlet property="labelTitle" destination="q2f-Tt-feU" id="B5R-a0-mNO"/>

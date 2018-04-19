@@ -52,6 +52,25 @@
 "alert.email_verification.title" = "Verificação de email";
 "alert.email_verification.message" = "Nós enviamos um email para confirmar seu registro. Se você não receber um email em breve, por favor volte e tente novamente.";
 
+"alert.discarding_changes.title" = "Mudanças não salvas";
+"alert.discarding_changes.message" = "Suas mudanças não salvas foram descartadas.";
+"alert.load_profile_error.title" = "Falha ao carregar seu perfil";
+"alert.load_profile_error.message" = "Algo de errado aconteceu ao carregar seu perfil. Por favor, tente novamente.";
+"alert.password_mismatch_error.title" = "Suas senhas não batem";
+"alert.password_mismatch_error.message" = "O campo de confirmação da senha difere da senha escolhida. Por favor, corrija e tente novamente.";
+"alert.update_profile_error.title" = "Falha ao atualizar";
+"alert.update_profile_error.message" = "Algo de errado aconteceu ao atualizar seu perfil. Por favor, tente novamente.";
+"alert.update_password_error.title" = "Falha ao alterar senha";
+"alert.update_password_error.message" = "Algo de errado aconteceu ao alterar sua senha. Por favor, tente novamente";
+"alert.update_profile_empty_fields.title" = "Por favor, preenchar todos os campos";
+"alert.update_profile_empty_fields.message" = "Todas as informações do seu perfil são necessárias e não podem ficar em branco.";
+"alert.update_profile_invalid_email.title" = "E-mail inválido";
+"alert.update_profile_invalid_email.message" = "Parece que o e-mail está inválido. Por favor, corrija e tente novamente.";
+"alert.password_empty_fields.title" = "Atualizar senha";
+"alert.password_empty_fields.message" = "Por favor, preencha os dois campos para atualizar sua senha.";
+"alert.update_profile_success.title" = "Perfil atualizado";
+"alert.update_password_success.title" = "Senha alterada";
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Servidor mudou de URL";
 "connection.server.redirect.alert.message" = "Parece que este servidor mudou a URL para:\n\n%@\n\Gostaria de atualizar a URL?";
@@ -65,6 +84,15 @@
 "auth.connect.button_connect" = "Conectar";
 "auth.connect.ssl_required" = "É necessário que seu servidor suporte SSL";
 "auth.connect.connecting" = "Conectando no servidor";
+
+"auth.login.username.placeholder" = "E-mail ou usuário";
+"auth.login.password.placeholder" = "Senha";
+"auth.login.buttonRegister" = "Criar uma conta";
+"auth.login.buttonResetPassword" = "Esqueci minha senha";
+"auth.login.agree_label" = "Ao proceder você está concordando com os";
+"auth.login.agree_and" = "e";
+"auth.login.agree_termsofservice" = "Termos de Serviço";
+"auth.login.agree_privacypolicy" = "Política de Privacidade";
 
 "auth.forgot_password.title" = "Esqueceu sua senha?";
 "auth.forgot_password.message" = "Digite seu e-mail";
@@ -90,7 +118,7 @@
 "user_menu.busy" = "Ocupado";
 "user_menu.invisible" = "Invisível";
 "user_menu.admin" = "Administração";
-"user_menu.settings" = "Minha conta";
+"user_menu.preferences" = "Preferências";
 "user_menu.logout" = "Sair";
 
 // New Room View
@@ -119,6 +147,7 @@
 "chat.read_only" = "Este canal é somente leitura";
 "chat.muted" = "Você foi silenciado";
 "chat.loading_messages" = "Carregando mensagens...";
+"chat.unread_separator" = "novas mensagens";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Adicionar reação";
@@ -134,6 +163,12 @@
 "chat.message.actions.delete.confirm.title" = "Deletar esta mensagem?";
 "chat.message.actions.delete.confirm.message" = "Tem certeza que deseja deletar esta mensagem? A mensagem não poderá ser recuperada.";
 "chat.message.actions.delete.confirm.yes" = "Sim, deletar";
+"chat.message.actions.discard" = "Descartar mensagem";
+"chat.message.actions.discard.confirm.title" = "Descartar esta mensagem?";
+"chat.message.actions.discard.confirm.message" = "Esta mensagem não foi enviada. Você deseja descartá-la? A mensagem não poderá ser recuperada.";
+"chat.message.actions.discard.confirm.yes" = "Sim, descartar";
+"chat.message.actions.resend" = "Reenviar";
+"chat.message.actions.resend_all" = "Reenviar todas";
 "Send" = "Enviar"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -148,6 +183,7 @@
 "chat.upload.shoot_video" = "Gravar um vídeo";
 "chat.upload.choose_from_library" = "Escolher da biblioteca";
 "chat.upload.import_file" = "Importar arquivo...";
+"chat.upload.draw" = "Desenhar algo";
 
 // Chat Download
 "chat.download.downloading_file" = "Baixando \"%@\"";
@@ -155,6 +191,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Toque para abrir";
 "chat.message.open_browser" = "Abrir no Safari";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Oops!";
+"chat.drawing.messageTitle" = "Você precisa desenhar algo antes de enviar.";
+"chat.drawing.fileName" = "Desenho";
+"chat.drawing.settings.opacity" = "Opacidade";
+"chat.drawing.settings.width" = "Largura";
+"chat.drawing.settings.color.selected" = "Selecionar cor";
+"chat.drawing.settings.color.others" = "Escolha uma cor:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nome da sala alterou para: %@ por %@";
@@ -181,6 +226,7 @@
 "chat.info.item.members" = "Membros";
 "chat.info.item.pinned" = "Pinadas";
 "chat.info.item.starred" = "Favoritas";
+"chat.info.item.mentions" = "Menções";
 
 // Members List
 "chat.members.list.title" = "Membros";
@@ -190,16 +236,59 @@
 "chat.messages.list.empty" = "Nenhuma mensagem encontrada";
 "chat.messages.pinned.list.title" = "Mensagens Pinadas";
 "chat.messages.starred.list.title" = "Mensagens Favoritas";
+"chat.messages.mentions.list.title" = "Menções";
 
 // Settings
 "myaccount.settings.title" = "Configurações";
 "myaccount.settings.contactus" = "Entre em contato";
+"myaccount.settings.profile" = "Perfil";
 "myaccount.settings.license" = "Licença";
+"myaccount.settings.language" = "Idioma";
 "myaccount.settings.appicon" = "Ícone do App";
 "myaccount.settings.version" = "Versão: %@ (%@)";
+"myaccount.settings.web_browser" = "Navegador";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Escolher Ícone";
-"myaccount.settings.changeicon.header" = "Você pode escolher o ícone do Rocket.Chat+ para mudar a aparência em sua home screen. Escolha o ícone abaixo que você mais gostar.";
+"myaccount.settings.changeicon.header" = "Você pode escolher o ícone do Rocket.Chat para mudar a aparência em sua home screen. Escolha o ícone abaixo que você mais gostar.";
 "myaccount.settings.changeicon.errortitle" = "Não podemos alterar seu ícone";
 "myaccount.settings.changeicon.iosversion" = "Esta funcionalidade está disponível somente para usuários com versão do iOS superior a 10.3.";
+
+// Change Language
+"myaccount.settings.language.title" = "Alterar Idioma";
+"myaccount.settings.language.reset" = "Restaurar o Padrão";
+"myaccount.settings.language.message" = "Você mudou o idioma. Você precisa fechar o aplicativo e abrir novamente para que as alterações tenham efeito.";
+
+// Choose Web Browser
+"web_browser.safari.title" = "Safari";
+"web_browser.in_app_safari.title" = "Navegador no App";
+"web_browser.chrome.title" = "Chrome";
+"web_browser.opera.title" = "Opera Mini";
+"web_browser.firefox.title" = "Firefox";
+"myaccount.settings.web_browser.title" = "Navegador";
+"myaccount.settings.web_browser.footer" = "Este aplicativo será usado para abrir links no Rocket Chat.";
+
+// Update Profile
+"myaccount.settings.profile.title" = "Perfil";
+"myaccount.settings.editing_profile.title" = "Editar Perfi";
+"myaccount.settings.profile.actions.save" = "Salvar";
+"myaccount.settings.profile.actions.edit" = "Editar";
+"myaccount.settings.profile.actions.change_password" = "Alterar senha";
+"myaccount.settings.profile.section.profile" = "Perfil";
+"myaccount.settings.profile.section.password" = "Senha";
+"myaccount.settings.profile.name_placeholder" = "Nome";
+"myaccount.settings.profile.username_placeholder" = "Username";
+"myaccount.settings.profile.email_placeholder" = "E-mail";
+"myaccount.settings.profile.password_required.title" = "Insira sua senha";
+"myaccount.settings.profile.password_required.message" = "É necessário inserir sua senha para atualizar seu e-mail.";
+"myaccount.settings.profile.password_required.placeholder" = "Senha";
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "Nova senha";
+"myaccount.settings.profile.new_password.section.password" = "Senha";
+"myaccount.settings.profile.new_password.actions.save" = "Salvar";
+"myaccount.settings.profile.new_password.password_placeholder" = "Nova senha";
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Confirmação da senha";
+"myaccount.settings.profile.new_password.password_required.title" = "Insira sua senha";
+"myaccount.settings.profile.new_password.password_required.message" = "É necessário inserir sua senha atual para criar uma nova senha.";
+"myaccount.settings.profile.new_password.password_required.placeholder" = "Senha";

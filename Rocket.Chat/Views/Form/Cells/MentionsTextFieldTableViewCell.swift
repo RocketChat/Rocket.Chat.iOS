@@ -61,7 +61,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
 
     private func fetchUsers() {
         guard
-            let realm = Realm.shared,
+            let realm = Realm.current,
             let name = textFieldInput.text,
             name.count > 0
         else {
@@ -70,10 +70,10 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
         }
 
         let users = realm.objects(User.self).filter(
-            NSPredicate(format: "name CONTAINS %@ OR username CONTAINS %@", name, name)
+            NSPredicate(format: "name CONTAINS[cd] %@ OR username CONTAINS[cd] %@", name, name)
         )
 
-        let usernames = Array(users).flatMap { $0.username }.filter {
+        let usernames = Array(users).compactMap { $0.username }.filter {
             AuthManager.currentUser()?.username != $0
         }
 
