@@ -259,6 +259,13 @@ final class ChatDataController {
         return (indexPaths, removedIndexPaths)
     }
 
+    func needsUpdate(oldMessage: Message, newMessage: Message) -> Bool {
+        return oldMessage.text != newMessage.text ||
+            oldMessage.type != newMessage.type ||
+            oldMessage.mentions.count != newMessage.mentions.count ||
+            oldMessage.channels.count != newMessage.channels.count
+    }
+
     func update(_ message: Message) -> Int {
         for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
@@ -266,8 +273,10 @@ final class ChatDataController {
                    return -1
                 }
 
-                if obj.message?.text != message.text || obj.message?.type != message.type {
-                    MessageTextCacheManager.shared.update(for: message)
+                if let oldMessage = obj.message {
+                    if needsUpdate(oldMessage: oldMessage, newMessage: message) {
+                        MessageTextCacheManager.shared.update(for: message)
+                    }
                 }
 
                 data[idx].message = message
