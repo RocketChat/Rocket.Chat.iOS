@@ -23,19 +23,23 @@ struct UploadClient: APIClient {
             description: description
         )
 
-        api.fetch(req, succeeded: { result in
-            if let error = result.error {
-                Alert(key: "alert.upload_error").withMessage(error).present()
-            }
-            completion?()
-        }, errored: { error in
-            if case .version = error {
-                versionFallback?()
-            } else {
-                Alert(key: "alert.upload_error").present()
+        api.fetch(req) { response in
+            switch response {
+            case .resource(let resource):
+                if let error = resource.error {
+                    Alert(key: "alert.upload_error").withMessage(error).present()
+                }
                 completion?()
+            case .error(let error):
+                if case .version = error {
+                    versionFallback?()
+                } else {
+                    Alert(key: "alert.upload_error").present()
+                    completion?()
+                }
             }
-        })
+
+        }
     }
 
     func uploadAvatar(data: Data, filename: String, mimetype: String, completion: (() -> Void)? = nil) {
@@ -45,10 +49,8 @@ struct UploadClient: APIClient {
             mimetype: mimetype
         )
 
-        api.fetch(req, succeeded: { _ in
+        api.fetch(req) { _ in
             completion?()
-        }, errored: { _ in
-            completion?()
-        })
+        }
     }
 }

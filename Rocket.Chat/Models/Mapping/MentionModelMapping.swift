@@ -12,10 +12,6 @@ import RealmSwift
 
 extension Mention: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
-        if self.identifier == nil {
-            self.identifier = String.random()
-        }
-
         self.username = values["username"].stringValue
     }
 }

@@ -18,15 +18,15 @@ protocol APIRequestMiddleware {
 
 protocol APIFetcher {
     @discardableResult
-    func fetch<R>(_ request: R, succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask?
+    func fetch<R: APIRequest>(_ request: R, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask?
     @discardableResult
-    func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?,
-                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask?
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask?
 }
 
 extension APIFetcher {
-    func fetch<R>(_ request: R, succeeded: ((APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask? {
-        return fetch(request, options: .none, sessionDelegate: nil, succeeded: succeeded, errored: errored)
+    @discardableResult
+    func fetch<R: APIRequest>(_ request: R, completion: ((APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask? {
+        return fetch(request, options: .none, sessionDelegate: nil, completion: completion)
     }
 }
 
@@ -65,18 +65,19 @@ class API: APIFetcher {
     }
 
     @discardableResult
-    func fetch<R>(_ request: R, options: APIRequestOptions = .none, sessionDelegate: URLSessionTaskDelegate? = nil,
-                  succeeded: ((_ result: APIResult<R>) -> Void)?, errored: APIErrored?) -> URLSessionTask? {
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions = .none,
+                              sessionDelegate: URLSessionTaskDelegate? = nil,
+                              completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask? {
         var transformedRequest = request
         for middleware in requestMiddlewares {
             if let error = middleware.handle(&transformedRequest) {
-                errored?(error)
+                completion?(.error(error))
                 return nil
             }
         }
 
         guard let request = transformedRequest.request(for: self, options: options) else {
-            errored?(.malformedRequest)
+            completion?(.error(.malformedRequest))
             return nil
         }
 
@@ -95,17 +96,17 @@ class API: APIFetcher {
 
         let task = session.dataTask(with: request) { (data, _, error) in
             if let error = error {
-                errored?(.error(error))
+                completion?(.error(.error(error)))
                 return
             }
 
             guard let data = data else {
-                errored?(.noData)
+                completion?(.error(.noData))
                 return
             }
 
             let json = try? JSON(data: data)
-            succeeded?(APIResult<R>(raw: json))
+            completion?(APIResponse<R.APIResourceType>.resource(R.APIResourceType(raw: json)))
         }
 
         task.resume()

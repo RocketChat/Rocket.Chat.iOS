@@ -31,9 +31,7 @@ extension MessageManager {
         let request = [
             "msg": "method",
             "method": "loadHistory",
-            "params": ["\(subscription.rid)", lastDate, historySize, [
-                "$date": Date().timeIntervalSince1970 * 1000
-            ]]
+            "params": ["\(subscription.rid)", lastDate, historySize]
         ] as [String: Any]
 
         let validMessages = List<Message>()

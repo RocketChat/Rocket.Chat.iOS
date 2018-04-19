@@ -10,11 +10,16 @@ import XCTest
 
 @testable import Rocket_Chat
 
+private class TestResource: APIResource { }
+
+private class TestRequest: APIRequest {
+    typealias APIResourceType = TestResource
+
+    let path = "/test"
+    var requiredVersion = Version(0, 60, 0)
+}
+
 class VersionMiddlewareSpec: XCTestCase {
-    class TestRequest: APIRequest {
-        let path = "/test"
-        var requiredVersion = Version(0, 60, 0)
-    }
 
     func testHandleRequest() {
         let available = Version(0, 60, 0)

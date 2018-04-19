@@ -99,6 +99,7 @@ extension AppManager {
     }
 
     static func reloadApp() {
+        SocketManager.sharedInstance.connectionHandlers = [:]
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {
@@ -164,22 +165,26 @@ extension AppManager {
         // If not, fetch it
         let currentRealm = Realm.current
         let request = SubscriptionInfoRequest(roomName: name)
-        API.current()?.fetch(request, succeeded: { result in
-            DispatchQueue.main.async {
-                Realm.executeOnMainThread(realm: currentRealm, { realm in
-                    guard let values = result.channel else { return }
+        API.current()?.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                DispatchQueue.main.async {
+                    Realm.executeOnMainThread(realm: currentRealm, { realm in
+                        guard let values = resource.channel else { return }
 
-                    let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
-                        object?.rid = object?.identifier ?? ""
+                        let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
+                            object?.rid = object?.identifier ?? ""
+                        })
+
+                        realm.add(subscription, update: true)
                     })
 
-                    realm.add(subscription, update: true)
-                })
-
-                _ = openRoom()
-
+                    _ = openRoom()
+                }
+            case .error:
+                break
             }
-        }, errored: nil)
+        }
     }
 }
 

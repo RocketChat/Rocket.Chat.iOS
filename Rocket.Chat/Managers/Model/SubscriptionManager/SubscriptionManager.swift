@@ -205,7 +205,7 @@ struct SubscriptionManager {
             "msg": "sub",
             "name": "stream-notify-user",
             "params": [eventName, false]
-            ] as [String: Any]
+        ] as [String: Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }

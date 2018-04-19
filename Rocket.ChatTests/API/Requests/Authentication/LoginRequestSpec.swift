@@ -48,7 +48,7 @@ class LoginRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = LoginResult(raw: json)
+        let result = LoginResource(raw: json)
 
         XCTAssertEqual(result.data, json["data"])
         XCTAssertEqual(result.authToken, "9HqLlyZOugoStsXCUfD_0YdwnNnunAJF8V47U3QHXSq")

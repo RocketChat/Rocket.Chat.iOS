@@ -118,18 +118,21 @@ class NewPasswordTableViewController: UITableViewController {
         }
 
         let updatePasswordRequest = UpdateUserRequest(password: newPassword, currentPassword: currentPassword)
-        api?.fetch(updatePasswordRequest, succeeded: { [weak self] result in
-            stopLoading()
+        api?.fetch(updatePasswordRequest) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                stopLoading()
 
-            if let errorMessage = result.errorMessage {
-                Alert(key: "alert.update_password_error").withMessage(errorMessage).present()
-            } else {
-                self?.passwordUpdated?(self)
+                if let errorMessage = resource.errorMessage {
+                    Alert(key: "alert.update_password_error").withMessage(errorMessage).present()
+                } else {
+                    self?.passwordUpdated?(self)
+                }
+            case .error:
+                stopLoading()
+                Alert(key: "alert.update_password_error").present()
             }
-        }, errored: { _ in
-            stopLoading()
-            Alert(key: "alert.update_password_error").present()
-        })
+        }
     }
 
     // MARK: UITableViewDelegate
