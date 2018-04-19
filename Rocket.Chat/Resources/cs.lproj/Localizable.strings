@@ -11,6 +11,9 @@
 "alert.connection.invalid_url.title" = "Jejky!";
 "alert.connection.invalid_url.message" = "Zadaná adresa URL je neplatná. Zkontrolujte to a zkuste to znovu, prosím!";
 
+"alert.connection.not_secured.title" = "Oops!"; // TODO
+"alert.connection.not_secured.message" = "Could not establish a secure connection to the server. Please make sure the server supports SSL."; // TODO
+
 "alert.connection.socket_error.title" = "Oops!";
 "alert.connection.socket_error.message" = "Could not connect to this server!";
 
