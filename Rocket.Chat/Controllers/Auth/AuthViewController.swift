@@ -22,7 +22,10 @@ final class AuthViewController: BaseViewController {
     var temporary2FACode: String?
 
     var api: API? {
-        guard let serverURL = serverURL, let serverVersion = serverVersion else {
+        guard
+            let serverURL = serverURL,
+            let serverVersion = serverVersion
+        else {
             return nil
         }
 
