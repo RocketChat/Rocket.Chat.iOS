@@ -46,6 +46,7 @@ final class ChatDataController {
     var unreadSeparator = false
     var dismissUnreadSeparator = false
 
+    @discardableResult
     func clear() -> [IndexPath] {
         var indexPaths: [IndexPath] = []
 
@@ -105,9 +106,12 @@ final class ChatDataController {
 
         let sameUser = message.user == prevMessage.user
 
-        let timeLimit = Message.maximumTimeForSequence
-        let recent = date.timeIntervalSince(prevDate) < timeLimit
+        var timeLimit = AuthSettingsDefaults.messageGroupingPeriod
+        if let settings = AuthSettingsManager.settings {
+            timeLimit = settings.messageGroupingPeriod
+        }
 
+        let recent = Int(date.timeIntervalSince(prevDate)) < timeLimit
         return sameUser && recent
     }
 

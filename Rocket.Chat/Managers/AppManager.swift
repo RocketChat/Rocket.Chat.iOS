@@ -44,6 +44,12 @@ struct AppManager {
     */
     static var initialRoomId: String?
 
+    /**
+     Room Id for the currently active room.
+    */
+    static var currentRoomId: String? {
+        return ChatViewController.shared?.subscription?.rid
+    }
 }
 
 extension AppManager {
@@ -60,7 +66,7 @@ extension AppManager {
         }
     }
 
-    static func changeToServerIfExists(serverUrl: String, roomId: String? = nil) -> Bool {
+    static func changeToServerIfExists(serverUrl: URL, roomId: String? = nil) -> Bool {
         guard let index = DatabaseManager.serverIndexForUrl(serverUrl) else {
             return false
         }
@@ -84,12 +90,16 @@ extension AppManager {
     }
 
     static func changeToOrAddServer(serverUrl: String, credentials: DeepLinkCredentials? = nil, roomId: String? = nil) {
-        guard let url = URL(string: serverUrl), changeToServerIfExists(serverUrl: url.absoluteString, roomId: roomId) else {
+        guard
+            let url = URL(string: serverUrl),
+            changeToServerIfExists(serverUrl: url, roomId: roomId)
+        else {
             return addServer(serverUrl: serverUrl, credentials: credentials, roomId: roomId)
         }
     }
 
     static func reloadApp() {
+        SocketManager.sharedInstance.connectionHandlers = [:]
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {
@@ -138,9 +148,9 @@ extension AppManager {
         })
     }
 
-    static func openChannel(name: String) {
-        func openChannel() -> Bool {
-            guard let channel = Subscription.find(name: name, subscriptionType: [.channel]) else { return false }
+    static func openRoom(name: String, type: SubscriptionType = .channel) {
+        func openRoom() -> Bool {
+            guard let channel = Subscription.find(name: name, subscriptionType: [type]) else { return false }
 
             ChatViewController.shared?.subscription = channel
 
@@ -148,28 +158,33 @@ extension AppManager {
         }
 
         // Check if we already have this channel
-        if openChannel() == true {
+        if openRoom() == true {
             return
         }
 
         // If not, fetch it
         let currentRealm = Realm.current
         let request = SubscriptionInfoRequest(roomName: name)
-        API.current()?.fetch(request, succeeded: { result in
-            DispatchQueue.main.async {
-                Realm.executeOnMainThread(realm: currentRealm, { realm in
-                    guard let values = result.channel else { return }
+        API.current()?.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                DispatchQueue.main.async {
+                    Realm.executeOnMainThread(realm: currentRealm, { realm in
+                        guard let values = resource.channel else { return }
 
-                    let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
-                        object?.rid = object?.identifier ?? ""
+                        let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
+                            object?.rid = object?.identifier ?? ""
+                        })
+
+                        realm.add(subscription, update: true)
                     })
 
-                    realm.add(subscription, update: true)
-                })
-
-                _ = openChannel()
+                    _ = openRoom()
+                }
+            case .error:
+                break
             }
-        }, errored: nil)
+        }
     }
 }
 
@@ -191,7 +206,7 @@ extension AppManager {
         case let .mention(name):
             openDirectMessage(username: name)
         case let .channel(name):
-            openChannel(name: name)
+            openRoom(name: name)
         }
     }
 }

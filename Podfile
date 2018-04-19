@@ -22,10 +22,9 @@ def shared_pods
   # Crash Report
   pod 'Fabric'
   pod 'Crashlytics'
-  pod 'Instabug'
 
   # Code utilities
-  pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
+  pod 'semver'
 
   # UI
   pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
@@ -50,9 +49,9 @@ def shared_pods
   # Authentication SDKs
   pod 'OAuthSwift'
   pod '1PasswordExtension'
-  pod 'GoogleSignIn'
 
   # Debugging
+  pod 'Instabug', :configurations => ['Debug', 'Beta']
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
 end

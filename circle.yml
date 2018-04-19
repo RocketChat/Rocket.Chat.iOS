@@ -24,18 +24,21 @@ jobs:
       - run:
           name: Build for testing
           command: ./Scripts/build_for_testing.sh
-    #   - run:
-    #       name: Run tests on iPad iOS 10.3
-    #       command: ./Scripts/test_without_building.sh "10.3.1" "iPad Air 2"
+      - run:
+          name: Run tests on iPad iOS 10.3
+          command: ./Scripts/test_without_building.sh "10.3.1" "iPad Air 2"
       - run:
           name: Run tests on iPad iOS 11.3
           command: ./Scripts/test_without_building.sh "11.3" "iPad Air 2"
-    #   - run:
-    #       name: Run tests on iPhone iOS 10.3
-    #       command: ./Scripts/test_without_building.sh "10.3.1" "iPhone 5s"
+      - run:
+          name: Run tests on iPhone iOS 10.3
+          command: ./Scripts/test_without_building.sh "10.3.1" "iPhone 5s"
       - run:
           name: Run tests on iPhone iOS 11.3
           command: ./Scripts/test_without_building_coverage.sh "11.3" "iPhone 8"
+      - run:
+          name: Run tests on iPhone (X series) iOS 11.3
+          command: ./Scripts/test_without_building_coverage.sh "11.3" "iPhone X"      
       - run:
           name: Codecov
           command: bash <(curl -s https://codecov.io/bash) -J 'Rocket.Chat'

@@ -214,18 +214,20 @@ extension SubscriptionsViewController {
         tableView.tableFooterView = nil
         activityViewSearching.startAnimating()
 
-        SubscriptionManager.spotlight(text) { [weak self] result in
-            let currentText = self?.textFieldSearch.text ?? ""
+        API.current()?.client(SpotlightClient.self).search(query: text) { [weak self] result in
+            DispatchQueue.main.async {
+                let currentText = self?.textFieldSearch.text ?? ""
 
-            if currentText.count == 0 {
-                return
+                if currentText.count == 0 {
+                    return
+                }
+
+                self?.activityViewSearching.stopAnimating()
+                self?.isSearchingRemotely = true
+                self?.searchResult = result
+                self?.groupSubscription()
+                self?.tableView.reloadData()
             }
-
-            self?.activityViewSearching.stopAnimating()
-            self?.isSearchingRemotely = true
-            self?.searchResult = result
-            self?.groupSubscription()
-            self?.tableView.reloadData()
         }
     }
 
@@ -309,11 +311,15 @@ extension SubscriptionsViewController {
         assigned = true
 
         subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.observe(handleSubscriptionUpdates)
+        subscriptionsToken = subscriptions?.observe({ [weak self] changes in
+            self?.handleSubscriptionUpdates(changes: changes)
+        })
 
         if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
             let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
-            currentUserToken = query.observe(handleCurrentUserUpdates)
+            currentUserToken = query.observe({ [weak self] changes in
+                self?.handleCurrentUserUpdates(changes: changes)
+            })
         }
 
         groupSubscription()

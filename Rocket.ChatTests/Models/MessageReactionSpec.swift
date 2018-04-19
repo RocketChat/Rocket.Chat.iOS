@@ -23,7 +23,6 @@ class MessageReactionSpec: XCTestCase {
             ]
         ]))
 
-        XCTAssertNotNil(object.identifier)
         XCTAssertEqual(object.emoji, ":smile:")
     }
 }

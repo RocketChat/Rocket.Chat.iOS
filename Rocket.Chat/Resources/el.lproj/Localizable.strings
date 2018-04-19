@@ -52,6 +52,8 @@
 "alert.email_verification.title" = "Επαλήθευση Email";
 "alert.email_verification.message" = "Σας στείλαμε ένα email για να επιβεβαιώσουμε την εγγραφή σας. Αν δεν το λάβετε σύντομα, παρακαλούμε επιστρέψτε και ξαναπροσπαθήστε.";
 
+"alert.discarding_changes.title" = "Unsaved changes"; // TODO
+"alert.discarding_changes.message" = "Your unsaved changes have been discarded."; // TODO
 "alert.load_profile_error.title" = "Failed to load your profile"; // TODO
 "alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again."; // TODO
 "alert.password_mismatch_error.title" = "Your password doesn't match"; // TODO
@@ -224,6 +226,7 @@
 "chat.info.item.members" = "Μέλη";
 "chat.info.item.pinned" = "Καρφιτσωμένα";
 "chat.info.item.starred" = "Αστερωμένα";
+"chat.info.item.mentions" = "Mentions"; // TODO
 
 // Members List
 "chat.members.list.title" = "Μέλη";
@@ -233,11 +236,12 @@
 "chat.messages.list.empty" = "Δεν βρέθηκαν μηνύματα";
 "chat.messages.pinned.list.title" = "Καρφιτσωμένα Μηνύματα";
 "chat.messages.starred.list.title" = "Αστερωμένα Μηνύματα";
+"chat.messages.mentions.list.title" = "Mentions"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Ρυθμίσεις";
 "myaccount.settings.contactus" = "Επικοινωνήστε μαζί μας";
-"myaccount.settings.profile" = "Profile"; // TODO: 
+"myaccount.settings.profile" = "Profile"; // TODO:
 "myaccount.settings.license" = "Άδεια";
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
@@ -246,14 +250,14 @@
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Επιλέξτε Εικονίδιο";
-"myaccount.settings.changeicon.header" = "Μπορείτε να αλλάξετε πώς το δικό σας Rocket.Chat+ εικονίδιο θα φαίνεται στην συσκευή σας. Παρακαλούμε επιλέξτε ένα από τα παρακάτω εικονίδια, όποιο σας αρέσει πιο πολύ.";
+"myaccount.settings.changeicon.header" = "Μπορείτε να αλλάξετε πώς το δικό σας Rocket.Chat εικονίδιο θα φαίνεται στην συσκευή σας. Παρακαλούμε επιλέξτε ένα από τα παρακάτω εικονίδια, όποιο σας αρέσει πιο πολύ.";
 "myaccount.settings.changeicon.errortitle" = "Δεν μπορούμε να αλλάξουμε εικονίδιο";
 "myaccount.settings.changeicon.iosversion" = "Εναλλακτικά εικονίδια εφαρμογής δεν υποστηρίζονται σε iOS εκδόσεις μικρότερες από 10.3";
 
 // Change Language
 "myaccount.settings.language.title" = "Μεταβολή Γλώσσας";
 "myaccount.settings.language.reset" = "Επαναφορά στην Προεπιλεγμένη";
-"myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat+ ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";
+"myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
@@ -271,6 +275,7 @@
 "myaccount.settings.profile.actions.edit" = "Edit"; // TODO
 "myaccount.settings.profile.actions.change_password" = "Change your password"; // TODO
 "myaccount.settings.profile.section.profile" = "Profile"; // TODO
+"myaccount.settings.profile.section.password" = "Password"; // TODO
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO

@@ -39,6 +39,8 @@ func selectServer(store: SEStore, serverIndex: Int) {
 
 func selectInitialServer(store: SEStore) -> SEAction? {
     store.dispatch(fetchServers)
-    selectServer(store: store, serverIndex: 0)
+    let serverCount = DatabaseManager.servers?.count ?? 0
+    let index = DatabaseManager.selectedIndex < serverCount ? DatabaseManager.selectedIndex : 0
+    selectServer(store: store, serverIndex: index)
     return nil
 }

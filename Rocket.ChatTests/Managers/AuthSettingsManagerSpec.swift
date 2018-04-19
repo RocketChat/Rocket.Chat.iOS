@@ -60,7 +60,6 @@ class AuthSettingsManagerSpec: XCTestCase {
     func testInternalCachedSettingsUpdatedFromAuth() {
         Realm.executeOnMainThread({ realm in
             let settings = AuthSettings()
-            settings.identifier = "dumb.settings.01"
             settings.cdnPrefixURL = "foo.bar.baz"
 
             let auth = Auth()
@@ -78,7 +77,6 @@ class AuthSettingsManagerSpec: XCTestCase {
     func testUpdateCachedSettings() {
         Realm.executeOnMainThread({ realm in
             let settings = AuthSettings()
-            settings.identifier = "dumb.settings.02"
             settings.cdnPrefixURL = "foo.bar.baz"
 
             let auth = Auth()

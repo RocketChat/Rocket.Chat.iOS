@@ -9,9 +9,8 @@
 
 import SwiftyJSON
 
-typealias LoginResult = APIResult<LoginRequest>
-
 class LoginRequest: APIRequest {
+    typealias APIResourceType = LoginResource
     let method: HTTPMethod = .post
     let path = "/api/v1/login"
 
@@ -32,7 +31,7 @@ class LoginRequest: APIRequest {
     }
 }
 
-extension APIResult where T == LoginRequest {
+class LoginResource: APIResource {
     var data: JSON? {
         return raw?["data"]
     }

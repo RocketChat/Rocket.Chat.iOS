@@ -71,7 +71,6 @@
 "alert.update_profile_success.title" = "Profile updated";
 "alert.update_password_success.title" = "Password updated";
 
-
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
 "connection.server.redirect.alert.message" = "Looks like this server changed it's URL to:\n\n%@\n\nWould you like to update the URL?";
@@ -227,6 +226,7 @@
 "chat.info.item.members" = "Members";
 "chat.info.item.pinned" = "Pinned";
 "chat.info.item.starred" = "Starred";
+"chat.info.item.mentions" = "Mentions";
 
 // Members List
 "chat.members.list.title" = "Members";
@@ -236,6 +236,7 @@
 "chat.messages.list.empty" = "No messages found";
 "chat.messages.pinned.list.title" = "Pinned Messages";
 "chat.messages.starred.list.title" = "Starred Messages";
+"chat.messages.mentions.list.title" = "Mentions";
 
 // Settings
 "myaccount.settings.title" = "Preferences";
@@ -247,17 +248,16 @@
 "myaccount.settings.version" = "Version: %@ (%@)";
 "myaccount.settings.web_browser" = "Web Browser";
 
-
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon";
-"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of the icons below, whichever you like the most.";
+"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat icon looks like on your device. Please choose one of the icons below, whichever you like the most.";
 "myaccount.settings.changeicon.errortitle" = "Cannot change icon";
 "myaccount.settings.changeicon.iosversion" = "Alternate application icons are not supported on iOS version below 10.3";
 
 // Change Language
 "myaccount.settings.language.title" = "Change Language";
 "myaccount.settings.language.reset" = "Reset to Default";
-"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+ before the new settings will take effect.";
+"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat before the new settings will take effect.";
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
@@ -275,6 +275,7 @@
 "myaccount.settings.profile.actions.edit" = "Edit";
 "myaccount.settings.profile.actions.change_password" = "Change your password";
 "myaccount.settings.profile.section.profile" = "Profile";
+"myaccount.settings.profile.section.password" = "Password";
 "myaccount.settings.profile.name_placeholder" = "Name";
 "myaccount.settings.profile.username_placeholder" = "Username";
 "myaccount.settings.profile.email_placeholder" = "E-mail";

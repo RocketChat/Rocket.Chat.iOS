@@ -53,14 +53,14 @@ class PostMessageRequestSpec: APITestCase {
             "success": true
         ])
 
-        let result = APIResult<PostMessageRequest>(raw: mockResult)
+        let result = PostMessageResource(raw: mockResult)
 
         let message = Message()
         message.map(mockResult["message"], realm: nil)
 
         XCTAssertEqual(result.message?.identifier, "jC9chsFddTvsbFQG7", "message is correct")
 
-        let nilResult = APIResult<PostMessageRequest>(raw: nil)
+        let nilResult = PostMessageResource(raw: nil)
         XCTAssertNil(nilResult.message, "message is nil if raw is nil")
     }
 }

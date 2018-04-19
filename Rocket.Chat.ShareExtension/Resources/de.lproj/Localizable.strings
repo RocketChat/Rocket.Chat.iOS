@@ -30,3 +30,4 @@
 "report.success.message" = "Die Inhalt wurde erfolgreich versandt.";
 "report.error.title" = "Fehler";
 "report.error.message" = "Etwas ist schiefgelaufen beim Teilen.";
+"report.cancelled.message" = "You cancelled the request. The message wasn't sent."; //TODO

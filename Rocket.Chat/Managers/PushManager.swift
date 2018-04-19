@@ -70,7 +70,7 @@ final class PushManager {
 // MARK: Handle Notifications
 
 struct PushNotification {
-    let host: String
+    let host: URL
     let username: String
     let roomId: String
     let roomType: SubscriptionType
@@ -78,7 +78,8 @@ struct PushNotification {
     init?(raw: [AnyHashable: Any]) {
         guard
             let json = JSON(parseJSON: (raw["ejson"] as? String) ?? "").dictionary,
-            let host = json["host"]?.string,
+            let hostString = json["host"]?.string,
+            let host = URL(string: hostString),
             let username = json["sender"]?["username"].string,
             let roomType = json["type"]?.string,
             let roomId = json["rid"]?.string
@@ -141,10 +142,7 @@ extension PushManager {
 
     @discardableResult
     static func handleNotification(_ notification: PushNotification, reply: String? = nil) -> Bool {
-        guard
-            let serverUrl = URL(string: notification.host)?.socketURL()?.absoluteString,
-            let index = DatabaseManager.serverIndexForUrl(serverUrl)
-        else {
+        guard let index = DatabaseManager.serverIndexForUrl(notification.host) else {
             return false
         }
 
@@ -163,11 +161,14 @@ extension PushManager {
             let message = "\(reply)\(appendage)"
 
             let backgroundTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-            API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), succeeded: { _ in
-                UIApplication.shared.endBackgroundTask(backgroundTask)
-            }, errored: { _ in
-                Alert.defaultError.present()
-            })
+            API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message)) { response in
+                switch response {
+                case .resource:
+                    UIApplication.shared.endBackgroundTask(backgroundTask)
+                case .error:
+                    Alert.defaultError.present()
+                }
+            }
         }
 
         return true
@@ -176,6 +177,10 @@ extension PushManager {
 
 class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        if SocketManager.isConnected() {
+            completionHandler([])
+            return
+        }
         completionHandler([.alert, .sound])
     }
 

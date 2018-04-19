@@ -96,7 +96,7 @@ extension NSItemProvider {
                 if let itemData = item as? Data {
                     data = itemData
                     mimetype = "application/octet-stream"
-                } else if let url = item as? URL, let urlData = try? Data(contentsOf: url) {
+                } else if let url = item as? URL, let urlData = try? Data(contentsOf: url, options: [.mappedIfSafe]) {
                     data = urlData
                     name = url.lastPathComponent
                     mimetype = url.mimeType()

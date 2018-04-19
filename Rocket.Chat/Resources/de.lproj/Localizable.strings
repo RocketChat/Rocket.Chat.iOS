@@ -52,6 +52,8 @@
 "alert.email_verification.title" = "E-Mail Bestätigung";
 "alert.email_verification.message" = "Wir haben dir eine E-Mail zur Bestätigung deiner Registrierung geschickt. Solltest du keine Mail erhalten haben versuche es noch einmal.";
 
+"alert.discarding_changes.title" = "Unsaved changes"; // TODO
+"alert.discarding_changes.message" = "Your unsaved changes have been discarded."; // TODO
 "alert.load_profile_error.title" = "Failed to load your profile"; // TODO
 "alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again."; // TODO
 "alert.password_mismatch_error.title" = "Your password doesn't match"; // TODO
@@ -161,11 +163,12 @@
 "chat.message.actions.delete.confirm.title" = "Diese Nachricht löschen?";
 "chat.message.actions.delete.confirm.message" = "Bist du sicher, dass du diese Nachricht löschen möchtest? Sie kann dann nicht wiederhergestellt werden.";
 "chat.message.actions.delete.confirm.yes" = "Ja, löschen";
+"chat.message.actions.discard" = "Discard message"; //TODO
+"chat.message.actions.discard.confirm.title" = "Discard this message?"; //TODO
+"chat.message.actions.discard.confirm.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.discard.confirm.yes" = "Yes, discard"; //TODO
 "chat.message.actions.resend" = "Resend"; //TODO
 "chat.message.actions.resend_all" = "Resend all"; //TODO
-"chat.message.actions.delete.discard.title" = "Discard this message?"; //TODO
-"chat.message.actions.delete.discard.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
-"chat.message.actions.delete.discard.yes" = "Yes, discard"; //TODO
 "Send" = "Senden"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -223,6 +226,7 @@
 "chat.info.item.members" = "Teilnehmer";
 "chat.info.item.pinned" = "Angeheftet";
 "chat.info.item.starred" = "Favorisiert";
+"chat.info.item.mentions" = "Mentions"; // TODO
 
 // Members List
 "chat.members.list.title" = "Mitglieder";
@@ -232,11 +236,12 @@
 "chat.messages.list.empty" = "Keine Nachrichten gefunden";
 "chat.messages.pinned.list.title" = "Angeheftete Nachrichten";
 "chat.messages.starred.list.title" = "Favorisierte Nachrichten";
+"chat.messages.mentions.list.title" = "Mentions"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Einstellungen"; // TODO: new text: Preferences
 "myaccount.settings.contactus" = "Kontaktiere uns";
-"myaccount.settings.profile" = "Profile"; // TODO: 
+"myaccount.settings.profile" = "Profile"; // TODO:
 "myaccount.settings.license" = "Lizenz";
 "myaccount.settings.language" = "Sprache";
 "myaccount.settings.appicon" = "App Icon"; // TODO:
@@ -270,6 +275,7 @@
 "myaccount.settings.profile.actions.edit" = "Edit"; // TODO
 "myaccount.settings.profile.actions.change_password" = "Change your password"; // TODO
 "myaccount.settings.profile.section.profile" = "Profile"; // TODO
+"myaccount.settings.profile.section.password" = "Password"; // TODO
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO

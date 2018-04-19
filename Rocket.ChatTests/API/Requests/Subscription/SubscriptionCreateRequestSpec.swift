@@ -81,8 +81,8 @@ class SubscriptionCreateRequestSpec: APITestCase {
             ]
         ])
 
-        let result = APIResult<SubscriptionCreateRequest>(raw: mockResult)
-        let resultPrivate = APIResult<SubscriptionCreateRequest>(raw: mockResultPrivate)
+        let result = SubscriptionCreateResource(raw: mockResult)
+        let resultPrivate = SubscriptionCreateResource(raw: mockResultPrivate)
 
         XCTAssertEqual(result.success, true, "success is correct")
         XCTAssertEqual(result.error, "error-test", "error is correct")
