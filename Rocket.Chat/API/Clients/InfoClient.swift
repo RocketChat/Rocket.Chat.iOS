@@ -17,10 +17,10 @@ struct InfoClient: APIClient {
             case .resource(let resource):
                 guard let version = resource.version else { return }
                 realm?.execute({ realm in
-                    AuthManager.isAuthenticated(realm: realm)?.serverVersion = "\(version)"
+                    AuthManager.isAuthenticated(realm: realm)?.serverVersion = version
                 })
             case .error:
-                return
+                break
             }
         }
     }

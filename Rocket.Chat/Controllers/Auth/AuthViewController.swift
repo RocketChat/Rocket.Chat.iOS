@@ -16,9 +16,18 @@ final class AuthViewController: BaseViewController {
 
     internal var connecting = false
 
+    var serverVersion: Version?
     var serverURL: URL!
     var serverPublicSettings: AuthSettings?
     var temporary2FACode: String?
+
+    var api: API? {
+        guard let serverURL = serverURL, let serverVersion = serverVersion else {
+            return nil
+        }
+
+        return API(host: serverURL, version: serverVersion)
+    }
 
     let socketHandlerToken = String.random(5)
 

@@ -58,7 +58,7 @@ extension AuthViewController {
             self?.updateLoginServices(changes: changes)
         }
 
-        API(host: serverURL).client(InfoClient.self).fetchLoginServices()
+        api?.client(InfoClient.self).fetchLoginServices()
     }
 
     func presentOAuthViewController(for loginService: LoginService) {
@@ -105,8 +105,8 @@ extension AuthViewController {
             let provider = loginService.provider,
             let host = serverURL.host,
             let serverUrl = URL(string: "https://\(host)")
-            else {
-                return
+        else {
+            return
         }
 
         let controller = SAMLViewController(serverUrl: serverUrl, provider: provider, success: {
