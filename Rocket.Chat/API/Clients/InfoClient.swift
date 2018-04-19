@@ -17,11 +17,33 @@ struct InfoClient: APIClient {
             case .resource(let resource):
                 guard let version = resource.version else { return }
                 realm?.execute({ realm in
-                    AuthManager.isAuthenticated(realm: realm)?.serverVersion = "\(version)"
+                    AuthManager.isAuthenticated(realm: realm)?.serverVersion = version
                 })
             case .error:
-                return
+                break
             }
+        }
+    }
+
+    func fetchLoginServices(realm: Realm? = Realm.current) {
+        api.fetch(LoginServicesRequest()) { response in
+            switch response {
+            case .resource(let res):
+                DispatchQueue.main.async {
+                    realm?.execute({ realm in
+                        realm.add(res.loginServices, update: true)
+                    })
+                }
+            case .error(let error):
+                switch error {
+                case .version:
+                    // version fallback
+                    LoginServiceManager.subscribe()
+                default:
+                    break
+                }
+            }
+
         }
     }
 }
