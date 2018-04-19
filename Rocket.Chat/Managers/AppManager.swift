@@ -99,6 +99,7 @@ extension AppManager {
     }
 
     static func reloadApp() {
+        SocketManager.sharedInstance.connectionHandlers.removeAllObjects()
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {
