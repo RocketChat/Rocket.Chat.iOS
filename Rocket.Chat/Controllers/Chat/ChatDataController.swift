@@ -81,7 +81,7 @@ final class ChatDataController {
             return false
         }
 
-        // don't group temporary messages
+        // don't group deleted messages
         if (message.markedForDeletion, prevMessage.markedForDeletion) != (false, false) {
             return false
         }
@@ -118,7 +118,7 @@ final class ChatDataController {
     func indexPathOf(_ identifier: String) -> IndexPath? {
         return data.filter { item in
             return item.identifier == identifier
-            }.compactMap { item in
+        }.compactMap { item in
             item.indexPath
         }.first
     }
@@ -127,7 +127,7 @@ final class ChatDataController {
         return data.filter { item in
             guard let messageIdentifier = item.message?.identifier else { return false }
             return messageIdentifier == identifier
-            }.compactMap { item in
+        }.compactMap { item in
             item.indexPath
         }.first
     }
@@ -263,7 +263,9 @@ final class ChatDataController {
         return oldMessage.text != newMessage.text ||
             oldMessage.type != newMessage.type ||
             oldMessage.mentions.count != newMessage.mentions.count ||
-            oldMessage.channels.count != newMessage.channels.count
+            oldMessage.channels.count != newMessage.channels.count ||
+            oldMessage.temporary != newMessage.temporary ||
+            oldMessage.failed != newMessage.failed
     }
 
     func update(_ message: Message) -> Int {
