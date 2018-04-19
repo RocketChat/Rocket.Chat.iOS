@@ -78,7 +78,8 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
                     "scope": "openid",
                     "buttonLabelText": "open",
                     "buttonLabelColor": "#FFFFFF",
-                    "loginStyle": "popup", "buttonColor":"#13679A",
+                    "loginStyle": "popup",
+                    "buttonColor": "#13679A",
                     "tokenSentVia": "payload",
                     "identityTokenSentVia": nil,
                     "usernameField": "username",
@@ -99,7 +100,7 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
                 expectation.fulfill()
             }
         })
-        
+
         wait(for: [expectation], timeout: 2)
     }
 }
