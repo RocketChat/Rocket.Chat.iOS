@@ -156,12 +156,12 @@
 "chat.message.actions.react" = "Agregar Reacción";
 "chat.message.actions.block" = "Bloquear mensajes del usuario";
 "chat.message.actions.report" = "Mensaje de informe";
-"chat.message.actions.edit" = "Editar mensaje";
+"chat.message.actions.edit" = "Editar";
 "chat.message.actions.copy" = "Copia";
-"chat.message.actions.pin" = "Pin mensaje";
+"chat.message.actions.pin" = "Pin";
 "chat.message.actions.unpin" = "Anula mensaje";
-"chat.message.actions.quote" = "Citar mensaje";
-"chat.message.actions.reply" = "Responder al mensaje";
+"chat.message.actions.quote" = "Citar";
+"chat.message.actions.reply" = "Responder";
 "chat.message.actions.delete" = "Borrar mensaje";
 "chat.message.actions.delete.confirm.title" = "Eliminar este mensaje?";
 "chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone.";
