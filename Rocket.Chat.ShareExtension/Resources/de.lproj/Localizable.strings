@@ -22,6 +22,7 @@
 
 "compose.title" = "Teilen";
 "compose.send" = "Senden";
+"compose.cancel" = "Abbrechen";
 "compose.destination.to" = "An: ";
 "compose.file.name.placeholder" = "Dateiname";
 "compose.file.description.placeholder" = "Beschreibung";
