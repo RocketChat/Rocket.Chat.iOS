@@ -32,7 +32,7 @@ extension APIFetcher {
 
 typealias AnyAPIFetcher = Any & APIFetcher
 
-class API: APIFetcher {
+final class API: APIFetcher {
     let host: URL
     let version: Version
 

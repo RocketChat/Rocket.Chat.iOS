@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ServerManager {
+final class ServerManager {
 
     static let shared = ServerManager()
     var timestampOffset = 0.0

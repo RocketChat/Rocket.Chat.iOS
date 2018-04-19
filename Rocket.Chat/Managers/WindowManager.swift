@@ -54,7 +54,7 @@ enum Storyboard {
     }
 }
 
-class WindowManager {
+final class WindowManager {
 
     /**
         This method will transform the keyWindow.rootViewController
