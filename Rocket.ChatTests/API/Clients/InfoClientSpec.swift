@@ -39,6 +39,7 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
         wait(for: [expectation], timeout: 2)
     }
 
+    //swiftlint:disable function_body_length
     func testFetchLoginServices() {
         let api = MockAPI()
         let realm = testRealm()
@@ -58,8 +59,9 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
                     "scope": "openid",
                     "buttonLabelText": "open",
                     "buttonLabelColor": "#FFFFFF",
-                    "loginStyle":"popup", "buttonColor":"#13679A",
-                    "tokenSentVia":"payload",
+                    "loginStyle": "popup",
+                    "buttonColor": "#13679A",
+                    "tokenSentVia": "payload",
                     "identityTokenSentVia": nil,
                     "usernameField": "username",
                     "mergeUsers": true
@@ -76,13 +78,13 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
                     "scope": "openid",
                     "buttonLabelText": "open",
                     "buttonLabelColor": "#FFFFFF",
-                    "loginStyle":"popup", "buttonColor":"#13679A",
-                    "tokenSentVia":"payload",
+                    "loginStyle": "popup", "buttonColor":"#13679A",
+                    "tokenSentVia": "payload",
                     "identityTokenSentVia": nil,
                     "usernameField": "username",
                     "mergeUsers": true
                 ]],
-            "success":true
+            "success": true
         ])
 
         try? realm.write {
@@ -97,6 +99,7 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
                 expectation.fulfill()
             }
         })
+        
         wait(for: [expectation], timeout: 2)
     }
 }
