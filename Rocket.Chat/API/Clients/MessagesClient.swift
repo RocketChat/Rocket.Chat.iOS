@@ -139,6 +139,7 @@ struct MessagesClient: APIClient {
             return false
         }
 
+        let emoji = (emoji.first, emoji.last) == (":", ":") ? emoji : ":\(emoji):"
         let reactions = List(message.reactions)
         let message = Message(value: message)
         message.reactions = reactions

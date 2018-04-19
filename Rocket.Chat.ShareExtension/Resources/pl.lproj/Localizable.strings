@@ -22,6 +22,7 @@
 
 "compose.title" = "Udostępnij";
 "compose.send" = "Wyślij";
+"compose.cancel" = "Cancel"; //TODO
 "compose.destination.to" = "Do: ";
 "compose.file.name.placeholder" = "Nazwa pliku";
 "compose.file.description.placeholder" = "Opis pliku";
