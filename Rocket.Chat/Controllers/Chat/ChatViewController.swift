@@ -11,6 +11,7 @@ import SlackTextViewController
 import SimpleImageViewer
 
 private typealias NibCellIndentifier = (nibName: String, cellIdentifier: String)
+private let kEmptyCellIdentifier = "kEmptyCellIdentifier"
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
@@ -293,6 +294,9 @@ final class ChatViewController: SLKTextViewController {
             (nibName: "ChatChannelHeaderCell", cellIdentifier: ChatChannelHeaderCell.identifier),
             (nibName: "ChatDirectMessageHeaderCell", cellIdentifier: ChatDirectMessageHeaderCell.identifier)
         ]
+
+        // This cell is used in case no other cell is available or useful.
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kEmptyCellIdentifier)
 
         collectionViewCells.forEach {
             collectionView?.register(UINib(
@@ -965,7 +969,7 @@ extension ChatViewController {
             let obj = dataController.itemAt(indexPath),
             !(obj.message?.isInvalidated ?? false)
         else {
-            return UICollectionViewCell()
+            return cellForEmpty(at: indexPath)
         }
 
         if obj.type == .message {
@@ -997,12 +1001,20 @@ extension ChatViewController {
 
     // MARK: Cells
 
+    func cellForEmpty(at indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView?.dequeueReusableCell(withReuseIdentifier: kEmptyCellIdentifier, for: indexPath) {
+            return cell
+        }
+
+        return UICollectionViewCell()
+    }
+
     func cellForMessage(_ obj: ChatData, at indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView?.dequeueReusableCell(
             withReuseIdentifier: ChatMessageCell.identifier,
             for: indexPath
         ) as? ChatMessageCell else {
-            return UICollectionViewCell()
+            return cellForEmpty(at: indexPath)
         }
 
         cell.delegate = self
@@ -1021,7 +1033,7 @@ extension ChatViewController {
             withReuseIdentifier: ChatMessageDaySeparator.identifier,
             for: indexPath
         ) as? ChatMessageDaySeparator else {
-            return UICollectionViewCell()
+            return cellForEmpty(at: indexPath)
         }
 
         cell.labelTitle.text = RCDateFormatter.date(obj.timestamp)
@@ -1033,7 +1045,7 @@ extension ChatViewController {
             withReuseIdentifier: ChatMessageUnreadSeparator.identifier,
             for: indexPath
         ) as? ChatMessageUnreadSeparator else {
-            return UICollectionViewCell()
+            return cellForEmpty(at: indexPath)
         }
 
         cell.labelTitle.text = localized("chat.unread_separator")
@@ -1045,7 +1057,7 @@ extension ChatViewController {
             withReuseIdentifier: ChatChannelHeaderCell.identifier,
             for: indexPath
         ) as? ChatChannelHeaderCell else {
-            return UICollectionViewCell()
+            return cellForEmpty(at: indexPath)
         }
 
         cell.subscription = subscription
@@ -1057,7 +1069,7 @@ extension ChatViewController {
             withReuseIdentifier: ChatDirectMessageHeaderCell.identifier,
             for: indexPath
         ) as? ChatDirectMessageHeaderCell else {
-            return UICollectionViewCell()
+            return cellForEmpty(at: indexPath)
         }
         cell.subscription = subscription
         return cell
@@ -1068,7 +1080,7 @@ extension ChatViewController {
             withReuseIdentifier: ChatLoaderCell.identifier,
             for: indexPath
         ) as? ChatLoaderCell else {
-            return UICollectionViewCell()
+            return cellForEmpty(at: indexPath)
         }
 
         return cell
