@@ -755,7 +755,30 @@ final class ChatViewController: SLKTextViewController {
             showLoadingMessagesHeaderStatusView()
         }
 
-        MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
+        let client = API.current()?.client(SubscriptionsClient.self)
+        client?.loadHistory(subscription: tempSubscription, latest: date) { [weak self] messages in
+            guard let strongSelf = self else { return }
+
+            DispatchQueue.main.async {
+                strongSelf.activityIndicator.stopAnimating()
+
+                if date == nil {
+                    strongSelf.hideHeaderStatusView()
+                }
+
+                strongSelf.isRequestingHistory = false
+                strongSelf.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+
+                if messages.count == 0 {
+                    strongSelf.dataController.loadedAllMessages = true
+                    strongSelf.syncCollectionView()
+                } else {
+                    strongSelf.dataController.loadedAllMessages = false
+                }
+            }
+        }
+
+        /*MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
 
@@ -773,7 +796,7 @@ final class ChatViewController: SLKTextViewController {
                     self?.dataController.loadedAllMessages = false
                 }
             }
-        }
+        }*/
     }
 
     fileprivate func loadMoreMessagesFrom(date: Date?, loadRemoteHistory: Bool = true) {

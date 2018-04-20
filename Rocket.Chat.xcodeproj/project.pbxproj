@@ -536,6 +536,8 @@
 		80EF621A205A981600EF739B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41494B911D63C6280004F369 /* UIImageExtension.swift */; };
 		80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */; };
 		80F1F8102080F307007998AB /* MarkdownManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1F80F2080F307007998AB /* MarkdownManagerSpec.swift */; };
+		80F1F86920821638007998AB /* SubscriptionHistoryRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1F86820821638007998AB /* SubscriptionHistoryRequest.swift */; };
+		80F1F86B20821ADD007998AB /* SubscriptionsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1F86A20821ADD007998AB /* SubscriptionsClient.swift */; };
 		80FA9066205313E20069038F /* SEContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA9065205313E20069038F /* SEContent.swift */; };
 		80FA9068205314040069038F /* SEServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA9067205314040069038F /* SEServer.swift */; };
 		80FA906A20569F890069038F /* SEComposeFileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80FA906920569F890069038F /* SEComposeFileCell.swift */; };
@@ -1175,6 +1177,8 @@
 		80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensionsSpec.swift; sourceTree = "<group>"; };
 		80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+CustomEmojis.swift"; sourceTree = "<group>"; };
 		80F1F80F2080F307007998AB /* MarkdownManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownManagerSpec.swift; sourceTree = "<group>"; };
+		80F1F86820821638007998AB /* SubscriptionHistoryRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionHistoryRequest.swift; sourceTree = "<group>"; };
+		80F1F86A20821ADD007998AB /* SubscriptionsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsClient.swift; sourceTree = "<group>"; };
 		80FA9065205313E20069038F /* SEContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEContent.swift; sourceTree = "<group>"; };
 		80FA9067205314040069038F /* SEServer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEServer.swift; sourceTree = "<group>"; };
 		80FA906920569F890069038F /* SEComposeFileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEComposeFileCell.swift; sourceTree = "<group>"; };
@@ -2286,6 +2290,7 @@
 				8013F86F1FD6B5B000EE1A4E /* InfoClient.swift */,
 				80054CFD1FDAFF5200F5ECF9 /* PushClient.swift */,
 				809B530A1FE2B1AB00833DD2 /* UploadClient.swift */,
+				80F1F86A20821ADD007998AB /* SubscriptionsClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -2361,6 +2366,7 @@
 				800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */,
 				89AEB7F71F7D225D00112A09 /* SubscriptionCreateRequest.swift */,
 				990FF6D520740C79007B4A53 /* SubscriptionMentionsRequest.swift */,
+				80F1F86820821638007998AB /* SubscriptionHistoryRequest.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -3565,6 +3571,7 @@
 				996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */,
 				411EDED51E3102CB00BC7BE3 /* UploadManager.swift in Sources */,
 				41D5BC311DAFBEF4009A493A /* UIViewExtentions.swift in Sources */,
+				80F1F86B20821ADD007998AB /* SubscriptionsClient.swift in Sources */,
 				0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */,
 				597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */,
 				D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */,
@@ -3586,6 +3593,7 @@
 				807FB58420483A4D00E21429 /* ServersViewController.swift in Sources */,
 				806DB94E20698C25004ED8ED /* ChatMessageCellAccessibility.swift in Sources */,
 				41B96362207E48260068F1A6 /* MessageTextValidator.swift in Sources */,
+				80F1F86920821638007998AB /* SubscriptionHistoryRequest.swift in Sources */,
 				809B530E1FE2EFA100833DD2 /* ReactionListView.swift in Sources */,
 				4159720C1D3DB854002258F4 /* Email.swift in Sources */,
 				14FBFF771FB267BF000D400B /* MentionsTextFieldTableViewCell.swift in Sources */,
