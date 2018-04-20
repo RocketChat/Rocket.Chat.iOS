@@ -232,7 +232,9 @@
 "chat.info.item.mentions" = "Mentions"; // TODO
 
 // Members List
-"chat.members.list.title" = "miembros";
+"chat.member.unblock.title" = "Desatascar";
+"chat.member.open.profile.title" = "Abrir perfil";
+"chat.members.list.title" = "Miembros";
 
 // Messages List
 "chat.messages.list.title" = "Mensajes";
@@ -250,6 +252,10 @@
 "myaccount.settings.appicon" = "Icono de aplicación";
 "myaccount.settings.version" = "Versión: %@ (%@)";
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
+"myaccount.settings.version" = "Version: %@ (%@)";
+
+"blocked.list.empty.title" = "No tienes usuarios bloqueados";
+"blocked.users.title" = "Usuarios bloqueados";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Elige un icono";

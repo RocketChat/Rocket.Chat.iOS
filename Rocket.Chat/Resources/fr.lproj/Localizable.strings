@@ -234,6 +234,8 @@
 
 // Members List
 "chat.members.list.title" = "Membres";
+"chat.member.unblock.title" = "Débloquer";
+"chat.member.open.profile.title" = "Ouvrir le profil";
 
 // Messages List
 "chat.messages.list.title" = "Messages";
@@ -241,6 +243,9 @@
 "chat.messages.pinned.list.title" = "Messages épinglés";
 "chat.messages.starred.list.title" = "Messages favoris";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
+
+"blocked.list.empty.title" = "Vous n'avez aucun utilisateur bloqué";
+"blocked.users.title" = "Utilisateurs bloqués";
 
 // Settings
 "myaccount.settings.title" = "Réglages"; // TODO: new text: Preferences

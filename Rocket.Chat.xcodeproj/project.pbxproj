@@ -583,6 +583,7 @@
 		99F41BCE20658B1300B240FC /* EditProfileViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */; };
 		99F41BD020658C3400B240FC /* NewPasswordViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
+		A630DCCF2059BECD00F09A4E /* BlockedUsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A630DCCE2059BECD00F09A4E /* BlockedUsersListViewController.swift */; };
 		AB2AC99226FB9C7C9DA45E94 /* Pods_Rocket_Chat_ShareExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6787D07A45177F339DB234DD /* Pods_Rocket_Chat_ShareExtension.framework */; };
 		B5893BF41F6C4A5F00365768 /* UserReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */; };
 		B5893BF61F6C4B1D00365768 /* UserReviewManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */; };
@@ -1226,6 +1227,7 @@
 		99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = EditProfileViewModelSpec.swift; path = Settings/EditProfileViewModelSpec.swift; sourceTree = "<group>"; };
 		99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewPasswordViewModelSpec.swift; path = Settings/NewPasswordViewModelSpec.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TintedTextField.swift; sourceTree = "<group>"; };
+		A630DCCE2059BECD00F09A4E /* BlockedUsersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockedUsersListViewController.swift; path = Controllers/Settings/BlockedUsersListViewController.swift; sourceTree = "<group>"; };
 		AAC8D92081FF042E089F3063 /* Pods-Rocket.Chat.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.beta.xcconfig"; sourceTree = "<group>"; };
 		B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserReviewManager.swift; path = Managers/UserReviewManager.swift; sourceTree = "<group>"; };
 		B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserReviewManagerSpec.swift; path = Managers/UserReviewManagerSpec.swift; sourceTree = "<group>"; };
@@ -1541,6 +1543,7 @@
 			isa = PBXGroup;
 			children = (
 				9960C82E2063F091004A034C /* Web Browser */,
+				A630DCCE2059BECD00F09A4E /* BlockedUsersListViewController.swift */,
 				99282260204DE0AE005D2067 /* Profile */,
 				0B9AB2BF20444EB300ABEA05 /* Language */,
 				0B3A9767202C75A60019CA92 /* ChangeAppIcon */,
@@ -3568,6 +3571,7 @@
 				0BBCC2BF204532F0001E3B6D /* ChangeLanguageCell.swift in Sources */,
 				597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */,
 				D32E28261DFD86C300D6019C /* PersistencyCoordinator.swift in Sources */,
+				A630DCCF2059BECD00F09A4E /* BlockedUsersListViewController.swift in Sources */,
 				D10E9C221F643616007F1796 /* MentionModelMapping.swift in Sources */,
 				8076FDA42048533000114F28 /* String+Random.swift in Sources */,
 				419205491D52EDE6004EEC5F /* UILabelExtension.swift in Sources */,

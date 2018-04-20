@@ -233,6 +233,8 @@
 
 // Members List
 "chat.members.list.title" = "Membros";
+"chat.member.unblock.title" = "Desbloquear";
+"chat.member.open.profile.title" = "Perfil aberto";
 
 // Messages List
 "chat.messages.list.title" = "Mensagens";
@@ -240,6 +242,9 @@
 "chat.messages.pinned.list.title" = "Mensagens Pinadas";
 "chat.messages.starred.list.title" = "Mensagens Favoritas";
 "chat.messages.mentions.list.title" = "Menções";
+
+"blocked.list.empty.title" = "Você não possui usuários bloqueados";
+"blocked.users.title" = "Usuários bloqueados";
 
 // Settings
 "myaccount.settings.title" = "Configurações";

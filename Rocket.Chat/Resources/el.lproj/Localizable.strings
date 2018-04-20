@@ -233,6 +233,8 @@
 
 // Members List
 "chat.members.list.title" = "Μέλη";
+"chat.member.unblock.title" = "Ξεβουλώνω";
+"chat.member.open.profile.title" = "Ανοίξτε το προφίλ";
 
 // Messages List
 "chat.messages.list.title" = "Μηνύματα";
@@ -250,6 +252,9 @@
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
+
+"blocked.list.empty.title" = "Δεν έχετε αποκλεισμένους χρήστες";
+"blocked.users.title" = "Αποκλεισμένοι χρήστες";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Επιλέξτε Εικονίδιο";
