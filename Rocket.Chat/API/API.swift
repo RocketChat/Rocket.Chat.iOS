@@ -99,12 +99,17 @@ class API: APIFetcher {
         #endif
 
         let task = session.dataTask(with: request) { (data, _, error) in
-            if let error = error {
+            if let error = error as NSError? {
                 #if DEBUG
                 Log.debug("[REST][RESULT][ERROR][\(request.url?.absoluteString ?? "")]: \(error)")
                 #endif
 
-                completion?(.error(.error(error)))
+                if NSError.sslErrors.contains(error.code) {
+                    completion?(.error(.notSecured))
+                } else {
+                    completion?(.error(.error(error)))
+                }
+
                 return
             }
 

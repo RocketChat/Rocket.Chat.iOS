@@ -22,6 +22,7 @@
 
 "compose.title" = "Share"; //TODO
 "compose.send" = "Send"; //TODO
+"compose.cancel" = "Cancel"; //TODO
 "compose.destination.to" = "To: "; //TODO
 "compose.file.name.placeholder" = "File name"; //TODO
 "compose.file.description.placeholder" = "File description"; //TODO
