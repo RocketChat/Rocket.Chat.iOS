@@ -10,7 +10,7 @@
 "searchbar.placeholder" = "Nach einem Emoji suchen";
 
 "categories.recent" = "OFT BENUTZT";
-"categories.custom" = "CUSTOM";
+"categories.custom" = "EIGENE";
 "categories.people" = "SMILEYS & PERSONEN";
 "categories.nature" = "TIERE & NATUR";
 "categories.food" = "ESSEN & TRINKEN";
@@ -20,4 +20,4 @@
 "categories.symbols" = "SYMBOLE";
 "categories.flags" = "FLAGGEN";
 
-"reactorlist.title" = "Reactions"; //TODO
+"reactorlist.title" = "Reaktionen";

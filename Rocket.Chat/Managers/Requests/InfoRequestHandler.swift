@@ -29,17 +29,22 @@ class InfoRequestHandler: NSObject {
             switch response {
             case .resource(let resource):
                 self?.validateServerResponse(result: resource)
-            case .error:
+            case .error(let error):
+                self?.alert(for: error)
                 self?.delegate?.urlNotValid()
-                self?.alertInvalidURL()
             }
         }
     }
 
+    func alert(for error: APIError) {
+        switch error {
+        case .notSecured: Alert(key: "alert.connection.not_secured").present()
+        default: alertInvalidURL()
+        }
+    }
+
     func alertInvalidURL() {
-        Alert(
-            key: "alert.connection.invalid_url"
-        ).present()
+        Alert(key: "alert.connection.invalid_url").present()
     }
 
     internal func validateServerResponse(result: InfoResource?) {
