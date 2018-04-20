@@ -13,9 +13,9 @@ import SwiftyJSON
 
 class PostMessageRequestSpec: APITestCase {
     func testRequest() {
-        let _request = PostMessageRequest(roomId: "roomId", text: "text")
+        let preRequest = PostMessageRequest(roomId: "roomId", text: "text")
 
-        guard let request = _request.request(for: api) else {
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
         guard let httpBody = request.httpBody else {
@@ -33,7 +33,7 @@ class PostMessageRequestSpec: APITestCase {
     }
 
     func testResult() {
-        let _result = JSON([
+        let mockResult = JSON([
             "ts": 148174896,
             "channel": "general",
             "message": [
@@ -53,14 +53,14 @@ class PostMessageRequestSpec: APITestCase {
             "success": true
         ])
 
-        let result = APIResult<PostMessageRequest>(raw: _result)
+        let result = PostMessageResource(raw: mockResult)
 
         let message = Message()
-        message.map(_result["message"], realm: nil)
+        message.map(mockResult["message"], realm: nil)
 
         XCTAssertEqual(result.message?.identifier, "jC9chsFddTvsbFQG7", "message is correct")
 
-        let nilResult = APIResult<PostMessageRequest>(raw: nil)
+        let nilResult = PostMessageResource(raw: nil)
         XCTAssertNil(nilResult.message, "message is nil if raw is nil")
     }
 }

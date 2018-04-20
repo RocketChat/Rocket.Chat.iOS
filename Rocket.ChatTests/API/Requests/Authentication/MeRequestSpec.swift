@@ -13,12 +13,12 @@ import SwiftyJSON
 
 class MeRequestSpec: APITestCase {
     func testRequest() {
-        let _request = MeRequest()
-        guard let request = _request.request(for: api) else {
+        let preRequest = MeRequest()
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
 
-        let expectedURL = api.host.appendingPathComponent(_request.path)
+        let expectedURL = api.host.appendingPathComponent(preRequest.path)
 
         XCTAssertEqual(request.url, expectedURL, "url is correct")
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
@@ -46,10 +46,10 @@ class MeRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = MeResult(raw: json)
+        let result = MeResource(raw: json)
         XCTAssertEqual(result.user?.identifier, "aobEdbYhXfu5hkeqG")
 
-        let nilResult = MeResult(raw: nil)
+        let nilResult = MeResource(raw: nil)
         XCTAssertEqual(nilResult.user, nil)
     }
 }

@@ -9,18 +9,14 @@
 
 import SwiftyJSON
 
-typealias InfoResult = APIResult<InfoRequest>
-
 class InfoRequest: APIRequest {
+    typealias APIResourceType = InfoResource
+
     let path = "/api/v1/info"
 }
 
-extension APIResult where T == InfoRequest {
-    var info: JSON? {
-        return raw?["info"]
-    }
-
+class InfoResource: APIResource {
     var version: String? {
-        return info?["version"].string
+        return raw?["info"]["version"].string
     }
 }

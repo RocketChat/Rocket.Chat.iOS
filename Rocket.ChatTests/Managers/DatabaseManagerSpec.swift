@@ -24,16 +24,16 @@ private let testServers = [[
 extension DatabaseManager {
 
     static func setupTestServers() {
-        UserDefaults.standard.set(testServers, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(testServers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 0)
     }
 
     static func clearAllServers() {
-        UserDefaults.standard.set([], forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set([], forKey: ServerPersistKeys.servers)
     }
 
     static func removeServersKey() {
-        UserDefaults.standard.removeObject(forKey: ServerPersistKeys.servers)
+        UserDefaults.group.removeObject(forKey: ServerPersistKeys.servers)
     }
 }
 
@@ -44,12 +44,12 @@ class DatabaseManagerSpec: XCTestCase {
     }
 
     func testSelectedIndex() {
-        UserDefaults.standard.set(0, forKey: ServerPersistKeys.selectedIndex)
+        UserDefaults.group.set(0, forKey: ServerPersistKeys.selectedIndex)
         XCTAssertEqual(DatabaseManager.selectedIndex, 0, "selectedIndex is correct")
     }
 
     func testSelectedIndexEmpty() {
-        UserDefaults.standard.removeObject(forKey: ServerPersistKeys.selectedIndex)
+        UserDefaults.group.removeObject(forKey: ServerPersistKeys.selectedIndex)
         XCTAssertEqual(DatabaseManager.selectedIndex, 0, "selectedIndex returns 0 when value is nil")
     }
 
@@ -91,7 +91,7 @@ class DatabaseManagerSpec: XCTestCase {
         ]]
 
         // Setup servers & a different selected index
-        UserDefaults.standard.set(servers, forKey: ServerPersistKeys.servers)
+        UserDefaults.group.set(servers, forKey: ServerPersistKeys.servers)
         DatabaseManager.selectDatabase(at: 4)
 
         // Clear the invalids
@@ -162,9 +162,18 @@ class DatabaseManagerSpec: XCTestCase {
 
     func testServerIndexForUrl() {
         DatabaseManager.setupTestServers()
-        XCTAssertEqual(DatabaseManager.serverIndexForUrl("wss://foo.com/websocket"), 0, "correct index for foo.com")
-        XCTAssertEqual(DatabaseManager.serverIndexForUrl("wss://open.rocket.chat/websocket"), 1, "correct index for open.rocket.chat")
-        XCTAssertNil(DatabaseManager.serverIndexForUrl("wss://unexisting.chat/websocket"), "index is nil for unexisting server")
+
+        guard
+            let foo = URL(string: "https://foo.com"),
+            let open = URL(string: "https://open.rocket.chat/"),
+            let unexisting = URL(string: "https://unexisting.chat")
+        else {
+            return XCTFail("url(s) can not be nil")
+        }
+
+        XCTAssertEqual(DatabaseManager.serverIndexForUrl(foo), 0, "correct index for foo.com")
+        XCTAssertEqual(DatabaseManager.serverIndexForUrl(open), 1, "correct index for open.rocket.chat")
+        XCTAssertNil(DatabaseManager.serverIndexForUrl(unexisting), "index is nil for unexisting server")
     }
 
     func testCopyServerInformationNilServers() {

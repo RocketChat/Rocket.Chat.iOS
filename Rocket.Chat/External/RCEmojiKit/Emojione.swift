@@ -23,10 +23,6 @@ struct Emojione {
         return emojis
     }()
 
-    static var regex: String = {
-        Emojione.values.keys.flatMap { $0.escapingRegex() }.reduce("") { $0.isEmpty ? ":\($1):" : "\($0)|:\($1):" }
-    }()
-
     static let values: [String: String] = {
         guard let file = Bundle.main.url(forResource: "emojiNames", withExtension: "json") else { return [:] }
         guard let contents = try? Data(contentsOf: file, options: []) else { return [:] }

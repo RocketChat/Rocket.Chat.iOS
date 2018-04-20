@@ -11,11 +11,41 @@ import RealmSwift
 
 struct CustomEmojiManager {
     static func sync() {
+        let currentRealm = Realm.current
+        API.current()?.fetch(CustomEmojiRequest()) { response in
+            switch response {
+            case .resource(let resource):
+                guard resource.success else {
+                    return Log.debug(resource.errorMessage)
+                }
+
+                currentRealm?.execute({ realm in
+                    realm.delete(realm.objects(CustomEmoji.self))
+
+                    let emoji = List<CustomEmoji>()
+                    resource.customEmoji.forEach({ customEmoji in
+                        let realmCustomEmoji = realm.create(CustomEmoji.self, value: customEmoji, update: true)
+                        emoji.append(realmCustomEmoji)
+                    })
+
+                    realm.add(emoji, update: true)
+                })
+            case .error(let error):
+                switch error {
+                case .version: websocketSync(currentRealm)
+                default: break
+                }
+            }
+
+        }
+    }
+
+    private static func websocketSync(_ realm: Realm?) {
         let requestEmojis = [
             "msg": "method",
             "method": "listEmojiCustom",
             "params": []
-        ] as [String: Any]
+            ] as [String: Any]
 
         let currentRealm = Realm.current
         SocketManager.send(requestEmojis) { response in

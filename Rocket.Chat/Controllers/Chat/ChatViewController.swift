@@ -10,6 +10,8 @@ import RealmSwift
 import SlackTextViewController
 import SimpleImageViewer
 
+private typealias NibCellIndentifier = (nibName: String, cellIdentifier: String)
+
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
 
@@ -37,6 +39,7 @@ final class ChatViewController: SLKTextViewController {
                     scrollToBottomButtonIsVisible = false
                     return
                 }
+
                 let collectionViewBottom = collectionView.frame.origin.y + collectionView.frame.height
                 self.buttonScrollToBottomMarginConstraint?.constant = (collectionViewBottom - view.frame.height) - 40
             } else {
@@ -59,6 +62,7 @@ final class ChatViewController: SLKTextViewController {
     var replyView: ReplyView!
     var replyString: String = ""
     var messageToEdit: Message?
+    var lastTimeSentTypingEvent: Date?
 
     var dataController = ChatDataController()
 
@@ -79,7 +83,7 @@ final class ChatViewController: SLKTextViewController {
 
     var subscription: Subscription? {
         didSet {
-            // clean up
+            // Clean up
             subscriptionToken?.invalidate()
             didCancelTextEditing(self)
 
@@ -149,7 +153,6 @@ final class ChatViewController: SLKTextViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-        SocketManager.removeConnectionHandler(token: socketHandlerToken)
         messagesToken?.invalidate()
         subscriptionToken?.invalidate()
     }
@@ -282,8 +285,6 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func registerCells() {
-        typealias NibCellIndentifier = (nibName: String, cellIdentifier: String)
-
         let collectionViewCells: [NibCellIndentifier] = [
             (nibName: "ChatLoaderCell", cellIdentifier: ChatLoaderCell.identifier),
             (nibName: "ChatMessageCell", cellIdentifier: ChatMessageCell.identifier),
@@ -472,12 +473,37 @@ final class ChatViewController: SLKTextViewController {
     override func textViewDidChange(_ textView: UITextView) {
         guard let subscription = self.subscription else { return }
 
+        // Intervals
+        let kDefaultTypingInterval = 3 // seconds
+        let kDefaultTypingIntervalCheck = 5 // seconds
+
+        // Update draft text
         DraftMessageManager.update(draftMessage: textView.text, for: subscription)
 
         if textView.text?.isEmpty ?? true {
             SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
         } else {
+            // We're not calling this event every char because the web starts flickering
+            // the "typing" view.
+            if let lastTimeSentTypingEvent = lastTimeSentTypingEvent {
+                if Int(Date().timeIntervalSince(lastTimeSentTypingEvent)) < kDefaultTypingInterval {
+                    return
+                }
+            }
+
+            // User is typing right now
+            lastTimeSentTypingEvent = Date()
             SubscriptionManager.sendTypingStatus(subscription, isTyping: true)
+
+            // After 5 seconds without writing, we send an event
+            // telling the server that user is not typing anymore
+            DispatchQueue.main.asyncAfter(deadline: .now() + TimeInterval(kDefaultTypingIntervalCheck)) { [weak self] in
+                if let lastTimeSentTypingEvent = self?.lastTimeSentTypingEvent {
+                    if Int(Date().timeIntervalSince(lastTimeSentTypingEvent)) >= kDefaultTypingIntervalCheck {
+                        SubscriptionManager.sendTypingStatus(subscription, isTyping: false)
+                    }
+                }
+            }
         }
     }
 
@@ -789,17 +815,12 @@ final class ChatViewController: SLKTextViewController {
     }
 
     fileprivate func appendMessages(messages: [Message], completion: VoidCompletion?) {
-        guard
-            let subscription = subscription,
-            let collectionView = collectionView,
-            !subscription.isInvalidated
-        else {
+        guard let subscription = subscription, let collectionView = collectionView, !subscription.isInvalidated else {
             return
         }
 
         guard !isAppendingMessages else {
             Log.debug("[APPEND MESSAGES] Blocked trying to append \(messages.count) messages")
-
             // This message can be called many times during the app execution and we need
             // to call them one per time, to avoid adding the same message multiple times
             // to the list. Also, we keep the subscription identifier in order to make sure
@@ -1080,11 +1101,10 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
 
         if let obj = dataController.itemAt(indexPath) {
             if obj.type == .header {
-                if subscription.type == .directMessage {
-                    return CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
-                } else {
-                    return CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
-                }
+                let isDirectMessage = subscription.type == .directMessage
+                let directMessageHeaderSize = CGSize(width: fullWidth, height: ChatDirectMessageHeaderCell.minimumHeight)
+                let channelHeaderSize = CGSize(width: fullWidth, height: ChatChannelHeaderCell.minimumHeight)
+                return isDirectMessage ? directMessageHeaderSize : channelHeaderSize
             }
 
             if obj.type == .loader {
@@ -1098,9 +1118,9 @@ extension ChatViewController: UICollectionViewDelegateFlowLayout {
             if obj.type == .unreadSeparator {
                 if dataController.dismissUnreadSeparator {
                     return CGSize(width: fullWidth, height: 0)
-                } else {
-                    return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
                 }
+
+                return CGSize(width: fullWidth, height: ChatMessageUnreadSeparator.minimumHeight)
             }
 
             if let message = obj.message {

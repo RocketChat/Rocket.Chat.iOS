@@ -52,20 +52,23 @@ struct MessagesClient: APIClient {
             text: message.text
         )
 
-        api.fetch(request, succeeded: { result in
-            guard let message = result.raw?["message"] else { return }
-            updateMessage(json: message)
-        }, errored: { error in
-            switch error {
-            case .version:
-                // TODO: Remove SendMessage Fallback + old methods after Rocket.Chat 1.0
-                SubscriptionManager.sendTextMessage(message, completion: { response in
-                    updateMessage(json: response.result["result"])
-                })
-            default:
-                setMessageOffline()
+        api.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                guard let message = resource.raw?["message"] else { return }
+                updateMessage(json: message)
+            case .error(let error):
+                switch error {
+                case .version:
+                    SubscriptionManager.sendTextMessage(message, completion: { response in
+                        updateMessage(json: response.result["result"])
+                    })
+                default:
+                    setMessageOffline()
+                }
             }
-        })
+
+        }
     }
 
     func sendMessage(text: String, subscription: Subscription, id: String = String.random(18), user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) {
@@ -91,37 +94,100 @@ struct MessagesClient: APIClient {
             return false
         }
 
-        api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser),
-                  succeeded: nil, errored: { _ in Alert.defaultError.present() })
+        api.fetch(DeleteMessageRequest(roomId: message.rid, msgId: id, asUser: asUser)) { response in
+            switch response {
+            case .resource: break
+            case .error: Alert.defaultError.present()
+            }
+        }
 
         return true
     }
 
     @discardableResult
     func updateMessage(_ message: Message, text: String, realm: Realm? = Realm.current) -> Bool {
-        guard
-            let id = message.identifier,
-            !message.rid.isEmpty
-        else {
+        guard let id = message.identifier, !message.rid.isEmpty else {
             return false
         }
 
         let request = UpdateMessageRequest(roomId: message.rid, msgId: id, text: text)
 
-        api.fetch(request, succeeded: { response in
-            guard let message = response.message else {
-                return Alert.defaultError.present()
-            }
-
-            DispatchQueue.main.async {
-                try? realm?.write {
-                    realm?.add(message, update: true)
+        api.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                guard let message = resource.message else {
+                    return Alert.defaultError.present()
                 }
 
-                MessageTextCacheManager.shared.update(for: message)
-            }
+                DispatchQueue.main.async {
+                    try? realm?.write {
+                        realm?.add(message, update: true)
+                    }
 
-        }, errored: { _ in Alert.defaultError.present() })
+                    MessageTextCacheManager.shared.update(for: message)
+                }
+            case .error: Alert.defaultError.present()
+            }
+        }
+
+        return true
+    }
+
+    @discardableResult
+    func reactMessage(_ message: Message, emoji: String, user: User? = AuthManager.currentUser(), realm: Realm? = Realm.current) -> Bool {
+        guard let id = message.identifier, let username = user?.username else {
+            return false
+        }
+
+        let emoji = (emoji.first, emoji.last) == (":", ":") ? emoji : ":\(emoji):"
+        let reactions = List(message.reactions)
+        let message = Message(value: message)
+        message.reactions = reactions
+
+        if let reactionIndex = reactions.index(where: { $0.emoji == emoji }) {
+            let reaction = MessageReaction(value: reactions[reactionIndex])
+            if let usernameIndex = reaction.usernames.index(of: username) {
+                let usernames = List(reaction.usernames)
+                usernames.remove(at: usernameIndex)
+                reaction.usernames = usernames
+                if usernames.isEmpty {
+                    reactions.remove(at: reactionIndex)
+                } else {
+                    reactions[reactionIndex] = reaction
+                }
+            } else {
+                let usernames = List(reaction.usernames)
+                usernames.append(username)
+                reaction.usernames = usernames
+                reactions[reactionIndex] = reaction
+            }
+        } else {
+            let reaction = MessageReaction()
+            reaction.usernames.append(username)
+            reaction.emoji = emoji
+            reactions.append(reaction)
+        }
+
+        message.reactions = reactions
+        message.updatedAt = Date()
+
+        try? realm?.write {
+            realm?.add(message, update: true)
+        }
+
+        api.fetch(ReactMessageRequest(msgId: id, emoji: emoji)) { response in
+            switch response {
+            case .resource: break
+            case .error(let error):
+                switch error {
+                case .version:
+                    // version fallback
+                    MessageManager.react(message, emoji: emoji, completion: { _ in })
+                default:
+                    Alert.defaultError.present()
+                }
+            }
+        }
 
         return true
     }

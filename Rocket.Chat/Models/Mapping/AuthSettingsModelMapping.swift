@@ -11,11 +11,8 @@ import SwiftyJSON
 import RealmSwift
 
 extension AuthSettings: ModelMappeable {
+    //swiftlint:disable function_body_length
     func map(_ values: JSON, realm: Realm?) {
-        if self.identifier == nil {
-            self.identifier = String.random()
-        }
-
         self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
         self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string
 
@@ -72,6 +69,12 @@ extension AuthSettings: ModelMappeable {
         self.hideMessageUserRemoved = objectForKey(object: values, key: "Message_HideType_ru")?.bool ?? false
 
         // Message
+        if let period = objectForKey(object: values, key: "Message_GroupingPeriod")?.int {
+            self.messageGroupingPeriod = period
+        }
+
+        self.messageAllowPinning = objectForKey(object: values, key: "Message_AllowPinning")?.bool ?? true
+
         self.messageShowDeletedStatus = objectForKey(object: values, key: "Message_ShowDeletedStatus")?.bool ?? true
         self.messageAllowDeleting = objectForKey(object: values, key: "Message_AllowDeleting")?.bool ?? true
         self.messageAllowDeletingBlockDeleteInMinutes = objectForKey(object: values, key: "Message_AllowDeleting_BlockDeleteInMinutes")?.int ?? 0
@@ -79,6 +82,8 @@ extension AuthSettings: ModelMappeable {
         self.messageShowEditedStatus = objectForKey(object: values, key: "Message_ShowEditedStatus")?.bool ?? true
         self.messageAllowEditing = objectForKey(object: values, key: "Message_AllowEditing")?.bool ?? true
         self.messageAllowEditingBlockEditInMinutes = objectForKey(object: values, key: "Message_AllowEditing_BlockEditInMinutes")?.int ?? 0
+
+        self.messageMaxAllowedSize = objectForKey(object: values, key: "Message_MaxAllowedSize")?.int ?? 0
 
         // Custom Fields
         self.rawCustomFields = objectForKey(object: values, key: "Accounts_CustomFields")?.string?.removingWhitespaces()

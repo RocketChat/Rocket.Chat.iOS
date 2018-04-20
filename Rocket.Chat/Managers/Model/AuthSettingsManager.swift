@@ -26,23 +26,78 @@ final class AuthSettingsManager {
         }
     }
 
-    static func updatePublicSettings(_ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings>) {
+    static func updatePublicSettings(serverVersion: Version? = nil, apiHost: URL? = nil, _ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings>) {
+        let api: API?
+        if let apiHost = apiHost {
+            if let serverVersion = serverVersion {
+                api = API(host: apiHost, version: serverVersion)
+            } else {
+                api = API(host: apiHost)
+            }
+        } else {
+            api = API.current()
+        }
+
+        let currentRealm = Realm.current
+        let options = APIRequestOptions.paginated(count: 0, offset: 0)
+        api?.fetch(PublicSettingsRequest(), options: options) { response in
+            switch response {
+            case .resource(let resource):
+                guard resource.success else {
+                    completion(nil)
+                    return
+                }
+
+                currentRealm?.execute({ realm in
+                    let settings = resource.authSettings
+
+                    // Delete all the AuthSettings objects, since we don't
+                    // support multiple-server per database
+                    realm.delete(realm.objects(AuthSettings.self))
+                    realm.add(settings)
+
+                    if let auth = AuthManager.isAuthenticated(realm: realm) {
+                        auth.settings = settings
+                        realm.add(auth, update: true)
+                    }
+
+                    let unmanagedSettings = AuthSettings(value: settings)
+                    shared.internalSettings = unmanagedSettings
+
+                    DispatchQueue.main.async {
+                        ServerManager.updateServerInformation(from: unmanagedSettings)
+                        completion(unmanagedSettings)
+                    }
+                })
+            case .error(let error):
+                switch error {
+                case .version: websocketUpdatePublicSettings(currentRealm, auth, completion: completion)
+                default: completion(nil)
+                }
+            }
+        }
+    }
+
+    private static func websocketUpdatePublicSettings(_ realm: Realm?, _ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings>) {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
         ] as [String: Any]
 
-        let currentRealm = Realm.current
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
                 completion(nil)
                 return
             }
 
-            currentRealm?.execute({ realm in
+            realm?.execute({ realm in
                 let settings = AuthManager.isAuthenticated(realm: realm)?.settings ?? AuthSettings()
                 settings.map(response.result["result"], realm: realm)
-                realm.add(settings, update: true)
+
+                // Delete all the AuthSettings objects, since we don't
+                // support multiple-server per database
+                realm.delete(realm.objects(AuthSettings.self))
+                realm.add(settings)
 
                 if let auth = AuthManager.isAuthenticated(realm: realm) {
                     auth.settings = settings

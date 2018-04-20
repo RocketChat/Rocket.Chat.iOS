@@ -17,7 +17,7 @@ let kBlockedUsersIndentifiers = "kBlockedUsersIndentifiers"
 
 extension MessageManager {
 
-    static var blockedUsersList = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
+    static var blockedUsersList = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 
     static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletionObjectsList<Message>) {
         var lastDate: Any!
@@ -31,9 +31,7 @@ extension MessageManager {
         let request = [
             "msg": "method",
             "method": "loadHistory",
-            "params": ["\(subscription.rid)", lastDate, historySize, [
-                "$date": Date().timeIntervalSince1970 * 1000
-            ]]
+            "params": ["\(subscription.rid)", lastDate, historySize]
         ] as [String: Any]
 
         let validMessages = List<Message>()
@@ -113,7 +111,7 @@ extension MessageManager {
             "name": "stream-notify-room",
             "id": eventName,
             "params": [eventName, false]
-            ] as [String: Any]
+        ] as [String: Any]
 
         let currentRealm = Realm.current
         SocketManager.subscribe(request, eventName: eventName) { response in
@@ -144,28 +142,34 @@ extension MessageManager {
         }
     }
 
-    static func pin(_ message: Message, completion: @escaping MessageCompletion) {
+    static func pin(_ message: Message) {
         guard let messageIdentifier = message.identifier else { return }
 
         let request = [
             "msg": "method",
             "method": "pinMessage",
-            "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
+            "params": [[
+                "rid": message.rid,
+                "_id": messageIdentifier
+            ]]
         ] as [String: Any]
 
-        SocketManager.send(request, completion: completion)
+        SocketManager.send(request)
     }
 
-    static func unpin(_ message: Message, completion: @escaping MessageCompletion) {
+    static func unpin(_ message: Message) {
         guard let messageIdentifier = message.identifier else { return }
 
         let request = [
             "msg": "method",
             "method": "unpinMessage",
-            "params": [ ["rid": message.rid, "_id": messageIdentifier ] ]
+            "params": [[
+                "rid": message.rid,
+                "_id": messageIdentifier
+            ]]
         ] as [String: Any]
 
-        SocketManager.send(request, completion: completion)
+        SocketManager.send(request)
     }
 
     static func react(_ message: Message, emoji: String, completion: @escaping MessageCompletion) {
@@ -183,9 +187,9 @@ extension MessageManager {
     static func blockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
         guard let userIdentifier = user.identifier else { return }
 
-        var blockedUsers: [String] = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
+        var blockedUsers: [String] = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
         blockedUsers.append(userIdentifier)
-        UserDefaults.standard.setValue(blockedUsers, forKey: kBlockedUsersIndentifiers)
+        UserDefaults.group.setValue(blockedUsers, forKey: kBlockedUsersIndentifiers)
         self.blockedUsersList = blockedUsers
 
         Realm.execute({ (realm) in

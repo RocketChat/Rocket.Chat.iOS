@@ -48,8 +48,12 @@ extension SocketManager {
         internalConnectionHandler?(socket, true)
         internalConnectionHandler = nil
 
-        for (_, handler) in connectionHandlers {
-            handler.socketDidConnect(socket: self)
+        if let enumerator = connectionHandlers.objectEnumerator() {
+            while let handler = enumerator.nextObject() {
+                if let handler = handler as? SocketConnectionHandler {
+                    handler.socketDidConnect(socket: self)
+                }
+            }
         }
     }
 
@@ -61,8 +65,12 @@ extension SocketManager {
         // Do nothing?
         let error = SocketError(json: result.result["error"])
 
-        for (_, handler) in connectionHandlers {
-            handler.socketDidReturnError(socket: self, error: error)
+        if let enumerator = connectionHandlers.objectEnumerator() {
+            while let handler = enumerator.nextObject() {
+                if let handler = handler as? SocketConnectionHandler {
+                    handler.socketDidReturnError(socket: self, error: error)
+                }
+            }
         }
     }
 

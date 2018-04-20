@@ -166,6 +166,7 @@ extension Auth {
 }
 
 extension Auth {
+
     enum CanUnblockUserResult {
         case allowed
         case notActionable
@@ -175,9 +176,40 @@ extension Auth {
     func canUnblockUser(_ user: User) -> CanUnblockUserResult {
         guard let userIdentifier = user.identifier else { return .unknown }
         let isBlocked = MessageManager.blockedUsersList.contains(userIdentifier)
+        
         if !isBlocked {
             return .notActionable
         }
+
+        return .allowed
+    }
+
+}
+
+extension Auth {
+    enum CanPinMessageResult {
+        case allowed
+        case notActionable
+        case notAllowed
+        case unknown
+    }
+
+    func canPinMessage(_ message: Message) -> CanPinMessageResult {
+        guard
+            let user = user,
+            let settings = settings
+        else {
+            return .unknown
+        }
+
+        if !message.type.actionable {
+            return .notActionable
+        }
+
+        if !settings.messageAllowPinning || !user.hasPermission(.pinMessage, realm: self.realm) {
+            return .notAllowed
+        }
+
         return .allowed
     }
 }

@@ -1,0 +1,34 @@
+/* 
+  Localizable.strings
+  Rocket.Chat
+
+  Created by Matheus Cardoso on 2/28/18.
+  Copyright © 2018 Rocket.Chat. All rights reserved.
+*/
+
+"global.ok" = "Ok";
+
+"alert.no_servers.title" = "Sem servidores";
+"alert.no_servers.message" = "Você precisa acessar pelo menos um servidor Rocket.Chat para compartilhar algo.";
+
+"servers.title" = "Servidores";
+
+"rooms.title" = "Selecionar Canais";
+"rooms.section.server" = "Selecionar servidor";
+"rooms.section.favorites" = "Favoritos";
+"rooms.section.channels" = "Canais";
+"rooms.section.groups" = "Grupos Privados";
+"rooms.section.directMessages" = "Mensagens Diretas";
+
+"compose.title" = "Compartilhar";
+"compose.send" = "Enviar";
+"compose.cancel" = "Cancelar";
+"compose.destination.to" = "Para: ";
+"compose.file.name.placeholder" = "Nome do arquivo";
+"compose.file.description.placeholder" = "Descrição do arquivo";
+
+"report.success.title" = "Successo";
+"report.success.message" = "Você compartilhou o conteúdo com sucesso.";
+"report.error.title" = "Erro";
+"report.error.message" = "Algo de errado aconteceu enquanto seu conteúdo estava sendo enviado.";
+"report.cancelled.message" = "Você cancelou a requisição. A mensagem não foi enviada.";
