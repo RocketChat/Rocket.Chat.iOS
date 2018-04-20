@@ -188,8 +188,8 @@ extension ChatViewController: AVAudioRecorderDelegate {
     func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         guard flag == true else { return }
 
-        let start = startTime ?? NSDate()
-        let seconds = Int(abs(start.timeIntervalSinceNow))
+        // let start = startTime ?? NSDate()
+        let seconds = 0 // Int(abs(start.timeIntervalSinceNow))
 
         let messageTime = String(format: "%.2d:%.2d", seconds / 60, seconds % 60)
         let message = String(format: localized("alert.audio_message.success.message"), messageTime)
