@@ -14,7 +14,7 @@ final class ReplyView: UIView {
 
     var onClose: (() -> Void)?
 
-    @IBAction func closePressed( _ sender: UIButton) {
+    @IBAction func closePressed(_ sender: UIButton) {
         onClose?()
     }
 }
