@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatLoaderCell: UICollectionViewCell {
+final class ChatLoaderCell: UICollectionViewCell {
 
     static let minimumHeight = CGFloat(50)
     static let identifier = "ChatLoaderCell"

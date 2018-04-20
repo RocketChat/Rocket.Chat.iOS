@@ -11,7 +11,7 @@ import SwiftyJSON
 
 typealias RunCommandSucceeded = (RunCommandResource) -> Void
 
-class RunCommandRequest: APIRequest {
+final class RunCommandRequest: APIRequest {
     typealias APIResourceType = RunCommandResource
 
     let method: HTTPMethod = .post
@@ -39,7 +39,7 @@ class RunCommandRequest: APIRequest {
     }
 }
 
-class RunCommandResource: APIResource {
+final class RunCommandResource: APIResource {
     var success: Bool? {
         return raw?["success"].boolValue
     }

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
+final class ChatCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
     var heightOfInsertedItems: CGFloat = 0.0
 
