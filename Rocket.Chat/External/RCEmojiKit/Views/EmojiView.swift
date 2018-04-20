@@ -9,7 +9,7 @@
 import UIKit
 import FLAnimatedImage
 
-class EmojiView: UIView {
+final class EmojiView: UIView {
     @IBOutlet var contentView: UIView!
     @IBOutlet weak var emojiImageView: FLAnimatedImageView! {
         didSet {

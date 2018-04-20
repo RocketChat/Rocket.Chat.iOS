@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class DeleteMessageRequest: APIRequest {
+final class DeleteMessageRequest: APIRequest {
     typealias APIResourceType = DeleteMessageResource
     let requiredVersion = Version(0, 48, 0)
 
@@ -36,7 +36,7 @@ class DeleteMessageRequest: APIRequest {
     }
 }
 
-class DeleteMessageResource: APIResource {
+final class DeleteMessageResource: APIResource {
     var success: Bool? {
         return raw?["success"].boolValue
     }

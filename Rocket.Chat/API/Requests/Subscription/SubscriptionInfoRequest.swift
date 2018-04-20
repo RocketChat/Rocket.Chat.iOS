@@ -22,7 +22,7 @@ fileprivate extension SubscriptionType {
     }
 }
 
-class SubscriptionInfoRequest: APIRequest {
+final class SubscriptionInfoRequest: APIRequest {
     typealias APIResourceType = SubscriptionInfoResource
 
     var path: String {
@@ -35,7 +35,7 @@ class SubscriptionInfoRequest: APIRequest {
     let roomName: String?
     let type: SubscriptionType
 
- init(roomId: String, type: SubscriptionType = .channel) {
+    init(roomId: String, type: SubscriptionType = .channel) {
         self.type = type
         self.roomId = roomId
         self.roomName = nil
@@ -50,7 +50,7 @@ class SubscriptionInfoRequest: APIRequest {
     }
 }
 
-class SubscriptionInfoResource: APIResource {
+final class SubscriptionInfoResource: APIResource {
     var channel: JSON? {
         return raw?["channel"]
     }

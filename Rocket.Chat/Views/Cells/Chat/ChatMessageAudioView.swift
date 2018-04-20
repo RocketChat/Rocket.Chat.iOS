@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ChatMessageAudioView: ChatMessageAttachmentView {
+final class ChatMessageAudioView: ChatMessageAttachmentView {
     override static var defaultHeight: CGFloat {
         return 80
     }
@@ -40,12 +40,14 @@ class ChatMessageAudioView: ChatMessageAttachmentView {
             timeSlider.setThumbImage(#imageLiteral(resourceName: "Player Progress").resizeWith(width: 15)?.imageWithTint(.RCDarkGray()), for: .highlighted)
         }
     }
+
     @IBOutlet weak var playButton: UIButton! {
         didSet {
             playButton.tintColor = .gray
             playButton.imageView?.tintColor = .gray
         }
     }
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     private var player: AVAudioPlayer? {

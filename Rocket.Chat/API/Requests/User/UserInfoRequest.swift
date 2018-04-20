@@ -9,7 +9,7 @@
 
 import SwiftyJSON
 
-class UserInfoRequest: APIRequest {
+final class UserInfoRequest: APIRequest {
     typealias APIResourceType = UserInfoResource
     let path = "/api/v1/users.info"
 
@@ -31,7 +31,7 @@ class UserInfoRequest: APIRequest {
     }
 }
 
-class UserInfoResource: APIResource {
+final class UserInfoResource: APIResource {
     var user: User? {
         guard let raw = raw?["user"] else { return nil }
 

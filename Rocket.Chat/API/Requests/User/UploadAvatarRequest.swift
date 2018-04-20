@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class UploadAvatarRequest: APIRequest {
+final class UploadAvatarRequest: APIRequest {
     typealias APIResourceType = UploadAvatarResource
 
     let requiredVersion = Version(0, 60, 0)
@@ -47,7 +47,7 @@ class UploadAvatarRequest: APIRequest {
     }
 }
 
-class UploadAvatarResource: APIResource {
+final class UploadAvatarResource: APIResource {
     var success: Bool {
         return raw?["success"].bool ?? false
     }
