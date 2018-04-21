@@ -25,7 +25,7 @@ enum SubscriptionCreateType {
     }
 }
 
-class SubscriptionCreateRequest: APIRequest {
+final class SubscriptionCreateRequest: APIRequest {
     typealias APIResourceType = SubscriptionCreateResource
 
     let method: HTTPMethod = .post

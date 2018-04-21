@@ -341,24 +341,39 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         present(alert, animated: true)
     }
 
-    fileprivate func update(user: User?) {
-        if let avatarFile = avatarFile {
+    /**
+        This method will only update the avatar image
+        of the user.
+     */
+    fileprivate func updateAvatar() {
+        guard let avatarFile = avatarFile else { return }
+
+        startLoading()
+        isUploadingAvatar = true
+
+        let client = API.current()?.client(UploadClient.self)
+        client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] in
+            guard let strongSelf = self else { return }
+
+            if !strongSelf.isUpdatingUser {
+                strongSelf.alertSuccess(title: localized("alert.update_profile_success.title"))
+            }
+
+            strongSelf.isUploadingAvatar = false
+            strongSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
+            strongSelf.stopLoading()
+            strongSelf.avatarFile = nil
+        })
+    }
+
+    /**
+        This method will only update the user information.
+     */
+    fileprivate func updateUserInformation(user: User) {
+        isUpdatingUser = true
+
+        if !isUploadingAvatar {
             startLoading()
-            isUploadingAvatar = true
-
-            let client = API.current()?.client(UploadClient.self)
-            client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] in
-                guard let weakSelf = self else { return }
-                if !weakSelf.isUpdatingUser { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
-                weakSelf.isUploadingAvatar = false
-                weakSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
-                weakSelf.stopLoading()
-            })
-        }
-
-        guard let user = user else {
-            if !isUploadingAvatar { endEditing() }
-            return
         }
 
         let stopLoading: (_ shouldEndEditing: Bool) -> Void = { [weak self] shouldEndEditing in
@@ -366,11 +381,10 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             self?.stopLoading(shouldEndEditing: shouldEndEditing)
         }
 
-        if !isUploadingAvatar { startLoading() }
-        isUpdatingUser = true
-
         let updateUserRequest = UpdateUserRequest(user: user, currentPassword: currentPassword)
         api?.fetch(updateUserRequest) { [weak self] response in
+            guard let strongSelf = self else { return }
+
             switch response {
             case .resource(let resource):
                 if let errorMessage = resource.errorMessage {
@@ -379,12 +393,12 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
                     return
                 }
 
-                self?.user = resource.user
+                strongSelf.user = resource.user
                 stopLoading(true)
 
-                guard let weakSelf = self else { return }
-
-                if !weakSelf.isUploadingAvatar { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
+                if !strongSelf.isUploadingAvatar {
+                    strongSelf.alertSuccess(title: localized("alert.update_profile_success.title"))
+                }
             case .error:
                 stopLoading(false)
                 Alert(key: "alert.update_profile_error").present()
@@ -392,8 +406,31 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
     }
 
+    /**
+        This method will check if there's an new avatar
+        to be updated and if there's any information on the
+        user to be updated as well. They're both different API
+        calls that need to be made.
+     */
+    fileprivate func update(user: User?) {
+        if avatarFile != nil {
+            updateAvatar()
+        }
+
+        guard let user = user else {
+            if !isUploadingAvatar {
+                endEditing()
+            }
+
+            return
+        }
+
+        updateUserInformation(user: user)
+    }
+
     @IBAction func didPressAvatarButton(_ sender: UIButton) {
         hideKeyboard()
+
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -422,20 +459,24 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     func startLoading() {
-        DispatchQueue.main.async {
-            self.navigationItem.leftBarButtonItem?.isEnabled = false
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.view.isUserInteractionEnabled = false
+            strongSelf.navigationItem.leftBarButtonItem?.isEnabled = false
+            strongSelf.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: strongSelf.activityIndicator)
         }
     }
 
     func stopLoading(shouldEndEditing: Bool = true, shouldRefreshAvatar: Bool = false) {
         if !isUpdatingUser, !isUploadingAvatar {
-            DispatchQueue.main.async {
-                self.navigationItem.leftBarButtonItem?.isEnabled = true
+            DispatchQueue.main.async { [weak self] in
+                self?.view.isUserInteractionEnabled = true
+                self?.navigationItem.leftBarButtonItem?.isEnabled = true
+
                 if shouldEndEditing {
-                    self.endEditing()
+                    self?.endEditing()
                 } else {
-                    self.navigationItem.rightBarButtonItem = self.saveButton
+                    self?.navigationItem.rightBarButtonItem = self?.saveButton
                 }
             }
         }
@@ -491,7 +532,6 @@ extension EditProfileTableViewController: UIImagePickerControllerDelegate {
         }
 
         avatarFile = file
-
         dismiss(animated: true, completion: nil)
     }
 

@@ -49,11 +49,13 @@ final class AuthSettingsManager {
                 }
 
                 currentRealm?.execute({ realm in
-                    let settings = resource.authSettings
-
                     // Delete all the AuthSettings objects, since we don't
                     // support multiple-server per database
                     realm.delete(realm.objects(AuthSettings.self))
+                })
+
+                currentRealm?.execute({ realm in
+                    let settings = resource.authSettings
                     realm.add(settings)
 
                     if let auth = AuthManager.isAuthenticated(realm: realm) {
@@ -91,12 +93,14 @@ final class AuthSettingsManager {
             }
 
             realm?.execute({ realm in
-                let settings = AuthManager.isAuthenticated(realm: realm)?.settings ?? AuthSettings()
-                settings.map(response.result["result"], realm: realm)
-
                 // Delete all the AuthSettings objects, since we don't
                 // support multiple-server per database
                 realm.delete(realm.objects(AuthSettings.self))
+            })
+
+            realm?.execute({ realm in
+                let settings = AuthManager.isAuthenticated(realm: realm)?.settings ?? AuthSettings()
+                settings.map(response.result["result"], realm: realm)
                 realm.add(settings)
 
                 if let auth = AuthManager.isAuthenticated(realm: realm) {

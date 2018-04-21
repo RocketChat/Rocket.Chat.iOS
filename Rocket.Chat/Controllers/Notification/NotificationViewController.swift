@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-class NotificationViewController: UIViewController {
+final class NotificationViewController: UIViewController {
 
     static let shared = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
 

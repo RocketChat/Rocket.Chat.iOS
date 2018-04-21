@@ -18,6 +18,7 @@ final class ChatMessageImageView: ChatMessageAttachmentView {
     override static var defaultHeight: CGFloat {
         return 250
     }
+
     var isLoadable = true
 
     weak var delegate: ChatMessageImageViewProtocol?

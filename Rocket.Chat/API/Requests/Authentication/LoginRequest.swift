@@ -9,7 +9,7 @@
 
 import SwiftyJSON
 
-class LoginRequest: APIRequest {
+final class LoginRequest: APIRequest {
     typealias APIResourceType = LoginResource
     let method: HTTPMethod = .post
     let path = "/api/v1/login"
@@ -31,7 +31,7 @@ class LoginRequest: APIRequest {
     }
 }
 
-class LoginResource: APIResource {
+final class LoginResource: APIResource {
     var data: JSON? {
         return raw?["data"]
     }

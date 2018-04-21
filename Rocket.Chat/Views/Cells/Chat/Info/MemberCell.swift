@@ -30,7 +30,7 @@ struct MemberCellData {
     }
 }
 
-class MemberCell: UITableViewCell {
+final class MemberCell: UITableViewCell {
     static let identifier = "MemberCell"
 
     @IBOutlet weak var statusView: UIView! {

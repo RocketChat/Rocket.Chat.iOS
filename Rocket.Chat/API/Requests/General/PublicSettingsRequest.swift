@@ -8,7 +8,7 @@
 
 import Foundation
 
-class PublicSettingsRequest: APIRequest {
+final class PublicSettingsRequest: APIRequest {
     typealias APIResourceType = PublicSettingsResource
 
     let requiredVersion = Version(0, 62, 2)
@@ -69,7 +69,7 @@ class PublicSettingsRequest: APIRequest {
     """.removingWhitespaces()
 }
 
-class PublicSettingsResource: APIResource {
+final class PublicSettingsResource: APIResource {
     var authSettings: AuthSettings {
         let authSettings = AuthSettings()
 

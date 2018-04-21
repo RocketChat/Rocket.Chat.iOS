@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VOTextField: UITextField {
+final class VOTextField: UITextField {
     override var accessibilityLabel: String? {
         get { return localizedAccessibilityLabel }
         set { }

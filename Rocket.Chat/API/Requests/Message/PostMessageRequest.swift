@@ -9,7 +9,7 @@
 
 import SwiftyJSON
 
-class PostMessageRequest: APIRequest {
+final class PostMessageRequest: APIRequest {
     typealias APIResourceType = PostMessageResource
 
     let method: HTTPMethod = .post
@@ -33,7 +33,7 @@ class PostMessageRequest: APIRequest {
     }
 }
 
-class PostMessageResource: APIResource {
+final class PostMessageResource: APIResource {
     var message: Message? {
         guard let rawMessage = raw?["message"] else { return nil }
 

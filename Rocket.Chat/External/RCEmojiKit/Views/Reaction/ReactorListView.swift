@@ -16,7 +16,7 @@ protocol ReactorPresenter {
 
 typealias ReactorCell = UITableViewCell & ReactorPresenter
 
-class DefaultReactorCell: UITableViewCell, ReactorPresenter {
+final class DefaultReactorCell: UITableViewCell, ReactorPresenter {
     var reactor: String = "" {
         didSet {
             textLabel?.text = reactor
@@ -42,7 +42,7 @@ struct ReactorListViewModel: RCEmojiKitLocalizable {
     }
 }
 
-class ReactorListView: UIView {
+final class ReactorListView: UIView {
     @IBOutlet var contentView: UIView!
 
     @IBOutlet weak var reactorTableView: UITableView! {

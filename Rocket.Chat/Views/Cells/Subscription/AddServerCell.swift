@@ -8,7 +8,7 @@
 
 import UIKit
 
-class AddServerCell: UITableViewCell {
+final class AddServerCell: UITableViewCell {
 
     static let identifier = "kAddServerCellIdentifier"
 
