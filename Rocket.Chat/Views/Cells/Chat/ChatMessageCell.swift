@@ -101,49 +101,6 @@ final class ChatMessageCell: UICollectionViewCell {
 
     @IBOutlet weak var reactionsListViewConstraint: NSLayoutConstraint!
 
-    static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
-        let fullWidth = width
-        let attributedString = MessageTextCacheManager.shared.message(for: message)
-
-        var total = (CGFloat)(sequential ? 8 : 36) + (message.reactions.count > 0 ? 40 : 0)
-        if attributedString?.string ?? "" != "" {
-            total += (attributedString?.heightForView(withWidth: fullWidth - 76) ?? 0)
-        }
-
-        for url in message.urls {
-            guard url.isValid() else { continue }
-            total += ChatMessageURLView.defaultHeight
-        }
-
-        for attachment in message.attachments {
-            let type = attachment.type
-
-            if type == .textAttachment {
-                total += ChatMessageTextView.heightFor(collapsed: attachment.collapsed, withText: attachment.text, isFile: attachment.isFile)
-            }
-
-            if type == .image {
-                total += ChatMessageImageView.heightFor(withText: attachment.descriptionText)
-            }
-
-            if type == .video {
-                total += ChatMessageVideoView.heightFor(withText: attachment.descriptionText)
-            }
-
-            if type == .audio {
-                total += ChatMessageAudioView.heightFor(withText: attachment.descriptionText)
-            }
-
-            if !attachment.collapsed {
-                attachment.fields.forEach {
-                    total += ChatMessageTextView.heightFor(collapsed: false, withText: $0.value)
-                }
-            }
-        }
-
-        return total
-    }
-
     // MARK: Sequential
     @IBOutlet weak var labelUsernameHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var labelDateHeightConstraint: NSLayoutConstraint!
@@ -363,9 +320,9 @@ extension ChatMessageCell {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
 
-        var total = (CGFloat)(sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
+        var total = (CGFloat)(sequential ? 8 : 36) + (message.reactions.count > 0 ? 40 : 0)
         if attributedString?.string ?? "" != "" {
-            total += (attributedString?.heightForView(withWidth: fullWidth - 55) ?? 0)
+            total += (attributedString?.heightForView(withWidth: fullWidth - 76) ?? 0)
         }
 
         for url in message.urls {
