@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.security.application-groups</key>
 	<array>
-		<string>group.ios.sam.chat.rocket</string>
+		<string>group.ios.chat.rocket</string>
 	</array>
 </dict>
 </plist>
