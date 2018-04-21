@@ -107,7 +107,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
         var total = (CGFloat)(sequential ? 8 : 36) + (message.reactions.count > 0 ? 40 : 0)
         if attributedString?.string ?? "" != "" {
-            total += (attributedString?.heightForView(withWidth: fullWidth - 84) ?? 0)
+            total += (attributedString?.heightForView(withWidth: fullWidth - 76) ?? 0)
         }
 
         for url in message.urls {

@@ -45,7 +45,7 @@
                         </constraints>
                     </view>
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="sWJ-OU-dZk" userLabel="Media Views">
-                        <rect key="frame" x="72" y="33" width="268" height="260"/>
+                        <rect key="frame" x="64" y="33" width="276" height="260"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="260" id="4Ab-x2-r5e"/>
                         </constraints>
@@ -60,7 +60,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Idm-4q-rB2" customClass="ReactionListView" customModule="Rocket_Chat" customModuleProvider="target">
-                        <rect key="frame" x="72" y="293" width="268" height="40"/>
+                        <rect key="frame" x="64" y="293" width="276" height="40"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="40" id="un3-x5-7Av"/>
                         </constraints>
@@ -75,12 +75,12 @@
                 </subviews>
             </view>
             <constraints>
-                <constraint firstItem="sWJ-OU-dZk" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="72" id="1TD-TH-eBP"/>
+                <constraint firstItem="sWJ-OU-dZk" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="64" id="1TD-TH-eBP"/>
                 <constraint firstItem="Gxd-Cw-G69" firstAttribute="centerY" secondItem="pvK-41-cNi" secondAttribute="centerY" id="3p5-a3-GUZ"/>
                 <constraint firstItem="40K-VI-9eL" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="8" id="4Ig-wg-cUQ"/>
                 <constraint firstItem="dHe-RL-dFU" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="11" id="4Zr-IT-efr"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="top" secondItem="oAa-qT-sOc" secondAttribute="top" constant="8" id="796-8s-tZB"/>
-                <constraint firstItem="Idm-4q-rB2" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="72" id="8Er-OM-NsM"/>
+                <constraint firstItem="Idm-4q-rB2" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="64" id="8Er-OM-NsM"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="7" id="9Lf-Mp-5cE"/>
                 <constraint firstAttribute="trailing" secondItem="sWJ-OU-dZk" secondAttribute="trailing" constant="12" id="D1b-Il-xxS"/>
                 <constraint firstItem="Idm-4q-rB2" firstAttribute="top" secondItem="sWJ-OU-dZk" secondAttribute="bottom" id="J8K-SC-v89"/>
