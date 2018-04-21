@@ -74,6 +74,13 @@
 "alert.update_profile_success.title" = "Profile updated"; // TODO
 "alert.update_password_success.title" = "Password updated"; // TODO
 
+"alert.audio_message.success.send" = "Send"; // TODO
+"alert.audio_message.success.title" = "Success"; // TODO
+"alert.audio_message.success.message" = "Your message was successfully recorded. Recording time: %@."; // TODO
+
+"alert.audio_message.error.title" = "Ooops!"; // TODO
+"alert.audio_message.error.message" = "An error has occurred. Please, record your message  again."; // TODO
+
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Le serveur a changé son URL";
 "connection.server.redirect.alert.message" = "On dirait que ce serveur a changé son adresse URL:\n\n%@\n\nVoulez-vous mettre à jour l'URL?";
