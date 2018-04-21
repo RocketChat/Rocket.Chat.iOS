@@ -81,7 +81,7 @@ final class ChatDataController {
             return false
         }
 
-        // don't group temporary messages
+        // don't group deleted messages
         if (message.markedForDeletion, prevMessage.markedForDeletion) != (false, false) {
             return false
         }
@@ -118,7 +118,7 @@ final class ChatDataController {
     func indexPathOf(_ identifier: String) -> IndexPath? {
         return data.filter { item in
             return item.identifier == identifier
-            }.compactMap { item in
+        }.compactMap { item in
             item.indexPath
         }.first
     }
@@ -127,7 +127,7 @@ final class ChatDataController {
         return data.filter { item in
             guard let messageIdentifier = item.message?.identifier else { return false }
             return messageIdentifier == identifier
-            }.compactMap { item in
+        }.compactMap { item in
             item.indexPath
         }.first
     }
@@ -259,6 +259,15 @@ final class ChatDataController {
         return (indexPaths, removedIndexPaths)
     }
 
+    func needsUpdate(oldMessage: Message, newMessage: Message) -> Bool {
+        return oldMessage.text != newMessage.text ||
+            oldMessage.type != newMessage.type ||
+            oldMessage.mentions.count != newMessage.mentions.count ||
+            oldMessage.channels.count != newMessage.channels.count ||
+            oldMessage.temporary != newMessage.temporary ||
+            oldMessage.failed != newMessage.failed
+    }
+
     func update(_ message: Message) -> Int {
         for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
@@ -266,8 +275,10 @@ final class ChatDataController {
                    return -1
                 }
 
-                if obj.message?.text != message.text || obj.message?.type != message.type {
-                    MessageTextCacheManager.shared.update(for: message)
+                if let oldMessage = obj.message {
+                    if needsUpdate(oldMessage: oldMessage, newMessage: message) {
+                        MessageTextCacheManager.shared.update(for: message)
+                    }
                 }
 
                 data[idx].message = message

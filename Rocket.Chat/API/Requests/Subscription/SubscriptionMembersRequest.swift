@@ -22,7 +22,7 @@ fileprivate extension SubscriptionType {
     }
 }
 
-class SubscriptionMembersRequest: APIRequest {
+final class SubscriptionMembersRequest: APIRequest {
     typealias APIResourceType = SubscriptionMembersResource
 
     let requiredVersion = Version(0, 59, 0)

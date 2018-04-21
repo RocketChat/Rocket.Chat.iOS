@@ -9,13 +9,13 @@
 
 import SwiftyJSON
 
-class InfoRequest: APIRequest {
+final class InfoRequest: APIRequest {
     typealias APIResourceType = InfoResource
 
     let path = "/api/v1/info"
 }
 
-class InfoResource: APIResource {
+final class InfoResource: APIResource {
     var version: String? {
         return raw?["info"]["version"].string
     }

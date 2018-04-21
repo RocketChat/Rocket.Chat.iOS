@@ -8,9 +8,9 @@
 
 import Foundation
 
-class ServerManager {
+struct ServerManager {
 
-    static let shared = ServerManager()
+    static var shared = ServerManager()
     var timestampOffset = 0.0
 
     /**

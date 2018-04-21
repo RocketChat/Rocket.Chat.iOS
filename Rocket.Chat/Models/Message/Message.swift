@@ -45,7 +45,7 @@ enum MessageType: String {
     }
 }
 
-class Message: BaseModel {
+final class Message: BaseModel {
     @objc dynamic var subscription: Subscription!
     @objc dynamic var internalType: String = ""
     @objc dynamic var rid = ""
