@@ -208,9 +208,9 @@ extension MessageManager {
     }
     static func unblockMessagesFrom(_ user: User, completion: @escaping VoidCompletion) {
         guard let userIdentifier = user.identifier else { return }
-        var blockedUsers: [String] = UserDefaults.standard.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
+        var blockedUsers: [String] = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
         blockedUsers.remove(object: userIdentifier)
-        UserDefaults.standard.setValue(blockedUsers, forKey: kBlockedUsersIndentifiers)
+        UserDefaults.group.setValue(blockedUsers, forKey: kBlockedUsersIndentifiers)
         self.blockedUsersList = blockedUsers
 
         Realm.execute({ (realm) in

@@ -100,29 +100,27 @@ extension BlockedUsersListViewController: UITableViewDelegate {
 
 extension BlockedUsersListViewController {
     func blockedUserActions(_ username: String, _ user: User) {
-        if AuthManager.isAuthenticated()?.canUnblockUser(user) == .allowed {
-            let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
-            alert.addAction(UIAlertAction(title: localized("chat.member.open.profile.title"), style: .default, handler: { _ in
-                AppManager.openDirectMessage(username: username) {
-                    self.dismiss(animated: true, completion: nil)
-                }
-            }))
-            alert.addAction(UIAlertAction(title: localized("chat.member.unblock.title"), style: .destructive, handler: { _ in
-                MessageManager.unblockMessagesFrom(user, completion: {
-                    UIView.performWithoutAnimation {
-                        self.showEmptyStateIfNeeded()
-                        self.membersTableView?.reloadData()
-                    }
-                })
-            }))
-            alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
-
-            if let presenter = alert.popoverPresentationController {
-                presenter.sourceView = view
-                presenter.sourceRect = view.bounds
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        alert.addAction(UIAlertAction(title: localized("chat.member.open.profile.title"), style: .default, handler: { _ in
+            AppManager.openDirectMessage(username: username) {
+                self.dismiss(animated: true, completion: nil)
             }
-            present(alert, animated: true, completion: nil)
+        }))
+        alert.addAction(UIAlertAction(title: localized("chat.member.unblock.title"), style: .destructive, handler: { _ in
+            MessageManager.unblockMessagesFrom(user, completion: {
+                UIView.performWithoutAnimation {
+                    self.showEmptyStateIfNeeded()
+                    self.membersTableView?.reloadData()
+                }
+            })
+        }))
+        alert.addAction(UIAlertAction(title: localized("global.cancel"), style: .cancel, handler: nil))
+
+        if let presenter = alert.popoverPresentationController {
+            presenter.sourceView = view
+            presenter.sourceRect = view.bounds
         }
+        present(alert, animated: true, completion: nil)
     }
 
     // If we don't have blocked users the emptyView won't be hidden
