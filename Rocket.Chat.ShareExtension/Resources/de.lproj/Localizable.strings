@@ -22,6 +22,7 @@
 
 "compose.title" = "Teilen";
 "compose.send" = "Senden";
+"compose.cancel" = "Abbrechen";
 "compose.destination.to" = "An: ";
 "compose.file.name.placeholder" = "Dateiname";
 "compose.file.description.placeholder" = "Beschreibung";
@@ -30,4 +31,4 @@
 "report.success.message" = "Die Inhalt wurde erfolgreich versandt.";
 "report.error.title" = "Fehler";
 "report.error.message" = "Etwas ist schiefgelaufen beim Teilen.";
-"report.cancelled.message" = "You cancelled the request. The message wasn't sent."; //TODO
+"report.cancelled.message" = "Die Nachricht wurde nicht versandt, da die Übertragung abgebrochen wurde.";
