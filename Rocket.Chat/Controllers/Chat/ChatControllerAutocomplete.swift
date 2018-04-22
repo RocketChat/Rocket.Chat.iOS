@@ -89,8 +89,10 @@ extension ChatViewController {
         }
 
         cell.selectionStyle = .default
+        var isUser = false
 
         if let user = searchResult[indexPath.row].1 as? User {
+            isUser = true
             cell.avatarView.labelInitials.textColor = .white
             cell.avatarView.user = user
         } else if let emoji = searchResult[indexPath.row].1 as? Emoji {
@@ -116,7 +118,13 @@ extension ChatViewController {
             cell.avatarView.backgroundColor = .white
         }
 
-        cell.labelTitle.text = searchResult[indexPath.row].0
+        let user = AuthManager.currentUser()
+
+        if isUser, searchResult[indexPath.row].0 == user?.username {
+            cell.labelTitle.text = searchResult[indexPath.row].0 + " (" + localized("subscriptions.you") + ")"
+        } else {
+            cell.labelTitle.text = searchResult[indexPath.row].0
+        }
         return cell
     }
 }

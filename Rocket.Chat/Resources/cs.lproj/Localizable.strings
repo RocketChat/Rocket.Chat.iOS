@@ -109,6 +109,7 @@
 "subscriptions.favorites" = "Oblíbené";
 "subscriptions.channels" = "Kanály";
 "subscriptions.direct_messages" = "Přímé zprávy";
+"subscriptions.you" = "you"; //TODO
 
 // Servers
 "servers.add_new_team" = "Přidat nový tým";

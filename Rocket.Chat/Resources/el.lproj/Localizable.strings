@@ -109,6 +109,7 @@
 "subscriptions.favorites" = "Αγαπημένα";
 "subscriptions.channels" = "Κανάλια";
 "subscriptions.direct_messages" = "Άμεσα Μηνύματα";
+"subscriptions.you" = "you"; //TODO
 
 // Servers
 "servers.add_new_team" = "Προσθέστε νέα ομάδας";
