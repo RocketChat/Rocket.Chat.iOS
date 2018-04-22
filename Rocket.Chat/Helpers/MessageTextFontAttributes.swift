@@ -10,9 +10,9 @@ import UIKit
 
 struct MessageTextFontAttributes {
 
-    static let defaultFontSize = CGFloat(17)
+    static let defaultFontSize = CGFloat(16)
 
-    static let defaultFontColor = UIColor.black
+    static let defaultFontColor = #colorLiteral(red: 0.1241737381, green: 0.1242020801, blue: 0.1241700128, alpha: 1)
     static let systemFontColor = UIColor.lightGray
     static let failedFontColor = UIColor.lightGray
 
