@@ -160,6 +160,7 @@ extension Auth {
         if message.user == user {
             return .myOwn
         }
+        
         return .allowed
     }
 }
@@ -182,7 +183,6 @@ extension Auth {
 
         return .allowed
     }
-
 }
 
 extension Auth {
