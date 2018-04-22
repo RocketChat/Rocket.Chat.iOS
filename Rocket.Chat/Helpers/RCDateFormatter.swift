@@ -8,7 +8,7 @@
 
 import Foundation
 
-class RCDateFormatter {
+final class RCDateFormatter {
     private static let dateFormatter = DateFormatter()
 
     static func date(_ date: Date, dateStyle: DateFormatter.Style = .medium) -> String {

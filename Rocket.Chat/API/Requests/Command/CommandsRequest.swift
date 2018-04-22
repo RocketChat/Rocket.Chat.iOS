@@ -15,7 +15,7 @@ struct CommandsRequest: APIRequest {
     let requiredVersion = Version(0, 60, 0)
 }
 
-class CommandsResource: APIResource {
+final class CommandsResource: APIResource {
     var commands: [Command]? {
         return raw?["commands"].arrayValue.map {
             let command = Command()

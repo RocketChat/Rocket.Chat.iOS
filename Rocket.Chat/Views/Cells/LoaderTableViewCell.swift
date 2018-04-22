@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoaderTableViewCell: UITableViewCell {
+final class LoaderTableViewCell: UITableViewCell {
     static let identifier: String = "LoaderTableViewCell"
 
     weak var loaderView: LoaderView?

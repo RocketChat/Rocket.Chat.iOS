@@ -22,7 +22,7 @@ fileprivate extension SubscriptionType {
     }
 }
 
-class SubscriptionMessagesRequest: APIRequest {
+final class SubscriptionMessagesRequest: APIRequest {
     typealias APIResourceType = SubscriptionMessagesResource
 
     var path: String {
@@ -60,7 +60,7 @@ class SubscriptionMessagesRequest: APIRequest {
     }
 }
 
-class SubscriptionMessagesResource: APIResource {
+final class SubscriptionMessagesResource: APIResource {
     var messages: [Message?]? {
         return raw?["messages"].arrayValue.map {
             let message = Message()

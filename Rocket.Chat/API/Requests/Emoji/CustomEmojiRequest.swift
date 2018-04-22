@@ -9,14 +9,14 @@
 import Foundation
 import SwiftyJSON
 
-class CustomEmojiRequest: APIRequest {
+final class CustomEmojiRequest: APIRequest {
     typealias APIResourceType = CustomEmojiResource
 
     let requiredVersion = Version(0, 61, 0)
     let path = "/api/v1/emoji-custom"
 }
 
-class CustomEmojiResource: APIResource {
+final class CustomEmojiResource: APIResource {
     var customEmoji: [CustomEmoji] {
         var customEmoji: [CustomEmoji] = []
         let customEmojiRaw = raw?["emojis"].array

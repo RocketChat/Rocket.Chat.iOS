@@ -11,7 +11,10 @@
 "alert.connection.invalid_url.title" = "Oups!";
 "alert.connection.invalid_url.message" = "L'URL saisie est invalide. Veuillez la vérifier et réessayer, s'il vous plaît!";
 
-"alert.connection.socket_error.title" = "Oops!";
+"alert.connection.not_secured.title" = "Oups!";
+"alert.connection.not_secured.message" = "Impossible d'établir une connexion sécurisée avec le serveur. S'il vous plaît assurez-vous le serveur prend en charge le protocole SSL.";
+
+"alert.connection.socket_error.title" = "Oups!";
 "alert.connection.socket_error.message" = "Impossible de se connecter à ce serveur!";
 
 "alert.connection.invalid_version.title" = "Oups!";
@@ -150,15 +153,16 @@
 "chat.unread_separator" = "new messages"; //TODO
 
 // Chat Message Actions
+
 "chat.message.actions.react" = "Ajouter une réaction";
 "chat.message.actions.block" = "Bloquer les messages de l'utilisateur";
 "chat.message.actions.report" = "Signaler le message";
-"chat.message.actions.edit" = "Modifier le message";
+"chat.message.actions.edit" = "Modifier";
 "chat.message.actions.copy" = "Copier";
-"chat.message.actions.pin" = "Épingler le message";
-"chat.message.actions.unpin" = "Désépingler le message";
-"chat.message.actions.quote" = "Citer le message";
-"chat.message.actions.reply" = "Répondre au message";
+"chat.message.actions.pin" = "Épingler";
+"chat.message.actions.unpin" = "Désépingler";
+"chat.message.actions.quote" = "Citer";
+"chat.message.actions.reply" = "Répondre";
 "chat.message.actions.delete" = "Supprimer le message";
 "chat.message.actions.delete.confirm.title" = "Supprimer ce message ?";
 "chat.message.actions.delete.confirm.message" = "Êtes-vous sûr de vouloir supprimer ce message ? Ceci est irréversible";

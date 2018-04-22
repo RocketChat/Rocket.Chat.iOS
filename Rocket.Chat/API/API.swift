@@ -32,7 +32,7 @@ extension APIFetcher {
 
 typealias AnyAPIFetcher = Any & APIFetcher
 
-class API: APIFetcher {
+final class API: APIFetcher {
     let host: URL
     let version: Version
 
@@ -95,8 +95,12 @@ class API: APIFetcher {
         }
 
         let task = session.dataTask(with: request) { (data, _, error) in
-            if let error = error {
-                completion?(.error(.error(error)))
+            if let error = error as NSError? {
+                if NSError.sslErrors.contains(error.code) {
+                    completion?(.error(.notSecured))
+                } else {
+                    completion?(.error(.error(error)))
+                }
                 return
             }
 

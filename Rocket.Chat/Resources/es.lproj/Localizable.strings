@@ -11,6 +11,9 @@
 "alert.connection.invalid_url.title" = "Uy!";
 "alert.connection.invalid_url.message" = "La URL que ingresó no es válida. Compruébalo y vuelve a intentarlo, por favor!";
 
+"alert.connection.not_secured.title" = "Oops!"; // TODO
+"alert.connection.not_secured.message" = "Could not establish a secure connection to the server. Please make sure the server supports SSL."; // TODO
+
 "alert.connection.socket_error.title" = "Uy!";
 "alert.connection.socket_error.message" = "No se pudo conectar a este servidor!";
 
@@ -153,12 +156,12 @@
 "chat.message.actions.react" = "Agregar Reacción";
 "chat.message.actions.block" = "Bloquear mensajes del usuario";
 "chat.message.actions.report" = "Mensaje de informe";
-"chat.message.actions.edit" = "Editar mensaje";
+"chat.message.actions.edit" = "Editar";
 "chat.message.actions.copy" = "Copia";
-"chat.message.actions.pin" = "Pin mensaje";
+"chat.message.actions.pin" = "Pin";
 "chat.message.actions.unpin" = "Anula mensaje";
-"chat.message.actions.quote" = "Citar mensaje";
-"chat.message.actions.reply" = "Responder al mensaje";
+"chat.message.actions.quote" = "Citar";
+"chat.message.actions.reply" = "Responder";
 "chat.message.actions.delete" = "Borrar mensaje";
 "chat.message.actions.delete.confirm.title" = "Eliminar este mensaje?";
 "chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone.";

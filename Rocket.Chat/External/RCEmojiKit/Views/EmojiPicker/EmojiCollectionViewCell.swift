@@ -9,7 +9,7 @@
 import UIKit
 import FLAnimatedImage
 
-class EmojiCollectionViewCell: UICollectionViewCell {
+final class EmojiCollectionViewCell: UICollectionViewCell {
     enum Emoji {
         case custom(URL?)
         case standard(String?)

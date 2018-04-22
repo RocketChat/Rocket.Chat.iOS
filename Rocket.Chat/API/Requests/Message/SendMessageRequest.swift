@@ -8,7 +8,7 @@
 
 import SwiftyJSON
 
-class SendMessageRequest: APIRequest {
+final class SendMessageRequest: APIRequest {
     typealias APIResourceType = SendMessageResource
     let requiredVersion = Version(0, 60, 0)
 
@@ -38,6 +38,6 @@ class SendMessageRequest: APIRequest {
     }
 }
 
-class SendMessageResource: APIResource {
+final class SendMessageResource: APIResource {
 
 }

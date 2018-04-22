@@ -8,7 +8,7 @@
 
 import Foundation
 
-class NotificationManager {
+final class NotificationManager {
     static let shared = NotificationManager()
 
     var notification: ChatNotification?
