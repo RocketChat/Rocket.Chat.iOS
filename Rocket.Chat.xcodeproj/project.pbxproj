@@ -456,11 +456,11 @@
 		807A8F6B1F9E4D0C00CC78DB /* OAuthManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */; };
 		807C7BF920740F3C006B600E /* AuthCanPinMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7BF820740F3C006B600E /* AuthCanPinMessage.swift */; };
 		807C7C022074307F006B600E /* KMPlaceholderTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C012074307F006B600E /* KMPlaceholderTextView.swift */; };
-		807C7C12207522EF006B600E /* LoginServicesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C11207522EF006B600E /* LoginServicesRequest.swift */; };
 		807C7C0620751ED2006B600E /* SpotlightClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C0520751ED1006B600E /* SpotlightClient.swift */; };
 		807C7C0820751EDC006B600E /* SpotlightRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C0720751EDB006B600E /* SpotlightRequest.swift */; };
 		807C7C0C20751F06006B600E /* SpotlightRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C0B20751F06006B600E /* SpotlightRequestSpec.swift */; };
 		807C7C1020751F40006B600E /* SpotlightClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C0F20751F40006B600E /* SpotlightClientSpec.swift */; };
+		807C7C12207522EF006B600E /* LoginServicesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807C7C11207522EF006B600E /* LoginServicesRequest.swift */; };
 		807FB53D2044B49800E21429 /* Emojione+Transform.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53C2044B49800E21429 /* Emojione+Transform.swift */; };
 		807FB53F2045F36E00E21429 /* EmojioneSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB53E2045F36D00E21429 /* EmojioneSpec.swift */; };
 		807FB55B2046E7DD00E21429 /* SERoomsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807FB55A2046E7DD00E21429 /* SERoomsViewController.swift */; };
@@ -584,6 +584,7 @@
 		99F41BD020658C3400B240FC /* NewPasswordViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
 		A630DCCF2059BECD00F09A4E /* BlockedUsersListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A630DCCE2059BECD00F09A4E /* BlockedUsersListViewController.swift */; };
+		A6CE5B50208D2D0D00DA3CFD /* AuthCanUnblockUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = A6CE5B4F208D2D0D00DA3CFD /* AuthCanUnblockUser.swift */; };
 		AB2AC99226FB9C7C9DA45E94 /* Pods_Rocket_Chat_ShareExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6787D07A45177F339DB234DD /* Pods_Rocket_Chat_ShareExtension.framework */; };
 		B5893BF41F6C4A5F00365768 /* UserReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */; };
 		B5893BF61F6C4B1D00365768 /* UserReviewManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */; };
@@ -1098,11 +1099,11 @@
 		807A8F6A1F9E4D0C00CC78DB /* OAuthManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = OAuthManagerSpec.swift; path = Managers/OAuthManagerSpec.swift; sourceTree = "<group>"; };
 		807C7BF820740F3C006B600E /* AuthCanPinMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanPinMessage.swift; sourceTree = "<group>"; };
 		807C7C012074307F006B600E /* KMPlaceholderTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMPlaceholderTextView.swift; sourceTree = "<group>"; };
-		807C7C11207522EF006B600E /* LoginServicesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginServicesRequest.swift; sourceTree = "<group>"; };
 		807C7C0520751ED1006B600E /* SpotlightClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightClient.swift; sourceTree = "<group>"; };
 		807C7C0720751EDB006B600E /* SpotlightRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightRequest.swift; sourceTree = "<group>"; };
 		807C7C0B20751F06006B600E /* SpotlightRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightRequestSpec.swift; sourceTree = "<group>"; };
 		807C7C0F20751F40006B600E /* SpotlightClientSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotlightClientSpec.swift; sourceTree = "<group>"; };
+		807C7C11207522EF006B600E /* LoginServicesRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginServicesRequest.swift; sourceTree = "<group>"; };
 		807FB53C2044B49800E21429 /* Emojione+Transform.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Emojione+Transform.swift"; sourceTree = "<group>"; };
 		807FB53E2045F36D00E21429 /* EmojioneSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojioneSpec.swift; sourceTree = "<group>"; };
 		807FB5582046E7DD00E21429 /* Rocket.Chat.ShareExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = Rocket.Chat.ShareExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1228,6 +1229,7 @@
 		99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = NewPasswordViewModelSpec.swift; path = Settings/NewPasswordViewModelSpec.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TintedTextField.swift; sourceTree = "<group>"; };
 		A630DCCE2059BECD00F09A4E /* BlockedUsersListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockedUsersListViewController.swift; path = Controllers/Settings/BlockedUsersListViewController.swift; sourceTree = "<group>"; };
+		A6CE5B4F208D2D0D00DA3CFD /* AuthCanUnblockUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanUnblockUser.swift; sourceTree = "<group>"; };
 		AAC8D92081FF042E089F3063 /* Pods-Rocket.Chat.beta.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rocket.Chat.beta.xcconfig"; path = "Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat.beta.xcconfig"; sourceTree = "<group>"; };
 		B5893BF31F6C4A5E00365768 /* UserReviewManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserReviewManager.swift; path = Managers/UserReviewManager.swift; sourceTree = "<group>"; };
 		B5893BF51F6C4B1D00365768 /* UserReviewManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = UserReviewManagerSpec.swift; path = Managers/UserReviewManagerSpec.swift; sourceTree = "<group>"; };
@@ -2447,6 +2449,7 @@
 				8076FDAF204856AF00114F28 /* AuthCanBlockMessage.swift */,
 				807C7BF820740F3C006B600E /* AuthCanPinMessage.swift */,
 				8076FDB42048571200114F28 /* AuthUser.swift */,
+				A6CE5B4F208D2D0D00DA3CFD /* AuthCanUnblockUser.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -2948,6 +2951,7 @@
 				FC8FBCDB0132F52FB242368E /* [CP] Embed Pods Frameworks */,
 				FD5E5CD0D343F2BAB726ADF9 /* 📦 Embed Pods Frameworks */,
 				807FB5672046E7DD00E21429 /* Embed App Extensions */,
+				B064E3758E4142FC80F1F2C5 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -2970,6 +2974,7 @@
 				41DF76F11D2C50720028DBF8 /* Resources */,
 				DC24B2F8EF9BED399B024C23 /* [CP] Embed Pods Frameworks */,
 				DEFA8FD3D3E972322218FB03 /* 📦 Embed Pods Frameworks */,
+				3EAC6C8639A726732C14A144 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3007,6 +3012,7 @@
 				807FB5542046E7DD00E21429 /* Sources */,
 				807FB5552046E7DD00E21429 /* Frameworks */,
 				807FB5562046E7DD00E21429 /* Resources */,
+				E89B64D3BD07EB2473EAF8A6 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3273,6 +3279,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3EAC6C8639A726732C14A144 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		5A6B94785E51D859BD0468DE /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3304,6 +3325,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		B064E3758E4142FC80F1F2C5 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.Chat/Pods-Rocket.Chat-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		D37272A11E13E60E00A25E1A /* SwiftLint */ = {
@@ -3395,6 +3431,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.ChatTests/Pods-Rocket.ChatTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E89B64D3BD07EB2473EAF8A6 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Rocket.Chat.ShareExtension/Pods-Rocket.Chat.ShareExtension-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		EA3F7DE5AADE2FCAFD362350 /* [CP] Check Pods Manifest.lock */ = {
@@ -3791,6 +3842,7 @@
 				4112DC581FFFB9B2005995E1 /* BaseModel.swift in Sources */,
 				33A7AD9E207A2F95000E9D0F /* ChatNotification.swift in Sources */,
 				41A87BAD1DA66E700000EE80 /* AuthSettings.swift in Sources */,
+				A6CE5B50208D2D0D00DA3CFD /* AuthCanUnblockUser.swift in Sources */,
 				8076FDBB2048591A00114F28 /* AuthManagerRecover.swift in Sources */,
 				8013F8671FD6B4F400EE1A4E /* Command.swift in Sources */,
 				77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */,

@@ -343,7 +343,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
         message.user = user2
         message.userBlocked = false
 
-        // user state is "unblocked"
+        // user's state is "unblocked"
         try? realm.write {
             realm.add(auth)
             realm.add(user1)
@@ -351,18 +351,17 @@ class AuthSpec: XCTestCase, RealmTestCase {
         }
 
         guard let user = message.user else { return }
-        //XCTAssert(auth.canUnblockUser(user) == .notActionable)
+        XCTAssert(auth.canUnblockUser(message) == .notActionable)
 
-        // user state is "blocked"
+        // user's state is "blocked"
 
+        message.userBlocked = true
         guard let userIdentifier = user.identifier else { return }
 
         MessageManager.blockedUsersList.append(userIdentifier)
-        //XCTAssert(auth.canUnblockUser(user) == .allowed)
+        XCTAssert(auth.canUnblockUser(message) == .allowed)
         MessageManager.blockedUsersList.remove(object: userIdentifier)
     }
-
-      
 
     func testCanPinMessage() {
         let realm = testRealm()
@@ -380,7 +379,6 @@ class AuthSpec: XCTestCase, RealmTestCase {
         let message = Message.testInstance()
         message.identifier = "mid"
         message.user = user2
-      
         let permission = Permission()
         permission.identifier = PermissionType.pinMessage.rawValue
         permission.roles.append("admin")
