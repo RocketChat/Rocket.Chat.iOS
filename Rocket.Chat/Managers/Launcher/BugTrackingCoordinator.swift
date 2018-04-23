@@ -27,8 +27,8 @@ struct BugTrackingCoordinator: LauncherProtocol {
 
         if disabled {
             anonymizeCrashReports()
-        } else if let user = AuthManager.currentUser() {
-            identifyCrashReports(withUser: user)
+        } else {
+            BugTrackingCoordinator().prepareToLaunch(with: nil)
         }
     }
 

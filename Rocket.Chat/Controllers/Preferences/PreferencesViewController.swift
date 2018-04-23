@@ -72,7 +72,12 @@ final class PreferencesViewController: UITableViewController {
         }
     }
 
-    @IBOutlet weak var switchTracking: UISwitch!
+    @IBOutlet weak var switchTracking: UISwitch! {
+        didSet {
+            switchTracking.isOn = viewModel.trackingValue
+        }
+    }
+
     @IBOutlet weak var labelTracking: UILabel! {
         didSet {
             labelTracking.text = viewModel.trackingTitle
@@ -175,7 +180,10 @@ final class PreferencesViewController: UITableViewController {
 
     // MARK: IBAction
 
-    
+    @IBAction func crashReportSwitchDidChange(sender: Any) {
+        BugTrackingCoordinator.toggleCrashReporting(disabled: !switchTracking.isOn)
+    }
+
 }
 
 extension PreferencesViewController: MFMailComposeViewControllerDelegate {
