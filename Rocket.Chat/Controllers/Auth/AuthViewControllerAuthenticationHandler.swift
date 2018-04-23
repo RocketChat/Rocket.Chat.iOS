@@ -20,9 +20,7 @@ extension AuthViewController {
                     return
                 }
 
-                Alert(
-                    key: "error.socket.default_error"
-                    ).present()
+                Alert(key: "error.socket.default_error").present()
             }
 
             return
@@ -36,8 +34,6 @@ extension AuthViewController {
                 SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
 
                 if let user = resource.user {
-                    BugTrackingCoordinator.identifyCrashReports(withUser: user)
-
                     if user.username != nil {
                         DispatchQueue.main.async {
                             strongSelf.dismiss(animated: true, completion: nil)
@@ -50,9 +46,7 @@ extension AuthViewController {
                     }
                 } else {
                     self?.stopLoading()
-                    Alert(
-                        key: "error.socket.default_error"
-                        ).present()
+                    Alert(key: "error.socket.default_error").present()
                 }
             case .error:
                 self?.stopLoading()
