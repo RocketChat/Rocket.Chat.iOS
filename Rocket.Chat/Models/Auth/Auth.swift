@@ -24,7 +24,6 @@ final class Auth: Object {
 
     @objc dynamic var settings: AuthSettings?
 
-    // Token
     @objc dynamic var token: String?
     @objc dynamic var tokenExpires: Date?
     @objc dynamic var lastAccess: Date?
@@ -39,4 +38,10 @@ final class Auth: Object {
     override static func primaryKey() -> String? {
         return "serverURL"
     }
+
+    // MARK: Internal
+
+    // This key controls if the first channel (based on firstChannelAfterLogin) setting
+    // was already opened on this authentication object
+    @objc dynamic var internalFirstChannelOpened = true
 }
