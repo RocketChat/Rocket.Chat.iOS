@@ -24,7 +24,12 @@ struct BugTrackingCoordinator: LauncherProtocol {
 
     static func toggleCrashReporting(disabled: Bool) {
         UserDefaults.standard.set(disabled, forKey: kCrashReportingDisabledKey)
-        BugTrackingCoordinator().prepareToLaunch(with: nil)
+
+        if disabled {
+            anonymizeCrashReports()
+        } else if let user = AuthManager.currentUser() {
+            identifyCrashReports(withUser: user)
+        }
     }
 
     func prepareToLaunch(with options: [UIApplicationLaunchOptionsKey: Any]?) {
