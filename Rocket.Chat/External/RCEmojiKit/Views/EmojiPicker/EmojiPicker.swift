@@ -9,9 +9,9 @@
 import UIKit
 import SDWebImage
 
-fileprivate typealias EmojiCategory = (name: String, emojis: [Emoji])
+private typealias EmojiCategory = (name: String, emojis: [Emoji])
 
-class EmojiPicker: UIView, RCEmojiKitLocalizable {
+final class EmojiPicker: UIView, RCEmojiKitLocalizable {
     static let defaults = UserDefaults(suiteName: "EmojiPicker")
 
     var customEmojis: [Emoji] = []
@@ -55,6 +55,7 @@ class EmojiPicker: UIView, RCEmojiKitLocalizable {
         (name: "symbols", emojis: Emojione.symbols),
         (name: "flags", emojis: Emojione.flags)
     ]
+
     fileprivate var searchedCategories: [(name: String, emojis: [Emoji])] = []
     fileprivate func searchCategories(string: String) -> [EmojiCategory] {
         return ([customCategory] + defaultCategories).map {
@@ -165,8 +166,7 @@ class EmojiPicker: UIView, RCEmojiKitLocalizable {
         emojisCollectionView.dataSource = self
         emojisCollectionView.delegate = self
 
-        let emojiCellNib = UINib(nibName: "EmojiCollectionViewCell", bundle: nil)
-        emojisCollectionView.register(emojiCellNib, forCellWithReuseIdentifier: "EmojiCollectionViewCell")
+        emojisCollectionView.register(EmojiCollectionViewCell.self, forCellWithReuseIdentifier: "EmojiCollectionViewCell")
         emojisCollectionView.register(EmojiPickerSectionHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "EmojiPickerSectionHeaderView")
 
         if let layout = emojisCollectionView.collectionViewLayout as? UICollectionViewFlowLayout {
@@ -225,12 +225,12 @@ extension EmojiPicker: UICollectionViewDataSource {
         let emoji = currentCategories[indexPath.section].emojis[indexPath.row]
 
         if let file = emoji.imageUrl {
-            cell.emojiView.emojiImageView.sd_setImage(with: URL(string: file), completed: nil)
-        } else if emoji.supportsTones, let currentTone = currentSkinTone.name {
-            let shortname = String(emoji.shortname.dropLast()) + "_\(currentTone):"
-            cell.emojiView.emojiLabel.text = Emojione.transform(string: shortname)
+            cell.emoji = .custom(URL(string: file))
         } else {
-            cell.emojiView.emojiLabel.text = Emojione.transform(string: emoji.shortname)
+            var toneModifier = ""
+            if emoji.supportsTones, let currentTone = currentSkinTone.name { toneModifier = "_\(currentTone)" }
+            let searchString = String(emoji.shortname.dropFirst().dropLast()) + toneModifier
+            cell.emoji = .standard(Emojione.values[searchString])
         }
 
         return cell

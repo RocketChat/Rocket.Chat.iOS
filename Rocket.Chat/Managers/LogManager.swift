@@ -8,7 +8,8 @@
 
 import Foundation
 
-final class Log {
+struct Log {
+
     static func debug(_ text: String?) {
         guard let text = text else { return }
 

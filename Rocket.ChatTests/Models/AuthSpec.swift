@@ -69,6 +69,13 @@ class AuthSpec: XCTestCase, RealmTestCase {
         XCTAssertEqual(object.apiHost?.absoluteString, "https://team.rocket.chat", "apiHost returns API Host correctly")
     }
 
+    func testAPIHostOnSubdirectory() {
+        let object = Auth()
+        object.serverURL = "wss://team.rocket.chat/subdirectory/websocket"
+
+        XCTAssertEqual(object.apiHost?.absoluteString, "https://team.rocket.chat/subdirectory", "apiHost returns API Host correctly")
+    }
+
     func testAPIHostInvalidServerURL() {
         let object = Auth()
         object.serverURL = ""
@@ -184,7 +191,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
         XCTAssert(auth.canDeleteMessage(message) == .allowed)
     }
 
-    //swiftlint:disable function_body_length
+    // swiftlint:disable function_body_length
     func testCanEditMessage() {
         let realm = testRealm()
 
@@ -316,5 +323,65 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         XCTAssert(auth.canBlockMessage(message) == .notActionable)
 
+    }
+
+    func testCanPinMessage() {
+        let realm = testRealm()
+
+        let user1 = User.testInstance()
+        user1.identifier = "uid1"
+        user1.roles.append("admin")
+
+        let user2 = User.testInstance()
+        user2.identifier = "uid2"
+        user2.roles.append("admin")
+
+        let auth = Auth.testInstance()
+        auth.userId = user1.identifier
+
+        let message = Message.testInstance()
+        message.identifier = "mid"
+        message.user = user1
+
+        let permission = Permission()
+        permission.identifier = PermissionType.pinMessage.rawValue
+        permission.roles.append("admin")
+
+        try? realm.write {
+            realm.add(permission)
+            realm.add(auth)
+            realm.add(user1)
+            realm.add(user2)
+
+            auth.settings?.messageAllowPinning = true
+        }
+
+        // User & Server have permission
+        XCTAssertEqual(auth.canPinMessage(message), .allowed)
+
+        // Message is not actionable
+        try? realm.write {
+            message.createdAt = Date()
+            message.internalType = MessageType.userJoined.rawValue
+        }
+
+        XCTAssertEqual(auth.canPinMessage(message), .notActionable)
+
+        // Server permission doesn't allow to pin
+        try? realm.write {
+            auth.settings?.messageAllowPinning = false
+            message.user = user1
+            message.internalType = MessageType.text.rawValue
+        }
+
+        XCTAssertEqual(auth.canPinMessage(message), .notAllowed)
+
+        // User without the role required but server allows to
+        try? realm.write {
+            user1.roles.removeAll()
+            auth.settings?.messageAllowPinning = true
+        }
+
+        XCTAssertEqual(auth.canPinMessage(message), .notAllowed)
     }
 }

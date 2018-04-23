@@ -73,15 +73,4 @@ class OAuthViewControllerSpec: XCTestCase {
         XCTAssertFalse(controller.activityIndicator.isAnimating)
         XCTAssertTrue(controller.activityIndicator.isHidden)
     }
-
-    func testwillNavigateToUrl() {
-        let controller = OAuthViewController.testInstance()
-
-        XCTAssertTrue(controller.willNavigate(controller.webView, to: controller.callbackUrl, decisionHandler: { _ in }))
-        XCTAssertFalse(controller.willNavigate(controller.webView, to: nil, decisionHandler: { _ in }))
-
-        let url: URL! = URL(string: "https://a.com/#%7B%22credentialToken%22:%22token%22,%22credentialSecret%22:%22secret%22%7D")
-        controller.callbackUrl = url
-        XCTAssertTrue(controller.willNavigate(controller.webView, to: controller.callbackUrl, decisionHandler: { _ in }))
-    }
 }

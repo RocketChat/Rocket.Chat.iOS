@@ -53,6 +53,6 @@ class VersionSpec: XCTestCase {
         version1 = Version(2, 1, 0)
         version2 = Version(0, 1, 2)
 
-        XCTAssert(version2 > version1)
+        XCTAssert(version2 < version1)
     }
 }

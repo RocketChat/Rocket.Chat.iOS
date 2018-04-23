@@ -31,7 +31,12 @@ class DateExtension: XCTestCase {
     }
 
     func testDateFromString() {
-        let dateString = "2017-04-26T20:10:32.866Z"
+        let localTimeZoneFormatter = DateFormatter()
+        localTimeZoneFormatter.timeZone = TimeZone.current
+        localTimeZoneFormatter.dateFormat = "Z"
+        let localTimeOffset = localTimeZoneFormatter.string(from: Date())
+
+        let dateString = "2017-04-26T20:10:32.866" + localTimeOffset
 
         guard let date = Date.dateFromString(dateString) else {
             XCTFail("Date is not nil")

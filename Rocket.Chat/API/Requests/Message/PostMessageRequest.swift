@@ -9,9 +9,9 @@
 
 import SwiftyJSON
 
-typealias PostMessageResult = APIResult<PostMessageRequest>
+final class PostMessageRequest: APIRequest {
+    typealias APIResourceType = PostMessageResource
 
-class PostMessageRequest: APIRequest {
     let method: HTTPMethod = .post
     let path = "/api/v1/chat.postMessage"
 
@@ -33,7 +33,7 @@ class PostMessageRequest: APIRequest {
     }
 }
 
-extension APIResult where T == PostMessageRequest {
+final class PostMessageResource: APIResource {
     var message: Message? {
         guard let rawMessage = raw?["message"] else { return nil }
 

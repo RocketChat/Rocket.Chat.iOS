@@ -14,16 +14,19 @@ class MockAPI: APIFetcher {
     var nextResult: JSON?
     var nextError: APIError?
 
-    func fetch<R>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?, succeeded: ((APIResult<R>) -> Void)?, errored: APIErrored?) {
+    @discardableResult
+    func fetch<R: APIRequest>(_ request: R, options: APIRequestOptions, sessionDelegate: URLSessionTaskDelegate?, completion: ((_ result: APIResponse<R.APIResourceType>) -> Void)?) -> URLSessionTask? {
         if let nextResult = nextResult {
-            succeeded?(APIResult<R>(raw: nextResult))
+            completion?(.resource(R.APIResourceType(raw: nextResult)))
         }
 
         if let nextError = nextError {
-            errored?(nextError)
+            completion?(.error(nextError))
         }
 
         nextResult = nil
         nextError = nil
+
+        return nil
     }
 }

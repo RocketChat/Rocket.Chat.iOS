@@ -21,28 +21,39 @@ class InfoRequestHandler: NSObject {
 
     weak var delegate: InfoRequestHandlerDelegate?
     var url: URL?
+    var version: Version?
     var validateServerVersion = true
 
     func validate(with url: URL) {
-        API(host: url).fetch(InfoRequest(), sessionDelegate: self, succeeded: { [weak self] result in
-            self?.validateServerResponse(result: result)
-        }, errored: { [weak self] _ in
-            self?.delegate?.urlNotValid()
-            self?.alertInvalidURL()
-        })
+        API(host: url).fetch(InfoRequest()) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                self?.validateServerResponse(result: resource)
+            case .error(let error):
+                self?.alert(for: error)
+                self?.delegate?.urlNotValid()
+            }
+        }
+    }
+
+    func alert(for error: APIError) {
+        switch error {
+        case .notSecured: Alert(key: "alert.connection.not_secured").present()
+        default: alertInvalidURL()
+        }
     }
 
     func alertInvalidURL() {
-        Alert(
-            key: "alert.connection.invalid_url"
-        ).present()
+        Alert(key: "alert.connection.invalid_url").present()
     }
 
-    internal func validateServerResponse(result: InfoResult?) {
+    internal func validateServerResponse(result: InfoResource?) {
         guard let version = result?.version else {
             delegate?.urlNotValid()
             return
         }
+
+        self.version = version.version()
 
         if validateServerVersion {
             if let minVersion = Bundle.main.object(forInfoDictionaryKey: "RC_MIN_SERVER_VERSION") as? String {
@@ -79,14 +90,17 @@ extension InfoRequestHandler: URLSessionTaskDelegate {
     }
 
     func handleRedirect(_ newURL: URL) {
-        API(host: newURL).fetch(InfoRequest(), sessionDelegate: self, succeeded: { result in
-            self.handleRedirectInfoResult(result, for: newURL)
-        }, errored: { [weak self] _ in
-            self?.delegate?.urlNotValid()
-        })
+        API(host: newURL).fetch(InfoRequest()) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                self?.handleRedirectInfoResult(resource, for: newURL)
+            case .error:
+                self?.delegate?.urlNotValid()
+            }
+        }
     }
 
-    func handleRedirectInfoResult(_ result: InfoResult, for url: URL) {
+    func handleRedirectInfoResult(_ result: InfoResource, for url: URL) {
         guard
             result.raw != nil,
             let controller = self.delegate?.viewControllerToPresentAlerts,

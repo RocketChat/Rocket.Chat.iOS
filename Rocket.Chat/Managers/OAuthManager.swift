@@ -11,7 +11,7 @@ import OAuthSwift
 import UIKit
 import SwiftyJSON
 
-class OAuthCredentials {
+final class OAuthCredentials {
     let token: String
     let secret: String?
 
@@ -28,47 +28,36 @@ class OAuthCredentials {
     }
 }
 
-class OAuthManager {
-    private static var oauthSwift: OAuthSwift?
+final class OAuthManager {
+    private static var oauthSwift: OAuth2Swift?
     private static var oauth1Swift: OAuth1Swift?
 
     @discardableResult
     static func authorize(loginService: LoginService, at server: URL, viewController: UIViewController, success: @escaping (OAuthCredentials) -> Void, failure: @escaping () -> Void) -> Bool {
-        print("am here")
-        guard let callbackUrl = callbackUrl(for: loginService, server: server) else {
-            print("callbackurl not working")
+        guard
+            let callbackUrl = callbackUrl(for: loginService, server: server),
+            let oauthSwift = oauthSwift(for: loginService),
+            let authorizeUrlString = loginService.authorizeUrl,
+            let authorizeUrl = URL(string: authorizeUrlString),
+            let scope = loginService.scope,
+            let state = state()
+        else {
             failure()
             return false
         }
-        guard let oauthSwift = oauth1Swift(for: loginService) else {
-            print("oauthswift not working ")
-            failure()
-            return false
-        }
-        guard let authorizeUrlString = loginService.authorizeUrl else {
-            print("authorizeUrlString not working  ")
-            failure()
-            return false
-        }
-        guard let authorizeUrl = URL(string: authorizeUrlString) else {
-            failure()
-            return false
-        }
-        let handler = OAuthViewController(authorizeUrl: authorizeUrl, callbackUrl: callbackUrl, success: success, failure: failure)
+
+        let userAgent: String? = loginService.type == .google ? "Mozilla/5.0 (Linux; Android 4.1.1; Galaxy Nexus Build/JRO03C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19" : nil
+
+        let handler = OAuthViewController(authorizeUrl: authorizeUrl, callbackUrl: callbackUrl, userAgent: userAgent, success: success, failure: failure)
         viewController.navigationController?.pushViewController(handler, animated: true)
 
         oauthSwift.removeCallbackNotificationObserver()
         oauthSwift.authorizeURLHandler = handler
-        self.oauth1Swift = oauthSwift
+        self.oauthSwift = oauthSwift
 
-        return oauthSwift.authorize(withCallbackURL: callbackUrl, success: { _, _, _  in }, failure: { _ in
-            failure()
-        }) != nil
-        /**
         return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { _ in
             failure()
         }) != nil
-         **/
     }
 
     static func credentialsForUrlFragment(_ fragment: String) -> OAuthCredentials? {
@@ -119,21 +108,12 @@ class OAuthManager {
     }
 
     static func oauth1Swift(for loginService: LoginService) -> OAuth1Swift? {
-            print(loginService.type)
-            guard let consumerKey = loginService.clientId else {
-                print("consumerKey not working")
-                return nil
-            }
-            guard let requestTokenUrl = loginService.requestTokenUrl else {
-                print("requestTokenUrl not working")
-                return nil
-            }
-            guard let authorizeUrl = loginService.authorizeUrl else {
-                print("authorizeUrl not working")
-                return nil
-            }
-            guard let accessTokenUrl = loginService.accessTokenUrl else {
-                print("accessTokenUrl not working")
+            guard
+                let consumerKey = loginService.clientId,
+                let requestTokenUrl = loginService.requestTokenUrl,
+                let authorizeUrl = loginService.authorizeUrl,
+                let accessTokenUrl = loginService.accessTokenUrl
+            else {
                 return nil
             }
         return OAuth1Swift(

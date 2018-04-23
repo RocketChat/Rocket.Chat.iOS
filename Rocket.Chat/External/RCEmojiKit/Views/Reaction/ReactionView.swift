@@ -25,7 +25,7 @@ struct ReactionViewModel {
     }
 }
 
-class ReactionView: UIView {
+final class ReactionView: UIView {
     @IBOutlet var contentView: UIView! {
         didSet {
             contentView.layer.borderWidth = 1
