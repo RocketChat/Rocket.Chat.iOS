@@ -14,7 +14,7 @@
         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XuJ-Kr-IFM" customClass="ChatMessageURLView" customModule="Rocket_Chat" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfz-qe-v9j" customClass="ChatSideLineView" customModule="Rocket_Chat" customModuleProvider="target">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nfz-qe-v9j">
                     <rect key="frame" x="0.0" y="0.0" width="3" height="1000"/>
                     <color key="backgroundColor" red="0.80000000000000004" green="0.80000000000000004" blue="0.80000000000000004" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
