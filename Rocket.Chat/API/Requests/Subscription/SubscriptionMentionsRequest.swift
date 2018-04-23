@@ -9,7 +9,7 @@
 import SwiftyJSON
 import Foundation
 
-class SubscriptionMentionsRequest: APIRequest {
+final class SubscriptionMentionsRequest: APIRequest {
     typealias APIResourceType = SubscriptionMentionsResource
 
     let requiredVersion = Version(0, 63, 0)
@@ -24,7 +24,7 @@ class SubscriptionMentionsRequest: APIRequest {
     }
 }
 
-class SubscriptionMentionsResource: APIResource {
+final class SubscriptionMentionsResource: APIResource {
     var messages: [Message]? {
         return raw?["mentions"].arrayValue.map {
             let message = Message()

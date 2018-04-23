@@ -15,33 +15,15 @@ internal enum BundleInfoKey: String {
 
 final class PreferencesViewModel {
 
-    internal var title: String {
-        return localized("myaccount.settings.title")
-    }
+    internal let title = localized("myaccount.settings.title")
+    internal let profile = localized("myaccount.settings.profile")
+    internal let contactus = localized("myaccount.settings.contactus")
+    internal let license = localized("myaccount.settings.license")
+    internal let language = localized("myaccount.settings.language")
+    internal let appicon = localized("myaccount.settings.appicon")
+    internal let webBrowser = localized("myaccount.settings.web_browser")
 
-    internal var profile: String {
-        return localized("myaccount.settings.profile")
-    }
-
-    internal var contactus: String {
-        return localized("myaccount.settings.contactus")
-    }
-
-    internal var license: String {
-        return localized("myaccount.settings.license")
-    }
-
-    internal var language: String {
-        return localized("myaccount.settings.language")
-    }
-
-    internal var appicon: String {
-        return localized("myaccount.settings.appicon")
-    }
-
-    internal var webBrowser: String {
-        return localized("myaccount.settings.web_browser")
-    }
+    internal let licenseURL = URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
 
     internal var trackingTitle: String {
         return localized("myaccount.settings.tracking.title")
@@ -67,26 +49,19 @@ final class PreferencesViewModel {
         return appInfo(.build)
     }
 
-    internal var supportEmail: String {
-        return "Rocket.Chat Support <support@rocket.chat>"
-    }
+    internal let supportEmail = "Rocket.Chat Support <support@rocket.chat>"
 
-    internal var supportEmailSubject: String {
-        return "Support on iOS native application"
-    }
+    internal let supportEmailSubject = "Support on iOS native application"
 
     internal var supportEmailBody: String {
-        var text = "<br /><br />"
-        text += "<b>Device information</b><br />"
-        text += "<b>System name</b>: \(UIDevice.current.systemName)<br />"
-        text += "<b>System version</b>: \(UIDevice.current.systemVersion)<br />"
-        text += "<b>System model</b>: \(UIDevice.current.model)<br />"
-        text += "<b>Application version</b>: \(version) (\(build))"
-        return text
-    }
-
-    internal var licenseURL: URL? {
-        return URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
+        return """
+        <br /><br />
+        <b>Device information</b><br />
+        <b>System name</b>: \(UIDevice.current.systemName)<br />
+        <b>System version</b>: \(UIDevice.current.systemVersion)<br />
+        <b>System model</b>: \(UIDevice.current.model)<br />
+        <b>Application version</b>: \(version) (\(build))
+        """
     }
 
     internal var canChangeAppIcon: Bool {
@@ -98,14 +73,12 @@ final class PreferencesViewModel {
     }
 
     #if DEBUG || BETA
-    internal var canOpenFLEX = true
+    internal let canOpenFLEX = true
     #else
-    internal var canOpenFLEX = false
+    internal let canOpenFLEX = false
     #endif
 
-    internal var numberOfSections: Int {
-        return 5
-    }
+    internal let numberOfSections = 5
 
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {

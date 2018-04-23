@@ -9,7 +9,7 @@
 import Foundation
 import SwiftyJSON
 
-class UpdateUserRequest: APIRequest {
+final class UpdateUserRequest: APIRequest {
     typealias APIResourceType = UpdateUserResource
 
     let requiredVersion = Version(0, 62, 2)
@@ -62,7 +62,7 @@ class UpdateUserRequest: APIRequest {
     }
 }
 
-class UpdateUserResource: APIResource {
+final class UpdateUserResource: APIResource {
     var user: User? {
         guard let rawMessage = raw?["user"] else { return nil }
 

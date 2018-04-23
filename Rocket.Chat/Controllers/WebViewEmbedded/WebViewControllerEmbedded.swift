@@ -9,7 +9,7 @@
 import UIKit
 import WebKit
 
-class WebViewControllerEmbedded: UIViewController {
+final class WebViewControllerEmbedded: UIViewController {
 
     var urlLoaded = false
     var url: URL?
