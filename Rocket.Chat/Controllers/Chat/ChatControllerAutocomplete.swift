@@ -120,10 +120,9 @@ extension ChatViewController {
 
         let user = AuthManager.currentUser()
 
+        cell.labelTitle.text = searchResult[indexPath.row].0
         if isUser, searchResult[indexPath.row].0 == user?.username {
-            cell.labelTitle.text = searchResult[indexPath.row].0 + " (" + localized("subscriptions.you") + ")"
-        } else {
-            cell.labelTitle.text = searchResult[indexPath.row].0
+            cell.labelTitle.text?.append(" (" + localized("subscriptions.you") + ")")
         }
         return cell
     }
