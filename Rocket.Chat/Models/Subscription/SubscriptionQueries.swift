@@ -31,7 +31,7 @@ extension Subscription {
         return auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false).first
     }
 
-    static func subscription(with name: String, auth: Auth) -> Subscription? {
+    static private func subscription(with name: String, auth: Auth) -> Subscription? {
         return auth.subscriptions.filter("name = %@", name).first
     }
 
@@ -45,7 +45,10 @@ extension Subscription {
 
         if !auth.internalFirstChannelOpened {
             if let firstChannel = auth.settings?.firstChannelAfterLogin, !firstChannel.isEmpty {
-                return subscription(with: firstChannel, auth: auth)
+                if let subscription = subscription(with: firstChannel, auth: auth) {
+                    auth.setFirstChannelOpened()
+                    return subscription
+                }
             }
         }
 

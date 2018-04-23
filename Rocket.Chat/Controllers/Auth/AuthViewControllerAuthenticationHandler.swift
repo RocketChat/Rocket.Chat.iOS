@@ -26,6 +26,10 @@ extension AuthViewController {
             return
         }
 
+        if let publicSettings = serverPublicSettings {
+            AuthSettingsManager.persistPublicSettings(settings: publicSettings)
+        }
+
         API.current()?.fetch(MeRequest()) { [weak self] response in
             switch response {
             case .resource(let resource):
