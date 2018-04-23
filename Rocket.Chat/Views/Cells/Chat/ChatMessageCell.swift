@@ -320,7 +320,7 @@ extension ChatMessageCell {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
 
-        var total = (CGFloat)(sequential ? 13 : 34) + (message.reactions.count > 0 ? 40 : 0)
+        var total = (CGFloat)(sequential ? 15 : 35) + (message.reactions.count > 0 ? 40 : 0)
         if attributedString?.string ?? "" != "" {
             total += (attributedString?.heightForView(withWidth: fullWidth - 76) ?? 0)
         }

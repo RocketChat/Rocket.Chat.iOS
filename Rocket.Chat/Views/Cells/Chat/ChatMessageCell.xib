@@ -12,10 +12,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" misplaced="YES" id="oAa-qT-sOc" customClass="ChatMessageCell" customModule="Rocket_Chat" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="373" height="465"/>
+            <rect key="frame" x="0.0" y="0.0" width="416" height="424"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="373" height="465"/>
+                <rect key="frame" x="0.0" y="0.0" width="416" height="424"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.75" translatesAutoresizingMaskIntoConstraints="NO" id="40K-VI-9eL">
@@ -89,14 +89,14 @@
                 <constraint firstAttribute="trailing" secondItem="Idm-4q-rB2" secondAttribute="trailing" constant="12" id="Wzj-wo-r7j"/>
                 <constraint firstItem="sWJ-OU-dZk" firstAttribute="top" secondItem="2eJ-5r-Kgq" secondAttribute="bottom" id="cqm-ha-bqT"/>
                 <constraint firstItem="40K-VI-9eL" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="12" id="evW-4R-3TS"/>
-                <constraint firstAttribute="bottom" secondItem="Idm-4q-rB2" secondAttribute="bottom" constant="4" id="kdQ-0K-2Dm"/>
+                <constraint firstAttribute="bottom" secondItem="Idm-4q-rB2" secondAttribute="bottom" id="kdQ-0K-2Dm"/>
                 <constraint firstItem="dHe-RL-dFU" firstAttribute="leading" secondItem="oAa-qT-sOc" secondAttribute="leading" constant="12" id="myV-aY-DuJ"/>
                 <constraint firstItem="pvK-41-cNi" firstAttribute="leading" secondItem="40K-VI-9eL" secondAttribute="trailing" constant="2" id="nFi-sf-ZfI"/>
-                <constraint firstItem="2eJ-5r-Kgq" firstAttribute="top" secondItem="40K-VI-9eL" secondAttribute="bottom" id="oBU-c9-0bJ"/>
+                <constraint firstItem="2eJ-5r-Kgq" firstAttribute="top" secondItem="40K-VI-9eL" secondAttribute="bottom" constant="2" id="oBU-c9-0bJ"/>
                 <constraint firstItem="2eJ-5r-Kgq" firstAttribute="leading" secondItem="dHe-RL-dFU" secondAttribute="trailing" constant="12" id="wIX-xY-yjb"/>
                 <constraint firstAttribute="trailing" secondItem="2eJ-5r-Kgq" secondAttribute="trailing" constant="12" id="xan-6S-aXM"/>
             </constraints>
-            <size key="customSize" width="373" height="465"/>
+            <size key="customSize" width="416" height="424"/>
             <variation key="default">
                 <mask key="constraints">
                     <exclude reference="OVZ-S3-Gij"/>
