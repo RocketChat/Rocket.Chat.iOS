@@ -109,6 +109,7 @@
 "subscriptions.favorites" = "Favoritos";
 "subscriptions.channels" = "Canales";
 "subscriptions.direct_messages" = "Mensajes directos";
+"subscriptions.you" = "you"; //TODO
 
 // Servers
 "servers.add_new_team" = "Agregar nuevo equipo";
