@@ -25,13 +25,8 @@ final class PreferencesViewModel {
 
     internal let licenseURL = URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
 
-    internal var trackingTitle: String {
-        return localized("myaccount.settings.tracking.title")
-    }
-
-    internal var trackingFooterText: String {
-        return localized("myaccount.settings.tracking.footer")
-    }
+    internal let trackingTitle = localized("myaccount.settings.tracking.title")
+    internal var trackingFooterText = localized("myaccount.settings.tracking.footer")
 
     internal var trackingValue: Bool {
         return !BugTrackingCoordinator.isCrashReportingDisabled
