@@ -29,8 +29,7 @@ final class OAuthCredentials {
 }
 
 final class OAuthManager {
-    private static var oauthSwift: OAuth2Swift?
-    private static var oauth1Swift: OAuth1Swift?
+    private static var oauthSwift: OAuthSwift?
 
     @discardableResult
     static func authorize(loginService: LoginService, at server: URL, viewController: UIViewController, success: @escaping (OAuthCredentials) -> Void, failure: @escaping () -> Void) -> Bool {
@@ -53,11 +52,20 @@ final class OAuthManager {
 
         oauthSwift.removeCallbackNotificationObserver()
         oauthSwift.authorizeURLHandler = handler
+
         self.oauthSwift = oauthSwift
 
-        return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { _ in
-            failure()
-        }) != nil
+        if let oauthSwift = oauthSwift as? OAuth1Swift {
+            return oauthSwift.authorize(withCallbackURL: callbackUrl, success: { _, _, _ in }, failure: { error in
+                failure()
+            }) != nil
+        } else if let oauthSwift = oauthSwift as? OAuth2Swift {
+            return oauthSwift.authorize(withCallbackURL: callbackUrl, scope: scope, state: state, success: { _, _, _  in }, failure: { _ in
+                failure()
+            }) != nil
+        } else {
+            return false
+        }
     }
 
     static func credentialsForUrlFragment(_ fragment: String) -> OAuthCredentials? {
@@ -89,7 +97,15 @@ final class OAuthManager {
         return "{\"loginStyle\":\"popup\",\"credentialToken\":\"\(String.random(40))\",\"isCordova\":true}".base64Encoded()
     }
 
-    static func oauthSwift(for loginService: LoginService) -> OAuth2Swift? {
+    static func oauthSwift(for loginService: LoginService) -> OAuthSwift? {
+        if loginService.oauth1 {
+            return oauth1Swift(for: loginService)
+        } else {
+            return oauth2Swift(for: loginService)
+        }
+    }
+
+    static func oauth2Swift(for loginService: LoginService) -> OAuth2Swift? {
         guard
             let authorizeUrl = loginService.authorizeUrl,
             let accessTokenUrl = loginService.accessTokenUrl,

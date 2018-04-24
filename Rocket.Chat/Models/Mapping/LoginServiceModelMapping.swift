@@ -140,6 +140,8 @@ extension LoginService: ModelMappeable {
         buttonLabelText = "twitter"
         buttonLabelColor = "#ffffff"
         buttonColor = "#00aced"
-        callbackPath = "twitter?close"
+        callbackPath = "twitter"
+
+        oauth1 = true
     }
 }

@@ -64,6 +64,9 @@ class LoginService: BaseModel {
     @objc dynamic var issuer: String?
     @objc dynamic var provider: String?
 
+    // OAuth1
+    @objc dynamic var oauth1: Bool = false
+
     // true if LoginService has enough information to be used
     var isValid: Bool {
         if type == .cas && loginUrl != nil {
