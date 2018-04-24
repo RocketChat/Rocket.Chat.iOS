@@ -7,35 +7,10 @@
 //
 
 import Foundation
-import SwiftyJSON
 
-/**
-    This keys are used to store all servers and
-    database information to each server user is
-    connected to.
- */
-struct ServerPersistKeys {
-    // Server controls
-    static let servers = "kServers"
-    static let selectedIndex = "kSelectedIndex"
+struct ServerManager {
 
-    // Database
-    static let databaseName = "kDatabaseName"
-
-    // Authentication information
-    static let token = "kAuthToken"
-    static let serverURL = "kAuthServerURL"
-    static let serverVersion = "kAuthServerVersion"
-    static let userId = "kUserId"
-
-    // Display information
-    static let serverIconURL = "kServerIconURL"
-    static let serverName = "kServerName"
-}
-
-class ServerManager {
-
-    static let shared = ServerManager()
+    static var shared = ServerManager()
     var timestampOffset = 0.0
 
     /**
@@ -47,7 +22,7 @@ class ServerManager {
             have information required.
      */
     static func updateServerInformation(from settings: AuthSettings) {
-        let defaults = UserDefaults.standard
+        let defaults = UserDefaults.group
         let selectedIndex = DatabaseManager.selectedIndex
 
         guard

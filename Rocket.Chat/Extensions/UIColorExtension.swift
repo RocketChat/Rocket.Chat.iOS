@@ -40,13 +40,28 @@ enum SystemMessageColor {
 
 extension UIColor {
 
-    convenience init(rgb: UInt, alphaVal: CGFloat) {
+    convenience init(rgb: Int, alphaVal: CGFloat) {
         self.init(
             red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0,
             blue: CGFloat(rgb & 0x0000FF) / 255.0,
             alpha: CGFloat(alphaVal)
         )
+    }
+
+    // MARK: Avatar Colors
+
+    static var avatarColors: [UIColor] {
+        return [
+            0xF44336, 0xE91E63, 0x9C27B0, 0x673AB7, 0x3F51B5,
+            0x2196F3, 0x03A9F4, 0x00BCD4, 0x009688, 0x4CAF50,
+            0x8BC34A, 0xCDDC39, 0xFFC107, 0xFF9800, 0xFF5722,
+            0x795548, 0x9E9E9E, 0x607D8B
+        ].map { UIColor(rgb: $0, alphaVal: 1.0) }
+    }
+
+    static func forName(_ name: String) -> UIColor {
+        return avatarColors[name.count % avatarColors.count]
     }
 
     // MARK: Color from strings

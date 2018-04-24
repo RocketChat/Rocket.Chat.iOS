@@ -9,9 +9,9 @@
 import UIKit
 import SDWebImage
 
-fileprivate typealias EmojiCategory = (name: String, emojis: [Emoji])
+private typealias EmojiCategory = (name: String, emojis: [Emoji])
 
-class EmojiPicker: UIView, RCEmojiKitLocalizable {
+final class EmojiPicker: UIView, RCEmojiKitLocalizable {
     static let defaults = UserDefaults(suiteName: "EmojiPicker")
 
     var customEmojis: [Emoji] = []
@@ -55,6 +55,7 @@ class EmojiPicker: UIView, RCEmojiKitLocalizable {
         (name: "symbols", emojis: Emojione.symbols),
         (name: "flags", emojis: Emojione.flags)
     ]
+
     fileprivate var searchedCategories: [(name: String, emojis: [Emoji])] = []
     fileprivate func searchCategories(string: String) -> [EmojiCategory] {
         return ([customCategory] + defaultCategories).map {

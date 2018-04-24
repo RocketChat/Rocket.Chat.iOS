@@ -13,46 +13,62 @@ extension NSAttributedString {
     func applyingCustomEmojis(_ emojis: [String: Emoji]) -> NSAttributedString {
         let attributedString = NSMutableAttributedString(attributedString: self)
 
-        let regexPattern = ":(\\w+|-|\\+)*:"
+        var ranges = NSMutableAttributedString.getMatches(from: attributedString)
+        let notMatched = NSMutableAttributedString.insertEmojis(emojis, into: attributedString, in: string.filterOutRangesInsideCode(ranges: ranges))
+        ranges = NSMutableAttributedString.getMatches(from: attributedString, excludingRanges: notMatched)
+        NSMutableAttributedString.insertEmojis(emojis, into: attributedString, in: string.filterOutRangesInsideCode(ranges: ranges))
 
-        guard let regex = try? NSRegularExpression(pattern: regexPattern, options: []) else { return attributedString }
+        return attributedString
+    }
+}
 
-        let ranges = regex.matches(
-            in: attributedString.string,
-            options: [],
-            range: NSRange(location: 0, length: attributedString.length)
-            ).map {
-                $0.range(at: 0)
-        }
+extension NSMutableAttributedString {
 
-        // exclude matches inside code tags
-        let filteredRanges = attributedString.string.filterOutRangesInsideCode(ranges: ranges)
-
+    @discardableResult
+    static func insertEmojis(_ emojis: [String: Emoji], into string: NSMutableAttributedString, in ranges: [NSRange]) -> [NSRange] {
         var offset = 0
-        for range in filteredRanges {
+        var notMatched = [NSRange]()
+
+        for range in ranges {
             let imageAttachment = NSTextAttachment()
             imageAttachment.bounds = CGRect(x: 0, y: 0, width: 22.0, height: 22.0)
             let transformedRange = NSRange(location: range.location - offset, length: range.length)
-            let replacementString = attributedString.attributedSubstring(from: transformedRange)
+            let replacementString = string.attributedSubstring(from: transformedRange)
 
             if let emoji = emojis[replacementString.string.replacingOccurrences(of: ":", with: "")], let imageUrl = emoji.imageUrl {
 
                 imageAttachment.contents = imageUrl.data(using: .utf8)
                 let imageString = NSAttributedString(attachment: imageAttachment)
-                attributedString.replaceCharacters(in: transformedRange, with: imageString)
+                string.replaceCharacters(in: transformedRange, with: imageString)
 
                 offset += replacementString.length - 1
+            } else {
+                notMatched.append(transformedRange)
             }
         }
 
-        return attributedString
+        return notMatched
+    }
+
+    static func getMatches(from string: NSMutableAttributedString, excludingRanges: [NSRange] = []) -> [NSRange] {
+        var ranges = [NSRange]()
+        var lastMatchIndex = 0
+        for range in excludingRanges {
+            ranges.append(NSRange(location: lastMatchIndex, length: range.location - lastMatchIndex + 1))
+            lastMatchIndex = range.location + range.length - 1
+        }
+        ranges.append(NSRange(location: lastMatchIndex, length: string.length - lastMatchIndex))
+
+        let regex = try? NSRegularExpression(pattern: ":(\\w|-|\\+)+:", options: [])
+        let matchRanges = ranges.map { range in regex?.matches(in: string.string, options: [], range: range).map { $0.range(at: 0) } ?? [] }
+        return matchRanges.reduce(into: [NSRange]()) { $0.append(contentsOf: $1) }
     }
 }
 
 extension String {
     func codeRanges() -> [NSRange] {
         let codeRegex = try? NSRegularExpression(pattern: "(```)(?:[a-zA-Z]+)?((?:.|\r|\n)*?)(```)", options: [.anchorsMatchLines])
-        let codeMatches = codeRegex?.matches(in: self, options: [], range: NSRange(location: 0, length: count)) ?? []
+        let codeMatches = codeRegex?.matches(in: self, options: [], range: NSRange(location: 0, length: utf16.count)) ?? []
         return codeMatches.map { $0.range(at: 0) }
     }
 
@@ -66,13 +82,5 @@ extension String {
         }
 
         return filteredRanges
-    }
-
-    func escapingRegex() -> String? {
-        var escaped = self
-        ["[", "]", "(", ")", "*", "+", "?", ".", "^", "$", "|"].forEach {
-            escaped = escaped.replacingOccurrences(of: $0, with: "\\\($0)")
-        }
-        return escaped
     }
 }

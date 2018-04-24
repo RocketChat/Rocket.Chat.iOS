@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SEFileDetailView" customModule="Rocket_Chat_ShareExtension" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="Koy-Gn-27i" id="9Ou-2E-4an"/>
+                <outlet property="detailLabel" destination="woO-Ml-3IL" id="jsu-lT-W3E"/>
+                <outlet property="fileSizeLabel" destination="85X-Bp-8XX" id="Dtt-A2-6xf"/>
+                <outlet property="previewImageView" destination="f4u-5V-Nht" id="DlU-JW-xEm"/>
+                <outlet property="titleLabel" destination="qGn-Px-B1K" id="Cen-zW-Zxv"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="Koy-Gn-27i">
+            <rect key="frame" x="0.0" y="0.0" width="466" height="95"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="85MB" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85X-Bp-8XX">
+                    <rect key="frame" x="106.5" y="66" width="46" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="IMG_2003.jpeg" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qGn-Px-B1K">
+                    <rect key="frame" x="106.5" y="8" width="117" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1024x1024" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="woO-Ml-3IL">
+                    <rect key="frame" x="106.5" y="37" width="85" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f4u-5V-Nht">
+                    <rect key="frame" x="20" y="8" width="79" height="79"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="f4u-5V-Nht" secondAttribute="height" multiplier="1:1" id="vkX-3p-t4A"/>
+                    </constraints>
+                </imageView>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="85X-Bp-8XX" firstAttribute="top" secondItem="woO-Ml-3IL" secondAttribute="bottom" constant="8" id="5Aa-Ig-XcZ"/>
+                <constraint firstItem="f4u-5V-Nht" firstAttribute="width" secondItem="f4u-5V-Nht" secondAttribute="height" multiplier="1:1" id="FdH-cJ-2JV"/>
+                <constraint firstItem="85X-Bp-8XX" firstAttribute="leading" secondItem="f4u-5V-Nht" secondAttribute="trailing" constant="8" id="FuX-g9-hYP"/>
+                <constraint firstItem="woO-Ml-3IL" firstAttribute="top" secondItem="qGn-Px-B1K" secondAttribute="bottom" constant="8" id="U9n-r0-7Qo"/>
+                <constraint firstItem="mtW-r3-jQb" firstAttribute="bottom" secondItem="f4u-5V-Nht" secondAttribute="bottom" constant="8" id="V8P-0b-HxT"/>
+                <constraint firstItem="f4u-5V-Nht" firstAttribute="top" secondItem="mtW-r3-jQb" secondAttribute="top" constant="8" id="a7N-Wr-nJy"/>
+                <constraint firstItem="f4u-5V-Nht" firstAttribute="leading" secondItem="mtW-r3-jQb" secondAttribute="leading" constant="20" id="bug-DL-Djx"/>
+                <constraint firstItem="woO-Ml-3IL" firstAttribute="centerY" secondItem="mtW-r3-jQb" secondAttribute="centerY" id="ehl-Fs-Off"/>
+                <constraint firstItem="qGn-Px-B1K" firstAttribute="leading" secondItem="f4u-5V-Nht" secondAttribute="trailing" constant="8" id="hZ3-MA-lCf"/>
+                <constraint firstItem="woO-Ml-3IL" firstAttribute="leading" secondItem="f4u-5V-Nht" secondAttribute="trailing" constant="7.5" id="khN-f5-AdB"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="mtW-r3-jQb"/>
+            <point key="canvasLocation" x="28" y="230.5"/>
+        </view>
+    </objects>
+</document>

@@ -24,7 +24,7 @@ extension User: ModelMappeable {
             self.name = name
         }
 
-        if let roles = values["roles"].array?.flatMap({ $0.string }) {
+        if let roles = values["roles"].array?.compactMap({ $0.string }) {
             self.roles.removeAll()
             self.roles.append(contentsOf: roles)
         }
@@ -38,7 +38,7 @@ extension User: ModelMappeable {
         }
 
         if let emailsRaw = values["emails"].array {
-            let emails = emailsRaw.flatMap { emailRaw -> Email? in
+            let emails = emailsRaw.compactMap { emailRaw -> Email? in
                 let email = Email(value: [
                     "email": emailRaw["address"].stringValue,
                     "verified": emailRaw["verified"].boolValue
@@ -49,15 +49,8 @@ extension User: ModelMappeable {
                 return email
             }
 
-            if let realm = realm {
-                emails.forEach({ email in
-                    if let realmEmail = realm.object(ofType: Email.self, forPrimaryKey: email.identifier as AnyObject) {
-                        self.emails.append(realmEmail)
-                    }
-                })
-            } else {
-                self.emails.append(contentsOf: emails)
-            }
+            self.emails.removeAll()
+            self.emails.append(contentsOf: emails)
         }
     }
 }

@@ -4,15 +4,27 @@ platform :ios, '10.0'
 use_frameworks!
 inhibit_all_warnings!
 
+def webimage_pods
+  pod 'SDWebImage', '~> 4'
+  pod 'SDWebImage/GIF'
+end
+
+def database_pods
+  pod 'RealmSwift'
+  pod 'SwiftyJSON'
+end
+
+def ui_pods
+  pod 'MBProgressHUD', '~> 1.1.0'
+end
+
 def shared_pods
   # Crash Report
   pod 'Fabric'
   pod 'Crashlytics'
-  pod 'Instabug'
 
   # Code utilities
-  pod 'SwiftyJSON'
-  pod 'semver', :git => 'https://github.com/rafaelks/Semver.Swift.git', :branch => 'chore/swift4'
+  pod 'semver'
 
   # UI
   pod 'SideMenuController', :git => 'https://github.com/rafaelks/SideMenuController.git'
@@ -21,28 +33,33 @@ def shared_pods
   pod 'SimpleImageViewer', :git => 'https://github.com/cardoso/SimpleImageViewer.git'
   pod 'TagListView', '~> 1.0'
   pod 'SearchTextField'
-  pod 'MBProgressHUD', '~> 1.1.0'
+  ui_pods
 
   # Text Processing
   pod 'RCMarkdownParser', :git => 'https://github.com/RocketChat/RCMarkdownParser.git'
 
   # Database
-  pod 'RealmSwift'
+  database_pods
 
   # Network
-  pod 'SDWebImage', '~> 4'
-  pod 'SDWebImage/GIF'
-  pod 'Starscream'
+  webimage_pods
+  pod 'Starscream', '~> 2'
   pod 'ReachabilitySwift'
 
   # Authentication SDKs
   pod 'OAuthSwift'
   pod '1PasswordExtension'
-  pod 'GoogleSignIn'
 
   # Debugging
+  pod 'Instabug', :configurations => ['Debug', 'Beta']
   pod 'SwiftLint', :configurations => ['Debug']
   pod 'FLEX', '~> 2.0', :configurations => ['Debug', 'Beta']
+end
+
+target 'Rocket.Chat.ShareExtension' do
+  webimage_pods
+  database_pods
+  ui_pods
 end
 
 target 'Rocket.Chat' do

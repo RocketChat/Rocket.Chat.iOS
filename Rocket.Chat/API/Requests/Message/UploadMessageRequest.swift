@@ -8,9 +8,9 @@
 
 import SwiftyJSON
 
-typealias UploadMessageResult = APIResult<UploadMessageRequest>
+final class UploadMessageRequest: APIRequest {
+    typealias APIResourceType = UploadMessageResource
 
-class UploadMessageRequest: APIRequest {
     let requiredVersion = Version(0, 60, 0)
 
     let method: HTTPMethod = .post
@@ -41,28 +41,56 @@ class UploadMessageRequest: APIRequest {
     }
 
     func body() -> Data? {
-        var data = Data()
+        let tempFileUrl = URL(fileURLWithPath: "\(NSTemporaryDirectory())upload_\(String.random(10)).temp")
+
+        FileManager.default.createFile(atPath: tempFileUrl.path, contents: nil)
+
+        guard let fileHandle = FileHandle(forWritingAtPath: tempFileUrl.path) else {
+            return nil
+        }
+
+        // write prefix
+
+        var prefixData = Data()
         let boundaryPrefix = "--\(boundary)\r\n"
 
-        data.appendString(boundaryPrefix)
-        data.appendString("Content-Disposition: form-data; name=\"msg\"\r\n\r\n")
-        data.appendString(msg)
+        prefixData.appendString(boundaryPrefix)
+        prefixData.appendString("Content-Disposition: form-data; name=\"msg\"\r\n\r\n")
+        prefixData.appendString(msg)
 
-        data.appendString("\r\n".appending(boundaryPrefix))
-        data.appendString("Content-Disposition: form-data; name=\"description\"\r\n\r\n")
-        data.appendString(description)
+        prefixData.appendString("\r\n".appending(boundaryPrefix))
+        prefixData.appendString("Content-Disposition: form-data; name=\"description\"\r\n\r\n")
+        prefixData.appendString(description)
 
-        data.appendString("\r\n".appending(boundaryPrefix))
-        data.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
-        data.appendString("Content-Type: \(mimetype)\r\n\r\n")
-        data.append(self.data)
-        data.appendString("\r\n--".appending(boundary.appending("--")))
+        prefixData.appendString("\r\n".appending(boundaryPrefix))
+        prefixData.appendString("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\r\n")
+        prefixData.appendString("Content-Type: \(mimetype)\r\n\r\n")
 
-        return data
+        //try? prefixData.append(fileURL: tempFileUrl)
+        fileHandle.write(prefixData)
+
+        // write file
+
+        fileHandle.seekToEndOfFile()
+        fileHandle.write(data)
+
+        // write suffix
+
+        var suffixData = Data()
+        suffixData.appendString("\r\n--".appending(boundary.appending("--")))
+
+        fileHandle.seekToEndOfFile()
+        fileHandle.write(suffixData)
+
+        fileHandle.closeFile()
+
+        // return mapped data
+
+        return try? Data(contentsOf: tempFileUrl, options: .mappedIfSafe)
     }
 }
 
-extension APIResult where T == UploadMessageRequest {
+final class UploadMessageResource: APIResource {
     var error: String? {
         return raw?["error"].string
     }

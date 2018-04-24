@@ -12,8 +12,12 @@ import RealmSwift
 
 extension LoginService: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
-        service = values["service"].stringValue
-        clientId = values["clientId"].string ?? values["appId"].string
+        if identifier == nil {
+            identifier = values["_id"].string ?? values["id"].string
+        }
+
+        service = values["name"].string ?? values["service"].string
+        clientId = values["appId"].string ?? values["clientId"].string
         custom = values["custom"].boolValue
         serverUrl = values["serverURL"].stringValue
         tokenPath = values["tokenPath"].stringValue
@@ -36,6 +40,7 @@ extension LoginService: ModelMappeable {
         provider = values["clientConfig"]["provider"].string
 
         switch type {
+        case .google: mapGoogle()
         case .facebook: mapFacebook()
         case .gitlab: mapGitLab()
         case .github: mapGitHub()
@@ -45,6 +50,20 @@ extension LoginService: ModelMappeable {
         case .custom: break
         case .invalid: break
         }
+    }
+
+    func mapGoogle() {
+        service = "google"
+        scope = "email profile"
+
+        serverUrl = "https://accounts.google.com"
+        tokenPath = "/login/oauth/access_token"
+        authorizePath = "/o/oauth2/v2/auth"
+        buttonLabelText = "google"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#dd4b39"
+
+        callbackPath = "google?close"
     }
 
     func mapGitHub() {

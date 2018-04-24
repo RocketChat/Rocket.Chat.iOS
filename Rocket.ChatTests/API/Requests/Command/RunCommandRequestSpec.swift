@@ -13,9 +13,9 @@ import SwiftyJSON
 
 class RunCommandRequestSpec: APITestCase {
     func testRequest() {
-        let _request = RunCommandRequest(command: "command", params: "params", roomId: "roomId")
+        let preRequest = RunCommandRequest(command: "command", params: "params", roomId: "roomId")
 
-        guard let request = _request.request(for: api) else {
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
         guard let httpBody = request.httpBody else {

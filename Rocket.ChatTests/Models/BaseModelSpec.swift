@@ -84,7 +84,7 @@ class BaseModelSpec: XCTestCase {
             XCTAssert(BaseModel.delete(withIdentifier: "obj3") == false)
         })
 
-        XCTAssert(Realm.shared?.objects(BaseModel.self).count == 1)
-        XCTAssert(Realm.shared?.objects(BaseModel.self).first == object2)
+        XCTAssert(Realm.current?.objects(BaseModel.self).count == 1)
+        XCTAssert(Realm.current?.objects(BaseModel.self).first == object2)
     }
 }

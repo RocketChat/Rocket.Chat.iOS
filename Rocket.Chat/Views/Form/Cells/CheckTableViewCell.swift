@@ -8,10 +8,11 @@
 
 import Foundation
 
-class CheckTableViewCell: UITableViewCell, FormTableViewCellProtocol {
+final class CheckTableViewCell: UITableViewCell, FormTableViewCellProtocol {
     static let identifier = "kCheckTableViewCell"
     static let xibFileName = "CheckTableViewCell"
     static let defaultHeight: Float = 56
+
     weak var delegate: FormTableViewDelegate?
     var key: String?
 

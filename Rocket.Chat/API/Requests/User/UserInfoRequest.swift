@@ -9,9 +9,8 @@
 
 import SwiftyJSON
 
-typealias UserInfoResult = APIResult<UserInfoRequest>
-
-class UserInfoRequest: APIRequest {
+final class UserInfoRequest: APIRequest {
+    typealias APIResourceType = UserInfoResource
     let path = "/api/v1/users.info"
 
     let query: String?
@@ -32,7 +31,7 @@ class UserInfoRequest: APIRequest {
     }
 }
 
-extension APIResult where T == UserInfoRequest {
+final class UserInfoResource: APIResource {
     var user: User? {
         guard let raw = raw?["user"] else { return nil }
 

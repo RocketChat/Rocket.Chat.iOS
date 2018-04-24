@@ -11,7 +11,7 @@ import OAuthSwift
 import UIKit
 import SwiftyJSON
 
-class OAuthCredentials {
+final class OAuthCredentials {
     let token: String
     let secret: String?
 
@@ -28,7 +28,7 @@ class OAuthCredentials {
     }
 }
 
-class OAuthManager {
+final class OAuthManager {
     private static var oauthSwift: OAuth2Swift?
 
     @discardableResult
@@ -45,7 +45,9 @@ class OAuthManager {
             return false
         }
 
-        let handler = OAuthViewController(authorizeUrl: authorizeUrl, callbackUrl: callbackUrl, success: success, failure: failure)
+        let userAgent: String? = loginService.type == .google ? "Mozilla/5.0 (Linux; Android 4.1.1; Galaxy Nexus Build/JRO03C) AppleWebKit/535.19 (KHTML, like Gecko) Chrome/18.0.1025.166 Mobile Safari/535.19" : nil
+
+        let handler = OAuthViewController(authorizeUrl: authorizeUrl, callbackUrl: callbackUrl, userAgent: userAgent, success: success, failure: failure)
         viewController.navigationController?.pushViewController(handler, animated: true)
 
         oauthSwift.removeCallbackNotificationObserver()

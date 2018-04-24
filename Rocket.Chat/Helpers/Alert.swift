@@ -10,7 +10,7 @@ import MBProgressHUD
 
 protocol Alerter: class {
     func alert(title: String, message: String, handler: ((UIAlertAction) -> Void)?)
-    func alertSuccess(title: String)
+    func alertSuccess(title: String, completion: (() -> Void)?)
 }
 
 extension UIViewController: Alerter {
@@ -20,7 +20,7 @@ extension UIViewController: Alerter {
         present(alert, animated: true, completion: nil)
     }
 
-    func alertSuccess(title: String) {
+    func alertSuccess(title: String, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
             let successHUD = MBProgressHUD.showAdded(to: self.view, animated: true)
             successHUD.mode = .customView
@@ -30,7 +30,12 @@ extension UIViewController: Alerter {
             successHUD.isSquare = true
             successHUD.label.text = title
 
-            successHUD.hide(animated: true, afterDelay: 1.5)
+            let delay = 1.5
+
+            successHUD.hide(animated: true, afterDelay: delay)
+            DispatchQueue.main.asyncAfter(deadline: .now() + delay, execute: {
+                completion?()
+            })
         }
     }
 }
@@ -51,10 +56,8 @@ struct Alert {
 
     func present(handler: ((UIAlertAction) -> Void)? = nil) {
         func present() {
-            let window = UIWindow(frame: UIScreen.main.bounds)
-            window.rootViewController = UIViewController()
+            let window = UIWindow.topWindow
             window.windowLevel = UIWindowLevelAlert + 1
-            window.makeKeyAndVisible()
             window.rootViewController?.alert(title: title, message: message, handler: handler)
         }
 

@@ -37,7 +37,7 @@ class SocketManager {
     var isUserAuthenticated = false
 
     internal var internalConnectionHandler: SocketCompletion?
-    internal var connectionHandlers: [String: SocketConnectionHandler] = [:]
+    internal var connectionHandlers = NSMapTable<NSString, AnyObject>(keyOptions: .strongMemory, valueOptions: .weakMemory)
 
     // MARK: Connection
 
@@ -45,12 +45,14 @@ class SocketManager {
         sharedInstance.serverURL = url
         sharedInstance.internalConnectionHandler = completion
 
-        var request = URLRequest(url: url)
-        request.setValue(url.host ?? "", forHTTPHeaderField: "Host")
-
-        sharedInstance.socket = WebSocket(request: request)
-        sharedInstance.socket?.advancedDelegate = sharedInstance
+        sharedInstance.socket = WebSocket(url: url)
+        sharedInstance.socket?.delegate = sharedInstance
         sharedInstance.socket?.pongDelegate = sharedInstance
+        sharedInstance.socket?.headers = [
+            "Host": url.host ?? "",
+            "User-Agent": API.userAgent
+        ]
+
         sharedInstance.socket?.connect()
     }
 
@@ -138,14 +140,13 @@ extension SocketManager {
             API.current()?.client(InfoClient.self).fetchInfo()
 
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
-
-                })
+                AuthSettingsManager.updatePublicSettings(auth)
 
                 UserManager.userDataChanges()
                 UserManager.changes()
                 SubscriptionManager.changes(auth)
                 SubscriptionManager.subscribeRoomChanges()
+                SubscriptionManager.subscribeInAppNotifications()
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
                 CustomEmojiManager.sync()
@@ -170,18 +171,18 @@ extension SocketManager {
 extension SocketManager {
 
     static func addConnectionHandler(token: String, handler: SocketConnectionHandler) {
-        sharedInstance.connectionHandlers[token] = handler
+        sharedInstance.connectionHandlers.setObject(handler as AnyObject, forKey: token as NSString)
     }
 
     static func removeConnectionHandler(token: String) {
-        sharedInstance.connectionHandlers.removeValue(forKey: token)
+        sharedInstance.connectionHandlers.removeObject(forKey: token as NSString)
     }
 
 }
 
 // MARK: WebSocketDelegate
 
-extension SocketManager: WebSocketAdvancedDelegate {
+extension SocketManager: WebSocketDelegate {
 
     func websocketDidConnect(socket: WebSocket) {
         Log.debug("[WebSocket] \(socket.currentURL)\n -  did connect")
@@ -195,7 +196,7 @@ extension SocketManager: WebSocketAdvancedDelegate {
         SocketManager.send(object)
     }
 
-    func websocketDidDisconnect(socket: WebSocket, error: Error?) {
+    func websocketDidDisconnect(socket: WebSocket, error: NSError?) {
         Log.debug("[WebSocket] \(socket.currentURL)\n - did disconnect with error (\(String(describing: error)))")
 
         isUserAuthenticated = false
@@ -207,18 +208,22 @@ extension SocketManager: WebSocketAdvancedDelegate {
             handler(socket, socket.isConnected)
         }
 
-        for (_, handler) in connectionHandlers {
-            handler.socketDidDisconnect(socket: self)
+        if let enumerator = connectionHandlers.objectEnumerator() {
+            while let handler = enumerator.nextObject() {
+                if let handler = handler as? SocketConnectionHandler {
+                    handler.socketDidConnect(socket: self)
+                }
+            }
         }
     }
 
-    func websocketDidReceiveData(socket: WebSocket, data: Data, response: WebSocket.WSResponse) {
+    func websocketDidReceiveData(socket: WebSocket, data: Data) {
         Log.debug("[WebSocket] did receive data (\(data))")
     }
 
     static let jsonParseQueue = DispatchQueue(label: "chat.rocket.json.parse", qos: .background)
 
-    func websocketDidReceiveMessage(socket: WebSocket, text: String, response: WebSocket.WSResponse) {
+    func websocketDidReceiveMessage(socket: WebSocket, text: String) {
         SocketManager.jsonParseQueue.async {
             let json = JSON(parseJSON: text)
 
@@ -238,20 +243,13 @@ extension SocketManager: WebSocketAdvancedDelegate {
         }
     }
 
-    func websocketHttpUpgrade(socket: WebSocket, request: String) {
-        Log.debug("[WebSocket] http upgrade request (\(request))")
-    }
-
-    func websocketHttpUpgrade(socket: WebSocket, response: String) {
-        Log.debug("[WebSocket] http upgrade response (\(response))")
-    }
 }
 
 // MARK: WebSocketPongDelegate
 
 extension SocketManager: WebSocketPongDelegate {
 
-    func websocketDidReceivePong(socket: WebSocketClient, data: Data?) {
+    func websocketDidReceivePong(socket: WebSocket, data: Data?) {
         Log.debug("[WebSocket] did receive pong")
     }
 

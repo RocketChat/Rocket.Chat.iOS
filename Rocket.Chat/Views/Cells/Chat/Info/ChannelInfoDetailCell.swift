@@ -22,7 +22,7 @@ struct ChannelInfoDetailCellData: ChannelInfoCellDataProtocol {
     }
 }
 
-class ChannelInfoDetailCell: UITableViewCell, ChannelInfoCellProtocol {
+final class ChannelInfoDetailCell: UITableViewCell, ChannelInfoCellProtocol {
     static let identifier = "kChannelInfoCellDetail"
     static let defaultHeight: Float = 44
     var data: ChannelInfoDetailCellData? {

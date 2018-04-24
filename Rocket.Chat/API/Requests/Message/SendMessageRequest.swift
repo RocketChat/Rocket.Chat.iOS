@@ -8,9 +8,8 @@
 
 import SwiftyJSON
 
-typealias SendMessageResult = APIResult<SendMessageRequest>
-
-class SendMessageRequest: APIRequest {
+final class SendMessageRequest: APIRequest {
+    typealias APIResourceType = SendMessageResource
     let requiredVersion = Version(0, 60, 0)
 
     let method: HTTPMethod = .post
@@ -39,6 +38,6 @@ class SendMessageRequest: APIRequest {
     }
 }
 
-extension APIResult where T == SendMessageRequest {
+final class SendMessageResource: APIResource {
 
 }
