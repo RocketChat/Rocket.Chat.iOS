@@ -33,7 +33,7 @@ class PreferencesViewModelSpec: XCTestCase {
     func testFormattedAppVersion() {
         let build = info?["CFBundleVersion"] as? String ?? ""
         let version = info?["CFBundleShortVersionString"] as? String ?? ""
-        let formatted = "Client: \(version) (\(build)) Server: ?"
+        let formatted = "Version: \(version) (\(build))"
 
         XCTAssertEqual(model.formattedVersion, formatted, "show app version and build")
     }
@@ -64,7 +64,7 @@ class PreferencesViewModelSpec: XCTestCase {
         XCTAssertTrue(model.numberOfSections == 5, "incorrect sections number")
         XCTAssertTrue(model.numberOfRowsInSection(0) == 1, "incorrect rows number")
         XCTAssertTrue(model.numberOfRowsInSection(1) == 4, "incorrect rows number")
-        XCTAssertTrue(model.numberOfRowsInSection(2) == 2, "incorrect rows number")
+        XCTAssertTrue(model.numberOfRowsInSection(2) == 3, "incorrect rows number")
         XCTAssertTrue(model.numberOfRowsInSection(3) == 1, "incorrect rows number")
         XCTAssertTrue(model.numberOfRowsInSection(4) == 1, "incorrect rows number")
     }
