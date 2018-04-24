@@ -359,6 +359,46 @@ extension ChatMessageCell {
 
 }
 
+// MARK: Reactions
+
+extension ChatMessageCell {
+    fileprivate func updateReactions() {
+        let username = AuthManager.currentUser()?.username
+
+        let models = Array(message.reactions.map { reaction -> ReactionViewModel in
+            let highlight: Bool
+            if let username = username {
+                highlight = reaction.usernames.contains(username)
+            } else {
+                highlight = false
+            }
+
+            let emoji = reaction.emoji ?? "?"
+            let imageUrl = CustomEmoji.withShortname(emoji)?.imageUrl()
+
+            return ReactionViewModel(
+                emoji: emoji,
+                imageUrl: imageUrl,
+                count: reaction.usernames.count.description,
+                highlight: highlight,
+                reactors: Array(reaction.usernames)
+            )
+        })
+
+        reactionsListView.model = ReactionListViewModel(reactionViewModels: models)
+
+        if message.reactions.count > 0 {
+            reactionsListView.isHidden = false
+            reactionsListViewConstraint.constant = 40
+        } else {
+            reactionsListView.isHidden = true
+            reactionsListViewConstraint.constant = 0
+        }
+    }
+}
+
+// MARK: Themeable
+
 extension ChatMessageCell {
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
