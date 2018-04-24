@@ -1,5 +1,5 @@
 //
-//  AuthSettings+HiddenTypes.swift
+//  AuthSettingsHiddenTypes.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/1/18.

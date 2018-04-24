@@ -252,6 +252,8 @@
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
 "myaccount.settings.server_version" = "Server Version: %@"; // TODO
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
+"myaccount.settings.tracking.title" = "Send Crash Report"; // TODO
+"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it."; // TODO
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Επιλέξτε Εικονίδιο";

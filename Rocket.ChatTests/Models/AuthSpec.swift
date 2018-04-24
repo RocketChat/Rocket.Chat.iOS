@@ -83,6 +83,20 @@ class AuthSpec: XCTestCase, RealmTestCase {
         XCTAssertNil(object.apiHost, "apiHost will be nil when serverURL is an invalid URL")
     }
 
+    func testFirstChannelHasSeenDefaultTrue() {
+        let object = Auth()
+        XCTAssertTrue(object.internalFirstChannelOpened)
+    }
+
+    func testFirstChannelHasSeenChanges() {
+        let object = Auth()
+        object.internalFirstChannelOpened = false
+        XCTAssertFalse(object.internalFirstChannelOpened)
+
+        object.setFirstChannelOpened()
+        XCTAssertTrue(object.internalFirstChannelOpened)
+    }
+
     //swiftlint:disable function_body_length
     func testCanDeleteMessage() {
         let realm = testRealm()
