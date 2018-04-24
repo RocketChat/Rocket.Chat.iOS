@@ -25,6 +25,13 @@ final class PreferencesViewModel {
 
     internal let licenseURL = URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
 
+    internal let trackingTitle = localized("myaccount.settings.tracking.title")
+    internal var trackingFooterText = localized("myaccount.settings.tracking.footer")
+
+    internal var trackingValue: Bool {
+        return !BugTrackingCoordinator.isCrashReportingDisabled
+    }
+
     internal var formattedVersion: String {
         return String(format: localized("myaccount.settings.version"), version, build)
     }
@@ -66,14 +73,15 @@ final class PreferencesViewModel {
     internal let canOpenFLEX = false
     #endif
 
-    internal let numberOfSections = 4
+    internal let numberOfSections = 5
 
     internal func numberOfRowsInSection(_ section: Int) -> Int {
         switch section {
         case 0: return 1
         case 1: return (canChangeAppIcon ? 4 : 3)
         case 2: return 2
-        case 3: return (canOpenFLEX ? 1 : 0)
+        case 3: return 1
+        case 4: return (canOpenFLEX ? 1 : 0)
         default: return 0
         }
     }

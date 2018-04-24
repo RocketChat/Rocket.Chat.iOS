@@ -109,6 +109,7 @@
 "subscriptions.favorites" = "Favoritos";
 "subscriptions.channels" = "Canais";
 "subscriptions.direct_messages" = "Mensagens Diretas";
+"subscriptions.you" = "Você";
 
 // Servers
 "servers.add_new_team" = "Adicionar novo time";
@@ -250,6 +251,8 @@
 "myaccount.settings.appicon" = "Ícone do App";
 "myaccount.settings.version" = "Versão: %@ (%@)";
 "myaccount.settings.web_browser" = "Navegador";
+"myaccount.settings.tracking.title" = "Relatórios de error";
+"myaccount.settings.tracking.footer" = "Nós nunca registramos as suas conversas. O envio de relatórios de erro contém apenas informações relevantes relacionadas ao erro ocorrido para nos ajudar a corrigi-los.";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Escolher Ícone";
