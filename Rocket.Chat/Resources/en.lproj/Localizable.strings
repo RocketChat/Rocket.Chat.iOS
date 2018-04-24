@@ -109,6 +109,7 @@
 "subscriptions.favorites" = "Favorites";
 "subscriptions.channels" = "Channels";
 "subscriptions.direct_messages" = "Direct Messages";
+"subscriptions.you" = "you";
 
 // Servers
 "servers.add_new_team" = "Add new Team";
@@ -250,6 +251,8 @@
 "myaccount.settings.appicon" = "Application Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
 "myaccount.settings.web_browser" = "Web Browser";
+"myaccount.settings.tracking.title" = "Send Crash Report";
+"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it.";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon";

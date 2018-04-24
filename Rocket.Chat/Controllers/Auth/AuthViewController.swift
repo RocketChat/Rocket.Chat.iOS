@@ -151,6 +151,7 @@ final class AuthViewController: BaseViewController {
     }
 
     // MARK: Keyboard Handlers
+
     override func keyboardWillShow(_ notification: Notification) {
         if let keyboardSize = ((notification as NSNotification).userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             visibleViewBottomConstraint.constant = keyboardSize.height
@@ -162,6 +163,7 @@ final class AuthViewController: BaseViewController {
     }
 
     // MARK: Loaders
+
     func startLoading() {
         textFieldUsername.alpha = 0.5
         textFieldPassword.alpha = 0.5
@@ -186,6 +188,7 @@ final class AuthViewController: BaseViewController {
     }
 
     // MARK: IBAction
+
     func authenticateWithUsernameOrEmail() {
         let email = textFieldUsername.text ?? ""
         let password = textFieldPassword.text ?? ""

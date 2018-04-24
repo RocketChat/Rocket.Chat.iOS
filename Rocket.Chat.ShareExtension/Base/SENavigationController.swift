@@ -15,10 +15,7 @@ final class SENavigationController: UINavigationController {
             $0 as? NSItemProvider
         } ?? []
 
-        // support only one share for now
-        if let item = itemProviders.first {
-            parseItemProviders(store, [item])
-        }
+        parseItemProviders(store, itemProviders)
 
         return nil
     }

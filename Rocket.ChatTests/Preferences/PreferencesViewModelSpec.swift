@@ -53,12 +53,20 @@ class PreferencesViewModelSpec: XCTestCase {
         XCTAssertTrue(model.canChangeAppIcon, "invalid value for canChangeAppIcon")
     }
 
+    func testTrackingValue() {
+        let value = BugTrackingCoordinator.isCrashReportingDisabled
+
+        // trackinValue is always the opposite of the value
+        XCTAssertNotEqual(model.trackingValue, value)
+    }
+
     func testNumberOfRowsInSection() {
-        XCTAssertTrue(model.numberOfSections == 4, "incorrect sections number")
+        XCTAssertTrue(model.numberOfSections == 5, "incorrect sections number")
         XCTAssertTrue(model.numberOfRowsInSection(0) == 1, "incorrect rows number")
         XCTAssertTrue(model.numberOfRowsInSection(1) == 4, "incorrect rows number")
         XCTAssertTrue(model.numberOfRowsInSection(2) == 2, "incorrect rows number")
         XCTAssertTrue(model.numberOfRowsInSection(3) == 1, "incorrect rows number")
+        XCTAssertTrue(model.numberOfRowsInSection(4) == 1, "incorrect rows number")
     }
 
     func testStringsOverall() {
@@ -85,6 +93,12 @@ class PreferencesViewModelSpec: XCTestCase {
 
         XCTAssertNotNil(model.webBrowser)
         XCTAssertNotEqual(model.webBrowser, "")
+
+        XCTAssertNotNil(model.trackingTitle)
+        XCTAssertNotEqual(model.trackingTitle, "")
+
+        XCTAssertNotNil(model.trackingFooterText)
+        XCTAssertNotEqual(model.trackingFooterText, "")
     }
 
 }

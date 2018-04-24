@@ -19,7 +19,8 @@ final class PreferencesViewController: UITableViewController {
     private let kSectionProfile = 0
     private let kSectionSettings = 1
     private let kSectionInformation = 2
-    private let kSectionFlex = 3
+    private let kSectionTracking = 3
+    private let kSectionFlex = 4
 
     private let viewModel = PreferencesViewModel()
 
@@ -68,6 +69,18 @@ final class PreferencesViewController: UITableViewController {
     @IBOutlet weak var labelDefaultWebBrowser: UILabel! {
         didSet {
             labelDefaultWebBrowser.text = WebBrowserManager.browser.name
+        }
+    }
+
+    @IBOutlet weak var switchTracking: UISwitch! {
+        didSet {
+            switchTracking.isOn = viewModel.trackingValue
+        }
+    }
+
+    @IBOutlet weak var labelTracking: UILabel! {
+        didSet {
+            labelTracking.text = viewModel.trackingTitle
         }
     }
 
@@ -156,6 +169,21 @@ final class PreferencesViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection(section)
     }
+
+    override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
+        if section == kSectionTracking {
+            return viewModel.trackingFooterText
+        }
+
+        return nil
+    }
+
+    // MARK: IBAction
+
+    @IBAction func crashReportSwitchDidChange(sender: Any) {
+        BugTrackingCoordinator.toggleCrashReporting(disabled: !switchTracking.isOn)
+    }
+
 }
 
 extension PreferencesViewController: MFMailComposeViewControllerDelegate {
