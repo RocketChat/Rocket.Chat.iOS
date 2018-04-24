@@ -249,7 +249,7 @@
 "myaccount.settings.license" = "Άδεια";
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
-"myaccount.settings.version" = "Έκδοση: %@ (%@)";
+"myaccount.settings.version" = "Client: %@ (%@) Server: %@"; // TODO
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
 
 // Change Application Icon

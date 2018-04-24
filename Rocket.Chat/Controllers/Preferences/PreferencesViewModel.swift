@@ -26,7 +26,8 @@ final class PreferencesViewModel {
     internal let licenseURL = URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
 
     internal var formattedVersion: String {
-        return String(format: localized("myaccount.settings.version"), version, build)
+        let serverVersion = AuthManager.isAuthenticated()?.serverVersion ?? "?"
+        return String(format: localized("myaccount.settings.version"), version, build, serverVersion)
     }
 
     internal var version: String {

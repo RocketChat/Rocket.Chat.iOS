@@ -250,7 +250,7 @@
 "myaccount.settings.license" = "Licence";
 "myaccount.settings.language" = "Language"; // TODO
 "myaccount.settings.appicon" = "Icône de l'application";
-"myaccount.settings.version" = "Version : %@ (%@)";
+"myaccount.settings.version" = "Client: %@ (%@) Server: %@"; // TODO
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
 
 // Change Application Icon
