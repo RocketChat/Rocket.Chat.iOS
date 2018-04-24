@@ -33,7 +33,7 @@ class PreferencesViewModelSpec: XCTestCase {
     func testFormattedAppVersion() {
         let build = info?["CFBundleVersion"] as? String ?? ""
         let version = info?["CFBundleShortVersionString"] as? String ?? ""
-        let formatted = "Version: \(version) (\(build))"
+        let formatted = "Client: \(version) (\(build)) Server: ?"
 
         XCTAssertEqual(model.formattedVersion, formatted, "show app version and build")
     }
