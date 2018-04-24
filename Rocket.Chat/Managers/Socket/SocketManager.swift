@@ -140,9 +140,7 @@ extension SocketManager {
             API.current()?.client(InfoClient.self).fetchInfo()
 
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
-
-                })
+                AuthSettingsManager.updatePublicSettings(auth)
 
                 UserManager.userDataChanges()
                 UserManager.changes()

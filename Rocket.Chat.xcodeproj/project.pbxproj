@@ -283,6 +283,8 @@
 		41E423002044216000543877 /* UIColorExtensionSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E422FF2044216000543877 /* UIColorExtensionSpec.swift */; };
 		41E53A171E546F5500C3FBB3 /* UINibExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E53A161E546F5500C3FBB3 /* UINibExtensions.swift */; };
 		41E991D41D343A9F00BDDCA8 /* DateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E991D31D343A9F00BDDCA8 /* DateExtension.swift */; };
+		41E9BD0D208EA4040084D4D8 /* AuthInternalExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E9BD0C208EA4040084D4D8 /* AuthInternalExtensions.swift */; };
+		41E9BD0F208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41E9BD0E208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift */; };
 		41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EB22321E5E474200AA3AE7 /* UploadVideoCompression.swift */; };
 		41EB22361E5F056600AA3AE7 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 41EB22381E5F056600AA3AE7 /* Localizable.strings */; };
 		41EE157E1E05BED600754D45 /* ChatControllerAutocomplete.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41EE157D1E05BED600754D45 /* ChatControllerAutocomplete.swift */; };
@@ -422,7 +424,7 @@
 		8076FDA52048534200114F28 /* String+Random.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDA32048533000114F28 /* String+Random.swift */; };
 		8076FDA62048536800114F28 /* BaseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4112DC551FFFB9B1005995E1 /* BaseModel.swift */; };
 		8076FDA9204853DE00114F28 /* RealmExecute.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDA8204853DE00114F28 /* RealmExecute.swift */; };
-		8076FDAB2048549C00114F28 /* AuthSettings+HiddenTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDAA2048549C00114F28 /* AuthSettings+HiddenTypes.swift */; };
+		8076FDAB2048549C00114F28 /* AuthSettingsHiddenTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDAA2048549C00114F28 /* AuthSettingsHiddenTypes.swift */; };
 		8076FDAE2048567B00114F28 /* AuthCanDeleteMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDAD2048567B00114F28 /* AuthCanDeleteMessage.swift */; };
 		8076FDB0204856AF00114F28 /* AuthCanBlockMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDAF204856AF00114F28 /* AuthCanBlockMessage.swift */; };
 		8076FDB2204856CC00114F28 /* AuthCanEditMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB1204856CC00114F28 /* AuthCanEditMessage.swift */; };
@@ -769,6 +771,7 @@
 		4101BF001F8D0A1700F67E89 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManagerSpec.swift; sourceTree = "<group>"; };
 		4102E3A91E532323004BAA82 /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
+		4102E3AC1E53273E004BAA82 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		411119B51F680DB00019854B /* NetworkCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCoordinator.swift; sourceTree = "<group>"; };
 		411119B71F6825C30019854B /* NetworkManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerSpec.swift; sourceTree = "<group>"; };
 		4112BEEB1E7971A400E734CB /* MainChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainChatViewController.swift; sourceTree = "<group>"; };
@@ -789,7 +792,6 @@
 		412719451E6B403700461FEE /* RegisterUsernameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterUsernameViewController.swift; sourceTree = "<group>"; };
 		412731D41DE0A55C00FC45A0 /* ChatPreviewModeView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatPreviewModeView.xib; sourceTree = "<group>"; };
 		412731D61DE0A89B00FC45A0 /* ChatPreviewModeView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatPreviewModeView.swift; sourceTree = "<group>"; };
-		4129937D208E25C100E12C49 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		412A95D41FD94ED000954AA6 /* ChatMessageVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatMessageVideoView.swift; sourceTree = "<group>"; };
 		412A95D51FD94ED000954AA6 /* ChatMessageVideoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageVideoView.xib; sourceTree = "<group>"; };
 		412BCC841E55C6A300F7F4EE /* ChatMessageTextView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChatMessageTextView.xib; sourceTree = "<group>"; };
@@ -938,6 +940,8 @@
 		41E422FF2044216000543877 /* UIColorExtensionSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtensionSpec.swift; sourceTree = "<group>"; };
 		41E53A161E546F5500C3FBB3 /* UINibExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UINibExtensions.swift; sourceTree = "<group>"; };
 		41E991D31D343A9F00BDDCA8 /* DateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateExtension.swift; sourceTree = "<group>"; };
+		41E9BD0C208EA4040084D4D8 /* AuthInternalExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthInternalExtensions.swift; sourceTree = "<group>"; };
+		41E9BD0E208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionQueriesSpec.swift; sourceTree = "<group>"; };
 		41EB22321E5E474200AA3AE7 /* UploadVideoCompression.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadVideoCompression.swift; sourceTree = "<group>"; };
 		41EB22371E5F056600AA3AE7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		41EB223A1E5F057F00AA3AE7 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -1075,7 +1079,7 @@
 		8076FD9F2048519D00114F28 /* AuthManagerSocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManagerSocket.swift; sourceTree = "<group>"; };
 		8076FDA32048533000114F28 /* String+Random.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Random.swift"; sourceTree = "<group>"; };
 		8076FDA8204853DE00114F28 /* RealmExecute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmExecute.swift; sourceTree = "<group>"; };
-		8076FDAA2048549C00114F28 /* AuthSettings+HiddenTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AuthSettings+HiddenTypes.swift"; sourceTree = "<group>"; };
+		8076FDAA2048549C00114F28 /* AuthSettingsHiddenTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthSettingsHiddenTypes.swift; sourceTree = "<group>"; };
 		8076FDAD2048567B00114F28 /* AuthCanDeleteMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanDeleteMessage.swift; sourceTree = "<group>"; };
 		8076FDAF204856AF00114F28 /* AuthCanBlockMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanBlockMessage.swift; sourceTree = "<group>"; };
 		8076FDB1204856CC00114F28 /* AuthCanEditMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanEditMessage.swift; sourceTree = "<group>"; };
@@ -1574,7 +1578,8 @@
 			isa = PBXGroup;
 			children = (
 				414EFF911E54FE69004F001F /* AuthExtensions.swift */,
-				8076FDAA2048549C00114F28 /* AuthSettings+HiddenTypes.swift */,
+				41E9BD0C208EA4040084D4D8 /* AuthInternalExtensions.swift */,
+				8076FDAA2048549C00114F28 /* AuthSettingsHiddenTypes.swift */,
 				41D7CA861E644E47000F38EA /* MessageExtensions.swift */,
 				D12D34021F69C76400AED992 /* SubscriptionExtensions.swift */,
 				80E99F281FD8B2B800B70B59 /* UserExtensions.swift */,
@@ -1723,6 +1728,7 @@
 				68D186DE1ED9714F0030EE8C /* MessageURLSpec.swift */,
 				808792371FB14B3300EFE77F /* PermissionSpec.swift */,
 				4161333D1D46E3AB00E09DA2 /* SubscriptionSpec.swift */,
+				41E9BD0E208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift */,
 				4161333B1D46E32F00E09DA2 /* UserSpec.swift */,
 			);
 			path = Models;
@@ -3519,11 +3525,12 @@
 				807C7C0620751ED2006B600E /* SpotlightClient.swift in Sources */,
 				33383509207926DE006E1D0A /* TransparentToTouchesWindow.swift in Sources */,
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
+				41E9BD0D208EA4040084D4D8 /* AuthInternalExtensions.swift in Sources */,
 				41852E891F92BBEC00D1C499 /* ChatControllerReplyHandler.swift in Sources */,
 				D1C536CC1F688B2F00EBA8D9 /* MarkdownManager.swift in Sources */,
 				418C4DC61DC4C07800ABED4C /* SubscriptionSectionView.swift in Sources */,
 				7758A7641F8FA44400FAA244 /* PickerViewDelegate.swift in Sources */,
-				8076FDAB2048549C00114F28 /* AuthSettings+HiddenTypes.swift in Sources */,
+				8076FDAB2048549C00114F28 /* AuthSettingsHiddenTypes.swift in Sources */,
 				8076FDE42048CC8600114F28 /* MigrationCoordinator.swift in Sources */,
 				806DB94620695A46004ED8ED /* AuthViewControllerLoginServices.swift in Sources */,
 				41D7CA871E644E47000F38EA /* MessageExtensions.swift in Sources */,
@@ -3835,6 +3842,7 @@
 				80235D221F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift in Sources */,
 				8013F8791FD6B63200EE1A4E /* VersionMiddlewareSpec.swift in Sources */,
 				41F8487E1FA38B0A00C9AE84 /* PreferencesViewModelSpec.swift in Sources */,
+				41E9BD0F208EA8C40084D4D8 /* SubscriptionQueriesSpec.swift in Sources */,
 				808792381FB14B3300EFE77F /* PermissionSpec.swift in Sources */,
 				807C7C0C20751F06006B600E /* SpotlightRequestSpec.swift in Sources */,
 				4161333C1D46E32F00E09DA2 /* UserSpec.swift in Sources */,
