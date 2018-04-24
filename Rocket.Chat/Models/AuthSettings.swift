@@ -49,6 +49,8 @@ final class AuthSettings: Object {
     @objc dynamic var isCASEnabled = false
     @objc dynamic var casLoginUrl: String?
 
+    @objc dynamic var gitlabUrl: String?
+
     @objc dynamic var firstChannelAfterLogin: String?
 
     // Authentication Placeholder Fields

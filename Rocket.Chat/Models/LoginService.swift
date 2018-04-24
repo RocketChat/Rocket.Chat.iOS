@@ -149,9 +149,14 @@ extension LoginService {
         return service
     }
 
-    static var gitlab: LoginService {
+    static func gitlab(url: String? = nil) -> LoginService {
         let service = LoginService()
         service.mapGitLab()
+
+        if let url = url {
+            service.serverUrl = url
+        }
+
         return service
     }
 
