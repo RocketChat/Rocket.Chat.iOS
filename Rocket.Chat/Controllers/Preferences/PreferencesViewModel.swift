@@ -26,8 +26,16 @@ final class PreferencesViewModel {
     internal let licenseURL = URL(string: "https://github.com/RocketChat/Rocket.Chat.iOS/blob/develop/LICENSE")
 
     internal var formattedVersion: String {
+        return String(format: localized("myaccount.settings.version"), version, build)
+    }
+
+    internal var formattedServerVersion: String {
         let serverVersion = AuthManager.isAuthenticated()?.serverVersion ?? "?"
-        return String(format: localized("myaccount.settings.version"), version, build, serverVersion)
+        return String(format: localized("myaccount.settings.server_version"), serverVersion)
+    }
+
+    internal var serverAddress: String {
+        return AuthManager.isAuthenticated()?.apiHost?.host ?? ""
     }
 
     internal var version: String {
@@ -73,7 +81,7 @@ final class PreferencesViewModel {
         switch section {
         case 0: return 1
         case 1: return (canChangeAppIcon ? 4 : 3)
-        case 2: return 2
+        case 2: return 3
         case 3: return (canOpenFLEX ? 1 : 0)
         default: return 0
         }

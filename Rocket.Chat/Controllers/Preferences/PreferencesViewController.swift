@@ -47,6 +47,18 @@ final class PreferencesViewController: UITableViewController {
         }
     }
 
+    @IBOutlet weak var labelServerVersion: UILabel! {
+        didSet {
+            labelServerVersion.text = viewModel.formattedServerVersion
+        }
+    }
+
+    @IBOutlet weak var labelServerAddress: UILabel! {
+        didSet {
+            labelServerAddress.text = viewModel.serverAddress
+        }
+    }
+
     @IBOutlet weak var labelLanguage: UILabel! {
         didSet {
             labelLanguage.text = viewModel.language
