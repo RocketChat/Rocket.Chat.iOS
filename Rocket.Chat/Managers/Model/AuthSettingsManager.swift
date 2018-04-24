@@ -63,6 +63,7 @@ final class AuthSettingsManager {
             api = API.current()
         }
 
+        let realm = Realm.current
         let options = APIRequestOptions.paginated(count: 0, offset: 0)
         api?.fetch(PublicSettingsRequest(), options: options) { response in
             switch response {
@@ -72,10 +73,10 @@ final class AuthSettingsManager {
                     return
                 }
 
-                persistPublicSettings(settings: resource.authSettings, completion: completion)
+                persistPublicSettings(settings: resource.authSettings, realm: realm, completion: completion)
             case .error(let error):
                 switch error {
-                case .version: websocketUpdatePublicSettings(Realm.current, auth, completion: completion)
+                case .version: websocketUpdatePublicSettings(realm, auth, completion: completion)
                 default: completion?(nil)
                 }
             }
