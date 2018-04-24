@@ -42,6 +42,7 @@ class MessagesListViewData {
 
     var title: String = localized("chat.messages.list.title")
 
+    var isSearchingMessages: Bool = false
     var isListingMentions: Bool = false
     var isShowingAllMessages: Bool {
         return showing >= total
@@ -57,45 +58,56 @@ class MessagesListViewData {
     }
 
     var query: String?
-
     private var isLoadingMoreMessages = false
+
     func loadMoreMessages(completion: (() -> Void)? = nil) {
-        if isLoadingMoreMessages { return }
+        guard !isLoadingMoreMessages else { return }
 
-        if let subscription = subscription {
-            isLoadingMoreMessages = true
+        if isListingMentions {
+            loadMentions(completion: completion)
+        } else {
+            loadMessages(completion: completion)
+        }
+    }
 
-            let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
-            if isListingMentions {
-                let request = SubscriptionMentionsRequest(roomId: subscription.rid)
-                API.current()?.fetch(request, options: options) { [weak self] response in
-                    switch response {
-                    case .resource(let resource):
-                        self?.handleMessages(
-                            fetchingWith: resource.fetchMessagesFromRealm,
-                            showing: resource.count,
-                            total: resource.total,
-                            completion: completion
-                        )
-                    case .error:
-                        Alert.defaultError.present()
-                    }
-                }
-            } else {
-                let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
-                API.current()?.fetch(request, options: options) { [weak self] response in
-                    switch response {
-                    case .resource(let resource):
-                        self?.handleMessages(
-                            fetchingWith: resource.fetchMessagesFromRealm,
-                            showing: resource.count,
-                            total: resource.total,
-                            completion: completion
-                        )
-                    case .error:
-                        Alert.defaultError.present()
-                    }
-                }
+    private func loadMessages(completion: (() -> Void)? = nil) {
+        guard let subscription = subscription else { return }
+
+        isLoadingMoreMessages = true
+        let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+        let request = SubscriptionMessagesRequest(roomId: subscription.rid, type: subscription.type, query: query)
+        API.current()?.fetch(request, options: options) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                self?.handleMessages(
+                    fetchingWith: resource.fetchMessagesFromRealm,
+                    showing: resource.count,
+                    total: resource.total,
+                    completion: completion
+                )
+            case .error:
+                Alert.defaultError.present()
+            }
+        }
+    }
+
+    private func loadMentions(completion: (() -> Void)? = nil) {
+        guard let subscription = subscription else { return }
+
+        isLoadingMoreMessages = true
+        let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
+        let request = SubscriptionMentionsRequest(roomId: subscription.rid)
+        API.current()?.fetch(request, options: options) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                self?.handleMessages(
+                    fetchingWith: resource.fetchMessagesFromRealm,
+                    showing: resource.count,
+                    total: resource.total,
+                    completion: completion
+                )
+            case .error:
+                Alert.defaultError.present()
             }
         }
     }
@@ -132,6 +144,7 @@ class MessagesListViewData {
 }
 
 class MessagesListViewController: BaseViewController {
+    lazy var searchBar = UISearchBar()
     var data = MessagesListViewData()
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -190,15 +203,23 @@ extension MessagesListViewController {
 
         registerCells()
 
-        title = data.title
+        if data.isSearchingMessages {
+            setupSearchBar()
+        } else {
+            title = data.title
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        loadMoreMessages()
+        if !data.isSearchingMessages {
+            loadMoreMessages()
+        } else {
+            searchBar.becomeFirstResponder()
+        }
 
-        guard let refreshControl = collectionView.refreshControl else { return }
+        guard let refreshControl = collectionView.refreshControl, !data.isSearchingMessages else { return }
         collectionView.refreshControl?.beginRefreshing()
         collectionView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
     }
@@ -218,6 +239,14 @@ extension MessagesListViewController {
             nibName: "ChatMessageDaySeparator",
             bundle: Bundle.main
         ), forCellWithReuseIdentifier: ChatMessageDaySeparator.identifier)
+    }
+
+    func setupSearchBar() {
+        searchBar.placeholder = "Search messages"
+        searchBar.showsCancelButton = true
+        searchBar.delegate = self
+
+        navigationItem.titleView = searchBar
     }
 }
 
@@ -277,5 +306,15 @@ extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
         }
 
         return CGSize(width: fullWidth, height: 50)
+    }
+}
+
+extension MessagesListViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+
+    }
+
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }

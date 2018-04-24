@@ -938,6 +938,20 @@ final class ChatViewController: SLKTextViewController {
 
     // MARK: IBAction
 
+    @IBAction func showSearchMessages() {
+        guard
+            let storyboard = storyboard,
+            let messageList = storyboard.instantiateViewController(withIdentifier: "MessagesListViewController") as? MessagesListViewController
+        else {
+            return
+        }
+
+        messageList.data.isSearchingMessages = true
+        let searchMessagesNav = BaseNavigationController(rootViewController: messageList)
+
+        present(searchMessagesNav, animated: true, completion: nil)
+    }
+
     @objc func chatTitleViewDidPressed(_ sender: AnyObject) {
         performSegue(withIdentifier: "Channel Info", sender: sender)
     }
