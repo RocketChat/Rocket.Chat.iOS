@@ -1549,8 +1549,8 @@
 				99282260204DE0AE005D2067 /* Profile */,
 				9960C82E2063F091004A034C /* Web Browser */,
 				806728FC200789F4009FE94D /* PreferencesNavigationController.swift */,
-				35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */,
 				995D1235208F941100E8E382 /* PreferencesViewController.swift */,
+				35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
