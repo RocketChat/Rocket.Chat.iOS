@@ -31,7 +31,7 @@ extension Subscription {
         return auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false).first
     }
 
-    static private func subscription(with name: String, auth: Auth) -> Subscription? {
+    static internal func subscription(with name: String, auth: Auth) -> Subscription? {
         return auth.subscriptions.filter("name = %@", name).first
     }
 
