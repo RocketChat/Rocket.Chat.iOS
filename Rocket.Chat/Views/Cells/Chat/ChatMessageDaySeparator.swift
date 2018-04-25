@@ -13,4 +13,12 @@ final class ChatMessageDaySeparator: UICollectionViewCell {
     static let identifier = "ChatMessageDaySeparator"
 
     @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var seperatorLine: UIView!
+}
+
+extension ChatMessageDaySeparator {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+        seperatorLine.backgroundColor = theme.mutedAccent
+    }
 }

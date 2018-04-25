@@ -18,8 +18,9 @@ class Theme: NSObject {
     let tintColor: UIColor
     let focusedBackground: UIColor
     let auxiliaryBackground: UIColor
+    var mutedAccent: UIColor = #colorLiteral(red: 0.9953911901, green: 0.9881951213, blue: 1, alpha: 0.3031745158)
 
-    init(backgroundColor: UIColor, titleText: UIColor, bodyText: UIColor, auxiliaryText: UIColor, hyperlinkText: UIColor, tintColor: UIColor, focusedBackground: UIColor, auxiliaryBackground: UIColor) {
+    init(backgroundColor: UIColor, titleText: UIColor, bodyText: UIColor, auxiliaryText: UIColor, hyperlinkText: UIColor, tintColor: UIColor, focusedBackground: UIColor, auxiliaryBackground: UIColor, mutedAccent: UIColor?) {
         self.backgroundColor = backgroundColor
         self.titleText = titleText
         self.bodyText = bodyText
@@ -28,6 +29,9 @@ class Theme: NSObject {
         self.tintColor = tintColor
         self.focusedBackground = focusedBackground
         self.auxiliaryBackground = auxiliaryBackground
+        if let mutedAccent = mutedAccent {
+            self.mutedAccent = mutedAccent
+        }
     }
 
     static let dark = Theme(
@@ -38,7 +42,8 @@ class Theme: NSObject {
         hyperlinkText: #colorLiteral(red: 1, green: 0.8117647059, blue: 0.231372549, alpha: 1),
         tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
         focusedBackground: #colorLiteral(red: 0.1433121264, green: 0.1433121264, blue: 0.1433121264, alpha: 1),
-        auxiliaryBackground: #colorLiteral(red: 0, green: 0.1019607843, blue: 0.3254901961, alpha: 1)
+        auxiliaryBackground: #colorLiteral(red: 0, green: 0.1019607843, blue: 0.3254901961, alpha: 1),
+        mutedAccent: nil
     )
 }
 
@@ -71,7 +76,7 @@ extension SLKTextView {
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         self.textColor = theme.bodyText
-        self.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.2984980193)
+        self.layer.borderColor = theme.mutedAccent.cgColor
         self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.04910321301)
     }
 }
