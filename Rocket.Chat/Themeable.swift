@@ -71,6 +71,8 @@ extension SLKTextView {
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         self.textColor = theme.bodyText
+        self.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.2984980193)
+        self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.04910321301)
     }
 }
 
