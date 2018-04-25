@@ -142,7 +142,7 @@
 		412719461E6B403700461FEE /* RegisterUsernameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412719451E6B403700461FEE /* RegisterUsernameViewController.swift */; };
 		412731D51DE0A55C00FC45A0 /* ChatPreviewModeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412731D41DE0A55C00FC45A0 /* ChatPreviewModeView.xib */; };
 		412731D71DE0A89B00FC45A0 /* ChatPreviewModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412731D61DE0A89B00FC45A0 /* ChatPreviewModeView.swift */; };
-		4129937E208E25C200E12C49 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4129937D208E25C100E12C49 /* PreferencesViewController.swift */; };
+		4129937E208E25C200E12C49 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		412A95D61FD94ED000954AA6 /* ChatMessageVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412A95D41FD94ED000954AA6 /* ChatMessageVideoView.swift */; };
 		412A95D71FD94ED000954AA6 /* ChatMessageVideoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412A95D51FD94ED000954AA6 /* ChatMessageVideoView.xib */; };
 		412BCC851E55C6A300F7F4EE /* ChatMessageTextView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 412BCC841E55C6A300F7F4EE /* ChatMessageTextView.xib */; };
@@ -526,6 +526,7 @@
 		80D0CE732050BE680056B17F /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
 		80D0CE742050BFBE0056B17F /* AuthManagerCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB82048581F00114F28 /* AuthManagerCurrentUser.swift */; };
 		80D0CE752050BFD20056B17F /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB42048571200114F28 /* AuthUser.swift */; };
+		80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DF5208FC57100034D1F /* PreferencesViewController.swift */; };
 		80D5637220592D32008896D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D5637120592D32008896D6 /* Assets.xcassets */; };
 		80D563752059325A008896D6 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D563742059325A008896D6 /* MimeType.swift */; };
 		80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5637620593533008896D6 /* ParseItemProviders.swift */; };
@@ -771,7 +772,6 @@
 		4101BF001F8D0A1700F67E89 /* AppManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManager.swift; sourceTree = "<group>"; };
 		4101BF021F8D11FB00F67E89 /* AppManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppManagerSpec.swift; sourceTree = "<group>"; };
 		4102E3A91E532323004BAA82 /* Preferences.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Preferences.storyboard; sourceTree = "<group>"; };
-		4102E3AC1E53273E004BAA82 /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		411119B51F680DB00019854B /* NetworkCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkCoordinator.swift; sourceTree = "<group>"; };
 		411119B71F6825C30019854B /* NetworkManagerSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkManagerSpec.swift; sourceTree = "<group>"; };
 		4112BEEB1E7971A400E734CB /* MainChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainChatViewController.swift; sourceTree = "<group>"; };
@@ -1169,6 +1169,7 @@
 		80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomCellModel.swift; sourceTree = "<group>"; };
 		80D0CE6E20509C100056B17F /* SEAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEAvatarView.swift; sourceTree = "<group>"; };
 		80D0CE7020509C230056B17F /* SEAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEAvatarView.xib; sourceTree = "<group>"; };
+		80D41DF5208FC57100034D1F /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		80D5637120592D32008896D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D563742059325A008896D6 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		80D5637620593533008896D6 /* ParseItemProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseItemProviders.swift; sourceTree = "<group>"; };
@@ -1547,8 +1548,8 @@
 				0B9AB2BF20444EB300ABEA05 /* Language */,
 				99282260204DE0AE005D2067 /* Profile */,
 				9960C82E2063F091004A034C /* Web Browser */,
+				80D41DF5208FC57100034D1F /* PreferencesViewController.swift */,
 				806728FC200789F4009FE94D /* PreferencesNavigationController.swift */,
-				4129937D208E25C100E12C49 /* PreferencesViewController.swift */,
 				35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */,
 			);
 			path = Preferences;
@@ -3649,6 +3650,7 @@
 				80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */,
 				8013F86D1FD6B59A00EE1A4E /* APIClient.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
+				80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
@@ -3789,7 +3791,7 @@
 				9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */,
 				140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */,
 				419ECCA21F3C8F15005F224B /* ChatControllerHeaderStatus.swift in Sources */,
-				4129937E208E25C200E12C49 /* PreferencesViewController.swift in Sources */,
+				4129937E208E25C200E12C49 /* (null) in Sources */,
 				8073719A1F94E83600D53ADF /* SocketError.swift in Sources */,
 				807C7C0820751EDC006B600E /* SpotlightRequest.swift in Sources */,
 				41D894021F4EF64200E284D2 /* ChatDirectMessageHeaderCell.swift in Sources */,
