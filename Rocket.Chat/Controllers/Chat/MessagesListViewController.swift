@@ -224,7 +224,7 @@ class MessagesListViewController: BaseViewController {
         }
     }
 
-    func searchForMessages(withText text: String) {
+    func searchMessages(withText text: String) {
         data.searchMessages(withText: text) {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -362,6 +362,6 @@ extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
 
 extension MessagesListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchForMessages(withText: searchText)
+        searchMessages(withText: searchText)
     }
 }
