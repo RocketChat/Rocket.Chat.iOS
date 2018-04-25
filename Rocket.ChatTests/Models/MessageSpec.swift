@@ -184,3 +184,35 @@ extension MessageSpec {
     }
 
 }
+
+// MARK: Equatable
+
+extension MessageSpec {
+
+    func testEqualMessagesTrue() {
+        let updatedAt = Date()
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+
+        XCTAssertTrue(message1 == message2)
+    }
+
+    func testEqualMessagesFalse() {
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = Date().addingTimeInterval(60)
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = Date().addingTimeInterval(120)
+
+        XCTAssertFalse(message1 == message2)
+    }
+
+}
