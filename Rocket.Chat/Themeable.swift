@@ -86,6 +86,8 @@ extension UISearchBar {
     }
 }
 
+// TODO: The add/insertSubview methods should not be overridden for UICollectionView,
+// but rather for a subclass of the same.
 extension UICollectionView {
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
