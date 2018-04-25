@@ -11,9 +11,10 @@ import RealmSwift
 
 extension SubscriptionMessagesResource {
     func fetchMessagesFromRealm() -> [Message]? {
+        let realm = Realm.current
         return raw?["messages"].arrayValue.map { json in
             let message = Message()
-            message.map(json, realm: Realm.current)
+            message.map(json, realm: realm)
             return message
         }
     }
@@ -21,9 +22,10 @@ extension SubscriptionMessagesResource {
 
 extension SubscriptionMentionsResource {
     func fetchMessagesFromRealm() -> [Message]? {
+        let realm = Realm.current
         return raw?["mentions"].arrayValue.map { json in
             let message = Message()
-            message.map(json, realm: Realm.current)
+            message.map(json, realm: realm)
             return message
         }
     }
@@ -31,9 +33,10 @@ extension SubscriptionMentionsResource {
 
 extension SearchMessagesResource {
     func fetchMessagesFromRealm() -> [Message]? {
+        let realm = Realm.current
         return raw?["messages"].arrayValue.map { json in
             let message = Message()
-            message.map(json, realm: Realm.current)
+            message.map(json, realm: realm)
             return message
         }
     }

@@ -24,8 +24,8 @@ extension MessagesListViewController: UISearchBarDelegate {
         self.updateIsEmptyMessage()
 
         searchTimer?.invalidate()
-        searchTimer = Timer(timeInterval: 0.5, repeats: false, block: { _ in
-            self.searchMessages(withText: searchText)
+        searchTimer = Timer(timeInterval: 0.5, repeats: false, block: { [weak self] _ in
+            self?.searchMessages(withText: searchText)
         })
 
         if let timer = searchTimer {
