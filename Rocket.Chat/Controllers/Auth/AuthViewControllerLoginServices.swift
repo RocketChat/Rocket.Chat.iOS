@@ -39,7 +39,7 @@ extension AuthViewController {
         }
 
         if settings.isGitLabAuthenticationEnabled {
-            addOAuthButton(for: .gitlab)
+            addOAuthButton(for: .gitlab(url: settings.gitlabUrl))
         }
 
         if settings.isLinkedInAuthenticationEnabled {

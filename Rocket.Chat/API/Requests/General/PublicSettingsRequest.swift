@@ -35,6 +35,7 @@ final class PublicSettingsRequest: APIRequest {
                 "LDAP_Enable",
                 "CAS_enabled",
                 "CAS_login_url",
+                "API_Gitlab_URL",
                 "Accounts_ShowFormLogin",
                 "Accounts_RegistrationForm",
                 "Accounts_PasswordReset",
