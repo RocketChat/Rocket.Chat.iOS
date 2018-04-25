@@ -29,6 +29,16 @@ extension SubscriptionMentionsResource {
     }
 }
 
+extension SearchMessagesResource {
+    func fetchMessagesFromRealm() -> [Message]? {
+        return raw?["messages"].arrayValue.map { json in
+            let message = Message()
+            message.map(json, realm: Realm.current)
+            return message
+        }
+    }
+}
+
 class MessagesListViewData {
     typealias CellData = (message: Message?, date: Date?)
 
@@ -59,6 +69,26 @@ class MessagesListViewData {
 
     var query: String?
     private var isLoadingMoreMessages = false
+
+    func searchMessages(withText text: String, completion: (() -> Void)? = nil) {
+        guard let subscription = subscription else {
+            return
+        }
+
+        API.current()?.fetch(SearchMessagesRequest(roomId: subscription.rid, searchText: text)) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                self?.handleMessages(
+                    fetchingWith: resource.fetchMessagesFromRealm,
+                    showing: nil,
+                    total: nil,
+                    completion: completion
+                )
+            case .error:
+                Alert.defaultError.present()
+            }
+        }
+    }
 
     func loadMoreMessages(completion: (() -> Void)? = nil) {
         guard !isLoadingMoreMessages else { return }
@@ -118,6 +148,10 @@ class MessagesListViewData {
             self.total = total ?? 0
             if let messages = messagesFetcher() {
                 guard var lastMessage = messages.first else {
+                    if self.isSearchingMessages {
+                        self.cellsPages = []
+                    }
+
                     self.isLoadingMoreMessages = false
                     completion?()
                     return
@@ -132,10 +166,15 @@ class MessagesListViewData {
                     cellsPage.append(CellData(message: message, date: nil))
                     lastMessage = message
                 }
-                self.cellsPages.append(cellsPage)
+
+                if self.isSearchingMessages {
+                    self.cellsPages = [cellsPage]
+                } else {
+                    self.cellsPages.append(cellsPage)
+                }
             }
 
-            self.currentPage += 1
+            if !self.isSearchingMessages { self.currentPage += 1 }
 
             self.isLoadingMoreMessages = false
             completion?()
@@ -144,6 +183,7 @@ class MessagesListViewData {
 }
 
 class MessagesListViewController: BaseViewController {
+    lazy var refreshControl = UIRefreshControl()
     lazy var searchBar = UISearchBar()
     var data = MessagesListViewData()
 
@@ -183,6 +223,15 @@ class MessagesListViewController: BaseViewController {
             }
         }
     }
+
+    func searchForMessages(withText text: String) {
+        data.searchMessages(withText: text) {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                self.updateIsEmptyMessage()
+            }
+        }
+    }
 }
 
 // MARK: ViewController
@@ -190,11 +239,6 @@ class MessagesListViewController: BaseViewController {
 extension MessagesListViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
-
-        collectionView.refreshControl = refreshControl
 
         let label = UILabel(frame: collectionView.frame)
         label.textAlignment = .center
@@ -207,6 +251,8 @@ extension MessagesListViewController {
             setupSearchBar()
         } else {
             title = data.title
+            refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
+            collectionView.refreshControl = refreshControl
         }
     }
 
@@ -283,7 +329,7 @@ extension MessagesListViewController: UICollectionViewDataSource {
 
 extension MessagesListViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        if indexPath.row == data.cells.count - data.pageSize/3 {
+        if indexPath.row == data.cells.count - data.pageSize/3 && !data.isSearchingMessages {
             loadMoreMessages()
         }
     }
