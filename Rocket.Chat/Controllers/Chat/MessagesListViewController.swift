@@ -213,8 +213,9 @@ class MessagesListViewController: BaseViewController {
         guard let label = collectionView.backgroundView as? UILabel else { return }
 
         if data.cells.count == 0 {
-            if data.isSearchingMessages && (searchBar.text == nil || searchBar.text == "")
-                    || data.isLoadingSearchResults {
+            if data.isSearchingMessages &&
+                    (searchBar.text == nil || searchBar.text == "") ||
+                    data.isLoadingSearchResults {
                 label.text = ""
                 return
             }
