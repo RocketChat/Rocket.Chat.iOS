@@ -86,11 +86,6 @@ final class ChatDataController {
             return false
         }
 
-        // don't group temporary messages
-        if (message.temporary, prevMessage.temporary) != (false, false) {
-            return false
-        }
-
         // don't group failed messages
         if (message.failed, prevMessage.failed) != (false, false) {
             return false
@@ -259,15 +254,6 @@ final class ChatDataController {
         return (indexPaths, removedIndexPaths)
     }
 
-    func needsUpdate(oldMessage: Message, newMessage: Message) -> Bool {
-        return oldMessage.text != newMessage.text ||
-            oldMessage.type != newMessage.type ||
-            oldMessage.mentions.count != newMessage.mentions.count ||
-            oldMessage.channels.count != newMessage.channels.count ||
-            oldMessage.temporary != newMessage.temporary ||
-            oldMessage.failed != newMessage.failed
-    }
-
     func update(_ message: Message) -> Int {
         for (idx, obj) in data.enumerated()
             where obj.message?.identifier == message.identifier {
@@ -276,7 +262,7 @@ final class ChatDataController {
                 }
 
                 if let oldMessage = obj.message {
-                    if needsUpdate(oldMessage: oldMessage, newMessage: message) {
+                    if !(oldMessage == message) {
                         MessageTextCacheManager.shared.update(for: message)
                     }
                 }

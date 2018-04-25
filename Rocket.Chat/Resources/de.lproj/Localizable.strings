@@ -251,6 +251,7 @@
 "myaccount.settings.language" = "Sprache";
 "myaccount.settings.appicon" = "App Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
+"myaccount.settings.server_version" = "Server Version: %@"; // TODO
 "myaccount.settings.web_browser" = "Webbrowser";
 "myaccount.settings.tracking.title" = "Send Crash Report"; // TODO
 "myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it."; // TODO

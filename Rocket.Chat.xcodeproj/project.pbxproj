@@ -525,6 +525,7 @@
 		80D0CE732050BE680056B17F /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
 		80D0CE742050BFBE0056B17F /* AuthManagerCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB82048581F00114F28 /* AuthManagerCurrentUser.swift */; };
 		80D0CE752050BFD20056B17F /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB42048571200114F28 /* AuthUser.swift */; };
+		80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DF5208FC57100034D1F /* PreferencesViewController.swift */; };
 		80D5637220592D32008896D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D5637120592D32008896D6 /* Assets.xcassets */; };
 		80D563752059325A008896D6 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D563742059325A008896D6 /* MimeType.swift */; };
 		80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5637620593533008896D6 /* ParseItemProviders.swift */; };
@@ -1171,6 +1172,7 @@
 		80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomCellModel.swift; sourceTree = "<group>"; };
 		80D0CE6E20509C100056B17F /* SEAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEAvatarView.swift; sourceTree = "<group>"; };
 		80D0CE7020509C230056B17F /* SEAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEAvatarView.xib; sourceTree = "<group>"; };
+		80D41DF5208FC57100034D1F /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		80D5637120592D32008896D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D563742059325A008896D6 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		80D5637620593533008896D6 /* ParseItemProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseItemProviders.swift; sourceTree = "<group>"; };
@@ -1553,6 +1555,7 @@
 				0B9AB2BF20444EB300ABEA05 /* Language */,
 				99282260204DE0AE005D2067 /* Profile */,
 				9960C82E2063F091004A034C /* Web Browser */,
+				80D41DF5208FC57100034D1F /* PreferencesViewController.swift */,
 				806728FC200789F4009FE94D /* PreferencesNavigationController.swift */,
 				35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */,
 				99731FB02090A70100D07FCF /* PreferencesViewController.swift */,
@@ -3659,6 +3662,7 @@
 				80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */,
 				8013F86D1FD6B59A00EE1A4E /* APIClient.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
+				80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
