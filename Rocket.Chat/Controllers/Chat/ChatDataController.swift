@@ -86,6 +86,11 @@ final class ChatDataController {
             return false
         }
 
+        // don't group failed messages
+        if (message.failed, prevMessage.failed) != (false, false) {
+            return false
+        }
+
         // unwrap dates
         guard
             let date = message.createdAt,

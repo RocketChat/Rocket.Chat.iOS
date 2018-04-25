@@ -101,8 +101,8 @@ extension Message {
             lhs.identifier == rhs.identifier &&
             lhs.temporary == rhs.temporary &&
             lhs.failed == rhs.failed &&
-            lhs.mentions.count == rhs.mentions.count
-            lhs.channels.count == rhs.channels.count
+            lhs.mentions.count == rhs.mentions.count &&
+            lhs.channels.count == rhs.channels.count &&
             lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970
     }
 }

@@ -267,16 +267,11 @@ final class ChatMessageCell: UICollectionViewCell {
             return
         }
 
-        switch (message.failed, message.temporary) {
-        case (true, _):
+        if (message.failed) {
             statusView.isHidden = false
             statusView.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
             statusView.tintColor = .red
-        case (false, true):
-            statusView.isHidden = false
-            statusView.image = UIImage(named: "Clock")?.withRenderingMode(.alwaysTemplate)
-            statusView.tintColor = .gray
-        case (false, false):
+        } else {
             statusView.isHidden = true
         }
 
