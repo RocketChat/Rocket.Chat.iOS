@@ -573,7 +573,6 @@
 		995FEB2F206286D9004EE38F /* WebBrowserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995FEB2E206286D9004EE38F /* WebBrowserManager.swift */; };
 		9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */; };
 		996154B1205197E7009B9857 /* NewPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996154B0205197E7009B9857 /* NewPasswordViewModel.swift */; };
-		99731FB12090A70100D07FCF /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99731FB02090A70100D07FCF /* PreferencesViewController.swift */; };
 		9977302720725B5C009AF465 /* CustomEmojiRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302620725B5C009AF465 /* CustomEmojiRequest.swift */; };
 		9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */; };
 		9977302C2072B746009AF465 /* PublicSettingsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9977302B2072B746009AF465 /* PublicSettingsRequest.swift */; };
@@ -1222,7 +1221,6 @@
 		995FEB2E206286D9004EE38F /* WebBrowserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserManager.swift; sourceTree = "<group>"; };
 		9960C82F2063F0C8004A034C /* WebBrowserTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebBrowserTableViewController.swift; sourceTree = "<group>"; };
 		996154B0205197E7009B9857 /* NewPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModel.swift; sourceTree = "<group>"; };
-		99731FB02090A70100D07FCF /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		9977302620725B5C009AF465 /* CustomEmojiRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequest.swift; sourceTree = "<group>"; };
 		9977302920727E17009AF465 /* CustomEmojiRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiRequestSpec.swift; sourceTree = "<group>"; };
 		9977302B2072B746009AF465 /* PublicSettingsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublicSettingsRequest.swift; sourceTree = "<group>"; };
@@ -1558,7 +1556,6 @@
 				80D41DF5208FC57100034D1F /* PreferencesViewController.swift */,
 				806728FC200789F4009FE94D /* PreferencesNavigationController.swift */,
 				35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */,
-				99731FB02090A70100D07FCF /* PreferencesViewController.swift */,
 			);
 			path = Preferences;
 			sourceTree = "<group>";
@@ -3795,7 +3792,6 @@
 				8076FDC72048632300114F28 /* SubscriptionQueries.swift in Sources */,
 				80054CFE1FDAFF5200F5ECF9 /* PushClient.swift in Sources */,
 				597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */,
-				99731FB12090A70100D07FCF /* PreferencesViewController.swift in Sources */,
 				414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */,
 				8076FDB0204856AF00114F28 /* AuthCanBlockMessage.swift in Sources */,
 				8076FDA9204853DE00114F28 /* RealmExecute.swift in Sources */,
