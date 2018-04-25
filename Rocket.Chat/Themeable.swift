@@ -81,6 +81,8 @@ extension UISearchBar {
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         barStyle = .black
+        tintColor = theme.hyperlinkText
+        keyboardAppearance = .dark
     }
 }
 
@@ -156,6 +158,11 @@ extension UITabBar {
 }
 
 extension SLKTextInputbar {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+        textView.keyboardAppearance = .dark
+    }
+
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
         view.applyTheme(AppDelegate.theme)
