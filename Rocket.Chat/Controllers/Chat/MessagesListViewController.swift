@@ -394,27 +394,3 @@ extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: fullWidth, height: 50)
     }
 }
-
-extension MessagesListViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard !searchText.isEmpty else {
-            data.cellsPages = []
-            collectionView.reloadData()
-            updateIsEmptyMessage()
-            return
-        }
-
-        self.data.isLoadingSearchResults = true
-        self.collectionView.reloadData()
-        self.updateIsEmptyMessage()
-
-        searchTimer?.invalidate()
-        searchTimer = Timer(timeInterval: 0.5, repeats: false, block: { _ in
-            self.searchMessages(withText: searchText)
-        })
-
-        if let timer = searchTimer {
-            RunLoop.main.add(timer, forMode: .commonModes)
-        }
-    }
-}
