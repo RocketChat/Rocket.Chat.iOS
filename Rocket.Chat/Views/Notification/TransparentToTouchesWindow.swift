@@ -20,4 +20,5 @@ class TransparentToTouchesWindow: UIWindow {
         }
         return nil
     }
+
 }

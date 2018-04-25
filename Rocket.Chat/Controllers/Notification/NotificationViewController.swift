@@ -48,6 +48,11 @@ final class NotificationViewController: UIViewController {
         view.clipsToBounds = true
     }
 
+    // TODO: This does not belong here
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIApplication.shared.delegate?.window??.rootViewController?.preferredStatusBarStyle ?? .default
+    }
+
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 

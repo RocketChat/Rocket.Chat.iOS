@@ -62,6 +62,7 @@ class Theme: NSObject {
     @objc func applyTheme(_ theme: Theme)
 }
 
+// TODO: These do not belong here
 extension UIView: Themeable {
     func applyTheme(_ theme: Theme) {
         backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
@@ -79,6 +80,11 @@ extension UILabel {
 extension UICollectionView {
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
+        view.applyTheme(AppDelegate.theme)
+    }
+
+    open override func addSubview(_ view: UIView) {
+        super.addSubview(view)
         view.applyTheme(AppDelegate.theme)
     }
 }
@@ -119,5 +125,18 @@ extension UIToolbar {
         self.isTranslucent = false
         self.barTintColor = theme.focusedBackground
         self.tintColor = theme.tintColor
+        self.barStyle = .black
+    }
+
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        view.applyTheme(AppDelegate.theme)
+    }
+}
+
+extension SLKTextInputbar {
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        view.applyTheme(AppDelegate.theme)
     }
 }

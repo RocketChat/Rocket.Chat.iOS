@@ -400,36 +400,17 @@ final class ChatViewController: SLKTextViewController {
             if !textInputbar.subviews.contains(textInputbarBackground) {
                 insertTextInputbarBackground()
             }
-
-            // Making the old background for textInputView, transparent
-            // after the safeAreaInsets are set. (Initially zero)
-            // This helps improve the translucency effect of the bar.
-            if !oldTextInputbarBgIsTransparent, view.safeAreaInsets.bottom > 0 {
-                textInputbar.setBackgroundImage(UIImage(), forToolbarPosition: .any, barMetrics: .default)
-                textInputbar.backgroundColor = UIColor.clear
-                textInputbar.barTintColor = UIColor.clear
-                oldTextInputbarBgIsTransparent = true
-            }
-
-            if let textInputbarHC = textInputbarBackgroundHeightConstraint, textInputbarHC.constant != view.safeAreaInsets.bottom {
-                textInputbarHC.constant = view.safeAreaInsets.bottom
-            }
         }
     }
 
     private func insertTextInputbarBackground() {
-        if #available(iOS 11.0, *) {
-            textInputbar.insertSubview(textInputbarBackground, at: 0)
-            textInputbarBackground.applyTheme(AppDelegate.theme)
-            textInputbarBackground.translatesAutoresizingMaskIntoConstraints = false
+        textInputbar.insertSubview(textInputbarBackground, at: 0)
+        textInputbarBackground.translatesAutoresizingMaskIntoConstraints = false
 
-            textInputbarBackgroundHeightConstraint = textInputbarBackground.heightAnchor.constraint(equalTo: textInputbar.heightAnchor, multiplier: 1, constant: view.safeAreaInsets.bottom)
-            textInputbarBackgroundHeightConstraint?.isActive = true
-
-            textInputbarBackground.widthAnchor.constraint(equalTo: textInputbar.widthAnchor).isActive = true
-            textInputbarBackground.topAnchor.constraint(equalTo: textInputbar.topAnchor).isActive = true
-            textInputbarBackground.centerXAnchor.constraint(equalTo: textInputbar.centerXAnchor).isActive = true
-        }
+        textInputbarBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        textInputbarBackground.widthAnchor.constraint(equalTo: textInputbar.widthAnchor).isActive = true
+        textInputbarBackground.topAnchor.constraint(equalTo: textInputbar.topAnchor).isActive = true
+        textInputbarBackground.centerXAnchor.constraint(equalTo: textInputbar.centerXAnchor).isActive = true
     }
 
     // MARK: SlackTextViewController
