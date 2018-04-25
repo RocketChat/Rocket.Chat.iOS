@@ -267,7 +267,7 @@ final class ChatMessageCell: UICollectionViewCell {
             return
         }
 
-        if (message.failed) {
+        if message.failed {
             statusView.isHidden = false
             statusView.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
             statusView.tintColor = .red
