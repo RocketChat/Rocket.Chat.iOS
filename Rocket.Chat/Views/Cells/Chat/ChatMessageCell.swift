@@ -30,11 +30,8 @@ final class ChatMessageCell: UICollectionViewCell {
 
     var message: Message! {
         didSet {
-            if oldValue != nil && oldValue.identifier == message?.identifier {
-                if oldValue.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
-                    Log.debug("message is cached")
-                    return
-                }
+            if oldValue != nil && oldValue == message {
+                return
             }
 
             updateMessage()
