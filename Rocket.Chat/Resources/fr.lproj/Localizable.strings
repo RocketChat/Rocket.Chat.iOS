@@ -239,6 +239,7 @@
 // Messages List
 "chat.messages.list.title" = "Messages";
 "chat.messages.list.empty" = "Aucun messages trouvé";
+"chat.messages.list.search.placeholder" = "Search messages"; // TODO
 "chat.messages.pinned.list.title" = "Messages épinglés";
 "chat.messages.starred.list.title" = "Messages favoris";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
@@ -246,11 +247,12 @@
 // Settings
 "myaccount.settings.title" = "Réglages"; // TODO: new text: Preferences
 "myaccount.settings.contactus" = "Contactez-nous";
-"myaccount.settings.profile" = "Profile"; // TODO:
+"myaccount.settings.profile" = "Profile"; // TODO
 "myaccount.settings.license" = "Licence";
 "myaccount.settings.language" = "Language"; // TODO
 "myaccount.settings.appicon" = "Icône de l'application";
 "myaccount.settings.version" = "Version : %@ (%@)";
+"myaccount.settings.server_version" = "Server Version: %@"; // TODO
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
 "myaccount.settings.tracking.title" = "Send Crash Report"; // TODO
 "myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it."; // TODO

@@ -528,6 +528,7 @@
 		80D0CE732050BE680056B17F /* UIColorCSSColorsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 412BCC8A1E55D4AA00F7F4EE /* UIColorCSSColorsExtension.swift */; };
 		80D0CE742050BFBE0056B17F /* AuthManagerCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB82048581F00114F28 /* AuthManagerCurrentUser.swift */; };
 		80D0CE752050BFD20056B17F /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB42048571200114F28 /* AuthUser.swift */; };
+		80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DF5208FC57100034D1F /* PreferencesViewController.swift */; };
 		80D5637220592D32008896D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D5637120592D32008896D6 /* Assets.xcassets */; };
 		80D563752059325A008896D6 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D563742059325A008896D6 /* MimeType.swift */; };
 		80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5637620593533008896D6 /* ParseItemProviders.swift */; };
@@ -585,6 +586,9 @@
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
 		99D888F82045DFC500E51306 /* EditProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */; };
 		99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888FA204623A900E51306 /* UpdateUserRequest.swift */; };
+		99DBB872208FF6FE00382DB2 /* SearchMessagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */; };
+		99DBB8742090360600382DB2 /* MessagesListControllerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */; };
+		99DBB87620903A7F00382DB2 /* SearchMessagesRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */; };
 		99F41BCE20658B1300B240FC /* EditProfileViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */; };
 		99F41BD020658C3400B240FC /* NewPasswordViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
@@ -1172,6 +1176,7 @@
 		80D0CE6B205080AA0056B17F /* SERoomCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SERoomCellModel.swift; sourceTree = "<group>"; };
 		80D0CE6E20509C100056B17F /* SEAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEAvatarView.swift; sourceTree = "<group>"; };
 		80D0CE7020509C230056B17F /* SEAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEAvatarView.xib; sourceTree = "<group>"; };
+		80D41DF5208FC57100034D1F /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		80D5637120592D32008896D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D563742059325A008896D6 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		80D5637620593533008896D6 /* ParseItemProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseItemProviders.swift; sourceTree = "<group>"; };
@@ -1231,6 +1236,9 @@
 		99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DraftMessageManager.swift; sourceTree = "<group>"; };
 		99D888F72045DFC500E51306 /* EditProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileTableViewController.swift; sourceTree = "<group>"; };
 		99D888FA204623A900E51306 /* UpdateUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserRequest.swift; sourceTree = "<group>"; };
+		99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMessagesRequest.swift; sourceTree = "<group>"; };
+		99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListControllerSearch.swift; sourceTree = "<group>"; };
+		99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMessagesRequestSpec.swift; sourceTree = "<group>"; };
 		99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModelSpec.swift; sourceTree = "<group>"; };
 		99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModelSpec.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TintedTextField.swift; sourceTree = "<group>"; };
@@ -1550,6 +1558,7 @@
 				0B9AB2BF20444EB300ABEA05 /* Language */,
 				99282260204DE0AE005D2067 /* Profile */,
 				9960C82E2063F091004A034C /* Web Browser */,
+				80D41DF5208FC57100034D1F /* PreferencesViewController.swift */,
 				806728FC200789F4009FE94D /* PreferencesNavigationController.swift */,
 				33CCA7292091034200FD4C57 /* PreferencesViewController.swift */,
 				35E892C9201CDD9700B4BE5A /* PreferencesViewModel.swift */,
@@ -2188,6 +2197,7 @@
 				4112BEEB1E7971A400E734CB /* MainChatViewController.swift */,
 				800FCD3D1F72893E00D9A692 /* MembersListViewController.swift */,
 				800E22831F8500A200DA84F1 /* MessagesListViewController.swift */,
+				99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -2434,6 +2444,7 @@
 				80054CF01FD9505A00F5ECF9 /* SendMessageRequest.swift */,
 				8032E3E720362EF5009D33CE /* UpdateMessageRequest.swift */,
 				80054CF61FD9AA1B00F5ECF9 /* UploadMessageRequest.swift */,
+				99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -2445,6 +2456,7 @@
 				806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */,
 				8067DA9C206BC7D2005E3369 /* ReactMessageRequestSpec.swift */,
 				80213C0A1FDFE35C00809E14 /* UploadMessageRequestSpec.swift */,
+				99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -3650,9 +3662,11 @@
 				140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */,
 				80054CF31FD951B100F5ECF9 /* MessagesClient.swift in Sources */,
 				33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */,
+				99DBB8742090360600382DB2 /* MessagesListControllerSearch.swift in Sources */,
 				80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */,
 				8013F86D1FD6B59A00EE1A4E /* APIClient.swift in Sources */,
 				414D99161EA0E7CB0020F7E9 /* SignupViewController.swift in Sources */,
+				80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */,
 				800FCD4F1F728EC800D9A692 /* ChannelInfoUserCell.swift in Sources */,
 				14BAFAE220308F010054A2E6 /* DrawingBrushColorViewController.swift in Sources */,
 				8076FDD6204864E700114F28 /* UserQueries.swift in Sources */,
@@ -3778,6 +3792,7 @@
 				D18675EC1F716A0D00406FB4 /* LoginRequest.swift in Sources */,
 				35E892CC201CDDED00B4BE5A /* SignupViewControllerCustomFields.swift in Sources */,
 				806728FF20079734009FE94D /* DeleteMessageRequest.swift in Sources */,
+				99DBB872208FF6FE00382DB2 /* SearchMessagesRequest.swift in Sources */,
 				80054CF11FD9505A00F5ECF9 /* SendMessageRequest.swift in Sources */,
 				0B7A210D204680D500D11085 /* ChangeLanguageResetCell.swift in Sources */,
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
@@ -3910,6 +3925,7 @@
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
 				8013F8811FD6B6C600EE1A4E /* CommandsClientSpec.swift in Sources */,
+				99DBB87620903A7F00382DB2 /* SearchMessagesRequestSpec.swift in Sources */,
 				0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */,
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
 				8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */,
