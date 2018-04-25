@@ -69,12 +69,42 @@ final class AuthViewController: BaseViewController {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
-    @IBOutlet var buttonRegister: UIButton!
-    @IBOutlet weak var buttonResetPassword: UIButton!
-    @IBOutlet weak var labelProceedingAgreeing: UILabel!
-    @IBOutlet weak var buttonTermsOfService: UIButton!
-    @IBOutlet weak var labelAnd: UILabel!
-    @IBOutlet weak var buttonPrivacy: UIButton!
+    @IBOutlet var buttonRegister: UIButton! {
+        didSet {
+            buttonRegister.setTitle(localized("auth.login.buttonRegister"), for: .normal)
+        }
+    }
+
+    @IBOutlet weak var buttonResetPassword: UIButton! {
+        didSet {
+            buttonResetPassword.setTitle(localized("auth.login.buttonResetPassword"), for: .normal)
+        }
+    }
+
+    @IBOutlet weak var labelProceedingAgreeing: UILabel! {
+        didSet {
+            labelProceedingAgreeing.text = localized("auth.login.agree_label")
+        }
+    }
+
+    @IBOutlet weak var buttonTermsOfService: UIButton! {
+        didSet {
+            buttonTermsOfService.setTitle(localized("auth.login.agree_termsofservice"), for: .normal)
+        }
+    }
+
+    @IBOutlet weak var labelAnd: UILabel! {
+        didSet {
+            labelAnd.text = localized("auth.login.agree_and")
+        }
+    }
+
+    @IBOutlet weak var buttonPrivacy: UIButton! {
+        didSet {
+            buttonPrivacy.setTitle(localized("auth.login.agree_privacypolicy"), for: .normal)
+        }
+    }
+
     @IBOutlet weak var authButtonsStackView: UIStackView!
     var customAuthButtons = [String: UIButton]()
 
@@ -87,20 +117,16 @@ final class AuthViewController: BaseViewController {
         super.viewDidLoad()
         title = serverURL.host
 
-        if let registrationForm = AuthSettingsManager.shared.settings?.registrationForm {
-           buttonRegister.isHidden = registrationForm != .isPublic
+        guard let settings = serverPublicSettings else { return }
+
+        if !settings.isUsernameEmailAuthenticationEnabled {
+            buttonRegister.isHidden = true
+        } else {
+            buttonRegister.isHidden = settings.registrationForm != .isPublic
         }
 
-        textFieldUsername.placeholder = localized("auth.login.username.placeholder")
-        textFieldPassword.placeholder = localized("auth.login.password.placeholder")
-        buttonRegister.setTitle(localized("auth.login.buttonRegister"), for: .normal)
-        buttonResetPassword.setTitle(localized("auth.login.buttonResetPassword"), for: .normal)
-        labelProceedingAgreeing.text = localized("auth.login.agree_label")
-        buttonTermsOfService.setTitle(localized("auth.login.agree_termsofservice"), for: .normal)
-        labelAnd.text = localized("auth.login.agree_and")
-        buttonPrivacy.setTitle(localized("auth.login.agree_privacypolicy"), for: .normal)
-        hideViewFields = !(AuthSettingsManager.settings?.isUsernameEmailAuthenticationEnabled ?? true)
-        buttonResetPassword.isHidden = !(AuthSettingsManager.settings?.isPasswordResetEnabled ?? true)
+        hideViewFields = !settings.isUsernameEmailAuthenticationEnabled
+        buttonResetPassword.isHidden = !settings.isPasswordResetEnabled
 
         updateFieldsPlaceholders()
         updateAuthenticationMethods()
