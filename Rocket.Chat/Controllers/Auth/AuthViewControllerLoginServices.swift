@@ -15,11 +15,15 @@ extension AuthViewController {
         guard let settings = self.serverPublicSettings else { return }
 
         if !(settings.emailOrUsernameFieldPlaceholder?.isEmpty ?? true) {
-            self.textFieldUsername.placeholder = settings.emailOrUsernameFieldPlaceholder
+            textFieldUsername.placeholder = settings.emailOrUsernameFieldPlaceholder
+        } else {
+            textFieldUsername.placeholder = localized("auth.login.username.placeholder")
         }
 
         if !(settings.passwordFieldPlaceholder?.isEmpty ?? true) {
-            self.textFieldPassword.placeholder = settings.passwordFieldPlaceholder
+            textFieldPassword.placeholder = settings.passwordFieldPlaceholder
+        } else {
+            textFieldPassword.placeholder = localized("auth.login.password.placeholder")
         }
     }
 
