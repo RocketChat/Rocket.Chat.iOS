@@ -238,6 +238,7 @@
 // Messages List
 "chat.messages.list.title" = "Mensajes";
 "chat.messages.list.empty" = "No se han encontrado mensajes";
+"chat.messages.list.search.placeholder" = "Search messages"; // TODO
 "chat.messages.pinned.list.title" = "Mensajes fijados";
 "chat.messages.starred.list.title" = "Mensajes destacados";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO

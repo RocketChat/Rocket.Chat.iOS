@@ -238,6 +238,7 @@
 // Messages List
 "chat.messages.list.title" = "Zprávy";
 "chat.messages.list.empty" = "Nebyly nalezeny žádné zprávy";
+"chat.messages.list.search.placeholder" = "Search messages"; // TODO
 "chat.messages.pinned.list.title" = "Připnuté zprávy";
 "chat.messages.starred.list.title" = "Zprávy s hvězdičkou";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO

@@ -307,9 +307,9 @@ extension MessagesListViewController {
     }
 
     func setupSearchBar() {
-        searchBar.placeholder = "Search messages"
+        searchBar.placeholder = localized("chat.messages.list.search.placeholder")
         searchBar.delegate = self
-        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(close))
+        let cancelButton = UIBarButtonItem(title: localized("global.cancel"), style: .plain, target: self, action: #selector(close))
 
         navigationItem.rightBarButtonItem = cancelButton
         navigationItem.titleView = searchBar
