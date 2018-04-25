@@ -38,7 +38,7 @@ extension ChatNotification {
 extension ChatNotification.Payload {
     struct Sender: Codable, Equatable {
         let id: String
-        let name: String
+        let name: String?
         let username: String
 
         enum CodingKeys: String, CodingKey {
