@@ -86,8 +86,8 @@ class MessagesListViewData {
                     total: nil,
                     completion: completion
                 )
-            case .error:
-                Alert.defaultError.present()
+            default:
+                break
             }
         }
     }
@@ -364,6 +364,10 @@ extension MessagesListViewController: UICollectionViewDataSource {
 }
 
 extension MessagesListViewController: UICollectionViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        hideKeyboard()
+    }
+
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if indexPath.row == data.cells.count - data.pageSize/3 && !data.isSearchingMessages {
             loadMoreMessages()
