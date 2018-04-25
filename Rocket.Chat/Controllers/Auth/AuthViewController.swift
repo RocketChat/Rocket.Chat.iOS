@@ -117,9 +117,7 @@ final class AuthViewController: BaseViewController {
         super.viewDidLoad()
         title = serverURL.host
 
-        guard let settings = serverPublicSettings else {
-            return
-        }
+        guard let settings = serverPublicSettings else { return }
 
         if !settings.isUsernameEmailAuthenticationEnabled {
             buttonRegister.isHidden = true
