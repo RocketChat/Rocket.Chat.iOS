@@ -52,6 +52,7 @@ class MessagesListViewData {
 
     var title: String = localized("chat.messages.list.title")
 
+    var isLoadingSearchResults: Bool = false
     var isSearchingMessages: Bool = false
     var isListingMentions: Bool = false
     var isShowingAllMessages: Bool {
@@ -76,6 +77,7 @@ class MessagesListViewData {
         }
 
         API.current()?.fetch(SearchMessagesRequest(roomId: subscription.rid, searchText: text)) { [weak self] response in
+            self?.isLoadingSearchResults = false
             switch response {
             case .resource(let resource):
                 self?.handleMessages(
@@ -156,6 +158,7 @@ class MessagesListViewData {
                     completion?()
                     return
                 }
+
                 var cellsPage = [CellData(message: nil, date: lastMessage.createdAt ?? Date(timeIntervalSince1970: 0))]
                 messages.forEach { message in
                     if lastMessage.createdAt?.day != message.createdAt?.day ||
@@ -185,6 +188,8 @@ class MessagesListViewData {
 class MessagesListViewController: BaseViewController {
     lazy var refreshControl = UIRefreshControl()
     lazy var searchBar = UISearchBar()
+
+    var searchTimer: Timer?
     var data = MessagesListViewData()
 
     @IBOutlet weak var collectionView: UICollectionView!
@@ -208,6 +213,12 @@ class MessagesListViewController: BaseViewController {
         guard let label = collectionView.backgroundView as? UILabel else { return }
 
         if data.cells.count == 0 {
+            if data.isSearchingMessages && (searchBar.text == nil || searchBar.text == "")
+                    || data.isLoadingSearchResults {
+                label.text = ""
+                return
+            }
+
             label.text = localized("chat.messages.list.empty")
         } else {
             label.text = ""
@@ -227,6 +238,10 @@ class MessagesListViewController: BaseViewController {
     func searchMessages(withText text: String) {
         data.searchMessages(withText: text) {
             DispatchQueue.main.async {
+                if self.searchBar.text == nil || self.searchBar.text == "" {
+                    self.data.cellsPages = []
+                }
+
                 self.collectionView.reloadData()
                 self.updateIsEmptyMessage()
             }
@@ -248,6 +263,9 @@ extension MessagesListViewController {
         registerCells()
 
         if data.isSearchingMessages {
+            let gesture = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+            gesture.cancelsTouchesInView = false
+            collectionView.addGestureRecognizer(gesture)
             setupSearchBar()
         } else {
             title = data.title
@@ -297,7 +315,16 @@ extension MessagesListViewController {
     }
 
     @objc func close() {
+        hideKeyboard()
         presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+
+    @objc func hideKeyboard() {
+        guard data.isSearchingMessages else {
+            return
+        }
+
+        searchBar.resignFirstResponder()
     }
 }
 
@@ -305,11 +332,15 @@ extension MessagesListViewController {
 
 extension MessagesListViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.cells.count + (data.isShowingAllMessages ? 0 : 1)
+        return !data.isLoadingSearchResults ? data.cells.count + (data.isShowingAllMessages ? 0 : 1) : 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard indexPath.row < data.cells.count else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoaderCell.identifier, for: indexPath)
+        }
+
+        if data.isSearchingMessages && data.isLoadingSearchResults {
             return collectionView.dequeueReusableCell(withReuseIdentifier: ChatLoaderCell.identifier, for: indexPath)
         }
 
@@ -362,6 +393,24 @@ extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
 
 extension MessagesListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        searchMessages(withText: searchText)
+        guard !searchText.isEmpty else {
+            data.cellsPages = []
+            collectionView.reloadData()
+            updateIsEmptyMessage()
+            return
+        }
+
+        self.data.isLoadingSearchResults = true
+        self.collectionView.reloadData()
+        self.updateIsEmptyMessage()
+
+        searchTimer?.invalidate()
+        searchTimer = Timer(timeInterval: 0.5, repeats: false, block: { _ in
+            self.searchMessages(withText: searchText)
+        })
+
+        if let timer = searchTimer {
+            RunLoop.main.add(timer, forMode: .commonModes)
+        }
     }
 }
