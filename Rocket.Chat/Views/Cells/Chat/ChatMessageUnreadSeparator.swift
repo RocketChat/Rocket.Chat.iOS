@@ -13,4 +13,13 @@ final class ChatMessageUnreadSeparator: UICollectionViewCell {
     static let identifier = "ChatMessageUnreadSeparator"
 
     @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var seperatorLine: UIView!
+}
+
+extension ChatMessageUnreadSeparator {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+        seperatorLine.backgroundColor = theme.strongAccent
+        labelTitle.textColor = theme.strongAccent
+    }
 }

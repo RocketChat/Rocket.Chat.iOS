@@ -18,9 +18,10 @@ class Theme: NSObject {
     let tintColor: UIColor
     let focusedBackground: UIColor
     let auxiliaryBackground: UIColor
-    var mutedAccent: UIColor = #colorLiteral(red: 0.9953911901, green: 0.9881951213, blue: 1, alpha: 0.3031745158)
+    let mutedAccent: UIColor
+    let strongAccent: UIColor
 
-    init(backgroundColor: UIColor, titleText: UIColor, bodyText: UIColor, auxiliaryText: UIColor, hyperlinkText: UIColor, tintColor: UIColor, focusedBackground: UIColor, auxiliaryBackground: UIColor, mutedAccent: UIColor?) {
+    init(backgroundColor: UIColor, titleText: UIColor, bodyText: UIColor, auxiliaryText: UIColor, hyperlinkText: UIColor, tintColor: UIColor, focusedBackground: UIColor, auxiliaryBackground: UIColor, mutedAccent: UIColor?, strongAccent: UIColor?) {
         self.backgroundColor = backgroundColor
         self.titleText = titleText
         self.bodyText = bodyText
@@ -29,8 +30,17 @@ class Theme: NSObject {
         self.tintColor = tintColor
         self.focusedBackground = focusedBackground
         self.auxiliaryBackground = auxiliaryBackground
+
         if let mutedAccent = mutedAccent {
             self.mutedAccent = mutedAccent
+        } else {
+            self.mutedAccent = #colorLiteral(red: 0.9953911901, green: 0.9881951213, blue: 1, alpha: 0.3031745158)
+        }
+
+        if let strongAccent = strongAccent {
+            self.strongAccent = strongAccent
+        } else {
+            self.strongAccent = #colorLiteral(red: 0.9720572829, green: 0.3783821166, blue: 0.446572125, alpha: 1)
         }
     }
 
@@ -43,7 +53,8 @@ class Theme: NSObject {
         tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
         focusedBackground: #colorLiteral(red: 0.1433121264, green: 0.1433121264, blue: 0.1433121264, alpha: 1),
         auxiliaryBackground: #colorLiteral(red: 0, green: 0.1019607843, blue: 0.3254901961, alpha: 1),
-        mutedAccent: nil
+        mutedAccent: nil,
+        strongAccent: nil
     )
 }
 
