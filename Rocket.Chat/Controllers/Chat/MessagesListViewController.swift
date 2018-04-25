@@ -289,10 +289,15 @@ extension MessagesListViewController {
 
     func setupSearchBar() {
         searchBar.placeholder = "Search messages"
-        searchBar.showsCancelButton = true
         searchBar.delegate = self
+        let cancelButton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(close))
 
+        navigationItem.rightBarButtonItem = cancelButton
         navigationItem.titleView = searchBar
+    }
+
+    @objc func close() {
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -357,10 +362,6 @@ extension MessagesListViewController: UICollectionViewDelegateFlowLayout {
 
 extension MessagesListViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        presentingViewController?.dismiss(animated: true, completion: nil)
+        searchForMessages(withText: searchText)
     }
 }
