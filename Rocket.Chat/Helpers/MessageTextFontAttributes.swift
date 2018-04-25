@@ -12,9 +12,16 @@ struct MessageTextFontAttributes {
 
     static let defaultFontSize = CGFloat(15)
 
-    static let defaultFontColor = AppDelegate.theme.bodyText //UIColor.darkGray
-    static let systemFontColor = AppDelegate.theme.auxiliaryText //UIColor.lightGray
-    static let failedFontColor = AppDelegate.theme.auxiliaryBackground //UIColor.lightGray
+    // TODO: Probably should not be changed here
+    static var defaultFontColor: UIColor {
+        return AppDelegate.theme.bodyText
+    } //UIColor.darkGray
+    static var systemFontColor: UIColor {
+        return AppDelegate.theme.auxiliaryText
+    } //UIColor.lightGray
+    static var failedFontColor: UIColor {
+        return AppDelegate.theme.auxiliaryBackground
+    } //UIColor.lightGray
 
     static let defaultFont = UIFont.systemFont(ofSize: defaultFontSize)
     static let italicFont = UIFont.italicSystemFont(ofSize: defaultFontSize)
