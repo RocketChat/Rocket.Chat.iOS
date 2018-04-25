@@ -238,6 +238,7 @@
 // Messages List
 "chat.messages.list.title" = "Μηνύματα";
 "chat.messages.list.empty" = "Δεν βρέθηκαν μηνύματα";
+"chat.messages.list.search.placeholder" = "Search messages"; // TODO
 "chat.messages.pinned.list.title" = "Καρφιτσωμένα Μηνύματα";
 "chat.messages.starred.list.title" = "Αστερωμένα Μηνύματα";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
@@ -250,6 +251,7 @@
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
+"myaccount.settings.server_version" = "Server Version: %@"; // TODO
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
 "myaccount.settings.tracking.title" = "Send Crash Report"; // TODO
 "myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it."; // TODO

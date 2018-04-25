@@ -238,6 +238,7 @@
 // Messages List
 "chat.messages.list.title" = "Wiadomości";
 "chat.messages.list.empty" = "Nie znaleziono wiadomości";
+"chat.messages.list.search.placeholder" = "Search messages"; // TODO
 "chat.messages.pinned.list.title" = "Przypięte wiadomości";
 "chat.messages.starred.list.title" = "Wiadomości oznaczone gwiazdką";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
@@ -250,6 +251,7 @@
 "myaccount.settings.language" = "Język";
 "myaccount.settings.appicon" = "Ikona aplikacji";
 "myaccount.settings.version" = "Wersja: %@ (%@)";
+"myaccount.settings.server_version" = "Server Version: %@"; // TODO
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
 "myaccount.settings.tracking.title" = "Send Crash Report"; // TODO
 "myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it."; // TODO

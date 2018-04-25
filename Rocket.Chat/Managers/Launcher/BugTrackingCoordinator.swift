@@ -84,6 +84,10 @@ struct BugTrackingCoordinator: LauncherProtocol {
         if let serverURL = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverURL] {
             crashlytics.setObjectValue(serverURL, forKey: ServerPersistKeys.serverURL)
         }
+
+        if let serverVersion = AuthManager.selectedServerInformation()?[ServerPersistKeys.serverVersion] {
+            crashlytics.setObjectValue(serverVersion, forKey: ServerPersistKeys.serverVersion)
+        }
     }
 
     static func anonymizeCrashReports() {

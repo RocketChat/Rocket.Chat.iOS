@@ -94,3 +94,15 @@ final class Message: BaseModel {
     // Internal
     @objc dynamic var markedForDeletion: Bool = false
 }
+
+extension Message {
+    static func == (lhs: Message, rhs: Message) -> Bool {
+        return
+            lhs.identifier == rhs.identifier &&
+            lhs.temporary == rhs.temporary &&
+            lhs.failed == rhs.failed &&
+            lhs.mentions.count == rhs.mentions.count &&
+            lhs.channels.count == rhs.channels.count &&
+            lhs.updatedAt?.timeIntervalSince1970 == rhs.updatedAt?.timeIntervalSince1970
+    }
+}
