@@ -337,3 +337,10 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
         fatalError("init(coder:) has not been implemented")
     }
 }
+
+extension EmojiPicker {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+        skinToneButton.backgroundColor = currentSkinTone.color
+    }
+}

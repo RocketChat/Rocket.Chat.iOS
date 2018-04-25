@@ -77,6 +77,13 @@ extension UILabel {
     }
 }
 
+extension UISearchBar {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+        barStyle = .black
+    }
+}
+
 extension UICollectionView {
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
@@ -123,6 +130,20 @@ extension UIToolbar {
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         self.isTranslucent = false
+        self.barTintColor = theme.focusedBackground
+        self.tintColor = theme.tintColor
+        self.barStyle = .black
+    }
+
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        view.applyTheme(AppDelegate.theme)
+    }
+}
+
+extension UITabBar {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
         self.barTintColor = theme.focusedBackground
         self.tintColor = theme.tintColor
         self.barStyle = .black
