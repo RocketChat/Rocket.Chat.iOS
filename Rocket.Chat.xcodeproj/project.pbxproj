@@ -585,6 +585,7 @@
 		99D888FB204623A900E51306 /* UpdateUserRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99D888FA204623A900E51306 /* UpdateUserRequest.swift */; };
 		99DBB872208FF6FE00382DB2 /* SearchMessagesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */; };
 		99DBB8742090360600382DB2 /* MessagesListControllerSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */; };
+		99DBB87620903A7F00382DB2 /* SearchMessagesRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */; };
 		99F41BCE20658B1300B240FC /* EditProfileViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */; };
 		99F41BD020658C3400B240FC /* NewPasswordViewModelSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */; };
 		A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */; };
@@ -1231,6 +1232,7 @@
 		99D888FA204623A900E51306 /* UpdateUserRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateUserRequest.swift; sourceTree = "<group>"; };
 		99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMessagesRequest.swift; sourceTree = "<group>"; };
 		99DBB8732090360600382DB2 /* MessagesListControllerSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessagesListControllerSearch.swift; sourceTree = "<group>"; };
+		99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchMessagesRequestSpec.swift; sourceTree = "<group>"; };
 		99F41BCD20658B1300B240FC /* EditProfileViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModelSpec.swift; sourceTree = "<group>"; };
 		99F41BCF20658C3400B240FC /* NewPasswordViewModelSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewModelSpec.swift; sourceTree = "<group>"; };
 		A0FFC1601E8A9D8D00A1B5EA /* TintedTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TintedTextField.swift; sourceTree = "<group>"; };
@@ -2445,6 +2447,7 @@
 				806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */,
 				8067DA9C206BC7D2005E3369 /* ReactMessageRequestSpec.swift */,
 				80213C0A1FDFE35C00809E14 /* UploadMessageRequestSpec.swift */,
+				99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -3910,6 +3913,7 @@
 				41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */,
 				416296FC1F41D42800BCCEDD /* DownloadManagerSpec.swift in Sources */,
 				8013F8811FD6B6C600EE1A4E /* CommandsClientSpec.swift in Sources */,
+				99DBB87620903A7F00382DB2 /* SearchMessagesRequestSpec.swift in Sources */,
 				0BC0E8612032DB20004BFAAF /* DrawingBrushColorSpec.swift in Sources */,
 				D1A403D91F6760BC00798EDA /* NSAttributedStringExtensionsSpec.swift in Sources */,
 				8067290120081046009FE94D /* DeleteMessageRequestSpec.swift in Sources */,
