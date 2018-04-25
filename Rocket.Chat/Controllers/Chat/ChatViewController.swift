@@ -946,6 +946,7 @@ final class ChatViewController: SLKTextViewController {
             return
         }
 
+        messageList.data.subscription = subscription
         messageList.data.isSearchingMessages = true
         let searchMessagesNav = BaseNavigationController(rootViewController: messageList)
 
