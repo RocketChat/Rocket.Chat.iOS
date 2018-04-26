@@ -44,6 +44,24 @@ class MessageSpec: XCTestCase {
         })
     }
 
+    func testStarred() {
+        let message = Message()
+
+        let values = JSON([
+            "_id": "message-json-1",
+            "rid": "123",
+            "msg": "Foo Bar Baz",
+            "ts": ["$date": 123456789],
+            "_updatedAt": ["$date": 123456789],
+            "u": ["_id": "123", "username": "foo"],
+            "starred": [["_id": "userid1"], ["_id": "userid2"], ["_id": "userid3"]]
+        ])
+
+        message.map(values, realm: nil)
+
+        XCTAssertEqual(message.starred.count, 3, "message is mapping 'starred' correctly")
+    }
+
     func testSubscriptionObject() {
         let auth = Auth()
         auth.serverURL = "http://foo.bar.baz"
