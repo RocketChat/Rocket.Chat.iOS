@@ -10,13 +10,13 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-enum SubscriptionType: String {
+enum SubscriptionType: String, Equatable {
     case directMessage = "d"
     case channel = "c"
     case group = "p"
 }
 
-class Subscription: BaseModel {
+final class Subscription: BaseModel {
     @objc dynamic var auth: Auth?
 
     @objc internal dynamic var privateType = SubscriptionType.channel.rawValue

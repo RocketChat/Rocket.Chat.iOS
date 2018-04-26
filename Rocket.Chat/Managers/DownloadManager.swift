@@ -8,14 +8,14 @@
 
 import Foundation
 
-class DownloadManager {
+final class DownloadManager {
 
     /**
         - parameters:
             - url: The URL of the file to fetch the name of it.
         - returns: The filename based on the file URL.
      */
-    class func filenameFor(_ url: String) -> String? {
+    static func filenameFor(_ url: String) -> String? {
         return url.components(separatedBy: "/").last
     }
 
@@ -27,7 +27,7 @@ class DownloadManager {
             - filename: The filename to generate the URL
         - returns: The local file URL on cache repository.
      */
-    class func localFileURLFor(_ filename: String) -> URL? {
+    static func localFileURLFor(_ filename: String) -> URL? {
         if let docDirectory = try? FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: true) {
             return docDirectory.appendingPathComponent(filename)
         }
@@ -42,7 +42,7 @@ class DownloadManager {
             - localUrl: The local URL to be searched.
         - returns: Returns if the file exists or not.
      */
-    class func fileExists(_ localUrl: URL) -> Bool {
+    static func fileExists(_ localUrl: URL) -> Bool {
         return FileManager.default.fileExists(atPath: localUrl.path)
     }
 
@@ -57,7 +57,7 @@ class DownloadManager {
             - localUrl: The file local URL to be saved.
             - completion: The completion block to be called.
      */
-    class func download(url: URL, to localUrl: URL, completion: @escaping () -> Void) {
+    static func download(url: URL, to localUrl: URL, completion: @escaping () -> Void) {
         // File may already exists
         if fileExists(localUrl) {
             completion()

@@ -10,13 +10,13 @@ import SwiftyJSON
 
 extension SocketError {
     enum Error {
-        case invalidUser
+        case invalidSession
         case other(String)
 
         init(rawValue: String) {
             switch rawValue {
-            case "error-invalid-user":
-                self = .invalidUser
+            case "403":
+                self = .invalidSession
             default:
                 self = .other(rawValue)
             }

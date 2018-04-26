@@ -184,3 +184,107 @@ extension MessageSpec {
     }
 
 }
+
+// MARK: Equatable
+
+extension MessageSpec {
+
+    func testEqualMessagesTrue() {
+        let updatedAt = Date()
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+
+        XCTAssertTrue(message1 == message2)
+    }
+
+    func testEqualMessagesFalse() {
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = Date().addingTimeInterval(60)
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = Date().addingTimeInterval(120)
+
+        XCTAssertFalse(message1 == message2)
+    }
+
+    func testEqualMessagesMentionsFalse() {
+        let updatedAt = Date()
+
+        let mentions = List<Mention>()
+        let mention = Mention()
+        mention.username = "foobar"
+        mentions.append(mention)
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+        message2.mentions = mentions
+
+        XCTAssertFalse(message1 == message2)
+    }
+
+    func testEqualMessagesChannelsFalse() {
+        let updatedAt = Date()
+
+        let channels = List<Channel>()
+        let channel = Channel()
+        channel.name = "foobar"
+        channels.append(channel)
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+        message2.channels = channels
+
+        XCTAssertFalse(message1 == message2)
+    }
+
+    func testEqualMessagesTemporaryFalse() {
+        let updatedAt = Date()
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+        message1.temporary = true
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+        message2.temporary = false
+
+        XCTAssertFalse(message1 == message2)
+    }
+
+    func testEqualMessagesFailedFalse() {
+        let updatedAt = Date()
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+        message1.failed = true
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+        message2.failed = false
+
+        XCTAssertFalse(message1 == message2)
+    }
+
+}

@@ -13,10 +13,6 @@ import RealmSwift
 extension AuthSettings: ModelMappeable {
     //swiftlint:disable function_body_length
     func map(_ values: JSON, realm: Realm?) {
-        if self.identifier == nil {
-            self.identifier = String.random()
-        }
-
         self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
         self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string
 
@@ -45,10 +41,13 @@ extension AuthSettings: ModelMappeable {
         self.isLDAPAuthenticationEnabled = objectForKey(object: values, key: "LDAP_Enable")?.bool ?? false
         self.isCASEnabled = objectForKey(object: values, key: "CAS_enabled")?.bool ?? false
         self.casLoginUrl = objectForKey(object: values, key: "CAS_login_url")?.string
+        self.gitlabUrl = objectForKey(object: values, key: "API_Gitlab_URL")?.string
 
         self.isUsernameEmailAuthenticationEnabled = objectForKey(object: values, key: "Accounts_ShowFormLogin")?.bool ?? true
         self.rawRegistrationForm = objectForKey(object: values, key: "Accounts_RegistrationForm")?.string
         self.isPasswordResetEnabled = objectForKey(object: values, key: "Accounts_PasswordReset")?.bool ?? true
+
+        self.firstChannelAfterLogin = objectForKey(object: values, key: "First_Channel_After_Login")?.string
 
         // Authentication Placeholder Fields
         self.emailOrUsernameFieldPlaceholder = objectForKey(object: values, key: "Accounts_EmailOrUsernamePlaceholder")?.stringValue ?? ""

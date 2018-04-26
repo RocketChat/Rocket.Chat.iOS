@@ -11,7 +11,7 @@ import UIKit
 final class DrawingBrushOpacityViewController: UIViewController {
     weak var delegate: DrawingBrushOpacityDelegate?
 
-    private var opacity: Float = 1
+    private var opacity: CGFloat = 1
     @IBOutlet private weak var slider: UISlider!
     @IBOutlet weak var opacityLabel: UILabel!
     @IBOutlet weak var opacityTitle: UILabel! {
@@ -21,18 +21,19 @@ final class DrawingBrushOpacityViewController: UIViewController {
     }
 
     @IBAction func opacityChanged(_ sender: UISlider) {
-        opacityLabel.text = String(format: "%.2f", sender.value * 100).appending("%")
-        delegate?.brushOpacityChanged(opacity: CGFloat(sender.value))
+        let value = CGFloat(sender.value)
+        opacityLabel.text = "\(String(format: "%.2f", value * 100))%"
+        delegate?.brushOpacityChanged(opacity: value)
     }
 
     func setCurrectOpacity(_ opacity: CGFloat) {
-        self.opacity = Float(opacity)
+        self.opacity = opacity
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        opacityLabel.text = String(format: "%.2f", opacity * 100).appending("%")
-        slider.value = opacity
+        opacityLabel.text = "\(String(format: "%.2f", opacity * 100))%"
+        slider.value = Float(opacity)
     }
 }

@@ -60,7 +60,7 @@ class UserInfoRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = UserInfoResult(raw: json)
+        let result = UserInfoResource(raw: json)
 
         XCTAssertEqual(result.user?.identifier, "nSYqWzZ4GsKTX4dyK", "id is correct")
     }

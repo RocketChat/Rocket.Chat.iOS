@@ -26,7 +26,32 @@ final class AuthSettingsManager {
         }
     }
 
-    static func updatePublicSettings(serverVersion: Version? = nil, apiHost: URL? = nil, _ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings>) {
+    static func persistPublicSettings(settings: AuthSettings, realm: Realm? = Realm.current, completion: (MessageCompletionObject<AuthSettings>)? = nil) {
+        let unmanagedSettings = AuthSettings(value: settings)
+        shared.internalSettings = unmanagedSettings
+
+        realm?.execute({ realm in
+            // Delete all the AuthSettings objects, since we don't
+            // support multiple-server per database
+            realm.delete(realm.objects(AuthSettings.self))
+        })
+
+        realm?.execute({ realm in
+            realm.add(settings)
+
+            if let auth = AuthManager.isAuthenticated(realm: realm) {
+                auth.settings = settings
+                realm.add(auth, update: true)
+            }
+        })
+
+        DispatchQueue.main.async {
+            ServerManager.updateServerInformation(from: unmanagedSettings)
+            completion?(unmanagedSettings)
+        }
+    }
+
+    static func updatePublicSettings(serverVersion: Version? = nil, apiHost: URL? = nil, _ auth: Auth?, completion: (MessageCompletionObject<AuthSettings>)? = nil) {
         let api: API?
         if let apiHost = apiHost {
             if let serverVersion = serverVersion {
@@ -38,40 +63,27 @@ final class AuthSettingsManager {
             api = API.current()
         }
 
-        let currentRealm = Realm.current
+        let realm = Realm.current
         let options = APIRequestOptions.paginated(count: 0, offset: 0)
-        api?.fetch(PublicSettingsRequest(), options: options, succeeded: { result in
-            guard result.success else {
-                completion(nil)
-                return
-            }
-
-            currentRealm?.execute({ realm in
-                let settings = result.authSettings
-                realm.add(settings, update: true)
-
-                if let auth = AuthManager.isAuthenticated(realm: realm) {
-                    auth.settings = settings
-                    realm.add(auth, update: true)
+        api?.fetch(PublicSettingsRequest(), options: options) { response in
+            switch response {
+            case .resource(let resource):
+                guard resource.success else {
+                    completion?(nil)
+                    return
                 }
 
-                let unmanagedSettings = AuthSettings(value: settings)
-                shared.internalSettings = unmanagedSettings
-
-                DispatchQueue.main.async {
-                    ServerManager.updateServerInformation(from: unmanagedSettings)
-                    completion(unmanagedSettings)
+                persistPublicSettings(settings: resource.authSettings, realm: realm, completion: completion)
+            case .error(let error):
+                switch error {
+                case .version: websocketUpdatePublicSettings(realm, auth, completion: completion)
+                default: completion?(nil)
                 }
-            })
-        }, errored: { error in
-            switch error {
-            case .version: websocketUpdatePublicSettings(currentRealm, auth, completion: completion)
-            default: completion(nil)
             }
-        })
+        }
     }
 
-    private static func websocketUpdatePublicSettings(_ realm: Realm?, _ auth: Auth?, completion: @escaping MessageCompletionObject<AuthSettings>) {
+    private static func websocketUpdatePublicSettings(_ realm: Realm?, _ auth: Auth?, completion: (MessageCompletionObject<AuthSettings>)? = nil) {
         let object = [
             "msg": "method",
             "method": "public-settings/get"
@@ -79,28 +91,13 @@ final class AuthSettingsManager {
 
         SocketManager.send(object) { (response) in
             guard !response.isError() else {
-                completion(nil)
+                completion?(nil)
                 return
             }
 
-            realm?.execute({ realm in
-                let settings = AuthManager.isAuthenticated(realm: realm)?.settings ?? AuthSettings()
-                settings.map(response.result["result"], realm: realm)
-                realm.add(settings, update: true)
-
-                if let auth = AuthManager.isAuthenticated(realm: realm) {
-                    auth.settings = settings
-                    realm.add(auth, update: true)
-                }
-
-                let unmanagedSettings = AuthSettings(value: settings)
-                shared.internalSettings = unmanagedSettings
-
-                DispatchQueue.main.async {
-                    ServerManager.updateServerInformation(from: unmanagedSettings)
-                    completion(unmanagedSettings)
-                }
-            })
+            let settings = AuthSettings()
+            settings.map(response.result["result"], realm: realm)
+            persistPublicSettings(settings: settings, realm: realm, completion: completion)
         }
     }
 

@@ -9,7 +9,7 @@
 import Foundation
 import Reachability
 
-class NetworkManager {
+final class NetworkManager {
 
     static let shared = NetworkManager()
     var reachability: Reachability?

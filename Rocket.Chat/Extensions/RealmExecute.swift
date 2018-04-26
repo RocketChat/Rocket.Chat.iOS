@@ -28,8 +28,10 @@ extension Realm {
                     }
                 }
 
-                DispatchQueue.main.async {
-                    completion?()
+                if let completion = completion {
+                    DispatchQueue.main.async {
+                        completion()
+                    }
                 }
 
                 UIApplication.shared.endBackgroundTask(backgroundTaskId)

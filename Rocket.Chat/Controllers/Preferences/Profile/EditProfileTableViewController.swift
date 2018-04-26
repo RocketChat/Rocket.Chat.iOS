@@ -154,29 +154,32 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         }
 
         let meRequest = MeRequest()
-        api?.fetch(meRequest, succeeded: { [weak self] result in
+        api?.fetch(meRequest) { [weak self] response in
             stopLoading()
-            if let errorMessage = result.errorMessage {
-                Alert(key: "alert.load_profile_error").withMessage(errorMessage).present(handler: { _ in
+
+            switch response {
+            case .resource(let resource):
+                if let errorMessage = resource.errorMessage {
+                    Alert(key: "alert.load_profile_error").withMessage(errorMessage).present(handler: { _ in
+                        self?.navigationController?.popViewController(animated: true)
+                    })
+                } else {
+                    self?.user = resource.user
+                    self?.isLoading = false
+                    DispatchQueue.main.async {
+                        if self?.canEditAnyInfo ?? false {
+                            self?.navigationItem.rightBarButtonItem = self?.editButton
+                        }
+
+                        self?.tableView.reloadData()
+                    }
+                }
+            case .error:
+                Alert(key: "alert.load_profile_error").present(handler: { _ in
                     self?.navigationController?.popViewController(animated: true)
                 })
-            } else {
-                self?.user = result.user
-                self?.isLoading = false
-                DispatchQueue.main.async {
-                    if self?.canEditAnyInfo ?? false {
-                        self?.navigationItem.rightBarButtonItem = self?.editButton
-                    }
-
-                    self?.tableView.reloadData()
-                }
             }
-        }, errored: { _ in
-            stopLoading()
-            Alert(key: "alert.load_profile_error").present(handler: { _ in
-                self.navigationController?.popViewController(animated: true)
-            })
-        })
+        }
     }
 
     func bindUserData() {
@@ -338,24 +341,39 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
         present(alert, animated: true)
     }
 
-    fileprivate func update(user: User?) {
+    /**
+        This method will only update the avatar image
+        of the user.
+     */
+    fileprivate func updateAvatar() {
+        guard let avatarFile = avatarFile else { return }
+
         startLoading()
+        isUploadingAvatar = true
 
-        if let avatarFile = avatarFile {
-            isUploadingAvatar = true
+        let client = API.current()?.client(UploadClient.self)
+        client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] in
+            guard let strongSelf = self else { return }
 
-            let client = API.current()?.client(UploadClient.self)
-            client?.uploadAvatar(data: avatarFile.data, filename: avatarFile.name, mimetype: avatarFile.type, completion: { [weak self] in
-                guard let weakSelf = self else { return }
-                if !weakSelf.isUpdatingUser { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
-                weakSelf.isUploadingAvatar = false
-                weakSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
-                weakSelf.stopLoading()
-            })
-        }
+            if !strongSelf.isUpdatingUser {
+                strongSelf.alertSuccess(title: localized("alert.update_profile_success.title"))
+            }
 
-        guard let user = user else {
-            return
+            strongSelf.isUploadingAvatar = false
+            strongSelf.avatarView.avatarPlaceholder = UIImage(data: avatarFile.data)
+            strongSelf.stopLoading()
+            strongSelf.avatarFile = nil
+        })
+    }
+
+    /**
+        This method will only update the user information.
+     */
+    fileprivate func updateUserInformation(user: User) {
+        isUpdatingUser = true
+
+        if !isUploadingAvatar {
+            startLoading()
         }
 
         let stopLoading: (_ shouldEndEditing: Bool) -> Void = { [weak self] shouldEndEditing in
@@ -363,30 +381,56 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
             self?.stopLoading(shouldEndEditing: shouldEndEditing)
         }
 
-        isUpdatingUser = true
-
         let updateUserRequest = UpdateUserRequest(user: user, currentPassword: currentPassword)
-        api?.fetch(updateUserRequest, succeeded: { [weak self] result in
-            if let errorMessage = result.errorMessage {
+        api?.fetch(updateUserRequest) { [weak self] response in
+            guard let strongSelf = self else { return }
+
+            switch response {
+            case .resource(let resource):
+                if let errorMessage = resource.errorMessage {
+                    stopLoading(false)
+                    Alert(key: "alert.update_profile_error").withMessage(errorMessage).present()
+                    return
+                }
+
+                strongSelf.user = resource.user
+                stopLoading(true)
+
+                if !strongSelf.isUploadingAvatar {
+                    strongSelf.alertSuccess(title: localized("alert.update_profile_success.title"))
+                }
+            case .error:
                 stopLoading(false)
-                Alert(key: "alert.update_profile_error").withMessage(errorMessage).present()
-                return
+                Alert(key: "alert.update_profile_error").present()
+            }
+        }
+    }
+
+    /**
+        This method will check if there's an new avatar
+        to be updated and if there's any information on the
+        user to be updated as well. They're both different API
+        calls that need to be made.
+     */
+    fileprivate func update(user: User?) {
+        if avatarFile != nil {
+            updateAvatar()
+        }
+
+        guard let user = user else {
+            if !isUploadingAvatar {
+                endEditing()
             }
 
-            self?.user = result.user
-            stopLoading(true)
+            return
+        }
 
-            guard let weakSelf = self else { return }
-
-            if !weakSelf.isUploadingAvatar { weakSelf.alertSuccess(title: localized("alert.update_profile_success.title")) }
-        }, errored: { _ in
-            stopLoading(false)
-            Alert(key: "alert.update_profile_error").present()
-        })
+        updateUserInformation(user: user)
     }
 
     @IBAction func didPressAvatarButton(_ sender: UIButton) {
         hideKeyboard()
+
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
 
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
@@ -415,20 +459,24 @@ class EditProfileTableViewController: UITableViewController, MediaPicker {
     }
 
     func startLoading() {
-        DispatchQueue.main.async {
-            self.navigationItem.leftBarButtonItem?.isEnabled = false
-            self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: self.activityIndicator)
+        DispatchQueue.main.async { [weak self] in
+            guard let strongSelf = self else { return }
+            strongSelf.view.isUserInteractionEnabled = false
+            strongSelf.navigationItem.leftBarButtonItem?.isEnabled = false
+            strongSelf.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: strongSelf.activityIndicator)
         }
     }
 
     func stopLoading(shouldEndEditing: Bool = true, shouldRefreshAvatar: Bool = false) {
         if !isUpdatingUser, !isUploadingAvatar {
-            DispatchQueue.main.async {
-                self.navigationItem.leftBarButtonItem?.isEnabled = true
+            DispatchQueue.main.async { [weak self] in
+                self?.view.isUserInteractionEnabled = true
+                self?.navigationItem.leftBarButtonItem?.isEnabled = true
+
                 if shouldEndEditing {
-                    self.endEditing()
+                    self?.endEditing()
                 } else {
-                    self.navigationItem.rightBarButtonItem = self.saveButton
+                    self?.navigationItem.rightBarButtonItem = self?.saveButton
                 }
             }
         }
@@ -484,7 +532,6 @@ extension EditProfileTableViewController: UIImagePickerControllerDelegate {
         }
 
         avatarFile = file
-
         dismiss(animated: true, completion: nil)
     }
 

@@ -11,6 +11,9 @@
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "The URL you entered is invalid. Check it and try again, please!";
 
+"alert.connection.not_secured.title" = "Oops!";
+"alert.connection.not_secured.message" = "Could not establish a secure connection to the server. Please make sure the server supports SSL.";
+
 "alert.connection.socket_error.title" = "Oops!";
 "alert.connection.socket_error.message" = "Could not connect to this server!";
 
@@ -30,7 +33,7 @@
 "alert.socket_error.invalid_user.message" = "Your session has expired. Please log in again.";
 
 "alert.login_service_error.title" = "Authentication Error";
-"alert.login_service_error.message" = "Could not authenticate using this service. Please, try again.";
+"alert.login_service_error.message" = "Could not authenticate using this service. Please try again.";
 
 "alert.authorization_error.title" = "Authorization Error";
 "alert.authorization_error.create_channel.description" = "You can't create channels";
@@ -55,22 +58,21 @@
 "alert.discarding_changes.title" = "Unsaved changes";
 "alert.discarding_changes.message" = "Your unsaved changes have been discarded.";
 "alert.load_profile_error.title" = "Failed to load your profile";
-"alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again.";
+"alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please try again.";
 "alert.password_mismatch_error.title" = "Your password doesn't match";
-"alert.password_mismatch_error.message" = "The confirmation field doesn't match with the password you've provided. Please, check it and try again.";
+"alert.password_mismatch_error.message" = "The confirmation field doesn't match with the password you've provided. Please check it and try again.";
 "alert.update_profile_error.title" = "Failed to update";
-"alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please, try again.";
+"alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please try again.";
 "alert.update_password_error.title" = "Failed to change password";
-"alert.update_password_error.message" = "Something wrong happened when changing your password. Please, try again.";
-"alert.update_profile_empty_fields.title" = "Please, fill the empty fields";
+"alert.update_password_error.message" = "Something wrong happened when changing your password. Please try again.";
+"alert.update_profile_empty_fields.title" = "Please fill the empty fields";
 "alert.update_profile_empty_fields.message" = "All your profile information are required and can't stay blank";
 "alert.update_profile_invalid_email.title" = "Invalid e-mail";
-"alert.update_profile_invalid_email.message" = "It seems that the e-mail you've entered is invalid. Please, fix it and try again.";
-"alert.password_empty_fields.title" = "Please, fill the empty fields";
+"alert.update_profile_invalid_email.message" = "It seems that the e-mail you've entered is invalid. Please fix it and try again.";
+"alert.password_empty_fields.title" = "Please fill the empty fields";
 "alert.password_empty_fields.message" = "Fill up the password and confirmation fields so you can update your password.";
 "alert.update_profile_success.title" = "Profile updated";
 "alert.update_password_success.title" = "Password updated";
-
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Server changed it's URL";
@@ -107,6 +109,7 @@
 "subscriptions.favorites" = "Favorites";
 "subscriptions.channels" = "Channels";
 "subscriptions.direct_messages" = "Direct Messages";
+"subscriptions.you" = "you";
 
 // Servers
 "servers.add_new_team" = "Add new Team";
@@ -154,12 +157,12 @@
 "chat.message.actions.react" = "Add Reaction";
 "chat.message.actions.block" = "Block messages from user";
 "chat.message.actions.report" = "Report Message";
-"chat.message.actions.edit" = "Edit message";
+"chat.message.actions.edit" = "Edit";
 "chat.message.actions.copy" = "Copy";
-"chat.message.actions.pin" = "Pin message";
-"chat.message.actions.unpin" = "Unpin message";
-"chat.message.actions.quote" = "Quote message";
-"chat.message.actions.reply" = "Reply to message";
+"chat.message.actions.pin" = "Pin";
+"chat.message.actions.unpin" = "Unpin";
+"chat.message.actions.quote" = "Quote";
+"chat.message.actions.reply" = "Reply";
 "chat.message.actions.delete" = "Delete message";
 "chat.message.actions.delete.confirm.title" = "Delete this message?";
 "chat.message.actions.delete.confirm.message" = "Are you sure you want to delete this message? This process can't be undone.";
@@ -235,6 +238,7 @@
 // Messages List
 "chat.messages.list.title" = "Messages";
 "chat.messages.list.empty" = "No messages found";
+"chat.messages.list.search.placeholder" = "Search messages";
 "chat.messages.pinned.list.title" = "Pinned Messages";
 "chat.messages.starred.list.title" = "Starred Messages";
 "chat.messages.mentions.list.title" = "Mentions";
@@ -247,19 +251,21 @@
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Application Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
+"myaccount.settings.server_version" = "Server Version: %@";
 "myaccount.settings.web_browser" = "Web Browser";
-
+"myaccount.settings.tracking.title" = "Send Crash Report";
+"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it.";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Choose an icon";
-"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat+ icon looks like on your device. Please choose one of the icons below, whichever you like the most.";
+"myaccount.settings.changeicon.header" = "You can change how your Rocket.Chat icon looks like on your device. Please choose one of the icons below, whichever you like the most.";
 "myaccount.settings.changeicon.errortitle" = "Cannot change icon";
 "myaccount.settings.changeicon.iosversion" = "Alternate application icons are not supported on iOS version below 10.3";
 
 // Change Language
 "myaccount.settings.language.title" = "Change Language";
 "myaccount.settings.language.reset" = "Reset to Default";
-"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat+ before the new settings will take effect.";
+"myaccount.settings.language.message" = "You have changed language settings. You must restart Rocket.Chat before the new settings will take effect.";
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
@@ -277,6 +283,7 @@
 "myaccount.settings.profile.actions.edit" = "Edit";
 "myaccount.settings.profile.actions.change_password" = "Change your password";
 "myaccount.settings.profile.section.profile" = "Profile";
+"myaccount.settings.profile.section.password" = "Password";
 "myaccount.settings.profile.name_placeholder" = "Name";
 "myaccount.settings.profile.username_placeholder" = "Username";
 "myaccount.settings.profile.email_placeholder" = "E-mail";

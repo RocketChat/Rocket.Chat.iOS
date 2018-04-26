@@ -37,7 +37,7 @@ class SocketManager {
     var isUserAuthenticated = false
 
     internal var internalConnectionHandler: SocketCompletion?
-    internal var connectionHandlers: [String: SocketConnectionHandler] = [:]
+    internal var connectionHandlers = NSMapTable<NSString, AnyObject>(keyOptions: .strongMemory, valueOptions: .weakMemory)
 
     // MARK: Connection
 
@@ -140,14 +140,13 @@ extension SocketManager {
             API.current()?.client(InfoClient.self).fetchInfo()
 
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
-                AuthSettingsManager.updatePublicSettings(auth, completion: { _ in
-
-                })
+                AuthSettingsManager.updatePublicSettings(auth)
 
                 UserManager.userDataChanges()
                 UserManager.changes()
                 SubscriptionManager.changes(auth)
                 SubscriptionManager.subscribeRoomChanges()
+                SubscriptionManager.subscribeInAppNotifications()
                 PermissionManager.changes()
                 PermissionManager.updatePermissions()
                 CustomEmojiManager.sync()
@@ -172,11 +171,11 @@ extension SocketManager {
 extension SocketManager {
 
     static func addConnectionHandler(token: String, handler: SocketConnectionHandler) {
-        sharedInstance.connectionHandlers[token] = handler
+        sharedInstance.connectionHandlers.setObject(handler as AnyObject, forKey: token as NSString)
     }
 
     static func removeConnectionHandler(token: String) {
-        sharedInstance.connectionHandlers.removeValue(forKey: token)
+        sharedInstance.connectionHandlers.removeObject(forKey: token as NSString)
     }
 
 }
@@ -209,8 +208,12 @@ extension SocketManager: WebSocketDelegate {
             handler(socket, socket.isConnected)
         }
 
-        for (_, handler) in connectionHandlers {
-            handler.socketDidDisconnect(socket: self)
+        if let enumerator = connectionHandlers.objectEnumerator() {
+            while let handler = enumerator.nextObject() {
+                if let handler = handler as? SocketConnectionHandler {
+                    handler.socketDidConnect(socket: self)
+                }
+            }
         }
     }
 

@@ -20,7 +20,7 @@ struct AuthSettingsDefaults {
     static let messageGroupingPeriod = 900
 }
 
-final class AuthSettings: BaseModel {
+final class AuthSettings: Object {
     @objc dynamic var siteURL: String?
     @objc dynamic var cdnPrefixURL: String?
 
@@ -49,6 +49,10 @@ final class AuthSettings: BaseModel {
 
     @objc dynamic var isCASEnabled = false
     @objc dynamic var casLoginUrl: String?
+
+    @objc dynamic var gitlabUrl: String?
+
+    @objc dynamic var firstChannelAfterLogin: String?
 
     // Authentication Placeholder Fields
     @objc dynamic var emailOrUsernameFieldPlaceholder: String?

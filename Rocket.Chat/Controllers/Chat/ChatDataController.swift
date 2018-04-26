@@ -46,6 +46,7 @@ final class ChatDataController {
     var unreadSeparator = false
     var dismissUnreadSeparator = false
 
+    @discardableResult
     func clear() -> [IndexPath] {
         var indexPaths: [IndexPath] = []
 
@@ -80,13 +81,8 @@ final class ChatDataController {
             return false
         }
 
-        // don't group temporary messages
+        // don't group deleted messages
         if (message.markedForDeletion, prevMessage.markedForDeletion) != (false, false) {
-            return false
-        }
-
-        // don't group temporary messages
-        if (message.temporary, prevMessage.temporary) != (false, false) {
             return false
         }
 
@@ -117,7 +113,7 @@ final class ChatDataController {
     func indexPathOf(_ identifier: String) -> IndexPath? {
         return data.filter { item in
             return item.identifier == identifier
-            }.compactMap { item in
+        }.compactMap { item in
             item.indexPath
         }.first
     }
@@ -126,7 +122,7 @@ final class ChatDataController {
         return data.filter { item in
             guard let messageIdentifier = item.message?.identifier else { return false }
             return messageIdentifier == identifier
-            }.compactMap { item in
+        }.compactMap { item in
             item.indexPath
         }.first
     }
@@ -265,8 +261,10 @@ final class ChatDataController {
                    return -1
                 }
 
-                if obj.message?.text != message.text || obj.message?.type != message.type {
-                    MessageTextCacheManager.shared.update(for: message)
+                if let oldMessage = obj.message {
+                    if !(oldMessage == message) {
+                        MessageTextCacheManager.shared.update(for: message)
+                    }
                 }
 
                 data[idx].message = message

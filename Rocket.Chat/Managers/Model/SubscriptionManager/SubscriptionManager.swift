@@ -196,196 +196,24 @@ struct SubscriptionManager {
             })
         }
     }
-}
 
-// MARK: Typing
-extension SubscriptionManager {
-    static func subscribeTypingEvent(_ subscription: Subscription, completion: @escaping (String?, Bool) -> Void) {
-        let eventName = "\(subscription.rid)/typing"
+    static func subscribeInAppNotifications() {
+        guard let user = AuthManager.currentUser() else { return }
+
+        let eventName = "\(user.identifier ?? "")/notification"
         let request = [
             "msg": "sub",
-            "name": "stream-notify-room",
-            "id": eventName,
+            "name": "stream-notify-user",
             "params": [eventName, false]
         ] as [String: Any]
 
         SocketManager.subscribe(request, eventName: eventName) { response in
             guard !response.isError() else { return Log.debug(response.result.string) }
 
-            let msg = response.result["fields"]["args"]
-            let userNameTyping = msg[0].string
-            let flag = (msg[1].int ?? 0) > 0
-
-            completion(userNameTyping, flag)
-        }
-    }
-
-    static func sendTypingStatus(_ subscription: Subscription, isTyping: Bool, completion: MessageCompletion? = nil) {
-        guard let username = AuthManager.currentUser()?.username else { return }
-
-        let request = [
-            "msg": "method",
-            "method": "stream-notify-room",
-            "params": ["\(subscription.rid)/typing", username, isTyping]
-        ] as [String: Any]
-
-        SocketManager.send(request) { response in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-
-            completion?(response)
-        }
-    }
-}
-
-// MARK: Search
-extension SubscriptionManager {
-    static func spotlight(_ text: String, completion: @escaping MessageCompletionObjectsList<Subscription>) {
-        let request = [
-            "msg": "method",
-            "method": "spotlight",
-            "params": [text, NSNull(), ["rooms": true, "users": true]]
-        ] as [String: Any]
-
-        let currentRealm = Realm.current
-        SocketManager.send(request) { response in
-            guard !response.isError() else {
-                completion([])
-                return Log.debug(response.result.string)
+            if let data = try? response.result["fields"]["args"][0].rawData() {
+                let notification = try? JSONDecoder().decode(ChatNotification.self, from: data)
+                notification?.post()
             }
-
-            var subscriptions = [Subscription]()
-            var identifiers = [String]()
-            let rooms = response.result["result"]["rooms"].array
-            let users = response.result["result"]["users"].array
-
-            currentRealm?.execute({ (realm) in
-                rooms?.forEach { object in
-                    let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                        object?.rid = object?.identifier ?? ""
-                    })
-
-                    if let identifier = subscription.identifier {
-                        identifiers.append(identifier)
-                    }
-
-                    subscriptions.append(subscription)
-                }
-
-                users?.forEach { object in
-                    let user = User.getOrCreate(realm: realm, values: object, updates: nil)
-                    let subscription = Subscription()
-                    subscription.identifier = user.identifier ?? ""
-                    subscription.otherUserId = user.identifier
-                    subscription.type = .directMessage
-                    subscription.name = user.username ?? ""
-                    subscription.fname = user.name ?? ""
-                    subscriptions.append(subscription)
-
-                    if let identifier = subscription.identifier {
-                        identifiers.append(identifier)
-                    }
-                }
-
-                realm.add(subscriptions, update: true)
-            }, completion: {
-                var detachedSubscriptions = [Subscription]()
-
-                Realm.executeOnMainThread(realm: currentRealm, { (realm) in
-                    for identifier in identifiers {
-                        if let subscription = realm.object(ofType: Subscription.self, forPrimaryKey: identifier) {
-                            detachedSubscriptions.append(subscription)
-                        }
-                    }
-                })
-
-                completion(detachedSubscriptions)
-            })
         }
-    }
-}
-
-// MARK: Rooms, Groups & DMs
-extension SubscriptionManager {
-    static func createDirectMessage(_ username: String, completion: @escaping MessageCompletion) {
-        let request = [
-            "msg": "method",
-            "method": "createDirectMessage",
-            "params": [username]
-        ] as [String: Any]
-
-        SocketManager.send(request) { response in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-            completion(response)
-        }
-    }
-
-    static func getRoom(byName name: String, completion: @escaping MessageCompletion) {
-        let request = [
-            "msg": "method",
-            "method": "getRoomByTypeAndName",
-            "params": ["c", name]
-        ] as [String: Any]
-
-        SocketManager.send(request) { response in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-            completion(response)
-        }
-    }
-
-    static func join(room rid: String, completion: @escaping MessageCompletion) {
-        let request = [
-            "msg": "method",
-            "method": "joinRoom",
-            "params": [rid]
-        ] as [String: Any]
-
-        SocketManager.send(request) { (response) in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-            completion(response)
-        }
-    }
-}
-
-// MARK: Messages
-extension SubscriptionManager {
-    static func markAsRead(_ subscription: Subscription, completion: @escaping MessageCompletion) {
-        let request = [
-            "msg": "method",
-            "method": "readMessages",
-            "params": [subscription.rid]
-        ] as [String: Any]
-
-        SocketManager.send(request) { response in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-            completion(response)
-        }
-    }
-
-    static func sendTextMessage(_ message: Message, completion: @escaping MessageCompletion) {
-
-        let request = [
-            "msg": "method",
-            "method": "sendMessage",
-            "params": [[
-                "_id": message.identifier ?? "",
-                "rid": message.subscription.rid,
-                "msg": message.text
-                ]]
-            ] as [String: Any]
-
-        SocketManager.send(request) { (response) in
-            guard !response.isError() else { return Log.debug(response.result.string) }
-            completion(response)
-        }
-    }
-
-    static func toggleFavorite(_ subscription: Subscription, completion: @escaping MessageCompletion) {
-        let request = [
-            "msg": "method",
-            "method": "toggleFavorite",
-            "params": [subscription.rid, !subscription.favorite]
-        ] as [String: Any]
-
-        SocketManager.send(request, completion: completion)
     }
 }
