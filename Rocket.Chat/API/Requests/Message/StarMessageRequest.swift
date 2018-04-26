@@ -42,4 +42,3 @@ final class StarMessageResource: APIResource {
         return raw?["success"].boolValue
     }
 }
-
