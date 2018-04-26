@@ -290,7 +290,7 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
-        delegate?.handleUsernameTapMessageCell(message, view: contentView, recognizer: recognizer)
+        delegate?.handleUsernameTapMessageCell(message, view: labelUsername, recognizer: recognizer)
     }
 }
 
