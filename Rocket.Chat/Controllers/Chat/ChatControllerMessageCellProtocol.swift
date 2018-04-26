@@ -1,4 +1,4 @@
- //
+//
 //  ChatControllerMessageCellProtocol.swift
 //  Rocket.Chat
 //
