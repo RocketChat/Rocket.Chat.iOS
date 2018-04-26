@@ -124,7 +124,7 @@ extension LoginService: ModelMappeable {
 
     func mapWordPress() {
         service = "wordpress"
-        scope = "openid"
+        scope = "auth"
 
         serverUrl = "https://public-api.wordpress.com"
         tokenPath = "/oauth2/token"
@@ -132,6 +132,8 @@ extension LoginService: ModelMappeable {
         buttonLabelText = "wordpress"
         buttonLabelColor = "#ffffff"
         buttonColor = "#1e8cbe"
+
+        callbackPath = "wordpress?close"
     }
 
     func mapCAS() {
