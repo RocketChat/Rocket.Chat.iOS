@@ -1,4 +1,4 @@
-//
+ //
 //  ChatControllerMessageCellProtocol.swift
 //  Rocket.Chat
 //
@@ -12,7 +12,7 @@ import MobilePlayer
 import FLAnimatedImage
 import SimpleImageViewer
 
-extension ChatViewController: ChatMessageCellProtocol {
+extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter {
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
 
         // set up controller
@@ -68,8 +68,8 @@ extension ChatViewController: ChatMessageCellProtocol {
     }
 
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
-        guard let username = message.user?.username else { return }
-        AppManager.openDirectMessage(username: username)
+        guard let user = message.user else { return }
+        presentActionSheetForUser(user, source: (view, nil))
     }
 
     func openURL(url: URL) {

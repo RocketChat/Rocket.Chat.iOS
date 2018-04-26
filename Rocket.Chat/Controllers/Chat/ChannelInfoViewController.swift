@@ -126,7 +126,6 @@ class ChannelInfoViewController: BaseViewController {
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let membersList = segue.destination as? MembersListViewController {
-            membersList.delegate = self
             membersList.data.subscription = self.subscription
         }
 
@@ -255,17 +254,4 @@ extension ChannelInfoViewController: UITableViewDataSource {
         return tableViewData[section].count
     }
 
-}
-
-// MARK: MembersListDelegate
-
-extension ChannelInfoViewController: MembersListDelegate {
-    func membersList(_ controller: MembersListViewController, didSelectUser user: User) {
-        guard let username = user.username else { return }
-
-        AppManager.openDirectMessage(username: username) {
-            controller.dismiss(animated: true, completion: nil)
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
 }

@@ -526,6 +526,7 @@
 		80D0CE742050BFBE0056B17F /* AuthManagerCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB82048581F00114F28 /* AuthManagerCurrentUser.swift */; };
 		80D0CE752050BFD20056B17F /* AuthUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8076FDB42048571200114F28 /* AuthUser.swift */; };
 		80D41DF6208FC57100034D1F /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DF5208FC57100034D1F /* PreferencesViewController.swift */; };
+		80D41DFA2092147300034D1F /* UserActionSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DF92092147300034D1F /* UserActionSheetPresenter.swift */; };
 		80D5637220592D32008896D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D5637120592D32008896D6 /* Assets.xcassets */; };
 		80D563752059325A008896D6 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D563742059325A008896D6 /* MimeType.swift */; };
 		80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5637620593533008896D6 /* ParseItemProviders.swift */; };
@@ -1172,6 +1173,7 @@
 		80D0CE6E20509C100056B17F /* SEAvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEAvatarView.swift; sourceTree = "<group>"; };
 		80D0CE7020509C230056B17F /* SEAvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SEAvatarView.xib; sourceTree = "<group>"; };
 		80D41DF5208FC57100034D1F /* PreferencesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
+		80D41DF92092147300034D1F /* UserActionSheetPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserActionSheetPresenter.swift; sourceTree = "<group>"; };
 		80D5637120592D32008896D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D563742059325A008896D6 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		80D5637620593533008896D6 /* ParseItemProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseItemProviders.swift; sourceTree = "<group>"; };
@@ -1654,6 +1656,7 @@
 		4161332F1D46CA2800E09DA2 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				80D41DFB2092152A00034D1F /* ActionSheets */,
 				41C275DD1D847FEE003C88CF /* Avatar */,
 				416133301D46CA3100E09DA2 /* Cells */,
 				41F167E51DAC450200775CCA /* Chat */,
@@ -1869,11 +1872,11 @@
 				419205481D52EDE6004EEC5F /* UILabelExtension.swift */,
 				994D1EDE205AB945007F29C8 /* UINavigationControllerExtension.swift */,
 				41E53A161E546F5500C3FBB3 /* UINibExtensions.swift */,
-				41A1748B1DD9F2F900188E3B /* UIViewControllerExtension.swift */,
 				41D5BC301DAFBEF4009A493A /* UIViewExtentions.swift */,
 				41B554C41FBF0C71000510B7 /* UIWindowExtensions.swift */,
 				41BAE3E61D71B26C00C2445A /* URLExtension.swift */,
 				8076FDE52048CD0600114F28 /* UserDefaults+Group.swift */,
+				41A1748B1DD9F2F900188E3B /* UIViewControllerExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2666,6 +2669,14 @@
 				807FB53E2045F36D00E21429 /* EmojioneSpec.swift */,
 			);
 			path = RCEmojiKit;
+			sourceTree = "<group>";
+		};
+		80D41DFB2092152A00034D1F /* ActionSheets */ = {
+			isa = PBXGroup;
+			children = (
+				80D41DF92092147300034D1F /* UserActionSheetPresenter.swift */,
+			);
+			path = ActionSheets;
 			sourceTree = "<group>";
 		};
 		80D563702058A8A7008896D6 /* Cells */ = {
@@ -3790,6 +3801,7 @@
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
 				8076FDC72048632300114F28 /* SubscriptionQueries.swift in Sources */,
+				80D41DFA2092147300034D1F /* UserActionSheetPresenter.swift in Sources */,
 				80054CFE1FDAFF5200F5ECF9 /* PushClient.swift in Sources */,
 				597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */,
 				414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */,
