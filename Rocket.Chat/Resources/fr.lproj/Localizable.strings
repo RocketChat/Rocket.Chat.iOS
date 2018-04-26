@@ -303,3 +303,7 @@
 "myaccount.settings.profile.new_password.password_required.title" = "Enter your password"; // TODO
 "myaccount.settings.profile.new_password.password_required.message" = "Your current password is required when setting a new password."; // TODO
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Password"; // TODO
+
+// User Action Sheet
+"user_action_sheet.conversation" = "Conversation"; // TODO
+

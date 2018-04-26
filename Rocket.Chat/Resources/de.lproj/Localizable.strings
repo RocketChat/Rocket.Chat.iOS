@@ -302,3 +302,6 @@
 "myaccount.settings.profile.new_password.password_required.title" = "Passwort eingeben";
 "myaccount.settings.profile.new_password.password_required.message" = "Das aktuelle Passwort wird zum Ändern benötigt.";
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Passwort";
+
+// User Action Sheet
+"user_action_sheet.conversation" = "Conversation"; // TODO
