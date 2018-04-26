@@ -17,10 +17,7 @@ extension Auth {
     }
 
     func canStarMessage(_ message: Message) -> CanStarMessageResult {
-        guard
-            let user = user,
-            let settings = settings
-        else {
+        guard let settings = settings else {
             return .unknown
         }
 
