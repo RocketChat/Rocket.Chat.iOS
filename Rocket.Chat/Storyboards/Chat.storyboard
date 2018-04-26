@@ -23,10 +23,6 @@
         <scene sceneID="sPN-TU-rHY">
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" id="A1E-cs-q8E" customClass="ChatViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rlV-iR-eWf"/>
-                        <viewControllerLayoutGuide type="bottom" id="AmO-ZE-7Kw"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OVX-LA-RMF" customClass="ChatView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
