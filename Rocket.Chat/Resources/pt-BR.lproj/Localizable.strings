@@ -161,6 +161,8 @@
 "chat.message.actions.copy" = "Copiar";
 "chat.message.actions.pin" = "Pinar";
 "chat.message.actions.unpin" = "Remover pino";
+"chat.message.actions.star" = "Favoritar";
+"chat.message.actions.unstar" = "Desfavoritar";
 "chat.message.actions.quote" = "Citar";
 "chat.message.actions.reply" = "Responder";
 "chat.message.actions.delete" = "Deletar mensagem";
