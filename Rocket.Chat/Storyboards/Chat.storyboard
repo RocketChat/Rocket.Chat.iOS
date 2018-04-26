@@ -26,7 +26,7 @@
                         <viewControllerLayoutGuide type="top" id="rlV-iR-eWf"/>
                         <viewControllerLayoutGuide type="bottom" id="AmO-ZE-7Kw"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="OVX-LA-RMF">
+                    <view key="view" contentMode="scaleToFill" id="OVX-LA-RMF" customClass="ChatView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

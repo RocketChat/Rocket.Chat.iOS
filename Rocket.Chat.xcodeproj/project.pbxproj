@@ -99,6 +99,7 @@
 		334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */; };
 		3353DBF8206787E500738D1C /* Themeable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3353DBF7206787E500738D1C /* Themeable.swift */; };
 		335F4F03207A31D3005E14AF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F4F02207A31D3005E14AF /* NotificationManager.swift */; };
+		3370D8BA20926E5700EEA225 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8B920926E5700EEA225 /* ChatView.swift */; };
 		339B692B2050449700F97392 /* KeyboardFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B6929205042D300F97392 /* KeyboardFrameView.swift */; };
 		33A5C9BE206A561400FE1C8F /* emojiNames.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9BD206A561400FE1C8F /* emojiNames.json */; };
 		33A5C9CA206A565800FE1C8F /* symbols.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C1206A565800FE1C8F /* symbols.json */; };
@@ -749,6 +750,7 @@
 		334CFFED20668DDF003CDB99 /* EmojiCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCollectionViewCell.swift; sourceTree = "<group>"; };
 		3353DBF7206787E500738D1C /* Themeable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Themeable.swift; sourceTree = "<group>"; };
 		335F4F02207A31D3005E14AF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
+		3370D8B920926E5700EEA225 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		339B6929205042D300F97392 /* KeyboardFrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameView.swift; sourceTree = "<group>"; };
 		33A5C9BD206A561400FE1C8F /* emojiNames.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emojiNames.json; sourceTree = "<group>"; };
 		33A5C9C1206A565800FE1C8F /* symbols.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = symbols.json; sourceTree = "<group>"; };
@@ -2218,6 +2220,7 @@
 				41F167E81DAC4D4300775CCA /* ChatTitleView.swift */,
 				41F167EA1DAC4D5500775CCA /* ChatTitleView.xib */,
 				411498E21FC7A99C00D66542 /* ChatTitleViewModel.swift */,
+				3370D8B920926E5700EEA225 /* ChatView.swift */,
 				339B6929205042D300F97392 /* KeyboardFrameView.swift */,
 				1435BFA21F9B601600FB2768 /* RCTextView.swift */,
 				80CFB5731F8DA55C00FC9715 /* ReplyView.swift */,
@@ -3603,6 +3606,7 @@
 				7798B4191F852D670074B2F4 /* CustomField.swift in Sources */,
 				8076FDB52048571200114F28 /* AuthUser.swift in Sources */,
 				4159720E1D3DB882002258F4 /* Mention.swift in Sources */,
+				3370D8BA20926E5700EEA225 /* ChatView.swift in Sources */,
 				41D701D81E6763D100FED2EE /* NSAttributedStringExtensions.swift in Sources */,
 				806401311FB09DE800990572 /* Permission.swift in Sources */,
 				807FB58420483A4D00E21429 /* ServersViewController.swift in Sources */,

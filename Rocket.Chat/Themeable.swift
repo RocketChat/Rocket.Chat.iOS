@@ -59,7 +59,8 @@ class Theme: NSObject {
 }
 
 @objc protocol Themeable {
-    @objc func applyTheme(_ theme: Theme)
+    func applyTheme(_ theme: Theme)
+    var theme: Theme? { get }
 }
 
 // TODO: These do not belong here
@@ -68,6 +69,8 @@ extension UIView: Themeable {
         backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
         subviews.forEach { $0.applyTheme(theme) }
     }
+
+    var theme: Theme? { return nil }
 }
 
 extension UILabel {
@@ -89,14 +92,20 @@ extension UISearchBar {
 // TODO: The add/insertSubview methods should not be overridden for UICollectionView,
 // but rather for a subclass of the same.
 extension UICollectionView {
+    override var theme: Theme? { return superview?.theme }
+
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        view.applyTheme(AppDelegate.theme)
+        if let theme = theme {
+            view.applyTheme(theme)
+        }
     }
 
     open override func addSubview(_ view: UIView) {
         super.addSubview(view)
-        view.applyTheme(AppDelegate.theme)
+        if let theme = theme {
+            view.applyTheme(theme)
+        }
     }
 }
 
@@ -117,6 +126,8 @@ extension UITextView {
 }
 
 extension UINavigationBar {
+    override var theme: Theme? { return AppDelegate.theme }
+
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         self.subviews.forEach { $0.applyTheme(theme) }
@@ -126,11 +137,15 @@ extension UINavigationBar {
 
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        view.applyTheme(AppDelegate.theme)
+        if let theme = theme {
+            view.applyTheme(theme)
+        }
     }
 }
 
 extension UIToolbar {
+    override var theme: Theme? { return AppDelegate.theme }
+
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         self.isTranslucent = false
@@ -141,11 +156,15 @@ extension UIToolbar {
 
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        view.applyTheme(AppDelegate.theme)
+        if let theme = theme {
+            view.applyTheme(theme)
+        }
     }
 }
 
 extension UITabBar {
+    override var theme: Theme? { return AppDelegate.theme }
+
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         self.barTintColor = theme.focusedBackground
@@ -155,11 +174,15 @@ extension UITabBar {
 
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        view.applyTheme(AppDelegate.theme)
+        if let theme = theme {
+            view.applyTheme(theme)
+        }
     }
 }
 
 extension SLKTextInputbar {
+    override var theme: Theme? { return AppDelegate.theme }
+
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         textView.keyboardAppearance = .dark
@@ -167,6 +190,8 @@ extension SLKTextInputbar {
 
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        view.applyTheme(AppDelegate.theme)
+        if let theme = theme {
+            view.applyTheme(theme)
+        }
     }
 }
