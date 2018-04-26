@@ -93,6 +93,7 @@ final class AuthSettings: Object {
     @objc dynamic var messageGroupingPeriod = AuthSettingsDefaults.messageGroupingPeriod
 
     @objc dynamic var messageAllowPinning = true
+    @objc dynamic var messageAllowStarring = true
 
     @objc dynamic var messageShowDeletedStatus: Bool = true
     @objc dynamic var messageAllowDeleting: Bool = true
