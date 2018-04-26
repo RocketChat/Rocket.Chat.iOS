@@ -12,7 +12,8 @@ import SwiftyJSON
 class LoginServicesRequest: APIRequest {
     typealias APIResourceType = LoginServicesResource
 
-    let requiredVersion: Version = Version(0, 64, 0)
+    // TODO: Re-enable when we have fixed the APIs.
+    let requiredVersion: Version = Version(999, 999, 999)
     let path = "/api/v1/settings.oauth"
 }
 
