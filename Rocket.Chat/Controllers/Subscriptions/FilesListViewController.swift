@@ -38,15 +38,18 @@ class FilesListViewData {
 
             let options = APIRequestOptions.paginated(count: pageSize, offset: currentPage*pageSize)
             let filesRequest = SubscriptionFilesRequest(roomId: subscription.rid, subscriptionType: subscription.type)
-            API.current()?.fetch(filesRequest, options: options, succeeded: { result in
-                self.handle(result: result, completion: completion)
-            }, errored: { _ in
-                Alert.defaultError.present()
+            API.current()?.fetch(filesRequest, options: options, completion: { [weak self] result in
+                switch result {
+                case .resource(let resource):
+                    self?.handle(result: resource, completion: completion)
+                default:
+                    Alert.defaultError.present()
+                }
             })
         }
     }
 
-    private func handle(result: SubscriptionFilesResult, completion: (() -> Void)? = nil) {
+    private func handle(result: SubscriptionFilesResource, completion: (() -> Void)? = nil) {
         DispatchQueue.main.async {
             self.showing += result.count ?? 0
             self.total = result.total ?? 0

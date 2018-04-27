@@ -36,10 +36,14 @@ final class SubscriptionCell: UITableViewCell {
 
     func updateSubscriptionInformatin() {
         guard let subscription = self.subscription else { return }
+        guard let user = AuthManager.currentUser() else { return }
 
         updateIconImage()
 
         labelName.text = subscription.displayName()
+        if subscription.displayName() == user.username {
+            labelName.text?.append(" (" + localized("subscriptions.you") + ")")
+        }
 
         if subscription.unread > 0 || subscription.alert {
             labelName.font = UIFont.preferredFont(forTextStyle: UIFontTextStyle.headline)

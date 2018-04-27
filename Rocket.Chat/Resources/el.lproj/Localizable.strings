@@ -11,6 +11,9 @@
 "alert.connection.invalid_url.title" = "Ωπ!";
 "alert.connection.invalid_url.message" = "Το URL που εισάγατε είναι άκυρο. Παρακαλούμε ελέγξτε το και ξαναπροσπαθήστε!";
 
+"alert.connection.not_secured.title" = "Oops!"; // TODO
+"alert.connection.not_secured.message" = "Could not establish a secure connection to the server. Please make sure the server supports SSL."; // TODO
+
 "alert.connection.socket_error.title" = "Ωπ!";
 "alert.connection.socket_error.message" = "Δεν είναι δυνατή η σύνδεση σε αυτόν τον εξυπηρετητή!";
 
@@ -52,19 +55,21 @@
 "alert.email_verification.title" = "Επαλήθευση Email";
 "alert.email_verification.message" = "Σας στείλαμε ένα email για να επιβεβαιώσουμε την εγγραφή σας. Αν δεν το λάβετε σύντομα, παρακαλούμε επιστρέψτε και ξαναπροσπαθήστε.";
 
+"alert.discarding_changes.title" = "Unsaved changes"; // TODO
+"alert.discarding_changes.message" = "Your unsaved changes have been discarded."; // TODO
 "alert.load_profile_error.title" = "Failed to load your profile"; // TODO
-"alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please, try again."; // TODO
+"alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please try again."; // TODO
 "alert.password_mismatch_error.title" = "Your password doesn't match"; // TODO
-"alert.password_mismatch_error.message" = "The confirmation field doesn't match with the password you've provided. Please, check it and try again."; // TODO
+"alert.password_mismatch_error.message" = "The confirmation field doesn't match with the password you've provided. Please check it and try again."; // TODO
 "alert.update_profile_error.title" = "Failed to update"; // TODO
-"alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please, try again."; // TODO
+"alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please try again."; // TODO
 "alert.update_password_error.title" = "Failed to change password"; // TODO
-"alert.update_password_error.message" = "Something wrong happened when changing your password. Please, try again."; // TODO
-"alert.update_profile_empty_fields.title" = "Please, fill the empty fields"; // TODO
+"alert.update_password_error.message" = "Something wrong happened when changing your password. Please try again."; // TODO
+"alert.update_profile_empty_fields.title" = "Please fill the empty fields"; // TODO
 "alert.update_profile_empty_fields.message" = "All your profile information are required and can't stay blank"; // TODO
 "alert.update_profile_invalid_email.title" = "Invalid e-mail"; // TODO
-"alert.update_profile_invalid_email.message" = "It seems that the e-mail you've entered is invalid. Please, fix it and try again."; // TODO
-"alert.password_empty_fields.title" = "Please, fill the empty fields"; // TODO
+"alert.update_profile_invalid_email.message" = "It seems that the e-mail you've entered is invalid. Please fix it and try again."; // TODO
+"alert.password_empty_fields.title" = "Please fill the empty fields"; // TODO
 "alert.password_empty_fields.message" = "Fill up the password and confirmation fields so you can update your password."; // TODO
 "alert.update_profile_success.title" = "Profile updated"; // TODO
 "alert.update_password_success.title" = "Password updated"; // TODO
@@ -104,6 +109,7 @@
 "subscriptions.favorites" = "Αγαπημένα";
 "subscriptions.channels" = "Κανάλια";
 "subscriptions.direct_messages" = "Άμεσα Μηνύματα";
+"subscriptions.you" = "you"; //TODO
 
 // Servers
 "servers.add_new_team" = "Προσθέστε νέα ομάδας";
@@ -155,6 +161,8 @@
 "chat.message.actions.copy" = "Αντιγράψτε";
 "chat.message.actions.pin" = "Καρφιτσώστε μήνυμα";
 "chat.message.actions.unpin" = "Ξεκαρφιτσώστε μήνυμα";
+"chat.message.actions.star" = "Star"; // TODO
+"chat.message.actions.unstar" = "Unstar"; // TODO
 "chat.message.actions.quote" = "Επιδείξτε μήνυμα";
 "chat.message.actions.reply" = "Απαντήστε σε μήνυμα";
 "chat.message.actions.delete" = "Διαγράψτε μήνυμα";
@@ -233,6 +241,7 @@
 // Messages List
 "chat.messages.list.title" = "Μηνύματα";
 "chat.messages.list.empty" = "Δεν βρέθηκαν μηνύματα";
+"chat.messages.list.search.placeholder" = "Search messages"; // TODO
 "chat.messages.pinned.list.title" = "Καρφιτσωμένα Μηνύματα";
 "chat.messages.starred.list.title" = "Αστερωμένα Μηνύματα";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
@@ -242,23 +251,26 @@
 // Settings
 "myaccount.settings.title" = "Ρυθμίσεις";
 "myaccount.settings.contactus" = "Επικοινωνήστε μαζί μας";
-"myaccount.settings.profile" = "Profile"; // TODO: 
+"myaccount.settings.profile" = "Profile"; // TODO:
 "myaccount.settings.license" = "Άδεια";
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Εικονίδιο Εφαρμογής";
 "myaccount.settings.version" = "Έκδοση: %@ (%@)";
+"myaccount.settings.server_version" = "Server Version: %@"; // TODO
 "myaccount.settings.web_browser" = "Web Browser"; // TODO
+"myaccount.settings.tracking.title" = "Send Crash Report"; // TODO
+"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it."; // TODO
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Επιλέξτε Εικονίδιο";
-"myaccount.settings.changeicon.header" = "Μπορείτε να αλλάξετε πώς το δικό σας Rocket.Chat+ εικονίδιο θα φαίνεται στην συσκευή σας. Παρακαλούμε επιλέξτε ένα από τα παρακάτω εικονίδια, όποιο σας αρέσει πιο πολύ.";
+"myaccount.settings.changeicon.header" = "Μπορείτε να αλλάξετε πώς το δικό σας Rocket.Chat εικονίδιο θα φαίνεται στην συσκευή σας. Παρακαλούμε επιλέξτε ένα από τα παρακάτω εικονίδια, όποιο σας αρέσει πιο πολύ.";
 "myaccount.settings.changeicon.errortitle" = "Δεν μπορούμε να αλλάξουμε εικονίδιο";
 "myaccount.settings.changeicon.iosversion" = "Εναλλακτικά εικονίδια εφαρμογής δεν υποστηρίζονται σε iOS εκδόσεις μικρότερες από 10.3";
 
 // Change Language
 "myaccount.settings.language.title" = "Μεταβολή Γλώσσας";
 "myaccount.settings.language.reset" = "Επαναφορά στην Προεπιλεγμένη";
-"myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat+ ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";
+"myaccount.settings.language.message" = "Έχετε μεταβάλει τις ρυθμίσεις γλώσσας. Πρέπει να επανεκκινήσετε το Rocket.Chat ώστε να τεθούν σε εφαρμογή οι νέες ρυθμίσεις.";
 
 // Choose Web Browser
 "web_browser.safari.title" = "Safari";
@@ -276,6 +288,7 @@
 "myaccount.settings.profile.actions.edit" = "Edit"; // TODO
 "myaccount.settings.profile.actions.change_password" = "Change your password"; // TODO
 "myaccount.settings.profile.section.profile" = "Profile"; // TODO
+"myaccount.settings.profile.section.password" = "Password"; // TODO
 "myaccount.settings.profile.name_placeholder" = "Name"; // TODO
 "myaccount.settings.profile.username_placeholder" = "Username"; // TODO
 "myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO
@@ -292,3 +305,6 @@
 "myaccount.settings.profile.new_password.password_required.title" = "Enter your password"; // TODO
 "myaccount.settings.profile.new_password.password_required.message" = "Your current password is required when setting a new password."; // TODO
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Password"; // TODO
+
+// User Action Sheet
+"user_action_sheet.conversation" = "Conversation"; // TODO

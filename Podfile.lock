@@ -14,7 +14,7 @@ PODS:
   - MBProgressHUD (1.1.0)
   - MobilePlayer (1.2.0)
   - OAuthSwift (1.2.0)
-  - RCMarkdownParser (3.0.4)
+  - RCMarkdownParser (3.0.6)
   - ReachabilitySwift (4.1.0)
   - Realm (3.1.1):
     - Realm/Headers (= 3.1.1)
@@ -97,7 +97,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   RCMarkdownParser:
-    :commit: 8d90207815f563f9e1a1a5b7a0a8fe1c1c94ff34
+    :commit: 43d99beabd1c39f8988d2e6631a46623b0116906
     :git: https://github.com/RocketChat/RCMarkdownParser.git
   SideMenuController:
     :commit: 267ddbc263304534df12e2b0dfbe8343f60891ab
@@ -119,7 +119,7 @@ SPEC CHECKSUMS:
   MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   MobilePlayer: 069b13482499f14c25b6ce53f63a91e17975b073
   OAuthSwift: 7fd6855b8e4d58eb5a30d156ea9bed7a8aecd1ca
-  RCMarkdownParser: db98166953cad4d0045d28f627d93330b36eb7ff
+  RCMarkdownParser: 518b616a4f48bb02247243544d4fd55c048288a4
   ReachabilitySwift: 6849231cd4e06559f3b9ef4a97a0a0f96d41e09f
   Realm: 42d1c38a5b1bbcc828b48a7ce702cb86fc68adf4
   RealmSwift: d31937ca6a6ee54acde64ec839523c0a3c04924b

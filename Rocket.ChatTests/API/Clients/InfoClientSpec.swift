@@ -38,4 +38,69 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
         })
         wait(for: [expectation], timeout: 2)
     }
+
+    //swiftlint:disable function_body_length
+    func testFetchLoginServices() {
+        let api = MockAPI()
+        let realm = testRealm()
+        let client = InfoClient(api: api)
+
+        api.nextResult = JSON([
+            "services": [
+                [
+                    "_id": "ooGRhWvEPrLx9vPFB",
+                    "service": "open",
+                    "clientId": "h8K3pqagWgqxBE2cp",
+                    "custom": true,
+                    "serverURL": "https://open.rocket.chat",
+                    "tokenPath": "/oauth/token",
+                    "identityPath": "/api/v1/me",
+                    "authorizePath": "/oauth/authorize",
+                    "scope": "openid",
+                    "buttonLabelText": "open",
+                    "buttonLabelColor": "#FFFFFF",
+                    "loginStyle": "popup",
+                    "buttonColor": "#13679A",
+                    "tokenSentVia": "payload",
+                    "identityTokenSentVia": nil,
+                    "usernameField": "username",
+                    "mergeUsers": true
+                ],
+                [
+                    "_id": "AKSJHdjkasdh",
+                    "service": "cardoso",
+                    "clientId": "h8K3pqagWgqxBE2cp",
+                    "custom": true,
+                    "serverURL": "https://cardoso.rocket.chat",
+                    "tokenPath": "/oauth/token",
+                    "identityPath": "/api/v1/me",
+                    "authorizePath": "/oauth/authorize",
+                    "scope": "openid",
+                    "buttonLabelText": "open",
+                    "buttonLabelColor": "#FFFFFF",
+                    "loginStyle": "popup",
+                    "buttonColor": "#13679A",
+                    "tokenSentVia": "payload",
+                    "identityTokenSentVia": nil,
+                    "usernameField": "username",
+                    "mergeUsers": true
+                ]],
+            "success": true
+        ])
+
+        try? realm.write {
+            realm.add(Auth.testInstance())
+        }
+
+        client.fetchLoginServices(realm: realm)
+
+        let expectation = XCTestExpectation(description: "login services added to realm")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            if realm.objects(LoginService.self).count == 2 {
+                expectation.fulfill()
+            }
+        })
+
+        wait(for: [expectation], timeout: 3)
+    }
 }

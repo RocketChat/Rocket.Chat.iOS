@@ -10,15 +10,11 @@ import Foundation
 import SwiftyJSON
 import RealmSwift
 
-final class MessageReaction: BaseModel {
+final class MessageReaction: Object {
     @objc dynamic var emoji: String?
     var usernames = List<String>()
 
     func map(emoji: String, json: JSON) {
-        if self.identifier == nil {
-            self.identifier = String.random()
-        }
-
         self.emoji = emoji
 
         self.usernames.removeAll()

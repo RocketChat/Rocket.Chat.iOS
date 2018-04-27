@@ -20,7 +20,6 @@ class ChannelSpec: XCTestCase {
 
         channel.map(json, realm: nil)
 
-        XCTAssert(channel.identifier != nil, "will have identifier")
         XCTAssert(channel.name == name, "will assign name")
     }
 }

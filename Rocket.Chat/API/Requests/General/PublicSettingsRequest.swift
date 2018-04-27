@@ -7,9 +7,10 @@
 //
 
 import Foundation
-typealias PublicSettingsResult = APIResult<PublicSettingsRequest>
 
-class PublicSettingsRequest: APIRequest {
+final class PublicSettingsRequest: APIRequest {
+    typealias APIResourceType = PublicSettingsResource
+
     let requiredVersion = Version(0, 62, 2)
     let path = "/api/v1/settings.public"
     let query: String? =
@@ -31,9 +32,11 @@ class PublicSettingsRequest: APIRequest {
                 "Accounts_OAuth_Github",
                 "Accounts_OAuth_Gitlab",
                 "Accounts_OAuth_Linkedin",
+                "Accounts_OAuth_Wordpress",
                 "LDAP_Enable",
                 "CAS_enabled",
                 "CAS_login_url",
+                "API_Gitlab_URL",
                 "Accounts_ShowFormLogin",
                 "Accounts_RegistrationForm",
                 "Accounts_PasswordReset",
@@ -59,16 +62,18 @@ class PublicSettingsRequest: APIRequest {
                 "Message_AllowEditing",
                 "Message_AllowEditing_BlockEditInMinutes",
                 "Message_AllowPinning",
+                "Message_AllowStarring",
                 "Message_GroupingPeriod",
                 "Message_MaxAllowedSize",
-                "Accounts_CustomFields"
+                "Accounts_CustomFields",
+                "First_Channel_After_Login"
             ]
         }
     }
     """.removingWhitespaces()
 }
 
-extension APIResult where T == PublicSettingsRequest {
+final class PublicSettingsResource: APIResource {
     var authSettings: AuthSettings {
         let authSettings = AuthSettings()
 

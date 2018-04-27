@@ -73,4 +73,8 @@ class MarkdownManager {
             4: [NSAttributedStringKey.font.rawValue: UIFont.boldSystemFont(ofSize: 16)]
         ]
     }
+
+    func transformAttributedString(_ attributedString: NSAttributedString) -> NSAttributedString {
+        return parser.attributedStringFromAttributedMarkdownString(attributedString)
+    }
 }

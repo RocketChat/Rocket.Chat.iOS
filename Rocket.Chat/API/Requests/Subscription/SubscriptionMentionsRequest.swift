@@ -9,9 +9,9 @@
 import SwiftyJSON
 import Foundation
 
-typealias SubscriptionMentionsResult = APIResult<SubscriptionMentionsRequest>
+final class SubscriptionMentionsRequest: APIRequest {
+    typealias APIResourceType = SubscriptionMentionsResource
 
-class SubscriptionMentionsRequest: APIRequest {
     let requiredVersion = Version(0, 63, 0)
     let path = "/api/v1/channels.getAllUserMentionsByChannel"
 
@@ -24,7 +24,7 @@ class SubscriptionMentionsRequest: APIRequest {
     }
 }
 
-extension APIResult where T == SubscriptionMentionsRequest {
+final class SubscriptionMentionsResource: APIResource {
     var messages: [Message]? {
         return raw?["mentions"].arrayValue.map {
             let message = Message()

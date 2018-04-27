@@ -10,8 +10,6 @@ import SwiftyJSON
 import Foundation
 import RealmSwift
 
-typealias SubscriptionFilesResult = APIResult<SubscriptionFilesRequest>
-
 fileprivate extension SubscriptionType {
     var path: String {
         switch self {
@@ -26,6 +24,8 @@ fileprivate extension SubscriptionType {
 }
 
 class SubscriptionFilesRequest: APIRequest {
+    typealias APIResourceType = SubscriptionFilesResource
+
     var path: String {
         return type.path
     }
@@ -41,7 +41,7 @@ class SubscriptionFilesRequest: APIRequest {
     }
 }
 
-extension APIResult where T == SubscriptionFilesRequest {
+final class SubscriptionFilesResource: APIResource {
     var files: [File]? {
         return raw?["files"].arrayValue.map {
             let file = File()

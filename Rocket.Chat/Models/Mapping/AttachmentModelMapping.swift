@@ -12,10 +12,6 @@ import RealmSwift
 
 extension AttachmentField: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
-        if self.identifier == nil {
-            self.identifier = String.random()
-        }
-
         self.short = values["short"].boolValue
         self.title = values["title"].stringValue
         self.value = values["value"].stringValue

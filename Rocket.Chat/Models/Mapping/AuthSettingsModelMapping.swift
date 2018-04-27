@@ -13,10 +13,6 @@ import RealmSwift
 extension AuthSettings: ModelMappeable {
     //swiftlint:disable function_body_length
     func map(_ values: JSON, realm: Realm?) {
-        if self.identifier == nil {
-            self.identifier = String.random()
-        }
-
         self.siteURL = objectForKey(object: values, key: "Site_Url")?.string
         self.cdnPrefixURL = objectForKey(object: values, key: "CDN_PREFIX")?.string
 
@@ -41,13 +37,17 @@ extension AuthSettings: ModelMappeable {
         self.isGitHubAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Github")?.bool ?? false
         self.isGitLabAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Gitlab")?.bool ?? false
         self.isLinkedInAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Linkedin")?.bool ?? false
+        self.isWordPressAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Wordpress")?.bool ?? false
         self.isLDAPAuthenticationEnabled = objectForKey(object: values, key: "LDAP_Enable")?.bool ?? false
         self.isCASEnabled = objectForKey(object: values, key: "CAS_enabled")?.bool ?? false
         self.casLoginUrl = objectForKey(object: values, key: "CAS_login_url")?.string
+        self.gitlabUrl = objectForKey(object: values, key: "API_Gitlab_URL")?.string
 
         self.isUsernameEmailAuthenticationEnabled = objectForKey(object: values, key: "Accounts_ShowFormLogin")?.bool ?? true
         self.rawRegistrationForm = objectForKey(object: values, key: "Accounts_RegistrationForm")?.string
         self.isPasswordResetEnabled = objectForKey(object: values, key: "Accounts_PasswordReset")?.bool ?? true
+
+        self.firstChannelAfterLogin = objectForKey(object: values, key: "First_Channel_After_Login")?.string
 
         // Authentication Placeholder Fields
         self.emailOrUsernameFieldPlaceholder = objectForKey(object: values, key: "Accounts_EmailOrUsernamePlaceholder")?.stringValue ?? ""
@@ -78,6 +78,7 @@ extension AuthSettings: ModelMappeable {
         }
 
         self.messageAllowPinning = objectForKey(object: values, key: "Message_AllowPinning")?.bool ?? true
+        self.messageAllowStarring = objectForKey(object: values, key: "Message_AllowStarring")?.bool ?? true
 
         self.messageShowDeletedStatus = objectForKey(object: values, key: "Message_ShowDeletedStatus")?.bool ?? true
         self.messageAllowDeleting = objectForKey(object: values, key: "Message_AllowDeleting")?.bool ?? true

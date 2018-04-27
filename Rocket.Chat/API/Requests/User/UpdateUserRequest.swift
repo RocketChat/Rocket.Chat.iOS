@@ -9,9 +9,9 @@
 import Foundation
 import SwiftyJSON
 
-typealias UserUpdateResult = APIResult<UpdateUserRequest>
+final class UpdateUserRequest: APIRequest {
+    typealias APIResourceType = UpdateUserResource
 
-class UpdateUserRequest: APIRequest {
     let requiredVersion = Version(0, 62, 2)
     let method: HTTPMethod = .post
     let path = "/api/v1/users.updateOwnBasicInfo"
@@ -62,7 +62,7 @@ class UpdateUserRequest: APIRequest {
     }
 }
 
-extension APIResult where T == UpdateUserRequest {
+final class UpdateUserResource: APIResource {
     var user: User? {
         guard let rawMessage = raw?["user"] else { return nil }
 
