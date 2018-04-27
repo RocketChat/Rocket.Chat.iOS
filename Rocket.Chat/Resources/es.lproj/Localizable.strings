@@ -161,6 +161,8 @@
 "chat.message.actions.copy" = "Copia";
 "chat.message.actions.pin" = "Pin";
 "chat.message.actions.unpin" = "Anula mensaje";
+"chat.message.actions.star" = "Star"; // TODO
+"chat.message.actions.unstar" = "Unstar"; // TODO
 "chat.message.actions.quote" = "Citar";
 "chat.message.actions.reply" = "Responder";
 "chat.message.actions.delete" = "Borrar mensaje";
