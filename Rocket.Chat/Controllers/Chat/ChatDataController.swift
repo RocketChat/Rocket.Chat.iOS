@@ -68,13 +68,30 @@ final class ChatDataController {
         let prevIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
 
         guard
-            let prevMessage = itemAt(prevIndexPath)?.message,
+            let previousObject = itemAt(prevIndexPath),
             let message = itemAt(indexPath)?.message
         else {
             return false
         }
 
+        var previousMessage = previousObject.message
+
+        if previousMessage == nil {
+            // Having an unread separator should not block the sequential messages
+            if previousObject.type != .unreadSeparator {
+                return false
+            }
+
+            // Here we get one object before the previous object to check
+            // if the message can be sequential
+            let prevIndexPath = IndexPath(row: prevIndexPath.row - 1, section: prevIndexPath.section)
+            if let message = itemAt(prevIndexPath)?.message {
+                previousMessage = message
+            }
+        }
+
         guard
+            let prevMessage = previousMessage,
             message.type.sequential && prevMessage.type.sequential &&
             message.groupable && prevMessage.groupable
         else {
@@ -173,7 +190,7 @@ final class ChatDataController {
                 var insert = true
                 for obj in data.filter({ $0.type == .daySeparator })
                     where firstMessage.timestamp.sameDayAs(obj.timestamp) {
-                            insert = false
+                        insert = false
                 }
 
                 if insert {
@@ -216,7 +233,7 @@ final class ChatDataController {
             }).count == 0
         }
 
-        for newObj in items {
+        for (idx, newObj) in items.enumerated() {
             if let lastObj = lastObj {
                 if needsDateSeparator(lastObj) {
                     insertDaySeparator(from: lastObj)

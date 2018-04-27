@@ -36,8 +36,8 @@ extension Message {
             subscription.type != .directMessage,
             let username = self.user?.username,
             username != AuthManager.currentUser()?.username
-            else {
-                return quoteString
+        else {
+            return quoteString
         }
 
         return " @\(username)\(quoteString)"
