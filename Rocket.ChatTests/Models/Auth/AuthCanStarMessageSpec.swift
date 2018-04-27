@@ -38,7 +38,8 @@ class AuthCanStarMessageSpec: XCTestCase, RealmTestCase {
 
         // Server permission doesn't allow to pin
         try? realm.write {
-            auth.settings?.messageAllowPinning = false
+            message.internalType = MessageType.text.rawValue
+            auth.settings?.messageAllowStarring = false
         }
 
         XCTAssertEqual(auth.canStarMessage(message), .notAllowed)

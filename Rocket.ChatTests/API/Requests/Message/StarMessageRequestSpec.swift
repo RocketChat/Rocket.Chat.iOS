@@ -25,7 +25,7 @@ class StarMessageRequestSpec: APITestCase {
             return XCTFail("body is valid json")
         }
 
-        XCTAssertEqual(request.url?.path, "/api/v1/chat.star", "path is correct")
+        XCTAssertEqual(request.url?.path, "/api/v1/chat.starMessage", "path is correct")
         XCTAssertEqual(request.httpMethod, "POST", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
         XCTAssertEqual(bodyJson["messageId"].string, "msgId", "messageId is correct")
@@ -44,7 +44,7 @@ class StarMessageRequestSpec: APITestCase {
             return XCTFail("body is valid json")
         }
 
-        XCTAssertEqual(request.url?.path, "/api/v1/chat.unstar", "path is correct")
+        XCTAssertEqual(request.url?.path, "/api/v1/chat.unStarMessage", "path is correct")
         XCTAssertEqual(request.httpMethod, "POST", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
         XCTAssertEqual(bodyJson["messageId"].string, "msgId", "messageId is correct")
