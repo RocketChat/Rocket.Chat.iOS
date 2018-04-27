@@ -170,7 +170,7 @@ extension AppManager {
 
         // If not, fetch it
         let currentRealm = Realm.current
-        let request = SubscriptionInfoRequest(roomName: name)
+        let request = RoomInfoRequest(roomName: name)
         API.current()?.fetch(request) { response in
             switch response {
             case .resource(let resource):

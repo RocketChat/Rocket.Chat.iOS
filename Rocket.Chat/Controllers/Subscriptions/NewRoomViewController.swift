@@ -139,7 +139,7 @@ class NewRoomViewController: BaseViewController {
             return
         }
 
-        let roomType: SubscriptionCreateType
+        let roomType: RoomCreateType
         if publicRoom {
             roomType = .channel
         } else {
@@ -158,9 +158,9 @@ class NewRoomViewController: BaseViewController {
         }
     }
 
-    fileprivate func executeRequestCreateRoom(roomName: String, roomType: SubscriptionCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
+    fileprivate func executeRequestCreateRoom(roomName: String, roomType: RoomCreateType, members: [String], readOnlyRoom: Bool, completion: @escaping (Bool, String?) -> Void) {
 
-        let request = SubscriptionCreateRequest(
+        let request = RoomCreateRequest(
             name: roomName,
             type: roomType,
             members: members,

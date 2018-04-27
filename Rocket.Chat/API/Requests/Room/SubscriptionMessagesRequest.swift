@@ -1,5 +1,5 @@
 //
-//  SubscriptionMessagesRequest.swift
+//  RoomMessagesRequest.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 9/21/17.
@@ -22,8 +22,8 @@ fileprivate extension SubscriptionType {
     }
 }
 
-final class SubscriptionMessagesRequest: APIRequest {
-    typealias APIResourceType = SubscriptionMessagesResource
+final class RoomMessagesRequest: APIRequest {
+    typealias APIResourceType = RoomMessagesResource
 
     var path: String {
         return type.path
@@ -60,7 +60,7 @@ final class SubscriptionMessagesRequest: APIRequest {
     }
 }
 
-final class SubscriptionMessagesResource: APIResource {
+final class RoomMessagesResource: APIResource {
     var messages: [Message?]? {
         return raw?["messages"].arrayValue.map {
             let message = Message()

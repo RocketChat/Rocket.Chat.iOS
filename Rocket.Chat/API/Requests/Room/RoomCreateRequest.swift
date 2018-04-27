@@ -1,5 +1,5 @@
 //
-//  SubscriptionCreateRequest.swift
+//  RoomCreateRequest.swift
 //  Rocket.Chat
 //
 //  Created by Bruno Macabeus Aquino on 28/09/17.
@@ -11,7 +11,7 @@
 
 import Foundation
 
-enum SubscriptionCreateType {
+enum RoomCreateType {
     case channel
     case group
 
@@ -25,8 +25,8 @@ enum SubscriptionCreateType {
     }
 }
 
-final class SubscriptionCreateRequest: APIRequest {
-    typealias APIResourceType = SubscriptionCreateResource
+final class RoomCreateRequest: APIRequest {
+    typealias APIResourceType = RoomCreateResource
 
     let method: HTTPMethod = .post
     var path: String {
@@ -34,11 +34,11 @@ final class SubscriptionCreateRequest: APIRequest {
     }
 
     let name: String
-    let type: SubscriptionCreateType
+    let type: RoomCreateType
     let members: [String]
     let readOnly: Bool
 
-    init(name: String, type: SubscriptionCreateType, members: [String] = [], readOnly: Bool = false) {
+    init(name: String, type: RoomCreateType, members: [String] = [], readOnly: Bool = false) {
         self.name = name
         self.type = type
         self.members = members
@@ -56,7 +56,7 @@ final class SubscriptionCreateRequest: APIRequest {
     }
 }
 
-class SubscriptionCreateResource: APIResource {
+class RoomCreateResource: APIResource {
     var success: Bool? {
         return raw?["success"].boolValue
     }

@@ -1,31 +1,29 @@
 //
-//  SubscriptionMembersRequest.swift
+//  RoomInfoRequest.swift
 //  Rocket.Chat
 //
-//  Created by Matheus Cardoso on 9/21/17.
+//  Created by Matheus Cardoso on 9/19/17.
 //  Copyright © 2017 Rocket.Chat. All rights reserved.
 //
+//  DOCS: https://rocket.chat/docs/developer-guides/rest-api/channels/info
 
 import SwiftyJSON
-import Foundation
 
 fileprivate extension SubscriptionType {
     var path: String {
         switch self {
         case .channel:
-            return "/api/v1/channels.members"
+            return "/api/v1/channels.info"
         case .group:
-            return "/api/v1/groups.members"
+            return "/api/v1/groups.info"
         case .directMessage:
-            return "/api/v1/dm.members"
+            return "/api/v1/dm.info"
         }
     }
 }
 
-final class SubscriptionMembersRequest: APIRequest {
-    typealias APIResourceType = SubscriptionMembersResource
-
-    let requiredVersion = Version(0, 59, 0)
+final class RoomInfoRequest: APIRequest {
+    typealias APIResourceType = RoomInfoResource
 
     var path: String {
         return type.path
@@ -52,24 +50,12 @@ final class SubscriptionMembersRequest: APIRequest {
     }
 }
 
-class SubscriptionMembersResource: APIResource {
-    var members: [User?]? {
-        return raw?["members"].arrayValue.map {
-            let user = User()
-            user.map($0, realm: nil)
-            return user
-        }
+final class RoomInfoResource: APIResource {
+    var channel: JSON? {
+        return raw?["channel"]
     }
 
-    var count: Int? {
-        return raw?["count"].int
-    }
-
-    var offset: Int? {
-        return raw?["offset"].int
-    }
-
-    var total: Int? {
-        return raw?["total"].int
+    var usernames: [String]? {
+        return channel?["usernames"].arrayValue.map { $0.stringValue }
     }
 }

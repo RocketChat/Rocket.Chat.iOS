@@ -1,5 +1,5 @@
 //
-//  SubscriptionInfoRequestSpec.swift
+//  RoomInfoRequestSpec.swift
 //  Rocket.ChatTests
 //
 //  Created by Matheus Cardoso on 9/19/17.
@@ -11,9 +11,9 @@ import SwiftyJSON
 
 @testable import Rocket_Chat
 
-class SubscriptionInfoRequestSpec: APITestCase {
+class RoomInfoRequestSpec: APITestCase {
     func testRequestWithRoomId() {
-        let preRequest = SubscriptionInfoRequest(roomId: "ByehQjC44FwMeiLbX")
+        let preRequest = RoomInfoRequest(roomId: "ByehQjC44FwMeiLbX")
         guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
@@ -26,7 +26,7 @@ class SubscriptionInfoRequestSpec: APITestCase {
     }
 
     func testRequestWithRoomName() {
-        let preRequest = SubscriptionInfoRequest(roomName: "testing")
+        let preRequest = RoomInfoRequest(roomName: "testing")
         guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
@@ -62,7 +62,7 @@ class SubscriptionInfoRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionInfoResource(raw: json)
+        let result = RoomInfoResource(raw: json)
 
         XCTAssertEqual(result.channel, json["channel"])
         XCTAssertEqual(result.usernames ?? [], ["testing", "testing1", "testing2"])
