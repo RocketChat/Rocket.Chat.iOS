@@ -192,7 +192,7 @@ extension ChatViewController {
         }
 
         controller.customEmojis = CustomEmoji.emojis()
-        controller.view.applyTheme(AppDelegate.theme)
+        controller.view.applyTheme(ThemeManager.theme)
 
         if UIDevice.current.userInterfaceIdiom == .phone {
             self.navigationController?.pushViewController(controller, animated: true)

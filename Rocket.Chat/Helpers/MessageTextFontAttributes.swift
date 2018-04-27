@@ -14,13 +14,13 @@ struct MessageTextFontAttributes {
 
     // TODO: Probably should not be changed here
     static var defaultFontColor: UIColor {
-        return AppDelegate.theme.bodyText
+        return ThemeManager.theme.bodyText
     } //UIColor.darkGray
     static var systemFontColor: UIColor {
-        return AppDelegate.theme.auxiliaryText
+        return ThemeManager.theme.auxiliaryText
     } //UIColor.lightGray
     static var failedFontColor: UIColor {
-        return AppDelegate.theme.auxiliaryBackground
+        return ThemeManager.theme.auxiliaryBackground
     } //UIColor.lightGray
 
     static let defaultFont = UIFont.systemFont(ofSize: defaultFontSize)

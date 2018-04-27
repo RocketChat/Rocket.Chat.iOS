@@ -169,11 +169,8 @@ final class ChatViewController: SLKTextViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationController?.navigationBar.barStyle = .black
         navigationController?.navigationBar.isTranslucent = false
-//        navigationController?.navigationBar.barTintColor = UIColor.white
-//        navigationController?.navigationBar.tintColor = UIColor(rgb: 0x5B5B5B, alphaVal: 1)
-        navigationController?.navigationBar.applyTheme(AppDelegate.theme)
+        navigationController?.navigationBar.applyTheme(ThemeManager.theme)
         setNeedsStatusBarAppearanceUpdate()
 
         collectionView?.isPrefetchingEnabled = true
@@ -278,7 +275,7 @@ final class ChatViewController: SLKTextViewController {
         let view = ChatTitleView.instantiateFromNib()
         self.navigationItem.titleView = view
         chatTitleView = view
-        view?.applyTheme(AppDelegate.theme)
+        view?.applyTheme(ThemeManager.theme)
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(chatTitleViewDidPressed))
         chatTitleView?.addGestureRecognizer(gesture)
@@ -332,7 +329,6 @@ final class ChatViewController: SLKTextViewController {
         let sizeHeight = collectionView?.contentSize.height ?? 0
         let offset = CGPoint(x: 0, y: max(sizeHeight - boundsHeight, 0))
         collectionView?.setContentOffset(offset, animated: animated)
-        scrollToBottomButtonIsVisible = false
     }
 
     internal func resetScrollToBottomButtonPosition() {

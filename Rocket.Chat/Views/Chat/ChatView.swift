@@ -9,5 +9,5 @@
 import UIKit
 
 class ChatView: UIView {
-    override var theme: Theme? { return AppDelegate.theme }
+    override var theme: Theme? { return ThemeManager.theme }
 }
