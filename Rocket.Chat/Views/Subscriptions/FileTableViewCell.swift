@@ -8,12 +8,13 @@
 
 import UIKit
 import SDWebImage
+import FLAnimatedImage
 
 class FileTableViewCell: UITableViewCell {
 
     static let identifier = String(describing: FileTableViewCell.self)
 
-    @IBOutlet weak var filePreview: UIImageView!
+    @IBOutlet weak var filePreview: FLAnimatedImageView!
     @IBOutlet weak var name: UILabel!
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var uploadedAt: UILabel!
