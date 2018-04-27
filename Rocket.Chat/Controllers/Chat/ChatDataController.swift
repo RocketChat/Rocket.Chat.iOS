@@ -233,7 +233,7 @@ final class ChatDataController {
             }).count == 0
         }
 
-        for (idx, newObj) in items.enumerated() {
+        for newObj in items {
             if let lastObj = lastObj {
                 if needsDateSeparator(lastObj) {
                     insertDaySeparator(from: lastObj)
