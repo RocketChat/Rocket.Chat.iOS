@@ -34,20 +34,20 @@ class AuthCanStarMessageSpec: XCTestCase, RealmTestCase {
             message.internalType = MessageType.userJoined.rawValue
         }
 
-        XCTAssertEqual(auth.canPinMessage(message), .notActionable)
+        XCTAssertEqual(auth.canStarMessage(message), .notActionable)
 
         // Server permission doesn't allow to pin
         try? realm.write {
             auth.settings?.messageAllowPinning = false
         }
 
-        XCTAssertEqual(auth.canPinMessage(message), .notAllowed)
+        XCTAssertEqual(auth.canStarMessage(message), .notAllowed)
 
         // Settings is nil
         try? realm.write {
             auth.settings = nil
         }
 
-        XCTAssertEqual(auth.canPinMessage(message), .unknown)
+        XCTAssertEqual(auth.canStarMessage(message), .unknown)
     }
 }
