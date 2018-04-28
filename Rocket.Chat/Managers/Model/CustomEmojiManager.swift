@@ -11,7 +11,10 @@ import RealmSwift
 
 struct CustomEmojiManager {
     static func sync() {
+        CustomEmoji.cachedEmojis = nil
+
         let currentRealm = Realm.current
+
         API.current()?.fetch(CustomEmojiRequest()) { response in
             switch response {
             case .resource(let resource):
@@ -36,7 +39,6 @@ struct CustomEmojiManager {
                 default: break
                 }
             }
-
         }
     }
 
