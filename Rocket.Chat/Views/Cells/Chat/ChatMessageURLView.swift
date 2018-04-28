@@ -68,5 +68,6 @@ extension ChatMessageURLView {
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         viewLeftBorder.backgroundColor = theme.auxiliaryText
+        labelURLDescription.textColor = theme.auxiliaryText
     }
 }

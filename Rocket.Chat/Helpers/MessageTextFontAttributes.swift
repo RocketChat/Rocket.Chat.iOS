@@ -20,7 +20,7 @@ struct MessageTextFontAttributes {
         return ThemeManager.theme.auxiliaryText
     } //UIColor.lightGray
     static var failedFontColor: UIColor {
-        return ThemeManager.theme.auxiliaryBackground
+        return ThemeManager.theme.auxiliaryText
     } //UIColor.lightGray
 
     static let defaultFont = UIFont.systemFont(ofSize: defaultFontSize)

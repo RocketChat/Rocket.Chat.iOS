@@ -210,7 +210,7 @@ final class ChatViewController: SLKTextViewController {
         }
 
         setupReplyView()
-        view.applyTheme(Theme.dark)
+        view.applyTheme(ThemeManager.theme)
     }
 
     override func viewWillAppear(_ animated: Bool) {

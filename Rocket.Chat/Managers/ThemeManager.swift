@@ -10,7 +10,7 @@ import Foundation
 import SlackTextViewController
 
 struct ThemeManager {
-    static let theme = Theme.dark
+    static let theme = Theme.light
 }
 
 @objc protocol Themeable {
@@ -39,7 +39,7 @@ extension UISearchBar {
         super.applyTheme(theme)
         barStyle = .black
         tintColor = theme.hyperlinkText
-        keyboardAppearance = .dark
+        keyboardAppearance = .light
     }
 }
 
@@ -63,8 +63,8 @@ extension SLKTextView {
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         self.textColor = theme.bodyText
-        self.layer.borderColor = theme.mutedAccent.cgColor
-        self.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.04910321301)
+        self.layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
+        self.backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
     }
 }
 
@@ -81,8 +81,9 @@ extension UINavigationBar {
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         self.subviews.forEach { $0.applyTheme(theme) }
-        self.barTintColor = theme.backgroundColor
+        self.barTintColor = theme.focusedBackground
         self.tintColor = theme.bodyText
+        self.barStyle = .default
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {
@@ -101,7 +102,7 @@ extension UIToolbar {
         self.isTranslucent = false
         self.barTintColor = theme.focusedBackground
         self.tintColor = theme.tintColor
-        self.barStyle = .black
+        self.barStyle = .default
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {
@@ -119,7 +120,7 @@ extension UITabBar {
         super.applyTheme(theme)
         self.barTintColor = theme.focusedBackground
         self.tintColor = theme.tintColor
-        self.barStyle = .black
+        self.barStyle = .default
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {
@@ -135,7 +136,7 @@ extension SLKTextInputbar {
 
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
-        textView.keyboardAppearance = .dark
+        textView.keyboardAppearance = .default
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {

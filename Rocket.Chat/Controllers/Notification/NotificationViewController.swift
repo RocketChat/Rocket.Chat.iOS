@@ -50,6 +50,7 @@ final class NotificationViewController: UIViewController {
 
     // TODO: This does not belong here
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        UIApplication.shared.delegate?.window??.rootViewController?.presentedViewController
         return UIApplication.shared.delegate?.window??.rootViewController?.preferredStatusBarStyle ?? .default
     }
 

@@ -20,6 +20,5 @@ extension ChatMessageDaySeparator {
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         seperatorLine.backgroundColor = theme.mutedAccent
-        labelTitle.textColor = theme.auxiliaryText
     }
 }

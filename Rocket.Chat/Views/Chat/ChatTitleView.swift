@@ -40,5 +40,11 @@ final class ChatTitleView: UIView {
             icon.tintColor = viewModel.iconColor
         }
     }
+}
 
+extension ChatTitleView {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+        labelTitle.textColor = theme.titleText
+    }
 }
