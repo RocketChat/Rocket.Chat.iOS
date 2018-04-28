@@ -175,4 +175,5 @@ class ChatMessageTextViewModelSpec: XCTestCase {
             XCTFail("View create failed")
         }
     }
+
 }

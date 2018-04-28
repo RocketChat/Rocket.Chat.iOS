@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bDT-Aq-lo9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="bDT-Aq-lo9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -161,19 +161,77 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" textLabel="A7K-i5-rCS" detailTextLabel="awd-rJ-YyE" style="IBUITableViewCellStyleSubtitle" id="lry-Zd-QVi">
+                                        <rect key="frame" x="0.0" y="415" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="lry-Zd-QVi" id="zKT-w3-7Hd">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Server Version: 0.64.0-rc2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="A7K-i5-rCS">
+                                                    <rect key="frame" x="16" y="5" width="201.5" height="20.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="open.rocket.chat" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="awd-rJ-YyE">
+                                                    <rect key="frame" x="16" y="25.5" width="96" height="14.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection headerTitle="" id="dbP-0D-Jfl">
+                                <string key="footerTitle">We track crashes on Fabric, but this is optional for you if you don't want us to track it. Please keep in mind that this information help us understading the crashes that you are having while using the app.</string>
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" id="93i-3u-Cb2">
+                                        <rect key="frame" x="0.0" y="495" width="375" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="93i-3u-Cb2" id="rNB-gF-HG7">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Hm8-9Z-8cD">
+                                                    <rect key="frame" x="310" y="6" width="51" height="31"/>
+                                                    <connections>
+                                                        <action selector="crashReportSwitchDidChangeWithSender:" destination="pKS-7b-iHv" eventType="valueChanged" id="jbd-Lp-BV1"/>
+                                                    </connections>
+                                                </switch>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Crash Report" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="evt-2t-Ueh">
+                                                    <rect key="frame" x="16" y="11.5" width="278" height="21"/>
+                                                    <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="evt-2t-Ueh" firstAttribute="centerY" secondItem="rNB-gF-HG7" secondAttribute="centerY" id="227-0q-tNE"/>
+                                                <constraint firstItem="Hm8-9Z-8cD" firstAttribute="leading" secondItem="evt-2t-Ueh" secondAttribute="trailing" constant="16" id="GMY-4g-b2z"/>
+                                                <constraint firstAttribute="trailing" secondItem="Hm8-9Z-8cD" secondAttribute="trailing" constant="16" id="SdP-IU-fIz"/>
+                                                <constraint firstItem="evt-2t-Ueh" firstAttribute="leading" secondItem="rNB-gF-HG7" secondAttribute="leading" constant="16" id="aJU-SD-SAK"/>
+                                                <constraint firstItem="Hm8-9Z-8cD" firstAttribute="centerY" secondItem="rNB-gF-HG7" secondAttribute="centerY" id="fMI-ro-sDw"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
                                 </cells>
                             </tableViewSection>
                             <tableViewSection headerTitle="" id="foh-5i-x3M">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" accessoryType="disclosureIndicator" indentationWidth="10" textLabel="yOP-5b-ROX" style="IBUITableViewCellStyleDefault" id="E1a-oW-6uO">
-                                        <rect key="frame" x="0.0" y="451" width="375" height="44"/>
+                                        <rect key="frame" x="0.0" y="635" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="E1a-oW-6uO" id="vmD-3V-kdv">
-                                            <rect key="frame" x="0.0" y="0.0" width="341" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="349" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Open FLEX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="yOP-5b-ROX">
-                                                    <rect key="frame" x="16" y="0.0" width="324" height="43.5"/>
+                                                    <rect key="frame" x="15" y="0.0" width="325" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                     <nil key="textColor"/>
@@ -204,8 +262,12 @@
                         <outlet property="labelLanguage" destination="TK4-N1-2eh" id="MEN-VF-dcq"/>
                         <outlet property="labelLicense" destination="kCF-5t-4W3" id="bt0-I5-0WI"/>
                         <outlet property="labelProfile" destination="v4Z-mC-WTf" id="F5v-mS-hxv"/>
+                        <outlet property="labelServerAddress" destination="awd-rJ-YyE" id="6nz-YL-OlT"/>
+                        <outlet property="labelServerVersion" destination="A7K-i5-rCS" id="FCf-OZ-zdd"/>
+                        <outlet property="labelTracking" destination="evt-2t-Ueh" id="EHK-gb-d8N"/>
                         <outlet property="labelVersion" destination="vOz-GO-Ifh" id="14X-a4-dRc"/>
                         <outlet property="labelWebBrowser" destination="drM-Ve-z71" id="EMJ-zW-IXg"/>
+                        <outlet property="switchTracking" destination="Hm8-9Z-8cD" id="NwL-DE-zCj"/>
                         <segue destination="14p-5u-LKz" kind="show" identifier="AppIcon" id="5Rh-qB-fEf"/>
                         <segue destination="G2F-kh-af5" kind="show" identifier="Language" id="UkX-RM-9MT"/>
                     </connections>

@@ -13,7 +13,7 @@ struct MemberCellData {
 
     var nameText: String {
         let utcText = member.utcOffset != nil ? "(UTC \(member.utcOffset ?? 0))" : ""
-        return "\(member.name ?? "") \(utcText)"
+        return "\(member.displayName()) \(utcText)"
     }
 
     var statusColor: UIColor {
@@ -30,7 +30,7 @@ struct MemberCellData {
     }
 }
 
-class MemberCell: UITableViewCell {
+final class MemberCell: UITableViewCell {
     static let identifier = "MemberCell"
 
     @IBOutlet weak var statusView: UIView! {

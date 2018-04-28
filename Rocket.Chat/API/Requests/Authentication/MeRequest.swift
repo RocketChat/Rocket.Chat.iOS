@@ -9,13 +9,13 @@
 
 import SwiftyJSON
 
-class MeRequest: APIRequest {
+final class MeRequest: APIRequest {
     typealias APIResourceType = MeResource
 
     let path = "/api/v1/me"
 }
 
-class MeResource: APIResource {
+final class MeResource: APIResource {
     var user: User? {
         guard let raw = raw else { return nil }
 

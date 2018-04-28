@@ -32,7 +32,7 @@ extension APIFetcher {
 
 typealias AnyAPIFetcher = Any & APIFetcher
 
-class API: APIFetcher {
+final class API: APIFetcher {
     let host: URL
     let version: Version
 
@@ -94,19 +94,40 @@ class API: APIFetcher {
             )
         }
 
+        #if DEBUG
+        Log.debug("[REST][REQUEST]: \(request.url?.absoluteString ?? "")")
+        #endif
+
         let task = session.dataTask(with: request) { (data, _, error) in
-            if let error = error {
-                completion?(.error(.error(error)))
+            if let error = error as NSError? {
+                #if DEBUG
+                Log.debug("[REST][RESULT][ERROR][\(request.url?.absoluteString ?? "")]: \(error)")
+                #endif
+
+                if NSError.sslErrors.contains(error.code) {
+                    completion?(.error(.notSecured))
+                } else {
+                    completion?(.error(.error(error)))
+                }
+
                 return
             }
 
             guard let data = data else {
+                #if DEBUG
+                Log.debug("[REST][RESULT][\(request.url?.absoluteString ?? "")]: No data.")
+                #endif
+
                 completion?(.error(.noData))
                 return
             }
 
             let json = try? JSON(data: data)
             completion?(APIResponse<R.APIResourceType>.resource(R.APIResourceType(raw: json)))
+
+            #if DEBUG
+            Log.debug("[REST][RESULT][\(request.url?.absoluteString ?? "")]: \(json?.rawString() ?? "").")
+            #endif
         }
 
         task.resume()

@@ -82,6 +82,16 @@ extension ChatViewController {
             actions.append(pin)
         }
 
+        if auth.canStarMessage(message) == .allowed, let userId = auth.user?.identifier {
+            let isStarred = message.starred.contains(userId)
+            let starMessage = isStarred ? localized("chat.message.actions.unstar") : localized("chat.message.actions.star")
+            let star = UIAlertAction(title: starMessage, style: .default, handler: { (_) in
+                API.current()?.client(MessagesClient.self).starMessage(message, star: !isStarred)
+            })
+
+            actions.append(star)
+        }
+
         if auth.canBlockMessage(message) == .allowed {
             let block = UIAlertAction(title: localized("chat.message.actions.block"), style: .default, handler: { [weak self] (_) in
                 DispatchQueue.main.async {

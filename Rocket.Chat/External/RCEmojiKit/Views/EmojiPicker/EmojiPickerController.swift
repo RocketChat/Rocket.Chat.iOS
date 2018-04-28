@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
+final class EmojiPickerController: UIViewController, RCEmojiKitLocalizable {
 
     var emojiPicked: ((String) -> Void)?
     var customEmojis: [Emoji] = []

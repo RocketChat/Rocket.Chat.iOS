@@ -11,6 +11,9 @@
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "A URL que você inseriu está incorreta ou é inválida. Confira se ela está informada corretamente e tente novamente, por favor!";
 
+"alert.connection.not_secured.title" = "Oops!"; // TODO
+"alert.connection.not_secured.message" = "Could not establish a secure connection to the server. Please make sure the server supports SSL."; // TODO
+
 "alert.connection.socket_error.title" = "Oops!";
 "alert.connection.socket_error.message" = "Não foi possível conectar a este servidor!";
 
@@ -106,6 +109,7 @@
 "subscriptions.favorites" = "Favoritos";
 "subscriptions.channels" = "Canais";
 "subscriptions.direct_messages" = "Mensagens Diretas";
+"subscriptions.you" = "Você";
 
 // Servers
 "servers.add_new_team" = "Adicionar novo time";
@@ -153,12 +157,14 @@
 "chat.message.actions.react" = "Adicionar reação";
 "chat.message.actions.block" = "Bloquear mensagens do usuário";
 "chat.message.actions.report" = "Reportar mensagem";
-"chat.message.actions.edit" = "Editar mensagem";
+"chat.message.actions.edit" = "Editar";
 "chat.message.actions.copy" = "Copiar";
-"chat.message.actions.pin" = "Pinar mensagem";
-"chat.message.actions.unpin" = "Remover pino da mensagem";
-"chat.message.actions.quote" = "Citar mensagem";
-"chat.message.actions.reply" = "Responder mensagem";
+"chat.message.actions.pin" = "Pinar";
+"chat.message.actions.unpin" = "Remover pino";
+"chat.message.actions.star" = "Favoritar";
+"chat.message.actions.unstar" = "Desfavoritar";
+"chat.message.actions.quote" = "Citar";
+"chat.message.actions.reply" = "Responder";
 "chat.message.actions.delete" = "Deletar mensagem";
 "chat.message.actions.delete.confirm.title" = "Deletar esta mensagem?";
 "chat.message.actions.delete.confirm.message" = "Tem certeza que deseja deletar esta mensagem? A mensagem não poderá ser recuperada.";
@@ -234,6 +240,7 @@
 // Messages List
 "chat.messages.list.title" = "Mensagens";
 "chat.messages.list.empty" = "Nenhuma mensagem encontrada";
+"chat.messages.list.search.placeholder" = "Pesquisar";
 "chat.messages.pinned.list.title" = "Mensagens Pinadas";
 "chat.messages.starred.list.title" = "Mensagens Favoritas";
 "chat.messages.mentions.list.title" = "Menções";
@@ -246,7 +253,10 @@
 "myaccount.settings.language" = "Idioma";
 "myaccount.settings.appicon" = "Ícone do App";
 "myaccount.settings.version" = "Versão: %@ (%@)";
+"myaccount.settings.server_version" = "Versão do servidor: %@";
 "myaccount.settings.web_browser" = "Navegador";
+"myaccount.settings.tracking.title" = "Relatórios de error";
+"myaccount.settings.tracking.footer" = "Nós nunca registramos as suas conversas. O envio de relatórios de erro contém apenas informações relevantes relacionadas ao erro ocorrido para nos ajudar a corrigi-los.";
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Escolher Ícone";
@@ -292,3 +302,6 @@
 "myaccount.settings.profile.new_password.password_required.title" = "Insira sua senha";
 "myaccount.settings.profile.new_password.password_required.message" = "É necessário inserir sua senha atual para criar uma nova senha.";
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Senha";
+
+// User Action Sheet
+"user_action_sheet.conversation" = "Conversa";

@@ -11,6 +11,12 @@ import RealmSwift
 
 struct AppManager {
 
+    /**
+     This key will be the default URL (and unique) of the app to be
+     used on authenticating in a new server. This is not used in our
+     App Store application, but can be used in forks or whitelabels
+     that require a unique URL to be used.
+    */
     private static let kApplicationServerURLKey = "RC_SERVER_URL"
 
     /**
@@ -99,7 +105,7 @@ extension AppManager {
     }
 
     static func reloadApp() {
-        SocketManager.sharedInstance.connectionHandlers = [:]
+        SocketManager.sharedInstance.connectionHandlers.removeAllObjects()
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {

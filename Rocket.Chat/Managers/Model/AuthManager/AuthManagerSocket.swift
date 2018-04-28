@@ -108,6 +108,7 @@ extension AuthManager {
             let result = response.result
 
             let auth = Auth()
+            auth.internalFirstChannelOpened = false
             auth.lastSubscriptionFetch = nil
             auth.lastAccess = Date()
             auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
