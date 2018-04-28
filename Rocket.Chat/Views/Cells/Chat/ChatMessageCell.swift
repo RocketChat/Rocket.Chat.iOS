@@ -16,7 +16,7 @@ protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoVi
 }
 
 final class ChatMessageCell: UICollectionViewCell {
-    static let minimumHeight = CGFloat(55)
+    static let minimumHeight = CGFloat(56)
     static let identifier = "ChatMessageCell"
 
     weak var longPressGesture: UILongPressGestureRecognizer?
@@ -53,6 +53,8 @@ final class ChatMessageCell: UICollectionViewCell {
         didSet {
             avatarView.layer.cornerRadius = 4
             avatarView.layer.masksToBounds = true
+            avatarView.layer.borderColor = UIColor.black.withAlphaComponent(0.1).cgColor
+            avatarView.layer.borderWidth = 0.5
         }
     }
 
@@ -103,7 +105,7 @@ final class ChatMessageCell: UICollectionViewCell {
 
     var sequential: Bool = false {
         didSet {
-            avatarContainerHeightConstraint.constant = sequential ? 0 : 35
+            avatarContainerHeightConstraint.constant = sequential ? 0 : 40
             labelUsernameHeightConstraint.constant = sequential ? 0 : 21
             labelDateHeightConstraint.constant = sequential ? 0 : 21
         }
@@ -310,9 +312,9 @@ extension ChatMessageCell {
         let fullWidth = width
         let attributedString = MessageTextCacheManager.shared.message(for: message)
 
-        var total = (CGFloat)(sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
+        var total = (CGFloat)(sequential ? 15 : 35) + (message.reactions.count > 0 ? 40 : 0)
         if attributedString?.string ?? "" != "" {
-            total += (attributedString?.heightForView(withWidth: fullWidth - 55) ?? 0)
+            total += (attributedString?.heightForView(withWidth: fullWidth - 76) ?? 0)
         }
 
         for url in message.urls {
