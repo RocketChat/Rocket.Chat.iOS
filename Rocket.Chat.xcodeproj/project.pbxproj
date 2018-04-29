@@ -101,6 +101,11 @@
 		335F4F03207A31D3005E14AF /* NotificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 335F4F02207A31D3005E14AF /* NotificationManager.swift */; };
 		3370D8BA20926E5700EEA225 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8B920926E5700EEA225 /* ChatView.swift */; };
 		3370D8BC2093570D00EEA225 /* ThemeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8BB2093570D00EEA225 /* ThemeManager.swift */; };
+		3370D8BE2095978800EEA225 /* UserActionSheetPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8BD2095978800EEA225 /* UserActionSheetPresenter.swift */; };
+		3370D8C0209598C100EEA225 /* AuthCanStarMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8BF209598C000EEA225 /* AuthCanStarMessage.swift */; };
+		3370D8C22095995900EEA225 /* StarMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C12095995800EEA225 /* StarMessageRequest.swift */; };
+		3370D8C42095998E00EEA225 /* StarMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */; };
+		3370D8C6209599E600EEA225 /* AuthCanStarMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */; };
 		339B692B2050449700F97392 /* KeyboardFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B6929205042D300F97392 /* KeyboardFrameView.swift */; };
 		33A5C9BE206A561400FE1C8F /* emojiNames.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9BD206A561400FE1C8F /* emojiNames.json */; };
 		33A5C9CA206A565800FE1C8F /* symbols.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C1206A565800FE1C8F /* symbols.json */; };
@@ -753,6 +758,11 @@
 		335F4F02207A31D3005E14AF /* NotificationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationManager.swift; sourceTree = "<group>"; };
 		3370D8B920926E5700EEA225 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		3370D8BB2093570D00EEA225 /* ThemeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeManager.swift; sourceTree = "<group>"; };
+		3370D8BD2095978800EEA225 /* UserActionSheetPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserActionSheetPresenter.swift; sourceTree = "<group>"; };
+		3370D8BF209598C000EEA225 /* AuthCanStarMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessage.swift; sourceTree = "<group>"; };
+		3370D8C12095995800EEA225 /* StarMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarMessageRequest.swift; sourceTree = "<group>"; };
+		3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarMessageRequestSpec.swift; sourceTree = "<group>"; };
+		3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessageSpec.swift; sourceTree = "<group>"; };
 		339B6929205042D300F97392 /* KeyboardFrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameView.swift; sourceTree = "<group>"; };
 		33A5C9BD206A561400FE1C8F /* emojiNames.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emojiNames.json; sourceTree = "<group>"; };
 		33A5C9C1206A565800FE1C8F /* symbols.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = symbols.json; sourceTree = "<group>"; };
@@ -2444,12 +2454,12 @@
 			children = (
 				806728FE20079734009FE94D /* DeleteMessageRequest.swift */,
 				806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */,
-				80D41DFC2092378400034D1F /* StarMessageRequest.swift */,
 				8067DA9A206BC71A005E3369 /* ReactMessageRequest.swift */,
 				80054CF01FD9505A00F5ECF9 /* SendMessageRequest.swift */,
 				8032E3E720362EF5009D33CE /* UpdateMessageRequest.swift */,
 				80054CF61FD9AA1B00F5ECF9 /* UploadMessageRequest.swift */,
 				99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */,
+				3370D8C12095995800EEA225 /* StarMessageRequest.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -2460,9 +2470,9 @@
 				8067290020081046009FE94D /* DeleteMessageRequestSpec.swift */,
 				806C59A41FBB2F4C00C32D0A /* PostMessageRequestSpec.swift */,
 				8067DA9C206BC7D2005E3369 /* ReactMessageRequestSpec.swift */,
-				80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */,
 				80213C0A1FDFE35C00809E14 /* UploadMessageRequestSpec.swift */,
 				99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */,
+				3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */,
 			);
 			path = Message;
 			sourceTree = "<group>";
@@ -2475,7 +2485,7 @@
 				8076FDAD2048567B00114F28 /* AuthCanDeleteMessage.swift */,
 				8076FDB1204856CC00114F28 /* AuthCanEditMessage.swift */,
 				807C7BF820740F3C006B600E /* AuthCanPinMessage.swift */,
-				80D41DFE20923AA600034D1F /* AuthCanStarMessage.swift */,
+				3370D8BF209598C000EEA225 /* AuthCanStarMessage.swift */,
 				8076FDB42048571200114F28 /* AuthUser.swift */,
 			);
 			path = Auth;
@@ -2685,7 +2695,7 @@
 		80D41DFB2092152A00034D1F /* ActionSheets */ = {
 			isa = PBXGroup;
 			children = (
-				80D41DF92092147300034D1F /* UserActionSheetPresenter.swift */,
+				3370D8BD2095978800EEA225 /* UserActionSheetPresenter.swift */,
 			);
 			path = ActionSheets;
 			sourceTree = "<group>";
@@ -2693,8 +2703,8 @@
 		80D41E0320924A6500034D1F /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */,
 				416133391D46E0A200E09DA2 /* AuthSpec.swift */,
-				80D41E0420924A8200034D1F /* AuthCanStarMessageSpec.swift */,
 			);
 			path = Auth;
 			sourceTree = "<group>";
@@ -3643,6 +3653,7 @@
 				412719461E6B403700461FEE /* RegisterUsernameViewController.swift in Sources */,
 				806C59A21FBB0BD600C32D0A /* PostMessageRequest.swift in Sources */,
 				41BAE3E71D71B26C00C2445A /* URLExtension.swift in Sources */,
+				3370D8C0209598C100EEA225 /* AuthCanStarMessage.swift in Sources */,
 				4174CB0D1D2D994A0086DAC8 /* ConnectServerViewController.swift in Sources */,
 				4199A9891DABCC570035F820 /* Emojione.swift in Sources */,
 				418C74431FA3813F00499577 /* CompoundPickerViewDelegate.swift in Sources */,
@@ -3656,7 +3667,6 @@
 				8013F8651FD5E13600EE1A4E /* APIExtensions.swift in Sources */,
 				4147CE7F1F5EB27B00C322C3 /* AddServerCell.swift in Sources */,
 				A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */,
-				80D41DFF20923AA600034D1F /* AuthCanStarMessage.swift in Sources */,
 				8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */,
 				4174CB171D2D9BB70086DAC8 /* AuthViewController.swift in Sources */,
 				418688111E53CC86002F785C /* ChatControllerMessageActions.swift in Sources */,
@@ -3688,6 +3698,7 @@
 				412BCC871E55C6B800F7F4EE /* ChatMessageTextView.swift in Sources */,
 				140A95E6202F7074003FD564 /* DrawingControllerDelegate.swift in Sources */,
 				80054CF31FD951B100F5ECF9 /* MessagesClient.swift in Sources */,
+				3370D8C22095995900EEA225 /* StarMessageRequest.swift in Sources */,
 				33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */,
 				99DBB8742090360600382DB2 /* MessagesListControllerSearch.swift in Sources */,
 				80AE2542203E61AF00DC2867 /* ChatMessageUnreadSeparator.swift in Sources */,
@@ -3728,6 +3739,7 @@
 				414EFF921E54FE69004F001F /* AuthExtensions.swift in Sources */,
 				41EE15821E05BF9600754D45 /* ChatControllerSocketConnectionHandler.swift in Sources */,
 				414A1FFA1D46395400093E10 /* SocketManager.swift in Sources */,
+				3370D8BE2095978800EEA225 /* UserActionSheetPresenter.swift in Sources */,
 				800FCD4E1F728EC800D9A692 /* ChannelInfoDetailCell.swift in Sources */,
 				4151B45C1E2D1E5800F8AA1B /* AuthSettingsModelMapping.swift in Sources */,
 				806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */,
@@ -3766,7 +3778,6 @@
 				334CFFEE20668DDF003CDB99 /* EmojiCollectionViewCell.swift in Sources */,
 				415DC7F61F67F5D30039FB4F /* NetworkManager.swift in Sources */,
 				807371A61F96A4FF00D53ADF /* LoginServiceModelHandler.swift in Sources */,
-				80D41DFD2092378400034D1F /* StarMessageRequest.swift in Sources */,
 				41C45AEF1DFAD42800D9969C /* ChatDataController.swift in Sources */,
 				801DF8151FD7172500302CC8 /* SubscriptionUserView.swift in Sources */,
 				4112DC591FFFB9B2005995E1 /* ModelHandler.swift in Sources */,
@@ -3825,7 +3836,6 @@
 				4174CB131D2D99960086DAC8 /* BaseViewController.swift in Sources */,
 				897083D31F8CF08100233561 /* CheckTableViewCell.swift in Sources */,
 				8076FDC72048632300114F28 /* SubscriptionQueries.swift in Sources */,
-				80D41DFA2092147300034D1F /* UserActionSheetPresenter.swift in Sources */,
 				80054CFE1FDAFF5200F5ECF9 /* PushClient.swift in Sources */,
 				597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */,
 				414A1FFC1D46395900093E10 /* SocketResponse.swift in Sources */,
@@ -3910,7 +3920,7 @@
 				411498E11FC7A85400D66542 /* ChatTitleViewModelSpec.swift in Sources */,
 				80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */,
 				80247B3F1FE8582700878833 /* MessageReactionSpec.swift in Sources */,
-				80D41E0520924A8200034D1F /* AuthCanStarMessageSpec.swift in Sources */,
+				3370D8C6209599E600EEA225 /* AuthCanStarMessageSpec.swift in Sources */,
 				8013F8431FD02D8F00EE1A4E /* ChatCollectionViewFlowLayoutSpec.swift in Sources */,
 				77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */,
 				807C7C1020751F40006B600E /* SpotlightClientSpec.swift in Sources */,
@@ -3948,7 +3958,7 @@
 				80213C0B1FDFE35C00809E14 /* UploadMessageRequestSpec.swift in Sources */,
 				80C110891FB62F7B00205BB1 /* OAuthViewControllerSpec.swift in Sources */,
 				411119B81F6825C30019854B /* NetworkManagerSpec.swift in Sources */,
-				80D41E01209248F800034D1F /* StarMessageRequestSpec.swift in Sources */,
+				3370D8C42095998E00EEA225 /* StarMessageRequestSpec.swift in Sources */,
 				99F41BD020658C3400B240FC /* NewPasswordViewModelSpec.swift in Sources */,
 				416296F91F41B42B00BCCEDD /* UploadHelperSpec.swift in Sources */,
 				80A63C511F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift in Sources */,
