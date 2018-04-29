@@ -9,7 +9,7 @@
 import UIKit
 import AudioToolbox
 
-final class NotificationViewController: UIViewController {
+final class NotificationViewController: TopTransparentViewController {
 
     static let shared = NotificationViewController(nibName: "NotificationViewController", bundle: nil)
 
@@ -46,11 +46,6 @@ final class NotificationViewController: UIViewController {
         view.layer.shadowRadius = 8.0
         view.layer.shadowOffset = CGSize(width: 0, height: 0)
         view.clipsToBounds = true
-    }
-
-    // TODO: This does not belong here
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return UIApplication.shared.delegate?.window??.rootViewController?.preferredStatusBarStyle ?? .default
     }
 
     override func viewWillLayoutSubviews() {

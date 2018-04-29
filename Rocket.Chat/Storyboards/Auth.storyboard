@@ -37,7 +37,7 @@
                         <viewControllerLayoutGuide type="top" id="yxx-YJ-SEM"/>
                         <viewControllerLayoutGuide type="bottom" id="4sW-vJ-FiJ"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="hnM-NP-iCl">
+                    <view key="view" contentMode="scaleToFill" id="hnM-NP-iCl" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -173,7 +173,7 @@
                         <viewControllerLayoutGuide type="top" id="f3J-1q-ulY"/>
                         <viewControllerLayoutGuide type="bottom" id="lpb-3T-cNi"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="JO1-X2-MzO">
+                    <view key="view" contentMode="scaleToFill" id="JO1-X2-MzO" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -426,7 +426,7 @@
                         <viewControllerLayoutGuide type="top" id="hj4-d5-2Sm"/>
                         <viewControllerLayoutGuide type="bottom" id="xMK-Ku-eUa"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Lg9-5C-7wV">
+                    <view key="view" contentMode="scaleToFill" id="Lg9-5C-7wV" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -578,7 +578,7 @@
                         <viewControllerLayoutGuide type="top" id="Cvn-8U-8Yn"/>
                         <viewControllerLayoutGuide type="bottom" id="82g-Z9-U2L"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="KqA-fP-IfF">
+                    <view key="view" contentMode="scaleToFill" id="KqA-fP-IfF" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -693,7 +693,7 @@
                         <viewControllerLayoutGuide type="top" id="Wwu-n3-bEd"/>
                         <viewControllerLayoutGuide type="bottom" id="6bu-4I-tQa"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="Ruc-70-sqZ">
+                    <view key="view" contentMode="scaleToFill" id="Ruc-70-sqZ" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -806,6 +806,6 @@
         <image name="OnePassword-Button" width="27" height="27"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="O3e-MC-N7z"/>
+        <segue reference="oar-7v-T9W"/>
     </inferredMetricsTieBreakers>
 </document>

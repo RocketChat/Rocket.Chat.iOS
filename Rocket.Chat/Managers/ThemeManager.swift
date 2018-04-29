@@ -64,6 +64,7 @@ extension UISearchBar {
     }
 }
 
+// TODO: Set the correct color
 extension UIActivityIndicatorView {
     override func applyTheme() {
         super.applyTheme()

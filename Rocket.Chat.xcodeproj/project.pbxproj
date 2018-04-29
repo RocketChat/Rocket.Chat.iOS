@@ -107,6 +107,8 @@
 		3370D8C42095998E00EEA225 /* StarMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */; };
 		3370D8C6209599E600EEA225 /* AuthCanStarMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */; };
 		3370D8C82095F56B00EEA225 /* SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C72095F56A00EEA225 /* SubscriptionsView.swift */; };
+		3370D8CE2096261F00EEA225 /* NotThemeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8CD2096261F00EEA225 /* NotThemeableView.swift */; };
+		3370D8D12096677A00EEA225 /* TopTransparentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */; };
 		339B692B2050449700F97392 /* KeyboardFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B6929205042D300F97392 /* KeyboardFrameView.swift */; };
 		33A5C9BE206A561400FE1C8F /* emojiNames.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9BD206A561400FE1C8F /* emojiNames.json */; };
 		33A5C9CA206A565800FE1C8F /* symbols.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C1206A565800FE1C8F /* symbols.json */; };
@@ -765,6 +767,8 @@
 		3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarMessageRequestSpec.swift; sourceTree = "<group>"; };
 		3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessageSpec.swift; sourceTree = "<group>"; };
 		3370D8C72095F56A00EEA225 /* SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsView.swift; sourceTree = "<group>"; };
+		3370D8CD2096261F00EEA225 /* NotThemeableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotThemeableView.swift; sourceTree = "<group>"; };
+		3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTransparentViewController.swift; sourceTree = "<group>"; };
 		339B6929205042D300F97392 /* KeyboardFrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameView.swift; sourceTree = "<group>"; };
 		33A5C9BD206A561400FE1C8F /* emojiNames.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emojiNames.json; sourceTree = "<group>"; };
 		33A5C9C1206A565800FE1C8F /* symbols.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = symbols.json; sourceTree = "<group>"; };
@@ -1531,6 +1535,14 @@
 			path = SubscriptionManager;
 			sourceTree = "<group>";
 		};
+		3370D8CF2096671C00EEA225 /* Themeable */ = {
+			isa = PBXGroup;
+			children = (
+				3370D8CD2096261F00EEA225 /* NotThemeableView.swift */,
+			);
+			path = Themeable;
+			sourceTree = "<group>";
+		};
 		33A5C9C0206A565800FE1C8F /* Emojis */ = {
 			isa = PBXGroup;
 			children = (
@@ -1561,6 +1573,7 @@
 			children = (
 				33F73B2F2073F24200F03F29 /* NotificationViewController.swift */,
 				333207FE20766E4F00AD3290 /* NotificationViewController.xib */,
+				3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */,
 			);
 			path = Notification;
 			sourceTree = "<group>";
@@ -1682,6 +1695,7 @@
 				33F73B292073BDD800F03F29 /* Notification */,
 				418C4DC41DC4C05000ABED4C /* Sections */,
 				41A91AED1E51C4E5005C94B1 /* Subscriptions */,
+				3370D8CF2096671C00EEA225 /* Themeable */,
 				7758A7621F8FA34300FAA244 /* UIPickerView */,
 			);
 			path = Views;
@@ -3693,6 +3707,7 @@
 				80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */,
 				41D4ABAB1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
+				3370D8D12096677A00EEA225 /* TopTransparentViewController.swift in Sources */,
 				80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */,
 				806DB94820695BCF004ED8ED /* AuthViewControllerConnectionHandler.swift in Sources */,
 				339B692B2050449700F97392 /* KeyboardFrameView.swift in Sources */,
@@ -3870,6 +3885,7 @@
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
 				80DC9A6C206BA95600032BE0 /* Localized.swift in Sources */,
+				3370D8CE2096261F00EEA225 /* NotThemeableView.swift in Sources */,
 				14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* SubscriptionCreateRequest.swift in Sources */,

@@ -18,7 +18,7 @@ class MainChatViewController: SideMenuController, SideMenuControllerDelegate {
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        return centerViewController.preferredStatusBarStyle
     }
 
     class func closeSideMenuIfNeeded() {
