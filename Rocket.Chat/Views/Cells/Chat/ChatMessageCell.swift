@@ -245,14 +245,12 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
-    fileprivate func updateMessageContent() {
-        if let text = MessageTextCacheManager.shared.message(for: message) {
+    fileprivate func updateMessageContent(force: Bool = false) {
+        if let text = force ? MessageTextCacheManager.shared.update(for: message) : MessageTextCacheManager.shared.message(for: message) {
             if message.temporary {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
             } else if message.failed {
                 text.setFontColor(MessageTextFontAttributes.failedFontColor)
-            } else {
-                text.setFontColor(MessageTextFontAttributes.defaultFontColor)
             }
 
             labelText.message = text
@@ -395,6 +393,6 @@ extension ChatMessageCell {
         super.applyTheme(theme)
         labelDate.textColor = theme.auxiliaryText
         labelUsername.textColor = theme.titleText
-        updateMessageContent()
+        updateMessageContent(force: true)
     }
 }
