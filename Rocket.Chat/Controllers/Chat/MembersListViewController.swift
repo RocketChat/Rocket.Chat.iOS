@@ -109,6 +109,7 @@ class MembersListViewController: BaseViewController {
 // MARK: ViewController
 extension MembersListViewController {
     override func viewDidLoad() {
+        super.viewDidLoad()
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(refreshControlDidPull), for: .valueChanged)
 

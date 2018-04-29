@@ -43,8 +43,9 @@ final class ChatTitleView: UIView {
 }
 
 extension ChatTitleView {
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         labelTitle.textColor = theme.titleText
     }
 }

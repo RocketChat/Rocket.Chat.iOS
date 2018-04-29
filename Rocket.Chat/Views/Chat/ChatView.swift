@@ -15,8 +15,9 @@ class ChatView: UIView {
 extension ChatView {
     override var theme: Theme? { return ThemeManager.theme }
 
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         scrollToBottomButton.tintColor = theme.titleText
         scrollToBottomButton.layer.borderColor = theme.auxiliaryText.cgColor
     }

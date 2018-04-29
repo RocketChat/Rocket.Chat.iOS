@@ -54,9 +54,7 @@ final class ReactionView: UIView {
 
         countLabel.text = model.count
 
-        if let theme = theme {
-            self.applyTheme(theme)
-        }
+        self.applyTheme()
     }
 
     override init(frame: CGRect) {
@@ -104,8 +102,9 @@ extension ReactionView {
 }
 
 extension ReactionView {
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
 
         let colors: (UIColor, UIColor, UIColor) = {
             if theme == .light {

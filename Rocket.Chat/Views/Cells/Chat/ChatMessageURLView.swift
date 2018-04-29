@@ -65,8 +65,9 @@ final class ChatMessageURLView: UIView {
 }
 
 extension ChatMessageURLView {
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         viewLeftBorder.backgroundColor = theme.auxiliaryText
         labelURLDescription.textColor = theme.auxiliaryText
     }

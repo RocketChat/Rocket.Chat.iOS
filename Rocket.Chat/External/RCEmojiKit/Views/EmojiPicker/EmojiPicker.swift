@@ -341,8 +341,8 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
 extension EmojiPicker {
     override var theme: Theme? { return ThemeManager.theme }
 
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
         skinToneButton.backgroundColor = currentSkinTone.color
     }
 }

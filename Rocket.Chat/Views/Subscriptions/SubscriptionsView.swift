@@ -13,12 +13,5 @@ class SubscriptionsView: UIView {
 }
 
 extension SubscriptionsView {
-    override var theme: Theme? {
-        return nil
-    }
-
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
-        subscriptionsTableView.backgroundColor = .RCBlue()
-    }
+    override var theme: Theme? { return nil }
 }

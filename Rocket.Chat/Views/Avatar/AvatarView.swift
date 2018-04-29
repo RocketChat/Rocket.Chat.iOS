@@ -174,8 +174,8 @@ final class AvatarView: UIView {
 }
 
 extension AvatarView {
-    override func applyTheme(_ theme: Theme) {
-        self.subviews.forEach { $0.applyTheme(theme) }
+    override func applyTheme() {
+        self.subviews.forEach { $0.applyTheme() }
         labelInitials.textColor = .white
     }
 }

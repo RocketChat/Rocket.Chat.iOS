@@ -13,7 +13,7 @@ struct ThemeManager {
     static var theme = Theme.dark {
         didSet {
             UIView.animate(withDuration: 0.3) {
-                observers.forEach { $0?.applyTheme(theme) }
+                observers.forEach { $0?.applyTheme() }
             }
         }
     }
@@ -22,21 +22,22 @@ struct ThemeManager {
     static func addObserver(_ observer: Themeable?) {
         observers = observers.compactMap { $0 }
         guard let observer = observer else { return }
-        observer.applyTheme(ThemeManager.theme)
+        observer.applyTheme()
         weak var weakObserver = observer
         observers.append(weakObserver)
     }
 }
 
 @objc protocol Themeable {
-    func applyTheme(_ theme: Theme)
+    func applyTheme()
 //    var theme: Theme? { get }
 }
 
 extension UIView: Themeable {
-    func applyTheme(_ theme: Theme) {
+    func applyTheme() {
+        guard let theme = theme else { return }
         backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
-        self.subviews.forEach { $0.applyTheme(theme) }
+        self.subviews.forEach { $0.applyTheme() }
     }
 
     @objc var theme: Theme? {
@@ -46,40 +47,48 @@ extension UIView: Themeable {
 }
 
 extension UILabel {
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
-        textColor = theme.bodyText
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        textColor = theme.titleText
     }
 }
 
 extension UISearchBar {
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         barStyle = theme.appearence.barStyle
         tintColor = theme.hyperlinkText
         keyboardAppearance = .light
     }
 }
 
+extension UIActivityIndicatorView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        activityIndicatorViewStyle = .gray
+        color = .white
+    }
+}
+
 extension UICollectionView {
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        if let theme = theme {
-            view.applyTheme(theme)
-        }
+        view.applyTheme()
     }
 
     open override func addSubview(_ view: UIView) {
         super.addSubview(view)
-        if let theme = theme {
-            view.applyTheme(theme)
-        }
+        view.applyTheme()
     }
 }
 
 extension UITableView {
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         if theme == .dark || theme == .black {
             backgroundColor = theme.focusedBackground
         } else {
@@ -90,22 +99,19 @@ extension UITableView {
 
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        if let theme = theme {
-            view.applyTheme(theme)
-        }
+        view.applyTheme()
     }
 
     open override func addSubview(_ view: UIView) {
         super.addSubview(view)
-        if let theme = theme {
-            view.applyTheme(theme)
-        }
+        view.applyTheme()
     }
 }
 
 extension SLKTextView {
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         self.textColor = theme.bodyText
         self.layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
         self.backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
@@ -113,8 +119,9 @@ extension SLKTextView {
 }
 
 extension UITextView {
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         self.tintColor = theme.hyperlinkText
     }
 }
@@ -122,26 +129,26 @@ extension UITextView {
 extension UINavigationBar {
     override var theme: Theme? { return ThemeManager.theme }
 
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
-        self.subviews.forEach { $0.applyTheme(theme) }
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        self.subviews.forEach { $0.applyTheme() }
         self.tintColor = theme.bodyText
         self.barStyle = theme.appearence.barStyle
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        if let theme = theme {
-            view.applyTheme(theme)
-        }
+        view.applyTheme()
     }
 }
 
 extension UIToolbar {
     override var theme: Theme? { return ThemeManager.theme }
 
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         self.isTranslucent = false
         self.barTintColor = theme.focusedBackground
         self.tintColor = theme.tintColor
@@ -150,17 +157,16 @@ extension UIToolbar {
 
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        if let theme = theme {
-            view.applyTheme(theme)
-        }
+        view.applyTheme()
     }
 }
 
 extension UITabBar {
     override var theme: Theme? { return ThemeManager.theme }
 
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         self.barTintColor = theme.focusedBackground
         self.tintColor = theme.tintColor
         self.barStyle = theme.appearence.barStyle
@@ -168,55 +174,28 @@ extension UITabBar {
 
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        if let theme = theme {
-            view.applyTheme(theme)
-        }
+        view.applyTheme()
     }
 }
 
 extension SLKTextInputbar {
     override var theme: Theme? { return ThemeManager.theme }
 
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         textView.keyboardAppearance = theme.appearence.keyboardAppearence
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
-        if let theme = theme {
-            view.applyTheme(theme)
-        }
+        view.applyTheme()
     }
 }
 
 extension UIViewController: Themeable {
-    func applyTheme(_ theme: Theme) {
-        view.applyTheme(theme)
-        presentedViewController?.applyTheme(theme)
-        navigationController?.navigationBar.applyTheme(theme)
-    }
-}
-
-extension UINavigationController {
-    open override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if let theme = presentingViewController?.view.theme {
-            view.applyTheme(theme)
-        }
-    }
-
-    open override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
-        super.present(viewControllerToPresent, animated: flag, completion: completion)
-        if let theme = view.theme {
-            viewControllerToPresent.applyTheme(theme)
-        }
-    }
-
-    open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        super.prepare(for: segue, sender: sender)
-        if let theme = view.theme {
-            segue.destination.applyTheme(theme)
-        }
+    func applyTheme() {
+        view.applyTheme()
+        navigationController?.navigationBar.applyTheme()
     }
 }

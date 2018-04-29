@@ -17,8 +17,9 @@ final class ChatMessageDaySeparator: UICollectionViewCell {
 }
 
 extension ChatMessageDaySeparator {
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         seperatorLine.backgroundColor = theme.mutedAccent
     }
 }

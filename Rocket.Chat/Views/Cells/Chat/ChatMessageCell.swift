@@ -389,8 +389,9 @@ extension ChatMessageCell {
 // MARK: Themeable
 
 extension ChatMessageCell {
-    override func applyTheme(_ theme: Theme) {
-        super.applyTheme(theme)
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
         labelDate.textColor = theme.auxiliaryText
         labelUsername.textColor = theme.titleText
         updateMessageContent(force: true)
