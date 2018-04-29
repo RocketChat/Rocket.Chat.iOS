@@ -217,7 +217,7 @@ final class ChatViewController: SLKTextViewController {
         }
 
         setupReplyView()
-        ThemeManager.addObserver(view)
+        ThemeManager.addObserver(self)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -1262,5 +1262,12 @@ extension ChatViewController: KeyboardFrameViewDelegate {
 
     var keyboardProxyView: UIView? {
         return textInputbar.inputAccessoryView.superview
+    }
+}
+
+extension ChatViewController {
+    override func applyTheme(_ theme: Theme) {
+        view.applyTheme(theme)
+        navigationController?.navigationBar.barTintColor = theme.focusedBackground
     }
 }

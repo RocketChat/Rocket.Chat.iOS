@@ -280,7 +280,7 @@ final class ChatDataController {
 
                 if let oldMessage = obj.message {
                     if !(oldMessage == message) {
-                        MessageTextCacheManager.shared.update(for: message)
+                        MessageTextCacheManager.shared.update(for: message, with: nil)
                     }
                 }
 

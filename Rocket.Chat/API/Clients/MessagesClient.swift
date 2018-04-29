@@ -29,7 +29,7 @@ struct MessagesClient: APIClient {
                     realm?.add(message, update: true)
                 }
 
-                MessageTextCacheManager.shared.update(for: message)
+                MessageTextCacheManager.shared.update(for: message, with: nil)
             }
         }
 
@@ -42,7 +42,7 @@ struct MessagesClient: APIClient {
                     realm?.add(message, update: true)
                 }
 
-                MessageTextCacheManager.shared.update(for: message)
+                MessageTextCacheManager.shared.update(for: message, with: nil)
             }
         }
 
@@ -143,7 +143,7 @@ struct MessagesClient: APIClient {
                         realm?.add(message, update: true)
                     }
 
-                    MessageTextCacheManager.shared.update(for: message)
+                    MessageTextCacheManager.shared.update(for: message, with: nil)
                 }
             case .error: Alert.defaultError.present()
             }

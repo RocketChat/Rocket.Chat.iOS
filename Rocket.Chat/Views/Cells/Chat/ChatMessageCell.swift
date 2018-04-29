@@ -246,11 +246,11 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     fileprivate func updateMessageContent(force: Bool = false) {
-        if let text = force ? MessageTextCacheManager.shared.update(for: message) : MessageTextCacheManager.shared.message(for: message) {
+        if let text = force ? MessageTextCacheManager.shared.update(for: message, with: theme) : MessageTextCacheManager.shared.message(for: message, with: theme) {
             if message.temporary {
-                text.setFontColor(MessageTextFontAttributes.systemFontColor)
+                text.setFontColor(MessageTextFontAttributes.systemFontColor(for: theme))
             } else if message.failed {
-                text.setFontColor(MessageTextFontAttributes.failedFontColor)
+                text.setFontColor(MessageTextFontAttributes.failedFontColor(for: theme))
             }
 
             labelText.message = text
@@ -306,7 +306,7 @@ extension ChatMessageCell {
 
     static func cellMediaHeightFor(message: Message, width: CGFloat, sequential: Bool = true) -> CGFloat {
         let fullWidth = width
-        let attributedString = MessageTextCacheManager.shared.message(for: message)
+        let attributedString = MessageTextCacheManager.shared.message(for: message, with: nil)
 
         var total = (CGFloat)(sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
         if attributedString?.string ?? "" != "" {

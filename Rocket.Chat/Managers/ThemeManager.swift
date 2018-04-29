@@ -30,7 +30,7 @@ struct ThemeManager {
 
 @objc protocol Themeable {
     func applyTheme(_ theme: Theme)
-    var theme: Theme? { get }
+//    var theme: Theme? { get }
 }
 
 extension UIView: Themeable {
@@ -39,7 +39,10 @@ extension UIView: Themeable {
         self.subviews.forEach { $0.applyTheme(theme) }
     }
 
-    var theme: Theme? { return superview?.theme }
+    @objc var theme: Theme? {
+        guard let superview = superview else { return ThemeManager.theme }
+        return superview.theme
+    }
 }
 
 extension UILabel {
@@ -59,6 +62,32 @@ extension UISearchBar {
 }
 
 extension UICollectionView {
+    open override func insertSubview(_ view: UIView, at index: Int) {
+        super.insertSubview(view, at: index)
+        if let theme = theme {
+            view.applyTheme(theme)
+        }
+    }
+
+    open override func addSubview(_ view: UIView) {
+        super.addSubview(view)
+        if let theme = theme {
+            view.applyTheme(theme)
+        }
+    }
+}
+
+extension UITableView {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+        if theme == .dark || theme == .black {
+            backgroundColor = theme.focusedBackground
+        } else {
+            backgroundColor = #colorLiteral(red: 0.937, green: 0.937, blue: 0.957, alpha: 1)
+        }
+        separatorColor = theme.mutedAccent
+    }
+
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
         if let theme = theme {
@@ -96,7 +125,6 @@ extension UINavigationBar {
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
         self.subviews.forEach { $0.applyTheme(theme) }
-        self.barTintColor = theme.focusedBackground
         self.tintColor = theme.bodyText
         self.barStyle = theme.appearence.barStyle
     }
@@ -158,6 +186,37 @@ extension SLKTextInputbar {
         super.insertSubview(view, at: index)
         if let theme = theme {
             view.applyTheme(theme)
+        }
+    }
+}
+
+extension UIViewController: Themeable {
+    func applyTheme(_ theme: Theme) {
+        view.applyTheme(theme)
+        presentedViewController?.applyTheme(theme)
+        navigationController?.navigationBar.applyTheme(theme)
+    }
+}
+
+extension UINavigationController {
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let theme = presentingViewController?.view.theme {
+            view.applyTheme(theme)
+        }
+    }
+
+    open override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {
+        super.present(viewControllerToPresent, animated: flag, completion: completion)
+        if let theme = view.theme {
+            viewControllerToPresent.applyTheme(theme)
+        }
+    }
+
+    open override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        super.prepare(for: segue, sender: sender)
+        if let theme = view.theme {
+            segue.destination.applyTheme(theme)
         }
     }
 }

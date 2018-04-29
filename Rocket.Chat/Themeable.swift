@@ -22,7 +22,7 @@ class Theme: NSObject {
     let strongAccent: UIColor
     let appearence: Appearence
 
-    struct Appearence {
+    struct Appearence: Equatable {
         let barStyle: UIBarStyle
         let keyboardAppearence: UIKeyboardAppearance
 
@@ -30,7 +30,18 @@ class Theme: NSObject {
         static let light = Appearence(barStyle: .default, keyboardAppearence: .default)
     }
 
-    init(backgroundColor: UIColor, titleText: UIColor, bodyText: UIColor, auxiliaryText: UIColor, hyperlinkText: UIColor, tintColor: UIColor, focusedBackground: UIColor, auxiliaryBackground: UIColor, mutedAccent: UIColor?, strongAccent: UIColor?, appearence: Appearence) {
+    init(backgroundColor: UIColor,
+         titleText: UIColor,
+         bodyText: UIColor,
+         auxiliaryText: UIColor,
+         hyperlinkText: UIColor,
+         tintColor: UIColor,
+         focusedBackground: UIColor,
+         auxiliaryBackground: UIColor,
+         mutedAccent: UIColor?,
+         strongAccent: UIColor?,
+         appearence: Appearence) {
+
         self.backgroundColor = backgroundColor
         self.titleText = titleText
         self.bodyText = bodyText
