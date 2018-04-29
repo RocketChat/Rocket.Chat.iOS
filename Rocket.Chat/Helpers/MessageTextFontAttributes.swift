@@ -30,17 +30,6 @@ struct MessageTextFontAttributes {
         return theme?.auxiliaryText ?? ThemeManager.theme.auxiliaryText
     }
 
-    // TODO: Probably should not be changed here
-//    static var defaultFontColor: UIColor {
-//        return ThemeManager.theme.bodyText
-//    } //UIColor.darkGray
-//    static var systemFontColor: UIColor {
-//        return ThemeManager.theme.auxiliaryText
-//    } //UIColor.lightGray
-//    static var failedFontColor: UIColor {
-//        return ThemeManager.theme.auxiliaryText
-//    } //UIColor.lightGray
-
     static let defaultFont = UIFont.systemFont(ofSize: defaultFontSize)
     static let italicFont = UIFont.italicSystemFont(ofSize: defaultFontSize)
     static let boldFont = UIFont.boldSystemFont(ofSize: defaultFontSize)
