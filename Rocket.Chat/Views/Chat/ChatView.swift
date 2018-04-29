@@ -9,5 +9,15 @@
 import UIKit
 
 class ChatView: UIView {
+    @IBOutlet weak var scrollToBottomButton: UIButton!
+}
+
+extension ChatView {
     override var theme: Theme? { return ThemeManager.theme }
+
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+        scrollToBottomButton.tintColor = theme.titleText
+        scrollToBottomButton.layer.borderColor = theme.auxiliaryText.cgColor
+    }
 }

@@ -7,6 +7,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Navigation items with more than one left or right bar item" minToolsVersion="7.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -55,14 +56,24 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Stw-bA-gXV" secondAttribute="trailing" constant="12" id="hLW-Z0-cMV"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="vBC-8x-yRN"/>
+                        <connections>
+                            <outlet property="scrollToBottomButton" destination="Stw-bA-gXV" id="Dw5-dz-7IE"/>
+                        </connections>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa">
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="DYt-PN-xSF">
-                            <connections>
-                                <action selector="showSearchMessages" destination="A1E-cs-q8E" id="WGB-Gv-7oO"/>
-                            </connections>
-                        </barButtonItem>
+                        <rightBarButtonItems>
+                            <barButtonItem systemItem="search" id="DYt-PN-xSF">
+                                <connections>
+                                    <action selector="showSearchMessages" destination="A1E-cs-q8E" id="WGB-Gv-7oO"/>
+                                </connections>
+                            </barButtonItem>
+                            <barButtonItem systemItem="refresh" id="0Ub-a5-6O5">
+                                <connections>
+                                    <action selector="changeTheme:" destination="A1E-cs-q8E" id="oY0-du-8vu"/>
+                                </connections>
+                            </barButtonItem>
+                        </rightBarButtonItems>
                     </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorContainer" destination="fbt-TF-z7U" id="Nmz-IG-SvM"/>

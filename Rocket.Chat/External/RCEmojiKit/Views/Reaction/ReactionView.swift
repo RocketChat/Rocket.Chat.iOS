@@ -54,10 +54,9 @@ final class ReactionView: UIView {
 
         countLabel.text = model.count
 
-        let colors = model.highlight ? (#colorLiteral(red: 0.3098039216, green: 0.6901960784, blue: 0.9882352941, alpha: 1), #colorLiteral(red: 0.7411764706, green: 0.8823529412, blue: 0.9960784314, alpha: 1), #colorLiteral(red: 0.9529411765, green: 0.9764705882, blue: 1, alpha: 1)) : (#colorLiteral(red: 0.6666666667, green: 0.6666666667, blue: 0.6666666667, alpha: 1), #colorLiteral(red: 0.9058823529, green: 0.9058823529, blue: 0.9058823529, alpha: 1), #colorLiteral(red: 0.9882352941, green: 0.9882352941, blue: 0.9882352941, alpha: 1))
-        countLabel.textColor = colors.0
-        contentView.layer.borderColor = colors.1.cgColor
-        contentView.backgroundColor = colors.2
+        if let theme = theme {
+            self.applyTheme(theme)
+        }
     }
 
     override init(frame: CGRect) {
@@ -101,5 +100,23 @@ extension ReactionView {
         if sender.state == .began {
             longPressRecognized(sender)
         }
+    }
+}
+
+extension ReactionView {
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+
+        let colors: (UIColor, UIColor, UIColor) = {
+            if theme == .light {
+                return model.highlight ? (#colorLiteral(red: 0, green: 0.56, blue: 0.9882352941, alpha: 0.69), #colorLiteral(red: 0, green: 0.5516742082, blue: 0.9960784314, alpha: 0.26), #colorLiteral(red: 0, green: 0.4999999989, blue: 1, alpha: 0.05)) : (#colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.33), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.09), #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0.01))
+            } else {
+                return model.highlight ? (#colorLiteral(red: 0, green: 0.56, blue: 0.9882352941, alpha: 0.69), #colorLiteral(red: 0, green: 0.5516742082, blue: 0.9960784314, alpha: 0.26), #colorLiteral(red: 0, green: 0.4999999989, blue: 1, alpha: 0.05)) : (#colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.33), #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.09), #colorLiteral(red: 1, green: 1, blue: 1, alpha: 0.01))
+            }
+        }()
+
+        countLabel.textColor = colors.0
+        contentView.layer.borderColor = colors.1.cgColor
+        contentView.backgroundColor = colors.2
     }
 }

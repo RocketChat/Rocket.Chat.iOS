@@ -15,6 +15,13 @@ private let kEmptyCellIdentifier = "kEmptyCellIdentifier"
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
+    @IBAction func changeTheme(_ sender: Any) {
+        if ThemeManager.theme == .light {
+                ThemeManager.theme = .dark
+        } else {
+                ThemeManager.theme = .light
+        }
+    }
 
     var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
@@ -170,7 +177,7 @@ final class ChatViewController: SLKTextViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
-        navigationController?.navigationBar.applyTheme(ThemeManager.theme)
+        ThemeManager.addObserver(navigationController?.navigationBar)
         setNeedsStatusBarAppearanceUpdate()
 
         collectionView?.isPrefetchingEnabled = true
@@ -210,7 +217,7 @@ final class ChatViewController: SLKTextViewController {
         }
 
         setupReplyView()
-        view.applyTheme(ThemeManager.theme)
+        ThemeManager.addObserver(view)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -275,7 +282,7 @@ final class ChatViewController: SLKTextViewController {
         let view = ChatTitleView.instantiateFromNib()
         self.navigationItem.titleView = view
         chatTitleView = view
-        view?.applyTheme(ThemeManager.theme)
+        ThemeManager.addObserver(chatTitleView)
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(chatTitleViewDidPressed))
         chatTitleView?.addGestureRecognizer(gesture)
@@ -283,7 +290,6 @@ final class ChatViewController: SLKTextViewController {
 
     private func setupScrollToBottomButton() {
         buttonScrollToBottom.layer.cornerRadius = 25
-        buttonScrollToBottom.layer.borderColor = UIColor.lightGray.cgColor
         buttonScrollToBottom.layer.borderWidth = 1
     }
 

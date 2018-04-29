@@ -249,10 +249,10 @@ final class ChatMessageCell: UICollectionViewCell {
         if let text = MessageTextCacheManager.shared.message(for: message) {
             if message.temporary {
                 text.setFontColor(MessageTextFontAttributes.systemFontColor)
-            }
-
-            if message.failed {
+            } else if message.failed {
                 text.setFontColor(MessageTextFontAttributes.failedFontColor)
+            } else {
+                text.setFontColor(MessageTextFontAttributes.defaultFontColor)
             }
 
             labelText.message = text
@@ -348,7 +348,6 @@ extension ChatMessageCell {
 
         return total
     }
-
 }
 
 // MARK: Reactions
@@ -396,5 +395,6 @@ extension ChatMessageCell {
         super.applyTheme(theme)
         labelDate.textColor = theme.auxiliaryText
         labelUsername.textColor = theme.titleText
+        updateMessageContent()
     }
 }
