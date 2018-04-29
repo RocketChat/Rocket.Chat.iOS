@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class ChangeAppIconViewController: UIViewController {
+final class ChangeAppIconViewController: BaseViewController {
 
     private let viewModel = ChangeAppIconViewModel()
 

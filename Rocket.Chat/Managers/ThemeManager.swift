@@ -54,6 +54,14 @@ extension UILabel {
     }
 }
 
+extension UITextField {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        textColor = theme.titleText
+    }
+}
+
 extension UISearchBar {
     override func applyTheme() {
         super.applyTheme()

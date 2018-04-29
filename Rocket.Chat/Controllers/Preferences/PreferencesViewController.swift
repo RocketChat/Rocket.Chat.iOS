@@ -14,7 +14,7 @@ import SafariServices
 import FLEX
 #endif
 
-final class PreferencesViewController: UITableViewController {
+final class PreferencesViewController: BaseTableViewController {
 
     private let kSectionProfile = 0
     private let kSectionSettings = 1

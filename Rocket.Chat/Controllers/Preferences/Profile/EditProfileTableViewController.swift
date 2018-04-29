@@ -11,7 +11,7 @@ import MBProgressHUD
 import SwiftyJSON
 
 // swiftlint:disable file_length type_body_length
-class EditProfileTableViewController: UITableViewController, MediaPicker {
+class EditProfileTableViewController: BaseTableViewController, MediaPicker {
 
     static let identifier = String(describing: EditProfileTableViewController.self)
 

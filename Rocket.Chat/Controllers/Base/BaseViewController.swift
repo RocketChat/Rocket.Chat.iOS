@@ -8,17 +8,28 @@
 
 import UIKit
 
+// swiftlint:disable private_over_fileprivate
+fileprivate func baseViewDidLoad(controller: UIViewController) {
+    ThemeManager.addObserver(controller)
+
+    controller.navigationItem.backBarButtonItem = UIBarButtonItem(
+        title: "",
+        style: .plain,
+        target: nil,
+        action: nil
+    )
+}
+
 class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
+        baseViewDidLoad(controller: self)
+    }
+}
 
-        ThemeManager.addObserver(self)
-
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(
-            title: "",
-            style: .plain,
-            target: nil,
-            action: nil
-        )
+class BaseTableViewController: UITableViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        baseViewDidLoad(controller: self)
     }
 }
