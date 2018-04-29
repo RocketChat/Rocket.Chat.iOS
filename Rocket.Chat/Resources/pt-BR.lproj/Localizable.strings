@@ -161,6 +161,8 @@
 "chat.message.actions.copy" = "Copiar";
 "chat.message.actions.pin" = "Pinar";
 "chat.message.actions.unpin" = "Remover pino";
+"chat.message.actions.star" = "Favoritar";
+"chat.message.actions.unstar" = "Desfavoritar";
 "chat.message.actions.quote" = "Citar";
 "chat.message.actions.reply" = "Responder";
 "chat.message.actions.delete" = "Deletar mensagem";
@@ -300,3 +302,6 @@
 "myaccount.settings.profile.new_password.password_required.title" = "Insira sua senha";
 "myaccount.settings.profile.new_password.password_required.message" = "É necessário inserir sua senha atual para criar uma nova senha.";
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Senha";
+
+// User Action Sheet
+"user_action_sheet.conversation" = "Conversa";

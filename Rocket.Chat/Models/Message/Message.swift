@@ -70,6 +70,7 @@ final class Message: BaseModel {
 
     @objc dynamic var failed = false
 
+    var starred = List<String>()
     var mentions = List<Mention>()
     var channels = List<Channel>()
     var attachments = List<Attachment>()
