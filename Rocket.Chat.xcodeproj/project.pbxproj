@@ -109,6 +109,9 @@
 		3370D8C82095F56B00EEA225 /* SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C72095F56A00EEA225 /* SubscriptionsView.swift */; };
 		3370D8CE2096261F00EEA225 /* NotThemeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8CD2096261F00EEA225 /* NotThemeableView.swift */; };
 		3370D8D12096677A00EEA225 /* TopTransparentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */; };
+		3370D8D3209778EF00EEA225 /* ThemePreferenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D2209778EE00EEA225 /* ThemePreferenceCell.swift */; };
+		3370D8D620977D8600EEA225 /* ThemePreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D520977D8600EEA225 /* ThemePreferenceViewModel.swift */; };
+		3370D8D820977E9C00EEA225 /* ThemePreferenceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D720977E9C00EEA225 /* ThemePreferenceController.swift */; };
 		339B692B2050449700F97392 /* KeyboardFrameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 339B6929205042D300F97392 /* KeyboardFrameView.swift */; };
 		33A5C9BE206A561400FE1C8F /* emojiNames.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9BD206A561400FE1C8F /* emojiNames.json */; };
 		33A5C9CA206A565800FE1C8F /* symbols.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C1206A565800FE1C8F /* symbols.json */; };
@@ -769,6 +772,9 @@
 		3370D8C72095F56A00EEA225 /* SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsView.swift; sourceTree = "<group>"; };
 		3370D8CD2096261F00EEA225 /* NotThemeableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotThemeableView.swift; sourceTree = "<group>"; };
 		3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTransparentViewController.swift; sourceTree = "<group>"; };
+		3370D8D2209778EE00EEA225 /* ThemePreferenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreferenceCell.swift; sourceTree = "<group>"; };
+		3370D8D520977D8600EEA225 /* ThemePreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreferenceViewModel.swift; sourceTree = "<group>"; };
+		3370D8D720977E9C00EEA225 /* ThemePreferenceController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreferenceController.swift; sourceTree = "<group>"; };
 		339B6929205042D300F97392 /* KeyboardFrameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyboardFrameView.swift; sourceTree = "<group>"; };
 		33A5C9BD206A561400FE1C8F /* emojiNames.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = emojiNames.json; sourceTree = "<group>"; };
 		33A5C9C1206A565800FE1C8F /* symbols.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = symbols.json; sourceTree = "<group>"; };
@@ -1543,6 +1549,15 @@
 			path = Themeable;
 			sourceTree = "<group>";
 		};
+		3370D8D420977D4500EEA225 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				3370D8D720977E9C00EEA225 /* ThemePreferenceController.swift */,
+				3370D8D520977D8600EEA225 /* ThemePreferenceViewModel.swift */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
 		33A5C9C0206A565800FE1C8F /* Emojis */ = {
 			isa = PBXGroup;
 			children = (
@@ -1584,6 +1599,7 @@
 				0B3A9767202C75A60019CA92 /* ChangeAppIcon */,
 				0B9AB2BF20444EB300ABEA05 /* Language */,
 				99282260204DE0AE005D2067 /* Profile */,
+				3370D8D420977D4500EEA225 /* Theme */,
 				9960C82E2063F091004A034C /* Web Browser */,
 				806728FC200789F4009FE94D /* PreferencesNavigationController.swift */,
 				33CCA7292091034200FD4C57 /* PreferencesViewController.swift */,
@@ -1637,6 +1653,7 @@
 			isa = PBXGroup;
 			children = (
 				4153E80420504BE700FBC26B /* ReusableViewText.swift */,
+				3370D8D2209778EE00EEA225 /* ThemePreferenceCell.swift */,
 				412EF3C52050507C001689A3 /* ReusableViewText.xib */,
 			);
 			path = Preferences;
@@ -3588,6 +3605,7 @@
 			files = (
 				14BAFAE020308EF30054A2E6 /* DrawingBrushOpacityViewController.swift in Sources */,
 				41499C8F1F2A116900790EA7 /* ServerManager.swift in Sources */,
+				3370D8D820977E9C00EEA225 /* ThemePreferenceController.swift in Sources */,
 				41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */,
 				807C7C0620751ED2006B600E /* SpotlightClient.swift in Sources */,
 				33383509207926DE006E1D0A /* TransparentToTouchesWindow.swift in Sources */,
@@ -3681,6 +3699,7 @@
 				41D701D61E67111E00FED2EE /* MessageTextFontAttributes.swift in Sources */,
 				D1D535EE1F708628006625D2 /* APIRequest.swift in Sources */,
 				41C275DF1D848005003C88CF /* AvatarView.swift in Sources */,
+				3370D8D620977D8600EEA225 /* ThemePreferenceViewModel.swift in Sources */,
 				8013F8651FD5E13600EE1A4E /* APIExtensions.swift in Sources */,
 				4147CE7F1F5EB27B00C322C3 /* AddServerCell.swift in Sources */,
 				A0FFC1611E8A9D8D00A1B5EA /* TintedTextField.swift in Sources */,
@@ -3810,6 +3829,7 @@
 				80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */,
 				995FEB2F206286D9004EE38F /* WebBrowserManager.swift in Sources */,
 				4162E1531D651A8800AAAE49 /* UserManager.swift in Sources */,
+				3370D8D3209778EF00EEA225 /* ThemePreferenceCell.swift in Sources */,
 				4112BEEC1E7971A400E734CB /* MainChatViewController.swift in Sources */,
 				800FCD4C1F728EC800D9A692 /* ChannelInfoCellProtocol.swift in Sources */,
 				800E22841F8500A200DA84F1 /* MessagesListViewController.swift in Sources */,

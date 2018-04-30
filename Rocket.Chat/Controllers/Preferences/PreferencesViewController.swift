@@ -78,6 +78,12 @@ final class PreferencesViewController: BaseTableViewController {
         }
     }
 
+    @IBOutlet weak var labelTheme: UILabel! {
+        didSet {
+            labelTheme.text = viewModel.theme
+        }
+    }
+
     @IBOutlet weak var labelDefaultWebBrowser: UILabel! {
         didSet {
             labelDefaultWebBrowser.text = WebBrowserManager.browser.name

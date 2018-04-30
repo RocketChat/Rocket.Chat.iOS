@@ -305,3 +305,11 @@
 
 // User Action Sheet
 "user_action_sheet.conversation" = "Conversation";
+
+// Theme
+"theme.settings.title" = "Theme";
+"theme.settings.header" = "ALL THEMES";
+"theme.settings.footer" = "Applying a theme will change how the app looks.";
+"theme.light" = "Light";
+"theme.dark" = "Dark";
+"theme.black" = "Black";

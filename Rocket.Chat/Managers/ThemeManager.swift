@@ -10,13 +10,21 @@ import Foundation
 import SlackTextViewController
 
 struct ThemeManager {
-    static var theme = Theme.dark {
+    static var theme = themes.first(where: { $0.title == UserDefaults.standard.string(forKey: userDefaultsKey) })?.theme ?? Theme.light {
+
         didSet {
-            UIView.animate(withDuration: 0.3) {
-                observers.forEach { $0?.applyTheme() }
+            UIView.animate(
+                withDuration: 0.3,
+                animations: ({ observers.forEach { $0?.applyTheme() } })
+            ) { _ in
+                let themeName = themes.first(where: { $0.theme == theme })?.title
+                UserDefaults.standard.set(themeName, forKey: userDefaultsKey)
             }
         }
     }
+
+    static let userDefaultsKey = "RCTheme"
+    static let themes: [(title: String, theme: Theme)] = [("light", .light), ("dark", .dark), ("black", .black)]
 
     static var observers = [Themeable?]()
     static func addObserver(_ observer: Themeable?) {
