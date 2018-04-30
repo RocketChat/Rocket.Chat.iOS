@@ -121,6 +121,14 @@ extension UITableView {
     }
 }
 
+extension UITableViewCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        detailTextLabel?.textColor = theme.auxiliaryText
+    }
+}
+
 extension SLKTextView {
     override func applyTheme() {
         super.applyTheme()

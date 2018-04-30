@@ -88,7 +88,7 @@ class Theme: NSObject {
         hyperlinkText: #colorLiteral(red: 1, green: 0.8117647059, blue: 0.231372549, alpha: 1),
         tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
         focusedBackground: #colorLiteral(red: 0.1433121264, green: 0.1433121264, blue: 0.1433121264, alpha: 1),
-        auxiliaryBackground: #colorLiteral(red: 0.9999960065, green: 1, blue: 1, alpha: 1),
+        auxiliaryBackground: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
         mutedAccent: nil,
         strongAccent: nil,
         appearence: .dark
@@ -102,7 +102,7 @@ class Theme: NSObject {
         hyperlinkText: #colorLiteral(red: 1, green: 0.8117647059, blue: 0.231372549, alpha: 1),
         tintColor: #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0),
         focusedBackground: #colorLiteral(red: 0.04620946944, green: 0.04620946944, blue: 0.04620946944, alpha: 1),
-        auxiliaryBackground: #colorLiteral(red: 0.921431005, green: 0.9214526415, blue: 0.9214410186, alpha: 1),
+        auxiliaryBackground: #colorLiteral(red: 0.8039215803, green: 0.8039215803, blue: 0.8039215803, alpha: 1),
         mutedAccent: nil,
         strongAccent: nil,
         appearence: .dark

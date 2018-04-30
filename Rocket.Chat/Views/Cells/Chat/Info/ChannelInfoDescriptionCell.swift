@@ -32,5 +32,12 @@ final class ChannelInfoDescriptionCell: UITableViewCell, ChannelInfoCellProtocol
             labelDescription.text = data?.description
         }
     }
+}
 
+extension ChannelInfoDescriptionCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        labelDescription.textColor = theme.auxiliaryText
+    }
 }

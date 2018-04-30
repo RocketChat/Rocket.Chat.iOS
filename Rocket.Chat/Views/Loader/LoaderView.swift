@@ -60,7 +60,7 @@ class LoaderView: UIView {
                 clockwise: false
             )
 
-            circleLayer.fillColor = fillColor
+            circleLayer.fillColor = theme?.auxiliaryBackground.cgColor ?? fillColor
             circleLayer.backgroundColor = nil
             circleLayer.path = path.cgPath
             circleLayer.frame = CGRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -79,5 +79,14 @@ class LoaderView: UIView {
             layer.addSublayer(circle)
         }
     }
+}
 
+extension LoaderView {
+    override func applyTheme() {
+        super.applyTheme()
+        if isAnimating {
+            stopAnimating()
+            startAnimating()
+        }
+    }
 }
