@@ -81,8 +81,16 @@ extension UIActivityIndicatorView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        activityIndicatorViewStyle = .gray
-        color = .white
+//        activityIndicatorViewStyle = .gray
+        tintColor = theme.bodyText
+    }
+}
+
+extension UIRefreshControl {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        tintColor = theme.bodyText
     }
 }
 

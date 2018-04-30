@@ -181,8 +181,7 @@ extension ChatViewController {
         let message = String(format: localized("chat.upload.uploading_file"), fileName)
         chatHeaderViewStatus?.labelTitle.text = message
         chatHeaderViewStatus?.buttonRefresh.isHidden = true
-        chatHeaderViewStatus?.backgroundColor = .RCLightGray()
-        chatHeaderViewStatus?.setTextColor(.RCDarkBlue())
+        chatHeaderViewStatus?.applyTheme()
         chatHeaderViewStatus?.activityIndicator.startAnimating()
     }
 
