@@ -99,9 +99,9 @@ extension UITableView {
         super.applyTheme()
         guard let theme = theme else { return }
         if theme == .dark || theme == .black {
-            backgroundColor = theme.focusedBackground
+            backgroundColor = style == .grouped ? theme.focusedBackground : theme.backgroundColor
         } else {
-            backgroundColor = #colorLiteral(red: 0.937, green: 0.937, blue: 0.957, alpha: 1)
+            backgroundColor = style == .grouped ? #colorLiteral(red: 0.937, green: 0.937, blue: 0.957, alpha: 1) : theme.backgroundColor
         }
         separatorColor = theme.mutedAccent
     }
