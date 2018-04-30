@@ -137,6 +137,7 @@ class HighlightLayoutManager: NSLayoutManager {
         textView.frame = bounds
 
         updateCustomEmojiViews()
+        applyTheme()
     }
 
     override func prepareForInterfaceBuilder() {
