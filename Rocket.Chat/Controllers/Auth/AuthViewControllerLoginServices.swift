@@ -12,19 +12,23 @@ import RealmSwift
 
 extension AuthViewController {
     func updateFieldsPlaceholders() {
-        guard let settings = self.serverPublicSettings else { return }
+        guard let settings = serverPublicSettings else { return }
 
         if !(settings.emailOrUsernameFieldPlaceholder?.isEmpty ?? true) {
-            self.textFieldUsername.placeholder = settings.emailOrUsernameFieldPlaceholder
+            textFieldUsername.placeholder = settings.emailOrUsernameFieldPlaceholder
+        } else {
+            textFieldUsername.placeholder = localized("auth.login.username.placeholder")
         }
 
         if !(settings.passwordFieldPlaceholder?.isEmpty ?? true) {
-            self.textFieldPassword.placeholder = settings.passwordFieldPlaceholder
+            textFieldPassword.placeholder = settings.passwordFieldPlaceholder
+        } else {
+            textFieldPassword.placeholder = localized("auth.login.password.placeholder")
         }
     }
 
     func updateAuthenticationMethods() {
-        guard let settings = self.serverPublicSettings else { return }
+        guard let settings = serverPublicSettings else { return }
 
         if settings.isGoogleAuthenticationEnabled {
             addOAuthButton(for: .google)
@@ -39,7 +43,7 @@ extension AuthViewController {
         }
 
         if settings.isGitLabAuthenticationEnabled {
-            addOAuthButton(for: .gitlab)
+            addOAuthButton(for: .gitlab(url: settings.gitlabUrl))
         }
 
         if settings.isLinkedInAuthenticationEnabled {
@@ -50,15 +54,19 @@ extension AuthViewController {
             addOAuthButton(for: .twitter)
         }
 
+        if settings.isWordPressAuthenticationEnabled {
+            addOAuthButton(for: .wordpress)
+        }
+
         if settings.isCASEnabled {
             addOAuthButton(for: .cas)
         }
     }
 
     func setupLoginServices() {
-        self.loginServicesToken?.invalidate()
+        loginServicesToken?.invalidate()
 
-        self.loginServicesToken = LoginServiceManager.observe { [weak self] changes in
+        loginServicesToken = LoginServiceManager.observe { [weak self] changes in
             self?.updateLoginServices(changes: changes)
         }
 
@@ -68,16 +76,16 @@ extension AuthViewController {
     func presentOAuthViewController(for loginService: LoginService) {
         OAuthManager.authorize(loginService: loginService, at: serverURL, viewController: self, success: { [weak self] credentials in
             guard let strongSelf = self else { return }
-
             strongSelf.startLoading()
-            AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
-            }, failure: { [weak self] in
-                self?.alert(
-                    title: localized("alert.login_service_error.title"),
-                    message: localized("alert.login_service_error.message")
-                )
 
-                self?.stopLoading()
+            AuthManager.auth(credentials: credentials, completion: strongSelf.handleAuthenticationResponse)
+        }, failure: { [weak self] in
+            self?.alert(
+                title: localized("alert.login_service_error.title"),
+                message: localized("alert.login_service_error.message")
+            )
+
+            self?.stopLoading()
         })
     }
 
@@ -87,8 +95,8 @@ extension AuthViewController {
             let loginUrl = URL(string: loginUrlString),
             let host = serverURL.host,
             let callbackUrl = URL(string: "https://\(host)/_cas/\(String.random(17))")
-            else {
-                return
+        else {
+            return
         }
 
         let controller = CASViewController(loginUrl: loginUrl, callbackUrl: callbackUrl, success: {
@@ -97,10 +105,8 @@ extension AuthViewController {
             self?.stopLoading()
         })
 
-        self.startLoading()
-
+        startLoading()
         navigationController?.pushViewController(controller, animated: true)
-
         return
     }
 
@@ -119,10 +125,8 @@ extension AuthViewController {
             self?.stopLoading()
         })
 
-        self.startLoading()
-
+        startLoading()
         navigationController?.pushViewController(controller, animated: true)
-
         return
     }
 
@@ -138,6 +142,7 @@ extension AuthViewController {
         case .gitlab: button.setImage(#imageLiteral(resourceName: "gitlab"), for: .normal)
         case .linkedin: button.setImage(#imageLiteral(resourceName: "linkedin"), for: .normal)
         case .twitter: button.setImage(#imageLiteral(resourceName: "twitter"), for: .normal)
+        case .wordpress: button.setImage(#imageLiteral(resourceName: "wordpress"), for: .normal)
         default: button.setTitle(loginService.buttonLabelText ?? "", for: .normal)
         }
 
@@ -165,7 +170,7 @@ extension AuthViewController {
             modifications.map { res[$0] }.forEach {
                 guard
                     let identifier = $0.identifier,
-                    let button = self.customAuthButtons[identifier]
+                    let button = customAuthButtons[identifier]
                 else {
                     return
                 }
@@ -179,7 +184,7 @@ extension AuthViewController {
                 guard
                     $0.custom,
                     let identifier = $0.identifier,
-                    let button = self.customAuthButtons[identifier]
+                    let button = customAuthButtons[identifier]
                 else {
                     return
                 }
@@ -188,6 +193,6 @@ extension AuthViewController {
                 customAuthButtons.removeValue(forKey: identifier)
             }
         default: break
-    }
+        }
     }
 }

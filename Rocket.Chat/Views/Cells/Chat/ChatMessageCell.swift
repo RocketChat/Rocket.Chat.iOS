@@ -30,11 +30,8 @@ final class ChatMessageCell: UICollectionViewCell {
 
     var message: Message! {
         didSet {
-            if oldValue != nil && oldValue.identifier == message?.identifier {
-                if oldValue.updatedAt?.timeIntervalSince1970 == message.updatedAt?.timeIntervalSince1970 {
-                    Log.debug("message is cached")
-                    return
-                }
+            if oldValue != nil && oldValue == message {
+                return
             }
 
             updateMessage()
@@ -270,16 +267,11 @@ final class ChatMessageCell: UICollectionViewCell {
             return
         }
 
-        switch (message.failed, message.temporary) {
-        case (true, _):
+        if message.failed {
             statusView.isHidden = false
             statusView.image = UIImage(named: "Exclamation")?.withRenderingMode(.alwaysTemplate)
             statusView.tintColor = .red
-        case (false, true):
-            statusView.isHidden = false
-            statusView.image = UIImage(named: "Clock")?.withRenderingMode(.alwaysTemplate)
-            statusView.tintColor = .gray
-        case (false, false):
+        } else {
             statusView.isHidden = true
         }
 
@@ -298,7 +290,7 @@ final class ChatMessageCell: UICollectionViewCell {
     }
 
     @objc func handleUsernameTapGestureCell(recognizer: UIGestureRecognizer) {
-        delegate?.handleUsernameTapMessageCell(message, view: contentView, recognizer: recognizer)
+        delegate?.handleUsernameTapMessageCell(message, view: labelUsername, recognizer: recognizer)
     }
 }
 

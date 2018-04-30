@@ -39,9 +39,11 @@ extension AuthSettings: ModelMappeable {
         self.isLinkedInAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Linkedin")?.bool ?? false
         self.isTwitterAuthenticationEnabled = objectForKey(object: values, key:
             "Accounts_OAuth_Twitter")?.bool ?? false
+        self.isWordPressAuthenticationEnabled = objectForKey(object: values, key: "Accounts_OAuth_Wordpress")?.bool ?? false
         self.isLDAPAuthenticationEnabled = objectForKey(object: values, key: "LDAP_Enable")?.bool ?? false
         self.isCASEnabled = objectForKey(object: values, key: "CAS_enabled")?.bool ?? false
         self.casLoginUrl = objectForKey(object: values, key: "CAS_login_url")?.string
+        self.gitlabUrl = objectForKey(object: values, key: "API_Gitlab_URL")?.string
 
         self.isUsernameEmailAuthenticationEnabled = objectForKey(object: values, key: "Accounts_ShowFormLogin")?.bool ?? true
         self.rawRegistrationForm = objectForKey(object: values, key: "Accounts_RegistrationForm")?.string
@@ -78,6 +80,7 @@ extension AuthSettings: ModelMappeable {
         }
 
         self.messageAllowPinning = objectForKey(object: values, key: "Message_AllowPinning")?.bool ?? true
+        self.messageAllowStarring = objectForKey(object: values, key: "Message_AllowStarring")?.bool ?? true
 
         self.messageShowDeletedStatus = objectForKey(object: values, key: "Message_ShowDeletedStatus")?.bool ?? true
         self.messageAllowDeleting = objectForKey(object: values, key: "Message_AllowDeleting")?.bool ?? true

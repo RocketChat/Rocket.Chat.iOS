@@ -95,12 +95,12 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
         client.fetchLoginServices(realm: realm)
 
         let expectation = XCTestExpectation(description: "login services added to realm")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.4, execute: {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
             if realm.objects(LoginService.self).count == 2 {
                 expectation.fulfill()
             }
         })
 
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 3)
     }
 }

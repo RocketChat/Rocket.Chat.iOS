@@ -16,6 +16,7 @@ enum LoginServiceType {
     case linkedin
     case gitlab
     case twitter
+    case wordpress
     case saml
     case cas
     case custom
@@ -29,6 +30,7 @@ enum LoginServiceType {
         case "gitlab": self = .gitlab
         case "linkedin": self = .linkedin
         case "twitter": self = .twitter
+        case "wordpress": self = .wordpress
         case "saml": self = .saml
         case "cas": self = .cas
         default: self = .invalid
@@ -166,9 +168,14 @@ extension LoginService {
         return service
     }
 
-    static var gitlab: LoginService {
+    static func gitlab(url: String? = nil) -> LoginService {
         let service = LoginService()
         service.mapGitLab()
+
+        if let url = url {
+            service.serverUrl = url
+        }
+
         return service
     }
 
@@ -181,6 +188,12 @@ extension LoginService {
     static var twitter: LoginService {
         let service = LoginService()
         service.mapTwitter()
+        return service
+    }
+
+    static var wordpress: LoginService {
+        let service = LoginService()
+        service.mapWordPress()
         return service
     }
 

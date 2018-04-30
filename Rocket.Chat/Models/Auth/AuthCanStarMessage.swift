@@ -1,26 +1,23 @@
 //
-//  AuthCanPinMessage.swift
+//  AuthCanStarMessage.swift
 //  Rocket.Chat
 //
-//  Created by Matheus Cardoso on 4/3/18.
+//  Created by Matheus Cardoso on 4/26/18.
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
 import Foundation
 
 extension Auth {
-    enum CanPinMessageResult {
+    enum CanStarMessageResult {
         case allowed
         case notActionable
         case notAllowed
         case unknown
     }
 
-    func canPinMessage(_ message: Message) -> CanPinMessageResult {
-        guard
-            let user = user,
-            let settings = settings
-        else {
+    func canStarMessage(_ message: Message) -> CanStarMessageResult {
+        guard let settings = settings else {
             return .unknown
         }
 
@@ -28,7 +25,7 @@ extension Auth {
             return .notActionable
         }
 
-        if !settings.messageAllowPinning || !user.hasPermission(.pinMessage, realm: self.realm) {
+        if !settings.messageAllowStarring {
             return .notAllowed
         }
 

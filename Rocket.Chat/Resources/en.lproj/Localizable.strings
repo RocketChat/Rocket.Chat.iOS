@@ -161,6 +161,8 @@
 "chat.message.actions.copy" = "Copy";
 "chat.message.actions.pin" = "Pin";
 "chat.message.actions.unpin" = "Unpin";
+"chat.message.actions.star" = "Star"; // TODO
+"chat.message.actions.unstar" = "Unstar"; // TODO
 "chat.message.actions.quote" = "Quote";
 "chat.message.actions.reply" = "Reply";
 "chat.message.actions.delete" = "Delete message";
@@ -238,6 +240,7 @@
 // Messages List
 "chat.messages.list.title" = "Messages";
 "chat.messages.list.empty" = "No messages found";
+"chat.messages.list.search.placeholder" = "Search messages";
 "chat.messages.pinned.list.title" = "Pinned Messages";
 "chat.messages.starred.list.title" = "Starred Messages";
 "chat.messages.mentions.list.title" = "Mentions";
@@ -250,6 +253,7 @@
 "myaccount.settings.language" = "Language";
 "myaccount.settings.appicon" = "Application Icon";
 "myaccount.settings.version" = "Version: %@ (%@)";
+"myaccount.settings.server_version" = "Server Version: %@";
 "myaccount.settings.web_browser" = "Web Browser";
 "myaccount.settings.tracking.title" = "Send Crash Report";
 "myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it.";
@@ -298,3 +302,6 @@
 "myaccount.settings.profile.new_password.password_required.title" = "Enter your password";
 "myaccount.settings.profile.new_password.password_required.message" = "Your current password is required when setting a new password.";
 "myaccount.settings.profile.new_password.password_required.placeholder" = "Password";
+
+// User Action Sheet
+"user_action_sheet.conversation" = "Conversation";
