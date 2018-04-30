@@ -95,6 +95,8 @@ class NewRoomViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
+        super.viewDidLoad()
+
         CheckTableViewCell.registerCell(for: tableView)
         TextFieldTableViewCell.registerCell(for: tableView)
         MentionsTextFieldTableViewCell.registerCell(for: tableView)

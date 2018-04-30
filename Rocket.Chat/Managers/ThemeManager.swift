@@ -59,6 +59,10 @@ extension UITextField {
         super.applyTheme()
         guard let theme = theme else { return }
         textColor = theme.titleText
+        keyboardAppearance = theme.appearence.keyboardAppearence
+        if let placeholder = placeholder {
+            attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: theme.mutedAccent])
+        }
     }
 }
 
@@ -68,7 +72,7 @@ extension UISearchBar {
         guard let theme = theme else { return }
         barStyle = theme.appearence.barStyle
         tintColor = theme.hyperlinkText
-        keyboardAppearance = .light
+        keyboardAppearance = theme.appearence.keyboardAppearence
     }
 }
 

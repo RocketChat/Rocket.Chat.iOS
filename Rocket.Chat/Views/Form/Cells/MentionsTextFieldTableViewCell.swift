@@ -114,3 +114,11 @@ final class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellPr
         }
     }
 }
+
+extension MentionsTextFieldTableViewCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        imgLeftIcon.tintColor = theme.titleText
+    }
+}

@@ -35,3 +35,11 @@ final class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
         delegate?.updateDictValue(key: key ?? "", value: textFieldInput.text ?? "")
     }
 }
+
+extension TextFieldTableViewCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        imgLeftIcon.tintColor = theme.titleText
+    }
+}
