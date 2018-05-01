@@ -9,6 +9,14 @@
 import UIKit
 import SlackTextViewController
 
+@objc protocol Themeable {
+    func applyTheme()
+}
+
+@objc protocol ThemeProvider {
+    var theme: Theme? { get }
+}
+
 class Theme: NSObject {
     let backgroundColor: UIColor
     let titleText: UIColor
