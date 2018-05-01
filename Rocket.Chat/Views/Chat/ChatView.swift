@@ -13,8 +13,6 @@ class ChatView: UIView {
 }
 
 extension ChatView {
-    override var theme: Theme? { return ThemeManager.theme }
-
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }

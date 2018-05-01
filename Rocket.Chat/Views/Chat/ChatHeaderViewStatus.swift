@@ -48,10 +48,11 @@ extension ChatHeaderViewStatus {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        if theme == .light {
+        switch theme {
+        case .light:
             backgroundColor = .RCLightGray()
             setTextColor(.RCDarkBlue())
-        } else {
+        default:
             backgroundColor = UIColor.RCDarkGray()
             setTextColor(theme.bodyText)
         }

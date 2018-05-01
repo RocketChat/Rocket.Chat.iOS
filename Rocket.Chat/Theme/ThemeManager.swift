@@ -38,17 +38,20 @@ struct ThemeManager {
 
 @objc protocol Themeable {
     func applyTheme()
-//    var theme: Theme? { get }
 }
 
-extension UIView: Themeable {
+@objc protocol ThemeProvider {
+    var theme: Theme? { get }
+}
+
+extension UIView: Themeable, ThemeProvider {
     func applyTheme() {
         guard let theme = theme else { return }
         backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
         self.subviews.forEach { $0.applyTheme() }
     }
 
-    @objc var theme: Theme? {
+    var theme: Theme? {
         guard let superview = superview else { return ThemeManager.theme }
         return superview.theme
     }
@@ -118,10 +121,9 @@ extension UITableView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        if theme == .dark || theme == .black {
-            backgroundColor = style == .grouped ? theme.focusedBackground : theme.backgroundColor
-        } else {
-            backgroundColor = style == .grouped ? #colorLiteral(red: 0.937, green: 0.937, blue: 0.957, alpha: 1) : theme.backgroundColor
+        switch theme {
+        case .dark, .black: backgroundColor = style == .grouped ? theme.focusedBackground : theme.backgroundColor
+        default: backgroundColor = style == .grouped ? #colorLiteral(red: 0.937, green: 0.937, blue: 0.957, alpha: 1) : theme.backgroundColor
         }
         separatorColor = theme.mutedAccent
     }
