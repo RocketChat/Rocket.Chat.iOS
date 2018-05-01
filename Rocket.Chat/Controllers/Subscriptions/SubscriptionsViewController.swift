@@ -47,16 +47,6 @@ final class SubscriptionsViewController: BaseViewController {
         }
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        unregisterKeyboardNotifications()
-    }
-
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        registerKeyboardHandlers(tableView)
-    }
-
     // MARK: Storyboard Segues
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -68,7 +58,7 @@ final class SubscriptionsViewController: BaseViewController {
     func subscribeModelChanges() {
         guard !assigned else { return }
         guard let auth = AuthManager.isAuthenticated() else { return }
-        guard let realm = Realm.shared else { return }
+        guard let realm = Realm.current else { return }
 
         assigned = true
 
@@ -240,17 +230,17 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
         API.current()?.client(SpotlightClient.self).search(query: text) { [weak self] result in
             DispatchQueue.main.async {
-                let currentText = self?.textFieldSearch.text ?? ""
-
-                if currentText.count == 0 {
-                    return
-                }
-
-                self?.activityViewSearching.stopAnimating()
-                self?.isSearchingRemotely = true
-                self?.searchResult = result
-                self?.groupSubscription()
-                self?.tableView.reloadData()
+//                let currentText = self?.textFieldSearch.text ?? ""
+//
+//                if currentText.count == 0 {
+//                    return
+//                }
+//
+//                self?.activityViewSearching.stopAnimating()
+//                self?.isSearchingRemotely = true
+//                self?.searchResult = result
+//                self?.groupSubscription()
+//                self?.tableView.reloadData()
             }
         }
     }
