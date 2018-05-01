@@ -129,46 +129,35 @@ final class AvatarView: UIView {
     }
 
     private func setAvatarWithInitials() {
-<<<<<<< HEAD
         let subscription = self.subscription?.displayName() ?? "?"
         let username = self.user?.username ?? "?"
         let text = subscription == "?" ? username : subscription
 
-=======
         guard let user = user, !user.isInvalidated else {
             if let username = self.username {
                 setAvatarWithInitials(forUsername: username)
                 return
             }
+
             labelInitials?.text = "?"
             backgroundColor = .black
             return
         }
+
         setAvatarWithInitials(forUsername: user.username)
     }
 
     private func setAvatarWithInitials(forUsername username: String?) {
         let username = username ?? "?"
->>>>>>> 25874b701592a79c1722bb372f084aa18ac1e7f8
-        var initials = ""
+        var initials = "?"
         var color = UIColor.black
 
-<<<<<<< HEAD
-        if text == "?" {
-            initials = text
-            color = 0x000000
-        } else {
-            let position = text.count % avatarColors.count
-            color = avatarColors[position]
-            initials = initialsFor(text)
-=======
         if username == "?" {
             initials = username
         } else {
             let position = username.count % UIColor.avatarColors.count
             color = UIColor.avatarColors[position]
             initials = initialsFor(username)
->>>>>>> 25874b701592a79c1722bb372f084aa18ac1e7f8
         }
 
         labelInitials?.text = initials.uppercased()
