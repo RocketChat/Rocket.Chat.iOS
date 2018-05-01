@@ -81,6 +81,8 @@ extension UISearchBar {
         barStyle = theme.appearence.barStyle
         tintColor = theme.hyperlinkText
         keyboardAppearance = theme.appearence.keyboardAppearence
+        let textField = subviews.first?.subviews.first { $0 is UITextField } as? UITextField
+        textField?.backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
     }
 }
 
@@ -89,7 +91,6 @@ extension UIActivityIndicatorView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-//        activityIndicatorViewStyle = .gray
         tintColor = theme.bodyText
     }
 }

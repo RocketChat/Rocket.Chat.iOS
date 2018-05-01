@@ -359,7 +359,7 @@
         <scene sceneID="lOu-qi-JRh">
             <objects>
                 <viewController storyboardIdentifier="Servers" id="7xe-nw-9mY" customClass="ServersViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="QL3-Do-ipl">
+                    <view key="view" contentMode="scaleToFill" id="QL3-Do-ipl" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>

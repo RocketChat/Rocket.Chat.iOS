@@ -181,7 +181,6 @@ class MessagesListViewData {
             }
 
             if !self.isSearchingMessages { self.currentPage += 1 }
-
             self.isLoadingMoreMessages = false
             completion?()
         }
@@ -316,6 +315,7 @@ extension MessagesListViewController {
 
         navigationItem.rightBarButtonItem = cancelButton
         navigationItem.titleView = searchBar
+        searchBar.applyTheme()
     }
 
     @objc func close() {
