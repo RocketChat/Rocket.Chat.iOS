@@ -15,7 +15,7 @@ struct ThemeManager {
         didSet {
             UIView.animate(
                 withDuration: 0.3,
-                animations: ({ observers.forEach { $0?.applyTheme() } })
+                animations: ({ observers.forEach { $0.value?.applyTheme() } })
             ) { _ in
                 let themeName = themes.first(where: { $0.theme == theme })?.title
                 UserDefaults.standard.set(themeName, forKey: userDefaultsKey)
@@ -26,12 +26,24 @@ struct ThemeManager {
     static let userDefaultsKey = "RCTheme"
     static let themes: [(title: String, theme: Theme)] = [("light", .light), ("dark", .dark), ("black", .black)]
 
-    static var observers = [Themeable?]()
+    static var observers = [Weak<Themeable>]()
     static func addObserver(_ observer: Themeable?) {
         observers = observers.compactMap { $0 }
         guard let observer = observer else { return }
         observer.applyTheme()
-        weak var weakObserver = observer
-        observers.append(weakObserver)
+        observers.append(Weak(observer))
+    }
+}
+
+struct Weak<T: AnyObject> {
+    weak var value: T?
+    init(_ value: T) {
+        self.value = value
+    }
+}
+
+extension Array where Element == Weak<AnyObject> {
+    mutating func filterReleasedReferences() {
+        self = self.compactMap { $0 }
     }
 }
