@@ -11,7 +11,7 @@ import RealmSwift
 
 extension ChatViewController {
     override func didChangeAutoCompletionPrefix(_ prefix: String, andWord word: String) {
-        guard let realm = Realm.shared else { return }
+        guard let realm = Realm.current else { return }
 
         searchResult = []
         searchWord = word
@@ -89,8 +89,10 @@ extension ChatViewController {
         }
 
         cell.selectionStyle = .default
+        var isUser = false
 
         if let user = searchResult[indexPath.row].1 as? User {
+            isUser = true
             cell.avatarView.labelInitials.textColor = .white
             cell.avatarView.user = user
         } else if let emoji = searchResult[indexPath.row].1 as? Emoji {
@@ -116,7 +118,12 @@ extension ChatViewController {
             cell.avatarView.backgroundColor = .white
         }
 
+        let user = AuthManager.currentUser()
+
         cell.labelTitle.text = searchResult[indexPath.row].0
+        if isUser, searchResult[indexPath.row].0 == user?.username {
+            cell.labelTitle.text?.append(" (" + localized("subscriptions.you") + ")")
+        }
         return cell
     }
 }

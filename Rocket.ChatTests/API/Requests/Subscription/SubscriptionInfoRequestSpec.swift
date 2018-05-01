@@ -13,11 +13,11 @@ import SwiftyJSON
 
 class SubscriptionInfoRequestSpec: APITestCase {
     func testRequestWithRoomId() {
-        let _request = SubscriptionInfoRequest(roomId: "ByehQjC44FwMeiLbX")
-        guard let request = _request.request(for: api) else {
+        let preRequest = SubscriptionInfoRequest(roomId: "ByehQjC44FwMeiLbX")
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
-        let url = api.host.appendingPathComponent(_request.path)
+        let url = api.host.appendingPathComponent(preRequest.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomId=ByehQjC44FwMeiLbX"
 
@@ -26,11 +26,11 @@ class SubscriptionInfoRequestSpec: APITestCase {
     }
 
     func testRequestWithRoomName() {
-        let _request = SubscriptionInfoRequest(roomName: "testing")
-        guard let request = _request.request(for: api) else {
+        let preRequest = SubscriptionInfoRequest(roomName: "testing")
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
-        let url = api.host.appendingPathComponent(_request.path)
+        let url = api.host.appendingPathComponent(preRequest.path)
         var urlComponents = URLComponents(url: url, resolvingAgainstBaseURL: false)
         urlComponents?.query = "roomName=testing"
 
@@ -62,7 +62,7 @@ class SubscriptionInfoRequestSpec: APITestCase {
 
         let json = JSON(parseJSON: jsonString)
 
-        let result = SubscriptionInfoResult(raw: json)
+        let result = SubscriptionInfoResource(raw: json)
 
         XCTAssertEqual(result.channel, json["channel"])
         XCTAssertEqual(result.usernames ?? [], ["testing", "testing1", "testing2"])

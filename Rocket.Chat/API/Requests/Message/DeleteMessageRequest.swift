@@ -6,13 +6,10 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
-
 import SwiftyJSON
 
-typealias DeleteMessageResult = APIResult<SendMessageRequest>
-
-class DeleteMessageRequest: APIRequest {
+final class DeleteMessageRequest: APIRequest {
+    typealias APIResourceType = DeleteMessageResource
     let requiredVersion = Version(0, 48, 0)
 
     let method: HTTPMethod = .post
@@ -39,7 +36,7 @@ class DeleteMessageRequest: APIRequest {
     }
 }
 
-extension APIResult where T == DeleteMessageRequest {
+final class DeleteMessageResource: APIResource {
     var success: Bool? {
         return raw?["success"].boolValue
     }

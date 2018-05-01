@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ReactorListViewController: UIViewController {
+final class ReactorListViewController: UIViewController {
     override var preferredContentSize: CGSize {
         set { }
         get {

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ServersViewController: UIViewController {
+final class ServersViewController: UIViewController {
 
     var servers: [[String: String]] = []
 

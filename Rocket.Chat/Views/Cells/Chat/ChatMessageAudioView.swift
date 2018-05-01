@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class ChatMessageAudioView: ChatMessageAttachmentView {
+final class ChatMessageAudioView: ChatMessageAttachmentView {
     override static var defaultHeight: CGFloat {
         return 80
     }
@@ -18,6 +18,7 @@ class ChatMessageAudioView: ChatMessageAttachmentView {
         didSet {
             self.titleLabel.text = attachment?.title
             self.detailText.text = attachment?.descriptionText
+            self.detailTextIndicator.isHidden = attachment?.descriptionText?.isEmpty ?? true
             let fullHeight = ChatMessageAudioView.heightFor(withText: attachment?.descriptionText)
             fullHeightConstraint.constant = fullHeight
             detailTextHeightConstraint.constant = fullHeight - ChatMessageAudioView.defaultHeight
@@ -29,6 +30,7 @@ class ChatMessageAudioView: ChatMessageAttachmentView {
 
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var detailText: UILabel!
+    @IBOutlet weak var detailTextIndicator: UILabel!
     @IBOutlet weak var detailTextHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var fullHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var timeLabel: UILabel!
@@ -38,12 +40,14 @@ class ChatMessageAudioView: ChatMessageAttachmentView {
             timeSlider.setThumbImage(#imageLiteral(resourceName: "Player Progress").resizeWith(width: 15)?.imageWithTint(.RCDarkGray()), for: .highlighted)
         }
     }
+
     @IBOutlet weak var playButton: UIButton! {
         didSet {
             playButton.tintColor = .gray
             playButton.imageView?.tintColor = .gray
         }
     }
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 
     private var player: AVAudioPlayer? {

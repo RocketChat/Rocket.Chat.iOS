@@ -11,11 +11,13 @@ import RealmSwift
 import TagListView
 import SearchTextField
 
-class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol, TagListViewDelegate {
+final class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol, TagListViewDelegate {
     static let identifier = "kMentionsTextFieldTableViewCell"
     static let xibFileName = "MentionsTextFieldTableViewCell"
+
     static let defaultHeight: Float = -1
     weak var delegate: FormTableViewDelegate?
+
     var key: String?
 
     @IBOutlet private weak var tagListView: TagListView!
@@ -61,7 +63,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
 
     private func fetchUsers() {
         guard
-            let realm = Realm.shared,
+            let realm = Realm.current,
             let name = textFieldInput.text,
             name.count > 0
         else {
@@ -70,10 +72,10 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
         }
 
         let users = realm.objects(User.self).filter(
-            NSPredicate(format: "name CONTAINS %@ OR username CONTAINS %@", name, name)
+            NSPredicate(format: "name CONTAINS[cd] %@ OR username CONTAINS[cd] %@", name, name)
         )
 
-        let usernames = Array(users).flatMap { $0.username }.filter {
+        let usernames = Array(users).compactMap { $0.username }.filter {
             AuthManager.currentUser()?.username != $0
         }
 
@@ -88,6 +90,7 @@ class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol
     }
 
     // MARK: Tag
+
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         for tag in users where tag.value === tagView {
             users.removeValue(forKey: tag.key)

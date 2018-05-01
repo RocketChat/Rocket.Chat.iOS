@@ -130,8 +130,8 @@ extension Subscription {
             messages = messages.filter("createdAt < %@", lastMessageDate)
         }
 
-        for i in 0..<min(limit, messages.count) {
-            limitedMessages.append(messages[i])
+        for idx in 0..<min(limit, messages.count) {
+            limitedMessages.append(messages[idx])
         }
 
         return limitedMessages
@@ -191,11 +191,11 @@ extension Subscription {
 
 // MARK: Queries
 extension Subscription {
-    static func find(rid: String, realm: Realm? = Realm.shared) -> Subscription? {
+    static func find(rid: String, realm: Realm? = Realm.current) -> Subscription? {
         return realm?.objects(Subscription.self).filter("rid == '\(rid)'").first
     }
 
-    static func find(name: String, subscriptionType: [SubscriptionType], realm: Realm? = Realm.shared) -> Subscription? {
+    static func find(name: String, subscriptionType: [SubscriptionType], realm: Realm? = Realm.current) -> Subscription? {
         let predicate = NSPredicate(
             format: "name == %@ && privateType IN %@",
             name, subscriptionType.map { $0.rawValue }
@@ -220,5 +220,17 @@ extension Subscription {
         }
 
         return lastSeenSubscription(auth: auth)
+    }
+}
+
+// MARK: Failed Messages
+extension Subscription {
+    func setTemporaryMessagesFailed() {
+        try? realm?.write {
+            messages.filter("temporary = true").forEach {
+                $0.temporary = false
+                $0.failed = true
+            }
+        }
     }
 }

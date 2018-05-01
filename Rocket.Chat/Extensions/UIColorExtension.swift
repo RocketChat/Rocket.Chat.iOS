@@ -8,15 +8,66 @@
 
 import UIKit
 
+enum SystemMessageColor {
+    case warning
+    case danger
+    case good
+    case unknown(String)
+
+    init(rawValue: String) {
+        switch rawValue {
+        case SystemMessageColor.warning.rawValue: self = .warning
+        case SystemMessageColor.danger.rawValue: self = .danger
+        case SystemMessageColor.good.rawValue: self = .good
+        default:
+            self = .unknown(rawValue)
+        }
+    }
+
+    var rawValue: String {
+        return String(describing: self)
+    }
+
+    var color: UIColor {
+        switch self {
+        case .warning: return UIColor(rgb: 0xFCB316, alphaVal: 1)
+        case .danger: return UIColor(rgb: 0xD30230, alphaVal: 1)
+        case .good: return UIColor(rgb: 0x35AC19, alphaVal: 1)
+        case .unknown(let string): return UIColor(hex: string)
+        }
+    }
+}
+
 extension UIColor {
 
-    convenience init(rgb: UInt, alphaVal: CGFloat) {
+    convenience init(rgb: Int, alphaVal: CGFloat) {
         self.init(
             red: CGFloat((rgb & 0xFF0000) >> 16) / 255.0,
             green: CGFloat((rgb & 0x00FF00) >> 8) / 255.0,
             blue: CGFloat(rgb & 0x0000FF) / 255.0,
             alpha: CGFloat(alphaVal)
         )
+    }
+
+    // MARK: Avatar Colors
+
+    static var avatarColors: [UIColor] {
+        return [
+            0xF44336, 0xE91E63, 0x9C27B0, 0x673AB7, 0x3F51B5,
+            0x2196F3, 0x03A9F4, 0x00BCD4, 0x009688, 0x4CAF50,
+            0x8BC34A, 0xCDDC39, 0xFFC107, 0xFF9800, 0xFF5722,
+            0x795548, 0x9E9E9E, 0x607D8B
+        ].map { UIColor(rgb: $0, alphaVal: 1.0) }
+    }
+
+    static func forName(_ name: String) -> UIColor {
+        return avatarColors[name.count % avatarColors.count]
+    }
+
+    // MARK: Color from strings
+
+    static func normalizeColorFromString(string: String) -> UIColor {
+        return SystemMessageColor(rawValue: string).color
     }
 
     // MARK: Status
@@ -41,6 +92,10 @@ extension UIColor {
 
     static func RCBackgroundColor() -> UIColor {
         return UIColor(rgb: 0x2F343D, alphaVal: 1)
+    }
+
+    static func RCEditingAvatarColor() -> UIColor {
+        return UIColor(rgb: 0xEAEAEA, alphaVal: 0.75)
     }
 
     static func RCDarkGray() -> UIColor {

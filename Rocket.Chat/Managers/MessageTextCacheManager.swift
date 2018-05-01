@@ -8,7 +8,7 @@
 
 import Foundation
 
-class MessageTextCacheManager {
+final class MessageTextCacheManager {
 
     static let shared = MessageTextCacheManager()
     let cache = NSCache<NSString, NSAttributedString>()
@@ -28,9 +28,12 @@ class MessageTextCacheManager {
 
     @discardableResult func update(for message: Message) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
+
         let key = cachedKey(for: identifier)
 
-        let text = NSMutableAttributedString(string: message.textNormalized())
+        let text = NSMutableAttributedString(attributedString:
+            NSAttributedString(string: message.textNormalized()).applyingCustomEmojis(CustomEmoji.emojiStrings)
+        )
 
         if message.isSystemMessage() {
             text.setFont(MessageTextFontAttributes.italicFont)
@@ -41,37 +44,37 @@ class MessageTextCacheManager {
             text.setLineSpacing(MessageTextFontAttributes.defaultFont)
         }
 
-        let mentions = Array(message.mentions.flatMap { $0.username })
-        let channels = Array(message.channels.flatMap { $0.name })
+        let mentions = Array(message.mentions.compactMap { $0.username })
+        let channels = Array(message.channels.compactMap { $0.name })
         let username = AuthManager.currentUser()?.username
 
-        let attributedString = text.transformMarkdown().applyingCustomEmojis(CustomEmoji.emojis())
+        let attributedString = text.transformMarkdown()
         let finalText = NSMutableAttributedString(attributedString: attributedString)
         finalText.trimCharacters(in: .whitespaces)
         finalText.highlightMentions(mentions, username: username)
         finalText.highlightChannels(channels)
 
-        self.cache.setObject(finalText, forKey: key)
-
+        cache.setObject(finalText, forKey: key)
         return finalText
     }
 
     func message(for message: Message) -> NSMutableAttributedString? {
         guard let identifier = message.identifier else { return nil }
-        let resultText: NSAttributedString
+
+        var resultText: NSAttributedString?
         let key = cachedKey(for: identifier)
 
         if let cachedVersion = cache.object(forKey: key) {
             resultText = cachedVersion
-        } else {
-            if let result = update(for: message) {
-                resultText = result
-            } else {
-                resultText = NSAttributedString(string: message.text)
-            }
+        } else if let result = update(for: message) {
+            resultText = result
         }
 
-        return NSMutableAttributedString(attributedString: resultText)
+        if let resultText = resultText {
+            return NSMutableAttributedString(attributedString: resultText)
+        }
+
+        return nil
     }
 
 }

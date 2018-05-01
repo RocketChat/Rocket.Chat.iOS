@@ -92,7 +92,7 @@ extension NSMutableAttributedString {
     }
 
     func transformMarkdown() -> NSAttributedString {
-        return MarkdownManager.parser.attributedStringFromAttributedMarkdownString(self)
+        return MarkdownManager.shared.transformAttributedString(self)
     }
 
     func highlightMentions(_ mentions: [String], username: String?) {

@@ -16,13 +16,13 @@ import SwiftyJSON
 
 extension Message {
 
-    static func testInstance() -> Message {
+    static func testInstance(_ name: String = "message") -> Message {
         let message = Message()
         message.user = User.testInstance()
-        message.rid = "message-rid"
-        message.text = "message-text"
+        message.text = "\(name)-text"
+        message.rid = "\(name)-rid"
         message.subscription = Subscription.testInstance()
-        message.identifier = "message-identifier"
+        message.identifier = "\(name)-identifier"
         message.subscription.type = .channel
         message.createdAt = Date()
         return message
@@ -42,6 +42,24 @@ class MessageSpec: XCTestCase {
         Realm.executeOnMainThread({ (realm) in
             realm.deleteAll()
         })
+    }
+
+    func testStarred() {
+        let message = Message()
+
+        let values = JSON([
+            "_id": "message-json-1",
+            "rid": "123",
+            "msg": "Foo Bar Baz",
+            "ts": ["$date": 123456789],
+            "_updatedAt": ["$date": 123456789],
+            "u": ["_id": "123", "username": "foo"],
+            "starred": [["_id": "userid1"], ["_id": "userid2"], ["_id": "userid3"]]
+        ])
+
+        message.map(values, realm: nil)
+
+        XCTAssertEqual(message.starred.count, 3, "message is mapping 'starred' correctly")
     }
 
     func testSubscriptionObject() {
@@ -181,6 +199,110 @@ extension MessageSpec {
         XCTAssertNil(message.replyString, "replyString is nil when message identifier is nil")
         message.subscription.auth?.settings?.siteURL = nil
         XCTAssertNil(message.replyString, "replyString is nil when there's no siteURL")
+    }
+
+}
+
+// MARK: Equatable
+
+extension MessageSpec {
+
+    func testEqualMessagesTrue() {
+        let updatedAt = Date()
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+
+        XCTAssertTrue(message1 == message2)
+    }
+
+    func testEqualMessagesFalse() {
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = Date().addingTimeInterval(60)
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = Date().addingTimeInterval(120)
+
+        XCTAssertFalse(message1 == message2)
+    }
+
+    func testEqualMessagesMentionsFalse() {
+        let updatedAt = Date()
+
+        let mentions = List<Mention>()
+        let mention = Mention()
+        mention.username = "foobar"
+        mentions.append(mention)
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+        message2.mentions = mentions
+
+        XCTAssertFalse(message1 == message2)
+    }
+
+    func testEqualMessagesChannelsFalse() {
+        let updatedAt = Date()
+
+        let channels = List<Channel>()
+        let channel = Channel()
+        channel.name = "foobar"
+        channels.append(channel)
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+        message2.channels = channels
+
+        XCTAssertFalse(message1 == message2)
+    }
+
+    func testEqualMessagesTemporaryFalse() {
+        let updatedAt = Date()
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+        message1.temporary = true
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+        message2.temporary = false
+
+        XCTAssertFalse(message1 == message2)
+    }
+
+    func testEqualMessagesFailedFalse() {
+        let updatedAt = Date()
+
+        let message1 = Message()
+        message1.identifier = "identifier"
+        message1.updatedAt = updatedAt
+        message1.failed = true
+
+        let message2 = Message()
+        message2.identifier = "identifier"
+        message2.updatedAt = updatedAt
+        message2.failed = false
+
+        XCTAssertFalse(message1 == message2)
     }
 
 }

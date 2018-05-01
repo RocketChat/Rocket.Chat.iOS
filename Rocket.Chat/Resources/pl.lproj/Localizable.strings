@@ -11,6 +11,9 @@
 "alert.connection.invalid_url.title" = "Ups!";
 "alert.connection.invalid_url.message" = "URL który wprowadziłeś jest niepoprawny. Proszę sprawdzić jego poprawność i spróbować ponownie.";
 
+"alert.connection.not_secured.title" = "Oops!"; // TODO
+"alert.connection.not_secured.message" = "Could not establish a secure connection to the server. Please make sure the server supports SSL."; // TODO
+
 "alert.connection.socket_error.title" = "Ups!";
 "alert.connection.socket_error.message" = "Nie udało się połączyć z wybranym serwerem!";
 
@@ -23,8 +26,8 @@
 "alert.feature.wip.title" = "Ups!";
 "alert.feature.wip.message" = "Wciąż pracujemy nad tą funkcją. Bądź czujny!";
 
-"alert.insecure_image.title" = "Insecure resource"; //TODO
-"alert.insecure_image.message" = "The resource of the image is insecure and therefore not loaded. Only SSL resources are allowed."; //TODO
+"alert.insecure_image.title" = "Niepewne źródło";
+"alert.insecure_image.message" = "Źródło obrazu jest niepewne i nie zostało załadowane. Jedynie źródła SSL są zezwolone.";
 
 "alert.socket_error.invalid_user.title" = "Sesja wygasła";
 "alert.socket_error.invalid_user.message" = "Twoja sesja wygasła. Zaloguj się ponownie.";
@@ -50,7 +53,26 @@
 "alert.upload_dialog.action.upload" = "Wyślij";
 
 "alert.email_verification.title" = "Weryfikacja e-mail";
-"alert.email_verification.message" = "Wysłaliśmy Ci e-mail z potwierdzeniem rejestracji. Jeżeli wkrótce nie otrzymasz maila spróbuj ponownie się zarejestrować.";
+"alert.email_verification.message" = "Wysłaliśmy Ci e-mail z potwierdzeniem rejestracji. Jeżeli wkrótce nie otrzymasz maila spróbuj ponownie się zarejestrować.";
+
+"alert.discarding_changes.title" = "Unsaved changes"; // TODO
+"alert.discarding_changes.message" = "Your unsaved changes have been discarded."; // TODO
+"alert.load_profile_error.title" = "Failed to load your profile"; // TODO
+"alert.load_profile_error.message" = "Something wrong happened when loading your profile. Please try again."; // TODO
+"alert.password_mismatch_error.title" = "Your password doesn't match"; // TODO
+"alert.password_mismatch_error.message" = "The confirmation field doesn't match with the password you've provided. Please check it and try again."; // TODO
+"alert.update_profile_error.title" = "Failed to update"; // TODO
+"alert.update_profile_error.message" = "Something wrong happened when updating your profile. Please try again."; // TODO
+"alert.update_password_error.title" = "Failed to change password"; // TODO
+"alert.update_password_error.message" = "Something wrong happened when changing your password. Please try again."; // TODO
+"alert.update_profile_empty_fields.title" = "Please fill the empty fields"; // TODO
+"alert.update_profile_empty_fields.message" = "All your profile information are required and can't stay blank"; // TODO
+"alert.update_profile_invalid_email.title" = "Invalid e-mail"; // TODO
+"alert.update_profile_invalid_email.message" = "It seems that the e-mail you've entered is invalid. Please fix it and try again."; // TODO
+"alert.password_empty_fields.title" = "Please fill the empty fields"; // TODO
+"alert.password_empty_fields.message" = "Fill up the password and confirmation fields so you can update your password."; // TODO
+"alert.update_profile_success.title" = "Profile updated"; // TODO
+"alert.update_password_success.title" = "Password updated"; // TODO
 
 // Connection Redirect
 "connection.server.redirect.alert.title" = "Serwer zmienił swój adres";
@@ -66,6 +88,15 @@
 "auth.connect.ssl_required" = "Wymagane jest, aby Twój serwer wspierał SSL";
 "auth.connect.connecting" = "Trwa łączenie. Trzymaj się";
 
+"auth.login.username.placeholder" = "Email or username";
+"auth.login.password.placeholder" = "Password";
+"auth.login.buttonRegister" = "Create new account";
+"auth.login.buttonResetPassword" = "Forgot password";
+"auth.login.agree_label" = "By proceeding you are agreeing to our";
+"auth.login.agree_and" = "and";
+"auth.login.agree_termsofservice" = "Terms of Service";
+"auth.login.agree_privacypolicy" = "Privacy Policy";
+
 "auth.forgot_password.title" = "Zapomniałeś hasła?";
 "auth.forgot_password.message" = "Wprowadź e-mail";
 "auth.forgot_password.success" = "Jeżeli ten e-mail jest zarejestrowany wyślemy Ci instrukcje jak zresetować hasło. Jeżeli wkrótce nie otrzymasz maila spróbuj ponownie.";
@@ -78,6 +109,7 @@
 "subscriptions.favorites" = "Ulubione";
 "subscriptions.channels" = "Kanały";
 "subscriptions.direct_messages" = "Prywatne wiadomości";
+"subscriptions.you" = "Ty";
 
 // Servers
 "servers.add_new_team" = "Dodaj nowy Zespół";
@@ -90,7 +122,7 @@
 "user_menu.busy" = "Zajęty";
 "user_menu.invisible" = "Ukryty";
 "user_menu.admin" = "Zarządzanie";
-"user_menu.settings" = "Moje Konto";
+"user_menu.preferences" = "Preferencje";
 "user_menu.logout" = "Wyloguj";
 
 // New Room View
@@ -119,6 +151,7 @@
 "chat.read_only" = "Ten kanał jest tylko do odczytu";
 "chat.muted" = "Zostałeś wyciszony na tym kanale";
 "chat.loading_messages" = "Ładowanie wiadomości...";
+"chat.unread_separator" = "nowe wiadomości";
 
 // Chat Message Actions
 "chat.message.actions.react" = "Dodaje reakcję";
@@ -128,12 +161,20 @@
 "chat.message.actions.copy" = "Kopiuj";
 "chat.message.actions.pin" = "Przypnij wiadomość";
 "chat.message.actions.unpin" = "Odepnij wiadomość";
+"chat.message.actions.star" = "Star"; // TODO
+"chat.message.actions.unstar" = "Unstar"; // TODO
 "chat.message.actions.quote" = "Cytuj wiadomość";
 "chat.message.actions.reply" = "Odpowiedz na wiadomość";
 "chat.message.actions.delete" = "Usuń wiadomość";
 "chat.message.actions.delete.confirm.title" = "Usunąć wiadomość?";
 "chat.message.actions.delete.confirm.message" = "Czy na pewno usunąć tą wiadomość? Tej czynności nie można cofnąć.";
 "chat.message.actions.delete.confirm.yes" = "Tak, usuń";
+"chat.message.actions.discard" = "Discard message"; //TODO
+"chat.message.actions.discard.confirm.title" = "Discard this message?"; //TODO
+"chat.message.actions.discard.confirm.message" = "This message was not yet sent. Do you want to discard it? This process can't be undone."; //TODO
+"chat.message.actions.discard.confirm.yes" = "Yes, discard"; //TODO
+"chat.message.actions.resend" = "Resend"; //TODO
+"chat.message.actions.resend_all" = "Resend all"; //TODO
 "Send" = "Wyślij"; //SLKTextInputbar.m
 
 // Chat Message Report
@@ -148,6 +189,7 @@
 "chat.upload.shoot_video" = "Nagraj wideo";
 "chat.upload.choose_from_library" = "Wybierz plik z biblioteki";
 "chat.upload.import_file" = "Importuj plik z...";
+"chat.upload.draw" = "Narysuj obrazek";
 
 // Chat Download
 "chat.download.downloading_file" = "Pobieranie \"%@\"";
@@ -155,6 +197,15 @@
 // Chat Cell Static Messages
 "chat.message.open_file" = "Dotknij aby otworzyć plik";
 "chat.message.open_browser" = "Otwórz w przeglądarce";
+
+// Chat Drawing
+"chat.drawing.errorTitle" = "Ups!";
+"chat.drawing.messageTitle" = "Przed wysłaniem musisz coś narysować.";
+"chat.drawing.fileName" = "Rysunek";
+"chat.drawing.settings.opacity" = "Nieprzezroczystość";
+"chat.drawing.settings.width" = "Szerokość";
+"chat.drawing.settings.color.selected" = "Wybrany kolor";
+"chat.drawing.settings.color.others" = "Wybierz kolor poniżej:";
 
 // Message Types
 "chat.message.type.room_name_changed" = "Nazwa pokoju została zmieniona na: %@ przez %@";
@@ -181,6 +232,7 @@
 "chat.info.item.members" = "Członkowie";
 "chat.info.item.pinned" = "Przypięte";
 "chat.info.item.starred" = "Oznaczone gwiazdką";
+"chat.info.item.mentions" = "Mentions"; // TODO
 
 // Members List
 "chat.members.list.title" = "Członkowie";
@@ -188,18 +240,68 @@
 // Messages List
 "chat.messages.list.title" = "Wiadomości";
 "chat.messages.list.empty" = "Nie znaleziono wiadomości";
+"chat.messages.list.search.placeholder" = "Search messages"; // TODO
 "chat.messages.pinned.list.title" = "Przypięte wiadomości";
 "chat.messages.starred.list.title" = "Wiadomości oznaczone gwiazdką";
+"chat.messages.mentions.list.title" = "Mentions"; // TODO
 
 // Settings
-"myaccount.settings.title" = "Ustawienia";
+"myaccount.settings.title" = "Preferencje";
 "myaccount.settings.contactus" = "Kontakt";
+"myaccount.settings.profile" = "Profile"; // TODO:
 "myaccount.settings.license" = "Licencja";
+"myaccount.settings.language" = "Język";
 "myaccount.settings.appicon" = "Ikona aplikacji";
 "myaccount.settings.version" = "Wersja: %@ (%@)";
+"myaccount.settings.server_version" = "Server Version: %@"; // TODO
+"myaccount.settings.web_browser" = "Web Browser"; // TODO
+"myaccount.settings.tracking.title" = "Send Crash Report"; // TODO
+"myaccount.settings.tracking.footer" = "We never track the content of your chats. The crash report only contains relevant information for us in order to identifiy problems and fix it."; // TODO
 
 // Change Application Icon
 "myaccount.settings.changeicon.title" = "Wybierz ikonę";
 "myaccount.settings.changeicon.header" = "Możesz zmienić to jak wygląda ikona aplikacji Rocket.Chat na Twoim urządzeniu. Wybierz jedną z ikon poniżej, która podoba Ci się najbardziej.";
 "myaccount.settings.changeicon.errortitle" = "Nie można zmienić ikony";
 "myaccount.settings.changeicon.iosversion" = "Alternatywne ikony aplikacji nie są wspierane na systemie poniżej wersji 10.3";
+
+// Change Language
+"myaccount.settings.language.title" = "Zmień język";
+"myaccount.settings.language.reset" = "Przywróć domyślny język";
+"myaccount.settings.language.message" = "Ustawienia języka zostały zmienione. Musisz ponownie uruchomić Rocket.Chat aby nowe ustawienia zostały zastosowane.";
+
+// Choose Web Browser
+"web_browser.safari.title" = "Safari";
+"web_browser.in_app_safari.title" = "In-App Browser"; // TODO
+"web_browser.chrome.title" = "Chrome";
+"web_browser.opera.title" = "Opera Mini";
+"web_browser.firefox.title" = "Firefox";
+"myaccount.settings.web_browser.title" = "Web browser"; // TODO
+"myaccount.settings.web_browser.footer" = "This application will be used to open links in Rocket Chat."; // TODO
+
+// Update Profile
+"myaccount.settings.profile.title" = "Profile"; // TODO
+"myaccount.settings.editing_profile.title" = "Edit Profile"; // TODO
+"myaccount.settings.profile.actions.save" = "Save"; // TODO
+"myaccount.settings.profile.actions.edit" = "Edit"; // TODO
+"myaccount.settings.profile.actions.change_password" = "Change your password"; // TODO
+"myaccount.settings.profile.section.profile" = "Profile"; // TODO
+"myaccount.settings.profile.section.password" = "Password"; // TODO
+"myaccount.settings.profile.name_placeholder" = "Name"; // TODO
+"myaccount.settings.profile.username_placeholder" = "Username"; // TODO
+"myaccount.settings.profile.email_placeholder" = "E-mail"; // TODO
+"myaccount.settings.profile.password_required.title" = "Enter your password"; // TODO
+"myaccount.settings.profile.password_required.message" = "Your password is required when updating your e-mail."; // TODO
+"myaccount.settings.profile.password_required.placeholder" = "Password"; // TODO
+
+// New Password
+"myaccount.settings.profile.new_password.title" = "New password"; // TODO
+"myaccount.settings.profile.new_password.section.password" = "Password"; // TODO
+"myaccount.settings.profile.new_password.actions.save" = "Save"; // TODO
+"myaccount.settings.profile.new_password.password_placeholder" = "New password"; // TODO
+"myaccount.settings.profile.new_password.password_confirmation_placeholder" = "Password confirmation"; // TODO
+"myaccount.settings.profile.new_password.password_required.title" = "Enter your password"; // TODO
+"myaccount.settings.profile.new_password.password_required.message" = "Your current password is required when setting a new password."; // TODO
+"myaccount.settings.profile.new_password.password_required.placeholder" = "Password"; // TODO
+
+// User Action Sheet
+"user_action_sheet.conversation" = "Conversation"; // TODO

@@ -12,10 +12,6 @@ import RealmSwift
 
 extension MessageURL: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
-        if self.identifier == nil {
-            self.identifier = String.random()
-        }
-
         guard let url = values["url"].string else { return }
         guard let meta = values["meta"].dictionary else { return }
 

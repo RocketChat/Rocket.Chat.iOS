@@ -71,6 +71,7 @@ final class SubscriptionCell: UITableViewCell {
 
     func updateSubscriptionInformatin() {
         guard let subscription = self.subscription else { return }
+        guard let user = AuthManager.currentUser() else { return }
 
         updateStatus()
 
@@ -82,6 +83,10 @@ final class SubscriptionCell: UITableViewCell {
 
         labelName.text = subscription.displayName()
         labelLastMessage.text = subscription.lastMessageText()
+
+        if subscription.displayName() == user.username {
+            labelName.text?.append(" (" + localized("subscriptions.you") + ")")
+        }
 
         let nameFontSize = labelName.font.pointSize
         let dateFontSize = labelDate.font.pointSize

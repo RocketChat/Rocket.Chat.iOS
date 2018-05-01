@@ -5,11 +5,20 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Drawing-->
+        <scene sceneID="3yF-79-9Jb">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Drawing" id="C4t-wc-v6p" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OI3-Q7-WoS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2250" y="-2"/>
+        </scene>
         <!--Rocket.Chat-->
         <scene sceneID="sPN-TU-rHY">
             <objects>
@@ -44,11 +53,12 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fbt-TF-z7U" firstAttribute="centerX" secondItem="OVX-LA-RMF" secondAttribute="centerX" id="KJR-gK-4gl"/>
-                            <constraint firstItem="Stw-bA-gXV" firstAttribute="bottom" secondItem="AmO-ZE-7Kw" secondAttribute="top" constant="50" id="Rmd-sZ-pDt"/>
+                            <constraint firstItem="fbt-TF-z7U" firstAttribute="centerX" secondItem="vBC-8x-yRN" secondAttribute="centerX" id="KJR-gK-4gl"/>
+                            <constraint firstItem="Stw-bA-gXV" firstAttribute="bottom" secondItem="vBC-8x-yRN" secondAttribute="bottom" constant="50" id="Rmd-sZ-pDt"/>
                             <constraint firstItem="fbt-TF-z7U" firstAttribute="centerY" secondItem="OVX-LA-RMF" secondAttribute="centerY" constant="-27" id="cGn-Mi-wTF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Stw-bA-gXV" secondAttribute="trailing" constant="12" id="hLW-Z0-cMV"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="vBC-8x-yRN"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa"/>
@@ -68,10 +78,6 @@
         <scene sceneID="O3d-Vc-Gen">
             <objects>
                 <viewController id="RHh-7Y-nF1" customClass="ChannelInfoViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JPz-h4-egz"/>
-                        <viewControllerLayoutGuide type="bottom" id="4wG-9T-gw6"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mxD-Or-g3f">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -89,10 +95,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BZN-WA-DFR" firstAttribute="top" secondItem="mxD-Or-g3f" secondAttribute="top" id="ISH-fd-Uik"/>
-                            <constraint firstItem="BZN-WA-DFR" firstAttribute="leading" secondItem="mxD-Or-g3f" secondAttribute="leading" id="QrR-f2-fmg"/>
-                            <constraint firstItem="4wG-9T-gw6" firstAttribute="top" secondItem="BZN-WA-DFR" secondAttribute="bottom" id="XLl-gm-huT"/>
-                            <constraint firstAttribute="trailing" secondItem="BZN-WA-DFR" secondAttribute="trailing" id="w3C-Mc-tMr"/>
+                            <constraint firstItem="BZN-WA-DFR" firstAttribute="leading" secondItem="T6z-yl-y9C" secondAttribute="leading" id="QrR-f2-fmg"/>
+                            <constraint firstItem="T6z-yl-y9C" firstAttribute="bottom" secondItem="BZN-WA-DFR" secondAttribute="bottom" id="XLl-gm-huT"/>
+                            <constraint firstItem="T6z-yl-y9C" firstAttribute="trailing" secondItem="BZN-WA-DFR" secondAttribute="trailing" id="w3C-Mc-tMr"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="T6z-yl-y9C"/>
                     </view>
                     <navigationItem key="navigationItem" id="lin-67-skp"/>
                     <connections>
@@ -163,11 +170,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="hz2-84-IvC" secondAttribute="trailing" id="KJP-z3-zeD"/>
-                            <constraint firstItem="hz2-84-IvC" firstAttribute="leading" secondItem="Dua-YL-gS7" secondAttribute="leading" id="WWj-Zo-x5X"/>
+                            <constraint firstItem="GrM-Bc-gqw" firstAttribute="trailing" secondItem="hz2-84-IvC" secondAttribute="trailing" id="KJP-z3-zeD"/>
+                            <constraint firstItem="hz2-84-IvC" firstAttribute="leading" secondItem="GrM-Bc-gqw" secondAttribute="leading" id="WWj-Zo-x5X"/>
                             <constraint firstItem="hz2-84-IvC" firstAttribute="top" secondItem="Dua-YL-gS7" secondAttribute="top" id="Y5b-x4-IAS"/>
-                            <constraint firstItem="083-vv-Y5u" firstAttribute="top" secondItem="hz2-84-IvC" secondAttribute="bottom" id="aKY-wB-Osk"/>
+                            <constraint firstItem="GrM-Bc-gqw" firstAttribute="bottom" secondItem="hz2-84-IvC" secondAttribute="bottom" id="aKY-wB-Osk"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="GrM-Bc-gqw"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>
@@ -213,6 +221,7 @@
                             <constraint firstItem="pu2-ou-2ep" firstAttribute="leading" secondItem="wih-fh-LH7" secondAttribute="leading" id="hQb-c7-Ozr"/>
                             <constraint firstItem="pu2-ou-2ep" firstAttribute="top" secondItem="6M7-qB-RlN" secondAttribute="bottom" id="lGq-H9-Udx"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="7RK-51-HPR"/>
                     </view>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
                     <connections>

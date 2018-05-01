@@ -8,7 +8,7 @@
 
 import UIKit
 
-fileprivate typealias ListSegueData = (title: String, query: String?)
+private typealias ListSegueData = (title: String, query: String?, isListingMentions: Bool)
 
 class ChannelInfoViewController: BaseViewController {
 
@@ -22,11 +22,13 @@ class ChannelInfoViewController: BaseViewController {
         didSet {
             guard let subscription = self.subscription else { return }
 
+            let shouldListMentions = subscription.type != .directMessage
             let channelInfoData = [
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
-                ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList)
-            ]
+                ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList),
+                shouldListMentions ? ChannelInfoDetailCellData(title: localized("chat.info.item.mentions"), detail: "", action: showMentionsList) : nil
+            ].compactMap({$0})
 
             if subscription.type == .directMessage {
                 tableViewData = [[
@@ -88,7 +90,12 @@ class ChannelInfoViewController: BaseViewController {
     }
 
     func showPinnedList() {
-        let data = ListSegueData(title: localized("chat.messages.pinned.list.title"), query: "{\"pinned\":true}")
+        let data = ListSegueData(
+            title: localized("chat.messages.pinned.list.title"),
+            query: "{\"pinned\":true}",
+            isListingMentions: false
+        )
+
         self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
@@ -98,13 +105,27 @@ class ChannelInfoViewController: BaseViewController {
             return
         }
 
-        let data = ListSegueData(title: localized("chat.messages.starred.list.title"), query: "{\"starred._id\":{\"$in\":[\"\(userId)\"]}}")
+        let data = ListSegueData(
+            title: localized("chat.messages.starred.list.title"),
+            query: "{\"starred._id\":{\"$in\":[\"\(userId)\"]}}",
+            isListingMentions: false
+        )
+
+        self.performSegue(withIdentifier: "toMessagesList", sender: data)
+    }
+
+    func showMentionsList() {
+        let data = ListSegueData(
+            title: localized("chat.messages.mentions.list.title"),
+            query: nil,
+            isListingMentions: true
+        )
+
         self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let membersList = segue.destination as? MembersListViewController {
-            membersList.delegate = self
             membersList.data.subscription = self.subscription
         }
 
@@ -115,6 +136,7 @@ class ChannelInfoViewController: BaseViewController {
             if let segueData = sender as? ListSegueData {
                 messagesList.data.title = segueData.title
                 messagesList.data.query = segueData.query
+                messagesList.data.isListingMentions = segueData.isListingMentions
             }
         }
     }
@@ -232,17 +254,4 @@ extension ChannelInfoViewController: UITableViewDataSource {
         return tableViewData[section].count
     }
 
-}
-
-// MARK: MembersListDelegate
-
-extension ChannelInfoViewController: MembersListDelegate {
-    func membersList(_ controller: MembersListViewController, didSelectUser user: User) {
-        guard let username = user.username else { return }
-
-        AppManager.openDirectMessage(username: username) {
-            controller.dismiss(animated: true, completion: nil)
-            self.dismiss(animated: true, completion: nil)
-        }
-    }
 }

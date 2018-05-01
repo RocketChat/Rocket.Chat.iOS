@@ -167,30 +167,33 @@ class NewRoomViewController: BaseViewController {
             readOnly: readOnlyRoom
         )
 
-        API.current()?.fetch(request, succeeded: { result in
-            guard
-                let success = result.success,
-                let name = result.name, success == true,
-                let auth = AuthManager.isAuthenticated()
-            else {
-                completion(false, result.error)
-                return
-            }
+        API.current()?.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                guard
+                    let success = resource.success,
+                    let name = resource.name, success == true,
+                    let auth = AuthManager.isAuthenticated()
+                else {
+                    completion(false, resource.error)
+                    return
+                }
 
-            SubscriptionManager.updateSubscriptions(auth) { _ in
-                if let newRoom = Realm.shared?.objects(Subscription.self).filter("name == '\(name)' && privateType != 'd'").first {
+                SubscriptionManager.updateSubscriptions(auth) { _ in
+                    if let newRoom = Realm.current?.objects(Subscription.self).filter("name == '\(name)' && privateType != 'd'").first {
 
                     // let controller = ChatViewController.shared
                     // controller?.subscription = newRoom
 
-                    completion(true, nil)
-                } else {
-                    completion(false, nil)
+                        completion(true, nil)
+                    } else {
+                        completion(false, nil)
+                    }
                 }
+            case .error:
+                Alert.defaultError.present()
             }
-        }, errored: { _ in
-            // TODO: Handle error
-        })
+        }
     }
 
     @IBAction func buttonCloseDidPressed(_ sender: Any) {

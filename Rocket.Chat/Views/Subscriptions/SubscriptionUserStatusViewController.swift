@@ -78,7 +78,7 @@ final class SubscriptionUserStatusViewController: UIViewController {
     @IBOutlet weak var buttonSettings: UIView!
     @IBOutlet weak var labelSettings: UILabel! {
         didSet {
-            labelSettings.text = localized("user_menu.settings")
+            labelSettings.text = localized("user_menu.preferences")
         }
     }
 
@@ -146,7 +146,7 @@ final class SubscriptionUserStatusViewController: UIViewController {
     }
 
     @IBAction func buttonSettingsDidPressed(_ sender: Any) {
-        let storyboard = UIStoryboard(name: "Settings", bundle: Bundle.main)
+        let storyboard = Storyboard.preferences.instantiate()
 
         if let controller = storyboard.instantiateInitialViewController() {
             controller.modalPresentationStyle = .formSheet

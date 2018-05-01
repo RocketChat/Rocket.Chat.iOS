@@ -13,11 +13,12 @@ struct ChannelInfoUserCellData: ChannelInfoCellDataProtocol {
     var user: User?
 }
 
-class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol {
+final class ChannelInfoUserCell: UITableViewCell, ChannelInfoCellProtocol {
     typealias DataType = ChannelInfoUserCellData
 
     static let identifier = "kChannelInfoCellUser"
     static let defaultHeight: Float = 80
+
     var data: DataType? {
         didSet {
             labelTitle.text = data?.user?.name

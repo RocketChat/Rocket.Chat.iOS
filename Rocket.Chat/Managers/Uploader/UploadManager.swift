@@ -65,13 +65,7 @@ class UploadManager {
     func upload(file: FileUpload, fileName: String, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
         guard let settings = AuthSettingsManager.settings else { return }
         guard let store = settings.uploadStorageType else { return }
-
-        // TODO: AmazonS3 method was removed from server version 0.57
-        if store == "AmazonS3" {
-            uploadToAmazonS3(file: file, fileName: fileName, subscription: subscription, progress: progress, completion: completion)
-        } else {
-            uploadToUFSFile(store: store, file: file, fileName: fileName, subscription: subscription, progress: progress, completion: completion)
-        }
+        uploadToUFSFile(store: store, file: file, fileName: fileName, subscription: subscription, progress: progress, completion: completion)
     }
 
     // swiftlint:disable function_body_length function_parameter_count
@@ -148,60 +142,4 @@ class UploadManager {
             task.resume()
         }
     }
-
-    // TODO: AmazonS3 method was removed from server version 0.57
-    func uploadToAmazonS3(file: FileUpload, fileName: String, subscription: Subscription, progress: UploadProgressBlock, completion: @escaping UploadCompletionBlock) {
-        let request = [
-            "msg": "method",
-            "method": "slingshot/uploadRequest",
-            "params": [
-                "rocketchat-uploads", [
-                    "name": fileName,
-                    "size": file.size,
-                    "type": file.type
-                ], [
-                    "rid": subscription.rid
-                ]
-            ]
-        ] as [String: Any]
-
-        SocketManager.send(request) { [unowned self] (response) in
-            guard !response.isError() else {
-                completion(response, true)
-                return
-            }
-
-            let result = response.result
-            guard let uploadURL = URL(string: result["result"]["upload"].stringValue) else { return }
-            guard let downloadURL = result["result"]["download"].string else { return }
-
-            let request = self.requestUpload(uploadURL, file: file, formData: result["result"]["postData"])
-
-            let config = URLSessionConfiguration.default
-            let session = URLSession(configuration: config)
-            let task = session.dataTask(with: request, completionHandler: { (_, _, error) in
-                if error != nil {
-                    completion(nil, true)
-                } else {
-                    DispatchQueue.main.async {
-                        let fileIdentifier = downloadURL.components(separatedBy: "/").last ?? String.random()
-
-                        self.sendFileMessage(params: [
-                            subscription.rid,
-                            "s3", [
-                                "type": file.type,
-                                "size": file.size,
-                                "name": fileName,
-                                "_id": fileIdentifier,
-                                "url": downloadURL
-                            ]
-                        ], completion: completion)
-                    }
-                }
-            })
-
-            task.resume()
-        }
-    }
-
 }

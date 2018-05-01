@@ -13,9 +13,9 @@ import SwiftyJSON
 
 class DeleteMessageRequestSpec: APITestCase {
     func testRequest() {
-        let _request = DeleteMessageRequest(roomId: "roomId", msgId: "msgId", asUser: false)
+        let preRequest = DeleteMessageRequest(roomId: "roomId", msgId: "msgId", asUser: false)
 
-        guard let request = _request.request(for: api) else {
+        guard let request = preRequest.request(for: api) else {
             return XCTFail("request is not nil")
         }
         guard let httpBody = request.httpBody else {
@@ -33,7 +33,7 @@ class DeleteMessageRequestSpec: APITestCase {
     }
 
     func testResult() {
-        let _result = JSON([
+        let mockResult = JSON([
             "_id": "i68rmSm0Tslr4S4DMu",
             "message": [
                 "rid": "pcHSHHjvJLBcud3dh",
@@ -48,11 +48,11 @@ class DeleteMessageRequestSpec: APITestCase {
             "success": true
         ])
 
-        let result = APIResult<DeleteMessageRequest>(raw: _result)
+        let result = DeleteMessageResource(raw: mockResult)
 
         XCTAssert(result.success == true)
 
-        let nilResult = APIResult<DeleteMessageRequest>(raw: nil)
+        let nilResult = DeleteMessageResource(raw: nil)
         XCTAssertNil(nilResult.success, "success is nil if raw is nil")
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-class ReplyView: UIView {
+final class ReplyView: UIView {
     @IBOutlet weak var username: UILabel!
     @IBOutlet weak var message: UILabel!
 

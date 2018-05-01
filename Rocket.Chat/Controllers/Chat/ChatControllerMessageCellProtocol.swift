@@ -12,7 +12,7 @@ import MobilePlayer
 import FLAnimatedImage
 import SimpleImageViewer
 
-extension ChatViewController: ChatMessageCellProtocol {
+extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter {
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
 
         // set up controller
@@ -68,20 +68,18 @@ extension ChatViewController: ChatMessageCellProtocol {
     }
 
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer) {
-        guard let username = message.user?.username else { return }
-        AppManager.openDirectMessage(username: username)
+        guard let user = message.user else { return }
+        presentActionSheetForUser(user, source: (view, nil))
     }
 
     func openURL(url: URL) {
-        let controller = SFSafariViewController(url: url)
-        present(controller, animated: true, completion: nil)
+        WebBrowserManager.open(url: url)
     }
 
     func openURLFromCell(url: MessageURL) {
         guard let targetURL = url.targetURL else { return }
         guard let destinyURL = URL(string: targetURL) else { return }
-        let controller = SFSafariViewController(url: destinyURL)
-        present(controller, animated: true, completion: nil)
+        WebBrowserManager.open(url: destinyURL)
     }
 
     func openVideoFromCell(attachment: Attachment) {
@@ -112,7 +110,7 @@ extension ChatViewController: ChatMessageCellProtocol {
         openDocument(attachment: attachment)
     }
 
-    func viewDidCollpaseChange(view: UIView) {
+    func viewDidCollapseChange(view: UIView) {
         guard let origin = collectionView?.convert(CGPoint.zero, from: view) else { return }
         guard let indexPath = collectionView?.indexPathForItem(at: origin) else { return }
         collectionView?.reloadItems(at: [indexPath])

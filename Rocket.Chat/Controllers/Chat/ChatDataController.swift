@@ -10,6 +10,7 @@ import Foundation
 
 enum ChatDataType {
     case daySeparator
+    case unreadSeparator
     case message
     case loader
     case header
@@ -32,16 +33,20 @@ struct ChatData {
 }
 
 final class ChatDataController {
-
     var messagesUsernames: Set<String> = []
     var data: [ChatData] = [] {
         didSet {
             messagesUsernames.removeAll()
-            messagesUsernames.formUnion(data.flatMap { $0.message?.user?.username })
+            messagesUsernames.formUnion(data.compactMap { $0.message?.user?.username })
         }
     }
-    var loadedAllMessages = false
 
+    var loadedAllMessages = false
+    var lastSeen: Date = Date()
+    var unreadSeparator = false
+    var dismissUnreadSeparator = false
+
+    @discardableResult
     func clear() -> [IndexPath] {
         var indexPaths: [IndexPath] = []
 
@@ -63,11 +68,48 @@ final class ChatDataController {
         let prevIndexPath = IndexPath(row: indexPath.row - 1, section: indexPath.section)
 
         guard
-            let prevMessage = itemAt(prevIndexPath)?.message,
-            let message = itemAt(indexPath)?.message,
+            let previousObject = itemAt(prevIndexPath),
+            let message = itemAt(indexPath)?.message
+        else {
+            return false
+        }
+
+        var previousMessage = previousObject.message
+
+        if previousMessage == nil {
+            // Having an unread separator should not block the sequential messages
+            if previousObject.type != .unreadSeparator {
+                return false
+            }
+
+            // Here we get one object before the previous object to check
+            // if the message can be sequential
+            let prevIndexPath = IndexPath(row: prevIndexPath.row - 1, section: prevIndexPath.section)
+            if let message = itemAt(prevIndexPath)?.message {
+                previousMessage = message
+            }
+        }
+
+        guard
+            let prevMessage = previousMessage,
             message.type.sequential && prevMessage.type.sequential &&
-            message.groupable && prevMessage.groupable &&
-            !(message.markedForDeletion || prevMessage.markedForDeletion),
+            message.groupable && prevMessage.groupable
+        else {
+            return false
+        }
+
+        // don't group deleted messages
+        if (message.markedForDeletion, prevMessage.markedForDeletion) != (false, false) {
+            return false
+        }
+
+        // don't group failed messages
+        if (message.failed, prevMessage.failed) != (false, false) {
+            return false
+        }
+
+        // unwrap dates
+        guard
             let date = message.createdAt,
             let prevDate = prevMessage.createdAt
         else {
@@ -76,16 +118,19 @@ final class ChatDataController {
 
         let sameUser = message.user == prevMessage.user
 
-        let timeLimit = Message.maximumTimeForSequence
-        let recent = date.timeIntervalSince(prevDate) < timeLimit
+        var timeLimit = AuthSettingsDefaults.messageGroupingPeriod
+        if let settings = AuthSettingsManager.settings {
+            timeLimit = settings.messageGroupingPeriod
+        }
 
+        let recent = Int(date.timeIntervalSince(prevDate)) < timeLimit
         return sameUser && recent
     }
 
     func indexPathOf(_ identifier: String) -> IndexPath? {
         return data.filter { item in
             return item.identifier == identifier
-        }.flatMap { item in
+        }.compactMap { item in
             item.indexPath
         }.first
     }
@@ -94,7 +139,7 @@ final class ChatDataController {
         return data.filter { item in
             guard let messageIdentifier = item.message?.identifier else { return false }
             return messageIdentifier == identifier
-        }.flatMap { item in
+        }.compactMap { item in
             item.indexPath
         }.first
     }
@@ -118,6 +163,19 @@ final class ChatDataController {
             newItems.append(separator)
         }
 
+        func insertUnreadSeparator() {
+            let separator = ChatData(type: .unreadSeparator, timestamp: lastSeen)
+            identifiers.append(separator.identifier)
+            newItems.append(separator)
+        }
+
+        if dismissUnreadSeparator {
+            for (idx, obj) in data.enumerated() where obj.type == .unreadSeparator {
+                data.remove(at: idx)
+                removedIndexPaths.append(obj.indexPath)
+            }
+        }
+
         if loadedAllMessages {
             if data.filter({ $0.type == .header }).count == 0 {
                 let obj = ChatData(type: .header, timestamp: Date(timeIntervalSince1970: 0))
@@ -132,7 +190,7 @@ final class ChatDataController {
                 var insert = true
                 for obj in data.filter({ $0.type == .daySeparator })
                     where firstMessage.timestamp.sameDayAs(obj.timestamp) {
-                            insert = false
+                        insert = false
                 }
 
                 if insert {
@@ -156,7 +214,16 @@ final class ChatDataController {
             }
         }
 
-        func needsSeparator(_ obj: ChatData) -> Bool {
+        func needsUnreadSeparator(_ obj: ChatData) -> Bool {
+            if obj.timestamp > lastSeen && !unreadSeparator {
+                unreadSeparator = true
+                return true
+            }
+
+            return false
+        }
+
+        func needsDateSeparator(_ obj: ChatData) -> Bool {
             if obj.type != .message { return false }
 
             return data.filter({
@@ -168,11 +235,15 @@ final class ChatDataController {
 
         for newObj in items {
             if let lastObj = lastObj {
-                if needsSeparator(lastObj) {
+                if needsDateSeparator(lastObj) {
                     insertDaySeparator(from: lastObj)
-                } else if needsSeparator(newObj) {
+                } else if needsDateSeparator(newObj) {
                     insertDaySeparator(from: newObj)
                 }
+            }
+
+            if needsUnreadSeparator(newObj) {
+                insertUnreadSeparator()
             }
 
             newItems.append(newObj)
@@ -207,8 +278,10 @@ final class ChatDataController {
                    return -1
                 }
 
-                if obj.message?.text != message.text || obj.message?.type != message.type {
-                    MessageTextCacheManager.shared.update(for: message)
+                if let oldMessage = obj.message {
+                    if !(oldMessage == message) {
+                        MessageTextCacheManager.shared.update(for: message)
+                    }
                 }
 
                 data[idx].message = message
@@ -235,5 +308,4 @@ final class ChatDataController {
 
         return nil
     }
-
 }

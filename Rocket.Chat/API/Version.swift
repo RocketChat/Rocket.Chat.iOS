@@ -41,10 +41,15 @@ extension Version: CustomStringConvertible {
 
 extension Version: Comparable {
     static func < (lhs: Version, rhs: Version) -> Bool {
-        if lhs.major < rhs.major { return true }
-        if lhs.minor < rhs.minor { return true }
-        if lhs.patch < rhs.patch { return true }
-        return false
+        if lhs.major == rhs.major {
+            if lhs.minor == rhs.minor {
+                return lhs.patch < rhs.patch
+            } else {
+                return lhs.minor < rhs.minor
+            }
+        } else {
+            return lhs.major < rhs.major
+        }
     }
 
     static func == (lhs: Version, rhs: Version) -> Bool {

@@ -7,20 +7,24 @@
 //
 //  DOCS: https://rocket.chat/docs/developer-guides/rest-api/authentication/me
 
-import Foundation
+import SwiftyJSON
 
-typealias MeResult = APIResult<MeRequest>
+final class MeRequest: APIRequest {
+    typealias APIResourceType = MeResource
 
-class MeRequest: APIRequest {
     let path = "/api/v1/me"
 }
 
-extension APIResult where T == MeRequest {
+final class MeResource: APIResource {
     var user: User? {
         guard let raw = raw else { return nil }
 
         let user = User()
         user.map(raw, realm: nil)
         return user
+    }
+
+    var errorMessage: String? {
+        return raw?["error"].string
     }
 }

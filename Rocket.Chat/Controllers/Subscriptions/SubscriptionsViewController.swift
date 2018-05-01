@@ -238,16 +238,20 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     func searchOnSpotlight(_ text: String = "") {
         tableView.tableFooterView = nil
 
-        SubscriptionManager.spotlight(text) { [weak self] result in
-            let currentText = self?.searchController?.searchBar.text ?? ""
+        API.current()?.client(SpotlightClient.self).search(query: text) { [weak self] result in
+            DispatchQueue.main.async {
+                let currentText = self?.textFieldSearch.text ?? ""
 
-            if currentText.count == 0 {
-                return
+                if currentText.count == 0 {
+                    return
+                }
+
+                self?.activityViewSearching.stopAnimating()
+                self?.isSearchingRemotely = true
+                self?.searchResult = result
+                self?.groupSubscription()
+                self?.tableView.reloadData()
             }
-
-            self?.isSearchingRemotely = true
-            self?.searchResult = result
-            self?.tableView.reloadData()
         }
     }
 
@@ -286,12 +290,6 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<Results<T>>?) {
-//        if isSearchingLocally || isSearchingRemotely {
-//            updateSearched()
-//        } else {
-//            updateAll()
-//        }
-
         guard case .update(_, _, let insertions, let modifications)? = changes else {
             return
         }
@@ -299,9 +297,23 @@ extension SubscriptionsViewController: UISearchBarDelegate {
         if insertions.count > 0 {
 
         }
+    }
 
-        if modifications.count > 0 {
+    func subscribeModelChanges() {
+        guard !assigned else { return }
+        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard let realm = Realm.current else { return }
 
+        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
+        subscriptionsToken = subscriptions?.observe({ [weak self] changes in
+            self?.handleSubscriptionUpdates(changes: changes)
+        })
+
+        if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
+            let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
+            currentUserToken = query.observe({ [weak self] changes in
+                self?.handleCurrentUserUpdates(changes: changes)
+            })
         }
     }
 

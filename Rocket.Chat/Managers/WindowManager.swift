@@ -11,6 +11,7 @@ import UIKit
 enum Storyboard {
     case auth(serverUrl: String, credentials: DeepLinkCredentials?)
     case chat
+    case preferences
     case subscriptions
 
     var name: String {
@@ -19,6 +20,10 @@ enum Storyboard {
         case .chat: return "Chat"
         case .subscriptions: return "Subscriptions"
         }
+    }
+
+    func instantiate() -> UIStoryboard {
+        return UIStoryboard(name: name, bundle: Bundle.main)
     }
 
     func initialViewController() -> UIViewController? {
@@ -47,7 +52,7 @@ enum Storyboard {
     }
 }
 
-class WindowManager {
+final class WindowManager {
 
     /**
         This method will transform the keyWindow.rootViewController
