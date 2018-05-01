@@ -287,8 +287,8 @@ extension MessagesListViewController {
         }
 
         guard let refreshControl = collectionView.refreshControl, !data.isSearchingMessages else { return }
-        collectionView.refreshControl?.beginRefreshing()
         collectionView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+        collectionView.refreshControl?.beginRefreshing()
     }
 
     func registerCells() {
