@@ -58,7 +58,7 @@ extension UIActivityIndicatorView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        tintColor = theme.bodyText
+        color = theme.bodyText
     }
 }
 
