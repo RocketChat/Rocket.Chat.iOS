@@ -51,7 +51,7 @@ DEPENDENCIES:
   - RCMarkdownParser (from `https://github.com/RocketChat/RCMarkdownParser.git`)
   - ReachabilitySwift
   - RealmSwift
-  - SDWebImage (~> 4)
+  - SDWebImage (~> 4.1)
   - SDWebImage/GIF
   - SearchTextField
   - semver
@@ -134,6 +134,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 070dabdcb1beb81b247c65ffa3a79dbbfb3b48aa
   TagListView: 669f7d4455003c877655875d34829731c4191528
 
-PODFILE CHECKSUM: d16e02c835e46588d3b117f3d1bc28edc9970159
+PODFILE CHECKSUM: bebfc51ab3962c1587520680c2ff16890c3ce936
 
 COCOAPODS: 1.5.0

@@ -85,6 +85,13 @@ class FileTableViewCell: UITableViewCell {
                     self.filePreview.image = nil
                 }
             }
+
+            return
+        }
+
+        if file.isAudio {
+            filePreview.image = #imageLiteral(resourceName: "audio")
+            return
         }
     }
 

@@ -40,6 +40,11 @@ extension File {
         return videoTypes.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
     }
 
+    var isAudio: Bool {
+        let audioTypes = ["mp3", "wav", "3gp", "audio"]
+        return audioTypes.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
+    }
+
     var videoThumbPath: URL? {
         let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         let documents = path[0]
