@@ -43,9 +43,10 @@ class SubscriptionFilesRequest: APIRequest {
 
 final class SubscriptionFilesResource: APIResource {
     var files: [File]? {
+        let realm = Realm.current
         return raw?["files"].arrayValue.map {
             let file = File()
-            file.map($0, realm: Realm.current)
+            file.map($0, realm: realm)
             return file
         }
     }
