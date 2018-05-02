@@ -7,19 +7,16 @@
 //
 
 import Foundation
-import SlackTextViewController
 
 struct ThemeManager {
     static var theme = themes.first(where: { $0.title == UserDefaults.standard.string(forKey: userDefaultsKey) })?.theme ?? Theme.light {
 
         didSet {
-            UIView.animate(
-                withDuration: 0.3,
-                animations: ({ observers.forEach { $0.value?.applyTheme() } })
-            ) { _ in
-                let themeName = themes.first(where: { $0.theme == theme })?.title
-                UserDefaults.standard.set(themeName, forKey: userDefaultsKey)
+            UIView.animate(withDuration: 0.3) {
+                observers.forEach { $0.value?.applyTheme() }
             }
+            let themeName = themes.first(where: { $0.theme == theme })?.title
+            UserDefaults.standard.set(themeName, forKey: userDefaultsKey)
         }
     }
 
