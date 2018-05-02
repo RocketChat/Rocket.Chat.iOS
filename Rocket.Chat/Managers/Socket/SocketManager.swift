@@ -130,14 +130,20 @@ class SocketManager {
 extension SocketManager {
 
     static func reconnect() {
-        guard let auth = AuthManager.isAuthenticated() else { return }
+        guard
+            let auth = AuthManager.isAuthenticated(),
+            let infoClient = API.current()?.client(InfoClient.self),
+            let commandsClient = API.current()?.client(CommandsClient.self)
+        else {
+            return
+        }
 
         AuthManager.resume(auth, completion: { (response) in
             guard !response.isError() else {
                 return
             }
 
-            API.current()?.client(InfoClient.self).fetchInfo()
+            infoClient.fetchInfo()
 
             SubscriptionManager.updateSubscriptions(auth, completion: { _ in
                 AuthSettingsManager.updatePublicSettings(auth)
@@ -148,10 +154,10 @@ extension SocketManager {
                 SubscriptionManager.subscribeRoomChanges()
                 SubscriptionManager.subscribeInAppNotifications()
                 PermissionManager.changes()
-                PermissionManager.updatePermissions()
+                infoClient.fetchPermissions()
                 CustomEmojiManager.sync()
 
-                API.current()?.client(CommandsClient.self).fetchCommands()
+                commandsClient.fetchCommands()
 
                 if let userIdentifier = auth.userId {
                     PushManager.updateUser(userIdentifier)
