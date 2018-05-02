@@ -11,6 +11,7 @@ import SDWebImage
 import FLAnimatedImage
 import SimpleImageViewer
 import MBProgressHUD
+import MobilePlayer
 
 class FilesListViewData {
     var subscription: Subscription?
@@ -114,7 +115,21 @@ class FilesListViewController: BaseViewController {
         }
     }
 
-    func openImage(fromFile file: File, onImageView imageView: FLAnimatedImageView?) {
+    func openImage(fromFile file: File, fromImageView imageView: FLAnimatedImageView) {
+        if imageView.animatedImage != nil || imageView.image != nil {
+            let configuration = ImageViewerConfiguration { config in
+                config.image = imageView.image
+                config.animatedImage = imageView.animatedImage
+                config.imageView = imageView
+                config.allowSharing = true
+            }
+            present(ImageViewerController(configuration: configuration), animated: true)
+        } else {
+            openRemoteImage(fromFile: file, fromImageView: imageView)
+        }
+    }
+
+    private func openRemoteImage(fromFile file: File, fromImageView imageView: FLAnimatedImageView?) {
         guard let fileURL = file.fullFileURL() else { return }
 
         func open(data: Data?) {
@@ -139,6 +154,14 @@ class FilesListViewController: BaseViewController {
         SDWebImageDownloader.shared().downloadImage(with: fileURL, options: [.useNSURLCache], progress: nil, completed: { _, data, _, _ in
             open(data: data)
         })
+    }
+
+    func openVideo(fromFile file: File) {
+        guard let videoURL = file.fullFileURL() else { return }
+        let controller = MobilePlayerViewController(contentURL: videoURL)
+        controller.title = file.name
+        controller.activityItems = [file.name, videoURL]
+        present(controller, animated: true, completion: nil)
     }
 }
 
@@ -220,16 +243,15 @@ extension FilesListViewController: UITableViewDelegate {
         }
 
         let file = data.cell(at: indexPath.row)
-        if fileCell.filePreview.animatedImage != nil || fileCell.filePreview.image != nil {
-            let configuration = ImageViewerConfiguration { config in
-                config.image = fileCell.filePreview.image
-                config.animatedImage = fileCell.filePreview.animatedImage
-                config.imageView = fileCell.filePreview
-                config.allowSharing = true
-            }
-            present(ImageViewerController(configuration: configuration), animated: true)
-        } else {
-            openImage(fromFile: file, onImageView: fileCell.filePreview)
+
+        if file.isImage {
+            openImage(fromFile: file, fromImageView: fileCell.filePreview)
+            return
+        }
+
+        if file.isVideo {
+            openVideo(fromFile: file)
+            return
         }
     }
 }
