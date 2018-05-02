@@ -90,7 +90,14 @@ class FileTableViewCell: UITableViewCell {
         }
 
         if file.isAudio {
+            filePreview.contentMode = .scaleAspectFit
             filePreview.image = #imageLiteral(resourceName: "audio")
+            return
+        }
+
+        if file.isDocument {
+            filePreview.contentMode = .scaleAspectFit
+            filePreview.image = #imageLiteral(resourceName: "icon_file")
             return
         }
     }
