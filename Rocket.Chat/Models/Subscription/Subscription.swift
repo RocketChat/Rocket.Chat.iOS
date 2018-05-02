@@ -46,6 +46,8 @@ final class Subscription: BaseModel {
     @objc dynamic var roomTopic: String?
     @objc dynamic var roomDescription: String?
     @objc dynamic var roomReadOnly = false
+    @objc dynamic var roomUpdatedAt: Date?
+    @objc dynamic var roomLastMessage: Message?
 
     let roomMuted = RealmSwift.List<String>()
 
@@ -55,8 +57,46 @@ final class Subscription: BaseModel {
     let messages = LinkingObjects(fromType: Message.self, property: "subscription")
 }
 
-// MARK: Failed Messages
 extension Subscription {
+
+    func lastMessageText() -> String {
+        guard
+            let lastMessage = roomLastMessage,
+            let userLastMessage = lastMessage.user
+        else {
+            return "No message"
+        }
+
+        var text = lastMessage.text
+
+        let isFromCurrentUser = userLastMessage.identifier == AuthManager.currentUser()?.identifier
+        let isOnlyAttachment = text.isEmpty && lastMessage.attachments.count > 0
+
+        if isOnlyAttachment {
+            text = " sent an attachment"
+        } else {
+            if !isFromCurrentUser {
+                text = ": \(text)"
+            }
+        }
+
+        if isFromCurrentUser && isOnlyAttachment {
+            text = "You\(text)"
+        }
+
+        if !isFromCurrentUser {
+            text = "\(userLastMessage.displayName())\(text)"
+        }
+
+        return text
+    }
+
+}
+
+// MARK: Failed Messages
+
+extension Subscription {
+
     func setTemporaryMessagesFailed() {
         try? realm?.write {
             messages.filter("temporary = true").forEach {
@@ -65,4 +105,5 @@ extension Subscription {
             }
         }
     }
+
 }

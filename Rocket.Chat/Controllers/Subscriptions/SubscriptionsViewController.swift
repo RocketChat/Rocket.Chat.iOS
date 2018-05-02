@@ -280,31 +280,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<Results<T>>?) {
-        guard case .update(_, _, let insertions, let modifications)? = changes else {
-            return
-        }
-
-        if insertions.count > 0 {
-
-        }
-    }
-
-    func subscribeModelChanges() {
-        guard !assigned else { return }
-        guard let auth = AuthManager.isAuthenticated() else { return }
-        guard let realm = Realm.current else { return }
-
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "lastSeen", ascending: false)
-        subscriptionsToken = subscriptions?.observe({ [weak self] changes in
-            self?.handleSubscriptionUpdates(changes: changes)
-        })
-
-        if let currentUserIdentifier = AuthManager.currentUser()?.identifier {
-            let query = realm.objects(User.self).filter("identifier = %@", currentUserIdentifier)
-            currentUserToken = query.observe({ [weak self] changes in
-                self?.handleCurrentUserUpdates(changes: changes)
-            })
-        }
+        
     }
 
     func updateCurrentUserInformation() {

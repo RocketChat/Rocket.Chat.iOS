@@ -213,15 +213,10 @@ final class ChatViewController: SLKTextViewController {
         setupReplyView()
     }
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        keyboardFrame?.updateFrame()
-    }
-
     @objc internal func reconnect() {
-        chatHeaderViewStatus?.labelTitle.text = localized("connection.connecting.banner.message")
-        chatHeaderViewStatus?.activityIndicator.startAnimating()
-        chatHeaderViewStatus?.buttonRefresh.isHidden = true
+//        chatHeaderViewStatus?.labelTitle.text = localized("connection.connecting.banner.message")
+//        chatHeaderViewStatus?.activityIndicator.startAnimating()
+//        chatHeaderViewStatus?.buttonRefresh.isHidden = true
 
         if subscription == nil {
             subscription = .initialSubscription()
