@@ -104,7 +104,6 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
         wait(for: [expectation], timeout: 3)
     }
 
-    //swiftlint:disable function_body_length
     func testFetchPermissions() {
         let api = MockAPI()
         let realm = testRealm()
