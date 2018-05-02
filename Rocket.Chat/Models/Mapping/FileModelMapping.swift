@@ -29,9 +29,13 @@ extension File: ModelMappeable {
         uploadedAt = Date.dateFromString(values["uploadedAt"].stringValue)
         url = values["path"].stringValue
 
-        if let userIdentifier = values["userId"].string {
+        if let userIdentifier = values["user"]["_id"].string {
             if let realm = realm {
                 if let user = realm.object(ofType: User.self, forPrimaryKey: userIdentifier as AnyObject) {
+                    self.user = user
+                } else {
+                    let user = User()
+                    user.map(values["user"], realm: realm)
                     self.user = user
                 }
             }
