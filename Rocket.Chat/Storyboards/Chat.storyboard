@@ -407,15 +407,71 @@
                             <constraint firstAttribute="trailing" secondItem="jAU-FE-FIa" secondAttribute="trailing" id="sh2-3M-2Sh"/>
                             <constraint firstItem="jAU-FE-FIa" firstAttribute="leading" secondItem="xkp-Sr-T5G" secondAttribute="leading" id="z5t-g0-QEc"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="PaK-Vr-y5q"/>
                     </view>
                     <navigationItem key="navigationItem" title="Files" id="AiB-jG-eeo"/>
                     <connections>
                         <outlet property="tableView" destination="jAU-FE-FIa" id="NKt-fm-ycq"/>
+                        <segue destination="qEc-4Q-FG2" kind="show" identifier="showAudio" id="9e9-wj-bAv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6xo-Ss-83K" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4349.6000000000004" y="950.37481259370327"/>
+        </scene>
+        <!--Audio File View Controller-->
+        <scene sceneID="1pS-kY-iSB">
+            <objects>
+                <viewController id="qEc-4Q-FG2" customClass="AudioFileViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SiU-5E-2Lr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="82u-IQ-DU7">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="jgn-ls-zPc"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="audioLarge" translatesAutoresizingMaskIntoConstraints="NO" id="E2d-6v-d5m">
+                                <rect key="frame" x="137" y="251" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="BHQ-5w-k0r"/>
+                                    <constraint firstAttribute="width" constant="100" id="twF-EH-PrI"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio titleAudio titleAudio titleAudio titleAudio titleAudio titl" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtD-Pz-APQ">
+                                <rect key="frame" x="52" y="375" width="270" height="38.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="lWs-01-56X"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="wWi-Pc-Qfx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="E2d-6v-d5m" firstAttribute="centerX" secondItem="SiU-5E-2Lr" secondAttribute="centerX" id="5EW-ka-2N5"/>
+                            <constraint firstItem="82u-IQ-DU7" firstAttribute="bottom" secondItem="nxo-e6-YmM" secondAttribute="bottom" id="6bS-NT-YLz"/>
+                            <constraint firstItem="82u-IQ-DU7" firstAttribute="leading" secondItem="nxo-e6-YmM" secondAttribute="leading" id="Fb8-1G-Luh"/>
+                            <constraint firstItem="wtD-Pz-APQ" firstAttribute="top" secondItem="E2d-6v-d5m" secondAttribute="bottom" constant="24" id="MwE-eP-QLl"/>
+                            <constraint firstItem="82u-IQ-DU7" firstAttribute="trailing" secondItem="nxo-e6-YmM" secondAttribute="trailing" id="Z29-hA-vnm"/>
+                            <constraint firstItem="wtD-Pz-APQ" firstAttribute="centerX" secondItem="E2d-6v-d5m" secondAttribute="centerX" id="gRm-22-fep"/>
+                            <constraint firstItem="E2d-6v-d5m" firstAttribute="centerY" secondItem="SiU-5E-2Lr" secondAttribute="centerY" constant="-32" id="xYG-WV-Zf4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nxo-e6-YmM"/>
+                    </view>
+                    <connections>
+                        <outlet property="audioPlayerContainer" destination="82u-IQ-DU7" id="qFs-Ob-gVr"/>
+                        <outlet property="audioTitle" destination="wtD-Pz-APQ" id="TJY-vd-1FI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="smQ-H2-PlA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5060" y="949.47526236881572"/>
         </scene>
         <!--Messages-->
         <scene sceneID="yul-vI-y3f">
@@ -461,5 +517,6 @@
     </scenes>
     <resources>
         <image name="Arrow Down" width="25" height="25"/>
+        <image name="audioLarge" width="100" height="100"/>
     </resources>
 </document>

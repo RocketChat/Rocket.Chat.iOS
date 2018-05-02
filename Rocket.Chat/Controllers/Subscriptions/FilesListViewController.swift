@@ -243,6 +243,12 @@ extension FilesListViewController {
             bundle: Bundle.main
         ), forCellReuseIdentifier: LoaderTableViewCell.identifier)
     }
+
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let audioViewController = segue.destination as? AudioFileViewController, let file = sender as? File {
+            audioViewController.file = file
+        }
+    }
 }
 
 // MARK: UITableView
@@ -285,6 +291,11 @@ extension FilesListViewController: UITableViewDelegate {
 
         if file.isVideo {
             openVideo(fromFile: file)
+            return
+        }
+
+        if file.isAudio {
+            performSegue(withIdentifier: "showAudio", sender: file)
             return
         }
 
