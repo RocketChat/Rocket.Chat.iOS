@@ -221,6 +221,7 @@
 "chat.message.type.subscription_role_removed" = "%@ não é mais %@ por %@";
 "chat.message.type.room_archived" = "Esta sala foi arquivada por %@";
 "chat.message.type.room_unarchived" = "Esta sala foi desarquivada por %@";
+"chat.message.type.message_pinned" = "Pinou uma mensagem:";
 
 // Chat Information
 "chat.info.title" = "Informações";
