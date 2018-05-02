@@ -103,4 +103,39 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
 
         wait(for: [expectation], timeout: 3)
     }
+
+    //swiftlint:disable function_body_length
+    func testFetchPermissions() {
+        let api = MockAPI()
+        let realm = testRealm()
+        let client = InfoClient(api: api)
+
+        api.nextResult = JSON([
+            [
+                "_id": "snippet-message",
+                "roles": [
+                    "owner",
+                    "moderator",
+                    "admin"
+                ]
+            ],
+            [
+                "_id": "access-permissions",
+                "roles": [
+                    "admin"
+                ]
+            ]
+        ])
+
+        client.fetchPermissions(realm: realm)
+
+        let expectation = XCTestExpectation(description: "permissions added to realm")
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            if realm.objects(Permission.self).count == 2 {
+                expectation.fulfill()
+            }
+        })
+
+        wait(for: [expectation], timeout: 3)
+    }
 }
