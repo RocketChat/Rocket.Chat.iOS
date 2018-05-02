@@ -61,4 +61,8 @@ final class SubscriptionFilesResource: APIResource {
     var total: Int? {
         return raw?["total"].int
     }
+
+    var success: Bool {
+        return raw?["success"].bool ?? false
+    }
 }
