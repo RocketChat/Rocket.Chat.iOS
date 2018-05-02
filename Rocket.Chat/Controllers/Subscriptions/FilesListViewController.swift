@@ -24,6 +24,7 @@ class FilesListViewData {
 
     var title: String = localized("chat.messages.files.list.title")
 
+    var isFirstAppearing = true
     var isShowingAllFiles: Bool {
         return showing >= total
     }
@@ -225,11 +226,14 @@ extension FilesListViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        loadMoreFiles()
+        if data.isFirstAppearing {
+            data.isFirstAppearing = false
+            loadMoreFiles()
 
-        guard let refreshControl = tableView.refreshControl else { return }
-        tableView.refreshControl?.beginRefreshing()
-        tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+            guard let refreshControl = tableView.refreshControl else { return }
+            tableView.refreshControl?.beginRefreshing()
+            tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+        }
     }
 
     func registerCells() {
