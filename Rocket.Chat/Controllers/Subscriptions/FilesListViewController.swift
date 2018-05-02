@@ -134,7 +134,9 @@ class FilesListViewController: BaseViewController {
     private func openRemoteImage(fromFile file: File, fromImageView imageView: FLAnimatedImageView?) {
         guard let fileURL = file.fullFileURL() else { return }
 
-        func open(data: Data?) {
+        let open: ((Data?) -> Void) = { [weak self] data in
+            guard let strongSelf = self else { return }
+
             let configuration = ImageViewerConfiguration { config in
                 if let data = data {
                     if file.isGif {
@@ -147,14 +149,14 @@ class FilesListViewController: BaseViewController {
             }
 
             DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
-                self.present(ImageViewerController(configuration: configuration), animated: false)
+                MBProgressHUD.hide(for: strongSelf.view, animated: true)
+                strongSelf.present(ImageViewerController(configuration: configuration), animated: false)
             }
         }
 
         MBProgressHUD.showAdded(to: view, animated: true)
         SDWebImageDownloader.shared().downloadImage(with: fileURL, options: [.useNSURLCache], progress: nil, completed: { _, data, _, _ in
-            open(data: data)
+            open(data)
         })
     }
 
@@ -190,9 +192,10 @@ class FilesListViewController: BaseViewController {
             let loadingHUD = MBProgressHUD.showAdded(to: view, animated: true)
             loadingHUD.label.text = message
             // Download file and cache it to be used later
-            DownloadManager.download(url: fileURL, to: localFileURL) {
+            DownloadManager.download(url: fileURL, to: localFileURL) { [weak self] in
                 DispatchQueue.main.async {
-                    MBProgressHUD.hide(for: self.view, animated: true)
+                    guard let strongSelf = self else { return }
+                    MBProgressHUD.hide(for: strongSelf.view, animated: true)
                     open()
                 }
             }
