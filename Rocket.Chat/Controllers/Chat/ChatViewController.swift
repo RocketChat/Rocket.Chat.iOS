@@ -15,13 +15,6 @@ private let kEmptyCellIdentifier = "kEmptyCellIdentifier"
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
-    @IBAction func changeTheme(_ sender: Any) {
-        if ThemeManager.theme == .light {
-                ThemeManager.theme = .dark
-        } else {
-                ThemeManager.theme = .light
-        }
-    }
 
     var activityIndicator: LoaderView!
     @IBOutlet weak var activityIndicatorContainer: UIView! {
