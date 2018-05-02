@@ -29,4 +29,36 @@ extension File {
     var username: String {
         return user?.username ?? ""
     }
+
+    var isImage: Bool {
+        let imageExtensions = ["gif", "jpg", "png", "jpeg"]
+        return imageExtensions.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
+    }
+
+    fileprivate static func fullURLWith(_ path: String?, auth: Auth? = nil) -> URL? {
+        guard let path = path else { return nil }
+
+        if path.contains("http://") || path.contains("https://") {
+            return URL(string: path)
+        }
+
+        let pathClean = path.replacingOccurrences(of: "//", with: "/")
+
+        guard
+            let pathPercentEncoded = NSString(string: pathClean).addingPercentEncoding(withAllowedCharacters: .urlPathAllowed),
+            let auth = auth ?? AuthManager.isAuthenticated(),
+            let userId = auth.userId,
+            let token = auth.token,
+            let baseURL = auth.baseURL()
+            else {
+                return nil
+        }
+
+        let urlString = "\(baseURL)\(pathPercentEncoded)?rc_uid=\(userId)&rc_token=\(token)"
+        return URL(string: urlString)
+    }
+
+    func fullFileURL(auth: Auth? = nil) -> URL? {
+        return File.fullURLWith(url, auth: auth)
+    }
 }
