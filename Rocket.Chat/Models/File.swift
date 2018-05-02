@@ -31,8 +31,20 @@ extension File {
     }
 
     var isImage: Bool {
-        let imageExtensions = ["gif", "jpg", "png", "jpeg"]
-        return imageExtensions.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
+        let imageTypes = ["gif", "jpg", "png", "jpeg", "image"]
+        return imageTypes.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
+    }
+
+    var isVideo: Bool {
+        let videoTypes = ["mp4", "mov", "video", "flv"]
+        return videoTypes.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
+    }
+
+    var videoThumbPath: URL? {
+        let path = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let documents = path[0]
+        let thumbName = url.replacingOccurrences(of: "/", with: "\\")
+        return documents.appendingPathComponent("\(thumbName).png")
     }
 
     fileprivate static func fullURLWith(_ path: String?, auth: Auth? = nil) -> URL? {
