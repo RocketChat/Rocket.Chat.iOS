@@ -42,4 +42,3 @@ final class PinMessageResource: APIResource {
         return raw?["success"].boolValue
     }
 }
-
