@@ -90,6 +90,7 @@ class FileTableViewCell: UITableViewCell {
         }
 
         if file.isAudio {
+            accessoryType = .disclosureIndicator
             filePreview.contentMode = .scaleAspectFit
             filePreview.image = #imageLiteral(resourceName: "audio")
             return
@@ -108,6 +109,7 @@ class FileTableViewCell: UITableViewCell {
         username.text = ""
         uploadedAt.text = ""
         playOverlay.isHidden = true
+        accessoryType = .none
         filePreview.contentMode = .scaleAspectFill
         filePreview.animatedImage = nil
         filePreview.image = nil
