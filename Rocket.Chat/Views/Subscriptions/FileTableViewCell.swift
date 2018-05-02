@@ -25,9 +25,42 @@ class FileTableViewCell: UITableViewCell {
         }
     }
 
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        filePreview.sd_setShowActivityIndicatorView(true)
+        filePreview.sd_setIndicatorStyle(.gray)
+    }
+
     func bindFileData() {
         name.text = file.name
         username.text = "@\(file.username)"
         uploadedAt.text = file.uploadedAt?.formatted()
+
+        guard let fileURL = file.fullFileURL() else {
+            filePreview.animatedImage = nil
+            filePreview.image = nil
+            return
+        }
+
+        if file.isImage {
+            filePreview.sd_setImage(with: fileURL) { (_, error, _, _) in
+                guard error == nil else {
+                    self.filePreview.contentMode = .scaleAspectFit
+                    self.filePreview.image = #imageLiteral(resourceName: "Resource Unavailable")
+                    return
+                }
+            }
+        }
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        name.text = ""
+        username.text = ""
+        uploadedAt.text = ""
+        filePreview.animatedImage = nil
+        filePreview.image = nil
+        filePreview.sd_cancelCurrentImageLoad()
+        filePreview.sd_cancelCurrentAnimationImagesLoad()
     }
 }
