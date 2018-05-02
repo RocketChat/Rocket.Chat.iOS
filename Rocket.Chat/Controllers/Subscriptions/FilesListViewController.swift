@@ -79,6 +79,7 @@ class FilesListViewData {
 
 class FilesListViewController: BaseViewController {
     var data = FilesListViewData()
+    var documentController: UIDocumentInteractionController?
 
     @IBOutlet weak var tableView: UITableView!
 
@@ -162,6 +163,39 @@ class FilesListViewController: BaseViewController {
         controller.title = file.name
         controller.activityItems = [file.name, videoURL]
         present(controller, animated: true, completion: nil)
+    }
+
+    func openDocument(fromFile file: File) {
+        guard let identifier = file.identifier else { return }
+        guard let fileURL = file.fullFileURL() else { return }
+        let localUniqueName = identifier + file.url.replacingOccurrences(of: "/", with: "")
+        guard let filename = DownloadManager.filenameFor(localUniqueName) else { return }
+        guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
+
+        // Open document itself
+        func open() {
+            documentController = UIDocumentInteractionController(url: localFileURL)
+            documentController?.delegate = self
+            DispatchQueue.main.async {
+                self.documentController?.presentPreview(animated: true)
+            }
+        }
+
+        // Checks if we do have the file in the system, before downloading it
+        if DownloadManager.fileExists(localFileURL) {
+            open()
+        } else {
+            let message = String(format: localized("chat.download.downloading_file"), file.name)
+            let loadingHUD = MBProgressHUD.showAdded(to: view, animated: true)
+            loadingHUD.label.text = message
+            // Download file and cache it to be used later
+            DownloadManager.download(url: fileURL, to: localFileURL) {
+                DispatchQueue.main.async {
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    open()
+                }
+            }
+        }
     }
 }
 
@@ -253,5 +287,18 @@ extension FilesListViewController: UITableViewDelegate {
             openVideo(fromFile: file)
             return
         }
+
+        if file.isDocument {
+            openDocument(fromFile: file)
+            return
+        }
+    }
+}
+
+// MARK: UIDocumentInteractionDelegate
+
+extension FilesListViewController: UIDocumentInteractionControllerDelegate {
+    func documentInteractionControllerViewControllerForPreview(_ controller: UIDocumentInteractionController) -> UIViewController {
+        return self
     }
 }
