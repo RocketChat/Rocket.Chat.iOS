@@ -50,6 +50,14 @@ final class MessageTextCacheManager {
 
         let attributedString = text.transformMarkdown()
         let finalText = NSMutableAttributedString(attributedString: attributedString)
+
+        // Set text color for markdown quotes
+        finalText.enumerateAttribute(.backgroundColor, in: NSRange(location: 0, length: finalText.length), options: []) { (value, range, _) in
+            if let backgroundColor = value as? UIColor, backgroundColor != .clear {
+                finalText.addAttribute(.foregroundColor, value: UIColor.darkGray, range: range)
+            }
+        }
+
         finalText.trimCharacters(in: .whitespaces)
         finalText.highlightMentions(mentions, username: username)
         finalText.highlightChannels(channels)
