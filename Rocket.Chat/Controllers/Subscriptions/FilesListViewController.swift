@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import SDWebImage
+import FLAnimatedImage
+import SimpleImageViewer
+import MBProgressHUD
 
 class FilesListViewData {
     var subscription: Subscription?
@@ -109,6 +113,36 @@ class FilesListViewController: BaseViewController {
             }
         }
     }
+
+    func openImage(fromFile file: File, onImageView imageView: FLAnimatedImageView?) {
+        guard let identifier = file.identifier else { return }
+        guard let fileURL = file.fullFileURL() else { return }
+        guard let filename = DownloadManager.filenameFor(identifier) else { return }
+        guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
+
+        func open(data: Data?) {
+            let configuration = ImageViewerConfiguration { config in
+                if let data = data {
+                    if file.isGif {
+                        config.animatedImage = FLAnimatedImage(gifData: data)
+                    } else {
+                        config.image = UIImage(data: data)
+                    }
+                }
+                config.imageView = imageView
+            }
+
+            DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
+                self.present(ImageViewerController(configuration: configuration), animated: false)
+            }
+        }
+
+        MBProgressHUD.showAdded(to: view, animated: true)
+        SDWebImageDownloader.shared().downloadImage(with: fileURL, options: [.useNSURLCache], progress: nil, completed: { _, data, _, _ in
+            open(data: data)
+        })
+    }
 }
 
 // MARK: ViewController
@@ -179,4 +213,26 @@ extension FilesListViewController: UITableViewDataSource {
         return UITableViewCell()
     }
 
+}
+
+extension FilesListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        guard let fileCell = tableView.cellForRow(at: indexPath) as? FileTableViewCell else {
+            return
+        }
+
+        let file = data.cell(at: indexPath.row)
+        if fileCell.filePreview.animatedImage != nil || fileCell.filePreview.image != nil {
+            let configuration = ImageViewerConfiguration { config in
+                config.image = fileCell.filePreview.image
+                config.animatedImage = fileCell.filePreview.animatedImage
+                config.imageView = fileCell.filePreview
+                config.allowSharing = true
+            }
+            present(ImageViewerController(configuration: configuration), animated: true)
+        } else {
+            openImage(fromFile: file, onImageView: fileCell.filePreview)
+        }
+    }
 }

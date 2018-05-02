@@ -35,6 +35,11 @@ extension File {
         return imageTypes.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
     }
 
+    var isGif: Bool {
+        let gifTypes = ["gif"]
+        return gifTypes.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
+    }
+
     var isVideo: Bool {
         let videoTypes = ["mp4", "mov", "video", "flv"]
         return videoTypes.compactMap { type.range(of: $0, options: .caseInsensitive) != nil ? true : nil }.first ?? false
