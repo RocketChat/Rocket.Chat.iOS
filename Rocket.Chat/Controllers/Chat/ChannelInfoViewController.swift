@@ -24,6 +24,7 @@ class ChannelInfoViewController: BaseViewController {
 
             let shouldListMentions = subscription.type != .directMessage
             let channelInfoData = [
+                ChannelInfoDetailCellData(title: localized("chat.info.item.files"), detail: "", action: showFilesList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList),
@@ -124,19 +125,36 @@ class ChannelInfoViewController: BaseViewController {
         self.performSegue(withIdentifier: "toMessagesList", sender: data)
     }
 
+    func showFilesList() {
+        let data = ListSegueData(
+            title: localized("chat.messages.files.list.title"),
+            query: nil,
+            isListingMentions: false
+        )
+
+        self.performSegue(withIdentifier: "toFilesList", sender: data)
+    }
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let membersList = segue.destination as? MembersListViewController {
             membersList.data.subscription = self.subscription
         }
 
         if let messagesList = segue.destination as? MessagesListViewController {
-
             messagesList.data.subscription = self.subscription
 
             if let segueData = sender as? ListSegueData {
                 messagesList.data.title = segueData.title
                 messagesList.data.query = segueData.query
                 messagesList.data.isListingMentions = segueData.isListingMentions
+            }
+        }
+
+        if let filesList = segue.destination as? FilesListViewController {
+            filesList.data.subscription = self.subscription
+
+            if let segueData = sender as? ListSegueData {
+                filesList.data.title = segueData.title
             }
         }
     }
