@@ -29,6 +29,9 @@ class FileTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        filePreview.layer.cornerRadius = 4
+        filePreview.layer.borderWidth = 0.5
+        filePreview.layer.borderColor = UIColor.lightGray.cgColor
         filePreview.sd_setShowActivityIndicatorView(true)
         filePreview.sd_setIndicatorStyle(.gray)
     }
