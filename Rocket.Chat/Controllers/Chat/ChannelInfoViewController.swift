@@ -24,11 +24,11 @@ class ChannelInfoViewController: BaseViewController {
 
             let shouldListMentions = subscription.type != .directMessage
             let channelInfoData = [
+                ChannelInfoDetailCellData(title: localized("chat.info.item.files"), detail: "", action: showFilesList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.members"), detail: "", action: showMembersList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.pinned"), detail: "", action: showPinnedList),
                 ChannelInfoDetailCellData(title: localized("chat.info.item.starred"), detail: "", action: showStarredList),
-                shouldListMentions ? ChannelInfoDetailCellData(title: localized("chat.info.item.mentions"), detail: "", action: showMentionsList) : nil,
-                ChannelInfoDetailCellData(title: localized("chat.info.item.files"), detail: "", action: showFilesList)
+                shouldListMentions ? ChannelInfoDetailCellData(title: localized("chat.info.item.mentions"), detail: "", action: showMentionsList) : nil
             ].compactMap({$0})
 
             if subscription.type == .directMessage {
