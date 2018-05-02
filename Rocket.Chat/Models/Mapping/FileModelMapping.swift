@@ -27,7 +27,7 @@ extension File: ModelMappeable {
         fileExtension = values["extension"].stringValue
         progress = values["progress"].int ?? 0
         uploadedAt = Date.dateFromString(values["uploadedAt"].stringValue)
-        url = values["url"].stringValue
+        url = values["path"].stringValue
 
         if let userIdentifier = values["userId"].string {
             if let realm = realm {
