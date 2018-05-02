@@ -115,10 +115,7 @@ class FilesListViewController: BaseViewController {
     }
 
     func openImage(fromFile file: File, onImageView imageView: FLAnimatedImageView?) {
-        guard let identifier = file.identifier else { return }
         guard let fileURL = file.fullFileURL() else { return }
-        guard let filename = DownloadManager.filenameFor(identifier) else { return }
-        guard let localFileURL = DownloadManager.localFileURLFor(filename) else { return }
 
         func open(data: Data?) {
             let configuration = ImageViewerConfiguration { config in
