@@ -37,7 +37,7 @@ class SubscriptionFilesRequest: APIRequest {
     init(roomId: String, subscriptionType: SubscriptionType) {
         self.type = subscriptionType
         self.roomId = roomId
-        self.query = "roomId=\(roomId)"
+        self.query = "roomId=\(roomId)&sort={\"uploadedAt\":-1}"
     }
 }
 
