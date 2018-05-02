@@ -45,62 +45,76 @@ class FileTableViewCell: UITableViewCell {
         }
 
         if file.isImage {
-            filePreview.sd_setImage(with: fileURL) { (_, error, _, _) in
-                guard error == nil else {
-                    self.filePreview.contentMode = .scaleAspectFit
-                    self.filePreview.image = #imageLiteral(resourceName: "Resource Unavailable")
-                    return
-                }
-            }
-
+            updateImage(withURL: fileURL)
             return
         }
 
         if file.isVideo {
-            playOverlay.isHidden = false
-            guard let thumbURL = file.videoThumbPath else { return }
-
-            if let imageData = try? Data(contentsOf: thumbURL) {
-                if let thumbnail = UIImage(data: imageData) {
-                    filePreview.image = thumbnail
-                    return
-                }
-            }
-
-            DispatchQueue.global(qos: .userInitiated).async {
-                let asset = AVAsset(url: fileURL)
-                let imageGenerator = AVAssetImageGenerator(asset: asset)
-                imageGenerator.appliesPreferredTrackTransform = true
-                let time = CMTimeMake(1, 1)
-
-                do {
-                    let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
-                    let thumbnail = UIImage(cgImage: imageRef)
-                    try UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)
-
-                    DispatchQueue.main.async {
-                        self.filePreview.image = thumbnail
-                    }
-                } catch {
-                    self.filePreview.image = nil
-                }
-            }
-
+            updateVideo(withURL: fileURL)
             return
         }
 
         if file.isAudio {
-            accessoryType = .disclosureIndicator
-            filePreview.contentMode = .scaleAspectFit
-            filePreview.image = #imageLiteral(resourceName: "audio")
+            updateAudio(withURL: fileURL)
             return
         }
 
         if file.isDocument {
-            filePreview.contentMode = .scaleAspectFit
-            filePreview.image = #imageLiteral(resourceName: "icon_file")
+            updateDocument(withURL: fileURL)
             return
         }
+    }
+
+    func updateImage(withURL url: URL) {
+        filePreview.sd_setImage(with: url) { (_, error, _, _) in
+            guard error == nil else {
+                self.filePreview.contentMode = .scaleAspectFit
+                self.filePreview.image = #imageLiteral(resourceName: "Resource Unavailable")
+                return
+            }
+        }
+    }
+
+    func updateVideo(withURL url: URL) {
+        playOverlay.isHidden = false
+        guard let thumbURL = file.videoThumbPath else { return }
+
+        if let imageData = try? Data(contentsOf: thumbURL) {
+            if let thumbnail = UIImage(data: imageData) {
+                filePreview.image = thumbnail
+                return
+            }
+        }
+
+        DispatchQueue.global(qos: .userInitiated).async {
+            let asset = AVAsset(url: url)
+            let imageGenerator = AVAssetImageGenerator(asset: asset)
+            imageGenerator.appliesPreferredTrackTransform = true
+            let time = CMTimeMake(1, 1)
+
+            do {
+                let imageRef = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                let thumbnail = UIImage(cgImage: imageRef)
+                try UIImagePNGRepresentation(thumbnail)?.write(to: thumbURL, options: .atomic)
+
+                DispatchQueue.main.async {
+                    self.filePreview.image = thumbnail
+                }
+            } catch {
+                self.filePreview.image = nil
+            }
+        }
+    }
+
+    func updateAudio(withURL url: URL) {
+        accessoryType = .disclosureIndicator
+        filePreview.contentMode = .scaleAspectFit
+        filePreview.image = #imageLiteral(resourceName: "audio")
+    }
+
+    func updateDocument(withURL url: URL) {
+        filePreview.contentMode = .scaleAspectFit
+        filePreview.image = #imageLiteral(resourceName: "icon_file")
     }
 
     override func prepareForReuse() {
