@@ -127,6 +127,7 @@
 		33A5C9D1206A565800FE1C8F /* activity.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C8206A565800FE1C8F /* activity.json */; };
 		33A5C9D2206A565800FE1C8F /* nature.json in Resources */ = {isa = PBXBuildFile; fileRef = 33A5C9C9206A565800FE1C8F /* nature.json */; };
 		33A7AD9E207A2F95000E9D0F /* ChatNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33A7AD9D207A2F95000E9D0F /* ChatNotification.swift */; };
+		33C219C1209B0390009E8126 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
 		33CCA72A2091034200FD4C57 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CCA7292091034200FD4C57 /* PreferencesViewController.swift */; };
 		33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2B2073BDF400F03F29 /* NotificationView.swift */; };
 		33F73B302073F24200F03F29 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33F73B2F2073F24200F03F29 /* NotificationViewController.swift */; };
@@ -604,7 +605,6 @@
 		9987B59C2093E60D007D277C /* SubscriptionFilesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9987B59B2093E60C007D277C /* SubscriptionFilesRequest.swift */; };
 		99923773204B3BD800C2D15F /* UploadAvatarRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99923772204B3BD800C2D15F /* UploadAvatarRequest.swift */; };
 		999483EB20644CC4004F61CA /* WebBrowserViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999483EA20644CC4004F61CA /* WebBrowserViewModel.swift */; };
-		999F25B5207EEB0C002E0F68 /* FileModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 999F25B4207EEB0C002E0F68 /* FileModelMapping.swift */; };
 		999F25B7207EEE70002E0F68 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		99B060CE1FB1225200F471C2 /* DraftMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99B060CD1FB1225200F471C2 /* DraftMessageManager.swift */; };
 		99C577EE207E4F1500CE9B4D /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99C577ED207E4F1500CE9B4D /* File.swift */; };
@@ -3844,6 +3844,7 @@
 				8076FDB2204856CC00114F28 /* AuthCanEditMessage.swift in Sources */,
 				D12D34031F69C76400AED992 /* SubscriptionExtensions.swift in Sources */,
 				99C577EE207E4F1500CE9B4D /* File.swift in Sources */,
+				33C219C1209B0390009E8126 /* FileModelMapping.swift in Sources */,
 				1435BFA31F9B601600FB2768 /* RCTextView.swift in Sources */,
 				8076FDC520485ABB00114F28 /* SubscriptionUser.swift in Sources */,
 				41A91AF11E51CD41005C94B1 /* SubscriptionUserStatusView.swift in Sources */,
