@@ -233,6 +233,7 @@
 "chat.info.item.pinned" = "Připnuto";
 "chat.info.item.starred" = "S hvězdičkou";
 "chat.info.item.mentions" = "Mentions"; // TODO
+"chat.info.item.files" = "Arquivos"; // TODO
 
 // Members List
 "chat.members.list.title" = "Členové";
@@ -244,6 +245,8 @@
 "chat.messages.pinned.list.title" = "Připnuté zprávy";
 "chat.messages.starred.list.title" = "Zprávy s hvězdičkou";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
+"chat.messages.files.list.title" = "Files"; // TODO
+"chat.messages.files.list.empty" = "No files found"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Preferences"; // TODO
