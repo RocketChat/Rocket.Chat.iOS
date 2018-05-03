@@ -164,7 +164,7 @@
         <!--Main Split View Controller-->
         <scene sceneID="xwn-PL-3sB">
             <objects>
-                <splitViewController presentsWithGesture="NO" id="GCf-VY-VV6" customClass="MainSplitViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController minimumPrimaryColumnWidth="320" preferredPrimaryColumnWidthFraction="0.32000000000000001" presentsWithGesture="NO" id="GCf-VY-VV6" customClass="MainSplitViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="M6P-WE-AWB" kind="relationship" relationship="masterViewController" id="kFT-O8-SmH"/>
                         <segue destination="Q7Z-N2-FIp" kind="relationship" relationship="detailViewController" id="ObY-Ks-BM2"/>
