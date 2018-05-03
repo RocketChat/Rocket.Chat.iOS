@@ -36,7 +36,7 @@ class InfoClientSpec: XCTestCase, RealmTestCase {
                 expectation.fulfill()
             }
         })
-        wait(for: [expectation], timeout: 2)
+        wait(for: [expectation], timeout: 3)
     }
 
     //swiftlint:disable function_body_length
