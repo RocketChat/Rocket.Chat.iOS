@@ -233,6 +233,7 @@
 "chat.info.item.pinned" = "Fijado";
 "chat.info.item.starred" = "Sembrado de estrellas";
 "chat.info.item.mentions" = "Mentions"; // TODO
+"chat.info.item.files" = "Arquivos"; // TODO
 
 // Members List
 "chat.members.list.title" = "miembros";
@@ -244,6 +245,8 @@
 "chat.messages.pinned.list.title" = "Mensajes fijados";
 "chat.messages.starred.list.title" = "Mensajes destacados";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
+"chat.messages.files.list.title" = "Files"; // TODO
+"chat.messages.files.list.empty" = "No files found"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Preferencias";

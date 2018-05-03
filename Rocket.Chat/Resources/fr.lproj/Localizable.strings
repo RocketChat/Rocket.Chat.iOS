@@ -234,6 +234,7 @@
 "chat.info.item.pinned" = "Épinglé";
 "chat.info.item.starred" = "Mis en favoris";
 "chat.info.item.mentions" = "Mentions"; // TODO
+"chat.info.item.files" = "Arquivos"; // TODO
 
 // Members List
 "chat.members.list.title" = "Membres";
@@ -245,6 +246,8 @@
 "chat.messages.pinned.list.title" = "Messages épinglés";
 "chat.messages.starred.list.title" = "Messages favoris";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
+"chat.messages.files.list.title" = "Files"; // TODO
+"chat.messages.files.list.empty" = "No files found"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Réglages"; // TODO: new text: Preferences

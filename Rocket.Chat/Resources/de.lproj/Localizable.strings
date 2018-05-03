@@ -232,6 +232,7 @@
 "chat.info.item.members" = "Teilnehmer";
 "chat.info.item.pinned" = "Angeheftet";
 "chat.info.item.starred" = "Favorisiert";
+"chat.info.item.files" = "Arquivos"; // TODO
 "chat.info.item.mentions" = "Erwähnungen";
 
 // Members List
@@ -243,6 +244,8 @@
 "chat.messages.list.search.placeholder" = "Search messages"; // TODO
 "chat.messages.pinned.list.title" = "Angeheftete Nachrichten";
 "chat.messages.starred.list.title" = "Favorisierte Nachrichten";
+"chat.messages.files.list.title" = "Files"; // TODO
+"chat.messages.files.list.empty" = "No files found"; // TODO
 "chat.messages.mentions.list.title" = "Erwähnungen";
 
 // Settings

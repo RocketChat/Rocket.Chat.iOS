@@ -233,6 +233,7 @@
 "chat.info.item.pinned" = "Przypięte";
 "chat.info.item.starred" = "Oznaczone gwiazdką";
 "chat.info.item.mentions" = "Mentions"; // TODO
+"chat.info.item.files" = "Arquivos"; // TODO
 
 // Members List
 "chat.members.list.title" = "Członkowie";
@@ -244,6 +245,8 @@
 "chat.messages.pinned.list.title" = "Przypięte wiadomości";
 "chat.messages.starred.list.title" = "Wiadomości oznaczone gwiazdką";
 "chat.messages.mentions.list.title" = "Mentions"; // TODO
+"chat.messages.files.list.title" = "Files"; // TODO
+"chat.messages.files.list.empty" = "No files found"; // TODO
 
 // Settings
 "myaccount.settings.title" = "Preferencje";
