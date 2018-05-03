@@ -46,4 +46,26 @@ struct InfoClient: APIClient {
 
         }
     }
+
+    func fetchPermissions(realm: Realm? = Realm.current) {
+        api.fetch(PermissionsRequest()) { response in
+            switch response {
+            case .resource(let res):
+                DispatchQueue.main.async {
+                    realm?.execute({ realm in
+                        realm.add(res.permissions, update: true)
+                    })
+                }
+            case .error(let error):
+                switch error {
+                case .version:
+                    // version fallback
+                    PermissionManager.updatePermissions()
+                default:
+                    break
+                }
+            }
+
+        }
+    }
 }

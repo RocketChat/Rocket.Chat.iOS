@@ -533,6 +533,8 @@
 		80D41E0520924A8200034D1F /* AuthCanStarMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0420924A8200034D1F /* AuthCanStarMessageSpec.swift */; };
 		80D41E0B20993CE200034D1F /* PinMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0A20993CE200034D1F /* PinMessageRequest.swift */; };
 		80D41E0D20993FCB00034D1F /* PinMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */; };
+		80D41E072099341C00034D1F /* PermissionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E062099341C00034D1F /* PermissionsRequest.swift */; };
+		80D41E092099393600034D1F /* PermissionsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E082099393600034D1F /* PermissionsRequestSpec.swift */; };
 		80D5637220592D32008896D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D5637120592D32008896D6 /* Assets.xcassets */; };
 		80D563752059325A008896D6 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D563742059325A008896D6 /* MimeType.swift */; };
 		80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5637620593533008896D6 /* ParseItemProviders.swift */; };
@@ -1195,6 +1197,8 @@
 		80D41E0420924A8200034D1F /* AuthCanStarMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessageSpec.swift; sourceTree = "<group>"; };
 		80D41E0A20993CE200034D1F /* PinMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMessageRequest.swift; sourceTree = "<group>"; };
 		80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMessageRequestSpec.swift; sourceTree = "<group>"; };
+		80D41E062099341C00034D1F /* PermissionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsRequest.swift; sourceTree = "<group>"; };
+		80D41E082099393600034D1F /* PermissionsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsRequestSpec.swift; sourceTree = "<group>"; };
 		80D5637120592D32008896D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D563742059325A008896D6 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		80D5637620593533008896D6 /* ParseItemProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseItemProviders.swift; sourceTree = "<group>"; };
@@ -2306,6 +2310,7 @@
 				9977302B2072B746009AF465 /* PublicSettingsRequest.swift */,
 				80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */,
 				807C7C0720751EDB006B600E /* SpotlightRequest.swift */,
+				80D41E062099341C00034D1F /* PermissionsRequest.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -2591,6 +2596,7 @@
 				D18675E91F70A58B00406FB4 /* InfoRequestSpec.swift */,
 				9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */,
 				807C7C0B20751F06006B600E /* SpotlightRequestSpec.swift */,
+				80D41E082099393600034D1F /* PermissionsRequestSpec.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -3772,6 +3778,7 @@
 				4147CE791F5EA3D000C322C3 /* SubscriptionsPageViewController.swift in Sources */,
 				802A4E24204D73100072CD23 /* AppGroup.swift in Sources */,
 				8076FDE62048CD0600114F28 /* UserDefaults+Group.swift in Sources */,
+				80D41E072099341C00034D1F /* PermissionsRequest.swift in Sources */,
 				41CABFFC1F50515100E0B289 /* ArrayExtensions.swift in Sources */,
 				335F4F03207A31D3005E14AF /* NotificationManager.swift in Sources */,
 				35E892CA201CDD9700B4BE5A /* PreferencesViewModel.swift in Sources */,
@@ -3967,6 +3974,7 @@
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
 				8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */,
+				80D41E092099393600034D1F /* PermissionsRequestSpec.swift in Sources */,
 				418C74451FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift in Sources */,
 				80D41E0D20993FCB00034D1F /* PinMessageRequestSpec.swift in Sources */,
 				140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */,
