@@ -61,6 +61,18 @@ final class Subscription: BaseModel {
 
 extension Subscription {
 
+    func avatarURL(auth: Auth? = nil) -> URL? {
+        guard
+            let auth = auth ?? AuthManager.isAuthenticated(),
+            let baseURL = auth.baseURL(),
+            let encodedName = name.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed)
+        else {
+            return nil
+        }
+
+        return URL(string: "\(baseURL)/avatar/%22\(encodedName)?format=jpeg")
+    }
+
     func setTemporaryMessagesFailed() {
         try? realm?.write {
             messages.filter("temporary = true").forEach {

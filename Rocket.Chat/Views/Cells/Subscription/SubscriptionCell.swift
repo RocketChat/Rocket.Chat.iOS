@@ -54,7 +54,7 @@ final class SubscriptionCell: UITableViewCell {
     @IBOutlet weak var labelDate: UILabel!
     @IBOutlet weak var labelUnread: UILabel! {
         didSet {
-            labelUnread.layer.cornerRadius = 2
+            labelUnread.layer.cornerRadius = 4
         }
     }
 
@@ -89,7 +89,7 @@ final class SubscriptionCell: UITableViewCell {
         }
 
         let nameFontSize = labelName.font.pointSize
-        let dateFontSize = labelDate.font.pointSize
+        let lastMessageFontSize = labelLastMessage.font.pointSize
 
         if let roomUpdatedAt = subscription.roomUpdatedAt {
             labelDate.text = dateFormatted(date: roomUpdatedAt)
@@ -97,14 +97,14 @@ final class SubscriptionCell: UITableViewCell {
 
         if subscription.unread > 0 {
             labelName.font = UIFont.boldSystemFont(ofSize: nameFontSize)
-            labelDate.font = UIFont.boldSystemFont(ofSize: dateFontSize)
-            labelDate.textColor = .black
+            labelLastMessage.font = UIFont.boldSystemFont(ofSize: lastMessageFontSize)
+            labelDate.textColor = .RCBlue()
 
             labelUnread.alpha = 1
             labelUnread.text =  "\(subscription.unread)"
         } else {
             labelName.font = UIFont.systemFont(ofSize: nameFontSize)
-            labelDate.font = UIFont.systemFont(ofSize: dateFontSize)
+            labelLastMessage.font = UIFont.systemFont(ofSize: lastMessageFontSize)
             labelDate.textColor = .RCGray()
 
             labelUnread.alpha = 0

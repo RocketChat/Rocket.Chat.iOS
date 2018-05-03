@@ -299,6 +299,8 @@
 		41FC9E0C209B3BAA00FED485 /* UploadMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80054CF61FD9AA1B00F5ECF9 /* UploadMessageRequest.swift */; };
 		41FC9E0D209B44A500FED485 /* ChatMessageDaySeparator.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D3A62D1E0805310011949D /* ChatMessageDaySeparator.xib */; };
 		41FC9E0E209B44CD00FED485 /* ChatLoaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41CABFF71F5047D600E0B289 /* ChatLoaderCell.xib */; };
+		41FC9E0F209B469C00FED485 /* AutocompleteCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41AC3CD21DCC9873002DC39A /* AutocompleteCell.xib */; };
+		41FC9E10209B49B200FED485 /* ChatDirectMessageHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 41D894031F4EF65700E284D2 /* ChatDirectMessageHeaderCell.xib */; };
 		41FE55531F6038D60071E97A /* DatabaseManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41FE55521F6038D60071E97A /* DatabaseManagerSpec.swift */; };
 		597ECBA21E3708A50041C5C5 /* DataExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA11E3708A50041C5C5 /* DataExtension.swift */; };
 		597ECBA41E3708B10041C5C5 /* PushManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 597ECBA31E3708B10041C5C5 /* PushManager.swift */; };
@@ -3224,6 +3226,7 @@
 				14F8A227202E5CBF00175FDC /* Black-83.5@2x.png in Resources */,
 				14F8A23C202E5D0600175FDC /* Red-60@3x.png in Resources */,
 				14F8A274202E653E00175FDC /* Grey-60@2x.png in Resources */,
+				41FC9E10209B49B200FED485 /* ChatDirectMessageHeaderCell.xib in Resources */,
 				14F8A225202E5CBF00175FDC /* Black-60@2x.png in Resources */,
 				14F8A25C202E64B200175FDC /* BnW-60@3x.png in Resources */,
 				14F8A26D202E653E00175FDC /* Grey-29@2x.png in Resources */,
@@ -3236,6 +3239,7 @@
 				418C4DC81DC4C08800ABED4C /* SubscriptionSectionView.xib in Resources */,
 				14F8A298202E65C700175FDC /* Blue-29@2x.png in Resources */,
 				412E1F3C1DB6D55000531FDA /* ChatMessageURLView.xib in Resources */,
+				41FC9E0F209B469C00FED485 /* AutocompleteCell.xib in Resources */,
 				413FB6E01FE17EB700F010AA /* SubscriptionsTitleView.xib in Resources */,
 				14F8A242202E5D0600175FDC /* Red-40@3x.png in Resources */,
 				806465EC1FED19B9001F27DB /* EmojiView.xib in Resources */,
