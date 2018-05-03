@@ -42,6 +42,8 @@ final class ChatTitleView: UIView {
     }
 }
 
+// MARK: Themeable
+
 extension ChatTitleView {
     override func applyTheme() {
         super.applyTheme()

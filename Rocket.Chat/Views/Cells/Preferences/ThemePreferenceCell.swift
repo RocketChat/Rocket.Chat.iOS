@@ -72,6 +72,8 @@ extension ThemePreferenceCell {
     }
 }
 
+// MARK: Themeable
+
 extension ThemePreferenceCell {
     override func applyTheme() {
         super.applyTheme()

@@ -101,6 +101,8 @@ extension ReactionView {
     }
 }
 
+// MARK: Themeable
+
 extension ReactionView {
     override func applyTheme() {
         super.applyTheme()

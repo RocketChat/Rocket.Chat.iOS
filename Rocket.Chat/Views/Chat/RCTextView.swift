@@ -173,6 +173,8 @@ extension RCTextView: UITextViewDelegate {
     }
 }
 
+// MARK: Themeable
+
 extension RCTextView {
     override func applyTheme() {
         super.applyTheme()

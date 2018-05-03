@@ -81,6 +81,8 @@ class LoaderView: UIView {
     }
 }
 
+// MARK: Themeable
+
 extension LoaderView {
     override func applyTheme() {
         super.applyTheme()

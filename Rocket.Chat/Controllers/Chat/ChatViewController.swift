@@ -170,8 +170,6 @@ final class ChatViewController: SLKTextViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationController?.navigationBar.isTranslucent = false
-        ThemeManager.addObserver(navigationController?.navigationBar)
-        setNeedsStatusBarAppearanceUpdate()
 
         collectionView?.isPrefetchingEnabled = true
         collectionView?.keyboardDismissMode = .interactive
@@ -1259,9 +1257,11 @@ extension ChatViewController: KeyboardFrameViewDelegate {
     }
 }
 
+// MARK: Themeable
+
 extension ChatViewController {
     override func applyTheme() {
-        view.applyTheme()
+        super.applyTheme()
         navigationController?.navigationBar.barTintColor = ThemeManager.theme.focusedBackground
     }
 }

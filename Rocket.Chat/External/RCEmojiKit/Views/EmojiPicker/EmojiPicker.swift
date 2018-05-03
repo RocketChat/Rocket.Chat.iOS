@@ -338,6 +338,8 @@ private class EmojiPickerSectionHeaderView: UICollectionReusableView {
     }
 }
 
+// MARK: Themeable
+
 extension EmojiPicker {
     override var theme: Theme? { return ThemeManager.theme }
 

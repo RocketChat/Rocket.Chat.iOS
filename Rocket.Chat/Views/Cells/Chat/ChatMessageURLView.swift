@@ -64,6 +64,8 @@ final class ChatMessageURLView: UIView {
     }
 }
 
+// MARK: Themeable
+
 extension ChatMessageURLView {
     override func applyTheme() {
         super.applyTheme()

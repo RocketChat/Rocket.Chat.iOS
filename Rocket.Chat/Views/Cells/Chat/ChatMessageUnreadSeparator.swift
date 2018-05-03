@@ -16,6 +16,8 @@ final class ChatMessageUnreadSeparator: UICollectionViewCell {
     @IBOutlet weak var seperatorLine: UIView!
 }
 
+// MARK: Themeable
+
 extension ChatMessageUnreadSeparator {
     override func applyTheme() {
         super.applyTheme()

@@ -166,6 +166,8 @@ extension ChatMessageAudioView: AVAudioPlayerDelegate {
     }
 }
 
+// MARK: Themeable
+
 extension ChatMessageAudioView {
     override func applyTheme() {
         super.applyTheme()

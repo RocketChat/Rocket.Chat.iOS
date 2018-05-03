@@ -12,6 +12,8 @@ class ChatView: UIView {
     @IBOutlet weak var scrollToBottomButton: UIButton!
 }
 
+// MARK: Themeable
+
 extension ChatView {
     override func applyTheme() {
         super.applyTheme()

@@ -115,6 +115,8 @@ final class MentionsTextFieldTableViewCell: UITableViewCell, FormTableViewCellPr
     }
 }
 
+// MARK: Themeable
+
 extension MentionsTextFieldTableViewCell {
     override func applyTheme() {
         super.applyTheme()

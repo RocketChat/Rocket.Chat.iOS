@@ -34,6 +34,8 @@ final class ChannelInfoDescriptionCell: UITableViewCell, ChannelInfoCellProtocol
     }
 }
 
+// MARK: Themeable
+
 extension ChannelInfoDescriptionCell {
     override func applyTheme() {
         super.applyTheme()

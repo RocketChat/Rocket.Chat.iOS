@@ -11,6 +11,6 @@ import UIKit
 extension UIViewController: Themeable {
     func applyTheme() {
         view.applyTheme()
-        navigationController?.navigationBar.applyTheme()
+        navigationController?.applyTheme()
     }
 }

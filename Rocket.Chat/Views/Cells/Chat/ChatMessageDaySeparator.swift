@@ -16,6 +16,8 @@ final class ChatMessageDaySeparator: UICollectionViewCell {
     @IBOutlet weak var seperatorLine: UIView!
 }
 
+// MARK: Themeable
+
 extension ChatMessageDaySeparator {
     override func applyTheme() {
         super.applyTheme()

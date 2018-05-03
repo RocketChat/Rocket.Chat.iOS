@@ -173,6 +173,8 @@ final class AvatarView: UIView {
 
 }
 
+// MARK: Themeable
+
 extension AvatarView {
     override func applyTheme() {
         labelInitials.textColor = .white

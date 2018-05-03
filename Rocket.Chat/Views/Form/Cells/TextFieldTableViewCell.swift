@@ -36,6 +36,8 @@ final class TextFieldTableViewCell: UITableViewCell, FormTableViewCellProtocol {
     }
 }
 
+// MARK: Themeable
+
 extension TextFieldTableViewCell {
     override func applyTheme() {
         super.applyTheme()

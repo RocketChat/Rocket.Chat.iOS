@@ -44,6 +44,8 @@ final class ChatHeaderViewStatus: UIView {
 
 }
 
+// MARK: Themeable
+
 extension ChatHeaderViewStatus {
     override func applyTheme() {
         super.applyTheme()
