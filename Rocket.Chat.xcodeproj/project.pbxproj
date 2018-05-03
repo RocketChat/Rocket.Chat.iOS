@@ -110,7 +110,6 @@
 		3370D8C22095995900EEA225 /* StarMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C12095995800EEA225 /* StarMessageRequest.swift */; };
 		3370D8C42095998E00EEA225 /* StarMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */; };
 		3370D8C6209599E600EEA225 /* AuthCanStarMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */; };
-		3370D8C82095F56B00EEA225 /* SubscriptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C72095F56A00EEA225 /* SubscriptionsView.swift */; };
 		3370D8CE2096261F00EEA225 /* NotThemeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8CD2096261F00EEA225 /* NotThemeableView.swift */; };
 		3370D8D12096677A00EEA225 /* TopTransparentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */; };
 		3370D8D3209778EF00EEA225 /* ThemePreferenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D2209778EE00EEA225 /* ThemePreferenceCell.swift */; };
@@ -777,7 +776,6 @@
 		3370D8C12095995800EEA225 /* StarMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarMessageRequest.swift; sourceTree = "<group>"; };
 		3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarMessageRequestSpec.swift; sourceTree = "<group>"; };
 		3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessageSpec.swift; sourceTree = "<group>"; };
-		3370D8C72095F56A00EEA225 /* SubscriptionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsView.swift; sourceTree = "<group>"; };
 		3370D8CD2096261F00EEA225 /* NotThemeableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotThemeableView.swift; sourceTree = "<group>"; };
 		3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTransparentViewController.swift; sourceTree = "<group>"; };
 		3370D8D2209778EE00EEA225 /* ThemePreferenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreferenceCell.swift; sourceTree = "<group>"; };
@@ -2066,7 +2064,6 @@
 		41A91AED1E51C4E5005C94B1 /* Subscriptions */ = {
 			isa = PBXGroup;
 			children = (
-				3370D8C72095F56A00EEA225 /* SubscriptionsView.swift */,
 				41A91AF01E51CD41005C94B1 /* SubscriptionUserStatusView.swift */,
 				41A91AEE1E51C51A005C94B1 /* SubscriptionUserStatusView.xib */,
 				801DF8141FD7172500302CC8 /* SubscriptionUserView.swift */,
@@ -3917,7 +3914,6 @@
 				8076FDBB2048591A00114F28 /* AuthManagerRecover.swift in Sources */,
 				8013F8671FD6B4F400EE1A4E /* Command.swift in Sources */,
 				77BA81511F87C4CB00F295F4 /* TextField.swift in Sources */,
-				3370D8C82095F56B00EEA225 /* SubscriptionsView.swift in Sources */,
 				41E2FA051D414F0400238DFD /* SubscriptionsViewController.swift in Sources */,
 				800F38ED2019492D0005CB78 /* DeepLink.swift in Sources */,
 				4151B4581E2D1D2E00F8AA1B /* MessageModelMapping.swift in Sources */,

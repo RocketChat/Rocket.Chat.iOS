@@ -14,7 +14,7 @@
         <scene sceneID="aTu-g1-T0C">
             <objects>
                 <viewController storyboardIdentifier="Subscriptions" id="pre-Wt-UOv" customClass="SubscriptionsViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="Sgi-qY-oLC" customClass="SubscriptionsView" customModule="Rocket_Chat" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="Sgi-qY-oLC" customClass="NotThemeableView" customModule="Rocket_Chat" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
@@ -235,9 +235,6 @@
                             <constraint firstItem="fKk-pZ-N3a" firstAttribute="top" secondItem="5g6-R1-nTb" secondAttribute="bottom" id="l6S-jK-uiN"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="BC2-s4-mxp"/>
-                        <connections>
-                            <outlet property="subscriptionsTableView" destination="fKk-pZ-N3a" id="6SN-4e-1x1"/>
-                        </connections>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <navigationItem key="navigationItem" id="cIZ-6h-3cC"/>
