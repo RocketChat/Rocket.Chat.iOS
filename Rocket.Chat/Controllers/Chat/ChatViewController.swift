@@ -93,11 +93,6 @@ final class ChatViewController: SLKTextViewController {
 
             resetUnreadSeparator()
 
-            if !SocketManager.isConnected() {
-                socketDidDisconnect(socket: SocketManager.sharedInstance)
-                reconnect()
-            }
-
             subscription.setTemporaryMessagesFailed()
 
             subscriptionToken = subscription.observe { [weak self] changes in
@@ -118,9 +113,6 @@ final class ChatViewController: SLKTextViewController {
             if let oldValue = oldValue {
                 if oldValue.identifier != subscription.identifier {
                     emptySubscriptionState()
-                } else if self.closeSidebarAfterSubscriptionUpdate {
-                    MainChatViewController.closeSideMenuIfNeeded()
-                    self.closeSidebarAfterSubscriptionUpdate = false
                 }
             } else {
                 emptySubscriptionState()
@@ -192,10 +184,8 @@ final class ChatViewController: SLKTextViewController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        SocketManager.addConnectionHandler(token: socketHandlerToken, handler: self)
 
         if !SocketManager.isConnected() {
-            socketDidDisconnect(socket: SocketManager.sharedInstance)
             reconnect()
         }
 

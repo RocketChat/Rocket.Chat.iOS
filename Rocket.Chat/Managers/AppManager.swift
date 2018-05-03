@@ -54,7 +54,7 @@ struct AppManager {
      Room Id for the currently active room.
     */
     static var currentRoomId: String? {
-        return ChatViewController.shared?.subscription?.rid
+        return "foo"//ChatViewController.shared?.subscription?.rid
     }
 }
 

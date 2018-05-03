@@ -18,6 +18,7 @@ enum Storyboard {
         switch self {
         case .auth: return "Auth"
         case .chat: return "Chat"
+        case .preferences: return "Preferences"
         case .subscriptions: return "Subscriptions"
         }
     }

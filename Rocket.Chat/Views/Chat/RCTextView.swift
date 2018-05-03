@@ -165,7 +165,7 @@ extension RCTextView: UITextViewDelegate {
                 return true
             }
 
-            ChatViewController.shared?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
+//            ChatViewController.shared?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
         }
 
         return false

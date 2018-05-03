@@ -56,7 +56,7 @@ class MembersListViewData {
 
                     strongSelf.currentPage += 1
 
-                    strongSelf.title = "\(localized("chat.members.list.title")) (\(strongSelf.total))"
+//                    strongSelf.title = "\(localized("chat.members.list.title")) (\(strongSelf.total))"
                     strongSelf.isLoadingMoreMembers = false
                     completion?()
                 case .error:
