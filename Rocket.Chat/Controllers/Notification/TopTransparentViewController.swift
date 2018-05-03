@@ -54,7 +54,7 @@ class TopTransparentViewController: UIViewController {
     }
 }
 
-extension Collection {
+fileprivate extension Collection {
 
     /// Returns the element at the specified index only if, it is within bounds, otherwise returns nil.
     subscript (safe index: Index) -> Element? {

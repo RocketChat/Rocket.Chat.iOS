@@ -12,12 +12,6 @@ struct MessageTextFontAttributes {
 
     static let defaultFontSize = CGFloat(15)
 
-    struct FontColor {
-        let defaultFontColor: UIColor
-        let systemFontColor: UIColor
-        let failedFontColor: UIColor
-    }
-
     static func defaultFontColor(for theme: Theme? = nil) -> UIColor {
         return theme?.bodyText ?? ThemeManager.theme.bodyText
     }

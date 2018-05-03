@@ -30,7 +30,7 @@ class TransparentToTouchesWindow: UIWindow {
             let originalMethod = class_getInstanceMethod(UIViewController.self, originalSelector),
             let swizzledMethod = class_getInstanceMethod(UIViewController.self, swizzledSelector)
         else {
-                return
+            return
         }
 
         let didAddMethod = class_addMethod(

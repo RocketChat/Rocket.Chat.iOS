@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import SlackTextViewController
 
 @objc protocol Themeable {
     func applyTheme()

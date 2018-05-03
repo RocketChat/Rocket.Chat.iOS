@@ -218,7 +218,6 @@ final class ChatViewController: SLKTextViewController {
 
     @objc internal func reconnect() {
         chatHeaderViewStatus?.labelTitle.text = localized("connection.connecting.banner.message")
-        chatHeaderViewStatus?.applyTheme()
         chatHeaderViewStatus?.activityIndicator.startAnimating()
         chatHeaderViewStatus?.buttonRefresh.isHidden = true
 

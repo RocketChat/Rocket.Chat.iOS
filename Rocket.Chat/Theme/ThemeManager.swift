@@ -10,7 +10,6 @@ import Foundation
 
 struct ThemeManager {
     static var theme = themes.first(where: { $0.title == UserDefaults.standard.string(forKey: userDefaultsKey) })?.theme ?? Theme.light {
-
         didSet {
             UIView.animate(withDuration: 0.3) {
                 observers.forEach { $0.value?.applyTheme() }

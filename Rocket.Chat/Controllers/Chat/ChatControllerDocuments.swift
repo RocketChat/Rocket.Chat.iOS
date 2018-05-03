@@ -45,7 +45,6 @@ extension ChatViewController {
             let message = String(format: localized("chat.download.downloading_file"), filename)
             chatHeaderViewStatus?.labelTitle.text = message
             chatHeaderViewStatus?.buttonRefresh.isHidden = true
-            chatHeaderViewStatus?.applyTheme()
             chatHeaderViewStatus?.activityIndicator.startAnimating()
 
             // Download file and cache it to be used later
