@@ -221,6 +221,7 @@
 "chat.message.type.subscription_role_removed" = "%@ ist nicht mehr länger %@ von %@";
 "chat.message.type.room_archived" = "Dieser Raum wurde archiviert von %@";
 "chat.message.type.room_unarchived" = "Dieser Raum wurde wiederhergestellt von %@";
+"chat.message.type.message_pinned" = "Pinned a message:"; // TODO
 
 // Chat Information
 "chat.info.title" = "Info";
