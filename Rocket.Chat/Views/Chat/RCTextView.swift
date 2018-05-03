@@ -162,7 +162,7 @@ extension RCTextView: UITextViewDelegate {
                 let end = textView.position(from: start, offset: characterRange.length),
                 let range = textView.textRange(from: start, to: end)
             else {
-                return true
+                return false
             }
 
             ChatViewController.shared?.presentActionSheetForUser(user, source: (textView, textView.firstRect(for: range)))
@@ -170,4 +170,5 @@ extension RCTextView: UITextViewDelegate {
 
         return false
     }
+
 }
