@@ -9,7 +9,7 @@
 import RealmSwift
 
 // swiftlint:disable file_length
-final class SubscriptionsViewController: BaseViewController {
+final class SubscriptionsViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint! {
