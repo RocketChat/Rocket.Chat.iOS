@@ -433,7 +433,6 @@ final class ChatViewController: SLKTextViewController {
 
         dataController.dismissUnreadSeparator = true
         dataController.lastSeen = subscription?.lastSeen ?? Date()
-        syncCollectionView()
 
         let text = "\(messageText)\(replyString)"
 
@@ -760,8 +759,6 @@ final class ChatViewController: SLKTextViewController {
         }
 
         MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] nextPageDate in
-            self?.isRequestingHistory = false
-
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
 
@@ -769,22 +766,18 @@ final class ChatViewController: SLKTextViewController {
                     self?.hideHeaderStatusView()
                 }
 
+                self?.isRequestingHistory = false
                 self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
 
                 if nextPageDate == nil {
                     self?.dataController.loadedAllMessages = true
                     self?.syncCollectionView()
-                }
-
-                if loadNextPage {
-                    if let nextPageDate = nextPageDate {
-                        self?.loadHistoryFromRemote(date: nextPageDate, loadNextPage: false)
-                    } else {
-                        self?.dataController.loadedAllMessages = true
-                        self?.syncCollectionView()
-                    }
                 } else {
                     self?.dataController.loadedAllMessages = false
+                }
+
+                if let nextPageDate = nextPageDate, loadNextPage {
+                    self?.loadHistoryFromRemote(date: nextPageDate, loadNextPage: false)
                 }
             }
         }
