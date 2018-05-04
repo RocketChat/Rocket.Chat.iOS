@@ -221,6 +221,7 @@
 "chat.message.type.subscription_role_removed" = "%@ δεν ισχύει πλέον %@ για %@";
 "chat.message.type.room_archived" = "Αυτό το δωμάτιο αρχειοθετήθηκε από %@";
 "chat.message.type.room_unarchived" = "Αυτό το δωμάτιο ξεαρχειοθετήθηκε από %@";
+"chat.message.type.message_pinned" = "Pinned a message:"; // TODO
 
 // Chat Information
 "chat.info.title" = "Πληροφορία";
