@@ -749,9 +749,6 @@ final class ChatViewController: SLKTextViewController {
             collectionView?.insertItems(at: indexPaths)
             collectionView?.deleteItems(at: removedIndexPaths)
         }, completion: nil)
-
-        collectionView?.setNeedsLayout()
-        collectionView?.layoutIfNeeded()
     }
 
     func loadHistoryFromRemote(date: Date?, loadNextPage: Bool = true) {
@@ -764,6 +761,8 @@ final class ChatViewController: SLKTextViewController {
         }
 
         MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] nextPageDate in
+            self?.isRequestingHistory = false
+
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
 
@@ -771,19 +770,20 @@ final class ChatViewController: SLKTextViewController {
                     self?.hideHeaderStatusView()
                 }
 
-                self?.isRequestingHistory = false
                 self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+
+                if nextPageDate == nil {
+                    self?.dataController.loadedAllMessages = true
+                    self?.syncCollectionView()
+                }
 
                 if loadNextPage {
                     if let nextPageDate = nextPageDate {
                         self?.loadHistoryFromRemote(date: nextPageDate, loadNextPage: false)
+                    } else {
+                        self?.dataController.loadedAllMessages = true
+                        self?.syncCollectionView()
                     }
-                }
-
-                // There are no new messages
-                if nextPageDate == nil {
-                    self?.dataController.loadedAllMessages = true
-                    self?.syncCollectionView()
                 } else {
                     self?.dataController.loadedAllMessages = false
                 }
