@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 struct SubscriptionsClient: APIClient {
     let api: AnyAPIFetcher
@@ -19,8 +20,7 @@ struct SubscriptionsClient: APIClient {
 
         api.fetch(req) { response in
             switch response {
-            case .resource:
-                break
+            case .resource: break
             case .error(let error):
                 print(error)
                 if case .version = error {
