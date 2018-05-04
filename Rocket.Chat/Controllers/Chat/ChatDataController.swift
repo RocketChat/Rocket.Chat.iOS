@@ -174,6 +174,10 @@ final class ChatDataController {
                 data.remove(at: idx)
                 removedIndexPaths.append(obj.indexPath)
             }
+
+            unreadSeparator = false
+            dismissUnreadSeparator = false
+            lastSeen = ChatViewController.shared?.subscription?.lastSeen ?? Date()
         }
 
         if loadedAllMessages {
