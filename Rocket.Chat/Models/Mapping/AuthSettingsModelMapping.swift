@@ -78,6 +78,7 @@ extension AuthSettings: ModelMappeable {
         }
 
         self.messageAllowPinning = objectForKey(object: values, key: "Message_AllowPinning")?.bool ?? true
+        self.messageAllowStarring = objectForKey(object: values, key: "Message_AllowStarring")?.bool ?? true
 
         self.messageShowDeletedStatus = objectForKey(object: values, key: "Message_ShowDeletedStatus")?.bool ?? true
         self.messageAllowDeleting = objectForKey(object: values, key: "Message_AllowDeleting")?.bool ?? true

@@ -32,6 +32,8 @@ enum MessageType: String {
     case roomArchived = "room-archived"
     case roomUnarchived = "room-unarchived"
 
+    case messagePinned = "message_pinned"
+
     var sequential: Bool {
         let sequential: [MessageType] = [.text, .textAttachment, .messageRemoved]
 
@@ -70,6 +72,7 @@ final class Message: BaseModel {
 
     @objc dynamic var failed = false
 
+    var starred = List<String>()
     var mentions = List<Mention>()
     var channels = List<Channel>()
     var attachments = List<Attachment>()
@@ -78,6 +81,10 @@ final class Message: BaseModel {
     var reactions = List<MessageReaction>()
 
     var type: MessageType {
+        if let type = MessageType(rawValue: internalType) {
+            return type
+        }
+
         if let attachment = attachments.first {
             return attachment.type
         }
@@ -88,7 +95,7 @@ final class Message: BaseModel {
             }
         }
 
-        return MessageType(rawValue: internalType) ?? .text
+        return  .text
     }
 
     // Internal

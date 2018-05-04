@@ -161,6 +161,8 @@
 "chat.message.actions.copy" = "Copy";
 "chat.message.actions.pin" = "Pin";
 "chat.message.actions.unpin" = "Unpin";
+"chat.message.actions.star" = "Star"; // TODO
+"chat.message.actions.unstar" = "Unstar"; // TODO
 "chat.message.actions.quote" = "Quote";
 "chat.message.actions.reply" = "Reply";
 "chat.message.actions.delete" = "Delete message";
@@ -219,6 +221,7 @@
 "chat.message.type.subscription_role_removed" = "%@ is no longer %@ by %@";
 "chat.message.type.room_archived" = "This room has been archived by %@";
 "chat.message.type.room_unarchived" = "This room has been unarchived by %@";
+"chat.message.type.message_pinned" = "Pinned a message:";
 
 // Chat Information
 "chat.info.title" = "Info";
@@ -231,6 +234,7 @@
 "chat.info.item.pinned" = "Pinned";
 "chat.info.item.starred" = "Starred";
 "chat.info.item.mentions" = "Mentions";
+"chat.info.item.files" = "Files";
 
 // Members List
 "chat.members.list.title" = "Members";
@@ -242,6 +246,8 @@
 "chat.messages.pinned.list.title" = "Pinned Messages";
 "chat.messages.starred.list.title" = "Starred Messages";
 "chat.messages.mentions.list.title" = "Mentions";
+"chat.messages.files.list.title" = "Files";
+"chat.messages.files.list.empty" = "No files found";
 
 // Settings
 "myaccount.settings.title" = "Preferences";
