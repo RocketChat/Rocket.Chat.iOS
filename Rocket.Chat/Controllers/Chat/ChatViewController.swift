@@ -341,7 +341,6 @@ final class ChatViewController: SLKTextViewController {
 
     func resetUnreadSeparator() {
         dataController.dismissUnreadSeparator = true
-        syncCollectionView()
         dataController.unreadSeparator = false
         dataController.dismissUnreadSeparator = false
         dataController.lastSeen = subscription?.lastSeen ?? Date()
@@ -434,7 +433,6 @@ final class ChatViewController: SLKTextViewController {
 
         dataController.dismissUnreadSeparator = true
         dataController.lastSeen = subscription?.lastSeen ?? Date()
-        syncCollectionView()
 
         let text = "\(messageText)\(replyString)"
 
@@ -751,7 +749,7 @@ final class ChatViewController: SLKTextViewController {
         }, completion: nil)
     }
 
-    func loadHistoryFromRemote(date: Date?) {
+    func loadHistoryFromRemote(date: Date?, loadNextPage: Bool = true) {
         guard let subscription = subscription else { return }
 
         let tempSubscription = Subscription(value: subscription)
@@ -760,7 +758,7 @@ final class ChatViewController: SLKTextViewController {
             showLoadingMessagesHeaderStatusView()
         }
 
-        MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] messages in
+        MessageManager.getHistory(tempSubscription, lastMessageDate: date) { [weak self] nextPageDate in
             DispatchQueue.main.async {
                 self?.activityIndicator.stopAnimating()
 
@@ -768,14 +766,20 @@ final class ChatViewController: SLKTextViewController {
                     self?.hideHeaderStatusView()
                 }
 
-                self?.isRequestingHistory = false
-                self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+                if loadNextPage {
+                    self?.isRequestingHistory = false
+                    self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+                }
 
-                if messages.count == 0 {
+                if nextPageDate == nil {
                     self?.dataController.loadedAllMessages = true
                     self?.syncCollectionView()
                 } else {
                     self?.dataController.loadedAllMessages = false
+                }
+
+                if let nextPageDate = nextPageDate, loadNextPage {
+                    self?.loadHistoryFromRemote(date: nextPageDate, loadNextPage: false)
                 }
             }
         }
@@ -784,7 +788,7 @@ final class ChatViewController: SLKTextViewController {
     private func loadMoreMessagesFrom(date: Date?, loadRemoteHistory: Bool = true) {
         guard let subscription = subscription else { return }
 
-        if isRequestingHistory || dataController.loadedAllMessages {
+        if isRequestingHistory {
             return
         }
 
@@ -1175,6 +1179,7 @@ extension ChatViewController {
                 loadMoreMessagesFrom(date: message.createdAt)
             }
         }
+
         resetScrollToBottomButtonPosition()
     }
 }
