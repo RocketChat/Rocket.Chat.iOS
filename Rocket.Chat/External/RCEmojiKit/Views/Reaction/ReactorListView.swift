@@ -112,8 +112,6 @@ extension ReactorListView: UITableViewDataSource {
 
         cell.reactor = model.reactionViewModels[indexPath.section].reactors[indexPath.row]
 
-        cell.applyTheme()
-        cell.backgroundColor = theme?.popoverBackground.withAlphaComponent(cell.backgroundColor?.cgColor.alpha ?? 0.0)
         return cell
     }
 
