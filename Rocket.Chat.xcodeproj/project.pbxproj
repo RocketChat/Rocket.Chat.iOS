@@ -408,6 +408,7 @@
 		806DB94820695BCF004ED8ED /* AuthViewControllerConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94720695BCF004ED8ED /* AuthViewControllerConnectionHandler.swift */; };
 		806DB94A20695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94920695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift */; };
 		806DB94E20698C25004ED8ED /* ChatMessageCellAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94D20698C25004ED8ED /* ChatMessageCellAccessibility.swift */; };
+		806EFA5E209BF1AC00D0D650 /* SubscriptionReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806EFA5D209BF1AC00D0D650 /* SubscriptionReadRequest.swift */; };
 		8073719A1F94E83600D53ADF /* SocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371991F94E83600D53ADF /* SocketError.swift */; };
 		8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719B1F963FA400D53ADF /* APITestCase.swift */; };
 		8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719D1F9688B200D53ADF /* LoginServiceManager.swift */; };
@@ -531,10 +532,10 @@
 		80D41DFF20923AA600034D1F /* AuthCanStarMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DFE20923AA600034D1F /* AuthCanStarMessage.swift */; };
 		80D41E01209248F800034D1F /* StarMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */; };
 		80D41E0520924A8200034D1F /* AuthCanStarMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0420924A8200034D1F /* AuthCanStarMessageSpec.swift */; };
-		80D41E0B20993CE200034D1F /* PinMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0A20993CE200034D1F /* PinMessageRequest.swift */; };
-		80D41E0D20993FCB00034D1F /* PinMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */; };
 		80D41E072099341C00034D1F /* PermissionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E062099341C00034D1F /* PermissionsRequest.swift */; };
 		80D41E092099393600034D1F /* PermissionsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E082099393600034D1F /* PermissionsRequestSpec.swift */; };
+		80D41E0B20993CE200034D1F /* PinMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0A20993CE200034D1F /* PinMessageRequest.swift */; };
+		80D41E0D20993FCB00034D1F /* PinMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */; };
 		80D5637220592D32008896D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D5637120592D32008896D6 /* Assets.xcassets */; };
 		80D563752059325A008896D6 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D563742059325A008896D6 /* MimeType.swift */; };
 		80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5637620593533008896D6 /* ParseItemProviders.swift */; };
@@ -1089,6 +1090,7 @@
 		806DB94720695BCF004ED8ED /* AuthViewControllerConnectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewControllerConnectionHandler.swift; sourceTree = "<group>"; };
 		806DB94920695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewControllerAuthenticationHandler.swift; sourceTree = "<group>"; };
 		806DB94D20698C25004ED8ED /* ChatMessageCellAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCellAccessibility.swift; sourceTree = "<group>"; };
+		806EFA5D209BF1AC00D0D650 /* SubscriptionReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionReadRequest.swift; sourceTree = "<group>"; };
 		807371991F94E83600D53ADF /* SocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketError.swift; sourceTree = "<group>"; };
 		8073719B1F963FA400D53ADF /* APITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITestCase.swift; sourceTree = "<group>"; };
 		8073719D1F9688B200D53ADF /* LoginServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceManager.swift; sourceTree = "<group>"; };
@@ -1195,10 +1197,10 @@
 		80D41DFE20923AA600034D1F /* AuthCanStarMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessage.swift; sourceTree = "<group>"; };
 		80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarMessageRequestSpec.swift; sourceTree = "<group>"; };
 		80D41E0420924A8200034D1F /* AuthCanStarMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessageSpec.swift; sourceTree = "<group>"; };
-		80D41E0A20993CE200034D1F /* PinMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMessageRequest.swift; sourceTree = "<group>"; };
-		80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMessageRequestSpec.swift; sourceTree = "<group>"; };
 		80D41E062099341C00034D1F /* PermissionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsRequest.swift; sourceTree = "<group>"; };
 		80D41E082099393600034D1F /* PermissionsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsRequestSpec.swift; sourceTree = "<group>"; };
+		80D41E0A20993CE200034D1F /* PinMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMessageRequest.swift; sourceTree = "<group>"; };
+		80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMessageRequestSpec.swift; sourceTree = "<group>"; };
 		80D5637120592D32008896D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D563742059325A008896D6 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		80D5637620593533008896D6 /* ParseItemProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseItemProviders.swift; sourceTree = "<group>"; };
@@ -2422,6 +2424,7 @@
 				990FF6D520740C79007B4A53 /* SubscriptionMentionsRequest.swift */,
 				800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */,
 				9987B59B2093E60C007D277C /* SubscriptionFilesRequest.swift */,
+				806EFA5D209BF1AC00D0D650 /* SubscriptionReadRequest.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -3879,6 +3882,7 @@
 				41B4B2341E40B1D200F4D252 /* ChatControllerUploader.swift in Sources */,
 				807371A21F96968C00D53ADF /* LoginServiceModelMapping.swift in Sources */,
 				4133EDCF1DA2834E005AA783 /* ChatMessageImageView.swift in Sources */,
+				806EFA5E209BF1AC00D0D650 /* SubscriptionReadRequest.swift in Sources */,
 				9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */,
 				140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */,
 				419ECCA21F3C8F15005F224B /* ChatControllerHeaderStatus.swift in Sources */,
