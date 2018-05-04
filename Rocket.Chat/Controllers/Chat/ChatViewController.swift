@@ -766,8 +766,10 @@ final class ChatViewController: SLKTextViewController {
                     self?.hideHeaderStatusView()
                 }
 
-                self?.isRequestingHistory = false
-                self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+                if loadNextPage {
+                    self?.isRequestingHistory = false
+                    self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
+                }
 
                 if nextPageDate == nil {
                     self?.dataController.loadedAllMessages = true
@@ -786,7 +788,7 @@ final class ChatViewController: SLKTextViewController {
     private func loadMoreMessagesFrom(date: Date?, loadRemoteHistory: Bool = true) {
         guard let subscription = subscription else { return }
 
-        if isRequestingHistory || dataController.loadedAllMessages {
+        if isRequestingHistory {
             return
         }
 
