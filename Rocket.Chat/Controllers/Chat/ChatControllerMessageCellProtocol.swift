@@ -48,6 +48,7 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
             if let presenter = controller.popoverPresentationController {
                 presenter.sourceView = reactionView
                 presenter.sourceRect = reactionView.bounds
+                presenter.backgroundColor = view.theme?.focusedBackground
             }
 
             self.present(controller, animated: true)

@@ -55,6 +55,7 @@ final class ReactorListView: UIView {
         }
     }
 
+    var isPopover = false
     var closePressed: () -> Void = { }
     var selectedReactor: (String) -> Void = { _ in }
     var configureCell: (ReactorCell) -> Void = { _ in }
@@ -111,6 +112,8 @@ extension ReactorListView: UITableViewDataSource {
 
         cell.reactor = model.reactionViewModels[indexPath.section].reactors[indexPath.row]
 
+        cell.applyTheme()
+        cell.backgroundColor = theme?.popoverBackground.withAlphaComponent(cell.backgroundColor?.cgColor.alpha ?? 0.0)
         return cell
     }
 
@@ -128,7 +131,6 @@ extension ReactorListView: UITableViewDataSource {
 extension ReactorListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
-        view.backgroundColor = UIColor(red: 247/255, green: 247/255, blue: 247/255, alpha: 1)
 
         let stackView = UIStackView(frame: CGRect(x: 16, y: 8, width: tableView.frame.size.width - 16, height: 24))
         stackView.spacing = 8
@@ -145,6 +147,9 @@ extension ReactorListView: UITableViewDelegate {
 
         view.addSubview(stackView)
 
+        view.applyTheme()
+        view.backgroundColor = #colorLiteral(red: 0.6727701823, green: 0.6727701823, blue: 0.6727701823, alpha: 0.09813784247)
+
         return view
     }
 
@@ -155,5 +160,26 @@ extension ReactorListView: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         selectedReactor(model.reactionViewModels[indexPath.section].reactors[indexPath.row])
+    }
+}
+
+extension ReactorListView {
+    override var theme: Theme? {
+        guard let theme = super.theme else { return nil }
+        guard isPopover else { return theme }
+        let popoverTheme = Theme(
+            backgroundColor: theme.focusedBackground,
+            titleText: theme.titleText,
+            bodyText: theme.bodyText,
+            auxiliaryText: theme.auxiliaryText,
+            hyperlinkText: theme.hyperlinkText,
+            tintColor: theme.tintColor,
+            focusedBackground: theme.focusedBackground,
+            auxiliaryBackground: theme.auxiliaryBackground,
+            mutedAccent: theme.mutedAccent,
+            strongAccent: theme.strongAccent,
+            appearence: theme.appearence
+        )
+        return popoverTheme
     }
 }

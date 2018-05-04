@@ -194,6 +194,7 @@ extension ChatViewController {
         if let presenter = controller.popoverPresentationController {
             presenter.sourceView = view
             presenter.sourceRect = view.bounds
+            presenter.backgroundColor = view.theme?.focusedBackground
         }
 
         controller.emojiPicked = { emoji in
