@@ -749,6 +749,9 @@ final class ChatViewController: SLKTextViewController {
             collectionView?.insertItems(at: indexPaths)
             collectionView?.deleteItems(at: removedIndexPaths)
         }, completion: nil)
+
+        collectionView?.setNeedsLayout()
+        collectionView?.layoutIfNeeded()
     }
 
     func loadHistoryFromRemote(date: Date?) {
@@ -771,7 +774,7 @@ final class ChatViewController: SLKTextViewController {
                 self?.isRequestingHistory = false
                 self?.loadMoreMessagesFrom(date: date, loadRemoteHistory: false)
 
-                if messages.count == 0 {
+                if messages.count == 0 || messages.count < MessageManager.historySize {
                     self?.dataController.loadedAllMessages = true
                     self?.syncCollectionView()
                 } else {
@@ -1175,6 +1178,7 @@ extension ChatViewController {
                 loadMoreMessagesFrom(date: message.createdAt)
             }
         }
+
         resetScrollToBottomButtonPosition()
     }
 }
