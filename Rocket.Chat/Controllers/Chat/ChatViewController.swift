@@ -341,7 +341,6 @@ final class ChatViewController: SLKTextViewController {
 
     func resetUnreadSeparator() {
         dataController.dismissUnreadSeparator = true
-        syncCollectionView()
         dataController.unreadSeparator = false
         dataController.dismissUnreadSeparator = false
         dataController.lastSeen = subscription?.lastSeen ?? Date()
