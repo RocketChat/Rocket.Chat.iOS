@@ -146,7 +146,7 @@ extension ReactorListView: UITableViewDelegate {
         view.addSubview(stackView)
 
         view.applyTheme()
-        view.backgroundColor = #colorLiteral(red: 0.6727701823, green: 0.6727701823, blue: 0.6727701823, alpha: 0.09813784247)
+        view.backgroundColor = #colorLiteral(red: 0.4980838895, green: 0.4951269031, blue: 0.5003594756, alpha: 0.09813784247)
 
         return view
     }
