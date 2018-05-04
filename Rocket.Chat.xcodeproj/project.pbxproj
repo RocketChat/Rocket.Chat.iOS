@@ -409,6 +409,7 @@
 		806DB94A20695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94920695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift */; };
 		806DB94E20698C25004ED8ED /* ChatMessageCellAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94D20698C25004ED8ED /* ChatMessageCellAccessibility.swift */; };
 		806EFA5E209BF1AC00D0D650 /* SubscriptionReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806EFA5D209BF1AC00D0D650 /* SubscriptionReadRequest.swift */; };
+		806EFA62209BF30500D0D650 /* SubscriptionsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806EFA61209BF30500D0D650 /* SubscriptionsClient.swift */; };
 		8073719A1F94E83600D53ADF /* SocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371991F94E83600D53ADF /* SocketError.swift */; };
 		8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719B1F963FA400D53ADF /* APITestCase.swift */; };
 		8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719D1F9688B200D53ADF /* LoginServiceManager.swift */; };
@@ -1091,6 +1092,7 @@
 		806DB94920695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewControllerAuthenticationHandler.swift; sourceTree = "<group>"; };
 		806DB94D20698C25004ED8ED /* ChatMessageCellAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCellAccessibility.swift; sourceTree = "<group>"; };
 		806EFA5D209BF1AC00D0D650 /* SubscriptionReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionReadRequest.swift; sourceTree = "<group>"; };
+		806EFA61209BF30500D0D650 /* SubscriptionsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsClient.swift; sourceTree = "<group>"; };
 		807371991F94E83600D53ADF /* SocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketError.swift; sourceTree = "<group>"; };
 		8073719B1F963FA400D53ADF /* APITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITestCase.swift; sourceTree = "<group>"; };
 		8073719D1F9688B200D53ADF /* LoginServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceManager.swift; sourceTree = "<group>"; };
@@ -2348,6 +2350,7 @@
 				80054CFD1FDAFF5200F5ECF9 /* PushClient.swift */,
 				807C7C0520751ED1006B600E /* SpotlightClient.swift */,
 				809B530A1FE2B1AB00833DD2 /* UploadClient.swift */,
+				806EFA61209BF30500D0D650 /* SubscriptionsClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -3719,6 +3722,7 @@
 				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
 				D1D535EC1F7081FA006625D2 /* API.swift in Sources */,
 				41DAE93E1D318F350098E068 /* Subscription.swift in Sources */,
+				806EFA62209BF30500D0D650 /* SubscriptionsClient.swift in Sources */,
 				80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */,
 				41D4ABAB1F4CD10C00ACDDDD /* ChatCollectionViewFlowLayout.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,

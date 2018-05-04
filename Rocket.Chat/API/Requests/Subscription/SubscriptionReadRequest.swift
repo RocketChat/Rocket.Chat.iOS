@@ -16,7 +16,7 @@ final class SubscriptionReadRequest: APIRequest {
     let requiredVersion = Version(0, 61, 0)
 
     let method: HTTPMethod = .post
-    let path = "subscriptions.read"
+    let path = "/api/v1/subscriptions.read"
 
     let rid: String
 
@@ -38,4 +38,3 @@ final class SubscriptionReadResource: APIResource {
         return raw?["success"].boolValue
     }
 }
-
