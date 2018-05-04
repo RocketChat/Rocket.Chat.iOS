@@ -1,5 +1,5 @@
 //
-//  NotThemeableView.swift
+//  NotThemeableViews.swift
 //  Rocket.Chat
 //
 //  Created by Samar Sunkaria on 4/29/18.
@@ -9,5 +9,9 @@
 import UIKit
 
 class NotThemeableView: UIView {
+    override var theme: Theme? { return nil }
+}
+
+class NotThemeableNavigationBar: UINavigationBar {
     override var theme: Theme? { return nil }
 }

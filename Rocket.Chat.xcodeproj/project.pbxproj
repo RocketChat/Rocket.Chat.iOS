@@ -110,7 +110,7 @@
 		3370D8C22095995900EEA225 /* StarMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C12095995800EEA225 /* StarMessageRequest.swift */; };
 		3370D8C42095998E00EEA225 /* StarMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */; };
 		3370D8C6209599E600EEA225 /* AuthCanStarMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */; };
-		3370D8CE2096261F00EEA225 /* NotThemeableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8CD2096261F00EEA225 /* NotThemeableView.swift */; };
+		3370D8CE2096261F00EEA225 /* NotThemeableViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8CD2096261F00EEA225 /* NotThemeableViews.swift */; };
 		3370D8D12096677A00EEA225 /* TopTransparentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */; };
 		3370D8D3209778EF00EEA225 /* ThemePreferenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D2209778EE00EEA225 /* ThemePreferenceCell.swift */; };
 		3370D8D620977D8600EEA225 /* ThemePreferenceViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3370D8D520977D8600EEA225 /* ThemePreferenceViewModel.swift */; };
@@ -786,7 +786,7 @@
 		3370D8C12095995800EEA225 /* StarMessageRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarMessageRequest.swift; sourceTree = "<group>"; };
 		3370D8C32095998E00EEA225 /* StarMessageRequestSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StarMessageRequestSpec.swift; sourceTree = "<group>"; };
 		3370D8C5209599E600EEA225 /* AuthCanStarMessageSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessageSpec.swift; sourceTree = "<group>"; };
-		3370D8CD2096261F00EEA225 /* NotThemeableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotThemeableView.swift; sourceTree = "<group>"; };
+		3370D8CD2096261F00EEA225 /* NotThemeableViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotThemeableViews.swift; sourceTree = "<group>"; };
 		3370D8D02096677A00EEA225 /* TopTransparentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTransparentViewController.swift; sourceTree = "<group>"; };
 		3370D8D2209778EE00EEA225 /* ThemePreferenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreferenceCell.swift; sourceTree = "<group>"; };
 		3370D8D520977D8600EEA225 /* ThemePreferenceViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemePreferenceViewModel.swift; sourceTree = "<group>"; };
@@ -1558,7 +1558,7 @@
 		330888B2209901C800D44D4E /* Theme */ = {
 			isa = PBXGroup;
 			children = (
-				3370D8CD2096261F00EEA225 /* NotThemeableView.swift */,
+				3370D8CD2096261F00EEA225 /* NotThemeableViews.swift */,
 				3353DBF7206787E500738D1C /* Theme.swift */,
 				330888B5209909F600D44D4E /* ThemeableViewControllers.swift */,
 				330888B32099094400D44D4E /* ThemeableViews.swift */,
@@ -3959,7 +3959,7 @@
 				414A1FF61D46320F00093E10 /* ResponseMessage.swift in Sources */,
 				4151B44E1E2CF19A00F8AA1B /* UserModelHandler.swift in Sources */,
 				80DC9A6C206BA95600032BE0 /* Localized.swift in Sources */,
-				3370D8CE2096261F00EEA225 /* NotThemeableView.swift in Sources */,
+				3370D8CE2096261F00EEA225 /* NotThemeableViews.swift in Sources */,
 				14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* SubscriptionCreateRequest.swift in Sources */,
