@@ -12,9 +12,7 @@ import SlackTextViewController
 extension UIView: Themeable, ThemeProvider {
     func applyTheme() {
         guard let theme = theme else { return }
-        if frame.height > 0.5 || frame.size == .zero {
-            backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
-        }
+        backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
         self.subviews.forEach { $0.applyTheme() }
     }
 
@@ -107,8 +105,10 @@ extension UITableView {
 
 extension UITableViewCell {
     override func applyTheme() {
-        super.applyTheme()
+        subviews.filter { type(of: $0).description() != "_UITableViewCellSeparatorView" }
+            .forEach { $0.applyTheme() }
         guard let theme = theme else { return }
+        backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
         detailTextLabel?.textColor = theme.auxiliaryText
     }
 }
