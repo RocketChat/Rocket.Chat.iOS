@@ -14,7 +14,7 @@ import UserNotifications
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var notificationWindow: UIWindow?
+    var notificationWindow: TransparentToTouchesWindow?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         Launcher().prepareToLaunch(with: launchOptions)
@@ -50,6 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         notificationWindow?.rootViewController = NotificationViewController.shared
         notificationWindow?.windowLevel = UIWindowLevelAlert
         notificationWindow?.makeKeyAndVisible()
+        notificationWindow?.isHidden = true
     }
 
     // MARK: AppDelegate LifeCycle

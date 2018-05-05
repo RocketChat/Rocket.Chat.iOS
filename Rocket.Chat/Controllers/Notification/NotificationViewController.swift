@@ -74,15 +74,18 @@ final class NotificationViewController: TopTransparentViewController {
         // Commented out until a setting is added to toggle the sound.
         // playSound()
 
+        willStartDisplayingContent()
         UIView.animate(withDuration: animationDuration) {
             self.notificationViewIsHidden = false
             self.view.layoutIfNeeded()
         }
 
         timer = Timer.scheduledTimer(withTimeInterval: notificationVisibleDuration, repeats: false) { [weak self] _ in
-            UIView.animate(withDuration: self?.animationDuration ?? 0.0) {
+            UIView.animate(withDuration: self?.animationDuration ?? 0.0, animations: ({
                 self?.notificationViewIsHidden = true
                 self?.view.layoutIfNeeded()
+            })) { (_) in
+                self?.didEndDisplayingContent()
             }
         }
     }
