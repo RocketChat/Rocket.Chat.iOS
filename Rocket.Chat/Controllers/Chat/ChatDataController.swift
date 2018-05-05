@@ -42,7 +42,9 @@ final class ChatDataController {
     }
 
     var loadedAllMessages = false
-    var lastSeen: Date = Date()
+    lazy var lastSeen: Date = {
+        return Date()
+    }()
     var unreadSeparator = false
     var dismissUnreadSeparator = false
 
@@ -177,8 +179,20 @@ final class ChatDataController {
 
             unreadSeparator = false
             dismissUnreadSeparator = false
-            lastSeen = ChatViewController.shared?.subscription?.lastSeen ?? Date()
         }
+
+        func updateLastSeen() {
+            if let mostRecentMessage = items.filter({$0.type == .message}).sorted(by: {$0.timestamp > $1.timestamp}).first {
+                if mostRecentMessage.message?.user == AuthManager.currentUser() {
+                    lastSeen = mostRecentMessage.timestamp
+                } else if let secondMostRecentMessage = data.filter({$0.type == .message}).sorted(by: {$0.timestamp > $1.timestamp}).first,
+                    mostRecentMessage.timestamp <= lastSeen && mostRecentMessage.timestamp > secondMostRecentMessage.timestamp {
+                    lastSeen = secondMostRecentMessage.timestamp
+                }
+            }
+        }
+
+        updateLastSeen()
 
         if loadedAllMessages {
             if data.filter({ $0.type == .header }).count == 0 {
@@ -219,9 +233,11 @@ final class ChatDataController {
         }
 
         func needsUnreadSeparator(_ obj: ChatData) -> Bool {
-            if obj.timestamp > lastSeen && !unreadSeparator {
-                unreadSeparator = true
-                return true
+            if let currentUser = AuthManager.currentUser(), let objUser = obj.message?.user, currentUser != objUser {
+                if obj.timestamp > lastSeen && !unreadSeparator {
+                    unreadSeparator = true
+                    return true
+                }
             }
 
             return false

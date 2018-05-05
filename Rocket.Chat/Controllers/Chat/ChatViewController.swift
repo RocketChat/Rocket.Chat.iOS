@@ -341,6 +341,7 @@ final class ChatViewController: SLKTextViewController {
 
     func resetUnreadSeparator() {
         dataController.dismissUnreadSeparator = true
+        dataController.lastSeen = Date()
     }
 
     // MARK: Handling Keyboard
@@ -429,7 +430,7 @@ final class ChatViewController: SLKTextViewController {
         stopReplying()
 
         dataController.dismissUnreadSeparator = true
-        dataController.lastSeen = subscription?.lastSeen ?? Date()
+        dataController.lastSeen = Date()
 
         let text = "\(messageText)\(replyString)"
 
@@ -875,6 +876,12 @@ final class ChatViewController: SLKTextViewController {
 
             // No new data? Don't update it then
             if objs.count == 0 {
+                if self.dataController.dismissUnreadSeparator {
+                    DispatchQueue.main.async {
+                        self.syncCollectionView()
+                    }
+                }
+
                 DispatchQueue.main.async {
                     self.isAppendingMessages = false
                     completion?()
