@@ -233,9 +233,11 @@ final class ChatDataController {
         }
 
         func needsUnreadSeparator(_ obj: ChatData) -> Bool {
-            if obj.timestamp > lastSeen && !unreadSeparator {
-                unreadSeparator = true
-                return true
+            if let currentUser = AuthManager.currentUser(), let objUser = obj.message?.user, currentUser != objUser {
+                if obj.timestamp > lastSeen && !unreadSeparator {
+                    unreadSeparator = true
+                    return true
+                }
             }
 
             return false
