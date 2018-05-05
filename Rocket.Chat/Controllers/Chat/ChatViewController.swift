@@ -1259,6 +1259,7 @@ extension ChatViewController: KeyboardFrameViewDelegate {
 extension ChatViewController {
     override func applyTheme() {
         super.applyTheme()
-        navigationController?.navigationBar.barTintColor = ThemeManager.theme.focusedBackground
+        guard let theme = view.theme else { return }
+        navigationController?.navigationBar.barTintColor = theme.focusedBackground
     }
 }

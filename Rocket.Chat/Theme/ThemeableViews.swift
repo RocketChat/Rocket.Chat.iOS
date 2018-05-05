@@ -35,6 +35,7 @@ extension UITextField {
         super.applyTheme()
         guard let theme = theme else { return }
         textColor = theme.titleText
+        tintColor = theme.hyperlinkText
         keyboardAppearance = theme.appearence.keyboardAppearence
         if let placeholder = placeholder {
             attributedPlaceholder = NSAttributedString(string: placeholder, attributes: [.foregroundColor: theme.mutedAccent])
@@ -46,9 +47,7 @@ extension UISearchBar {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        barStyle = theme.appearence.barStyle
-        tintColor = theme.hyperlinkText
-        keyboardAppearance = theme.appearence.keyboardAppearence
+        tintColor = theme.tintColor
         let textField = subviews.first?.subviews.first { $0 is UITextField } as? UITextField
         textField?.backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
     }
@@ -131,12 +130,9 @@ extension UITextView {
 }
 
 extension UINavigationBar {
-    override var theme: Theme? { return ThemeManager.theme }
-
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        self.subviews.forEach { $0.applyTheme() }
         self.tintColor = theme.bodyText
         self.barStyle = theme.appearence.barStyle
     }
@@ -148,8 +144,6 @@ extension UINavigationBar {
 }
 
 extension UIToolbar {
-    override var theme: Theme? { return ThemeManager.theme }
-
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
@@ -166,8 +160,6 @@ extension UIToolbar {
 }
 
 extension UITabBar {
-    override var theme: Theme? { return ThemeManager.theme }
-
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
@@ -183,8 +175,6 @@ extension UITabBar {
 }
 
 extension SLKTextInputbar {
-    override var theme: Theme? { return ThemeManager.theme }
-
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
