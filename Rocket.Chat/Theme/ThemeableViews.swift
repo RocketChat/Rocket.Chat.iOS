@@ -12,7 +12,9 @@ import SlackTextViewController
 extension UIView: Themeable, ThemeProvider {
     func applyTheme() {
         guard let theme = theme else { return }
-        backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
+        if frame.width > 1.0, frame.height > 1.0 {
+            backgroundColor = theme.backgroundColor.withAlphaComponent(backgroundColor?.cgColor.alpha ?? 0.0)
+        }
         self.subviews.forEach { $0.applyTheme() }
     }
 
