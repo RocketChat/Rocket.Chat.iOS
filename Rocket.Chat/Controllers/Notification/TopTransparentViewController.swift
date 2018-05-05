@@ -16,4 +16,8 @@ class TopTransparentViewController: UIViewController {
     func didEndDisplayingContent() {
         (UIApplication.shared.delegate as? AppDelegate)?.notificationWindow?.isHidden = true
     }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return UIApplication.shared.statusBarStyle
+    }
 }
