@@ -341,6 +341,7 @@ final class ChatViewController: SLKTextViewController {
 
     func resetUnreadSeparator() {
         dataController.dismissUnreadSeparator = true
+        dataController.lastSeen = Date()
     }
 
     // MARK: Handling Keyboard
@@ -429,7 +430,7 @@ final class ChatViewController: SLKTextViewController {
         stopReplying()
 
         dataController.dismissUnreadSeparator = true
-        dataController.lastSeen = subscription?.lastSeen ?? Date()
+        dataController.lastSeen = Date()
 
         let text = "\(messageText)\(replyString)"
 
