@@ -66,7 +66,7 @@ extension AuthManager {
         }
     }
 
-    static func auth(token: String, completion: @escaping MessageCompletion) {
+    static func auth(token: String, completion: @escaping (Bool) -> Void) {
         auth(params: ["resume": token], completion: completion)
     }
 
@@ -92,48 +92,46 @@ extension AuthManager {
     /**
      Generic method that authenticates the user.
      */
-    static func auth(params: [String: Any], completion: @escaping MessageCompletion) {
-        let object = [
-            "msg": "method",
-            "method": "login",
-            "params": [params]
-        ] as [String: Any]
+    static func auth(params: [String: Any], completion: @escaping (Bool) -> Void) {
+        guard let url = SocketManager.sharedInstance.serverURL?.httpServerURL() else {
+            return completion(false)
+        }
 
-        SocketManager.send(object) { (response) in
-            guard !response.isError() else {
-                completion(response)
-                return
+        let api = API(host: url)
+
+        api.fetch(LoginRequest(params: params)) { response in
+            switch response {
+            case .resource(let resource):
+                guard resource.status == "success" else {
+                    return completion(false)
+                }
+
+                let auth = Auth()
+                auth.internalFirstChannelOpened = false
+                auth.lastSubscriptionFetch = nil
+                auth.lastAccess = Date()
+                auth.serverURL = api.host.absoluteString
+                auth.token = resource.authToken
+                auth.userId = resource.userId
+
+                persistAuthInformation(auth)
+                DatabaseManager.changeDatabaseInstance()
+
+                Realm.executeOnMainThread({ (realm) in
+                    // Delete all the Auth objects, since we don't
+                    // support multiple-server per database
+                    realm.delete(realm.objects(Auth.self))
+
+                    PushManager.updatePushToken()
+                    realm.add(auth)
+                })
+
+                SocketManager.sharedInstance.isUserAuthenticated = true
+                ServerManager.timestampSync()
+                completion(true)
+            case .error:
+                completion(false)
             }
-
-            let result = response.result
-
-            let auth = Auth()
-            auth.internalFirstChannelOpened = false
-            auth.lastSubscriptionFetch = nil
-            auth.lastAccess = Date()
-            auth.serverURL = response.socket?.currentURL.absoluteString ?? ""
-            auth.token = result["result"]["token"].string
-            auth.userId = result["result"]["id"].string
-
-            if let date = result["result"]["tokenExpires"]["$date"].double {
-                auth.tokenExpires = Date.dateFromInterval(date)
-            }
-
-            persistAuthInformation(auth)
-            DatabaseManager.changeDatabaseInstance()
-
-            Realm.executeOnMainThread({ (realm) in
-                // Delete all the Auth objects, since we don't
-                // support multiple-server per database
-                realm.delete(realm.objects(Auth.self))
-
-                PushManager.updatePushToken()
-                realm.add(auth)
-            })
-
-            SocketManager.sharedInstance.isUserAuthenticated = true
-            ServerManager.timestampSync()
-            completion(response)
         }
     }
 
@@ -145,7 +143,7 @@ extension AuthManager {
      - parameter completion: The completion block that'll be called in case
      of success or error.
      */
-    static func auth(_ username: String, password: String, code: String? = nil, completion: @escaping MessageCompletion) {
+    static func auth(_ username: String, password: String, code: String? = nil, completion: @escaping (Bool) -> Void) {
         let usernameType = username.contains("@") ? "email" : "username"
         var params: [String: Any]?
 
@@ -186,12 +184,12 @@ extension AuthManager {
      - parameter completion: The completion block that'll be called in case
      of success or error.
      */
-    static func auth(credentials: OAuthCredentials, completion: @escaping MessageCompletion) {
+    static func auth(credentials: OAuthCredentials, completion: @escaping (Bool) -> Void) {
         let params = [
             "oauth": [
                 "credentialToken": credentials.token,
                 "credentialSecret": credentials.secret ?? ""
-                ] as [String: Any]
+            ] as [String: Any]
         ]
 
         AuthManager.auth(params: params, completion: completion)
@@ -204,21 +202,21 @@ extension AuthManager {
      - parameter completion: The completion block that'll be called in case
      of success or error.
      */
-    static func auth(casCredentialToken: String, completion: @escaping MessageCompletion) {
+    static func auth(casCredentialToken: String, completion: @escaping (Bool) -> Void) {
         let params = [
             "cas": [
                 "credentialToken": casCredentialToken
-                ] as [String: Any]
+            ] as [String: Any]
         ]
 
         AuthManager.auth(params: params, completion: completion)
     }
 
-    static func auth(samlCredentialToken: String, completion: @escaping MessageCompletion) {
+    static func auth(samlCredentialToken: String, completion: @escaping (Bool) -> Void) {
         let params = [
             "saml": true,
             "credentialToken": samlCredentialToken
-            ] as [String: Any]
+        ] as [String: Any]
 
         AuthManager.auth(params: params, completion: completion)
     }

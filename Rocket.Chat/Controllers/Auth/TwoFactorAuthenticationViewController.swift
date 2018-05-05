@@ -90,16 +90,16 @@ final class TwoFactorAuthenticationViewController: BaseViewController {
     fileprivate func authenticate() {
         startLoading()
 
-        AuthManager.auth(username, password: password, code: textFieldCode.text ?? "") { [weak self] (response) in
+        AuthManager.auth(username, password: password, code: textFieldCode.text ?? "") { [weak self] (success) in
             self?.stopLoading()
 
-            if response.isError() {
-                if let error = response.result["error"].dictionary {
+            if !success {
+                /*if let error = response.result["error"].dictionary {
                     Alert(
                         title: localized("error.socket.default_error.title"),
                         message: error["message"]?.string ?? localized("error.socket.default_error.message")
                     ).present()
-                }
+                }*/
             } else {
                 self?.dismiss(animated: true, completion: nil)
                 AppManager.reloadApp()

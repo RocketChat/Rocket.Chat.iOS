@@ -9,29 +9,29 @@
 
 import SwiftyJSON
 
+typealias LoginParams = [String: Any];
+
 final class LoginRequest: APIRequest {
     typealias APIResourceType = LoginResource
     let method: HTTPMethod = .post
     let path = "/api/v1/login"
 
-    let username: String
-    let password: String
+    let params: LoginParams
 
-    init(_ username: String, _ password: String) {
-        self.username = username
-        self.password = password
+    init(params: LoginParams) {
+        self.params = params
     }
 
     func body() -> Data? {
-        let string = """
-        { "username": "\(username)", "password": "\(password)" }
-        """
-
-        return string.data(using: .utf8)
+        return JSON(params).description.data(using: .utf8)
     }
 }
 
 final class LoginResource: APIResource {
+    var status: String? {
+        return raw?["status"].string
+    }
+
     var data: JSON? {
         return raw?["data"]
     }
