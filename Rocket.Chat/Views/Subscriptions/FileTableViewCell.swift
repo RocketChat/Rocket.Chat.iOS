@@ -134,3 +134,13 @@ class FileTableViewCell: UITableViewCell {
         filePreview.sd_cancelCurrentAnimationImagesLoad()
     }
 }
+
+// MARK: Themeable
+
+extension FileTableViewCell {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        filePreview.tintColor = theme.titleText
+    }
+}

@@ -70,7 +70,7 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
             let pause = #imageLiteral(resourceName: "Player Pause").withRenderingMode(.alwaysTemplate)
             let play = #imageLiteral(resourceName: "Player Play").withRenderingMode(.alwaysTemplate)
             playButton.setImage(playing ? pause : play, for: .normal)
-            playButton.imageView?.tintColor = .RCDarkGray()
+            applyTheme()
         }
     }
 

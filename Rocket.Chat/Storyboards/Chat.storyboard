@@ -468,6 +468,7 @@
                         <viewLayoutGuide key="safeArea" id="nxo-e6-YmM"/>
                     </view>
                     <connections>
+                        <outlet property="audioImage" destination="E2d-6v-d5m" id="SdD-D2-jbH"/>
                         <outlet property="audioPlayerContainer" destination="82u-IQ-DU7" id="qFs-Ob-gVr"/>
                         <outlet property="audioTitle" destination="wtD-Pz-APQ" id="TJY-vd-1FI"/>
                     </connections>

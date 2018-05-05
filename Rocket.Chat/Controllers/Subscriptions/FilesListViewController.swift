@@ -234,8 +234,8 @@ extension FilesListViewController {
             loadMoreFiles()
 
             guard let refreshControl = tableView.refreshControl else { return }
-            tableView.refreshControl?.beginRefreshing()
             tableView.contentOffset = CGPoint(x: 0, y: -refreshControl.frame.size.height)
+            tableView.refreshControl?.beginRefreshing()
         }
     }
 
