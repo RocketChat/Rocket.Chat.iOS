@@ -193,7 +193,14 @@ class EditProfileTableViewController: BaseTableViewController, MediaPicker {
 
     // MARK: State Management
 
+    var isEditingProfile = false {
+        didSet {
+            applyTheme()
+        }
+    }
+
     @objc func beginEditing() {
+        isEditingProfile = true
         navigationItem.title = viewModel.editingTitle
         navigationItem.rightBarButtonItem = saveButton
         navigationItem.hidesBackButton = true
@@ -207,6 +214,7 @@ class EditProfileTableViewController: BaseTableViewController, MediaPicker {
     }
 
     @objc func endEditing() {
+        isEditingProfile = false
         bindUserData()
 
         navigationItem.title = viewModel.title
@@ -228,21 +236,18 @@ class EditProfileTableViewController: BaseTableViewController, MediaPicker {
             name.isEnabled = true
         } else {
             name.isEnabled = false
-            name.textColor = .lightGray
         }
 
         if authSettings?.isAllowedToEditUsername ?? false {
             username.isEnabled = true
         } else {
             username.isEnabled = false
-            username.textColor = .lightGray
         }
 
         if authSettings?.isAllowedToEditEmail ?? false {
             email.isEnabled = true
         } else {
             email.isEnabled = false
-            email.textColor = .lightGray
         }
 
         if authSettings?.isAllowedToEditName ?? false {
@@ -258,11 +263,8 @@ class EditProfileTableViewController: BaseTableViewController, MediaPicker {
         hideKeyboard()
         avatarButton.isEnabled = false
         name.isEnabled = false
-        name.textColor = .black
         username.isEnabled = false
-        username.textColor = .black
         email.isEnabled = false
-        email.textColor = .black
     }
 
     // MARK: Actions
@@ -553,5 +555,22 @@ extension EditProfileTableViewController: UITextFieldDelegate {
 
         return true
     }
+}
 
+extension EditProfileTableViewController {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = view.theme else { return }
+
+        switch isEditingProfile {
+        case false:
+            name.textColor = theme.titleText
+            username.textColor = theme.titleText
+            email.textColor = theme.titleText
+        case true:
+            name.textColor = (authSettings?.isAllowedToEditName ?? false) ? theme.titleText : theme.auxiliaryText
+            username.textColor = (authSettings?.isAllowedToEditName ?? false) ? theme.titleText : theme.auxiliaryText
+            email.textColor = (authSettings?.isAllowedToEditName ?? false) ? theme.titleText : theme.auxiliaryText
+        }
+    }
 }

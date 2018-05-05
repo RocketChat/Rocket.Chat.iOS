@@ -111,21 +111,11 @@ extension UITableViewCell {
     }
 }
 
-extension SLKTextView {
-    override func applyTheme() {
-        super.applyTheme()
-        guard let theme = theme else { return }
-        self.textColor = theme.bodyText
-        self.layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
-        self.backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
-    }
-}
-
 extension UITextView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        self.tintColor = theme.hyperlinkText
+        tintColor = theme.hyperlinkText
     }
 }
 
@@ -133,8 +123,8 @@ extension UINavigationBar {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        self.tintColor = theme.bodyText
-        self.barStyle = theme.appearence.barStyle
+        tintColor = theme.bodyText
+        barStyle = theme.appearence.barStyle
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {
@@ -147,10 +137,10 @@ extension UIToolbar {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        self.isTranslucent = false
-        self.barTintColor = theme.focusedBackground
-        self.tintColor = theme.tintColor
-        self.barStyle = theme.appearence.barStyle
+        isTranslucent = false
+        barTintColor = theme.focusedBackground
+        tintColor = theme.tintColor
+        barStyle = theme.appearence.barStyle
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {
@@ -163,9 +153,9 @@ extension UITabBar {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        self.barTintColor = theme.focusedBackground
-        self.tintColor = theme.tintColor
-        self.barStyle = theme.appearence.barStyle
+        barTintColor = theme.focusedBackground
+        tintColor = theme.tintColor
+        barStyle = theme.appearence.barStyle
     }
 
     open override func insertSubview(_ view: UIView, at index: Int) {
@@ -184,5 +174,15 @@ extension SLKTextInputbar {
     open override func insertSubview(_ view: UIView, at index: Int) {
         super.insertSubview(view, at: index)
         view.applyTheme()
+    }
+}
+
+extension SLKTextView {
+    override func applyTheme() {
+        super.applyTheme()
+        guard let theme = theme else { return }
+        self.textColor = theme.bodyText
+        self.layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
+        self.backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
     }
 }
