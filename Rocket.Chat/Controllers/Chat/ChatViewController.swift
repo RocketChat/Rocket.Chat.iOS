@@ -876,6 +876,12 @@ final class ChatViewController: SLKTextViewController {
 
             // No new data? Don't update it then
             if objs.count == 0 {
+                if self.dataController.dismissUnreadSeparator {
+                    DispatchQueue.main.async {
+                        self.syncCollectionView()
+                    }
+                }
+
                 DispatchQueue.main.async {
                     self.isAppendingMessages = false
                     completion?()
