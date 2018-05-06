@@ -9,7 +9,7 @@
 
 import SwiftyJSON
 
-typealias LoginParams = [String: Any];
+typealias LoginParams = [String: Any]
 
 final class LoginRequest: APIRequest {
     typealias APIResourceType = LoginResource
@@ -28,6 +28,10 @@ final class LoginRequest: APIRequest {
 }
 
 final class LoginResource: APIResource {
+    var error: String? {
+        return raw?["error"].string
+    }
+
     var status: String? {
         return raw?["status"].string
     }
@@ -44,3 +48,5 @@ final class LoginResource: APIResource {
         return data?["userId"].string
     }
 }
+
+typealias LoginResponse = APIResponse<LoginResource>

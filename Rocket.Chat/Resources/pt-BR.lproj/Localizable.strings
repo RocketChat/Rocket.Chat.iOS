@@ -7,6 +7,12 @@
 "error.socket.default_error.title" = "Oops!";
 "error.socket.default_error.message" = "Algo errado aconteceu, por favor tente novamente.";
 
+"error.login.title" = "Oops!";
+"error.login.message" = "Something wrong happened while trying to login."; //TODO
+
+"error.login_unauthorized.title" = "Oops!";
+"error.login_unauthorized.message" = "Your credentials were rejected! Please, try again."; //TODO
+
 // Alerts
 "alert.connection.invalid_url.title" = "Oops!";
 "alert.connection.invalid_url.message" = "A URL que você inseriu está incorreta ou é inválida. Confira se ela está informada corretamente e tente novamente, por favor!";

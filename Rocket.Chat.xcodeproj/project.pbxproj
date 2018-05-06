@@ -388,6 +388,7 @@
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
 		805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC361FFC08870033151B /* CustomEmoji.swift */; };
 		805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC381FFE54820033151B /* CustomEmojiSpec.swift */; };
+		8062E327209E19BB0044F407 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E326209E19BB0044F407 /* AuthClient.swift */; };
 		806401311FB09DE800990572 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401301FB09DE800990572 /* Permission.swift */; };
 		806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401321FB09EC400990572 /* PermissionModelMapping.swift */; };
 		806401351FB09F8A00990572 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401341FB09F8A00990572 /* PermissionManager.swift */; };
@@ -1074,6 +1075,7 @@
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
 		805DEC361FFC08870033151B /* CustomEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmoji.swift; sourceTree = "<group>"; };
 		805DEC381FFE54820033151B /* CustomEmojiSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiSpec.swift; sourceTree = "<group>"; };
+		8062E326209E19BB0044F407 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
 		806401301FB09DE800990572 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		806401321FB09EC400990572 /* PermissionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionModelMapping.swift; sourceTree = "<group>"; };
 		806401341FB09F8A00990572 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
@@ -2353,6 +2355,7 @@
 				807C7C0520751ED1006B600E /* SpotlightClient.swift */,
 				809B530A1FE2B1AB00833DD2 /* UploadClient.swift */,
 				806EFA61209BF30500D0D650 /* SubscriptionsClient.swift */,
+				8062E326209E19BB0044F407 /* AuthClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -3912,6 +3915,7 @@
 				80DC9A6C206BA95600032BE0 /* Localized.swift in Sources */,
 				14A6A83120421DF8008C210D /* ColorPickerView.swift in Sources */,
 				8013F88E1FD6B83C00EE1A4E /* CommandModelMapping.swift in Sources */,
+				8062E327209E19BB0044F407 /* AuthClient.swift in Sources */,
 				89AEB7F81F7D225D00112A09 /* SubscriptionCreateRequest.swift in Sources */,
 				807C7C12207522EF006B600E /* LoginServicesRequest.swift in Sources */,
 				80B3DC0B202DCE1D004249AD /* SAMLViewController.swift in Sources */,

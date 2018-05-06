@@ -66,7 +66,7 @@ extension AuthManager {
         }
     }
 
-    static func auth(token: String, completion: @escaping (Bool) -> Void) {
+    static func auth(token: String, completion: @escaping (LoginResponse) -> Void) {
         auth(params: ["resume": token], completion: completion)
     }
 
@@ -92,47 +92,13 @@ extension AuthManager {
     /**
      Generic method that authenticates the user.
      */
-    static func auth(params: [String: Any], completion: @escaping (Bool) -> Void) {
+    static func auth(params: [String: Any], completion: @escaping (LoginResponse) -> Void) {
         guard let url = SocketManager.sharedInstance.serverURL?.httpServerURL() else {
-            return completion(false)
+            return completion(.error(.malformedRequest))
         }
 
-        let api = API(host: url)
-
-        api.fetch(LoginRequest(params: params)) { response in
-            switch response {
-            case .resource(let resource):
-                guard resource.status == "success" else {
-                    return completion(false)
-                }
-
-                let auth = Auth()
-                auth.internalFirstChannelOpened = false
-                auth.lastSubscriptionFetch = nil
-                auth.lastAccess = Date()
-                auth.serverURL = api.host.absoluteString
-                auth.token = resource.authToken
-                auth.userId = resource.userId
-
-                persistAuthInformation(auth)
-                DatabaseManager.changeDatabaseInstance()
-
-                Realm.executeOnMainThread({ (realm) in
-                    // Delete all the Auth objects, since we don't
-                    // support multiple-server per database
-                    realm.delete(realm.objects(Auth.self))
-
-                    PushManager.updatePushToken()
-                    realm.add(auth)
-                })
-
-                SocketManager.sharedInstance.isUserAuthenticated = true
-                ServerManager.timestampSync()
-                completion(true)
-            case .error:
-                completion(false)
-            }
-        }
+        let client = API(host: url).client(AuthClient.self)
+        client.login(params: params, completion: completion)
     }
 
     /**
@@ -143,7 +109,7 @@ extension AuthManager {
      - parameter completion: The completion block that'll be called in case
      of success or error.
      */
-    static func auth(_ username: String, password: String, code: String? = nil, completion: @escaping (Bool) -> Void) {
+    static func auth(_ username: String, password: String, code: String? = nil, completion: @escaping (LoginResponse) -> Void) {
         let usernameType = username.contains("@") ? "email" : "username"
         var params: [String: Any]?
 
@@ -184,7 +150,7 @@ extension AuthManager {
      - parameter completion: The completion block that'll be called in case
      of success or error.
      */
-    static func auth(credentials: OAuthCredentials, completion: @escaping (Bool) -> Void) {
+    static func auth(credentials: OAuthCredentials, completion: @escaping (LoginResponse) -> Void) {
         let params = [
             "oauth": [
                 "credentialToken": credentials.token,
@@ -202,7 +168,7 @@ extension AuthManager {
      - parameter completion: The completion block that'll be called in case
      of success or error.
      */
-    static func auth(casCredentialToken: String, completion: @escaping (Bool) -> Void) {
+    static func auth(casCredentialToken: String, completion: @escaping (LoginResponse) -> Void) {
         let params = [
             "cas": [
                 "credentialToken": casCredentialToken
@@ -212,7 +178,7 @@ extension AuthManager {
         AuthManager.auth(params: params, completion: completion)
     }
 
-    static func auth(samlCredentialToken: String, completion: @escaping (Bool) -> Void) {
+    static func auth(samlCredentialToken: String, completion: @escaping (LoginResponse) -> Void) {
         let params = [
             "saml": true,
             "credentialToken": samlCredentialToken
