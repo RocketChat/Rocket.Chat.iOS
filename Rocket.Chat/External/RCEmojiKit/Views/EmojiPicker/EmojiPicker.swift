@@ -292,9 +292,13 @@ extension EmojiPicker: UITabBarDelegate {
         emojisCollectionView.reloadData()
         emojisCollectionView.layoutIfNeeded()
 
+        let numberOfCells = emojisCollectionView.numberOfItems(inSection: index)
         let indexPath = IndexPath(row: 1, section: index)
-        emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-        emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -36.0)), animated: false)
+
+        if numberOfCells > 0 {
+            emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+            emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -36.0)), animated: false)
+        }
     }
 }
 
