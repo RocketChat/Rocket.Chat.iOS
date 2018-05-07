@@ -20,7 +20,6 @@ class MentionSpec: XCTestCase {
 
         mention.map(json, realm: nil)
 
-        XCTAssert(mention.identifier != nil, "will have identifier")
         XCTAssert(mention.username == username, "will assign username")
     }
 }

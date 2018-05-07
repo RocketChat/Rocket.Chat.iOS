@@ -11,6 +11,12 @@ import RealmSwift
 
 struct AppManager {
 
+    /**
+     This key will be the default URL (and unique) of the app to be
+     used on authenticating in a new server. This is not used in our
+     App Store application, but can be used in forks or whitelabels
+     that require a unique URL to be used.
+    */
     private static let kApplicationServerURLKey = "RC_SERVER_URL"
 
     /**
@@ -99,6 +105,7 @@ extension AppManager {
     }
 
     static func reloadApp() {
+        SocketManager.sharedInstance.connectionHandlers.removeAllObjects()
         SocketManager.disconnect { (_, _) in
             DispatchQueue.main.async {
                 if AuthManager.isAuthenticated() != nil {
@@ -164,22 +171,26 @@ extension AppManager {
         // If not, fetch it
         let currentRealm = Realm.current
         let request = SubscriptionInfoRequest(roomName: name)
-        API.current()?.fetch(request, succeeded: { result in
-            DispatchQueue.main.async {
-                Realm.executeOnMainThread(realm: currentRealm, { realm in
-                    guard let values = result.channel else { return }
+        API.current()?.fetch(request) { response in
+            switch response {
+            case .resource(let resource):
+                DispatchQueue.main.async {
+                    Realm.executeOnMainThread(realm: currentRealm, { realm in
+                        guard let values = resource.channel else { return }
 
-                    let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
-                        object?.rid = object?.identifier ?? ""
+                        let subscription = Subscription.getOrCreate(realm: realm, values: values, updates: { object in
+                            object?.rid = object?.identifier ?? ""
+                        })
+
+                        realm.add(subscription, update: true)
                     })
 
-                    realm.add(subscription, update: true)
-                })
-
-                _ = openRoom()
-
+                    _ = openRoom()
+                }
+            case .error:
+                break
             }
-        }, errored: nil)
+        }
     }
 }
 

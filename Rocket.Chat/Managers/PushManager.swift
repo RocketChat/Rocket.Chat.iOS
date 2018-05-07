@@ -152,7 +152,9 @@ extension PushManager {
         if index != DatabaseManager.selectedIndex {
             AppManager.changeSelectedServer(index: index)
         } else {
-            ChatViewController.shared?.subscription = .notificationSubscription()
+            if let auth = AuthManager.isAuthenticated() {
+                ChatViewController.shared?.subscription = .notificationSubscription(auth: auth)
+            }
         }
 
         if let reply = reply {
@@ -161,18 +163,21 @@ extension PushManager {
             let message = "\(reply)\(appendage)"
 
             let backgroundTask = UIApplication.shared.beginBackgroundTask(expirationHandler: nil)
-            API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message), succeeded: { _ in
-                UIApplication.shared.endBackgroundTask(backgroundTask)
-            }, errored: { _ in
-                Alert.defaultError.present()
-            })
+            API.current()?.fetch(PostMessageRequest(roomId: notification.roomId, text: message)) { response in
+                switch response {
+                case .resource:
+                    UIApplication.shared.endBackgroundTask(backgroundTask)
+                case .error:
+                    Alert.defaultError.present()
+                }
+            }
         }
 
         return true
     }
 }
 
-class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
+final class UserNotificationCenterDelegate: NSObject, UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         if SocketManager.isConnected() {
             completionHandler([])

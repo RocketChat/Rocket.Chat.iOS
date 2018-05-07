@@ -9,9 +9,9 @@
 
 import SwiftyJSON
 
-typealias SpotlightResult = APIResult<SpotlightRequest>
+final class SpotlightRequest: APIRequest {
+    typealias APIResourceType = SpotlightResource
 
-class SpotlightRequest: APIRequest {
     let version = Version(0, 61, 0)
     let path = "/api/v1/spotlight"
 
@@ -22,7 +22,7 @@ class SpotlightRequest: APIRequest {
     }
 }
 
-extension APIResult where T == SpotlightRequest {
+final class SpotlightResource: APIResource {
     var users: [JSON] {
         return raw?["users"].arrayValue ?? []
     }

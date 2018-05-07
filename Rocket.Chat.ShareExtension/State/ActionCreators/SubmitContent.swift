@@ -9,23 +9,28 @@
 import Foundation
 
 fileprivate extension SEStore {
-    var contentRequests: [(Int, APIRequest)] {
-        return store.state.content.map { content -> APIRequest in
+    enum Request {
+        case file(UploadMessageRequest)
+        case text(SendMessageRequest)
+    }
+
+    var contentRequests: [(Int, Request)] {
+        return store.state.content.map { content -> Request in
             switch content.type {
             case .file(let file):
-                return UploadMessageRequest(
+                return .file(UploadMessageRequest(
                     roomId: store.state.currentRoom.rid,
                     data: file.data,
                     filename: file.name,
                     mimetype: file.mimetype,
                     description: file.description
-                )
+                ))
             case .text(let text):
-                return SendMessageRequest(
+                return .text(SendMessageRequest(
                     id: "ios_se_\(String.random(10))",
                     roomId: store.state.currentRoom.rid,
                     text: text
-                )
+                ))
             }
         }.enumerated().map { ($0, $1) }
     }
@@ -45,11 +50,12 @@ var urlTasks: [URLSessionTask?] = []
 
 func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
     var fileRequests = store.contentRequests.compactMap { index, request -> (index: Int, request: UploadMessageRequest)? in
-        guard let request = request as? UploadMessageRequest else {
+        switch request {
+        case .file(let request):
+            return (index, request)
+        default:
             return nil
         }
-
-        return (index, request)
     }
 
     func requestNext() {
@@ -63,25 +69,27 @@ func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
 
             store.dispatch(.setContentValue(content.withStatus(.sending), index: index))
 
-            let task = store.api?.fetch(request, succeeded: { result in
-                DispatchQueue.main.async {
+            let task = store.api?.fetch(request) { response in
+
+                switch response {
+                case .resource(let resource):
                     let content = store.state.content[index]
-                    if let error = result.error {
-                        store.dispatch(.setContentValue(content.withStatus(.errored(error)), index: index))
-                    } else {
-                        store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
+                    DispatchQueue.main.async {
+                        if let error = resource.error {
+                                store.dispatch(.setContentValue(content.withStatus(.errored(error)), index: index))
+                        } else {
+                                store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
+                        }
+                    }
+                case .error(let error):
+                    let content = store.state.content[index]
+                    DispatchQueue.main.async {
+                        store.dispatch(.setContentValue(content.withStatus(.errored("\(error)")), index: index))
                     }
                 }
 
                 requestNext()
-            }, errored: { error in
-                DispatchQueue.main.async {
-                    let content = store.state.content[index]
-                    store.dispatch(.setContentValue(content.withStatus(.errored("\(error)")), index: index))
-                }
-
-                requestNext()
-            })
+            }
 
             urlTasks.append(task)
         }
@@ -92,11 +100,12 @@ func submitFiles(store: SEStore, completion: @escaping (() -> Void)) {
 
 func submitMessages(store: SEStore, completion: @escaping (() -> Void)) {
     var messageRequests = store.contentRequests.compactMap { index, request -> (index: Int, request: SendMessageRequest)? in
-        guard let request = request as? SendMessageRequest else {
+        switch request {
+        case .text(let request):
+            return (index, request)
+        default:
             return nil
         }
-
-        return (index, request)
     }
 
     func requestNext() {
@@ -108,21 +117,21 @@ func submitMessages(store: SEStore, completion: @escaping (() -> Void)) {
         let content = store.state.content[index]
         store.dispatch(.setContentValue(content.withStatus(.sending), index: index))
 
-        let task = store.api?.fetch(request, succeeded: { _ in
-            DispatchQueue.main.async {
-                let content = store.state.content[index]
-                store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
+        let task = store.api?.fetch(request) { response in
+            switch response {
+            case .resource:
+                DispatchQueue.main.async {
+                    let content = store.state.content[index]
+                    store.dispatch(.setContentValue(content.withStatus(.succeeded), index: index))
+                }
+            case .error(let error):
+                DispatchQueue.main.async {
+                    let content = store.state.content[index]
+                    store.dispatch(.setContentValue(content.withStatus(.errored("\(error)")), index: index))
+                }
             }
-
             requestNext()
-        }, errored: { error in
-            DispatchQueue.main.async {
-                let content = store.state.content[index]
-                store.dispatch(.setContentValue(content.withStatus(.errored("\(error)")), index: index))
-            }
-
-            requestNext()
-        })
+        }
 
         urlTasks.append(task)
     }

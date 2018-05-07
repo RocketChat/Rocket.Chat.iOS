@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 import SwiftyJSON
 
-class MessageURL: BaseModel {
+final class MessageURL: Object {
     @objc dynamic var textDescription: String?
     @objc dynamic var title: String?
     @objc dynamic var targetURL: String?

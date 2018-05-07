@@ -8,9 +8,9 @@
 
 import SwiftyJSON
 
-typealias UpdateMessageResult = APIResult<UpdateMessageRequest>
+final class UpdateMessageRequest: APIRequest {
+    typealias APIResourceType = UpdateMessageResource
 
-class UpdateMessageRequest: APIRequest {
     let requiredVersion = Version(0, 49, 0)
 
     let method: HTTPMethod = .post
@@ -37,7 +37,7 @@ class UpdateMessageRequest: APIRequest {
     }
 }
 
-extension APIResult where T == UpdateMessageRequest {
+final class UpdateMessageResource: APIResource {
     var message: Message? {
         guard let rawMessage = raw?["message"] else { return nil }
 

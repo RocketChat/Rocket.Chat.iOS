@@ -58,6 +58,12 @@ extension Message: ModelMappeable {
             self.userBlocked = isBlocked
         }
 
+        // Starred
+        if let starred = values["starred"].array {
+            self.starred.removeAll()
+            starred.compactMap({ $0["_id"].string }).forEach(self.starred.append)
+        }
+
         // Attachments
         if let attachments = values["attachments"].array {
             self.attachments.removeAll()

@@ -11,7 +11,7 @@ import SDWebImage
 
 private typealias EmojiCategory = (name: String, emojis: [Emoji])
 
-class EmojiPicker: UIView, RCEmojiKitLocalizable {
+final class EmojiPicker: UIView, RCEmojiKitLocalizable {
     static let defaults = UserDefaults(suiteName: "EmojiPicker")
 
     var customEmojis: [Emoji] = []
@@ -55,6 +55,7 @@ class EmojiPicker: UIView, RCEmojiKitLocalizable {
         (name: "symbols", emojis: Emojione.symbols),
         (name: "flags", emojis: Emojione.flags)
     ]
+
     fileprivate var searchedCategories: [(name: String, emojis: [Emoji])] = []
     fileprivate func searchCategories(string: String) -> [EmojiCategory] {
         return ([customCategory] + defaultCategories).map {
@@ -291,9 +292,13 @@ extension EmojiPicker: UITabBarDelegate {
         emojisCollectionView.reloadData()
         emojisCollectionView.layoutIfNeeded()
 
+        let numberOfCells = emojisCollectionView.numberOfItems(inSection: index)
         let indexPath = IndexPath(row: 1, section: index)
-        emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-        emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -36.0)), animated: false)
+
+        if numberOfCells > 0 {
+            emojisCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
+            emojisCollectionView.setContentOffset(emojisCollectionView.contentOffset.applying(CGAffineTransform(translationX: 0.0, y: -36.0)), animated: false)
+        }
     }
 }
 

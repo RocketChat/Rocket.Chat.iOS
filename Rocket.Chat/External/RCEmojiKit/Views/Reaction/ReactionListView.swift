@@ -20,7 +20,7 @@ struct ReactionListViewModel {
     }
 }
 
-class ReactionListView: UIView {
+final class ReactionListView: UIView {
     @IBOutlet var scrollView: UIScrollView! {
         didSet {
             setupScrollView()

@@ -1,5 +1,5 @@
 //
-//  AuthViewController+AuthenticationHandler.swift
+//  AuthViewControllerAuthenticationHandler.swift
 //  Rocket.Chat
 //
 //  Created by Matheus Cardoso on 3/26/18.
@@ -20,40 +20,41 @@ extension AuthViewController {
                     return
                 }
 
-                Alert(
-                    key: "error.socket.default_error"
-                    ).present()
+                Alert(key: "error.socket.default_error").present()
             }
 
             return
         }
 
-        API.current()?.fetch(MeRequest(), succeeded: { [weak self] result in
-            guard let strongSelf = self else { return }
+        if let publicSettings = serverPublicSettings {
+            AuthSettingsManager.persistPublicSettings(settings: publicSettings)
+        }
 
-            SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
+        API.current()?.fetch(MeRequest()) { [weak self] response in
+            switch response {
+            case .resource(let resource):
+                guard let strongSelf = self else { return }
 
-            if let user = result.user {
-                BugTrackingCoordinator.identifyCrashReports(withUser: user)
+                SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
 
-                if user.username != nil {
-                    DispatchQueue.main.async {
-                        strongSelf.dismiss(animated: true, completion: nil)
-                        AppManager.reloadApp()
+                if let user = resource.user {
+                    if user.username != nil {
+                        DispatchQueue.main.async {
+                            strongSelf.dismiss(animated: true, completion: nil)
+                            AppManager.reloadApp()
+                        }
+                    } else {
+                        DispatchQueue.main.async {
+                            strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
+                        }
                     }
                 } else {
-                    DispatchQueue.main.async {
-                        strongSelf.performSegue(withIdentifier: "RequestUsername", sender: nil)
-                    }
+                    self?.stopLoading()
+                    Alert(key: "error.socket.default_error").present()
                 }
-            } else {
+            case .error:
                 self?.stopLoading()
-                Alert(
-                    key: "error.socket.default_error"
-                    ).present()
             }
-            }, errored: { [weak self] _ in
-                self?.stopLoading()
-        })
+        }
     }
 }

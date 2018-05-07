@@ -83,12 +83,4 @@ extension String {
 
         return filteredRanges
     }
-
-    func escapingRegex() -> String? {
-        var escaped = self
-        ["[", "]", "(", ")", "*", "+", "?", ".", "^", "$", "|"].forEach {
-            escaped = escaped.replacingOccurrences(of: $0, with: "\\\($0)")
-        }
-        return escaped
-    }
 }

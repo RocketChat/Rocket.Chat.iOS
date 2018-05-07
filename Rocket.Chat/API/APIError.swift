@@ -15,6 +15,7 @@ enum APIError: CustomStringConvertible {
     case error(Error)
     case noData
     case malformedRequest
+    case notSecured
 
     var description: String {
         switch self {
@@ -23,5 +24,11 @@ enum APIError: CustomStringConvertible {
         default:
             return "\(self)"
         }
+    }
+}
+
+extension NSError {
+    static var sslErrors: [Int] {
+        return [NSURLErrorSecureConnectionFailed, NSURLErrorServerCertificateUntrusted, NSURLErrorServerCertificateHasBadDate, NSURLErrorServerCertificateNotYetValid, NSURLErrorServerCertificateHasUnknownRoot]
     }
 }
