@@ -35,6 +35,8 @@ final class SubscriptionsViewController: BaseViewController {
         updateBackButton()
 
         subscribeModelChanges()
+
+        updateData()
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -272,7 +274,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
     }
 
     func handleSubscriptionUpdates<T>(changes: RealmCollectionChange<Results<T>>?) {
-        
+        updateSubscriptionsList()
     }
 
     func updateCurrentUserInformation() {

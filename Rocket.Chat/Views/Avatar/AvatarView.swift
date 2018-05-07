@@ -29,24 +29,19 @@ final class AvatarView: UIView {
 
     var avatarURL: URL? {
         didSet {
-            if avatarURL != nil {
-                updateAvatar()
-            }
+            updateAvatar()
         }
     }
 
     var subscription: Subscription? {
         didSet {
-            imageView?.image = nil
             updateAvatar()
         }
     }
 
     var user: User? {
         didSet {
-            if user != nil {
-                updateAvatar()
-            }
+            updateAvatar()
         }
     }
 
@@ -176,6 +171,7 @@ final class AvatarView: UIView {
         avatarURL = nil
         imageURL = nil
         user = nil
+        subscription = nil
         emoji = nil
 
         imageView.image = nil

@@ -61,8 +61,8 @@ final class SubscriptionCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
 
-        avatarView.user = nil
-        avatarView.subscription = nil
+        avatarView.prepareForReuse()
+
         labelName.text = ""
         labelLastMessage.text = ""
         labelUnread.text = ""
@@ -76,8 +76,10 @@ final class SubscriptionCell: UITableViewCell {
         updateStatus()
 
         if let user = subscription.directMessageUser {
+            avatarView.subscription = nil
             avatarView.user = user
         } else {
+            avatarView.user = nil
             avatarView.subscription = subscription
         }
 
