@@ -196,7 +196,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func searchBy(_ text: String = "") {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.filterBy(name: text)
+        subscriptions = auth.subscriptions.filterBy(name: text).sorted(byKeyPath: "roomUpdatedAt", ascending: false)
         searchText = text
 
         if text.count == 0 {
@@ -246,7 +246,7 @@ extension SubscriptionsViewController: UISearchBarDelegate {
 
     func updateSearched() {
         guard let auth = AuthManager.isAuthenticated() else { return }
-        subscriptions = auth.subscriptions.sorted(byKeyPath: "roomUpdatedAt", ascending: false).filterBy(name: searchText)
+        subscriptions = auth.subscriptions.filterBy(name: searchText).sorted(byKeyPath: "roomUpdatedAt", ascending: false)
     }
 
     func updateSubscriptionsList() {
