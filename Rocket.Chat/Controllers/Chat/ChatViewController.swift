@@ -80,10 +80,6 @@ final class ChatViewController: SLKTextViewController {
 
     var subscription: Subscription? {
         didSet {
-            // Clean up
-            subscriptionToken?.invalidate()
-            didCancelTextEditing(self)
-
             guard
                 let subscription = subscription,
                 !subscription.isInvalidated
@@ -109,23 +105,9 @@ final class ChatViewController: SLKTextViewController {
             }
 
             emptySubscriptionState()
-
-            if let oldValue = oldValue {
-                if oldValue.identifier != subscription.identifier {
-                    emptySubscriptionState()
-                }
-            } else {
-                emptySubscriptionState()
-            }
-
             updateSubscriptionInfo()
             markAsRead()
             typingIndicatorView?.dismissIndicator()
-
-            if let oldValue = oldValue, oldValue.identifier != subscription.identifier {
-                unsubscribe(for: oldValue)
-            }
-
             textView.text = DraftMessageManager.draftMessage(for: subscription)
         }
     }
@@ -182,14 +164,7 @@ final class ChatViewController: SLKTextViewController {
             action: nil
         )
 
-        NotificationCenter.default.addObserver(self, selector: #selector(reconnect), name: NSNotification.Name.UIApplicationDidBecomeActive, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-
-        if !SocketManager.isConnected() {
-            reconnect()
-        }
-
-        subscription = .initialSubscription()
 
         view.bringSubview(toFront: activityIndicatorContainer)
         view.bringSubview(toFront: buttonScrollToBottom)
@@ -203,16 +178,6 @@ final class ChatViewController: SLKTextViewController {
         setupReplyView()
     }
 
-    @objc internal func reconnect() {
-//        chatHeaderViewStatus?.labelTitle.text = localized("connection.connecting.banner.message")
-//        chatHeaderViewStatus?.activityIndicator.startAnimating()
-//        chatHeaderViewStatus?.buttonRefresh.isHidden = true
-
-        if subscription == nil {
-            subscription = .initialSubscription()
-        }
-    }
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
@@ -220,7 +185,6 @@ final class ChatViewController: SLKTextViewController {
 
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-
         updateChatPreviewModeViewConstraints()
     }
 
