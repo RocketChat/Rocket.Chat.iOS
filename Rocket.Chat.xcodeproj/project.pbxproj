@@ -415,6 +415,8 @@
 		806DB94820695BCF004ED8ED /* AuthViewControllerConnectionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94720695BCF004ED8ED /* AuthViewControllerConnectionHandler.swift */; };
 		806DB94A20695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94920695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift */; };
 		806DB94E20698C25004ED8ED /* ChatMessageCellAccessibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806DB94D20698C25004ED8ED /* ChatMessageCellAccessibility.swift */; };
+		806EFA5E209BF1AC00D0D650 /* SubscriptionReadRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806EFA5D209BF1AC00D0D650 /* SubscriptionReadRequest.swift */; };
+		806EFA62209BF30500D0D650 /* SubscriptionsClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806EFA61209BF30500D0D650 /* SubscriptionsClient.swift */; };
 		8073719A1F94E83600D53ADF /* SocketError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 807371991F94E83600D53ADF /* SocketError.swift */; };
 		8073719C1F963FA400D53ADF /* APITestCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719B1F963FA400D53ADF /* APITestCase.swift */; };
 		8073719E1F9688B200D53ADF /* LoginServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8073719D1F9688B200D53ADF /* LoginServiceManager.swift */; };
@@ -537,6 +539,10 @@
 		80D41DFF20923AA600034D1F /* AuthCanStarMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41DFE20923AA600034D1F /* AuthCanStarMessage.swift */; };
 		80D41E01209248F800034D1F /* StarMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */; };
 		80D41E0520924A8200034D1F /* AuthCanStarMessageSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0420924A8200034D1F /* AuthCanStarMessageSpec.swift */; };
+		80D41E072099341C00034D1F /* PermissionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E062099341C00034D1F /* PermissionsRequest.swift */; };
+		80D41E092099393600034D1F /* PermissionsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E082099393600034D1F /* PermissionsRequestSpec.swift */; };
+		80D41E0B20993CE200034D1F /* PinMessageRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0A20993CE200034D1F /* PinMessageRequest.swift */; };
+		80D41E0D20993FCB00034D1F /* PinMessageRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */; };
 		80D5637220592D32008896D6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 80D5637120592D32008896D6 /* Assets.xcassets */; };
 		80D563752059325A008896D6 /* MimeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D563742059325A008896D6 /* MimeType.swift */; };
 		80D5637720593533008896D6 /* ParseItemProviders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80D5637620593533008896D6 /* ParseItemProviders.swift */; };
@@ -547,6 +553,7 @@
 		80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F281FD8B2B800B70B59 /* UserExtensions.swift */; };
 		80E99F2C1FD8B4BA00B70B59 /* APIExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */; };
 		80E99F2F1FD8B4F400B70B59 /* UserExtensionsSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */; };
+		80E9DBCF209BF98100A48CA9 /* SubscriptionReadRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80E9DBCE209BF98100A48CA9 /* SubscriptionReadRequestSpec.swift */; };
 		80EF621A205A981600EF739B /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41494B911D63C6280004F369 /* UIImageExtension.swift */; };
 		80F09A1D1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */; };
 		80F1F8102080F307007998AB /* MarkdownManagerSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 80F1F80F2080F307007998AB /* MarkdownManagerSpec.swift */; };
@@ -1099,6 +1106,8 @@
 		806DB94720695BCF004ED8ED /* AuthViewControllerConnectionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewControllerConnectionHandler.swift; sourceTree = "<group>"; };
 		806DB94920695CD0004ED8ED /* AuthViewControllerAuthenticationHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewControllerAuthenticationHandler.swift; sourceTree = "<group>"; };
 		806DB94D20698C25004ED8ED /* ChatMessageCellAccessibility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatMessageCellAccessibility.swift; sourceTree = "<group>"; };
+		806EFA5D209BF1AC00D0D650 /* SubscriptionReadRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionReadRequest.swift; sourceTree = "<group>"; };
+		806EFA61209BF30500D0D650 /* SubscriptionsClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsClient.swift; sourceTree = "<group>"; };
 		807371991F94E83600D53ADF /* SocketError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketError.swift; sourceTree = "<group>"; };
 		8073719B1F963FA400D53ADF /* APITestCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APITestCase.swift; sourceTree = "<group>"; };
 		8073719D1F9688B200D53ADF /* LoginServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginServiceManager.swift; sourceTree = "<group>"; };
@@ -1205,6 +1214,10 @@
 		80D41DFE20923AA600034D1F /* AuthCanStarMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessage.swift; sourceTree = "<group>"; };
 		80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarMessageRequestSpec.swift; sourceTree = "<group>"; };
 		80D41E0420924A8200034D1F /* AuthCanStarMessageSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthCanStarMessageSpec.swift; sourceTree = "<group>"; };
+		80D41E062099341C00034D1F /* PermissionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsRequest.swift; sourceTree = "<group>"; };
+		80D41E082099393600034D1F /* PermissionsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionsRequestSpec.swift; sourceTree = "<group>"; };
+		80D41E0A20993CE200034D1F /* PinMessageRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMessageRequest.swift; sourceTree = "<group>"; };
+		80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinMessageRequestSpec.swift; sourceTree = "<group>"; };
 		80D5637120592D32008896D6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		80D563742059325A008896D6 /* MimeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MimeType.swift; sourceTree = "<group>"; };
 		80D5637620593533008896D6 /* ParseItemProviders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseItemProviders.swift; sourceTree = "<group>"; };
@@ -1214,6 +1227,7 @@
 		80E99F281FD8B2B800B70B59 /* UserExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensions.swift; sourceTree = "<group>"; };
 		80E99F2B1FD8B4BA00B70B59 /* APIExtensionsSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIExtensionsSpec.swift; sourceTree = "<group>"; };
 		80E99F2E1FD8B4F400B70B59 /* UserExtensionsSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserExtensionsSpec.swift; sourceTree = "<group>"; };
+		80E9DBCE209BF98100A48CA9 /* SubscriptionReadRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionReadRequestSpec.swift; sourceTree = "<group>"; };
 		80F09A1C1FFFC24800977D0D /* NSAttributedString+CustomEmojis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+CustomEmojis.swift"; sourceTree = "<group>"; };
 		80F1F80F2080F307007998AB /* MarkdownManagerSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarkdownManagerSpec.swift; sourceTree = "<group>"; };
 		80FA9065205313E20069038F /* SEContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SEContent.swift; sourceTree = "<group>"; };
@@ -2321,6 +2335,7 @@
 				9977302B2072B746009AF465 /* PublicSettingsRequest.swift */,
 				80054CFB1FDAFD7700F5ECF9 /* PushTokenDeleteRequest.swift */,
 				807C7C0720751EDB006B600E /* SpotlightRequest.swift */,
+				80D41E062099341C00034D1F /* PermissionsRequest.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -2359,6 +2374,7 @@
 				80054CFD1FDAFF5200F5ECF9 /* PushClient.swift */,
 				807C7C0520751ED1006B600E /* SpotlightClient.swift */,
 				809B530A1FE2B1AB00833DD2 /* UploadClient.swift */,
+				806EFA61209BF30500D0D650 /* SubscriptionsClient.swift */,
 			);
 			path = Clients;
 			sourceTree = "<group>";
@@ -2435,6 +2451,7 @@
 				990FF6D520740C79007B4A53 /* SubscriptionMentionsRequest.swift */,
 				800E22851F8507E400DA84F1 /* SubscriptionMessagesRequest.swift */,
 				9987B59B2093E60C007D277C /* SubscriptionFilesRequest.swift */,
+				806EFA5D209BF1AC00D0D650 /* SubscriptionReadRequest.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -2447,6 +2464,7 @@
 				80235D211F7442F700A56CA5 /* SubscriptionMembersRequestSpec.swift */,
 				990FF6D7207438D4007B4A53 /* SubscriptionMentionsRequestSpec.swift */,
 				992B5AB7209A2890009C8123 /* SubscriptionFilesRequestSpec.swift */,
+				80E9DBCE209BF98100A48CA9 /* SubscriptionReadRequestSpec.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -2491,6 +2509,8 @@
 			children = (
 				806728FE20079734009FE94D /* DeleteMessageRequest.swift */,
 				806C59A11FBB0BD600C32D0A /* PostMessageRequest.swift */,
+				80D41DFC2092378400034D1F /* StarMessageRequest.swift */,
+				80D41E0A20993CE200034D1F /* PinMessageRequest.swift */,
 				8067DA9A206BC71A005E3369 /* ReactMessageRequest.swift */,
 				99DBB871208FF6FE00382DB2 /* SearchMessagesRequest.swift */,
 				80054CF01FD9505A00F5ECF9 /* SendMessageRequest.swift */,
@@ -2509,6 +2529,7 @@
 				8067DA9C206BC7D2005E3369 /* ReactMessageRequestSpec.swift */,
 				99DBB87520903A7F00382DB2 /* SearchMessagesRequestSpec.swift */,
 				80D41E00209248F800034D1F /* StarMessageRequestSpec.swift */,
+				80D41E0C20993FCB00034D1F /* PinMessageRequestSpec.swift */,
 				80213C0A1FDFE35C00809E14 /* UploadMessageRequestSpec.swift */,
 			);
 			path = Message;
@@ -2607,6 +2628,7 @@
 				D18675E91F70A58B00406FB4 /* InfoRequestSpec.swift */,
 				9921BFAB2075AF5F00BB027A /* PublicSettingsRequestSpec.swift */,
 				807C7C0B20751F06006B600E /* SpotlightRequestSpec.swift */,
+				80D41E082099393600034D1F /* PermissionsRequestSpec.swift */,
 			);
 			path = General;
 			sourceTree = "<group>";
@@ -3704,6 +3726,7 @@
 				80D41DFF20923AA600034D1F /* AuthCanStarMessage.swift in Sources */,
 				8069D26E1FFF876D00C75926 /* Emoji.swift in Sources */,
 				4174CB171D2D9BB70086DAC8 /* AuthViewController.swift in Sources */,
+				80D41E0B20993CE200034D1F /* PinMessageRequest.swift in Sources */,
 				418688111E53CC86002F785C /* ChatControllerMessageActions.swift in Sources */,
 				411498E31FC7A99C00D66542 /* ChatTitleViewModel.swift in Sources */,
 				80213C0E1FE0639E00809E14 /* HTTPMethod.swift in Sources */,
@@ -3723,6 +3746,7 @@
 				D32E28241DFD86C300D6019C /* BugTrackingCoordinator.swift in Sources */,
 				D1D535EC1F7081FA006625D2 /* API.swift in Sources */,
 				41DAE93E1D318F350098E068 /* Subscription.swift in Sources */,
+				806EFA62209BF30500D0D650 /* SubscriptionsClient.swift in Sources */,
 				80E99F291FD8B2B800B70B59 /* UserExtensions.swift in Sources */,
 				4151B4541E2D1A9E00F8AA1B /* SubscriptionModelHandler.swift in Sources */,
 				80113DF81F98330C0048F2C2 /* OAuthViewController.swift in Sources */,
@@ -3792,6 +3816,8 @@
 				41EB22331E5E474200AA3AE7 /* UploadVideoCompression.swift in Sources */,
 				802A4E24204D73100072CD23 /* AppGroup.swift in Sources */,
 				8076FDE62048CD0600114F28 /* UserDefaults+Group.swift in Sources */,
+				80D41E072099341C00034D1F /* PermissionsRequest.swift in Sources */,
+				41CABFFC1F50515100E0B289 /* ArrayExtensions.swift in Sources */,
 				335F4F03207A31D3005E14AF /* NotificationManager.swift in Sources */,
 				35E892CA201CDD9700B4BE5A /* PreferencesViewModel.swift in Sources */,
 				33F73B2D2073BDF400F03F29 /* NotificationView.swift in Sources */,
@@ -3890,6 +3916,7 @@
 				413FB6C11FE17D7D00F010AA /* UIViewExtentions.swift in Sources */,
 				8076FDB0204856AF00114F28 /* AuthCanBlockMessage.swift in Sources */,
 				8076FDA9204853DE00114F28 /* RealmExecute.swift in Sources */,
+				806EFA5E209BF1AC00D0D650 /* SubscriptionReadRequest.swift in Sources */,
 				9960C8302063F0C8004A034C /* WebBrowserTableViewController.swift in Sources */,
 				140A95E4202F536D003FD564 /* DrawingViewController.swift in Sources */,
 				807C7C0820751EDC006B600E /* SpotlightRequest.swift in Sources */,
@@ -3968,6 +3995,7 @@
 				77C2612D1F97453600724A1F /* SelectFieldSpec.swift in Sources */,
 				807C7C1020751F40006B600E /* SpotlightClientSpec.swift in Sources */,
 				998165CA204EBBA10059D346 /* UpdateUserRequestSpec.swift in Sources */,
+				80E9DBCF209BF98100A48CA9 /* SubscriptionReadRequestSpec.swift in Sources */,
 				33093DC5207C7EAF00DD81F6 /* ChatNotificationSpec.swift in Sources */,
 				9977302A20727E17009AF465 /* CustomEmojiRequestSpec.swift in Sources */,
 				992B5AB8209A2890009C8123 /* SubscriptionFilesRequestSpec.swift in Sources */,
@@ -3984,7 +4012,9 @@
 				416133401D46E6A800E09DA2 /* MessageSpec.swift in Sources */,
 				41ADDD4B1E9E787E0007A458 /* LoaderViewSpec.swift in Sources */,
 				8018B5701FBE070000C3CC25 /* PushManagerSpec.swift in Sources */,
+				80D41E092099393600034D1F /* PermissionsRequestSpec.swift in Sources */,
 				418C74451FA3820F00499577 /* CompoundPickerViewDelegateSpec.swift in Sources */,
+				80D41E0D20993FCB00034D1F /* PinMessageRequestSpec.swift in Sources */,
 				140A95DE202F1E6F003FD564 /* ChangeAppIconViewModelSpec.swift in Sources */,
 				8013F8821FD6B6C600EE1A4E /* InfoClientSpec.swift in Sources */,
 				77C261251F97445300724A1F /* AuthSettingsSpec.swift in Sources */,
