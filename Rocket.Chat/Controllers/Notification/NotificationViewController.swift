@@ -21,7 +21,17 @@ final class NotificationViewController: UIViewController {
     var lastTouchLocation: CGPoint?
     let animationDuration: TimeInterval = 0.3
     let notificationVisibleDuration: TimeInterval = 6.0
+    let topInset: CGFloat = 8.0
+
     let soundUrl = Bundle.main.url(forResource: "chime", withExtension: "mp3")
+
+    var isDeviceWithNotch: Bool {
+        if #available(iOS 11.0, *) {
+            return view.safeAreaInsets.top > 20
+        } else {
+            return false
+        }
+    }
 
     var notificationViewIsHidden: Bool {
         get {
@@ -34,7 +44,7 @@ final class NotificationViewController: UIViewController {
         set {
             visibleConstraint?.isActive = !newValue
             hiddenConstraint?.isActive = newValue
-            (UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha = newValue ? 1 : 0
+            (UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha = newValue || isDeviceWithNotch ? 1 : 0
         }
     }
 
@@ -51,10 +61,10 @@ final class NotificationViewController: UIViewController {
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
 
-        visibleConstraint.constant = 8
+        visibleConstraint.constant = topInset
         if #available(iOS 11.0, *) {
-            if view.safeAreaInsets.top > 20 {
-                visibleConstraint.constant = 38
+            if isDeviceWithNotch {
+                visibleConstraint.constant = view.safeAreaInsets.top
             }
         }
     }
