@@ -12,6 +12,8 @@ import MobilePlayer
 import FLAnimatedImage
 import SimpleImageViewer
 
+extension ReactorListViewController: UserActionSheetPresenter { }
+
 extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter {
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView) {
 
@@ -55,9 +57,12 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
 
         // on select reactor
 
-        controller.reactorListView.selectedReactor = { username in
-            controller.close(animated: true)
-            AppManager.openDirectMessage(username: username)
+        controller.reactorListView.selectedReactor = { username, rect in
+            guard let user = User.find(username: username) else {
+                return
+            }
+
+            controller.presentActionSheetForUser(user, source: (controller.view, rect))
         }
     }
 
