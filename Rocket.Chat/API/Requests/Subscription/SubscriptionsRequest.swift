@@ -46,4 +46,8 @@ final class SubscriptionsResource: APIResource {
             return subscription
         }.compactMap { $0 }
     }
+
+    var success: Bool? {
+        return raw?["success"].bool
+    }
 }
