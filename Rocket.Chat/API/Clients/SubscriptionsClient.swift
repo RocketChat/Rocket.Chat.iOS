@@ -29,4 +29,6 @@ struct SubscriptionsClient: APIClient {
             }
         }
     }
+
+    func fetchSubscriptions(
 }
