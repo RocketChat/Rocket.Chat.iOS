@@ -151,6 +151,21 @@ final class ChatMessageCell: UICollectionViewCell {
         }
     }
 
+    func insertButtonActions() -> CGFloat {
+        var addedHeight = CGFloat(0)
+
+        if message.subscription.roomBroadcast {
+            if let view = ChatMessageActionButtonsView.instantiateFromNib() {
+//                view.delegate = delegate
+
+                mediaViews.addArrangedSubview(view)
+                addedHeight += ChatMessageActionButtonsView.defaultHeight
+            }
+        }
+
+        return addedHeight
+    }
+
     func insertURLs() -> CGFloat {
         var addedHeight = CGFloat(0)
         message.urls.forEach { url in
@@ -168,7 +183,9 @@ final class ChatMessageCell: UICollectionViewCell {
 
     //swiftlint:disable cyclomatic_complexity
     func insertAttachments() {
-        var mediaViewHeight = insertURLs()
+        var mediaViewHeight = CGFloat(0)
+        mediaViewHeight += insertButtonActions()
+        mediaViewHeight += insertURLs()
 
         message.attachments.forEach { attachment in
             let type = attachment.type
@@ -313,6 +330,10 @@ extension ChatMessageCell {
         var total = (CGFloat)(sequential ? 8 : 29) + (message.reactions.count > 0 ? 40 : 0)
         if attributedString?.string ?? "" != "" {
             total += (attributedString?.heightForView(withWidth: fullWidth - 55) ?? 0)
+        }
+
+        if message.subscription.roomBroadcast {
+            total += ChatMessageActionButtonsView.defaultHeight
         }
 
         for url in message.urls {
