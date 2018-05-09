@@ -388,9 +388,10 @@
 		805DEC351FFC03380033151B /* CustomEmojiManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC341FFC03380033151B /* CustomEmojiManager.swift */; };
 		805DEC371FFC08870033151B /* CustomEmoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC361FFC08870033151B /* CustomEmoji.swift */; };
 		805DEC391FFE54820033151B /* CustomEmojiSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 805DEC381FFE54820033151B /* CustomEmojiSpec.swift */; };
+		8062E327209E19BB0044F407 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E326209E19BB0044F407 /* AuthClient.swift */; };
 		8062E32920A1CAAB0044F407 /* SubscriptionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */; };
 		8062E32C20A1F8100044F407 /* RoomsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32B20A1F8100044F407 /* RoomsRequest.swift */; };
-		8062E327209E19BB0044F407 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E326209E19BB0044F407 /* AuthClient.swift */; };
+		8062E32E20A366360044F407 /* SubscriptionsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32D20A366360044F407 /* SubscriptionsRequestSpec.swift */; };
 		806401311FB09DE800990572 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401301FB09DE800990572 /* Permission.swift */; };
 		806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401321FB09EC400990572 /* PermissionModelMapping.swift */; };
 		806401351FB09F8A00990572 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401341FB09F8A00990572 /* PermissionManager.swift */; };
@@ -1078,9 +1079,10 @@
 		805DEC341FFC03380033151B /* CustomEmojiManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiManager.swift; sourceTree = "<group>"; };
 		805DEC361FFC08870033151B /* CustomEmoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmoji.swift; sourceTree = "<group>"; };
 		805DEC381FFE54820033151B /* CustomEmojiSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEmojiSpec.swift; sourceTree = "<group>"; };
+		8062E326209E19BB0044F407 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
 		8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsRequest.swift; sourceTree = "<group>"; };
 		8062E32B20A1F8100044F407 /* RoomsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsRequest.swift; sourceTree = "<group>"; };
-		8062E326209E19BB0044F407 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
+		8062E32D20A366360044F407 /* SubscriptionsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsRequestSpec.swift; sourceTree = "<group>"; };
 		806401301FB09DE800990572 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		806401321FB09EC400990572 /* PermissionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionModelMapping.swift; sourceTree = "<group>"; };
 		806401341FB09F8A00990572 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
@@ -2454,6 +2456,7 @@
 				990FF6D7207438D4007B4A53 /* SubscriptionMentionsRequestSpec.swift */,
 				992B5AB7209A2890009C8123 /* SubscriptionFilesRequestSpec.swift */,
 				80E9DBD7209CB06000A48CA9 /* SubscriptionReadRequestSpec.swift */,
+				8062E32D20A366360044F407 /* SubscriptionsRequestSpec.swift */,
 			);
 			path = Subscription;
 			sourceTree = "<group>";
@@ -4039,6 +4042,7 @@
 				80E9DBD8209CB06200A48CA9 /* SubscriptionReadRequestSpec.swift in Sources */,
 				411119B81F6825C30019854B /* NetworkManagerSpec.swift in Sources */,
 				80D41E01209248F800034D1F /* StarMessageRequestSpec.swift in Sources */,
+				8062E32E20A366360044F407 /* SubscriptionsRequestSpec.swift in Sources */,
 				99F41BD020658C3400B240FC /* NewPasswordViewModelSpec.swift in Sources */,
 				416296F91F41B42B00BCCEDD /* UploadHelperSpec.swift in Sources */,
 				80A63C511F719FB300FE5AC4 /* SubscriptionInfoRequestSpec.swift in Sources */,
