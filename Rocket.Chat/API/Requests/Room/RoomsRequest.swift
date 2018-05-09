@@ -31,24 +31,19 @@ struct RoomsRequest: APIRequest {
 }
 
 final class RoomsResource: APIResource {
-    var update: [Subscription]? {
-        return raw?["update"].arrayValue.map {
-            let subscription = Subscription()
-            subscription.map($0, realm: nil)
-            return subscription
-            }.compactMap { $0 }
+    var update: [JSON]? {
+        return raw?["update"].array
     }
 
-    var remove: [Subscription]? {
-        return raw?["update"].arrayValue.map {
-            let subscription = Subscription()
-            subscription.map($0, realm: nil)
-            return subscription
-            }.compactMap { $0 }
+    var remove: [JSON]? {
+        return raw?["remove"].array
+    }
+
+    var list: [JSON]? {
+        return raw?["result"].array
     }
 
     var success: Bool? {
         return raw?["success"].bool
     }
 }
-

@@ -6,7 +6,7 @@
 //  Copyright © 2018 Rocket.Chat. All rights reserved.
 //
 
-import Foundation
+import SwiftyJSON
 import RealmSwift
 
 struct SubscriptionsClient: APIClient {
@@ -44,19 +44,17 @@ struct SubscriptionsClient: APIClient {
                 currentRealm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
 
-                    resource.list?.forEach { object in
-                        object.auth = auth
-                        subscriptions.append(object)
+                    func queueSubscriptionForUpdate(_ subscription: Subscription) {
+                        subscription.auth = auth
+                        subscriptions.append(subscription)
                     }
 
-                    resource.update?.forEach { object in
-                        object.auth = auth
-                        subscriptions.append(object)
-                    }
+                    resource.list?.forEach(queueSubscriptionForUpdate)
+                    resource.update?.forEach(queueSubscriptionForUpdate)
 
-                    resource.remove?.forEach { object in
-                        object.auth = nil
-                        subscriptions.append(object)
+                    resource.remove?.forEach { subscription in
+                        subscription.auth = nil
+                        subscriptions.append(subscription)
                     }
 
                     auth.lastSubscriptionFetch = Date.serverDate
@@ -95,31 +93,21 @@ struct SubscriptionsClient: APIClient {
 
                 let subscriptions = List<Subscription>()
 
-                // List is used the first time user opens the app
-                let list = resource.raw?["result"]["result"].array
+                func queueRoomValuesForUpdate(_ object: JSON) {
+                    guard
+                        let rid = object["_id"].string,
+                        let subscription = Subscription.find(rid: rid, realm: realm)
+                    else {
+                        return
+                    }
 
-                // Update is used on updates
-                let updated = resource.raw?["result"]["update"].array
+                    subscription.mapRoom(object)
+                    subscriptions.append(subscription)
+                }
 
                 currentRealm?.execute({ realm in
-                    list?.forEach { object in
-                        if let rid = object["_id"].string {
-                            if let subscription = Subscription.find(rid: rid, realm: realm) {
-                                subscription.mapRoom(object)
-                                subscriptions.append(subscription)
-                            }
-                        }
-                    }
-
-                    updated?.forEach { object in
-                        if let rid = object["_id"].string {
-                            if let subscription = Subscription.find(rid: rid, realm: realm) {
-                                subscription.mapRoom(object)
-                                subscriptions.append(subscription)
-                            }
-                        }
-                    }
-
+                    resource.list?.forEach(queueRoomValuesForUpdate)
+                    resource.update?.forEach(queueRoomValuesForUpdate)
                     realm.add(subscriptions, update: true)
                 }, completion: {
                     completion?()
