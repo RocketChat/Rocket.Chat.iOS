@@ -11,15 +11,17 @@ import Foundation
 extension AuthViewController {
     internal func handleAuthenticationResponse(_ response: LoginResponse) {
         if case let .resource(resource) = response, let error = resource.error {
-            stopLoading()
+            DispatchQueue.main.async { [weak self] in
+                self?.stopLoading()
 
-            switch error.lowercased() {
-            case "totp-required":
-                return performSegue(withIdentifier: "TwoFactor", sender: nil)
-            case "unauthorized":
-                return Alert(key: "error.login_unauthorized").present()
-            default:
-                return Alert(key: "error.login").present()
+                switch error.lowercased() {
+                case "totp-required":
+                    self?.performSegue(withIdentifier: "TwoFactor", sender: nil)
+                case "unauthorized":
+                    Alert(key: "error.login_unauthorized").present()
+                default:
+                    Alert(key: "error.login").present()
+                }
             }
         }
 
