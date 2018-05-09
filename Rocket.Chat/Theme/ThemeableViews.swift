@@ -183,8 +183,9 @@ extension SLKTextView {
     override func applyTheme() {
         super.applyTheme()
         guard let theme = theme else { return }
-        self.textColor = theme.bodyText
-        self.layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
-        self.backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
+        layer.borderColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.1518210827)
+        backgroundColor = #colorLiteral(red: 0.497693181, green: 0.494099319, blue: 0.5004472733, alpha: 0.04910321301)
+        textColor = theme.bodyText
+        tintColor = theme.hyperlinkText
     }
 }

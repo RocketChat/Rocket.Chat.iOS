@@ -105,6 +105,7 @@ extension ChatViewController {
             let edit = UIAlertAction(title: localized("chat.message.actions.edit"), style: .default, handler: { (_) in
                 self.messageToEdit = message
                 self.editText(message.text)
+                self.applyTheme()
             })
 
             actions.append(edit)
