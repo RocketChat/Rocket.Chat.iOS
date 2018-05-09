@@ -28,9 +28,6 @@ class ChatDataControllerSpec: XCTestCase {
         user.identifier = "TESTUSER"
 
         Realm.executeOnMainThread({ (realm) in
-            realm.delete(realm.objects(Auth.self))
-            realm.delete(realm.objects(User.self))
-
             realm.add(user)
             realm.add(auth)
         })
@@ -40,6 +37,7 @@ class ChatDataControllerSpec: XCTestCase {
         super.tearDown()
         Realm.executeOnMainThread({ (realm) in
             realm.delete(realm.objects(Auth.self))
+            realm.delete(realm.objects(User.self))
         })
     }
 
