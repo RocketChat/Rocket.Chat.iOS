@@ -42,11 +42,20 @@ struct SubscriptionsClient: APIClient {
 
                 let subscriptions = List<Subscription>()
 
+                let list = resource.raw?["result"].array
                 let updated = resource.raw?["result"]["update"].array
                 let removed = resource.raw?["result"]["remove"].array
 
                 currentRealm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
+
+                    list?.forEach { object in
+                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
+                            object?.auth = auth
+                        })
+
+                        subscriptions.append(subscription)
+                    }
 
                     updated?.forEach { object in
                         let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
@@ -75,6 +84,64 @@ struct SubscriptionsClient: APIClient {
                 switch error {
                 case .version:
                     self.fetchSubscriptionsFallback(updatedSince: updatedSince, realm: realm, completion: completion)
+                default:
+                    break
+                }
+            }
+        }
+    }
+
+    func fetchRooms(updatedSince: Date?, realm: Realm? = Realm.current, completion: @escaping () -> Void) {
+        let req = RoomsRequest(updatedSince: updatedSince)
+
+        let currentRealm = realm
+
+        api.fetch(req) { response in
+            switch response {
+            case .resource(let resource):
+                guard resource.success == true else { return }
+
+                currentRealm?.execute({ realm in
+                    guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
+                    auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
+                    realm.add(auth, update: true)
+                })
+
+                let subscriptions = List<Subscription>()
+
+                // List is used the first time user opens the app
+                let list = resource.raw?["result"]["result"].array
+
+                // Update is used on updates
+                let updated = resource.raw?["result"]["update"].array
+
+                currentRealm?.execute({ realm in
+                    list?.forEach { object in
+                        if let rid = object["_id"].string {
+                            if let subscription = Subscription.find(rid: rid, realm: realm) {
+                                subscription.mapRoom(object)
+                                subscriptions.append(subscription)
+                            }
+                        }
+                    }
+
+                    updated?.forEach { object in
+                        if let rid = object["_id"].string {
+                            if let subscription = Subscription.find(rid: rid, realm: realm) {
+                                subscription.mapRoom(object)
+                                subscriptions.append(subscription)
+                            }
+                        }
+                    }
+
+                    realm.add(subscriptions, update: true)
+                }, completion: {
+                    completion()
+                })
+            case .error(let error):
+                switch error {
+                case .version:
+                    break // add fallback
                 default:
                     break
                 }
