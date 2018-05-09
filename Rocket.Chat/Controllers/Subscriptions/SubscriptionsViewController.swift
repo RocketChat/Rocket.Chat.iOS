@@ -43,6 +43,7 @@ final class SubscriptionsViewController: BaseViewController {
         super.viewWillAppear(animated)
 
         updateData()
+        tableView?.reloadData()
 
         if let indexPath = tableView.indexPathForSelectedRow {
             tableView.deselectRow(at: indexPath, animated: animated)
