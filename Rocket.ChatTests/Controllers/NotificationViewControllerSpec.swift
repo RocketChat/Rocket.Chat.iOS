@@ -49,7 +49,11 @@ class NotificationViewControllerSpec: XCTestCase {
         notificationVC.notificationView.layoutIfNeeded()
         XCTAssert(notificationVC.visibleConstraint.isActive, "Visible constraint should be active")
         XCTAssertFalse(notificationVC.hiddenConstraint.isActive, "Hidden constraint should not be active")
-        XCTAssert((UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha == 0, "Status bar should not be visible")
+        if notificationVC.isDeviceWithNotch {
+            XCTAssert((UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha == 1, "Status bar should be visible")
+        } else {
+            XCTAssert((UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow)?.alpha == 0, "Status bar should not be visible")
+        }
     }
 
     func testNotificationViewControllerIsVisible() {
