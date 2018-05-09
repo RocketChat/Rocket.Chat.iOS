@@ -162,7 +162,7 @@ class UserSpec: XCTestCase, RealmTestCase {
 
         let permissionType = PermissionType.viewRoomAdministration
 
-        let permission = Permission()
+        let permission = Rocket_Chat.Permission()
         permission.identifier = permissionType.rawValue
         permission.roles.append("admin")
 
