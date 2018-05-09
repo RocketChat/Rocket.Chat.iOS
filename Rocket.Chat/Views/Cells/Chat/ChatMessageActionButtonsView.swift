@@ -8,9 +8,16 @@
 
 import UIKit
 
-class ChatMessageActionButtonsView: UIView {
+protocol ChatMessageActionButtonsViewProtocol: class {
+    func openReplyMessage(message: Message)
+}
 
-     static let defaultHeight = CGFloat(55)
+final class ChatMessageActionButtonsView: UIView {
+
+    static let defaultHeight = CGFloat(55)
+
+    weak var delegate: ChatMessageActionButtonsViewProtocol?
+    var message: Message?
 
     @IBOutlet weak var buttonReply: UIButton! {
         didSet {
@@ -19,6 +26,15 @@ class ChatMessageActionButtonsView: UIView {
             buttonReply.layer.borderColor = buttonColor.cgColor
             buttonReply.layer.borderWidth = 1
             buttonReply.layer.cornerRadius = 4
+            buttonReply.setTitle(localized("chat.message.actions.reply"), for: .normal)
+        }
+    }
+
+    // MARK: IBAction
+
+    @IBAction func buttonReplyDidPressed(sender: Any) {
+        if let message = message {
+            delegate?.openReplyMessage(message: message)
         }
     }
 

@@ -24,6 +24,9 @@
                     </constraints>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                     <state key="normal" title="Reply"/>
+                    <connections>
+                        <action selector="buttonReplyDidPressedWithSender:" destination="iN0-l3-epB" eventType="touchUpInside" id="qKi-Mm-HKo"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

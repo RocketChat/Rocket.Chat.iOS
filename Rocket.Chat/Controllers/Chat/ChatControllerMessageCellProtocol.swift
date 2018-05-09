@@ -95,6 +95,10 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
         present(controller, animated: true, completion: nil)
     }
 
+    func openReplyMessage(message: Message) {
+        
+    }
+
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView) {
         textView.resignFirstResponder()
 

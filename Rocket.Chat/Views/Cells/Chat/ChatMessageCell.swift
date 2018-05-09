@@ -8,8 +8,9 @@
 
 import UIKit
 
-protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol {
+protocol ChatMessageCellProtocol: ChatMessageURLViewProtocol, ChatMessageVideoViewProtocol, ChatMessageImageViewProtocol, ChatMessageTextViewProtocol, ChatMessageActionButtonsViewProtocol {
     func openURL(url: URL)
+
     func handleLongPressMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleUsernameTapMessageCell(_ message: Message, view: UIView, recognizer: UIGestureRecognizer)
     func handleLongPress(reactionListView: ReactionListView, reactionView: ReactionView)
@@ -156,7 +157,8 @@ final class ChatMessageCell: UICollectionViewCell {
 
         if message.subscription.roomBroadcast {
             if let view = ChatMessageActionButtonsView.instantiateFromNib() {
-//                view.delegate = delegate
+                view.message = message
+                view.delegate = delegate
 
                 mediaViews.addArrangedSubview(view)
                 addedHeight += ChatMessageActionButtonsView.defaultHeight
