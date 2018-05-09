@@ -41,35 +41,22 @@ struct SubscriptionsClient: APIClient {
 
                 let subscriptions = List<Subscription>()
 
-                let list = resource.raw?["result"].array
-                let updated = resource.raw?["result"]["update"].array
-                let removed = resource.raw?["result"]["remove"].array
-
                 currentRealm?.execute({ realm in
                     guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
 
-                    list?.forEach { object in
-                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                            object?.auth = auth
-                        })
-
-                        subscriptions.append(subscription)
+                    resource.list?.forEach { object in
+                        object.auth = auth
+                        subscriptions.append(object)
                     }
 
-                    updated?.forEach { object in
-                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                            object?.auth = auth
-                        })
-
-                        subscriptions.append(subscription)
+                    resource.update?.forEach { object in
+                        object.auth = auth
+                        subscriptions.append(object)
                     }
 
-                    removed?.forEach { object in
-                        let subscription = Subscription.getOrCreate(realm: realm, values: object, updates: { (object) in
-                            object?.auth = nil
-                        })
-
-                        subscriptions.append(subscription)
+                    resource.remove?.forEach { object in
+                        object.auth = nil
+                        subscriptions.append(object)
                     }
 
                     auth.lastSubscriptionFetch = Date.serverDate

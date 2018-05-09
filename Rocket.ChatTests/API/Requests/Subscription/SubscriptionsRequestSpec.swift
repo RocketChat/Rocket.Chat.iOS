@@ -42,15 +42,83 @@ class SubscriptionsRequestSpec: APITestCase {
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
     }
 
-    func testResult() {
-        let rawResult = JSON([
+    func testResource() {
+        let rawResource = JSON([
+            "remove": [
+                [
+                "t": "c",
+                "ts": "2017-11-25T15:08:17.249Z",
+                "name": "general",
+                "fname": nil,
+                "rid": "GENERAL",
+                "_updatedAt": "2017-11-25T15:08:17.249Z",
+                "_id": "5ALsG3QhpJfdMpyc8"
+                ]
+            ],
+            "update": [
+                [
+                    "t": "c",
+                    "ts": "2017-11-25T15:08:17.249Z",
+                    "name": "general",
+                    "fname": nil,
+                    "rid": "GENERAL",
+                    "_updatedAt": "2017-11-25T15:08:17.249Z",
+                    "_id": "5ALsG3QhpJfdMpyc8"
+                ],
+                [
+                    "t": "p",
+                    "ts": "2017-11-25T15:08:17.249Z",
+                    "name": "important",
+                    "fname": nil,
+                    "rid": "Ajalkjdaoiqw",
+                    "_updatedAt": "2017-11-25T15:08:17.249Z",
+                    "_id": "LKSAJdklasd123"
+                ]
+            ],
             "success": true
         ])
 
-        let result = SubscriptionsResource(raw: rawResult)
-        XCTAssert(result.success == true)
+        let resource = SubscriptionsResource(raw: rawResource)
+        XCTAssert(resource.success == true)
+        XCTAssert(resource.remove?.count == 1)
+        XCTAssert(resource.update?.count == 2)
+        XCTAssert(resource.list == nil)
+    }
 
-        let nilResult = SubscriptionsResource(raw: nil)
-        XCTAssertNil(nilResult.success, "success is nil if raw is nil")
+    func testListResource() {
+        let rawResource = JSON([
+            "result": [
+                [
+                    "t": "c",
+                    "ts": "2017-11-25T15:08:17.249Z",
+                    "name": "general",
+                    "fname": nil,
+                    "rid": "GENERAL",
+                    "_updatedAt": "2017-11-25T15:08:17.249Z",
+                    "_id": "5ALsG3QhpJfdMpyc8"
+                ],
+                [
+                    "t": "p",
+                    "ts": "2017-11-25T15:08:17.249Z",
+                    "name": "important",
+                    "fname": nil,
+                    "rid": "Ajalkjdaoiqw",
+                    "_updatedAt": "2017-11-25T15:08:17.249Z",
+                    "_id": "LKSAJdklasd123"
+                ]
+            ],
+            "success": true
+        ])
+
+        let resource = SubscriptionsResource(raw: rawResource)
+        XCTAssert(resource.success == true)
+        XCTAssert(resource.remove == nil)
+        XCTAssert(resource.update == nil)
+        XCTAssert(resource.list?.count == 2)
+    }
+
+    func testNilResource() {
+        let nilResource = SubscriptionsResource(raw: nil)
+        XCTAssertNil(nilResource.success, "success is nil if raw is nil")
     }
 }

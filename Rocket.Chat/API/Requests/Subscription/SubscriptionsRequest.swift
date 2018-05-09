@@ -32,7 +32,7 @@ struct SubscriptionsRequest: APIRequest {
 
 final class SubscriptionsResource: APIResource {
     var update: [Subscription]? {
-        return raw?["update"].arrayValue.map {
+        return raw?["update"].array?.map {
             let subscription = Subscription()
             subscription.map($0, realm: nil)
             return subscription
@@ -40,7 +40,15 @@ final class SubscriptionsResource: APIResource {
     }
 
     var remove: [Subscription]? {
-        return raw?["update"].arrayValue.map {
+        return raw?["remove"].array?.map {
+            let subscription = Subscription()
+            subscription.map($0, realm: nil)
+            return subscription
+        }.compactMap { $0 }
+    }
+
+    var list: [Subscription]? {
+        return raw?["result"].array?.map {
             let subscription = Subscription()
             subscription.map($0, realm: nil)
             return subscription
