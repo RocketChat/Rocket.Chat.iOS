@@ -22,7 +22,7 @@ enum APIError: CustomStringConvertible {
         case .error(let error):
             return error.localizedDescription
         default:
-            return "\(self)"
+            return Mirror(reflecting: self).children.first?.label ?? "unknown"
         }
     }
 }
