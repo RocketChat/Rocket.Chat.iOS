@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class ReactorListViewController: UIViewController {
+final class ReactorListViewController: UIViewController, Closeable {
     override var preferredContentSize: CGSize {
         set { }
         get {
@@ -34,14 +34,6 @@ final class ReactorListViewController: UIViewController {
             reactorListView.isPopover = presentationController?.presentationStyle == .popover
 
             reactorListView.model = model
-        }
-    }
-
-    func close(animated: Bool) {
-        if navigationController?.topViewController == self {
-            navigationController?.popViewController(animated: animated)
-        } else {
-            dismiss(animated: animated)
         }
     }
 

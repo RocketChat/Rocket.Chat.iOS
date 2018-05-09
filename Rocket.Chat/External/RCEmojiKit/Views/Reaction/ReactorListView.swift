@@ -57,7 +57,7 @@ final class ReactorListView: UIView {
 
     var isPopover = false
     var closePressed: () -> Void = { }
-    var selectedReactor: (String) -> Void = { _ in }
+    var selectedReactor: (String, CGRect) -> Void = { _, _ in }
     var configureCell: (ReactorCell) -> Void = { _ in }
 
     var model: ReactorListViewModel = .emptyState {
@@ -157,7 +157,8 @@ extension ReactorListView: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        selectedReactor(model.reactionViewModels[indexPath.section].reactors[indexPath.row])
+        let rect = tableView.rectForRow(at: indexPath)
+        selectedReactor(model.reactionViewModels[indexPath.section].reactors[indexPath.row], rect)
     }
 }
 
