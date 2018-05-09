@@ -29,7 +29,7 @@ struct SubscriptionsClient: APIClient {
         }
     }
 
-    func fetchSubscriptions(updatedSince: Date? = nil, realm: Realm? = Realm.current, completion: @escaping () -> Void) {
+    func fetchSubscriptions(updatedSince: Date? = nil, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
         let req = SubscriptionsRequest(updatedSince: updatedSince)
 
         let currentRealm = realm
@@ -77,7 +77,7 @@ struct SubscriptionsClient: APIClient {
                     realm.add(subscriptions, update: true)
                     realm.add(auth, update: true)
 
-                    completion()
+                    completion?()
                 })
             case .error(let error):
                 switch error {
@@ -90,7 +90,7 @@ struct SubscriptionsClient: APIClient {
         }
     }
 
-    func fetchRooms(updatedSince: Date?, realm: Realm? = Realm.current, completion: @escaping () -> Void) {
+    func fetchRooms(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
         let req = RoomsRequest(updatedSince: updatedSince)
 
         let currentRealm = realm
@@ -135,7 +135,7 @@ struct SubscriptionsClient: APIClient {
 
                     realm.add(subscriptions, update: true)
                 }, completion: {
-                    completion()
+                    completion?()
                 })
             case .error(let error):
                 switch error {
@@ -148,7 +148,7 @@ struct SubscriptionsClient: APIClient {
         }
     }
 
-    func fetchSubscriptionsFallback(updatedSince: Date?, realm: Realm? = Realm.current, completion: @escaping () -> Void) {
+    func fetchSubscriptionsFallback(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)?) {
         var params: [[String: Any]] = []
 
         if let updatedSince = updatedSince {
@@ -207,7 +207,65 @@ struct SubscriptionsClient: APIClient {
                 realm.add(subscriptions, update: true)
                 realm.add(auth, update: true)
 
-                completion()
+                completion?()
+            })
+        }
+    }
+
+    func fetchRoomsFallback(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)?) {
+        var params: [[String: Any]] = []
+
+        if let updatedSince = updatedSince {
+            params.append(["$date": Date.intervalFromDate(updatedSince)])
+        }
+
+        let requestRooms = [
+            "msg": "method",
+            "method": "rooms/get",
+            "params": params
+            ] as [String: Any]
+
+        let currentRealm = Realm.current
+
+        SocketManager.send(requestRooms) { response in
+            guard !response.isError() else { return Log.debug(response.result.string) }
+
+            currentRealm?.execute({ realm in
+                guard let auth = AuthManager.isAuthenticated(realm: realm) else { return }
+                auth.lastSubscriptionFetch = Date.serverDate.addingTimeInterval(-1)
+                realm.add(auth, update: true)
+            })
+
+            let subscriptions = List<Subscription>()
+
+            // List is used the first time user opens the app
+            let list = response.result["result"].array
+
+            // Update is used on updates
+            let updated = response.result["result"]["update"].array
+
+            currentRealm?.execute({ realm in
+                list?.forEach { object in
+                    if let rid = object["_id"].string {
+                        if let subscription = Subscription.find(rid: rid, realm: realm) {
+                            subscription.mapRoom(object)
+                            subscriptions.append(subscription)
+                        }
+                    }
+                }
+
+                updated?.forEach { object in
+                    if let rid = object["_id"].string {
+                        if let subscription = Subscription.find(rid: rid, realm: realm) {
+                            subscription.mapRoom(object)
+                            subscriptions.append(subscription)
+                        }
+                    }
+                }
+
+                realm.add(subscriptions, update: true)
+            }, completion: {
+                completion?()
             })
         }
     }

@@ -28,9 +28,7 @@ struct SubscriptionManager {
         let lastUpdate = auth.lastSubscriptionFetch
 
         client?.fetchSubscriptions(updatedSince: lastUpdate) {
-            client?.fetchRooms(updatedSince: lastUpdate, completion: {
-                print("se foi-se")
-            })
+            client?.fetchRooms(updatedSince: lastUpdate)
         }
     }
 
