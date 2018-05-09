@@ -7,11 +7,17 @@
 "error.socket.default_error.title" = "Uy!";
 "error.socket.default_error.message" = "Algo malo sucedió, por favor intente de nuevo.";
 
+"error.login.title" = "Uy!";
+"error.login.message" = "Something wrong happened while trying to login."; //TODO
+
+"error.login_unauthorized.title" = "Uy!";
+"error.login_unauthorized.message" = "Your credentials were rejected! Please, try again."; //TODO
+
 // Alerts
 "alert.connection.invalid_url.title" = "Uy!";
 "alert.connection.invalid_url.message" = "La URL que ingresó no es válida. Compruébalo y vuelve a intentarlo, por favor!";
 
-"alert.connection.not_secured.title" = "Oops!"; // TODO
+"alert.connection.not_secured.title" = "Uy!";
 "alert.connection.not_secured.message" = "Could not establish a secure connection to the server. Please make sure the server supports SSL."; // TODO
 
 "alert.connection.socket_error.title" = "Uy!";

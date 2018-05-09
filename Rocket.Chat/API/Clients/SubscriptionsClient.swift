@@ -22,7 +22,6 @@ struct SubscriptionsClient: APIClient {
             switch response {
             case .resource: break
             case .error(let error):
-                print(error)
                 if case .version = error {
                     SubscriptionManager.markAsRead(subscription, completion: { _ in })
                 }
