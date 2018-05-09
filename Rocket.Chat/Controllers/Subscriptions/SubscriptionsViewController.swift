@@ -346,9 +346,14 @@ extension SubscriptionsViewController: UITableViewDelegate {
 
         searchController?.searchBar.resignFirstResponder()
 
-        if let nav = splitViewController?.detailViewController as? BaseNavigationController {
-            if let chatController = nav.viewControllers.first as? ChatViewController {
-                chatController.subscription = subscription
+        // When using iPads, we override the detail controller creating
+        // a new instance.
+        if let _ = splitViewController?.detailViewController as? BaseNavigationController {
+            if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
+                controller.subscription = subscription
+
+                let nav = BaseNavigationController(rootViewController: controller)
+                splitViewController?.showDetailViewController(nav, sender: self)
             }
         } else if let controller = UIStoryboard.controller(from: "Chat", identifier: "Chat") as? ChatViewController {
             controller.subscription = subscription
