@@ -140,7 +140,7 @@ struct SubscriptionsClient: APIClient {
             case .error(let error):
                 switch error {
                 case .version:
-                    break // add fallback
+                    self.fetchRoomsFallback(updatedSince: updatedSince, realm: realm, completion: completion)
                 default:
                     break
                 }
