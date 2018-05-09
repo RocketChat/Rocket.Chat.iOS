@@ -22,13 +22,15 @@ struct SubscriptionManager {
         })
     }
 
-    static func updateSubscriptions(_ auth: Auth, completion: @escaping MessageCompletion) {
+    static func updateSubscriptions(_ auth: Auth, completion: (() -> Void)?) {
         let client = API.current()?.client(SubscriptionsClient.self)
 
         let lastUpdate = auth.lastSubscriptionFetch
 
         client?.fetchSubscriptions(updatedSince: lastUpdate) {
-            client?.fetchRooms(updatedSince: lastUpdate)
+            client?.fetchRooms(updatedSince: lastUpdate) {
+                completion?()
+            }
         }
     }
 

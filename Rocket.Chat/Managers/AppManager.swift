@@ -148,7 +148,7 @@ extension AppManager {
 
             guard let auth = AuthManager.isAuthenticated() else { return }
 
-            SubscriptionManager.updateSubscriptions(auth) { _ in
+            SubscriptionManager.updateSubscriptions(auth) {
                 _ = openDirectMessage()
             }
         })
