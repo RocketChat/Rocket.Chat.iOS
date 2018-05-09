@@ -46,13 +46,13 @@ class SubscriptionsRequestSpec: APITestCase {
         let rawResource = JSON([
             "remove": [
                 [
-                "t": "c",
-                "ts": "2017-11-25T15:08:17.249Z",
-                "name": "general",
-                "fname": nil,
-                "rid": "GENERAL",
-                "_updatedAt": "2017-11-25T15:08:17.249Z",
-                "_id": "5ALsG3QhpJfdMpyc8"
+                    "t": "c",
+                    "ts": "2017-11-25T15:08:17.249Z",
+                    "name": "general",
+                    "fname": nil,
+                    "rid": "GENERAL",
+                    "_updatedAt": "2017-11-25T15:08:17.249Z",
+                    "_id": "5ALsG3QhpJfdMpyc8"
                 ]
             ],
             "update": [

@@ -11,7 +11,7 @@ import SwiftyJSON
 struct RoomsRequest: APIRequest {
     typealias APIResourceType = RoomsResource
     let path = "/api/v1/rooms.get"
-    let requiredVersion = Version(0, 60, 0)
+    let requiredVersion = Version(0, 62, 0)
 
     var query: String? {
         if let updatedSince = updatedSince {

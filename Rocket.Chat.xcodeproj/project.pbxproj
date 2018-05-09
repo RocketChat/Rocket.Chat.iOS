@@ -392,6 +392,7 @@
 		8062E32920A1CAAB0044F407 /* SubscriptionsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */; };
 		8062E32C20A1F8100044F407 /* RoomsRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32B20A1F8100044F407 /* RoomsRequest.swift */; };
 		8062E32E20A366360044F407 /* SubscriptionsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32D20A366360044F407 /* SubscriptionsRequestSpec.swift */; };
+		8062E33120A3A2BB0044F407 /* RoomsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E33020A3A2BB0044F407 /* RoomsRequestSpec.swift */; };
 		806401311FB09DE800990572 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401301FB09DE800990572 /* Permission.swift */; };
 		806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401321FB09EC400990572 /* PermissionModelMapping.swift */; };
 		806401351FB09F8A00990572 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401341FB09F8A00990572 /* PermissionManager.swift */; };
@@ -1083,6 +1084,7 @@
 		8062E32820A1CAAB0044F407 /* SubscriptionsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsRequest.swift; sourceTree = "<group>"; };
 		8062E32B20A1F8100044F407 /* RoomsRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsRequest.swift; sourceTree = "<group>"; };
 		8062E32D20A366360044F407 /* SubscriptionsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsRequestSpec.swift; sourceTree = "<group>"; };
+		8062E33020A3A2BB0044F407 /* RoomsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsRequestSpec.swift; sourceTree = "<group>"; };
 		806401301FB09DE800990572 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		806401321FB09EC400990572 /* PermissionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionModelMapping.swift; sourceTree = "<group>"; };
 		806401341FB09F8A00990572 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
@@ -2496,6 +2498,14 @@
 			path = Room;
 			sourceTree = "<group>";
 		};
+		8062E32F20A3A2A30044F407 /* Room */ = {
+			isa = PBXGroup;
+			children = (
+				8062E33020A3A2BB0044F407 /* RoomsRequestSpec.swift */,
+			);
+			path = Room;
+			sourceTree = "<group>";
+		};
 		806C2ACE206BBAF200EE5F67 /* External */ = {
 			isa = PBXGroup;
 			children = (
@@ -2967,6 +2977,7 @@
 				807C7C0A20751F06006B600E /* General */,
 				806C59A31FBB2F3700C32D0A /* Message */,
 				80235D201F7442C100A56CA5 /* Subscription */,
+				8062E32F20A3A2A30044F407 /* Room */,
 				998165C8204EBB5E0059D346 /* User */,
 			);
 			path = Requests;
@@ -4011,6 +4022,7 @@
 				4161333A1D46E0A200E09DA2 /* AuthSpec.swift in Sources */,
 				990B4B642069DC9900999FE7 /* EditProfileTableViewControllerSpec.swift in Sources */,
 				33093DC7207C900900DD81F6 /* NotificationManagerSpec.swift in Sources */,
+				8062E33120A3A2BB0044F407 /* RoomsRequestSpec.swift in Sources */,
 				41DC7A1F1D3865FE00896FC0 /* MessageManagerSpec.swift in Sources */,
 				41B96365207E492C0068F1A6 /* MessageTextValidatorSpec.swift in Sources */,
 				D1DA25251F695ABF00DB6ABB /* ChatDataControllerSpec.swift in Sources */,
