@@ -7,17 +7,24 @@
 //
 
 import UIKit
+import RealmSwift
 
 extension Message {
 
-    func isBroadcastReplyAvailable() -> Bool {
+    /**
+        This method will return if the reply button
+        in a broadcast room needs to be displayed or
+        not for the message. If the subscription is not
+        a broadcast type, it'll return false.
+     */
+    func isBroadcastReplyAvailable(realm: Realm? = nil) -> Bool {
         guard
             !temporary,
             !failed,
             !markedForDeletion,
             subscription.roomBroadcast,
             !isSystemMessage(),
-            let currentUser = AuthManager.currentUser(),
+            let currentUser = AuthManager.currentUser(realm: realm),
             currentUser.identifier != user?.identifier
         else {
             return false

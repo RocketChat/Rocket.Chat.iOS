@@ -205,22 +205,39 @@ extension MessageSpec {
 
 // MARK: Broadcast
 
-extension MessageSpec {
+extension MessageSpec: RealmTestCase {
 
     func testMessageBroadcastTrue() {
-        let subscription = Subscription()
-        subscription.identifier = "1"
-        subscription.roomBroadcast = true
+        let realm = testRealm()
+
+        let auth = Auth()
+        auth.serverURL = "https://foo.com/"
+        auth.token = "123"
+        auth.tokenExpires = Date()
+        auth.lastAccess = Date()
+        auth.userId = "1"
 
         let user = User()
         user.identifier = "1"
 
+        let userOther = User()
+        userOther.identifier = "2"
+
+        Realm.executeOnMainThread(realm: realm, { realm in
+            realm.add(auth)
+            realm.add(user)
+        })
+
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
         let message = Message()
         message.subscription = subscription
         message.text = "foobar"
-        message.user = user
+        message.user = userOther
 
-        XCTAssertTrue(message.isBroadcastReplyAvailable())
+        XCTAssertTrue(message.isBroadcastReplyAvailable(realm: realm))
     }
 
     func testMessageSystemBroadcastFalse() {
