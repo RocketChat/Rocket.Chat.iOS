@@ -48,13 +48,15 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
 
         let expectation = XCTestExpectation(description: "number of subscriptions is correct")
 
-        client.fetchSubscriptions(updatedSince: nil, realm: realm) {
+        client.fetchSubscriptions(updatedSince: nil, realm: realm)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if realm.objects(Subscription.self).count == 2 {
                 expectation.fulfill()
             }
         }
 
-        wait(for: [expectation], timeout: 5)
+        wait(for: [expectation], timeout: 3)
     }
 
     func testSubscriptionsUpdate() {
@@ -65,6 +67,7 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
 
         let subscription = Subscription.testInstance()
         subscription.identifier = "subscription-identifier"
+        subscription.name = "internal"
         subscription.auth = auth
 
         try? realm.write {
@@ -98,13 +101,16 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
 
         let expectation = XCTestExpectation(description: "number of subscriptions is correct")
 
-        client.fetchSubscriptions(updatedSince: nil, realm: realm) {
-            if realm.objects(Subscription.self).count == 2 {
+        client.fetchSubscriptions(updatedSince: nil, realm: realm)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            let subs = realm.objects(Subscription.self)
+            if subs.count == 2, subs[0].name == "general" {
                 expectation.fulfill()
             }
         }
 
-        wait(for: [expectation], timeout: 5)
+        wait(for: [expectation], timeout: 3)
     }
 
     func testSubscriptionsRemove() {
@@ -135,17 +141,19 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
                 ]
             ],
             "success": true
-            ])
+        ])
 
         let expectation = XCTestExpectation(description: "number of subscriptions is correct")
 
-        client.fetchSubscriptions(updatedSince: nil, realm: realm) {
+        client.fetchSubscriptions(updatedSince: nil, realm: realm)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if let subscription = realm.objects(Subscription.self).first, subscription.auth == nil {
                 expectation.fulfill()
             }
         }
 
-        wait(for: [expectation], timeout: 5)
+        wait(for: [expectation], timeout: 3)
     }
 
     func testSubscriptionsRoomMapping() {
@@ -155,6 +163,7 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
         let auth = Auth.testInstance()
 
         let subscription = Subscription.testInstance()
+        subscription.roomReadOnly = false
         subscription.rid = "subscription-rid"
         subscription.identifier = "subscription-identifier"
         subscription.auth = auth
@@ -181,16 +190,18 @@ class SubscriptionsClientSpec: XCTestCase, RealmTestCase {
                 ]
             ],
             "success": true
-            ])
+        ])
 
-        let expectation = XCTestExpectation(description: "number of subscriptions is correct")
+        let expectation = XCTestExpectation(description: "subscription read only field was updated correctly")
 
-        client.fetchRooms(updatedSince: nil, realm: realm) {
+        client.fetchRooms(updatedSince: nil, realm: realm)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             if let subscription = realm.objects(Subscription.self).first, subscription.roomReadOnly == true {
                 expectation.fulfill()
             }
         }
 
-        wait(for: [expectation], timeout: 5)
+        wait(for: [expectation], timeout: 3)
     }
 }
