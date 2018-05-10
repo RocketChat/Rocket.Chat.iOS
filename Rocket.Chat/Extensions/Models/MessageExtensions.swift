@@ -17,7 +17,7 @@ extension Message {
         not for the message. If the subscription is not
         a broadcast type, it'll return false.
      */
-    func isBroadcastReplyAvailable(realm: Realm? = nil) -> Bool {
+    func isBroadcastReplyAvailable(realm: Realm? = Realm.current) -> Bool {
         guard
             !temporary,
             !failed,

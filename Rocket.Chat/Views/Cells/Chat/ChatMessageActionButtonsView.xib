@@ -17,7 +17,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Aer-QU-01F">
-                    <rect key="frame" x="0.0" y="4" width="90" height="35"/>
+                    <rect key="frame" x="0.0" y="8" width="90" height="35"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="90" id="IDf-cc-0Vs"/>
                         <constraint firstAttribute="height" constant="35" id="qM5-9R-cTO"/>
@@ -32,7 +32,7 @@
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="Aer-QU-01F" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="DLq-81-JkK"/>
-                <constraint firstItem="Aer-QU-01F" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="4" id="EQP-Ek-00q"/>
+                <constraint firstItem="Aer-QU-01F" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="8" id="EQP-Ek-00q"/>
             </constraints>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
