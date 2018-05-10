@@ -203,6 +203,79 @@ extension MessageSpec {
 
 }
 
+// MARK: Broadcast
+
+extension MessageSpec {
+
+    func testMessageBroadcastTrue() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let user = User()
+        user.identifier = "1"
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.user = user
+
+        XCTAssertTrue(message.isBroadcastReplyAvailable())
+    }
+
+    func testMessageSystemBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.internalType = MessageType.roomArchived.rawValue
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+    func testMessageTemporaryBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.temporary = true
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+    func testMessageFailedBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.failed = true
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+    func testMessageCurrentUserBroadcastFalse() {
+        let subscription = Subscription()
+        subscription.identifier = "1"
+        subscription.roomBroadcast = true
+
+        let message = Message()
+        message.subscription = subscription
+        message.text = "foobar"
+        message.failed = true
+
+        XCTAssertFalse(message.isBroadcastReplyAvailable())
+    }
+
+}
+
 // MARK: Equatable
 
 extension MessageSpec {

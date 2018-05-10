@@ -15,6 +15,7 @@ extension Message {
             !temporary,
             !failed,
             !markedForDeletion,
+            subscription.roomBroadcast,
             !isSystemMessage(),
             let currentUser = AuthManager.currentUser(),
             currentUser.identifier != user?.identifier
@@ -22,7 +23,7 @@ extension Message {
             return false
         }
 
-        return subscription.roomBroadcast
+        return true
     }
 
     func isSystemMessage() -> Bool {
