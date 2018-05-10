@@ -29,7 +29,7 @@ struct SubscriptionsClient: APIClient {
         }
     }
 
-    func fetchSubscriptions(updatedSince: Date? = nil, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
+    func fetchSubscriptions(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
         let req = SubscriptionsRequest(updatedSince: updatedSince)
 
         let currentRealm = realm
@@ -75,7 +75,6 @@ struct SubscriptionsClient: APIClient {
         }
     }
 
-    // fallback for servers < 0.62.0
     func fetchRooms(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)? = nil) {
         let req = RoomsRequest(updatedSince: updatedSince)
 
@@ -94,19 +93,19 @@ struct SubscriptionsClient: APIClient {
 
                 let subscriptions = List<Subscription>()
 
-                func queueRoomValuesForUpdate(_ object: JSON) {
-                    guard
-                        let rid = object["_id"].string,
-                        let subscription = Subscription.find(rid: rid, realm: realm)
-                    else {
-                        return
+                currentRealm?.execute({ realm in
+                    func queueRoomValuesForUpdate(_ object: JSON) {
+                        guard
+                            let rid = object["_id"].string,
+                            let subscription = Subscription.find(rid: rid, realm: realm)
+                        else {
+                            return
+                        }
+
+                        subscription.mapRoom(object)
+                        subscriptions.append(subscription)
                     }
 
-                    subscription.mapRoom(object)
-                    subscriptions.append(subscription)
-                }
-
-                currentRealm?.execute({ realm in
                     resource.list?.forEach(queueRoomValuesForUpdate)
                     resource.update?.forEach(queueRoomValuesForUpdate)
                     realm.add(subscriptions, update: true)
@@ -189,6 +188,7 @@ struct SubscriptionsClient: APIClient {
         }
     }
 
+    // fallback for servers < 0.62.0
     func fetchRoomsFallback(updatedSince: Date?, realm: Realm? = Realm.current, completion: (() -> Void)?) {
         var params: [[String: Any]] = []
 

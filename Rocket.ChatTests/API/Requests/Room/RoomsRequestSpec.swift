@@ -26,9 +26,7 @@ class RoomsRequestSpec: APITestCase {
     }
 
     func testRequestWithUpdatedSince() {
-        guard let date = Date.dateFromString("2015-03-25T12:00:00.000-0300") else {
-            return XCTFail("date is not nil")
-        }
+        let date = Date.dateFromString("2015-03-25T12:00:00.000+0000")
 
         let roomsRequest = RoomsRequest(updatedSince: date)
 
@@ -37,7 +35,7 @@ class RoomsRequestSpec: APITestCase {
         }
 
         XCTAssertEqual(request.url?.path, "/api/v1/rooms.get", "path is correct")
-        XCTAssertEqual(request.url?.query, "updatedSince=2015-03-25T12:00:00.000-0300")
+        XCTAssert(request.url?.query?.contains("updatedSince=") == true)
         XCTAssertEqual(request.httpMethod, "GET", "http method is correct")
         XCTAssertEqual(request.value(forHTTPHeaderField: "Content-Type"), "application/json", "content type is correct")
     }
