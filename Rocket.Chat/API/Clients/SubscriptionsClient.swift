@@ -61,9 +61,7 @@ struct SubscriptionsClient: APIClient {
 
                     realm.add(subscriptions, update: true)
                     realm.add(auth, update: true)
-
-                    completion?()
-                })
+                }, completion: completion)
             case .error(let error):
                 switch error {
                 case .version:
@@ -109,9 +107,7 @@ struct SubscriptionsClient: APIClient {
                     resource.list?.forEach(queueRoomValuesForUpdate)
                     resource.update?.forEach(queueRoomValuesForUpdate)
                     realm.add(subscriptions, update: true)
-                }, completion: {
-                    completion?()
-                })
+                }, completion: completion)
             case .error(let error):
                 switch error {
                 case .version:
