@@ -155,7 +155,7 @@ final class ChatMessageCell: UICollectionViewCell {
     func insertButtonActions() -> CGFloat {
         var addedHeight = CGFloat(0)
 
-        if message.subscription.roomBroadcast {
+        if message.isBroadcastReplyAvailable() {
             if let view = ChatMessageActionButtonsView.instantiateFromNib() {
                 view.message = message
                 view.delegate = delegate
@@ -186,7 +186,6 @@ final class ChatMessageCell: UICollectionViewCell {
     //swiftlint:disable cyclomatic_complexity
     func insertAttachments() {
         var mediaViewHeight = CGFloat(0)
-        mediaViewHeight += insertButtonActions()
         mediaViewHeight += insertURLs()
 
         message.attachments.forEach { attachment in
@@ -242,6 +241,7 @@ final class ChatMessageCell: UICollectionViewCell {
             }
         }
 
+        mediaViewHeight += insertButtonActions()
         mediaViewsHeightConstraint.constant = CGFloat(mediaViewHeight)
     }
 
@@ -334,7 +334,7 @@ extension ChatMessageCell {
             total += (attributedString?.heightForView(withWidth: fullWidth - 55) ?? 0)
         }
 
-        if message.subscription.roomBroadcast {
+        if message.isBroadcastReplyAvailable() {
             total += ChatMessageActionButtonsView.defaultHeight
         }
 

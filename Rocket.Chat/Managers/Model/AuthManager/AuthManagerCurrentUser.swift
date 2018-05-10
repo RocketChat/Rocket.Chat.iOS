@@ -9,6 +9,7 @@
 import Foundation
 
 extension AuthManager {
+
     /**
      - returns: Current user object, if exists.
      */

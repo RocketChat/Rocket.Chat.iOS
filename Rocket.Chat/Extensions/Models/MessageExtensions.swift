@@ -9,6 +9,22 @@
 import UIKit
 
 extension Message {
+
+    func isBroadcastReplyAvailable() -> Bool {
+        guard
+            !temporary,
+            !failed,
+            !markedForDeletion,
+            !isSystemMessage(),
+            let currentUser = AuthManager.currentUser(),
+            currentUser.identifier != user?.identifier
+        else {
+            return false
+        }
+
+        return subscription.roomBroadcast
+    }
+
     func isSystemMessage() -> Bool {
         return !(
             type == .text ||
@@ -112,9 +128,11 @@ extension Message {
 
         return text
     }
+
 }
 
 // MARK: Accessibility
+
 extension Message {
     override var accessibilityLabel: String? {
         get {
