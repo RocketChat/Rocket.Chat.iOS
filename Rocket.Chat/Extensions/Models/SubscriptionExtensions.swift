@@ -9,6 +9,30 @@
 import Foundation
 import RealmSwift
 
+// MARK: Information Viewing Options
+
+extension Subscription {
+
+    var canViewMembersList: Bool {
+        guard let currentUser = AuthManager.currentUser() else { return false }
+
+        if currentUser == roomOwner {
+            return true
+        }
+
+        if currentUser.canViewAdminPanel() {
+            return true
+        }
+
+        return !roomBroadcast
+    }
+
+    var canViewMentionsList: Bool {
+        return type != .directMessage
+    }
+
+}
+
 extension LinkingObjects where Element == Subscription {
     func sortedByLastSeen() -> Results<Subscription> {
         return self.sorted(byKeyPath: "lastSeen", ascending: false)

@@ -106,3 +106,33 @@ class SubscriptionExtensionsSpec: XCTestCase, RealmTestCase {
         XCTAssert(objects.last == sub1)
     }
 }
+
+// MARK: Information Viewing Options
+
+extension SubscriptionExtensionsSpec {
+
+    func testCanViewMentionsListDirectMessage() {
+        let subscription = Subscription()
+        subscription.type = .directMessage
+        subscription.identifier = "1"
+
+        XCTAssertFalse(subscription.canViewMentionsList)
+    }
+
+    func testCanViewMentionsListChannel() {
+        let subscription = Subscription()
+        subscription.type = .channel
+        subscription.identifier = "1"
+
+        XCTAssertTrue(subscription.canViewMentionsList)
+    }
+
+    func testCanViewMentionsListGroup() {
+        let subscription = Subscription()
+        subscription.type = .group
+        subscription.identifier = "1"
+
+        XCTAssertTrue(subscription.canViewMentionsList)
+    }
+
+}
