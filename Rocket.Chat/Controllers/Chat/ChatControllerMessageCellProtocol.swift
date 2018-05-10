@@ -96,7 +96,8 @@ extension ChatViewController: ChatMessageCellProtocol, UserActionSheetPresenter 
     }
 
     func openReplyMessage(message: Message) {
-        
+        guard let username = message.user?.username else { return }
+        AppManager.openDirectMessage(username: username, replyMessageIdentifier: message.identifier, completion: nil)
     }
 
     func openImageFromCell(attachment: Attachment, thumbnail: FLAnimatedImageView) {
