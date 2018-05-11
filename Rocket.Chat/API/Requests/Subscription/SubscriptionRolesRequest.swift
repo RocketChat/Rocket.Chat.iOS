@@ -44,9 +44,10 @@ final class SubscriptionRolesRequest: APIRequest {
 
 final class SubscriptionRolesResource: APIResource {
     var subscriptionRoles: [SubscriptionRoles]? {
+        guard let realm = Realm.current else { return nil }
         return raw?["roles"].arrayValue.map {
             let object = SubscriptionRoles()
-            object.user = User.find(withIdentifier: $0["u"]["_id"].stringValue)
+            object.user = User.getOrCreate(realm: realm, values: $0["u"], updates: nil)
             object.roles.append(contentsOf: $0["roles"].arrayValue.compactMap({ $0.string }))
             return object
         }
