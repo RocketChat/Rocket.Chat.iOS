@@ -68,6 +68,119 @@ class SubscriptionRolesRequestSpec: APITestCase {
         XCTAssertTrue(result.success)
     }
 
+    func testNullUserObject() {
+        let jsonString = """
+        {
+            "roles": [{
+                    "u": null,
+                    "_id": "j2pdXnucQbLg5WXRu",
+                    "rid": "ABsnusN6m9h7Z7KnR",
+                    "roles": [
+                        "owner",
+                        "moderator",
+                        "leader"
+                    ]
+                }
+            ],
+            "success": true
+        }
+        """
+
+        let json = JSON(parseJSON: jsonString)
+
+        let result = SubscriptionRolesResource(raw: json)
+        XCTAssertTrue(result.success)
+        XCTAssertEqual(result.subscriptionRoles?.count, 1)
+        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
+        XCTAssertNotNil(result.subscriptionRoles?.first?.user)
+        XCTAssertNil(result.subscriptionRoles?.first?.user?.identifier)
+    }
+
+    func testInvalidUserObject() {
+        let jsonString = """
+        {
+            "roles": [{
+                    "u": {
+                        "foo": "bar"
+                    },
+                    "_id": "j2pdXnucQbLg5WXRu",
+                    "rid": "ABsnusN6m9h7Z7KnR",
+                    "roles": [
+                        "owner",
+                        "moderator",
+                        "leader"
+                    ]
+                }
+            ],
+            "success": true
+        }
+        """
+
+        let json = JSON(parseJSON: jsonString)
+
+        let result = SubscriptionRolesResource(raw: json)
+        XCTAssertTrue(result.success)
+        XCTAssertEqual(result.subscriptionRoles?.count, 1)
+        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
+        XCTAssertNotNil(result.subscriptionRoles?.first?.user)
+        XCTAssertNil(result.subscriptionRoles?.first?.user?.identifier)
+    }
+
+    func testArrayUserObject() {
+        let jsonString = """
+        {
+            "roles": [{
+                    "u": ["foo"],
+                    "_id": "j2pdXnucQbLg5WXRu",
+                    "rid": "ABsnusN6m9h7Z7KnR",
+                    "roles": [
+                        "owner",
+                        "moderator",
+                        "leader"
+                    ]
+                }
+            ],
+            "success": true
+        }
+        """
+
+        let json = JSON(parseJSON: jsonString)
+
+        let result = SubscriptionRolesResource(raw: json)
+        XCTAssertTrue(result.success)
+        XCTAssertEqual(result.subscriptionRoles?.count, 1)
+        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 3)
+        XCTAssertNotNil(result.subscriptionRoles?.first?.user)
+        XCTAssertNil(result.subscriptionRoles?.first?.user?.identifier)
+    }
+
+    func testEmtpyRolesObject() {
+        let jsonString = """
+        {
+            "roles": [{
+                    "u": {
+                        "name": "John Appleseed",
+                        "username": "john.appleseed",
+                        "_id": "Xx6KW6XQsFkmDPGdE"
+                    },
+                    "_id": "j2pdXnucQbLg5WXRu",
+                    "rid": "ABsnusN6m9h7Z7KnR",
+                    "roles": [ ]
+                }
+            ],
+            "success": true
+        }
+        """
+
+        let json = JSON(parseJSON: jsonString)
+
+        let result = SubscriptionRolesResource(raw: json)
+        XCTAssertTrue(result.success)
+        XCTAssertEqual(result.subscriptionRoles?.count, 1)
+        XCTAssertEqual(result.subscriptionRoles?.first?.roles.count, 0)
+        XCTAssertEqual(result.subscriptionRoles?.first?.user?.username, "john.appleseed")
+    }
+
     func testEmptyResults() {
         let nilResult = SubscriptionRolesResource(raw: nil)
         XCTAssertNil(nilResult.subscriptionRoles)
