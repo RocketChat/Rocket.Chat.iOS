@@ -14,7 +14,13 @@ import RealmSwift
 extension Subscription {
 
     var canViewMembersList: Bool {
-        guard let currentUser = AuthManager.currentUser() else { return false }
+        if !roomBroadcast {
+            return true
+        }
+
+        guard let currentUser = AuthManager.currentUser() else {
+            return false
+        }
 
         if currentUser == roomOwner {
             return true
@@ -24,7 +30,13 @@ extension Subscription {
             return true
         }
 
-        return !roomBroadcast
+        if let currentUserRoles = usersRoles.filter({ $0.user?.identifier == currentUser.identifier }).first?.roles {
+            if currentUserRoles.contains(Role.admin.rawValue) { return true }
+            if currentUserRoles.contains(Role.moderator.rawValue) { return true }
+            if currentUserRoles.contains(Role.owner.rawValue) { return true }
+        }
+
+        return false
     }
 
     var canViewMentionsList: Bool {

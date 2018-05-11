@@ -23,7 +23,7 @@ fileprivate extension SubscriptionType {
     }
 }
 
-class SubscriptionFilesRequest: APIRequest {
+final class SubscriptionFilesRequest: APIRequest {
     typealias APIResourceType = SubscriptionFilesResource
 
     var path: String {
