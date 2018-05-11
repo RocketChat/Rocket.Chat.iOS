@@ -47,7 +47,7 @@ extension MainSplitViewController: SocketConnectionHandler {
     }
 
     func socketDidDisconnect(socket: SocketManager) {
-
+        SocketManager.reconnect()
     }
 
     func socketDidReturnError(socket: SocketManager, error: SocketError) {

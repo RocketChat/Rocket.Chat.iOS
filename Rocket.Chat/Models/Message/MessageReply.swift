@@ -11,8 +11,8 @@ extension Message {
         guard
             let identifier = identifier,
             let url = subscription.auth?.baseURL()
-            else {
-                return nil
+        else {
+            return nil
         }
 
         let path: String
