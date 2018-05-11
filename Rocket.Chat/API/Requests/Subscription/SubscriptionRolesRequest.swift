@@ -25,6 +25,8 @@ fileprivate extension SubscriptionType {
 final class SubscriptionRolesRequest: APIRequest {
     typealias APIResourceType = SubscriptionRolesResource
 
+    let requiredVersion = Version(0, 64, 2)
+
     var path: String {
         return type.path
     }
@@ -43,7 +45,7 @@ final class SubscriptionRolesRequest: APIRequest {
 final class SubscriptionRolesResource: APIResource {
     var subscriptionRoles: [SubscriptionRoles]? {
         return raw?["roles"].arrayValue.map {
-            var object = SubscriptionRoles()
+            let object = SubscriptionRoles()
             object.user = User.find(withIdentifier: $0["u"]["_id"].stringValue)
             object.roles.append(contentsOf: $0["roles"].arrayValue.compactMap({ $0.string }))
             return object
