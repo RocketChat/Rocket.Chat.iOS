@@ -11,7 +11,7 @@
 "error.login.message" = "Something wrong happened while trying to login."; //TODO
 
 "error.login_unauthorized.title" = "Uy!";
-"error.login_unauthorized.message" = "Your credentials were rejected! Please, try again."; //TODO
+"error.login_unauthorized.message" = "Your credentials were rejected! Please try again."; //TODO
 
 // Alerts
 "alert.connection.invalid_url.title" = "Uy!";
@@ -239,7 +239,7 @@
 "chat.info.item.pinned" = "Fijado";
 "chat.info.item.starred" = "Sembrado de estrellas";
 "chat.info.item.mentions" = "Mentions"; // TODO
-"chat.info.item.files" = "Arquivos"; // TODO
+"chat.info.item.files" = "Files"; // TODO
 
 // Members List
 "chat.members.list.title" = "miembros";
