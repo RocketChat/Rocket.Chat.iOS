@@ -10,8 +10,8 @@ import RealmSwift
 import SlackTextViewController
 import SimpleImageViewer
 
-typealias NibCellIndentifier = (nibName: String, cellIdentifier: String)
-let kEmptyCellIdentifier = "kEmptyCellIdentifier"
+private typealias NibCellIndentifier = (nibName: String, cellIdentifier: String)
+private let kEmptyCellIdentifier = "kEmptyCellIdentifier"
 
 // swiftlint:disable file_length type_body_length
 final class ChatViewController: SLKTextViewController {
