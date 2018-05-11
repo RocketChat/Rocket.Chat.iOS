@@ -8,10 +8,6 @@
 
 import UIKit
 
-protocol MembersListDelegate: class {
-    func membersList(_ controller: MembersListViewController, didSelectUser user: User)
-}
-
 class MembersListViewData {
     var subscription: Subscription?
 
@@ -74,8 +70,6 @@ class MembersListViewController: BaseViewController {
     var loaderCell: LoaderTableViewCell!
 
     var data = MembersListViewData()
-
-    weak var delegate: MembersListDelegate?
 
     @objc func refreshControlDidPull(_ sender: UIRefreshControl) {
         let data = MembersListViewData()
@@ -182,12 +176,10 @@ extension MembersListViewController: UITableViewDataSource {
     }
 }
 
-extension MembersListViewController: UITableViewDelegate {
+extension MembersListViewController: UITableViewDelegate, UserActionSheetPresenter {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-
-        let user = data.member(at: indexPath.row)
-        delegate?.membersList(self, didSelectUser: user)
+        presentActionSheetForUser(data.member(at: indexPath.row), source: (tableView, tableView.rectForRow(at: indexPath)))
     }
 
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {

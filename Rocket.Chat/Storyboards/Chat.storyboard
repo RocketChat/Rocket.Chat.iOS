@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="8cV-un-sd9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="8cV-un-sd9">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,10 +23,6 @@
         <scene sceneID="sPN-TU-rHY">
             <objects>
                 <viewController extendedLayoutIncludesOpaqueBars="YES" id="A1E-cs-q8E" customClass="ChatViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="rlV-iR-eWf"/>
-                        <viewControllerLayoutGuide type="bottom" id="AmO-ZE-7Kw"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="OVX-LA-RMF">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,14 +49,21 @@
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="fbt-TF-z7U" firstAttribute="centerX" secondItem="OVX-LA-RMF" secondAttribute="centerX" id="KJR-gK-4gl"/>
-                            <constraint firstItem="Stw-bA-gXV" firstAttribute="bottom" secondItem="AmO-ZE-7Kw" secondAttribute="top" constant="50" id="Rmd-sZ-pDt"/>
+                            <constraint firstItem="fbt-TF-z7U" firstAttribute="centerX" secondItem="vBC-8x-yRN" secondAttribute="centerX" id="KJR-gK-4gl"/>
+                            <constraint firstItem="Stw-bA-gXV" firstAttribute="bottom" secondItem="vBC-8x-yRN" secondAttribute="bottom" constant="50" id="Rmd-sZ-pDt"/>
                             <constraint firstItem="fbt-TF-z7U" firstAttribute="centerY" secondItem="OVX-LA-RMF" secondAttribute="centerY" constant="-27" id="cGn-Mi-wTF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Stw-bA-gXV" secondAttribute="trailing" constant="12" id="hLW-Z0-cMV"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="vBC-8x-yRN"/>
                     </view>
                     <extendedEdge key="edgesForExtendedLayout"/>
-                    <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa"/>
+                    <navigationItem key="navigationItem" title="Rocket.Chat" id="NRY-HN-GEa">
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="DYt-PN-xSF">
+                            <connections>
+                                <action selector="showSearchMessages" destination="A1E-cs-q8E" id="WGB-Gv-7oO"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="activityIndicatorContainer" destination="fbt-TF-z7U" id="Nmz-IG-SvM"/>
                         <outlet property="buttonScrollToBottom" destination="Stw-bA-gXV" id="u7H-cM-6TS"/>
@@ -75,10 +79,6 @@
         <scene sceneID="O3d-Vc-Gen">
             <objects>
                 <viewController id="RHh-7Y-nF1" customClass="ChannelInfoViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="JPz-h4-egz"/>
-                        <viewControllerLayoutGuide type="bottom" id="4wG-9T-gw6"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="mxD-Or-g3f">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -251,10 +251,11 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="BZN-WA-DFR" firstAttribute="top" secondItem="mxD-Or-g3f" secondAttribute="top" id="ISH-fd-Uik"/>
-                            <constraint firstItem="BZN-WA-DFR" firstAttribute="leading" secondItem="mxD-Or-g3f" secondAttribute="leading" id="QrR-f2-fmg"/>
-                            <constraint firstItem="4wG-9T-gw6" firstAttribute="top" secondItem="BZN-WA-DFR" secondAttribute="bottom" id="XLl-gm-huT"/>
-                            <constraint firstAttribute="trailing" secondItem="BZN-WA-DFR" secondAttribute="trailing" id="w3C-Mc-tMr"/>
+                            <constraint firstItem="BZN-WA-DFR" firstAttribute="leading" secondItem="T6z-yl-y9C" secondAttribute="leading" id="QrR-f2-fmg"/>
+                            <constraint firstItem="T6z-yl-y9C" firstAttribute="bottom" secondItem="BZN-WA-DFR" secondAttribute="bottom" id="XLl-gm-huT"/>
+                            <constraint firstItem="T6z-yl-y9C" firstAttribute="trailing" secondItem="BZN-WA-DFR" secondAttribute="trailing" id="w3C-Mc-tMr"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="T6z-yl-y9C"/>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="lin-67-skp">
                         <barButtonItem key="leftBarButtonItem" systemItem="stop" id="htz-bw-Fj9">
@@ -267,6 +268,7 @@
                         <outlet property="tableView" destination="BZN-WA-DFR" id="fMf-lW-s3T"/>
                         <segue destination="i6r-e5-U1B" kind="show" identifier="toMembersList" id="Dj3-vx-Ggd"/>
                         <segue destination="GAd-ch-6WH" kind="show" identifier="toMessagesList" id="199-n2-7WG"/>
+                        <segue destination="bID-Vt-oVI" kind="show" identifier="toFilesList" id="eAW-b6-Aqc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Svt-7Y-y44" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -293,14 +295,11 @@
         <scene sceneID="3gv-jK-am2">
             <objects>
                 <viewController id="8cV-un-sd9" customClass="MainChatViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="0HC-p4-uO1"/>
-                        <viewControllerLayoutGuide type="bottom" id="PZt-Mx-Wom"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Frn-gW-sf6">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="nvy-o7-oIa"/>
                     </view>
                     <connections>
                         <segue destination="ZWT-yJ-dk4" kind="custom" identifier="showCenterController" customClass="CenterContainmentSegue" customModule="SideMenuController" id="49z-6y-c6s"/>
@@ -350,10 +349,6 @@
         <scene sceneID="fGa-f1-0c5">
             <objects>
                 <viewController title="Members" id="i6r-e5-U1B" customClass="MembersListViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="FWi-Id-3dj"/>
-                        <viewControllerLayoutGuide type="bottom" id="083-vv-Y5u"/>
-                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="Dua-YL-gS7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -369,11 +364,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="hz2-84-IvC" secondAttribute="trailing" id="KJP-z3-zeD"/>
-                            <constraint firstItem="hz2-84-IvC" firstAttribute="leading" secondItem="Dua-YL-gS7" secondAttribute="leading" id="WWj-Zo-x5X"/>
+                            <constraint firstItem="GrM-Bc-gqw" firstAttribute="trailing" secondItem="hz2-84-IvC" secondAttribute="trailing" id="KJP-z3-zeD"/>
+                            <constraint firstItem="hz2-84-IvC" firstAttribute="leading" secondItem="GrM-Bc-gqw" secondAttribute="leading" id="WWj-Zo-x5X"/>
                             <constraint firstItem="hz2-84-IvC" firstAttribute="top" secondItem="Dua-YL-gS7" secondAttribute="top" id="Y5b-x4-IAS"/>
-                            <constraint firstItem="083-vv-Y5u" firstAttribute="top" secondItem="hz2-84-IvC" secondAttribute="bottom" id="aKY-wB-Osk"/>
+                            <constraint firstItem="GrM-Bc-gqw" firstAttribute="bottom" secondItem="hz2-84-IvC" secondAttribute="bottom" id="aKY-wB-Osk"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="GrM-Bc-gqw"/>
                     </view>
                     <connections>
                         <outlet property="membersTableView" destination="hz2-84-IvC" id="29I-J5-lyC"/>
@@ -383,20 +379,110 @@
             </objects>
             <point key="canvasLocation" x="4353" y="300"/>
         </scene>
+        <!--Files-->
+        <scene sceneID="fgU-3K-p7j">
+            <objects>
+                <viewController id="bID-Vt-oVI" customClass="FilesListViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ra6-x7-rKP"/>
+                        <viewControllerLayoutGuide type="bottom" id="pYP-pb-GvK"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="xkp-Sr-T5G">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="jAU-FE-FIa">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="bID-Vt-oVI" id="Waz-cM-o8k"/>
+                                    <outlet property="delegate" destination="bID-Vt-oVI" id="NkB-sj-LT6"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="pYP-pb-GvK" firstAttribute="top" secondItem="jAU-FE-FIa" secondAttribute="bottom" id="EyZ-Tm-xpQ"/>
+                            <constraint firstItem="jAU-FE-FIa" firstAttribute="top" secondItem="xkp-Sr-T5G" secondAttribute="top" id="p3X-Da-unI"/>
+                            <constraint firstAttribute="trailing" secondItem="jAU-FE-FIa" secondAttribute="trailing" id="sh2-3M-2Sh"/>
+                            <constraint firstItem="jAU-FE-FIa" firstAttribute="leading" secondItem="xkp-Sr-T5G" secondAttribute="leading" id="z5t-g0-QEc"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="PaK-Vr-y5q"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Files" id="AiB-jG-eeo"/>
+                    <connections>
+                        <outlet property="tableView" destination="jAU-FE-FIa" id="NKt-fm-ycq"/>
+                        <segue destination="qEc-4Q-FG2" kind="show" identifier="showAudio" id="9e9-wj-bAv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="6xo-Ss-83K" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4349.6000000000004" y="950.37481259370327"/>
+        </scene>
+        <!--Audio File View Controller-->
+        <scene sceneID="1pS-kY-iSB">
+            <objects>
+                <viewController id="qEc-4Q-FG2" customClass="AudioFileViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="SiU-5E-2Lr">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="82u-IQ-DU7">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="jgn-ls-zPc"/>
+                                </constraints>
+                            </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="audioLarge" translatesAutoresizingMaskIntoConstraints="NO" id="E2d-6v-d5m">
+                                <rect key="frame" x="137" y="251" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="BHQ-5w-k0r"/>
+                                    <constraint firstAttribute="width" constant="100" id="twF-EH-PrI"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio titleAudio titleAudio titleAudio titleAudio titleAudio titl" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wtD-Pz-APQ">
+                                <rect key="frame" x="52" y="375" width="270" height="38.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="270" id="lWs-01-56X"/>
+                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="21" id="wWi-Pc-Qfx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="E2d-6v-d5m" firstAttribute="centerX" secondItem="SiU-5E-2Lr" secondAttribute="centerX" id="5EW-ka-2N5"/>
+                            <constraint firstItem="82u-IQ-DU7" firstAttribute="bottom" secondItem="nxo-e6-YmM" secondAttribute="bottom" id="6bS-NT-YLz"/>
+                            <constraint firstItem="82u-IQ-DU7" firstAttribute="leading" secondItem="nxo-e6-YmM" secondAttribute="leading" id="Fb8-1G-Luh"/>
+                            <constraint firstItem="wtD-Pz-APQ" firstAttribute="top" secondItem="E2d-6v-d5m" secondAttribute="bottom" constant="24" id="MwE-eP-QLl"/>
+                            <constraint firstItem="82u-IQ-DU7" firstAttribute="trailing" secondItem="nxo-e6-YmM" secondAttribute="trailing" id="Z29-hA-vnm"/>
+                            <constraint firstItem="wtD-Pz-APQ" firstAttribute="centerX" secondItem="E2d-6v-d5m" secondAttribute="centerX" id="gRm-22-fep"/>
+                            <constraint firstItem="E2d-6v-d5m" firstAttribute="centerY" secondItem="SiU-5E-2Lr" secondAttribute="centerY" constant="-32" id="xYG-WV-Zf4"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="nxo-e6-YmM"/>
+                    </view>
+                    <connections>
+                        <outlet property="audioPlayerContainer" destination="82u-IQ-DU7" id="qFs-Ob-gVr"/>
+                        <outlet property="audioTitle" destination="wtD-Pz-APQ" id="TJY-vd-1FI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="smQ-H2-PlA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5060" y="949.47526236881572"/>
+        </scene>
         <!--Messages-->
         <scene sceneID="yul-vI-y3f">
             <objects>
-                <viewController title="Messages" id="GAd-ch-6WH" userLabel="Messages" customClass="MessagesListViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6M7-qB-RlN"/>
-                        <viewControllerLayoutGuide type="bottom" id="PSn-2v-aPD"/>
-                    </layoutGuides>
+                <viewController storyboardIdentifier="MessagesListViewController" title="Messages" id="GAd-ch-6WH" userLabel="Messages" customClass="MessagesListViewController" customModule="Rocket_Chat" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="wih-fh-LH7">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="pu2-ou-2ep">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="QjN-lv-M9T">
                                     <size key="itemSize" width="50" height="50"/>
@@ -413,11 +499,12 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="pu2-ou-2ep" secondAttribute="trailing" id="2JS-UT-Rle"/>
-                            <constraint firstItem="PSn-2v-aPD" firstAttribute="top" secondItem="pu2-ou-2ep" secondAttribute="bottom" id="Lq1-Av-lry"/>
-                            <constraint firstItem="pu2-ou-2ep" firstAttribute="height" secondItem="wih-fh-LH7" secondAttribute="height" id="b77-LE-N76"/>
-                            <constraint firstItem="pu2-ou-2ep" firstAttribute="leading" secondItem="wih-fh-LH7" secondAttribute="leading" id="jxX-By-LUx"/>
+                            <constraint firstItem="7RK-51-HPR" firstAttribute="trailing" secondItem="pu2-ou-2ep" secondAttribute="trailing" id="2JS-UT-Rle"/>
+                            <constraint firstItem="pu2-ou-2ep" firstAttribute="height" secondItem="7RK-51-HPR" secondAttribute="height" id="Abc-TU-ldb"/>
+                            <constraint firstItem="7RK-51-HPR" firstAttribute="bottom" secondItem="pu2-ou-2ep" secondAttribute="bottom" id="Lq1-Av-lry"/>
+                            <constraint firstItem="pu2-ou-2ep" firstAttribute="leading" secondItem="7RK-51-HPR" secondAttribute="leading" id="jxX-By-LUx"/>
                         </constraints>
+                        <viewLayoutGuide key="safeArea" id="7RK-51-HPR"/>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="pu2-ou-2ep" id="6l3-lH-YyP"/>
@@ -425,10 +512,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i4P-ZF-XWQ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4353" y="949"/>
+            <point key="canvasLocation" x="4350" y="1618"/>
         </scene>
     </scenes>
     <resources>
         <image name="Arrow Down" width="25" height="25"/>
+        <image name="audioLarge" width="100" height="100"/>
     </resources>
 </document>

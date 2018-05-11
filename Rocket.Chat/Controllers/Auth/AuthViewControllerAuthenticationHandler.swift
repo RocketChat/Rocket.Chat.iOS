@@ -9,23 +9,22 @@
 import Foundation
 
 extension AuthViewController {
-    internal func handleAuthenticationResponse(_ response: SocketResponse) {
-        if response.isError() {
+    internal func handleAuthenticationResponse(_ response: LoginResponse) {
+        if case let .resource(resource) = response, let error = resource.error {
             stopLoading()
 
-            if let error = response.result["error"].dictionary {
-                // User is using 2FA
-                if error["error"]?.string == "totp-required" {
-                    performSegue(withIdentifier: "TwoFactor", sender: nil)
-                    return
-                }
-
-                Alert(
-                    key: "error.socket.default_error"
-                    ).present()
+            switch error.lowercased() {
+            case "totp-required":
+                return performSegue(withIdentifier: "TwoFactor", sender: nil)
+            case "unauthorized":
+                return Alert(key: "error.login_unauthorized").present()
+            default:
+                return Alert(key: "error.login").present()
             }
+        }
 
-            return
+        if let publicSettings = serverPublicSettings {
+            AuthSettingsManager.persistPublicSettings(settings: publicSettings)
         }
 
         API.current()?.fetch(MeRequest()) { [weak self] response in
@@ -36,8 +35,6 @@ extension AuthViewController {
                 SocketManager.removeConnectionHandler(token: strongSelf.socketHandlerToken)
 
                 if let user = resource.user {
-                    BugTrackingCoordinator.identifyCrashReports(withUser: user)
-
                     if user.username != nil {
                         DispatchQueue.main.async {
                             strongSelf.dismiss(animated: true, completion: nil)
@@ -50,9 +47,7 @@ extension AuthViewController {
                     }
                 } else {
                     self?.stopLoading()
-                    Alert(
-                        key: "error.socket.default_error"
-                        ).present()
+                    Alert(key: "error.socket.default_error").present()
                 }
             case .error:
                 self?.stopLoading()

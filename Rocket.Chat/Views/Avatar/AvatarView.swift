@@ -16,7 +16,7 @@ final class AvatarView: UIView {
     var imageURL: URL? {
         didSet {
             if let imageURL = imageURL {
-                let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages, .highPriority, .cacheMemoryOnly]
+                let options: SDWebImageOptions = [.retryFailed, .scaleDownLargeImages, .highPriority]
                 imageView?.sd_setImage(with: imageURL, placeholderImage: avatarPlaceholder, options: options) { [weak self] (_, error, _, _) in
                     guard error == nil else { return }
 

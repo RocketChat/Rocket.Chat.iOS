@@ -83,6 +83,20 @@ class AuthSpec: XCTestCase, RealmTestCase {
         XCTAssertNil(object.apiHost, "apiHost will be nil when serverURL is an invalid URL")
     }
 
+    func testFirstChannelHasSeenDefaultTrue() {
+        let object = Auth()
+        XCTAssertTrue(object.internalFirstChannelOpened)
+    }
+
+    func testFirstChannelHasSeenChanges() {
+        let object = Auth()
+        object.internalFirstChannelOpened = false
+        XCTAssertFalse(object.internalFirstChannelOpened)
+
+        object.setFirstChannelOpened()
+        XCTAssertTrue(object.internalFirstChannelOpened)
+    }
+
     //swiftlint:disable function_body_length
     func testCanDeleteMessage() {
         let realm = testRealm()
@@ -159,7 +173,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         // force-delete-message permission
 
-        let forcePermission = Permission()
+        let forcePermission = Rocket_Chat.Permission()
         forcePermission.identifier = PermissionType.forceDeleteMessage.rawValue
         forcePermission.roles.append("admin")
 
@@ -173,7 +187,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         // delete-message permission time elapsed
 
-        let permission = Permission()
+        let permission = Rocket_Chat.Permission()
         permission.identifier = PermissionType.deleteMessage.rawValue
         permission.roles.append("admin")
 
@@ -267,7 +281,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
 
         // edit-message
 
-        let permission = Permission()
+        let permission = Rocket_Chat.Permission()
         permission.identifier = PermissionType.editMessage.rawValue
         permission.roles.append("admin")
 
@@ -343,7 +357,7 @@ class AuthSpec: XCTestCase, RealmTestCase {
         message.identifier = "mid"
         message.user = user1
 
-        let permission = Permission()
+        let permission = Rocket_Chat.Permission()
         permission.identifier = PermissionType.pinMessage.rawValue
         permission.roles.append("admin")
 

@@ -9,6 +9,8 @@
 import Foundation
 import RealmSwift
 
+public typealias MessagesHistoryCompletion = (Date?) -> Void
+
 struct MessageManager {
     static let historySize = 60
 }
@@ -19,7 +21,7 @@ extension MessageManager {
 
     static var blockedUsersList = UserDefaults.group.value(forKey: kBlockedUsersIndentifiers) as? [String] ?? []
 
-    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessageCompletionObjectsList<Message>) {
+    static func getHistory(_ subscription: Subscription, lastMessageDate: Date?, completion: @escaping MessagesHistoryCompletion) {
         var lastDate: Any!
 
         if let lastMessageDate = lastMessageDate {
@@ -34,7 +36,7 @@ extension MessageManager {
             "params": ["\(subscription.rid)", lastDate, historySize]
         ] as [String: Any]
 
-        let validMessages = List<Message>()
+        var lastMessageDate: Date?
 
         let currentRealm = Realm.current
         SocketManager.send(request) { response in
@@ -63,13 +65,10 @@ extension MessageManager {
                     })
 
                     realm.add(message, update: true)
-
-                    if !message.userBlocked {
-                        validMessages.append(message)
-                    }
+                    lastMessageDate = message.createdAt
                 }
             }, completion: {
-                completion(Array(validMessages))
+                completion(lastMessageDate)
             })
         }
     }
@@ -140,36 +139,6 @@ extension MessageManager {
             guard !response.isError() else { return Log.debug(response.result.string) }
             completion(response)
         }
-    }
-
-    static func pin(_ message: Message) {
-        guard let messageIdentifier = message.identifier else { return }
-
-        let request = [
-            "msg": "method",
-            "method": "pinMessage",
-            "params": [[
-                "rid": message.rid,
-                "_id": messageIdentifier
-            ]]
-        ] as [String: Any]
-
-        SocketManager.send(request)
-    }
-
-    static func unpin(_ message: Message) {
-        guard let messageIdentifier = message.identifier else { return }
-
-        let request = [
-            "msg": "method",
-            "method": "unpinMessage",
-            "params": [[
-                "rid": message.rid,
-                "_id": messageIdentifier
-            ]]
-        ] as [String: Any]
-
-        SocketManager.send(request)
     }
 
     static func react(_ message: Message, emoji: String, completion: @escaping MessageCompletion) {

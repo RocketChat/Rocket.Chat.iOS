@@ -57,7 +57,7 @@ class CASViewController: UIViewController {
     }
 }
 
-extension CASViewController: WKNavigationDelegate {
+extension CASViewController: WKNavigationDelegate, Closeable {
     func casCredentialToken(from url: URL) -> String? {
         guard url.path.contains("_cas/") else { return nil }
         return url.lastPathComponent
@@ -83,14 +83,6 @@ extension CASViewController: WKNavigationDelegate {
         }
 
         return true
-    }
-
-    func close(animated: Bool) {
-        if navigationController?.topViewController == self {
-            navigationController?.popViewController(animated: animated)
-        } else {
-            dismiss(animated: animated, completion: nil)
-        }
     }
 
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {

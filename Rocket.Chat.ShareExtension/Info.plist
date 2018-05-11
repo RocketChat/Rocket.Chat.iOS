@@ -17,9 +17,9 @@
 	<key>CFBundlePackageType</key>
 	<string>XPC!</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.2.1</string>
+	<string>2.3.0</string>
 	<key>CFBundleVersion</key>
-	<string>160</string>
+	<string>167</string>
 	<key>ITSEncryptionExportComplianceCode</key>
 	<string></string>
 	<key>NSExtension</key>
@@ -32,7 +32,7 @@
 			<false/>
 			<key>NSExtensionActivationRule</key>
 			<dict>
-				<key>NSExtensionActivationSupportsAttachmentsWithMaxCount</key>
+				<key>NSExtensionActivationDictionaryVersion</key>
 				<integer>2</integer>
 				<key>NSExtensionActivationSupportsFileWithMaxCount</key>
 				<integer>1</integer>

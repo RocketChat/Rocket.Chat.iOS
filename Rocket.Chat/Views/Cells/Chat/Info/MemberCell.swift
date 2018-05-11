@@ -13,7 +13,7 @@ struct MemberCellData {
 
     var nameText: String {
         let utcText = member.utcOffset != nil ? "(UTC \(member.utcOffset ?? 0))" : ""
-        return "\(member.name ?? "") \(utcText)"
+        return "\(member.displayName()) \(utcText)"
     }
 
     var statusColor: UIColor {

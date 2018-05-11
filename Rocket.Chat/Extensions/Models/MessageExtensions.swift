@@ -103,6 +103,9 @@ extension Message {
                 text
             )
 
+        case .messagePinned:
+            return localized("chat.message.type.message_pinned")
+
         default:
             break
         }

@@ -24,7 +24,17 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
             detailTextHeightConstraint.constant = fullHeight - ChatMessageAudioView.defaultHeight
             loading = true
             playing = false
-            updateAudio()
+            updateAudio(attachment: attachment)
+        }
+    }
+
+    var file: File! {
+        didSet {
+            detailText.text = ""
+            detailTextIndicator.isHidden = true
+            loading = true
+            playing = false
+            updateAudio(file: file)
         }
     }
 
@@ -100,12 +110,27 @@ final class ChatMessageAudioView: ChatMessageAttachmentView {
         playing = false
     }
 
-    func updateAudio() {
+    func updateAudio(attachment: Attachment? = nil, file: File? = nil) {
         loading = true
+        var tempURL: URL?
+        var tempLocalURL: URL?
 
-        guard let attachment = attachment, let identifier = attachment.identifier else { return }
-        guard let url = attachment.fullAudioURL() else { return }
-        guard let localURL = DownloadManager.localFileURLFor(identifier) else { return }
+        if let attachment = attachment {
+            guard let identifier = attachment.identifier else { return }
+            guard let url = attachment.fullAudioURL() else { return }
+            guard let localURL = DownloadManager.localFileURLFor(identifier) else { return }
+            tempURL = url
+            tempLocalURL = localURL
+        } else if let file = file {
+            guard let identifier = file.identifier else { return }
+            guard let url = file.fullFileURL() else { return }
+            let localUniqueURL = identifier + url.absoluteString.replacingOccurrences(of: "/", with: "")
+            guard let localURL = DownloadManager.localFileURLFor(localUniqueURL) else { return }
+            tempURL = url
+            tempLocalURL = localURL
+        }
+
+        guard let localURL = tempLocalURL, let url = tempURL else { return }
 
         func updatePlayer() throws {
             let data = try Data(contentsOf: localURL)

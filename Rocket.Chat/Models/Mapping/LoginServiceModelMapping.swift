@@ -13,7 +13,7 @@ import RealmSwift
 extension LoginService: ModelMappeable {
     func map(_ values: JSON, realm: Realm?) {
         if identifier == nil {
-            identifier = values["_id"].string
+            identifier = values["_id"].string ?? values["id"].string
         }
 
         service = values["name"].string ?? values["service"].string
@@ -45,6 +45,7 @@ extension LoginService: ModelMappeable {
         case .gitlab: mapGitLab()
         case .github: mapGitHub()
         case .linkedin: mapLinkedIn()
+        case .wordpress: mapWordPress()
         case .saml: break
         case .cas: break
         case .custom: break
@@ -119,6 +120,20 @@ extension LoginService: ModelMappeable {
         buttonColor = "#1b86bc"
 
         callbackPath = "linkedin?close"
+    }
+
+    func mapWordPress() {
+        service = "wordpress"
+        scope = "auth"
+
+        serverUrl = "https://public-api.wordpress.com"
+        tokenPath = "/oauth2/token"
+        authorizePath = "/oauth2/authorize"
+        buttonLabelText = "wordpress"
+        buttonLabelColor = "#ffffff"
+        buttonColor = "#1e8cbe"
+
+        callbackPath = "wordpress?close"
     }
 
     func mapCAS() {
