@@ -12,9 +12,14 @@ import RealmSwift
 extension ChatViewController {
 
     func updateSubscriptionRoles() {
-        guard let subscription = subscription else { return }
-        let rid = subscription.rid
+        guard
+            let subscription = subscription,
+            subscription.type != .directMessage
+        else {
+            return
+        }
 
+        let rid = subscription.rid
         let rolesRequest = SubscriptionRolesRequest(roomName: subscription.name, subscriptionType: subscription.type)
         API.current()?.fetch(rolesRequest, completion: { result in
             switch result {
