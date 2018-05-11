@@ -394,6 +394,8 @@
 		8062E32E20A366360044F407 /* SubscriptionsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E32D20A366360044F407 /* SubscriptionsRequestSpec.swift */; };
 		8062E33120A3A2BB0044F407 /* RoomsRequestSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E33020A3A2BB0044F407 /* RoomsRequestSpec.swift */; };
 		8062E33320A3AA760044F407 /* SubscriptionsClientSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E33220A3AA760044F407 /* SubscriptionsClientSpec.swift */; };
+		8062E33520A5ECF50044F407 /* APIRequestOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E33420A5ECF50044F407 /* APIRequestOption.swift */; };
+		8062E33620A5ED200044F407 /* APIRequestOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8062E33420A5ECF50044F407 /* APIRequestOption.swift */; };
 		806401311FB09DE800990572 /* Permission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401301FB09DE800990572 /* Permission.swift */; };
 		806401331FB09EC400990572 /* PermissionModelMapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401321FB09EC400990572 /* PermissionModelMapping.swift */; };
 		806401351FB09F8A00990572 /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 806401341FB09F8A00990572 /* PermissionManager.swift */; };
@@ -1087,6 +1089,7 @@
 		8062E32D20A366360044F407 /* SubscriptionsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsRequestSpec.swift; sourceTree = "<group>"; };
 		8062E33020A3A2BB0044F407 /* RoomsRequestSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomsRequestSpec.swift; sourceTree = "<group>"; };
 		8062E33220A3AA760044F407 /* SubscriptionsClientSpec.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubscriptionsClientSpec.swift; sourceTree = "<group>"; };
+		8062E33420A5ECF50044F407 /* APIRequestOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequestOption.swift; sourceTree = "<group>"; };
 		806401301FB09DE800990572 /* Permission.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Permission.swift; sourceTree = "<group>"; };
 		806401321FB09EC400990572 /* PermissionModelMapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionModelMapping.swift; sourceTree = "<group>"; };
 		806401341FB09F8A00990572 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
@@ -2996,6 +2999,7 @@
 				D1D535EB1F7081FA006625D2 /* API.swift */,
 				8013F86A1FD6B59A00EE1A4E /* APIClient.swift */,
 				8013F8691FD6B59900EE1A4E /* APIError.swift */,
+				8062E33420A5ECF50044F407 /* APIRequestOption.swift */,
 				D1D535ED1F708628006625D2 /* APIRequest.swift */,
 				8067DAA5206D1883005E3369 /* APIResource.swift */,
 				D15C83851F70991F001AB155 /* APIResponse.swift */,
@@ -3654,6 +3658,7 @@
 				14BAFAE020308EF30054A2E6 /* DrawingBrushOpacityViewController.swift in Sources */,
 				41499C8F1F2A116900790EA7 /* ServerManager.swift in Sources */,
 				41B554C51FBF0C71000510B7 /* UIWindowExtensions.swift in Sources */,
+				8062E33520A5ECF50044F407 /* APIRequestOption.swift in Sources */,
 				807C7C0620751ED2006B600E /* SpotlightClient.swift in Sources */,
 				33383509207926DE006E1D0A /* TransparentToTouchesWindow.swift in Sources */,
 				4174CB1F1D2DB3350086DAC8 /* StringExtensions.swift in Sources */,
@@ -4145,6 +4150,7 @@
 				804273DF204EBD51006DF420 /* APIError.swift in Sources */,
 				806DB94320687697004ED8ED /* Alert.swift in Sources */,
 				80D0CE752050BFD20056B17F /* AuthUser.swift in Sources */,
+				8062E33620A5ED200044F407 /* APIRequestOption.swift in Sources */,
 				800640F72049BA25006D990F /* SEScene.swift in Sources */,
 				8076FDBC2048596100114F28 /* URLExtension.swift in Sources */,
 				80FA907D2057F4650069038F /* SubmitContent.swift in Sources */,

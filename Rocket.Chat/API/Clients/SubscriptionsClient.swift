@@ -34,7 +34,7 @@ struct SubscriptionsClient: APIClient {
 
         let currentRealm = realm
 
-        api.fetch(req) { response in
+        api.fetch(req, options: [.retryOnError(count: 3)]) { response in
             switch response {
             case .resource(let resource):
                 guard resource.success == true else { return }
@@ -78,7 +78,7 @@ struct SubscriptionsClient: APIClient {
 
         let currentRealm = realm
 
-        api.fetch(req) { response in
+        api.fetch(req, options: [.retryOnError(count: 3)]) { response in
             switch response {
             case .resource(let resource):
                 guard resource.success == true else { return }
