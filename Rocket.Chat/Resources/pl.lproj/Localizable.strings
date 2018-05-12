@@ -11,7 +11,7 @@
 "error.login.message" = "Something wrong happened while trying to login."; //TODO
 
 "error.login_unauthorized.title" = "Ups!";
-"error.login_unauthorized.message" = "Your credentials were rejected! Please, try again."; //TODO
+"error.login_unauthorized.message" = "Your credentials were rejected! Please try again."; //TODO
 
 // Alerts
 "alert.connection.invalid_url.title" = "Ups!";
